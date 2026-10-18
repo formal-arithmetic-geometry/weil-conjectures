@@ -6,9 +6,6 @@ Authors: SHEAF group NZ
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Geometric stalks of cohomology sheaves

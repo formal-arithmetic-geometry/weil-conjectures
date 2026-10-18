@@ -6,13 +6,11 @@ Authors: SHEAF group Q3
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.CompositeFibreLocalModels
 import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import WeilConjectures.PointCount
 
 /-!

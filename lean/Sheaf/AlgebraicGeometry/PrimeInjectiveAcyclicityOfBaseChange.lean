@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic

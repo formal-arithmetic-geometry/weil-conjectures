@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.GroupTheory.Torsion
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 
 /-!

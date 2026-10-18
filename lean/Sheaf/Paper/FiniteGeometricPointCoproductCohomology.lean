@@ -6,8 +6,6 @@ Authors: SHEAF groups J1, K6
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointCohomology
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly

@@ -6,7 +6,6 @@ Authors: SHEAF group NO
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 

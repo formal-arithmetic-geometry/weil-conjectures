@@ -6,8 +6,6 @@ Authors: SHEAF group NC
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 

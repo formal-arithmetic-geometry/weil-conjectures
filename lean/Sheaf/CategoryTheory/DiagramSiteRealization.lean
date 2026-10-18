@@ -7,10 +7,6 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Adjunction.Evaluation
-public import Mathlib.CategoryTheory.Sites.Limits
-public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.DiagramSiteTopology
 import Sheaf.CategoryTheory.DiagramSiteSheafEquivalence
 import Sheaf.CategoryTheory.DiagramSiteModuleEquivalence
 

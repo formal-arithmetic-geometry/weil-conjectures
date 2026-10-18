@@ -7,8 +7,6 @@ module
 
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
-public import Mathlib.CategoryTheory.Abelian.Basic
-public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-!

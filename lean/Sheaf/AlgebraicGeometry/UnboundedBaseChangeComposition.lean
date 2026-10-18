@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
-import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Base change for a composite square on unbounded derived categories

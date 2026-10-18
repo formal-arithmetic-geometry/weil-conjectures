@@ -7,12 +7,8 @@ module
 
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Finite-stage constructible complexes of finite Tor amplitude

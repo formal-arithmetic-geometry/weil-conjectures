@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Algebra.Homology.Additive
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients

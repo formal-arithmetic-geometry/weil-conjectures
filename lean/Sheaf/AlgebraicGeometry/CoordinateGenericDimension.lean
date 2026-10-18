@@ -6,11 +6,7 @@ Authors: SHEAF group NA
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.FunctionField
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
 
 /-!

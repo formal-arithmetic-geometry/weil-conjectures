@@ -5,10 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-public import Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Shift compatibility of the derived square isomorphism

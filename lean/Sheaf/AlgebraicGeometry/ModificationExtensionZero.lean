@@ -5,14 +5,7 @@ Authors: SHEAF group NX
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 

@@ -6,7 +6,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 

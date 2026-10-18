@@ -6,27 +6,16 @@ Authors: SHEAF group NR
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.Topology.LocallyConstant.Algebra
-public import Mathlib.GroupTheory.QuotientGroup.Basic
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
 import Sheaf.RingTheory.WeaklyEtaleField
 
 import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-!
 # Affine sections of functions modulo the constant pro-etale sheaf

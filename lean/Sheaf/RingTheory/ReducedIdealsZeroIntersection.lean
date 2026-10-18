@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Ideals covering the spectrum of a reduced ring

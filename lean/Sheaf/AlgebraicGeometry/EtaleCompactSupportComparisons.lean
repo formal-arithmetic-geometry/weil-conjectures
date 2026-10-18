@@ -6,8 +6,6 @@ Authors: SHEAF group NN
 module
 
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 

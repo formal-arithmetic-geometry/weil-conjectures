@@ -5,7 +5,6 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Algebra.Category.ModuleCat.Differentials.Basic

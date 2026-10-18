@@ -2,7 +2,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-!

@@ -6,12 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.CategoryTheory.Limits.Final
-import Mathlib.CategoryTheory.Whiskering
 import Sheaf.AlgebraicGeometry.EventuallyFinite
 import Sheaf.AlgebraicGeometry.LocallyFiniteTypeLimitClosedFp
 

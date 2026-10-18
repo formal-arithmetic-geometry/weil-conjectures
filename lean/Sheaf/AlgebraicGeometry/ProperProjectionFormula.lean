@@ -5,12 +5,6 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Topology.Defs.Filter
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry

@@ -8,10 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-!
 # Constructible finite-ring sheaves have etale origin

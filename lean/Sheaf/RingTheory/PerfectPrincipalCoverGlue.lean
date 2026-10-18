@@ -6,17 +6,10 @@ Authors: SHEAF group NP
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import Mathlib.RingTheory.Localization.Away.Basic
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.CategoryTheory.Adjunction.Additive
-public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.RingTheory.FiniteProjectiveComplexFreeModel
-import Sheaf.RingTheory.RingPseudoCoherent
 import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
 import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect

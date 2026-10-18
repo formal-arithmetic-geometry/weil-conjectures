@@ -6,13 +6,8 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!

@@ -9,8 +9,6 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction

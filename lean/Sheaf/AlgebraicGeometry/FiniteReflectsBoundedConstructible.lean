@@ -6,11 +6,7 @@ Authors: SHEAF group NV
 module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.SixFunctors.Finite.Counit
 import Sheaf.AlgebraicGeometry.ConstructibleOfFiniteDirectImage
 

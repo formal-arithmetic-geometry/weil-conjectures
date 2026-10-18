@@ -7,21 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.Abelian
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.RingTheory.IndEtaleStability
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
-import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 
 /-!
 # Classical pro-etale stalks

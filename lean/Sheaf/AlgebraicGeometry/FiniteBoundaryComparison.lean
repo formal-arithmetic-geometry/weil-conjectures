@@ -7,14 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.SixFunctors.OpenClosed.Derived
 import WeilConjectures.SixFunctors.Finite.Counit
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Detecting derived comparisons off a finite boundary

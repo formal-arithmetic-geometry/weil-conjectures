@@ -7,9 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.Algebra.DirectSum.Module
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Geometric stalks of étale sum extension

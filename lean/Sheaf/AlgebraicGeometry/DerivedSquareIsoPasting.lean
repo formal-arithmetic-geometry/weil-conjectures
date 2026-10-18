@@ -5,10 +5,8 @@ Authors: SHEAF groups C1 and X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
-import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-!
 # Identity and pasting laws of derived square isomorphisms

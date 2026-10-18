@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import WeilConjectures.AlgebraicGeometry.Curve.Brauer
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-!
 # Second Kummer cohomology of a curve

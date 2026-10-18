@@ -12,9 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.Topology.Sheaves.LocallySurjective
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
-import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-!
 # Abelian sheaf cohomology on a profinite topological space

@@ -7,12 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 import Sheaf.CategoryTheory.AdjunctionSquareComposition
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!

@@ -6,10 +6,8 @@ Authors: SHEAF group NU
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Gluing
 
 /-!
 # Stabilization of a closed inverse system with locally finitely presented limit

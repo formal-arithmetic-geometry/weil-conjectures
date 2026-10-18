@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
 import Sheaf.CategoryTheory.RightDerivedSingleZeroUnit
 

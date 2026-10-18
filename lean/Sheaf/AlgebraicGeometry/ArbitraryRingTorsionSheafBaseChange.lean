@@ -6,8 +6,6 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility

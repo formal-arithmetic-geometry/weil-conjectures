@@ -5,7 +5,6 @@ Authors: SHEAF worker NR
 -/
 module
 
-public import Mathlib.FieldTheory.IsSepClosed
 public import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 

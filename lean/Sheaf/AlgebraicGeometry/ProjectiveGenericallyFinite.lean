@@ -6,12 +6,6 @@ Authors: SHEAF group NW
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-public import Mathlib.AlgebraicGeometry.Fiber
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.Topology.KrullDimension
-import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-!

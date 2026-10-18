@@ -5,14 +5,7 @@ Authors: SHEAF group NC
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 

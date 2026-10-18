@@ -6,7 +6,6 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Left exactness of pro-etale module direct image

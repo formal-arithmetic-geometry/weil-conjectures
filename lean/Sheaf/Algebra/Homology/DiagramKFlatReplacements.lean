@@ -6,15 +6,11 @@ Authors: SHEAF groups NE and P2
 module
 
 public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedToposKFlatPullback
-import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.Algebra.Homology.Functor
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 
 /-!
 # K-flat replacements of strict diagrams

@@ -6,9 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescent
-import Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec
 import Sheaf.AlgebraicGeometry.NagataMorphismDescends
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Recovery of the raw relative gluing datum

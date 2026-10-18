@@ -6,9 +6,6 @@ Authors: SHEAF group NL
 module
 
 public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
-public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 
 /-!

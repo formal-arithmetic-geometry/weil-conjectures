@@ -6,23 +6,13 @@ Authors: SHEAF group NA
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Mathlib.RingTheory.Ideal.Operations
-public import Mathlib.Algebra.Category.ModuleCat.Projective
-public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Sheaf.RingTheory.BoundedFiniteProjectiveResolution
 import Sheaf.RingTheory.PerfectModuleFiniteProjectiveDimension
 import Sheaf.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Localization.Finiteness
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.AuslanderBuchsbaum
-import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound
 
 /-!

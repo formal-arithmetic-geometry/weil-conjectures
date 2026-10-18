@@ -7,17 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

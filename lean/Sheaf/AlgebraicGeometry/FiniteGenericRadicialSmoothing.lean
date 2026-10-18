@@ -5,28 +5,14 @@ Authors: SHEAF group ND
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.GenericGeometricallyReducedPreparation
 import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.Topology.IrreducibleOpenComplementDimension
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
-import WeilConjectures.ConstructibleSheaf.Refinement
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # Generic smoothing after a finite radicial base change
 

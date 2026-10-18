@@ -8,13 +8,11 @@ module
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import Sheaf.Paper.StrictHenselizationFunctoriality
 public import Sheaf.Paper.StrictHenselizationPointEvaluation
-public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
-import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 
 /-! # Ind-etale affine strict-local base change
 

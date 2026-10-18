@@ -7,13 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Etale locality of the ordinary ambient adjoint
 

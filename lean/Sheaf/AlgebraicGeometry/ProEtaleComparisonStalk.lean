@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic

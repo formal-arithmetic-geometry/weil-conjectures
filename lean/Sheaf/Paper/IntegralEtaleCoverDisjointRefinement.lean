@@ -6,11 +6,7 @@ Authors: SHEAF group NC
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Disjoint refinement of an étale cover over an integral morphism
 

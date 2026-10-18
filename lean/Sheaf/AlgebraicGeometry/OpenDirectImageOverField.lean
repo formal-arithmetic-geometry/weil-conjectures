@@ -6,11 +6,7 @@ Authors: SHEAF group NQ
 module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.Data.ZMod.Basic
-public import Mathlib.Algebra.Field.ULift
 import Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 

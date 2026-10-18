@@ -5,10 +5,7 @@ Authors: SHEAF group NN
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.UniversalBaseChangeFailureDatum
 import Sheaf.AlgebraicGeometry.UniversalCurveTestVanishing
 

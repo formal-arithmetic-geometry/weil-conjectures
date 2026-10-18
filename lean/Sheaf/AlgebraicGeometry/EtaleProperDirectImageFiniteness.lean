@@ -5,20 +5,11 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
 

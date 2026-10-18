@@ -6,12 +6,9 @@ Authors: SHEAF group NY
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Vanishing of higher direct images at geometric points

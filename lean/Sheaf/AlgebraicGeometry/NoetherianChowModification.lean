@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 
 /-!

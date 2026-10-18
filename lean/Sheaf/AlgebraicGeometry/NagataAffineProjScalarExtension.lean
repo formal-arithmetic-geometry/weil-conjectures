@@ -6,8 +6,6 @@ Authors: SHEAF group NH
 module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 
 /-!
