@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import Mathlib.CategoryTheory.Category.Preorder
@@ -13,12 +12,8 @@ public import Mathlib.CategoryTheory.Category.Preorder
 /-!
 # Replete topoi of set-valued sheaves
 
-Source: the Weil conjectures blueprint, main-20261015, `sec-proetale-coefficients`,
-`sk-def-pe-replete`, node `det-pe-replete-definition`
-(blueprint: det-pe-replete-definition).
-
-For a site presented by a precoverage `K` satisfying `K.IsSiteForCoverings`, use the
-associated topology `K.toGrothendieck`, as in `def-weil-pbc-sites-and-cohomology`.
+Source: blueprint `det-pe-replete-definition` (sec-proetale-coefficients, sk-def-pe-replete);
+Bhatt–Scholze, *The pro-étale topology*, Definition 3.1.1.
 -/
 
 @[expose] public section
@@ -29,11 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.GrothendieckTopology
 
-/-- Source: the Weil conjectures blueprint, main-20261015, `sec-proetale-coefficients`,
-`sk-def-pe-replete`, node `det-pe-replete-definition`
-(blueprint: det-pe-replete-definition).
-
-The topos of set-valued sheaves on `J` is replete when every inverse sequence of
+/-- A Grothendieck topology `J` is *replete* (blueprint: det-pe-replete-definition; Bhatt–Scholze,
+Definition 3.1.1) when the topos of set-valued sheaves on `J` is replete when every inverse sequence of
 epimorphisms has epimorphic projections from its limit, at every natural-number index.
 An inverse sequence is `F : ℕᵒᵖ ⥤ Sheaf J (Type (max u v w))`; its adjacent transition
 is `F.map (homOfLE (Nat.le_succ n)).op`.
