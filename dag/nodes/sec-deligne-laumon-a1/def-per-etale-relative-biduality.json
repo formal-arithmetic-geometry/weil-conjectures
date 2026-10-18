@@ -1,0 +1,112 @@
+{
+ "id": "def-per-etale-relative-biduality",
+ "kind": "definition",
+ "title": "Ordinary etale relative dual functor and evaluation biduality",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring, $X$ a scheme, and $K,M\\in D(X_{\\mathrm{et}},R)$ in the ordinary unbounded etale module derived category [def-weil-pbc-derived-categories]. Use $H_X=R\\mathcal Hom_R$ with its derived tensor-Hom adjunction [def-pur-derived-internal-hom] and derived tensor product [def-kun-derived-tensor] with the canonical Koszul symmetry [lem-kun-tensor-sym]. Define the contravariant relative dual functor $D_K:D(X_{\\mathrm{et}},R)^{\\mathrm{op}}\\to D(X_{\\mathrm{et}},R)$ by $D_K(M)=H_X(M,K)$, with its inherited functoriality in the first Hom variable. Define $\\eta_{K,M}:M\\to D_K(D_KM)$ to be the transpose of $D_KM\\otimes_R^L M\\xrightarrow{\\sigma}M\\otimes_R^L D_KM\\xrightarrow{\\mathrm{ev}_{M,K}}K$ under the adjunction $(D_KM)\\otimes_R^L-\\dashv H_X(D_KM,-)$. The coefficient ring and target $K$ are arbitrary; no Noetherianity, boundedness, constructibility, dualizing property or invertibility of $\\eta_{K,M}$ is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.2.3.2, printed p. 296: relative dual and canonical evaluation-transpose biduality used in its identification"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative derived internal Hom dual functor and canonical biduality transpose of evaluation after tensor symmetry",
+   "results": "{\"t\": \"2026-10-18T22:08:27Z\", \"tool\": \"leansearch\", \"query\": \"relative derived internal Hom dual functor and canonical biduality transpose of evaluation after tensor symmetry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"transpose_dualTensorHom\", \"Module.Dual.instIsReflecive\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"LinearEquiv.trans_dualMap_symm_flip\", \"Lat.dualEquiv\", \"Module.Dual.transpose\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"Module.Dual.eval_naturality\"], \"digest\": \"18ec1ee1d0dccea2\"}",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing ordinary-etale definition with existing:true; no DAG definition record owns it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical map to double internal Hom dual into arbitrary target by evaluation and tensor symmetry",
+   "results": "{\"t\": \"2026-10-18T22:08:29Z\", \"tool\": \"leanfinder\", \"query\": \"canonical map to double internal Hom dual into arbitrary target by evaluation and tensor symmetry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.ihom.coev\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.exp.coev\", \"CategoryTheory.exp.ev\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.MonoidalClosed.pre\"], \"digest\": \"4f405d1e3283e19c\"}",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing ordinary-etale definition with existing:true; no DAG definition record owns it."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|[Ii]nternalHom.*[Pp]ullback|[Pp]ullback.*[Ii]nternalHom",
+   "results": "{\"t\": \"2026-10-18T22:08:27Z\", \"tool\": \"grep\", \"query\": \"bidual|[Ii]nternalHom.*[Pp]ullback|[Pp]ullback.*[Ii]nternalHom\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\"], \"digest\": \"d2da04bbdd47550a\"}",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing ordinary-etale definition with existing:true; no DAG definition record owns it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleInternalHomPullbackComparison|etaleEvaluationBiduality|CoefficientChangeDualizing in dag/nodes, WeilConjectures, lean/Sheaf; inspect all definition-node lean records; blueprint_refs.py search bidual / evaluation-transpose / pullback comparison",
+   "results": "No upstream WeilConjectures declaration of these names. Existing side declarations: EtaleGenericHomTriangle.lean:200 defines the comparison; CoefficientChangeDualizing.lean:49 and :57 give dual and biduality. DualizingLocallyClosedInheritance.lean:58 defines etaleEvaluationBiduality by the same adjunction and signed symmetry, but no definition node owns it. The only definition record for a bidual transpose is def-per-ringed-site-bidual-transpose: it takes an explicit normalized generic ringed-site model, rather than the fixed ordinary-etale tensor-Hom interface. def-per-derived-hom-pullback defines pullback of shifted Hom sets, not this internal-Hom object comparison. Blueprint search found no definition owner of these ordinary-etale declarations.",
+   "date": "2026-10-18",
+   "verdict": "Record the existing fixed ordinary-etale declarations; no duplicate Lean definition or theorem assumption."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-regular-base-change",
+  "date": "2026-10-18",
+  "group": "Q114"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: the local duality input for the Verdier lower-bound argument; regular pullback of internal Hom and strict-local testing; the relative dual functor and biduality arrow",
+   "via": [
+    "lem-per-potential-regular-base-change",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientChangeDualizing",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientChangeDualizing.biduality",
+  "statement": "def biduality (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})\n    (K M : DerivedCategoryModule R X) :\n    M ⟶ (dual R X K).obj (op ((dual R X K).obj (op M)))",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership requested by the H2 return of acbf27a5e59d. Records only the existing dual abbreviation and explicit evaluation-transpose biduality, not coefficient_change_dualizing or homComparison. The alternative etaleEvaluationBiduality was checked: it has the same body after unfolding dual, and has no definition-node owner. The generic ringed-site bidual node requires explicit model data, whereas this record uses the fixed ordinary-etale adjunction and Koszul symmetry.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.dual",
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.biduality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a31a368be",
+  "group": "Q114",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a31a368be",
+  "group": "Q114",
+  "result": "fix",
+  "note": "H2 repair of acbf27a5 accepted: module byte-identical (recompiled with nt_compile --json: 9.2 s, exit 0, no warnings besides sorry); item stmt_deps now add only def nodes; statement/proof/proof_deps unchanged vs live. def-per-etale-relative-biduality: existing:true dual/biduality in CoefficientChangeDualizing, statement verbatim (l.57-59), body = homEquiv(derivedTensorSymmetry ≫ counit) as the node says, deps own all used decls, no competing def-node owner (etaleEvaluationBiduality pre-existing duplicate, advisory). def-per-etale-hom-pullback-comparison: record verbatim (EtaleGenericHomTriangle l.200-208), body = transpose of g*ev ∘ α⁻¹; FIX: it cited theorem lem-weil-pbc-ringed-topoi-derived-tensor-pullback for α, but the Lean uses leftDerivedUpperStarTensorIso owned by lem-kun-inverse-image-monoidal. fixes/def-per-etale-hom-pullback-comparison.json swaps the stmt_dep/citation to lem-kun-inverse-image-monoidal and adds def-weil-pbc-inverse-image; citations = stmt_deps, no cycle, closure gains only generic pbc/kun nodes. Advisories: stale blueprint ids in existing docstrings; L(g^*) has no recorded def owner (base-era, as before)."
+ }
+}

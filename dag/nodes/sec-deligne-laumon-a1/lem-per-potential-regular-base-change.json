@@ -13,7 +13,11 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-topological-krull-dimension",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-per-etale-hom-pullback-comparison",
+  "def-per-etale-relative-biduality",
+  "def-weil-regular-scheme"
  ],
  "proof": [
   {
@@ -464,5 +468,32 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-99efe9c57 (reviewer sub-agent of L); spot-checked: Head 99efe9c5 is a re-delivery of 8d65a45f, which was FIXed. The item node is byte-identical to that head; only the report and citations.json changed, re-quoting the j_! revision of lem-per-etale-internal-hom-localization. That revision does not change Steps 6–7. Both repairs of the earlier FIX were therefore lost, and I re-applied them. (1) E5, Step 2: the step says beta is closed under distinguished triangles in A without showing that the connecting square commutes. Restored the argument: shift compatibility, naturality for the two squares, and naturality for delta for the connecting square. (2) C3/C4, Step 9: lem-weil-pbc-strict-henselization-triples does not identify the ring of def-weil-pbc-strict-henselization-limit with (R_p)^sh. Re-cited lem-weil-pbc-etale-local-ring-triples and lem-exc-affine-strict-local-ring-comparison, with the pair-to-triple translation for lem-sc-strict-henselization-noetherian. I re-read both nodes on the current DAG. (3) New, C1 minor, Step 5: the definition gives lisse only along the stratum's own immersion. Passing to the open subscheme V of T needs immersion independence, so I added the citation lemma-constructible-immersion-independence (sk-thm-p1, on route). Source check, ILO XVII: Prop. 4.2.2 (f regular, Noetherian, K in D^b_c, L in D^+) matches the statement. Steps 3–7 realize Cor. 4.2.3 and Lemmas 4.2.4–4.2.5 through 4.2.1 and the localization triangle: regular direct-image exchange for g = j and g = i, induction on Z with Ri^!B, supported base change and its closed-counit clause, then two-out-of-three and truncation. Step 3 needs no finite projective dimension; tested M = Z/l over Z/l^2. Step 8 uses exactly the hypotheses L and D_K L in D^b_c, as in 6.2.3.2. Steps 9–11 realize the opening of 6.5. Step 10 (fibres are absolutely flat, so their local rings are fields) is correct. Route: the only off-route citation is the declared generic lem-trf-geometric-inverse-image-exact, accepted as a tool use. Batch 5: the trace-formula and Poincare-duality nodes in the closure of the item's proof are all generic: def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation, the geometric inverse-image exactness node, lem-trf-bounded-below-derived-adjunction, 05WR strict-local invariance, henselian permanence, and lem-pod-separated-finite-type-base-change. So both flags are accepted: neither assumption gives these results, and ILO 4.2.3 is no step of the trace formula or of Poincare duality. No new nodes and no cycle; uses equal proof_deps; the longest step is 1872 characters. Maintainer: the 8d65 FIX never reached the group, so please make sure this one lands.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PotentialRegularBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.PotentialRegularBaseChange.regular_internalHom",
+  "declarations": [
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.Coefficients",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.pull",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.regular_internalHom",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.regular_biduality",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.pullback_exact_constructible",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.strict_localization_geometry",
+   "AlgebraicGeometry.Etale.PotentialRegularBaseChange.isIso_of_strict_localizations"
+  ],
+  "file": "lean/Sheaf/Paper/PotentialRegularBaseChange.lean",
+  "statement": "theorem regular_internalHom (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : 1 ≤ r) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (hX : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) (hY : ∀ U : Y.affineOpens, IsExcellent Γ(Y, U)) (hℓX : IsUnit (ℓ : Γ(X, ⊤))) (hℓY : IsUnit (ℓ : Γ(Y, ⊤))) (p : Y ⟶ X) [Flat p] (hreg : ∀ (x : X) (k' : Type u) [Field k'] [Algebra (X.residueField x) k'] [Module.Finite (X.residueField x) k'], IsRegularScheme (pullback (p.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) k'))))) (L : DerivedCategoryModule (Coefficients.{u} ℓ r) X) (hL : DerivedCategory.isBoundedConstructible (Coefficients.{u} ℓ r) X L) (Q : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Coefficients.{u} ℓ r)))) : IsIso (etaleInternalHomPullbackComparison (Coefficients.{u} ℓ r) p L Q.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a31a368be",
+  "group": "Q114",
+  "result": "fix",
+  "note": "H2 repair of acbf27a5 accepted: module byte-identical (recompiled with nt_compile --json: 9.2 s, exit 0, no warnings besides sorry); item stmt_deps now add only def nodes; statement/proof/proof_deps unchanged vs live. def-per-etale-relative-biduality: existing:true dual/biduality in CoefficientChangeDualizing, statement verbatim (l.57-59), body = homEquiv(derivedTensorSymmetry ≫ counit) as the node says, deps own all used decls, no competing def-node owner (etaleEvaluationBiduality pre-existing duplicate, advisory). def-per-etale-hom-pullback-comparison: record verbatim (EtaleGenericHomTriangle l.200-208), body = transpose of g*ev ∘ α⁻¹; FIX: it cited theorem lem-weil-pbc-ringed-topoi-derived-tensor-pullback for α, but the Lean uses leftDerivedUpperStarTensorIso owned by lem-kun-inverse-image-monoidal. fixes/def-per-etale-hom-pullback-comparison.json swaps the stmt_dep/citation to lem-kun-inverse-image-monoidal and adds def-weil-pbc-inverse-image; citations = stmt_deps, no cycle, closure gains only generic pbc/kun nodes. Advisories: stale blueprint ids in existing docstrings; L(g^*) has no recorded def owner (base-era, as before)."
  }
 }
