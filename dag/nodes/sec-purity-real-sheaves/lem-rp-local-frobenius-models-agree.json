@@ -27,9 +27,81 @@
   "def-weil-residue-field",
   "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack the rationalization and point-fiber conventions. The proposition [prop-trf-rational-frobenius-integral-model] identifies K_E with the rationalized object represented by K_O, while [def-weil-finite-coefficient-point] defines Fib_s at E as Gamma(s,-) tensor_O_E E. Applying the rational derived pullback and then this point fiber to the same geometric point xbar therefore gives a canonical E-linear identification alpha: K_{E,xbar}=K_{O,xbar} tensor_O_E E -> C_{xbar}=Fib_s(L xbar^* M). It is natural in morphisms and hence will transport the induced endomorphisms and their cohomology maps.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.proof.md",
+    "place": "Step 1, local stalk complex and rationalized coefficient conventions; expanded by the worker"
+   }
+  },
+  {
+   "text": "Fix the comparison families before comparing operators. Apply [lem-trf-integral-pullback-comparison-realization] with coefficient extension E=E to all compositions of xbar, g_X and g_s: use its c=eta^{-1} composed with R lim(c_n), formed on simultaneous strict reduction systems, and then rationalize. Its associativity, unit and scheme-morphism-equality clauses cover every iterate. These specify the integral composition isomorphisms whose rationalizations occur in [def-weil-local-frobenius-trace]. This is a choice of the canonical construction supplied by the cited lemma, not an extra property of K or theta. In particular write G=Lg_X^*, J=Fib_s L xbar^* and c_e:L(g_X^e)^* -> G^e for these iterated comparisons. The same choice is used throughout the next step.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), together with sites-cohomology.tex Tag 0D6D; the specified comparison/coherence construction is the statement of lem-trf-integral-pullback-comparison-realization, not an extra assertion attributed to these tags."
+   }
+  },
+  {
+   "text": "The closed-point clause of [def-weil-local-frobenius-trace] gives e>=1, so apply [lem-trf-local-frobenius-transport-normalization] with m=e, y from the chosen residue embedding, and Lambda=E, using exactly the comparison families fixed in Step 2. Write t=t_{y,e,M}:JM -> JG^e M for its successive point transports and b_e=J(c_e^{-1}) composed with t. The normalization equation t=J(kappa^[e]) composed with rho, interpreted through c_e, identifies b_e with the rationalized scheme-Frobenius stalk transport tau_{y,e} in [prop-trf-rational-frobenius-integral-model]. This uses the lemma's equality of specified strict-system maps and its integral realization and rationalization, not equality of unrelated maps inferred from their individual reductions. Here the return is g_X^e xbar=xbar g_s^e. The model proposition gives F^{trf}_x=phi_E^[e]_{xbar} composed with tau_{y,e}. Since phi_E=theta and all iterates use the same compositors, this iterated map is J(theta^[e]). The displayed local-Frobenius definition gives F^{geom}=J(theta^[e]) composed with b_e on C_{xbar}. Naturality of alpha from Step 1 therefore gives the typed equation alpha composed with F^{trf}_x = F^{geom} composed with alpha. Thus the comparison is already an intertwining isomorphism of point complexes.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-local-frobenius-transport-normalization",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.proof.md",
+    "place": "Step 1, last sentence on induced Frobenius operators; expanded using the trace-formula local normalization"
+   }
+  },
+  {
+   "text": "Apply the functor H^j to alpha and to the intertwining equality in Step 3. By [def-weil-coefficient-cohomology-modules], H^j is functorial on the derived point-fiber categories, so H^j(alpha) is an E-linear isomorphism and carries H^j(F^{trf}_x) to F_x. The interpretation of the cohomology-sheaf stalk in [def-weil-local-frobenius-trace] identifies the target with the stated H^j(C_{xbar}), including degrees in which the complex is zero.",
+   "uses": [
+    "def-weil-coefficient-cohomology-modules",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.proof.md",
+    "place": "Step 1, local cohomology operators; expanded by the worker"
+   }
+  },
+  {
+   "text": "Choose an E-basis of each finite-dimensional cohomology space and use H^j(alpha) to transport it. The two intertwined operators then have the same matrix, so multiplying by T^e and taking the finite determinant gives the displayed equality in E[T]. After extending scalars E to Qlb, the same matrix is carried coefficientwise to Qlb; the determinant polynomial is preserved by the ring homomorphism. This also covers the zero cohomology space, whose determinant is 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.proof.md",
+    "place": "Step 3, determinant form; finite-dimensional linear algebra expanded by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-local-frobenius-trace",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization",
+  "prop-trf-rational-frobenius-integral-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.proof.md",
+  "place": "Step 1, last sentence on induced Frobenius operators on geometric stalks; expanded through the existing trace-formula local normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +123,38 @@
    "results": "not run: no Loogle access on the review machine",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(stalk|transport)|((stalk|transport).*Frobenius)",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern arithmetic ring Frobenius, Witt vectors or structure-sheaf stalks, not Weil-complex stalk transport and its rationalized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At a closed point the scheme Frobenius stalk operator of an l adic Weil complex is conjugate to the geometric Galois point transport operator",
+   "results": "8 hits: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint, AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point, AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.stalkMap_congr_point_assoc, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern arithmetic ring Frobenius, Witt vectors or structure-sheaf stalks, not Weil-complex stalk transport and its rationalized comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"stalk\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern arithmetic ring Frobenius, Witt vectors or structure-sheaf stalks, not Weil-complex stalk transport and its rationalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric point Frobenius on an E Weil complex agrees with the rationalized integral trace formula stalk operator using canonical pullback composition comparisons",
+   "results": "8 hits: arithFrobAt, IsArithFrobAt.arithFrobAt, AlgebraicGeometry.Scheme.residue_residueFieldMap, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgebraicGeometry.Scheme.residue_residueFieldMap_assoc, AlgHom.IsArithFrobAt.localize, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgHom.IsArithFrobAt.localize_algebraMap",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern arithmetic ring Frobenius, Witt vectors or structure-sheaf stalks, not Weil-complex stalk transport and its rationalized comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +175,34 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankin"
+ "unit": "sk-p-real-rankin",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-rp-local-frobenius-models-agree",
+  "worker": "stage1",
+  "summary": "Repair of returned head e1ea054b4f: revalidated every proof citation against current DAG statements. Expanded the comparison into five steps, explicitly choosing the canonical strict-system pullback compositors required by the revised normalization lemma and citing their existing realization theorem. Wrote the normalized transport and typed operator-intertwining equations. Preserved the item statement, hypotheses, original proof route and recorded historical searches; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes cor-rp-euler-product proof sentence identifying the trace-formula local factor with the geometric-point local Frobenius, expanding the interface sentence in thm-weil-grothendieck-lefschetz-trace.proof.md Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Step 3 uses the generic comparison of successive geometric point transports with the scheme-Frobenius stalk transport and its integral/rational realization; the real-rankin unit does not construct this transport normalization."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Step 2 uses the specified canonical integral pullback-composition families, their coherence and rationalization required by the revised normalization statement; the real-rankin unit supplies no construction of integral pullback compositors."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-local-frobenius-transport-normalization",
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-870b97540",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-870b97540 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 5 steps, its 7 proof dependencies, the parent cor-rp-euler-product, unit sk-p-real-rankin and the source sentence at the end of Step 1 of main-20261015 thm-weil-grothendieck-lefschetz-trace.proof.md. The delivery adds no new nodes and no new Mathlib leaves. The item's statement and stmt_deps are unchanged, proof_deps is exactly the union of the steps' uses, and there is no SGA citation. Step 1: by def-weil-finite-coefficient-point item 3 (the E-stage point fiber is Gamma(s,-) tensored with E) and the rational pullback being the integral one on objects, alpha: K_{E,xbar} -> C_xbar is canonical and natural. Step 2: I read the full statement of lem-trf-integral-pullback-comparison-realization. With E=L the scalar comparison is the identity, and the associativity, unit, equal-morphism and iteration clauses fix the compositors c_e that def-weil-local-frobenius-trace requires. ell is invertible because ell != p. Step 3: the normalization lemma gives t = J(kappa^(e)) rho under c_e, and that is exactly the stalk transport tau_{y,e} of prop-trf-rational-frobenius-integral-model. The iterate orders of phi^[e] and theta^[e] agree, the return is g^e xbar = xbar g_s^e, and e>=1 comes from the closed-point clause. So alpha F^trf = F_x alpha, and I checked the types and orientation. Step 4: H^j is a functor with finite-dimensional values (def-weil-coefficient-cohomology-modules). Step 5 is elementary determinant transport. Small cases I checked: a point with a rank-one complex of eigenvalue lambda, a degree-2 point of Spec F_{q^2} over F_q, the zero complex, and a two-term complex with a nonzero differential. No duplicate found by rg. Batch-5 flag: I computed the transitive closures of lem-trf-local-frobenius-transport-normalization and lem-trf-integral-pullback-comparison-realization. Neither contains a trace-formula or Poincare-duality theorem or an assumption leaf. The only thm/prop-trf ids in them are the sec-six-functors Frobenius facts thm-trf-frobenius-fixed-points, prop-trf-scheme-galois-comparison and prop-trf-frobenius-factorization. Their content is generic: one fixes integral pullback compositors, the other compares Galois point transport with scheme-Frobenius stalk transport. Neither assumption gives that, and neither node is a trace-identity step. This matches the earlier ruling on lem-weil-isomorphism-derived-pullback-comparison-normalization, so both citations are kept. I accept both tool_uses; the unit itself cites sk-thm-trace-transport. No fixes were needed."
+ }
 }
