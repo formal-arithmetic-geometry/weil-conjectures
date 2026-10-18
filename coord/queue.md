@@ -1,6 +1,6 @@
 # Work queue
 
-961 items; claim with `tools/claim.py next <group> [--stage N]`.
+963 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (961)
+## Stage 3: modules to prove (963)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -59,6 +59,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.LinearAlgebra.SpectrumExactSequence` | - | 1 | proof | 1 |
 | `Sheaf.Paper.AmbientIndDerivedSums` | - | 2 | proof | 1 |
 | `Sheaf.Paper.AmbientIndDerivedTriangulated` | - | 2 | proof | 1 |
+| `Sheaf.Paper.BoundedConstructibleHomFiniteness` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CanonicalOriginCompactSupportComposition` | - | 4 | proof | 1 |
 | `Sheaf.Paper.CoefficientFrobenius` | - | 5 | proof | 1 |
@@ -632,6 +633,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleSumTensorTotalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteRingCompactSupportProjection` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FullCDClassRestriction` | - | 1 | proof | 4 |
+| `Sheaf.Paper.IntegralConstantModelHeartClosure` | - | 1 | proof | 4 |
 | `Sheaf.Paper.IntegralModelSurjectiveClosedReflection` | - | 1 | proof | 4 |
 | `Sheaf.Paper.IntegralTwistBaseChange` | - | 1 | proof | 4 |
 | `Sheaf.Paper.InterchangeProperPasting` | - | 1 | proof | 4 |
@@ -976,7 +978,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (25)
+## Stage 3: waiting for statements of dependencies (23)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -994,12 +996,10 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.CategoryTheory.ModuleObjects.LiftExact` | - | 1 | `lem-sfb-modobj-abelian` |
 | `Sheaf.CategoryTheory.Monoidal.ModuleEqualizerInternalHom` | - | 1 | `lem-sfb-modobj-abelian` |
 | `Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions` | - | 3 | `lem-sfb-modobj-abelian` |
-| `Sheaf.Paper.BoundedConstructibleHomFiniteness` | - | 1 | `lem-sfb-integral-cohomological-adic-criterion` |
 | `Sheaf.Paper.CoefficientFiniteDescentObjects` | - | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.Paper.CoefficientHeartClosure` | - | 1 | `lem-sfb-modobj-abelian` |
 | `Sheaf.Paper.EtaleWeilFundamentalRepresentation` | - | 8 | `def-tw-frobenius-action` |
 | `Sheaf.Paper.IntegralConstantModelHeart` | - | 1 | `sk-lem-integral-models` |
-| `Sheaf.Paper.IntegralConstantModelHeartClosure` | - | 1 | `lem-sfb-integral-cohomological-adic-criterion` |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | - | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.IntegralConstructibleExt` | - | 1 | `det-lem-int-ext-bound` |
 | `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | `lem-sf-proper-open-projection-mate` |
