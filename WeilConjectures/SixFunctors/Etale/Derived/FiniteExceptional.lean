@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
@@ -102,6 +103,85 @@ theorem constructibleFiniteTor_and_torAmplitudeIn_rightDerivedUpperShriek
   refine ⟨(constructibleFiniteTor _ X).prop_of_iso e.symm h₃,
     (torAmplitudeIn _ X _ _).prop_of_iso e.symm ?_⟩
   convert h₃t using 2 <;> ring
+
+section CoefficientChange
+
+variable {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] {φ : A →+* B}
+  (hφ : Function.Surjective φ) {a : A} (ha : RingHom.ker φ = Ideal.span {a})
+  {k : Type u} [Field k] [IsAlgClosed k]
+  [HasInvertibleExponent A (Spec (.of k))] [HasInvertibleExponent B (Spec (.of k))]
+
+include hφ ha in
+/-- Blueprint `cor-coef-finite-verdier`: Finite reductions of Verdier duality.
+
+For finite coefficient rings and a surjection `φ : A →+* B` with principal kernel, and for
+`K ∈ Dctf(X, A)` on a separated finite-type `k`-scheme `X`, the Verdier dual commutes with the
+coefficient change: `(𝔻_{X,A} K) ⊗ᴸ_A B ≅ 𝔻_{X,B}(K ⊗ᴸ_A B)`. (The comparison map of the
+blueprint, its cocycle and its compatibility with evaluation are not formalised.) -/
+theorem nonempty_iso_derivedExtendScalars_verdierDual {X : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [HasCompactification aX]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} A) X K) :
+    Nonempty ((derivedExtendScalars hφ ha X).obj
+        ((verdierDual (ModuleCat.{u + 1} A) aX).obj (op K)) ≅
+      (verdierDual (ModuleCat.{u + 1} B) aX).obj (op ((derivedExtendScalars hφ ha X).obj K))) :=
+  sorry
+
+include hφ ha in
+/-- The derived extension of scalars `- ⊗ᴸ_A B` commutes with the pullback `Lf^*` (the
+"coefficient tensor commutes with ordinary pullback" of blueprint
+`lem-coef-finite-exceptional`). Both are left adjoints, of `Rf_* ∘ Res` and `Res ∘ Rf_*`, which
+agree. -/
+theorem nonempty_iso_derivedExtendScalars_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    Nonempty ((derivedExtendScalars hφ ha X).obj ((L((f)^*[ModuleCat.{u + 1} A])).obj K) ≅
+      (L((f)^*[ModuleCat.{u + 1} B])).obj ((derivedExtendScalars hφ ha Y).obj K)) :=
+  sorry
+
+include hφ ha in
+/-- Blueprint `lem-coef-finite-exceptional`: Finite exceptional adjoints and coefficient change,
+the coefficient reduction.
+
+For finite coefficient rings, a surjection `φ : A →+* B` with principal kernel (for instance
+`A_m ⟶ A_n`, `m ≥ n`), and `L ∈ Dctf(Y, A)`:
+`(Rf_A^! L) ⊗ᴸ_A B ≅ Rf_B^!(L ⊗ᴸ_A B)`.
+As in the blueprint, apply the duality formula
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_of_constructibleFiniteTor` and
+the coefficient change of the two Verdier duals
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedExtendScalars_verdierDual`,
+`cor-coef-finite-verdier`),
+the coefficient change commuting with ordinary pullback. (The cocycle and the compatibility with
+the units and counits are not formalised: the comparison is only asserted to exist.) -/
+theorem nonempty_iso_derivedExtendScalars_rightDerivedUpperShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasCompactification aY] (f : X ⟶ Y) [HasCompactification f] [HasCompactification (f ≫ aY)]
+    [QuasiCompact (f ≫ aY)] [IsSeparated (f ≫ aY)] [LocallyOfFiniteType (f ≫ aY)]
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (hL : constructibleFiniteTor (ModuleCat.{u + 1} A) Y L) :
+    Nonempty ((derivedExtendScalars hφ ha X).obj ((R(f)^![ModuleCat.{u + 1} A]).obj L) ≅
+      (R(f)^![ModuleCat.{u + 1} B]).obj ((derivedExtendScalars hφ ha Y).obj L)) := by
+  let DA := verdierDual (ModuleCat.{u + 1} A) aY
+  let DB := verdierDual (ModuleCat.{u + 1} B) aY
+  let EY := derivedExtendScalars hφ ha Y
+  have hD := constructibleFiniteTor_verdierDual A aY hL
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_of_constructibleFiniteTor A aY f hL
+  obtain ⟨v₁⟩ := nonempty_iso_derivedExtendScalars_verdierDual hφ ha (f ≫ aY)
+    (constructibleFiniteTor_leftDerivedUpperStar _ f hD)
+  obtain ⟨p⟩ := nonempty_iso_derivedExtendScalars_leftDerivedUpperStar hφ ha f (DA.obj (op L))
+  obtain ⟨v₂⟩ := nonempty_iso_derivedExtendScalars_verdierDual hφ ha aY hL
+  obtain ⟨v₃⟩ := nonempty_iso_derivedExtendScalars_verdierDual hφ ha aY hD
+  obtain ⟨β⟩ := nonempty_iso_verdierDual_verdierDual A aY hL
+  obtain ⟨d⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar B aY f (DB.obj (op (EY.obj L)))
+  -- `𝔻_B 𝔻_B (L ⊗ B) ≅ 𝔻_B ((𝔻_A L) ⊗ B) ≅ (𝔻_A 𝔻_A L) ⊗ B ≅ L ⊗ B`
+  let b : DB.obj (op (DB.obj (op (EY.obj L)))) ≅ EY.obj L :=
+    DB.mapIso v₂.op ≪≫ v₃.symm ≪≫ EY.mapIso β.symm
+  exact ⟨(derivedExtendScalars hφ ha X).mapIso e₁ ≪≫ v₁ ≪≫
+    ((verdierDual (ModuleCat.{u + 1} B) (f ≫ aY)).mapIso
+      (p ≪≫ (L((f)^*[ModuleCat.{u + 1} B])).mapIso v₂).op).symm ≪≫ d ≪≫
+    (R(f)^![ModuleCat.{u + 1} B]).mapIso b⟩
+
+end CoefficientChange
 
 end Etale
 

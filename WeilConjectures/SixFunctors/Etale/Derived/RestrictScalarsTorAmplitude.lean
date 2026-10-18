@@ -117,7 +117,7 @@ lemma exists_distTriang_tensor_quotientSingle (ha' : a ∈ nonZeroDivisors Λ) (
 
 omit [CommRing Λ] in
 /-- Homology concentration is invariant under isomorphism. -/
-lemma homologyConcentratedIn_of_iso {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+lemma homologyConcentratedIn_of_iso' {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     {a b : ℤ} {M N : _root_.DerivedCategory C} (e : M ≅ N)
     (h : _root_.DerivedCategory.homologyConcentratedIn a b M) :
     _root_.DerivedCategory.homologyConcentratedIn a b N := by
@@ -155,55 +155,97 @@ lemma homologyConcentratedIn_singleFunctor_tensor_quotientSingle (ha' : a ∈ no
     have := _root_.DerivedCategory.TStructure.t.isLE_shift T.obj₁ 0 1 (-1)
     exact _root_.DerivedCategory.TStructure.t.isLE_of_le _ (-1) 0 (by lia)
   have hR := rot_of_distTriang _ hT
-  exact homologyConcentratedIn_of_iso e₃
+  exact homologyConcentratedIn_of_iso' e₃
     ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ hR (-1) (inferInstanceAs (T.obj₂.IsGE (-1)))
         (inferInstanceAs ((T.obj₁⟦(1 : ℤ)⟧).IsGE (-1))),
       _root_.DerivedCategory.TStructure.t.isLE₂ _ hR 0 (inferInstanceAs (T.obj₂.IsLE 0))
         (inferInstanceAs ((T.obj₁⟦(1 : ℤ)⟧).IsLE 0))⟩
+
+section General
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
+
+/-- Unfolding `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn` (stated for a general
+coefficient category, where the comparison of the tensor products is cheap). -/
+lemma torAmplitudeIn_iff_forall {a b : ℤ}
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    DerivedCategory.torAmplitudeIn A X a b K ↔ ∀ G : Sheaf X.smallEtaleTopology A,
+      _root_.DerivedCategory.homologyConcentratedIn a b
+        (((derivedTensor A X).obj K).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
+  Iff.rfl
+
+/-- `K ⊗ᴸ N` has homology in `[a + c, b + d]` if `K` has Tor amplitude in `[a, b]` and `N`
+homology in `[c, d]`. -/
+lemma homologyConcentratedIn_derivedTensor {a b c d : ℤ}
+    {K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : DerivedCategory.torAmplitudeIn A X a b K)
+    (hN : _root_.DerivedCategory.homologyConcentratedIn c d N) :
+    _root_.DerivedCategory.homologyConcentratedIn (a + c) (b + d)
+      (((derivedTensor A X).obj K).obj N) :=
+  _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left hK hN
+
+variable {A X} in
+/-- The splitting step of `AlgebraicGeometry.Etale.torAmplitudeIn_derivedExtendScalars`: if
+`L ⊗ᴸ c` has Tor amplitude in `[α, β]`, `M ≅ G[0]` and
+`(L ⊗ᴸ M) ⊗ᴸ c ≅ (L ⊗ᴸ M) ⊞ (L ⊗ᴸ M)⟦1⟧`, then `L ⊗ᴸ M` has homology in `[α + 1, β]`. -/
+lemma homologyConcentratedIn_of_torAmplitudeIn_of_iso_biprod {α β : ℤ}
+    {L c M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {G : Sheaf X.smallEtaleTopology A}
+    (hL : DerivedCategory.torAmplitudeIn A X α β (((derivedTensor A X).obj L).obj c))
+    (e : M ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj G)
+    (s : ((derivedTensor A X).obj (((derivedTensor A X).obj L).obj M)).obj c ≅
+      ((derivedTensor A X).obj L).obj M ⊞ (((derivedTensor A X).obj L).obj M)⟦(1 : ℤ)⟧) :
+    _root_.DerivedCategory.homologyConcentratedIn (α + 1) β
+      (((derivedTensor A X).obj L).obj M) := by
+  obtain ⟨βt⟩ := nonempty_iso_derivedTensor_flip A X
+  let w : ((derivedTensor A X).obj (((derivedTensor A X).obj L).obj c)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G) ≅
+      ((derivedTensor A X).obj (((derivedTensor A X).obj L).obj M)).obj c :=
+    ((derivedTensor A X).obj _).mapIso e.symm ≪≫ derivedTensorAssociator A X _ _ _ ≪≫
+      ((derivedTensor A X).obj L).mapIso ((βt.app _).app _) ≪≫
+      (derivedTensorAssociator A X _ _ _).symm
+  have h₀ := homologyConcentratedIn_of_iso' (w ≪≫ s) (hL G)
+  have h₁ := (_root_.DerivedCategory.homologyConcentratedIn α β).prop_of_retract
+    ⟨biprod.inl, biprod.fst, biprod.inl_fst⟩ h₀
+  have h₂ := (_root_.DerivedCategory.homologyConcentratedIn α β).prop_of_retract
+    ⟨biprod.inr, biprod.snd, biprod.inr_snd⟩ h₀
+  obtain ⟨g, -⟩ := h₂
+  obtain ⟨-, l⟩ := h₁
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_shift _ (α + 1) 1 α, l⟩
+
+end General
 
 include hφ ha in
 /-- **Tor amplitude of a derived base change.** If `L ⊗ᴸ (Λ ⧸ ker φ)` has Tor amplitude in
 `[α, β]` over `Λ`, then `L ⊗ᴸ_Λ Λ'` has Tor amplitude in `[α + 1, β]` over `Λ'`. For a sheaf `G`
 of `Λ'`-modules, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ G) ≅ L ⊗ᴸ Res G`
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedRestrictScalars_derivedTensor`), and
-`(L ⊗ᴸ (Λ ⧸ ker φ)) ⊗ᴸ Res G ≅ (L ⊗ᴸ Res G) ⊞ (L ⊗ᴸ Res G)⟦1⟧`, `a` killing `Res G`. -/
+`(L ⊗ᴸ Res G) ⊗ᴸ (Λ ⧸ ker φ) ≅ (L ⊗ᴸ Res G) ⊞ (L ⊗ᴸ Res G)⟦1⟧`, `a` killing `Res G`. -/
 theorem torAmplitudeIn_derivedExtendScalars (ha' : a ∈ nonZeroDivisors Λ) {L : 𝐃(X, Λ)}
     {α β : ℤ}
-    (hL : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X α β (L ⊗ quotientSingle φ X)) :
+    (hL : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X α β
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj (quotientSingle φ X))) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ') X (α + 1) β
       ((derivedExtendScalars hφ ha X).obj L) := by
+  rw [torAmplitudeIn_iff_forall]
   intro G
   let R := Sheaf.restrictScalars X.smallEtaleTopology φ
   let RG := R.mapDerivedCategory.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
-  let hRG : RG ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj (R.obj G) :=
-    (R.mapDerivedCategorySingleFunctor 0).app G
   have haφ : φ a = 0 := by
     rw [← RingHom.mem_ker, ha]
     exact Ideal.mem_span_singleton_self a
-  have hz : a • 𝟙 (L ⊗ RG) = 0 := by
-    have : a • 𝟙 (L ⊗ RG) = ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).map (a • 𝟙 RG) := by
-      rw [Functor.map_smul, CategoryTheory.Functor.map_id]
-      rfl
-    rw [this, smul_id_derivedRestrictScalars_obj_eq_zero haφ, Functor.map_zero]
+  have hz : a • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj RG) = 0 := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+      smul_id_derivedRestrictScalars_obj_eq_zero haφ, Functor.map_zero]
   obtain ⟨s⟩ := nonempty_iso_tensor_quotientSingle_of_smul_eq_zero ha ha' hz
-  let w : (L ⊗ quotientSingle φ X) ⊗ (_root_.DerivedCategory.singleFunctor _ 0).obj (R.obj G) ≅
-      (L ⊗ RG) ⊗ quotientSingle φ X :=
-    whiskerLeftIso _ hRG.symm ≪≫ α_ _ _ _ ≪≫ whiskerLeftIso L (β_ _ _) ≪≫ (α_ _ _ _).symm
-  have h₀ := homologyConcentratedIn_of_iso (w ≪≫ s) (hL (R.obj G))
-  have h₁ : _root_.DerivedCategory.homologyConcentratedIn α β (L ⊗ RG) :=
-    (_root_.DerivedCategory.homologyConcentratedIn α β).prop_of_retract
-      ⟨biprod.inl, biprod.fst, by simp⟩ h₀
-  have h₂ : _root_.DerivedCategory.homologyConcentratedIn α β ((L ⊗ RG)⟦(1 : ℤ)⟧) :=
-    (_root_.DerivedCategory.homologyConcentratedIn α β).prop_of_retract
-      ⟨biprod.inr, biprod.snd, by simp⟩ h₀
-  have h₃ : _root_.DerivedCategory.homologyConcentratedIn (α + 1) β (L ⊗ RG) := by
-    obtain ⟨g, -⟩ := h₂
-    obtain ⟨-, l⟩ := h₁
-    exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_shift (L ⊗ RG) (α + 1) 1 α, l⟩
+  have h₃ := homologyConcentratedIn_of_torAmplitudeIn_of_iso_biprod hL
+    ((R.mapDerivedCategorySingleFunctor 0).app G) s
   obtain ⟨p⟩ := nonempty_iso_derivedRestrictScalars_derivedTensor hφ ha X L
     ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
   exact R.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
-    (homologyConcentratedIn_of_iso p.symm h₃)
+    (homologyConcentratedIn_of_iso' p.symm h₃)
 
 include hφ ha in
 /-- **Tor amplitude of a restriction of scalars.** If `N` has Tor amplitude in `[α, β]` over
@@ -215,6 +257,7 @@ theorem torAmplitudeIn_derivedRestrictScalars (ha' : a ∈ nonZeroDivisors Λ) {
     {α β : ℤ} (hN : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ') X α β N) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (α - 1) β
       ((Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj N) := by
+  rw [torAmplitudeIn_iff_forall]
   intro G
   let R := Sheaf.restrictScalars X.smallEtaleTopology φ
   let E := (derivedExtendScalars hφ ha X).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
@@ -222,18 +265,76 @@ theorem torAmplitudeIn_derivedRestrictScalars (ha' : a ∈ nonZeroDivisors Λ) {
     ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
   have hE : _root_.DerivedCategory.homologyConcentratedIn (-1) 0 E :=
     R.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
-      (homologyConcentratedIn_of_iso r.symm
+      (homologyConcentratedIn_of_iso' r.symm
         (homologyConcentratedIn_singleFunctor_tensor_quotientSingle ha ha' G))
-  have h₁ := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left hN hE
-  have h₂ := R.homologyConcentratedIn_mapDerivedCategory_obj h₁
+  have h₂ := R.homologyConcentratedIn_mapDerivedCategory_obj
+    (homologyConcentratedIn_derivedTensor _ X hN hE)
   obtain ⟨p⟩ := nonempty_iso_derivedRestrictScalars_derivedTensor hφ ha X
     ((_root_.DerivedCategory.singleFunctor _ 0).obj G) N
-  let w : R.mapDerivedCategory.obj (N ⊗ E) ≅
-      R.mapDerivedCategory.obj N ⊗ (_root_.DerivedCategory.singleFunctor _ 0).obj G :=
-    R.mapDerivedCategory.mapIso (β_ _ _) ≪≫ p ≪≫ β_ _ _
-  have h₃ := homologyConcentratedIn_of_iso w h₂
+  obtain ⟨βt⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
+  obtain ⟨βt'⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ') X
+  have h₃ := homologyConcentratedIn_of_iso'
+    (R.mapDerivedCategory.mapIso ((βt'.app _).app _) ≪≫ p ≪≫ (βt.app _).app _) h₂
+  obtain ⟨h₄, h₅⟩ := h₃
+  have : (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+      ((Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj N)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)).IsGE (α + -1) := h₄
+  have : (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+      ((Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj N)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)).IsLE (β + 0) := h₅
   exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_ge _ (α - 1) (α + -1) (by lia),
     _root_.DerivedCategory.TStructure.t.isLE_of_le _ (β + 0) β (by lia)⟩
+
+/-- For `Λ ⧸ J` finite, restriction of scalars along `Λ ⟶ Λ ⧸ J` preserves and reflects bounded
+constructibility: it commutes with the homology sheaves, is faithful and exact, and preserves
+and reflects constructibility of sheaves
+(`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff`). -/
+lemma boundedConstructible_derivedRestrictScalars_iff (J : Ideal Λ) [Finite (Λ ⧸ J)]
+    (N : 𝐃(X, Λ ⧸ J)) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj N) ↔
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Λ ⧸ J)) X N := by
+  let R := Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)
+  constructor
+  · rintro ⟨hb, hc⟩
+    refine ⟨R.bounded_of_bounded_mapDerivedCategory_obj hb, fun n ↦ ?_⟩
+    have : IsConstructibleSheaf ((R.mapDerivedCategory ⋙
+        _root_.DerivedCategory.homologyFunctor _ n).obj N) := hc n
+    have : IsConstructibleSheaf (R.obj
+        ((_root_.DerivedCategory.homologyFunctor _ n).obj N)) :=
+      IsConstructibleSheaf.of_iso ((R.mapDerivedCategoryHomologyFunctorIso n).app N).symm
+    exact (Scheme.isConstructibleSheaf_restrictScalars_iff J _).1 this
+  · rintro ⟨hb, hc⟩
+    refine ⟨R.bounded_mapDerivedCategory_obj hb, fun n ↦ ?_⟩
+    have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙ R).obj N) :=
+      (Scheme.isConstructibleSheaf_restrictScalars_iff J _).2 (hc n)
+    exact IsConstructibleSheaf.of_iso ((R.mapDerivedCategoryHomologyFunctorIso n).app N)
+
+section General₂
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+variable {A} in
+/-- Tor amplitude in `[a, b]` is closed under extensions. -/
+lemma torAmplitudeIn_obj₂_of_distTriang
+    {T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))} (hT : T ∈ distTriang _)
+    {a b : ℤ} (h₁ : DerivedCategory.torAmplitudeIn A X a b T.obj₁)
+    (h₃ : DerivedCategory.torAmplitudeIn A X a b T.obj₃) :
+    DerivedCategory.torAmplitudeIn A X a b T.obj₂ :=
+  fun F ↦ by
+    let G := (-⊗ᴸ-(X)[A]).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
+    let := _root_.DerivedCategory.commShiftTensorRight
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    obtain ⟨g₁, l₁⟩ := h₁ F
+    obtain ⟨g₃, l₃⟩ := h₃ F
+    exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ (G.map_distinguished _ hT) _ g₁ g₃,
+      _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
+
+end General₂
 
 end Etale
 

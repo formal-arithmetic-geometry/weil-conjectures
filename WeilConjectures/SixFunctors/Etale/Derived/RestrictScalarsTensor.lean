@@ -190,7 +190,8 @@ theorem nonempty_iso_derivedRestrictScalars_derivedTensor (L : 𝐃(X, Λ)) (N :
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P' hP'
   have := _root_.DerivedCategory.isIso_tensorLeftCounit _ hP
   have := _root_.DerivedCategory.isIso_tensorRightCounit _ hQ
-  let qF := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj ((F.mapHomologicalComplex _).obj P')
+  let qF := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+    ((F.mapHomologicalComplex _).obj P')
   let qM := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj M
   let qRM := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
     ((R.mapHomologicalComplex _).obj M)
