@@ -6,11 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
-import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 
 /-!
 # Projective morphisms are stable under base change
@@ -44,6 +40,16 @@ of `pullback.snd f g`; (2) apply quasi-compactness stability under base change
 -/
 theorem projective_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [IsProjective f] : IsProjective (pullback.snd f g) := by
-  sorry
+  obtain ⟨n, hn, i, hi, hif⟩ := IsHProjective.exists_isClosedImmersion (f := f)
+  have w : pullback.snd f g ≫ g = (pullback.fst f g ≫ i) ≫ ℙ(n; S) ↘ S := by
+    rw [Category.assoc, hif, pullback.condition]
+  let i' := ProjectiveSpace.liftBaseChange (pullback.snd f g) (pullback.fst f g ≫ i) w
+  have hpb : IsPullback (pullback.fst f g) i' i (ProjectiveSpace.map n g) := by
+    apply ProjectiveSpace.isPullback_liftBaseChange
+    rw [hif]
+    exact IsPullback.of_hasPullback f g
+  have hi' : IsClosedImmersion i' := MorphismProperty.of_isPullback hpb hi
+  exact { exists_isClosedImmersion :=
+    ⟨n, hn, i', hi', ProjectiveSpace.liftBaseChange_over _ _ _⟩ }
 
 end AlgebraicGeometry
