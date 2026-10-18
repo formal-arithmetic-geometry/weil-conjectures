@@ -1,0 +1,86 @@
+{
+ "id": "lem-per-strict-log-jacobian-criterion",
+ "kind": "statement",
+ "title": "Strict logarithmic Jacobian criterion",
+ "statement": "Let $S,X,Y$ be locally Noetherian fs log schemes and let $X\\to S$, $Y\\to S$ be log smooth [def-trf-fs-log-blowup, def-per-fs-log-smooth-etale]. Let $h:X\\to Y$ be an $S$-morphism of log schemes which is strict: its source log structure is the pullback of the target log structure. Fix a geometric point $\\bar x$ of $X$, with image $\\bar y$ in $Y$, and write $k$ for the residue field of $\\mathcal O_{X,\\bar x}$ [def-weil-pbc-geometric-stalks]. The relative logarithmic differential module $\\omega_f$ is generated over $\\mathcal O_X$ by $du$ for regular functions and $d\\log m$ for log sections, with additivity, the Leibniz rule, $d\\log(mm^{\\prime})=d\\log m+d\\log m^{\\prime}$, $d\\alpha(m)=\\alpha(m)d\\log m$, and vanishing of $du$ and $d\\log m$ for sections pulled back from the base. If the natural map $$k\\otimes_{\\mathcal O_{Y,\\bar y}}\\omega_{Y/S,\\bar y}\\longrightarrow k\\otimes_{\\mathcal O_{X,\\bar x}}\\omega_{X/S,\\bar x}$$ is injective, then the underlying scheme morphism $h$ is smooth on an open neighbourhood of $\\bar x$ [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed p.138, strictness and the Jacobian criterion attributed there to Kato 1988, 3.12."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-weil-pbc-geometric-stalks",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict map between log smooth schemes over a base is smooth when the map on logarithmic cotangent spaces is injective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic Jacobian criterion injective differentials strict smooth comparison toric monoid charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContMDiffMonoidMorphism.mk.injEq\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {H' : Type u_5} [inst_4 : TopologicalSpace H']\\n  {E' : Type u_6} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, charted spaces with corners modeled on normed vector spaces, and $C^n$-differentiable monoid homomorphisms between them, two smooth monoid morphisms are\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": IsUnit P.jacobian ↔ Function.Bijective P.aevalDifferential\", \"doc\": \"The Jacobian determinant of a pre-submersive presentation $ P $ is a unit in the ring if and only if the differential map $ \\\\text{aevalDifferential} $ associated with $ P $ is bijective.\"}\n  {\"name\": \"fdifferential\", \"module\": \"Mathlib.Geometry.Manifold.DerivationBundle\", \"type\": \"(f : C^∞⟮I, M; I', M'⟯) (x : M) : PointDerivation I x →ₗ[𝕜] PointDerivation I' (f x)\", \"doc\": \"The differential of a smooth map $ f $ between manifolds with corners, which at each point $ x $ induces a $\\\\mathbb{K}$-linear map from the space of derivations at $ x $ to the space of derivations at\"}\n  {\"name\": \"OpenPartialHomeomorph.MDifferentiable.mfderiv_injective\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Atlas\", \"type\": \"{x : M} (hx : x ∈ e.source) : Function.Injective (mfderiv I I' e x)\", \"doc\": \"For any point $x$ in the source of a differentiable open partial homeomorphism $e$ between manifolds modeled on a normed vector space $E$ with corners, the Fréchet derivative of $e$ at $x$ is an injec\"}\n  {\"name\": \"ContMDiffMonoidMorphism.mk.inj\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {H : Type u_2} {inst_1 : TopologicalSpace H} {E : Type u_3}\\n  {inst_2 : NormedAddCommGroup E} {inst_3 : NormedSpace 𝕜 E} {H' : Type u_5} {inst_4 : TopologicalSpace H'}\\n  {E' : Type u_6} {inst_5 : NormedAddCommGroup E'} {inst_6 : NormedSpace 𝕜 E'} {\", \"doc\": \"The constructor for smooth monoid morphisms between charted spaces with corners is injective: if two such morphisms share the same underlying monoid homomorphism and $ C^n $-differentiability data, th\"}\n  {\"name\": \"PartialDiffeomorph.mk.inj\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {F : Type u_3} {inst_3 : NormedAddCommGroup F} {inst_4 : NormedSpace 𝕜 F} {H : Type u_4}\\n  {inst_5 : TopologicalSpace H} {G : Type u_5} {inst_6 : TopologicalSpace G} {I : M\", \"doc\": \"The constructor for partial diffeomorphisms between manifolds with corners is injective: if two partial diffeomorphisms share the same underlying partial equivalence, open source/target sets, and $C^n\"}\n  {\"name\": \"ContMDiffAddMonoidMorphism.mk.inj\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {H : Type u_2} {inst_1 : TopologicalSpace H} {E : Type u_3}\\n  {inst_2 : NormedAddCommGroup E} {inst_3 : NormedSpace 𝕜 E} {H' : Type u_5} {inst_4 : TopologicalSpace H'}\\n  {E' : Type u_6} {inst_5 : NormedAddCommGroup E'} {inst_6 : NormedSpace 𝕜 E'} {\", \"doc\": \"If two smooth additive monoid morphisms between charted spaces with corners over a nontrivially normed field have the same underlying additive monoid homomorphism and the same proof of $C^n$-different\"}\n  {\"name\": \"ContMDiffAddMonoidMorphism.mk.injEq\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {H' : Type u_5} [inst_4 : TopologicalSpace H']\\n  {E' : Type u_6} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {\", \"doc\": \"Two smooth additive monoid morphisms between charted spaces with corners are equal if and only if their underlying additive monoid homomorphisms and their proofs of $ C^n $-differentiability are equal\"}\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic.*[Jj]acobian|[Ll]og[Ss]mooth|strict.*log.*smooth",
+   "results": "[grep] OK 0 hit(s)\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato Jacobian criterion for strict morphisms of fine saturated logarithmic schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-log-smooth-chart",
+  "date": "2026-10-19",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, first and last assertions, printed pp.136--139 (the smooth comparison, before adjoining the representation). Internal preparation argument: Expose X proof of Proposition 1.2, printed p.138, strictness and the Jacobian criterion attributed there to Kato 1988, 3.12.",
+   "via": [
+    "lem-per-equivariant-log-smooth-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
