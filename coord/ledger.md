@@ -15915,3 +15915,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/A4/Sheaf.Paper.SiteLocallyConstantFiniteType (stage 3; reviewer PASS; first push; landing 20261018T062653-L-629189 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A5/Sheaf.AlgebraicGeometry.SteinFiniteFibresResidueFields (stage 3; reviewer PASS; first push; landing 20261018T062653-L-629298 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A5/Sheaf.CategoryTheory.FiniteCoconeWeakMaps (stage 3; reviewer PASS; first push; landing 20261018T062654-L-629484 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:26 L: merged deliver/A6/Sheaf.AlgebraicGeometry.CompactBoundedConstructibleBaseChange (stage 3; reviewer PASS; first push; landing 20261018T062654-L-629674 (proof); batch 20261018T062645; modules 1; new nodes 0)

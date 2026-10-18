@@ -11,19 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChang
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Compactification.Defs
-import WeilConjectures.Compactification.BaseChange
-import WeilConjectures.ConstructibleSheaf.OpenClosed
-import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Bounded constructibility and base change for compact direct images
@@ -41,6 +31,25 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
+private theorem boundedConstructible_iff (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (T : Scheme.{u}) (K : DerivedCategoryModule Λ T) :
+    DerivedCategory.isBoundedConstructible Λ T K ↔
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K := by
+  constructor
+  · rintro ⟨hc, a, b, hab, hvan⟩
+    refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩,
+      fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+    · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
+    · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦ hvan i (Or.inr hi)
+  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+      min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff K a).1 ha i
+        (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (_root_.DerivedCategory.isLE_iff K b).1 hb i
+        (lt_of_le_of_lt (le_max_right _ _) hi)
+
 /-- Compact direct image preserves bounded constructibility over a field of characteristic
 other than `ℓ`, and its specified exchange is invertible after every Noetherian base change.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
@@ -52,28 +61,23 @@ complex is viewed in `D⁺`, with the constructibility and two-sided bound impos
 object in `D`. The compactification `c` computes the candidate `Rp_* j_!`; its base change computes
 the target of the exchange, exactly as in `def-cbc-exchange-map`.
 
-Proof: (1) Finite-type schemes over a field are Noetherian by
-`lem-weil-pbc-finite-type-over-noetherian`. Nagata (`thm-nagata-compactification`) supplies a
-compactification, and its ambient scheme is Noetherian and finite type over the same field by
-`lem-weil-pbc-proper-fp-permanence`. The definition `def-amb-etale-compact-support` identifies the
-candidate with `Rp_* j_!`.
-(2) Extension by zero is exact (`sbc-prop-extension-by-zero-and-arbitrary-base-change`). The
-cohomology comparison `lem-weil-pbc-exact-functor-complex-cohomology` and
-`lem-fin-extension-by-zero` show that `j_!K` is bounded constructible, with the same interval.
-(3) The finite ring F_ℓ is killed by ℓ, which is invertible on the schemes in question. Apply
-`lem-fin-proper-bounded-constructible` to the proper compactification map to obtain the first
-conclusion.
-(4) Base change of the compactification is a compactification
-(`lemma-nagata-compactification-base-change`, `def-nagata-compactification-base-change`). Its
-ambient scheme is Noetherian over the given Noetherian base; its open source is Noetherian too.
-Extension-by-zero base change identifies the inverse image of `j_!K` with `j'_!v_X^*K`.
-(5) Bounded-below proper base change (`thm-weil-pbc-bounded-below`) applies to `j_!K` with torsion
-cohomology. The comparison `lem-weil-pbc-exchange-forget-coefficients` identifies the specified
-module-coefficient exchange and reflects its invertibility.
-(6) Exact inverse image is module pullback (`prop-weil-pbc-inverse-image-modules-exact`). The map
-of `def-cbc-exchange-map` is the proper exchange followed by the image of the extension-by-zero
-isomorphism. Both factors are invertible, so their composite is invertible. No finite-type
-hypothesis over the original field is used for the new base. -/
+Proof: Convert bounded constructibility to the source library's equivalent formulation:
+constructible cohomology for the finite coefficient ring, and boundedness for the standard
+t-structure. The comparison of finite-value and finite-stalk constructibility is
+`Scheme.isConstructibleEtaleModuleSheaf_iff`; the interval bounds are exactly
+`DerivedCategory.isGE_iff` and `DerivedCategory.isLE_iff`.
+The supplied compactification already gives the proper map `c.g` and open immersion `c.i`.
+Its ambient scheme is Noetherian because `c.g ≫ aS` is finite type over a field, so `c.i` is
+quasi-compact. Exact extension by zero preserves bounded constructibility by
+`boundedConstructible_mapDerivedCategory_openImmersionLowerShriek`.
+The prime field is killed by `ℓ`; its positive exponent is invertible on every scheme
+mapping to `Spec k`, by applying the global-sections ring maps to the unit `(ℓ : k)`.
+Apply `isBoundedConstructible_rightDerivedLowerStar_of_proper` to `c.g`, with structure
+morphism `c.g ≫ aS`, and convert the extension-by-zero complex back to the project predicate.
+For base change use the existing instance
+`isIso_rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap`, evaluated at `K`.
+It applies to precisely the specified compactification and arbitrary Cartesian square;
+its proof assembles proper base change and extension-by-zero base change. -/
 theorem isBoundedConstructible_compactSupport_and_baseChange
     (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (hℓ : (ℓ : k) ≠ 0)
     {X S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))
@@ -91,6 +95,27 @@ theorem isBoundedConstructible_compactSupport_and_baseChange
       (X' : Scheme.{u}) (vX : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback vX f' f v),
       IsIso ((rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap
         (ULift.{u + 1} (ZMod ℓ)) sq c).app K) := by
-  sorry
+  have hcompat := hf
+  let Λ := ULift.{u + 1} (ZMod ℓ)
+  have hcoeff (T : Scheme.{u}) (aT : T ⟶ Spec (.of k)) :
+      IsSmoothBaseChangeCoefficients ℓ Λ T := by
+    refine ⟨(Fact.out : ℓ.Prime).pos, inferInstance, ?_, ?_⟩
+    · apply ULift.down_injective
+      simp [Λ]
+    · have hu : IsUnit (ℓ : Γ(Spec (.of k), ⊤)) := by
+        simpa using (Ne.isUnit hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom
+      simpa using hu.map aT.appTop.hom
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian c.Z :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aS)
+      __ := QuasiCompact.compactSpace_of_compactSpace c.g }
+  refine ⟨?_, ?_⟩
+  · have hj := boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i
+      ((boundedConstructible_iff Λ X K.obj).1 hK)
+    exact isBoundedConstructible_rightDerivedLowerStar_of_proper Λ ℓ
+      (c.g ≫ aS) aS c.g rfl (hcoeff _ (c.g ≫ aS)) (hcoeff _ aS) _
+      ((boundedConstructible_iff Λ c.Z _).2 hj)
+  · intro S' _ v X' vX f' sq
+    infer_instance
 
 end AlgebraicGeometry.Etale
