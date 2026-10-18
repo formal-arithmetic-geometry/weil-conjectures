@@ -149,5 +149,34 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a438e6fe5 (reviewer sub-agent of L); spot-checked: Read in full: the item, both blueprint texts (master order 2225 and main-20261015 order 2569, identical apart from the order number) and all 12 stmt_deps statements. The delivered statement keeps the source's data and only adds citations, the ambient codomain D(Y,A) and the action RHom(u,id_ω), so no target is weakened. The exceptional functor is the constructible Ra_Y^! = ν^* a^× Rν_* of def-weil-exceptional-inverse-image on finite-coefficient pro-étale D^+/D^b_c. A_s is in D^b_ctf, there is no ambient datum, and this agrees with def-trf-admissibility including its main-20261015 update. Citing def-weil-proper-morphism and def-weil-finite-type-morphism directly is a valid sharpening of def-weil-scheme-morphism-properties. The evaluation is well defined: currying H(P,H(M,ω)) ≅ H(P⊗M,ω) by lem-weil-pbc-ringed-internal-hom-exact-restriction (Stacks 08J9), then H^0 global sections ≅ Hom by lem-pur-rhom-global-sections (08JA), on a small site (V-small skeleton). Both are notion-level prerequisites, not proof steps, so no tool_use is needed. The stmt_deps closure is acyclic. Small cases checked: Y=s, M=0, M=A_Y, Y empty, n=1, singular Y. Mathlib searches cover all kinds. The slopmaster2 Duality.lean:89-105 definitions need a HasBoundedBelowUpperShriek instance and have no evaluation, so they are not an attachment. One repair: def-fix-six-functor-datum states the same ω_{X,Λ}=Ra_X^!Λ and D_X=RHom(-,ω), but the item's blueprint.same_as was [], so I set it to [\"def-fix-six-functor-datum\"] in fixes/dag/nodes/sec-six-functors/def-trf-dualizing-complex.json. Minor: the report gives the slopmaster2 path as weil-src-slopmaster2; the file is under weil-conjectures-slopmaster2.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceFormulaDualizingComplex",
+  "declaration": "WeilConjectures.traceFormulaDualizingComplex",
+  "declarations": [
+   "WeilConjectures.traceFormulaDerivedCategory",
+   "WeilConjectures.traceFormulaFiniteTorCategory",
+   "WeilConjectures.traceFormulaDerivedInternalHom",
+   "WeilConjectures.traceFormulaClosed",
+   "WeilConjectures.traceFormulaDualizingComplex",
+   "WeilConjectures.traceFormulaVerdierDual",
+   "WeilConjectures.traceFormulaVerdierHomEquiv",
+   "WeilConjectures.traceFormulaVerdierEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/TraceFormulaDualizingComplex.lean",
+  "statement": "def traceFormulaDualizingComplex (T : TraceFormulaCoefficientConventions.{u}) (Y : Over (Spec (CommRingCat.of T.datum.k))) [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] : traceFormulaDerivedCategory T Y.left",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Intrinsic finite-coefficient dualizing object, contravariant functor on the full finite-Tor constructible category, and evaluation as the closed transpose of its identity. Uses the recorded intrinsic exceptional functor reexported by FixedFiniteExceptionalAt, the exact constant regular module in degree zero, and the evaluation-normalized finite closed structure; no ambient exceptional-adjoint assumption or preservation assertion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d3300918",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause check of def-trf-dualizing-complex at 7d33009184: T conventions (ℓ≠p, A_{E,n}, n≥1); Y : Over (Spec k) with IsSeparated, LocallyOfFiniteType and QuasiCompact only; admissibility not assumed (a theorem, no ambient datum); ω = existing integralDualizingFiniteTerm = recorded sfFiniteExceptional (ν^* f^× Rν_*) applied to the constant A_s in degree 0; D_Y = ι.op ⋙ (curry H).flip.obj ω on the full finiteTorConstructibleCategory to the ambient proEtaleDerivedCategory, acting as RHom(u,id_ω); H definitionally the recorded finiteIntrinsicDerivedInternalHom; adjunction = recorded finiteIntrinsicClosed transpose; ev = transpose.symm (𝟙). Edge cases n=1, n=0 excluded as in source, Y empty, Y=s, M=0, universes ok. Only the node's lean field changed; statement verbatim; all 8 declarations recorded; no sorry, axiom or hollow data; docstrings ok; lines ≤100. nt_compile --json: rc 0, 40.3 s, no diagnostics. Non-blocking: second-reading section is a direct-delivery placeholder (this review is the independent reading); ω reuses a lem-coef-finite-dualizing declaration not in stmt_deps (acyclic, H4 reuse); admissibility uses the fixed-coordinate sfFiniteExceptionalAt, this item the intrinsic sfFiniteExceptional."
  }
 }

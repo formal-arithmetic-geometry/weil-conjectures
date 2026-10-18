@@ -100,10 +100,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-29e4fdc21",
-  "group": "NX",
+  "reviewer": "NT-stage2-cc-7fe0efd85",
+  "group": "NU",
   "result": "pass",
-  "note": "Read the item node, all 5 stmt_deps, the source proof, both delivered modules and the used declarations (SfPunctualEigenvalue, SfIsMixedOfWeightsAtMost, zlWeilHigherShriek, Compactification.ofIsProper, IsFinite). Clauses match: IsFinite Z0 with LFT/QC/proper inferred and no extra hypothesis; G in sfCommonStageWeilSheaf; hG is the punctual eigenvalue bound with base #k(y), equivalent per stalk to stalk weights <= w; H_c^0 is the canonical R^0_c a_! on Spec k0 with compactification ofIsProper (compactification-independent); the conclusion SfIsMixedOfWeightsAtMost on the point (q_y=q) is equivalent to Frobenius-module mixedness. Edge cases (empty Z0, zero G, any real w, degree-d points, nonreduced, Jordan blocks), universes u/v independent. The section 1(B) repair of def-weil-ordinary-compact-cohomology is justified (old record on the older WeilSheaf category), real data, old interface publicly imported, node changes only in lean. Item changes only in lean and stmt_deps (+ landed def-zl-weil-compact-support-cohomology). Docstrings with source place and blueprint tag, sorry-only proof, lean.statement verbatim for both nodes. nt_compile.py --json on both snapshot files: rc 0, no errors or warnings, 3.4-3.8 s, reproduced twice. Observations only: the dependency lean record is replaced (prescribed form; Q43 declaration remains importable); the NX second reading is an author re-reading."
+  "note": "Re-delivery after RETURN at 5266638bfe4d (only F1: dependency record overwrite). Snapshot diff shows exactly the requested repair: adicOrdinaryCohomology/adicCompactCohomology appended verbatim (independent universe v, finite-stage rational cohomology + canonical Shrink scalar extension) to NX's CommonStageCompactWeilCohomology.lean; def-weil-ordinary-compact-cohomology lean record keeps NX's module/declaration/statement/file/3 declarations, only adds the 2 helpers, by=NU, and an H13 note; item imports that module; nothing else changed. Re-read item against node/sources: smooth+separated+finite type X0, l≠p, Ω algebraic closure, lisse via landed HasCommonStageLisseLattice (matches on smooth X), realization iso in common-stage category, natural H0≅Hom(unit,L) pinned to actual integral functors, natural injective fibrewise-linear compact map, exact nonzero-fibre locus closed with IsClosedSubsetProperOver; no affine/connected/dimension hypothesis; edge cases covered; Ω:Type(u+1) forced and documented. New node def-a1-lisse-integral-completed-realization unchanged and built only from definition-node modules. 5 sorry, all theorems; no hollow defs; docstrings/blueprint tags present; statements verbatim; other nodes byte-identical to main. nt_compile --json on the 3 snapshot modules: rc 0, no errors/warnings (twice); importers PoincarePointFiniteness and FiniteBoundaryWeights compile rc 0 with the extended module; no name collisions. Observations only: Nonempty linear equivs in _natural (acceptable, node existential); second reading is an author self-reading."
  },
  "lean": {
   "module": "Sheaf.Paper.CommonStageCompactWeilCohomology",
@@ -111,14 +111,16 @@
   "declarations": [
    "WeilConjectures.sfWeilCohomologyPoint",
    "WeilConjectures.sfWeilCohomologyPoint_isFinite",
-   "WeilConjectures.commonStageCompactWeilCohomology"
+   "WeilConjectures.commonStageCompactWeilCohomology",
+   "WeilConjectures.adicOrdinaryCohomology",
+   "WeilConjectures.adicCompactCohomology"
   ],
   "file": "lean/Sheaf/Paper/CommonStageCompactWeilCohomology.lean",
   "statement": "def commonStageCompactWeilCohomology (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : Compactification Y₀.hom) (G : sfCommonStageWeilSheaf D l hl Y₀ Qbar) (n : ℕ) : sfCommonStageWeilSheaf D l hl (sfWeilCohomologyPoint D) Qbar",
   "branch": "newtargets-dag",
-  "by": "NX",
+  "by": "NU",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B): the previous Frobenius-retaining specialization accepts the older AlgebraicGeometry.WeilSheaf and PadicAlgCl, while the current punctual-weight dependency accepts sfCommonStageWeilSheaf over an arbitrary specified coefficient closure. The previous common-stage coefficient output forgets Frobenius. This module retains the canonical compact-support higher image as a Weil sheaf on Spec(k₀), using zlWeilHigherShriek and its comparison with sfQbarCompactSupportValue. Its geometric coefficient fibre is the original H_c^n with the induced action. No operator or category equivalence is postulated or chosen. Public imports retain the entire previous ordinary/compact interface, all four coefficient cases, constants, twists and Weil-complex specializations. The new specialization is for sheaves and n≥0; it does not restrict the retained integer-degree interfaces."
+  "note": "Section 1(B): the previous Frobenius-retaining specialization accepts the older AlgebraicGeometry.WeilSheaf and PadicAlgCl, while the current punctual-weight dependency accepts sfCommonStageWeilSheaf over an arbitrary specified coefficient closure. The previous common-stage coefficient output forgets Frobenius. This module retains the canonical compact-support higher image as a Weil sheaf on Spec(k₀), using zlWeilHigherShriek and its comparison with sfQbarCompactSupportValue. Its geometric coefficient fibre is the original H_c^n with the induced action. No operator or category equivalence is postulated or chosen. Public imports retain the entire previous ordinary/compact interface, all four coefficient cases, constants, twists and Weil-complex specializations. The new specialization is for sheaves and n≥0; it does not restrict the retained integer-degree interfaces. NU repair under §1(B): NX's recorded interface covers compact support only, over a compactification of X₀ over k₀, as a Weil sheaf; it supplies neither ordinary H⁰ nor a coefficient-module value with Ω in Type (u+1). The appended adicOrdinaryCohomology and adicCompactCohomology compute the actual finite-stage rational ordinary/compact cohomology after forgetting Weil structure and canonically extend scalars to Ω in independent universe v. NX's module, primary declaration, signature, file and three owned declarations are preserved; the original OrdinaryCompactWeilCohomology module is unchanged."
  }
 }

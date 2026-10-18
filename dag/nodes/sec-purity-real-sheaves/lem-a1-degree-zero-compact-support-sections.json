@@ -14,7 +14,10 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-ordinary-compact-cohomology",
   "def-pod-lisse-l-adic-sheaves",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-a1-common-stage-lisse-lattice",
+  "def-a1-lisse-integral-completed-realization",
+  "def-pod-lisse-adic-fibre-functors"
  ],
  "proof": [
   {
@@ -407,5 +410,57 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-cb7803bb4 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new lattice node, and the statement of every cited node in full; I made no changes. Sources checked: Milne LEC Remark 29.7 (p.166) and the compact-support definition, and Bhatt-Scholze Prop 6.8.4(1)-(6), Lemma 7.4.7 and Lemma 7.4.10. No SGA is cited. Steps 1-2: the lattice M comes from the new lemma; lem-per gives M_n with M=lim nu^*M_n; M[0] is constructible by stratified-perfect (ii)=>(i); lem-tw full faithfulness identifies M[1/varpi] with For(F). Steps 3-4: nu^*j_!=j_!nu^*, compactification cohomology, and the pro-etale direct-image comparison give V_n=Gamma(Xbar,j_!M_n). Applying proper-support composition to j and p gives an injection into W_n whose image is the sections with proper support. Step 5: Gamma at an algebraically closed point is exact, sections commute with Rlim, and the degree-0 Milnor sequence has R^1lim H^{-1}=0, so no Mittag-Leffler condition is used. Steps 6-7: flat scalar extension keeps H^0 and injectivity; stage changes go through lem-coef-integral-compact-support (Tor amplitude [0,0]) and the compact-support and point coefficient comparisons. Step 8: on finitely many clopen components, cor-galois (1) makes the support of s_n a union of components; the supports increase and stabilize, so S=S_N is proper. Step 9 is elementary. Small cases tested: X empty, X proper, A^1 with a constant section, pt disjoint union A^1, and varpi-divisible classes. New node lem-a1-smooth-lisse-integral-lattice: true, since T smooth implies normal implies geometrically unibranch, so pi1^proet=pi1^et is profinite (BS 7.4.10), a compact monodromy group fixes a lattice, and BS 7.4.7 turns that lattice into M. It is not a duplicate: lem-weil-pbc-lisse-lattice-etale-local and lem-sfb-etale-local-monodromy-realization give lattices only etale-locally, and lem-weil-pbc-lisse-e-constructible-integral-lattice gives a constructible, not lisse, model. It does not restate a clause of the item. Batch-5 check: I computed the closure of nt-target-weil-conjectures and nt-target-zeta-rational on the base and on the delivery, and the delivery adds exactly one node, the new lemma. lem-tw-lisse-rational-realization is a coefficient realization and reaches trace-formula material only through a pullback-realization comparison: outside. lem-weil-pbc-integral-stratified-perfect-characterization reaches Poincare duality only through a general definition: outside. lem-trf-compactification-cohomology is the general identity RGamma_c=RGamma(Xbar,j_!), which the trace-formula assumption cannot supply and which is already in the batch-5 closure: outside. lem-pur-compact-support-integral-coefficient-comparison reaches the trace-formula chapter only through a general adjoint-mate lemma: outside. cor-galois-lisse-representations is the Galois correspondence, not Poincare duality, and the parent already cites it: outside. I accept all 23 tool_uses as foundational black-box tools. proof_deps equals the union of the uses, and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DegreeZeroCompactSupportSections",
+  "declaration": "WeilConjectures.a1DegreeZeroCompactSupportSections_natural",
+  "declarations": [
+   "WeilConjectures.a1DegreeZero_geometricProperties",
+   "WeilConjectures.a1DegreeZero_finiteType",
+   "WeilConjectures.a1DegreeZero_quasiCompact",
+   "WeilConjectures.a1DegreeZero_separated",
+   "WeilConjectures.a1DegreeZero_noetherian",
+   "WeilConjectures.a1DegreeZero_absoluteSeparated",
+   "WeilConjectures.a1DegreeZero_structFiniteType",
+   "WeilConjectures.a1DegreeZero_structQuasiCompact",
+   "WeilConjectures.a1DegreeZero_structSeparated",
+   "WeilConjectures.a1DegreeZero_primeInvertible",
+   "WeilConjectures.A1DegreeZeroLisse",
+   "WeilConjectures.a1DegreeZeroPair",
+   "WeilConjectures.a1DegreeZeroRealization",
+   "WeilConjectures.A1DegreeZeroRealizes",
+   "WeilConjectures.A1DegreeZeroSections",
+   "WeilConjectures.a1DegreeZeroSectionFiber",
+   "WeilConjectures.a1DegreeZeroCompactSupportSections",
+   "WeilConjectures.A1DegreeZeroIntegral",
+   "WeilConjectures.a1DegreeZeroUnit",
+   "WeilConjectures.a1DegreeZeroOfModel",
+   "WeilConjectures.a1DegreeZeroModelMap",
+   "WeilConjectures.a1DegreeZeroIntegralRealization",
+   "WeilConjectures.a1DegreeZeroIntegralRealization_mem",
+   "WeilConjectures.a1DegreeZeroIntegralModel",
+   "WeilConjectures.a1DegreeZeroScalar",
+   "WeilConjectures.a1DegreeZeroOrdinaryFunctor",
+   "WeilConjectures.a1DegreeZeroCompactFunctor",
+   "WeilConjectures.a1DegreeZeroLisseInclusion_existsUnique",
+   "WeilConjectures.a1DegreeZeroLisseInclusion",
+   "WeilConjectures.A1DegreeZeroNaturalComparison",
+   "WeilConjectures.a1DegreeZeroCompactSupportSections_natural"
+  ],
+  "file": "lean/Sheaf/Paper/DegreeZeroCompactSupportSections.lean",
+  "statement": "theorem a1DegreeZeroCompactSupportSections_natural [Smooth X₀.hom] (F : sfCommonStageWeilSheaf D l hl X₀ Ω) (_hF : HasCommonStageLisseLattice l Ω (D.geometricFiber X₀).left ((sfCommonStageWeilForget D l hl X₀ Ω).obj F.obj)) (c : Compactification (D.geometricFiber X₀).hom) : ∃ (N : A1DegreeZeroNaturalComparison D l hl X₀ Ω c) (L : A1DegreeZeroLisse D l hl X₀ Ω), A1DegreeZeroRealizes D l hl X₀ Ω L ((sfCommonStageWeilForget D l hl X₀ Ω).obj F.obj) ∧ Nonempty (adicOrdinaryCohomology D l hl (D.geometricFiber X₀).left Ω ((sfCommonStageWeilForget D l hl X₀ Ω).obj F.obj) 0 ≃ₗ[Ω] N.ordinaryCohomology.obj L) ∧ Nonempty (adicCompactCohomology D l hl (D.geometricFiber X₀).left Ω c ((sfCommonStageWeilForget D l hl X₀ Ω).obj F.obj) 0 ≃ₗ[Ω] N.compactCohomology.obj L)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The main declaration packages natural comparisons on the entire algebraic-coefficient lisse category, fixed by their actual integral-model functors at every finite coefficient field. The objectwise theorem gives the direct H_c^0-to-Hom formulation. The new owning definition node def-a1-lisse-integral-completed-realization supplies the inverse-limit realization, recorded rational localization/common-stage inclusion, and finite-coefficient-point normalization. No generic definition from AdicMiddleExtensionConstructible or the immersion/point scalar-extension theorem modules is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fe0efd85",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after RETURN at 5266638bfe4d (only F1: dependency record overwrite). Snapshot diff shows exactly the requested repair: adicOrdinaryCohomology/adicCompactCohomology appended verbatim (independent universe v, finite-stage rational cohomology + canonical Shrink scalar extension) to NX's CommonStageCompactWeilCohomology.lean; def-weil-ordinary-compact-cohomology lean record keeps NX's module/declaration/statement/file/3 declarations, only adds the 2 helpers, by=NU, and an H13 note; item imports that module; nothing else changed. Re-read item against node/sources: smooth+separated+finite type X0, l≠p, Ω algebraic closure, lisse via landed HasCommonStageLisseLattice (matches on smooth X), realization iso in common-stage category, natural H0≅Hom(unit,L) pinned to actual integral functors, natural injective fibrewise-linear compact map, exact nonzero-fibre locus closed with IsClosedSubsetProperOver; no affine/connected/dimension hypothesis; edge cases covered; Ω:Type(u+1) forced and documented. New node def-a1-lisse-integral-completed-realization unchanged and built only from definition-node modules. 5 sorry, all theorems; no hollow defs; docstrings/blueprint tags present; statements verbatim; other nodes byte-identical to main. nt_compile --json on the 3 snapshot modules: rc 0, no errors/warnings (twice); importers PoincarePointFiniteness and FiniteBoundaryWeights compile rc 0 with the extended module; no name collisions. Observations only: Nonempty linear equivs in _natural (acceptable, node existential); second reading is an author self-reading."
  }
 }

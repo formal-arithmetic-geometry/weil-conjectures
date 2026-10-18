@@ -1,0 +1,113 @@
+{
+ "id": "def-a1-proetale-set-restriction",
+ "kind": "definition",
+ "title": "Restriction of set-valued sheaves to a small pro-etale site object",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] in universe $\\mathcal U$ and let $U\\to X$ be an object of its small pro-etale site [def-weil-pbc-proetale-site]. For set-valued sheaves in the value universe of that site, define $\\operatorname{res}_U:\\operatorname{Sh}(X_{\\mathrm{proet}})\\to\\operatorname{Sh}(U_{\\mathrm{proet}})$ by precomposition with the structure-map composition functor $c_U:U_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$, $(V\\to U)\\mapsto(V\\to U\\to X)$. Thus $(\\operatorname{res}_U F)(V\\to U)=F(V\\to X)$, restrictions on site arrows are those of $F$, and a sheaf morphism is restricted by the same precomposition. This is a sheaf functor because $c_U$ is continuous. No covering, quasi-compactness, nonemptiness or Noetherian hypothesis on $U\\to X$ is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 4, Definition 4.1.1 and Lemma 4.1.6 (small pro-etale site and composition); Lemma 5.1.4, restriction F|Yi to a pro-etale covering member"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtaleSetRestriction|sheafPushforwardContinuous|isContinuous_overMap",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Presheaf.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; directory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "No specialized pro-etale restriction match in Mathlib; the exact existing project definition is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of sets on a small proetale site to the small proetale site of a weakly etale object by composing structure maps",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.PresheafedSpace.restrict_presheaf; TopCat.Presheaf.restrictOpen; TopCat.Presheaf.restrict; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-18",
+   "verdict": "No specialized pro-etale restriction match in Mathlib; the exact existing project definition is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict set valued sheaves on a scheme proetale site to a weakly etale object by precomposition with the structure map composition functor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.restrictFunctor; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.opensDiagram; AlgebraicGeometry.Scheme.restrict_presheaf_obj; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-18",
+   "verdict": "No specialized pro-etale restriction match in Mathlib; the exact existing project definition is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleSetRestriction|IsProEtaleClassical|IsProEtaleLocallyConstant|IsProEtaleLocallyClassical in dag/nodes, lean/Sheaf and /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "The sole definition of proEtaleSetRestriction is in lean/Sheaf/AlgebraicGeometry/ProEtaleLocallyClassicalEtaleCover.lean:40-46, listed as a helper by the theorem node lem-weil-pbc-proetale-locally-classical-etale-cover. Other DAG matches use it in proofs or discuss a different classicality predicate. No definition node owns the restriction notion.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the exact existing project declaration with existing: true; no copied definition."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'pro-etale restriction'",
+   "results": "0 blueprint nodes match 'pro-etale restriction'",
+   "date": "2026-10-18",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-proetale-local-system-representability",
+  "date": "2026-10-18",
+  "group": "Q43"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The local trivialization F|U_i in the auxiliary geometric-covering representability input.",
+   "via": [
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSetRestriction",
+  "statement": "def proEtaleSetRestriction (X : Scheme.{u}) (U : X.ProEt) :\n    Sheaf (ProEt.topology X) (Type (u + 1)) ⥤\n      Sheaf (ProEt.topology U.left) (Type (u + 1))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Dedicated definition node for the existing restriction helper at lines 40-46 of the published module, confirmed by scompile.py --source. Reuses its real continuous-precomposition construction without copying or changing the declaration. The theorem proEtale_locallyClassical_etaleCover is not part of this definition or a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-889fa9ea8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-889fa9ea8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_deps, the new node def-a1-proetale-set-restriction, the module, the report and the exact declarations (proEtaleSetRestriction, schemeUniverseLift/LiftMap, Mathlib ValuativeCriterion, constantSheaf, ProEt.topology). Delivery changes only the item's lean and stmt_deps; statement, 8 proof steps and proof_deps unchanged. Every clause matches the node and BS 7.3.1/7.3.9: real pro-etale cover, canonical restriction, sheafified constant sheaf, natural presheaf iso into over-category Yoneda (X-morphisms), full ValuativeCriterion (existence and uniqueness), no finiteness, properness or quasi-compactness. The u+1 universes (sets S_i, Z, base via canonical schemeUniverseLift) are necessary, not a restriction, and valuation tests at u+1 contain all u-rings. The helper functor has real data (object map checked by rfl) and fully proved laws. The new node binds the existing declaration (existing:true, §5) with a verbatim signature. Exactly one sorry, docstrings carry source, blueprint id and all 8 steps, max line 87, report has Worker report and Second reading by Q43. nt_compile --json: rc 0, about 8 s, clean; probe #check/#print axioms confirms universes and the only sorry coming through the landed enlargement. Edge cases X empty, S_i empty, S_i infinite or not u-small, and arbitrary arrows are admissible. No duplicates in side lean/. No findings."
+ }
+}

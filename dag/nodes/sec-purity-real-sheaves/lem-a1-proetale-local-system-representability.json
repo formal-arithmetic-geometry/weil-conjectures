@@ -13,7 +13,9 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf",
   "def-weil-etale-morphism",
-  "def-trf-valuation-ring"
+  "def-trf-valuation-ring",
+  "def-a1-proetale-set-restriction",
+  "def-trf-scheme-universe-enlargement"
  ],
  "proof": [
   {
@@ -230,5 +232,28 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-7fda51070 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 3 new nodes and the statement of every cited node in full. Sources checked: Bhatt–Scholze 5.1.1–5.1.4, 5.4.1 and 7.3.1–7.3.11 (5.1.4 is for pro-étale covers, so step 1 is justified); Stacks 0GF6 with its construction and size footnote, 03XX (no quasi-compactness hypothesis) with 03XU, and 0421 and 04P2. The item statement is unchanged, true and not weakened. It is BS 7.3.9 Loc_X⊂Cov_X with existence and uniqueness of valuative lifts. Edge cases checked: X=∅, S_i=∅, infinite S_i. The parent lem-a1-normal-locally-constant-finite-section uses exactly what the item gives. All three new nodes are true and are strictly smaller than the item. Realization: 0GF6 plus Yoneda, and the pro-étale comparison via BS 5.1.1/5.4.1 and the fact that étale maps are locally of finite presentation; non-separated étale spaces are allowed and no schemehood is claimed. fpqc descent of separatedness and of the full valuative property: I wrote out the argument. Pass to a faithfully flat valuation ring R→R' that dominates a local ring of the cover, then make the two lifts agree on the R-flat generic fibre and descend with 04P2. Infinite disjoint unions show why the node correctly avoids 'proper'. Separated étale space over a scheme is a scheme: 03XX+03XU. There are no duplicates among the lem-trf algebraic-space nodes, lem-weil-pbc-fpqc-descend-separated, lem-trf-space-qc-separated-etale-local or lem-galois-constant-sheaf-sets-representable. Batch-5: all 4 flagged citations (def-trf-algebraic-space ×3, def-trf-valuation-ring) are general definitions. Their transitive closure contains no other trace-formula or Poincaré-duality node, so they are outside both assumptions; accepted. Tool uses accepted: BS 5.1.4 classicality, BS 5.1.2 full faithfulness, constant-sheaf representability, scheme coproducts. FIX: step 6 applied the descent node, which needs every scheme base change of the diagonal to be a closed immersion. Step 5 shows only that the diagonal of D_i is a closed immersion, so the step needed base-change stability of closed immersions and transport along E_{U_i}≅D_i. I added both, citing the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, and regenerated proof_deps. The corrected item is in fixes/dag/nodes/sec-purity-real-sheaves/; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_localSystem_representability",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleUniverseLiftToOver",
+   "AlgebraicGeometry.Scheme.proEtale_localSystem_representability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalSystemRepresentability.lean",
+  "statement": "theorem proEtale_localSystem_representability (X : Scheme.{u}) [IsLocallyNoetherian X] (F : Sheaf (ProEt.topology X) (Type (u + 1))) (I : Type (u + 1)) (U : I → X.ProEt) (hcover : (ProEt.topology X).CoversTop U) (S : I → Type (u + 1)) (htriv : ∀ i : I, Nonempty (((proEtaleSetRestriction X (U i)).obj F) ≅ (constantSheaf (ProEt.topology (U i).left) (Type (u + 1))).obj (S i))) : ∃ (Z : Scheme.{u + 1}) (q : Z ⟶ schemeUniverseLift.{u, u + 1} X), Etale q ∧ Nonempty (F.obj ≅ (proEtaleUniverseLiftToOver X).op ⋙ yoneda.obj (Over.mk q)) ∧ ValuativeCriterion q",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Original small site and its own value universe; arbitrary local sheet sets in Type (u + 1). The existing canonical schemeUniverseLift allows the representing scheme to lie in universe u + 1 over the same geometric base. Its canonical functor of points is evaluated on the enlarged original site objects. The one postponed theorem asserts the natural isomorphism and the full ValuativeCriterion, with no finiteness or quasi-compactness assumption. The landed eight proof steps and proof_deps are preserved verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-889fa9ea8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_deps, the new node def-a1-proetale-set-restriction, the module, the report and the exact declarations (proEtaleSetRestriction, schemeUniverseLift/LiftMap, Mathlib ValuativeCriterion, constantSheaf, ProEt.topology). Delivery changes only the item's lean and stmt_deps; statement, 8 proof steps and proof_deps unchanged. Every clause matches the node and BS 7.3.1/7.3.9: real pro-etale cover, canonical restriction, sheafified constant sheaf, natural presheaf iso into over-category Yoneda (X-morphisms), full ValuativeCriterion (existence and uniqueness), no finiteness, properness or quasi-compactness. The u+1 universes (sets S_i, Z, base via canonical schemeUniverseLift) are necessary, not a restriction, and valuation tests at u+1 contain all u-rings. The helper functor has real data (object map checked by rfl) and fully proved laws. The new node binds the existing declaration (existing:true, §5) with a verbatim signature. Exactly one sorry, docstrings carry source, blueprint id and all 8 steps, max line 87, report has Worker report and Second reading by Q43. nt_compile --json: rc 0, about 8 s, clean; probe #check/#print axioms confirms universes and the only sorry coming through the landed enlargement. Edge cases X empty, S_i empty, S_i infinite or not u-small, and arbitrary arrows are admissible. No duplicates in side lean/. No findings."
  }
 }

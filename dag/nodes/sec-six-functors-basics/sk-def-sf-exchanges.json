@@ -355,32 +355,26 @@
   }
  },
  "lean": {
-  "module": "Sheaf.Paper.SfExchanges",
-  "declaration": "CategoryTheory.SuppliedExchangeProjection.sfExchangeProjection",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.sfExchangeEnoughInjectives",
-   "AlgebraicGeometry.Scheme.sfExchangeStarPlus",
-   "AlgebraicGeometry.Scheme.sfExchangeShriek",
-   "AlgebraicGeometry.Scheme.sfFiniteProjectionAmbient",
-   "AlgebraicGeometry.Scheme.sfFiniteProjection_boundedBelow",
-   "AlgebraicGeometry.Scheme.sfFiniteProjectionPlus",
-   "AlgebraicGeometry.Scheme.sfExchangeShriekCompleted",
-   "CategoryTheory.SuppliedExchangeProjection.sfExchangeProjection"
-  ],
-  "file": "lean/Sheaf/Paper/SfExchanges.lean",
-  "statement": "def sfExchangeProjection (d : ExchangeProjectionStage (DX := DX) (DB := DB) (DY := DY) (DX' := DX') (DB' := DB') (DY' := DY')) : (d.push ⋙ d.horizontal ⟶ d.horizontal' ⋙ d.push') × (d.compactSupport ⋙ d.horizontal ⟶ d.horizontal' ⋙ d.compactSupport') × (d.compactSupport ⋙ d.tensorY ⟶ (Functor.postcompose₂.obj d.compactSupport).obj ((((Functor.whiskeringLeft₂ DX).obj (𝟭 DX)).obj d.pull).obj d.tensorX))",
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleExchanges",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleExchanges.lean",
+  "statement": "def sfEtaleProjection (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} Λ) c ⟶ rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) c",
   "branch": "newtargets-dag",
-  "by": "Q12",
+  "by": "NH",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The typed family uses the published canonical operations: actual intrinsic finite maps (including the D+ projection lift), the existing completed adic exchange, and the supplied-domain composites at the other coefficient stages. The named bounded-below theorem states only the well-typedness of the projection display; its proof is postponed."
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfEtaleProjection",
+   "AlgebraicGeometry.Etale.projectionMapOfCompactification"
+  ],
+  "note": "§1(B): the recorded sfFiniteProjectionAmbient/Plus maps use intrinsic pro-etale modules and cannot supply the small-etale projection required by this finite-coefficient consumer. The dependency module publicly imports SfExchanges, preserving every existing exchange, completed exchange and supplied-domain declaration, and adds only sfEtaleProjection: the existing canonical Etale.projectionMapOfCompactification specialized to the recorded constant-module etale categories. It is a bifunctor natural transformation. Its components on the stated domain have bounded-below endpoints by the delivered finite theorem; no isomorphism is chosen as data."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-667f0185b",
-  "group": "Q12",
+  "reviewer": "NT-stage2-cc-69a98042d",
+  "group": "NH",
   "result": "pass",
-  "note": "Statement verbatim with main-20261015 order 1701; node changes only the added landed def stmt_dep def-sp-finite-ring-compact-support-projection-map and the lean record. Ex_* = mateEquiv of the intrinsic derivedPlus adjunctions around the inverse sfIntrinsicSquarePullback (f' unit, theta, f counit; direction checked; any CommSq). Finite Ex_! = compactificationExchangeFromData with the proper-square theta and the canonical open exchange (inverse fixed to the mate by the canonical field, so Classical.choice is determined). Adic Ex_! = completedCompactSupportExchange verbatim with completed pullbacks. Higher stages = ExchangeProjectionStage exchange/compactExchange/projection. PF = recorded finiteRingCompactSupportProjection component on intrinsic Db_c x Dctf, lifted to D+ via a named sorry typing theorem (true, docstring proof). Edge cases and universes fine; no hollow defs, no stronger assumptions, no name clashes, acyclic, no theorem stmt_deps. nt_compile reproduced: 6.3 s, rc 0, no warnings; axioms checked. Observations only: beta relies on the postponed lem-trf-open-square-exchange existence theorem; PF uses the realization presentation of Rf_!."
+  "note": "Item statement verbatim with main-20261015 order 1706. Lean matches each clause: Λ=coefficientExtensionRing l E n (n≥1); f IsSeparated+LocallyOfFiniteType+QuasiCompact with no ℓ-invertibility, field or qcqs assumption; small-étale DerivedCategoryModule; K bounded and constructible via recorded IsConstructibleEtaleSheafOfSets; L bounded constructible with hasTorAmplitudeIn; conclusion t.plus on both endpoints plus IsIso of the canonical upstream projectionMapOfCompactification component (direction checked; naturality from the bifunctor transformation), for every Compactification c. Universes u/u+1 as in landed thm-sf-pf-finite; all bound. Upstream hasProjectionFormula_of_boundedConstructible adds HasInvertibleExponent, so not reused; thm-sf-pf-finite is a finite-field special case, not a duplicate. §1(B) SfEtaleExchanges publicly re-exports SfExchanges and adds only the canonical étale specialization; only lean changed in both nodes; statements verbatim in files. nt_compile --json of both files rc 0 (4.8/3.5/4.1 s), no errors. No hollow defs, sorry only, docstrings with source and blueprint and the six proof steps. Observations: the sk-def-sf-exchanges record now lists only the étale PF (old decls kept by public import and named in the note; tool limitation); no independent group second reading, per the 2026-10-17 direct-delivery policy, which this review covers."
  }
 }
