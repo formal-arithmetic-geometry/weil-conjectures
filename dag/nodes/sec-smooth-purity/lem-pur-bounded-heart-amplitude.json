@@ -14,10 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Fix $a\\le b$ and $K$ as in the statement, and choose a representing complex $C$ for $K$. Put $K_q=\\tau_{\\le q}C$ in $D(\\mathcal A)$. By [lem-weil-pbc-truncation-descends], $H^r(K_q)=H^r(K)$ for $r\\le q$, and $H^r(K_q)=0$ for $r>q$, naturally. We will prove, by induction on the nonnegative integer $n$, that $T K_{a-1+n}$ has zero cohomology outside the fixed interval $[a+c,b+d]$, for $0\\le n\\le b-a+1$. This induction concerns only finitely many truncations of the chosen representative; it uses no limit.",
+   "text": "Choose a representative complex C of K using essential surjectivity of Q. Transport the vanishing hypotheses and membership in S along the homologyFunctorFactors isomorphisms. Thus C.IsGE a and C.IsLE b by Mathlib CochainComplex.isGE_iff and isLE_iff. Put K_q=Q(tau_{<=q}C). Induct on natural n with a-1+n<=b to bound T(K_{a-1+n}) in the fixed interval [a+c,b+d]. No limit is used.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-truncation-descends"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
@@ -38,9 +37,9 @@
    }
   },
   {
-   "text": "For $n=0$, $K_{a-1}$ has zero cohomology in every degree: below $a$ this follows from the bound on $K$, and above $a-1$ from truncation. Thus the map $0\\to\\tau_{\\le a-1}C$ is a quasi-isomorphism of complexes, so $K_{a-1}\\cong0$ in the localization defining $D(\\mathcal A)$. The functor $T$ is additive, so it preserves zero: indeed $\\mathrm{id}_{T0}=T(\\mathrm{id}_0)=T(0)=0$. Hence all cohomology of $T K_{a-1}$ vanishes, proving the base case.",
+   "text": "For n=0, the bounded-below clause of [lem-weil-pbc-truncation-triangle] gives (tau_{<=a-1}C).IsGE a. Canonical truncation also gives IsLE (a-1), so Mathlib DerivedCategory.TStructure.t.isZero shows that K_{a-1} is zero. Exactness of T implies additivity and preservation of zero objects. Applying T and H^i therefore gives the base case.",
    "uses": [
-    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle",
     "def-weil-triangulated-category"
    ],
    "elementary": true,
@@ -63,9 +62,8 @@
    }
   },
   {
-   "text": "At $n=b-a+1$ the induction bounds $T K_b$. The canonical inclusion $\\tau_{\\le b}C\\to C$ induces an isomorphism on every cohomology object: in degrees $\\le b$ by the truncation calculation, and in degrees $>b$ both sides have zero cohomology. It is a quasi-isomorphism and therefore $K_b\\cong K$ in $D(\\mathcal A)$. Applying $T$ and then $H^i$ transfers the bound from $T K_b$ to $T K$. This is exactly the claimed interval $[a+c,b+d]$; the construction has used neither infinite products nor completeness.",
+   "text": "At n=(b-a+1).toNat the truncation index is b, so the induction bounds T(K_b). Since C.IsLE b, Mathlib CochainComplex.quasiIso_ιTruncLE_iff makes tau_{<=b}C -> C a quasi-isomorphism. Q inverts it. Compose its image with Q(C) ≅ K and apply T and H^i to transport the bound. The construction uses neither infinite products nor completeness.",
    "uses": [
-    "lem-weil-pbc-truncation-descends",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -77,7 +75,6 @@
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-truncation-descends",
   "def-weil-triangulated-category",
   "lem-sp-derived-cohomology-shift",
   "lem-weil-pbc-truncation-triangle",
@@ -86,7 +83,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles and finite induction; compare more-etale.tex Tag 0G2A, proof of lemma-derived-lower-shriek-bounded (3)"
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle, finite induction on successive cohomology triangles; more-etale.tex Tag 0G2A, lemma-derived-lower-shriek-bounded (3). Lean proof by Y9 uses Mathlib truncation support and isLE/quasi-isomorphism APIs and the bounded-below clause of truncation_triangle."
  },
  "mathlib_searches": [
   {
@@ -218,7 +215,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-truncation-descends",
   "lem-weil-pbc-truncation-triangle"
  ],
  "reviewed": {
@@ -246,5 +242,15 @@
   "group": "Q61",
   "result": "pass",
   "note": "Clause-by-clause match of DerivedCategory.bounded_heart_amplitude against the node: abelian A and B with HasDerivedCategory and six independent universes; T a DerivedCategory functor with CommShift ℤ and IsTriangulated; S closed under isomorphism and containing 0; c<=d; heart bound via singleFunctor A 0; a<=b; H^r(K)=0 outside [a,b] and H^r(K) in S for all r; conclusion IsZero(H^i(TK)) for i<a+c or i>b+d. Nothing extra assumed. The homologyFunctor ShiftSequence gives H^a(K[n])=H^{a+n}(K), the node's convention. lean.statement is verbatim. Only the lean field differs from side. No definitions, proof sorry only, source and blueprint docstrings present, theorem docstring carries the five proof steps. Imported truncation modules exist as the dependency nodes record. No duplicate found. Worker report real; Second reading section is the accepted 2026-10-17 direct-delivery note. nt_compile.py --json: rc=0, 1.0 s, no errors or warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261018T135947-L-2974357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
