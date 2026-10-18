@@ -9130,6 +9130,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseCh
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDualityFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantIntLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible

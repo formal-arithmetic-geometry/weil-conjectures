@@ -78,7 +78,8 @@ theorem extFrobeniusOfResolution_eq {n : ℕ} (x : Ext (constantIntSheaf X) B n)
         (zero_add n) := by
   obtain ⟨f, hf, rfl⟩ := R.extMk_surjective x (n + 1) rfl
   rw [extFrobeniusOfResolution_extMk, ← Ext.comp_assoc_of_third_deg_zero,
-    InjectiveResolution.mk₀_comp_mapExactFunctor_extMk, InjectiveResolution.extMk_comp_mk₀ _ _ _ _ ψ]
+    InjectiveResolution.mk₀_comp_mapExactFunctor_extMk,
+    InjectiveResolution.extMk_comp_mk₀ _ _ _ _ ψ]
   rfl
 
 variable {B' : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
