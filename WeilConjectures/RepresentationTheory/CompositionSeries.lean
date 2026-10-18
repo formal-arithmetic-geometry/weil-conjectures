@@ -189,7 +189,7 @@ theorem isIrreducible_factor (i : Fin s.length) : (s.factor i).IsIrreducible :=
 
 /-- **Jordan–Hölder.** Any two composition series of a representation have the same composition
 factors, up to permutation and isomorphism, with the same multiplicities.
-(blueprint: `lem-mg-jordan-holder`) -/
+(blueprint: `lem-mg-jordan-holder`, part L1 of `sk-r-linear-library`) -/
 theorem jordanHolder (s₁ s₂ : ρ.CompositionSeries) :
     ∃ e : Fin s₁.length ≃ Fin s₂.length, ∀ i, Nonempty ((s₁.factor i).Equiv (s₂.factor (e i))) := by
   obtain ⟨e, he⟩ := _root_.CompositionSeries.jordan_holder s₁.series s₂.series

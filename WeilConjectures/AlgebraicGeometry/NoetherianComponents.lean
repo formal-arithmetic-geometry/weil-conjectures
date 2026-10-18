@@ -14,7 +14,7 @@ public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 /-!
 # Irreducible components of Noetherian schemes, flat open maps, normal étale schemes
 
-Three elementary facts used by the Noetherian theory of constructible étale sheaves:
+Four elementary facts used by the Noetherian theory of constructible étale sheaves:
 
 - `AlgebraicGeometry.Scheme.finite_irreducibleComponents` (blueprint
   `lem-weil-pbc-noetherian-finite-components`): a Noetherian scheme has finitely many
@@ -22,6 +22,9 @@ Three elementary facts used by the Noetherian theory of constructible étale she
 - `AlgebraicGeometry.universallyOpen_of_flat_of_locallyOfFinitePresentation` (blueprint
   `lem-weil-pbc-flat-lfp-open`): a flat morphism locally of finite presentation is universally
   open, in particular open (`AlgebraicGeometry.Scheme.Hom.isOpenMap`).
+- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk` (Stacks 033M):
+  a Noetherian scheme whose local rings are integrally closed domains is a finite disjoint union
+  of open and closed normal integral subschemes.
 - `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale` (blueprint
   `lem-fin-etale-normal-components`): a Noetherian scheme étale over a normal integral scheme is
   a finite disjoint union of open and closed normal integral subschemes.
@@ -82,18 +85,20 @@ theorem Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale {W Y : Scheme.{u}}
   exact Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization (R := Γ(Y, U))
     (hV.primeIdealOf ⟨x, hxV⟩).asIdeal (W.presheaf.stalk x)
 
-/-- Blueprint `lem-fin-etale-normal-components`: Normal components after étale pullback.
+/-- **Noetherian normal schemes decompose** (Stacks 033M). A Noetherian scheme whose local rings
+are integrally closed domains is a finite disjoint union of open and closed subschemes `X_a`
+which are integral with integrally closed local rings.
 
-Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
-of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and
-closed subschemes `W_a` which are normal integral. -/
-theorem Scheme.exists_isClopen_isIntegral_of_etale {W Y : Scheme.{u}} (f : W ⟶ Y) [Etale f]
-    [IsNoetherian W] [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) :
+The `X_a` are the connected components of `X`: there are finitely many of them, and each is
+irreducible because its local rings are domains. -/
+@[stacks 033M]
+theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Scheme.{u})
+    [IsNoetherian W]
+    (hW : ∀ x : W, IsDomain (W.presheaf.stalk x) ∧ IsIntegrallyClosed (W.presheaf.stalk x)) :
     ∃ (n : ℕ) (U : Fin n → W.Opens), (∀ a, IsClopen (U a : Set W)) ∧
       Pairwise (fun a b ↦ Disjoint (U a) (U b)) ∧ ⨆ a, U a = ⊤ ∧
       ∀ a, IsIntegral (U a).toScheme ∧
         ∀ w : (U a).toScheme, IsIntegrallyClosed ((U a).toScheme.presheaf.stalk w) := by
-  have hW := Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale f hY
   let e := (Finite.equivFin (ConnectedComponents W)).symm
   let U (a : Fin (Nat.card (ConnectedComponents W))) : W.Opens :=
     ⟨ConnectedComponents.mk ⁻¹' {e a},
@@ -123,5 +128,19 @@ theorem Scheme.exists_isClopen_isIntegral_of_etale {W Y : Scheme.{u}} (f : W ⟶
   refine ⟨isIntegral_of_irreducibleSpace_of_isReduced _, fun w ↦ ?_⟩
   have := (hW ((U a).ι w)).2
   exact .of_equiv (hst w)
+
+/-- Blueprint `lem-fin-etale-normal-components`: Normal components after étale pullback.
+
+Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
+of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and
+closed subschemes `W_a` which are normal integral. -/
+theorem Scheme.exists_isClopen_isIntegral_of_etale {W Y : Scheme.{u}} (f : W ⟶ Y) [Etale f]
+    [IsNoetherian W] [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) :
+    ∃ (n : ℕ) (U : Fin n → W.Opens), (∀ a, IsClopen (U a : Set W)) ∧
+      Pairwise (fun a b ↦ Disjoint (U a) (U b)) ∧ ⨆ a, U a = ⊤ ∧
+      ∀ a, IsIntegral (U a).toScheme ∧
+        ∀ w : (U a).toScheme, IsIntegrallyClosed ((U a).toScheme.presheaf.stalk w) :=
+  W.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk
+    (Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale f hY)
 
 end AlgebraicGeometry

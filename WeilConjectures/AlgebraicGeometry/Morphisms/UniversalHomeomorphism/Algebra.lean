@@ -27,6 +27,8 @@ subalgebras.
 - `Algebra.IsUniversalHomeomorphism.tensorProduct`: stability under base change.
 - `Algebra.IsUniversalHomeomorphism.of_subalgebra`: if `B` is a universal homeomorphism over
   `A` and `B₀ ⊆ B` is an `A`-subalgebra, then so is `B₀`.
+- `AlgebraicGeometry.isHomeomorph_pullback_fst_of_isPurelyInseparable`: base change along a
+  purely inseparable field extension is a homeomorphism.
 -/
 
 @[expose] public section
@@ -155,5 +157,16 @@ instance _root_.Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (K L : T
         (a₁ := (Spec.preimage g₁).hom) (a₂ := (Spec.preimage g₂).hom)
         (congrArg CommRingCat.Hom.hom h)) x)
     exact { }
+
+/-- **Base change along a purely inseparable extension is a homeomorphism.** For a purely
+inseparable extension `k'/k` and a `k`-scheme `f : X ⟶ Spec k`, the projection
+`X_{k'} = X ×_{Spec k} Spec k' ⟶ X` is a homeomorphism: it is the base change of the universal
+homeomorphism `Spec k' ⟶ Spec k`.
+
+(blueprint: `lem-pc-homeo-pure-insep`) -/
+theorem isHomeomorph_pullback_fst_of_isPurelyInseparable (k k' : Type u) [Field k] [Field k']
+    [Algebra k k'] [IsPurelyInseparable k k'] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) :
+    IsHomeomorph (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base :=
+  Scheme.Hom.isHomeomorph _
 
 end AlgebraicGeometry

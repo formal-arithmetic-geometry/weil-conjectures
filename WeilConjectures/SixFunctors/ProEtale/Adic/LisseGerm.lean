@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GermComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermComp
 
 /-!
 # Sections of lisse sheaves are determined by their germs

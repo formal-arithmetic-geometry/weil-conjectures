@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 
 /-!
 # Coherence of the commutation of scalar extension with pullback

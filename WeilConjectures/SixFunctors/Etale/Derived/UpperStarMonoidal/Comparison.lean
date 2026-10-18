@@ -56,7 +56,7 @@ namespace Etale
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 section
 
-open DerivedCategory Functor.OplaxMonoidal
+open _root_.DerivedCategory Functor.OplaxMonoidal
 
 variable [(g)^*[A].PreservesFlat]
 
@@ -181,7 +181,7 @@ theorem nonempty_iso_leftDerivedUpperStar_unit :
 
 section Monoidal
 
-open DerivedCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+open _root_.DerivedCategory Functor.LaxMonoidal Functor.OplaxMonoidal
 
 variable [(g)^*[A].PreservesFlat]
 

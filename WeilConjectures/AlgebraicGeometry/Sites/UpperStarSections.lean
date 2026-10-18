@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
-public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
