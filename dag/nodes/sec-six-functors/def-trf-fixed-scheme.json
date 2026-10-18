@@ -167,5 +167,40 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7e34c40b0 (reviewer sub-agent of L); spot-checked: Read the item in full: all 9 stmt_deps statements, the main-20261015 source def-trf-fixed-scheme.md (identical to the stored blueprint_update), the unit sk-prop-sf-rf-shriek-preservation (the item is only stored there and realizes no step), the citers (def-trf-graph-correspondence, prop-trf-fixed-square-cartesian, thm-trf-frobenius-fixed-points, def-trf-scheme-frobenius, lem-trf-integration-component-sum), Stacks 004S/004T/01JP/01IO/01JB/01JC, and the project Lean Correspondence.fix/ofGraph. The fibre-product definition and c1 iF = d = c2 iF are correct. Both source corrections are genuine and checked on counterexamples. (1) 'Intersection of the image with the diagonal' fails for C = Spec k[eps] -> s; 'inverse image along c' is exactly the displayed pullback. (2) (id,h) needs a_X h = a_X, which fails for the Frobenius of Spec of an algebraic closure of F_q. This matches the graph node's k-endomorphism, Lean ofGraph's hg, and the k-linear Phi of the only Fix(h) citer. The equalizer description holds for every test scheme (h = id gives X; translation on A^1 gives the empty scheme). The pi_0 convention counts all components; the clopen clause is redundant but true and blocks the misreading under which the coproduct display fails. The coproduct identification is an elementary instance of the Mathlib-leaf coproduct and gluing nodes. Edge cases checked: empty F, two points, a nonreduced point. No new nodes, no cycle, no duplicate definition of connected components or equalizers in the DAG, no hypothesis added, no SGA, no tool_uses. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61d21167b",
+  "group": "ND",
+  "result": "fix",
+  "note": "Read node (only lean set; statement and stmt_deps unchanged), all 9 stmt_deps incl. the TrfCohomologicalCorrespondence record, the module, the report, and upstream Correspondence.fix (a different ambient structure, not a duplicate; no named finite-clopen-component definition exists). Clause check: fixedScheme = pullback c.toProduct (pullback.diagonal X.hom) with fst/snd as i_F and d; fixedScheme_relations gives c∘i_F=Δ∘d and c1 i_F=d=c2 i_F; graph (𝟙, h.left) over s; HasFiniteClopenConnectedComponents = Finite (ConnectedComponents F) ∧ each fibre clopen, counting all components; open subschemes with full sheaf; canonical Sigma.desc map with asIso. No extra hypotheses or universe restrictions, no hollow data, only sorry proofs, empty case covered. Finding H3: trfEndomorphismFixedScheme_equalizer stated only (∃! lift ↔ t≫h=t), which does not show that composites g≫incl are fixed, so it falls short of the node's bijection Hom(T,Fix h) ≅ {t | h t = t}. fixes/TraceFixedScheme.lean adds the conjunct ∀ g, (g≫incl)≫h.left = g≫incl with an updated proof docstring; same name and binders, no record change. fixes/def-trf-fixed-scheme.report.md keeps both sections verbatim and appends a maintainer-fix note. Second reading by the same worker (dispatcher-mandated) is clause-level, accepted under H11. nt_compile --json: delivered and fixed files both rc 0, no diagnostics (3.8 s / 3.9 s)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceFixedScheme",
+  "declaration": "WeilConjectures.TrfCohomologicalCorrespondence.fixedScheme",
+  "declarations": [
+   "WeilConjectures.TrfCohomologicalCorrespondence.fixedScheme",
+   "WeilConjectures.TrfCohomologicalCorrespondence.fixedInclusion",
+   "WeilConjectures.TrfCohomologicalCorrespondence.fixedProjection",
+   "WeilConjectures.TrfCohomologicalCorrespondence.fixedScheme_relations",
+   "WeilConjectures.trfFixedGraphMap",
+   "WeilConjectures.trfEndomorphismFixedScheme",
+   "WeilConjectures.trfEndomorphismFixedInclusion",
+   "WeilConjectures.trfEndomorphismFixedScheme_equalizer",
+   "AlgebraicGeometry.Scheme.HasFiniteClopenConnectedComponents",
+   "AlgebraicGeometry.Scheme.clopenConnectedComponentOpen",
+   "AlgebraicGeometry.Scheme.clopenConnectedComponentScheme",
+   "AlgebraicGeometry.Scheme.clopenConnectedComponentsMap",
+   "AlgebraicGeometry.Scheme.isIso_clopenConnectedComponentsMap",
+   "AlgebraicGeometry.Scheme.clopenConnectedComponentsIso"
+  ],
+  "file": "lean/Sheaf/Paper/TraceFixedScheme.lean",
+  "statement": "def fixedScheme (c : TrfCohomologicalCorrespondence F l E n hl X K) : Scheme.{u}",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded TrfCohomologicalCorrespondence and its geometric toProduct, with the actual pullback along the Mathlib diagonal. The remaining declarations render the projections, graph/equalizer convention, finiteness of all connected components, full open component subschemes and their canonical coproduct isomorphism. Each of the three postponed theorem statements is a clause of this definition node, with its proof in its docstring; all are listed in declarations. The graph and component helpers are geometric constructions also meaningful without coefficients. No statement or dependency field changed."
  }
 }
