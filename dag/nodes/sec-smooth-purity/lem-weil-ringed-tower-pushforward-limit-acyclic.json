@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-ringed-tower-pushforward-limit-acyclic",
+ "kind": "statement",
+ "title": "Inverse-limit acyclicity of levelwise pushforward of a K-injective tower",
+ "statement": "Let C and D be small sites, R and S sheaves of rings whose section rings are commutative, and f a ringed-topos morphism from (C,R) to (D,S) [def-weil-pbc-ringed-topos-morphism]. Choose the ordinary unbounded derived categories of the two tower module categories and of S-modules [def-weil-abstract-derived-category]. Let I be a K-injective unbounded complex of strict inverse sequences of R-module sheaves and T a K-injective unbounded complex of strict inverse sequences of S-module sheaves [def-pur-kinjective-complex, def-weil-sheaf-of-modules-category]. For every quasi-isomorphism j from the levelwise module direct image f_*I to T, the chain map obtained by applying ordinary inverse limit degreewise to j is a quasi-isomorphism. No exactness of countable products or of module pullback is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof; Tag 0D6E, lemma-derived-pushforward-composition, K-flat pullback argument specialized to the constant-tower adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Regard each sectionwise commutative RingCat sheaf as an explicitly constructed CommRingCat sheaf with exactly the same underlying ring sheaf. On modules, use K-flat replacements with flat terms. On strict towers apply the stated diagram replacement theorem on a universe-lifted copy of the index category, restrict back, and transpose the resulting strict functor to a complex of towers. Evaluation detects its augmentation quasi-isomorphism. The module resolution is the existing flatKFlat_resolutions helper in RingedToposDerivedPushforwardComposition; its predicate is an equivalent two-field structure.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the module pullback left adjoint to the supplied direct image. Apply its adjunction levelwise. It sends quasi-isomorphisms between the good tower complexes of step 1 to quasi-isomorphisms, since evaluation detects quasi-isomorphisms and the stated K-flat pullback theorem applies at each level. The constant tower functor is exact, is left adjoint to inverse limit, and carries a good module complex to a good tower complex.",
+   "uses": [
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work in homotopy categories localized at quasi-isomorphisms. For a good complex P and a K-injective I, the pullback/direct-image adjunction identifies Hom(P,f_*I) with Hom(f^*P,I). Show that Hom(P,f_*I) maps bijectively to the corresponding localized Hom: represent localized maps by right fractions, replace their denominator source by a good resolution, use pullback inversion of good quasi-isomorphisms, then use the K-injective bijection of homotopy maps with derived maps. This proves both injectivity and surjectivity, without asserting that f_*I is K-injective. This is the original hom_localization_bijective helper used privately by the now-exported isIso_map_of_adjoints theorem, imported from RingedToposDerivedPushforwardComposition rather than copied.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding bijection to the levelwise adjunction, the constant/limit adjunction, and their composite. For every good module complex P, adjunction identifies postcomposition with lim(j) in the localized Hom from P with postcomposition with j in the localized Hom from the constant tower on P. The latter is bijective because j is a quasi-isomorphism and T is K-injective. Every localized object has a good representative by step 1, so postcomposition with lim(j) is bijective from every object. Yoneda implies that lim(j) is invertible after localization, which is precisely the asserted quasi-isomorphism. Apply the original exported isIso_map_of_adjoints helper to these two adjunctions and their resolving classes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit localization-by-right-fractions argument realizing the K-flat adjunction proof of Tag 0D6E for the tower square of Tag 0A07. Repair of return e9f56cc03e: reuse the shared resolving-adjunction and K-flat resolution helpers in their original module; remove all duplicated helper proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat.*limit|lim.*IsKInjective|QuasiIso.*lim",
+   "results": "['Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean']",
+   "date": "2026-10-18",
+   "verdict": "No match: available hits concern K-injective criteria, bounded resolutions or eventually constant limits, rather than unbounded tower pushforward acyclicity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"mapHomologicalComplex\"",
+   "results": "['CochainComplex.Plus.instIsKInjectiveObjHomologicalComplexIntInjectiveObjectUpMapHomologicalComplexιObjPlus']",
+   "date": "2026-10-18",
+   "verdict": "No match: available hits concern K-injective criteria, bounded resolutions or eventually constant limits, rather than unbounded tower pushforward acyclicity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit acyclicity of direct image of a K-injective tower using K-flat pullback",
+   "results": "['CochainComplex.IsKInjective.rightOrthogonal', 'CochainComplex.IsKInjective', 'CochainComplex.isKInjective_of_injective', 'CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.isKInjective_iff_rightOrthogonal', 'CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CochainComplex.cm5b.instInjectiveXIntI']",
+   "date": "2026-10-18",
+   "verdict": "No match: available hits concern K-injective criteria, bounded resolutions or eventually constant limits, rather than unbounded tower pushforward acyclicity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a quasi-isomorphism from the direct image of a K-injective inverse system of module complexes to a K-injective system is given, then inverse limit preserves this quasi-isomorphism.",
+   "results": "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology; QuasiIso.quasiIsoAt; HomologicalComplex.quasiIso_map_of_preservesHomology; isoOfQuasiIsoAt_inv_hom_id_assoc; HomologicalComplex.quasiIsoAt_map_of_preservesHomology; CategoryTheory.ShortComplex.QuasiIso.isIso; CochainComplex.isKInjective_of_iso; CategoryTheory.preservesLimitIso_inv_π_assoc",
+   "date": "2026-10-18",
+   "verdict": "No match: the hits require a homology-preserving functor, concern individual homology maps, or transport K-injectivity along an isomorphism. Inverse limit is not assumed homology preserving here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison",
+  "date": "2026-10-18",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-direct-image-composition",
+   "place": "Proof, integral stage: second comparison with derived inverse limit; quasi-isomorphism of the common direct-image representative with the resolved tower limit",
+   "via": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedTowerPushforwardLimitAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/RingedTowerPushforwardLimitAcyclic.lean",
+  "declaration": "CategoryTheory.ringedTowerPushforwardLimitAcyclic",
+  "statement": "theorem ringedTowerPushforwardLimitAcyclic\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (R : Sheaf J RingCat.{u}) (S : Sheaf K RingCat.{u})\n    (hcommR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)\n    (hcommS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a)\n    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)]\n    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} S)]\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} S)]\n    (f : RingedToposMorphism R S)\n    (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u} R) ℤ) (hI : I.IsKInjective)\n    (T : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u} S) ℤ) (hT : T.IsKInjective)\n    (j : ((((Functor.whiskeringRight ℕᵒᵖ (ringedSiteModules.{u} R)\n        (ringedSiteModules.{u} S)).obj f.modules).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj I) ⟶ T) [QuasiIso j] :\n    QuasiIso (((lim : (ℕᵒᵖ ⥤ ringedSiteModules.{u} S) ⥤ _).mapHomologicalComplex\n      (ComplexShape.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261018T093506-L-3541548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261018T093506-L-3541548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,6 +11,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+public import
+  WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
@@ -108,7 +113,11 @@ private theorem postcomp_bijective
     refine ⟨a, hZ.injective ?_⟩
     simp only [Q.map_comp, ha, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
-private theorem isIso_map_of_adjoints
+/-- Two resolving pullback adjunctions detect acyclicity of a right-adjoint image.
+
+The right-fraction hom comparisons identify postcomposition with the given localized
+isomorphism on every good test object; resolving arbitrary objects then applies Yoneda. -/
+theorem isIso_map_of_adjoints
     {A B E DA DB DE : Type*}
     [Category* A] [Category* B] [Category* E]
     [Category* DA] [Category* DB] [Category* DE]
@@ -174,7 +183,7 @@ private theorem isIso_map_of_adjoints
 variable {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
   [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
 omit [HasDerivedCategory A] in
-private theorem derives (F : A ⥤ B) [F.Additive] :
+theorem derives (F : A ⥤ B) [F.Additive] :
     (CochainComplex.KInjectives.localizerMorphism A).Derives
       (F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w}) := by
   intro X Y f hf
@@ -189,7 +198,7 @@ private theorem derives (F : A ⥤ B) [F.Additive] :
   change IsIso (DerivedCategory.Q.map
     ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f.hom))
   infer_instance
-private theorem exists_derived [Abelian.HasKInjectiveResolutions A]
+theorem exists_derived [Abelian.HasKInjectiveResolutions A]
     (F : A ⥤ B) [F.Additive] :
     ∃ (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
       (η : F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
@@ -319,16 +328,20 @@ private theorem quasiIso_of_isIso_map
 
 end Generic
 
-private def flatKFlat
+/-- A K-flat homotopy complex whose terms are flat module sheaves.
+
+The structure keeps the two properties available without unfolding tensor realizations. -/
+structure flatKFlat
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (R : Sheaf J CommRingCat.{u}) : ObjectProperty (HomotopyCategory
+    (R : Sheaf J CommRingCat.{u}) (X : HomotopyCategory
       (ringedSiteModules.{u, u, u, u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
-      (ComplexShape.up ℤ)) :=
-  fun X ↦ CochainComplex.IsAcyclicTensorKFlat X.as ∧
-    ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)
+      (ComplexShape.up ℤ)) : Prop where
+  kflat : CochainComplex.IsAcyclicTensorKFlat X.as
+  flat (n : ℤ) : SheafOfModules.IsFlat (X.as.X n)
 
-private theorem flatKFlat_resolutions
+/-- Every module homotopy complex admits a flat-term K-flat resolution. -/
+theorem flatKFlat_resolutions
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u}
@@ -376,7 +389,7 @@ private theorem flatKFlat_inverts
   apply (DerivedCategory.isIso_Qh_map_iff _).mpr
   simpa only [Functor.mapHomotopyCategory_map,
     HomotopyCategory.quotient_map_mem_quasiIso_iff,
-    HomologicalComplex.mem_quasiIso_iff] using hinv P Q s hX.1 hX.2 hY.1 hY.2 hq
+    HomologicalComplex.mem_quasiIso_iff] using hinv P Q s hX.kflat hX.flat hY.kflat hY.flat hq
 
 set_option maxHeartbeats 800000 in
 -- Repeated module localizations and their comparison-unit equations require more elaboration steps.
@@ -547,7 +560,9 @@ theorem ringedToposDerivedPushforwardComposition
     (flatKFlat_resolutions K B) (flatKFlat_resolutions L R)
     (flatKFlat_inverts J K A B FL hinvf)
     (flatKFlat_inverts K L B R GL hinvg)
-    (fun X hX ↦ hgoodg X.as hX.1 hX.2)
+    (fun X hX ↦ by
+      obtain ⟨hK, hF⟩ := hgoodg X.as hX.kflat hX.flat
+      exact ⟨hK, hF⟩)
     ((HomotopyCategory.quotient MA (ComplexShape.up ℤ)).obj I)
     (fun X ↦ CochainComplex.IsKInjective.Qh_map_bijective X I)
     ((HomotopyCategory.quotient MB (ComplexShape.up ℤ)).obj T)
