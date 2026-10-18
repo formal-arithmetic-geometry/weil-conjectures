@@ -9641,6 +9641,7 @@ public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
 public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
+public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroAdjunction
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
