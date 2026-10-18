@@ -214,7 +214,7 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
     (j y ≫ aY)
     (pullback.snd f (j y)) G' A' I _
     (fun k ↦ (Etale.upperStar _ g).mapIso (eG k) ≪≫
-      (Etale.upperStarRestrictScalarsIso (I k) g).app (F₀ k))
+      (Etale.upperStarRestrictScalarsIso (Ideal.Quotient.mk (I k)) g).app (F₀ k))
     ((g)^*ᵃ[l].mapIso eF ≪≫
       ((padicIntModUpperStarCompAdicSheafExtendScalarsIso l g).app _).symm ≪≫
       (adicSheafExtendScalars _ l).mapIso
