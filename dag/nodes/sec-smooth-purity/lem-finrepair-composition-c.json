@@ -17,18 +17,19 @@
  ],
  "proof": [
   {
-   "text": "Fix composable $f:X\\to Y$ and $g:Y\\to Z$ in the domain of [def-finrepair-property-c], and a constructible $\\Lambda$-sheaf $F$ on $X_{\\Et}$. The coefficient ring is finite and commutative. For every $b\\ge0$, $\\mathcal C(f)$ makes $R^bf_*F$ constructible on $Y_{\\Et}$; applying $\\mathcal C(g)$ to this sheaf makes $R^ag_*(R^bf_*F)$ constructible on $Z_{\\Et}$ for every $a\\ge0$. This is just the two quantified hypotheses in [def-finrepair-property-c], applied successively.",
+   "text": "Fix composable $f:X\\to Y$ and $g:Y\\to Z$ in the domain of [def-finrepair-property-c], and a constructible $\\Lambda$-sheaf $F$ on $X_{\\Et}$. The coefficient ring is finite and commutative. For every $b\\ge0$, $\\mathcal C(f)$ makes $R^bf_*F$ constructible on $Y_{\\Et}$; applying $\\mathcal C(g)$ to this sheaf makes $R^ag_*(R^bf_*F)$ constructible on $Z_{\\Et}$ for every $a\\ge0$. This is just the two quantified hypotheses in [def-finrepair-property-c], applied successively. Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to pass from the finite-constant-value predicate to IsConstructibleSheaf. Identify higherDirectImage with the ordinary nonnegative right derived functor by Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso.",
    "uses": [
-    "def-finrepair-property-c"
+    "def-finrepair-property-c",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-composition-c.md",
     "place": "Proof, first sentence: constructibility of the E_2 terms"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-grothendieck-spectral-sequence] to the two scheme morphisms and the commutative ring $\\Lambda$. It supplies a spectral sequence of $\\Lambda$-module sheaves on $Z_{\\Et}$ with $E_2^{a,b}=R^ag_*R^bf_*F$, zero terms outside the first quadrant, $d_r$ of bidegree $(r,1-r)$, and $E_{r+1}$ equal to the cohomology of $d_r$. Its abutment in degree $n$ is $H^n=R^n(gf)_*F$, with a finite filtration whose graded pieces are $E_\\infty^{p,n-p}$. No acyclicity hypothesis on the constructible sheaf $F$ and no uniform cohomological-dimension bound are required by the cited statement.",
+   "text": "Apply [lem-weil-pbc-grothendieck-spectral-sequence] to the two scheme morphisms and the commutative ring $\\Lambda$. It supplies a spectral sequence of $\\Lambda$-module sheaves on $Z_{\\Et}$ with $E_2^{a,b}=R^ag_*R^bf_*F$, zero terms outside the first quadrant, $d_r$ of bidegree $(r,1-r)$, and $E_{r+1}$ equal to the cohomology of $d_r$. Its abutment in degree $n$ is $H^n=R^n(gf)_*F$, with a finite filtration whose graded pieces are $E_\\infty^{p,n-p}$. No acyclicity hypothesis on the constructible sheaf $F$ and no uniform cohomological-dimension bound are required by the cited statement. In Lean use the proved source declaration exists_grothendieckSpectralSequence_lowerStar directly; its abutment is the right derived functor of the composite of the two underived functors.",
    "uses": [
     "lem-weil-pbc-grothendieck-spectral-sequence"
    ],
@@ -39,7 +40,7 @@
    }
   },
   {
-   "text": "Induct on the integer $r\\ge2$ to show that every term $E_r^{a,b}$ is constructible. For $r=2$ this is step 1 in the first quadrant; outside it the terms are zero, which is finite locally constant on the single stratum $Z$. Suppose all terms of $E_r$ are constructible. For any bidegree put $K=\\ker(d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1})$. The kernel clause of [thm-constructible-serre] makes $K$ constructible. Since $d_r^2=0$, the incoming differential factors through $K$, giving $E_r^{a-r,b+r-1}\\to K$. The cokernel clause of [thm-constructible-serre] makes its cokernel constructible. This cokernel is $E_{r+1}^{a,b}$ by the page-cohomology formula of [lem-weil-pbc-grothendieck-spectral-sequence]. Thus the induction advances. Only kernels and cokernels of morphisms between constructible sheaves have been used; no closure under arbitrary subsheaves is assumed.",
+   "text": "Induct on the integer $r\\ge2$ to show that every term $E_r^{a,b}$ is constructible. For $r=2$ this is step 1 in the first quadrant; outside it the terms are zero, which is finite locally constant on the single stratum $Z$. Suppose all terms of $E_r$ are constructible. For any bidegree put $K=\\ker(d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1})$. The kernel clause of [thm-constructible-serre] makes $K$ constructible. Since $d_r^2=0$, the incoming differential factors through $K$, giving $E_r^{a-r,b+r-1}\\to K$. The cokernel clause of [thm-constructible-serre] makes its cokernel constructible. This cokernel is $E_{r+1}^{a,b}$ by the page-cohomology formula of [lem-weil-pbc-grothendieck-spectral-sequence]. Thus the induction advances. Only kernels and cokernels of morphisms between constructible sheaves have been used; no closure under arbitrary subsheaves is assumed. The private helper constructible_homology uses ShortComplex.homologyIsoCokernelLift, and constructible_page implements simultaneous Int.leInduction over all bidegrees.",
    "uses": [
     "thm-constructible-serre",
     "lem-weil-pbc-grothendieck-spectral-sequence"
@@ -51,11 +52,12 @@
    }
   },
   {
-   "text": "Fix $n\\ge0$. For each $0\\le p\\le n$, choose an integer $r>\\max(p,n-p+1)$. The stabilization assertion of [lem-weil-pbc-grothendieck-spectral-sequence] identifies $E_\\infty^{p,n-p}$ with $E_r^{p,n-p}$, so step 3 makes this graded piece constructible. The same cited statement gives $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$ and $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. Descend on $p$ from $n+1$ to $0$: the base $F^{n+1}H^n=0$ is constructible; if $F^{p+1}H^n$ is constructible, the short exact sequence $0\\to F^{p+1}H^n\\to F^pH^n\\to E_\\infty^{p,n-p}\\to0$ and the extension clause of [thm-constructible-serre] make $F^pH^n$ constructible. Hence $H^n$ is constructible. As $n$ and $F$ were arbitrary, this is $\\mathcal C(gf)$ by [def-finrepair-property-c]. The bound on $r$ depends on the bidegree; the argument never bounds all higher direct images at once.",
+   "text": "Fix $n\\ge0$. For each $0\\le p\\le n$, choose an integer $r>\\max(p,n-p+1)$. The stabilization assertion of [lem-weil-pbc-grothendieck-spectral-sequence] identifies $E_\\infty^{p,n-p}$ with $E_r^{p,n-p}$, so step 3 makes this graded piece constructible. The same cited statement gives $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$ and $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. Descend on $p$ from $n+1$ to $0$: the base $F^{n+1}H^n=0$ is constructible; if $F^{p+1}H^n$ is constructible, the short exact sequence $0\\to F^{p+1}H^n\\to F^pH^n\\to E_\\infty^{p,n-p}\\to0$ and the extension clause of [thm-constructible-serre] make $F^pH^n$ constructible. Hence $H^n$ is constructible. As $n$ and $F$ were arbitrary, this is $\\mathcal C(gf)$ by [def-finrepair-property-c]. The bound on $r$ depends on the bidegree; the argument never bounds all higher direct images at once. In Lean pageInfinity (p,q) is defined at page p+q+2, so no further stabilization isomorphism is needed. The private helper constructible_abutment descends the subobject filtration using Nat.decreasingInduction and the short exact sequence of a monomorphism and its cokernel. Transport along lowerStarComp, its induced right-derived isomorphism and homologyRightDerivedFunctorPlusObjSingleFunctorIso identifies the abutment with higherDirectImage of the composite. Transfer back using [lem-weil-pbc-constructible-etale-module-sheaf-comparison].",
    "uses": [
     "lem-weil-pbc-grothendieck-spectral-sequence",
     "thm-constructible-serre",
-    "def-finrepair-property-c"
+    "def-finrepair-property-c",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
@@ -67,12 +69,13 @@
  "proof_deps": [
   "def-finrepair-property-c",
   "lem-weil-pbc-grothendieck-spectral-sequence",
-  "thm-constructible-serre"
+  "thm-constructible-serre",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-composition-c.md",
-  "place": "Proof: explicit page induction and finite-filtration induction, using Stacks Tags 0734, 015N and 03RZ"
+  "place": "Blueprint proof implemented by B8: simultaneous page induction and descending finite-filtration induction, with the proved source Leray theorem and finite-value/finite-stalk comparison; Stacks Tags 0734, 015N and 03RZ."
  },
  "mathlib_searches": [
   {
@@ -197,5 +200,15 @@
   "by": "NR",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261018T062705-L-632586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
