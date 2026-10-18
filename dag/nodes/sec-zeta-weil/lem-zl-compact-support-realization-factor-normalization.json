@@ -29,9 +29,163 @@
   "lem-sf-integral-compactification-comparison-bridge",
   "lem-pur-compact-support-condensed-realization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D=j_{!,B}K$ and $N=S_gJ_jr_XK$. All complete inputs and intermediate bounds are supplied by the hypotheses. The coefficient identifications for $B_T$ and $(A_n)_T$ commute with quotient maps by [lem-weil-pbc-profinite-coefficient-inverse-image]. Apply [prop-weil-pbc-direct-image-limits] to $g$ and $D$: the proper factor of $b$ is its specified diagram-site projection mate. Its evaluations are isomorphisms, since $D$ is complete. The coefficient hypotheses hold: $R$ is a Noetherian DVR and $A_n$ is finite by [def-weil-l-adic-coefficient-extension], and $[R\\xrightarrow{t^n}R]$ resolves $A_n$ by finite free modules. The second factor is the strict open reduction isomorphism $r_j:r_ZD\\to J_jr_XK$ of [lem-sf-integral-open-reduction-comparison]. Thus $b=S_g(r_j)r_g$ is a system map and is invertible, using detection of isomorphisms in [lem-coef-semilinear-derived-sections]. The strict-tower definition [lem-weil-compact-support-reduction-tower-functor] identifies $\\mathcal L_YN=P_RK$ with its prescribed transitions and maps. Finally [lem-weil-pbc-constant-completion-equivalence] identifies the actual quotient-tower unit with the completion unit; it is invertible on $P_R^0K$, which is complete by hypothesis. Therefore $q=\\mathcal L(b)u_{P_R^0K}$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.14 (context); agent verification using the cited strict-system and completion statements"
+   }
+  },
+  {
+   "text": "Let $d_g:\\mathcal L_YS_gr_ZD\\to Rg_{*,B}D$ be the specified one-letter identification and $e$ the system counit. The basic transpose formula of [lem-sf-generator-reduction-coherence] says $r_g=e_{S_gr_ZD}r_Y(d_g^{-1})$. Naturality of the actual unit and its triangle identity [lem-coef-derived-system-evaluation-calculus] give\n$$\n\\mathcal L_Y(r_g)u_{Rg_{*,B}D}\n=\\mathcal L_Y(e_{S_gr_ZD})u_{\\mathcal L_YS_gr_ZD}d_g^{-1}=d_g^{-1}.\n$$\nConsequently\n$$q=\\mathcal L_YS_g(r_j)d_g^{-1},\\qquad q^{-1}=d_g\\,\\mathcal L_YS_g(r_j^{-1}).$$\nThis also gives $e_Nr_Y(q)=b$: substitute $q=\\mathcal L(b)u$, move $b$ past $e$ by naturality, and cancel $e_{r_Y(P_R^0K)}r_Y(u)=1$. These are equations in the derived system adjunction, with the specified unit, rather than equations inferred from evaluated arrows.",
+   "uses": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Tensor reassociation and adjunction units/counits sentence; explicit two-letter transpose cancellation"
+   }
+  },
+  {
+   "text": "Check the structural normalization before using these coordinates. For a generator $\\tau:B\\to C$, let $r_B,r_C$ be the successive proper/open coefficient comparisons. The generator theorem [lem-sf-generator-reduction-coherence] gives $\\tau r_B=r_Cr(\\tau_{\\rm int})$ inside the system category. Put $q_B=\\mathcal L(r_B)u$ and similarly for $C$. Apply $\\mathcal L$ and use naturality of $u$ to obtain\n$$\\mathcal L(\\tau)q_B=q_C\\tau_{\\rm int}.$$\nThus conjugation by the inverse comparisons gives precisely the separately derived units, counits, proper/open interchange and compositors. For the two-letter word $S_gJ_j$, $r_B=b$, so this comparison is exactly the $q$ of Step 2. For basic proper and open letters this uses the stated $d_g$ and the open comparison $d_j=u_D^{-1}\\mathcal L(r_j)^{-1}$ of [lem-sf-integral-open-reduction-comparison]. The expression-realization theorem [lem-sf-integral-compactification-system-realization] supplies the realization for all allowed contexts and its intertwining of these same generators. On a composite of generator arrows the adjacent inverse comparisons cancel. Hence this verification compares actual structural maps, including their whiskerings, on the assumed domain.",
+   "uses": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Generator comparisons and coherence; explicit conjugation of the strict-system generator square"
+   }
+  },
+  {
+   "text": "Check the completed compactification composition with the precise bridge [lem-sf-integral-compactification-comparison-bridge]. Identify each $F_v$ there with $P_{R,v}=\\mathcal LB_vr$ by its direct defining-tower identification $d_v$; these identifications are retained on morphisms. The bridge then reads\n$$\\alpha_{g,f}=\\mathcal L(\\beta)\\,\\mathcal LB_g(e_{B_frK})$$\nwith source $\\mathcal LB_gr(\\mathcal LB_frK)$. For separately derived word coordinates put\n$$Q_{g,f}=\\mathcal LB_g(e_{B_frK})\\,q_{g,P_{R,f}K}\\,P_{R,g}^0(q_{f,K}).$$\nIt maps $P_{R,g}^0P_{R,f}^0K$ to $\\mathcal LB_gB_frK$. This is the successive word comparison: substitute $q_f=\\mathcal L(b_f)u$ and $q_g=\\mathcal L(b_g)u$, move $b_f$ past $e$ by naturality, and cancel $e_{rM}r(u_M)=1$. The result is precisely $\\mathcal L(r_{B_gB_f})u$, where $r_{B_gB_f}$ is the composite of the proper/open letter comparisons. The triangles used here are those of [lem-coef-derived-system-evaluation-calculus]. The generator squares of [lem-sf-generator-reduction-coherence], applied successively to the proper/open interchange and compositors forming $\\beta$, give by Step 3\n$$q_h^{-1}\\mathcal L(\\beta)Q_{g,f}=\\beta_{\\rm int}.$$\nSubstitution of the bridge formula is the required equality for the specified completed composition. Thus the comparison is with that composition, with its inserted counit, and the same separately derived proper/open maps. No arbitrary expression-realization is substituted for the bridge's direct $d_v$.",
+   "uses": [
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-generator-reduction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5; application of the existing actual-map comparison bridge"
+   }
+  },
+  {
+   "text": "Now expand the specification of $a_{f,E}$ in [lem-pur-compact-support-condensed-realization], construction Steps 3--5. It first inverts $\\mathcal L(b)u$, then applies coefficient realization to the separately derived proper/open word. The first arrow is therefore $J_Y(q^{-1}[1/t])$, by Step 2. Its proper arrow is exactly $\\chi_g^J$: [lem-weil-pbc-condensed-e-realization] specifies $J$ as derived coefficient extension and fixes its direct-image comparison, including counits. Its open arrow is $\\delta_j^J$: apply [lem-sf-open-tensor-normalization] to the identity of $Z$ with coefficient map $B_Z\\to E_Z^c$; its restriction is identity under balancing and its inverse is the specified open-unit adjunct. This identifies each arrow in the defining ordered composite, rather than replacing it by another isomorphism between the same objects. Associating these three arrows yields\n$$a_{f,E,K}=Rg_{*,E}(\\delta^J_{j,K})\\,\\chi^J_{g,j_{!,B}K}\\,J_Y(q^{-1}_{c,K}[1/t]).$$",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent-formulated specified-map construction of lem-pur-compact-support-condensed-realization, Steps 3--5; Proposition 6.8.14(2), Remark 6.8.15 give context, not this formula"
+   }
+  },
+  {
+   "text": "For finite $F/E$, [lem-weil-pbc-condensed-flat-coefficient-calculus] gives finite freeness of $F_Y^c$ over $E_Y^c$. The inverse-image coefficient identifications are the composition identifications of [def-weil-pbc-condensed-e-module-category]. Apply [lem-sp-finite-free-direct-image-coherence] with $q=g$, coefficient rings $E^c,F^c$, and $L=j_{!,E}K_E$. Its specified isomorphism $\\pi_g$ is the adjunct of $T_Z(\\varepsilon_{g,E,L})\\mu$, exactly the proper map in the question; in particular it is a map of $F^c$-modules. Apply [lem-sf-open-tensor-normalization] to scalar extension $E_Z^c\\to F_Z^c$ for $j$. This supplies $\\delta_j^{E,F}$ with identity open restriction. Expanding the canonical coefficient projection of the composite $P_E^c=Rg_{*,E}j_{!,E}$, its first arrow is $\\pi_{g,j_{!,E}K_E}$ and its second is $Rg_{*,F}(\\delta_j^{E,F})$. This is the specification used for $\\xi$ in [lem-pur-compact-support-condensed-realization], construction Step 6. It proves the second displayed equality for finite $F$, including invertibility of its proper factor.",
+   "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent-formulated finite coefficient comparison, construction Step 6 of lem-pur-compact-support-condensed-realization; Remark 6.8.15 is context"
+   }
+  },
+  {
+   "text": "For $F=\\Omega$, use the small filtered poset of finite $H\\subset\\Omega$ containing $E$, final among finite intermediate fields by composita. The coefficient ring and scalar cocone are those of [prop-weil-pbc-qbar-condensed-two-colimit], so they consist of finite-subextension-valued functions. Put $L=j_{!,E}K_E$, bounded below. The presentation theorem [lem-weil-pbc-condensed-coefficient-complex-presentation], with its base field and input field both $E$, gives simultaneous representatives of $T_{E,H}L$ with one common lower bound and identifies the coefficient cocone maps under transposition. By [lem-weil-pbc-condensed-flat-coefficient-calculus] scalar extension is exact, so the bound is retained. The proper $g$ is qcqs. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] with coefficient sheaf $E^c$: the colimit of the restricted finite proper comparisons is an isomorphism on every cohomology sheaf. The restriction/direct-image comparison in [lem-weil-pbc-ring-sheaf-change-adjunction] identifies its target with the restriction of $Rg_{*,\\Omega}T_{E,\\Omega}L$ and reflects isomorphisms. The resulting map is the restriction of the actual $\\Omega^c$-linear adjunct $\\pi_g$ of $T_Z(\\varepsilon)\\mu$. Indeed on each finite cocone leg its transpose is the same balanced pullback followed by the same counit; the presentation theorem's transposition identity identifies these with the colimit legs. Thus $\\pi_g$ itself is invertible in $D(\\Omega_Y^c)$, with exactly the stated mate formula.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent verification of the algebraic-closure coefficient step of lem-pur-compact-support-condensed-realization, Step 13; the cited simultaneous presentation and bounded-below continuity supply the precise argument"
+   }
+  },
+  {
+   "text": "The open comparison at $E\\to\\Omega$ is supplied directly by [lem-sf-open-tensor-normalization], for the ring map $E_Z^c\\to\\Omega_Z^c$. Its inverse is the open-unit adjunct, so restriction to $X$ is the balanced identity. Exact open extension is a left adjoint by the same statement's open adjunction; hence it commutes with the coefficient colimit. On every finite cocone leg the composite $Rg_{*,\\Omega}(\\delta_j^{E,\\Omega})\\pi_g$ is the scalar-extended composite of Step 6: proper coefficient transitivity is [lem-pur-ringed-coefficient-projection-cocycle], and open transitivity follows by taking adjuncts, where both maps are identity after balancing. The simultaneous presentation identifies these actual cocone arrows, not just objects. The definition of $\\xi_{f,E,\\Omega}$ in [lem-pur-compact-support-condensed-realization], construction Step 13, is the same colimit coefficient projection. The cocone equations therefore give\n$$\\xi_{f,E,\\Omega,K_E}=Rg_{*,\\Omega}(\\delta^{E,\\Omega}_{j,K_E})\\,\\pi_{g,j_{!,E}K_E}$$\nin the $\\Omega^c$-module derived category. This uses a colimit cocone of representing complexes with a common lower bound; no faithfulness of finite evaluation or unrestricted derived colimit assertion is needed.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent verification of the specified algebraic-closure coefficient projection, construction Step 13; open-unit normalization and coefficient transitivity"
+   }
+  },
+  {
+   "text": "All factors are natural transformations: $u$, the strict coefficient maps, their inverses on this domain, the direct-image comparison of $J$, and the scalar/open adjunction comparisons. Applying the preceding composites to a morphism $K\\to K'$ therefore gives their naturality squares. If $j=\\mathrm{id}$, its unit is identity; [lem-sf-open-tensor-normalization] gives $r_j=1$ and both $\\delta_j=1$ under the coefficient unitors. Step 2 then reads $q^{-1}=d_g$, and the first compact-support formula is precisely the specified proper realization comparison; the second is $\\pi_g$. If also $g=\\mathrm{id}$, $q=u_K$ and its inverse is the completion identification, as the same triangle calculation shows. For $K=0$ or an empty open all proper/open images are zero and all displayed comparisons are the unique maps between zero objects. For $F=E$, coefficient transitivity's identity clause makes $\\pi_g$ and the scalar/open factor identity. None of these checks adds a nonzero, nonempty, or positive-rank hypothesis.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent edge-case and naturality checks for the specified composites"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sf-generator-reduction-coherence",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Explicit normalization of the proper/open coefficient word using the cited system adjunction and comparison statements; Bhatt–Scholze provides the coefficient context only."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +221,38 @@
    "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_counit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv.  Read the returned signatures; ordinary sheaf adjunctions, discrete condensed adjunctions or compactly supported functions, not the specified adic-to-condensed proper/open comparison. The local sheaf adjunction is abelian, not this comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(comparison|realization)|projection.*counit|proper.*coefficient",
+   "results": "10 hits: Mathlib/Data/Analysis/Topology.lean, Mathlib/Data/Analysis/Topology.lean, Mathlib/Algebra/Polynomial/Inductions.lean, Mathlib/Algebra/Polynomial/Inductions.lean, Mathlib/Algebra/Module/Submodule/Union.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Data/Nat/Choose/Central.lean, Mathlib/Data/Nat/Choose/Central.lean. Read returned results: ordinary module/sheaf adjunctions, solid condensed adjunctions or unrelated compactness/polynomial facts; no specified integral reconstruction and condensed compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with compact support as the proper direct image counit mate followed by open extension by zero",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.restrictCoextendScalarsAdj, LinearEquiv.extendScalarsOfIsLocalizationEquiv. Read returned results: ordinary module/sheaf adjunctions, solid condensed adjunctions or unrelated compactness/polynomial facts; no specified integral reconstruction and condensed compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified compact support adic to condensed realization factors as the integral reconstruction comparison followed by proper pushforward and open scalar extension",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolid, Condensed.profiniteSolidification, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondensed.ihomPoints_symm_comp, Condensed.isColimitLocallyConstantPresheaf_desc_apply, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor. Read returned results: ordinary module/sheaf adjunctions, solid condensed adjunctions or unrelated compactness/polynomial facts; no specified integral reconstruction and condensed compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison for coefficient extension of derived direct image is the adjunction transpose of pullback tensor balancing followed by the counit and commutes with open extension by zero",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. Read returned results: ordinary module/sheaf adjunctions, solid condensed adjunctions or unrelated compactness/polynomial facts; no specified integral reconstruction and condensed compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-proper-unit-condensed-realization",
@@ -90,5 +272,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-compact-support-realization-factor-normalization",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded the two-letter reduction/limit transpose calculation, structural generator and completed-composition normalization, defining factorization of a, finite coefficient mate and bounded-below finite-subfield colimit argument for Omega. Preserved the statement and all provenance. Searched project declarations and Mathlib; no exact attachment or Mathlib leaf.",
+  "blueprint": "The first proof sentence of sk-thm-rationality uses trace-to-determinant factorization. This item serves the existing operator-realization ancestry by fixing its proper/open coefficient maps. It changes no unit-level route; current main-20261015 sk-thm-rationality generalizes the archived unit statement to finite-type schemes.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic coefficient/derived-adjunction tool: Coherent derived reduction, limit adjunction and fiberwise evaluation. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic coefficient/derived-adjunction tool: Derived semilinear sections and coefficient-linear geometric operations. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-pur-compact-support-condensed-realization",
+    "why": "Generic coefficient/derived-adjunction tool: Compact-support comparison with completed and condensed coefficient realization. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic coefficient/derived-adjunction tool: Coefficient projection cocycle for ordinary derived ringed diagrams. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sf-generator-reduction-coherence",
+    "why": "Generic coefficient/derived-adjunction tool: Basic generator coefficient squares in semilinear systems. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sf-integral-compactification-comparison-bridge",
+    "why": "Generic coefficient/derived-adjunction tool: Constant-tower and semilinear-counit normalizations of integral compactification composition agree. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic coefficient/derived-adjunction tool: Coherent integral realization of compactification expressions and their maps. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic coefficient/derived-adjunction tool: Strict reduction and normalized realization of completed open extension. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic coefficient/derived-adjunction tool: Open-extension unit normalization for derived tensor and base change. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-sp-finite-free-direct-image-coherence",
+    "why": "Generic coefficient/derived-adjunction tool: Coherent finite-free coefficient comparison for ambient derived direct image. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Generic coefficient/derived-adjunction tool: Coherent compact-support reduction tower functor. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "why": "Generic coefficient/derived-adjunction tool: Uniformly bounded-below coefficient complex presentation with canonical tensor maps. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Generic coefficient/derived-adjunction tool: Realization of rationalized integral coefficients in condensed E module objects. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Generic coefficient/derived-adjunction tool: Exact condensed coefficient changes and their derived tensor calculus. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Generic coefficient/derived-adjunction tool: Bounded-below filtered continuity of pro-etale pushforward. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic coefficient/derived-adjunction tool: Constant-to-completed coefficients on derived-complete categories. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic coefficient/derived-adjunction tool: Compatible inverse image of profinite coefficient sheaves. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic coefficient/derived-adjunction tool: Derived adjunctions under compatible changes of ring sheaves. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic coefficient/derived-adjunction tool: Direct image, derived limits, and completeness. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   },
+   {
+    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
+    "why": "Generic coefficient/derived-adjunction tool: Filtered two-colimit presentation of condensed Qbar bounded constructible complexes. It fixes an operation or comparison used in the proper/open realization; the zeta rationality unit supplies no such coefficient calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sf-generator-reduction-coherence",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NK-9de5d7325",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-9de5d7325 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item is split into 9 steps, there are no new nodes and the statement is unchanged. I read all 22 cited statements and the full statement and proof of lem-pur-compact-support-condensed-realization. Bhatt–Scholze Def 6.7.6, Lemma 6.7.14, Prop 6.8.14(2) and Rem 6.8.15 give context only; the node correctly marks the proof as agent-written, and no SGA source is used. Step 2 recomputes correctly: L(r_g)u=d_g^{-1}, so q=L S_g(r_j)d_g^{-1}, and e r(q)=b by the triangle identities. Step 3 gives L(τ)q_B=q_Cτ_int, with whiskering taken from lem-sf-integral-compactification-system-realization. In Step 4 the bridge formula and Q_{g,f} type-check and give q_h^{-1}L(β)Q=β_int. Steps 5, 6 and 8 match the defining composites in the parent's construction Steps 3–5, 6 and 13. Step 7's Ω argument checks out: the input is bounded below, the presentation, continuity (g proper hence qcqs) and ring-change lemmas apply, and the schemes are noetherian. The edge cases hold: j=id gives q^{-1}=d_g; g=j=id gives q=u_K; zero input or empty X gives zero; F=E gives the identity. One note for the maintainer, not a delivery fault: the parent's statement only asserts that a exists, and its defining composite is in its proof Step 5. The item's own reviewed statement records that composite, so unfolding it is forced; the parent's statement should carry the composite. Mechanical batch-5 check: lem-sf-generator-reduction-coherence and lem-sf-integral-open-reduction-comparison reach sec-trace-formula only through the definitions def-trf-integral-comparison-realization-models and def-trf-integral-comparison-sequence-systems, plus generic filtered-derived and adic-algebra lemmas (lem-trf-filtered-*, lem-pod-*). None of these is the trace formula, Poincaré duality or a step of their proofs, so both citations stand. I accept all 20 declared tool_uses as black-box coefficient-calculus lemmas. Nothing was changed."
  }
 }
