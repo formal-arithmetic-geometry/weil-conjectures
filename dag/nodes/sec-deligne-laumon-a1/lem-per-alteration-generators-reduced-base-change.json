@@ -14,9 +14,135 @@
   "def-per-prime-to-ell-alteration-topology",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an object $T\\to S$, finite type is preserved by ordinary base change, so $T\\prime=T\\times_S S\\prime$ is of finite type over $S\\prime$ and is Noetherian. The finite-extension hypothesis makes $h$ geometrically reduced: on each affine open $\\operatorname{Spec}A$ of a fibre $h_s$, its scalar extensions for finite purely inseparable fields are reduced; the affine-spectrum and tensor-product identifications give the same assertion for $A\\otimes_{\\kappa(s)}L$. The existing finite-inseparable test gives reducedness for every field extension, and the affine open-cover criterion gives it for the whole fibre. Every field-valued point of $S$ factors through its residue field, so this is the hypothesis of the Mathlib reduced-pullback lemma. Apply that lemma to the reduced Noetherian $T$ to obtain reducedness of $T\\prime$. Flat base change preserves maximal dominance, so every generic point of $T\\prime$ maps to a generic point $s\\prime$ of $S\\prime$. The flat map $h$ sends $s\\prime$ to a generic point $s$ of $S$. The generic-fibre criterion says $T_s$ is finite over $\\kappa(s)$. Its scalar extension to $\\kappa(s\\prime)$ is still finite: on coordinate rings a finite spanning set tensors to a finite spanning set. Hence the residue fields of its points, in particular those of the generic points of $T\\prime$, are finite over $\\kappa(s\\prime)$. This verifies every object condition.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-flat-maximal-dominance-base-change",
+    "lem-per-flat-geometrically-reduced-pullback",
+    "lem-per-generic-fibre-finiteness-criterion",
+    "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.1.5, 1.1.7 and 1.2.3 fourth bullet."
+   }
+  },
+  {
+   "text": "An $S$-morphism $u:T\\to V$ induces the unique $S\\prime$-morphism $u\\prime:T\\times_S S\\prime\\to V\\times_S S\\prime$ with the prescribed projections. Uniqueness in the scheme fibre-product universal property shows $(vu)\\prime=v\\prime u\\prime$ and $(1_T)\\prime=1_{T\\prime}$. As $S$ and $S\\prime$ are reduced, their identity maps are objects and terminal in their alteration categories. The canonical scheme isomorphism $S\\times_S S\\prime\\simeq S\\prime$ therefore identifies the image of the terminal object with the terminal object.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.2 and 1.2.3 first and fourth bullets."
+   }
+  },
+  {
+   "text": "For a diagram $X\\to Z\\leftarrow Y$ in $\\operatorname{alt}/S$, put $C=X\\times_Z Y$ and $P=C_{\\mathrm{md}}$. The product clause of the alteration calculus identifies $P$ as its categorical pullback. These are finite-type $S$-schemes: the morphisms of the diagram are locally of finite type by cancellation, and are quasi-compact since their sources are Noetherian (every open of a Noetherian space is quasi-compact); then apply finite-type composition and base change. Set $C\\prime=C\\times_S S\\prime$ and $P\\prime=P\\times_S S\\prime$. The latter is reduced by step 1, since $P$ is an alteration object. For every generic $s$ of $S$, $C_s=X_s\\times_{Z_s}Y_s$ is finite: its coordinate algebra is a tensor product of finite-dimensional $\\kappa(s)$-algebras over the finite-dimensional algebra of $Z_s$, hence a quotient of their tensor product over $\\kappa(s)$. The base change of $P\\hookrightarrow C$ is a closed immersion. By maximal-dominance stability $P\\prime$ is maximally dominant over $S\\prime$, so its closed support is contained in $|(C\\prime)_{\\mathrm{md}}|$. Conversely let $c\\prime$ be a generic point of a component of $C\\prime$ dominating $S\\prime$. Its image $s\\prime$ in $S\\prime$ maps to a generic point $s$ of $S$, by flatness of $h$. Its image in $C$ therefore lies in $C_s$, whose whole support is contained in $P$ by the dominant-part statement. Thus $c\\prime$ belongs to the inverse image $|P\\prime|$; as this subset is closed it contains its whole component. The supports coincide. Both closed subschemes are reduced, so uniqueness of the reduced induced closed subscheme gives $P\\prime\\simeq(C\\prime)_{\\mathrm{md}}$ over $C\\prime$.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "lem-per-dominant-part-coreflection",
+    "lem-per-flat-maximal-dominance-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-per-generic-fibre-finiteness-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5--1.2.6 and flat base-change component comparison (II 1.1.3, 1.1.5)."
+   }
+  },
+  {
+   "text": "The scheme fibre-product universal property identifies $C\\prime$ canonically with $X\\prime\\times_{Z\\prime}Y\\prime$, compatibly with the two projections. Step 3 and the product clause of the alteration calculus now identify $P\\prime$ with the categorical fibre product of $X\\prime$ and $Y\\prime$ over $Z\\prime$. Any other universal cone over the original diagram has a unique isomorphism to the cone with vertex $P$; applying the functor of step 2 and this isomorphism proves the assertion for every universal cone.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.6; the universal-property transport."
+   }
+  },
+  {
+   "text": "Let $(U_i\\to T)_i$ be an $\\ell\\prime$-decomposed etale generating family. Its members after base change are objects by step 1, and the induced family over $T\\prime$ is etale by etale-covering base change. For $t\\prime\\in T\\prime$ with image $t\\in T$, choose $u\\in U_i$ over $t$ of finite residue degree prime to $\\ell$. Apply the residue-base-change lemma to $\\kappa(u)/\\kappa(t)$ and $K=\\kappa(t\\prime)$. It gives a point of $\\operatorname{Spec}\\kappa(u)\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}\\kappa(t\\prime)$ with finite residue degree prime to $\\ell$ over $\\kappa(t\\prime)$. The field-fibre inclusion $\\operatorname{Spec}\\kappa(u)\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}\\kappa(t\\prime)\\to U_i\\times_T T\\prime\\simeq U_i\\times_S S\\prime$ sends this point to a point $w$ over $u$ and $t\\prime$ whose attached prime of $\\kappa(u)\\otimes_{\\kappa(t)}\\kappa(t\\prime)$ is the given one, and the fibre-product residue-field lemma identifies $\\kappa(w)$ with its residue field, compatibly with $\\kappa(t\\prime)$; so $w$ has exactly that residue degree. This supplies the required lift of every $t\\prime$.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-per-prime-to-ell-residue-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.7 and 2.1.1."
+   }
+  },
+  {
+   "text": "Let $f:U\\to T$ be a proper surjective maximally $\\ell\\prime$-finite generator. The map $f\\prime:U\\prime\\to T\\prime$ is proper and surjective by their ordinary base-change lemmas. Let $t\\prime$ be a generic point of $T\\prime$. The projection $T\\prime\\to T$ is flat, hence sends $t\\prime$ to a generic point $t$. Choose a generic $u\\in U$ over $t$ with finite residue degree prime to $\\ell$. The residue-base-change lemma gives a point of $\\operatorname{Spec}\\kappa(u)\\otimes_{\\kappa(t)}\\kappa(t\\prime)$ with finite residue degree prime to $\\ell$; its image $u\\prime\\in U\\prime$ lies over $u$ and $t\\prime$, and by the fibre-product residue-field lemma $\\kappa(u\\prime)$ is that residue field over $\\kappa(t\\prime)$. It is a generic point of $U\\prime$: its image $s\\prime$ in $S\\prime$ is generic by step 1, and the generic-fibre criterion makes $(U\\prime)_{s\\prime}$ finite over a field. Any generalization of $u\\prime$ must lie in this fibre, since $s\\prime$ has no strict generalizations; all points of a finite scheme over a field are closed and have no strict generalizations. Thus $u\\prime$ has no strict generalization. Finally, for every generic point $v\\prime$ of $U\\prime$, its image in $T\\prime$ lies over the same generic point of $S\\prime$. Step 1 gives finiteness of $\\kappa(v\\prime)/\\kappa(s\\prime)$; its intermediate field $\\kappa(f\\prime(v\\prime))$ therefore gives finiteness of $\\kappa(v\\prime)/\\kappa(f\\prime(v\\prime))$. These are both clauses of maximal $\\ell\\prime$-finiteness.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-per-flat-maximal-dominance-base-change",
+    "lem-per-prime-to-ell-residue-base-change",
+    "lem-per-generic-fibre-finiteness-criterion",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.1.8, 1.2.7, 2.3.1 and the generator calculation in 2.3.4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-per-flat-maximal-dominance-base-change",
+  "lem-per-flat-geometrically-reduced-pullback",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-reduced-scheme-open-cover",
+  "def-pc-fibre-product",
+  "lem-per-alteration-cover-calculus",
+  "lem-per-dominant-part-coreflection",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-per-prime-to-ell-residue-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "II 1.1.3--1.2.8 and 2.1.1--2.3.4; explicit flat component comparison and universal-cone argument supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +178,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected returned types; component facts about flatness, reduced schemes, regular sequences or ordinary etale maps do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|maximally.?ell|decomposed.*etale|dominant.*reduced",
+   "results": "{\"t\": \"2026-10-18T22:46:25Z\", \"tool\": \"grep\", \"query\": \"alteration|maximally.?ell|decomposed.*etale|dominant.*reduced\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "unavailable: incorrect grep subdirectory Mathlib duplicated the root; no absence conclusion from this call. The later AlgebraicGeometry grep corrects it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat base change of reduced generically finite schemes preserves alteration generators",
+   "results": "{\"t\": \"2026-10-18T22:46:25Z\", \"tool\": \"leansearch\", \"query\": \"flat base change of reduced generically finite schemes preserves alteration generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"Algebra.Presentation.baseChange_toGenerators\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\"], \"digest\": \"97d1ef2a782482fb\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the alteration-category functor and generator assertions: returned only ordinary flatness, scheme reducedness and general site/category declarations; read their types. The pullback reducedness component is recorded separately as a candidate."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-18T22:46:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "unavailable: loogle: unknown identifier 'AlgebraicGeometry.IsEtale'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat base change reduced schemes alteration category preserves categorical fibre products and prime-to-ell generators",
+   "results": "{\"t\": \"2026-10-18T22:46:26Z\", \"tool\": \"leanfinder\", \"query\": \"flat base change reduced schemes alteration category preserves categorical fibre products and prime-to-ell generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"1c097123dddeea1c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the alteration-category functor and generator assertions: returned only ordinary flatness, scheme reducedness and general site/category declarations; read their types. The pullback reducedness component is recorded separately as a candidate."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-18T22:48:39Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"], \"digest\": \"a38b4fa92fd402bf\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the alteration-category functor and generator assertions: returned only ordinary flatness, scheme reducedness and general site/category declarations; read their types. The pullback reducedness component is recorded separately as a candidate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor on alteration sites preserves finite limits under a reduced flat morphism and prime to ell decomposed etale and proper surjective covers",
+   "results": "{\"t\": \"2026-10-18T22:48:42Z\", \"tool\": \"leanfinder\", \"query\": \"Functor on alteration sites preserves finite limits under a reduced flat morphism and prime to ell decomposed etale and proper surjective covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet\", \"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CommRingCat.Under.preservesFiniteLimits_of_flat\", \"CategoryTheory.preservesFiniteLimits_of_flat\", \"CategoryTheory.flat_of_preservesFiniteLimits\"], \"digest\": \"cc46ed208f70f19d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the alteration-category functor and generator assertions: returned only ordinary flatness, scheme reducedness and general site/category declarations; read their types. The pullback reducedness component is recorded separately as a candidate."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|maximally.?ell|decomposed.*etale|dominant.*reduced",
+   "results": "{\"t\": \"2026-10-18T22:55:49Z\", \"tool\": \"grep\", \"query\": \"alteration|maximally.?ell|decomposed.*etale|dominant.*reduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\"], \"digest\": \"721f7c84e4b7b290\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the alteration-category functor and generator assertions: returned only ordinary flatness, scheme reducedness and general site/category declarations; read their types. The pullback reducedness component is recorded separately as a candidate."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-pair-alteration-pullback",
@@ -82,5 +257,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-generators-reduced-base-change",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited metadata. Wrote six proof steps distinguishing ordinary base change from dominant-part categorical products. Reused existing dominant-part, finite-inseparable geometric-reducedness test, residue-field and generator nodes. Created one general statement-only maximal-dominance input and one exact Mathlib reduced-pullback leaf. The finite-extension-to-geometric-reducedness bridge remains an explicit step citing existing nodes.",
+  "blueprint": "Ancestor finiteness/duality input through ILO IX 1.3, printed p.132: “Le changement de base par g préserve régularité, diviseurs à croisements normaux, et familles couvrantes pour la topologie des ℓ′-altérations.” The generator and categorical-product inputs to II 2.3.4, before passing to the generated topology.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme-theoretic tool used in the explicit flat base-change and generator argument; no alteration-unit node supplies this underlying scheme fact."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "why": "Generic affine scheme and geometric reducedness tool for converting the given finite-extension fibre test; it does not replace the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-reduced-iff",
+    "why": "Generic affine scheme and geometric reducedness tool for converting the given finite-extension fibre test; it does not replace the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine scheme and geometric reducedness tool for converting the given finite-extension fibre test; it does not replace the alteration route."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-open-cover",
+    "why": "Generic affine scheme and geometric reducedness tool for converting the given finite-extension fibre test; it does not replace the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-points",
+    "why": "Generic scheme-theoretic tool (Stacks 01JT): points of a fibre product over a pair of points and their residue fields, used to transfer the residue degree from the field-fibre to the base-changed generator; no alteration-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic scheme-theoretic tool (Stacks 01JT): points of a fibre product over a pair of points and their residue fields, used to transfer the residue degree from the field-fibre to the base-changed generator; no alteration-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-reduced-scheme-open-cover",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-defc1105b",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-defc1105b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, ILO II 1.1.2–1.2.5 and 2.3.4 (PDF pp.29–34), and Mathlib Geometrically/Reduced.lean:41-46,128-131. The statement matches ILO 1.2.3, fourth bullet: a reduced morphism in the sense of EGA IV 6.8.1 means fibres stay reduced after finite residue-field extensions. It also matches 2.3.4. I left the statement as it was. Steps 1–4 are correct: geometric reducedness via 030V, the open cover and the affine tensor product, then the Mathlib flat-pullback instance; generic-to-generic via the new lemma plus the generic-fibre criterion; equality of the two dominant-part supports, with both inclusions checked through the coreflection clause (X_md)_s=(X_s)_red, then uniqueness of the reduced induced closed subscheme. One fault, C1: steps 5 and 6 move the residue field of a point of Spec κ(u)⊗κ(t′) onto a point of U′ without citing Stacks 01JT. The FIX adds lem-weil-pbc-fibre-product-points and lem-weil-pbc-fibre-product-point-residue-field to the uses, proof_deps and tool_uses of steps 5–6 and writes the identification into the text. I checked lem-per-flat-maximal-dominance-base-change is true: flat maps lift generalizations (03HV), and the base-change clause reduces to fibres over the generic κ(y). No existing node states it. lem-weil-pbc-flat-generalizations-lift gives only clause (1). Maintainer note: the report wrongly says that node has its directions reversed; it states 03HV correctly. The Mathlib leaf is an exact match for the second instance at lines 128-131. Batch-5 flags: the only trace-formula nodes reached are lem-trf-finite-residue-point-closed-in-fibre (01TE), 030V (algebra) and 01J1 (a Mathlib leaf). All are generic, none is a step of the trace formula or Poincaré duality proofs, so I accepted them. The two added citations reach no trf or pod node and create no cycle. The three files contain no SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
