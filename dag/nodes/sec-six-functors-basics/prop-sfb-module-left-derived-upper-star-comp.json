@@ -198,5 +198,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-848abd312 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the blueprint main-20261015 statement, its proof and unit clause 4, the restricted-functor unit, Stacks derived.tex label lemma-right-derived-exact-functor (015F, line 5884), and Mathlib Localization/Predicate.lean:278-290. The statement is verbatim the blueprint statement and is not weakened. The coefficient category is the same Mod_{Λ_T} throughout, and f^* = Ext_{α_f}∘mapMod(f^*_Ab) is the same functor in def-sfb-module-upper-star and in sk-def-sfb-module-pushforward-pullback. The direction b: h^*→f^*g^* matches def-sfb-module-upper-star-comp. Step 1: exactness comes from det-prop-sfb-module-pullback-exact-main, applied to f, g and h. Step 2: the right-Kan comparison u_a/v_a, with inverse equations from uniqueness, is correct, and p_a = ε_a is invertible. Step 3: the termwise chain isomorphism is genuinely elementary. Step 4: I checked the types of q_K and t_K. The descent through localization clauses (2) and (3) is correct, and the component equation makes the 'induced by b' clause precise. The route follows the blueprint (exact ⇒ levelwise ⇒ transport). The missing blueprint node prop-sfb-module-left-derived-upper-star-levelwise is correctly replaced by the exactness node, the factorization leaf and tool clause (1). Accepted tool_use: lem-weil-pbc-exact-functor-derived-functor, a generic tool that is split and reviewed pass. There are no new nodes and no cycle (only the parent def-sfb-dc-upper-star-comp cites the item). Possible duplicates checked: def-sfb-derived-comap-upper-star-iso, new-comap-upper-star-iso-composition, lem-sfb-module-upper-star-kflat-quasi-iso; none states this result. No SGA source is used. Fixes: step 1 now introduces ε_a and says (L_a, ε_a) is a right Kan extension, with lem-weil-pbc-exact-functor-derived-functor added to its uses; step 2 had relied on ε_a 'from step 1' without it being introduced. I also added sk-def-sfb-condensed-ring to stmt_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarComp",
+  "statement": "noncomputable def leftDerivedUpperStarComp {Z : Scheme.{u}} (g : Y ⟶ Z) :\n    L((f ≫ g)^*⟦Λ⟧) ≅ L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧) :=",
+  "branch": "slopmaster2",
+  "by": "Q27",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing declaration in the published pro-etale module-object framework, read from the shared side source and confirmed with scompile.py --source. In the module context Λ is a commutative condensed ring object on the coherent profinite site, f : X ⟶ Y is fixed, and g : Y ⟶ Z is arbitrary. The declaration has exactly the node’s natural isomorphism L((g ∘ f)^*) ≅ Lf^* ⋙ Lg^* after translating Lean composition (f ≫ g) and diagrammatic functor composition (g)^* ⋙ (f)^*. Its construction is Functor.leftDerivedFunctorNatIso applied to the underived module-object upperStarComp, followed by Functor.leftDerivedFunctorCompIso. No duplicate module is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6559f0785",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Existing-declaration binding to ProEtale.CondensedRing.leftDerivedUpperStarComp (ModuleObject/Derived/UpperLowerStar.lean). Signature checked with #check on the live build: arbitrary commutative condensed Λ (MonObj+IsCommMonObj), arbitrary f : X ⟶ Y and g : Y ⟶ Z in Scheme.{u}, L((f≫g)^*) ≅ L(g^*) ⋙ L(f^*) on unbounded D(Mod_{Λ_T}). Direction matches L(g∘f)^* ≅ Lf^*∘Lg^*. Statement field verbatim. Body leftDerivedFunctorNatIso(upperStarComp) ≪≫ leftDerivedFunctorCompIso is the canonical exact-derived/levelwise transport, which is the node's proof route, so the isomorphism is induced by b. upperStarComp is exactly the leftAdjointCompIso conjugate formula of the dependency's mathlib_match (one definition per notion). Lf^* is the same generic leftDerivedFunctor as the landed sk-def-sfb-module-derived-pushpull record. lcompile check file: exit 0, axioms only propext/Classical.choice/Quot.sound. nt_compile of the side copy shows only already-declared errors from its duplicated compatibility block (known stale-clone artifact, not this declaration; identical declaration text live). No hollow definitions, no extra hypotheses, no new proofs, report sections present. No findings."
  }
 }

@@ -1,0 +1,119 @@
+{
+ "id": "def-per-integral-lisse-reduction-data",
+ "kind": "definition",
+ "title": "Integral lisse coefficient and reduction data",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and a scheme $X$ [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site]. Use the continuous coefficient sheaves $A_X,E_X$ [def-weil-pbc-lisse-lattice-coefficients] and constant sheaves [def-weil-pbc-constant-sheaf]. Define the underlying ring sheaf of $A_X$, its continuous quotient sheaves $(A/\\varpi^{n+1})_X$, their pointwise reduction and transition maps, and constant sections. In the sheaf module categories [def-weil-sheaf-of-modules-category], define multiplication by integral constants and the quotient predicate by its cokernel universal property (equivalently the sheaf tensor quotient [def-pur-sheaf-tensor-product]). Define integral lisse modules as the full subcategory of locally finite free $A_X$-modules, with rank zero and locally varying ranks allowed; define normalized positive reduction towers as inverse systems whose levels are restrictions of locally finite free quotient modules and whose adjacent transition is the quotient by $\\varpi^{n+1}$. Define $\\mathrm{IntegralLisseReductionEquivalence}(\\ell,E,X)$ as the TYPE of coefficient identifications and reduction-equivalence data: finite constant identifications fixed on constant sections; the continuous coefficient cone fixed on every reduction and its limit property; the scalar cokernel properties; the localization cocone at $\\ell$, fixed by $a\\mapsto\\ell^{-n}a$ in $E_X$, and its colimit property; an equivalence from integral lisse modules to normalized towers whose reduction components are the scalar quotients and whose inverse has the actual limit cone, with naturality on all morphisms and unit and counit fixed on every projection. This defines a type of such data and asserts no inhabitance.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral lisse reduction tower coefficient limit quotient localization equivalence data",
+   "results": "8 hits: localizedQuotientEquiv; instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient; instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences; InfiniteGalois.algEquivToLimit; instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences; Submodule.toLocalizedQuotient'_mk; ProfiniteGrp.isIso_toLimit; Algebra.Generators.cotangentCompLocalizationAwayEquiv.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing published definitions in Sheaf.SixFunctors.IntegralLisseReductionEquivalence via an existing:true record; no definition is copied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral lisse sheaf normalized reduction tower coefficient limit localization equivalence specification",
+   "results": "8 hits in AlgebraicGeometry.Scheme.Hom normalization API (normalizationDiagram, preservesLocalization_normalizationDiagramMap, normalizationDesc, ι_toNormalization, ι_fromNormalization, toNormalization_normalizationDesc_assoc, instIsIntegralHomFromNormalization, instIsIntegralNormalization).",
+   "date": "2026-10-18",
+   "verdict": "No specialized definition matches."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLisseRing|supportSiteComparisonCoefficientPullback|IntegralLisseReductionEquivalence (Mathlib, WeilConjectures, lean/Sheaf and dag/nodes); blueprint_refs.py search lisse reduction / comparison pullback",
+   "results": "msearch Mathlib: 0 hits; upstream WeilConjectures: 0 hits. lean/Sheaf finds exactly the definitions in IntegralLisseReductionEquivalence and SupportComparisonPullbackCoherence and their consumers. DAG records only their theorem-node ownership; no definition node owns them. blueprint search lisse reduction: 0; comparison pullback: 6 unrelated nodes.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing published definitions in Sheaf.SixFunctors.IntegralLisseReductionEquivalence via an existing:true record; no definition is copied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-lisse-completed-system-comparison",
+  "date": "2026-10-18",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Integral coefficient, scalar quotient, normalized reduction and limit-cone interfaces used to formulate the completed lisse comparison.",
+   "via": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralLisseReductionEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLisseRing",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteRing",
+   "AlgebraicGeometry.ProEtale.integralLisseReduction",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteConstant",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteTransition",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteDiagram",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteRestriction",
+   "AlgebraicGeometry.ProEtale.integralLisseScalar",
+   "AlgebraicGeometry.ProEtale.IsIntegralLisseQuotient",
+   "AlgebraicGeometry.ProEtale.IntegralLisseModule",
+   "AlgebraicGeometry.ProEtale.IsIntegralReductionTower",
+   "AlgebraicGeometry.ProEtale.IntegralReductionTower",
+   "AlgebraicGeometry.ProEtale.integralLisseRingMap",
+   "AlgebraicGeometry.ProEtale.integralLisseFraction",
+   "AlgebraicGeometry.ProEtale.IntegralLisseReductionEquivalence"
+  ],
+  "statement": "structure IntegralLisseReductionEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Reuse the exact published definitions, including all supporting declarations, in Sheaf.SixFunctors.IntegralLisseReductionEquivalence. The prior extraction duplicated those declarations; no copied definition or dependency-module replacement is delivered. This definition node records the existing type/predicate and does not assert its inhabitance/coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7704166b0",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7704166b0",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Head 7704166b02bf repairs both earlier returns. (1) The 88a3b6 return said the statement dependencies cited two theorem nodes only for their definitions. The item now cites two new definition nodes instead: def-per-integral-lisse-reduction-data and def-per-site-comparison-pullback-data. Both are existing:true records of the published declarations in Sheaf.SixFunctors.IntegralLisseReductionEquivalence and Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence. The theorem nodes stay as proof dependencies. (2) L's 8a66bc return found duplicate declarations; there are no copied modules now. The side DAG has 21 landed precedents of this pattern. Each new node statement matches the published structure or predicate field by field. The pullback node records that nu_X^* is definitionally comparisonUpperStar. stage2_delivery.check_existing and check_new_node report no failures for either node. No other node in the side DAG records these declarations except the two owning theorem nodes. The item module is byte-identical to the 88a3b6 module that was reviewed in full. Outside the lean record, the only item-node change is the two statement-dependency swaps, and lean.statement is verbatim. On my own re-reading, every hypothesis and conclusion clause matches the node and BS 6.8.2, 6.8.4(1),(4) and 5.1.5. Specifically: IsFreeSystem keeps the towers finite free; the inverse limit is pinned by IsLimit; rational realization is fully faithful with no essential surjectivity; pullback, ramified coefficient extension at sourceIndex, and identity/composition equations are all pinned. Edge cases checked: empty X, rank 0 and varying rank, index 0 = A/varpi, e=2. Single explicit universe u; no hollow definitions; the only sorry is the item theorem, with the ten-step proof docstring. nt_compile per-file compile: 57.3 s, exit 0, clean."
+ }
+}

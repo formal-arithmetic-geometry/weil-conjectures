@@ -260,5 +260,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperUnboundedWindowBounded",
+  "declaration": "AlgebraicGeometry.ProEtale.properUnboundedWindowBounded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properUnboundedWindowBounded",
+   "AlgebraicGeometry.ProEtale.properUnboundedWindowBounded_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/ProperUnboundedWindowBounded.lean",
+  "statement": "theorem properUnboundedWindowBounded (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] (a b : ℤ) (I : Type (u + 1)) (M : I → DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X)) (hM : ∀ (i : I) (r : ℤ), ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ r).obj (M i))) (hbound : ∀ (i : I) (r : ℤ), r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj (M i))) : ∃ (c : Cofan M) (_ : IsColimit c) (d : Cofan (fun i ↦ (CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj (M i))) (hd : IsColimit d), IsIso (hd.desc (Cofan.mk ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj c.pt) (fun i ↦ (CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map (c.inj i))))",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb8ecbe2d",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Checked every clause against the node and source place. Λ=E is continuousMapRingObj on a finite subextension of PadicAlgCl ℓ; Λ=Qlb is padicAlgClRingObj (maps valued in some finite subextension, as the qlbar node defines it). Also matched: IsProper with no extra hypotheses, DerivedCategory of pulledBackModuleObjects, IndCons as ObjectProperty.ind.{u+1} of the recorded IsConstantModelConstructible on every cohomology object, F = rightDerivedFunctor of the full lowerStar composite, I : Type (u+1), bounds with no a≤b. The conclusion exhibits the ambient coproduct cofans and makes the canonical desc (fac: d.inj i ≫ η = F.map (c.inj i)) an iso, independent of the cofans chosen. Edge cases (empty I, a>b, a=b, ℓ=2) are covered. lean.statement matches the file verbatim, there are only 2 sorry and no definitions, the docstrings carry source, blueprint and proof steps, and the report has both sections. nt_compile.py: rc 0, 11.2 s, no errors or warnings. Notes only: Type-0 continuousMapRingObj is consistent with the dependency's note and the landed siblings; the qlbar node has no lean record but the published declaration is exact."
  }
 }

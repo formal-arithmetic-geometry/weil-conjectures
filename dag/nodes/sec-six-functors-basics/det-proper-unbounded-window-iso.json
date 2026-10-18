@@ -213,5 +213,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperUnboundedWindowIso",
+  "declaration": "AlgebraicGeometry.ProEtale.proper_unbounded_window_iso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proper_unbounded_window_iso",
+   "AlgebraicGeometry.ProEtale.proper_unbounded_window_iso_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/ProperUnboundedWindowIso.lean",
+  "statement": "theorem proper_unbounded_window_iso (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] (d : ℤ) (hd : ∀ (y : Y) (n : ℕ), (n : WithBot ℕ∞) ≤ topologicalKrullDim ↥(pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)) → (n : ℤ) ≤ d) (K : DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X)) (hK : ∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj K)) (q : ℤ) : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj K)) ∧ ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj ((DerivedCategory.TStructure.t.truncLE q).obj K))) ∧ ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj ((DerivedCategory.TStructure.t.truncGE (q - 2 * d - 1)).obj ((DerivedCategory.TStructure.t.truncLE q).obj K)))) ∧ IsIso ((DerivedCategory.homologyFunctor _ q).map ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map ((DerivedCategory.TStructure.t.truncLEι q).app K))) ∧ IsIso ((DerivedCategory.homologyFunctor _ q).map ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map ((DerivedCategory.TStructure.t.truncGEπ (q - 2 * d - 1)).app ((DerivedCategory.TStructure.t.truncLE q).obj K))))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two declarations state the finite-subextension and condensed-algebraic-closure cases respectively. Ambient IsIso for the specified canonical maps, together with all three explicit IndCons membership assertions, is equivalent to isomorphism in that full subcategory. The integer dimension bound includes negative bounds and empty geometric fibres."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3cf661f8",
+  "group": "Q93",
+  "result": "pass",
+  "note": "3-file delivery (module, node lean record, report with Worker report and the standard Second reading stub). The statement matches the node clause by clause: two theorems (Λ=E via Profinite.continuousMapRingObj E, Type-0 E, the upstream and landed-sibling convention; Λ=Q̄ via padicAlgClRingObj), Dic via ind.{u+1} IsConstantModelConstructible on homologyFunctor in every degree, Rp_* = (CondensedRing.lowerStar Λ p).rightDerivedFunctor, canonical truncLEι/truncGEπ at q and q-2d-1, conclusion = 3 IndCons memberships + 2 IsIso (exact for a full subcategory). The integer bound hd is exactly dim ≤ d, including d<0 (empty fibres) and dim=⊤ excluded. The geometric fibre is the recorded pullback along the residue-field algebraic closure. No extra hypotheses; no unbound universes. Gates: no definitions, sorry-only proofs (print axioms), source/blueprint docstrings with proof steps, statement verbatim. nt_compile.py: clean, about 29 s; #check confirmed the elaborated types. Minor: an unused public import."
  }
 }

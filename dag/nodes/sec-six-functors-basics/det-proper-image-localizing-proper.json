@@ -211,5 +211,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProperImageLocalizingProper",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingHypotheses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
+   "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper_coefficients"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProperImageLocalizingProper.lean",
+  "statement": "theorem proper_image_localizing_proper (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : Λ ∈ [Mon.mk (Profinite.continuousMapRingObj A), Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ]), Mon.mk (Profinite.padicIntegersRingObj ℓ E.val), Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ]), Mon.mk (Profinite.continuousMapRingObj E), Mon.mk (Profinite.padicAlgClRingObj ℓ)]) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] : ProperLocalizingHypotheses Λ.X p → ProperLocalizingRestriction Λ.X p",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Aggregate statement: proper_image_localizing_proper is the conditional restriction; proper_image_localizing_proper_coefficients proves its two hypotheses in the standing scheme setting for exactly the six admissible coefficient cases. The two real-data Prop definitions only expand the hypotheses and conclusion of this node. The coefficient is bundled in Mon, so list membership identifies its multiplication as well as its underlying sheaf. No statement or dependency changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d851eb53",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Commit 7d851eb touches only the report, the item node's lean field, and the new module ProperImageLocalizingProper.lean; lean.statement is verbatim in the file. Conditional theorem matches the node: six bundled admissible coefficients (finite discrete A : Type, Z_l, O_E via padicIntegersRingObj, Q_l, E, finite-subextension Qbar padicAlgClRingObj), ordinary unbounded module-object derived category, hypothesis 1 = full Dbc ⊓ finiteTorAmplitude preservation, hypothesis 2 = PreservesColimit only for families in localizingClosureProEtale, conclusion = canonical ObjectProperty.lift that IsTriangulated and preserves Discrete-indexed colimits. Coefficient theorem has exactly the sk-def-sfb-dc-setting hypotheses (char k prime, ≠ l, separated finite-type over k, k-morphism, proper). Universes: category is Category.{u+1,u+2}; sum index Type (u+2) matches the landed closure definition and is mathematically equivalent to small sums; no site-universe restriction. No duplicate notion; Prop defs have real bodies; only the two theorems use sorry (#print axioms); docstrings carry source and blueprint tag and the proof steps. Worker report and the self-declared Q91 second reading are present. nt_compile.py on the snapshot module is clean (3.8 s, no errors or warnings). No findings."
  }
 }

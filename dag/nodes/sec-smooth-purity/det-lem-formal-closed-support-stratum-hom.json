@@ -25,7 +25,9 @@
   "def-pur-sheaf-hom",
   "def-pur-sheaf-tensor-product",
   "def-pur-hom-complex",
-  "def-pur-ringed-site-zeroth-hypercohomology"
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-condensed-finite-locally-projective",
+  "def-pur-admissible-condensed-ring"
  ],
  "proof": [
   {
@@ -236,5 +238,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportStratumHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_stratum_globalHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumGlobalRHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumRGamma",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDual",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor_derived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_stratum_globalHom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportStratumHom.lean",
+  "statement": "theorem closedSupport_stratum_globalHom {S Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (uS : S ⟶ Z) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion uS] (hij : Set.range i.base = (Set.range j.base)ᶜ) (_hΛ : IsAdmissibleCoefficient Λ) (L : supportModules Λ S) (hL : IsFiniteLocallyProjective Λ S L) : Nonempty (stratumGlobalRHom Λ X ((lowerStar Λ i).obj ((openImmersionLowerShriek Λ uS).obj L)) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ stratumGlobalRHom Λ Z ((openImmersionLowerShriek Λ uS).obj L)) ∧ Nonempty ((closedSupport Λ i j).rightDerivedFunctor ⋙ stratumGlobalRHom Λ Z ((openImmersionLowerShriek Λ uS).obj L) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumGlobalRHom Λ S L) ∧ Nonempty ((closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumGlobalRHom Λ S L ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumDualTensor Λ S L hL ⋙ stratumRGamma Λ S) ∧ ∀ q : ℤ, Nonempty (shiftFunctor (DerivedCategory (supportModules Λ X)) q ⋙ preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor (supportModules Λ X) 0).obj ((lowerStar Λ i).obj ((openImmersionLowerShriek Λ uS).obj L)))) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumDualTensor Λ S L hL ⋙ stratumRGamma Λ S ⋙ DerivedCategory.homologyFunctor Ab.{u + 1} q)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three comparisons are isomorphisms of functors on the whole unbounded derived category. The fourth conjunct is a natural isomorphism of abelian-group-valued functors for each integer. Helpers define global RHom, R-Gamma, the ordinary sheaf dual and termwise dual tensor; the two auxiliary theorems state exactness and agreement with the existing derived tensor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3effb3e95",
+  "group": "Q20",
+  "result": "pass",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

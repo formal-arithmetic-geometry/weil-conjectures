@@ -125,23 +125,25 @@
    "CategoryTheory.derivedInternalHomOfUniverses_inverts",
    "CategoryTheory.derivedInternalHomOfUniverses",
    "CategoryTheory.derivedInternalHomOfUniverses_comparison",
-   "CategoryTheory.derivedInternalHomOfUniverses_obj_iso"
+   "CategoryTheory.derivedInternalHomOfUniverses_obj_iso",
+   "AlgebraicGeometry.Etale.derivedHom",
+   "AlgebraicGeometry.Etale.derivedTensorHomAdjunction"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomOfUniverses.lean",
   "statement": "def derivedInternalHomOfUniverses {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] : (DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ⥤ DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))",
   "branch": "newtargets-dag",
-  "by": "Q05",
-  "date": "2026-10-15",
+  "by": "NW",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "§1(B): the recorded derivedInternalHom requires SmallCategory C and fixes both coefficients and modules to the site object universe. The small pro-etale site instead has object universe t+1, morphism universe t, and coefficients max u (t+1). Retain the old interface through its public import and supply the same Hom-complex/product-localization construction with independent site universes and coefficients max c v r. The module uses the canonical small-object K-injective replacement, not an arbitrary Hom functor or an assumed comparison. The second reading also retains the node’s comparisons with every functorial K-injective replacement and arbitrary source/K-injective target representatives at these same independent universes."
+  "note": "§1(B), returned H4/H13: retain this dependency's complete generic ringed-site internal Hom construction, independent universes, localization proof, all functorial-replacement comparisons and arbitrary-representative comparisons unchanged. Add only a public import of WeilConjectures.SixFunctors.Etale.Derived.Hom, whose existing derivedHom and derivedTensorHomAdjunction provide the canonical ordinary-etale fixed-coefficient presentation needed by the item. Importing the original generic module alone did not expose those names, as the dry-run probe showed; preflight requires retaining the defining module for the generic primary declaration. This dependency-module repair satisfies both requirements without copying or redefining the ordinary-etale Hom, choosing arbitrary data, assuming a closed structure, or dropping the generic construction.",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomOfUniverses.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-06c02526a",
-  "group": "Q05",
+  "reviewer": "NT-stage2-cc-3f43e3118",
+  "group": "NW",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
+  "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

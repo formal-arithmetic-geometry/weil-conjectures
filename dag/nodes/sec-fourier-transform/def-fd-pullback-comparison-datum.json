@@ -1,0 +1,102 @@
+{
+ "id": "def-fd-pullback-comparison-datum",
+ "kind": "definition",
+ "title": "Simultaneous whole-tower pullback comparison datum",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. For noetherian finite-dimensional schemes $T$ with $\\ell$ invertible, use the coefficient comparison data of [def-fd-coefficient-comparison-datum]. A simultaneous pullback comparison datum consists of one such coefficient datum for every $T$, an integral whole-diagram realization system of [lem-trf-integral-pullback-comparison-realization] satisfying its composition, unit, scalar and associator normalizations for every inclusion of finite coefficient fields, and the following data for every scheme isomorphism $h:U\\simeq T$. It supplies a finite pullback comparison datum of [def-fd-finite-pullback-comparison-datum] for every finite coefficient field, and a natural isomorphism on the common-stage pair categories. The framework stage family has the actual rational pullbacks and scalar comparisons of [def-weil-derived-pullback-tensor-hom], and descends to its actual common-stage pullback. The target stage family is the actual PBC pullback family of [def-weil-pbc-completed-pullback]. The two composite coefficient/pullback stage-system morphisms are connected by a compatible transformation whose finite components are the specified finite rational comparison; this is exactly the mixed scalar square. At each literal pair the common-stage natural isomorphism is the finite-stage inclusion of that rational component. This definition asserts no existence and leaves identity/composition compatibility of the inter-system scheme comparison to the owning existence theorem.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence: local Frobenius operators computed in the coefficient category def-weil-pbc-qbar-category; comparison with the framework finite stages used to define those operators"
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-fd-finite-pullback-comparison-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent datum of finite rational coefficient equivalences with normalized scalar comparisons and common-stage equivalence",
+   "results": "8 hits: Submodule.quotientEquivDirectSum, Equiv.smul, Finite.algEquiv, LinearEquiv.ofFinrankEq, ratCast_smul_eq, Equiv.ratCast, LinearIsometryEquiv.mk.noConfusion, LinearIsometryEquiv.noConfusion",
+   "date": "2026-10-18",
+   "verdict": "no match: these do not package the two recorded constructible systems with their canonical maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent comparison datum for rational constructible coefficient systems with scalar cocycle and canonical pullback tower comparison",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.Pullback.cocycle, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-18",
+   "verdict": "no match for these two recorded systems"
+  },
+  {
+   "tool": "grep",
+   "query": "(Coefficient|Pullback).*Comparison.*(Data|Datum|System)",
+   "results": "msearch CategoryTheory: 0 hits. rg in WeilConjectures and lean/Sheaf for FdCoefficientComparison|coherent.*comparison.*datum|PullbackComparisonSystem: 0 hits. blueprint_refs.py search coefficient comparison datum: 0 blueprint nodes; rg comparison datum|comparison data|whole.tower comparison in dag/nodes/sec-fourier-transform: 0 hits. Whole-DAG exact comparison-datum and Fd declaration-name search: no match. Broad comparison-data search yields unrelated affine, Cech, six-functor and condensed comparisons; the coherent-pullback, condensed-coefficient and ambient-complete-raw-system definition nodes concern other data, not this pair of coefficient presentations.",
+   "date": "2026-10-18",
+   "verdict": "the comparison data are not an existing notion or node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-rational-coefficient-category-comparison",
+  "date": "2026-10-18",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence: local Frobenius operators computed in the coefficient category def-weil-pbc-qbar-category; comparison with the framework finite stages used to define those operators",
+   "via": [
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.FdCoefficientComparisonSystem",
+  "declaration": "WeilConjectures.FdCoefficientComparisonSystem",
+  "declarations": [
+   "WeilConjectures.FdPullbackSystem",
+   "WeilConjectures.FdCoefficientComparisonSystem"
+  ],
+  "file": "lean/Sheaf/Paper/FdCoefficientComparisonSystem.lean",
+  "statement": "structure FdCoefficientComparisonSystem",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cbd3ef79",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cbd3ef79",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read all four delivered modules, node JSONs and the key dependency declarations (IntegralPullbackComparisonRealization, DerivedPullbackTensorHom, IntegralOperationsScalarComparisons, IntegralStratifiedPerfectCharacterization, SfWeilSheafComplex, StageSystem, IsoAlgebra.mapOfNatIso). Clause-by-clause: hypotheses exact (stalk-invertibility = PBC interface; residue Invertible derived); J_{T,E} pinned by integral_identity/objects/tensors, exact both ways; beta pinned to chi via integral_scalar_lift/chi/ordinary.completion with direction PBC->SF so j=beta^{-1}; cocycle=family.coh, shifts; pair functor = family.functor, exact, Omega-linear, no Karoubi; pullback pinned by whole-tower FdPullbackChain + normalization, mixed square, pair_components; FdComparisonSchemeCoherence fixes unit/composition/scalar to lem-trf and PBC canonical isos; Frobenius pairs via IsoAlgebra.mapOfNatIso for separated finite-type X0. Verified in Lean that the HEq-related types coincide (Stage = sfRational over pbcFiniteField by rfl; sfCommonStageWeilComplex and sfWeilComplex equal the IsoAlgebra types by congr). nt_compile --json on all four files: clean, 21.4/23.4/7.2/4.7 s; sorry only in the final theorem (axioms checked). lean.statement verbatim for all four nodes; docstrings/source/blueprint present; report sections present. Remarks only: simultaneous realization coherence for all E<=L is the item's own obligation; scheme coherence is stated integrally, and the rational/common-stage versions follow from the pins."
+ }
+}

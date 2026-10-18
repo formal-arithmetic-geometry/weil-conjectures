@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-proetale-trace-coefficient-interfaces",
+ "kind": "definition",
+ "title": "Canonical internal-module trace coefficient interfaces",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $R_Z=\\Lambda_Z$ its pulled-back ring on the small pro-etale site of a scheme $Z$ [sk-def-sfb-pulled-back-coefficients] [def-weil-pbc-proetale-site], and $D(Z)=D(\\operatorname{Mod}_{R_Z})$ the ordinary unbounded internal-module derived category [sk-def-sfb-module-derived-pushpull], with relative derived tensor and unit $R_Z$ [sk-def-sfb-derived-tensor-hom]. For a scheme map $h:Z\\to B$, use the published aliases $\\operatorname{tracePull}_h=Lh^*$ and $\\operatorname{tracePush}_h=Rh_*$ for the total derived module functors [sk-def-sfb-module-derived-pushpull]. Put $\\operatorname{TraceLoc}(Z)=\\operatorname{Loc}(\\operatorname{Dbc}(Z,\\Lambda))$, with exactly the constant-model bounded constructibility predicate [sk-def-sfb-constructible] and localizing closure [sk-def-localizing-closure]. For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ inside its fixed algebraic closure, at coefficients $\\Lambda=\\mathcal O_E$ put $\\operatorname{traceTate}(Z)=R_Z(1)[2]$, the integral Tate module of [sk-def-sp-tate-twist] placed in degree zero and shifted by $2$. The ordinary internal-module inverse image has the specified strong monoidal core characterized uniquely by the universal tensor-section normalization: the adjunction unit sends the universal tensor of two sections to the tensor of their universal pullback sections, and the unit comparison on the regular module is the coefficient map $\\alpha_h$ [sk-def-sfb-pulled-back-coefficients] [def-sfb-module-derived-pushpull-adjunction]. Denote this predicate by $\\operatorname{CondensedTensorNormalization}$, its published unique-existence helper by $\\operatorname{condensedTensorCore\\_existsUnique}$, the core selected from that unique-existence theorem by $\\operatorname{condensedTensorCore}$, and its induced monoidal structure by $\\operatorname{condensedUpperStarMonoidal}$. The canonical unit comparison $\\operatorname{condensedDerivedUnitIso}:Lh^*R_B\\simeq R_Z$ is computed in degree zero from this normalized ordinary unit map, using the existing derived-to-complex comparison and the single-complex functor. All these are the existing declarations in Sheaf.Paper.TraceBaseChangeFirst; no assertion about either trace triangle is part of this interface.",
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sp-tate-twist",
+  "def-sfb-module-derived-pushpull-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), canonical internal-module operations, integral Tate line and coefficient unit used by the trace triangles; Stacks 03EL and 07A4 for normalized tensor pullback and the derived unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback unit comparison and localizing closure of constructible internal proetale module derived categories",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Limits.pullbackComparison; CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_app; SheafOfModules.pullback; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction.",
+   "date": "2026-10-18",
+   "verdict": "Only generic sectionwise-module and category interfaces; reuse the exact published internal-module definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical integral Tate twist shifted by two and derived module pullback unit comparison",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib specialization; use the existing TraceBaseChangeFirst declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "CondensedTensorNormalization|condensedTensorCore|condensedDerivedUnitIso|traceTate|TraceLoc",
+   "results": "msearch.py Mathlib grep: 0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib duplicate."
+  },
+  {
+   "tool": "rg",
+   "query": "CondensedTensorNormalization|condensedTensorCore|condensedDerivedUnitIso|traceTate|\"[^\"]*TraceLoc\" in dag/nodes, lean/Sheaf and /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "lean/Sheaf/Paper/TraceBaseChangeFirst.lean; dag/nodes/sec-six-functors-basics/lem-sfb-trace-base-change-first.json; dag/nodes/sec-six-functors-basics/det-thm-int-restriction-line.json. No separate definition node found; the first node carries the theorem as its primary declaration and the latter uses a trace in its formula.",
+   "date": "2026-10-18",
+   "verdict": "Existing definitions in the published first-triangle module; add only an existing:true definition-node binding as requested by the independent return, without editing its owner record."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'trace unit comparison'",
+   "results": "0 blueprint nodes match 'trace unit comparison'",
+   "date": "2026-10-18",
+   "verdict": "No separate blueprint definition node for the imported interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trace-base-change-second",
+  "date": "2026-10-18",
+  "group": "Q17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "(1), second triangle: canonical module functor aliases, localizing category, even shifted Tate line and coefficient unit comparison",
+   "via": [
+    "lem-sfb-trace-base-change-second"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "module": "Sheaf.Paper.TraceBaseChangeFirst",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tracePull",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceD",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePush",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceLoc",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceTate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CondensedTensorNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore_existsUnique",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedUpperStarMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedUnitIso"
+  ],
+  "statement": "def tracePull {Z B : Scheme.{u}} (h : Z ⟶ B) : TraceD Λ B ⥤ TraceD Λ Z ",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing published definitions, recorded separately from the unused first-triangle theorem as required by the independent return of ef40e3e6000f. The unique-existence helper determines the ordinary tensor core uniquely; condensedDerivedUnitIso uses that core, not trace_base_change_first. No source re-declaration or change to the Q16 owner record."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6110e3efb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6110e3efb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after the ef40e3e6 RETURN (H2). Both Lean modules are byte-identical to ef40e3e6, which was otherwise correct. The new existing:true def node def-sfb-proetale-trace-coefficient-interfaces covers TraceD, tracePull, tracePush, TraceLoc, traceTate, CondensedTensorNormalization, condensedTensorCore_existsUnique, condensedTensorCore, condensedUpperStarMonoidal and condensedDerivedUnitIso. All exist in live TraceBaseChangeFirst; the primary statement is verbatim (line 317). It omits trace_base_change_first, TraceFirstAssertion and TraceFirstHypotheses. Its citations equal its stmt_deps (8 foundational nodes), and the Q16 owner record is untouched. The item and def-sfb-proetale-projection-exchange-maps now cite it in place of lem-sfb-trace-base-change-first. The delivered modules use only TraceLoc, tracePull, tracePush, traceTate and condensedDerivedUnitIso (plus the monoidal instance), all covered by the new node. Acyclic (2222, 2224 and 2280 reached nodes). Item vs live differs only in lean and stmt_deps; the dependency records equal live. nt_compile --json rc 0, no warnings: TraceBaseChangeFirst 38.0 s, ProEtaleProjectionExchangeMaps 36.7 s, TraceBaseChangeSecond 50.3 s. Non-blocking: TraceDerived/traceSquarePullback near-duplicate TraceD/tracePullSquare; the tensor and unit comparisons are separately normalized; maintainer note that the node lists Q16's sorry helper condensedTensorCore_existsUnique, whose content is stated in the node."
+ }
+}

@@ -24,7 +24,9 @@
   "lem-coef-semilinear-derived-sections",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-weil-pbc-mate-pasting"
+  "lem-weil-pbc-mate-pasting",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows"
  ],
  "proof": [
   {
@@ -347,5 +349,35 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-16a4475a2 (reviewer sub-agent of L); spot-checked: I read the item in full: all 11 steps and every cited node's statement. I checked the cited sources: Stacks more-etale 0F7B/0F7C/0F7D with their proofs, and the Local pairs paragraph of main-20261015 det-sp-tower-gluing. The pasting orders match 0F7C (vertical, (Rp2*γQ1)∘(γQ2 Rr1*)) and 0F7D (horizontal, (γQ2 k!)∘(j! γQ1)). The statement is not weakened. It holds for any inverse sequence of rings, and the parent's Tow(T,O_E) is the case R_n=A_n. The base change is the clopen-projection α followed by its proper-adjunction mate, normalized exactly as in lem-cbc-strict-tower-proper-open-calculus. Checks: s=(k,r) is clopen because it is an étale monomorphism and proper over S. The vertical and horizontal nested-projection calculations hold (the section label is r2r1(v) because j is mono). Substituting into the mate definition gives the displayed γ_Q. Clause 1/2 substitutions of lem-weil-pbc-mate-pasting give both displayed laws. Identity cases hold via clause 4. Small cases tested: zero ring, empty V, cartesian square, a two-point W over a point, nested components. There are no new nodes and no cycle. lem-sf-integral-compactification-system-realization is narrower (A_n systems, constructible inputs only), so it is not a duplicate. No SGA is used. Repairs, written as a whole corrected node in fixes/: (1) step 2 inferred that module pullback equals abelian inverse image for arbitrary R_n from def-weil-proetale-inverse-image alone, which needs c^f to be an isomorphism. It now cites lem-pe-constant-left-module-inverse-image (any ring), with proof_deps and tool_uses updated. The finite-ring prop-weil-pbc-proetale-constant-ring-map would not do. (2) Step 10 now also cites clause 3(a),(b) of lem-weil-pbc-mate-pasting to move the mates from the composite adjunctions to (p2p1)^*⊣R(p2p1)_* and (r2r1)^*⊣R(r2r1)_*. The statement and stmt_deps are unchanged. I accept the declared tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.properOpenPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.modulePi_components",
+   "AlgebraicGeometry.ProEtale.VaryingRing.moduleAlpha_vertical",
+   "AlgebraicGeometry.ProEtale.VaryingRing.moduleAlpha_horizontal",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alpha_vertical",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alpha_horizontal",
+   "AlgebraicGeometry.ProEtale.VaryingRing.properOpenPasting",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alpha_identities",
+   "AlgebraicGeometry.ProEtale.VaryingRing.gamma_identities",
+   "AlgebraicGeometry.ProEtale.VaryingRing.gamma_evaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean",
+  "statement": "theorem properOpenPasting : (∀ {A C E B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F) (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact i] [QuasiCompact j] [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂] (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j) (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j) (M : Derived R φ A), (J R φ j).map ((pComp R φ r₁ r₂).hom.app M) ≫ (gamma R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app M ≫ (pComp R φ p₁ p₂).inv.app ((J R φ k).obj M) = (gamma R φ i r₂ p₂ j h₂).app ((P R φ r₁).obj M) ≫ (P R φ p₂).map ((gamma R φ k r₁ p₁ i h₁).app M)) ∧ (∀ {A C E B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F) (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F) [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact l] [QuasiCompact i] [QuasiCompact j] [IsProper r] [IsProper p] [IsProper q] (h₁ : k ≫ p = r ≫ i) (h₂ : l ≫ q = p ≫ j) (h : (k ≫ l) ≫ q = r ≫ (i ≫ j)) (M : Derived R φ A), (jComp R φ i j).hom.app ((P R φ r).obj M) ≫ (gamma R φ (k ≫ l) r q (i ≫ j) h).app M ≫ (P R φ q).map ((jComp R φ k l).inv.app M) = (J R φ j).map ((gamma R φ k r p i h₁).app M) ≫ (gamma R φ l p q j h₂).app ((J R φ k).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The remaining clauses are modulePi_components, moduleAlpha_vertical, moduleAlpha_horizontal, alpha_vertical, alpha_horizontal, alpha_identities, gamma_identities and gamma_evaluation. The two new definitions supply the canonical scheme operations and intrinsic arrows missing from the generic semilinear interface; no item statement was changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9d02ffb5",
+  "group": "Q47",
+  "result": "pass",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

@@ -225,5 +225,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-d4c0375dc (reviewer sub-agent of L); spot-checked: Mathematics and citations check out. The item metadata incorrectly records created.item as lem-sfb-ringed-site-kflat-stalk-criterion and created.group as Q63; corrected JSON is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ringed-site-restriction-kflat.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat",
+  "declaration": "SheafOfModules.ringedSite_restriction_exact_kflat",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteRestrictionKFlat.lean",
+  "statement": "theorem ringedSite_restriction_exact_kflat {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max u v w}) (U : C) : PreservesFiniteLimits (localizedSystemRestriction.{u, v, w} R U) ∧ PreservesFiniteColimits (localizedSystemRestriction.{u, v, w} R U) ∧ ∀ K : CochainComplex (SheafOfModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := R) K → CochainComplex.IsKFlatIndependentCoefficients (R := R.over U) (((localizedSystemRestriction.{u, v, w} R U).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80f431dcb",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0E8K clause by clause: exactness of restriction (PreservesFiniteLimits and PreservesFiniteColimits of localizedSystemRestriction, an abbrev of Mathlib overFunctor), and for every unbounded K, IsKFlatIndependentCoefficients over R implies the same over R.over U for the termwise restriction. Recorded dependency declarations used, no extra hypotheses (no boundedness, flatness, subterminal U or universe equality; coefficient universe max u v w with w free). Single sorry theorem, no definitions; docstrings carry source, blueprint and all five proof steps; lean.statement verbatim; Worker report and Second reading sections present. nt_compile.py --json on the snapshot: exit 0, no diagnostics, 3.0 s; a control mutation (R.over U replaced by R) fails as expected. Minor: two imports used only by the docstring's proof plan and the stmt-dep site-axioms import; not blocking."
  }
 }

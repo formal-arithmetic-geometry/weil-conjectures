@@ -20,7 +20,8 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-size-convention",
   "def-pur-finite-pullback-tensor-comparison",
-  "lem-weil-structure-direct-images-constructible"
+  "lem-weil-structure-direct-images-constructible",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof": [
   {
@@ -265,32 +266,31 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-15b5e89b6",
-  "group": "NN",
-  "result": "pass",
-  "note": "Clause-by-clause match with the node and the main-20261015 source: canonical comparison = finiteIntrinsicTranspose of (canonicalFinitePullbackTensor).inv ≫ F(finiteIntrinsicEvaluation), not an arbitrary iso. IsIso, two-variable naturality for arbitrary maps, the N-shift square (NatTrans.CommShift equation over ℤ) and the triangle morphism with all three components are stated. The extra M-shift clause is backed by DAG proof step 6. Hypotheses are not stronger: g≫a_X is LFT+QC, M is only site-perfect, N is ctf; ℓ-invertibility instances are built without new hypotheses. Mechanical finding on lem-weil-structure-direct-images-constructible: only the postponed lemma finiteFieldDatumPrimeUnit (IsUnit ℓ in k) is used, to build the Invertible instances the comparison needs, and no definition of that module is used. The statement genuinely needs that theorem's conclusion; the edge already exists via def-trf-coefficient-conventions→def-weil-ordinary-compact-cohomology; no cycle (script check). PASS on that point. Verified by rfl that T.coefficientRing = finiteCoefficientRing at T.level. lean.statement is verbatim; docstrings and blueprint tags are present; the only sorry is the theorem; no hollow definitions; universes bound. nt_compile on the snapshot is clean (20.1 s / 18.9 s, no errors or warnings). Edge cases M=0, N=0, M=A_X, Y'=∅, level 1, ℤ/ℓ², all integer shifts are covered."
+  "reviewer": "NT-stage2-cc-390c6f152",
+  "group": "Q13",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
  "lean": {
-  "module": "Sheaf.SixFunctors.InternalHomPullback",
-  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.internalHomPullback",
+  "module": "Sheaf.Paper.InternalHomPullback",
+  "declaration": "WeilConjectures.internalHomPullback",
   "declarations": [
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackCategory",
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackHom",
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackFunctor",
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackPerfect",
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackFiniteTor",
-   "WeilConjectures.TraceFormulaCoefficientConventions.homPullbackUnits",
-   "WeilConjectures.TraceFormulaCoefficientConventions.internalHomPullbackComparison",
-   "WeilConjectures.TrfHomPullbackShiftSquare",
-   "WeilConjectures.TrfHomPullbackTriangleSquare",
-   "WeilConjectures.TraceFormulaCoefficientConventions.internalHomPullback"
+   "WeilConjectures.finiteHomPullback",
+   "WeilConjectures.finiteHomPullback_naturality",
+   "WeilConjectures.finiteHomPullbackSource",
+   "WeilConjectures.finiteHomPullbackTarget",
+   "WeilConjectures.FiniteHomPullbackRightShift",
+   "WeilConjectures.FiniteHomPullbackLeftShift",
+   "WeilConjectures.FiniteHomPullbackTriangle",
+   "WeilConjectures.FiniteHomPullbackProperties",
+   "WeilConjectures.finiteHomPrimeInvertible",
+   "WeilConjectures.internalHomPullback"
   ],
-  "file": "lean/Sheaf/SixFunctors/InternalHomPullback.lean",
-  "statement": "theorem internalHomPullback (T : TraceFormulaCoefficientConventions.{u}) {Y : Scheme.{u}} (g : Y ⟶ T.geometricBaseChange) [LocallyOfFiniteType (g ≫ T.structureMap)] [QuasiCompact (g ≫ T.structureMap)] : (∀ (M N : T.homPullbackCategory T.geometricBaseChange), T.homPullbackPerfect T.geometricBaseChange M → T.homPullbackFiniteTor T.geometricBaseChange N → IsIso (T.internalHomPullbackComparison g M N)) ∧ (∀ (M M' N N' : T.homPullbackCategory T.geometricBaseChange), T.homPullbackPerfect T.geometricBaseChange M → T.homPullbackPerfect T.geometricBaseChange M' → T.homPullbackFiniteTor T.geometricBaseChange N → T.homPullbackFiniteTor T.geometricBaseChange N' → ∀ (a : M' ⟶ M) (b : N ⟶ N'), (T.homPullbackFunctor g).map ((T.homPullbackHom T.geometricBaseChange).map (Prod.mkHom a.op b)) ≫ T.internalHomPullbackComparison g M' N' = T.internalHomPullbackComparison g M N ≫ (T.homPullbackHom Y).map (Prod.mkHom ((T.homPullbackFunctor g).map a).op ((T.homPullbackFunctor g).map b))) ∧ (∀ (M : T.homPullbackCategory T.geometricBaseChange), T.homPullbackPerfect T.geometricBaseChange M → ∃ _ : ((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).obj (op M)).CommShift ℤ, ∃ _ : ((Functor.curry.obj (T.homPullbackHom Y)).obj (op ((T.homPullbackFunctor g).obj M))).CommShift ℤ, ((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).obj (op M)).IsTriangulated ∧ ((Functor.curry.obj (T.homPullbackHom Y)).obj (op ((T.homPullbackFunctor g).obj M))).IsTriangulated ∧ TrfHomPullbackShiftSquare (((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).obj (op M)) ⋙ T.homPullbackFunctor g) (T.homPullbackFunctor g ⋙ ((Functor.curry.obj (T.homPullbackHom Y)).obj (op ((T.homPullbackFunctor g).obj M)))) (T.internalHomPullbackComparison g M) (T.homPullbackFiniteTor T.geometricBaseChange) ∧ TrfHomPullbackTriangleSquare (((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).obj (op M)) ⋙ T.homPullbackFunctor g) (T.homPullbackFunctor g ⋙ ((Functor.curry.obj (T.homPullbackHom Y)).obj (op ((T.homPullbackFunctor g).obj M)))) (T.internalHomPullbackComparison g M) (T.homPullbackFiniteTor T.geometricBaseChange)) ∧ (∀ (N : T.homPullbackCategory T.geometricBaseChange), T.homPullbackFiniteTor T.geometricBaseChange N → ∃ _ : ((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).flip.obj N).CommShift ℤ, ∃ _ : ((Functor.curry.obj (T.homPullbackHom Y)).flip.obj ((T.homPullbackFunctor g).obj N)).CommShift ℤ, ((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).flip.obj N).IsTriangulated ∧ ((Functor.curry.obj (T.homPullbackHom Y)).flip.obj ((T.homPullbackFunctor g).obj N)).IsTriangulated ∧ TrfHomPullbackShiftSquare (((Functor.curry.obj (T.homPullbackHom T.geometricBaseChange)).flip.obj N) ⋙ T.homPullbackFunctor g) ((T.homPullbackFunctor g).op ⋙ ((Functor.curry.obj (T.homPullbackHom Y)).flip.obj ((T.homPullbackFunctor g).obj N))) (fun M ↦ T.internalHomPullbackComparison g M.unop N) (fun M ↦ T.homPullbackPerfect T.geometricBaseChange M.unop))",
+  "file": "lean/Sheaf/Paper/InternalHomPullback.lean",
+  "statement": "theorem internalHomPullback (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] : @FiniteHomPullbackProperties l _ E _ _ _ n X Y g (finiteHomPrimeInvertible l D hl Y) (finiteHomPrimeInvertible l D hl X)",
   "branch": "newtargets-dag",
-  "by": "NN",
+  "by": "Q13",
   "date": "2026-10-18",
-  "existing": false,
-  "note": "The actual comparison is the evaluation transpose using canonicalFinitePullbackTensor. IsIso, arbitrary-morphism two-variable naturality, both integer-shift squares, and a morphism of distinguished triangles with all three components are explicit. The Hom shift structures are quantified as exact-functor witnesses, following the recorded ringed internal-Hom exactness interface. Global finite-field/coefficient hypotheses use TraceFormulaCoefficientConventions; no extra residue-invertibility assumption is imposed."
+  "existing": false
  }
 }

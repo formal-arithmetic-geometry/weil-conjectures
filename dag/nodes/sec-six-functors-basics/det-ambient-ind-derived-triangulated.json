@@ -236,10 +236,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-8a7ccdffc",
-  "group": "Q61",
-  "result": "pass",
-  "note": "Reviewed immutable statements, all eight dependencies, exact declarations, sources, edge cases, universes, docstrings, and route-pivot compliance. Signature matches verbatim; per-file compilation passed in both modes without diagnostics. Findings recorded in review.md; no fixes needed."
+  "reviewer": "NT-stage2-cc-298b0e1cd",
+  "group": "NE",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
  "lean": {
   "module": "Sheaf.Paper.AmbientIndDerivedTriangulated",
@@ -247,9 +247,13 @@
   "file": "lean/Sheaf/Paper/AmbientIndDerivedTriangulated.lean",
   "statement": "theorem indConstructibleDerived_isTriangulated (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsTriangulated (fun K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ↦ ∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj K)) ∧ ObjectProperty.IsTriangulated (fun K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ)) ↦ ∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) ((DerivedCategory.homologyFunctor _ n).obj K))",
   "branch": "newtargets-dag",
-  "by": "Q61",
+  "by": "NE",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Repair of return at 735c4bd0228f: both coefficient cases are stated as conjuncts using the canonical ring-object instances of padicSubfieldRingObj and padicAlgClRingObj. No arbitrary MonObj structure or equality of underlying abelian sheaves is quantified. The declaration docstring gives all seven proof steps."
+  "note": "The original triangulated statement is retained verbatim. A second declaration explicitly states isomorphism closure for both canonical coefficient rings, which Mathlib ObjectProperty.IsTriangulated does not include. Both declarations use the recorded constant-model constructibility predicate, actual internal modules, ordinary derived category, and small ambient filtered colimits. Added the recorded kernel/cokernel and Mathlib proof-dependency imports.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.indConstructibleDerived_isTriangulated",
+   "AlgebraicGeometry.ProEtale.indConstructibleDerived_isClosedUnderIsomorphisms"
+  ]
  }
 }

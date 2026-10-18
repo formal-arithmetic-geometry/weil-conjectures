@@ -402,5 +402,41 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-7ea318903 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 12 steps, all 29 cited statements, Stacks 0GF6 with its proof and set-theoretic footnote, and 03I4. There are no new nodes. The statement is unchanged and holds in the cases I tested: empty X, the initial sheaf (V=R=E=∅), the final sheaf, constant sheaves and non-separated spaces. No duplicate exists in the DAG. Steps 1-6 follow 0GF6: the 04HV open relation, the equivalence relation checked on all X-schemes T as 02WW requires, 036W with (T,X,Y)=(X,B,P), and the coequalizer on both sites. Full faithfulness (step 8) and the pro-etale comparison by atlas coequalizer and adjunction (steps 9-11) are correct. Batch-5 check: lem-a1-algebraic-space-fpqc-sheaf reaches sec-trace-formula only at the definition def-trf-algebraic-space. The closures of lem-trf-etale-relation-quotient (02WW), lem-trf-space-chartwise-etale-permanence (03FR-03FV), lem-trf-space-fibre-products-etale-covers (02X2) and lem-trf-etale-descent-through-source-cover (036W) contain only algebraic-space and descent foundations. None contains cohomology, trace, duality or a batch-4 target. Neither assumption gives these results, so they are genuinely outside the assumed statements and acceptable. The declared tool_uses are accepted; sk-lem-pe-weakly-etale-stability is the only off-route one. FIX, two small repairs in the corrected item: (1) step 7 used that h_{E_1}^et is a sheaf on X_et without citing anything; I added lem-a1-algebraic-space-fpqc-sheaf and lem-weil-pbc-fpqc-finer-than-etale. (2) Step 12 took E×_XU, an algebraic space over X, to be an algebraic space over U with the same charts (change of base scheme, Stacks 03I4(6)) without argument; I wrote out the diagonal and atlas check and cited def-trf-algebraic-space. No statement change, no drops.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleSheaf_algebraicSpace_realization",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsEtaleOver",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSpaces",
+   "AlgebraicGeometry.AlgebraicSpace.realizationPresheaves_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.etaleRealizationFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.proEtaleRealizationFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.largeEtaleRealizationFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.largeEtaleRealizationLiftIso",
+   "AlgebraicGeometry.AlgebraicSpace.etaleProEtaleRealizationComparison",
+   "AlgebraicGeometry.AlgebraicSpace.realizationBaseChangeSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.realizationBaseChange_isEtaleSpace",
+   "AlgebraicGeometry.AlgebraicSpace.realizationBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.proEtaleRealizationRestrictionFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.proEtaleRealizationRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedRealizationComparison",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSheaf_algebraicSpace_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafAlgebraicSpaceRealization.lean",
+  "statement": "theorem etaleSheaf_algebraicSpace_realization (X : Scheme.{u}) : (etaleRealizationFunctor X).IsEquivalence ∧ IsIso (etaleProEtaleRealizationComparison X) ∧ ∀ (U : Scheme.{u}) (f : U ⟶ X) (hf : WeaklyEtale f) (E : EtaleSpaces X), IsIso (restrictedRealizationComparison f hf E)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The exact Hom functors, chartwise predicate, universe lift, adjunction counit comparison and explicit base-change/restriction constructions accompany the main theorem. The only postponed supporting properties are the sheaf conditions and algebraic/etale stability already used in this node. Definitions contain actual data; the universe-lift identification is the identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3ee6a75c",
+  "group": "NP",
+  "result": "fix",
+  "note": "Substance correct. Lean matches every clause of the node: chartwise IsEtaleOver as defined inline; equivalence onto Type-u sheaves on X.Etale from the full subcategory; IsIso of the counit of the recorded proEtaleSiteComparison (Type u+1 via an Iso.refl ulift, no universe equality imposed); WeaklyEtale restriction via Over.map ⊤ hf; base change E_U as Over.map f precomposition (03I4(6)). No extra hypotheses; edge cases (empty X/U, initial/final sheaf, identity f, universes) covered; no duplicate (IsChartwiseEtale is for maps between spaces, AlgebraicSpace.pullback is a pullback of modules). Defs are real data; the 3 sorry Props have source/blueprint/proof docstrings; the main docstring carries 12 steps; statement verbatim; only lean differs from the side node. FIX: added the brief's required '## Main definitions/## Main statements' module docstring list (docstring only) in fixes/EtaleSheafAlgebraicSpaceRealization.lean. Compile: nt_compile --json fails standalone because the live FlatCompositeFibreDimensionAtPoint is non-module and the side version is not in stage2-source-overrides.json (infrastructure; the maintainer should list it). With the two unchanged dependency sources supplied first, the delivered and fixed modules compile rc=0 with no errors."
  }
 }

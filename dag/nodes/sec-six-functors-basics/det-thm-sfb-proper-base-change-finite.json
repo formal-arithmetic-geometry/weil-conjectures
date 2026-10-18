@@ -19,7 +19,8 @@
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-proetale-operations",
   "sk-def-sfb-derived-tensor-hom",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "new-proetale-derived-module-pullback-monoidal"
  ],
  "proof": [
   {
@@ -306,5 +307,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProperBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperCoefficientRing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperAmbientExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProperBaseChange.lean",
+  "statement": "theorem finiteProperBaseChange (A : Type u) [CommRing A] [Finite A] (ℓ : ℕ) [Fact ℓ.Prime] (_hA : ∃ r : ℕ, (ℓ ^ r : ℕ) • (1 : A) = 0) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (p : X ⟶ Y) [IsProper p.left] : (∀ K : ConstantModelConstructibleFiniteTor (finiteProperCoefficientRing A).X X.left, (constantModelBoundedConstructible (finiteProperCoefficientRing A).X Y.left ⊓ DerivedCategory.finiteTorAmplitude _) ((lowerStar (finiteProperCoefficientRing A).X p.left).rightDerivedFunctor.obj K.obj)) ∧ (∀ (X' Y' : Scheme.{u}) (g : Y' ⟶ Y.left) (p' : X' ⟶ Y') (g' : X' ⟶ X.left) (sq : ChosenCartesianSquare g' p' p.left g) (K : ConstantModelConstructibleFiniteTor (finiteProperCoefficientRing A).X X.left), IsIso ((finiteProperAmbientExchange (finiteProperCoefficientRing A).X sq.toCommSq).app K.obj)) ∧ (∀ (K : ConstantModelConstructibleFiniteTor (finiteProperCoefficientRing A).X X.left) (M : ConstantModelConstructibleFiniteTor (finiteProperCoefficientRing A).X Y.left), IsIso ((((derivedUpperStarLowerStarAdjunction (finiteProperCoefficientRing A).X p.left).rightAdjointProjectionMap (leftDerivedUpperStarTensor (finiteProperCoefficientRing A).X p.left)).app K.obj).app M.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The statement uses the exact recorded ConstantModelConstructibleFiniteTor, with coefficients bundled by a specialization of the existing sheafified constant-ring construction in arbitrary universe u. The ambient exchange is constructed as mateEquiv of the two canonical composition isomorphisms and square equality. The projection map is the published rightAdjointProjectionMap applied to the published internal-module leftDerivedUpperStarTensor; the landed monoidal interface node is added to stmt_deps. No topology parameter, arbitrary map, completion or chosen resolution is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f795cd95f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

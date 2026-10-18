@@ -24,7 +24,10 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-compactifications-refinements",
   "def-weil-pbc-proetale-site",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-canonical-bridge"
  ],
  "proof": [
   {
@@ -222,5 +225,43 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-634794feb (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, all 34 cited statements, the near-duplicate candidates, the unit, the blueprint proof of fix-prop-coherence (main-20261015) and Stacks 0F7B/0F7C/0F7D/0F7F (more-etale), 0GL1/0E8I (lemma-j-shriek-and-tensor), plus the tag-to-label mappings for 07A4/07A6/0E48/0941. Against the base, the item changes only in proof, proof_deps, status and split_report; the statement, Lean record and steps 1, 4, 6, 7 are identical. Steps 2, 3 and 5 now run 1162, 1591 and 1660 characters and cite the three new nodes, as the human's return asked. proof_deps equals the union of uses. No new node reaches the item, so there is no cycle. No SGA source is used. The new nodes carry statements only, with blueprint ancestry fix-prop-coherence via the item and four kinds of search. Step 2 hypotheses: opens of finite-type k-schemes are quasi-compact, B=R maps to A_n, and the étale-origin levels meet the finite-evaluation clause of lem-cbc-strict-tower-proper-open-calculus. Step 3: the open node needs quasi-compactness and l invertible, both of which hold. Step 5: I checked r_{AV}=e R(c_{AV}^{-1}) by hand, and the R-L transpose gives c_T L(tau)=tau_int c_V. Proper/open node: s=(k,r) is open because b is open and k=bs, and closed because q is separated and qs=r is proper. The types of alpha_Q, Gamma_Q, lambda_Q and of the vertical, horizontal and base-change pastings match. Tested U empty, i=id (Gamma=lambda^{-1}), identity squares and refinement r=1. It generalizes the item's clause to arbitrary C_n and adds lambda, base change and scalar restriction, so I do not count it as a mere restatement under D1. lem-sf-ambient-proper-open-pasting cannot replace it: it lacks lambda, base change and scalar restriction, and citing it would close a cycle through lem-sf-proper-open-projection-mate, which has the item in its stmt_deps. Open node: r_j is the identity on flat-term K-flat representatives, and its evaluation is the open-tensor map. j_!K is complete by lem-cbc-completed-extension-zero-comparison together with the Koszul/quotient equivalence. The d_j types check; j=id gives u^{-1} and the empty open gives 0. Generator node: r_A=e R(d_A^{-1}) holds levelwise as the adjoint of the limit projection and holds for J_j by definition. The words have length at most 3, and it excludes trees and whiskering. Minor imprecisions, not faults: the levelwise use of lem-weil-pbc-ring-sheaf-change-adjunction on towers, and the fact that direct image means proper S_p. No fixes, no dropped nodes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralCompactificationSystemRealization",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralCompactificationSystemRealization",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.properExchange",
+   "WeilConjectures.IntegralSystemRealization.properProjection",
+   "WeilConjectures.IntegralSystemRealization.compactificationExchange",
+   "WeilConjectures.IntegralSystemRealization.compactificationProjection",
+   "WeilConjectures.IntegralSystemRealization.ringedProperProjection",
+   "WeilConjectures.IntegralSystemRealization.ringedCompactificationExchange",
+   "WeilConjectures.IntegralSystemRealization.ringedCompactificationProjection",
+   "WeilConjectures.IntegralSystemRealization.ProperOpenCoherence",
+   "WeilConjectures.IntegralSystemRealization.compactAmbient",
+   "WeilConjectures.IntegralSystemRealization.compactOpen",
+   "WeilConjectures.IntegralSystemRealization.compactProper",
+   "WeilConjectures.IntegralSystemRealization.Expression.systemObj",
+   "WeilConjectures.IntegralSystemRealization.Expression.ringedObj",
+   "WeilConjectures.IntegralSystemRealization.CanonicalIsoPair",
+   "WeilConjectures.IntegralSystemRealization.BasicPair",
+   "WeilConjectures.IntegralSystemRealization.CanonicalPair",
+   "WeilConjectures.IntegralSystemRealization.Realizations",
+   "WeilConjectures.IntegralSystemRealization.integralCompactificationSystemRealization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationSystemRealization.lean",
+  "statement": "theorem integralCompactificationSystemRealization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) : ∃ o : Operations l E, Nonempty (Realizations l E D o)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e90536c5",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 25edfecdc076. Diffed all 4 files against it (Operations unchanged). R1 repaired: coherence now quantifies only over the inductive Prop CanonicalPair, whose BasicPair/CanonicalIsoPair generators are indexed by actual system maps (compositors, associator, tensor/pull, beta, clopen, open projection, P⊣S and J⊣P units/counits, Gamma, the mateEquiv exchange, rightAdjointProjectionMap projection, compactification exchange/projection via SuppliedExchangeProjection) and actual localized ringed maps pinned by transpose/adjunct equations (RingedOpenComparisons, RingedProperOpen.adjunct to ringedProperOpenLambda). The integral side is transported by the recursive completionMap built from the recorded Pull.unit/Tensor.chi, independently of c_V, with closure under id, comp and all 6 constructors; <𝟙,0> cannot be generated. R2: free fields removed. R3: exchange is the defined mate. R4: projection/compactification composites and ringedTensorCoherence restored. R5: eqToIso of the proved originRestrictionEquality and exact section equalities replace the free ≅/≃. Item clauses, domain bounds, compact-support pinning, Gamma equations, recursive c_V pinning, edge cases and universes re-checked. Declarations lists and verbatim statements match all 4 files; docstrings complete; sole sorry. nt_compile --json on all 4 files: exit 0, clean, 17.8/8.7/32.7/40.9 s. Advisory: the unchanged HEq in restrictedDirectCanonical can be satisfied (types equal by the same equality)."
  }
 }

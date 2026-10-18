@@ -246,5 +246,42 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-18d8ca60f (reviewer sub-agent of L); spot-checked: Read the item in full (6 steps), the statements of all cited nodes (substitution lemma, normalized-DVR effectivity, ringed strict-tower Rlim, semilinear derived sections, integral-operations-well-defined, integral derived operations, normalized DVR tower, reduction tower), the parent lem-pur-derived-pullback-tensor-iso (its step 5 is the only citer), unit sk-def-purity-conv (uses sk-def-sf-operations) and Stacks 0941 (lemma-derived-limit-is-ok, l.5067) and 07A4 (lemma-pullback-tensor-product, l.3684). Coefficient category matches def-pur-integral-derived-operations: small pro-étale site, R=lim(O_E/ϖ^n), L=Rlim∘Res. Not a target node, so the master base-change check does not apply. Step checks: (1) termwise f_n^* is exact and Tot(U_n⊗V_n) with U_n K-flat computes ⊗^L, so A and D are the substitution systems, which are normalized; (2) Rlim functoriality makes L(c) and L(c^{-1}) inverse; (3) μ=b^{-1}L(c)a and ν=a^{-1}L(c^{-1})b, inverse by cancellation; (4) r_P R(μ)=e_D RL(c)R(a)=c r_S, with counit naturality a one-line consequence of the canonical comparison; (5) pμ=b'^{-1}L(yc)a=b'^{-1}L(c'x)a=μ's; (6) levelwise quasi-isomorphisms are coherent equivalences, and clause (2) of lem-pur-integral-operations-well-defined supplies the canonical comparisons. Edge cases checked: c=id, empty X, f=id, unbounded complexes. Every hypothesis is used. No new nodes, no restatement of a parent clause, no duplicate (grep finds only the item and its parent). A DFS on the snapshot DAG finds no cycle. No SGA. Route: lem-pur-integral-operations-well-defined is on route via sk-def-sf-operations; accepted tool_uses: lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-coef-normalized-dvr-effectivity, lem-coef-semilinear-derived-sections. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTowerLimitComparison",
+  "declaration": "WeilConjectures.IntegralTowerLimit.integralTowerLimitComparison",
+  "declarations": [
+   "WeilConjectures.IntegralTowerLimit.sites",
+   "WeilConjectures.IntegralTowerLimit.Good",
+   "WeilConjectures.IntegralTowerLimit.pullback",
+   "WeilConjectures.IntegralTowerLimit.total",
+   "WeilConjectures.IntegralTowerLimit.Input",
+   "WeilConjectures.IntegralTowerLimit.source",
+   "WeilConjectures.IntegralTowerLimit.target",
+   "WeilConjectures.IntegralTowerLimit.Realization",
+   "WeilConjectures.IntegralTowerLimit.comparison",
+   "WeilConjectures.IntegralTowerLimit.Diagram",
+   "WeilConjectures.IntegralTowerLimit.sourceMap",
+   "WeilConjectures.IntegralTowerLimit.targetMap",
+   "WeilConjectures.IntegralTowerLimit.sourceReduction",
+   "WeilConjectures.IntegralTowerLimit.targetReduction",
+   "WeilConjectures.IntegralTowerLimit.Laws",
+   "WeilConjectures.IntegralTowerLimit.integralTowerLimitComparison"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTowerLimitComparison.lean",
+  "statement": "theorem integralTowerLimitComparison (f : X ⟶ Y) (_hlX : ∀ x : X, IsUnit (l : X.residueField x)) (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y)) (M : CompletedOperations.Models l E (sites X Y)) (_hM : CompletedOperations.ComparisonLaws.{t, u, 0, 0} l E M) (A : Input l E f) : ∃ r : Realization l E M A, Laws l E r",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of independent return L at immutable head 61b1d28044a6: require the ComparisonLaws supplied alongside Models by completedOperationTowerSubstitution. Bare Models does not entail counit invertibility, normalization preservation, comparison invertibility, or naturality. The finite input universe is 0 and the scheme index is Bool; no site or coefficient universe is identified. All canonical map formulas and conclusions are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69e312e3e",
+  "group": "Q54",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

@@ -355,10 +355,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-55961363a",
-  "group": "NQ",
-  "result": "pass",
-  "note": "Repair of 621f42b0dca3 is correct. The statement uses the recorded smoothPurityMap for all three gamma arrows and the transported standingExceptionalComposition (counit mate, pur9) for c inverse, with c invertible by a named IsIso theorem. The source identification is a definition built from 8 canonical maps (reassociation, pullback compositor plus ordered power splitting with Koszul sign +1, associator, twist pullback, tensor pullback, two reassociations, realization unit), fixed independently of gamma and c. K lives on the small pro-etale site with hK finite-Tor constructible; ctf of Rg^!K is a named theorem. No extra binders (exponent, compactification and composite smoothness removed). Node unchanged except lean; lean.statement verbatim; the 39 declarations match the file. Only theorem proofs are sorry; Classical.choose is used only on exists-unique-by-HEq theorems, and asIso only with a named IsIso theorem. Docstrings complete. nt_compile: delivered file clean in 7.0-7.5 s. Scratch proofs: power zero/successor and coefficient Noetherian, pullback-tensor and fixed pullback-comp exists-unique proved; 7 of 8 source factors match their stage endpoints; factor 4 and the fixed tensor-pullback exists-unique hit the 60 s limit, but their functor identifications hold by HEq.rfl. The associator exists-unique rests on the landed smoothPurityTensorPresentation. Edge cases d=0/e=0, identities, empty schemes, ramified E, universes all fine."
+  "reviewer": "NT-stage2-cc-7cc8fb241",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Head 7cc8fb24 differs from a2a66f78 only in the H2 correction: stmt_deps cite def-pur-composition-comparisons (existing:true on compositionSourceIdentification in PurityCompositionCoherence) instead of thm-pur-composition-coherence, which stays in proof_deps; the five Lean modules are byte-identical. Item statement re-checked clause by clause against node and master/main sources: full finite-type domain with no absolute separatedness, d:ℕ, D^b_ctf on the pro-etale site, IsIso of smoothPurityMap, arbitrary base change with hK'/hγ' asserted through finiteReductionSmoothExchange = (Lu*γ)^-1≫BaseChangeSource≫γ', composition equation with d+e. Every lean.statement is verbatim, proofs are only sorry, no hollow defs, the §1(B) changes only drop absolute IsSeparated binders, and both report sections are present. The new node's statement matches the Lean. F1 (fixed): the restored def-pur-composition-comparisons is the originally delivered 36be74 record, not its corrected version: lean.note names nonexistent SmoothPurityExchange aliases, and two search records say declarations are moved or extracted. fixes/def-pur-composition-comparisons.json is the complete record with only those four strings corrected. nt_compile --json: the five delivered files rc 0, clean (5-9 s); live importers AdicSmoothDualizingComplexes, FiniteCoefficientSmoothPurity, FiniteReductionComparisons/OfPurity/ChartCalculus/RootCharts/AffineOrientation and SmoothPurityNaturality clean. Maintainer notes: stale tool_uses and 'separated X,Y' prose; ND's exchange record may cite def-pur-composition-comparisons once it lands."
  },
  "lean": {
   "module": "Sheaf.Paper.PurityCompositionCoherence",
@@ -407,9 +407,9 @@
   "file": "lean/Sheaf/Paper/PurityCompositionCoherence.lean",
   "statement": "theorem smoothPurityCompositionCoherence (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (K : Scheme.proEtaleDerivedCategory Z P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Z K) : P.smoothPurityMap (f ≫ g) (d + e) K hK = (P.compositionSourceIdentification f g d e K).hom ≫ (P.compositionShiftedPullback f d).map (P.smoothPurityMap g e K hK) ≫ P.smoothPurityMap f d ((P.compositionExceptional g).obj K) (P.compositionExceptional_ctf g e K hK) ≫ (P.compositionExceptionalIso f g K hK).inv",
   "branch": "newtargets-dag",
-  "by": "NQ",
+  "by": "Q58",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Repair of 621f42b0dca3: intrinsic small-pro-etale Dctf input; the three gamma arrows are smoothPurityMap, c is the transported standingExceptionalComposition, and the source identification is constructed from canonical tensor powers, pullback, tensor and shift comparisons. No arbitrary arrow or identification is quantified."
+  "note": "Section 1(B), returned R1: remove the three absolute IsSeparated scheme variables from the owning composition module. Retain all 39 names, constructions and theorem conclusions. The existing exceptional functor, its finite-Tor preservation and its canonical standing counit compositor now apply to the full finite-type field domain of the node and the corollary. No compositionExceptionalAll aliases or duplicate maps are introduced."
  }
 }

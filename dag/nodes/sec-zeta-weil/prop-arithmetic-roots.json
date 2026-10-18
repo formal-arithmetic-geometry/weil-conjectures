@@ -199,5 +199,29 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-rh"
+ "unit": "sk-thm-rh",
+ "lean": {
+  "module": "Sheaf.Paper.ArithmeticRoots",
+  "declaration": "WeilConjectures.arithmetic_roots",
+  "declarations": [
+   "WeilConjectures.arithmeticRootsBaseCharP",
+   "WeilConjectures.arithmeticRootsCoefficientChar",
+   "WeilConjectures.arithmetic_roots"
+  ],
+  "file": "lean/Sheaf/Paper/ArithmeticRoots.lean",
+  "statement": "theorem arithmetic_roots (D : FiniteFieldDatum.{u}) (X₀ : Scheme.{u}) [X₀.Over (Spec (.of D.k₀))] [IsProper (X₀ ↘ Spec (.of D.k₀))] [GeometricallyConnected (X₀ ↘ Spec (.of D.k₀))] (d : ℕ) (hsmooth : @FiniteFieldDatum.IsSmoothOfPureDimension D (Over.mk (X₀ ↘ Spec (.of D.k₀))) (inferInstanceAs (LocallyOfFiniteType (X₀ ↘ Spec (.of D.k₀)))) (inferInstanceAs (QuasiCompact (X₀ ↘ Spec (.of D.k₀)))) d) (i : ℤ) (hi₀ : 0 ≤ i) (hi : i ≤ 2 * (d : ℤ)) (P : Polynomial ℤ) (hP₀ : P.coeff 0 = 1) (hP : Scheme.IsIntegralFrobeniusFactor D.k₀ X₀ i P) (Qbar : Type v) [Field Qbar] [Algebra ℚ Qbar] [IsAlgClosure ℚ Qbar] : P.reverse.Monic ∧ (∀ α : Qbar, (P.reverse.map (Int.castRingHom Qbar)).IsRoot α → IsIntegral ℤ α ∧ IsWeilNumber D α (i : ℝ) ∧ ∀ (C : D.CoefficientDatum) (e : PadicAlgCl C.l ≃ₐ[Padic C.l] C.Qbar) (j : C.AlgebraicNumberRealization D Qbar), ((AlgEquiv.toEquiv j) α : C.Qbar) ≠ 0 ∧ ((Scheme.frobeniusCharpolyRev D.k₀ C.l X₀ i).map e.toRingHom).IsRoot ((AlgEquiv.toEquiv j) α : C.Qbar)⁻¹ ∧ Module.End.HasEigenvalue (((ModuleCat.extendScalars e.toRingHom).map (ModuleCat.ofHom (WeilSheaf.ordinaryCompactWeilSheafCohomology (WeilSheaf.adicConstant D.k₀ C.l X₀) i).1.frobeniusEnd)).hom) ((AlgEquiv.toEquiv j) α : C.Qbar)) ∧ ∀ β : Qbar, (P.map (Int.castRingHom Qbar)).IsRoot β → ∀ τ : IntermediateField.adjoin ℚ ({β} : Set Qbar) →+* ℂ, ‖τ (IntermediateField.AdjoinSimple.gen ℚ β)‖ = (D.q : ℝ) ^ (-(i : ℝ) / 2)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded determinant family is over PadicAlgCl l. All choices of coefficient closure C.Qbar and all Padic l-algebra identifications e are covered by actual tensor extension along e. The resulting operator is the image of the existing ordinary-cohomology Frobenius under ModuleCat.extendScalars; no arbitrary operator or cohomology substitute is supplied. The intrinsic Weil-number predicate includes both nonzeroness and the norm equality for every embedding of the simple rational field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e4ecdcc4",
+  "group": "Q63",
+  "result": "pass",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ }
 }

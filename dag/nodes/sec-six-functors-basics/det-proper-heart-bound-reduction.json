@@ -410,5 +410,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperHeartBoundReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.properHeartBoundReduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProperHeartHigherVanishing",
+   "AlgebraicGeometry.ProEtale.properHeartRationalization",
+   "AlgebraicGeometry.ProEtale.ProperHeartBoundReductionAssertions",
+   "AlgebraicGeometry.ProEtale.properHeartBoundReduction"
+  ],
+  "file": "lean/Sheaf/Paper/ProperHeartBoundReduction.lean",
+  "statement": "theorem properHeartBoundReduction (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (r : ℕ) [Fact r.Prime] [CharP k r] (_hrℓ : r ≠ ℓ) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (c : ℤ) : @ProperHeartBoundReductionAssertions ℓ _ E X Y { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) } p c",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ffd198c72",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Clause-by-clause match of properHeartBoundReduction with the node and blueprint source: prime ell; k with CharP r prime, r≠ell; X,Y separated finite type over k; p IsProper over k; c:ℤ. R^q tested for q:ℕ with c<q, so negative degrees vanish by convention and degree 0 is tested for c<0. Premise covers every F≥E including F=E, every IsImmersion a:S→X, lisse L0 (pro-étale locally Mod.IsFree, varying ranks, rank 0 allowed), and all three vanishings via coefficientHeartLocallyClosedExtension, Mod.extendScalars along coefficientMap O_F→F, then F→Q̄ℓ. Conclusion covers Λ=E or finite-subextension-valued Q̄ℓ and all ConstantModelConstructible M. Compiled rfl checks: continuousMapRingObj F and padicAlgClRingObj are definitionally coefficientHeartRingObj of the conclusion rings. #synth finds IsCommMonObj in both cases (not vacuous). Noetherian instance derived, not assumed. Shape: only the module and the item node's lean field changed; statement verbatim; lines ≤100; docstrings with source, blueprint id and 7-step plan; helper defs are real data; only the theorem proof is sorry. nt_compile clean twice (rc 0, ~5 s), plus a check run. Non-blocking: the Second reading section is an author self-check (landed precedent, and this review is the independent reading); change-of-scalars and qlbar-condensed dependency nodes are still unrecorded but the exact published declarations are used."
  }
 }

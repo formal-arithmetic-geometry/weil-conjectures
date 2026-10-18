@@ -85,29 +85,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.FiniteTorAmplitude",
-  "declaration": "WeilConjectures.finiteTorConstructible",
+  "module": "Sheaf.Paper.FiniteTorAmplitudeSites",
+  "declaration": "WeilConjectures.finiteTorConstructibleEtale",
   "declarations": [
-   "WeilConjectures.finiteTorConstructible",
-   "WeilConjectures.finiteTorConstructibleCategory",
-   "WeilConjectures.finiteTorConstructibleIntegral",
-   "WeilConjectures.finiteTorConstructibleIntegralCategory",
-   "WeilConjectures.finiteTorFieldCoefficientCategory"
+   "WeilConjectures.finiteTorConstructibleEtale"
   ],
-  "statement": "def finiteTorConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
+  "statement": "def finiteTorConstructibleEtale\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :\n    ObjectProperty (Etale.DerivedCategoryModule\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
   "branch": "newtargets-dag",
-  "by": "Q93",
-  "date": "2026-10-17",
+  "by": "NW",
+  "date": "2026-10-18",
   "existing": true,
-  "note": "§1(B): the recorded fixed-scalar FiniteTorAmplitudeProEtaleModule interface has the wrong module-sheaf presentation for the intrinsic ambient derivedInternalHomOfUniverses. Importing it together with the required proof dependencies also yields a duplicate upperStarIsoLowerStarInv declaration between the FiniteCoefficient and legacy Iso modules. Rebind to the existing original intrinsic predicate finiteTorConstructible, already publicly imported and used to define that wrapper, in Sheaf.Paper.FiniteTorAmplitude. This gives precisely the node’s constant-ring pro-etale finite-Tor constructible category, and retains the existing integral and field definitions without a new definition or a source change."
+  "note": "§1(B), returned H4/H13: the recorded intrinsic finiteTorConstructible has proEtaleDerivedCategory as its domain and cannot be applied to the ordinary etale DerivedCategoryModule of this item. Reuse the already published ordinary-etale presentation finiteTorConstructibleEtale, rather than an arbitrary predicate. Its body is exactly the recorded finite-value bounded constructibility and one ordered Tor interval, tested against every degree-zero module sheaf through hasTorAmplitudeIn. It uses the canonical ULift of the identical positive-level quotient ring. Original pro-etale, integral and field-stage definitions remain unchanged in Sheaf.Paper.FiniteTorAmplitude; no new definition is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bd503af64",
-  "group": "Q93",
+  "reviewer": "NT-stage2-cc-3f43e3118",
+  "group": "NW",
   "result": "pass",
-  "note": "Every clause of the node matches the Lean: D, l prime with l ≠ D.p, E finite over Padic l, n ≥ 1 with coefficientExtensionRing, T locally finite type + quasi-compact over Spec D.k with no separatedness/dimension/invertibility binder, K and L in proEtaleDerivedCategory with the original intrinsic finiteTorConstructible (bounded constructible plus an a ≤ b Tor interval tested on every constant-ring module sheaf), conclusion the same predicate on derivedInternalHomOfUniverses.{u+1,u,u}(ProEt.topology T, proEtaleConstantRing T A).obj (op K, L), a real K-injective Hom localization. Universes match, statement field verbatim, only the lean fields changed. The §1(B) rebind of def-weil-finite-tor-amplitude from the fixed-scalar wrapper back to the original intrinsic predicate is justified: the internal Hom lives on A_T-modules and the wrapper is defined from this predicate. Edge cases (empty and non-separated T, zero objects, n = 1) covered. Docstrings and blueprint tags present, sorry only, no line over 100 characters, no pro-etale substitute. Omitting the proof-only ConstructibleHomComparison import because of an upstream duplicate is acceptable. nt_compile --json: 5.9 s, rc 0, no errors or warnings. Observations, not blocking: the second reading is the same worker's pass, and this dependency record has been rebound repeatedly."
+  "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

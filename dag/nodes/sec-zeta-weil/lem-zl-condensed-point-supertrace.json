@@ -346,5 +346,47 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a12ce4670 (reviewer sub-agent of L); spot-checked: Read the whole item: the statement and all 11 steps. Read every cited node's statement, the parent's uses of the item (sk-thm-rationality steps 4-6), the two sibling citers and both batch-5 assumption leaves. Batch-5 check: the scope of nt-assume-trace-formula explicitly excludes identifying categorical traces with alternating sums of cohomology traces, and it takes the right duals as hypotheses. This item supplies exactly those two things. The three flagged citations are general algebra. lem-trf-chain-supertrace is the signed dual and supertrace over a commutative ring, used only over E. prop-trf-trace-formal-laws is used only for clause (4), the supertrace over a field. lem-trf-exact-pairing-iso-transport is a Mathlib-status monoidal fact. I computed that these citations add 0 nodes to the existing batch-5 closure (nt-target-zeta-rational and nt-target-weil-conjectures, item excluded). Their closures reach no trace-formula or Poincare theorem node. So they lie outside both assumptions and are accepted. Coefficient category checked against the definitions: U_s = p_s^* of Profinite.padicAlgClRingObj (sk-def-sfb-qlbar-condensed), D_cons of sk-def-sfb-bounded-constructible, def-sfb-dc-tensor (which names Qlb), and the subfield coefficient map. E is the E of def-trf-coefficient-conventions, so clause (4) applies. Step checks: (1) scalar injectivity via H^0 and singleton evaluation, U(s)=Omega, no conservativity used; (3) Stacks 064B-type full faithfulness plus field splitting gives the essential image D^b_fd; (5) chain-level splitting, contractible summands, and U^r=coker(0) is finitely presented, so constructible; (7) Stacks 06YQ verified in sites-cohomology.tex (the report's tag correction is right), with flatness carried across by the internal/section comparison; (10) I recomputed the sign (-1)^{i(-i)}=(-1)^i; (11) the transport data (U,V,E)=(R,P,D) with (w^{-1},1_D) and the naturality calculation re-derived. Small cases tested: 0, E[0], E[-1], the contractible two-term complex, char k=2. Interpretation note: the trace is for the right dual transported along w; this is consistent with sk-d-trace and with how the parent supplies HasRightDual. No new nodes, no SGA, proof_deps equals the union of step uses, statement unchanged. All 7 declared tool_uses accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedPointSupertrace",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_point_supertrace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointCondensedModules",
+   "AlgebraicGeometry.ProEtale.PointCondensedCategory",
+   "AlgebraicGeometry.ProEtale.pointSupertraceModuleColimits",
+   "AlgebraicGeometry.ProEtale.pointSupertraceComplexMonoidal",
+   "AlgebraicGeometry.ProEtale.pointSupertraceComplexMonoidalStruct",
+   "AlgebraicGeometry.ProEtale.pointSupertraceTotalExists",
+   "AlgebraicGeometry.ProEtale.pointSupertraceSourceBraiding",
+   "AlgebraicGeometry.ProEtale.pointSupertraceTargetBraiding",
+   "AlgebraicGeometry.ProEtale.PointSupertraceFrame",
+   "AlgebraicGeometry.ProEtale.pointSupertraceSectionRing",
+   "AlgebraicGeometry.ProEtale.pointSupertraceEvaluation",
+   "AlgebraicGeometry.ProEtale.CondensedPointRealizationData",
+   "AlgebraicGeometry.ProEtale.CondensedPointScalarData",
+   "AlgebraicGeometry.ProEtale.CondensedPointMatrixData",
+   "AlgebraicGeometry.ProEtale.CondensedPointTensorModelData",
+   "AlgebraicGeometry.ProEtale.pointSupertraceTensorMatrix",
+   "AlgebraicGeometry.ProEtale.pointSupertraceTensorDescent",
+   "AlgebraicGeometry.ProEtale.CondensedPointCohomologyData",
+   "AlgebraicGeometry.ProEtale.CondensedPointDualityData",
+   "AlgebraicGeometry.ProEtale.CondensedPointSupertraceData",
+   "AlgebraicGeometry.ProEtale.condensed_point_supertrace"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedPointSupertrace.lean",
+  "statement": "theorem condensed_point_supertrace (k : Type u) [Field k] [IsAlgClosed k] (p l : ℕ) [Fact p.Prime] [Fact l.Prime] [CharP k p] (_hpl : p ≠ l) (E : PadicAlgCl.FiniteIntermediateField l) : Nonempty (CondensedPointSupertraceData k l E)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The complete comparison is stated as existence of matrix-normalized realization data, with all properties and actual scalar, tensor, cohomology and duality normalization equations. No data are chosen from the postponed existence proof. Helpers are aliases, canonical existing structures, and the explicit statement package of this same node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8d33d9a4",
+  "group": "Q65",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

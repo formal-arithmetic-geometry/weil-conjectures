@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-proetale-rational-localizing-projection-helpers",
+ "kind": "definition",
+ "title": "Canonical internal projection-formula helper maps",
+ "status": "split",
+ "statement": "For a pro-etale morphism of schemes with condensed commutative coefficient sheaf, use the published internal-module projection-formula interface: `ModuleObjectTensorGeneratorFormula` specifies the ordinary balanced tensor comparison on pure tensors; `ModuleObjectDerivedTensorFormula` specifies its total-complex lift and derived counit normalization; `existsUnique_moduleObjectDerivedTensorComparison` gives the unique comparison satisfying these formulas and invertibility; `moduleObjectDerivedTensorComparison` is that comparison; and `moduleObjectProjectionMate` is the counit mate of this comparison under the recorded derived upper-star/lower-star adjunction [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The ambient internal-module categories and maps use [sk-def-sfb-pulled-back-coefficients], [def-weil-pbc-proetale-site], [sk-def-sfb-module-derived-pushpull], [sk-def-sfb-derived-tensor-hom], [def-sfb-module-derived-pushpull-adjunction], and [def-weil-pbc-adjunction-mate].",
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field-localizing.md",
+  "place": "canonical internal-module tensor comparison and projection mate used by the projection/exchange construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived tensor comparison projection mate internal module objects",
+   "results": "No exact Mathlib declaration; only generic tensor and adjunction facts were returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor comparison on internal pro-etale module objects characterized on total-complex generators",
+   "results": "No exact Mathlib match; generic derived tensor and adjunction declarations only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleObjectDerivedTensorFormula, moduleObjectProjectionMate",
+   "results": "No matching Mathlib declarations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleObjectTensorGeneratorFormula|moduleObjectProjectionMate",
+   "results": "Exact declarations found in lean/Sheaf/Paper/RationalLocalizingProjectionFormula.lean; no duplicate in the source checkout or other Sheaf modules.",
+   "subdirectory": "Mathlib and WeilConjectures/ and lean/Sheaf",
+   "date": "2026-10-18",
+   "verdict": "existing published declarations"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trace-base-change-second",
+  "date": "2026-10-18",
+  "group": "Q17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "(1), second triangle: canonical tensor comparison and projection mate used by the exchange construction",
+   "via": [
+    "lem-sfb-trace-base-change-second"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "module": "Sheaf.Paper.RationalLocalizingProjectionFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleObjectTensorGeneratorFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleObjectDerivedTensorFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_moduleObjectDerivedTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMate"
+  ],
+  "statement": "def moduleObjectProjectionMate\n    (A : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))\n    (B : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n    (lowerStar Λ f).rightDerivedFunctor.obj A ⊗ B ⟶\n      (lowerStar Λ f).rightDerivedFunctor.obj\n        (A ⊗ (upperStar Λ f).leftDerivedFunctor.obj B) ",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing published declarations in Sheaf.Paper.RationalLocalizingProjectionFormula.lean. They are the five canonical helper definitions used by the projection/exchange module; the stronger theorem det-thm-sf-pf-field-localizing is not cited."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6110e3efb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6110e3efb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after the ef40e3e6 RETURN (H2). Both Lean modules are byte-identical to ef40e3e6, which was otherwise correct. The new existing:true def node def-sfb-proetale-trace-coefficient-interfaces covers TraceD, tracePull, tracePush, TraceLoc, traceTate, CondensedTensorNormalization, condensedTensorCore_existsUnique, condensedTensorCore, condensedUpperStarMonoidal and condensedDerivedUnitIso. All exist in live TraceBaseChangeFirst; the primary statement is verbatim (line 317). It omits trace_base_change_first, TraceFirstAssertion and TraceFirstHypotheses. Its citations equal its stmt_deps (8 foundational nodes), and the Q16 owner record is untouched. The item and def-sfb-proetale-projection-exchange-maps now cite it in place of lem-sfb-trace-base-change-first. The delivered modules use only TraceLoc, tracePull, tracePush, traceTate and condensedDerivedUnitIso (plus the monoidal instance), all covered by the new node. Acyclic (2222, 2224 and 2280 reached nodes). Item vs live differs only in lean and stmt_deps; the dependency records equal live. nt_compile --json rc 0, no warnings: TraceBaseChangeFirst 38.0 s, ProEtaleProjectionExchangeMaps 36.7 s, TraceBaseChangeSecond 50.3 s. Non-blocking: TraceDerived/traceSquarePullback near-duplicate TraceD/tracePullSquare; the tensor and unit comparisons are separately normalized; maintainer note that the node lists Q16's sorry helper condensedTensorCore_existsUnique, whose content is stated in the node."
+ }
+}

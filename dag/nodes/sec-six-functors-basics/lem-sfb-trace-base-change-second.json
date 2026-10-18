@@ -19,7 +19,10 @@
   "def-weil-pbc-cartesian-square",
   "sk-def-sp-tate-twist",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-proetale-projection-exchange-maps",
+  "def-sfb-proetale-trace-coefficient-interfaces"
  ],
  "proof": [
   {
@@ -247,5 +250,34 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-ffe68d44a (reviewer sub-agent of L); spot-checked: The mathematics is correct; I read the item, every cited statement and the sources in full. The statement and stmt_deps are unchanged from the base, and there are no new nodes. The base-change map b_2 is the Stacks 07A7 map for the 0E48 square with (f',g,g')=(p_2,f,p_1); this matches the item's definition-of-mate and the orientation in step 3. The coefficients stay in the ordinary D(Mod over the pulled-back condensed O_E sheaf) restricted to Loc(D^b_c), with no rationalisation or tower. I re-derived step 3: the 0E48 coherence converted to the item's left-factor convention, with V=p_1^*T_X matching the domain of t_2 and b_{2,T_X}; lambda is invertible from that equation. I re-derived step 5's permutations from the first identity of lem-sfb-ringed-projection-tensor-composition: the sources agree by symmetric monoidal coherence and the targets differ exactly by R(1⊗sigma_{V,V}). I checked step 2: R_W(1) is locally free of rank one, its one-term complex is K-flat by 06YQ, and the symmetry sign is (-1)^4=1, so sigma_{V,V}=1. An odd shift would give a sign, so the even shift is essential. Steps 4 and 6 are elementary. Edge cases checked: K=0, f=id, ell=2. Both route nodes belong to sk-prop-p1-adjunction-rational, which the unit cites. I accept the three declared tool uses (exchange-tensor coherence 0E48, signed derived symmetric monoidal structure, bounded-flat K-flat 06YQ) as generic black boxes. No duplicate found by rg: the sibling lem-sfb-trace-base-change-first is a different rearrangement. Fixes in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-trace-base-change-second.json: (B4) all six proof texts had lost their TeX backslashes (otimes, circ, pi, lambda, sigma, psi, mathcal; \\to had become a TAB, \\rm a newline, \\, a comma), and I restored them verbatim; (C1, minor) step 2 used the identification V ≅ R_W(1)[2] without a citation, so I added a sentence citing sk-def-sfb-module-derived-pushpull and sk-prop-sfb-cartesian-coefficients(1), which were already in proof_deps, plus a note on naturality of sigma. Only proof[*].text and proof[1].uses changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceBaseChangeSecond",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.traceBaseChangeSecond",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceG",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceSquareG",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceB",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceSecondHypotheses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceIntegralCoefficients",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceIntegralTX",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceIntegralTW",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceBaseChangeSecond"
+  ],
+  "file": "lean/Sheaf/Paper/TraceBaseChangeSecond.lean",
+  "statement": "theorem traceBaseChangeSecond (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [W.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (p₁ p₂ : W ⟶ X) [p₁.IsOver (Spec (.of k))] [p₂.IsOver (Spec (.of k))] (sq : ChosenCartesianSquare p₁ p₂ f f) (h : TraceSecondHypotheses (traceIntegralCoefficients ℓ E) f p₁ p₂ sq.toCommSq (traceTate ℓ E Y)) (t : (tracePush (traceIntegralCoefficients ℓ E) f).obj (traceIntegralTX ℓ E f) ⟶ 𝟙_ (TraceDerived (traceIntegralCoefficients ℓ E) Y)) (t₁ : (tracePush (traceIntegralCoefficients ℓ E) p₁).obj (traceIntegralTW ℓ E f p₁) ⟶ 𝟙_ (TraceDerived (traceIntegralCoefficients ℓ E) X)) (t₂ : (tracePush (traceIntegralCoefficients ℓ E) p₂).obj (traceIntegralTW ℓ E f p₁) ⟶ 𝟙_ (TraceDerived (traceIntegralCoefficients ℓ E) X)) (ht₁ : (traceBaseChange (traceIntegralCoefficients ℓ E) f p₂ p₁ sq.toCommSq.flip).app (traceIntegralTX ℓ E f) ≫ (tracePush (traceIntegralCoefficients ℓ E) p₁).map ((traceSquarePullback (traceIntegralCoefficients ℓ E) f p₁ p₂ sq.toCommSq).hom.app (traceTate ℓ E Y)) ≫ t₁ = (tracePull (traceIntegralCoefficients ℓ E) f).map t ≫ (condensedDerivedUnitIso (traceIntegralCoefficients ℓ E) f).hom) (ht₂ : (traceBaseChange (traceIntegralCoefficients ℓ E) f p₁ p₂ sq.toCommSq).app (traceIntegralTX ℓ E f) ≫ t₂ = (tracePull (traceIntegralCoefficients ℓ E) f).map t ≫ (condensedDerivedUnitIso (traceIntegralCoefficients ℓ E) f).hom) (K : TraceDerived (traceIntegralCoefficients ℓ E) Y) (hK : TraceLoc (traceIntegralCoefficients ℓ E) Y K) : traceB (traceIntegralCoefficients ℓ E) f p₁ p₂ sq.toCommSq (traceTate ℓ E Y) ((traceG (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y)).obj K) (h.base_change _ (h.twisted_pull K hK)).1 (h.projection_B _ (h.twisted_pull K hK)) ≫ (traceG (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y)).map (traceCounit (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y) K t (h.projection_f K hK)) = (tracePush (traceIntegralCoefficients ℓ E) p₂).map ((traceSquareG (traceIntegralCoefficients ℓ E) f p₁ p₂ sq.toCommSq (traceTate ℓ E Y) K).hom ▷ traceIntegralTW ℓ E f p₁) ≫ @inv _ _ _ _ (traceProjection (traceIntegralCoefficients ℓ E) p₂ ((traceG (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y)).obj K) (traceIntegralTW ℓ E f p₁)) (h.projection_rhs K hK) ≫ ((traceG (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y)).obj K ◁ t₂) ≫ (ρ_ ((traceG (traceIntegralCoefficients ℓ E) f (traceTate ℓ E Y)).obj K)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6110e3efb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after the ef40e3e6 RETURN (H2). Both Lean modules are byte-identical to ef40e3e6, which was otherwise correct. The new existing:true def node def-sfb-proetale-trace-coefficient-interfaces covers TraceD, tracePull, tracePush, TraceLoc, traceTate, CondensedTensorNormalization, condensedTensorCore_existsUnique, condensedTensorCore, condensedUpperStarMonoidal and condensedDerivedUnitIso. All exist in live TraceBaseChangeFirst; the primary statement is verbatim (line 317). It omits trace_base_change_first, TraceFirstAssertion and TraceFirstHypotheses. Its citations equal its stmt_deps (8 foundational nodes), and the Q16 owner record is untouched. The item and def-sfb-proetale-projection-exchange-maps now cite it in place of lem-sfb-trace-base-change-first. The delivered modules use only TraceLoc, tracePull, tracePush, traceTate and condensedDerivedUnitIso (plus the monoidal instance), all covered by the new node. Acyclic (2222, 2224 and 2280 reached nodes). Item vs live differs only in lean and stmt_deps; the dependency records equal live. nt_compile --json rc 0, no warnings: TraceBaseChangeFirst 38.0 s, ProEtaleProjectionExchangeMaps 36.7 s, TraceBaseChangeSecond 50.3 s. Non-blocking: TraceDerived/traceSquarePullback near-duplicate TraceD/tracePullSquare; the tensor and unit comparisons are separately normalized; maintainer note that the node lists Q16's sorry helper condensedTensorCore_existsUnique, whose content is stated in the node."
  }
 }

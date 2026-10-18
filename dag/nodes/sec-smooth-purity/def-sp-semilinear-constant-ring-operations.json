@@ -1,0 +1,154 @@
+{
+ "id": "def-sp-semilinear-constant-ring-operations",
+ "kind": "definition",
+ "title": "Constant-ring semilinear system operations and normalized evaluation mates",
+ "status": "split",
+ "statement": "Fix a universe $u$, with schemes in universe $u$ and rings in universe $u+1$. Let $C:\\mathbb N\\to\\operatorname{CommRing}$ be any sequence of commutative rings with homomorphisms $\\tau_n:C_{n+1}\\to C_n$, and let $X$ be a scheme [def-pc-scheme]. On its small pro-etale site [def-weil-pbc-proetale-site], put $B_{n,X}=\\underline{C_n}_X$ and $\\tau_{n,X}=\\underline{\\tau_n}_X$, using the constant sheaf functor [def-weil-pbc-constant-sheaf]. Define $B_{\\bullet,X}$ on the vertical sequence site by $B_{\\bullet,X}(n,V)=B_{n,X}(V)$, with the given horizontal ring transitions. Define $\\mathscr S_X$ to be the strict semilinear system category [def-coef-semilinear-system-models]: its objects are sheaves of $B_{n,X}$-modules $M_n$ with $B_{n+1,X}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{\\tau_{n,X}}M_n$, and its morphisms are componentwise module maps commuting with these transitions. Write $D_X=D(\\mathscr S_X)$ for its ordinary unbounded derived category [def-weil-abstract-derived-category].\n\nFor a scheme map $f:X\\to Y$, use the sequence-site functor $(n,V)\\mapsto(n,V\\times_YX)$ and the structural ring map uniquely characterized at every $(n,V)$ by the canonical constant-section map $B_{n,Y}(V)\\to B_{n,X}(V\\times_YX)$. Define $f_{*,\\bullet}:\\mathscr S_X\\to\\mathscr S_Y$ to be module-sheaf direct image with this ring map, and $f^*_\\bullet$ to be its left adjoint, with its ordinary adjunction unit and counit retained. Set $P_f=Df^*_\\bullet$, the exact termwise localization, $R_f=Rf_{*,\\bullet}$, the total right-derived functor on systems, and take $P_f\\dashv R_f$ to be the adjunction induced by that ordinary adjunction. For an open immersion $j:U\\hookrightarrow X$ [def-weil-open-immersion], define $j_{!,\\bullet}$ as the left adjoint of $j^*_\\bullet$ (the sheafified extension-by-zero construction [def-weil-extension-by-zero-presheaf]), retaining its ordinary unit and counit, and set $J_j=Dj_{!,\\bullet}$.\n\nFor $n\\in\\mathbb N$, let $E_n^0:\\mathscr S_X\\to\\mathcal T_X(C_n)$ be evaluation $M\\mapsto M_n$ followed by the constant strict tower, where $\\mathcal T_X(C_n)$ and its ordinary and derived operations are those of [def-cbc-strict-constant-tower-operations], and set $E_n=DE_n^0$. Specify the ordinary direct-image comparison $f_{*,n}^{\\mathcal T}\\circ E_{n,X}^0\\cong E_{n,Y}^0\\circ f_{*,\\bullet}$ by the identity on every underlying component section $M_n(V\\times_YX)$. Define $a_{f,n}:f_n^{*,\\mathcal T}\\circ E_{n,Y}^0\\to E_{n,X}^0\\circ f_\\bullet^*$ as the ordinary adjunction transpose [def-weil-pbc-adjunction-mate] of the inverse of this specified comparison, and use its inverse isomorphism after exact localization to define $E_{n,X}\\circ P_f\\cong G_{f,n}\\circ E_{n,Y}$. Define $E_{n,Y}\\circ R_f\\to R_{f,n}\\circ E_{n,X}$ as the derived adjunction mate of the inverse of this last comparison. These definitions retain the specified section and adjunction normalizations, with no hypothesis of flat coefficient transitions, finiteness of the rings, boundedness of complexes, or faithfulness of derived evaluation. The site object universe is $u+1$, its morphism universe is $u$, the ring/module universe is $u+1$, and the derived localization universe is $u+2$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-coef-semilinear-system-models",
+  "def-weil-abstract-derived-category",
+  "def-weil-open-immersion",
+  "def-weil-extension-by-zero-presheaf",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs (open-extension adjunctions and maps of towers) and Levels (evaluation-compatible operations). Arbitrary-ring strict-system specialization of Zheng, Construction 4.1 and Lemma 4.10; Stacks Tags 03D7, 03DI, 03EK and 07A4. Already constructed in Sheaf.SixFunctors.SemilinearProperOpenMatePasting, independent of its mate-pasting theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant ring sheaves inverse sequence strict semilinear module systems inverse image direct image extension by zero derived adjunction evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.evaluation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(X : Cᵒᵖ) : SheafOfModules.{v} R ⥤ ModuleCat.{v} (R.val.obj X)\", \"doc\": \"The functor that maps a sheaf of modules over a sheaf of rings $ R $ to its module over $ R(X) $ by first forgetting the sheaf condition to obtain a presheaf of modules and then evaluating at the obje\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).counit.app M).val.app U x = M.val.map (adj.unit.app U.unop).op x\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \": functor R ⊣ underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \": functor R ⊣ underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesLimitsOfShape D (evaluation R X : SheafOfModules.{v} R ⥤ _)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ preserves limits of shape $D$. This means that given a diagram in the category of sheaves of module\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Only generic sheaf-module adjunction/evaluation results; none gives this constant-ring strict-system specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinear module systems constant coefficient rings pro etale pullback pushforward extension by zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"KaehlerDifferential.moduleBaseChange'\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} is equipped with a B-module structure. This construction utilizes th\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Generic module pullbacks and etale algebra results; no exact specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "SemilinearProperOpen|coefficientSequenceTopology|systemRing (Mathlib/CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "SemilinearProperOpen in upstream WeilConjectures and lean/Sheaf; blueprint_refs.py search semilinear; DAG ownership search",
+   "results": "Upstream has no SemilinearProperOpen namespace. The project namespace occurs in lean/Sheaf/SixFunctors/SemilinearProperOpenMatePasting.lean. Its definitions are recorded among the theorem node's helpers but have no separate definition owner. def-coef-semilinear-system-models owns generic Systems/DS, and def-coef-semilinear-geometry-base, -derived and -ops own abstract interfaces rather than this specialization. blueprint_refs.py search semilinear found 15 blueprint nodes about other semilinear notions; none owns these definitions.",
+   "date": "2026-10-18",
+   "verdict": "Exact published project definitions found; register existing:true, create no Lean definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-varying-ring-graph-summand",
+  "date": "2026-10-18",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Levels: the constant-ring semilinear module-system operations and normalized evaluation comparisons used by the graph construction.",
+   "via": [
+    "lem-sp-varying-ring-graph-summand",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Modules",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.constantRingSheafify",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.proEtSmall",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.sequenceSmall",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficients",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.transition",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.ringSystem",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Modules",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.derived",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Derived",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.siteMap",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.siteMap_continuous",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.push",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.push_additive",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.push_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.pull",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.ordinaryAdj",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.pull_exact",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.pull_additive",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.pull_limits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.pull_colimits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.systems_kInjective",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.P",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.R",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.adj",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.openPull_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.ordinaryOpenAdj",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_exact",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_additive",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_limits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_colimits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.J",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.levelTower",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.E",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPushOrdinary_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalP",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR_isIso"
+  ],
+  "statement": "abbrev Modules (X : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition owner for the published constant-ring specialization and its canonical ordinary/derived operations and evaluation mates. Reuses the declarations verbatim; none is chosen from or depends on semilinearProperOpenMatePasting. Generic Systems/DS remain owned by def-coef-semilinear-system-models. No module or theorem is redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44edbc443",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44edbc443",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of 4720c777bda7. VaryingRingGraphSummand.lean is byte-identical (sha256 fa3f906a…), so the earlier full substance check (graph_clopen, graphMap, theta, evaluation clause, finite_normalization, edge cases, universes, no hollow defs, docstrings) carries over. Item delta: stmt_dep lem-sf-semilinear-proper-open-mate-pasting replaced by new def node def-sp-semilinear-constant-ring-operations, plus the lean.note; nothing else changed. New node: kind definition, existing:true on unchanged Sheaf.SixFunctors.SemilinearProperOpenMatePasting; all 42 listed declarations exist there; statement 'abbrev Modules (X : Scheme.{u})' matches line 86 verbatim; TeX matches coefficients/ringSystem/Modules=Systems/Derived=DS/push/pull=leftAdjoint/adj/extension/J/E/evalPushOrdinary/evalPullInv/evalP/evalR; nothing is .choose of the theorem; 9 definition stmt_deps, all live, no theorem, no cycle; no competing def node on the module. nt_compile --json clean: SemilinearProperOpenMatePasting 30.4 s, item 8.8 s, exit 0, no warnings. Earlier advisories A1–A3 optional."
+ }
+}

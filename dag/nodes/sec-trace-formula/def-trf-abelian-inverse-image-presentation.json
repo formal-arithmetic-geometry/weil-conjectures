@@ -1,0 +1,107 @@
+{
+ "id": "def-trf-abelian-inverse-image-presentation",
+ "kind": "definition",
+ "title": "Normalized presentations of abelian inverse image",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites [def-weil-pbc-sites-and-cohomology] and let $L:\\operatorname{Sh}(J,\\mathrm{Set})\\to\\operatorname{Sh}(K,\\mathrm{Set})$ be a functor. An abelian inverse-image presentation of $L$ consists of a functor $A:\\operatorname{Ab}(J)\\to\\operatorname{Ab}(K)$ and a natural isomorphism $e:|A(-)|\\cong L(|-|)$, with the following graph normalizations. For every abelian sheaf $M$, test sheaf $T$, and arrows $a,b,t:T\\to |M|$ satisfying $t=a+b$ on every section, the arrows $e_M^{-1}L(a),e_M^{-1}L(b),e_M^{-1}L(t)$ satisfy the same equation on every section of $L(T)$. Likewise a sectionwise zero arrow remains zero. Naturality of $e$ specifies the underlying action on morphisms. When $L$ preserves finite limits these conditions express precisely transport of addition and zero along its finite-product and terminal-object comparisons; additive inverses are determined by addition and zero. No adjunction or exactness on abelian sheaves is part of the datum.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR, quadruple description preceding Proposition 00YV, and Proposition 00YV (2), definition of the transported abelian operations"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift a finite limit preserving functor of sheaves of sets to abelian sheaves with normalized underlying sheaf and addition",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, PresheafOfModules.toPresheaf_preservesFiniteLimits, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.toPresheaf_preservesLimit, CategoryTheory.HasSheafify.mk, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.presheafToSheaf_additive, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf. Additional project/DAG searches: rg AbelianSheafInverseImage|AbelianInverseImage found only scheme-specific scalarAbelianInverseImage/moduleAbelianInverseImageComparison; blueprint_refs.py search abelian inverse image found only sk-lem-pe-injective-acyclicity. ConstantLeftModuleInverseImageLift has a coefficient-specific abelian field inside additional module and derived data; it is not the standalone presentation.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: reuse sheafCompose and the existing sheaf categories; no standalone normalized abelian inverse-image presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on sheaves of abelian groups with a natural underlying set inverse image isomorphism preserving addition and zero on every generalized section",
+   "results": "8 hits: SheafOfModules.toSheaf, CategoryTheory.sheafForget, CategoryTheory.sheafToPresheaf, SheafOfModules.pullback, TopCat.Sheaf.pushforward, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.pushforwardSections, SheafOfModules.pushforward. Additional project/DAG searches: rg AbelianSheafInverseImage|AbelianInverseImage found only scheme-specific scalarAbelianInverseImage/moduleAbelianInverseImageComparison; blueprint_refs.py search abelian inverse image found only sk-lem-pe-injective-acyclicity. ConstantLeftModuleInverseImageLift has a coefficient-specific abelian field inside additional module and derived data; it is not the standalone presentation.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: reuse sheafCompose and the existing sheaf categories; no standalone normalized abelian inverse-image presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianSheafInverseImage|AbelianInverseImage|abelian.*inverse.*[Ll]ift",
+   "results": "0 hits: no hits. Additional project/DAG searches: rg AbelianSheafInverseImage|AbelianInverseImage found only scheme-specific scalarAbelianInverseImage/moduleAbelianInverseImageComparison; blueprint_refs.py search abelian inverse image found only sk-lem-pe-injective-acyclicity. ConstantLeftModuleInverseImageLift has a coefficient-specific abelian field inside additional module and derived data; it is not the standalone presentation.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: reuse sheafCompose and the existing sheaf categories; no standalone normalized abelian inverse-image presentation"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-inverse-image-exact",
+  "date": "2026-10-18",
+  "group": "Q29"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The normalized induced abelian-sheaf functor in the exactness input for inverse image of sheaf differentials.",
+   "via": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.AbelianInverseImagePresentation",
+  "declaration": "CategoryTheory.AbelianInverseImagePresentation",
+  "file": "lean/Sheaf/CategoryTheory/Sites/AbelianInverseImagePresentation.lean",
+  "statement": "structure AbelianInverseImagePresentation {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28f992f81",
+  "group": "Q29",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28f992f81",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement field unchanged; only lean and stmt_deps changed, plus a new def node def-trf-abelian-inverse-image-presentation with real fields (functor, natural underlying iso with f.inverse, add/zero graph laws). Read against Stacks 04JC first assertion, 00YV(2) and 03D2. Since f.inverse preserves finite limits, every abelian presentation and every AlgebraicInverseImageOfUniverses (r=m=w) is forced to be the canonical transport, so the 'for all presentations' exactness clauses are true and no stronger than the node; the existence clauses prevent vacuity. No extra hypotheses: EssentiallySmall.{w} sites with independent universes, any CommRing sheaf B, no flatness. No duplicate found in Mathlib or the side Lean (ConstantLeftModuleInverseImageLift is constant-coefficient only, SitePullbackAbelianUnderlying needs a site functor, liftsGroupRingObjects is existence only). No cycle, the only sorry is the theorem proof, docstrings and blueprint tags present, lean.statement verbatim, report sections present. nt_compile.py --json on both files: rc 0, no errors or warnings; #print axioms shows sorryAx only from the theorem. No findings."
+ }
+}

@@ -152,5 +152,23 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-88bd0bcad (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 0CUE, 0CUF, 00E8 and 01I3. Added the existing principal-localization citation missing from step 3 and clarified step 1’s factor wording. Statements unchanged; edge cases and dependency checks pass. Review and corrected whole JSON written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.FilteredSpectrumTopologicalLimit",
+  "file": "lean/Sheaf/Topology/FilteredSpectrumTopologicalLimit.lean",
+  "declaration": "AlgebraicGeometry.filteredSpectrumTopologicalLimit",
+  "statement": "theorem filteredSpectrumTopologicalLimit (I : Type u) [PartialOrder I] [Nonempty I] (hdir : Directed (· ≤ ·) (id : I → I)) (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c) : (∃ e : Homeomorph (Spec c.pt) {p : (i : I) → Spec (F.obj i) // ∀ (i j : I) (hij : i ≤ j), (Spec.map (F.map (homOfLE hij))) (p j) = p i}, ∀ x : Spec c.pt, (e.1 x : (i : I) → Spec (F.obj i)) = (fun i => (Spec.map (c.ι.app i)) x)) ∧ ∀ (i : I) (Q : Set (Spec (F.obj i))), IsOpen Q → IsCompact Q → IsCompact ((Spec.map (c.ι.app i)) ⁻¹' Q)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55a68b5b7",
+  "group": "N3",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

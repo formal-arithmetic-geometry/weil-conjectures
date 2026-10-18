@@ -165,7 +165,12 @@
   "def-coef-normalized-dvr-tower",
   "lem-pur-coefficient-extension-reduction-model",
   "lem-pur-integral-operations-scalar-extension",
-  "def-weil-derived-complete-integral-detailed"
+  "def-weil-derived-complete-integral-detailed",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-operation-tower-substitution",
+  "def-pur-integral-derived-operations"
  ],
  "mathlib_searches": [
   {
@@ -290,5 +295,60 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-73a83592c (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement in full, along with the parent lem-pur-derived-pullback-tensor-iso and the proof of lem-pur-integral-operations-scalar-extension. Sources are checked at the cited places: Stacks 07A4 is sites-cohomology lemma-pullback-tensor-product (tags line 9294; .tex lines 3684-3714); the main-20261015 blueprint def-weil-derived-pullback-tensor-hom has the integral-operations clause; the ancestor def-weil-frobenius-coefficient-twists has its last sentence on compatibility with reduction and scalar extension; Bhatt-Scholze Def 3.4.10, Lem 3.4.12 and Prop 3.5.1 are on pp. 22-25. No SGA is used. The displayed square is true: it is the coefficient-square clause of lem-pur-cochain-pullback-tensor-coherence (u=f, R=A_Y, S=A_X, R'=B_Y, S'=B_X, eps=sigma_Y, eps^S=sigma_X) with the item's kappa equal to the inverse of the lemma's kappa. Domains, codomains and the (-1)^p sign were checked. The item is not a restatement of the parent: it adds strict tower compatibility, units, transitivity for successive extensions, and the derived-limit identification. Small cases tested: f=id with L=E and P=Q=A[0], where everything reduces to unitors; the ramified case Q_l(sqrt l), where B_2=F_l[pi]/pi^2 is not flat over Z/l^2, so the ordinary tensors have derived meaning only through K-flatness (step 1), and the statement correctly assumes no flatness; and E in L in F, where iota^{EF}=j iota^{EL}. Step 8 pins a specific choice for the isomorphisms that lem-pur-integral-operations-scalar-extension only asserts exist. It shows the limits have that lemma's shape, naturality, unit and transitivity, and claims no uniqueness. This matches how that lemma's proof builds them (scalar association plus completion) and how lem-trf-integral-pullback-comparison-realization makes the same kind of choice, so I accept it. No new nodes, no cycle (dependency closure of 2257 nodes checked) and no duplicate. The three declared tool_uses are accepted as generic black boxes: lem-weil-pbc-ringed-pullback-preserves-kflat, lem-weil-pbc-ringed-strict-tower-homotopy-limit and lem-pur-integral-operations-scalar-extension. FIX: step 7 used j_m:B_m->C_m and iota^{EF}_m=j_m iota^{EL}_m without citing where j_m is defined. I added both, citing def-weil-integral-scalar-extension for L in F, and added that node to step 7's uses; it was already in proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-scalar-extension-tower-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "declaration": "WeilConjectures.ScalarExtensionTower.scalarExtensionTowerCoherence",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.sequenceSmall",
+   "WeilConjectures.ScalarExtensionTower.siteSmall",
+   "WeilConjectures.ScalarExtensionTower.tensor",
+   "WeilConjectures.ScalarExtensionTower.Complex",
+   "WeilConjectures.ScalarExtensionTower.scalarAdditive",
+   "WeilConjectures.ScalarExtensionTower.scalar",
+   "WeilConjectures.ScalarExtensionTower.pull",
+   "WeilConjectures.ScalarExtensionTower.kappa",
+   "WeilConjectures.ScalarExtensionTower.scalarUnit",
+   "WeilConjectures.ScalarExtensionTower.scalarComp",
+   "WeilConjectures.ScalarExtensionTower.generator",
+   "WeilConjectures.ScalarExtensionTower.pullSection",
+   "WeilConjectures.ScalarExtensionTower.Comparisons",
+   "WeilConjectures.ScalarExtensionTower.comparisons_existsUnique",
+   "WeilConjectures.ScalarExtensionTower.comparisons",
+   "WeilConjectures.ScalarExtensionTower.leftRoute",
+   "WeilConjectures.ScalarExtensionTower.rightRoute",
+   "WeilConjectures.ScalarExtensionTower.square",
+   "WeilConjectures.ScalarExtensionTower.unit",
+   "WeilConjectures.ScalarExtensionTower.composition",
+   "WeilConjectures.ScalarExtensionTower.integralTensorGenerator",
+   "WeilConjectures.ScalarExtensionTower.IsTensorModelNormalized",
+   "WeilConjectures.ScalarExtensionTower.TensorModel",
+   "WeilConjectures.ScalarExtensionTower.pullbackReduction",
+   "WeilConjectures.ScalarExtensionTower.scalarReduction",
+   "WeilConjectures.ScalarExtensionTower.tensorReduction",
+   "WeilConjectures.ScalarExtensionTower.Good",
+   "WeilConjectures.ScalarExtensionTower.DerivedSigmaModel",
+   "WeilConjectures.ScalarExtensionTower.derivedSigma_existsUnique",
+   "WeilConjectures.ScalarExtensionTower.derivedSigma",
+   "WeilConjectures.ScalarExtensionTower.realizationModels",
+   "WeilConjectures.ScalarExtensionTower.scalarExtensionTowerCoherence",
+   "WeilConjectures.ScalarExtensionTower.modelSection",
+   "WeilConjectures.ScalarExtensionTower.quotientModels"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarExtensionTowerCoherence.lean",
+  "statement": "theorem scalarExtensionTowerCoherence (W : Bool → Scheme.{u}) (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W) (SX : IntegralComparisonScalarModel.{u, u} l E L ι (W true) (ME.calculus true) (ML.roos true)) (SY : IntegralComparisonScalarModel.{u, u} l E L ι (W false) (ME.calculus false) (ML.roos false)) (TE : TensorModel l E (W false) (ME.calculus false) (ME.roos false)) (TL : TensorModel l L (W false) (ML.calculus false) (ML.roos false)) (f : W true ⟶ W false) (_hX : IsUnit (l : Γ(W true, ⊤))) (_hY : IsUnit (l : Γ(W false, ⊤))) (M N : sfIntegralConstructibleCategory l E (W false)) : ∃ (hF : IsSfDerivedComplete l E (W true) ((integralDerivedPullback.{u, u} l E f).obj M.obj)) (hT : IsSfDerivedComplete l E (W false) ((integralCompletedTensor.{u, u} l E (W false)).obj (M.obj, N.obj))), ((ML.calculus true).reduction.map (scalarPullbackCompleted l E L ι f M.obj M.property.1 hF).hom ≫ pullbackReduction l L W ML f ((integralScalarExtension.{u} l E L ι (W false)).obj M.obj) ≫ (integralComparisonDerivedSequencePullback.{u, u} l L f).map (scalarReduction l E L ι (W false) (ME.calculus false) (ML.calculus false) (ML.roos false) SY M.obj) = scalarReduction l E L ι (W true) (ME.calculus true) (ML.calculus true) (ML.roos true) SX ((integralDerivedPullback.{u, u} l E f).obj M.obj) ≫ (integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map (pullbackReduction l E W ME f M.obj) ≫ (integralComparisonSystemScalarPullback.{u, u} l E L ι f).hom.app ((ME.calculus false).reduction.obj M.obj)) ∧ ((ML.calculus false).reduction.map (scalarTensorCompleted l E L ι (W false) M.obj N.obj M.property.1 N.property.1 hT).hom ≫ tensorReduction l L (W false) (ML.calculus false) (ML.roos false) TL ((integralScalarExtension.{u} l E L ι (W false)).obj M.obj) ((integralScalarExtension.{u} l E L ι (W false)).obj N.obj) ≫ (ML.calculus false).systemClosed.tensor.map (Prod.mkHom (scalarReduction l E L ι (W false) (ME.calculus false) (ML.calculus false) (ML.roos false) SY M.obj) (scalarReduction l E L ι (W false) (ME.calculus false) (ML.calculus false) (ML.roos false) SY N.obj)) = scalarReduction l E L ι (W false) (ME.calculus false) (ML.calculus false) (ML.roos false) SY ((integralCompletedTensor.{u, u} l E (W false)).obj (M.obj, N.obj)) ≫ (integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W false)).map (tensorReduction l E (W false) (ME.calculus false) (ME.roos false) TE M.obj N.obj) ≫ (derivedSigma l E L ι (W false) (ME.calculus false) (ML.calculus false)).hom.app ((ME.calculus false).reduction.obj M.obj, (ME.calculus false).reduction.obj N.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The complete node is rendered by the main derived-reduction theorem together with square, unit, composition, quotientModels and their pure-tensor-normalized canonical adapters. All maps live on actual ringed quotient sequence sites, so equality includes every transition and inverse; the representative-normalized realizations pin the named completed comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35d1bc6de",
+  "group": "Q55",
+  "result": "pass",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

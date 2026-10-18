@@ -350,12 +350,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-68e90c475 (reviewer sub-agent of L); spot-checked: I read the whole item, the new helper, every cited statement, the main-20261015 blueprint proof, the unit route and Stacks derived.tex 014E/014Q (the cone convention with the negative projection). The new node lem-sf-double-hom-cone-comparison is true: I re-derived by hand that s_{C,m} is a chain map, the formula (chi g)(y)=(-1)^{p+r}g(y), both components of the T^2(E) differential under theta, theta T^2(i)=i, and chi_A T^2(-pi)=-pi theta. It is not a duplicate (I compared it with lem-sc-hom-complex-mapping-cone, the exactness clause of the ringed-site currying lemma, lem-sfb-ringed-site-duality-maps and the internal-Hom shift lemmas) and it is not a restated clause of the item. Steps 3, 5, 6 and 7 check out: the chain-map computation for b, the exponent (p+1)t in the shift equation, and the commshift hypotheses. Step 8 meets the hypotheses of the ambient adjoint (Spec k is Noetherian, Nagata gives the compactification, finite type over Noetherian gives Noetherian, A is finite). One C3 fault, repaired: step 4 identified the derived adjunction of step 1 with chain currying, but the cited statement of lem-weil-pbc-ringed-internal-hom-exact-restriction (and of rhom-global-sections) gives only an unnamed natural isomorphism, so delta=Q(b) was not justified. Fix: step 1 now builds the bijection on K-flat/K-injective models from cited statements (kflat-into-kinjective, kinjective-hom-derived, lem-sc-derived-hom-tensor-total, the global-homotopy lemma, tensor-descent). The symmetry paragraph moved to step 2, and step 4 now holds by construction. Step 8 also cites def-weil-pbc-derived-categories and def-weil-size-convention for the small etale site. proof_deps and split_report.tool_uses were updated to match. The statement, blueprint fields and new node are unchanged. I accept the remaining declared tool uses, and the citation of thm-amb-etale-exceptional-adjoint, which the blueprint node itself cites. No SGA source is used and there is no cycle.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-de1ce422b",
-  "group": "Q11",
+  "reviewer": "NT-stage2-cc-3f43e3118",
+  "group": "NW",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical maps, universes, edge cases, and maintainer gates. All three modules reproduced cleanly through scompile.py in sandbox and library views. No fixes required; branch unchanged."
+  "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
  },
  "lean": {
   "module": "Sheaf.Paper.DualityPairing",
@@ -367,14 +367,16 @@
    "AlgebraicGeometry.ProEtale.AmbientDualityPairing",
    "AlgebraicGeometry.Etale.ambient_duality_pairing",
    "AlgebraicGeometry.Etale.AmbientDualityPairing.bidualityMap",
-   "AlgebraicGeometry.ProEtale.AmbientDualityPairing.bidualityMap"
+   "AlgebraicGeometry.ProEtale.AmbientDualityPairing.bidualityMap",
+   "AlgebraicGeometry.Etale.IsEtaleKoszulSymmetry",
+   "AlgebraicGeometry.Etale.etaleKoszulSymmetry"
   ],
   "statement": "theorem ambient_duality_pairing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y (dualizingComplex (ModuleCat.{u + 1} Λ) aY) ∧ ∀ W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)), ProEtale.AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y W",
   "branch": "newtargets-dag",
-  "by": "Q11",
-  "date": "2026-10-16",
+  "by": "NW",
+  "date": "2026-10-18",
   "existing": false,
   "file": "lean/Sheaf/Paper/DualityPairing.lean",
-  "note": "§1(B): the current published canonical pairing and its bidualityMap projections are retained. Direct import of its public legacy pro-etale Hom closure together with the required intrinsic finite-coefficient framework fails with the duplicate UpperLowerStar notation declaration. Replace only that Hom import by its generic closed derived-category import, and unfold the pro-etale derivedTensor, derivedHom and tensor-Hom adjunction wrappers to their exact definitions. All pairing equations, Koszul normalizations, projected arrows, theorem hypotheses and conclusions are unchanged; no additional predicate or arbitrary map is introduced."
+  "note": "§1(B), repair of returned H4/H13: preserve the entire existing pairing module, with its evaluation normalization, biduality maps, shifts, triangles, and pro-etale clause unchanged. Expose the standalone symmetry component constructed in its proof step 1 by etaleKoszulSymmetry. The geometric pairing theorem otherwise exposes it only after specializing the dualizing object and invertible-exponent data; direct specialization of raw DerivedMonoidal.braiding to derivedTensor hit a deterministic kernel timeout. This helper has exactly that proof component and fixes every hom by HEq to the canonical descended Koszul braiding. Therefore its witness determines the symmetry uniquely and introduces no arbitrary map or extra assumption in the consumer. All formal prerequisites were already public imports of this module. IsEtaleKoszulSymmetry names exactly the same component HEq condition, avoiding the deterministic kernel timeout caused by repeating its large inline predicate in Classical.choose."
  }
 }

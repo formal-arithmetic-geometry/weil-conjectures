@@ -273,5 +273,23 @@
   "group": "Q159",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-47952293a (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 source (Setting, Transport, Extension of scalars, Conclusion), both units and every cited statement. The statement agrees with the source: arbitrary commutative condensed Lambda, any f, module objects in abelian pro-etale sheaves with the sheafified tensor over Z, f^*=Ext_{alpha_f} o mapMod(f^*_Ab). Nothing is weakened. Steps 1-3, 5 and 6 are correct and every hypothesis is in force: abelian monoidal categories with additive, cocontinuous tensor; Lambda_Y, f^*Lambda_Y and Lambda_X commutative; F additive (by the adjunction transpose) and exact; U G = F U for the lifted lemma; Res_{alpha^{-1}} in the right direction; the hypotheses of the extension-along-iso nodes; and the transfer along theta. One C4 fault, which I repaired: step 4 claimed alpha_f is an isomorphism of ring objects from lem-sfb-alpha-iso, which only states that alpha_f is an isomorphism. Step 4 now also cites lem-sfb-alpha-ring-hom (on the route, reviewed) and adds the line that the inverse of a ring-object isomorphism is a ring-object map. The proof_deps are updated and I checked that no cycle results. There are no new nodes, and no duplicate exists in the DAG (sk-prop-sfb-cartesian-coefficients covers admissible Lambda only). I accept the tool uses det-prop-sfb-module-pullback-exact-lifted and lem-sfb-alpha-iso, both prescribed by the source; det-def-sfb-sheaf-tensor-closed is on the route, so its declaration was unnecessary. Edge cases checked: identity f, empty X, Lambda=0, Z/4 coefficients, and Z->Z/2 as a negative case. Maintenance note: the item is exactly the statement of unit sk-prop-sfb-module-pullback-exact (realized.statement is empty) but is bound to sk-def-sfb-dc-restricted-functors, and its blueprint.is is null. The maintainer should consider rebinding it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedModulePullbackExact",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_additive_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedModulePullbackExact.lean",
+  "statement": "theorem module_pullback_additive_exact (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) : (upperStar Λ f).Additive ∧ PreservesFiniteLimits (upperStar Λ f) ∧ PreservesFiniteColimits (upperStar Λ f) ∧ PreservesFiniteLimits ((AlgebraicGeometry.ProEtale.upperStar AddCommGrpCat.{u + 1} f).mapMod (condensedRingObj Λ Y)) ∧ PreservesFiniteColimits ((AlgebraicGeometry.ProEtale.upperStar AddCommGrpCat.{u + 1} f).mapMod (condensedRingObj Λ Y)) ∧ PreservesFiniteLimits (Mod.extendScalars (condensedPullbackHom Λ f)) ∧ PreservesFiniteColimits (Mod.extendScalars (condensedPullbackHom Λ f))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-441c39d51",
+  "group": "Q49",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  }
 }

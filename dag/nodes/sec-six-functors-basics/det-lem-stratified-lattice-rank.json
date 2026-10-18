@@ -20,7 +20,9 @@
   "sk-def-sfb-module-objects",
   "sk-def-pe-site",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-condensed-e-module-category"
  ],
  "proof": [
   {
@@ -243,5 +245,24 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-d34daaf38 (reviewer sub-agent of L); spot-checked: I read the item in full, all 7 steps and every cited statement; the delivery has no new nodes. The statement matches the main-20261015 blueprint sk-lem-stratified-lattice-rank.md. 'Lisse' is used in the blueprint's sense of locally free of finite rank for the pro-étale topology (sk-lem-coefficient-heart l.11). X is any scheme, quasi-compactness is assumed only for the finiteness clause, and the statement is not weakened. The route is unit paragraph 2: clopen rank loci descend by fpqc descent of opens. Step 2: the transition matrices over C(|W|,E) satisfy AB=1 and BA=1, and evaluating at a point gives n_i=n_j by def-weil-vector-space-dimension. Γ(W,E_W)=C(|W|,E) is checked against HRS Example 3.1 p.6, which holds for any scheme. Step 3: the overlap hypothesis holds, and with V=id the node specializes exactly to Stacks 03N0 (descent.tex lemma-open-fpqc-covering); complements and joint surjectivity give clopen. Step 5: independence of choices uses only the uniqueness clause of the descent statement. Step 6: the restricted families are pro-étale coverings by 022D(3) and weakly étale base change, and the open pieces form a coproduct decomposition. Step 7: a finite subcover of a disjoint clopen cover. Edge cases tested: X empty, L=0, rank 0 against rank r, two points with ranks 1 and 2, an infinite disjoint union of points with unbounded ranks, and non-quasi-separated X. Removing the unused coefficient-heart-closure edge is justified: my transitive reachability check finds no path back to the item. An rg search of the DAG finds no duplicate. All five declared tool_uses are accepted as generic black boxes. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedLatticeRank",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_clopen_rank_decomposition_of_isLisse",
+  "file": "lean/Sheaf/Paper/StratifiedLatticeRank.lean",
+  "statement": "theorem exists_clopen_rank_decomposition_of_isLisse (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) X)) (hL : IsLisseCoefficientModule (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) L) : ∃ R : ℕ → X.Opens, (∀ r : ℕ, IsClosed (R r : Set X)) ∧ (∀ (x : X) (r : ℕ), x ∈ R r ↔ ∃ (U : X.ProEt) (v : U.left), U.hom v = x ∧ Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) r)) ∧ (∀ (U : X.ProEt) (n : ℕ), Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) n) → ∀ (v : U.left) (r : ℕ), U.hom v ∈ R r ↔ n = r) ∧ (CompactSpace X → {r : ℕ | (R r : Set X).Nonempty}.Finite) ∧ IsIso (Sigma.desc (fun r : ℕ ↦ (R r).ι)) ∧ ∀ r : ℕ, ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (R r).toScheme, ∀ i : C.I₀, Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.f i ≫ (R r).ι)).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.X i)) r)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "H3 repair of returned head 62e4e13a3aa2: the finite field extension is supplied by Field, Algebra and FiniteDimensional; every continuousCoefficientRingObj explicitly uses the topology of spectralNorm.normedField ℚ_[l] E and its canonical topological-ring instance. Reuses the published continuous coefficient ring and Q77 lisse predicate; no definition is copied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62c91f7ab",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Repairs the H3 return of 62e4e13a3aa2: E is bound only as Field/Algebra ℚ_[l]/FiniteDimensional, and all eight continuous coefficient ring occurrences use the spectralNorm.normedField topology (the project's |·|_E convention, as in coefficientExtensionAbsoluteValue and LisseLatticeCoefficientsSized). Every clause matches the node: arbitrary scheme, landed Q77 IsLisseCoefficientModule, clopen R : ℕ → X.Opens, existential and universal rank characterizations, finiteness only under CompactSpace, IsIso Sigma.desc of the open subschemes, constant rank r cover on each piece. Edge cases covered (empty X, rank 0, empty U, unbounded ranks, E = ℚ_ℓ); no extra assumptions or universe equalities. Single sorry theorem, no definitions, source/blueprint docstrings with all 7 proof steps, lean.statement verbatim (script-checked), the two added definition stmt_deps are acyclic. nt_compile rc 0 in 3.6 s with no errors or warnings. Cosmetic only: header credits group Q21; report names Mathlib Mod where the record names pulledBackModuleObjects (the same Mod category)."
  }
 }

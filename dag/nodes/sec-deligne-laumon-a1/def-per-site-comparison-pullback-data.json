@@ -1,0 +1,117 @@
+{
+ "id": "def-per-site-comparison-pullback-data",
+ "kind": "definition",
+ "title": "Canonical etale and pro-etale comparison pullback data",
+ "status": "split",
+ "statement": "Use schemes and chosen Cartesian squares [def-weil-pbc-cartesian-square], etale inverse images [def-weil-pbc-inverse-image], the etale-to-pro-etale site comparison [def-weil-pbc-site-comparison-morphism], and pro-etale inverse images [def-weil-proetale-inverse-image]. For a coefficient category $D$ with the small colimits and weak sheafifications needed for these sites, define the etale and pro-etale inverse images by left Kan extension followed by sheafification, with their canonical adjunctions to restriction. Define their identity, composition and chosen-square identifications as the adjoint mates of the corresponding restriction identifications. Define $\\nu_X^*$ by the same Kan-extension/sheafification construction along the inclusion $X_{\\mathrm{et}}\\to X_{\\mathrm{proet}}$. For Grothendieck abelian coefficients this is definitionally $\\mathrm{comparisonUpperStar}(D,X)$ with right adjoint $\\mathrm{comparisonLowerStar}(D,X)$; for set coefficients it is the inverse-image (left-adjoint) part of $\\mathrm{proEtaleSiteComparison}(X)$. Define the site base-change identification by the common chosen fibre products, and the direct-image comparison by restriction on those products. Define $\\nu_Y^* f_{\\mathrm{et}}^{-1}\\cong f_{\\mathrm{proet}}^{-1}\\nu_X^*$ (for $f:Y\\to X$) as the adjunction mate of this direct-image comparison. Define the predicate $\\mathrm{supportSiteComparisonPullbackCoherent}(D)$ to be its identity, arbitrary-composition, and chosen-Cartesian-square equations on every sheaf, using the specified identifications. No coherence assertion is made here.",
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+  "place": "Canonical site inclusion, comparison pullback and adjunction-mate construction; Stacks 099R, 00WX and 0B65 specify the constructions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale proetale comparison inverse image canonical adjunction base change identity composition",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.iso_inv_base_hom_base; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; Algebra.FormallyEtale.comp; SheafOfModules.PullbackConstruction.adjunction; Algebra.Etale.baseChange; Topology.IsInducing.adjunction; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing published definitions in Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence via an existing:true record; no definition is copied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical etale proetale comparison inverse image adjunction base change mate",
+   "results": "8 hits: Scheme.Etale.forgetFullyFaithful; Scheme.Etale.forget; StandardEtalePair.homEquiv_symm_apply; Condensed.profiniteSolidCounit; Scheme.Modules.pseudofunctor_map_adj; Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; Adjunction.functorCategory_inverseImage_isomorphisms_counit; Scheme.Modules.restrictFunctorAdjCounitIso.",
+   "date": "2026-10-18",
+   "verdict": "No specialized definition matches."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLisseRing|supportSiteComparisonCoefficientPullback|IntegralLisseReductionEquivalence (Mathlib, WeilConjectures, lean/Sheaf and dag/nodes); blueprint_refs.py search lisse reduction / comparison pullback",
+   "results": "msearch Mathlib: 0 hits; upstream WeilConjectures: 0 hits. lean/Sheaf finds exactly the definitions in IntegralLisseReductionEquivalence and SupportComparisonPullbackCoherence and their consumers. DAG records only their theorem-node ownership; no definition node owns them. blueprint search lisse reduction: 0; comparison pullback: 6 unrelated nodes.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing published definitions in Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence via an existing:true record; no definition is copied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-lisse-completed-system-comparison",
+  "date": "2026-10-18",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Canonical inverse-image and adjunction-mate definitions used to formulate pullback compatibility of the completed lisse comparison.",
+   "via": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.supportSiteComparisonPullbackCoherent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportSiteEtaleComparisonPullback",
+   "AlgebraicGeometry.ProEtale.supportSiteEtaleComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.supportSiteEtaleComparisonId",
+   "AlgebraicGeometry.ProEtale.supportSiteEtaleComparisonComp",
+   "AlgebraicGeometry.ProEtale.supportSiteEtaleComparisonSquare",
+   "AlgebraicGeometry.ProEtale.supportSiteProEtaleComparisonPullback",
+   "AlgebraicGeometry.ProEtale.supportSiteProEtaleComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.supportSiteProEtaleComparisonId",
+   "AlgebraicGeometry.ProEtale.supportSiteProEtaleComparisonComp",
+   "AlgebraicGeometry.ProEtale.supportSiteProEtaleComparisonSquare",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientPullback",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientAdjunction",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonSiteBaseChangeIso",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientDirectImageIso",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientPullbackIso",
+   "AlgebraicGeometry.ProEtale.supportSiteComparisonPullbackCoherent"
+  ],
+  "statement": "def supportSiteComparisonPullbackCoherent : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Reuse the exact published definitions, including all supporting declarations, in Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence. The prior extraction duplicated those declarations; no copied definition or dependency-module replacement is delivered. This definition node records the existing type/predicate and does not assert its inhabitance/coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7704166b0",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7704166b0",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Head 7704166b02bf repairs both earlier returns. (1) The 88a3b6 return said the statement dependencies cited two theorem nodes only for their definitions. The item now cites two new definition nodes instead: def-per-integral-lisse-reduction-data and def-per-site-comparison-pullback-data. Both are existing:true records of the published declarations in Sheaf.SixFunctors.IntegralLisseReductionEquivalence and Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence. The theorem nodes stay as proof dependencies. (2) L's 8a66bc return found duplicate declarations; there are no copied modules now. The side DAG has 21 landed precedents of this pattern. Each new node statement matches the published structure or predicate field by field. The pullback node records that nu_X^* is definitionally comparisonUpperStar. stage2_delivery.check_existing and check_new_node report no failures for either node. No other node in the side DAG records these declarations except the two owning theorem nodes. The item module is byte-identical to the 88a3b6 module that was reviewed in full. Outside the lean record, the only item-node change is the two statement-dependency swaps, and lean.statement is verbatim. On my own re-reading, every hypothesis and conclusion clause matches the node and BS 6.8.2, 6.8.4(1),(4) and 5.1.5. Specifically: IsFreeSystem keeps the towers finite free; the inverse limit is pinned by IsLimit; rational realization is fully faithful with no essential surjectivity; pullback, ramified coefficient extension at sourceIndex, and identity/composition equations are all pinned. Edge cases checked: empty X, rank 0 and varying rank, index 0 = A/varpi, e=2. Single explicit universe u; no hollow definitions; the only sorry is the item theorem, with the ten-step proof docstring. nt_compile per-file compile: 57.3 s, exit 0, clean."
+ }
+}

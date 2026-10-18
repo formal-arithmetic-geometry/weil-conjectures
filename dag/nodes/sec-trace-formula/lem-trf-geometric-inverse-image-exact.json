@@ -20,7 +20,9 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "def-galois-exact-functor"
+  "def-galois-exact-functor",
+  "def-trf-abelian-inverse-image-presentation",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -228,5 +230,23 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-7ecfbeb74 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 12 cited node statements plus def-weil-pbc-sheafification, Stacks 04JC (sites-modules.tex l.5540, first assertion and proof), Tag 03D2 (l.1020), 03DA/03DB through the cited module node, unit sk-i-curve-zero and the citing parent lem-trf-topos-inverse-image-differentials. The statement is unchanged and correct for an arbitrary geometric morphism and an arbitrary commutative ring sheaf B; the coefficient category is Mod(f^{-1}B) with transported scalars, with no non-flat tensor claim. Step 1: the abelian-group-object adjunction lift applies because L preserves finite limits and R preserves finite products as a right adjoint; no site functor is assumed. Step 2: abelian limits are sectionwise, so the underlying cone is a limit of set sheaves; the factorization u is shown additive by joint uniqueness, which I checked. Step 3: finite colimits are preserved by the lifted adjunction, and additivity and exact sequences are written out. Step 4: the 03D2 action transport L(mu)∘p^{-1} is written out; the transport of LB's ring axioms is stated briefly but is the same elementary argument. Step 5: forgetting scalars preserves limits and colimits and reflects isomorphisms (proved in the step), so the module comparison maps are isomorphisms. Edge cases checked: identity morphism, zero ring, empty diagram, B=Z, non-flat ring change. No new nodes. Accepted tool_uses: lem-weil-pbc-sheaf-algebraic-structures-objects and lem-weil-pbc-module-sheaves-colimits-forgetful, both generic site-theoretic tools. No duplicate: lem-weil-pbc-site-pullback-abelian-exact needs a morphism of sites; lem-pe-constant-left-module-inverse-image covers only constant rings; prop-weil-pbc-inverse-image-(modules-)exact covers only etale sites. No cycle (the 126-node closure does not contain the item), no SGA citation, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.GeometricInverseImageExact",
+  "declaration": "CategoryTheory.GeometricMorphism.geometric_inverse_image_exact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/GeometricInverseImageExact.lean",
+  "statement": "theorem geometric_inverse_image_exact {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) : (∃ A : AbelianInverseImagePresentation f.inverse, exactFunctor _ _ A.functor) ∧ (∀ A : AbelianInverseImagePresentation f.inverse, exactFunctor _ _ A.functor) ∧ (∀ B : Sheaf J CommRingCat.{w}, (∃ (BI : Sheaf K CommRingCat.{w}), Nonempty (SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse B BI)) ∧ ∀ (BI : Sheaf K CommRingCat.{w}) (I : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse B BI), exactFunctor _ _ I.modules ∧ exactFunctor _ _ (I.modules ⋙ SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj BI)))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28f992f81",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement field unchanged; only lean and stmt_deps changed, plus a new def node def-trf-abelian-inverse-image-presentation with real fields (functor, natural underlying iso with f.inverse, add/zero graph laws). Read against Stacks 04JC first assertion, 00YV(2) and 03D2. Since f.inverse preserves finite limits, every abelian presentation and every AlgebraicInverseImageOfUniverses (r=m=w) is forced to be the canonical transport, so the 'for all presentations' exactness clauses are true and no stronger than the node; the existence clauses prevent vacuity. No extra hypotheses: EssentiallySmall.{w} sites with independent universes, any CommRing sheaf B, no flatness. No duplicate found in Mathlib or the side Lean (ConstantLeftModuleInverseImageLift is constant-coefficient only, SitePullbackAbelianUnderlying needs a site functor, liftsGroupRingObjects is existence only). No cycle, the only sorry is the theorem proof, docstrings and blueprint tags present, lean.statement verbatim, report sections present. nt_compile.py --json on both files: rc 0, no errors or warnings; #print axioms shows sorryAx only from the theorem. No findings."
  }
 }
