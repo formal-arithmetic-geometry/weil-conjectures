@@ -6,6 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.CategoryTheory.ScalarLocalization
+public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 

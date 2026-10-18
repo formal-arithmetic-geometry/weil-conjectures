@@ -7,11 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.CategoryTheory.Adjunction.Evaluation
-import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
