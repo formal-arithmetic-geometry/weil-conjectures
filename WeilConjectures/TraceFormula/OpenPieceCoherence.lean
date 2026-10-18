@@ -88,6 +88,25 @@ lemma counit_app_ofNatIsoRight_upperShriekIsoUpperStar
     Iso.symm_inv, conjugateIsoEquiv_apply_hom]
   exact h
 
+
+/-- An open immersion `j` stable under universal homeomorphisms `Φ_U ≫ j = j ≫ Φ` is the base
+change of itself along `Φ`: the square `Φ_U ≫ j = j ≫ Φ` is cartesian. -/
+lemma isPullback_of_comp_eq_of_isOpenImmersion {Φ : X ⟶ X} {ΦU : U ⟶ U}
+    [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦU.left]
+    (hj : ΦU ≫ j = j ≫ Φ) : IsPullback ΦU j j Φ := by
+  have hjl : ΦU.left ≫ j.left = j.left ≫ Φ.left := by
+    rw [← Over.comp_left, hj, Over.comp_left]
+  have H' : Φ.left ⁻¹ᵁ j.left.opensRange = j.left.opensRange := by
+    refine TopologicalSpace.Opens.ext (Set.ext fun x ↦ ?_)
+    constructor
+    · rintro ⟨u, hu⟩
+      obtain ⟨u', rfl⟩ := ΦU.left.surjective u
+      refine ⟨u', Φ.left.injective ?_⟩
+      rw [← hu, ← Scheme.Hom.comp_apply, ← hjl, Scheme.Hom.comp_apply]
+    · rintro ⟨u, rfl⟩
+      exact ⟨ΦU.left u, by rw [← Scheme.Hom.comp_apply, hjl, Scheme.Hom.comp_apply]⟩
+  exact IsPullback.of_map (Over.forget _) hj
+    (IsOpenImmersion.isPullback ΦU.left j.left j.left Φ.left hjl.symm H')
 end OpenImmersion
 
 end AlgebraicGeometry.ProEtale.CondensedRing
