@@ -14,9 +14,59 @@
   "def-weil-closed-immersion",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=i^*M$. By [lem-weil-pbc-invertible-pullback-invertible], $L$ is invertible. Ampleness of $M$ implies that $Y$ is quasi-compact by [def-weil-pbc-ample-invertible-module]. The definition of a closed immersion [def-weil-closed-immersion] identifies $X$ homeomorphically with the closed subset $i(X)$ of $Y$. Apply [lem-weil-pbc-closed-in-quasi-compact] to that closed subset. Thus $X$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$. By ampleness [def-weil-pbc-ample-invertible-module], choose $n\\geq1$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ such that $i(x)\\in Y_s$ and $Y_s$ is affine. Apply [lem-weil-pbc-tensor-power-section-nonvanishing-pullback] to the morphism $i$, the invertible module $M$, this positive integer $n$ and the section $s$. It gives a global section $t\\in\\Gamma(X,L^{\\otimes n})$ whose nonvanishing open is $X_t=i^{-1}(Y_s)$. In particular $x\\in X_t$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+   }
+  },
+  {
+   "text": "Since $i$ is a closed immersion and $Y_s$ is an affine open, clause (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] says that $i^{-1}(Y_s)$ is affine. Hence the section $t$ of Step 2 has affine nonvanishing open $X_t$ containing $x$. For every $x$ we have now produced the positive tensor-power section required by [def-weil-pbc-ample-invertible-module]. Together with invertibility and quasi-compactness from Step 1, this is ampleness of $L=i^*M$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +95,59 @@
    "results": "No ampleness API; unrelated local/open immersion declarations",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*closed|closed.*ample|IsAmple",
+   "results": "{\"t\": \"2026-10-17T23:50:57Z\", \"tool\": \"grep\", \"query\": \"ample.*closed|closed.*ample|IsAmple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ample line bundle restricted to closed subscheme remains ample",
+   "results": "{\"t\": \"2026-10-17T23:50:57Z\", \"tool\": \"leansearch\", \"query\": \"ample line bundle restricted to closed subscheme remains ample\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, IsClosedImmersion, pullback",
+   "results": "{\"t\": \"2026-10-17T23:50:57Z\", \"tool\": \"loogle\", \"query\": \"IsAmple, IsClosedImmersion, pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsAmple'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of an ample invertible sheaf to an arbitrary closed subscheme is ample",
+   "results": "{\"t\": \"2026-10-17T23:51:07Z\", \"tool\": \"leanfinder\", \"query\": \"The restriction of an ample invertible sheaf to an arbitrary closed subscheme is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.ι_basicOpen_preimage\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_comap_ideal\", \"AlgebraicGeometry.IsAffineOpen.basicOpen\"], \"digest\": \"6064b0b92939ed3b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|[Aa]mpleness|[Aa]mple",
+   "results": "{\"t\": \"2026-10-17T23:51:20Z\", \"tool\": \"grep\", \"query\": \"IsAmple|[Aa]mpleness|[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\"], \"digest\": \"a7e16c01ba6cfe6c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, ModuleCat",
+   "results": "{\"t\": \"2026-10-17T23:51:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an ample line bundle along a closed immersion of schemes is ample",
+   "results": "{\"t\": \"2026-10-17T23:51:28Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of an ample line bundle along a closed immersion of schemes is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.instIsClosedImmersionSndScheme\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\"], \"digest\": \"9aa7b3c9a8f716d5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-graded-immersion-ample-criterion",
@@ -77,5 +176,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ample-restrict-closed-immersion",
+  "worker": "stage1",
+  "summary": "Expanded the proof of Stacks Properties Tag 01PU into invertibility and quasi-compactness, pullback of positive tensor-power sections with their nonvanishing loci, and affineness of those loci. All supporting facts already have DAG nodes; no new nodes and no statement change. The project theorem IsAmple.pullback is only for the different projective-over-a-field notion and is not an attachment.",
+  "blueprint": "Realizes Step 3 of sk-lem-trf-graded-immersion-ample-criterion, the restriction of the ample positive Proj twist along the closed immersion. Preserves the historical ancestry through lem-trf-local-term-locality; no replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-b10c4dc88",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-b10c4dc88 (reviewer sub-agent of L); spot-checked: I read the item and every node it cites in full. The statement matches Stacks properties.tex Tag 01PU (lemma-ample-on-closed, l.4274) with Definition 01PS (l.4243) exactly: Y is any scheme, M is ample and invertible, i is any closed immersion, and the claim is that i^*M is ample. No hypothesis is added or dropped. Step 1 shows i^*M is invertible (lem-weil-pbc-invertible-pullback-invertible, sorry-free in slopmaster2). It then uses that Y is quasi-compact by the definition of ampleness, that i is a homeomorphism onto a closed subset, and IsClosed.isCompact (Topology 005C), so X is quasi-compact. Step 2 takes n>=1 and s with i(x) in Y_s and Y_s affine. lem-weil-pbc-tensor-power-section-nonvanishing-pullback (sorry-free in slopmaster2) then gives a section t of the n-th power of the pullback with X_t = i^{-1}(Y_s), using the same nonvanishing predicate, so this is a real section transport and not just an isomorphism. Step 3 uses clause (1) of lem-weil-pbc-closed-immersion-affine-cover-criterion, a Mathlib leaf for Stacks 01QO/01IH, to show X_t is affine, which completes the definition. All cited statements are Mathlib leaves or sorry-free in slopmaster2, so nothing leaves the unit's route and no tool_uses entry is needed. The parent unit's Step 3 uses the item with matching hypotheses. I checked these cases: X empty, i the identity, Spec R/I inside Spec R, and non-reduced X or I not of finite type. There are no new nodes, no cycles and no SGA citations; Mathlib searches are recorded honestly, with LeanSearch marked unavailable. Two observations, no fix applied: (1) the existing reviewed lem-weil-pbc-pullback-ample-invertible (pullback of an ample module along an affine morphism; sorry-free in slopmaster2 as isAmple_tensorPullback_of_isAffineHom) covers the item as a one-line special case. The item already existed (created by Q19) and the report names this candidate, so the maintainer may later merge or shortcut. (2) The item has no lean_audit field; it was created that way by Q19 and this delivery did not change it."
  }
 }
