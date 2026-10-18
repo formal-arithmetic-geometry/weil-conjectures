@@ -1,0 +1,199 @@
+{
+ "id": "lem-f7-etale-compactification-graph-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-etale-adjoint-locality",
+   "place": "Proof paragraph 1: identify compact support for an etale map with exact sum extension; then compose left adjoints and compare their right adjoints.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Graph extension computes etale compact support on sheaves",
+ "statement": "Let $A$ be a finite commutative ring, $u:U\\to X$ a separated quasi-compact etale morphism of arbitrary schemes [def-pc-scheme, def-weil-etale-morphism, def-weil-proper-morphism], and $u=pj$ a compactification with $j:U\\to Z$ open and $p:Z\\to X$ proper. The canonical graph-extension natural transformation $a_c:u_{\\Sigma!}\\to p_*j_!$ of [def-f7-etale-compactification-graph-map] is an isomorphism on constant-$A$ module sheaves. No Noetherian or global compactness condition is imposed on $U,X$. The scheme, morphism, and functor notions used here are those of [def-weil-pbc-etale-sum-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F4Y (lemma-separated-etale-shriek) and Tag 0F52 (lemma-compactify-f-shriek-separated); etale-cohomology.tex Tag 0F4L supplies graph extension. The proof below gives the geometric-fibre verification of the explicit map."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-sum-extension",
+  "def-f7-etale-compactification-graph-map"
+ ],
+ "proof": [
+  {
+   "text": "Construct the graph map as in [def-f7-etale-compactification-graph-map]. The graph is clopen: it is open inside the base change of j because it is an etale diagonal, and is closed as a section of the proper map q. The projection is identity on this component and zero on its complement.",
+   "uses": [
+    "def-f7-etale-compactification-graph-map",
+    "lem-weil-pbc-open-section-clopen",
+    "lem-weil-pbc-etale-sheaf-clopen-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change pulls this decomposition back to the corresponding graph and complement. The projection therefore commutes with base change, component by component. Etale sum exchange is the adjunction-preserving comparison of restriction functors. Mate pasting and transposition under the proper inverse-image/direct-image adjunction identify the base change of a_c with the graph map on the base-changed compactification. The equality is checked on the two sheaf components before passing to any derived category. For the open-extension component, the source API openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap supplies compatibility with ordinary exchange, and unit_map_openImmersionLowerShriekBaseChangeMap_app supplies its adjunction normalization.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-mate-pasting",
+    "def-f7-etale-compactification-graph-map",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a geometric point apply proper base change in degree zero to the previous square. The etale geometric fibre is a finite disjoint union of points, and every section on it has proper support. It is clopen in the proper fibre, since its finitely many rational points are closed. Restriction identifies the two sides with the finite sum and finite product of the stalks. Equivalently, Mathlib IsFinite.of_locallyQuasiFinite gives finiteness of the fibre map directly; the finite-etale sum/direct-image comparison and the clopen comparison compute these same sections.",
+   "uses": [
+    "lem-weil-pbc-proper-geometric-point-exchange",
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-shriek-star-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The graph projection sends a sheet germ to itself on its component and to zero on every other component. Thus the stalk map is the canonical finite sum-to-product map, which is invertible also for an empty index set. The sum-stalk formula fixes this identification on every summand. Conservative geometric stalks detect isomorphisms; naturality of the constructed graph map gives the claimed functor isomorphism. The clopen-product calculation may first be made after forgetting the module structure; all component maps are linear, and the module forgetful functor reflects isomorphisms.",
+   "uses": [
+    "lem-amb-etale-sum-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-shriek-star-finite-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-f7-etale-compactification-graph-map",
+  "lem-amb-etale-sum-stalks",
+  "lem-cbc-extension-zero-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-section-clopen",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F4Y and 0F52, with the graph construction of etale-cohomology.tex Tag 0F4L; the remaining Lean obligation is the recorded geometric-fibre argument.",
+  "note": "The stated generality is checked by the attached Lean proof or, for the remaining graph-isomorphism obligation, by its complete graph and geometric-fibre proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism of schemes, compactly supported pushforward equals exact extension by zero, and exceptional inverse image localizes along it",
+   "results": "8 hits: Scheme.Etale, IsEtale, IsEtale.instFormallyUnramified; isProper_eq, IsSeparated.instCompScheme; Scheme.Modules.pullbackPushforwardAdjunction and restrictFunctorAdjCounitIso. These are geometry or structure-sheaf modules, not constant-ring etale compact support.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including CategoryTheory.Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom and leftAdjointUniq_hom_counit in Mathlib.CategoryTheory.Adjunction.Unique. Read and used the generic adjoint uniqueness API; it does not supply the etale compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "generic adjunction tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek|rightDerivedUpperShriek|rightAcyclic",
+   "results": "msearch grep returned 0 hits. Separate rg in lean/WeilConjectures and lean/Sheaf found the exact etale sum-extension adjunction, the source compact-support composition theorem, and the Noetherian EtaleCompactSupportNormalization theorem.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib statement; project declarations reused as stated in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "date": "2026-10-18",
+  "group": "F7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "worker": "stage3 F7",
+  "summary": "Graph extension computes etale compact support on sheaves",
+  "blueprint": "Expands the etale sum-extension and compactification comparison in lem-amb-etale-adjoint-locality, proof paragraph 1, while retaining the compact-support/adjunction route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-geometric-point-exchange",
+    "why": "The degree-zero proper geometric-point exchange, already proved for module sheaves, identifies the actual stalk map with fibre restriction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic finite-etale fibre or stalk calculation used only for the sheaf comparison, not as a substitute for a compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-star-finite-modules",
+    "why": "Generic finite-etale fibre or stalk calculation used only for the sheaf comparison, not as a substitute for a compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-section-clopen",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactificationGraphIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactificationGraphIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_etaleCompactificationGraphMap",
+  "statement": "theorem isIso_etaleCompactificationGraphMap\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U X : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]\n    (c : Compactification u) : IsIso (etaleCompactificationGraphMap A u c)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261018T071151-L-1667554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261018T071151-L-1667554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-f7-compact-support-composition-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-etale-adjoint-locality",
+   "place": "Proof paragraph 1: identify compact support for an etale map with exact sum extension; then compose left adjoints and compare their right adjoints.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existing unbounded compact-support composition without compactness hypotheses",
+ "statement": "Let $A$ be a finite commutative ring and $f:X\\to Y$, $g:Y\\to T$ morphisms of arbitrary schemes such that $f,g,gf$ admit factorizations as an open immersion followed by a proper morphism. Let $Rf_!$, $Rg_!$, and $R(gf)_!$ be open extension followed by derived proper direct image, using their chosen compactifications. Then there is a natural isomorphism $R(gf)_!\\cong Rg_!Rf_!$ on the ordinary unbounded constant-$A$ module derived categories [def-weil-pbc-derived-categories]. No quasi-compactness assumption is needed. The scheme, morphism, and functor notions used here are those of [def-pc-scheme, def-weil-proper-morphism, def-weil-open-immersion].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriek_comp and preceding docstring, proof using graphs in the product of the proper ambients."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use the already-proved source composition theorem attached below. Its construction takes the product of the proper ambients of g and gf and embeds X as a closed subscheme of an open in that product. Over the open Y in the second ambient the same embedding computes Rf_!. Exchange proper direct image past the open extension, compose the proper direct images and the open extensions, and identify the compactification models. The source construction uses only the supplied compactifications; it does not require quasi-compactness or Noetherianity.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriek_comp and preceding docstring, proof using graphs in the product of the proper ambients.",
+  "note": "The agent transcribed the plan from the existing source-library Lean proof. The attached Lean file and declaration are unchanged; this node only records that existing tool in its actual generality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism of schemes, compactly supported pushforward equals exact extension by zero, and exceptional inverse image localizes along it",
+   "results": "8 hits: Scheme.Etale, IsEtale, IsEtale.instFormallyUnramified; isProper_eq, IsSeparated.instCompScheme; Scheme.Modules.pullbackPushforwardAdjunction and restrictFunctorAdjCounitIso. These are geometry or structure-sheaf modules, not constant-ring etale compact support.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including CategoryTheory.Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom and leftAdjointUniq_hom_counit in Mathlib.CategoryTheory.Adjunction.Unique. Read and used the generic adjoint uniqueness API; it does not supply the etale compact-support comparison.",
+   "date": "2026-10-18",
+   "verdict": "generic adjunction tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek|rightDerivedUpperShriek|rightAcyclic",
+   "results": "msearch grep returned 0 hits. Separate rg in lean/WeilConjectures and lean/Sheaf found the exact etale sum-extension adjunction, the source compact-support composition theorem, and the Noetherian EtaleCompactSupportNormalization theorem.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib statement; project declarations reused as stated in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "date": "2026-10-18",
+  "group": "F7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "worker": "stage3 F7",
+  "summary": "Existing unbounded compact-support composition without compactness hypotheses",
+  "blueprint": "Expands the etale sum-extension and compactification comparison in lem-amb-etale-adjoint-locality, proof paragraph 1, while retaining the compact-support/adjunction route.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic geometry, stalk, or derived-category tool used for its stated conclusion; this does not replace a step of the compact-support unit."
+   }
+  ]
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp",
+  "statement": "theorem nonempty_iso_rightDerivedLowerShriek_comp {X Y T : Scheme.{u}} (f : X ⟶ Y)\n    (g : Y ⟶ T) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :\n    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅\n      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261018T071151-L-1667554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261018T071151-L-1667554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
