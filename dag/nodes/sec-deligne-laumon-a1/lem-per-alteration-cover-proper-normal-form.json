@@ -18,9 +18,193 @@
   "def-weil-finite-type-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the finite rooted refinement tree of [lem-per-alteration-finite-normal-generator-tree]. We prove by induction on the height below a vertex $Z$ that its leaf family is dominated by a proper surjection $H\\to Z$ with $H$ integral and generic degree prime to $\\ell$, followed by a finite completely decomposed family of separated etale finite-type maps to $H$. All schemes constructed remain of finite type over $X$, hence Noetherian and quasi-excellent by [lem-per-quasi-excellent-finite-type-stability] and [lem-weil-pbc-finite-type-over-noetherian]. A leaf uses $H=Z$ and the identity cover. Before the induction step, Steps 2--8 establish the required interchange for an E-vertex: a finite completely decomposed etale family $E_i\\to Z$ with integral sources, followed by integral proper surjections $A_i\\to E_i$ of prime-to-$\\ell$ generic degrees $n_i$, can be dominated by one proper prime-to-$\\ell$ map followed by a finite completely decomposed etale family mapping to the respective $A_i$.",
+   "uses": [
+    "lem-per-alteration-finite-normal-generator-tree",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, general-case opening reduction; II 3.1.2"
+   }
+  },
+  {
+   "text": "For the interchange, apply [lem-per-integral-etale-chart-flatification] to the finite family $E_i\\to Z$ and $A_i\\to E_i$. Its hypotheses require integral Noetherian quasi-excellent $Z$, separated finite-type etale integral $E_i$, and proper dominant integral $A_i$ of finite generic degrees: these are precisely the data in Step 1 at an E-vertex. Obtain a normal integral modification $q:Z_0\\to Z$, normal integral $E_i^0=E_i\\times_ZZ_0$, and integral schemes $B_i$ finite locally free and surjective over $E_i^0$, of ranks $n_i$, with maps $B_i\\to A_i$. Here $q$ is an isomorphism over a dense open, so its generic degree is one. Its image is closed and contains that dense open, hence it is surjective. The family $E_i^0\\to Z_0$ remains completely decomposed: a residue-preserving lift over the image of $z_0$ gives a point of the fibre product over $z_0$ with residue field $\\kappa(z_0)$.",
+   "uses": [
+    "lem-per-integral-etale-chart-flatification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, platification paragraph, printed p. 29"
+   }
+  },
+  {
+   "text": "Put $K=k(Z_0)$, $K_i=k(E_i^0)$ and $F_i=k(B_i)$. By [lem-weil-pbc-etale-fibre-discrete-separable-points], the generic fibre of an etale chart is a disjoint union of spectra of finite separable fields. Since the source is integral, it has a single generic-fibre point. The generic points of $E_i^0$ lie over the generic point of $Z_0$: an etale map is open by [def-weil-etale-morphism, lem-weil-pbc-flat-lfp-open], and a nonempty open image in an integral scheme is dense. On affine charts the residue-field theorem [lem-weil-pbc-etale-algebra-residue-field-separable] therefore gives finite separable $K_i/K$. The generic fibre of $B_i\\to E_i^0$ is $\\operatorname{Spec}F_i$: by [lem-sc-integral-function-field-affine-fraction] its affine ring embeds in $F_i$; it is a finite-dimensional domain over $K_i$, so multiplication by any nonzero element is surjective and it is a field. Its dimension is the locally free rank $n_i$, hence $[F_i:K_i]=n_i$ is prime to $\\ell$. Its characteristic hypothesis holds: $\\ell$ is invertible on $X$, hence its image in the $X$-algebra $K$ is a unit, so $\\operatorname{char}K\\neq\\ell$. Apply [lem-per-sylow-simultaneous-field-sections] to obtain one finite $K'/K$ of degree prime to $\\ell$ with a $K_i$-embedding $F_i\\to M$ for every field factor $M$ of $K_i\\otimes_K K'$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-per-sylow-simultaneous-field-sections",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, generic fields and quasi-Galois/Sylow argument, printed pp. 29--30"
+   }
+  },
+  {
+   "text": "Let $N$ be the normalization of $Z_0$ in $K'$ [def-fin-normalization-extension]. It is obtained on each nonempty affine $\\operatorname{Spec}R\\subseteq Z_0$ by the integral closure $R'$ in $K'$. The ring $R$ is quasi-excellent, hence Nagata by [lem-exc-quasi-excellent-nagata]. The zero-prime case of [def-weil-pbc-nagata-ring] and the definition [def-weil-pbc-japanese-domain] imply that $R'$ is a finite $R$-module. Thus $N\\to Z_0$ is finite. The integral-closure theorem [lem-weil-pbc-integral-closure-finite-extension-normal] identifies $\\operatorname{Frac}(R')=K'$ and makes $R'$ a normal domain; [lem-weil-pbc-localization-normal-domain] gives normal local rings. The affine normalizations glue by the cited normalization definition. Every chart contains the same dense generic point, so $N$ is normal integral with function field $K'$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, normalization in the Sylow fixed field; Stacks Tags 07QV, 035H and integral closure construction"
+   }
+  },
+  {
+   "text": "The finite map $N\\to Z_0$ is proper by [lem-weil-pbc-finite-proper] and surjective because its image is closed and contains the generic point. Its generic degree is $[K':K]$, prime to $\\ell$. Composition with $q$ is proper by [lem-weil-pbc-proper-fp-permanence], surjective, and of the same generic degree because $k(Z_0)=k(Z)$. It is of finite type, and $N$ is Noetherian and quasi-excellent by [lem-weil-pbc-finite-type-over-noetherian, lem-per-quasi-excellent-finite-type-stability]. These observations supply all hypotheses for the normal-component argument in the next step, without requiring the initial $Z$ itself to be normal.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, proper generic-degree conclusion, printed p. 30"
+   }
+  },
+  {
+   "text": "Set $W_i=E_i^0\\times_{Z_0}N$. The maps $W_i\\to N$ are etale by [lem-weil-pbc-etale-scheme-base-change], and separated of finite type by [lem-pod-separated-finite-type-base-change]; their sources are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The normal-component statement [lem-fin-etale-normal-components] decomposes each $W_i$ into finitely many open-and-closed normal integral components $D$. Every such $D$ meets the generic fibre: the etale map is open by [def-weil-etale-morphism, lem-weil-pbc-flat-lfp-open], so every nonempty open of $D$ has image meeting the generic point of $N$. The generic fibre is the base change of $\\operatorname{Spec}K_i$, namely $\\operatorname{Spec}(K_i\\otimes_KK')$; by [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a disjoint union of field spectra, whose points are exactly the field factors $M$ in Step 3, and each component $D$ has one such function field. The embedding $F_i\\to M$ supplies a generic section of $B_i\\times_{E_i^0}D\\to D$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-etale-normal-components",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, the normal etale charts over the finite normalization, printed p. 30"
+   }
+  },
+  {
+   "text": "The map $B_i\\to E_i^0$ is finite locally free, hence finite by [def-pc-finite-locally-free], so the last map is finite by [lem-trf-finite-radicial-basechange] (its first assertion applies to every finite map, without a radicial hypothesis). Take the reduced induced closed structure on the closure of the image of its generic section using [lem-weil-pbc-reduced-induced-closed-subscheme]. This is an integral scheme $C$; its generic field is $k(D)$ because the section gives a residue-field-isomorphic point over the generic point. The map $C\\to D$ is finite, by [lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-composition], and birational. Since $D$ is normal integral, [lem-trf-finite-birational-normal-iso] makes $C\\to D$ an isomorphism. Its inverse followed by $C\\to B_i\\times_{E_i^0}D$ extends the generic section, hence gives a map $D\\to B_i\\to A_i$. The extension uses finiteness and normality; no extension of rational maps by properness alone is asserted.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, extension of generic sections; Stacks Tag 0AB1, lemma-finite-birational-over-normal"
+   }
+  },
+  {
+   "text": "The components $D\\to N$ form a finite completely decomposed etale family. Indeed, for $n\\in N$ choose a residue-preserving point $e\\in E_i^0$ over its image $z_0$; the compatible maps $\\operatorname{Spec}\\kappa(n)\\to E_i^0,N$ yield a point of $W_i$ with residue field exactly $\\kappa(n)$, lying on one $D$. The component inclusion is open, so its composite with $W_i\\to N$ is etale by [lem-weil-pbc-etale-composition-cancellation]. It is separated and finite type: $W_i$ has those properties, and each component is open and closed, hence quasi-compact in the Noetherian $W_i$. Each $D$ maps to the matching $A_i$ by Step 7. This completes the interchange asserted in Step 1, including finite family, separatedness, finite type and all factorisations.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, concluding completely decomposed family, printed p. 30"
+   }
+  },
+  {
+   "text": "Now perform the induction of Step 1. At a P-vertex $Z$ with child $P\\to Z$, apply the induction hypothesis over $P$ to obtain $H\\to P$ and its finite completely decomposed etale family. Compose $H\\to P\\to Z$. Properness follows from [lem-weil-pbc-proper-fp-permanence], and surjectivity composes. The generic degree is the product of the two prime-to-$\\ell$ degrees: if $(a_r)$ is a $k(Z)$-basis of $k(P)$ and $(b_s)$ a $k(P)$-basis of $k(H)$, then $(a_rb_s)_{r,s}$ spans $k(H)$ and is linearly independent by grouping first in the $b_s$ and then in the $a_r$. Thus the product remains prime to $\\ell$. The etale family over $H$ and its maps to the leaves are unchanged.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, stability under composing proper generators"
+   }
+  },
+  {
+   "text": "At an E-vertex $Z$ with children $E_i$, the induction hypothesis on each child gives an integral proper prime-to-$\\ell$ map $A_i\\to E_i$ and a finite completely decomposed separated etale finite-type family $(C_{ij}\\to A_i)_j$ mapping to the leaves below $E_i$. Apply Steps 2--8 to $E_i\\to Z$ and $A_i\\to E_i$. Obtain $N\\to Z$ proper prime-to-$\\ell$ and a finite completely decomposed separated etale finite-type family $(D_a\\to N)_a$ with $D_a\\to A_{i(a)}$. Pull back the corresponding $C_{i(a)j}$ to $D_a$, then compose to $N$. These maps are etale by [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation], separated finite type by [lem-pod-separated-finite-type-base-change, lem-weil-pbc-proper-fp-permanence, lem-sfb-finite-type-composition-base-change]. They are completely decomposed: choose a residue-preserving point in $D_a$ above a given $n$, then a residue-preserving point in its pulled-back $C$-family; the two residue-field isomorphisms compose. Every composite factors through the required leaf. The family is finite since both indexing sets are finite. This proves the induction at an E-vertex.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, finite-generator induction using the interchange"
+   }
+  },
+  {
+   "text": "Apply the induction at the root $X$. The tree lemma supplies a map from every leaf to one of the original $T_b$, so composing the factorisations produced above gives $V_i\\to T_{b(i)}$ over $X$. Put $Y=H$ in the root's induction conclusion. It is integral Noetherian, the map $Y\\to X$ is proper surjective with finite prime-to-$\\ell$ generic degree, and the resulting finite separated etale finite-type family is completely decomposed. All schemes were constructed of finite type over $X$. These are exactly the clauses of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, conclusion, printed p. 30"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-per-alteration-finite-normal-generator-tree",
+  "lem-per-integral-etale-chart-flatification",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-per-sylow-simultaneous-field-sections",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, proof of Theorem 3.2.1, printed pp. 29--30; finite-generator preparation in §§1.2--3.1, printed pp. 25--28. Induction and finite-section extension written out using the cited scheme tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +240,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.Scheme.Cover.changeProp\", \"AlgebraicGeometry.Scheme.Cover.Over.over\"], \"digest\": \"b5ccb944f1f90545\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every prime to ell alteration covering of an integral quasi excellent Noetherian scheme is refined by an integral proper surjection of degree prime to ell followed by a finite completely decomposed etale cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {X S : AlgebraicGeometry.Scheme} →\\n    (f : X ⟶ S) →\\n      (hf : P f) → [inst : AlgebraicGeometry.Surjective f] → Unique (AlgebraicGeometry.Scheme.Hom.cover f hf).I₀\", \"doc\": \"Let $P$ be a property of morphisms between schemes, and let $f: X \\\\to S$ be a surjective morphism of schemes that satisfies property $P$. The cover generated by the single morphism $f$ has a zeroth in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f], (AlgebraicGeometry.Scheme.Hom.cover f hf).I₀ = PUnit.{v + 1}\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $, the zeroth component $ I_0 $ of the covering sieve $\\\\{f\\\\}$ generated by $ f $ in the precoverage combinin\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary etale topology, normalization, jointly surjective covers and proper base change do not state a prime-to-ell alteration-cover normal form; the grep matches in MayerVietorisSquare.lean are comments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper alteration and Nisnevich normal form for a covering sieve in the prime to ell alteration topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X →\\n      AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X\", \"doc\": \"Given a scheme $X$ and a cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by a morphism property $P$, this function lifts $\\\\mathcal{U}$ from universe level $v$ to universe level $u$ whi\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : P.IsMultiplicative] {X : AlgebraicGeometry.Scheme} {S : CategoryTheory.Sieve X},\\n  S ∈ (AlgebraicGeometry.Scheme.grothendieckTopology P) X → ∃ 𝒰, CategoryTheory.Presieve.ofArrows 𝒰.X 𝒰.f ≤\", \"doc\": \"Given a morphism property $ P $ on the category of schemes that is stable under base change and multiplicative, if a sieve $ S $ on a scheme $ X $ belongs to the Grothendieck topology generated by $ P\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f], (AlgebraicGeometry.Scheme.Hom.cover f hf).I₀ = PUnit.{v + 1}\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $, the zeroth component $ I_0 $ of the covering sieve $\\\\{f\\\\}$ generated by $ f $ in the precoverage combinin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalClosure\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property $ P $ on schemes is said to be source-local if a morphism $ f $ satisfies $ P $ whenever there exists a covering sieve $ \\\\mathcal{U} $ of the source scheme $ X $ such that for ever\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary etale topology, normalization, jointly surjective covers and proper base change do not state a prime-to-ell alteration-cover normal form; the grep matches in MayerVietorisSquare.lean are comments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary etale topology, normalization, jointly surjective covers and proper base change do not state a prime-to-ell alteration-cover normal form; the grep matches in MayerVietorisSquare.lean are comments."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|Nisnevich|completely.decomposed",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary etale topology, normalization, jointly surjective covers and proper base change do not state a prime-to-ell alteration-cover normal form; the grep matches in MayerVietorisSquare.lean are comments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral proper prime to ell alteration followed by a completely decomposed etale family dominates any alteration cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \": IsZariskiLocalAtTarget @IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary etale topology, normalization, jointly surjective covers and proper base change do not state a prime-to-ell alteration-cover normal form; the grep matches in MayerVietorisSquare.lean are comments."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-standard-refinement",
@@ -71,7 +290,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Ancestor proof Step 3 (Verdier duality), through the open-immersion finiteness input to finite exceptional preservation: ILO XIII 3.2.1, the sentence applying IX 1.1 and II 3.2.3 to construct the finite family of commutative diagrams. Expose II, Theorem 3.2.3, printed pp. 30--31, with finite-cover Corollary 2.2.4, printed p. 27; finite form as used in Expose XIII 3.2.1, printed p. 199. On the integral Noetherian sources the finite flat maps have positive constant finite locally free rank; etale sources may be refined by affine opens. Input to the standard-refinement argument: Expose II, Theorem 3.2.1, printed pp. 29--30; finite affine-open refinement using Corollary 2.2.4, printed p. 27. This is the proper-surjection normal form, not the modification/finite-flat normal form of Theorem 3.2.3.",
+   "place": "Ancestor proof Step 3 (Verdier duality), through the open-immersion finiteness input to finite exceptional preservation: ILO XIII 3.2.1 applies IX 1.1 and II 3.2.3; the proper-surjection normal form is supplied by ILO II Theorem 3.2.1, printed pp. 29--30, with finite affine refinement by Corollary 2.2.4, printed p. 27.",
    "via": [
     "lem-per-alteration-cover-standard-refinement",
     "lem-per-prime-to-ell-uniformization-standard-form",
@@ -84,5 +303,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-cover-proper-normal-form",
+  "worker": "stage1",
+  "summary": "Retained the statement of ILO II Theorem 3.2.1. Replaced the interrupted draft by explicit finite-tree induction, with the proper/etale interchange proved by simultaneous flatification, simultaneous field sections, finite normalization and finite birational section extension. Removed the duplicate finite-subcover node in favor of its existing DAG occurrence (used by the generator-tree input), and removed the unused etale-conversion draft node by using completely decomposed generators in that input. Only two new statement-only nodes remain. Corrected the nonexistent tensor-product dependency. No statement correction or attachment.",
+  "blueprint": "Realizes the ancestor Artin--Gabber Step 3 branch: ILO XIII 3.2.1 invokes the proper-surjection normal form of II 3.2.1 and its finite affine refinement (Corollary 2.2.4).",
+  "tool_uses": [
+   {
+    "node": "def-fin-normalization-extension",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "def-weil-pbc-japanese-domain",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "def-weil-pbc-nagata-ring",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-trf-finite-birational-normal-iso",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "General scheme/commutative-algebra tool used in the explicitly cited proof step; the perverse Fourier unit has no replacement for this fact. It supports ILO II 3.2.1 and does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "The generic fibres of etale charts are disjoint unions of spectra of finite separable fields; this is the general scheme fact needed to identify the field factors in the ILO argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-fin-normalization-extension",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-4133f3f90",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-4133f3f90 (reviewer sub-agent of L); spot-checked: Read ILO II §§1.2.5–1.2.8, 2.1–2.3, 3.1.1–3.1.2 and Thm 3.2.1 with its proof (printed pp. 25–30). The item statement is unchanged from live and matches II 3.2.1. All 11 steps were checked against the cited statements. Step 2: the hypotheses and conclusions of the chart flatification hold; c.d. survives base change. Step 3: the generic fibres are fields; K_i/K is separable by 00U3; [F_i:K_i]=n_i. Step 4: normalization is finite via 07QV Nagata and N-2 at the zero prime. Steps 6–7: étale components are normal integral; the generic section extends because the closure is finite and birational onto a normal D (0AB1). Steps 8–10: étale, separated, finite type and c.d. survive composition and pullback. Step 9: the degree is multiplicative. New nodes: the generator tree is true, by the alteration-cover-calculus tree argument plus II 3.1.1/3.1.2, choosing components and normalizing. The Sylow field lemma is true: normal closure L, K'=L^S, and S_σ fixes an extension because their number is prime to ℓ; tested on I empty, inseparable F_i and ℓ=2. Neither node is a duplicate of the cover calculus, the finite-subcover nodes, the Sylow-index node or the residue base change node, and neither restates the item. Batch-5 flags: the closures of chart-flatification (2192 nodes), quasi-excellent-finite-type-stability (g-ring/j2 affine cover) and lem-trf-finite-birational-normal-iso (0AB1) contain only generic commutative algebra and scheme theory (Raynaud–Gruson flattening, Mittag-Leffler, Fitting ideals, G-ring/J-2). They contain no trace-formula or Poincaré-duality statement, no sk-thm-trace-transport and no nt-* node, so I accepted them; the same holds for the direct pod leaf 01KU/01T4. I accepted the worker's tool_uses (generic tools). FIX in the item: Step 3 now checks that char K≠ℓ, which the Sylow lemma requires, from ℓ invertible on X. Step 7 now cites def-pc-finite-locally-free for finiteness of B_i→E_i^0, added to uses and proof_deps. No nodes dropped.; 1 file(s) fixed by the reviewer"
  }
 }
