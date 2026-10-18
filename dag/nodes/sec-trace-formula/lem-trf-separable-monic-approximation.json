@@ -12,9 +12,73 @@
   "def-weil-polynomial-ring",
   "def-pc-separable-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $d=1$, monicity gives $f=T+f_0$. Its derivative is $1$, so $0\\cdot f+1\\cdot f\\prime=1$ proves separability directly. Take $g=f$; every required coefficient difference is $0<\\epsilon$. Henceforth suppose $d\\ge2$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the auxiliary approximation lemma; formal derivative and separability convention: Tag 09H1 (fields-definition-separable), lines 1164–1178. The elementary absolute-value and coefficient calculations are supplied here, not asserted to be in Stacks."
+   }
+  },
+  {
+   "text": "Nontriviality supplies $u\\ne0$ with $|u|\\ne1$. Put $t=u$ if $|u|<1$ and $t=u^{-1}$ otherwise; multiplicativity gives $0<r=|t|<1$. The powers $t^n$ have strictly decreasing positive absolute values $r^n$, so are pairwise distinct. They are eventually smaller than any $\\eta>0$: writing $c=r^{-1}-1>0$, induction gives $(1+c)^n\\ge1+nc$, hence $r^n\\le(1+nc)^{-1}<\\eta$ for every sufficiently large integer $n$. Thus, for every finite subset $S\\subset F$, there is a power $t^n\\notin S$ with $0<|t^n|<\\eta$: only finitely many of the distinct powers belong to $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the auxiliary approximation lemma; formal derivative and separability convention: Tag 09H1 (fields-definition-separable), lines 1164–1178. The elementary absolute-value and coefficient calculations are supplied here, not asserted to be in Stacks."
+   }
+  },
+  {
+   "text": "There is at most one $a\\in F$ with $f\\prime+a=0$ as a polynomial: two such values would have difference the zero constant polynomial and so be equal. Use the preceding power construction with $\\eta=\\epsilon$ to choose $a$ outside this set and with $|a|<\\epsilon$. Put $h=f+aT$. The coefficient formula for the derivative gives $h\\prime=f\\prime+a\\ne0$. Since $d\\ge2$, the added term has degree below $d$, so $h$ is still monic of degree $d$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the auxiliary approximation lemma; formal derivative and separability convention: Tag 09H1 (fields-definition-separable), lines 1164–1178. The elementary absolute-value and coefficient calculations are supplied here, not asserted to be in Stacks."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-polynomial-constant-shifts-finite-exceptions] to $h\\in F[T]$ with $h\\prime\\ne0$. It gives a finite subset $B_h\\subset F$ outside which $h+b$ is separable. Use the powers constructed in step 2, now with $S=B_h$ and $\\eta=\\epsilon$, to choose $b\\notin B_h$ with $|b|<\\epsilon$. Set $g=h+b=f+aT+b$. The cited statement gives that $g$ is separable.",
+   "uses": [
+    "lem-trf-polynomial-constant-shifts-finite-exceptions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the auxiliary approximation lemma; formal derivative and separability convention: Tag 09H1 (fields-definition-separable), lines 1164–1178. The elementary absolute-value and coefficient calculations are supplied here, not asserted to be in Stacks."
+   }
+  },
+  {
+   "text": "Both added terms have degree at most $1<d$, so the coefficient of $T^d$ in $g$ is $1$ and all coefficients above it remain zero. Thus $g$ is monic of degree $d$. The coefficient differences are $g_0-f_0=b$, $g_1-f_1=a$, and $g_i-f_i=0$ for $2\\le i<d$. Their absolute values are respectively $|b|<\\epsilon$, $|a|<\\epsilon$, and $0<\\epsilon$. This proves every required inequality. The construction took place entirely in $F$, with no completeness or perfectness assumption.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the auxiliary approximation lemma; formal derivative and separability convention: Tag 09H1 (fields-definition-separable), lines 1164–1178. The elementary absolute-value and coefficient calculations are supplied here, not asserted to be in Stacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "lem-trf-polynomial-constant-shifts-finite-exceptions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Agent-supplied two-parameter perturbation proof; separability convention from Tag 09H1 (fields-definition-separable). The imported Temkin auxiliary citation is contextual, not a quotation of this density lemma, and its PDF is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +114,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.HasSeparableContraction\", \"IsSepClosed.of_exists_root\", \"Polynomial.Monic.natSepDegree_eq_one_iff\", \"Polynomial.exists_approx_polynomial\", \"Polynomial.lifts_and_degree_eq_and_monic\", \"FirstOrder.Field.realize_genericMonicPolyHasRoot\", \"AlgebraicClosure.subProdXSubC\", \"IsSepClosed.exists_aeval_eq_zero\"], \"sub\": \"\", \"digest\": \"a774026e60329c34\"}",
    "date": "2026-10-18",
    "verdict": "no match: monic coefficient approximation in Mathlib/Analysis/Normed/Field/Approximation.lean:132 does not ensure separability. Mathlib/Analysis/Normed/Field/Dense.lean explicitly lists separable-monic density as a TODO; IsAlgClosed.of_denseRange also requires characteristic zero and an algebraically closed dense subfield."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separable monic polynomials of fixed degree are dense in monic polynomials over a nontrivially valued field",
+   "results": "{\"t\": \"2026-10-18T23:02:55Z\", \"tool\": \"leanfinder\", \"query\": \"Separable monic polynomials of fixed degree are dense in monic polynomials over a nontrivially valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.of_exists_root\", \"Polynomial.Monic.natSepDegree_eq_one_iff\", \"Polynomial.HasSeparableContraction\", \"Polynomial.natSepDegree_ne_zero\", \"IsSepClosed.exists_eval₂_eq_zero\", \"IsSepClosed.exists_aeval_eq_zero\", \"IsSepClosed.exists_eval₂_eq_zero_of_injective\", \"Polynomial.Separable\"], \"digest\": \"93d08d38d2007a9b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Field/Dense.lean:22–30, which lists separable approximation as a TODO, and Approximation.lean:132–137, whose coefficient approximation does not assert separability; semantic hits are definitions, topological separability, or separable-field results."
+  },
+  {
+   "tool": "grep",
+   "query": "approximat.*separable|separable.*approximat|exists_monic_and_natDegree",
+   "results": "{\"t\": \"2026-10-18T23:05:21Z\", \"tool\": \"grep\", \"query\": \"approximat.*separable|separable.*approximat|exists_monic_and_natDegree\", \"sub\": \"Analysis/Normed/Field\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Approximation.lean\", \"Mathlib/Analysis/Normed/Field/Approximation.lean\", \"Mathlib/Analysis/Normed/Field/Approximation.lean\"], \"digest\": \"990181562ea4bfd6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Field/Dense.lean:22–30, which lists separable approximation as a TODO, and Approximation.lean:132–137, whose coefficient approximation does not assert separability; semantic hits are definitions, topological separability, or separable-field results."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.Monic",
+   "results": "{\"t\": \"2026-10-18T23:05:21Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Separable, Polynomial.Monic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsSepClosed.of_exists_root\"], \"digest\": \"33ed8e4f249bebfb\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Field/Dense.lean:22–30, which lists separable approximation as a TODO, and Approximation.lean:132–137, whose coefficient approximation does not assert separability; semantic hits are definitions, topological separability, or separable-field results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "separable monic polynomials are dense among monic polynomials over a nontrivially valued field",
+   "results": "{\"t\": \"2026-10-18T23:05:22Z\", \"tool\": \"leansearch\", \"query\": \"separable monic polynomials are dense among monic polynomials over a nontrivially valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Separable\", \"Dense.isSeparable_iff\", \"AlgebraicClosure.Monics\", \"Polynomial.separable_def'\", \"Polynomial.separable_def\", \"IsSeparable\", \"Polynomial.Separable.of_pow'\", \"Polynomial.Separable.squarefree\"], \"digest\": \"adf965d9dc3f1c6c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Field/Dense.lean:22–30, which lists separable approximation as a TODO, and Approximation.lean:132–137, whose coefficient approximation does not assert separability; semantic hits are definitions, topological separability, or separable-field results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-rank-one-formal-comparison",
@@ -87,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-separable-monic-approximation",
+  "worker": "stage1",
+  "summary": "Checked project attachments and whole-DAG/blueprint duplicates. Preserve the statement. Handle degree one directly; construct infinitely many distinct arbitrarily small powers from nontriviality; choose a small linear perturbation with nonzero derivative, then avoid the finite exceptional constant shifts. One new algebraic statement-only node, searched by two semantic phrasings, Loogle, and grep. No Lean or compiler used. Imported Temkin PDF missing locally, so proof is explicitly agent-written and WANTED is recorded.",
+  "blueprint": "Historical supporting ingredient in the existing ancestry of lem-trf-local-term-locality, namely the separable-approximation input to lem-trf-valuation-rank-one-formal-comparison. This split supplies that already-queued auxiliary lemma and does not change sk-i-curve-zero or its contracting-correspondence route. All five steps concern only this auxiliary algebraic approximation."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-26d316ac1",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-26d316ac1 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the three cited defs, the citer (rank-one formal comparison step 2, which uses exactly the item's statement), Stacks fields.tex 09H0/09H1 (lines ~1145-1178) and Mathlib Dense.lean TODO / Approximation.lean:132 / Separable.lean. Item statement unchanged and correct; nontriviality is needed (trivial value, T^2 in char 2, eps<=1 is a counterexample). Step 1: d=1, f'=1, so f is separable. Step 2: |t|<1 gives distinct powers tending to 0 (Bernoulli), so they avoid any finite set. Step 3: f'+a=0 for at most one a; h=f+aT has h'≠0 and stays monic for d>=2 (checked T^p in char p). Step 4 cites the new node with exactly its hypothesis h'≠0. Step 5 coefficient bookkeeping is right. New node lem-trf-polynomial-constant-shifts-finite-exceptions is true: an irreducible factor q of h' divides h+b for at most one b, and h' has finitely many such factors. Tested on linear h, T^2 (char≠2), T^3 (char 2) and T^p+aT; h'≠0 is necessary (T^p+b over algebraically closed char p fails for every b). It meets B1-B7, three kinds of search are recorded, it is not a clause of the item, and a DAG-wide scan of separable+finite/dense/approximation/shift statements found no duplicate. The blueprint from/via match the item; there is no cycle, no SGA, no tool_uses, the item is not in route-pivot-dropped, and no parallel run exists. Temkin PDF is missing, WANTED recorded, proof labelled agent-written. No changes. Maintainer note: the item belongs to the historical Temkin chain of sk-i-curve-zero."
  }
 }
