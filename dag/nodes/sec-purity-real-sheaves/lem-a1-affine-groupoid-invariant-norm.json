@@ -13,7 +13,8 @@
   "def-pc-fibre-product",
   "def-pc-finite-locally-free",
   "lem-pd-finite-locally-free-norm-charts",
-  "def-weil-endomorphism-determinant"
+  "def-weil-endomorphism-determinant",
+  "def-a1-scheme-groupoid-laws"
  ],
  "proof": [
   {
@@ -172,5 +173,24 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-c19922e4d (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Stacks 03BH supports all three steps; both pullback squares and determinant base-change identities check out. Small cases include varying ranks, nilpotents and empty schemes. The dependency closure is acyclic; the former polynomial-norm cycle is removed. Accepted the norm-chart tool use. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e5c8222fb",
+  "group": "NS",
+  "result": "fix",
+  "note": "Mathematics, exact Lean signature, dependencies, universes, edge cases, docstrings and per-file compilation pass. Repaired the H11 placeholder second-reading section with a complete replacement report in fixes/lem-a1-affine-groupoid-invariant-norm.report.md. Full findings are in review.md; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm",
+  "declaration": "AlgebraicGeometry.affineGroupoid_invariant_norm",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidInvariantNorm.lean",
+  "statement": "theorem affineGroupoid_invariant_norm (A B : CommRingCat.{u}) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hG : Scheme.IsGroupoid s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] (f n : A) (hn : ∀ x : Spec A, ∃ V : (Spec A).Opens, x ∈ V ∧ IsAffineOpen V ∧ (letI := (s.app V).hom.toAlgebra Module.Free Γ(Spec A, V) Γ(Spec B, s ⁻¹ᵁ V) ∧ Module.Finite Γ(Spec A, V) Γ(Spec B, s ⁻¹ᵁ V) ∧ (Spec A).presheaf.map (homOfLE (le_top : V ≤ ⊤)).op ((Scheme.ΓSpecIso A).inv n) = Algebra.norm Γ(Spec A, V) ((Spec B).presheaf.map (homOfLE (le_top : s ⁻¹ᵁ V ≤ ⊤)).op ((Scheme.ΓSpecIso B).inv ((Spec.preimage t).hom f))))) : n ∈ RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The norm section n is specified by the local finite-free determinant charts of exists_finiteLocallyFree_norm_charts, transported through Scheme.ΓSpecIso. No global freeness or constant-rank hypothesis is imposed."
  }
 }
