@@ -18,9 +18,163 @@
   "def-weil-pbc-derived-categories",
   "def-amb-etale-compact-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any finite map $f$ in the square, finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact], also for $\\Lambda$-modules since exactness is detected on underlying abelian sheaves. Check the constant-sheaf sequence\n$$0\\longrightarrow\\Lambda_X\\xrightarrow{(+,+)}i_*\\Lambda_Y\\oplus p_*\\Lambda_{X'}\\xrightarrow{(+,-)}q_*\\Lambda_{Y'}\\longrightarrow0.$$\nAt a geometric point $x\\notin Y$, [lemma-weil-pbc-finite-stalk-formula] gives $0\\to\\Lambda\\xrightarrow{1}\\Lambda\\to0$. At $x\\in Y$, let $E$ be the finite geometric fibre of $p$. The sequence is $0\\to\\Lambda\\to\\Lambda\\oplus\\Lambda^E\\to\\Lambda^E\\to0$, with $a\\mapsto(a,(a)_e)$ and $(b,(c_e))\\mapsto(b-c_e)_e$. The last map is onto, by taking $b=0,c_e=-d_e$, and its kernel is exactly the diagonal. This remains valid for $E=\\varnothing$. Exactness of stalks and their conservativity [prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative] give the asserted sheaf sequence.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 291, initial constant-sheaf exact sequence"
+   }
+  },
+  {
+   "text": "Every finite map here is compactifiable using itself as the proper part and the identity as open part. Finite-type affine algebras over excellent rings are excellent by [lem-exc-finite-type-localization-excellent]; thus the schemes in the square meet the hypotheses of [lem-per-potential-dualizing-finite-pullback]. That result makes $p'^!K_Y$ and $i'^!K_{X'}$ potential for the induced dimension function (the residue transcendence degrees are zero). By the assumed pinned uniqueness on $Y'$, choose their unique pinned identifications with $K_{Y'}$. Adjunction gives $a:q_*K_{Y'}\\to i_*K_Y$ and $b:q_*K_{Y'}\\to p_*K_{X'}$. Complete $(a,-b)$ to a distinguished triangle and call its third object $K_X$. Exact finite direct image and closure of $D^+$ under finite cones ensure $K_X\\in D^+$. Denote the two maps to $K_X$ by $u:i_*K_Y\\to K_X$ and $v:p_*K_{X'}\\to K_X$. The triangle relation is $ua=vb$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 291, construction by the difference of the counits"
+   }
+  },
+  {
+   "text": "Write $j:U\\hookrightarrow X$, $j':U\\hookrightarrow X'$ using the given isomorphism. Restrict the defining triangle to $U$. The two terms supported on $Y$ disappear and $j^*p_*K_{X'}=j'^*K_{X'}$: at every geometric point the finite-stalk formula gives precisely its unique fibre factor. Thus $j^*v$ is an isomorphism. By open restriction, [lem-per-potential-dualizing-finite-pullback] makes this restricted complex potential. Transfer its pinnings on each residue-field etale site to $K_X$ at points of $U$, using the costalk convention of [def-per-potential-dualizing-complex]; their geometric fibres are taken afterwards.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-per-potential-dualizing-finite-pullback",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 291, paragraph restricting to U"
+   }
+  },
+  {
+   "text": "Apply $i^!$ to the triangle. The exchange and its counit normalization in [lem-per-finite-closed-support-exchange] make $i^!b$ an isomorphism. Moreover $i^!i_*K_Y=K_Y$: exact fully faithful closed pushforward [prop-openclosed-lowerstar-fully-faithful] remains fully faithful on derived categories (apply the exact $i^*$ to its degreewise counit), so the unit of its right adjunction is invertible. The first arrow of the resulting triangle has the form $(c,-1):D\\to K_Y\\oplus D$. The automorphism $(y,d)\\mapsto(y+cd,d)$ changes it to $(0,-1)$; hence its cone is $K_Y$, with the map from the first summand an isomorphism. Consequently the adjoint $u^\\flat:K_Y\\to i^!K_X$ is an isomorphism. For each $y\\in Y$, the closed-immersion costalk identification of [lem-per-exceptional-costalk-gysin] gives $C_yK_Y\\cong C_{i(y)}K_X$ on the residue-field etale site. Transport $p_y$ through its inverse to obtain the residue-field pinning of [def-per-potential-dualizing-complex], and then take its geometric fibres. Together with Step 3 these make $K_X$ pointwise pinned, with no residue compatibility across the boundary yet claimed.",
+   "uses": [
+    "lem-per-finite-closed-support-exchange",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-per-exceptional-costalk-gysin",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 291, i!-comparison and putative pinnings"
+   }
+  },
+  {
+   "text": "Let $v^\\flat:K_{X'}\\to p^!K_X$ be adjoint to $v$. Transpose $ua=vb$ through the composite adjunctions. It says that the following two maps from $K_{Y'}$ to $q^!K_X$ are equal:\n$$K_{Y'}\\cong p'^!K_Y\\xrightarrow{p'^!u^\\flat}p'^!i^!K_X\\cong q^!K_X,$$\n$$K_{Y'}\\cong i'^!K_{X'}\\xrightarrow{i'^!v^\\flat}i'^!p^!K_X\\cong q^!K_X.$$\nTransitivity of the costalk comparisons [lem-per-exceptional-costalk-gysin] identifies the induced pointwise pinnings under these composition maps, even for the pointwise pinned $K_X$. The first line is an isomorphism preserving those pinnings by Step 4, so $i'^!v^\\flat$ is an isomorphism preserving them as well. Over $U$, source locality of the exceptional adjoint [lem-amb-etale-adjoint-locality] identifies $j'^*p^!K_X$ with $j^*K_X$; under this identification $j'^*v^\\flat=j^*v$, an isomorphism preserving the pinnings of Step 3. The localization triangle [lem-exc-closed-support-triangle] applied to a cone of $v^\\flat$ shows that a morphism killed by both $i'^!$ and $j'^*$ is an isomorphism. Therefore $v^\\flat$ is a pinning-preserving isomorphism on $X'$.",
+   "uses": [
+    "lem-per-exceptional-costalk-gysin",
+    "lem-amb-etale-adjoint-locality",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 292, equality of the two adjoints and comparison on X′"
+   }
+  },
+  {
+   "text": "The finite map $r:X'\\sqcup Y\\to X$ with components $p,i$ is surjective: $p$ covers $U$, and $i$ covers $Y$. Its exceptional pullback is the pair $(p^!K_X,i^!K_X)$, since finite disjoint-union sheaves, direct images and Hom adjunctions are componentwise. Steps 4 and 5 identify these, with their induced pinnings, with $K_{X'}$ and $K_Y$. They are potential by hypothesis. Apply [lem-per-finite-surjective-potential-detection] to $r$ and the pointwise pinned $K_X$ to conclude the exact compatibility required by [def-per-potential-dualizing-complex]: $p_{\\bar y}=p_{\\bar x}(1)[2]\\circ\\operatorname{sp}_{\\bar y,\\bar x}$ at every immediate geometric specialization, with its fixed normalized transition $d^{-1}\\operatorname{sp}_{\\widetilde Z}(\\nu^*i^!(K_X|_{X_{(\\bar x)}}))$. This is the transition after strict localization, with the signed twist/shift identification prescribed there. Thus $K_X$ is potential. The use of $r$ is necessary because the hypotheses do not say that $p$ is surjective. This proves existence and both asserted pinned comparisons.",
+   "uses": [
+    "lem-per-finite-surjective-potential-detection",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.3 and proof of Proposition 5.4.1, pp. 291-292: use the covering finite family {p,i}"
+   }
+  },
+  {
+   "text": "For any potential complex $K$ on $X$, turn the sheaf sequence of Step 1 into a triangle using [lem-weil-pbc-complex-ses-triangle]. Apply $R\\mathcal Hom_\\Lambda(-,K)$, which carries triangles to triangles [lem-sf-hom-triangulated]. The finite internal-Hom adjunction [lem-per-finite-exceptional-internal-hom], including its counit normalization, identifies the resulting triangle as\n$$q_*q^!K\\xrightarrow{(+,-)}i_*i^!K\\oplus p_*p^!K\\longrightarrow K\\longrightarrow q_*q^!K[1].$$\nHere $R\\mathcal Hom(\\Lambda_X,K)=K$, as is immediate from the Hom-complex model with the coefficient unit as first variable. The pullback result [lem-per-potential-dualizing-finite-pullback] makes the three extraordinary restrictions potential. Their unique pinned identifications with the chosen complexes identify the first arrow with $(a,-b)$ of Step 2. This gives the canonical triangle once a pinned potential complex is fixed, without assuming that arbitrary triangulated cones are canonically chosen.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-hom-triangulated",
+    "lem-per-finite-exceptional-internal-hom",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 291, first paragraph: dualizing the constant sequence"
+   }
+  },
+  {
+   "text": "Let $K,L$ be any two potential complexes on $X$. By [lem-per-potential-dualizing-finite-pullback], their restrictions $f^!K,f^!L$ are potential for $f=i,p,q$. The assumed uniqueness on $Y,X',Y'$ gives isomorphisms $\\alpha_f:f^!K\\to f^!L$. Their induced maps on $q^!K$ agree, since composition preserves pinnings and there is only one pinned isomorphism on $Y'$. Composing $\\alpha_f$ with scalar endomorphisms, the assumed scalar rigidity on the three schemes identifies\n$$\\tau_{\\leq0}R\\mathcal Hom(f^!K,f^!L)\\cong\\Lambda_{\\operatorname{dom}(f)}.$$\nApply $R\\mathcal Hom(-,L)$ to Step 7 and use [lem-sf-hom-triangulated, lem-per-finite-exceptional-internal-hom]. The result is a triangle\n$$H\\longrightarrow B\\xrightarrow{d} C\\longrightarrow H[1],$$\nwhere $H=R\\mathcal Hom(K,L)$, $B=i_*R\\mathcal Hom(i^!K,i^!L)\\oplus p_*R\\mathcal Hom(p^!K,p^!L)$ and $C=q_*R\\mathcal Hom(q^!K,q^!L)$. The counit compatibility of the internal-Hom adjunction identifies $H^0(d)$ with $(b,(c_e))\\mapsto(b-c_e)_e$, or sheafwise $(+,-)$ on $i_*\\Lambda\\oplus p_*\\Lambda\\to q_*\\Lambda$. This follows because each restriction takes $\\alpha_i$ or $\\alpha_p$ to the same $\\alpha_q$, and is linear on scalars.",
+   "uses": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-sf-hom-triangulated",
+    "lem-per-finite-exceptional-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, pp. 292-293, compatible pinned isomorphisms and internal-Hom triangle"
+   }
+  },
+  {
+   "text": "Exact finite pushforward [lemma-weil-pbc-finite-direct-image-exact] and the assumed scalar rigidity imply $H^r(B)=H^r(C)=0$ for $r<0$. The cohomology sequence of Step 8 then gives $H^r(H)=0$ for $r<0$ and\n$$H^0(H)=\\ker\\bigl(i_*\\Lambda_Y\\oplus p_*\\Lambda_{X'}\\xrightarrow{(+,-)}q_*\\Lambda_{Y'}\\bigr)=\\Lambda_X,$$\nwith the last equality proved in Step 1. Hence $\\tau_{\\leq0}H\\cong\\Lambda_X$. The diagonal section $1$ gives a map $\\Lambda_X\\to\\tau_{\\leq0}H\\to H$, hence a morphism $\\psi:K\\to L$ by [lem-pur-rhom-global-sections]. Its exceptional restrictions are $\\alpha_i,\\alpha_p$, by the counit-normalized comparisons in Step 8. In particular it preserves all pointwise pinnings. It is invertible: it is an isomorphism after $i^!$, and also on $U$ since $p$ is an isomorphism there; the localization triangle [lem-exc-closed-support-triangle] kills its cone.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-pur-rhom-global-sections",
+    "lem-per-finite-exceptional-internal-hom",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, p. 293, low-degree cohomology and the distinguished global morphism"
+   }
+  },
+  {
+   "text": "Because $H=R\\mathcal Hom(K,L)$ has no negative cohomology, degree-zero hypercohomology equals $\\Gamma(X,H^0(H))$: in a bounded-below representative beginning in degree zero, both groups are the kernel of $\\Gamma(H^0\\text{-term})\\to\\Gamma(H^1\\text{-term})$, since sections preserve kernels. Thus [lem-pur-rhom-global-sections] identifies all morphisms $K\\to L$ with $\\Gamma(X,\\Lambda_X)$, taking a scalar $\\lambda$ to $\\lambda\\psi$. A pinning-preserving isomorphism has scalar $1$ at every point (its map on the rank-one costalk is the identity), hence $\\lambda=1$ by stalk conservativity. This proves unique pinned isomorphism. For $K=L$, the normalized local isomorphisms are the identities, and Step 9's isomorphism $\\Lambda_X\\to\\tau_{\\leq0}R\\mathcal Hom(K,K)$ is exactly scalar action, since its two restrictions send $1$ to the identities. This proves the scalar-rigidity clause for every potential complex on $X$.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 5.4.1, pp. 292-293, uniqueness with fixed pinnings and scalar normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-potential-dualizing-finite-pullback",
+  "def-per-potential-dualizing-complex",
+  "lem-per-finite-closed-support-exchange",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-per-exceptional-costalk-gysin",
+  "lem-amb-etale-adjoint-locality",
+  "lem-exc-closed-support-triangle",
+  "lem-per-finite-surjective-potential-detection",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-hom-triangulated",
+  "lem-per-finite-exceptional-internal-hom",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 5.4.1, pp. 290-293; the finite-surjective test uses X′ disjoint union Y to include the non-surjective case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +206,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -74,5 +228,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-modification-pinned-gluing",
+  "worker": "stage1",
+  "summary": "Expanded Gabber XVII 5.4.1 into the constant exact sequence, explicit signed cone, closed and open comparisons, equality of adjoint maps, finite-surjective detection, and the internal-Hom rigidity argument. Three general auxiliary comparison/detection statements are left unsplit with the earlier logged Mathlib searches retained. No statement or coefficient-category change. The cover X′ disjoint union Y handles a possibly non-surjective finite modification. Repair of the stale-definition return: revalidated the current prime-power definition and all retained citations; Steps 3 and 4 now explicitly transport residue-field pinnings before taking geometric fibres, and Step 6 explicitly obtains the current definition’s normalized specialization equation from finite-surjective detection.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, inherited Proof Step 3 (dimension-normalized Verdier duality), via potential-dualizing uniqueness; this is the finite-modification gluing argument used in the general excellent case. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses in finite-modification gluing; the perverse unit has no replacement for this local infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-finite-type-localization-excellent",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-amb-etale-adjoint-locality",
+  "lem-exc-closed-support-triangle",
+  "lem-sf-hom-triangulated",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-59caf4301",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-59caf4301 (reviewer sub-agent of L); spot-checked: I read the item (10 steps), all three new nodes, every cited statement in its current form (including the N4 def-per-potential-dualizing-complex, costalk-gysin with its 9 steps and finite-pullback with its 6 steps), and ILO XVII 2.4.3.1-2.4.3.4 (pp. 266-267) and 5.4.1 with its proof (pp. 290-293). Re-delivery delta against 63c395233e: only Steps 3, 4 and 6 changed. Step 3: for x in U, Spec O_{X,x} lies in U, so the residue-field pinnings transfer. Step 4: the closed-immersion clause of costalk-gysin (a_t = id, r_t = 0) transports p_y. Step 6: r = p ⊔ i is finite surjective (p alone need not be: X = two points, Y = one of them, X' = the other), and the specialization equation is the definition restated. Steps 1-10 match the source; cone cancellation, H^0 = Λ_X and λ = 1 checked; E = ∅, Y = ∅ and Y = X edge cases hold. Statement unchanged, no target weakened. Faults: (1) C5/B9, re-applied because the earlier FIX was lost at the stale-definition landing refusal: lem-per-finite-exceptional-internal-hom is the finite instance of the blueprint node prop-asd-internal-adjunction with the normalization of lem-asd-internal-adjunction-evaluation. The earlier corrected file is restored (f^× of thm-amb-etale-exceptional-adjoint on D+, three added stmt_deps, same_as = [prop-asd-internal-adjunction]). (2) C5/B9, new: lem-per-putative-finite-detection (Q07, now in this delivery's base) already states 2.4.3.3 with Cl_π pinnings, and the report does not mention it. The new detection node is kept because it uses the β pinnings of the whole chain; its statement now asserts that β and Cl_π pinnings agree for finite f (the étale identification for separable extensions, the degree for purely inseparable ones) and gets the equivalence from the Q07 node, which is added to stmt_deps. Batch 5: all three flagged citations reach sec-trace-formula only through lem-trf-ambient-diagonal-purity-base-change. That node is finite-coefficient (A_{E,n}) étale smooth purity over excellent bases on the diagonal/deformation route, given by neither the Q̄_ℓ trace-formula leaf nor the Poincaré-duality leaf, and not a step of either. Accepted. The fixes add 4 nodes to the closure, none in sec-trace-formula or sec-poincare-duality, and no cycles. No SGA. All 9 tool_uses accepted as generic étale infrastructure.; 2 file(s) fixed by the reviewer"
  }
 }
