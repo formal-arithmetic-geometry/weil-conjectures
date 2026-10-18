@@ -160,7 +160,8 @@ theorem isIso_derivedComparisonAdjunction_unit_app
 
 variable {A X} in
 /-- Blueprint `thm-weil-pbc-site-comparison`: `D(ν^*)` is fully faithful on bounded below
-complexes: for `K` and `M` in `D⁺(X_ét)`, `D(ν^*)` induces a bijection `Hom(K, M) ≃ Hom(ν^* K, ν^* M)`. It is the composite of the
+complexes: for `K` and `M` in `D⁺(X_ét)`, `D(ν^*)` induces a bijection
+`Hom(K, M) ≃ Hom(ν^* K, ν^* M)`. It is the composite of the
 bijection `Hom(K, M) ≃ Hom(K, Rν_* ν^* M)` given by the unit, which is invertible at the bounded
 below `M` (`isIso_derivedComparisonAdjunction_unit_app`), and the adjunction
 `D(ν^*) ⊣ Rν_*`. Only `M` needs to be bounded below. -/

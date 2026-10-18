@@ -25,8 +25,12 @@ formula says that
 
 `(1, h, …, hⁿ) : ⊕ₐ Λ_S(-a)[-2a] ⟶ Rq_* Λ_{ℙⁿ_S}`
 
-is an isomorphism (`AlgebraicGeometry.Etale.isIso_projectiveSpaceFormulaMap`, the case of a
-trivial bundle of `thm-pur-projective-bundle-formula`).
+is an isomorphism (`AlgebraicGeometry.Etale.isIso_projectiveFormulaMap`, the case of a
+trivial bundle of `thm-pur-projective-bundle-formula`; stated, not proved).
+
+The hyperplane class exists and is unique (`AlgebraicGeometry.Etale.hyperplaneClass`), and its
+adjoint `Λ ⟶ RH^! Λ(1)[2]` is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_hyperplaneClass`).
 -/
 
 @[expose] public section
@@ -338,9 +342,8 @@ include aS in
 
 *Existence of the hyperplane class.* The Kummer classes `∂κ(T_∗ / Tᵢ)` of the local equations of
 the coordinate hyperplane glue to a class with supports in the hyperplane.
-
-The gluing is that of `AlgebraicGeometry.VectorBundle.exists_thomClass`, the
-frames on `D₊(Tᵢ) ∩ D₊(Tⱼ)` differing by the unit `Tᵢ / Tⱼ`. -/
+The gluing is that of `AlgebraicGeometry.VectorBundle.exists_thomClass`, the frames on
+`D₊(Tᵢ) ∩ D₊(Tⱼ)` differing by the unit `Tᵢ / Tⱼ` (`exists_unit_hyperplaneFrame`). -/
 theorem exists_isHyperplaneClass [Finite n] :
     ∃ γ, IsHyperplaneClass Λ n S γ := by
   set K := (R(hyperplane n S)_![ModuleCat.{u + 1} Λ]).obj
