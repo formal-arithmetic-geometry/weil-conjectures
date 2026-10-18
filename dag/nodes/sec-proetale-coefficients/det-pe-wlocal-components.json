@@ -31,104 +31,67 @@
  ],
  "proof": [
   {
-   "text": "Put $S=T^c$ with its subspace topology. Since $S$ is closed in the spectral space $T$, [lem-weil-pbc-spectral-closed-subspace] makes $S$ spectral. Each singleton of $S$ is closed, since it is the trace of a closed singleton of $T$. Thus $S$ has no nontrivial specializations.",
+   "text": "Apply spectral_closed_subspace to the closed locus S of closed points. The subtype has T1Space by WLocalSpace.t1Space_closedPoints, without assuming WLocalSpace T. The already proved SpectralSpace.totallySeparatedSpace instance (Stacks 0905) gives total separation of S. Consequently S is compact Hausdorff and totally disconnected. This reuses the source-library proof of the former constructible-closure steps.",
    "uses": [
-    "lem-weil-pbc-spectral-closed-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0902, lemma-spectral-sub, closed-subspace case; Tag 0905, lemma-characterize-profinite-spectral, (6) implies (5)"
-   }
-  },
-  {
-   "text": "Let $U$ be a quasi-compact open subset of $S$. By [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact] it is retrocompact, hence constructible by [def-weil-constructible-subset]: use the single term $U\\cap(S\\setminus\\varnothing)$. Apply [lem-weil-pbc-spectral-proconstructible-closure-specialization] to the one-member family $E_*=U$. Every $x\\in\\overline U$ is a specialization of some $u\\in U$; since $S$ has closed singletons, $x=u$. Thus $\\overline U=U$, so every quasi-compact open of $S$ is clopen.",
-   "uses": [
-    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-    "def-weil-constructible-subset",
-    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 005H (lemma-constructible), 0903 (lemma-constructible-stable-specialization-closed), and 0905 (lemma-characterize-profinite-spectral), (5) implies (4)"
-   }
-  },
-  {
-   "text": "By the definition of spectral space [def-weil-spectral-space], $S$ is quasi-compact and its quasi-compact opens form a basis. Sobriety implies $T_0$: two topologically indistinguishable points would both be generic points of the same irreducible closed singleton closure. Hence distinct points of $S$ are separated by a basis open $U$ containing exactly one; $U$ and its complement are disjoint open neighbourhoods. This makes $S$ Hausdorff. Any connected subset containing two distinct points would be separated by the same clopen $U$ and its complement. Therefore $S$ is totally disconnected. Being quasi-compact Hausdorff and totally disconnected is precisely being profinite, proving clause 1.",
-   "uses": [
+    "lem-weil-pbc-spectral-closed-subspace",
     "def-weil-spectral-space"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0905, lemma-characterize-profinite-spectral, (4) implies (2) and the final paragraph; the separation arguments written out"
-   }
+   "elementary": true
   },
   {
-   "text": "For every $x\\in T$, apply [lem-sc-quasi-compact-kolmogorov-closed-point] to the nonempty closed subset $\\overline{\\{x\\}}$ of $T$. Its hypotheses hold: $T$ is quasi-compact and sober, hence $T_0$ as in step 3. It supplies a point $c\\in\\overline{\\{x\\}}$ closed in $T$, so $x$ specializes to $c$. Also $\\overline{\\{x\\}}$ is connected: in a separation into two relatively open nonempty parts, $x$ lies in one part, while every nonempty relatively open subset of its closure must contain $x$, contradicting disjointness. Consequently $x$ and every specialization of $x$ lie in the same connected component.",
+   "text": "For each x, exists_isClosed_specializes applies the compact T0 closed-point theorem to closure {x}, producing a closed specialization c. Specializes.connectedComponents_mk_eq identifies the components of x and c: a singleton closure is connected.",
    "uses": [
     "lem-sc-quasi-compact-kolmogorov-closed-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 005E, lemma-quasi-compact-closed-point; used in proetale.tex Tag 0968, lemma-spectral-split; connectedness of a singleton closure written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume now that closed specializations are unique. The hypotheses of [lem-weil-pbc-w-local-closed-points-components-homeomorphism] hold: $T$ is spectral, $S$ is closed, and two closed specializations of one point are equal. Thus the canonical map $h:S\\to\\pi_0(T)$ is a homeomorphism. Write $q:T\\to\\pi_0(T)$ for the continuous quotient map and define $r=h^{-1}\\circ q$. If $c$ is the closed specialization of $x$, step 4 gives $q(x)=q(c)=h(c)$, so $r(x)=c$. This both identifies $r$ with the asserted specialization map and proves its continuity. For $c\\in S$, $q(c)=h(c)$ gives $r(c)=c$, so it is a retraction. Since $h$ is bijective, $r^{-1}(c)=q^{-1}(h(c))$, exactly the connected component of $c$; by the preceding identification this is exactly the generalizations of $c$. Finally $h$ transports the compact Hausdorff totally disconnected topology established in clause 1 to $\\pi_0(T)$. This proves every assertion of clause 2.",
+   "text": "When closed specializations are unique, construct the WLocalSpace instance using that uniqueness and closedness of S. Apply the existing closed-points/components homeomorphism e. Define r = e.symm composed with the component quotient. It is continuous and fixes S. For a closed specialization c of x, specialization preserves the component quotient; injectivity of e gives r(x)=c.",
    "uses": [
-    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0968, lemma-spectral-split, (2) implies (1), first paragraph; paragraph after Tag 096A, definition-w-local; quotient-map argument made explicit"
-   }
-  },
-  {
-   "text": "Conversely, suppose every connected component of $T$ has exactly one closed point. Step 4 provides a closed specialization of every $x$. Every such specialization lies in the component of $x$, so the component hypothesis makes it unique. Combined with clause 2, this proves equivalence of the two closed-point conditions, with closedness of $S$ retained on both sides. On affine spectra the definition of w-local in [sk-def-pe-wlocal] is therefore exactly the definition in [def-weil-pbc-w-local]. No assertion that uniqueness alone implies closedness is used.",
-   "uses": [
-    "sk-def-pe-wlocal",
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
     "def-weil-pbc-w-local"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0968, lemma-spectral-split, (2) implies (1); Tag 096A, definition-w-local, and following paragraph; Tag 0969 explains why closedness must be retained"
-   }
+   "elementary": true
   },
   {
-   "text": "For clause 4, take $T=\\operatorname{Spec}R$ and a maximal ideal $\\mathfrak m$. The localization $R_{\\mathfrak m}$ is at $M=R\\setminus\\mathfrak m$ by [def-weil-pbc-localization-at-prime]. The image formula in [lem-weil-pbc-localization-spectrum-embedding] gives the image as the primes $\\mathfrak p$ with $\\mathfrak p\\cap M=\\varnothing$, equivalently $\\mathfrak p\\subseteq\\mathfrak m$. In the Zariski topology, $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$: a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, and $V(\\mathfrak p)$ is the smallest such set. Thus these are precisely the generalizations of $\\mathfrak m$, which clause 2 already identifies with its connected component. This proves clause 4.",
+   "text": "For closed c, r(x)=c iff the component classes of x and c agree, hence the fibre is the component. For x in that component choose its closed specialization d from step 2; injectivity on closed points gives d=c. Conversely specialization gives equal components. Thus the component equals the generalizations of c. Transport all three profinite properties through e.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If each component contains a unique closed point, a closed specialization from step 2 lies there, and any other closed specialization lies there too, giving uniqueness. Conversely the homeomorphism injects closed points into components and closed-point existence gives surjectivity. These arguments construct the space-level WLocalSpace equivalence with closedness retained, and unfolding IsWLocalRing gives the affine-ring equivalence.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A maximal ideal m determines a closed spectrum point. Apply the component/generalization identity from step 4. PrimeSpectrum.localization_comap_range for Localization.AtPrime m gives exactly the primes disjoint from m.primeCompl. Such disjointness is equivalent to containment in m, by taking complements; PrimeSpectrum.le_iff_specializes identifies that containment with specialization to m. This proves the last clause.",
    "uses": [
     "def-weil-pbc-localization-at-prime",
     "lem-weil-pbc-localization-spectrum-embedding"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E3, lemma-spec-localization, with the elementary Zariski closure computation; proetale.tex paragraph following Tag 096A"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-spectral-closed-subspace",
-  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-  "def-weil-constructible-subset",
-  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
   "def-weil-spectral-space",
   "lem-sc-quasi-compact-kolmogorov-closed-point",
   "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
-  "sk-def-pe-wlocal",
   "def-weil-pbc-w-local",
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-localization-spectrum-embedding"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/topology.tex",
-  "place": "Tags 0902, 0903, 0905, 005E; combined with proetale.tex Tags 0968, 096A and algebra.tex Tag 00E3"
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex; literature/stacks-project/proetale.tex; literature/stacks-project/algebra.tex",
+  "place": "D9, 2026-10-18: Tags 0902, 0905, 005E, 0968, 096A, 00E3; Lean proof reuses source-library spectral T1 total separation and closed-points/components homeomorphism, with an explicit continuous retraction, component calculation, converse, and localization range argument."
  },
  "mathlib_searches": [
   {
@@ -240,9 +203,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-spectral-closed-subspace",
-  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-  "def-weil-constructible-subset",
-  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
   "def-weil-spectral-space",
   "lem-sc-quasi-compact-kolmogorov-closed-point",
   "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
@@ -289,5 +249,15 @@
   "by": "Q96",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T145055-L-3637216",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
