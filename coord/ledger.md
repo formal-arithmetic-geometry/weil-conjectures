@@ -16139,3 +16139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/R3/Sheaf.RingTheory.GeometricallyNormalTensorNormal (stage 3; reviewer PASS; first push; landing 20261018T062901-L-672641 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:29 L: merged deliver/R4/Sheaf.AlgebraicGeometry.GeometricStalkCohomology (stage 3; reviewer PASS; first push; landing 20261018T062901-L-672828 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ProperStability (stage 3; reviewer PASS; first push; landing 20261018T062902-L-672984 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/R4/Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261018T062902-L-673171 (proof); batch 20261018T062645; modules 1; new nodes 0)
