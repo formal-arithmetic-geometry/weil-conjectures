@@ -149,3 +149,50 @@ lemma isoAlgebraTensorFunctorCompMapOfNatIsoIso_hom_app_hom_f (j : T₁ ⟶ T₂
 end IsoAlgebra
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+set_option hygiene false in
+local notation "𝐒" => Spec (CommRingCat.of k₀)
+
+set_option hygiene false in
+local notation "Fr[" T "]" => Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))
+
+set_option hygiene false in
+local notation "bc[" f "]" =>
+  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
+
+set_option hygiene false in
+local notation "EX[" φ "]" => adicUpperStarExchange l (bc[φ]) (Fr[X]) (Fr[Y])
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ (comp_over φ 𝐒)).symm
+
+lemma tensorFunctor_eq_isoAlgebraTensorFunctor (A : ProEtaleWeilSheaf k₀ l X) :
+    tensorFunctor k₀ l X A = isoAlgebraTensorFunctor l (Fr[X]) A :=
+  rfl
+
+lemma upperStar_eq_mapOfNatIso (φ : X ⟶ Y) [φ.IsOver 𝐒] :
+    upperStar k₀ l φ = IsoAlgebra.mapOfNatIso (EX[φ]) := by
+  rw [← adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange]
+  rfl
+
+/-- **Pullback of pro-étale Weil sheaves commutes with tensor products**:
+`φ^*(- ⊗ A) ≅ φ^*(-) ⊗ φ^* A`, through the comparison
+`AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso` of the underlying sheaves
+(`AlgebraicGeometry.ProEtale.isoAlgebraTensorFunctorCompMapOfNatIsoIso`). -/
+theorem nonempty_tensorFunctorCompUpperStarIso (φ : X ⟶ Y) [φ.IsOver 𝐒]
+    (A : ProEtaleWeilSheaf k₀ l Y) :
+    Nonempty (tensorFunctor k₀ l Y A ⋙ upperStar k₀ l φ ≅
+      upperStar k₀ l φ ⋙ tensorFunctor k₀ l X ((upperStar k₀ l φ).obj A)) := by
+  rw [upperStar_eq_mapOfNatIso, tensorFunctor_eq_isoAlgebraTensorFunctor,
+    tensorFunctor_eq_isoAlgebraTensorFunctor]
+  exact ⟨isoAlgebraTensorFunctorCompMapOfNatIsoIso l (bc[φ]) (Fr[X]) (Fr[Y])
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ (comp_over φ 𝐒)).symm
+    (EX[φ]) rfl A⟩
+
+end AlgebraicGeometry.ProEtaleWeilSheaf
