@@ -16,9 +16,109 @@
   "def-weil-completed-integral-coefficients",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pod-separated-finite-type-base-change], $T$ is separated and finite type over $K$. The spectrum of a field is Noetherian: its one affine chart has only the ideals $0$ and $(1)$. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. Apply [lem-trf-smooth-geometrically-normal] to the smooth $K_0$-scheme $T_0$ and the given field extension $K/K_0$: every local ring of $T$ is a normal domain. Finally $\\ell$ remains invertible in $K$ and in all local rings of $T$, since its inverse in $K_0$ maps to an inverse. No finite-type hypothesis on $K/K_0$ is needed.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-smooth-geometrically-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; morphisms.tex Tags 01T4 and 01T6; schemes.tex Tag 01KU"
+   }
+  },
+  {
+   "text": "Every nonempty set of closed subsets of $|T|$ has a minimal element by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; equivalently every ascending chain of open subsets stabilizes. Hence $|T|$ has finitely many connected components, each open, by [lem-sfb-noetherian-connected-components-open]. Components are always closed, so these give a finite disjoint clopen covering $T=\\coprod_i X_i$ by nonempty connected schemes; each $X_i$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and separated and normal by restriction of the affine charts and local rings. It suffices to construct the desired submodule on each $X_i$. If $T$ is empty, the zero sheaf is already the required lattice. On a component write $B_X=\\varprojlim_n(A/\\varpi^n)_X$ and $E_X=B_X[1/\\varpi]$; restricting the coefficient constructions to an open subscheme gives these same sheaves, because constant sheaves, objectwise limits and sheaf localization restrict to the corresponding constructions on the open slice.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF, 04ME and 0052, the Noetherian connected-component decomposition"
+   }
+  },
+  {
+   "text": "Fix one component $X$ and a geometric point $\\bar x$ (take an algebraic closure of the residue field at any of its points). Apply [lem-a1-normal-proetale-monodromy] to $L|_X$. All its hypotheses were checked in steps 1–2. It gives a finite-dimensional $E$-space $V=\\Phi_X(L|_X)$ with jointly continuous action of the profinite group $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$. In particular, the rank on this component is the finite integer $\\dim_E V$, possibly zero. The normality hypothesis is essential here: it is what permits profinite etale monodromy for a pro-etale lisse sheaf.",
+   "uses": [
+    "lem-a1-normal-proetale-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 7.4.7 and 7.4.10, with Stacks Tag 0BQ3"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-profinite-stable-lattice] to the compact group $\\Pi$ acting on $V$. Obtain a stable finite free $A$-lattice $\\Lambda\\subset V$, spanning $V$, whose restricted action is continuous for its $\\varpi$-adic topology. For every $n\\geq1$, $\\Lambda/\\varpi^n\\Lambda$ is a finite free $A/\\varpi^n$-module with continuous action for the discrete topology: the quotient map is continuous and the action descends. Clause (1) of [cor-galois-lisse-representations] supplies the corresponding finite locally constant etale sheaf $F_n$. Its compatibility with coefficient extension identifies $F_{n+1}\\otimes_{A/\\varpi^{n+1}}A/\\varpi^n$ with $F_n$. The quotient maps are compatible, by full faithfulness and their equality on modules. Thus $(F_n)_n$ is an actual normalized tower of rank $\\dim_E V$, not merely a list of unrelated sheaves.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "First sentence of proof of Lemma 7.4.7 and Proposition 6.8.4(1); compact-lattice argument: literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, second bullet"
+   }
+  },
+  {
+   "text": "By [lem-per-lisse-completed-system-comparison], the sheaf $N=\\varprojlim_n\\nu_X^*F_n$ is a lisse $B_X$-module of this rank. The separated Noetherian and invertibility hypotheses of that comparison hold by steps 1–2. The normalization clause of [lem-a1-normal-proetale-monodromy] identifies $\\Phi_X(N[1/\\varpi])$ with the representation $V=\\Phi_X(L|_X)$. Full faithfulness of that equivalence therefore supplies an $E_X$-linear isomorphism $\\alpha:N[1/\\varpi]\\xrightarrow{\\sim}L|_X$. This uses the completed coefficient sheaf, rather than the constant sheaf of the abstract ring $A$.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-a1-normal-proetale-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4) and Lemma 7.4.7, integral normalization of the representation equivalence"
+   }
+  },
+  {
+   "text": "It remains to obtain a submodule, not just an abstract integral model. By the coefficient isomorphisms of [lem-sfb-integral-lisse-reduction-equivalence], $B_X$ is the continuous-function sheaf $A_X$ of [def-weil-pbc-lisse-lattice-coefficients]. Multiplication by $\\varpi$ on it is injective: a continuous function with $\\varpi f=0$ is zero pointwise since $A\\subset E$ is a domain. On a trivializing cover $N\\cong B_X^r$, multiplication by every power of $\\varpi$ is consequently injective. The canonical map $N\\to N[1/\\varpi]$ is then a monomorphism: a section mapping to zero is locally killed by a power of $\\varpi$, and so is locally zero and hence zero. Compose it with $\\alpha$ and let $M_X$ be its image inside $L|_X$. This is a $B_X$-submodule isomorphic to $N$, hence lisse. After inverting $\\varpi$ the first map becomes the identity localization isomorphism, so the inclusion $M_X[1/\\varpi]\\to L|_X$ is exactly the isomorphism induced by $\\alpha$.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "def-weil-pbc-lisse-lattice-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2); elementary torsion-free localization on a free chart"
+   }
+  },
+  {
+   "text": "For an object $U\\to T$ put $U_i=U\\times_T X_i$. The finitely many disjoint opens $U_i$ cover $U$, so the sheaf condition gives $L(U)=\\prod_i L|_{X_i}(U_i)$ and the analogous equality for $B_T(U)$. Define $M(U)$ to be the submodule $\\prod_i M_{X_i}(U_i)$ under these equalities, with restrictions componentwise. This is a sheaf because each factor is, and $M|_{X_i}=M_{X_i}$. Their trivializing covers together trivialize $M$, and their inclusion-induced rationalization isomorphisms glue to $M[1/\\varpi]\\xrightarrow{\\sim}L$. If a component has rank zero its factor is zero. For the empty scheme the product is the unique zero module sheaf, as already noted. Ranks therefore may vary between components exactly as in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3 and elementary sheaf gluing over a finite disjoint clopen cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-a1-normal-proetale-monodromy",
+  "lem-pod-profinite-stable-lattice",
+  "cor-galois-lisse-representations",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "def-weil-pbc-lisse-lattice-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 7.4.7 and 7.4.10; Proposition 6.8.4(1),(4); assembled with the compact-monodromy lattice argument of Stanford lecture 19, Proposition 1.1.9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +154,38 @@
    "results": "Algebra.IsInvariant.isIntegral_of_profinite, LocallyConstant.freeOfProfinite, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.isDiscrete_tfae, CondensedMod.isDiscrete_tfae, Profinite.NobelingProof.Nobeling_aux, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|unibranch|pro.?etale.*fundamental|fundamental.*pro.?etale",
+   "results": "Mathlib/Topology/MetricSpace/MetricSeparated.lean; Mathlib/Topology/MetricSpace/Cover.lean; Mathlib/Data/Rel/Separated.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are general sheaf constructions, locally constant functions, etale morphisms or profinite group limits; none identifies pro-etale lisse adic sheaves with etale fundamental-group representations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally free l-adic sheaf on a smooth scheme admits a global lisse integral lattice",
+   "results": "SheafOfModules.ιFree; SheafOfModules.free; CondensedSet.LocallyConstant.functorFullyFaithful; Profinite.NobelingProof.Nobeling_aux; ZLattice.module_free; LocallyConstant.freeOfProfinite; smoothSheafCommGroup; SheafOfModules.freeCofan",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are general sheaf constructions, locally constant functions, etale morphisms or profinite group limits; none identifies pro-etale lisse adic sheaves with etale fundamental-group representations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lattice\", \"Sheaf\"",
+   "results": "PresheafOfModules.Submodule.instCompleteLattice; SheafOfModules.Submodule.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup; AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are general sheaf constructions, locally constant functions, etale morphisms or profinite group limits; none identifies pro-etale lisse adic sheaves with etale fundamental-group representations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every lisse E sheaf on a smooth finite type scheme over a field contains a locally free integral lattice over the completed ring of integers",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; IsIntegralClosure.module_free; AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; AlgebraicGeometry.IsIntegral.component_integral",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are general sheaf constructions, locally constant functions, etale morphisms or profinite group limits; none identifies pro-etale lisse adic sheaves with etale fundamental-group representations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-degree-zero-compact-support-sections",
@@ -76,5 +204,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-smooth-lisse-integral-lattice",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficients unchanged. Split the geometric preparation, profinite monodromy, stable lattice, normalized finite tower, completion, actual submodule embedding and clopen gluing. Reused the existing stable-lattice and completed-system comparison nodes. Added only a statement-only normal-scheme pro-etale monodromy comparison, with actual Mathlib searches. Checked empty base, rank zero, disconnected schemes, arbitrary field extensions and non-normal failure.",
+  "blueprint": "The first sentence of the ancestor lem-a1-affine-hc0 master proof is made precise by lem-a1-degree-zero-compact-support-sections; its integral realization requires this lattice. Steps 1–3 establish the normal profinite-monodromy setting; steps 4–6 construct the lattice and its given inclusion; step 7 covers all components.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic base-change permanence supplies separated finite type over K; this unit has no such scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence for finite-type schemes supplies the Noetherian base of monodromy."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic smooth-over-a-field normality, applied to T_0 and K/K_0, is a geometry tool, not a trace-formula argument."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic topology gives finitely many clopen connected components; there is no replacement in this unit."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Generic compact continuous representation lattice theorem is the algebra tool after profinite monodromy."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Only finite-coefficient clause (1) is used, to realize the quotient representations as a normalized tower."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Integral completion of a normalized finite locally free etale tower supplies the completed lisse sheaf; no affine-curve cohomology or perverse theorem is used."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Only its canonical coefficient ring isomorphisms identify the completed ring with the continuous-function ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-pod-profinite-stable-lattice",
+  "cor-galois-lisse-representations",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-baf946973",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-baf946973 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct and follows Bhatt–Scholze (BS) Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4(1),(4) and §7.4 (Lemmas 7.4.7 and 7.4.10, read at the cited places), together with Stacks 056T and 0BQ3. The item statement is unchanged and not weakened: it uses the completed B_T, an arbitrary field extension K/K_0, a possibly disconnected T, rank 0 and the empty scheme. Steps: (1) the hypotheses of all three cited lemmas hold exactly; 056T applies to every field extension. (2) The connected components are clopen. (3) The new comparison node gives profinite monodromy. (4) The stable-lattice lemma applies (compact group, jointly continuous action), and cor-galois-lisse-representations(1) with base change gives the normalized tower. (5) lem-per-lisse-completed-system-comparison makes N lisse, and the normalization clause plus full faithfulness give N[1/ϖ] ≅ L. (6) B_X ≅ A_X (continuous functions) has no ϖ-torsion, so N embeds in L. (7) Disjoint gluing. Edge cases tested: empty T, rank 0, Spec K, components of different ranks, infinite or inseparable K/K_0. Normality cannot be dropped (BS Example 7.4.9). New node lem-a1-normal-proetale-monodromy is true (7.4.7 + 0BQ3 + 7.4.10, with the integral normalization from the proof of 7.4.7 and 6.8.4(1),(4)). It is statement-only, not a duplicate: lem-sfb-etale-local-monodromy-realization gives only étale-local essential surjectivity. It does not restate the item (D1). Blueprint same_as [] confirmed by grep of main-20261015. No SGA source cited. Batch-5 check, all accepted: none of the four cited nodes is the trace formula, Poincaré duality or a step specific to their proofs, and neither assumption leaf gives any of them; computed closures reach no PD or trace-formula theorem, batch-4 target or nt-assume node. lem-trf-smooth-geometrically-normal is Stacks 056T, general algebra. lem-pod-profinite-stable-lattice is general representation theory. cor-galois-lisse-representations is the Galois/lisse foundation of unit sk-lem-finite (the finiteness unit); its closure holds only lattice, adic-limit and module-object lemmas. lem-sfb-integral-lisse-reduction-equivalence reaches only the I-adic tower lemmas lem-pod-adic-limit-finite-modules and lem-pod-adic-tower-reconstruction. All 8 declared tool_uses accepted. Fixes: (a) C1, item step 2 now cites the Mathlib leaves lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (Noetherian topological space) and lem-weil-pbc-noetherian-open-subscheme-noetherian (each component Noetherian), added to proof_deps. (b) B3, the new node now cites def-weil-completed-integral-coefficients for (A/ϖ^n)_X and places its stmt_dep lem-per-lisse-completed-system-comparison in the text. No cycles; no nodes dropped.; 2 file(s) fixed by the reviewer"
  }
 }
