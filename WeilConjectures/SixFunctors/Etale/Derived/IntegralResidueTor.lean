@@ -142,7 +142,7 @@ theorem torAmplitudeIn_of_isDerivedBaseChange {X : Scheme.{u}} {K : 𝐃(X, Λ)}
       ((_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_iso e₀.symm hK)
   -- Base change along `e` gives another derived base change of `K` along `Λ ⟶ A_n ⧸ J'`.
   have hψ' := hu₀.comp
-    (gf := (Ideal.Quotient.mk J').comp (Ideal.Quotient.mk (I ^ (n + 1))))
+    (g := e.toRingHom) (gf := (Ideal.Quotient.mk J').comp (Ideal.Quotient.mk (I ^ (n + 1))))
     (RingHom.ext fun _ ↦ rfl) (Sheaf.isDerivedBaseChange_ringEquiv e K₀)
   obtain ⟨eNK⟩ := hψ.nonempty_iso hψ'
   have hN : _root_.DerivedCategory.homologyConcentratedIn a b N :=

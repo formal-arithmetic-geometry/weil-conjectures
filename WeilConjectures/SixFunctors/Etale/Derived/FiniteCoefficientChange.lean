@@ -114,7 +114,7 @@ with `dim X ≤ d`. For `K ∈ Dctf(X, Λ)` and a derived base change `η : K �
 the direct image: `(Rf_{*,Λ} K) ⊗ᴸ_Λ B ≅ Rf_{*,B}(K_B)` in `D(Y_ét, Λ)`, the left hand side being
 the reduction `AlgebraicGeometry.Etale.reductionModIdeal` and the right hand side read after
 restriction of scalars. -/
-theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar_of_constructibleFiniteTor
     {K : 𝐃(X, Λ)} (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     {KB : 𝐃(X, Λ ⧸ J)}
     {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj KB}
@@ -138,7 +138,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar
   exact ⟨e₁ ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso eB ≪≫
     ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
       (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
-      (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f B)).symm ≪≫
+      (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f B))).symm ≪≫
     (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
       (constantSingle (ModuleCat.{u + 1} Λ) Y B))).symm⟩
 
