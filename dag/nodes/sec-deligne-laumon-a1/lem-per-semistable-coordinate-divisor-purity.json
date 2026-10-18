@@ -1,0 +1,88 @@
+{
+ "id": "lem-per-semistable-coordinate-divisor-purity",
+ "kind": "statement",
+ "title": "Purity of coordinate divisors in the standard semistable trait model",
+ "statement": "For a prime $\\ell$ and $A=\\mathbf F_\\ell$, use ordinary small-etale derived categories and Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. If $W$ is a regular Noetherian scheme with $\\ell$ invertible [def-weil-regular-scheme], say that $W$ is punctually pure at $w\\in W$ when, for $W_w=\\operatorname{Spec}\\mathcal O_{W,w}$, $d_w=\\dim\\mathcal O_{W,w}$ and its closed-point inclusion $j_w:\\operatorname{Spec}\\kappa(w)\\hookrightarrow W_w$, the Kummer fundamental-class map\n$$A_{\\kappa(w)}\\longrightarrow j_w^!A_{W_w}(d_w)[2d_w]$$\nof [lem-per-regular-immersion-class-calculus] is an isomorphism. Say that $W$ is punctually pure when this holds at every point. Local rings and residue fields are as in [def-weil-residue-field], affine spectra as in [def-weil-affine-spectrum], and dimension as in [def-weil-pbc-krull-dimension-ring].\n\nA trait is $S=\\operatorname{Spec}R$ with $R$ a Noetherian local domain of dimension one and principal maximal ideal; a uniformizer $\\pi$ generates that maximal ideal. Suppose $\\ell$ is invertible in $R$ and $n\\geq1$. Put\n$$X=\\operatorname{Spec}R[T_1,\\ldots,T_n]/(T_1\\cdots T_n-\\pi).$$\nFor every $i$ let $h_i:H_i\\hookrightarrow X$ be the closed immersion cut out by $T_i=0$ [def-weil-closed-immersion]. The Cartier Kummer fundamental class induces an isomorphism\n$$A_{H_i}\\xrightarrow{\\sim}h_i^!A_X(1)[2].$$\nThe assertion holds over any trait, without excellence, completion or henselianity assumptions.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.5.12 proof, printed p.251, all-one semistable case, with Lemma 3.5.13(iv). The source cites Illusie (2004), Theorem 1.4, and Rapoport--Zink (1982), Satz 2.21."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-per-regular-immersion-class-calculus",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer fundamental class of a component in a standard strict semistable trait model is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x)\", \"doc\": \"For any open immersion of schemes $f: X \\\\to Y$ and any point $x \\\\in X$, the induced ring homomorphism between the residue fields, $k(f(x)) \\\\to k(x)$, is an isomorphism.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {S : Type v} →\\n      [inst_1 : CommRing S] →\\n        (p : Ideal R) →\\n          (P : Ideal S) →\\n            [inst_2 : Algebra R S] →\\n              [hfp : NeZero (Ideal.ramificationIdx (algebraMap R S) p P)] →\\n                [IsDedekindDomain S] →\\n          \", \"doc\": \"Given a Dedekind domain $ S $, a nonzero prime ideal $ \\\\mathfrak{P} \\\\subseteq S $, and a ring homomorphism $ f: R \\\\to S $ with ramification index $ e > 0 $ for the prime ideal $ \\\\mathfrak{p} \\\\subseteq\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x : ↥(AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).glued),\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰) x)\", \"doc\": \"For any point $x$ in the glued scheme constructed from an open cover $\\\\mathcal{U}$ of a scheme $X$, the stalk map induced by the canonical morphism from the glued scheme to $X$ is an isomorphism in th\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern smooth algebra presentations, polynomial regular elements, finite-flat infrastructure or unrelated notions; none states this cohomological assertion or monomial regular-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "punctual etale purity of semistable monomial scheme product variables minus uniformizer with all exponents one",
+   "results": "{\"t\": \"2026-10-18T20:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"punctual etale purity of semistable monomial scheme product variables minus uniformizer with all exponents one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePair.g\", \"StandardEtalePair.f\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"StandardEtalePresentation\"], \"digest\": \"ce8ee9ec15a0e46d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern smooth algebra presentations, polynomial regular elements, finite-flat infrastructure or unrelated notions; none states this cohomological assertion or monomial regular-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-18T20:23:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: only finestTopologySingle (a sieve name substring hit), no purity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|semistable|Kummer.*pur|Gysin",
+   "results": "{\"t\": \"2026-10-18T20:23:00Z\", \"tool\": \"grep\", \"query\": \"punctual.*pur|semistable|Kummer.*pur|Gysin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: only finestTopologySingle (a sieve name substring hit), no purity theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale purity of the coordinate divisor in a strict semistable trait scheme",
+   "results": "{\"t\": \"2026-10-18T20:44:40Z\", \"tool\": \"leansearch\", \"query\": \"Etale purity of the coordinate divisor in a strict semistable trait scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.IsEtale\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.isOpen_etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\"], \"digest\": \"1911c1497490d3ec\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic smoothness, nonzerodivisors, and adjoining-root infrastructure do not state this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-monomial-trait-punctual-purity",
+  "date": "2026-10-19",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.5.12 proof, printed p.251, all-one semistable case, with Lemma 3.5.13(iv). The source cites Illusie (2004), Theorem 1.4, and Rapoport--Zink (1982), Satz 2.21.",
+   "via": [
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

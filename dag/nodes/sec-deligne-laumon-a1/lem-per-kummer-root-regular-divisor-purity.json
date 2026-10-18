@@ -1,0 +1,91 @@
+{
+ "id": "lem-per-kummer-root-regular-divisor-purity",
+ "kind": "statement",
+ "title": "Kummer-root invariance of regular divisor purity",
+ "statement": "For a prime $\\ell$ and $A=\\mathbf F_\\ell$, use ordinary small-etale derived categories and Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. If $W$ is a regular Noetherian scheme with $\\ell$ invertible [def-weil-regular-scheme], say that $W$ is punctually pure at $w\\in W$ when, for $W_w=\\operatorname{Spec}\\mathcal O_{W,w}$, $d_w=\\dim\\mathcal O_{W,w}$ and its closed-point inclusion $j_w:\\operatorname{Spec}\\kappa(w)\\hookrightarrow W_w$, the Kummer fundamental-class map\n$$A_{\\kappa(w)}\\longrightarrow j_w^!A_{W_w}(d_w)[2d_w]$$\nof [lem-per-regular-immersion-class-calculus] is an isomorphism. Say that $W$ is punctually pure when this holds at every point. Local rings and residue fields are as in [def-weil-residue-field], affine spectra as in [def-weil-affine-spectrum], and dimension as in [def-weil-pbc-krull-dimension-ring]. Let $X=\\operatorname{Spec}B$ be regular Noetherian with $\\ell$ invertible, and let $f\\in B$ be a nonzerodivisor with $D=\\operatorname{Spec}(B/(f))$ regular. Put\n$$X'=\\operatorname{Spec}B[U]/(U^\\ell-f),\\qquad D'=V(U)\\subset X'.$$\nWrite $i:D\\hookrightarrow X$ and $i':D'\\hookrightarrow X'$ [def-weil-closed-immersion], and use polynomial rings as in [def-weil-polynomial-ring]. Then $X'$ is regular, $D'\\simeq D$ is a regular effective Cartier divisor, and\n$$A_D\\to i^!A_X(1)[2]\\text{ is an isomorphism}\\quad\\Longleftrightarrow\\quad A_{D'}\\to i'^!A_{X'}(1)[2]\\text{ is an isomorphism}.$$\nEmpty divisors are allowed. The projection $p:X'\\to X$ is finite locally free of rank $\\ell$ [def-pc-finite-locally-free], is surjective, and restricts to a surjective etale morphism $X'\\setminus D'\\to X\\setminus D$ [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.4.5 and its proof, printed pp.246--248 (the monic root algebra, and its Kummer cover away from the divisor)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-per-regular-immersion-class-calculus",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-closed-immersion",
+  "def-weil-polynomial-ring",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Regular divisor cohomological purity is invariant under adjoining an ell-th root of a local equation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} [inst_1 : IsLocalRing A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → g.IsWeierstrassDivisor\", \"doc\": \"Let $ A $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $. If the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (applied coe\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Ideal A → Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A),\\n  H.seq f 1 =\\n    (PowerSeries.mk fun i => (PowerSeries.coeff (i + ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat)) f) *\\n      ↑⋯.unit⁻¹\", \"doc\": \"For a power series $ g $ satisfying the Weierstrass divisor condition at an ideal $ I $, the first term $ H_1 $ in the associated Weierstrass divisor sequence is given by multiplying the power series \"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [IsScalarTower R S N] (p : Ideal R) [inst_9 : p.IsP\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ and $ N $ be $ R $-modules, and $ p $ a prime ideal of $ R $. Suppose $ N $ is a non-trivial finitely generated $ S $-module obtained by localizing $ M $ at \"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished_smul\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {a : A} {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) (a • g) ≠ 0),\\n  (a • g).weierstrassDistinguished hg = g.weierstrassDistinguished ⋯\", \"doc\": \"Let $ A $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field homomorphism $ \\\\rho: A \\\\to k $. For any $ a \\\\in A $ and power series $ g \\\\in A[[x]] $, if $ \\\\rho(a) \\\\neq 0 $\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern smooth algebra presentations, polynomial regular elements, finite-flat infrastructure or unrelated notions; none states this cohomological assertion or monomial regular-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "punctual purity invariant under adjoining an ell-th root of a regular divisor",
+   "results": "{\"t\": \"2026-10-18T20:11:02Z\", \"tool\": \"leanfinder\", \"query\": \"punctual purity invariant under adjoining an ell-th root of a regular divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.noZeroSMulDivisors_of_prime_of_degree_ne_zero\", \"IsPurelyInseparable.isPRadical\", \"Algebra.IsUnramifiedAt\", \"IsPRadical.isPurelyInseparable\", \"mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt\", \"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree\"], \"digest\": \"3fdfd8c925504d9e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern smooth algebra presentations, polynomial regular elements, finite-flat infrastructure or unrelated notions; none states this cohomological assertion or monomial regular-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-18T20:23:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: only finestTopologySingle (a sieve name substring hit), no purity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|semistable|Kummer.*pur|Gysin",
+   "results": "{\"t\": \"2026-10-18T20:23:00Z\", \"tool\": \"grep\", \"query\": \"punctual.*pur|semistable|Kummer.*pur|Gysin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: only finestTopologySingle (a sieve name substring hit), no purity theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining an ell-th root of a regular Cartier divisor preserves etale purity",
+   "results": "{\"t\": \"2026-10-18T20:44:40Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining an ell-th root of a regular Cartier divisor preserves etale purity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"IsAdjoinRootMonic.toIsAdjoinRoot\", \"IsAdjoinRoot.ofEquiv\", \"IsAdjoinRootMonic.noConfusion\", \"IntermediateField.isPurelyInseparable_adjoin_iff_pow_mem\", \"AdjoinRoot.instField\", \"IsAdjoinRoot\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"50a61a69f305ca55\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic smoothness, nonzerodivisors, and adjoining-root infrastructure do not state this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-monomial-trait-punctual-purity",
+  "date": "2026-10-19",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.4.5 and its proof, printed pp.246--248 (the monic root algebra, and its Kummer cover away from the divisor).",
+   "via": [
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
