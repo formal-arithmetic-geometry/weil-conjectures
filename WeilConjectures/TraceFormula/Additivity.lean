@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.TraceFormula.OpenPieceCoherence
 
 /-!
 
@@ -472,26 +473,60 @@ theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
     Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
+set_option maxHeartbeats 1000000 in
+-- the open-piece operator unfolds to a long composite
+omit [IsClosedImmersion i.left] in
+/-- The square of the open piece (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(a)):
+`RΓ_c(ε) ∘ E_U = F_c(K) ∘ RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`. Through
+`F_c = RΓ_c(φ) ∘ Φ^♯` this is the compatibility of the extension by zero with the pullbacks along
+the Frobenii, `compToPoint_inv_app_comp_counit_comp_compactPullback`. -/
+theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)
+    (K : WeilBoundedConstructible ℓ Φ) :
+    compactFrobeniusOpenPiece ℓ hj K ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
+            K.carrier) =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
+            K.carrier) ≫ K.compactFrobenius := by
+  have h := compToPoint_inv_app_comp_counit_comp_compactPullback ℓ j hj K.carrier
+  have hn₁ := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)
+  have hn₂ := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.naturality
+      K.str.hom)
+  simp only [Functor.comp_map, Functor.comp_obj] at hn₁
+  simp only [Functor.comp_map, Functor.id_map, Functor.map_comp, Functor.comp_obj,
+    Functor.id_obj] at hn₂
+  rw [boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl] at hn₂ ⊢
+  rw [compactFrobeniusOpenPiece,
+    ← cancel_epi ((boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier))]
+  simp only [Category.assoc]
+  rw [Iso.inv_hom_id_app_assoc, compactFrobenius_eq K, reassoc_of% h]
+  refine Eq.trans (congrArg (fun f ↦ f ≫
+    (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
+          K.carrier)) (compactFrobenius_weilUpperStar hj K)) ?_
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn₁, hn₂]
+
 variable (ℓ) in
-/-- **Unfinished gap of this proof** (blueprint `prop-trf-trace-additivity-open-closed`, Steps 2(a)
-and 3), for the open piece: the conjugate `E_U` of the compactly supported Frobenius of `K|_U`
-commutes with `RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`, and the operators `E_Z`, `E_U`
-commute with the connecting morphism of the compactly supported localization triangle (for any
-localization triangle; its connecting morphism is unique by the Hom vanishing of blueprint
-`prop-sf-open-closed-triangle-all-stages`).
+/-- **Unfinished gap of this proof** (blueprint `prop-trf-trace-additivity-open-closed`, Step 3):
+the operators `E_Z`, `E_U` commute with the connecting morphism of the compactly supported
+localization triangle (for any localization triangle; its connecting morphism is unique by the
+Hom vanishing of blueprint `prop-sf-open-closed-triangle-all-stages`).
 
-This is not an input from another subsection but a gap of this proof, left open for two reasons:
-
-* the first square relates the identification `Rj_! ≅ j_!` of the open immersion (through which
-  the counit `ε` is defined) with the composition isomorphisms and the compact-support base change
-  `Ex_!` along `j` entering the Frobenius comparison `θ` of `Ra_{X!}`; both are comparisons of
-  the lower shriek attached to different compactifications, and their compatibility is
-  compactification coherence, for which there is no API yet;
-* the square with the connecting morphism needs the Frobenius comparison `θ` (built from the
-  compact-support base change, the unit of `LΦ^* ⊣ RΦ_*`, `RΦ_! ≅ RΦ_*` and composition
-  isomorphisms on `Dᵇc`) to commute with the shifts of the ambient derived categories, for which
-  there is no shift-compatibility API for these functors on `Dᵇc`. -/
-theorem compactFrobenius_openPiece_compat
+This is not an input from another subsection but a gap of this proof: it needs the Frobenius
+comparison `θ` (built from the compact-support base change, the unit of `LΦ^* ⊣ RΦ_*`,
+`RΦ_! ≅ RΦ_*` and composition isomorphisms on `Dᵇc`) to commute with the shifts of the ambient
+derived categories, for which there is no shift-compatibility API for these functors on `Dᵇc`.
+(The companion square with the counit `ε` is `compactFrobeniusOpenPiece_comp_counit`.) -/
+theorem compactFrobenius_connecting_compat
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
           ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
@@ -508,13 +543,6 @@ theorem compactFrobenius_openPiece_compat
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
             i).unit.app K.carrier)) δ ∈ distTriang _) :
-    compactFrobeniusOpenPiece ℓ hj K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
-            K.carrier) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
-            K.carrier) ≫ K.compactFrobenius ∧
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (point k).left)).ι.map (compactFrobeniusClosedPiece ℓ hi K) ≫
         compactLocalizationConnecting ℓ j i K.carrier δ =
@@ -543,7 +571,8 @@ theorem trace_compactFrobenius_eq_add_of_isCompl
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
         trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed ℓ j i hcompl K.carrier
-  obtain ⟨h₁, h₃⟩ := compactFrobenius_openPiece_compat ℓ hj hi K δ hδ
+  have h₁ := compactFrobeniusOpenPiece_comp_counit hj K
+  have h₃ := compactFrobenius_connecting_compat ℓ hj hi K δ hδ
   let : HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
