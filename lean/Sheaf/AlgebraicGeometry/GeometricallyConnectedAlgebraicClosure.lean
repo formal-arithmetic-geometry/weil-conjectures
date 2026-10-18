@@ -9,10 +9,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Testing geometric connectedness on an algebraically closed extension
@@ -55,7 +53,12 @@ theorem geometricallyConnected_iff_connectedSpace_of_isAlgClosed
     GeometricallyConnected (X ↘ Spec (.of k)) ↔
       ConnectedSpace ↥(pullback (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) := by
-  sorry
+  constructor
+  · intro h
+    exact pullback_of_geometrically GeometricallyConnected.geometrically_connectedSpace _ _
+  · intro h
+    exact (geometricallyConnected_iff_of_fieldExtension (k := k) (k' := Ω) X).mpr
+      (GeometricallyConnected.of_connectedSpace_of_isSepClosed (pullback.snd _ _))
 
 /-- A geometrically connected scheme over a field is nonempty.
 Source: Stacks Project, `varieties.tex`, remark after Definition 33.7.1
@@ -67,6 +70,8 @@ isomorphic to `X`, so `X` is connected. Connectedness includes nonemptiness
 theorem GeometricallyConnected.nonempty_over_field
     {k : Type u} [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [GeometricallyConnected (X ↘ Spec (.of k))] : Nonempty X := by
-  sorry
+  have : ConnectedSpace X :=
+    GeometricallyConnected.connectedSpace_of_subsingleton (X ↘ Spec (.of k))
+  infer_instance
 
 end AlgebraicGeometry
