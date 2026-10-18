@@ -7,19 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.TruncationCouple
-import Sheaf.CategoryTheory.TruncationCoupleExact
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.Algebra.Homology.ExactCouple.Basic
-import WeilConjectures.CategoryTheory.ExactCouple
-import WeilConjectures.CategoryTheory.TruncationCouple
+import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 
 /-! # Compatibility of the exact-couple differential
 
@@ -129,6 +117,157 @@ theorem exact_couple_differential
             ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (sheaf K q)) ≫
         (truncationTargetIso g' f'
           ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom) := by
-  sorry
+  obtain ⟨⟨P, Q, hPD, hQD, hPE, hQE, hPa, hQa, hPf, hQf, hPg, hQg⟩,
+    hα, hg, hf, hpage⟩ := truncation_exchange_couple_morphism sq K
+  let τ := derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq
+  let d (p q : ℤ) : P.D p q ⟶ Q.D p q :=
+    eqToHom (congrFun (congrFun hPD p) q) ≫ tD τ K p q ≫
+      eqToHom (congrFun (congrFun hQD p) q).symm
+  let e (p q : ℤ) : P.E p q ⟶ Q.E p q :=
+    eqToHom (congrFun (congrFun hPE p) q) ≫ tE τ K p q ≫
+      eqToHom (congrFun (congrFun hQE p) q).symm
+  let T : BigradedExactCouple.CoupleMorphism P Q :=
+    { tD := d
+      tE := e
+      alpha_comm := by
+        intro p q
+        have hQa' (p q : ℤ) : Q.alpha p q =
+            eqToHom (congrFun (congrFun hQD p) q) ≫
+              alpha (truncationPsi g' f') K p q ≫
+              eqToHom (congrFun (congrFun hQD (p - 1)) (q + 1)).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hQD p) q)
+            (congrFun (congrFun hQD (p - 1)) (q + 1))).2
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hQD]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hQa)
+            intro p₁ p₂ h
+            cases h
+            exact congrArg (fun d : ℤ → ℤ → _ ↦
+              ∀ q : ℤ, d p₁ q ⟶ d (p₁ - 1) (q + 1)) hQD
+        have hPa' (p q : ℤ) : P.alpha p q =
+            eqToHom (congrFun (congrFun hPD p) q) ≫
+              alpha (truncationPhi f g) K p q ≫
+              eqToHom (congrFun (congrFun hPD (p - 1)) (q + 1)).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hPD p) q)
+            (congrFun (congrFun hPD (p - 1)) (q + 1))).2
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hPD]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hPa)
+            intro p₁ p₂ h
+            cases h
+            exact congrArg (fun d : ℤ → ℤ → _ ↦
+              ∀ q : ℤ, d p₁ q ⟶ d (p₁ - 1) (q + 1)) hPD
+        rw [hQa', hPa']
+        simp only [d, Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+        rw [← Category.assoc (tD τ K p q), ← hα]
+        simp only [Category.assoc]
+        rfl
+      f_comm := by
+        intro p q
+        have hQf' (p q : ℤ) : Q.f p q =
+            eqToHom (congrFun (congrFun hQE p) q) ≫
+              CategoryTheory.TruncationExchange.f (truncationPsi g' f') K p q ≫
+              eqToHom (congrFun (congrFun hQD (p + 2)) (q - 1)).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hQE p) q)
+            (congrFun (congrFun hQD (p + 2)) (q - 1))).2
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hQE, hQD]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hQf)
+            intro p₁ p₂ h
+            cases h
+            exact
+              congrArg₂ (fun d e : ℤ → ℤ → _ ↦
+                ∀ q : ℤ, d p₁ q ⟶ e (p₁ + 2)
+                  (q - 1)) hQE hQD
+        have hPf' (p q : ℤ) : P.f p q =
+            eqToHom (congrFun (congrFun hPE p) q) ≫
+              CategoryTheory.TruncationExchange.f (truncationPhi f g) K p q ≫
+              eqToHom (congrFun (congrFun hPD (p + 2)) (q - 1)).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hPE p) q)
+            (congrFun (congrFun hPD (p + 2)) (q - 1))).2
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hPE, hPD]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hPf)
+            intro p₁ p₂ h
+            cases h
+            exact
+              congrArg₂ (fun d e : ℤ → ℤ → _ ↦
+                ∀ q : ℤ, d p₁ q ⟶ e (p₁ + 2)
+                  (q - 1)) hPE hPD
+        rw [hQf', hPf']
+        simp only [d, e, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+          Category.id_comp]
+        rw [← Category.assoc (tE τ K p q), ← hf]
+        simp only [Category.assoc]
+        rfl
+      g_comm := by
+        intro p q
+        apply (cancel_mono (eqToHom (show Q.E (p + (0 : ℕ)) (q - (0 : ℕ)) =
+          Q.E p q by congr 1 <;> omega))).1
+        simp only [Category.assoc]
+        rw [eqToHom_naturality (fun pq : ℤ × ℤ ↦ e pq.1 pq.2)
+          (show (p + (0 : ℕ), q - (0 : ℕ)) = (p, q) by ext <;> omega)]
+        change d p q ≫ Q.initialG p q = P.initialG p q ≫ e p q
+        have hQg' (p q : ℤ) : Q.initialG p q =
+            eqToHom (congrFun (congrFun hQD p) q) ≫
+              CategoryTheory.TruncationExchange.g (truncationPsi g' f') K p q ≫
+              eqToHom (congrFun (congrFun hQE p) q).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hQD p) q)
+            (congrFun (congrFun hQE (p)) (q))).2
+          dsimp only [BigradedExactCouple.initialG]
+          rw [comp_eqToHom_heq_iff]
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hQD, hQE, Nat.cast_zero, add_zero, sub_zero]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hQg)
+            intro p₁ p₂ h
+            cases h
+            apply congrArg (fun t : ℤ → Type _ ↦ ∀ q : ℤ, t q)
+            funext q
+            simp only [hQD, hQE, Nat.cast_zero, add_zero, sub_zero]
+        have hPg' (p q : ℤ) : P.initialG p q =
+            eqToHom (congrFun (congrFun hPD p) q) ≫
+              CategoryTheory.TruncationExchange.g (truncationPhi f g) K p q ≫
+              eqToHom (congrFun (congrFun hPE p) q).symm := by
+          apply (conj_eqToHom_iff_heq _ _
+            (congrFun (congrFun hPD p) q)
+            (congrFun (congrFun hPE (p)) (q))).2
+          dsimp only [BigradedExactCouple.initialG]
+          rw [comp_eqToHom_heq_iff]
+          refine dcongr_heq (HEq.refl q) ?_ (fun _ _ ↦ ?_)
+          · intro q₁ q₂ h
+            cases h
+            simp only [hPD, hPE, Nat.cast_zero, add_zero, sub_zero]
+          · refine dcongr_heq (HEq.refl p) ?_ (fun _ _ ↦ hPg)
+            intro p₁ p₂ h
+            cases h
+            apply congrArg (fun t : ℤ → Type _ ↦ ∀ q : ℤ, t q)
+            funext q
+            simp only [hPD, hPE, Nat.cast_zero, add_zero, sub_zero]
+        rw [hQg', hPg']
+        simp only [d, e, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+          Category.id_comp]
+        rw [← Category.assoc (tD τ K p q), ← hg]
+        simp only [Category.assoc]
+        rfl }
+  obtain ⟨⟨M, _, hM, _, hk, hd⟩, _⟩ :=
+    BigradedExactCouple.derivedCoupleFunctoriality P Q T
+  refine ⟨P, Q, hPE, hQE, hPD, hQD, hPa, hQa, hPf, hQf, hPg, hQg,
+    hα, hg, hf, ?_, hpage⟩
+  exact ⟨fun n p q ↦ (M n).tE p q, hM, fun n p q ↦ (hd n p q).symm, hk⟩
 
 end AlgebraicGeometry.Etale
