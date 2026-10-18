@@ -2,7 +2,7 @@
  "id": "lem-sp-proetale-proper-boundary-cohomology",
  "kind": "statement",
  "title": "Boundary cohomology of an open-extended pro-etale injective on a proper scheme",
- "statement": "Let $Q=\\operatorname{Spec}R$ be an affine scheme [def-pc-scheme, def-weil-affine-spectrum] in the universes of its small pro-etale site [def-weil-pbc-proetale-site]. Assume that $R$ is w-contractible in the following explicit sense: every faithfully flat weakly etale ring map $R\\to R'$ admits an $R$-algebra retraction $R'\\to R$ [def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-ind-etale-algebra]. Let $z:Z\\hookrightarrow Q$ be a closed immersion [def-weil-closed-immersion] with complementary quasi-compact open immersion $e:E\\hookrightarrow Q$ [def-weil-open-immersion, def-weil-finite-type-morphism]. Assume every point of $Q$ specializes to a point of $Z$, meaning that for every $x\\in Q$ the closure of $\\{x\\}$ meets $Z$.\nLet $p:P\\to Q$ be proper [def-weil-proper-morphism], set $P_E=P\\times_Q E$ [def-pc-fibre-product], and let $h:U\\hookrightarrow P_E$ be an open immersion whose image is also closed. Assume the composite $j:U\\hookrightarrow P_E\\hookrightarrow P$ is a quasi-compact open immersion. Let $A$ be a finite commutative ring and let $J$ be an injective sheaf of modules over the constant sheaf $A_U$ on $U_{\\mathrm{proet}}$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-sp-injective-resolutions]. Then its extension by zero [def-weil-extension-by-zero] satisfies\n$$H^q(P_{\\mathrm{proet}},j_!J)=0\\qquad(q>0).$$\nHere cohomology means the right derived functors of global sections in the category of constant-$A$ module sheaves, computed by an injective resolution [def-weil-pbc-sites-and-cohomology, def-sp-injective-resolutions]. The sheaf $J$ need not have etale origin.",
+ "statement": "Let $Q=\\operatorname{Spec}R$ be an affine scheme [def-pc-scheme, def-weil-affine-spectrum] in the universes of its small pro-etale site [def-weil-pbc-proetale-site]. Assume that $R$ is w-contractible in the following explicit sense: every faithfully flat weakly etale ring map $R\\to R'$ admits an $R$-algebra retraction $R'\\to R$ [def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-ind-etale-algebra]. Let $z:Z\\hookrightarrow Q$ be a closed immersion [def-weil-closed-immersion] with complementary quasi-compact open immersion $e:E\\hookrightarrow Q$ [def-weil-open-immersion, def-weil-finite-type-morphism]. Assume every point of $Q$ specializes to a point of $Z$, meaning that for every $x\\in Q$ the closure of $\\{x\\}$ meets $Z$.\nLet $p:P\\to Q$ be proper [def-weil-proper-morphism], set $P_E=P\\times_Q E$ [def-pc-fibre-product], and let $h:U\\hookrightarrow P_E$ be an open immersion whose image is also closed. Assume the composite $j:U\\hookrightarrow P_E\\hookrightarrow P$ is a quasi-compact open immersion. Let $A$ be a finite commutative ring and let $J$ be an injective sheaf of modules over the constant sheaf $A_U$ on $U_{\\mathrm{proet}}$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-sp-injective-resolutions]. Assume in addition that $J$ has etale origin: there are a sheaf $J_0$ of $A$-modules on $U_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] and an isomorphism $\\nu_U^*J_0\\cong J$, where $\\nu_U$ is the site-comparison morphism [def-weil-pbc-site-comparison-morphism]. Then its extension by zero [def-weil-extension-by-zero] satisfies\n$$H^q(P_{\\mathrm{proet}},j_!J)=0\\qquad(q>0).$$\nHere cohomology means the right derived functors of global sections in the category of constant-$A$ module sheaves, computed by an injective resolution [def-weil-pbc-sites-and-cohomology, def-sp-injective-resolutions].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
   "place": "Clause (b), compactification independence: agent-extracted boundary-cohomology sublemma of the pro-etale injective-acyclicity obligation. Etale motivation only: literature/stacks-project/more-etale.tex, Tag 0F7B, label lemma-shriek-proper-and-open, case (b), the boundary-fibre vanishing. Pro-etale Tag 09AG, label lemma-jshriek-zero, gives only degree-zero specialization vanishing, not this higher-cohomology assertion. Neither tag is claimed to prove this pro-etale statement."
@@ -22,11 +22,133 @@
   "def-sp-injective-resolutions",
   "def-weil-extension-by-zero",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=j_!J$ and choose the supplied witness $\\alpha:\\nu_U^*J_0\\cong J$. By [lem-cbc-proetale-extension-zero-comparison] there is an isomorphism $\\nu_P^*(j^{\\mathrm{et}}_!J_0)\\cong j_!\\nu_U^*J_0\\cong F$. Regard both sheaves as complexes concentrated in degree zero: their degree-zero cohomology is the sheaf and all other cohomology is zero. This is an etale-origin witness for $F[0]$ in the sense of [def-weil-pbc-etale-origin-witness]. Exactness of $j_!$ identifies its action on these degree-zero complexes with the sheaf $F$. No injectivity of $J_0$ is required.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; bounded-below witness concentrated in degree zero."
+   }
+  },
+  {
+   "text": "Let $a:P_Z=P\\times_Q Z\\hookrightarrow P$ and $b:P_E\\hookrightarrow P$ be the base changes of $z$ and $e$. They are complementary closed and open immersions, and $b$ is quasi-compact. These statements follow respectively from [lem-weil-pbc-closed-immersion-base-change], [lem-weil-pbc-open-immersion-base-change] and [lem-pc-quasi-compact-base-change]; complementarity is the inverse-image equality of the two subsets. Since $j=bh$, the adjunction of [lem-weil-extension-by-zero-adjunction] identifies $j_!$ with $b_!h_!$: both are left adjoint to $h^*b^*=j^*$, and the adjunction bijections give the canonical identification. Thus $a^*F=a^*b_!h_!J=0$ by the $i^{-1}j_!=0$ clause of [lem-weil-pbc-proetale-ringed-open-closed] on $P$. All coefficient rings are the inverse images of the same constant ring $A$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH and 09BN, complementary immersion functors; base-change stability of immersions and quasi-compactness."
+   }
+  },
+  {
+   "text": "Write $p_Z:P_Z\\to Z$ for the projection. Apply [thm-weil-pbc-finite-level-proetale] to the Cartesian square with horizontal arrows $a,z$, vertical arrows $p_Z,p$, and input $F[0]$. Properness of $p$ and finiteness of the discrete commutative ring $A$ are hypotheses of the item; step 1 supplies exactly the etale-origin witness required by the theorem. It gives $z^*Rp_*F[0]\\cong Rp_{Z,*}a^*F[0]=0$ by step 2. The derived direct image carries zero to zero because its additive injective-resolution construction carries the zero resolution to zero.",
+   "uses": [
+    "thm-weil-pbc-finite-level-proetale",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, with coefficient ring A and ideal 0; no constructibility assumption."
+   }
+  },
+  {
+   "text": "For an integer $q$ set $G_q=\\mathcal H^q(Rp_*F[0])$. The module inverse image $z^*$ is exact by [lem-weil-pbc-proetale-immersion-limit-preservation]. Applying it to the kernels and images defining cohomology therefore gives $z^*G_q=\\mathcal H^q(z^*Rp_*F[0])=0$. Apply the exact open-closed sequence of [lem-weil-pbc-proetale-ringed-open-closed] on $Q$ to $G_q$. Its final term is zero, so its counit identifies $G_q\\cong e_!e^*G_q$. The hypothesis that $e$ is quasi-compact is exactly the hypothesis needed for this sequence.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH, lemma-ses-associated-to-open, and 09BL, closed inverse-image evaluation and exactness."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-shriek-specialization-zero] with $X=Q$, $U=E$, the given closed immersion $z$, and the affine site object $V=Q$ with its identity map. An open immersion is weakly etale, $E\\times_Q Z$ is empty, and every point of $Q$ specializes into $Z$ by hypothesis. It gives $(e_!H)(Q)=0$ for every abelian sheaf $H$ on $E$. The same vanishing holds for constant-$A$ module sheaves: [def-weil-extension-by-zero] defines their extension by sheafifying the identical zero-or-one-summand presheaf, and [def-weil-presheaf-modules-sheafification] explicitly takes the underlying abelian sheafification and then extends the scalar action. Forgetting the action therefore gives exactly the abelian extension used by the lemma. With $H$ underlying $e^*G_q$, step 4 yields $G_q(Q)=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero; sites-modules.tex module-sheafification construction. This is degree-zero vanishing of G_q, not a direct higher-cohomology use of 09AG."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-wcontractible-affine-weakly-contractible] with $X=Q$ and its identity site object. The ring-retraction assumption in the item makes this object weakly contractible in the full small pro-etale site, with the stipulated universes. By [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact], evaluation at this object on constant-$A$ module sheaves preserves homology. In particular, for every complex $C^\\bullet$ of such sheaves, $\\mathcal H^q(C^\\bullet)(Q)=H^q(C^\\bullet(Q))$.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible; sites-cohomology.tex Tag 0946, lemma-w-contractible."
+   }
+  },
+  {
+   "text": "The small-site module category on $P$ is Grothendieck by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose an injective resolution $F\\to I^\\bullet$ with $I^n=0$ for $n<0$ [def-sp-injective-resolutions]; by definition $H^q(P_{\\mathrm{proet}},F)=H^q(I^\\bullet(P))$. By part (2) of [lem-weil-pbc-dplus-injective-representative] the bounded-below injective complex $I^\\bullet$ is K-injective. In [def-weil-pbc-proetale-operations], $Rp_*(QI^\\bullet)=Q(p_*I(I^\\bullet))$ for the functorial K-injective resolution $I^\\bullet\\to I(I^\\bullet)$. This is a quasi-isomorphism between K-injective complexes, hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]; the additive termwise functor $p_*$ preserves homotopy equivalences, so $p_*I^\\bullet$ represents $Rp_*F[0]$, as $QI^\\bullet\\cong F[0]$. The direct-image section formula of [def-weil-pbc-proetale-operations] gives $(p_*I^n)(Q)=I^n(P)$, since $P\\times_Q Q=P$. Thus, by step 6 and then step 5, $H^q(P_{\\mathrm{proet}},F)=H^q(I^\\bullet(P))=H^q((p_*I^\\bullet)(Q))=G_q(Q)=0$. This proves the requested $q>0$ vanishing (and also degree zero). This argument resolves $F$ on $P$ and never assumes that $j_!J$ is injective.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070J, lemma-bounded-below-injectives-K-injective, and 070I, lemma-K-injective; explicit section-complex calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "thm-weil-pbc-finite-level-proetale",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-shriek-specialization-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite-ring etale-origin proper base change (09C9), open comparison (09AF), and specialization-zero (09AG), combined with exact evaluation on the w-contractible base. Original arbitrary-injective statement corrected after the explicit nodal counterexample in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +191,80 @@
    "results": "OK 12 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
    "date": "2026-10-18",
    "verdict": "no match: hits concern structure-sheaf sections, generic injective vanishing, or site definitions; none gives boundary cohomology of an open-extended pro-etale injective. Read the generic vanishing at Mathlib/CategoryTheory/Abelian/RightDerived.lean:153; its input must itself be injective on P, which is not assumed here."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(cohomology|acyclic)|extensionByZero|openImmersionLowerShriek",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper henselian pair rigidity for arbitrary torsion sheaves on the pro etale site",
+   "results": "OK 8 hits: HenselianLocalRing.toIsLocalRing, HenselianLocalRing, HenselianLocalRing.casesOn, HenselianRing, Algebra.Etale.formallyEtale, HenselianLocalRing.recOn, HenselianLocalRing.mk, instHenselianRingMaximalIdeal",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"sheafCohomology\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale cohomology of extension by zero of an injective module sheaf on a proper scheme over a weakly contractible affine base vanishes when every base point specializes into the closed complement",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, Algebra.etaleLocus_eq_compl_support, Algebra.Extension.cotangentComplex_injective_iff, CochainComplex.isKInjective_of_injective_aux, Algebra.Extension.subsingleton_h1Cotangent",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a proper scheme over a weakly contractible ring, every higher cohomology group of an injective pro etale sheaf extended by zero from a generic open vanishes",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_rightDerived_obj_injective|extensionByZero|Pro[Ee]tale",
+   "results": "OK 12 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|proper_base_change|isIso_baseChange",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for finite coefficient pro etale sheaves that are pulled back from the etale site",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage, Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsProper\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Boundary cohomology vanishes on a proper scheme over a weakly contractible affine base for extension by zero of an etale origin torsion sheaf disjoint from a closed specialization locus",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.zero_of_zero_cover, groupCohomology.subtype_comp_d₀₁, groupCohomology.subtype_comp_d₀₁_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf limit vanishing, ring henselianity, geometric stability under base change, and generic derived injective facts do not state this cohomology claim"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-proetale-open-injective-proper-acyclic",
@@ -93,5 +285,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sp-proetale-proper-boundary-cohomology",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the arbitrary-pro-etale-injective statement is false. report.md gives a regular nodal elliptic degeneration, the profinite-cyclic-cover / infinite-cyclic-cover coset sheaf, and an injective-envelope argument giving nonzero H^1(j_!J). Restore the etale-origin hypothesis of the source coefficient class. Split the corrected claim into open comparison, disjoint restriction, finite-level proper base change, base support, specialization-zero and exact evaluation. No new nodes. Parent arbitrary-injective callers are not discharged by this correction.",
+  "blueprint": "Repairs the boundary obligation extracted below cor-exc-base-change-open-immersion-general. The current blueprint works on the etale-origin/localizing coefficient class; its old clause (b) does not assert arbitrary-sheaf pro-etale proper base change. The corrected proof uses the existing proper-base-change chapter as a generic comparison tool, without the circular arbitrary-open acyclicity nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Step 1 uses compatibility of comparison inverse image with open extension by zero. The existence unit does not prove this sheaf-comparison identity."
+   },
+   {
+    "node": "def-weil-pbc-etale-origin-witness",
+    "why": "Step 1 packages a degree-zero etale complex and the comparison isomorphism into exactly the input datum of finite-level proper base change."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Step 1 uses exactness to identify the termwise extension of the degree-zero complex with the derived extension; this is the general open-operation exactness tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Step 2 uses stability of closed immersions under arbitrary base change, a generic geometric fact outside the existence unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Step 2 uses stability of open immersions under arbitrary base change, a generic geometric fact outside the existence unit."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Step 2 uses quasi-compactness of the base change of E to check the open-closed localization hypothesis; the existence unit supplies no different quasi-compactness theorem."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Step 2 uses the open adjunction twice to identify the composite extension by zero, without assuming any higher-cohomology result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Steps 2 and 4 use only disjoint restriction and the module sheaf short exact localization sequence, not derived proper base change or arbitrary-injective acyclicity."
+   },
+   {
+    "node": "thm-weil-pbc-finite-level-proetale",
+    "why": "Step 3 uses finite-ring proper base change exclusively for the etale-origin witness built in step 1. The original arbitrary-injective route is false, as the report counterexample shows; this comparison theorem supplies the corrected coefficient-class argument, not a replacement of the existence unit."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Steps 3 and 7 use the ordinary uncompleted pushforward and its section formula to compute cohomology of the actual sheaf, with no completion or coefficient-category change."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Step 4 uses exact module inverse image for the closed immersion, to commute it with cohomology; no conservativity of geometric stalks is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "why": "Step 5 uses the affine degree-zero specialization vanishing only after showing each cohomology sheaf is an open extension; this avoids misusing it as higher vanishing."
+   },
+   {
+    "node": "def-weil-extension-by-zero",
+    "why": "Step 5 identifies the defining module extension presheaf with the underlying abelian extension presheaf for an open immersion."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Step 5 uses the explicit underlying abelian sheafification construction to transfer specialization vanishing from abelian to module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+    "why": "Step 6 converts the item's ring-retraction assumption into surjectivity of evaluation on all sheaf epimorphisms, not only etale sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "Step 6 uses preservation of homology by module evaluation at the weakly contractible affine object."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Step 7 uses the Grothendieck property of small-site module sheaves. The fixed site universes make the underlying category small in the sheaf universe."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Step 7 obtains enough injectives in that module category from its Grothendieck property; this is a generic homological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Step 7 uses its degree bound n=0 and its bounded-below K-injectivity clause for an honest injective resolution."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "thm-weil-pbc-finite-level-proetale",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-shriek-specialization-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NA-139067506",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-139067506 (reviewer sub-agent of L); spot-checked: I read the item in full, the base statement, the citer lem-sp-proetale-open-injective-proper-acyclic, all 20 cited statements, Stacks 09AG/09C9/0982 and HHL Cor. 4.19 and Rem. 7.15. The base statement ('J need not have etale origin') is false. I checked the delivered counterexample step by step. Setup: Q=Spec k[[t]] is w-contractible by 0982; P is the regular cubic degeneration with a nodal fibre C; the ℤ-chain cover of C lifts by 0A48 to an integral pro-étale Ẑ-torsor T̃. Take F=F_p[T̃/ℤ]. Γ(P,F)=0, because π0^cond(T̃)=* and Ẑ-invariants of F_p[Ẑ/ℤ] vanish. Restricted to C, F has a nonzero section. Γ(P,G)→Γ(C,i^*G) is injective by 09AG on the cover by localizations at units mod t. With J=j^*I for an injective envelope I of F, this gives H^1(P,j_!J)≠0. The added etale-origin hypothesis is a visible E7 correction of a non-target agent-extracted node, and the corrected statement is true. Steps 1–6 check against their cited statements: 09AF comparison gives the witness; open-closed gives a^*j_!=0; finite-level pro-étale PBC (09C9 with I=0) gives z^*Rp_*F=0; the cohomology sheaves are e_!-extended; 09AG gives G_q(Q)=0; evaluation at the w-contractible Q is exact. I accept the tool_uses. FIX (C4): step 7 cited lem-weil-pbc-right-derived-plus-injective for 'p_*I^• represents Rp_*F'. That node concerns an abstract D^+ Kan extension, not the operations Rp_*. I rewrote step 7 to use an injective resolution, K-injectivity (dplus-representative (2)) and lem-weil-pbc-kinjective-hom-derived, and updated uses, proof_deps and tool_uses (whole file in fixes/dag/nodes/sec-smooth-purity/). Maintainer note: the citer lem-sp-proetale-open-injective-proper-acyclic is false by the same example, since evaluating R^1p_* at Q gives H^1≠0. Its step citing this item no longer matches, and its chain (lem-sp-proper-open-derived-support, lem-sp-fullcd-ambient-adjoint) needs a HUMAN.md entry.; 1 file(s) fixed by the reviewer"
  }
 }
