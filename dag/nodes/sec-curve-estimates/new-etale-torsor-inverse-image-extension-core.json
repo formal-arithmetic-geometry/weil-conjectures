@@ -1,0 +1,107 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-torsor-inverse-image-extension",
+   "place": "worker decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ (worker decomposition)"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension",
+  "date": "2026-10-18",
+  "group": "J9"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaf torsor and equivariant action",
+   "results": "No exact general sheaf torsor transport theorem found.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "CategoryTheory.Sheaf.Torsor",
+   "results": "Internal Server Error",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*inverse image.*extension",
+   "results": "No matching declaration in Mathlib CategoryTheory Sites.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "id": "new-etale-torsor-inverse-image-extension-core",
+ "title": "Extension core after inverse-image torsor transport",
+ "statement": "theorem etale_torsor_inverse_image_extension_core\n    (X Y : AlgebraicGeometry.Scheme.{u}) (f : Y ⟶ X)\n    {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (T : Torsor G) (E : ExtensionPresentation.{u, u} X T)\n    (T' : Torsor ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj G))\n    (eT : (AlgebraicGeometry.Scheme.etaleSetPullback f).obj T.sheaf ≅ T'.sheaf)\n    (heq : (∀ (W : X.Etale) (g : G.obj.obj (Opposite.op W))\n          (t : T.sheaf.obj.obj (Opposite.op W)),\n        (eT.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n          f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) (T.vadd (Opposite.op W) g t))) = T'.vadd (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n              (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              f).unit.app G).hom.app (Opposite.op W) g) (eT.hom.hom.app (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t)))) :\n    ∃ γ : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj ((constantSheaf\n        X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ≅ ((constantSheaf Y.smallEtaleTopology\n          AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ))),\n        (∀ (W : X.Etale) (n : ℤ),\n          γ.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n            f).obj W)) (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u +\n            1} f).unit.app ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).hom.app (Opposite.op W) ((toSheafify\n          X.smallEtaleTopology\n                ((Functor.const X.Etaleᵒᵖ).obj\n                  (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (Opposite.op W) ⟨n⟩)) =\n            (toSheafify Y.smallEtaleTopology\n              ((Functor.const Y.Etaleᵒᵖ).obj\n                (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (Opposite.op\n                  ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W)) ⟨n⟩) ∧\n        ∃ hz : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫\n          ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.projection ≫ γ.hom) =\n          0,\n          (ShortComplex.mk ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n            E.inclusion)\n            ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.projection ≫ γ.hom)\n              hz).ShortExact ∧\n          ∃ E' : ExtensionPresentation.{u, u} Y T',\n            ∃ e : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj E.middle ≅\n              E'.middle,\n              ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫ e.hom =\n                E'.inclusion ∧\n              e.hom ≫ E'.projection = (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                f).map E.projection ≫ γ.hom ∧\n              (∀ (W : X.Etale) (t : T.sheaf.obj.obj (Opposite.op W)),\n                e.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback\n                  @AlgebraicGeometry.Etale ⊤ f).obj W))\n                  (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n                  f).unit.app E.middle).hom.app (Opposite.op W) (E.generator (Opposite.op W) t)) =\n                  E'.generator (Opposite.op ((MorphismProperty.Over.pullback\n                  @AlgebraicGeometry.Etale ⊤ f).obj W)) (eT.hom.hom.app (Opposite.op\n                  ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t))) ∧\n              (∀ U : Y.Etaleᵒᵖ,\n                Set.BijOn (fun t : T'.sheaf.obj.obj U =>\n                  e.inv.hom.app U (E'.generator U t)) Set.univ\n                  {x | ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n                    E.projection ≫ γ.hom).hom.app U x =\n                    (toSheafify Y.smallEtaleTopology\n                      ((Functor.const Y.Etaleᵒᵖ).obj\n                        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U ⟨1⟩}) ∧\n              (∀ (U : Y.Etaleᵒᵖ) (g : ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                f).obj G).obj.obj U)\n                  (t : T'.sheaf.obj.obj U),\n                e.inv.hom.app U (E'.generator U (T'.vadd U g t)) =\n                  e.inv.hom.app U (E'.generator U t) +\n                    ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n                      E.inclusion).hom.app U g)) ∧\n              ∀ e' : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj E.middle ≅\n                  E'.middle,\n                (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫\n                  e'.hom = E'.inclusion →\n                e'.hom ≫ E'.projection = (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                  f).map E.projection ≫ γ.hom →\n                (∀ (W : X.Etale) (t : T.sheaf.obj.obj (Opposite.op W)),\n                  e'.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback\n                    @AlgebraicGeometry.Etale ⊤ f).obj W))\n                    (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n                    f).unit.app E.middle).hom.app (Opposite.op W) (E.generator (Opposite.op W) t)) =\n                    E'.generator (Opposite.op ((MorphismProperty.Over.pullback\n                    @AlgebraicGeometry.Etale ⊤ f).obj W)) (eT.hom.hom.app (Opposite.op\n                    ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n              (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n              (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n                (Opposite.op W) t))) →\n                  e' = e",
+ "stmt_deps": [
+  "lem-sc-torsor-h1",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding substantive subargument of Lemma 03AJ; its proof remains to be completed from the listed declarations.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-torsor-h1",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtensionAux",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleTorsorInverseImageExtensionAux.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.etale_torsor_inverse_image_extension_core",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-18",
+  "statement": "theorem etale_torsor_inverse_image_extension_core\n    (X Y : AlgebraicGeometry.Scheme.{u}) (f : Y ⟶ X)\n    {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (T : Torsor G) (E : ExtensionPresentation.{u, u} X T)\n    (T' : Torsor ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj G))\n    (eT : (AlgebraicGeometry.Scheme.etaleSetPullback f).obj T.sheaf ≅ T'.sheaf)\n    (heq : (∀ (W : X.Etale) (g : G.obj.obj (Opposite.op W))\n          (t : T.sheaf.obj.obj (Opposite.op W)),\n        (eT.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n          f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) (T.vadd (Opposite.op W) g t))) = T'.vadd (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n              (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              f).unit.app G).hom.app (Opposite.op W) g) (eT.hom.hom.app (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t)))) :\n    ∃ γ : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj ((constantSheaf\n        X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ≅ ((constantSheaf Y.smallEtaleTopology\n          AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ))),\n        (∀ (W : X.Etale) (n : ℤ),\n          γ.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n            f).obj W)) (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u +\n            1} f).unit.app ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).hom.app (Opposite.op W) ((toSheafify\n          X.smallEtaleTopology\n                ((Functor.const X.Etaleᵒᵖ).obj\n                  (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (Opposite.op W) ⟨n⟩)) =\n            (toSheafify Y.smallEtaleTopology\n              ((Functor.const Y.Etaleᵒᵖ).obj\n                (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (Opposite.op\n                  ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W)) ⟨n⟩) ∧\n        ∃ hz : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫\n          ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.projection ≫ γ.hom) =\n          0,\n          (ShortComplex.mk ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n            E.inclusion)\n            ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.projection ≫ γ.hom)\n              hz).ShortExact ∧\n          ∃ E' : ExtensionPresentation.{u, u} Y T',\n            ∃ e : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj E.middle ≅\n              E'.middle,\n              ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫ e.hom =\n                E'.inclusion ∧\n              e.hom ≫ E'.projection = (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                f).map E.projection ≫ γ.hom ∧\n              (∀ (W : X.Etale) (t : T.sheaf.obj.obj (Opposite.op W)),\n                e.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback\n                  @AlgebraicGeometry.Etale ⊤ f).obj W))\n                  (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n                  f).unit.app E.middle).hom.app (Opposite.op W) (E.generator (Opposite.op W) t)) =\n                  E'.generator (Opposite.op ((MorphismProperty.Over.pullback\n                  @AlgebraicGeometry.Etale ⊤ f).obj W)) (eT.hom.hom.app (Opposite.op\n                  ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t))) ∧\n              (∀ U : Y.Etaleᵒᵖ,\n                Set.BijOn (fun t : T'.sheaf.obj.obj U =>\n                  e.inv.hom.app U (E'.generator U t)) Set.univ\n                  {x | ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n                    E.projection ≫ γ.hom).hom.app U x =\n                    (toSheafify Y.smallEtaleTopology\n                      ((Functor.const Y.Etaleᵒᵖ).obj\n                        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U ⟨1⟩}) ∧\n              (∀ (U : Y.Etaleᵒᵖ) (g : ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                f).obj G).obj.obj U)\n                  (t : T'.sheaf.obj.obj U),\n                e.inv.hom.app U (E'.generator U (T'.vadd U g t)) =\n                  e.inv.hom.app U (E'.generator U t) +\n                    ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map\n                      E.inclusion).hom.app U g)) ∧\n              ∀ e' : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj E.middle ≅\n                  E'.middle,\n                (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).map E.inclusion ≫\n                  e'.hom = E'.inclusion →\n                e'.hom ≫ E'.projection = (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1}\n                  f).map E.projection ≫ γ.hom →\n                (∀ (W : X.Etale) (t : T.sheaf.obj.obj (Opposite.op W)),\n                  e'.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback\n                    @AlgebraicGeometry.Etale ⊤ f).obj W))\n                    (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n                    f).unit.app E.middle).hom.app (Opposite.op W) (E.generator (Opposite.op W) t)) =\n                    E'.generator (Opposite.op ((MorphismProperty.Over.pullback\n                    @AlgebraicGeometry.Etale ⊤ f).obj W)) (eT.hom.hom.app (Opposite.op\n                    ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n              (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n              (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n                (Opposite.op W) t))) →\n                  e' = e"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261018T071159-L-1670473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261018T071159-L-1670473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

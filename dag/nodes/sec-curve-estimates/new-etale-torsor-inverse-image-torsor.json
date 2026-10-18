@@ -1,0 +1,107 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-torsor-inverse-image-extension",
+   "place": "worker decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ (worker decomposition)"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension",
+  "date": "2026-10-18",
+  "group": "J9"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaf torsor and equivariant action",
+   "results": "No exact general sheaf torsor transport theorem found.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "CategoryTheory.Sheaf.Torsor",
+   "results": "Internal Server Error",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*inverse image.*extension",
+   "results": "No matching declaration in Mathlib CategoryTheory Sites.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "id": "new-etale-torsor-inverse-image-torsor",
+ "title": "Inverse-image torsor and equivariance",
+ "statement": "theorem etale_torsor_inverse_image_torsor\n    (X Y : AlgebraicGeometry.Scheme.{u}) (f : Y ⟶ X)\n    {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (T : Torsor G) (E : ExtensionPresentation.{u, u} X T) :\n    ∃ (T' : Torsor ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj G))\n      (eT : (AlgebraicGeometry.Scheme.etaleSetPullback f).obj T.sheaf ≅ T'.sheaf),\n            (∀ (W : X.Etale) (g : G.obj.obj (Opposite.op W))\n          (t : T.sheaf.obj.obj (Opposite.op W)),\n        (eT.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n          f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) (T.vadd (Opposite.op W) g t))) = T'.vadd (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n              (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              f).unit.app G).hom.app (Opposite.op W) g) (eT.hom.hom.app (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t)))",
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding substantive subargument of Lemma 03AJ; its proof remains to be completed from the listed declarations.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtensionAux",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleTorsorInverseImageExtensionAux.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.etale_torsor_inverse_image_torsor",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-18",
+  "statement": "theorem etale_torsor_inverse_image_torsor\n    (X Y : AlgebraicGeometry.Scheme.{u}) (f : Y ⟶ X)\n    {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (T : Torsor G) (E : ExtensionPresentation.{u, u} X T) :\n    ∃ (T' : Torsor ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj G))\n      (eT : (AlgebraicGeometry.Scheme.etaleSetPullback f).obj T.sheaf ≅ T'.sheaf),\n            (∀ (W : X.Etale) (g : G.obj.obj (Opposite.op W))\n          (t : T.sheaf.obj.obj (Opposite.op W)),\n        (eT.hom.hom.app (Opposite.op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤\n          f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) (T.vadd (Opposite.op W) g t))) = T'.vadd (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n              (((AlgebraicGeometry.Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              f).unit.app G).hom.app (Opposite.op W) g) (eT.hom.hom.app (Opposite.op\n              ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f) (Type (u + 1))\n            (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)\n            (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app\n              (Opposite.op W) t)))"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261018T071159-L-1670473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261018T071159-L-1670473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

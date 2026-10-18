@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
 import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtensionAux
 
 /-! # Inverse image of the canonical étale torsor extension
 
@@ -151,6 +152,8 @@ theorem etale_torsor_inverse_image_extension
               (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app T.sheaf).hom.app
                 (Opposite.op W) t))) →
                   e' = e := by
-  sorry
+  obtain ⟨T', eT, heq⟩ := etale_torsor_inverse_image_torsor X Y f T E
+  refine ⟨T', eT, heq, ?_⟩
+  exact etale_torsor_inverse_image_extension_core X Y f T E T' eT heq
 
 end CategoryTheory.Sheaf.Torsor
