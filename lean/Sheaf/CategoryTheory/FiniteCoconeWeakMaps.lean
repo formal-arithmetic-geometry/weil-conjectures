@@ -6,8 +6,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.CategoryTheory.FiniteCoconeLimitCycles
 import Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries
-import WeilConjectures.CategoryTheory.ExactCouple
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! Canonical weak-convergence maps for a finite diagonal exact couple.
 Source: Stacks Project, Homology, Tag 012W.
@@ -139,6 +137,78 @@ theorem finiteCocone_weakMaps
       (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧
       (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P))))
     (L : X.LimitSubobjects) (hreg : X.IsRegular) : X.WeaklyConvergesTo L A := by
-  sorry
+  have hleft : ∀ n : ℤ, ∃ a : ℤ, ∀ P : ℤ, P ≤ a → IsIso ((A n).ι P) := by
+    intro n
+    obtain ⟨a, b, ha, hb⟩ := hA n
+    exact ⟨a, ha⟩
+  have hzero : ∀ n : ℤ, ∃ b : ℤ, ∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)) := by
+    intro n
+    obtain ⟨a, b, ha, hb⟩ := hA n
+    exact ⟨b, hb⟩
+  intro p q
+  let n := p + q
+  let t : X.D p q ⟶ X.D p (n - p) := eqToHom (by dsimp [n]; congr 1; omega)
+  let j := t ≫ (A n).ι p
+  let g := X.initialG p q
+  let a : X.D (p + 1) (n - (p + 1)) ⟶ X.D p q :=
+    X.alphaDiagonal n p ≫ eqToHom (by dsimp [n]; congr 1; omega)
+  have ha : a ≫ t = X.alphaDiagonal n p := by
+    simp [a, t]
+  have hg : kernelSubobject g = imageSubobject a := by
+    have hh := initialG_kernel X n p
+    have htransport : t ≫ X.initialG p (n - p) =
+        g ≫ eqToHom (by dsimp [n]; congr 1; omega) := by
+      dsimp [t, g, initialG]
+      rw [← Category.assoc, ← eqToHom_naturality
+        (fun pq : ℤ × ℤ ↦ X.g pq.1 pq.2)
+        (show (p, q) = (p, n - p) by dsimp [n]; ext <;> omega)]
+      simp only [Category.assoc, eqToHom_trans]
+    have hker : kernelSubobject g = kernelSubobject (t ≫ X.initialG p (n - p)) := by
+      have hh' := congrArg (fun f : X.D p q ⟶ X.E p (n - p) ↦ kernelSubobject f)
+        htransport
+      exact (hh'.trans (kernelSubobject_comp_mono g _)).symm
+    rw [hker, ← pullback_kernel, hh]
+    have heq : (Subobject.«exists» t).obj (imageSubobject a) =
+        imageSubobject (X.alphaDiagonal n p) := by
+      rw [Subobject.exists_obj_eq_imageSubobject,
+        ← imageSubobject_comp_of_epi (factorThruImageSubobject a),
+        imageSubobject_arrow_comp_assoc, ha]
+    rw [← heq, Subobject.exists_iso_map, Subobject.pullback_map_self]
+  have hZ := finiteCocone_limitCycles X L hreg hzero p q
+  have hB := finiteCocone_limitBoundaries X A hleft L p q
+  let z := (L.Z p q).factorThru g (g_factors_limitCycles X L p q)
+  have hz : z ≫ (L.Z p q).arrow = g := Subobject.factorThru_arrow _ _ _
+  have hepi : Epi z := epi_of_imageSubobject_comp_arrow_eq z (by rw [hz]; exact hZ.symm)
+  have hpage : Epi (X.toPageInfinity L p q) := by
+    dsimp [toPageInfinity]
+    exact epi_comp z _
+  have hgraded : Epi (X.toGradedPiece A p q) := by
+    dsimp [toGradedPiece]
+    infer_instance
+  refine ⟨hpage, hgraded, ?_⟩
+  have hpageker : kernelSubobject (X.toPageInfinity L p q) =
+      kernelSubobject g ⊔ kernelSubobject j := by
+    rw [toPageInfinity, quotient_kernel, Subobject.factorThru_arrow, hB]
+    exact pullback_image g (kernelSubobject j)
+  have hgradedker : kernelSubobject (X.toGradedPiece A p q) =
+      kernelSubobject j ⊔ kernelSubobject g := by
+    have hk := quotient_kernel (imageSubobject ((A n).ι (p + 1)))
+      (imageSubobject ((A n).ι p)) (X.imageFiltration_antitone n (A n) (by omega))
+      (t ≫ factorThruImageSubobject ((A n).ι p))
+    have hk' : kernelSubobject (X.toGradedPiece A p q) =
+        (Subobject.pullback j).obj (imageSubobject ((A n).ι (p + 1))) := by
+      simpa only [toGradedPiece, imageFiltration, PBCDecreasingFiltration.gradedPiece,
+        Category.assoc, imageSubobject_arrow_comp] using hk
+    rw [hk']
+    change (Subobject.pullback j).obj (imageSubobject ((A n).ι (p + 1))) = _
+    have him : imageSubobject ((A n).ι (p + 1)) =
+        (Subobject.«exists» j).obj (imageSubobject a) := by
+      rw [Subobject.exists_obj_eq_imageSubobject,
+        ← imageSubobject_comp_of_epi (factorThruImageSubobject a),
+        imageSubobject_arrow_comp_assoc]
+      dsimp [j]
+      rw [← Category.assoc, ha, (A n).comm]
+    rw [him, pullback_image, hg]
+  exact hpageker.trans (by rw [sup_comm]; exact hgradedker.symm)
 
 end CategoryTheory.BigradedExactCouple
