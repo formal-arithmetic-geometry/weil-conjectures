@@ -7,35 +7,214 @@
    "place": "Comparator challenge theorem WeilConjectures.weil_conjectures (lean/Comparator/Weil/Challenge.lean): factorization, functional equation and Riemann hypothesis for smooth proper geometrically integral X over a finite field",
    "via": []
   },
-  "same_as": []
+  "same_as": [
+   "thm-weil-final",
+   "sk-thm-weil-final"
+  ]
  },
  "kind": "statement",
  "title": "WeilConjectures.weil_conjectures",
- "statement": "Let k be a finite field with q=#k elements, d a natural number, and f:X->Spec k a morphism of schemes that is smooth of relative dimension d, proper and geometrically integral [def-weil-scheme-morphism-properties, def-weil-proper-morphism, def-weil-geometric-hypotheses]. For a finite field k with q=#k elements, a scheme X and a morphism f:X->Spec k, the zeta series Z(X,t)=f.zetaSeries in Q[[t]] [def-weil-point-counts-zeta] is Z(X,t)=exp(sum_{n>=1} N_n t^n/n), substituted into the formal exponential series, where N_n=f.pointCount n is the number of k-morphisms Spec F_{q^n} -> X (morphisms g with g followed by f equal to the map induced by k -> F_{q^n}), F_{q^n} being the model FiniteField.galoisExtension k n = the splitting field over k of X^{q^n}-X, and N_n=0 (junk value) if this set is infinite. A polynomial with integer coefficients is viewed in Q[[t]] through its coefficientwise image in Q[t] [def-weil-coefficientwise-extension, def-weil-polynomial-as-power-series]. Then there is a family P_0,...,P_{2d} in Z[t] [def-weil-polynomial-ring], indexed by i in {0,...,2d}, with the three properties:\n(1) Weil factorization (IsWeilFactorization q d Z P): P_i(0)=1 for every i [def-weil-polynomial-coefficient]; P_0=1-t; P_{2d}=1-q^d t; and Z(X,t) * prod_{i even} P_i = prod_{i odd} P_i in Q[[t]] [def-weil-formal-power-series].\n(2) Functional equation (WeilFunctionalEquation q d P): for every i, the multiset of complex roots of P_{2d-i} (roots of its coefficientwise image in C[t], counted with multiplicity) [def-weil-polynomial-root, def-weil-root-multiplicity] equals the image of the multiset of complex roots of P_i under z |-> (q^d z)^{-1}.\n(3) Riemann hypothesis (WeilRiemannHypothesis q d P): for every i and every complex root z of P_i, |z| = q^{-i/2} (real power) [def-weil-complex-absolute-value, def-weil-real-power].\nEquivalently the inverse roots alpha of P_i are q^{i/2}-Weil numbers and alpha |-> q^d/alpha matches the inverse roots of P_i with those of P_{2d-i}.",
+ "statement": "Let k be a finite field with q=#k elements, d a natural number, and $f:X\\to\\operatorname{Spec}k$ a morphism of schemes that is smooth of relative dimension d, proper and geometrically integral [def-sbc-smooth-morphisms, def-weil-proper-morphism, def-pc-geometrically-irreducible]. For a finite field k with q=#k elements, a scheme X and a morphism $f:X\\to\\operatorname{Spec}k$, the zeta series Z(X,t)=f.zetaSeries in Q[[t]] [def-weil-point-counts-zeta] is Z(X,t)=exp(sum_{n>=1} N_n t^n/n), substituted into the formal exponential series, where N_n=f.pointCount n is the number of k-morphisms $\\operatorname{Spec}F_{q^n}\\to X$ (morphisms g with g followed by f equal to the map induced by $k\\to F_{q^n}$), F_{q^n} being the model FiniteField.galoisExtension k n = the splitting field over k of X^{q^n}-X, and N_n=0 (junk value) if this set is infinite. A polynomial with integer coefficients is viewed in Q[[t]] through its coefficientwise image in Q[t] [def-weil-coefficientwise-ring-hom-map, def-weil-polynomial-as-power-series]. Then there is a family P_0,...,P_{2d} in Z[t] [def-weil-polynomial-ring], indexed by i in {0,...,2d}, with the three properties:\n(1) Weil factorization (IsWeilFactorization q d Z P): P_i(0)=1 for every i [def-weil-polynomial-coefficient]; P_0=1-t; P_{2d}=1-q^d t; and Z(X,t) * prod_{i even} P_i = prod_{i odd} P_i in Q[[t]] [def-weil-formal-power-series].\n(2) Functional equation (WeilFunctionalEquation q d P): for every i, the multiset of complex roots of P_{2d-i} (roots of its coefficientwise image in C[t], counted with multiplicity) [def-weil-polynomial-root, def-weil-root-multiplicity] equals the image of the multiset of complex roots of P_i under $z\\mapsto(q^dz)^{-1}$.\n(3) Riemann hypothesis (WeilRiemannHypothesis q d P): for every i and every complex root z of P_i, |z| = q^{-i/2} (real power) [def-weil-complex-absolute-value, def-weil-real-power].\nEquivalently the inverse roots alpha of P_i are q^{i/2}-Weil numbers and $\\alpha\\mapsto q^d/\\alpha$ matches the inverse roots of P_i with those of P_{2d-i}.",
  "source": {
   "document": "lean/Comparator/Weil/Challenge.lean",
   "place": "WeilConjectures.weil_conjectures"
  },
  "stmt_deps": [
   "def-weil-point-counts-zeta",
-  "def-weil-scheme-morphism-properties",
   "def-weil-proper-morphism",
-  "def-weil-geometric-hypotheses",
   "def-weil-polynomial-ring",
   "def-weil-polynomial-coefficient",
   "def-weil-formal-power-series",
-  "def-weil-coefficientwise-extension",
   "def-weil-polynomial-as-power-series",
   "def-weil-polynomial-root",
   "def-weil-root-multiplicity",
   "def-weil-complex-absolute-value",
-  "def-weil-real-power"
+  "def-weil-real-power",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-smooth-morphisms",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-geometric-hypotheses",
+  "def-weil-coefficientwise-extension"
  ],
- "proof": "",
- "proof_deps": [],
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Set $k_0=k$ and $X_0=X$, and choose an algebraic closure $\\bar k$ of $k_0$. By def-weil-finite-field-q-elements, $q=p^a$ for a prime $p$ and $a\\geq1$, giving the global datum of def-weil-finite-field-fiber. Properness gives separatedness and finite type by def-weil-proper-morphism. For $n\\geq1$, lem-weil-unique-subfield-of-closure (1),(3) identifies $K_n=\\{x\\in\\bar k:x^{q^n}=x\\}$ as a subfield containing $k_0$, with $q^n$ elements. The polynomial $h(U)=U^{q^n}-U$ has precisely these $q^n$ roots; since its degree is $q^n$, it splits in $K_n$, and these roots generate $K_n$ as a $k_0$-algebra because they are every element of $K_n$. Apply lem-weil-splitting-field-algebra-equivalence to obtain a $k_0$-algebra isomorphism $e:K_n\\simeq h.\\mathrm{SplittingField}=E_n$. The induced maps $\\operatorname{Spec}(e)$ and $\\operatorname{Spec}(e^{-1})$ are inverse over $\\operatorname{Spec}k_0$ by def-weil-affine-spectrum. Sending a point $g:\\operatorname{Spec}E_n\\to X_0$ to $g\\circ\\operatorname{Spec}(e^{-1})$ gives the inverse bijections between the two sets of $k_0$-points. Their cardinalities agree, and lem-weil-point-counts-finite (1) makes them finite. Hence the comparator exponential equals the series of def-weil-point-counts-zeta, coefficient by coefficient. Next put $\\bar X=X_0\\times_{k_0}\\bar k$. By lem-pod-separated-finite-type-base-change this is finite type over $\\bar k$. A field has only the ideals $0,1$, so is a Noetherian ring; its one-point affine spectrum is locally Noetherian by pqf-def-locnoeth and is quasi-compact. Thus lem-weil-pbc-finite-type-over-noetherian makes $\\bar X$ Noetherian, in particular locally Noetherian. By lem-sbc-smooth-relative-dimension-permanence (1), $\\bar X\\to\\operatorname{Spec}\\bar k$ is smooth of relative dimension $d$. Its only fibre is $\\bar X$, so def-sbc-smooth-morphisms gives local topological dimension $d$ at every point. Apply lem-sbc-constant-local-dimension-components with $Y=O=\\bar X$: every irreducible component has dimension $d$. This is the pure-dimension clause of def-weil-geometric-hypotheses. For every extension $k_0\\to k^{\\prime}$, geometrical integrality (def-pc-geometrically-irreducible) makes $(X_0)_{k^{\\prime}}$ integral; lem-pc-integral-scheme-irreducible makes it nonempty and irreducible, and lem-pc-irreducible-space-connected makes it connected. Thus $X_0$ is geometrically connected without needing a separate closure criterion. All hypotheses of def-weil-smooth-proper-datum and the final Weil component theorems are now verified.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-point-counts-zeta",
+    "def-weil-proper-morphism",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sbc-constant-local-dimension-components",
+    "def-weil-geometric-hypotheses",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-integral-scheme-irreducible",
+    "lem-pc-irreducible-space-connected",
+    "def-weil-smooth-proper-datum",
+    "def-weil-finite-field-q-elements",
+    "lem-weil-unique-subfield-of-closure",
+    "lem-weil-splitting-field-algebra-equivalence",
+    "def-weil-affine-spectrum",
+    "lem-weil-point-counts-finite",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+    "place": "opening paragraph: the hypotheses make the smooth-proper datum and the point-count zeta is the stated exponential"
+   }
+  },
+  {
+   "text": "Apply thm-weil-final-integrality to this datum, obtaining the same family $P_i\\in\\mathbf Z[T]$ for $0\\leq i\\leq2d$, with $P_i(0)=1$ and $Z=\\prod_iP_i^{(-1)^{i+1}}$ in $\\mathbf Q(T)$. Use def-weil-coefficientwise-ring-hom-map along $\\mathbf Z\\to\\mathbf Q$; put $A=\\prod_{i\\text{ odd}}P_i$ and $B=\\prod_{i\\text{ even}}P_i$ in $\\mathbf Q[T]$. Both have constant term $1$. The displayed rational factorization says $Z=A/B$. By def-weil-rational-power-series, its expansion at zero agrees with the point-count series; by def-weil-polynomial-as-power-series, $B(0)=1$ makes $B$ a unit in $\\mathbf Q[[T]]$, so this identity is exactly $ZB=A$ in $\\mathbf Q[[T]]$. The two endpoint identities $P_0=1-T$ and $P_{2d}=1-q^dT$ follow from thm-weil-final-betti for these same factors. Reindexing by $\\operatorname{Fin}(2d+1)$ sends $i$ to the factor $P_i$ and preserves parity. The coefficient and product conventions of def-weil-polynomial-coefficient, def-weil-polynomial-ring and def-weil-formal-power-series then give every field of IsWeilFactorization for this one family.",
+   "uses": [
+    "thm-weil-final-integrality",
+    "thm-weil-final-betti",
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-coefficient",
+    "def-weil-formal-power-series",
+    "def-weil-coefficientwise-ring-hom-map",
+    "def-weil-polynomial-as-power-series",
+    "def-weil-rational-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+    "place": "Clause (i) and Clause (ii): factorization and the identification of the canonical factors"
+   }
+  },
+  {
+   "text": "For this same family, prop-duality-reciprocity gives $b_i=b_{2d-i}$ and the identity $P_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$ in $\\mathbf Q[T,T^{-1}]$. Applying $\\mathbf Q\\to\\mathbf C$ to its finitely many coefficients preserves the identity, by the coefficientwise ring-map convention. Here $D_i$ is nonzero because $P_i(0)=1$ makes $P_i$ nonzero and $D_i$ is its signed leading coefficient. Fix a root $\\beta$ of $P_i$ in $\\mathbf C$. By lem-weil-reciprocal-root-factorization it is nonzero. Set $c=q^{-d}$ and $\\gamma=c/\\beta=(q^d\\beta)^{-1}$. Write $P_{2d-i}(U)=(U-\\gamma)^mR(U)$ with $R(\\gamma)\\neq0$; this is the multiplicity definition, also allowing $m=0$. Then $c/T-\\gamma=-\\gamma(T-\\beta)/T$, so $P_{2d-i}(c/T)=(-\\gamma/T)^m(T-\\beta)^mR(c/T)$. At $T=\\beta$, the factors $-\\gamma/T$ and $R(c/T)$ are nonzero, so its order is exactly $m$. The other side of the Laurent identity is a factor nonzero at $\\beta$ times $P_i(T)$, and therefore has exactly the multiplicity of $\\beta$ in $P_i$. These multiplicities are equal. The transformation $\\beta\\mapsto c/\\beta$ is an involution on $\\mathbf C^\\times$; exchanging $i$ and $2d-i$ gives the converse for every root. Thus the complex root multisets correspond with multiplicity, exactly WeilFunctionalEquation, with $i.\\mathrm{rev}$ corresponding to $2d-i$. Constant factors have empty root multiset, and the same identity handles them.",
+   "uses": [
+    "thm-weil-final-integrality",
+    "prop-duality-reciprocity",
+    "lem-weil-reciprocal-root-factorization",
+    "def-weil-coefficientwise-ring-hom-map",
+    "def-weil-polynomial-root",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+    "place": "Clause (v): degreewise Laurent reciprocity, read as the complex-root functional equation in clause (2) of the updated main-20261015 statement; explicit reflection and multiplicity calculation supplied here."
+   }
+  },
+  {
+   "text": "Use lem-weil-pbc-relative-algebraic-closure-algclosed with $F=\\mathbf Q$ and $\\Omega=\\mathbf C$. It gives the algebraic closure $A=\\{z\\in\\mathbf C:z\\text{ algebraic over }\\mathbf Q\\}$ as an actual subfield of $\\mathbf C$. Instantiate thm-weil-final-rh with this choice of $\\overline{\\mathbf Q}=A$, which does not alter the integral factors. Let $z$ be any complex root of $P_i$. Its constant coefficient is $1$, so $P_i$ is nonzero, and the equation $P_i(z)=0$ with rational coefficients says exactly that $z$ is algebraic over $\\mathbf Q$. Thus it gives an element $\\beta\\in A$ whose inclusion in $\\mathbf C$ is $z$. Evaluating the finite coefficient sum in the subfield $A$ shows $P_i(\\beta)=0$: its image under the injective inclusion is $P_i(z)=0$. By lem-weil-reciprocal-root-factorization, $\\beta\\neq0$ and it is the ordinary root corresponding to a reciprocal root. The restriction of $A\\hookrightarrow\\mathbf C$ to $\\mathbf Q(\\beta)$ is an embedding $\\tau$ with $\\tau(\\beta)=z$. The ordinary-root clause of thm-weil-final-rh gives $|z|=|\\tau(\\beta)|=q^{-i/2}$. By def-weil-polynomial-root, def-weil-complex-absolute-value and def-weil-real-power, this is precisely WeilRiemannHypothesis for all complex roots of the same family. Together with steps 2 and 3 it gives the three required properties simultaneously.",
+   "uses": [
+    "thm-weil-final-rh",
+    "def-weil-polynomial-root",
+    "def-weil-complex-absolute-value",
+    "def-weil-real-power",
+    "lem-weil-reciprocal-root-factorization",
+    "lem-weil-pbc-relative-algebraic-closure-algclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+    "place": "Clause (iii): arithmetic roots and the ordinary-root reformulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-complex-absolute-value",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-field-q-elements",
+  "def-weil-formal-power-series",
+  "def-weil-geometric-hypotheses",
+  "def-weil-point-counts-zeta",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-polynomial-coefficient",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root",
+  "def-weil-proper-morphism",
+  "def-weil-rational-power-series",
+  "def-weil-real-power",
+  "def-weil-root-multiplicity",
+  "def-weil-smooth-proper-datum",
+  "lem-pc-integral-scheme-irreducible",
+  "lem-pc-irreducible-space-connected",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-relative-algebraic-closure-algclosed",
+  "lem-weil-point-counts-finite",
+  "lem-weil-reciprocal-root-factorization",
+  "lem-weil-splitting-field-algebra-equivalence",
+  "lem-weil-unique-subfield-of-closure",
+  "pqf-def-locnoeth",
+  "prop-duality-reciprocity",
+  "thm-weil-final-betti",
+  "thm-weil-final-integrality",
+  "thm-weil-final-rh"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil conjectures factorization functional equation Riemann hypothesis for smooth proper geometrically integral scheme over finite field",
+   "results": "Polynomial.cardPowDegreeIsAdmissible; NumberField.dedekindZeta; AlgebraicGeometry.IsSmoothOfRelativeDimension; unrelated scheme-limit declarations; no target predicate or theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsWeilFactorization, WeilFunctionalEquation, WeilRiemannHypothesis",
+   "results": "0 hits; loogle: unknown identifier 'IsWeilFactorization'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilFunctionalEquation|WeilRiemannHypothesis|IsWeilFactorization [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil conjectures factorization functional equation Riemann hypothesis for smooth proper geometrically integral scheme over finite field",
+   "results": "completedRiemannZeta_one_sub; PowerSeries.IsWeierstrassFactorizationAt; WeakFEPair.functional_equation; no target theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence of polynomials over integers for zeta series smooth proper geometrically integral finite field functional equation roots absolute values",
+   "results": "Mahler-measure and unrelated polynomial existence declarations; no target theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map, Polynomial.roots, PowerSeries, IsProper",
+   "results": "0 hits; loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Polynomial\\.roots|PowerSeries\\.exp|IsProper|GeometricallyIntegral [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral polynomial factorization of scheme zeta function over finite field",
+   "results": "Polynomial.isIntegral_iff_isIntegral_coeff; Polynomial roots/factorization results; AlgebraicGeometry.IsIntegral; no zeta theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -50,6 +229,45 @@
   "file": "lean/Comparator/Weil/Challenge.lean",
   "note": "batch 5 target; assumes PD (nt-assume-poincare-duality) and the trace formula (nt-assume-trace-formula)"
  },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+  "place": "assembly of the three comparator predicates from the final Weil component theorems"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "nt-target-weil-conjectures",
+  "worker": "stage1",
+  "summary": "Repair of returned head f5fd4ab067: verified the relative-dimension-to-pure-dimension bridge with base change and local Noetherianity; identified the two point-count models using closure-subfield roots and a new Mathlib leaf for splitting-field algebra equivalence, followed by explicit inverse maps on points; expanded the rational factorization into Q[[T]]; derived the complex root-multiset identity directly from rational Laurent reciprocity with its multiplicity calculation; applied the RH theorem in the algebraic closure of Q inside C using an existing generic closure lemma. Corrected the statement notion citations and stmt_deps and recorded both matching blueprint nodes. The retained bespoke unsplit point-count bridge was replaced by the generic Mathlib leaf.",
+  "blueprint": "thm-weil-final opening paragraph and Clauses (i)–(iii) of literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil-final/thm-weil-final.proof.md",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-9b3226a3b",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-9b3226a3b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, plus the statements of all 35 cited nodes, the unit (a remark with uses=[]), the chapter, main-20261015 thm-weil-final(.proof).md, Comparator/Weil/Challenge.lean and Definitions.lean, Mathlib Construction.lean:268-269 and 292-310 and IsSplittingField.lean:47-49, and Stacks fields.tex lemma-splitting-field (09HU). The item statement matches weil_conjectures clause by clause: the hypotheses (SmoothOfRelativeDimension d, IsProper, GeometricallyIntegral), q=Nat.card k, the galoisExtension point-count model with its junk value, all IsWeilFactorization fields with even indices in the denominator, the root-multiset equation with i.rev=2d-i, and the RH real power -i/2. Nothing is weakened. Step 1: K_n gives h=U^{q^n}-U splitting and generation by roots, the leaf gives a k_0-algebra isomorphism, Spec(e^{±1}) gives inverse bijections on points, and lem-weil-point-counts-finite (1) gives finiteness. Pure dimension follows from finite-type base change, Noetherianity over Spec k̄, permanence of relative dimension (1), and constant-local-dimension-components with Y=O=X̄. Geometric connectedness follows from integral to irreducible to connected after every extension. Step 2: the integrality factorization in Q(T) becomes ZB=A in Q[[T]] by def-weil-rational-power-series with B(0)=1, and the endpoints come from betti; d=0 checked. Step 3: I re-derived the Laurent reciprocity identity and checked the local computation c/T-γ=-γ(T-β)/T, which gives m_β(P_i)=m_{c/β}(P_{2d-i}) for every nonzero β; tested on P^1, elliptic curves and repeated roots. Step 4: A is the algebraic closure of Q in C (existing lemma), the complex root z lies in A and is nonzero, and the inclusion gives τ with |z|=q^{-i/2}. Route: the off-unit uses are the carriers the remark unit itself names, the same as the reviewed thm-weil-final. No tool_uses are needed and there is no SGA. New leaf lem-weil-splitting-field-algebra-equivalence: true, an exact match to Polynomial.IsSplittingField.algEquiv at line 305, searches recorded honestly, and not a duplicate (the rg hits are sk-def-zeta, unique-subfield, kummer and galois-frobenius, none of which states splitting-field uniqueness). FIX (B2): the leaf statement used 'the constructed splitting field f.SplittingField' without saying what it is. I rewrote that sentence to describe Polynomial.SplittingField f as an extension in which f splits and which is generated by its roots. The corrected file is in fixes/dag/nodes/sec-zeta-weil/; the match and citations are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Statement",
+  "declaration": "AlgebraicGeometry.Scheme.weil_conjectures",
+  "statement": "theorem weil_conjectures (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]\n    [GeometricallyIntegral f] :\n    ∃ P : Fin (2 * d + 1) → Polynomial ℤ,\n      IsWeilFactorization (Nat.card k) d f.zetaSeries P ∧\n      WeilFunctionalEquation (Nat.card k) d P ∧\n      WeilRiemannHypothesis (Nat.card k) d P",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing statement, with the explicit structure morphism f and all three comparator predicates for one common integral polynomial family. Read WeilConjectures/Statement.lean and the current source returned by scompile.py --source WeilConjectures.Statement; the latter retains this exact signature. The comparator declaration WeilConjectures.weil_conjectures has the same type under a different namespace. No duplicate theorem or predicates are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55477a805",
+  "group": "N6",
+  "result": "pass",
+  "note": "Existing binding of nt-target-weil-conjectures to AlgebraicGeometry.Scheme.weil_conjectures (WeilConjectures.Statement, branch slopmaster2); only the lean field changed vs newtargets-dag. lean.statement is verbatim the header in slopmaster2 and live Statement.lean:96; check_existing returns no failures or notes. lcompile of /tmp/n6wc/CheckWeil.lean proves type_of% Scheme.weil_conjectures.{u} = type_of% WeilConjectures.weil_conjectures.{u} by rfl (exit 0), so the type is exactly the comparator target with one universe. Live and slopmaster2 Weil.Definitions are identical; every hypothesis and conclusion clause (finite field, q=Nat.card k, SmoothOfRelativeDimension d, IsProper, GeometricallyIntegral, galoisExtension point counts, zetaSeries, the IsWeilFactorization fields, root-multiset functional equation with i.rev, RH with rpow -i/2) matches the node. All 13 stmt_dep records checked. Edge cases d=0, constant factors, multiplicity, characteristic, empty scheme, n=0 junk and universes OK. No new module, so the hollow/proof/docstring/pro-etale gates are not triggered; Worker report and Second reading by N6 present; no duplicate in lean/Sheaf. No fixes."
+ },
  "lean_audit": {
   "master": {
    "state": "none",
@@ -61,23 +279,5 @@
    "decls": [],
    "missing": []
   }
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-55477a805",
-  "group": "N6",
-  "result": "pass",
-  "note": "Existing binding of nt-target-weil-conjectures to AlgebraicGeometry.Scheme.weil_conjectures (WeilConjectures.Statement, branch slopmaster2); only the lean field changed vs newtargets-dag. lean.statement is verbatim the header in slopmaster2 and live Statement.lean:96; check_existing returns no failures or notes. lcompile of /tmp/n6wc/CheckWeil.lean proves type_of% Scheme.weil_conjectures.{u} = type_of% WeilConjectures.weil_conjectures.{u} by rfl (exit 0), so the type is exactly the comparator target with one universe. Live and slopmaster2 Weil.Definitions are identical; every hypothesis and conclusion clause (finite field, q=Nat.card k, SmoothOfRelativeDimension d, IsProper, GeometricallyIntegral, galoisExtension point counts, zetaSeries, the IsWeilFactorization fields, root-multiset functional equation with i.rev, RH with rpow -i/2) matches the node. All 13 stmt_dep records checked. Edge cases d=0, constant factors, multiplicity, characteristic, empty scheme, n=0 junk and universes OK. No new module, so the hollow/proof/docstring/pro-etale gates are not triggered; Worker report and Second reading by N6 present; no duplicate in lean/Sheaf. No fixes."
- },
- "lean": {
-  "module": "WeilConjectures.Statement",
-  "declaration": "AlgebraicGeometry.Scheme.weil_conjectures",
-  "statement": "theorem weil_conjectures (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]\n    [GeometricallyIntegral f] :\n    ∃ P : Fin (2 * d + 1) → Polynomial ℤ,\n      IsWeilFactorization (Nat.card k) d f.zetaSeries P ∧\n      WeilFunctionalEquation (Nat.card k) d P ∧\n      WeilRiemannHypothesis (Nat.card k) d P",
-  "branch": "slopmaster2",
-  "by": "N6",
-  "date": "2026-10-17",
-  "existing": true,
-  "note": "Exact existing statement, with the explicit structure morphism f and all three comparator predicates for one common integral polynomial family. Read WeilConjectures/Statement.lean and the current source returned by scompile.py --source WeilConjectures.Statement; the latter retains this exact signature. The comparator declaration WeilConjectures.weil_conjectures has the same type under a different namespace. No duplicate theorem or predicates are introduced."
  }
 }
