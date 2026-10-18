@@ -107,7 +107,9 @@ lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' 
   rw [reassoc_of% h₂, ← S'.map_comp, h₃, S'.map_comp, Category.assoc]
 
 /-- The component `S (R N) ⟶ R' (S' N)` of the mate of `s : S ⋙ L' ⟶ L ⋙ S'`: the map adjoint to
-`L' (S (R N)) ⟶ S' (L (R N)) ⟶ S' N`. -/
+`L' (S (R N)) ⟶ S' (L (R N)) ⟶ S' N`. It is the component at `N` of Mathlib's
+`CategoryTheory.mateEquiv adj adj' s` (`CategoryTheory.Adjunction.mateApp_eq_mateEquiv_app`);
+the separate definition keeps a regular head that the kernel compares argument by argument. -/
 def mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
     S.obj (R.obj N) ⟶ R'.obj (S'.obj N) :=
   adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N))
@@ -118,7 +120,20 @@ lemma mateApp_eq (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N :
       adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N)) :=
   rfl
 
-/-- The mate component `CategoryTheory.Adjunction.mateApp` is natural. -/
+/-- `CategoryTheory.Adjunction.mateApp` is the component of Mathlib's `CategoryTheory.mateEquiv`. -/
+lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
+    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).natTrans.app N := by
+  simp [mateApp]
+
+/-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:
+```
+S (R N) --mateApp N--> R' (S' N)
+   |                       |
+S (R f)               R' (S' f)
+   v                       v
+S (R N') -mateApp N'-> R' (S' N')
+```
+-/
 lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') {N N' : D}
     (f : N ⟶ N') :
     adj.mateApp adj' S S' s N ≫ R'.map (S'.map f) =
@@ -126,14 +141,30 @@ lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ 
   adj.unit_app_comp_map_naturality adj' S S' s f
 
 /-- The image of the unit of `adj`, followed by the mate component, is the unit of `adj'` followed
-by the square. -/
+by the square:
+```
+S F ---S (η F)---> S (R (L F))
+ |                     |
+η' (S F)          mateApp (L F)
+ v                     v
+R' (L' (S F)) -R' (s F)-> R' (S' (L F))
+```
+-/
 lemma map_unit_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (F : C) :
     S.map (adj.unit.app F) ≫ adj.mateApp adj' S S' s (L.obj F) =
       adj'.unit.app (S.obj F) ≫ R'.map (s.app F) :=
   adj.map_unit_comp_unit_app_comp_map adj' S S' s F
 
 /-- The mate component precomposed with `S` of a morphism `a : A ⟶ R N` is the map adjoint to
-`L' (S A) ⟶ S' (L A) ⟶ S' N`. -/
+`L' (S A) ⟶ S' (L A) ⟶ S' N`:
+```
+S A ---------S a---------> S (R N)
+ |                            |
+η' (S A)                  mateApp N
+ v                            v
+R' (L' (S A)) --R' (s A ≫ S' (L a ≫ ε N))--> R' (S' N)
+```
+-/
 lemma map_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') {A : C} {N : D}
     (a : A ⟶ R.obj N) :
     S.map a ≫ adj.mateApp adj' S S' s N =
