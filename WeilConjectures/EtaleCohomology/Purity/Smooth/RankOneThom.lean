@@ -176,7 +176,8 @@ theorem isIso_counit_constantComplex :
       (by rw [← Functor.map_comp, hs]; exact CategoryTheory.Functor.map_id _ _)
 
 include aS in
-/-- `Rπ_!` of the forget-supports map `Rz_! Λ_S ≅ Rz_! Rz^! Λ_V(d)[2d] ⟶ Λ_V(d)[2d]` of the Thom
+/-- Blueprint `thm-pur-vector-bundle-thom` (the isomorphism clause): `Rπ_!` of the
+forget-supports map `Rz_! Λ_S ≅ Rz_! Rz^! Λ_V(d)[2d] ⟶ Λ_V(d)[2d]` of the Thom
 class is an isomorphism `Λ_S ≅ Rπ_! Rz_! Λ_S ⟶ Rπ_! Λ_V(d)[2d]`. -/
 theorem isIso_rightDerivedLowerShriek_map_thomClass :
     IsIso ((R(π)_![ModuleCat.{u + 1} Λ]).map
