@@ -31,48 +31,42 @@
  ],
  "proof": [
   {
-   "text": "Identify the coefficient category with ordinary module sheaves, without assuming commutativity. For a ring object $R=\\Lambda_X$ in tensor abelian sheaves, define on every object $U$ the operations $rs=\\mu_U(r\\otimes s)$ and $1_U=\\eta_U(1)$. The ring-object axioms evaluated on pure tensors give associative unital rings $R(U)$; restrictions preserve these operations. For an internal module $(M,\\gamma)$ put $rm=\\gamma_U(r\\otimes m)$. Conversely a sectionwise left action is a natural family of $\\mathbf Z$-bilinear maps $R(U)\\times M(U)\\to M(U)$, so it extends uniquely to $R\\otimes M\\to M$ by [lem-pc-sites-sheaf-tensor-bilinear-universal], specialized to the constant ring sheaf $\\mathbf Z$. An abelian sheaf is canonically a module over this sheaf: locally a section of $\\mathbf Z$ is an integer, acting by repeated addition. Naturality and additivity imply linearity in those locally constant integers by checking on that cover. Consequently this tensor is the sheafified objectwise $\\otimes_{\\mathbf Z}$ used here, by the same bilinear universal property. Evaluating on pure tensors shows that the module axioms in the two descriptions agree. The two constructions are inverse, also on morphisms (the equation $f\\gamma=\\gamma'(R\\otimes f)$ is exactly sectionwise linearity), giving an identification with the category of sheaves of left modules [def-weil-sheaf-of-modules-category] over the reconstructed ring sheaf. This is just the action definition [sk-def-sfb-module-objects] and the tensor definition [sk-def-sfb-sheaf-tensor]; no commutative-ring-module equivalence is used.",
+   "text": "Apply the existing source theorem CategoryTheory.Mod.isGrothendieckAbelian directly to internal left modules over the pulled-back ring object. Its actual Lean statement requires only MonObj, not IsCommMonObj. The ambient abelian sheaves are Grothendieck and their closed tensor preserves colimits, so no sectionwise ring reconstruction is needed.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-weil-sheaf-of-modules-category"
+    "lem-sfb-modobj-grothendieck"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CV, definition-sheaf-modules; elementary unpacking of internal actions using the sheaf tensor universal property"
+    "document": "lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Abelian.lean",
+    "place": "CategoryTheory.Mod.isGrothendieckAbelian; Grothendieck section"
    }
   },
   {
-   "text": "Choose the small site skeleton and the coefficient universe as in [def-weil-pbc-proetale-site, def-weil-size-convention]. The ring-sheaf Grothendieck theorem [lem-weil-pbc-ring-sheaves-grothendieck] applies to this site and the ring sheaf reconstructed in step 1, including when $\\Lambda$ is noncommutative. Thus $\\mathcal A$ is Grothendieck abelian. Apply [lem-kun-grothendieck-derived-coproducts] to $\\mathcal A$: for every small family of complexes $(K_i)$ its termwise coproduct represents the coproduct of $QK_i$ in $D(\\mathcal A)$. Every derived object is represented by a complex by [def-weil-abstract-derived-category], so these give all the required direct sums, including the empty sum. This proves the existence and termwise assertion of (1).",
+   "text": "Install the existing Grothendieck K-injective resolution instance. The theorem derived_hasCoproducts supplies all coproducts indexed in Type (u+1). Use HomologicalComplex.coconeOfHasColimitEval for a family of complexes: its evaluation in each degree is the chosen coproduct, and isColimit_mapCocone_grothendieckSum proves that its specified coprojections become a coproduct after Q. This includes empty families.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-size-convention",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-grothendieck-derived-has-coproducts",
     "lem-kun-grothendieck-derived-coproducts",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079Q, remark-existence-D (ringed-site example), and Tag 07D9, lemma-derived-products (1)-(2)"
+    "place": "Tags 079Q and 07D9; existing K-injective and termwise coproduct theorems"
    }
   },
   {
-   "text": "For each distinguished triangle choose a cone-triangle representative $Q(K_i\\xrightarrow{f_i}L_i\\to C(f_i)\\to K_i[1])$, using precisely the characterization in [def-weil-abstract-derived-category]. At degree $r$ the rebracketing of coproducts gives\n$$\\bigoplus_i C(f_i)^r=\\bigoplus_i(L_i^r\\oplus K_i^{r+1})\\cong(\\bigoplus_i L_i^r)\\oplus(\\bigoplus_i K_i^{r+1})=C(\\bigoplus_i f_i)^r.$$\nThe differentials on both sides are the same block matrix $\\begin{pmatrix}\\bigoplus d_{L_i}&\\bigoplus f_i\\\\0&-\\bigoplus d_{K_i}\\end{pmatrix}$; the inclusion, the negative projection, and the shift are preserved by this identification. By the coproduct statement used in step 2 [lem-kun-grothendieck-derived-coproducts], the sum of the chosen triangles is therefore isomorphic to the cone triangle of $\\bigoplus f_i$ in the derived category, hence distinguished. Coproducts of the originally chosen triangle isomorphisms are isomorphisms (sum their inverses). Closure of distinguished triangles under isomorphism proves the rest of (1). This calculation also covers the empty family, yielding the zero cone triangle.",
+   "text": "Transport each triangle T_i through triangleOpEquivalence to the opposite category. Mathlib productTriangle_distinguished says their product U is distinguished. Its inverse image Z in the original category is distinguished by unop_distinguished. The morphisms T_i to Z are obtained from the product projections, followed contravariantly by the inverse functor and the inverse unit. The unit has identity vertex components. Therefore the three vertex cofans have injections given by the unop product projections. Their universal properties follow explicitly by taking opposites of product lifts, with factorization and uniqueness from productIsProduct. This constructs the required cofan including its connecting maps, and works for the empty family.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-kun-grothendieck-derived-coproducts"
+    "def-weil-triangulated-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
-    "place": "(1), termwise sum of mapping-cone triangles; cone formula as in Stacks Tag 05RU/05RT"
+    "document": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+    "place": "productTriangle_distinguished, with Opposite/Pretriangulated.lean: triangleOpEquivalence and unop_distinguished"
    }
   },
   {
-   "text": "Define the object predicate $P(K)$ by: $K$ belongs to every full replete triangulated subcategory closed under small sums and containing $\\mathcal S$. The ambient derived category is one such subcategory. Every member of $\\mathcal S$, and the zero object, satisfy $P$. If $P(K)$ holds then $P(K[n])$ holds for every $n\\in\\mathbf Z$, and the same is true after an isomorphism. If two vertices of a distinguished triangle satisfy $P$, they belong to every subcategory in the definition, so its third vertex also belongs to each of them. Likewise, a small family of objects satisfying $P$ has its ambient coproduct in every such subcategory, using (1). Thus the full subcategory on $P$ has all the required closure properties. It is contained in each of the subcategories defining it, which is exactly minimality. This proves (2). This is a pointwise intersection of object predicates in the ambient universe, not a colimit indexed by a proper class; no smallness of $\\mathcal S$ is assumed.",
+   "text": "For the landed intersection localizingClosure S, prove repleteness, zero containment, shift stability and extension closure by testing any localizing predicate P containing S. Its corresponding closure condition applies pointwise. The same argument uses P's existing-coproduct condition for all ambient object-universe families. Thus the intersection is localizing. Every element of S satisfies every such P, proving containment; evaluating the defining universal quantifier at a candidate P proves minimality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -81,19 +75,19 @@
    }
   },
   {
-   "text": "Suppose $K\\cong A\\oplus B$ belongs to $\\Loc(\\mathcal S)$. Set $T=\\bigoplus_{n\\in\\mathbf N}(A\\oplus B)$, which belongs to $\\Loc(\\mathcal S)$ by (1)-(2). There is an isomorphism $A\\oplus T\\cong T$: send the extra $A$ to the $A$-summand of copy $0$, send the $A$-summand of copy $n$ to the $A$-summand of copy $n+1$, and send the $B$-summand of copy $n$ to the $B$-summand of copy $n$. The inverse sends $A_0$ to the extra $A$, $A_{n+1}$ to $A_n$, and $B_n$ to $B_n$; both composites are identities on every coprojection. Hence $T\\oplus A$ belongs to $\\Loc(\\mathcal S)$. The split triangle $T\\xrightarrow{\\mathrm{inl}}T\\oplus A\\xrightarrow{\\mathrm{pr}_2}A\\xrightarrow{0}T[1]$ is distinguished by [lem-sbc-biproduct-triangle-distinguished]. Its first two vertices lie in $\\Loc(\\mathcal S)$, so (2) puts $A$ there. Interchange $A,B$ for the other summand. Thus the localizing closure is thick by the definition [pur9-def-thick].",
+   "text": "Let P=Loc(S). First turn P's existing ambient-object-universe coproduct closure into IsClosedUnderColimitsOfShape. For I in Type (u+1), reindex along Discrete(ULift.{u+2} I) equivalent to Discrete I. Since the ambient derived category has I-indexed coproducts, P.FullSubcategory has them too. The proved countable-coproduct theorem makes it idempotent complete. For a retract K of L in P, regard r.r followed by r.i as an idempotent of the full-subcategory object L. Split it there as K'. The maps r.i followed by the splitting projection and the splitting inclusion followed by r.r exhibit K isomorphic to K'. Their inverse equations follow from the retract equation and the two splitting equations. Since P is replete, K lies in P. This is direct-summand closure, hence thickness.",
    "uses": [
-    "lem-sbc-biproduct-triangle-distinguished",
+    "lem-countable-coproducts-idempotent-complete",
     "pur9-def-thick"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
-    "place": "(3), Eilenberg swindle; split triangle is Stacks Tag 05QT, lemma-split (3)"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QW (countable coproducts imply idempotent completeness); uniqueness of idempotent splittings"
    }
   },
   {
-   "text": "If $\\mathcal S\\subseteq\\mathcal S'\\subseteq\\Loc(\\mathcal S)$, the localizing category $\\Loc(\\mathcal S')$ contains $\\mathcal S$, so minimality from (2) gives $\\Loc(\\mathcal S)\\subseteq\\Loc(\\mathcal S')$. Conversely $\\Loc(\\mathcal S)$ is localizing and contains $\\mathcal S'$, so the same minimality gives the opposite inclusion. This proves the last assertion of (3).",
+   "text": "If S is contained in S' and S' in Loc(S), apply the intersection formula for Loc(S') to the candidate Loc(S), obtaining Loc(S') ≤ Loc(S). Conversely every localizing P containing S' contains S, so any member of Loc(S) lies in P. This gives the reverse inclusion, and antisymmetry proves equality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -103,22 +97,18 @@
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-proetale-site",
-  "def-weil-size-convention",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-modobj-grothendieck",
+  "lem-grothendieck-derived-has-coproducts",
   "lem-kun-grothendieck-derived-coproducts",
   "def-weil-abstract-derived-category",
-  "lem-sbc-biproduct-triangle-distinguished",
+  "def-weil-triangulated-category",
+  "lem-countable-coproducts-idempotent-complete",
   "pur9-def-thick"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
-  "place": "(1)-(3), with existing Stacks ringed-site and derived-coproduct lemmas replacing the unavailable Neeman citation"
+  "place": "(1)-(3), implemented by P1 using the existing internal-module Grothendieck theorem, duality from Mathlib triangle products, pointwise intersection, and the proved countable-coproduct idempotent-completeness theorem"
  },
  "mathlib_searches": [
   {
@@ -236,8 +226,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-kun-grothendieck-derived-coproducts"
  ],
  "reviewed": {
@@ -282,5 +270,15 @@
   "by": "NR",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261018T145108-L-3642742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

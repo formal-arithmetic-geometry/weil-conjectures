@@ -16531,3 +16531,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsDerived (stage 3; reviewer PASS; first push; landing 20261018T145106-L-3641909 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/K5/Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction (stage 3; reviewer PASS; first push; landing 20261018T145106-L-3642175 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/P1/Sheaf.Paper.IntegralOperationsWellDefined (stage 3; reviewer PASS; first push; landing 20261018T145107-L-3642362 (proof); batch 20261018T145048; modules 1; new nodes 0)
+- 14:51 L: merged deliver/P1/Sheaf.Paper.LocalizingClosureExistence (stage 3; reviewer PASS; first push; landing 20261018T145108-L-3642742 (interface); batch 20261018T145048; modules 1; new nodes 0; change records: coord/changes/P1-localizing-closure-imports.md)

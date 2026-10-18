@@ -6,17 +6,16 @@ Authors: SHEAF group NR
 module
 
 public import Sheaf.Paper.LocalizingClosure
-public import Sheaf.Paper.ConstantModelTorAmplitude
 public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.SheafTensor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Sheaf.CategoryTheory.CountableCoproductsIdempotentComplete
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 /-!
 # Existence and thickness of the localizing closure
 
@@ -34,13 +33,74 @@ of the type of all module objects does not enlarge the required coproduct existe
 
 set_option autoImplicit false
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry Scheme
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 namespace AlgebraicGeometry.ProEtale
+
+open Opposite CategoryTheory.Pretriangulated.Opposite
+
+private noncomputable def cofanUnopIsColimit
+    {C : Type u} [Category.{v} C] {I : Type w} (F : I → Cᵒᵖ) [HasProduct F] :
+    IsColimit (Cofan.mk (∏ᶜ F).unop (fun i ↦ (Pi.π F i).unop)) := by
+  let hc := productIsProduct F
+  refine Cofan.IsColimit.mk _
+    (fun s ↦ (hc.lift (Fan.mk (op s.pt) (fun i ↦ (s.inj i).op))).unop) ?_ ?_
+  · intro s i
+    apply Quiver.Hom.op_inj
+    exact hc.fac (Fan.mk (op s.pt) (fun i ↦ (s.inj i).op)) (Discrete.mk i)
+  · intro s m hm
+    apply Quiver.Hom.op_inj
+    apply hc.hom_ext
+    intro ⟨i⟩
+    exact (congrArg Quiver.Hom.op (hm i)).trans
+      (hc.fac (Fan.mk (op s.pt) (fun i ↦ (s.inj i).op)) (Discrete.mk i)).symm
+
+private theorem triangleCoproducts
+    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasCoproducts.{w} C] (I : Type w) (T : I → Triangle C)
+    (hT : ∀ i, T i ∈ distTriang C) :
+    ∃ c : Cofan T,
+      Nonempty (IsColimit (Triangle.π₁.mapCocone c)) ∧
+      Nonempty (IsColimit (Triangle.π₂.mapCocone c)) ∧
+      Nonempty (IsColimit (Triangle.π₃.mapCocone c)) ∧ c.pt ∈ distTriang C := by
+  classical
+  let e := triangleOpEquivalence C
+  let T' : I → Triangle Cᵒᵖ := fun i ↦ e.functor.obj (op (T i))
+  let U := productTriangle T'
+  let Z := (e.inverse.obj U).unop
+  let c : Cofan T := Cofan.mk Z (fun i ↦
+    ((e.unitIso.app (op (T i))).unop).inv ≫
+      (e.inverse.map (productTriangle.π T' i)).unop)
+  refine ⟨c, ⟨?_⟩, ⟨?_⟩, ⟨?_⟩, ?_⟩
+  · refine (isColimitMapCoconeCofanMkEquiv Triangle.π₁ T _).symm ?_
+    refine IsColimit.ofIsoColimit (cofanUnopIsColimit (fun i ↦ (T' i).obj₃))
+      (Cocone.ext (Iso.refl _) ?_)
+    intro ⟨i⟩
+    change (Pi.π (fun i ↦ (T' i).obj₃) i).unop ≫ 𝟙 _ =
+      𝟙 _ ≫ (Pi.π (fun i ↦ (T' i).obj₃) i).unop
+    simp only [Category.id_comp, Category.comp_id]
+  · refine (isColimitMapCoconeCofanMkEquiv Triangle.π₂ T _).symm ?_
+    refine IsColimit.ofIsoColimit (cofanUnopIsColimit (fun i ↦ (T' i).obj₂))
+      (Cocone.ext (Iso.refl _) ?_)
+    intro ⟨i⟩
+    change (Pi.π (fun i ↦ (T' i).obj₂) i).unop ≫ 𝟙 _ =
+      𝟙 _ ≫ (Pi.π (fun i ↦ (T' i).obj₂) i).unop
+    simp only [Category.id_comp, Category.comp_id]
+  · refine (isColimitMapCoconeCofanMkEquiv Triangle.π₃ T _).symm ?_
+    refine IsColimit.ofIsoColimit (cofanUnopIsColimit (fun i ↦ (T' i).obj₁))
+      (Cocone.ext (Iso.refl _) ?_)
+    intro ⟨i⟩
+    change (Pi.π (fun i ↦ (T' i).obj₁) i).unop ≫ 𝟙 _ =
+      𝟙 _ ≫ (Pi.π (fun i ↦ (T' i).obj₁) i).unop
+    simp only [Category.id_comp, Category.comp_id]
+  · exact unop_distinguished U (productTriangle_distinguished T'
+      (fun i ↦ op_distinguished (T i) (hT i)))
+
 
 /-- The three assertions of the localizing-closure existence lemma.
 
@@ -59,45 +119,28 @@ Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-clo
 node det-def-localizing-closure-existence, clauses (1)--(3)
 (blueprint: det-def-localizing-closure-existence).
 
-Proof plan:
-1. Identify internal left modules with sectionwise left module sheaves: evaluate
-ring multiplication, unit, and actions on pure tensors. Conversely natural
-bilinear actions extend uniquely through the sheaf tensor universal property
-(lem-pc-sites-sheaf-tensor-bilinear-universal, sk-def-sfb-sheaf-tensor).
-These constructions are inverse on objects and on action-compatible maps and
-work without commutativity (sk-def-sfb-module-objects).
-2. Choose the small site skeleton in the fixed coefficient universe. The
-ring-sheaf Grothendieck theorem lem-weil-pbc-ring-sheaves-grothendieck makes this
-module category Grothendieck abelian. Apply lem-kun-grothendieck-derived-coproducts:
-the termwise coproduct complex, with its actual coprojections, is a coproduct
-after localization. Every derived object has a complex representative, so this
-also supplies arbitrary derived coproducts, including the empty coproduct.
-3. Choose cone representatives of distinguished triangles. Degreewise,
-the sum of cones is canonically the cone of the sum of the maps: rebracket
-sums of L_i^r plus K_i^(r+1), with differential having blocks d_L, f, 0, -d_K.
-This identifies all three arrows, including the negative projection and shift.
-Thus the sum is a cone triangle, hence distinguished; transport the original
-triangle isomorphisms. The empty family gives the zero cone triangle.
-4. Relate the landed closure predicate to the fixed small indexing convention.
-Small coproducts are included among object-universe coproducts by universe lift.
-For any existing larger coproduct C, each nonzero summand gives a distinct
-nonzero coordinate idempotent in End(C), by its injection and projection.
-Since End(C) is small, the nonzero summands form a small index type; removing
-zero summands expresses C as a small coproduct. Thus closure under small
-coproducts is equivalent to closure under all existing object-universe sums.
-Every closure condition is inherited pointwise by intersection: zero,
-all integer shifts, isomorphisms, two-out-of-three for distinguished triangles,
-and small sums. The ambient category is a candidate. Every member of S lies
-in the intersection, which is contained in every candidate, proving minimality.
-5. If A plus B is in the closure, so is T, the countable sum of copies of
-A plus B. Reindex the A-summands by shifting their natural-number indices by
-one to obtain A plus T isomorphic to T, fixing all B-summands. The split
-triangle T to T plus A to A to T[1] is distinguished by
-lem-sbc-biproduct-triangle-distinguished. Its first two vertices are in the
-closure, so A is too. Interchange A and B. Retracts give the same direct-summand
-condition, hence thickness (pur9-def-thick).
-6. If S is contained in S' and S' in Loc(S), minimality gives both inclusions
-between Loc(S) and Loc(S'), hence their equality. -/
+Proof:
+1. The source theorem `Mod.isGrothendieckAbelian` applies directly to internal
+left modules, without commutativity: abelian sheaves are Grothendieck and their
+closed tensor preserves colimits. This avoids reconstruction of sectionwise rings.
+2. Grothendieck categories have K-injective resolutions. Apply
+`derived_hasCoproducts` and `isColimit_mapCocone_grothendieckSum`. The explicit
+termwise cocone has a colimit cocone in each degree, including for the empty family.
+3. Use `productTriangle_distinguished` in the opposite category, then transport
+back through `triangleOpEquivalence`. Its three vertices are coproducts because
+they are the opposites of the corresponding products; the unit isomorphisms of
+the equivalence have identity vertex components. This includes the empty family.
+4. Prove the intersection is replete, contains zero, and is closed under shifts,
+extensions and all existing coproducts by testing each defining predicate.
+Containment of S and minimality follow immediately from the intersection formula.
+5. Lift any small index type to the ambient object universe to obtain coproduct
+closure in Mathlib's object-property API. Thus the full subcategory has small
+coproducts and is idempotent complete by
+`isIdempotentComplete_of_countableCoproducts`. A retract of one of its objects
+splits the same idempotent as an object of this full subcategory. The explicit
+isomorphism between the two splittings, and repleteness, put the retract in it.
+6. For S ≤ S' ≤ Loc(S), the intersection formulas give both inclusions between
+Loc(S) and Loc(S'), so antisymmetry gives equality. -/
 theorem localizingClosure_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})
@@ -134,6 +177,101 @@ theorem localizingClosure_exists
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
       S ≤ S' → S' ≤ localizingClosure S →
         localizingClosure S' = localizingClosure S) := by
-  sorry
+  classical
+  let A := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  let : IsGrothendieckAbelian.{u + 1} A := Mod.isGrothendieckAbelian _
+  let : Abelian.HasKInjectiveResolutions A :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{u + 1}
+  let : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
+  let : HasCoproducts.{u + 1} A :=
+    fun I ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete I)
+  let : HasCoproducts.{u + 1} (DerivedCategory A) := derived_hasCoproducts
+  have hiso : (localizingClosure S).IsClosedUnderIsomorphisms := by
+    constructor
+    intro K L e hK P hP hS
+    let := hP.2.1
+    exact P.prop_of_iso e (hK P hP hS)
+  let := hiso
+  have hzero : (localizingClosure S).ContainsZero := by
+    refine ⟨0, isZero_zero _, ?_⟩
+    intro P hP hS
+    let := hP.1
+    let := hP.2.1
+    exact P.prop_zero
+  let := hzero
+  have hshift : (localizingClosure S).IsStableUnderShift ℤ := by
+    constructor
+    intro n
+    constructor
+    intro K hK
+    rw [ObjectProperty.prop_shift_iff]
+    intro P hP hS
+    let := hP.1
+    exact P.le_shift n K (hK P hP hS)
+  let := hshift
+  have htri : (localizingClosure S).IsTriangulated := by
+    refine { ext₂' := ?_ }
+    intro T hT h₁ h₃
+    apply ObjectProperty.le_isoClosure
+    intro P hP hS
+    let := hP.1
+    let := hP.2.1
+    exact P.ext_of_isTriangulatedClosed₂ T hT (h₁ P hP hS) (h₃ P hP hS)
+  let := htri
+  have hloc : IsLocalizingSubcategory (localizingClosure S) := by
+    refine ⟨htri, hiso, ?_⟩
+    intro I F hF hK
+    change ∀ P, IsLocalizingSubcategory P → S ≤ P → _
+    intro P hP hS
+    exact hP.2.2 F hF (fun i ↦ hK i P hP hS)
+  have hcontains : S ≤ localizingClosure S := fun K hK P hP hS ↦ hS K hK
+  have hminimal : ∀ P, IsLocalizingSubcategory P → S ≤ P → localizingClosure S ≤ P :=
+    fun P hP hS K hK ↦ hK P hP hS
+  refine ⟨inferInstance, ?_, ?_, hloc, hcontains, hminimal, ?_, ?_⟩
+  · intro I K
+    refine ⟨HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K), ?_, ?_⟩
+    · exact fun n ↦ ⟨colimit.isColimit _⟩
+    · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
+  · exact triangleCoproducts
+  · let P := localizingClosure S
+    let (I : Type (u + 2)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
+      apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
+      rintro _ ⟨F, hF⟩
+      exact hloc.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
+    let (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+    let : HasCoproducts.{u + 1} P.FullSubcategory := fun I ↦
+      hasColimitsOfShape_of_closedUnderColimits (Discrete I) P
+    let : IsIdempotentComplete P.FullSubcategory :=
+      isIdempotentComplete_of_countableCoproducts P.FullSubcategory
+    constructor
+    intro K L r hL
+    let L' : P.FullSubcategory := ⟨L, hL⟩
+    let p : L' ⟶ L' := ObjectProperty.homMk (r.r ≫ r.i)
+    -- Split the retract idempotent within the full localizing subcategory.
+    have hp : p ≫ p = p := by
+      apply ObjectProperty.hom_ext
+      simp [p, Category.assoc]
+    obtain ⟨K', i, e, hie, hei⟩ := IsIdempotentComplete.idempotents_split L' p hp
+    have hie' : i.hom ≫ e.hom = 𝟙 K'.obj := congrArg (fun f ↦ f.hom) hie
+    have hei' : e.hom ≫ i.hom = r.r ≫ r.i := congrArg (fun f ↦ f.hom) hei
+    let a : K ≅ K'.obj :=
+      { hom := r.i ≫ e.hom
+        inv := i.hom ≫ r.r
+        hom_inv_id := by rw [Category.assoc, ← Category.assoc e.hom, hei']; simp
+        inv_hom_id := by
+          calc
+            _ = (i.hom ≫ (r.r ≫ r.i)) ≫ e.hom := by simp only [Category.assoc]
+            _ = (i.hom ≫ (e.hom ≫ i.hom)) ≫ e.hom := by rw [hei']
+            _ = 𝟙 K'.obj := by
+              simp only [← Category.assoc, hie', Category.id_comp] }
+    exact P.prop_of_iso a.symm K'.property
+  · intro S' h₁ h₂
+    apply le_antisymm
+    · intro K hK
+      exact hK (localizingClosure S) hloc h₂
+    · intro K hK P hP hSP
+      exact hK P hP (fun L hL ↦ hSP L (h₁ L hL))
 
 end AlgebraicGeometry.ProEtale
