@@ -7,22 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.ConstructibleModificationTransfer
-import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
-import Sheaf.AlgebraicGeometry.NoetherianChowModification
-import Sheaf.AlgebraicGeometry.ProjectiveConstructibleHigherDirectImages
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Proper direct-image constructibility
@@ -49,41 +35,14 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`,
 `thm-fin-proper-constructibility-complete.md`, statement and proof
 (blueprint: thm-fin-proper-constructibility-complete).
 
-Proof plan:
-1. A field is Noetherian. Finite type over a Noetherian scheme makes `X` and `S`
-   Noetherian (`lem-weil-pbc-finite-type-over-noetherian`), hence quasi-compact and
-   quasi-separated (`lem-weil-pbc-locally-noetherian-quasi-separated`). Work degree by
-   degree with the coefficients of `def-finrepair-property-c`.
-2. Reduce to affine targets: restrict to an affine open and base change the proper map
-   (`lem-weil-pbc-proper-base-change`). Noetherian opens are quasi-compact, hence still
-   finite type over the field. Restrict the constructible partition
-   (`def-weil-pbc-constructible-complexes`). Derived open restriction
-   (`lem-weil-pbc-derived-open-restriction`) and exact module inverse image
-   (`prop-weil-pbc-inverse-image-modules-exact`) identify the restricted higher direct
-   images. Glue by `lem-weil-pbc-constructible-qcqs-affine-local`.
-3. For each closed subset of `X` take its reduced induced subscheme and its proper
-   composite to `S` (`lem-weil-pbc-closed-immersion-proper`). These schemes remain finite
-   type. The empty subset has zero direct images, which are constructible. If any subset
-   fails `C`, choose a minimal nonempty failing subset `Z` using
-   `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal`.
-4. Apply `lem-fin-noetherian-chow-modification` to `Z` over the affine Noetherian target:
-   obtain a proper modification `Y → Z`, an isomorphism over a dense open `U`, with
-   projective composite to `S`. Projective-space charts and the closed embedding
-   (`def-pc-projective-morphism`) make `Y` finite type over the field. Apply
-   `thm-fin-projective-constructibility-complete` to obtain `C` for that composite.
-5. The reduced closed complement of `U` is a proper closed subset of `Z`, so minimality
-   gives `C` for its map to `S`. Apply `lem-finrepair-modification-c` to obtain `C` for
-   `Z`, a contradiction. In particular `C` holds for the reduction of `X`.
-6. The reduction immersion is a universal homeomorphism
-   (`lem-weil-pbc-reduction-universal-homeomorphism`). Topological invariance
-   (`thm-weil-pbc-universal-homeomorphism-invariance`) gives quasi-inverse exact functors,
-   also for constant-coefficient modules, by transporting the scalar action. Inverse
-   image preserves the finite constructible partition. Choose an injective resolution
-   on the reduction (`lem-weil-pbc-module-sheaves-enough-injectives`); its direct image
-   under the exact equivalence remains an injective resolution. The sectionwise formula
-   (`def-weil-pbc-direct-image`) identifies the composite direct image with that for the
-   reduction-to-`S` map, so their higher direct images agree. Their constructibility gives
-   the affine-target assertion, and step 2 proves the global assertion. -/
+Proof: The source library already proves proper direct-image constructibility with
+finite-stalk constructibility and the total derived direct image. On the empty target,
+every sheaf is zero and hence constructible. Otherwise the invertible annihilating
+exponent on the target descends to the ground field. Convert the constructibility of
+`F` to the finite-stalk convention and apply the source theorem. The compatibility
+isomorphism between total and bounded-below right derived functors identifies its
+homology sheaf with `higherDirectImage`; transport constructibility through this
+isomorphism and convert back to the finite-constant-value convention. -/
 theorem hasConstructibleHigherDirectImages_of_proper
     (k : Type u) [Field k] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} [X.Over (Spec (.of k))] [S.Over (Spec (.of k))]
@@ -92,6 +51,29 @@ theorem hasConstructibleHigherDirectImages_of_proper
     (hX : IsSmoothBaseChangeCoefficients N Λ X)
     (hS : IsSmoothBaseChangeCoefficients N Λ S) (f : X ⟶ S) [IsProper f] :
     HasConstructibleHigherDirectImages k N Λ hX hS f := by
-  sorry
+  classical
+  intro q F hF
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+  by_cases hS' : IsEmpty S
+  · let := hS'
+    exact Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)
+  have : Nonempty S := not_isEmpty_iff.mp hS'
+  have : HasInvertibleExponent Λ S := ⟨N, hS.1, hS.2.2.1, hS.2.2.2⟩
+  have : HasInvertibleExponent Λ (Spec (.of k)) :=
+    .of_hom_of_nonempty (S ↘ Spec (.of k))
+  have : Scheme.IsConstructibleSheaf F := (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+  let A := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
+  have : Scheme.IsConstructibleSheaf
+      ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((_root_.DerivedCategory.Plus.ι ⋙
+          (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor).obj A)) := by
+    change Scheme.IsConstructibleSheaf
+      ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
+    exact hasConstructibleDirectImages_of_isProper (S ↘ Spec (.of k)) f F inferInstance q
+  exact Scheme.IsConstructibleSheaf.of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+      ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlusCompatibility.app A).symm)
 
 end AlgebraicGeometry.Etale
