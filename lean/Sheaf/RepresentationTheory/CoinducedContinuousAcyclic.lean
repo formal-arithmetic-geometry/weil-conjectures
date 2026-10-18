@@ -9,8 +9,8 @@ public import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 public import Mathlib.Data.Fin.Tuple.Basic
-import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
 import Sheaf.RepresentationTheory.CoinducedHomotopyIdentity
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Acyclicity of discrete continuous coinduction
@@ -68,6 +68,38 @@ theorem coinducedContinuousCochains_isZero
     ∀ q : ℕ, 0 < q →
       IsZero ((HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A)
         (ComplexShape.up ℕ) q).obj K) := by
-  sorry
+  classical
+  obtain ⟨d, h, hdformula, _, hhomotopy⟩ := coinduced_homotopy_identity G A M
+  let e (n : ℕ) : K.X n ≃ₗ[A]
+      LocallyConstant (Fin n → G) (LocallyConstant G M.obj.V) :=
+    (eK n).trans (LocallyConstant.congrRightₗ A eD)
+  have ed (n : ℕ) (f : K.X n) :
+      e (n + 1) (K.d n (n + 1) f) = d n (e n f) := by
+    ext g x
+    rw [hdformula]
+    change eD (eK (n + 1) (K.d n (n + 1) f) g) x = _
+    rw [hd]
+    simp only [map_add, map_sum, map_zsmul, LocallyConstant.add_apply, hD]
+    congr 1
+    exact (map_sum (LocallyConstant.evalₗ A x)
+      (fun j : Fin (n + 1) ↦
+        (-1 : ℤ) ^ (j.val + 1) • eD (eK n f (Fin.contractNth j (· * ·) g)))
+      Finset.univ).trans (by rfl)
+  intro q hq
+  obtain ⟨p, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  change IsZero (K.homology (p + 1))
+  apply (K.exactAt_iff_isZero_homology (p + 1)).mp
+  apply (K.exactAt_iff' p (p + 1) (p + 1 + 1)
+    (CochainComplex.prev_nat_succ p) (CochainComplex.next ℕ (p + 1))).mpr
+  rw [CategoryTheory.ShortComplex.moduleCat_exact_iff]
+  intro x hx
+  change K.d (p + 1) (p + 1 + 1) x = 0 at hx
+  refine ⟨(e p).symm (h p (e (p + 1) x)), ?_⟩
+  change K.d p (p + 1) ((e p).symm (h p (e (p + 1) x))) = x
+  apply (e (p + 1)).injective
+  rw [ed, LinearEquiv.apply_symm_apply]
+  have hc : d (p + 1) (e (p + 1) x) = 0 := by
+    rw [← ed, hx, map_zero]
+  simpa only [hc, map_zero, add_zero] using hhomotopy p (e (p + 1) x)
 
 end Rep
