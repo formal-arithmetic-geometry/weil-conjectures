@@ -18,9 +18,117 @@
   "lem-weil-pbc-spec-module-tilde-sections",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S_W=R\\Gamma(W,\\mathcal F|_W)$ and $G_K=R\\Gamma_K(M[0])$. Since $A$ is Noetherian, choose finite generators for $\\mathfrak m$ and $J$. By [lem-per-affine-support-cech-localization] there are canonical triangles $G_{\\mathfrak m}\\to M[0]\\to S_U\\to G_{\\mathfrak m}[1]$ and $G_J\\to M[0]\\to S_V\\to G_J[1]$. Here $V\\subseteq U$ because $J\\subseteq\\mathfrak m$. The support inclusion $\\{\\mathfrak m\\}\\subseteq V(J)$, the identity of $M[0]$, and restriction $r_{U,V}:S_U\\to S_V$ give a morphism from the first triangle to the second, with supported component $a_J:G_{\\mathfrak m}\\to G_J$. This fixes the directions of all maps before completing.",
+   "uses": [
+    "lem-per-affine-support-cech-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXQ (theorem-algebraization-formal-sections), proof: the two localization triangles; local-cohomology.tex Tag 0A6T."
+   }
+  },
+  {
+   "text": "Put $B_n=A/I^n$ and choose a K-flat complex $P$ representing $M[0]$. The complexes $E_f,T_f$ of [lem-per-affine-support-cech-localization] are bounded and have flat terms by [lem-weil-pbc-localization-flat]; finite products here are finite direct sums, and tensoring a finite direct sum is the direct sum of the exact tensor functors. Thus [lem-pc-module-bounded-flat-kflat] makes them K-flat. The same formula computes reduction of their tensor with $P$ over $B_n$: its terms are $P\\otimes_A B_n\\otimes_{B_n}(B_n)_{\\bar g}$. Indeed $A_g\\otimes_A B_n\\cong(B_n)_{\\bar g}$ sends $(a/g^t)\\otimes b$ to $\\bar a b/\\bar g^t$; its inverse sends $b/\\bar g^t$ to $(1/g^t)\\otimes b$, by the localization relations. The alternating differentials are unchanged. The tensor of $P$ with either localization model remains K-flat: tensoring an acyclic complex first with $P$, then with the model, stays acyclic. Also $P\\otimes_A B_n$ is K-flat over $B_n$, since tensoring it with an acyclic $B_n$-complex is the same as tensoring $P$ with that acyclic complex over $A$. This identifies reduction of the two augmented and unaugmented models with the corresponding models over $B_n$, with derived coefficient complex $P\\otimes_A B_n$. In particular this coefficient is not replaced by $M/I^nM[0]$. For the restriction arrow, use covers $D(f_i)$ of $U$ and $D(g_j)$ of $V$, and the common refinement $D(f_i g_j)$ of the cover of $V$. Every refinement coordinate is a localization map, so the displayed fraction maps commute with it and with the augmentation. The induced map of fibres is therefore the support arrow, by the supported localization comparison in [lem-per-affine-support-cech-localization]. Thus the identifications carry the arrows of step 1 to those over $B_n$; the same formulas commute with $B_{n+1}\\to B_n$.",
+   "uses": [
+    "lem-per-affine-support-cech-localization",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T, proof, augmented and unaugmented localization tensors; dualizing.tex Tags 0955 and 0956. Scalar reduction is the displayed fraction calculation."
+   }
+  },
+  {
+   "text": "Primes of $B_n$ are primes of $A$ containing $I^n$, hence containing $I$. Such a prime contains $J$ exactly when it is $\\mathfrak m$, by $V(J)\\cap V(I)=\\{\\mathfrak m\\}$. Consequently $V_{B_n}(JB_n)=V_{B_n}(\\mathfrak mB_n)$. The two base-changed opens are literally equal, so their restriction map on derived sections is the identity. Their geometric supported-section functors are also literally equal. The closed-support naturality clause of [lem-per-affine-support-cech-localization], with the reductions identified in step 2, therefore shows that both $a_J\\otimes_A^{\\mathbf L}B_n$ and $r_{U,V}\\otimes_A^{\\mathbf L}B_n$ are isomorphisms. The equality of primes and opens holds at every level and commutes with reduction, so these are levelwise isomorphisms of the canonical towers, not an unrelated family of choices.",
+   "uses": [
+    "lem-per-affine-support-cech-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXQ, canonical comparison of the localization triangles; equality of the two supports on each closed fibre, spelled out using the models of 0A6T."
+   }
+  },
+  {
+   "text": "Use the strict diagram replacements of [lem-weil-pbc-diagram-kflat-replacements] for the arrows and squares under consideration. Reduction to the strict tower $(L\\otimes_A^{\\mathbf L}B_n)_n$ preserves cone triangles: on K-flat representatives, $\\operatorname{Cone}(f)\\otimes_A B_n\\cong\\operatorname{Cone}(f\\otimes_A B_n)$, since the cone has terms $Q^j\\oplus P^{j+1}$ and tensor gives exactly the same differential matrix. The cone is K-flat by [lem-pc-kflat-cone-direct-sum]. Quotient maps into these complexes commute with the matrix, including the shifted component, so completion units give a morphism of triangles. On the one-object site with coefficient ring $A$, [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact functor $R\\varprojlim$ and its natural Roos triangle. In $A$-modules products are exact: products preserve kernels coordinatewise, and a tuple of surjections is surjective by choosing one preimage per coordinate. Hence its derived products are computed by termwise products, giving precisely the mapping-fibre model fixed in the statement. It follows that $F_I(L)=L^{\\wedge_I}$ preserves distinguished triangles and the unit $\\eta_L:L\\to F_I(L)$ respects them. A levelwise quasi-isomorphism of strict tower complexes is a quasi-isomorphism in their diagram category, as [lem-weil-pbc-diagram-kflat-replacements] specifies, and is inverted by this derived functor. Thus step 3 gives canonical isomorphisms $\\widehat a_J:F_I(G_{\\mathfrak m})\\to F_I(G_J)$ and $\\widehat r_{U,V}:F_I(S_U)\\to F_I(S_V)$.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 091D (lemma-compute-Rlim-modules) and 0CQD (lemma-distinguished-triangle-Rlim-modules); exact tensor on cone models, then the exact strict-tower derived limit."
+   }
+  },
+  {
+   "text": "Apply [lem-per-derived-completion-finite-cohomology] to $M[0]$. It gives a canonical isomorphism $F_I(M[0])\\cong\\widehat M[0]$ identifying $\\eta_M$ with $M\\to\\widehat M=\\varprojlim_n M/I^nM$. Since $A$ is Noetherian, $I$-adically complete, and $M$ finite, [lem-weil-pbc-finite-module-complete-over-complete-noetherian] makes this very map bijective. Therefore $\\eta_M:M[0]\\to F_I(M[0])$ is an isomorphism, and use its inverse to identify the completed middle term with $M[0]$. This identification takes the middle component of the completion-unit morphism of triangles to the identity; it does not choose an arbitrary automorphism of $M$.",
+   "uses": [
+    "lem-per-derived-completion-finite-cohomology",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06 (lemma-derived-completion-pseudo-coherent), with quotient-tower model Tag 0922; algebra.tex Tag 00MA for finite-module completeness."
+   }
+  },
+  {
+   "text": "Complete the first triangle in step 1 and use step 5 to obtain $C\\to M[0]\\to D\\to C[1]$. Completing the morphism in step 1 gives a morphism from this triangle to the completed $J$-triangle with components $(\\widehat a_J,\\mathrm{id}_M,\\widehat r_{U,V})$, all invertible. Its componentwise inverses form the inverse triangle morphism: for example the third square follows by multiplying $\\widehat a_J[1]\\,\\widehat w_U=\\widehat w_V\\,\\widehat r_{U,V}$ by the two inverses. Compose this inverse triangle morphism with the unit morphism from the uncompleted $J$-triangle. The resulting morphism to $C\\to M[0]\\to D\\to C[1]$ has components $\\alpha_J=\\widehat a_J^{-1}\\eta_{G_J}$, $\\mathrm{id}_M$, and $b_V=\\widehat r_{U,V}^{-1}\\eta_{S_V}$. Thus both the support identification and the completed restriction inverse in the statement are the canonical ones fixed above. This constructs the triangle morphism including the connecting-map square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXQ, proof: the canonical map between the two triangles, with its components specified explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-homology-long-exact] to the two triangles of step 6. Their degree-zero portions end in $H^1(M[0])=0$. The top row is $H_J^0(M)\\to M\\to\\Gamma(V,\\mathcal F|_V)\\to H_J^1(M)\\to0$, and the bottom is $H^0(C)\\to M\\to H^0(D)\\to H^1(C)\\to0$. The degree-zero sections identification is the degree-zero right-derived-functor identification [pqf-def-cohomology]. The morphism of triangles constructed in step 6 gives commuting squares, including the boundary square, by [lem-weil-pbc-derived-cohomology-ladder]. Its components in these rows are exactly $H^0(\\alpha_J)$, $\\mathrm{id}_M$, $\\beta_V=H^0(b_V)$ and $H^1(\\alpha_J)$. This proves every asserted exactness and commutativity clause.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-derived-cohomology-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS (lemma-cohomology-homological) and Tag 0147 (definition-homological), equation-long-exact-cohomology-sequence; applied to the triangles in the proof of algebraization.tex Tag 0DXQ."
+   }
+  },
+  {
+   "text": "For an open $V'\\subseteq V$ containing $U\\cap V(I)$, write $X\\setminus V'=V(J')$. Since $\\mathfrak m$ lies outside $V'$, $J'\\subseteq\\mathfrak m$; the neighborhood condition gives $V(J')\\cap V(I)=\\{\\mathfrak m\\}$. Steps 2--4 therefore also make $\\widehat r_{U,V'}$ invertible. Restriction composes: $r_{U,V'}=r_{V,V'}r_{U,V}$. Naturality of the completion unit gives $\\eta_{S_{V'}}r_{V,V'}=\\widehat r_{V,V'}\\eta_{S_V}$. Thus\n$$b_{V'}r_{V,V'}=\\widehat r_{U,V'}^{-1}\\widehat r_{V,V'}\\eta_{S_V}=\\widehat r_{U,V}^{-1}\\eta_{S_V}=b_V.$$\nTaking $H^0$ gives $\\beta_{V'}\\circ\\mathrm{res}_{V,V'}=\\beta_V$. No uniqueness of an ideal defining a closed set is assumed; all comparisons use its actual closed support. The formula includes empty opens and $I=(0)$, when the relevant reductions and comparisons still have the same models.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXQ, restriction compatibility of the canonical comparison; explicit functoriality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-per-affine-support-cech-localization",
+  "lem-per-derived-completion-finite-cohomology",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXQ (theorem-algebraization-formal-sections), proof, the localization triangles and canonical comparison; the quotient-level and map-compatibility details are expanded using the cited affine models and strict-tower calculus."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-formal-punctured-idempotent-algebraization",
@@ -86,5 +194,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-completed-affine-localization-diagram",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the two localization triangles, proved the support and open restriction comparisons after every derived quotient using their identical closed-fibre supports, applied exact strict-tower derived limit, identified the completed finite module through its canonical completion map, and constructed the full morphism of triangles before taking cohomology. Two statement-only helpers, no Mathlib leaves; exactness of completion is expanded from existing diagram K-flat and strict-tower results rather than made a new node.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: The two localization triangles and their comparison in the proof of 0DXQ underlying the formal-sections application in the first half of 0ECR. Steps 1 and 6--7 realize the two localization triangles and their canonical comparison in 0DXQ used by the formal-sections input. Steps 2--5 expand the support comparison and unchanged middle term; step 8 realizes neighborhood-restriction compatibility. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Strict diagram replacements keep the reduction arrows and quotient towers coherent. This is a generic resolution tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-cone-direct-sum",
+    "why": "K-flat cone closure makes the explicit cone reduction compute the derived triangle. The perverse unit has no such general homological algebra result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Applied on the one-object site of A-modules for exactness and functoriality of the derived inverse limit, including the canonical Roos triangle."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Applies to the bounded finite principal-localization complexes so their tensors compute derived reduction over each quotient ring."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Flatness of each principal ring localization, used to check K-flatness of the affine models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-2437b0bc7",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-2437b0bc7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: 0DXQ proof lines 3595-3625, 0A6T, 0955(3), 0956 and 0A06. The item statement is unchanged and matches the 0DXQ comparison; its hypotheses are Noetherian local, I-complete, M finite and V(J)∩V(I)={m}, with I proper so I⊆m. Steps 1-8 are correct. (1) The support map goes from m to J and the restriction from U to V. (2) The Cech models are K-flat; base change to B_n=A/I^n is explicit and keeps the derived coefficient P⊗B_n. (3) V(JB_n)=V(mB_n) at every level, correctly marked elementary. (4) F_I is exact using diagram K-flat replacements, the K-flat cone and strict-tower Rlim with exact products of A-modules. (5) eta_M is an isomorphism by node 2 and the Lean-closed finite-module completeness node. (6) alpha_J and b_V are the canonical maps of the statement. (7) The long exact sequences and the ladder give the rows and the boundary square, ending in 0 since H^1(M[0])=0. (8) beta_{V'}res=beta_V, from V(J')∩V(I)={m} and naturality of eta. New node lem-per-affine-support-cech-localization is 0A6T+0955(3)+0956 and keeps Noetherianity; it is general, not a restated clause. It is not a duplicate: the per Cech nodes give only module-level H^q, with no triangle or support naturality. Tested r=0, K=A and nilpotent f. New node lem-per-derived-completion-finite-cohomology is exactly 0A06 with the 0922 model, allows unbounded L, and is not a duplicate. Tested I=0, I=A and N=A/I. Both nodes are statement-only with complete B-fields. The 5 declared generic tool_uses are accepted: diagram-kflat-replacements, kflat-cone, ringed-strict-tower-homotopy-limit, module-bounded-flat-kflat and localization-flat. No cycle, no SGA, unit records untouched."
  }
 }
