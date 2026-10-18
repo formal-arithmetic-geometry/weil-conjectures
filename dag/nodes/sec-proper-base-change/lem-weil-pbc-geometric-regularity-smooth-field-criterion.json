@@ -37,104 +37,79 @@
  ],
  "proof": [
   {
-   "text": "Assume $f$ smooth and fix a finitely generated field extension $L/k$ and $z\\in X_L$. By the affine-local characterization of smoothness in [def-sbc-smooth-morphisms], choose a smooth affine neighbourhood $U=\\operatorname{Spec}A$ of the image of $z$, so $k\\to A$ is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. By [lem-weil-pbc-affine-chart-base-change-iso], the inverse image $U_L$ is the affine open $\\operatorname{Spec}(L\\otimes_k A)$ of $X_L$, containing $z$. The map $L\\to L\\otimes_k A$ is smooth by clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition]. Thus its localization at the prime corresponding to $z$ is regular local by [lem-weil-pbc-smooth-over-field-regular-local]. It is $\\mathcal O_{X_L,z}$ by [lem-weil-pbc-affine-open-stalk-localization]. This proves the forward implication (indeed for every field extension).",
+   "text": "Assume f smooth. Scheme smoothness is stable under base change, so X_L is smooth over L for every field extension, without using finite generation. Around a point of X_L choose a spectrum chart Spec R. The chart map followed by the structure map is smooth, and HasRingHomProperty.Spec_iff identifies this with Algebra.Smooth L R [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Its localizations are regular by [lem-weil-pbc-smooth-over-field-regular-local]. Spec.stalkIso and the isomorphism on stalks of the open immersion identify this localization with the required stalk [lem-weil-pbc-affine-open-stalk-localization].",
    "uses": [
     "def-sbc-smooth-morphisms",
     "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "lem-weil-pbc-affine-chart-base-change-iso",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
     "lem-weil-pbc-smooth-over-field-regular-local",
     "lem-weil-pbc-affine-open-stalk-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038X (lemma-geometrically-regular-smooth), forward implication; algebra.tex Tags 00T4 and 00TT; schemes.tex Tags 01JR and 01HV"
-   }
+   "elementary": false
   },
   {
-   "text": "Conversely assume the regular-local-ring condition. Fix $x\\in X$. The definition of locally of finite type [def-weil-finite-type-morphism] provides an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$ with $A$ a finite type $k$-algebra. Let $\\mathfrak p$ be its prime corresponding to $x$, and put $K=\\kappa(\\mathfrak p)$. The induced residue field of the zero prime of $k$ is $k$ itself. Applying [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated] to $k\\to A$ proves that $K/k$ is finitely generated as a field, so the assumed condition may be applied with $L=K$.",
+   "text": "For the converse take a spectrum chart i:Spec A -> X. Equip A with the k-algebra structure obtained from Spec.preimage(i followed by f). Local finite type gives Algebra.FiniteType k A [def-weil-finite-type-morphism]. A is finitely presented over the Noetherian field k [lem-weil-pbc-finite-type-noetherian-finite-presentation]. For p in Spec A set K=kappa(p); essential finite type of residue fields and IntermediateField.fg_top show K/k is finitely generated [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated].",
    "uses": [
     "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
     "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038X (lemma-geometrically-regular-smooth), converse: affine reduction and finitely generated residue field"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $B=K\\otimes_k A$. By [lem-weil-pbc-affine-chart-base-change-iso], $U_K$ is the affine open $\\operatorname{Spec}B$ in $X_K$ and its projection to $U$ is induced by $j:A\\to B$, $a\\mapsto1\\otimes a$. The compatible maps $K\\to K$ (identity) and $A\\to K$ (residue map $\\bar a$) yield by [lem-weil-pbc-algebra-tensor-pushout-universal-property] a $K$-algebra map $\\epsilon:B\\to K$, $\\lambda\\otimes a\\mapsto\\lambda\\bar a$. This map is surjective since $\\epsilon(\\lambda\\otimes1)=\\lambda$. Consequently $\\mathfrak q=\\ker\\epsilon$ is maximal and contracts under $j$ to $\\mathfrak p$. Moreover $B/\\mathfrak q\\cong K$ as $K$-algebras, and $\\epsilon$ extends to $B_{\\mathfrak q}\\to K$ by $b/s\\mapsto\\epsilon(b)/\\epsilon(s)$: the denominator is nonzero exactly when $s\\notin\\mathfrak q$. Its kernel is $\\mathfrak qB_{\\mathfrak q}$, so $\\kappa(\\mathfrak q)\\cong K$ as $K$-extensions, by [def-weil-pbc-localization-at-prime].",
+   "text": "For every finitely generated L/k, pullbackSymmetry followed by pullbackSpecIso identifies the base-changed chart with Spec(L tensor_k A) [lem-weil-pbc-fibre-product-affine-spectra]. Compose the inverse isomorphism with pullback.map induced by i and identity maps; Mathlib Scheme.pullback_map_isOpenImmersion makes this an open immersion into X_L. The assumed regularity of its image stalk transfers along its stalk isomorphism and Spec.stalkIso. Hence every localization of L tensor_k A at a prime is regular [lem-weil-pbc-affine-open-stalk-localization].",
    "uses": [
-    "lem-weil-pbc-affine-chart-base-change-iso",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JR (lemma-open-fibre-product); agent residue-field-point calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "The point $z\\in U_K\\subset X_K$ corresponding to $\\mathfrak q$ has regular local ring by the hypothesis and Step 2. By [lem-weil-pbc-affine-open-stalk-localization], this local ring is $B_{\\mathfrak q}$. The algebra $B$ is finite type over $K$: if $a_1,\\dots,a_n$ generate $A$ over $k$, then $1\\otimes a_1,\\dots,1\\otimes a_n$ generate $B$ over $K$. Its residue extension $\\kappa(\\mathfrak q)/K$ is the identity extension by Step 3 and is separable by [def-weil-pbc-separable-field-extension]: its only intermediate field is $K$, the transcendence basis is empty, and the minimal polynomials are linear with derivative $1$. The regular-to-smooth implication of [lem-weil-pbc-regular-local-separable-residue-smooth], with base field $K$, algebra $B$ and prime $\\mathfrak q$, therefore proves $K\\to B$ smooth at $\\mathfrak q$.",
+   "text": "Use the tensor universal property (AlgHom.liftEquiv) to construct epsilon:K tensor_k A -> K, lambda tensor a |-> lambda times residue(a) [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Its kernel q is prime. Ideal.ResidueField.lift_a extends epsilon to a K-algebra embedding kappa(q) -> K: elements outside q map to nonzero elements, hence units [def-weil-pbc-localization-at-prime]. Algebraic separability descends along this embedding. Each intermediate field has the empty transcendence basis, giving IsSeparableExtension K kappa(q) [def-weil-pbc-separable-field-extension]. The tensor algebra is finite type over K and its localization at q is regular by the preceding step. Therefore [lem-weil-pbc-regular-local-separable-residue-smooth] yields smoothness at q.",
    "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-separable-field-extension",
     "lem-weil-pbc-regular-local-separable-residue-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00TV (lemma-separable-smooth); agent application at the residue-field rational point"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-smooth-at-prime-field-extension-descent] with the field extension $K/k$, finite type algebra $A$, and prime $\\mathfrak q\\subset K\\otimes_k A$. Its contracted prime is $\\mathfrak p$ by Step 3 and the required smoothness at $\\mathfrak q$ was proved in Step 4. Thus $k\\to A$ is smooth at $\\mathfrak p$: there is $g\\in A\\setminus\\mathfrak p$ for which $A_g$ is a smooth $k$-algebra.",
+   "text": "The contraction of q under includeRight is p: epsilon(1 tensor a)=residue(a), which vanishes precisely for a in p (Ideal.algebraMap_residueField_eq_zero). Apply [lem-weil-pbc-smooth-at-prime-field-extension-descent] to deduce IsSmoothAtPrime k p. Thus there is g outside p with A_g smooth over k.",
    "uses": [
-    "lem-weil-pbc-smooth-at-prime-field-extension-descent"
+    "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02UQ (lemma-smooth-field-change-local), descent implication"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-principal-localization-open-immersion], the localization map identifies $\\operatorname{Spec}A_g$ with the open subscheme $D(g)\\subset U$. This open contains $x$ because $g\\notin\\mathfrak p$ and its morphism to $\\operatorname{Spec}k$ is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. As $x$ was arbitrary, these neighbourhoods cover $X$. Hence $f$ is smooth by the affine-local characterization stated in [def-sbc-smooth-morphisms]. The argument is pointwise; for empty $X$ the cover is empty and both conditions are vacuous.",
+   "text": "For each p take the smooth principal localization supplied by the preceding step. Mathlib Algebra.basicOpen_subset_smoothLocus_iff_smooth puts p in the algebraic smooth locus; since all primes belong, Algebra.smoothLocus_eq_univ_iff gives formal smoothness of A. Together with finite presentation this gives Algebra.Smooth k A. Transfer to the spectrum map by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Apply IsZariskiLocalAtSource.iff_of_openCover to X.affineCover, using isoSpec to present each component as a spectrum. This gives Smooth f [def-sbc-smooth-morphisms], including the empty scheme.",
    "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
     "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "def-sbc-smooth-morphisms"
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01V6 (lemma-smooth-characterize), affine-local characterization; more-morphisms.tex Tag 02H6"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-smooth-morphisms",
   "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-  "lem-weil-pbc-affine-chart-base-change-iso",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
   "lem-weil-pbc-smooth-over-field-regular-local",
   "lem-weil-pbc-affine-open-stalk-localization",
   "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
   "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-separable-field-extension",
   "lem-weil-pbc-regular-local-separable-residue-smooth",
-  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
-  "lem-weil-pbc-principal-localization-open-immersion"
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 038X (lemma-geometrically-regular-smooth), variant of the converse using base change to the finitely generated residue field itself, with Algebra Tags 00TV and 02UQ"
+  "place": "Tag 038X; the existing residue-field rational-point variant, formalized by H4 using Algebra Tags 00TV and 02UQ, Mathlib affine fibre products and the algebraic smooth locus."
  },
  "mathlib_searches": [
   {
@@ -262,7 +237,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-  "lem-weil-pbc-affine-chart-base-change-iso",
   "lem-weil-pbc-smooth-over-field-regular-local",
   "lem-weil-pbc-regular-local-separable-residue-smooth",
   "lem-weil-pbc-smooth-at-prime-field-extension-descent"
@@ -304,5 +278,15 @@
   "by": "NL",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261018T062806-L-654752",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
