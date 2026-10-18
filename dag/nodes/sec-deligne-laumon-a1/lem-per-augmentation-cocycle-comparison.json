@@ -10,9 +10,116 @@
  "stmt_deps": [
   "def-exc-continuous-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First make the finite coefficient constructions explicit. By [lem-exc-coinduced-functions-open-stabilizer], every continuous map $t:G\\to S$ to a discrete space is constant on right cosets of some open normal $U$. Such a quotient $G/U$ is finite: its open cosets cover compact $G$, so finitely many cover it. Thus $t(G)$ is finite. Apply this also to the continuous orbit maps $g\\mapsto gm$ for the finitely many $m$ in any finite subset $E\\subset M$. The union of these finite orbits is finite and $G$-stable. Its $\\Lambda$-span $N$ is finite, being the image of $\\Lambda^r$ for a finite number $r$ of generators, and is $G$-stable. For every $n\\in N$, apply the same cited statement to $g\\mapsto gn$, and intersect the resulting finitely many open normal subgroups. The intersection acts trivially on $N$ (evaluate each orbit map at $1$). Consequently every finite subset of $M$ lies in a finite stable $N$ whose action factors through a finite quotient. Here only the coset factorization is a non-elementary input; the finite span and finite intersection are the displayed finite constructions.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, definition-G-module-continuous; profinite coset factorization as stated in the cited node. Agent finite-span argument, using finite Lambda."
+   }
+  },
+  {
+   "text": "For clarity the $A$-action on $M$ used in the statement is the following construction. Given $m$, choose $N$ and $U$ as in Step 1, let $Q=G/U$, and set $am=a_Um$ using the finite group-ring action on $N$, where $a_U\\in\\Lambda[Q]$ is the projection of $a$. This is independent of $N,U$: enlarge two choices to their sum and replace their subgroups by the intersection, then both formulas are the same finite sum of coefficients acting on $m$. Computing on a common finite stable submodule containing the finitely many vectors in question proves $(ab)m=a(bm)$, distributivity and $1m=m$. The orbit map $A\\to M$, $a\\mapsto am$, factors through the finite discrete ring $\\Lambda[Q]$, hence is continuous. The same formula shows that a $G$-equivariant $\\Lambda$-linear coefficient map commutes with the $A$-action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1.1, pp. 259–260: completed group ring and discrete modules. Explicit finite-quotient construction supplied by the agent."
+   }
+  },
+  {
+   "text": "Let $c:G\\to M$ be a continuous crossed homomorphism. Step 1 gives finite image and a finite stable submodule $N$ containing it. Apply [lem-exc-coinduced-functions-open-stabilizer] to $c$, then intersect its open normal subgroup with one acting trivially on $N$ from Step 1. Write $U$ for this intersection, $Q=G/U$, and $\\bar c:Q\\to N$ for the resulting function. Normality makes $Q$ a group, and both the action and $c$ descend, so $\\bar c(qr)=\\bar c(q)+q\\bar c(r)$. Also $c(1)=0$, by the cocycle identity at $(1,1)$. All statements below use this one common quotient, not a quotient that merely fixes one vector.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, definition-G-module-continuous; apply the cited coset factorization to c and use the finite constructions in Step 1."
+   }
+  },
+  {
+   "text": "Define a $\\Lambda$-linear map $L:\\Lambda[Q]\\to N$ by $L(\\sum_q b_q q)=\\sum_q b_q\\bar c(q)$. For $q\\in Q$ and $x=\\sum_r b_r r$, the cocycle identity gives\n$$L(qx)=qL(x)+\\epsilon(x)\\bar c(q).$$\nThus $L(qx)=qL(x)$ if $x\\in I_Q:=\\ker(\\Lambda[Q]\\xrightarrow\\epsilon\\Lambda)$; summing over $q$ shows that $L|_{I_Q}$ is $\\Lambda[Q]$-linear. The projection $p_U:I\\to I_Q$ therefore gives the continuous $A$-linear map $f_c=L\\circ p_U:I\\to N\\hookrightarrow M$. Continuity follows from the finite discrete intermediary, and $A$-linearity from the action constructed in Step 2. Finally $f_c(g-1)=\\bar c(\\bar g)-\\bar c(1)=c(g)$. This constructs the required map; no universal property of a completed free module is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1.1, pp. 259–260. Agent finite-sum construction of the degree-one comparison."
+   }
+  },
+  {
+   "text": "The $\\Lambda$-span $D$ of all $g-1$ is dense in $I$. Indeed a basic neighbourhood in the inverse limit prescribes finitely many quotient coordinates; replace their subgroups by their intersection $V$. If $a\\in I$ has coordinate $a_V=\\sum_{q\\in G/V} b_q q$, then $\\sum_q b_q=0$. Choose representatives $g_q\\in G$. The element $\\sum_q b_q(g_q-1)\\in D$ has coordinate $a_V$, and hence matches all the prescribed coordinates. If two continuous $\\Lambda$-linear maps $I\\to M$ agree on $D$, their difference is zero everywhere: a nonzero value would, by continuity to discrete $M$, have a nonempty open fibre disjoint from dense $D$. This proves uniqueness of $f_c$, independence of the choices in Steps 3–4, and $\\Lambda$-linearity of $c\\mapsto f_c$, by checking each identity on $g-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1.1: inverse-limit topology. Agent density and uniqueness argument in finite quotient coordinates."
+   }
+  },
+  {
+   "text": "Conversely, for continuous $A$-linear $f:I\\to M$ put $c_f(g)=f(g-1)$. The map $g\\mapsto g-1$ is continuous since each finite quotient coordinate is, and\n$gh-1=(g-1)+g(h-1)$ implies $c_f(gh)=c_f(g)+gc_f(h)$. Thus $c_f$ is a continuous crossed homomorphism. Step 4 gives $c_{f_c}=c$, and Step 5 gives $f_{c_f}=f$, since both sides agree on $g-1$. For $m\\in M$ the map $r_m:I\\to M$, $x\\mapsto xm$, is continuous by Step 2 and $A$-linear by associativity. Its corresponding cocycle is $c_{r_m}(g)=(g-1)m=gm-m$. Therefore the two inverse linear maps carry precisely the submodules of principal maps and coboundaries onto each other.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology: displayed degree-zero and degree-one differentials. Agent algebraic inverse and boundary computation."
+   }
+  },
+  {
+   "text": "Use the continuous inhomogeneous cochain model in [def-exc-continuous-cohomology]. Its differentials in degrees zero and one are\n$$d^0m(g)=gm-m,\\qquad d^1c(g,h)=gc(h)-c(gh)+c(g).$$\nHence its degree-one cohomology is exactly the quotient of continuous crossed homomorphisms by these coboundaries. Step 6 descends to the asserted isomorphism with $\\operatorname{Hom}_{A,\\mathrm{cont}}(I,M)/\\{r_m\\}$. For a continuous $G$-equivariant $\\Lambda$-linear map $u:M\\to M'$, $u f_c$ and $f_{uc}$ agree on every $g-1$, so Step 5 identifies them. This proves naturality in the coefficient module.",
+   "uses": [
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential; the equivalence with the derived definition is explicitly part of the cited statement."
+   }
+  },
+  {
+   "text": "Check the augmentation comparison and its sign on the bar model [lem-sfb-bar-resolution-cochains]. Write $R=\\mathbf Z[G]$. The ring map $R\\to A$ sends each $g$ to its compatible quotient coordinates and each integer to its scalar in $\\Lambda$. Define $R$-linear maps $\\phi_0:B_0=R\\to A$ by this ring map and $\\phi_1:B_1\\to I$ by $[g]\\mapsto g-1$. Augmentations commute. The cited differential gives $d_1[g]=g-1$ and $d_2[g|h]=g[h]-[gh]+[g]$. Thus $\\phi_0d_1$ equals inclusion composed with $\\phi_1$, while\n$$\\phi_1d_2[g|h]=g(h-1)-(gh-1)+(g-1)=0.$$\nTogether with zero maps in higher degrees this is a chain map to $[I\\hookrightarrow A]$. Precomposition in degrees zero and one sends $m$ to the same $m$ and $f$ to the cochain $g\\mapsto f(g-1)$, exactly the map of Step 6. Restricting to continuous cochains is legitimate here because Step 6 proves this function continuous; no claim that abstract group cohomology equals continuous cohomology is used. The bijection of Step 6 proves that this restricted degree-one comparison is an isomorphism. This describes the comparison whenever the augmented complex computes degree one, without claiming that $I$ is projective for arbitrary $G$. In particular its inverse sends $[c]$ to $[f_c]$, not to $[-f_c]$.",
+   "uses": [
+    "lem-sfb-bar-resolution-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1–1.2.2: augmentation complex. Agent explicit comparison with the signed bar differential stated in the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Now impose the additional topological $A$-module isomorphism $\\theta:A\\xrightarrow\\sim I$, $a\\mapsto a(1-\\sigma)$. For an arbitrary algebraic $A$-linear map $f:I\\to M$, set $m=f(1-\\sigma)$. Then $(f\\theta)(a)=am$, whose continuity was established in Step 2. Since $\\theta^{-1}$ is continuous, $f=(f\\theta)\\theta^{-1}$ is continuous. The same argument identifies algebraic $\\operatorname{Hom}_A(A,M)$ with $M$ by evaluation at $1$, and restriction along $I\\hookrightarrow A$ sends $m$ precisely to $r_m$. Thus the degree-one quotient in Step 7 is the stated cokernel using all algebraic maps $I\\to M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1.2 and 1.2.2, p. 260; the topological isomorphism is a hypothesis of the item, not an assertion proved here."
+   }
+  },
+  {
+   "text": "Finally $1-\\sigma=-(\\sigma-1)$, so the constructed comparison gives\n$$f_c(1-\\sigma)=-f_c(\\sigma-1)=-c(\\sigma).$$\nFor a coboundary this is $r_m(1-\\sigma)=(1-\\sigma)m=-(\\sigma m-m)$, consistent with the same differential and quotient. This also checks the sign when $M$ has trivial action; in characteristic two the two signs coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 1.2.1.2 and 1.2.3, p. 260: coordinate 1-sigma. Agent sign check against the positive bar differential."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-continuous-cohomology",
+  "lem-exc-coinduced-functions-open-stabilizer",
+  "lem-sfb-bar-resolution-cochains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 1.2.1–1.2.3, pp. 259–260, for the completed algebra and trait coordinates; the general profinite crossed-cocycle construction and signed bar comparison are supplied explicitly by Q10, using Stacks Tags 04JP and 0DVG and the cited bar-resolution node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +162,73 @@
    "results": "Search log: {\"t\": \"2026-10-18T13:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous cohomology of a procyclic profinite group computed using its completed group algebra augmentation ideal and crossed homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.I\", \"ContinuousCohomology.const\", \"ContinuousCohomology.invariants\", \"ContinuousCohomology.MultiInd.functor\", \"ContinuousCohomology.I_obj_V_carrier\"], \"digest\": \"a8645e6939f2cae8\"}; inspected the returned continuousCohomology and homogeneousCochains signatures: no augmentation comparison or sign assertion.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, QuotientGroup",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:46:39Z\", \"tool\": \"loogle\", \"query\": \"LocallyConstant, QuotientGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'QuotientGroup'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(orbit|span)|exists.*(normal|quotient)|lift.*[Qq]uotient",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:46:40Z\", \"tool\": \"grep\", \"query\": \"finite.*(orbit|span)|exists.*(normal|quotient)|lift.*[Qq]uotient\", \"sub\": \"Topology/Algebra\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/SeparationQuotient/Section.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Hom.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Hom.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ClopenNhdofOne.lean\"], \"digest\": \"63888114e79577f8\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a discrete continuous module over a profinite group and a finite coefficient ring, together with finitely many continuous functions from the group, is contained in a finite stable submodule and all data factor through one finite quotient",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a discrete continuous module over a profinite group and a finite coefficient ring, together with finitely many continuous functions from the group, is contained in a finite stable submodule and all data factor through one finite quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.spanFin\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.span\", \"Profinite.NobelingProof.Nobeling_aux\", \"Profinite.NobelingProof.CC_exact\", \"Profinite.NobelingProof.spanFinBasis.span\", \"Condensed.finFree\"], \"digest\": \"ae43b2794ba10ef3\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous function from a profinite group to a discrete module factors through a finite quotient which also acts on a finite invariant submodule containing its image",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:46:40Z\", \"tool\": \"leansearch\", \"query\": \"A continuous function from a profinite group to a discrete module factors through a finite quotient which also acts on a finite invariant submodule containing its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.invariants\", \"ProfiniteGrp.toLimit_fun_continuous\", \"ProfiniteGrp.toLimit_surjective\", \"ProfiniteGrp.denseRange_toLimit\", \"ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor\", \"ProfiniteGrp.isIso_toLimit\", \"LinearPMap.HasCore\", \"ProfiniteGrp.toLimit\"], \"digest\": \"1b5e2cf570b6c7ca\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every locally constant function on a compact totally disconnected topological group is constant on cosets of some open normal subgroup; every finite subset of a smooth module over a finite ring lies in a finite invariant submodule",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:47:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every locally constant function on a compact totally disconnected topological group is constant on cosets of some open normal subgroup; every finite subset of a smooth module over a finite ring lies in a finite invariant submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"LocallyConstant.freeOfProfinite\", \"Profinite.NobelingProof.Nobeling_aux\", \"MeasureTheory.Measure.haar.index_defined\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace\", \"Subgroup.quotient_finite_of_isOpen'\", \"TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant\"], \"digest\": \"f77c165c2534631e\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:47:15Z\", \"tool\": \"loogle\", \"query\": \"LocallyConstant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LocallyConstant\", \"LocallyConstant.const\", \"LocallyConstant.toFun\", \"LocallyConstant.Simps.apply\", \"LocallyConstant.instFunLike\", \"LocallyConstant.instInhabited\", \"LocallyConstant.flip\", \"LocallyConstant.map\"], \"digest\": \"3e9cec9d83fe9ebc\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(quotient|lift)|[Ff]inite[Rr]ange|[Ff]inite.*[Rr]ange",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:47:15Z\", \"tool\": \"grep\", \"query\": \"exists.*(quotient|lift)|[Ff]inite[Rr]ange|[Ff]inite.*[Rr]ange\", \"sub\": \"Topology/LocallyConstant\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/LocallyConstant/Basic.lean\"], \"digest\": \"8b978def8a31d418\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "augmentationIdeal|cocycles₁|H1Iso",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:47:57Z\", \"tool\": \"grep\", \"query\": \"augmentationIdeal|cocycles₁|H1Iso\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\"], \"digest\": \"16df9a2abacaf517\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous crossed homomorphisms of a profinite group correspond to continuous linear maps out of the augmentation ideal of the completed group ring, modulo principal cocycles",
+   "results": "Actual search log: {\"t\": \"2026-10-18T14:47:57Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous crossed homomorphisms of a profinite group correspond to continuous linear maps out of the augmentation ideal of the completed group ring, modulo principal cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.kerHomogeneousCochainsZeroEquiv\", \"ContinuousCohomology.const\", \"continuousCohomology\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.const_app_hom\", \"ContinuousCohomology.I_map_hom\", \"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.I_obj_V_carrier\"], \"digest\": \"4c96000a8e4dde72\"}. Read returned hits: locally constant finite-range and finite-quotient topology results do not assert the completed augmentation comparison; abstract groupCohomology cocycles and ContinuousCohomology degree-zero interfaces do not assert it either.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-gysin-residue",
@@ -81,5 +251,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-augmentation-cocycle-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the completed action and cocycle functional in finite quotient coordinates, proved density/uniqueness and inverse maps, checked coboundaries and naturality, wrote the signed bar comparison, and proved automatic continuity under the stated topological generator isomorphism. Reused the existing profinite coset-factorization lemma, continuous-cohomology definition and Mathlib bar-resolution leaf; no new nodes. All proof steps are under 2000 characters.",
+  "blueprint": "Refines the augmentation-ideal comparison introduced for lem-per-trait-gysin-residue, through the recorded ancestry to lem-per-artin-gabber-affine-curve, Proof Step 3 (regular finite-torsion local duality/orientation). The current main-20261015 ancestor contains no augmentation comparison; this is a descendant refinement of the documented ILO trait model. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-coinduced-functions-open-stabilizer",
+    "why": "General profinite factorization of a continuous discrete-valued function, used on orbit maps and the cocycle to choose a common finite quotient; the perverse unit has no such group-topological statement."
+   },
+   {
+    "node": "def-exc-continuous-cohomology",
+    "why": "Supplies the definition and explicit continuous inhomogeneous cochain model of H^1; this generic cohomology interface is needed to identify the quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-coinduced-functions-open-stabilizer",
+  "def-exc-continuous-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-c4d7e38b5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c4d7e38b5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item plus its report, no new nodes. The statement is byte-identical to the version in the N8 snapshot that created it, and only split-owned fields changed. All ten steps are under 2000 characters. Source: I read ILO XVII 1.2.1–1.2.3, pp. 259–260. ILO gives Λ[[G]] = lim Λ[G/H], the augmentation ideal I_G and the freeness of I_G on 1−σ (1.2.1.2), but not the general crossed-homomorphism comparison or its sign. The item correctly marks that part as an agent refinement. Coefficient category: def-exc-continuous-cohomology (finite ring, discrete module, open stabilisers, continuous inhomogeneous cochains) matches the item exactly. Cited statements: the open-stabiliser lemma gives exactly the right-coset factorisation used in Steps 1 and 3. The bar leaf gives d_1[g]=g−1, d_2[g|h]=g[h]−[gh]+[g] and the precomposition cochain identification; its induced differential matches Step 7. Step checks: L(qx)=qL(x)+ε(x)c̄(q) holds, so L is linear on I_Q. Density holds because Σb_q(g_q−1) has V-coordinate a_V when Σb_q=0. The inverse uses gh−1=(g−1)+g(h−1). The chain map is zero because φ1d2[g|h]=0, and the pullback f ↦ f(g−1) carries no sign. Automatic continuity follows from f=(fθ)θ⁻¹ with θ⁻¹ continuous. f_c(1−σ)=−c(σ). Edge cases: trivial G, M=0, the zero ring, finite G, trivial action, G=Z_ℓ with F_ℓ for odd ℓ (the sign is detectable) and characteristic 2 all behave as stated. The only citer, lem-per-trait-gysin-residue Step 4, uses exactly the unchanged sign clause. Duplicates: the trait residue-model nodes state only the freeness and the F(M) model, so nothing duplicates the comparison. There is no SGA. I accept the declared tool_uses (the generic open-stabiliser lemma; the cohomology definition is a notion). No changes."
  }
 }
