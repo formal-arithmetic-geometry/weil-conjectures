@@ -6,29 +6,9 @@ Authors: SHEAF group NL
 module
 
 public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
-public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.FieldFailure
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
-import Sheaf.AlgebraicGeometry.BaseChangeSourceTransitionThickening
-import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionThickening
-import Sheaf.AlgebraicGeometry.BaseChangeStalkTransportComp
-import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.BaseChangeSourceImageLimitDescent
-import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitZeroDetection
-import Sheaf.AlgebraicGeometry.BaseChangeTargetStalkRestrictionImage
-import Sheaf.AlgebraicGeometry.BaseChangeClosedOpenEmbedding
-import Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero
-import Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 
 /-!
 # Detection of failure of base change over a field
@@ -92,6 +72,18 @@ theorem exists_fieldFailure_of_cumulativeUniversalBaseChangeProperty
     (hfail : ¬ UniversalBaseChangeProperty (ULift.{u + 1} (ZMod n)) f (q : ℤ)) :
     ∃ d : FieldFailure (ULift.{u + 1} (ZMod n)) f (q : ℤ),
       S.IsSeparated → IsAffineHom d.a := by
-  sorry
+  have hprev' : ∀ r : ℤ, r < (q : ℤ) →
+      UniversalBaseChangeProperty (ULift.{u + 1} (ZMod n)) f r := by
+    intro r hr
+    by_cases hneg : r < 0
+    · exact universalBaseChangeProperty_of_neg _ f hneg
+    · have hrnonneg : 0 ≤ r := le_of_not_gt hneg
+      have hrbound : r.toNat ≤ q - 1 := by omega
+      simpa only [Int.toNat_of_nonneg hrnonneg] using hprev r.toNat hrbound
+  obtain ⟨d⟩ := nonempty_fieldFailure_of_not_universalBaseChangeProperty
+    (ULift.{u + 1} (ZMod n)) f (q : ℤ) (by omega) hprev' hfail
+  exact ⟨d, fun hS ↦ by
+    have := hS
+    exact d.isAffineHom_a⟩
 
 end AlgebraicGeometry.Etale
