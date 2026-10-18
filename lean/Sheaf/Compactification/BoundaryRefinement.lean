@@ -59,7 +59,13 @@ inverse image. Substitute `s⁻¹(e.i(X)) = d.i(X)` and then
 equalities, with ambient maps the scheme identity and composite, respectively. -/
 theorem boundaryRefinementProperty_isMultiplicative {X S : Scheme.{u}} (f : X ⟶ S) :
     (boundaryRefinementProperty f).IsMultiplicative := by
-  sorry
+  refine { id_mem := fun c ↦ ?_, comp_mem := fun r s hr hs ↦ ?_ }
+  · change (𝟙 c.obj.Z) ⁻¹ᵁ c.obj.i.opensRange = c.obj.i.opensRange
+    exact Scheme.Hom.id_preimage _
+  · change r.hom.hom ⁻¹ᵁ _ = _ at hr
+    change s.hom.hom ⁻¹ᵁ _ = _ at hs
+    change (r.hom.hom ≫ s.hom.hom) ⁻¹ᵁ _ = _
+    rw [Scheme.Hom.comp_preimage, hs, hr]
 
 attribute [instance] boundaryRefinementProperty_isMultiplicative
 
