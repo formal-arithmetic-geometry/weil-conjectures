@@ -60,6 +60,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.StableImageTower
 public import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
@@ -167,6 +168,8 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
+public import WeilConjectures.Algebra.Homology.DerivedCategory.MittagLefflerArtinian
+public import WeilConjectures.Algebra.Homology.DerivedCategory.MittagLefflerTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
@@ -5955,6 +5958,7 @@ public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
+public import WeilConjectures.CategoryTheory.Sites.DisjointGluing
 public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
 public import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductData
 public import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductExists
@@ -6598,6 +6602,7 @@ public import WeilConjectures.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddi
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
+public import WeilConjectures.LinearAlgebra.Basis.TowerLift
 public import WeilConjectures.LinearAlgebra.ExteriorLocalizationKernelTorsion
 public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
 public import WeilConjectures.LinearAlgebra.ExteriorPower.Top
@@ -6613,6 +6618,7 @@ public import WeilConjectures.LinearAlgebra.IdempotentImageBaseChange
 public import WeilConjectures.LinearAlgebra.KernelBasisOfUnitValue
 public import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 public import WeilConjectures.LinearAlgebra.Matrix.ComplementaryMinors
+public import WeilConjectures.LinearAlgebra.Matrix.GeneralLinearGroup.LocalLift
 public import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
 public import WeilConjectures.LinearAlgebra.Matrix.SplitFactorization
 public import WeilConjectures.LinearAlgebra.MatrixRankFieldExtension
@@ -9185,6 +9191,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+public import WeilConjectures.SixFunctors.ProEtale.DisjointOpensGluing
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
