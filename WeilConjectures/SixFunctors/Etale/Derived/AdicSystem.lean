@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 public import WeilConjectures.EtaleCohomology.PoincareDuality.StalkPerfect
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealizationComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
 
 /-!
 # Normalized adic systems and the realization of their compact cohomology and stalks
@@ -508,7 +508,7 @@ theorem realization {c : Cone (S.restrict ⋙
             (op n) ≫ e.hom.app (op n)) ∧
       ∀ a b : ℤ, (∀ n : ℕ, (S.restrict.obj (op n)).IsGE a ∧ (S.restrict.obj (op n)).IsLE b) →
         c.pt.IsGE a ∧ c.pt.IsLE b :=
-  ProEtale.derivedComplete_and_exists_iso_of_isNormalizedTower_comparison hϖ hI
+  ProEtale.derivedComplete_and_exists_iso_of_isNormalizedTower hϖ hI
     S.isNormalizedTower_restrict hc
 
 end AdicSystem
