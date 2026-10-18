@@ -69,8 +69,8 @@ are determined near one point (`WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 case through the finite cover by the normalizations of its irreducible components
 (`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite`). The identification
 `lem-wf-boundary-stalk-invariants` of the boundary stalk of a lisse Weil sheaf with the inertia
-invariants `V^{I_s}` is not formalised: the inertia groups are data here, and the monodromy
-action of the fundamental group on the stalks of a Weil sheaf is not available.
+invariants `V^{I_s}` is
+`WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk_eq_invariants`.
 -/
 
 @[expose] public section

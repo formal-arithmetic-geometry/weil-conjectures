@@ -20,7 +20,7 @@ local ring whose units are the invariant units of `A`
 (`FixedPoints.isLocalRing_subring`). If `A` is henselian, so is `A^G`; if `A` is strictly
 henselian, so is `A^G` (`FixedPoints.isStrictlyHenselianLocalRing_subring`). Both rest on the
 uniqueness of henselian lifts of simple roots
-(`Polynomial.eq_of_isRoot_of_sub_mem_maximalIdeal`): `G` permutes the roots of an invariant
+(`IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub`): `G` permutes the roots of an invariant
 polynomial lifting a given simple residue root, so it fixes the unique one.
 
 For `A` the localization at a point `Q` over a boundary point `z` of the integral closure of a
@@ -32,25 +32,6 @@ compute boundary stalks (blueprint `lem-wf-boundary-stalk-invariants`).
 @[expose] public section
 
 open Polynomial IsLocalRing
-
-/-- **Uniqueness of henselian lifts.** In a local ring, two roots of a polynomial which are
-congruent modulo the maximal ideal agree, if the derivative at one of them is a unit. -/
-theorem Polynomial.eq_of_isRoot_of_sub_mem_maximalIdeal {A : Type*} [CommRing A] [IsLocalRing A]
-    {f : A[X]} {a a' : A} (ha : f.IsRoot a) (ha' : f.IsRoot a')
-    (h : a' - a ∈ maximalIdeal A) (hu : IsUnit (f.derivative.eval a)) : a' = a := by
-  obtain ⟨k, hk⟩ := f.binomExpansion a (a' - a)
-  rw [add_sub_cancel, ha'.eq_zero, ha.eq_zero, zero_add] at hk
-  have hunit : IsUnit (f.derivative.eval a + k * (a' - a)) := by
-    by_contra hn
-    have hm : f.derivative.eval a ∈ maximalIdeal A := by
-      have := (maximalIdeal A).sub_mem ((mem_maximalIdeal _).2 hn)
-        ((maximalIdeal A).mul_mem_left k h)
-      rwa [add_sub_cancel_right] at this
-    exact ((mem_maximalIdeal _).1 hm) hu
-  have h0 : (a' - a) * (f.derivative.eval a + k * (a' - a)) = 0 := by
-    linear_combination -hk
-  rw [← sub_eq_zero]
-  exact (hunit.mul_left_eq_zero).1 h0
 
 namespace FixedPoints
 
@@ -148,7 +129,8 @@ theorem henselianLocalRing_subring [HenselianLocalRing A]
         exact (f.coeff n).2 g
       have hroot : fA.IsRoot (g • a) := by
         rw [IsRoot, ← hfA, smul_eval_smul, ha.eq_zero, smul_zero]
-      exact eq_of_isRoot_of_sub_mem_maximalIdeal ha hroot (hG g a) hua
+      exact (IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub ha hroot
+        (fun hu' ↦ (mem_maximalIdeal _).1 (hG g a) (by simpa using hu'.neg)) hua).symm
     refine ⟨⟨a, hfix⟩, ?_, ?_⟩
     · apply Subtype.ext
       rw [← hev]
@@ -215,7 +197,8 @@ theorem isStrictlyHenselianLocalRing_subring [IsStrictlyHenselianLocalRing A]
         exact (P.coeff n).2 g
       have hroot : PA.IsRoot (g • b) := by
         rw [IsRoot, ← hfA, smul_eval_smul, hb.eq_zero, smul_zero]
-      exact eq_of_isRoot_of_sub_mem_maximalIdeal hb hroot (hG g b) hub
+      exact (IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub hb hroot
+        (fun hu' ↦ (mem_maximalIdeal _).1 (hG g b) (by simpa using hu'.neg)) hub).symm
     refine ⟨residue S ⟨b, hfix⟩, ?_⟩
     rw [← hPp, eval_map, eval₂_at_apply]
     have : P.eval (⟨b, hfix⟩ : S) = 0 := Subtype.ext (by

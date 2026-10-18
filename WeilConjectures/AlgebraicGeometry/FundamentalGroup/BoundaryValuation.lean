@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromy
-public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.KummerValuation
+public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Valuation
 
 /-!
 # Orders of vanishing at a boundary point and inertia

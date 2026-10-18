@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.RepresentationTheory.LinHom
+public import WeilConjectures.Mathlib.RepresentationTheory.Intertwining
 public import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
 
 /-!

@@ -38,13 +38,17 @@ section Pullback
 variable {C U U' : Scheme.{u}} [IsIntegral C] (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U]
   (ι : U' ⟶ U) [IsOpenImmersion ι] [Nonempty U']
 
+local notation "Ω" => SeparableClosure (Scheme.functionField C)
+
 @[reassoc]
 lemma genericPointLift_comp_comp : genericPointLift (ι ≫ j) ≫ ι = genericPointLift j := by
   rw [← cancel_mono j, Category.assoc, genericPointLift_comp, genericPointLift_comp]
 
 lemma genericGeometricPoint_comp_comp :
-    genericGeometricPoint (C := C) (ι ≫ j) ≫ ι = genericGeometricPoint j := by
-  simp only [genericGeometricPoint, pointOfAlgebra, Category.assoc, genericPointLift_comp_comp]
+    (Etale.genericGeometricPoint (C := C) (ι ≫ j) : Spec (.of Ω) ⟶ _) ≫ ι =
+      (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _) := by
+  simp only [Etale.genericGeometricPoint, pointOfAlgebra, Category.assoc,
+    genericPointLift_comp_comp]
 
 variable [ConnectedSpace U'] {N : ℕ} [NeZero N]
 
@@ -54,9 +58,10 @@ lemma galoisCharacter_pullback (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U) :
     (T.pullback ι).galoisCharacter (ι ≫ j) = T.galoisCharacter j := by
   funext σ
   set t' := (T.pullback ι).genericFiberPoint (ι ≫ j)
-  have ht' : t' ≫ pullback.snd T.π ι = genericGeometricPoint (ι ≫ j) :=
+  have ht' : t' ≫ pullback.snd T.π ι = (Etale.genericGeometricPoint (ι ≫ j) : Spec (.of Ω) ⟶ _) :=
     (T.pullback ι).genericFiberPoint_comp (ι ≫ j)
-  have ht : (t' ≫ pullback.fst T.π ι) ≫ T.π = genericGeometricPoint j := by
+  have ht : (t' ≫ pullback.fst T.π ι) ≫ T.π =
+      (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _) := by
     rw [Category.assoc, pullback.condition, ← Category.assoc, ht', genericGeometricPoint_comp_comp]
   refine (T.galoisCharacter_eq_of_specMap_comp_eq j σ _ ht ?_).symm
   have h := (T.pullback ι).specMap_comp_eq_comp_vadd_galoisCharacter (ι ≫ j) σ t'
@@ -95,6 +100,8 @@ open WeilGroup
 variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Spec (.of k)}
   [IsCurve p] [SmoothOfRelativeDimension 1 p] [ConnectedSpace C] [ConnectedSpace U]
   {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] [IsIntegral C] [IsLocallyNoetherian C]
+
+local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 omit [ConnectedSpace U] in
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: a torsor on `U` has vanishing residue at every
@@ -141,7 +148,7 @@ theorem residue_eq_zero_of_mem_range {N : ℕ} [NeZero N] [NeZero (N : k)]
       rintro ⟨w, hw⟩
       have : W.ι w = u₀ := hinj hw
       exact w.2 this
-  let s := genericGeometricPoint (C := C) (W.ι ≫ j)
+  let s := (Etale.genericGeometricPoint (C := C) (W.ι ≫ j) : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   rw [← residue_pullback j W.ι p T]
   refine (residue_eq_zero_iff_forall_monodromy_eq_one (p := p) V hV (j u₀) hz s G _).2
@@ -190,7 +197,7 @@ theorem exists_isIsomorphic_pullback_of_residue_eq_zero {U' : Scheme.{u}} (ι : 
     rw [this]
     exact hc.preimage j.base.hom.continuous
   have : IrreducibleSpace U := j.isOpenEmbedding.irreducibleSpace
-  let s := genericGeometricPoint (C := C) (ι ≫ j)
+  let s := (Etale.genericGeometricPoint (C := C) (ι ≫ j) : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   have hV : ∀ z ∈ S, ConnectedSpace (complOpens S hS {z}).toScheme := fun z hz ↦ by
     have : Nonempty (complOpens S hS {z}).toScheme :=

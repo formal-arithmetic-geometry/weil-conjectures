@@ -49,32 +49,29 @@ variable {C U : Scheme.{u}} [IsIntegral C] (j : U ⟶ C) [IsOpenImmersion j] [No
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-/-- The generic geometric point `Spec Ω ⟶ U` of a nonempty open `U` of an integral scheme `C`,
-for `Ω` the separable closure of the function field of `C`. -/
-noncomputable abbrev genericGeometricPoint : Spec (.of Ω) ⟶ U :=
-  pointOfAlgebra Ω (genericPointLift j)
-
 variable {N : ℕ} [NeZero N] (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U)
 
 /-- A `k(C)`-automorphism `σ` of `Ω` moves a point of a `ℤ / N`-torsor over the generic geometric
 point by translation. -/
 lemma exists_specMap_comp_eq (σ : Gal(Ω/C.functionField)) (t : Spec (.of Ω) ⟶ T.P)
-    (ht : t ≫ T.π = genericGeometricPoint j) :
+    (ht : t ≫ T.π = (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)) :
     ∃ m : ZMod N, Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ t = t ≫ T.vadd ⟨m⟩ := by
   have ht' : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ t) ≫ T.π =
-      genericGeometricPoint j := by
+      (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _) := by
     rw [Category.assoc, ht]
     exact specMapIso_hom_comp_pointOfAlgebra _ σ
-  obtain ⟨m, hm⟩ := T.exists_fiber_map_vaddHom (genericGeometricPoint j)
-    (Over.homMk t ht : (fiber (genericGeometricPoint j)).obj T.toFiniteEtale)
+  obtain ⟨m, hm⟩ := T.exists_fiber_map_vaddHom (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)
+    (Over.homMk t ht :
+      (fiber (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)).obj T.toFiniteEtale)
     (Over.homMk _ ht')
   exact ⟨m.down, (congrArg CommaMorphism.left hm).symm⟩
 
 /-- The point of a torsor over the generic geometric point used to define the Galois character. -/
 noncomputable def genericFiberPoint : Spec (.of Ω) ⟶ T.P :=
-  (T.nonempty_fiber (genericGeometricPoint j)).some.left
+  (T.nonempty_fiber (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)).some.left
 
-lemma genericFiberPoint_comp : T.genericFiberPoint j ≫ T.π = genericGeometricPoint j :=
+lemma genericFiberPoint_comp :
+    T.genericFiberPoint j ≫ T.π = (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _) :=
   fiber_left_comp _ _
 
 /-- The **Galois character** `χ_T : Gal(Ω / k(C)) → ℤ / N` of a `ℤ / N`-torsor `T` on `U`: a
@@ -85,19 +82,21 @@ noncomputable def galoisCharacter (σ : Gal(Ω/C.functionField)) : ZMod N :=
 
 /-- `σ` moves every point of `T` over the generic geometric point by `χ_T(σ)`. -/
 lemma specMap_comp_eq_comp_vadd_galoisCharacter (σ : Gal(Ω/C.functionField))
-    (t : Spec (.of Ω) ⟶ T.P) (ht : t ≫ T.π = genericGeometricPoint j) :
+    (t : Spec (.of Ω) ⟶ T.P) (ht : t ≫ T.π = (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)) :
     Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ t = t ≫ T.vadd ⟨T.galoisCharacter j σ⟩ := by
   have h₀ := (T.exists_specMap_comp_eq j σ _ (T.genericFiberPoint_comp j)).choose_spec
-  obtain ⟨a, ha⟩ := T.exists_fiber_map_vaddHom (genericGeometricPoint j)
+  obtain ⟨a, ha⟩ := T.exists_fiber_map_vaddHom (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)
     (Over.homMk (T.genericFiberPoint j) (T.genericFiberPoint_comp j) :
-      (fiber (genericGeometricPoint j)).obj T.toFiniteEtale) (Over.homMk t ht)
+      (fiber (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _)).obj T.toFiniteEtale)
+      (Over.homMk t ht)
   have ht₀ : t = T.genericFiberPoint j ≫ T.vadd a := (congrArg CommaMorphism.left ha).symm
   rw [ht₀, reassoc_of% h₀, Category.assoc, ← T.add_vadd, ← T.add_vadd, add_comm]
   rfl
 
 /-- The Galois character is characterised by the action on one point. -/
 lemma galoisCharacter_eq_of_specMap_comp_eq (σ : Gal(Ω/C.functionField))
-    (t : Spec (.of Ω) ⟶ T.P) (ht : t ≫ T.π = genericGeometricPoint j) {m : ZMod N}
+    (t : Spec (.of Ω) ⟶ T.P) (ht : t ≫ T.π = (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _))
+    {m : ZMod N}
     (h : Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ t = t ≫ T.vadd ⟨m⟩) :
     T.galoisCharacter j σ = m :=
   congrArg ULift.down (T.eq_of_comp_vadd_eq t
@@ -108,7 +107,8 @@ lemma galoisCharacter_eq_of_isIsomorphic {T T' : EtaleTorsor (ULift.{u + 1} (ZMo
     (h : T.IsIsomorphic T') : T.galoisCharacter j = T'.galoisCharacter j := by
   obtain ⟨φ, hφπ, hφv⟩ := h
   ext σ
-  have ht : (T.genericFiberPoint j ≫ φ.hom) ≫ T'.π = genericGeometricPoint j := by
+  have ht : (T.genericFiberPoint j ≫ φ.hom) ≫ T'.π =
+      (Etale.genericGeometricPoint j : Spec (.of Ω) ⟶ _) := by
     rw [Category.assoc, hφπ, T.genericFiberPoint_comp j]
   refine (T'.galoisCharacter_eq_of_specMap_comp_eq j σ _ ht ?_).symm
   rw [← Category.assoc, T.specMap_comp_eq_comp_vadd_galoisCharacter j σ _
@@ -117,7 +117,8 @@ lemma galoisCharacter_eq_of_isIsomorphic {T T' : EtaleTorsor (ULift.{u + 1} (ZMo
 section Monodromy
 
 variable [ConnectedSpace U] {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] {s : Spec (.of Ω') ⟶ U}
-  (τ : fiber (genericGeometricPoint j) ≅ fiber s)
+  (τ : fiber (Etale.genericGeometricPoint j :
+    Spec (.of (SeparableClosure (Scheme.functionField C))) ⟶ U) ≅ fiber s)
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 

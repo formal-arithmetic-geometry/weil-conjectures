@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 
@@ -39,15 +40,6 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] [Finite K] {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-omit [Finite K] in
-/-- A smooth connected scheme over a field is irreducible: it is regular and locally
-Noetherian. -/
-theorem irreducibleSpace_of_smooth {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) [Smooth p]
-    [ConnectedSpace C] : IrreducibleSpace C := by
-  have := LocallyOfFiniteType.isLocallyNoetherian p
-  have := IsRegular.of_smooth p
-  exact IsRegular.irreducibleSpace C
-
 /-- A nonempty open immersion into an irreducible scheme has dense range. -/
 theorem dense_range_of_isOpenImmersion {U C : Scheme.{u}} [IrreducibleSpace C] (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] : Dense (Set.range j.base) :=
@@ -66,7 +58,7 @@ theorem IsLisse.bijective_globalSectionsRestrict_of_isOpenImmersion {C U : Schem
     [j.IsOver (Spec (.of K))] {F : WeilSheaf K l C} (hF : F.IsLisse) :
     Function.Bijective (globalSectionsRestrict j F) := by
   have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
-  have := irreducibleSpace_of_smooth (C ↘ Spec (.of K))
+  have := WeilGroup.irreducibleSpace_of_smooth (p := C ↘ Spec (.of K))
   have : QuasiCompact j := by
     have : QuasiCompact (j ≫ C ↘ Spec (.of K)) := by
       rw [comp_over j]

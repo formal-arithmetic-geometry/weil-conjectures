@@ -174,6 +174,8 @@ lemma monodromy_out {Y : Scheme.{u}} [ConnectedSpace Y] {Ω' : Type u} [Field Ω
 variable {C U : Scheme.{u}} [IsIntegral C] [ConnectedSpace C] [ConnectedSpace U] (j : U ⟶ C)
   [IsOpenImmersion j] [Nonempty U]
 
+local notation "Ω" => SeparableClosure (Scheme.functionField C)
+
 variable (M) in
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: the restriction map
 `j^* : H¹(C, M) → H¹(U, M)` of the residue sequence, in the torsor model of `H¹`: the class of a
@@ -185,7 +187,7 @@ noncomputable def restrictH1 :
     Sheaf.H ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M)) 1 :=
   AddMonoidHom.mk' (fun x ↦ classH1 M U ⟦((classH1Equiv M C).symm x).out.pullback j⟧) fun x y ↦ by
-    let s := genericGeometricPoint (C := C) j
+    let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
     obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
     obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
     apply (sheafHEquivContinuousMonoidHom M s G).injective
@@ -219,7 +221,7 @@ theorem restrictH1_map {M' : Type (u + 1)} [AddCommGroup M'] [Finite M'] [Topolo
       (AddCommGrpCat.ofHom φ)) 1 x) =
       Sheaf.H.map ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).map
         (AddCommGrpCat.ofHom φ)) 1 (restrictH1 M j x) := by
-  let s := genericGeometricPoint (C := C) j
+  let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
   apply (sheafHEquivContinuousMonoidHom M' s G).injective
@@ -243,9 +245,10 @@ noncomputable def residueH1 :
       (AddCommGrpCat.of (ULift.{u + 1} (ZMod N)))) 1 →+
     ((z : ↥(Set.range j.base)ᶜ) → Additive (rootsOfUnity N k) →+ ZMod N) :=
   AddMonoidHom.mk' (fun x z ↦ ((classH1Equiv _ U).symm x).out.residue j p z.1) fun x y ↦ by
-    let s := genericGeometricPoint (C := C) j
+    let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
     obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
-    let τ : fiber (genericGeometricPoint (C := C) j) ≅ fiber s := Iso.refl _
+    let τ : fiber (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _) ≅ fiber s :=
+      Iso.refl _
     funext z
     refine residue_eq_add_of_galoisCharacter_eq_add j p (fun σ ↦ ?_) z.1
     rw [galoisCharacter_eq_monodromy j _ τ G, galoisCharacter_eq_monodromy j _ τ G,
@@ -275,9 +278,9 @@ theorem residueH1_map_castHom {d : ℕ} [NeZero (N * d)] [NeZero ((N * d : ℕ) 
       (AddCommGrpCat.ofHom (ZMod.castHom (dvd_mul_right N d) (ZMod N)).toAddMonoidHom.uliftMap))
         1 x) z (Additive.ofMul ξ') =
       ZMod.castHom (dvd_mul_right N d) (ZMod N) (residueH1 j p (N * d) x z (Additive.ofMul ξ)) := by
-  let s := genericGeometricPoint (C := C) j
+  let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
-  let τ : fiber (genericGeometricPoint (C := C) j) ≅ fiber s := Iso.refl _
+  let τ : fiber (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _) ≅ fiber s := Iso.refl _
   refine residue_eq_castHom_of_galoisCharacter j p (fun σ ↦ ?_) z.1 ξ ξ' hξ
   rw [galoisCharacter_eq_monodromy j _ τ G, galoisCharacter_eq_monodromy j _ τ G, monodromy_out,
     monodromy_out, sheafHEquivContinuousMonoidHom_map]
@@ -432,7 +435,7 @@ theorem isIsomorphic_of_isIsomorphic_pullback_of_isRegular [IsRegular C] {M : Ty
     T₁.IsIsomorphic T₂ := by
   let _ : TopologicalSpace M := ⊥
   have : DiscreteTopology M := ⟨rfl⟩
-  let s := genericGeometricPoint (C := C) j
+  let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
   exact isIsomorphic_of_isIsomorphic_pullback j s
@@ -453,7 +456,7 @@ theorem exists_isIsomorphic_pullback_iff_residue_eq_zero {N : ℕ} [NeZero N] [N
   have := LocallyOfFiniteType.isLocallyNoetherian p
   have : IsRegular C := IsRegular.of_smooth p
   have := irreducibleSpace_of_smooth (p := p)
-  let s := genericGeometricPoint (C := C) j
+  let s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   -- the open `U ∪ {z}` for a boundary point `z`
   have hVz (z : C) (hz : z ∉ Set.range j.base) :

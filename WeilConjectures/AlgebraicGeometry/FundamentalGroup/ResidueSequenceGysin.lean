@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceKummer
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceRestrict
@@ -240,17 +241,11 @@ variable {k : Type u} [Field k] {C U : Scheme.{u}} [C.Over (Spec (.of k))]
   (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U]
 
 variable (k) in
-omit [IsIntegral C] in
-/-- A smooth proper scheme of relative dimension one over `k` is a curve. -/
-lemma isCurve_over : IsCurve (C ↘ Spec (.of k)) :=
-  { krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (.of k)) 1 }
-
-variable (k) in
 include k in
 /-- The boundary points of a nonempty open of a smooth integral curve are closed. -/
 lemma isClosed_singleton_of_notMem_range {z : C} (hz : z ∉ Set.range j.base) :
     IsClosed ({z} : Set C) := by
-  have := isCurve_over k (C := C)
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstance
   have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
   have := irreducibleSpace_of_smooth (p := C ↘ Spec (.of k))
   obtain ⟨u⟩ := (inferInstance : Nonempty U)
@@ -261,7 +256,7 @@ variable (k) in
 include k in
 /-- The boundary of a nonempty open of a smooth integral curve is finite. -/
 lemma finite_compl_range : (Set.range j.base)ᶜ.Finite := by
-  have := isCurve_over k (C := C)
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstance
   have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
   exact finite_boundary (p := C ↘ Spec (.of k)) j
 
@@ -400,7 +395,7 @@ theorem range_residueH1_eq_ker_gysinH2 (N : ℕ) [NeZero N] [NeZero (N : k)] :
     (residueH1 j (C ↘ Spec (.of k)) N).range = (gysinH2 k j N).ker := by
   classical
   set p := C ↘ Spec (.of k)
-  have := isCurve_over k (C := C)
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstance
   have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
   have := irreducibleSpace_of_smooth (p := p)
   have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
@@ -528,7 +523,7 @@ theorem residueSequence_exact (N : ℕ) [NeZero N] [NeZero (N : k)] :
       Function.Exact (restrictH1 (ULift.{u + 1} (ZMod N)) j)
         (residueH1 j (C ↘ Spec (.of k)) N) ∧
       Function.Exact (residueH1 j (C ↘ Spec (.of k)) N) (gysinH2 k j N) := by
-  have := isCurve_over k (C := C)
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstance
   have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
   have : IsRegular C := IsRegular.of_smooth (C ↘ Spec (.of k))
   refine ⟨injective_restrictH1 (j := j), fun y ↦ ?_, fun y ↦ ?_⟩

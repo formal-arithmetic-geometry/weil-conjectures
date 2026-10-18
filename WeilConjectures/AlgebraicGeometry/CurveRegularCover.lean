@@ -7,6 +7,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
@@ -20,7 +21,6 @@ rings being fields or discrete valuation rings.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.isIntegrallyClosed_stalk_Spec_field`
 - `AlgebraicGeometry.Scheme.isRegular_normalization`
 - `AlgebraicGeometry.Scheme.exists_isFinite_isRegular_cover`
 -/
@@ -33,17 +33,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The local rings of the spectrum of a field are integrally closed. -/
-theorem isIntegrallyClosed_stalk_Spec_field (K : Type u) [Field K] (x : Spec (.of K)) :
-    IsIntegrallyClosed ((Spec (.of K)).presheaf.stalk x) := by
-  let := TopCat.Presheaf.algebra_section_stalk (Spec (.of K)).presheaf
-    (⟨x, trivial⟩ : (⊤ : (Spec (.of K)).Opens))
-  have := (isAffineOpen_top (Spec (.of K))).isLocalization_stalk ⟨x, trivial⟩
-  have : IsIntegrallyClosed Γ(Spec (.of K), ⊤) :=
-    .of_equiv (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv.symm
-  exact isIntegrallyClosed_of_isLocalization _ _
-    ((isAffineOpen_top _).primeIdealOf ⟨x, trivial⟩).asIdeal.primeCompl_le_nonZeroDivisors
-
 /-- The normalization of an integral scheme of finite type and of dimension at most one over a
 field is regular: its local rings are integrally closed noetherian local domains of dimension at
 most one, hence fields or discrete valuation rings. -/
@@ -55,7 +44,7 @@ theorem isRegular_normalization {k : Type u} [Field k] (X : Scheme.{u}) [IsInteg
     LocallyOfFiniteType.isLocallyNoetherian (X.fromNormalization ≫ q)
   exact IsRegular.of_isIntegrallyClosed_stalk
     (fun y ↦ ⟨inferInstance, X.fromSpecFunctionField.isIntegrallyClosed_stalk_normalization
-      (isIntegrallyClosed_stalk_Spec_field X.functionField) y⟩)
+      (isIntegrallyClosed_stalk_Spec X.functionField) y⟩)
     ((X.topologicalKrullDim_normalization q).trans_le hdim)
 
 /-- **A curve has a finite regular cover.** A scheme `C` of finite type and of dimension at most

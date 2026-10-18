@@ -88,9 +88,10 @@ theorem residue_mapIso (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom ≫ j = j ≫ 
   set F := C.functionField
   let ι : F →+* Ω := algebraMap F Ω
   let e := functionFieldAut EC
-  let η := genericGeometricPoint (C := C) j
+  let η := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   have hηj : η ≫ j = Spec.map (CommRingCat.ofHom ι) ≫ C.fromSpecFunctionField := by
-    simp only [η, genericGeometricPoint, pointOfAlgebra, Category.assoc, genericPointLift_comp]
+    simp only [η, Etale.genericGeometricPoint, pointOfAlgebra, Category.assoc,
+      genericPointLift_comp]
     rfl
   have hyU : Spec.map (CommRingCat.ofHom (φ : Ω →+* Ω)) ≫ η = η ≫ EU.hom := by
     rw [← cancel_mono j, Category.assoc, hηj, hφη, Category.assoc, hE, ← Category.assoc η, hηj,

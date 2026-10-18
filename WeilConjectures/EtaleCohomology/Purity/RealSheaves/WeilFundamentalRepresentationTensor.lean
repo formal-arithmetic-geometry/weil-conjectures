@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
-public import WeilConjectures.Mathlib.RepresentationTheory.LinHom
+public import WeilConjectures.Mathlib.RepresentationTheory.Intertwining
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.StalkTensorTrace
 

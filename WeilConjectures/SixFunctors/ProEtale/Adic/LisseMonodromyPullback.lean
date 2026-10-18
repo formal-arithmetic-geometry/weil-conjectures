@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy

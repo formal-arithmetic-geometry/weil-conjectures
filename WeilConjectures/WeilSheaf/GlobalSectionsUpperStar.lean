@@ -20,7 +20,7 @@ composite of the global sections of the unit `F ⟶ φ_* φ^* F` with `Γ(Ȳ, φ
 it is bijective as soon as the unit is an isomorphism
 (`AlgebraicGeometry.WeilSheaf.bijective_globalSectionsRestrict`); this is the case for a lisse
 Weil sheaf on a smooth curve and a dense open immersion
-(`AlgebraicGeometry.WeilSheaf.IsLisse.bijective_globalSectionsRestrict`).
+(`AlgebraicGeometry.WeilSheaf.IsLisse.bijective_globalSectionsRestrict_of_isOpenImmersion`).
 -/
 
 @[expose] public section

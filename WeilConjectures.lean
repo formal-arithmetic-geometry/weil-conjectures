@@ -4873,7 +4873,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapPrecomp
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
@@ -5050,7 +5049,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
 public import WeilConjectures.Mathlib.CategoryTheory.CofilteredSystem
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
@@ -5285,14 +5283,14 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
-public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.KummerValuation
+public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Valuation
 public import WeilConjectures.Mathlib.Order.BooleanAlgebra.Set
 public import WeilConjectures.Mathlib.Order.Directed
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
+public import WeilConjectures.Mathlib.RepresentationTheory.Intertwining
 public import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
-public import WeilConjectures.Mathlib.RepresentationTheory.LinHom
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic

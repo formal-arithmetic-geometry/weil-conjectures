@@ -94,12 +94,12 @@ theorem exists_residue_eq_ord_of_isUnit {ζ : k} (hζ : IsPrimitiveRoot ζ N) {g
   have hn : IsUnit (N : Γ(U, ⊤)) := by simpa using hN.isUnit.map c
   set ζU := c ζ
   have hζU : ζU ^ N = 1 := by rw [← map_pow, hζ.pow_eq_one, map_one]
-  set s := genericGeometricPoint (C := C) j
+  set s := (Etale.genericGeometricPoint (C := C) j : Spec (.of Ω) ⟶ _)
   have hs : pointRingHom s =
       CommRingCat.ofHom (toFunctionField j) ≫ CommRingCat.ofHom (algebraMap _ Ω) := by
     apply Spec.map_injective
     rw [Spec.map_preimage, Spec.map_comp, specMap_toFunctionField]
-    simp only [s, genericGeometricPoint, pointOfAlgebra, Category.assoc]
+    simp only [s, Etale.genericGeometricPoint, pointOfAlgebra, Category.assoc]
   have hc (r : k) : (pointRingHom s).hom (c r) =
       algebraMap C.functionField Ω (p.functionFieldConstants r) := by
     rw [hs]
