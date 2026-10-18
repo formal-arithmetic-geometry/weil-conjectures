@@ -15,9 +15,125 @@
   "def-pur-etale-derived-supported-sections",
   "def-asd-finite-etale-tate-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f:\\widehat S\\to S$ for the completion morphism and $k=A/\\mathfrak m$. By [lem-weil-pbc-adic-completion-noetherian], $\\widehat A$ is Noetherian. By [lem-weil-pbc-local-completion-local-ring], it is local with maximal ideal $\\mathfrak m\\widehat A$, and the induced map $k\\to\\widehat A/\\mathfrak m\\widehat A$ is an isomorphism. The quotient maps define closed immersions $i:s=\\operatorname{Spec}k\\hookrightarrow S$ and $\\widehat i:\\widehat s\\hookrightarrow\\widehat S$ by [lem-weil-pbc-spec-quotient-closed-immersion]. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $\\widehat S\\times_Ss$ with $\\operatorname{Spec}(\\widehat A\\otimes_A k)=\\operatorname{Spec}(\\widehat A/\\mathfrak m\\widehat A)=\\widehat s$. The tensor-to-quotient map sends $b\\otimes\\bar a$ to $b f^\\sharp(a)$ modulo $\\mathfrak m\\widehat A$, with inverse $\\bar b\\mapsto b\\otimes1$; these are well-defined mutually inverse maps. Thus the closed square is cartesian and its lower-dimensional projection $\\rho:\\widehat s\\to s$ is the residue-field isomorphism. Both $S$ and $\\widehat S$ are Noetherian schemes, and $\\ell$ remains invertible on $\\widehat S$ because its inverse in $A$ maps to an inverse in $\\widehat A$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion); affine closed square: schemes.tex Tags 01IG and 01JQ"
+   }
+  },
+  {
+   "text": "Excellence implies the G-ring property by [def-exc-excellent-ring]. Apply [def-weil-pbc-g-ring] at the maximal ideal $\\mathfrak m$. Since all elements outside $\\mathfrak m$ are already units, $A_{\\mathfrak m}=A$, and its local completion is precisely $\\widehat A$. Consequently $A\\to\\widehat A$ is flat, and each fibre algebra $B_{\\mathfrak p}=\\widehat A\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$. By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $f$ is flat as a scheme morphism. For every finite field extension $K/\\kappa(\\mathfrak p)$, [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] makes $K\\otimes_{\\kappa(\\mathfrak p)}B_{\\mathfrak p}$ a regular Noetherian ring. By [lem-weil-pbc-fibre-product-affine-spectra], its spectrum is the corresponding base change of the fibre of $f$, hence is regular by [def-weil-regular-scheme]. This verifies exactly the flatness and geometrically regular fibres required for regular base change. No regularity of $A$ itself is asserted.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QT (definition-excellent) and 07GH (definition-G-ring); algebra.tex Tag 0381 (lemma-geometrically-regular); morphisms.tex Tag 01U5 (lemma-flat-characterize)"
+   }
+  },
+  {
+   "text": "For either closed immersion $i:Z\\hookrightarrow X$ in Step 1, with open complement $j$, put $P_ZF=\\ker(F\\to j_*j^*F)$ and $i^!_0F=i^*P_ZF$. The statement of [lem-pur-etale-supported-kernel-adjunction] gives $P_ZF\\cong i_*i^!_0F$, the adjunction $i_*\\dashv i^!_0$, and exactness of $i_*$ on abelian sheaves. These assertions also hold on sheaves of constant $\\Lambda$-modules: all maps are natural for each scalar endomorphism of $F$, so the displayed isomorphism is $\\Lambda$-linear, and an adjoint transpose is $\\Lambda$-linear exactly when the original map is (apply naturality to multiplication by each $\\lambda\\in\\Lambda$). Exactness follows by the exact faithful forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $I$ is injective and $N\\hookrightarrow N'$ is a module-sheaf monomorphism on $Z$, exactness of $i_*$ and injectivity of $I$ make $\\operatorname{Hom}_X(i_*N',I)\\to\\operatorname{Hom}_X(i_*N,I)$ surjective. The adjunction identifies this with $\\operatorname{Hom}_Z(N',i^!_0I)\\to\\operatorname{Hom}_Z(N,i^!_0I)$. Thus $i^!_0I$ is injective by the definition of injectivity [def-sp-injective-resolutions].",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof; scalar-action transport and the written Hom extension argument"
+   }
+  },
+  {
+   "text": "Let $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$. Choose a bounded-below injective module-sheaf representative $I$ using [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. By [lem-weil-pbc-right-derived-plus-injective], $i^!K$ is represented by $i^!_0I$. Step 3 says its terms are injective on $Z$, so that same result computes $R\\Gamma(Z,i^!K)$ by $\\Gamma(Z,i^!_0I)$. The isomorphism $P_ZI\\cong i_*i^!_0I$ identifies this complex termwise with $\\Gamma(X,P_ZI)=\\ker(\\Gamma(X,I)\\to\\Gamma(X\\setminus Z,j^*I))$. By [def-pur-etale-derived-supported-sections] this last complex computes $R\\Gamma_Z(X,K)$. We obtain the natural identification $R\\Gamma_Z(X,K)\\cong R\\Gamma(Z,i^!K)$, normalized by the actual inclusion of the kernel into $\\Gamma(X,I)$. Naturality follows termwise from the natural kernel isomorphism; comparison maps and homotopies between injective representatives retain that equality.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, and the following supported derived-functor calculation; derived.tex Tags 013K and 05TH"
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-supported-base-change] to the cartesian closed square of Step 1, the regular morphism $f$ of Step 2, and $K=\\Lambda_S(m)[0]$. Its Noetherian and invertible-$\\ell$ assumptions hold by Step 1, and a sheaf in degree zero is bounded below. It yields the canonical isomorphism $\\beta_K:\\rho^*i^!K\\xrightarrow{\\sim}\\widehat i^!f^*K$. Apply [lem-asd-etale-finite-twist-pullback] with coefficient ring $\\Lambda$ and modulus $\\ell^n$ to identify $f^*\\Lambda_S(m)$ canonically with $\\Lambda_{\\widehat S}(m)$ for every signed integer $m$. In particular no choice of a root of unity or trivialization of the twist enters. The regular-supported comparison is specified by the closed counits and localization triangles, so this is the canonical supported comparison, with its stated normalization.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3 and the paragraph following it, printed p. 281; signed finite twists: Stacks etale-cohomology.tex Tag 03PK"
+   }
+  },
+  {
+   "text": "Under the identifications of Step 4, the supported pullback is the composite\n$$R\\Gamma(s,i^!K)\\longrightarrow R\\Gamma(\\widehat s,\\rho^*i^!K)\\xrightarrow{R\\Gamma(\\widehat s,\\beta_K)}R\\Gamma(\\widehat s,\\widehat i^!f^*K).$$\nHere is a representative check of this assertion, rather than only an abstract isomorphism of the groups. Take an injective representative $K\\to I$ on $S$, an injective resolution $f^*K\\to J$ on $\\widehat S$, and a comparison chain map $f^*I\\to J$ extending it; bounded-below K-injectivity in [lem-weil-pbc-dplus-injective-representative] supplies such a representative in the homotopy category. The sheaf pullback sends $P_sI$ into $P_{\\widehat s}f^*I$, since a section whose restriction to the open complement is zero still restricts to zero after base change. Applying $f^*I\\to J$ gives the chain map on supported kernels. Through Step 3 it is the map $\\rho^*i^!_0I\\to\\widehat i^!_0J$ whose closed counit composite is the pulled-back supported inclusion. The bounded-below derived adjunction [lem-trf-bounded-below-derived-adjunction], applied to the exact module-sheaf adjunction $\\widehat i_*\\dashv\\widehat i^!_0$ of Step 3 (enough injectives by Step 4), gives $\\widehat i_*\\dashv\\widehat i^!$ on $D^+$; by its counit formula the derived counit at the injective complex $J$ is the class of the termwise counit $\\widehat i_*\\widehat i^!_0J\\cong P_{\\widehat s}J\\subset J$. By the adjunction bijection, a map into $\\widehat i^!f^*K$ is determined by its composite with this counit. The canonical-counit specification in [lem-per-regular-supported-base-change] gives $\\beta_K$ the same composite, the pullback of the counit of $K$; hence the derived class of the chain map is $\\beta_K$. Taking sections and using Step 4 therefore gives exactly the displayed composite for the pullback defined by restriction of supported sections. A different comparison chain map gives a homotopic map, so the check is independent of these representatives.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-per-regular-supported-base-change",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3, the canonical supported exchange; representative verification using Stacks etale-cohomology.tex Tag 09XQ"
+   }
+  },
+  {
+   "text": "Since $\\rho:\\widehat s\\to s$ is the isomorphism of Step 1, pulling a sheaf back along $\\rho$ just transports it to the isomorphic etale site; its global sections and injective resolutions are transported by inverse equivalences. Thus the first arrow in Step 6 is an isomorphism. The second is an isomorphism because $\\beta_K$ is one. Applying cohomology in degree $q$ to that composite and using the identification $f^*K=\\Lambda_{\\widehat S}(m)$ of Step 5 proves the required canonical isomorphism $H^q_s(S,\\Lambda(m))\\to H^q_{\\widehat s}(\\widehat S,\\Lambda(m))$. This applies to every integer $q$; for $q<0$ both groups vanish since they are derived from a sheaf in degree zero by a left exact functor. The argument needs no finite type hypothesis on $f$, no regularity hypothesis on $S$, and no replacement of $s$ by a geometric point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.6.3, printed p. 279: completion reduction; the corollary is deduced explicitly above from 4.2.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "def-weil-regular-scheme",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-etale-derived-supported-sections",
+  "lem-per-regular-supported-base-change",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, completion reduction in the proof of Lemma 3.6.3, printed p. 279, reconstructed using the existing regular supported base-change Corollary 4.2.3 (printed p. 281) and the cited Stacks completion facts."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-top-residue-class",
@@ -77,5 +193,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-completion-supported-constant-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Derived the completion comparison from the existing prime-power regular supported exchange; verified Noetherianity, the scheme-theoretic closed fibre, regularity from the G-ring definition, signed twist pullback, and the actual supported pullback using injective kernel representatives. No new nodes; the source cites formal base change, whose required specialization is supplied by these existing nodes. No Lean attachment found.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, Proof Step 1 (dimension-normalized duality), through the potential-dualizing/normal-top-class branch in blueprint.from.via: this item supplies precisely the completion reduction in the proof of ILO XVII Lemma 3.6.3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the completed ring, required by regular supported exchange. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Maximal ideal and canonical residue-field identification, required to identify the closed fibre with the same residue-field scheme. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-quotient-closed-immersion",
+    "why": "Closed immersions of the residue-field spectra. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine tensor description of the closed fibre and the geometrically regular fibres. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Translation of ring-map flatness into flatness of the affine completion morphism. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Checks the finite-extension formulation of geometric regularity required by the cited regular supported exchange. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Closed support kernel identification, exact closed pushforward, and support adjunction, used to compare supported global sections with sections of i!. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exact faithful scalar-forgetting detects exactness of closed module pushforward. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Existence of module-sheaf injective resolutions in the ordinary etale categories. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Bounded-below injective/K-injective representatives, used to compute functors and represent the canonical pullback. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Computes the supported right derived functor and global sections on the same injective complexes. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Canonical pullback of signed roots-of-unity twists, including negative twists. This is a generic algebra or derived-functor interface; no node of the Fourier/perverse unit supplies it."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Generic bounded-below derived adjunction with termwise counit formula, used in Step 6 to identify the chain-level supported pullback with the canonical exchange beta by the adjunction bijection. Pure derived-category interface, outside both batch-5 assumptions; no node of the Fourier/perverse unit supplies it. (Added by the stage-1 reviewer.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-96080c50e",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-96080c50e (reviewer sub-agent of L); spot-checked: I read the item's full 7-step split (no new nodes; statement and stmt_deps identical to live) against ILO XVII Lemma 3.6.3 (printed p. 279). The source reduces to the complete case by formal base change (Fujiwara 6.6.4). The worker proves it instead through regular base change (ILO XVII Cor. 4.2.3, lem-per-regular-supported-base-change), which is valid because A excellent makes A→Â regular. Step 2 checks this correctly: G-ring at m, A_m=A, finite-extension geometric regularity via lem-weil-pbc-geometrically-regular-finitely-generated-extensions. Step 1 (residue-field iso, cartesian closed square), Steps 3-4 (supported kernel adjunction on Λ-modules, i^!_0 keeps injectives, RΓ_Z=RΓ(Z,i^!)), Step 5 (twist pullback with modulus ℓ^n, signed m) and Step 7 are correct. Small cases (field, Artinian, henselized DVR, q<0) agree. No duplicates (searched Fujiwara/formal base change/completion invariance), no cycle, no SGA. FIX (C1) in Step 6: identifying the chain-level supported pullback with β_K needs the derived adjunction î_*⊣î^! and its termwise counit, which nothing cited. I added lem-trf-bounded-below-derived-adjunction to the Step 6 uses with that sentence, and to proof_deps and tool_uses. Batch-5 flag: I recomputed the closure; its sec-trace-formula/sec-poincare-duality members are all generic (geometric morphisms, inverse-image exactness, derived adjunction, ind-étale invariance 05WR, henselian permanence, separated finite-type base change). None is part of either assumption or of their proofs, so the flag is accepted.; 1 file(s) fixed by the reviewer"
  }
 }
