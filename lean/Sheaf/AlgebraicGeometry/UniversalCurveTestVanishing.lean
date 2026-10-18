@@ -11,21 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import Sheaf.AlgebraicGeometry.NormalScheme
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.SmoothCurveConnectedCoproduct
-import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.SmoothCurveAlgClosedExtension
-import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
-import Sheaf.CategoryTheory.Galois.AbstractEquivalence
-import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
-import Sheaf.AlgebraicGeometry.AffineCurveCohomologicalDimension
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
+import Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing
 
 /-! # Vanishing in the universal curve test
 
@@ -129,7 +116,7 @@ these covers with $C\to U$ from slicing kills the original class on an etale cov
 7. For completeness the local killing criterion needs no extra vanishing theorem. If every element
 of an abelian presheaf $P$ is locally zero, any morphism $P\to F$ into a sheaf is zero: the image
 of each element restricts to zero on a cover, so is zero by the uniqueness part of the sheaf
-axiom. Apply this to the sheafification unit $P\to P^\#$ of [def-weil-pbc-sheafification]. The
+argument. Apply this to the sheafification unit $P\to P^\#$ of [def-weil-pbc-sheafification]. The
 unit is zero, and its universal property says there is a unique map $P^\#\to P^\#$ factoring it.
 Both the identity and zero map do, so they agree, and $P^\#=0$. The preceding steps establish
 local killing of $P_q$ first on affine objects and hence on all objects by their affine open
@@ -152,6 +139,79 @@ theorem isZero_universalCurveTest_higherDirectImage
         ((DerivedCategory.Plus.singleFunctor
           (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
             (Y.constantZMod d.natAbs)))) := by
-  sorry
+  let S := Spec (.of A)
+  let : Algebra A S.functionField := instAlgebraCarrierFunctionFieldSpec (.of A)
+  have : IsFractionRing A S.functionField := functionField_isFractionRing_of_affine (.of A)
+  let α : S.functionField ≃ₐ[A] L :=
+    IsLocalization.algEquiv (nonZeroDivisors A) S.functionField L
+  have : IsAlgClosed S.functionField := IsAlgClosed.of_ringEquiv L _ α.toRingEquiv.symm
+  let i : S.functionField ⟶ CommRingCat.of K :=
+    CommRingCat.ofHom ((algebraMap L K).comp α.toRingHom)
+  have hi : Spec.map i ≫ S.fromSpecStalk (genericPoint S) =
+      Spec.map (CommRingCat.ofHom (algebraMap L K)) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap A L)) := by
+    change Spec.map i ≫ (Spec (.of A)).fromSpecStalk _ = _
+    rw [Spec.fromSpecStalk_eq', ← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext a
+    exact congrArg (algebraMap L K) (α.commutes a)
+  have hsq : IsPullback e h (Spec.map i ≫ S.fromSpecStalk (genericPoint S)) f := by
+    rw [hi]
+    have hp : IsPullback h e f
+        (Spec.map (CommRingCat.ofHom (algebraMap L K)) ≫
+          Spec.map (CommRingCat.ofHom (algebraMap A L))) := by
+      exact IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback
+        sq.hom_fst sq.hom_snd
+    exact hp.flip
+  have hn : d.natAbs ≠ 0 := by
+    intro hz
+    have hd0 : d = 0 := Int.natAbs_eq_zero.mp hz
+    simp [hd0] at hd
+  have hunit : IsUnit (d.natAbs : A) := by
+    rcases le_total 0 d with hpos | hneg
+    · have heq : (d.natAbs : ℤ) = d := by
+        rw [Int.natCast_natAbs, abs_of_nonneg hpos]
+      have heqA : (d.natAbs : A) = (d : A) := by
+        simpa only [Int.cast_natCast] using congrArg (fun z : ℤ ↦ (z : A)) heq
+      rw [heqA]
+      exact hd
+    · have heq : (d.natAbs : ℤ) = -d := by
+        rw [Int.natCast_natAbs, abs_of_nonpos hneg]
+      have heqA : (d.natAbs : A) = -(d : A) := by
+        simpa only [Int.cast_natCast, Int.cast_neg] using congrArg (fun z : ℤ ↦ (z : A)) heq
+      rw [heqA]
+      exact hd.neg
+  let D : CurveTestDatum.{u} :=
+    { S₀ := S
+      isIntegrallyClosed_stalk := fun x ↦ (hA.2 x).2
+      X₀ := X
+      f₀ := f
+      K := K
+      i := i
+      Y₀ := Y
+      e := e
+      h := h
+      isPullback := hsq
+      d := d.natAbs
+      isUnit_d := by
+        simpa using hunit.map (Scheme.ΓSpecIso (.of A)).inv.hom }
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, q = n := ⟨q.toNat, by omega⟩
+  have : NeZero d.natAbs := ⟨hn⟩
+  apply isZero_cyclicHigherDirectImage_of_locally_zero h d.natAbs n
+  intro U u _ _ ξ
+  rcases (show n = 1 ∨ 2 ≤ n by omega) with rfl | hn'
+  · exact D.exists_cover_cohomologyMap_eq_zero (dvd_refl _) u ξ
+  · refine ⟨PUnit, fun _ ↦ U, fun _ ↦ 𝟙 U, fun _ ↦ inferInstance,
+      fun x ↦ ⟨⟨⟩, x, rfl⟩, fun _ ↦ ?_⟩
+    have big := (IsPullback.of_hasPullback h u).paste_horiz hsq
+    have : SmoothOfRelativeDimension 1 (u ≫ f) :=
+      inferInstanceAs (SmoothOfRelativeDimension (0 + 1) (u ≫ f))
+    have : SmoothOfRelativeDimension 1 (pullback.fst h u ≫ e) :=
+      (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback big.flip inferInstance
+    have : IsAffineHom h := MorphismProperty.of_isPullback hsq inferInstance
+    have : IsAffine Y := isAffine_of_isAffineHom h
+    have := (subsingleton_sheafH_constantZMod_and_nonempty_addEquiv_sheafH_zero
+      (pullback.fst h u ≫ e) hn).1 n hn'
+    rw [Subsingleton.elim ξ 0, map_zero]
 
 end AlgebraicGeometry.Etale

@@ -22,123 +22,52 @@
  ],
  "proof": [
   {
-   "text": "Put $n=|d|$. Since $A$ is a nonzero domain and $d$ is a unit, $n\\geq1$; the ideals $(d)$ and $(n)$ in $\\mathbf Z$ coincide and $n$ remains a unit after every restriction and field extension below. Thus we work with $M=\\mathbf Z/n\\mathbf Z$ without excluding negative integers $d$. By [sbc-lem-higher-direct-image-presheaf], $R^qh_*\\underline M$ is associated with $P_q(U)=H^q(U\\times_XY,\\underline M)=H^q(U\\times_S\\operatorname{Spec}K,\\underline M)$. The equality of fibre products follows by composing the two Cartesian squares. It suffices to kill every such class after an etale cover; the elementary sheafification argument is given in the last step. Affine opens cover each etale object, so it suffices to start with affine $U$.",
+   "text": "Identify A’s affine function field with L using the fraction-ring algebra equivalence. Transport the algebraically closed structure and compose the resulting map with L → K. The chosen Cartesian square is converted to the source CurveTestDatum orientation by the pullback universal property.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sheafification"
+    "def-sbc-normal-dominant-galois",
+    "sbc-def-base-change-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
+    "place": "Tag 0EYU, universal curve test datum"
    }
   },
   {
-   "text": "For affine etale $U\\to X$, the composite $U\\to S$ is smooth of relative dimension $0+1=1$ by [lem-sbc-smooth-relative-dimension-permanence]; its fibre $C=U\\times_S\\operatorname{Spec}K$ is smooth of relative dimension one by the same node. It is affine: if $U=\\operatorname{Spec}B$, then $C=\\operatorname{Spec}(B\\otimes_AK)$. Smoothness gives local finite presentation; affineness makes $C\\to\\operatorname{Spec}K$ quasi-compact and separated, hence finite type. To allow disconnected or empty $C$, use [lem-sc-smooth-curve-connected-coproduct] to decompose it into finitely many connected smooth curves $C_j$. Their inclusions are open and closed; being closed in affine $C$, each $C_j$ is affine. Apply [sbc-thm-cohomological-dimension-of-an-affine-curve] to each $C_j$ and only its $q>1$ clause. By [lem-weil-pbc-finite-coproduct-cohomology-assembly], $H^q(C,\\underline M)=\\prod_jH^q(C_j,\\underline M)=0$ for $q>1$. The empty product is the zero abelian group.",
+   "text": "Replace the signed coefficient d by d.natAbs. IsUnit d implies d ≠ 0 and hence d.natAbs ≠ 0; the cast of d.natAbs is a unit because d is either nonnegative or nonpositive. For each q ≥ 1, write q as a natural number and apply the cyclic local-vanishing theorem.",
    "uses": [
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "def-sbc-smooth-morphisms",
-    "lem-sc-smooth-curve-connected-coproduct",
+    "lem-sbc-cyclic-higher-direct-image-local-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, coefficient normalization"
+   }
+  },
+  {
+   "text": "In degree one use CurveTestDatum.exists_cover_cohomologyMap_eq_zero, which packages slicing, normal-base reduction, algebraically closed invariance, torsor trivialization and spreading. In degrees at least two, base change preserves smooth relative dimension one and the resulting affine smooth curve has subsingleton constant-sheaf cohomology.",
+   "uses": [
     "sbc-thm-cohomological-dimension-of-an-affine-curve",
-    "lem-weil-pbc-finite-coproduct-cohomology-assembly"
+    "sbc-thm-universal-test-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
-   }
-  },
-  {
-   "text": "For $q=1$, apply [sbc-lem-slicing] to the smooth composite $U\\to S$ from the preceding step. It gives a jointly surjective etale family $U_i\\to U$, with $U_i\\to V_i\\to S$, both $U_i,V_i$ affine, $U_i\\to V_i$ smooth with geometrically connected fibres and a section. Because $S$ and $V_i$ are affine, $V_i\\to S$ is separated: its diagonal is induced by the surjection $\\Gamma(V_i)\\otimes_A\\Gamma(V_i)\\to\\Gamma(V_i)$. Apply [sbc-lem-etale-over-normal] to the integral normal $S$, whose function field $L$ is separably closed. It writes $V_i$ as a disjoint union of open-and-closed summands $V_{i\\alpha}$, each identified with an open of $S$. First restrict $U_i$ to $U_{i\\alpha}=U_i\\times_{V_i}V_{i\\alpha}$; this is open and closed in the affine $U_i$, hence affine, and is still etale over $U$. Refine each nonempty $V_{i\\alpha}$ by affine open subsets $W$; this avoids assuming an arbitrary open of $S$ affine. Put $C_W=U_{i\\alpha}\\times_{V_{i\\alpha}}W$. This is affine, smooth with geometrically connected fibres and a section over $W$. Since $W\\to S$ is an open immersion, $C_W=U_{i\\alpha}\\times_SW$; the relative dimension is one by the permanence node applied to the etale composite $U_{i\\alpha}\\to U\\to X$ and base change to $W$. The $C_W\\to U$ still form an etale covering. Each nonempty affine open $W$ is integral normal with function field $L$: its local rings are those of $S$, and its generic point has the same local ring $L$. The canonical geometric generic point $\\operatorname{Spec}K\\to S$ therefore factors through every such $W$. We may now work with one pair $(C,W)$ of this form and the restriction $\\xi\\in H^1(C_K,\\underline M)$.",
-   "uses": [
-    "sbc-lem-slicing",
-    "sbc-lem-etale-over-normal",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "def-sbc-normal-dominant-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
-   }
-  },
-  {
-   "text": "The generic fibre $C_L$ is a smooth separated curve over $L$, and it is connected and nonempty because $C\\to W$ has geometrically connected fibres and a section. The map $C_K\\to C_L$ is the base change for the given field extension $L\\subseteq K$ (here the specified generic factorization of $g$ is essential). Apply [sbc-thm-algebraically-closed-invariance] in degree one; it supplies $\\bar\\xi\\in H^1(C_L,\\underline M)$ pulling back to $\\xi$. By [sbc-prop-torsors-h1], $\\bar\\xi$ is represented by a finite etale $M$-torsor $P\\to C_L$, naturally under pullback. Do not assume $P$ connected. For the next step fix the geometric base point $\\sigma(\\eta):\\operatorname{Spec}L\\to C_L$ and a point $p$ in the fibre of $P$ there; the fibre is nonempty by the torsor condition and is split by [lem-galois-geometric-fibre], since $L$ is algebraically closed.",
-   "uses": [
-    "sbc-thm-algebraically-closed-invariance",
-    "sbc-prop-torsors-h1",
-    "lem-galois-geometric-fibre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
-   }
-  },
-  {
-   "text": "Here is the connected-component argument in the unit, rather than the incorrect claim that every torsor is connected. By [lem-fet-galois-category] and [thm-galois-abstract-equivalence], finite etale covers of connected $C_L$ are finite continuous $\\pi_1(C_L,\\sigma(\\eta))$-sets. Identify the fibre of $P$ with $M$ using $p$. The monodromy is translation by the homomorphism $f_P$ of [sbc-prop-torsors-h1]. Put $G=\\operatorname{im}f_P\\subset M$. The subset $G\\subset M$ is invariant and nonempty, so the equivalence realizes its inclusion as a finite etale subcover $Z\\to P$. The orbit decomposition $M=\\coprod_{a\\in M/G}(a+G)$ shows $Z$ is an open-and-closed component. It is connected: a decomposition into two nonempty open-and-closed finite etale pieces would decompose the transitive $\\pi_1$-set $G$ into two invariant subsets. Translations by $G$ commute with the monodromy and act simply transitively on its fibre; full faithfulness transports these automorphisms and their group laws to $Z$. Thus $Z\\to C_L$ is a finite etale Galois cover with group $G$. The chosen label $0\\in G$ is a point above $\\sigma(\\eta)$, rational over $L$ by [lem-galois-geometric-fibre]. Its degree $|G|$ divides $n=|M|$ by the partition into cosets, hence is a unit on $W$: if $n=|G|a$, an inverse is $a n^{-1}$. The map $Z\\to P$ gives a section of $Z\\times_{C_L}P\\to Z$, namely $z\\mapsto(z,z\\mapsto P)$; the torsor is therefore trivial on $Z$, and the natural pointed bijection of [sbc-prop-torsors-h1] says $\\bar\\xi|_Z=0$.",
-   "uses": [
-    "lem-fet-galois-category",
-    "thm-galois-abstract-equivalence",
-    "sbc-prop-torsors-h1",
-    "lem-galois-geometric-fibre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
-   }
-  },
-  {
-   "text": "Apply [sbc-thm-spreading-finite-etale-galois] with base $W$ and curve $C$. All its hypotheses now hold: $W$ is affine, hence qcqs, integral normal; $C\\to W$ is affine smooth, hence qcqs, has geometrically connected fibres and the restricted section; $|G|$ is invertible; and $Z$ has the required rational point over that section. Obtain a finite etale Galois cover $T\\to C$ with $T_L\\simeq Z$. It is surjective by its torsor condition, so it is an etale covering of $C$. Pulling $\\bar\\xi|_Z=0$ to $K$ gives $\\xi|_{T_K}=0$. Explicitly, $T\\times_CC_K\\simeq T_L\\times_LK\\simeq Z\\times_LK$; functoriality of cohomology identifies restriction of $\\xi$ with pullback of $\\bar\\xi|_Z$. The torsor interpretation is natural by [sbc-prop-torsors-h1]. Composing these covers with $C\\to U$ from slicing kills the original class on an etale cover of $U$.",
-   "uses": [
-    "sbc-thm-spreading-finite-etale-galois",
-    "sbc-prop-torsors-h1",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
-   }
-  },
-  {
-   "text": "For completeness the local killing criterion needs no extra vanishing theorem. If every element of an abelian presheaf $P$ is locally zero, any morphism $P\\to F$ into a sheaf is zero: the image of each element restricts to zero on a cover, so is zero by the uniqueness part of the sheaf axiom. Apply this to the sheafification unit $P\\to P^\\#$ of [def-weil-pbc-sheafification]. The unit is zero, and its universal property says there is a unique map $P^\\#\\to P^\\#$ factoring it. Both the identity and zero map do, so they agree, and $P^\\#=0$. The preceding steps establish local killing of $P_q$ first on affine objects and hence on all objects by their affine open covers. Thus $R^qh_*\\underline M=P_q^\\#=0$ for every $q\\geq1$.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
+    "place": "Tag 0EYU, degrees one and above"
    }
   }
  ],
  "proof_deps": [
-  "sbc-lem-higher-direct-image-presheaf",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-sheafification",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "def-sbc-smooth-morphisms",
-  "lem-sc-smooth-curve-connected-coproduct",
+  "lem-sbc-cyclic-higher-direct-image-local-vanishing",
   "sbc-thm-cohomological-dimension-of-an-affine-curve",
-  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-  "sbc-lem-slicing",
-  "sbc-lem-etale-over-normal",
+  "sbc-thm-universal-test-vanishing",
   "def-sbc-normal-dominant-galois",
-  "sbc-thm-algebraically-closed-invariance",
-  "sbc-prop-torsors-h1",
-  "lem-galois-geometric-fibre",
-  "lem-fet-galois-category",
-  "thm-galois-abstract-equivalence",
-  "sbc-thm-spreading-finite-etale-galois"
+  "sbc-def-base-change-square"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYU, theorem-smooth-base-change, second proof: final universal curve-test argument"
+  "place": "Tag 0EYU, second proof, universal curve-test argument, implemented through existing CurveTestDatum and cyclic local-vanishing interfaces"
  },
  "mathlib_searches": [
   {
@@ -228,9 +157,7 @@
    }
   ]
  },
- "tool_uses": [
-  "sbc-lem-higher-direct-image-presheaf"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -256,5 +183,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261018T062949-L-691641",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
