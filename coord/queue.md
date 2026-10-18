@@ -1,6 +1,6 @@
 # Work queue
 
-55 items; claim with `tools/claim.py next <group> [--stage N]`.
+54 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (55)
+## Stage 3: modules to prove (54)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -23,7 +23,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 12 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
