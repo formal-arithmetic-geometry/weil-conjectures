@@ -20,7 +20,8 @@
   "def-kun-derived-tensor",
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-per-galois-partition-modules"
  ],
  "proof": [
   {
@@ -193,5 +194,28 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-45553e2d1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and ILO XVII 7.3.1-7.3.8 and 7.6.1-7.6.11 (pp. 303-314) in full. The item's statement is unchanged from the base (checked against the Q57 snapshot) and matches ILO 7.6.10 with Definition 7.6.8, all three clauses of (B) included. Step 1 takes (2) of the uniform-bounds node, which supplies partitions and bounds independent of N. Step 2 is genuinely elementary: the shift sign gives the bound c_Z+d_i. In Step 3 the partition Q_U is fixed before Rj_* is applied, and (1) gives the bound c_U+d_j. Step 4 takes exactness of i_*, i^*i_* = 1 and j^*i_* = 0 from the trf node, and Q_0 (Q_Z plus the components of U with identity covers) is a valid Galois partition. Step 5 uses the triangle and the long exact sequence; the coker/ker extension and the max bound need no rotation shift. New node lem-per-etale-internal-hom-localization is true: it is the ILO 7.6.10 triangle, restricted to bounded K and bounded-below N, and no DAG node duplicates it. New node lem-per-galois-localization-uniform-bounds combines 7.6.3 and 7.6.5-7.6.7. The word 'ouverte' in the printed 7.6.6 is correctly recorded as a typo for a closed immersion, as the proof shows. Arbitrary A is justified: Rj_* and Ri^! can be computed on the underlying Lambda-sheaves, and FCons membership depends only on the pi_1-module. Neither new node restates a clause of the item or its parent. Edge cases checked: Z or U or X empty, K = 0, A = Lambda[t]. Batch-5 check: lem-trf-oriented-closed-base-localization is already in the closure of the nt-target-weil-conjectures and nt-target-zeta-rational targets without this citation, which removes 0 nodes. Its own 228-node closure is generic topos and module infrastructure with no trace-formula or Poincare-duality statement, so it lies outside the assumed statements and is accepted. Accepted tool_uses: that trf node and lem-sf-derived-homology-long-exact. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CtfHomLocalizationDevissage",
+  "declaration": "AlgebraicGeometry.Etale.ctf_hom_localization_devissage",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SatisfiesConditionB",
+   "AlgebraicGeometry.Etale.ctf_hom_localization_devissage"
+  ],
+  "file": "lean/Sheaf/Paper/CtfHomLocalizationDevissage.lean",
+  "statement": "theorem ctf_hom_localization_devissage (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod l) A] (hDual : (fun (R : Type (u + 1)) [CommRing R] ↦ ∃ Q : DerivedCategoryModule R X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) X Q ∧ ∀ M : DerivedCategoryModule R X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) X M → DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) X (((derivedHom (ModuleCat.{u + 1} R) X).obj (op M)).obj Q) ∧ IsIso ((derivedTensorHomAdjunction (ModuleCat.{u + 1} R) (((derivedHom (ModuleCat.{u + 1} R) X).obj (op M)).obj Q)).homEquiv M Q (((derivedTensorSymmetry (ModuleCat.{u + 1} R) X).hom.app (((derivedHom (ModuleCat.{u + 1} R) X).obj (op M)).obj Q)).app M ≫ (derivedTensorHomAdjunction (ModuleCat.{u + 1} R) M).counit.app Q))) (ULift.{u + 1} (ZMod l))) {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hcomp : Set.range i.base ∩ Set.range j.base = (∅ : Set X) ∧ Set.range i.base ∪ Set.range j.base = Set.univ) (K : DerivedCategoryModule A X) (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K) (hi : SatisfiesConditionB A Z ((Etale.upperStar (ModuleCat.{u + 1} A) i).mapDerivedCategory.obj K)) (hj : SatisfiesConditionB A U ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj K)) : SatisfiesConditionB A X K",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the already landed def-per-galois-partition-modules. Condition (B) is a helper for this node. The canonical biduality arrow is written directly using the tensor--Hom adjunction and signed symmetry, avoiding an import of the downstream coefficient-comparison theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df120a7c5",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement matches ILO XVII 7.6.8/7.6.10 and the node clause by clause: (B) has the source's quantifier order (∀P ∃P' c ∀N∈D^b_P), IsLE 0 = H^q=0 for q>0, and the constructibility clause is limited to D^b_P inputs. The dualizing hypothesis uses the canonical evaluation-transpose arrow, the same formula as the landed ctfHomBidualMap and HasConditionBDuality; the beta-redex wrapper adds no assumption. i,j are complementary closed/open immersions, i*K and j*K are ordinary upperStar restrictions, and K is constructibleFiniteTor. Partition classes reuse the landed def-per-galois-partition-modules (correctly added to stmt_deps). No duplicate (B) predicate: the parent states it inline and the bidual defs exist only in theorem modules. Edge cases: empty X/Z/U, K=0, infinite or zero A, char ℓ; universes are the project convention. nt_compile --json: 2.7 s, clean; control copy with an error reported it; lean.statement is verbatim. Advisory: derivedTensorSymmetry and the upstream boundedConstructible/constructibleFiniteTor predicates come from nodes outside stmt_deps, as in the landed parent and sibling; two imports are only for the proof."
  }
 }
