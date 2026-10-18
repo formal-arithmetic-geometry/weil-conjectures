@@ -143,17 +143,24 @@ theorem WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits {T Y : Schem
     0 r (by exact_mod_cast hr)).of_iso ((DerivedCategory.homologyFunctor _ r).mapIso e)
 
 /-- **Finite pushforward is exact on pro-étale sheaves of `ℚ̄_ℓ`-modules**: for a finite morphism
-`g : X ⟶ Y`, the direct image `g_*` of pro-étale sheaves of (discrete) `ℚ̄_ℓ`-modules preserves
-finite colimits. This is the pro-étale analogue of the exactness of finite direct images for
-étale sheaves (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), and the
-input of the passage to `ℚ̄_ℓ`-coefficients of blueprint `def-weil-pbc-qbar-category`.
+`g : X ⟶ Y` of finite presentation, the direct image `g_*` of pro-étale sheaves of (discrete)
+`ℚ̄_ℓ`-modules preserves finite colimits. This is the pro-étale analogue of the exactness of
+finite direct images for étale sheaves
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), and the input of the
+passage to `ℚ̄_ℓ`-coefficients of blueprint `def-weil-pbc-qbar-category`.
 
 It is not yet available: unlike for closed immersions, covers of `X ×_Y V` are not refined by
 base changes of covers of `V`, and a finite algebra over a w-contractible ring need not be
 w-contractible (its `π₀` need not be extremally disconnected), so the closed-immersion argument
-via henselian lifts does not apply directly. -/
+via henselian lifts does not apply directly. A plausible route: for `A` w-contractible and `B`
+finite and finitely presented over `A`, `B` is again w-contractible, so `X ×_Y V` is weakly
+contractible for every weakly contractible affine `V` over `Y`.
+
+Finite presentation is needed: for a separably closed field `k`, the closed immersion
+`Spec C(βℕ ∖ ℕ, k) ⟶ Spec C(βℕ, k)` is finite but its open complement is not quasi-compact,
+and exactness of its pushforward would make `Γ(Spec C(βℕ ∖ ℕ, k), -)` exact. -/
 theorem ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite {X Y : Scheme.{u}}
-    (g : X ⟶ Y) [IsFinite g] :
+    (g : X ⟶ Y) [IsFinite g] [LocallyOfFinitePresentation g] :
     PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]) :=
   sorry
 
@@ -176,6 +183,12 @@ theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
   have : IsFinite (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))) :=
     Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsFinite) p _ ‹_›
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : LocallyOfFinitePresentation (Scheme.Hom.geometricFiberMap p
+      (comp_over p (Spec (CommRingCat.of k₀)))) :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange
+      (P := @LocallyOfFinitePresentation) p _ inferInstance
   have := ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite (l := l)
     (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))
   have := ProEtale.preservesFiniteColimits_adicLowerStar_of_preservesFiniteColimits (l := l)

@@ -9119,6 +9119,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp

@@ -60,8 +60,7 @@ of `sbc-thm-finiteness-finite-type` is `lem-dg-compact-support-amplitude`.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
-- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` and
-  `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek`
 - `thm-fin-open-immersion`, both in the namespace `AlgebraicGeometry.Etale`:
   `boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmersion` and
@@ -537,43 +536,6 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
     exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ c.g (c.g ≫ aY) aY
       rfl _ (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
-
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
-
-**Finiteness of compactly supported direct images with `ℚ̄_ℓ`-coefficients.** For a prime `ℓ`
-invertible in `k` and `f : X ⟶ Y` separated of finite type between finite-type `k`-schemes,
-`Rf_!` carries `D^b_c(X, ℚ̄_ℓ)` into `D^b_c(Y, ℚ̄_ℓ)`.
-
-The coefficients here are *discrete*: this is étale cohomology with values in the
-`ℚ`-vector space `ℚ̄_ℓ`, not the `ℓ`-adic cohomology of the blueprint, which is obtained from
-the finite-coefficient case `boundedConstructible_rightDerivedLowerShriek` by passing to the
-limit over the `ℤ/ℓⁿ` and inverting `ℓ` (the pro-étale `Dᵇc(-)⟦padicAlgClRingObj ℓ⟧`). The two
-differ: for an elliptic curve `E` over an algebraically closed field, `H¹(E, ℚ̄_ℓ) = 0` with
-discrete coefficients. The statement is still true, but by a different argument: Galois
-cohomology with coefficients in a `ℚ`-vector space vanishes in positive degrees, so on a
-normal scheme the constant sheaf is `Rη_*` of its restriction to the generic points; this
-settles the proper normal case via Stein factorization, the general proper case follows by
-induction on the dimension from the normalization square, and constructible sheaves reduce to
-constant ones through finite étale covers trivializing their (finite) monodromy, the trace
-splitting them off. None of this, nor the stalk description of higher direct images it relies
-on, is formalised.
-
-As for `Rf_!` with finite coefficients, `Y` has to be quasi-compact: for the proper morphism
-`f : ⊔ₙ Xₙ ⟶ ⊔ₙ Spec k`, with `Xₙ` the union of the `n + 2` coordinate hyperplanes of `ℙⁿ⁺¹_k`,
-the constant sheaf has `Hⁿ(Xₙ, ℚ̄_ℓ) ≠ 0` (the nerve of the cover of `Xₙ` by its components is
-the boundary of an `(n + 1)`-simplex, and the components and their intersections are normal, so
-have no higher cohomology with rational coefficients), so `Rf_! ℚ̄_ℓ` is not bounded. -/
-theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact l.Prime]
-    (hl : ringChar k ≠ l) (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
-    (hf : f ≫ aY = aX)
-    (K : _root_.DerivedCategory
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))))
-    (hK : DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) X K) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) Y
-      ((R(f)_![ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]).obj K) :=
-  sorry
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
