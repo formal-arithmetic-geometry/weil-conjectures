@@ -227,22 +227,28 @@
    "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalSections",
    "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFibre",
    "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalRho",
-   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFrobenius"
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFrobenius",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalCompactSections",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalCompactStep",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalRepeatedTransport",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalComparedTransport",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalFrobenius",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalFrobeniusCohomology"
   ],
   "file": "lean/Sheaf/Paper/TraceFormulaLocalFrobeniusOperator.lean",
   "statement": "def finiteLocalFrobenius (T : TraceFormulaCoefficientConventions.{u}) (K : T.strictWeilComplex) (m : ℕ) (hm : 1 ≤ m) (z : Spec (.of T.datum.k) ⟶ T.geometricBaseChange) (hz : z ≫ T.datum.schemeFrobeniusIterate T.X₀ m = z) : (T.finiteLocalFibre z).obj K.obj.carrier ⟶ (T.finiteLocalFibre z).obj K.obj.carrier",
   "branch": "newtargets-dag",
-  "by": "Q52",
+  "by": "N9",
   "date": "2026-10-18",
   "existing": false,
-  "note": "§1(B): the recorded Etale.frobeniusOperator is a linear operator on Hom(unit,M) in an etale sheaf-derived category. It does not supply clause 2 of this node on the ordinary module complex Fib_s(Lz^*K) for the recorded intrinsic pro-etale strict Weil complex. This module publicly retains that upstream declaration and supplements it with clause 2 only: finiteLocalFibre, the canonical fixed-point rho, and the local operator using the specified kappa and iterated Weil isomorphism. Clause 1, the compact-support operator F_{c,K}^m, is not stated by this new clause-2 module and was not stated by the old Etale.frobeniusOperator either. No arbitrary transport is assumed."
+  "note": "§1(B), repair R2: retain the existing local module, its finiteLocalFrobenius primary declaration and signature, and its four local declarations unchanged. The previous record supplied only clause 2; clause 1 on the actual compact-support module complex was missing. Append six global definitions in this same owning module: compact sections, degree-one transport, repeated transport, comparison transport, Frobenius, and its maps in every cohomological degree. All constructions use the recorded canonical transport and comparisons; no arbitrary map is supplied."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-51d411585",
-  "group": "Q52",
-  "result": "pass",
-  "note": "Re-delivery fixes both RETURN findings of 4a7859e. (R1) The def-weil-proetale-geometric-stalk node file is byte-identical to side again. The three point-stalk helpers moved into LocalFrobeniusConjugacy.lean with lem-trf-local-frobenius-conjugacy blueprint docstrings and are listed in the item's lean.declarations; the separate helper module and its import were deleted. The only change in the move is an explicit HasDerivedCategory.{u+1} instance, the same localization the existing point fibre uses. (R2) The def-trf-frobenius-operators lean.note and the report say clause 1 (F_{c,K}^m) is stated by neither the new module nor the old Etale.frobeniusOperator. Re-checked: both node files differ from side only in lean; signatures verbatim; all declarations exist; no name clashes. Every item clause matches the node: d lifts and orbit Spec(sigma^i)>>z>>g^i, the exists-unique F_{q^m} point, T_0=id and the HEq cocycle for i,j>=0, conjugacy T.hom>>F0>>T.inv, trace equality with perfectness concluded, one-circuit independence. finiteLocalFrobenius = rho>>Fib(Lz^*(kappa>>phi^[m])) matches clause 2. No extra hypotheses, universe restrictions or hollow definitions; the only proofs are sorry. nt_compile.py --json on both snapshot files: exit 0, no diagnostics (4.6-4.9 s, 12.9-13.2 s). Non-blocking note: clause 1 of def-trf-frobenius-operators still has no Lean statement, as the record's note says."
+  "reviewer": "NT-stage2-cc-f7da57a30",
+  "group": "N9",
+  "result": "fix",
+  "note": "R1 repaired: theorem lem-trf-frobenius-pullback-comparison-coherence replaced in stmt_deps by new existing:true def node def-trf-frobenius-pullback-power-comparison (5 plain defs, no choose); its lemma stmt_dep constructs c_{h,k}, so it is genuine. R2 repaired: def-trf-frobenius-operators record is a superset on TraceFormulaLocalFrobeniusOperator (same primary signature, 4+6 decls; live record unchanged since base). Mechanical finding: lem-trf-point-transport-composition is genuine, since pointPowerTransportFinite comes from Classical.choose of pointPowerFiniteSigma_existsUnique, so PASS on it. Item math unchanged from 04e83 and correct; record statement matches the file verbatim. FIX: the delivered dep module text predates live and drops 8 public imports; fixes/TraceFormulaLocalFrobeniusOperator.lean = live text + the 2 imports, 3 set_options and 6 defs. nt_compile --json clean: fix 16.8 s, item 21.5 s, live importer LocalFrobeniusConjugacy 17.1 s."
  }
 }

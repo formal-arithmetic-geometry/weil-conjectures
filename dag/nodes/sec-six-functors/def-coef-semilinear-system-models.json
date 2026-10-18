@@ -192,9 +192,10 @@
   "file": "lean/Sheaf/Paper/SemilinearSystemModels.lean",
   "statement": "abbrev Systems",
   "branch": "newtargets-dag",
-  "by": "NF",
+  "by": "NK",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "§1(B) repair: the current published source fails universe inference in scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel because the smaller-coefficient sheafification instance is tried at an arbitrary max coefficient universe. Disable that competing instance while elaborating this module, as in the existing tower dependency modules, then restore it. All declarations and mathematical interfaces are retained."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -207,9 +208,9 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8a244d7e9",
-  "group": "NF",
+  "reviewer": "NT-stage2-cc-00d48d80e",
+  "group": "NK",
   "result": "fix",
-  "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
+  "note": "Item module byte-identical to the PASSed 0d59aa7 (sha 324985b6); statement re-checked vs node/source: f's own geometric fibres, recorded proEtaleRingCompactSupportImage with canonical constant rings, finite clause gives Dctf + [a,b+2d], tower clause R=O_E/ℓ^(n+1) covers all positive levels, gives Tor interval + vanishing outside [a,b+2d]; Fcomparison makes the quantification over base/ops sound; gates and verbatim statement OK. Compiles clean against the live dependency (rc 0, 6.9/6.5 s at load ~88). F1: the delivered SemilinearSystemModels.lean is stale and drops two public imports (KFlatResolutionIndependentCoefficients, CoefficientHomRepresentativeEvaluation) that live has; the edit is unneeded because live already disables the instance. FIX: fixes/SemilinearSystemModels.lean = live text (sha 89b6054c). M1: dep record by NF→NK plus an inaccurate note; land with --revert-nodes def-coef-semilinear-system-models if possible."
  }
 }

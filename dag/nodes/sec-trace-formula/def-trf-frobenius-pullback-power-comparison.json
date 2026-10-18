@@ -1,0 +1,103 @@
+{
+ "id": "def-trf-frobenius-pullback-power-comparison",
+ "kind": "definition",
+ "title": "Canonical positive Frobenius pullback-power comparisons",
+ "status": "split",
+ "statement": "Fix the finite-field coefficient datum S of [def-trf-coefficient-conventions], and let g be its geometric Galois Frobenius of [def-trf-scheme-frobenius]. In the ordinary constant-coefficient pro-etale derived category of [def-weil-pbc-proetale-operations], put P_m=L(g^m)^* for m≥1 and T=P_1. For any endofunctor T define T^1=T and T^{m+1}=T∘T^m. Let C_{a,b}:P_{a+b}≅P_b∘P_a be the inverse of the canonical derived pullback composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], with coefficient identification [pur713-def-pullback-comparison] and the equality g^{a+b}=g^b∘g^a inserted. Define d_m:P_m≅T^m recursively by d_1=id and d_{m+1}=T(d_m)∘C_{1,m}. Positive m is encoded by its predecessor r=m−1. These are definitions of the actual comparisons, without any assertion of coherence.",
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "pur713-def-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
+  "place": "m-th-iterate assertion; operator definition clause 1 and canonical pullback-power comparisons in the proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between pullback along positive powers of geometric Frobenius and repeated derived pullback",
+   "results": "8 hits: iterateFrobeniusEquiv_eq_pow, iterateFrobenius_eq_pow, iterateFrobenius_mul_apply, CategoryTheory.Limits.pullbackComparison, coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv.congr_simp, iterate_frobeniusEquiv_symm_pow_p_pow, CategoryTheory.Limits.instIsIsoPullbackComparison. None is the specialized derived comparison.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "frobeniusPullbackPowerComparison",
+   "results": "0 hits; unknown identifier 'frobeniusPullbackPowerComparison'.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPullbackPower|trfPositiveFunctorPower (Mathlib, upstream WeilConjectures, lean/Sheaf, dag/nodes); blueprint_refs.py search frobenius-pullback-power",
+   "results": "Mathlib wrapper: 0 hits. Upstream: no hits. lean/Sheaf: the five plain definitions in Sheaf.Paper.FrobeniusPullbackComparisonCoherence. DAG: only the coherence theorem record lists them as auxiliary declarations; no definition node. blueprint_refs.py: 0 blueprint nodes match.",
+   "date": "2026-10-18",
+   "verdict": "Reuse existing definitions without a new module; separate definition node requested by R1."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-operator-compact-description",
+  "date": "2026-10-18",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "The canonical d_m and actual pullback powers used to state the compact-support formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusPullbackComparisonCoherence",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPowerComparison",
+  "declarations": [
+   "WeilConjectures.trfPositiveFunctorPower",
+   "WeilConjectures.trfPositiveFunctorPowerSplit",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPower",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPowerSplit",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPowerComparison"
+  ],
+  "statement": "def frobeniusPullbackPowerComparison (S : TraceFormulaCoefficientConventions.{u}) :\n    (r : ℕ) → S.frobeniusPullbackPower r ≅\n      trfPositiveFunctorPower (S.frobeniusPullbackPower 0) r",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "R1: these are plain existing definitions, not choices from the coherence theorem. This node records their construction; the coherence theorem remains solely a proof dependency of the consuming item."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7da57a30",
+  "group": "N9",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7da57a30",
+  "group": "N9",
+  "result": "fix",
+  "note": "R1 repaired: theorem lem-trf-frobenius-pullback-comparison-coherence replaced in stmt_deps by new existing:true def node def-trf-frobenius-pullback-power-comparison (5 plain defs, no choose); its lemma stmt_dep constructs c_{h,k}, so it is genuine. R2 repaired: def-trf-frobenius-operators record is a superset on TraceFormulaLocalFrobeniusOperator (same primary signature, 4+6 decls; live record unchanged since base). Mechanical finding: lem-trf-point-transport-composition is genuine, since pointPowerTransportFinite comes from Classical.choose of pointPowerFiniteSigma_existsUnique, so PASS on it. Item math unchanged from 04e83 and correct; record statement matches the file verbatim. FIX: the delivered dep module text predates live and drops 8 public imports; fixes/TraceFormulaLocalFrobeniusOperator.lean = live text + the 2 imports, 3 set_options and 6 defs. nt_compile --json clean: fix 16.8 s, item 21.5 s, live importer LocalFrobeniusConjugacy 17.1 s."
+ }
+}

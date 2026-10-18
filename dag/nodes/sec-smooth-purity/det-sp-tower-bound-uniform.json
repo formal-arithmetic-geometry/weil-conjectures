@@ -28,7 +28,8 @@
   "def-weil-pbc-projection-compactification",
   "sk-def-sp-normalized-towers",
   "det-sp-tower-shriek-levels",
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-semilinear-system-models"
  ],
  "proof": [
   {
@@ -436,5 +437,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportUniformTorBound",
+  "declaration": "AlgebraicGeometry.ProEtale.compactSupport_uniform_tor_bound",
+  "file": "lean/Sheaf/Paper/CompactSupportUniformTorBound.lean",
+  "statement": "theorem compactSupport_uniform_tor_bound (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) [QuasiCompact c.i] (d : ℕ) (_hd : ∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) (a b : ℤ) (_hab : a ≤ b) : (∀ (A : Type u) [CommRing A] [Finite A], (∃ r : ℕ, 0 < r ∧ (l : A) ^ r = 0) → ∀ M : proEtaleDerivedCategory X A, spFiniteConstructibleTor X A M → HasProEtaleTorAmplitude X A M a b → spFiniteConstructibleTor Y A ((proEtaleRingCompactSupportImage c (proEtaleConstantRing Y A) (proEtaleConstantRing c.Z A) (proEtaleConstantRing X A) (proEtaleConstantRingComparison c.g A) (proEtaleConstantRingComparison c.i A)).obj M) ∧ HasProEtaleTorAmplitude Y A ((proEtaleRingCompactSupportImage c (proEtaleConstantRing Y A) (proEtaleConstantRing c.Z A) (proEtaleConstantRing X A) (proEtaleConstantRingComparison c.g A) (proEtaleConstantRingComparison c.i A)).obj M) a (b + 2 * (d : ℤ))) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (base : SpTowerShriek.Base l E) (ops : SpTowerShriek.Operations l E base) (C : SpTowerShriek.D l E X), (∀ n : ℕ, spFiniteConstructibleTor X (SpTowerShriek.R l E n) ((SpTowerShriek.Ev l E X n).obj C) ∧ HasProEtaleTorAmplitude X (SpTowerShriek.R l E n) ((SpTowerShriek.Ev l E X n).obj C) a b) → ∀ n : ℕ, HasProEtaleTorAmplitude Y (SpTowerShriek.R l E n) ((SpTowerShriek.Ev l E Y n).obj ((SpTowerShriek.F l E base ops c).obj C)) a (b + 2 * (d : ℤ)) ∧ ∀ q : ℤ, (q < a ∨ b + 2 * (d : ℤ) < q) → IsZero ((@DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y (SpTowerShriek.R l E n))) _ _ (HasDerivedCategory.standard _) q).obj ((SpTowerShriek.Ev l E Y n).obj ((SpTowerShriek.F l E base ops c).obj C))))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00d48d80e",
+  "group": "NK",
+  "result": "fix",
+  "note": "Item module byte-identical to the PASSed 0d59aa7 (sha 324985b6); statement re-checked vs node/source: f's own geometric fibres, recorded proEtaleRingCompactSupportImage with canonical constant rings, finite clause gives Dctf + [a,b+2d], tower clause R=O_E/ℓ^(n+1) covers all positive levels, gives Tor interval + vanishing outside [a,b+2d]; Fcomparison makes the quantification over base/ops sound; gates and verbatim statement OK. Compiles clean against the live dependency (rc 0, 6.9/6.5 s at load ~88). F1: the delivered SemilinearSystemModels.lean is stale and drops two public imports (KFlatResolutionIndependentCoefficients, CoefficientHomRepresentativeEvaluation) that live has; the edit is unneeded because live already disables the instance. FIX: fixes/SemilinearSystemModels.lean = live text (sha 89b6054c). M1: dep record by NF→NK plus an inaccurate note; land with --revert-nodes def-coef-semilinear-system-models if possible."
  }
 }

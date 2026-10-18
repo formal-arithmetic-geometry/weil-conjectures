@@ -18,7 +18,9 @@
   "def-trf-strict-weil-complex",
   "def-trf-frobenius-operators",
   "def-trf-iterated-weil-map",
-  "def-weil-frobenius-cohomology-transport"
+  "def-weil-frobenius-cohomology-transport",
+  "lem-trf-point-transport-composition",
+  "def-trf-frobenius-pullback-power-comparison"
  ],
  "proof": [
   {
@@ -221,5 +223,27 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-187ec5de2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full; review.md has the details. The item statement is unchanged and matches main-20261015 and master sk-d-weil verbatim. Coefficients are A_{E,n} constant pro-etale throughout. The derived pullback of def-weil-derived-pullback-tensor-hom is the same as the module pullback of def-weil-pbc-proetale-operations, and c_{h,k} is the comparison of lem-weil-pbc-proetale-derived-pullback-composition. 'Base change along g^m' is read as the direct transport tau^(m), which is the stronger reading, so the target is not weakened. Step 1 unfolds clause 1 of def-trf-frobenius-operators at m=1 with c_1=id. Step 2: g^r is an isomorphism and ell != p, so lem-weil-isomorphism-derived-pullback keeps P_r M bounded constructible; c_{m,M} of the transport-composition lemma is the inverse of c_{g,g^m}, which is b_m. Step 3 matches every hypothesis of the induction helper: C=D^b_c, eta=tau_c (natural), d_1=id, and the identity d_{r+1}^{-1}T(d_r)=b_r (type-checked). Step 4: the cocycle at (1,r) gives the identification b_r, naturality at u=phi^[r] holds, and the display re-derives with correct types. Step 5 is the induction. proof_deps equals the union of uses. Both new nodes are true: I proved the induction helper (S_{r+1}=H(b_r)eta_{P_r}S_r, S_1=eta_M) and checked coherence at r=1,2. Both are statement-only, self-contained, strictly smaller than the item, and have correct created/blueprint fields with three kinds of search. One duplicate candidate is missing from the report: lem-trf-derived-pullback-coherence, which states the three-morphism associativity at finite A. It is the input for splitting the coherence helper, not a duplicate of it. I keep the short induction helper because the human's return asked for that induction to be extracted. Accepted tool uses: lem-weil-frobenius-cohomology-transport-iso and lem-weil-isomorphism-derived-pullback. The third declared entry, lem-weil-pbc-proetale-derived-pullback-composition, is no longer used in the proof steps. No SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusOperatorCompactDescription",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.frobenius_operator_compact_description",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteGlobalDirectPowerTransport",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobenius_operator_compact_description"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusOperatorCompactDescription.lean",
+  "statement": "theorem frobenius_operator_compact_description (T : TraceFormulaCoefficientConventions.{u}) (c₀ : Compactification T.X₀.hom) (K : T.strictWeilComplex) (r : ℕ) : T.finiteGlobalFrobenius c₀ K r = (T.finiteGlobalFrobenius c₀ K 0) ^ (r + 1) ∧ T.finiteGlobalFrobenius c₀ K r = T.finiteGlobalDirectPowerTransport c₀ K.obj.carrier r ≫ (T.finiteGlobalCompactSections c₀).map (T.iteratedWeilIsomorphism K (r + 1) (Nat.succ_le_succ (Nat.zero_le r))).hom ∧ IsIso (T.finiteGlobalDirectPowerTransport c₀ K.obj.carrier r)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7da57a30",
+  "group": "N9",
+  "result": "fix",
+  "note": "R1 repaired: theorem lem-trf-frobenius-pullback-comparison-coherence replaced in stmt_deps by new existing:true def node def-trf-frobenius-pullback-power-comparison (5 plain defs, no choose); its lemma stmt_dep constructs c_{h,k}, so it is genuine. R2 repaired: def-trf-frobenius-operators record is a superset on TraceFormulaLocalFrobeniusOperator (same primary signature, 4+6 decls; live record unchanged since base). Mechanical finding: lem-trf-point-transport-composition is genuine, since pointPowerTransportFinite comes from Classical.choose of pointPowerFiniteSigma_existsUnique, so PASS on it. Item math unchanged from 04e83 and correct; record statement matches the file verbatim. FIX: the delivered dep module text predates live and drops 8 public imports; fixes/TraceFormulaLocalFrobeniusOperator.lean = live text + the 2 imports, 3 set_options and 6 defs. nt_compile --json clean: fix 16.8 s, item 21.5 s, live importer LocalFrobeniusConjugacy 17.1 s."
  }
 }
