@@ -12,7 +12,8 @@
   "def-weil-pbc-henselian-terminology",
   "lem-trf-fs-face-sharpening",
   "lem-trf-log-regular-sharp-chart",
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-tor-modules",
+  "def-sc-p1-tor-kernel-boundary-construction"
  ],
  "proof": [
   {
@@ -252,5 +253,34 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ee6e25c94 (reviewer sub-agent of L); spot-checked: I read all eight steps, the statements of every cited node, the parent and Kato nodes, unit sk-i-curve-zero, and ILO at VI 1.1-1.6 (pp. 69-70), VI 3.7(a) (p. 75), VIII 3.1.1-3.1.5 (pp. 98-99) and the proof of VIII 3.4.3 (p. 110). The proof is agent-written and honestly marked as such; ILO is used as context and the cited places are accurate. The statement is true. The section s exists because P_F is the full preimage of P_x and P_x^gp is free. A sharp chart b exists (c = alpha∘s is one). u exists and is a homomorphism because the chart bijection Q x A^x ≅ M is unique. The Tor isomorphism goes through the kernel of the multiplication map (00M3 and 00M6) and the explicit maps lambda, sigma, rho. I rechecked their balancing, inverses and compatibility with multiplication; for rho the key identity is u(q+p)b(p) = u(q)c(p). Part (b) of the naturality lemma identifies the maps with change-of-rings maps: Z[H]Z[P_F] = Z[H_F] = Z[H_x]Z[P_F]. Edge cases checked: H empty, H = P, H meeting F, P a group, and P = N with alpha(1) = it in C[[t]], which confirms that the twist needs coefficients in A. Tool uses of lem-weil-pbc-tor-ideal-kernel-naturality and lem-weil-pbc-tor-symmetry are accepted as generic Tor algebra. A duplicate search over the DAG found no node stating this comparison; there are no new nodes and no SGA citations. One fix: the item statement did not say which Z[P_x]-algebra structure A has on the right side of the Tor isomorphism. The twist and the parent's Kato vanishing need z^q -> b(q). The corrected statement names the log structure M on Spec A and its stalk, says b is the structural map of a chart b_M: P_x -> M_x with the same characteristic identification as alpha, and says A is an algebra via alpha on the left and via b on the right. This adds no hypothesis and does not weaken the statement; it is in fixes/dag/nodes/sec-trace-formula/lem-trf-log-chart-face-tor-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LogChartFaceTorComparison",
+  "declaration": "AlgebraicGeometry.logChart_face_tor_comparison",
+  "declarations": [
+   "AlgebraicGeometry.LogChartFaceTor.face",
+   "AlgebraicGeometry.LogChartFaceTor.inclusion",
+   "AlgebraicGeometry.LogChartFaceTor.sharpMap",
+   "AlgebraicGeometry.LogChartFaceTor.ideal",
+   "AlgebraicGeometry.LogChartFaceTor.coefficients",
+   "AlgebraicGeometry.LogChartFaceTor.tor",
+   "AlgebraicGeometry.LogChartFaceTor.idealTensor",
+   "AlgebraicGeometry.LogChartFaceTor.boundary",
+   "AlgebraicGeometry.logChart_face_tor_comparison"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LogChartFaceTorComparison.lean",
+  "statement": "theorem logChart_face_tor_comparison {P A : Type u} [CommMonoid P] [CommRing A] [IsStrictlyHenselianLocalRing A] (hP : IsFineSaturatedMonoid P) (M : EtaleLogStructure (Spec (.of A))) (hM : M.IsFineSaturated) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)) (ht : (Scheme.SpecToEquivOfField Ω (Spec (.of A)) t).1.asIdeal = IsLocalRing.maximalIdeal A) (e : strictLocalRing (Spec (.of A)) t ≃+* A) (aM : P →* M.toEtalePrelogStructure.stalk t) (haM : M.IsStalkChart t aM) (a : P →* A) (ha : ∀ p : P, a p = e (M.toEtalePrelogStructure.stalkAlpha t (aM p))) (s : Associates (Algebra.faceLocalization P (LogChartFaceTor.face a)) →* Algebra.faceLocalization P (LogChartFaceTor.face a)) (hs : ∀ q, Associates.mk (s q) = q) (bM : Associates (Algebra.faceLocalization P (LogChartFaceTor.face a)) →* M.toEtalePrelogStructure.stalk t) (hbM : M.IsStalkChart t bM) (hchar : ∀ p : P, Associates.mk (aM p) = Associates.mk (bM (LogChartFaceTor.sharpMap a p))) (b : Associates (Algebra.faceLocalization P (LogChartFaceTor.face a)) →* A) (hb : ∀ q, b q = e (M.toEtalePrelogStructure.stalkAlpha t (bM q))) : ∃ (aF : Algebra.faceLocalization P (LogChartFaceTor.face a) →* A) (u : Associates (Algebra.faceLocalization P (LogChartFaceTor.face a)) →* Aˣ), aF.comp (LogChartFaceTor.inclusion a) = a ∧ (∀ q, aF (s q) = (u q : A) * b q) ∧ ∀ (H : Set P), (∀ p ∈ H, ∀ r : P, p * r ∈ H) → ∃ (θ : LogChartFaceTor.idealTensor a H ≃+ LogChartFaceTor.idealTensor b ((LogChartFaceTor.sharpMap a) '' H)) (E : LogChartFaceTor.tor a H ≃+ LogChartFaceTor.tor b ((LogChartFaceTor.sharpMap a) '' H)), (∀ (p : P) (_hp : p ∈ H) (g : (Algebra.faceLocalization P (LogChartFaceTor.face a))ˣ), LogChartFaceTor.inclusion a p = s (LogChartFaceTor.sharpMap a p) * g → ∀ (z : LogChartFaceTor.ideal H) (w : LogChartFaceTor.ideal ((LogChartFaceTor.sharpMap a) '' H)) (x : A), (z : MonoidAlgebra ℤ P) = MonoidAlgebra.single p 1 → (w : MonoidAlgebra ℤ _) = MonoidAlgebra.single (LogChartFaceTor.sharpMap a p) 1 → θ (z ⊗ₜ[MonoidAlgebra ℤ P] (@id (LogChartFaceTor.coefficients a) x)) = w ⊗ₜ[MonoidAlgebra ℤ _] (@id (LogChartFaceTor.coefficients b) (aF g * (u (LogChartFaceTor.sharpMap a p) : A) * x))) ∧ (∀ z, LogChartFaceTor.boundary b ((LogChartFaceTor.sharpMap a) '' H) (E z) = θ (LogChartFaceTor.boundary a H z))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7499a316",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Every clause matches the node: fs monoid P; strictly henselian A; stalk charts aM and bM of the same log stalk with matching characteristic classes (hchar); face, face localization and Associates sharp quotient from the face-sharpening dependency; section s. aF is uniquely determined. u is pinned only by aF(s q)=u q*b q, as in the node, and the twist is well defined for any such u. θ is given on monomials as z^p⊗x ↦ z^{p̄}⊗aF(g)u(p̄)x, recomputed as the composite of proof steps 5-7, with balancing and inverse checked. E is pinned by the boundary square because torKernelBoundary is injective, so the statement is true. Edge cases H=∅, H=P, H meeting F, P a group, P trivial all hold; the shared universe is forced by the dependency API. The record statement is verbatim and only the item node changed; the added stmt_dep def-sc-p1-tor-kernel-boundary-construction is a landed definition node, which is allowed. The 8 helpers have real data and only the theorem is sorry; docstrings and all 8 proof steps are present; no duplicate found. nt_compile --json is clean (3.0 s) and a broken control copy fails. Advisories: Algebra.faceLocalization is owned by the theorem node lem-trf-face-localization-fs, which predates this delivery; the LogRegularSharpChart import is unused."
  }
 }
