@@ -10,7 +10,12 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-sf-double-hom-cone-comparison",
+  "def-zl-ringed-site-duality-model",
+  "def-per-ringed-site-bidual-transpose",
+  "def-pur-hom-complex",
+  "def-coef-hom-representative-evaluation"
  ],
  "proof": [
   {
@@ -293,5 +298,38 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-b633ace4a (reviewer sub-agent of L); spot-checked: Shape: one commit containing only the item and the report; no new nodes. The statement, stmt_deps and blueprint are identical to the imported item (compared with the Q07 snapshots). Source read: Stacks sites-cohomology.tex Tag 08JC lemma-RHom-triangulated (l.8948) and Tag 0A97 lemma-internal-hom-evaluate (l.8965, chain evaluation; with L=M this gives K->D_M^2 K). No SGA cited. I read every cited statement in full and recomputed every sign. Step 2: d b(x)(f)=(-1)^{(p+1)q}f(dx)=b(dx)(f), and naturality holds. Step 3: unsigned currying commutes with both differentials, giving d_I g(x)(y)-(-1)^n g(dx)(y)-(-1)^{n+p}g(x)(dy). It matches the closed-monoidal node's rule u -> e∘(u⊗1). T(P_V) is K-injective by lem-pur-hom-kflat-into-kinjective. Step 4: the transpose of ev∘σ is T(r)b_P, and T(r) is a quasi-isomorphism by lem-pur-rhom-well-defined, so eta=Qb. Step 5: the θ_u and χ identities of lem-sf-double-hom-cone-comparison give an isomorphism from the image of the cone triangle (last map -π) to the cone triangle of T^2u, with ψ=Qχ. Step 6: (-1)^{p+t+p(t+1)}=(-1)^{(p+1)t}, so χ b_{E[1]}=b_E[1]. Step 8: the hypothesis of the commshift triangle-morphism lemma is exactly step 6, and the connecting square is written out. Step 9: two-out-of-three, shifts in both directions, isomorphisms, zero object and biproducts. Edge cases: K=0, K=O[0] (recovers lem-coef-rational-bidual-triangle-compatibility), a point over a field with M=k[0] and k[1], shift 0. The item generalizes the K=O node rather than duplicating it. The parent lem-per-gabber-local-duality-general uses exactly the stated clauses. All 13 tool_uses are accepted: they are generic ringed-site derived infrastructure the perverse unit lacks, and none replaces a unit route step. One cosmetic inaccuracy: the report mentions a citations.json that is not delivered. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeBidualTriangles",
+  "declaration": "CategoryTheory.RelativeBidualTriangles.compatibility",
+  "declarations": [
+   "CategoryTheory.RelativeBidualTriangles.Modules",
+   "CategoryTheory.RelativeBidualTriangles.Complex",
+   "CategoryTheory.RelativeBidualTriangles.D",
+   "CategoryTheory.RelativeBidualTriangles.dual",
+   "CategoryTheory.RelativeBidualTriangles.bidual",
+   "CategoryTheory.RelativeBidualTriangles.bidualMap",
+   "CategoryTheory.RelativeBidualTriangles.targetResolution",
+   "CategoryTheory.RelativeBidualTriangles.modelMap",
+   "CategoryTheory.RelativeBidualTriangles.signedHomShift",
+   "CategoryTheory.RelativeBidualTriangles.signedModelShift",
+   "CategoryTheory.RelativeBidualTriangles.reflexive",
+   "CategoryTheory.RelativeBidualTriangles.compatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeBidualTriangles.lean",
+  "statement": "theorem compatibility (K : D.{c, v, r, w} J O) (M : RingedSiteDualityModel.{c, v, r, w} J O) : (∃ _ : (dual.{c, v, r, w} J O K).CommShift ℤ, (dual.{c, v, r, w} J O K).IsTriangulated) ∧ ∃ cs : (bidual.{c, v, r, w} J O K).CommShift ℤ, (fun [comm : (bidual.{c, v, r, w} J O K).CommShift ℤ] ↦ (bidual.{c, v, r, w} J O K).IsTriangulated ∧ NatTrans.CommShift (bidualMap.{c, v, r, w} J O K M) ℤ ∧ (∀ (B : Complex.{c, v, r} J O) (eK : DerivedCategory.Q.obj B ≅ K) (E : Complex.{c, v, r} J O), DerivedCategory.Q.map (signedModelShift.{c, v, r} J O B E).hom ≫ ((DerivedCategory.Q).commShiftIso (1 : ℤ)).hom.app _ ≫ (modelMap.{c, v, r, w} J O K B eK E)⟦(1 : ℤ)⟧' = modelMap.{c, v, r, w} J O K B eK (E⟦(1 : ℤ)⟧) ≫ (bidual.{c, v, r, w} J O K).map (((DerivedCategory.Q).commShiftIso (1 : ℤ)).hom.app E) ≫ ((bidual.{c, v, r, w} J O K).commShiftIso (1 : ℤ)).hom.app (DerivedCategory.Q.obj E)) ∧ (∀ T : Triangle (D.{c, v, r, w} J O), T ∈ distTriang _ → ∃ f : T ⟶ (bidual.{c, v, r, w} J O K).mapTriangle.obj T, f.hom₁ = (bidualMap.{c, v, r, w} J O K M).app T.obj₁ ∧ f.hom₂ = (bidualMap.{c, v, r, w} J O K M).app T.obj₂ ∧ f.hom₃ = (bidualMap.{c, v, r, w} J O K M).app T.obj₃) ∧ (reflexive.{c, v, r, w} J O K M).IsTriangulated ∧ (reflexive.{c, v, r, w} J O K M).IsClosedUnderIsomorphisms) (comm := cs)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Returned H2 repair: cite def-zl-ringed-site-duality-model for the normalized presentation M, def-per-ringed-site-bidual-transpose for the existing evaluation transpose and its naturality, def-pur-hom-complex for homComplex, and def-coef-hom-representative-evaluation for the fixed replacement and localization comparison. The unused existence theorem lem-sfb-ringed-site-duality-maps is not a statement dependency. The Lean module and signature are unchanged: arbitrary K, the normalized evaluation transpose, the signed double-Hom shift including its leading minus, and the full triangulated isomorphism locus."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf419213e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 6d4917843346. Lean module byte-identical (sha256 0d10705b), so the prior substance review carries over: arbitrary K, bidualMap = existing ringedSiteBidual, CommShift pinned to Q(chi) with the leading minus for all B, eK, E, IsTriangulated, NatTrans.CommShift, triangle morphism incl. the connecting square, reflexive locus triangulated. Repairs verified: lem-sfb-ringed-site-duality-maps dropped; def-zl-ringed-site-duality-model, def-pur-hom-complex and def-coef-hom-representative-evaluation cited; new def node def-per-ringed-site-bidual-transpose is existing:true on RingedSiteDualityMaps ringedSiteBidual + naturality, statement verbatim, matches the transpose(braiding then evaluation) body, no live or parallel owner. Mechanical finding: lem-sf-double-hom-cone-comparison is genuine (signedHomShift = comparison.choose, sign fixed by its clause) -> PASS on that point. nt_compile --json clean, 19.0 s. Advisory only: def-coef-ringed-tensor-hom-model reached transitively."
  }
 }

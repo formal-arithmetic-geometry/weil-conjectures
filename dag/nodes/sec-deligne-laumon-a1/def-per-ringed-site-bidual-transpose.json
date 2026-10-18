@@ -1,0 +1,105 @@
+{
+ "id": "def-per-ringed-site-bidual-transpose",
+ "kind": "definition",
+ "title": "Canonical relative ringed-site bidual evaluation transpose",
+ "status": "split",
+ "statement": "Let $C$ be a category with object universe $c$ and morphism universe $v$, $J$ a Grothendieck topology on $C$, and $\\mathcal O$ a sheaf of commutative rings in universe $\\max(c,v,r)$. Use sheafification and local-bijection identification for additive sheaves in that universe, the category of module sheaves [def-weil-sheaf-of-modules-category], its unbounded derived category $D$ with morphisms in universe $w$ [def-weil-abstract-derived-category], and its derived internal-Hom bifunctor $H$ [def-pur-derived-internal-hom]. Let $M$ be a normalized ringed-site duality model [def-zl-ringed-site-duality-model], with its closed tensor-Hom adjunction $S$ and Koszul symmetry $\\sigma$. For any target $K\\in D$ and any $P\\in D$, define the relative bidual map $b_{K,P}:P\\to H(H(P,K),K)$ to be the transpose under $S$ of the composite $P\\otimes^L H(P,K)\\xrightarrow{\\sigma_{P,H(P,K)}}H(P,K)\\otimes^L P\\xrightarrow{\\mathrm{ev}_{P,K}}K$. Keep its naturality in $P$: for every $f:P\\to P\\prime$, $b_{K,P\\prime}\\circ f=H(H(f,1_K),1_K)\\circ b_{K,P}$, where both occurrences of the first argument of $H$ are contravariant. This defines the canonical transformation from the identity to the relative double dual. The target $K$ is arbitrary; no invertibility of $b_{K,P}$ is required.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-zl-ringed-site-duality-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A97 (lemma-internal-hom-evaluate), with evaluation and Koszul symmetry in the signed relative double-dual construction; the categorical transpose is the existing ringedSiteBidual in RingedSiteDualityMaps.lean:38-43 and its naturality in lines 77-85."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transpose of evaluation after symmetry defines the natural map to the relative double internal Hom dual in a closed symmetric monoidal category",
+   "results": "[leansearch] OK 8 hit(s): LinearEquiv.trans_dualMap_symm_flip, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, CategoryTheory.ihom.ev_naturality_assoc, transpose_dualTensorHom, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.ihom.ev_naturality, Module.Dual.transpose.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the already landed ringedSiteBidual and ringedSiteBidual_naturality with existing:true; the search hits do not supply another DAG definition owner for this map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical morphism from an object to double internal Hom into an arbitrary target obtained by transposing evaluation after braiding",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.ihom.coev, CategoryTheory.exp.coev, CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry', CategoryTheory.internalizeHom, CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.exp.ev.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the already landed ringedSiteBidual and ringedSiteBidual_naturality with existing:true; the search hits do not supply another DAG definition owner for this map."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSiteBidual|bidual.*transpose|transpose.*evaluation",
+   "results": "[grep] OK 0 hit(s) Mathlib CategoryTheory: no hit. rg in WeilConjectures found only generic rigid-category transpose lemmas, not this ringed-site map. rg in lean/Sheaf found RingedSiteDualityMaps.lean:41-43 (the definition) and 81-85 (naturality). Searching all def-*.json Lean declaration records found no owner of ringedSiteBidual or ringedSiteBidual_naturality; the existing theorem node lem-sfb-ringed-site-duality-maps lists them only as auxiliaries. blueprint_refs.py search bidual returned 26 blueprint nodes, none defining this generic transpose; ancestor is lem-per-artin-gabber-affine-curve.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the already landed ringedSiteBidual and ringedSiteBidual_naturality with existing:true; the search hits do not supply another DAG definition owner for this map."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-relative-bidual-triangles",
+  "date": "2026-10-18",
+  "group": "Q61"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: local duality for the Verdier lower-bound argument; the relative evaluation transpose used by lem-per-relative-bidual-triangles, statement and proof steps 2 and 4.",
+   "via": [
+    "lem-per-relative-bidual-triangles",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "declaration": "CategoryTheory.ringedSiteBidual",
+  "declarations": [
+   "CategoryTheory.ringedSiteBidual",
+   "CategoryTheory.ringedSiteBidual_naturality"
+  ],
+  "statement": "def ringedSiteBidual (P : D) : P ⟶ H.obj (op (H.obj (op P, O)), O)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Records only the existing definition and its naturality, not the existence theorem ringedSiteDualityMaps_exists. The declaration has ambient D, H, closed structure S, symmetry s and arbitrary target O; specialize D to the module derived category, H to derivedInternalHomOfUniverses J O, S and s to M.closed and M.symmetric, and the declaration target O to the arbitrary K. Its body is exactly S.transpose of braiding followed by S.evaluation. No new module or duplicate construction."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf419213e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf419213e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 6d4917843346. Lean module byte-identical (sha256 0d10705b), so the prior substance review carries over: arbitrary K, bidualMap = existing ringedSiteBidual, CommShift pinned to Q(chi) with the leading minus for all B, eK, E, IsTriangulated, NatTrans.CommShift, triangle morphism incl. the connecting square, reflexive locus triangulated. Repairs verified: lem-sfb-ringed-site-duality-maps dropped; def-zl-ringed-site-duality-model, def-pur-hom-complex and def-coef-hom-representative-evaluation cited; new def node def-per-ringed-site-bidual-transpose is existing:true on RingedSiteDualityMaps ringedSiteBidual + naturality, statement verbatim, matches the transpose(braiding then evaluation) body, no live or parallel owner. Mechanical finding: lem-sf-double-hom-cone-comparison is genuine (signedHomShift = comparison.choose, sign fixed by its clause) -> PASS on that point. nt_compile --json clean, 19.0 s. Advisory only: def-coef-ringed-tensor-hom-model reached transitively."
+ }
+}
