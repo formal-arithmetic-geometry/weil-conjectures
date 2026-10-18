@@ -21,86 +21,55 @@
  ],
  "proof": [
   {
-   "text": "Put $U=s(X)$ and $Z=V\\setminus U$, both open subschemes. The open immersion identifies $X$ with $U$, and the two inclusions exhibit $V=U\\amalg Z$: morphisms from the two disjoint opens glue uniquely, with no overlap conditions. Apply the finite clopen coproduct equivalence to abelian etale sheaves. It also gives an equivalence for $\\Lambda$-module sheaves: a $\\Lambda$-action is a family of abelian-sheaf endomorphisms indexed by $\\Lambda$ satisfying the ring identities; these endomorphisms and their identities are recovered componentwise by the fully faithful equivalence. Thus $\\Mod(V_{\\Et},\\Lambda)\\simeq\\Mod(X_{\\Et},\\Lambda)\\times\\Mod(Z_{\\Et},\\Lambda)$, with restriction to $X$ the first projection.",
+   "text": "Use the already proved source theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range to identify J=s_! with R=s_*. This is the clopen gluing and component argument already implemented in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper; it is valid directly for module coefficients. Transfer preservation of finite colimits from J to R along this natural isomorphism. Since R is a right adjoint it also preserves finite limits, so R is exact.",
    "uses": [
-    "def-weil-open-immersion",
-    "lem-weil-pbc-etale-sheaf-clopen-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-    "place": "Proof, first sentence: disjoint open cover and sheaf gluing; Stacks 0A5B (etale-cohomology-lemma-constant-smooth-statements), first proof paragraph"
-   }
-  },
-  {
-   "text": "Under this equivalence $s_!$ is $(F,0)$. Indeed $(F,0)$ is left adjoint to first projection, since $\\Hom((F,0),(G,H))=\\Hom(F,G)$, and extension by zero is left adjoint to restriction; uniqueness of a left adjoint identifies them canonically. The same insertion is right adjoint to first projection since $\\Hom((G,H),(F,0))=\\Hom(G,F)$. First projection is exact: kernels and cokernels in a product abelian category are the pairs of component kernels and cokernels. The right-adjoint injectivity lemma therefore shows that $s_!$ preserves injectives. Its exactness also ensures its degreewise functor acts on derived categories.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-sp-right-adjoint-preserves-injectives",
     "lem-weil-pbc-extension-by-zero-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-    "place": "Proof, sentences 2-3: extension by zero and injective preservation; Stacks 03DI (sites-modules-lemma-extension-by-zero), 03DJ (sites-modules-lemma-extension-by-zero-exact), 015Z (homology-lemma-adjoint-preserve-injectives)"
-   }
+   "elementary": false
   },
   {
-   "text": "For each etale $W\\to X$, set $T=V\\times_X W$. The projection $q:T\\to V$ is etale, being the base change of $W\\to X$. By [lem-weil-pbc-etale-inverse-image-restriction], the underlying abelian sheaf $G=(s_!F)|_T$ has $G(T)=(s_!F)(T)$ and $G(A\\to T)=(s_!F)(A\\to V)$ for each etale $A\\to T$. These identifications also respect each scalar endomorphism, hence the $\\Lambda$-module structures. The complementary opens of $T$ are $U\\times_XW\\cong W$ (using $ps=\\mathrm{id}_X$) and $Z\\times_XW$. Restricting the component sheaf $(F,0)$ to these opens gives $(F|_W,0)$; this follows directly by restricting the componentwise reconstruction, and respects its $\\Lambda$-action. The global-sections clause of the clopen coproduct lemma, applied to $G$ on $T$, gives $(p_*s_!F)(W)=(s_!F)(T)\\cong F(W)\\times0\\cong F(W)$ as $\\Lambda$-modules. The map is restriction to the first component. For a map $W'\\to W$ both composites restrict to $W'$, and for a sheaf map $F\\to F'$ both composites apply that map to the restricted section. Hence these identifications form a natural sheaf isomorphism $p_*s_!\\cong\\mathrm{id}$, rather than only objectwise equalities.",
+   "text": "Let adj be s^* adjoint to s_*. Its counit is invertible since pushforward along an open immersion is fully faithful. Prove that the derived counit is invertible: on Qh(N), the factorization Adjunction.derivedPlus_counit_app_fac expresses it, after precomposing with the invertible image of the right-derived comparison, as the localization of the homotopy-category counit composed with an exact-functor comparison. The homotopy-category counit is invertible because the induced right adjoint is fully faithful. Exactness of R makes its right-derived comparison invertible. Finally every bounded-below derived object is isomorphic to Qh(N), and naturality transports invertibility. This is the private proved helper exact_derived_counit_isIso.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-    "place": "Proof, displayed section identity: direct image evaluated on an etale test scheme; Stacks 0A5B first proof paragraph for component sections; Stacks 03S2 (section-extension-by-zero), paragraph after Definition 03S3, etale inverse image as restriction"
-   }
-  },
-  {
-   "text": "The module-sheaf categories on $X$ and $V$ have enough injectives. Choose a bounded below complex $I$ of injective $\\Lambda$-module sheaves and an isomorphism $QI\\cong K$, using the $D^+$ representative lemma. It is K-injective. By step 2, $s_!I$ is again bounded below with injective terms, hence is K-injective by the same lemma and represents $s_!K$. Applying the computation-on-injectives clause of the right-derived-functor lemma to $p_*$ gives $Rp_*s_!K\\cong Q(p_*s_!I)$. Step 3 in every degree commutes with differentials by naturality in sheaf maps, so it is a chain isomorphism $p_*s_!I\\cong I$. Thus $Rp_*s_!K\\cong QI\\cong K$.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
     "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-    "place": "Proof, last two sentences: bounded-below injective resolution; Stacks 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 05TH (lemma-injective-acyclic), 05TI (lemma-enough-injectives-right-derived)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $r_I:p_*s_!I\\to I$ be the chain isomorphism of step 3 and $\\alpha_{s_!I}:Q(p_*s_!I)\\to Rp_*Q(s_!I)$ the derived comparison. On this representative the asserted map is $\\tau_I=Q(r_I)\\alpha_{s_!I}^{-1}:Rp_*Q(s_!I)\\to QI$. For a derived morphism $f:K\\to K'$ choose identifications $QI\\cong K$, $QI'\\cong K'$; the K-injective Hom bijection represents $f$ by a unique homotopy class $h:I\\to I'$. Step 3 gives $r_{I'}(p_*s_!h)=h r_I$, while naturality of the comparison gives $Rp_*Q(s_!h)\\alpha_{s_!I}=\\alpha_{s_!I'}Q(p_*s_!h)$. Inverting the comparisons and combining these equations gives $\\tau_{I'}Rp_*Q(s_!h)=Q(h)\\tau_I$, proving naturality after the chosen identifications. For a second representative $J$ of the same $K$, the Hom bijection lifts the induced isomorphism $QI\\to QJ$ and its inverse to $h:I\\to J$ and $g:J\\to I$; injectivity of that bijection gives $gh=\\mathrm{id}_I$ and $hg=\\mathrm{id}_J$ in the homotopy category. Thus $h$ is a homotopy equivalence. Substituting this $h$ into the two displayed compatibility equations shows that the two maps to $K$ agree after the representative identifications. The resulting isomorphism is therefore independent of the representative and is precisely restriction to the section component.",
+   "text": "Consequently Rs_* is fully faithful. Exactness and the clopen comparison give an isomorphism D(s_!) = D(s_*) isomorphic to Rs_*. For each K, D(s_!)(K) lies in the essential image of Rs_*, so the unit of Ds^* adjoint to Rs_* is invertible on D(s_!)(K), by Adjunction.isIso_unit_app_of_iso.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-extension-by-zero-exact",
     "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-    "place": "Proof, final sentence: identity in each degree gives the asserted derived isomorphism; Stacks 070I (lemma-K-injective), 05SA (lemma-derived-functor)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The exact left adjoint s^* implies s_* preserves injective objects. Apply Functor.rightDerivedFunctorPlusCompIso' to lowerStarComp for s,p and ps=id, and then lowerStarIdDerivedPlus. This gives c: Rs_* followed by Rp_* isomorphic to identity. Whisker the derived unit of step 3 by Rp_*, and compose with c evaluated on Ds^*D(s_!)(K), to obtain a natural isomorphism t: Rp_*D(s_!) isomorphic to Ds^*D(s_!).",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit of s_! adjoint to s^* is invertible. Applying the exact derived functor and the identity/composition comparison isomorphisms gives a: identity isomorphic to Ds^*D(s_!). Define e=t followed by a inverse. Then e followed by a is t by cancellation of a inverse with a. Expanding t is exactly the displayed canonical-map equation; the construction from natural transformations already supplies naturality and independence of representatives.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-open-immersion",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-sp-right-adjoint-preserves-injectives",
   "lem-weil-pbc-extension-by-zero-exact",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.md",
-  "place": "Proof, expanded with the cited Stacks lemmas"
+  "place": "Clopen component proof, shortened using the proved clopen comparison in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper and exact bounded-below derived adjunctions; formalized by G3 on 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -210,10 +179,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-sheaf-clopen-product",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives"
+  "lem-weil-pbc-extension-by-zero-exact"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -240,5 +207,15 @@
   "by": "NI",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T062756-L-650986",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
