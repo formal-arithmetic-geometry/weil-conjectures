@@ -402,5 +402,45 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantLocalModel",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteConstantLocalModel_iff_exists_cover",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarSections",
+   "AlgebraicGeometry.ProEtale.scalarSections_laxMonoidal",
+   "AlgebraicGeometry.ProEtale.scalarRingObj",
+   "AlgebraicGeometry.ProEtale.scalarRingObj_comm",
+   "AlgebraicGeometry.ProEtale.scalarConstant",
+   "AlgebraicGeometry.ProEtale.scalarConstant_monoidal",
+   "AlgebraicGeometry.ProEtale.scalarConstant_iso_constantSheaf",
+   "AlgebraicGeometry.ProEtale.scalarCoefficientHom",
+   "AlgebraicGeometry.ProEtale.scalarCoefficientHom_isMonHom",
+   "AlgebraicGeometry.ProEtale.scalarConstant_comm",
+   "AlgebraicGeometry.ProEtale.finiteConstantScalarExtension",
+   "AlgebraicGeometry.ProEtale.scalarSection",
+   "AlgebraicGeometry.ProEtale.scalarMatrix",
+   "AlgebraicGeometry.ProEtale.HasFiniteConstantLocalModelOnCover",
+   "AlgebraicGeometry.ProEtale.HasScalarMatrixPresentationOnCover",
+   "AlgebraicGeometry.ProEtale.finiteConstantLocalModel_iff_exists_cover",
+   "AlgebraicGeometry.ProEtale.finiteConstantLocalModelOnCover_iff_scalarMatrix",
+   "AlgebraicGeometry.ProEtale.HasFiniteConstantLocalModel.isLocallyFinitelyPresented",
+   "AlgebraicGeometry.ProEtale.not_locallyFinitelyPresented_implies_finiteConstantLocalModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantLocalModel.lean",
+  "statement": "theorem finiteConstantLocalModel_iff_exists_cover {X : Scheme.{u}} (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : HasFiniteConstantLocalModel Λ X M ↔ ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, HasFiniteConstantLocalModelOnCover Λ M 𝒰",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reuses the published HasFiniteConstantLocalModel from Sheaf.Paper.CondensedConstantConstructibility instead of duplicating it. This module gives its explicit scalar-section/constant-sheaf/extension-of-scalars formulation, the same-cover scalar-matrix equivalence, local finite presentation and the failure of the universal converse. Scalars and their modules use the existing internal-ring/internal-module encoding in Ab. The parent constructibility node already cites this item, so no reverse DAG edge is added; the existing defining module is imported and the maintainer must omit a reverse proof import that would close an import cycle. Return repair: the ordinary functor from scalar modules to condensed-coefficient module sheaves is named finiteConstantScalarExtension; AlgebraicGeometry.ProEtale.scalarExtension from OpenScalarExchange instead denotes a derived functor between constant-ring sheaf-module derived categories, so the two constructions have different domains, codomains and coefficient data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5bec8b98d",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases, canonical constructions, and verbatim statement checked; scompile.py passed without diagnostics. Replaced the placeholder second-reading section with a substantive independent review in fixes/det-def-sfb-constructible-local-model.report.md. Full findings recorded in review.md; repository files and branch heads unchanged."
  }
 }
