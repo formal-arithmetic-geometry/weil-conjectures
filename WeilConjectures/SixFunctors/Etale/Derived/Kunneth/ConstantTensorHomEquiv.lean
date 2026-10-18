@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Constant
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorTensorComparison
 
 /-!
 # The constant-tensor comparison as a transpose
