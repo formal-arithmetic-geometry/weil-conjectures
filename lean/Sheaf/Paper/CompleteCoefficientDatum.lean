@@ -587,6 +587,7 @@ theorem adicTransitionComplex_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ
           ((adicConstantMap X (adicQuotientMap I b a hab)).hom.app U r) m := by
   sorry
 
+
 /-- Apply the quotient map on the scalar factor, with the original Λ-action retained.
 Source: blueprint order 1255, step 2
 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
@@ -728,6 +729,7 @@ theorem adicBalanceHom_naturality (X : Scheme.{t}) {A B C : Type t}
       adicBalanceHom X φ ψ χ h P ≫ adicChangeHom X χ f := by
   sorry
 
+
 /-- The transitions commute with comparison maps of the chosen complexes.
 Source: blueprint order 1255, step 2.
 Proof: both paths send r tensor m to q_{b,a}(r) tensor f(m), by the two defining
@@ -789,12 +791,21 @@ theorem adicNormalization_cocycle (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
       (adicNormalization X d M c a (le_trans hab hbc)).hom := by
   sorry
 
-/-- Extension along the identity coefficient map has its uniquely specified unit map.
+/-- Existence and the tensor-generator formula for the identity scalar extension map.
 Source: blueprint order 1255, step 4; Stacks Tag 03EK.
-Proof: send s tensor m to s times m. Balancing makes the map well-defined, and the
-inverse sends m to 1 tensor m. Restrictions and differentials commute with the formula.
-Local tensor generators prove uniqueness; balancing proves the two inverse identities.
-(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+Proof: construct the sheafified map sending `s tensor m` to `s • m` and its inverse
+sending `m` to `1 tensor m`; verify restriction and differential compatibility on local
+sections, then prove the two composites are identities by tensor induction.
+(blueprint: adic-unit-exists-data) -/
+theorem adicUnit_exists_data (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (φ : A →+* A) (hφ : φ = RingHom.id A)
+    (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ) :
+    ∃ f : adicChange X φ P ⟶ P, IsIso f ∧
+      ∀ (p : ℤ) (U : X.ProEtᵒᵖ) (s : (adicConstantRing X A).obj.obj U)
+        (m : (P.X p).val.obj U),
+        (f.f p).val.app U (adicTensorSection X φ _ U s m) = s • m  := by
+  sorry
+
 theorem adicUnit_exists (X : Scheme.{t}) {A : Type t} [CommRing A]
     (φ : A →+* A) (hφ : φ = RingHom.id A)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ) :
@@ -802,7 +813,15 @@ theorem adicUnit_exists (X : Scheme.{t}) {A : Type t} [CommRing A]
       ∀ (p : ℤ) (U : X.ProEtᵒᵖ) (s : (adicConstantRing X A).obj.obj U)
         (m : (P.X p).val.obj U),
         (f.f p).val.app U (adicTensorSection X φ _ U s m) = s • m := by
-  sorry
+  obtain ⟨f, hf, hform⟩ := adicUnit_exists_data X φ hφ P
+  refine ⟨f, ⟨hf, hform⟩, ?_⟩
+  intro g hg
+  apply HomologicalComplex.hom_ext
+  intro p
+  apply adicTensorHom_ext
+  intro U s m
+  exact (hg.2 p U s m).trans (hform p U s m).symm
+
 
 /-- The ordinary unit map, with its canonical tensor-generator formula.
 Source: blueprint order 1255, step 4
