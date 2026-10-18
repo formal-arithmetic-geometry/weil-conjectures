@@ -315,5 +315,38 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-0dc1d9536 (reviewer sub-agent of L); spot-checked: I read the whole item against the blueprint thm-coef-rational-verdier (master and main-20261015 are identical; main-20261017 matches main-20261015) and against every cited statement. Steps 1-4 and 7 check out, including the arrow types, the balancing relation, the opposite-category identification, exactness, full faithfulness and the associator and unit equations. Fault (C1/C4): step 5 puts integral evaluation on the completed tensor and attributes it to thm-coef-integral-verdier, but that theorem's proof step 5 defines evaluation on the ordinary tensor over the completed coefficient sheaf. Step 6's tensor comparison c inherits the same gap, because lem-coef-integral-finite-extension (proof steps 1 and 6) also works with ordinary tensors. Fix: steps 5 and 6 now cite lem-fix-constructible-tensor-completion (its hypotheses hold: X is quasi-compact and quasi-separated, ℓ is invertible, inputs are in D^b_c). They set ev = ev°∘χ^{-1} and c = T(χ)∘c°∘χ^{-1}, and the completed-tensor equations follow by naturality of χ. The node is added to proof_deps and tool_uses: it is a generic lemma from unit sk-rem-sf-pf-done with no cycle. Long step 6 (2060 characters, 2103 after the fix) is one argument, the localization of two supplied integral equations, with no hidden lemma, so it stays. Accepted tool uses: prop-weil-pbc-rational-transport, lem-pur-integral-operations-preserve-constructible and lem-fix-constructible-tensor-completion. There are no new nodes, no SGA citations and no weakening of the target. Not blocking: the report says the source metadata was moved to main-20261015, but source.document still names the master path, which is valid and has identical text.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a8ed32e2",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause. Hypotheses: FiniteFieldDatum, l prime, l≠p, IsSeparated + LocallyOfFiniteType + QuasiCompact, no properness. Conclusion: exact E-linear anti-equivalence on the raw rationalization, pinned to the integral RHom on objects and pure tensors; bidual pinned to Q(IntegralVerdier.delta); evaluation pinned to Q(chi^-1 ≫ ordinary counit); omega_E = Q omega_R. Scalar extension: comparison pinned to Q(beta) and omega to Q(u); evaluation and delta squares, unit (Q of integral unit) and associator (Q of comp) equations, directions type-checked. Edge cases covered (empty X, zero/torsion objects, E=Q_l, identity embeddings, universes at the deps' common u). completionChain is choice from a uniquely determining theorem; units is a subsingleton Invertible. No hollow defs, sorry only in the theorem. Docstrings and the 7-step proof present; lines ≤100; plain imports are proof-dep modules. Node changed only in lean; statement verbatim; declarations complete. nt_compile --json on the snapshot file: rc 0, 42.0 s, no errors or warnings. No findings requiring changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdier",
+  "declaration": "WeilConjectures.coef_rational_verdier",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.units",
+   "WeilConjectures.RationalVerdier.integralTensor",
+   "WeilConjectures.RationalVerdier.tensor",
+   "WeilConjectures.RationalVerdier.completionChain",
+   "WeilConjectures.RationalVerdier.Completion",
+   "WeilConjectures.RationalVerdier.Datum",
+   "WeilConjectures.RationalVerdier.scalar",
+   "WeilConjectures.RationalVerdier.integralScalar",
+   "WeilConjectures.RationalVerdier.Extension",
+   "WeilConjectures.RationalVerdier.ExtensionProperties",
+   "WeilConjectures.RationalVerdier.Conclusion",
+   "WeilConjectures.coef_rational_verdier"
+  ],
+  "file": "lean/Sheaf/SixFunctors/RationalVerdier.lean",
+  "statement": "theorem coef_rational_verdier (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : RationalVerdier.Conclusion D l hl X",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical integral RHom and its pure-tensor rationalization on the recorded intrinsic raw category. Completed evaluation retains the normalized quotient-map completion comparison. Every finite field and every coherent integral dualizing presentation is covered, with rationalized canonical u, beta, unit and associator, and explicit evaluation and actual delta squares."
  }
 }
