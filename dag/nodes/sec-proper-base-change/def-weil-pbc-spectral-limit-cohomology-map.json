@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-spectral-limit-cohomology-map",
+ "kind": "definition",
+ "title": "Canonical cohomology map for a topological f-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof: the canonical cohomology maps used in continuity of the punctured-neighborhood inverse system.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let h:X→Y be a continuous map of topological spaces, A an abelian sheaf on Y, B an abelian sheaf on X, α:A→h_*B an f-map, and c a family of maps H^q(V,A)→H^q(h⁻¹V,h⁻¹A) on object cohomology [lem-weil-pbc-site-cohomology-pullback-data, def-sc-topological-abelian-cohomology]. Define m(h,c,α,q):H^q(Y,A)→H^q(X,B) as c at V=Y followed by the cohomology map of the adjoint h⁻¹A→B [def-weil-pbc-topological-inverse-image], and finally by restriction along the equality h⁻¹(Y)=X. This is precisely the pre-existing spectralLimitCohomologyMap definition, relocated without changing its expression.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A37, the f-map construction preceding lemma-colimit"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-site-cohomology-pullback-data",
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A37, the canonical maps in lemma-colimit; relocated existing definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback on sheaf cohomology preserves identities and composition and cohomology classes on directed spectral limits descend to finite stages",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback_id_comp\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X Y : C} (f : X ⟶ Y) :\\n  (J.overMapPullbackComp A (𝟙 X) f).inv ≫\\n      Functor.whiskerLeft _ (J.overMapPullbackId A X).hom ≫ (Functor.rightUnitor _).hom =\\n    (overMapPullbackCongr _ _ (by simp)).hom\", \"doc\": \"For a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, an object $ A $, and a morphism $ f : X \\\\to Y $, the composition of the pullback functor induced by the identity morphism $ \\\\mathrm{id}\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback (𝟙 X) ≅ 𝟭 _\", \"doc\": \"The pullback functor induced by the identity morphism on a scheme $X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This follows from the adjunction b\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": PreservesFiniteLimits (Functor.sheafPullback G A J K)\", \"doc\": \"For a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pullback functor preserves finite limits. This means that the\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullbackId\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"(X : C) : J.overMapPullback A (𝟙 X) ≅ 𝟭 _\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, the pullback functor induced by the identity morphism $\\\\text{id}_X$ on the over category $\\\\text{Over}\\\\, X$ is \"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of abelian sheaves commutes with filtered colimits on inverse limits of spectral spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type u) →\\n  (S : LightProfinite) →\\n    CategoryTheory.Limits.IsColimit\\n      ((LightCondensed.locallyConstantPresheaf X).mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))\", \"doc\": \"The colimit of the locally constant presheaf diagram over the opposite category of light profinite spaces is established by leveraging the finality of the inverse double opposite equivalence for the n\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type (u + 1)) →\\n  (S : Profinite) → CategoryTheory.Limits.IsColimit ((Condensed.locallyConstantPresheaf X).mapCocone S.asLimitCone.op)\", \"doc\": \"For a profinite space $ S $, the locally constant presheaf on the opposite category of profinite spaces satisfies the colimit condition with respect to the diagram formed by the discrete quotients of \"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"LightProfinite.hasSheafify\", \"module\": \"Mathlib/Condensed/Light/Instances\", \"type\": \"∀ (A : Type u') [inst : CategoryTheory.Category.{u, u'} A] [CategoryTheory.Limits.HasLimits A]\\n  [CategoryTheory.Limits.HasColimits A] {FA : A → A → Type v} {CA : A → Type u}\\n  [inst_3 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_4 : CategoryTheory.ConcreteCategory A FA]\\n  [CategoryTheory.Lim\", \"doc\": \"The category of compact Hausdorff, totally disconnected, second-countable topological spaces (light profinite spaces), equipped with the coherent Grothendieck topology generated by finite effective ep\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  (LightCondensed.isoLocallyConstantOfI\", \"doc\": \"For a contravariant functor $ F : \\text{LightProfinite}^{\\text{op}} \\to \\text{Type} $ preserving finite products, if every light profinite space $ S $ satisfies the colimit condition for the cocone constr\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"colimit\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"TateCohomology.preservesFiniteColimits_tateComplexFunctor\", \"module\": \"Mathlib.RepresentationTheory.Homological.TateCohomology.Basic\", \"type\": \" {R G : Type u} [CommRing R] [Group G] [Fintype G] : CategoryTheory.Limits.PreservesFiniteColimits (tateComplexFunctor R G)\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*cohomology|cohomology.*spectral|colimit_exists_rep",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"39\", \"text\": \"theorem isColimit_exists_rep [HasLimitsOfShape Jᵒᵖ C] {c : Cocone F} (hc : IsColimit c) (x : c.pt) :\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"41\", \"text\": \"  Concrete.isColimit_exists_rep (F ⋙ forget C) (isColimitOfPreserves (forget C) hc) x\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"44\", \"text\": \"theorem colimit_exists_rep [HasLimitsOfShape Jᵒᵖ C] (x : colimit (C := SheafedSpace C) F) :\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"46\", \"text\": \"  Concrete.isColimit_exists_rep (F ⋙ SheafedSpace.forget C)\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"70\", \"text\": \"    obtain ⟨i, y, ⟨⟩⟩ := SheafedSpace.colimit_exists_rep (F ⋙ forgetToSheafedSpace) x\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/AB.lean\", \"line\": \"43\", \"text\": \"    rcases Concrete.colimit_exists_rep S.X₂ x with ⟨j, y, rfl⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"line\": \"139\", \"text\": \"  obtain ⟨⟨j⟩, z, h⟩ := Concrete.isColimit_exists_rep _ s' x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean\", \"line\": \"349\", \"text\": \"  obtain ⟨_ | j, y, rfl⟩ := Concrete.colimit_exists_rep _ x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"210\", \"text\": \"  obtain ⟨S, y, h⟩ := Concrete.colimit_exists_rep (J.diagram P X) x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/WithAlgebraicStructures.lean\", \"line\": \"70\", \"text\": \"  obtain ⟨j, x, rfl⟩ := Concrete.colimit_exists_rep F x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"130\", \"text\": \"theorem isColimit_exists_rep {D : Cocone F} (hD : IsColimit D) (x : ToType D.pt) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"135\", \"text\": \"theorem colimit_exists_rep [HasColimit F] (x : ToType (colimit F)) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"137\", \"text\": \"  Concrete.isColimit_exists_rep F (colimit.isColimit _) x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"196\", \"text\": \"  obtain ⟨j, y, rfl⟩ := isColimit_exists_rep F hD x\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitCohomology",
+  "date": "2026-10-18",
+  "group": "V3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitCohomologyMap",
+  "declaration": "TopCat.Sheaf.spectralLimitCohomologyMap",
+  "file": "lean/Sheaf/Topology/SpectralLimitCohomologyMap.lean",
+  "statement": "def spectralLimitCohomologyMap {X Y : TopCat.{u}} (f : X ⟶ Y) (c : SiteCohomologyFamily (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X) (Opens.map f)) {F : Y.Sheaf AddCommGrpCat.{u}} {G : X.Sheaf AddCommGrpCat.{u}} (α : F ⟶ (pushforward AddCommGrpCat.{u} f).obj G) (q : ℕ) : CategoryTheory.Sheaf.H' F q ⊤ ⟶ CategoryTheory.Sheaf.H' G q ⊤",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-57f22",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T071236-L-1681912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-57f22",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T071236-L-1681912",
+  "kind": "interface",
+  "note": "independent cc review: Delivered SpectralLimitCohomology (theorem statement byte-identical to clone; relocated spectralLimitCohomologyMap identical and publicly re-exported) against clone, change record, new nodes and Stacks 0A37; all 7 modules compile clean; importer PuncturedNeighborhoodCohomologyColimit compiles; axioms: sorryAx only via the three named holes"
+ }
+}

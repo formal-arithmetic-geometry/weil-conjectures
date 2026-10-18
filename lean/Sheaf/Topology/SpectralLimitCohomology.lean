@@ -15,18 +15,10 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Topology.Sheaves.Cech
-import WeilConjectures.Topology.Sheaves.PushforwardCohomology
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.Topology.SpectralDirectedLimit
-import Sheaf.Topology.SpectralLimitDescendOpens
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Topology.SpectralLimitSheafSections
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
+public import Sheaf.Topology.SpectralLimitCohomologyMap
+import Sheaf.Topology.SpectralLimitCohomologyLaws
+import Sheaf.Topology.SpectralLimitCohomologyClassLift
+import Sheaf.Topology.SpectralLimitCohomologyEventualZero
 
 /-!
 # Cohomological continuity on directed spectral limits
@@ -53,26 +45,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace TopCat.Sheaf
-
-/-- The cohomology map of an `f`-map, computed by pullback followed by its adjoint.
-The final restriction identifies the inverse image of the terminal open with the terminal
-open. The family `c` is normalized by `SiteCohomologyFamily.IsPullback` in the theorem below.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F7 and 0A37
-(blueprint: lem-weil-pbc-spectral-limit-cohomology). -/
-noncomputable def spectralLimitCohomologyMap {X Y : TopCat.{u}} (f : X ⟶ Y)
-    (c : SiteCohomologyFamily (Opens.grothendieckTopology Y)
-      (Opens.grothendieckTopology X) (Opens.map f))
-    {F : Y.Sheaf AddCommGrpCat.{u}} {G : X.Sheaf AddCommGrpCat.{u}}
-    (α : F ⟶ (pushforward AddCommGrpCat.{u} f).obj G) (q : ℕ) :
-    CategoryTheory.Sheaf.H' F q ⊤ ⟶ CategoryTheory.Sheaf.H' G q ⊤ :=
-  c q ⊤ F ≫
-    (((CategoryTheory.Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) q).map
-      ((sheafAdjunctionContinuous (Opens.map f) AddCommGrpCat.{u}
-        (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).homEquiv F G |>.symm α))).app
-      (op ((Opens.map f).obj ⊤)) ≫
-    (CategoryTheory.Sheaf.cohomologyPresheaf G q).map
-      (eqToHom (congrArg op (Opens.map_top f)))
-
 
 /-- Cohomology of a compatible abelian-sheaf system on a directed spectral inverse limit
 is the filtered colimit of its stage cohomology, with the canonical comparison map.
@@ -195,6 +167,51 @@ theorem spectralLimit_cohomology
               (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv
                 (F i) (colimit P) ((eP i).inv ≫ colimit.ι P i)) q) ∧
         IsIso (colimit.desc H c ≫ ec.hom) := by
-  sorry
+  classical
+  let a := fun (i j : I) (h : i ≤ j) ↦
+    spectralLimitCohomologyMap (f i j h) (cf i j h) (α i j h) q
+  let b := fun i : I ↦ spectralLimitCohomologyMap (p i) (cp i)
+      ((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u}
+        (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv
+          (F i) (colimit P) ((eP i).inv ≫ colimit.ι P i)) q
+  obtain ⟨ha, haa, hab⟩ := spectralLimit_cohomology_laws S f hfid hfcomp X p hpcomp
+    F α hαid hαcomp P eP hP cf hcf cp hcp q
+  let H : I ⥤ AddCommGrpCat.{u} :=
+    { obj := fun i ↦ CategoryTheory.Sheaf.H' (F i) q ⊤
+      map := fun {i j} h ↦ a i j (leOfHom h)
+      map_id := fun i ↦ ha i
+      map_comp := fun {i j k} hij hjk ↦ (haa i j k (leOfHom hij) (leOfHom hjk)).symm }
+  let c : Cocone H :=
+    { pt := CategoryTheory.Sheaf.H' (colimit P) q ⊤
+      ι := { app := b
+             naturality := fun i j h ↦ by simpa using hab i j (leOfHom h) } }
+  refine ⟨H, (fun _ ↦ Iso.refl _), ?_, c, Iso.refl _, ?_, ?_⟩
+  · intro i j h
+    simp [H, a]
+  · intro i
+    simp [c, b]
+  · suffices IsIso (colimit.desc H c) by simpa using this
+    apply (ConcreteCategory.isIso_iff_bijective (colimit.desc H c)).2
+    constructor
+    · apply (injective_iff_map_eq_zero (colimit.desc H c).hom).2
+      intro z hz
+      obtain ⟨i, x, rfl⟩ := Concrete.colimit_exists_rep H z
+      have hx : (b i).hom x = 0 := by
+        change (colimit.ι H i ≫ colimit.desc H c).hom x = 0 at hz
+        rwa [colimit.ι_desc] at hz
+      obtain ⟨j, h, hj⟩ := spectralLimit_cohomology_eventual_zero S f hf hfid hfcomp
+        X p hpcomp hlimit htop F α hαid hαcomp P eP hP cf hcf cp hcp q i x hx
+      calc
+        (colimit.ι H i).hom x =
+            (colimit.ι H j).hom ((H.map (homOfLE h)).hom x) :=
+          (colimit.w_apply H (homOfLE h) x).symm
+        _ = 0 := by change (colimit.ι H j).hom ((a i j h).hom x) = 0; rw [hj, map_zero]
+    · intro y
+      obtain ⟨i, x, hx⟩ := spectralLimit_cohomology_class_lift S f hf hfid hfcomp
+        X p hpcomp hlimit htop F α hαid hαcomp P eP hP cp hcp q y
+      refine ⟨(colimit.ι H i).hom x, ?_⟩
+      change (colimit.ι H i ≫ colimit.desc H c).hom x = y
+      rw [colimit.ι_desc]
+      exact hx
 
 end TopCat.Sheaf

@@ -1,0 +1,247 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-cohomology-eventual-zero",
+ "kind": "statement",
+ "title": "A stage class whose colimit image is zero becomes zero after a later transition.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof: continuity for the punctured-neighborhood inverse system, using Cohomology Tag 0A37; eventual-zero subargument.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let $I$ be a directed set (nonempty, every pair has a common upper bound). Let $X_i$ be spectral spaces [def-weil-spectral-space], with continuous transition maps $f_{ij}:X_j\\to X_i$ for $i\\le j$, satisfying $f_{ii}=\\mathrm{id}$ and $f_{ij}f_{jk}=f_{ik}$. Assume each $f_{ij}$ is spectral, meaning that the inverse image of every quasi-compact open is quasi-compact. Let $X$ be spectral and let continuous maps $p_i:X\\to X_i$, satisfying $f_{ij}\\circ p_j=p_i$ for $i\\le j$, exhibit $X$ as the inverse limit in topological spaces: the map $x\\mapsto(p_i(x))_i$ is a bijection onto the compatible tuples and the topology is the coarsest making all $p_i$ continuous. For each $i$ let $F_i$ be a sheaf of abelian groups on $X_i$. Give morphisms $\\alpha_{ij}:F_i\\to(f_{ij})_*F_j$ for $i\\le j$, with $\\alpha_{ii}=\\mathrm{id}$ and $\\alpha_{ik}=(f_{ij})_*\\alpha_{jk}\\circ\\alpha_{ij}$, using the sectionwise equality $(f_{ik})_*=(f_{ij})_*(f_{jk})_*$ [def-weil-pbc-topological-inverse-image]. Equivalently their adjoints are compatible inverse-image maps $f_{ij}^{-1}F_i\\to F_j$. On $X$ form $F=\\varinjlim_{i\\in I}p_i^{-1}F_i$ in abelian sheaves [def-weil-pbc-category-colimit], with transition maps obtained by pulling back those adjoints and using $p_i=f_{ij}p_j$.  For each transition and projection fix a family of cohomology pullbacks [lem-weil-pbc-site-cohomology-pullback-data], natural in the sheaf, compatible with Yoneda connecting maps, and equal in degree zero to the adjunction unit. For an f-map A → h_*B write m(h,A→h_*B,q) [def-weil-pbc-spectral-limit-cohomology-map] for pullback to h⁻¹A followed by the map induced by its adjoint h⁻¹A → B and by restriction along h⁻¹(top)=top. Write b_i for m(p_i,F_i→(p_i)_*F,q), where this f-map is adjoint to the coprojection p_i⁻¹F_i→F. For every integer q≥0, index i and class x∈H^q(S_i,F_i) such that b_i(x)=0, there exist j≥i for which m(f_ij,α_ij,q)(x)=0. This asserts detection of the zero relation only; it asserts no generation of classes on X.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A37, label lemma-colimit, induction and comparison argument"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-spectral-limit-cohomology-map",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-site-cohomology-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The spectral inverse-limit theorem gives spectral projections, so each $p_i^{-1}(U_i)$ is quasi-compact when $U_i$ is. The limit topology has a basis of finite intersections of inverse images of opens. Refine each stage open by its quasi-compact-open basis. For finitely many resulting opens choose a common upper index $k$; their intersection is $p_k^{-1}(\\bigcap_l f_{i_lk}^{-1}U_{i_l})$, whose stage open is quasi-compact by spectrality and quasi-separatedness. Thus these inverse images form a basis. The descent-opens lemma represents every quasi-compact open at a stage and detects inclusions and finite covering equalities at later stages, as needed below.",
+   "uses": [
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A30, label lemma-descend-opens; Tag 0A2Z, spectral inverse-limit basis"
+   }
+  },
+  {
+   "text": "Apply the section comparison to the compatible sheaf system on X. It identifies sections of F over p_i^{-1}(U_i) with the filtered colimit of the sections of F_j over f_{ij}^{-1}(U_i), and the comparison is the canonical one induced by the transition maps.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens"
+   }
+  },
+  {
+   "text": "Use the full site of open subsets of each X_i with arbitrary open coverings, not a finite-cover colimit site. Its objects and inclusion morphisms form sets; unions of open covers and intersections verify the site axioms. Choose embeddings e_k:F_k\\to A_k with A_k injective using enough injectives on this site. Define G_i(V)=\\prod_{k\\ge i}A_k(f_{ik}^{-1}V), with componentwise restrictions. This is a sheaf: a compatible local family glues uniquely in each factor, and those gluings give the unique product section. It is the product of the sheaves (f_{ik})_*A_k, with its universal property verified componentwise. Each factor is injective by the topological pushforward-injective lemma, which assumes only continuity; the product-injectives lemma gives injectivity of G_i.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sc-topological-pushforward-injective",
+    "lem-weil-pbc-product-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Define \\gamma_i:F_i\\to G_i by its k-component (f_{ik})_*e_k\\circ\\alpha_{ik}. Its i-component is e_i because \\alpha_{ii}=1, so \\gamma_i is monic. Define \\beta_{ij}:G_i\\to(f_{ij})_*G_j on an open V by discarding coordinates k not \\ge j; the retained k-coordinate lies in A_k(f_{jk}^{-1}f_{ij}^{-1}V)=A_k(f_{ik}^{-1}V). Thus \\beta_{ii}=1, and both \\beta_{ik} and (f_{ij})_*\\beta_{jk}\\circ\\beta_{ij} retain exactly the coordinates l\\ge k. On coordinate k\\ge j, (f_{ij})_*\\gamma_j\\circ\\alpha_{ij} equals (f_{ik})_*e_k\\circ(f_{ij})_*\\alpha_{jk}\\circ\\alpha_{ij}=(f_{ik})_*e_k\\circ\\alpha_{ik}, the same as \\beta_{ij}\\circ\\gamma_i. These are sheaf maps since coordinate projections commute with restrictions. Take adjoints to obtain the required compatible inverse-image system of injectives. This proves the construction here rather than applying the finite-cover-site system lemma.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Let Q_i=\\operatorname{coker}(\\gamma_i). The exactness clause of the topological pushforward-injective lemma says that inverse image along every continuous f_{ij} and p_i is exact. The compatible maps from the preceding step therefore induce maps f_{ij}^{-1}Q_i\\to Q_j by the cokernel universal property; their identity and composition laws follow by precomposing the epimorphisms f_{ij}^{-1}G_i\\to f_{ij}^{-1}Q_i. Pulling back 0\\to F_i\\to G_i\\to Q_i\\to0 along p_i remains exact. Applying exact filtered colimits on the full open-set site of X gives 0\\to F\\to G\\to Q\\to0, where G=\\varinjlim_i p_i^{-1}G_i and Q=\\varinjlim_i p_i^{-1}Q_i. No finite-cover hypothesis is used in either cited exactness statement.",
+   "uses": [
+    "lem-sc-topological-pushforward-injective",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Let B be the quasi-compact opens of X and Cov all finite coverings of members of B by members of B. They are cofinal among arbitrary open coverings: refine each covering by the quasi-compact-open basis and extract a finite subcover using quasi-compactness of the target. Finite intersections remain in B by spectrality. Descend a finite covering U=\\bigcup_l U_l and its members to one stage using the open-descent lemma; the finite-stage equality is eventually a covering equality. For every later stage the pulled-back covering is still a covering and its finite intersections are quasi-compact since the transition maps are spectral. Step 2 applied to the G_i identifies each term of the ordered Cech complex with its filtered-colimit counterpart. In each fixed degree there are only finitely many tuples: a tuple of finitely many colimit sections is represented at a common stage, and equality is also detected at a common stage, so finite products commute with this colimit. Restrictions are the same under these identifications, hence so are the alternating differentials. The finite-stage complexes have zero positive cohomology by the topological injective-Cech lemma, and exact filtered colimits of abelian groups preserve this exactness. The site Cech-vanishing criterion now applies on the full open-set site, with B and Cov as above, and gives H^p(U,G)=0 for every U in B and p>0, in particular for U=X.",
+   "uses": [
+    "lem-pc-topological-injective-cech-positive-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-weil-pbc-spectral-limit-descend-opens",
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, lemma-colimit, final proof paragraph using Tags 0A30, 01EP and 01EW"
+   }
+  },
+  {
+   "text": "Induct on q simultaneously for every system. In degree zero, identify cohomology with sections using generator evaluation. The sections comparison identifies the canonical map with the filtered-colimit section map, whose zero relations are detected at a later index. Restriction to an upper tail ensures that this index is ≥ the given i.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "lem-weil-pbc-site-cohomology-pullback-data",
+    "lem-weil-pbc-spectral-limit-cohomology-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
+   }
+  },
+  {
+   "text": "For q=n+1 use the compatible embedding F_i→G_i into stage injectives and quotient Q_i, with exact limit sequence F→G→Q. Surjectivity of the stage boundary gives z_i in H^n(S_i,Q_i) with δz_i=x. Boundary naturality implies δb_i(z_i)=0. Exactness on X therefore writes b_i(z_i) as the image of w in H^n(X,G). Generation, applied in degree n to the G-system, represents w by w_k. Move z_i and w_k to a common upper stage j. Their difference in H^n(S_j,Q_j) has zero image on X. The induction hypothesis for the Q-system makes this difference zero at a later stage l. Apply δ there: the image of w_k has zero boundary by exactness, and the boundary of z_i is the transition of x. Thus that transition of x vanishes.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-site-cohomology-pullback-data",
+    "lem-weil-pbc-spectral-limit-cohomology-class-lift",
+    "lem-weil-pbc-spectral-limit-cohomology-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-spectral-space",
+  "lem-pc-topological-injective-cech-positive-exact",
+  "lem-sc-topological-pushforward-injective",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-site-cohomology-pullback-data",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-weil-pbc-spectral-limit-cohomology-class-lift",
+  "lem-weil-pbc-spectral-limit-cohomology-degree-zero",
+  "lem-weil-pbc-spectral-limit-cohomology-laws",
+  "lem-weil-pbc-spectral-limit-descend-opens",
+  "lem-weil-pbc-spectral-limit-sheaf-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Expanded eventual-zero subargument of Tag 0A37, label lemma-colimit, following the parent node proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback on sheaf cohomology preserves identities and composition and cohomology classes on directed spectral limits descend to finite stages",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback_id_comp\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X Y : C} (f : X ⟶ Y) :\\n  (J.overMapPullbackComp A (𝟙 X) f).inv ≫\\n      Functor.whiskerLeft _ (J.overMapPullbackId A X).hom ≫ (Functor.rightUnitor _).hom =\\n    (overMapPullbackCongr _ _ (by simp)).hom\", \"doc\": \"For a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, an object $ A $, and a morphism $ f : X \\\\to Y $, the composition of the pullback functor induced by the identity morphism $ \\\\mathrm{id}\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback (𝟙 X) ≅ 𝟭 _\", \"doc\": \"The pullback functor induced by the identity morphism on a scheme $X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This follows from the adjunction b\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": PreservesFiniteLimits (Functor.sheafPullback G A J K)\", \"doc\": \"For a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pullback functor preserves finite limits. This means that the\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullbackId\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"(X : C) : J.overMapPullback A (𝟙 X) ≅ 𝟭 _\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, the pullback functor induced by the identity morphism $\\\\text{id}_X$ on the over category $\\\\text{Over}\\\\, X$ is \"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of abelian sheaves commutes with filtered colimits on inverse limits of spectral spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type u) →\\n  (S : LightProfinite) →\\n    CategoryTheory.Limits.IsColimit\\n      ((LightCondensed.locallyConstantPresheaf X).mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))\", \"doc\": \"The colimit of the locally constant presheaf diagram over the opposite category of light profinite spaces is established by leveraging the finality of the inverse double opposite equivalence for the n\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type (u + 1)) →\\n  (S : Profinite) → CategoryTheory.Limits.IsColimit ((Condensed.locallyConstantPresheaf X).mapCocone S.asLimitCone.op)\", \"doc\": \"For a profinite space $ S $, the locally constant presheaf on the opposite category of profinite spaces satisfies the colimit condition with respect to the diagram formed by the discrete quotients of \"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"LightProfinite.hasSheafify\", \"module\": \"Mathlib/Condensed/Light/Instances\", \"type\": \"∀ (A : Type u') [inst : CategoryTheory.Category.{u, u'} A] [CategoryTheory.Limits.HasLimits A]\\n  [CategoryTheory.Limits.HasColimits A] {FA : A → A → Type v} {CA : A → Type u}\\n  [inst_3 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_4 : CategoryTheory.ConcreteCategory A FA]\\n  [CategoryTheory.Lim\", \"doc\": \"The category of compact Hausdorff, totally disconnected, second-countable topological spaces (light profinite spaces), equipped with the coherent Grothendieck topology generated by finite effective ep\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  (LightCondensed.isoLocallyConstantOfI\", \"doc\": \"For a contravariant functor $ F : \\text{LightProfinite}^{\\text{op}} \\to \\text{Type} $ preserving finite products, if every light profinite space $ S $ satisfies the colimit condition for the cocone constr\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"colimit\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"TateCohomology.preservesFiniteColimits_tateComplexFunctor\", \"module\": \"Mathlib.RepresentationTheory.Homological.TateCohomology.Basic\", \"type\": \" {R G : Type u} [CommRing R] [Group G] [Fintype G] : CategoryTheory.Limits.PreservesFiniteColimits (tateComplexFunctor R G)\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*cohomology|cohomology.*spectral|colimit_exists_rep",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"39\", \"text\": \"theorem isColimit_exists_rep [HasLimitsOfShape Jᵒᵖ C] {c : Cocone F} (hc : IsColimit c) (x : c.pt) :\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"41\", \"text\": \"  Concrete.isColimit_exists_rep (F ⋙ forget C) (isColimitOfPreserves (forget C) hc) x\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"44\", \"text\": \"theorem colimit_exists_rep [HasLimitsOfShape Jᵒᵖ C] (x : colimit (C := SheafedSpace C) F) :\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"46\", \"text\": \"  Concrete.isColimit_exists_rep (F ⋙ SheafedSpace.forget C)\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"70\", \"text\": \"    obtain ⟨i, y, ⟨⟩⟩ := SheafedSpace.colimit_exists_rep (F ⋙ forgetToSheafedSpace) x\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/AB.lean\", \"line\": \"43\", \"text\": \"    rcases Concrete.colimit_exists_rep S.X₂ x with ⟨j, y, rfl⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"line\": \"139\", \"text\": \"  obtain ⟨⟨j⟩, z, h⟩ := Concrete.isColimit_exists_rep _ s' x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean\", \"line\": \"349\", \"text\": \"  obtain ⟨_ | j, y, rfl⟩ := Concrete.colimit_exists_rep _ x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean\", \"line\": \"210\", \"text\": \"  obtain ⟨S, y, h⟩ := Concrete.colimit_exists_rep (J.diagram P X) x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/WithAlgebraicStructures.lean\", \"line\": \"70\", \"text\": \"  obtain ⟨j, x, rfl⟩ := Concrete.colimit_exists_rep F x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"130\", \"text\": \"theorem isColimit_exists_rep {D : Cocone F} (hD : IsColimit D) (x : ToType D.pt) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"135\", \"text\": \"theorem colimit_exists_rep [HasColimit F] (x : ToType (colimit F)) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"137\", \"text\": \"  Concrete.isColimit_exists_rep F (colimit.isColimit _) x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"196\", \"text\": \"  obtain ⟨j, y, rfl⟩ := isColimit_exists_rep F hD x\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No declaration comparing general abelian sheaf cohomology on varying spectral spaces, or the normalized f-map laws, was found. Concrete.colimit_exists_rep supplies the final colimit argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitCohomology",
+  "date": "2026-10-18",
+  "group": "V3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitCohomologyEventualZero",
+  "declaration": "TopCat.Sheaf.spectralLimit_cohomology_eventual_zero",
+  "file": "lean/Sheaf/Topology/SpectralLimitCohomologyEventualZero.lean",
+  "statement": "theorem spectralLimit_cohomology_eventual_zero {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : I → TopCat.{u}) [∀ i : I, SpectralSpace (S i)] (f : ∀ (i j : I), i ≤ j → (S j ⟶ S i)) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hfid : ∀ i : I, f i i le_rfl = 𝟙 (S i)) (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), f j k hjk ≫ f i j hij = f i k (hij.trans hjk)) (X : TopCat.{u}) [SpectralSpace X] (p : ∀ i : I, X ⟶ S i) (hpcomp : ∀ (i j : I) (h : i ≤ j), p j ≫ f i j h = p i) (hlimit : ∀ a : ∀ i : I, S i, (∀ (i j : I) (h : i ≤ j), f i j h (a j) = a i) → ∃! x : X, ∀ i : I, p i x = a i) (htop : X.str = ⨅ i : I, TopologicalSpace.induced (p i) (S i).str) (F : ∀ i : I, (S i).Sheaf AddCommGrpCat.{u}) (α : ∀ (i j : I) (h : i ≤ j), F i ⟶ (pushforward AddCommGrpCat.{u} (f i j h)).obj (F j)) (hαid : ∀ (i : I) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq ((α i i le_rfl).hom.app (op U) s) s) (hαcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq ((α i k (hij.trans hjk)).hom.app (op U) s) ((α j k hjk).hom.app (op ((Opens.map (f i j hij)).obj U)) ((α i j hij).hom.app (op U) s))) (P : I ⥤ X.Sheaf AddCommGrpCat.{u}) [HasColimit P] (eP : ∀ i : I, P.obj i ≅ (sheafPullback (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).obj (F i)) (hP : ∀ (i j : I) (h : i ≤ j) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq (((eP i).inv ≫ P.map (homOfLE h) ≫ (eP j).hom).hom.app (op ((Opens.map (p i)).obj U)) (((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).unit.app (F i)).hom.app (op U) s)) (((sheafAdjunctionContinuous (Opens.map (p j)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S j)) (Opens.grothendieckTopology X)).unit.app (F j)).hom.app (op ((Opens.map (f i j h)).obj U)) ((α i j h).hom.app (op U) s))) (cf : ∀ (i j : I) (h : i ≤ j), SiteCohomologyFamily (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j)) (Opens.map (f i j h))) (hcf : ∀ (i j : I) (h : i ≤ j), @SiteCohomologyFamily.IsPullback _ _ _ _ (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j)) (Opens.map (f i j h)) inferInstance (@Adjunction.left_adjoint_additive _ _ _ _ _ _ _ _ (sheafAdjunctionContinuous (Opens.map (f i j h)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j))) (Functor.additive_of_preserves_binary_products _)) inferInstance inferInstance (cf i j h)) (cp : ∀ i : I, SiteCohomologyFamily (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X) (Opens.map (p i))) (hcp : ∀ i : I, @SiteCohomologyFamily.IsPullback _ _ _ _ (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X) (Opens.map (p i)) inferInstance (@Adjunction.left_adjoint_additive _ _ _ _ _ _ _ _ (sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)) (Functor.additive_of_preserves_binary_products _)) inferInstance inferInstance (cp i)) (q : ℕ) (i : I) (x : CategoryTheory.Sheaf.H' (F i) q ⊤) (hx : (spectralLimitCohomologyMap (p i) (cp i) ((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv (F i) (colimit P) ((eP i).inv ≫ colimit.ι P i)) q).hom x = 0) : ∃ (j : I) (h : i ≤ j), (spectralLimitCohomologyMap (f i j h) (cf i j h) (α i j h) q).hom x = 0",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-57f22",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T071236-L-1681912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-57f22",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T071236-L-1681912",
+  "kind": "interface",
+  "note": "independent cc review: Delivered SpectralLimitCohomology (theorem statement byte-identical to clone; relocated spectralLimitCohomologyMap identical and publicly re-exported) against clone, change record, new nodes and Stacks 0A37; all 7 modules compile clean; importer PuncturedNeighborhoodCohomologyColimit compiles; axioms: sorryAx only via the three named holes"
+ }
+}
