@@ -5,8 +5,11 @@ Authors: SHEAF group Q31
 -/
 module
 
+public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 import Sheaf.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
