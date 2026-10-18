@@ -2,7 +2,7 @@
  "id": "lem-per-tame-kummer-group-algebra-completion",
  "kind": "statement",
  "title": "Tame finite-index group algebra base change",
- "statement": "Let $L\\hookrightarrow M$ be an inclusion of finitely generated abelian groups, not assumed torsion free, with finite cokernel annihilated by a positive integer $N$. Let $E$ be a commutative ring in which $N$ is invertible and $\\rho:L\\to E^\\times$ a group homomorphism. Define $\\mathbf Z[L]$ and $\\mathbf Z[M]$ as the rings with basis $[g]$ and multiplication $[g][g']=[g+g']$, and use $[l]\\mapsto\\rho(l)$ to form $U=E\\otimes_{\\mathbf Z[L]}\\mathbf Z[M]$ [def-weil-pbc-module-tensor-product]. Then $U$ is a finite free $E$-module of rank $|M/L|$, and $E\\to U$ is etale [def-weil-etale-morphism]. If $E$ is a nonzero complete Noetherian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion], then $U$ is a finite product of nonzero complete Noetherian local $E$-algebras $U_i$, each finite etale over $E$; the factors are indexed by the maximal ideals of $U$, and their residue fields are finite separable extensions of the residue field of $E$.",
+ "statement": "Let $L\\hookrightarrow M$ be an inclusion of finitely generated abelian groups, not assumed torsion free, with finite cokernel annihilated by a positive integer $N$. Let $E$ be a commutative ring in which $N$ is invertible and $\\rho:L\\to E^\\times$ a group homomorphism. Define $\\mathbf Z[L]$ and $\\mathbf Z[M]$ as the rings with basis $[g]$ and multiplication $[g][g']=[g+g']$, and use $[l]\\mapsto\\rho(l)$ to form $U=E\\otimes_{\\mathbf Z[L]}\\mathbf Z[M]$ [def-weil-pbc-module-tensor-product], a commutative $E$-algebra with $(a\\otimes x)(a'\\otimes x')=aa'\\otimes xx'$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Then $U$ is a finite free $E$-module of rank $|M/L|$ [def-weil-pbc-free-module], and $E\\to U$ is etale [def-weil-etale-morphism]. If $E$ is a nonzero complete Noetherian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion], then $U$ is a finite product of nonzero complete Noetherian local $E$-algebras $U_i$, each finite etale over $E$; the factors are indexed by the maximal ideals of $U$, and their residue fields are finite separable extensions of the residue field of $E$ [def-weil-residue-field, def-weil-pbc-separable-algebraic-extension].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "ILO VI 2.2, printed p.72: invertible-exponent diagonalizable kernel in the Kummer chart; unit-group algebra form of this calculation."
@@ -11,11 +11,120 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-etale-morphism",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adic-completion"
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-free-module",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=M/L$ and choose representatives $s(c)\\in M$, with $s(0)=0$. Every $m\\in M$ is uniquely $l+s(c)$, so the map $\\bigoplus_{c\\in C}\\mathbf Z[L]\\to\\mathbf Z[M]$, $(a_c)\\mapsto\\sum_c a_c[s(c)]$, is an isomorphism of $\\mathbf Z[L]$-modules: its inverse groups the coefficients of a finite group-ring sum by their cosets. The tensor-product universal property now gives inverse $E$-linear maps $E^{C}\\rightleftarrows U$: send the $c$-th vector to $1\\otimes[s(c)]$, and send $a\\otimes[l+s(c)]$ to the vector with coefficient $a\\rho(l)$ at $c$. The latter formula respects balancing because translating by $l_0\\in L$ multiplies its coefficient by $\\rho(l_0)$. These formulas compose to the identity on the displayed generators. Thus these elements are a basis, proving the finite free assertion, including its stated rank.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, printed p.72, invertible-exponent group-algebra calculation, expanded by Q125"
+   }
+  },
+  {
+   "text": "Choose finitely many $m_1,\\ldots,m_r\\in M$ whose classes generate $C$, and set $H_0=L$, $H_j=L+\\mathbf Zm_1+\\cdots+\\mathbf Zm_j$. Let $d_j$ be the order of $m_j$ modulo $H_{j-1}$. It is a positive divisor of $N$: division $N=qd_j+a$, $0\\le a<d_j$, gives $am_j\\in H_{j-1}$, hence $a=0$ by minimality. In particular $d_j$ is a unit in every $E$-algebra, with inverse $(N/d_j)N^{-1}$. Define $A_j=E\\otimes_{\\mathbf Z[L]}\\mathbf Z[H_j]$, so $A_0=E$ and $A_r=U$. By clause (1) of the algebra-tensor lemma each $A_j$ is a commutative $E$-algebra with multiplication $(a\\otimes x)(a'\\otimes x')=aa'\\otimes xx'$, and by its clause (2), applied to $E\\to A_j$ and $\\mathbf Z[H_{j-1}]\\to\\mathbf Z[H_j]\\to A_j$ (which agree on $\\mathbf Z[L]$), the map $A_{j-1}\\to A_j$, $a\\otimes[h]\\mapsto a\\otimes[h]$, is an $E$-algebra homomorphism. The same explicit coset-basis formulas from step 1 apply to each $H_j/L$ and show that $A_{j-1}\\to A_j$ is injective (its basis vectors are a subset). Write $u_j=1\\otimes[d_jm_j]\\in A_{j-1}^\\times$, whose inverse is $1\\otimes[-d_jm_j]$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, printed p.72, invertible-exponent group-algebra calculation, expanded by Q125"
+   }
+  },
+  {
+   "text": "For a fixed $j$, the map $A_{j-1}[T]/(T^{d_j}-u_j)\\to A_j$ sending $T$ to $1\\otimes[m_j]$ is an isomorphism. It is a well-defined $A_{j-1}$-algebra map since, by the multiplication of step 2, $(1\\otimes[m_j])^{d_j}=1\\otimes[d_jm_j]=u_j$. Indeed the monic-quotient lemma gives basis $1,T,\\ldots,T^{d_j-1}$ over $A_{j-1}$. A representative set for $H_j/L$ is obtained by taking all $h+am_j$, where $h$ ranges over representatives for $H_{j-1}/L$ and $0\\le a<d_j$: existence and uniqueness follow by division modulo the cyclic group $H_j/H_{j-1}$. Consequently the displayed map sends an $E$-basis bijectively to the $E$-basis constructed in step 1, and is invertible. This proves the comparison by explicit bases rather than assuming a splitting of the abelian-group extension; torsion in $L$ and $M$ causes no change.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, printed p.72, invertible-exponent group-algebra calculation, expanded by Q125"
+   }
+  },
+  {
+   "text": "In $B=A_{j-1}[T]/(T^{d_j}-u_j)$, let $t$ be the class of $T$. Then $t$ is a unit since $t^{d_j}=u_j$; explicitly $t^{-1}=u_j^{-1}t^{d_j-1}$. The derivative of $Q=T^{d_j}-u_j$ at $t$ is the unit $d_jt^{d_j-1}$. The standard-etale monic-derivative lemma says $A_{j-1}[T][Y]/(Q,YQ^{\\prime}-1)$ is etale over $A_{j-1}$. This ring is $B$: the inverse to the natural map from $B$ sends $Y$ to $(d_jt^{d_j-1})^{-1}$, and both composites fix $t$ and $Y$ by the relation $YQ^{\\prime}=1$. Hence each $A_{j-1}\\to A_j$ is etale. Iterating etale composition gives $E\\to U$ etale. For $r=0$, $U=E$ and the identity is an open immersion, hence etale by the same cited permanence lemma.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale); Tags 02GN (lemma-composition-etale) and 02GP (lemma-open-immersion-etale)"
+   }
+  },
+  {
+   "text": "Now suppose $E$ is nonzero complete Noetherian local, complete for its maximal ideal. Step 1 makes $U$ a finite $E$-module, so the finite-over-complete-local-product lemma applies and gives an $E$-algebra product decomposition $U\\simeq\\prod_{i=1}^tU_i$, with every $U_i$ Noetherian local and complete for its maximal ideal. Here the two cited completeness definitions both mean that the canonical map to the inverse limit of the quotients by ideal powers is bijective, so the hypotheses agree. Discard any zero factors if the convention allows them. The product is nonempty, since the nonempty coset basis and $E\\ne0$ imply $U\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0325 (lemma-quotient-complete-local), second assertion; Definition 0317 (definition-complete)"
+   }
+  },
+  {
+   "text": "Each projection $U\\to U_i$ is surjective and $E$-linear, so $U_i$ is a finite $E$-module (project the finite basis). Its spectrum is an open-and-closed component of $\\operatorname{Spec}U$: apply the finite-product-principal-open lemma with $H=U$, the $F_i=U_i$ as $U$-algebras by the projections, and $h=1$. Its compatibility over $H=U$ identifies each coproduct inclusion with the given projection spectrum map (the product structure map is the displayed decomposition isomorphism). The scheme-coproduct lemma makes those inclusions open immersions. Thus $\\operatorname{Spec}U_i\\to\\operatorname{Spec}E$ is etale by the open-immersion and composition clauses of etale permanence, using step 4. To identify the indexing without invoking a uniqueness theorem, let $e_i$ be the coordinate idempotents. For any maximal ideal $\\mathfrak n$ of $U$, their images in the field $U/\\mathfrak n$ are idempotents summing to $1$ and pairwise orthogonal; exactly one is $1$ and the rest are $0$. Hence $\\mathfrak n$ contains precisely the kernel of one projection and is the inverse image of the unique maximal ideal of that local factor. Conversely each such inverse image is maximal, giving exactly the required bijection.",
+   "uses": [
+    "lem-sbc-finite-product-principal-open",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 01I1, finite product spectra; Tags 01JB and 01JC, scheme coproducts; Tags 02GP and 02GN, etale permanence. Coordinate idempotent argument by Q125."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be the maximal ideal of $E$ and $\\mathfrak n_i$ that of $U_i$. The finite-algebra local-radical lemma gives $\\mathfrak n_i\\cap E=\\mathfrak m$ and $\\mathfrak mU_i\\subseteq\\mathfrak n_i$. Therefore $U_i/\\mathfrak n_i$ is a quotient of the finite-dimensional $E/\\mathfrak m$-vector space $U_i/\\mathfrak mU_i$, so the residue field extension is finite. Apply the etale residue-field separability lemma to the etale map $\\operatorname{Spec}U_i\\to\\operatorname{Spec}E$ at its closed point. Its conclusion says that this same residue-field extension is separable algebraic; together with the preceding dimension bound it is finite separable, as claimed.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of 9=>10, maximal ideals of a finite algebra lie over the base maximal ideal; Tag 02G8 (lemma-unramified-etale-fibres), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-sbc-finite-product-principal-open",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2, printed p.72 motivates the unit-group calculation; Q125 gives the coset and cyclic-adjunction argument, then applies Stacks 0325 and 02G8."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +195,45 @@
    "results": "Returned 25 hits: Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean. ",
    "date": "2026-10-19",
    "verdict": "no match: the read signatures give general etale, power-series substitution, or completion infrastructure, not the stated comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of group algebras for an inclusion of abelian groups with finite quotient of invertible exponent is finite free etale",
+   "results": "Returned: Algebra.Etale.baseChange, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.iff_exists_algEquiv_prod, IsGaloisGroup.to_isFractionRing, KaehlerDifferential.isBaseChange_of_formallyEtale, groupCohomology.Hilbert90.aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod, groupCohomology.exists_mul_galRestrict_of_norm_eq_one. Read signatures in the search output.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not prove the twisted finite-index group-algebra extension; base change needs the etaleness being proved, and the field product criterion assumes a field base."
+  },
+  {
+   "tool": "grep",
+   "query": "etale|Etale",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not prove the twisted finite-index group-algebra extension; base change needs the etaleness being proved, and the field product criterion assumes a field base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite index inclusion of finitely generated abelian groups induces a finite etale group ring extension after inverting the quotient exponent",
+   "results": "Returned: StandardEtalePair.Ring, AddSubgroup.fintypeQuotientOfFiniteIndex, Algebra.Etale.finitePresentation, StandardEtalePair.instAlgebraRing, AddSubgroup.finiteIndex_of_finite_quotient, Algebra.instIsStandardEtaleRing, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.instEtaleRing. Read signatures in the search output.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not prove the twisted finite-index group-algebra extension; base change needs the etaleness being proved, and the field product criterion assumes a field base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Etale\"",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not prove the twisted finite-index group-algebra extension; base change needs the etaleness being proved, and the field product criterion assumes a field base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a character of a subgroup L of an abelian group M with finite quotient killed by a unit N the twisted group ring E tensor Z[M] is an etale E algebra",
+   "results": "Returned: Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.baseChange, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.iff_exists_algEquiv_prod, StandardEtalePair.instAlgebraRing, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars. Read signatures in the search output.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not prove the twisted finite-index group-algebra extension; base change needs the etaleness being proved, and the field product criterion assumes a field base."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-invertible-kummer-monoid-extension",
@@ -117,5 +261,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-kummer-group-algebra-completion",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement using explicit coset bases and a cyclic tower, without assuming the groups are free or the extension splits. Reused all algebraic and scheme lemmas from the DAG; no new nodes. Read ILO VI 2.2 and the cited Stacks sources. Expanded the indexing, finite factors, and residue-field finiteness separately from separability.",
+  "blueprint": "Auxiliary algebra in the existing from/via chain beneath lem-per-artin-gabber-affine-curve, serving the ILO VI 2.2 invertible-exponent Kummer chart; realizes the full group-algebra claim without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic finite-algebra decomposition over a complete Noetherian local base; the perverse unit contains no such algebra lemma."
+   },
+   {
+    "node": "lem-sbc-finite-product-principal-open",
+    "why": "Used only at h=1 to identify factor spectra with coproduct components, independent of the smooth-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-local-radical",
+    "why": "Generic finite algebra over a local ring: maximal ideals contract to the base maximal ideal; needed for the specified residue extensions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sbc-finite-product-principal-open",
+  "lem-weil-pbc-finite-algebra-local-radical"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e52eec360",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e52eec360 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; there are no new nodes. I checked the statement of each of the 16 cited nodes, ILO VI 2.2 p.72 and the parent's use of this item. The statement is unchanged from the Q89 base except for added definition citations. The mathematics is correct: (1) coset basis with the balancing check; (2) d_j divides N, so u_j is a unit; (3) A_{j-1}[T]/(T^{d_j}-u_j) ≅ A_j, by comparing explicit bases and representatives h+a m_j; (4) a standard étale presentation, since Q'=d_j t^{d_j-1} is a unit, then étale composition; (5) Stacks 0325, with both completeness definitions meaning the same; (6) product-spectrum open immersions at h=1, plus maximal-ideal indexing by idempotents; (7) maximal ideals contract to m, so the residue extension is finite, and separable by the étale residue lemma. Small cases checked: L=M; Z/2 and Z/4 over Z_3, where the factors have residue fields F_3, F_3, F_9; E=0. The DAG search found no duplicate (the cyclotomic group-algebra, tame-root-product and tame-root-extension nodes differ). I accept the declared tool_uses of Stacks 0325 and the finite-product principal open. One B3/C1 fault, fixed: the ring structure of U and the ring maps A_{j-1}→A_j were used without a citation. I cited lem-weil-pbc-algebra-tensor-pushout-universal-property in the statement (as a citation only), in stmt_deps and proof_deps, and in steps 2 and 3, adding sentences for the algebra map and for the well-definedness of T↦1⊗[m_j].; 1 file(s) fixed by the reviewer"
  }
 }
