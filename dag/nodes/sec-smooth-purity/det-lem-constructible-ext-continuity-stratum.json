@@ -23,7 +23,9 @@
   "def-weil-pbc-category-colimit",
   "def-weil-size-convention",
   "det-lem-formal-closed-support-stratum-hom",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-lisse-coefficient-module",
+  "def-pur-admissible-condensed-ring"
  ],
  "proof": [
   {
@@ -304,5 +306,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleExtContinuityStratum",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleExtContinuityStratum",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleExtContinuityStratum.lean",
+  "statement": "theorem constructibleExtContinuityStratum (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {S Z V X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) (j : V ⟶ X) (uS : S ⟶ Z) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion uS] [QuasiCompact uS] (hij : Set.range i.base = (Set.range j.base)ᶜ) (hΛ : IsAdmissibleCoefficient Λ) (L : supportModules Λ S) (hL : ProEtale.IsLisseCoefficientModule Λ L) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (supportModules Λ X) ℤ) (b : ℤ) (hK : ∀ (t : I) (n : ℤ), n < b → IsZero ((K.obj t).X n)) (q : ℤ) : IsIso (colimit.post K (DerivedCategory.Q ⋙ shiftFunctor (DerivedCategory (supportModules Λ X)) q ⋙ preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor (supportModules Λ X) 0).obj ((lowerStar Λ i).obj ((openImmersionLowerShriek Λ uS).obj L))))))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a139ba43a",
+  "group": "N1",
+  "result": "pass",
+  "note": "Re-delivery after the H12/H4 RETURN of 31ca687c50b3. The duplicate node def-pur-condensed-finite-locally-free and ProEtaleFiniteLocallyFree.lean are deleted. In stmt_deps that node is replaced by the landed def-sfb-lisse-coefficient-module (its snapshot record is identical to live). The item .lean differs in exactly two lines: the import Sheaf.Paper.CoefficientHeartCommonStratification and hL : ProEtale.IsLisseCoefficientModule Λ L. Only the lean and stmt_deps node fields differ; statement, proof and sources are unchanged. lean.statement is verbatim. The lisse predicate is pro-etale locally finite free, with varying ranks and rank 0 allowed, and adds no assumption. The other clauses (qcqs X, closed i with quasi-compact open complement j, quasi-compact open u, admissible Λ, a_!L as in closedSupport_stratum_globalHom, uniform termwise bound b, IsIso of colimit.post for every q) are unchanged from the earlier review. nt_compile --json: 3.5 s, EXIT 0, clean. Advisory: the Second reading section is the accepted placeholder."
  }
 }

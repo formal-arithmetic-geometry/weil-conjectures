@@ -184,5 +184,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c51157956",
+  "group": "N3",
+  "result": "pass",
+  "note": "Existing-only delivery: only the lean record changes (live node had lean=null), pointing to AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison in WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs. The record statement is verbatim the published Over-based signature in weil-conjectures-sheaf (older local copies still have explicit-k). Body = (boundedConstructibleUpperStarComp f' g).symm ≪≫ eqToIso(sq.w) ≪≫ boundedConstructibleUpperStarComp g' f = c_{g',f}∘e∘c_{f',g}^{-1}, confirmed by rfl in an nt_compile --json check (2.6 s, exit 0, #check signature matches). Hypotheses match the node exactly: prime ℓ, field k with prime ringChar ≠ ℓ, four separated finite-type Over(Spec k) objects with over-morphisms, arbitrary commutative condensed Λ (MonObj+IsCommMonObj, same binder as the PASSed upper-star dep records), CommSq only, no IsPullback, no IsFinitenessCoefficient. The single universe u is the framework convention already in the dep records. Edge cases (identity square, noncartesian square with empty X', Λ=0) admitted. No duplicate (Etale.pullbackSquareComparison is a different notion). Report has a Worker report and a Second reading by N3. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison",
+  "statement": "noncomputable def boundedConstructiblePullbackSquareComparison (sq : CommSq g' f' f g) :\n    boundedConstructibleUpperStar Λ ℓ g ⋙ boundedConstructibleUpperStar Λ ℓ f' ≅\n      boundedConstructibleUpperStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g'",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing definition in the published WeilConjectures framework, inspected through scompile.py --source (the local shared framework copy has an older explicit-k interface). Section parameters supply arbitrary commutative condensed coefficients, prime ell, a field of positive prime characteristic different from ell, separated finite-type Over (Spec k) objects and their over-morphisms. The body is (boundedConstructibleUpperStarComp Λ ℓ f' g).symm, then eqToIso induced by sq.w, then boundedConstructibleUpperStarComp Λ ℓ g' f, exactly the specified orientation and canonical formula. The comparison is defined before the IsFinitenessCoefficient section and imposes no cartesian, proper or coefficient-finiteness hypothesis. The branch label follows the dependency records for the published upstream root and its live/side overlay. No new module or definition."
  }
 }
