@@ -1,10 +1,6 @@
 module
 
 public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
-public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.Basic
-public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
-public import Sheaf.Algebra.Homology.LeftResolutionBicomplexTotalExists
-import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 @[expose] public section
 
@@ -50,7 +46,11 @@ theorem totalizedAugmentation_natural_quasiIso
             HomologicalComplex₂.total.map
               ((HomologicalComplex₂.singleRow A (ComplexShape.up ℤ)
                 (ComplexShape.up ℤ) 0).map φ.hom) (ComplexShape.up ℤ)) := by
-  sorry
+  constructor
+  · intro K
+    infer_instance
+  · intro K L φ
+    exact Λ.totalπ'_naturality φ
 
 end LeftResolution
 end Abelian
