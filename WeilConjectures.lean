@@ -6344,7 +6344,6 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivari
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.ProperUnitPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInjective
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceCupNondegenerate
@@ -9587,8 +9586,6 @@ public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
-public import WeilConjectures.WeilSheaf.CompactSupportExt
-public import WeilConjectures.WeilSheaf.CompactSupportExtFrobenius
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
@@ -9661,7 +9658,6 @@ public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
-public import WeilConjectures.WeilSheaf.PoincareDualityProper
 public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroAdjunction
 public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroIhom
