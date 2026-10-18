@@ -29,77 +29,46 @@
  ],
  "proof": [
   {
-   "text": "For the torsion underlying sheaf write $F=\\varinjlim_nF[n]$ [lemma-weil-pbc-prime-torsion-devissage]. Properness makes $f$ and every base change $f'$ quasi-compact and quasi-separated, so higher direct images along $f$ and $f'$ commute with this filtered colimit by [lemma-weil-pbc-direct-image-filtered-colimit] (the $F[n]$ and $g'^{-1}F[n]$ are torsion), while $g^{-1}$ and $g'^{-1}$ commute with colimits by [lem-weil-pbc-inverse-image-preserves-colimits]. Since $g^{-1}$ is exact, $\\mathcal H^q(\\Ex_{\\square,F})$ is the base change map $g^{-1}R^qf_*F\\to R^qf'_*g'^{-1}F$, and by the naturality of $\\Ex_\\square$ in its argument [lemma-weil-pbc-derived-exchange-replacement] applied to the inclusions $F[n]\\to F$ it is, under these colimit isomorphisms, the filtered colimit of the maps $\\mathcal H^q(\\Ex_{\\square,F[n]})$. A filtered colimit of isomorphisms is an isomorphism, and a morphism of $\\Dplus(Y'_{\\Et})$ inducing isomorphisms on all cohomology sheaves is an isomorphism [lem-weil-pbc-derived-plus-iso-on-cohomology]; so it suffices to treat the sheaves $F[n]$, each a $\\Lambda_X$-module killed by $n$.",
+   "text": "For every prime l and every cartesian square, apply the canonical inverse-image coefficient comparison [lem-weil-pbc-module-abelian-inverse-image-comparison] and the canonical derived direct-image coefficient comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] to the degree-zero complex of g'^{-1}I. Exact forgetting commutes with homology, so the hypothesis identifies the underlying abelian sheaf of its positive module-valued higher direct image with a zero object. Faithfulness of forgetting reflects the equation id = 0. Thus f has module-valued HasInjectiveAcyclicity over Lambda/l for every prime l.",
    "uses": [
-    "lemma-weil-pbc-prime-torsion-devissage",
-    "lemma-weil-pbc-direct-image-filtered-colimit",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lemma-weil-pbc-derived-exchange-replacement",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, proof paragraph 2 (F = colim F[n])"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $n$, the prime-torsion dévissage [lemma-weil-pbc-prime-torsion-devissage] supplies the short exact sequences $0\\to G[\\ell]\\to G\\xrightarrow{\\ell}\\ell G\\to0$ of torsion $\\Lambda_X$-modules, with $\\ell G$ killed by $n/\\ell$ when $nG=0$. For such a sequence the exchange maps form a morphism between the long exact sequences of higher direct images, and exchange is an isomorphism in every degree for $G$ once it is for $G[\\ell]$ and $\\ell G$ [lemma-weil-pbc-five-lemma-transfer] (the five lemma [lem-weil-pbc-five-lemma] on the morphism of triangles of [lem-weil-pbc-derived-exchange-triangulated]). By induction on the number of prime factors of $n$ [lemma-weil-pbc-prime-factor-induction] it suffices to treat a sheaf killed by one prime $\\ell$.",
+   "text": "Apply the existing coefficient-wise theorem hasTorsionBaseChange_of_hasInjectiveAcyclicity of [lemma-weil-pbc-property-iff-acyclicity] in WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients. Its proof first uses the injective-resolution/underived-exchange argument for the torsion rings Lambda/l, and then prime-factor devissage and filtered-colimit passage. This reuses, without bypassing, the unit sk-thm-iff route and yields the module-valued exchange isomorphism on every bounded-below complex with torsion homology.",
    "uses": [
-    "lemma-weil-pbc-prime-torsion-devissage",
-    "lemma-weil-pbc-five-lemma-transfer",
-    "lem-weil-pbc-five-lemma",
-    "lem-weil-pbc-derived-exchange-triangulated",
-    "lemma-weil-pbc-prime-factor-induction"
+    "lemma-weil-pbc-property-iff-acyclicity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, proof paragraph 2 (induction and five lemma)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\ell F=0$ and regard $F$ as a sheaf of $(\\Lambda/\\ell)$-modules. By [lem-weil-pbc-module-sheaves-enough-injectives] choose an injective resolution $F\\to I^\\bullet$ in $\\Mod(X_{\\Et},\\Lambda/\\ell)$, $I^m=0$ for $m<0$. Each $I^m$ is killed by $\\ell$, hence torsion, and by the coefficient-wise IA hypothesis $R^qf'_*g'^{-1}I^m=0$ for $q>0$; for the identity square ($g=\\mathrm{id}_Y$) also $R^qf_*I^m=0$ for $q>0$. All of this is about underlying abelian sheaves. Let $J=I(F)$ be the K-injective complex of abelian sheaves chosen for $F$ in the definition of $Rf_*$ [def-weil-pbc-direct-image] [def-weil-pbc-kinjective-resolutions], with $s=\\rho_F$; by [lem-weil-pbc-kinjective-hom-derived] the isomorphism $QI^\\bullet\\cong QF\\cong QJ$ is $Q(h)$ for a quasi-isomorphism of complexes $h:I^\\bullet\\to J$ under $F$, and likewise the chosen resolution of $g'^{-1}J$ is $Q(j)$ for a quasi-isomorphism $j:g'^{-1}J\\to J'$ with $J'$ K-injective. By [lem-weil-pbc-derived-exchange-termwise], applied with $(J,s)$ and $j$, $\\Ex_{\\square,F}$ is $Q(e_J)$ with $e_J=f'_*(j)\\circ\\Ex^0_{\\square,J}$, up to the isomorphisms $\\sigma_{\\rm src},\\sigma_{\\rm tgt}$. Termwise naturality of $\\Ex^0_\\square$ [lemma-weil-pbc-underived-exchange-naturality] for $h$ gives $e_J\\circ g^{-1}f_*(h)=f'_*(g'^{-1}I\\to g'^{-1}J\\to J')\\circ\\Ex^0_{\\square,I}$. Here $g^{-1}f_*(h)$ is a quasi-isomorphism, because $f_*(h)$ is one by the Leray criterion for complexes [lemma-weil-pbc-leray-acyclicity](3) applied to the $f_*$-acyclic $I^m$, and $g^{-1}$ is exact; likewise $f'_*$ of the quasi-isomorphism $g'^{-1}I\\to J'$ is a quasi-isomorphism by the same criterion applied to the $f'_*$-acyclic $g'^{-1}I^m$; and $\\Ex^0_{\\square,I}$ is an isomorphism of complexes, termwise by [lemma-weil-pbc-proper-underived-exchange] since $f$ is proper and the $I^m$ are torsion. Hence $Q(e_J)$, and so $\\Ex_{\\square,F}$, is an isomorphism.",
+   "text": "By [lem-weil-pbc-torsion-sheaf-characterizations], the filtration definition of torsion assumed for the underlying abelian sheaf of F is equivalent to local torsion. The existing isTorsionModuleSheaf_iff_isTorsion identifies this with torsion of the module sheaf F. The degree-zero complex of F has torsion homology: degree zero is F, and every other homology sheaf is zero. Apply Step 2 to this complex.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-kinjective-resolutions",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-derived-exchange-termwise",
-    "lemma-weil-pbc-underived-exchange-naturality",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lemma-weil-pbc-proper-underived-exchange"
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, proof paragraphs 2-3 (prime-torsion resolution and comparison)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The fixed compatibility equation of [lem-weil-pbc-module-abelian-derived-exchange-compatibility] identifies the forgotten module exchange followed by its invertible target comparison with its invertible source comparison followed by abelian exchange. Functors preserve isomorphisms, so cancellation proves invertibility of the specified abelian exchange on the forgotten module complex. The natural isomorphism commuting exact forgetting with the degree-zero embedding, and naturality of derived exchange, transport this to exactly the complex in the conclusion.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-prime-torsion-devissage",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lemma-weil-pbc-derived-exchange-replacement",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lemma-weil-pbc-five-lemma-transfer",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-derived-exchange-triangulated",
-  "lemma-weil-pbc-prime-factor-induction",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-kinjective-resolutions",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "lemma-weil-pbc-underived-exchange-naturality",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lemma-weil-pbc-proper-underived-exchange"
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A4B, proof paragraphs 2-3"
+  "place": "Lemma 0A4B, proof paragraphs 2-3; implemented by reusing the library coefficient theorem and canonical coefficient comparisons (Stacks 03FD, 072W, 0736 and 07A7)."
  },
  "mathlib_searches": [
   {
@@ -157,10 +126,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-module-sheaves-enough-injectives"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-11",
   "by": "L",
@@ -202,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-682537",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

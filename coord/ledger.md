@@ -16175,3 +16175,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/T6/Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous (stage 3; reviewer PASS; first push; landing 20261018T062921-L-680743 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/T7/Sheaf.AlgebraicGeometry.ProperSmoothConnectedFibreDimensionLoci (stage 3; reviewer PASS; first push; landing 20261018T062921-L-681167 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:29 L: merged deliver/T9/Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant (stage 3; reviewer PASS; first push; landing 20261018T062922-L-681792 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ArbitraryRingTorsionSheafBaseChange (stage 3; reviewer PASS; first push; landing 20261018T062923-L-682537 (proof); batch 20261018T062645; modules 1; new nodes 0)

@@ -9,17 +9,9 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-!
 # Sheaf-level proper base change for arbitrary coefficient rings
@@ -42,30 +34,21 @@ Coefficient-wise injective acyclicity for `Λ/ℓ` implies derived base change f
 `Λ`-module sheaf whose underlying abelian sheaf is torsion.
 
 Proof:
-1. Write the underlying torsion sheaf as the filtered colimit of `F[n]`, by
-`lemma-weil-pbc-prime-torsion-devissage`. Properness gives quasi-compactness and
-quasi-separatedness after every base change. Higher direct images commute with this
-colimit by `lemma-weil-pbc-direct-image-filtered-colimit`, and inverse images do so by
-`lem-weil-pbc-inverse-image-preserves-colimits`. Exactness of inverse image identifies
-cohomology of exchange with the higher-direct-image exchange maps. Naturality
-(`lemma-weil-pbc-derived-exchange-replacement`) makes the exchange for `F` the colimit
-of those for `F[n]`. Use `lem-weil-pbc-derived-plus-iso-on-cohomology` to reduce to `F[n]`.
-2. For a sheaf killed by `n`, use the sequences `0 → G[ℓ] → G → ℓG → 0`
-from `lemma-weil-pbc-prime-torsion-devissage`. Exchange respects the long exact sequences
-by `lem-weil-pbc-derived-exchange-triangulated`; the five lemma
-(`lem-weil-pbc-five-lemma`, `lemma-weil-pbc-five-lemma-transfer`) and
-`lemma-weil-pbc-prime-factor-induction` reduce to a sheaf killed by one prime `ℓ`.
-3. Choose an injective resolution in `Λ/ℓ`-module sheaves using
-`lem-weil-pbc-module-sheaves-enough-injectives`. The hypothesis gives acyclicity after
-pullback; its identity-square case gives acyclicity for `f_*`. Compare this resolution
-with the chosen abelian K-injective resolution (`def-weil-pbc-kinjective-resolutions`,
-`lem-weil-pbc-kinjective-hom-derived`). By `lem-weil-pbc-derived-exchange-termwise`,
-exchange is computed by underived exchange followed by the resolution comparison.
-Termwise naturality (`lemma-weil-pbc-underived-exchange-naturality`) and the Leray
-criterion (`lemma-weil-pbc-leray-acyclicity`, part 3) make the comparison maps
-quasi-isomorphisms. Underived exchange is a termwise isomorphism by
-`lemma-weil-pbc-proper-underived-exchange`, since the terms are torsion and `f` is proper.
-Thus the derived exchange morphism is an isomorphism. -/
+1. The canonical inverse-image and derived direct-image coefficient comparisons identify
+   the underlying abelian higher direct image of a pulled-back module sheaf with the
+   corresponding abelian expression in `hIA`. Exact forgetting commutes with homology
+   and is faithful, so vanishing of this expression implies module-valued injective
+   acyclicity over every `Λ/ℓ`.
+2. Apply the library's `hasTorsionBaseChange_of_hasInjectiveAcyclicity`. Its proof performs
+   the prime-quotient injective-resolution argument, prime-factor induction, and
+   filtered-colimit passage of Stacks 0A4B. This retains the unit's proof route.
+3. The torsion-sheaf characterization turns `hF` into local torsion of the underlying
+   abelian sheaf, equivalently `IsTorsionModuleSheaf F`. Its degree-zero complex therefore
+   has torsion homology, and the module-valued exchange is invertible there.
+4. Canonical coefficient comparisons intertwine module and abelian derived exchange.
+   Their endpoint maps are invertible, so the specified abelian exchange is invertible
+   on the forgotten complex. Naturality transports this to the degree-zero complex
+   of the underlying abelian sheaf. -/
 theorem isIso_derivedBaseChangeMapPlus_of_primeQuotient_injective_acyclicity
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (hIA : ∀ (ℓ : ℕ), ℓ.Prime →
@@ -95,6 +78,58 @@ theorem isIso_derivedBaseChangeMapPlus_of_primeQuotient_injective_acyclicity
         (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
         ((sheafCompose X.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))) := by
-  sorry
+  -- Convert the abelian vanishing hypothesis to the module-coefficient interface.
+  have hIAm : ∀ ℓ : ℕ, ℓ.Prime →
+      HasInjectiveAcyclicity (Λ ⧸ Ideal.span ({(ℓ : Λ)} : Set Λ)) f := by
+    intro ℓ hℓ Y₁ X₁ g₁ f₁ g₁' sq₁ I _ hI q hq
+    let R := Λ ⧸ Ideal.span ({(ℓ : Λ)} : Set Λ)
+    let M := (upperStar (ModuleCat.{u + 1} R) g₁').obj I
+    let L := (DerivedCategory.Plus.singleFunctor
+      (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} R)) 0).obj M
+    let e : (moduleAbelianForget R Y₁).mapDerivedCategoryPlus.obj
+          ((lowerStar (ModuleCat.{u + 1} R) f₁).rightDerivedFunctorPlus.obj L) ≅
+        (lowerStar AddCommGrpCat.{u + 1} f₁).rightDerivedFunctorPlus.obj
+          ((DerivedCategory.Plus.singleFunctor
+            (Sheaf X₁.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
+              ((upperStar AddCommGrpCat.{u + 1} g₁').obj
+                ((moduleAbelianForget R X).obj I))) :=
+      (moduleAbelianDerivedLowerStarIso R f₁).app L ≪≫
+        (lowerStar AddCommGrpCat.{u + 1} f₁).rightDerivedFunctorPlus.mapIso
+          (((moduleAbelianForget R X₁).mapDerivedCategoryPlusSingleFunctor 0).app M ≪≫
+            (DerivedCategory.Plus.singleFunctor
+              (Sheaf X₁.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).mapIso
+                ((moduleAbelianUpperStarIso R g₁').symm.app I))
+    have hz := IsZero.of_iso (hIA ℓ hℓ sq₁ I hI q hq)
+      (((moduleAbelianForget R Y₁).mapDerivedCategoryPlusHomologyFunctorIso q).app
+          ((lowerStar (ModuleCat.{u + 1} R) f₁).rightDerivedFunctorPlus.obj L) ≪≫
+        (DerivedCategory.Plus.homologyFunctor
+          (Sheaf Y₁.smallEtaleTopology AddCommGrpCat.{u + 1}) q).mapIso e)
+    change IsZero ((DerivedCategory.Plus.homologyFunctor
+      (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj
+        ((lowerStar (ModuleCat.{u + 1} R) f₁).rightDerivedFunctorPlus.obj L))
+    apply (IsZero.iff_id_eq_zero _).2
+    apply (moduleAbelianForget R Y₁).map_injective
+    rw [CategoryTheory.Functor.map_id, Functor.map_zero]
+    exact hz.eq_of_src _ _
+  -- Reuse the existing prime-factor and filtered-colimit argument.
+  have hbc := hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ f hIAm
+  have htor : Scheme.IsTorsionModuleSheaf F :=
+    (Scheme.isTorsionModuleSheaf_iff_isTorsion F).2
+      ((Scheme.isTorsionAbelianSheaf_characterizations _).1.mp hF)
+  let K := (DerivedCategory.Plus.singleFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F
+  have hK : DerivedCategory.Plus.moduleTorsionHomology Λ X K :=
+    DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj Λ X F
+  have : IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+    hbc sq K hK
+  -- Transport the specified exchange map, using the canonical compatibility equation.
+  have hcompat := moduleAbelianDerivedExchange_compatibility Λ sq.toCommSq K
+  have hforgot : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}
+      sq.toCommSq).app ((moduleAbelianForget Λ X).mapDerivedCategoryPlus.obj K)) := by
+    rw [← isIso_comp_left_iff (moduleAbelianDerivedExchangeSourceIso Λ f g K).hom,
+      ← hcompat]
+    infer_instance
+  exact (NatTrans.isIso_app_iff_of_iso _
+    (((moduleAbelianForget Λ X).mapDerivedCategoryPlusSingleFunctor 0).app F)).mp hforgot
 
 end AlgebraicGeometry.Etale
