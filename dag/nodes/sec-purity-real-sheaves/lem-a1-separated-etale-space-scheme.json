@@ -14,9 +14,69 @@
   "def-pc-fibre-product",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The chartwise etale hypothesis is exactly the hypothesis of [lem-a1-etale-space-locally-quasi-finite]. Therefore q is locally quasi-finite in the chartwise sense: for every representable etale scheme chart V→E, the composite V→X is locally quasi-finite.",
+   "uses": [
+    "lem-a1-etale-space-locally-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XU (lemma-etale-locally-quasi-finite)."
+   }
+  },
+  {
+   "text": "The assumed scheme-base-change condition on the diagonal is precisely separatedness of q: by [def-weil-proper-morphism], a morphism is separated when its diagonal is a closed immersion, and the algebraic-space meaning of closed immersion is the testwise meaning stated in the item.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Separated morphisms and their diagonal; the algebraic-space testwise convention is the item definition."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-separated-locally-qf-space-representable] with the base scheme S=X, target scheme T=X, algebraic space E, and f=q. It supplies a scheme Z over X and an isomorphism h_Z≅E over X.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme)."
+   }
+  },
+  {
+   "text": "Let $\\varphi:h_Z\\to E$ be the isomorphism over $X$ from step 3. It is a representable etale map from a scheme in the sense of [def-trf-algebraic-space]: for a scheme $T$ and a map $h_T\\to E$, the fibre product $h_Z\\times_E h_T$ is the base change of the isomorphism $\\varphi$, so the projection $h_Z\\times_Eh_T\\to h_T$ is an isomorphism; the fibre product is thus represented by $T$ and the scheme projection is an isomorphism of schemes, in particular an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). So $V=Z$ with $V\\to E$ equal to $\\varphi$ is one of the representable etale scheme charts in the item's chartwise hypothesis, and that hypothesis makes the composite $q\\circ\\varphi:Z\\to X$ an etale morphism of schemes [def-weil-etale-morphism]. Since $\\varphi$ is a map over $X$, $q\\circ\\varphi$ is the structure morphism of $Z$ over $X$, which is therefore etale.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space): representable etale maps tested on scheme base changes; an isomorphism of schemes is an open immersion, Morphisms Tag 02GP (lemma-open-immersion-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03XU and 03XX, Section 0417 (schemehood); the final etaleness of Z over X is the item's chartwise hypothesis applied to the representing isomorphism."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-proetale-local-system-representability",
@@ -67,12 +127,28 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary representability input to lem-a1-affine-hc0: Tags 03XU and 03XX in Section 0417 (schemehood), turning an etale separated algebraic space into a scheme.",
    "via": [
     "lem-a1-proetale-local-system-representability"
-   ],
-   "place": "Auxiliary representability input to lem-a1-affine-hc0: Tag 03XU (lemma-etale-locally-quasi-finite) and Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), in Section Tag 0417 (section-schemehood)."
+   ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-separated-etale-space-scheme",
+  "worker": "stage1",
+  "summary": "Split the item into the two Stacks inputs it actually uses: chartwise etale algebraic-space morphisms are locally quasi-finite (03XU), and separated locally quasi-finite algebraic spaces over schemes are representable (03XX). The item proof then identifies the diagonal hypothesis with separatedness and applies the chartwise etale hypothesis to the representing isomorphism, which is a representable etale scheme chart (Codex review FIX: step 4 no longer cites the sec-trace-formula node lem-trf-space-chartwise-etale-permanence).",
+  "blueprint": "The ancestor lem-a1-affine-hc0 needs the separated etale-space schemehood input. The four steps realize the 03XU and 03XX schemehood route in Section 0417 and the final chartwise-etale transfer.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NF-d5829664a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-d5829664a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement against Stacks spaces-morphisms.tex: 03XU (lemma-etale-locally-quasi-finite, l.7760, via Morphisms 03WS) and 03XX (proposition-locally-quasi-finite-separated-over-scheme, l.10589, Section 0417). The item matches 03XX+03XU with T=X and no quasi-compactness assumption. I tested small cases: disjoint copies of X and the empty space work as expected. The doubled line and the bug-eyed cover show the separatedness hypothesis is needed. Steps 1 and 3 apply the two new nodes with matching hypotheses. Step 2 is a harmless elementary remark. The new nodes are statement-only, self-contained and strictly smaller than the item. They do not duplicate any node: I checked them against the trf 0265/02WW/03KG representability nodes. Batch-5 check: def-trf-algebraic-space is a general definition with no proof deps, so I accepted it. lem-trf-space-chartwise-etale-permanence is a split node on the sec-trace-formula route, cited in step 4 off-unit and without a tool_uses declaration. The step does not need it, so I removed the citation. FIX: step 4 now says the representing isomorphism h_Z->E is a representable étale scheme chart, because its scheme tests are isomorphisms, hence open immersions, hence étale by the Mathlib leaf lem-weil-pbc-etale-composition-cancellation(1) (Stacks 02GP). The item's chartwise hypothesis then makes Z->X étale. Step 4 is now elementary, and proof_deps, proof_origin and the split_report summary are updated. No node dropped and no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
