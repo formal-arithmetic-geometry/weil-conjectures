@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.Sites.MonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
@@ -24,7 +25,7 @@ module-object six functors need in order to transport ring objects and module ob
   lax monoidal `g_*` (`Adjunction.leftAdjointOplaxMonoidal`). This is formal.
 * `ProEtale.isIso_η_upperStar` and `ProEtale.isIso_δ_upperStar`: the oplax structure maps
   `g^* 𝟙 ⟶ 𝟙` and `g^* (F ⊗ G) ⟶ g^* F ⊗ g^* G` are isomorphisms, i.e. `g^*` is *strong*
-  monoidal. This is the actual content of the file, and it is currently `sorry`ed, see below.
+  monoidal (`ProEtale.isIso_upperStar_η` and `ProEtale.isIso_upperStar_δ`).
 * `ProEtale.monoidal_upperStar`: the resulting strong monoidal structure on `g^*`, and
   `ProEtale.isMonoidal_upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*` is a monoidal
   adjunction in the sense of mathlib (`Adjunction.IsMonoidal`), the lax structure of `g_*` and
@@ -32,25 +33,11 @@ module-object six functors need in order to transport ring objects and module ob
 * `ProEtale.laxBraided_upperStar`: `g^*` is moreover (lax) braided, which is deduced from the
   lax braidedness of `g_*` by the mate correspondence. In particular `g^*` sends commutative
   ring objects to commutative ring objects (`Functor.isCommMonObj_obj`).
-
-## Sorried input
-
-* `ProEtale.isIso_η_upperStar` and `ProEtale.isIso_δ_upperStar`: the pullback `g^*` commutes
-  with the tensor product of sheaves. The argument: the tensor product of sheaves is the
-  sheafification of the objectwise tensor product of presheaves, `g^*` is the sheafification of
-  the left Kan extension along the opposite of base change, and both sheafification and this
-  Kan extension commute with the objectwise tensor product (the latter because the Kan extension
-  is a colimit over the comma categories of base change, which are cofiltered since base change
-  preserves finite limits, and filtered colimits commute with the tensor product, `A` being
-  closed). For `g` weakly étale, `g^*` is restriction along the localization functor of the
-  pro-étale sites, and the statement is the compatibility of sheafification with restriction
-  along a continuous cocontinuous functor.
 * `ProEtale.isMonoidal_lowerStarComp`: the composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of
-  `ProEtale.lowerStarComp` is monoidal. Both lax monoidal structures are the sheafification of
-  the objectwise one transported along the base change functors of the sites, and the
-  composition isomorphism is induced by the pullback pasting isomorphism
-  `(V ×_Z Y) ×_Y X ≅ V ×_Z X`, which is compatible with the objectwise tensor products. It is
-  the input making the composition isomorphism of pushforwards of module objects
+  `ProEtale.lowerStarComp` is monoidal. It is the composition isomorphism of pushforwards along
+  the base change functors of the sites, which is monoidal for any continuous functors
+  (`Functor.isMonoidal_sheafPushforwardContinuousComp'_hom`). It is the input making the
+  composition isomorphism of pushforwards of module objects
   (`ProEtale.CondensedRing.lowerStarComp`) available.
 
 -/
@@ -121,7 +108,14 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 a monoidal natural isomorphism, for the composite lax monoidal structure on `f_* ⋙ g_*`. See
 the module docstring. -/
 instance ProEtale.isMonoidal_lowerStarComp :
-    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := sorry
+    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := by
+  unfold ProEtale.lowerStarComp
+  have := Scheme.ProEt.isContinuous_overPullback g
+  have := Scheme.ProEt.isContinuous_overPullback f
+  have := Scheme.ProEt.isContinuous_overPullback (f ≫ g)
+  exact Functor.isMonoidal_sheafPushforwardContinuousComp'_hom A (Scheme.ProEt.topology Z)
+    (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+    (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
 
 end LowerStarComp
 

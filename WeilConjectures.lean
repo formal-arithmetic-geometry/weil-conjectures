@@ -5968,6 +5968,7 @@ public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSections
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.LocallyBijectiveFiniteLimit
 public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.CategoryTheory.Sites.MonoidalComp
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
 public import WeilConjectures.CategoryTheory.Sites.Point.DiscreteModule
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
@@ -8535,6 +8536,8 @@ public import WeilConjectures.RingTheory.SmoothStableConormalBasisAux
 public import WeilConjectures.RingTheory.SmoothStandardSmoothRetract
 public import WeilConjectures.RingTheory.Spectrum.Prime.Colimit
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantHom
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantPushout
 public import WeilConjectures.RingTheory.SquareZeroCoefficientAdjustment
 public import WeilConjectures.RingTheory.SquareZeroSmallModel
 public import WeilConjectures.RingTheory.StabilizedFiniteFreeTower

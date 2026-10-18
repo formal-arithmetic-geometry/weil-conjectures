@@ -8,9 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.Topology.LocallyConstant.Algebra
+public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantPushout
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
@@ -99,37 +102,27 @@ derived functors on module objects need.
 
 ## Main results
 
+* `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
+  is weakly étale, `LC(S, ℤ)` being weakly étale over `ℤ` (`LocallyConstant.weaklyEtale`).
+* `AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt`: the functor
+  `S ↦ Spec LC(S, ℤ)` preserves finite limits: `LC(-, ℤ)` sends a fibre product of profinite
+  sets to a pushout of rings (`Profinite.isPushout_locallyConstant_pullback`), and the point
+  to `ℤ`.
+* `AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt`: it sends a finite jointly
+  surjective family to a pro-étale covering, the underlying space of `Spec LC(S, ℤ)` being
+  `S × Spec ℤ` (`LocallyConstant.homeomorphPrimeSpectrum`). This is Lemma 4.2 of the notes.
+* `AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar` and
+  `AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar`: `p^*` is strong monoidal, being the
+  sheafification of a left Kan extension along a representably flat functor.
+* `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
+  `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is built from the conjugate of
+  the composition isomorphism of pushforwards, which is monoidal by
+  `ProEtale.isMonoidal_lowerStarComp`.
 * `AlgebraicGeometry.ProEtale.condensedPushforwardHom_id` and
   `AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp`: `η` is compatible with the identity
   and composition isomorphisms of the pushforwards. These are the cases `F = p^* Λ` of the general
   coherences `ProEtale.unitCompUpperStarComp_id` and `ProEtale.unitCompUpperStarComp_comp` of
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`.
-
-## Sorried input
-
-* `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
-  by free abelian groups; it is what makes the derived functors with values in `Ab` available.
-* `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
-  is weakly étale, `LC(S, ℤ)` being ind-Zariski over `ℤ` (the filtered colimit of the finite
-  products `ℤ^{S_i}`), and ind-Zariski algebras being weakly étale.
-* `AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt` and
-  `AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt`: the functor
-  `S ↦ Spec LC(S, ℤ)` preserves finite limits (`LC(-, ℤ)` sends a fibre product of profinite
-  sets to the tensor product, and the point to `ℤ`), and sends a finite jointly surjective
-  family to a pro-étale covering (the map on underlying spaces of `Spec LC(S, ℤ)` is the
-  projection `S × Spec ℤ → S`, so surjectivity is preserved, and the morphisms are weakly
-  étale and affine). This is Lemma 4.2 of the notes.
-* `AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt`: the left Kan
-  extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist, both sites being essentially
-  small in `u + 1` and `Ab.{u + 1}` being cocomplete for `u + 1`-small diagrams, exactly as
-  for `SmallSite.hasLeftKanExtension_op_overPullback`.
-* `AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar` and
-  `AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar`: `p^*` is strong monoidal, being the
-  sheafification of a left Kan extension along a finite limit preserving functor, which
-  commutes with the objectwise tensor product (as for `ProEtale.isIso_δ_upperStar`).
-* `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
-  `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
-  isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
 
 -/
 
@@ -139,11 +132,13 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor.OplaxMonoidal
 
-/-- Abelian groups admit functorial flat resolutions, by free abelian groups: the free abelian
-group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
+/-- Abelian groups admit functorial flat resolutions: the unit `ℤ` of the tensor product is a
+flat separator of `Ab`, so `∐_{ℤ ⟶ M} ℤ`, the free abelian group on `M`, is flat and surjects
+functorially onto `M`. This is the instance of `WeilConjectures.CategoryTheory.RingObjects.Ab`.
+-/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution Ab.{u} :=
-  sorry
+  inferInstance
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -179,8 +174,18 @@ noncomputable def profiniteToScheme : Profinite.{u} ⥤ Scheme.{u} :=
 
 /-- `Spec LC(S, ℤ) ⟶ Spec ℤ` is weakly étale. See the module docstring. -/
 instance weaklyEtale_toSpecZ_profiniteToScheme (S : Profinite.{u}) :
-    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) :=
-  sorry
+    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) := by
+  let e : CommRingCat.of (LocallyConstant S (ULift.{u} ℤ)) ≅
+      CommRingCat.of (LocallyConstant S ℤ) :=
+    (LocallyConstant.congrRightRingEquiv ULift.ringEquiv).toCommRingCatIso
+  have : WeaklyEtale (Spec.map (CommRingCat.ofHom
+      (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ))))) := by
+    rw [WeaklyEtale.Spec_iff, CommRingCat.hom_ofHom, RingHom.weaklyEtale_algebraMap_iff]
+    infer_instance
+  rw [show toSpecZ (profiniteToScheme.obj S) =
+    Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap _ _)) from
+      specULiftZIsTerminal.hom_ext _ _]
+  infer_instance
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` from profinite sets to the pro-étale site of `Spec ℤ`. -/
 noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where
@@ -194,8 +199,37 @@ lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
   rfl
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits. See the module docstring. -/
-instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} :=
-  sorry
+instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} := by
+  have hpb : PreservesLimitsOfShape WalkingCospan profiniteToScheme.{u} := by
+    refine ⟨fun {K} ↦ ?_⟩
+    have : PreservesLimit (cospan (K.map WalkingCospan.Hom.inl)
+        (K.map WalkingCospan.Hom.inr)) profiniteToScheme.{u} :=
+      preservesLimit_of_preserves_limit_cone (CompHausLike.pullback.isLimit _ _)
+        ((isLimitMapConePullbackConeEquiv _ _).symm (IsPullback.map Scheme.Spec
+          (Profinite.isPushout_locallyConstant_pullback _ _).op.flip).isLimit)
+    exact preservesLimit_of_iso_diagram _ (diagramIsoCospan K).symm
+  have : PreservesLimitsOfShape WalkingCospan profiniteToProEt.{u} := by
+    refine ⟨fun {K} ↦ ?_⟩
+    have : PreservesLimit K (profiniteToProEt ⋙ ProEt.forget specZ ⋙ Over.forget specZ) :=
+      inferInstanceAs (PreservesLimit K profiniteToScheme)
+    exact preservesLimit_of_reflects_of_preserves _ (ProEt.forget specZ ⋙ Over.forget specZ)
+  have : PreservesLimit (Functor.empty.{0} Profinite.{u}) profiniteToProEt.{u} := by
+    refine preservesLimit_of_preserves_limit_cone Profinite.isTerminalPUnit
+      ((isLimitMapConeEmptyConeEquiv _ _).symm ?_)
+    let e : CommRingCat.of (ULift.{u} ℤ) ≅ CommRingCat.of (LocallyConstant (PUnit.{u + 1}) ℤ) :=
+      RingEquiv.toCommRingCatIso (ULift.ringEquiv.trans
+        (RingEquiv.ofRingHom (LocallyConstant.constRingHom (X := PUnit.{u + 1}))
+          (LocallyConstant.evalRingHom PUnit.unit) (by ext f ⟨⟩; rfl) (by ext; rfl)))
+    have h : toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})) =
+        Spec.map e.hom := specULiftZIsTerminal.hom_ext _ _
+    have : IsIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1}))) := by
+      rw [h]
+      infer_instance
+    refine IsTerminal.isTerminalOfObj (ProEt.forget specZ) _ ?_
+    exact Over.mkIdTerminal.ofIso
+      (Over.isoMk (asIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1}))))).symm
+  have := preservesLimitsOfShape_pempty_of_preservesTerminal profiniteToProEt.{u}
+  exact preservesFiniteLimits_of_preservesTerminal_and_pullbacks _
 
 instance : RepresentablyFlat profiniteToProEt.{u} :=
   flat_of_preservesFiniteLimits _
@@ -203,19 +237,48 @@ instance : RepresentablyFlat profiniteToProEt.{u} :=
 /-- The functor `S ↦ Spec LC(S, ℤ)` sends finite jointly surjective families to pro-étale
 coverings. See the module docstring. -/
 lemma coverPreserving_profiniteToProEt :
-    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt :=
-  sorry
+    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt where
+  cover_preserve {S R} hR := by
+    obtain ⟨α, _, X, π, hπ, hR⟩ := (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).1 hR
+    have hsurj := ((Profinite.effectiveEpiFamily_tfae X π).out 0 2).1 hπ
+    refine GrothendieckTopology.superset_covering _ ?_
+      (Precoverage.generate_mem_toGrothendieck (R := Presieve.ofArrows _
+        (fun a ↦ profiniteToProEt.map (π a))) ?_)
+    · rw [Sieve.generate_le_iff]
+      rintro _ _ ⟨a⟩
+      exact Sieve.image_mem_functorPushforward _ _ (hR a)
+    let 𝒰 : (profiniteToScheme.obj S).Cover (Scheme.precoverage @WeaklyEtale) :=
+      { I₀ := α
+        X a := profiniteToScheme.obj (X a)
+        f a := profiniteToScheme.map (π a)
+        mem₀ := by
+          rw [presieve₀_mem_precoverage_iff]
+          refine ⟨fun x ↦ ?_, fun a ↦ ?_⟩
+          · obtain ⟨⟨s, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective
+              (T := S) (R := ℤ) x
+            obtain ⟨a, y, rfl⟩ := hsurj s
+            exact ⟨a, LocallyConstant.toPrimeSpectrum (y, p), rfl⟩
+          · have : WeaklyEtale (profiniteToScheme.map (π a) ≫ toSpecZ _) := by
+              rw [comp_toSpecZ]
+              infer_instance
+            exact WeaklyEtale.of_comp _ (toSpecZ (profiniteToScheme.obj S)) }
+    have (a : α) : QuasiCompact (𝒰.f a) :=
+      inferInstanceAs (QuasiCompact (Spec.map (CommRingCat.ofHom _)))
+    have : QuasiCompactCover 𝒰.toPreZeroHypercover := .of_finite
+    rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
+    exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 this, 𝒰.mem₀⟩
 
 instance isContinuous_profiniteToProEt :
     profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology specZ) :=
   Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
     coverPreserving_profiniteToProEt
 
-/-- The left Kan extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist. See the module
-docstring. -/
+/-- The left Kan extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist: the indexing comma
+categories are essentially small in `u + 1` and `Ab.{u + 1}` has colimits of that size
+(`Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`). -/
 instance hasLeftKanExtension_op_profiniteToProEt (F : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}) :
     profiniteToProEt.op.HasLeftKanExtension F :=
-  sorry
+  inferInstance
 
 /-- The profinite test object `X[S] = Spec LC(S, ℤ) ×_{Spec ℤ} X = lim_i ∐_{S_i} X` over a
 scheme `X`, as a functor from profinite sets to the pro-étale site of `X`. -/
@@ -256,13 +319,15 @@ noncomputable instance oplaxMonoidal_pointUpperStar : pointUpperStar.{u}.OplaxMo
   pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal
 
 /-- The inverse image `p^*` preserves the unit. See the module docstring. -/
-instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) :=
-  sorry
+instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) := by
+  unfold pointUpperStar
+  infer_instance
 
 /-- The inverse image `p^*` commutes with the tensor product. See the module docstring. -/
 instance isIso_δ_pointUpperStar (F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :
-    IsIso (δ pointUpperStar F G) :=
-  sorry
+    IsIso (δ pointUpperStar F G) := by
+  unfold pointUpperStar
+  infer_instance
 
 /-- The inverse image `p^*` is strong monoidal. -/
 noncomputable instance monoidal_pointUpperStar : pointUpperStar.{u}.Monoidal :=
@@ -350,8 +415,26 @@ noncomputable def upperStarFromPointComp :
 /-- The comparison `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. See the module
 docstring. -/
 instance isMonoidal_upperStarFromPointComp :
-    NatTrans.IsMonoidal (upperStarFromPointComp f).hom :=
-  sorry
+    NatTrans.IsMonoidal (upperStarFromPointComp f).hom := by
+  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction Ab.{u + 1} (f ≫ toSpecZ Y))
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    isMonoidal_upperStarLowerStarAdjunction _ _
+  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Y)).comp
+        (upperStarLowerStarAdjunction Ab.{u + 1} f))
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    Adjunction.isMonoidal_comp _ _
+  have : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f (toSpecZ Y)).inv :=
+    isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).inv
+  have hcongr {g g' : X ⟶ specZ} (h : g = g') :
+      NatTrans.IsMonoidal (eqToHom (congrArg (upperStar Ab.{u + 1}) h)) := by
+    subst h
+    exact inferInstanceAs (NatTrans.IsMonoidal (𝟙 _))
+  have := hcongr (comp_toSpecZ f)
+  unfold upperStarFromPointComp
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, eqToIso.hom]
+  infer_instance
 
 /-- The comparison `α_f : f^* Λ_Y ≅ Λ_X` of the coefficient rings pulled back from the point,
 an isomorphism of ring objects of abelian sheaves on `X_proét`. -/
