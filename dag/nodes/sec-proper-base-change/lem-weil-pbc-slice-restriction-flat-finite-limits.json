@@ -13,23 +13,23 @@
  ],
  "proof": [
   {
-   "text": "Given a finite-limit diagram of modules on the slice, apply the sheafified direct-sum extension by zero. The extension exactness equivalence identifies its finite-limit cone with the extension of the original cone.",
+   "text": "Let L be sheafified direct-sum extension, T tensoring with F, and TU tensoring with F restricted to U. Extension preserves zero morphisms: its direct-sum maps send every summand to zero, and sheafification preserves zero. Rewrite the extension exactness equivalence as S.Exact iff (S.map L).Exact for every short complex S on the slice.",
    "uses": [
     "lem-weil-pbc-ringed-slice-extension-exactness"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the extended diagram with the flat sheaf on the original site, so its finite limits are preserved. The natural extension-by-zero tensor comparison identifies this tensor diagram with the extension of the restricted tensor diagram.",
+   "text": "Evaluate the natural extension tensor comparison at each pair (G,F), and compose with tensorObjIsoSheafification on the slice and its inverse on the original site, obtaining TU composed with L naturally isomorphic to L composed with T. Naturality is the composite of the two tensor/sheafification naturality squares and the projection formula square at (f,id F).",
    "uses": [
-    "def-pc-flat-sheaf-modules",
     "lem-weil-pbc-ringed-slice-extension-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "Use the reverse implication of the extension exactness equivalence, or equivalently its cone reflection, to reflect the finite-limit comparison back to the slice. This is precisely preservation of finite limits by tensoring with the restriction.",
+   "text": "Flatness supplies finite-limit and finite-colimit preservation by T. Extend an exact short complex S using the equivalence of step 1, then apply T. Transport this exactness through the short-complex isomorphism induced by step 2, and reflect it back using step 1. Thus TU preserves exactness of every short complex. Tensoring is additive, so Mathlib Functor.preservesHomology_of_map_exact and Functor.preservesFiniteLimits_of_preservesHomology give finite-limit preservation.",
    "uses": [
+    "def-pc-flat-sheaf-modules",
     "lem-weil-pbc-ringed-slice-extension-exactness"
    ],
    "elementary": false
@@ -43,7 +43,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0E8J (lemma-restriction-flat), finite-limit component"
+  "place": "Tag 0E8J (lemma-restriction-flat), exact-complex argument; finite-limit conclusion via Mathlib exact-functor API"
  },
  "mathlib_searches": [
   {
@@ -108,14 +108,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-f26e0",
-  "group": "Q3",
+  "reviewer": "COMPILER",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261016T054838-L-158061",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG/report against packet and sheaf-dag; all modules and three direct importers compile cleanly."
+  "landing": "20261018T062909-L-675165",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
