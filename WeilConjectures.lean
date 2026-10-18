@@ -10896,6 +10896,7 @@ public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.Induction
 public import WeilConjectures.TraceFormula.KunnethVerdier

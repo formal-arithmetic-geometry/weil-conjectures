@@ -390,6 +390,7 @@ lemma id_comp_map_id_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D) 
     (c : F.obj X ⟶ Y) : 𝟙 (F.obj X) ≫ F.map (𝟙 X) ≫ c = c := by
   simp
 
+omit [IsOpenImmersion j.left] in
 /-- The adjunction `(𝟙 U)_! ⊣ L(𝟙 U)^*` on bounded constructible complexes attached to the
 compactification `U ⟶[𝟙] U ⟶[j] X` is identified with the identity adjunction by
 `(𝟙 U)_! ≅ 𝟭` and `L(𝟙 U)^* ≅ 𝟭`: `ι⁻¹ ≫ ε = u` on `L(𝟙 U)^*`. -/
@@ -419,7 +420,8 @@ lemma boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_inv_app_comp_cou
       Functor.whiskeringRight_obj_obj, boundedConstructibleOpenImmersionLowerShriekCompatibility,
       ObjectProperty.liftCompιIso, Functor.FullyFaithful.preimageIso_inv, Iso.trans_inv,
       Iso.refl_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv, NatTrans.comp_app,
-      Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.id_app, Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
+      Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.id_app, Functor.comp_obj,
+      ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
       Functor.whiskerLeft_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
       Category.id_comp, ObjectProperty.homMk_hom]
     exact Category.comp_id _

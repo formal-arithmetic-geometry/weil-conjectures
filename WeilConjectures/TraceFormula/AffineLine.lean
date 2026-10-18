@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.TraceFormula.DimensionZero
 public import WeilConjectures.TraceFormula.Fibration
+public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.TraceClass
@@ -35,10 +36,10 @@ decomposition of the fixed locus of `Φ_m` into its reduced rational points
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.WeilBoundedConstructible.nonempty_fixedPointDecomposition`: the fixed
-  scheme of the iterate `Φ_m` of the model Frobenius of a proper `X` is the finite disjoint union
-  of its rational points, each a reduced open and closed point (it is étale over `k`, the graph
-  of a Frobenius being transversal to the diagonal).
+- The description of the fixed scheme of `Φ_m` as the disjoint union of its rational points,
+  `ProEtale.CondensedRing.IsModelFrobenius.nonempty_isLimit_fixedPointsFork` (blueprint
+  `thm-trf-frobenius-fixed-points`, six-functor chapter), from which
+  `ProEtale.CondensedRing.WeilBoundedConstructible.nonempty_fixedPointDecomposition` follows.
 
 -/
 
@@ -96,13 +97,29 @@ set_option linter.overlappingInstances false in
 Frobenius `Φ` of a proper `X = X₀ ×_{k₀} k` and `m ≥ 1`, the fixed scheme of `Φ_m` (the
 equalizer of `𝟙` and `Φ_m`) is étale over `k`, the graph of a Frobenius being transversal to the
 diagonal; it is therefore the finite disjoint union of the reduced points `Spec k` given by the
-fixed rational points. This is a geometric input of the trace formula (Lang), stated here and
-not proved. -/
+fixed rational points (`IsModelFrobenius.nonempty_isLimit_fixedPointsFork`, blueprint
+`thm-trf-frobenius-fixed-points`). -/
 theorem nonempty_fixedPointDecomposition [IsAlgClosed k] {k₀ : Type u} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
     (hΦ : IsModelFrobenius Φ f₀ p) [IsProper X.hom] (K : WeilBoundedConstructible ℓ Φ) {m : ℕ}
-    (hm : 1 ≤ m) [Fintype (FixedPoint Φ m)] : Nonempty (K.FixedPointDecomposition m) :=
-  sorry
+    (hm : 1 ≤ m) [Fintype (FixedPoint Φ m)] : Nonempty (K.FixedPointDecomposition m) := by
+  obtain ⟨hl⟩ := hΦ.nonempty_isLimit_fixedPointsFork hm
+  let F : (K.graph m).FixedLocus :=
+    { F := sigmaPoint k (FixedPoint Φ m)
+      ι := fixedPointsι Φ m
+      w := fixedPointsι_comp Φ m
+      isLimit := hl }
+  have : IsProper (point k).hom := inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
+  refine ⟨
+    { F := F
+      B := fun _ ↦ point k
+      j := sigmaPointι k (FixedPoint Φ m)
+      disjoint := fun _ _ h ↦ disjoint_range_sigmaPointι k _ h
+      cover := iUnion_range_sigmaPointι k _
+      range_eq := fun x ↦ ?_ }⟩
+  have hx : K.fixedLocusPoint m F x.1 x.2 = sigmaPointι k (FixedPoint Φ m) x :=
+    Fork.IsLimit.hom_ext hl ((Fork.IsLimit.lift_ι hl).trans (sigmaPointι_fixedPointsι Φ m x).symm)
+  rw [hx, Set.range_unique]
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve** (blueprint `sk-thm-trace-formula`, through
@@ -286,26 +303,40 @@ lemma weilOpenLowerShriek_eq_mapOfNatIso (sq : IsPullback ΦU j j ΦY) :
     weilOpenLowerShriek ℓ sq = IsoAlgebra.mapOfNatIso (openSquareExchange ℓ sq) :=
   rfl
 
+/-- The compatibility of the unit of `j_! ⊣ Lj^*` with the open-square exchange `b_{Φ_Y}` and
+the Frobenius comparison of `Lj^*`: the restriction of `b_{Φ_Y}⁻¹` is the comparison, up to the
+units. -/
+lemma unit_comp_map_openSquareExchange_inv_weil (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (M : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).unit.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU).obj M) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        ((openSquareExchange ℓ sq).inv.app M) =
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU).map
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).unit.app M) ≫
+      (weilUpperStarComparison ℓ ΦU ΦY j hw).hom.app
+        ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj M) :=
+  unit_comp_map_baseChangeIso_inv_of_eq _ (weilUpperStarComparison_eq_flip sq hw) M
+
+/-- **The restriction of the Weil extension by zero** (blueprint `def-trf-weil-extension-zero`):
+the unit of `j_! ⊣ Lj^*` is an isomorphism of Weil objects `j^* (j_! K) ≅ K`. -/
+noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
+    (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
+  IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso (openSquareExchange ℓ sq)
+    (weilUpperStarComparison ℓ ΦU ΦY j hw) K
+    (unit_comp_map_openSquareExchange_inv_weil sq hw K.carrier)
+
 /-- **The degree one trace formula passes along the restriction of the Weil extension by zero**
 (blueprint `def-trf-weil-extension-zero`): the unit of `j_! ⊣ Lj^*` is an isomorphism of Weil
-objects `j^* (j_! K) ≅ K` (`IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso` applied to
-`unit_comp_map_baseChangeIso_inv_of_eq` and `weilUpperStarComparison_eq_flip`), so the degree one
-trace formula for `j^* (j_! K)` gives the one for `K`.
-
-UNFINISHED gap of this subsection: the isomorphism of Weil objects is mathematically assembled
-above, but identifying its source with `(weilUpperStar …).obj ((weilOpenLowerShriek …).obj K)`
-times out (in elaboration and in the kernel) on the instance arguments of the two descriptions of
-the categories of Weil objects, which differ by abstracted proofs. -/
+objects `j^* (j_! K) ≅ K` (`weilUpperStarWeilOpenLowerShriekIso`), so the degree one trace
+formula for `j^* (j_! K)` gives the one for `K`. -/
 theorem traceFormulaOne_of_weilUpperStar_weilOpenLowerShriek (sq : IsPullback ΦU j j ΦY)
     (hw : ΦU ≫ j = j ≫ ΦY) [IsFinite ΦU.left] [IsUniversalHomeomorphism ΦU.left]
     (K : WeilBoundedConstructible ℓ ΦU)
     (h : ((weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K)).TraceFormulaOne) :
     K.TraceFormulaOne :=
-  WeilBoundedConstructible.TraceFormulaOne.of_iso
-    (IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso (openSquareExchange ℓ sq)
-      (weilUpperStarComparison ℓ ΦU ΦY j hw) K
-      (unit_comp_map_baseChangeIso_inv_of_eq (sq := sq) _ (weilUpperStarComparison_eq_flip sq hw)
-        K.carrier)) h
+  WeilBoundedConstructible.TraceFormulaOne.of_iso (weilUpperStarWeilOpenLowerShriekIso sq hw K) h
 
 end Restriction
 
