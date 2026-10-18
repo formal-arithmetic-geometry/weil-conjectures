@@ -94,7 +94,8 @@
   "def-trf-coefficient-conventions",
   "def-trf-scheme-frobenius",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "pur713-def-pullback-comparison"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
@@ -211,5 +212,32 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9b9bdd611 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item's statement, stmt_deps, source and blueprint are byte-identical to the unsplit live copy, so the statement is unchanged. The coefficient category is the ordinary unbounded D(X_proet,A) with constant A=A_{E,n}. This is the same category as def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition. That lemma normalizes its comparisons on K-flat complexes with flat terms, as Stacks Tag 0D6D (sites-cohomology.tex 3658-3680) does. No other coefficient category is substituted. Step 1: lem-trf-constant-coefficient-composition supplies the composite-identification hypothesis of the composition lemma. Clause 4 of def-weil-l-adic-coefficient-extension makes A finite, and A is commutative. Step 2: I matched lem-trf-derived-pullback-coherence index by index with j=g^a, h=g^b, k=g^c, i.e. c_{h,k}=C_{b,c}, c_{j,kh}=C_{a,b+c}, c_{j,h}=C_{a,b}, c_{hj,k}=C_{a+b,c}, using the direction convention c_{f,g}:L(gf)^*->Lf^*Lg^*. Steps 3-6: I re-derived the recursion, the a-induction for d_{a+b}=T^a(d_b)(d_aP_b)C_{a,b} using the cocycle at (1,a-1,b), the tree-independence argument with the naturality interchange, and the inverse identity d_{r+1}^{-1}T(d_r)=C_{1,r}^{-1}=b_r. All maps are well typed. Small cases r=2, 3 and 4 and the empty scheme check out. There are no new nodes and no duplicates: lem-trf-derived-pullback-coherence is an input, not a duplicate, and lem-trf-iterated-weil-cocycle concerns phi^[m]. There is no cycle, proof_deps equals the union of uses, and no SGA source is used. The parent cites this item for c_m of def-trf-frobenius-operators, and the item makes that c_m well defined. Accepted tool use: lem-weil-pbc-proetale-derived-pullback-composition, a generic construction of the comparison isomorphism. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusPullbackComparisonCoherence",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.frobenius_pullback_comparison_coherence",
+  "declarations": [
+   "WeilConjectures.trfPositiveFunctorPower",
+   "WeilConjectures.trfPositiveFunctorPowerSplit",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPower",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPowerSplit",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobeniusPullbackPowerComparison",
+   "WeilConjectures.TraceFormulaCoefficientConventions.frobenius_pullback_comparison_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusPullbackComparisonCoherence.lean",
+  "statement": "theorem frobenius_pullback_comparison_coherence (S : TraceFormulaCoefficientConventions.{u}) : S.frobeniusPullbackPowerComparison 0 = Iso.refl (S.frobeniusPullbackPower 0) ∧ (∀ a b : ℕ, S.frobeniusPullbackPowerComparison (b + a + 1) ≪≫ trfPositiveFunctorPowerSplit (S.frobeniusPullbackPower 0) a b = S.frobeniusPullbackPowerSplit a b ≪≫ Functor.isoWhiskerLeft (S.frobeniusPullbackPower b) (S.frobeniusPullbackPowerComparison a) ≪≫ Functor.isoWhiskerRight (S.frobeniusPullbackPowerComparison b) (trfPositiveFunctorPower (S.frobeniusPullbackPower 0) a) ∧ S.frobeniusPullbackPowerComparison (b + a + 1) ≪≫ trfPositiveFunctorPowerSplit (S.frobeniusPullbackPower 0) a b = S.frobeniusPullbackPowerSplit a b ≪≫ Functor.isoWhiskerRight (S.frobeniusPullbackPowerComparison b) (S.frobeniusPullbackPower a) ≪≫ Functor.isoWhiskerLeft (trfPositiveFunctorPower (S.frobeniusPullbackPower 0) b) (S.frobeniusPullbackPowerComparison a)) ∧ (∀ (r : ℕ) (M : proEtaleDerivedCategory S.geometricBaseChange S.coefficientRing), (S.frobeniusPullbackPower 0).map ((S.frobeniusPullbackPowerComparison r).hom.app M) ≫ (S.frobeniusPullbackPowerComparison (r + 1)).inv.app M = (S.frobeniusPullbackPowerSplit 0 r).inv.app M)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b05c9da2f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b05c9da2f",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause. C_{a,b} is the canonical c_{g^a,g^b} from proEtaleConstantRingPullbackComposition (the canonical composition of lem-weil-pbc-proetale-derived-pullback-composition), via a pow_add eqToIso, in the correct direction. d_r is the recursion d_{r+1}=T(d_r)∘C_{1,r} with d_1=id. Splitting independence is (*) d_{a+b}≫assoc = C_{a,b}≫d_aP_b≫T^a(d_b) in both refinement orders, equivalent by tree induction. The inverse identity d_{r+1}^{-1}∘T(d_r)=b_r holds for all r and M. Edge cases (exponent 1/2, summand 1, zero object, empty X0, n=1) and universes are fine. No hollow defs; docstrings and the six-step proof are present; the statement is verbatim; the stmt_deps addition pur713-def-pullback-comparison is a landed node (allowed). H4 fixed: frobeniusPullbackPower was a private copy of the recorded FiniteFieldDatum.geometricGaloisDerivedPullback (def-trf-scheme-frobenius); fixes/FrobeniusPullbackComparisonCoherence.lean redefines it through that declaration, definitionally unchanged, and the node record is unchanged. nt_compile --json: delivered and fixed files both exit 0 with no diagnostics (about 10 s each)."
  }
 }
