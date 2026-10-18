@@ -17,11 +17,145 @@
   "def-pc-reduced-scheme",
   "def-weil-etale-morphism",
   "def-weil-proper-morphism",
-  "def-weil-surjective-morphism"
+  "def-weil-surjective-morphism",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:X\\to S$, let $G$ be the set of generic points of components of $S$, and put $A_X=p^{-1}(G)$. The fibre description [def-pc-scheme-fibre] identifies this set with the union of the generic fibres in the statement. The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], hence has finitely many components by [lem-weil-pbc-noetherian-finitely-many-components]. By [lem-sc-irreducible-components-cover, lem-sc-scheme-sober], every point lies in a component with a generic point. A component generic point $s$ of $S$ has no strict generalization: the closure of any generalization is irreducible, contains the component $\\overline{\\{s\\}}$, hence equals it by maximality, and sobriety gives equality of the points. If $x\\in A_X$ and $\\xi$ is the generic point of any component containing $x$, continuity gives that $p(\\xi)$ generalizes $p(x)\\in G$, so $p(\\xi)=p(x)$. Thus $A_X$ is contained in the union $C_X$ of components whose generic points map into $G$. Conversely each such generic point belongs to $A_X$, and its entire component lies in $\\overline{A_X}$. The finite union $C_X$ is closed, so $\\overline{A_X}=C_X$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.1.1 and 1.2.5, printed pp. 23, 25"
+   }
+  },
+  {
+   "text": "Give $C_X$ its reduced induced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme]; call the inclusion $i_X:X_{\\mathrm{md}}\\hookrightarrow X$. It is reduced and has exactly the required support. The components of this finite union are exactly the selected components of $X$: every irreducible subset of a finite union of closed subsets lies in one of them, and distinct components of $X$ cannot contain one another. Thus every component generic point of $X_{\\mathrm{md}}$ maps into $G$. The closed immersion $i_X$ is proper, in particular finite type, by [lem-weil-pbc-closed-immersion-proper]. Composing with $p$ gives a finite-type $S$-scheme by [lem-sfb-finite-type-composition-base-change]. Consequently $X_{\\mathrm{md}}$ belongs to the reduced maximally dominant finite-type subcategory, including when $C_X$ is empty.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5, printed p. 25"
+   }
+  },
+  {
+   "text": "Let $T$ have the hypotheses in the Hom assertion, and let $u:T\\to X$ be an $S$-morphism. By [lem-sc-irreducible-components-cover, lem-sc-scheme-sober], every $t\\in T$ is a specialization of a component generic point $\\tau$. Its image $u(\\tau)$ lies over $G$, hence in $A_X$. Continuity gives $u(t)\\in\\overline{A_X}=C_X$. Since $T$ is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] supplies a factorization $v:T\\to X_{\\mathrm{md}}$. It is unique: on an affine open of $X$, the inclusion is induced by a surjective ring map, so two lifts have identical ring maps after composing with this surjection and hence identical ring maps; these local equalities glue [def-weil-closed-immersion]. The lift is over $S$ because $i_X$ is over $S$ and $i_Xv=u$. This proves exactly the asserted Hom bijection.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5, printed p. 25; factorization as in Stacks 0356"
+   }
+  },
+  {
+   "text": "For an $S$-morphism $f:X\\to Y$, apply Step 3 with $T=X_{\\mathrm{md}}$, which has the required properties by Step 2, to $fi_X$. This defines $f_{\\mathrm{md}}$ uniquely by $i_Yf_{\\mathrm{md}}=fi_X$. The identity of $X_{\\mathrm{md}}$ satisfies the equation for $f=\\mathrm{id}_X$; for $g:Y\\to Z$, the composite $g_{\\mathrm{md}}f_{\\mathrm{md}}$ satisfies the equation for $gf$. Uniqueness gives the identity and composition laws. The same equations give naturality of the Hom bijection in both variables, establishing the stated coreflection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5, printed p. 25"
+   }
+  },
+  {
+   "text": "Fix $s\\in G$. By [lem-weil-pbc-proper-fp-permanence], base changing $i_X$ gives a closed immersion $j:(X_{\\mathrm{md}})_s\\to X_s$. Its image is all of $|X_s|$: Step 1 includes every point over $s$ in $C_X$, and [def-pc-scheme-fibre] identifies the fibre topology with that inverse image. By [lem-pur-reduction-generic-fibre] applied to $X_{\\mathrm{md}}\\to S$, this fibre is reduced, since $X_{\\mathrm{md}}$ already is reduced. The same reduced-induced construction on all of $|X_s|$ is $(X_s)_{\\mathrm{red}}$ [def-weil-pbc-scheme-reduction]. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] therefore identifies $j$ canonically with $(X_s)_{\\mathrm{red}}\\hookrightarrow X_s$. This proves the generic-fibre assertion, even if $S$ is nonreduced or has several components.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-scheme-fibre",
+    "lem-pur-reduction-generic-fibre",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.6 proof, printed p. 25; Stacks 054Z (lemma-reduction-generic-fibre)"
+   }
+  },
+  {
+   "text": "Suppose $f:X\\to Y$ is etale. It is flat and locally of finite presentation by [def-weil-etale-morphism], so its underlying map is open by [lem-weil-pbc-flat-lfp-open]. Since $f$ is over $S$, $A_X=f^{-1}(A_Y)$. We check $f^{-1}(\\overline{A_Y})=\\overline{f^{-1}(A_Y)}$. Continuity gives the inclusion from right to left. If $f(x)\\in\\overline{A_Y}$ and $U$ is any open neighbourhood of $x$, the open neighbourhood $f(U)$ of $f(x)$ meets $A_Y$. A point in that intersection has a preimage in $U$, so $U$ meets $f^{-1}(A_Y)$. This proves the reverse inclusion. By Step 1 the result is $f^{-1}(C_Y)=C_X$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.8 proof (open-immersion case), printed p. 26; same open-map closure argument for an etale map"
+   }
+  },
+  {
+   "text": "Put $P=X\\times_Y Y_{\\mathrm{md}}$. Its projection to $Y_{\\mathrm{md}}$ is etale by [lem-weil-pbc-etale-scheme-base-change]; since $Y_{\\mathrm{md}}$ is reduced, $P$ is reduced by [etale-proposition-etale-reduced]. Its projection to $X$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence], and its support is $f^{-1}(C_Y)=C_X$ by Step 6. Thus the uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] gives a unique isomorphism $X_{\\mathrm{md}}\\simeq P$ over $X$. The canonical comparison is exactly this isomorphism: its two projections are $i_X$ and $f_{\\mathrm{md}}$, whose compatibility is the defining equation in Step 4, and a closed immersion admits at most one lift. This proves the etale comparison for the specified canonical map.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5 and the open-map argument of 1.2.8; Stacks 02GO and 025O"
+   }
+  },
+  {
+   "text": "Suppose instead that $f:X\\to Y$ is proper and surjective. By [lem-weil-pbc-closed-immersion-proper], the composite $X_{\\mathrm{md}}\\to X\\to Y$ is proper and $Y_{\\mathrm{md}}\\to Y$ is proper, hence separated. Apply [lem-weil-pbc-proper-to-separated] over $Y$ to conclude that $f_{\\mathrm{md}}:X_{\\mathrm{md}}\\to Y_{\\mathrm{md}}$ is proper. Its image is closed by the definition of properness [def-weil-proper-morphism]. For each $s\\in G$, the base change $X_s\\to Y_s$ is surjective by [lem-weil-pbc-surjective-base-change]. Each point of $Y_s$ therefore lifts to a point of $X_s$, which belongs to $C_X$ by Step 1 and hence is a point of $X_{\\mathrm{md}}$. Thus the image of $f_{\\mathrm{md}}$ contains every point of $Y_{\\mathrm{md}}$ above $G$. These points are dense by Step 1 for $Y$, since $Y_{\\mathrm{md}}\\to Y$ identifies its space with $C_Y=\\overline{A_Y}$. A closed subset containing that dense subset is the whole space. This proves surjectivity as well as properness.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-to-separated",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.8, printed p. 26"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pur-reduction-generic-fibre",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-proper-to-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.1.1, 1.2.5--1.2.8, printed pp. 23--26; coreflection and proper-image argument expanded, etale comparison proved by the open-map closure argument and reduced pullback."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +191,38 @@
    "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"80\", \"text\": \"      rw [Z.property.1.closure_genericPoint (isClosed_of_mem_irreducibleComponents _ Z.property)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"153\", \"text\": \"-- and a bundled structure `DominantPartialMap`.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned types do not state this assertion or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "maximally|dominantPart|generic.*closure|closure.*generic",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Birational/Composition.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern general scheme properties, ideal-sheaf adjunction, rational maps, or geometric reducedness, not the dominant-component coreflection and its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced closure of the generic fibres of a scheme commutes with etale morphisms and preserves proper surjections",
+   "results": "8 hits; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsReduced; AlgebraicGeometry.isReduced_of_isOpenImmersion; Algebra.IsGeometricallyReduced.mk; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsReduced.mk",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern general scheme properties, ideal-sheaf adjunction, rational maps, or geometric reducedness, not the dominant-component coreflection and its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsReduced\"",
+   "results": "0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern general scheme properties, ideal-sheaf adjunction, rational maps, or geometric reducedness, not the dominant-component coreflection and its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced union of components dominating the base defines a right adjoint on reduced maximally dominant schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.kerAdjunction; AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; AlgebraicGeometry.IsDominant; AlgebraicGeometry.Scheme.range_fromSpecStalk; AlgebraicGeometry.Scheme.IsLocallyDirected.V; AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover; AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern general scheme properties, ideal-sheaf adjunction, rational maps, or geometric reducedness, not the dominant-component coreflection and its clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-calculus",
@@ -87,5 +249,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-dominant-part-coreflection",
+  "worker": "stage1",
+  "summary": "Expanded ILO II 1.2.5 and 1.2.8 into eight steps, with an explicit proof of the etale comparison. Reused all scheme-theoretic and topological tools already present in the DAG; no new nodes. Checked the generic fibre over a nonreduced base by the exact general statement of Stacks 054Z. No statement correction was needed. Added the generic-point and scheme-fibre definition dependencies. No matching project declaration or Mathlib theorem was found.",
+  "blueprint": "Ancestor proof Step 3, finiteness/duality input through ILO IX 1.1, specifically the alteration-cover calculus used in the nodal quotient reduction: Expose II 1.2.5 (coreflection and dominant components), 1.2.8 (proper surjections); the etale comparison follows from flat generization (1.1.3, 1.1.5) and preservation of reduced schemes under etale maps. Printed pp. 23--26.",
+  "tool_uses": [
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Scheme-theoretic fibre of a morphism over a point. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: A Noetherian scheme has finitely many irreducible components. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Every irreducible subset lies in an irreducible component; the components cover the space. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Schemes are sober. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Reduced induced closed subscheme structure on a closed subset: existence and uniqueness. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Closed immersions are proper. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Finite-type morphisms are stable under composition and base change. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: A map from a reduced scheme factors through a closed subscheme exactly set-theoretically. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Closed immersion of schemes. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-pur-reduction-generic-fibre",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Reduction commutes with a generic fibre. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-scheme-reduction",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: The reduction of a scheme. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Etale morphism of schemes. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Flat finite-presentation morphisms are open. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Base change of an etale morphism of schemes is etale (Stacks 02GO). No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Etale morphisms over reduced schemes are reduced. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Proper to a separated target. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Separated, universally closed and proper morphisms. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme/topology tool used by the ILO II dominant-part argument: Base change of a surjective morphism is surjective. No node of this unit replaces this tool; the alteration-cover route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pur-reduction-generic-fibre",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-proper-to-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-4421add93",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4421add93 (reviewer sub-agent of L); spot-checked: I read the source at ILO Exposé II: 1.2.1 (S Noetherian), 1.2.5 (X_md and the coreflection), the proof of 1.2.6 (the generic-fibre formula) and 1.2.8 (open immersions and proper surjections), printed pp. 23-26. The item statement is the base statement unchanged. Its étale comparison is stronger than ILO's open-immersion case and is proved by the same open-map closure argument. Steps 1-2 are correct: the closure of p^{-1}(G) equals the finite union C_X of the components over generic points, using Stacks 01T6, 0BA8, 004W and 01IS, and the reduced induced structure comes from 01J3. Step 3 is correct: a reduced T whose generic points lie over G maps into C_X, and the map factors through it by Stacks 0356 (schemes.tex l.2269, checked); uniqueness follows from the surjective ring maps of a closed immersion. Step 4 is genuinely elementary. Step 5 is correct: base change of the closed immersion has full support, (X_md)_s is reduced by the 054Z node (more-morphisms l.6690, which needs no hypotheses), and the uniqueness clause gives (X_s)_red; S may be nonreduced. Steps 6-7 are correct: an étale map is open, so f^{-1}(C_Y)=C_X; P = X x_Y Y_md is reduced because it is étale over a reduced scheme, its projection to X is a closed immersion with support C_X, and uniqueness gives P = X_md with the canonical map. Step 8 matches ILO's proof: f_md is proper (01W3/01W5 and proper-to-separated), its image is closed, and it contains the dense set A_Y. I tested an empty dominant part, S=Spec k[e]/e^2 (X_md=X_red), several base components with vertical components of X, and open-immersion and disjoint-union étale maps. A walk over all 92 dependency nodes finds no cycle and no missing node. A search for duplicates finds none: the citer lem-per-alteration-cover-calculus uses the clauses exactly as stated, and generic-fibre-finiteness-criterion has different content. The delivery cites no SGA source. I accept the 20 tool_uses: all are generic Stacks scheme and topology tools. Advisory only: the statement keeps ILO's phrase 'morphism between finite-type S-schemes'. It means an S-morphism, so stage 3 should formalize f as an S-morphism."
  }
 }
