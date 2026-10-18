@@ -13,7 +13,14 @@ public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarComp
 
 /-!
-# Pullback of pro-étale Weil sheaves is compatible with tensor products
+# The Frobenius exchange isomorphism of `ℓ`-adic pullbacks is monoidal
+
+The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of sheaves of `ℚ̄_ℓ`-modules attached to
+a morphism `j` intertwining automorphisms `a` and `b` is a monoidal natural isomorphism
+(`AlgebraicGeometry.ProEtale.isMonoidal_upperStarExchange_hom`), and it is the underlying
+isomorphism of the exchange isomorphism of `ℓ`-adic sheaves
+(`AlgebraicGeometry.ProEtale.adicUpperStarExchange_hom_app_hom`). These are the inputs of the
+compatibility of pullbacks of pro-étale Weil sheaves with tensor products.
 
 -/
 
@@ -117,21 +124,18 @@ lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom' {k : Type u} [
   rw [adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, upperStarExchange_hom_app]
   congr 1
 
+/-- The pullback of sheaves of `ℚ̄_ℓ`-modules is braided. -/
+lemma upperStar_μ_comp_map_braiding (j : T₁ ⟶ T₂)
+    (X Y : Sheaf (Scheme.ProEt.topology T₂) (WeilCoefficients.{u} l)) :
+    μ (j)^*[WeilCoefficients.{u} l] X Y ≫ (j)^*[WeilCoefficients.{u} l].map (β_ X Y).hom =
+      (β_ _ _).hom ≫ μ (j)^*[WeilCoefficients.{u} l] Y X :=
+  Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ j) _ _
+
+/-- The pushforward of sheaves of `ℚ̄_ℓ`-modules is lax braided. -/
+lemma lowerStar_μ_comp_map_braiding (g : T₁ ⟶ T₁)
+    (X Y : Sheaf (Scheme.ProEt.topology T₁) (WeilCoefficients.{u} l)) :
+    μ (g)_*[WeilCoefficients.{u} l] X Y ≫ (g)_*[WeilCoefficients.{u} l].map (β_ X Y).hom =
+      (β_ _ _).hom ≫ μ (g)_*[WeilCoefficients.{u} l] Y X :=
+  Functor.LaxBraided.braided _ _
+
 end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry
-
-open ProEtale Endofunctor
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))]
-
-set_option hygiene false in
-local notation "𝐒" => Spec (CommRingCat.of k₀)
-
-set_option hygiene false in
-local notation "bc[" f "]" =>
-  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
-
-end AlgebraicGeometry
