@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.LowerStarId
@@ -661,24 +662,6 @@ noncomputable def WeilSheaf.upperStarNegIsoLowerStarNeg :
   (CategoryTheory.Equivalence.mk _ _ (WeilSheaf.upperStarNegUnitIso k₀ l)
     (WeilSheaf.upperStarNegUnitIso k₀ l).symm).toAdjunction.rightAdjointUniq
     (WeilSheaf.upperStarLowerStarAdjunction (affineLine.smul k₀ (-1)))
-
-/-- The images of two endomorphisms conjugate under an isomorphism are isomorphic. -/
-theorem _root_.CategoryTheory.nonempty_iso_image_of_comp_eq {C : Type*} [Category* C]
-    [Abelian C] {A B : C} (e : A ≅ B) (f : A ⟶ A) (g : B ⟶ B) [HasImage f] [HasImage g]
-    (h : f ≫ e.hom = e.hom ≫ g) :
-    Nonempty (Limits.image f ≅ Limits.image g) := by
-  have hg : (e.inv ≫ Limits.factorThruImage f) ≫ (Limits.image.ι f ≫ e.hom) = g := by
-    rw [Category.assoc, Limits.image.fac_assoc, h, Iso.inv_hom_id_assoc]
-  have : StrongEpi (e.inv ≫ Limits.factorThruImage f) := strongEpi_of_epi _
-  exact ⟨Limits.image.isoStrongEpiMono _ _ hg⟩
-
-/-- An exact functor of abelian categories preserves images. -/
-theorem _root_.CategoryTheory.nonempty_iso_obj_image {C D : Type*} [Category* C] [Category* D]
-    [Abelian C] [Abelian D] (Φ : C ⥤ D) [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
-    {A B : C} (f : A ⟶ B) [HasImage f] [HasImage (Φ.map f)] :
-    Nonempty (Φ.obj (image f) ≅ image (Φ.map f)) :=
-  ⟨Φ.mapIso (Abelian.imageIsoImage _).symm ≪≫ Abelian.PreservesImage.iso Φ _ ≪≫
-    Abelian.imageIsoImage _⟩
 
 /-- `φ^* F ≅ g'^* G` for `F ≅ g^* G` and `φ ≫ g = g'`. -/
 theorem WeilSheaf.nonempty_iso_upperStar_obj_of_iso {X Y : Scheme.{u}}

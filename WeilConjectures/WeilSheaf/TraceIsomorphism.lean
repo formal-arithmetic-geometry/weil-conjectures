@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.PoincareDualityLisse
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -52,9 +53,11 @@ on which `F` acts as asserted. The value line `ℚ̄_ℓ(-d)` is `ℚ̄_ℓ` wit
 *Coefficients.* The blueprint states the field-stage results for `E` and `ℚ̄_ℓ`; Weil sheaves
 in the repository have coefficients `ℚ̄_ℓ`, so only the stage `ℚ̄_ℓ` is stated.
 
-*Ingredients.* The degreewise perfectness of another subsection is stated here, with `sorry`, in
-the form needed:
-`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`
+*Ingredients.* The degreewise perfectness of another subsection, in the form needed,
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`,
+is the case `F = ℚ̄_ℓ` of the lisse statement
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`, since
+`ℚ̄_ℓ^∨(d) ≅ ℚ̄_ℓ(d)`
 (`thm-pod-degreewise-perfectness-over-a-field`, with the Frobenius invariance of
 `sk-thm-frobenius`). The other inputs are the clauses of `prop-cohomological-finiteness`
 (`WeilConjectures.WeilSheaf.Finiteness`), put in the form needed:
@@ -107,8 +110,23 @@ theorem exists_isPerfPair_compactlySupportedCohomology_adicConstant (d : ℕ)
     ∃ P : ((adicConstant k₀ l X).compactlySupportedCohomology i).carrier →ₗ[PadicAlgCl l]
         ((tateTwistSheaf k₀ l X d).cohomology j).carrier →ₗ[PadicAlgCl l] PadicAlgCl l,
       P.IsPerfPair ∧ ∀ x y, P (((adicConstant k₀ l X).compactlySupportedCohomology i).frobenius x)
-        (((tateTwistSheaf k₀ l X d).cohomology j).frobenius y) = P x y :=
-  sorry
+        (((tateTwistSheaf k₀ l X d).cohomology j).frobenius y) = P x y := by
+  have hA := isLisse_adicConstant k₀ l X
+  obtain ⟨P, hP, hPF⟩ := exists_isPerfPair_compactlySupportedCohomology_dual d hA i j h
+  -- `ℚ̄_ℓ(d) ≅ (ℚ̄_ℓ)^∨(d)`: both are `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵈ}`
+  let e : tateTwistSheaf k₀ l X d ≅
+      ((adicConstant k₀ l X).dual hA).constantTwist (cyclotomicUnit k₀ l ^ d) :=
+    ObjectProperty.isoMk _ (tateTwistSheafObjIso k₀ l X d ≪≫
+      ProEtaleWeilSheaf.constantTwistCongrIso (by simp) _ ≪≫
+      (ProEtaleWeilSheaf.constantTwistObjConstantTwistIso 1⁻¹ (cyclotomicUnit k₀ l ^ d) _).symm ≪≫
+      (ProEtaleWeilSheaf.constantTwist k₀ l X _).mapIso
+        (dualObjIsoOfIso _ hA (ProEtaleWeilSheaf.constantTwistOneObjIso _).symm).symm ≪≫
+      (constantTwistObjIso _ _).symm)
+  let E := cohomologyEquivOfIso e j
+  refine ⟨P.compl₁₂ (LinearEquiv.refl _ _).toLinearMap E.toLinearEquiv.toLinearMap,
+    LinearMap.IsPerfPair.compl₁₂ (p := P) (LinearEquiv.refl _ _) E.toLinearEquiv, fun x y ↦ ?_⟩
+  simp only [LinearMap.compl₁₂_apply, LinearEquiv.coe_coe, LinearEquiv.refl_apply]
+  rw [E.map_frobenius, hPF]
 
 end Ingredients
 
