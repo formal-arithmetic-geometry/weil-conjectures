@@ -17,9 +17,86 @@
   "def-weil-residue-field",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Properness includes finite type, and finite type includes locally of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Apply [lem-per-generically-finite-quasifinite-over-dimension-one] with $g=f$, $Z=Y$, $S=X$, and $s=x$. Its local Noetherian, dimension, and generic algebraicity hypotheses are precisely the hypotheses of the item. Hence $f$ is quasi-finite at every point over $x$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-per-generically-finite-quasifinite-over-dimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+   }
+  },
+  {
+   "text": "Put $F=Y\\times_X\\operatorname{Spec}\\kappa(x)$, the scheme-theoretic fibre [def-pc-scheme-fibre]. Its underlying space is homeomorphic to $f^{-1}(\\{x\\})$. For every point $y$ over $x$, [lem-weil-pbc-quasi-finite-at-point-isolated] applies because $f$ is locally of finite type and is quasi-finite at $y$. Thus each corresponding singleton of $F$ is open: $F$ is discrete.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+   }
+  },
+  {
+   "text": "The morphism $F\\to\\operatorname{Spec}\\kappa(x)$ is the base change of $f$, hence proper by clause (1) of [lem-pc-proper-base-change]. The target is affine by [def-weil-affine-spectrum]. Applying [pqf-lem-proper-basic] to this proper morphism over an affine target shows that $F$ is quasi-compact.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-weil-affine-spectrum",
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-quasi-compact-scheme], the open covering of $F$ by all its singletons admits a finite subcover. A union of finitely many singletons is finite, so $F$ has finitely many points. The homeomorphism of [def-pc-scheme-fibre] then shows that $f^{-1}(\\{x\\})$ is a finite set. This also includes the empty-fibre case, using the empty finite subcover.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proper-finite-fibre-finite-near] to the original proper morphism $f:Y\\to X$ and the point $x$. The preceding step supplies exactly its finite-set hypothesis; this theorem imposes no Noetherian condition on the target. It gives an open neighbourhood $V$ of $x$ such that $f^{-1}(V)\\to V$ is finite, as required.",
+   "uses": [
+    "lem-trf-proper-finite-fibre-finite-near"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-per-generically-finite-quasifinite-over-dimension-one",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-pc-proper-base-change",
+  "def-weil-affine-spectrum",
+  "pqf-lem-proper-basic",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-trf-proper-finite-fibre-finite-near"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB7, varieties-lemma-finite-in-codim-1, proof for condition (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +132,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsFinite f ↔ IsProper f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite) →\\n    AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes. If for every affine open subset $U \\\\subseteq Y$, the ring of sections $\\\\Gamma(f^{-1}(U), \\\\mathcal{O}_X)$ is a finitely generated module over $\\\\Gamma(\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper generically finite morphism finite in a neighborhood of a point of local dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: proper plus locally quasi-finite, or proper plus a finite fibre, is available; the generic-algebraicity-to-finite-fibre implication is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : @AlgebraicGeometry.IsFinite = @AlgebraicGeometry.IsProper ⊓ @AlgebraicGeometry.IsAffineHom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsProper f] [AlgebraicGeometry.LocallyQuasiFinite f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"[Stacks Tag 02LS](https://stacks.math.columbia.edu/tag/02LS) ((1) <=> (3))\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" : @AlgebraicGeometry.IsFinite = @AlgebraicGeometry.IsProper ⊓ @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsProper f] (y : ↥Y) (hx : (⇑f ⁻¹' {y}).Finite) : ∃ V, y ∈ V ∧ AlgebraicGeometry.IsFinite (f ∣_ V)\", \"doc\": \"[Stacks Tag 02UP](https://stacks.math.columbia.edu/tag/02UP)\"}\n  {\"name\": \"AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ S) (s : ↥S) (H : (⇑f '' ⇑(CategoryTheory.CategoryStruct.comp f g) ⁻¹' {s}).Finite) [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g] [AlgebraicGeometry.LocallyOfFiniteType g] : ∃ U, s ∈ U ∧\", \"doc\": \"[Stacks Tag 0AH8](https://stacks.math.columbia.edu/tag/0AH8)\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: proper plus locally quasi-finite, or proper plus a finite fibre, is available; the generic-algebraicity-to-finite-fibre implication is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "0AB7|finite.*codim|genericallyFinite",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: proper plus locally quasi-finite, or proper plus a finite fibre, is available; the generic-algebraicity-to-finite-fibre implication is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper generically finite morphism finite in codimension one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsFinite f ↔ IsProper f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite) →\\n    AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes. If for every affine open subset $U \\\\subseteq Y$, the ring of sections $\\\\Gamma(f^{-1}(U), \\\\mathcal{O}_X)$ is a finitely generated module over $\\\\Gamma(\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: proper plus locally quasi-finite, or proper plus a finite fibre, is available; the generic-algebraicity-to-finite-fibre implication is absent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-modification-codimension-one",
@@ -84,5 +189,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-generically-finite-proper-near-dimension-one",
+  "worker": "stage1",
+  "summary": "Followed Stacks Tag 0AB7 condition (1), preserving the statement. Added only the general locally-finite-type quasi-finiteness input Tag 0AB6 as an unsplit child. All other non-elementary inputs reuse existing nodes; compact discrete implies finite is written as an elementary singleton-cover step. Searched source, DAG, whole blueprint, and Mathlib and checked every cited statement.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses; input Tag 0AB7, varieties-lemma-finite-in-codim-1, condition (1); this split realizes the Tag 0AB7 input of the codimension-one modification lemma, via its quasi-finite fibre, finite fibre, and finite-neighbourhood argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "The pointwise quasi-finiteness-to-isolated-fibre-point implication is a generic scheme-theoretic tool, not given by this perverse-sheaf unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness of the scheme-theoretic fibre is the base-change permanence tool; this unit does not reprove it."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Quasi-compactness of a proper scheme over an affine base is a generic tool needed for the singleton-cover argument."
+   },
+   {
+    "node": "lem-trf-proper-finite-fibre-finite-near",
+    "why": "The general proper finite-fibre neighbourhood theorem is the final tool explicitly invoked by Tag 0AB7, using its non-Noetherian generalization Tag 02UP."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-pc-proper-base-change",
+  "pqf-lem-proper-basic",
+  "lem-trf-proper-finite-fibre-finite-near"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-ec7585303",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-ec7585303 (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against the Stacks source; the review is in review.md. Item vs varieties 0AB7 condition (1) (lines 3267-3297): matches hypothesis by hypothesis, statement unchanged. New node lem-per-generically-finite-quasifinite-over-dimension-one vs 0AB6 condition (1) (lines 3187-3265): matches the source and is true without properness or a global Noetherian hypothesis. Each notion it uses cites a definition node that defines it, and it is statement only. It is strictly smaller than the item (quasi-finiteness only, no properness), so it is not a restatement and makes no cycle. Steps: 1 applies 0AB6 with locally finite type taken from proper ⊂ finite type; 2 applies 01TH isolated points through the def-pc-scheme-fibre homeomorphism, so the fibre is discrete; 3 shows the fibre is proper by base-change clause (1) and quasi-compact by pqf-lem-proper-basic's affine clause; 4 (marked elementary, and it is) concludes that a quasi-compact discrete fibre is finite, empty fibre included; 5 applies 02UP (more-morphisms lines 12594-12622, no Noetherian hypothesis). That repairs 0AB7's citation of 02OH, which needs a locally Noetherian target. thm-sc-proper-finite-fibre-finite-neighbourhood assumes a locally Noetherian S and cannot replace step 5. Duplicates: the trf curve nodes citing 0AB6/0AB7 are special cases, and the blueprint main-20261015 has no 0AB6/0AB7 node. Batch-5 flag on lem-trf-proper-finite-fibre-finite-near: its full 142-node closure reaches no trace-formula, Poincare-duality or target node, only the generic Mathlib leaf lem-pod-separated-finite-type-base-change. It is Stacks 02UP, generic scheme theory that neither assumption gives, and non-trace chapters already cite it, so I accept it as a tool. The four declared tool_uses (01TH, proper base change, proper-basic, 02UP) are accepted. Small cases checked: A^1_k over Spec k is excluded by the transcendental generic point; an empty fibre is vacuous; dimension 0 is allowed; the blow-up of A^2 shows the dimension bound is needed. No fixes."
  }
 }
