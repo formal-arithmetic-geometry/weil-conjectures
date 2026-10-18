@@ -16,9 +16,122 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "It suffices to test the proposed function after every strict localization of $P$, by [lem-per-dimension-functions-strict-localization]. Fix a geometric point $\\bar u$ of $P$ and its image $\\bar x$ in $X$. By [lem-per-regular-strict-local-model] the induced map $f:Y=P_{(\\bar u)}\\to S=X_{(\\bar x)}$ is local and regular between Noetherian excellent strictly local schemes, and its local fibre dimensions agree with the original ones at every point. By [lem-per-dimension-functions-strict-localization], $d_S=\\delta_X\\circ|S\\to X|$ is a dimension function. Thus the pullback of the proposed function is $d_S(f(y))-b_f(y)$. Write $S=\\operatorname{Spec}A$, $Y=\\operatorname{Spec}B$, with maximal ideal $\\mathfrak m$ of $A$. The map $A\\to B$ is flat by [def-weil-flat-morphism] applied at the closed point.",
+   "uses": [
+    "lem-per-dimension-functions-strict-localization",
+    "lem-per-regular-strict-local-model",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4, first reduction; XVII, strict-local reductions preceding Lemma 4.3.2.3."
+   }
+  },
+  {
+   "text": "Choose a dimension function $d$ on $Y$ using [lem-per-local-dimension-function-calculus]. We will use the following direct chain computation for $S$ and $Y$: if $v\\rightsquigarrow w$ is a Zariski specialization, then $d(v)-d(w)=\\dim\\mathcal O_{\\overline{\\{v\\}}_{\\mathrm{red}},w}$ (and the same formula for $d_S$). Indeed, excellence gives the bounded saturated-chain property in [def-exc-excellent-ring]; choose a saturated chain in the indicated local closure. Each consecutive pair is Zariski immediate and hence geometric immediate by [lem-per-immediate-specialization-criterion], so each difference is one. Summing gives its length, which is the displayed dimension by catenarity. The length-zero case gives zero.",
+   "uses": [
+    "lem-per-local-dimension-function-calculus",
+    "def-exc-excellent-ring",
+    "lem-per-immediate-specialization-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Theorem 2.2.1, proof of Lemma 2.2.5, and Proposition 2.1.4."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\subset A$, the affine fibre with ring $F_{\\mathfrak p}=B\\otimes_A\\kappa(\\mathfrak p)$ is integral. To see this using precisely [lem-per-strict-local-regular-integral-fibres], extend $\\kappa(\\mathfrak p)$ to an algebraically closed field $K$. That node says that $\\operatorname{Spec}(F_{\\mathfrak p}\\otimes_{\\kappa(\\mathfrak p)}K)$ is nonempty and integral. The ring map $F_{\\mathfrak p}\\to F_{\\mathfrak p}\\otimes K$ is injective: choose a $\\kappa(\\mathfrak p)$-linear functional $K\\to\\kappa(\\mathfrak p)$ taking $1$ to $1$, whose tensor with the identity is a left inverse. Hence $F_{\\mathfrak p}$ is a nonzero subring of a domain and is itself a domain. This proves integrality only for this local morphism of strict localizations.",
+   "uses": [
+    "lem-per-strict-local-regular-integral-fibres",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.2.3; descent of the affine domain condition along a field extension is the displayed linear retraction."
+   }
+  },
+  {
+   "text": "Put $C_{\\mathfrak p}=B/\\mathfrak pB$. By [lem-weil-pbc-flat-module-base-change] it is flat over the domain $A/\\mathfrak p$, and by [lem-trf-flat-module-torsionfree-domain] multiplication by each nonzero element of $A/\\mathfrak p$ is injective on it. Consequently its map to its localization $F_{\\mathfrak p}$ is injective: an element in the kernel is killed by one such nonzero scalar, so is zero. Step 3 shows that $C_{\\mathfrak p}$ is a domain. Thus $\\mathfrak q_{\\mathfrak p}=\\mathfrak pB$ is a prime of $B$, contracting to $\\mathfrak p$ (a nonzero scalar cannot kill $1$ in $C_{\\mathfrak p}$). It is the unique generic point of the fibre. In particular $\\mathfrak q_{\\mathfrak m}=\\mathfrak mB$ is prime.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebraic expansion of XIV Proposition 2.5.4, fibre-generic points; Stacks 00HI (lemma-flat-base-change) and the flat-domain torsion-free implication."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-height-formula] to the flat map of Noetherian rings $A/\\mathfrak p\\to C_{\\mathfrak p}$ and the prime $\\mathfrak q_{\\mathfrak m}/\\mathfrak pB$. Its contraction is the maximal ideal $\\mathfrak m/\\mathfrak p$; the localized source is $A/\\mathfrak p$. The local closed fibre is $(B/\\mathfrak mB)_{(0)}=\\operatorname{Frac}(B/\\mathfrak mB)$, a field, so has dimension zero. The formula gives\n$$\\dim(C_{\\mathfrak p})_{\\mathfrak q_{\\mathfrak m}/\\mathfrak pB}=\\dim(A/\\mathfrak p).$$\nAll quotients are Noetherian, and the primeness and flatness needed here were established in step 4. No finite-type assumption has entered.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, lemma-dimension-base-fibre-equals-total, applied after quotient by the base prime."
+   }
+  },
+  {
+   "text": "Apply the chain computation of step 2 to $\\mathfrak p\\rightsquigarrow\\mathfrak m$ in $S$ and $\\mathfrak q_{\\mathfrak p}\\rightsquigarrow\\mathfrak q_{\\mathfrak m}$ in $Y$. Their reduced local closures have dimensions $\\dim(A/\\mathfrak p)$ and $\\dim(C_{\\mathfrak p})_{\\mathfrak q_{\\mathfrak m}/\\mathfrak pB}$, equal by step 5. Subtracting the two differences therefore gives\n$$d_S(\\mathfrak p)-d(\\mathfrak q_{\\mathfrak p})=d_S(\\mathfrak m)-d(\\mathfrak q_{\\mathfrak m}).$$\nThis proves the needed constancy at the fibre-generic points without presupposing the specialization-geometry node, whose proof depends on this item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4, comparison at fibre-generic points; explicit subtraction using steps 2 and 5."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be any prime of $B$ over $\\mathfrak p$. It contains $\\mathfrak q_{\\mathfrak p}=\\mathfrak pB$. Its reduced local closure from this generic point is $(C_{\\mathfrak p})_{\\mathfrak q/\\mathfrak pB}=B_{\\mathfrak q}/\\mathfrak pB_{\\mathfrak q}$. By [lem-sbc-scheme-fibre-stalk-quotient], this is the local ring of the fibre at $\\mathfrak q$: the maximal ideal of $A_{\\mathfrak p}$ generates exactly $\\mathfrak pB_{\\mathfrak q}$. Its dimension is $b_f(\\mathfrak q)$. The chain computation in step 2 gives\n$$d(\\mathfrak q)=d(\\mathfrak q_{\\mathfrak p})-b_f(\\mathfrak q).$$\nThe displayed ring identification also follows directly by successive localization of the quotient, as in [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4, constancy on each fibre; local ring identification is Stacks Tag 0HA1, lemma-local-ring-fibre, schemes.tex lines 3544–3563."
+   }
+  },
+  {
+   "text": "For every $\\mathfrak q$ over $\\mathfrak p$, steps 6 and 7 yield\n$$d_S(\\mathfrak p)-b_f(\\mathfrak q)=d(\\mathfrak q)+d_S(\\mathfrak m)-d(\\mathfrak q_{\\mathfrak m}).$$\nThe right side is a dimension function, since adding a fixed integer to $d$ preserves the decrease by one along every immediate geometric specialization. Thus the proposed function pulls back to a dimension function on every strict localization of $P$. The converse implication of [lem-per-dimension-functions-strict-localization] proves the assertion on $P$. If $P$ is empty the condition is vacuous; the length-zero and zero-dimensional fibre cases are included in these identities.",
+   "uses": [
+    "lem-per-dimension-functions-strict-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4, conclusion by the constant difference with a dimension function."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-dimension-functions-strict-localization",
+  "lem-per-regular-strict-local-model",
+  "def-weil-flat-morphism",
+  "lem-per-local-dimension-function-calculus",
+  "def-exc-excellent-ring",
+  "lem-per-immediate-specialization-criterion",
+  "lem-per-strict-local-regular-integral-fibres",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIV Proposition 2.5.4, printed pp.217–218, with XVII Lemma 4.3.2.3. Agent-written algebraic expansion of the same strict-local, fibre-generic comparison, replacing the last Hauptidealsatz calculation by Stacks 00ON on A/p -> B/pB."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +167,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimensionFunction|dimension_function|dimension function|codimensionFunction",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state the dimension-function assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Flat\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state the dimension-function assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension functions on excellent schemes pull back along regular morphisms by subtracting local fibre dimension",
+   "results": "Returned AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state the dimension-function assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of codimension functions for a flat morphism with geometrically regular fibres of excellent schemes",
+   "results": "Returned AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.UniversallyOpen.fst, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.instQuasiCompactFstScheme",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state the dimension-function assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A codimension function pulls back under a regular scheme map with correction minus the height in the fibre",
+   "results": "Returned ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, Ideal.height_le_height_add_spanFinrank_of_le, height_le_ringKrullDim_quotient_add_spanFinrank, Ideal.height_le_height_add_of_liesOver, Module.supportDim_add_length_eq_supportDim_of_isRegular, Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors, Ideal.height_le_ringKrullDim_quotient_add_encard",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state the dimension-function assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-specialization-geometry",
@@ -80,5 +228,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-dimension-function-pullback",
+  "worker": "stage1",
+  "summary": "Checked the exact regular (not finite-type) statement against ILO XIV Proposition 2.5.4. Retained it unchanged. Split the strict-local proof using existing local-model, integral-fibre, dimension-function and flat-height nodes; one new statement-only strict-local locality lemma. Gave explicit domain descent, quotient-flatness and codimension calculations, avoiding the circular specialization-geometry citation. Mathlib searches found only the already-existing height formula, not the item or the locality lemma.",
+  "blueprint": "Proof Step 3 of lem-per-artin-gabber-affine-curve in the master blueprint (lower perverse bound via Verdier duality), through regular pullback of the finite-coefficient potential dualizing complexes: the generic-fibre lifting and codimension argument. Supporting input: Regular pullback of dimension functions by fibre local dimension. The eight steps supply the dimension-function input to regular pullback of potential dualizing complexes in that Step 3; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Step 7 uses only the generic local ring of a fibre formula (Stacks 0HA1); no node of this perverse unit supplies that algebraic identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-914e8ac27",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-914e8ac27 (reviewer sub-agent of L); spot-checked: Item statement matches ILO XIV Prop 2.5.4, pp.217-218 (regular morphism of excellent schemes, δ_Y = δ_X∘f − dim O_{Y_{f(y)},y}): unchanged, sign correct, no finite-type hypothesis added. New node lem-per-dimension-functions-strict-localization is true. ⇐: take t̄ = v̄; T_(v̄) is strictly local. ⇒: ind-étale invariance of strict localization, as in ILO XIV 2.1.8. It is statement-only, not a duplicate of any existing dimension-function node, strictly smaller than the item, and its blueprint ancestor matches the tool output. Steps checked: (1) the local-model node gives regular local f, excellence and equal fibre dimensions, and A→B is flat at the closed point. (2) The saturated-chain formula d(v)−d(w)=dim O_{Z,w} uses catenarity plus the criterion's clause (a) and its consequently clause. (3) Integral geometric fibre (XVII 4.3.2.3, proved without XIV 2.5.4, so no cycle); a linear retraction makes F_p a domain. (4) Flat base change and torsion-freeness give B/pB ⊂ F_p, so pB is prime over p and is the fibre's generic point. (5) The 00ON height formula on A/p→B/pB at mB/pB gives dim A/p. (6) Elementary subtraction. (7) Stacks 0HA1 gives B_q/pB_q = O_{Y_p,q}. (8) The result is d plus a constant; descend to P with the new lemma. I found no cycle in the closures of the cited nodes. Tool use of lem-sbc-scheme-fibre-stalk-quotient is accepted as a generic Stacks 0HA1 identification. Batch-5 flags: the criterion's closure reaches only generic algebra nodes in sec-trace-formula (ind-etale-strict-local-invariance / 05WR, henselian permanence, closed-immersion cartesian, ind-etale-local-henselian-integral, bounded-below derived adjunction, def henselization-at-prime). lem-trf-flat-module-torsionfree-domain is a Mathlib leaf for flat ⇒ torsion-free. None of these is part of the trace formula or Poincaré duality, so both flags are accepted. No SGA source is cited. No fixes."
  }
 }
