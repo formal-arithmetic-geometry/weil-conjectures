@@ -16,9 +16,157 @@
   "def-weil-residue-field",
   "def-weil-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every finite coefficient field $E$, put $R=\\mathcal O_E$, $A_n=R/\\varpi_E^n$, and $\\mathcal I_T=D^b_c(T,R)$. The schemes $T=X,Y,s$ are noetherian of finite dimension with $\\ell$ invertible. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies the integral category underlying [def-weil-pbc-qbar-category] with the completed integral category used for the operations: it explicitly includes the compatible etale-origin witnesses and the alternative integral notation. Its closure under shifts and cones will also be used below. Thus the raw localization [def-weil-pbc-rational-category] and common-field representatives [def-weil-pbc-qbar-category] use exactly these integral stages, without adjoining a Karoubi envelope.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Sections 6.5–6.6; identification with the specified completed categories"
+   }
+  },
+  {
+   "text": "Apply [lem-per-adic-exceptional-projection] to $a_T:T\\to s$. It gives the constructible adjunction $Ra_{T!}\\dashv a_T^!$ and an integral object $\\omega_{T,R}=a_T^!R_s$. Its canonical first reduction is $a_{T,1}^!(A_1)_s$. By [lem-per-finite-residue-dualizing], this is the normalized finite-coefficient dualizing complex for $\\delta_T(t)=\\operatorname{trdeg}_k\\kappa(t)$. Thus the integral object is defined by extraordinary pullback of the unit, with its relative normalization fixed by this normalized first reduction. At $T=s$ the structure map is the identity, so its adjoint and dualizing object are respectively the identity and $R_s$. No claim concerning global Galois cohomological dimension is used.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "lem-per-finite-residue-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.18–6.7.20; ILO XVII 4.1.2 and 6.1.1 for normalization"
+   }
+  },
+  {
+   "text": "Set $D_{T,R}K=H_R(K,\\omega_{T,R})$. By [lem-per-adic-closed-constructible] this stays in $\\mathcal I_T$, and hence so does its double dual. Let $\\delta_K:K\\to D_{T,R}^2K$ be the transpose of evaluation, with the tensor symmetry inserted. The evaluation-normalized comparisons [lem-coef-integral-hom-reduction], applied first to $(K,\\omega_{T,R})$ and then to $(D_{T,R}K,\\omega_{T,R})$, identify its first reduction with the evaluation-defined bidual map for $K_1$ and $\\omega_{T,1}$. This is an isomorphism by the pro-etale realization clause of [lem-per-finite-residue-dualizing]; that clause identifies the actual pro-etale internal Hom and evaluation, not just the underlying constructible categories. To see directly that this detects the integral isomorphism, take the cone $C$ of $\\delta_K$. It is derived complete by the category characterization in step 1. Its first derived reduction is zero. Tensoring the coefficient exact sequences $0\\to\\varpi^{n-1}R/\\varpi^nR\\to R/\\varpi^nR\\to R/\\varpi^{n-1}R\\to0$ with $C$ inductively makes all $C\\otimes_R^LA_n$ zero. The reconstruction triangle in [def-weil-derived-complete] then has two zero product terms, so $C=0$. This proves the actual integral $\\delta_K$ is an isomorphism, natural in $K$.",
+   "uses": [
+    "lem-per-adic-closed-constructible",
+    "lem-coef-integral-hom-reduction",
+    "lem-per-finite-residue-dualizing",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.13 and 6.7.20: lift the finite bidual map using completeness"
+   }
+  },
+  {
+   "text": "The ringed-site internal Hom takes triangles to dual triangles and has the signed comparison $H_R(K[n],\\omega)\\cong H_R(K,\\omega)[-n]$, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. These comparisons are the ones in the given adic operations. Thus $D_{T,R}$ is exact contravariantly and reverses shifts. The natural isomorphism $\\delta:1\\cong D_{T,R}^2$ constructed in step 3 exhibits $D_{T,R}^{\\mathrm{op}}$ as a quasi-inverse (on the opposite category use the inverse opposite of $\\delta$). This gives the integral anti-equivalence without assuming that every constructible complex is site-perfect.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.20, and the signed ringed-site internal-Hom triangle and shift comparisons"
+   }
+  },
+  {
+   "text": "Since $a_X=a_Yf$, the right-adjoint composition comparison of [lem-per-adic-exceptional-projection] gives $i_f:\\omega_{X,R}\\cong f^!\\omega_{Y,R}$. For each $M\\in\\mathcal I_Y$ and $K\\in\\mathcal I_X$, the closed tensor adjunction and the two constructible adjunctions give the following natural bijections:\n$$\\begin{aligned}\n\\operatorname{Hom}_Y(M,D_{Y,R}Rf_!K)&\\cong\\operatorname{Hom}_Y(M\\widehat\\otimes^LRf_!K,\\omega_{Y,R})\\\\\n&\\cong\\operatorname{Hom}_Y(Rf_!(Lf^*M\\widehat\\otimes^LK),\\omega_{Y,R})\\\\\n&\\cong\\operatorname{Hom}_X(Lf^*M\\widehat\\otimes^LK,f^!\\omega_{Y,R})\\\\\n&\\cong\\operatorname{Hom}_X(Lf^*M,D_{X,R}K)\\\\\n&\\cong\\operatorname{Hom}_Y(M,Rf_*D_{X,R}K).\n\\end{aligned}$$\nThe second line uses the inverse of the projection isomorphism and symmetry; the fourth uses $i_f^{-1}$ and tensor–Hom adjunction. Every displayed object is constructible: use [lem-per-adic-closed-constructible] for tensor and Hom and [lem-sf-integral-direct-image-constructible, lem-sf-integral-compact-support-constructible] for the direct images. These bijections determine an isomorphism $e_K:D_{Y,R}Rf_!K\\to Rf_*D_{X,R}K$: send the identity of its source through the bijections, and use the inverse bijections on the identity of its target for its inverse. Naturality of the bijections shows that the two composites are identities. This is the Yoneda argument written on identities, so no fully-faithfulness-only citation is being used.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "lem-per-adic-closed-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.2, 6.7.7, 6.7.14 and 6.7.19: projection and adjunction derivation of Verdier exchange"
+   }
+  },
+  {
+   "text": "The map just constructed is the canonical exchange. Indeed, its transpose under $Lf^*\\dashv Rf_*$ and tensor–Hom adjunction is\n$$Lf^*D_YRf_!K\\widehat\\otimes^LK\\longrightarrow\\omega_X.$$\nIts further transpose under $Rf_!\\dashv f^!$, using $i_f$, is the projection identification followed by evaluation\n$$Rf_!(Lf^*D_YRf_!K\\widehat\\otimes^LK)\\cong D_YRf_!K\\widehat\\otimes^LRf_!K\\xrightarrow{\\mathrm{ev}}\\omega_Y.$$\nThus both the canonical definition and the identity-image construction in step 5 have exactly this transpose, so injectivity of the adjunction bijections identifies them. In particular it is natural in $K$. Replacing $K$ by $K[n]$ in this pairing gives the same pairing after the signed tensor-shift identifications; the internal-Hom shift comparison transposes to this shifted evaluation, so $e$ commutes with shifts.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "lem-per-adic-closed-constructible",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.13–6.7.14 and 6.7.19: evaluation normalization of the exchange map"
+   }
+  },
+  {
+   "text": "For $E\\subset L$, scalar extension of $\\omega_{T,R}$ identifies with $\\omega_{T,\\mathcal O_L}$ by the exceptional comparison of [lem-per-adic-exceptional-projection], applied to $a_T$ and its coefficient unit. Combining this with the evaluation-defined Hom comparison of [lem-per-adic-closed-constructible] and the tensor comparison of [lem-pur-integral-operations-scalar-extension] gives $b_{L/E,K}:T_{L/E}D_{T,E}K\\cong D_{T,L}T_{L/E}K$ after rationalization. That Hom comparison is the transpose of scalar-extended evaluation, so it preserves evaluation and hence its double transpose $\\delta$. The exceptional comparisons preserve counits and the projection map. Applying scalar extension to the displayed pairing in step 6 therefore gives the same pairing over $L$; injectivity of the two adjunction transposes proves compatibility of $e$. All comparison maps have the identity and tower equations of the cited statements, not just objectwise isomorphisms.\n\nRationalize each integral functor by extending its action on morphisms $R$-linearly to $E$. The Hom groups of [def-weil-pbc-rational-category] are exactly integral Hom groups tensored with $E$, so each integral adjunction bijection and its inverse extend to inverse bijections on rational Hom groups; their naturality equations and triangle equations remain equalities. Exactness and the signed shifts pass through the exact scalar localization [lem-weil-linear-scalar-localization-triangulated]. The isomorphisms $\\delta$, $i_f$ and $e$ remain isomorphisms with their integral inverses. The integral finiteness assertions therefore give both rational direct-image functors on all bounded constructible objects.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "lem-per-adic-closed-constructible",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2) and Remark 6.8.15; finite free coefficient extension and scalar localization"
+   }
+  },
+  {
+   "text": "Now descend to the common-stage category. By [prop-weil-pbc-scalar-extension] the identity transitions are literally identities and the tensor associators satisfy unit and pentagon equations. Apply [lem-sbc-coherent-pair-functor-descent] to $Rf_!$, $Rf_*$, $a_T^!$, with the rationalized scalar comparisons, identity and tower equations of [lem-per-adic-exceptional-projection], and to $D_{T,E}$ using the opposite stage diagrams. For the last family the morphism formula is\n$$D[M,u]=[M,b_{M/E,K}^{-1}\\circ D_M(u)\\circ b_{M/F,L}],\\quad u:T_{M/E}K\\to T_{M/F}L.$$\nContravariant naturality and the tower equation for $b$ make this independent of transport; identities and composition are checked at one field. The compatible finite-stage evaluations, bidual maps and exchange maps descend by the transformation clause of that same lemma. Their inverses descend too, since the inverse of a compatible isomorphism satisfies the inverse comparison equation. Thus common-stage $\\delta$ and $e$ are isomorphisms. Each distinguished triangle has a common-stage representative by [def-weil-pbc-qbar-category]; the exact finite-stage dual functor takes it to its distinguished dual triangle. Consequently the descended $D_T$ is exact, reverses shifts, and is an anti-equivalence via its descended $\\delta$. The internal Hom and unit in the statement are defined by the same finite-stage operations, so $D_T$ is $R\\mathcal Hom(-,\\omega_T)$. Direct images preserve bounded constructibility because their value on $(E,K)$ is $(E,Rf_{!,E}K)$ or $(E,Rf_{*,E}K)$; the latter is precisely the adic direct image of [def-weil-derived-direct-image].",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-adic-exceptional-projection",
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-pbc-qbar-category",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1)–(2): common-finite-stage descent of operations and their canonical maps"
+   }
+  },
+  {
+   "text": "It remains to verify the asserted common-stage adjunction, rather than only descend its two functors. For $K=(E,K_E)$ and $L=(F,L_F)$ choose fields $M\\supset E,F$. The rational adjunction bijections at $M$ identify\n$$A_M=\\operatorname{Hom}_M(Ra_{T!,M}T_{M/E}K_E,T_{M/F}L_F),\\quad\nB_M=\\operatorname{Hom}_M(T_{M/E}K_E,a_{T,M}^!T_{M/F}L_F).$$\nTheir transition compatibility follows from preservation of units and counits in step 7. By [lem-coef-qbar-adjunction-hom-descent] they induce inverse bijections on the filtered Hom colimits, which are the Hom groups of [def-weil-pbc-qbar-category]. Naturality holds on representatives at one field. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to obtain $Ra_{T!}\\dashv Ra_T^!$, with the descended finite-stage unit and counit. Its value at the common-stage coefficient unit is represented by $(\\mathbf Q_\\ell,\\omega_{T,\\mathbf Q_\\ell})$, giving the stated $\\omega_T$ and normalization. All asserted naturality, shift and finite coefficient-extension compatibilities hold at each representing field by steps 6–7 and hence in the common-stage category.",
+   "uses": [
+    "lem-coef-qbar-adjunction-hom-descent",
+    "def-weil-pbc-qbar-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and the finite-stage constructible adjunction of Lemma 6.7.19"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-qbar-category",
+  "lem-per-adic-exceptional-projection",
+  "lem-per-finite-residue-dualizing",
+  "lem-per-adic-closed-constructible",
+  "lem-coef-integral-hom-reduction",
+  "def-weil-derived-complete",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-coef-qbar-adjunction-hom-descent",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7–6.8, with the explicit projection/adjunction and common-stage descent arguments written here; finite normalization from ILO XVII"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +202,45 @@
    "results": "No hits.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality for bounded constructible l-adic sheaves over any field exchanges extraordinary pushforward and direct image",
+   "results": "{\"t\": \"2026-10-18T10:38:06Z\", \"tool\": \"leanfinder\", \"query\": \"Verdier duality for bounded constructible l-adic sheaves over any field exchanges extraordinary pushforward and direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\"], \"digest\": \"80de25b2482a5047\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic dualizing complex arbitrary excellent scheme dimension function evaluation biduality",
+   "results": "{\"t\": \"2026-10-18T10:38:48Z\", \"tool\": \"leanfinder\", \"query\": \"Adic dualizing complex arbitrary excellent scheme dimension function evaluation biduality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"localCohomology.diagram\", \"BDeRhamPlus\", \"localCohomology\", \"localCohomology.isoSelfLERadical\", \"FGModuleCat.exactPairing\", \"AdicCompletion.map_exact\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\"], \"digest\": \"85118c3767ea093a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "{\"t\": \"2026-10-18T10:38:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Verdier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing\", \"CategoryTheory.ObjectProperty.IsVerdierRightLocalizing\", \"CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing\", \"CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing\", \"CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff\", \"CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff\", \"CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite\", \"CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite\"], \"digest\": \"ea4164d215a9973e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizing|bidual",
+   "results": "{\"t\": \"2026-10-18T10:38:49Z\", \"tool\": \"grep\", \"query\": \"Verdier|dualizing|bidual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\"], \"digest\": \"b66e89ada9fb81d8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality constructible adic sheaves extraordinary pushforward",
+   "results": "{\"t\": \"2026-10-18T10:39:47Z\", \"tool\": \"leansearch\", \"query\": \"Verdier duality constructible adic sheaves extraordinary pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.pushforward_map_val\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp\", \"SheafOfModules.pushforward\"], \"digest\": \"ebfea571c1c963d2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -74,5 +257,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-qbar-arbitrary-field-duality",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-field statement. Lifted finite residue-coefficient biduality via actual evaluation and derived completeness, derived exchange by projection and adjunction, and descended the maps and adjunction through raw rational and common-stage categories. Three foundational statement-only nodes isolate the missing arbitrary-field inputs. Reused the existing integral-category comparison and adic finiteness nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: supplies its biduality and Verdier exchange without imposing a finite-field hypothesis. The unit and chapter routes are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic coefficient-category, ringed-site, adic finiteness, or categorical descent tool used with exactly its stated hypotheses; the perverse unit has no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-coef-integral-hom-reduction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-58e0645ad",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-58e0645ad (reviewer sub-agent of L); spot-checked: I read the item in full, all three new nodes, every cited statement, unit sk-p-dl-a1-perverse, the chapter, and the parent's steps 1/4/6. Sources checked: Bhatt–Scholze 6.3.16, 6.7.1–6.7.21, 6.8.14 and 6.8.15; ILO XVII 2.4.4.1, 4.1.2, 5.1.1, 6.1.1 and 7.1.3. The item statement is unchanged from the parent's split and no target is weakened. The result is true over any field: BS 6.7 needs only quasi-excellent, ℓ-coprime schemes. The trdeg normalization is ILO XVII 4.1.2 starting from δ=0 on Spec k (2.4.4.1). Steps 1–6 and 9 check out. Step 3 lifts mod-ϖ biduality using the evaluation-preserving Hom reduction, cone closure, induction over A_n and the Roos triangle. Steps 5–6 give the exchange by the Yoneda argument and identify it as the canonical one through its projection/evaluation transpose. Step 9 gives the common-stage adjunction from the colimit of adjunction bijections. The three new nodes are true. I tested them on empty T, T=Spec k, k=R with ℓ=2 (infinite cd, harmless because the statements are sheaf-level), and characteristic 0 or imperfect k. They are not duplicates: every existing biduality, exchange, exceptional-adjoint or Hom node is over F̄_q or needs char p>0. None restates a clause of the item. No SGA is cited. I accept the nine generic tool_uses. FIX, two C3/C4 faults. (1) Step 8 descends Rf_!, Rf_* and a_T^! but cited no scalar-extension comparisons for Rf_! and f^! with identity and tower equations. prop-weil-pbc-scalar-extension covers only ambient Rf_* and pullback. Repair: lem-per-adic-exceptional-projection now states these comparisons explicitly for Lf^*, adic Rf_*, Rf_! and f^! (f^! as the mate), together with their transport of units, counits, reductions, compositions and projections. Step 8 now cites it. In the same node I fixed a B3 fault: it now cites def-weil-pbc-constructible-complexes, def-weil-pbc-site-comparison-morphism and def-weil-integral-scalar-extension. (2) Step 7 claimed the Hom scalar-extension comparison is evaluation-defined, but lem-pur-integral-operations-scalar-extension does not say that. Repair: lem-per-adic-closed-constructible now states that the evaluation-defined comparison is an isomorphism with identity and tower equations and that it carries evaluation. Step 7 now cites it. proof_deps are unchanged and every step stays under 2000 characters. Maintainer note: def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients and def-weil-finite-torsion-constructibility carry a global-finite-field header but are used over arbitrary fields across the DAG.; 3 file(s) fixed by the reviewer"
  }
 }
