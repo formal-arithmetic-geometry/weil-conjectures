@@ -2475,6 +2475,7 @@ public import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 public import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSections
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
+public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.MonoidalUnitSections
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
@@ -4009,6 +4010,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClos
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Smooth
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
