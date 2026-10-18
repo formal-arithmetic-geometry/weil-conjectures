@@ -10,11 +10,98 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-formal-glueing-data",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget multiplication in the specified algebra datum and call the resulting module datum $\\mathbf E$. By hypothesis it is an object of $\\mathrm{Glue}$. Apply the essential-surjectivity clause of [prop-weil-pbc-formal-glueing-equivalence](2), with $I=K$: its flatness and quotient-isomorphism hypotheses are exactly ours. Obtain an $R$-module $M$ and an isomorphism $a:\\mathrm{Can}(M)\\to\\mathbf E$. Write its component module isomorphisms as $a':M\\otimes_RS\\to E'$ and $a_i:M_{f_i}\\to E_i$. Both $a$ and its inverse satisfy the morphism compatibility equations of [def-weil-pbc-formal-glueing-data]. No multiplication on $M$ is assumed.",
+   "uses": [
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 05ER (proposition-equivalence) and 05EU (remark-formal-glueing-algebras), algebra-category consequence"
+   }
+  },
+  {
+   "text": "Define $D$ to be the subset of $E'\\times\\prod_iE_i$ consisting of tuples $d=(e',(e_i)_i)$ with $\\alpha_i(e'/1)=e_i\\otimes1$ for every $i$ and $\\alpha_{ij}(e_i/1)=e_j/1$ for every $i,j$. Its underlying $R$-module is exactly $H^0$ of the underlying module datum $\\mathbf E$ of [def-weil-pbc-formal-glueing-H0] (same tuples, same equations). Give it coordinatewise addition and multiplication. Each equality is an equality of two ring-homomorphism images, so it is preserved by sums, negatives, products and the unit. The tuple of the images of any $r\\in R$ also satisfies every equality, since all transition maps are algebra maps. Thus $D$ is a commutative unital $R$-algebra, with $R$-algebra projections $p':D\\to E'$ and $p_i:D\\to E_i$. This is an actual subring construction, not a choice of an unknown algebra structure.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-H0"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05EU (remark-formal-glueing-algebras), final two sentences, expanded by the matching-tuples construction of Tag 05EL"
+   }
+  },
+  {
+   "text": "Define the $R$-linear map $\\lambda:M\\to D$ by $m\\mapsto(a'(m\\otimes1),(a_i(m/1))_i)$. It lands in $D$ by the compatibility equations for $a$. On the whole product of modules, the componentwise isomorphism $(a',(a_i)_i)$ carries a tuple satisfying the canonical matching equations to a tuple satisfying the displayed equations defining $D$, and its inverse does the reverse, by the morphism equations for $a^{-1}$. For the canonical datum those matching tuples are precisely $\\ker\\beta$ in [lem-weil-pbc-formal-glueing-complex-exact]: the canonical comparison identifies $(M\\otimes_RS)_{f_i}$ with $M_{f_i}\\otimes_RS$ and the double localizations with $M_{f_if_j}$. That lemma, with the same $R,S,f_i,K$, says $m\\mapsto(m\\otimes1,(m/1)_i)$ is injective and has image exactly $\\ker\\beta$. It follows that $\\lambda$ is bijective.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-complex-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 05EL (remark-glueing-data), 05EK (lemma-recover-module-from-glueing-data), and 05ER: identify the matching-tuples module with any algebraizing module"
+   }
+  },
+  {
+   "text": "Define $q':D\\otimes_RS\\to E'$ on pure tensors by $q'(d\\otimes s)=p'(d)s$, and $q_i:D_{f_i}\\to E_i$ by $q_i(d/f_i^n)=p_i(d)/f_i^n$. The first formula is balanced and additive, hence defines the tensor map; it preserves multiplication since $(p'(d)s)(p'(e)u)=p'(de)su$, and it sends $1\\otimes1$ to $1$. The localization formula is well-defined by the fraction relation, since $f_i$ is invertible in $E_i$; it preserves sums, products and the unit by the fraction formulas. Thus these are respectively $S$- and $R_{f_i}$-algebra maps. On pure tensors and fractions one has $q'\\circ(\\lambda\\otimes_RS)=a'$ and $q_i\\circ\\lambda_{f_i}=a_i$: both sides send $m\\otimes s$ to $s\\,a'(m\\otimes1)$, respectively $m/f_i^n$ to $f_i^{-n}a_i(m/1)$. Extension of scalars and localization preserve the isomorphism $\\lambda$, as applying the same operations to $\\lambda^{-1}$ gives inverse maps. Hence $q'$ and all $q_i$ are bijective. Their inverses preserve the algebra operations by injectivity, so they are algebra isomorphisms.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05EU, tensor-structure and algebra-category assertion: projection maps and their bijectivity explicitly checked"
+   }
+  },
+  {
+   "text": "These isomorphisms respect the prescribed gluing maps. For $d\\in D$, $s\\in S$ and $n\\ge0$, the prime-chart square evaluated at $(d\\otimes s)/f_i^n$ asserts\n$\\alpha_i(p'(d)s/f_i^n)=(p_i(d)/f_i^n)\\otimes s$.\nThis follows from $\\alpha_i(p'(d)/1)=p_i(d)\\otimes1$ and $S_{f_i}$-linearity. For $d\\in D$ and $a,b\\ge0$, the chart-chart square evaluated at $(d/f_i^a)/f_j^b$ asserts\n$\\alpha_{ij}((p_i(d)/f_i^a)/f_j^b)=(p_j(d)/f_j^b)/f_i^a$.\nThis is $\\alpha_{ij}(p_i(d)/1)=p_j(d)/1$ multiplied by the inverses of $f_i^af_j^b$ in the common localization. Fractions and sums of pure tensors generate the relevant modules, so the squares commute on every element. Thus $(q',(q_i)_i)$ is an isomorphism from the canonical gluing datum of $D$ to the specified one, with algebra maps on every component.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 05EL and 05EU: explicit compatibility with both sorts of transition isomorphisms"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-formal-glueing-finite-modules] to the underlying $R$-module of $D$, with $I=K$. Flatness and the quotient isomorphism have not changed. Its base change and localizations are identified by $q'$ and $q_i$ with the finite modules $E'$ and $E_i$ in the hypotheses. Finite generation is preserved by these module isomorphisms: inverse images of a finite generating family generate. The reverse implication of the cited criterion therefore makes $D$ finitely generated over $R$. Together with the constructed algebra isomorphisms and the checked squares, this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05EU (remark-formal-glueing-algebras), finite-module assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-formal-glueing-equivalence",
+  "def-weil-pbc-formal-glueing-data",
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-formal-glueing-finite-modules",
+  "def-weil-pbc-formal-glueing-H0"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit matching-subring argument expanding Tags 05EU and 05EL, using the module equivalence 05ER and exactness 05EK; no abstract monoidal-equivalence theorem is assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +137,45 @@
    "results": "{\"t\": \"2026-10-18T21:12:52Z\", \"tool\": \"grep\", \"query\": \"formalGlue|formal_glu|[Gg]lueing|[Gg]luing|patching\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match: zero hits in Mathlib/RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite commutative algebras descend from a formal gluing datum over a flat ring map and principal localizations with compatible algebra isomorphisms",
+   "results": "{\"t\": \"2026-10-18T22:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite commutative algebras descend from a formal gluing datum over a flat ring map and principal localizations with compatible algebra isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.exists_fgAlgCatSkeleton\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.FiniteType.of_span_eq_top_source\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"AlgHom.FinitePresentation\", \"AlgebraicGeometry.Flat.instDescScheme\"], \"digest\": \"f1fa8fc47a361da8\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: finite-type descent and skeletons are different assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "formalGlue|formal_glu|[Gg]lueing|[Gg]luing|patching",
+   "results": "{\"t\": \"2026-10-18T22:23:51Z\", \"tool\": \"grep\", \"query\": \"formalGlue|formal_glu|[Gg]lueing|[Gg]luing|patching\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no formal gluing or patching in Mathlib/RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing finite commutative algebras along a flat ring map isomorphic modulo an ideal and localizations at generators of that ideal",
+   "results": "{\"t\": \"2026-10-18T22:23:51Z\", \"tool\": \"leansearch\", \"query\": \"Gluing finite commutative algebras along a flat ring map isomorphic modulo an ideal and localizations at generators of that ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization.existsUnique_algebraMap_eq_of_span_eq_top\", \"RingHom.Flat.holdsForLocalizationAway\", \"Algebra.FiniteType.of_span_eq_top_source\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"IsLocalization.flat\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\"], \"digest\": \"b282a7518eb83ef6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: open-cover localization and flatness locality do not algebraize formal gluing data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories of algebras for formal patching along an adic completion and punctured spectrum",
+   "results": "{\"t\": \"2026-10-18T22:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of categories of algebras for formal patching along an adic completion and punctured spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofAlgEquiv_apply\", \"Padic.adicCompletionEquiv\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"AdicCompletion.ofAlgEquiv_symm_of\", \"AdicCompletion.ofAlgEquiv\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.of_ofAlgEquiv_symm\", \"AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ\"], \"digest\": \"28f12a29890ac33d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: completion equivalences do not give formal algebra gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra\", \"Glue\"",
+   "results": "{\"t\": \"2026-10-18T22:23:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra\\\", \\\"Glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.toTopGlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData.toPresheafedSpaceGlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.toGlueData\"], \"digest\": \"d96a3eb7476fa4d4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits are gluing data for ringed spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-conormal-torsion-algebraization",
@@ -78,5 +200,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-formal-glueing-finite-algebras",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps construct the matching subring, identify its underlying module by 05ER and 05EK, prove its canonical projections are compatible algebra isomorphisms, and apply the existing finite-module criterion. No new nodes or Mathlib leaves. All cited node statements were read; tensor and localization computations, both overlap squares, empty index set and degenerate rings were checked.",
+  "blueprint": "Preserves the recorded ancestor and via chain. Realizes the algebra-gluing input of lem-per-conormal-torsion-algebraization, proof Step 4, originating in Tag 0ALR second paragraph and its use of 05ER/05EU on the recorded reverse-completion/Ratliff branch of lem-per-artin-gabber-affine-curve. The current ancestor blueprint does not itself spell out this lower-level algebra argument.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-formal-glueing-equivalence",
+    "why": "General module-gluing equivalence 05ER supplies an algebraizing module; this unit has no such commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-formal-glueing-complex-exact",
+    "why": "General matching-tuples exactness 05EK identifies the explicitly constructed subring module, not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-formal-glueing-finite-modules",
+    "why": "General finite-module detection 05EU proves finiteness of the constructed algebra; no lemma of this unit supplies this module criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-formal-glueing-equivalence",
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "lem-weil-pbc-formal-glueing-finite-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-1e42ded32",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-1e42ded32 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, every cited node's statement, and Stacks 05EU (l.25036), 05ER, 05EK/05EL and the use in 0ALR (l.32040ff). The statement is the algebra form of 05ER+05EU under exactly 05ER's hypotheses: R→S flat and R/K≅S/KS. It is unchanged and not weakened. Step checks: (1) the essential-surjectivity clause gives M with a: Can(M)≅E. (2) D is an equalizer of ring maps, so it is a subring. (3) λ lands in D by a's morphism equations; Φ=(a',a_i) maps ker β onto D (using σ^M, c^M and the injective (a_j)_{f_i}), so λ is bijective by the 05EK exactness node. (4) q'∘(λ⊗S)=a' and q_i∘λ_{f_i}=a_i, so q' and q_i are algebra isomorphisms. (5) both Glue squares checked on generators by S_{f_i}- and R_{f_if_j}-linearity. (6) the reverse direction of the finite-modules node makes D finite. Edge cases checked: t=0, zero charts, i=j, f_i a zerodivisor. Tool uses from sk-thm-p1 are declared and accepted. No SGA, no new nodes, no cycle, no duplicate algebra-gluing node. FIX: the step-2 matching subring is literally def-weil-pbc-formal-glueing-H0 (same tuples and equations) but did not cite it. I added the citation to step 2's uses and to proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
