@@ -7575,6 +7575,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraMapDerivedComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -11370,6 +11371,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
@@ -11916,6 +11918,9 @@ public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
+public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.ExtensionByZero
+public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
+public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerStar
 public import WeilConjectures.WeilSheaf.ProperBaseChange
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
