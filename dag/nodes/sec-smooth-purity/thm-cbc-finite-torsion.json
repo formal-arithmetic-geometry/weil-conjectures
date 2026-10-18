@@ -23,173 +23,79 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied compactification $c=(j,p)$. [lem-cbc-compactifiable-cofiltered] gives its base-changed compactification and refinements under arbitrary $g$. The upper open square is cartesian by the fibre-product construction in [def-cbc-compact-support-square]. Write $M=j_!K$. Exactness in [lem-weil-pbc-extension-by-zero-exact] allows degreewise $j_!$ to descend to $D^+$; a representative zero below a fixed degree stays zero there. By [def-cbc-exchange-map], the map to prove invertible is exactly $(Rp'_*\\beta_K)\\circ\\operatorname{Ex}^{\\Lambda}_{*,p}(M)$, with $\\beta:\\bar g'^{-1}j_!\\cong j'_!g'^{-1}$.",
+   "text": "Use the already proved IsIso instance for rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap at every object. This is the supplied compactification exchange, with no additional geometric hypotheses. The other identity, horizontal/vertical pasting and canonical-exchange clauses are the existing declarations in this mixed Lean record, not new claims inferred from objectwise invertibility.",
    "uses": [
-    "lem-cbc-compactifiable-cofiltered",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "def-cbc-exchange-map",
-    "def-cbc-compact-support-square"
+    "def-cbc-exchange-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I, construction before lemma-shriek-well-defined; blueprint proof first displayed composite"
+    "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
    }
   },
   {
-   "text": "The additive group of finite $\\Lambda$ has finite exponent: for each $a\\in\\Lambda$ two nonnegative multiples coincide, so a positive integer kills $a$; multiplying these integers over all elements gives $N>0$ with $N\\Lambda=0$. Then $N1_\\Lambda=0$, so $Nx=(N1_\\Lambda)x=0$ for every element of every $\\Lambda$-module. Thus the underlying abelian cohomology sheaves of $M$ are torsion. Apply [thm-weil-pbc-bounded-below] to the proper $p$, its cartesian square and the bounded-below underlying abelian complex. Its exchange is invertible. The exact forgetful comparison [lem-weil-pbc-exchange-forget-coefficients] identifies this map with the underlying map of the specific module exchange in step 1 and reflects invertibility. Hence $\\operatorname{Ex}^{\\Lambda}_{*,p}(M)$ is invertible. No prime invertibility or constructibility is used.",
-   "uses": [
-    "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-exchange-forget-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDE, label lemma-proper-base-change (bounded-below complexes with torsion cohomology), deduced from Tag 095T, label theorem-proper-base-change; applied to the proper factor as in the blueprint"
-   }
-  },
-  {
-   "text": "Apply [cor-cbc-derived-extension-zero-base-change] to the upper open square from step 1. It gives precisely the invertible $\\beta_K$ in [def-cbc-exchange-map]. Applying $Rp'_*$ preserves its inverse (the image of $\\beta_K^{-1}$). Therefore the composite in step 1 has inverse $\\operatorname{Ex}_{*,p}^{-1}\\circ Rp'_*(\\beta_K^{-1})$, which proves invertibility. Both factors are natural transformations: the proper exchange is the unit/counit composite specified in the definition and $\\beta$ is natural by the cited corollary. Their composite is consequently natural in $K$.",
-   "uses": [
-    "cor-cbc-derived-extension-zero-base-change",
-    "def-cbc-exchange-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, label lemma-shriek-base-change (abelian sheaves and module sheaves); blueprint proof first paragraph"
-   }
-  },
-  {
-   "text": "For a refinement $u:c_1\\to c_2$ write $p_1=p_2u$ and let $u'$ be its base change. By [def-weil-pbc-proper-open-comparison], $\\alpha_u:j_{2!}\\to Ru_*j_{1!}$ is the refinement comparison; [lem-cbc-proper-open-interchange-coherence] identifies it with $\\gamma$ for the square with left vertical identity, right vertical $u$, and opens $j_1,j_2$. Put $C_u=Rp_{2,*}\\alpha_u:F_{c_2}\\to F_{c_1}$, inserting direct-image composition. The base-change equation for $\\gamma$ reads\n$$ Ru'_*\\beta_1\\circ\\operatorname{Ex}_{*,u}(j_{1!})\\circ\\bar g_2^{-1}\\alpha_u\n=\\alpha_{u'}g'^{-1}\\circ\\beta_2.$$\nApply $Rp'_{2,*}$ and precede by $\\operatorname{Ex}_{*,p_2}(j_{2!})$. Naturality moves $\\alpha_u$ past this latter exchange. The vertical proper-exchange equation [lem-weil-pbc-mate-pasting], applied directly to the module-coefficient adjunctions in [def-cbc-exchange-map], identifies the two successive proper exchanges for $p_2,u$ with the exchange for $p_1$. This yields the explicit comparison square\n$$ C_{u'}g'^{-1}\\circ\\operatorname{Ex}_!^{c_2}=\\operatorname{Ex}_!^{c_1}\\circ g^{-1}C_u.$$\nThus a refinement comparison intertwines the compact-support exchange maps, rather than merely comparing their objects. The abstract formalism realization is CompactSupportFormalism.shriekBaseChange_refinementComparison: obtain the open cube equation from the two horizontal pasting formulas, invert it, transpose along the refinement pullback/pushforward adjunction, and finish with vertical pushforward base change and naturality of the pushforward compositor.",
+   "text": "For a Cartesian refinement r, apply the extension-by-zero adjunction bijection to the specified alpha_r and the canonical refinementOpenImmersionLowerShriekComparison. The inverse-image composition compatibility of the canonical open base-change unit gives one transpose. The unit normalization of the specified properOpenIdentification gives the other. Cancel theta and the monic open-extension unit; the triangle identity and naturality identify the two arrows.",
    "uses": [
     "def-weil-pbc-proper-open-comparison",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-mate-pasting",
-    "def-cbc-exchange-map"
+    "lem-weil-pbc-proper-open-identification-unit",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; blueprint refinement paragraph"
+    "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
    }
   },
   {
-   "text": "The comparison maps $\\alpha_u$ are invertible by [lem-weil-pbc-proper-open-comparison-iso] and obey $\\alpha_{vu}=(Rv_*\\alpha_u)\\alpha_v$, $\\alpha_{\\mathrm{id}}=\\mathrm{id}$ by [lem-weil-pbc-proper-open-comparison-composition]. Use the normalized composition isomorphisms and the identity and triple-composition equations of [lem-cbc-etale-derived-direct-image-coherence] for ordinary etale $D^+$ with constant-ring modules. These give the associativity normalization of the direct-image composition in $C_u=Rp_{2,*}\\alpha_u:F_{c_2}\\to F_{c_1}$. Expanding $C_{vu}$, the comparison-composition equation replaces $\\alpha_{vu}$ by $(Rv_*\\alpha_u)\\alpha_v$, and naturality moves the compositor past $\\alpha_u$. Associativity identifies the two parenthesizations. Thus $C_{vu}=C_uC_v$ and $C_{\\mathrm{id}}=\\mathrm{id}$; all $C_u$ are isomorphisms.",
+   "text": "Apply properOpenComparison_comp to consecutive refinements. The existing derivedPlusFormalism_pfComp'_inv identifies the compositor in the specified refinement map with rightDerivedFunctorPlusCompIso' of lowerStarComp. Use the already proved concrete rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc, then compositor naturality, to obtain C_(r comp s)=C_s followed by C_r. A private ordinary-functor lemma carries out this calculation; there is no new normalized direct-image pseudofunctor.",
    "uses": [
-    "lem-weil-pbc-proper-open-comparison-iso",
-    "lem-weil-pbc-proper-open-comparison-composition",
-    "lem-cbc-etale-derived-direct-image-coherence"
+    "lem-weil-pbc-proper-open-comparison-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I, lemma-shriek-well-defined; cancellation in the blueprint refinement paragraph"
+    "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
    }
   },
   {
-   "text": "For compactifications $c,d$, choose $e\\xrightarrow{r}c$, $e\\xrightarrow{s}d$ by [lem-cbc-compactifiable-cofiltered] and put $I_{c,d}=C_s^{-1}C_r:F_c\\to F_d$. The previous step makes $c\\mapsto F_c$ a functor from the cofiltered compactification category to the opposite of the category of functors $D^+(X_{\\mathrm{et}},\\Lambda)\\to D^+(Y_{\\mathrm{et}},\\Lambda)$, sending all arrows to isomorphisms. Apply [lem-cbc-cofiltered-span-comparison] to the ordered pair $(d,c)$, using arrows $s,r$ in that order. Passing its common-predecessor ratio from the opposite category to the original category reverses composition and gives precisely $C_s^{-1}C_r:F_c\\to F_d$. Hence $I_{c,d}$ is independent of the common refinement and of its arrows, as an actual natural transformation.",
+   "text": "For the chosen compactification c put w=infFst c c, from inf c c to c. The existing dense common-refinement construction makes both w and w comp r Cartesian over the open. The previous Cartesian calculation identifies both maps with their formalism refinement comparisons. The specified alpha_w is invertible, hence C_w is invertible.",
    "uses": [
     "lem-cbc-compactifiable-cofiltered",
-    "lem-cbc-cofiltered-span-comparison"
+    "lem-weil-pbc-proper-open-comparison-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I, lemma-shriek-well-defined; cancellation in the blueprint refinement paragraph"
+    "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
    }
   },
   {
-   "text": "Choose a common refinement $e$ of $c,d,k$, using [lem-cbc-compactifiable-cofiltered] twice. Computing each ratio through $e$ gives $I_{d,k}I_{c,d}=(C_{e\\to k}^{-1}C_{e\\to d})(C_{e\\to d}^{-1}C_{e\\to c})=I_{c,k}$; taking the same two arrows gives $I_{c,c}=\\mathrm{id}$. Base change preserves the common-refinement data by the same node. Apply step 4 to $r,s$ and cancel $C_{s'}$ to obtain\n$$I_{c',d'}g'^{-1}\\circ\\operatorname{Ex}_!^c=\\operatorname{Ex}_!^d\\circ g^{-1}I_{c,d}.$$\nThis constructs the canonical ordinary etale comparisons and proves independence of the exchange. CompactSupportFormalism.lowerShriekBaseChange_eq constructs the base-changed refinement as a pullback lift and checks its open square by cartesian-square cancellation. Apply refinement compatibility to each leg of Compactification.inf, then cancel the refinement comparisons and use the shriekIso cocycle. This is a proof for any formalism satisfying the stated abstract exchange axioms.",
+   "text": "The composition equation yields C_r=C_(w comp r) followed by inverse C_w. Substitute the Cartesian identifications. CompactSupportFormalism.shriekIso_eq computes precisely this ratio, so C_r is the hom of shriekIso d c. This proves the arbitrary-refinement normalization without a density assumption on c or a Cartesian assumption on r. The mixed record's existing formalism declarations supply the remaining coherence clauses as recorded in its unchanged lean attachment.",
    "uses": [
     "lem-cbc-compactifiable-cofiltered"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I, lemma-shriek-well-defined; cancellation in the blueprint refinement paragraph"
-   }
-  },
-  {
-   "text": "For an identity base change, [lem-weil-pbc-mate-pasting] makes the proper factor the identity after inserting the unit isomorphisms; [cor-cbc-derived-extension-zero-base-change] makes $\\beta$ the identity too. Their composite is the identity. For two successive base changes $g,h$, compute all compactifications by base-changing $c$. Expand the two composite maps as the four factors $h^{-1}\\operatorname{Ex}_{*,p}$, $h^{-1}Rp'_*\\beta_g$, $\\operatorname{Ex}_{*,p'}$ and $Rp''_*\\beta_h$. Naturality of $\\operatorname{Ex}_{*,p'}$ moves $\\beta_g$ through it. The proper horizontal pasting equation combines the two proper factors, and the open horizontal pasting equation combines $h^{-1}\\beta_g$ and $\\beta_h$. The result is exactly the two-factor formula of [def-cbc-exchange-map] for $gh$. These equations are proved directly for modules using [lem-weil-pbc-mate-pasting], not inferred from faithfulness of derived forgetting: the latter is not assumed. Inverse-image composition is termwise pullback along composite maps; both associativity maps preserve every fibre-product projection, so their square isomorphisms paste. The unit/counit mate formula is explicitly the module formula of [def-cbc-exchange-map]. Apply clauses (1), (2), (4) of the generic mate theorem to these pasted or identity inverse-image squares to obtain respectively the horizontal, vertical and identity proper-exchange equations. The direct-image composition is normalized as in step 5. For each change of compactification, the comparison square of step 7 conjugates both sides by the same invertible comparisons; cancellation proves the equation for those choices.",
-   "uses": [
-    "cor-cbc-derived-extension-zero-base-change",
-    "def-cbc-exchange-map",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, label remark-base-change (mate construction); labels remark-compose-base-change and remark-compose-base-change-horizontal (pasting formulas); their omitted verifications are supplied by the cited Mathlib mate-pasting node; blueprint final sentence"
-   }
-  },
-  {
-   "text": "For vertically pasted squares with $X\\xrightarrow{f}Y\\xrightarrow{h}Z$, use [lem-cbc-compactifiable-compatible-tower] to choose $Y\\xrightarrow{i}\\bar Y\\xrightarrow{q}Z$, $X\\xrightarrow{a}\\bar X\\xrightarrow{p}\\bar Y$, and $U=\\bar X\\times_{\\bar Y}Y$, with opens $c:X\\to U$, $b:U\\to\\bar X$, $a=bc$, and proper $p_Y:U\\to Y$. These and their base changes compute $F=Rp_{Y,*}c_!$, $H=Rq_*i_!$ and $E=R(qp)_*a_!$. Define the tower composition isomorphism by\n$$\\mu:HF=Rq_*i_!Rp_{Y,*}c_!\\xrightarrow{Rq_*\\gamma c_!}Rq_*Rp_*b_!c_!\\xrightarrow{\\sim}E.$$\nHere $\\gamma$ is the normalized invertible open/proper comparison of [lem-cbc-proper-open-interchange-coherence]. The last arrow uses the coherent ordinary etale direct-image compositor of [lem-cbc-etale-derived-direct-image-coherence] and $b_!c_!\\cong a_!$ of [lem-cbc-extension-zero-composition]. Exactness [lem-weil-pbc-extension-by-zero-exact] gives the degreewise derived version of the latter, with the same unit and associativity equations.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-cbc-etale-derived-direct-image-coherence",
-    "lem-cbc-extension-zero-composition",
-    "lem-weil-pbc-extension-by-zero-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7F, composition tower and base-change equation; blueprint final sentence"
-   }
-  },
-  {
-   "text": "For this fixed tower expand the two compact-support exchanges by [def-cbc-exchange-map]. The base-change equation of [lem-cbc-proper-open-interchange-coherence] moves $\\gamma:i_!Rp_{Y,*}\\to Rp_*b_!$ through pullback: it identifies the factor $i_!Rp_{Y,*}$ with its base-changed counterpart, using its displayed proper exchanges and open comparisons. The successive proper factors for $q,p$ then combine by clause (2) of [lem-weil-pbc-mate-pasting], applied to the module adjunctions, with the direct-image normalization of step 5. The open factors for $b,c$ combine by [cor-cbc-derived-extension-zero-base-change], whose composition clause uses the canonical $b_!c_!\\cong a_!$. Naturality moves each adjacent open comparison through the remaining proper exchange. The two surviving factors are $\\operatorname{Ex}_{*,qp}(a_!K)$ followed by the extension-by-zero comparison for $a$, precisely the exchange for $hf$. Thus\n$$\\operatorname{Ex}_{!,hf}\\circ g^{-1}\\mu=\\mu' g_X^{-1}\\circ(Rh'_!\\operatorname{Ex}_{!,f})\\circ(\\operatorname{Ex}_{!,h}Rf_!).$$\nHere $g$ is the base change on $Z$ and $g_X$ its projection on $X$; all exchange maps are the specified module maps. In the abstract Lean realization, the private helpers baseChange_cube_hom_app and exchange_cube_app prove the cube equation by horizontal open pasting followed by adjunction counit transposition. baseChange_open_comp_inv_app is the inverse of vertical open pasting. shriekBaseChange_compIso combines these equations with vertical pushforward pasting and naturality to prove compatibility for a pair of compatible triangles. lowerShriekBaseChange_paste_vert explicitly constructs the base-changed triangle using pullback lifts, checks its cartesian faces by square cancellation, and transports that compatibility with lowerShriekBaseChange_eq and lowerShriekCompIso_hom_eq. The triangle for the source uses the chosen compactification of the second morphism directly, so no quasi-compactness of that second morphism is added. Comparison isomorphisms cancel by their inverse equations and naturality.",
-   "uses": [
-    "def-cbc-exchange-map",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-weil-pbc-mate-pasting",
-    "cor-cbc-derived-extension-zero-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7F, composition tower and base-change equation; blueprint final sentence"
-   }
-  },
-  {
-   "text": "For a refinement from tower 1 to tower 2, [lem-cbc-tower-composition-refinement] gives\n$$C_{hf}\\circ\\mu_2=\\mu_1\\circ(C_hF_1)\\circ(H_2C_f).$$\nIts hypotheses hold for all proper maps $u,v,w$ and all commuting arrows supplied by [lem-cbc-compactifiable-compatible-tower]; it requires no cartesian hypothesis for $vb_1=b_2w$. Any two towers have a common refining tower by that same node. The invertibility and cocycle equations of steps 5–7 allow cancellation of $C_f,C_h,C_{hf}$ in the displayed equation. Hence the composition isomorphism computed in step 9 is independent of the tower after the canonical comparisons. Apply this both before and after base change, and use the comparison square of step 7 to conjugate the equation of step 10. Cancellation gives the stated vertical pasting equation for all supplied compactifications, still on ordinary etale $D^+$ and with no condition on $g$.",
-   "uses": [
-    "lem-cbc-tower-composition-refinement",
-    "lem-cbc-compactifiable-compatible-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7F, composition tower and base-change equation; blueprint final sentence"
+    "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
    }
   }
  ],
  "proof_deps": [
-  "lem-cbc-compactifiable-cofiltered",
-  "lem-weil-pbc-extension-by-zero-exact",
   "def-cbc-exchange-map",
-  "def-cbc-compact-support-square",
-  "thm-weil-pbc-bounded-below",
-  "lem-weil-pbc-exchange-forget-coefficients",
-  "cor-cbc-derived-extension-zero-base-change",
   "def-weil-pbc-proper-open-comparison",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proper-open-comparison-iso",
+  "lem-weil-pbc-proper-open-identification-unit",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-proper-open-comparison-composition",
-  "lem-cbc-etale-derived-direct-image-coherence",
-  "lem-cbc-cofiltered-span-comparison",
-  "lem-cbc-compactifiable-compatible-tower",
-  "lem-cbc-extension-zero-composition",
-  "lem-cbc-tower-composition-refinement"
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-weil-pbc-proper-open-comparison-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7I, 0F7J and 0F7F; blueprint two-factor proof, with identity/pasting and coefficient checks expanded; abstract refinement, independence and vertical-pasting realizations completed by F4 on 2026-10-18 in WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange"
+  "place": "Tag 0F7I, refinement comparison and cancellation; existing formalism supplies canonical comparisons and exchange coherence"
  },
  "mathlib_searches": [
   {
@@ -359,19 +265,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-extension-by-zero-exact",
-  "thm-weil-pbc-bounded-below",
-  "lem-weil-pbc-exchange-forget-coefficients",
   "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-proper-open-comparison-iso",
   "lem-weil-pbc-proper-open-comparison-composition",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "def-pc-fibre-product",
-  "def-weil-pbc-direct-image",
   "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "reviewed": {
@@ -416,9 +312,9 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261018T062750-L-649152",
+  "landing": "20261018T091358-L-3253393",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
