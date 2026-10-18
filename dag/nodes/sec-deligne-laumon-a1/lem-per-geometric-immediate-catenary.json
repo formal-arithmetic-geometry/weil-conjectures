@@ -1,0 +1,82 @@
+{
+ "id": "lem-per-geometric-immediate-catenary",
+ "kind": "statement",
+ "title": "Geometric and Zariski immediate specializations on universally catenary schemes",
+ "statement": "Let $X$ be a Noetherian scheme, meaning a scheme [def-pc-scheme] with a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring] which is universally catenary: for every affine open $\\operatorname{Spec}A\\subseteq X$, every finite-type $A$-algebra is catenary in the bounded saturated-chain sense of [def-exc-excellent-ring]. Let $y\\ne x$ be points of $X$ with $x\\in\\overline{\\{y\\}}$. The following conditions are equivalent. (1) There is no point strictly between $y$ and $x$ in the specialization order; equivalently the local ring of the reduced closure $\\overline{\\{y\\}}$ at $x$ has Krull dimension one [def-weil-pbc-krull-dimension-ring]. (2) There exists a geometric specialization $\\bar y\\rightsquigarrow\\bar x$ above $y\\rightsquigarrow x$ for which the reduced closure of the image of $\\bar y$ in $X_{(\\bar x)}$ has dimension one [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. In particular, every immediate geometric specialization projects to a saturated inclusion of the corresponding primes on any affine neighbourhood of $x$. No regularity, field of definition, or coefficient sheaf is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Definitions 2.1.1–2.1.2 and Proposition 2.1.4, printed pp.209–211."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a universally catenary Noetherian scheme etale immediate specializations are Zariski immediate specializations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {a b : ↥X}, a ≤ b ↔ b ⤳ a\", \"doc\": \"For any scheme $X$ and points $a, b \\\\in X$, the inequality $a \\\\leq b$ in the specialization preorder holds if and only if $b$ specializes to $a$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism induced by the specialization map between stalks $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ with the canonical mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the induced map on stalks at $ x $ composed with the specialization-induced morphism from the stalk of $ Y $ at \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the diagram involving the stalk maps at $ x $ and $ x' $ and the specialization-induced maps on $ Y $ and $ X $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y) {Z : AlgebraicGeometry.Scheme} (h_1 : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h))\\n      (CategoryTheory.CategoryStruct.comp (X.fromSpecStalk y) h_1) =\\n    CategoryTheory.CategoryStru\", \"doc\": \"For any scheme $X$, points $x$ and $y$ in $X$ with $x$ specializing to $y$, and any morphism $h_1: X \\to Z$ to a scheme $Z$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,y}) \\to \\\\\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Codimension one geometric specialization agrees with saturated prime inclusion in a universally catenary scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.spec_le_iff\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"(R : CommRingCat) (p q : Spec R) : p ≤ q ↔ q.asIdeal ≤ p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and prime ideals $ p, q $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the specialization preorder $ p \\\\leq q $ holds if and only if the ideal corresponding to $ q \"}\n  {\"name\": \"PrimeSpectrum.le_iff_specializes\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x y : PrimeSpectrum R) : x ≤ y ↔ x ⤳ y\", \"doc\": \"For any two points $x$ and $y$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, the inclusion $x \\\\leq y$ (interpreted as ideal containment) holds if and only if $x$ specia\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X : Scheme.{u}} {a b : X} : a ≤ b ↔ b ⤳ a\", \"doc\": \"For any scheme $X$ and points $a, b \\\\in X$, the inequality $a \\\\leq b$ in the specialization preorder holds if and only if $b$ specializes to $a$.\"}\n  {\"name\": \"PrimeSpectrum.localizationMapOfSpecializes\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{x y : PrimeSpectrum R} (h : x ⤳ y) : Localization.AtPrime y.asIdeal →+* Localization.AtPrime x.asIdeal\", \"doc\": \"Given prime ideals $\\\\mathfrak{p}$ and $\\\\mathfrak{q}$ in the prime spectrum of a commutative semiring $R$, if $\\\\mathfrak{p}$ specializes to $\\\\mathfrak{q}$, this constructs the canonical ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instPreorderCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X : Scheme.{u}} : Preorder X\", \"doc\": \"For any scheme $X$, its underlying topological space is equipped with the specialization preorder, where a point $x$ is less than or equal to a point $y$ if $y$ is in the closure of the set containing\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"(H : ValuativeCriterion.Existence f) : SpecializingMap f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": StableUnderSpecialization (Set.range (comap f)) ↔ IsClosed (Set.range (comap f))\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative semirings, the image of the prime spectrum map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by $ f $ is stable under specia\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Catenary\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]atenary|immediate.*speciali|speciali.*immediate",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal catenarity strict henselization preserves dimension one components of a local integral scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.DimensionLEOne.isIntegralClosure\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Basic\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] (B : Type u_4) [inst_2 : CommRing B]\\n  [IsDomain B] [Nontrivial R] [inst_5 : Algebra R A] [inst_6 : Algebra R B] [inst_7 : Algebra B A] [IsScalarTower R B A]\\n  [IsIntegralClosure B R A] [Ring.DimensionLEOne R], Ring.DimensionL\", \"doc\": \"If $ R $ is a commutative ring with Krull dimension at most one, $ B $ is the integral closure of $ A $ over $ R $, and the necessary algebra and scalar tower conditions hold, then $ B $ also has Krul\"}\n  {\"name\": \"Ring.DimensionLEOne.localization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ {R : Type u_2} (Rₘ : Type u_3) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing Rₘ] [inst_3 : Algebra R Rₘ]\\n  {M : Submonoid R} [IsLocalization M Rₘ], M ≤ nonZeroDivisors R → ∀ [h : Ring.DimensionLEOne R], Ring.DimensionLEOne Rₘ\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain with Krull dimension at most one. If $ R_\\\\mathfrak{m} $ denotes the localization of $ R $ at a submonoid $ M $ consisting of non-zero divisor\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-dualizing-regular-unit",
+  "date": "2026-10-18",
+  "group": "Q07"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; comparing geometric immediate specializations with saturated prime chains for the negative-codimension normalization.",
+   "via": [
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

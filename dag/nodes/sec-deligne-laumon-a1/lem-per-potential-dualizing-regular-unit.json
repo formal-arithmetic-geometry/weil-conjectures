@@ -13,9 +13,131 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [rem-pc-regular-normal], the nonempty connected Noetherian regular scheme $T$ is integral, so it has a unique generic point $\\eta$. Excellence includes universal catenarity [def-exc-excellent-ring]. For an immediate geometric specialization $\\bar y\\rightsquigarrow\\bar x$, [lem-per-geometric-immediate-catenary] gives a saturated inclusion $\\mathfrak p\\subsetneq\\mathfrak q$ on an affine neighbourhood of $x$. Its coordinate ring is a domain. In its localization at $\\mathfrak q$, concatenate a saturated chain from $(0)$ to $\\mathfrak p$ with this last inclusion. Catenarity says its length equals every saturated chain from $(0)$ to $\\mathfrak q$. These lengths are finite by the definition of catenarity; the prime chains below $\\mathfrak p$ compute the dimension of its local ring. Thus $c_T(x)=c_T(y)+1$, giving $-c_T(y)=-c_T(x)+1$. This verifies the geometric dimension-function condition of [def-per-potential-dualizing-complex].",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-exc-excellent-ring",
+    "lem-per-geometric-immediate-catenary",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV Proposition 2.2.2, using Proposition 2.1.4; XVII Definition 2.1.1"
+   }
+  },
+  {
+   "text": "For each $x$, localize at $x$ and write $i_x:\\operatorname{Spec}\\kappa(x)\\hookrightarrow\\operatorname{Spec}\\mathcal O_{T,x}$. The local ring is regular by the hypothesis on $T$, and all its prime localizations are regular by [lem-weil-pbc-regular-local-localization]; the residue field is regular since its zero maximal ideal has zero generators. Thus both are Noetherian regular affine schemes, and the closed immersion has codimension $c_T(x)$. Apply [lem-per-absolute-gysin-purity] to get $\\operatorname{Cl}_{i_x}:\\Lambda(-c_T(x))[-2c_T(x)]\\xrightarrow{\\sim}R\\Gamma_x\\Lambda_T$. Define $p_x=\\operatorname{Cl}_{i_x}^{-1}$. The Gysin localization and etale compatibility make this an intrinsic pointwise pinning, with the same pinning after geometric restriction. These data form a putative complex in the terminology of [lem-per-putative-finite-detection]; potentiality remains to be checked. At $\\eta$ the local ring is a field, $c_T(\\eta)=0$, and $i_\\eta$ is the identity. Identity normalization of Gysin gives $p_\\eta=1$.",
+   "uses": [
+    "lem-per-absolute-gysin-purity",
+    "lem-per-putative-finite-detection",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 2.4.1.1 and XVI Theorem 3.1.1"
+   }
+  },
+  {
+   "text": "Fix an immediate geometric specialization and put $X=T_{(\\bar x)}$, $d=c_T(x)$. By [lem-sc-strict-henselization-regular] and [lem-sc-strict-henselization-dimension], $X$ has a regular local coordinate ring of dimension $d$. Its prime localizations are regular by [lem-weil-pbc-regular-local-localization], so it is a regular scheme. The trait $V$ below is regular for the same reason: its DVR maximal ideal has one generator and its dimension is one. The restriction and costalk comparisons of [lem-per-putative-finite-detection] transport the pointwise pinnings to $X$. Let $i:C\\hookrightarrow X$ be the reduced closure of the image of $\\bar y$, and $\\nu:V\\to C$ its normalization. Use only the geometric assertions of [lem-per-codimension-one-costalk-reduction]: apply that lemma to the auxiliary constant $\\mathbf F_\\ell$ sheaf on $T$, to obtain that $C$ is integral excellent strictly henselian of dimension one and $\\nu$ is finite surjective with $V$ a strictly henselian DVR trait. More precisely, the current statement makes $\\nu$ a universal homeomorphism with unchanged generic point and finite purely inseparable closed residue extension. This application is independent of our prime-power complex; none of that lemma's $\\mathbf F_\\ell$ costalk formulas is used for $\\Lambda$. Excellence of $V$ follows from [lem-exc-finite-type-localization-excellent] applied to the finite normalization algebra over $C$. Define $L=i^!\\Lambda_X$ with its induced putative pinnings. The residue square in question is the one for $L$ on $C$, by [lem-per-putative-finite-detection].",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "lem-per-putative-finite-detection",
+    "lem-per-codimension-one-costalk-reduction",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of Proposition 2.4.4.1, first reduction to C and its normalization"
+   }
+  },
+  {
+   "text": "Put $h=i\\nu:V\\to X$. It is finite between regular affine schemes. At its closed point $v$, the quasi-finite dimension formula in [lem-per-absolute-gysin-purity] gives $d_h=1-d$; put $a=1-d$. Its purity isomorphism is $\\operatorname{Cl}_h:\\Lambda_V(a)[2a]\\xrightarrow{\\sim}h^!\\Lambda_X=\\nu^!L$. We must check the pinnings, not just the underlying objects. For a point $v$ of $V$, put $z=h(v)$ and $\\pi_v:\\operatorname{Spec}\\kappa(v)\\to\\operatorname{Spec}\\kappa(z)$. Localizing at these points gives $h i_v=i_z\\pi_v$. Gysin composition identifies the two factorizations by\n$$i_v^!\\operatorname{Cl}_h\\circ\\operatorname{Cl}_{i_v}(a)[2a]=\\pi_v^!\\operatorname{Cl}_{i_z}\\circ\\operatorname{Cl}_{\\pi_v},$$\nwith the additive twists and shifts understood. Taking inverses shows that $\\operatorname{Cl}_h$ identifies the pinnings induced on $h^!\\Lambda_X$ by [lem-per-putative-finite-detection] with the shifted regular pinnings of $\\Lambda_V(a)[2a]$. This is a pointwise computation at both points of the trait. The induced dimension function has value $-d=a-1$ at the closed point, hence $a$ at the generic point, since it is a dimension function on a trait. No potentiality of the ambient constant sheaf has been used here.",
+   "uses": [
+    "lem-per-absolute-gysin-purity",
+    "lem-per-putative-finite-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 2.4.3.4 and its Gysin composition square, then proof of Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "By [lem-per-trait-gysin-residue], on $V$ one has $\\operatorname{sp}_{\\eta,v}(\\Lambda_V)=\\operatorname{Cl}_{i_v}(1)[2]$. Its generic pinning is the identity and its closed pinning is $\\operatorname{Cl}_{i_v}^{-1}$. Therefore $p_v(1)[2]\\circ\\operatorname{sp}_{\\eta,v}=1=p_\\eta$, with the required sign. Tensor the displayed equality with $\\Lambda_V(a)$ and shift by $2a$. This preserves the residue construction: the twist is an etale locally free line by [lem-asd-etale-finite-twist-pullback], and on the strict trait it is trivial; in a basis the stalk maps, averaging and evaluation defining the residue are the same scalar-linear maps. Changing basis multiplies both sides by the same unit. Thus the shifted regular pinnings on $\\Lambda_V(a)[2a]$ are potential for the induced dimension function. Step 4 identifies these with the induced pinnings on $\\nu^!L$.",
+   "uses": [
+    "lem-per-trait-gysin-residue",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 2.4.2.1(a) and the final sentence of the proof of Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "The finite-surjective detection assertion of [lem-per-putative-finite-detection], applied to $\\nu:V\\to C$ and the putative complex $L$, now shows that $L$ is potential. Its single residue square is the original square on $T$ by the same node's closed-costalk and strict-localization comparisons. Consequently $p_y=p_x(1)[2]\\circ\\operatorname{sp}_{y,x}$ for the specialization fixed in Step 3. It was arbitrary, so the pointwise pinnings of Step 2 make $\\Lambda_T$ potential by [def-per-potential-dualizing-complex]. This uses reflection of potentiality from $\\nu^!L$, rather than any theorem requiring $L$ to be potential already.",
+   "uses": [
+    "lem-per-putative-finite-detection",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 2.4.3.3 and proof of Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "Let $m\\in\\mathbf Z$. The twists $\\Lambda_T(m)$ are locally free lines, including for negative $m$, and pull back to the corresponding twists at every point by [lem-asd-etale-finite-twist-pullback]. Define the pinning of $\\Lambda_T(m)[2m]$ at $x$ by $p_x(m)[2m]$. The costalk-tensor identification here can be checked after trivializing the line on an etale neighbourhood: the supported-section kernel and any injective resolution are unchanged up to tensoring with a free rank-one module, an exact autoequivalence. Changes of basis are units and all maps are linear, so these identifications glue. On the strict localization used to compute each residue, use the same trivialization. Averaging, evaluation and the normalization scalar commute with it, hence the new residue square is the old square tensored and shifted. Its target is $\\Lambda(m-c_T(x))[2(m-c_T(x))]$. Adding the constant $m$ preserves the dimension-function equality, so [def-per-potential-dualizing-complex] gives the claimed pinned potential structure.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 2.4.4.1, twist and shift of its pinnings"
+   }
+  },
+  {
+   "text": "Write $p_{x,n}=\\operatorname{Cl}_{i_x,n}^{-1}$. The coefficient-quotient square for the Gysin classes in [lem-per-absolute-gysin-purity] commutes. Since both horizontal Gysin maps are isomorphisms, composing that square with their inverses gives the commuting square for $p_{x,n+1}$ and $p_{x,n}$. The source coefficient sheaf is free over itself, so its derived scalar reduction is the ordinary constant $\\Lambda_n$; no flatness of $\\Lambda_n$ over $\\Lambda_{n+1}$ is asserted. All twists use the canonical power map $u\\mapsto u^\\ell$ by [lem-asd-etale-finite-twist-pullback], so tensor powers, duals and the shifted pinnings have these same compatible transitions. The construction has used regularity and excellence, with $\\ell$ invertible, throughout; it has made no choice of a smooth presentation over a field.",
+   "uses": [
+    "lem-per-absolute-gysin-purity",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 3.3, the coefficient Gysin square and compatible cocycles; XVII Proposition 2.4.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "rem-pc-regular-normal",
+  "def-exc-excellent-ring",
+  "lem-per-geometric-immediate-catenary",
+  "def-per-potential-dualizing-complex",
+  "lem-per-absolute-gysin-purity",
+  "lem-per-putative-finite-detection",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-per-codimension-one-costalk-reduction",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-trait-gysin-residue",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV Proposition 2.1.4 and proof of Proposition 2.2.2; XVI section 3.3; XVII Propositions 2.4.1.1, 2.4.2.1, 2.4.3.3, Lemma 2.4.3.4 and proof of Proposition 2.4.4.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +166,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute cohomological purity for finite type morphisms between regular schemes Gysin fundamental classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  [AlgebraicGeometry.QuasiCompact f],\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Scheme.Hom.toImage f) (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\\n    (AlgebraicGeometry.Scheme.Hom.imageι f) (AlgebraicGeome\", \"doc\": \"Given a quasi-compact immersion $ f : X \\\\to Y $ of schemes, the square formed by the canonical morphism from $ X $ to the image subscheme $ f.\\\\text{image} $, the lift to the cobord $ f.\\\\text{liftCobor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees $m, m' > 0$, the pullback of the inclusion morphisms $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale Gysin fundamental class isomorphism between regular schemes compatible with composition and reduction of finite coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(e : X ≅ Y) (y : Y) : e.hom.stalkMap (e.inv y) ≫ e.inv.stalkMap y = (Y.presheaf.stalkCongr (.of_eq (by simp))).hom\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes and any point $ y \\\\in Y $, the composition of the stalk map $ e_\\\\ast $ at $ e^{-1}(y) $ followed by the stalk map $ e^{-1}_\\\\ast $ at $ y $ equals t\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] [FormallyEtale A B] : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": StableUnderComposition Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"RingHom.Etale.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": RespectsIso Etale\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism and $ e : S \\\\cong T $ is a ring isomorphism, then the composition $ e \\\\circ f : R \\\\to T $ is also étale. Similarly, if $ g : S \\\\to T $ is étale and $ e\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.finestTopologySingle\", \"module\": \"Mathlib.CategoryTheory.Sites.Canonical\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.Functor Cᵒᵖ (Type w)) : CategoryTheory.GrothendieckTopology C\", \"doc\": \"Construct the finest (largest) Grothendieck topology for which the given presheaf is a sheaf.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "absolute.?purity|Gysin|gysin",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular closed immersion extraordinary inverse image constant finite torsion sheaf Tate twist",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens)\\n  (x : CategoryTheory.ToType (Y.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appLE f (AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ \", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any open subset $ U $ of $ Y $, the inverse of the isomorphism induced by $ f $ on sections over $ U $ composed with the corresponding sheaf morphis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).inv.app M) \", \"doc\": \"For open immersions $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ between schemes, the functor induced by the composition $ g \\\\circ f $ on open subsets of $ X $ satisfies $ (g \\\\circ f)_*(U) = g_*(f_*(U)) $ for an\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-regular-reduction-dualizing",
@@ -68,5 +225,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-dualizing-regular-unit",
+  "worker": "stage1",
+  "summary": "Constructs inverse pointwise absolute Gysin pinnings; checks residues by normalized curves, quasi-finite Gysin composition and finite-surjective detection, then handles all twists and coefficient quotients. Reuses existing geometry only at its stated coefficient level. Four independent general auxiliary results stated and searched; the item statement is unchanged. Revalidated the changed codimension-one reduction statement on repair: Step 3 uses its geometric clauses only, with the current verbatim quotation.",
+  "blueprint": "Realizes the regular finite-torsion local model in Step 3 (dimension-normalized Verdier duality) of lem-per-artin-gabber-affine-curve, via lem-per-finite-regular-reduction-dualizing and the two qbar generic-model ancestors.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "General regular-to-normal and connected-to-integral geometry; our perverse unit supplies no such commutative-algebra result."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "General regularity under strict henselization, needed for the ambient local purity calculation."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "General dimension invariance under strict henselization, to fix d in the local purity calculation."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "General excellence stability, used only on the finite normalization algebra."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "General finite etale Tate-line and power-transition identifications; the perverse unit supplies no alternative."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "General localization of regular local rings, ensuring the affine local and strict-local schemes used for purity are regular at every point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-01fadafe5",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-01fadafe5 (reviewer sub-agent of L); spot-checked: Redelivery of 1079c760, which was a FIX but was refused at landing because lem-per-codimension-one-costalk-reduction had changed. The four new nodes are byte-identical to that delivery and have lost its B3 fixes. The item adds only one Step-3 sentence stating the current universal-homeomorphism, generic-point and inseparable-residue clauses, and they match the changed node. I read the item, all new nodes, def-per-potential-dualizing-complex, the current codimension-one statement and ILO at XVII 2.1.1–2.4.4.1 (including the proofs of 2.4.2.1, 2.4.3.3, Lemma 2.4.3.4 and 2.4.4.1) and XIV 2.1.3–2.2.5. The steps follow ILO in order. Step 1 is XIV 2.2.2 via 2.1.4. Step 2 is 2.4.1.1, with p=Cl^{-1} and p_eta=1 from the identity clause. Steps 3–4 are the 2.4.4.1 reduction and Lemma 2.4.3.4; d_h=1-d is constant because a regular local ring is CM. Step 5 is 2.4.2.1(a). Step 6 is finite-surjective reflection (2.4.3.3), so it is not circular. Steps 7–8 handle twists and the coefficient squares with u->u^ell. The codimension-one node is used only for its coefficient-free geometry, and its notion of immediate specialization is the definition's. Batch 5: the flagged citation lem-per-codimension-one-costalk-reduction reaches lem-trf-integral-component-henselian-permanence. That node is pure commutative algebra (Stacks 092X/09XK: an integral algebra with no nontrivial idempotents over a henselian local ring is henselian local). It is used only to make the normalization of C a strictly henselian DVR, it is not part of either assumed theorem or its proof, and so it is accepted. The new nodes are not duplicates: the existing purity nodes need smooth schemes over a field, the forward pullback nodes only push potentiality forward, and the F_ell trait model has no Gysin comparison. No SGA source is cited, and every step is under 2000 characters. The six generic tool_uses are accepted. Fault B3, fixed in fixes/: in lem-per-absolute-gysin-purity I added [def-weil-closed-immersion] and [def-sbc-smooth-morphisms]; in lem-per-putative-finite-detection I added [def-weil-proper-morphism] for separated, [def-weil-closed-immersion] for i, and [def-weil-finite-integral-morphism] and [def-weil-surjective-morphism]; stmt_deps are updated in both. Maintainer note: ILO proves 2.4.2.1(a) only up to sign, so whoever splits lem-per-trait-gysin-residue must compute the sign with the XVI 2.1.1 convention.; 2 file(s) fixed by the reviewer"
  }
 }
