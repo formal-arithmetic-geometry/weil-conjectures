@@ -277,5 +277,23 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-eeebf5bef (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources: Stacks 0578 (more-morphisms 7215-7255), 0573 (6563-6641), and morphisms 01RE, 056D, 056E and 081I. The item statement is unchanged and matches 0578. Step-by-step check. Step 1: going to Y_red keeps the residue fields and the fibres; the calculation is written out. Step 2: generic flatness gives only flatness and local finite presentation, and only that is used. It is a declared off-unit tool use, which I accept. Step 3: every fibre is topologically Noetherian, so the inclusions of opens are quasi-compact and quasi-separated, which the Nagata lemmas need. Step 4: a dense smooth locus plus the pointwise fibre criterion makes U_eta dense; smooth opens give geometrically reduced U_y through the open-cover node. Step 5: 056D gives that U_eta is scheme-theoretically dense, i.e. the sheaf map is injective. Step 6: the new child applies with exactly its hypotheses. Steps 7-8: on affine charts, flat pullback (081I) through the faithfully flat D->D⊗L, then the section-wise 056E argument, give reducedness after every field extension. This correctly fills in what the source's bare 056E step leaves out. New node lem-trf-schematic-density-generic-fibre-open: it is Stacks 0573 with density written as sheaf injectivity (01RE). It is true; tested on Z[x]/(px) with U=D(p), on an empty generic fibre and on U=X. It has no proof sketch, cites its definitions, and records searches of all three kinds. It is not a clause of the item, and grep finds no existing 0573 node. The 0559, 0577 and preparation nodes are different statements. No SGA anywhere. Advisory: under the blueprint_update of def-nagata-scheme-theoretic-image, step 7 also needs (U_y∩C)_L->C_L quasi-compact; it is, because C_L is Noetherian. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreGeometricallyReducedOpen",
+  "declaration": "AlgebraicGeometry.exists_nonempty_open_geometricallyReduced_fiber_of_generic",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreGeometricallyReducedOpen.lean",
+  "statement": "theorem exists_nonempty_open_geometricallyReduced_fiber_of_generic {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [IrreducibleSpace Y] (η : Y) (hη : IsGenericPoint η Set.univ) (hgeneric : GeometricallyReduced (f.fiberToSpecResidueField η)) : ∃ V : Y.Opens, (V : Set Y).Nonempty ∧ ∀ y : Y, y ∈ V → GeometricallyReduced (f.fiberToSpecResidueField y)",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16fa4754c",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0578 clause by clause: LocallyOfFiniteType+QuasiCompact (finite-type dep node), IrreducibleSpace Y, IsGenericPoint η univ, GeometricallyReduced of fiberToSpecResidueField at η and at every y in a nonempty Y.Opens; no added hypotheses; universe-u field quantification equivalent; empty fibres/X covered. Node copy differs from side only in lean; statement verbatim. No defs, proof sorry, docstrings carry Tag 0578, blueprint id and all 8 proof steps; imports are proof-dep modules. No duplicate (GenericConstancyGeometricReducedness assumes finite presentation, is an iff and cites this item). nt_compile --json on snapshot: rc=0, 3.7 s, no warnings."
  }
 }
