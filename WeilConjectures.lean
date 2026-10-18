@@ -8,6 +8,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.CocontinuousGenerator
 public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
+public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
@@ -4894,6 +4895,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.ConnectedConstant
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+public import WeilConjectures.AlgebraicGeometry.Sites.Cospecialization
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
@@ -6192,6 +6194,7 @@ public import WeilConjectures.ConstructibleSheaf.RepresentablePullbackConstantOf
 public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.ConstructibleSheaf.Simple
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule
@@ -8667,6 +8670,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangePro
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Characterization
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
@@ -8683,6 +8687,10 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClosed
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Smooth
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SmoothProperLocallyConstant
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SmoothProperSpecialization
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianSections
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
@@ -9040,6 +9048,8 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicInt
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
@@ -9061,6 +9071,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetLaxMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetMonoidalAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeWeilCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
@@ -9116,6 +9128,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafComparison
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
