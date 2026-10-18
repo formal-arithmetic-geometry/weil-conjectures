@@ -16549,3 +16549,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/V8/Sheaf.Paper.FiniteSubextensionsDirected (stage 3; reviewer PASS; first push; landing 20261018T145120-L-3647045 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AffineTraceTower (stage 3; reviewer PASS; first push; landing 20261018T145121-L-3647407 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/W3/Sheaf.Paper.DerivedLocalIsomorphismSheaf (stage 3; reviewer PASS; first push; landing 20261018T145122-L-3647711 (interface); batch 20261018T145048; modules 1; new nodes 0; change records: coord/changes/derived-local-isomorphism-proof-scope.md)
+- 14:51 L: merged deliver/Z6/Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound (stage 3; reviewer PASS; first push; landing 20261018T145123-L-3648003 (proof); batch 20261018T145048; modules 1; new nodes 0)
