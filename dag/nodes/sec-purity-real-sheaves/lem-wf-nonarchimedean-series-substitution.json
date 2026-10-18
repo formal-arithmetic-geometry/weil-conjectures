@@ -1,0 +1,121 @@
+{
+ "id": "lem-wf-nonarchimedean-series-substitution",
+ "kind": "statement",
+ "title": "Coefficient bounds ensuring nonarchimedean series substitution and Cauchy products",
+ "statement": "Let $K$ be a field with a multiplicative nonarchimedean absolute value $|\\cdot|:K\\to\\mathbf R_{\\ge0}$, complete for the metric $|x-y|$. Formal series have the coefficient and Cauchy-product convention of [def-weil-formal-power-series]. For $\\rho>0$, say $H(T)=\\sum_{m\\ge0}h_mT^m$ is restricted at $\\rho$ if $|h_m|\\rho^m\\to0$. Its evaluation is $H(x)=\\sum_{m\\ge0}h_mx^m$ for $|x|\\le\\rho$.\n\n(1) If $H$ and $J$ are restricted at $\\rho$, then their formal Cauchy product is restricted at $\\rho$ and $(HJ)(x)=H(x)J(x)$ for every $|x|\\le\\rho$.\n\n(2) Let $\\rho,s>0$, $F(T)=\\sum_{n\\ge0}a_nT^n$ and $G(T)=\\sum_{m\\ge1}b_mT^m$. Assume\n$$|b_m|\\rho^m\\longrightarrow0,\\qquad \\sup_{m\\ge1}|b_m|\\rho^m\\le s,\\qquad |a_n|s^n\\longrightarrow0.$$\nThen the formal composition $F\\circ G=\\sum_{n\\ge0}a_nG(T)^n$ is restricted at $\\rho$, $|G(x)|\\le s$ and\n$$(F\\circ G)(x)=F(G(x))\\quad(|x|\\le\\rho).$$\nMore precisely, for every $|x|\\le\\rho$ the family\n$$\\left(a_n\\prod_{j=1}^n b_{m_j}x^{m_j}\\right)_{n\\ge0,\\ (m_1,\\ldots,m_n)\\in\\mathbf Z_{\\ge1}^{\\,n}}$$\nis summable in $K$ (meaning that finite subsums converge as finite subsets increase), and may be grouped either by $n$ or by $m_1+\\cdots+m_n$. Its terms satisfy\n$$\\left|a_n\\prod_{j=1}^n b_{m_j}x^{m_j}\\right|\\le |a_n|s^n.$$\nFor $n=0$ there is one term $a_0$, with empty product $1$ and total degree $0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "paragraph 3, justification of evaluating the formal identities; the explicit coefficient-summability criterion is supplied by Q153"
+ },
+ "stmt_deps": [
+  "def-weil-formal-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of uniformly convergent power series commutes with substitution and Cauchy products over a complete nonarchimedean field",
+   "results": "8 hits including MvPowerSeries.eval₂_subst, PowerSeries.hasSum_eval₂, PowerSeries.comp_aeval, PowerSeries.comp_eval₂, and MvPowerSeries.hasSum_eval₂; no exact theorem for the stated uniform-domain result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.comp_eval₂, PowerSeries.hasSum_eval₂, MvPowerSeries.eval₂_subst",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eval₂_subst|comp_eval₂|hasSum_eval₂|Cauchy",
+   "results": "Historical command returned 0 hits with subdirectory Mathlib/RingTheory/PowerSeries or Mathlib. This was a mis-scoped grep, NOT evidence of absence; see the correctly scoped repair searches below.",
+   "date": "2026-10-18",
+   "verdict": "inconclusive: mis-scoped grep; superseded by repair searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal power series evaluation commutes with substitution in a complete topological ring",
+   "results": "8 hits including MvPowerSeries.comp_subst_apply, MvPowerSeries.eval₂_subst, MvPowerSeries.comp_subst, PowerSeries.comp_aeval, MvPowerSeries.HasSubst.hasEval, and PowerSeries.subst_coe; these require Mathlib HasEval/HasSubst hypotheses and do not state the uniform nonarchimedean-domain lemma.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a complete nonarchimedean normed field restricted multivariate power series with weighted coefficients tending to zero admit composition when the Gauss norms of the inner zero-constant series are bounded by the outer radii; evaluation commutes with composition",
+   "results": "Command returned 8 hits; scope=service index. Top results: [\"MvPowerSeries.eval₂_subst\", \"MvPowerSeries.comp_aeval\", \"MvPowerSeries.comp_eval₂\", \"MvPowerSeries.comp_subst_apply\", \"MvPowerSeries.comp_subst\", \"PowerSeries.comp_eval₂\", \"PowerSeries.comp_aeval\", \"MvPowerSeries.HasSubst.hasEval\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If b_0=0, sup_n norm(b_n) r^n <= s, norm(b_n) r^n tends to zero, and norm(a_n) s^n tends to zero, evaluation of F composed with G commutes with substitution on norm(x)<=r in a complete ultrametric field",
+   "results": "Command returned 8 hits; scope=service index. Top results: [\"MvPowerSeries.eval₂_subst\", \"MvPowerSeries.comp_subst_apply\", \"MvPowerSeries.comp_subst\", \"PowerSeries.comp_aeval\", \"MvPowerSeries.comp_aeval\", \"PowerSeries.comp_eval₂\", \"MvPowerSeries.comp_substAlgHom\", \"MvPowerSeries.comp_eval₂\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.eval₂_subst",
+   "results": "Command returned 1 hits; scope=service index. Top results: [\"MvPowerSeries.eval₂_subst\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete ultrametric field admits summable Cauchy products and substitution of power series if the inner weighted coefficient supremum lies within a radius where the outer weighted coefficients tend to zero",
+   "results": "Command returned 8 hits; scope=service index. Top results: [\"tsum_mul_tsum_eq_tsum_sum_range_of_summable_norm\", \"summable_powerSeries_of_norm_lt_one\", \"summable_powerSeries_of_norm_lt\", \"MvPowerSeries.hasSum_aeval\", \"FormalMultilinearSeries.summable\", \"MvPowerSeries.WithPiTopology.summable_of_tendsto_weightedOrder_atTop_nhds_top\", \"Summable.mul_of_nonarchimedean\", \"IsUltrametricDist.nnnorm_tsum_le\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "grep",
+   "query": "hasSum_eval₂|comp_eval₂|eval₂_subst",
+   "results": "Command returned 11 hits; scope=RingTheory. Top results: [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "grep",
+   "query": "eval₂_subst|comp_eval₂|hasSum_eval₂|summable_mul|summable_prod",
+   "results": "Command returned 7 hits; scope=RingTheory/PowerSeries. Top results: [\"Mathlib/RingTheory/PowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/PowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "grep",
+   "query": "subst|eval|hasSum|IsRestricted|gaussNorm",
+   "results": "Command returned 25 hits; scope=RingTheory/PowerSeries. Top results: [\"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "grep",
+   "query": "mul_of_nonarchimedean|tsum_mul_tsum_of_nonarchimedean",
+   "results": "Command returned 5 hits; scope=Topology/Algebra/InfiniteSum. Top results: [\"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\"]. ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-deep-principal-unit-log",
+  "date": "2026-10-18",
+  "group": "Q153"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-d-real-log",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-deep-principal-unit-log",
+   "place": "Proof paragraph 3: the missing summability justification for evaluating compositions and Cauchy products on a deep closed disc",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

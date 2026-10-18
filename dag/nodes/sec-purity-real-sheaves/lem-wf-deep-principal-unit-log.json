@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-deep-principal-unit-log",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The logarithm on sufficiently deep principal units",
@@ -12,33 +12,132 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.md",
   "place": "node lem-wf-deep-principal-unit-log, order 2615"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
  "proof": [
   {
-   "text": "For $x\\in\\mathfrak m_E^r$,\n\n$$\nv_E(x^n/n)\\geq nr-e\\,v_\\ell(n)\\longrightarrow+\\infty.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Put $I=\\mathfrak m_E^r$, $q=\\ell^{-r/e}$ and $\\delta=r-e/(\\ell-1)>0$. Write $L(T)=\\sum_{n\\ge1}(-1)^{n+1}T^n/n$ and $A(T)=\\sum_{n\\ge1}T^n/n!$, so the desired maps are $u\\mapsto L(u-1)$ and $x\\mapsto1+A(x)$. By [lem-wf-log-exp-valuation-convergence], $L,A$ converge uniformly on $I=\\{|x|_E\\le q\\}$, have continuous sums in $I$, and each of their weighted coefficient sequences at radius $q$ is bounded by $q\\theta^{n-1}\\to0$, where $\\theta=\\ell^{-\\delta/e}<1$. In particular both weighted coefficient suprema are at most $q$.",
+   "uses": [
+    "lem-wf-log-exp-valuation-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraphs 1–2 and the coefficient bounds needed by paragraph 3"
+   }
   },
   {
-   "text": "Also $v_\\ell(n!)\\leq n/(\\ell-1)$, so\n\n$$\nv_E(x^n/n!)\\geq n\\left(r-\\frac e{\\ell-1}\\right)\n\\longrightarrow+\\infty.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Apply clause (2) of [lem-wf-nonarchimedean-series-substitution] twice, with $\\rho=s=q$, first $(F,G)=(L,A)$ and then $(F,G)=(A,L)$. Both inner series have zero constant term; step 1 supplies restrictedness, the bound $\\sup_m|b_m|_Eq^m\\le q$, and $|a_n|_Eq^n\\to0$ in each case. For either pair, an expanded term $a_n\\prod_{j=1}^n b_{m_j}x^{m_j}$ has norm at most $|a_n|_Eq^n\\le q\\theta^{n-1}$ for $n\\ge1$. This bound tends to zero with $n$, and for fixed $n$ the terms tend to zero as the tuple escapes finite subsets, by the inner coefficient decay. Thus the cited criterion makes the full expanded composition families summable. The formal identities [lem-wf-log-exp-formal-identities], specialized to the commutative $\\mathbf Q$-algebra $E$, can therefore be evaluated to give $L(A(x))=x$ and $A(L(x))=x$ for every $x\\in I$. Consequently $\\log(\\exp x)=x$ and $\\exp(\\log(1+x))=1+x$.",
+   "uses": [
+    "lem-wf-nonarchimedean-series-substitution",
+    "lem-wf-log-exp-formal-identities",
+    "lem-wf-log-exp-valuation-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, inverse identities with explicit summability hypotheses"
+   }
   },
   {
-   "text": "Thus both series converge. The formal identities\n$\\log(\\exp x)=x$, $\\exp(\\log(1+x))=1+x$, and\n$\\log((1+x)(1+y))=\\log(1+x)+\\log(1+y)$ may be evaluated in this\ndomain, because every series involved converges there. They prove that\n$\\log$ and $\\exp$ are inverse continuous homomorphisms; in particular\n$\\log$ is injective. The quotient\n$\\mathcal O_E^\\times/(1+\\mathfrak m_E^r)$ is finite. Taking $N$ to be\nits exponent gives the last assertion. The strict inequality on $r$\nalso covers $\\ell=2$, so no shallow principal-unit torsion remains in the\nlogarithm domain.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $a,b\\in I$; then $a+b\\in I$ by the nonarchimedean inequality. Apply [lem-weil-power-series-exp-hom] with $R=E$, $U=aT$ and $W=bT$. These have zero constant coefficients, and its formal identity is\n$$\\left(\\sum_{n\\ge0}\\frac{a^nT^n}{n!}\\right)\\left(\\sum_{n\\ge0}\\frac{b^nT^n}{n!}\\right)=\\sum_{n\\ge0}\\frac{(a+b)^nT^n}{n!}.$$\nBy [lem-wf-log-exp-valuation-convergence], the coefficient sequences of all three series tend to zero: their positive-degree terms have norms at most $q\\theta^{n-1}$. They are therefore restricted at radius $1$. Clause (1) of [lem-wf-nonarchimedean-series-substitution] permits evaluating this Cauchy product at $T=1$ (whose norm is $1$), giving $\\exp(a+b)=\\exp(a)\\exp(b)$. This works simultaneously for every pair $a,b$ and does not substitute $x+y+xy$ into a one-variable identity.",
+   "uses": [
+    "lem-weil-power-series-exp-hom",
+    "lem-wf-log-exp-valuation-convergence",
+    "lem-wf-nonarchimedean-series-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, homomorphism identity via formal exponential addition and a summable Cauchy product"
+   }
+  },
+  {
+   "text": "The two inverse identities of step 2 identify $I$ bijectively with $1+I$. Also $\\exp(0)=1$ directly from the series. Step 3 gives $\\exp(a)\\exp(-a)=1$, so all these values are units, and proves multiplicative closure and the homomorphism property of exponential. For $u,v\\in1+I$, put $a=\\log u$, $b=\\log v$. Step 2 gives $u=\\exp a$, $v=\\exp b$, so step 3 and then step 2 give $\\log(uv)=\\log(\\exp(a+b))=a+b$. Thus logarithm is the inverse homomorphism. Continuity of both maps follows from [lem-wf-log-exp-valuation-convergence], with the translations $u\\mapsto u-1$ and $x\\mapsto1+x$ continuous in the field topology. This proves all the asserted topological group claims.",
+   "uses": [
+    "lem-wf-log-exp-valuation-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, inverse continuous group homomorphisms"
+   }
+  },
+  {
+   "text": "For the finite extension with its extended absolute value [def-weil-l-adic-coefficient-extension], clauses 2–4 of [lem-weil-l-adic-extension-integers-dvr] give that $\\mathcal O_E$ is a DVR with finite residue field and a uniformizer $\\varpi$. Since $r>e/(\\ell-1)>0$, the integer $r$ is at least $1$. Clauses 1–2 of [lem-weil-valued-dvr-finite-quotients] identify $\\varpi^r\\mathcal O_E=\\mathfrak m_E^r$ and make $\\mathcal O_E/\\mathfrak m_E^r$ finite. Reduction maps $\\mathcal O_E^\\times$ to the unit group of that finite ring. A unit maps to $1$ exactly when $u-1\\in\\mathfrak m_E^r$, so its kernel is $1+\\mathfrak m_E^r$. Taking $N\\ge1$ to be the exponent of the finite image yields $u^N\\in1+\\mathfrak m_E^r$ for every unit $u$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, finite quotient and a uniform exponent"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-power-series-exp-hom",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-wf-log-exp-formal-identities",
+  "lem-wf-log-exp-valuation-convergence",
+  "lem-wf-nonarchimedean-series-substitution"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "paragraphs 1–3; the invalid convergence-only evaluation inference in paragraph 3 is replaced by an explicit coefficient-summability application"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension E of Q_l with normalized valuation, logarithm and exponential converge and are inverse on m_E^r when r > e/(l-1), and a power of every unit lies in 1+m_E^r",
+   "results": "No exact match. Hits include Valued.exists_pow_lt_of_le_exp_neg_one, Valuation.IsRankOneDiscrete.generator_zpowers_eq_range, and local-field valuation declarations, none for this theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Padic.exp_log, Padic.log_exp, NormedField.exp_log, IsROrC.exp_log",
+   "results": "0 hits; loogle reported unknown identifier Padic.exp_log.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exp_log|log_exp|padicValNat_factorial|valuation.*factorial|Subgroup.*quotient_finite [Mathlib/Algebra/]",
+   "results": "Hits are generic WithZero exp/log identities in Mathlib/Algebra/GroupWithZero/WithZero.lean and order lemmas; no finite-extension p-adic result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "p-adic logarithm exponential inverse on a sufficiently deep maximal ideal of a finite extension",
+   "results": "Hits include PadicInt.inv, PadicInt.isFractionRing, PadicInt.maximalIdeal_eq_span_p, and Padic valuation lemmas; none states this result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of the l-adic field: deep ideal logarithm exponential convergence inverse continuous and finite unit quotient",
+   "results": "No exact match; hits concern BDeRhamPlus, number-field units, and PadicInt continuous additive characters.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*quotient|principal.*unit|expSeries|logSeries [Mathlib/Topology/]",
+   "results": "Hits include finite quotient and principal-neighborhood infrastructure, but no theorem asserting the p-adic log/exp result for finite extensions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +157,34 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-log"
+ "unit": "sk-d-real-log",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-deep-principal-unit-log",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery: replace the false uniform-convergence substitution node by a weighted-coefficient summability criterion, strengthen the valuation lemma by the explicit majorant q theta^(n-1), and state only the purely formal inverse identities in the formal-identities node. Establish exponential additivity using the existing formal exponential homomorphism node and a justified Cauchy-product evaluation at T=1; deduce logarithm additivity from the inverse identities. Keep the exact target statement and finite quotient argument. Correct historical mis-scoped grep interpretations and record new searches against the repaired statements.",
+  "blueprint": "Step 1 realizes paragraphs 1–2; steps 2–4 repair and realize paragraph 3 (formal inverses, product identity, continuity); step 5 realizes its finite quotient exponent. The current main-20261015 proof and master proof agree.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-power-series-exp-hom",
+    "why": "Generic formal exponential addition for U=aT and W=bT; the unit has no separate algebraic addition identity, and its logarithm route still uses the same convergent series."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR, uniformizer and finite residue field facts for the finite coefficient model; generic input to the unit quotient argument, already referenced by the coefficient definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-power-series-exp-hom",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-0cd17b136",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-0cd17b136 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, the 3 new unsplit nodes and the statement of every cited node against blueprint main-20261015 (lem-wf-deep-principal-unit-log .md and .proof.md, same as the master copy) and unit sk-d-real-log. The target statement is the blueprint's, verbatim and unchanged; the unit's ell^2 O_E = m_E^{2e} domain is covered. (1) valuation-convergence is true. v_ell(n) and v_ell(n!) are both at most (n-1)/(ell-1), the second by Legendre. This gives v_E >= r+(n-1)delta and weighted coefficients at most q*theta^(n-1) <= q. I checked it at (2,1,2) and (3,2,2), where equality occurs; the boundary case r=e/(ell-1) is correctly excluded (-1 is torsion in Q_2). (2) formal-identities is true over any commutative Q-algebra and uses the same composition convention as the substitution node. The live Mathlib Log.lean has no subst_exp_log, so unsplit is correct. (3) series-substitution is true: each expanded term is at most |a_n|s^n, and the finitely-many-terms-above-epsilon argument gives summability, both groupings and restrictedness. The returned p=2 counterexample fails its |a_n|s^n -> 0 hypothesis, so the false helper is really repaired. Step 2 applies clause (2) with rho=s=q, and every hypothesis is supplied by step 1. Step 3 evaluates exp(aT)exp(bT)=exp((a+b)T), from lem-weil-power-series-exp-hom, at T=1 with rho=1. Step 4 is elementary as written. Step 5: the DVR node (clauses 2-4) and the Mathlib-leaf finite-quotients node (clauses 1-2) give the finite quotient O_E/m_E^r and the exponent N. No duplicates: I compared against exp-hom, exp-coefficientwise-map, dl-a1 radius and factorial nodes, pbc adic evaluation and the ultrametric nodes. No new node restates a clause of the item. The route is kept; only the blueprint's insufficient convergence-only evaluation justification is made precise. Accepted tool_uses: lem-weil-power-series-exp-hom and lem-weil-l-adic-extension-integers-dvr. No fixes written."
+ }
 }
