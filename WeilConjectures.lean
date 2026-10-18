@@ -6841,6 +6841,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
