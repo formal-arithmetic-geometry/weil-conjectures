@@ -11,11 +11,10 @@ public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Mathlib.Algebra.CharP.CharAndCard
 import Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity
 import Sheaf.AlgebraicGeometry.ProperLocallyAcyclicSpecialization
 import Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity
-import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Prime-to-characteristic specialization for smooth proper morphisms
@@ -92,6 +91,51 @@ theorem isIso_strictLocalSpecialization_smooth_proper_prime
             ((sheafCompose X.smallEtaleTopology
               (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))
                 AddCommGrpCat.{u + 1})).obj F))))) := by
-  sorry
+  let R := ULift.{u + 1} (ZMod ell)
+  let U := forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}
+  let G := (sheafCompose X.smallEtaleTopology U).obj F
+  have hkill (M : ModuleCat.{u + 1} R) (m : M) : ell • m = 0 := by
+    rw [← Nat.cast_smul_eq_nsmul R, CharP.cast_eq_zero R ell, zero_smul]
+  have : Scheme.IsLocallyConstantSheaf G := by
+    obtain ⟨d⟩ := Scheme.IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
+    refine ⟨⟨⟨d.cover, fun i ↦ ?_⟩⟩⟩
+    let := d.isConstant i
+    have : GrothendieckTopology.PreservesSheafification
+        (X.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i)) U :=
+      GrothendieckTopology.instPreservesSheafification _ _
+    change ((sheafCompose (X.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))
+      U).obj (F.over (d.cover.etalePrecoverageToEtale i))).IsConstant _
+    infer_instance
+  have hG : G.IsTorsion := by
+    refine Sheaf.IsTorsion.of_forall_isAddTorsion fun V m ↦ ?_
+    exact isOfFinAddOrder_iff_nsmul_eq_zero.mpr
+      ⟨ell, (Fact.out : ell.Prime).pos, hkill (F.obj.obj V) m⟩
+  have hf : IsLocallyAcyclicRelative f G := by
+    apply isLocallyAcyclicRelative_of_locallyConstant_torsion f (smooth_localAcyclicity f).2
+    intro K _ _ x m
+    have : LocallySmall.{u} X.Etale := locallySmall_self _
+    have : PreservesFilteredColimitsOfSize.{u, u} U :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    let e := ((Scheme.pointSmallEtale x).sheafFiberCompIso U).app F
+    have hm : ell • m = 0 := by
+      apply (ConcreteCategory.bijective_of_isIso e.hom).1
+      simpa only [map_nsmul, map_zero] using
+        hkill (((Scheme.pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} R)).obj F)
+          (e.hom m)
+    refine ⟨isOfFinAddOrder_iff_nsmul_eq_zero.mpr
+      ⟨ell, (Fact.out : ell.Prime).pos, hm⟩, ?_⟩
+    by_cases hc : ringChar (X.residueField (x default)) = 0
+    · exact Or.inl hc
+    · apply Or.inr
+      have hu : IsUnit (ell : X.residueField (x default)) := by
+        simpa only [map_natCast] using
+          (hunit (f (x default))).map
+            ((X.residue (x default)).hom.comp (f.stalkMap (x default)).hom)
+      have hp : ell.Coprime (ringChar (X.residueField (x default))) :=
+        (Fact.out : ell.Prime).coprime_iff_not_dvd.mpr
+          ((isUnit_iff_not_dvd_char_of_ringChar_ne_zero _ ell hc).mp hu)
+      exact hp.of_dvd_left (addOrderOf_dvd_of_nsmul_eq_zero hm)
+  have hsp := isIso_etaleStalkSpecialization_of_proper_locallyAcyclic f G hG hf q s t
+  exact hsp
 
 end AlgebraicGeometry.Etale

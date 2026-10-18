@@ -16224,3 +16224,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/X3/Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage (stage 3; reviewer PASS; first push; landing 20261018T062948-L-691123 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/X3/Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients (stage 3; reviewer PASS; first push; landing 20261018T062949-L-691336 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/X3/Sheaf.AlgebraicGeometry.UniversalCurveTestVanishing (stage 3; reviewer PASS; first push; landing 20261018T062949-L-691641 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/X6/Sheaf.AlgebraicGeometry.SmoothProperPrimeSpecialization (stage 3; reviewer PASS; first push; landing 20261018T062950-L-691836 (proof); batch 20261018T062645; modules 1; new nodes 0)

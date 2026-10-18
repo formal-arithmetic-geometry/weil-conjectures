@@ -38,9 +38,8 @@
  ],
  "proof": [
   {
-   "text": "Let $G$ be the underlying abelian sheaf of $F$. A module trivializing cover for $F$ also trivializes $G$, by forgetting the scalar action in each trivialization. Every section and every germ of $G$ is killed by $\\ell$: it is an element of an $\\mathbf F_\\ell$-module and $\\ell\\cdot 1=0$ in $\\mathbf F_\\ell$. Thus $G$ is torsion and every nonzero stalk element has order $\\ell$ (zero has order $1$). For $x\\in X$ with image $s\\in S$, the local ring homomorphism $\\mathcal O_{S,s}\\to\\kappa(x)$ takes the assumed unit $\\ell$ to a unit; hence $\\kappa(x)$ has characteristic different from $\\ell$. Therefore each stalk element has order prime to its residue characteristic, including in characteristic zero. This verifies the coefficient hypotheses without assuming finite stalks.",
+   "text": "Let $G$ be the underlying abelian sheaf of $F$. Use the same locally constant datum as $F$: on each localized site the forgetful functor preserves sheafification and therefore sends the constant module sheaf to a constant abelian sheaf. For every module $M$ over $\\operatorname{ULift}(\\mathbf F_\\ell)$, the equality $\\ell\\cdot1=0$ gives $\\ell m=0$. Applied sectionwise this proves that $G$ is torsion. Forgetting scalars commutes with geometric stalks because it preserves filtered colimits, so every stalk element $m$ of $G$ is also killed by $\\ell$. Hence $m$ has finite additive order dividing $\\ell$. At a geometric point $x$ of $X$, the composite $\\mathcal O_{S,f(x)}\\to\\mathcal O_{X,x}\\to\\kappa(x)$ sends the assumed unit $\\ell$ to a unit. If the residue characteristic is nonzero, the prime $\\ell$ therefore does not divide it and is coprime to it. Every divisor of $\\ell$, including the order of $m$, is then coprime to the residue characteristic. Characteristic zero is handled separately. No finite-stalk hypothesis is used.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
     "def-constructible-locally-constant"
    ],
    "elementary": true,
@@ -72,7 +71,7 @@
    }
   },
   {
-   "text": "Fix $q\\ge0$, $\\bar s$, and $\\bar t$ as in the statement. Apply [lem-weil-pbc-proper-locally-acyclic-specialization] to $f$ and $G$. Properness is an original hypothesis; step 1 gives a torsion sheaf and step 3 gives local acyclicity relative to it. This yields an isomorphism $(R^qf_*G)_{\\bar s}\\to(R^qf_*G)_{\\bar t}$. The cited node specifies the pointed-neighbourhood restriction map, so it is exactly the specialization map claimed here, rather than merely an abstract isomorphism between the two groups.",
+   "text": "Fix $q\\ge0$, $\\bar s$, and $\\bar t$ as in the statement. Apply [lem-weil-pbc-proper-locally-acyclic-specialization] to $f$ and $G$. Properness is an original hypothesis; step 1 gives a torsion sheaf and step 3 gives local acyclicity relative to it. This yields an isomorphism $(R^qf_*G)_{\\bar s}\\to(R^qf_*G)_{\\bar t}$. The cited node specifies the pointed-neighbourhood restriction map, so it is exactly the specialization map claimed here, rather than merely an abstract isomorphism between the two groups. In Lean the statement already forms higher direct images after forgetting scalars to abelian sheaves. The two definitions strictLocalSpecialization and etaleStalkSpecialization are definitionally equal (the differing proofs of the identity-composition condition are proof irrelevant), so the cited theorem applies directly. No derived coefficient comparison is needed.",
    "uses": [
     "lem-weil-pbc-proper-locally-acyclic-specialization"
    ],
@@ -81,31 +80,18 @@
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 0GKD proof, lemma-sp-isom-proper-torsion-loc-ac (0GJW) specialized to G[0]"
    }
-  },
-  {
-   "text": "If higher direct images are formed in $\\mathbf F_\\ell$-module sheaves, the canonical comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] identifies their underlying derived abelian sheaves with $Rf_*G$. The forgetting functor is exact, so it preserves kernels, images and cokernels and therefore the quotient $\\ker d^q/\\operatorname{im}d^{q-1}$ computing degree-$q$ cohomology. Apply degree-$q$ cohomology to the derived comparison: it gives an isomorphism from the underlying abelian sheaf of the module-valued $R^qf_*F$ to $R^qf_*G$. Now take ordinary geometric stalks of this sheaf isomorphism. The underlying group of a module stalk is the same pointed-neighbourhood colimit of groups: scalar multiplication is defined on germ representatives and the additive germ relations are unchanged. The resulting isomorphism of abelian sheaves on $S$ commutes with restriction on every pointed neighbourhood: its components are a sheaf morphism. Consequently it intertwines specialization on the two stalks, since specialization is induced by those restrictions. Step 4 therefore gives bijectivity of the underlying homomorphism of the module specialization map. That map is $\\mathbf F_\\ell$-linear by the module-valued restriction construction; its bijective inverse is linear, since if $y=\\operatorname{sp}(x)$ then $\\operatorname{sp}(a x)=a y$. It is therefore an isomorphism of $\\mathbf F_\\ell$-modules as well. Under the abelian interpretation of higher direct images, step 4 already proves the result.",
-   "uses": [
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKD degree-q consequence; coefficient comparison and exact geometric stalk cohomology"
-   }
   }
  ],
  "proof_deps": [
   "def-constructible-locally-constant",
-  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lem-weil-pbc-proper-locally-acyclic-specialization",
   "lem-weil-pbc-smooth-local-acyclicity"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GKD, lemma-sp-isom-proper-loc-cst-torsion, proof via 0GJQ, 0GJR, 0GJW; coefficient bookkeeping spelled out"
+  "place": "Tag 0GKD, lemma-sp-isom-proper-loc-cst-torsion, proof via 0GJQ, 0GJR and 0GJW. The Lean statement uses the abelian interpretation, so the optional module-derived comparison is pruned; coefficient and stalk calculations are proved in the theorem."
  },
  "mathlib_searches": [
   {
@@ -243,5 +229,15 @@
   "by": "NL",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261018T062950-L-691836",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
