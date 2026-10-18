@@ -62,7 +62,8 @@ lemma descFunctor_map_ι {i : I} {x y : C i} (f : x ⟶ y) :
 
 variable [∀ i, (Φ i).CommShift ℤ] [∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (ι h).hom ℤ]
 
-omit [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ] in
+omit [IsDirectedOrder I]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ] in
 /-- The compatibility of `ι` with the commutations with the shifts, for the inverse. -/
 lemma ι_inv_shift_comm {i n : I} (h : i ≤ n) (a : ℤ) (z : C i) :
     (ι h).inv.app (z⟦a⟧) ≫ (Φ n).map (((S.T h).commShiftIso a).hom.app z) ≫
@@ -89,9 +90,13 @@ noncomputable def descFunctorCommShiftIso (a : ℤ) :
           ((Φ X.stage).commShiftIso a).hom.app X.obj ≫
             ((ι hX).inv.app X.obj ≫ (Φ n).map u ≫ (ι hY).hom.app Y.obj)⟦a⟧' := by
         simp only [Functor.map_comp, Category.assoc]
-        rw [← A, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-        erw [Functor.map_id, Category.id_comp]
-        rw [reassoc_of% B, reassoc_of% (ι_inv_shift_comm Φ ι hX a X.obj)]
+        rw [← A]
+        simp only [← Functor.map_comp_assoc, Category.assoc, Functor.comp_obj, Iso.inv_hom_id_app,
+          Category.comp_id]
+        rw [Functor.map_comp, Category.assoc, reassoc_of% B,
+          reassoc_of% (ι_inv_shift_comm Φ ι hX a X.obj)]
+      simp only [Functor.comp_map, Iso.app_hom]
+      erw [Morphism.functor_map_mkHom]
       exact key)
 
 omit [∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (ι h).hom ℤ] in
@@ -130,7 +135,6 @@ instance (i : I) : NatTrans.CommShift (ιCompDescFunctorIso Φ ι coh i).hom ℤ
       Functor.whiskerLeft_app, Functor.commShiftIso_comp_hom_app]
     rw [ι_commShiftIso_hom_app, descFunctor_commShiftIso_hom_app]
     erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.comp_id]
-    exact (Category.id_comp _).symm
 
 variable [∀ i, Preadditive (C i)] [∀ i, HasZeroObject (C i)]
   [∀ i (n : ℤ), (shiftFunctor (C i) n).Additive] [∀ i, Pretriangulated (C i)]
