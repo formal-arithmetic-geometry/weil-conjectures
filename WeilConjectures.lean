@@ -164,10 +164,12 @@ public import WeilConjectures.Algebra.Homology.CyclePullbackResolution
 public import WeilConjectures.Algebra.Homology.CyclePullbackTower
 public import WeilConjectures.Algebra.Homology.CyclePullbackTowerComparison
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
+public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTowerMap
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
+public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
@@ -5521,6 +5523,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
@@ -6285,6 +6288,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.EtaleCohomology.PoincareDuality.StalkPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
@@ -8685,6 +8689,8 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClos
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Smooth
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
@@ -8916,6 +8922,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
@@ -9133,11 +9140,13 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Linear
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
