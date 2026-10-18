@@ -208,10 +208,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ce605626e",
-  "group": "Q26",
+  "reviewer": "NT-stage2-cc-fc39bc835",
+  "group": "NQ",
   "result": "pass",
-  "note": "Read node, 8 stmt_deps, source TraceFormula/Statement.lean (published = live) and Basic.lean. compactSupportProperUnit is term-for-term the source compactCohomologyFrobeniusComparison factors after the identity pullback with rightUnitor, which modelCompactComparisonWithoutIdentity cancels exactly; conjunct 1 is that unfolding, conjunct 2 is naturality. Conjunct 3 uses the actual globalOperator 1 for an arbitrary Weil object for h and is true via the library-proved right unit law boundedConstructibleUpperStarComp_id_right_app (docstring records this; node step 4 elides it, remark only). Hypotheses match: unbundled finite-field datum as in the nt-assume-trace-formula interface, l != p, separated finite-type f0 kept by include, X-instances implied by base change, finiteness from hΦ.isFinite rather than assumed; actual padicAlgClRingObj D^b_c, no substitute. Single universe u as the interface requires; autoImplicit off. No hollow defs, only the theorem proof is sorry, docstrings carry source and blueprint, lean.statement verbatim, all 5 declarations present, no duplicate in side Sheaf. Second-reading section is the standard post-2026-10-17 note, accepted. nt_compile --json on the snapshot module: 11.0 s, exit 0, no errors or warnings."
+  "note": "No-op redelivery of the landed Q26 stage-2 module (merged 04:50). Diff against main: one module-docstring sentence, node lean.by Q26->NQ (misattribution; lead may keep Q26 or retire the claim), blueprint-index timestamp, new report with Worker report and Second reading by NQ. Independently checked against TraceFormula/Statement.lean and Basic.lean. Clause 1: compactCohomologyFrobeniusComparison minus its [UpperStarId whisker ≫ rightUnitor] prefix is term-for-term compactSupportProperUnit (unit, proper comparison inv, composition comparison inv, eqToIso comp_toPoint). Clause 2: naturality has the right shape. Clause 3: globalOperator 1 holds via iterateStr 1 and boundedConstructibleUpperStarComp_id_right_app. Hypotheses match the node: finite k0, IsAlgClosure, l prime and != char, separated finite-type f0 via include, IsModelFrobenius with Nat.card k0, r>=1, properness from hΦ.isFinite. Actual padicAlgClRingObj D^b_c, single universe, autoImplicit off, no hollow defs, single sorry, docstrings with source and blueprint, lean.statement verbatim. nt_compile --json: 10.8 s, exit 0, no errors or warnings."
  },
  "lean": {
   "module": "Sheaf.Paper.ModelCompactComparisonUnit",
@@ -226,7 +226,7 @@
   "file": "lean/Sheaf/Paper/ModelCompactComparisonUnit.lean",
   "statement": "theorem modelCompactComparison_eq_properUnit (hΦ : IsModelFrobenius Φ f₀ π) (r : ℕ) (hr : 1 ≤ r) : modelCompactComparisonWithoutIdentity ℓ hΦ r = modelCompactProperUnit ℓ hΦ r ∧ (∀ (M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (v : M ⟶ N), (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v ≫ (modelCompactProperUnit ℓ hΦ r).app N = (modelCompactProperUnit ℓ hΦ r).app M ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ r)).map v)) ∧ (∀ K : WeilBoundedConstructibleOfEnd ℓ (frobeniusIterate Φ r), modelCompactGlobalOperator ℓ hΦ r K = (modelCompactProperUnit ℓ hΦ r).app K.carrier ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map K.str.hom)",
   "branch": "newtargets-dag",
-  "by": "Q26",
+  "by": "NQ",
   "date": "2026-10-18",
   "existing": false,
   "note": "The finite-field datum is unpacked as finite k₀, its algebraic closure k, prime characteristic and ℓ distinct from it; q is Nat.card k₀, and IsModelFrobenius uses precisely that q-power. X is any specified cartesian geometric fibre. Includes explicit proper-unit, identity-removal and actual-globalOperator helpers, with no new choice of comparisons. The theorem retains algebraic closure and separated quasi-compact finite-type model hypotheses explicitly using include."
