@@ -229,5 +229,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-17acfc94e (reviewer sub-agent of L); spot-checked: I read the source, Stacks Tag 0C2A (more-algebra.tex lines 31983-32033). The item's statement matches it hypothesis by hypothesis, including the case r=0, and is byte-identical to the base unsplit version, so the citer lem-per-conormal-torsion-algebraization is unaffected. No new nodes. I checked all 8 steps by hand. Step 2 clears the idempotence relation into equalities in R with a common n. Step 3 shows the two idempotents agree on R_{f_if_j}; this is a cleaner argument than the source's (f_if_ja_j)^N relation, and it holds when e_j=0. Step 4 gives b_i=f_i^N a_i with d=n+N, b_i^2=f_i^d b_i and f_j^d b_i=f_i^d b_j. Step 5 uses the statement of the Mathlib leaf lem-weil-pbc-localization-quotient-commute (Stacks 00CT) to identify E' after inverting f_i. Steps 6-7 are elementary product algebra: B=B_e x B/(e), and localization commutes with a two-factor product. Step 8 tests over the principal cover through the injectivity and gluing clauses of lem-weil-pbc-cover-module-exact (Stacks 00EK), applied to M=S and M=V. Its tool_use is accepted: it is a generic commutative-algebra tool used as the source's algebra-lemma-cover. Small cases tested: R=k[x] with K=(x) and E=R_x or E=k, a generator f_i=0, and f=0 with r>0; all work. Searching the DAG for 0C2A, the lemma label and the key words finds no duplicate. Three kinds of Mathlib search are recorded; IsLocalization.Away.quotient_of_isIdempotentElem only handles a single global idempotent. No SGA is cited, the unit's route is unchanged, and the blueprint fields and the Review by Q41 section are present. No faults; no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PuncturedIdempotentComplement",
+  "declaration": "RingTheory.exists_punctured_idempotent_complement",
+  "file": "lean/Sheaf/RingTheory/PuncturedIdempotentComplement.lean",
+  "statement": "theorem exists_punctured_idempotent_complement {R : Type u} [CommRing R] {E : Type v} [CommRing E] (K : Ideal R) (hK : K.FG) (u : R →+* E) (hlocal : ∀ f ∈ K, ∃ e : Localization.Away f, IsIdempotentElem e ∧ @IsLocalization.Away (Localization.Away f) _ e (Localization.Away (u f)) _ (Localization.awayMap u f).toAlgebra) : ∃ (E' : Type u) (_ : CommRing E') (v : R →+* E'), Function.Surjective v ∧ ∀ f ∈ K, Function.Bijective (Localization.awayMap (u.prod v) f)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32e8cc3b1",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Lean matches node/Stacks 0C2A clause by clause: K.FG covers r=0; the hypothesis is for every f in K, with IsLocalization.Away e over the algebra from awayMap u f (the given map, not an unrelated one); the conclusion is a surjective v : R ->+* E' (E' : Type u, fine since E'=R/J) with awayMap (u.prod v) f bijective for every f in K. No extra hypotheses; universes u,v independent and bound. Edge cases r=0, f=0, e=0/1, K=top, zero ring covered. Only the lean field changed vs live node; statement verbatim in file. Imports: public statement imports + 3 proof-dep modules (rule 7). No existing declaration found. No definitions; sorry only; docstrings have source/blueprint and all 8 steps; lines <=100. nt_compile --json clean (1.8 s); broken control copy errors as expected. Report has Worker report + Second reading placeholder. No findings."
  }
 }
