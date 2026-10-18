@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-internal-hom-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom versus pullback for a site-perfect first variable",
@@ -15,38 +15,163 @@
  "stmt_deps": [
   "def-trf-coefficient-conventions",
   "def-weil-finite-tor-amplitude",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-size-convention"
  ],
  "proof": [
   {
-   "text": "By [def-weil-site-perfect-complex], locally on the site $M$ is\nrepresented by a bounded complex $P$ of finite free $A$-modules.\nWriting $M^\\vee=R\\mathcal Hom_A(M,A_X)$, the termwise finite-free\nidentity $\\operatorname{Hom}_A(P^i,N^j)=(P^i)^\\vee\\otimes_A N^j$,\nwith the usual total-complex signs, gives\n\n$$\nM^\\vee\\otimes_A^L N\\xrightarrow{\\sim}R\\mathcal Hom_A(M,N).\n$$",
+   "text": "Work on small skeletons of the coefficient sites and put $H_X(U,V)=R\\mathcal Hom_A(U,V)$, $\\mathbf1_X=A_X$, and $F=Lg^*$. The finite-level operations are those of [def-weil-derived-pullback-tensor-hom]. By [lem-sf-ringed-derived-closed-symmetric-monoidal] the ambient categories are closed symmetric monoidal, with $H_X(M,-)$ right adjoint to $-\\otimes^L M$ and evaluation as counit. By [lem-sfb-ringed-derived-monoidal-comparisons], $F$ is strong symmetric monoidal with its canonical tensor comparison and $F\\mathbf1_X\\cong\\mathbf1_{Y'}$. Define $\\beta_{M,N}$ to be the transpose of\n$$FH_X(M,N)\\otimes FM\\xrightarrow{\\sim}F(H_X(M,N)\\otimes M)\\xrightarrow{F(\\mathrm{ev})}FN.$$\nThis specifies the canonical comparison, including its normalization; no arbitrary isomorphism between the two objects is substituted.",
    "uses": [
-    "def-weil-site-perfect-complex"
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
   },
   {
-   "text": "There are finitely many summands in each total degree. Thus the same\nidentity computes the derived functors, and it is independent of the\nchosen representative: the map is the adjoint of evaluation under the\ntensor–Hom adjunction of [def-weil-derived-tensor]. These local\nidentifications therefore glue. The same argument identifies\n$Lg^*M^\\vee$ with $(Lg^*M)^\\vee$: pull back the finite free complex\nand its evaluation map. Monoidality of derived pullback, as in\n[def-weil-derived-pullback-tensor-hom], now gives\n\n$$\n\\begin{aligned}\nLg^*R\\mathcal Hom_A(M,N)\n&\\cong Lg^*M^\\vee\\otimes_A^L Lg^*N\\\\\n&\\cong (Lg^*M)^\\vee\\otimes_A^L Lg^*N\\\\\n&\\cong R\\mathcal Hom_A(Lg^*M,Lg^*N).\n\\end{aligned}\n$$\n\nThe composite is the canonical comparison, since both have as adjoint\nthe pullback of evaluation. Evaluation is natural, and tensoring with\na fixed complex is exact; this proves the claimed compatibilities.",
+   "text": "Set $D=H_X(M,\\mathbf1_X)$ and let $e=\\mathrm{ev}_{M,\\mathbf1_X}:D\\otimes M\\to\\mathbf1_X$ be coefficient evaluation. Site-perfectness [def-weil-site-perfect-complex] is local bounded finite-projective perfectness on this ringed site (a covering of the final object pulls back to every object, and restrictions of direct summands of finite free modules are such), so [lem-sfb-ringed-site-perfect-duality] applies, for every ambient second variable $T$: its canonical evaluation comparison, written with the factors as in [lem-sfb-ringed-site-duality-maps], is a natural isomorphism\n$$\\theta_T=e_{M,T}:T\\otimes D\\xrightarrow{\\sim}H_X(M,T).$$\nBy [lem-sfb-ringed-site-duality-maps], $\\theta_T$ is internal composition $H_X(\\mathbf1_X,T)\\otimes H_X(M,\\mathbf1_X)\\to H_X(M,T)$ after $T\\cong H_X(\\mathbf1_X,T)$, and internal composition is the transpose of the composite evaluation [def-coef-ringed-tensor-hom-model]. Hence $\\mathrm{ev}_{M,T}\\circ(\\theta_T\\otimes1_M)=1_T\\otimes e$ (unitor understood); on representatives $y\\otimes\\phi\\otimes x\\mapsto y\\,\\phi(x)$. The closed adjunction of step 1 followed by $\\theta_T^{-1}$ gives bijections $\\operatorname{Hom}(S\\otimes M,T)\\cong\\operatorname{Hom}(S,T\\otimes D)$ natural in $S,T$, i.e. an adjunction $-\\otimes M\\dashv-\\otimes D$ with counit $1_T\\otimes e$. Let $c:\\mathbf1_X\\to M\\otimes D$ be its unit at $\\mathbf1_X$. The triangle identity at $\\mathbf1_X$ is the first identity below. Then $1_T\\otimes c$ is the unit at $T$: under the counit it transposes to $1_T\\otimes(1_M\\otimes e)(c\\otimes1_M)=1_{T\\otimes M}$, and the unit is the unique arrow with this transpose. The other triangle identity at $\\mathbf1_X$, with unit $1_D\\otimes c$ at $D$ and counit $e$ at $\\mathbf1_X$, is the second:\n$$(1_M\\otimes e)(c\\otimes1_M)=1_M,\\qquad(e\\otimes1_D)(1_D\\otimes c)=1_D,$$\nwith associators and unitors understood. Thus $(D,M,e,c)$ is an actual dual pair, obtained from the finite-perfect evaluation isomorphisms.",
    "uses": [
-    "def-weil-derived-tensor",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-site-perfect-complex",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-site-duality-maps",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
+  },
+  {
+   "text": "Apply $F$ to both displayed identities. Define $e':FD\\otimes FM\\to\\mathbf1_{Y'}$ by the inverse tensor comparison, $F(e)$ and the unit comparison; define $c':\\mathbf1_{Y'}\\to FM\\otimes FD$ by the inverse unit comparison, $F(c)$ and the tensor comparison. The associativity and unit coherence in [lem-sfb-ringed-derived-monoidal-comparisons] identifies the images of the two identities with\n$$(1_{FM}\\otimes e')(c'\\otimes1_{FM})=1_{FM},\\qquad(e'\\otimes1_{FD})(1_{FD}\\otimes c')=1_{FD}.$$\nSo $(FD,FM,e',c')$ is a dual pair. This step applies a functor to equations and substitutes its coherent tensor and unit identifications.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dual-tensor-adjunctions] to the dual pair of step 3: it gives $-\\otimes FM\\dashv-\\otimes FD$. Its bijection is the explicit one (Mathlib tensorRightHomEquiv, Rigid/Basic.lean): $w:T\\otimes FM\\to V$ goes to $(w\\otimes1_{FD})(1_T\\otimes c')$, with inverse $u\\mapsto(1_V\\otimes e')(u\\otimes1_{FM})$; the two composites are identities by the two triangle identities of step 3 and an interchange of independent factors, so this is checked here and not taken from the node statement. Its counit is therefore $1_V\\otimes e'$. Compare it with $-\\otimes FM\\dashv H_{Y'}(FM,-)$ from [lem-sf-ringed-derived-closed-symmetric-monoidal]. Let\n$$\\theta'_V:V\\otimes FD\\longrightarrow H_{Y'}(FM,V)$$\nbe the transpose of $1_V\\otimes e'$ under the closed adjunction, and $\\psi_V:H_{Y'}(FM,V)\\to V\\otimes FD$ the arrow corresponding to $\\mathrm{ev}_{FM,V}$ under the explicit bijection. Both adjunction bijections represent the functor $T\\mapsto\\operatorname{Hom}(T\\otimes FM,V)$; $\\theta'_V\\psi_V$ and $\\psi_V\\theta'_V$ correspond to $\\mathrm{ev}_{FM,V}$ and to $1_V\\otimes e'$ under these bijections, as do the identities, so both composites are identities and $\\theta'_V$ is invertible. Naturality in $V$ follows from the naturality of both bijections.",
+   "uses": [
+    "lem-sfb-dual-tensor-adjunctions",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
+  },
+  {
+   "text": "Form the composite of isomorphisms\n$$FH_X(M,N)\\xrightarrow{F(\\theta_N^{-1})}F(N\\otimes D)\\xrightarrow{\\sim}FN\\otimes FD\\xrightarrow{\\theta'_{FN}}H_{Y'}(FM,FN).$$\nIts transpose is $F(\\mathrm{ev}_{M,N})$ after the inverse tensor comparison: by step 2, evaluation after $\\theta_N\\otimes1_M$ is $1_N\\otimes e$; by step 4, evaluation after $\\theta'_{FN}\\otimes1_{FM}$ is $1_{FN}\\otimes e'$; step 3 identifies the latter with $F(1_N\\otimes e)$ through the tensor comparison. Cancelling $F\\theta_N$ in this equality gives exactly the transpose used to define $\\beta_{M,N}$ in step 1. Injectivity of the closed adjunction bijection shows that the composite equals $\\beta_{M,N}$. Hence the canonical comparison is invertible.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
+  },
+  {
+   "text": "Naturality holds also for noninvertible maps of site-perfect first variables. For $a:M'\\to M$ and $b:N\\to N'$, the defining counit identity\n$$\\mathrm{ev}_{M',N'}\\circ(H_X(a,b)\\otimes1_{M'})=b\\circ\\mathrm{ev}_{M,N}\\circ(1\\otimes a)$$\nis naturality of evaluation in the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Applying $F$, using the bifunctorial tensor comparison, and transposing gives the naturality square for $\\beta$. For shifts and triangles use the exact derived pullback of [lem-weil-pbc-ringed-topoi-derived-pullback] and the shift and triangle structures on internal Hom of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The comparison preserves their specified shift structures, as can be checked on the representative evaluation of [def-coef-ringed-tensor-hom-model]: a homogeneous family $f$ evaluates on $x$ to $f(x)$, and the Hom differential is $d_Nf-(-1)^{|f|}fd_M$ [def-pur-hom-complex]. Shifting $N$ changes $d_N$ by the same sign on both sides. For a shift of the first variable, the identification $H(M[1],N)\\cong H(M,N)[-1]$ sends a degree-$r$ homogeneous map to $(-1)^r$ times its reindexed family; substituting $d_{M[1]}=-d_M$ in the displayed differential verifies this sign, and $F$ preserves it. Finally, evaluating into a cone acts componentwise on its $N_2\\oplus N_1[1]$ terms, so commutes with the inclusion, projection, and cone differential matrix. These identities pass through the normalized representative comparison to the derived category. Thus $\\beta$ is a transformation of exact functors in $N$ and gives a morphism of distinguished triangles, including the connecting arrow. Restrict this ambient conclusion to the stated $N\\in D^b_{ctf}(X,A)$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+    "place": "Proof, finite-perfect dual evaluation and pullback of evaluation; expanded using the proof of sk-thm-sf-internal-hom-pullback in the same unit"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
   "def-weil-site-perfect-complex",
-  "def-weil-derived-tensor",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-dual-tensor-adjunctions",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-hom-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-internal-hom-pullback/thm-trf-internal-hom-pullback.proof.md",
+  "place": "Proof; formal dual-pair expansion of the same unit's sk-thm-sf-internal-hom-pullback.proof.md, Steps 1–3. Ringed-site inputs: Stacks 08JJ, 08J9, 07A4, 06YY and 08JC."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback commutes with derived internal Hom when the first argument is a perfect complex of sheaves",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_comp_id",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomObjIsoTensor|isIso.*[Hh]om.*[Pp]ullback|[Pp]ullback.*[Hh]om",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/Adhesive/Subobject.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.ihomObjIsoTensor, Functor.Monoidal",
+   "results": "0 hits: ; loogle: unknown identifier 'MonoidalClosed.ihomObjIsoTensor'",
+   "date": "2026-10-18",
+   "verdict": "inconclusive: Loogle did not recognize the queried identifier; repeated with a second query and a focused source grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image commutes with internal Hom from a perfect complex",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ShortComplex.leftHomologyIso_inv_naturality, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\"",
+   "results": "12 hits: AddActionSemiHomClass, MulActionSemiHomClass, DistribMulActionSemiHomClass, MulDistribMulActionSemiHomClass, instAddActionSemiHomClassAddActionHom, instMulActionSemiHomClassMulActionHom, AddActionSemiHomClass.toAddActionHom, MulActionSemiHomClass.toMulActionHom",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor preserves the evaluation isomorphism between tensor with the dual and internal Hom for dualizable objects",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.coev_expComparison, CategoryTheory.tensorLeftHomEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomObjIsoTensor|def tensorLeftHomEquiv|def tensorRightHomEquiv|def expComparison",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary pullback or generic rigid-category adjunctions only; no derived coefficient-site comparison with all compatibility clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -80,5 +205,59 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-internal-hom-pullback"
+ "unit": "sk-thm-sf-internal-hom-pullback",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-trf-internal-hom-pullback",
+  "worker": "stage1",
+  "summary": "Retained the statement. Replaced definitions-as-theorems by existing ringed-site perfect duality, closed structure, coherent monoidal pullback and exactness tools. Constructed the dual pair, transported its identities, and verified the evaluation-mate normalization, naturality, shifts and cone compatibility. No new nodes. The Lean Nonempty iso declaration does not state all clauses and is not an attachment.",
+  "blueprint": "The item proof paragraph 1 is realized by step 2 (08JJ includes its finite-projective local calculation); paragraph 2 by steps 1 and 3–6. Also follows the current same-unit sketch proof Steps 1–3: dual tensor/Hom, preservation of a dual pair, and identification with canonical comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic closed symmetric monoidal structure and evaluation adjunction on any ringed-site derived category; the unit gives no separate theorem for it."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coherent strong monoidality of ringed-topos derived pullback; makes the blueprint monoidality step a cited theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "Generic ringed-site finite-perfect tensor-dual/internal-Hom evaluation, exactly the blueprint local finite-projective computation, not another geometric route."
+   },
+   {
+    "node": "lem-sfb-dual-tensor-adjunctions",
+    "why": "Generic tensor adjunction for an exact dual pair; used only after explicitly transporting the two triangle identities."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic exactness of ringed-topos derived pullback for the shifts/triangles clause."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic internal Hom shifts and triangulated structure for the final compatibility clause."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Generic ringed-site normalization of the canonical evaluation comparison (internal composition after T=H(1,T)) that the perfect-duality statement refers to; used in step 2 to identify the counit of the tensor-dual adjunction as 1⊗e. No node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-dual-tensor-adjunctions",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-bd9cee4be",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-bd9cee4be (reviewer sub-agent of L); spot-checked: The mathematics is read in full and correct. There are no new nodes, nothing is dropped, and the statement is unchanged and not weakened. Coefficients: β is the transpose of F(ev)∘t, with Lg^* the K-flat derived module pullback of the ringed site (X_proet, A_X) at finite level. This matches def-weil-derived-pullback-tensor-hom, lem-sfb-ringed-derived-monoidal-comparisons and the current sketch proof. The Lean Nonempty iso was rightly not attached. Source: Stacks 08JJ (sites-cohomology l.13048) covers any perfect K, every M and finite-projective summands. Two repairs. (1) C4 in step 2: the counit 1⊗e of the adjunction −⊗M ⊣ −⊗D was asserted from 'the canonical evaluation comparison' without citing its normalization. It now cites lem-sfb-ringed-site-duality-maps (internal composition after T≅H(1,T)) and def-coef-ringed-tensor-hom-model (internal composition is the transpose of the composite evaluation), and orders the triangle identities explicitly. (2) C3 in step 4: the leaf lem-sfb-dual-tensor-adjunctions only asserts that some adjunction exists, yet the step used its counit 1⊗e′. The step now writes the explicit bijection (Mathlib tensorRightHomEquiv, checked against Rigid/Basic.lean l.405) and the explicit inverse ψ_V, and checks both composites. proof_deps is recomputed and lem-sfb-ringed-site-duality-maps is added to tool_uses. I verified the step-5 calculation and the step-6 signs (def-pur-hom-complex). No duplicate: the Picard-framework analogues are for O_X on schemes, the others étale. No cycle (checked by script), no SGA. Edge cases checked: M=0, M=A_X, Y′=∅, A=Z/ℓ², unbounded N.; 1 file(s) fixed by the reviewer"
+ }
 }

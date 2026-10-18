@@ -2,13 +2,16 @@
  "id": "def-pur-complete-flag-bundle",
  "kind": "definition",
  "title": "Complete flag bundle by tautological kernels",
- "statement": "Let $T$ be a scheme and $F$ a finite locally free $\\mathcal O_T$-module of rank $r$ [def-amb-finite-locally-free-module]. Define the complete flag bundle $p:\\operatorname{Fl}_T(F)\\to T$ recursively. For $r=0,1$ take $p=\\operatorname{id}_T$ with the empty or one-step filtration. For $r>1$ form $q:P=\\mathbf P_T(F)=\\operatorname{Proj}_T\\operatorname{Sym}F$ with the quotient-line convention [lem-pur-projective-bundle-tautological-geometry]. Its tautological map $q^*F\\twoheadrightarrow\\mathcal O_P(1)$ sends, on the standard chart where the $j$th coordinate is invertible, a local basis vector $e_i$ to $(X_i/X_j)e_j$. Let $K$ be its kernel, of rank $r-1$, and take $\\operatorname{Fl}_T(F)=\\operatorname{Fl}_P(K)$ with projection the composite to $T$. The filtration of the pulled-back $K$, followed by $p^*F$, is the universal filtration $0=F_0\\subset F_1\\subset\\cdots\\subset F_r=p^*F$ by vector subbundles, with invertible quotients $Q_j=F_j/F_{j-1}$. Here subbundle means that the quotient is locally free. A local splitting of each surjection onto an invertible quotient gives an adapted local frame; no splitting of the filtration on all of the flag bundle is included in this definition.",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $r\\in\\mathbf N$, and $F$ a finite locally free $\\mathcal O_T$-module of constant rank $r$ [def-amb-finite-locally-free-module]. Pullback of modules is [def-pc-module-pullback], and an invertible module means [def-sc-invertible-module]. Define the complete flag bundle $p:\\operatorname{Fl}_T(F)\\to T$, together with its filtration, by recursion on $r$. For $r=0$ take $p=\\operatorname{id}_T$ and $F_0=0=F$; for $r=1$ take $p=\\operatorname{id}_T$ and $0=F_0\\subset F_1=F$. For $r>1$, form $q:P=\\mathbf P_T(F)=\\operatorname{Proj}_T\\operatorname{Sym}^{\\bullet}F\\to T$ and $L=\\mathcal O_P(1)$ as in [lem-pur-projective-bundle-tautological-geometry]. Use the quotient-line convention: the degree-one generators give the map $\\epsilon:q^*F\\to L$. In a frame $v_1,\\ldots,v_r$ of $F$, on $D_+(X_j)$ with twist generator $\\tau_j$ its formula is $\\epsilon(v_i)=(X_i/X_j)\\tau_j$. These formulas define the same map on overlaps: $\\tau_j=(X_j/X_k)\\tau_k$, and a change of frame acts on degree-one generators of $\\operatorname{Sym}^{\\bullet}F$ by that same change of basis. Define $K=\\ker\\epsilon$, the subsheaf of sections sent to zero. On this chart $\\epsilon$ has section $\\tau_j\\mapsto v_j$, and $K$ has basis $v_i-(X_i/X_j)v_j$ for $i\\ne j$; thus $K$ has rank $r-1$ and this recursive call is defined. Put $T'=\\operatorname{Fl}_P(K)$, write $h:T'\\to P$ for its recursively defined projection, and set $p=q\\circ h$. If $0=G_0\\subset\\cdots\\subset G_{r-1}=h^*K$ is the recursive filtration, set $F_i=G_i\\subset h^*q^*F=p^*F$ for $0\\le i\\le r-1$, using the pullback of the inclusion $K\\subset q^*F$, and set $F_r=p^*F$. Its last quotient is $Q_r=h^*L$; the earlier quotients are $Q_i=G_i/G_{i-1}$. Quotients here are sheaf quotients. This recursively specified filtration is called the universal filtration. Each $Q_i$ is invertible, and each $F_i$ is a vector subbundle, meaning that $p^*F/F_i$ is locally free. Indeed the displayed chart splitting remains a splitting after pullback; combining it with an adapted frame for the recursive filtration gives an adapted local frame for the new filtration. No splitting on all of $T'$ is part of the data.",
  "source": {
   "document": "literature/stacks-project/chow.tex",
   "place": "Tag 02UL, lemma-splitting-principle, recursive projective-bundle construction; blueprint Step 1"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
   "lem-pur-projective-bundle-tautological-geometry"
  ],
  "proof": [],
@@ -42,10 +45,52 @@
    "results": "{\"t\": \"2026-10-18T02:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IO.AccessRight.flags\", \"IO.FileRight.flags\", \"Std.Http.URI.Builder.addQueryFlag\", \"Lean.LeanOptionValue.asCliFlagValue\", \"Lean.OptionFlags\", \"Lean.instBEqOptionFlags\", \"Lean.instHashableOptionFlags\", \"Lean.instInhabitedOptionFlags\"], \"digest\": \"05c8de9b649c75a2\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flag, AlgebraicGeometry.Proj",
+   "results": "{\"t\": \"2026-10-18T02:35:02Z\", \"tool\": \"loogle\", \"query\": \"Module.Flag, AlgebraicGeometry.Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Module.Flag'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: unknown identifier Module.Flag; no declaration returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete flag scheme of a finite locally free sheaf constructed by iterating projective bundles of tautological kernels",
+   "results": "{\"t\": \"2026-10-18T02:35:05Z\", \"tool\": \"leanfinder\", \"query\": \"Complete flag scheme of a finite locally free sheaf constructed by iterating projective bundles of tautological kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"4620a97b56c02464\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no flag-bundle scheme construction; Proj is absolute, Grassmannian is a module-valued functor, and basis flags are submodules, as checked in their source"
+  },
+  {
+   "tool": "grep",
+   "query": "flag.*[Bb]undle|[Bb]undle.*flag|complete.*flag|[Ff]lag[Ss]cheme|tautological.*kernel",
+   "results": "{\"t\": \"2026-10-18T02:35:16Z\", \"tool\": \"grep\", \"query\": \"flag.*[Bb]undle|[Bb]undle.*flag|complete.*flag|[Ff]lag[Ss]cheme|tautological.*kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no occurrences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme parametrizing full flags of locally free quotients of a vector bundle",
+   "results": "{\"t\": \"2026-10-18T02:35:16Z\", \"tool\": \"leansearch\", \"query\": \"A scheme parametrizing full flags of locally free quotients of a vector bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme\", \"Flag.mk.noConfusion\", \"Flag.recOn\", \"AlgebraicGeometry.Scheme.mk\", \"Flag.rec\", \"Module.Basis.toFlag_carrier\", \"Module.Basis.flag_covBy\"], \"digest\": \"41b43b4522a23675\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no flag-bundle scheme construction; Proj is absolute, Grassmannian is a module-valued functor, and basis flags are submodules, as checked in their source"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\"",
+   "results": "{\"t\": \"2026-10-18T02:35:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Grassmannian.«termG(_,_;_)»\", \"Module.Grassmannian\", \"Module.Grassmannian.functor\", \"Module.Grassmannian.toSubmodule\", \"Module.Grassmannian.instCoeOutSubmodule\", \"Module.Grassmannian.ext\", \"Module.Grassmannian.ext_iff\", \"Module.Grassmannian.finite_quotient\"], \"digest\": \"a8145fe36309621c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no flag-bundle scheme construction; Proj is absolute, Grassmannian is a module-valued functor, and basis flags are submodules, as checked in their source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative full flag variety of a vector bundle on a scheme with a universal filtration by line bundle quotients",
+   "results": "{\"t\": \"2026-10-18T02:35:25Z\", \"tool\": \"leanfinder\", \"query\": \"Relative full flag variety of a vector bundle on a scheme with a universal filtration by line bundle quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"Module.Basis.flag\", \"Module.Basis.toFlag\", \"IsModuleFiltration.mk_int\", \"IsModuleFiltration\", \"Ideal.Filtration.N\"], \"digest\": \"c29c497ed8c07ac5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no flag-bundle scheme construction; Proj is absolute, Grassmannian is a module-valued functor, and basis flags are submodules, as checked in their source"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -62,5 +107,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-pur-complete-flag-bundle",
+  "worker": "stage1",
+  "summary": "Completed the definition split using existing nodes only. Added the scheme, module pullback and invertible-module dependencies; retained the quotient-line recursion and made the canonical quotient map, chart kernel basis, pullback inclusion, recursive indices and local adapted frames explicit. The kernel calculation and preservation of its displayed direct sum by tensor pullback are elementary, not new nodes. No project declaration or Mathlib match states this flag-bundle construction.",
+  "blueprint": "thm-pur-localized-top-chern: the flag-bundle pullback and line quotients in the earlier Step 1/Step 2 proof, as recorded in blueprint_update and in the reviewed parent split. The current main-20261015 source states L1-L4 without a detailed proof. This definition supplies the complete flag bundle used by the parent and by lem-pur-flag-pullback-injective; no unit-level route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-c59002130",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-c59002130 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks chow.tex Tag 02UL lemma-splitting-principle (proof lines 8445-8464: the sequence 0->F->pi^*E->O(1)->0 of ranks r-1, r, 1, then induction, with base case id) and constructions.tex Tag 01OB definition-projective-bundle plus the canonical map pi^*Sym^n E->O(n) that follows it. The recursion matches the source with the same quotient-line convention. Chart checks: eps(v_i)=(X_i/X_j)tau_j agrees on overlaps because tau_j=(X_j/X_k)tau_k, which is the transition in lem-pur-projective-bundle-tautological-geometry (used with n=r-1>=1, so its hypothesis holds). The kernel basis v_i-(X_i/X_j)v_j together with v_j is unitriangular, so K is free of rank r-1 over any ring and the recursion is well defined. The local splitting survives h^*, so h^*K->p^*F is injective with quotient h^*L and no flatness is needed. The indices F_i=G_i, F_r=p^*F and Q_r=h^*L are right, and adapted local frames make every F_i and p^*F/F_i locally free. Tested r=0, 1, 2, 3, empty T and rings with zero divisors; no global splitting is claimed, and in rank 2 none exists in general (Euler sequence). All five stmt_deps say what the item uses. The delivery adds no new nodes. Searching the DAG with rg, the main-20261015 blueprint and slopmaster2 found no duplicate. The searches recorded on the node give no Mathlib match. A definition has no proof steps, so there is no route issue, and no SGA source is used. Not cited: lem-trf-projective-bundle-quotient-geometry states the canonical surjection, but it is built on a different symmetric-algebra node, and the inline chart construction is complete, so I left it uncited. Notes outside this delivery: lem-pur-flag-pullback-injective omits the constant-rank hypothesis that Fl_T(F) needs; the item's lean_audit field is absent; four search verdicts on the node carry boilerplate text. No fixes written."
  }
 }
