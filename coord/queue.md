@@ -1,6 +1,6 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+65 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (68)
+## Stage 3: modules to prove (65)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -34,14 +34,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.QcqsHigherDirectImage` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison` | - | 1 | proof | 2 |
-| `Sheaf.Paper.FiniteTensorConstructibleCohomology` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ProjectionFormulaTotalization` | - | 1 | proof | 2 |
-| `Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.NowhereDenseDimZero` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect` | - | 1 | proof | 3 |
-| `Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedKoszulSystem` | - | 9 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal` | - | 1 | proof | 3 |
