@@ -19,7 +19,9 @@
   "def-weil-weil-sheaf-complex",
   "pqf-def-quasifinite",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-zl-weil-compact-support-cohomology",
+  "def-weil-punctual-weights"
  ],
  "proof": [
   {
@@ -546,5 +548,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-44e119ab4 (reviewer sub-agent of L); spot-checked: I read the item (10 steps), the new node, the unit, the main-20261015 unit section and the lem-zl-quasi-finite proof, the statement of every cited node, and the earlier runs. The statement is byte-identical to the base and the unit. The source error is confirmed: the lem-zl-quasi-finite proof wrongly says the ZMT compactification is separated over k_0 (counterexample: the identity of the doubled-origin line). Steps 1-2: the ZMT hypotheses hold (Y_0 is qcqs); T_V, V and X_V are affine/separated and of finite type. Steps 3-4: the new node's hypotheses hold (quasi-compact open v and j, finite p, Noetherian, finite-dimensional, l invertible); Ex^pbc S = T J(Ex^sf) typechecks; thm-cbc-finite-extension needs only f separated; J reflects invertibility. Step 5: prop-functor-package, the immersion lemma and the finite-image lemma are used only on separated charts. Step 6: the pullback t-exactness lemma has no separatedness hypothesis, and the separated-open-cover criterion of lem-dl-a1-constructible-fibres-exact applies. Steps 7-10: the orbit calculation checks out (e_z F_y^e = F_x e_z, beta^e = alpha, q_x = q_y^e), using only multiplicativity of iota; one global filtration is pushed forward. Edge cases: empty X_0, zero sheaf, doubled origin, e=1, negative w, nonreduced fibre, F_{q^2}/F_q. The new node is statement-only and self-contained and does not restate the item. fix-lem-exchanges clause 1 is a neighbour, not a duplicate: it has no J/S/T and adds etale-origin witness hypotheses. FIX: the 875c review's Step 1 repair was lost when the landing failed. I re-applied it: Step 1 now cites def-zl-weil-compact-support-cohomology, whose comparison gives compactification independence with no separatedness, and that id is added to the step's uses and to proof_deps. No cycle, no route issue. Batch 5: none of the 7 flagged citations has a trace-formula or Poincare-duality theorem in its closure, and all are already in the batch-5 closure. def-weil-local-frobenius-trace and def-pod-lisse-l-adic-sheaves are general definitions. lem-pod-texact-truncation-comparison, lem-pod-proper-coincidence-frobenius and the lem-trf Frobenius-transport coherence lemmas are generic infrastructure. Accepted. The declared tool_uses are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuasiFiniteCompactSupportWeights",
+  "declaration": "WeilConjectures.sfQuasiFiniteCompactSupport",
+  "file": "lean/Sheaf/Paper/QuasiFiniteCompactSupportWeights.lean",
+  "statement": "theorem sfQuasiFiniteCompactSupport (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {X₀ Y₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [QuasiSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] (_hqf : Scheme.Hom.IsQuasiFinite f₀.left) (c : Compactification f₀.left) (F : sfCommonStageWeilSheaf D l hl X₀ Ω) : (∀ i : ℕ, 0 < i → IsZero (zlWeilHigherShriek D l hl Ω f₀ c i F)) ∧ ∀ (iota : Ω →+* ℂ) (w : ℝ), (SfIsMixedOfWeightsAtMost D l hl Ω X₀ iota F w → SfIsMixedOfWeightsAtMost D l hl Ω Y₀ iota (zlWeilHigherShriek D l hl Ω f₀ c 0 F) w) ∧ ((∀ (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (α : Ω), SfPunctualEigenvalue D l hl Ω X₀ F x α → ‖iota α‖ ≤ (Nat.card (X₀.left.residueField x.val) : ℝ) ^ (w / 2)) → ∀ (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (β : Ω), SfPunctualEigenvalue D l hl Ω Y₀ (zlWeilHigherShriek D l hl Ω f₀ c 0 F) y β → ‖iota β‖ ≤ (Nat.card (Y₀.left.residueField y.val) : ℝ) ^ (w / 2))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-890dc936a",
+  "group": "NX",
+  "result": "fix",
+  "note": "Head 890dc936 = returned 4d595ece + report text only (item .lean, delivered AdicPunctualWeights.lean, node records byte/JSON-identical). 4d59 FIX was lost to a landing 60 s timeout on unrelated base side module DerivedPullbackTensorHom (batch 20261018-213717). Item sfQuasiFiniteCompactSupport re-checked against node/source order 3161: relative IsSeparated, Stacks IsQuasiFinite, Y0 finite type + QuasiSeparated, arbitrary Compactification, vanishing for i>0 outside iota, mixed and punctual-upper clauses for any iota : Omega ->+* C with the same iota on both sides; statement verbatim, single sorry, docstrings with source and 10 steps, universes independent; added stmt_deps are used definitions. FIX: withdraw the unneeded 1(B) edit of AdicPunctualWeights (stale galoisFiniteUnit reason; WeilMixedUpperBounds now imports AdicHeartIntrinsicFibres and DerivedPullbackTensorHom itself; delivered text would delete ~35 public imports added to live at 2026-10-19 00:09 and inline the canonical sfAdicCoefficientEmbedding). fixes/AdicPunctualWeights.lean = current live text (cmp identical); report fix adds a maintainer section. nt_compile --json: fixed set 5.1/5.5 s clean; delivered set 3.9/4.7 s clean; delivered dep + ConstantExtensionWeilHeartEquivalence/ExtensionByZeroPunctual/WeilMixedUpperBounds clean (the earlier importer break no longer reproduces). Maintainer: --revert-nodes def-weil-punctual-weights keeps Q52's record; retry at lower load if a base side module times out again rather than returning to NX."
  }
 }
