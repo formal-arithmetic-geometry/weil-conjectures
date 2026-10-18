@@ -10,13 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.GroupTheory.Torsion
-import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 
 /-!
 # The proper projection formula with torsion coefficients
@@ -67,7 +61,8 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_isProper_of_isAddTor
     (Λ : Type (u + 1)) [CommRing Λ] (hΛ : IsAddTorsion Λ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (E : DerivedCategoryModule Λ X) (K : DerivedCategoryModule Λ Y) :
-    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app K) :=
-  sorry
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app K) := by
+  have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ hΛ f
+  infer_instance
 
 end AlgebraicGeometry.Etale
