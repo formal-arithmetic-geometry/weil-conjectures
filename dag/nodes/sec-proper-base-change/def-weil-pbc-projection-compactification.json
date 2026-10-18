@@ -15,9 +15,45 @@
  "stmt_deps": [
   "def-nagata-compactification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Present the open immersion j as the object ProEt.mk j. Use the arbitrary-coefficient open localization equivalence q of [lem-weil-pbc-proetale-ringed-open-comparison] to identify the actual inverse-image module functor followed by q.functor with slice restriction.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Slice restriction is additive sectionwise, so it preserves zero morphisms. Apply [new-localized-restriction-extension-exists] to obtain its left adjoint L preserving finite limits. Compose the adjunction with q.toAdjunction and transport its right side along the open-localization comparison to get q.functor followed by L left adjoint to actual module inverse image.",
+   "uses": [
+    "new-localized-restriction-extension-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the prescribed ring isomorphism c, the scalar-restriction functor is an equivalence e. The scalar-extension adjunction proved in [def-weil-pbc-proetale-operations] identifies tensor extension with e.inverse by uniqueness of left adjoints. Reverse that equivalence adjunction and compose with the previous adjunction. The resulting e.functor followed by q.functor followed by L is left adjoint to the specified proEtaleRingModulePullback and preserves finite limits, because equivalences and L do. This proves proEtaleOpenRestriction_isRightAdjoint.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare this exact left adjoint with the already specified proEtaleRingOpenExtension using Adjunction.leftAdjointUniq and transport finite-limit preservation across that natural isomorphism. Adjunction.left_adjoint_additive supplies additivity from that of pullback; leftAdjoint_preservesColimits supplies finite-colimit preservation. The existing exact termwise derived functor and its proper-direct-image composite are unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "new-localized-restriction-extension-exists",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas lemma-extension-by-zero (03DI) and lemma-extension-by-zero-exact (03DJ), transported using the existing pro-etale open localization comparison; categorical adjunction composition and uniqueness glue written by R3."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "imported",
@@ -131,5 +167,15 @@
   "statement": "Let $f:X\\to Y$ admit a chosen compactification\n\n$$\nX\\xrightarrow{j}\\overline X\\xrightarrow{p}Y,\n\\qquad f=pj,\n$$\n\nwith $j$ an open immersion and $p$ proper. For this datum and $E$ in the\nderived category of sheaves on $X_{\\Et}$ set\n\n$$\nRf_!^{(j,p)}E:=Rp_*j_!E,\n$$\n\nwhere $j_!$ (extension by zero) is exact and so is applied termwise.\n\nFor proper $f$, its identity compactification is $(j,p)=(1_X,f)$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T135918-L-2963204",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

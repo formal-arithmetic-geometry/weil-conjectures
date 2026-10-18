@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 public import WeilConjectures.Compactification.Defs
 
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
+import Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
+
 /-!
 # Compact-support image on ringed pro-etale sites
 
@@ -30,6 +34,42 @@ variable {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ S)
 
+-- Construct an exact left adjoint using the slice presentation of the open site.
+set_option backward.isDefEq.respectTransparency false in
+private theorem openRestriction_exactLeftAdjoint :
+    ∃ L : proEtaleRingModules X S ⥤ proEtaleRingModules Z R,
+      Nonempty (L ⊣ proEtaleRingModulePullback j R S c) ∧ PreservesFiniteLimits L := by
+  let U := ProEt.mk j
+  have : IsOpenImmersion U.hom := inferInstanceAs (IsOpenImmersion j)
+  let A := (sheafCompose (ProEt.topology Z)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  obtain ⟨q, ⟨eq⟩⟩ := proEtale_ringed_open_comparison U R
+  have : (SheafOfModules.overFunctor.{u + 1} A U).Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  obtain ⟨L, hL, _, ⟨a⟩⟩ :=
+    CategoryTheory.localized_restriction_extension_exists A U inferInstance
+  have := hL
+  let ef : proEtaleModuleInverseImage j R ≅
+      SheafOfModules.overFunctor A U ⋙ q.inverse :=
+    (Functor.rightUnitor _).symm ≪≫
+      Functor.isoWhiskerLeft _ q.unitIso ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eq q.inverse
+  let af : q.functor ⋙ L ⊣ proEtaleModuleInverseImage j R :=
+    (q.toAdjunction.comp a).ofNatIsoRight ef.symm
+  let rc := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c
+  let e := proEtaleScalarEquivalence X rc
+  let ae := proEtaleRingExtensionAdjunction j R S c
+  let ei := ae.leftAdjointUniq e.symm.toAdjunction
+  let ae' : e.functor ⊣ proEtaleRingExtension j R S c :=
+    e.toAdjunction.ofNatIsoRight ei.symm
+  let ap : e.functor ⋙ q.functor ⋙ L ⊣ proEtaleRingModulePullback j R S c :=
+    ae'.comp af
+  exact ⟨_, ⟨ap⟩, inferInstance⟩
+
 /-- Restriction along an open immersion has extension by zero as its left adjoint.
 This universal property determines extension by zero up to its unique adjoint isomorphism.
 Source: proper base change, definition 1268
@@ -40,7 +80,9 @@ A map from this extension to M is exactly a map to the restriction of M: maps ou
 j are uniquely zero, and the sheaf gluing condition gives the unique extension inside.
 This bijection is natural in both modules and supplies the asserted left adjoint. -/
 @[instance] theorem proEtaleOpenRestriction_isRightAdjoint :
-    (proEtaleRingModulePullback j R S c).IsRightAdjoint := sorry
+    (proEtaleRingModulePullback j R S c).IsRightAdjoint := by
+  obtain ⟨L, ⟨a⟩, _⟩ := openRestriction_exactLeftAdjoint j R S c
+  exact a.isRightAdjoint
 
 /-- Extension by zero, specified by its adjoint universal property to actual restriction.
 Source: proper base change, definition 1268
@@ -57,7 +99,15 @@ module maps are local on the site, so these properties descend to the original s
 theorem proEtaleRingOpenExtension_exact :
     (proEtaleRingOpenExtension j R S c).Additive ∧
       PreservesFiniteLimits (proEtaleRingOpenExtension j R S c) ∧
-      PreservesFiniteColimits (proEtaleRingOpenExtension j R S c) := sorry
+      PreservesFiniteColimits (proEtaleRingOpenExtension j R S c) := by
+  let a := Adjunction.ofIsRightAdjoint (proEtaleRingModulePullback j R S c)
+  obtain ⟨L, ⟨b⟩, hL⟩ := openRestriction_exactLeftAdjoint j R S c
+  have := hL
+  have hlim : PreservesFiniteLimits (proEtaleRingOpenExtension j R S c) :=
+    preservesFiniteLimits_of_natIso (b.leftAdjointUniq a)
+  have : PreservesColimitsOfSize.{0, 0} (proEtaleRingOpenExtension j R S c) :=
+    a.leftAdjoint_preservesColimits
+  exact ⟨a.left_adjoint_additive, hlim, inferInstance⟩
 
 /-- Additivity of extension by zero. Source: proper base change, definition 1268
 (blueprint: def-weil-pbc-projection-compactification). -/
