@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Data.Int.Interval
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomMapQuasiIso
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomFiniteSupport
