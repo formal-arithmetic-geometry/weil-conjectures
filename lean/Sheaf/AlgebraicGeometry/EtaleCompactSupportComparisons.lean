@@ -9,21 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProperOpenComparison
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import Sheaf.AlgebraicGeometry.CompactificationCategory
-import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
-import Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition
-import Sheaf.AlgebraicGeometry.ProperOpenComparisonIso
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 
 /-!
 # Canonical comparisons for ordinary etale compact support
@@ -101,6 +87,15 @@ theorem etaleCompactSupport_refinementComparison_eq
       ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pfComp'
         r.hom d.g c.g r.hom_g).inv.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapDerivedCategoryPlus.obj K) := by
-  sorry
+  have sq : IsPullback (𝟙 X) f f (𝟙 Y) :=
+    IsPullback.of_horiz_isIso ⟨by simp⟩
+  have h := (compactSupportFiniteTorsion Λ sq c).2 d r K
+  simp only [compactSupportProperOpenRefinementMap,
+    derivedPlusFormalism_pfComp'_inv] at h
+  rw [derivedPlusFormalism_shriekIso] at h
+  rw [rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq,
+    rightDerivedLowerShriekOfCompactificationPlusIso_symm,
+    derivedPlusFormalism_pfComp'_inv]
+  exact h.symm
 
 end AlgebraicGeometry.Etale
