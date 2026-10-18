@@ -10776,8 +10776,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionPositiveDegree
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
@@ -10807,6 +10809,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactification
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationIso
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationRestrict
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
@@ -10982,8 +10989,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpac
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChangeCharts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
@@ -11012,6 +11021,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChangeUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
