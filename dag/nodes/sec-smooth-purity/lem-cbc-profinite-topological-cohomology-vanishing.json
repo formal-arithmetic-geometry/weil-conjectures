@@ -25,94 +25,55 @@
  ],
  "proof": [
   {
-   "text": "Let $\\varphi:F\\to E$ be an epimorphism of abelian sheaves on $X$ and $e\\in E(X)$. By [lem-sc-abelian-sheaf-epi-iff-stalk-epi], for each $x\\in X$ choose a germ $a_x\\in F_x$ with $\\varphi_x(a_x)=e_x$. Apply [def-weil-pbc-module-stalk] to abelian presheaves as modules over the constant presheaf $\\mathbf Z$: represent $a_x$ by $f_x\\in F(V_x)$; equality of the image germ and $e_x$ gives an open $x\\in U_x\\subseteq V_x$ on which $\\varphi(f_x|_{U_x})=e|_{U_x}$. Thus the opens $U_x$ cover $X$ with lifts of $e$.",
+   "text": "For an epimorphism $f:F\\to E$ and $e\\in E(X)$, use the local-surjectivity characterization in [lem-sc-abelian-sheaf-epi-iff-stalk-epi], implemented by TopCat.Sheaf.isLocallySurjective_iff_epi and TopCat.Presheaf.isLocallySurjective_iff. For every $x\\in X$ choose an open neighbourhood $V_x$ and $s_x\\in F(V_x)$ with $f(s_x)=e|_{V_x}$. No module-stalk construction is needed.",
    "uses": [
-    "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
-    "def-weil-pbc-module-stalk"
+    "lem-sc-abelian-sheaf-epi-iff-stalk-epi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3F (lemma-vanishing-for-profinite), local section lifts; Sheaves Section 0078 (section-stalks), equality of germs"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-profinite-clopen-basis], for each $x$ choose a clopen $C_x$ with $x\\in C_x\\subseteq U_x$. Compactness of $X$ supplies a finite subcover $C_1,\\ldots,C_n$. Put $D_1=C_1$ and $D_i=C_i\\setminus\\bigcup_{j<i}C_j$ for $2\\leq i\\leq n$. A finite union of clopens is clopen, so each $D_i$ is clopen; the $D_i$ are pairwise disjoint, cover $X$, and $D_i\\subseteq C_i\\subseteq U_{x_i}$. Discard empty parts. If $X=\\varnothing$, take the empty cover. This proves the finite disjoint refinement used in Topology Tag 08ZZ directly from the cited basis and compactness.",
+   "text": "Use [lem-weil-pbc-profinite-clopen-basis] to choose clopens $x\\in C_x\\subseteq V_x$ and compactness to extract a finite subcover. Mathlib exists_clopen_partition_of_clopen_cover, specialized with all prescribed closed subsets empty, gives disjoint clopens $D_i\\subseteq C_i$ covering $X$. This implements the original elementary finite refinement: subtract preceding clopens successively. Empty pieces and an empty cover are allowed.",
    "uses": [
     "lem-weil-pbc-profinite-clopen-basis"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering); elementary finite refinement from its clopen basis consequence"
-   }
+   "elementary": true
   },
   {
-   "text": "Restrict the chosen lift on $U_{x_i}$ to $D_i$. These sections agree on pairwise intersections: distinct parts have empty intersection, and the sheaf axiom for the empty cover says $F(\\varnothing)=0$. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology] glues them to $f\\in F(X)$. Naturality gives $\\varphi(f)|_{D_i}=e|_{D_i}$, and uniqueness in the sheaf axiom gives $\\varphi(f)=e$. Hence every epimorphism of abelian sheaves induces a surjection on global sections, including when $X$ is empty. Together with the additivity and left exactness of $\\Gamma(X,-)$ stated in that node, global sections are exact.",
+   "text": "Restrict $s_i$ to $D_i$. For unequal indices, $D_i\\cap D_j=\\varnothing$; the sheaf axiom in [def-weil-pbc-sites-and-cohomology] makes $F(\\varnothing)$ terminal, hence zero, so these restrictions agree. For equal indices compatibility is reflexivity. Glue by TopCat.Sheaf.existsUnique_gluing'; naturality of $f$ and uniqueness of gluing show that the glued section maps to $e$. Thus global sections send epimorphisms to surjections, including for empty $X$.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3F (lemma-vanishing-for-profinite), surjectivity and exactness of global sections"
-   }
+   "elementary": true
   },
   {
-   "text": "To spell out the higher-derived-functor vanishing rather than invoke it without a citation, use [lem-weil-pbc-site-sheaves-enough-injectives] on the site of opens of $X$. Fix a Grothendieck universe containing $X$, and take covering families indexed by sets in this universe; the opens, inclusions and covering families then form sets in a larger universe. The site axioms hold: the identity covers its target, a composite of open covers covers its target, and pulling back an open cover along an inclusion gives the cover by intersections. This restriction of index sets gives exactly the usual sheaves: after deleting repetitions any open cover is indexed by a subset of the set of opens of $X$, and matching sections at repeated copies of the same open must be equal on that open. Thus the sheaf axiom for the bounded families implies it for every open cover. For any abelian sheaf $G$, choose a monomorphism $G\\hookrightarrow I$ with $I$ injective and let $Q$ be its cokernel. In the abelian category this yields a short exact sequence $0\\to G\\to I\\to Q\\to0$: [def-sp-abelian] says every monomorphism is a kernel, if the embedding $i$ is $\\ker(h)$, then $h$ factors through $c=\\operatorname{coker}(i)$. Any map killed by $c$ is killed by $h$, hence factors uniquely through $i$; conversely $ci=0$. Thus $i=\\ker(c)$, giving the condition in [def-weil-pbc-exact-sequence]. The identifications $H^0(X,A)=A(X)$ and $H^r(X,I)=0$ for $r>0$ are provided by [def-weil-pbc-sites-and-cohomology].",
+   "text": "Let $P$ be the sheafification of the free abelian presheaf on the representable of the top open. The sheafification adjunction, free-forgetful adjunction and Yoneda identify $\\operatorname{Hom}(P,F)$ with $F(X)$, naturally under postcomposition. This is the representing object in the definition of $H^q(X,F)$ in [def-sc-topological-abelian-cohomology]. Apply Step 3 to the section corresponding to any map $P\\to E$; its lift corresponds to a map $P\\to F$ whose composite is the original map. This is exactly the definition of $P$ being projective.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "def-sp-abelian",
-    "def-weil-pbc-exact-sequence",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01DZ (section-cohomology-sheaves); Tag 0A3F, final sentence expanded; Derived Categories Tag 015B (lemma-higher-derived-functors), injective vanishing"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-right-derived-universal-delta-functor] to $\\Gamma(X,-)$, which is additive and left exact by [def-weil-pbc-sites-and-cohomology] and whose source has enough injectives as in Step 4. The long exact sequence contains $I(X)\\to Q(X)\\to H^1(X,G)\\to H^1(X,I)=0$. Step 3 makes its first map surjective, since $I\\to Q$ is an epimorphism. Exactness therefore makes the connecting map zero and also surjective, so $H^1(X,G)=0$ for every abelian sheaf $G$.",
-   "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015B (lemma-higher-derived-functors), long exact sequence; details of Tag 015F (lemma-right-derived-exact-functor) used in Cohomology Tag 0A3F"
-   }
-  },
-  {
-   "text": "Induct on the positive degree, with the claim for all abelian sheaves simultaneously. Step 5 is the base degree $1$. Suppose $H^r(X,A)=0$ for every abelian sheaf $A$, where $r\\geq1$, and apply the sequence of Step 4 to any $G$. By [lem-weil-pbc-right-derived-universal-delta-functor] the segment $H^r(X,I)\\to H^r(X,Q)\\to H^{r+1}(X,G)\\to H^{r+1}(X,I)$ is exact. The two terms for $I$ vanish by [def-weil-pbc-sites-and-cohomology], and the term for $Q$ vanishes by the induction hypothesis. Thus $H^{r+1}(X,G)=0$. This proves the claim for every integer $q>0$ with precisely the cohomology of [def-sc-topological-abelian-cohomology].",
-   "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-weil-pbc-sites-and-cohomology",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015B (lemma-higher-derived-functors); explicit dimension shifting for Tag 015F as used by Cohomology Tag 0A3F"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The enough-injectives instance [lem-weil-pbc-site-sheaves-enough-injectives] supplies HasExt in the required universe. By [def-sc-topological-abelian-cohomology], the displayed $H'$ is $\\operatorname{Ext}^q(P,G)$, for the projective object of Step 4. The current blueprint clause of [def-pc-ext] says that positive Ext from a projective object is zero; Mathlib Abelian.Ext.subsingleton_of_projective states this directly in the derived-category Ext model. Write $q=n+1$ and apply it. This avoids injective dimension shifting and a separate universal delta functor.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sc-topological-abelian-cohomology",
+    "def-pc-ext"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
-  "def-weil-pbc-module-stalk",
   "lem-weil-pbc-profinite-clopen-basis",
   "def-weil-pbc-sites-and-cohomology",
+  "def-sc-topological-abelian-cohomology",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "def-sp-abelian",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "def-sc-topological-abelian-cohomology"
+  "def-pc-ext"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A3F (lemma-vanishing-for-profinite); finite refinement expanded from Topology Tag 08ZZ and higher-derived vanishing expanded using Derived Categories Tag 015B"
+  "place": "Tag 0A3F, lemma-vanishing-for-profinite: local lifts and finite disjoint refinement; the final exact-functor argument is implemented directly by projectivity of the free representing sheaf and Mathlib Ext.subsingleton_of_projective (def-pc-ext, blueprint main-20261015)."
  },
  "mathlib_searches": [
   {
@@ -310,5 +271,15 @@
   "group": "NR",
   "result": "pass",
   "note": "Statement, dependencies, source, edge cases, docstrings, searches, immutable snapshot integrity, and server-only scompile verified; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261018T062807-L-655198",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
