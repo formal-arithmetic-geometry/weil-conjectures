@@ -183,5 +183,27 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-b7f3b316c (reviewer sub-agent of L); spot-checked: I read in full the item, the main-20261015 source and its sibling sources (the auxiliary exchange and the base-changed compactification), all of sk-def-sf-exchanges/_section.md, every cited node's statement, and the one consumer, pur9-cs-def-bc. The source's input pur713-input-comparison is dangling: a search of the whole blueprint and DAG finds it only in consumers. Making theta an explicitly supplied natural isomorphism R_{c'} to R_{c_{f'}} on D(X'_proet,A) is the right repair and weakens nothing, since the source already says 'Under Input'. No existing node can supply theta: prop-compactification-coherence-detailed covers only the etale-origin domain and lem-weil-pbc-etale-shriek-compactification-independence only etale D^+. The composite, its direction and the invertibility clause match the source. Ex_! is the current parent statement unchanged (Ex_* followed by Rp'_*(b)). Step 1's naturality uses only the parent's statement and theta's naturality. Step 2's four inverse identities are correct. Edge cases checked: K=0, empty X, theta=id, identity square, n=1, proper f. There are no new nodes and no duplicates; pur713-def-shriek-exchange-module is the module-object version of the parent. Fixed three small faults in statement and stmt_deps (fixes/dag/nodes/sec-smooth-purity/pur713-def-shriek-exchange-chosen.json). (1) Coefficient category, E4: the item used def-weil-pbc-proetale-modules, whose ring sheaf is (U -> Cont(pi0,A))^#, while the parent's Ex and the j_! it uses live over the constant sheaf A_T of def-weil-pbc-proetale-site. Replaced the citation with def-weil-pbc-proetale-site and stated the constant-sheaf identifications. (2) Compactification: the item allowed any open immersion, but pur713-def-base-changed-compactification takes c in the sense of def-nagata-compactification (quasi-compact open immersion). Aligned the item and cited that node. (3) B3: cited def-weil-pbc-cartesian-square and def-weil-scheme-morphism-properties. Also changed 'in particular' to 'namely' so the definition depends only on the stated theta. Proof, blueprint fields and searches are unchanged; the statement's citations equal stmt_deps; no tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ShriekExchangeChosen",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientCompactSupportExchangeChosen",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientCompactSupportExchangeChosen",
+   "AlgebraicGeometry.ProEtale.isIso_finiteCoefficientCompactSupportExchangeChosen_app_iff"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ShriekExchangeChosen.lean",
+  "statement": "def finiteCoefficientCompactSupportExchangeChosen (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) (cf' : Compactification f') (theta : Rf_!(c.ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd))[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))] ≅ Rf_!(cf')[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) : Rf_!(c)[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))] ⋙ L((g)^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⟶ L((g')^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⋙ Rf_!(cf')[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94b61c5bc",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Ex° = parent finiteCoefficientCompactSupportExchange ≫ (isoWhiskerLeft L(g'^*) theta).hom, with theta : Rf_!(c.ofIsPullback …) ≅ Rf_!(cf') as supplied data. Direction, order, target and c' (ofIsPullback = X̄×_Y Y') match the node. Rf_! = D(i_!) ⋙ Rg_* matches R_{d,A}. The componentwise iff is a sorry theorem whose docstring has the inverse argument. Binders and universes are identical to the reviewed parent. The Lean Compactification (open immersion not necessarily qc, f not assumed separated finite type) is a disclosed generalization shared with the parent. Not hollow; docstrings carry source and blueprint; the node differs only in its lean field; the statement matches the signature; the report has both sections; no duplicate. nt_compile --json on the snapshot: clean, 5.2 s. Edge cases checked: n=1, K=0, theta=refl, proper f, empty schemes."
  }
 }

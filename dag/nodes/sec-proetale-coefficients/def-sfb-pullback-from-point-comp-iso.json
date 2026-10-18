@@ -288,5 +288,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+  "statement": "noncomputable def upperStarFromPointComp :\n    upperStarFromPoint Y ⋙ (f)^*[Ab.{u + 1}] ≅ upperStarFromPoint X",
+  "branch": "slopmaster2",
+  "by": "N8",
+  "date": "2026-10-18",
+  "note": "Exact existing declaration in the published pro-etale module-object framework, read through scompile.py --source and compiled with a server #print/#check probe. For arbitrary schemes X Y : Scheme.{u} and f : X ⟶ Y, it defines the natural isomorphism upperStarFromPoint Y ⋙ (f)^*[Ab.{u + 1}] ≅ upperStarFromPoint X by whiskering the inverse of upperStarComp Ab f (toSpecZ Y) and the equality-induced identification from comp_toSpecZ f. This is exactly f^* ∘ p_Y^* ≅ p_X^* with p_X^* = upperStarFromPoint X; no duplicate module is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf10bed1f",
+  "group": "N8",
+  "result": "pass",
+  "note": "Existing-declaration delivery: node lean -> AlgebraicGeometry.ProEtale.upperStarFromPointComp (side ModuleObject/Basic.lean:344-348), statement field verbatim. Body = associator ≪≫ isoWhiskerLeft pointUpperStar ((upperStarComp Ab f (toSpecZ Y)).symm ≪≫ eqToIso (congrArg upperStar (comp_toSpecZ f))), exactly the node's composite and direction f^*∘p_Y^* ≅ p_X^*, built from the recorded dependency declarations upperStar/upperStarFromPoint/upperStarComp and comp_toSpecZ (sk-def record sfbPullbackFromPoint is an abbrev of upperStarFromPoint). Arbitrary f : X ⟶ Y in Scheme.{u}, Ab.{u+1}, no extra hypotheses or universe restriction; identity/empty/zero/non-finite cases covered. nt_compile --json probe: #check/#print match, rfl against the node composite accepted, axioms propext/Classical.choice/Quot.sound only (no sorryAx). The commit touches only the node lean record and the report; no duplicate declaration. The second reading holds the standard post-10-17 text. Cosmetic only: the report names the sk-def umbrella declaration 'pullback_from_point' instead of sfbPullbackFromPoint."
  }
 }
