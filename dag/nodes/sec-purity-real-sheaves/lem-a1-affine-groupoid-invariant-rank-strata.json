@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
-  "def-pc-finite-locally-free"
+  "def-pc-finite-locally-free",
+  "def-a1-groupoid-scheme"
  ],
  "proof": [
   {
@@ -214,5 +215,23 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-902cdaf14 (reviewer sub-agent of L); spot-checked: I read the whole item against Stacks groupoids.tex: definition-groupoid, 02YE lemma-diagram, 03BI lemma-finite-locally-free-disjoint-free with its proof, and the first paragraph of 03BJ lemma-integral-over-invariants. I also read the statement of every cited node. The statement is 03BI specialised to affine U and R. No hypothesis is dropped and groupoids are not reduced to equivalence relations. The added clauses (I finite, nonempty affine strata, affine R_r, the groupoid restricting to each stratum, I empty when U is empty) are all proved and are what the parent's step 1 uses. Step by step: step 1 uses the degree-locally-constant node exactly as stated. Step 2 rules out rank 0 through the identity section. Step 3 is the 02YE comparison P≅Q over R, written out and checked with Stacks' convention. Step 4 applies clause (2) of finite-flat-rank-iso to the base changes of s along t and along s, giving d∘t=d∘s. Steps 5 and 6 use qcqs and then the clopen-idempotent node with clause (0) of affine-ideals-closed-subscheme, over A and over B. Step 7 restricts the structure maps and gets t_r≅s_r through the inverse. Small cases checked: A=0; the trivial groupoid; Z/2⊔Z/3, giving I={2,3}; nonreduced mu_p; isotropy. There are no new nodes. The DAG search found no duplicate (the parent, grandparent and invariant-norm nodes say different things). The route is fine. I accept the declared tool use of lem-weil-pbc-finite-locally-free-degree-locally-constant (Morphisms 04MH, Lean-closed). Two text fixes, both in the item file: (a) step 3 now also checks that G lands in P, s(c(d,i(b)))=s(i(b))=t(b). (b) Step 7 wrote 's∘c=s∘pr_1' without saying which projection pr_1 is; in the item's own 1-indexed language this reads as false. It now says s(c(a,b))=s(b), the source of the second factor. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidInvariantRankStrata",
+  "declaration": "AlgebraicGeometry.affineGroupoid_exists_invariant_rank_strata",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidInvariantRankStrata.lean",
+  "statement": "theorem affineGroupoid_exists_invariant_rank_strata {A B : CommRingCat.{u}} (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hG : IsGroupoidScheme s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] : ∃ (I : Finset ℕ) (U : I → (Spec A).Opens) (V : I → (Spec B).Opens), (∀ r : I, 0 < r.1) ∧ (∀ r : I, Nonempty (U r).toScheme ∧ IsClosed (U r : Set (Spec A)) ∧ IsAffine (U r).toScheme) ∧ Pairwise (fun r r' : I ↦ Disjoint (U r) (U r')) ∧ (⨆ r : I, U r) = ⊤ ∧ (IsEmpty (Spec A) → I = ∅) ∧ ∀ r : I, V r = s ⁻¹ᵁ U r ∧ V r = t ⁻¹ᵁ U r ∧ IsAffine (V r).toScheme ∧ ∃ (s' t' : (V r).toScheme ⟶ (U r).toScheme) (e' : (U r).toScheme ⟶ (V r).toScheme) (i' : (V r).toScheme ⟶ (V r).toScheme) (c' : pullback s' t' ⟶ (V r).toScheme) (k : pullback s' t' ⟶ pullback s t), IsGroupoidScheme s' t' e' i' c' ∧ s'.IsFiniteLocallyFreeOfDegree r.1 ∧ t'.IsFiniteLocallyFreeOfDegree r.1 ∧ s' ≫ (U r).ι = (V r).ι ≫ s ∧ t' ≫ (U r).ι = (V r).ι ≫ t ∧ e' ≫ (V r).ι = (U r).ι ≫ e ∧ i' ≫ (V r).ι = (V r).ι ≫ i ∧ k ≫ pullback.fst s t = pullback.fst s' t' ≫ (V r).ι ∧ k ≫ pullback.snd s t = pullback.snd s' t' ≫ (V r).ι ∧ c' ≫ (V r).ι = k ≫ c",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-564ca3036",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, dependencies, every statement clause, edge cases, universes, docstrings, and route-pivot exclusions. Exact statement field matches. scompile.py reproduced sandbox and library compiles with exit 0 and no diagnostics. No fixes needed; branch head unchanged."
  }
 }

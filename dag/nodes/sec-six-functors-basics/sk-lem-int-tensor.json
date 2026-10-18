@@ -132,5 +132,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bea4cb0a1",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement, dependencies, helper constructions, edge cases, route-pivot compliance, docstrings, and recorded scompile evidence checked; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralTensorInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralTensorInverseImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteComplex",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteComplexQuotient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteComplexTransition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralPullbackIsCompleted",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralTensorInverseImage"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralTensorInverseImage.lean",
+  "statement": "theorem integralTensorInverseImage (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (g : X ⟶ Y) [g.IsOver (Spec (.of k))] : (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y)), boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y) K → boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) g).leftDerivedFunctor).obj K) ∧ IntegralPullbackIsCompleted ℓ E g K) ∧ (∀ K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)), boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) K → boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) L → boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj L)) ∧ (∀ (j : X ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) K → boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y) (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj K)) ∧ (∀ (i : X ⟶ Y) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) K → boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y) (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical completed inverse-image comparison is stated by its normalized derived-limit triangle, using canonical cone reductions and cofinal ell powers. The cone of multiplication on a representing complex computes the usual derived finite reduction by the two-term flat resolution. No comparison morphism or completeness hypothesis is assumed; no coefficient category, constructibility predicate or derived operation is redefined."
  }
 }
