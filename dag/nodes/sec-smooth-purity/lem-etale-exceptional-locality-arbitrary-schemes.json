@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale restriction of the exceptional inverse image is the exceptional inverse image of the composite by uniqueness of right adjoints",
+   "results": "8 hits about structure-sheaf restriction and open-immersion adjunctions; no etale exceptional locality.",
+   "date": "2026-10-18",
+   "verdict": "Use source compact-support composition and exact sum extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits; rightAdjointUniq gives the isomorphism of right adjoints to a common left adjoint.",
+   "date": "2026-10-18",
+   "verdict": "Used for the final formal Hom/Yoneda step."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|etaleLowerShriek",
+   "results": "19 hits including Mathlib.CategoryTheory.Adjunction.Unique and its applications.",
+   "date": "2026-10-18",
+   "verdict": "Use rightAdjointUniq; the geometric comparison is in the project."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of the exceptional inverse image along an etale morphism is the exceptional inverse image of the composite",
+   "results": "8 hits about categorical pullback composition and Scheme.Modules.pullbackComp; no exceptional inverse-image locality.",
+   "date": "2026-10-18",
+   "verdict": "Use the explicit graph comparison and right-adjoint uniqueness."
+  }
+ ],
+ "id": "lem-etale-exceptional-locality-arbitrary-schemes",
+ "title": "Etale exceptional locality over arbitrary schemes",
+ "statement": "Let $A$ be a finite commutative ring, $U,X,Y$ arbitrary schemes, $u:U\\to X$ quasi-compact separated etale, $f:X\\to Y$, and $h:U\\to Y$ with $h=fu$ [def-weil-etale-morphism, def-weil-scheme-morphism-properties]. Suppose $f,h$ admit compactifications [def-weil-compactifications-refinements]. On ordinary unbounded derived categories of constant-A etale module sheaves [def-weil-pbc-derived-categories], the chosen exceptional inverse images [thm-amb-etale-exceptional-adjoint] satisfy a natural isomorphism $u^*Rf^!\\cong Rh^!$. There are no Noetherian or quasi-compactness assumptions on f or h.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
+  "place": "Second paragraph, displayed Hom calculation and Yoneda; generality of the existing source-library theorem"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Substitute h=uf. Choose a compactification U -> Z -> Y of h. The graph a:U -> Z times_Y X has first projection the open immersion into Z, hence a is an immersion. The second projection is proper by base change. Quasi-compactness of u and the immersion-into-proper construction give a compactification of u. No quasi-compactness of h or f is used.",
+   "uses": [
+    "lemma-nagata-immersion-into-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generalized graph comparison identifies the chosen unbounded Ru_! with degreewise exact etale sum extension. Transport the exact derived sum-extension/inverse-image adjunction along this isomorphism, obtaining Ru_! left adjoint to D(u^*).",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this adjunction with Rf_! left adjoint to Rf^!. The existing unbounded compact-support composition isomorphism identifies its left adjoint with Rh_!. Thus Rf^! followed by D(u^*) and Rh^! are right adjoints to the same functor. Mathlib Adjunction.rightAdjointUniq gives their natural isomorphism. Finally use the exact-functor comparison Lu^* congruent to D(u^*).",
+   "uses": [
+    "lem-etale-unbounded-compact-support-composition",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-immersion-into-proper",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-etale-unbounded-compact-support-composition",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
+  "place": "Hom calculation and Yoneda, implemented by composition of adjunctions and rightAdjointUniq"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-etale-adjoint-locality",
+   "place": "Ambient adjoint locality, source-library generality without Noetherian hypotheses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18",
+  "statement": "theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale\n    {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]\n    (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]\n    [HasCompactification h] :\n    Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅\n      R(h)^![ModuleCat.{u + 1} Λ])"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "independent cc review: the delivered EtaleLocalization proof, GraphDerivedIso and GraphGeometricBaseChange generalizations and the new JointlySurjective module against the live tree, the change record and the 6 node files; compiled the delivery and its 7 downstream importers, ran #print axioms"
+ }
+}

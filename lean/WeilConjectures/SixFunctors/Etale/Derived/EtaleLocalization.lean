@@ -8,6 +8,9 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
 /-!
 # Étale localization of the derived categories of étale sheaves
@@ -21,7 +24,7 @@ Two facts about a surjective or arbitrary étale morphism `u : U ⟶ X` and the 
   jointly surjective family of étale maps reflect isomorphisms of sheaves;
 * the exceptional inverse image localizes along étale maps,
   `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint `lem-amb-etale-adjoint-locality`, a node of the blueprint
-  subsection `sk-prop-sf-cbc`, recorded here without proof).
+  subsection `sk-prop-sf-cbc`).
 
 ## Main statements
 
@@ -82,18 +85,43 @@ For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` 
 `Lu^* Rf^! K ≅ R(u ≫ f)^! K`,
 
 naturally in `K`. The blueprint also records that the extension by zero `u_!` along `u` is
-exact and left adjoint to `u^*`; the extension by zero along an étale map that is not an open
-immersion is not available in the library. The canonical isomorphism is the mate of the
+exact and left adjoint to `u^*`; the graph comparison identifies its degreewise derived
+functor with compact-support pushforward. The canonical isomorphism is the mate of the
 composition `R(u ≫ f)_! ≅ Rf_! ⋙ Ru_!` with `Ru_! ⊣ Lu^*`; only its existence is recorded.
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`. -/
+This is a node of the blueprint subsection `sk-prop-sf-cbc`.
+(blueprint: lem-etale-exceptional-locality-arbitrary-schemes)
+
+Proof: construct a compactification of `u` by its graph in the proper base change of a
+compactification of `u ≫ f`. The graph comparison identifies `Ru_!` with exact sum extension.
+Compose its adjunction with the exceptional adjunction for `f`, use compact-support
+composition, and apply uniqueness of right adjoints. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
     [HasCompactification h] :
     Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(h)^![ModuleCat.{u + 1} Λ]) :=
-  sorry
+      R(h)^![ModuleCat.{u + 1} Λ]) := by
+  subst h
+  -- Compactify u without requiring f or its composite to be quasi-compact.
+  let c := HasCompactification.compactification (u ≫ f)
+  let a : U ⟶ pullback c.g f := pullback.lift c.i u c.comm.symm
+  have ha : a ≫ pullback.fst c.g f = c.i := pullback.lift_fst _ _ _
+  have : IsImmersion a := by
+    have : IsImmersion (a ≫ pullback.fst c.g f) := by rw [ha]; infer_instance
+    exact IsImmersion.of_comp a (pullback.fst c.g f)
+  have : HasCompactification u := HasCompactification.of_isImmersion a
+    (pullback.snd c.g f) (pullback.lift_snd _ _ _)
+  let e := canonicalEtaleCompactSupportComparison Λ u
+    (HasCompactification.compactification u)
+  let adjU := (derivedEtaleLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} Λ) u inferInstance).ofNatIsoLeft e.symm
+  obtain ⟨ecomp⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ u f
+  exact ⟨Functor.isoWhiskerLeft R(f)^![ModuleCat.{u + 1} Λ]
+      (leftDerivedUpperStarIsoMapDerivedCategory _ u) ≪≫
+    Adjunction.rightAdjointUniq
+      ((adjU.comp (rightDerivedUpperShriekAdjunction _ f)).ofNatIsoLeft ecomp.symm)
+      (rightDerivedUpperShriekAdjunction _ (u ≫ f))⟩
 
 end Etale
 

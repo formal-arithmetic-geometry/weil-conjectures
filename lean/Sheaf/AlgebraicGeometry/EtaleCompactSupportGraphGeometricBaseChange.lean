@@ -27,7 +27,8 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The forward graph map commutes with the specified compact-support exchange at a
-geometric point. This is equality of unbounded derived transformations.
+geometric point over an arbitrary scheme. This is equality of unbounded derived
+transformations; neither scheme needs to be Noetherian or quasi-compact.
 Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6, 07A7, 0E46 and 0E47.
 (blueprint: lem-asd-compact-support-graph-geometric-base-change).
 
@@ -47,7 +48,6 @@ before testing stalks, and includes an empty geometric fibre and the zero ring. 
 theorem compactSupportGraphDerivedComparison_geometric_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
-    [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian X] [CompactSpace X]
     (c : Compactification f) (y : X) :
     Functor.whiskerRight
         (compactSupportDerivedComparison A f c (etaleCompactificationGraphMap A f c))
@@ -60,7 +60,6 @@ theorem compactSupportGraphDerivedComparison_geometric_baseChange
         (compactSupportDerivedComparison A (pullback.fst (X.algClosurePoint y) f)
           (c.ofIsPullback (IsPullback.of_hasPullback (X.algClosurePoint y) f).flip)
           (etaleCompactificationGraphMap A (pullback.fst (X.algClosurePoint y) f)
-            (c.ofIsPullback (IsPullback.of_hasPullback (X.algClosurePoint y) f).flip))) := by
-  sorry
+            (c.ofIsPullback (IsPullback.of_hasPullback (X.algClosurePoint y) f).flip))) := by sorry
 
 end AlgebraicGeometry.Etale

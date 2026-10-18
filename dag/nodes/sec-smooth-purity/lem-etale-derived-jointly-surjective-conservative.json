@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the unbounded derived category of etale sheaves is an isomorphism if its pullbacks to algebraic closure residue field points are isomorphisms",
+   "results": "8 hits about module-sheaf components, scheme stalks and etale morphisms; no derived etale geometric-point theorem.",
+   "date": "2026-10-18",
+   "verdict": "Extract the already proved source-library theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "One exact generic cohomology isomorphism criterion in Mathlib.Algebra.Homology.DerivedCategory.HomologySequence.",
+   "date": "2026-10-18",
+   "verdict": "Used in the existing proof."
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectIsomorphisms|mapDerivedCategoryHomologyFunctorIso",
+   "results": "18 hits for generic jointly-reflecting families and conservative points, no etale derived specialization.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the established sheaf conservativity and exact inverse-image APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jointly surjective inverse image functors on etale sheaves detect isomorphisms in their unbounded derived categories",
+   "results": "8 hits about locally surjective sheaves and continuous pushforwards; no exact derived etale specialization.",
+   "date": "2026-10-18",
+   "verdict": "Generalize the existing source geometric-point proof using the sheaf jointly-surjective theorem."
+  }
+ ],
+ "id": "lem-etale-derived-jointly-surjective-conservative",
+ "title": "Jointly surjective pullbacks detect unbounded etale derived isomorphisms",
+ "statement": "Let $A$ be a commutative ring, $Y$ a scheme and $a_i:U_i\\to Y$ any small jointly surjective family of scheme morphisms [lem-etale-sheaf-jointly-surjective-conservative]. A morphism in the unbounded etale module derived category [def-weil-pbc-derived-categories] is invertible if each left-derived inverse image $La_i^*$ makes it invertible. No morphism $a_i$ is required to be etale; there are no finiteness, boundedness or Noetherian hypotheses.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/ProperProjectionFormula.lean",
+  "place": "Existing theorem isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map; proof by exact inverse image and cohomology."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-etale-sheaf-jointly-surjective-conservative"
+ ],
+ "proof": [
+  {
+   "text": "Use the unbounded cohomology isomorphism criterion. For every degree, exact inverse image commutes with cohomology and agrees with its left-derived functor. The assumed derived isomorphisms therefore make each cohomology morphism invertible after all pullbacks in the family. Sheaf inverse-image conservativity for the jointly surjective family makes that cohomology morphism invertible. This generalizes the source-library geometric-point argument, without importing that source module because it depends on the parent theorem.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-etale-sheaf-jointly-surjective-conservative"
+ ],
+ "proof_origin": {
+  "by": "source",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/ProperProjectionFormula.lean",
+  "place": "Existing geometric-point cohomology proof, generalized to arbitrary jointly surjective families."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-compact-support-graph-derived-isomorphism",
+   "place": "Step 3, derived geometric-point conservativity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDerivedJointlySurjectiveConservative",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDerivedJointlySurjectiveConservative.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective",
+  "statement": "theorem isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective\n    (A : Type (u + 1)) [CommRing A] {Y : Scheme.{u}}\n    {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ Y)\n    (ha : ∀ y : Y, ∃ (i : ι) (x : U i), (a i).base x = y)\n    {M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))}\n    (φ : M ⟶ N) (h : ∀ i, IsIso ((L((a i)^*[ModuleCat.{u + 1} A])).map φ)) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "independent cc review: the delivered EtaleLocalization proof, GraphDerivedIso and GraphGeometricBaseChange generalizations and the new JointlySurjective module against the live tree, the change record and the 6 node files; compiled the delivery and its 7 downstream importers, ran #print axioms"
+ }
+}

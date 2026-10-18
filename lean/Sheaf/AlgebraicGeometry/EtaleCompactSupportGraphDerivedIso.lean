@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphSheafNormalization
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportFiniteGraphIso
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+import Sheaf.AlgebraicGeometry.EtaleDerivedJointlySurjectiveConservative
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!
@@ -30,7 +30,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The specified graph map is invertible after unbounded derived descent.
+/-- The specified graph map is invertible after unbounded derived descent for a
+quasi-compact separated etale morphism over an arbitrary scheme.
 Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6 and 0F0C.
 (blueprint: lem-asd-compact-support-graph-derived-isomorphism).
 
@@ -50,14 +51,16 @@ Only the graph base-change identity remains a separate geometric obligation here
 theorem isIso_compactSupportGraphDerivedComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
-    [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian X] [CompactSpace X]
+    [QuasiCompact f]
     (c : Compactification f) :
     IsIso (compactSupportDerivedComparison A f c
       (etaleCompactificationGraphMap A f c)) := by
   have happ : ∀ K, IsIso ((compactSupportDerivedComparison A f c
       (etaleCompactificationGraphMap A f c)).app K) := by
     intro K
-    apply isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map A
+    apply isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective A
+      (fun y : X ↦ X.algClosurePoint y)
+      (fun y ↦ ⟨y, IsLocalRing.closedPoint _, Scheme.algClosurePoint_base _ _ _⟩)
     intro y
     apply (NatIso.isIso_map_iff
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
@@ -94,7 +97,7 @@ Source: SGA 4 XVII 6.2.11
 noncomputable def canonicalEtaleCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
-    [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian X] [CompactSpace X]
+    [QuasiCompact f]
     (c : Compactification f) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅
       (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory :=
@@ -107,7 +110,7 @@ Source: SGA 4 XVII 6.2.11
 (blueprint: lem-asd-compact-support-graph-derived-isomorphism). -/
 noncomputable def canonicalEtaleCompactSupportCore
     (A : Type (u + 1)) [CommRing A] [Finite A] : EtaleCompactSupportCore A where
-  comparison := canonicalEtaleCompactSupportComparison A
+  comparison := fun f _ _ _ _ _ _ c ↦ canonicalEtaleCompactSupportComparison A f c
   sheafComparison := fun f _ _ _ _ _ _ c => etaleCompactificationGraphMap A f c
   sheaf_normalization := fun f _ _ _ _ _ _ c M =>
     compactSupportGraphSheafComparison_normalization A f c M

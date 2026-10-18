@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived compact support pushforward commutes with composition of compactifiable scheme morphisms",
+   "results": "8 hits, chiefly Scheme.Modules.pushforwardComp and generic pushforward coherence; no compact-support composition on etale derived categories.",
+   "date": "2026-10-18",
+   "verdict": "Use the already proved source-library theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "Not in Mathlib; source library supplies the theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|compactification",
+   "results": "25 hits about topological compactifications; no derived etale compact-support composition.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the source declaration rather than restate it in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived compact support pushforward of a composite is the composition of the compact support pushforwards",
+   "results": "8 hits including continuous sheaf pushforward composition and exponentiable-morphism pushforwards; none for derived etale compact support.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing source-library theorem."
+  }
+ ],
+ "id": "lem-etale-unbounded-compact-support-composition",
+ "title": "Existing unbounded compact-support composition",
+ "statement": "Let $A$ be a finite commutative ring and $X\\xrightarrow{f}Y\\xrightarrow{g}T$ morphisms of arbitrary schemes. Suppose that $f$, $g$ and $fg$ admit compactifications [def-weil-compactifications-refinements]. For compact support on the ordinary unbounded etale module derived categories [def-amb-etale-compact-support, def-weil-pbc-derived-categories], there is a natural isomorphism $R(gf)_!\\cong Rg_!Rf_!$. No quasi-compactness or Noetherianity is assumed beyond the supplied compactifications.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriek_comp; existing proved source theorem, graph-factorization proof"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved source theorem nonempty_iso_rightDerivedLowerShriek_comp. Its construction embeds the source by a proper map into an open of the product of compactification ambients. The same graph computes f and its composite. Torsion proper base change exchanges open extension with the proper projection; compose the two open extensions and the proper derived pushforwards. The graph model comparisons identify this composite with the chosen compactifications. This does not take a quasi-compact closure and therefore needs no quasi-compactness of f, g or their composite.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "source",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriek_comp"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-etale-adjoint-locality",
+   "place": "Second paragraph: the compact-support composition used in the Hom calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18",
+  "statement": "theorem nonempty_iso_rightDerivedLowerShriek_comp {X Y T : Scheme.{u}} (f : X ⟶ Y)\n    (g : Y ⟶ T) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :\n    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅\n      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-2c227",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T094933-L-3721634",
+  "kind": "interface",
+  "note": "independent cc review: the delivered EtaleLocalization proof, GraphDerivedIso and GraphGeometricBaseChange generalizations and the new JointlySurjective module against the live tree, the change record and the 6 node files; compiled the delivery and its 7 downstream importers, ran #print axioms"
+ }
+}
