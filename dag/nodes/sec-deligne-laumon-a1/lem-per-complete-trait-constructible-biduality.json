@@ -17,9 +17,301 @@
   "def-pur-derived-internal-hom",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian because every ideal is principal. Completeness gives excellence. It is regular: its only primes are $(0)$ and its maximal ideal, and their local rings are a field and a one-dimensional local ring with principal maximal ideal. Finite-type affine charts of $X$ are Noetherian and excellent. Apply the independent trait lemma to $S$: $A_S$ is dualizing. Unlike the rejected smooth-pullback input, that lemma uses only the dimension-one tame-inertia calculation.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-regular-scheme",
+    "lem-per-complete-local-excellence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-trait-constant-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII sections 1.2.1–1.2.3; Stacks Tag 07QW for excellence"
+   }
+  },
+  {
+   "text": "We prove an auxiliary assertion within this proof by induction. Fields are excellent; the products are Noetherian excellent by finite-type stability. Each projective-line projection is proper, and their composites are proper. For a field $T=\\operatorname{Spec}k$ with $\\ell$ invertible, or an excellent strictly henselian DVR trait $T$, put $W_n(T)=(\\mathbf P^1_T)^n$ and $\\pi_n:W_n(T)\\to T$. Composing the normalized projective-line adjunctions gives\n$$\\Omega_{n,T}=\\pi_n^\\times A_T\\cong A_{W_n(T)}(n)[2n].$$\nHere twists are the ordinary etale roots-of-unity rank-one sheaves. At $n=0$ this is the identity adjunction. The base-change clause of the projective-line adjunction and pullback of twists give these identifications after every regular base change used below. Internal Hom into $\\Omega_{n,T}$ preserves $D^b_c$ by the low-base Hom-finiteness lemma; the target is bounded constructible since its twist is locally free of rank one. Thus for every $M\\in D^b_c$ the cone $C_M$ of its specified evaluation bidual map is bounded constructible, before any biduality is assumed.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-finite-etale-twist-line",
+    "lem-per-low-base-constructible-internal-hom",
+    "lem-per-relative-bidual-triangles",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, printed p.298: constructible cone; here use actual projective-line adjoints and low-base finiteness"
+   }
+  },
+  {
+   "text": "For a proper projection $r:W_n(T)\\to T$, internal adjunction gives\n$$a_M:Rr_*D_WM\\xrightarrow{\\sim}D_TRr_*M,$$\nwhere $D_T=R\\mathcal Hom_A(-,A_T)$. Both $M$ and $D_WM$ are bounded constructible by the preceding step, and their proper images are bounded constructible. Applying $a$ again gives\n$$b_M=D_T(a_M^{-1})a_{D_WM}:Rr_*D_W^2M\\xrightarrow{\\sim}D_T^2Rr_*M.$$\nIt satisfies $b_M Rr_*\\eta_M=\\eta_{Rr_*M}$. Indeed transpose both maps against $D_TRr_*M$, precompose this factor by $a_M$, and use the evaluation normalization of internal adjunction. Both transposes become the direct-image tensor map followed by $Rr_*$ of evaluation after symmetry and the exceptional counit $Rr_*\\Omega_{n,T}\\to A_T$. Naturality of evaluation cancels $a_M^{-1}a_M$, so the transposes and hence the maps agree. This argument uses no potential complexes or biduality on $W_n(T)$.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-per-proper-finite-coefficient-bounded-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, last paragraph: proper comparison, derived here directly from internal adjunction"
+   }
+  },
+  {
+   "text": "Under any regular base change $g:T'\\to T$ between the fields or excellent traits occurring below, and also under a strict localization of a coordinate projective line, the pullback of $\\Omega_{n,T}$ is the displayed twist-shift for the corresponding product, up to a common invertible twist-shift if we regard one coordinate as part of the new base. Regular base change of internal Hom applies first to $M$ and then to $D_WM$, since step 2 proves both bounded constructible. The resulting comparison identifies the pullback of $\\eta_M$ with evaluation biduality on the new product. Common invertible twist-shifts cancel by the twisted-bidual transport lemma. In particular $C_M$ pulls back to its biduality cone there. Strict localizations are Noetherian excellent and regular as morphisms, as stipulated in the internal-Hom comparison lemma.",
+   "uses": [
+    "lem-per-potential-regular-base-change",
+    "lem-sf-etale-twisted-bidual-transport",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 4.2.2 and Proposition 6.4.2 proof, localization argument; no pinning clause used"
+   }
+  },
+  {
+   "text": "First prove biduality on $W_n(k)$ simultaneously for every field $k$ of characteristic different from $\\ell$, by induction on $n$. At $n=0$, a constructible sheaf on $\\operatorname{Spec}k$ is a finite-dimensional continuous Galois representation. After a finite separable cover it is a finite free constant sheaf, so internal Hom is its ordinary linear dual; evaluation into the double dual is the ordinary finite-dimensional isomorphism. For bounded complexes the result follows from cohomological truncations and the triangle property of evaluation. For the inductive step one may replace $k$ by a separable closure: this is the strict localization of the field, so the regular-comparison lemma applies and its pullback tests every geometric stalk, and step 4 identifies the biduality map after this change. Hence it suffices to treat separably closed $k$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-ext-sheaf-constructible",
+    "lem-per-relative-bidual-triangles",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-per-potential-regular-base-change",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, dimension-zero induction; finite-dimensional evaluation base case"
+   }
+  },
+  {
+   "text": "Let $n>0$ and $M\\in D^b_c(W_n(k),A)$, with $k$ separably closed. For each coordinate projection $r_j:W_n(k)\\to\\mathbf P^1_k$, pull back to a geometric generic point of $\\mathbf P^1_k$. This is the strict localization at its generic point, hence regular by the cited strict-localization statement. The resulting scheme is $W_{n-1}(k(t)^{\\mathrm{sep}})$. Step 4 identifies the cone there, including the cancelled common twist-shift, and the induction hypothesis on $n$ says it vanishes. Thus if $C_{M,z}\\ne0$, every coordinate image of $z$ is nongeneric in $\\mathbf P^1_k$, hence closed. The closed-points-of-product lemma, iterated, implies that $z$ is closed in $W_n(k)$. Therefore all cohomology of $C_M$ is supported at closed points.",
+   "uses": [
+    "lem-weil-pbc-localization-regular",
+    "lem-per-potential-regular-base-change",
+    "lem-sf-etale-twisted-bidual-transport",
+    "lem-kun-closed-points-of-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, coordinate-projection argument, specialized to dimension zero"
+   }
+  },
+  {
+   "text": "Apply step 3 to $\\pi_n:W_n(k)\\to\\operatorname{Spec}k$. Since the field base has biduality by step 5 and $R\\pi_{n,*}M$ is bounded constructible, step 3 shows $R\\pi_{n,*}C_M=0$. The closed-support detection lemma over a separably closed field applies to $C_M$, whose support was just shown to consist of closed points. It gives $C_M=0$. This proves the induction for all fields. This argument includes $M=0$, $n=0$, and imperfect separably closed ground fields; no claim that such a field is perfect is used.",
+   "uses": [
+    "lem-per-proper-finite-coefficient-bounded-preservation",
+    "lem-kun-0f1g"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, final cone-detection argument; Stacks Tag 0F1G"
+   }
+  },
+  {
+   "text": "Next prove the assertion for $W_n(T)$ simultaneously for all excellent strictly henselian DVR traits $T$ with $\\ell$ invertible, again by induction on $n$. The case $n=0$ is the independent trait lemma, which needs neither completeness nor mixed characteristic. Let $n>0$. Restriction to the generic field of $T$ is regular. Step 4 and the field result show that the cone $C_M$ is zero outside the closed fibre $W_n(s)$, where $s$ is the separably closed residue field. This establishes the support reduction without a closed-fibre purity or costalk comparison.",
+   "uses": [
+    "lem-per-trait-constant-duality",
+    "lem-weil-pbc-localization-regular",
+    "lem-per-potential-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, outer dimension induction, restricted to traits"
+   }
+  },
+  {
+   "text": "Let $y$ be the generic point of $\\mathbf P^1_s\\subset\\mathbf P^1_T$ and choose a geometric point over $y$. Put $T'=(\\mathbf P^1_T)_{(\\bar y)}$. The special fibre is integral and Cartier: on either affine chart it is defined by the nonzerodivisor uniformizer of $T$, with quotient $\\kappa(s)[t]$. These charts are regular by polynomial regularity over the regular DVR. Thus the generic Cartier stalk lemma makes $\\mathcal O_{\\mathbf P^1_T,y}$ a DVR, and strict henselization preserves this property. The strict localization lemma gives excellence of $T'$ and regularity of its map to $\\mathbf P^1_T$. Hence $T'$ is another excellent strictly henselian DVR trait with $\\ell$ invertible. It need not be complete; this is why the trait input has been stated without completeness.",
+   "uses": [
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-sbc-regular-cartier-generic-stalk-dvr",
+    "lem-sc-strict-henselization-dvr",
+    "lem-per-potential-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, scheme Y at the generic point of the coordinate special fibre; generic Cartier/DVR geometry"
+   }
+  },
+  {
+   "text": "For each of the $n$ coordinate projections $r_j:W_n(T)\\to\\mathbf P^1_T$, the base change along $T'\\to\\mathbf P^1_T$ is $W_{n-1}(T')$. By step 4 its cone is the pullback of $C_M$: $\\Omega_{n,T}$ pulls back to $A(n)[2n]$, differing from $\\Omega_{n-1,T'}$ only by the invertible factor $A(1)[2]$. The induction hypothesis on $n$, applied to this new trait $T'$, kills the pullback. A nonzero stalk at a point above the generic point $y$ would remain nonzero at some point of this surjective geometric extension, so $C_{M,z}\\ne0$ implies that the image of $z$ under $r_j$ is not $y$. Step 8 already places $z$ in the closed fibre. All its coordinate images in $\\mathbf P^1_s$ are therefore closed. The product lemma again makes $z$ a closed point of $W_n(s)$.",
+   "uses": [
+    "lem-per-potential-regular-base-change",
+    "lem-sf-etale-twisted-bidual-transport",
+    "lem-kun-closed-points-of-product",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, inner induction on projective-line factors at the generic special-fibre point"
+   }
+  },
+  {
+   "text": "Proper comparison in step 3, the trait base case, and proper constructible preservation give $R\\pi_{n,*}C_M=0$. Since $C_M$ restricts to zero off $W_n(s)$, open/closed recollement identifies it with $i_*i^*C_M$ for $i:W_n(s)\\hookrightarrow W_n(T)$. Proper base change at $s$ identifies $s^*R\\pi_{n,*}C_M$ with $R\\Gamma(W_n(s),i^*C_M)$; it is zero. The residue field is separably closed, and step 10 proved that $i^*C_M$ is supported at closed points. Stacks Tag 0F1G therefore gives $i^*C_M=0$, whence $C_M=0$. This completes both inductions and proves bounded constructible biduality on every product $W_n(T)$ used here.",
+   "uses": [
+    "lem-per-proper-finite-coefficient-bounded-preservation",
+    "lem-cbc-open-closed-recollement",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-kun-0f1g"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, proper-image and closed-support detection"
+   }
+  },
+  {
+   "text": "Fix an affine chart $U=\\operatorname{Spec}B$ of $X$. Finitely many algebra generators give a closed immersion $i:U\\hookrightarrow V=\\mathbf A^m_S$. Regard $V$ as the product of the standard affine opens in $W_m(S)$; the affine-space open-immersion lemma is used with $n=1$ in each factor. Write $j:V\\hookrightarrow W_m(S)$ and $q:V\\to S$. Open locality identifies $K=q^\\times A_S$ with $j^*\\Omega_{m,S}$. For any $M\\in D^b_c(V,A)$, $j_!M$ is bounded constructible: exactness gives the same cohomological bounds; extend the finite constructible stratification of each cohomology sheaf by the closed complement with value zero, using the inside/outside stalk formula. All strata remain locally closed constructible since the ambient scheme is Noetherian. Moreover $j^*j_!M=M$ by that stalk formula. Restrict the biduality of $j_!M$ from step 11. Restriction of internal Hom respects evaluation and tensor symmetry, hence gives the specified biduality for $M$ with target $K$. The same restriction gives bounded constructibility of $K$ and of $R\\mathcal Hom_A(M,K)$. This proves the ambient-chart input.",
+   "uses": [
+    "lem-chow-affine-immersion",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, initial affine embedding reduction, applied after the product induction"
+   }
+  },
+  {
+   "text": "With $K=q^\\times A_S$ from step 12, put $Q_U=i^!K$. The finite-adjunction lemma identifies this bounded-below right adjoint with the restriction of the ambient adjoint; in particular $i^!K\\in D^+(U,A)$. Compact-support composition and uniqueness of right adjoints identify $i^!q^\\times A_S$ with $(p|_U)^\\times A_S$. Open locality identifies the latter with $Q_X|_U$. All these comparisons are the counit-compatible adjunction comparisons. Since $i$ is closed, it is finite, with $Ri_!=i_*$, so there is no regular-immersion requirement at this step.",
+   "uses": [
+    "lem-per-finite-exceptional-internal-hom",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, affine closed-support reduction; explicit finite-adjunction descent and gluing"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_c(U,A)$, exact finite direct image makes $i_*M$ bounded constructible on $V$. The finite internal-adjunction isomorphism gives\n$$a_M:i_*R\\mathcal Hom_A(M,Q_U)\\xrightarrow{\\sim}D_V(i_*M).$$\nThe right-hand side is bounded constructible by step 12. Closed geometric stalks identify the stalks of $i_*F$ on $i(U)$ with those of $F$. Hence the counit $i^*i_*F\\to F$ is an isomorphism, as can be tested on these stalks. Exact inverse image and constructible pullback therefore show that $D_UM=R\\mathcal Hom_A(M,Q_U)\\cong i^*D_V(i_*M)$ is bounded constructible. Apply this with $M=A_U$: on each etale object, an $A$-linear map from the free rank-one module $A$ is determined by its value at $1$, so $R\\mathcal Hom_A(A_U,Q_U)=Q_U$. Thus $Q_U$ itself is bounded constructible. This proves boundedness before taking any second dual.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "lem-per-finite-exceptional-internal-hom",
+    "lemma-openclosed-stalk-lowerstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, affine closed-support reduction; explicit finite-adjunction descent and gluing"
+   }
+  },
+  {
+   "text": "We check the specified map, not merely existence of an abstract double-dual isomorphism. Apply the same $a$ to $D_UM$, which step 14 has proved bounded constructible. There is an isomorphism\n$$b_M=D_V(a_M^{-1})\\circ a_{D_UM}:i_*D_U^2M\\xrightarrow{\\sim}D_V^2(i_*M).$$\nThe normalization in finite internal adjunction sends evaluation on $U$ to the pairing on $V$ obtained by first evaluating and then applying the counit $i_*Q_U\\to K$. To see the iteration compatibility, pair both $b_M i_*\\eta^U_M$ and $\\eta^V_{i_*M}$ with $D_V(i_*M)$ and precompose that factor by $a_M$. For each expression, tensor--Hom adjunction cancels the transpose, and naturality of evaluation cancels $a_M^{-1}a_M$. The resulting pairing is in both cases\n$$i_*M\\otimes i_*D_UM\\longrightarrow i_*(M\\otimes D_UM)\\xrightarrow{i_*(\\mathrm{ev}\\circ\\mathrm{sym})}i_*Q_U\\longrightarrow K.$$\nThus adjunction gives $b_M i_*\\eta^U_M=\\eta^V_{i_*M}$. The last map is invertible by step 12, so $i_*\\eta^U_M$ is invertible. Exactness of $i_*$ and its closed-stalk formula show that its cone vanishes if and only if the original cone vanishes. Hence $\\eta^U_M$ is invertible, naturally in $M$.",
+   "uses": [
+    "lem-per-finite-exceptional-internal-hom",
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lemma-openclosed-stalk-lowerstar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, affine closed-support reduction; explicit finite-adjunction descent and gluing"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_c(X,A)$, slice restriction commutes with derived internal Hom. Together with step 13 this identifies $(D_XM)|_{U_a}$ with $D_{U_a}(M|_{U_a})$, and a second application identifies $(D_X^2M)|_{U_a}$ with $D_{U_a}^2(M|_{U_a})$. The comparisons respect evaluation and tensor symmetry, so they identify the restriction of $\\eta_M$ with the map proved invertible in step 15. Each $Q_X|_{U_a}$ and $(D_XM)|_{U_a}$ is bounded constructible. Since the affine cover is finite, the union of their finitely many cohomological intervals is bounded; constructibility is local on this cover by its finite-stratification definition. Hence $Q_X,D_XM\\in D^b_c(X,A)$. The cone of $\\eta_M$ restricts to zero on the cover, so each of its geometric stalks is zero, and therefore each cohomology sheaf is zero. Thus $\\eta_M$ is an isomorphism. All comparisons are natural in $M$, and the symmetry-transposed evaluation defines a natural transformation for arbitrary dualizing target, so the resulting isomorphism is natural. No step assumes regularity or punctual purity of $X$.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-constructible-complexes",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-per-relative-bidual-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Proposition 6.4.2 proof, affine closed-support reduction; explicit finite-adjunction descent and gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-regular-scheme",
+  "lem-per-complete-local-excellence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-trait-constant-duality",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "det-sp-unique-right-adjoint",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-per-low-base-constructible-internal-hom",
+  "lem-per-relative-bidual-triangles",
+  "lem-exc-fields-excellent",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-composition",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-per-proper-finite-coefficient-bounded-preservation",
+  "lem-per-potential-regular-base-change",
+  "lem-sf-etale-twisted-bidual-transport",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-localization-regular",
+  "lem-kun-closed-points-of-product",
+  "lem-kun-0f1g",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-sbc-regular-cartier-generic-stalk-dvr",
+  "lem-sc-strict-henselization-dvr",
+  "lem-cbc-open-closed-recollement",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-per-finite-exceptional-internal-hom",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII Proposition 6.4.2 and its proof, printed pp.297–298: direct projective-line induction over fields and excellent strictly henselian traits, with ambient projective-line adjoints in place of potential dualizing complexes; closed-support descent and gluing retained. No use of Theorem 0.9."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +369,67 @@
    "results": "Actual recorded result: 8 hits; FractionalIdeal.dual_involutive, Matroid.dual_involutive, BddOrd.dualEquiv_inverse, FinBddDistLat.dualEquiv_inverse, Lat.dualEquiv_inverse, BddLat.dualEquiv_inverse, PartOrd.dualEquiv_inverse, LinearMap.BilinForm.dualBasis_involutive; digest 41e84da92c8e421e",
    "date": "2026-10-19",
    "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant finite field sheaf on a strictly henselian discrete valuation trait is a Verdier dualizing complex",
+   "results": "8 hits; CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.IsFiniteType.mk; digest 5d2ed2845f50fc57. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant-sheaf definitions, algebraic etale loci and finite-dimensional vector-space evaluation do not assert duality on a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a henselian valuation trait finite constructible etale sheaves satisfy evaluation biduality with the constant finite field as dualizing object",
+   "results": "8 hits; FGModuleCat.exactPairing, CompHausLike.LocallyConstant.counit_app_val, Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_compl_support, Algebra.etaleLocus, FGModuleCat.FGModuleCatEvaluation_apply', FGModuleCat.FGModuleCatEvaluation_apply; digest 57fdd85eb5bc504f. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant-sheaf definitions, algebraic etale loci and finite-dimensional vector-space evaluation do not assert duality on a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trait.*dual|dual.*trait|bidual|Verdier",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth exceptional pullback preserves etale dualizing complexes for bounded constructible finite field sheaves",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; digest 75704a3e839d0fbc. ",
+   "date": "2026-10-19",
+   "verdict": "no match: smoothness of etale morphisms and ring-theoretic formal etaleness do not assert preservation of etale dualizing complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If K is an etale dualizing complex and f is smooth then f shriek K is an etale dualizing complex",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale; digest 05edcdf9bb6f0b25. ",
+   "date": "2026-10-19",
+   "verdict": "no match: smoothness of etale morphisms and ring-theoretic formal etaleness do not assert preservation of etale dualizing complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Verdier|biduality",
+   "results": "25 hits; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; digest 722e8cd64b09a834. ",
+   "date": "2026-10-19",
+   "verdict": "no match: textual uses of dualizing and Verdier, and general triangulated localization; no etale dualizing-complex theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-dualizing-scalar-restriction",
@@ -106,5 +455,219 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-trait-constructible-biduality",
+  "worker": "stage1",
+  "summary": "Returned-delivery repair: remove the circular smooth-dualizing-pullback input. The item now carries the two projective-line inductions from ILO XVII 6.4.2 explicitly, first over fields and then simultaneously over all excellent strictly henselian DVR traits. Generalize the independent trait input to cover the new strict local traits. Add only low-base internal-Hom finiteness (no biduality) as a statement-only input. Derive proper-image evaluation compatibility directly from the generic internal adjunction. Retain the accepted finite closed-support descent and gluing. Item statement unchanged.",
+  "blueprint": "Proof Step 1, dimension-normalized Verdier duality, via the regular finite-torsion duality input: the local biduality invoked in ILO Expose XVI, Lemma 3.5.9 proof, printed p.250, before the purity of the target is proved. Steps 1–12 give the non-Gabber dimension-at-most-one local biduality input by projective-line induction; steps 13–16 give closed-support descent and gluing.",
+  "tool_uses": [
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "Only its explicit definition is used to formulate the dimension-one argument; it supplies no competing geometric duality route."
+   },
+   {
+    "node": "def-weil-regular-scheme",
+    "why": "Only its explicit definition is used to formulate the dimension-one argument; it supplies no competing geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "All finite-type charts over the trait are Noetherian, which supplies the hypotheses of finite adjunction and constructibility."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Finite-type charts and projective-line products over the excellent trait or field remain excellent; the unit has no competing algebraic excellence input."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "The normalized ordinary projective-line right adjoint gives A(1)[2] and the counit explicitly. This supplies the duality object before biduality, not a smooth-dualizing-preservation result."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "The ordinary compact-support functors compose; hence their right adjoints compose on products and on affine closed factorizations."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Counit-compatible uniqueness identifies the displayed composite adjoints with the ambient adjoint; only formal category theory is used."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Ordinary finite twists pull back canonically under all regular changes of base used in the coordinate induction."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Finite Tate twists are invertible rank-one sheaves; this proves constructibility of the displayed targets and permits cancelling a common twist."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Fields in the dimension-zero induction are excellent, so the regular internal-Hom comparison applies; this is commutative algebra, not a replacement duality theorem."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Each projection of a projective line over the preceding product is proper, allowing ordinary proper adjunction and bounded preservation."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Composing the projective-line projections makes the product projection proper; only this general geometric stability is taken."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "For proper projections, the internal adjunction compares the direct image of the relative dual with the dual of the direct image, without assuming biduality."
+   },
+   {
+    "node": "lem-asd-internal-adjunction-evaluation",
+    "why": "Its evaluation/counit normalization proves the proper comparison carries the actual evaluation-transposed eta to eta."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The ordinary module derived category has the tensor-Hom transposition and symmetry needed for the explicit counit calculation."
+   },
+   {
+    "node": "lem-sf-etale-twisted-bidual-transport",
+    "why": "It cancels the common rank-one twist and shift after a coordinate is moved into the base, preserving the canonical evaluation map."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Only its explicit definition is used to formulate the dimension-one argument; it supplies no competing geometric duality route."
+   },
+   {
+    "node": "lem-sf-ext-sheaf-constructible",
+    "why": "At a field base a finite locally free sheaf has no higher internal Ext; finite-dimensional linear algebra then proves its evaluation biduality."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Truncation triangles extend the finite-dimensional sheaf base case to all bounded constructible complexes."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Geometric stalks detect invertibility in field descent, closed-support descent, and the final finite-cover gluing."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Only its explicit definition is used to formulate the dimension-one argument; it supplies no competing geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Restriction to the generic point of a DVR is regular, so the regular Hom comparison identifies its cone."
+   },
+   {
+    "node": "lem-kun-closed-points-of-product",
+    "why": "Closedness of every coordinate image forces a point of the product over the residue field to be closed; this is the support argument of the stated induction."
+   },
+   {
+    "node": "lem-kun-0f1g",
+    "why": "A complex supported on closed points of a finite-type scheme over a separably closed field is zero if all global cohomology vanishes."
+   },
+   {
+    "node": "lem-trf-polynomial-ring-regular-base",
+    "why": "The affine charts of P1 over a regular DVR are regular. Only this polynomial-ring theorem, not the trace-formula route, is used."
+   },
+   {
+    "node": "lem-sbc-regular-cartier-generic-stalk-dvr",
+    "why": "The local ring at the generic point of the integral Cartier special fibre is a DVR, so the trait induction applies there."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Strict henselization of that DVR is still a DVR; no purity or global duality input is taken."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "A cone vanishing off the special fibre equals the closed direct image of its restriction; this is the generic sheaf recollement triangle."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Restricting the vanishing proper image to the closed point computes cohomology of the cone on the closed fibre."
+   },
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "Finitely many generators give the closed immersion of an affine chart into affine space over the trait."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "With n=1 it identifies A1 with the standard open of P1, giving the product open A^m in (P1)^m."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Open restriction of the ordinary ambient right adjoint agrees with the adjoint on the open chart."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Open restriction commutes with derived internal Hom and its evaluation, allowing restriction of the bidual map."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Extension by zero preserves the bounds on cohomology when extending an arbitrary chart complex to the product."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Its inside/outside formula gives j* j! = identity and the zero complementary stratum, so the chart reduction applies to every constructible M."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "why": "Exact closed direct image preserves bounded constructible complexes for the finite-support descent."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Closed direct image has the original stalks on the closed subspace and zero elsewhere; thus i* i* = identity and it reflects isomorphisms."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Closed inverse image preserves cohomological bounds when the dual descends from its ambient closed direct image."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Pullback of the bounded constructible ambient dual to the closed chart remains constructible."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "det-sp-unique-right-adjoint",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-exc-fields-excellent",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-composition",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-etale-twisted-bidual-transport",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-localization-regular",
+  "lem-kun-closed-points-of-product",
+  "lem-kun-0f1g",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-sbc-regular-cartier-generic-stalk-dvr",
+  "lem-sc-strict-henselization-dvr",
+  "lem-cbc-open-closed-recollement",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-7d1cc65e9",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7d1cc65e9 (reviewer sub-agent of L); spot-checked: Re-delivery of the a569dc60 RETURN (D2, D4/C6). The circular lem-per-smooth-dualizing-pullback is withdrawn. The item now writes out ILO XVII 6.4.2 (printed pp.297–298), checked against the source: an induction on W_n=(P^1)^n, first over all fields and then over all excellent strictly henselian DVR traits. ILO's 6.2.3.1 is replaced by the low-base RHom finiteness node, 6.2.3.2 by lem-per-potential-regular-base-change (no pinnings) plus twist pullback and twisted-bidual transport, and Th. finitude 4.4 by step 3, a direct internal-adjunction transpose (b_M Rr_*η_M=η_{Rr_*M}). Steps 6/10 force closed-point support through the coordinate strict localizations: for fields Spec k(t)^sep; for traits T'=(P^1_T)_(y), a DVR by the regular Cartier generic-stalk and strict-henselization nodes, and excellent. Steps 7/11 finish with 0F1G after proper base change. Steps 12–16 are the closed-support descent and gluing accepted at the return. Recomputed closure: no path from any dependency back to the item. Item statement is byte-identical to live (live is still unsplit). New nodes: (1) lem-per-trait-constant-duality, A_T dualizing on an excellent strictly henselian DVR with ell invertible. True: the dimension-one tame model of ILO XVII 1.2 needs no completeness, and completeness had to go because T' in step 9 is incomplete. Not a duplicate; the regular-unit potential nodes would close the cycle. (2) lem-per-low-base-constructible-internal-hom, RHom in D^b_c over a regular base of dim ≤1. True by Zheng 3.15(a) with 3.14/2.29(1); proved before biduality there. Not a duplicate: the existing variants cover only fields, Fbar_q, site-perfect arguments or potential complexes. Neither node restates a clause of the item. Advisory: steps 4/6/10 leave implicit that the base change of a strict localization is regular (it is ind-étale; I accept this as elementary). Batch-5: universally-catenary, bounded-below derived adjunction, geometric inverse-image exactness, closed-monoidal uncurry laws, polynomial-ring regularity, and lisse module objects (reached via kun proper base change and finite exceptional internal Hom). Each is generic algebra or category theory, not a step of the trace formula or of Poincaré duality, so all are accepted. No SGA citation. The 39 tool_uses are generic and accepted. No fixes; review.md written."
  }
 }
