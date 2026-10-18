@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "Choose $a=np^n+mp^m+n+m$ and put $P=p^a$, $B=n(p^n-1)+m(p^m-1)$. Since $p\\geq2$ and $n,m>0$, $a>0$, $a\\geq n,m$, and $a-n+1-B=n+2m+1>0$, while $a-m+1-B=2n+m+1>0$. Thus both $a-n+1$ and $a-m+1$ are at least $B$. A unital subring contains every integer multiple of $1$ by repeated addition and additive inverses. Thus $p^a(x+y)=p^{a-n}(p^nx)+p^{a-m}(p^my)$ belongs to $A$ by its defining closure properties.",
+   "text": "Choose $a=np^n+mp^m+n+m$ and put $P=p^a$, $B_0=np^n+mp^m$. Since $n,m>0$, $a>0$ and $a\\geq n,m$. The unital subring contains natural-number casts, and $p^a(x+y)=p^{a-n}(p^nx)+p^{a-m}(p^my)$ belongs to $A$ by closure under products and sums.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "Apply [lem-pur-commutative-ring-binomial-expansion] with exponent $P$: $(x+y)^P=\\sum_{i=0}^P\\binom Pi x^iy^{P-i}$. For each index put $j=P-i$, and use integer division with remainder to write $i=qp^n+r$ and $j=q^{\\prime}p^m+r^{\\prime}$, where $0\\leq r<p^n$ and $0\\leq r^{\\prime}<p^m$. Put $D=nr+mr^{\\prime}\\leq B$. It suffices to show that the integer coefficient $\\binom Pi$ is divisible by $p^D$.",
+   "text": "Apply [lem-pur-commutative-ring-binomial-expansion] with exponent $P$. For each $0\\leq i\\leq P$, put $j=P-i$, $r=i\\bmod p^n$, $s=j\\bmod p^m$, and $D=nr+ms$. The remainder bounds give $D\\leq B_0$, hence $D+n\\leq a$ and $D+m\\leq a$. It suffices to prove that $p^D$ divides $\\binom Pi$ and then show each term belongs to the subring.",
    "uses": [
     "lem-pur-commutative-ring-binomial-expansion"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "If $r=r^{\\prime}=0$, then $D=0$ and the required divisibility is automatic. If $r>0$, then $i>0$ and $p^n$ does not divide $i$, so the definition of $v_p(i)$ gives $v_p(i)\\leq n-1$. Apply [lem-pur-prime-power-binomial-divisibility] with $k=i$ (indeed $0<i\\leq P$). It gives $p^{a-v_p(i)}\\mid\\binom Pi$; since $a-v_p(i)\\geq a-n+1\\geq B\\geq D$, also $p^D\\mid\\binom Pi$. If $r=0$ and $r^{\\prime}>0$, use $0<j\\leq P$ and $v_p(j)\\leq m-1$ in the same cited statement. It gives $p^D\\mid\\binom Pj$, and $\\binom Pj=\\binom Pi$ by the factorial formula with $j=P-i$. These cases include all indices. The endpoint indices $i=0,P$ have both remainders zero because $a\\geq n,m$, so no valuation at zero is used.",
+   "text": "If $r=s=0$ then $D=0$ and divisibility is immediate. If $r\\ne0$, then $i>0$. Since $p^{v_p(i)}$ divides $i$ but $p^n$ does not divide $i$, we have $v_p(i)<n$. Specialize [lem-pur-prime-power-binomial-divisibility] (Mathlib WittVector.map_frobeniusPoly.key₁) at $a$ and $i-1$. It gives $p^{a-v_p(i)}\\mid\\binom Pi$. Since $D+n\\leq a$, $D\\leq a-v_p(i)$, so $p^D\\mid\\binom Pi$. If $r=0$ and $s\\ne0$, apply the same argument with $j$ and $m$, and use $\\binom Pj=\\binom Pi$. The zero index is excluded by the nonzero remainder, so the argument never uses a valuation at zero.",
    "uses": [
     "lem-pur-prime-power-binomial-divisibility"
    ],
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "For each index write $\\binom Pi=c_i p^{nr+mr^{\\prime}}$ with $c_i\\in\\mathbf N$, using step 3. In $C$ the corresponding term equals $c_i(x^{p^n})^q(y^{p^m})^{q^{\\prime}}(p^nx)^r(p^my)^{r^{\\prime}}$. This follows by multiplying out the powers, using $i=qp^n+r$ and $j=q^{\\prime}p^m+r^{\\prime}$. Each of the four bases is in $A$ by hypothesis; powers (including exponent zero), their product, and the integer multiple are in $A$ by repeated multiplication and addition. The finite sum from step 2 therefore belongs to $A$. Together with step 1 this proves both required memberships with the same positive $a$. No division or cancellation in $C$ is used.",
+   "text": "For any $q,c,x,i$, if $x^q$ and $cx$ belong to $A$, the identity $c^{i\\bmod q}x^i=(x^q)^{i/q}(cx)^{i\\bmod q}$ proves membership by closure under powers and products; this is the proved private helper pow_mod_mul_mem. Apply it to $(q,c,x)=(p^n,p^n,x)$ and $(p^m,p^m,y)$. Write $\\binom Pi=p^D c_i$ with $c_i\\in\\mathbf N$ using step 3. Then the binomial term $x^iy^j\\binom Pi$ is the product of $p^{nr}x^i$, $p^{ms}y^j$, and the natural-number cast $c_i$, all in $A$. Closure under finite sums gives $(x+y)^{p^a}\\in A$. Combine this with step 1, with no division or cancellation in $C$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -213,5 +213,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261018T062915-L-678169",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -16162,3 +16162,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/T1/Sheaf.Algebra.Homology.BoundedDerivedTowerProZero (stage 3; reviewer PASS; first push; landing 20261018T062914-L-677450 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/T1/Sheaf.CategoryTheory.Triangulated.DerivedLimitMorphism (stage 3; reviewer PASS; first push; landing 20261018T062914-L-677658 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/T1/Sheaf.RingTheory.GeometricallyNormalPerfectClosureCriterion (stage 3; reviewer PASS; first push; landing 20261018T062915-L-677940 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/T1/Sheaf.RingTheory.PrimePowerAdditionSubring (stage 3; reviewer PASS; first push; landing 20261018T062915-L-678169 (proof); batch 20261018T062645; modules 1; new nodes 0)
