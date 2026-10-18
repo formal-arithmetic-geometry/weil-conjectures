@@ -109,7 +109,7 @@ class `1 ∈ H^0_Y(X, Rs_! Λ_Y)` (`AlgebraicGeometry.Etale.supportedUnitClass`)
 noncomputable def sectionUnitClass :
     𝟙_ (DerivedCategoryModule Λ Y) ⟶
       (R(p)_![ModuleCat.{u + 1} Λ]).obj ((R(s)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Y)) :=
-  (derivedUpperStarLowerStarAdjunction _ p).unit.app _ ≫
+  (derivedUpperStarLowerStarAdjunction _ p).unit.app (constantComplex Λ Y) ≫
     (R((p)_*[ModuleCat.{u + 1} Λ])).map
       ((leftDerivedUpperStarConstantComplexIso Λ p).hom ≫ supportedUnitClass Λ s) ≫
     (rightDerivedLowerShriekIsoRightDerivedLowerStar _ p).inv.app _
@@ -184,12 +184,13 @@ adjoint: for `γ : Λ_X ⟶ Rs_! Rs^! L` and `f : L ⟶ Rp^! Λ_Y`, the composit
 is `Λ_Y ⟶ Rp_! Rs_! Λ_Y` (`AlgebraicGeometry.Etale.sectionUnitClass`) followed by the transpose,
 under `Rp_! Rs_! ⊣ Rs^! Rp^!`, of `Rs^!(f) ∘ cl`, where `cl : Λ_Y ⟶ Rs^! L` is the adjoint of
 `γ` (`AlgebraicGeometry.Etale.supportedClassMap`). -/
+set_option maxHeartbeats 1000000 in
 lemma unit_comp_map_comp_counit_eq_sectionUnitClass_comp
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
       (R(s)_![ModuleCat.{u + 1} Λ]).obj ((R(s)^![ModuleCat.{u + 1} Λ]).obj L))
     (f : L ⟶ (R(p)^![ModuleCat.{u + 1} Λ]).obj (𝟙_ (DerivedCategoryModule Λ Y))) :
-    (derivedUpperStarLowerStarAdjunction _ p).unit.app _ ≫
+    (derivedUpperStarLowerStarAdjunction _ p).unit.app (constantComplex Λ Y) ≫
       (R((p)_*[ModuleCat.{u + 1} Λ])).map ((leftDerivedUpperStarConstantComplexIso Λ p).hom ≫
         γ ≫ (rightDerivedUpperShriekAdjunction _ s).counit.app L) ≫
       (rightDerivedLowerShriekIsoRightDerivedLowerStar _ p).inv.app L ≫
@@ -199,8 +200,39 @@ lemma unit_comp_map_comp_counit_eq_sectionUnitClass_comp
       (((rightDerivedUpperShriekAdjunction _ s).comp
         (rightDerivedUpperShriekAdjunction _ p)).homEquiv _ _).symm
         (supportedClassMap Λ s γ ≫ (R(s)^![ModuleCat.{u + 1} Λ]).map f) := by
-  sorry
-
+  obtain ⟨c, rfl⟩ : ∃ c, γ = supportedUnitClass Λ s ≫ (R(s)_![ModuleCat.{u + 1} Λ]).map c :=
+    ⟨_, eq_supportedUnitClass_comp_supportedClassMap Λ s γ⟩
+  rw [supportedClassMap_supportedUnitClass_comp, Adjunction.homEquiv_counit,
+    Adjunction.comp_counit_app]
+  let g := (R(s)_![ModuleCat.{u + 1} Λ]).map c ≫
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.app L
+  have h₁ : (R(s)_![ModuleCat.{u + 1} Λ]).map (c ≫ (R(s)^![ModuleCat.{u + 1} Λ]).map f) ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.app _ = g ≫ f := by
+    rw [Functor.map_comp, Category.assoc, Category.assoc]
+    exact congrArg _ ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit_naturality f)
+  have h₂ : (R((p)_*[ModuleCat.{u + 1} Λ])).map g ≫
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).inv.app L =
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).inv.app _ ≫
+        (R(p)_![ModuleCat.{u + 1} Λ]).map g :=
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).inv.naturality g
+  have h₃ : sectionUnitClass Λ p s ≫ (R(p)_![ModuleCat.{u + 1} Λ]).map g =
+      (derivedUpperStarLowerStarAdjunction _ p).unit.app (constantComplex Λ Y) ≫
+        (R((p)_*[ModuleCat.{u + 1} Λ])).map ((leftDerivedUpperStarConstantComplexIso Λ p).hom ≫
+          supportedUnitClass Λ s ≫ g) ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).inv.app L := by
+    rw [sectionUnitClass, Category.assoc, Category.assoc, ← h₂]
+    simp only [g, Functor.map_comp, Category.assoc]
+  have h₄ : (R(p)_![ModuleCat.{u + 1} Λ]).map ((R(s)_![ModuleCat.{u + 1} Λ]).map
+      (c ≫ (R(s)^![ModuleCat.{u + 1} Λ]).map f)) ≫
+      (R(p)_![ModuleCat.{u + 1} Λ]).map
+        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.app _) ≫
+      (rightDerivedUpperShriekAdjunction _ p).counit.app (𝟙_ (DerivedCategoryModule Λ Y)) =
+      (R(p)_![ModuleCat.{u + 1} Λ]).map g ≫ (R(p)_![ModuleCat.{u + 1} Λ]).map f ≫
+      (rightDerivedUpperShriekAdjunction _ p).counit.app (𝟙_ (DerivedCategoryModule Λ Y)) := by
+    rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc]
+  simp only [Functor.comp_map]
+  rw [h₄, reassoc_of% h₃]
+  simp only [g, Functor.map_comp, Category.assoc]
 end Section
 
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k]
@@ -235,3 +267,4 @@ theorem exists_fundamentalClassMap_comp_eq_sectionPurityMap :
 end Etale
 
 end AlgebraicGeometry
+
