@@ -13,14 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Construct continuous cochain terms and differentials explicitly. Continuity of the action follows from open stabilizers; finite sums preserve continuity. The bar differential squares to zero by pairwise cancellation. Postcomposition commutes with the differential. Linearity implies additivity of the resulting functors.",
-   "uses": [],
+   "text": "Apply continuousCochains_shortExact to the split short exact sequence M --id--> M --> 0, separately for each coefficient object M. Its first complex and term equivalences supply the model K(M), e(M,n), and the differential formula; no separate bar-differential cancellation lemma is needed. Define the coefficient map in degree n by conjugating continuous postcomposition with e(M,n) and e(N,n). Equivariance, additivity and preservation of finite sums show that these maps commute with the differential. The term equivalences prove the identity and composition laws pointwise.",
+   "uses": [
+    "lem-exc-continuous-cochains-short-exact"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply continuousCochains_shortExact to each short exact coefficient sequence. Its term equivalences give cochain isomorphisms to the constructed complexes, since both differentials have the specified formula. These isomorphisms identify the induced arrows by postcomposition and transfer short exactness. The homology sequence supplies connecting maps and exactness at each position, and homology sequence naturality supplies the connecting-map axiom. In degree zero there are no incoming boundaries, so an injective cochain map induces an injective homology map. These maps and additive homology functors give the asserted delta-functor.",
+   "text": "For the chosen abelian structure, the underlying-module functor preserves zero maps and finite limits by discreteModules_abelian. Hence it is additive by Mathlib Functor.additive_of_preserves_binary_products. Evaluating its map_add identity shows that coefficient addition is pointwise addition of underlying linear maps. Conjugating continuous postcomposition therefore proves additivity of the cochain functor.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary short exact coefficient sequence, use continuousCochains_shortExact again. In each degree n, compose its term equivalences with the inverses of e(M,n) to obtain a short-complex isomorphism from its degree-n sequence to the degree-n sequence of the cochain functor. The postcomposition identities prove both commutative squares pointwise. Transfer short exactness along this isomorphism and apply the degreewise criterion for short exactness of complexes. The two zero-morphism instances on the coefficient category are identified by uniqueness of zero morphisms.",
    "uses": [
     "lem-exc-continuous-cochains-short-exact",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take homology degree by degree. The homology functors are additive, and the homology long exact sequence supplies the connecting maps and its three exactness positions. Degree zero has no incoming differential, so Mathlib HomologicalComplex.mono_homologyMap_of_mono_of_not_rel gives the initial monomorphism from the degree-zero mono. Apply connecting-map naturality to the image under the cochain functor of every short-complex morphism. These are precisely all fields of CohomologicalDeltaFunctor.",
+   "uses": [
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
     "def-weil-pbc-delta-functor"
@@ -30,6 +46,8 @@
  ],
  "proof_deps": [
   "lem-exc-continuous-cochains-short-exact",
+  "lem-exc-discrete-modules-abelian",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality",
   "def-weil-pbc-delta-functor"
@@ -37,7 +55,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, displayed differential and the paragraph asserting a cohomological delta-functor"
+  "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed differential and the paragraph beginning However, a short exact sequence of discrete G-modules; Lean proof uses the stated short-exact theorem also for the split identity sequence."
  },
  "mathlib_searches": [
   {
@@ -111,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T085230-L-10693",
-  "kind": "interface",
+  "landing": "20261018T062830-L-662672",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
