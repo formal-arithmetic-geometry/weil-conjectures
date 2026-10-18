@@ -2,7 +2,7 @@
  "id": "lem-trf-surjective-qis-simplicial-group-trivial-kan",
  "kind": "statement",
  "title": "Termwise surjective quasi-isomorphisms of simplicial abelian groups are trivial Kan fibrations",
- "statement": "Let $f:X\\to Y$ be a morphism of simplicial objects in the category of abelian groups [def-weil-pbc-simplicial-object]. For a simplicial abelian group $X$ let $s(X)$ be its associated chain complex, with $s(X)_n=X_n$ for $n\\geq0$, $s(X)_n=0$ for $n<0$, and differential $\\sum_{i=0}^n(-1)^id_i:X_n\\to X_{n-1}$; $f$ induces a morphism of chain complexes $s(f):s(X)\\to s(Y)$ [def-weil-pbc-module-chain-complex-homology]. Assume that $f_n:X_n\\to Y_n$ is surjective for every $n\\geq0$ and that $H_n(s(f))$ is an isomorphism for every $n$. Then the map of underlying simplicial sets [def-weil-pbc-simplicial-set] is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration].",
+ "statement": "Let $f:X\\to Y$ be a morphism of simplicial objects in the category of abelian groups [def-weil-pbc-simplicial-object]. For a simplicial abelian group $X$ let $s(X)$ be its associated chain complex, with $s(X)_n=X_n$ for $n\\geq0$, $s(X)_n=0$ for $n<0$, and differential $\\sum_{i=0}^n(-1)^id_i:X_n\\to X_{n-1}$ for $n>0$, with the differential in degree $0$ equal to the zero map $X_0\\to0$; $f$ induces a morphism of chain complexes $s(f):s(X)\\to s(Y)$ [def-weil-pbc-module-chain-complex-homology]. Assume that $f_n:X_n\\to Y_n$ is surjective for every $n\\geq0$ and that $H_n(s(f))$ is an isomorphism for every $n$. Then the map of underlying simplicial sets [def-weil-pbc-simplicial-set] is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration].",
  "source": {
   "document": "literature/stacks-project/simplicial.tex",
   "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); associated chain complex as in section-complexes, trivial Kan fibration as in Tag definition-trivial-kan."
@@ -13,9 +13,44 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C_X^r=s(X)_{-r}$ and $C_Y^r=s(Y)_{-r}$, with $d_{C_X}^r=d_{s(X),-r}$ and the analogous differential on $C_Y$. These are exactly the nonpositive cochain complexes in [lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting]. Indeed, in degree $-n$ the term is $X_n$ and the differential is the same alternating sum for $n>0$; in degree $0$ and in positive degrees it is zero. The quotient formulas in [def-weil-pbc-module-chain-complex-homology] and [def-weil-abstract-derived-category] give $H^r(C_X)=H_{-r}(s(X))$ and $H^r(C_Y)=H_{-r}(s(Y))$: their kernels and images are literally those of the same two homomorphisms. The induced maps also agree, since both send the class of $x$ to the class of $f_{-r}(x)$. Thus $C_f$ is a quasi-isomorphism by the assumed homology isomorphisms; for $r>0$ both cohomology groups are zero.",
+   "uses": [
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); associated complex in section-complexes, lines 3608–3623. Reuse of the existing DAG statement with cohomological indexing."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting] to the given simplicial abelian groups and the unchanged morphism $f$. Its degreewise surjectivity hypothesis is precisely the hypothesis on $f_n$, and Step 1 verifies its quasi-isomorphism hypothesis. Its statement supplies fillers of every boundary square for the underlying simplicial-set map, including degree $0$. In particular, the empty-boundary square of a vertex $y\\in Y_0$ supplies a vertex over $y$; the remaining squares are exactly those for $n\\geq1$ in [def-weil-pbc-trivial-kan-fibration]. Hence the underlying map is a trivial Kan fibration.",
+   "uses": [
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), statement; Definition 08NL (definition-trivial-kan)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), reused through the existing same-tag DAG theorem; agent-written elementary chain/cochain reindexing, with no new mathematical input."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -23,10 +58,45 @@
    "results": "KanComplex.lean defines KanComplex with horn-filling lemmas (KanComplex.hornFilling l.44, exists_lift_of_kanComplex l.55, KanComplex.iff l.83); no file in AlgebraicTopology/SimplicialSet mentions AddCommGrp; no statement that simplicial groups are Kan or that surjective quasi-isomorphisms of simplicial abelian groups are trivial fibrations.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"trivialFibrations\"",
+   "results": "{\"t\": \"2026-10-18T23:04:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"trivialFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned types. SSet fibration instances only define horn lifting, DoldKan projections concern normalization, and the homology/lifting hits are generic constructions. No returned theorem establishes simplicial boundary lifting from degreewise surjectivity and alternating-complex quasi-isomorphism. Read CategoryWithFibrations.lean:35–105 and DoldKan/NCompGamma.lean:40–76; grep scope AlgebraicTopology/DoldKan."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso|[Ss]urjective|[Tt]rivial[Ff]ib",
+   "results": "{\"t\": \"2026-10-18T23:04:00Z\", \"tool\": \"grep\", \"query\": \"quasiIso|[Ss]urjective|[Tt]rivial[Ff]ib\", \"sub\": \"AlgebraicTopology/DoldKan\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\"], \"digest\": \"64a993caee261a60\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned types. SSet fibration instances only define horn lifting, DoldKan projections concern normalization, and the homology/lifting hits are generic constructions. No returned theorem establishes simplicial boundary lifting from degreewise surjectivity and alternating-complex quasi-isomorphism. Read CategoryWithFibrations.lean:35–105 and DoldKan/NCompGamma.lean:40–76; grep scope AlgebraicTopology/DoldKan."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective morphism of simplicial abelian groups inducing homology isomorphisms lifts simplex boundaries",
+   "results": "{\"t\": \"2026-10-18T23:04:05Z\", \"tool\": \"leansearch\", \"query\": \"A surjective morphism of simplicial abelian groups inducing homology isomorphisms lifts simplex boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.boundary\", \"CategoryTheory.ShortComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"SSet.Subcomplex.lift\", \"HomologicalComplex.liftCycles\", \"CategoryTheory.ShortComplex.LeftHomologyData.liftH\", \"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary_assoc\", \"CategoryTheory.ShortComplex.LeftHomologyData.liftK_π_eq_zero_of_boundary\", \"CategoryTheory.ShortComplex.RightHomologyData.liftH\"], \"digest\": \"d3d89cfe7467a766\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned types. SSet fibration instances only define horn lifting, DoldKan projections concern normalization, and the homology/lifting hits are generic constructions. No returned theorem establishes simplicial boundary lifting from degreewise surjectivity and alternating-complex quasi-isomorphism. Read CategoryWithFibrations.lean:35–105 and DoldKan/NCompGamma.lean:40–76; grep scope AlgebraicTopology/DoldKan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise surjective quasi-isomorphism of simplicial abelian groups is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-18T23:04:05Z\", \"tool\": \"leanfinder\", \"query\": \"A degreewise surjective quasi-isomorphism of simplicial abelian groups is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Truncated.HomotopyCategory.mk_surjective\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\"], \"digest\": \"ac567cdab0e7538d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned types. SSet fibration instances only define horn lifting, DoldKan projections concern normalization, and the homology/lifting hits are generic constructions. No returned theorem establishes simplicial boundary lifting from degreewise surjectivity and alternating-complex quasi-isomorphism. Read CategoryWithFibrations.lean:35–105 and DoldKan/NCompGamma.lean:40–76; grep scope AlgebraicTopology/DoldKan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism of simplicial modules with acyclic kernel has the right lifting property against all simplex boundaries",
+   "results": "{\"t\": \"2026-10-18T23:04:30Z\", \"tool\": \"leanfinder\", \"query\": \"An epimorphism of simplicial modules with acyclic kernel has the right lifting property against all simplex boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Projective.instHasLiftingPropertyOfEpi\", \"SimplicialObject.Splitting.IndexSet.instEpiSimplexCategoryE\", \"SSet.hasDimensionLT_of_epi\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap\", \"CategoryTheory.projective_iff_llp_epimorphisms_zero\", \"AlgebraicTopology.DoldKan.degeneracy_comp_PInfty\"], \"digest\": \"0e8322b0e7a9654c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned types. SSet fibration instances only define horn lifting, DoldKan projections concern normalization, and the homology/lifting hits are generic constructions. No returned theorem establishes simplicial boundary lifting from degreewise surjectivity and alternating-complex quasi-isomorphism. Read CategoryWithFibrations.lean:35–105 and DoldKan/NCompGamma.lean:40–76; grep scope AlgebraicTopology/DoldKan."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "L",
   "item": "lem-trf-cotangent-sheaf-model",
@@ -57,5 +127,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+  "worker": "stage1",
+  "summary": "Reused the pre-existing same-tag boundary-lifting node, rather than creating a duplicate. Wrote the exact chain-to-cochain reindexing and checked every hypothesis and the vertex clause. Clarified that the alternating-face formula applies only in positive chain degrees and that the degree-zero differential is zero. No new nodes, no Lean attachment, no route change.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic input to lem-trf-cotangent-sheaf-model, Step 2: a polynomial resolution is a trivial Kan fibration on underlying simplicial sets (Stacks 08P1, used in 08PU). Reuse of the pre-existing Stacks 08P1 node, after checking the two indexing conventions."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-80830a400",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-80830a400 (reviewer sub-agent of L); spot-checked: I read the item, every cited node and Stacks simplicial.tex at 0194 (l.3605-3640), 08NL (l.5514-5546) and 08P1 (l.5837-5881); tag mappings checked. No new nodes. (1) Statement: the only change is a typing fix. Base applied the alternating sum at n=0, which needs a face X_0->X_{-1}; the delivery sets d_0:X_0->0, as in 0194 (U_0->0), and names the change in the report. Nothing is weakened. (2) Step 1 is elementary and correct: C^r=s(X)_{-r}, d^r=d_{-r}, so H^r(C)=ker d_{-r}/im d_{-r+1}=H_{-r}(s(X)). This matches the twin's s(X)^{-n}=X_n with zero positive terms; checked at r=0 and r>0. (3) Step 2 uses the statement of lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting (termwise surjective plus quasi-isomorphism gives fillers for all n>=0), which covers 08NL including the n=0 vertex clause. Small cases checked: identity, zero groups, constant simplicial groups. (4) Duplicate: item and twin are both Stacks 08P1, created the same day (2026-10-18) by Q30 and Q13. Citing an existing restatement is what brief-stage1 prescribes. This is not D1, since no new node was created. There is no cycle (the twin has no proof_deps and does not reach the item), both are in unit sk-i-curve-zero, and the 08P1 proof remains queued on the twin. Maintainer note: merge the two per stages/1-dag.md §2 and split the twin via kernel reduction, lemma-simplicial-group-kan and lemma-quasi-isomorphism. (5) Route pivot: def-weil-pbc-trivial-kan-fibration is an inherited stmt_dep. It is the classical Stacks 08NL boundary-lifting notion (Mathlib I.rlp), used in the classical cotangent-complex branch (08PU) and by the non-dropped parent and twin, and it is used at a named step (Step 2). It is not infinity/model machinery, so I accept it and suggest the maintainer remove it from the dropped list. The 'quillen' hits are only Mathlib search results (SSet.modelCategoryQuillen); 'simplicial set' is the classical notion from def-weil-pbc-simplicial-set. No SGA, no tool_uses, Mathlib searches recorded, no fixes."
  }
 }
