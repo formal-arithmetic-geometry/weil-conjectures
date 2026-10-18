@@ -37,7 +37,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The derived pushforward on bounded constructible complexes is additive. -/
-instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
+instance additive_boundedConstructibleLowerStar [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
     (boundedConstructibleLowerStar Λ ℓ f).Additive := by
   unfold boundedConstructibleLowerStar
   infer_instance
@@ -50,14 +50,15 @@ instance additive_boundedConstructibleOpenImmersionLowerShriek (j : X ⟶ Y)
   infer_instance
 
 /-- The lower shriek `Rf_!^c` attached to a compactification is additive. -/
-instance additive_boundedConstructibleLowerShriekOfCompactification {f : X ⟶ Y}
+instance additive_boundedConstructibleLowerShriekOfCompactification
+    [IsFinitenessCoefficient ℓ Λ] {f : X ⟶ Y}
     (c : Compactification f.left) :
     (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).Additive := by
   unfold boundedConstructibleLowerShriekOfCompactification
   infer_instance
 
 /-- The derived lower shriek on bounded constructible complexes is additive. -/
-instance additive_boundedConstructibleLowerShriek (f : X ⟶ Y) :
+instance additive_boundedConstructibleLowerShriek [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
     (boundedConstructibleLowerShriek Λ ℓ f).Additive := by
   unfold boundedConstructibleLowerShriek
   infer_instance
