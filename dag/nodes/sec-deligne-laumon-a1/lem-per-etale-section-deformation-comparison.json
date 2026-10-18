@@ -22,9 +22,145 @@
   "lem-pur-noetherian-etale-section-specialization",
   "lem-amb-etale-adjoint-locality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=\\mathbf A^1_S$, $a:T\\to S$, $D=\\operatorname{Def}_s(V)$, $C=s^*\\omega_g$ and $F=\\widetilde s^*\\omega_{\\widetilde g}$. The section-specialization theorem supplies the actual smooth deformation, the fibre identifications $\\theta_1:i_1^*F\\simeq C$, $\\theta_0:i_0^*F\\simeq C_N:=z^*\\omega_\\pi$, and the uniquely normalized $\\kappa:F\\simeq a^*C$. In these notations $\\delta=\\theta_0(i_0^*\\kappa)^{-1}$. Keep the fibre identifications in the formulas, rather than suppressing them. Also put $Q:\\mathbf A^d_T\\to T$, $r:\\mathbf A^d_T\\to\\mathbf A^d_S$, $o:S\\to\\mathbf A^d_S$, $o_T:T\\to\\mathbf A^d_T$, and $C_q=o^*\\omega_q$. The square $(Q,r,a,q)$ is Cartesian. Both affine projections are smooth of pure dimension $d$.",
+   "uses": [
+    "lem-pur-noetherian-etale-section-specialization",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Opening paragraph: family and canonical fibre identifications; Local construction: affine-space family"
+   }
+  },
+  {
+   "text": "Write $D_U=D\\times_VU$. On affine opens $\\operatorname{Spec}B\\subset U$ mapping into $\\mathbf A^d_{\\operatorname{Spec}R}$ put $P=R[x_1,\\ldots,x_d]$, $J=(x_1,\\ldots,x_d)$ and $I=JB$. The equality $I=JB$ is precisely the scheme-theoretic centre hypothesis. Since $e$ is etale it is flat; the affine flatness criterion says $B$ is a flat $P$-module. Tensoring $J^m\\hookrightarrow P$ with $B$ identifies $B\\otimes_PJ^m$ with $I^m$. The Laurent pieces of $P[t,J/t]$ are $Pt^k$ for $k\\geq0$ and $J^mt^{-m}$ for $m>0$. Tensoring their inclusions and multiplying coefficients therefore gives the canonical algebra isomorphism\n$$B\\otimes_PP[t,J/t]\\simeq B[t,I/t].$$\nThe monomial correspondence $x^\\alpha t^k\\leftrightarrow u^\\alpha t^{k+|\\alpha|}$, for $k\\geq-|\\alpha|$, identifies $P[t,J/t]$ with $R[t,u_1,\\ldots,u_d]$, with $x_j=tu_j$. All maps are the identity on $B,t$ and send $u_j$ to $e^*x_j/t$, so they agree on overlaps. Thus globally $D_U=U\\times_{\\mathbf A^d_S}\\mathbf A^d_T$, where the second map is $(u,t)\\mapsto tu$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, first paragraph, x_i=t u_i; Stacks 01U5/lemma-flat-characterize and 00HD/lemma-flat"
+   }
+  },
+  {
+   "text": "The second projection $E:D_U\\to\\mathbf A^d_T$ is separated etale of finite type: it is the base change of $e$. It carries $\\widetilde s$ to $o_T$. At $t=1$ the preceding ring map is $x_j\\mapsto u_j$, hence $E_1=e$. At $t=0$ it is $u_j\\mapsto[e^*x_j]\\in I/I^2$. Under the canonical zero-fibre identification fixed in the statement this is exactly $E_0=\\lambda$, not its composite with an arbitrary linear automorphism. Indeed $e^*x_j/t\\bmod t$ goes to the degree-one ideal class, and products give the stated map in every degree. This uses the conormal algebra's specified degree-one map and the normal-fibre identification supplied by the section-specialization theorem. The open $D_U\\subset D$ contains the entire deformed section, since its image in $V$ is $s(S)$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-pur-conormal-graded-algebra",
+    "lem-pur-noetherian-etale-section-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: etale map of pairs; canonical deformed coordinates and the two fibres"
+   }
+  },
+  {
+   "text": "All locality and exchange maps used below are on the whole ordinary unbounded etale derived categories with the same finite constant ring $A$. Here are their geometric hypotheses. The schemes $T,\\mathbf A^d_S,\\mathbf A^d_T$ are Noetherian by finite type over a Noetherian base, and $D$ is Noetherian by the section-specialization theorem. Their open subschemes $U,D_U$ are Noetherian. The inclusions $j:U\\hookrightarrow V$ and $J:D_U\\hookrightarrow D$ are etale; they are separated, and finite type because opens of Noetherian schemes are quasi-compact and an open immersion is locally an isomorphism. The maps $e,E$ are separated finite-type etale by hypothesis and Step 3. The maps $q,Q,\\pi,\\widetilde g,g$ are compactifiable as assumed. For the restrictions $g|_U,\\widetilde g|_{D_U}$, their diagonals are closed by restriction of the original diagonals, and they are finite type by composition. Every Noetherian target is quasi-compact and quasi-separated, so Nagata also provides all auxiliary compactifications, including those of $j,J,e,E,\\lambda$. Thus etale locality applies to every composite below; $\\ell^n A=0$ and $\\ell^n$ is invertible on every scheme concerned, as smooth exceptional base change requires. Restriction by the open etale maps preserves smoothness and pure relative dimension, by smooth relative-dimension permanence.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-noetherian-etale-section-specialization",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: hypotheses for ordinary etale locality and smooth exceptional base change"
+   }
+  },
+  {
+   "text": "We use the following direct instance of the cited coherence statements. Write $L_{f,u}:u^*\\omega_f\\simeq\\omega_{fu}$ for counit-preserving etale locality, and $b_f:v_X^*\\omega_f\\simeq\\omega_{f'}$ for smooth exceptional base change along $v:B'\\to B$. If $u:W\\to X$ is one of the etale maps and $u':W'\\to X'$ its base change, then\n$$b_{fu}\\circ v_W^*L_{f,u}=L_{f',u'}\\circ u'^*b_f.$$\nTo check this identity, use the compact-support composition $Rf_!Ru_!\\simeq R(fu)_!$. The exchange for this composite is, by compatibility with composition, the exchange for $u$ followed by that for $f$. The etale compact-support normalization identifies the first exchange with the sum-extension exchange, including its counit. Take mates of these two equal composites: mate-pasting along adjunctions, followed by change of adjunction by the normalization comparison, gives precisely the displayed equality. Here $L$ and $b$ are the mates specified in the locality and smooth-base-change statements. Likewise two successive changes of base give the composite $b$ by mate-pasting along the horizontal functors; an identity change gives the identity by the identity clause. This is a formal substitution into the cited equalities, with no purity or orientation assertion added.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "prop-asd-smooth-base-change",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and normalization: formal coherence of the canonical maps; Stacks 0E46/remark-compose-base-change and 0E47/remark-compose-base-change-horizontal"
+   }
+  },
+  {
+   "text": "Restrict etale locality for $J:D_U\\hookrightarrow D$ and $E:D_U\\to\\mathbf A^d_T$ to their common section. Since $\\widetilde g|_{D_U}=QE$, this gives\n$$\\widetilde\\chi:F\\xrightarrow{\\sim}o_T^*\\omega_Q,$$\nnamely the section pullback of $L_{Q,E}^{-1}L_{\\widetilde g,J}$. Smooth base change for $q$ along $a$ gives $b_{q,a}:r^*\\omega_q\\simeq\\omega_Q$. Pulling this map to $o_T$ gives\n$$\\eta:a^*C_q\\xrightarrow{\\sim}o_T^*\\omega_Q.$$\nDefine $H=\\eta^{-1}\\widetilde\\chi:F\\xrightarrow{\\sim}a^*C_q$. These are actual adjunction comparisons. Inverse images are exact constant-coefficient inverse images, so their degreewise derived functors preserve these composites and inverses.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "prop-asd-smooth-base-change",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, second paragraph: compare the family and the original section to the same affine-space family"
+   }
+  },
+  {
+   "text": "Apply Step 5 to $J$ and $E$ with the two changes of base $i_r:S\\to T$, $r=0,1$. The fibre maps of $J$ are respectively $j:U\\hookrightarrow V$ and $1_N$, since $U$ contains the whole centre; the fibre maps of $E$ are $e$ and $\\lambda$ by Step 3. For $q$, the composite base change along $a i_r=1_S$ is the identity; hence the fibre comparison for $Q$ cancels $i_r^*\\eta$. The locality square of Step 5, pulled to the sections, now reads explicitly\n$$i_1^*H=\\chi_e\\theta_1,\\qquad i_0^*H=\\chi_\\lambda\\theta_0.$$\nFor example the second equality before cancellation is $b_{Q,i_0}\\,i_0^*\\widetilde\\chi=\\chi_\\lambda\\theta_0$ and $b_{Q,i_0}\\,i_0^*\\eta=1_{C_q}$, where $b_{Q,i_0}$ denotes its pullback to the zero section. At $1$ the same equations have $e,\\theta_1$ in place of $\\lambda,\\theta_0$. Thus both fibre identities compare the specified maps, including their normalization.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-compact-support-normalization",
+    "prop-asd-smooth-base-change",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: fibre at t=1, normal frame at t=0, and normalization"
+   }
+  },
+  {
+   "text": "Set $K=(a^*\\chi_e^{-1})H:F\\xrightarrow{\\sim}a^*C$. Step 7 gives $i_1^*K=\\theta_1$, so uniqueness in the section-specialization theorem gives $K=\\kappa$. At zero it gives\n$$i_0^*\\kappa=\\chi_e^{-1}\\chi_\\lambda\\theta_0.$$\nInvert this equality and use Step 1's formula for $\\delta$ to obtain $\\delta=\\chi_\\lambda^{-1}\\chi_e$, or $\\chi_\\lambda\\delta=\\chi_e$, as asserted. Empty $S$ causes no exception: every map is unique. For $d=0$ there are no coordinate generators, $e^{-1}(0)=U=s(S)$, and all the same formulas reduce to identities. The calculation used flatness over $R[x]$, never reducedness of $R$ or a global isomorphism $U\\simeq\\mathbf A^d_S$.",
+   "uses": [
+    "lem-pur-noetherian-etale-section-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Normalization at t=1 and Gluing uniqueness; restriction to t=0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "prop-asd-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-lem-affine-space-smooth",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction and normalization, with explicit extended-Rees algebra and mate-pasting calculations for the actual comparison maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +196,45 @@
    "results": "Actual logged results: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\"]}",
    "date": "2026-10-18",
    "verdict": "no match: only algebraic etale loci, standard etale rings, manifold zero sections, or scheme stalk specialization maps; none compares ordinary etale dualizing section invariants through deformation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale coordinates of a smooth section preserve the normalized deformation to the normal cone comparison of exceptional pullback",
+   "results": "{\"t\": \"2026-10-18T14:23:55Z\", \"tool\": \"leanfinder\", \"query\": \"Etale coordinates of a smooth section preserve the normalized deformation to the normal cone comparison of exceptional pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"StandardEtalePresentation.hasMap\"], \"digest\": \"67f458d74305c68d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned etale/standard-smooth algebra and scheme specialization statements do not concern normalized exceptional-adjunction deformation comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-18T14:24:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalCone\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned etale/standard-smooth algebra and scheme specialization statements do not concern normalized exceptional-adjunction deformation comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation.*normal|normalCone|dualizingComplex",
+   "results": "{\"t\": \"2026-10-18T14:25:26Z\", \"tool\": \"grep\", \"query\": \"deformation.*normal|normalCone|dualizingComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned etale/standard-smooth algebra and scheme specialization statements do not concern normalized exceptional-adjunction deformation comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized specialization of etale exceptional pullback along a section in deformation to the normal cone is preserved by etale coordinate charts",
+   "results": "{\"t\": \"2026-10-18T14:25:32Z\", \"tool\": \"leansearch\", \"query\": \"Normalized specialization of etale exceptional pullback along a section in deformation to the normal cone is preserved by etale coordinate charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"7c3d0af8d67c0118\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned etale/standard-smooth algebra and scheme specialization statements do not concern normalized exceptional-adjunction deformation comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional adjunction base change and etale locality commute with specialization to the zero fibre of a deformation family",
+   "results": "{\"t\": \"2026-10-18T14:26:20Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional adjunction base change and etale locality commute with specialization to the zero fibre of a deformation family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Flat.generalizingMap\"], \"digest\": \"330e0920ec636787\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned etale/standard-smooth algebra and scheme specialization statements do not concern normalized exceptional-adjunction deformation comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ordinary-smooth-orientation",
@@ -85,5 +256,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-etale-section-deformation-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the deformed etale chart by flat Laurent pieces, tracked its actual normal frame at zero, and proved the two fibre identities by compact-support normalization and mate pasting. A normalized family candidate and uniqueness give the equation. No new nodes or orientation choice.",
+  "blueprint": "Realizes the Local construction x_i=t u_i and normalization at t=1 of current sk-thm-dnc.proof.md, serving the artin-gabber ancestor proof Step 3 via the existing ordinary-smooth-orientation chain.",
+  "tool_uses": [
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic geometry or adjunction tool: def-weil-etale-morphism; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Counit-preserving etale/open locality on whole ordinary unbounded derived categories."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "The composition/base-change coherence of the specified compact-support maps."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Compatibility of etale compact supports with sum extension, its counit and base change."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic geometry or adjunction tool: lem-pod-separated-finite-type-base-change; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic geometry or adjunction tool: lem-pur-conormal-graded-algebra; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-pur-noetherian-etale-section-specialization",
+    "why": "The existing ordinary-etale normalized family comparison and its uniqueness; used without any Tate orientation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-etale-scheme-base-change; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-finite-type-over-noetherian; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-flat-morphism-affine-criterion; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Flat tensor exactness for the Laurent homogeneous pieces of the extended Rees algebra."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-locally-noetherian-quasi-separated; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-mate-pasting; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-noetherian-open-subscheme-noetherian; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic geometry or adjunction tool: lem-weil-pbc-open-immersion-etale; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "The canonical counit-mate exceptional base-change isomorphism, applied to the affine projection and the two fibres."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic geometry or adjunction tool: prop-weil-pbc-inverse-image-modules-exact; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic geometry or adjunction tool: sbc-lem-affine-space-smooth; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic geometry or adjunction tool: thm-nagata-compactification; no node of the Fourier-perversity unit states this auxiliary fact about deformation charts."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic permanence of smooth pure relative dimension on etale/open chart restriction; no Fourier-perversity node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-etale-morphism",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "prop-asd-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-lem-affine-space-smooth",
+  "thm-nagata-compactification",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-ec3cb943d",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-ec3cb943d (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, every cited statement, and the current main-20261015 sk-thm-dnc.proof.md (Local construction, Gluing, restriction to t=0). Shape: one commit, item plus report with a Q41 review, no new nodes. Statement and stmt_deps are byte-identical to the Q06-created node (370232b2); only status, proof, proof_deps, proof_origin, split_report and searches changed. Coefficient category: ordinary unbounded étale D(−,Z/ℓ^n) throughout, the same as locality, smooth base change, compact-support comparisons and étale normalization. χ_e is the counit-preserving (rightAdjointUniq) locality map. Step 2 checked: flatness gives B⊗J^m=I^m; the Laurent pieces give B[t,I/t]; R[t,u]≅P[t,J/t] with x=tu, injective on monomials. Step 3: E is the base change of e, E∘s̃=o_T, E_1=e, E_0=λ under the stated degree-j zero-fibre identification, and J_0=1_N. Step 4: Noetherian, compactifiability (Nagata covers Q and the restrictions) and dimension-permanence hypotheses hold. Step 5: formal mate pasting from α/C compatibility and the C=C^Σ normalization; accepted as elementary. Steps 6–8: b_{Q,i_r}∘i_r^*η=b_{q,1}=1 gives i_r^*H=χθ_r; uniqueness gives K=κ and δ=χ_λ^{-1}χ_e, directions checked. Edge cases: d=0, empty S, scaling e by a unit (formula invariant), and the chart y²−1 near y=1 (ideal-class frame 2[y−1]). No SGA. All 20 tool_uses accepted: generic geometry/adjunction facts plus the section-specialization theorem and smooth base change as black boxes. Overlap with lem-trf-finite-ring-section-deformation was already judged at Q06. Batch-5 flag on lem-asd-etale-compact-support-normalization accepted: the chain ends at lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves ≃ module objects of FLC), generic sheaf algebra outside both assumed statements and their proofs. No changes."
  }
 }
