@@ -16196,3 +16196,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/V2/Sheaf.AlgebraicGeometry.RelativeProjectiveSpace (stage 3; reviewer PASS; first push; landing 20261018T062932-L-686384 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/V3/Sheaf.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic (stage 3; reviewer PASS; first push; landing 20261018T062933-L-686558 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:29 L: merged deliver/V3/Sheaf.CategoryTheory.ConstantCoefficientScalarExtension (stage 3; reviewer PASS; first push; landing 20261018T062933-L-686709 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/V4/Sheaf.AlgebraicGeometry.OpenSectionClopen (stage 3; reviewer PASS; first push; landing 20261018T062934-L-686851 (proof); batch 20261018T062645; modules 1; new nodes 0)

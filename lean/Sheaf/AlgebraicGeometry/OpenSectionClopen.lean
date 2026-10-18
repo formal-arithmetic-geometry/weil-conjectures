@@ -48,6 +48,14 @@ theorem open_section_clopen {V S : Scheme.{u}} (p : V ⟶ S) (s : S ⟶ V)
     IsClopen (Set.range s) ∧
       ∃ W : V.Opens, (W : Set V) = (Set.range s)ᶜ ∧
         Nonempty (IsColimit (BinaryCofan.mk s W.ι)) := by
-  sorry
+  have : IsClosedImmersion (s ≫ p) := hs ▸ inferInstance
+  have : IsClosedImmersion s := IsClosedImmersion.of_comp s p
+  have hcl : IsClopen (Set.range s) :=
+    ⟨s.isClosedEmbedding.isClosed_range, s.isOpenEmbedding.isOpen_range⟩
+  let W : V.Opens := ⟨(Set.range s)ᶜ, hcl.isClosed.isOpen_compl⟩
+  refine ⟨hcl, W, rfl, nonempty_isColimit_binaryCofanMk_of_isCompl s W.ι ?_⟩
+  rw [Scheme.Opens.opensRange_ι]
+  simp [isCompl_iff, disjoint_iff, codisjoint_iff, ← SetLike.coe_set_eq,
+    Scheme.Hom.coe_opensRange, W]
 
 end AlgebraicGeometry
