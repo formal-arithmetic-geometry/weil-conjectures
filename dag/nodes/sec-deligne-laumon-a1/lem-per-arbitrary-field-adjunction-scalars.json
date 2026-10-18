@@ -19,9 +19,162 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $k$ is a field it is Noetherian, so the finite-type $k$-schemes $X$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and finite dimensional by [lem-kun-dimension-finite-type]. Since $\\ell$ is invertible in $k$ and $X,Y$ are $k$-schemes, $\\ell$ is invertible on $X$ and on $Y$. These are exactly the scheme hypotheses of [def-weil-pbc-rational-category], [lem-per-continuous-rational-derived-realization] and [prop-weil-pbc-scalar-extension]. The hypotheses of [lem-a1-rational-direct-image-realization] (a field, $\\ell$ invertible in it, a morphism between separated finite-type $k$-schemes in the sense of [def-weil-scheme-morphism-properties]) are those of the item verbatim.",
+   "uses": [
+    "def-weil-scheme-morphism-properties",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-weil-pbc-rational-category",
+    "lem-per-continuous-rational-derived-realization",
+    "prop-weil-pbc-scalar-extension",
+    "lem-a1-rational-direct-image-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2 and Remark 6.8.15; hypotheses checked for finite-type schemes over a field"
+   }
+  },
+  {
+   "text": "For each finite coefficient field $H=E,L$, form the raw integral completed pullback and direct image and then localize, exactly as in [def-weil-pbc-completed-pullback], [def-weil-derived-direct-image], and [def-weil-pbc-rational-category]. The realization [lem-a1-rational-direct-image-realization] identifies these localized functors and their actual units and counits with the ambient derived-module pullback/direct-image adjunction. The continuous realization [lem-per-continuous-rational-derived-realization] identifies the pullback with $H_X\\otimes^L_{f^{-1}H_Y}f^{-1}(-)$ and supplies the coefficient-extension compatibility. The integral pullback and direct-image constructions preserve shifts and triangles by [lem-cbc-completed-pullback-triangles] and [lem-pc-right-derived-functor-triangulated], and localization preserves the exact structures by [prop-weil-pbc-rational-transport].",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-derived-direct-image",
+    "def-weil-pbc-rational-category",
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), and Remark 6.8.15"
+   }
+  },
+  {
+   "text": "In the ambient module categories put $\\widetilde T_W=-\\otimes^L_{E_W}L_W$ and let $V_W$ be restriction of scalars. The derived coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] has unit $\\eta^c_W$ given on K-flat representatives by $x\\mapsto x\\otimes1$. The ringed-topos composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the coefficient-change and scheme morphism, supplies $d:V_Y\\widetilde D_L\\xrightarrow{\\sim}\\widetilde D_EV_X$. Thus the specified ambient $\\widetilde b_K$ is the transpose of the displayed composite through $d^{-1}$, with exactly the normalization in the statement.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2 and Remark 6.8.15; coefficient-adjunction transpose calculation"
+   }
+  },
+  {
+   "text": "Regard the ambient categories as derived categories of ringed topoi: $W=(X_{\\mathrm{proet}},L_X)$, $X_1=(X_{\\mathrm{proet}},E_X)$, $X_2=(Y_{\\mathrm{proet}},L_Y)$ and $Y_0=(Y_{\\mathrm{proet}},E_Y)$, with $f_1=(\\mathrm{id},E_X\\to L_X)$, $g_1=(f,f^{-1}E_Y\\to E_X)$, $f_2=(f,f^{-1}L_Y\\to L_X)$ and $g_2=(\\mathrm{id},E_Y\\to L_Y)$. The two composite structural maps $f^{-1}E_Y\\to L_X$ coincide, since all coefficient maps are induced by the finite quotient maps, the inclusion $\\mathcal O_E\\subset\\mathcal O_L$ and localization [lem-per-continuous-rational-derived-realization]; use the identity commutation $g_1f_1=g_2f_2$. Then $Lg_1^*=\\widetilde P_E$, $Lf_2^*=\\widetilde P_L$, $Lf_1^*=\\widetilde T_X$ and $Lg_2^*=\\widetilde T_Y$, while $Rf_{1*}=V_X$ and $Rg_{2*}=V_Y$ because restriction of scalars is exact. The canonical derived adjunction of $f_1$ (and of $g_2$) is the coefficient adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction]: both are adjunctions $\\widetilde T\\dashv V$ whose unit on a flat-term K-flat complex is the class of $x\\mapsto x\\otimes1$, and an adjunction is determined by its unit. Form the composite adjunctions [def-weil-pbc-composite-adjunction] $P_1=\\widetilde T_X\\widetilde P_E\\dashv V_1=\\widetilde D_EV_X$, with counit $e_{1,Z}=\\varepsilon^c_{X,Z}\\circ\\widetilde T_X(\\widetilde\\varepsilon_{E,V_XZ})$, and $P_2=\\widetilde P_L\\widetilde T_Y\\dashv V_2=V_Y\\widetilde D_L$, with counit $e_2$; the hom bijection of the second is $\\widetilde h_L$ followed by the coefficient bijection on $Y$. In [lem-sfb-ringed-comparison-tensor-adjunction] the comparison $\\theta:P_2\\to P_1$ is, on a flat-term K-flat $E_Y$-complex $C$, the termwise identification $L_X\\otimes_{f^{-1}L_Y}f^{-1}(C\\otimes_{E_Y}L_Y)\\cong L_X\\otimes_{f^{-1}E_Y}f^{-1}C\\cong(E_X\\otimes_{f^{-1}E_Y}f^{-1}C)\\otimes_{E_X}L_X$, so $\\theta=\\widetilde a^{-1}$. Its comparison $c:V_1\\to V_2$, built from the two composition isomorphisms of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], is $d^{-1}$. That lemma gives $e_{2,Z}\\circ P_2(c_Z)=e_{1,Z}\\circ\\theta_{V_1Z}$ for every $Z$. Put $Z=\\widetilde T_XK$. By Step 3, $\\widetilde b_K$ is the coefficient transpose of $c_Z\\circ\\widetilde D_E(\\eta^c_{X,K})$, so $\\widetilde h_L^{-1}(\\widetilde b_K)$ is its $P_2\\dashv V_2$ transpose: $\\widetilde h_L^{-1}(\\widetilde b_K)=e_{2,Z}\\circ P_2(c_Z)\\circ P_2\\widetilde D_E(\\eta^c_{X,K})=e_{1,Z}\\circ\\theta_{V_1Z}\\circ P_2\\widetilde D_E(\\eta^c_{X,K})=e_{1,Z}\\circ P_1\\widetilde D_E(\\eta^c_{X,K})\\circ\\theta_{\\widetilde D_EK}$, the last by naturality of $\\theta$. Naturality of $\\widetilde\\varepsilon_E$ gives $\\widetilde\\varepsilon_{E,V_XZ}\\circ\\widetilde P_E\\widetilde D_E(\\eta^c_{X,K})=\\eta^c_{X,K}\\circ\\widetilde\\varepsilon_{E,K}$, hence $e_{1,Z}\\circ P_1\\widetilde D_E(\\eta^c_{X,K})=\\varepsilon^c_{X,Z}\\circ\\widetilde T_X(\\eta^c_{X,K})\\circ\\widetilde T_X(\\widetilde\\varepsilon_{E,K})=\\widetilde T_X(\\widetilde\\varepsilon_{E,K})$ by the triangle identity of the coefficient adjunction. Therefore $\\widetilde h_L^{-1}(\\widetilde b_K)=\\widetilde T_X(\\widetilde\\varepsilon_{E,K})\\circ\\widetilde a_{\\widetilde D_EK}^{-1}$.",
+   "uses": [
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 (the pullback f^*K = f_naive^*K tensored with the coefficient sheaf, right adjoint f_*); agent-derived conjugate-comparison mate calculation"
+   }
+  },
+  {
+   "text": "By Step 2, $J$ identifies $h_H$ and $\\varepsilon_H$ with the restrictions of $\\widetilde h_H$ and $\\widetilde\\varepsilon_H$ [lem-a1-rational-direct-image-realization]. The finite-extension clause of [lem-per-continuous-rational-derived-realization] identifies $J_LT_{L/E}$ with $\\widetilde T J_E$ and carries the pullback comparison $a$ of [prop-weil-pbc-scalar-extension] to the balanced reassociation $\\widetilde a$, all coefficient comparisons there being induced by the quotient, localization and balanced tensor maps. The finite-extension clause of [lem-a1-rational-direct-image-realization] says that the direct-image realization commutes with the coefficient comparison $b$ of [prop-weil-pbc-scalar-extension]; on the ambient side the canonical coefficient comparison is the transpose $\\widetilde b$ fixed in Step 3. Hence $J$ carries both sides of $h_L^{-1}(b_B)=T_X(\\varepsilon_{E,B})\\circ a_{D_EB}^{-1}$ to the two sides of the ambient identity of Step 4 for $K=J_XB$. Since $J$ is an equivalence onto its image, in particular faithful, the finite-stage identity holds for every $B$.",
+   "uses": [
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2) and Remark 6.8.15"
+   }
+  },
+  {
+   "text": "For $u:P_EA\\to B$, apply the bijection $h_L$ to $T_X(u)\\circ a_A^{-1}$ and substitute the mate identity from Step 5. The defining adjunction identities $h_L(h_L^{-1}(w))=w$ and naturality in the source and target yield\n$h_L(T_X(u)\\circ a_A^{-1})=b_B\\circ T_Y(h_E(u))$.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-a1-rational-direct-image-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; adjunction bijection and mate equation"
+   }
+  },
+  {
+   "text": "For $v:A\\to D_EB$, use the inverse adjunction bijection and the same mate equality. Applying $h_L^{-1}$ to $b_B\\circ T_Y(v)$ gives\n$h_L^{-1}(b_B\\circ T_Y(v))=T_X(h_E^{-1}(v))\\circ a_A^{-1}$,\nby cancellation of $h_L$ with its inverse and naturality of $T_X,T_Y$ and of $a$.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-a1-rational-direct-image-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; inverse adjunction bijection"
+   }
+  },
+  {
+   "text": "Each $D_H$ is $H$-linear: it is the scalar localization $f/\\varpi^n\\mapsto D(f)/\\varpi^n$ of an $\\mathcal O_H$-linear exact functor [prop-weil-pbc-rational-transport]. Hence $h_H(u)=D_H(u)\\circ\\eta_A$ is $H$-linear in $u$, and its inverse, a bijective linear map, is linear too. The shift comparisons for completed pullback and derived direct image are those of [lem-cbc-completed-pullback-triangles] and [lem-pc-right-derived-functor-triangulated], localized by [prop-weil-pbc-rational-transport]. For the ambient ringed-topos adjunctions $\\widetilde P_H\\dashv\\widetilde D_H$, [lem-weil-pbc-derived-adjunction-shift] says that unit and counit commute with the canonical shift comparisons obtained by shifting K-flat and K-injective resolutions. Through the exact realization $J$ and the unit and counit identification of [lem-a1-rational-direct-image-realization], the finite-stage unit and counit commute with the corresponding shift comparisons, so $h_H$ and $h_H^{-1}$ commute with cochain shifts. The scalar shift comparison $\\sigma$ commutes with the associators by [prop-weil-pbc-scalar-extension]. Since the displayed equations hold for all objects, also for shifted ones, they commute with these shift comparisons.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-a1-rational-direct-image-realization",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; shift and linearity compatibility"
+   }
+  },
+  {
+   "text": "For the identity extension $T_{E/E}=\\mathrm{id}$, [prop-weil-pbc-scalar-extension] makes $a$ and $b$ identities, and every displayed equation reduces to the adjunction identity $h_E(h_E^{-1}(w))=w$. For $E\\subset L\\subset L'$, the same node identifies the direct comparisons $a_{L'/E}$, $b_{L'/E}$ with the two-step composites $(a_{L'/L}T_{L/E})\\circ(T_{L'/L}a_{L/E})$ and $(b_{L'/L}T_{L/E})\\circ(T_{L'/L}b_{L/E})$, conjugated by the associators $a_{L',L,E}$. Apply the forward equation of Step 6 for $L/E$, then for $L'/L$ with $u$ replaced by $T(u)\\circ a^{-1}$; by naturality of the associators and of $a$ the composite is the forward equation for $L'/E$ after the associator identifications. The composite-mate normalization is the pasting of [lem-weil-pbc-mate-pasting], clause (1). The inverse equation and the counit normalization follow in the same way from Step 7 and Step 5; the pentagon of [prop-weil-pbc-scalar-extension] makes the result independent of the parenthesization of longer towers. On the ambient side the same holds since [lem-a1-rational-direct-image-realization] and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] preserve these associators. This proves every clause, including the ambient and the raw, non-Karoubi finite-stage formulation.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-mate-pasting",
+    "lem-a1-rational-direct-image-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2) and Remark 6.8.15; identity and tower compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-rational-category",
+  "def-weil-scheme-morphism-properties",
+  "lem-a1-rational-direct-image-realization",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit ambient tensor--Hom mate calculation and restriction to raw rationalized stages"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +213,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-qbar-ordinary-adjunction",
@@ -79,5 +232,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-arbitrary-field-adjunction-scalars",
+  "worker": "stage1",
+  "summary": "Split the arbitrary-field scalar-adjunction compatibility into hypothesis verification, finite-stage realization, ambient coefficient-adjunction normalization, the tensor mate calculation, restriction through the continuous realization, the two Hom equations, linearity and shifts, and identity/tower coherence. The imported statement and its hypotheses are unchanged; no new nodes were needed because every non-elementary ingredient is already stated by the cited realization, coefficient-adjunction, scalar-extension, and derived-functor nodes.",
+  "blueprint": "The item has no direct blueprint node (blueprint.is is null). The route follows the ancestor lem-per-artin-gabber-affine-curve's ordinary-adjunction compatibility requirement, with the Bhatt--Scholze Lemma 6.7.2/Proposition 6.8.14/Remark 6.8.15 places supplying the arbitrary-field realization and the agent-derived scalar-mate calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of finite-type schemes over the field."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite-dimensionality needed by the finite-stage categories."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Shift and distinguished-triangle compatibility of completed pullback."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Shift and triangle compatibility of derived direct image."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Exact scalar localization of the integral operations."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Ambient coefficient extension/restriction adjunction and normalized unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Ambient composition comparison used to define the normalized direct-image comparison."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Specified scalar-extension functors, associators, shift comparisons and the pullback/direct-image coefficient comparisons a,b; the item is about these comparisons and no node of the unit states them."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Conjugacy of the pullback and direct-image composition comparisons for two factorizations of one ringed-topos morphism (Step 4); a generic ringed-topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Unit and counit of the ambient derived pullback/direct-image adjunction commute with shifts (Step 8); generic ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-derived-adjunction-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-e8256531e",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e8256531e (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 9 steps, every cited statement, the F̄_q analogue lem-pur-ordinary-adjunction-scalar-compatibility, unit sk-p-dl-a1-perverse, and Bhatt–Scholze Lemma 6.7.2, Prop. 6.8.14 and Rem. 6.8.15. No SGA is cited. The statement is true and unchanged. It is the Beck–Chevalley agreement of the two mates: the types check, and the forward and inverse Hom equations follow by naturality of a. It holds in the cases E=L, f=id, X empty, B=0 and ramified E⊂L. No existing node duplicates it, and the delivery adds no new nodes. Main fault (C1/C3/E5): Step 4, which carries the whole content, argued with 'pure tensors' on derived morphisms. It never used d, gave no K-injective control and no normalization of the derived pullback/direct-image counit; and by BS Rem. 6.8.15 the pullback is not exact here. I repaired it with the existing reviewed node lem-sfb-ringed-comparison-tensor-adjunction, which says c is the conjugate of θ for the two factorizations (X,L_X)→(X,E_X)→(Y,E_Y) and (X,L_X)→(Y,L_Y)→(Y,E_Y). Here θ is ã^{-1} and c is d^{-1}, and with def-weil-pbc-composite-adjunction, naturality of ε̃_E and a triangle identity this gives h̃_L^{-1}(b̃) = T̃_X(ε̃_E)∘ã^{-1}. Step 8 (C1): shift compatibility of the bijections now cites lem-weil-pbc-derived-adjunction-shift, and the linearity argument is written out. Step 5 now names the finite-extension clauses of lem-per-continuous and lem-a1 and uses faithfulness of J. Step 1 drops the uncited quasi-excellence claim and checks the hypotheses of the cited nodes. Step 9 writes out the identity and tower cases with lem-weil-pbc-mate-pasting (1). Step 7 has a TeX typo fixed. The off-unit prop-weil-pbc-scalar-extension was used but not declared; I declared it together with the two new tool citations, all accepted, and the 7 tool uses the delivery declared are accepted too. proof_deps now equals the union of uses, and there is no cycle. The corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-arbitrary-field-adjunction-scalars.json.; 1 file(s) fixed by the reviewer"
  }
 }
