@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.Sites.TorsorPullback
 import WeilConjectures.CategoryTheory.Sites.EtaleInverseImageLiftingTorsor
 import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductExists
 
@@ -29,6 +30,9 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace CategoryTheory.Sheaf.Torsor
 
+set_option maxHeartbeats 600000 in
+-- The naturality of the pullback comparison `σ` identifies sections of the pushforward of the
+-- sheaf inverse image with those of `Scheme.etaleSetPullback`, which unfolds both constructions.
 /-- The canonical torsor class is compatible with scheme pullback and change of coefficients.
 The inverse-image torsor is identified with the sheafified set inverse image, with its action
 specified by equivariance on the sections pulled back by the adjunction units. The contracted
@@ -96,19 +100,26 @@ theorem etale_torsor_h1_functoriality :
     let T' := lifts terminalIsTerminal hY s'
     obtain ⟨eT, heT⟩ := etale_inverse_image_lifting_torsor X Y f S hS s T hs
     refine ⟨T', eT, heT, ?_⟩
-    rw [_root_.Quotient.sound hs, classH1_lifts, classH1_lifts]
-    rw [H.δ_apply, H.δ_apply, Etale.cohomologyMap_apply,
-      Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_extClass]
-    have hz := Etale.cohomologyMap_zero_eq_globalSectionsUpperStarMap f S.X₃ g
-    have hg : (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
-        terminalIsTerminal).hom.app S.X₃ g = s := by
-      exact ConcreteCategory.congr_hom
-        ((Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
-          terminalIsTerminal).inv_hom_id_app S.X₃) s
-    rw [hg, Etale.cohomologyMap_apply] at hz
-    change _ = ((H.equiv₀ (U.obj S.X₃) terminalIsTerminal).symm s').comp hY.extClass _
-    rw [← hz]
-    exact (Abelian.Ext.comp_assoc _ _ _ (zero_add 0) (zero_add 1) (by omega)).symm
+    let ε := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
+      (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit.app T.sheaf
+    let σ : ∀ W : X.Etaleᵒᵖ, T.sheaf.obj.obj W →
+        T'.sheaf.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop)) :=
+      fun W x ↦ eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop))
+        (ε.hom.app W x)
+    have hσ : ∀ ⦃W V : X.Etaleᵒᵖ⦄ (h : W ⟶ V) (x : T.sheaf.obj.obj W),
+        T'.sheaf.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (σ W x) =
+          σ V (T.sheaf.obj.map h x) := fun W V h x ↦
+      ((NatTrans.naturality_apply eT.hom.hom _ _).symm.trans
+        (congrArg _ (NatTrans.naturality_apply ε.hom h x).symm))
+    have key := Etale.classH1_eq_map_cohomologyMap_of_equivariant f
+      ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G) T T' σ hσ
+      (fun W a x ↦ heT W.unop a x)
+    rw [Adjunction.homEquiv_counit] at key
+    simp only [Functor.id_obj, Adjunction.left_triangle_components, H.map_id_apply] at key
+    rw [classH1_congr (Scheme.isTerminalEtale X) terminalIsTerminal,
+      classH1_congr (Scheme.isTerminalEtale Y) terminalIsTerminal]
+    exact key.symm
   · intro S G G' φ T
     obtain ⟨T', ⟨q⟩⟩ := etale_contracted_product_exists S φ T
     refine ⟨T', ⟨q⟩, ?_⟩
