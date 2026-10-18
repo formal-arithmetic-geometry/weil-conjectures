@@ -35,4 +35,13 @@ theorem IsSpectralMap.continuous_constructibleTopology
     {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y]
     [SpectralSpace X] [SpectralSpace Y] {f : X → Y} (hf : IsSpectralMap f) :
     @Continuous X Y (constructibleTopology X) (constructibleTopology Y) f := by
-  sorry
+  rw [continuous_generateFrom_iff]
+  intro s hs
+  rcases hs with hs | hs
+  · exact IsCompact.isOpen_constructibleTopology_of_isOpen
+      (hf.isCompact_preimage_of_isOpen hs.1 hs.2)
+      (hf.continuous.isOpen_preimage s hs.1)
+  · apply IsCompact.isOpen_constructibleTopology_of_isClosed
+    · rw [← Set.preimage_compl]
+      exact hf.isCompact_preimage_of_isOpen hs.1.isOpen_compl hs.2
+    · exact hs.1.preimage hf.continuous
