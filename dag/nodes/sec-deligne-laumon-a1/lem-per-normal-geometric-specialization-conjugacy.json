@@ -15,9 +15,101 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$, $K=\\operatorname{Frac}A$, and $\\bar\\eta=\\operatorname{Spec}\\Omega$, $\\bar s=\\operatorname{Spec}\\Xi$. Let $K^s\\subset\\Omega$ and $k^s\\subset\\Xi$ be the separable algebraic closures of $K$ and $k=\\kappa(s)$ inside the chosen algebraic closures, as in [def-weil-pbc-relative-separable-closure]. Put $B=A^{sh}_{\\bar s}$. By [lem-weil-pbc-etale-local-ring-triples](3) (with $U=S$), the colimit defining $B$ in [def-weil-pbc-strict-henselization-limit] is canonically the triples colimit of [lem-weil-pbc-strict-henselization-triples] for $\\mathfrak p=\\mathfrak m_A$ and $k^s$, so $B$ is a local filtered colimit of etale $A$-algebras, is strictly henselian, and has residue field $k^s$; the residue identification with $k^s\\subset\\Xi$ is [lem-weil-pbc-strict-henselization-functoriality](1). The same two results at the zero prime, with $\\kappa(\\bar\\eta)=K^s$, identify $S_{(\\bar\\eta)}$ with $\\operatorname{Spec}K^s$ over $S$: its maximal ideal is $\\mathfrak pC=0$, and its residue map is an isomorphism to $K^s$. Normality of $A$ and [lem-weil-pbc-etale-colimit-normal-local-domain](a),(b) show that $B$ is a domain and $A\\to B$ is injective.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06DI, lemma-henselization-normal; Algebra Tags 04GW/04GP, strict henselization by triples; etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring), translation of affine pointed etale neighbourhoods into triples"
+   }
+  },
+  {
+   "text": "Let $C=(A\\setminus\\{0\\})^{-1}B=B\\otimes_AK$, a nonzero domain. By [lem-weil-pbc-ind-etale-stability], the presentation in Step 1 makes $C/K$ ind-etale and hence weakly etale. By [lem-weil-pbc-weak-etale-field], every finitely generated $K$-subalgebra $D\\subset C$ is finite etale. By [lem-weil-pbc-etale-algebra-over-field-product], $D$ is a finite product of finite separable fields. Since $D$ is a nonzero subring of the domain $C$, it has no nontrivial idempotent, so this product has exactly one factor. In particular, every nonzero $c\\in C$ has its inverse in the field $K[c]\\subset C$. Thus $C$ is a field, necessarily $F=\\operatorname{Frac}B$. The residue-field clause of [lem-weil-pbc-weak-etale-field] at the zero prime says $F/K$ is separable algebraic. Consequently every $A$-map $B\\to K^s$ extends uniquely to a $K$-embedding $F\\to K^s$, since it first factors through $C$, which is a field; conversely any such embedding restricts to an $A$-map. This describes exactly the specialization maps of the statement, by contravariance of affine spectra.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q, lemma-absolutely-flat-over-field, and Algebra Tag 00U3, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "An embedding $F\\to K^s$ exists. Indeed, by [lem-pc-algebraic-closure-exists-unique](1) choose an algebraic closure $L/F$. It is also an algebraic closure of $K$. Here is the algebraicity check: for $z\\in L$, the finitely many coefficients of a monic equation for $z$ over $F$ lie in a finite extension $K_0/K$ (adjoin these finitely many algebraic elements). If the equation has degree $m$, the $K_0$-span of $1,z,\\ldots,z^{m-1}$ is closed under multiplication by $z$. Using a finite $K$-basis of $K_0$, its finite $K$-dimension yields a nonzero polynomial over $K$ vanishing at $z$. Thus $L/K$ is algebraic, and $L$ is algebraically closed by construction. Apply [lem-pc-algebraic-closure-exists-unique](2) over $K$ to obtain $L\\simeq\\Omega$. The image of $F$ lies in $K^s$, because $F/K$ is separable algebraic and [def-weil-pbc-relative-separable-closure] describes $K^s$ as precisely those separable algebraic elements of $\\Omega$. Restricting this embedding to $B$ and taking spectra gives the required specialization.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GT/09GV, theorem-existence-algebraic-closure and lemma-algebraic-closures-isomorphic; elementary finite-coefficient algebraicity argument supplied here"
+   }
+  },
+  {
+   "text": "Let $t,t'$ correspond to embeddings $i,i':F\\to K^s\\subset\\Omega$ as in Step 2. View $\\Omega$ as an $F$-extension separately through $i$ and through $i'$. In either case it is an algebraic closure of $F$: it is algebraically closed, and a polynomial over $K$ for an element of $\\Omega$ remains a polynomial over the embedded copy of $F$. By [lem-pc-algebraic-closure-exists-unique](2), now over $F$, there is a field isomorphism $a:\\Omega\\to\\Omega$ satisfying $a\\circ i=i'$. Both embeddings fix $K$, so $a$ fixes $K$. It preserves $K^s$ by its defining separability property [def-weil-pbc-relative-separable-closure]. Let $\\sigma$ be the corresponding automorphism of $\\bar\\eta$ (and use its induced automorphism of $\\operatorname{Spec}K^s$). On rings $(t\\circ\\sigma)^\\#=a\\circ i|_B=i'|_B=(t')^\\#$; hence $t'=t\\circ\\sigma$. This proves transitivity without assuming the intermediate extension $F/K$ is normal.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.5.8, printed p. 277: the conjugating generic geometric isomorphism; its field argument is supplied using Stacks 09GV"
+   }
+  },
+  {
+   "text": "For an $s$-automorphism $\\tau$ of $\\bar s$, its field map $\\tau^\\#:\\Xi\\to\\Xi$ preserves $k^s$ [def-weil-pbc-relative-separable-closure]. Apply [lem-weil-pbc-map-into-henselian-colimit] with base ring $A$, source algebra $B$, target henselian local ring $B$, prime $\\mathfrak m_B$, and residue map $\\tau^\\#|_{k^s}$. All hypotheses hold by Step 1. It gives a unique local $A$-map $h:B\\to B$ inducing that residue map. Applying the same result to $\\tau^{-1}$ and then its uniqueness to the two composites proves $h$ is an automorphism. This is the induced action of $\\tau$ on the strict localization: on every pointed etale neighbourhood its map is uniquely determined by the prescribed residue embedding, by the same uniqueness assertion. The composite $\\tau\\circ t$ therefore has ring map $t^\\#\\circ h$, so is again a specialization to $\\bar s$. Applying Step 4 to $t$ and this specialization gives $\\sigma$ with $\\tau\\circ t=t\\circ\\sigma$, as required.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR, lemma-map-into-henselian-colimit; application to the strict henselization with its fixed residue embedding"
+   }
+  },
+  {
+   "text": "Finally let the two chosen generic geometric points be $\\operatorname{Spec}\\Omega_1$ and $\\operatorname{Spec}\\Omega_2$, where each $\\Omega_j$ is an algebraic closure of $K$. Given specializations $t_j$, Step 2 gives embeddings $i_j:F\\to\\Omega_j$ whose images lie in the respective separable closures. Each $\\Omega_j$, regarded through $i_j$, is an algebraic closure of $F$ by the polynomial argument of Step 4. By [lem-pc-algebraic-closure-exists-unique](2) over $F$, choose $a:\\Omega_1\\xrightarrow{\\sim}\\Omega_2$ with $a i_1=i_2$. It fixes the common $K$ and identifies the separable closures by [def-weil-pbc-relative-separable-closure]. Thus its spectrum $\\sigma:\\bar\\eta_2\\to\\bar\\eta_1$ satisfies $t_2=t_1\\circ\\sigma$. Applying this also with $t_2$ replaced by $\\tau\\circ t_2$ proves the closed-automorphism compatibility for different choices. Existence for each choice was already proved in Step 3.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GV, lemma-algebraic-closures-isomorphic, applied to the field F with its two specified embeddings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII Lemma 3.5.8 and Proposition 3.6.1, printed pp. 277–278: explicit algebraic proof of the geometric conjugacy used there, with Stacks 06DI, 04GW, 092Q, 09GT, 09GV and 08HR"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -46,10 +138,45 @@
    "results": "Read 8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; no theorem about excellence of complete local rings or Galois conjugacy of geometric specialization maps.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric specializations from a geometric generic point to a geometric closed point of a normal henselian local scheme are conjugate by generic Galois automorphisms",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst.  No match for the normal strict-local scheme specialization-conjugacy statement; field embeddings and stalk specialization alone do not supply all clauses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"specialization\", \"Galois\"",
+   "results": "Read 0 hits: .  No match for the normal strict-local scheme specialization-conjugacy statement; field embeddings and stalk specialization alone do not supply all clauses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "speciali[sz].*(Galois|conjug)|Galois.*speciali[sz]",
+   "results": "Read 0 hits: .  No match for the normal strict-local scheme specialization-conjugacy statement; field embeddings and stalk specialization alone do not supply all clauses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic geometric specialization maps into the strict henselization of a normal local ring are conjugate",
+   "results": "Read 8 hits: AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply, AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, PrimeSpectrum.localizationMapOfSpecializes, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk.  No match for the normal strict-local scheme specialization-conjugacy statement; field embeddings and stalk specialization alone do not supply all clauses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two embeddings of an algebraic field extension into an algebraic closure are conjugate under the absolute Galois group",
+   "results": "Read 8 hits: NumberField.ComplexEmbedding.exists_comp_symm_eq_of_comp_eq, NumberField.InfinitePlace.ComplexEmbedding.exists_comp_symm_eq_of_comp_eq, NumberField.ComplexEmbedding.IsConj.ext, NumberField.ComplexEmbedding.IsConj.ext_iff, galLiftEquiv, Normal.algHomEquivAut, Field.absoluteGaloisGroup, NumberField.ComplexEmbedding.IsConj.  No match for the normal strict-local scheme specialization-conjugacy statement; field embeddings and stalk specialization alone do not supply all clauses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-top-residue-class",
@@ -73,5 +200,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-geometric-specialization-conjugacy",
+  "worker": "stage1",
+  "summary": "Statement retained. Six explicit steps identify the generic fibre of the normal strict henselization with a separable algebraic fraction field, construct embeddings into the chosen generic closure, prove transitivity using uniqueness of algebraic closures over that intermediate field, lift the closed residue action by henselian uniqueness, and treat different chosen closures. All support nodes already exist; no new nodes. Algebraic and separable closures are kept distinct, including imperfect residue fields.",
+  "blueprint": "Supports the current ancestor lem-per-artin-gabber-affine-curve Step 1 (dimension-normalized duality and middle t-structure), through the potential-dualizing/top-residue-class descendants recorded in blueprint.from.via; explicitly fills the conjugating-isomorphism argument of ILO XVII 3.5.8 and 3.6.1 used by lem-per-normal-top-residue-class Steps 3 and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Identifies the pointed-etale-neighbourhood colimit of the strict localization with the triples colimit at the closed and at the zero prime (reviewer FIX); a generic geometric-localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The filtered etale ring presentation, residue field and locality of strict henselization; the perverse unit supplies no such ring-theoretic construction."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "The residue-compatible identification of the geometric strict localization with the ring strict henselization; a generic geometric-localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Normality and injectivity of the local ind-etale algebra over a normal domain; a generic commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Ind-etale base change to the fraction field and implication weakly etale; no change to the perverse proof route."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Finite etale subalgebras and separable residue fields over a field, used only to identify the generic strict-local field."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Unique lifting of a specified residue automorphism to the henselian local ind-etale algebra, a generic ring tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-9c845adfe",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-9c845adfe (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, along with each cited statement. I checked them against ILO XVII, printed pp. 277–278 (the two σ diagrams in the proof of 3.5.8 and the Gal-invariance and independence in 3.6.1), and the Stacks places 04GW/04GP, 04HX, 06DI, 092Q, 00U3, 09GT/09GV and 08HR. Shape: one commit, statement verbatim, no new nodes, no SGA, no cycle (the item is not in its own 585-node closure). Fault (C1/C3), fixed: Step 1 used the triples lemma and functoriality(1) to treat B as the triples colimit and to get S_(η̄)=Spec K^s from m=𝔭C=0 at the zero prime. Neither statement identifies the colimit over pointed étale neighbourhoods in def-weil-pbc-strict-henselization-limit with the triples colimit; lem-weil-pbc-etale-local-ring-triples(3) (Stacks 04HX, with U=S) does. I added that citation to the Step 1 text, its uses and source, the proof_deps, and split_report.tool_uses (a generic sk-thm-p1 tool). Steps 2–6 are correct. Step 2: B⊗_A K is ind-étale over K, so weakly étale; its f.g. subalgebras are finite products of separable fields, and since the ring is a domain each has a single factor, so C=Frac B is a field, separable algebraic over K. Step 3: existence via an algebraic closure of F that is algebraic over K. Step 4: uniqueness of the algebraic closure over F gives a with a∘i=i', so (t∘σ)^#=i'|_B; normality of F/K is not needed. Step 5: the 08HR lift with R=A, S=B, q=m_B and residue map τ^#|k^s, unique and invertible. Step 6: two generic closures Ω1, Ω2. Edge cases checked: dimension 0; A strictly henselian (B=A); imperfect K (K^s≠Ω, kept apart); normality is needed (a nodal base fails). Excellence and Noetherianity are kept but not used. Maintainer note: lem-trf-normal-generic-arrow-transitivity states the same transitivity in topos-point language; this split creates neither node. Fixed node: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-normal-geometric-specialization-conjugacy.json.; 1 file(s) fixed by the reviewer"
  }
 }
