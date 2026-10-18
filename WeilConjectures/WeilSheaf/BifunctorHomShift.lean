@@ -70,6 +70,11 @@ lemma bifunctorHomShiftSign_add (a b p : ℤ) :
   congr 1
   ring
 
+lemma bifunctorHomShiftSign_one (p : ℤ) : bifunctorHomShiftSign 1 p = (p + 1).negOnePow := by
+  rw [bifunctorHomShiftSign]
+  congr 1
+  lia
+
 @[simp]
 lemma bifunctorHomShiftSign_zero (p : ℤ) : bifunctorHomShiftSign 0 p = 1 := by
   simp [bifunctorHomShiftSign]
@@ -247,12 +252,49 @@ noncomputable instance : (bifunctorHomOpFunctor H Y).CommShift ℤ where
     simp only [Functor.CommShift.isoZero_hom_app, bifunctorHomOpFunctorCommShiftIso,
       NatIso.ofComponents_hom_app, Iso.op_hom, Quiver.Hom.unop_op, unop_comp,
       bifunctorHomOpFunctor_map, shiftFunctorZero_op_inv_app, shiftFunctorOpIso_inv_app_zero]
-    trace_state
-    sorry
+    erw [unop_id, id_comp]
+    ext m : 1
+    refine bifunctorHomObj_hom_ext fun p q hpq ↦ ?_
+    simp only [HomologicalComplex.comp_f, assoc, bifunctorHomShiftIso_hom_f_π,
+      bifunctorHomShiftSign_zero, one_smul, bifunctorHomMapLeft_f_π, shiftFunctorZero_hom_app_f]
+    rw [bifunctorHomπ_congr_left (h₂ := by lia)]
+    erw [bifunctorHomObj_XIsoOfEq_hom_π]
+    rfl
   commShiftIso_add a b := by
     ext K
     apply Quiver.Hom.unop_inj
-    trace_state
-    sorry
+    rw [Functor.CommShift.isoAdd_hom_app, ← shiftFunctorAdd'_eq_shiftFunctorAdd,
+      ← shiftFunctorAdd'_eq_shiftFunctorAdd,
+      shiftFunctorAdd'_op_inv_app _ a b (a + b) rfl (-a) (-b) (-(a + b)) (by lia) (by lia) (by lia),
+      shiftFunctor_op_map _ b (-b)]
+    simp only [bifunctorHomOpFunctorCommShiftIso, NatIso.ofComponents_hom_app, Iso.op_hom,
+      unop_comp, Quiver.Hom.unop_op, bifunctorHomOpFunctor_map, shiftFunctorOpIso_inv_app_neg,
+      shiftFunctorOpIso_hom_app_neg, assoc]
+    repeat erw [CategoryTheory.Functor.map_id]
+    repeat erw [unop_id]
+    repeat erw [id_comp]
+    ext m : 1
+    refine bifunctorHomObj_hom_ext fun p q hpq ↦ ?_
+    simp only [HomologicalComplex.comp_f, assoc, bifunctorHomShiftIso_hom_f_π,
+      bifunctorHomMapLeft_f_π, shiftFunctorAdd'_hom_app_f', shiftFunctor_map_f']
+    erw [bifunctorHomShiftIso_hom_f_π_assoc]
+    simp only [Linear.comp_units_smul, Linear.units_smul_comp, assoc]
+    erw [bifunctorHomShiftIso_hom_f_π_assoc]
+    simp only [Linear.comp_units_smul, Linear.units_smul_comp, assoc, smul_smul]
+    rw [bifunctorHomπ_congr_left (h₂ := by lia)]
+    erw [bifunctorHomObj_XIsoOfEq_hom_π]
+    rw [← bifunctorHomShiftSign_add]
+
+@[simp]
+lemma bifunctorHomOpFunctor_commShiftIso_hom_app (n : ℤ) (K : CochainComplex C ℤ) :
+    ((bifunctorHomOpFunctor H Y).commShiftIso n).hom.app K =
+      (bifunctorHomShiftIso H K Y n (-n) (add_neg_cancel n)).hom.op :=
+  rfl
+
+@[simp]
+lemma bifunctorHomOpFunctor_commShiftIso_inv_app (n : ℤ) (K : CochainComplex C ℤ) :
+    ((bifunctorHomOpFunctor H Y).commShiftIso n).inv.app K =
+      (bifunctorHomShiftIso H K Y n (-n) (add_neg_cancel n)).inv.op :=
+  rfl
 
 end CochainComplex
