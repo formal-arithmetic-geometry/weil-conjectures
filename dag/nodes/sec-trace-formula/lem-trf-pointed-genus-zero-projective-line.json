@@ -16,9 +16,212 @@
   "def-pc-degree-line-bundle",
   "def-nagata-projective-space-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The curve convention makes C nonempty, integral, and of finite type over k. Its local-ring dimension is one. The stalk-dimension/generalization-chain formula and sobriety identify the supremum of these dimensions with topological Krull dimension: replace each point in a strict generalization chain by its closure, and conversely use the unique generic points of a chain of irreducible closed subsets. Thus C has topological dimension one. The field k is Noetherian (its only ideals are 0 and k), so finite type implies C is Noetherian. For every n>=0 put L_n=M^{\\otimes n}, with L_0=O_C. These are invertible, hence quasi-coherent of finite type by their rank-one local trivializations, and therefore coherent.",
+   "uses": [
+    "def-pc-curve",
+    "def-pc-dimension",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-weil-pbc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-pbc-ample-invertible-module",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; preliminaries for the cohomological calculation"
+   }
+  },
+  {
+   "text": "Proper coherent cohomology is finite-dimensional, and the dimension-one vanishing theorem gives H^q(C,L_n)=0 for q>1. Consequently chi(O_C)=1 by the two hypotheses on O_C. The degree definition gives chi(M)=deg_k(M)+chi(O_C)=2. Since chi(M)=h^0(M)-h^1(M), h^0(M)>=2. Choose a nonzero section s in H^0(C,M).",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; first paragraph, Euler characteristic and choice of s"
+   }
+  },
+  {
+   "text": "The nonzero-section Cartier lemma says that on every nonempty affine trivialization of M, s=a e with a a nonzero element of a domain. Multiplication by s is therefore injective on every L_n. Define Q_n as its cokernel, obtaining 0 -> L_n -> L_{n+1} -> Q_n -> 0 for n>=0. The local presentation is A --a--> A -> A/(a), with the target trivialized by e^{n+1}. It shows directly that Q_n=Q_0 tensor L_n and that all their supports equal the closed zero set D=Z(s). The coherent-cokernel lemma makes Q_0 coherent. The generic point of the integral C is outside D, since a is nonzero. Every chain of irreducible closed subsets of D can be extended strictly by C; since dim C=1, dim D<=0.",
+   "uses": [
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; exact sequence of s and its finite zero scheme"
+   }
+  },
+  {
+   "text": "Euler additivity in 0 -> O_C -> M -> Q_0 -> 0 gives chi(Q_0)=2-1=1. The zero-dimensional-support theorem gives H^q(C,Q_0)=0 for q>0 and dim_k H^0(C,Q_0)=1. The same theorem, applied with the invertible L_n, says that Q_n is coherent with the same support, chi(Q_n)=chi(Q_0)=1, H^q(C,Q_n)=0 for q>0, and dim_k H^0(C,Q_n)=1. In particular D is nonempty.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; zero-dimensional restriction and Euler characteristic"
+   }
+  },
+  {
+   "text": "A nonzero q in the one-dimensional k-space H^0(C,Q_0) generates Q_0 as an O_C-module, as follows. Apply the finite-support presentation to Q_0 (and N=O_C): Q_0=i_*G for a closed immersion i:Spec A -> C with A finite-dimensional over k, G coherent, and Gamma(G)=H^0(C,Q_0). The A-linear map A -> Gamma(G), 1 |-> q, is onto because its image already contains the k-span of q, the entire space. The affine tilde functor preserves cokernels and its counit on the quasi-coherent G is an isomorphism; thus O_{Spec A} -> G is onto. At points of this closed subscheme O_C -> i_*O_{Spec A} is onto, so q generates i_*G; outside it Q_0=0. This proves the claim using precisely the cited statements, not a global-generation assertion absent from the zero-dimensional Euler theorem.",
+   "uses": [
+    "lem-pc-zero-support-finite-scheme",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; global generation on the Artinian zero scheme"
+   }
+  },
+  {
+   "text": "The long exact sequence of 0 -> O_C -> M -> Q_0 -> 0 and H^1(C,O_C)=0 lift q to a section t of M. At a point of D, write s=a e and t=b e in a local basis. Since q generates Q_0, b mod a generates the local ring O_{C,x}/(a); hence b is a unit (a lies in the maximal ideal). Off D, a is a unit. Thus s,t generate M everywhere, and on D the restriction of t is a basis of M|_D.",
+   "uses": [
+    "pqf-def-cohomology",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; lifting a generator of the restriction to a second section"
+   }
+  },
+  {
+   "text": "Induct on n using the exact sequences of step 3 and their cohomology long exact sequences. Starting from H^1(C,L_0)=0, the vanishings H^1(C,Q_n)=0 imply H^1(C,L_{n+1})=0. They also give short exact sequences 0 -> H^0(C,L_n) --s--> H^0(C,L_{n+1}) -> H^0(C,Q_n) -> 0. Since the last space has dimension one and H^0(C,L_0)=k, dim_k H^0(C,L_n)=n+1 for every n>=0.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; vanishing and dimension calculation for every tensor power"
+   }
+  },
+  {
+   "text": "For each n>=0 the n+1 monomials s^{n-j}t^j, 0<=j<=n, form a basis of H^0(C,L_n). For n=0 this is the given k=H^0(C,O_C). Inductively, the image of t^{n+1} in Q_n is a local basis on D: in the local presentation of step 3 it has unit coefficient b^{n+1} modulo a. Because D is nonempty this section is nonzero, and spans the one-dimensional H^0(C,Q_n). Subtracting an appropriate k-multiple of t^{n+1} from any section of L_{n+1} therefore leaves s times a section of L_n. The induction gives spanning by the stated monomials, and the dimension n+2 from step 7 gives their linear independence. This is an explicit induction using the displayed exact sequences.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; multiplication and generation of the section ring"
+   }
+  },
+  {
+   "text": "Let B=direct_sum_{n>=0} H^0(C,L_n), with the section-ring multiplication. Sending the two degree-one variables S,T to s,t defines a graded k-algebra homomorphism k[S,T] -> B. On degree n it sends the polynomial basis S^{n-j}T^j to the basis of step 8; it is thus bijective in each degree, and therefore an isomorphism of graded rings. In degree zero it is exactly the canonical k -> H^0(C,O_C) from the hypothesis.",
+   "uses": [
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; the degree-one section ring is the polynomial ring"
+   }
+  },
+  {
+   "text": "The positive-degree ampleness criterion applies to this proper integral topological-dimension-one C and gives that M is ample, since deg_k M=1>0. Its structure map f:C -> Spec k is quasi-compact, as it is finite type. The only affine opens of Spec k are itself and the empty open, so M is also f-ample. The canonical-Proj criterion consequently supplies an open immersion r:C -> Proj_{Spec k}(direct_sum f_*L_n). Affine restriction of relative Proj identifies this target with Proj B; the graded isomorphism of step 9 identifies it over k with Proj k[S,T].",
+   "uses": [
+    "lem-trf-proper-integral-curve-ample-degree",
+    "def-pc-curve",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; ampleness and the canonical map to Proj"
+   }
+  },
+  {
+   "text": "The coefficient map k tensor_Z Z[S,T] -> k[S,T], c tensor p |-> c p, is a graded k-algebra isomorphism: in each degree both sides have the same binary monomial basis, and these maps respect multiplication. The affine-Proj scalar-extension theorem for Z -> k now identifies Proj k[S,T] with Spec k times_{Spec Z} Proj Z[S,T], preserving structure maps. By the projective-space definition this is P({0,1};Spec k)=P^1_k. Thus r is a k-morphism and an open immersion into the precise projective line of the conclusion.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; identification with the base-change definition of projective line"
+   }
+  },
+  {
+   "text": "Projective space over k is proper, hence separated. The proper-to-separated theorem applied to the proper C -> Spec k and the k-morphism r:C -> P^1_k makes r proper; a proper morphism is closed. Its image is consequently both open and closed, and is nonempty because C is integral. The two standard charts of P^1_k are Spec k[u] and Spec k[v]. Their intersection is obtained by inverting u and v, with v=u^{-1}, so the zero primes agree there. Each chart is irreducible: in the domain k[u] (respectively k[v]) the zero prime has the whole spectrum as closure. The common zero prime is therefore dense in both charts and in their union. Hence P^1_k is irreducible, so a nonempty open-and-closed subset is all of it. Thus r is a surjective open immersion, which by the definition of open immersion is an isomorphism of schemes over k, as required.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-to-separated",
+    "pqf-lem-proper-closed-map",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-open-immersion",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T (lemma-genus-zero-positive-degree), degree-one specialization; the image in the projective line is the whole line"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-curve",
+  "def-pc-dimension",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-euler-additive",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-zero-support-finite-scheme",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-closed-immersion",
+  "pqf-def-cohomology",
+  "def-sc-invertible-section-ring",
+  "lem-trf-proper-integral-curve-ample-degree",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-to-separated",
+  "pqf-lem-proper-closed-map",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C6T, lemma-genus-zero-positive-degree, specialized to degree one; binary-monomial induction spells out its multiplication argument, and generic ampleness/canonical-Proj results realize its final Proj step."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +264,73 @@
    "results": "8 hits: WeierstrassCurve.Projective, WeierstrassCurve.toProjective, WeierstrassCurve.Projective.toAffine, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.Point.toAffine_of_equiv, WeierstrassCurve.Projective.Point.fromAffine_some, WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply; read the returned Weierstrass projective-model signatures; none classifies a proper genus-zero curve with a degree-one invertible module.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper integral curve over a field with H0 O equal to the field and H1 O zero, an invertible sheaf of positive degree has h0 equal to degree plus one, h1 zero, and gives a closed immersion into projective d-space",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; note: none; digest fb3b760addb084fc. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAmple, Scheme.Hom.projective, Proj, Module.finrank",
+   "results": "0 hits; returned names/files: none; note: loogle: unknown identifier 'AlgebraicGeometry.IsAmple'; digest 4f53cda18c2baa0c. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "very.ample|Riemann.?Roch|degree.*H0|closed.*immersion.*Proj",
+   "results": "3 hits; returned names/files: Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean; note: none; digest 10ae725ffe4b6d70. Searched Mathlib/AlgebraicGeometry. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "positive degree line bundle on proper integral curve with genus zero gives projective embedding",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, WeierstrassCurve.natDegree_preΨ_pos, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, WeierstrassCurve.natDegree_preΨ₄_pos, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.natDegree_Ψ₃_pos, WeierstrassCurve.Projective.Point.instZeroOfNontrivial, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; note: none; digest c1b3aa883bfe6ab9. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral curve over any field whose global regular functions are the field and whose first structure sheaf cohomology vanishes is isomorphic to projective line if it has a line bundle of degree one",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.projIsoSpec, WeierstrassCurve.Projective.nonsingularLift_some, WeierstrassCurve.Projective.NonsingularLift, AlgebraicGeometry.AffineSpace.isoOfIsAffine; note: none; digest 763c14f1b2a33930. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degree one invertible sheaf on a proper integral genus zero curve gives an isomorphism to projective line",
+   "results": "8 hits; returned names/files: Module.Invertible.instProjective, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.stalkIso'_symm_mk, WeierstrassCurve.Projective.Point.instZeroOfNontrivial, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv; note: none; digest 31468b45905d264f. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\"",
+   "results": "0 hits; returned names/files: none; note: none; digest 4f53cda18c2baa0c. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus.*zero|genus.*0|degree.*one.*[Pp]rojective|H1.*[Pp]rojective",
+   "results": "0 hits; returned names/files: none; note: none; digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral proper algebraic curve with arithmetic genus zero and invertible sheaf of degree one is a projective one space over its ground field",
+   "results": "8 hits; returned names/files: WeierstrassCurve.Projective, WeierstrassCurve.toProjective, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.Point, WeierstrassCurve.Projective.toAffine, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.nonsingular_some; note: none; digest 97ded0a00128e608. Read the returned signatures/results: Proj construction and affine-chart tools, Weierstrass models, and invertible-module projectivity do not state this classification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-nodal-polar-section",
@@ -94,5 +360,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-pointed-genus-zero-projective-line",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0C6T over an arbitrary field and the full statements of every cited existing node. Split the degree-one case through the section cokernel, its finite-support generation, all tensor-power cohomology, an explicit binary-monomial basis and graded polynomial-ring identification, and the ample canonical-Proj map. All non-elementary tools already exist; no new nodes, smoothness, geometric integrality or algebraic-closure assumptions are introduced. Mathlib and project searches found no attachment.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch of lem-trf-local-term-locality; Proof of Proposition 4.4.6, printed pp. 32--33, horizontal points, vanishing of H1, cohomology and base change, and the lifted section with exact poles; substep: descent of the geometrically projective-line component to the residue field using a rational smooth point",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Translate the curve convention from local-ring to topological dimension by chains. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Use generic points to compare dimensions and exclude the generic point from a zero divisor. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity needed for coherent-module and cohomological tools. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Rank-one local trivializations give coherent tensor powers on the Noetherian curve. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Finite-dimensional coherent cohomology on a proper curve over the field. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Vanishing above dimension one for the Euler calculation. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "The nonzero section is locally a nonzerodivisor on the integral curve. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Coherence of the section cokernel. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Euler characteristic of the section cokernel. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Vanishing and unchanged Euler characteristic for zero-dimensional support after invertible twists. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-pc-zero-support-finite-scheme",
+    "why": "Represent the section cokernel by a module on a finite affine closed subscheme. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Turn generation of global sections on that affine scheme into generation of its quasi-coherent sheaf. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Affine restriction and invariance of Proj under the explicit graded section-ring isomorphism. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Compare Proj k[S,T] with the specified base-change construction of P1. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Separatedness of the target projective line. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "The constructed k-morphism is proper because its source is proper and its target separated. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "pqf-lem-proper-closed-map",
+    "why": "Closedness of the image of the constructed morphism. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Prove irreducibility of P1 directly from its two affine charts. This is a generic tool, not a replacement of the nearby-cycle unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-euler-additive",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-zero-support-finite-scheme",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-to-separated",
+  "pqf-lem-proper-closed-map",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-cc810a5f0",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-cc810a5f0 (reviewer sub-agent of L); spot-checked: I read all of item lem-trf-pointed-genus-zero-projective-line against Stacks curves.tex Tag 0C6T (lemma-genus-zero-positive-degree, statement and proof) with d=1. Compared with the side DAG, the statement, stmt_deps and blueprint fields are unchanged, and the hypotheses match 0C6T exactly: integral proper curve, k->H^0 an isomorphism, H^1(O)=0, deg M=1. No smoothness or algebraically-closed assumption is added and the conclusion is not weakened. I read the full statements of all 34 cited nodes, plus def-nagata-relative-proj and lem-trf-space-line-module-proj-map. Steps 1-2: the chain lemma and sobriety convert local-ring dimension 1 to topological dimension 1; C is Noetherian; coherent cohomology is finite and H^q=0 for q>=2; chi(O)=1 and chi(M)=2. Step 3: the Cartier lemma gives a nonzero local coefficient a in a domain; D=Z(s) misses the generic point; a chain argument gives dim D<=0. Step 4: Euler additivity and lem-pc-chi-zero-dim-support clause 3 with N=L_n give h^0(Q_n)=1, H^1(Q_n)=0 and D nonempty. Step 5: the finite-support closed immersion, the tilde/Gamma counit and cokernel preservation, and the closed-immersion surjectivity correctly supply global generation, which the DAG's version of 0AYT does not state. Step 6: b mod a generates O_x/(a) and a is in m_x, so b is a unit. Steps 7-8 are a properly set-up induction: H^1(L_n)=0, h^0(L_n)=n+1, and the monomial basis via the nonzero image of t^{n+1} on the nonempty D. Step 9: B is isomorphic to k[S,T] as graded rings. Step 10: lem-trf-proper-integral-curve-ample-degree applies; f-ample over Spec k holds since the empty open is vacuous; the canonical-Proj criterion and relative-Proj restriction plus graded invariance give an open immersion into Proj k[S,T]. Step 11: the affine-Proj scalar extension for Z->k needs no flatness and gives P({0,1};Spec k). Step 12: r is proper, hence its image is closed and open and nonempty; P^1 is irreducible from the two charts with overlap D(u), v=u^{-1}; so r is an isomorphism over k. Small cases checked: P^1 with O(1); conics with and without a degree-1 bundle; characteristic 2 and imperfect fields; empty D excluded. No new nodes. Duplicate check: lem-trf-genus-zero-smooth-proper-line (algebraically closed, smooth) is strictly narrower and lem-asd-projective-line-genus-zero is the converse; nothing else matches. The parent lem-trf-valuation-nodal-polar-section, step 2, uses exactly this statement. I accept all 20 declared generic off-unit tool_uses. No SGA is cited. No fixes were written."
  }
 }
