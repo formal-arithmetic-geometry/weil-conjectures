@@ -8766,6 +8766,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationLowerStarBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
