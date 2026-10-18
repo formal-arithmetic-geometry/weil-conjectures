@@ -25,7 +25,13 @@
   "lem-asd-etale-finite-twist-pullback",
   "thm-pur-diagonal-dualizing-object",
   "det-sp-reduction-exceptional",
-  "thm-amb-vector-bundle-purity"
+  "thm-amb-vector-bundle-purity",
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-finite-ring-section-data"
  ],
  "proof": [
   {
@@ -239,5 +245,43 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.FiniteGeneralRing",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteGeneralRingSmoothPurity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingPrimeSetting",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingRingFinite",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalarUnitIso",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalar",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalarIso",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingUnit",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingDualizingUnitMap",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingReduction",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingLevelPower",
+   "AlgebraicGeometry.ProEtale.FiniteGeneralRingKummerComparison",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingCoefficientMap",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingOrientationExtension",
+   "AlgebraicGeometry.ProEtale.FiniteGeneralRingAt",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingSmoothPurity",
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingLevelGamma",
+   "AlgebraicGeometry.ProEtale.FiniteGeneralRingTensorFormula",
+   "AlgebraicGeometry.ProEtale.FiniteGeneralRingLevelIndependence"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/FiniteGeneralRing.lean",
+  "statement": "theorem finiteGeneralRingSmoothPurity (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] (d : ℕ) [SmoothOfRelativeDimension d f] (n : ℕ) (hn : 1 ≤ n) (A : Type u) [CommRing A] [Finite A] (hA : ((ell ^ n : ℕ) : A) = 0) : ∃ (hX : IsNoetherian X) (hY : IsNoetherian Y) (hqc : QuasiCompact f), ∃ hc : HasCompactification f, FiniteGeneralRingAt (finiteGeneralRingPrimeSetting D ell hEll n hn) A hA d f (Y ↘ Spec (.of D.k)) hX hY hqc hc",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of immutable returned head 1e59820e921c: actual transported exceptional inverse image at the same coefficient-independent compactification; its value on the coefficient unit; actual intrinsic scalarExtensionFunctor and normalized realization; the counit-transpose reduction comparison; scalar extension of diagonalDualizingObject at the bottom Q_ell subextension and level n; the direct diagonal/Rees/vector-integration normalization; the published inverse-projection-formula/counit purity map; Kummer-generator-normalized common-level comparisons and equality of the entire purity maps. No functor or natural transformation is existentially unconstrained. H2 return on 504629d2a2c8: Geometry is cited through its existing definition owner def-pur-finite-ring-section-data; the section-deformation theorem remains a proof prerequisite."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-705a36521",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN on 504629d2a2c8. Lean module byte-identical (sha256 fb4591d5); item stmt_deps now replace theorem node lem-trf-finite-ring-section-deformation with existing:true definition node def-pur-finite-ring-section-data, which owns Geometry (the only declaration used from that module, no .choose); lean.declarations completed with LevelGamma/TensorFormula/LevelIndependence, all declared in the file. Other snapshot dependency records equal live side records, none overwritten. Independent reread: hypotheses match the node with nothing stronger; omega = exceptional of the actual unit; c is the actual reduction comparison and is asserted iso; theta pinned by c≫theta = scalar-extended diagonalDualizingObject; alpha pinned by OrientationNormalized and linked to theta; proGamma iso, natural, Dctf target; n-independence via max with Kummer-pinned q/b. Edge cases d=0, n=1, A=0, empty schemes OK; statement verbatim; docstrings and report sections present. nt_compile --json rc=0, clean, item 19.3 s at load 77. Advisory: owners of pbcComparisonReduction, unitIso, Tate line/generator, rootsOfUnitySheaf, gmSheaf, HasCompactification, ordinaryFiniteUnit, finite_coefficientExtensionRing still not in stmt_deps; proof-only edge to lem-trf-finite-ring-section-deformation left to the maintainer."
  }
 }
