@@ -8,16 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Mathlib.Algebra.Homology.BifunctorShift
+import WeilConjectures.SixFunctors.Etale.Derived.Hom
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
-import Sheaf.Paper.EtaleFlatKFlatResolution
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Derived tensor products of étale sheaves preserve direct sums
@@ -69,6 +61,14 @@ theorem derivedTensor_preservesDirectSums (Λ : Type (u + 1)) [CommRing Λ]
       ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj A)) ∧
     (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)
       ((derivedTensor (ModuleCat.{u + 1} Λ) T).flip.obj A)) := by
-  sorry
+  -- The existing tensor--Hom adjunction avoids unfolding the derived monoidal structure.
+  have h (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I)
+      ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj A) :=
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) A).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  refine ⟨h, fun I ↦ ?_⟩
+  have := h I
+  exact preservesColimitsOfShape_of_natIso
+    ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) T).app A)
 
 end AlgebraicGeometry.Etale
