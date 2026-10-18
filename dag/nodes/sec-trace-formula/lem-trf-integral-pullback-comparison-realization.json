@@ -27,7 +27,9 @@
   "def-pur-kinjective-complex",
   "lem-pur-derived-change-of-rings",
   "lem-pur-integral-operations-well-defined",
-  "lem-weil-integral-scalar-extension-well-defined"
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models"
  ],
  "proof": [
   {
@@ -249,5 +251,45 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-461c8d6ef (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 8 steps), every cited node's statement, unit sk-thm-trace-transport with its transitive route, the blueprint prop-trf-karoubi-independence.proof (last sentence), the parent lem-trf-local-frobenius-transport-normalization and its 3 citing steps, and Stacks 099N(2),(5), 0D6D, 06YS/06YT/06YY and 0941. The statement and stmt_deps are unchanged, so no target is weakened, and the statement is true. Small cases checked: at E=L, f=id, K=R the map a is the identity through the completeness map; at h=id, c^E is the completion identification; the types of both sides of the composition/scalar equation match. The level maps are isomorphisms: for η and λ by preserve-constructible (1); for λ and μ by the reduction-model counit and scalar association. All five points of the earlier return are repaired. Step 3 now cites the right level isomorphisms. Steps 5 and 8 no longer use lem-pod or the scalar-extension lemma as facts, and use the strict clauses of reduction-model and tower-coherence instead. Step 6 treats F_{h,L}(a_k) as h^* of the κ tower. Step 7 compares the E=L case with χ_{E/E}. Every proof use is on the route; lem-pod and the scalar-extension lemma remain only as statement dependencies; no tool_uses were declared or accepted. No duplicate: lem-pur-composition-comparison-scalar-compatibility is about h^! at rational level, and lem-trf-frobenius-transports-scalar-extension is about compact-support transport. FIX writes a corrected item file with two repairs. (a) Steps 3 and 6: I wrote out the justification of levelwise derived change of rings on tower derived categories (via the tower ringed site), and the naturality of the ε-built comparison in strict tower maps, by K-injective lifting; def-pur-kinjective-complex is added to step 6. (b) Step 5: I added the missing citation lem-weil-integral-scalar-extension-constructible, because c^L at T_V K and the L-level factors need D^b_c over O_L. proof_deps was recomputed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00a3d7a2b",
+  "group": "N2",
+  "result": "pass",
+  "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackComparisonRealization",
+  "declaration": "WeilConjectures.integralPullbackComparisonRealization",
+  "file": "lean/Sheaf/Paper/IntegralPullbackComparisonRealization.lean",
+  "statement": "theorem integralPullbackComparisonRealization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) : ∃ D : IntegralComparisonSystem l, IntegralComparisonRealizationCoherence l E L ι D",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralComparisonPullbackCounit",
+   "WeilConjectures.integralComparisonScalarCounit",
+   "WeilConjectures.IntegralComparisonCoefficientData",
+   "WeilConjectures.IntegralComparisonScalarData",
+   "WeilConjectures.IntegralComparisonSystem",
+   "WeilConjectures.integralComparisonEta",
+   "WeilConjectures.integralComparisonLambda",
+   "WeilConjectures.integralComparisonMu",
+   "WeilConjectures.integralComparisonComposition",
+   "WeilConjectures.integralComparisonScalar",
+   "WeilConjectures.integralComparisonConstructibleScalar",
+   "WeilConjectures.integralComparisonUnit",
+   "WeilConjectures.integralComparisonScalarUnit",
+   "WeilConjectures.integralComparisonScalarAssociator",
+   "WeilConjectures.integralComparisonSequenceSiteSmall",
+   "WeilConjectures.IntegralComparisonCompositionLaws",
+   "WeilConjectures.integralComparisonScalarSquareLeft",
+   "WeilConjectures.integralComparisonScalarSquareRight",
+   "WeilConjectures.IntegralComparisonRealizationCoherence",
+   "WeilConjectures.integralPullbackComparisonRealization"
+  ]
  }
 }
