@@ -27,50 +27,60 @@
  ],
  "proof": [
   {
-   "text": "Let $T_E=\\coprod_{e\\in E}T$ be the constant group scheme over $T$ (Groupoids, Example 39.5.6, Tag 03YW). By [lem-weil-pbc-constant-group-scheme-morphism-clopen], for every etale $T$-scheme $U$ the representable presheaf $h_{T_E}(U)=\\operatorname{Mor}_T(U,T_E)$ is the set of clopen decompositions $U=\\coprod_{e\\in E}U_e$, equivalently maps $|U|\\to E$ with open fibres. Under this identification the canonical map $E\\to h_{T_E}(U)$ sends $e$ to the morphism whose $e$-piece is all of $U$ and whose other pieces are empty, exactly the constant map with value $e$; the group law is pointwise addition.",
+   "text": "Equip E with the discrete topology and define L(U)=LocallyConstant(|U|,E), with pointwise addition and pullback restrictions. Sending a locally constant map to its continuous map gives a natural additive isomorphism with the restriction of the fpqc sheaf U ↦ C(|U|,E) [lem-cbc-continuous-functions-fpqc-sheaf]. An etale covering is fpqc, so this is an etale sheaf; the continuous forgetful functor Scheme.Etale.forget T ⋙ Over.forget T restricts it to the small site. In Lean the fpqc-to-etale topology inequality factors through the pro-etale topology.",
    "uses": [
     "def-pc-scheme",
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-constant-group-scheme-morphism-clopen"
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-cbc-continuous-functions-fpqc-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 59.23.2 (Tag 03P5), using Groupoids, Example 39.5.6 (Tag 03YW)"
+    "place": "Remark 59.23.2 (Tag 03P5); direct continuous-map proof, using Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean and Mathlib/CategoryTheory/Sites/LocallyBijective.lean"
    }
   },
   {
-   "text": "By [lem-weil-pbc-small-etale-representable-presheaf-sheaf], $h_{T_E}$ is a sheaf on the small etale site (Stacks Lemma 59.15.8, Tag 03O3). Let $P_E$ be the constant presheaf $U\\mapsto E$, let $\\eta:P_E\\to P_E^\\#=\\underline E$ be its sheafification map, and let $\\alpha:P_E\\to h_{T_E}$ be the map of Step 1. Since $h_{T_E}$ is a sheaf, $\\alpha$ factors uniquely as $P_E\\xrightarrow{\\eta}\\underline E\\xrightarrow{\\varphi}h_{T_E}$. Conversely, every section of $h_{T_E}(U)$ has the clopen decomposition of Step 1, so the family of its nonempty pieces is an etale covering of $U$ on each member of which it is $\\alpha(e)$, a constant section. Thus $h_{T_E}$ is the sheaf associated to $P_E$ and the sheafification comparison $\\varphi:\\underline E\\xrightarrow{\\sim}h_{T_E}$ is an isomorphism by the sheafification universal property (equivalently, local representatives give surjectivity and the sheaf uniqueness condition gives injectivity). Taking $U=T$ identifies $\\underline E(T)$ with the group of Zariski-locally-constant maps $|T|\\to E$, and the factorization carries $\\iota_T(e)$ to the constant map with value $e$.",
+   "text": "Define alpha:E_const → L by constant functions. For a section s on an etale object U, its open fibres F_e={x | s(x)=e} are open subschemes, hence etale over T. Their inclusions cover U because x belongs to F_{s(x)}, and the restriction of s to F_e equals the constant e. Thus the image sieve of s is covering, giving local surjectivity. If alpha(a)=alpha(b), either a=b, and their equalizer sieve is top, or evaluating at any point contradicts a≠b. In the latter case U is empty, its empty covering is contained in the equalizer sieve. This gives local injectivity, including the empty scheme.",
    "uses": [
-    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 59.23.2 (Tag 03P5); direct continuous-map proof, using Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean and Mathlib/CategoryTheory/Sites/LocallyBijective.lean"
+   }
+  },
+  {
+   "text": "By the sheafification universal property [def-weil-pbc-sheafification], alpha factors as eta followed by a sheaf morphism c:E_const^# → L. The unit eta is locally bijective and local injectivity and surjectivity cancel across it (Mathlib Presheaf.comp_isLocallyInjective_iff and comp_isLocallySurjective_iff). Hence c is locally bijective, so it is an isomorphism by the concrete sheaf local-bijectivity criterion in Mathlib, equivalently [lem-weil-pbc-site-sheafification-iso-locally-bijective]. Evaluate this isomorphism at Etale.mk (𝟙 T) and take its additive equivalence. Evaluating eta ≫ c = alpha at e proves exactly that the canonical section e maps to LocallyConstant.const T e.",
+   "uses": [
     "def-weil-pbc-sheafification",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "lem-weil-pbc-constant-group-scheme-morphism-clopen",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 59.23.2 (Tag 03P5), using Lemma 59.15.8 (Tag 03O3) and the sheafification universal property"
+    "place": "Remark 59.23.2 (Tag 03P5); direct continuous-map proof, using Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean and Mathlib/CategoryTheory/Sites/LocallyBijective.lean"
    }
   }
  ],
  "proof_deps": [
   "def-pc-scheme",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-constant-group-scheme-morphism-clopen",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Remark 59.23.2 (Tag 03P5), with Groupoids Example 39.5.6 (Tag 03YW), Etale Cohomology Lemma 59.15.8 (Tag 03O3), and the sheafification universal property"
+  "place": "Remark 59.23.2 (Tag 03P5); direct continuous-map proof, using Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean and Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "note": "Universe-u adaptation of the proved direct continuous-map comparison in WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf; no unit-level step changed."
  },
  "mathlib_searches": [
   {
@@ -154,5 +164,15 @@
   "group": "H1",
   "result": "pass",
   "note": "T : Scheme.{u} arbitrary; E : Type u [AddCommGroup E]; Mathlib constantSheaf T.smallEtaleTopology AddCommGrpCat at E, sections .obj.obj at Etale.mk (𝟙 T); AddEquiv to LocallyConstant T E (open fibres = Zariski-locally constant, pointwise add); same φ sends toSheafify unit component of e to LocallyConstant.const T e; #check confirmed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261018T062822-L-659855",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
