@@ -55,6 +55,60 @@ noncomputable def continuousMapPresheafCommRing (T : Type v) [TopologicalSpace T
     map_zero' := by ext; rfl
     map_add' := by intros; ext; rfl }
 
+private theorem commRingForgetReflectsLimit {J : Type v} [Category J]
+    (F : J ⥤ CommRingCat.{u}) (c : Limits.Cone F)
+    (hc : Limits.IsLimit ((CategoryTheory.forget CommRingCat).mapCone c)) :
+    Nonempty (Limits.IsLimit c) := by
+  let ext (x y : c.pt) (h : ∀ j, c.π.app j x = c.π.app j y) : x = y := by
+    apply (Limits.Types.isLimitEquivSections hc).injective
+    exact Subtype.ext (funext h)
+  let lift (s : Limits.Cone F) : s.pt ⟶ c.pt := CommRingCat.ofHom
+    { toFun := hc.lift ((CategoryTheory.forget CommRingCat).mapCone s)
+      map_one' := by
+        apply ext
+        intro j
+        simpa using ConcreteCategory.congr_hom (hc.fac
+          ((CategoryTheory.forget CommRingCat).mapCone s) j) (1 : s.pt)
+      map_mul' := by
+        intro x y
+        apply ext
+        intro j
+        have hj (z : s.pt) : c.π.app j
+            (hc.lift ((CategoryTheory.forget CommRingCat).mapCone s) z) = s.π.app j z :=
+          ConcreteCategory.congr_hom (hc.fac
+            ((CategoryTheory.forget CommRingCat).mapCone s) j) z
+        simp only [map_mul]
+        rw [hj, hj, hj, map_mul]
+      map_zero' := by
+        apply ext
+        intro j
+        simpa using ConcreteCategory.congr_hom (hc.fac
+          ((CategoryTheory.forget CommRingCat).mapCone s) j) (0 : s.pt)
+      map_add' := by
+        intro x y
+        apply ext
+        intro j
+        have hj (z : s.pt) : c.π.app j
+            (hc.lift ((CategoryTheory.forget CommRingCat).mapCone s) z) = s.π.app j z :=
+          ConcreteCategory.congr_hom (hc.fac
+            ((CategoryTheory.forget CommRingCat).mapCone s) j) z
+        simp only [map_add]
+        rw [hj, hj, hj, map_add] }
+  refine ⟨{ lift := lift, fac := ?_, uniq := ?_ }⟩
+  · intro s j
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    exact ConcreteCategory.congr_hom (hc.fac ((CategoryTheory.forget CommRingCat).mapCone s) j) x
+  · intro s m hm
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    apply ext
+    intro j
+    exact (congrArg (fun f : s.pt ⟶ _ ↦ f x) (hm j)).trans
+      (ConcreteCategory.congr_hom (hc.fac ((CategoryTheory.forget CommRingCat).mapCone s) j) x).symm
+
 /-- The continuous-function presheaf is a pro-etale sheaf.
 
 Source: Bhatt--Scholze, Lemma 4.2.12 and Definition 6.8.1 (blueprint:
@@ -65,7 +119,14 @@ sheafhood through the ring forgetful functor. This is step 1 of the node. -/
 theorem continuousMapPresheafCommRing_isSheaf (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf proetaleTopology (continuousMapPresheafCommRing T) := by
-  sorry
+  have h : Presheaf.IsSheaf proetaleTopology
+      (continuousMapPresheafCommRing T ⋙ CategoryTheory.forget _) :=
+    Presheaf.IsSheaf.of_le proetaleTopology_le_fpqcTopology
+      (isSheaf_fpqcTopology_continuousMapPresheaf T)
+  rw [Presheaf.isSheaf_iff_isLimit] at h ⊢
+  intro X S hS
+  rcases h S hS with ⟨hc⟩
+  exact commRingForgetReflectsLimit _ _ hc
 
 /-- The continuous-function coefficient sheaf on the small pro-etale site.
 
@@ -143,7 +204,15 @@ theorem finiteCoefficientTower_map_id (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
       (finiteCoefficientRingMap l E (h := le_rfl)) =
       𝟙 ((CategoryTheory.constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj
         (finiteCoefficientRing l E n.unop)) := by
-  sorry
+  have hmap : finiteCoefficientRingMap l E (h := le_rfl (a := n.unop)) =
+      𝟙 (finiteCoefficientRing l E n.unop) := by
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    rcases x with ⟨x⟩
+    induction x using Quotient.inductionOn' with
+    | h x => rfl
+  rw [hmap, CategoryTheory.Functor.map_id]
 
 /-- The quotient maps satisfy the composition law after passing to constant sheaves.
 Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
@@ -160,7 +229,14 @@ theorem finiteCoefficientTower_map_comp (l : ℕ) [Fact l.Prime] (X : Scheme.{u}
         (finiteCoefficientRingMap l E f.unop.le) ≫
       (CategoryTheory.constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
         (finiteCoefficientRingMap l E g.unop.le) := by
-  sorry
+  rw [← CategoryTheory.Functor.map_comp]
+  congr 1
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro x
+  rcases x with ⟨x⟩
+  induction x using Quotient.inductionOn' with
+  | h x => rfl
 
 /-- The tower of finite constant coefficient sheaves.
 Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(1) (blueprint:
@@ -235,7 +311,13 @@ theorem localizedContinuousMap_map_id (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) (U : X.ProEtᵒᵖ) :
     localizedContinuousMapRestriction X T s (𝟙 U) = RingHom.id _ := by
-  sorry
+  apply IsLocalization.ringHom_ext
+    (Submonoid.powers (ContinuousMap.const U.unop.left s))
+  apply RingHom.ext
+  intro x
+  simp only [localizedContinuousMapRestriction, IsLocalization.Away.map,
+    IsLocalization.map_eq, RingHom.comp_apply, RingHom.id_apply]
+  rfl
 
 /-- Restriction-localization maps satisfy the composition law.
 Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
@@ -249,7 +331,13 @@ theorem localizedContinuousMap_map_comp (X : Scheme.{u})
     localizedContinuousMapRestriction X T s (f ≫ g) =
       RingHom.comp (localizedContinuousMapRestriction X T s g)
         (localizedContinuousMapRestriction X T s f) := by
-  sorry
+  apply IsLocalization.ringHom_ext
+    (Submonoid.powers (ContinuousMap.const U.unop.left s))
+  apply RingHom.ext
+  intro x
+  simp only [RingHom.comp_apply, localizedContinuousMapRestriction,
+    IsLocalization.Away.map, IsLocalization.map_eq]
+  rfl
 
 /-- Sectionwise localization of the continuous-function presheaf on a small pro-etale site.
 Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
