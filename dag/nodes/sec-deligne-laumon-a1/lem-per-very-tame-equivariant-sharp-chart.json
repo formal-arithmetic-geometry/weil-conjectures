@@ -12,9 +12,71 @@
   "def-weil-geometric-point",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an fs chart $P\\to M$ through $\\bar x$ from the definition of an fs log structure. Let $F\\subseteq P$ be the face whose image in $A=\\mathcal O_{X,\\bar x}$ consists of units. The stalk pushout identifies $Q=M_{\\bar x}/A^\\times$ with $P_F/F^{\\rm gp}$. The face-sharpening lemma gives that $Q$ is fine, saturated and sharp and that $Q^{\\rm gp}$ is a finitely generated free abelian group. The quotient definition and group completion give the exact sequence $0\\to A^\\times\\to M_{\\bar x}^{\\rm gp}\\to Q^{\\rm gp}\\to0$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, 1.6 and proof 3.7(a), printed pp.70 and 75."
+   }
+  },
+  {
+   "text": "The stalk $A=\\mathcal O_{X,\\bar x}$ is computed on affine pointed etale neighbourhoods, which are cofinal, so it is the colimit $\\mathcal O^{\\rm sh}_{X,\\bar x}$, a strictly henselian local ring. An element $h\\in H$ fixes $\\bar x$, so it acts on $A$ by a local automorphism; this automorphism is the identity on the residue field, because that field embeds into the field of $\\bar x$ compatibly with $h$. Since $n$ is invertible in the residue field, it is a unit in $A$. Apply the tame unit-extension character lemma to the displayed exact sequence with $L=Q^{\\rm gp}$, $L_+=Q$, and $M=M_{\\bar x}$. Its section hypothesis holds for any group section $s_0$, which exists because $Q^{\\rm gp}$ is free: if $q\\in Q$ lifts to $m\\in M_{\\bar x}$, then $s_0(q)=mu$ with $u\\in A^\\times\\subset M_{\\bar x}$. We obtain a section $s:Q^{\\rm gp}\\to M_{\\bar x}^{\\rm gp}$ with $s(Q)\\subset M_{\\bar x}$ and a homomorphism $\\chi:H_{\\rm ab}\\otimes Q^{\\rm gp}\\to\\mu_n(A)$ satisfying $h.s(q)=\\chi(h\\otimes q)s(q)$. Restricting $s$ to $Q$ gives a monoid homomorphism $a:Q\\to M_{\\bar x}$, and its induced map to $M_{\\bar x}/A^\\times$ is the specified identity.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-trf-fs-face-sharpening",
+    "lem-per-tame-unit-extension-character"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, after the cocycle square: the section restricted to Q is the equivariant chart germ."
+   }
+  },
+  {
+   "text": "The hypothesis of the fine-log stalk-chart spreading lemma holds for $a$: $a(q)$ is a unit only if its class $q$ in $Q$ is $0$, so the face $E=(\\alpha a)^{-1}(A^\\times)$ is $\\{0\\}$, and $Q\\oplus A^\\times\\to M_{\\bar x}$, $(q,u)\\mapsto a(q)u$, is bijective because every $m$ with class $q$ equals $a(q)u$ for a unique unit $u$. The fine-log stalk-chart spreading lemma spreads the monoid map $a:Q\\to M_{\\bar x}$ to a pointed affine étale neighbourhood and a chart with this germ. For each generator $q$ and each $h\\in H$, the equality $h(a(q))=\\chi(h\\otimes q)a(q)$ holds in the stalk, so it holds after shrinking the neighbourhood; there are finitely many such equalities. Intersecting their finitely many translates gives an $H$-stable pointed étale neighbourhood, and restricting the chart there makes it $H$-equivariant. Shrink further where $n$ is invertible. The chart still induces the prescribed identification with $Q$ at $\\bar x$.",
+   "uses": [
+    "lem-trf-fine-log-stalk-chart-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, final sentence; finite shrinking argument made explicit."
+   }
+  },
+  {
+   "text": "Because the stabilizer fixes the geometric point, it acts trivially on the residue field and hence fixes every $n$th root of unity in the strict local ring; the character values therefore lie in the fixed group $\\mu_n$. Choosing a primitive root after the usual strict-local cyclotomic localization identifies $\\mu_n$ with the powers of $\\zeta_n$. The monoid-ring action is then diagonal, $h(z^q)=\\chi(h\\otimes q)z^q$, and the chart is equivalently a strict equivariant chart to $\\operatorname{Spec}\\mathbf Z[\\zeta_n,1/n][Q]$.",
+   "uses": [
+    "lem-per-tame-unit-extension-character",
+    "lem-sbc-strict-local-roots-of-unity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, §3.4 and Proposition 3.5(a), printed pp.74–75."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-per-tame-unit-extension-character",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI, Proposition 3.5(a) and proof 3.7(a), printed pp.74–75; the stalk cocycle calculation and finite equivariant shrinking are expanded into four steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-very-tame-quotient-log-regular",
@@ -73,5 +135,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-very-tame-equivariant-sharp-chart",
+  "worker": "stage1",
+  "summary": "Checked ILO VI Proposition 3.5(a) and proof 3.7(a) against the imported statement. The split isolates the fs face-sharpening input and the tame unit-extension character calculation, then spreads the equivariant germ over a finite H-stable pointed etale neighbourhood and records the diagonal monoid-ring form. No log-regularity or stratum-triviality hypothesis was added.",
+  "blueprint": "Realizes the ancestor proof Step 3 clause using the very-tame local chart input, specifically ILO VI Proposition 3.5(a) and proof 3.7(a), printed pp.74–75.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic monoid algebra: the quotient of an fs monoid by a face is fs sharp with free group completion; used as a black box, no trace-formula content."
+   },
+   {
+    "node": "lem-trf-fine-log-stalk-chart-spreading",
+    "why": "Generic log geometry: a stalk chart of a fine log structure spreads to an etale neighbourhood; used as a black box, no trace-formula content."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-fine-log-stalk-chart-spreading"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-ee62622dd",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-ee62622dd (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-tame-unit-extension-character, every cited statement and ILO VI 3.1–3.7 (pp. 73–76). The item statement is unchanged from Q109 and is equivalent to VI 3.5(a); ILO's exponent of |H| is replaced by |H|. The new node is true: the cocycle reduces to a hom H→Hom(L,μ_n(k)); this lifts uniquely to H-fixed μ_n(A) by Hensel; the remaining part with values in 1+m is a coboundary because 1+m is uniquely n-divisible, so H^1=0. Small cases tested: trivial H, t↦−t on C[[t]], L=0. It is not a duplicate of lem-per-equivariant-log-smooth-chart, very-tame-local-kummer-quotient, divisible-unit-lattice-extension or trf-log-regular-sharp-chart, and it does not restate a clause of the item. Steps 1 and 4 are correct; Φ_n(ζ)=0 follows from the unit property of ζ^k−1. Fixed: (1) Step 2 now cites lemma-weil-pbc-affine-neighbourhood-cofinal and lem-weil-pbc-strict-henselization-local-structure for O_X,x̄ being strictly henselian, and justifies the residue-identity action, n being a unit and s0(Q)⊂M. (2) Step 3 now checks the stalk-chart-spreading hypothesis: E={0} and Q⊕A^×≅M_x̄. The two off-route trf tools, face-sharpening and stalk-chart-spreading, are declared in split_report.tool_uses. (3) In the new node, the theorem stmt_dep lem-trf-fs-face-sharpening is dropped and sharp is defined inline; blueprint.from.via now has the full chain. Batch-5 flags: the closures of def-trf-fs-log-blowup, lem-trf-fs-face-sharpening and lem-trf-fine-log-stalk-chart-spreading contain no thm, sk, nt or poincare-duality node. They are generic monoid and log tools, not steps of the trace formula or Poincare duality, so I accepted them. No SGA citation.; 2 file(s) fixed by the reviewer"
  }
 }
