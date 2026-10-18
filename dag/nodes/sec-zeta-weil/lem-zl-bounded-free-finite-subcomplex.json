@@ -12,9 +12,72 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If the input list is empty, take the zero subcomplex. Otherwise choose an integer $a\\le b+1$ no greater than every input degree. For each $t\\le b+1$, prove the following strengthened assertion $P(t)$: every finite list of homogeneous elements in degrees at least $t$ is contained in a finite-free subcomplex which vanishes in degrees $n<t$ and $n>b$. Use descending induction, or equivalently induction on the nonnegative integer $b+1-t$. For $t=b+1$, all listed elements are zero because $F^n=0$ for $n>b$, so the zero subcomplex proves $P(b+1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, opening descending induction and zero-complex base case; make the lower support bound explicit"
+   }
+  },
+  {
+   "text": "Fix $t\\le b$ and assume $P(t+1)$. By freeness choose coordinates $\\phi:F^t\\xrightarrow{\\sim}\\bigoplus_{i\\in I}A$, whose elements are finitely supported coefficient functions. Let $J\\subset I$ be the union of the supports of $\\phi(x_j)$ over those inputs with $n_j=t$. This is finite, including when there are no such inputs. Write $e_i=\\phi^{-1}(\\delta_i)$ and let $E\\subset F^t$ be the image under $\\phi^{-1}$ of the functions supported in $J$. Extension by zero gives an $A$-linear isomorphism $A^J\\to E$, with inverse the restriction of $\\phi$ to $J$: restriction followed by extension recovers a function supported in $J$, and extension followed by restriction recovers every tuple. Thus $E$ is finite free and contains every input of degree $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, choose the basis b_j and the finite subset J prime"
+   }
+  },
+  {
+   "text": "Choose coordinates $\\psi:F^{t+1}\\xrightarrow{\\sim}\\bigoplus_{k\\in K}A$ and put $c_k=\\psi^{-1}(\\delta_k)$. Let $K'\\subset K$ be the union, over $i\\in J$, of the finite supports of $\\psi(d_F^t(e_i))$. It is a finite union of finite sets. The coordinate expansion gives $d_F^t(e_i)=\\sum_{k\\in K'}\\psi(d_F^t(e_i))(k)c_k$ for each $i\\in J$; coordinates outside $K'$ vanish by its definition. Hence these images lie in the span of the finite list $(c_k)_{k\\in K'}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, choose the basis c_k and the finite subset K prime controlling the differentials"
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis $P(t+1)$ to the finite list consisting of $(t+1,c_k)$ for $k\\in K'$ and all original pairs $(n_j,x_j)$ with $n_j>t$. Every degree in this list is at least $t+1$. Obtain a subcomplex $H$ with finite-free terms, with $H^n=0$ for $n<t+1$ and $n>b$, containing this list. Define submodules $G^n\\subset F^n$ by $G^n=0$ for $n<t$, $G^t=E$, and $G^n=H^n$ for $n>t$. This applies the induction hypothesis only to the preceding value of the natural-number induction parameter, not to the original assertion without a lower bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, application of the induction hypothesis to the c_k and the remaining original inputs; definition of G"
+   }
+  },
+  {
+   "text": "Check differential stability in all degrees. For $n<t$, the domain $G^n$ is zero. For $n=t$, each $v\\in E$ has the expression $v=\\sum_{i\\in J}\\phi(v)(i)e_i$; linearity and step 3 express $d_F^t(v)$ as an $A$-linear combination of the $c_k$, all belonging to $H^{t+1}=G^{t+1}$. For $n>t$, stability is that of $H$. Give $G$ these restricted differentials. The cochain identity in [def-weil-abstract-derived-category] is $d_F^{n+1}d_F^n=0$; applied to an element of $G^n$ it shows the two restricted maps also compose to zero, since equality in a submodule is equality of the underlying elements. Thus $G$ really is a subcomplex.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, verification that the displayed G is a subcomplex, including the splice differential"
+   }
+  },
+  {
+   "text": "The constructed $G$ contains the original inputs of degree $t$ by step 2 and those of higher degree by step 4. Its degree-$t$ term is $A^J$, its higher terms are the finite-free terms of $H$, and its lower terms are zero, isomorphic to $A^0$. All its terms vanish outside $[t,b]$, so $P(t)$ holds. After the finitely many induction steps down to $a$, $P(a)$ supplies the required subcomplex for the original list; enumerate each finite coordinate set to identify its coordinate module with $A^{r_n}$ for its cardinality $r_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free; proof, final assembly of G and completion of the descending induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-ring-derived-dualizable-perfect",
@@ -74,5 +137,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bounded-free-finite-subcomplex",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0FNR and expanded its descending induction with a uniform lower and upper support invariant, explicit finite coordinate maps, the empty-list base case, and the splice differential. The statement is unchanged. All inputs beyond the cochain definition are elementary finite-support calculations from the stated meaning of free, so no new nodes are created. The nearby project declaration gives only finitely generated terms and is not an attachment.",
+  "blueprint": "Supports prop-zl-smooth-proper-relative-purity, Step 3 field-stage evaluation criterion, through the recorded ancestry to lem-zl-ring-derived-dualizable-perfect. Realizes precisely the finite-free-subcomplex input in the proof of Stacks Tag 0FNS (lemma-have-dual-derived), using Tag 0FNR; this is below the unit route, not a replacement of its steps."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NL-dbd5a6bb0",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-dbd5a6bb0 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement and all 6 steps. Its statement matches Stacks 0FNR (more-algebra.tex lines 38552-38578, label lemma-complex-bounded-above-free-colim-bounded-finite-free, mapped through tags/tags) hypothesis by hypothesis: commutative ring, F^n=0 for n>b, free terms, a finite list of pairs, and a conclusion of a bounded subcomplex with finite-free terms. It is not weakened. The parent lem-zl-ring-derived-dualizable-perfect uses exactly this statement. Step 1 states the induction invariant P(t) explicitly, with a lower and an upper support bound; the base case t=b+1 holds because those elements are zero, and choosing a=min(degrees,b+1) closes the induction without circularity. Steps 2-3 are correct finite-coordinate support calculations, and E is isomorphic to A^J by extension by zero and restriction. Step 4 applies P(t+1) only to degrees >= t+1. Step 5 checks stability in each degree: n<=t-1, n=t (d(E) lies in the span of the c_k, which lies in H^{t+1}) and n>t. It gets d^2=0 from the statement of def-weil-abstract-derived-category, which says exactly that. Step 6 assembles G. Edge cases tested: empty list, all inputs above b, negative degrees, the zero ring, t=b, and Z/4 with differential 2, where the coordinate submodule is needed and is used. There are no new nodes. The only citation is a definition, so there is no route issue and no tool_uses. A grep of the snapshot DAG for 0FNR and finite-free subcomplex notions finds only the item and its parent; nearby candidates such as lem-wf-bounded-free-complex-projective-cohomology-splitting, lem-pc-derived-free-complex-cover and lem-sf-perfect-ring-classical-generator state different things. The blueprint.from chain agrees with the parent's. No fixes were needed."
  }
 }
