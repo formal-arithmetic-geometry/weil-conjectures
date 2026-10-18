@@ -14,7 +14,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.RingTheory.WContractibleGeometricCriterion
 import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-!
 # Exact sections at an algebraically closed pro-etale point
@@ -72,12 +74,9 @@ Proof (the seven steps of the node):
 4. Apply `lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits` to every
    commutative ring sheaf A and W = Spec k. Use its exactness clause for module evaluation,
    with the ordinary sectionwise action, including nonconstant and zero coefficient rings.
-5. Abelian sheaves are modules over the constant sheaf of integers: integer multiplication
-   extends uniquely across sheafification. Compatible local endomorphisms glue by applying
-   them to sections on pullback covers; uniqueness makes the glued maps additive and natural.
-   This constructs the endomorphism sheaf and the extended action. The action is forced
-   by unitality and all abelian-sheaf maps respect it. Kernels and images remain the same
-   underlying subgroups after forgetting this action, giving abelian-section surjectivity.
+5. An epimorphism of abelian sheaves is locally surjective. Forgetting the group
+   operations preserves these local lifts, so the underlying set-sheaf map is epic.
+   Step 3 then makes its map on sections surjective, without introducing integer actions.
 6. Apply `lem-sp-exact-functor-preserves-homology` to three consecutive complex terms.
    Evaluation preserves cycles, boundaries and their quotient, naturally in complex maps.
    Thus it preserves quasi-isomorphisms in every integer degree, without boundedness.
@@ -122,6 +121,60 @@ theorem point_proEtale_sections_exact (k : Type u) [Field k] [IsAlgClosed k] :
         ∀ i : ℤ, Nonempty
           ((pointModuleSections k A).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ i ≅
             DerivedCategory.homologyFunctor _ i ⋙ pointModuleSections k A))) := by
-  sorry
+  classical
+  have : WLocalSpace (PrimeSpectrum k) :=
+    { eq_of_specializes := fun _ _ _ _ ↦ Subsingleton.elim _ _
+      isClosed_closedPoints := by
+        have : closedPoints (PrimeSpectrum k) = Set.univ := by
+          ext x
+          simp only [Set.mem_univ, iff_true]
+          exact mem_closedPoints_iff.mpr isClosed_singleton
+        rw [this]
+        exact isClosed_univ }
+  have : IsWLocalRing k := ⟨inferInstance⟩
+  have : IsAlgClosed (IsLocalRing.ResidueField k) :=
+    IsAlgClosed.of_ringEquiv k _
+      (RingEquiv.ofBijective (IsLocalRing.residue k)
+        ⟨(IsLocalRing.residue k).injective, IsLocalRing.residue_surjective⟩)
+  have : IsStrictlyHenselianLocalRing k := ⟨inferInstance⟩
+  have hstrict (m : Ideal k) [m.IsMaximal] :
+      IsStrictlyHenselianLocalRing (Localization.AtPrime m) := by
+    apply IsStrictlyHenselianLocalRing.of_ringEquiv
+      (IsLocalization.atUnits k m.primeCompl (S := Localization.AtPrime m) ?_).toRingEquiv
+    intro x hx
+    exact isUnit_iff_ne_zero.mpr (fun he ↦ hx (he ▸ m.zero_mem))
+  have hretract (B : Type u) [CommRing B] (φ : k →+* B)
+      (hf : φ.FaithfullyFlat) (hw : φ.WeaklyEtale) :
+      ∃ r : B →+* k, r.comp φ = RingHom.id k :=
+    RingHom.exists_retraction_of_wlocal_geometric_criterion hstrict φ hf hw
+  have hW (F G : Sheaf (Scheme.ProEt.topology (Spec (.of k))) (Type (u + 1)))
+      (f : F ⟶ G) (hf : Epi f) :
+      Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) := by
+    exact Scheme.ProEt.surjective_app_of_affine_ring_retractions.{u, u}
+      (Spec (.of k)) k (𝟙 _) hretract F G f
+  constructor
+  · intro F G f hf
+    have : Epi f := hf
+    have : Sheaf.IsLocallySurjective f :=
+      (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{u + 1} f).mpr hf
+    let g := (sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
+      (CategoryTheory.forget AddCommGrpCat.{u + 1})).map f
+    exact hW _ _ g inferInstance
+  · intro A
+    have : IsAffine (Scheme.ProEt.mk (𝟙 (Spec (.of k)))).left :=
+      inferInstanceAs (IsAffine (Spec (.of k)))
+    obtain ⟨hlim, hcol, -⟩ := Scheme.ProEt.affine_weaklyContractible_evaluation_colimits
+      (Spec (.of k)) A (Scheme.ProEt.mk (𝟙 _)) hW
+    have : PreservesFiniteLimits (pointModuleSections k A) := hlim
+    have : PreservesFiniteColimits (pointModuleSections k A) := hcol
+    refine ⟨hlim, hcol, ?_, ?_⟩
+    · intro K L f hf
+      have : QuasiIso f := hf
+      infer_instance
+    · intro _ _ _ _
+      refine ⟨⟨inferInstance⟩, inferInstance,
+        ⟨(pointModuleSections k A).mapDerivedCategoryFactors⟩, ?_⟩
+      intro i
+      exact ⟨((pointModuleSections k A).mapDerivedCategoryHomologyFunctorIso i).symm⟩
 
 end AlgebraicGeometry.ProEtale
