@@ -13,11 +13,74 @@
   "def-pc-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-nagata-projective-space-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose integers $a,b\\geq0$ and immersions $i:X\\hookrightarrow\\mathbf P^a_Y$ and $j:Y\\hookrightarrow\\mathbf P^b_S$ supplied by the two hypotheses. Write $p_Y:\\mathbf P^a_Y\\to Y$, $p_A:\\mathbf P^a_S\\to S$ and $p_B:\\mathbf P^b_S\\to S$ for the structure maps. Thus $p_Y\\circ i=f$ and $p_B\\circ j=g$. The notation for projective spaces is [def-nagata-projective-space-base-change], with the coordinate index sets $\\{0,\\ldots,a\\}$ and $\\{0,\\ldots,b\\}$. Immersion has exactly the closed-then-open meaning of [def-weil-closed-immersion].",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space); unpacking the two immersion hypotheses."
+   }
+  },
+  {
+   "text": "By [lemma-nagata-projective-space-base-change-pullback] for $g:Y\\to S$, identify $\\mathbf P^a_Y$ with $Y\\times_S\\mathbf P^a_S$ over $Y$, and let $u:\\mathbf P^a_Y\\to\\mathbf P^a_S$ be its second projection. Put $T=\\mathbf P^b_S\\times_S\\mathbf P^a_S$, with projections $r_B,r_A$. The fibre-product universal property [def-pc-fibre-product] gives $k=(j\\circ p_Y,u):\\mathbf P^a_Y\\to T$. The square with upper map $k$, lower map $j$, and vertical maps $p_Y,r_B$ is cartesian: a pair $v:W\\to Y$, $t:W\\to T$ with $j\\circ v=r_B\\circ t$ determines the unique pair $(v,r_A\\circ t):W\\to Y\\times_S\\mathbf P^a_S$; its compatibility follows from $g=p_B\\circ j$ and $p_B\\circ r_B=p_A\\circ r_A$. Its image under $k$ equals $t$ because both projections agree. Conversely the two projections of any lift must be this pair. Thus $k$ is the base change of the immersion $j$ along $r_B$, so it is an immersion by clause (1) of [lem-weil-pbc-immersion-base-change-lft].",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY (lemma-base-change-immersion), with projective space defined by base change in Constructions, Tag 01NF (definition-projective-space)."
+   }
+  },
+  {
+   "text": "The two maps $i$ and $k$ are immersions, so clause (e) of [lem-weil-pbc-proper-fp-permanence] gives an immersion $h=k\\circ i:X\\hookrightarrow T$. It lies over $g\\circ f$: using the projection identities from the preceding steps, $(p_B\\circ r_B)\\circ h=p_B\\circ j\\circ p_Y\\circ i=g\\circ f$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 02V0 (lemma-composition-immersion)."
+   }
+  },
+  {
+   "text": "Apply [lem-chow-segre] with the ordered dimensions $b,a$ over the scheme $S$. It gives the Segre closed immersion $s:T=\\mathbf P^b_S\\times_S\\mathbf P^a_S\\hookrightarrow\\mathbf P^N_S$ over $S$, where $N=(b+1)(a+1)-1=ab+a+b\\geq0$. A closed immersion is an immersion by [def-weil-closed-immersion] (take the whole target as its open subscheme). Clause (e) of [lem-weil-pbc-proper-fp-permanence] therefore shows that $s\\circ h$ is an immersion. Since $s$ is an $S$-morphism and $(p_B\\circ r_B)\\circ h=g\\circ f$, its composite with $\\mathbf P^N_S\\to S$ is exactly $g\\circ f$. This is the required locally closed immersion.",
+   "uses": [
+    "lem-chow-segre",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD (lemma-segre-embedding); composition is Schemes, Tag 02V0 (lemma-composition-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-chow-segre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Direct Segre proof assembled from Tags 01NF and 01WD and Schemes Tags 01JY and 02V0; proves the finite-projective-space version of the composition assertion cited in Morphisms Tag 0C4M."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +116,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the hits give Proj constructions, properness, or projectivizations of vector spaces, not this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of morphisms admitting immersions into finite projective spaces admits an immersion into a finite projective space via the Segre embedding",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsPreimmersion.comp, AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsImmersion.of_comp, AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.IsPreimmersion.of_comp, AlgebraicGeometry.IsPreimmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsImmersion.comp_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit supplies the two relative projective embeddings and their composite; immersion composition alone is only one input"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiProjective|quasi_projective|segre",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit supplies the two relative projective embeddings and their composite; immersion composition alone is only one input"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composition of quasi projective morphisms into projective space is quasi projective",
+   "results": "Returned 8 hits: AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.instIsAffineHomCompScheme, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.IsSeparated.stableUnderComposition",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit supplies the two relative projective embeddings and their composite; immersion composition alone is only one input"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"comp\"",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit supplies the two relative projective embeddings and their composite; immersion composition alone is only one input"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi projective morphisms are stable under composition by embedding a product of projective spaces with the Segre morphism",
+   "results": "Returned 8 hits: AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit supplies the two relative projective embeddings and their composite; immersion composition alone is only one input"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-projective-finite-group-quotient",
@@ -82,5 +180,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-quasiprojective-affine-composition",
+  "worker": "stage1",
+  "summary": "Q27: retained the statement verbatim and proved the composition by base changing the second immersion, composing immersions, and applying the existing Segre lemma. All inputs already exist; no new nodes. Added the missing projective-space definition dependency and real logged Mathlib searches. Checked empty schemes, dimension-zero projective spaces, all cited statements and the over-base equality.",
+  "blueprint": "Realizes the supporting affine-base composition input of the ancestor lem-per-artin-gabber-affine-curve, through the existing projective-finite-group-quotient ancestry. It does not replace any perverse-sheaf unit step.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic projective-space base-change identity; no statement of the Fourier-perverse unit provides this geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Uses only clause (1), base-change stability of scheme immersions, as a generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Uses only clause (e), composition of immersions; the unrelated properness and finiteness clauses are not used."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "Uses the binary relative Segre closed immersion over an arbitrary scheme; the Fourier-perverse unit has no projective-space embedding tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-chow-segre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-dba8d27d0",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-dba8d27d0 (reviewer sub-agent of L); spot-checked: Read the item in full and every cited node's statement; the delivery has no new nodes. The statement is unchanged apart from one added stmt_dep, def-nagata-projective-space-base-change, which defines the projective space used. It has no extra hypotheses and matches what its only citer, lem-per-projective-finite-group-quotient, needs. Sources checked at their tags against tags/tags: 0C4M morphisms.tex:9755, 01VT :9518, 01WD constructions.tex:2927, 01JY schemes.tex:3445, 02V0 schemes.tex:4861, 01NF constructions.tex:2819. The direct Segre proof is labelled agent-written, which is accurate. Step 1 is elementary unpacking of the two immersions. Step 2: the pullback lemma gives u with p_A u = g p_Y, so k = (j p_Y, u) is defined. I re-checked the cartesian argument: the lift (v, r_A t) exists because g v = p_B r_B t = p_A r_A t, k sends it to t, and it is unique. So k is the base change of j along r_B, and clause (1) of lem-weil-pbc-immersion-base-change-lft makes it an immersion. Step 3: clause (e) of lem-weil-pbc-proper-fp-permanence gives h = k∘i over g∘f. Step 4: lem-chow-segre with m=b, n=a gives the Segre closed immersion over S into P^{ab+a+b}_S, def-chow-segre makes it a morphism over the base, and clause (e) applies again. Every step uses statements only, with no cycle. Edge cases checked: a or b = 0, a = b = 0, X or Y empty, R = 0. Closest existing node is lem-trf-h-projective-composition, the closed-immersion version; it does not give the locally closed statement, so it is not a duplicate. The four off-unit tool_uses are generic scheme facts and I accept them. No SGA citations. Minor: the report lists a citations.json that is not in the commit."
  }
 }
