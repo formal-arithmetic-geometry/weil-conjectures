@@ -17,11 +17,98 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-henselian-terminology",
-  "sk-def-pe-wlocal"
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "def-sfb-site-derived-constant-module-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the henselian-pair definition [def-weil-pbc-henselian-terminology] to the finite $A$-algebra $A$ itself. It gives a bijection $\\operatorname{Idem}(A)\\to\\operatorname{Idem}(A/I)$. Under [lem-weil-pbc-spec-clopen-idempotent], the clopen corresponding to $e$ is $D(e)$, and $i^{-1}D(e)=D(\\overline e)$. Thus inverse image is a bijection between the clopens of $T$ and those of $Z$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(1), proof; Stacks Tag 09XI, more-algebra.tex, lemma-characterize-henselian-pair (3)"
+   }
+  },
+  {
+   "text": "Put $P=\\pi_0(T)$, $Q=\\pi_0(Z)$ and $h=\\pi_0(i):Q\\to P$. By [sk-def-pe-wlocal] the underlying spaces of these affine schemes are spectral; [lem-pe-spectral-components-profinite] makes $P,Q$ compact Hausdorff. Every clopen of a space is a union of components, and hence descends to a clopen of its component quotient. Therefore Step 1 says that $h^{-1}$ is a bijection on clopens. The formula of [lem-weil-pbc-quasicompact-components-clopen-intersection], applied to $T$ and $Z$, separates distinct components by clopens. If $q_1\\ne q_2$ in $Q$, choose a separating clopen in $Q$ and lift it along $h^{-1}$; this separates $h(q_1),h(q_2)$, proving injectivity. The image $K=h(Q)$ is compact, hence closed in $P$. If $p\\notin K$, for each $k\\in K$ choose a clopen containing $p$ and excluding $k$. Compactness of $K$ gives finitely many whose intersection $V$ misses $K$. Then $h^{-1}V=\\varnothing=h^{-1}\\varnothing$, contradicting injectivity on clopens since $p\\in V$. So $h$ is surjective. A continuous bijection from compact to Hausdorff is a homeomorphism: it sends closed sets to compact, thus closed, sets.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-pe-spectral-components-profinite",
+    "lem-weil-pbc-quasicompact-components-clopen-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(1), finite clopen subdivisions argument, written out via component separation"
+   }
+  },
+  {
+   "text": "By [lem-zl-henselian-wstrict-local-invariance], $A$ is w-strictly local exactly when $A/I$ is. By Step 2, $P$ is extremally disconnected exactly when $Q$ is: a homeomorphism preserves open sets, their closures, and openness of those closures. The definition [sk-def-pe-wlocal] of w-contractibility is the conjunction of these two conditions, so $T$ is w-contractible if and only if $Z$ is.",
+   "uses": [
+    "lem-zl-henselian-wstrict-local-invariance",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2), first assertion; BS Lemma 2.2.13"
+   }
+  },
+  {
+   "text": "Assume these equivalent conditions. Apply [lem-zl-condensed-wcontractible-lisse-evaluation] to the two w-contractible affine schemes $T$ and $Z$. The coefficient-compatible component maps give equivalences $\\pi_T^*:D_{\\mathrm{lis}}(P,\\Lambda)\\simeq D_{\\mathrm{lis}}(T,\\Lambda)$ and $\\pi_Z^*:D_{\\mathrm{lis}}(Q,\\Lambda)\\simeq D_{\\mathrm{lis}}(Z,\\Lambda)$. Also [lem-zl-condensed-lisse-proetale-locality], for the scheme morphism $i$, gives the exact symmetric monoidal functor $i^*$, its restriction to dualizable objects, and its canonical coefficient identification.",
+   "uses": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-lisse-proetale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2), final assertion, using Proposition 4.3(3)"
+   }
+  },
+  {
+   "text": "The square of component maps commutes with $i$ and $h$. Here this includes the maps of sites, not only the point maps: the component-site construction in [lem-zl-condensed-wcontractible-lisse-evaluation] starts with finite clopen subdivisions. A clopen $U\\subseteq P$ gives the open-and-closed part $T_U\\subseteq T$; pulling back gives $Z\\times_TT_U=Z_{h^{-1}U}$. Thus the two composite constructions agree on every finite subdivision and on their inverse-limit construction of a profinite set over $P$. Functoriality of inverse image gives $i^*\\pi_T^*\\cong\\pi_Z^*h^*$, compatibly with coefficients, since each coefficient ring is pulled back from the same condensed ring $\\Lambda$.",
+   "uses": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2), final sentence, with the construction (4.1) preceding Proposition 4.3"
+   }
+  },
+  {
+   "text": "Since $h$ is a homeomorphism, relabelling profinite sets over $P$ by $h$ gives an inverse to $h^*$, also on the dualizable subcategories. By Steps 4 and 5, $i^*$ is conjugate by $\\pi_T^*,\\pi_Z^*$ to this equivalence. Hence $i^*$ is an equivalence and in particular gives bijections on all morphism sets between dualizable objects. Finally [lem-zl-condensed-lisse-proetale-locality] identifies $i^*(\\Lambda_T\\otimes^L_{\\underline R}\\underline C)$ with $\\Lambda_Z\\otimes^L_{\\underline R}\\underline C$ for every constant discrete scalar complex $C\\in D(R)$, $R=\\Gamma(*,\\Lambda)$; this is the required canonical scalar-extension compatibility.",
+   "uses": [
+    "lem-zl-condensed-lisse-proetale-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2), conclusion; Section 3 pullback paragraph before (3.1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-zl-henselian-wstrict-local-invariance",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-zl-condensed-lisse-proetale-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Corollary 4.4(1)-(2), proof on pp. 9-10"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +147,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-dualizable-local-perfect-models",
@@ -79,5 +166,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-condensed-henselian-lisse-rigidity",
+  "worker": "stage1",
+  "summary": "Followed HRS Corollary 4.4: henselian idempotents give the component homeomorphism, BS w-strict locality invariance gives w-contractibility, and the existing component-site equivalence identifies restriction on lisse objects. Expanded the component separation and the natural inverse-image square, and reused the existing pullback theorem for coefficients and scalar complexes. One statement-only new lemma, no Mathlib leaf; statement unchanged.",
+  "blueprint": "Serves prop-zl-smooth-proper-relative-purity, current proof Step 3 (perfect form of relative duality), through the local-perfect-model and dualizable-truncation chain recorded in blueprint.from. This is the HRS Corollary 4.4 input in the local-perfect-model proof; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "General affine clopen/idempotent dictionary, used only to translate the defining henselian bijection into a clopen bijection."
+   },
+   {
+    "node": "lem-pe-spectral-components-profinite",
+    "why": "General spectral-space topology makes the component quotients compact Hausdorff; no argument of that unit replaces this item route."
+   },
+   {
+    "node": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "why": "General component separation theorem supplies clopens separating distinct components of affine spectra, as required by HRS finite-subdivision argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-pe-spectral-components-profinite",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-8116ed520",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-8116ed520 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources checked at the cited places: HRS 2305.18131 pp.8-10 (Lemma 4.1, construction (4.1), Prop 4.3(1)-(3) with proof, Cor 4.4 with proof); BS 1309.1198 Def 2.2.1 and Lemmas 2.2.9, 2.2.12, 2.2.13, 2.2.15; Stacks 09XI clause (3). Statement: byte-identical to the base and matches HRS Cor 4.4(1)-(2) hypothesis by hypothesis. It keeps an arbitrary henselian pair and the same ordinary-derived dualizable coefficient category as the two cited unit nodes. The extra clauses (full faithfulness, canonical coefficient identification, scalar extension) follow from the equivalence and the locality node. Steps: Step 1 gets the idempotent bijection from the henselian definition with B=A plus the D(e) leaf. Step 2 proves the pi_0 homeomorphism: clopen bijection, component separation from lem-weil-pbc-quasicompact-components-clopen-intersection, then injectivity, surjectivity and compact-to-Hausdorff, all checked. Step 3 combines the new node with homeomorphism invariance of extremal disconnectedness and the definition in sk-def-pe-wlocal. Steps 4-6 use only the statements of lem-zl-condensed-wcontractible-lisse-evaluation (pi_T induced by S' to T x_S S') and lem-zl-condensed-lisse-proetale-locality. Step 5 is a formal fiber-product and pseudo-functoriality identity, borderline but acceptable as elementary. Route: the three declared tool_uses are accepted as generic topology tools; one of them, spec-clopen-idempotent, is a Mathlib leaf. No SGA is cited. blueprint.from and its places were verified in prop-zl-smooth-proper-relative-purity. New node lem-zl-henselian-wstrict-local-invariance: exactly BS 2.2.13, with w-strict locality written in the 2.2.9 form that equals the project definition. It is true, statement-only and three kinds of search are recorded. It does not restate a clause of the item. Tested on I=0, A=0, I=A (forces A=0), (k[[t]],(t)) with k separably closed, and (Z_p,(p)). Duplicate search found no duplicate: rg over the snapshot DAG for 2.2.13 and henselian with w-strict/w-local terms, eight candidate nodes read. No fixes written."
  }
 }
