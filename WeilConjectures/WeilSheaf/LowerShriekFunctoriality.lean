@@ -186,8 +186,8 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
   let adj := WeilComplex.extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j
   obtain ⟨Q, v, w, hT⟩ := distinguished_cocone_triangle (adj.counit.app K)
   -- `j^*` inverts the counit, so `j^* Q = 0` and `Q` comes from the closed part
-  have hj : IsIso ((WeilComplex.upperStar j).map (adj.counit.app K)) := by
-    sorry
+  have hj : IsIso ((WeilComplex.upperStar j).map (adj.counit.app K)) :=
+    adj.isIso_map_counit_app_of_isIso_unit K
   have hQ : IsZero ((WeilComplex.upperStar j).obj Q) := (Triangle.isZero₃_iff_isIso₁ _
     ((WeilComplex.upperStar j).map_distinguished _ hT)).2 hj
   obtain ⟨P, ⟨eP⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hij.symm Q hQ
@@ -202,11 +202,14 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
   have : IsIso (WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) i).counit :=
     inferInstance
   obtain ⟨e₁⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero (k₀ := k₀) (l := l) j
-  have e₂ : P ≅ (WeilComplex.upperStar i).obj K :=
-    (asIso ((WeilComplex.upperStarDerivedLowerStarAdjunction i).counit.app P)).symm ≪≫
-      (WeilComplex.upperStar i).mapIso eP ≪≫ (asIso ((WeilComplex.upperStar i).map v)).symm
+  have ea : (WeilComplex.upperStar i).obj Q ≅ (WeilComplex.upperStar i).obj K :=
+    (asIso ((WeilComplex.upperStar i).map v)).symm
+  have eb : (WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar i).obj P) ≅
+      (WeilComplex.upperStar i).obj Q := (WeilComplex.upperStar i).mapIso eP
+  have ec : (WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar i).obj P) ≅ P :=
+    asIso ((WeilComplex.upperStarDerivedLowerStarAdjunction i).counit.app P)
   have e₃ : Q ≅ (WeilComplex.derivedLowerStar i).obj ((WeilComplex.upperStar i).obj K) :=
-    eP.symm ≪≫ (WeilComplex.derivedLowerStar i).mapIso e₂
+    eP.symm ≪≫ (WeilComplex.derivedLowerStar i).mapIso (ec.symm ≪≫ eb ≪≫ ea)
   exact ⟨Triangle.mk (adj.counit.app K) v w, hT, ⟨(e₁.app _).symm⟩, ⟨Iso.refl _⟩, ⟨e₃⟩⟩
 
 

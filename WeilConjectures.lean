@@ -8801,6 +8801,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalComp
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCore
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCoreInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport

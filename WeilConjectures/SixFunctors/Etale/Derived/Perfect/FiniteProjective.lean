@@ -47,12 +47,21 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
 
+/-- The canonical map `RHom(K, 𝟙) ⊗ᴸ N ⟶ RHom(K, N)` in `D(Y_ét)`, for a general coefficient
+category. Stated through this abbreviation, statements about `A = ModuleCat Λ` use the same
+monoidal instances as the general results they are deduced from. -/
+noncomputable abbrev DerivedCategory.ihomUnitTensorToIhomEtale₂
+    (K N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (ihom K).obj (𝟙_ _) ⊗ N ⟶ (ihom K).obj N :=
+  MonoidalClosed.ihomUnitTensorToIhom K N
+
 /-- For a dualizable `K` in `D(Y_ét)`, the canonical map `RHom(K, 𝟙) ⊗ᴸ N ⟶ RHom(K, N)` is an
 isomorphism for every `N`: `RHom(K, 𝟙)` is then a left dual of `K`. -/
 theorem DerivedCategory.isIso_ihomUnitTensorToIhom_of_isDualizableEtale
     {K : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.IsDualizableEtale K) (N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (MonoidalClosed.ihomUnitTensorToIhom K N) := by
+    (hK : DerivedCategory.IsDualizableEtale K)
+    (N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    IsIso (DerivedCategory.ihomUnitTensorToIhomEtale₂ K N) := by
   obtain ⟨_⟩ := hK
   obtain ⟨_⟩ := Etale.DerivedCategory.nonempty_exactPairing_swap K Kᘁ
   exact MonoidalClosed.isIso_ihomUnitTensorToIhom Kᘁ K N
@@ -106,7 +115,8 @@ adjunction (`CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`, natural in `P`
 isomorphism, `P^∨ = RHom(P, Λ_X)` being the coefficient dual. -/
 theorem isIso_ihomUnitTensorToIhom (hP : IsFiniteProjectiveSheaf P)
     (N : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (MonoidalClosed.ihomUnitTensorToIhom ((DerivedCategory.singleFunctor _ 0).obj P) N) :=
+    IsIso (DerivedCategory.ihomUnitTensorToIhomEtale₂ ((DerivedCategory.singleFunctor _ 0).obj P)
+      N) :=
   DerivedCategory.isIso_ihomUnitTensorToIhom_of_isDualizableEtale hP.isDualizable N
 
 /-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective

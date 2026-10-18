@@ -50,23 +50,31 @@ open Scheme
 
 namespace Etale
 
+section General
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+
+/-- The comparison `Rg_*M ⊗ᴸ N_Y ⟶ Rg_*(M ⊗ᴸ N_Z)` attached to an isomorphism
+`a : Lg^*N_Y ≅ N_Z` is an isomorphism at `M` as soon as the projection map of `Rg_*` is an
+isomorphism at `(M, N_Y)`. It is stated for a general coefficient category, so that at
+`A = ModuleCat Λ` the monoidal instances are those of `AlgebraicGeometry.Etale.derivedTensor`. -/
+lemma isIso_rightDerivedLowerStarDerivedTensorRightMap_app {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+    {NY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    {NZ : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
+    (a : L((g)^*[A]).obj NY ≅ NZ)
+    {M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
+    (h : IsIso (((rightDerivedLowerStarProjectionMap A g).app M).app NY)) :
+    IsIso ((rightDerivedLowerStarDerivedTensorRightMap A g a.hom).app M) :=
+  IsIso.comp_isIso' h inferInstance
+
+end General
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (J : Ideal Λ) {k : Type u} [Field k]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
   (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
-
-omit [Finite Λ] in
-/-- The comparison `Rg_*M ⊗ᴸ N_Y ⟶ Rg_*(M ⊗ᴸ N_Z)` attached to an isomorphism
-`a : Lg^*N_Y ≅ N_Z` is an isomorphism at `M` as soon as the projection map of `Rg_*` is an
-isomorphism at `(M, N_Y)`. -/
-lemma isIso_rightDerivedLowerStarDerivedTensorRightMap_app {Z : Scheme.{u}} (g : Z ⟶ Y)
-    {NY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {NZ : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (a : L((g)^*[ModuleCat.{u + 1} Λ]).obj NY ≅ NZ)
-    {M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (h : IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g).app M).app NY)) :
-    IsIso ((rightDerivedLowerStarDerivedTensorRightMap _ g a.hom).app M) :=
-  IsIso.comp_isIso' h inferInstance
 
 include hf hd in
 /-- Blueprint `lem-coef-finite-direct-image`: Finite coefficient change for ordinary direct
@@ -81,7 +89,8 @@ isomorphism: it is the projection map of `Rf_*` at the finitely generated consta
 theorem isIso_rightDerivedLowerStarReductionModIdealMap_app_of_finite
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (b : ℤ)
     [K.IsLE b] : IsIso ((rightDerivedLowerStarReductionModIdealMap Λ J f).app K) :=
-  isIso_rightDerivedLowerStarDerivedTensorRightMap_app _ f _
+  isIso_rightDerivedLowerStarDerivedTensorRightMap_app _ f
+    (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J)))
     (isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle Λ aX aY f hf d hd K b _)
 
 include hf hd in
