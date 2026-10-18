@@ -400,7 +400,7 @@ theorem isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat
         (isColimitOfPreserves _ hc))
   have hR : IsColimit (R.mapCocone c) :=
     isColimitMapCoconeOfNatTrans β₃ c (fun A ↦ hβ₃ _ (hflat' A)) (hβ₃ M hM) hT
-  exact NatTrans.isIso_app_of_isColimit τn c hP hR fun A ↦
+  exact NatTrans.isIso_app_of_isColimit_mapCocone τn c hP hR fun A ↦
     have := isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp adj E A.n
     Functor.map_isIso H
       (τ.app ((singleFunctor _ 0).obj (ModuleCat.of Λ (Fin A.n →₀ Λ))))

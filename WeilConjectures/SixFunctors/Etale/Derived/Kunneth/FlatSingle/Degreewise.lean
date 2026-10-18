@@ -88,8 +88,8 @@ lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Pr
 
 /-- A natural transformation between functors preserving a colimit, which is an isomorphism on
 the diagram, is an isomorphism at the colimit. -/
-lemma CategoryTheory.NatTrans.isIso_app_of_isColimit {J : Type*} [Category J] {S T : C ⥤ D}
-    (τ : S ⟶ T) {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) [PreservesColimit F S]
+lemma CategoryTheory.NatTrans.isIso_app_of_isColimit_of_preservesColimit {J : Type*} [Category J]
+    {S T : C ⥤ D} (τ : S ⟶ T) {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) [PreservesColimit F S]
     [PreservesColimit F T] (h : ∀ j, IsIso (τ.app (F.obj j))) : IsIso (τ.app c.pt) := by
   let hS := isColimitOfPreserves S hc
   let hT := isColimitOfPreserves T hc
@@ -566,7 +566,7 @@ theorem isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar [QuasiCompac
     inferInstanceAs (PreservesColimitsOfShape I
       (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕 ⋙
         higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q))
-  have key := NatTrans.isIso_app_of_isColimit
+  have key := NatTrans.isIso_app_of_isColimit_of_preservesColimit
     (tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q) hcol fun j ↦ by
       have := hD j
       rw [isIso_tensorBaseChangeHomologyMap'_app_iff]
