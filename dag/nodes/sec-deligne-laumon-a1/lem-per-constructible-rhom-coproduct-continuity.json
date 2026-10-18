@@ -19,9 +19,75 @@
   "def-weil-size-convention",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-ringed-site-grothendieck-abelian] to $(X_{\\mathrm{et}},A_X)$, using the chosen small skeleton. Module sheaves have exact filtered colimits; direct sums are filtered colimits of finite biproducts, so are exact too. Consequently cohomology commutes with these sums: kernels, images and the quotient $\\ker d/\\operatorname{im}d$ commute with an exact colimit. By [lem-kun-grothendieck-derived-coproducts] the termwise sum of representatives gives the derived coproduct $L=\\bigoplus_iL_i$, with $H^qL=\\bigoplus_iH^qL_i$, hence $L\\in D^{\\geq c}$. The same coproduct description applies to the Hom objects. For an empty $I$, both sides are zero since the Hom complex into zero is zero.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-size-convention",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, first paragraph; finite-diagonal hyper-Ext expansion of the representable-sum inference"
+   }
+  },
+  {
+   "text": "Fix integers $p,q$ and put $F_i=H^q(L_i)$. Finite subsets $S\\subseteq I$, ordered by inclusion, form a small nonempty filtered poset, and $\\bigoplus_iF_i=\\varinjlim_S\\bigoplus_{i\\in S}F_i$. The first argument $K$ satisfies exactly the bounded-above constructibility hypotheses of [lem-per-constructible-ext-filtered-colimit]. Apply it to these finite subsums. For finite $S$, choose K-injective resolutions of the $F_i[0]$. Their finite sum is K-injective: a map from an acyclic complex has finitely many components, each null-homotopic by [def-pur-kinjective-complex], and the finite tuple of homotopies is a null-homotopy. It resolves the finite sum. The Hom-complex formula [def-pur-derived-internal-hom] then identifies its Hom complex with the finite sum of the individual Hom complexes. Thus the finite-stage Ext is $\\bigoplus_{i\\in S}\\mathcal Ext_A^p(K,F_i)$. Passing to the colimit gives the canonical isomorphism $\\bigoplus_i\\mathcal Ext_A^p(K,H^qL_i)\\simeq\\mathcal Ext_A^p(K,H^qL)$, induced by the given inclusions.",
+   "uses": [
+    "lem-per-constructible-ext-filtered-colimit",
+    "def-weil-pbc-category-colimit",
+    "def-pur-derived-internal-hom",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, first paragraph; finite-diagonal hyper-Ext expansion of the representable-sum inference"
+   }
+  },
+  {
+   "text": "Use [lem-per-bounded-above-rhom-hyperext] for each $L_i$ and for $L$, with the same bounds $r,c$. Naturality gives a comparison from the direct sum of the spectral sequences for $L_i$ to that for $L$; its abutment map is the cohomology of the canonical coproduct comparison. Step 2 makes its $E_2$ map an isomorphism. Exactness of sums from Step 1 implies that summing commutes with kernels, images and their quotients, so the sum of the pages is again a spectral sequence. Induction using $E_{s+1}=\\ker d_s/\\operatorname{im}d_s$ makes the comparison an isomorphism on every page. At $(p,q)$ an outgoing differential vanishes for $s>q-c+1$ and an incoming one vanishes for $s>p+r$, by the common quadrant bounds. Hence stabilization is uniform in $i$. For fixed total degree $n$, only $c\\leq q\\leq n+r$ occur. The finite abutment filtrations therefore have a common finite length; exactness of sums identifies the graded pieces of the summed filtration with the sums of $E_\\infty$. The comparison is an isomorphism on these pieces. Induction on this finite filtration, using the short exact sequences of successive filtration terms, shows it is an isomorphism on the abutment in degree $n$.",
+   "uses": [
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, first paragraph; finite-diagonal hyper-Ext expansion of the representable-sum inference"
+   }
+  },
+  {
+   "text": "The canonical map is an isomorphism on every cohomology sheaf by Step 3. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] in the abelian category of $A_X$-modules to conclude that it is an isomorphism in the ordinary unbounded derived category. The argument uses only the upper bound and constructible cohomology of $K$ and the common lower bound on the $L_i$; it never uses an upper bound or a constructibility condition on them.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, first paragraph; finite-diagonal hyper-Ext expansion of the representable-sum inference"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-per-bounded-above-rhom-hyperext",
+  "lem-per-constructible-ext-filtered-colimit",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII 10.1.1, first proof paragraph p. 325, expanded with the finite-diagonal hyper-Ext comparison stated in the new auxiliary node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-universal-coefficients",
@@ -91,5 +157,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-constructible-rhom-coproduct-continuity",
+  "worker": "stage1",
+  "summary": "Repaired the retained split after its citation-check failure: strengthened the auxiliary Ext input from a sheaf first argument to the bounded-above constructible first argument explicitly asserted in ILO XVII 10.1.1; isolated the generic finite-diagonal hyper-Ext spectral sequence; cited existing Grothendieck, derived coproduct and cohomology-detection statements; wrote out the uniform stabilization and finite-filtration comparison. The item statement is unchanged.",
+  "blueprint": "Expands the Ext-continuity to representable-direct-sum inference of ILO XVII 10.1.1 p. 325, serving the coefficient-comparison chain under ancestor lem-per-artin-gabber-affine-curve Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic computation of derived coproducts by termwise sums in a Grothendieck category; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-grothendieck-derived-coproducts"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-a7deadcca",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a7deadcca (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node statement in full. Source: ILO XVII Prop. 10.1.1, proof p. 325, first paragraph (X in D^-_c, so Ext^q(X,-) commutes with filtered inductive limits, hence with representable direct sums in D^+). The item's common lower bound is the same as representability of the sum in D^+, because H^j of the sum is the sum of the H^j. The statement is unchanged and is what the citer lem-per-ctf-hom-universal-coefficients Step 1 uses. Step 1: Grothendieck abelian (Lean-closed node), so sums are exact; lem-kun-grothendieck-derived-coproducts gives the termwise derived coproduct, including the empty family (accepted tool_use: a generic coproduct computation not given in the unit). Step 2: the finite-subset filtered poset (nonempty even for I empty), finite additivity, and lem-per-constructible-ext-filtered-colimit with the identical hypotheses on K. Step 3: I checked the indices myself. The outgoing d_s vanishes for s>q-c+1 and the incoming one for s>p+r, and only -r<=p<=n-c occur, so pages and finite filtrations are uniform in i and the summed comparison is an isomorphism. Step 4 is the Mathlib DerivedCategory.isIso_iff leaf. New node lem-per-constructible-ext-filtered-colimit is true: it reduces to tau_{>=m}K with m<-n, then by devissage to a constructible sheaf, which has a resolution by finite sums of j_!A_U, and Rj_* commutes with filtered colimits on Noetherian X. It is not a duplicate of the pro-etale/condensed nodes (sk-lem-constructible-ext-continuity, lem-sfb-constructible-internal-hom-continuity), the adic global-Hom compactness node or the finite-field ind-etale node. New node lem-per-bounded-above-rhom-hyperext is true: the Postnikov couple has E_2 vanishing for p<-r and q<c and finite convergence because RHom(K, tau_{>m}L) lies in D^{>m-r}, with bidegree (s,1-s). It is not a duplicate of thm-sp-truncation-e2 or the other truncation-couple nodes, which handle derived functors of a single left-exact functor, base-change functors or coherent global Ext. Small cases checked: I empty, K=0, K=A_X[0], K=F[t] shifts. Both new nodes are statement-only, B1-B9 hold, there is no restated clause and no cycle, and nothing cites SGA. No fixes."
  }
 }
