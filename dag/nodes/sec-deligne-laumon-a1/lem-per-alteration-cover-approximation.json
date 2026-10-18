@@ -1,0 +1,81 @@
+{
+ "id": "lem-per-alteration-cover-approximation",
+ "kind": "statement",
+ "title": "Prime-to-ell alteration coverings persist under sufficiently close approximation",
+ "statement": "Let $(A,\\mathfrak m)$ be an excellent henselian Noetherian local domain, put $S=\\operatorname{Spec}A$ and $\\widehat S=\\operatorname{Spec}\\widehat A$, and let $\\ell$ be a prime invertible in $A$ [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-adic-completion]. Write $\\widehat A=\\varinjlim_\\alpha A_\\alpha$ as the directed union of finite type $A$-subalgebras, with inclusions $s_\\alpha:A_\\alpha\\to\\widehat A$. Let $(X_i\\to\\widehat S)_{i\\in I}$ be a finite covering family in $\\operatorname{alt}/\\widehat S$ for the topology of $\\ell'$-alterations [def-per-prime-to-ell-alteration-topology]. For any finite type model $(X_{i,\\alpha_0}\\to\\operatorname{Spec}A_{\\alpha_0})_i$ of this family [def-weil-finite-type-morphism], there exist $\\alpha_1\\geq\\alpha_0$ and $N_0\\geq1$ such that for all $\\alpha\\geq\\alpha_1$, $N\\geq N_0$, and $A$-algebra maps $u:A_\\alpha\\to A$ congruent to $s_\\alpha$ modulo $\\mathfrak m^N\\widehat A$, the schemes $X_{i,u}$ pulled back along $\\operatorname{Spec}u$ have finite generic fibres, and the family $(X_{i,u}^{\\mathrm{dom}}\\to S)_i$ is a covering family in $\\operatorname{alt}/S$. Here $X_{i,u}^{\\mathrm{dom}}$ is the reduced closed union of the irreducible components of $X_{i,u}$ dominating $S$ [def-weil-irreducible-components], [def-pc-reduced-scheme]; empty members may be omitted. No regularity or boundary hypothesis is imposed on the $X_i$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Proposition 3.1(i),(iii), pp.37--38, applied to the finite disjoint union of the family. A fixed sufficiently high model suffices; auxiliary proper/Nisnevich covering certificates descend further as in Lemma 3.1.1."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-adic-completion",
+  "def-per-prime-to-ell-alteration-topology",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sufficiently close approximations of a prime to ell alteration covering over the completion of an excellent henselian domain remain alteration coverings after retaining dominant components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hensels_lemma\", \"module\": \"Mathlib/NumberTheory/Padics/Hensel\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R] [inst_2 : Algebra R ℤ_[p]]\\n  {F : Polynomial R} {a : ℤ_[p]},\\n  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →\\n    ∃ z,\\n      (Polynomial.aeval z) F = 0 ∧\\n        ‖z - a‖ < ‖(Polynomial.a\", \"doc\": \"For a polynomial $ F $ over the p-adic integers $ \\\\mathbb{Z}_p $ and an element $ a \\\\in \\\\mathbb{Z}_p $, if the p-adic norm of $ F(a) $ is strictly less than the p-adic norm of the derivative $ F'(a) $\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"PreTilt.untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsPrecomplete (Ideal.span {↑p}) O] → PreTilt O p → O\", \"doc\": \"The function maps each element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to an element $ y \\\\in O $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $\"}\n  {\"name\": \"PreTilt.untiltAux_smodEq_untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p) (n : ℕ),\\n  x.untiltAux n ≡ x.untiltFun [SMOD Ideal.span {↑p} ^ n]\", \"doc\": \"For any element $x$ in the pretilt $\\\\mathrm{PreTilt}(O, p)$ and natural number $n$, the auxiliary untilt function value $x.\\\\text{untiltAux}(n)$ is congruent to the untilt function value $x.\\\\text{until\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to ell generic degrees and Nisnevich alteration covering families persist under Artin approximation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyArtinian X] {U : X.OpenCover} (i) : IsLocallyArtinian (U.X i)\", \"doc\": \"If $ X $ is a locally Artinian scheme and $ U $ is an open cover of $ X $, then each open subset $ U_i $ in the cover is also a locally Artinian scheme. This means the property of being locally Artini\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.comap_algEquiv\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal S) [p.IsPrime] [Algebra.QuasiFiniteAt R p] (f : T ≃ₐ[R] S) : QuasiFiniteAt R (p.comap f.toRingHom)\", \"doc\": \"Given a prime ideal $ p $ in a commutative ring $ S $ and an $ R $-algebra equivalence $ f : T \\to S $, if the localization $ S_p $ is a quasi-finite $ R $-algebra, then the localization of $ T $ at th\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $X$ is an Artinian scheme, then $X$ is locally Artinian, meaning every point of $X$ has an open neighborhood whose coordinate ring is Artinian.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Pretopology\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : P.IsMultiplicative] {X : AlgebraicGeometry.Scheme} {S : CategoryTheory.Sieve X},\\n  S ∈ (AlgebraicGeometry.Scheme.grothendieckTopology P) X → ∃ 𝒰, CategoryTheory.Presieve.ofArrows 𝒰.X 𝒰.f ≤\", \"doc\": \"Given a morphism property $ P $ on the category of schemes that is stable under base change and multiplicative, if a sieve $ S $ on a scheme $ X $ belongs to the Grothendieck topology generated by $ P\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyNoetherian X] [DiscreteTopology X] : IsLocallyArtinian X\", \"doc\": \"If a scheme $X$ is locally Noetherian and its underlying topological space has the discrete topology, then $X$ is locally Artinian. This means every point in $X$ has an open neighborhood whose coordin\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{ι : Type*} {U : ι → X.Opens} (hU : TopologicalSpace.IsOpenCover U) (hU' : ∀ i, IsAffineOpen (U i)) :\\n  IsLocallyArtinian X ↔ ∀ i, IsArtinianRing Γ(X, U i)\", \"doc\": \"For a scheme $X$ with an open cover $\\\\{U_i\\\\}$ consisting of affine open subsets, $X$ is locally Artinian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is an Artinian ring for\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|Nisnevich|genericallyFinite",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-uniformization-complete-local-descent",
+  "date": "2026-10-19",
+  "group": "Q142"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3, finiteness/duality branch, through the IX 1.1 uniformization input: III Proposition 6.2, Expose III Proposition 3.1(i),(iii), pp.37--38, applied to the finite disjoint union of the family. A fixed sufficiently high model suffices; auxiliary proper/Nisnevich covering certificates descend further as in Lemma 3.1.1.",
+   "via": [
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

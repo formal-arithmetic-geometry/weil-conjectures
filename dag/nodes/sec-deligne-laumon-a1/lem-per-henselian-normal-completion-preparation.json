@@ -1,0 +1,81 @@
+{
+ "id": "lem-per-henselian-normal-completion-preparation",
+ "kind": "statement",
+ "title": "Henselian normalization and normal completion of a quasi-excellent local ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a reduced quasi-excellent Noetherian local ring, with ordinary henselization $H=R^h$ [def-weil-pbc-henselization-at-prime], [def-exc-excellent-ring], [def-pc-reduced-scheme]. Then $H$ is reduced, Noetherian, excellent and henselian [def-weil-pbc-henselian-terminology], and $\\dim H=\\dim R$. Its componentwise normalization [def-weil-pbc-reduced-normalization] is a finite product $\\prod_{a=1}^r B_a$ of normal excellent henselian Noetherian local domains. The map $\\coprod_a\\operatorname{Spec}B_a\\to\\operatorname{Spec}H$ is finite and surjective and is an isomorphism over a dense open containing every generic point. Each $\\dim B_a\\leq\\dim H$. For any normal excellent Noetherian local domain $B$, its maximal-ideal completion $\\widehat B$ [def-weil-pbc-adic-completion] is a normal Noetherian local domain, and $B\\to\\widehat B$ is faithfully flat. A nowhere dense closed subset of $\\operatorname{Spec}R$ has nowhere dense inverse image in $\\operatorname{Spec}H$, in each $\\operatorname{Spec}B_a$, and in $\\operatorname{Spec}\\widehat B_a$. Here normal means integrally closed in the fraction field; finite means finite as a module; and dimension is Krull dimension [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose I Theorem 8.1 and following paragraph (p.16), Corollary 6.3(ii) and Proposition 6.2 (p.14); III Proposition 6.2, first three reductions (pp.43--44). Dimension of henselization: Stacks more-algebra.tex Tag 06LK, lemma-henselization-dimension; reducedness: Tag 06DH, lemma-henselization-reduced; normal completion: Tag 0C23, lemma-completion-normal-local-ring. The normalization is finite birational, and the henselian finite algebra decomposition gives its local factors."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselization-at-prime",
+  "def-exc-excellent-ring",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced quasi excellent local ring has an excellent henselization whose finite normalization is a product of normal henselian local domains with normal completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselization preserves quasi excellence and dimension and completion of an excellent normal local domain is normal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [toIsLocalRing : IsLocalRing R],\\n  (∀ (f : Polynomial R),\\n      f.Monic →\\n        ∀ (a₀ : R),\\n          Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n            IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) →\\n              ∃ a, f.IsRoot a ∧ a - a₀ \", \"doc\": \"A commutative local ring $ R $ is Henselian if for every monic polynomial $ f \\\\in R[X] $, whenever $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $ (the maximal ideal) and $ f'(a_0) $ is a unit in \"}\n  {\"name\": \"HenselianRing.jac\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I], I ≤ ⊥.jacobson\", \"doc\": \"If $ R $ is a commutative ring and $ I $ is an ideal of $ R $ such that $ R $ is Henselian with respect to $ I $, then $ I $ is contained in the Jacobson radical of $ R $. The Jacobson radical here re\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsNoetherianRing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*excellent|excellent.*henseli|completion.*normal|normal.*completion",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-uniformization-complete-local-descent",
+  "date": "2026-10-19",
+  "group": "Q142"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3, finiteness/duality branch, through the IX 1.1 uniformization input: III Proposition 6.2, Expose I Theorem 8.1 and following paragraph (p.16), Corollary 6.3(ii) and Proposition 6.2 (p.14); III Proposition 6.2, first three reductions (pp.43--44). Dimension of henselization: Stacks more-algebra.tex Tag 06LK, lemma-henselization-dimension; reducedness: Tag 06DH, lemma-henselization-reduced; normal completion: Tag 0C23, lemma-completion-normal-local-ring. The normalization is finite birational, and the henselian finite algebra decomposition gives its local factors.",
+   "via": [
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
