@@ -46,10 +46,10 @@ cartesian square of a closed immersion `i : Z ⟶ X` and a weakly étale `w : W 
 to `W` commutes with the underived closed direct image: the base change map
 `i_* ⋙ w^* ⟶ w_Z^* ⋙ i_W*` (`AlgebraicGeometry.ProEtale.baseChangeMap`) is an isomorphism. This is
 the weakly étale base change theorem `AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback`
-applied to the closed immersion `i`. The two composites of inverse images agree by
-`AlgebraicGeometry.ProEtale.upperStarSquareIso`. -/
-theorem isIso_baseChangeMap_of_isClosedImmersion [IsClosedImmersion i] [WeaklyEtale w]
-    [WeaklyEtale wZ] (hsq : IsPullback iW wZ w i) :
+applied to `i`; that `i` is a closed immersion is not used. The two composites of inverse
+images agree by `AlgebraicGeometry.ProEtale.upperStarSquareIso`. -/
+theorem isIso_baseChangeMap_of_isClosedImmersion [WeaklyEtale w] [WeaklyEtale wZ]
+    (hsq : IsPullback iW wZ w i) :
     IsIso (baseChangeMap A hsq.toCommSq) :=
   isIso_baseChangeMap_of_isPullback A hsq
 
