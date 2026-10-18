@@ -24,9 +24,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.GrothendieckTopology
 
-/-- A Grothendieck topology `J` is *replete* (blueprint: det-pe-replete-definition; Bhatt–Scholze,
-Definition 3.1.1) when the topos of set-valued sheaves on `J` is replete when every inverse sequence of
-epimorphisms has epimorphic projections from its limit, at every natural-number index.
+/-- A Grothendieck topology `J` is *replete* (blueprint: det-pe-replete-definition;
+Bhatt–Scholze, Definition 3.1.1) when, in the topos of set-valued sheaves on `J`, every
+inverse sequence of epimorphisms has epimorphic projections from its limit, at every index.
 An inverse sequence is `F : ℕᵒᵖ ⥤ Sheaf J (Type (max u v w))`; its adjacent transition
 is `F.map (homOfLE (Nat.le_succ n)).op`.
 
