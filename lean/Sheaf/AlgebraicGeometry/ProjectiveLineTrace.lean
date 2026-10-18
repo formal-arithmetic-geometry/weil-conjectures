@@ -13,8 +13,6 @@ public import Mathlib.Topology.Defs.Filter
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
 
 /-!
 # The ordinary finite-coefficient projective-line trace
@@ -85,7 +83,7 @@ theorem projectiveLineTrace_chern (N : ℕ) (hN : 0 < N)
     ordinaryFiniteP1ChernPushforward A N hA S
         (projectiveLineTraceDatum N hN A hA S hS).chern ≫
       projectiveLineTrace N hN A hA S hS = 𝟙 (ordinaryFiniteUnit A S) := by
-  sorry
+  exact (projectiveLineTraceDatum N hN A hA S hS).trace_chern
 
 /-- The map epsilon for every unbounded complex: inverse of the canonical ordered
 proper projection, tensor with the normalized trace, and the tensor unit constraint.
