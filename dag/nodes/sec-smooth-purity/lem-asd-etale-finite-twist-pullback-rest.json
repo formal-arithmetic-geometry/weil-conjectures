@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "mathlib_match": null,
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK, finite Tate line local trivialization and signed powers"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback",
+   "place": "Proof steps 1-7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Tate sheaf pullback coherence",
+   "results": "No exact theorem; project declarations are required.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf tensor pullback Tate twist",
+   "results": "Only supporting monoidal lemmas.",
+   "verdict": "partial supporting lemmas",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTateSheaf pullback",
+   "results": "No existing declaration.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  }
+ ],
+ "id": "lem-asd-etale-finite-twist-pullback-rest",
+ "title": "Finite Tate pullback derived and exponent coherence",
+ "statement": "The Lean declaration `lem-asd-etale-finite-twist-pullback-rest` states the corresponding strict package in the finite Tate pullback proof: the first package contains local trivialization and abelian/tensor coherence; the second contains only the remaining derived and exponent clauses, assuming the explicit base data.",
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical local root, scalar-extension, tensor and dual comparisons as described in the corresponding proof steps of lem-asd-etale-finite-twist-pullback. The declaration is left as a named intermediate theorem for the unresolved construction.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "D3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E; derived tensor comparison and exponent changes",
+  "note": "Strict decomposition of the parent proof; the target combines this package with the other named package."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback",
+  "date": "2026-10-18",
+  "group": "D3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackRest",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteTwistPullbackRest.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleFiniteTwistPullback_rest",
+  "statement": "theorem etaleFiniteTwistPullback_rest (A : Type (u + 1)) [CommRing A] (m : ℕ)\n    (hm : 0 < m) (hA : (m : A) = 0)\n    (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),\n        IsUnit (m : Γ(T, ⊤)) →\n        ((Etale.upperStar AddCommGrpCat.{u + 1} v).obj (T.rootsOfUnitySheaf m) ≅\n          T'.rootsOfUnitySheaf m))\n    (c : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),\n        IsUnit (m : Γ(T, ⊤)) → IsUnit (m : Γ(T', ⊤)) → ∀ a : ℤ,\n        (Etale.upperStar (ModuleCat.{u + 1} A) v).obj (finiteEtaleTateSheaf A m T hA a) ≅\n          finiteEtaleTateSheaf A m T' hA a)\n    (p : ∀ (T : Scheme.{u}), IsUnit (m : Γ(T, ⊤)) → ∀ a b : ℤ,\n        finiteEtaleTateSheaf A m T hA a ⊗ finiteEtaleTateSheaf A m T hA b ≅\n          finiteEtaleTateSheaf A m T hA (a + b)) :\n        (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))) (a b : ℤ),\n      ∃ d : ((Etale.derivedTensorRight (ModuleCat.{u + 1} A) T\n          ((DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateSheaf A m T hA a)) ⋙\n          shiftFunctor _ b) ⋙ (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor ≅\n        (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor ⋙\n          Etale.derivedTensorRight (ModuleCat.{u + 1} A) T'\n            ((DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateSheaf A m T' hA a)) ⋙\n              shiftFunctor _ b),\n        ∀ K : Etale.DerivedCategoryModule A T,\n          d.app K =\n            ((Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.commShiftIso b).app\n              (((Etale.derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj\n                ((DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateSheaf A m T hA a))) ≪≫\n            (shiftFunctor _ b).mapIso\n              (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) v K\n                ((DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateSheaf A m T hA a)) ≪≫\n              ((Etale.derivedTensor (ModuleCat.{u + 1} A) T').obj\n                ((Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.obj K)).mapIso\n                ((Etale.singleFunctorCompLeftDerivedUpperStarIso\n                  (ModuleCat.{u + 1} A) v).app (finiteEtaleTateSheaf A m T hA a) ≪≫\n                (DerivedCategory.singleFunctor _ 0).mapIso (c v hT hT' a)))) ∧\n    (∀ (m' : ℕ), 0 < m' → ∀ (hdiv : m ∣ m')\n        (T : Scheme.{u}),\n      IsUnit (m' : Γ(T, ⊤)) →\n      ∃ (q : T.rootsOfUnitySheaf m' ⟶ T.rootsOfUnitySheaf m)\n        (t : ∀ a : ℤ, finiteEtaleTateSheaf A m' T\n          ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr\n            (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)) a ≅\n          finiteEtaleTateSheaf A m T hA a),\n      q ≫ kernel.ι (m • 𝟙 T.gmSheaf) = (m' / m) • kernel.ι (m' • 𝟙 T.gmSheaf) ∧\n      (∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf m').obj.obj W),\n        (t 1).hom.hom.app W (finiteEtaleTateOneGenerator A m' T\n          ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr\n            (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)) W a z) =\n          finiteEtaleTateOneGenerator A m T hA W a (q.hom.app W z)) ∧\n      t 0 = Iso.refl _ ∧\n      (∀ n : ℕ, t (.ofNat (n + 2)) =\n        tensorIso (t (.ofNat (n + 1))) (t 1)) ∧\n      (∀ n : ℕ,\n        tensorHom (t (.ofNat (n + 1))).hom (t (.negSucc n)).hom ≫\n            (ihom.ev (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1)))).app\n              (finiteEtaleTateSheaf A m T hA 0) =\n          (ihom.ev (finiteEtaleTateSheaf A m' T\n          ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr\n            (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv))\n            (.ofNat (n + 1)))).app\n            (finiteEtaleTateSheaf A m' T\n          ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr\n            (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)) 0)))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

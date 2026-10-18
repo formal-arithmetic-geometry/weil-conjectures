@@ -37,6 +37,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 /-!
 # Finite Tate sheaves and inverse image
 Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,
@@ -228,6 +230,10 @@ theorem etaleFiniteTwistPullback (A : Type (u + 1)) [CommRing A] (m : ℕ)
             (finiteEtaleTateSheaf A m' T
           ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr
             (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)) 0))) := by
-  sorry
+  obtain ⟨r, c, p, hbase⟩ := etaleFiniteTwistPullback_base A m hm hA
+  obtain hrest := etaleFiniteTwistPullback_rest A m hm hA r c p
+  let hh := @And.intro _ _ hbase hrest
+  refine ⟨r, c, p, ?_⟩
+  simpa only [and_assoc] using hh
 
 end AlgebraicGeometry.Scheme

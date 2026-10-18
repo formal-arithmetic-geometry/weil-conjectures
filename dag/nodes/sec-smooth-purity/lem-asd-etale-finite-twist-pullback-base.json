@@ -1,0 +1,111 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "mathlib_match": null,
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK, finite Tate line local trivialization and signed powers"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback",
+   "place": "Proof steps 1-7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Tate sheaf pullback coherence",
+   "results": "No exact theorem; project declarations are required.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf tensor pullback Tate twist",
+   "results": "Only supporting monoidal lemmas.",
+   "verdict": "partial supporting lemmas",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTateSheaf pullback",
+   "results": "No existing declaration.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  }
+ ],
+ "id": "lem-asd-etale-finite-twist-pullback-base",
+ "title": "Finite Tate pullback base package",
+ "statement": "The Lean declaration `lem-asd-etale-finite-twist-pullback-base` states the corresponding strict package in the finite Tate pullback proof: the first package contains local trivialization and abelian/tensor coherence; the second contains only the remaining derived and exponent clauses, assuming the explicit base data.",
+ "stmt_deps": [
+  "def-asd-finite-etale-tate-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical local root, scalar-extension, tensor and dual comparisons as described in the corresponding proof steps of lem-asd-etale-finite-twist-pullback. The declaration is left as a named intermediate theorem for the unresolved construction.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-etale-cover-detects-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-etale-cover-detects-iso"
+ ],
+ "proof_origin": {
+  "by": "D3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PK and 03Q1; local trivializations, root comparison and positive tensor coherence",
+  "note": "Strict decomposition of the parent proof; the target combines this package with the other named package."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback",
+  "date": "2026-10-18",
+  "group": "D3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteTwistPullbackBase.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleFiniteTwistPullback_base",
+  "statement": "theorem etaleFiniteTwistPullback_base (A : Type (u + 1)) [CommRing A] (m : ℕ)\n    (hm : 0 < m) (hA : (m : A) = 0) :\n    ∃ (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),\n        IsUnit (m : Γ(T, ⊤)) →\n        ((Etale.upperStar AddCommGrpCat.{u + 1} v).obj (T.rootsOfUnitySheaf m) ≅\n          T'.rootsOfUnitySheaf m))\n      (c : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),\n        IsUnit (m : Γ(T, ⊤)) → IsUnit (m : Γ(T', ⊤)) → ∀ a : ℤ,\n        (Etale.upperStar (ModuleCat.{u + 1} A) v).obj (finiteEtaleTateSheaf A m T hA a) ≅\n          finiteEtaleTateSheaf A m T' hA a)\n      (p : ∀ (T : Scheme.{u}), IsUnit (m : Γ(T, ⊤)) → ∀ a b : ℤ,\n        finiteEtaleTateSheaf A m T hA a ⊗ finiteEtaleTateSheaf A m T hA b ≅\n          finiteEtaleTateSheaf A m T hA (a + b)),\n    (∀ (T : Scheme.{u}), IsUnit (m : Γ(T, ⊤)) →\n      ∃ U : Cover.{u} etalePrecoverage T, ∀ (i : U.I₀) (a : ℤ),\n        Nonempty ((finiteEtaleTateSheaf A m T hA a).over (U.etalePrecoverageToEtale i) ≅\n          (constantSheaf (T.smallEtaleTopology.over (U.etalePrecoverageToEtale i))\n            (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤))),\n      (Etale.upperStar AddCommGrpCat.{u + 1} v).map (kernel.ι (m • 𝟙 T.gmSheaf)) ≫\n          upperStarGmSheafToGmSheaf v =\n        (r v hT).hom ≫ kernel.ι (m • 𝟙 T'.gmSheaf)) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))) (W : T.Etaleᵒᵖ) (a : A)\n        (z : (T.rootsOfUnitySheaf m).obj.obj W),\n      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).homEquiv _ _\n        (c v hT hT' 1).hom).hom.app W (finiteEtaleTateOneGenerator A m T hA W a z) =\n      finiteEtaleTateOneGenerator A m T' hA\n        ((MorphismProperty.Over.pullback @Etale ⊤ v).op.obj W) a\n        (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} v).homEquiv _ _\n          (r v hT).hom).hom.app W z)) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))),\n      c v hT hT' 0 = (upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).app\n        (ModuleCat.of A A)) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))) (n : ℕ),\n      c v hT hT' (.ofNat (n + 2)) =\n        asIso (Functor.OplaxMonoidal.δ (Etale.upperStar (ModuleCat.{u + 1} A) v)\n          (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1))) (finiteEtaleTateLine T m A hA)) ≪≫\n          tensorIso (c v hT hT' (.ofNat (n + 1))) (c v hT hT' 1)) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))) (n : ℕ),\n      (Etale.upperStar (ModuleCat.{u + 1} A) v).map\n          ((ihom.ev (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1)))).app\n            (finiteEtaleTateSheaf A m T hA 0)) ≫ (c v hT hT' 0).hom =\n        Functor.OplaxMonoidal.δ (Etale.upperStar (ModuleCat.{u + 1} A) v)\n          (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1)))\n          (finiteEtaleTateSheaf A m T hA (.negSucc n)) ≫\n          tensorHom (c v hT hT' (.ofNat (n + 1))).hom (c v hT hT' (.negSucc n)).hom ≫\n          (ihom.ev (finiteEtaleTateSheaf A m T' hA (.ofNat (n + 1)))).app\n            (finiteEtaleTateSheaf A m T' hA 0)) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (a : ℤ),\n      c (𝟙 T) hT hT a = (Etale.upperStarId (ModuleCat.{u + 1} A) T).app\n        (finiteEtaleTateSheaf A m T hA a)) ∧\n    (∀ {T T' T'' : Scheme.{u}} (v : T' ⟶ T) (w : T'' ⟶ T')\n        (hT : IsUnit (m : Γ(T, ⊤))) (hT' : IsUnit (m : Γ(T', ⊤)))\n        (hT'' : IsUnit (m : Γ(T'', ⊤))) (a : ℤ),\n      c (w ≫ v) hT hT'' a =\n        (Etale.upperStarComp (ModuleCat.{u + 1} A) w v).app\n          (finiteEtaleTateSheaf A m T hA a) ≪≫\n        (Etale.upperStar (ModuleCat.{u + 1} A) w).mapIso (c v hT hT' a) ≪≫\n          c w hT' hT'' a) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (a : ℤ),\n      p T hT 0 a = λ_ (finiteEtaleTateSheaf A m T hA a) ≪≫\n        eqToIso (congrArg (finiteEtaleTateSheaf A m T hA) (zero_add a).symm)) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (a : ℤ),\n      p T hT a 0 = ρ_ (finiteEtaleTateSheaf A m T hA a) ≪≫\n        eqToIso (congrArg (finiteEtaleTateSheaf A m T hA) (add_zero a).symm)) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (n : ℕ),\n      p T hT (.ofNat (n + 1)) 1 = Iso.refl _) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (a b d : ℤ),\n      (p T hT a b).hom ▷ finiteEtaleTateSheaf A m T hA d ≫ (p T hT (a + b) d).hom =\n        (α_ (finiteEtaleTateSheaf A m T hA a) (finiteEtaleTateSheaf A m T hA b)\n          (finiteEtaleTateSheaf A m T hA d)).hom ≫\n        finiteEtaleTateSheaf A m T hA a ◁ (p T hT b d).hom ≫\n          (p T hT a (b + d)).hom ≫\n            eqToHom (congrArg (finiteEtaleTateSheaf A m T hA) (add_assoc a b d).symm)) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (a b : ℤ),\n      (β_ (finiteEtaleTateSheaf A m T hA a) (finiteEtaleTateSheaf A m T hA b)).hom ≫\n          (p T hT b a).hom ≫\n          eqToHom (congrArg (finiteEtaleTateSheaf A m T hA) (add_comm b a)) =\n        (p T hT a b).hom) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (n : ℕ),\n      (p T hT (.ofNat (n + 1)) (.negSucc n)).hom ≫\n          eqToHom (congrArg (finiteEtaleTateSheaf A m T hA)\n            (add_neg_cancel (Int.ofNat (n + 1)))) =\n        (ihom.ev (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1)))).app\n          (finiteEtaleTateSheaf A m T hA 0)) ∧\n    (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n        (hT' : IsUnit (m : Γ(T', ⊤))) (a b : ℤ),\n      (Etale.upperStar (ModuleCat.{u + 1} A) v).map (p T hT a b).hom ≫\n          (c v hT hT' (a + b)).hom =\n        Functor.OplaxMonoidal.δ (Etale.upperStar (ModuleCat.{u + 1} A) v)\n          (finiteEtaleTateSheaf A m T hA a) (finiteEtaleTateSheaf A m T hA b) ≫\n        tensorHom (c v hT hT' a).hom (c v hT hT' b).hom ≫ (p T' hT' a b).hom)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
