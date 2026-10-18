@@ -13,11 +13,138 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-etale-morphism",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(x)$. Consider the etale residue triples over $(A,\\mathfrak p,k,\\mathrm{id}_k)$ of [def-weil-pbc-etale-residue-triples]. For $t=(B_t,\\alpha_t,q_t,\\phi_t)$ the composite $k\\to\\kappa(q_t)\\xrightarrow{\\phi_t}k$ is the identity. Since both maps are field embeddings, they are inverse isomorphisms: for $z\\in\\kappa(q_t)$, injectivity of $\\phi_t$ gives $z=i(\\phi_t(z))$. Thus every object already has the required unchanged residue field, with no separable-closure hypothesis. Choose a small full representative category $\\mathcal T$: [lem-weil-pbc-affine-etale-essentially-small-cover] gives a set of underlying affine etale schemes and, for each, the triples of primes and field maps form a set. Transport of objects and arrows along representative isomorphisms preserves filteredness and all pointings.",
+   "uses": [
+    "def-weil-pbc-etale-residue-triples",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), category of residue-preserving pairs; Tag 04GW, pointed-triple description; size bound from topologies.tex Tag 04HR."
+   }
+  },
+  {
+   "text": "The category $\\mathcal T$ is filtered by [lem-weil-pbc-etale-triples-filtered-colimit-filtered], applied with the arbitrary field $K=k$ and $\\chi=\\mathrm{id}$. Take the colimit $H$ of its diagram of commutative $A$-algebras using [lem-weil-pbc-commutative-algebras-colimits-exist]. By [lem-weil-pbc-filtered-colimit-algebras-elementwise], it is also the colimit in commutative rings and every element comes from a stage. The compatible pointings $\\psi_t:B_t\\to k$ induce $\\psi:H\\to k$ by the colimit universal property; write $\\iota_t:B_t\\to H$ for the legs and $\\rho:A\\to H$ for the structural map. Thus $\\psi\\iota_t=\\psi_t$ and $\\iota_t\\alpha_t=\\rho$. Reindex by [lem-coef-cardinal-filtered-poset-reindex] with $\\eta=\\aleph_0$, obtaining a nonempty directed poset $I$ and a diagram $A_a=B_{u(a)}$ with the same colimit $H$. Retain the original legs $\\iota_t$ for all $t$, as well as the restricted legs.",
+   "uses": [
+    "lem-weil-pbc-etale-triples-filtered-colimit-filtered",
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-cardinal-filtered-poset-reindex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), filtered colimit construction; categories.tex Tag 0032 (lemma-directed-category-system) for directed reindexing."
+   }
+  },
+  {
+   "text": "For $h\\in H$, choose $h=\\iota_t(b)$ by [lem-weil-pbc-filtered-colimit-algebras-elementwise]. If $\\psi(h)\\ne0$, then $b\\notin q_t$, so [lem-weil-pbc-etale-triple-unit-refinement] gives a pointed successor where $b$ is a unit; its image in $H$ is $h$ by cocone naturality, hence $h$ is a unit. If $\\psi(h)=0$, then $b\\in q_t$, so [lem-weil-pbc-etale-triple-ideal-refinement] gives a successor where $b$ belongs to $\\mathfrak pB_s$; mapping its finite ideal expression to $H$ gives $h\\in\\mathfrak pH$. Conversely $\\psi\\rho$ kills $\\mathfrak p$, hence $\\mathfrak pH\\subseteq\\ker\\psi$. Therefore $\\ker\\psi=\\mathfrak pH$ and every element outside this proper ideal is a unit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-triple-unit-refinement",
+    "lem-weil-pbc-etale-triple-ideal-refinement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), paragraphs proving locality, ideal equality and residue field; ideal refinement uses Tag 00U4 (lemma-etale-at-prime)."
+   }
+  },
+  {
+   "text": "Set $\\mathfrak m=\\ker\\psi=\\mathfrak pH$. Every proper ideal of $H$ lies in $\\mathfrak m$, since elements outside it are units, so $H$ is local with maximal ideal $\\mathfrak m$. For $s\\in A\\setminus\\mathfrak p$, $\\psi\\rho(s)\\ne0$, hence $\\rho(s)$ is invertible. The fraction formula $a/s\\mapsto\\rho(a)\\rho(s)^{-1}$ defines $A_{\\mathfrak p}\\to H$: the fraction relation is preserved after multiplying by the images of its denominators. Its inverse image of $\\mathfrak m$ is $\\mathfrak pA_{\\mathfrak p}$, because its composite with $\\psi$ is the usual map $A_{\\mathfrak p}\\to k$. It is therefore local. Every $z\\in k=\\operatorname{Frac}(A/\\mathfrak p)$ has the form $\\bar a/\\bar s$, $s\\notin\\mathfrak p$, so $z=\\psi(\\rho(a)\\rho(s)^{-1})$. Thus $\\psi$ is surjective and induces $H/\\mathfrak m\\cong k$, inverse to the map from $A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}=k$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), locality and residue-field paragraphs, applied directly to the system over A; localization is Definition Tag 00CO."
+   }
+  },
+  {
+   "text": "Let $P\\in H[T]$ be monic and let $a_0\\in k$ satisfy $\\overline P(a_0)=0$ and $\\overline{P'}(a_0)\\ne0$. Use [lemma-nagata-filtered-colimit-finite-data] on its finitely many coefficients to obtain a monic $Q\\in A_a[T]$ mapping to $P$ (lift the coefficients below the leading term and set that term equal to $1$). Put $B=A_a$ and use its pointing $B\\to k$. Then $Q(a_0)=0$ and $Q'(a_0)\\ne0$ in $k$. By [lem-weil-pbc-standard-etale-monic-derivative], $E=B[T,Y]/(Q,YQ'-1)$ is etale over $B$ and has a $B$-algebra map $E\\to k$ with $T\\mapsto a_0$. Composition makes $E$ etale over $A$ by [lem-weil-pbc-etale-composition-cancellation]. The kernel $q_E$ of $E\\to k$ contracts to $\\mathfrak p$; the map extends to a field embedding $\\kappa(q_E)\\to k$ since every denominator outside $q_E$ maps to a nonzero element. Hence $E$ defines a triple $s$ and $B\\to E$ a pointed arrow from $u(a)$ to $s$, after transport to representatives. The cocone equation $\\iota_s\\circ(B\\to E)=\\iota_{u(a)}$ gives $P(\\iota_s(T))=0$ and $\\psi(\\iota_s(T))=a_0$.",
+   "uses": [
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), final paragraph adjoining a simple root; standard etale algebra: Definition Tag 00UB and Lemma Tag 00UC."
+   }
+  },
+  {
+   "text": "The simple-root lifting condition proved in Step 5 and the local-ring structure of Step 4 satisfy condition (ii) of [lem-weil-pbc-henselian-local-root-lifting]. Its implication (ii) to (i) proves that $H$ is henselian in exactly the idempotent-lifting sense of [def-weil-pbc-henselian-terminology]. This supplies the requested henselian local $A$-algebra.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 04GF (definition-henselian), Lemma Tag 04GG (lemma-characterize-henselian); more-algebra.tex Tag 09XI identifies the idempotent convention."
+   }
+  },
+  {
+   "text": "For every $a$, let $x_a=q_{u(a)}$. Step 1 gives $\\kappa(x)\\xrightarrow{\\sim}\\kappa(x_a)$. The triple morphisms preserve their pointings, so their inverse-image prime ideals and residue identifications are preserved. The map $\\psi\\iota_{u(a)}$ has kernel $q_{u(a)}$, while $\\ker\\psi=\\mathfrak m$; consequently $\\iota_{u(a)}^{-1}(\\mathfrak m)=q_{u(a)}$, so the closed point of $\\operatorname{Spec}H$ maps to $x_a$. Each $u_a:\\operatorname{Spec}A_a\\to X$ is etale by the definition of a triple. It is separated by [lem-weil-pbc-affine-source-morphism-separated] and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1): its source is affine, its target $X=\\operatorname{Spec}A$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and etaleness includes local finite presentation. These hypotheses do not require $A$ to be Noetherian.",
+   "uses": [
+    "def-weil-pbc-etale-residue-triples",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), pointed etale system; schemes.tex Tags 01KN and 01KV for separatedness, Tag 03GI for quasi-compactness; morphisms.tex Definition 01TP for finite presentation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-small-colimit-limit] to the small ring diagram $a\\mapsto A_a$ and its colimit cocone with vertex $H$. It identifies $\\operatorname{Spec}H$ with $\\varprojlim_a\\operatorname{Spec}A_a$, with precisely the spectrum maps of the coprojections as projections. All maps commute with the maps to $X$ because every transition and every coprojection is an $A$-algebra map. The same cone is therefore limiting over $X$: a cone over $X$ has its unique factorization in schemes, and composing that factorization with any projection shows it is over $X$ (the index set is nonempty). Together with $\\mathfrak m=\\mathfrak pH$ and the residue identification of Step 4, this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit), affine spectrum of the colimit and its projections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-residue-triples",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-etale-triples-filtered-colimit-filtered",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-weil-pbc-etale-triple-unit-refinement",
+  "lem-weil-pbc-etale-triple-ideal-refinement",
+  "def-weil-pbc-localization-at-prime",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-spec-small-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GN (lemma-henselization), proof by residue-preserving pointed etale algebras; its construction is carried out directly over A using the arbitrary-field residue-triple refinements. Directed reindexing: categories.tex Tag 0032; affine limit: limits.tex Tag 01YW."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +180,45 @@
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|Henselization|IsHenselization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply henselian criteria or standard etale algebras, not the existence of this residue-preserving henselian colimit and its spectrum limit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary henselization as colimit of pointed etale algebras with same residue field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\", \"Algebra.Etale.of_isLocalizationAway\", \"HenselianLocalRing\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.formallyEtale\", \"HenselianLocalRing.toIsLocalRing\"], \"digest\": \"9411d3b6ccbf0ca0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply henselian criteria or standard etale algebras, not the existence of this residue-preserving henselian colimit and its spectrum limit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Algebra.Etale\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply henselian criteria or standard etale algebras, not the existence of this residue-preserving henselian colimit and its spectrum limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a henselian local ring by adjoining simple roots along pointed etale neighborhoods",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.is_henselian\", \"HenselianRing\", \"Field.henselian\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"IsAdicComplete.henselianRing\"], \"digest\": \"46d0e30d49c54451\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply henselian criteria or standard etale algebras, not the existence of this residue-preserving henselian colimit and its spectrum limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary henselization is the filtered colimit of etale ring algebras with unchanged residue field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instIsStandardEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"HenselianLocalRing.TFAE\", \"Algebra.IsEtaleAt\", \"Algebra.instFormallyUnramifiedResidueField\"], \"digest\": \"0de346e96da06543\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply henselian criteria or standard etale algebras, not the existence of this residue-preserving henselian colimit and its spectrum limit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-flat-cd-etale-exchange",
@@ -82,5 +244,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 04GN construction directly over A using triples pointed into kappa(x): unchanged residue fields, a small filtered diagram, directed reindexing, unit and ideal refinements, locality and surjective residue map, simple-root adjunction and the henselian criterion, and the affine spectrum limit. Reused existing DAG nodes throughout; no new node and no change to the statement. Added its missing localization definition dependency.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3 (Verdier duality), through the ILO II 3.2.3 passage to an ordinary henselian base quoted in the parent split: the eight steps supply precisely the residue-preserving affine etale system needed to pass to the limit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-triples-filtered-colimit-filtered",
+    "why": "Generic algebra/category tool: Filteredness of etale residue triples over an arbitrary field. This Fourier unit supplies no replacement; used only as the stated tool in the Stacks henselization construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-triple-unit-refinement",
+    "why": "Generic algebra/category tool: Etale residue triple unit refinement. This Fourier unit supplies no replacement; used only as the stated tool in the Stacks henselization construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-triple-ideal-refinement",
+    "why": "Generic algebra/category tool: Etale residue triple ideal refinement. This Fourier unit supplies no replacement; used only as the stated tool in the Stacks henselization construction."
+   },
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Generic algebra/category tool: Finite data and finite relations descend in a filtered colimit. This Fourier unit supplies no replacement; used only as the stated tool in the Stacks henselization construction."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic algebra/category tool: A local ring is henselian (idempotent lifting) iff simple roots of monic polynomials lift. This Fourier unit supplies no replacement; used only as the stated tool in the Stacks henselization construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-triples-filtered-colimit-filtered",
+  "lem-weil-pbc-etale-triple-unit-refinement",
+  "lem-weil-pbc-etale-triple-ideal-refinement",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-7f8bfbfb4",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-7f8bfbfb4 (reviewer sub-agent of L); spot-checked: Read the item, all 26 stmt_dep/proof_dep statements and Stacks algebra.tex 04GN (lemma-henselization) statement and proof in full. Statement unchanged; the one addition is the stmt_dep def-weil-pbc-localization-at-prime, which A_p needs. There are no new nodes. The route matches 04GN, carried out over A with triples pointed into k=kappa(p), which avoids the false claim that A->A_p is etale. Step 1: phi∘i=id plus injectivity makes the residue maps isomorphisms; the essentially-small cover gives the small model. Step 2: filteredness for arbitrary K, colimit plus elementwise, psi from the cocone, reindexing at aleph_0 to a nonempty directed poset. The reindex lemma holds for every category C, so it gives the ring colimit that Steps 5 and 8 need. Step 3: unit and ideal refinements give ker psi = pH (elementary). Step 4: locality, A_p->H is local, and psi is surjective via fractions (needed for nonmaximal p). Step 5: monic Q lifted by finite data; standard-etale (2) with L=k gives E->k, T->a_0, with no lift needed; q_E and the compatible residue map make E a triple. Step 6: root lifting (ii)=>(i) gives idempotent henselian. Step 7: iota^{-1}(m)=q_{u(a)}; transition maps preserve points and identifications; separated because the source is affine; finite presentation from qcqs-permanence (1). Step 8: the Spec-colimit limit, over X. Edge cases checked: a field A, (0) in Z, k[eps]/eps^2, non-Noetherian A. Duplicate search over henselization, 04GN and pair/strict-henselization nodes found none that states pointed residue-preserving A-neighbourhoods. tool_uses accepted (generic algebra tools); the 'Fourier unit' wording in them is cosmetic."
  }
 }
