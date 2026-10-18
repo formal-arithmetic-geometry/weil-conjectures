@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Module.PadicTorsionLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicFrobenius
 
@@ -16,13 +17,14 @@ geometric Galois Frobenius of `X̄ = X ×_{k₀} k̄`). The explicit comparison
 `Hom_{D(S_ét, Λ)}(Λ_S, Λ_S[n]) ≅ Hⁿ(S_proét, ℤ/ℓᵐ)`, `Λ = ℤ/ℓᵐ`
 (`AlgebraicGeometry.ProEtale.unitShiftAddEquivFiniteAdicH`), intertwines the Frobenius operator
 `x ↦ ε⁻¹ ≫ Le^* x ≫ ε[n]` of the canonical Weil datum `ε : Le^* Λ_S ≅ Λ_S` with the pullback `e^*`
-of pro-étale cohomology (`AlgebraicGeometry.ProEtale.finiteAdicHPullback_unitShiftAddEquivFiniteAdicH`).
+of pro-étale cohomology
+(`AlgebraicGeometry.ProEtale.finiteAdicHPullback_unitShiftAddEquivFiniteAdicH`).
 
 Consequently, nondegenerate finite-level pairings on `Hom(Λ_S, Λ_S[i]) × Hom(Λ_S, Λ_S[j])` which
 are similitudes for the étale Frobenius operators give the finite-level Frobenius similitudes
 `hQF` of `AlgebraicGeometry.ProEtale.exists_isPerfPair_adicConstantH`, for the pullbacks `e^*` on
-the integral cohomology `Hⁿ(S, ℤ_ℓ)`; hence a perfect pairing on `Hⁱ(S, ℚ̄_ℓ) × Hʲ(S, ℚ̄_ℓ)` which is
-a similitude for any endomorphisms extending `e^*`
+the integral cohomology `Hⁿ(S, ℤ_ℓ)`; hence a perfect pairing on `Hⁱ(S, ℚ̄_ℓ) × Hʲ(S, ℚ̄_ℓ)`
+which is a similitude for any endomorphisms extending `e^*`
 (`AlgebraicGeometry.ProEtale.exists_isPerfPair_adicConstantH_of_unitPairing`).
 -/
 
@@ -124,8 +126,8 @@ theorem exists_isPerfPair_adicConstantH_of_unitPairing [ConnectedSpace S] (e : S
     simpa [Q, P'] using LinearMap.congr_fun hy x
   · rw [reduction_integralAdicHPullback, reduction_integralAdicHPullback]
     simp only [Q, P', PadicInt.bilinearOfPowSMulEqZero_apply, AddMonoidHom.mk'_apply,
-      AddMonoidHom.coe_comp, Function.comp_apply, hsymm, hPF]
-    rw [Nat.cast_smul_eq_nsmul]
-    exact map_nsmul _ _ _
+      AddMonoidHom.coe_comp, Function.comp_apply, AddEquiv.coe_toAddMonoidHom, hsymm]
+    rw [hPF, map_nsmul]
+    exact (Nat.cast_smul_eq_nsmul ℤ_[l] c _).symm
 
 end AlgebraicGeometry.ProEtale
