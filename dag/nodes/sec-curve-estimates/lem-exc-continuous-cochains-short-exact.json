@@ -34,16 +34,18 @@
    }
   },
   {
-   "text": "The displayed formula defines a continuous $A$-linear differential: each projection, adjacent multiplication map $G^{n+1}\\to G^n$, and the action map $G\\times M\\to M$ is continuous, and finite sums are continuous into the discrete module. The identity $d^{n+1}d^n=0$ follows by expanding the two alternating sums: terms joining disjoint adjacent pairs occur twice with opposite signs, as do the action term paired with joining the first pair and the final omission term paired with joining the last pair; the remaining double-action terms cancel by $(g_1g_2)m=g_1(g_2m)$. In degree zero, the two terms from $d^1(d^0m)$ cancel directly. Thus these are cochain complexes.",
-   "uses": [],
-   "elementary": true,
+   "text": "Construct the differential as a continuous A-linear map by the displayed formula. The open stabilizers give joint continuity of the action on the discrete coefficients; projections and adjacent multiplication are continuous, so every summand is continuous. Give ULift of the underlying additive group the induced integer representation and its discrete topology. Apply [lem-sc-homogeneous-inhomogeneous-continuous-cohomology] to obtain additive coordinates for Mathlib's homogeneous complex. These coordinates identify the explicit continuous differential with the homogeneous differential. Lift a continuous cochain, take its inverse image under the coordinates, apply the homogeneous square-zero equation, and project ULift.down. This proves square-zero for our explicit differential in every degree, including zero, without a new cancellation calculation.",
+   "uses": [
+    "lem-sc-homogeneous-inhomogeneous-continuous-cohomology"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed inhomogeneous differential; the cancellation check is supplied here"
    }
   },
   {
-   "text": "For either equivariant $A$-linear map $u=i,p$, applying $u$ to every term in the formula for $d^nf$ gives the corresponding term of $d^n(u\\circ f)$: $u(gm)=g u(m)$ handles the first term, and additivity handles the alternating sum and last term. The degree-zero formula has the same property. Therefore the degreewise maps of Step 1 are morphisms of the complexes of Step 2 and their composite is zero. Extend these nonnegative complexes by zero in negative degrees. Their degreewise sequences are short exact in every integer degree, so the criterion [lem-weil-pbc-cochain-complexes-degreewise-exact] makes the resulting sequence short exact as complexes; restricting back to nonnegative degrees gives the asserted cochain-complex sequence.",
+   "text": "For either equivariant A-linear map u=i,p, applying u to each term of the explicit differential agrees with applying the differential after postcomposition: equivariance handles the action face and additivity handles the integer-weighted sum. Build the complex morphisms by CochainComplex.ofHom. Their composite is zero pointwise by the original short complex equation. Use Step 1 to prove injectivity, range equals kernel, and surjectivity in each degree of these actual continuous-map modules. ModuleCat's exactness criterion and mono/epi criteria give degreewise short exactness. Apply HomologicalComplex.shortExact_of_degreewise_shortExact from [lem-weil-pbc-cochain-complexes-degreewise-exact] directly to the shape up Nat. The degreewise coordinates are identity linear equivalences, so the postcomposition and differential equations hold by construction.",
    "uses": [
     "lem-weil-pbc-cochain-complexes-degreewise-exact",
     "lem-exc-discrete-modules-abelian"
@@ -57,12 +59,13 @@
  ],
  "proof_deps": [
   "lem-exc-discrete-modules-abelian",
+  "lem-sc-homogeneous-inhomogeneous-continuous-cohomology",
   "lem-weil-pbc-cochain-complexes-degreewise-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, label section-continuous-group-cohomology: assertion and differential are in the source; the degreewise lifting and cancellation details are supplied by the agent"
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential and short exactness paragraph; M4 realizes the lifting argument and naturality explicitly, and reuses the proved homogeneous-to-inhomogeneous coordinate theorem for square-zero."
  },
  "mathlib_searches": [
   {
@@ -141,5 +144,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261018T062834-L-664299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
