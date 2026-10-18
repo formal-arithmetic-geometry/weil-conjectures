@@ -16497,3 +16497,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleClosedSupportTorBound (stage 3; reviewer PASS; first push; landing 20261018T144405-L-3500487 (interface); batch 20261018T144352; modules 1; new nodes 0; change records: coord/changes/F2-closedSupport-torAmplitude-imports.md)
 - 14:44 L: merged deliver/G1/Sheaf.AlgebraicGeometry.EtaleOpenProjectionExchange (stage 3; reviewer PASS; first push; landing 20261018T144405-L-3500717 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap (stage 3; reviewer PASS; first push; landing 20261018T144407-L-3501008 (proof); batch 20261018T144352; modules 1; new nodes 0)
+- 14:44 L: merged deliver/G6/Sheaf.AlgebraicGeometry.ProEtaleProductsExact (stage 3; reviewer PASS; first push; landing 20261018T144408-L-3501307 (proof); batch 20261018T144352; modules 1; new nodes 0)

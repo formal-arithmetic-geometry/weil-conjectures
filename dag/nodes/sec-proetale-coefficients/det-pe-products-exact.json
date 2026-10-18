@@ -15,38 +15,36 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Fix an affine weakly contractible object $W$. By [det-pe-sections-limits-colimits], evaluation at $W$ commutes with products, so the evaluation of the product sequence is the product over $i$ of the exact sequences $0\to A_i(W)\to B_i(W)\to C_i(W)\to0$ supplied by [det-pe-wc-sections-exact]. The product sequence of modules is exact coordinatewise: injectivity and the kernel equality are checked coordinate by coordinate, and for any tuple $(c_i)_{i\\in I}$ choose, for each $i$, a preimage $b_i\\in B_i(W)$; then $(b_i)_i$ maps to $(c_i)_i$.",
+   "text": "Let L be the discrete-I limit functor on module sheaves. It is additive because it preserves binary products. To prove that L preserves finite colimits it suffices, by Mathlib Functor.exact_tfae, to prove that it preserves exact short complexes. Fix an exact short complex S of I-indexed module-sheaf diagrams and an affine weakly contractible W. By det-pe-sections-limits-colimits, evaluation E at W preserves finite limits and finite colimits. Whiskering diagrams with E is therefore exact, so S remains exact after evaluation. Mathlib ModuleCat.AB supplies exact products of modules; transport its instance from ULift I to I along the discrete equivalence to account for the coefficient and index universes. Applying the module limit functor gives an exact short complex.",
    "uses": [
-    "det-pe-sections-limits-colimits",
-    "det-pe-wc-sections-exact"
+    "det-pe-sections-limits-colimits"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md",
-    "place": "paragraph beginning “Products of sheaves are computed sectionwise”"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md; Mathlib/Algebra/Category/ModuleCat/AB.lean; Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+    "place": "Coordinatewise products paragraph; ModuleCat AB4Star; Functor.exact_tfae"
    }
   },
   {
-   "text": "The evaluated product sequence is therefore exact for every affine weakly contractible $W$. Apply [det-pe-sections-conservative], clause 1, to obtain exactness at the middle sheaf. Applying the same criterion to the sequences $0\to\\prod_i A_i\to\\prod_i B_i$ and $\\prod_i B_i\to\\prod_i C_i\to0$ gives injectivity of the first map and surjectivity of the second (the zero terms evaluate to zero), so $0\to\\prod_iA_i\to\\prod_iB_i\to\\prod_iC_i\to0$ is exact. This is precisely exactness of the product functor.",
+   "text": "The natural isomorphism preservesLimitNatIso E identifies the evaluated sheaf-limit short complex with the module-limit short complex just shown exact. Transport exactness along the induced short-complex isomorphism. Apply the first clause of det-pe-sections-conservative to conclude exactness of S.map L. Functor.exact_tfae now gives finite-colimit preservation by L, which is HasExactLimitsOfShape (Discrete I). This also proves endpoint exactness: preservation of all exact short complexes implies preservation of short exact complexes, by applying exactness to zero-endpoint complexes as in Mathlib exact_tfae. The argument includes empty I.",
    "uses": [
     "det-pe-sections-conservative"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md",
-    "place": "paragraph ending “the product sequence of sheaves is exact”"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md; Mathlib/CategoryTheory/Limits/Preserves/Limits.lean; Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+    "place": "Conservativity sentence; preservesLimitNatIso; Functor.exact_tfae"
    }
   }
  ],
  "proof_deps": [
   "det-pe-sections-limits-colimits",
-  "det-pe-wc-sections-exact",
   "det-pe-sections-conservative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md",
+  "place": "Same evaluation/product/conservativity argument implemented using Mathlib ModuleCat.AB, the natural limit comparison, and Functor.exact_tfae; G6, 2026-10-18"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -111,5 +109,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261018T144408-L-3501307",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
