@@ -20,9 +20,88 @@
   "def-pc-fibre-product",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the strict-local complement criterion [lem-per-divisor-purity-strict-local-criterion]. To prove purity of $(X,D)$, fix a geometric point $\\bar x\\to D$, pass to the strict henselization $S=X_{(\\bar x)}$, and write $U=S\\setminus(D\\times_XS)$. The strict-localization Cartesian identification for the closed immersion [lem-trf-closed-immersion-strict-localization-cartesian] identifies this divisor with the pullback of $D$ and reduces the desired assertion to $H^q(U_{\\mathrm{et}},A)=0$ for $q\\ge2$.",
+   "uses": [
+    "lem-per-divisor-purity-strict-local-criterion",
+    "lem-trf-closed-immersion-strict-localization-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.4.2 and Proposition 3.4.3, printed pp.245–246."
+   }
+  },
+  {
+   "text": "Put $Y_S=Y\\times_XS$. By [lem-trf-finite-base-strict-localization], $Y_S$ is a finite disjoint union of the strict localizations $Y_{(\\bar y_a)}$ at geometric points above $\\bar x$. These are regular Noetherian by [lem-sc-strict-henselization-regular, lem-sc-strict-henselization-noetherian]. The closed-immersion comparison [lem-trf-closed-immersion-strict-localization-cartesian] identifies $D'\\times_Y Y_{(\\bar y_a)}$ with $D'_{(\\bar y_a)}$. The closed subsets defined by a Cartier ideal and its radical are equal; thus $V=Y_S\\times_SU$ is the disjoint union of the complements of these divisors. The map $g:V\\to U$ remains finite locally free of rank $d$: on affine charts its algebra is $B\\otimes_R R'$ by [lem-weil-pbc-fibre-product-affine-spectra], with a finite free rank-$d$ module locally by [lem-pc-flf-properties]; tensoring its local basis gives a rank-$d$ basis after every base change. The rank agreement is also [lem-weil-pbc-finite-flat-rank-iso](2). The divisor's reduction is used only to identify its underlying closed set, never to assert it commutes with arbitrary base change.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-flf-properties",
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.4.3 p.246; Stacks Tags 03QP (finite strict-local decomposition), 06LJ (Noetherian strict henselization), 06LN (regularity), 02KD (lemma-base-change-finite-locally-free)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-divisor-purity-strict-local-criterion] to the original regular pair $(Y,D')$. The assumed isomorphism implies $H^q(Y_{(\\bar y_a)}\\setminus D'_{(\\bar y_a)},A)=0$ for every $q\\ge2$ and every $a$. Step 2 identifies these opens with the components of $V$. Sheaves and injective resolutions on a finite disjoint union are componentwise: sections are the finite product of sections and the category is the product of the component categories. Finite products of vector spaces preserve exact sequences, so taking cohomology of those resolutions gives $H^q(V,A)=\\prod_aH^q(Y_{(\\bar y_a)}\\setminus D'_{(\\bar y_a)},A)=0$.",
+   "uses": [
+    "lem-per-divisor-purity-strict-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.4.3, strict-henselian reduction, printed p.246."
+   }
+  },
+  {
+   "text": "For the finite locally free map $g:V\\to U$, the weighted trace theorem [lem-pur-quasifinite-flat-weighted-trace] supplies a trace $\\tau:g_*g^*A\\to A$ whose composite with the unit $A\\to g_*g^*A$ is multiplication by $d$. Since $\\ell\\nmid d$, multiplication by $d$ is invertible on $A$, so the unit is a split monomorphism. The finite-pushforward derived-sections comparison [lem-trf-derived-sections-finite-pushforward-modules] identifies $R\\Gamma(U,g_*A)$ with $R\\Gamma(V,A)$; applying cohomology therefore makes $H^q(U,A)\\to H^q(V,A)$ injective for every $q$. The vanishing from Step 3 forces $H^q(U,A)=0$ for $q\\ge2$.",
+   "uses": [
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-trf-derived-sections-finite-pushforward-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.4.3 and Lemma 3.4.4, printed p.246."
+   }
+  },
+  {
+   "text": "The vanishing in Step 4 holds for every geometric point of $D$. Applying the strict-local complement criterion [lem-per-divisor-purity-strict-local-criterion] gives that the Kummer class map $A_D\\to i^!A_X(1)[2]$ is an isomorphism, as required.",
+   "uses": [
+    "lem-per-divisor-purity-strict-local-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.4.3, printed p.246."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flf-properties",
+  "lem-per-divisor-purity-strict-local-criterion",
+  "lem-pur-quasifinite-flat-weighted-trace",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-derived-sections-finite-pushforward-modules",
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-flat-rank-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.4.3 and Lemma 3.4.4, printed pp.245–246."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +140,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-monomial-trait-punctual-purity",
@@ -73,7 +152,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.4.3, printed p.246 (the divisor descent assertion itself).",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve: regular finite-coefficient duality input via ILO XVI Proposition 3.4.3, printed p.246, using Proposition 3.4.2 and Lemma 3.4.4.",
    "via": [
     "lem-per-monomial-trait-punctual-purity",
     "lem-per-log-smooth-trait-punctual-purity",
@@ -87,5 +166,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-flat-regular-divisor-purity-descent",
+  "worker": "stage1",
+  "summary": "Split the divisor descent proof into the strict-local complement criterion, finite strict-local base change, componentwise vanishing, and the prime-to-ell weighted-trace injection. Reused the existing finite strict-localization decomposition and weighted trace/derived sections nodes; statement unchanged.",
+  "blueprint": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, specifically ILO XVI Proposition 3.4.3 (pp.245–246), with Proposition 3.4.2 as the complement criterion and Lemma 3.4.4 as the trace splitting.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Generic closed-immersion strict-local Cartesian comparison; identifies the strict-local divisor without changing the ILO XVI 3.4.3 route. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Generic finite-morphism decomposition over a strict local base; supplies the components used in ILO XVI 3.4.3. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-derived-sections-finite-pushforward-modules",
+    "why": "Generic finite-pushforward Leray comparison for ordinary etale module sheaves; turns the sheaf trace retraction into a cohomology injection. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-quasifinite-flat-weighted-trace",
+    "why": "Generic weighted trace for finite flat maps, including inseparable ones; its finite locally free degree identity is precisely the input of ILO XVI Lemma 3.4.4. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-flat-rank-iso",
+    "why": "Generic constant-rank preservation under base change. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine base-change tensor-algebra calculation. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic regularity of strict henselizations; needed for the geometric local schemes in ILO XVI 3.4.3. The perverse unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Noetherianity of strict henselizations; applies without excellence. The perverse unit supplies no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-derived-sections-finite-pushforward-modules",
+  "lem-pur-quasifinite-flat-weighted-trace",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-c3c7a3d4d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-c3c7a3d4d (reviewer sub-agent of L); spot-checked: Read ILO XVI 3.4.2–3.4.4 (printed pp.245–246, pdf pp.249–250), the item, the new node and every cited statement. The item matches 3.4.3 hypothesis by hypothesis and is unchanged. New node lem-per-divisor-purity-strict-local-criterion is ILO 3.4.2 and is true: strictly henselian regular S, f prime, H^q_D = H^{q-1}(U) for q>=2, and H^1(U,mu_l) = Z/l is generated by the Kummer class. It is statement-only, needs no cases split out (D empty and traits both check), is not an item clause, and duplicates nothing (compared with the 3.4.5, 3.2.4, 3.5.5, 3.5.7, trait-test and costalk nodes; absolute purity would be circular). Steps 1–5 are sound. Step 2 uses the 03QP/05WR finite strict-local splitting, 06LJ/06LN, setwise D' = f^{-1}D, and rank d preserved by base change. Step 3 applies the criterion on (Y,D') and the product over components. Step 4 uses the weighted trace's rank-r identity (finite locally free, Noetherian U and V) and the finite-pushforward RGamma to get a split injection into 0. Step 5 is the converse. Batch-5 flags were checked on each node's own closure and all are generic Stacks algebra or sheaf theory: class-calculus is already a base stmt_dep; the weighted trace reaches only pod 008B/0DV5/01KU and trf 02UP; the cartesian node is 05WS; finite-pushforward is 03QP/08J6; finite-base is 05WR/0GIP/092Y. None of them reaches a thm-pod, thm-trf, sk-thm node or a target. Accepted. No SGA in item or new-node sources. The eight generic tool_uses are accepted."
  }
 }
