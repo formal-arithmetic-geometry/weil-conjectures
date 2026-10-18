@@ -7,16 +7,20 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
 /-!
 # `Ra_! ≅ Ra_*` and the Frobenius data
 
-For a proper morphism `a : X ⟶ Y` and a cartesian square `g ≫ a = a ≫ h`, the isomorphism
-`Ra_! ≅ Ra_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)
-intertwines the Weil data `AlgebraicGeometry.Etale.lowerShriekWeilDatum` and
-`AlgebraicGeometry.Etale.lowerStarWeilDatum` as soon as it intertwines the exchange maps
-`Ex_! : Lh^* Ra_! ⟶ Ra_! Lg^*` and `Ex_* : Lh^* Ra_* ⟶ Ra_* Lg^*`
-(`lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar`).
+For a proper morphism `a : X ⟶ Y` and a cartesian square `g ≫ a = a ≫ h` (e.g. the geometric
+Frobenius square), the isomorphism `Ra_! ≅ Ra_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`) intertwines the
+exchange maps `Ex_! : Lh^* Ra_! ⟶ Ra_! Lg^*` and `Ex_* : Lh^* Ra_* ⟶ Ra_* Lg^*`
+(`AlgebraicGeometry.Etale.exchangeCompatible`), hence the Weil data
+`AlgebraicGeometry.Etale.lowerShriekWeilDatum` and `AlgebraicGeometry.Etale.lowerStarWeilDatum`
+(`Etale.lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app`).
 -/
 
 @[expose] public section
@@ -81,6 +85,57 @@ theorem lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerSta
           ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).hom.app K) ≫
         lowerStarWeilDatum sq.toCommSq φ := by
   exact CategoryTheory.NatTrans.comp_map_comp_app_of_whisker_eq _ _ _ hEx φ
+
+omit [Finite Λ] in
+/-- The isomorphism `Ra_! ≅ Ra_*` is the forget-supports map of the chosen compactification
+`(i, p)` of `a`: `Rp_*` of `D(i_!) ⟶ Ri_*`, followed by the composition map
+`Ri_* ⋙ Rp_* ⟶ Ra_*`. -/
+lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app (K : DerivedCategoryModule Λ X) :
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).hom.app K =
+      R(((HasCompactification.compactification a).g)_*[ModuleCat.{u + 1} Λ]).map
+          ((derivedOpenImmersionLowerShriekToLowerStar _
+            (HasCompactification.compactification a).i).app K) ≫
+        (rightDerivedLowerStarCompHom _ (HasCompactification.compactification a).i
+          (HasCompactification.compactification a).g a
+          (HasCompactification.compactification a).comm).app K := by
+  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
+    rightDerivedLowerShriekToLowerStarComp_comp_eq]
+  rfl
+
+/-- **`Ra_! ≅ Ra_*` intertwines the exchange maps** `Ex_! : Lh^* Ra_! ⟶ Ra_! Lg^*` and
+`Ex_* : Lh^* Ra_* ⟶ Ra_* Lg^*` of a cartesian square `g ≫ a = a ≫ h` with `a` proper. -/
+theorem exchangeCompatible (sq : IsPullback g a a h) : ExchangeCompatible (Λ := Λ) sq := by
+  let c := HasCompactification.compactification a
+  ext K
+  rw [rightDerivedLowerShriekBaseChangeMap_eq]
+  simp only [rightDerivedLowerShriekBaseChangeMap', rightDerivedLowerShriekIso,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
+    Category.assoc, rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app, Functor.map_comp]
+  rw [rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar]
+  exact rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app_comp_toLowerStar _
+    sq.toCommSq c (c.ofIsPullback sq) _ (c.isPullback_i_ofIsPullback sq)
+    (IsPullback.of_hasPullback c.g h).toCommSq K
+
+/-- **`Ra_! ≅ Ra_*` intertwines the Weil data**: for a cartesian square `g ≫ a = a ≫ h` with
+`a` proper and a Weil datum `φ : Lg^* K ⟶ K`, the square
+```
+  Lh^* Ra_! K ──Lh^* (Ra_! ≅ Ra_*)──▶ Lh^* Ra_* K
+       │                                  │
+  lowerShriekWeilDatum φ          lowerStarWeilDatum φ
+       ▼                                  ▼
+    Ra_! K ─────────(Ra_! ≅ Ra_*)───────▶ Ra_* K
+```
+commutes. -/
+theorem lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app
+    (sq : IsPullback g a a h) {K : DerivedCategoryModule Λ X}
+    (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    lowerShriekWeilDatum sq φ ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).hom.app K =
+      (L((h)^*[ModuleCat.{u + 1} Λ])).map
+          ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).hom.app K) ≫
+        lowerStarWeilDatum sq.toCommSq φ :=
+  lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar sq
+    (exchangeCompatible sq) φ
 
 end Etale
 

@@ -211,6 +211,35 @@ lemma rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar
 
 end Refinement
 
+section Independence
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
+  [QuasiCompact f]
+
+/-- **The forget-supports maps do not depend on the compactification**: the comparison
+isomorphism `Rf_!(c) ≅ Rf_!(d)` followed by the forget-supports map of `d` is the
+forget-supports map of `c`. -/
+lemma rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar
+    (c d : Compactification f) (M : DerivedCategory (Sheaf X.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriekOfCompactificationIso Λ c d).hom.app M ≫
+        R((d.g)_*[ModuleCat.{u + 1} Λ]).map
+          ((derivedOpenImmersionLowerShriekToLowerStar _ d.i).app M) ≫
+        (rightDerivedLowerStarCompHom _ d.i d.g f d.comm).app M =
+      R((c.g)_*[ModuleCat.{u + 1} Λ]).map
+          ((derivedOpenImmersionLowerShriekToLowerStar _ c.i).app M) ≫
+        (rightDerivedLowerStarCompHom _ c.i c.g f c.comm).app M := by
+  simp only [rightDerivedLowerShriekOfCompactificationIso, Iso.trans_hom, Iso.symm_hom, asIso_inv,
+    asIso_hom, NatTrans.comp_app, Category.assoc]
+  rw [← rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar _
+      (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d) M,
+    ← NatTrans.comp_app_assoc (inv (rightDerivedLowerShriekOfCompactificationComparison _
+      (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d))),
+    IsIso.inv_hom_id, NatTrans.id_app, Category.id_comp,
+    rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar]
+
+end Independence
+
 end Etale
 
 end AlgebraicGeometry
