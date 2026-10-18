@@ -6,6 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtensionAux
 
 /-! # Inverse image of the canonical étale torsor extension
