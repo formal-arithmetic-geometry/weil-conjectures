@@ -1,0 +1,82 @@
+{
+ "id": "lem-per-galois-descent-monodromy-tensor",
+ "kind": "statement",
+ "title": "Monodromy and tensor of modules descended along a finite Galois cover",
+ "statement": "Let $S$ be a nonempty connected Noetherian scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-noetherian-ring], let $c:T\\to S$ be a connected finite etale Galois cover [def-galois-object] with finite group $G=\\operatorname{Aut}_S(T)$, let $\\bar t$ be a geometric point of $T$ [def-weil-geometric-point], put $\\bar s=c\\circ\\bar t$ and $\\Pi=\\pi_1(S,\\bar s)$ with its profinite topology [def-galois-fibre-functor], and let $R$ be a commutative ring annihilated by an integer $n>0$. For an $R$-module $V$ with an $R$-linear $G$-action $\\rho$, let $T_{c,R}(V)$ be the $R_S$-module sheaf [def-weil-sheaf-of-modules-category] on $S_{\\mathrm{et}}$ [def-weil-pbc-etale-site] of [lem-per-galois-cover-module-descent], obtained by descending the constant sheaf $V_T$ [def-weil-pbc-constant-sheaf] along $c$, together with its trivialization $c^{-1}T_{c,R}(V)\\cong V_T$ [def-weil-pbc-inverse-image]. Stalks are geometric stalks [def-weil-pbc-geometric-stalks], and $(c^{-1}F)_{\\bar t}$ is identified with $F_{\\bar s}$. Local systems and their monodromy actions are those of [lem-per-torsion-local-system-monodromy]. Then:\n\n1. *(Monodromy of a descended module.)* There is a continuous surjective group homomorphism $\\theta:\\Pi\\to G$ with kernel $c_*\\pi_1(T,\\bar t)$, depending only on $c$ and $\\bar t$ (not on $R$ or $V$), with the following property. For every such $(V,\\rho)$ the sheaf $T_{c,R}(V)$ is a local system, and the map $\\gamma_V:V\\to T_{c,R}(V)_{\\bar s}$ sending $v$ to the germ at $\\bar t$ of the constant section $v$ of $c^{-1}T_{c,R}(V)\\cong V_T$ is an $R$-linear isomorphism, natural in equivariant linear maps, with $g\\cdot\\gamma_V(v)=\\gamma_V(\\rho(\\theta(g))v)$ for the monodromy action of every $g\\in\\Pi$.\n2. *(Tensor of descended modules.)* For two such $(V,\\rho)$ and $(W,\\sigma)$ there is an isomorphism of $R_S$-module sheaves\n$$T_{c,R}(V)\\otimes_{R_S}T_{c,R}(W)\\cong T_{c,R}(V\\otimes_RW)$$\n[def-pur-sheaf-tensor-product, def-weil-pbc-module-tensor-product], where $G$ acts on $V\\otimes_RW$ by $g(v\\otimes w)=\\rho(g)v\\otimes\\sigma(g)w$, natural in $V$ and $W$, whose pullback along $c$ sends the tensor $v\\otimes w$ of the constant sections $v$ of $V_T$ and $w$ of $W_T$ to the constant section $v\\otimes w$ of $(V\\otimes_RW)_T$.\n\nNo finiteness of $R$, $V$ or $W$ and no flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Section 03SF (pione-section-finite-etale-under-galois): Galois covers correspond to finite quotients $\\pi_1(X,\\bar x)\\to G$ with open normal kernel; Section 0BMQ (pione-section-galois), Lemma 0BN2 (lemma-galois); with ILO, Expose XVII, Proposition 7.2.3 and its proof, p. 301 (literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf): the fibre of a local system with the action of $\\pi_1$ through the equivalence of finite etale covers with finite $\\pi_1$-sets, passed to ind-objects; tensor clause: literature/stacks-project/sites-modules.tex, Tag 03EL (lemma-tensor-product-pullback) and Tag 0GMW (lemma-sheafification-tensor) applied to the descent data."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-galois-object",
+  "def-weil-geometric-point",
+  "def-galois-fibre-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "lem-per-galois-cover-module-descent",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "lem-per-torsion-local-system-monodromy",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GaloisCover|galoisCover",
+   "results": "grep -rlE over Mathlib/AlgebraicGeometry: 0 files",
+   "date": "2026-10-19",
+   "verdict": "no match: Mathlib has no finite etale Galois covers of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(Etale|etale)|Etale.*descent",
+   "results": "grep -rlE over Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites: 0 files",
+   "date": "2026-10-19",
+   "verdict": "no match: no etale descent of module sheaves along Galois covers"
+  },
+  {
+   "tool": "grep",
+   "query": "def functorToAction|lemma mulAction_naturality",
+   "results": "Mathlib/CategoryTheory/Galois/Action.lean:37 functorToAction; Mathlib/CategoryTheory/Galois/Basic.lean:202 mulAction_naturality",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories with finite fibres; nothing on module sheaves, descended constant sheaves, ind-finite local systems or tensor products"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-per-local-system-tensor-monodromy",
+  "date": "2026-10-19",
+  "group": "Q43"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3 of lem-per-artin-gabber-affine-curve: 'By the duality symmetry of the middle perverse t-structure' and 'the Verdier exchange'; the inherited coefficient-duality branch via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Subargument: ILO XVII Lemma 7.6.11, the locally constant flat case of condition (B). Auxiliary tensor stability of the fixed-partition weakly constructible class. The monodromy tensor comparison for arbitrary torsion local systems, before the finite convolution-filtration argument. Step 7 of lem-per-local-system-tensor-monodromy: equivariance of the stalk tensor comparison on a finite Galois cover trivializing a pair of finite-type pieces.",
+   "via": [
+    "lem-per-local-system-tensor-monodromy",
+    "lem-per-galois-partition-tensor-closure",
+    "lem-per-ctf-hom-locally-constant",
+    "lem-per-ctf-hom-condition-b",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
