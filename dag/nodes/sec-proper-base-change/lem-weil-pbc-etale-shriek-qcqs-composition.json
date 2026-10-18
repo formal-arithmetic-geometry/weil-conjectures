@@ -64,9 +64,10 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the morphisms of small etale topoi associated to $p$ and $\\overline g$, each with the constant ring sheaf $\\Lambda$. Their structural ring maps are the canonical pullback identifications of this constant ring. Choose a universe in which all three small sites are small. The canonical isomorphism $R\\overline g_*Rp_*\\cong R(\\overline g p)_*$ restricts to $D^+$: derived direct images computed by bounded-below injective resolutions preserve the lower bound, as described in [def-weil-pbc-direct-image]. By [def-weil-pbc-projection-compactification] the two model compact-support functors are $Rf_!^{d_f}=Rp_{Y,*}c_!$ and $R(gf)_!^{d_{gf}}=R(\\overline g p)_*a_!$. Hence the step-3 isomorphism, followed by step 2 and direct-image composition, gives the explicit natural chain\n$$Rg_!^{c_g}Rf_!^{d_f}=R\\overline g_*i_!Rp_{Y,*}c_!\\cong R\\overline g_*Rp_*b_!c_!\\cong R\\overline g_*Rp_*a_!\\cong R(\\overline g p)_*a_!=R(gf)_!^{d_{gf}}.$$\nEach arrow is an isomorphism of functors; the coefficient ring and site remain the small etale $\\Lambda$-module ones throughout.",
+   "text": "For fixed coefficients, the source library already proves the bounded-below composition API. The exact left adjoint upperStar in [def-weil-pbc-inverse-image] makes lowerStar preserve injective objects by Mathlib's Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms. Apply the proved source theorem Functor.rightDerivedFunctorPlusCompIso' directly to the underived lowerStarComp comparison of [lem-weil-pbc-inverse-image-composition]. This gives Rp_* followed by R(gbar)_* isomorphic to R(p followed by gbar)_* on the same bounded-below module-sheaf categories [def-weil-pbc-direct-image]. Thus no ringed-topos presentation, K-injective comparison, or restriction of an unbounded functor is needed. Using [def-weil-pbc-projection-compactification], write the compatible models as c_! followed by RpY_* and a_! followed by R(p followed by gbar)_*. Associate the four factors, whisker the step-3 interchange on both sides, associate again, whisker the step-2 comparison c_! followed by b_! isomorphic to a_!, and whisker the bounded-below direct-image composition comparison. This yields an isomorphism from the composite of the two compatible model functors to the model functor for f followed by g.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
     "def-weil-pbc-direct-image",
     "def-weil-pbc-projection-compactification"
    ],
@@ -93,15 +94,16 @@
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-etale-open-proper-interchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-projection-compactification",
   "lem-weil-pbc-etale-shriek-compactification-independence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F7J, label lemma-shriek-composition, construction (first paragraph and calculation); Tag 0F7I for arbitrary chosen models"
+  "place": "Tags 0F7J and 0F7I, same compatible-triangle calculation. U3 realizes step 4 directly with the proved source bounded-below PlusComp API and lowerStarComp instead of the general ringed-topos/K-injective theorem."
  },
  "mathlib_searches": [
   {
@@ -291,5 +293,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261018T062924-L-683720",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
