@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-extension-cokernel-presentation",
+ "kind": "statement",
+ "title": "A lifted quotient presentation presents an extension as a cokernel",
+ "statement": "Let D be an abelian category [def-sp-abelian]. Suppose 0→M --i→ E --p→ N→0 and 0→K --k→ P --q→ N→0 are short exact sequences. For every l:P→E with l≫p=q there is g:K→M with g≫i=k≫l, and E is isomorphic to the cokernel of the map K→M⊕P with components -g and k.",
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), a lifted quotient presentation presents an extension as a cokernel"
+ },
+ "proof": [
+  {
+   "text": "Since k l p=k q=0, the kernel property of i gives a unique g with g i=k l. Put a=(-g,k) and b=(i,l). The biproduct identities give a b=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove b epi by cancellation against maps to zero. A map t killing b kills i, so the cokernel property of p gives t=p d. It also kills l, hence q d=l p d=l t=0. Since q is epi, d=0 and t=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove a is a kernel of b. Its second component k is mono, so a is mono. If z:Z→M⊕P satisfies z b=0, its second component is killed by q, hence factors uniquely as w k. The equation z b=0, the relation g i=k l, and monicity of i force its first component to be -w g. Thus z=w a, uniquely.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In an abelian category an epi is a cokernel of its kernel. Apply this to b and a, and compare with the chosen cokernel of a to obtain E≅coker(a).",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3); categorical details expanded in the Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category a short exact extension is the cokernel of the relations of a lifted presentation of its quotient",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.gIsCokernel; CategoryTheory.ShortComplex.cokernelToAbelianCoimageIsCokernel; CategoryTheory.ShortComplex.exact_cokernel; CategoryTheory.ShortComplex.cokernelToAbelianCoimage; CategoryTheory.ShortComplex.Exact.isColimitCoimage; CategoryTheory.ShortComplex.RightHomologyData.ofAbelian_Q; CategoryTheory.ShortComplex.RightHomologyData.ofAbelian_p; Module.Presentation.cokernelSolution",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\"",
+   "results": "12 hits: CategoryTheory.ShortExactSequence; CategoryTheory.ShortComplex.ShortExact; CategoryTheory.ShortComplex.shortExact; CategoryTheory.ShortComplex.ShortExact.exact; CategoryTheory.ShortComplex.Splitting.shortExact; CategoryTheory.ShortComplex.ShortExact.op; CategoryTheory.ShortComplex.shortExact_iff_op; CategoryTheory.ShortComplex.ShortExact.epi_g",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_cokernel_presentation|overFunctor_exact|exists_cover_lift_finite_sections",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lifted presentation of the quotient of a short exact sequence presents the middle object as a cokernel",
+   "results": "8 hits: Module.Presentation.ofExact_relation; Module.Presentation.ofExact; Module.Presentation.cokernel; CategoryTheory.ShortComplex.ShortExact.gIsCokernel; CategoryTheory.ShortComplex.LeftHomologyData.ofHasKernelOfHasCokernel_π; Module.Presentation.CokernelData.ofSection; CategoryTheory.ShortComplex.Exact.gIsCokernel; Module.Presentation.CokernelData.mk",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Existing sheafification, local-surjectivity, and short-exact-sequence structural results are used where applicable; the remaining hits have different objects or hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre",
+  "date": "2026-10-18",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification",
+   "via": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExtensionCokernelPresentation",
+  "file": "lean/Sheaf/CategoryTheory/ExtensionCokernelPresentation.lean",
+  "declaration": "CategoryTheory.exists_cokernel_presentation_of_lift",
+  "statement": "theorem exists_cokernel_presentation_of_lift {D : Type u} [Category.{v} D] [Abelian D]\n    {M E N K P : D} (i : M ⟶ E) (p : E ⟶ N) (k : K ⟶ P) (q : P ⟶ N)\n    (hip : i ≫ p = 0) (hkq : k ≫ q = 0)\n    (hS : (ShortComplex.mk i p hip).ShortExact)\n    (hT : (ShortComplex.mk k q hkq).ShortExact)\n    (l : P ⟶ E) (hl : l ≫ p = q) :\n    ∃ g : K ⟶ M, g ≫ i = k ≫ l ∧\n      Nonempty (E ≅ cokernel (biprod.lift (-g) k))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

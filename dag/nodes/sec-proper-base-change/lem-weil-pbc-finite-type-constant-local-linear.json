@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-finite-type-constant-local-linear",
+ "kind": "statement",
+ "title": "Finite constant module maps are locally linear on slices",
+ "statement": "Let (C,J) be a small site [def-weil-pbc-sites-and-cohomology], B a commutative Noetherian ring [def-weil-pbc-noetherian-ring], M a finite B-module [def-weil-finitely-generated-module], and N any B-module. For the constant module functor F [def-weil-pbc-strict-perfect-coefficient-package], every morphism a:F(M)|U→F(N)|U becomes F(g)|V for some B-linear g:M→N on every member V→U of a covering sieve; restriction uses the canonical successive-restriction isomorphisms [def-pur-localized-ringed-site].",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), finite constant module maps are locally linear on slices"
+ },
+ "proof": [
+  {
+   "text": "Over a Noetherian ring every finitely generated module is finitely presented. The constant module functor used here is definitionally the module-sheafification functor of the existing local-Hom theorem.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "View the morphism on C/U as a section of the local Hom presheaf. Local surjectivity of the constant-Hom comparison provides a covering image sieve and a coefficient-module map on each member.",
+   "uses": [
+    "lem-sf-constant-module-hom-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local-Hom equivalence to the image-sieve witness. Its restriction formula is the composite through the successive-restriction isomorphisms, yielding exactly the asserted equality. No nonempty-cover or nondegeneracy assumption is used.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sf-constant-module-hom-locally-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3); categorical details expanded in the Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite type locally constant sheaves of modules over a noetherian ring are closed under kernels cokernels and extensions",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; instAbelianLightCondMod; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; Condensed.finFree; LightCondMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functor",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "12 hits: CategoryTheory.Presheaf.IsLocallySurjective; CategoryTheory.Sheaf.IsLocallySurjective; CategoryTheory.Sheaf.instIsLocallySurjectiveFunToImage; CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify; CategoryTheory.Presheaf.isLocallySurjective_toSheafify'; CategoryTheory.Sheaf.epi_of_isLocallySurjective'; CategoryTheory.Presheaf.isLocallySurjective_of_iso; CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteTypeLocallyConstant|exists_mem_forall_exists",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between constant sheaves of modules with finitely presented source are locally induced by linear maps",
+   "results": "8 hits: LocallyConstant.mapₗ; CondensedMod.LocallyConstant.instFullModuleCatFunctor; LocallyConstant.congrRightₗ; CompHausLike.LocallyConstant.functor_map_val; LocallyConstant.constₗ; LocallyConstant.comapₗ; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; CompHausLike.LocallyConstantModule.functor_map_val",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Existing sheafification, local-surjectivity, and short-exact-sequence structural results are used where applicable; the remaining hits have different objects or hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre",
+  "date": "2026-10-18",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification",
+   "via": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteTypeConstantLocalLinear",
+  "file": "lean/Sheaf/CategoryTheory/FiniteTypeConstantLocalLinear.lean",
+  "declaration": "SheafOfModules.exists_cover_constant_linearMap",
+  "statement": "theorem exists_cover_constant_linearMap (M N : ModuleCat.{u} B) [Module.Finite B M] (U : C)\n    (a : ((strictPerfectConstantSheaf J B).obj M).over U ⟶\n      ((strictPerfectConstantSheaf J B).obj N).over U) :\n    ∃ S ∈ J U, ∀ (V : C) (f : V ⟶ U), S f → ∃ g : M ⟶ N,\n      (overFunctorMap _ f).inv.app ((strictPerfectConstantSheaf J B).obj M) ≫\n        (overMap _ f).map a ≫\n        (overFunctorMap _ f).hom.app ((strictPerfectConstantSheaf J B).obj N) =\n          ((strictPerfectConstantSheaf J B).map g).over V",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-18",
+  "note": "Section parameters: {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (B : Type u) [CommRing B] [IsNoetherianRing B]."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

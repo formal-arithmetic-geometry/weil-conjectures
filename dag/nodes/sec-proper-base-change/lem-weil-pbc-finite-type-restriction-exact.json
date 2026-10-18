@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-finite-type-restriction-exact",
+ "kind": "statement",
+ "title": "Restriction of module sheaves to a slice is exact",
+ "statement": "Let (C,J) be a small site [def-weil-pbc-sites-and-cohomology], R a sheaf of rings, and U an object. Restriction of R-module sheaves [def-weil-sheaf-of-modules-category] to R|U-module sheaves on C/U [def-pur-localized-ringed-site] preserves finite limits and finite colimits.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), restriction of module sheaves to a slice is exact"
+ },
+ "proof": [
+  {
+   "text": "For underlying abelian sheaves, restriction along the slice forgetful functor is both a right adjoint and, by cocontinuity, a left adjoint. It therefore preserves finite limits and colimits. These adjunctions exist since the site is small and abelian groups admit the required Kan extensions.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of modules commutes with taking the underlying abelian sheaf. The underlying-sheaf functor is faithful and preserves finite limits and colimits by the module sheafification construction. It reflects short exactness. Apply the preceding preservation result to the underlying short exact sequence to prove preservation by module restriction.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive exact-functor criterion in an abelian category turns preservation of short exact sequences into preservation of finite limits and finite colimits.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3); categorical details expanded in the Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification and restriction of sheaves of modules on a small Grothendieck site preserve finite limits and finite colimits",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf; CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification; CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover; CategoryTheory.HasSheafify.isLeftExact; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\"",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.sheafification; CategoryTheory.GrothendieckTopology.sheafification_obj; CategoryTheory.GrothendieckTopology.toSheafification; CategoryTheory.GrothendieckTopology.toSheafification_app; CategoryTheory.GrothendieckTopology.sheafification_map; CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso; CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso; CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_hom_app",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*over|PreservesFiniteColimits.*over|preservesFinite.*sheafification",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/MorphismProperty.lean; Mathlib/CategoryTheory/Limits/MorphismProperty.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification and restriction of sheaves of modules preserve finite limits and finite colimits on a small site",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf; PresheafOfModules.sheafification; CategoryTheory.preservesFiniteLimits_presheafToSheaf; PresheafOfModules.sheafify; CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Existing sheafification, local-surjectivity, and short-exact-sequence structural results are used where applicable; the remaining hits have different objects or hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre",
+  "date": "2026-10-18",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification",
+   "via": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteTypeRestrictionExact",
+  "file": "lean/Sheaf/CategoryTheory/FiniteTypeRestrictionExact.lean",
+  "declaration": "SheafOfModules.overFunctor_exact",
+  "statement": "theorem overFunctor_exact {C : Type u} [SmallCategory C]\n    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C) :\n    PreservesFiniteLimits (overFunctor.{u} R U) ∧\n      PreservesFiniteColimits (overFunctor.{u} R U)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

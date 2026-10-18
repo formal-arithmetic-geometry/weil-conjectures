@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-constant-finite-free-local-lift",
+ "kind": "statement",
+ "title": "Constant finite free sheaf morphisms lift locally through epis",
+ "statement": "Let (C,J) be a small site [def-weil-pbc-sites-and-cohomology], B a commutative ring, p:F→G an epi of modules over the constant ring sheaf [def-weil-sheaf-of-modules-category], n a natural number, and U an object. Every morphism a:constant(B^n)|U→G|U lifts through p|V after restriction to every member V→U of a covering sieve. Constants and their finite-free comparisons are those of [def-weil-pbc-strict-perfect-coefficient-package], and all slice restrictions use [def-pur-localized-ringed-site].",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), constant finite free sheaf morphisms lift locally through epis"
+ },
+ "proof": [
+  {
+   "text": "First replace the source by the finite biproduct of rank-one free sheaves. On the slice over U, a morphism from a rank-one summand is determined by its value at one at the terminal object: naturality propagates that value to all slice objects.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the finitely many values of the summand morphisms through p on a common covering sieve.",
+   "uses": [
+    "lem-weil-pbc-finite-sections-epi-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each member V→U the lifted sections define morphisms from the rank-one free sheaves on C/V by the unit-Hom equivalence. Restriction preserves the finite coproduct, so these assemble to a morphism from the restricted biproduct. Naturality and equality on one at the terminal object verify the composite with p.",
+   "uses": [
+    "lem-weil-pbc-finite-type-restriction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical finite-free comparison to identify constant(B^n) with the product, hence biproduct, of n copies of the ring sheaf. Transport the preceding result through its restricted isomorphism. The finite coproduct and finite-section argument include n=0.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-finite-sections-epi-lift",
+  "lem-weil-pbc-finite-type-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3); categorical details expanded in the Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite collection of sections of the codomain of an epimorphism of sheaves of modules lifts on a common covering sieve",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi; SheafOfModules.GeneratingSections.ofEpi_s; SheafOfModules.GeneratingSections.ofEpi_I; SheafOfModules.GeneratingSections.opEpi_comp; SheafOfModules.GeneratingSections.mk.inj; SheafOfModules.GeneratingSections.epi; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "12 hits: CategoryTheory.Presheaf.IsLocallySurjective; CategoryTheory.Sheaf.IsLocallySurjective; CategoryTheory.Sheaf.instIsLocallySurjectiveFunToImage; CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify; CategoryTheory.Presheaf.isLocallySurjective_toSheafify'; CategoryTheory.Sheaf.epi_of_isLocallySurjective'; CategoryTheory.Presheaf.isLocallySurjective_of_iso; CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*finite.*section|finite.*section.*lift|finsetInf_mem",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match; the listed structural lemmas are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many sections lift through an epimorphism of sheaves of modules on a common covering sieve",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi_s; SheafOfModules.GeneratingSections.ofEpi; CategoryTheory.Sheaf.isLocallySurjective_iff_epi'; SheafOfModules.GeneratingSections.mk; SheafOfModules.GeneratingSections.IsFiniteType.mk; SheafOfModules.sections; CategoryTheory.Sheaf.epi_of_isLocallySurjective'; CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Existing sheafification, local-surjectivity, and short-exact-sequence structural results are used where applicable; the remaining hits have different objects or hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre",
+  "date": "2026-10-18",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification",
+   "via": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantFiniteFreeLocalLift",
+  "file": "lean/Sheaf/CategoryTheory/ConstantFiniteFreeLocalLift.lean",
+  "declaration": "SheafOfModules.exists_cover_lift_constant_finite_free",
+  "statement": "theorem exists_cover_lift_constant_finite_free\n    (F G : ringedSiteModules.{u}\n      ((constantSheaf J RingCat.{u}).obj (RingCat.of B)))\n    (p : F ⟶ G) [Epi p] (n : ℕ) (U : C)\n    (a : ((strictPerfectConstantSheaf J B).obj\n      (ModuleCat.of B (Fin n → B))).over U ⟶ G.over U) :\n    ∃ S ∈ J U, ∀ (V : C) (f : V ⟶ U), S f →\n      ∃ l : ((strictPerfectConstantSheaf J B).obj\n        (ModuleCat.of B (Fin n → B))).over V ⟶ F.over V,\n        l ≫ p.over V =\n          (overFunctorMap _ f).inv.app _ ≫ (overMap _ f).map a ≫\n            (overFunctorMap _ f).hom.app G",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-18",
+  "note": "Section parameters: {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} {B : Type u} [CommRing B]."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T092904-L-3441075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
