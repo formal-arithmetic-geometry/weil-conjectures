@@ -134,7 +134,7 @@ closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace of t
 `RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)`,
 the restrictions being the derived pullbacks of Weil objects. It comes from the localization
 triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
-traces in distinguished triangles (blueprint `lem-trf-trace-triangle-compatibility`); no
+traces in distinguished triangles (blueprint `prop-trf-trace-formal-laws`); no
 invertibility of `φ` is used in the blueprint. -/
 theorem trace_compactFrobenius_eq_add
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
