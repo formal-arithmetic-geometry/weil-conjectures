@@ -56,7 +56,7 @@ Proof: the `r`-increasing enumeration of `∅` is the empty list, and a fold ove
 returns its initial value `i₀`. -/
 theorem directedFiniteUpperBound_empty {I : Type u} (i₀ : I) (d : I → I → I)
     (r : LinearOrder I) : directedFiniteUpperBound i₀ d r ∅ = i₀ := by
-  sorry
+  simp [directedFiniteUpperBound]
 
 /-- (blueprint: def-nagata-directed-finite-upper-bound) The insertion recursion:
 `u (F ∪ {i}) = d (u F) i` whenever `i ∉ F` and `j ≺ i` for every `j ∈ F`, where `≺` is the
@@ -68,7 +68,17 @@ although `d` need not be commutative or associative. -/
 theorem directedFiniteUpperBound_insert {I : Type u} (i₀ : I) (d : I → I → I)
     (r : LinearOrder I) {F : Finset I} {i : I} (hi : i ∉ F) (hF : ∀ j ∈ F, r.lt j i) :
     directedFiniteUpperBound i₀ d r (insert i F) = d (directedFiniteUpperBound i₀ d r F) i := by
-  sorry
+  let : LinearOrder I := r
+  have hnodup : (F.sort (· ≤ ·) ++ [i]).Nodup := by
+    simpa using List.Nodup.concat (by simpa using hi) (F.sort_nodup (· ≤ ·))
+  have hsorted : (F.sort (· ≤ ·) ++ [i]).Pairwise (· ≤ ·) := by
+    simp only [List.pairwise_append, List.pairwise_singleton, true_and,
+      List.mem_singleton, forall_eq]
+    exact ⟨F.pairwise_sort (· ≤ ·), fun j hj ↦ (hF j ((Finset.mem_sort (· ≤ ·)).mp hj)).le⟩
+  have hsort : (insert i F).sort (· ≤ ·) = F.sort (· ≤ ·) ++ [i] := by
+    simpa using (List.toFinset_sort (r := (· ≤ ·)) hnodup).2 hsorted
+  simp only [directedFiniteUpperBound, hsort, List.foldl_append, List.foldl_cons,
+    List.foldl_nil]
 
 /-- (blueprint: def-nagata-directed-finite-upper-bound)
 (blueprint: lemma-nagata-directed-finite-upper-bound) The property `i ≤ u F` for `i ∈ F`,
@@ -83,4 +93,18 @@ the induction hypothesis gives `j ≤ u F' ≤ d (u F') i`; conclude by transiti
 theorem le_directedFiniteUpperBound {I : Type u} [Preorder I] (i₀ : I) (d : I → I → I)
     (hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j) (r : LinearOrder I) {F : Finset I} {i : I}
     (hi : i ∈ F) : i ≤ directedFiniteUpperBound i₀ d r F := by
-  sorry
+  have hfold : ∀ (l : List I) (a : I), ∀ j ∈ l, j ≤ l.foldl d a := by
+    intro l
+    induction l using List.reverseRecOn with
+    | nil => simp
+    | append_singleton l j ih =>
+      intro a k hk
+      simp only [List.mem_append, List.mem_singleton] at hk
+      simp only [List.foldl_append, List.foldl_cons, List.foldl_nil]
+      rcases hk with hk | hk
+      · exact (ih a k hk).trans (hd (l.foldl d a) j).1
+      · exact hk ▸ (hd (l.foldl d a) j).2
+  have hi' : i ∈ (letI : LinearOrder I := r; F.sort r.le) := by
+    let : LinearOrder I := r
+    exact (Finset.mem_sort r.le).2 hi
+  exact hfold _ i₀ i hi'
