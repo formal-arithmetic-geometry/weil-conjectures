@@ -223,6 +223,63 @@ lemma trace_weilStalkFrobenius_weilUpperStar {U : Over (Spec (.of k))}
   rw [← trace_stalkFrobenius_one _ u hu1 hu, trace_stalkFrobenius_weilUpperStar,
     trace_stalkFrobenius_one]
 
+/-! ### Subtracting an open piece -/
+
+/-- **Additivity read backwards**: for an open subscheme `j : U ⟶ X` with closed complement
+`i : Z ⟶ X`, both stable under the Frobenius, the degree one trace formula for a Weil object on
+`X` and for its restriction to `U` gives the degree one trace formula for its restriction to
+`Z`. -/
+theorem traceFormulaOne_of_isCompl_left [IsSepClosed k] {U : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] {Φ : X ⟶ X}
+    {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶ X} [IsOpenImmersion j.left]
+    [IsClosedImmersion i.left] (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
+    (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
+    [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left]
+    [IsUniversalHomeomorphism ΦU.left] [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
+    [Finite {u : RationalPoint U // u ≫ ΦU = u}] (hX : K.TraceFormulaOne)
+    (hU : ((weilUpperStar ℓ ΦU Φ j hj).obj K).TraceFormulaOne) :
+    ((weilUpperStar ℓ ΦZ Φ i hi).obj K).TraceFormulaOne := by
+  classical
+  intro _ _ _
+  let eU : {u : RationalPoint U // u ≫ ΦU = u} ≃ FixedPoint ΦU 1 :=
+    Equiv.subtypeEquivRight fun u ↦ by rw [frobeniusIterate_one]
+  let eZ : {z : RationalPoint Z // z ≫ ΦZ = z} ≃ FixedPoint ΦZ 1 :=
+    Equiv.subtypeEquivRight fun z ↦ by rw [frobeniusIterate_one]
+  let eX : FixedPoint Φ 1 ≃ {x : RationalPoint X // x ≫ Φ = x} :=
+    Equiv.subtypeEquivRight fun x ↦ by rw [frobeniusIterate_one]
+  let e : {u : RationalPoint U // u ≫ ΦU = u} ⊕ {z : RationalPoint Z // z ≫ ΦZ = z} ≃
+      {x : RationalPoint X // x ≫ Φ = x} :=
+    (Equiv.sumCongr eU eZ).trans ((fixedPointSumEquiv hcompl hj hi 1).trans eX)
+  let _ := Fintype.ofFinite {u : RationalPoint U // u ≫ ΦU = u}
+  let _ : Fintype {x : RationalPoint X // x ≫ Φ = x} := Fintype.ofEquiv _ e
+  let _ : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+        K.carrier) := (nonempty_hasRightDual_compactCohomology _).some
+  let _ : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+        ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier) :=
+    (nonempty_hasRightDual_compactCohomology _).some
+  let _ (x : RationalPoint X) : HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier) :=
+    (nonempty_hasRightDual_stalk _ x).some
+  let _ (u : RationalPoint U) : HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ u).obj
+        ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier) :=
+    (nonempty_hasRightDual_stalk _ u).some
+  have hXeq : trace K.compactFrobenius = ∑ x : {x : RationalPoint X // x ≫ Φ = x},
+      trace (K.weilStalkFrobenius x.1 x.2) := hX
+  have hUeq : trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius =
+      ∑ u : {u : RationalPoint U // u ≫ ΦU = u},
+        trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).weilStalkFrobenius u.1 u.2) := hU
+  have hadd := trace_compactFrobenius_eq_add hcompl hj hi K
+  rw [hXeq, hUeq, ← e.sum_comp, Fintype.sum_sum_type] at hadd
+  refine add_left_cancel (hadd.symm.trans ?_)
+  congr 1
+  · exact Finset.sum_congr rfl fun u _ ↦
+      (trace_weilStalkFrobenius_weilUpperStar hj K u.1 u.2).symm
+  · exact Finset.sum_congr rfl fun z _ ↦
+      (trace_weilStalkFrobenius_weilUpperStar hi K z.1 z.2).symm
+
 end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing
