@@ -187,15 +187,19 @@
    "WeilConjectures.SemilinearSections.scalarExtensionSection",
    "WeilConjectures.SemilinearSections.ScalarTensorPure",
    "WeilConjectures.SemilinearSections.scalarEpsilonIso",
-   "WeilConjectures.SemilinearSections.ScalarTensorComparisonModel"
+   "WeilConjectures.SemilinearSections.ScalarTensorComparisonModel",
+   "WeilConjectures.SemilinearSections.ScalarData.ordinary",
+   "WeilConjectures.SemilinearSections.ScalarData.object_eq",
+   "WeilConjectures.SemilinearSections.ScalarData.counit",
+   "WeilConjectures.SemilinearSections.ScalarData.computesOnKFlat"
   ],
   "file": "lean/Sheaf/Paper/SemilinearSystemModels.lean",
   "statement": "abbrev Systems",
   "branch": "newtargets-dag",
-  "by": "NK",
+  "by": "Q09",
   "date": "2026-10-18",
   "existing": false,
-  "note": "§1(B) repair: the current published source fails universe inference in scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel because the smaller-coefficient sheafification instance is tried at an arbitrary max coefficient universe. Disable that competing instance while elaborating this module, as in the existing tower dependency modules, then restore it. All declarations and mathematical interfaces are retained."
+  "note": "§1(B) transitive dependency compile repair: model projections in scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel left unsolved successor universe constraints at independent site/coefficient sizes. Explicit-universe aliases ScalarData.ordinary, object_eq, counit, computesOnKFlat and the existing T alias give precisely the same model projections. No mathematical data, universe size or conditions change. Compilation profiling also required preserving internalHom as a def with the same body, locally keeping it folded after the model definitions, and disabling unused generated injectivity/size-specification lemmas for the three large structures; all mathematical fields are unchanged."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -208,9 +212,9 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-00d48d80e",
-  "group": "NK",
+  "reviewer": "NT-stage2-cc-bb0fae180",
+  "group": "Q09",
   "result": "fix",
-  "note": "Item module byte-identical to the PASSed 0d59aa7 (sha 324985b6); statement re-checked vs node/source: f's own geometric fibres, recorded proEtaleRingCompactSupportImage with canonical constant rings, finite clause gives Dctf + [a,b+2d], tower clause R=O_E/ℓ^(n+1) covers all positive levels, gives Tor interval + vanishing outside [a,b+2d]; Fcomparison makes the quantification over base/ops sound; gates and verbatim statement OK. Compiles clean against the live dependency (rc 0, 6.9/6.5 s at load ~88). F1: the delivered SemilinearSystemModels.lean is stale and drops two public imports (KFlatResolutionIndependentCoefficients, CoefficientHomRepresentativeEvaluation) that live has; the edit is unneeded because live already disables the instance. FIX: fixes/SemilinearSystemModels.lean = live text (sha 89b6054c). M1: dep record by NF→NK plus an inaccurate note; land with --revert-nodes def-coef-semilinear-system-models if possible."
+  "note": "Item module byte-identical (sha 83355444) to the FIXed 210de/a5fe heads; substance re-checked: properOpenAlpha is canonical (ordinaryOpenExtensionBaseChangeIso beta, then the clopen projection of squareLift via unit + rightDerivedLowerStarIsoOfIsClosedRange, then the compositors), gamma = mateEquiv with the published proper adjunctions, pi = rightDerivedLowerStarProjectionMap, delta = inverse of derivedOpenImmersionLowerShriekProjectionIso; the equation's order matches the node; no Cartesian/Tor/bounded hypotheses; the system clause is an equality in System l E D with z.properOpen.gamma before evaluation; 8 steps in the docstrings; statement verbatim; sorry only. F1: the delivered SemilinearSystemModels.lean is stale against live 89b6054c (drops 2 public imports and [-instance], turns the internalHom abbrev into a def). The group rebased (blueprint-index = live but for its header), so the landing's REVERT DEPENDENCY guard that refused the a5fe fix will not fire and the stale text would overwrite live. FIX: fixes/SemilinearSystemModels.lean = live text + only the 4 recorded ScalarData aliases (sha 3a4b9817). nt_compile --json: item vs live dependencies 6.4 s clean; fixed dependency 27.6 s + item 7.2 s clean. MAINTAINER: the item needs neither the dependency edit nor the aliases; the cleanest landing is --revert-nodes def-coef-semilinear-system-models WITHOUT the fix file (revert + fix file = the 00:19 refusal). The delivered dependency record (by Q09) has an inaccurate note; its declarations contain all of NK's."
  }
 }

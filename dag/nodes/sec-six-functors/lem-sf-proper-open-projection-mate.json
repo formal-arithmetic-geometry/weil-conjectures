@@ -13,7 +13,8 @@
   "def-exchange-projection",
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-sf-open-tensor-normalization",
-  "lem-sf-integral-compactification-system-realization"
+  "lem-sf-integral-compactification-system-realization",
+  "def-coef-semilinear-system-models"
  ],
  "proof": [
   {
@@ -335,5 +336,45 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-286a19c63 (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement, all 8 steps, the unit sk-rem-sf-pf-done (a remark with no steps), the statements of all 10 cited nodes, and how the citer fix-prop-projection-formula uses it (steps 7 and 10). Stacks Tags 0F7B/0F7C/0F7D are at more-etale.tex lines 2460, 2617 and 2676; they are context only, and proof_origin correctly says by: agent. The quoted blueprint sentence is in main-20261015 fix-prop-projection-formula.proof.md:12. Coefficients: alpha and gamma match lem-cbc-strict-tower-proper-open-calculus (clopen s=(k,r), no cartesian hypothesis, same mate formula), and the beta inverse normalizations of that node and lem-sf-open-tensor-normalization agree. Constant finite Lambda in unbounded pro-etale D is fine because pi needs only the general counit formula of lem-weil-pbc-ringed-projection-mate-exact. I recomputed both transposes in Steps 4-5 and they agree. Step 3's alpha-tensor square comes from full faithfulness of b_! and k_!, identity restrictions, and the (1,0) splitting on the clopen decomposition. Step 7 is right: after restriction, the mate of the clopen unit is S_r eps_r o eta_r S_r = 1, so gamma equals Gamma_Q by the intrinsic lambda_Q characterization. Step 8 is right: the system categories are modules on the ringed diagram site, and the open-tensor node covers diagram topoi. One comment, not a fault: Step 2 relies on the pullback tensor comparison being compatible with pullback composition. No node states this separately; the DAG treats it as part of the canonical identifications, which the item statement and the realization node both do explicitly. Edge cases checked: the cartesian case, a noncartesian fold-map example (B = D disjoint union D), zero objects, and identity squares. There are no new nodes. The sibling lem-sf-composition-projection-mate, lem-cbc-proper-open-interchange-coherence and lem-cbc-extension-zero-projection-formula do not duplicate the item, so same_as [] is right. Three kinds of Mathlib search are recorded and none is a match. No SGA source and no cycle. I accept all 8 declared tool_uses, since the unit has no steps. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProperOpenProjectionMate",
+  "declaration": "AlgebraicGeometry.ProEtale.properOpenProjectionMate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingIsNoetherian",
+   "AlgebraicGeometry.ProEtale.ProperOpenDerived",
+   "AlgebraicGeometry.ProEtale.ProperOpenPull",
+   "AlgebraicGeometry.ProEtale.ProperOpenPush",
+   "AlgebraicGeometry.ProEtale.ProperOpenShriek",
+   "AlgebraicGeometry.ProEtale.ProperOpenTensor",
+   "AlgebraicGeometry.ProEtale.properOpenProjection",
+   "AlgebraicGeometry.ProEtale.properOpenTensorIso",
+   "AlgebraicGeometry.ProEtale.properOpenAdj",
+   "AlgebraicGeometry.ProEtale.properOpenShriekComp",
+   "AlgebraicGeometry.ProEtale.properOpenShriekCongr",
+   "AlgebraicGeometry.ProEtale.properOpenClopenProjection",
+   "AlgebraicGeometry.ProEtale.properOpenBeta",
+   "AlgebraicGeometry.ProEtale.properOpenAlpha",
+   "AlgebraicGeometry.ProEtale.properOpenMate",
+   "AlgebraicGeometry.ProEtale.properOpenMateTensorMap",
+   "AlgebraicGeometry.ProEtale.properOpenPullSquareIso",
+   "AlgebraicGeometry.ProEtale.properOpenProjectionMate",
+   "WeilConjectures.IntegralSystemRealization.properOpenProjectionMateSystems"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProperOpenProjectionMate.lean",
+  "statement": "theorem properOpenProjectionMate (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {A B C D : Scheme.{u}} (k : A ⟶ B) (r : A ⟶ C) (p : B ⟶ D) (i : C ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : ProperOpenDerived Λ A) (N : ProperOpenDerived Λ D) : (properOpenTensorIso Λ i ((ProperOpenPush Λ r).obj M) N).hom ≫ (ProperOpenShriek Λ i).map (properOpenProjection Λ r M ((ProperOpenPull Λ i).obj N)) ≫ (ProperOpenShriek Λ i).map ((ProperOpenPush Λ r).map (((ProperOpenTensor Λ A).obj M).map ((properOpenPullSquareIso Λ k r p i h).hom.app N))) ≫ (properOpenMate Λ k r p i h).app (((ProperOpenTensor Λ A).obj M).obj ((ProperOpenPull Λ k).obj ((ProperOpenPull Λ p).obj N))) = properOpenMateTensorMap Λ k r p i h M N ≫ properOpenProjection Λ p ((ProperOpenShriek Λ k).obj M) N ≫ (ProperOpenPush Λ p).map (properOpenTensorIso Λ k M ((ProperOpenPull Λ p).obj N)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair: the ordinary alpha is constructed by the canonical beta/clopen-projection composite, with no free comparison parameter. The system clause is properOpenProjectionMateSystems, using the intrinsic Realizations.properOpen.gamma before evaluation. The proof docstrings give all eight node steps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb0fae180",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Item module byte-identical (sha 83355444) to the FIXed 210de/a5fe heads; substance re-checked: properOpenAlpha is canonical (ordinaryOpenExtensionBaseChangeIso beta, then the clopen projection of squareLift via unit + rightDerivedLowerStarIsoOfIsClosedRange, then the compositors), gamma = mateEquiv with the published proper adjunctions, pi = rightDerivedLowerStarProjectionMap, delta = inverse of derivedOpenImmersionLowerShriekProjectionIso; the equation's order matches the node; no Cartesian/Tor/bounded hypotheses; the system clause is an equality in System l E D with z.properOpen.gamma before evaluation; 8 steps in the docstrings; statement verbatim; sorry only. F1: the delivered SemilinearSystemModels.lean is stale against live 89b6054c (drops 2 public imports and [-instance], turns the internalHom abbrev into a def). The group rebased (blueprint-index = live but for its header), so the landing's REVERT DEPENDENCY guard that refused the a5fe fix will not fire and the stale text would overwrite live. FIX: fixes/SemilinearSystemModels.lean = live text + only the 4 recorded ScalarData aliases (sha 3a4b9817). nt_compile --json: item vs live dependencies 6.4 s clean; fixed dependency 27.6 s + item 7.2 s clean. MAINTAINER: the item needs neither the dependency edit nor the aliases; the cleanest landing is --revert-nodes def-coef-semilinear-system-models WITHOUT the fix file (revert + fix file = the 00:19 refusal). The delivered dependency record (by Q09) has an inaccurate note; its declarations contain all of NK's."
  }
 }
