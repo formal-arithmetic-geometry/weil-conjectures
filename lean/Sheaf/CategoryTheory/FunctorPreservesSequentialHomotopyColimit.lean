@@ -84,6 +84,46 @@ theorem Functor.preserves_sequentialHomotopyColimit
         q' ≫ (shiftFunctor D (1 : ℤ)).map (sigmaComparison F E) → IsIso c) ∧
     IsSequentialHomotopyColimit (fun n : ℕ ↦ F.obj (E n))
       (fun n : ℕ ↦ F.map (u n)) (F.obj H) := by
-  sorry
+  let s := Sigma.desc (fun n : ℕ ↦ u n ≫ Sigma.ι E (n + 1))
+  let E' := fun n : ℕ ↦ F.obj (E n)
+  let s' := Sigma.desc (fun n : ℕ ↦ F.map (u n) ≫ Sigma.ι E' (n + 1))
+  let a := sigmaComparison F E
+  have ha : IsIso a := inferInstance
+  have hs : s' ≫ a = a ≫ F.map s := by
+    apply Sigma.hom_ext
+    intro n
+    dsimp only [s, s', a, E']
+    simp only [Category.assoc, Sigma.ι_desc_assoc, ι_comp_sigmaComparison_assoc,
+      ι_comp_sigmaComparison, ← F.map_comp, Sigma.ι_desc]
+  have hfirst : (𝟙 (∐ E') - s') ≫ a = a ≫ F.map (𝟙 (∐ E) - s) := by
+    rw [F.map_sub, F.map_id, Preadditive.sub_comp, Preadditive.comp_sub,
+      Category.id_comp, Category.comp_id, hs]
+  let T := Triangle.mk (𝟙 (∐ E) - s) p q
+  let T' := Triangle.mk (𝟙 (∐ E') - s') p' q'
+  have hTF : F.mapTriangle.obj T ∈ distTriang D := F.map_distinguished T hT
+  obtain ⟨c, hc₂, hc₃⟩ := complete_distinguished_triangle_morphism
+    T' (F.mapTriangle.obj T) hT' hTF a a hfirst
+  have hc₂' : p' ≫ c = a ≫ F.map p := hc₂
+  have hc₃' : c ≫ F.map q ≫ (F.commShiftIso (1 : ℤ)).hom.app (∐ E) =
+      q' ≫ (shiftFunctor D (1 : ℤ)).map a := hc₃.symm
+  refine ⟨ha, ⟨c, hc₂', hc₃'⟩, ?_, ?_⟩
+  · intro c hc₂ hc₃
+    let φ : T' ⟶ F.mapTriangle.obj T :=
+      { hom₁ := a
+        hom₂ := a
+        hom₃ := c
+        comm₁ := hfirst
+        comm₂ := hc₂
+        comm₃ := hc₃.symm }
+    exact isIso₃_of_isIso₁₂ φ hT' hTF ha ha
+  · let g := a ≫ F.map p
+    let h := F.map q ≫ (F.commShiftIso (1 : ℤ)).hom.app (∐ E) ≫
+      CategoryTheory.inv ((shiftFunctor D (1 : ℤ)).map a)
+    let U := Triangle.mk (𝟙 (∐ E') - s') g h
+    refine ⟨g, h, ?_⟩
+    exact isomorphic_distinguished _ hTF U
+      (Triangle.isoMk U (F.mapTriangle.obj T) (asIso a) (asIso a) (Iso.refl _)
+        hfirst (by dsimp [U, g, T, Functor.mapTriangle, Triangle.mk]; simp)
+        (by dsimp [U, h, T, Functor.mapTriangle, Triangle.mk]; simp))
 
 end CategoryTheory
