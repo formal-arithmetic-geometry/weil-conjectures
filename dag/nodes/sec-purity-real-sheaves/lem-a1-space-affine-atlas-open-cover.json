@@ -13,9 +13,78 @@
   "def-weil-size-convention",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a scheme atlas $p:h_V\\to X$ that is representable, surjective and etale, using [def-trf-algebraic-space]. For each $v\\in V$, choose an affine open $W_v\\subseteq S$ containing its image, and then an affine open $U_v\\subseteq V$ containing $v$ and contained in the inverse image of $W_v$. Both choices follow from [lem-weil-pbc-affine-opens-basis]. Thus the $U_v$ cover $V$, and each structural map $U_v\\to S$ factors through the open subscheme $W_v$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. The index set $I=|V|$ is a set within [def-weil-size-convention]; if $V$ is empty, use the empty family. Write $U_i,W_i$ for these choices.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-size-convention",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FY, first proof sentence; expand Tag 03FX (lemma-cover-by-union-affines), proof lines 710-715, before forming the unnecessary coproduct."
+   }
+  },
+  {
+   "text": "For each $i$, the composite $f_i:h_{U_i}\\to h_V\\to X$ is representable and etale. Indeed, for a scheme test $h_T\\to X$, representability of $p$ gives the scheme $P=T\\times_XV$, with etale projection $P\\to T$ [def-trf-algebraic-space]. By pasting of fibre products, $T\\times_XU_i=P\\times_VU_i$, and its projection to $P$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]: the inverse-image open subscheme of $P$ under $P\\to V$ [def-weil-open-immersion]. Its projection to $T$ is therefore an open immersion followed by an etale morphism; clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] make it etale. This verifies the required property on every scheme test.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX, proof lines 715-722: etale composition, applied separately to each affine piece."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-etale-scheme-map-open-image] to each $f_i$. It produces an open subspace $X_i\\subseteq X$ with $|X_i|=\\operatorname{im}(|U_i|\\to|X|)$ and a representable surjective etale map $h_{U_i}\\to X_i$. These open subspaces cover: given a field-valued point $x:\\operatorname{Spec}K\\to X$, the scheme $\\operatorname{Spec}K\\times_XV$ surjects onto $\\operatorname{Spec}K$ by [def-trf-algebraic-space]. Choose a point of this nonempty scheme and its residue field $L$. The resulting map $\\operatorname{Spec}L\\to V$ has its image in some $U_i$, so factors through that open subscheme by [lem-weil-pbc-morphism-factors-through-open-subscheme] [def-weil-open-immersion]. Its composite to $X$ is the extension of $x$ to $L$, and hence represents the same point class. That class belongs to $|X_i|$. Thus $|X|=\\bigcup_i|X_i|$, exactly the covering condition in the statement.",
+   "uses": [
+    "lem-a1-etale-scheme-map-open-image",
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FY, middle proof sentences, lines 738-742; Tag 06NF for the open-image factorization."
+   }
+  },
+  {
+   "text": "Fix $i$ and a scheme test $h_T\\to X_i$. For each $t\\in T$, base change the surjective map $h_{U_i}\\to X_i$ along $\\operatorname{Spec}\\kappa(t)\\to X_i$. By the scheme-test definition of surjectivity [def-trf-algebraic-space] this is a nonempty scheme. A point and its residue field give an extension $L/\\kappa(t)$ and a lift $\\operatorname{Spec}L\\to U_i$. Since $U_i\\to S$ factors through $W_i$, the image of $t$ under $T\\to S$ lies in $W_i$. Consequently $T\\to S$ has image contained in $W_i$ and factors uniquely through the open subscheme $W_i$ by [lem-weil-pbc-morphism-factors-through-open-subscheme] [def-weil-open-immersion]. For varying $T\\to X_i$ these factorizations commute with pullback by uniqueness. They therefore define a natural transformation $X_i\\to h_{W_i}$ whose composite with $h_{W_i}\\to h_S$ is the structural map. This proves the affine-base clause for every $i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FY, last proof sentence, lines 743-744: explicit scheme-test verification of factorization through the affine base open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-size-convention",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-a1-etale-scheme-map-open-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03FY (lemma-union-of-quasi-compact), with the affine-piece construction from Tag 03FX and open-image input Tag 06NF; final factorization written on scheme tests."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +120,38 @@
    "results": "{\"t\": \"2026-10-18T01:48:19Z\", \"tool\": \"leansearch\", \"query\": \"Every algebraic space has a Zariski open covering with each member admitting an affine surjective etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\"], \"digest\": \"9b48532adbbdafcd\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern schemes, scheme morphisms, or generic sheaf gluing, not this algebraic-space or affine-relation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*etale.*atlas|etale.*atlas",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern schemes and scheme morphisms, not open images or affine atlases of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic space has a Zariski open covering with each member admitting an affine surjective etale atlas",
+   "results": "AlgebraicGeometry.Scheme.instInhabitedOpenCover; AlgebraicGeometry.Scheme.affineOpenCover; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.directedAffineCover; AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover; AlgebraicGeometry.Scheme.affineBasisCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover; AlgebraicGeometry.instIsAffineXSchemeAffineCover",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern schemes and scheme morphisms, not open images or affine atlases of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Cover\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern schemes and scheme morphisms, not open images or affine atlases of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic space has a Zariski open covering with each member admitting an affine surjective etale atlas",
+   "results": "AlgebraicGeometry.Scheme.instInhabitedOpenCover; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.affineBasisCover; AlgebraicGeometry.Scheme.AffineCover; AlgebraicGeometry.Scheme.AffineOpenCover; AlgebraicGeometry.Scheme.affineOpenCover; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.instIsAffineXSchemeAffineCover",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern schemes and scheme morphisms, not open images or affine atlases of algebraic spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-separated-locally-qf-space-representable",
@@ -74,5 +171,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-space-affine-atlas-open-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Expanded 03FY into affine neighbourhood choices in an existing atlas, scheme-test etaleness of the restricted charts, open images and pointwise coverage, and scheme-test factorization through the affine base opens. Reused the affine-basis and etale-composition Mathlib leaves; only the general 06NF open-image theorem is a new statement-only node. No quasi-compactness, separation or Noetherian hypothesis is added.",
+  "blueprint": "Auxiliary 03XX schemehood reduction underlying the separated-etale-space input to the support argument: 03FY constructs open images of affine etale charts, using 06NF. This continues the existing 03XX/03FY auxiliary route; it does not replace any chapter or unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N5-964945ca9",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-964945ca9 (reviewer sub-agent of L); spot-checked: Read in full: the item (03FY, lemma-union-of-quasi-compact, spaces-properties.tex lines 724-745), the 03FX construction (lines 700-722) and the new node checked against 06NF (lemma-etale-image-open, lines 536-558); also the statements of all cited nodes and unit sk-p-real-rankin. The item statement is unchanged and matches 03FY. The new node lem-a1-etale-scheme-map-open-image states 06NF's factorization part (surjective etale onto the open subspace with |X_f| = image), not the presentation clause. It is true (checked for U empty, f surjective and X a scheme), self-contained and statement-only, with correct blueprint from/via. It duplicates no existing node (rg over dag/nodes for 06NF/03FX/03FY and image-open phrasing; 03XW, 03M4, 02WW, 02WR and the chartwise-etale node differ). It does not restate a clause of the item. The steps are mathematically correct: atlas plus affine-basis choices; scheme-test etaleness by pasting, open immersion and composition; coverage via a residue-field point of Spec K x_X V; and the affine-base factorization via surjective lifts and uniqueness. FIX (C4): steps 1, 3 and 4 cited def-weil-open-immersion for factoring a map through an open subscheme, and step 2 cited it for base change of an open immersion. Both facts are existing Mathlib leaves: lem-weil-pbc-morphism-factors-through-open-subscheme and lem-weil-pbc-open-immersion-base-change. These citations are added in the corrected item JSON, with proof_deps recomputed and step 4 elementary set to false. Batch-5 check: def-trf-algebraic-space is the general definition of an algebraic space with definition-only deps. It is not a step of the trace formula or Poincare duality proofs, and the item and its parent already cite it, so it is outside the assumptions. No other trace/Poincare node is cited. Route: only definitions, Mathlib leaves and a same-unit node, so no tool_uses are needed. No SGA source is cited and no target is touched.; 1 file(s) fixed by the reviewer"
  }
 }
