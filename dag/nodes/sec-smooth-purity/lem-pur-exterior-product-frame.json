@@ -110,7 +110,9 @@
   "def-pur-proetale-supported-exterior-product",
   "def-sbc-smooth-morphisms",
   "def-weil-closed-immersion",
-  "lem-sbc-smooth-relative-dimension-permanence"
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-exterior-classes"
  ],
  "mathlib_searches": [
   {
@@ -166,5 +168,32 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-e98f190a7 (reviewer sub-agent of L); spot-checked: I read Step 5 of the main-20261015 sk-thm-regular proof, the unit and its route, the full statement of every cited node (using the blueprint_update text where present), and the proof of lem-pur-supported-hom. Steps 1-3 are correct: permanence (1)+(2) makes P and Q smooth over k; def-pur-supported-exterior-product gives the product-ideal kernel I⊗C+B⊗J; the pullback, boundary and Kummer clauses of lem-pur-supported-cup-functoriality give the pulled-back factors. In step 3 I removed a spurious 'block interchange' sign (the concatenated order needs only associativity) and added the unit case. Old step 4 had a C3/E5 gap. (a) The exterior product's theta lands in p^{-1}C_{Z1}(A)⊗p^{-1}C_{Z2}(A), while the cup's mu is defined on C_{Z1×U2}(A)⊗C_{U1×Z2}(A); the closed exchange relating them was never named. (b) It never said how the supported pullback acts on representing morphisms. (c) No cited statement says the chi of lem-pur-supported-hom (used by the cup) equals the C_i ⊣ RΓ_Z transpose (used by the exterior product); the quotient-model lemma covers only C_a against E_a. Repair: a new statement-only node, lem-pur-supported-hom-adjunction-transpose (chi(x)=x^flat[a]). It is true: it is exactly the phi ↦ phi_X(rho(1)) normalization in the proof of lem-pur-supported-hom, and no existing node states it. Two Mathlib greps are recorded with 0 hits; LeanSearch and Loogle were not run and are not recorded. Step 4 is rewritten: lem-pur-supported-hom-pullback's exchanges xi_r with xi_r∘p^{-1}q = q' by the triangle identity give theta=(xi_1⊗xi_2)^{-1}mu^{-1}, since q_Q is epic. A new step 5 compares the two classes using the pro-etale clause of lem-pur-supported-hom-pullback, the new lemma, and even degrees (no sigma signs). lem-pur-supported-product-quotient-model has been removed from the steps and proof_deps. The statement is unchanged. All citations are inside the unit route, so no tool_uses are needed. There are no cycles. lem-pur-compact-product-proper-support-compatibility generalizes only the second equality, so the item is not a duplicate. Batch-5: all three flagged citations reach sec-poincare-duality only via lem-pod-etale-stalk-tensor-scalar, a generic fact that stalks commute with tensor products. It is not part of Poincare duality or the trace formula, and it is already in the closure of the item's statement dependencies, so I accept it. The added nodes reach nothing new. No SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityExteriorProductFrame",
+  "declaration": "WeilConjectures.PurityFiniteSetting.exteriorProduct_frame",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameClass",
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameSquare",
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameTuple",
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameCupCore",
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameCup",
+   "WeilConjectures.PurityFiniteSetting.exteriorFrameReindex",
+   "WeilConjectures.PurityFiniteSetting.exteriorProduct_frame"
+  ],
+  "file": "lean/Sheaf/Paper/PurityExteriorProductFrame.lean",
+  "statement": "theorem exteriorProduct_frame (P : PurityFiniteSetting.{u}) {X Y Z W : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) (dX dY c d : ℕ) [SmoothOfRelativeDimension dX aX] [SmoothOfRelativeDimension dY aY] [IsSeparated aX] [IsSeparated aY] [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aX] [QuasiCompact aY] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] [Smooth (i ≫ aX)] [Smooth (j ≫ aY)] (_hc : ∀ z : Z, ringKrullDim (X.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (_hd : ∀ w : W, ringKrullDim (Y.presheaf.stalk (j w)) = ringKrullDim (W.presheaf.stalk w) + (d : WithBot ℕ∞)) (f : Fin c → Γ(X, ⊤)) (g : Fin d → Γ(Y, ⊤)) (ef : X.zeroLocusSubscheme (Set.range f) ≅ Z) (hf : ef.hom ≫ i = X.zeroLocusSubschemeι (Set.range f)) (eg : Y.zeroLocusSubscheme (Set.range g) ≅ W) (hg : eg.hom ≫ j = Y.zeroLocusSubschemeι (Set.range g)) (_hQ : ∀ q : ↥(pullback (i ≫ aX) (j ≫ aY) : Scheme.{u}), ringKrullDim ((pullback aX aY).presheaf.stalk (Etale.supportedProductImmersion aX aY i j q)) = ringKrullDim ((pullback (i ≫ aX) (j ≫ aY)).presheaf.stalk q) + ((c + d : ℕ) : WithBot ℕ∞)) : ∃ (eh : (pullback aX aY).zeroLocusSubscheme (Set.range (P.exteriorFrameTuple aX aY f g)) ≅ pullback (i ≫ aX) (j ≫ aY)) (e : pullback (i ≫ aX) (j ≫ aY) ≅ pullback (pullback.snd i (pullback.fst aX aY)) (pullback.snd j (pullback.snd aX aY))) (hh : eh.hom ≫ Etale.supportedProductImmersion aX aY i j = (pullback aX aY).zeroLocusSubschemeι (Set.range (P.exteriorFrameTuple aX aY f g))) (he : e.hom ≫ cupIntersection (pullback.snd i (pullback.fst aX aY)) (pullback.snd j (pullback.snd aX aY)) = Etale.supportedProductImmersion aX aY i j), P.exteriorFrameClass (pullback.fst aX aY ≫ aX) (Etale.supportedProductImmersion aX aY i j) (c + d) (P.exteriorFrameTuple aX aY f g) eh hh = P.exteriorFrameReindex true _ (by push_cast; ring) (by push_cast; rfl) (P.exteriorFrameCup aX aY i j e he (2 * (c : ℤ)) (2 * (d : ℤ)) c d (P.exteriorFrameClass aX i c f ef hf) (P.exteriorFrameClass aY j d g eg hg)) ∧ P.exteriorFrameClass (pullback.fst aX aY ≫ aX) (Etale.supportedProductImmersion aX aY i j) (c + d) (P.exteriorFrameTuple aX aY f g) eh hh = P.exteriorFrameReindex true _ (by push_cast; ring) (by push_cast; rfl) (P.exteriorFrameExternal aX aY i j (2 * (c : ℤ)) (2 * (d : ℤ)) c d (P.exteriorFrameClass aX i c f ef hf) (P.exteriorFrameClass aY j d g eg hg))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db26a6b39",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after 8eea12af H2 RETURN; delta is exactly the required repair: item and new node def-pur-supported-exterior-classes replace theorem stmt_dep lem-pur-supported-cup-functoriality with existing:true def-pur-supported-class-operations (owns FunctorialCupH, functorialCup, Pullback, ChangeSupport, Single, Source, Twist, TwistPullback, TwistProduct); functorialCupReindex replaced by documented local exteriorFrameReindex (same bare ▸ cast, in lean.declarations); new node statement differs only in the two citations; SupportedExteriorClasses.lean and its lean record byte-identical to the reviewed version; PurityFrameClass speed-up dropped, all dep records equal live; no stmt_dep dropped vs base. Statement re-confirmed against node (pure codim, ideal generation via zero-locus isos, ordered concatenation, both equalities, empty tuples give the unit, universes); both lean.statement fields verbatim. nt_compile --json clean: SupportedExteriorClasses 56.7 s, PurityExteriorProductFrame 16.5 s, exit 0. Advisory: SupportedExteriorClasses is near the 60 s limit; some private proof-only imports; frameClass P.level tie is a def-pur-frame-class record fault."
  }
 }

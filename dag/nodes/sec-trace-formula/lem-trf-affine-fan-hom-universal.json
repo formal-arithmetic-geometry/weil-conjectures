@@ -224,5 +224,27 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-6774ab44a (reviewer sub-agent of L); spot-checked: Read both nodes fully against ILO VIII 3.1.1–3.1.8 and 3.3.15; verified all seven steps, hypotheses, localization formulas, edge cases, duplicate candidates and route restrictions. No repairs or accepted tool_uses. Detailed checks written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFanHomUniversal",
+  "declaration": "AlgebraicGeometry.FineFan.affine_hom_universal",
+  "declarations": [
+   "AlgebraicGeometry.FineFan.affinePullback",
+   "AlgebraicGeometry.FineFan.affine_hom_universal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFanHomUniversal.lean",
+  "statement": "theorem affine_hom_universal (P : Type u) [CommMonoid P] (hP : IsFine P) (sP : IsSharp P) : (∀ (T : SheafedSpace CommMonCat.{u}), (∀ x : T, IsSharp (stalk T.presheaf x)) → Function.Bijective (fun f : {f : T ⟶ affine P // IsLocalMorphism f} ↦ affinePullback f.val)) ∧ (∀ (T T' : SheafedSpace CommMonCat.{u}), (∀ x : T, IsSharp (stalk T.presheaf x)) → (∀ x : T', IsSharp (stalk T'.presheaf x)) → ∀ (k : {k : T' ⟶ T // IsLocalMorphism k}) (f : {f : T ⟶ affine P // IsLocalMorphism f}), affinePullback (k.val ≫ f.val) = (SheafedSpace.Γ.map k.val.op).hom.comp (affinePullback f.val)) ∧ (∀ (Q : Type u) [CommMonoid Q], IsFine Q → IsSharp Q → ∀ (v : P →* Q), ∃! g : {g : affine Q ⟶ affine P // IsLocalMorphism g}, affinePullback g.val = (affineSection Q).comp v ∧ ∀ (T : SheafedSpace CommMonCat.{u}), (∀ x : T, IsSharp (stalk T.presheaf x)) → ∀ (f : {f : T ⟶ affine Q // IsLocalMorphism f}), affinePullback (f.val ≫ g.val) = (affinePullback f.val).comp v)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6628df64e",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Read item node, stmt_dep def-trf-fine-fan-blowup (IsFine, IsSharp, MonoidPrime, spectrumSections/sharpSheaf/affine, stalk, stalkMap, IsLocalMorphism, affineSection, IsAffineMap) and ILO VIII 3.1.5-3.1.8 (PDF pp.104-105). Clauses match: arbitrary SheafedSpace CommMonCat with sharp stalks, fine sharp P, local morphisms to the recorded affine P, affinePullback = Γ(f)∘affineSection (real data), Bijective, naturality in T, and naturality in P via the unique local g with canonical-section formula (true: Γ(affine P)=P for fine sharp P, stalks of the sharpened sheaf are sharp). No stronger hypotheses; single universe u is the dep's convention and stated in the report. Edge cases (empty T, trivial P, empty prime, nonsaturated or torsion P^gp) are covered. No duplicate in side/newtargets lean, runs/2 or Mathlib. Docstrings carry the source and blueprint id with the 7 proof steps; sorry only. Statement field verbatim; node changes only lean. nt_compile --json clean (2.3 s, exit 0); broken-copy control fails as expected. Advisories: redundant inner postcomposition conjunct; composite locality implicit; placeholder second-reading section per the 2026-10-17 policy."
  }
 }
