@@ -13,6 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
 /-!
 # The exceptional Künneth maps are isomorphisms
@@ -225,9 +227,12 @@ variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))]
 
 /-- **Smooth morphisms** satisfy the exceptional Künneth formula: the base change map is invertible
 by `prop-asd-smooth-base-change`, and the tensor maps of the smooth base change `h` are
-invertible since `θ_h` is (`thm-asd-smooth-tensor`). -/
-theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}} (g : T ⟶ S)
-    [HasCompactification g] (d : ℕ) [SmoothOfRelativeDimension d g] :
+invertible since `θ_h` is (`thm-asd-smooth-tensor`). The base `S` is quasi-separated, as in
+`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`
+(it is of finite type over `k` in the blueprint). -/
+theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}
+    [QuasiSeparatedSpace S] (g : T ⟶ S) [HasCompactification g] (d : ℕ)
+    [SmoothOfRelativeDimension d g] :
     IsExceptionalKunneth Λ k g := by
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
   have : HasInvertibleExponent Λ T := .of_hom (g ≫ b)
@@ -331,8 +336,7 @@ theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ 
     (isInvertible_dualizingComplex_of_smoothOfRelativeDimension Λ (v i) 0)
   refine ⟨fun N ↦ ?_, fun N M ↦ ?_⟩
   · refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ v hv _ fun i ↦ ?_
-    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ (u i) 0
-      (sqv i)
+    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ (sqv i)
     have := (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff (sqv i) sq (sqi i) rfl rfl N
       inferInstance).1 ((H i b c sqP (sqi i)).1 N)
     exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (v i) (hθ i)
