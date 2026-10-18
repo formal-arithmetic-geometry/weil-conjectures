@@ -14,9 +14,136 @@
   "lem-per-ordinary-smooth-orientation",
   "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with sheaves of modules over the constant ring $A=\\mathbf F_\\ell$ on the small etale sites. The inverse image $f^*$ is additive, exact and left adjoint to $f_*$ by prop-weil-pbc-inverse-image-modules-exact. Since $f$ is etale, lem-weil-pbc-etale-restriction-injectives gives the exact sheaf sum-extension functor $f_{\\Sigma!}$ and its adjunction $f_{\\Sigma!}\\dashv f^*$. The canonical graph map $c:f_{\\Sigma!}\\to f_*$ is an isomorphism for finite etale $f$, by lem-weil-pbc-etale-shriek-star-finite-modules. Transport the latter adjunction along $c$. This proves that $f_*$ is exact and gives both sheaf adjunctions $f_*\\dashv f^*\\dashv f_*$. These assertions hold for arbitrary module sheaves, without a constructibility hypothesis.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-etale-shriek-star-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S7 (lemma-shriek-equals-star-finite-etale)"
+   }
+  },
+  {
+   "text": "Specify the sheaf counit, rather than choosing an arbitrary adjunction on the isomorphic functor. In the presheaf defining $f_{\\Sigma!}f^*N$, a summand indexed by $s:V\\to X$ is $(f^*N)(V,s)=N(V)$, using etale inverse image as restriction. The adjoint of $1_{f^*N}$ sends this summand identically to $N(V)$; it factors uniquely through sheafification. Thus the counit is summation of the summand evaluations. By the defining graph formula for $c$, when $X=\\coprod_{a\\in I}Y$, the summand indexed by the $a$th constant section maps to the $a$th component, with zero in the others. The split-product description of $f_*$ and the sheaf condition on this finite clopen covering therefore identify the transported counit with $\\sum_{a\\in I}:\\bigoplus_aN\\to N$. This argument concerns the sheafified direct sum; it does not identify its sections with the raw presheaf sum on a disconnected test object.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-shriek-to-star-map",
+    "lem-weil-pbc-direct-image-split-cover-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S2 (section-extension-by-zero), equation-j-p-shriek; Tag 0F4L (lemma-shriek-into-star-separated-etale), graph formula; Tag 03SH, split sum normalization"
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-termwise-adjunction-homotopy to each of the two additive sheaf adjunctions of Step 1. They induce adjunctions on complexes and on homotopy categories, with the units and counits given degreewise. Both functors are exact, so lem-weil-pbc-exact-functor-derived-factorization supplies their descents at quasi-isomorphisms; lem-weil-pbc-exact-functor-derived-functor identifies these descents with the derived functors, on the whole category and on $D^+$. Apply lem-sfb-adjunction-localization to the two homotopy adjunctions. Its unit and counit formulas say that, under the termwise comparisons, the derived unit and counit are precisely the classes of the degreewise sheaf maps, and retain both triangle identities. Termwise functors preserve bounded-below complexes; alternatively their cohomology is the exact functor applied to the original cohomology. Restriction therefore yields $f_*\\dashv f^*\\dashv f_*$ on $D^+$, with $Rf_*=f_*$. In particular $t_M$ is the termwise sheaf counit of Step 2, not a map defined only on cohomology objects.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives, homotopy adjunction), 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors); localization normalization as in lem-sfb-adjunction-localization"
+   }
+  },
+  {
+   "text": "The etale-local splitting node supplies, around every point of $Y$, a finite clopen decomposition of the base-changed $X$ into copies of the etale neighbourhood; it imposes no global connectedness or surjectivity assumption. On a split chart the sheaf unit of $f^*\\dashv f_*$ is restriction to the fibre product by lem-weil-pbc-etale-inverse-image-restriction. Its component on each copy is therefore $1_N$, so the split-product identification makes it $N\\to\\prod_{a\\in I}N$, $n\\mapsto(n)_a$. The trace family of lem-weil-pbc-finite-etale-trace-exists is characterized by etale localization and these same sum formulas. The counit constructed in Step 2, evaluated on each presheaf summand, commutes with restriction to an etale chart and is that sum there, so uniqueness identifies it with this trace. For $A=\\mathbf F_\\ell$ the abelian trace is $A$-linear: additive maps between groups killed by $\\ell$ commute with multiplication by every residue class. Step 3 now gives the asserted diagonal unit and trace counit for complexes.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-direct-image-split-cover-product",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SH (section-trace-method), Definition 03SE (definition-trace-map), characterization after the definition; Tag 04HN in etale.tex"
+   }
+  },
+  {
+   "text": "A finite morphism is proper by lem-weil-pbc-finite-proper, hence separated and of finite type by def-weil-proper-morphism. Choose the proper compactification $(1_X,f)$. The definition of ordinary etale compact support makes its candidate exactly $Rf_*$, since extension by zero along $1_X$ is the identity. Thus the right adjoint supplied by thm-amb-etale-exceptional-adjoint and the right adjoint $f^*$ of Step 3 have a unique counit-compatible isomorphism, by det-sp-unique-right-adjoint. We use its inverse as the identification $f^!\\cong f^*$. The comparison with sum extension has the required normalization as well: lem-pur-etale-support-map-compatibility says that its inverse on sheaves sends each summand to its graph and is degreewise on complexes. For $(1_X,f)$ this is exactly the defining graph map $c$ of Step 1. Therefore its transported counit is the $t_M$ already fixed above. All schemes are Noetherian and $A$ is finite, as required for the compact-support adjoint; the chosen compactification proves compactifiability without any compactification existence theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "def-amb-etale-compact-support",
+    "thm-amb-etale-exceptional-adjoint",
+    "det-sp-unique-right-adjoint",
+    "lem-pur-etale-support-map-compatibility",
+    "def-weil-pbc-etale-shriek-to-star-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S7 (lemma-shriek-equals-star-finite-etale); proper compactification (identity,f); graph normalization of lem-pur-etale-support-map-compatibility"
+   }
+  },
+  {
+   "text": "Apply lem-pur-finite-smooth-gamma-normalization with $n=1$ to this finite etale map: it is separated, of finite type and compactifiable by Step 5, and $\\ell$ is invertible on both Noetherian schemes. Its coefficient ring $\\mathbf Z/\\ell$ is $A$. The lemma states that the rank-zero diagonal/deformation orientation is the identity under the sum-counit-preserving comparison, and that its tensor extension has adjoint exactly the sum/evaluation counit. By lem-weil-pbc-etale-smooth-zero-dimensional-fibres the etale map $f$ is smooth of pure relative dimension $0$; with Step 5 it is separated and compactifiable, so lem-per-ordinary-smooth-orientation applies to $f$ with $d=0$. Its dimension-zero clause identifies this with the orientation required in the statement. In particular the unit-coefficient orientation $g_f:A_X\\to f^!A_Y$ becomes $1_{A_X}$ under the comparison of Step 5; the transpose of $g_f$ is $t_{A_Y}$ and its canonical tensor extension is $t_M$. Uniqueness of a counit-compatible right-adjoint comparison rules out a further scalar or a differently normalized trace. This uses the existing diagonal/deformation normalization, not a trace-based construction of smooth purity.",
+   "uses": [
+    "lem-pur-finite-smooth-gamma-normalization",
+    "lem-per-ordinary-smooth-orientation",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Dimension-zero specialization of the diagonal/deformation orientation; lem-pur-finite-smooth-gamma-normalization, n=1"
+   }
+  },
+  {
+   "text": "Finally suppose every geometric fibre has $d$ points. On each splitting chart from Step 4, the finite index set has cardinality $d$: over any geometric point of the chart the disjoint copies give precisely those $d$ points. In every degree $r$ of a representing complex $K$, the sheaf composite is\n$$K^r\\xrightarrow{\\mathrm{diag}}\\bigoplus_{a\\in I}K^r\\xrightarrow{\\mathrm{sum}}K^r,\\qquad n\\longmapsto\\sum_{a\\in I}n=d n.$$\nEquality on the etale covering implies equality of these sheaf morphisms, by uniqueness in the sheaf condition. Thus the two chain maps are equal before localization, degree by degree. Applying localization and Step 3 gives $t_Mu_M=d\\operatorname{id}_M$ for every $M\\in D^+$. We have not inferred equality of arbitrary derived morphisms merely from equality after etale pullback. For an empty fibre the sum and diagonal factor through zero and $d=0$; for $d$ divisible by $\\ell$ the composite is zero. No division by $d$ or choice of a connected component is used.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SH (section-trace-method), restriction followed by trace; ILO Expose XVI, Lemma 3.5.10, printed p.250"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proper-morphism",
+  "det-sp-unique-right-adjoint",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-finite-etale-trace-exists",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Lemma 3.5.10 and proof, printed p.250; explicit termwise adjunction details from Stacks Tags 03S3, 03S7, 03SH, 015F; dimension-zero comparison follows the existing diagonal/deformation normalization node"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +179,45 @@
    "results": "Actual recorded hits: CondensedMod.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, CompHausLike.LocallyConstant.adjunction_left_triangle, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_counit, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
    "date": "2026-10-18",
    "verdict": "no match: returned scheme normalization, etale algebra, structural module adjunctions, or condensed locally constant functors; none has the stated ordinary etale Gysin or dualizing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.?[Ee]tale.*(adj|trace)|ambidex",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic structure-sheaf/topological adjunctions or unrelated Dold-Kan identities, not the finite-etale ordinary-derived trace and orientation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale pushforward and pullback are adjoint in both directions and trace after the diagonal is multiplication by the degree on derived etale sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic structure-sheaf/topological adjunctions or unrelated Dold-Kan identities, not the finite-etale ordinary-derived trace and orientation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Adjunction\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic structure-sheaf/topological adjunctions or unrelated Dold-Kan identities, not the finite-etale ordinary-derived trace and orientation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite etale morphisms, ordinary etale sheaf pushforward is exact and both left and right adjoint to inverse image; the counit is summation over the finite fibre",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic structure-sheaf/topological adjunctions or unrelated Dold-Kan identities, not the finite-etale ordinary-derived trace and orientation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and induction for a finite covering of sites form a Frobenius pair; sum after diagonal on complexes is the degree times identity",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.identity_N₂\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"SheafOfModules.ιFree_mapFree_inv\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.mapMono_on_summand_id\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic structure-sheaf/topological adjunctions or unrelated Dold-Kan identities, not the finite-etale ordinary-derived trace and orientation assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-proper-degree-descent",
@@ -80,5 +242,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-etale-derived-ambidexterity",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its definition dependencies. Reused existing ordinary-etale sheaf adjunction, canonical finite shriek-to-star map, exact derived localization, finite-cover trace, and dimension-zero diagonal/deformation normalization. Wrote the counit and unit on representatives and proved the degree equation as equality of chain maps before localization. No new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, through the punctual-purity proper-degree descent ancestor chain: supplies the finite-etale degree calculation and the orientation/trace normalization used there. Steps 1-4 and 7 expand ILO XVI 3.5.10; Steps 5-6 connect it to the ordinary smooth diagonal orientation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: Etale proper-support normalization intertwines exchange and projection. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "lem-pur-finite-smooth-gamma-normalization",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: Dimension-zero diagonal/deformation orientation and tensor-map normalization. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: Inverse image along an etale morphism is restriction. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: The functor induced by an exact functor is its own right and left derived functor. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic ordinary-etale sheaf/derived/adjunction infrastructure: The ordinary ambient exceptional adjoint. Used only for the specific statement cited in the proof; this perverse unit has no substitute for that ordinary-etale construction or normalization."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic scheme fact (etale implies smooth of relative dimension zero), needed to apply the dimension-zero case of lem-per-ordinary-smooth-orientation to f; this perverse unit has no node for it. Added by the stage-1 reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NP-589887115",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-589887115 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement (no new nodes). The source matches: ILO XVI Lemme 3.5.10, printed p.250 (pdf p.256), constant degree d, D+, composite of the two canonical adjunctions = d. Steps 1-5 and 7 are sound. Step 1: the adjunction f_Σ!⊣f^* is moved along the isomorphism c of 03S7 (this needs only the statement of def-weil-pbc-etale-shriek-to-star-map). Step 2: the counit, written out from its defining property, is the sum Σ on split charts. Step 3: the adjunction is computed term by term and then passed to the derived category. Step 4: the unit is the diagonal, and the counit equals the unique trace family. Step 5: the compactification (1_X,f) and the graph normalization of support-map-compatibility agree with c, and det-sp-unique-right-adjoint gives f^×≅f^*. Step 7: |J|=d on each chart, the composite equals d degree by degree, and sheaves glue. Edge cases checked: d=0 (X empty), d=1, ℓ|d, Y disconnected, f not surjective; d is never inverted. Step 6: every hypothesis of gamma-normalization holds (n=1, separated, finite type, compactifiable via (1_X,f), Noetherian, ℓ invertible), and its d=0 clause agrees with Step 8 of the orientation node. C1 fault fixed: applying lem-per-ordinary-smooth-orientation needs f smooth of relative dimension 0 in the sense of def-sbc-smooth-morphisms. Nothing cited gave this, and the existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres states exactly that bridge. I added it to Step 6, to proof_deps and to tool_uses. Batch-5 flags: support-map-compatibility and gamma-normalization were already in the proof closure of the base stmt_dep lem-per-ordinary-smooth-orientation, whose Step 8 cites gamma-normalization, so they add nothing to the batch-5 closure. Their chain ends in the generic stalk/tensor lemma lem-pod-etale-stalk-tensor-scalar, which is not a step of the Poincaré duality or trace formula proofs. Accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
