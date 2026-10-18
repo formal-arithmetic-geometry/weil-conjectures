@@ -6779,7 +6779,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.CommutativeSquareLi
 public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.CompletionTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
