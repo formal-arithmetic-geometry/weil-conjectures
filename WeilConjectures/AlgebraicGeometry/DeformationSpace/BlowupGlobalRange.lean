@@ -16,7 +16,9 @@ The open immersion `D_I X ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])`
 the closure of the locus lying over the zero section `t = 0` off the center, i.e. the complement
 of the strict transform of the zero section (blueprint `def-pur-dnc-section-family`). This is
 checked on the charts over the affine opens of `X`, where it is
-`AlgebraicGeometry.AffineBlowup.compl_closure_zeroFibreOffCenter`.
+`AlgebraicGeometry.AffineBlowup.compl_closure_zeroFibreOffCenter`. For `I` of finite type the open
+locus of the zero section off the center has quasi-compact inclusion, so the closure is the strict
+transform (`range_deformationSpaceToBlowup_eq_compl_strictTransform_of_ofFiniteType`).
 -/
 
 @[expose] public section
@@ -203,9 +205,9 @@ theorem range_deformationSpaceToBlowup :
 
 /-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. When the
 strict transform of the zero section is the closure of its open locus (e.g. under the
-quasi-compactness hypothesis below, which holds when `X` is quasi-separated and `K` is of finite
-type with quasi-compact support complement), the image of `D_I X` in the blow-up model is the
-complement of the strict transform. -/
+quasi-compactness hypothesis below, which holds when `I` is of finite type by
+`IdealSheafData.quasiCompact_strictTransformOpen_ι`), the image of `D_I X` in the blow-up model
+is the complement of the strict transform. -/
 theorem range_deformationSpaceToBlowup_eq_compl_strictTransform
     [QuasiCompact (strictTransformOpen X.polynomialSpecZeroSection
       I.deformationCenterSheaf.blowupMap I.deformationCenterSheaf.support.compl).ι] :
@@ -214,6 +216,118 @@ theorem range_deformationSpaceToBlowup_eq_compl_strictTransform
         I.deformationCenterSheaf.blowupMap I.deformationCenterSheaf.support.compl))ᶜ := by
   rw [range_strictTransformMap_eq_closure, range_deformationSpaceToBlowup]
   rfl
+
+/-- Over the chart `U`, the locus of the blow-up model lying over the complement of the center
+is the image of the locus of the affine blow-up over the complement of its center. -/
+lemma preimage_compl_support_inter_chart (U : X.AffineZariskiSite) :
+    I.deformationCenterSheaf.blowupMap ⁻¹'
+        ((I.deformationCenterSheaf.support.compl : Set X.polynomialSpec) ∩
+          (polynomialSpecChartOpen X U).1) =
+      (I.chartBlowupHom U ≫ I.deformationCenterSheaf.blowupι (polynomialSpecChartOpen X U)) ''
+        (toSpec (deformationCenter (I.siteIdeal U)) ⁻¹'
+          (centerCompl (I.siteIdeal U) : Set (Spec (.of (Polynomial Γ(X, U.1)))))) := by
+  set g := I.chartBlowupHom U ≫ I.deformationCenterSheaf.blowupι (polynomialSpecChartOpen X U)
+  have hg : ∀ z, I.deformationCenterSheaf.blowupMap (g z) =
+      colimit.ι (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor U
+        (toSpec (deformationCenter (I.siteIdeal U)) z) := by
+    intro z
+    have := congr($(I.chartBlowupHom_blowupι_blowupMap U) z)
+    simp only [Scheme.Hom.comp_apply] at this
+    exact this
+  ext y
+  constructor
+  · rintro ⟨h0, h1⟩
+    have hy : y ∈ I.deformationCenterSheaf.blowupMap ⁻¹ᵁ (polynomialSpecChartOpen X U).1 :=
+      h1
+    rw [blowupMap_preimage] at hy
+    obtain ⟨y₁, rfl⟩ := hy
+    obtain ⟨y', rfl⟩ : ∃ y', I.chartBlowupHom U y' = y₁ :=
+      ⟨inv (I.chartBlowupHom U) y₁, by rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]; rfl⟩
+    refine ⟨y', ?_, (Scheme.Hom.comp_apply _ _ _).symm⟩
+    have h0' : I.deformationCenterSheaf.blowupMap (g y') ∉ I.deformationCenterSheaf.support := by
+      have : g y' = _ := Scheme.Hom.comp_apply _ _ _
+      rw [this]; exact h0
+    rw [hg, chart_mem_support_deformationCenterSheaf_iff] at h0'
+    exact h0'
+  · rintro ⟨z, hz, rfl⟩
+    refine ⟨?_, ?_⟩
+    · change I.deformationCenterSheaf.blowupMap (g z) ∉ I.deformationCenterSheaf.support
+      rw [hg, chart_mem_support_deformationCenterSheaf_iff]
+      exact hz
+    · change I.deformationCenterSheaf.blowupMap (g z) ∈
+        (relativeGluingData X.coequifibered_toPolynomialPresheaf).toBase ⁻¹ᵁ U.1
+      rw [hg, toBase_preimage]
+      exact ⟨_, rfl⟩
+
+
+/-- For `I` of finite type, the inclusion of the locus of `(zero section) ×_{Spec_X 𝒪_X[t]}
+Bl_{V(I) × 0}` lying off the center is quasi-compact. This is checked over the charts
+`Spec Γ(U)[t]` of the base. -/
+lemma quasiCompact_strictTransformOpen_ι (hI : I.ofFiniteType) :
+    QuasiCompact (strictTransformOpen X.polynomialSpecZeroSection
+      I.deformationCenterSheaf.blowupMap I.deformationCenterSheaf.support.compl).ι := by
+  set f := X.polynomialSpecZeroSection
+  set π := I.deformationCenterSheaf.blowupMap
+  set W := strictTransformOpen f π I.deformationCenterSheaf.support.compl
+  let V : X.AffineZariskiSite → (pullback f π).Opens :=
+    fun U ↦ pullback.snd f π ⁻¹ᵁ (π ⁻¹ᵁ (polynomialSpecChartOpen X U).1)
+  have hV : iSup V = ⊤ := by
+    simp only [V, ← Scheme.Hom.preimage_iSup, iSup_polynomialSpecChartOpen,
+      Scheme.Hom.preimage_top]
+  refine IsZariskiLocalAtTarget.of_iSup_eq_top V hV fun U ↦ ?_
+  have hJ : (deformationCenter (I.siteIdeal U)).FG :=
+    deformationCenter_fg ((I.ofFiniteType_iff.mp hI) ⟨U.1, U.2⟩)
+  have : IsProper (toSpec (deformationCenter (I.siteIdeal U))) := isProper_toSpec _ hJ
+  set g := I.chartBlowupHom U ≫ I.deformationCenterSheaf.blowupι (polynomialSpecChartOpen X U)
+  have hrange : Set.range ((V U).ι ≫ pullback.snd f π) ⊆ Set.range g := by
+    rintro _ ⟨v, rfl⟩
+    have hv : pullback.snd f π ((V U).ι v) ∈ π ⁻¹ᵁ (polynomialSpecChartOpen X U).1 := by
+      have := v.2
+      rwa [Scheme.Opens.ι_apply]
+    rw [blowupMap_preimage] at hv
+    obtain ⟨y₁, hy₁⟩ := hv
+    refine ⟨inv (I.chartBlowupHom U) y₁, ?_⟩
+    change _ = pullback.snd f π ((V U).ι v)
+    rw [← hy₁, ← Scheme.Hom.comp_apply (inv (I.chartBlowupHom U))]
+    simp only [g, IsIso.inv_hom_id_assoc]
+  have : QuasiSeparatedSpace (AffineBlowup (deformationCenter (I.siteIdeal U))) :=
+    quasiSeparatedSpace_of_quasiSeparated (toSpec (deformationCenter (I.siteIdeal U)))
+  let h := IsOpenImmersion.lift g ((V U).ι ≫ pullback.snd f π) hrange
+  have : QuasiSeparated (h ≫ g) := by
+    rw [IsOpenImmersion.lift_fac]; infer_instance
+  have : QuasiSeparated h := .of_comp h g
+  have : QuasiSeparatedSpace (V U).toScheme := quasiSeparatedSpace_of_quasiSeparated h
+  have hW : ((W : Set ↥(pullback f π)) ∩ (V U : Set ↥(pullback f π))) =
+      pullback.snd f π ⁻¹' (π ⁻¹'
+      ((I.deformationCenterSheaf.support.compl : Set X.polynomialSpec) ∩
+        (polynomialSpecChartOpen X U).1)) := rfl
+  have hcpt : IsCompact ((W : Set ↥(pullback f π)) ∩ (V U : Set ↥(pullback f π))) := by
+    rw [hW, preimage_compl_support_inter_chart]
+    refine QuasiCompact.isCompact_preimage (f := pullback.snd f π) _ ?_ ?_
+    · rw [← preimage_compl_support_inter_chart]
+      exact (π ⁻¹ᵁ (I.deformationCenterSheaf.support.compl ⊓
+        (polynomialSpecChartOpen X U).1)).isOpen
+    · refine IsCompact.image ?_ g.continuous
+      exact QuasiCompact.isCompact_preimage (f := toSpec _) _ (centerCompl _).isOpen
+        (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨_, hJ, rfl⟩).1
+  have : CompactSpace (W.ι ⁻¹ᵁ V U).toScheme := by
+    refine isCompact_iff_compactSpace.mp ?_
+    refine W.ι.isOpenEmbedding.isEmbedding.isCompact_iff.mpr ?_
+    change IsCompact (W.ι '' (W.ι ⁻¹' (V U : Set ↥(pullback f π))))
+    rwa [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι, Set.inter_comm]
+  infer_instance
+
+/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. For an ideal
+sheaf `I` of finite type, the image of the Rees model `D_I X` in the blow-up model
+`Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of the strict transform of the zero section
+`X × 0`. -/
+theorem range_deformationSpaceToBlowup_eq_compl_strictTransform_of_ofFiniteType
+    (hI : I.ofFiniteType) :
+    Set.range I.deformationSpaceToBlowup =
+      (Set.range (strictTransformMap X.polynomialSpecZeroSection
+        I.deformationCenterSheaf.blowupMap I.deformationCenterSheaf.support.compl))ᶜ :=
+  have := I.quasiCompact_strictTransformOpen_ι hI
+  I.range_deformationSpaceToBlowup_eq_compl_strictTransform
 
 /-- The open complement of the closure of the locus over the zero section off the center in the
 blow-up model; under the hypothesis of
