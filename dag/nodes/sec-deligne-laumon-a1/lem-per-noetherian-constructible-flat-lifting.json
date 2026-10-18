@@ -19,9 +19,117 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-etale-sum-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The chosen finite affine Noetherian cover makes $X$ quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated] it is quasi-separated. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] every nonempty set of closed subsets of $|X|$ has a minimal element, so closed subsets satisfy the descending-chain condition and every subset of $|X|$ is quasi-compact by [lem-sfb-noetherian-space-compact-subsets]. Hence every open subset of $X$ is retrocompact, and each stratum $T$ of a stratification of $G$, being locally closed, is $U\\cap(X\\setminus V)$ with $U$ open and $V=X\\setminus\\overline T$ open, so it is a constructible subset in the sense of [def-weil-constructible-subset]. Thus $G$ satisfies the hypothesis of [lem-per-noetherian-affine-free-presentation], with constructible strata. Apply it to $G$ to obtain an epimorphism $q:P=\\bigoplus_{i=1}^r j_{U_i!}R_{U_i}\\to G$ with each $U_i$ affine. Only the epimorphic part of the presentation is needed; the source theorem also supplies the finite family of relations.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-constructible-subset",
+    "lem-per-noetherian-affine-free-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, lemma-category-constructible-modules, finite affine presentation; Tag 03TT, first choice of affine generators."
+   }
+  },
+  {
+   "text": "Put $P_W=j_{W!}R_W$. By [lem-weil-pbc-free-etale-module-shriek-comparison] this is the sheafified free representable. The Hom identification in [lem-weil-pbc-sheaf-free-separator], specialized to the separator $R$ of $R$-modules, gives $\\operatorname{Hom}(P_W,F)\\cong\\operatorname{Hom}_R(R,F(W))\\cong F(W)$; the last bijection evaluates at $1$. Thus each component $q_i:P_{U_i}\\to G$ corresponds to a section $s_i\\in G(U_i)$. Naturality identifies $gq_i$ with $g(s_i)$ and precomposition by the free map associated to $V\\to U_i$ with restriction of $s_i$ to $V$.",
+   "uses": [
+    "lem-weil-pbc-free-etale-module-shriek-comparison",
+    "lem-weil-pbc-sheaf-free-separator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, affine generators viewed as sections; sites-modules.tex Tag 03DI, equation-map-lower-shriek-OU-into-module."
+   }
+  },
+  {
+   "text": "The forgetful functor from module sheaves to abelian sheaves is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful], so it takes the epimorphism $p$ to an epimorphism. By [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], each $g(s_i)\\in C(U_i)$ lifts through $p$ on a covering sieve of $U_i$. Apply [lem-weil-pbc-etale-covering-sieve-finite-affine-refinement] to that sieve: $U_i$ is affine, hence quasi-compact. Obtain finitely many affine etale $X$-schemes $V_{ik}$, arrows $a_{ik}:V_{ik}\\to U_i$ jointly covering $U_i$, and sections $t_{ik}\\in B(V_{ik})$ with $p(t_{ik})=g(s_i)|_{V_{ik}}$. Membership in the lifting sieve gives an actual section lift for each selected arrow; it does not assert that $p(U_i)$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, replacement by etale coverings lifting the generators; sites-modules.tex Tag 03CN (5)."
+   }
+  },
+  {
+   "text": "Set $E=\\bigoplus_{i,k}P_{V_{ik}}$. The section $s_i|_{V_{ik}}$ defines $e_{ik}:P_{V_{ik}}\\to G$, and $t_{ik}$ defines $h_{ik}:P_{V_{ik}}\\to B$, by the Hom identification of Step 2. The coproduct maps give $e:E\\to G$ and $h:E\\to B$; existence follows from [lem-weil-pbc-module-sheaves-colimits-forgetful]. The equality of sections in Step 3 implies $ph_{ik}=ge_{ik}$, hence $ph=ge$. For epicness, let $u,v:G\\to H$ satisfy $ue=ve$. Evaluating the summand equalities at $1$ gives $u(s_i)|_{V_{ik}}=v(s_i)|_{V_{ik}}$ for all $k$. The sheaf axiom on the covering of $U_i$ gives $u(s_i)=v(s_i)$, so the Hom bijection gives $uq_i=vq_i$ for every $i$. Since $q$ is epic, $u=v$. Thus $e$ is epic.",
+   "uses": [
+    "lem-weil-pbc-free-etale-module-shriek-comparison",
+    "lem-weil-pbc-sheaf-free-separator",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, assembly of refined generators into a surjection lifting the given morphism; elementary coproduct and sheaf-axiom verification."
+   }
+  },
+  {
+   "text": "Each affine $V_{ik}$ is quasi-compact and quasi-separated, so [lem-per-noetherian-etale-sum-constructible] with $M=R$ shows $P_{V_{ik}}$ is constructible. Here $R$ is generated by $1$ as an $R$-module, even if its underlying set is infinite. A finite sum of constructibles is constructible directly: intersect their finitely many locally closed strata and then their finite collections of etale local trivializing covers. On the resulting cover the sum is constant of value the finite direct sum of the given finitely generated modules, generated by the union of their finite lists of generators. Thus $E$ is constructible.",
+   "uses": [
+    "lem-per-noetherian-etale-sum-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8 (3), lemma-jshriek-constructible; finite-sum closure written directly from the stratification definition."
+   }
+  },
+  {
+   "text": "For $j:V_{ik}\\to X$, [lem-weil-pbc-affine-source-morphism-separated] gives separatedness. By [lem-weil-pbc-qcqs-morphism-permanence], the affine source and quasi-separated target make $j$ quasi-compact. An etale map is locally of finite presentation, hence locally of finite type; therefore it is of finite type by [def-weil-finite-type-morphism]. The constant rank-one sheaf $R_{V_{ik}}$ is flat: its tensor functor is the identity, with $r\\otimes m\\mapsto rm$ and inverse $m\\mapsto1\\otimes m$. Apply [lem-pur-etale-sum-flat-kflat] to conclude $j_!R_{V_{ik}}$ is flat. Finite direct sums remain flat because tensor distributes over a finite sum and a finite sum of exact sequences of module sheaves is exact. Thus $E$ is flat.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-pur-etale-sum-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, flatness of the affine free terms; generic etale sum-extension flatness theorem with all morphism hypotheses checked."
+   }
+  },
+  {
+   "text": "The set of pairs $(i,k)$ is finite, so reindex it by $1,\\ldots,n$ to obtain exactly the displayed form of $E$. If $G=0$, take $n=0$, $E=0$ and the unique maps: $0\\to0$ is epic and $ph=ge=0$. If $X$ is empty, the empty covering sheaf axiom makes every module sheaf zero, reducing to this case. A zero coefficient ring likewise forces every module sheaf to be zero. No step used finiteness of the underlying set of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, finite affine-generator construction, including the zero and empty cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-constructible-subset",
+  "lem-per-noetherian-affine-free-presentation",
+  "lem-weil-pbc-free-etale-module-shriek-comparison",
+  "lem-weil-pbc-sheaf-free-separator",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+  "lem-per-noetherian-etale-sum-constructible",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-pur-etale-sum-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03TT, lemma-when-ctf, proof of the local lifting of affine generators; Tag 095N and Tag 03S8 (3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +172,38 @@
    "results": "{\"t\": \"2026-10-18T18:18:36Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Epi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.GeneratingSections.instIsFiniteTypeOfEpi\", \"SheafOfModules.GeneratingSections.ofEpi_I\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.ofEpi_π\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.epi\"], \"digest\": \"31b158d77acf7ddf\"}",
    "date": "2026-10-18",
    "verdict": "no match: GeneratingSections.ofEpi and its auxiliary declarations propagate an already chosen family through an epimorphism; they do not construct a finite flat constructible lifting cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves admit finite free etale generators lifting a surjection over Noetherian coefficients",
+   "results": "{\"t\": \"2026-10-18T19:44:46Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves admit finite free etale generators lifting a surjection over Noetherian coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.ιFree\", \"SheafOfModules.free\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"e8ad1bdd7cdbdefb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: related module-sheaf local generators, scheme morphisms or free Yoneda objects do not state the Noetherian-coefficient constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible etale module sheaf over a Noetherian ring admits a finite flat constructible cover lifting a map along an epimorphism",
+   "results": "{\"t\": \"2026-10-18T19:44:47Z\", \"tool\": \"leanfinder\", \"query\": \"A constructible etale module sheaf over a Noetherian ring admits a finite flat constructible cover lifting a map along an epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFinitePresentation\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"24b2ae467b9a1754\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: related module-sheaf local generators, scheme morphisms or free Yoneda objects do not state the Noetherian-coefficient constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every constructible etale module over an infinite Noetherian ring admits finite affine etale generators whose images lift through an epimorphism after finite covers",
+   "results": "{\"t\": \"2026-10-18T20:00:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every constructible etale module over an infinite Noetherian ring admits finite affine etale generators whose images lift through an epimorphism after finite covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePresentation\", \"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"f3140f532fa5f904\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: related module-sheaf local generators, scheme morphisms or free Yoneda objects do not state the Noetherian-coefficient constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine free etale generators of a constructible sheaf over a Noetherian coefficient ring",
+   "results": "{\"t\": \"2026-10-18T20:07:59Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine free etale generators of a constructible sheaf over a Noetherian coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmooth.out\", \"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"a9dec1415e316be8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: related module-sheaf local generators, scheme morphisms or free Yoneda objects do not state the Noetherian-coefficient constructible theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-ctf-flat-model",
@@ -91,5 +227,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-constructible-flat-lifting",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the finite affine generators, finite local lifting, epimorphism verification, constructibility and flatness. Added precise Noetherian finite-type presentation and etale sum-constructibility inputs because existing finite-coefficient or finite-underlying-set statements do not apply.",
+  "blueprint": "Realizes the finite affine generators and lifting refinements of Stacks 03TT in the coefficient-comparison flat-model input to the Step 1 relative-duality chain of lem-per-artin-gabber-affine-curve, through the recorded via ancestors.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-free-etale-module-shriek-comparison",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-free-separator",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   },
+   {
+    "node": "lem-pur-etale-sum-flat-kflat",
+    "why": "Generic sheaf or scheme input for the finite affine lifting construction; the perverse unit has no substitute and its duality route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-free-etale-module-shriek-comparison",
+  "lem-weil-pbc-sheaf-free-separator",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-pur-etale-sum-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8fed60b64",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8fed60b64 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 03RX (l.11671), 03S8(3) (l.12185), 095N (l.12412) and the proof of 03TT (l.13744). One fault, repaired (E2). As delivered, the new node lem-per-noetherian-affine-free-presentation was false: it allowed qcqs X with arbitrary locally closed strata (def-constructible-stratification), but Stacks 03RX requires constructible strata. Counterexample: X=Spec(prod F_2), x a non-isolated point, F=i_*R. F has a constant restriction on each of {x} and X\\{x}, but its support {x} is not constructible, so F has no finite affine presentation (095N with lemma-support-constructible). FIX: the node now requires constructible strata [def-weil-constructible-subset], and in that form it is a special case of 095N. Item Step 1 now proves G's strata are constructible on the Noetherian X: it adds lem-weil-pbc-noetherian-scheme-closed-subsets-minimal and lem-sfb-noetherian-space-compact-subsets (Mathlib leaves) and def-weil-constructible-subset, and proof_deps is updated. Steps 2-7 check out. Step 2: the Hom formula P_W to F(W) needs only naturality in F. Step 3: the refinement arrows lie in the lifting sieve and are jointly surjective, so they form a covering. Step 4: epicness by the sheaf axiom. Step 5: 03S8(3) with M=R, plus closure under finite sums. Step 6: all hypotheses of the flat sum-extension node hold (separated, finite presentation, hence finite type). Step 7: edge cases. The 03S8(3) node is true as stated. Neither new node restates the item, and neither duplicates an existing node, since the existing presentation and sum nodes need finite Lambda or finite-set values. Batch 5: lem-pur-etale-sum-flat-kflat reaches only lem-pod-etale-stalk-tensor-scalar (stalk of a tensor product), which is generic and not part of the trace formula or Poincare duality, so I accept it. The 10 declared tool_uses are generic and accepted. No SGA. Corrected files are in fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  }
 }
