@@ -7,15 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Mathlib.CategoryTheory.Subobject.Lattice
-import Sheaf.CategoryTheory.DerivedCoupleExact
-import all Sheaf.CategoryTheory.FinitePageImageLift
-import Sheaf.CategoryTheory.DerivedCoupleKernelIdentities
-import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
-import WeilConjectures.CategoryTheory.DerivedCoupleExact
+import all WeilConjectures.CategoryTheory.FinitePageImageLift
 import WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities
-import WeilConjectures.CategoryTheory.ExactCouple
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
-import WeilConjectures.CategoryTheory.FinitePageImageLift
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # Finite cycles of an exact couple
@@ -103,7 +97,105 @@ theorem finiteCycle_formula (X : BigradedExactCouple C 0) (t : ℕ) (p q : ℤ) 
     X.cycleBoundaryTower.Z t p q =
       (Subobject.pullback (X.f p q)).obj
         (imageSubobject (X.incomingAlphaIter t (p + 2) (q - 1))) := by
-  sorry
+  obtain ⟨A, I, hA0, hAs, hI0, hIs, hImono, hIm, _⟩ := X.pageCouple_image_prefix
+  have hA : ∀ (r : ℕ) (p q : ℤ), A r p q = X.incomingAlphaIter r p q := by
+    intro r p q
+    induction r with
+    | zero =>
+      rw [hA0]
+      simp only [incomingAlphaIter, alphaIter, eqToHom_trans]
+    | succ r ih => rw [hAs, ih, CategoryTheory.incomingAlphaIter_succ]
+  let T := X.cycleBoundaryTower
+  have hf : ∀ (r : ℕ) (p q : ℤ),
+      T.projection r p q ≫ (X.pageCouple r).f p q ≫ I r (p + 2) (q - 1) =
+        (T.Z r p q).arrow ≫ X.f p q := by
+    intro r p q
+    induction r with
+    | zero =>
+      simp only [hI0, T.projection_zero, pageCouple, Category.comp_id]
+    | succ r ih =>
+      let Y := X.pageCouple r
+      let M := Classical.choice Y.derivedMaps_exists
+      have hf' : Y.derivedEProjection p q ≫ (X.pageCouple (r + 1)).f p q ≫
+          Y.derivedDInclusion (p + 2) (q - 1) = kernel.ι (Y.d p q) ≫ Y.f p q :=
+        by exact M.f_comm p q
+      rw [T.projection_succ, hIs]
+      calc
+        (T.cycleLift r p q ≫ Y.derivedEProjection p q) ≫
+            (X.pageCouple (r + 1)).f p q ≫
+              Y.derivedDInclusion (p + 2) (q - 1) ≫ I r (p + 2) (q - 1) =
+            T.cycleLift r p q ≫ (kernel.ι (Y.d p q) ≫ Y.f p q) ≫
+              I r (p + 2) (q - 1) := by
+          simpa only [Category.assoc] using congrArg
+            (fun z ↦ T.cycleLift r p q ≫ z ≫ I r (p + 2) (q - 1)) hf'
+        _ = (T.Z (r + 1) p q).arrow ≫ X.f p q := by
+          calc
+            _ = (T.cycleLift r p q ≫ kernel.ι (Y.d p q)) ≫
+                Y.f p q ≫ I r (p + 2) (q - 1) := by simp only [Category.assoc]
+            _ = Subobject.ofLE _ _ (T.Z_decreasing r p q) ≫
+                (T.projection r p q ≫ (X.pageCouple r).f p q ≫
+                  I r (p + 2) (q - 1)) := by
+              rw [T.cycleLift_comm]
+              simp only [Category.assoc]
+              rfl
+            _ = (T.Z (r + 1) p q).arrow ≫ X.f p q := by
+              rw [ih, Subobject.ofLE_arrow_assoc]
+  have hZ : ∀ (r : ℕ) (p q : ℤ), T.Z r p q =
+      (Subobject.pullback (X.f p q)).obj (imageSubobject (I r (p + 2) (q - 1))) := by
+    intro r p q
+    induction r with
+    | zero =>
+      rw [T.Z_zero, hI0]
+      change ⊤ = (Subobject.pullback (X.f p q)).obj (imageSubobject (𝟙 _))
+      rw [imageSubobject_mono, Subobject.mk_eq_top_of_isIso,
+        Subobject.pullback_top]
+    | succ r ih =>
+      have : Mono (I r (p + 2) (q - 1)) := hImono _ _ _
+      have hZi : T.Z r p q =
+          (Subobject.pullback (X.f p q)).obj (Subobject.mk (I r (p + 2) (q - 1))) := by
+        rw [ih, imageSubobject_mono]
+      have hk := derived_couple_kernel_identities (X.pageCouple r) p q
+      have hmap : (Subobject.map (I r (p + 2) (q - 1))).obj
+          (kernelSubobject ((X.pageCouple r).g (p + 2) (q - 1))) =
+            imageSubobject (I (r + 1) (p + 2) (q - 1)) := by
+        let Y := X.pageCouple r
+        let u := p + 2
+        let w := q - 1
+        let a := Y.alpha (u + 1) (w - 1)
+        let e : Y.D ((u + 1) - 1) ((w - 1) + 1) ⟶ Y.D u w :=
+          eqToHom (by congr 1 <;> omega)
+        have transport (a b u w : ℤ) (hu : a - 1 = u) (hw : b + 1 = w) :
+            kernelSubobject (Y.g u w) =
+              imageSubobject (Y.alpha a b ≫ eqToHom (congrArg₂ Y.D hu hw)) := by
+          subst u
+          subst w
+          simpa only [eqToHom_refl, Category.comp_id] using (Y.exact_g a b).symm
+        have hker : kernelSubobject (Y.g u w) = imageSubobject (a ≫ e) :=
+          transport (u + 1) (w - 1) u w (by omega) (by omega)
+        change (Subobject.map (I r u w)).obj (kernelSubobject (Y.g u w)) = _
+        rw [hker, Subobject.map_obj_eq_mk]
+        have himage : imageSubobject (a ≫ e ≫ I r u w) =
+            imageSubobject (I (r + 1) u w) := by
+          rw [hIs]
+          change imageSubobject (a ≫ e ≫ I r u w) =
+            imageSubobject ((image.ι a ≫ e) ≫ I r u w)
+          calc
+            _ = imageSubobject ((factorThruImage a ≫ image.ι a) ≫ e ≫ I r u w) := by
+              simp only [image.fac]
+            _ = _ := by
+              simpa only [Category.assoc] using
+                (imageSubobject_comp_of_epi (factorThruImage a)
+                  (image.ι a ≫ e ≫ I r u w))
+        rw [← himage]
+        have : StrongEpi (factorThruImageSubobject (a ≫ e)) := strongEpi_of_epi _
+        simpa only [imageSubobject_arrow_comp_assoc, Category.assoc] using
+          (Subobject.imageSubobject_eq_mk (factorThruImageSubobject (a ≫ e))
+            ((imageSubobject (a ≫ e)).arrow ≫ I r u w)).symm
+      rw [T.Z_succ, hk.1, ← Subobject.pullback_comp]
+      rw [pullback_square (T.Z r p q) (I r (p + 2) (q - 1))
+        (T.projection r p q ≫ (X.pageCouple r).f p q) (X.f p q)
+        (by simpa only [Category.assoc] using hf r p q) hZi, hmap]
+  rw [hZ, hIm, hA]
 
 
 end CategoryTheory.BigradedExactCouple
