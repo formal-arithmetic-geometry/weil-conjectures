@@ -144,5 +144,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-973117022",
+  "group": "NX",
+  "result": "pass",
+  "note": "Item module Sheaf/Targets/PoincareUncurry.lean states uncurry_poincareMap_of_smooth with sorry only; node changed only in lean, statement verbatim; report has Worker report and Second reading by NX. Every node clause matches: l prime, char k prime and != l, X,S separated finite type over Spec k as Over objects, p over k, explicit [SmoothOfRelativeDimension d p.left], conclusion uncurry(poincareMap)=cupProduct>>trace, all through the published maps (adjunctions, exceptional projection, chosen smoothPurityIso preimage, boundedConstructibleTateTwist with ell_isUnit). Live upstream uncurry_poincareMap is proved but omits smoothness (#check confirmed), so it is not an exact existing binding; keeping smoothness explicit is correct and matches N6's smooth-purity record. Edge cases d=0, identity, empty schemes covered; single universe u. No definitions, docstrings give source and blueprint and the 3 proof steps, no duplicate in lean/Sheaf or dag. nt_compile --json: clean exit 0 (27.4 s); probe: axioms include only sorryAx beyond the standard ones, and the delivered statement is closed by uncurry_poincareMap ℓ p d, so both sides use the same morphisms. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.PoincareUncurry",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.uncurry_poincareMap_of_smooth",
+  "file": "lean/Sheaf/Targets/PoincareUncurry.lean",
+  "statement": "theorem uncurry_poincareMap_of_smooth (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (p : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d p.left] : uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The published upstream uncurry_poincareMap omits SmoothOfRelativeDimension from its elaborated type (verified by #print through scompile). This statement keeps the node's smooth pure-relative-dimension hypothesis as an explicit binder while reusing its published canonical maps and all dependency definitions; no second definition is introduced."
  }
 }

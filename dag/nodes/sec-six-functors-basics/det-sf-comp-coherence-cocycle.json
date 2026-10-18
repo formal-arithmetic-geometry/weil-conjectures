@@ -217,5 +217,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c998be6a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Lean matches node and blueprint source clause by clause: admissible Λ via IsLocalizingAdmissibleCoefficient, f separated/finite type, Y qcqs, BoundaryCompactification objects with no density on c_a, Rf_! = ι ⋙ rightDerivedLowerShriekOfCompactification on localizingClosureProEtale with ambient target; one existential family φ with IsIso of the canonical refinement components, normalization φ≫ρ_{h2}=ρ_{h1} for every dense common refinement and both projections (direction checked), φ c c = refl, cocycle in ≪≫ order. Helper defs are real canonical data (Rp_* of localizingRefinementMap, inverse refinementDerivedLowerStarComp, eqToIso of the triangle); no hollow def, only the theorem is sorry. Node copy changes only lean (verbatim statement); dependency copies identical to base; docstrings, imports and lines OK; new names unused elsewhere. nt_compile --json: rc 0, 7.0 s, no diagnostics. Non-blocking maintainer note: proof steps 2/4 cite det-sf-comp-composition-interchange and det-sf-comp-coherence-refinement, whose statements and compiled theorems assume the char-p finite-type-over-k setting, so stage 3 needs those generalized or a proof-plan repair for the general qcqs statement."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationCoherenceCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactification_coherence_cocycle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactificationLocalizingCandidate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactificationRefinementComponent",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_coherence_cocycle"
+  ],
+  "file": "lean/Sheaf/Paper/CompactificationCoherenceCocycle.lean",
+  "statement": "theorem compactification_coherence_cocycle (ℓ : ℕ) [Fact ℓ.Prime] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {X Y : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ φ : ∀ c₁ c₂ : Compactification.BoundaryCompactification f, compactificationLocalizingCandidate Λ c₁ ≅ compactificationLocalizingCandidate Λ c₂, (∀ (c : Compactification.BoundaryCompactification f) (d : Compactification.DenseBoundaryCompactification f) (h : d.obj ⟶ c) (K : (localizingClosureProEtale Λ X).FullSubcategory), IsIso (compactificationRefinementComponent Λ h K.obj)) ∧ (∀ (c₁ c₂ : Compactification.BoundaryCompactification f) (d : Compactification.DenseBoundaryCompactification f) (h₁ : d.obj ⟶ c₁) (h₂ : d.obj ⟶ c₂) (K : (localizingClosureProEtale Λ X).FullSubcategory), (φ c₁ c₂).hom.app K ≫ compactificationRefinementComponent Λ h₂ K.obj = compactificationRefinementComponent Λ h₁ K.obj) ∧ (∀ c : Compactification.BoundaryCompactification f, φ c c = Iso.refl _) ∧ (∀ c₁ c₂ c₃ : Compactification.BoundaryCompactification f, φ c₁ c₂ ≪≫ φ c₂ c₃ = φ c₁ c₃)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The source-restricted candidate abbreviates the existing unbounded module-object composite. The canonical refinement component is Rp_* of the recorded localizingRefinementMap, followed by the inverse recorded derived compositor and the proper triangle equality. The theorem existentially supplies natural isomorphisms, with normalization against every common dense refinement, identity and cocycle equations. No density is assumed for the two compared compactifications, and no localizing-target preservation is assumed."
  }
 }

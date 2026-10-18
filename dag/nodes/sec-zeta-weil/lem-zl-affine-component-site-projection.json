@@ -16,7 +16,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-sites-and-cohomology",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-proetale-qcqs-subsite"
  ],
  "proof": [
   {
@@ -419,5 +420,32 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-54496f9c6 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps, the statement of every cited node, both citers, and Bhatt–Scholze 4.2.12–4.2.13 with the paragraph and proof around them. The coord/returns/NR.md file is not in the snapshot, so I rebuilt the counterexample myself. The old clause (BS 4.2.13(1) for all qcqs U) is false. The proof only checks that π0U→π0V is a coequalizer in Prof, which proves nothing for arbitrary sheaves. The chain counterexample (V=Spec ∏A_n, U=D(f)⊔D(g)) holds: G(X×_YX) would need R'-chains of uniformly bounded length, which do not exist. So restricting the evaluation clause to W with split finite qcqs covers is a forced correction, not a weakening, and the report has the required Statement corrected and Source error sections. Steps 1–8 are sound: the clopen-idempotent localization gives T_E, its stalks are r^{-1}O_T, the mapping property holds, finite limits and coverings are preserved, the geometric morphism comes from the left-exact site functor, and the Kan index has the initial object (π0W). Steps 9–12 are sound: finite-coproduct products, finite qcqs refinement, then injectivity and surjectivity of η_W through the section σ. Step 13 handles algebraic structures. I tested T empty, E empty, E=P, W empty, finite clopen W and w-contractible W (which satisfies the hypothesis). The item is not a duplicate of the absolute-point weakly-contractible Kan nodes, and it introduces no cycle and no SGA. I accept all 18 declared tool_uses as generic. FIX: I added [def-trf-geometric-morphism] to the statement and stmt_deps (B3); the whole file is under fixes/. For the maintainer: lem-zl-generic-fiber-components-section step 6 applies the evaluation clause at Ω[E] for arbitrary E, which the corrected item no longer covers. Its conclusion still holds, because π_V's site functor is the step-5 basis equivalence, so π_V^{-1}F(Ω[E])=F(E) directly. Please reword that landed node's step 6 and record the BS 4.2.13(1) error in coord/HUMAN.md. lem-zl-component-relative-profinite-site uses only unchanged clauses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73b5236c4",
+  "group": "NE",
+  "result": "fix",
+  "note": "Read the item node with all 13 steps, all 8 stmt_deps records and declarations (Scheme.ProEt/precoverage/topology, Qcqs, GeometricMorphism, IndEtaleAcrossUniverses, spectralSpace_connectedComponents_profinite), the module, the report (real Worker report and Second reading by NE) and the landed citer ComponentRelativeProfiniteSite. Every clause matches the node: affine T; P = ConnectedComponents T; T_E affine, ind-etale, with a homeomorphism onto the equality fibre |T|x_P E and iso stalk maps (inverse-image sheaf); pi0(T_E) = E via r; naturality; PreservesFiniteLimits; finite Fin n jointly surjective covers (n=0 included); continuity into coherentTopology.over P; geometric morphism with direct image iso to pushforward along U; evaluation iso pinned by unit/restriction/b and natural in F and in eligible W, only for qcqs W with split finite qcqs covers; Type/AddCommGrpCat/CommRingCat at u+1. No extra hypotheses, universes bound, edge cases (empty T/E/W, Fin 0, E=P) fine. No hollow defs, sorry only in the theorem, docstrings and 13 steps present, statement verbatim, lines <=100, no name clashes; stmt_deps gain def-weil-pbc-proetale-qcqs-subsite (landed node with lean record, allowed). componentProfinite T = affineComponentSpace T by rfl (probe compile), so no duplicate notion. nt_compile --json: delivered file rc=0 clean, fixed file rc=0 clean. FIX: (1) lean-record.json adds lean.declarations for the five helpers plus the theorem; (2) complete AffineComponentSiteProjection.lean adds the Main definitions/Main statements list to the module docstring; declarations unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineComponentSiteProjection",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComponentSiteProjection.lean",
+  "statement": "theorem affine_component_site_projection (T : Scheme.{u}) [IsAffine T] : ∃ (U : Over (componentProfinite T) ⥤ T.ProEt) (r : ∀ E : Over (componentProfinite T), C((U.obj E).left, E.left)), (∀ E : Over (componentProfinite T), IsAffine (U.obj E).left ∧ RingHom.IndEtaleAcrossUniverses (U.obj E).hom.appTop.hom ∧ (∀ x : (U.obj E).left, IsIso ((U.obj E).hom.stalkMap x)) ∧ (∃ h : (U.obj E).left ≃ₜ {p : T × E.left | ConnectedComponents.mk p.1 = E.hom p.2}, (∀ x, (h x).val.1 = (U.obj E).hom x) ∧ (∀ x, (h x).val.2 = r E x)) ∧ (∃ e : ConnectedComponents (U.obj E).left ≃ₜ E.left, ∀ x : (U.obj E).left, e (ConnectedComponents.mk x) = r E x)) ∧ (∀ (E E' : Over (componentProfinite T)) (a : E ⟶ E') (x : (U.obj E).left), r E' ((U.map a).left x) = a.left (r E x)) ∧ PreservesFiniteLimits U ∧ (∀ (n : ℕ) (E : Fin n → Over (componentProfinite T)) (B : Over (componentProfinite T)) (a : ∀ i, E i ⟶ B), (∀ x : B.left, ∃ (i : Fin n) (y : (E i).left), (a i).left y = x) → Presieve.ofArrows (fun i ↦ U.obj (E i)) (fun i ↦ U.map (a i)) ∈ precoverage T (U.obj B)) ∧ ∃ hU : U.IsContinuous ((coherentTopology Profinite.{u}).over (componentProfinite T)) (topology T), ComponentSiteEvaluation T U r hU (Type (u + 1)) ∧ ComponentSiteEvaluation T U r hU AddCommGrpCat.{u + 1} ∧ ComponentSiteEvaluation T U r hU CommRingCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection",
+   "AlgebraicGeometry.Scheme.ProEt.componentProfinite",
+   "AlgebraicGeometry.Scheme.ProEt.componentObject",
+   "AlgebraicGeometry.Scheme.ProEt.componentObjectMap",
+   "AlgebraicGeometry.Scheme.ProEt.HasSplitFiniteQcqsCovers",
+   "AlgebraicGeometry.Scheme.ProEt.ComponentSiteEvaluation"
+  ],
+  "fixed_by": "NT-stage2-cc-73b5236c4"
  }
 }

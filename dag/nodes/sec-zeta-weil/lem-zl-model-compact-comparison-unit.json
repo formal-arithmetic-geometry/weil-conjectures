@@ -204,5 +204,31 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-0c1d5d01b (reviewer sub-agent of L); spot-checked: I read the whole item, its four steps, every cited statement, the parent, the sibling and unit sk-thm-rationality. The source archive literature/upstream-pr1473-495bc3883 is missing locally, so I read the definitions read-only in lean/WeilConjectures/TraceFormula/Statement.lean. That file is identical to the b5sync/pr1473 copy at the three definitions (l.122, l.146, l.188); only the imports and one local braiding-instance attribute (l.269) differ. compactCohomologyFrobeniusComparison is, in order: UpperStarId with its unitors, the unit of LΦ^*⊣RΦ_*, the inverse of LowerShriekIsoLowerStar_padicAlgCl (RΦ_!≅RΦ_*), the inverse of LowerShriekComp_padicAlgCl (R(f≫g)_!≅Rf_!⋙Rg_!), then eqToIso comp_toPoint. This is exactly the item's c_h, α and e, in the item's order. Mathlib mapOfNatIso_obj_str gives str = e.app K ≪≫ P.mapIso w, and frobenius = u^{-1} ≫ str, so the identity-pullback terms cancel and globalOperator = P(φ_m)∘d. The eqToHom casts in globalOperator are along definitionally equal carriers, so they are identities. The coefficient category is the actual padicAlgClRingObj module-object D^b_c with the chosen-compactification lower shriek. No finite or adic coefficients are identified with it, there is no base-change morphism, and no target is weakened. Step 2: lem-trf-scheme-frobenius-finite-radicial makes Φ finite; the Mathlib leaves 01WK (IsFinite.instCompScheme) and 01WN (IsProper.instOfIsFinite) give the induction and properness; fh=f is comp_toPoint. Steps 1, 3 and 4 are correctly marked elementary. Small cases checked: X empty or M=0, X=Spec k, non-reduced X_0, X=A^1, r=1 and 2. Duplicate search with rg: the existing proper-unit nodes are at finite coefficients and the sibling realization lemma is different, so there are no duplicates and no new nodes; the item is not a restated clause of its parent. Both declared tool uses are accepted: the Frobenius-finiteness lemma is generic geometry, and nt-assume-trace-formula is used only to name the interface, never its trace equality. No SGA is cited. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce605626e",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read node, 8 stmt_deps, source TraceFormula/Statement.lean (published = live) and Basic.lean. compactSupportProperUnit is term-for-term the source compactCohomologyFrobeniusComparison factors after the identity pullback with rightUnitor, which modelCompactComparisonWithoutIdentity cancels exactly; conjunct 1 is that unfolding, conjunct 2 is naturality. Conjunct 3 uses the actual globalOperator 1 for an arbitrary Weil object for h and is true via the library-proved right unit law boundedConstructibleUpperStarComp_id_right_app (docstring records this; node step 4 elides it, remark only). Hypotheses match: unbundled finite-field datum as in the nt-assume-trace-formula interface, l != p, separated finite-type f0 kept by include, X-instances implied by base change, finiteness from hΦ.isFinite rather than assumed; actual padicAlgClRingObj D^b_c, no substitute. Single universe u as the interface requires; autoImplicit off. No hollow defs, only the theorem proof is sorry, docstrings carry source and blueprint, lean.statement verbatim, all 5 declarations present, no duplicate in side Sheaf. Second-reading section is the standard post-2026-10-17 note, accepted. nt_compile --json on the snapshot module: 11.0 s, exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModelCompactComparisonUnit",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactComparison_eq_properUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportProperUnit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactProperUnit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactComparisonWithoutIdentity",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactGlobalOperator",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactComparison_eq_properUnit"
+  ],
+  "file": "lean/Sheaf/Paper/ModelCompactComparisonUnit.lean",
+  "statement": "theorem modelCompactComparison_eq_properUnit (hΦ : IsModelFrobenius Φ f₀ π) (r : ℕ) (hr : 1 ≤ r) : modelCompactComparisonWithoutIdentity ℓ hΦ r = modelCompactProperUnit ℓ hΦ r ∧ (∀ (M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (v : M ⟶ N), (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v ≫ (modelCompactProperUnit ℓ hΦ r).app N = (modelCompactProperUnit ℓ hΦ r).app M ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ r)).map v)) ∧ (∀ K : WeilBoundedConstructibleOfEnd ℓ (frobeniusIterate Φ r), modelCompactGlobalOperator ℓ hΦ r K = (modelCompactProperUnit ℓ hΦ r).app K.carrier ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map K.str.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The finite-field datum is unpacked as finite k₀, its algebraic closure k, prime characteristic and ℓ distinct from it; q is Nat.card k₀, and IsModelFrobenius uses precisely that q-power. X is any specified cartesian geometric fibre. Includes explicit proper-unit, identity-removal and actual-globalOperator helpers, with no new choice of comparisons. The theorem retains algebraic closure and separated quasi-compact finite-type model hypotheses explicitly using include."
  }
 }
