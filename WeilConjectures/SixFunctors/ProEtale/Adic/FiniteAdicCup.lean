@@ -103,6 +103,22 @@ theorem unitShiftAddEquivFiniteAdicH_cupProduct {i j k : ℕ} (h : i + j = k)
   simp only [unitShiftAddEquivFiniteAdicH, AddEquiv.trans_apply, AddEquiv.symm_apply_apply]
   exact congrArg (extAddEquivFiniteAdicH l m S k) (unitShiftAddEquivExt_cupProduct S _ h x y)
 
+omit [CompactSpace S] [QuasiSeparatedSpace S] in
+/-- Graded commutativity of `AlgebraicGeometry.Etale.cupProduct`, with the degrees read in `ℕ`. -/
+lemma cupProduct_comm_comp_eqToHom (Λ : Type (u + 1)) [CommRing Λ] {i j k : ℕ} (h : i + j = k)
+    (x : 𝟙_ (Etale.DerivedCategoryModule Λ S) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(i : ℤ)⟧)
+    (y : 𝟙_ (Etale.DerivedCategoryModule Λ S) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(j : ℤ)⟧) :
+    Etale.cupProduct _ (j : ℤ) (i : ℤ) y x ≫
+        eqToHom (by rw [← h, add_comm i j, Nat.cast_add] :
+          (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(j : ℤ) + i⟧ =
+            (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(k : ℤ)⟧) =
+      (((i : ℤ) * j).negOnePow : ℤ) •
+        (Etale.cupProduct _ (i : ℤ) (j : ℤ) x y ≫ eqToHom (by rw [← h, Nat.cast_add] :
+          (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(i : ℤ) + j⟧ =
+            (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(k : ℤ)⟧)) := by
+  rw [Etale.cupProduct_comm, Units.smul_def, Preadditive.zsmul_comp, Category.assoc,
+    eqToHom_trans]
+
 /-- **Graded commutativity of the cup product**: `y ⌣ x = (-1)^{ij} x ⌣ y`. -/
 theorem finiteAdicHCup_comm {i j k : ℕ} (h : i + j = k) (x : FiniteAdicH S l m i)
     (y : FiniteAdicH S l m j) :
@@ -110,9 +126,11 @@ theorem finiteAdicHCup_comm {i j k : ℕ} (h : i + j = k) (x : FiniteAdicH S l m
       ((i : ℤ) * j).negOnePow • finiteAdicHCup l m S h x y := by
   obtain ⟨x, rfl⟩ := (unitShiftAddEquivFiniteAdicH l m S i).surjective x
   obtain ⟨y, rfl⟩ := (unitShiftAddEquivFiniteAdicH l m S j).surjective y
-  rw [← unitShiftAddEquivFiniteAdicH_cupProduct, ← unitShiftAddEquivFiniteAdicH_cupProduct,
-    Etale.cupProduct_comm, Units.smul_def, Units.smul_def, Preadditive.zsmul_comp,
-    Category.assoc, eqToHom_trans, map_zsmul]
+  refine (unitShiftAddEquivFiniteAdicH_cupProduct l m S _ y x).symm.trans ?_
+  refine ((congrArg (unitShiftAddEquivFiniteAdicH l m S k)
+    (cupProduct_comm_comp_eqToHom S _ h x y)).trans (map_zsmul _ _ _)).trans ?_
+  exact congrArg ((((i : ℤ) * j).negOnePow : ℤ) • ·)
+    (unitShiftAddEquivFiniteAdicH_cupProduct l m S h x y)
 
 omit [CompactSpace S] [QuasiSeparatedSpace S] in
 /-- The Frobenius operator of the shifted canonical Weil datum commutes with the identifications
@@ -129,6 +147,25 @@ lemma frobeniusOperator_comp_eqToHom {Λ : Type (u + 1)} [CommRing Λ] (g : S �
   subst hab
   simp only [eqToHom_refl, Category.comp_id]
 
+omit [CompactSpace S] [QuasiSeparatedSpace S] in
+/-- The Frobenius operator of the canonical Weil datum is multiplicative for the cup product, with
+the degrees read in `ℕ`. -/
+lemma frobeniusOperator_cupProduct_comp_eqToHom {Λ : Type (u + 1)} [CommRing Λ] (g : S ⟶ S)
+    {i j k : ℕ} (h : i + j = k)
+    (x : 𝟙_ (Etale.DerivedCategoryModule Λ S) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(i : ℤ)⟧)
+    (y : 𝟙_ (Etale.DerivedCategoryModule Λ S) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ S))⟦(j : ℤ)⟧) :
+    Etale.frobeniusOperator g
+        (Etale.shiftWeilDatum g (Etale.leftDerivedUpperStarUnitIso _ g).hom (k : ℤ))
+        (Etale.cupProduct _ (i : ℤ) (j : ℤ) x y ≫ eqToHom (by rw [← h, Nat.cast_add])) =
+      Etale.cupProduct _ (i : ℤ) (j : ℤ)
+        (Etale.frobeniusOperator g
+          (Etale.shiftWeilDatum g (Etale.leftDerivedUpperStarUnitIso _ g).hom (i : ℤ)) x)
+        (Etale.frobeniusOperator g
+          (Etale.shiftWeilDatum g (Etale.leftDerivedUpperStarUnitIso _ g).hom (j : ℤ)) y) ≫
+        eqToHom (by rw [← h, Nat.cast_add]) := by
+  have hk : (i : ℤ) + j = k := by rw [← h, Nat.cast_add]
+  rw [frobeniusOperator_comp_eqToHom S g hk, Etale.frobeniusOperator_cupProduct]
+
 /-- The pullback along an automorphism `e` of a connected `S` is multiplicative for the cup
 product. -/
 theorem finiteAdicHPullback_finiteAdicHCup [ConnectedSpace S] (e : S ≅ S) {i j k : ℕ}
@@ -137,10 +174,15 @@ theorem finiteAdicHPullback_finiteAdicHCup [ConnectedSpace S] (e : S ≅ S) {i j
       finiteAdicHCup l m S h (finiteAdicHPullback e l m i x) (finiteAdicHPullback e l m j y) := by
   obtain ⟨x, rfl⟩ := (unitShiftAddEquivFiniteAdicH l m S i).surjective x
   obtain ⟨y, rfl⟩ := (unitShiftAddEquivFiniteAdicH l m S j).surjective y
-  rw [← unitShiftAddEquivFiniteAdicH_cupProduct, finiteAdicHPullback_unitShiftAddEquivFiniteAdicH,
-    finiteAdicHPullback_unitShiftAddEquivFiniteAdicH,
-    finiteAdicHPullback_unitShiftAddEquivFiniteAdicH, ← unitShiftAddEquivFiniteAdicH_cupProduct,
-    frobeniusOperator_comp_eqToHom, Etale.frobeniusOperator_cupProduct]
+  refine (congrArg (finiteAdicHPullback e l m k)
+    (unitShiftAddEquivFiniteAdicH_cupProduct l m S h x y).symm).trans ?_
+  refine (finiteAdicHPullback_unitShiftAddEquivFiniteAdicH l m S e k _).trans ?_
+  refine (congrArg (unitShiftAddEquivFiniteAdicH l m S k)
+    (frobeniusOperator_cupProduct_comp_eqToHom S e.hom h x y)).trans ?_
+  refine (unitShiftAddEquivFiniteAdicH_cupProduct l m S h _ _).trans ?_
+  exact congr_arg₂ (fun a b ↦ finiteAdicHCup l m S h a b)
+    (finiteAdicHPullback_unitShiftAddEquivFiniteAdicH l m S e i x).symm
+    (finiteAdicHPullback_unitShiftAddEquivFiniteAdicH l m S e j y).symm
 
 /-- The reduction `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` of the coefficients is multiplicative for the cup product. -/
 theorem finiteAdicHTransition_finiteAdicHCup {i j k : ℕ} (h : i + j = k)
@@ -155,7 +197,7 @@ lemma smul_finiteAdicH_eq_nsmul {n : ℕ} (c : ℤ_[l]) (x : FiniteAdicH S l m n
     c • x = c.appr m • x := by
   obtain ⟨a, ha⟩ := Ideal.mem_span_singleton'.1 (PadicInt.appr_spec m c)
   have hc : c = (c.appr m : ℤ_[l]) + a * (l : ℤ_[l]) ^ m := by rw [ha]; ring
-  rw [hc, add_smul, mul_smul, pow_smul_finiteAdicH, smul_zero, add_zero,
+  rw [congrArg (· • x) hc, add_smul, mul_smul, pow_smul_finiteAdicH, smul_zero, add_zero,
     Nat.cast_smul_eq_nsmul ℤ_[l]]
 
 /-- The cup product is `ℤ_ℓ`-linear in the first variable. -/

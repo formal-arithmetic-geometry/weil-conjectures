@@ -33,14 +33,16 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicInt
 
 variable (l : ℕ) [Fact l.Prime] (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]
-  (hfin : ∀ m k, Finite (FiniteAdicH S l m k))
 
 /-- The **cup product** `Hⁱ(S, ℚ̄_ℓ) × Hʲ(S, ℚ̄_ℓ) ⟶ Hᵏ(S, ℚ̄_ℓ)`, `i + j = k`: the `ℚ̄_ℓ`-bilinear
 extension of the cup product of integral cohomology along `Hⁿ(S, ℚ̄_ℓ) = ℚ̄_ℓ ⊗ Hⁿ(S, ℤ_ℓ)`. -/
-noncomputable def adicConstantHCup {i j k : ℕ} (h : i + j = k) :
+noncomputable def adicConstantHCup (hfin : ∀ m k, Finite (FiniteAdicH S l m k)) {i j k : ℕ}
+    (h : i + j = k) :
     AdicConstantH l S i →ₗ[PadicAlgCl l] AdicConstantH l S j →ₗ[PadicAlgCl l]
       AdicConstantH l S k :=
   sorry
+
+variable (hfin : ∀ m k, Finite (FiniteAdicH S l m k))
 
 /-- The cup product extends the cup product of integral cohomology. -/
 theorem adicConstantHCup_integralToAdicConstantH {i j k : ℕ} (h : i + j = k)

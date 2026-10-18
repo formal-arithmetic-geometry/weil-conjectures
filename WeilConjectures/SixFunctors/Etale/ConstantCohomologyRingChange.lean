@@ -133,9 +133,9 @@ lemma mapExtComp_extRingChange (n : ℕ)
   (AddEquiv.ofBijective _ (bijective_mapExtComp_constantIntToRing Λ X
     (Sheaf.constantRing X.smallEtaleTopology Λ) n)).apply_symm_apply _
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 /-- Pushing `ψ ∘ φ^* w` to abelian cohomology gives the abelian cohomology class of `w`, up to
 the identification `sheafRestrictScalarsCompSheafForget₂Iso`. -/
-omit [CompactSpace X] [QuasiSeparatedSpace X] in
 lemma mapExtComp_mk₀_constantRingMap_comp_mapExactFunctor (n : ℕ)
     (w : Ext (Sheaf.constantRing X.smallEtaleTopology Λ)
       (Sheaf.constantRing X.smallEtaleTopology Λ) n) :
@@ -152,6 +152,7 @@ lemma mapExtComp_mk₀_constantRingMap_comp_mapExactFunctor (n : ℕ)
     ← constantIntToRing_comp_constantRingForgetMap φ X, constantRingForgetMap]
   simp only [Iso.symm_inv, Iso.symm_hom, Ext.mk₀_comp_mk₀_assoc, Ext.comp_assoc_of_third_deg_zero]
 
+/-- `w ↦ ψ ∘ φ^* w` is injective on `Extⁿ(Λ_X, Λ_X)`. -/
 lemma injective_mk₀_constantRingMap_comp_mapExactFunctor (n : ℕ) :
     Function.Injective fun w : Ext (Sheaf.constantRing X.smallEtaleTopology Λ)
         (Sheaf.constantRing X.smallEtaleTopology Λ) n ↦
