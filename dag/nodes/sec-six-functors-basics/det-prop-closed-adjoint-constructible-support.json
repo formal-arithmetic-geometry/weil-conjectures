@@ -557,5 +557,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedSupportConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_constructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedSupportConstructibleAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedSupportConstructible.lean",
+  "statement": "theorem closedSupport_constructible (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) {Z U X : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [U.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] (i : Z ⟶ X) (j : U ⟶ X) [i.IsOver (Spec (.of k))] [j.IsOver (Spec (.of k))] [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, ClosedSupportConstructibleAssertions (Profinite.continuousMapRingObj.{u} E) i j) ∧ ClosedSupportConstructibleAssertions (Profinite.padicAlgClRingObj.{u} ℓ) i j",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The conjunction covers every finite intermediate field and the finite-subextension-valued algebraic-closure coefficient, each with its canonical ring-object structure. ClosedSupportConstructibleAssertions expands the node assertion using the existing formalClosedSupport functor and its kernel-normalized ordinary adjunction, derived by the existing exact-left/right-derived adjunction construction. No support functor or constructibility predicate is copied. The normalized adjunction is existential in the conclusion rather than assumed or selected from an arbitrary Nonempty object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3261e26ed",
+  "group": "Q40",
+  "result": "pass",
+  "note": "The statement matches every hypothesis and conclusion clause of the node: both coefficient cases (all finite E and Q̄ℓ, existing ring structures), separated finite-type X/Z/U over k, k-morphisms, closed/open complementary immersions, no added quasi-compactness of j. RΓ_Z and Dbc are the recorded declarations; the first arrow is the counit of an existential adjunction pinned by the same equation as the landed FormalClosedSupportAssertions (so it is unique); the second arrow is the open unit; the third arrow is existential; the three non-K terms (including the shift) and RΓ_Z K on Z have explicit bounded-constructible clauses. j^* is the landed closed-support lemma's formalSupportPullback, canonically isomorphic to the pushpull extension of scalars; consistent, not a fault. Edge cases (empty schemes, K=0, ℓ=2) and the single universe checked. The helper is real, the only proof is sorry, docstrings carry source place, blueprint tag and seven proof steps, lean.statement is verbatim, and only the lean field of the node changed. nt_compile --json on the snapshot: exit 0, 13.6 s, no warnings; #print axioms shows only the standard axioms plus sorryAx. Non-blocking: the second reading was done by the same worker."
  }
 }

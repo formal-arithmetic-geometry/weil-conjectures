@@ -257,5 +257,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UniformConstructibleExt",
+  "declaration": "AlgebraicGeometry.ProEtale.uniformConstructibleExt",
+  "file": "lean/Sheaf/Paper/UniformConstructibleExt.lean",
+  "statement": "theorem uniformConstructibleExt (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ D.p) (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj Λ)] (_hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨ Λ = Profinite.padicAlgClCondensedRing ℓ) (k : Type u) [Field k] (_hk : Nonempty (k ≃+* D.k₀) ∨ Nonempty (k ≃+* D.k)) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : (∀ C : ConstantModelConstructible (coefficientHeartRingObj Λ) X, ∃ d : ℕ, ∀ N : ConstantModelConstructible (coefficientHeartRingObj Λ) X, ∀ q : ℕ, d < q → Subsingleton (Abelian.Ext C.obj N.obj q)) ∧ (∀ (S Z U : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X) (j : U ⟶ X) [IsOpenImmersion v] [IsClosedImmersion i] [IsOpenImmersion j] [CompactSpace S] [QuasiSeparatedSpace S] [QuasiCompact j], Set.range i.base = (Set.range j.base)ᶜ → ∀ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj Λ) S), IsLisseCoefficientModule (coefficientHeartRingObj Λ) L → ∃ d : ℕ, (d : WithTop ℕ) = relativeCohomologicalDimension ℓ (Fact.out : ℓ.Prime) j + cohomologicalDimension ℓ (Fact.out : ℓ.Prime) S + 2 ∧ ∀ N : ConstantModelConstructible (coefficientHeartRingObj Λ) X, ∀ q : ℕ, d < q → Subsingleton (Abelian.Ext ((CondensedRing.lowerStar (coefficientHeartRingObj Λ) i).obj ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj Λ) v).obj L)) N.obj q))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54d31d264",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read node, blueprint _section/proof and det-* lemmas, all 8 stmt_deps with their Lean (cohomologicalDimension/relativeCohomologicalDimension, ConstantModelConstructible, condensedRingObj, Abelian.Ext, FiniteFieldDatum, coefficientHeart/IsLisseCoefficientModule (finite free locally), formalClosedSupportAssertions, compactificationOverField). Lean matches clause by clause: Λ=E⊂Q̄ℓ finite or Q̄ℓ as in coefficientHeart; X separated finite type over F_q or its closure per proof step 1 (needed for finite cd); ∀C ∃d:ℕ ∀N ∀q>d Subsingleton of ambient Ext; second conjunct gives the exact finite cutoff cd(j)+cd(S)+2 for i_*v_!L with range i = complement of range j; the extra qcqs binders hold automatically on Noetherian X. Edge cases (C=0, N=0, empty X/S, extreme factorizations, L=0, q=d) and universes checked. No definitions, proof only sorry, docstrings carry source/blueprint and proof plan, lean.statement matches the file exactly, node diff is lean-only, report has both sections. nt_compile --json reproduced clean (exit 0, 12.0 s); probe gives axioms propext/sorryAx/Classical.choice/Quot.sound. No findings; second reading is a disclosed self-check."
  }
 }
