@@ -10,9 +10,109 @@
  "stmt_deps": [
   "def-weil-formal-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The norm on the additive group of $K$ is $|\\cdot|$; its induced metric is exactly the given complete metric. Thus [lem-wf-ultrametric-family-summability] applies, including for a trivial absolute value. Whenever $H$ is restricted at $\\rho$ and $|x|\\le\\rho$, $|h_mx^m|\\le |h_m|\\rho^m\\to0$, so for every $\\epsilon>0$ only finitely many terms exceed $\\epsilon$. The criterion gives summability and therefore the stated evaluation $H(x)$. In part (2) put $B_m=|b_m|\\rho^m$ for $m\\ge1$ and $A_n=|a_n|s^n$ for $n\\ge0$. Applying this to $G$ and the bound clause of the same node gives $|G(x)|\\le s$, since every $|b_mx^m|\\le B_m\\le s$. Hence $\\sum_n a_nG(x)^n$ is summable as well, since its term norms are at most $A_n\\to0$.",
+   "uses": [
+    "lem-wf-ultrametric-family-summability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: evaluation convergence and the bound for the inner series"
+   }
+  },
+  {
+   "text": "For part (1), write $U_i=|h_i|\\rho^i$ and $V_j=|j_j|\\rho^j$, where $J(T)=\\sum_j j_jT^j$. Both sequences tend to zero, so choose $M\\ge1$ bounding both (bound the finite initial portions and use an eventual bound of $1$). Given $\\epsilon>0$, choose $N$ such that $U_i,V_i<\\epsilon/M$ for $i\\ge N$. For $k\\ge2N$, every pair $i+j=k$ has $i\\ge N$ or $j\\ge N$, so $U_iV_j<\\epsilon$. By [def-weil-formal-power-series], the coefficient $c_k$ of $HJ$ is $\\sum_{i+j=k}h_i j_j$. Iterating the strong triangle inequality over this finite sum gives $|c_k|\\rho^k\\le\\max_{i+j=k}U_iV_j<\\epsilon$. Thus $HJ$ is restricted at $\\rho$.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: weighted coefficient decay of the Cauchy product"
+   }
+  },
+  {
+   "text": "Fix $|x|\\le\\rho$. Step 1 gives summability of $(h_ix^i)_i$ and $(j_jx^j)_j$. Apply [lem-wf-nonarchimedean-summable-products] to these two families: the double family $(h_i j_j x^{i+j})_{i,j\\ge0}$ is summable with sum $H(x)J(x)$. Apply [lem-wf-summable-family-regrouping] to $p(i,j)=i+j$. Its degree-$k$ fiber is finite and has sum $c_kx^k$, because its pairs are precisely $(i,k-i)$ for $0\\le i\\le k$. Here $c_k$ is the coefficient defined in [def-weil-formal-power-series]. Thus the grouped sum is $(HJ)(x)$, proving the evaluation identity.",
+   "uses": [
+    "lem-wf-nonarchimedean-summable-products",
+    "lem-wf-summable-family-regrouping",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: Cauchy-product evaluation identity"
+   }
+  },
+  {
+   "text": "For part (2), write $\\mathcal I=\\coprod_{n\\ge0}\\mathbf Z_{\\ge1}^{\\,n}$. For $\\alpha=(n;m_1,\\ldots,m_n)$ put $d(\\alpha)=\\sum_jm_j$ and $t_\\alpha=a_n\\prod_jb_{m_j}$, using $d=0$, $t=a_0$ for the unique empty tuple. Repeatedly expanding the coefficient formula of [def-weil-formal-power-series] by finite distributivity shows that the coefficient of $T^k$ in $G^n$ is $\\sum_{m_1+\\cdots+m_n=k}\\prod_jb_{m_j}$: for $n=0$ it is $1$ at $k=0$ and $0$ otherwise; appending one positive index proves the induction step. Since $m_j\\ge1$, only $n\\le k$ can contribute at $k$, and every $m_j\\le k$. Each degree fiber of $\\mathcal I$ is therefore finite, and the formal composition has coefficient $c_k=\\sum_{d(\\alpha)=k}t_\\alpha$.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: finite formal-composition coefficient expansion"
+   }
+  },
+  {
+   "text": "Define the nonnegative weighted bound $W_\\alpha=|t_\\alpha|\\rho^{d(\\alpha)}=|a_n|\\prod_j B_{m_j}\\le A_n$. For every $\\epsilon>0$ this family has only finitely many $W_\\alpha\\ge\\epsilon$. Indeed, choose $N\\ge1$ so that $A_n<\\epsilon$ for $n\\ge N$. For each $1\\le n<N$ with $a_n\\ne0$, choose $M_n$ so that $B_m<\\epsilon/(|a_n|s^{n-1})$ for $m\\ge M_n$; this uses $s>0$ and $B_m\\to0$. If any coordinate of an $n$-tuple is at least $M_n$, then $W_\\alpha\\le |a_n|s^{n-1}B_{m_j}<\\epsilon$. If $a_n=0$ there are no exceptional tuples of that length. The remaining tuples lie in the finite union of the finite boxes $\\{1,\\ldots,M_n-1\\}^n$, together with the one empty tuple. This is a finite-counting estimate, not an assertion that the bound $W_\\alpha\\le A_n$ alone implies summability.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: uniform finite-exception estimate from both coefficient hypotheses"
+   }
+  },
+  {
+   "text": "It follows that $F\\circ G$ is restricted at $\\rho$. Given $\\epsilon>0$, apply step 5 with $\\epsilon/2$ and let $D$ exceed the total degrees of all the finitely many exceptional tuples (take $D=1$ when there are none). For $k\\ge D$, every tuple of degree $k$ satisfies $W_\\alpha<\\epsilon/2$. The finite coefficient formula of step 4 and the iterated strong triangle inequality give $|c_k|\\rho^k\\le\\max_{d(\\alpha)=k}W_\\alpha\\le\\epsilon/2<\\epsilon$; if the fiber is empty its coefficient is zero. This proves weighted coefficient decay without choosing an element of norm $\\rho$ or assuming $\\rho$ belongs to the value group.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: restriction of the formal composition on the full closed disc"
+   }
+  },
+  {
+   "text": "For any $|x|\\le\\rho$, multiplicativity gives $|t_\\alpha x^{d(\\alpha)}|\\le W_\\alpha\\le A_n=|a_n|s^n$. The finite-exception estimate of step 5 and [lem-wf-ultrametric-family-summability] show that the family $(t_\\alpha x^{d(\\alpha)})_{\\alpha\\in\\mathcal I}$ is summable. Use [lem-wf-summable-family-regrouping] first with $d:\\mathcal I\\to\\mathbf Z_{\\ge0}$: step 4 identifies the finite degree-fiber sum with $c_kx^k$, so the total sum is $(F\\circ G)(x)$. Use the same node with $\\alpha\\mapsto n$ to group by length; it also guarantees summability on each length fiber and equality with the total sum. This proves both permitted groupings, including the length-zero and degree-zero fiber consisting of $a_0$.",
+   "uses": [
+    "lem-wf-ultrametric-family-summability",
+    "lem-wf-summable-family-regrouping",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: summability and the two regroupings of the flattened monomial family"
+   }
+  },
+  {
+   "text": "To identify the sum grouped by length, fix $x$ and put $q_m=b_mx^m$ for $m\\ge1$, a summable family with sum $G(x)$ by step 1. Induct on $n$ to show that the tuple family $(\\prod_{j=1}^nq_{m_j})_{(m_1,\\ldots,m_n)}$ is summable with sum $G(x)^n$. At $n=0$ this is the singleton family with value $1$. The induction step is [lem-wf-nonarchimedean-summable-products] for the length-$n$ family and $q$; splitting a tuple into its first $n$ entries and its last entry is a bijection, and the nets of finite sums agree under its image map. Applying that node once more with the singleton family of value $a_n$ identifies the length-$n$ sum as $a_nG(x)^n$. Thus step 7 grouped by length is $\\sum_n a_nG(x)^n=F(G(x))$, whose summability was proved in step 1. Equality of the two groupings proves $(F\\circ G)(x)=F(G(x))$.",
+   "uses": [
+    "lem-wf-nonarchimedean-summable-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3: repeated-product induction identifying the length-grouped sum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-formal-power-series",
+  "lem-wf-nonarchimedean-summable-products",
+  "lem-wf-summable-family-regrouping",
+  "lem-wf-ultrametric-family-summability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "paragraph 3: explicit weighted finite-exception argument supplementing the blueprint convergence assertion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +197,45 @@
    "results": "Command returned 5 hits; scope=Topology/Algebra/InfiniteSum. Top results: [\"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\"]. ",
    "date": "2026-10-18",
    "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complete nonarchimedean fields, if weighted coefficients b_m rho^m tend to zero and are bounded by s, and a_n s^n tends to zero, the zero-constant formal composition F(G(T)) is restricted at rho and evaluation agrees with F(G(x)) on the closed disc",
+   "results": "8 hits; scope=service index; top hits: PowerSeries.comp_aeval, PowerSeries.comp_eval₂, HasFiniteFPowerSeriesAt.comp, HasFPowerSeriesAt.tendsto_partialSum_prod_of_comp, HasFPowerSeriesAt.eventually_hasSum_of_comp, HasFPowerSeriesWithinAt.comp, FormalMultilinearSeries.comp_summable_nnreal, FormalMultilinearSeries.le_comp_radius_of_summable",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item; restricted-product clause alone is in Mathlib; comp_eval₂ concerns a continuous ring homomorphism after evaluation and assumes linear topology/topological nilpotence, not weighted formal substitution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted power series composition convergence under weighted coefficient bounds over a complete ultrametric field",
+   "results": "8 hits; scope=service index; top hits: HasFPowerSeriesAt.eventually_hasSum_of_comp, PowerSeries.IsRestricted.convergenceSet, PowerSeries.le_weightedOrder_subst, PowerSeries.IsRestricted, HasFPowerSeriesAt.tendsto_partialSum_prod_of_comp, PowerSeries.IsRestricted.mul, FormalMultilinearSeries.le_comp_radius_of_summable, PowerSeries.IsRestricted.convergenceSet_BddAbove",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item; restricted-product clause alone is in Mathlib; comp_eval₂ concerns a continuous ring homomorphism after evaluation and assumes linear topology/topological nilpotence, not weighted formal substitution"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.comp_eval₂",
+   "results": "1 hits; scope=service index; top hits: PowerSeries.comp_eval₂",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item; restricted-product clause alone is in Mathlib; comp_eval₂ concerns a continuous ring homomorphism after evaluation and assumes linear topology/topological nilpotence, not weighted formal substitution"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_eval₂|isRestricted.mul|isRestricted_iff",
+   "results": "6 hits; scope=RingTheory/PowerSeries; top hits: Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Evaluation.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item; restricted-product clause alone is in Mathlib; comp_eval₂ concerns a continuous ring homomorphism after evaluation and assumes linear topology/topological nilpotence, not weighted formal substitution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of restricted series on a closed nonarchimedean disc preserves weighted coefficient decay and its flattened family of monomials is unconditionally summable",
+   "results": "8 hits; scope=service index; top hits: PowerSeries.IsRestricted.mul, FormalMultilinearSeries.comp_summable_nnreal, PowerSeries.IsRestricted.add, FormalMultilinearSeries.changeOriginSeries_summable_aux₁, FormalMultilinearSeries.changeOriginSeries_summable_aux₃, HasFPowerSeriesAt.tendsto_partialSum_prod_of_comp, Nat.Partition.multipliable_powerSeriesMk_card_restricted, FormalMultilinearSeries.changeOriginSeries_summable_aux₂",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item; restricted-product clause alone is in Mathlib; comp_eval₂ concerns a continuous ring homomorphism after evaluation and assumes linear topology/topological nilpotence, not weighted formal substitution"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-deep-principal-unit-log",
@@ -117,5 +252,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-nonarchimedean-series-substitution",
+  "worker": "stage1",
+  "summary": "Kept the repaired Q153 statement unchanged. Proved the weighted coefficient decay for products and compositions by explicit finite-exception estimates, including empty tuples. Added three general Mathlib leaves for ultrametric summability/bounds, arbitrary-fiber regrouping, and multiplication of summable families; no clause of the item was moved into a new lemma. Checked pinned source and attachment candidates, formal evaluation hypotheses, and all citation statements.",
+  "blueprint": "Realizes paragraph 3 of lem-wf-deep-principal-unit-log.proof.md: justification for evaluating the formal log/exp identities on a deep closed disc. The parent unit small-log route is unchanged; this child supplies the analytic convergence step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-2a3395d6d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2a3395d6d (reviewer sub-agent of L); spot-checked: I read the item's statement (the Q153 statement, unchanged), all 8 steps and the 3 new Mathlib leaves in full, plus def-weil-formal-power-series, def-weil-field, the unit sk-d-real-log and blueprint main-20261015 lem-wf-deep-principal-unit-log.proof.md paragraph 3. Step 1: the cofinite criterion gives evaluation, and the bound with C=s>0 gives |G(x)|<=s. Step 2: the M>=1, N, k>=2N estimate on the Cauchy-product coefficient is correct and elementary. Step 3: the product leaf plus regrouping by i+j over finite fibers gives (HJ)(x)=H(x)J(x). Step 4: the induction for the coefficients of G^n is properly set up, and fibers are finite since m_j>=1. Step 5: the finite-exception estimate really uses B_m->0, not only W<=A_n; with B_m constant there would be infinitely many length-1 exceptions. Step 6: composition decay uses no point of norm rho. Steps 7-8: the two regroupings, the induction for G(x)^n via the product leaf and a bijection, and singleton scaling by a_n, all correct. Mathlib sources checked at the lines cited: Nonarchimedean.lean:104 (summable_iff_tendsto_cofinite_zero), :126, :135, :139 (mul_of_nonarchimedean, NonarchimedeanRing section, no completeness needed); Ultra.lean:197 (nonarchimedeanGroup instance) and :347 (norm_tsum_le_of_forall_le_of_nonneg, needs C>=0); Constructions.lean:240 (tsum_fiberwise, needs CompleteSpace and T2); Group.lean:301 (subtype). One caveat: Mathlib has no ready-made NonarchimedeanRing instance for an ultrametric normed field. It is a two-field instance built from Ultra.lean:197, which B8 accepts. I tested the leaves on empty and singleton index sets, empty fibers, a non-surjective p and the trivial absolute value. An rg search of dag/nodes found no duplicates: the nearest, lem-wf-summable-finite-subset-products, lem-rp-nonnegative-summable-comparison and lem-sfb-ultrametric-criterion-natural-norms, are different statements. No new node restates a clause of the item. No off-unit statement or tool_uses, no SGA citation, and blueprint from/via are correct. The target base-change and coefficient-category check does not apply, since this is not a target node. I made no changes."
  }
 }
