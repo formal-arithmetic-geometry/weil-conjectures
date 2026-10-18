@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.TraceFormula.CompactPullback
+public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -423,6 +424,58 @@ theorem nonempty_hasRightDual_stalk [IsSepClosed k]
   sorry
 
 end WeilBoundedConstructible
+
+/-! ### The Frobenius comparison at a fibre -/
+
+section Fibre
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Z : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the categories of sheaves make the rewriting slow
+/-- **The Frobenius comparison at a fibre** (blueprint `lem-trf-weil-shriek-operator-fibres`,
+proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
+`β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
+lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {p : X' ⟶ X}
+    {f' : X' ⟶ Y} {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y}
+    [IsFinite r.left] [IsUniversalHomeomorphism r.left] [IsProper ΦZ.left]
+    (sq : IsPullback p f' (r ≫ f') ΦY) (hy : y ≫ ΦY = y)
+    (hZ : IsPullback (j ≫ p) (toPoint Z) (r ≫ f') y) (hL : IsPullback j (toPoint Z) f' y)
+    (hT : IsPullback (j ≫ p) ΦZ r j) (hi : ΦZ ≫ j ≫ p = (j ≫ p) ≫ r ≫ p)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (r ≫ f')).obj K)) hy.symm) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y ΦY).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).obj K) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((weilLowerShriekFrobeniusComparison ℓ (r ≫ p) ΦY (r ≫ f') sq r rfl rfl).hom.app K) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K) =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
+      (compactPullback ℓ ΦZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) := by
+  have hH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hL sq K
+  have cH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app ℓ hZ
+    (hL.paste_horiz sq) rfl rfl rfl hy.symm K
+  have hk := baseChange_comp_relativeFrobenius_stalk ℓ hZ hL hT hi K
+  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
+    Category.id_comp, Functor.comp_obj, Functor.id_obj]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [cH, hH]
+  sorry
+
+end Fibre
 
 /-! ### Compatibilities with the lower shriek -/
 
