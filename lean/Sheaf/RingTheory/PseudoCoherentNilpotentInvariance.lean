@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Ideal.Maps
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.Algebra.Module.Projective
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.RingTheory.Flat.Basic
 import Sheaf.RingTheory.NilpotentProjectiveComplexLift
 import WeilConjectures.RingTheory.NakayamaNilpotent
