@@ -6,10 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-import all Sheaf.Paper.NonvanishingSectionTrivializes
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
+import all WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # The stalk of an invertible module has rank one
 
@@ -40,6 +37,15 @@ theorem invertible_stalk_linearEquiv (Y : Scheme.{u}) (L : Y.Modules)
     [L.IsInvertible] (y : Y) :
     Nonempty (↑(TopCat.Presheaf.stalk L.val.presheaf y) ≃ₗ[Y.presheaf.stalk y]
       ↑(Y.presheaf.stalk y)) := by
-  sorry
+  obtain ⟨U, hyU, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := L) y
+  let e' : L.restrict U.ι ≅ unit U := (restrictFunctorIsoPullback U.ι).app L ≪≫ e
+  have ht := (isFreeGenerator_one (⊤ : U.toScheme.Opens)).app_hom e'.symm
+  have hex : ∃ t : Γ(L, U), IsFreeGenerator t :=
+    ⟨_, ((isFreeGenerator_restrict_iff U.ι L _).mp ht).map
+      (Scheme.Opens.ι_image_top U).ge⟩
+  obtain ⟨t, ht⟩ := hex
+  exact ⟨(LinearEquiv.ofBijective
+    (LinearMap.toSpanSingleton (Y.presheaf.stalk y) _ (L.presheaf.germ U y hyU t))
+    (stalk_generator_bijective ht y hyU)).symm⟩
 
 end AlgebraicGeometry.Scheme.Modules
