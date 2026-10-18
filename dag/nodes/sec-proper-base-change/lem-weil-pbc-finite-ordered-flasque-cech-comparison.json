@@ -31,86 +31,39 @@
  ],
  "proof": [
   {
-   "text": "Work throughout in abelian groups, or in modules over $\\Gamma(X,\\mathcal O_X)$ by restriction of scalars. Write each subset in increasing order. In the alternating face sum, terms deleting positions $i<j$ occur twice with signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so the horizontal differential squares to zero. Restrictions commute with the resolution differential, hence $d_hd_v=d_vd_h$. The total differential is therefore the one specified in the statement. Restriction of a global section has horizontal differential zero (the two restrictions to every overlap agree), and commutes with $d_v$. Thus $\\alpha$ is a cochain map. For $\\beta$, the equation $d_G^0e^0=0$ kills the vertical part and restriction naturality of $e^0$ gives the horizontal cochain identity. These arguments also apply when an indexed product is empty, hence zero.",
+   "text": "Apply the finite ordered flasque row/global-sections comparison to obtain quasi-isomorphism of alpha.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-double-complex-total"
+    "lem-weil-pbc-finite-ordered-flasque-cech-comparison-alpha"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01EQ (lemma-cech-cohomology), component maps; Tag 01FJ (lemma-ordered-alternating), alternating faces"
-   }
+   "elementary": false
   },
   {
-   "text": "We prove directly that for any flasque abelian sheaf $A$ and any finite ordered family of opens, its ordered section complex has zero positive cohomology; the family need only cover its own union. Induct on the number $r$ of opens, simultaneously for every space and every flasque sheaf. For $r=0$ the complex is zero; for $r=1$ all positive terms are zero. For $r>1$ let $a$ be a degree-$k$ cocycle, $k>0$, and put $j=r-1$. By induction the restriction of $a$ to subsets avoiding $j$ equals $db$ for a degree-$(k-1)$ cochain of the first $r-1$ opens. Extend $b$ to the full complex by setting all components containing $j$ to zero, and replace $a$ by $a-db$. The new cocycle is zero on all subsets avoiding $j$. For $W_i=V_i\\cap V_j$, $i<j$, put $t_T=a_{T\\cup\\{j\\}}$, for $|T|=k$. Evaluating $da=0$ on $R\\cup\\{j\\}$ gives $d_Wt=0$: the last face is zero and the other faces have precisely the ordered differential signs. If $k>1$, induction on the $r-1$ opens $W_i$ for the restriction of $A$ to $V_j$ gives $t=d_Wu$. This restriction is flasque because its restriction maps are those of $A$. Define $c_{R\\cup\\{j\\}}=u_R$ for $|R|=k-1$, and set $c$ to zero on subsets avoiding $j$. Then $(dc)_{T\\cup\\{j\\}}=(d_Wu)_T=t_T$, and all other components are zero, so the residual $a$ is $dc$. If $k=1$, the equation $d_Wt=0$ says that the $t_i$ agree on overlaps. Sheaf gluing produces $t$ over $W=\\bigcup_{i<j}W_i\\subseteq V_j$. Flasqueness extends $t$ to $s\\in A(V_j)$. Take $c_j=s$ and $c_i=0$ for $i<j$; then $(dc)_{i,j}=s|_{W_i}=t_i$ and all other components vanish. This again gives $dc=a$. Adding back the first $b$ proves exactness. Empty intersections and an empty $W$ use $A(\\varnothing)=0$, which follows from the sheaf axiom for the empty cover.",
+   "text": "Use the explicit coefficient map beta, its component formula, its quasi-isomorphism from sectionwise hypotheses, and its degree-zero compatibility.",
    "uses": [
-    "def-sc-zariski-flasque",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-finite-ordered-flasque-cech-comparison-beta",
+    "lem-weil-pbc-ordered-cech-coefficient-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 09SZ (lemma-flasque-acyclic-cech), finite ordered variant proved here by induction, with ordered differential as in Tag 01FJ"
-   }
+   "elementary": false
   },
   {
-   "text": "For a finite cover of $X$, a degree-zero ordered Cech cocycle is a tuple $(s_i)$ with $s_i|_{V_i\\cap V_j}=s_j|_{V_i\\cap V_j}$. The sheaf gluing and uniqueness axioms identify these tuples with $A(X)$ via restriction. There are no degree-zero boundaries. Together with Step 2, for every $q$ the augmented horizontal row $\\Gamma(X,G^q)[0]\\to D^{\\bullet,q}$ is a quasi-isomorphism. If $r=0$, the covering condition implies $X=\\varnothing$, so both its source and target are zero by the empty-cover sheaf axiom.",
+   "text": "Push the second augmentation forward and transport its single-complex source through the canonical single-functor isomorphism. Apply coefficient-map naturality and the existing global-section augmentation naturality to the supplied maps.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-ordered-cech-coefficient-map",
+    "def-sc-alternating-cech-total-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 09SZ (lemma-flasque-acyclic-cech); degree-zero gluing in Tag 01EQ (lemma-cech-cohomology)"
-   }
-  },
-  {
-   "text": "Let $B^{0,q}=\\Gamma(X,G^q)$ and $B^{p,q}=0$ for $p\\ne0$, with vertical differential the section differential. Restriction is a double-complex map $f:B\\to D$ by Step 1. In the explicit hypothesis of the cited theorem, $K.\\mathrm{flip}.X(q)$ is the horizontal complex $K^{\\bullet,q}$ (the outer index of $K$ is $p$). Thus its required maps for $f$ are exactly $\\Gamma(X,G^q)[0]\\to D^{\\bullet,q}$, proved quasi-isomorphisms in Step 3. Apply that theorem directly, without flipping $f$, in the abelian category of abelian groups. Both bicomplexes are first quadrant, so every total degree has finitely many summands; there is no upper bound required on the resolution degree. The resulting total map is precisely $\\alpha$, since its only source summand in degree $n$ is $(0,n)$, the differential there is $d_v$, and its components are restrictions. Hence $\\alpha$ is a quasi-isomorphism.",
-   "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01EQ (lemma-cech-cohomology), augmented-row argument; Homology Tag 0133 (lemma-double-complex-gives-resolution), via the cited column-comparison theorem"
-   }
-  },
-  {
-   "text": "For each fixed $p$, the augmentation $L^p[0]\\to D^{p,\\bullet}$ is a quasi-isomorphism. To verify finite-product preservation here without another lemma, cycles in a product complex are exactly tuples of cycles, and boundaries are exactly tuples of boundaries: a tuple of boundary elements has a tuple of preimages, chosen over the finite set of subsets $S$. Therefore cohomology is the product of the cohomologies and its augmentation map is the product of the stipulated section-augmentation isomorphisms. The product over an empty set is zero. Put $E^{p,0}=L^p$ and $E^{p,q}=0$ for $q\\ne0$, with horizontal differential $d_L$. The augmentation defines a double-complex map $g:E\\to D$ by Step 1. Flip both indices: the horizontal rows of $E^{\\mathrm{flip}}\\to D^{\\mathrm{flip}}$ are exactly the original vertical column maps just checked. These are the maps in the cited theorem's explicit flipped-component hypothesis, so that theorem gives a quasi-isomorphism on the flipped totals. Identify each flipped total with the original total by multiplying the summand originally indexed $(p,q)$ by $(-1)^{pq}$. For a horizontal arrow, the flipped differential followed by this sign has coefficient $(-1)^q(-1)^{(p+1)q}=(-1)^{pq}$; for a vertical arrow the coefficient is $(-1)^{p(q+1)}=(-1)^{pq}(-1)^p$. These are exactly the coefficients of $d_h+(-1)^pd_v$ after applying the source sign. Hence this is a cochain isomorphism. It commutes with $g$ because $g$ preserves both indices and the signs are identical on source and target. The resulting original total map is a quasi-isomorphism. Since $\\operatorname{Tot}(E)=L^\\bullet$ and the sign on its $q=0$ summands is one, this map is precisely $\\beta$.",
-   "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01ET (lemma-cech-spectral-sequence-application), acyclic-column argument for the given resolution; Homology Tag 0133 (lemma-double-complex-gives-resolution)"
-   }
-  },
-  {
-   "text": "For $s\\in\\Gamma(X,F)$, both degree-zero composites have $i$-th component $e^0(s)|_{V_i}=e^0(s|_{V_i})$ in $D^{0,0}$. Thus the composites agree. For naturality, write $u:F\\to h_*F^{\\prime}$ and $v:G^\\bullet\\to h_*G^{\\prime\\bullet}$ for the supplied maps. On each subset $S$, the induced component maps are $u_{V_S}$ and $v^q_{V_S}$, with target sections over $h^{-1}V_S=\\bigcap_{i\\in S}h^{-1}V_i$. Their sheaf-morphism identities give $v^q_{V_T}\\operatorname{res}_{S,T}=\\operatorname{res}^{\\prime}_{S,T}v^q_{V_S}$ for $S\\subset T$, their cochain identities give $d_{G^{\\prime}}v^q=v^{q+1}d_G$, and their augmentation identity gives $v^0e^0=e^{\\prime0}u$. Summing the first equality with the same ordered face signs proves compatibility with $d_h$; the second proves compatibility with the signed vertical differential, and the third gives the $\\beta$ square. Evaluating the first equality on $X\\supseteq V_i$ gives the $\\alpha$ square. Coefficient maps are the case $h=1_X$, and restriction to an open $W$ is the case of its inclusion with the indexed family $(W\\cap V_i)$. No inverse-image exactness, flatness or preservation of flasqueness is used. On $Y$ repeat Steps 1--5 only when the stated hypotheses there hold. All displayed maps are additive and semilinear over the global structure-ring map, which suffices for the asserted naturality.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01EQ (lemma-cech-cohomology), omitted functoriality verified componentwise; Tag 01FJ (lemma-ordered-alternating), fixed ordered indices"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-double-complex-total",
-  "def-sc-zariski-flasque",
-  "lem-sc-first-quadrant-total-column-comparison"
+  "lem-weil-pbc-finite-ordered-flasque-cech-comparison-alpha",
+  "lem-weil-pbc-finite-ordered-flasque-cech-comparison-beta",
+  "lem-weil-pbc-ordered-cech-coefficient-map",
+  "def-sc-alternating-cech-total-complex"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "G2 stage 3",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 09SZ, 01EQ, 01ET and 01FJ; explicit finite-cover induction and component naturality, using Homology Tag 0133 total comparison"
+  "place": "Tags 09SZ, 01ET and 01EQ; finite support replaces first-quadrant comparison"
  },
  "mathlib_searches": [
   {
@@ -261,9 +214,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sc-first-quadrant-total-column-comparison"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -290,5 +241,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Uses the already landed ordered-tuple totalization of def-sc-alternating-cech-total-complex. Naturality is expressed on X with pushforward coefficients: sections and restrictions there are exactly those on the inverse-image indexed cover on Y, with global scalars restricted. Beta is existential with every component specified, rather than choosing any data from an unproved existence theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T091402-L-3254827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

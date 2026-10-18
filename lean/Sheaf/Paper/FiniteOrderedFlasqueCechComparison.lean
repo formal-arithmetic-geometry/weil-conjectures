@@ -10,7 +10,8 @@ public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.FirstQuadrantTotalComparison
+import Sheaf.Paper.FiniteOrderedFlasqueCechComparisonAlpha
+import Sheaf.Paper.FiniteOrderedFlasqueCechComparisonBeta
 
 /-!
 # Finite ordered Čech comparison for flasque resolutions
@@ -33,32 +34,22 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Cohomology, Tags 09SZ, 01ET, 01EQ, 01FJ and 01FM.
 (blueprint: lem-weil-pbc-finite-ordered-flasque-cech-comparison)
 
-Proof: Write each nonempty subset in increasing order. Two successive face deletions
-cancel with opposite signs. Restrictions commute with the resolution differential,
-so the double complex commutes and its total differential is d_h + (-1)^p d_v.
-Global restriction and the coefficient augmentation therefore give cochain maps.
-For a flasque sheaf, prove positive ordered Čech exactness by induction on the number
-of opens. Subtract a boundary on the first r-1 opens. The residual cocycle is supported
-on subsets containing the last index. On the intersections with the last open use
-induction in degrees above one. In degree one glue the residual sections on their
-union, then extend to the last open by flasqueness. Degree zero is sheaf gluing.
-Thus every augmented horizontal row is a quasi-isomorphism. Apply
-lem-sc-first-quadrant-total-column-comparison to the row augmentation to obtain alpha.
-Each vertical column augmentation is a finite product of the stipulated section
-quasi-isomorphisms: cycles and boundaries are computed coordinatewise. Transpose
-both double complexes and apply the same total comparison. The sign (-1)^(pq)
-identifies the transposed total with the original one, giving beta; it is one on q=0.
-The degree-zero composites agree by naturality of the coefficient augmentation.
-For a supplied coefficient and cochain map into a pushforward, apply its section maps
-to every ordered tuple. Naturality commutes with each face restriction, the cochain
-identity commutes with the vertical differential, and compatibility with augmentation
-gives the beta square. Restriction of global sections gives the alpha square.
-Pushforward sections over V are exactly sections over h inverse V, so the target
-expressions below are the inverse-image-cover expressions, with scalars restricted
-from the target global ring. Identity morphisms give coefficient naturality; open
-immersions give restriction naturality. No flatness is used. Apply the assertion
-again on Y when the hypotheses there hold. If r=0 the covering condition forces X
-empty, and every source and product is zero by the empty-cover sheaf axiom. -/
+Proof: The flasque row augmentation follows from the source library's full Čech
+exactness theorem, the ordered/usual restriction homotopy equivalence, and degree-zero
+sheaf gluing. Negative coefficient rows vanish. Only the finitely many Čech columns
+0,...,r-1 can be nonzero, so finite-strip row augmentation gives alpha.
+Construct beta with its prescribed resolution-degree-zero components. The cochain
+identity for e kills its vertical differential, and restriction naturality supplies
+its horizontal cochain identity. Each vertical column is a finite product of section
+complexes. Restriction of scalars and these products preserve the stipulated
+quasi-isomorphisms; finite-column comparison gives quasi-isomorphism of totals.
+The total of the single coefficient complex is isomorphic to its Čech complex,
+and naturality identifies the resulting composite with beta. Naturality of global
+restriction proves degree-zero agreement. For the final square, push the second
+augmentation forward, transport its single-complex source through the canonical
+functor isomorphism, and apply beta naturality and the existing alpha naturality.
+All component formulas also hold for empty tuples and the empty cover.
+-/
 theorem finiteOrderedFlasqueCechComparison
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -101,6 +92,28 @@ theorem finiteOrderedFlasqueCechComparison
             (.up ℤ)).map v ≫ alternatingCechAugmentationMap V
               (((Scheme.Modules.pushforward h).mapHomologicalComplex (.up ℤ)).obj G') =
               alternatingCechAugmentationMap V G ≫ (alternatingCechTotalFunctor V).map v := by
-  sorry
+  refine ⟨finiteOrderedFlasqueCechComparison_alpha X G hfl r V hcover,
+    orderedCechCoefficientMap V e, fun _ ↦ rfl,
+    orderedCechCoefficientMap_quasiIso X F G e r V hsections,
+    orderedCechCoefficientMap_zero V e, ?_⟩
+  intro Y h F' G' e' _ _ u v huv
+  let H := Scheme.Modules.pushforward h
+  let eH := ((H.mapHomologicalComplex (.up ℤ)).map e')
+  let a := (HomologicalComplex.singleMapHomologicalComplex H (.up ℤ) 0).inv.app F'
+  let e'' := a ≫ eH
+  have he : e''.f 0 = H.map (e'.f 0) := by
+    change ((HomologicalComplex.singleMapHomologicalComplex H (.up ℤ) 0).inv.app F').f 0 ≫
+      H.map (e'.f 0) = H.map (e'.f 0)
+    rw [HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+    change (𝟙 _) ≫ H.map (𝟙 _) ≫ H.map (e'.f 0) = H.map (e'.f 0)
+    erw [Category.id_comp, H.map_id]
+    exact Category.id_comp _
+  refine ⟨orderedCechCoefficientMap V e'', ?_, ?_, ?_⟩
+  · intro n
+    change ((alternatingCechModuleFunctor V).map (e''.f 0)).f n ≫ _ = _
+    rw [he]
+  · apply orderedCechCoefficientMap_naturality V e e'' u v
+    simpa only [he] using huv
+  · exact alternatingCechAugmentation_naturality V G _ v
 
 end AlgebraicGeometry
