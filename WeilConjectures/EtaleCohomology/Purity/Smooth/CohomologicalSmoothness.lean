@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
@@ -139,12 +140,14 @@ include d in
 with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
 change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
 `ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. For quasi-compact `f'` the canonical base change map is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
+possible. The isomorphism is the canonical base change map
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`),
+which is constructed for quasi-compact `f'` and shown to be an isomorphism over a
+quasi-separated base `Y`; both hypotheses hold in the Noetherian setting of the blueprint.
 -/
-theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : Scheme.{u}}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    [HasCompactification f'] :
+theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSeparatedSpace Y]
+    {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+    (sq : IsPullback g' f' f g) [HasCompactification f'] [QuasiCompact f'] :
     Nonempty (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f ⋙
         L((g')^*[ModuleCat.{u + 1} Λ]) ≅
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙

@@ -31,6 +31,8 @@ that `q^* j_! = j'_!` is again fully faithful.
 - `CategoryTheory.Adjunction.map_map_unit_app_eq`: `R (L (η X)) = η (R (L X))` when `ε (L X)` is
   an isomorphism.
 - `CategoryTheory.Adjunction.isIso_map_unit_app_obj`: `J' (η_{J K})` is an isomorphism.
+- `CategoryTheory.Adjunction.isIso_map_counit_app_of_isIso_unit`: `R ε_Y` is an isomorphism when
+  the unit is.
 -/
 
 @[expose] public section
@@ -129,6 +131,16 @@ lemma map_bijective_of_isIso_unit_app (adj : L ⊣ R) (A : C) {B : C}
   rw [h]
   exact (adj.homEquiv A (L.obj B)).symm.bijective.comp
     ((asIso (adj.unit.app B)).homToEquiv (Z := A)).bijective
+
+/-- For an adjunction `L ⊣ R` with invertible unit, `R` inverts the counit: by the triangle
+identity, `R ε_Y` is a retraction of the invertible `η_{R Y}`. -/
+lemma isIso_map_counit_app_of_isIso_unit (adj : L ⊣ R) [IsIso adj.unit] (Y : D) :
+    IsIso (R.map (adj.counit.app Y)) := by
+  have h := adj.right_triangle_components Y
+  have : IsIso (adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y)) := by
+    rw [h]
+    exact IsIso.id _
+  exact IsIso.of_isIso_comp_left (adj.unit.app (R.obj Y)) _
 
 end UnitIso
 
