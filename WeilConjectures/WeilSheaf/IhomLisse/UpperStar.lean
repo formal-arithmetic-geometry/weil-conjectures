@@ -171,6 +171,7 @@ noncomputable abbrev upperStarStr {M : AdicSheaf l Y} (sM : (b.inv)_*ᵃ[l].obj 
     (a.inv)_*ᵃ[l].obj ((j)^*ᵃ[l].obj M) ≅ (j)^*ᵃ[l].obj M :=
   (adicUpperStarExchangeIso l j a b c).app M ≪≫ (j)^*ᵃ[l].mapIso sM
 
+/-- The underlying morphism of the transported structure isomorphism. -/
 lemma upperStarStr_hom_hom {M : AdicSheaf l Y} (sM : (b.inv)_*ᵃ[l].obj M ≅ M) :
     (upperStarStr l c sM).hom.hom =
       (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom.app M.X ≫

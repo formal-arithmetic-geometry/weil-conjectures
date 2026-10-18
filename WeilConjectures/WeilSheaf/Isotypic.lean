@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.WeilSheaf.TorsorPairing
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
@@ -31,7 +32,8 @@ functions, being induced by morphisms of schemes over `k₀`.
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Opposite
+open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal
+open scoped Obj
 
 namespace AlgebraicGeometry
 
@@ -301,6 +303,115 @@ lemma ProEtaleWeilSheaf.comp_torsorIdempotent (χ : AddChar G (PadicAlgCl l))
   rw [← Preadditive.sum_comp, ProEtaleWeilSheaf.sum_smulEnd, Finset.sum_const, Finset.card_univ,
     ← Nat.card_eq_fintype_card, nsmul_eq_mul, mul_inv_cancel₀ hG,
     ProEtaleWeilSheaf.smulEnd_one, Category.id_comp]
+
+/-- The Weil structure of `π_* ℚ̄_ℓ` is compatible with the product of functions. -/
+@[reassoc]
+lemma ProEtaleWeilSheaf.torsorPushforward_str_mul :
+    ((ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom ⊗ₘ
+        (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom) ≫
+      MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
+        (W ↘ Spec (CommRingCat.of k₀)).geometricFiber)) =
+      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          _ _ ≫
+        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].map
+          (MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
+            (W ↘ Spec (CommRingCat.of k₀)).geometricFiber))) ≫
+        (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom := by
+  rw [ProEtaleWeilSheaf.torsorPushforward_str_hom_hom]
+  exact ProEtale.lowerStarExchange_mul π̄
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
+
+
+
+/-- The underlying morphism of the projector `e_χ` of pro-étale Weil sheaves is the projector of
+the underlying sheaves. -/
+lemma ProEtaleWeilSheaf.torsorIdempotent_hom_f (χ : AddChar G (PadicAlgCl l)) :
+    (ProEtaleWeilSheaf.torsorIdempotent π τ hτ χ).hom.f =
+      ProEtale.torsorIdempotent l π̄ (geometricTorsorAut k₀ τ) (geometricTorsorAut_comp k₀ π τ hτ)
+        χ := by
+  let := Fintype.ofFinite G
+  rw [ProEtaleWeilSheaf.torsorIdempotent, ProEtale.torsorIdempotent]
+  change (Endofunctor.IsoAlgebra.forget _).map _ = _
+  rw [Functor.map_sum]
+  rfl
+
+/-- **Pairings of isotypic components of pro-étale Weil sheaves.** -/
+theorem ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic [Etale π] [QuasiCompact π]
+    [Surjective π] (hadd : ∀ g h, (τ (g + h)).hom = (τ g).hom ≫ (τ h).hom)
+    (hsplit : ProEtale.IsTorsorSplit π τ hτ) (χ₁ χ₂ : AddChar G (PadicAlgCl l))
+    (hG : (Nat.card G : PadicAlgCl l) ≠ 0) {M₁ M₂ M₃ : ProEtaleWeilSheaf k₀ l Z}
+    (φ₁ : M₁ ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
+    (φ₂ : M₂ ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
+    (φ₃ : M₃ ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
+    (hφ₁ : ∀ g, φ₁ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
+      ProEtaleWeilSheaf.smulEnd (χ₁ g) M₁ ≫ φ₁)
+    (hφ₂ : ∀ g, φ₂ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
+      ProEtaleWeilSheaf.smulEnd (χ₂ g) M₂ ≫ φ₂)
+    (hφ₃ : ∀ g, φ₃ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
+      ProEtaleWeilSheaf.smulEnd ((χ₁ * χ₂) g) M₃ ≫ φ₃)
+    (hθ₁ : IsIso ((π̄)^*ᵃ[l].map φ₁.hom.f ≫
+      (ProEtale.adicUpperStarLowerStarAdjunction l π̄).counit.app _))
+    (hθ₂ : IsIso ((π̄)^*ᵃ[l].map φ₂.hom.f ≫
+      (ProEtale.adicUpperStarLowerStarAdjunction l π̄).counit.app _))
+    (hθ₃ : IsIso ((π̄)^*ᵃ[l].map φ₃.hom.f ≫
+      (ProEtale.adicUpperStarLowerStarAdjunction l π̄).counit.app _)) :
+    Nonempty (M₁ ≅ ProEtaleWeilSheaf.ihom k₀ l Z M₂ M₃) := by
+  have : Etale π̄ := Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @Etale) _ _
+    ‹_›
+  have : Surjective π̄ :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @Surjective) _ _ ‹_›
+  have : QuasiCompact π̄ :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiCompact) _ _ ‹_›
+  have hτb := geometricTorsorAut_comp k₀ π τ hτ
+  have hsplit' : ProEtale.IsTorsorSplit π̄ (geometricTorsorAut k₀ τ) hτb :=
+    hsplit.of_isPullback (Scheme.Hom.isPullback_geometricFiberMap π _).flip _ hτb
+      fun g ↦ Scheme.Hom.geometricFiberMap_comp_geometricFiberProj _ (comp_over (τ g).hom _)
+  have hadd' (g h : G) : (geometricTorsorAut k₀ τ (g + h)).hom =
+      (geometricTorsorAut k₀ τ g).hom ≫ (geometricTorsorAut k₀ τ h).hom := by
+    simp only [Scheme.Hom.geometricFiberMapIso_hom]
+    rw [← Scheme.Hom.geometricFiberMap_comp]
+    exact Scheme.Hom.geometricFiberMap_congr (hadd g h) _ _
+  have hgeom {M : ProEtaleWeilSheaf k₀ l Z} (φ : M ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
+      (χ : AddChar G (PadicAlgCl l))
+      (hφ : ∀ g, φ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
+        ProEtaleWeilSheaf.smulEnd (χ g) M ≫ φ) (g : G) :
+      φ.hom.f ≫ ProEtale.torsorTranslation l π̄ (geometricTorsorAut k₀ τ) hτb g =
+        ProEtale.AdicSheaf.smul (ULift.up (χ g)) M.carrier ≫ φ.hom.f :=
+    congrArg (fun f ↦ f.hom.f) (hφ g)
+  obtain ⟨r, hr₁, hr₂⟩ := ProEtale.exists_retraction_of_isotypic π̄ (geometricTorsorAut k₀ τ) hτb
+    hadd' hsplit' (χ₁ * χ₂) hG φ₃.hom.f (hgeom φ₃ _ hφ₃) hθ₃
+  set Fr := ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+  have hstr {A B : ProEtaleWeilSheaf k₀ l Z} (f : A ⟶ B) :
+      Fr.map f.hom.f.hom ≫ B.str.hom.hom = A.str.hom.hom ≫ f.hom.f.hom := by
+    have := congrArg Mod.Hom.hom f.hom.h
+    rwa [Mod.comp_hom', Mod.comp_hom', ProEtale.adicLowerStar_map_hom] at this
+  have hr : Fr.map r.hom ≫ M₃.str.hom.hom =
+      (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom ≫ r.hom := by
+    have : Mono φ₃.hom.f.hom := by
+      have h := congrArg Mod.Hom.hom hr₁
+      rw [Mod.comp_hom', Mod.id_hom'] at h
+      exact (IsSplitMono.mk' ⟨_, h⟩).mono
+    rw [← cancel_mono φ₃.hom.f.hom, Category.assoc, ← hstr, ← Fr.map_comp_assoc, ← Mod.comp_hom',
+      hr₂, Category.assoc, ← Mod.comp_hom', hr₂,
+      ← ProEtaleWeilSheaf.torsorIdempotent_hom_f π τ hτ, hstr]
+  have hp : (M₁.str.hom.hom ⊗ₘ M₂.str.hom.hom) ≫
+      ProEtale.torsorPairing l π̄ φ₁.hom.f φ₂.hom.f r =
+      μ Fr M₁.carrier.X M₂.carrier.X ≫ Fr.map (ProEtale.torsorPairing l π̄ φ₁.hom.f φ₂.hom.f r) ≫
+        M₃.str.hom.hom := by
+    rw [ProEtale.torsorPairing, tensorHom_comp_tensorHom_assoc, ← hstr φ₁, ← hstr φ₂,
+      ← tensorHom_comp_tensorHom_assoc, ProEtaleWeilSheaf.torsorPushforward_str_mul_assoc, ← hr]
+    erw [Functor.LaxMonoidal.μ_natural_assoc]
+    rw [Fr.map_comp, Fr.map_comp, Category.assoc, Category.assoc]
+  have hκ := hp
+  rw [← ProEtale.AdicSheaf.curryHom_evaluation (ProEtale.torsorPairing l π̄ φ₁.hom.f φ₂.hom.f r)
+    (ProEtale.isLinearRight_torsorPairing π̄ φ₁.hom.f φ₂.hom.f r)
+    (ProEtale.torsorPairing_linear_left π̄ φ₁.hom.f φ₂.hom.f r)] at hκ
+  have := ProEtale.isIso_torsorPairingCurry π̄ (geometricTorsorAut k₀ τ) hτb χ₁ χ₂ hG φ₁.hom.f
+    φ₂.hom.f φ₃.hom.f r (hgeom φ₁ _ hφ₁) (hgeom φ₂ _ hφ₂) hr₂ hθ₁ hθ₂ hθ₃
+  exact ⟨Endofunctor.IsoAlgebra.isoMk (asIso (ProEtale.torsorPairingCurry l π̄ φ₁.hom.f φ₂.hom.f r))
+    (ProEtaleWeilSheaf.homToIhom_comm M₁ M₂ M₃ _ hκ)⟩
 
 end Torsor
 

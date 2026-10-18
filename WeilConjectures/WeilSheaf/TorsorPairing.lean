@@ -98,6 +98,23 @@ lemma NatTrans.isMonHom_app_comp {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E} [F.La
     exact this
 
 
+
+/-- The component at a monoid of a monoidal natural transformation into a composite of lax
+monoidal functors is a morphism of monoids, the target being `G (F A)`. -/
+lemma NatTrans.isMonHom_app_comp_right {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E} [F.LaxMonoidal]
+    [G.LaxMonoidal] [H.LaxMonoidal] (α : H ⟶ F ⋙ G) [NatTrans.IsMonoidal α] (A : C)
+    [MonObj A] : IsMonHom (α.app A) := by
+  have h := NatTrans.isMonHom_app α A
+  constructor
+  · have := h.one_hom
+    simp only [Functor.obj.η_def, Functor.LaxMonoidal.comp_ε, Functor.comp_map,
+      Category.assoc] at this ⊢
+    simp
+  · have := h.mul_hom
+    simp only [Functor.obj.μ_def, Functor.LaxMonoidal.comp_μ, Functor.comp_map,
+      Category.assoc] at this ⊢
+    simp
+
 /-- For a monoidal adjunction `F ⊣ G` and a monoid `B`, the adjoint of the product
 `(f₁ ⊗ f₂) ≫ μ ≫ G.map mul` of two morphisms into `G B` is the product of their adjoints. -/
 lemma Adjunction.map_tensorHom_mul_comp_counit {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
@@ -442,5 +459,39 @@ theorem isIso_torsorPairingCurry [WeaklyEtale π] [QuasiCompact π] [Surjective 
     (asIso ((π)^*ᵃ[l].map φ₃ ≫ (adicUpperStarLowerStarAdjunction l π).counit.app _)) ?_
   rw [torsorPairingCurry, AdicSheaf.curryHom_evaluation]
   exact torsorPairing_upperStar π τ hτ χ₁ χ₂ hG φ₁ φ₂ φ₃ r hφ₁ hφ₂ hr _ _ rfl rfl
+
+
+/-- The exchange `(e_Z)_* π_* ℚ̄_ℓ ≅ π_* ℚ̄_ℓ` of a pushforward with automorphisms `e_Z`, `e_W`
+such that `π ≫ e_Z = e_W ≫ π` is compatible with the products of functions. -/
+lemma lowerStarExchange_mul (π : W ⟶ Z) (eZ : Z ≅ Z) (eW : W ≅ W)
+    (hc : π ≫ eZ.hom = eW.hom ≫ π) :
+    let f := ((lowerStarComp (WeilCoefficients.{u} l) π eZ.hom ≪≫
+      lowerStarCongr (WeilCoefficients.{u} l) hc ≪≫
+      (lowerStarComp (WeilCoefficients.{u} l) eW.hom π).symm).app (adicConstantSheaf l W) ≪≫
+        (π)_*[WeilCoefficients.{u} l].mapIso (adicConstantSheafLowerStarIso l eW)).hom
+    (f ⊗ₘ f) ≫ MonObj.mul (X := (π)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l W)) =
+      μ (eZ.hom)_*[WeilCoefficients.{u} l] _ _ ≫ (eZ.hom)_*[WeilCoefficients.{u} l].map
+        (MonObj.mul (X := (π)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l W))) ≫ f := by
+  intro f
+  have h1 := NatTrans.isMonHom_app_comp (lowerStarComp (WeilCoefficients.{u} l) π eZ.hom).hom
+    (adicConstantSheaf l W)
+  have h2 : IsMonHom ((lowerStarCongr (WeilCoefficients.{u} l) hc).hom.app
+      (adicConstantSheaf l W)) := NatTrans.isMonHom_app _ _
+  have h3' := NatTrans.isMonHom_app_comp_right (lowerStarComp (WeilCoefficients.{u} l) eW.hom π).inv
+    (adicConstantSheaf l W)
+  have : IsMonHom (adicConstantSheafLowerStarIso l eW).inv :=
+    inferInstanceAs (IsMonHom (adicConstantSheafToLowerStar l eW.hom))
+  have : IsMonHom (adicConstantSheafLowerStarIso l eW).hom := by
+    have : IsMonHom (inv (adicConstantSheafLowerStarIso l eW).inv) := inferInstance
+    rwa [IsIso.Iso.inv_inv] at this
+  have h4 := Functor.map.instIsMonHom (F := (π)_*[WeilCoefficients.{u} l])
+    (f := (adicConstantSheafLowerStarIso l eW).hom)
+  simp only [f, Iso.trans_hom, Iso.app_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.mapIso_hom, Category.assoc]
+  rw [← tensorHom_comp_tensorHom_assoc, ← tensorHom_comp_tensorHom_assoc,
+    ← tensorHom_comp_tensorHom_assoc, ← IsMonHom.mul_hom, ← IsMonHom.mul_hom_assoc,
+    ← IsMonHom.mul_hom_assoc, ← IsMonHom.mul_hom_assoc, Functor.obj.μ_def]
+  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.map_comp, Category.assoc,
+    Functor.obj.μ_def]
 
 end AlgebraicGeometry.ProEtale

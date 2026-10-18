@@ -121,6 +121,7 @@ lemma adicUpperStarIhomComparison_eq_of_weaklyEtale [WeaklyEtale g] (M N : AdicS
   apply Mod.uncurryHom_injective
   rw [uncurryHom_adicUpperStarIhomComparison, Mod.uncurryHom, adicUpperStarIhomIso_evaluation]
 
+/-- The comparison is an isomorphism for a weakly étale morphism. -/
 instance isIso_adicUpperStarIhomComparison_of_weaklyEtale [WeaklyEtale g]
     (M N : AdicSheaf l Y) : IsIso (adicUpperStarIhomComparison l g M N) := by
   rw [adicUpperStarIhomComparison_eq_of_weaklyEtale]

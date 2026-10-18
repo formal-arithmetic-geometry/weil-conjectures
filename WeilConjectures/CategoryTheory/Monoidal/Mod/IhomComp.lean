@@ -20,6 +20,12 @@ Let `A` be a commutative monoid in a symmetric monoidal Grothendieck abelian cat
   (`CategoryTheory.Mod.hom_ext₂`).
 * The internal composition `Hom_A(N, K) ⟶ Hom_A(Hom_A(M, N), Hom_A(M, K))`, `g ↦ (f ↦ g ∘ f)`
   (`CategoryTheory.Mod.ihomComp`).
+* The comparison `Hom_A(Hom_A(Hom_A(a, H), L), K) ⟶ Hom_A(a, Hom_A(Hom_A(H, L), K))`,
+  `f ↦ (x ↦ (y ↦ f (t ↦ y (t x))))` (`CategoryTheory.Mod.ihomIhomComparison`). It is natural in
+  `a` and `K`, and an isomorphism for `a = A` and hence for `a` free of finite rank
+  (`CategoryTheory.Mod.isIso_ihomIhomComparison_free`). For `L = A` it identifies the tensor
+  product with `a^∨` followed by the tensor product with `H^∨` with the tensor product with
+  `Hom_A(a, H)^∨`.
 -/
 
 @[expose] public section
@@ -64,6 +70,7 @@ noncomputable def curryHomOfLinear {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X)
       Category.assoc, act_whiskerRight_evaluation, associator_naturality_middle_assoc,
       ← MonoidalCategory.whiskerLeft_comp_assoc, curry_evaluation])
 
+/-- The underlying morphism of `curryHomOfLinear q` is `curry q`. -/
 lemma curryHomOfLinear_hom {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X) (hq : IsLinearRight q)
     (hq' : act M.X ▷ D.X ≫ q = (α_ A M.X D.X).hom ≫ A ◁ q ≫ act N.X) :
     (curryHomOfLinear q hq hq').hom = curry q hq :=
@@ -128,6 +135,7 @@ noncomputable abbrev ihomCompUncurried :
     (((ihom N).obj K).X ⊗ ((ihom M).obj N).X) ⊗ M.X ⟶ K.X :=
   (α_ _ _ _).hom ≫ ((ihom N).obj K).X ◁ evaluation M N ≫ evaluation N K
 
+/-- The uncurried internal composition is `A`-linear in the third variable. -/
 lemma isLinearRight_ihomCompUncurried : IsLinearRight (ihomCompUncurried M N K) := by
   have h₁ := isLinearRight_evaluation M N
   have h₂ := isLinearRight_evaluation N K
@@ -141,6 +149,7 @@ lemma isLinearRight_ihomCompUncurried : IsLinearRight (ihomCompUncurried M N K) 
   simp only [comp_whiskerRight, Category.assoc]
   monoidal
 
+/-- The uncurried internal composition is `A`-linear in the second variable. -/
 lemma ihomCompUncurried_linear_middle :
     (((ihom N).obj K).X ◁ act ((ihom M).obj N).X) ▷ M.X ≫ ihomCompUncurried M N K =
       ((α_ _ A _).inv ≫ (β_ ((ihom N).obj K).X A).hom ▷ _ ≫ (α_ A _ _).hom) ▷ M.X ≫
@@ -155,6 +164,7 @@ lemma ihomCompUncurried_linear_middle :
     associator_naturality_right_assoc]
   monoidal
 
+/-- The uncurried internal composition is `A`-linear in the first variable. -/
 lemma ihomCompUncurried_linear_left :
     (act ((ihom N).obj K).X ▷ ((ihom M).obj N).X) ▷ M.X ≫ ihomCompUncurried M N K =
       (α_ A _ _).hom ▷ M.X ≫ (α_ A _ M.X).hom ≫ A ◁ ihomCompUncurried M N K ≫ act K.X := by
@@ -177,6 +187,7 @@ lemma uncurryHom_ihomComp :
 
 end IhomComp
 
+/-- The uncurried form of the identity of `Hom_A(M, N)` is the evaluation. -/
 lemma uncurryHom_id (M N : Mod C A) : uncurryHom (𝟙 ((ihom M).obj N)) = evaluation M N := by
   rw [uncurryHom, Mod.id_hom', id_whiskerRight, Category.id_comp]
 
@@ -210,6 +221,7 @@ lemma uncurryHom_toIhomIhom :
 
 /-- The twice uncurried form of `ihomIhomComparison`: `(f ⊗ x) ⊗ y ↦ f (δ (x ⊗ y))`, where `δ`
 is the uncurried form of `toIhomIhom`. -/
+@[reassoc]
 lemma uncurryHom_ihomIhomComparison :
     uncurryHom (ihomIhomComparison a H L K) ▷ ((ihom H).obj L).X ≫
         evaluation ((ihom H).obj L) K =
@@ -224,7 +236,8 @@ lemma uncurryHom_toIhomIhom_naturality {a' : Mod C A} (h : a' ⟶ a) :
       h.hom ▷ ((ihom H).obj L).X ≫ uncurryHom (toIhomIhom a H L) := by
   apply hom_ext_of_evaluation (D := (ihom a).obj H)
   rw [comp_whiskerRight_assoc, evaluation_ihomMap, ← whisker_exchange_assoc,
-    uncurryHom_toIhomIhom, comp_whiskerRight_assoc, uncurryHom_toIhomIhom, whisker_exchange_assoc, associator_naturality_right_assoc,
+    uncurryHom_toIhomIhom, comp_whiskerRight_assoc, uncurryHom_toIhomIhom, whisker_exchange_assoc,
+    associator_naturality_right_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc, BraidedCategory.braiding_naturality_right_assoc,
     evaluation_ihomMap, ← BraidedCategory.braiding_naturality_left_assoc,
     ← comp_whiskerRight_assoc, BraidedCategory.braiding_naturality_left, comp_whiskerRight_assoc,
@@ -242,8 +255,21 @@ lemma ihomIhomComparison_naturality {a' : Mod C A} (h : a' ⟶ a) :
     associator_naturality_middle_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc, uncurryHom_toIhomIhom_naturality]
 
+variable {K} in
+/-- `ihomIhomComparison` is natural in `K`. -/
+@[reassoc]
+lemma ihomIhomComparison_naturality_right {K' : Mod C A} (f : K ⟶ K') :
+    (ihom _).map f ≫ ihomIhomComparison a H L K' =
+      ihomIhomComparison a H L K ≫ (ihom a).map ((ihom ((ihom H).obj L)).map f) := by
+  apply hom_ext₂
+  rw [uncurryHom_comp, comp_whiskerRight_assoc, uncurryHom_ihomIhomComparison,
+    uncurryHom_comp_ihom_map, comp_whiskerRight_assoc, evaluation_naturality,
+    uncurryHom_ihomIhomComparison_assoc, associator_naturality_left_assoc,
+    ← whisker_exchange_assoc, evaluation_naturality]
+
 end Compare
 
+/-- `Hom_A(f, -)` is an isomorphism for an isomorphism `f`. -/
 instance isIso_ihomMap {M M' : Mod C A} (f : M ⟶ M') [IsIso f] : IsIso (ihomMap f) :=
   ⟨ihomMap (inv f), by rw [← ihomMap_comp, IsIso.inv_hom_id, ihomMap_id], by
     rw [← ihomMap_comp, IsIso.hom_inv_id, ihomMap_id]⟩
@@ -327,6 +353,7 @@ lemma ihomIhomComparison_regular :
     ← MonoidalCategory.whiskerLeft_comp_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc]
   erw [Category.assoc, leftUnitor_inv_unit_uncurryHom_toIhomIhom]
 
+/-- `ihomIhomComparison` is an isomorphism for `a = A`. -/
 instance isIso_ihomIhomComparison_regular :
     IsIso (ihomIhomComparison (regular A) H L K) := by
   have : IsIso (ihomIhomComparison (regular A) H L K ≫ ihomRegularIso.hom.app _) := by
@@ -360,16 +387,19 @@ noncomputable def ihomIhomIhomMapAddHom (a' a : Mod C A) :
       (ihom ((ihom ((ihom a').obj H)).obj L)).obj K) :=
   (ihomMapAppAddHom _ _ K).comp ((ihomMapAppAddHom _ _ L).comp (ihomMapAppAddHom a' a H))
 
+/-- The value of `ihomIhomIhomMapAddHom`. -/
 lemma ihomIhomIhomMapAddHom_apply {a' a : Mod C A} (h : a' ⟶ a) :
     ihomIhomIhomMapAddHom H L K a' a h =
       (ihomMap ((ihomMap ((ihomMap h).app H)).app L)).app K :=
   rfl
 
+/-- `ihomIhomIhomMapAddHom` is contravariantly functorial. -/
 lemma ihomIhomIhomMapAddHom_comp {a'' a' a : Mod C A} (g : a'' ⟶ a') (h : a' ⟶ a) :
     ihomIhomIhomMapAddHom H L K a'' a (g ≫ h) =
       ihomIhomIhomMapAddHom H L K a' a h ≫ ihomIhomIhomMapAddHom H L K a'' a' g := by
   simp only [ihomIhomIhomMapAddHom_apply, ihomMap_comp, NatTrans.comp_app]
 
+/-- `ihomIhomIhomMapAddHom` preserves identities. -/
 lemma ihomIhomIhomMapAddHom_id (a : Mod C A) :
     ihomIhomIhomMapAddHom H L K a a (𝟙 a) = 𝟙 _ := by
   simp only [ihomIhomIhomMapAddHom_apply, ihomMap_id, NatTrans.id_app]
