@@ -19,7 +19,8 @@
   "def-weil-pbc-constructible-complexes",
   "def-compact-support-direct-image-detailed",
   "def-weil-open-immersion",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "sk-lem-sf-flat-model"
  ],
  "proof": [
   {
@@ -371,5 +372,29 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-8d16646cc (reviewer sub-agent of L); spot-checked: Read the item, its 15 steps, both new nodes, unit sk-lem-sf-ctf-generation and master blueprint Steps 0-3 in full; the item has no blueprint_update and its statement is unchanged and not weakened. Rebuilt old step 7 (now steps 7-12) is correct. Step 7: clause (ii) of constructible-origin matches word for word the D^b_c of def-weil-finite-torsion-constructibility (the coefficient category of def-trf-coefficient-conventions); Tor-amplitude (i)/(ii) restricts the equivalence to ctf, with bounded hence bounded below and ell invertible since ell != p; exactness comes from comparison-pullback-exact (2) plus exact-functor-derived-triangulated, and the inverse from the leaf. Step 8 is genuinely elementary: a closed immersion is affine and a monomorphism, hence qcqs. Step 9: comparison-direct-image (qcqs, D^+) composed with extension-zero-comparison gives the displayed isomorphism. Step 10: locally-constant-origin (a)/(b) plus the A-linear stalk isomorphism match the full flat lisse families, and pullback-exact (1) matches the constant ones. Step 11: thickness from Step 6 and clause (3) of det-sf-flat-model-generation; the ambient-closure lemma gives both inclusions and the reflection used by the Step 15 obstruction. Step 12 keeps the shift hypothesis and claims invertibility only. Leaf lem-trf-exact-equivalence-inverse: Mathlib Triangulated/Adjunction.lean:184 needs functor, inverse and equivalence CommShift, exactly as the statement supplies; line 202 Equivalence.IsTriangulated.mk' and line 195 inverse instance verified, a one-line specialization; Stacks 05SQ (derived.tex:916) is the right lemma. lem-trf-ambient-thick-closure-equivalence: I proved it myself via the closure in A equalling the ambient closure (retracts are summands, A thick) and two thick-preimage arguments; checked on empty S, A=C and a singleton; no idempotent completeness needed; not a relabelled clause; DAG and main-20261015 blueprint searches found no duplicate. Unit-route check: all new citations are on route; the only off-route citation is the previously declared tool use cor-galois-lisse-representations. proof_deps equals the union of uses, no merged or missing ids, no SGA, no doubled backslashes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TrfDevissageGeneration",
+  "declaration": "AlgebraicGeometry.trf_devissage_generation",
+  "declarations": [
+   "AlgebraicGeometry.trfConstantClosureGenerators",
+   "AlgebraicGeometry.trf_devissage_generation",
+   "AlgebraicGeometry.exists_trf_constant_coefficients_not_generating"
+  ],
+  "file": "lean/Sheaf/Paper/TrfDevissageGeneration.lean",
+  "statement": "theorem trf_devissage_generation (T : WeilConjectures.TraceFormulaCoefficientConventions.{u}) (X : Scheme.{u}) (aX : X ⟶ Spec (.of T.datum.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] : WeilConjectures.finiteTorConstructible T.coefficients.l T.coefficientField T.level T.level_pos X = (@sfProEtaleClosureGenerators X T.coefficientRing inferInstance (Padic.finite_coefficientExtensionRing T.coefficients.l T.coefficientField T.level T.level_pos)).triangEnvelope",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Both clauses are stated: the generation equality and an existential failure of constant-coefficient generation. Reuses the published sfProEtaleClosureGenerators from sk-lem-sf-flat-model; the additional helper only spells out the constant rank-one subfamily from this item. X is arbitrary separated finite type over the convention datum k, not restricted to T.geometricBaseChange. The finite coefficient instance is supplied explicitly by the existing positive-level finiteness theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03dc4f5da",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Clause-by-clause match: T conventions with A=T.coefficientRing, finiteness supplied as a term not an assumption; X arbitrary separated finite type over T.datum.k (LOFT+QC+IsSeparated), not restricted to the geometric base change; D^b_ctf is the recorded finiteTorConstructible on proEtaleDerivedCategory; generators are the landed sfProEtaleClosureGenerators (stratum, j open into scheme-theoretic closure, g_*j_!L, lisse+IsFlatOnSite), equality with Mathlib triangEnvelope. The final sentence is an existential non-generation by the real constant family A_U (helper has data); the Kummer obstruction was checked as mathematically sound. Edge cases (empty X, n=1, higher levels, universes) are fine. Node differs from base only in lean and stmt_deps (+landed sk-lem-sf-flat-model, no cycle); lean.statement verbatim; docstrings carry source, blueprint tag and steps 1-15; no line over 100 chars; only sorry proofs. Report has a real Worker report and the standard post-2026-10-17 second-reading text. nt_compile --json on the snapshot: exit 0, no diagnostics, module 4.5 s. Remarks only: overlap with proEtaleThickGeneration_eq is acceptable for a separate node with an extra clause; IsFlatOnSite comes from the landed record."
  }
 }
