@@ -27,54 +27,70 @@
  ],
  "proof": [
   {
-   "text": "Write $T\\cong\\operatorname{Spec}A$ using [def-pc-scheme]. By [def-weil-affine-spectrum], the Zariski closed sets are $V(I)=\\{\\mathfrak q:I\\subseteq\\mathfrak q\\}$. Since $V(\\mathfrak p)$ contains $\\mathfrak p$ and is contained in every closed set containing it, the closure of the point $\\mathfrak p$ is $V(\\mathfrak p)$, the primes containing $\\mathfrak p$. Closedness of every point therefore says every prime is maximal: if $\\mathfrak p\\subsetneq J\\subsetneq A$, apply [lem-weil-pbc-minimal-prime-over-proper-ideal] to $J$ to obtain a prime $\\mathfrak q\\supseteq J$. Then $\\mathfrak q\\ne\\mathfrak p$ lies in $V(\\mathfrak p)$, contradicting closedness of the singleton. Apply [lem-weil-pbc-zero-dimensional-spectrum-profinite] to conclude that $|T|$ is compact Hausdorff and totally disconnected. No reducedness or finiteness is required.",
+   "text": "Write T as Spec A. The Mathlib equivalence PrimeSpectrum.isClosed_singleton_iff_isMaximal turns closedness of every singleton into maximality of every prime. Apply lem-weil-pbc-zero-dimensional-spectrum-profinite and transfer the three topological instances along T.isoSpec.hom.homeomorph.",
    "uses": [
     "def-pc-scheme",
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
-    "lem-weil-pbc-minimal-prime-over-proper-ideal"
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09AY, first sentence of proof; Algebra Tag 04MG; Algebra Tag 00E0, lemma-Zariski-topology, prime existence over a proper ideal"
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
    }
   },
   {
-   "text": "Fix a point corresponding to $\\mathfrak p\\subset A$. Every prime is minimal as well as maximal, since an inclusion between two maximal proper ideals is an equality. By clause (1) of [lem-weil-pbc-spec-domain-stalks-function-field], $\\mathcal O_{T,t}\\cong A_{\\mathfrak p}$; it is local with maximal ideal $\\mathfrak p A_{\\mathfrak p}$ by [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-minimal-prime-localization-radical] to $I=0$ to identify this maximal ideal with $\\sqrt{0}$. Every prime contains every nilpotent element (if $a^n=0$ lies in a prime, repeated primality gives $a$ in it); hence every prime of $A_{\\mathfrak p}$ contains its maximal ideal and must equal it. Its residue field is the assumed separably closed $\\kappa(t)$. Apply [lem-weil-pbc-dimension-zero-local-strictly-henselian] to this local ring. Thus all local rings of $T$ are strictly henselian.",
+   "text": "Closed singletons make the specialization order discrete. Every point is therefore maximal in that order. Mathlib ringKrullDim_stalk_eq_coheight and Order.IsMax.coheight_eq_zero show that every stalk has Krull dimension zero. Its residue field is separably closed by hypothesis, so lem-weil-pbc-dimension-zero-local-strictly-henselian makes each stalk strictly henselian.",
    "uses": [
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-minimal-prime-localization-radical",
     "lem-weil-pbc-dimension-zero-local-strictly-henselian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09AY, third sentence of proof; Algebra Tag 06RS"
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
    }
   },
   {
-   "text": "For the given abelian etale sheaf $F$, apply [lem-weil-pbc-gabber-strict-henselian-zariski-comparison] using step 2. Its direct image $\\epsilon_*F$ is the abelian Zariski sheaf assigning $F(U\\hookrightarrow T)$ to every open $U$. It gives an isomorphism $H^i(T_{\\rm Zar},\\epsilon_*F)\\cong H^i(T_{\\rm et},F)$ for every $i\\ge0$. This is comparison with the direct image, not an assertion that $F$ itself is a Zariski sheaf.",
+   "text": "For an etale map Y -> T and y over x, choose an affine open V around y. Pull Spec(O_T,x) back along V -> T and choose a point over y and the closed point. Apply lem-sbc-strict-henselian-etale-neighbourhood-section to obtain a section over Spec(O_T,x). Its composition into V corresponds to a ring map Gamma(V) -> O_T,x over Gamma(T). The map Gamma(T) -> Gamma(V) is finitely presented. Apply Mathlib RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit to the stalk colimit, with the natural transformation given by restriction from Gamma(T), to factor the map over Gamma(U) for some open neighborhood U of x, maintaining the structure-map equation. Taking Spec and composing U -> Spec Gamma(U) gives a section U -> Y. These constructions and their compatibility identities are fully proved in the private exists_section_near_of_strictlyHenselian helper.",
    "uses": [
-    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison"
+    "lem-sbc-strict-henselian-etale-neighbourhood-section"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09AY, final sentence of proof; Tag 09AX"
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
    }
   },
   {
-   "text": "By [def-sc-topological-abelian-cohomology], cohomology on the open-set site of $|T|$ is the Zariski cohomology of the scheme. Apply [lem-cbc-profinite-topological-cohomology-vanishing] to $|T|$ from step 1 and $G=\\epsilon_*F$ from step 3: for $i>0$ the source of the comparison is zero. Since that comparison is an isomorphism, its target $H^i(T_{\\rm et},F)$ is zero as well.",
+   "text": "Construct the explicit open-subscheme inclusion i:T.Opens -> T.Etale. The fully faithful forgetful functor identifies it with the inclusion supplied by lem-weil-pbc-zariski-etale-core; transfer continuity along this isomorphism. Thus restricting any etale abelian sheaf along i gives a Zariski sheaf. For an epimorphism F -> G, Mathlib Sheaf.isLocallySurjective_iff_epi' supplies etale local lifts of each section of G(T). The covering-family description of the small etale topology gives a covering member above each x. The section on an open neighborhood furnished in step 3 pulls that lift back to a Zariski local lift; naturality verifies its image is the restriction of the original section.",
    "uses": [
-    "def-sc-topological-abelian-cohomology",
-    "lem-cbc-profinite-topological-cohomology-vanishing"
+    "lem-weil-pbc-zariski-etale-core",
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09AY, second and final sentences; Cohomology Tag 0A3F"
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
+   }
+  },
+  {
+   "text": "Refine this open cover of the profinite space by a finite disjoint clopen cover using Mathlib IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover. Pull back the local lifts to these clopens. Distinct pairwise intersections are empty, on which the sheaf of groups has only its zero section. The lifts are therefore compatible and the sheaf gluing theorem gives a global lift; separatedness verifies its image. This includes the empty scheme, for which the finite cover has no members. Hence evaluation at i(top), a terminal etale object, preserves epimorphisms. The full proof is the private surjective_top_of_profinite_local_lifts helper.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
+   }
+  },
+  {
+   "text": "The constant-sheaf/evaluation adjunction constantSheafAdj and Adjunction.map_projective send the projective group ULift Z to a projective constant sheaf, because the right adjoint preserves epimorphisms by steps 4-5. Sheaf.H is Ext from this constant sheaf. Write i=n+1 and apply Mathlib Abelian.Ext.subsingleton_of_projective to obtain the required vanishing.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument"
    }
   }
  ],
@@ -82,19 +98,16 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-zero-dimensional-spectrum-profinite",
-  "lem-weil-pbc-minimal-prime-over-proper-ideal",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-minimal-prime-localization-radical",
   "lem-weil-pbc-dimension-zero-local-strictly-henselian",
-  "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
-  "def-sc-topological-abelian-cohomology",
-  "lem-cbc-profinite-topological-cohomology-vanishing"
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-zariski-etale-core",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "T4 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09AY, lemma-affine-only-closed-points, proof via 04MG, 06RS, 09AX and 0A3F"
+  "place": "Tag 09AY, lemma-affine-only-closed-points; direct exactness argument; strictly henselian etale sections from the proved source library; finite-presentation stalk descent, disjoint clopen gluing and projective Ext vanishing from Mathlib"
  },
  "mathlib_searches": [
   {
@@ -242,5 +255,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261018T062919-L-680072",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
