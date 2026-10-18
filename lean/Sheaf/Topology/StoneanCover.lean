@@ -64,8 +64,41 @@ theorem stonean_cover
       (Continuous (Ultrafilter.extend (id : T → T)) ∧
         Surjective (Ultrafilter.extend (id : T → T)) ∧
         (∀ t : T, Ultrafilter.extend (id : T → T) (pure t) = t) ∧
-        (∀ (p : Ultrafilter T) (x : T),
+      (∀ (p : Ultrafilter T) (x : T),
           (↑p : Filter T) ≤ 𝓝 x ↔ x = Ultrafilter.extend (id : T → T) p)) := by
-  sorry
+  -- Shorten the closure argument in the plan: extend a lift from principal ultrafilters,
+  -- then use density and Gleason's equivalence to obtain extremal disconnectedness.
+  have hproj : CompactT2.Projective (Ultrafilter T) := by
+    intro Y Z _ _ _ _ _ _ f g hf hg hgsur
+    obtain ⟨s, hs⟩ := hgsur.hasRightInverse
+    let t : T → Y := s ∘ f ∘ (pure : T → Ultrafilter T)
+    let h : Ultrafilter T → Y := Ultrafilter.extend t
+    have hh : Continuous h := continuous_ultrafilter_extend t
+    refine ⟨h, hh, ?_⟩
+    apply denseRange_pure.equalizer (hg.comp hh) hf
+    funext x
+    simpa [Function.comp_def, h, t] using hs (f (pure x))
+  have hED : ExtremallyDisconnected (Ultrafilter T) :=
+    (CompactT2.extremallyDisconnected_iff_projective_iff_section (Ultrafilter T)).1.mpr hproj
+  have hTD : TotallyDisconnectedSpace (Ultrafilter T) :=
+    (CompactT2.extremallyDisconnected_iff_projective_iff_section (Ultrafilter T)).2.2 hED
+  have hclopen : ∀ (E : Set T), IsClopen {p : Ultrafilter T | E ∈ p} := by
+    intro E
+    exact ⟨ultrafilter_isClosed_basic E, ultrafilter_isOpen_basic E⟩
+  have hcont : Continuous (Ultrafilter.extend (id : T → T)) :=
+    continuous_ultrafilter_extend _
+  have hpure : ∀ t : T, Ultrafilter.extend (id : T → T) (pure t) = t := by
+    intro t
+    exact ultrafilter_extend_pure _ _
+  have hsurj : Surjective (Ultrafilter.extend (id : T → T)) := by
+    intro t
+    exact ⟨pure t, hpure t⟩
+  have hlim : ∀ (p : Ultrafilter T) (x : T),
+      (↑p : Filter T) ≤ 𝓝 x ↔ x = Ultrafilter.extend (id : T → T) p := by
+    intro p x
+    simpa only [Ultrafilter.map_id, eq_comm] using
+      (ultrafilter_extend_eq_iff (f := id) (b := p) (c := x)).symm
+  exact ⟨⟨inferInstance, inferInstance, hclopen, denseRange_pure⟩,
+    ⟨hED, hTD, hproj⟩, ⟨hcont, hsurj, hpure, hlim⟩⟩
 
 end

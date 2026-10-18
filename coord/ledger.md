@@ -16493,3 +16493,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: merged deliver/B5/Sheaf.AlgebraicGeometry.EtaleReesChart (stage 3; reviewer PASS; first push; landing 20261018T144400-L-3498949 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/B7/Sheaf.CategoryTheory.ConstantRingModuleSheaves (stage 3; reviewer PASS; first push; landing 20261018T144401-L-3499465 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/C5/Sheaf.AlgebraicGeometry.FrobeniusOpenSquare (stage 3; reviewer PASS; first push; landing 20261018T144402-L-3500046 (proof); batch 20261018T144352; modules 1; new nodes 0)
+- 14:44 L: merged deliver/D8/Sheaf.Topology.StoneanCover (stage 3; reviewer PASS; first push; landing 20261018T144403-L-3500247 (proof); batch 20261018T144352; modules 1; new nodes 0)
