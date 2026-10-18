@@ -22,110 +22,53 @@
  ],
  "proof": [
   {
-   "text": "Write $r_j^{\\mathrm{et}}=j^{\\mathrm{et},-1}$ and $r_j^{\\mathrm{pro}}=j^{\\mathrm{pro},-1}$ for restriction. An open immersion is etale and etale morphisms compose, so every etale $W\\to U$ also defines an etale $W\\to X$. The etale inverse-image restriction lemma identifies $r_j^{\\mathrm{et}}G(W\\to U)$ with $G(W\\to X)$, with the same restriction maps. Its identification is natural in the underlying abelian sheaf; applying naturality to each scalar endomorphism $\\lambda_a$ ($a\\in\\Lambda$) shows that it is $\\Lambda$-linear and gives the same identification for constant-coefficient module sheaves. For the specified sheafification construction of $j_!^{\\mathrm{et}}$, the etale extension adjunction gives natural bijections $\\operatorname{Hom}(j_!^{\\mathrm{et}}F,G)\\cong\\operatorname{Hom}(F,r_j^{\\mathrm{et}}G)$. Its stated presheaf formula fixes the adjunction, including its counit, rather than choosing an unspecified left adjoint.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "03S2 (section-extension-by-zero), Definition 03S3 and following restriction and adjunction formulas"
-   }
-  },
-  {
-   "text": "Apply the current pro-etale localization lemma with $W=U$ and $A=\\Lambda$: its open-immersion example supplies the site-object hypothesis. It identifies $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$, identifies the restriction of the constant ring sheaf $\\Lambda_X$ with $\\Lambda_U$, and states $r_j^{\\mathrm{pro}}M(V\\to U)=M(V\\to X)$ with the module structure and restrictions inherited from $M$. The pro-etale extension adjunction states $j_!^{\\mathrm{pro}}\\dashv r_j^{\\mathrm{pro}}$ for precisely the functor of [def-weil-extension-by-zero]. Thus its Hom bijection is one of module morphisms. All restrictions here are localization restrictions; no geometric-stalk conservativity, quasi-compactness, or constructibility is required. Here the identification of sites is the canonical equivalence $\\iota_j$, not a literal equality of independently chosen small skeleta. The section formulas and the later pasting calculations are made on the concrete bounded-object categories, where clause (1) states an isomorphism, and are read on the chosen skeleta through this equivalence. The coefficient identification is the unique ring map equal to the identity on constant sections, as in clause (2); hence two successive identifications and the direct one agree, since both have this defining property.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-extension-by-zero-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AE (definition-extension-zero), module clause; Modules on Sites 03DH (section-localize), 03DI (lemma-extension-by-zero)"
-   }
-  },
-  {
-   "text": "For $M$ a module sheaf on $X_{\\mathrm{proet}}$, the comparison definition states $(\\nu_{X*}M)(W\\to X)=M(W\\to X)$ for etale $W\\to X$, and the same formula on arrows. Consequently for every etale $W\\to U$ the restrictions of steps 1 and 2 give\n$$ (r_j^{\\mathrm{et}}\\nu_{X*}M)(W\\to U)=M(W\\to X)=(\\nu_{U*}r_j^{\\mathrm{pro}}M)(W\\to U). $$\nBoth maps along $W'\\to W$ are the restriction map of $M$ along that same scheme morphism; both scalar operations are those of $M$. The identity on these sections therefore defines a module-sheaf natural isomorphism $\\theta_{j,M}:r_j^{\\mathrm{et}}\\nu_{X*}M\\xrightarrow{\\sim}\\nu_{U*}r_j^{\\mathrm{pro}}M$. It is natural in $M$ since both sides send a map $M\\to N$ to its component at $W\\to X$. For $V\\xrightarrow{k}U\\xrightarrow{j}X$, both the direct identification $\\theta_{jk}$ and the pasted identifications $\\theta_j,\\theta_k$ are the identity of $M(W\\to V\\to U\\to X)$; for $j=\\mathrm{id}$ the identification is the identity as well.",
-   "uses": [
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AF (lemma-jshriek-comparison), right-adjoint identification; 099R (section-comparison), restriction along the inclusion"
-   }
-  },
-  {
-   "text": "For fixed $F\\in\\operatorname{Mod}(U_{\\mathrm{et}},\\Lambda)$ put $A_jF=\\nu_X^*j_!^{\\mathrm{et}}F$ and $B_jF=j_!^{\\mathrm{pro}}\\nu_U^*F$. Using the two comparison adjunctions from the comparison definition and the extension adjunctions of steps 1 and 2, form the following bijections, natural in $F,M$:\n$$\\begin{aligned}\n\\operatorname{Hom}(A_jF,M)&\\cong\\operatorname{Hom}(j_!^{\\mathrm{et}}F,\\nu_{X*}M)\\cong\\operatorname{Hom}(F,r_j^{\\mathrm{et}}\\nu_{X*}M),\\\\\n\\operatorname{Hom}(B_jF,M)&\\cong\\operatorname{Hom}(\\nu_U^*F,r_j^{\\mathrm{pro}}M)\\cong\\operatorname{Hom}(F,\\nu_{U*}r_j^{\\mathrm{pro}}M).\n\\end{aligned}$$\nPostcomposition with $\\theta_{j,M}$ between the rightmost Hom sets, followed by the inverse of the second chain, gives a bijection $\\Psi_{F,M}:\\operatorname{Hom}(A_jF,M)\\xrightarrow{\\sim}\\operatorname{Hom}(B_jF,M)$.",
+   "text": "Use the existing canonical natural isomorphism openImmersionLowerShriekComparisonUpperStarIso. Its components are invertible by the natural-isomorphism API, and its naturality is already part of its type. Its definition is the inverse conjugate of comparisonLowerStarOpenImmersionRestrictionIso, the identity comparison on sections. No new inverse is chosen.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AF (lemma-jshriek-comparison), both functors left adjoint to the identified restriction functor"
-   }
-  },
-  {
-   "text": "Construct $\\beta_F=\\Psi_{F,A_jF}(\\mathrm{id}_{A_jF}):B_jF\\to A_jF$ and $\\alpha_F=\\Psi_{F,B_jF}^{-1}(\\mathrm{id}_{B_jF}):A_jF\\to B_jF$. Naturality of $\\Psi$ in its target gives $\\Psi_{F,M}(h)=h\\circ\\beta_F$ for every $h:A_jF\\to M$; hence $\\alpha_F\\beta_F=\\mathrm{id}_{B_jF}$. Naturality of $\\Psi^{-1}$ under postcomposition by $q:B_jF\\to M$ gives $\\Psi^{-1}_{F,M}(q)=q\\circ\\Psi^{-1}_{F,B_jF}(\\mathrm{id}_{B_jF})=q\\circ\\alpha_F$. Taking $q=\\beta_F$ and using $\\Psi^{-1}_{F,A_jF}(\\beta_F)=\\mathrm{id}_{A_jF}$ gives $\\beta_F\\alpha_F=\\mathrm{id}_{A_jF}$. Thus $\\alpha_F$ is an isomorphism. This specifies the canonical comparison in the displayed direction: it is the adjoint comparison corresponding to the sectionwise identity $\\theta_j^{-1}$, equivalently the inverse of the mate $\\beta_F$ of $\\theta_j$. In particular its characterization is $\\Psi_{F,M}(h)\\alpha_F=h$ for every $M,h$; it fixes the map and not just existence of some isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AF (lemma-jshriek-comparison), uniqueness of the adjoint, expanded using the natural Hom bijections"
-   }
-  },
-  {
-   "text": "For $f:F\\to F'$, naturality in $F$ of $\\Psi$ gives $\\Psi_{F,A_jF'}(A_jf)=\\beta_{F'}B_jf$. Naturality in $M$ gives the left side $A_jf\\,\\beta_F$. Therefore $A_jf\\,\\beta_F=\\beta_{F'}B_jf$; multiplication by the inverses gives $B_jf\\,\\alpha_F=\\alpha_{F'}A_jf$. This is the asserted naturality of the comparison in $F$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AF (lemma-jshriek-comparison), natural adjoint identification, expanded"
-   }
-  },
-  {
-   "text": "For $V\\xrightarrow{k}U\\xrightarrow{j}X$, let $c^{\\mathrm{et}}_{j,k}:j_!^{\\mathrm{et}}k_!^{\\mathrm{et}}\\xrightarrow{\\sim}(jk)_!^{\\mathrm{et}}$ be the canonical etale composition comparison of the extension-composition lemma. On the pro-etale site, composing the two extension Hom bijections gives\n$$\\operatorname{Hom}(j_!^{\\mathrm{pro}}k_!^{\\mathrm{pro}}H,M)\\cong\\operatorname{Hom}(H,r_k^{\\mathrm{pro}}r_j^{\\mathrm{pro}}M)=\\operatorname{Hom}(H,r_{jk}^{\\mathrm{pro}}M).$$\nThe last equality is the sectionwise identity of relocalization on the concrete bounded-object categories, including the coefficient identifications of step 2; on chosen small skeleta it denotes the corresponding natural identification. Two successive coefficient maps and the direct map agree because each is the unique ring map that is the identity on constant sections. Comparing this bijection with the Hom bijection for $(jk)_!^{\\mathrm{pro}}$ and applying the explicit construction and inverse calculation of step 5 gives $c^{\\mathrm{pro}}_{j,k}:j_!^{\\mathrm{pro}}k_!^{\\mathrm{pro}}\\xrightarrow{\\sim}(jk)_!^{\\mathrm{pro}}$. The etale composition comparison is fixed by the identical construction with the etale extension Hom bijections and the sectionwise equality $r_k^{\\mathrm{et}}r_j^{\\mathrm{et}}=r_{jk}^{\\mathrm{et}}$ from step 1. Thus on both sites precomposition by $c_{j,k}$ converts the composite-immersion transpose into the two successive transposes. These are the canonical adjunction composition maps: their transposes are identities of the iterated restriction functors. For the identity immersion the same prescription gives the unit identification; for three immersions either parenthesization transposes to the same identity on threefold restriction, so injectivity of the Hom bijection makes them equal.",
-   "uses": [
-    "lem-cbc-extension-zero-composition",
-    "lem-weil-extension-by-zero-adjunction",
-    "def-pur-localized-ringed-site",
     "lem-weil-pbc-extension-by-zero-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AE (definition-extension-zero), localized module adjunction; Modules on Sites 03DH; Sites 03EH (lemma-relocalize)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $F$ on $V_{\\mathrm{et}}$, write $E_j$ and $P_j$ for the etale and pro-etale extension Hom bijections and $N_T$ for the comparison Hom bijection. The notation includes the source and target objects appropriate to each application. Step 4 says\n$$\\Psi_j=P_j^{-1}N_U^{-1}(\\theta_j\\circ -)E_jN_X.$$\nFirst use the composite left adjoints, before applying $c^{\\mathrm{et}}$ and $c^{\\mathrm{pro}}$. For $h:\\nu_X^*j_!^{\\mathrm{et}}k_!^{\\mathrm{et}}F\\to M$, successively moving $\\nu^*$ past $j_!$ and $k_!$ gives the Hom map\n$$Q(h)=P_j^{-1}\\bigl(\\Psi_k(P_j(\\Psi_j(h)))\\bigr).$$\nSubstitution cancels the adjacent $N_U$ and $N_U^{-1}$ and gives\n$$Q(h)=P_j^{-1}P_k^{-1}N_V^{-1}\\bigl(\\theta_{k,r_j^{\\mathrm{pro}}M}\\circ E_k(\\theta_{j,M}\\circ E_jN_X(h))\\bigr).$$\nNaturality of $E_k$ in its target says $E_k(\\theta_{j,M}\\circ t)=r_k^{\\mathrm{et}}(\\theta_{j,M})\\circ E_k(t)$. Step 3 gives $\\theta_{k,r_j^{\\mathrm{pro}}M}\\circ r_k^{\\mathrm{et}}(\\theta_{j,M})=\\theta_{jk,M}$. Hence\n$$Q(h)=P_j^{-1}P_k^{-1}N_V^{-1}\\bigl(\\theta_{jk,M}\\circ E_kE_jN_X(h)\\bigr),$$\nwhich is precisely $\\Psi_{jk}$ after the composition identifications of step 7. On the other hand step 5 gives $\\Psi_j(h)=h\\circ\\beta_{j,k_!^{\\mathrm{et}}F}$ and $\\Psi_k(q)=q\\circ\\beta_{k,F}$; naturality of $P_j$ in its source then gives\n$$Q(h)=h\\circ\\beta_{j,k_!^{\\mathrm{et}}F}\\circ j_!^{\\mathrm{pro}}(\\beta_{k,F}).$$\nEvaluating these equal Hom maps at the identity, and inserting the composition maps, proves\n$$\\beta_{jk,F}=\\nu_X^*(c^{\\mathrm{et}}_{j,k,F})\\circ\\beta_{j,k_!^{\\mathrm{et}}F}\\circ j_!^{\\mathrm{pro}}(\\beta_{k,F})\\circ(c^{\\mathrm{pro}}_{j,k,\\nu_V^*F})^{-1}.$$\nInverting this equation proves the required composition law\n$$\\alpha_{jk,F}=c^{\\mathrm{pro}}_{j,k,\\nu_V^*F}\\circ j_!^{\\mathrm{pro}}(\\alpha_{k,F})\\circ\\alpha_{j,k_!^{\\mathrm{et}}F}\\circ\\nu_X^*((c^{\\mathrm{et}}_{j,k,F})^{-1}).$$\nFor an identity immersion, its extension adjunction identifies $E_j$ and $P_j$ with identity Hom maps, and step 3 identifies $\\theta_j$ with the identity. Thus $\\Psi_j=N_X^{-1}N_X$ and $\\alpha_j$ is the identity under the unit identifications. All calculations use only naturality and inverseness of the established Hom bijections.",
+   "text": "Define the literal composition comparisons of restrictions on both sites using Over.mapComp and sheafPushforwardContinuousComp. Compute their conjugates across restriction/pushforward adjunctions on sections: both give lowerStarComp. Injectivity of conjugateEquiv then identifies upperStarComp followed by the two restriction identifications with the direct restriction identification followed by restriction composition. The etale calculation reuses Etale.upperStarComp_hom_comp_upperStarIsoLocalizationRestriction; the pro-etale calculation is proved by pullback.hom_ext. The identity version uses Over.mapId and pullbackId and is proved by the same conjugation argument.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove elementary transport formulas for conjugation and composite adjunctions by their units and naturality. They show that the exact public extension-composition definitions, Etale.openImmersionLowerShriekComp and proEtaleOpenExtensionComp, transpose to the inverses of the literal restriction-composition comparisons from the preceding step. Likewise the exact leftAdjointIdIso maps transpose to the inverses of identity restriction.",
+   "uses": [
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply adjunctionSquareComposition to the three comparison adjunctions and the etale and pro-etale extension adjunctions. Each comparison mate identity is the defining apply_symm_apply equality. For its right-adjoint pasting hypothesis evaluate on a pro-etale sheaf and an etale site object. The two comparison maps are identities; the remaining two Over.mapComp arrows cancel, since both have identity underlying scheme morphism. This proves the pasted equality of natural isomorphisms.",
+   "uses": [
+    "lem-pc-adjunction-square-composition",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the inverse of the pasted equality at F and cancel the two extension-composition isomorphisms; a generic categorical cancellation lemma avoids unfolding the extension constructions. For identities, conjugate both routes, use the unitors and the identity-restriction mate computations, and evaluate the resulting equality at F. All section calculations and adjunction identities apply to empty schemes and zero coefficient rings without case restrictions.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "09AF (lemma-jshriek-comparison), canonical adjoint identification; identity and pasting expanded by their Hom transposes"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-extension-by-zero-adjunction",
   "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-cbc-extension-zero-composition",
-  "def-pur-localized-ringed-site"
+  "lem-pc-adjunction-square-composition"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "09AF (lemma-jshriek-comparison), with its localization adjunction 09AE / Modules on Sites 03DI; naturality and pasting expanded by the Hom bijections"
+  "place": "Tag 09AF, canonical adjoint comparison; composition and identity expanded using the published adjunctionSquareComposition theorem and Mathlib conjugation identities. Q4, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -294,5 +237,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The existing upstream natural isomorphism gives the canonical comparison and naturality; the theorem states invertibility, composition pasting and identity normalization. proEtaleOpenExtensionComp is the canonical adjunction composition isomorphism, constructed from the existing inverse-image composition. The pro-etale extension dependency record is repaired to the fixed-coefficient presentation matching both the site-comparison and etale-extension interfaces."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T062855-L-670922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
