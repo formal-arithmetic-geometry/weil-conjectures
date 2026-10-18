@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
 # Composition and base change for the compact-support direct image of Weil complexes
@@ -15,17 +15,11 @@ Two of the compatibilities of blueprint `prop-weil-operations` ("composition, ba
 projection, purity and duality isomorphisms are morphisms of Weil complexes"), for the direct
 image with compact support `Rf₀!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), and the Grothendieck–Lefschetz trace
-formula for Weil complexes (blueprint `thm-trf-grothendieck-lefschetz-qbar`), as inputs of the
-Fourier trace formula.
-
-Weil complexes are the objects of the derived category of pro-étale Weil sheaves, the Frobenius
-being built into the coefficient category, so every isomorphism of functors of Weil complexes is
-automatically compatible with the Weil structures. The composition and base change isomorphisms
-are therefore clauses 3 and 4 of blueprint `prop-functor-package` (whose statement includes the
-equivariance of its comparisons), rendered as
-`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso` and
-`AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`. The trace formula
-belongs to another blueprint section and is recorded here without proof.
+formula for Weil complexes (blueprint `thm-trf-grothendieck-lefschetz-qbar`). They belong to
+other blueprint sections and are recorded here as inputs of the Fourier trace formula. The two
+compatibilities of `Rf₀!` are deduced from their statements in
+`WeilConjectures.WeilSheaf.LowerShriekFunctoriality` (clauses 3 and 4 of blueprint
+`prop-functor-package`); the trace formula is stated without proof.
 
 ## Main statements
 

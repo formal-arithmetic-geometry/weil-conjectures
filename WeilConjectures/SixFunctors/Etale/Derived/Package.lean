@@ -114,7 +114,21 @@ The eight clauses of the blueprint, one group of fields each:
 7. **Relative product.** The four Künneth comparisons over `k` are isomorphisms.
 8. **Stability.** `Lf^*`, `- ⊗ᴸ -`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` carry `Dctf` into
    `Dctf`.
-See the module docstring for the clauses that are deliberately not carried here. -/
+See the module docstring for the clauses that are deliberately not carried here.
+
+Blueprint `def-sf-datum`: Six-functor datum, axiomatized
+
+The axioms (A1)–(A4) and (A6) of a six-functor datum, at a finite coefficient stage
+`Λ = A_{E,n}` on the étale sites: the fields of this structure are the adjunctions (A1), the base
+change isomorphisms (A2), the projection formula (A3), the composition law and proper
+coincidence (A4) and Verdier biduality (A6); the compatibilities (A5) with change of coefficients
+are not carried (see the module docstring).
+
+Blueprint `rem-sf-summary`: What a six-functor formalism is
+
+The six-functor formalism summarised by the remark is the conjunction of the clauses of this
+structure: the two adjoint pairs, base change, the projection formula, and proper coincidence
+together with the orientation of a smooth morphism. -/
 structure SixOperationsPackage : Prop where
   /-- (1) The adjunction `Lf^* ⊣ Rf_*`. -/
   upperStarLowerStarAdjunction :
