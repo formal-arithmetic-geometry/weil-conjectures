@@ -246,10 +246,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bfecfad67",
-  "group": "Q46",
-  "result": "fix",
-  "note": "Head bfecfad67760 repairs the landing tool's RETURN of 0e2341929dd3 (word-for-word duplicate statements): total_isIso is removed and totalIso uses the published tensorPullbackTotal_isIso; existsUnique and unit now bind their full context explicitly (independent uC/vC/uD/vD/u, fresh-namespace structure), which is genuinely more general than the published shared-universe versions. import_prune_check.py exits 0 on all 5 modules. nt_compile --json of all 5 modules: no errors or warnings (data module 36.3 s, arrows 16.6 s, item 2.8 s). All lean.statement fields match their file signatures and all declaration inventories match their files. The clause-by-clause match is unchanged and confirmed: RingedPullback pinned to changeOfRings, comparison = totalIso.symm with unique k, IsCoherent (naturality, associator, Koszul braiding, both unitors), the composition equation via the conjugate normalized on generators, and the coefficient/transition equations with no inverse; no added hypotheses; edge cases covered. FIX (H3/H8, unrepaired from 0e2341929dd3, item module byte-identical): the primary declaration cochainPullbackTensorCoherenceOfUniverses is only the ULift-lifted-ring special case, and its docstring claims an original-size transport that the statement lacks. fixes/ has the complete item module with that docstring corrected, and lean-record.json making cochainPullbackTensorCoherence primary with its verbatim statement; it compiles cleanly with its siblings."
+  "reviewer": "NT-stage2-cc-c68c4a6cd",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the item node, all 6 statement dependencies and the RingedPullback/Comparison/IsCoherent/CompositePresentation/IsCompatibleWithComposition/CoefficientSquare/changed/kappa/tau/restrictionTensor/IsCompatibleWithCoefficients declarations. Every node clause matches the Lean: comparison iso with its normalized inverse, naturality, associator, Koszul braiding, both unitors, composition square over arbitrary third sites, coefficient square and S-linear transition square with no inverse. No extra hypotheses and independent site/coefficient universes. Edge cases (zero complexes, negative degrees, zero ring, identity maps) covered. Delivery content equals the version already landed from Q46 apart from lean.by=NA and one true docstring sentence; dependency records are identical to the landed ones. Gates hold: no hollow definitions, sorry only in the two theorem proofs, source and blueprint docstrings present, lean.statement verbatim, declaration inventory exact, worker report and Second reading by NA present. nt_compile --json of the snapshot module: exit 0, no errors or warnings (item 2.7 s; dependencies 34.8/16.9/3.6/1.5 s)."
  },
  "lean": {
   "module": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
@@ -262,7 +262,7 @@
   "file": "lean/Sheaf/SecSmoothPurity/CochainPullbackTensorCoherence.lean",
   "statement": "theorem cochainPullbackTensorCoherence (f : RingedPullback R S) (k : Comparison f) : HasTensorCoherence.{w, uC, vC, uD, vD, uE, vE} f k",
   "branch": "newtargets-dag",
-  "by": "Q46",
+  "by": "NA",
   "date": "2026-10-18",
   "existing": false,
   "note": "Returned-delivery repair: usual cochain monoidal maps, actual composable ringed morphisms, normalized coefficient maps and both chain-map equations. The primary declaration is the common theorem for arbitrary ring sheaves R, S with modules in the rings' universe w (the universe of the sheaf monoidal structure) and independent site object/Hom universes. cochainPullbackTensorCoherenceOfUniverses is its specialization to the ULift coefficient rings of the universe-transport node. The node statement is unchanged.",
