@@ -7,8 +7,6 @@ module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.SixFunctors.FiniteDualizing
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
