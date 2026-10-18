@@ -8883,6 +8883,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComp
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
