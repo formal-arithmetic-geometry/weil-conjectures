@@ -811,6 +811,89 @@ noncomputable def proEtaleRingDirectImageDerivedUnit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem derivedDirectImageComparison_unique
+    {d d' : proEtaleRingDerivedDirectImage f SV SU cS ⋙
+        (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
+      (proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+        proEtaleRingDerivedDirectImage f RV RU cR}
+    (hd : ∀ K : CochainComplex (proEtaleRingModules U SU) ℤ,
+      (proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+          (proEtaleRingDirectImageDerivedUnit f SV SU cS K) ≫
+        d.hom.app (DerivedCategory.Q.obj K) ≫
+        (proEtaleRingDerivedDirectImage f RV RU cR).map
+          ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K) =
+      (proEtaleRingRestrictScalars aV).mapDerivedCategoryFactors.hom.app
+          (((proEtaleRingModuleDirectImage f SV SU cS).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex
+            (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm)
+              (.up ℤ)).hom.app K) ≫
+        proEtaleRingDirectImageDerivedUnit f RV RU cR
+          (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K))
+    (hd' : ∀ K : CochainComplex (proEtaleRingModules U SU) ℤ,
+      (proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+          (proEtaleRingDirectImageDerivedUnit f SV SU cS K) ≫
+        d'.hom.app (DerivedCategory.Q.obj K) ≫
+        (proEtaleRingDerivedDirectImage f RV RU cR).map
+          ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K) =
+      (proEtaleRingRestrictScalars aV).mapDerivedCategoryFactors.hom.app
+          (((proEtaleRingModuleDirectImage f SV SU cS).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex
+            (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm)
+              (.up ℤ)).hom.app K) ≫
+        proEtaleRingDirectImageDerivedUnit f RV RU cR
+          (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K)) :
+    d = d' := by
+  apply Iso.ext
+  apply derived_comp_ext (proEtaleRingModuleDirectImage f SV SU cS)
+    (proEtaleRingRestrictScalars aV)
+    ((proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+      proEtaleRingDerivedDirectImage f RV RU cR)
+  intro K
+  dsimp only [chainDerivedUnit]
+  have h := hd K
+  have h' := hd' K
+  dsimp only [proEtaleRingDirectImageDerivedUnit, chainDerivedUnit] at h h'
+  apply (cancel_mono ((proEtaleRingDerivedDirectImage f RV RU cR).map
+    ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K))).mp
+  simpa only [Category.assoc] using h.trans h'.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Existence of the normalized derived direct-image comparison.
+Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
+Proof: apply the general ringed-topos derived direct-image composition theorem to the two
+factorizations of the compatible coefficient-change morphism. Identify the exact restriction
+direct image with termwise restriction and identify the two underived composite module direct
+images by the sectionwise identity isomorphism. Transport the resulting composition comparison
+across the canonical right-derived-functor uniqueness isomorphisms. The defining unit equation
+of the general theorem becomes exactly the displayed equation after expanding the canonical
+quotient identifications in `proEtaleRingDirectImageDerivedUnit`. The K-injective resolution
+clause supplies invertibility on representatives and hence a natural isomorphism. -/
+theorem proEtaleRingRestrictionDerivedDirectImage_exists :
+    ∃ d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
+        (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
+      (proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+        proEtaleRingDerivedDirectImage f RV RU cR,
+      ∀ K : CochainComplex (proEtaleRingModules U SU) ℤ,
+        (proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+            (proEtaleRingDirectImageDerivedUnit f SV SU cS K) ≫
+          d.hom.app (DerivedCategory.Q.obj K) ≫
+          (proEtaleRingDerivedDirectImage f RV RU cR).map
+            ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K) =
+        (proEtaleRingRestrictScalars aV).mapDerivedCategoryFactors.hom.app
+            (((proEtaleRingModuleDirectImage f SV SU cS).mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex
+              (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm)
+                (.up ℤ)).hom.app K) ≫
+          proEtaleRingDirectImageDerivedUnit f RV RU cR
+            (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K) := by
+  sorry
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The direct-image comparison is the unique comparison compatible with the derived
 units and the identity-on-sections underived comparison.
 Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
@@ -838,9 +921,14 @@ theorem proEtaleRingRestrictionDerivedDirectImage_existsUnique :
             ((NatIso.mapHomologicalComplex
               (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm)
                 (.up ℤ)).hom.app K) ≫
-          proEtaleRingDirectImageDerivedUnit f RV RU cR
+      proEtaleRingDirectImageDerivedUnit f RV RU cR
             (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  obtain ⟨d, hd⟩ := proEtaleRingRestrictionDerivedDirectImage_exists
+    f RV SV RU SU aV aU cR cS comm
+  refine ⟨d, hd, ?_⟩
+  intro d' hd'
+  exact (derivedDirectImageComparison_unique f RV SV RU SU aV aU cR cS comm
+    (d := d) (d' := d') hd hd').symm
 
 /-- The canonical derived direct-image comparison `d`, determined by its unit normalization.
 Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/

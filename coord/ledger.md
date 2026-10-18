@@ -16410,3 +16410,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:31 L: merged deliver/A3/Sheaf.Paper.ProjectionFormulaTotalization (stage 3; reviewer PASS; first push; landing 20261018T103141-L-4174414 (interface); batch 20261018T103138; modules 3; new nodes 2)
 - 10:31 L: merged deliver/C1/Sheaf.Paper.LocalHomTowerCriterion (stage 3; reviewer PASS; after a return; landing 20261018T103142-L-4174555 (interface); batch 20261018T103138; modules 3; new nodes 1)
 - 10:31 L: merged deliver/D3/Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback (stage 3; reviewer PASS; first push; landing 20261018T103142-L-4174771 (interface); batch 20261018T103138; modules 3; new nodes 2)
+- 10:31 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction (stage 3; reviewer PASS; first push; landing 20261018T103143-L-4174927 (proof); batch 20261018T103138; modules 1; new nodes 1)

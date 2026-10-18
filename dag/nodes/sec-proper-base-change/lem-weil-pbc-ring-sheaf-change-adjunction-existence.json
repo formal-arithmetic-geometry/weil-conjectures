@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-ring-sheaf-change-adjunction-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+   "place": "proof step 4: derived direct-image composition comparison and its unit normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of the normalized derived direct-image comparison",
+ "statement": "For compatible coefficient changes on the pro-etale sites, there exists a natural isomorphism between the derived direct image after restriction along the source coefficient map and restriction along the target coefficient map after derived direct image, satisfying the displayed unit-normalization equation of the parent node for every cochain complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, comparison and normalization on K-injective resolutions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the general ringed-topos derived direct-image composition theorem to the two factorizations of the compatible coefficient-change morphism. Identify the exact restriction direct image with termwise restriction and identify the two underived composite module direct images by the sectionwise identity isomorphism. Transport the resulting composition comparison across the canonical right-derived-functor uniqueness isomorphisms. The defining unit equation of the general theorem becomes exactly the displayed equation after expanding the canonical quotient identifications in proEtaleRingDirectImageDerivedUnit. The K-injective resolution clause supplies invertibility of the comparison on representatives and hence a natural isomorphism on the derived categories.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E specialized to the compatible coefficient square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image comparison for compatible ringed-topos coefficient changes",
+   "results": "No direct specialized declaration; generic ringedToposDerivedPushforwardComposition is the applicable theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUnique|rightDerivedFunctorCompMapDerivedCategoryIso",
+   "results": "Mathlib and WeilConjectures expose right-derived uniqueness and exact-composition comparison APIs; no direct coefficient-specialized theorem was found.",
+   "date": "2026-10-18",
+   "verdict": "used the generic right-derived extensionality route; existence remains split"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedUnique rightDerivedFunctorCompMapDerivedCategoryIso",
+   "results": "generic derived-functor uniqueness and composition declarations",
+   "date": "2026-10-18",
+   "verdict": "no direct ring-sheaf coefficient comparison match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image composition ringed topoi",
+   "results": "CategoryTheory.ringedToposDerivedPushforwardComposition",
+   "date": "2026-10-18",
+   "verdict": "generic composition theorem matches the planned existence route but requires concrete ringed-topos instantiation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction",
+  "by": "worker",
+  "date": "2026-10-18",
+  "group": "E2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingSheafChangeAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingRestrictionDerivedDirectImage_exists",
+  "statement": "theorem proEtaleRingRestrictionDerivedDirectImage_exists : ∃ d : proEtaleRingDerivedDirectImage f SV SU cS ⋙ (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅ (proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙ proEtaleRingDerivedDirectImage f RV RU cR, ∀ K : CochainComplex (proEtaleRingModules U SU) ℤ, (proEtaleRingRestrictScalars aV).mapDerivedCategory.map (proEtaleRingDirectImageDerivedUnit f SV SU cS K) ≫ d.hom.app (DerivedCategory.Q.obj K) ≫ (proEtaleRingDerivedDirectImage f RV RU cR).map ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K) = (proEtaleRingRestrictScalars aV).mapDerivedCategoryFactors.hom.app (((proEtaleRingModuleDirectImage f SV SU cS).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm) (.up ℤ)).hom.app K) ≫ proEtaleRingDirectImageDerivedUnit f RV RU cR (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261018T103143-L-4174927",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261018T103143-L-4174927",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
