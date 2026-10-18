@@ -2,7 +2,7 @@
  "id": "lem-per-finite-closed-support-exchange",
  "kind": "statement",
  "title": "Closed extraordinary restriction commutes with finite direct image",
- "statement": "Let $A$ be a finite commutative ring. Let $p:X'\\to X$ be a finite morphism of Noetherian schemes and $i:Y\\hookrightarrow X$ a closed immersion [def-weil-finite-integral-morphism, def-weil-closed-immersion]. Form $Y'=Y\\times_X X'$ with projections $i':Y'\\hookrightarrow X'$ and $p':Y'\\to Y$, and put $q=pi'=ip'$ [def-pc-fibre-product]. On ordinary small-etale derived categories [def-weil-pbc-derived-categories], use the bounded-below right adjoints $i^!,i'^!$ to exact closed direct image, and exact finite direct images $p_*,p'_*,q_*$ [def-amb-etale-compact-support]. There is a natural isomorphism\n$$i^!p_*M\\cong p'_*i'^!M\\qquad(M\\in D^+(X'_{\\mathrm{et}},A)).$$\nUnder $i^!i_*\\cong\\mathrm{id}$ and this isomorphism, the map\n$$i^!\\bigl(p_*i'_*i'^!M\\longrightarrow p_*M\\bigr)$$\nobtained from the counit for $i'$ is the identity of $p'_*i'^!M$. In particular it is an isomorphism. The exchange uses the canonical pullback/closed-direct-image base-change map and the ordinary adjunctions; the displayed normalization fixes the counit map, rather than merely asserting that its source and target are isomorphic.",
+ "statement": "Let $A$ be a finite commutative ring. Let $p:X'\\to X$ be a finite morphism of Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings) and $i:Y\\hookrightarrow X$ a closed immersion [def-weil-finite-integral-morphism, def-weil-closed-immersion]. Form $Y'=Y\\times_X X'$ with projections $i':Y'\\hookrightarrow X'$ and $p':Y'\\to Y$, and put $q=pi'=ip'$ [def-pc-fibre-product]. On ordinary small-etale derived categories [def-weil-pbc-derived-categories], use the bounded-below right adjoints $i^!,i'^!$ to exact closed direct image, and exact finite direct images $p_*,p'_*,q_*$ [def-weil-pbc-direct-image, lem-exc-closed-ambient]. There is a natural isomorphism\n$$i^!p_*M\\cong p'_*i'^!M\\qquad(M\\in D^+(X'_{\\mathrm{et}},A)).$$\nUnder $i^!i_*\\cong\\mathrm{id}$ and this isomorphism, the map\n$$i^!\\bigl(p_*i'_*i'^!M\\longrightarrow p_*M\\bigr)$$\nobtained from the counit for $i'$ is the identity of $p'_*i'^!M$. In particular it is an isomorphism. The exchange uses the canonical pullback/closed-direct-image base-change map and the ordinary adjunctions; the displayed normalization fixes the counit map, rather than merely asserting that its source and target are isomorphic.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}"
@@ -12,11 +12,133 @@
   "def-weil-closed-immersion",
   "def-pc-fibre-product",
   "def-weil-pbc-derived-categories",
-  "def-amb-etale-compact-support"
+  "def-weil-pbc-direct-image",
+  "lem-exc-closed-ambient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base change $i'$ is closed by [lem-weil-pbc-closed-immersion-base-change]. Finiteness of $p'$ can also be checked directly: over $\\operatorname{Spec}R\\subset X$ write $X'=\\operatorname{Spec}B$ with $B$ generated over $R$ by $b_1,\\ldots,b_r$, and $Y=\\operatorname{Spec}(R/I)$. Then $Y'=\\operatorname{Spec}(B/IB)$ and the images of the same $b_a$ generate over $R/I$. This is precisely [def-weil-finite-integral-morphism]. The maps $i,i'$ are finite by [lem-weil-pbc-closed-immersion-finite], and $q=pi'=ip'$ is finite by [lem-weil-pbc-finite-composition]. The direct-image formula of [def-weil-pbc-direct-image], evaluated on an etale $V\\to X$, identifies both $p_*i'_*N$ and $i_*p'_*N$ with $N(V\\times_XY')$. Denote this canonical identification by $c_N:i_*p'_*N\\xrightarrow{\\sim}p_*i'_*N$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tags 01QR, 035C, 01WK; finite base change on affine charts; direct image evaluated on fibre products"
+   }
+  },
+  {
+   "text": "By [lemma-weil-pbc-finite-direct-image-exact] the direct images of all five finite maps are exact on abelian sheaves. This gives exactness on $A$-module sheaves as well: by [def-weil-sheaf-of-modules-category] kernels are computed sectionwise and cokernels by sheafifying the sectionwise cokernels, so forgetting the action preserves and detects exactness. The direct-image formula [def-weil-pbc-direct-image] commutes with this forgetting. Likewise inverse image is exact by [prop-weil-pbc-inverse-image-exact], with the same conclusion for the induced constant-coefficient module action. The adjunction on module sheaves, with the actual abelian unit and counit, is [lem-weil-pbc-inverse-image-module-adjunction]. Here the pulled-back coefficient ring is the constant $A$, as in [def-weil-pbc-inverse-image]. Thus [def-weil-exact-derived-adjunction] gives $p^*\\dashv p_*$, $p'^*\\dashv p'_*$ and $i^*\\dashv i_*$, $i'^*\\dashv i'_*$ on the derived categories, with termwise units and counits. By [lem-weil-pbc-exact-functor-derived-functor], exact direct images compute their right derived functors on $D^+$.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "def-weil-pbc-inverse-image",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Tags 03QP (proposition-finite-higher-direct-image-zero), 03DA (lemma-abelian), 015F (lemma-right-derived-exact-functor); exact adjunction localized termwise"
+   }
+  },
+  {
+   "text": "Use the right adjoints $i_*\\dashv i^!$ and $i'_*\\dashv i'^!$ supplied by [lem-exc-closed-ambient], denoting their units by $u,u'$ and counits by $e,e'$. They restrict to $D^+$. Indeed exactness makes $i_*$ and $i'_*$ preserve the standard classes $D^{\\le n}$; if $M\\in D^{\\ge n}$ then $\\operatorname{Hom}(T,i^!M)=\\operatorname{Hom}(i_*T,M)=0$ for $T\\in D^{\\le n-1}$, so the standard t-structure [def-sbc-standard-tstructure-derived-category] gives $i^!M\\in D^{\\ge n}$. The same argument applies to $i'^!$. This uses only the ambient closed adjunction, with no constructibility, invertibility of the coefficient order, or exceptional adjoint for $p$.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38"
+   }
+  },
+  {
+   "text": "The closed ordinary counit $i^*i_*N\\to N$ is invertible on sheaves by [prop-openclosed-lowerstar-fully-faithful]. It remains so for module sheaves: it is $A$-linear by [lem-weil-pbc-inverse-image-module-adjunction], and the inverse of a bijective linear map is linear. By [def-weil-exact-derived-adjunction] it remains invertible termwise on derived categories. Now [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful] applied to $i^*\\dashv i_*$ shows that the derived $i_*$ is fully faithful. Consequently the unit $u_N:N\\to i^!i_*N$ is invertible: under $i_*\\dashv i^!$, the map $\\operatorname{Hom}(T,N)\\to\\operatorname{Hom}(T,i^!i_*N)$ induced by $u_N$ is exactly the bijection $\\operatorname{Hom}(T,N)\\to\\operatorname{Hom}(i_*T,i_*N)$. Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] to the opposite of $D^+(Y_{\\mathrm{et}},A)$. We use $u^{-1}$ for the normalization $i^!i_*\\cong1$.",
+   "uses": [
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-finite-exchange] to the square with finite direct-image map $i$ and base-change map $p$. It gives the canonical isomorphism $\\theta_T:p^*i_*T\\xrightarrow{\\sim}i'_*p'^*T$. The map is $A$-linear: its defining restriction and adjunction maps in [def-weil-pbc-underived-exchange] are module-linear by [lem-weil-pbc-inverse-image-module-adjunction]; an invertible linear map of abelian sheaves has linear inverse. Exactness from Step 2 allows the same termwise map on $D^+$. For $T\\in D^+(Y_{\\mathrm{et}},A)$ and $M\\in D^+(X'_{\\mathrm{et}},A)$ the ordinary and closed adjunctions therefore give natural bijections\n$$\\operatorname{Hom}(T,p'_*i'^!M)\\cong\\operatorname{Hom}(p'^*T,i'^!M)\\cong\\operatorname{Hom}(i'_*p'^*T,M)\\xrightarrow{\\circ\\theta_T}\\operatorname{Hom}(p^*i_*T,M)\\cong\\operatorname{Hom}(i_*T,p_*M)\\cong\\operatorname{Hom}(T,i^!p_*M).$$\nBy [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] applied to the opposite category, these bijections are postcomposition with a unique isomorphism $\\delta_M:p'_*i'^!M\\xrightarrow{\\sim}i^!p_*M$. Naturality of every bijection also gives naturality in $M$; the isomorphism requested in the statement is $\\delta_M^{-1}$.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38"
+   }
+  },
+  {
+   "text": "We check the actual arrow. Write $a:p^*p_*\\to1$ and $a':p'^*p'_*\\to1$ for the ordinary counits. The definition of exchange in [def-weil-pbc-underived-exchange] gives\n$$i'_*(a'_N)\\circ\\theta_{p'_*N}=a_{i'_*N}\\circ p^*(c_N)$$\nunder the pullback-composition identifications. To verify this equality directly, transpose under $p^*\\dashv p_*$ and evaluate on an etale $V\\to X$: both maps restrict a section of $N$ on $V\\times_XY'$ along the same projection, so give the identity of that section in $p_*i'_*N$. This uses the section formula of [def-weil-pbc-direct-image] and the linear adjunction of [lem-weil-pbc-inverse-image-module-adjunction]. Put $N=i'^!M$. Tracing $1_{p'_*N}$ through the Hom bijections of Step 5 gives, on $X'$, the map\n$$e'_M\\circ i'_*(a'_N)\\circ\\theta_{p'_*N}=e'_M\\circ a_{i'_*N}\\circ p^*(c_N).$$\nNaturality of $a$ changes the right side to $a_M\\circ p^*(p_*e'_M\\circ c_N)$. Its transpose under $p^*\\dashv p_*$ is therefore $E_M=p_*e'_M\\circ c_N:i_*p'_*N\\to p_*M$, by the triangle identity. Its final transpose under $i_*\\dashv i^!$ is\n$$\\delta_M=i^!(E_M)\\circ u_{p'_*N}.$$\nThus $\\delta$ is the comparison defined by the canonical exchange and ordinary adjunctions, with the prescribed closed counit, rather than an unspecified isomorphism.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38"
+   }
+  },
+  {
+   "text": "Under $c_N$ the map in the statement is $i^!(E_M)$. By Step 6,\n$$\\delta_M^{-1}\\circ i^!(E_M)\\circ u_{p'_*i'^!M}=1_{p'_*i'^!M}.$$\nStep 4 identifies its source $i^!i_*p'_*i'^!M$ with $p'_*i'^!M$ using $u^{-1}$, and Step 5 identifies its target with that same object using $\\delta^{-1}$. Hence the specified map is the identity under precisely these identifications, and in particular is invertible. All computations are natural in $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "def-weil-pbc-direct-image",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "def-weil-pbc-inverse-image",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-exc-closed-ambient",
+  "def-sbc-standard-tstructure-derived-category",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lemma-weil-pbc-finite-exchange",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Proposition 5.4.1, p. 291, paragraph applying i! to q_*K_{Y′} -> p_*K_{X′}; adjunction and counit calculation expanded by Q38; explicit formal adjunction expansion of the source's evident functor isomorphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +174,214 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  (I.map f).support = TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' ↑I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary pullback/pushforward, scheme morphism properties, or unrelated uses of support; none states this exceptional etale comparison or pinning criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+     "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit",
+     "CategoryTheory.Adjunction.restrictFullyFaithful",
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app",
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app",
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc",
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc",
+     "CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional restriction for a closed immersion commutes with finite pushforward on bounded below derived categories of etale module sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "AlgebraicGeometry.Scheme.Modules.instFullPushforward",
+     "AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrict"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|extraordinary.*restriction|closed.*baseChange|finite.*baseChange",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean"
+    ],
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exceptional inverse image commutes with finite direct image etale sheaves counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.IsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app",
+     "AlgebraicGeometry.isClosedImmersion_iff_isAffineHom"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite pushforward commutes with local cohomology along a closed subscheme via adjunction and base change of closed direct image",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate of finite direct image closed extraordinary inverse image adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "TopCat.Sheaf.pullbackPushforwardAdjunction",
+     "TopCat.Presheaf.pushforwardPullbackAdjunction",
+     "Topology.IsInducing.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|Mates|baseChange",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean"
+    ],
+    "sub": "CategoryTheory/Adjunction"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed support exceptional inverse image finite direct image natural isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInverseImage",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_comap",
+     "CategoryTheory.Abelian.coimIsoIm",
+     "CategoryTheory.MorphismProperty.map_inverseImage_le",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "CategoryTheory.Abelian.coimIsoIm_inv_app",
+     "CategoryTheory.Abelian.PreservesImage.iso_inv_ι_assoc"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.Mates, CategoryTheory.Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Adjunction.Mates'",
+    "top": [],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed extraordinary inverse image i! commutes with finite direct image p_* in a cartesian square of etale derived categories",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+     "SheafOfModules.pullbackComp"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary scheme-module restrictions, general adjunction APIs or unrelated support; none supplies exceptional etale closed-support exchange with its counit normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-modification-pinned-gluing",
@@ -78,5 +404,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-closed-support-exchange",
+  "worker": "Q38",
+  "summary": "Expanded the ILO XVII 5.4.1 closed-support calculation into exact module adjunctions, closed full faithfulness, the Hom-bijection comparison, its explicit counit transpose and the normalized identity. Reused existing DAG statements throughout; no new nodes. Replaced the inapplicable compact-support definition citation without changing the mathematical claim.",
+  "blueprint": "Realizes the closed-support exchange subargument of the finite-modification gluing expansion of lem-per-artin-gabber-affine-curve Step 3 (via the recorded ancestry); no chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-module-adjunction",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic exactness, adjunction or closed-immersion tool used only for the ordinary finite-coefficient closed-support calculation; it does not replace the perverse/duality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-exc-closed-ambient",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lemma-weil-pbc-finite-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-56fe33d8f",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-56fe33d8f (reviewer sub-agent of L); spot-checked: I read the item (7 steps, no new nodes), the report, every cited statement including the blueprint_update texts, and ILO XVII Prop. 5.4.1 with its proof, printed pp. 290-292. The item makes precise the source's claim that i^!q_*K_{Y'} -> i^!p_*K_{X'} is an isomorphism, which ILO proves by i^!q_*i'^! = i^!i_*p'_*i'^! = p'_*i'^! = i^!p_*. Statement changes from base: the citation def-amb-etale-compact-support is replaced by def-weil-pbc-direct-image and lem-exc-closed-ambient, and the Noetherian convention is written inline. i^! is fixed as the right adjoint to i_*, so the meaning is unchanged and nothing is weakened. The coefficients are ordinary small-étale A-modules with A a finite ring, which matches lem-exc-closed-ambient. Step checks: (1) the B/IB chart shows p' is finite, and both composites are N(V x_X Y') via c_N. (2) Exactness passes from abelian sheaves to modules, and the derived adjunctions are termwise. (3) i^! preserves D+ by t-structure orthogonality, which is a few lines, so the elementary flag is acceptable. (4) Counit-iso implies full faithfulness for i^* ⊣ i_*; post-composition with u_N equals the bijection f -> adj(i_*f), so u is invertible by coyoneda in the opposite category. (5) The finite exchange square is f=i, g=p, giving p^*i_* -> i'_*p'^*, the correct direction; delta = Phi(1). (6) I checked the mate identity i'_*(a')θ = a∘p^*(c) on sections: both transposes equal c_N by the p' triangle identity. Naturality of a then gives delta = i^!(E)∘u. (7) delta^{-1}∘i^!(E)∘u = 1, which proves every clause. Edge cases checked: Y empty, i = id, p = id, nonreduced Y, A of any characteristic. No step needs flatness or constructibility. No duplicate exists: I grepped the DAG for i^!p_* / g^!f_* patterns, read the four nearest candidates (regular closed-support base change, supported calculus, finite residue Gysin, trf shriek calculus), and blueprint_refs gave 0 hits. No SGA is cited. I accept the 7 declared tool_uses as generic tools that leave the unit route unchanged. tools/review_split.py: PASS. No fixes."
  }
 }
