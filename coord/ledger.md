@@ -16237,3 +16237,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/Y6/Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity (stage 3; reviewer PASS; first push; landing 20261018T062955-L-694348 (interface); batch 20261018T062645; modules 3; new nodes 2)
 - 06:29 L: merged deliver/Y7/Sheaf.AlgebraicGeometry.NagataRelativeGluingAxiomsEventually (stage 3; reviewer PASS; first push; landing 20261018T062956-L-694631 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/Y8/Sheaf.AlgebraicGeometry.NagataRelativeGluingValidStage (stage 3; reviewer PASS; first push; landing 20261018T062956-L-694833 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/Y9/Sheaf.AlgebraicGeometry.NormalityPerfectClosureTest (stage 3; reviewer PASS; first push; landing 20261018T062957-L-695070 (proof); batch 20261018T062645; modules 1; new nodes 0)
