@@ -6,7 +6,6 @@ Authors: SHEAF group NW
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Mathlib.CategoryTheory.Products.Basic
 
 /-! # Naturality of the evaluation-defined closed adjunction comparison
 
