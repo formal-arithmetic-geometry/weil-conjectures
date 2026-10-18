@@ -319,5 +319,32 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-afc06a869 (reviewer sub-agent of L); spot-checked: Reviewed item, all eight steps, cited DAG statements, Stacks Tags 0D6G/08FI and Remark 07A7, current main-20261015 blueprint route, unit/chapter metadata, edge cases, and Mathlib searches. The mate typing, K-injective restriction, derived adjunction normalization, and final cancellation are correct; no new nodes or repairs are needed. Wrote review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2b555687",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Unchanged re-push of the PASSed head 1b8928e53acb: Lean module and item node byte-identical; the only other changes are blueprint-index.tsv and Q90's landed sk-def-localizing-closure record, which the module still compiles against. L returned 1b8928e53acb at landing only for the 60 s timeout under load. Independent re-read against the node: k-setting (Over Spec k, finite type, separated, IsOver on every map); open identity locus as IsPullback i (𝟙 U) h j; U' = U×_Z Z' via hOpen; θ is the derived leftDerivedUpperStarComp; mate via mateEquiv with orientation (unit, θ, counit) checked by hand; r_h is the canonical comparison-then-counit map (equal to the node's K-injective r_h by step 6), with IsIso asserted for r_h and r_h'; final equation is node step 8 for all unbounded K. Edge cases U = ∅, v = id, K = 0 and universes OK. No hollow defs, one sorry, docstrings and blueprint tags present, statement verbatim, no name collisions. nt_compile --json: clean in 28.0 s (29 s CPU) at load ~89, profiled run clean in 30.9 s; typeclass inference ~20 s spread over many searches, no single hotspot, so no speed-up FIX. Retry landing at lower load."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.baseChangeIdentityOpenRestriction",
+  "file": "lean/Sheaf/SixFunctors/BaseChangeIdentityOpenRestriction.lean",
+  "statement": "theorem baseChangeIdentityOpenRestriction {k : Type u} [Field k] {p ell : ℕ} [Fact ell.Prime] [CharP k p] (hp : 0 < p) (hple : p ≠ ell) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ell Λ) {D Z U D' Z' U' : Scheme.{u}} [D.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [U.Over (Spec (.of k))] [D'.Over (Spec (.of k))] [Z'.Over (Spec (.of k))] [U'.Over (Spec (.of k))] [LocallyOfFiniteType (D ↘ Spec (.of k))] [QuasiCompact (D ↘ Spec (.of k))] [IsSeparated (D ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (D' ↘ Spec (.of k))] [QuasiCompact (D' ↘ Spec (.of k))] [IsSeparated (D' ↘ Spec (.of k))] [LocallyOfFiniteType (Z' ↘ Spec (.of k))] [QuasiCompact (Z' ↘ Spec (.of k))] [IsSeparated (Z' ↘ Spec (.of k))] [LocallyOfFiniteType (U' ↘ Spec (.of k))] [QuasiCompact (U' ↘ Spec (.of k))] [IsSeparated (U' ↘ Spec (.of k))] (h : D ⟶ Z) [h.IsOver (Spec (.of k))] (j : U ⟶ Z) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j] (i : U ⟶ D) [i.IsOver (Spec (.of k))] (hi : i ≫ h = j) (hU : IsPullback i (𝟙 U) h j) (v : Z' ⟶ Z) [v.IsOver (Spec (.of k))] (h' : D' ⟶ Z') [h'.IsOver (Spec (.of k))] (w : D' ⟶ D) [w.IsOver (Spec (.of k))] (sq : ChosenCartesianSquare w h' h v) (j' : U' ⟶ Z') [j'.IsOver (Spec (.of k))] (i' : U' ⟶ D') [i'.IsOver (Spec (.of k))] (vU : U' ⟶ U) [vU.IsOver (Spec (.of k))] (hi' : i' ≫ h' = j') (hU' : IsPullback i' (𝟙 U') h' j') (hbaseU : vU ≫ j = j' ≫ v) (hOpen : IsPullback vU j' j v) (hbaseD : i' ≫ w = vU ≫ i) : IsIso (derivedIdentityOpenRestrictionComparison (Λ := Λ) h i j hi) ∧ IsIso (derivedIdentityOpenRestrictionComparison (Λ := Λ) h' i' j' hi') ∧ ∀ (K : DerivedCategory (moduleObjectCategory (Λ := Λ) D)), (derivedPullbackSquareIso (Λ := Λ) vU j' j v hbaseU).hom.app ((derivedLowerStar (Λ := Λ) h).obj K) ≫ (derivedUpperStar (Λ := Λ) vU).map ((derivedIdentityOpenRestrictionComparison (Λ := Λ) h i j hi).app K) = (derivedUpperStar (Λ := Λ) j').map (derivedBaseChangeIdentityMate (Λ := Λ) h h' v w sq.w K) ≫ (derivedIdentityOpenRestrictionComparison (Λ := Λ) h' i' j' hi').app ((derivedUpperStar (Λ := Λ) w).obj K) ≫ (derivedPullbackSquareIso (Λ := Λ) i' vU w i hbaseD).inv.app K",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectCategory",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedLowerStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedPullbackSquareIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedIdentityOpenRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedBaseChangeIdentityMate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.baseChangeIdentityOpenRestriction"
+  ]
  }
 }

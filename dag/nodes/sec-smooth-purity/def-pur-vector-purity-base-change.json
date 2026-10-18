@@ -1,0 +1,104 @@
+{
+ "id": "def-pur-vector-purity-base-change",
+ "kind": "definition",
+ "title": "Canonical vector-purity base-change equation",
+ "status": "split",
+ "statement": "For an integration-normalized inverse-purity family gamma of [def-pur-vector-purity-normalization], define its arbitrary-base-change compatibility as follows. For every Cartesian presentation of the pulled-back rank-d bundle pi':E'→B' with g:B'→B and g':E'→E, take e:g'^*Rpi^!→Rpi'^!g^* to be the actual exceptional exchange. Form a:g'^*(W tensor pi^*K)≈W' tensor pi'^*g^*K from the actual pullback tensorator, pullback-composition isomorphisms and independently normalized Tate pullback. There is a separately integration-normalized gamma' such that e_K is invertible on K in D^b_ctf and g'^*(gamma_K)≫e_K=a_K≫gamma'_(g^*K). The bundle bases are Noetherian and the annihilator is invertible, as required to form their integration traces.",
+ "stmt_deps": [
+  "def-pur-vector-purity-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an",
+  "place": "Step 4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integration normalized vector bundle purity compatibility with base change direct sum and scalar extension",
+   "results": "[leansearch] OK 8 hit(s): IsBaseChange.directSum, IsBaseChange.directSumPow, VectorBundle, VectorPrebundle.ctorIdx, VectorBundleCore.vectorBundle, VectorPrebundle, Trivialization.coordChangeL_prod, ContDiffBump.integral_normed_smul. None is an etale purity equation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical vector bundle purity normalization base change direct sum derived coefficient reduction equations",
+   "results": "[leanfinder] OK 8 hit(s): Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.NF, Module.Basis.SmithNormalForm.a, Mathlib.Tactic.Module.qNF, Module.Basis.SmithNormalForm.snf, Submodule.smithNormalFormBotBasis_def, Mathlib.Tactic.LinearCombination.normStx. No scheme-site purity normalization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedUpperShriekBaseChangeMap, vectorBundleIntegration, derivedRestrictScalars",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'rightDerivedUpperShriekBaseChangeMap'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "VectorPurityGammaNormalized|PurityBaseChangeEquation|PurityDirectSumEquation|PurityFiniteReductionEquation",
+   "results": "[grep] OK 0 hit(s) in Mathlib. rg of upstream WeilConjectures and shared lean/Sheaf: no matches. rg of dag/nodes/sec-smooth-purity found the integration, Thom and theorem nodes but no independent definition of these normalized compatibility predicates; blueprint_refs.py search returned 0 blueprint nodes match vector bundle purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.VectorPurityBaseChange",
+  "declaration": "WeilConjectures.PurityFiniteSetting.PurityBaseChangeEquation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.purityPullbackSquare",
+   "WeilConjectures.PurityFiniteSetting.purityBundleBaseChangeAssociator",
+   "WeilConjectures.PurityFiniteSetting.PurityBaseChangeEquation"
+  ],
+  "file": "lean/Sheaf/Paper/VectorPurityBaseChange.lean",
+  "statement": "def PurityBaseChangeEquation (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤))) (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] [HasCompactification (VectorBundleZeroSection.π B d F)] (γ : VectorPurityGamma A N hA B d F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f405667c",
+  "group": "NG",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f405667c",
+  "group": "NG",
+  "result": "fix",
+  "note": "Read the item node (statement_change, 16 citers), 13 stmt_deps, report (Worker report + Second reading by NG), all 6 modules, and the prior reviews. Only FiniteReduction, the new ScalarSingle module/node and stmt_deps changed since b1ff296d; the other 4 modules are byte-identical and their clauses match. FIX H4 (repeats b1ff's finding; that FIX timed out at landing and the group restored its copies): q (purityScalarOpenRestriction/CompactRestriction/CompactMap), b (finiteReductionMate) and the scalar unit (purityScalarSheafUnit/DerivedUnitMap) duplicate the published ExceptionalCoefficients.compactSupportMap/mateMap/unitIso. The fixed modules reuse them; the reduction equation asserts q, a_scalar and mateMap invertible and Q_E(γ)≫mateMap=a≫γm on ctf K and K=𝟙; purityScalarUnitMap keeps its name and type, now built from unitIso; both def-node records and the report are updated; every lean.statement is verbatim. nt_compile --json of all 6 fixed files is clean, max 31.0 s (delivered max 40.2 s). Mechanical stmt_dep finding: tensorIso/unitIso, scalarPullbackIso and the derived scalar tensor Q are constructed by the cited theorems, so PASS on those; ringed-topoi-derived-tensor-pullback and fix-operation-reduction are unused over-citations, dropped from the def node, and their removal from the item is recommended. Gates: sorry only in vectorBundlePurity, no hollow defs, no extra assumptions, edge cases d=0, empty B and m=n kept, universes explicit."
+ }
+}

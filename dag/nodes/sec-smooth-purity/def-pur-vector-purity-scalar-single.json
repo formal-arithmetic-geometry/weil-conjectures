@@ -1,0 +1,117 @@
+{
+ "id": "def-pur-vector-purity-scalar-single",
+ "kind": "definition",
+ "title": "Canonical scalar comparison on degree-zero coefficient sheaves",
+ "status": "split",
+ "statement": "For commutative rings $A,A′$ in the coefficient universe, a ring map $\\phi:A\\to A′$, and a scheme $T$, use the published ordinary scalar adjunction $S\\dashv R$ and derived scalar adjunction $Q\\dashv V$ of [def-weil-pbc-witness-compatibility] and [lem-pur-derived-change-of-rings]. Write $i_A,i_{A′}$ for placement in degree zero. Exact restriction has its canonical comparison $c:i_{A′}V\\cong Ri_A$. Define $q_M:Q(i_A M)\\to i_{A′}(SM)$ as the adjunction transpose of $i_A(\\eta_M)\\gg c^{-1}_{SM}$. At the coefficient-unit object use the published normalized scalar unit identification $Q(\\mathbf1)\\cong\\mathbf1$ of [lem-pur-exceptional-coefficient-comparison], transported along the canonical single/unit identifications to $Q(i_A\\mathbf1)\\to i_{A′}\\mathbf1$. All tensor structures are the published ones used in [def-pur-vector-purity-normalization]. Retain the normalized scalar/pullback and tensor comparisons of [lem-pur-etale-scalar-mate-projection] and [lem-pur-exceptional-coefficient-comparison]; these are transparent aliases, not new scalar functors or comparisons.",
+ "stmt_deps": [
+  "def-weil-pbc-witness-compatibility",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-vector-purity-normalization",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pur-exceptional-coefficient-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "coefficient-reduction compatibility, second paragraph; ordinary scalar/single transpose via Stacks 06YY"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension comparison on a module concentrated in degree zero",
+   "results": "[leansearch] OK 8 hit(s): HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization, TrivSqZeroExt.isScalarTower, DirectSum.GradeZero.module, Derivation.coe_restrictScalars, TrivSqZeroExt.instIsScalarTower, TrivSqZeroExt.isCentralScalar, ZeroHom.instIsScalarTower, exteriorPower.zeroEquiv. None is this derived adjunction transpose.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical comparison from derived scalar extension of a sheaf in degree zero to ordinary scalar extension in degree zero",
+   "results": "[leanfinder] OK 8 hit(s): PresheafOfModules.Sheafify.SMulCandidate.x, SheafOfModules.unitToPushforwardObjUnit, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.smulCandidate, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.smul, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.Sheafify.SMulCandidate. None gives the derived scalar/single map.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapDerivedCategorySingleFunctor'",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*Single|Scalar.*Single|scalar.*single|Scalar.*single in Mathlib/Algebra/Homology, upstream WeilConjectures/SixFunctors, shared lean/Sheaf/Paper; blueprint_refs.py search scalar single; DAG scalar degree-zero search",
+   "results": "Mathlib and upstream: no scalar/single map. Project: ConstantCoefficientObjectsConstructible gives only completed pro-etale coefficient reduction, in a different encoding; ConstantTowerTransition uses the exact restriction/single comparison in a direct-image theorem. Both signatures and docstrings were read. The Mathlib exact-functor comparison is reused on restriction; it does not apply to nonexact scalar extension. Blueprint search: 0 blueprint nodes match scalar single. DAG search finds scalar reduction/transport nodes, not this general ordinary-etale degree-zero transpose.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; reuse ordinary and derived scalar adjunctions and exact restriction comparison"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "coefficient-reduction compatibility: explicit degree-zero scalar comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.VectorPurityScalarSingle",
+  "declaration": "WeilConjectures.PurityFiniteSetting.purityScalarSingleMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.purityScalarSheaf",
+   "AlgebraicGeometry.Etale.purityScalarSheafAdjunction",
+   "AlgebraicGeometry.Etale.purityScalarExtension",
+   "AlgebraicGeometry.Etale.purityScalarPullback",
+   "AlgebraicGeometry.Etale.purityScalarAdjunction",
+   "AlgebraicGeometry.Etale.purityScalarTensor",
+   "WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap",
+   "WeilConjectures.PurityFiniteSetting.purityTransportUnitMap",
+   "WeilConjectures.PurityFiniteSetting.purityScalarSingleMap",
+   "WeilConjectures.PurityFiniteSetting.purityScalarUnitMap"
+  ],
+  "file": "lean/Sheaf/Paper/VectorPurityScalarSingle.lean",
+  "statement": "def purityScalarSingleMap {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (φ : A →+* A') (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) : (Etale.purityScalarExtension φ T).obj ((DerivedCategory.singleFunctor _ 0).obj M) ⟶ (DerivedCategory.singleFunctor _ 0).obj ((Etale.purityScalarSheaf φ T).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reviewer fix (H4): the coefficient-unit comparison is the published normalized ExceptionalCoefficients.unitIso transported along the single/unit identifications; the duplicate oplax-unit construction (purityScalarSheafUnit, purityScalarDerivedUnitMap) is removed.",
+  "fixed_by": "NT-stage2-cc-4f405667c"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f405667c",
+  "group": "NG",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f405667c",
+  "group": "NG",
+  "result": "fix",
+  "note": "Read the item node (statement_change, 16 citers), 13 stmt_deps, report (Worker report + Second reading by NG), all 6 modules, and the prior reviews. Only FiniteReduction, the new ScalarSingle module/node and stmt_deps changed since b1ff296d; the other 4 modules are byte-identical and their clauses match. FIX H4 (repeats b1ff's finding; that FIX timed out at landing and the group restored its copies): q (purityScalarOpenRestriction/CompactRestriction/CompactMap), b (finiteReductionMate) and the scalar unit (purityScalarSheafUnit/DerivedUnitMap) duplicate the published ExceptionalCoefficients.compactSupportMap/mateMap/unitIso. The fixed modules reuse them; the reduction equation asserts q, a_scalar and mateMap invertible and Q_E(γ)≫mateMap=a≫γm on ctf K and K=𝟙; purityScalarUnitMap keeps its name and type, now built from unitIso; both def-node records and the report are updated; every lean.statement is verbatim. nt_compile --json of all 6 fixed files is clean, max 31.0 s (delivered max 40.2 s). Mechanical stmt_dep finding: tensorIso/unitIso, scalarPullbackIso and the derived scalar tensor Q are constructed by the cited theorems, so PASS on those; ringed-topoi-derived-tensor-pullback and fix-operation-reduction are unused over-citations, dropped from the def node, and their removal from the item is recommended. Gates: sorry only in vectorBundlePurity, no hollow defs, no extra assumptions, edge cases d=0, empty B and m=n kept, universes explicit."
+ }
+}

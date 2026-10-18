@@ -22,7 +22,8 @@
   "def-weil-size-convention",
   "def-weil-pbc-proetale-site",
   "def-weil-finite-type-morphism",
-  "def-sfb-right-derived-functor"
+  "def-sfb-right-derived-functor",
+  "def-sfb-condensed-pullback-tensor-comparison"
  ],
  "proof": [
   {
@@ -382,5 +383,33 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f386312f4 (reviewer sub-agent of L); spot-checked: Read the item in full (11 steps), the statements of all 15 stmt_deps and all 27 proof_deps, the unit sk-def-sfb-dc-restricted-functors, Bhatt-Scholze Lemma 6.7.13 (proof: 'By adjointness RHom(K,L)=i_*RHom(R,i^!L)') and 6.7.14, and Stacks 08JB. Statement: RHom(j_!L,N)=Rj_*RHom(L,j^*N) and RHom(i_*P,N)=i_*RHom(P,Ri^!N) on the unbounded module-object categories over B_T=Lambda_T, with qc complement; this is true and nothing is weakened. Edge cases checked: Z empty, U empty (nilpotent thickening), Lambda=0, unbounded inputs. Steps 1,2,4-7,9-11 check out against their cited statements; I recomputed the Koszul signs in step 5 and checked both K-flat preservation directions in step 6. FAULT 1 (E3/E4, step 3): the closed comparison chi was built from a 'counit of i^*-|i_* applied to i_*G(x)M', i.e. a map i_*i^*N->N, which does not exist. I rebuilt it as psi: i_*G(x)M -> i_*i^*(..) = i_*(G(x)i^*M) from the unit; i^*psi is invertible by the triangle identity plus invertible epsilon, j^*psi is 0->0, the detector makes psi invertible, and chi=psi^{-1}. The later steps are unaffected. FAULT 2 (C1, step 8): Lj^*=j^* and Ri_*=i_* for exact functors now cite sk-def-sfb-derived-categories (added to uses and proof_deps). No new nodes. No duplicate: the candidates det-lem-formal-closed-support-stratum(-hom), lem-weil-closed-costalk-duality, lem-weil-stratum-ambient-hom and det-lem-int-ext-formula state other things. No cycle, no merged citations, no SGA. Accepted all 9 declared tool_uses (alpha-iso, ringed-open-closed, immersion-limit-preservation, ringed-topoi pullback-tensor, formal-closed-support-adjunction, ringed-site Grothendieck, kflat-resolution, site-derived-tensor-descent, termwise-adjunction-homotopy) as generic black boxes. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f4c12212",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Head 0f4c12212a35 is byte-identical to the PASSed 94631a apart from blueprint-index; L returned the earlier heads only because CondensedPullbackTensorComparison exceeded the 60 s compile limit. Re-read independently: every node clause matches the Lean (arbitrary commutative condensed Λ; closed i and quasi-compact open j with complementary images, no condition on X; j_! and exact i_* termwise; total Rj_*; Ri^! as the right-derived i^* ker(N → j_*j^*N) of the actual unit). Both Hom maps traced against steps 9-11; the closed projection uses the unit of i^* ⊣ i_*. Naturality squares correct; the auxiliary invertibility of the closed projection is true (node steps 3 and 7). The new comparison node is canonical: each comparison is chosen from a fully specifying uniqueness theorem and holds for any f. Item changes only lean plus one stmt_dep; statements verbatim; declarations exist; only the item theorem and three uniqueness theorems are sorry; docstrings and both report sections present. nt_compile --json clean: comparison module 46.9 s and item module 19.1 s at load 109, comparison module 32-39 s back to back at load 93-99. Profiler: ~21 s kernel check of SupportDerivedTensorNormalization; linter-off variant gave no gain, so no FIX. Retry landing at lower load."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openClosedInternalHomFormulas",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedPullbackDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportProjection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportProjection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportHomMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportHomMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openClosedInternalHomFormulas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedOpenClosedInternalHom.lean",
+  "statement": "theorem openClosedInternalHomFormulas {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ∃ (p : ∀ (P : DerivedCategory (supportModules Λ Z)) (T : DerivedCategory (supportModules Λ X)), ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).obj T ≅ (lowerStar Λ i).mapDerivedCategory.obj (((derivedTensor Λ Z).obj P).obj ((supportPullback Λ i).mapDerivedCategory.obj T))) (o : ∀ (L : DerivedCategory (supportModules Λ U)) (N : DerivedCategory (supportModules Λ X)), (((derivedHom Λ X).obj (op ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj N) ≅ (lowerStar Λ j).rightDerivedFunctor.obj (((derivedHom Λ U).obj (op L)).obj ((supportPullback Λ j).mapDerivedCategory.obj N))) (c : ∀ (P : DerivedCategory (supportModules Λ Z)) (N : DerivedCategory (supportModules Λ X)), (((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N) ≅ (lowerStar Λ i).mapDerivedCategory.obj (((derivedHom Λ Z).obj (op P)).obj ((closedSupport Λ i j).rightDerivedFunctor.obj N))), (∀ P T, (p P T).hom = closedSupportProjection Λ i P T) ∧ (∀ L N, (o L N).hom = openSupportHomMap Λ j L N) ∧ (∀ P N, (c P N).hom = closedSupportHomMap Λ i j hij P N (p P (((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N)).inv) ∧ (∀ (L L' : DerivedCategory (supportModules Λ U)) (N N' : DerivedCategory (supportModules Λ X)) (a : L' ⟶ L) (b : N ⟶ N'), (((derivedHom Λ X).map ((openImmersionLowerShriek Λ j).mapDerivedCategory.map a).op).app N ≫ ((derivedHom Λ X).obj (op ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L'))).map b) ≫ (o L' N').hom = (o L N).hom ≫ (lowerStar Λ j).rightDerivedFunctor.map (((derivedHom Λ U).map a.op).app ((supportPullback Λ j).mapDerivedCategory.obj N) ≫ ((derivedHom Λ U).obj (op L')).map ((supportPullback Λ j).mapDerivedCategory.map b))) ∧ (∀ (P P' : DerivedCategory (supportModules Λ Z)) (N N' : DerivedCategory (supportModules Λ X)) (a : P' ⟶ P) (b : N ⟶ N'), (((derivedHom Λ X).map ((lowerStar Λ i).mapDerivedCategory.map a).op).app N ≫ ((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P'))).map b) ≫ (c P' N').hom = (c P N).hom ≫ (lowerStar Λ i).mapDerivedCategory.map (((derivedHom Λ Z).map a.op).app ((closedSupport Λ i j).rightDerivedFunctor.obj N) ≫ ((derivedHom Λ Z).obj (op P')).map ((closedSupport Λ i j).rightDerivedFunctor.map b)))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The existential families o,c are precisely the two isomorphisms. Their simultaneous morphism equations give full contravariant/covariant naturality. Their hom components equal the explicitly constructed evaluation/adjunction transposes. The auxiliary closed projection isomorphism p has its hom fixed to the actual unit-induced projection. supportPullback is identified with recorded upperStar by the canonical alpha scalar-transport isomorphism, without changing coefficients. Exact closed image uses mapDerivedCategory; the open image and support use total unbounded rightDerivedFunctor."
  }
 }

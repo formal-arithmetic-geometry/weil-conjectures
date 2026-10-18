@@ -7,14 +7,25 @@
  },
  "kind": "statement",
  "title": "Vector-bundle purity",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$ [def-asd-vector-bundle-zero-section]. For every $K\\in D^b_{ctf}(B,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nR\\pi^!K\\;\\xrightarrow{\\ \\sim\\ }\\;L\\pi^*K(r)[2r],\n$$\n\ncompatible with base change, with direct sums of vector bundles, and\nwith the adjunctions; in particular\n\n$$\n\\omega_\\pi=R\\pi^!\\Lambda_B\\;\\cong\\;\\Lambda_E(r)[2r],\n$$\n\nand the identification is compatible with the finite reduction of the\ncoefficients.",
+ "statement": "In the finite-coefficient part of the current purity conventions ([def-pur-conventions] fixed setting), put $\\Lambda=A_{E,n}$ with $n\\geq1$. The integral, rational and algebraically closed versions are the separate coefficient transports of the blueprint transport section. In the ordinary-etale realization of the finite constructible category,\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$ [def-asd-vector-bundle-zero-section]. For every $K\\in D^b_{ctf}(B,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nR\\pi^!K\\;\\xrightarrow{\\ \\sim\\ }\\;L\\pi^*K(r)[2r],\n$$\n\ncompatible with base change, with direct sums of vector bundles, and\nwith the adjunctions; in particular\n\n$$\n\\omega_\\pi=R\\pi^!\\Lambda_B\\;\\cong\\;\\Lambda_E(r)[2r],\n$$\n\nand the identification is compatible with the finite reduction of the\ncoefficients.\n\nWrite gamma_{pi,K}=alpha_{pi,K}^{-1} for the adjoint of the actual integration trace after inverse projection. Every compatibility below concerns this same independently integration-normalized family.\n\nFor an arbitrary base change g:B'→B and its pullback bundle pi':E'→B', let e:g'^*Rpi^!→Rpi'^!g^* be the exceptional exchange (the mate of the inverse compact-support exchange) and a the tensor/pullback/Tate associator. On K in D^b_ctf(B,A), e is invertible and g'^*(gamma_{pi,K}) ≫ e_K = a_K ≫ gamma_{pi',g^*K}.\n\nFor F⊕G of ranks r,s use the canonical projections q:E(F⊕G)→E(G), j:E(F⊕G)→E(F), p:E(G)→B, and h=pq. Let c:R h^!≈R q^!R p^! be the right-adjoint mate of the compact-support compositor formed through an actual compactification triangle. With gamma_q obtained by base change of the first bundle's unit orientation and the dualizing tensor map, gamma_h equals a_{r,s} ≫ (1 tensor q^*gamma_p) ≫ gamma_q ≫ c^{-1}, the ordered Step-5 composite.\n\nFor each 1≤m≤n use the quotient A_{E,n}→A_{E,m} and its derived scalar tensor Q [lem-pur-derived-change-of-rings]. Form q_scalar:Q_B Rpi_{!,n}≈Rpi_{!,m}Q_E from the canonical open-extension/proper-direct-image coefficient comparison. Let b_{n,m} be the exceptional adjoint of q_scalar^{-1} ≫ Q_B(epsilon_n). Let a_scalar be the scalar tensor/pullback/Tate comparison, whose ordinary line comparison sends a tensor z to phi(a) tensor z. Then Q_E(gamma_{pi,K}) ≫ b_{n,m,K} = a_scalar,K ≫ gamma_{pi,Q_B K}, with both vertical maps invertible, including the component K=the coefficient-unit OBJECT.\n\nThe normalization and the three displayed predicates are defined in [def-pur-vector-purity-normalization], [def-pur-vector-purity-base-change], [def-pur-vector-purity-direct-sum], [def-pur-vector-purity-finite-reduction].\n",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.md",
   "place": "node cor-pur-vector-bundle-purity, order 1990"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-asd-vector-bundle-zero-section"
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-purity-normalization",
+  "def-pur-vector-purity-base-change",
+  "def-pur-vector-purity-direct-sum",
+  "def-pur-vector-purity-finite-reduction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-weil-pbc-witness-compatibility",
+  "lem-fix-operation-reduction",
+  "lem-pur-exceptional-coefficient-comparison",
+  "def-pur-vector-purity-scalar-single"
  ],
  "proof": [
   {
@@ -454,5 +465,125 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-2d600662b (reviewer sub-agent of L); spot-checked: Read all eight steps, all 39 cited statements, sources and unit/chapter route. Verified mate direction, coefficient categories, finite reduction, coherent system passage, edge cases and acyclicity. No new nodes or repairs. Detailed checks and accepted tool uses are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f405667c",
+  "group": "NG",
+  "result": "fix",
+  "note": "Read the item node (statement_change, 16 citers), 13 stmt_deps, report (Worker report + Second reading by NG), all 6 modules, and the prior reviews. Only FiniteReduction, the new ScalarSingle module/node and stmt_deps changed since b1ff296d; the other 4 modules are byte-identical and their clauses match. FIX H4 (repeats b1ff's finding; that FIX timed out at landing and the group restored its copies): q (purityScalarOpenRestriction/CompactRestriction/CompactMap), b (finiteReductionMate) and the scalar unit (purityScalarSheafUnit/DerivedUnitMap) duplicate the published ExceptionalCoefficients.compactSupportMap/mateMap/unitIso. The fixed modules reuse them; the reduction equation asserts q, a_scalar and mateMap invertible and Q_E(γ)≫mateMap=a≫γm on ctf K and K=𝟙; purityScalarUnitMap keeps its name and type, now built from unitIso; both def-node records and the report are updated; every lean.statement is verbatim. nt_compile --json of all 6 fixed files is clean, max 31.0 s (delivered max 40.2 s). Mechanical stmt_dep finding: tensorIso/unitIso, scalarPullbackIso and the derived scalar tensor Q are constructed by the cited theorems, so PASS on those; ringed-topoi-derived-tensor-pullback and fix-operation-reduction are unused over-citations, dropped from the def node, and their removal from the item is recommended. Gates: sorry only in vectorBundlePurity, no hollow defs, no extra assumptions, edge cases d=0, empty B and m=n kept, universes explicit.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NG stage 2",
+  "old_statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$ [def-asd-vector-bundle-zero-section]. For every $K\\in D^b_{ctf}(B,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nR\\pi^!K\\;\\xrightarrow{\\ \\sim\\ }\\;L\\pi^*K(r)[2r],\n$$\n\ncompatible with base change, with direct sums of vector bundles, and\nwith the adjunctions; in particular\n\n$$\n\\omega_\\pi=R\\pi^!\\Lambda_B\\;\\cong\\;\\Lambda_E(r)[2r],\n$$\n\nand the identification is compatible with the finite reduction of the\ncoefficients.",
+  "what": "The original coefficient variable was ambiguous against the current convention's finite-part scope. The saved packet also encoded unconstrained base-change maps, a false all-small-categories compositor predicate (refuted by a nontrivial endomorphism in the one-object Z/2 category), and ring-level rather than derived reduction. Specify finite Lambda=A_{E,n}, the ordinary-etale realization, and the three actual normalized source equations, including the coefficient-unit object.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.md",
+   "place": "vector-bundle purity; sk-prop-an proof Steps 4--6 and sec-six-functors-basics/sk-def-purity-conv/def-pur-conventions.md final coefficient-scope paragraph"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-orientation-ground-field-retagging",
+    "holds": true,
+    "note": "Its normal-bundle argument is at finite Z/l^m and A_{E,n}; the later tower claim transports those normalized finite maps."
+   },
+   {
+    "id": "det-sp-orientation-charts",
+    "holds": true,
+    "note": "Uses arbitrary pullback of the normal bundle at finite Z/l^n and the same integration-normalized unit orientation."
+   },
+   {
+    "id": "thm-pur-composition-coherence",
+    "holds": true,
+    "note": "Uses the ordered direct-sum law and base change for finite A; rank-zero cases use the coefficient-unit associator."
+   },
+   {
+    "id": "lem-pur-finite-universal-smooth-trace",
+    "holds": true,
+    "note": "Uses the integration-adjoint normalization at R and at the finite free extension B; both coefficient stages are finite quotients."
+   },
+   {
+    "id": "det-sp-orientation-vector-bundle",
+    "holds": true,
+    "note": "Compares the diagonal orientation with the inverse integration mate for finite Z/l^n; this is the retained normalization."
+   },
+   {
+    "id": "det-sp-purity-bc-factors",
+    "holds": true,
+    "note": "Its proof applies this result first at R=Z/l^n; general finite rings and varying towers are obtained using its separate scalar and tower steps."
+   },
+   {
+    "id": "prop-pur-dnc-family-constancy",
+    "holds": true,
+    "note": "Uses the unit orientation for trivial rank-d bundles and its arbitrary base change, explicitly with Lambda=A_{E,n}."
+   },
+   {
+    "id": "det-sp-finite-general-ring",
+    "holds": true,
+    "note": "Uses this corollary at R=Z/l^n; its separate trace-and-chart argument then extends to arbitrary finite A."
+   },
+   {
+    "id": "sk-lem-geometry",
+    "holds": true,
+    "note": "The standard-pair family is computed by finite-coefficient rank-d unit purity and then pulled back along the affine-line projection."
+   },
+   {
+    "id": "lem-pur-dnc-section-geometry",
+    "holds": true,
+    "note": "Its standard-pair clause uses only the finite-coefficient unit orientation of a trivial vector bundle."
+   },
+   {
+    "id": "lem-pur-diagonal-dnc-chart-normalization",
+    "holds": true,
+    "note": "Uses finite A_{E,n}, normal-bundle zero-section pullback, base change and direct-sum normalization, all retained explicitly."
+   },
+   {
+    "id": "sk-thm-dnc",
+    "holds": true,
+    "note": "The stated prime-power finite coefficient setting uses trivial-bundle unit purity on the coordinate charts."
+   },
+   {
+    "id": "thm-pur-finite-reduction-of-purity",
+    "holds": true,
+    "note": "Its last diagonal factor is reduced by the actual b_{n,m} square, including K=the coefficient-unit object."
+   },
+   {
+    "id": "thm-pur-finite-coefficient-smooth-purity",
+    "holds": true,
+    "note": "Uses the integration-normalized vector-bundle unit map for arbitrary finite A_{E,n}, not an integral purity theorem."
+   },
+   {
+    "id": "lem-pur-vector-integration-site-comparison",
+    "holds": true,
+    "note": "Identifies precisely the ordinary-etale integration transpose and its inverse with the finite pro-etale vector-bundle map."
+   },
+   {
+    "id": "thm-pur-diagonal-dualizing-object",
+    "holds": true,
+    "note": "Its proof explicitly takes A=A_{E,n} and pulls the bundle unit orientation back to the zero section before gluing."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pur-conventions",
+   "def-asd-vector-bundle-zero-section"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VectorBundlePurity",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorBundlePurity",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.VectorBundlePurityConclusion",
+   "WeilConjectures.PurityFiniteSetting.vectorBundlePurity"
+  ],
+  "file": "lean/Sheaf/Paper/VectorBundlePurity.lean",
+  "statement": "theorem vectorBundlePurity (P : PurityFiniteSetting.{u}) (B : Scheme.{u}) (hB : B ⟶ Spec (CommRingCat.of P.field.k)) [LocallyOfFiniteType hB] [QuasiCompact hB] (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] : VectorBundlePurityConclusion P B hB d F",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair: independently integration-normalized gamma, actual pullback bundle and Tate associator; ordered symmetric-algebra sum projections and compactification compositor mate; actual derived quotient scalar tensor and counit mate, with the coefficient-unit object. Current source finite-part coefficient scope is explicit."
  }
 }

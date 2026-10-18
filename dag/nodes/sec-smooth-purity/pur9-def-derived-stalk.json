@@ -63,5 +63,24 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-289c42ecb (reviewer sub-agent of L); spot-checked: Read in full: the item pur9-def-derived-stalk and its source, literature/blueprint/main-20261015/.../sk-prop-sf-trace-perfectness/pur9-def-derived-stalk.md (order 2171), plus the statement of every dependency. The source's references pur713-def-derived-pull and pur713-def-data exist nowhere: no DAG node has either id and no blueprint file in main-20261015 or master defines them. The item replaces them with existing nodes, each defining exactly its clause. (1) sk-def-purity-conv supplies O_E, ϖ, n≥1, ℓ invertible and k. (2) def-pc-scheme supplies the scheme. (3) def-kun-separably-closed supplies separably closed; the item correctly does not use def-weil-geometric-point, which needs algebraically closed. (4) The finite-level clause of def-weil-derived-pullback-tensor-hom supplies D(X_proet,A) and L x̄^*; its hypotheses (schemes with ℓ invertible, a morphism) hold for x̄:Spec Ω→X. Its category is A_W-modules on the small pro-étale site of an arbitrary scheme (def-weil-pbc-proetale-site), the same category used by pur7710-def-ind-etale-tests and pur713-def-pullback-comparison. pur713-def-derived-pull-module covers only O_E, E and Q̄_ℓ coefficients, not the finite level. (5) pur7710-def-derived-sections supplies RΓ: it is defined for any scheme W, explicitly need not be of finite type, and takes sheaves of A-modules to the ordinary D(Mod_A), so the categories match. Nothing is weakened and the generality to separably closed Ω and Spec Ω of infinite type is kept. Edge cases n=1, X=∅, K=0, X=Spec Ω with x̄=id, Ω separably but not algebraically closed: all well-formed, and consistent with the only user, prop-trf-compact-support-perfectness. No duplicate: def-trf-frobenius-operators and def-weil-local-frobenius-trace define a different K_x̄ (L x̄^*M or its point fibre at algebraically closed points of the base Spec k). There are no new nodes or proof steps, no cycle, every dependency exists and is unmerged, and no tool_uses are needed. Mathlib has the pro-étale site but no derived stalk, so status split is right. The item's mathlib_searches is empty, as on 11 other imported split nodes in the chapter, and the preflight requires searches only for new nodes. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c94237bc",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node, source place (order 2171), all 5 stmt_deps and their Lean (finiteCoefficientRing/finiteDerivedPullback, ProEtale.rightDerivedGlobalSections = R(Sheaf.Γ), sfIntrinsicModuleEquivalence = asEquivalence of the canonical finiteCoefficientIntrinsicRealization). Lean = RΓ_{Spec Ω,proet} ∘ (canonical realization inverse) ∘ Lx̄^* at level n+1; IsSepClosed only, no finite type, ℓ-unit hypothesis on X, output DerivedCategory(ModuleCat(ULift A)) keeps A-action. Edge cases n=1, K=0, identity point, imperfect sep-closed Ω, infinite-type Ω fine; universes inherited. No duplicate (existing stalk API needs IsAlgClosed). Only lean field changed; statement verbatim; docstrings with source/blueprint; no sorry. nt_compile --json: 7.5 s, exit 0, no diagnostics. Non-blocking: unused PurityConventions import."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedGeometricStalk",
+  "declaration": "WeilConjectures.finiteDerivedGeometricStalk",
+  "file": "lean/Sheaf/Paper/DerivedGeometricStalk.lean",
+  "statement": "def finiteDerivedGeometricStalk (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (X : Scheme.{u}) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (xbar : Spec (.of Ω) ⟶ X) (K : proEtaleDerivedCategory X (finiteCoefficientRing l E (n + 1))) : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The natural-number parameter n denotes positive level n+1, matching finiteDerivedPullback. The exact inverse of the published intrinsic coefficient realization transports its output to fixed-scalar module-valued sheaves before applying the existing rightDerivedGlobalSections; the coefficient action is retained using the standard ULift."
  }
 }
