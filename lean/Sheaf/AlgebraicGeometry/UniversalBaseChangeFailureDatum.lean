@@ -12,17 +12,11 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
-import Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.AlgebraicGeometry.FieldFailureOfCumulativeBaseChange
-import Sheaf.AlgebraicGeometry.IntegralSurjectiveTargetBaseChange
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 
 /-!
 # A universal base-change failure over a geometric generic point
@@ -94,6 +88,109 @@ theorem exists_universalBaseChangeFailure_cyclic_datum
             ((DerivedCategory.Plus.singleFunctor _ 0).obj
               ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
                 (AddCommGrpCat.of (ULift.{u + 1} (ZMod d))))))) := by
-  sorry
+  classical
+  let Λ := ULift.{u + 1} (ZMod n)
+  have hqZ : (1 : ℤ) ≤ (q : ℤ) := by omega
+  have hdegree : ((q - 1 : ℕ) : ℤ) = (q : ℤ) - 1 := by omega
+  obtain ⟨F, _⟩ :=
+    exists_fieldFailure_of_cumulativeUniversalBaseChangeProperty f n hn hinv q hq hprev hfail
+  have := F.isAffine
+  let := F.field
+  let K := AlgebraicClosure F.K
+  let πK : Spec (.of K) ⟶ Spec (.of F.K) :=
+    Spec.map (CommRingCat.ofHom (algebraMap F.K K))
+  have : IsIntegralHom πK :=
+    IsIntegralHom.SpecMap_iff.2 fun x ↦ Algebra.IsIntegral.isIntegral (R := F.K) x
+  have hπK : Function.Surjective πK.base := fun x ↦
+    ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩
+  obtain ⟨S'', _, _, hnorm, _, π, _, i, hi⟩ :=
+    exists_normalization_of_isAlgClosed (πK ≫ F.g)
+  let g'' := Spec.map i ≫ S''.fromSpecStalk (genericPoint S'')
+  have hπ : IsPullback (pullback.fst F.p' π) (pullback.snd F.p' π) F.p' π :=
+    IsPullback.of_hasPullback _ _
+  have sq'' : IsPullback (pullback.fst g'' (pullback.snd F.p' π))
+      (pullback.snd g'' (pullback.snd F.p' π)) g'' (pullback.snd F.p' π) :=
+    IsPullback.of_hasPullback _ _
+  have sq := (sq''.flip.paste_horiz hπ).flip
+  have hpb := hπ.paste_horiz F.isPullback
+  have hprev' : BaseChangeProperty Λ F.p' ((q : ℤ) - 1) := by
+    rw [← hdegree]
+    exact hprev (q - 1) le_rfl F.a F.b F.p' F.isPullback
+  have h₁ : ¬ IsIso (baseChangeHomologyMap Λ sq (q : ℤ)
+      ((πK)^*[ModuleCat.{u + 1} Λ].obj F.F)) := by
+    rw [isIso_baseChangeHomologyMap_congr Λ F.p' hi sq (hi ▸ sq)]
+    exact fun hiso ↦ F.not_isIso
+      (isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective Λ (q : ℤ) hqZ hprev'
+        F.isPullback_fibre πK hπK (hi ▸ sq) F.F hiso)
+  have h₂ : ¬ IsIso (baseChangeHomologyMap Λ sq'' (q : ℤ)
+      ((πK)^*[ModuleCat.{u + 1} Λ].obj F.F)) :=
+    fun hiso ↦ h₁ ((isIso_baseChangeHomologyMap_iff_of_isIntegralHom Λ π hπ sq'' sq
+      (q : ℤ) _).2 hiso)
+  have hprev'' : BaseChangeProperty Λ (pullback.snd F.p' π) ((q : ℤ) - 1) := by
+    rw [← hdegree]
+    exact hprev (q - 1) le_rfl _ _ _ hpb
+  have := mono_baseChangeHomologyMap Λ (q : ℤ) hqZ hprev'' sq''
+    ((πK)^*[ModuleCat.{u + 1} Λ].obj F.F)
+  have h₃ : ¬ IsZero ((baseChangeTargetFunctor Λ (pullback.fst g'' (pullback.snd F.p' π))
+      (pullback.snd g'' (pullback.snd F.p' π)) (q : ℤ)).obj
+        ((πK)^*[ModuleCat.{u + 1} Λ].obj F.F)) :=
+    fun hz ↦ h₂ ((IsZero.of_mono (baseChangeHomologyMap Λ sq'' (q : ℤ)
+      ((πK)^*[ModuleCat.{u + 1} Λ].obj F.F)) hz).isIso hz _)
+  have : IsAffineHom (pullback.snd g'' (pullback.snd F.p' π)) :=
+    MorphismProperty.of_isPullback sq'' inferInstance
+  have hΛ : (n : Λ) = 0 := by
+    apply ULift.ext
+    exact ZMod.natCast_self n
+  obtain ⟨r, _, hrn, _, hnonzero⟩ := exists_prime_cyclic_higherDirectImage Λ
+    (pullback.fst g'' (pullback.snd F.p' π)) (pullback.snd g'' (pullback.snd F.p' π))
+    n (by omega) hΛ (q : ℤ) _ h₃
+  refine ⟨S'', pullback F.p' π, π ≫ F.a, pullback.fst F.p' π ≫ F.b,
+    pullback.snd F.p' π, ?_, inferInstance, inferInstance, hnorm,
+    inferInstance, K, inferInstance, inferInstance, i,
+    pullback g'' (pullback.snd F.p' π), pullback.fst g'' (pullback.snd F.p' π),
+    pullback.snd g'' (pullback.snd F.p' π), ?_, r, hrn, ?_⟩
+  · exact ⟨hpb.toCommSq, hpb.isoPullback, hpb.isoPullback_hom_fst, hpb.isoPullback_hom_snd⟩
+  · exact ⟨sq''.flip.toCommSq, sq''.flip.isoPullback,
+      sq''.flip.isoPullback_hom_fst, sq''.flip.isoPullback_hom_snd⟩
+  · let P := ULift.{u + 1} (ZMod r)
+    let Y := pullback g'' (pullback.snd F.p' π)
+    let h := pullback.snd g'' (pullback.snd F.p' π)
+    let U := sheafCompose (pullback F.p' π).smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} P) AddCommGrpCat.{u + 1})
+    let H := DerivedCategory.Plus.singleFunctor
+      (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+        (lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlus ⋙
+          DerivedCategory.Plus.homologyFunctor _ (q : ℤ)
+    let C := constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+    let R := ModuleCat.restrictScalars.{u + 1} (Int.castRingHom P)
+    have : R.IsLeftAdjoint :=
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1} (Int.castRingHom P)).isLeftAdjoint
+    let er : R ⋙ forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1} ≅
+        forget₂ (ModuleCat.{u + 1} P) AddCommGrpCat.{u + 1} := Iso.refl _
+    have : (forget₂ (ModuleCat.{u + 1} P) AddCommGrpCat.{u + 1}).IsLeftAdjoint :=
+      Functor.isLeftAdjoint_of_iso er
+    obtain ⟨ec⟩ := nonempty_higherDirectImage_forget_iso P h (q : ℤ)
+      (constantModSheaf P Y r)
+    let cc := (constantCommuteCompose Y.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} P) AddCommGrpCat.{u + 1})).app
+        (ModuleCat.of P (P ⧸ (Ideal.span {(r : P)} : Ideal P)))
+    have hrP : (r : P) = 0 := by
+      apply ULift.ext
+      exact ZMod.natCast_self r
+    have hspan : (Ideal.span {(r : P)} : Ideal P) = ⊥ := by simp [hrP]
+    let l : ModuleCat.of.{u + 1} P (P ⧸ (Ideal.span {(r : P)} : Ideal P)) ≅
+        ModuleCat.of.{u + 1} P P :=
+      (Submodule.quotEquivOfEqBot _ hspan).toModuleIso
+    let lc := (forget₂ (ModuleCat.{u + 1} P) AddCommGrpCat.{u + 1}).mapIso l
+    intro hz
+    have hU : IsZero (U.obj
+        (higherDirectImage P h (q : ℤ) (constantModSheaf P Y r))) :=
+      IsZero.of_iso hz (ec ≪≫ H.mapIso (cc ≪≫ C.mapIso lc))
+    apply hnonzero
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply U.zero_of_map_zero
+    change U.map (𝟙 (higherDirectImage P h (q : ℤ) (constantModSheaf P Y r))) = 0
+    rw [U.map_id]
+    exact (IsZero.iff_id_eq_zero _).mp hU
 
 end AlgebraicGeometry.Etale
