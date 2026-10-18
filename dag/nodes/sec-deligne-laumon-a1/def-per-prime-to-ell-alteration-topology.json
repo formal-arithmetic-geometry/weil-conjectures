@@ -113,5 +113,33 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-8a1a4fbd2 (reviewer sub-agent of L); spot-checked: Definition split with no new nodes. The statement, stmt_deps, source and blueprint fields are byte-identical to the live node; the delivery adds only status split and split_report, and replaces the creator's mathlib_searches with the worker's seven logged records. The failed unqualified Loogle query is correctly marked unavailable. I read ILO Exposé II pp. 23-28 against the node. Def 1.2.2 (expanded through 1.1.2/1.1.8/1.1.9) gives the objects of alt/S: finite type, reduced, maximal points map to maximal points with finite residue extension. Def 1.1.8 (maximally l'-finite) matches in both clauses and in its quantifiers. 2.1.1 (l'-decomposed; completely decomposed is the l=infinity case) matches. 2.3.1 and Remark 2.3.2 (the generated topology, not a pretopology) match. Fixing l prime is not a weakening: all three citers (gabber-prime-to-ell-regular-cover, alteration-cover-standard-refinement, prime-to-ell-uniformization-standard-form) use l prime and the l' topology. Étale families over an object of alt/S stay in alt/S because étale maps are flat, hence maximally dominant. All ten stmt_deps define what is taken from them; the rest is elementary. A DAG grep (alt/S, l'-decomposed, maximally dominant, alteration topology) and a blueprint grep found no duplicate. No SGA source. Small cases: Spec C over Spec R for l=2 and l=3, Z[i]/Z, and the empty object. Empty proof is correct for a definition. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeToEllAlterationTopology",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.topology",
+  "declarations": [
+   "AlgebraicGeometry.PrimeToEllAlteration.Alt",
+   "AlgebraicGeometry.PrimeToEllAlteration.IsMaximallyPrimeToEllFinite",
+   "AlgebraicGeometry.PrimeToEllAlteration.IsPrimeToEllDecomposedEtaleFamily",
+   "AlgebraicGeometry.PrimeToEllAlteration.IsCompletelyDecomposedEtaleFamily",
+   "AlgebraicGeometry.PrimeToEllAlteration.IsPrimeToEllDecomposedEtalePresieve",
+   "AlgebraicGeometry.PrimeToEllAlteration.topology",
+   "AlgebraicGeometry.PrimeToEllAlteration.IsCoveringFamily",
+   "AlgebraicGeometry.PrimeToEllAlteration.Refines"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeToEllAlterationTopology.lean",
+  "statement": "def topology (S : Scheme.{u}) [IsNoetherian S] (ell : ℕ) [Fact ell.Prime] : GrothendieckTopology (Alt S)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a2f1702f",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Module PrimeToEllAlterationTopology matches ILO II 1.1.2/1.1.8/1.2.2/2.1.1/2.3.1 clause by clause: Alt S (finite type = LocallyOfFiniteType+QuasiCompact, reduced, generic points to generic points with finite residue extension, Over-morphisms); maximally ell'-finite with correct quantifiers (residueDegree 0 convention covered by explicit finiteness); decomposed etale families lift every point; completely decomposed uses IsIso of the canonical residue map; topology is sInf of topologies containing the generated sieves, i.e. the smallest one; covering family and refinement match. Hypotheses only IsNoetherian S and ell prime, no universe restrictions. All 10 stmt_dep records read and used as recorded. Only the lean record was added to the node; statement verbatim matches the signature; all declarations have source and blueprint docstrings; no sorry, nothing hollow, no duplicate in side lean or Mathlib. Second reading section is the standard post-10-17 stub, accepted. nt_compile --json clean in 1.8 s."
  }
 }
