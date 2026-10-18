@@ -100,7 +100,20 @@ theorem zeroSection_spec (V : PurityVectorBundle P Z hZ c) :
           U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
             (SymmetricAlgebra.algebraMapInv (R := Z.presheaf.obj (op U.1))
               (M := V.𝓔.val.obj (op U.1))).toRingHom) := by
-  sorry
+  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType hZ
+  let := V.locallyFree
+  obtain ⟨hsection, hclosed⟩ := VectorBundleZeroSection.zero_spec Z c V.𝓔
+  refine ⟨?_, ?_, ?_⟩
+  · rw [zeroSection, ← V.over_commutes]
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hsection
+  · let := hclosed
+    dsimp only [zeroSection]
+    infer_instance
+  · intro U
+    refine ⟨VectorBundleZeroSection.zeroRestricted Z c V.𝓔 U.1, ?_,
+      (VectorBundleZeroSection.affineChart_spec Z c V.𝓔 U).2.2⟩
+    simp only [zeroSection, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact Scheme.Hom.resLE_comp_ι _ _
 
 /-- An étale trivialization comprises an étale base change and a scheme isomorphism over
 its source from the pullback bundle to relative affine `c`-space. Surjectivity of the
