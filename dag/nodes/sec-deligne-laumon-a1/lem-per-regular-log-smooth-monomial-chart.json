@@ -14,9 +14,135 @@
   "def-weil-etale-morphism",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The canonically logged trait is log regular: at its closed point the nonunit ideal is $(\\pi)$, its quotient is the residue field (dimension zero), and the characteristic is $\\mathbf N$, of rank one; at its generic point the log structure is trivial and the local ring is a field. These give precisely the stratum and dimension conditions. Apply log-smooth preservation of log regularity to $(X,M)\\to S$. The chart hypothesis is exactly the one in the statement, including invertible torsion, so $(X,M)$ is log regular.",
+   "uses": [
+    "lem-per-log-smooth-invertible-torsion-log-regular",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.2, 1.8, printed pp.69--70; XVI 3.6.1 and the log-regularity invocation in 3.6.5."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and the given uniformizer $\\pi$. The hypothesis on $(X,M)\\to S$ is log smoothness in the sense of [def-per-fs-log-smooth-etale]: its charts $\\mathbf N\\to P$ have injective group map, so the kernel is zero, and the torsion of the cokernel is finite of invertible order with smooth comparison. Choose an algebraic closure of $\\kappa(x)$ and hence a geometric point $\\bar x$ over $x$. Apply the uniformizer-chart theorem for log-smooth schemes over a trait to $V=X$, $\\bar v=\\bar x$ and the given $\\pi$. It gives an etale $a:W\\to X$ whose image contains $x$, a fine saturated monoid $P$ with torsion-free $P^{\\rm gp}$, an injection $g:\\mathbf N\\to P$, a chart $P\\to M|_W$ compatible through $g$ with the chart $1\\mapsto\\pi$ of $S$, and an etale comparison $c:W\\to S\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[P]$. Choose $w\\in W$ with $a(w)=x$ and, by the same algebraic-closure statement, a geometric point $\\bar w$ over $w$. Since $a$ is etale it is locally of finite presentation and hence locally of finite type; $W$ is locally Noetherian by the cited finite-type lemma.",
+   "uses": [
+    "lem-per-trait-log-smooth-uniformizer-chart",
+    "def-per-fs-log-smooth-etale",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI 3.6.3 with Q=N (footnote x) and first paragraph of proof of 3.6.5, printed pp.252--253; local Noetherian input: Stacks Tag 01T6, morphisms.tex, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Give $W$ the pulled-back log structure. The map $a$ is strict: on a pulled-back chart its monoid map is the identity, its group cokernel is zero, and its comparison is the etale morphism $a$, which is smooth by the cited etale-smoothness lemma. Log-smooth preservation therefore makes $W$ log regular. At every geometric point of $W$, its characteristic equals the characteristic at the corresponding geometric point of $X$, because $a$ is etale and the log structure is the inverse-image sheaf. As $X$ is regular and log regular, the free-characteristic criterion makes these monoids free. The converse direction of the same criterion on $W$ makes every ordinary local ring of $W$ regular. Thus $W$ is regular; subsequent open restrictions remain regular and locally Noetherian.",
+   "uses": [
+    "lem-per-log-smooth-invertible-torsion-log-regular",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-trf-fs-log-blowup",
+    "def-sbc-smooth-morphisms",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.7--1.8, printed p.70; XVI proof of 3.6.5, regular and log-regular source."
+   }
+  },
+  {
+   "text": "Let $F\\subset P$ be the elements whose chart images are units at $\\bar w$. It is a face: in a local ring a product is a unit exactly when both factors are units. Choose finite monoid generators of $P$. The generators lying in $F$ generate $F$, since the face property applied to an expression for an element of $F$ forces every summand to lie in $F$. Shrink $W$ to the intersection of the finitely many opens where these images are invertible. Replace $P$ by $P_F=\\{p-f:p\\in P,f\\in F\\}$. The face-sharpening lemma says that it is fs and its unit group is $H=F^{\\rm gp}$; its group completion is still $P^{\\rm gp}$, as both contain $P$ and are subgroups of that group. The chart extends by inverting these units. On monoid rings this is localization at the corresponding monomials, so the new toric model is an open of the old one and $c$ factors through it. The factor is etale by etale cancellation with that open immersion.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI proof of 3.6.5, second paragraph and footnote xi, printed p.253; face localization: Expose VIII 3.1.1--3.1.2."
+   }
+  },
+  {
+   "text": "For the localized chart write $P$ again. Its elements mapping to units at $\\bar w$ are exactly $H=P^\\times$: if $p-f$ maps to a unit, then $p\\in F$, so $p-f\\in F^{\\rm gp}$. The stalk chart identity is $M_{\\bar w}=P\\oplus_H\\mathcal O_{W,\\bar w}^{\\times}$. Quotienting by the units therefore identifies $P/H$ with $\\overline M_{\\bar w}$. By regularity and log regularity of $W$, the free-characteristic criterion gives an isomorphism $P/H\\cong\\mathbf N^r$ for some $r\\geq0$.",
+   "uses": [
+    "lem-trf-free-characteristic-regular-boundary",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI proof of 3.6.5, characteristic quotient and free-monoid criterion, printed p.253; VI 1.7."
+   }
+  },
+  {
+   "text": "Lift the $r$ standard generators of $P/H$ to elements $v_1,\\ldots,v_r\\in P$. Define $\\phi:\\mathbf N^r\\oplus H\\to P$ by $(m,h)\\mapsto\\sum_i m_iv_i+h$. It is surjective: subtracting the lift of the image of $p$ in $P/H$ leaves an element of $H$ in $P^{\\rm gp}$, and that element, being a unit, belongs to $P$. It is injective: equality first gives equality of the $\\mathbf N^r$ coordinates in $P/H$, and cancellation in $P^{\\rm gp}$ then gives equality of the $H$ coordinates. Thus $\\phi$ is an isomorphism. The group $H$ is finitely generated by the generators of $F$ from Step 4 and torsion-free because it is a subgroup of the torsion-free $P^{\\rm gp}$. Use the finite-basis theorem to choose a basis $a_1,\\ldots,a_s$ of $H$. Write $g(1)=(e_1,\\ldots,e_r,\\sum_j f_ja_j)$; all $e_i\\geq0$. Replace $a_j$ by $-a_j$ whenever $f_j<0$, making every $f_j\\geq0$. Since $g$ is injective, $g(1)\\ne0$, so $n=r+s\\geq1$ and the tuple $(e_1,\\ldots,e_r,f_1,\\ldots,f_s)$ is not all zero.",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI proof of 3.6.5, splitting of the free quotient and choice of unit-group basis, printed p.253; the cancellation argument is written out."
+   }
+  },
+  {
+   "text": "The chart decomposition identifies its monoid ring with $\\mathbf Z[t_1,\\ldots,t_r,y_1^{\\pm1},\\ldots,y_s^{\\pm1}]$: the monomial indexed by $(m,\\sum_jb_ja_j)$ goes to $t^my^b$, giving inverse maps on these abelian-group bases and preserving products. Under this identification $z^{g(1)}=\\prod_i t_i^{e_i}\\prod_j y_j^{f_j}$. Tensoring over $\\mathbf Z[\\mathbf N]=\\mathbf Z[q]$ with $R$, where $q\\mapsto\\pi$, therefore gives the ring $B=R[t_1,\\ldots,t_r,y_1^{\\pm1},\\ldots,y_s^{\\pm1}]/(\\prod_i t_i^{e_i}\\prod_jy_j^{f_j}-\\pi)$. Explicitly the two maps are induced by the same variables, subject to the relation $z^{g(1)}=\\pi$, and are mutual inverses. Thus the comparison target is $\\operatorname{Spec}B$, the principal open where $y_1\\cdots y_s$ is invertible in the required monomial hypersurface $T$. If $s=0$, this open is all of $T$. All identifications respect $R$, so the composite $b:W\\to\\operatorname{Spec}B\\hookrightarrow T$ is an $S$-morphism.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI final paragraph of proof of 3.6.5, printed p.253; explicit monoid-ring identification and open torus locus."
+   }
+  },
+  {
+   "text": "The map $b$ is etale, being the composite of the etale comparison with an open immersion. Since $W$ is regular, the definition of a regular scheme supplies an affine open neighbourhood $U$ of the underlying point $w$ of $\\bar w$ with regular Noetherian coordinate ring. Thus $U$ is regular affine Noetherian. Restricting both $a$ and $b$ along this open immersion preserves etaleness by the cited composition lemma. The point $u=w\\in U$ maps to $x$, the exponent tuple is the one in Step 6, and the restricted $b$ is over the original trait $S$. This proves every clause for the chosen $x$ and $\\pi$. If $X$ is empty the pointwise assertion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI conclusion of proof of 3.6.5, printed p.253; affine shrinking from the definition of regular scheme; etale composition and open immersions: Stacks morphisms.tex, lemma-composition-etale and lemma-open-immersion-etale."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-log-smooth-invertible-torsion-log-regular",
+  "def-trf-fs-log-blowup",
+  "lem-per-trait-log-smooth-uniformizer-chart",
+  "def-per-fs-log-smooth-etale",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-free-characteristic-regular-boundary",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-sbc-smooth-morphisms",
+  "def-weil-regular-scheme",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-fg-torsionfree-group-free",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI proof of Proposition 3.6.5, printed p.253, with inputs XVI 3.6.3 (trait case) and VI 1.7--1.8; monoid cancellation and ring identification expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +178,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"{f : R →+* S} (hf : f.IsStandardSmooth) : ∃ n, ∃ g : MvPolynomial (Fin n) R →+* S, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"[Algebra R S] [Algebra.IsStandardSmoothOfRelativeDimension n R S] : ∃ g : MvPolynomial (Fin n) R →ₐ[R] S, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
    "date": "2026-10-19",
    "verdict": "no match: standard smooth polynomial presentations do not provide logarithmic monomial charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular log smooth schemes over a trait have etale local charts by a monomial equal to a uniformizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular fs logarithmically smooth scheme over a discrete valuation ring is etale locally a monomial hypersurface",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?smooth|monomial.*chart",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale monomial hypersurface chart for regular logarithmically smooth schemes over a trait",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"{f : R →+* S} (hf : f.IsStandardSmooth) : ∃ n, ∃ g : MvPolynomial (Fin n) R →+* S, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"[Algebra R S] [Algebra.IsStandardSmoothOfRelativeDimension n R S] : ∃ g : MvPolynomial (Fin n) R →ₐ[R] S, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-smooth-trait-punctual-purity",
@@ -80,5 +241,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-log-smooth-monomial-chart",
+  "worker": "stage1",
+  "summary": "Q51 follows ILO XVI 3.6.5: the existing trait uniformizer-chart node (3.6.3), face localization, regular characteristic freeness (existing VI 1.7 node), splitting and torus-open monomial calculation. One general logarithmic input, log-regularity preservation with invertible torsion (VI 1.8), is a new statement-only node. No statement change, Lean writing or compilation.",
+  "blueprint": "Realizes the inherited proof Step 3 regular finite-torsion local model input of lem-per-artin-gabber-affine-curve, specifically the monomial chart invoked in ILO XVI Theorem 3.6.2 through Proposition 3.6.5. This is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic fs face-localization theorem needed for the chart calculation; the perverse unit has no monoid localization result."
+   },
+   {
+    "node": "lem-trf-fg-torsionfree-group-free",
+    "why": "Generic finite basis for the unit group of the chart."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Generic existence of an algebraic closure used to choose a geometric point over the specified ordinary point."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic local Noetherian ascent for the etale neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale composition, open-immersion and cancellation properties for restricting the chart."
+   },
+   {
+    "node": "lem-trf-free-characteristic-regular-boundary",
+    "why": "Generic criterion ILO VI 1.7 (regular iff free characteristic) for log regular fs schemes, used in both directions on X and W; no node of the perverse unit states it, and it is already in the batch-5 closure."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic fact that an etale morphism is smooth, so a strict etale map satisfies the chart hypothesis of the preservation lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-pc-algebraic-closure-exists-unique",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-free-characteristic-regular-boundary",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-e5c6b6255",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-e5c6b6255 (reviewer sub-agent of L); spot-checked: FIX: the mathematics was read in full and the item is a correct split of ILO XVI 3.6.5 (printed p.253), using 3.6.3 and Definition 3.5.11 (pp.250-252) and VI 1.7-1.8 (p.70). The statement is unchanged.\n\nSteps checked:\n- Step 1: the canonical trait is log regular at both points.\n- Step 3: W is strict, hence log regular, and regular through both directions of the VI 1.7 criterion.\n- Step 4: F is a face, and face-sharpening gives P_F fs with units F^gp; the chart extends and c is étale by cancellation.\n- Step 5: P/H is the characteristic monoid and is free.\n- Step 6: P is N^r plus H, a basis exists, sign flips make all exponents nonnegative, and g(1)≠0.\n- Step 7: the correct comparison target is the torus-open principal open of V(S,π,e), not V itself.\n- Step 8: shrinking to a regular affine open.\nEdge cases tested: generic point with r=0, s=0, n=1, and invertible torsion P=N with g(1)=d (this rules out the torsion-free trf preservation lemma).\n\nFaults repaired (three):\n- C5: new lem-per-log-smooth-torsionfree-etale-chart duplicates the landed same-unit lem-per-trait-log-smooth-uniformizer-chart (XVI 3.6.3 with Q=N), which is identical in live. Step 2 now cites it plus def-per-fs-log-smooth-etale (kernel 0) and chooses w in a^{-1}(x) with a geometric point over it. Node dropped.\n- C5: new lem-per-log-regular-free-characteristic is word for word the first sentence of lem-trf-free-characteristic-regular-boundary (VI 1.7). Steps 3 and 5 now cite that node. Node dropped. A per copy is not justified for batch 5: that trf node is already in the base batch-5 closure, so citing it adds 0 nodes.\n- C1: Step 3 used 'étale hence smooth' without a node; it now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres.\nproof_deps, the summary and tool_uses were updated (two declarations added). No cycle; every step is under 2000 characters.\n\nKept: lem-per-log-smooth-invertible-torsion-log-regular, which is VI 1.8 with invertible torsion. It is a true generalization of lem-trf-log-smooth-log-regular, which requires a torsion-free cokernel, and Step 1 needs it.\n\nBatch 5: def-trf-fs-log-blowup (general definition), lem-trf-fs-face-sharpening (monoid algebra) and lem-trf-fg-torsionfree-group-free (f.g. abelian groups) are generic, not trace-formula or Poincaré-duality steps. All three are already in the base batch-5 closure, and the fixed delivery adds no trf or pod node. Accepted.\n\nAccepted tool_uses: face-sharpening, fg basis, algebraic closure, 01T6, étale composition/cancellation, VI 1.7 node, étale⇒smooth.; 1 file(s) fixed by the reviewer"
  }
 }
