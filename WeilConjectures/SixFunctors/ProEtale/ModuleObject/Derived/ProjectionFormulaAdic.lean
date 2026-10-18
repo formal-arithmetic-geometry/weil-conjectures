@@ -104,7 +104,8 @@ theorem isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingO
     (hK : localizingBoundedConstructible 𝐎 X.left K) :
     IsIso ((baseChangeMap 𝐎 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
   isIso_baseChangeMap_of_localizing_padicIntegersRingObj ℓ E sq
-    (fun _ hK' ↦ isIso_baseChangeMap_padicIntegersRingObj ℓ E sq hK') hK
+    (fun K hK' ↦
+      (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ E p).2.1 sq K hK') hK
 
 /-- Blueprint `det-thm-sf-pf-adic-projection`: The integral proper projection formula.
 
@@ -135,7 +136,9 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingO
     (∀ (K : 𝔻[𝐎](X.left)) (L : 𝔻[𝐎](Y.left)), localizingBoundedConstructible 𝐎 X.left K →
       localizingBoundedConstructible 𝐎 Y.left L →
         IsIso (((projectionMap 𝐎 p.left).app K).app L)) :=
-  ⟨fun _ _ hK hL ↦ isIso_projectionMap_padicIntegersRingObj ℓ E p hK hL,
+  ⟨fun K L hK hL ↦
+      (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (X' := X) (Y' := Y) ℓ E
+        p).2.2 K L hK hL,
     fun _ _ hA hB ↦ localizingBoundedConstructible_tensor 𝐎
       (fun _ _ hK hL ↦ boundedConstructible_tensor_padicIntegersRingObj ℓ E hK hL) hA hB,
     fun _ _ hA hB ↦ localizingBoundedConstructible_tensor 𝐎
@@ -145,7 +148,8 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingO
       (localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj ℓ E p).2
       (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐎 ℓ p L hL)
       (fun _ _ hK hL ↦ boundedConstructible_tensor_padicIntegersRingObj ℓ E hK hL)
-      (fun _ _ hM hL ↦ isIso_projectionMap_padicIntegersRingObj ℓ E p hM hL) hK hL⟩
+      (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (X' := X) (Y' := Y) ℓ E
+        p).2.2 hK hL⟩
 
 /-- Blueprint `sk-thm-sf-pf-adic`: Open direct image and projection formula.
 

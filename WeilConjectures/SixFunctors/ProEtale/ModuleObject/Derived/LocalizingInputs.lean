@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`
@@ -15,14 +16,17 @@ The projection formula and proper base change on the localizing categories `Loc(
 for the `ℓ`-adic coefficient rings `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` (blueprint `sk-thm-sf-pf-adic`,
 `sk-thm-sf-pf-field`) rest on the following statements of other subsections of the blueprint,
 stated here for the module objects over `Λ_X` of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject` (each theorem carries the blueprint id of the
-node it formalises; they are not proved here):
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject`. Each theorem carries the blueprint id of the
+node it formalises and states that node for one coefficient ring; the docstring lists the
+clauses of the node which are not stated, for lack of the relevant notions for module objects.
+They are not proved here.
 
 * `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes;
 * `det-thm-sfb-proper-base-change-integral`, `det-thm-sfb-proper-base-change-rational`: proper
-  base change and the projection formula on `Dbc(-, Λ)`;
+  direct image, proper base change and the projection formula on `Dbc(-, Λ)`;
 * `det-prop-int-compactness-direct-sums`, `sk-prop-proper-image-localizing`: the proper direct
-  image maps `Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and preserves direct sums there;
+  image maps `Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and preserves direct sums there (and so does
+  the extension by zero along an open immersion);
 * `sk-prop-proper-base-change-unbounded`, `det-proper-base-change-unbounded-extension`: proper
   base change on the localizing categories;
 * `sk-prop-open-coefficients`: the direct image along a quasi-compact open immersion preserves
@@ -75,7 +79,8 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
-(`ℓ`-adic `Λ`); the case `Λ = 𝒪̲_E`. If `K, L ∈ D(Mod_{𝒪_{E,X}})` are bounded constructible, then
+(`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = 𝒪̲_E`.
+If `K, L ∈ D(Mod_{𝒪_{E,X}})` are bounded constructible, then
 so is `K ⊗ᴸ_{𝒪_{E,X}} L`. -/
 theorem boundedConstructible_tensor_padicIntegersRingObj
     {K L : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
@@ -86,32 +91,49 @@ theorem boundedConstructible_tensor_padicIntegersRingObj
   sorry
 
 /-- Blueprint `det-thm-sfb-proper-base-change-integral`: Proper direct image, base change and
-projection formula for `𝒪_E`; part (3), the projection formula: for `p : X ⟶ Y` proper,
-`K ∈ Dbc(X, 𝒪_E)` and `M ∈ Dbc(Y, 𝒪_E)`, the projection formula map
-`Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` is an isomorphism. -/
-theorem isIso_projectionMap_padicIntegersRingObj (p : X ⟶ Y) [IsProper p.left]
-    {K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
-    {M : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](Y.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K)
-    (hM : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left) M) :
-    IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E) p.left).app K).app M) :=
-  sorry
+projection formula for `𝒪_E`. Let `p : X ⟶ Y` be proper.
 
-/-- Blueprint `det-thm-sfb-proper-base-change-integral`: Proper direct image, base change and
-projection formula for `𝒪_E`; part (3), proper base change: for a cartesian square
-`g' ≫ p = p' ≫ g` with `p` proper and `K ∈ Dbc(X, 𝒪_E)`, the base change map
-`g^*Rp_*K ⟶ Rp'_*g'^*K` is an isomorphism. -/
-theorem isIso_baseChangeMap_padicIntegersRingObj {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'}
-    {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
-    {K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K) :
-    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E)
-      ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
+1. For `K ∈ Dbc(X, 𝒪_E)`, `Rp_*K` is derived `π_E`-complete, and
+   `(Rp_*K) ⊗ᴸ 𝒪_{E,Y}/π_E ≃ Rp_*(K ⊗ᴸ 𝒪_{E,X}/π_E)`; hence `Rp_*K ∈ Dbc(Y, 𝒪_E)`.
+2. (Derived Nakayama.) A derived `π_E`-complete `C` with `C ⊗ᴸ 𝒪_E/π_E = 0` is zero.
+3. The proper base change map `g^*Rp_*K ⟶ Rp'_*g'^*K` (for a cartesian square
+   `g' ≫ p = p' ≫ g`) and the projection formula map `Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` are
+   isomorphisms for `K ∈ Dbc(X, 𝒪_E)` and `M ∈ Dbc(Y, 𝒪_E)`.
+
+Stated here: the conclusion `Rp_*K ∈ Dbc(Y, 𝒪_E)` of (1), and (3). Not stated: the derived
+completeness and the reduction formula of (1), and (2): derived completeness and reduction
+modulo `π_E` (`sk-def-pe-derived-completion`) are not available for module objects over
+`𝒪_{E,X}`. -/
+theorem properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (p : X ⟶ Y)
+    [IsProper p.left] :
+    (∀ K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left),
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)
+          ((R((p.left)_*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K)) ∧
+    (∀ {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' p' p g)
+      (K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)),
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K →
+        IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E)
+          ((Over.forget _).map_commSq sq.toCommSq)).app K)) ∧
+    (∀ (K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left))
+      (M : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](Y.left)),
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left) M →
+          IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E) p.left).app K).app M)) :=
   sorry
 
 /-- Blueprint `det-prop-int-compactness-direct-sums`: Integral proper direct image on the
-localizing categories; part (3): for `p : X ⟶ Y` proper, `Rp_*` maps `Loc(Dbc(X, 𝒪_E))` into
-`Loc(Dbc(Y, 𝒪_E))` and preserves direct sums there. -/
+localizing categories. Let `p : X ⟶ Y` be proper, with fibres of dimension `≤ d`.
+
+1. For `N ∈ Cons(X, 𝒪_E)`, `Rp_*N ∈ Dbc(Y, 𝒪_E)` has cohomology in degrees `[0, 2d + 1]`; for
+   `N ∈ IndCons(X, 𝒪_E)`, `H^q Rp_*N ∈ IndCons(Y, 𝒪_E)` and vanishes outside `[0, 2d + 1]`.
+2. For `K ∈ Dic(X, 𝒪_E)`, `H^q Rp_*K` depends only on the degrees `[q - 2d - 1, q]` of `K`, and
+   `Rp_*` commutes with arbitrary direct sums of objects of `Dic(X, 𝒪_E)`.
+3. `Rp_*` maps `Loc(Dbc(X, 𝒪_E))` into `Loc(Dbc(Y, 𝒪_E))` and preserves direct sums there.
+
+Stated here: (3), which does not involve `d`. Not stated: (1) and (2), which are about the
+ind-constructible sheaves `IndCons(-, 𝒪_E)` and the complexes `Dic(-, 𝒪_E)` with
+ind-constructible cohomology, not available for module objects over `𝒪_{E,X}`. -/
 theorem localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj (p : X ⟶ Y)
     [IsProper p.left] :
     (∀ M, localizingBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X.left M →
@@ -139,7 +161,8 @@ theorem isIso_baseChangeMap_of_localizing_padicIntegersRingObj {p : X ⟶ Y} {g 
 
 /-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
 `Λ = 𝒪̲_E`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, 𝒪_E)` into
-`Dbc(X, 𝒪_E)`. -/
+`Dbc(X, 𝒪_E)`. The node states this for `Λ = 𝒪_E, E, ℚ̄_ℓ`; only the case `Λ = 𝒪̲_E`, the one
+used, is stated here. -/
 theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicIntegersRingObj
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
@@ -162,7 +185,8 @@ set_option hygiene false in
 local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
 
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
-(`ℓ`-adic `Λ`); the case `Λ = E̲`. If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
+(`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = E̲`.
+If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
 so is `K ⊗ᴸ_{Λ_X} L`. -/
 theorem boundedConstructible_tensor_continuousMapRingObj
     {K L : 𝔻[𝐄](X.left)}
@@ -172,27 +196,54 @@ theorem boundedConstructible_tensor_continuousMapRingObj
   sorry
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
-projection formula for `E` and `ℚ̄_ℓ`; part (3), the projection formula, for `Λ = E̲`: for
-`p : X ⟶ Y` proper, `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`, the projection formula map
-`Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` is an isomorphism. -/
-theorem isIso_projectionMap_continuousMapRingObj (p : X ⟶ Y) [IsProper p.left]
-    {K : 𝔻[𝐄](X.left)} {M : 𝔻[𝐄](Y.left)}
-    (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)
-    (hM : boundedConstructible (condensedRingObj 𝐄 Y.left) M) :
-    IsIso (((projectionMap 𝐄 p.left).app K).app M) :=
+projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = E̲`. Let `p : X ⟶ Y` be proper.
+
+1. For `K ∈ D(X_proét, 𝒪_E)` bounded below, `Rp_*(K[1/ℓ]) ≃ (Rp_*K)[1/ℓ]`; for
+   `K ∈ D(X_proét, E)` bounded below and `F/E` finite, `Rp_*(K_F) ≃ (Rp_*K)_F` and
+   `Rp_*(K_{ℚ̄_ℓ}) ≃ (Rp_*K)_{ℚ̄_ℓ}`, via the canonical maps.
+2. `Rp_*` maps `Dbc(X, Λ)` into `Dbc(Y, Λ)`.
+3. The proper base change map `g^*Rp_*K ⟶ Rp'_*g'^*K` (for a cartesian square
+   `g' ≫ p = p' ≫ g`) and the projection formula map `Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` are
+   isomorphisms for `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`.
+
+Stated here: (2) and (3), for `Λ = E̲`. Not stated: the comparisons (1) of the direct image
+with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
+the corresponding morphisms of condensed rings and the flatness needed for the comparison maps
+`AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are not available for these
+coefficient rings. -/
+theorem properDirectImage_baseChange_projectionFormula_continuousMapRingObj (p : X ⟶ Y)
+    [IsProper p.left] :
+    (∀ K : 𝔻[𝐄](X.left), boundedConstructible (condensedRingObj 𝐄 X.left) K →
+      boundedConstructible (condensedRingObj 𝐄 Y.left) ((R((p.left)_*⟦𝐄⟧)).obj K)) ∧
+    (∀ {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' p' p g)
+      (K : 𝔻[𝐄](X.left)), boundedConstructible (condensedRingObj 𝐄 X.left) K →
+        IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K)) ∧
+    (∀ (K : 𝔻[𝐄](X.left)) (M : 𝔻[𝐄](Y.left)), boundedConstructible (condensedRingObj 𝐄 X.left) K →
+      boundedConstructible (condensedRingObj 𝐄 Y.left) M →
+        IsIso (((projectionMap 𝐄 p.left).app K).app M)) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
-the proper direct image, for `Λ = E̲` (for which `Dctf = Dbc`): for `p : X ⟶ Y` proper,
-`Rp_*` restricts to an exact functor `Loc(Dbc(X, Λ)) ⥤ Loc(Dbc(Y, Λ))` that preserves direct
-sums. -/
-theorem localizingBoundedConstructible_rightDerivedLowerStar_continuousMapRingObj (p : X ⟶ Y)
-    [IsProper p.left] :
-    (∀ M, localizingBoundedConstructible 𝐄 X.left M →
-      localizingBoundedConstructible 𝐄 Y.left ((R((p.left)_*⟦𝐄⟧)).obj M)) ∧
-    (R((p.left)_*⟦𝐄⟧)).PreservesCoproductsOn.{u + 1}
-      (localizingBoundedConstructible 𝐄 X.left) :=
-  sorry
+the case `Λ = E̲` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps
+`Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and preserves direct sums there. If `j : U ⟶ X` is an
+open immersion, `j_!` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`, preserves direct sums, and maps
+`Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`. Both functors are exact, being triangulated functors
+of the ambient derived categories. The statement on `j_!` is
+`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace (blueprint
+`det-proper-image-localizing-open`). -/
+theorem localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj :
+    (∀ (p : X ⟶ Y) [IsProper p.left],
+      (∀ M, localizingBoundedConstructible 𝐄 X.left M →
+        localizingBoundedConstructible 𝐄 Y.left ((R((p.left)_*⟦𝐄⟧)).obj M)) ∧
+      (R((p.left)_*⟦𝐄⟧)).PreservesCoproductsOn.{u + 1}
+        (localizingBoundedConstructible 𝐄 X.left)) ∧
+    (∀ (j : X' ⟶ X) [IsOpenImmersion j.left],
+      boundedConstructible (condensedRingObj 𝐄 X'.left) ≤
+          (boundedConstructible (condensedRingObj 𝐄 X.left)).inverseImage D((j.left)_!open⟦𝐄⟧) ∧
+        (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) D((j.left)_!open⟦𝐄⟧)) ∧
+        localizingBoundedConstructible 𝐄 X'.left ≤
+          (localizingBoundedConstructible 𝐄 X.left).inverseImage D((j.left)_!open⟦𝐄⟧)) :=
+  ⟨fun _ _ ↦ sorry, fun j _ ↦ localizingClosure_boundedConstructible_openImmersionLowerShriek 𝐄 ℓ j⟩
 
 /-- Blueprint `sk-prop-proper-base-change-unbounded`: Proper base change on the localizing
 categories, for `Λ = E̲` (for which `Dctf = Dbc`): for a cartesian square
@@ -215,7 +266,8 @@ set_option hygiene false in
 local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
-(`ℓ`-adic `Λ`); the case `Λ = ℚ̲̄_ℓ`. If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
+(`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = ℚ̲̄_ℓ`.
+If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
 so is `K ⊗ᴸ_{Λ_X} L`. -/
 theorem boundedConstructible_tensor_padicAlgClRingObj
     {K L : 𝔻[𝐐](X.left)}
@@ -225,27 +277,54 @@ theorem boundedConstructible_tensor_padicAlgClRingObj
   sorry
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
-projection formula for `E` and `ℚ̄_ℓ`; part (3), the projection formula, for `Λ = ℚ̲̄_ℓ`: for
-`p : X ⟶ Y` proper, `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`, the projection formula map
-`Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` is an isomorphism. -/
-theorem isIso_projectionMap_padicAlgClRingObj (p : X ⟶ Y) [IsProper p.left]
-    {K : 𝔻[𝐐](X.left)} {M : 𝔻[𝐐](Y.left)}
-    (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)
-    (hM : boundedConstructible (condensedRingObj 𝐐 Y.left) M) :
-    IsIso (((projectionMap 𝐐 p.left).app K).app M) :=
+projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = ℚ̲̄_ℓ`. Let `p : X ⟶ Y` be proper.
+
+1. For `K ∈ D(X_proét, 𝒪_E)` bounded below, `Rp_*(K[1/ℓ]) ≃ (Rp_*K)[1/ℓ]`; for
+   `K ∈ D(X_proét, E)` bounded below and `F/E` finite, `Rp_*(K_F) ≃ (Rp_*K)_F` and
+   `Rp_*(K_{ℚ̄_ℓ}) ≃ (Rp_*K)_{ℚ̄_ℓ}`, via the canonical maps.
+2. `Rp_*` maps `Dbc(X, Λ)` into `Dbc(Y, Λ)`.
+3. The proper base change map `g^*Rp_*K ⟶ Rp'_*g'^*K` (for a cartesian square
+   `g' ≫ p = p' ≫ g`) and the projection formula map `Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` are
+   isomorphisms for `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`.
+
+Stated here: (2) and (3), for `Λ = ℚ̲̄_ℓ`. Not stated: the comparisons (1) of the direct image
+with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
+the corresponding morphisms of condensed rings and the flatness needed for the comparison maps
+`AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are not available for these
+coefficient rings. -/
+theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X ⟶ Y)
+    [IsProper p.left] :
+    (∀ K : 𝔻[𝐐](X.left), boundedConstructible (condensedRingObj 𝐐 X.left) K →
+      boundedConstructible (condensedRingObj 𝐐 Y.left) ((R((p.left)_*⟦𝐐⟧)).obj K)) ∧
+    (∀ {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' p' p g)
+      (K : 𝔻[𝐐](X.left)), boundedConstructible (condensedRingObj 𝐐 X.left) K →
+        IsIso ((baseChangeMap 𝐐 ((Over.forget _).map_commSq sq.toCommSq)).app K)) ∧
+    (∀ (K : 𝔻[𝐐](X.left)) (M : 𝔻[𝐐](Y.left)), boundedConstructible (condensedRingObj 𝐐 X.left) K →
+      boundedConstructible (condensedRingObj 𝐐 Y.left) M →
+        IsIso (((projectionMap 𝐐 p.left).app K).app M)) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
-the proper direct image, for `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`): for `p : X ⟶ Y` proper,
-`Rp_*` restricts to an exact functor `Loc(Dbc(X, Λ)) ⥤ Loc(Dbc(Y, Λ))` that preserves direct
-sums. -/
-theorem localizingBoundedConstructible_rightDerivedLowerStar_padicAlgClRingObj (p : X ⟶ Y)
-    [IsProper p.left] :
-    (∀ M, localizingBoundedConstructible 𝐐 X.left M →
-      localizingBoundedConstructible 𝐐 Y.left ((R((p.left)_*⟦𝐐⟧)).obj M)) ∧
-    (R((p.left)_*⟦𝐐⟧)).PreservesCoproductsOn.{u + 1}
-      (localizingBoundedConstructible 𝐐 X.left) :=
-  sorry
+the case `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps
+`Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and preserves direct sums there. If `j : U ⟶ X` is an
+open immersion, `j_!` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`, preserves direct sums, and maps
+`Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`. Both functors are exact, being triangulated functors
+of the ambient derived categories. The statement on `j_!` is
+`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace (blueprint
+`det-proper-image-localizing-open`). -/
+theorem localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj :
+    (∀ (p : X ⟶ Y) [IsProper p.left],
+      (∀ M, localizingBoundedConstructible 𝐐 X.left M →
+        localizingBoundedConstructible 𝐐 Y.left ((R((p.left)_*⟦𝐐⟧)).obj M)) ∧
+      (R((p.left)_*⟦𝐐⟧)).PreservesCoproductsOn.{u + 1}
+        (localizingBoundedConstructible 𝐐 X.left)) ∧
+    (∀ (j : X' ⟶ X) [IsOpenImmersion j.left],
+      boundedConstructible (condensedRingObj 𝐐 X'.left) ≤
+          (boundedConstructible (condensedRingObj 𝐐 X.left)).inverseImage D((j.left)_!open⟦𝐐⟧) ∧
+        (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) D((j.left)_!open⟦𝐐⟧)) ∧
+        localizingBoundedConstructible 𝐐 X'.left ≤
+          (localizingBoundedConstructible 𝐐 X.left).inverseImage D((j.left)_!open⟦𝐐⟧)) :=
+  ⟨fun _ _ ↦ sorry, fun j _ ↦ localizingClosure_boundedConstructible_openImmersionLowerShriek 𝐐 ℓ j⟩
 
 /-- Blueprint `sk-prop-proper-base-change-unbounded`: Proper base change on the localizing
 categories, for `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`): for a cartesian square

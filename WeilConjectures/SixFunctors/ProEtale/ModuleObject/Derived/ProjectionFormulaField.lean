@@ -113,11 +113,14 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_continuousMapRingO
     (hB : localizingBoundedConstructible 𝐄 Y.left B) :
     IsIso (((projectionMap 𝐄 p.left).app A).app B) :=
   isIso_projectionMap_of_localizingBoundedConstructible 𝐄 p.left
-    (localizingBoundedConstructible_rightDerivedLowerStar_continuousMapRingObj ℓ E p).1
-    (localizingBoundedConstructible_rightDerivedLowerStar_continuousMapRingObj ℓ E p).2
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X) ℓ E).1
+      p).1
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X) ℓ E).1
+      p).2
     (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐄 ℓ p L hL)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_continuousMapRingObj ℓ E hK hL)
-    (fun _ _ hM hL ↦ isIso_projectionMap_continuousMapRingObj ℓ E p hM hL) hA hB
+    (properDirectImage_baseChange_projectionFormula_continuousMapRingObj (X' := X) (Y' := Y) ℓ E
+      p).2.2 hA hB
 
 /-- Blueprint `sk-thm-sf-pf-field`: Projection formula and proper base change with rational
 coefficients; the case `Λ = E`.
@@ -187,11 +190,12 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicAlgClRingObj
     (hB : localizingBoundedConstructible 𝐐 Y.left B) :
     IsIso (((projectionMap 𝐐 p.left).app A).app B) :=
   isIso_projectionMap_of_localizingBoundedConstructible 𝐐 p.left
-    (localizingBoundedConstructible_rightDerivedLowerStar_padicAlgClRingObj ℓ p).1
-    (localizingBoundedConstructible_rightDerivedLowerStar_padicAlgClRingObj ℓ p).2
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).1
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).2
     (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐐 ℓ p L hL)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_padicAlgClRingObj ℓ hK hL)
-    (fun _ _ hM hL ↦ isIso_projectionMap_padicAlgClRingObj ℓ p hM hL) hA hB
+    (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (X' := X) (Y' := Y) ℓ
+      p).2.2 hA hB
 
 /-- Blueprint `sk-thm-sf-pf-field`: Projection formula and proper base change with rational
 coefficients; the case `Λ = ℚ̄_ℓ`.

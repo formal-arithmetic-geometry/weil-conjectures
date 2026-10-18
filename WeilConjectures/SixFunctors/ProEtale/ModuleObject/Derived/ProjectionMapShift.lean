@@ -26,6 +26,29 @@ map is compatible with shifts and cones") used when extending the projection for
   commutes with the shifts in `L`.
 - `AlgebraicGeometry.ProEtale.CondensedRing.commShift_projectionMap_flipApp`: the projection map
   commutes with the shifts in `M`.
+
+## Sorried input
+
+The two instances on the tensor comparison `m : Lp^*(K ⊗ᴸ L) ⟶ Lp^*K ⊗ᴸ Lp^*L`,
+`commShift_leftDerivedUpperStarTensor_app` and `commShift_leftDerivedUpperStarTensor_flipApp`,
+are `sorry`ed. The étale analogue (`commShift_leftDerivedUpperStarTensorComparisonApp` in the
+namespace `AlgebraicGeometry.Etale`) is proved by `DerivedCategory.commShift_of_tensorLeft_fac`;
+the same argument
+here needs, for each `K`, a K-flat `X` with `Qh X ≅ K` whose pullback `p^* X` is K-flat, and the
+value of `m` on `(Qh X, Qh M)` through the counits. Both depend on `sorry`ed foundations of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` and
+`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`:
+
+* `m` is defined by the universal property of the left derived bifunctor
+  `Lp^* - ⊗ᴸ Lp^* -`, whose derivedness
+  (`AlgebraicGeometry.ProEtale.CondensedRing.isLeftDerivedFunctor₂_upperStarTensor`) and whose
+  counit's naturality are `sorry`ed, so the only handle on `m` is this `sorry`ed instance;
+* the flat resolutions of module objects come from the `sorry`ed instance
+  `CategoryTheory.Mod.hasFunctorialFlatResolution`, so only the flatness of the resolving objects
+  is known, and the K-flatness of `p^* X` then needs that `p^*` on module objects preserves flat
+  objects (`CategoryTheory.Functor.PreservesFlat`), which is not available;
+* `m` is built from the lax structure `p^* A ⊗ p^* B ⟶ p^*(A ⊗ B)`, while
+  `DerivedCategory.commShift_of_tensorLeft_fac` is stated for an oplax one.
 -/
 
 @[expose] public section
