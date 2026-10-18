@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathrm{Cov}$ consist of all finite basis coverings. The refinement hypothesis says precisely that, for each $U\\in\\mathcal B$, these coverings are cofinal among coverings of $U$: each member of the refinement maps over $U$ to a member of the original covering. Closure under fibre products puts every object occurring in their Cech complexes in $\\mathcal B$. Use the chosen products, alternating restrictions and ordered tuples of [def-weil-pbc-site-cech-complex]. No coproduct object $\\coprod_a V_a$ in the site is needed.",
+   "text": "Let $\\mathrm{Cov}$ consist of all finite basis coverings. The refinement hypothesis says precisely that, for each $U\\in\\mathcal B$, these coverings are cofinal among coverings of $U$: each member of the refinement maps over $U$ to a member of the original covering. Closure under fibre products puts every object occurring in their Cech complexes in $\\mathcal B$. Use the chosen products, alternating restrictions and ordered tuples of [def-weil-pbc-site-cech-complex]. No coproduct object $\\coprod_a V_a$ in the site is needed. In Lean the finite family is indexed in the common universe by ULift (Fin m); private reindexCech, unliftExact and liftExact transport positive exactness in both directions by precomposing cochains with ULift.up or ULift.down. Their alternating differentials commute term by term.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "For each $U\\in\\mathcal B$, apply [lem-weil-pbc-site-ses-cech-h1-surjective] to this short exact sequence of underlying abelian sheaves and the cofinal set of finite basis coverings of $U$. Its degree-one vanishing hypothesis holds for $A$, so $I(U)\\to Q(U)$ is surjective. Explicitly, locally lift $s\\in Q(U)$ to sections $i_a\\in I(V_a)$ on such a finite refinement. On overlaps $i_b-i_a$ is the image of a unique section $c_{ab}$ of $A$, and $c_{bc}-c_{ac}+c_{ab}=0$ on triple products by cancellation and the injectivity of $A\\to I$ on sections. Vanishing of $\\check H^1$ gives $c_{ab}=b_b-b_a$. Replacing $i_a$ by $i_a-b_a$ makes the lifts agree on overlaps; they glue in $I$ to a preimage of $s$. Left exactness on sections follows from the sectionwise kernel description, so $0\\to A(U)\\to I(U)\\to Q(U)\\to0$ is short exact for every basis object.",
+   "text": "For each $U\\in\\mathcal B$, apply [lem-weil-pbc-site-ses-cech-h1-surjective] to this short exact sequence of underlying abelian sheaves and the cofinal set of finite basis coverings of $U$. Its degree-one vanishing hypothesis holds for $A$, so $I(U)\\to Q(U)$ is surjective. Explicitly, locally lift $s\\in Q(U)$ to sections $i_a\\in I(V_a)$ on such a finite refinement. On overlaps $i_b-i_a$ is the image of a unique section $c_{ab}$ of $A$, and $c_{bc}-c_{ac}+c_{ab}=0$ on triple products by cancellation and the injectivity of $A\\to I$ on sections. Vanishing of $\\check H^1$ gives $c_{ab}=b_b-b_a$. Replacing $i_a$ by $i_a-b_a$ makes the lifts agree on overlaps; they glue in $I$ to a preimage of $s$. Left exactness on sections follows from the sectionwise kernel description, so $0\\to A(U)\\to I(U)\\to Q(U)\\to0$ is short exact for every basis object. For the cited theorem, Cov consists of coverings whose index type is ULift (Fin m), with every member in B. Presieve.ofArrows_comp_eq_of_surjective proves that lifting or lowering this index does not change the covering presieve. The exact functor SheafOfModules.toSheaf sends the module short exact sequence to the abelian sheaf sequence used here.",
    "uses": [
     "lem-weil-pbc-site-ses-cech-h1-surjective",
     "def-weil-sheaf-of-modules-category",
@@ -77,7 +77,7 @@
    }
   },
   {
-   "text": "For each $\\mathcal V\\in\\mathrm{Cov}$ all its iterated intersections are in $\\mathcal B$ by step 1. Taking in degree $p$ the finite product of the section sequences of step 4 gives a short exact sequence of Cech cochain groups: kernels are coordinatewise, and a tuple in the quotient has a preimage obtained by choosing a preimage in each of its finitely many coordinates. The maps commute with alternating restrictions by naturality. Hence $0\\to\\check C^\\bullet(\\mathcal V,A)\\to\\check C^\\bullet(\\mathcal V,I)\\to\\check C^\\bullet(\\mathcal V,Q)\\to0$ is degreewise short exact. By [lem-weil-pbc-complex-ses-homology-long-exact], for $p>0$ the sequence $\\check H^p(\\mathcal V,I)\\to\\check H^p(\\mathcal V,Q)\\to\\check H^{p+1}(\\mathcal V,A)$ is exact. Both outside groups vanish, the first by step 2 and the last by the hypothesis on $A$. Thus $Q$ has the same positive Cech vanishing property as $A$.",
+   "text": "For each $\\mathcal V\\in\\mathrm{Cov}$ all its iterated intersections are in $\\mathcal B$ by step 1. Taking in degree $p$ the finite product of the section sequences of step 4 gives a short exact sequence of Cech cochain groups: kernels are coordinatewise, and a tuple in the quotient has a preimage obtained by choosing a preimage in each of its finitely many coordinates. The maps commute with alternating restrictions by naturality. Hence $0\\to\\check C^\\bullet(\\mathcal V,A)\\to\\check C^\\bullet(\\mathcal V,I)\\to\\check C^\\bullet(\\mathcal V,Q)\\to0$ is degreewise short exact. By [lem-weil-pbc-complex-ses-homology-long-exact], for $p>0$ the sequence $\\check H^p(\\mathcal V,I)\\to\\check H^p(\\mathcal V,Q)\\to\\check H^{p+1}(\\mathcal V,A)$ is exact. Both outside groups vanish, the first by step 2 and the last by the hypothesis on $A$. Thus $Q$ has the same positive Cech vanishing property as $A$. Use the products hypothesis on the ULift-indexed covering and reindex back to Fin m. Its degreewise short exactness follows by choosing preimages in each coordinate and sectionwise kernel exactness. SiteCechComplex.comparison_exists transports the vanishing from these chosen products to the arbitrary products S in the conclusion.",
    "uses": [
     "def-weil-pbc-site-cech-complex",
     "lem-weil-pbc-complex-ses-homology-long-exact"
@@ -89,12 +89,11 @@
    }
   },
   {
-   "text": "For each basis object $U$, evaluation $\\Gamma(U,-):\\Mod(\\mathcal O)\\to\\mathbf{Ab}$ is additive and preserves kernels, since addition and kernels are sectionwise [def-weil-sheaf-of-modules-category]; it is left exact [def-sp-left-exact-additive]. Apply [lem-weil-pbc-derived-functor-long-exact] to $0\\to A\\to I\\to Q\\to0$, and [lem-weil-pbc-derived-functor-injective-vanishing] to $I$, in the category of module sheaves. The surjectivity in step 4 and the identification $R^0\\Gamma(U,-)=\\Gamma(U,-)$ give $H^1(U,A)=0$. For $q>1$ the adjacent zero groups $H^{q-1}(U,I)$ and $H^q(U,I)$ give an isomorphism $H^{q-1}(U,Q)\\simeq H^q(U,A)$. Now induct on $q\\ge1$ with the claim for every sheaf $A$ having the Cech vanishing property and every basis object $U$. The case $q=1$ has just been proved. For $q>1$, step 5 shows that the quotient $Q$ again has the property, so the induction hypothesis gives $H^{q-1}(U,Q)=0$, and the displayed isomorphism gives $H^q(U,A)=0$. Taking $A=M$ proves the second assertion in every positive degree.",
+   "text": "Apply the existing generic dimension-shifting criterion [lem-pc-right-acyclic-of-epi-map-g] to the additive left exact evaluation functor in module sheaves and the property P of positive Cech vanishing on all finite basis coverings. Step 2 supplies P for injectives, step 5 supplies closure under cokernels in short exact sequences whose first two terms satisfy P, and step 4 gives epimorphic evaluation of quotient maps when the first term satisfies P. The criterion embeds A into an injective, takes its cokernel Q in P, uses the degree-zero surjectivity for degree one, and inducts on the degree with the derived long exact sequence. Enough injectives follows from the Grothendieck theorem of step 3. Finally InjectiveResolution.isoRightDerivedObj identifies the resulting zero derived evaluation with the homology of the evaluation of any specified injective resolution, exactly as required by the conclusion.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-sp-left-exact-additive",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-weil-pbc-derived-functor-injective-vanishing"
+    "lem-pc-right-acyclic-of-epi-map-g"
    ],
    "elementary": false,
    "source": {
@@ -114,13 +113,13 @@
   "lem-weil-pbc-site-ses-cech-h1-surjective",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "def-sp-left-exact-additive",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-derived-functor-injective-vanishing"
+  "lem-pc-right-acyclic-of-epi-map-g"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection), dimension-shifting proof in module sheaves; Lemmas Tags 03FB and 03FC for injective Cech vanishing"
+  "place": "Tags 03F9, 03FB, 03FC; dimension shifting packaged by the existing proved Functor.rightAcyclic_of_epi_map_g, followed by InjectiveResolution.isoRightDerivedObj",
+  "note": "G4 stage 3, 2026-10-18: complete proof, unchanged signature; ULift transports finite covering indices, and comparison_exists handles arbitrary chosen products."
  },
  "mathlib_searches": [
   {
@@ -236,8 +235,7 @@
   "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
   "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
-  "lem-weil-pbc-site-ses-cech-h1-surjective",
-  "lem-weil-pbc-derived-functor-long-exact"
+  "lem-weil-pbc-site-ses-cech-h1-surjective"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -264,5 +262,15 @@
   "group": "NU",
   "result": "pass",
   "note": "Wrote review.md. Hypotheses, conclusions, dependencies, edge cases, docstrings and verbatim signature match. Server-only per-file compilation reproduced cleanly. No delivery defects; search-wrapper audit-log side effect documented."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062758-L-651567",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

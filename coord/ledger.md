@@ -16027,3 +16027,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/G3/Sheaf.CategoryTheory.LocalCoefficientLocalization (stage 3; reviewer PASS; first push; landing 20261018T062757-L-651115 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/G3/Sheaf.RepresentationTheory.DiscreteContinuousInjectives (stage 3; reviewer PASS; first push; landing 20261018T062757-L-651262 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/G3-discrete-continuous-injectives-universes.md)
 - 06:27 L: merged deliver/G4/Sheaf.AlgebraicGeometry.DerivedOpenRestriction (stage 3; reviewer PASS; first push; landing 20261018T062758-L-651447 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/G4/Sheaf.CategoryTheory.ModuleCechCriterion (stage 3; reviewer PASS; first push; landing 20261018T062758-L-651567 (proof); batch 20261018T062645; modules 1; new nodes 0)
