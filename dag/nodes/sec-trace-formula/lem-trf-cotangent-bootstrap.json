@@ -9,12 +9,69 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-trf-cotangent-resolution-coherence",
-  "lem-trf-cotangent-transitivity-triangle"
+  "def-weil-pbc-tor-modules",
+  "lem-trf-cotangent-resolution-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=B\\otimes_A B$, with $\\iota_1(b)=b\\otimes1$, $\\iota_2(b)=1\\otimes b$ and multiplication $\\mu:D\\to B$. Choose a free $A$-module resolution $F_\\bullet\\to B$. As a bounded-above complex of flat $A$-modules it is K-flat [lem-pc-module-bounded-flat-kflat], so by [lem-pc-kflat-scalar-extension-counit] the derived extension of scalars $B\\otimes_A^{\\mathbf L}B$ along $A\\to B$ is computed by $F_\\bullet\\otimes_A B$. Its cohomology in degree $-i$ is $\\operatorname{Tor}^A_i(B,B)$ [def-weil-pbc-tor-modules], and right exactness of $\\otimes$ identifies its $H^0$ with $D$ through the multiplication map. Hence the Tor hypothesis says exactly that the canonical multiplication map $B\\otimes_A^{\\mathbf L}B\\to D[0]$ is a quasi-isomorphism. Apply [lem-trf-cotangent-flat-base-change] to the commutative square with $C=B$, $A'=B$ (both via the given map $A\\to B$), $C'=D$, $C\\to C'$ equal to $\\iota_1$ and $A'\\to C'$ equal to $\\iota_2$. Its base-change morphism is a canonical isomorphism $\\beta:L_{B/A}\\otimes_B^{\\mathbf L}D\\xrightarrow{\\sim}L_{D/B}$ in $D(D)$. Here the derived tensor is taken along $\\iota_1$, and $L_{D/B}$ is the cotangent complex of $\\iota_2$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-scalar-extension-counit",
+    "def-weil-pbc-tor-modules",
+    "lem-trf-cotangent-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), proof: first sentence invoking Tag 08QQ"
+   }
+  },
+  {
+   "text": "Apply the canonical transitivity triangle [lem-trf-cotangent-transitivity-triangle] to $B\\xrightarrow{\\iota_2}D\\xrightarrow{\\mu}B$, whose composite is $\\mathrm{id}_B$. This gives a distinguished triangle $L_{D/B}\\otimes_D^{\\mathbf L}B\\to L_{B/B}\\to L_{B/D}\\to(L_{D/B}\\otimes_D^{\\mathbf L}B)[1]$ in $D(B)$, with $L_{D/B}$ the complex of Step 1. The third term is $L_{B/D}=0$ by the hypothesis of the item. For the middle term, [lem-trf-localization-cotangent-vanishing] with $R=B$ and $S=\\{1\\}$ gives $L_{S^{-1}B/B}=0$. The canonical map $j:B\\to S^{-1}B$ is a $B$-algebra isomorphism. The squares from $\\mathrm{id}:B\\to B$ to $j$ given by $(\\mathrm{id}_B,j)$ and back by $(\\mathrm{id}_B,j^{-1})$ induce standard maps between $L_{B/B}$ and $L_{S^{-1}B/B}$ [lem-trf-cotangent-resolution-coherence]. Since these maps preserve identities and compose strictly, they are mutually inverse isomorphisms of complexes. Thus every $H^i(L_{B/B})$ vanishes, so $L_{B/B}=0$. In the long exact cohomology sequence of the triangle [lem-sf-derived-homology-long-exact], each $H^i(L_{D/B}\\otimes_D^{\\mathbf L}B)$ sits between $H^{i-1}(L_{B/D})=0$ and $H^i(L_{B/B})=0$, hence vanishes. So $L_{D/B}\\otimes_D^{\\mathbf L}B$ is acyclic, that is, zero in $D(B)$.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-localization-cotangent-vanishing",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), proof: distinguished triangle for $B\\to B\\otimes_A B\\to B$"
+   }
+  },
+  {
+   "text": "By [lem-trf-cotangent-resolution-coherence], $L_{B/A}$ is the complex $K=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}B)$ with $P_\\bullet=P^{\\mathrm{std}}_\\bullet(B/A)$, and $K$ is zero in positive degrees. Each $P_n$ is a polynomial $A$-algebra, so by [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] every term $K^{-n}$ is a free $B$-module. Hence $K$ is K-flat [lem-pc-module-bounded-flat-kflat], and [lem-pc-kflat-scalar-extension-counit] computes $L_{B/A}\\otimes_B^{\\mathbf L}D$, taken along $\\iota_1$, as $K\\otimes_B D$. That complex also has free terms and is bounded above. By the same two nodes, applying $-\\otimes_D^{\\mathbf L}B$ along $\\mu$ to it is computed by $(K\\otimes_B D)\\otimes_D B$. Since $\\mu\\iota_1=\\mathrm{id}_B$, the termwise $B$-linear maps $(k\\otimes d)\\otimes b\\mapsto\\mu(d)b\\,k$ and $k\\mapsto(k\\otimes1)\\otimes1$ are mutually inverse. They commute with the differentials. So $(L_{B/A}\\otimes_B^{\\mathbf L}D)\\otimes_D^{\\mathbf L}B\\cong L_{B/A}$ in $D(B)$. Applying the functor $-\\otimes_D^{\\mathbf L}B$ to the isomorphism $\\beta$ of Step 1 gives $L_{B/A}\\cong L_{D/B}\\otimes_D^{\\mathbf L}B$, which is zero by Step 2. Hence $L_{B/A}=0$ in $D(B)$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), proof: final displayed derived-tensor cancellation; K-flat computation as in Tag 08QQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-scalar-extension-counit",
+  "def-weil-pbc-tor-modules",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-localization-cotangent-vanishing",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R1 (lemma-bootstrap), with the K-flat computation of the derived tensor cancellation made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-cotangent-vanishing",
@@ -51,7 +108,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting ring/sheaf input: the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1).",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Vanishing of the full cotangent complex for etale ring maps (Step 3 there): the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1).",
    "via": [
     "lem-trf-etale-cotangent-vanishing",
     "lem-trf-lci-cotangent-presentation",
@@ -69,5 +126,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cotangent-bootstrap",
+  "worker": "stage1",
+  "summary": "Preserved the imported statement and split the Tag 08R1 argument into the derived base-change identification, the transitivity-triangle vanishing, and the derived-tensor cancellation back to L_{B/A}. Reused four existing DAG nodes; no new nodes or Mathlib leaves were needed. Reviewer repair (Q67 maintainer reader): Step 3 now computes the derived tensor cancellation on the free-term K-flat model of L_{B/A} instead of citing the single-category monoidal node lem-sfb-derived-monoidal, which does not state composition of derived scalar extensions along B->D->B. Step 1 derives the Tor/derived-tensor identification from the Tor definition. Step 2 makes the L_{B/B}=S^{-1}B transport and the cohomology argument explicit, and fixes the two factor maps. stmt_deps: the transitivity triangle was replaced by the Tor definition.",
+  "blueprint": "Realizes the supporting ring/sheaf input sentence in the inherited blueprint proof: “Supporting ring/sheaf input: the Tor-vanishing bootstrap from the diagonal cotangent complex to L_{B/A} (Stacks Tag 08R1).”",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Steps 1 and 3 take from it only that bounded-above complexes of flat (free) modules are K-flat; generic homological algebra, no node of sk-i-curve-zero states it (already an accepted tool use of lem-trf-cotangent-flat-base-change)."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "Steps 1 and 3 take from it only that derived extension of scalars is computed termwise on K-flat complexes; generic, no node of the unit states it (already an accepted tool use of lem-trf-cotangent-flat-base-change)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-955153c1d",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-955153c1d (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item's statement matches Stacks Tag 08R1 (cotangent.tex lemma-bootstrap) hypothesis by hypothesis and is not weakened. I tested it on A=B, k[t]→k[t]/t (Tor_1≠0, so the hypothesis correctly fails), A→A[x] (L_{B/B⊗B}≠0, consistent with L_{B/A}=Ω≠0), localizations and the zero ring. The nearest existing node is lem-trf-derived-diagonal-cotangent-vanishing (08R0), which has a different hypothesis and is not a duplicate. There are no new nodes. Step 1's use of 08QQ via lem-trf-cotangent-flat-base-change matches that node's quasi-isomorphism hypothesis and its base-change map β. I fixed three faults in one corrected item JSON under fixes/. (1) C4/E5: Step 3 cited lem-sfb-derived-monoidal, which only gives the monoidal structure of a single category, not the composition of derived scalar extension along B→D→B. Step 3 now computes this on the free-term K-flat model K=s(Ω⊗B) of L_{B/A}, citing resolution-coherence, the polynomial Kähler basis leaf, lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit. It writes out the explicit inverse rebracketing (k⊗d)⊗b↦μ(d)bk. The monoidal tool use is withdrawn. (2) C1: Step 1 now derives the Tor ⇔ derived-tensor quasi-isomorphism from a free resolution, citing def-weil-pbc-tor-modules, and fixes the factor maps ι1/ι2. Step 2 now transports L_{B/B}≅L_{{1}^{-1}B/B} through the resolution-coherence functoriality and cites the Mathlib long exact sequence leaf lem-sf-derived-homology-long-exact. (3) stmt_deps: the unused transitivity triangle is removed and def-weil-pbc-tor-modules added. I also filled blueprint.from.place in the same chain format as the sibling nodes. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit, both generic and already accepted on lem-trf-cotangent-flat-base-change. There is no cycle (the cited closure has 272 nodes and does not contain the item), and no SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }
