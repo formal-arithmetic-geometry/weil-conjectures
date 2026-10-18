@@ -30,9 +30,6 @@ positive degrees (blueprint `lem-kun-0ezp`), whence blueprint `lem-kun-0f1i-norm
 
 ## Main statements
 
-- `CategoryTheory.IsPullback.isLimitOfIsPullbackMap`: a cone whose square of cone points is
-  cartesian over a system of cartesian squares is a limit cone.
-- `CategoryTheory.Limits.isLimitPullbackConstCone`: base change commutes with connected limits.
 - `Subalgebra.isColimitCoconeOfMonotone`: a directed covering family of subalgebras is a filtered
   colimit.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field`
@@ -51,114 +48,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
-
-namespace CategoryTheory
-
-variable {J : Type*} [Category J] {C : Type*} [Category C]
-
-/-- Converse of `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: given a system of
-cartesian squares `Pⱼ → Xⱼ, Pⱼ → Yⱼ, Xⱼ → Sⱼ, Yⱼ → Sⱼ`, limit cones of the diagrams `X`, `Y`,
-`S`, and a cone `cP` over `P` whose induced square of cone points is cartesian, the cone `cP`
-is a limit cone. -/
-noncomputable def IsPullback.isLimitOfIsPullbackMap {P X Y S : J ⥤ C} {fst : P ⟶ X}
-    {snd : P ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
-    (h : ∀ j, IsPullback (fst.app j) (snd.app j) (f.app j) (g.app j))
-    {cP : Cone P} {cX : Cone X} {cY : Cone Y} {cS : Cone S} (hX : IsLimit cX)
-    (hY : IsLimit cY) (hS : IsLimit cS)
-    (hP : IsPullback (hX.map cP fst) (hY.map cP snd) (hS.map cX f) (hS.map cY g)) :
-    IsLimit cP where
-  lift s := hP.lift (hX.map s fst) (hY.map s snd) (hS.hom_ext fun j ↦ by
-    simpa using congrArg (s.π.app j ≫ ·) (h j).w)
-  fac s j := (h j).hom_ext
-    (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_fst, IsLimit.map_π])
-    (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_snd, IsLimit.map_π])
-  uniq s m hm := hP.hom_ext (hX.hom_ext fun j ↦ by simp [← hm])
-    (hY.hom_ext fun j ↦ by simp [← hm])
-
-namespace Limits
-
-variable [HasPullbacks C]
-
-/-- Pullbacks in a functor category are computed pointwise. -/
-lemma isPullback_pullback_app {F G H : J ⥤ C} (f : F ⟶ H) (g : G ⟶ H) (j : J) :
-    IsPullback ((pullback.fst f g).app j) ((pullback.snd f g).app j) (f.app j) (g.app j) :=
-  (IsPullback.of_hasPullback f g).map ((evaluation J C).obj j)
-
-/-- The transition squares of the diagram `j ↦ X ×_W Dⱼ` over the diagram `D` are cartesian. -/
-lemma isPullback_pullback_const_map {D : J ⥤ C} {W X : C} (a : X ⟶ W)
-    (w : D ⟶ (Functor.const J).obj W) {j k : J} (u : j ⟶ k) :
-    IsPullback ((pullback ((Functor.const J).map a) w).map u)
-      ((pullback.snd ((Functor.const J).map a) w).app j)
-      ((pullback.snd ((Functor.const J).map a) w).app k) (D.map u) := by
-  refine IsPullback.of_right ?_ ((pullback.snd ((Functor.const J).map a) w).naturality u)
-    (isPullback_pullback_app _ w k)
-  have h₁ : (pullback ((Functor.const J).map a) w).map u ≫
-      (pullback.fst ((Functor.const J).map a) w).app k =
-        (pullback.fst ((Functor.const J).map a) w).app j := by
-    simpa using (pullback.fst ((Functor.const J).map a) w).naturality u
-  have h₂ : D.map u ≫ w.app k = w.app j := by simpa using w.naturality u
-  rw [h₁, h₂]
-  exact isPullback_pullback_app _ w j
-
-/-- The cone with vertex `X'` over the diagram `j ↦ X ×_W Dⱼ`, for a commutative square
-`X' → X, X' → lim D` over `W`. -/
-@[simps pt]
-noncomputable def pullbackConstCone {D : J ⥤ C} {W X : C} (a : X ⟶ W)
-    (w : D ⟶ (Functor.const J).obj W) (cD : Cone D) {X' : C} (b : X' ⟶ X) (p' : X' ⟶ cD.pt)
-    {w₀ : cD.pt ⟶ W} (hw₀ : ∀ j, cD.π.app j ≫ w.app j = w₀) (hb : b ≫ a = p' ≫ w₀) :
-    Cone (pullback ((Functor.const J).map a) w) where
-  pt := X'
-  π :=
-    { app j := (isPullback_pullback_app _ w j).lift b (p' ≫ cD.π.app j) (by simp [hw₀, hb])
-      naturality j k u := (isPullback_pullback_app _ w k).hom_ext (by simp) (by simp) }
-
-@[reassoc (attr := simp)]
-lemma pullbackConstCone_π_app_fst {D : J ⥤ C} {W X : C} (a : X ⟶ W)
-    (w : D ⟶ (Functor.const J).obj W) (cD : Cone D) {X' : C} (b : X' ⟶ X) (p' : X' ⟶ cD.pt)
-    {w₀ : cD.pt ⟶ W} (hw₀ : ∀ j, cD.π.app j ≫ w.app j = w₀) (hb : b ≫ a = p' ≫ w₀) (j : J) :
-    (pullbackConstCone a w cD b p' hw₀ hb).π.app j ≫
-      (pullback.fst ((Functor.const J).map a) w).app j = b :=
-  IsPullback.lift_fst _ _ _ _
-
-@[reassoc (attr := simp)]
-lemma pullbackConstCone_π_app_snd {D : J ⥤ C} {W X : C} (a : X ⟶ W)
-    (w : D ⟶ (Functor.const J).obj W) (cD : Cone D) {X' : C} (b : X' ⟶ X) (p' : X' ⟶ cD.pt)
-    {w₀ : cD.pt ⟶ W} (hw₀ : ∀ j, cD.π.app j ≫ w.app j = w₀) (hb : b ≫ a = p' ≫ w₀) (j : J) :
-    (pullbackConstCone a w cD b p' hw₀ hb).π.app j ≫
-      (pullback.snd ((Functor.const J).map a) w).app j = p' ≫ cD.π.app j :=
-  IsPullback.lift_snd _ _ _ _
-
-/-- Over a connected index category, the base change `X ×_W (lim D)` of a limit along a map
-`a : X ⟶ W` is the limit of the base changes `X ×_W Dⱼ`. -/
-noncomputable def isLimitPullbackConstCone [IsConnected J] {D : J ⥤ C} {W X : C} (a : X ⟶ W)
-    (w : D ⟶ (Functor.const J).obj W) {cD : Cone D} (hD : IsLimit cD) {X' : C} (b : X' ⟶ X)
-    (p' : X' ⟶ cD.pt) {w₀ : cD.pt ⟶ W} (hw₀ : ∀ j, cD.π.app j ≫ w.app j = w₀)
-    (hpb : IsPullback b p' a w₀) :
-    IsLimit (pullbackConstCone a w cD b p' hw₀ hpb.w) := by
-  refine IsPullback.isLimitOfIsPullbackMap (isPullback_pullback_app _ w)
-    (isLimitConstCone J X) hD (isLimitConstCone J W) ?_
-  have e₁ : (isLimitConstCone J X).map (pullbackConstCone a w cD b p' hw₀ hpb.w)
-      (pullback.fst ((Functor.const J).map a) w) = b :=
-    (isLimitConstCone J X).hom_ext fun j ↦ by
-      rw [IsLimit.map_π, pullbackConstCone_π_app_fst]
-      exact (Category.comp_id b).symm
-  have e₂ : hD.map (pullbackConstCone a w cD b p' hw₀ hpb.w)
-      (pullback.snd ((Functor.const J).map a) w) = p' :=
-    hD.hom_ext fun j ↦ by simp
-  have e₃ : (isLimitConstCone J W).map (constCone J X) ((Functor.const J).map a) = a :=
-    (isLimitConstCone J W).hom_ext fun j ↦ by
-      rw [IsLimit.map_π]
-      exact (Category.id_comp a).trans (Category.comp_id a).symm
-  have e₄ : (isLimitConstCone J W).map cD w = w₀ :=
-    (isLimitConstCone J W).hom_ext fun j ↦ by
-      rw [IsLimit.map_π, hw₀]
-      exact (Category.comp_id _).symm
-  rw [e₁, e₂, e₃, e₄]
-  exact hpb
-
-end Limits
-
-end CategoryTheory
 
 namespace Subalgebra
 
@@ -302,8 +191,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
   let pD : XD ⟶ S := pullback.snd _ _
   let eD : YD ⟶ T := pullback.snd _ _
   let hD : YD ⟶ XD := pullback.map _ _ _ _ (𝟙 _) g (𝟙 _) (by simp) (by simp)
-  have hX := isPullback_pullback_app a' w
-  have hY := isPullback_pullback_app a' (g ≫ w)
+  have hX := isPullback_pullback_evaluation a' w
+  have hY := isPullback_pullback_evaluation a' (g ≫ w)
   have h₁ : hD ≫ pullback.fst a' w = pullback.fst a' (g ≫ w) := by simp [hD]
   have h₂ : hD ≫ pD = eD ≫ g := by simp [hD, pD, eD]
   have h₁' (i : I) :
@@ -318,18 +207,18 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
   have hsT (i : I) : cT.π.app i ≫ (g ≫ w).app i = t ≫ s := by
     rw [NatTrans.comp_app, ← Category.assoc, ← ht, Category.assoc, hs]
   have hpbY : IsPullback (h ≫ b) e a (t ≫ s) := sq.flip.paste_horiz hpb
-  let cX := pullbackConstCone a w cS b p' hs hpb.w
-  let cY := pullbackConstCone a (g ≫ w) cT (h ≫ b) e hsT hpbY.w
-  have hXl : IsLimit cX := isLimitPullbackConstCone a w hS b p' hs hpb
-  have hYl : IsLimit cY := isLimitPullbackConstCone a (g ≫ w) hT (h ≫ b) e hsT hpbY
+  let cX := constPullbackCone a w cS b p' hs hpb.w
+  let cY := constPullbackCone a (g ≫ w) cT (h ≫ b) e hsT hpbY.w
+  have hXl : IsLimit cX := isLimitConstPullbackCone a w hS b p' hs hpb
+  have hYl : IsLimit cY := isLimitConstPullbackCone a (g ≫ w) hT (h ≫ b) e hsT hpbY
   have e₁ (i : I) : cX.π.app i ≫ pD.app i = p' ≫ cS.π.app i :=
-    pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i
+    constPullbackCone_π_app_snd _ _ _ _ _ _ _ i
   have e₂ (i : I) : cY.π.app i ≫ eD.app i = e ≫ cT.π.app i :=
-    pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i
+    constPullbackCone_π_app_snd _ _ _ _ _ _ _ i
   have hh₀ (i : I) : h ≫ cX.π.app i = cY.π.app i ≫ hD.app i := by
     refine (hX i).hom_ext ?_ ?_
     · rw [Category.assoc, Category.assoc, h₁' i]
-      rw [pullbackConstCone_π_app_fst, pullbackConstCone_π_app_fst]
+      rw [constPullbackCone_π_app_fst, constPullbackCone_π_app_fst]
     · rw [Category.assoc, Category.assoc, h₂' i, e₁ i, reassoc_of% (e₂ i), ← ht, sq.w_assoc]
   have hpD (i : I) : QuasiCompact (pD.app i) :=
     MorphismProperty.of_isPullback (P := @QuasiCompact) (hX i) ‹_›
@@ -347,11 +236,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
   have (i : I) : CompactSpace (XD.obj i) :=
     QuasiCompact.compactSpace_of_compactSpace (pD.app i ≫ w.app i)
   have {i j : I} (f : i ⟶ j) : IsAffineHom (XD.map f) :=
-    MorphismProperty.of_isPullback (P := @IsAffineHom) (isPullback_pullback_const_map a w f).flip
+    MorphismProperty.of_isPullback (P := @IsAffineHom) (isPullback_map_pullback_const a w f).flip
       inferInstance
   have {i j : I} (f : i ⟶ j) : IsAffineHom (YD.map f) :=
     MorphismProperty.of_isPullback (P := @IsAffineHom)
-      (isPullback_pullback_const_map a (g ≫ w) f).flip inferInstance
+      (isPullback_map_pullback_const a (g ≫ w) f).flip inferInstance
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit Λ pD g eD hD hsq hS hXl hT hYl
     (fun i ↦ (e₁ i).symm) ht
     (fun i ↦ (e₂ i).symm) hh₀ sq (g ≫ w) (t ≫ s) hsT G q
