@@ -16042,3 +16042,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/H3/Sheaf.NumberTheory.Padics.AdicLimitFiniteModules (stage 3; reviewer PASS; first push; landing 20261018T062805-L-654281 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/AdicLimitFiniteModules.md)
 - 06:28 L: merged deliver/H3/Sheaf.RingTheory.PerfectPrincipalCoverGlue (stage 3; reviewer PASS; first push; landing 20261018T062806-L-654548 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/H4/Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion (stage 3; reviewer PASS; first push; landing 20261018T062806-L-654752 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/H4/Sheaf.Paper.ExchangeIdentityPasting (stage 3; reviewer PASS; first push; landing 20261018T062807-L-654978 (proof); batch 20261018T062645; modules 1; new nodes 0)

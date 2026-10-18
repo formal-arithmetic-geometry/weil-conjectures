@@ -7,10 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-! # Identity and pasting equations for exchange
 
@@ -25,6 +24,38 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
+
+private lemma derivedDirectImageComposition_inv_eq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z) :
+    (derivedDirectImageComposition e f).inv =
+      (Functor.rightDerivedFunctorPlusCompIso' (f)_*[AddCommGrpCat.{u + 1}]
+        (e)_*[AddCommGrpCat.{u + 1}]
+        (lowerStarComp AddCommGrpCat.{u + 1} f e)).hom := by
+  change conjugateEquiv
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} e).derivedPlus.comp
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus)
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (f ≫ e)).derivedPlus
+      (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} f e (f ≫ e) rfl).hom = _
+  apply conjugateEquiv_eq_of_unit
+  intro K
+  simp only [Adjunction.comp_unit_app, Functor.comp_obj]
+  simpa only [Category.assoc] using
+    (derivedPlus_unit_comp_upperStarCompDerivedPlus (AddCommGrpCat.{u + 1}) f e
+      (f ≫ e) rfl K).symm
+
+private lemma derivedDirectImageComposition_hom_eq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z) :
+    (derivedDirectImageComposition e f).hom =
+      (Functor.rightDerivedFunctorPlusCompIso' (f)_*[AddCommGrpCat.{u + 1}]
+        (e)_*[AddCommGrpCat.{u + 1}]
+        (lowerStarComp AddCommGrpCat.{u + 1} f e)).inv := by
+  symm
+  apply (cancel_epi ((Functor.rightDerivedFunctorPlusCompIso'
+    (f)_*[AddCommGrpCat.{u + 1}] (e)_*[AddCommGrpCat.{u + 1}]
+    (lowerStarComp AddCommGrpCat.{u + 1} f e)).hom)).1
+  rw [Iso.hom_inv_id, ← derivedDirectImageComposition_inv_eq f e,
+    (derivedDirectImageComposition e f).inv_hom_id]
+  rfl
 
 /-- Identity, horizontal-pasting, and vertical-pasting laws for the derived exchange map.
 
@@ -95,6 +126,18 @@ theorem derivedExchange_identity_pasting :
           (Functor.associator _ _ _).hom ≫
           Functor.whiskerLeft (g')^*[A].mapDerivedCategoryPlus
             (derivedDirectImageComposition e' f').inv) := by
-  sorry
+  dsimp
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y f
+    exact Etale.derivedBaseChangeMapPlus_id (AddCommGrpCat.{u + 1}) f
+      (IsPullback.id_horiz f).toCommSq
+  · intro X' X Y' Y g' f' f g sq₁ Y'' X'' h h' f'' sq₂
+    exact Etale.derivedBaseChangeMapPlus_paste_horiz (AddCommGrpCat.{u + 1})
+      sq₁.toCommSq sq₂.toCommSq (sq₂.paste_horiz sq₁).toCommSq
+  · intro X' X Y' Y Z' Z g' f' f g e' e k sq₁ sq₂
+    simpa only [derivedDirectImageComposition_hom_eq, derivedDirectImageComposition_inv_eq,
+      rightDerivedLowerStarPlus] using
+      (Etale.derivedBaseChangeMapPlus_paste_vert (AddCommGrpCat.{u + 1})
+        sq₁.toCommSq sq₂.toCommSq (sq₁.paste_vert sq₂).toCommSq)
 
 end AlgebraicGeometry.Etale
