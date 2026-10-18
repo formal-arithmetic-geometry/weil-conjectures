@@ -8,7 +8,8 @@
   "place": "Expose XVII, sections 1.2.1–1.2.2, augmentation-ideal resolution underlying the supported-cohomology model; continuous crossed-cocycle comparison and its sign are the agent-stated degree-one refinement. Standard cocycle relation is written explicitly in the statement."
  },
  "stmt_deps": [
-  "def-exc-continuous-cohomology"
+  "def-exc-continuous-cohomology",
+  "def-per-completed-augmentation-algebra"
  ],
  "proof": [
   {
@@ -280,5 +281,36 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c4d7e38b5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item plus its report, no new nodes. The statement is byte-identical to the version in the N8 snapshot that created it, and only split-owned fields changed. All ten steps are under 2000 characters. Source: I read ILO XVII 1.2.1–1.2.3, pp. 259–260. ILO gives Λ[[G]] = lim Λ[G/H], the augmentation ideal I_G and the freeness of I_G on 1−σ (1.2.1.2), but not the general crossed-homomorphism comparison or its sign. The item correctly marks that part as an agent refinement. Coefficient category: def-exc-continuous-cohomology (finite ring, discrete module, open stabilisers, continuous inhomogeneous cochains) matches the item exactly. Cited statements: the open-stabiliser lemma gives exactly the right-coset factorisation used in Steps 1 and 3. The bar leaf gives d_1[g]=g−1, d_2[g|h]=g[h]−[gh]+[g] and the precomposition cochain identification; its induced differential matches Step 7. Step checks: L(qx)=qL(x)+ε(x)c̄(q) holds, so L is linear on I_Q. Density holds because Σb_q(g_q−1) has V-coordinate a_V when Σb_q=0. The inverse uses gh−1=(g−1)+g(h−1). The chain map is zero because φ1d2[g|h]=0, and the pullback f ↦ f(g−1) carries no sign. Automatic continuity follows from f=(fθ)θ⁻¹ with θ⁻¹ continuous. f_c(1−σ)=−c(σ). Edge cases: trivial G, M=0, the zero ring, finite G, trivial action, G=Z_ℓ with F_ℓ for odd ℓ (the sign is detectable) and characteristic 2 all behave as stated. The only citer, lem-per-trait-gysin-residue Step 4, uses exactly the unchanged sign clause. Duplicates: the trait residue-model nodes state only the freeness and the F(M) model, so nothing duplicates the comparison. There is no SGA. I accept the declared tool_uses (the generic open-stabiliser lemma; the cohomology definition is a notion). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.AugmentationCocycleComparison",
+  "declaration": "Rep.CompletedAugmentation.exists_augmentation_cocycle_comparison",
+  "declarations": [
+   "Rep.discreteContinuousCocycles₁",
+   "Rep.discreteContinuousD₀",
+   "Rep.discreteContinuousCoboundaries₁",
+   "Rep.discreteContinuousH₁",
+   "Rep.CompletedAugmentation.homFunctions",
+   "Rep.CompletedAugmentation.algebraicHom",
+   "Rep.CompletedAugmentation.continuousHom",
+   "Rep.CompletedAugmentation.principalFunctions",
+   "Rep.CompletedAugmentation.principalContinuous",
+   "Rep.CompletedAugmentation.principalAlgebraic",
+   "Rep.CompletedAugmentation.exists_augmentation_cocycle_comparison"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/AugmentationCocycleComparison.lean",
+  "statement": "theorem exists_augmentation_cocycle_comparison : ∃ B : ∀ M : DiscreteContinuousRep.{v, u, max u w} Λ G, ((discreteContinuousCohomologyFunctor.{u, v, w} G Λ 1).obj M) ≃ₗ[Λ] discreteContinuousH₁ M, ∃ E : ∀ M : DiscreteContinuousRep.{v, u, max u w} Λ G, discreteContinuousH₁ M ≃ₗ[Λ] ((continuousHom Λ G M) ⧸ principalContinuous Λ G M), (∀ (M N : DiscreteContinuousRep.{v, u, max u w} Λ G) (a : M ⟶ N) (c : discreteContinuousCocycles₁ M), ∃ d : discreteContinuousCocycles₁ N, (∀ g : G, d.val g = a.hom.hom (c.val g)) ∧ B N (((discreteContinuousCohomologyFunctor.{u, v, w} G Λ 1).map a).hom ((B M).symm (Submodule.Quotient.mk c))) = Submodule.Quotient.mk d) ∧ (∀ (M : DiscreteContinuousRep.{v, u, max u w} Λ G) (c : discreteContinuousCocycles₁ M), ∃ f : continuousHom Λ G M, (∀ g : G, f.val (difference Λ G g) = c.val g) ∧ (∀ f' : continuousHom Λ G M, (∀ g : G, f'.val (difference Λ G g) = c.val g) → f' = f) ∧ E M (Submodule.Quotient.mk c) = Submodule.Quotient.mk f) ∧ (∀ (M N : DiscreteContinuousRep.{v, u, max u w} Λ G) (a : M ⟶ N) (c : discreteContinuousCocycles₁ M) (f : continuousHom Λ G M), E M (Submodule.Quotient.mk c) = Submodule.Quotient.mk f → ∃ (d : discreteContinuousCocycles₁ N) (h : continuousHom Λ G N), (∀ g : G, d.val g = a.hom.hom (c.val g)) ∧ (∀ x : Ideal Λ G, h.val x = a.hom.hom (f.val x)) ∧ E N (Submodule.Quotient.mk d) = Submodule.Quotient.mk h) ∧ (∀ (σ : G), closure (Subgroup.zpowers σ : Set G) = Set.univ → ∀ θ : Algebra Λ G ≃ₗ[Algebra Λ G] Ideal Λ G, (∀ a : Algebra Λ G, (θ a).val = a * (1 - groupElement Λ G σ)) → Continuous θ → Continuous θ.symm → ∀ M : DiscreteContinuousRep.{v, u, max u w} Λ G, (∀ f : algebraicHom Λ G M, @Continuous (Ideal Λ G) M.obj.V (idealTopology Λ G) ⊥ f.val) ∧ ∃ Ealg : discreteContinuousH₁ M ≃ₗ[Λ] ((algebraicHom Λ G M) ⧸ principalAlgebraic Λ G M), (∀ (c : discreteContinuousCocycles₁ M) (f : continuousHom Λ G M), E M (Submodule.Quotient.mk c) = Submodule.Quotient.mk f → Ealg (Submodule.Quotient.mk c) = Submodule.Quotient.mk (⟨f.val, f.property.1⟩ : algebraicHom Λ G M)) ∧ (∀ (c : discreteContinuousCocycles₁ M) (f : continuousHom Λ G M), (∀ g : G, f.val (difference Λ G g) = c.val g) → f.val (-difference Λ G σ) = -c.val σ))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d0fe1047",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Item statement and proof are byte-identical to live; stmt_deps adds only the new def node. Def node def-per-completed-augmentation-algebra has real data: compatible families of mapDomainAlgHom transitions, product-of-discrete topology, augmentation summed at U=G, I=ker with subspace topology, [g] and g-1, and the action chosen from a true exists-unique theorem (group values plus continuous orbit maps). Item Lean matches every clause: finite CommRing Λ, profinite G, DiscreteContinuousRep.{v,u,max u w}; LocallyConstant cocycles with g c(h)-c(gh)+c(g); coboundaries from gm-m; algebraic, continuous and principal Hom submodules; E[c]=[f] with f(g-1)=c(g) unique among continuous maps; naturality of B and E; σ clause with closure(zpowers σ)=univ, θ a=a(1-σ) continuous both ways, all algebraic maps continuous, Ealg compatible with E, f(1-σ)=-c(σ). No completed-algebra duplicate in Mathlib or side Lean. Advisory: B is pinned only by naturality, the strongest the upstream Nonempty comparison allows; the node's sign claims are in the cocycle model, pinned via E. nt_compile --json: both files clean (1.7 s, 12.5 s), exit 0."
  }
 }
