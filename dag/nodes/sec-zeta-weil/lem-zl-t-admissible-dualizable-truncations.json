@@ -13,11 +13,105 @@
   "def-weil-pbc-proetale-site",
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scalar hypothesis has the following consequences. For a perfect $R$-complex $P$, choose a bounded finite-projective representative [def-pc-perfect-ring-complex]. Since $R$ is coherent, [lem-sc-coherent-ring-perfect-complex-cohomology] makes every $H^q(P)$ finitely presented. By the assumed finite projective resolutions, each $H^q(P)[0]$ is perfect. Write $[a,b]$ for a cohomological bound of $P$. For any $n$, induct on $j$ from $a-1$ to $\\min(n,b)$ using\n$$\\tau^{\\le j-1}P\\longrightarrow\\tau^{\\le j}P\\longrightarrow H^j(P)[-j]\\longrightarrow(\\tau^{\\le j-1}P)[1].$$\nThe base object is zero. The first and third objects at each induction step are perfect, so the middle object is perfect by the shift-and-cone closure in [lem-sf-perfect-ring-classical-generator]. This proves that $\\tau^{\\le n}P$ is perfect, including $n<a$ and $n\\ge b$. The triangle $\\tau^{\\le n-1}P\\to P\\to\\tau^{\\ge n}P$ then proves the same for $\\tau^{\\ge n}P$. In particular finitely presented modules placed in degree zero are perfect, and perfect scalar complexes have finitely presented cohomology.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-sc-coherent-ring-perfect-complex-cohomology",
+    "lem-sf-perfect-ring-classical-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 6.6, implication (2) to (1); finite cohomological induction spelling out the truncation argument"
+   }
+  },
+  {
+   "text": "For any scheme $T$, set $L_T(Q)=\\Lambda_T\\otimes^L_{\\underline R}\\underline Q$. We check the flat comparison on the affine w-contractible basis, which exists by [sk-thm-pe-weakly-contractible-basis]. For such $V\\to T$, [lem-zl-wcontractible-condensed-scalar-evaluation] gives $A_V=\\Gamma(V,\\Lambda_V)=\\Gamma(\\pi_0 V,\\Lambda)$, t-exact derived sections, and $R\\Gamma(V,L_TQ)=Q\\otimes_R^L A_V$. The space $\\pi_0 V$ is extremally disconnected profinite, so the stated t-admissibility makes $A_V$ flat over $R$. By [lem-weil-pbc-flat-tensor-exact], termwise tensor with $A_V$ preserves the kernel, image and cokernel sequences defining cohomology. Hence it preserves acyclic complexes and computes derived tensor, with $H^q(Q\\otimes_R^L A_V)=H^q(Q)\\otimes_R A_V$. The same kernel/cokernel calculation identifies the canonical truncation comparisons after evaluation at $V$. By [det-pe-sections-conservative] these comparisons are isomorphisms on sheaves. Thus, for either truncation,\n$$\\tau^{\\le n}L_T(Q)\\simeq L_T(\\tau^{\\le n}Q),\\qquad \\tau^{\\ge n}L_T(Q)\\simeq L_T(\\tau^{\\ge n}Q),$$\nand $\\mathcal H^q(L_TQ)\\cong\\Lambda_T\\otimes_{\\underline R}\\underline{H^q(Q)}$. The ordinary tensor here is the degree-zero cokernel defining scalar extension. This argument does not require a finite-component hypothesis on $T$.",
+   "uses": [
+    "sk-thm-pe-weakly-contractible-basis",
+    "lem-zl-wcontractible-condensed-scalar-evaluation",
+    "lem-weil-pbc-flat-tensor-exact",
+    "det-pe-sections-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2, the evaluation of the last comparison at w-contractible affines; equations (3.1)–(3.2)"
+   }
+  },
+  {
+   "text": "Let $K$ be dualizable on the given $X$. By [lem-zl-condensed-dualizable-local-perfect-models], choose a pro-etale cover on which $K|_{U_i}\\simeq L_{U_i}(P_i)$ with $P_i$ perfect over $R$. The cover is not required to have a uniform scalar complex or a uniform amplitude. By [lem-sfb-alpha-iso], restriction identifies the coefficient rings. Restriction to these site objects is exact on module sheaves, using the identified-coefficient inverse image of [def-weil-pbc-proetale-operations]; on complexes this preserves kernels and cokernels, hence standard truncations and cohomology. Step 2 therefore identifies $(\\tau^{\\le n}K)|_{U_i}$ with $L_{U_i}(\\tau^{\\le n}P_i)$, and likewise for $\\tau^{\\ge n}$. Step 1 makes both scalar truncations perfect. The reverse implication of [lem-zl-condensed-dualizable-local-perfect-models], applied on $X$ to these local models, makes both ambient truncations dualizable. This proves preservation for every integer $n$, without assuming that the cover objects themselves have finitely many irreducible components.",
+   "uses": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-alpha-iso",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), application of Theorem 4.13 and Proposition 6.6"
+   }
+  },
+  {
+   "text": "The full dualizable subcategory is stable by [lem-zl-condensed-dualizable-local-perfect-models]. Set $D_{\\mathrm{lis}}^{\\le0}=D_{\\mathrm{lis}}\\cap D^{\\le0}$ and $D_{\\mathrm{lis}}^{\\ge0}=D_{\\mathrm{lis}}\\cap D^{\\ge0}$. The ambient orthogonality and shift inclusions hold on these full subcategories. By Step 3, the ambient triangle $\\tau^{\\le0}K\\to K\\to\\tau^{\\ge1}K$ lies in $D_{\\mathrm{lis}}$, so it supplies the required t-decomposition there. These are precisely the axioms of the restricted standard t-structure. Its heart consists of the dualizable objects concentrated in degree zero.",
+   "uses": [
+    "lem-zl-condensed-dualizable-local-perfect-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), inheritance of the t-structure once truncations preserve lisse objects"
+   }
+  },
+  {
+   "text": "Suppose a module sheaf $M[0]$ is dualizable. Choose local scalar perfect models $M|_{U_i}\\simeq L_{U_i}(P_i)$ by [lem-zl-condensed-dualizable-local-perfect-models]. Take degree-zero cohomology and use the exact restriction in [def-weil-pbc-proetale-operations] and Step 2 to obtain\n$$M|_{U_i}\\cong\\Lambda_{U_i}\\otimes_{\\underline R}\\underline{H^0(P_i)}.$$\nBy [lem-sc-coherent-ring-perfect-complex-cohomology], each $N_i=H^0(P_i)$ is finitely presented. This proves the asserted local form for the heart; it does not require $P_i$ itself to be concentrated in degree zero.",
+   "uses": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "def-weil-pbc-proetale-operations",
+    "lem-sc-coherent-ring-perfect-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(2), description of the heart using equation (6.2)"
+   }
+  },
+  {
+   "text": "Conversely, let $M$ have the stated local form with finitely presented modules $N_i$. Their assumed finite resolutions make $N_i[0]$ perfect by [def-pc-perfect-ring-complex]. Step 2 identifies $L_{U_i}(N_i[0])$ with the ordinary module sheaf $\\Lambda_{U_i}\\otimes_{\\underline R}\\underline{N_i}$ in degree zero. The reverse implication of [lem-zl-condensed-dualizable-local-perfect-models] on $X$ now makes $M[0]$ dualizable, hence an object of the restricted heart. Finally, for any dualizable $K$ and integer $j$, Step 3 applied twice and shift closure give $\\mathcal H^j(K)[0]\\simeq(\\tau^{\\ge j}\\tau^{\\le j}K)[j]$ dualizable. The forward heart description in Step 5 applies to this sheaf. Different $N_i$, zero modules, and varying ranks are all allowed.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-zl-condensed-dualizable-local-perfect-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(2), reverse heart inclusion and cohomology consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-sc-coherent-ring-perfect-complex-cohomology",
+  "lem-sf-perfect-ring-classical-generator",
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-zl-wcontractible-condensed-scalar-evaluation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "det-pe-sections-conservative",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-sfb-alpha-iso",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 6.2(2), proof, using Theorem 4.13 and Proposition 6.6. The scalar finite Postnikov induction and the flat kernel/image/cokernel calculation are expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +147,45 @@
    "results": "No hits; searched Mathlib/CategoryTheory",
    "date": "2026-10-18",
    "verdict": "no match: general derived t-structures and finitely presented module sheaves do not give restriction to dualizable pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Standard truncations preserve dualizable complexes of sheaves over a t admissible condensed ring and their heart has finitely presented scalar local models",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.IsSolid; SheafOfModules.isFinitePresentation; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafProfinite; CondensedMod.ofSheafStonean; SheafOfModules.IsFinitePresentation; LightCondMod.ofSheafLightProfinite",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a dualizable complex with flat regular coherent continuous coefficients is locally a finitely presented scalar module",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The standard t structure restricts to dualizable complexes of condensed coefficient sheaves on schemes",
+   "results": "DerivedCategory.TStructure.t; Condensed; instCategoryCondensed; instAbelianCondensedMod; LightCondensed; CondensedMod.isDiscrete_tfae; Condensed.ofSheafCompHaus; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, CategoryTheory.HasRightDual",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "regularCoherent|RegularCoherent|tAdmissible|t_admissible",
+   "results": "Mathlib/NumberTheory/Height/NumberField.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-adic-hom-tensor-lisse-criterion",
@@ -68,12 +197,61 @@
  "blueprint": {
   "from": {
    "node": "prop-zl-smooth-proper-relative-purity",
-   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: after continuous-coefficient realization, applies the t-admissible dualizable truncation and heart theorem.",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem.",
    "via": [
     "lem-zl-adic-hom-tensor-lisse-criterion"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-t-admissible-dualizable-truncations",
+  "worker": "stage1",
+  "summary": "Kept the item statement verbatim. Followed HRS Theorem 6.2(2): finite scalar truncation induction, flat evaluation comparison, local perfect models, restriction of the standard t-structure and both heart inclusions. Created only the missing local scalar-model and condensed coefficient-evaluation statements; reused existing coherent-ring cohomology, perfect closure, flat exactness, basis and detection nodes.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic compatibility of pulled-back condensed coefficient rings with scheme inverse image; needed to apply the exact identified-coefficient restriction."
+   },
+   {
+    "node": "lem-sc-coherent-ring-perfect-complex-cohomology",
+    "why": "Generic coherent-ring cohomology theorem used on the bounded finite-projective scalar representative; not a replacement of the smooth-proper unit route."
+   },
+   {
+    "node": "lem-sf-perfect-ring-classical-generator",
+    "why": "Generic perfect-complex closure under shifts and cones used in the finite scalar truncation induction."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic pro-etale basis theorem needed for the flat evaluation check."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic flat-module tensor exactness theorem, valid for the scalar section rings in Step 2."
+   },
+   {
+    "node": "det-pe-sections-conservative",
+    "why": "Generic detection of sheaf isomorphisms and quasi-isomorphisms on the weakly contractible basis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-sc-coherent-ring-perfect-complex-cohomology",
+  "lem-sf-perfect-ring-classical-generator",
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-weil-pbc-flat-tensor-exact",
+  "det-pe-sections-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-f302c8dd7",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-f302c8dd7 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, HRS/BS sources, unit and chapter route, and delivery errors A–F. All hypotheses, edge cases, source locations, coefficient maps, ordinary derived-category operations, searches, and cross-unit tool uses check out. No duplicates, hidden long-step lemmas, route-pivot machinery, SGA citations, or repairs found."
  }
 }
