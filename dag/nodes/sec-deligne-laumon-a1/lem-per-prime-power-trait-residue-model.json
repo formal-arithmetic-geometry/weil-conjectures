@@ -18,9 +18,175 @@
   "def-asd-finite-etale-tate-sheaf",
   "lem-asd-etale-finite-twist-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-per-trait-tame-algebra] for the exact sequence $1\\to S\\to H\\to G\\to1$, its canonical root-of-uniformizer formula, the pro-$p$ property, and a generator $\\sigma$ of $G$. For $(d,p)=1$ put $B_d=\\Lambda[G/\\overline{\\langle\\sigma^d\\rangle}]$. These finite cyclic quotients form the inverse system defining $A$. We now prove, rather than assume, the augmentation assertion left as an exercise in Proposition 1.2.1.2. Throughout put $q=\\ell^n$, so $q\\Lambda=0$ and $(q,p)=1$.",
+   "uses": [
+    "lem-per-trait-tame-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "1.2 opening paragraph and 1.2.1 (printed pp. 259–260)"
+   }
+  },
+  {
+   "text": "Write $z$ for the image of $\\sigma$ in $B_d$. Coefficient comparison gives $\\ker(1-z:B_d\\to B_d)=\\Lambda N_d$, where $N_d=1+z+\\cdots+z^{d-1}$. If $x=\\sum a_i z^i$ and $\\sum a_i=0$, set $b_0=0$ and $b_i=\\sum_{j=1}^{i} a_j$ for $1\\le i<d$; then $(1-z)\\sum b_i z^i=x$. Thus the image of $1-z$ is exactly the augmentation ideal. For a compatible augmentation-zero family $x_d$, define $b_d$ by projecting any solution of $(1-z)b=x_{\\ell^n d}$ from $B_{\\ell^n d}$ to $B_d$. This is independent of the solution because $N_{\\ell^n d}$ projects to $\\ell^n N_d=0$. For $d\\mid e$, projecting a solution at $\\ell^n e$ through $\\ell^n d$ proves compatibility of the $b_d$. They give $b\\in A$ with $(1-\\sigma)b=x$. If $(1-\\sigma)b=0$, the component $b_d$ is the image of a multiple of $N_{\\ell^n d}$, hence zero. Consequently $1-\\sigma:A\\to I$ is bijective and $A$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 1.2.1.2 (printed p. 260), finite-cyclic coefficient proof of the exercise"
+   }
+  },
+  {
+   "text": "By [lem-per-trait-sheaf-gluing], write a sheaf as $(W,V,a)$ with $W=M_s$, $V=M_{\\bar\\eta}$ and $a(W)\\subset V^H\\subset V^S$. Both stalk functors are exact because kernels and cokernels of these triples are componentwise. For $v\\in V$, choose an open normal subgroup $U\\subset S$ fixing $v$ and put $\\operatorname{av}_S(v)=|S/U|^{-1}\\sum_{g\\in S/U}gv$. This does not change on refining $U$: each summand is repeated $[U:U']$ times. Common refinements prove additivity and linearity. It is natural, fixes $V^S$ and has image in $V^S$. The denominators are units in $\\Lambda$ because $p\\ne\\ell$. Since $S$ is normal, conjugating the finite sum shows $H$-equivariance. If an invariant vector is lifted through an equivariant surjection, averaging a lift gives an invariant lift. Thus $(-)^S$ is exact (also when $p=1$). Evaluation at $1-\\sigma$ identifies $\\operatorname{Hom}_A(I,V^S)$ with $V^S$, so it too is exact. The indicated differentials square to zero since $a(W)\\subset V^H$. This proves exactness of the functor $F$ in every degree.",
+   "uses": [
+    "lem-per-trait-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "1.2.2 before Proposition 1.2.2.1 and 1.2.3 projector (printed p. 260)"
+   }
+  },
+  {
+   "text": "Suppose $M$ is injective. In the triple description, $V\\mapsto(0,V,0)$ is an exact left adjoint to restriction $(W,V,a)\\mapsto V$. Hence [lem-exc-rg-right-adjoint-preserves-injectives] shows that $V$ is injective in discrete $H$-modules. Inflation from discrete $G$-modules to discrete $H$-modules is exact; its right adjoint is $V\\mapsto V^S$, because an $H$-map from an inflated module has image in $V^S$. The same cited adjoint theorem makes $N=V^S$ injective in discrete $G$-modules. This is precisely the restriction to $\\eta$, followed by the direct image $\\eta_{\\mathrm{et}}\\to BG$, used in the source; it needs no assertion that the compact modules $A$ or $I$ are discrete.",
+   "uses": [
+    "lem-per-trait-sheaf-gluing",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Proposition 1.2.2.1 (printed p. 260), injectivity via the generic-to-tame topos morphism"
+   }
+  },
+  {
+   "text": "For every $M=(W,V,a)$ the kernel of $V^S\\to\\operatorname{Hom}_A(I,V^S)$ is $V^H$: it consists of vectors killed by $1-\\sigma$, hence fixed by dense powers of $\\sigma$ and thus by $G$. In particular this kernel is $\\Gamma(\\eta,M|_\\eta)$, not sections supported at $s$. By [lem-per-trait-sheaf-gluing] and the definition of supported sections [def-pur-etale-derived-supported-sections], $H^0(F(M))=\\ker(W\\to V^H)=\\Gamma_{\\{s\\}}(T,M)$. For injective $M$, any $v\\in V^H$ defines a morphism $(0,\\Lambda,0)\\to M$ by $1\\mapsto v$. Extend it along the monomorphism $(0,\\Lambda,0)\\hookrightarrow(\\Lambda,\\Lambda,\\mathrm{id})$. The closed component of the extension supplies $w\\in W$ with $a(w)=v$. Therefore $H^1(F(M))=0$.",
+   "uses": [
+    "lem-per-trait-sheaf-gluing",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Proposition 1.2.2.1 (printed p. 260), degree-zero identification and middle exactness"
+   }
+  },
+  {
+   "text": "For injective $M$, let $N=V^S$ as in Step 4 and take $x\\in N$. Choose $d$ prime to $p$ with $\\sigma^d x=x$, and put $e=\\ell^n d$. The finite cyclic norm $N_e=1+z+\\cdots+z^{e-1}$ kills $x$, since $N_e x=\\ell^n\\sum_{i<d}\\sigma^i x=0$. In $B_e$ the annihilator of $1-z$ is exactly $\\Lambda N_e$, by the coefficient calculation in Step 2. Thus $(1-z)B_e\\to N$, $(1-z)b\\mapsto bx$, is a well-defined equivariant linear map. Both its domain and $B_e$ are discrete $G$-modules. Injectivity of $N$ extends it to $B_e\\to N$. The image $y$ of $1$ satisfies $(1-\\sigma)y=x$. Hence the last differential of $F(M)$ is surjective, and $H^2(F(M))=0$. This justifies the source's extension argument in the discrete category, without applying injectivity directly to $I\\subset A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Proposition 1.2.2.1 (printed p. 260), last-term surjectivity in discrete modules"
+   }
+  },
+  {
+   "text": "The category $\\operatorname{Mod}(T_{\\mathrm{et}},\\Lambda)$ is Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-sc-bounded-below-injective-resolution-existence] to choose a quasi-isomorphism $K\\to J$ with $J$ bounded below and injective termwise. The ordinary derived category and supported-section functor here are exactly those in [def-weil-pbc-derived-categories] and [def-pur-etale-derived-supported-sections], so $\\Gamma_{\\{s\\}}(T,J)$ computes $R\\Gamma_{\\{s\\}}(T,K)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "def-weil-pbc-derived-categories",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 1.2.2.1, bounded-below injective reduction; Stacks 03DA, 03DB, 03EW; Mathlib bounded-below injective replacements"
+   }
+  },
+  {
+   "text": "Exactness in Step 3 shows that applying each of the three degree functors of $F$ to an acyclic complex gives an acyclic complex. Filter its total complex by horizontal degree $i\\ge r$ for $r=0,1,2,3$. The three successive quotients are those acyclic column complexes shifted by $i$, so the total is acyclic by the long exact sequences of these three finite filtration quotients. Apply this to the cone of $K\\to J$ to obtain $F(K)\\simeq F(J)$. Steps 5–6 say that each augmented row $\\Gamma_{\\{s\\}}(T,J^q)\\to F(J^q)$ is a quasi-isomorphism. The cone of the total augmentation is acyclic: for a total cocycle start at its least vertical degree, solve its horizontal boundary using exactness of that augmented row, and subtract the resulting total boundary. Repeat in increasing vertical degree. At fixed total degree there are only finitely many components, because the horizontal degrees lie between $-1$ and $2$, so the process terminates. This proves $\\Gamma_{\\{s\\}}(T,J)\\simeq F(J)$. The augmentation is natural and all quasi-isomorphisms can be inverted in the derived category. Therefore $F(K)$ naturally represents supported cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 1.2.2.1 (printed p. 260), totalization of the bounded-width complex and injective reduction"
+   }
+  },
+  {
+   "text": "Because $G$ is procyclic, its projection to $L=\\mu_q(\\kappa(\\bar\\eta))$ has kernel $qG$: a generator identifies this with $\\widehat{\\mathbf Z}^{(p')}/q\\widehat{\\mathbf Z}^{(p')}$. The projection itself is canonical. Every continuous additive map $G\\to N$ kills $qG$ since $qN=0$, and every additive map $G/qG\\to N$ is continuous and $\\Lambda$-linear. Thus $N(-1)=\\operatorname{Hom}_\\Lambda(L,N)\\cong\\operatorname{Hom}_{\\mathrm{cont}}(G,N)$ canonically, with no equivariance condition. For $N=V$, send $f$ to the unique $A$-linear map $b:I\\to V^S$ satisfying $b(1-\\sigma)=\\operatorname{av}_S(f(\\sigma))$. Steps 2–3 give existence, uniqueness and naturality. Place $b$ in degree two of $F(M)$, or degree zero of $F(M)[2]$. Its target has no outgoing differential and the source is concentrated in degree zero, so this is the specified cochain map $s_\\sigma$. The module $L$ is free of rank one over $\\Lambda$: the image in $\\mu_q$ of any generator of $G$ is a primitive $q$-th root, giving a basis by powers. No basis is used in the canonical identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "1.2.3 preceding Definition 1.2.3.1 (printed p. 260), twist, projector and evaluation"
+   }
+  },
+  {
+   "text": "We make the source's reduction for natural homotopies explicit. A homotopy from $V(-1)[0]$ to $F(M)[2]$ has just one possibly nonzero component $V(-1)\\to V^S$ (degree $-1$ of $F(M)[2]$). The natural map $(0,V,0)\\to(W,V,a)$ is the identity on both its source and this target, so naturality determines that component from sheaves with closed stalk zero. Next $\\operatorname{av}_S:V\\to V^S$ and the inclusion $V^S\\to V$ are $H$-maps and are inverse on invariants. Naturality with respect to the projector forces every such component to be its value on $V^S$ preceded by $\\operatorname{av}_S(-1)$. Conversely any natural component on discrete $G$-modules extends this way, and the homotopy equation extends since the two residue maps factor by the same projector. Hence existence and uniqueness reduce to $(0,N,0)$ for discrete $G$-modules $N$.",
+   "uses": [
+    "lem-per-trait-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 1.2.3.2, first paragraph (printed p. 261), reduction of the natural homotopy"
+   }
+  },
+  {
+   "text": "Natural $\\Lambda$-linear endomorphisms of the underlying-module functor on discrete $G$-modules are exactly elements of $A$. Indeed, for an open subgroup $U$, let $a_U$ be the value of the transformation on $1\\in\\Lambda[G/U]$. Naturality with the quotient maps makes the $a_U$ compatible. If $U$ fixes $x\\in N$, the equivariant map $\\Lambda[G/U]\\to N$ sending $1$ to $x$ shows that the transformation sends $x$ to $a_Ux$. Conversely a compatible family acts by this formula, independent of $U$, and defines a natural endomorphism. This is also an identification of rings, by evaluating sums and compositions on $1$. In particular the natural homotopy component after the reduction in Step 10 must be multiplication by a unique $h\\in A$, once evaluation at $\\sigma$ identifies $N(-1)$ with $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.2.1.1 (printed pp. 259–260) and Lemma 1.2.3.2 (printed pp. 261–262), natural operations"
+   }
+  },
+  {
+   "text": "Evaluate $\\operatorname{Hom}_A(I,N)$ at $1-\\sigma$ to identify $F((0,N,0))$ with $[N\\xrightarrow{1-\\sigma}N]$ in degrees $1,2$. Write $\\sigma'=\\sigma^\\alpha$ with $\\alpha\\in(\\widehat{\\mathbf Z}^{(p')})^\\times$, and write $\\bar\\alpha\\in\\Lambda^\\times$ for its reduction. Since both $1-\\sigma$ and $1-\\sigma'$ freely generate $I$, there is a unique unit $u\\in A^\\times$ with $1-\\sigma'=u(1-\\sigma)$. In the source coordinate $x=f(\\sigma)$, $f(\\sigma')=\\bar\\alpha x$. If $b=s_{\\sigma'}(f)$ then $u\\,b(1-\\sigma)=b(1-\\sigma')=\\bar\\alpha x$. Thus the two cochain maps become multiplication by $1$ and by $g=\\bar\\alpha u^{-1}$, respectively. By Step 11 their natural homotopy is precisely a solution of $(1-\\sigma)h=1-g$ in $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 1.2.3.2, the complexes F_sigma, comparison maps and relation ug=alpha (printed pp. 261–262)"
+   }
+  },
+  {
+   "text": "For a positive integer $b$, put $v_b=\\sum_{i=0}^{b-1}\\sigma^i$, so $(1-\\sigma)v_b=1-\\sigma^b$. In the quotient $B_d$, $v_b$ depends only on $b$ modulo $\\ell^n d$, since a sum of $\\ell^n d$ successive powers is $\\ell^n N_d=0$. These finite formulas therefore extend continuously and compatibly to $b\\in\\widehat{\\mathbf Z}^{(p')}$, giving $v_b\\in A$ with $\\epsilon(v_b)=b\\bmod q$. At $b=\\alpha$ injectivity in Step 2 gives $v_\\alpha=u$. Hence $\\epsilon(u)=\\bar\\alpha$, and $\\epsilon(g)=\\bar\\alpha/\\epsilon(u)=1$. Thus $1-g\\in I$. Step 2 now provides the unique $h\\in A$ with $(1-\\sigma)h=1-g$. Steps 10–12 turn it into the unique homotopy natural in all sheaves $M$, proving the exact generator-independence assertion. The uniqueness concerns natural homotopies, not homotopies for one isolated module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 1.2.3.2, epsilon(u)=epsilon(alpha) computation (printed p. 262)"
+   }
+  },
+  {
+   "text": "Apply $s_\\sigma$ termwise to $K$ and totalize, with total differential $d_F+(-1)^i d_K$ in horizontal degree $i$. This gives $K_{\\bar\\eta}(-1)\\to F(K)[2]$. Naturality makes the degree-$-1$ homotopy components of Step 13 commute with $d_K$. Since they lower horizontal degree by one, the vertical terms in the total homotopy equation cancel with opposite signs. Generator changes therefore give homotopic total maps. Each total degree has only three summands. By Steps 3 and 8, $F$, stalks and $\\operatorname{Hom}_\\Lambda(L,-)$ preserve quasi-isomorphisms; the latter is exact because $L$ is free of rank one. Thus the maps descend naturally to the localization [def-weil-pbc-derived-categories]. Evaluation gives $\\operatorname{Hom}_\\Lambda(L,N)\\otimes_\\Lambda L\\cong N$: in a basis $e$ it sends $f\\otimes e$ to $f(e)$, with inverse $x\\mapsto(e\\mapsto x)\\otimes e$, and changing basis leaves evaluation unchanged. Tensoring by $L$ is exact, hence is already derived tensor [def-kun-derived-tensor] (it takes every acyclic complex to an acyclic complex). Tensor the map with $L$ and use Step 8 to get $\\operatorname{sp}_T:K_{\\bar\\eta}\\to R\\Gamma_{\\{s\\}}(T,K)(1)[2]$. For coefficient integer $q$, [def-asd-finite-etale-tate-sheaf] and [lem-asd-etale-finite-twist-pullback] identify these twists with the signed Tate sheaves and supply the stated inverse-image comparisons. Here $q\\Lambda=0$ and $q$ is invertible on $T$, exactly the hypotheses of that comparison. The resulting morphism is independent of the generator and the complex representative and natural in $K$.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-derived-tensor",
+    "def-asd-finite-etale-tate-sheaf",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.2.3.1 and Lemma 1.2.3.2 (printed pp. 261–262), derived residue transition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-trait-tame-algebra",
+  "lem-per-trait-sheaf-gluing",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "def-pur-etale-derived-supported-sections",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-asd-finite-etale-tate-sheaf",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII 1.2.1–1.2.3, printed pp. 259–262; the omitted cyclic exercise and discrete-injective extension argument are written out for coefficient integer q=ell^n."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +222,31 @@
    "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"20\", \"text\": \"This file defines the `i`-th local cohomology module of an `R`-module `M` with support in an\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"91\", \"text\": \"Below, we give two equivalent definitions of the usual local cohomology with support\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"140\", \"text\": \"This is the \\\"largest\\\" diagram that computes local cohomology with support in `J`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"148\", \"text\": \"/-! We give two models for the local cohomology with support in an ideal `J`: first in terms of\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"10\", \"text\": \"/-! # Augmentation ideals\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"12\", \"text\": \"* `Ideal.IsAugmentation` :  An ideal `I` of an `A`-algebra `S` is an augmentation ideal\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"16\", \"text\": \"  then an ideal `I`of `A` is an augmentation ideal for the `R`-algebra structure if and only if\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"17\", \"text\": \"  it is an augmentation ideal for the `S`-algebra structure.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"29\", \"text\": \"/-- An ideal `I` of an `R`-algebra `A` is an augmentation ideal\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern algebraic module local cohomology, algebra complements, perfectoid rings or residue-field maps; none states the tame etale trait model and natural generator independence over Z/ell^n"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generator independent residue transition on a strictly henselian trait computed by wild invariants and tame completed group algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsPrecomplete (Ideal.span {↑p}) O] → PreTilt O p → O\", \"doc\": \"The function maps each element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to an element $ y \\\\in O $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"PreTilt.coeff\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"{O : Type u₂} →\\n  [inst : CommRing O] →\\n    {p : ℕ} → [inst_1 : Fact (Nat.Prime p)] → [inst_2 : Fact ¬IsUnit ↑p] → ℕ → PreTilt O p →+* ModP O p\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the $ n $-th coefficient homomorphism maps each sequence $ (f_k) $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to its $ n $-th term $ f_n \\\\in O/p $, preserv\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"PreTilt.untilt\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) O] → PreTilt O p →* O\", \"doc\": \"The function defines a multiplicative homomorphism from the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to the ring $ O $, mapping each sequence $ (f_n) $ in the pretilt to an element $ y \\\\in O $ such that $ y\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"PreTilt.mk_untilt_eq_coeff_zero\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  (Ideal.Quotient.mk (Ideal.span {↑p})) (PreTilt.untilt x) = (PreTilt.coeff 0) x\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, the image of $ \\\\mathrm{untilt}(x) $ under the canonical quotient map $ O \\\\to O/(p) $ equals the zeroth coefficient $ f_0 $ of the seque\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state this etale trait result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local cohomology of a strictly henselian discrete valuation ring with Z modulo prime power coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state this etale trait result"
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*inertia|wild.*inertia|augmentation.*ideal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"10\", \"text\": \"/-! # Augmentation ideals\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"12\", \"text\": \"* `Ideal.IsAugmentation` :  An ideal `I` of an `A`-algebra `S` is an augmentation ideal\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"16\", \"text\": \"  then an ideal `I`of `A` is an augmentation ideal for the `R`-algebra structure if and only if\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"17\", \"text\": \"  it is an augmentation ideal for the `S`-algebra structure.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"line\": \"29\", \"text\": \"/-- An ideal `I` of an `R`-algebra `A` is an augmentation ideal\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not state this etale trait result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-per-potential-dualizing-complex",
@@ -81,5 +268,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-prime-power-trait-residue-model",
+  "worker": "stage1",
+  "summary": "Completed the prime-power analogue of the reviewed F_ell sibling without changing the statement. Reused the coefficient-independent tame sequence and sheaf-triples nodes. Wrote out the cyclic augmentation calculation at levels ell^n*d, exact averaging, discrete injective argument, bounded-width comparison, natural operations and generator homotopy. The Tate module is free rank one over Z/ell^n, so ordinary tensor computes the stated derived twist. No new nodes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, current proof Step 1 dimension-normalized Verdier duality through the potential-dualizing interface; realizes the trait normalization in Expose XVII 1.2, below that interface. Chapter and unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic existence of the Grothendieck abelian category of etale module sheaves for the source injective-replacement argument; the current unit has no such category theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NX-c0c2425a7",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-c0c2425a7 (reviewer sub-agent of L); spot-checked: Read in full against ILO Travaux de Gabber XVII §1.2 (printed pp. 259-262): Prop. 1.2.1.2, Prop. 1.2.2.1 with its proof, Def. 1.2.3.1 and Lemma 1.2.3.2. Compared with the live base node: statement, stmt_deps, source and blueprint are byte-identical, so the target is not weakened; the inherited searches are kept and three were appended. One commit, two files, no new nodes, no SGA, no cycle, proof_deps equal the union of the uses. lem-per-trait-tame-algebra and lem-per-trait-sheaf-gluing are in the item's unit; lem-asd-etale-finite-twist-pullback and the module-sheaf Grothendieck theorem are in the unit's uses closure. Accepted tool use: lem-weil-pbc-module-sheaves-grothendieck-abelian (Step 7, generic, same as the reviewed F_ell sibling). The prime-power changes are correct and needed: N_{qd} projects to q*N_d=0 in Z/ell^n (with level ell*d this is 2≠0 in Z/4 when ell=2, n=2); v_b has period q*d; G/qG≅mu_q because ell is prime to p; the p-power averaging denominators are units; L=mu_q is free of rank one, so plain tensor is the derived tensor (K-flat) and Hom(L,-) is exact. Rechecked: the explicit preimage in Step 2, H^1=0 via (0,Λ,0)→(Λ,Λ,id), H^2=0 via extension from (1-z)B_e in discrete G-modules (fills the source's H^1/H^2 slip), the two adjunctions giving injectivity of V^S, the finite-width totalization, End(forget)=A, g=ᾱu^{-1} and ε(u)=ᾱ. Small cases: constant sheaf (cohomology Λ in degree 2 only), closed-supported sheaf, j_!V, d=1, p=1, ell=2 with n=2. Overlap with the F_ell sibling lem-per-trait-residue-model (the n=1 case) is a family overlap that the sibling's review already notes; the sibling cannot be cited for n≥2. No fixes."
  }
 }
