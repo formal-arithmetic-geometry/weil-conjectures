@@ -14,48 +14,172 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=A^{\\mathrm{sh}}_{T,\\bar x}$ and $f:A\\to B$ for the structural map. By [lem-weil-pbc-etale-local-ring-triples], the pointed-neighbourhood colimit defining $B$ is canonically, as an $A$-algebra, the triples colimit for the prime $\\mathfrak m_A$ and the separable closure of $\\kappa(\\mathfrak m_A)$ inside the field of $\\bar x$. Apply [lem-weil-pbc-strict-henselization-triples]: $B$ is henselian local, is a filtered colimit of etale $A$-algebras, and $f^{-1}(\\mathfrak m_B)=\\mathfrak m_A$. Thus it is ind-etale by [def-weil-pbc-ind-etale-algebra]. Moreover [lem-sc-strict-henselization-faithfully-flat] makes $f$ faithfully flat, hence flat by [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ind-etale-local-henselian-integral] to $f$. Its prime is $\\mathfrak m_A$, so $B$ is integral over the henselization $H$ of $A_{\\mathfrak m_A}$. Here $A_{\\mathfrak m_A}\\cong A$: a fraction $a/s$ maps to $as^{-1}$ since $s\\notin\\mathfrak m_A$ is a unit. Since $A$ is henselian, the structural map $\\eta:A\\to H$ is an isomorphism by [def-weil-pbc-henselization-at-prime]. Explicitly the universal property gives $r:H\\to A$ with $r\\eta=1_A$; uniqueness applied to the maps $H\\to H$ over $A$ gives $\\eta r=1_H$. Replace every coefficient of a monic equation over $H$ by its inverse image under $\\eta$; compatibility of the structural maps gives a monic equation over $A$. Hence $f$ is integral. Also $f$ is injective by [lem-weil-pbc-faithfully-flat-universally-injective] with $N=A$, under $A\\otimes_A B\\cong B$, $a\\otimes b\\mapsto f(a)b$.",
+   "uses": [
+    "lem-trf-ind-etale-local-henselian-integral",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  },
+  {
+   "text": "If $\\mathfrak q$ is a minimal prime of $B$, then $\\mathfrak p=f^{-1}(\\mathfrak q)$ is minimal in $A$. Indeed, if $\\mathfrak p'\\subseteq\\mathfrak p$ is prime, flat going down [lem-sc-flat-going-down] supplies a prime $\\mathfrak q'\\subseteq\\mathfrak q$ contracting to $\\mathfrak p'$. Minimality forces $\\mathfrak q'=\\mathfrak q$, hence $\\mathfrak p'=\\mathfrak p$.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  },
+  {
+   "text": "Conversely let $\\mathfrak p$ be a minimal prime of $A$. The integral injective map $f$ has a prime $\\mathfrak Q$ over $\\mathfrak p$ by [lem-weil-pbc-integral-injective-lying-over]. Choose a minimal prime $\\mathfrak q\\subseteq\\mathfrak Q$ of $B$ by [lem-weil-pbc-prime-contains-minimal-prime] with $I=0$. Its contraction is a prime contained in $\\mathfrak p$ and therefore equals $\\mathfrak p$. Thus every minimal prime downstairs has a minimal prime above it. No bijection of minimal primes is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  },
+  {
+   "text": "For a minimal prime $\\mathfrak q$ of $B$ and $\\mathfrak p=f^{-1}(\\mathfrak q)$, the induced homomorphism $\\bar f:A/\\mathfrak p\\to B/\\mathfrak q$ is injective: $f(a)\\in\\mathfrak q$ is equivalent to $a\\in\\mathfrak p$. It is integral: for $b+\\mathfrak q$, take a monic equation for $b$ over $A$ from Step 2 and reduce every coefficient modulo $\\mathfrak p$ and the equation modulo $\\mathfrak q$. Apply [lem-weil-pbc-integral-injective-dimension-equal] to obtain $\\dim(A/\\mathfrak p)=\\dim(B/\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-irreducible-components-minimal-primes], the components of $T$ and $T_{(\\bar x)}=\\operatorname{Spec}B$ are respectively $V_A(\\mathfrak p)$ and $V_B(\\mathfrak q)$ for minimal primes. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] these subspaces are homeomorphic to $\\operatorname{Spec}(A/\\mathfrak p)$ and $\\operatorname{Spec}(B/\\mathfrak q)$. Their topological dimensions are the corresponding ring dimensions by [def-weil-pbc-krull-dimension-ring]; homeomorphisms preserve chains of irreducible closed subsets and their lengths. Step 3 associates to every component upstairs a minimal prime downstairs, and Step 5 preserves its dimension. Step 4 lifts every minimal prime downstairs to one upstairs, and Step 5 again preserves the dimension. Applying these two implications to dimension one proves the equivalence.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Lemma 2.1.5, proof (printed p. 210): flatness, integrality and surjectivity of the strict-localization map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-trf-ind-etale-local-henselian-integral",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Lemma 2.1.5: the same flat-integral-surjective route, with the component argument expressed using minimal primes and integral quotient dimension equality (Stacks Tags 00HS, 00GQ, 00OK, 00ES, 00E5). Integrality is supplied by the existing generic henselian ind-etale lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A Noetherian henselian local scheme has a one-dimensional irreducible component if and only if its strict henselization does",
-   "results": "Mathlib hits HenselianLocalRing.TFAE, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, irreducibleComponents; no strict-henselization component theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "one-dimensional irreducible component invariant under strict henselization of a henselian local scheme",
-   "results": "Mathlib hits HenselianLocalRing.TFAE and finite irreducibleComponents; no strict-henselization component theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "HenselianLocalRing, irreducibleComponents, ringKrullDim",
-   "results": "0 hits.",
+   "query": "A Noetherian henselian local ring has a one dimensional irreducible component if and only if its strict henselization does",
+   "results": "Retained Q41 log: ; HenselianLocalRing.TFAE, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, HenselianLocalRing, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, IsDiscreteValuationRing.TFAE, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Field.henselian; 8 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Henselization|henselization|irreducibleComponents",
-   "results": "Mathlib RingTheory search found only generic irreducibleComponents/minimal-prime declarations; no henselization theorem.",
+   "query": "Henselization|henselization|IsIntegral.*ringKrullDim",
+   "results": "Retained Q41 log: grep failed: Command '['rg', '-n', '-i', '--max-count', '5', '-g', '*.lean', 'Henselization|henselization|IsIntegral.*ringKrullDim', '/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory']' timed out after 60 seconds; ; 0 hits. ",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, irreducibleComponents, ringKrullDim",
+   "results": "Retained Q41 log: service unavailable: ERROR Command '['curl', '-s', '-m', '40', '-A', 'Mozilla/5.0 (weil-sheaf researc; ; 0 hits. ",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization of a henselian local ring preserves one dimensional irreducible components",
+   "results": "Retained Q41 log: ; HenselianLocalRing.toIsLocalRing, HenselianLocalRing.is_henselian, HenselianRing.is_henselian, HenselianRing.jac, instHenselianRingMaximalIdeal, HenselianLocalRing, HenselianLocalRing.TFAE, HenselianLocalRing.casesOn; 8 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselization|henselization",
+   "results": "Retained Q41 log: ; ; 0 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "For a henselian Noetherian local ring a minimal prime quotient has Krull dimension one if and only if some minimal prime quotient of its strict henselization has dimension one",
-   "results": "Retained search hits: ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, Ring.KrullDimLE.of_isLocalization, ringKrullDim_le_ringKrullDim_add_spanFinrank, Ring.KrullDimLE.mk₁. None states the strict-localization component/fibre comparison.",
+   "query": "strict henselization preserves existence of a one-dimensional irreducible component of a Noetherian henselian local scheme",
+   "results": "Retained Q41 log: ; HenselianLocalRing.TFAE, instHenselianRingMaximalIdeal, HenselianLocalRing, HenselianLocalRing.toIsLocalRing, HenselianLocalRing.is_henselian, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, Field.henselian, HenselianRing; 8 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing irreducibleComponents ringKrullDim",
+   "results": "Retained Q41 log: loogle: Application type mismatch: The argument\n  irreducibleComponents\nhas type\n  (X : Type ?u.1) → [TopologicalSpace X] → Set (Set X)\nbut is expected to have type\n  Type ?u.1\nin the application\n  @Henselian; ; 0 hits. ",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|ringKrullDim|Henselization",
+   "results": "Retained Q41 log: ; Mathlib/RingTheory/Ideal/NatInt.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean; 25 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization preserves one dimensional irreducible components",
+   "results": "Retained Q41 log: ; HenselianLocalRing.TFAE, Ring.DimensionLEOne.isIntegralClosure, Ring.DimensionLEOne.localization, HenselianLocalRing.toIsLocalRing, irreducibleComponents_eq_singleton, Ring.DimensionLEOne.integralClosure, HenselianRing.recOn, HenselianLocalRing.casesOn; 8 hits. Read the returned names: henselian root criteria, generic spectrum/component facts and dimension-at-most-one results do not state the strict-henselization component comparison. No match to the item.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-immediate-specialization-criterion",
@@ -77,5 +201,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-component-dimension",
+  "worker": "stage1",
+  "summary": "Checked ILO XIV 2.1.5 and the existing node statements. Replaced the empty proof by six steps: identify the canonical strict henselization, obtain flatness and integrality using existing general lemmas, contract and lift minimal primes, compare quotient dimensions, and translate to components. No statement change and no new nodes. Reused the earlier Q41 search log and corrected the inherited search records to the exact logged Q41 queries.",
+  "blueprint": "Realizes the existing from.place: the henselian intermediate-scheme implication in ILO XIV 2.1.5 underlying lem-per-immediate-specialization-criterion, below the dimension-function branch of lem-per-artin-gabber-affine-curve. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Supplies precisely local henselian structure, the contraction of the maximal ideal, and the ind-etale presentation. The Fourier-exactness unit has no node stating this general local-algebra fact; it is a tool within the existing ILO component argument."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Gives faithful flatness of the canonical local strict-henselization map. The Fourier-exactness unit has no node stating this general local-algebra fact; it is a tool within the existing ILO component argument."
+   },
+   {
+    "node": "lem-trf-ind-etale-local-henselian-integral",
+    "why": "Supplies integrality over the base henselization; the henselian base identifies that henselization with A. The Fourier-exactness unit has no node stating this general local-algebra fact; it is a tool within the existing ILO component argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-ind-etale-local-henselian-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-12af154e2",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-12af154e2 (reviewer sub-agent of L); spot-checked: I read ILO XIV Lemme 2.1.5 (p. 210). The item's statement matches it hypothesis by hypothesis and is unchanged; the Noetherian hypothesis turns out not to be needed. The six steps are correct. Step 1: the neighbourhood colimit is identified with the triples colimit (etale-local-ring-triples (3), strict-henselization-triples (1)-(3) with K = the separable closure in Omega), so B is henselian local and ind-etale with f^-1(m_B)=m_A, and faithfully flat by 07QM. Step 2: lem-trf-ind-etale-local-henselian-integral gives B integral over H=A^h_{m_A}; the universal property gives H iso A (r eta=1, eta r=1 by uniqueness) and the monic equations are pulled back; f is injective by 05CK with N=A. Steps 3-4: flat going-down shows contractions of minimal primes are minimal; lying-over plus 00E0(4) with I=0 lifts minimal primes. Step 5: A/p -> B/q is injective and integral, so the dimensions are equal by 00OK. Step 6: components are V(minimal prime), V(p) is homeomorphic to Spec(A/p), and ring dimension equals topological dimension. Small cases checked: a field, a henselian DVR, k[[x,y,z]]/(xy,xz), nilpotents. No duplicate in the DAG; the completion analogue and etale-component-criterion nodes are different statements. review_split on the snapshot: PASS with the tool use declared. Route: sk-thm-p1, sk-thm-br and sk-thm-properbasechange are on the unit route; sk-i-curve-zero is declared as a tool use and accepted. Batch-5 flag: lem-trf-ind-etale-local-henselian-integral is generic commutative algebra (Schmidt p. 13, Stacks 04GN/04GQ). Its 105-node closure contains no assume leaf, Poincare node, trace-transport node or batch-4 target; its only sec-trace-formula members are itself and the definition. Neither assumed statement gives it, and it is not a step of either, so it is accepted, as with the earlier henselian-permanence acceptance. def-weil-pbc-henselization-at-prime is a general definition and is accepted. No fixes."
  }
 }
