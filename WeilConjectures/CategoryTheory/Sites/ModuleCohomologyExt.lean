@@ -14,10 +14,12 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapBijectiveA
 /-!
 # Sections of sheaves of modules and of their underlying abelian sheaves
 
-Let `T` be a terminal object of a site, `Λ` a ring and `Λ_X`, `ℤ_X` the constant sheaves. For a
-sheaf `Y` of `Λ`-modules, morphisms `Λ_X ⟶ Y` and morphisms `ℤ_X ⟶ Y` of abelian sheaves are
-both the global sections `Y(T)`. The class `u : ℤ_X ⟶ Λ_X` of `1 ∈ Λ` identifies them:
-`f ↦ u ≫ f` is bijective (`CategoryTheory.Sheaf.bijective_comp_forget₂_map`).
+Let `T` be a terminal object of a site, `Λ` a ring and `Λ_X`, `ℤ_X` the constant sheaves.
+Morphisms `ℤ_X ⟶ G` of abelian sheaves are the global sections `G(T)`
+(`CategoryTheory.Sheaf.constantHomEquiv`). For a sheaf `Y` of `Λ`-modules, morphisms
+`Λ_X ⟶ Y` and morphisms `ℤ_X ⟶ Y` of abelian sheaves are thus both the global sections `Y(T)`.
+The class `u : ℤ_X ⟶ Λ_X` of `1 ∈ Λ` identifies them: `f ↦ u ≫ f` is bijective
+(`CategoryTheory.Sheaf.bijective_comp_forget₂_map`).
 
 Together with `CategoryTheory.Functor.bijective_mapExtComp` this identifies `Ext^n(Λ_X, Y)`
 (cohomology computed with sheaves of `Λ`-modules) with `Hⁿ(Y)` (cohomology of the underlying
@@ -32,9 +34,32 @@ open CategoryTheory Limits Opposite Abelian
 
 namespace CategoryTheory.Sheaf
 
+section ConstantInt
+
+variable {C : Type*} [Category.{v} C] {J : GrothendieckTopology C}
+  [HasSheafify J AddCommGrpCat.{u}] {T : C} (hT : IsTerminal T)
+
+/-- Morphisms out of the constant sheaf `ℤ` are global sections: the value at `1` over the
+terminal object. -/
+noncomputable def constantHomEquiv (F : Sheaf J AddCommGrpCat.{u}) :
+    ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) ≃
+      F.obj.obj (op T) :=
+  ((constantSheafAdj J AddCommGrpCat.{u} hT).homEquiv _ F).trans
+    (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv
+
+lemma constantHomEquiv_comp {F G : Sheaf J AddCommGrpCat.{u}}
+    (f : (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F)
+    (g : F ⟶ G) :
+    constantHomEquiv hT G (f ≫ g) = g.hom.app (op T) (constantHomEquiv hT F f) := by
+  simp only [constantHomEquiv, Equiv.trans_apply, AddEquiv.toEquiv_eq_coe,
+    Adjunction.homEquiv_naturality_right]
+  rfl
+
+end ConstantInt
+
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {T : C} (hT : IsTerminal T)
   (Λ : Type w) [CommRing Λ] [HasWeakSheafify J (ModuleCat.{w} Λ)]
-  [HasWeakSheafify J AddCommGrpCat.{w}]
+  [HasSheafify J AddCommGrpCat.{w}]
   [J.HasSheafCompose (forget₂ (ModuleCat.{w} Λ) AddCommGrpCat.{w})]
 
 /-- The forgetful functor from sheaves of `Λ`-modules to abelian sheaves. -/
@@ -56,13 +81,7 @@ noncomputable def constantRingHomEquiv (Y : Sheaf J (ModuleCat.{w} Λ)) :
   ((constantSheafAdj J (ModuleCat.{w} Λ) hT).homEquiv _ _).trans
     (ModuleCat.homEquiv.trans (LinearMap.ringLmapEquivSelf Λ Λ _).toEquiv)
 
-/-- Morphisms `ℤ_X ⟶ G` of abelian sheaves are the global sections of `G`. -/
-noncomputable def constantIntHomEquiv (G : Sheaf J AddCommGrpCat.{w}) :
-    (constantInt J ⟶ G) ≃ G.obj.obj (op T) :=
-  ((constantSheafAdj J AddCommGrpCat.{w} hT).homEquiv _ _).trans
-    (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv
-
-omit [HasWeakSheafify J AddCommGrpCat.{w}]
+omit [HasSheafify J AddCommGrpCat.{w}]
   [J.HasSheafCompose (forget₂ (ModuleCat.{w} Λ) AddCommGrpCat.{w})] in
 lemma constantRingHomEquiv_comp {Y Y' : Sheaf J (ModuleCat.{w} Λ)} (f : constantRing J Λ ⟶ Y)
     (g : Y ⟶ Y') :
@@ -72,15 +91,9 @@ lemma constantRingHomEquiv_comp {Y Y' : Sheaf J (ModuleCat.{w} Λ)} (f : constan
     Adjunction.homEquiv_naturality_right]
   rfl
 
-lemma constantIntHomEquiv_comp {G G' : Sheaf J AddCommGrpCat.{w}} (f : constantInt J ⟶ G)
-    (g : G ⟶ G') :
-    constantIntHomEquiv J hT G' (f ≫ g) = g.hom.app (op T) (constantIntHomEquiv J hT G f) := by
-  rw [constantIntHomEquiv, Equiv.trans_apply, Adjunction.homEquiv_naturality_right]
-  rfl
-
 /-- The class `u : ℤ_X ⟶ Λ_X` of the global section `1`. -/
 noncomputable def constantIntToRing : constantInt J ⟶ (forget₂Module J Λ).obj (constantRing J Λ) :=
-  (constantIntHomEquiv J hT _).symm (constantRingHomEquiv J hT Λ _ (𝟙 _))
+  (constantHomEquiv hT _).symm (constantRingHomEquiv J hT Λ _ (𝟙 _))
 
 /-- **Morphisms out of `Λ_X` are morphisms out of `ℤ_X`.** For a sheaf `Y` of `Λ`-modules,
 `f ↦ u ≫ f`, `Hom(Λ_X, Y) ⟶ Hom(ℤ_X, Y)`, is bijective: both are the global sections of `Y`. -/
@@ -89,14 +102,14 @@ theorem bijective_comp_forget₂_map (Y : Sheaf J (ModuleCat.{w} Λ)) :
       constantIntToRing J hT Λ ≫ (forget₂Module J Λ).map f := by
   have key : (fun f : constantRing J Λ ⟶ Y ↦
       constantIntToRing J hT Λ ≫ (forget₂Module J Λ).map f) =
-      (constantIntHomEquiv J hT _).symm ∘ (constantRingHomEquiv J hT Λ Y) := by
+      (constantHomEquiv hT _).symm ∘ (constantRingHomEquiv J hT Λ Y) := by
     funext f
-    refine (constantIntHomEquiv J hT _).injective ?_
-    rw [Function.comp_apply, Equiv.apply_symm_apply, constantIntHomEquiv_comp, constantIntToRing,
+    refine (constantHomEquiv hT _).injective ?_
+    rw [Function.comp_apply, Equiv.apply_symm_apply, constantHomEquiv_comp, constantIntToRing,
       Equiv.apply_symm_apply]
     conv_rhs => rw [← Category.id_comp f, constantRingHomEquiv_comp]
     rfl
   rw [key]
-  exact (constantIntHomEquiv J hT _).symm.bijective.comp (constantRingHomEquiv J hT Λ Y).bijective
+  exact (constantHomEquiv hT _).symm.bijective.comp (constantRingHomEquiv J hT Λ Y).bijective
 
 end CategoryTheory.Sheaf
