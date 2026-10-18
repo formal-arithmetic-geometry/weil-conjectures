@@ -18,48 +18,175 @@
   "def-exc-excellent-ring",
   "def-per-potential-dualizing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{W,x}$ for $W=\\overline{\\{y\\}}_{\\mathrm{red}}$ and put $Z=\\operatorname{Spec}A$. By [lem-per-etale-immediate-component-criterion], $Z_{(\\bar x)}=X_{(\\bar x)}\\times_X W$ and the closures of points above $y$ have the same dimensions in the two schemes. Thus both assertions may be proved on the local integral scheme $Z$, whose generic point is $y$ and closed point is $x$. In particular a one-dimensional closure above $y$ is a component of $Z_{(\\bar x)}$; it need not be a component of $X_{(\\bar x)}$.",
+   "uses": [
+    "lem-per-etale-immediate-component-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, reduction preceding Proposition 2.1.3 and its proof, printed pp.209-210"
+   }
+  },
+  {
+   "text": "Assume $\\dim A=1$. The only primes of the local domain $A$ are $(0)$ and its maximal ideal. By [lem-per-strict-localization-discrete-fibres], the fibre of $Z_{(\\bar x)}\\to Z$ over $y$ is nonempty and discrete. By [lem-weil-pbc-etale-local-ring-triples] for $Y=U=Z$ and $\\mathfrak p=\\mathfrak m_A$, the ring of $Z_{(\\bar x)}$ is the triples colimit $A^{\\mathrm{sh}}$ of [lem-weil-pbc-strict-henselization-triples] for $K=\\kappa(\\bar x)$; by the latter, its maximal ideal is $\\mathfrak m_A A^{\\mathrm{sh}}$, so its fibre over $x$ has just the closed point $c$. For any $t$ over $y$, every specialization of $t$ other than $c$ is in that discrete fibre, hence equals $t$. Since a point of a local scheme specializes to its closed point, $\\overline{\\{t\\}}=\\{t,c\\}$ with $t\\ne c$. Its dimension is exactly one. Step 1 transfers this equality of dimensions to the ambient strict localization, proving (a) for every $t$.",
+   "uses": [
+    "lem-per-strict-localization-discrete-fibres",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.4, printed pp.209-211"
+   }
+  },
+  {
+   "text": "For (b), choose an affine neighbourhood $\\operatorname{Spec}R$ of $x$ with $R$ universally catenary. Write $A=R_{\\mathfrak q}/\\mathfrak pR_{\\mathfrak q}$, where $\\mathfrak p\\subseteq\\mathfrak q$ correspond to $y,x$, and $S=R\\setminus\\mathfrak q$. Every finite-type $A$-algebra $B$ is a quotient of $S^{-1}(R/\\mathfrak p)[t_1,\\ldots,t_n]$. Contract its defining ideal to $(R/\\mathfrak p)[t_1,\\ldots,t_n]$, obtaining $B=S^{-1}C$ with $C$ finite type over $R$. By [def-exc-excellent-ring], $C$ is catenary. Chains between fixed primes in $S^{-1}C$ correspond exactly to chains between their contractions in $C$: every intermediate prime avoids $S$. Their lengths and saturation are preserved, so $B$ is catenary. Thus $A=\\mathcal O_{W,x}$ is universally catenary.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.4, printed pp.209-211"
+   }
+  },
+  {
+   "text": "Construct $(H,\\mathfrak m_AH)$ as the henselization of the pair $(A,\\mathfrak m_A)$ using [lem-weil-pbc-pair-henselization]. Its statement supplies a filtered colimit of etale $A$-algebras, a henselian pair, and $H/\\mathfrak m_AH\\simeq A/\\mathfrak m_A=k$. By [lem-weil-pbc-henselian-factorization-criterion], $\\mathfrak m_AH$ lies in every maximal ideal of $H$. Since its quotient is a field, it is the unique maximal ideal. Thus $H$ is henselian local, with residue field $k$. By [lem-weil-pbc-henselization-noetherian-completion], $H$ is Noetherian and $\\widehat H\\simeq\\widehat A$ for these maximal-ideal completions.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-henselization-noetherian-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, final paragraph of Proposition 2.1.4 proof, printed p.211, through the application of Lemma 2.1.5"
+   }
+  },
+  {
+   "text": "Put $C=A^{\\mathrm{sh}}$, with residue field $K=k^{\\mathrm{sep}}$ and henselian local structure supplied by [lem-weil-pbc-strict-henselization-triples]. Apply [lem-weil-pbc-map-into-henselian-colimit] to $H$ and the residue embedding $k\\to K$, obtaining the unique local $A$-map $H\\to C$. For any henselian local $H$-algebra $T$ with a prescribed embedding $K\\to\\kappa(T)$ over $k$, the same lemma gives a unique pointed $A$-map $C\\to T$. This map is $H$-linear: the two composites $H\\to T$ are equal by that lemma applied to the ind-etale $A$-algebra $H$, since both induce the prescribed map from $k$. The strict henselization of $H$ has exactly this pointed mapping property by the same lemma. Applying the two properties to each other gives inverse pointed $H$-maps, their composites being identities by uniqueness. Hence $C$ is the strict henselization of $H$. By [lem-weil-pbc-etale-local-ring-triples], applied to $Y=Z$ and to $Y=\\operatorname{Spec}H$ with the geometric point $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k\\to\\operatorname{Spec}H$ (both with $\\kappa(\\bar x)=K$), these triples colimits are the rings of $Z_{(\\bar x)}$ and of $(\\operatorname{Spec}H)_{(\\bar x)}$; so $Z_{(\\bar x)}=\\operatorname{Spec}C$ is the strict localization of $\\operatorname{Spec}H$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, final paragraph of Proposition 2.1.4 proof, printed p.211, through the application of Lemma 2.1.5"
+   }
+  },
+  {
+   "text": "By Step 1 the assumed point with one-dimensional closure supplies a one-dimensional component of $\\operatorname{Spec}C$. Apply [lem-per-henselian-component-dimension] to the Noetherian henselian local ring $H$ of Step 4 and its strict localization identified in Step 5. It follows that $\\operatorname{Spec}H$ has a one-dimensional irreducible component.",
+   "uses": [
+    "lem-per-henselian-component-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, final paragraph of Proposition 2.1.4 proof, printed p.211, through the application of Lemma 2.1.5"
+   }
+  },
+  {
+   "text": "Apply the forward direction of [lem-per-completion-component-dimension] to $\\operatorname{Spec}H$; no catenarity of $H$ is required. It gives a one-dimensional component of $\\operatorname{Spec}\\widehat H$. By [lem-weil-pbc-henselization-noetherian-completion], $\\widehat H\\simeq\\widehat A$, so $\\operatorname{Spec}\\widehat A$ has such a component. Now apply the converse of [lem-per-completion-component-dimension] to $A$, which Step 3 proved universally catenary. It follows that $\\operatorname{Spec}A$ has a one-dimensional component. As $A$ is a domain, its only irreducible component is the whole spectrum, and hence $\\dim\\mathcal O_{W,x}=1$. This proves (b).",
+   "uses": [
+    "lem-per-completion-component-dimension",
+    "lem-weil-pbc-henselization-noetherian-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, final paragraph of Proposition 2.1.4 proof, printed p.211: easy direction of Lemma 2.1.6 for the henselization, equality of completions, then converse for the original local scheme"
+   }
+  },
+  {
+   "text": "Fix $\\bar x$ and assume $\\dim\\mathcal O_{W,x}=1$. By [lem-per-strict-localization-discrete-fibres] the fibre of $X_{(\\bar x)}\\to X$ over $y$ contains a point $t$; by Step 2 its closure has dimension one. Let $a:\\operatorname{Spec}\\Omega'\\to X_{(\\bar x)}$ be a geometric point over $t$, $\\Omega'$ an algebraic closure of $\\kappa(t)$ [def-weil-geometric-point], and put $\\bar y=\\rho_{\\bar x}\\circ a$, a geometric point of $X$ over $y$, with $\\rho_{\\bar x}$ the structural map [def-weil-pbc-strict-henselization-structural-map]. For an affine open $\\operatorname{Spec}R\\ni x$, [lem-weil-pbc-etale-local-ring-triples] writes the ring of $X_{(\\bar x)}$ as a filtered colimit of etale, hence finitely presented, $R$-algebras, so $\\rho_{\\bar x}$ is ind-etale as required in [lem-trf-ind-etale-strict-local-invariance]. That lemma makes the functorial map $(X_{(\\bar x)})_{(a)}\\to X_{(\\bar y)}$ of [lem-weil-pbc-strict-henselization-functoriality] an isomorphism over $X$. Its inverse followed by the structural map $(X_{(\\bar x)})_{(a)}\\to X_{(\\bar x)}$ is an $X$-map $X_{(\\bar y)}\\to X_{(\\bar x)}$, i.e. a geometric specialization $\\bar y\\rightsquigarrow\\bar x$. The isomorphism preserves closed points, and by clause 1 of the functoriality lemma the structural map sends the closed point to $t$. So the image of $\\bar y$ is $t$, whose reduced closure has dimension one: the specialization is immediate in the sense of [def-per-potential-dualizing].",
+   "uses": [
+    "lem-per-strict-localization-discrete-fibres",
+    "def-weil-geometric-point",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definitions 2.1.1-2.1.2 and the following remark (generizations etale immediate = images of points of the strict localization with one-dimensional closure), printed p.209; the identification of specializations with lifts is written out from the cited statements instead of the reference cited there"
+   }
+  },
+  {
+   "text": "Conversely, let $\\bar y\\rightsquigarrow\\bar x$ be an immediate geometric specialization over $y\\rightsquigarrow x$ [def-per-potential-dualizing]. Since it is an $X$-map, the image of $\\bar y$ is a point of $X_{(\\bar x)}$ over $y$, and its reduced closure has dimension one; Step 7 gives $\\dim\\mathcal O_{W,x}=1$. With Step 8 this is the required immediate-specialization criterion. If $y=x$, the only lift of $y$ in the strict localization is the closed point, with dimension-zero closure, while $\\mathcal O_{W,x}$ is a field; neither condition holds. Steps 1-8 apply to an arbitrary choice of $\\bar x$, and the ring $\\mathcal O_{W,x}$ does not depend on that choice, so the equivalence is independent of $\\bar x$.",
+   "uses": [
+    "def-per-potential-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.4, printed pp.209-211"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-etale-immediate-component-criterion",
+  "lem-per-strict-localization-discrete-fibres",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-per-henselian-component-dimension",
+  "lem-per-completion-component-dimension",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-per-potential-dualizing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Proposition 2.1.4, with Proposition 2.1.3 and Lemmas 2.1.5–2.1.6"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'strictHenselization\\|StrictHenselization\\|IsStrictlyHenselian' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "none",
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme immediate specialization of codimension one agrees with dimension one of point closures in its strict localization when universally catenary",
+   "results": "8 hits on specialization order and ordinary local rings; none on strict-local component dimensions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Codimension one specialization detected by strict henselization of a universally catenary Noetherian local ring",
+   "results": "8 hits on HenselianLocalRing, HenselianRing and stalk specialization; none states the criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"ringKrullDim\"",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rln 'UniversallyCatenary\\|IsCatenary\\|Catenary' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "none",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'HenselianLocalRing' and 'Henselization\\|henselization' in /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "Mathlib/RingTheory/Henselian.lean (definition of HenselianLocalRing and Hensel lifting only; no henselization, strict localization or dimension statement)",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'geometricPoint\\|GeometricPoint' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "none",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Equidimensional\\|equidimensional' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean (a docstring remark only; no formal equidimensionality or strict-localization dimension statement)",
+   "query": "strictHensel|StrictHensel|catenar|Catenar",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-extraordinary-pullback",
@@ -80,5 +207,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-immediate-specialization-criterion",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery: correct the strict-local component criterion to use the reduced local closure; prove the all-points forward implication on that closed strict-local subscheme; establish universal catenarity of its local ring; give the henselization-to-completion-to-original-local-ring chain including the easy direction of ILO 2.1.6 and the existing equality-of-completions node. Remove duplicate flatness from the fibre node, repair definitions and blueprint provenance, and reconcile the overlapping Q07 node, which now cites this stronger criterion, without introducing a reverse edge.",
+  "blueprint": "Proof Step 3, dimension-normalized Verdier duality over the arbitrary base field, expanded through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-extraordinary-pullback: the dimension-function normalization and its identification of Zariski and etale immediate specializations",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Noetherianity of the ordinary henselization and equality of its completion with the original local completion; the same-unit ILO component lemmas do not supply these commutative-algebra facts."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The maximal ideal of the strict henselization is the extension of the original maximal ideal, so the closed fibre is one point; no same-unit node states this ring construction fact."
+   },
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Constructs the henselian pair and gives its residue quotient and ind-etale presentation; no same-unit node supplies this algebraic construction."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Its Jacobson-radical clause and the residue quotient show the pair henselization is local, so the henselian component lemma applies."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Supplies the pointed mapping property and uniqueness that identify the strict localization after henselization; the comparison is written out in Step 5."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Identifies the pointed-neighbourhood strict localization of the definition with the triples colimit used in Steps 2, 5 and 8; no same-unit node states this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Supplies the functorial map of strict localizations and the closed-point image used in Step 8; generic, no same-unit node."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Stacks 05WR: strict localization is invariant under the ind-etale structural map; turns a point of the strict localization into a geometric specialization in Step 8. Generic tool, no same-unit node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-trf-ind-etale-strict-local-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-711b37b94",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-711b37b94 (reviewer sub-agent of L); spot-checked: Read in full: ILO XIV §2.1, printed pp.209-211 (Déf. 2.1.1-2.1.2, the reduction to the closure, Prop. 2.1.3/2.1.4 with proofs, Lemmas 2.1.5/2.1.6 with proofs, and the converse chain through 2.1.3, 2.1.5, X^h, completion and the converse of 2.1.6); the item, all four new nodes, the statement of every cited node, the citers and the prior 83b23aab RETURN. The live item is still unsplit, so the delivery is not superseded. Every point of the earlier return is fixed. The component criterion is now stated for Z = Spec O_{W,x} (Z_(x̄) = X_(x̄) ×_X W), which is correct and passes the A² line test. Step 7 now has the easy direction of 2.1.6 on H, Ĥ ≅ Â and the converse on A. Step 3 proves universal catenarity of A. The flatness duplicate, B2, B3 and B9 are fixed. The new nodes agree with ILO 2.1.3, 2.1.5 and 2.1.6 hypothesis by hypothesis; the discrete-fibre node is true (Noetherian ind-étale fibres, faithful flatness). There are no duplicates (an advisory overlap of the nonempty clause with lem-sc-strict-henselization-faithfully-flat), no cycle (Q07 → item only) and no SGA citation. Two faults repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-immediate-specialization-criterion.json; only proof, proof_deps and tool_uses changed. C4: Steps 2/5 used the triples colimit as the defined strict localization without lem-weil-pbc-etale-local-ring-triples; now cited. E5/C1: old Step 8 went from a point over y with one-dimensional closure to an immediate geometric specialization (an X-map X_(ȳ)→X_(x̄)) with no construction, and Q07 relies on that existence. New Step 8 builds it from a geometric point over t, lem-trf-ind-etale-strict-local-invariance (the strict localization is ind-étale over X) and lem-weil-pbc-strict-henselization-functoriality clause 1. New Step 9 gives the converse, the case y = x and independence of x̄. Three generic tool_uses were added (a batch-5 flag on the trf node, if raised, is generic). Maintainer note: merge Q07 lem-per-geometric-immediate-catenary into this criterion.; 1 file(s) fixed by the reviewer"
  }
 }
