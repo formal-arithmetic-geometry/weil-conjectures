@@ -6,7 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 
 /-!
 # Closedness of the derived tensor product
