@@ -8788,6 +8788,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCur
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstantScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
