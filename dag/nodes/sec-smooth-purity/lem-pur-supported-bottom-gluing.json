@@ -2,7 +2,7 @@
  "id": "lem-pur-supported-bottom-gluing",
  "kind": "statement",
  "title": "Gluing supported cohomology in its lowest local degree",
- "statement": "Use finite coefficients and supported cohomology [def-pur-conventions], [def-pur-support-cohomology]. Let $X$ be a separated finite-type $k$-scheme, let $Z\\hookrightarrow X$ be closed, let $a\\in\\mathbf Z$, and let $d\\geq0$. On the small etale site write $C=R\\underline\\Gamma_Z(A(a))$ for the derived sheaf of sections with support (the right-derived kernel of restriction to the open complement), and $\\mathcal H_Z^q(A(a))=\\mathcal H^q(C)$. Suppose $\\mathcal H_Z^q(A(a))=0$ for all $q<d$. Then the canonical edge isomorphisms\n$$H^d_{Z\\times_XU}(U_{\\mathrm{et}},A(a))\\xrightarrow{\\sim}\\Gamma(U,\\mathcal H_Z^d(A(a))|_U)$$\nhold for every etale $U\\to X$ and commute with further etale restriction. Under the canonical etale-to-pro-etale supported-cohomology comparison, they identify the pro-etale supported groups with the same sections. Consequently degree-$d$ supported classes have unique gluing on every Zariski or etale covering of $X$. The vanishing hypothesis is essential; no such gluing assertion is made in degrees above the first possible nonzero local-cohomology degree.",
+ "statement": "Fix the finite coefficient datum $k,\\ell,E,n,A=\\mathcal O_E/\\varpi_E^n$ of [def-pur-conventions]. Let $X$ be a separated finite-type $k$-scheme, $Z\\hookrightarrow X$ closed, $a\\in\\mathbf Z$, and $d\\geq0$. For a $k$-scheme $T$, let $A_T^{\\mathrm{et}}(a)$ be the finite etale Tate sheaf of [lem-asd-etale-finite-twist-pullback], constructed using any power of $\\ell$ annihilating $A$, and let $A_T^{\\mathrm{pro}}(a)$ be the pro-etale twist of [def-coefficient-twists-detailed]. Supported cohomology means that of the underlying abelian sheaves [def-pur-support-cohomology]. On $X_{\\mathrm{et}}$ put $F=A_X^{\\mathrm{et}}(a)$, $C=R\\underline\\Gamma_Z(F)$, the right-derived sheaf kernel of restriction to the open complement, and $\\mathcal H_Z^q(F)=\\mathcal H^q(C)$ [def-weil-derived-cohomology-sheaves]. Suppose $\\mathcal H_Z^q(F)=0$ for all $q<d$. Then for every etale $v:U\\to X$, with $Z_U=Z\\times_XU$, the canonical edge isomorphism\n$$H^d_{Z_U}(U_{\\mathrm{et}},A_U^{\\mathrm{et}}(a))\\xrightarrow{\\sim}\\Gamma(U,\\mathcal H_Z^d(F)|_U)$$\ncommutes with further etale restriction. Write $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ for [def-weil-pbc-site-comparison-morphism]. There are canonical, pullback-compatible isomorphisms $\\theta_{T,a}:\\nu_T^*A_T^{\\mathrm{et}}(a)\\xrightarrow{\\sim}A_T^{\\mathrm{pro}}(a)$ for every integer $a$, extending [lem-amb-finite-tate-site-descent] by evaluation duality at negative $a$. For every such $U$, the canonical supported comparison (derived support applied to the comparison adjunction unit, followed by the direct-image comparison of [lem-pur-derived-support-comparison-direct-image] and then $\\theta_{U,a}$) identifies $H^d_{Z_U}(U_{\\mathrm{proet}},A_U^{\\mathrm{pro}}(a))$ with the same sections. Consequently degree-$d$ supported classes on either site have unique gluing on every Zariski or etale covering of $X$. The vanishing hypothesis is essential; no such assertion is made in degrees above the first possible nonzero local-cohomology degree.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 015N, lemma-grothendieck-spectral-sequence, bottom-edge consequence for sheaf support followed by sections; repairs blueprint Step 3"
@@ -10,11 +10,229 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-pur-support-cohomology",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-derived-support-comparison-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=A_X^{\\mathrm{et}}(a)$. By [lem-asd-etale-finite-twist-pullback], $F|_U=A_U^{\\mathrm{et}}(a)$ canonically for every etale $U\\to X$, for all integers $a$. Set $P(G)=\\ker(G\\to j_*j^{-1}G)$ on $X_{\\mathrm{et}}$, where $j:X\\setminus Z\\hookrightarrow X$. Choose an injective resolution $F\\to I^\\bullet$ in abelian sheaves. For an etale $v:U\\to X$, restriction is exact and preserves injectives by [lem-weil-pbc-etale-restriction-injectives] (with constant ring $\\mathbf Z$). For an etale $W\\to U$, both $(P(G)|_U)(W)$ and $P_{Z\\times_XU}(G|_U)(W)$ are $\\ker(G(W)\\to G(W\\setminus(Z\\times_XW)))$. Thus the two support functors commute with restriction, and the restricted resolution shows $C|_U\\simeq R P_{Z\\times_XU}(F|_U)$. In particular its cohomology sheaves are $\\mathcal H^q(C)|_U$ [def-weil-derived-cohomology-sheaves]. Also $\\Gamma(U,P(I^\\bullet)|_U)$ computes $H^*_{Z\\times_XU}(U,F)$ by [def-pur-support-cohomology].",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-derived-cohomology-sheaves",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "For the closed immersion $i:Z\\hookrightarrow X$, [lem-pur-etale-supported-kernel-adjunction] identifies $P=i_*i^!_0$, with $i_*$ exact and left adjoint to $i^!_0$. By [lem-sp-right-adjoint-preserves-injectives], $i^!_0$ carries injective abelian sheaves on $X$ to injective abelian sheaves on $Z$. By [lem-weil-pbc-direct-image-preserves-injectives] (constant ring $\\mathbf Z$), $i_*$ carries the latter to injectives on $X$. Therefore $P$ carries injectives to injectives. This verifies the acyclicity condition for composing the sheaf support functor with sections; it is not inferred merely from the definition of supported cohomology.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-direct-image-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "For a fixed etale $U\\to X$, let $G_U(G)=\\Gamma(U,G|_U)$. Abelian etale sheaves form a Grothendieck abelian category by [lem-weil-pbc-module-sheaves-grothendieck-abelian], with constant ring $\\mathbf Z$. Restriction preserves injectives [lem-weil-pbc-etale-restriction-injectives], so $R^pG_U(G)=H^p(U,G|_U)$. Step 2 implies $P(I)$ is $G_U$-acyclic for every injective $I$. Apply [thm-sp-grothendieck] to $(P,G_U)$ and $F$ to get the first-quadrant spectral sequence\n$$E_2^{p,q}=H^p(U,\\mathcal H^q(C)|_U)\\ \\Longrightarrow\\ H^{p+q}_{Z\\times_XU}(U,F).$$\nHere $G_UP$ is exactly the kernel-of-restriction functor of [def-pur-support-cohomology], so the abutment is the specified supported group, not a different support construction. The theorem supplies convergence with the finite decreasing filtration in each total degree.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "thm-sp-grothendieck",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "By the hypothesis, $E_2^{p,q}=0$ for $0\\leq q<d$. Derive the required filtration endpoints from [def-sp-convergence]: convergence gives $\\operatorname{gr}^pH^d=E_\\infty^{p,d-p}$ and a separated, exhaustive decreasing filtration. The graded pieces vanish for $p<0$ and $p>d$ by the first-quadrant condition. Thus all $F^pH^d$ with $p\\leq0$ equal $F^0H^d$; exhaustiveness forces $F^0H^d=H^d$. Similarly all $F^pH^d$ with $p\\geq d+1$ equal $F^{d+1}H^d$; separatedness forces $F^{d+1}H^d=0$. Apply [lem-pur-first-quadrant-lowest-row-edge] with $m=d$ to this finite filtration. It gives the canonical edge isomorphism\n$$H^d_{Z\\times_XU}(U,F|_U)\\xrightarrow{\\sim}H^0(U,\\mathcal H^d(C)|_U)=\\Gamma(U,\\mathcal H_Z^d(F)|_U).$$\nIndeed only $(0,d)$ can contribute in total degree $d$; outgoing differentials land below row $d$, and incoming ones start in negative columns.",
+   "uses": [
+    "lem-pur-first-quadrant-lowest-row-edge",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "Use the single resolution $I^\\bullet$ of Step 1 for every etale object $U$. By [lem-pc-grothendieck-edge-cocycle], the edge sends a cocycle of $\\Gamma(U,P(I^\\bullet)|_U)$ to its image under the sheaf morphism\n$$\\ker(P(I^d)\\to P(I^{d+1}))\\longrightarrow\\mathcal H^d(P(I^\\bullet)).$$\nFor a further etale map $V\\to U$, evaluation of this same sheaf morphism on $V$ commutes with restriction from $U$. The edge maps therefore commute with every such restriction, as do their inverses. This proves the asserted naturality directly on cocycles, without assuming any additional functoriality in the second functor of the spectral sequence.",
+   "uses": [
+    "lem-pc-grothendieck-edge-cocycle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "First identify coefficients before comparing cohomology. For every $k$-scheme $T$, $\\ell$ is invertible and $A$ is a finite ring annihilated by a power of $\\ell$. Apply [lem-amb-finite-tate-site-descent] to obtain $\\theta_{T,b}:\\nu_T^*A_T^{\\mathrm{et}}(b)\\xrightarrow{\\sim}A_T^{\\mathrm{pro}}(b)$ for $b\\geq0$, independently of the annihilating power and compatibly with scheme pullback. This is an assertion about ordinary finite constant-ring module sheaves. By [lem-sf-comparison-pullback-exact], the module inverse image is the abelian-sheaf inverse image with its induced $A$-action; its coefficient unit is $A_{T_{\\mathrm{proet}}}$. No change to condensed or completed coefficient categories is being made.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 099R, section-comparison; Tag 03PK, section-kummer; finite-level identification as stated in lem-amb-finite-tate-site-descent"
+   }
+  },
+  {
+   "text": "For $a=-b<0$, set $L=A_T^{\\mathrm{et}}(b)$ and $L_p=A_T^{\\mathrm{pro}}(b)$. Both negative twists are the sheaf duals specified in [lem-asd-etale-finite-twist-pullback] and [def-coefficient-twists-detailed]. Pull back the evaluation $L^\\vee\\otimes_A L\\to A$ using [lem-weil-pbc-ringed-topoi-module-pullback-tensor] and use $\\theta_{T,b}$ from Step 6. By the definition of sheaf Hom [def-pur-sheaf-hom], the resulting pairing defines\n$$\\theta_{T,-b}:\\nu_T^*L^\\vee\\longrightarrow L_p^\\vee.$$\nOn an etale cover trivializing $L$ (provided by the finite-twist lemma), its inverse-image pro-etale cover trivializes both lines. If $e$ is a frame, this map sends the pulled-back $e^\\vee$ to the functional taking $\\theta_{T,b}(e)$ to $1$; it is therefore the identity $A\\to A$ in these frames. These local inverses glue: replacing $e$ by $ue$ replaces both dual frames by $u^{-1}$ times themselves. Thus the map is a canonical isomorphism. Pullback takes this formula to the same formula for the pulled-back frame, so the negative comparison commutes with every scheme pullback and evaluation, just as the positive comparison does. This is a direct local calculation for a line, not an assumption that arbitrary internal Hom commutes with inverse image.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-coefficient-twists-detailed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; evaluation and the sheaf-Hom definition; elementary rank-one frame calculation"
+   }
+  },
+  {
+   "text": "To use the on-route finite-module comparison with the abelian-sheaf support of Steps 1--5, apply [lem-pur-module-restriction-kernel-comparison] on both small sites, with the open monomorphism $T\\setminus Z_T\\to T$. Its statement identifies module-derived support, after forgetting scalars, with abelian-derived support; it also identifies the two short exact restriction-kernel models, hence their boundary maps. Ordinary evaluations agree by [lem-pe-left-module-derived-evaluation-forget], naturally in the object evaluated and compatibly with cohomology pullback. These are specified comparisons of derived functors, not an assertion that a module-injective sheaf is injective as an abelian sheaf. Use common universes containing the small sites and coefficients as these two lemmas require.",
+   "uses": [
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective; ordinary/module comparison and restriction-kernel refinement in the cited nodes"
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective $A$-module resolution $\\nu_X^*F\\to J^\\bullet$ using [lem-sc-bounded-below-injective-resolution-existence]; enough injectives is part of [lem-pur-module-restriction-kernel-comparison]. Exactness of $\\nu_X^*$ [lem-sf-comparison-pullback-exact] and its module adjunction [def-weil-pbc-site-comparison-morphism] imply, by [lem-sp-right-adjoint-preserves-injectives], that $B^\\bullet=\\nu_{X,*}J^\\bullet$ is termwise injective. The map $F\\to B^\\bullet$ represents the derived adjunction unit by [lem-pur-comparison-unit-injective-model], and is a quasi-isomorphism by [thm-weil-pbc-site-comparison]. Thus it is an etale injective resolution of $F$. Restrict $B^\\bullet$ and $J^\\bullet$ to every etale $U\\to X$: they remain injective resolutions by [lem-weil-pbc-etale-restriction-injectives] and [lem-weil-pbc-proetale-restriction-injectives]. These bounded-below injective complexes are K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. The pullback comparison [lem-weil-pbc-comparison-pullback] identifies the latter's coefficient with $\\nu_U^*(F|_U)$. The direct-image evaluation formula gives\n$$B^\\bullet(U)=J^\\bullet(U),\\qquad B^\\bullet(O_U)=J^\\bullet(O_U),\\qquad O_U=U\\setminus Z_U,$$\nwith identical differentials and restriction arrows. These equalities hold for all etale $U$, without a separatedness or finite-type assumption on $U$.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-sf-comparison-pullback-exact",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-pur-comparison-unit-injective-model",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/derived.tex; literature/stacks-project/homology.tex",
+    "place": "Tag 099V, lemma-relative-comparison; Tag 09B1, lemma-compare-derived; Tag 015Z, lemma-adjoint-preserve-injectives; Tag 013K, lemma-injective-resolutions-exist"
+   }
+  },
+  {
+   "text": "For every etale $U$, let $H_{U,Z_U}^{\\mathrm{et}}=R\\Gamma_{Z_U}(U_{\\mathrm{et}},-)$. Define the canonical supported comparison by the explicit composite\n$$c_U=b_{Z_U,\\nu_U^*(F|_U)}\\circ H_{U,Z_U}^{\\mathrm{et}}(\\eta_{F|_U}),$$\nwhere $\\eta$ is the unit of [thm-weil-pbc-site-comparison] and $b$ is [lem-pur-derived-support-comparison-direct-image]. Both arrows are isomorphisms; this construction therefore works for arbitrary $U$. In the resolutions of Step 9 it is exactly the identity\n$$\\ker(B^\\bullet(U)\\to B^\\bullet(O_U))=\\ker(J^\\bullet(U)\\to J^\\bullet(O_U)).$$\nOn every $W\\to U$ the two direct images evaluate at $J^\\bullet(W)$, and the restricted augmentation is the underived adjunction unit followed by the restricted resolution. Thus it represents $\\eta_{F|_U}$ by [lem-pur-comparison-unit-injective-model], while the normalization of $b$ is that kernel identity. For separated finite-type $U$ (in particular $X$), this is the canonical comparison denoted $c^{Z_U}_{U,F|_U}$ in [lem-pur-support-site-comparison]. Thus the unit's on-route supported comparison is used, and its domain is not silently enlarged: the displayed construction supplies the additional objects. Step 8 identifies its underlying groups with the groups of the statement.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-derived-support-comparison-direct-image",
+    "lem-pur-comparison-unit-injective-model",
+    "lem-pur-support-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md; literature/stacks-project/proetale.tex",
+    "place": "Proof paragraph 4, supported site comparison; Tag 099V, lemma-relative-comparison, and normalization in lem-pur-derived-support-comparison-direct-image"
+   }
+  },
+  {
+   "text": "The boundary assertion on separated finite-type $U$ is precisely [lem-pur-support-comparison-boundary], applied to $F|_U$; its hypotheses hold on $X$. Here is the full check also for arbitrary etale $U$. By the injective-surjectivity assertion in [lem-pur-module-restriction-kernel-comparison], Step 9 gives identical degreewise short exact sequences\n$$0\\to\\ker(B^\\bullet(U)\\to B^\\bullet(O_U))\\to B^\\bullet(U)\\to B^\\bullet(O_U)\\to0$$\nand the sequence with $J^\\bullet$ in place of $B^\\bullet$. Their termwise identity is a morphism of short exact complexes. Apply [lem-weil-pbc-complex-ses-long-exact-naturality]; under [thm-pur-with-support-exactness] these are exactly the two support long exact sequences. Step 10 identifies the kernel component with $c_U$; the middle and last components are the ordinary comparisons $g_U$ and $g_{O_U}$ of [lem-weil-pbc-comparison-global-cohomology], by their adjunction-unit normalization. Explicitly, lift a cocycle on $O_U$ to a cochain on $U$; its differential is in the support kernel and represents the boundary. The same lift and differential occur in the other sequence, so\n$$H^{q+1}(c_U)\\partial_{\\mathrm{et}}^q=\\partial_{\\mathrm{pro}}^q H^q(g_{O_U})$$\nwith the same sign. The module/abelian comparison of Step 8 preserves these short exact models. Thus the equality also holds for the abelian groups used here. This proves, rather than infers from a commuting square alone, the connecting-map compatibility on every allowed $U$.",
+   "uses": [
+    "lem-pur-support-comparison-boundary",
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "thm-pur-with-support-exactness",
+    "lem-weil-pbc-comparison-global-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/homology.tex",
+    "place": "Tag 09XP, section-cohomology-support, restriction-kernel model; Tag 0117, lemma-long-exact-sequence-cochain; Tag 08N7, lemma-snake-natural"
+   }
+  },
+  {
+   "text": "For a further etale map $V\\to U$, all three maps between the complexes of Steps 9--11 are evaluations of the same restriction morphisms of $B^\\bullet=\\nu_{X,*}J^\\bullet$ and $J^\\bullet$. The direct-image formula [def-weil-pbc-site-comparison-morphism] identifies them, so $c_U$ commutes with restriction to $V$. Steps 6--7 identify the coefficient $\\nu_U^*(F|_U)$ with $A_U^{\\mathrm{pro}}(a)$, compatibly with the same restrictions. Compose the inverse of this degree-$d$ supported comparison with the edge of Step 4. It identifies the pro-etale supported group with $\\Gamma(U,\\mathcal H_Z^d(F)|_U)$; Step 5 and the preceding equality give its naturality. This construction is valid also for $d=0$, since the identical-complex construction also applies in degree zero.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 099R, section-comparison, direct-image evaluation; Tag 09XP, section-cohomology-support, support-kernel evaluation"
+   }
+  },
+  {
+   "text": "Given an etale covering $\\{U_i\\to X\\}$ and compatible degree-$d$ supported classes, Step 5 takes them to sections of the single abelian sheaf $\\mathcal H^d(C)$ with equal restrictions on $U_i\\times_XU_j$. The equalizer sheaf axiom [def-weil-pbc-abelian-etale-sheaves] gives a unique section on $X$. Its inverse image under the edge isomorphism for $U=X$ is the required global supported class; restriction compatibility ensures its restrictions are the original classes. Injectivity of the same isomorphism gives uniqueness. Zariski coverings are etale coverings, so the same proof applies to them. Step 12 gives the identical assertion for the pro-etale supported groups evaluated on these coverings. The argument uses the vanishing precisely in Step 4 and makes no assertion in higher degrees.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-support-cohomology",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "thm-sp-grothendieck",
+  "lem-pur-first-quadrant-lowest-row-edge",
+  "def-sp-convergence",
+  "lem-pc-grothendieck-edge-cocycle",
+  "lem-amb-finite-tate-site-descent",
+  "lem-sf-comparison-pullback-exact",
+  "def-coefficient-twists-detailed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-hom",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-comparison-unit-injective-model",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-pur-derived-support-comparison-direct-image",
+  "lem-pur-support-site-comparison",
+  "lem-pur-support-comparison-boundary",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "thm-pur-with-support-exactness",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP/09XQ for support and 015N in derived.tex for the edge argument; proetale.tex Tags 099V/099W/09B1 for comparison. Agent-written assembly includes evaluation-dual extension to negative twists and the common-resolution proof for arbitrary etale objects."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +261,52 @@
    "results": "{\"t\": \"2026-10-18T02:15:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.homologyFunctor\", \"DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt\", \"DerivedCategory.instIsHomologicalHomologyFunctor\", \"DerivedCategory.shift_homologyFunctor\", \"DerivedCategory.HomologySequence.δ\", \"DerivedCategory.homologyFunctorFactors\", \"DerivedCategory.HomologySequence.exact₁\", \"DerivedCategory.HomologySequence.exact₃\"], \"digest\": \"f23bf374a1dced5c\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|supportedCohomology|hypercohomology|lowest.*cohomology",
+   "results": "{\"t\": \"2026-10-18T02:35:20Z\", \"tool\": \"grep\", \"query\": \"localCohomology|supportedCohomology|hypercohomology|lowest.*cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: localCohomology is module local cohomology via Ext colimits; Sheaf.H and cohomologyPresheaf define ordinary cohomology, not the supported lowest-degree edge theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections with closed support are a sheaf in the lowest nonzero degree of local cohomology",
+   "results": "{\"t\": \"2026-10-18T02:35:21Z\", \"tool\": \"leansearch\", \"query\": \"Derived sections with closed support are a sheaf in the lowest nonzero degree of local cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.section_ext\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"DerivedCategory.TStructure.t\", \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\"], \"digest\": \"a29eee6bf6c0ec4c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: section_ext, ideal supports and derived t-structure do not identify supported cohomology with sections in the lowest degree."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "results": "{\"t\": \"2026-10-18T02:35:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lowest supported cohomology under local cohomology sheaf vanishing equals sections of that cohomology sheaf naturally on etale opens",
+   "results": "{\"t\": \"2026-10-18T02:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"Lowest supported cohomology under local cohomology sheaf vanishing equals sections of that cohomology sheaf naturally on etale opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.StructureSheaf.res_const\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\"], \"digest\": \"8fc20bcf87e79819\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned structure-sheaf restriction facts and degree-zero homology maps, none giving the supported etale statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|def H|theorem.*[hH]omology",
+   "results": "{\"t\": \"2026-10-18T02:35:39Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|def H|theorem.*[hH]omology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\"], \"digest\": \"e82b34b4132fc704\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: localCohomology is module local cohomology via Ext colimits; Sheaf.H and cohomologyPresheaf define ordinary cohomology, not the supported lowest-degree edge theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The edge map from hypercohomology to global sections of the lowest nonvanishing cohomology sheaf is an isomorphism",
+   "results": "{\"t\": \"2026-10-18T02:35:42Z\", \"tool\": \"leanfinder\", \"query\": \"The edge map from hypercohomology to global sections of the lowest nonvanishing cohomology sheaf is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.isIso_homologyπ₀\", \"CochainComplex.ConnectData.homologyIsoPos\", \"groupCohomology.isoShortComplexH1_hom\", \"groupCohomology.isoShortComplexH2_hom\", \"CochainComplex.isoHomologyπ₀\", \"groupCohomology.isoShortComplexH1_inv\", \"groupCohomology.dArrowIso₀₁_hom_right\"], \"digest\": \"089319c0c3a0604b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned structure-sheaf restriction facts and degree-zero homology maps, none giving the supported etale statement or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -58,10 +318,104 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-localized-top-chern",
-   "place": "Tag 015N, lemma-grothendieck-spectral-sequence, bottom-edge consequence for sheaf support followed by sections; repairs blueprint Step 3",
+   "place": "thm-pur-localized-top-chern proof, Step 3: the sentence claiming that compatible local supported classes agree and glue; this node supplies the necessary lowest-local-degree criterion in its corrected universal zero-section use.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-supported-bottom-gluing",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: explicit finite etale/pro-etale twists with all-integer evaluation-dual comparison; convergence-derived filtration endpoints; on-route supported comparison and boundary statements; common injective-resolution kernel model defining and proving the boundary comparison on arbitrary etale objects. Retained the accepted etale edge/gluing proof and all recorded searches. No new nodes.",
+  "blueprint": "Repairs the gluing sentence in thm-pur-localized-top-chern Step 3, as already required by the reviewed ancestor: unit sk-prop-an Steps 2 and 4 glue sections of the lowest cohomology sheaf, not arbitrary higher supported classes. This split proves that bottom-degree mechanism without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Finite etale coefficient definition and its all-integer pullback compatibility, needed to state the etale half without identifying sites silently."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic etale restriction of injective sheaves, used to compute support on every etale object with one resolution."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic exact-adjunction criterion for preservation of injectives, needed to verify support acyclicity; no vector-bundle assertion is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "Generic etale direct-image injectivity, used for the closed immersion in the support factorization."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic ambient-category hypothesis for the support/sections Grothendieck spectral sequence."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Abstract derived-functor spectral sequence used for local-to-global supported cohomology; the unit has no separate general spectral sequence."
+   },
+   {
+    "node": "lem-pc-grothendieck-edge-cocycle",
+    "why": "Generic cocycle description of the actual left edge, used to check etale restriction compatibility explicitly."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic pullback-of-tensor comparison used only on the evaluation pairing of a finite coefficient line."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic scalar-forgetting comparison of ordinary derived evaluation, needed alongside the on-route supported comparison to relate coefficient categories."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution-existence",
+    "why": "Generic existence of a bounded-below injective resolution for the explicit site-comparison model."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Finite constant-ring bounded-below comparison unit, used in the on-route support/direct-image construction to make the explicit augmentation a resolution."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic injective restriction to a slice, allowing the one comparison resolution to compute on every etale object."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "Generic naturality of boundaries for a specified morphism of short exact complexes; verifies the arbitrary-etale-object extension of the on-route boundary comparison."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic bounded-below injective-to-K-injective criterion, needed for the precise kernel normalization in the on-route direct-image support comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-global-cohomology",
+    "why": "Generic adjunction-unit normalization of ordinary cohomology comparison; identifies the ordinary components in the common restriction-kernel model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "thm-sp-grothendieck",
+  "lem-pc-grothendieck-edge-cocycle",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-comparison-global-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-e8572ca13",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-e8572ca13 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all 13 steps, cited statements and sources. Accepted the coefficient descent, bottom-edge gluing and canonical supported comparison, including boundary compatibility. Corrected Step 9’s source list to include homology.tex for Tag 015Z. Review and whole corrected JSON written; no mathematical changes or new nodes.; 1 file(s) fixed by the reviewer"
  }
 }

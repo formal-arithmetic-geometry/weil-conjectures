@@ -13,9 +13,96 @@
   "def-weil-derived-pullback-tensor-hom",
   "lem-tw-lisse-rational-realization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=D^b_c(T,\\Lambda)$, $D=K^\\vee$ and let $e:D\\otimes K\\to\\mathbf1$ be evaluation. For $A,N\\in\\mathcal C$, compose symmetry $N\\otimes D\\cong D\\otimes N$, the assumed $c_{K,N}$, and the tensor--Hom transpose bijection of [lem-coef-completed-tensor-hom-transpose]. This gives bijections $\\Phi_{A,N}:\\operatorname{Hom}(A,N\\otimes D)\\to\\operatorname{Hom}(A\\otimes K,N)$ with formula $f\\mapsto(1_N\\otimes e)(f\\otimes1_K)$, by the specified transpose defining $c_{K,N}$. At the common stage, represent all objects and arrows at a finite field and take the filtered colimit of the rational bijections. This uses the common-stage operation on arrows of [def-weil-derived-pullback-tensor-hom] and the representative equivalence relation of [def-weil-pbc-finite-stage-pair-category].\n\nSet $\\eta=\\Phi_{\\mathbf1,K}^{-1}(1_K):\\mathbf1\\to K\\otimes D$. Its defining equation is the first triangle $(1_K\\otimes e)(\\eta\\otimes1_K)=1_K$. For $r=(e\\otimes1_D)(1_D\\otimes\\eta):D\\to D$, tensor bifunctoriality gives\n$$\\Phi_{D,\\mathbf1}(r)=e(r\\otimes1_K)=e\\bigl(1_D\\otimes[(1_K\\otimes e)(\\eta\\otimes1_K)]\\bigr)=e=\\Phi_{D,\\mathbf1}(1_D).$$\nHere associators and unitors are suppressed, and the middle equality interchanges the evaluations on the two disjoint $D\\otimes K$ factors. Injectivity yields $r=1_D$, the second triangle. Thus $K,D,e,\\eta$ are a dual pair in the given category, without choosing an integral lisse lattice.",
+   "uses": [
+    "lem-coef-completed-tensor-hom-transpose",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3(1): establish the dualizability input from the canonical evaluation comparisons"
+   }
+  },
+  {
+   "text": "If $\\Lambda=E$, retain this dual pair at the given field stage. If $\\Lambda=\\Qlb$, choose a common finite field $F$ over which $K,D,e,\\eta$ and the unit are represented. This is possible from the object-and-arrow construction of [def-weil-pbc-finite-stage-pair-category]. The completed operations and their scalar comparisons in [def-weil-derived-pullback-tensor-hom] represent the two composites in the triangle identities at finite fields as well. Equality of two representatives in the pair category means equality after some further finite coefficient extension. Choose one such extension for each of the two triangle identities and then their compositum. At that enlarged $F$ both identities hold. Consequently $K$ is represented by a finite-stage complex $K_F$ with an actual dual pair in the raw rationalized category at $F$. This argument descends only finitely many objects, arrows and equalities, rather than a condition quantified over all test complexes. When the pair category uses the PBC finite-stage model, identify its objects and arrows with the framework raw rationalization by [lem-fd-rational-coefficient-category-comparison]. This comparison is the identity on the common integral category and on localized Hom groups; the products appearing here use the same completed integral operations of [def-weil-derived-pullback-tensor-hom]. Thus $K_F$ and its displayed duality maps are in the finite-stage model used in Step 3.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9: finite-stage interpretation; finite dual-pair data descend directly by the pair-category equivalence relation"
+   }
+  },
+  {
+   "text": "Write $F$ for the field from Step 2 (or $E$ in the finite-stage case), put $B_T=\\widehat{\\mathcal O}_{F,T}$ and $F_T=B_T[1/\\varpi_F]$, and use $J_{T,F}$ of [lem-zl-rational-realization-tensor-comparison]. The finite-stage category identification [lem-fd-rational-coefficient-category-comparison] and the equivalence [lem-per-continuous-rational-derived-realization] give its exact realization into the ambient derived category of $F_T$-module sheaves. The latter statement identifies $F_T$ with the continuous coefficient sheaf. Apply $J_{T,F}$ to $e,\\eta$ and insert the tensor and unit comparisons of [lem-zl-rational-realization-tensor-comparison]. Since these comparisons commute with associators and unitors, each realized triangle composite is the image of the corresponding identity in Step 2, hence is an identity. Thus $J_{T,F}(K_F)$ is dualizable for ordinary derived tensor over $F_T$, in the full ambient derived category. This uses only tensor and unit compatibility, without assuming an internal-Hom comparison.",
+   "uses": [
+    "lem-zl-rational-realization-tensor-comparison",
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2) and Remark 6.8.15; Hemo--Richarz--Scholbach Definition 3.3(1)"
+   }
+  },
+  {
+   "text": "The condensed coefficient ring $\\underline F(S)=C(S,F)$ is the ring of [sk-def-sfb-condensed-ring]. Its underlying ring is the field $F$. Every finitely presented $F$-module is finite free, so this ring is regular coherent; every $F$-module $C(S,F)$ is flat, by choosing a vector-space basis. Hence the two t-admissibility hypotheses in [lem-zl-t-admissible-dualizable-truncations] hold. The finite affine cover by spectra of finitely generated $k$-algebras in [def-weil-finite-type-morphism], together with [lem-sfb-finite-type-noetherian-spectrum] applied to $\\operatorname{Spec}k$, makes $|T|$ noetherian: an ascending open chain stabilizes on each of finitely many affine charts and hence stabilizes globally. By [lem-sc-noetherian-finite-irreducible-components], $T$ has finitely many irreducible components. Apply [lem-zl-t-admissible-dualizable-truncations] to the dualizable complex of Step 3. Each $\\mathcal H^j(J_{T,F}K_F)$ is pro-etale locally $F_T\\otimes_{\\underline F}\\underline N$ for some finitely presented $F$-vector space $N$. Choosing a finite basis of $N$ identifies this sheaf with $F_T^{\\oplus r}$, including $r=0$. The theorem permits a different $N$ on each cover member, so it imposes no constant-rank condition across components.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 6.1, Theorem 6.2(2), and Corollaries 6.3 and 6.11(1) specialized to the finite coefficient field"
+   }
+  },
+  {
+   "text": "The identity-on-integral-objects comparison [lem-fd-rational-coefficient-category-comparison] preserves integral cohomology and its localized standard pair. The t-exact realization [lem-per-continuous-rational-derived-realization] therefore identifies $J_{T,F}(\\mathcal H^jK_F)$ with $\\mathcal H^j(J_{T,F}K_F)$. Step 4 puts this sheaf in the local finite free essential image specified by [lem-tw-lisse-rational-realization]. The realization in that statement is the same coefficient extension on integral representatives and localized morphisms, so its full faithfulness identifies $\\mathcal H^jK_F$ with a lisse object of the rational constructible heart. For $\\Lambda=\\Qlb$, [prop-constructible-truncations] says that the common-stage truncations commute with finite scalar extension; hence $\\mathcal H^jK$ is the common-stage image of $\\mathcal H^jK_F$. The final common-stage clause of [lem-tw-lisse-rational-realization] preserves its local finite free bases and finite ranks. This proves the conclusion for every $j\\in\\mathbf Z$ at both coefficient stages.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-tw-lisse-rational-realization",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); lisse realization and common-stage truncation conventions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-completed-tensor-hom-transpose",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-finite-stage-pair-category",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-zl-rational-realization-tensor-comparison",
+  "lem-per-continuous-rational-derived-realization",
+  "sk-def-sfb-condensed-ring",
+  "lem-zl-t-admissible-dualizable-truncations",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-tw-lisse-rational-realization",
+  "prop-constructible-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Definition 3.3 and Theorem 6.2(2), combined with Bhatt--Scholze Proposition 6.8.14(2); explicit raw-rational and common-stage evaluation argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +138,38 @@
    "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition; CompHausLike.LocallyConstantModule.functor; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
    "date": "2026-10-18",
    "verdict": "no match: results do not state this adic sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible l-adic complex whose internal Hom tensor evaluation comparison is invertible for all constructible complexes has lisse finite rank cohomology",
+   "results": "LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-18",
+   "verdict": "no match: these searches do not give the internal-Hom criterion for lisse adic cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizable rational adic constructible complexes have locally constant finite dimensional cohomology",
+   "results": "CondensedSet.LocallyConstant.functorFullyFaithful; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; CondensedSet.LocallyConstant.iso; CondensedMod.LocallyConstant.adjunction; LightCondSet.LocallyConstant.iso; CondensedMod.isDiscrete_tfae; LocallyConstant.instDistrib; FGModuleCat.FGModuleCatDual",
+   "date": "2026-10-18",
+   "verdict": "no match: these searches do not give the internal-Hom criterion for lisse adic cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizab.*lisse|lisse.*dualizab|proetale.*perfect",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: these searches do not give the internal-Hom criterion for lisse adic cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.HasRightDual",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: these searches do not give the internal-Hom criterion for lisse adic cohomology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-zl-smooth-proper-relative-purity",
@@ -66,10 +181,59 @@
  "blueprint": {
   "from": {
    "node": "prop-zl-smooth-proper-relative-purity",
-   "place": "Proof Step 1, final paragraph: the passage from finite local constancy to rational lissity; repairs the unsupported global lisse lattice by a coefficient-category criterion.",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: the canonical evaluation comparison is identified with the tensor–Hom evaluation map and the adic lissity criterion is applied.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-adic-hom-tensor-lisse-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Constructed a dual pair from the canonical comparisons, descended finite duality data for Qbar, realized the dual pair over continuous finite-field coefficients, applied the general t-admissible truncation/heart theorem, and returned through the t-exact lisse realization. Two supporting statements isolate the non-elementary tensor comparison and geometric t-structure inputs; the elementary dual-pair triangle calculation is written directly in Step 1.",
+  "blueprint": "Realizes the repaired coefficient-category passage in Proof Step 3 of prop-zl-smooth-proper-relative-purity: the field-stage projection formula produces the canonical evaluation comparison, then the adic lissity criterion gives lisse cohomology without a global lisse integral lattice.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-completed-tensor-hom-transpose",
+    "why": "Evaluation transpose on completed/raw-rational categories is the generic closed-monoidal tool needed to turn the hypothesis into Hom bijections."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Identifies the two raw rational finite-stage models by the identity on their integral objects; no unit step is replaced."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Provides the exact continuous-coefficient realization and its t-exact cohomology comparison."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Identifies locally finite free continuous coefficient sheaves with the lisse rational heart, including common finite stages."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Identifies common-stage cohomology with the finite-stage cohomology image; used only as a coefficient-category tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-noetherian-spectrum",
+    "why": "Generic affine noetherian-topology tool used only to verify the geometric hypothesis of the dualizable truncation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-tw-lisse-rational-realization",
+  "prop-constructible-truncations",
+  "lem-sfb-finite-type-noetherian-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-4792df350",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-4792df350 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but all three nodes incorrectly cite blueprint Proof Step 1; the ancestor actually uses this criterion and supporting lemmas in Proof Step 3. Corrected whole JSON files are in fixes/dag/nodes/sec-zeta-weil/, and review.md records the checks.; 3 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,82 @@
+{
+ "id": "lem-zl-rational-realization-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor compatibility of the raw rational continuous realization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and a separated finite-type scheme $T$ over $k=\\overline{\\mathbf F}_q$, where $\\ell\\ne\\operatorname{char}k$ [def-weil-scheme-morphism-properties]. Put $B_T=\\varprojlim_n(A/\\varpi^n)_T$ and $E_T=B_T[1/\\varpi]$, with localization the sheaf colimit of repeated multiplication by $\\varpi$. Use the small pro-etale site [def-weil-pbc-proetale-site], and the raw rationalized category $\\mathcal C_E(T)=D^b_c(T,E)$ of [def-weil-rationalization-karoubi]. Tensor $\\otimes^L_E$ and its unit $\\mathbf1_E$ in this category are exactly the completed-integral, rationalized operations of [def-weil-derived-pullback-tensor-hom].\n\nLet $I_{T,E}$ be the finite-stage identity-on-integral-objects equivalence of [lem-fd-rational-coefficient-category-comparison] from $\\mathcal C_E(T)$ to the PBC raw rationalization, and let $J^{\\mathrm{pbc}}_{T,E}$ be the t-exact continuous-coefficient realization of [lem-per-continuous-rational-derived-realization]. Set $J_{T,E}=J^{\\mathrm{pbc}}_{T,E}I_{T,E}$. Its values are bounded complexes of $E_T$-module sheaves with stratified locally finite free cohomology, in the ambient derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nThere are canonical natural isomorphisms\n$$J_{T,E}(P\\otimes^L_E Q)\\xrightarrow{\\sim}J_{T,E}(P)\\otimes^L_{E_T}J_{T,E}(Q),\\qquad J_{T,E}(\\mathbf1_E)\\xrightarrow{\\sim}E_T[0]$$\nfor all $P,Q\\in\\mathcal C_E(T)$. These comparisons make $J_{T,E}$ symmetric strong monoidal: they commute with associators, unitors and the signed symmetry. On integral representatives they are the coefficient-extension comparisons from the completed derived tensor to ordinary derived tensor after localization; on localized arrows $f/\\varpi^n$ they use $J(f)/\\varpi^n$. They commute with finite field extension $E\\subset F$, where on the ambient side extension means $F_T\\otimes^L_{E_T}-$ and on the raw rational side it is the scalar extension in [def-weil-rationalization-karoubi].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2) and Remark 6.8.15; tensor-compatible formulation for the specified completed operations. Also Hemo--Richarz--Scholbach Proposition 5.5 and Theorem 7.7 (natural coefficient-extension comparison). The extra coherence assertions are an agent formulation."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-per-continuous-rational-derived-realization",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars from completed integral l-adic sheaves to continuous rational coefficients identifies completed derived tensor with ordinary derived tensor",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct",
+   "date": "2026-10-18",
+   "verdict": "no match: completion of ordinary modules and general monoidal functor structures do not identify these adic sheaf tensor constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived tensor of constructible adic sheaves agrees with derived tensor of continuous coefficient sheaves after inverting the uniformizer",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-18",
+   "verdict": "no match: completion of ordinary modules and general monoidal functor structures do not identify these adic sheaf tensor constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of integral constructible proetale complexes is a symmetric monoidal equivalence to constructible complexes of continuous field coefficient modules",
+   "results": "ModuleCat.MonoidalCategory.symmetricCategory; LightCondensed.instSymmetricCategoryLightCondMod; ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; CondensedMod.LocallyConstant.adjunction; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Condensed.lanCondensedSet; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: completion of ordinary modules and general monoidal functor structures do not identify these adic sheaf tensor constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Functor.Monoidal.instId; CategoryTheory.Functor.Monoidal; CategoryTheory.Equivalence.instMonoidalFunctorRefl; CategoryTheory.Equivalence.instMonoidalInverseRefl; CategoryTheory.Functor.instMonoidalProdDiag; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.Monoidal.toLaxMonoidal; CategoryTheory.Functor.Monoidal.toOplaxMonoidal",
+   "date": "2026-10-18",
+   "verdict": "no match: completion of ordinary modules and general monoidal functor structures do not identify these adic sheaf tensor constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "completedTensor|adic.*tensor|tensor.*adic",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "no match: completion of ordinary modules and general monoidal functor structures do not identify these adic sheaf tensor constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-adic-hom-tensor-lisse-criterion",
+  "date": "2026-10-18",
+  "group": "NJ"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: realizes the completed/rationalized tensor and unit so the constructed dual pair maps to an ordinary dual pair.",
+   "via": [
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
