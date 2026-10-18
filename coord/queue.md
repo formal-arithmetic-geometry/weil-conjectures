@@ -1,6 +1,6 @@
 # Work queue
 
-1437 items; claim with `tools/claim.py next <group> [--stage N]`.
+1439 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1437)
+## Stage 3: modules to prove (1439)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -27,6 +27,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
+| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 7 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
@@ -172,6 +173,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ArtinSchreierPrimeCharacterComparison` | - | 1 | proof | 1 |
 | `Sheaf.Paper.BoundedConstructibleHomFiniteness` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CommonStageConstituentNonexceptional` | - | 4 | proof | 1 |
+| `Sheaf.Paper.DlConstantFieldCharts` | - | 1 | proof | 1 |
 | `Sheaf.Paper.EtaleWeilSheafEquivalence` | - | 1 | proof | 1 |
 | `Sheaf.Paper.FiniteEtaleLisseWeilImage` | - | 1 | proof | 1 |
 | `Sheaf.Paper.PurAdicReconstruction` | - | 1 | proof | 1 |
@@ -528,6 +530,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ExceptionalSiteRealization` | - | 2 | proof | 2 |
 | `Sheaf.Paper.FibreFunctorBasepointTransport` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FieldTorAmplitude` | - | 1 | proof | 2 |
+| `Sheaf.Paper.FieldWeilShriekShiftData` | - | 7 | proof | 2 |
 | `Sheaf.Paper.FiniteCoefficientAdjointComparisons` | - | 8 | proof | 2 |
 | `Sheaf.Paper.FiniteFieldInternalHomFiniteness` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralExceptionalInverseImage` | - | 12 | proof | 2 |
@@ -817,8 +820,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedPullbackUnitTower` | - | 3 | proof | 3 |
 | `Sheaf.Paper.CompositeIntegrationCounit` | - | 6 | proof | 3 |
 | `Sheaf.Paper.ConstantTowerDirectImageNormalization` | - | 9 | proof | 3 |
+| `Sheaf.Paper.FieldShriekLowerBound` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FieldStageOrdinaryRealization` | - | 8 | proof | 3 |
-| `Sheaf.Paper.FieldWeilShriekShiftData` | - | 7 | proof | 3 |
 | `Sheaf.Paper.FilteredCoefficientTensorBounds` | - | 2 | proof | 3 |
 | `Sheaf.Paper.FiniteConstantModelResolution` | - | 5 | proof | 3 |
 | `Sheaf.Paper.FiniteEtaleDescent` | - | 1 | proof | 3 |
@@ -1053,7 +1056,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstructibleHomComparison` | - | 1 | proof | 4 |
 | `Sheaf.Paper.DiagonalTowerSystem` | - | 6 | proof | 4 |
 | `Sheaf.Paper.EtaleSumTensorTotalization` | - | 1 | proof | 4 |
-| `Sheaf.Paper.FieldShriekLowerBound` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FinitePointInternalHomEvaluation` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteRingCompactSupportProjection` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FormalClosedSupportIILimits` | - | 1 | proof | 4 |
@@ -1452,7 +1454,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (81)
+## Stage 3: waiting for statements of dependencies (80)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1505,7 +1507,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.PbcWeilCategory` | 7 | 7 | `def-tw-frobenius-action` |
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
 | `Sheaf.Paper.RationalOpenDirectImageConstructible` | 7 | 1 | `det-prop-scalar-six-pullback` |
-| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constant-field-charts` |
 | `Sheaf.Paper.IntegralStratumExtBound` | 8 | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.MiddleExtensionHcZero` | 8 | 1 | `lem-a1-constructible-degree-zero-proper-support` |
 | `Sheaf.Paper.ProperHeartBoundLattice` | 8 | 1 | `sk-lem-integral-models` |
