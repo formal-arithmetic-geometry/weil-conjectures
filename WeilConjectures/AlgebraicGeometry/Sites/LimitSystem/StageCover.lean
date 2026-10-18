@@ -173,7 +173,13 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
     Category.comp_id]
   apply MorphismProperty.Over.Hom.ext
   apply pullback.hom_ext
-  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback]
+  · simp only [Functor.id_obj, Functor.const_obj_obj, Scheme.Hom.Etale,
+      MorphismProperty.Over.pullback, homOfLE_leOfHom, Cone.whisker_pt, Functor.comp_obj,
+      Over.forget_obj, Cone.whisker_π, Functor.whiskerLeft_app, MorphismProperty.Over.homMk_hom,
+      Over.homMk_left, stageBaseChangeIso, Iso.symm_hom, Iso.app_inv, etale_comp_left,
+      MorphismProperty.Over.isoMk_hom_left, MorphismProperty.Over.pullbackComp_inv_app_left,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app, Category.comp_id,
+      pullbackLeftPullbackSndIso_hom_fst, Y', ι, p']
     erw [pullback.lift_fst_assoc]
     rw [Category.assoc]
     erw [IsPullback.isoPullback_hom_fst_assoc]
@@ -181,7 +187,13 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
     simp only [c', V', baseChangeOverCone_π_app]
     erw [pullback.lift_fst, Category.comp_id]
     rfl
-  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback]
+  · simp only [Functor.const_obj_obj, Functor.id_obj, Scheme.Hom.Etale,
+      MorphismProperty.Over.pullback, homOfLE_leOfHom, Cone.whisker_pt, Functor.comp_obj,
+      Over.forget_obj, Cone.whisker_π, Functor.whiskerLeft_app, MorphismProperty.Over.homMk_hom,
+      Over.homMk_left, stageBaseChangeIso, Iso.symm_hom, Iso.app_inv, etale_comp_left,
+      MorphismProperty.Over.isoMk_hom_left, MorphismProperty.Over.pullbackComp_inv_app_left,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app, Category.comp_id,
+      pullbackLeftPullbackSndIso_hom_snd, Y', ι, p']
     erw [pullback.lift_snd, IsPullback.isoPullback_hom_snd]
     simp [V']
     rfl

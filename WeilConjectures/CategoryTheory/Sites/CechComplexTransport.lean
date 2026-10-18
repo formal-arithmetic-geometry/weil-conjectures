@@ -41,8 +41,8 @@ lemma cechNerveObjIso_hom_map {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k 
       cechNerveMap U y θ ≫ (cechNerveObjIso G U₀ U e (y ∘ θ)).hom := by
   rw [← cancel_mono (PreservesProduct.iso G (fun l ↦ U₀ ((y ∘ θ) l))).hom]
   refine Pi.hom_ext _ _ fun l ↦ ?_
-  simp only [cechNerveObjIso, Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id,
-    Category.comp_id, PreservesProduct.iso_hom, piComparison_comp_π, ← G.map_comp]
+  simp only [cechNerveObjIso, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    PreservesProduct.iso_hom, piComparison_comp_π, ← G.map_comp]
   have h₁ : cechNerveMap U₀ y θ ≫ Pi.π (fun l ↦ U₀ ((y ∘ θ) l)) l =
       Pi.π (fun l ↦ U₀ (y l)) (θ l) := cechNerveMap_π U₀ y θ l
   rw [h₁, ← piComparison_comp_π, ← PreservesProduct.iso_hom, Iso.inv_hom_id_assoc,

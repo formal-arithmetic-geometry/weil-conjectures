@@ -122,6 +122,7 @@ variable {M' : Type (u + 1)} [AddCommGroup M'] [Module Λ M'] [TopologicalSpace 
   (ε' : (ProEtale.upperStar (ModuleCat.{u + 1} Λ) g').obj F ≅
     (constantSheaf (Scheme.ProEt.topology W') (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ M'))
 
+omit [WeaklyEtale g] in
 /-- The sections over the open subscheme `T_Q` of `T` defined by an open `Q`, with its
 morphism to `W`. -/
 lemma ofOpenImmersion_hom_eq {T : Y.ProEt} (Q : T.left.Opens) (h : T.left ⟶ W)
@@ -159,7 +160,8 @@ lemma trivSections_apply_eq_trivTransition (T : Y.ProEt) (h : T.left ⟶ W)
   let r := ProEt.ofOpenImmersionHom T Q.ι
   let s' := (trivSections ε T h hh).symm (ContinuousMap.const _ n)
   have hr : F.obj.map r.op s = F.obj.map r.op s' := by
-    apply (trivSections ε (ProEt.ofOpenImmersion T Q.ι) (Q.ι ≫ h) (ofOpenImmersion_hom_eq Q h hh)).injective
+    apply (trivSections ε (ProEt.ofOpenImmersion T Q.ι) (Q.ι ≫ h)
+      (ofOpenImmersion_hom_eq Q h hh)).injective
     rw [trivSections_map ε r h hh (Q.ι ≫ h) (ofOpenImmersion_hom_eq Q h hh) rfl,
       trivSections_map ε r h hh (Q.ι ≫ h) (ofOpenImmersion_hom_eq Q h hh) rfl]
     ext x

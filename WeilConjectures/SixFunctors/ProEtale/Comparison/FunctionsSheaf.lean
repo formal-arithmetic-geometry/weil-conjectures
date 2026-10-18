@@ -74,7 +74,7 @@ lemma locallyConstantEvalPoint_injective :
   simp only [locallyConstantEvalPoint, RingHom.mem_ker, LocallyConstant.evalRingHom_apply,
     LocallyConstant.coe_charFn, Set.indicator_of_mem hs, Set.indicator_of_notMem ht,
     Pi.one_apply] at h
-  exact one_ne_zero (h.2 rfl)
+  exact one_ne_zero (of_eq_true h)
 
 /-- For an infinite profinite set `S`, the spectrum of `C_lc(S, k)` has a point which is not
 open: it is compact and infinite, hence not discrete. -/
@@ -86,7 +86,8 @@ lemma exists_not_isOpen_singleton_locallyConstant [Infinite S] :
     exact ⟨fun _ ↦ trivial, fun _ ↦ isOpen_iff_forall_mem_open.2 fun x hx ↦
       ⟨{x}, Set.singleton_subset_iff.2 hx, h x, rfl⟩⟩⟩
   have := finite_of_compact_of_discrete (X := PrimeSpectrum (LocallyConstant S k))
-  exact not_finite S (Finite.of_injective _ (locallyConstantEvalPoint_injective k S))
+  have := Finite.of_injective _ (locallyConstantEvalPoint_injective k S)
+  exact not_finite S
 
 end LocallyConstant
 
@@ -103,7 +104,7 @@ noncomputable def functionsSheaf : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat
   ⟨(ProEt.forget X ⋙ Over.forget X).op ⋙ continuousMapPresheafAb.{u + 1, u} M,
     (ProEt.forget X ⋙ Over.forget X).op_comp_isSheaf (Scheme.ProEt.topology X) proetaleTopology
       ⟨continuousMapPresheafAb.{u + 1, u} M,
-        Presheaf.isSheaf_of_le _ proetaleTopology_le_fpqcTopology
+        .of_le proetaleTopology_le_fpqcTopology
           (isSheaf_fpqcTopology_continuousMapPresheafAb M)⟩⟩
 
 /-- The inclusion of the constant presheaf `M` into the sheaf of all functions, as the
@@ -139,20 +140,28 @@ lemma isZero_functionsModConstant_obj_mkId {K : Type u} [Field K] [IsAlgClosed K
     IsZero ((functionsModConstant X M).obj.obj (op (Scheme.ProEt.mk (𝟙 X)))) := by
   have hsub (x y : X) : x = y := e.hom.homeomorph.injective (Subsingleton.elim _ _)
   have hsurj := surjective_app_of_epi_of_iso e (cokernel.π (constantToFunctionsSheaf X M))
-  refine AddCommGrpCat.isZero_of_subsingleton _
-  refine ⟨fun a b ↦ ?_⟩
-  suffices h : ∀ a, a = 0 by rw [h a, h b]
+  refine @AddCommGrpCat.isZero_of_subsingleton _ ⟨fun a b ↦ ?_⟩
+  suffices h : ∀ a : (functionsModConstant X M).obj.obj (op (Scheme.ProEt.mk (𝟙 X))), a = 0 by
+    rw [h a, h b]
   intro a
   obtain ⟨g, rfl⟩ := hsurj a
+  let g' : C((Scheme.ProEt.mk (𝟙 X)).left, M) := g
   obtain ⟨x⟩ : Nonempty X := ⟨e.inv (Classical.arbitrary _)⟩
-  have hg : g = (constantToFunctions X M).app (op (Scheme.ProEt.mk (𝟙 X))) (g x) :=
+  have hg : g = (constantToFunctions X M).app (op (Scheme.ProEt.mk (𝟙 X))) (g' x) :=
     ContinuousMap.ext fun y ↦ by rw [hsub y x]; rfl
-  rw [hg, ← toSheafify_sheafifyLift (Scheme.ProEt.topology X) (constantToFunctions X M)
-    (functionsSheaf X M).property]
+  have h1 : (constantToFunctions X M).app (op (Scheme.ProEt.mk (𝟙 X))) (g' x) =
+      (constantToFunctionsSheaf X M).hom.app _
+        ((toSheafify _ ((Functor.const _).obj (AddCommGrpCat.of M))).app _ (g' x)) := by
+    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app]
+    change _ = (toSheafify _ _ ≫ sheafifyLift _ (constantToFunctions X M)
+      (functionsSheaf X M).property).app _ _
+    rw [toSheafify_sheafifyLift]
+  rw [hg, h1]
   have := congrArg (fun φ ↦ φ.hom.app (op (Scheme.ProEt.mk (𝟙 X)))
-    ((toSheafify _ ((Functor.const _).obj (AddCommGrpCat.of M))).app _ (g x)))
+    ((toSheafify _ ((Functor.const _).obj (AddCommGrpCat.of M))).app _ (g' x)))
     (cokernel.condition (constantToFunctionsSheaf X M))
-  simpa [constantToFunctionsSheaf] using this
+  refine this.trans ?_
+  simp
 
 /-- If some object `U` of the small pro-étale site of `X` has a point `x` which is not open, the
 sheaf of functions modulo locally constant functions does not vanish: the indicator function of
@@ -162,9 +171,11 @@ lemma not_isZero_functionsModConstant [Nontrivial M] (U : X.ProEt) (x : U.left)
     ¬ IsZero (functionsModConstant X M) := by
   classical
   intro h
-  have : Epi (constantToFunctionsSheaf X M) := epi_of_isZero_cokernel _ h
+  have : Epi (constantToFunctionsSheaf X M) := Preadditive.epi_of_isZero_cokernel _ h
   have : Sheaf.IsLocallySurjective (constantToFunctionsSheaf X M) :=
     (Sheaf.isLocallySurjective_iff_epi' _ _).2 inferInstance
+  have : Presheaf.IsLocallySurjective (Scheme.ProEt.topology X)
+      (sheafifyLift _ (constantToFunctions X M) (functionsSheaf X M).property) := this
   have : Presheaf.IsLocallySurjective (Scheme.ProEt.topology X) (constantToFunctions X M) := by
     rw [← toSheafify_sheafifyLift (Scheme.ProEt.topology X) (constantToFunctions X M)
       (functionsSheaf X M).property]
@@ -178,13 +189,13 @@ lemma not_isZero_functionsModConstant [Nontrivial M] (U : X.ProEt) (x : U.left)
   rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hR
   refine hx (isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage (fun i ↦ (g i).left) hR _
     fun i ↦ ?_)
-  obtain ⟨m', hm'⟩ := hRle _ (Presieve.ofArrows.mk i)
+  obtain ⟨m', hm'⟩ := hRle _ _ (Presieve.ofArrows.mk i)
   have hpre : (g i).left.base ⁻¹' {x} = (fun _ ↦ m') ⁻¹' {m} := by
     ext y
     have := congrArg (fun φ : C((Y i).left, M) ↦ φ y) hm'
-    simp only [constantToFunctions_app_apply, ContinuousMap.const_apply] at this
-    simp only [Set.mem_preimage, Set.mem_singleton_iff, this]
-    change _ ↔ (if _ = x then m else 0) = m
+    change m' = (if (g i).left y = x then m else 0) at this
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    rw [this]
     split_ifs with hy
     · simp [hy]
     · simp [hy, hm.symm]
@@ -208,7 +219,7 @@ theorem exists_isZero_obj_mkId_and_not_isZero (k : Type u) [Field k] [IsAlgClose
     (M : Type (u + 1)) [AddCommGroup M] [Nontrivial M] :
     ∃ F : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1},
       IsZero (F.obj.obj (op (Scheme.ProEt.mk (𝟙 _)))) ∧ ¬ IsZero F := by
-  letI : TopologicalSpace M := ⊤
+  let _ : TopologicalSpace M := ⊤
   let S : Type u := ULift.{u} ℕ → Bool
   obtain ⟨x, hx⟩ := exists_not_isOpen_singleton_locallyConstant k S
   exact ⟨functionsModConstant _ M, isZero_functionsModConstant_obj_mkId _ M (Iso.refl _),

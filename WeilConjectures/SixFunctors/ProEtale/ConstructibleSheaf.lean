@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstructibleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantModel
 
 /-!
 
@@ -176,19 +178,49 @@ sheaves on its small pro-étale site. As `ν^*` is fully faithful
 `AlgebraicGeometry.ProEtale.faithful_comparisonUpperStar`), this says that a pro-étale sheaf is
 constructible if and only if it is `ν^*` of a constructible étale sheaf. That `ν^*` preserves
 constructibility is `isConstructible_comparisonUpperStar_obj`; the essential surjectivity is the
-content of the lemma. -/
+content of the lemma.
+
+The scheme `T` is assumed quasi-compact and quasi-separated, the setting of the blueprint (and
+of [Stacks 09AK]). Then the immersions of the strata are quasi-compact, their ranges being
+constructible, so that a pro-étale sheaf whose pullbacks to the strata are of étale origin is of
+étale origin (`AlgebraicGeometry.ProEtale.essImage_comparisonUpperStar_of_stratification`); on
+the quasi-compact quasi-separated strata, locally constant pro-étale sheaves are of étale origin
+(`AlgebraicGeometry.ProEtale.essImage_comparisonUpperStar_of_isLocallyConstant`). The étale
+model is finite locally constant on the strata, its comparison pullback being so
+(`AlgebraicGeometry.ProEtale.isFiniteLocallyConstantSheaf_of_comparisonUpperStar`). -/
 theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ]
-    {T : Scheme.{u}} {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :
+    {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
+    {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :
     IsConstructible Λ F ↔
       ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
         Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) := by
-  refine ⟨fun _ ↦ sorry, fun ⟨G, hG, ⟨e⟩⟩ ↦ ?_⟩
-  exact isConstructible_of_iso e (isConstructible_comparisonUpperStar_obj G)
+  refine ⟨fun ⟨S, hS⟩ ↦ ?_, fun ⟨G, hG, ⟨e⟩⟩ ↦ ?_⟩
+  · have hF : (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).essImage F := by
+      refine essImage_comparisonUpperStar_of_stratification S F fun k ↦ ?_
+      have : QuasiCompact (S.immersion k) := quasiCompact_of_isImmersion_of_isConstructible _
+        (by rw [S.range_immersion]; exact S.isConstructible_stratum k)
+      have : CompactSpace (S.domain k) :=
+        QuasiCompact.compactSpace_of_compactSpace (S.immersion k)
+      have : QuasiSeparatedSpace (S.domain k) :=
+        quasiSeparatedSpace_of_quasiSeparated (S.immersion k)
+      obtain ⟨ι, W, g, hg, h⟩ := hS k
+      exact essImage_comparisonUpperStar_of_isLocallyConstant g hg
+        fun i ↦ (h i).imp fun M hM ↦ hM.2
+    obtain ⟨G, ⟨e⟩⟩ := hF
+    refine ⟨G, ⟨⟨S, fun k ↦ ?_⟩⟩, ⟨e⟩⟩
+    obtain ⟨ι, W, g, hg, h⟩ := hS k
+    refine isFiniteLocallyConstantSheaf_of_comparisonUpperStar _ g hg fun i ↦ ?_
+    obtain ⟨M, hM, ⟨e'⟩⟩ := h i
+    exact ⟨M, hM, ⟨(ProEtale.upperStar _ (g i)).mapIso
+      (((comparisonUpperStarCompUpperStarIso _ (S.immersion k)).app G).symm ≪≫
+        (ProEtale.upperStar _ (S.immersion k)).mapIso e) ≪≫ e'⟩⟩
+  · exact isConstructible_of_iso e (isConstructible_comparisonUpperStar_obj G)
 
 variable (Λ) in
 /-- A constructible pro-étale sheaf is `ν^*` of a constructible étale sheaf
 (`lem-sf-proetale-constructible-origin` (i)). -/
 theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ] {T : Scheme.{u}}
+    [CompactSpace T] [QuasiSeparatedSpace T]
     {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} (hF : IsConstructible Λ F) :
     ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
       Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) :=
