@@ -14,9 +14,115 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-module-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the upper-bound calculation used below. If $X,Y\\in D(R)$ have cohomology zero above $u,v$, choose representing complexes and replace them by their good truncations $\\tau_{\\le u}X^\\bullet,\\tau_{\\le v}Y^\\bullet$. The truncation inclusions are quasi-isomorphisms, since they retain all the possibly nonzero cohomology. Apply the bounded-flat replacement statement on the one-object site with only the identity covering and structure ring $R$: ordinary $R$-modules identify with module sheaves on this site. It supplies flat complexes $F,G$, zero in degrees above $u,v$, respectively. They are K-flat by the bounded-flat criterion. The derived tensor is represented by $\\operatorname{Tot}(F\\otimes_R G)$. In degree $k>u+v$ each summand has $p>u$ or $q>v$ and is zero. Thus $H^k(X\\otimes_R^{\\mathbf L}Y)=0$ for $k>u+v$. This is just the total-degree calculation after applying the cited replacements.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "Put $t=\\max(m+a,n+b)$. If $n>a$, the preceding calculation gives vanishing of $K\\otimes_R^{\\mathbf L}L$ above $a+b<t$ because $t\\ge n+b>a+b$. The map from the zero finite-free complex is therefore an isomorphism in degrees greater than $t$ and surjective in degree $t$. It witnesses $t$-pseudo-coherence. If $m>b$, use instead $t\\ge m+a>a+b$ and the same zero witness. Hence it remains to treat $n\\le a$ and $m\\le b$.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "Choose bounded finite-free witnesses $\\alpha:P^\\bullet\\to K$ and $\\beta:Q^\\bullet\\to L$ from the definition of $n$- and $m$-pseudo-coherence. Write $C_\\alpha,C_\\beta$ for cone objects in distinguished triangles $P\\to K\\to C_\\alpha\\to P[1]$ and $Q\\to L\\to C_\\beta\\to Q[1]$, with $P,Q$ the images of the complexes in $D(R)$. The long exact sequences show $H^i(C_\\alpha)=0$ for $i\\ge n$ and $H^i(C_\\beta)=0$ for $i\\ge m$: in the segment $H^i(P)\\to H^i(K)\\to H^i(C_\\alpha)\\to H^{i+1}(P)\\to H^{i+1}(K)$ the first arrow is surjective and the last is injective for $i\\ge n$, and likewise for $\\beta$. Also $H^j(Q)=0$ for $j>b$, since $j>b\\ge m$ and $H^j(\\beta)$ is an isomorphism.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "Apply the exact functor $-\\otimes_R^{\\mathbf L}Q$ to the first cone triangle. The cone of $\\alpha\\otimes 1_Q:P\\otimes_R^{\\mathbf L}Q\\to K\\otimes_R^{\\mathbf L}Q$ is $C_\\alpha\\otimes_R^{\\mathbf L}Q$, whose cohomology vanishes above $(n-1)+b$ by step 1. Next apply $-\\otimes_R^{\\mathbf L}K$ to the second cone triangle. To write it in the desired factor order use the signed flip $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ for degrees $p,q$. It is its own inverse; the tensor differential formula gives equal coefficients $(-1)^{pq+q}$ on $y\\otimes d x$ and $(-1)^{pq}$ on $d y\\otimes x$ on both sides. This natural chain isomorphism descends through K-flat models. Thus the cone of $1_K\\otimes\\beta:K\\otimes_R^{\\mathbf L}Q\\to K\\otimes_R^{\\mathbf L}L$ is $K\\otimes_R^{\\mathbf L}C_\\beta$, with cohomology zero above $a+(m-1)$ by step 1.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "For a triangle $A\\xrightarrow f B\\to C\\to A[1]$ with $H^i(C)=0$ for $i\\ge t$, its long exact sequence makes $H^i(f)$ an isomorphism for $i>t$ and $H^t(f)$ surjective: the adjacent groups $H^{i-1}(C),H^i(C)$ vanish when $i>t$, and $H^t(C)=0$ suffices for surjectivity. In step 4 both cones vanish in degrees $i\\ge t$, since $t\\ge n+b$ and $t\\ge m+a$. Each of the two maps is therefore an isomorphism above $t$ and surjective at $t$. Their composite $\\alpha\\otimes^{\\mathbf L}\\beta:P\\otimes_R^{\\mathbf L}Q\\to K\\otimes_R^{\\mathbf L}L$ has the same properties, by functoriality of tensor and composition of surjections.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "Each finite-free module is flat: after a choice of finite basis its tensor functor is a finite direct sum of the identity functor, and exactness is checked coordinatewise. Hence the bounded complexes $P^\\bullet,Q^\\bullet$ are K-flat by the cited criterion, and $P\\otimes_R^{\\mathbf L}Q$ is represented by $E^\\bullet=\\operatorname{Tot}(P^\\bullet\\otimes_R Q^\\bullet)$. This is bounded and finite free in each degree. Indeed, for finite bases indexed by $I_p,J_q$, the tensors of their basis vectors indexed by $I_p\\times J_q$ form a basis of $P^p\\otimes_R Q^q$, with inverse sending each pure tensor to its coordinate products; the finite disjoint union over $p+q=k$ gives a finite basis of $E^k$. Bounds on the degrees of $P^\\bullet,Q^\\bullet$ give the sum of these bounds for $E^\\bullet$. Together with step 5, the map $E^\\bullet\\to K\\otimes_R^{\\mathbf L}L$ is the required witness in the definition of $t$-pseudo-coherence.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1): details of the omitted tensor approximation argument"
+   }
+  },
+  {
+   "text": "For the final assertion, use the definition of pseudo-coherence to choose bounded-above finite-free representatives $F^\\bullet,G^\\bullet$ for $K,L$, with upper term bounds $c,d$. Finite-free modules are flat by the coordinate argument of step 6; hence both representatives are K-flat. Their total tensor represents the derived tensor. For each degree $k$, nonzero summands satisfy $k-d\\le p\\le c$ and $q=k-p$, so only finitely many summands occur, each finite free by the explicit tensor bases of step 6. The total complex is zero above $c+d$. Thus it is a bounded-above finite-free representative, proving pseudo-coherence directly from its definition, without a Noetherian or finite Tor-dimension assumption.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, clause (2); Tag 064P, definition-pseudo-coherent, clause (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJE, lemma-tensor-pseudo-coherent; expands the omitted approximation comparison using cone triangles and termwise tensor bounds"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +151,45 @@
    "results": "HomologicalComplex.tensorObj, HasTensor; no pseudo-coherence theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coheren|IsMPseudoCoherent",
+   "results": "0 hits: . Read results; no pseudo-coherent tensor approximation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of n-pseudo-coherent bounded above complexes is max(m+a,n+b) pseudo-coherent",
+   "results": "8 hits: HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorXTensorUnit_1. Read results; no pseudo-coherent tensor approximation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor of finite free approximations to bounded above derived complexes is a finite free approximation",
+   "results": "8 hits: Module.Free.tensor, lTensorHomEquivHomLTensor, Module.Flat.rTensor_shortComplex_exact, lTensorHomEquivHomLTensor.congr_simp, ModuleCat.FreeMonoidal.μIso, Module.Finite.tensorProduct, Algebra.TensorProduct.instFree, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier. Read results; no pseudo-coherent tensor approximation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\", \"coherent\"",
+   "results": "0 hits: . Read results; no pseudo-coherent tensor approximation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximation of a derived tensor product via mapping cones and upper cohomological support",
+   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE. Read results; no pseudo-coherent tensor approximation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-derived-tensor-nonvanishing",
@@ -81,5 +222,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-pseudocoherent-tensor-closure",
+  "worker": "stage1",
+  "summary": "Expanded the omitted finite-stage tensor comparison by two exact tensor cone triangles, explicitly handling zero approximations when a stage exceeds the cohomological bound. Proved the full pseudo-coherent clause using bounded-above finite-free models. Reused existing bounded-flat replacement, K-flatness, exact tensor and cohomology nodes; no new nodes. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Complete-local step of that detection: tensor nonvanishing for bounded-above coherent complexes over a local ring; its closure clause $C\\otimes^{\\mathbf L}_AW\\in D^-_{\\mathrm{fg}}(A)$ (Stacks Tag 0DJE).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic flat replacement on the one-point site preserving an upper term bound; no curve-local-term unit node supplies it."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flatness criterion, required to compute derived tensors from the displayed models."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic exact derived tensor functor and K-flat computation, used to tensor the two approximation cone triangles."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-4cfdaf884",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-4cfdaf884 (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited node statements, Stacks 0DJE (more-algebra.tex:16487) and Definition definition-pseudo-coherent (line 15874), plus the parent lem-trf-local-derived-tensor-nonvanishing. The statement matches 0DJE clauses (1) and (2) exactly: arbitrary ring, upper cohomology bounds, t=max(m+a,n+b), no hypothesis added. The proof is correct. Step 1 bounds the derived tensor above using a good truncation, the bounded-flat replacement that keeps the term bound (on the one-point site), K-flatness and a total-degree count. Step 2 handles the cases n>a or m>b with the zero witness. Step 3 gets the cone bounds from the long exact sequence: H^i(C_alpha)=0 for i>=n, and H^j(Q)=0 for j>b because b>=m. Step 4 tensors the two cone triangles; I recomputed the signs of the flip: it is a chain involution. Its descent through K-flat models is terse but valid, since Q is bounded finite free and beta lifts to a chain map. Step 5 gets iso above t and surjective at t. Step 6 builds a finite basis of Tot(P⊗Q). Step 7 shows the tensor of bounded-above finite-free complexes is bounded-above finite-free (finite range k-d<=p<=c), with no perfectness or Noetherian assumption. Edge cases checked: R=0, zero objects, n=a and m=b, complexes unbounded below, and Z/4 with Z/2 (infinite Tor, still bounded above). No new nodes; rg for 0DJE, tensor-pseudo-coherent and tensor statements about pseudo-coherence found no duplicate. Accepted all three declared tool_uses (lem-pc-kflat-bounded-flat-replacement, lem-pc-module-bounded-flat-kflat, lem-pc-derived-tensor-second-factor-functor) as generic tools. No SGA cited. Nothing changed."
  }
 }
