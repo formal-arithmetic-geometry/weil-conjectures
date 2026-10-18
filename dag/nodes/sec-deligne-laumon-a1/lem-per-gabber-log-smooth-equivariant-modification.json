@@ -2,7 +2,7 @@
  "id": "lem-per-gabber-log-smooth-equivariant-modification",
  "kind": "statement",
  "title": "Gabber modification preserving relative logarithmic smoothness",
- "statement": "A trait is $\\operatorname{Spec}R$ for a Noetherian local domain of dimension one with principal maximal ideal. It is complete strictly henselian if $R$ is complete for that ideal, is henselian (simple roots of monic polynomials over its residue field lift), and has separably closed residue field. Its canonical log structure is $\\mathcal O\\cap j_*\\mathcal O_\\eta^\\times$, where $j$ includes its generic point. Mixed characteristic means fraction-field characteristic zero and positive residue characteristic.\n\nLet $T$ be a complete strictly henselian trait with its canonical fs log structure. Let $(V,M_V)$ be an integral log regular fs log scheme, quasi-projective of finite type over $T$, and log smooth over $T$ [def-trf-fs-log-blowup, def-per-fs-log-smooth-etale, def-pc-integral-scheme, def-weil-finite-type-morphism]. Quasi-projective over a scheme $B$ means admitting a locally closed immersion into some $\\mathbf P^n_B$; projective means a closed immersion into some $\\mathbf P^n_B$ followed by projection [def-kun-projective]. Let a finite group $H$ act on $(V,M_V)$ over $T$. Suppose the action is tame: at every geometric point $\\bar v$, its stabilizer has order prime to the residue characteristic (no restriction in characteristic zero). Suppose it is generically free: $H$ acts freely on a dense invariant open of $V$. There are an integral fs log scheme $(W,M_W)$ quasi-projective of finite type over $T$ and an $H$-equivariant projective birational log morphism $h:W\\to V$, such that $W$ is log regular and log smooth over $T$, and the scheme quotient $Q=W/H$ has an fs log structure for which it is log regular and log smooth over $T$. Here birational modification means that $h$ restricts to an isomorphism between dense opens. The quotient is the categorical geometric quotient, affine locally given by invariant rings; its log structure is the invariant direct image of $M_W$. The boundary of $W$ is allowed to contain the inverse image of the nonfree locus, even when that locus meets the generic fibre.",
+ "statement": "A trait is $\\operatorname{Spec}R$ for a Noetherian local domain of dimension one with principal maximal ideal. It is complete strictly henselian if $R$ is complete for that ideal, is henselian (simple roots of monic polynomials over its residue field lift), and has separably closed residue field. Its canonical log structure is $\\mathcal O\\cap j_*\\mathcal O_\\eta^\\times$, where $j$ includes its generic point. Mixed characteristic means fraction-field characteristic zero and positive residue characteristic.\n\nLet $T$ be a complete strictly henselian trait with its canonical fs log structure. Let $(V,M_V)$ be an integral log regular fs log scheme, quasi-projective of finite type over $T$, and log smooth over $T$ [def-trf-fs-log-blowup], [def-per-fs-log-smooth-etale], [def-pc-integral-scheme], [def-weil-finite-type-morphism]. Quasi-projective over a scheme $B$ means admitting a locally closed immersion into some $\\mathbf P^n_B$; projective means a closed immersion into some $\\mathbf P^n_B$ followed by projection [def-kun-projective]. Let a finite group $H$ act on $(V,M_V)$ over $T$. Suppose the action is tame: at every geometric point $\\bar v$, its stabilizer has order prime to the residue characteristic (no restriction in characteristic zero). Suppose it is generically free: $H$ acts freely on a dense invariant open of $V$. There are an integral fs log scheme $(W,M_W)$ quasi-projective of finite type over $T$ and an $H$-equivariant projective birational log morphism $h:W\\to V$, such that $W$ is log regular and log smooth over $T$, and the scheme quotient $Q=W/H$ has an fs log structure for which it is log regular and log smooth over $T$. Here birational modification means that $h$ restricts to an isomorphism between dense opens. The quotient is the categorical geometric quotient, affine locally given by invariant rings; its log structure is the invariant direct image of $M_W$. The boundary of $W$ is allowed to contain the inverse image of the nonfree locus, even when that locus meets the generic fibre.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose X Theorem 1.1, pp.135--136; Expose VI Theorem 3.2, pp.73--74; application in XVI 3.7, p.254. Complete traits and their finite-type schemes meet the noetherian quasi-excellent hypotheses."
@@ -15,9 +15,104 @@
   "def-weil-finite-type-morphism",
   "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T=\\operatorname{Spec}R$. By [lem-per-complete-local-excellence], $R$ is excellent, so $T$ is quasi-excellent. The finite-type map $V\\to T$ and [lem-per-quasi-excellent-finite-type-stability] make $V$ quasi-excellent and Noetherian (finite type includes quasi-compactness). The trait with its canonical chart $\\mathbf N\\to R$, $1\\mapsto\\pi$, is log regular directly: at its closed point the log ideal is $(\\pi)$, the quotient is the residue field of dimension zero and the characteristic rank is one; at the generic point the characteristic is zero and the local ring is a field. Quasi-projectivity makes $V$ separated over the affine separated trait, hence separated absolutely. Here projective space is separated by [lem-trf-projective-bundle-separated]; the locally closed immersion defining quasi-projectivity is separated, since its diagonal is an isomorphism onto the appropriate fibre product. By [lem-trf-log-regular-divisorial-structure], the log structure of $V$ is the divisorial structure of its dense triviality open. Its map to $T$ is a map of the resulting log regular pairs. Indeed the pullback of the uniformizer is a log section; at a point of the triviality locus it is a unit, so that point maps to the generic point of $T$.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-trf-projective-bundle-separated",
+    "lem-trf-log-regular-divisorial-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.1 hypotheses, pp.135--136; VI 1.2--1.4, p.69."
+   }
+  },
+  {
+   "text": "Apply the absolute four-stage construction [lem-per-gabber-absolute-equivariant-modification] to $(V,M_V,H)$. Its hypotheses are Step 1 and the assumed tame generically free action. Denote its final source by $W$ and its composite by $h$. Already $W$ is integral, fs log regular and quasi-projective of finite type over $T$; $h$ is equivariant, projective in the required finite-projective-space convention and an isomorphism over a dense invariant open. Its boundary is the inverse image of the original boundary together with the nonfree locus. The action on $W$ is very tame. We must check relative log smoothness along this particular construction, since it does not follow from its absolute conclusion.",
+   "uses": [
+    "lem-per-gabber-absolute-equivariant-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 1.1 and 5.6.1; X proof of 1.1, opening paragraph, p.139."
+   }
+  },
+  {
+   "text": "The first two stages are saturated log blowup towers. They are log etale by [lem-per-log-smooth-composition-strict-base-change]. Their composites with the initial log-smooth map to $T$ are therefore log smooth. The induction starts with the given log smoothness of $V/T$. At the end of these two stages the scheme is regular and the boundary is $H$-strict strict normal crossings, exactly as required by the fixed-locus chart lemma used next.",
+   "uses": [
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-log-smooth-composition-strict-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.3, p.139; VIII 4.1.1--4.1.8."
+   }
+  },
+  {
+   "text": "At a nontrivial fixed-locus blowup in the third stage, apply [lem-per-gabber-fixed-locus-log-chart]. Work in its local model $Y/\\Sigma$, with $\\gamma:Q\\to\\mathbf Z^t\\oplus\\mathbf N^r$. On a $z_i$ chart the group map $1\\oplus\\beta_i$ is an automorphism of the group completion: its inverse sends $e_j$ to $e_j-e_i$ for $j\\le m$, $j\\ne i$, and fixes the remaining basis vectors. Thus the composed base map is injective and has the same cokernel as $\\gamma^{\\rm gp}$. On a $y_i$ chart, $1\\oplus\\delta$ is injective with free cokernel $\\mathbf Z$; projection of a lattice vector $(a_1,\\ldots,a_r,b)$ to $b-\\sum_{j\\le m}a_j$ identifies that cokernel with $\\mathbf Z$. Therefore the cokernels of the two base maps fit into $0\\to\\operatorname{coker}\\gamma^{\\rm gp}\\to\\operatorname{coker}((1\\oplus\\delta)\\gamma)^{\\rm gp}\\to\\mathbf Z\\to0$. This sequence splits by choosing a preimage of $1$, so its torsion is exactly the invertible torsion of $\\operatorname{coker}\\gamma^{\\rm gp}$. In both kinds of charts the remaining variables are polynomial variables, so the comparison is smooth. The criterion [def-per-fs-log-smooth-etale] proves log smoothness on every chart. The blowup/strict-transform comparison and strict base-change locality in [lem-per-log-smooth-composition-strict-base-change] carry this calculation back to the original scheme. Apply this argument successively to the finite third-stage procedure. At every stage the induction hypothesis is log smoothness over $T$, and permissibility preserves the regular strict boundary supplied by the absolute construction.",
+   "uses": [
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-log-smooth-composition-strict-base-change",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.4--1.7, pp.141--146."
+   }
+  },
+  {
+   "text": "At the fourth stage use [lem-per-gabber-abelian-stage-toric-chart]. Its input hypotheses now hold: the preceding stage is regular with strict $H$-strict boundary, free off it, with abelian inertia, and is log smooth over $T$. Put $\\overline P=P\\oplus\\mathbf N^s$. The group map $Q^{\\rm gp}\\to\\overline P^{\\rm gp}$ is injective and its cokernel has the original invertible torsion, since the added factor is free. The image lies in $\\overline R^{\\rm gp}$. Consequently $\\overline R^{\\rm gp}/Q^{\\rm gp}$ is a subgroup of $\\overline P^{\\rm gp}/Q^{\\rm gp}$, and its torsion has invertible order. Transport through $\\overline R^{\\rm gp}\\simeq\\overline R'^{\\rm gp}$. The retained boundary has group $R'^{\\rm gp}\\subset\\overline R'^{\\rm gp}$, contains the image of $Q^{\\rm gp}$, and therefore $R'^{\\rm gp}/Q^{\\rm gp}$ is again a subgroup of that same cokernel. Its torsion is finite of invertible order. Thus $Q\\to R'$ meets the log smooth chart criterion. Moreover the scheme map from the quotient chart is smooth: $\\Lambda[\\overline R']=\\Lambda[R'][x_{c+1},\\ldots,x_b]$. This proves log smoothness of the fourth-stage quotient chart over $\\operatorname{Spec}\\Lambda[Q]$, and hence over $T$ after the strict base change. The local identifications and comparisons in the toric chart lemma make these charts cover the quotient. Locality [lem-per-log-smooth-composition-strict-base-change] gives log smoothness of that quotient over $T$.",
+   "uses": [
+    "lem-per-gabber-abelian-stage-toric-chart",
+    "lem-per-log-smooth-composition-strict-base-change",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, pp.146--148, especially (1.c)--(1.d) and the final paragraph."
+   }
+  },
+  {
+   "text": "The absolute construction makes $W$ quasi-projective over the affine Noetherian trait. By [lem-per-projective-finite-group-quotient], its categorical geometric scheme quotient $q:W\\to Q$ exists, is finite surjective, is affine locally computed by invariant rings, and is quasi-projective of finite type over $T$. The finite-quotient assertion gives an invariant affine cover by taking inverse images of affine opens of $Q$, so the action on $W$ is admissible. It is generically free because $h$ is an equivariant isomorphism over a dense free open. Apply [lem-per-very-tame-log-quotient]: the log structure is precisely $(q_*M_W)^H$, it is fs log regular, and $q$ is Kummer etale, in particular log etale. Its local quotient structures agree with Step 5 by the quotient and toric identifications. Thus $Q\\to T$ is log smooth, and composition [lem-per-log-smooth-composition-strict-base-change] gives log smoothness of $W\\xrightarrow qQ\\to T$. The factorization of the invariant log map $W\\to T$ through $Q$ is part of the quotient lemma. Together with Step 2 these are all conclusions. The enlarged boundary includes the nonfree locus without a special-fibre restriction, exactly as the source construction requires.",
+   "uses": [
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-very-tame-log-quotient",
+    "lem-per-log-smooth-composition-strict-base-change",
+    "lem-per-projective-finite-group-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.2--3.5, pp.73--75; X 1.8, pp.146--148; XVI 3.7, pp.254--255."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-complete-local-excellence",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-trf-projective-bundle-separated",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-per-gabber-absolute-equivariant-modification",
+  "lem-per-log-smooth-composition-strict-base-change",
+  "lem-per-gabber-fixed-locus-log-chart",
+  "def-per-fs-log-smooth-etale",
+  "lem-per-gabber-abelian-stage-toric-chart",
+  "lem-per-very-tame-log-quotient",
+  "lem-per-projective-finite-group-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII four-stage absolute modification; X proof of Theorem 1.1, 1.3--1.8, pp.139--148; VI Theorem 3.2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +141,52 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LogSmooth|LogRegular|very.tame|equivariant.modification",
+   "results": "{\"t\": \"2026-10-18T20:19:50Z\", \"tool\": \"grep\", \"query\": \"LogSmooth|LogRegular|very.tame|equivariant.modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber very tame modification and logarithmically smooth quotient",
+   "results": "{\"t\": \"2026-10-18T20:19:50Z\", \"tool\": \"leansearch\", \"query\": \"Gabber very tame modification and logarithmically smooth quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.smoothLocus\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\"], \"digest\": \"48ce476898a076ca\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\"",
+   "results": "{\"t\": \"2026-10-18T20:19:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame finite group action on a logarithmically smooth scheme admits a very tame projective birational modification whose quotient is logarithmically smooth",
+   "results": "{\"t\": \"2026-10-18T20:19:51Z\", \"tool\": \"leanfinder\", \"query\": \"Tame finite group action on a logarithmically smooth scheme admits a very tame projective birational modification whose quotient is logarithmically smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"263eca309f1bf2eb\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame action of a finite group on a toroidal embedding can be made very tame by blowing up fixed loci and toric subdivisions",
+   "results": "{\"t\": \"2026-10-18T20:22:00Z\", \"tool\": \"leanfinder\", \"query\": \"A tame action of a finite group on a toroidal embedding can be made very tame by blowing up fixed loci and toric subdivisions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finite.to_properlyDiscontinuousSMul\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"NumberField.mixedEmbedding.fundamentalCone.instMulActionSubtypeUnitsRingOfIntegersMemSubgroupTorsionElemMixedSpaceIntegerSet\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul\", \"NumberField.mixedEmbedding.fundamentalCone.torsion_unitSMul_mem_integerSet\", \"NumberField.mixedEmbedding.fundamentalCone.torsion_smul_mem_of_mem\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_smul_coe\", \"DiscreteTiling.PlacedTile.coe_mk_finite_iff\"], \"digest\": \"6095ec7fc5bce19c\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\"",
+   "results": "{\"t\": \"2026-10-18T20:36:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
@@ -74,5 +211,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gabber-log-smooth-equivariant-modification",
+  "worker": "stage1",
+  "summary": "Kept the statement. Checked the complete-trait/quasi-excellence hypotheses, used the absolute four-stage modification, and wrote out the relative lattice calculations for fixed-locus blowups and the abelian-inertia toric charts. Five supporting nodes state the construction, local models, quotient theorem and log chart calculus without hiding the relative argument in a restatement. All searches and citations are recorded.",
+  "blueprint": "Realizes the ancestor lem-per-artin-gabber-affine-curve Step 3 geometric purity input through XVI 3.7: H-equivariant modification X double-prime, log-smooth quotient over T, before the separate log resolution and purity application. No unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-separated",
+    "why": "Generic separatedness of projective space checks the absolute modification hypotheses."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Generic log-regular divisorial recognition converts the given fs structure into a log regular pair; the perverse unit supplies no such geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-separated",
+  "lem-trf-log-regular-divisorial-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-66c96b64c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-66c96b64c (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited statement in full, against ILO VIII 1.1–1.2, 4.1.5–4.2.13; X 1.1–1.10 (preparation 1.2, 1.3(vii), Lemmas 1.5–1.6, the Ui/Vi charts of 1.7, the 1.8 invariant monoids R̄ = Ker χ ∩ P̄ and R ⊂ R′ ⊂ R̄′); VI 3.1–3.5; and the XVI 3.7 application. The statement is unchanged apart from expanding the combined brackets, and it matches X 1.1 over a complete strictly henselian trait. Step 1: complete local gives excellent; finite type gives qe and Noetherian; separatedness checked; the trait's log-regularity dimension check holds; the map is one of log regular pairs. Step 2 takes only the absolute conclusions (VIII 1.2 shows h is not log smooth). Step 3: the first two stages are saturated log blowups, hence log étale. Step 4: I checked β_i^{-1}, the Vi cokernel map b−Σa_j and the split sequence. snc is kept because the blowups are permissible, and G-strictness by VIII 4.1.5. A (Z/2)² test on A² shows the strict-transform centres are locally fixed loci of subgroups of the inertia. Step 5: the subgroup-torsion argument for R̄^gp and R′^gp and the affine-space clause hold, and the quotient commutes with base change because |G| is invertible in Λ. Step 6: the quotient is admissible and generically free, the very-tame quotient is Kummer étale, and composition gives W→T log smooth. New nodes: all true, statement-only, not restatements, with small cases tested; none cites SGA. Two are strict generalizations of Q70's lem-per-gabber-equivariant-log-modification and lem-per-very-tame-quotient-log-regular (maintainer may repoint later). There is no existing general log-smooth chart-calculus node. Tool uses accepted: lem-trf-projective-bundle-separated and lem-trf-log-regular-divisorial-structure. Batch-5: the closures of every flagged citation contain only generic trf definitions or algebra (fs log/log-regular-pair definitions, universally catenary/CM, G-ring/J-2 locality, Proj separated, Kato–Nizioł toric local algebra). There is no thm-trf, trace transport, Poincaré duality or batch-4 node, so all flags are accepted. Advisory: the inherited stmt_dep def-weil-regular-scheme is unused but harmless. No fixes."
  }
 }
