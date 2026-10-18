@@ -38,7 +38,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | - | 1 | proof | 3 |
-| `Sheaf.Paper.AdicCompletionReduction` | - | 2 | proof | 3 |
+| `Sheaf.Paper.AdicCompletionReduction` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ExtendedCechCompletionModel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FlatRingedIdealCompleteEquivalence` | - | 2 | proof | 3 |
 | `Sheaf.Paper.LocalHomTowerCriterion` | - | 1 | proof | 3 |
