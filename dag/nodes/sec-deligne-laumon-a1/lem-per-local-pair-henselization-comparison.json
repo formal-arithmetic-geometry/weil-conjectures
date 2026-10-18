@@ -181,5 +181,25 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-26f94c1f1 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the unsplit base copy, there are no new nodes, and the only citer is lem-per-weierstrass-henselian-cylinder. Source: Stacks more-algebra 0A03 (lemma-henselization-local-ring), statement and proof, read in full. The delivery swaps two of the source's inputs for things already in the DAG. The Jacobson-radical input is replaced by a direct idempotent argument. The comparison through algebra-lemma-uniqueness-henselian is replaced by the 0A02 adjunction node together with the 04GQ universal property. It uses no SGA source and adds no hypothesis. Step 1: clause (3) of lem-weil-pbc-pair-henselization makes K/J a nonzero field, so J is maximal. Step 2: D=K/(1-z) is a finite K-algebra with D/JD=0, and the uniqueness of idempotent lifts in the definition forces D=0, so 1-z is a unit. Step 3: this gives locality, and injectivity of e makes eta local. Step 4: the hypotheses of lem-weil-pbc-henselization-universal-property hold exactly. h is local because units outside J map to units. Uniqueness among ring maps implies uniqueness among local maps. Step 5: A_m=A, and the maps u and v are mutually inverse by the two uniqueness statements. Cases I tested: a field, k[[t]], dual numbers and Z_(p); no step uses Noetherian, reduced or separability hypotheses. I found no duplicate: I grepped for 0A03 and scanned every henselization node; fiber-localization and the trf ind-etale node state different things. There is no cycle. I accept the tool use of lem-weil-pbc-henselization-universal-property (unit sk-thm-p1, the generic 0A02 adjunction, used as a black box). lem-weil-pbc-pair-henselization is Lean-closed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalPairHenselizationComparison",
+  "declaration": "RingTheory.local_pair_henselization_comparison",
+  "file": "lean/Sheaf/RingTheory/LocalPairHenselizationComparison.lean",
+  "statement": "theorem local_pair_henselization_comparison (A : Type u) [CommRing A] [IsLocalRing A] (c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of A) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap ((IsLocalRing.maximalIdeal A).map C.hom.hom) C.hom.hom Ideal.le_comap_map)))) (hc : Nonempty (IsColimit c)) : ∃ hK : HenselianLocalRing c.pt.right, @IsLocalRing.maximalIdeal c.pt.right _ hK.toIsLocalRing = (IsLocalRing.maximalIdeal A).map c.pt.hom.hom ∧ IsLocalHom c.pt.hom.hom ∧ Function.Bijective (Ideal.quotientMap ((IsLocalRing.maximalIdeal A).map c.pt.hom.hom) c.pt.hom.hom Ideal.le_comap_map) ∧ (∀ (S : Type v) [CommRing S] [HenselianLocalRing S] (g : A →+* S), IsLocalHom g → ∃! h : c.pt.right →+* S, IsLocalHom h ∧ h.comp c.pt.hom.hom = g) ∧ (∀ (H : Type v) [CommRing H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] [HenselianLocalRing H], Algebra.IsHenselizationAtPrime' A (IsLocalRing.maximalIdeal A) H → ∃! e : H ≃+* c.pt.right, IsLocalHom e.toRingHom ∧ e.toRingHom.comp ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H).comp (algebraMap A (Localization.AtPrime (IsLocalRing.maximalIdeal A)))) = c.pt.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Second reading (maintainer review): test rings S and the henselization H generalized from Type u to an independent universe v (the def node's IsHenselizationAtPrime' is universe-polymorphic; the citer lem-per-weierstrass-henselian-cylinder uses H : Type v).",
+  "fixed_by": "NT-stage2-cc-1ccde5a4f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ccde5a4f",
+  "group": "NS",
+  "result": "fix",
+  "note": "Every clause matches the node (Stacks 0A03/0A02/04GQ): an arbitrary colimit cocone over the dep's exact diagram; HenselianLocalRing K; maximal ideal = 𝔪K; η local; A/𝔪→K/J bijective; ∃! local extension to henselian local S; ∃! local A-ring equivalence H≃K for IsHenselizationAtPrime' H. No extra hypotheses, sorry-only proof, docstrings with source, blueprint id and the 5 steps, records unchanged except lean, no duplicate found. Delivered module compiles clean (nt_compile --json rc=0). Fault: S and H were restricted to A's universe u, although the def node's IsHenselizationAtPrime' is universe-polymorphic and the citer lem-per-weierstrass-henselian-cylinder quantifies H : Type v (its proof step 4 cites this item). FIX: universe u v, S : Type v, H : Type v, plus a docstring sentence. Complete module and lean-record in fixes/; the fix compiles clean (rc=0) and the statement is verbatim. Advisory: the u-only pair-adjunction proof dep needs a ULift or polymorphic bridge at stage 3."
  }
 }
