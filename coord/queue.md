@@ -1,6 +1,6 @@
 # Work queue
 
-1475 items; claim with `tools/claim.py next <group> [--stage N]`.
+1481 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1475)
+## Stage 3: modules to prove (1481)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -151,6 +151,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteCoefficientDescentTwoColimit` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients` | 6 | 32 | proof | 1 |
 | `Sheaf.Paper.IntegralConstantModelHeart` | 6 | 1 | proof | 1 |
+| `Sheaf.Paper.IntegralConstructibleCompactness` | 6 | 1 | proof | 1 |
+| `Sheaf.Paper.IntegralProperDirectSums` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.IsomorphismDerivedPullback` | 6 | 4 | proof | 1 |
 | `Sheaf.Paper.LisseEConstructibleIntegralLattice` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.LocalizedTStructure` | 6 | 1 | proof | 1 |
@@ -377,6 +379,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic` | 6 | 2 | proof | 2 |
 | `Sheaf.Paper.IntegralScalarExtensionWellDefined` | 6 | 8 | proof | 2 |
 | `Sheaf.Paper.IntegralTStructure` | 6 | 4 | proof | 2 |
+| `Sheaf.Paper.IntegralTensorProduct` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.InternalAdjunctionPairingChange` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.LisseAdicAutomorphismPullback` | 6 | 13 | proof | 2 |
 | `Sheaf.Paper.NormalizedEtaleOriginWitnesses` | 6 | 1 | proof | 2 |
@@ -631,6 +634,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralExtensionByZero` | 6 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralOpenImageProperFormulas` | 6 | 3 | proof | 3 |
 | `Sheaf.Paper.IntegralProperProjectionFormula` | 6 | 1 | proof | 3 |
+| `Sheaf.Paper.IntegralTensorPullback` | 6 | 8 | proof | 3 |
 | `Sheaf.Paper.IntegralTensorShriek` | 6 | 2 | proof | 3 |
 | `Sheaf.Paper.LocalizingLowerShriekComposition` | 6 | 1 | proof | 3 |
 | `Sheaf.Paper.NonrationalLocalizingLowerShriekComposition` | 6 | 1 | proof | 3 |
@@ -795,6 +799,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FourierAdicArtinSchreier` | 8 | 3 | proof | 3 |
 | `Sheaf.Paper.IndHeartCanonicalPresentation` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralComparisonSequenceSystems` | 8 | 11 | proof | 3 |
+| `Sheaf.Paper.IntegralStratumExtBound` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralTwistBaseChange` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralTwistScalarCoherence` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.ProperHeartBoundLattice` | 8 | 1 | proof | 3 |
@@ -1206,6 +1211,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CoefficientRealizationTransport` | - | 8 | proof | 5 |
 | `Sheaf.Paper.CompactProductProperSupportCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ConnectedConstantH0` | - | 3 | proof | 5 |
+| `Sheaf.Paper.DetThmSfCtfStabilityInternalHom` | - | 1 | proof | 5 |
 | `Sheaf.Paper.DirectImageCtfOpenTor` | - | 1 | proof | 5 |
 | `Sheaf.Paper.DivisibleExtensionDerivedReduction` | - | 8 | proof | 5 |
 | `Sheaf.Paper.FiniteForwardProductSymmetry` | - | 1 | proof | 5 |
@@ -1490,7 +1496,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (66)
+## Stage 3: waiting for statements of dependencies (61)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1518,10 +1524,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CohomologicalSmoothnessTheorem` | 6 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.DualizingObjectPurity` | 6 | 1 | `lem-pur-projection-purity-agreement` |
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 6 | 35 | `lem-coef-finite-free-extension` |
-| `Sheaf.Paper.IntegralConstructibleCompactness` | 6 | 1 | `sk-lem-int-integral-heart` |
-| `Sheaf.Paper.IntegralProperDirectSums` | 6 | 1 | `sk-lem-int-integral-heart` |
-| `Sheaf.Paper.IntegralTensorProduct` | 6 | 1 | `sk-lem-int-integral-heart` |
-| `Sheaf.Paper.IntegralTensorPullback` | 6 | 8 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 6 | 8 | `lem-trf-scheme-galois-coefficient-change` |
 | `Sheaf.Paper.PurityCompositionCoherence` | 6 | 12 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.PurityFiniteSetting` | 6 | 8 | `lem-pur-twist-frobenius-scalar` |
@@ -1538,12 +1540,11 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.PbcWeilCategory` | 7 | 7 | `def-tw-frobenius-action` |
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
 | `Sheaf.Paper.RationalOpenDirectImageConstructible` | 7 | 1 | `det-prop-scalar-six-pullback` |
-| `Sheaf.Paper.IntegralStratumExtBound` | 8 | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.ProperHeartBoundReduction` | 8 | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.Paper.UniformConstructibleExtRational` | 8 | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization` | 8 | 1 | `fix-lem-exchanges` |
 | `Sheaf.SixFunctors.IntegralExtHomContinuity` | 8 | 1 | `det-lem-int-integral-heart-dualizable` |
-| `Sheaf.Paper.IntegralStratumHomFormula` | 9 | 2 | `sk-lem-int-integral-heart` |
+| `Sheaf.Paper.IntegralStratumHomFormula` | 9 | 2 | `det-lem-int-integral-heart-dualizable` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | 16 | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.AlgebraicGeometry.CondensedModulePullbackExact` | - | 1 | `lem-sfb-modobj-abelian` |
@@ -1551,10 +1552,10 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.AdicSmoothDualizingComplexes` | - | 12 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.CommonStageFourierWeightUpper` | - | 2 | `lem-trf-rational-local-frobenius-powers` |
 | `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-a1-adic-compactification-section-realization` |
-| `Sheaf.Paper.DetThmSfCtfStabilityInternalHom` | - | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.DualStalkFrobenius` | - | 1 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
+| `Sheaf.Paper.IntegralConstructibleHeart` | - | 1 | `det-lem-int-integral-heart-dualizable` |
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | `lem-a1-finite-weil-sections-decomposition` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
