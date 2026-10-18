@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.Additive
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-!
 # Flat K-flat resolutions on the small étale site
@@ -58,6 +59,14 @@ theorem exists_etale_flat_isKFlat_resolution
         (J := T.smallEtaleTopology)
         (R := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj
           (CommRingCat.of Λ)) (K.X i)) ∧ QuasiIso f := by
-  sorry
+  let R := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj
+    (CommRingCat.of Λ)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  obtain ⟨K, f, hK, hflat, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients G
+  refine ⟨K, f, hK, ?_, hf⟩
+  intro i
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R (K.X i)).symm (hflat i)
 
 end AlgebraicGeometry.Scheme
