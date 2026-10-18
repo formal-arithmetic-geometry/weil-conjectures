@@ -17,9 +17,60 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-regular-specialization-geometry] with $r=h$, $P=Y$, $t'=\\bar y'$ and $t=\\bar y$. Its hypotheses are exactly the present Noetherian excellence and regularity hypotheses, and its geometric specializations and codimensions use the same strict-localization convention. Its rectangle assertion supplies fibre-generic $\\bar\\eta',\\bar\\eta$ and the two fibrewise vertical arrows. It asserts equality of the two composites to $\\bar y$, so this is a square of the specified geometric arrows, not only of their underlying points. Fibre-generic means codimension zero in the corresponding fibre, as required.",
+   "uses": [
+    "lem-per-regular-specialization-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.2.6, printed p.285; use the existing stronger geometry node."
+   }
+  },
+  {
+   "text": "Both endpoints of the top arrow obtained in Step 1 are fibre-generic. The generic-lift clause of [lem-per-regular-specialization-geometry] says that a fibre-generic lift ending at $\\bar\\eta$ of the base arrow is unique up to isomorphism and has the base codimension $a$. Hence the top arrow has codimension $a$. Given a chosen finite saturated base factorization, its immediate-arrow factorization clause lifts that factorization of this top arrow through fibre-generic points, with each lifted arrow immediate. Therefore each such arrow has codimension one, equal to its base arrow. If the chosen factorization includes codimension-zero transports at its ends, separate off those geometric isomorphisms first, apply this clause to the immediate part, and compose back the endpoint isomorphisms. The identity and geometric-isomorphism cases are explicitly allowed by the same cited statement; they have codimension zero and do not change either the intermediate fibre-generic condition or any codimension.",
+   "uses": [
+    "lem-per-regular-specialization-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemmas 4.3.2.4 and 4.3.2.5, printed p.285."
+   }
+  },
+  {
+   "text": "In the notation $b(t)$ of [lem-per-regular-specialization-geometry], $b(t)=c_h(t)$ by their identical local-ring definitions. Its final clause therefore gives vertical codimensions $c_h(y')$ and $c_h(y)$. For the bottom arrow its displayed codimension identity reads $b=a+c_h(y)-c_h(y')$. All dimensions here are finite local-ring dimensions, so rearranging gives $c_h(y')+b=a+c_h(y)$. In particular this is equality of the sums along the two paths in the square.",
+   "uses": [
+    "lem-per-regular-specialization-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4 and XVII, Lemma 4.3.2.6; rearrangement of the existing geometry-node identity."
+   }
+  },
+  {
+   "text": "To check that both path sums are also the codimension of their common composite, apply the same displayed identity of [lem-per-regular-specialization-geometry] to the geometric arrow $\\bar\\eta'\\rightsquigarrow\\bar y$ (either composite, equal by Step 1). Its base arrow is $\\bar x'\\rightsquigarrow\\bar x$ of codimension $a$, and $c_h(\\eta')=0$ since $\\eta'$ is fibre-generic. The identity gives $c_Y(\\bar\\eta',\\bar y)=a+c_h(y)$. This is the sum along the upper and right edges by Steps 2 and 3, and equals $c_h(y')+b$, the sum along the left and bottom edges, by Step 3. Thus codimensions add along both paths. Every cited assertion uses the compatible strict localizations of the specified geometric arrows; the proof makes no connectedness assertion about a global fibre.",
+   "uses": [
+    "lem-per-regular-specialization-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4; codimension identity applied to the common composite from XVII, Lemma 4.3.2.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-specialization-geometry"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Lemmas 4.3.2.4–4.3.2.6, printed p.285, and XIV, Proposition 2.5.4, printed pp.217–218; reuse the already existing stronger node lem-per-regular-specialization-geometry and spell out the codimension arithmetic."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +106,59 @@
    "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.Flat; AlgebraicGeometry.IsSmoothOfRelativeDimension; Algebra.HasGoingDown.of_flat; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsStandardSmooth.relativeDimension; AlgebraicGeometry.isSmoothOfRelativeDimension_comp; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat. These give going-down or smooth finite-presentation dimension statements, not the geometric codimension formula and rectangle for arbitrary regular maps.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular morphism excellent schemes lifts geometric specialization to generic points of fibres preserving codimension",
+   "results": "Actual logged hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeneralizingMap, AlgebraicGeometry.Flat.generalizingMap, IsGenericPoint",
+   "results": "Actual logged hits: . ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeneralizingMap|codim|specializ",
+   "results": "Actual logged hits: Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/Homotopy/Product.lean, Mathlib/Topology/Homotopy/Product.lean, Mathlib/Topology/Homotopy/Product.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "codimension formula for specialization in a flat morphism with geometrically regular fibres",
+   "results": "Actual logged hits: ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.generalizingMap. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat morphism strict henselian excellent local schemes geometrically integral fibres unique generic lift saturated specialization chain equal codimension",
+   "results": "Actual logged hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Flat, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.Flat.of_stalkMap. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*regular|regular.*morphism|generalizingMap|codimension",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralizingMap\"",
+   "results": "Actual logged hits: GeneralizingMap, Topology.IsOpenEmbedding.generalizingMap, GeneralizingMap.stableUnderGeneralization_range, Topology.IsInducing.generalizingMap, GeneralizingMap.stableUnderGeneralization_image, GeneralizingMap_iff_stableUnderGeneralization_image, GeneralizingMap.comp, GeneralizingMap.restrictPreimage. Underlying generalization/going-down results do not state geometric rectangles or codimension preservation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-pullback-pinnings",
@@ -70,7 +170,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 1: dimension-normalized Verdier duality in the lower perverse bound, via lem-per-qbar-arbitrary-field-duality and the regular generic duality model; the finite prime-power potential-dualizing pullback underlying that model. Geometric rectangle and chain reduction for the finite prime-power regular pullback.",
+   "place": "Proof Step 3 (the lower perverse bound by dimension-normalized Verdier duality), through the finite-prime-power regular pullback of potential dualizing complexes: generic-fibre specialization rectangle, lifting saturated chains, and codimension accounting. The incoming created.item ancestry is unchanged.",
    "via": [
     "lem-per-regular-pullback-pinnings",
     "lem-per-potential-dualizing-finite-pullback",
@@ -81,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-specialization-rectangle",
+  "worker": "stage1",
+  "summary": "Reused the pre-existing stronger same-unit node lem-per-regular-specialization-geometry instead of duplicating its geometric lifting lemmas. Matched hypotheses and geometric arrows against ILO XVII 4.3.2.4–4.3.2.6; wrote the chain-with-endpoint-transports deduction and both path-sum calculations explicitly. Statement unchanged; no new nodes and no Lean work.",
+  "blueprint": "The ancestor lem-per-artin-gabber-affine-curve, proof Step 3, uses dimension-normalized Verdier duality. This item is the generic-fibre rectangle/chain/codimension obligation in the finite regular potential-dualizing pullback below it. Corrected the inherited from.place description, which called the lower bound Step 1 rather than Step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-57e99432a",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-57e99432a (reviewer sub-agent of L); spot-checked: I read the whole item and the only node it cites, lem-per-regular-specialization-geometry (unsplit, same unit sk-p-dl-a1-perverse, created by Q12 on 2026-10-18). I also read the citer lem-per-regular-pullback-pinnings, the conventions in def-per-potential-dualizing-complex, and the ILO sources XVII 4.3.2.3–4.3.2.6 (printed pp.284–285) and XIV 2.5.4 (printed pp.217–218). The item's statement and stmt_deps are byte-identical to the base copies in the earlier Q30 run snapshots. Step 1: the square, fibre-generic η'/η, verticals in the fibres and equal composites are all clauses of the geometry node (ILO 4.3.2.6). Step 2: the top codimension is a by the uniqueness/codimension clause (4.3.2.4). Immediate lifts have codimension one, since immediate means codimension one by def-per-potential-dualizing-complex (4.3.2.5). End transports are handled by the explicitly allowed geometric isomorphisms and uniqueness up to isomorphism; terse but complete. Steps 3 and 4: the displayed identity c_P = c_X + b(t) - b(t') with b = c_h rearranges to c_h(y') + b = a + c_h(y), and applied to the composite η'⇝y it gives a + c_h(y). This matches XIV 2.5.4's dimension function. Edge cases checked: h = id; a point base; A^1 over a plane∪line base (1 = 1 + 1 - 1); Y = X⊔X with no global connectedness claimed. ℓ-invertibility is not needed in the strictly local setting. No cycle, since geometry has no proof_deps. Same unit, so no tool_uses; no SGA cited; no new nodes; all steps under 2000 characters; 12 Mathlib searches recorded. The from.place change to Step 3 of lem-per-artin-gabber-affine-curve is acceptable. Maintainer note: the item duplicates a special case of the parallel-created geometry node. Consider merging it into lem-per-regular-specialization-geometry (only citer: lem-per-regular-pullback-pinnings, Steps 1 and 5); citing the stronger node was the correct resolution here."
  }
 }
