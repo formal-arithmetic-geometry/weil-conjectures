@@ -23,9 +23,11 @@ form an injective resolution of `ℚ̄_ℓ,Ȳ`.
 
 universe u
 
-open CategoryTheory Limits Endofunctor Opposite
+open CategoryTheory Limits Endofunctor Opposite Abelian
 
 namespace AlgebraicGeometry
+
+attribute [local instance 2000] CategoryWithHomology.hasHomology
 
 open ProEtale
 
@@ -98,6 +100,8 @@ lemma sc_g_sectionsAddEquiv (f : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj 
     sectionsAddEquiv_comp]
   rfl
 
+set_option maxHeartbeats 1000000 in
+-- unifying the terms of the image of a resolution with the images of its terms is slow
 lemma extMk_eq_zero_iff_sectionsAddEquiv
     (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X r)
     (hf : f ≫ (I.map (forgetAb k₀ l Y)).cocomplex.d r (r + 1) = 0) :
@@ -117,11 +121,66 @@ lemma extMk_eq_zero_iff_sectionsAddEquiv
       rw [map_zero, ← hx]
       exact ConcreteCategory.congr_hom ((ShortComplex.map_f _ _).trans
         ((congrArg (globalSectionsWeilFunctor k₀ l Y).map h0).trans
-          (globalSectionsWeilFunctor k₀ l Y).map_zero)) x
+          ((globalSectionsWeilFunctor k₀ l Y).map_zero _ _))) x
   | succ p =>
     simp only [Nat.add_eq_zero_iff, one_ne_zero, and_false, false_and, false_or,
       Nat.add_right_cancel_iff, exists_prop, exists_eq_left]
-    sorry
+    rw [InjectiveResolution.map_cocomplex_d]
+    have key (g : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj (I.cocomplex.X p)) :
+        ((I.cocomplex.sc (p + 1)).map (globalSectionsWeilFunctor k₀ l Y)).f
+          (sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm) g) =
+          sectionsAddEquiv _ (g ≫ (forgetAb k₀ l Y).map (I.cocomplex.d p (p + 1))) := by
+      rw [sectionsAddEquivOfIso_apply]
+      refine (sectionsAddEquiv_comp _ (I.cocomplex.d _ (p + 1))).symm.trans ?_
+      have hd := congrArg (forgetAb k₀ l Y).map
+        (I.cocomplex.XIsoOfEq_hom_comp_d (CochainComplex.prev_nat_succ p).symm (p + 1))
+      rw [Functor.map_comp] at hd
+      rw [Category.assoc, hd]
+    constructor
+    · rintro ⟨g, hg⟩
+      exact ⟨sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm) g,
+        by rw [key, hg]⟩
+    · rintro ⟨x, hx⟩
+      refine ⟨(sectionsAddEquivOfIso
+        (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm)).symm x,
+        (sectionsAddEquiv _).injective ?_⟩
+      rw [← key, AddEquiv.apply_symm_apply, hx]
+
+/-- The `r`-th pro-étale `Ext` of `ℤ` into the underlying abelian sheaf of a pro-étale Weil sheaf
+`K` is the `r`-th homology of the complex of global sections of an injective resolution of `K`. -/
+noncomputable def extAddEquivHomology :
+    Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r ≃+
+      ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y)).homology :=
+  InjectiveResolution.extAddEquivHomology (I.map (forgetAb k₀ l Y)) _ (sectionsAddEquiv _)
+    (sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.next ℕ r).symm))
+    (sc_g_sectionsAddEquiv I r) (extMk_eq_zero_iff_sectionsAddEquiv I r)
+
+/-- The Frobenius on the cocycles `ℤ ⟶ Iⁿ` of the complex computing `Ext(ℤ, K)`: the Frobenius of
+the global sections `Γ(Ȳ, Iⁿ)`. -/
+noncomputable def cocycleFrobenius (n : ℕ) :
+    (constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X n) →+
+      (constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X n) :=
+  ((sectionsAddEquiv (I.cocomplex.X n)).symm.toAddMonoidHom.comp
+    ((globalSectionsFrobeniusNatTrans k₀ l Y).app (I.cocomplex.X n)).hom.toAddMonoidHom).comp
+      (sectionsAddEquiv (I.cocomplex.X n)).toAddMonoidHom
+
+lemma sectionsAddEquiv_cocycleFrobenius (n : ℕ)
+    (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X n) :
+    sectionsAddEquiv _ (cocycleFrobenius I n f) =
+      (globalSectionsFrobeniusNatTrans k₀ l Y).app (I.cocomplex.X n) (sectionsAddEquiv _ f) :=
+  AddEquiv.apply_symm_apply _ _
+
+lemma cocycleFrobenius_comp_d (n m : ℕ)
+    (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X n) :
+    cocycleFrobenius I m (f ≫ (I.map (forgetAb k₀ l Y)).cocomplex.d n m) =
+      cocycleFrobenius I n f ≫ (I.map (forgetAb k₀ l Y)).cocomplex.d n m := by
+  refine (sectionsAddEquiv _).injective ?_
+  rw [sectionsAddEquiv_cocycleFrobenius, InjectiveResolution.map_cocomplex_d,
+    sectionsAddEquiv_comp, sectionsAddEquiv_comp, sectionsAddEquiv_cocycleFrobenius]
+  have h := ConcreteCategory.congr_hom
+    ((globalSectionsFrobeniusNatTrans k₀ l Y).naturality (I.cocomplex.d n m)) (sectionsAddEquiv _ f)
+  simp only [ConcreteCategory.comp_apply] at h
+  exact h
 
 end ProEtaleWeilSheaf
 
