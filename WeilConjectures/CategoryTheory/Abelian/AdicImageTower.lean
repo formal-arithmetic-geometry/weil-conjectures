@@ -106,8 +106,8 @@ instance (m : ℕ) : Mono (H.adicImageTowerι ℓ c m) := by
   dsimp [adicImageTowerι]
   infer_instance
 
-@[reassoc (attr := simp)]
 /-- `ψₘ` factors as `H_{m+2c} ⟶ G'ₘ ⟶ H_{m+c}`. -/
+@[reassoc (attr := simp)]
 lemma adicImageTowerπ_ι (m : ℕ) :
     H.adicImageTowerπ ℓ c m ≫ H.adicImageTowerι ℓ c m = H.adicImageTowerMap ℓ c m :=
   image.fac _
@@ -128,8 +128,8 @@ noncomputable def adicImageTowerHom : H.adicImageTower ℓ c ⟶ H.towerShift c 
   app m := H.adicImageTowerι ℓ c m.unop
   naturality _ _ h := H.adicImageTower_map_comp_ι ℓ c (leOfHom h.unop)
 
-@[simp]
 /-- The components of `G' ⟶ (H_{m+c})ₘ` are the inclusions `G'ₘ ⟶ H_{m+c}`. -/
+@[simp]
 lemma adicImageTowerHom_app (m : ℕ) :
     (H.adicImageTowerHom ℓ c).app (op m) = H.adicImageTowerι ℓ c m :=
   rfl
