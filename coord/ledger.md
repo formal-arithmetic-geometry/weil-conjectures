@@ -15896,3 +15896,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: returned deliver/P1/Sheaf.RepresentationTheory.CoinducedHomotopyIdentity (reviewer RETURN: (the landing tools, head 00fc1e143) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rep)
 - 06:26 L: returned deliver/Q2/Sheaf.RingTheory.AuslanderBuchsbaum (reviewer RETURN: (the landing tools, head bd48fd255) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 06:26 L: returned deliver/Q7/Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen (reviewer RETURN: (the landing tools, head 540552dcf) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 06:26 L: returned deliver/R4/Sheaf.AlgebraicGeometry.IntegralChowRelativelyAmple (reviewer RETURN: (the landing tools, head 4e3848bc6) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
