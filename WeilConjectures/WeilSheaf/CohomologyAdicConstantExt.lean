@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.CategoryTheory.Sites.SheafSmul
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtFrobenius
 
 /-!
 # Weil cohomology of the constant sheaf as pro-étale `Ext`
@@ -212,6 +213,16 @@ lemma smulNatTrans_app_adicConstant (c : PadicAlgCl l) :
       adicScalar l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber c :=
   rfl
 
+variable (k₀ l Y) in
+/-- The structure isomorphisms `Fr^* M ≅ M` of pro-étale Weil sheaves, on the underlying abelian
+sheaves: `(Fr⁻¹)_* M ⟶ M`. -/
+noncomputable def strForgetAb :
+    forgetAb k₀ l Y ⋙
+        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[AddCommGrpCat.{u + 1}] ⟶
+      forgetAb k₀ l Y :=
+  Functor.whiskerRight (IsoAlgebra.strNatTrans (WeilSheaf.frobeniusPullback k₀ l Y))
+    (AdicSheaf.forget _ ⋙ sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) _)
+
 /-- The Frobenius on the cocycles `ℤ ⟶ Iⁿ` of the complex computing `Ext(ℤ, K)`: the Frobenius of
 the global sections `Γ(Ȳ, Iⁿ)`. -/
 noncomputable def cocycleFrobenius (n : ℕ) :
@@ -239,6 +250,28 @@ lemma cocycleFrobenius_comp_d (n m : ℕ)
   simp only [ConcreteCategory.comp_apply] at h
   exact h
 
+set_option maxHeartbeats 1600000 in
+-- the pushforward of the underlying abelian sheaf is only definitionally that of the sheaf
+/-- The Frobenius of the global sections of the terms of `I` on the cocycles `ℤ ⟶ Iⁿ` is
+`f ↦ (ℤ ⟶ Fr⁻¹_* ℤ) ≫ Fr⁻¹_* f ≫ φ`, `φ` the structure isomorphism of `Iⁿ`. -/
+lemma cocycleFrobenius_eq_resolutionFrobeniusCocycle (n : ℕ)
+    (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X n) :
+    cocycleFrobenius I n f = resolutionFrobeniusCocycle
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      (InjectiveResolution.mapMapHomOfNatTrans (strForgetAb k₀ l Y) I) n f := by
+  apply (sectionsAddEquiv _).injective
+  have h₂ := constantIntHomAddEquivΓ_constantIntSheafToLowerStar_comp
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv (I.cocomplex.X n).carrier.X f
+  have h₃ := constantIntHomAddEquivΓ_comp
+    (M := ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].obj
+      (I.cocomplex.X n).carrier.X) (N := (I.cocomplex.X n).carrier.X) (constantIntSheafToLowerStar
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[AddCommGrpCat.{u + 1}].map f)
+    ((AdicSheaf.forget _).map (I.cocomplex.X n).str.hom)
+  rw [h₂, Category.assoc] at h₃
+  rw [sectionsAddEquiv_cocycleFrobenius]
+  exact h₃.symm
+
 /-- The Frobenius on `Ext(ℤ, K)` induced by the Frobenius of the global sections of the terms of
 an injective resolution of `K`. -/
 noncomputable def extFrobenius :
@@ -246,6 +279,18 @@ noncomputable def extFrobenius :
       Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r :=
   InjectiveResolution.extMap (I.map (forgetAb k₀ l Y)) (cocycleFrobenius I)
     (cocycleFrobenius_comp_d I) r
+
+/-- `extFrobenius` is the Frobenius on `Ext` induced by the structure isomorphisms of the terms of
+the resolution, in the form of `AlgebraicGeometry.ProEtale.extFrobeniusOfResolution`. -/
+lemma extFrobenius_eq_extFrobeniusOfResolution :
+    extFrobenius I r = extFrobeniusOfResolution
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      (InjectiveResolution.mapMapHomOfNatTrans (strForgetAb k₀ l Y) I) r := by
+  have h : cocycleFrobenius I = resolutionFrobeniusCocycle
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      (InjectiveResolution.mapMapHomOfNatTrans (strForgetAb k₀ l Y) I) :=
+    funext fun n ↦ AddMonoidHom.ext (cocycleFrobenius_eq_resolutionFrobeniusCocycle I n)
+  exact InjectiveResolution.extMap_congr _ _ _ _ h r
 
 set_option maxRecDepth 4000 in
 /-- Through `extAddEquivHomology`, the Frobenius `extFrobenius` is the map induced on homology by
