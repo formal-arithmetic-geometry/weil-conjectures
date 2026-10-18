@@ -15,9 +15,117 @@
   "def-weil-closed-immersion",
   "def-trf-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "To prove separatedness, take any scheme $T$ and any map $T\\to E\\times_XE$, given by two maps $s,t:T\\to E$ over the same map $T\\to X$. Their equalizer $W=E\\times_{E\\times_XE}T$ is a scheme: it is also the pullback of the representable diagonal $E\\to E\\times E$ along $(s,t)$ [def-trf-algebraic-space]. The schemes $T_i=T\\times_XU_i$ form an fpqc covering of $T$ by [lem-galois-fpqc-covering-base-change]. The map $W\\times_TT_i\\to T_i$ is the scheme test of the diagonal of $q_i$ given by the two induced maps to $E_i$; hence it is a closed immersion by the hypothesis on $q_i$. Apply [lem-pc-fpqc-descend-closed-immersion] to the scheme map $W\\to T$. It is a closed immersion. This holds for every scheme test, exactly the required separatedness of $q$. All identifications here follow by describing a point as a pair of equal sections, so impose no representability on $E$ itself.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0421, lemma-descending-property-separated, diagonal argument; scheme-test reduction using descent.tex Tag 02L6"
+   }
+  },
+  {
+   "text": "Fix a valuation ring $R$ with fraction field $K$, a base map $b:\\operatorname{Spec}R\\to X$, and the given generic map $a$. There is at most one extension over $b$. Indeed, for any two extensions their equalizer is a closed immersion into $\\operatorname{Spec}R$ by step 1. By [def-weil-closed-immersion] it has the form $\\operatorname{Spec}(R/J)$. Equality on $\\operatorname{Spec}K$ says that every element of $J$ maps to zero in $K$. Since $R\\hookrightarrow K$ is injective, $J=0$, and the extensions are equal. This argument includes the case where $R$ is a field.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Separated diagonal gives uniqueness; direct affine equalizer calculation"
+   }
+  },
+  {
+   "text": "Pull the given cover back to $\\operatorname{Spec}R$. By [lem-galois-fpqc-covering-base-change] the schemes $V_i=U_i\\times_X\\operatorname{Spec}R$ are an fpqc covering. Thus every projection is flat and some $V_i$ has a point above the closed point of $\\operatorname{Spec}R$. Apply [lem-a1-flat-valuation-lifting] to this projection and the identity map of $\\operatorname{Spec}R$. Obtain an injective local map $R\\to R\\prime$ of valuation rings and a map $\\operatorname{Spec}R\\prime\\to V_i$. Write $K\\prime=\\operatorname{Frac}(R\\prime)$; injectivity induces $K\\hookrightarrow K\\prime$. The composite to $U_i$ is compatible with the specified map to $X$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "lem-a1-flat-valuation-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism"
+   }
+  },
+  {
+   "text": "The $R$-modules $R\\prime$ and $K\\prime$ are torsion-free because they embed into the field $K\\prime$ and $R\\to K\\prime$ is injective. Both are therefore flat by [lem-trf-valuation-torsionfree-flat]. The local map $R\\to R\\prime$ is faithfully flat, with surjective spectrum map, by [lem-weil-pbc-flat-local-hom-faithfully-flat]. The affine morphism is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Consequently $v:\\operatorname{Spec}R\\prime\\to\\operatorname{Spec}R$ is an fpqc covering: it is flat and surjective. Every affine open $V$ of $\\operatorname{Spec}R$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so finitely many principal opens $D(r_j)$ contained in $V$ cover $V$. Their inverse images $D(\\iota(r_j))$ in $\\operatorname{Spec}R\\prime$ are affine, and their images are exactly $D(r_j)$ by surjectivity. They supply the finite family required in [def-weil-pbc-fpqc-covering]. Also $K\\to K\\prime$ is a flat local map of fields by the same torsion-free criterion and hence faithfully flat by the same local-map lemma; its spectrum map is an fpqc covering as well.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539, lemma-valuation-ring-torsion-free-flat; algebra.tex Tag 00HR, lemma-local-flat-ff; topologies.tex Tag 03L7, affine case"
+   }
+  },
+  {
+   "text": "The map to $V_i$ gives a base map $\\operatorname{Spec}R\\prime\\to U_i$. Together with $a|_{\\operatorname{Spec}K\\prime}$ it gives a generic map $\\operatorname{Spec}K\\prime\\to E_i$. Apply the assumed full lifting property of $q_i$ to this valuation diagram. Compose the resulting lift with $E_i\\to E$ to obtain $e\\prime:\\operatorname{Spec}R\\prime\\to E$ over $X$, whose restriction to $\\operatorname{Spec}K\\prime$ is the base change of $a$. This applies to the actual chosen index $i$; no trivialization of $E$ or finite-type property is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, p.67, descent assertion: apply the local lifting hypothesis"
+   }
+  },
+  {
+   "text": "Put $B=R\\prime\\otimes_RR\\prime$ and $D=K\\prime\\otimes_RK\\prime=K\\prime\\otimes_KK\\prime$. These spectra are the indicated fibre products: the tensor algebra universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] and the contravariant affine-spectrum equivalence [def-weil-affine-spectrum] give the same pairs of compatible ring maps. Apply [lem-trf-flat-tensor-preserves-injection] twice to $R\\prime\\hookrightarrow K\\prime$, first tensoring with the $R$-flat module $R\\prime$, then with the $R$-flat module $K\\prime$ from step 4 (interchanging tensor factors when needed). It follows that $B\\to D$ is injective. The last displayed equality holds since every nonzero element of $R$ is already invertible in both $K\\prime$ factors. On $\\operatorname{Spec}D$ the two pullbacks of $e\\prime$ are both the pullback of $a$ along the common map to $\\operatorname{Spec}K$. Their equalizer on $\\operatorname{Spec}B$ is closed by step 1, hence is $\\operatorname{Spec}(B/J)$ by [def-weil-closed-immersion]. Its pullback to $D$ is the whole spectrum, so $JD=0$. Injectivity of $B\\to D$ forces $J=0$. Therefore the two maps agree on the entire overlap $\\operatorname{Spec}R\\prime\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R\\prime$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04P2, lemma-fpqc-universal-effective-epimorphisms, compatibility required for descent; explicit affine overlap verification"
+   }
+  },
+  {
+   "text": "Use [lem-a1-algebraic-space-fpqc-sheaf] with base scheme $X$, target $E$, domain $\\operatorname{Spec}R$, and the singleton fpqc cover $v$ of step 4. Step 6 is exactly its compatibility condition. It gives an $X$-morphism $\\widetilde a:\\operatorname{Spec}R\\to E$ pulling back to $e\\prime$. Its restriction to $\\operatorname{Spec}K$ and $a$ agree after the fpqc field extension $\\operatorname{Spec}K\\prime\\to\\operatorname{Spec}K$, since $e\\prime|_{K\\prime}=a|_{K\\prime}$. The equality clause of the same sheaf lemma, again over $X$, gives $\\widetilde a|_K=a$. This is the required lift; uniqueness was proved in step 2. The proof has used no quasi-compactness or finite-type assumption on $q$.",
+   "uses": [
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04P2, lemma-fpqc-universal-effective-epimorphisms, existence and injectivity of restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-a1-flat-valuation-lifting",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Expansion of the descent assertion in Lemma 7.3.9, p.67, using the read Stacks 0421 diagonal proof, 089F valuation lift and 04P2 morphism descent; the two-factor localization overlap calculation is written out by NH."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +161,45 @@
    "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence; AlgebraicGeometry.IsProper.of_valuativeCriterion; AlgebraicGeometry.IsSeparated.valuativeCriterion; AlgebraicGeometry.ValuativeCriterion; AlgebraicGeometry.ValuativeCriterion.existence; AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion; AlgebraicGeometry.ValuativeCriterion.eq; AlgebraicGeometry.ValuativeCriterion.iff",
    "date": "2026-10-18",
    "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full valuative existence and uniqueness property for an algebraic space over a scheme descends under an fpqc covering of the base",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.eq; AlgebraicGeometry.ValuativeCriterion.existence; AlgebraicGeometry.ValuativeCriterion.eq; AlgebraicGeometry.ValuativeCriterion.iff; AlgebraicGeometry.ValuativeCriterion.uniqueness; AlgebraicGeometry.ValuativeCriterion; AlgebraicGeometry.ValuativeCriterion.Existence; AlgebraicGeometry.ValuativeCriterion.Uniqueness",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme valuative definitions and criteria do not state fpqc descent for algebraic-space morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of the valuative criterion for separated algebraic spaces without quasi compactness",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.valuativeCriterion; AlgebraicGeometry.IsSeparated.of_valuativeCriterion; AlgebraicGeometry.ValuativeCriterion.existence; AlgebraicGeometry.ValuativeCriterion.Existence.eq; AlgebraicGeometry.ValuativeCriterion; AlgebraicGeometry.ValuativeCriterion.eq; AlgebraicGeometry.ValuativeCriterion.Existence; AlgebraicGeometry.ValuativeCriterion.Uniqueness",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme valuative definitions and criteria do not state fpqc descent for algebraic-space morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"ValuativeCriterion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme valuative definitions and criteria do not state fpqc descent for algebraic-space morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|valuative.*descent|descent.*valuative",
+   "results": "0 hits: ; directory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme valuative definitions and criteria do not state fpqc descent for algebraic-space morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fpqc descent of existence and uniqueness in the valuative criterion for algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.eq; AlgebraicGeometry.ValuativeCriterion; AlgebraicGeometry.ValuativeCriterion.Existence; AlgebraicGeometry.ValuativeCriterion.Uniqueness; AlgebraicGeometry.IsSeparated.valuativeCriterion; AlgebraicGeometry.Proj.valuativeCriterion_existence_aux; AlgebraicGeometry.ValuativeCriterion.uniqueness; AlgebraicGeometry.IsProper.of_valuativeCriterion",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme valuative definitions and criteria do not state fpqc descent for algebraic-space morphisms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-proetale-local-system-representability",
@@ -75,5 +218,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-space-fpqc-separated-valuative-descent",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven steps: descend the scheme tests of the diagonal by existing 02L6; prove uniqueness by a closed equalizer; refine one fpqc member by a dominating valuation ring (new 089F scheme-specialization node); obtain faithful flatness from existing valuation flatness/local flatness leaves; apply local lifting; check overlap equality through the injective map Rprime tensor_R Rprime to Kprime tensor_K Kprime; descend by the new 04P2 fpqc-sheaf node. Only two statement-only children, no Mathlib leaves created; all searches logged. No project attachment.",
+  "blueprint": "Auxiliary representability input to lem-a1-affine-hc0, through lem-a1-proetale-local-system-representability: expand the descent assertion in Bhatt–Scholze Lemma 7.3.9 (Loc_X to Cov_X), p.67. The ancestor proof has no valuation argument itself: this is the established auxiliary local-system representability input, specifically step 6 of its existing split. The current unit record and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme closed-immersion descent applied to tests of the algebraic-space diagonal; the Rankin unit has no fpqc descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-997b68ff9",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-997b68ff9 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes and the statement of every cited node in full. Sources checked: Bhatt–Scholze 7.3.9 p.67 ('Lemma 7.3.6 and descent'), Stacks 0421 and 04P2 (spaces-descent), 089F (spaces-morphisms) with its proof, the more-algebra definition that an extension of valuation rings is injective and local, and the tags 02L6/0421/04P2/089F in tags/tags. The item statement is unchanged, true, not weakened, and is what step 6 of lem-a1-proetale-local-system-representability uses. Step 1: the scheme equalizer W of two maps into E is tested on the base-changed fpqc cover T_i and descended with 02L6 applied to the scheme map W→T. Step 2: an ideal killed in the fraction field is zero. Steps 3–4: 089F applied with b=id gives an injective local map R→R'; torsion-free implies flat for R' and K', flat plus local gives faithfully flat, and the finite principal-open clause of the fpqc definition is checked explicitly. Step 6: R'⊗R'→K'⊗K' is injective by two flat-tensor applications; the two K-structures on D agree because nonzero r in R is invertible; the closed equalizer then forces J=0. Step 7: the 04P2 gluing, then the 04P2 uniqueness on {Spec K'→Spec K} recovers a. New nodes: lem-a1-flat-valuation-lifting matches 089F specialized to schemes, and lem-a1-algebraic-space-fpqc-sheaf matches the 04P2 equalizer with scheme domains. Both are statement-only, record all three search kinds, have correct blueprint.from/via and are not clauses of the item. Duplicate check: lem-weil-pbc-fpqc-representable-descent (023Q) has scheme targets only, and the other algebraic-space/fpqc nodes, the Nagata domination nodes and the proper specialization lift state different things. Accepted tool use: lem-pc-fpqc-descend-closed-immersion (sk-thm-picard-rr) as generic closed-immersion descent. Batch-5 check: def-trf-algebraic-space and def-trf-valuation-ring are general definitions, and lem-trf-flat-tensor-preserves-injection and lem-trf-valuation-torsionfree-flat are generic Mathlib algebra leaves. None of the four is part of the trace-formula or Poincaré-duality proofs, so all are accepted. Edge cases: X or E empty, R a field, the identity cover, and an infinite disjoint union (shows that properness must not be assumed). No SGA cited. No fixes."
  }
 }
