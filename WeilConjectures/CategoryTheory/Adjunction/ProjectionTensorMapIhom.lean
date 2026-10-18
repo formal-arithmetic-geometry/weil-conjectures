@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Yoneda
 # The Künneth map and its transport along a right adjoint with a projection formula
 
 In a braided monoidal closed category, a pairing `ev : D ⊗ A ⟶ W` and an object `S` give the
-*Künneth map* `S ⊗ D ⟶ [A, S ⊗ W]` (`CategoryTheory.kunnethMap`), the transpose of
+*Künneth map* `S ⊗ D ⟶ [A, S ⊗ W]` (`CategoryTheory.pairingKunnethMap`), the transpose of
 `A ⊗ (S ⊗ D) ≅ S ⊗ (D ⊗ A) ⟶ S ⊗ W`. For the evaluation pairing `[N, ω] ⊗ N ⟶ ω` of an object `N`
 pulled back to a product, it is the map `S ⊗ q^*[N, ω] ⟶ [q^* N, S ⊗ q^* ω]` behind the
 Künneth–Verdier isomorphism.
@@ -24,20 +24,20 @@ functor `F` with a comparison `δ : F(N ⊗ N') ≅ F N ⊗ F N'`, and let
 `τ : R M ⊗ F N ⟶ R(M ⊗ N)` be the tensor map (`CategoryTheory.Adjunction.projectionTensorMap`).
 The *internal Hom exchange* `R [A, Y] ⟶ [F A, R Y]` (`CategoryTheory.Adjunction.ihomExchange`)
 is an isomorphism, and `R` carries the Künneth map of `ev` at `S` to the Künneth map of
-`F ev` at `R S`, through `τ` (`CategoryTheory.Adjunction.projectionTensorMap_comp_map_kunnethMap`).
+`F ev` at `R S`, through `τ` (`CategoryTheory.Adjunction.projectionTensorMap_comp_map_pairingKunnethMap`).
 So, if `τ` is invertible at `(S, D)` and `(S, W)`, then `R` of the Künneth map is invertible if and
 only if the Künneth map of `F ev` at `R S` is
-(`CategoryTheory.Adjunction.isIso_map_kunnethMap_iff`).
+(`CategoryTheory.Adjunction.isIso_map_pairingKunnethMap_iff`).
 
 ## Main definitions
 
-- `CategoryTheory.kunnethMap`
+- `CategoryTheory.pairingKunnethMap`
 - `CategoryTheory.Adjunction.ihomExchange`
 
 ## Main statements
 
 - `CategoryTheory.Adjunction.isIso_ihomExchange`
-- `CategoryTheory.Adjunction.isIso_map_kunnethMap_iff`
+- `CategoryTheory.Adjunction.isIso_map_pairingKunnethMap_iff`
 -/
 
 @[expose] public section
@@ -52,43 +52,43 @@ variable {E : Type*} [Category* E] [MonoidalCategory E] [BraidedCategory E] [Mon
 
 /-- The **Künneth map** of a pairing `ev : D ⊗ A ⟶ W` at an object `S`:
 `S ⊗ D ⟶ [A, S ⊗ W]`, the transpose of `A ⊗ (S ⊗ D) ≅ S ⊗ (D ⊗ A) ⟶ S ⊗ W`. -/
-noncomputable def kunnethMap {A D W : E} (ev : D ⊗ A ⟶ W) (S : E) :
+noncomputable def pairingKunnethMap {A D W : E} (ev : D ⊗ A ⟶ W) (S : E) :
     S ⊗ D ⟶ (ihom A).obj (S ⊗ W) :=
   curry ((β_ (S ⊗ D) A).inv ≫ (α_ S D A).hom ≫ S ◁ ev)
 
-lemma uncurry_kunnethMap {A D W : E} (ev : D ⊗ A ⟶ W) (S : E) :
-    uncurry (kunnethMap ev S) = (β_ (S ⊗ D) A).inv ≫ (α_ S D A).hom ≫ S ◁ ev :=
+lemma uncurry_pairingKunnethMap {A D W : E} (ev : D ⊗ A ⟶ W) (S : E) :
+    uncurry (pairingKunnethMap ev S) = (β_ (S ⊗ D) A).inv ≫ (α_ S D A).hom ≫ S ◁ ev :=
   uncurry_curry _
 
 /-- The Künneth map is natural in `S`. -/
 @[reassoc]
-lemma kunnethMap_naturality {A D W : E} (ev : D ⊗ A ⟶ W) {S S' : E} (f : S ⟶ S') :
-    f ▷ D ≫ kunnethMap ev S' = kunnethMap ev S ≫ (ihom A).map (f ▷ W) := by
-  rw [kunnethMap, ← curry_natural_left, kunnethMap, ← curry_natural_right]
+lemma pairingKunnethMap_naturality {A D W : E} (ev : D ⊗ A ⟶ W) {S S' : E} (f : S ⟶ S') :
+    f ▷ D ≫ pairingKunnethMap ev S' = pairingKunnethMap ev S ≫ (ihom A).map (f ▷ W) := by
+  rw [pairingKunnethMap, ← curry_natural_left, pairingKunnethMap, ← curry_natural_right]
   congr 1
   rw [BraidedCategory.braiding_inv_naturality_right_assoc, associator_naturality_left_assoc,
     ← whisker_exchange, Category.assoc, Category.assoc]
 
 /-- Whether the Künneth map is an isomorphism only depends on `S` up to isomorphism. -/
-lemma isIso_kunnethMap_iff_of_iso {A D W : E} (ev : D ⊗ A ⟶ W) {S S' : E} (e : S ≅ S') :
-    IsIso (kunnethMap ev S) ↔ IsIso (kunnethMap ev S') := by
-  have h : kunnethMap ev S' =
-      e.inv ▷ D ≫ kunnethMap ev S ≫ (ihom A).map (e.hom ▷ W) := by
-    rw [← kunnethMap_naturality, ← comp_whiskerRight_assoc, e.inv_hom_id, id_whiskerRight,
+lemma isIso_pairingKunnethMap_iff_of_iso {A D W : E} (ev : D ⊗ A ⟶ W) {S S' : E} (e : S ≅ S') :
+    IsIso (pairingKunnethMap ev S) ↔ IsIso (pairingKunnethMap ev S') := by
+  have h : pairingKunnethMap ev S' =
+      e.inv ▷ D ≫ pairingKunnethMap ev S ≫ (ihom A).map (e.hom ▷ W) := by
+    rw [← pairingKunnethMap_naturality, ← comp_whiskerRight_assoc, e.inv_hom_id, id_whiskerRight,
       Category.id_comp]
   rw [h, isIso_comp_left_iff, isIso_comp_right_iff]
 
 /-- The Künneth map only depends on the pairing up to isomorphism. -/
-lemma kunnethMap_comp_of_iso {A A' D D' W W' : E} (ev : D ⊗ A ⟶ W) (ev' : D' ⊗ A' ⟶ W')
+lemma pairingKunnethMap_comp_of_iso {A A' D D' W W' : E} (ev : D ⊗ A ⟶ W) (ev' : D' ⊗ A' ⟶ W')
     (a : A ≅ A') (d : D ≅ D') (w : W ≅ W') (h : d.hom ▷ A ≫ D' ◁ a.hom ≫ ev' = ev ≫ w.hom)
     (S : E) :
-    S ◁ d.hom ≫ kunnethMap ev' S =
-      kunnethMap ev S ≫ (ihom A).map (S ◁ w.hom) ≫ (pre a.inv).app (S ⊗ W') := by
+    S ◁ d.hom ≫ pairingKunnethMap ev' S =
+      pairingKunnethMap ev S ≫ (ihom A).map (S ◁ w.hom) ≫ (pre a.inv).app (S ⊗ W') := by
   apply uncurry_injective
-  rw [uncurry_natural_left, uncurry_kunnethMap]
+  rw [uncurry_natural_left, uncurry_pairingKunnethMap]
   conv_rhs => rw [← Category.assoc, uncurry_pre_app,
     uncurry_natural_right,
-    uncurry_kunnethMap]
+    uncurry_pairingKunnethMap]
   simp only [Category.assoc]
   rw [BraidedCategory.braiding_inv_naturality_right_assoc,
     BraidedCategory.braiding_inv_naturality_left_assoc, associator_naturality_middle_assoc,
@@ -99,11 +99,11 @@ lemma kunnethMap_comp_of_iso {A A' D D' W W' : E} (ev : D ⊗ A ⟶ W) (ev' : D'
     MonoidalCategory.whiskerLeft_id, Category.id_comp]
 
 /-- Whether the Künneth map is an isomorphism only depends on the pairing up to isomorphism. -/
-lemma isIso_kunnethMap_iff_of_iso_pairing {A A' D D' W W' : E} (ev : D ⊗ A ⟶ W)
+lemma isIso_pairingKunnethMap_iff_of_iso_pairing {A A' D D' W W' : E} (ev : D ⊗ A ⟶ W)
     (ev' : D' ⊗ A' ⟶ W') (a : A ≅ A') (d : D ≅ D') (w : W ≅ W')
     (h : d.hom ▷ A ≫ D' ◁ a.hom ≫ ev' = ev ≫ w.hom) (S : E) :
-    IsIso (kunnethMap ev S) ↔ IsIso (kunnethMap ev' S) := by
-  have e := kunnethMap_comp_of_iso ev ev' a d w h S
+    IsIso (pairingKunnethMap ev S) ↔ IsIso (pairingKunnethMap ev' S) := by
+  have e := pairingKunnethMap_comp_of_iso ev ev' a d w h S
   have : IsIso ((pre a.inv).app (S ⊗ W')) :=
     ⟨(pre a.hom).app _, by simp [← NatTrans.comp_app, ← pre_map], by
       simp [← NatTrans.comp_app, ← pre_map]⟩
@@ -111,11 +111,11 @@ lemma isIso_kunnethMap_iff_of_iso_pairing {A A' D D' W W' : E} (ev : D ⊗ A ⟶
     isIso_comp_left_iff]
 
 /-- The Künneth map of the evaluation pairing `[N, ω] ⊗ N ⟶ ω` at the unit is an isomorphism. -/
-lemma isIso_kunnethMap_unit (N ω : E) :
-    IsIso (kunnethMap ((β_ ((ihom N).obj ω) N).hom ≫ (ihom.ev N).app ω) (𝟙_ E)) := by
-  have : kunnethMap ((β_ ((ihom N).obj ω) N).hom ≫ (ihom.ev N).app ω) (𝟙_ E) =
+lemma isIso_pairingKunnethMap_unit (N ω : E) :
+    IsIso (pairingKunnethMap ((β_ ((ihom N).obj ω) N).hom ≫ (ihom.ev N).app ω) (𝟙_ E)) := by
+  have : pairingKunnethMap ((β_ ((ihom N).obj ω) N).hom ≫ (ihom.ev N).app ω) (𝟙_ E) =
       (λ_ _).hom ≫ (ihom N).map (λ_ ω).inv := by
-    rw [eq_comm, ← curry_uncurry ((λ_ _).hom ≫ _), kunnethMap]
+    rw [eq_comm, ← curry_uncurry ((λ_ _).hom ≫ _), pairingKunnethMap]
     congr 1
     rw [uncurry_natural_right, ← Category.comp_id (λ_ _).hom, uncurry_natural_left,
       uncurry_id_eq_ev]
@@ -199,17 +199,17 @@ include hπr hassoc
 /-- **Transport of the Künneth map.** Through the tensor maps `τ` and the internal Hom exchange,
 `R` of the Künneth map of `ev : D ⊗ A ⟶ W` at `S` is the Künneth map of
 `F D ⊗ F A ≅ F(D ⊗ A) ⟶ F W` at `R S`. -/
-theorem projectionTensorMap_comp_map_kunnethMap {A Dd W : D} (ev : Dd ⊗ A ⟶ W) (S : D) :
-    adj.projectionTensorMap π S Dd ≫ R.map (kunnethMap ev S) ≫ adj.ihomExchange π A (S ⊗ W) =
-      kunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S) ≫
+theorem projectionTensorMap_comp_map_pairingKunnethMap {A Dd W : D} (ev : Dd ⊗ A ⟶ W) (S : D) :
+    adj.projectionTensorMap π S Dd ≫ R.map (pairingKunnethMap ev S) ≫ adj.ihomExchange π A (S ⊗ W) =
+      pairingKunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S) ≫
         (ihom (F.obj A)).map (adj.projectionTensorMap π S W) := by
   apply uncurry_injective
   rw [uncurry_natural_left, uncurry_natural_left, ihomExchange, uncurry_curry,
-    uncurry_natural_right, uncurry_kunnethMap]
+    uncurry_natural_right, uncurry_pairingKunnethMap]
   rw [BraidedCategory.braiding_inv_naturality_right_assoc,
     BraidedCategory.braiding_inv_naturality_right_assoc,
     projectionTensorMap_naturality_left_assoc adj π hπ, ← R.map_comp,
-    BraidedCategory.braiding_naturality_left_assoc, ← uncurry_eq, uncurry_kunnethMap,
+    BraidedCategory.braiding_naturality_left_assoc, ← uncurry_eq, uncurry_pairingKunnethMap,
     Iso.hom_inv_id_assoc, R.map_comp]
   have ha := adj.projectionTensorMap_assoc π hπ δ hassoc S Dd A
   have hr := projectionTensorMap_naturality_right adj π hπr S ev
@@ -219,22 +219,22 @@ theorem projectionTensorMap_comp_map_kunnethMap {A Dd W : D} (ev : Dd ⊗ A ⟶ 
 /-- **Transport of the Künneth map.** If the tensor maps `τ` of `L ⊣ R` at `(S, D)` and
 `(S, W)` are isomorphisms, then `R` of the Künneth map of `ev : D ⊗ A ⟶ W` at `S` is an
 isomorphism if and only if the Künneth map of `F D ⊗ F A ≅ F(D ⊗ A) ⟶ F W` at `R S` is. -/
-theorem isIso_map_kunnethMap_iff {A Dd W : D} (ev : Dd ⊗ A ⟶ W) (S : D)
+theorem isIso_map_pairingKunnethMap_iff {A Dd W : D} (ev : Dd ⊗ A ⟶ W) (S : D)
     [IsIso (adj.projectionTensorMap π S Dd)] [IsIso (adj.projectionTensorMap π S W)] :
-    IsIso (R.map (kunnethMap ev S)) ↔ IsIso (kunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S)) := by
+    IsIso (R.map (pairingKunnethMap ev S)) ↔ IsIso (pairingKunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S)) := by
   have := adj.isIso_ihomExchange π hπ A (S ⊗ W)
-  have h := adj.projectionTensorMap_comp_map_kunnethMap π hπ hπr δ hassoc ev S
+  have h := adj.projectionTensorMap_comp_map_pairingKunnethMap π hπ hπr δ hassoc ev S
   constructor
   · intro
-    have : IsIso (kunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S) ≫
+    have : IsIso (pairingKunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S) ≫
         (ihom (F.obj A)).map (adj.projectionTensorMap π S W)) := by
       rw [← h]; infer_instance
     exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (adj.projectionTensorMap π S W))
   · intro
-    have : IsIso (adj.projectionTensorMap π S Dd ≫ R.map (kunnethMap ev S) ≫
+    have : IsIso (adj.projectionTensorMap π S Dd ≫ R.map (pairingKunnethMap ev S) ≫
         adj.ihomExchange π A (S ⊗ W)) := by
       rw [h]; infer_instance
-    have : IsIso (R.map (kunnethMap ev S) ≫ adj.ihomExchange π A (S ⊗ W)) :=
+    have : IsIso (R.map (pairingKunnethMap ev S) ≫ adj.ihomExchange π A (S ⊗ W)) :=
       IsIso.of_isIso_comp_left (adj.projectionTensorMap π S Dd) _
     exact IsIso.of_isIso_comp_right _ (adj.ihomExchange π A (S ⊗ W))
 
@@ -267,8 +267,8 @@ lemma projectionTensorMap_tensorLeftAdjunction (T : E) [HasRightDual T] (M N : E
 /-- **Tensoring with a dualizable object.** If the Künneth map of `ev` at `S` is an
 isomorphism, then so is the one at `T ⊗ S` for `T` with a right dual: this is the transport of
 the Künneth map along the adjunction `Tᘁ ⊗ - ⊣ T ⊗ -`. -/
-theorem isIso_kunnethMap_tensor_left {A D W : E} (ev : D ⊗ A ⟶ W) (T : E) [HasRightDual T]
-    (S : E) [IsIso (kunnethMap ev S)] : IsIso (kunnethMap ev (T ⊗ S)) := by
+theorem isIso_pairingKunnethMap_tensor_left {A D W : E} (ev : D ⊗ A ⟶ W) (T : E) [HasRightDual T]
+    (S : E) [IsIso (pairingKunnethMap ev S)] : IsIso (pairingKunnethMap ev (T ⊗ S)) := by
   have hπ : ∀ {M M' : E} (φ : M ⟶ M') (N : E),
       (tensorLeft Tᘁ).map φ ▷ N ≫ (α_ Tᘁ M' N).hom =
         (α_ Tᘁ M N).hom ≫ (tensorLeft Tᘁ).map (φ ▷ (𝟭 E).obj N) := fun φ N ↦ by
@@ -288,7 +288,7 @@ theorem isIso_kunnethMap_tensor_left {A D W : E} (ev : D ⊗ A ⟶ W) (T : E) [H
     rw [projectionTensorMap_tensorLeftAdjunction]; infer_instance
   have := hτ S D
   have := hτ S W
-  have h := (tensorLeftAdjunction T Tᘁ).isIso_map_kunnethMap_iff (F := 𝟭 E)
+  have h := (tensorLeftAdjunction T Tᘁ).isIso_map_pairingKunnethMap_iff (F := 𝟭 E)
     (fun M N ↦ (α_ Tᘁ M N).hom) hπ hπr (fun N N' ↦ 𝟙 _) hassoc ev S
   convert h.1 inferInstance using 2 <;> first | rfl | simp
 

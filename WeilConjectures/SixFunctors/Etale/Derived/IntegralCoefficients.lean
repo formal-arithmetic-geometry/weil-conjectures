@@ -60,6 +60,12 @@ open Scheme
 
 namespace Etale
 
+-- Elaborate the ring structure of the quotients `Λ ⧸ Iⁿ` through their commutative ring
+-- structure, as in the general results about `[CommRing Λ']` applied to them: the kernel compares
+-- `Ideal.Quotient.instRingQuotient` with `CommRing.toRing Ideal.Quotient.commRing` inside derived
+-- categories only very slowly.
+attribute [local instance 2000] CommRing.toRing
+
 set_option hygiene false in
 /-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
 local notation "𝐃(" X ", " Λ ")" =>
@@ -212,21 +218,14 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
   have ha : RingHom.ker (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) = Ideal.span {ϖ ^ n} := by
     rw [Ideal.mk_ker, Ideal.span_singleton_pow]
   obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
-  obtain ⟨eK⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη
-  obtain ⟨eL⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη'
-  obtain ⟨e₂⟩ := nonempty_iso_derivedRestrictScalars_derivedExtendScalars hφ ha X L
+  obtain ⟨e₂⟩ := nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange
+    (Λ' := Λ ⧸ Ideal.span {ϖ} ^ n) hφ ha X hη hη'
   let q := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
     (Ideal.quotientEquivAlgOfEq Λ
       (Ideal.mk_ker (I := Ideal.span {ϖ} ^ n))).toLinearEquiv.toModuleIso
-  let e₃ : (reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj L ≅
-      (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).obj Ln :=
+  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
     (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).mapIso
-      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso q)).symm ≪≫ e₂.symm ≪≫
-      (derivedRestrictScalars _ X).mapIso eL
-  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso e₃ ≪≫
-    (derivedHomRestrictScalarsIso hφ ha X K).app Ln ≪≫
-    (derivedRestrictScalars _ X).mapIso
-      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.symm.op).app Ln)⟩
+      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso q)).symm ≪≫ e₂⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.

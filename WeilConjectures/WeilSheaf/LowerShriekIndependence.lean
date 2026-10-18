@@ -42,6 +42,11 @@ This is the comparison of the blueprint (`prop-compactification-coherence-detail
 
 @[expose] public section
 
+-- A scheme lies over itself through the identity. Some imports also bring `specOverSpec` into
+-- scope, which makes `Spec R` lie over itself through `Spec` of the algebra map `R → R`; give
+-- the identity precedence, as in the files that do not import `specOverSpec`.
+attribute [instance 1100] CategoryTheory.instOverClass
+
 universe u
 
 open CategoryTheory Limits Endofunctor Pretriangulated

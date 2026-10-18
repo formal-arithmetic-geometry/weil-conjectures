@@ -87,6 +87,8 @@ theorem IsIrreducibleLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
   · have : IsIso i := IsIso.of_isIso_comp_right i e.inv
     exact Or.inr this
 
+set_option synthInstance.maxHeartbeats 100000 in
+-- instance search for the equivalence's functors is slow with the imports of this file
 /-- An autoequivalence `E` of Weil sheaves whose inverse preserves lisse sheaves maps irreducible
 lisse sheaves to irreducible lisse sheaves. -/
 theorem IsIrreducibleLisse.map_equivalence (E : WeilSheaf k₀ l X ≌ WeilSheaf k₀ l X)

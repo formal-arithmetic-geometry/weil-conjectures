@@ -30,6 +30,18 @@ restriction of scalars and monoidal. We deduce:
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedRestrictScalars_derivedExtendScalars`: with
   scalars restricted back to `Λ`, `K ⊗ᴸ_Λ Λ'` is the derived tensor product of `K` with the
   constant sheaf `Λ ⧸ (a)`.
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange`: for
+  derived base changes `K'`, `L'` of `K`, `L`, `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ (a))_X) ≅ Res RHom_{Λ'}(K', L')`
+  (used for blueprint `lem-coef-integral-hom-reduction`).
+
+## Implementation notes
+
+The monoidal comparison of the derived extension of scalars is obtained from the general
+`CategoryTheory.Functor.leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor`. For the kernel to
+compare its monoidal structures with those inside `AlgebraicGeometry.Etale.derivedTensor` cheaply,
+instance search must produce syntactically the same terms; this is ensured by the local instance
+attributes below (the braiding `SymmetricCategory.toBraidedCategory` of `ModuleCat` and
+`AlgebraicGeometry.Etale.sheafBraidedCategory`).
 -/
 
 @[expose] public section

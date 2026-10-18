@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 
