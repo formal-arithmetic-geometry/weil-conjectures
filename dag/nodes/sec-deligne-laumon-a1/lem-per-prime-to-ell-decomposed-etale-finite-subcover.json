@@ -13,9 +13,65 @@
   "def-weil-etale-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite affine cover in the hypothesis makes $X$ quasi-compact and locally Noetherian. Applying the Noetherian closed-subset minimality lemma gives the descending-chain condition on closed subsets. Hence every subset of $X$, in particular every open subset, is quasi-compact. A locally Noetherian scheme is quasi-separated, and a quasi-compact quasi-separated scheme has spectral underlying space. Therefore the constructible topology on $X$ is quasi-compact.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Corollary 2.2.4, printed p. 27, using compactness of the constructible topology; Noetherian-to-spectral facts are written out from the cited definitions and existing DAG lemmas."
+   }
+  },
+  {
+   "text": "For each $i\\in I$, put $C_i=\\operatorname{dec}_{\\ell'}(u_i)$, the set of points $x\\in X$ admitting $z\\in U_i$ above $x$ with finite residue degree $[\\kappa(z):\\kappa(x)]$ prime to $\\ell$. Each $u_i$ is étale and $X$ is Noetherian, so the pointwise locus node [lem-per-prime-to-ell-decomposed-locus-constructible] applies and says that $C_i$ is ind-constructible, equivalently open in the constructible topology. This argument does not require $U_i$ to be quasi-compact or separated.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-residue-field",
+    "lem-per-prime-to-ell-decomposed-locus-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 2.2.2, printed p. 26, applied to each $u_i$."
+   }
+  },
+  {
+   "text": "The covering hypothesis is exactly $X=\\bigcup_{i\\in I}C_i$. By Step 1, the constructible topology is quasi-compact, and by Step 2 the $C_i$ are open in it. Thus a finite subset $I_0\\subseteq I$ satisfies $X=\\bigcup_{i\\in I_0}C_i$. Unfolding the definition of $C_i$ gives, for every $x\\in X$, an index $i\\in I_0$ and a point $z\\in U_i$ over $x$ whose finite residue degree is prime to $\\ell$, which is the required conclusion. If $X$ is empty, take $I_0=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+    "lem-per-prime-to-ell-decomposed-locus-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Corollary 2.2.4, printed p. 27."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "lem-per-prime-to-ell-decomposed-locus-constructible",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 2.2.2 and Corollary 2.2.4, printed pp. 26–27; compactness supplied by Stacks Tag 0901."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-calculus",
@@ -66,7 +122,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Ancestor proof Step 3, finiteness/duality input through ILO IX 1.1, specifically the alteration-cover calculus used in the nodal quotient reduction: Expose II Corollary 2.2.4, printed p. 27, for a prime ell; Proposition 2.2.2 makes the prime-to-ell lifting loci open in the compact constructible topology.",
+   "place": "Ancestor proof Step 3, finiteness/duality input through ILO IX 1.1, specifically the finite prime-to-ell extraction from Expose II Corollary 2.2.4 and its pointwise locus from Proposition 2.2.2, printed pp. 26–27.",
    "via": [
     "lem-per-alteration-cover-calculus",
     "lem-per-uniformization-nodal-quotient-reduction",
@@ -81,5 +137,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-to-ell-decomposed-etale-finite-subcover",
+  "worker": "stage1",
+  "summary": "Split the ILO finite-extraction argument into the Noetherian constructible-compactness reduction, the prime-to-ell ind-constructible locus for each etale member, and finite selection. Added one statement-only node for ILO II Proposition 2.2.2; the existing completely decomposed finite-subcover item was checked and not reused because degree one is a strictly stronger condition than degree prime to ell. The item statement and hypotheses are unchanged.",
+  "blueprint": "The ancestor proof Step 3 uses ILO II Corollary 2.2.4 in its finite prime-to-ell alteration-cover calculus. The three steps realize that finite extraction and its Proposition 2.2.2 pointwise input."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-f0747e1f5",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-f0747e1f5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement against ILO Exposé II 2.2.1, Prop 2.2.2, Cor 2.2.4 and Prop 1.2.7 (printed pp. 26–27). The item statement is byte-identical to the live base node and is exactly 2.2.4 for a prime ℓ. The new node lem-per-prime-to-ell-decomposed-locus-constructible is exactly 2.2.2. Its claim 'equivalently open in the constructible topology' is correct: on a Noetherian X every open is quasi-compact, so with the def's subbase (qc opens and their complements) the open sets are exactly the unions of locally closed sets. I tested the new node on Spec Z[i][1/2] → Spec Z[1/2]. For ℓ=2 the locus is the closed points p≡1 mod 4 and the generic point, of degree 2, is correctly left out; for ℓ=3 the locus is all of X. It also holds for a non-quasi-compact Y. It is true by the degree-sum argument of 1.2.7. Step 1 is the same Noetherian → spectral → compact constructible topology chain as the accepted completely-decomposed sibling, and each cited statement says what the step uses. Step 2's hypotheses match the new node's exactly. Step 3 applies the compactness statement directly; X empty gives I_0 empty. The new node is not a duplicate: no blueprint node (main-20261015 or master) states it, and the degree-one nodes completely-decomposed-finite-subcover and rational-lift-locally-closed-section neither imply it nor follow from it. It is strictly smaller than the item, so this is not a relabelling (D1). It has no SGA citation and no trf node. Its blueprint fields are correct: ancestor lem-per-artin-gabber-affine-curve, via list starting with the item, same_as empty. Advisory: the new node's Loogle entry failed with an unknown identifier but is recorded as 'no match' (B7); the other three searches are real. No fixes."
  }
 }
