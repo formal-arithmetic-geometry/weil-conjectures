@@ -265,6 +265,10 @@ variable [IsCurve (U ↘ Spec (.of K))] [GeometricallyConnected (U ↘ Spec (.of
   (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
   [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
 
+omit [C.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))]
+  [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [j.IsOver (Spec (.of K))]
+  [IsCurve (U ↘ Spec (.of K))] in
 /-- **Galois automorphisms acting on `k̄` as a Frobenius power lie in the Weil group.** If
 `σ ∘ ι = ι ∘ Φⁿ` on `k̄`, `Φ` the geometric Frobenius, then `(ρ(σ), n)` lies in the Weil group:
 on the fibre at the generic point of a constant cover `U₀ ×_{k₀} Spec A`, consisting of the
@@ -313,6 +317,7 @@ set_option maxHeartbeats 1600000 in
 -- the construction combines the Galois action with the neighbourhood of a compatible point
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [IsCurve (U ↘ Spec (.of K))] in
 /-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
 `lem-wf-boundary-stalk-invariants`). For a boundary point `z` with closed point `x`, there is
 `σ ∈ Gal(Ω / k(C))` whose image in `π₁(U₀)` lies in the Weil group (with some degree `n`) such that

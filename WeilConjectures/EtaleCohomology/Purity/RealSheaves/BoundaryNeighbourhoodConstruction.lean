@@ -186,6 +186,7 @@ set_option maxHeartbeats 3200000 in
 -- the construction assembles many morphisms of schemes over `C̄` and `Ū`
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- **A strictly henselian neighbourhood of a boundary point from a compatible point.** Let `c`
 be an affine chart at the boundary point `z` with closed point `x`, `Q` a maximal ideal over `z`
 of the integral closure of `Γ(C, W)` in `Ω`, compatible with `x̄` and the geometric generic
@@ -193,7 +194,6 @@ point: `ι(ι_x(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`, where `ι : k̄ ↪ Ω` 
 `ι_x : κ(x) ↪ k̄` the embedding of `x̄`. Let `σ_F` be an element of the decomposition group of
 `Q` acting on `ι(k̄)` as the `deg x`-th power of the geometric Frobenius. Then the inertia
 invariants `B_Q^{I_Q}` give a strictly henselian neighbourhood of the boundary point for the
-omit [GeometricallyConnected (C ↘ Spec (CommRingCat.of K))] in
 inertia group of `Q` and `σ_F`. (blueprint `lem-wf-boundary-stalk-invariants`) -/
 theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.range j.base)
     (c : BoundaryChart (C ↘ Spec (.of K)) j z) (x : C.finitePoints) (hx : x.1 = z)

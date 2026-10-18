@@ -77,6 +77,7 @@ instance : c.ideal.IsMaximal := c.isMaximal_ideal
 
 omit [IsAlgClosed k] [SmoothOfRelativeDimension 1 p] [Smooth p] [ConnectedSpace C]
   [ConnectedSpace U] [IsLocallyNoetherian C] in
+include p in
 /-- A boundary point with a chart is closed. -/
 lemma isClosed_singleton (hz : z ∉ Set.range j.base) : IsClosed ({z} : Set C) := by
   obtain ⟨u₀⟩ := (inferInstance : Nonempty U)
@@ -88,6 +89,7 @@ omit [IsAlgClosed k] [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsInteg
 lemma ideal_ne_bot (hz : z ∉ Set.range j.base) : c.ideal ≠ ⊥ := fun h ↦
   c.ϖ_ne_zero hz (by simpa [h] using c.ϖ_mem)
 
+omit [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsLocallyNoetherian C] in
 /-- The residue field of the chart at the boundary point is algebraically closed. -/
 lemma isAlgClosed_residueField (hz : z ∉ Set.range j.base) : IsAlgClosed c.ideal.ResidueField := by
   let z' : c.W := ⟨z, c.mem⟩
@@ -110,6 +112,7 @@ noncomputable def heightOneSpectrum (hz : z ∉ Set.range j.base) :
 
 set_option maxHeartbeats 400000 in
 -- the localization instances at the stalk are slow
+omit [IsAlgClosed k] [ConnectedSpace U] in
 /-- The `m`-adic valuation at the boundary point of a nonzero rational function `f` is
 `exp (- ord_z f)`. -/
 lemma valuation_eq_exp_neg_ord (hz : z ∉ Set.range j.base) {f : C.functionField} (hf : f ≠ 0) :
@@ -188,6 +191,7 @@ lemma valuation_eq_exp_neg_ord (hz : z ∉ Set.range j.base) {f : C.functionFiel
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [ConnectedSpace U] in
 /-- **An `N`-th root fixed by inertia.** If an `N`-th root in `Ω` of a nonzero rational function
 `f` is fixed by the inertia group of a point over the boundary point `z`, then `N` divides the
 order of vanishing of `f` at `z`. -/
@@ -209,9 +213,9 @@ set_option maxHeartbeats 400000 in
 -- the localization instances at the stalk are slow
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsLocallyNoetherian C] in
 /-- **Inertia fixes `N`-th roots of units.** The inertia group of a point over the boundary point
 `z` fixes every `N`-th root in `Ω` of a unit of the local ring at `z`, for `N` invertible in
-omit [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsLocallyNoetherian C] in
 `k`. -/
 theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [Q.IsMaximal]
     [Q.LiesOver c.ideal] {σ : Gal(Ω/C.functionField)}
@@ -282,6 +286,7 @@ theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [ConnectedSpace U] in
 /-- **`N`-th roots of functions of order divisible by `N`.** If `N` is invertible in `k` and
 divides the order of vanishing at the boundary point `z` of a nonzero rational function `f`, then
 the inertia group of a point over `z` fixes every `N`-th root of `f` in `Ω`. -/

@@ -351,7 +351,7 @@ lemma specMap_comp_specInertiaInvariantsTo_of_compatible
   obtain ⟨b, hbQ, hb⟩ := hQ a
   set c := ι (sectionsResidue x hxW a)
   have hd : ¬ IsUnit (ε c - algebraMap Γ(C, W) _ a) :=
-    not_isUnit_of_inertiaInvariantsToField_mem hW Q hbQ (by
+    not_isUnit_of_inertiaInvariantsToField_mem Q hbQ (by
       rw [map_sub, hε, AlgHom.commutes, hb])
   have h0 := (hr _).2 hd
   rw [map_sub, sub_eq_zero, show r (ε c) = c from RingHom.congr_fun hrε c] at h0
@@ -406,10 +406,9 @@ lemma residueFieldAlgebraMap_eq_comp :
   simp only [h, sectionsResidue, Category.assoc, CommRingCat.ofHom_comp, Spec.map_comp,
     CommRingCat.ofHom_hom, Spec.map_preimage]
 
-omit [IsDedekindDomain Γ(C, W)] in
+omit [IsDedekindDomain Γ(C, W)] [Finite k₀] in
 /-- **The embedding of the residue field induced by a point over `x`.** For an embedding
 `ε₀ : k̄ ↪ Ω` over `k₀` and a maximal ideal `Q` over `x`, there is a `k₀`-embedding
-omit [Finite k₀] in
 `ι₀ : κ(x) ↪ k̄` such that `ε₀(ι₀(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`. -/
 theorem exists_residueField_emb_compatible (ε₀ : AlgebraicClosure k₀ →+* Ω)
     (hε₀ : ε₀.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
