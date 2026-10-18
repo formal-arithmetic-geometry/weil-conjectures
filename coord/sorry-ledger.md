@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **3849**, closure **145**, holes in definitions **9**, definitions with undetermined data **318** (closure **3**).
+Holes now: library **3849**, closure **144**, holes in definitions **9**, definitions with undetermined data **318** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -341,22 +341,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 3683 | 48 |
+| Sheaf | 3683 | 47 |
 | WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
 | 889327369 (Queue at the start of stage 3) | library | 1808 | 3461 | -1653 | 733 | 14 |
 | 660345513 (Application of proof-dependency imports) | library | 1805 | 3460 | -1655 | 679 | 14 |
-| 660345513 (Application of proof-dependency imports) | closure | 1500 | 76 | 1424 | 603 | 0 |
+| 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 4215 |
+| proved | 4216 |
 | decomposed | 56 |
-| moved | 4159 |
+| moved | 4160 |
 | pruned | 147 |
 | other | 634 |
 
@@ -366,7 +366,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 142 | 141 | 102 | 39 | 73/142 (51.4%) |
-| A3 | 142 | 140 | 91 | 49 | 62/142 (43.7%) |
+| A3 | 143 | 141 | 91 | 50 | 62/143 (43.4%) |
 | A4 | 92 | 108 | 55 | 53 | 42/92 (45.7%) |
 | A5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | A6 | 3 | 4 | 0 | 4 | 0/3 (0.0%) |
@@ -382,7 +382,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | B8 | 2 | 6 | 0 | 6 | 0/2 (0.0%) |
 | B9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | C1 | 156 | 160 | 118 | 42 | 77/156 (49.4%) |
-| C2 | 135 | 129 | 87 | 42 | 60/135 (44.4%) |
+| C2 | 136 | 130 | 89 | 41 | 61/136 (44.9%) |
 | C3 | 127 | 135 | 82 | 53 | 57/127 (44.9%) |
 | C4 | 73 | 73 | 35 | 38 | 23/73 (31.5%) |
 | C5 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
@@ -585,7 +585,6 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.ZetaFunction.TraceFormula | 2 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded | 3 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | — |
-| Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction | 3 | 1 | A3 |
 | Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | C3 |
 | WeilConjectures.WeilSheaf.PoincareDuality | 3 | 1 | — |
 | Sheaf.CategoryTheory.RingedDerivedRestriction | 4 | 1 | — |
@@ -600,6 +599,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound | 5 | 1 | D4 |
 | Sheaf.CategoryTheory.Galois.GaloisTransitive | 5 | 1 | — |
 | Sheaf.WeilSheaf.AffineCurveRangePositive | 5 | 1 | — |
+| Sheaf.WeilSheaf.FiniteBoundaryPositive | 5 | 1 | — |
 
 Modules pruned since the imports baseline:
 
