@@ -41,11 +41,11 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `lem-zl-condensed-point-supertrace` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-def-sfb-constructible-local-model` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-def-sfb-constructible-local-model` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-def-localizing-closure-ctf-equals-bc` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-def-localizing-closure-ctf-equals-bc` |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `lem-pd-module-ringed-topos-derived-comparison` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-frobenius-cohomology-transport` |
-| `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `lem-zl-constant-extension-weil-heart-equivalence` |
+| `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `sk-l-dl-general-quasifinite` |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 4 | 1 | `thm-sf-ctf-stability` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-ambient-ind-derived-sums` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-trf-rational-local-frobenius-powers` |
