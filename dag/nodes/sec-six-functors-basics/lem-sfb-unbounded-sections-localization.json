@@ -17,53 +17,48 @@
  ],
  "proof": [
   {
-   "text": "The underlying categories of $\\mathcal C$ and of $\\mathcal C/W$ are small (an object of $\\mathcal C/W$ is an arrow $V\\to W$ of $\\mathcal C$), and $\\mathcal O$, $\\mathcal O_W$ are sheaves of commutative rings, so [prop-pur-kinjective-resolutions-exist] applies on both sites: $\\operatorname{Mod}(\\mathcal O)$ and $\\operatorname{Mod}(\\mathcal O_W)$ have K-injective resolutions. Hence the right-derived-functor clause of [sk-def-sfb-derived-categories] applies to the additive functors of evaluation at $W$ and at $\\operatorname{id}_W$ (followed by forgetting scalars): their total right derived functors on the unbounded derived categories are computed by applying the functor termwise to a K-injective resolution. Choose a K-injective cochain complex $I$ representing $K$. Apply [lem-pur-kinjective-restrict-localized] with the ring sheaf $\\mathcal O$ and object $W$: the termwise restriction $I|_W$, which represents $j_W^*K$, is K-injective on the localized ringed site. Hence $R\\Gamma(W,K)$ is represented by the complex $I(W)$, while $R\\Gamma(\\mathcal C/W,j_W^*K)$ is represented by $(I|_W)(\\operatorname{id}_W)$.",
+   "text": "The site and its slice are small in the common universe. Apply the existing proved source theorem SheafOfModules.isGrothendieckAbelian (WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian) on each. This is the common-universe special case of the ring-sheaf Grothendieck property appearing in the statement; no independent-universe transport theorem is needed. The proved Grothendieck-category K-injective-resolution instance supplies all resolution hypotheses of the total right derived functors in the statement. Restriction is additive directly by sectionwise extensionality. By [lem-pur-kinjective-restrict-localized], its termwise functor preserves K-injective complexes. Package this as PreservesKInjectiveComplexes.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "sk-def-sfb-derived-categories",
     "lem-pur-kinjective-restrict-localized"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI and 0D6F; choose a K-injective representative and restrict it"
+    "place": "Tags 08FI and 0D6F; restriction of K-injective representatives"
    }
   },
   {
-   "text": "By the sectionwise definition of localized restriction [def-pur-localized-ringed-site], for every degree $n$ one has $I^n(W)=((I|_W)^n)(\\operatorname{id}_W)$, and the restriction of the differential $d_I^n$ at $\\operatorname{id}_W$ is exactly $d_I^n(W)$. Thus the two displayed representatives are the same cochain complex after forgetting scalars, and the comparison is the degreewise identity.",
+   "text": "By [def-pur-localized-ringed-site], restriction followed by evaluation at id_W and forgetting scalars is definitionally evaluation at W and forgetting scalars, on both objects and morphisms. This remains the literal identity on termwise complexes and differentials, as sectionComplexIdentity records.",
    "uses": [
     "def-pur-localized-ringed-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6F proof, displayed identity Γ(W,I•)=Γ(C/W,I•|C/W)"
+    "place": "Tag 0D6F proof, identity of the two section complexes"
    }
   },
   {
-   "text": "The identity in the preceding step commutes with every chain map. A morphism $K\\to K'$ of $D(\\operatorname{Mod}(\\mathcal O))$ between objects represented by K-injective complexes $I,I'$ is the class of a chain map $f:I\\to I'$, unique up to homotopy, by [lem-weil-pbc-kinjective-hom-derived]; its restriction $f|_W$ represents $j_W^*$ of that morphism, and $(f|_W)(\\operatorname{id}_W)=f(W)$ as maps of complexes. Taking $f$ a quasi-isomorphism between two K-injective representatives of $K$ shows that the identification does not depend on the representative. Since both sides are the total right derived functors computed on K-injectives by [sk-def-sfb-derived-categories], this strict complex identity therefore gives the canonical natural isomorphism $R\\Gamma(W,K)\\cong R\\Gamma(\\mathcal C/W,j_W^*K)$ in $D(\\operatorname{Ab})$. Applying the cohomology functor in degree $q$ gives the stated isomorphism $H^qR\\Gamma(W,K)\\cong H^qR\\Gamma(\\mathcal C/W,j_W^*K)$ for every integer $q$, with no boundedness restriction.",
+   "text": "Apply the existing closed unbounded composition theorem [lem-fin-kinjective-derived-composition] to restriction F and localized evaluation G, with H=F composed with G and the identity comparison, using its underlying rightDerivedFunctorCompIso. This gives the required natural isomorphism because F composed with G is definitionally evaluation at W. For normalization, evaluate rightDerivedNatTrans_app, the universal factorization equation defining the composition comparison, on the homotopy quotient of a K-injective I. Its right-hand side is the composite derived unit: the G-unit followed by G applied to the F-unit. Both units are invertible since I and F(I) are K-injective. Cancel the units, and use naturality of the comparison along quotientCompQhIso.inv. Expanding rightDerivedFunctorObjQIso cancels the intermediate quotientCompQhIso and its inverse, giving precisely the equation with Q of sectionComplexIdentity. Finally apply homologyFunctor in any integer degree to the component of this natural isomorphism. These are purely categorical unit and isomorphism calculations and impose no boundedness condition.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "sk-def-sfb-derived-categories"
+    "lem-fin-kinjective-derived-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6F conclusion and naturality of the K-injective computation"
+    "place": "Tag 0D6F, K-injective computation; implemented with the existing derived composition universal unit"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
   "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "prop-pur-kinjective-resolutions-exist",
-  "sk-def-sfb-derived-categories"
+  "def-pur-localized-ringed-site",
+  "lem-fin-kinjective-derived-composition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6F (lemma-unbounded-cohomology-of-open), statement and K-injective proof; Tag 08FI for restriction of K-injectives"
+  "place": "Tags 08FI and 0D6F; existing source composition theorem and direct unit-normalization calculation, formalized by A8"
  },
  "mathlib_searches": [
   {
@@ -149,10 +144,8 @@
   ]
  },
  "tool_uses": [
-  "sk-def-sfb-derived-categories",
   "lem-pur-kinjective-restrict-localized",
-  "def-pur-localized-ringed-site",
-  "prop-pur-kinjective-resolutions-exist"
+  "def-pur-localized-ringed-site"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -191,5 +184,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Natural isomorphism of total right derived functors, normalized on every K-injective representative by Q of the literal section-complex identity. All integer cohomology degrees are included. The common-universe hypothesis is encoded by C, its arrows, ring values and module values in u; localization Hom universes w and z are independent. The additional already landed statement dependency supplies Grothendieck abelianness for arbitrary ring sheaves, without imposing commutativity."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261018T150144-L-3798734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
