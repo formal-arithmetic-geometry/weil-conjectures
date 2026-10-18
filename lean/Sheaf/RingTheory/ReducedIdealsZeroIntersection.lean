@@ -44,6 +44,30 @@ theorem reduced_ideals_zero_intersection
     I ⊓ J = ⊥ ∧
       ∃ e : I ≃ₗ[A] (Ideal.map (Ideal.Quotient.mk J) I),
         ∀ x : I, (e x : A ⧸ J) = Ideal.Quotient.mk J (x : A) := by
-  sorry
+  have hinf : I ⊓ J = ⊥ := by
+    apply le_antisymm _ bot_le
+    have hnil := (PrimeSpectrum.zeroLocus_eq_univ_iff ((I ⊓ J : Ideal A) : Set A)).mp
+      ((PrimeSpectrum.zeroLocus_inf I J).trans hcover)
+    rw [← SetLike.coe_subset_coe]
+    simpa only [nilradical_eq_zero, Ideal.zero_eq_bot] using hnil
+  let f : I →ₗ[A] Ideal.map (Ideal.Quotient.mk J) I :=
+    { toFun := fun x ↦ ⟨Ideal.Quotient.mk J x, Ideal.mem_map_of_mem _ x.property⟩
+      map_add' := fun x y ↦ Subtype.ext (map_add (Ideal.Quotient.mk J) (x : A) (y : A))
+      map_smul' := fun a x ↦ Subtype.ext (map_smul (Ideal.Quotient.mkₐ A J).toLinearMap a (x : A)) }
+  have hf : Function.Bijective f := by
+    constructor
+    · intro x y hxy
+      apply Subtype.ext
+      apply sub_eq_zero.mp
+      have hJ : (x : A) - (y : A) ∈ J :=
+        (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mp (congrArg Subtype.val hxy)
+      have hIJ : (x : A) - (y : A) ∈ I ⊓ J := ⟨I.sub_mem x.property y.property, hJ⟩
+      simpa only [hinf, Ideal.mem_bot] using hIJ
+    · intro y
+      obtain ⟨x, hx, hxy⟩ :=
+        (Ideal.mem_map_iff_of_surjective (Ideal.Quotient.mk J)
+          Ideal.Quotient.mk_surjective).mp y.property
+      exact ⟨⟨x, hx⟩, Subtype.ext hxy⟩
+  exact ⟨hinf, LinearEquiv.ofBijective f hf, fun _ ↦ rfl⟩
 
 end Ideal
