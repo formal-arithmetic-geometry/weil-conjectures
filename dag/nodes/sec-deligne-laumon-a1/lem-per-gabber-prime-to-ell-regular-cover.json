@@ -17,9 +17,106 @@
   "def-weil-finite-type-morphism",
   "def-trf-strict-normal-crossings-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-per-uniformization-nodal-quotient-reduction]. Its hypothesis is an assertion about marked nodal quotient models, not uniformization for general schemes. We prove that hypothesis in Steps 2--6, with arbitrary data $Y,T,G,Y',b,C,f,D,\\pi:C\\to X$ and effective Cartier divisor $E$ exactly as introduced in its statement. In particular $Y$ is affine excellent regular, $Y'$ is the normalization in a connected finite etale $G$-torsor off $T$, $C$ is integral excellent, and $\\pi^{-1}|E|\\subseteq B:=|D|\\cup f^{-1}b^{-1}|T|$. No regularity of $X=C/G$ is assumed.",
+   "uses": [
+    "lem-per-uniformization-nodal-quotient-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3--1.4, pp. 132--133"
+   }
+  },
+  {
+   "text": "The order of $G$ is a power of $\\ell$, hence invertible on $Y$. Apply [lem-per-tame-normalization-log-regular] to $Y,T$ and the connected finite etale $G$-torsor $b^{-1}(Y\\setminus|T|)\\to Y\\setminus|T|$. Its normalization is the given $Y'$, so $(Y',b^{-1}|T|)$ is a log regular pair. This step asserts log regularity of $Y'$, not regularity of its underlying scheme.",
+   "uses": [
+    "lem-per-tame-normalization-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1--2.2, pp. 133--134"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-log-regularity] to $f:C\\to Y'$ and the closed subset $b^{-1}|T|$, with the given marking $D$. The model supplies projectivity, hence properness, as well as flatness and finite presentation; all geometric fibres are nonempty connected nodal curves; $f$ is smooth away from $b^{-1}|T|$; and $D$ is effective Cartier, etale over $Y'$ and contained in the relative smooth locus. Thus $B$ is nowhere dense and $(C,B)$ is log regular. All conditions, including properness of the nodal morphism, are present in the model.",
+   "uses": [
+    "lem-trf-nodal-log-regularity",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.2, p. 134; VI 1.9, pp. 70--71"
+   }
+  },
+  {
+   "text": "The action preserves $B$. It is free on $f^{-1}(b^{-1}(Y\\setminus|T|))$: a geometric stabilizer there maps to the stabilizer of its image in the $G$-torsor, which is trivial. This open contains $C\\setminus B$ and is dense by Step 3. Its order is invertible on $C$. The model assumes admissibility and the integral excellent scheme quotient $X$. The marked model includes separatedness and Noetherianity of $C$. Apply [lem-per-tame-log-quotient-modification] to obtain an integral excellent Noetherian $M$, a proper birational $\\rho:M\\to X$, and a log regular pair $(M,B_M)$ with $\\rho^{-1}\\pi(B)\\subseteq B_M$. Since $\\pi$ is surjective and $\\pi^{-1}|E|\\subseteq B$, every point of $|E|$ belongs to $\\pi(B)$; hence $\\rho^{-1}|E|\\subseteq B_M$.",
+   "uses": [
+    "lem-per-tame-log-quotient-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.3--2.4, p. 134"
+   }
+  },
+  {
+   "text": "Apply [lem-per-noetherian-log-pair-strict-resolution] to $(M,B_M)$. It gives a proper birational $e:R\\to M$, with $R$ integral regular Noetherian, and a strict normal crossings boundary $A$ satisfying $e^{-1}B_M\\subseteq|A|$. Consequently $r=\\rho e:R\\to X$ is proper birational and $r^{-1}|E|\\subseteq |A|$. The properness of the composite follows from [lem-weil-pbc-proper-composition]; birationality follows by intersecting the dense opens on which the two morphisms are isomorphisms.",
+   "uses": [
+    "lem-per-noetherian-log-pair-strict-resolution",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, p. 134"
+   }
+  },
+  {
+   "text": "We check the exact original boundary, rather than only containment in $A$. Locally $E$ has one nonzero equation $a$; its pullback to the integral scheme $R$ remains nonzero because $r$ is dominant. At a point of $R$, the resolution statement gives parameters $t_1,\\ldots,t_s$ for the components of $A$. The support inclusion means that $a$ is a unit after inverting $t_1\\cdots t_s$. By [lem-trf-regular-local-ufd-boundary-factorization], $a=u\\prod t_i^{n_i}$ for a unit $u$ and $n_i\\geq0$. Its reduced support is the union of exactly the branches with $n_i>0$. These local descriptions show that the global reduced inverse image is a union of components of $A$: a selected branch contains an open subset of its integral component, whose closure lies in the closed inverse image. By [def-trf-strict-normal-crossings-boundary], deleting components preserves the defining regular-intersection and codimension conditions, and the reduced local equation is the product of the selected distinct parameters, an effective Cartier ideal. Thus $r^{-1}|E|$ is precisely the support of a strict normal crossings boundary. If $s=0$, $a$ is a unit and that boundary is empty. This proves the marked nodal quotient assertion required in Step 1.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, last paragraph, p. 134; VIII 4.2.2(i), p. 118"
+   }
+  },
+  {
+   "text": "The implication in [lem-per-uniformization-nodal-quotient-reduction], now with its marked-model hypothesis proved, applies to the given $S,Z,\\ell$. It produces a finite covering family $q_b:T_b\\to S$ in $\\operatorname{alt}/S$, with $T_b$ regular Noetherian and the exact support $q_b^{-1}Z$ a strict normal crossings boundary. By [def-per-prime-to-ell-alteration-topology], objects of $\\operatorname{alt}/S$ are finite-type morphisms. These are all clauses of the item. In particular no finite-dimensional or excellence assumption has been imposed on the original quasi-excellent $S$.",
+   "uses": [
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3--1.4 and 2.4; III 6.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-uniformization-nodal-quotient-reduction",
+  "lem-per-tame-normalization-log-regular",
+  "lem-trf-nodal-log-regularity",
+  "lem-kun-projective-implies-proper",
+  "lem-per-tame-log-quotient-modification",
+  "lem-per-noetherian-log-pair-strict-resolution",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-per-prime-to-ell-alteration-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX proof of Theorem 1.1, 1.3--2.4, pp. 132--134"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +152,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"e073f7ab5011e5b1\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber prime to ell alteration covering by regular schemes with strict normal crossings boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X.RationalMap Y) → (↑f.domain).OpenCover\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this constructs an open cover of the domain of $f$ using the domains of all partial maps equivalent to $f$. The cover consists of open immersions wh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.mkOfCovers_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} (J : Type u_1)\\n  (obj : J → AlgebraicGeometry.Scheme) (map : (j : J) → obj j ⟶ X)\\n  (covers : ∀ (x : ↥X), ∃ j y, (CategoryTheory.ConcreteCategory.hom (map j).base) y = x)\\n  (map_prop : autoParam (∀ (j : J\", \"doc\": \"Given a scheme $X$, a morphism property $P$, an index type $J$, a family of schemes $Y_j$ indexed by $J$, and morphisms $f_j: Y_j \\\\to X$ that are jointly surjective (their images cover $X$) and satisf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝓤 : X.OpenCover) → 𝓤.affineRefinement.openCover ⟶ 𝓤\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs a morphism from the affine refinement of $\\\\mathcal{U}$ to $\\\\mathcal{U}$ itself. The affine refinement is an open cov\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X)\\n  [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] [inst_1 : 𝒰.LocallyDirected] {i j : 𝒰.I₀} (xi : ↥(𝒰.X i))\\n  (xj : ↥(𝒰.X\", \"doc\": \"For any locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ satisfy $\\\\mathcal{U}.f(i)(x_i) = \\\\mathcal{U}.f(j)(x_j)$ in $X$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → Type v\", \"doc\": \"Given a morphism property $ P $ on schemes and a scheme $ S $, this type represents the indexing data associated with an affine cover satisfying property $ P $ over $ S $. It is constructed from the a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local uniformization of quasi excellent schemes by regular pairs in the alteration topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsProper\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \" {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [self : P.IsRegular] : P.IsProper\", \"doc\": \"\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\", \"type\": \" {X : SSet} {A : X.Subcomplex} {h : A.PairingCore} [self : h.IsRegular] : h.IsProper\", \"doc\": \"\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "Gabber|[Uu]niformi[sz]ation|[Aa]lteration|[Nn]ormal[Cc]rossing",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"line\": \"27\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"line\": \"25\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean\", \"line\": \"35\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi excellent Noetherian scheme has a prime to ell alteration cover resolving a closed subset",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : NoetherianSpace X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.OpenCover} (i) [IsLocallyNoetherian X] : IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsLocallyNoetherian X] : QuasiSeparatedSpace X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-uniformization-standard-form",
@@ -82,5 +214,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gabber-prime-to-ell-regular-cover",
+  "worker": "stage1",
+  "summary": "Follows ILO IX: reduce to marked nodal ell-group quotient models; regularize the normalized tame base logarithmically; reuse the marked nodal log-regularity theorem; apply a tame quotient modification and general excellent log-pair resolution; recover the exact original boundary by the existing local UFD factorization. Four genuine statement-only inputs are separated, with actual logged Mathlib searches. The original statement is unchanged.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, historical proof Step 3 (Verdier duality) via the finiteness chain; realizes the IX 1.1 input used in XIII 3.2.1 and the existing prime-to-ell standard-form proof. Current main-20261015 ancestor has no proof text; no claim that it contains an explicit uniformization proof.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-log-regularity",
+    "why": "Generic log-geometry, local-algebra, or properness tool used in the IX uniformization argument; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic log-geometry, local-algebra, or properness tool used in the IX uniformization argument; this unit has no replacement statement."
+   },
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Generic log-geometry, local-algebra, or properness tool used in the IX uniformization argument; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "The marked nodal model is projective; the nodal log-regularity input requires properness. This is a generic scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-log-regularity",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-9bbe92fc8",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-9bbe92fc8 (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes and every cited statement in full. Sources checked: ILO IX 1.1-2.4 (pp. 131-134), VII 4.3 (pp. 82-83), VIII 1.1 (p. 85) and 4.1.1-4.1.8 (pp. 117-118). The item statement is unchanged; it is IX 1.1 without the connectedness clause, so nothing is weakened. Step-by-step checks: Step 2 tame normalization (order ell^k is invertible, Y' is the normalization in kappa(V')). Step 3 nodal log regularity (all hypotheses hold; proper comes from projective via lem-kun-projective-implies-proper). Step 4 VIII 1.1 + VI 3.2 quotient modification (action is free on f^-1 b^-1 V; pi is surjective, so rho^-1|E| is inside B_M). Step 5 strict resolution, with the composite proper and birational. Step 6 elementary: a nonzero divides T^n, so 0AG0 factorization applies; the selected components form an snc subfamily with radical Cartier ideal (prod t_i). Step 7 is the reduction's conclusion verbatim. All four new nodes are true and tested on small cases (T empty, G trivial, B empty, enlarged boundary for an empty initial boundary). The reduction node is the IX 1.3-1.4 implication, whose antecedent is exactly situation (*) of 1.4. That antecedent is proved in Steps 2-6, so this is not a D1/D2 relabelling. No duplicates: the trf desingularization and strictification nodes work over a field, and the trf Kato tower nodes give only nc boundaries. No SGA citations and no cycle. Batch 5: the closure computed from both targets, with and without the delivery, differs only by the four new nodes. All flagged citations are already in the base closure and are generic: lem-trf-nodal-log-regularity (ILO VI 1.9 log geometry), lem-trf-regular-local-ufd-boundary-factorization (Stacks 0AG0 algebra), and the definitions def-trf-log-regular-pair and def-trf-strict-normal-crossings-boundary. None is given by the trace formula or PD, so the escape clause applies. I accept the worker's tool_uses (generic tools that unit sk-p-dl-a1-perverse does not state); recording them is left to the maintainer at the merge (C8)."
  }
 }
