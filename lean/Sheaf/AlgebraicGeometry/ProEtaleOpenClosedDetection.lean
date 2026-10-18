@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
 
 /-!
 # Detection by open and closed pro-etale restrictions
@@ -28,6 +28,28 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Extension along the coefficient isomorphism reflects vanishing, by its existing
+scalar-transport equivalence and tensor-extension adjunction.
+Source: Stacks, Modules on Sites, lemma-adjoint-push-pull-modules
+(blueprint: lem-exc-open-closed-detection). -/
+private theorem inverseImage_isZero_of_pullback
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (M : proEtaleRingModules Y R)
+    (h : IsZero ((proEtaleRingModulePullback f R S c).obj M)) :
+    IsZero ((proEtaleModuleInverseImage f R).obj M) := by
+  let rc := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c
+  let e := proEtaleScalarEquivalence X rc
+  let adj := proEtaleRingExtensionAdjunction f R S c
+  let t := adj.leftAdjointUniq e.symm.toAdjunction
+  have hz : IsZero (e.inverse.obj ((proEtaleModuleInverseImage f R).obj M)) :=
+    h.of_iso (t.app _).symm
+  exact (e.functor.map_isZero hz).of_iso (e.counitIso.app _).symm
 
 /-- A module over arbitrary commutative ring-sheaf coefficients is zero if its pullbacks
 along a closed immersion and its complementary quasi-compact open immersion are zero.
@@ -65,6 +87,23 @@ theorem proEtaleRingModule_isZero_of_open_closed
     (F : proEtaleRingModules X R)
     (hj : IsZero ((proEtaleRingModulePullback j R Rj cj).obj F))
     (hi : IsZero ((proEtaleRingModulePullback i R Ri ci).obj F)) : IsZero F := by
-  sorry
+  have hi' := inverseImage_isZero_of_pullback i R Ri ci F hi
+  have hj' := inverseImage_isZero_of_pullback j R Rj cj F hj
+  let V := ProEt.mk j
+  have : IsOpenImmersion V.hom := ‹IsOpenImmersion j›
+  have : QuasiCompact V.hom := ‹QuasiCompact j›
+  obtain ⟨q, ⟨e⟩, ai, aj, _, _, _, _, _, _, _, _, hs, _⟩ :=
+    proEtale_ringed_open_closed i V hU R
+  have ho : IsZero ((SheafOfModules.overFunctor.{u + 1}
+      (proEtaleModuleCoefficients R) V).obj F) :=
+    (q.functor.map_isZero hj').of_iso (e.app F).symm
+  have : (proEtaleRingedExtensionByZero V R).IsLeftAdjoint := aj.isLeftAdjoint
+  have : (proEtaleRingedDirectImage i R).IsRightAdjoint := ai.isRightAdjoint
+  let T := ComposableArrows.mk₂ (aj.counit.app F) (ai.unit.app F)
+  have hT : T.Exact := (hs F).2.2
+  have he := (T.exact₂_iff hT.toIsComplex).1 hT
+  exact he.isZero_of_both_isZero
+    ((proEtaleRingedExtensionByZero V R).map_isZero ho)
+    ((proEtaleRingedDirectImage i R).map_isZero hi')
 
 end AlgebraicGeometry.Scheme
