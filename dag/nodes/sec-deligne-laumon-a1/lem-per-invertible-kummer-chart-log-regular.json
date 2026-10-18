@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "pqf-def-locnoeth",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-fs-log-smooth-etale"
  ],
  "proof": [
   {
@@ -314,5 +315,23 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-577bf0ff7 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, the new node lem-per-completed-invertible-kummer-monoid-extension, every cited statement, and ILO VI 1.6–1.8 and 2.2–2.3 (PDF pp. 75–79). The item is unchanged and is VI 1.8 in the Kummer log-étale case that VI 2.2–2.3 describe, explicitly including 'Y log régulier, de sorte que X l'est également'. The split follows steps 4–7 of the existing lem-trf-log-smooth-log-regular. S1: noetherianity of A=O^sh and of B=C_q, finite type via the generators of Q. S2: 05WR invariance applied to Z_A→Z (base change of the structural map, explicitly covered) and to Z_A→W (étale); monomials preserved. S3: faces with h^{-1}F=G because A→B is local; the chart condition gives S≅M̄_ȳ, T≅N̄_z̄ and the log ideal J·B^sh; sharp and completed chart; ε checked by cancellation in the integral M_ȳ. S4: every hypothesis of the new node checked (N invertible on the neighbourhood, so in A). S5: formal-monoid-ring-dimension gives regularity and dim difference rk T^gp in both characteristics. S6: completion of the quotient, completion regularity and dimension, closed-immersion strict localization, strict-henselization regularity and dimension. The new node generalizes the trf extension model from an isomorphism on group completions to Kummer with invertible-order cokernel. It is not a duplicate and not a restatement of the item. Tested: A=Q[[s]] with twist −1 (absorbed, since only the ring and ideal pair are identified), unit R=Z with u not a square (étale, T=0), Z_p with y^m=p, and the excluded case Z/p in characteristic p. Advisory: 'complete' cites no adically-complete definition, the same omission as the trf model; no change made. No cycle (closure 631; the old log-smooth citation is gone). No SGA. Cross-unit tool_uses accepted. Batch 5: the closures of def-trf-fs-log-blowup, ind-etale-strict-local-invariance (05WR), fs-face-sharpening, log-regular-sharp-chart, log-regular-completed-chart, formal-monoid-ring-dimension and closed-immersion-strict-localization-cartesian (05WS) contain only general log-geometry and commutative-algebra trf nodes and no thm-trf, sk-thm-trace, nt-assume or Poincaré node. They are outside both assumptions, so accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleKummerChartLogRegular",
+  "declaration": "AlgebraicGeometry.invertibleKummerChart_logRegular",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleKummerChartLogRegular.lean",
+  "statement": "theorem invertibleKummerChart_logRegular (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (hY : Y.IsLogRegular) (hcharts : ∀ x : X.scheme, ∃ c : FSLogChart f, x ∈ Set.range c.V.hom ∧ Function.Injective c.g ∧ Function.Injective c.groupMap ∧ Finite c.cokernel ∧ (∀ q : c.Q, ∃ n : ℕ, 0 < n ∧ ∃ p : c.P, c.g p = q ^ n) ∧ (∃ n : ℕ, 0 < n ∧ (∀ z : c.cokernel, z ^ n = 1) ∧ (∀ y : c.W.left, IsUnit ((n : ℕ) : c.W.left.presheaf.stalk y))) ∧ Etale c.comparison) : X.IsLogRegular",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a57e4176",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match of invertibleKummerChart_logRegular to the node: fs locally Noetherian X Y and log morphism f; hY log regular; pointwise FSLogChart cover; injective g and groupMap; Kummer positive-power condition; Finite cokernel; positive n killing the cokernel and a unit at every stalk of target nbhd W; Etale canonical comparison; conclusion exactly X.IsLogRegular, no extra assumptions, single universe u. Not a duplicate: logSmooth_logRegular needs InjectiveFSLogChart with a torsion-free cokernel. Added stmt_dep def-per-fs-log-smooth-etale owns FSLogChart/groupMap/cokernel/comparison and is acyclic (closure 105, item absent). lean.statement verbatim; source/blueprint/proof-plan docstrings present; sorry only; both report sections present. nt_compile --json clean, exit 0, 2.4 s; broken-field control fails as expected. No findings."
  }
 }

@@ -18,7 +18,8 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism",
   "def-sc-generic-point",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-per-admissible-finite-scheme-quotient"
  ],
  "proof": [
   {
@@ -337,5 +338,28 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-ca1b6b872 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, every cited statement, ILO IX 1.2(ii)/1.4 condition (*) (printed pp.131–133) and the unit/blueprint route. No new nodes. Statement: same mathematics as base with conventions added; no target weakened. Quotient existence, finiteness and Noetherianity are assumptions, consistent with the Nagarajan repair of lem-per-admissible-quotient-generic-degree. One fault, B3: the statement cites def-sc-function-field, which defines k(C) only for curves over k, but C is an arbitrary integral scheme. FIX: the function field is now defined as the stalk O_{X,η} at the generic point [def-weil-pbc-module-stalk, def-sc-generic-point], with the induced germ map at q(η); stmt_deps changed to match. Steps check out: (1) affine W=Spec B with A=B^G, and the action groupoid Spec ∏_G B is finite locally free both ways; (2) in 03BL the equalizer is B^G=A, so fibres are orbits, also on geometric points; (3) the finite closed map gives V open and q^{-1}V=U, with U≅C×_Y V and p finite by base change; (4) freeness on test schemes holds via geometric points on clopen pieces, including empty and nonreduced T; (5) 03BM applies with S=D and C=B^G=A, giving p finite locally free and surjective and G×U≅U×_V U; (6) {p} is an fpqc covering, the base change is ⊔_G U→U, hence étale, and 02VN descends this; (7) simply transitive because Spec Ω is connected, plus quotient topology; (8) V is dense and Y integral; (9) norm trick gives L^G=Frac A; (10) the generic geometric point gives faithfulness, then 09I3 and 09I1 give a bijection G→Aut_K(L). Small cases tested: G=1, a field, trivial action excluded, char p p-groups. Duplicates: lem-per-free-finite-group-affine-quotient (abstract quotient, no identification with the given q) and lem-per-admissible-quotient-generic-degree (finite type, no torsor) — not restatements. Batch-5 flag on lem-a1-finite-flat-affine-relation-quotient: its closure reaches only lem-trf-finite-presentation-module-descent-flat-local (Stacks 03C4, faithfully flat descent of finite presentation) and lem-trf-fppf-covering-base-change (021O). Both are generic algebra or topology, outside the trace formula and Poincaré duality statements and proofs, so accepted. tool_uses accepted (generic groupoid quotient and fpqc descent): a1 orbit-fibres, a1 relation-quotient, galois-fpqc-descend-etale. No SGA source. No cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeFiniteActionTorsor",
+  "declaration": "AlgebraicGeometry.free_finite_action_torsor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.HasGaloisFunctionFieldAction",
+   "AlgebraicGeometry.free_finite_action_torsor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeFiniteActionTorsor.lean",
+  "statement": "theorem free_finite_action_torsor {G : Type v} [Group G] [Finite G] {C Y : Scheme.{u}} [IsIntegral C] [IsNoetherian C] [IsNoetherian Y] (a : G →* Aut C) (_hexc : ∀ W : C.affineOpens, IsExcellent Γ(C, W)) (U : C.Opens) (_hdense : Dense (U : Set C)) (_hstable : ∀ (g : G) (c : C), c ∈ U → (a g).hom c ∈ U) (_hfree : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ U.toScheme) (g : G), x ≫ U.ι ≫ (a g).hom = x ≫ U.ι → g = 1) (q : C ⟶ Y) (_hquotient : IsAdmissibleFiniteSchemeQuotient a q) : ∃ V : Y.Opens, (V : Set Y) = q '' (U : Set C) ∧ q ⁻¹ᵁ V = U ∧ ∃ p : U.toScheme ⟶ V.toScheme, IsPullback U.ι p q V.ι ∧ IsFinite p ∧ Etale p ∧ ∃ aU : G →* Aut U.toScheme, (∀ g : G, (aU g).hom ≫ U.ι = U.ι ≫ (a g).hom) ∧ IsAdmissibleFiniteSchemeQuotient aU p ∧ ∃ (t : Scheme.GaloisCoverAction G V.toScheme) (e : t.Z ≅ U.toScheme), e.hom ≫ p = t.π ∧ (∀ g : G, t.smul g ≫ e.hom = e.hom ≫ (aU g).hom) ∧ (C.IsSeparated → Dense (V : Set Y) ∧ ∃ hY : IsIntegral Y, @Scheme.Hom.HasGaloisFunctionFieldAction G _ C Y inferInstance hY a q)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the landed def-per-admissible-finite-scheme-quotient for the admissible finite quotient with invariant sheaf. HasGaloisFunctionFieldAction is the owning theorem’s function-field clause: the algebra is pinned to the generic stalk map and the group identification to inverse pullback. No function-field or quotient construction is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3aa79683",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Node diff vs live: only lean and stmt_deps change; the one added stmt_dep is the landed def-per-admissible-finite-scheme-quotient (Q112), used in the Lean. Statement verbatim in the file. Clause check: G is a finite group in any universe; C integral and Noetherian, with excellence on affine opens (project convention); the admissible finite quotient with invariant sheaf is the landed IsAdmissibleFiniteSchemeQuotient, whose topology and orbit-fibre conjuncts are implied, so not a stronger assumption; U is G-stable and dense; geometric freeness uses the def-weil-geometric-point inline form with Ω : Type u. Conclusions: V = q(U) open with q⁻¹V = U; IsPullback U.ι p q V.ι; p finite and étale; restricted action aU pinned to a; the restricted map is again an IsAdmissibleFiniteSchemeQuotient; GaloisCoverAction t with e : t.Z ≅ U pinned by e.hom ≫ p = t.π and the actions intertwined. Separated case: V dense, Y integral, and HasGaloisFunctionFieldAction, whose algebra is the q.functionFieldMap germ, with IsGalois, FiniteDimensional and ρ g = (a g⁻¹)^* (checked multiplicative). The helper is not hollow; no duplicate found in side lean or runs/2. nt_compile --json clean (3.2 s; dep 1.8 s). Advisory: the six private proof-step imports are unneeded (compiles clean without them); the second reading was done by the worker itself."
  }
 }
