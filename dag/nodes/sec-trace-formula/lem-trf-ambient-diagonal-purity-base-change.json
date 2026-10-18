@@ -459,5 +459,51 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ab643d593 (reviewer sub-agent of L); spot-checked: I read all 12 steps, both new nodes and every cited statement against main-20261015 (smooth-purity finite-ring proof, orientation, orientation-charts, orientation-vector-bundle and diagonal-dualizing-object proofs). The item statement is unchanged from the live DAG. The coefficient category is ordinary unbounded etale D(T_et,A) throughout and is never identified with the pro-etale one; no SGA source is used. Steps 1-6 and 8-12 hold: hypotheses checked (Noetherian bases, l invertible, Nagata, any Noetherian v). The tensor theorem covers every unbounded M. c_M is the beta of prop-asd-smooth-base-change. In r=0, D splits as A^1_S plus V' x G_m. Step 11 is a Yoneda argument over six natural bijections, and Step 12 gives its stated direction. One gap, repaired (C1/C4): Step 7 compares the base-change chart (x1,e(x2)) with the section lemma's chart (x1,e(x2)-e(x1)). These differ by translation on A^r_U, which needs translation invariance of the coordinate-tower trace; only GL_d invariance was cited. The blueprint does this in sk-prop-sp-orientation-vector-bundle.proof.md Step 1, and lem-pur-affine-translation-trace covers only bases of finite type over k. Fix: I added the statement-only node lem-trf-ambient-affine-translation-trace (finite A with NA=0, Noetherian base, ordinary etale) and cited it in Step 7; proof_deps updated. The worker's new node lem-trf-finite-ring-section-deformation is true (checked d=0 and the standard model; uniqueness holds because A^1 fibres are connected) and is a legitimate generalization of lem-pur-noetherian-etale-section-specialization, which is for Z/l^n only; O_E/varpi^n is not flat over Z/l^m. It does not restate a clause of the item. Tool uses accepted as declared.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AmbientDiagonalPurityBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.AmbientDiagonalPurity.ambientDiagonalPurityBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.twistTransport",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.diagonalRestriction",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.normalSectionComparison",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.DiagonalNormalized",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.existsUnique_orientation",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.inverseOrientation",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.twistedPullback",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.gamma",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.trace",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.gammaBaseChangeIso",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.exceptionalTensorMap",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.exceptionalHomComparison",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.coefficientProduct",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.coefficientCompositionIso",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.gammaCompositionIso",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.exceptionalCompositionIso",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.zeroTwistIso",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.Conclusions",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.Coefficient",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.coefficientFinite",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.invertiblePower",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.ExponentIndependent",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.coefficient_annihilator",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.ambientDiagonalPurityBaseChange",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.trace_composition",
+   "AlgebraicGeometry.Etale.AmbientDiagonalPurity.etale_trace_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/AmbientDiagonalPurityBaseChange.lean",
+  "statement": "theorem ambientDiagonalPurityBaseChange (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n m : ℕ) (hm : 0 < m) (hA : ((ell ^ m : ℕ) : Coefficient ell E n) = 0) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (_hExcellent : ∀ U : Y.affineOpens, IsExcellent Γ(Y, U.1)) (hEll : IsUnit (ell : Γ(Y, ⊤))) (d : ℕ) (h : X ⟶ Y) [SmoothOfRelativeDimension d h] [IsSeparated h] [QuasiCompact h] [HasCompactification h] : Conclusions (ell ^ m) (pow_pos (Fact.out : ell.Prime).pos m) (Coefficient ell E n) hA (invertiblePower ell m h hEll) d h ∧ ∀ S : Scheme.{u}, IsUnit (ell : Γ(S, ⊤)) → ExponentIndependent (Coefficient ell E n) (ell ^ m) hA S",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-927069c25",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Only the item lean field and the new module AmbientDiagonalPurityBaseChange.lean change; the 8 dependency nodes are identical to live side. nt_compile --json: clean, 17.7 s. lean.statement verbatim; 26/26 declarations match. All clauses render the node: A=ULift coefficientExtensionRing(n+1), the conventions' ring; excellent Noetherian Y, ell invertible; smooth separated qc rel dim d, extra binders (IsNoetherian X, HasCompactification, Noetherian pullback) are consequences. theta pinned by diagonalRestriction (actual smoothDualizingBaseChangeMap), unique normalized kappa, normalSectionComparison, bundleOrientation; inverseOrientation chosen from an exists-unique theorem, allowed. gamma = a_h then smoothTensorDualityMap, IsIso and natural for all unbounded M. Base change via smoothExceptionalBaseChangeMap (transpose of inv B then v*counit), with orientation, gamma and trace equations for arbitrary excellent Noetherian Y'. Composition through rightAdjointUniq of the unbounded tower iso; r=0 sum/evaluation counit with the pinned EtaleCompactSupportNormalization. H_h = exceptional tensor then ev, IsIso for all L,M. ExponentIndependent pins the root and line maps. No hollow defs, all theorems sorry with docstrings, no line over 100 chars, no pro-etale substitute. Advisory: same-worker second reading; cone comparison existential as in the published purityNormalCone_comparison, independence asserted by the exists-unique theorem."
  }
 }
