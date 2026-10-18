@@ -187,5 +187,28 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-59117269b (reviewer sub-agent of L); spot-checked: Step 4 incorrectly treated extension by zero as zero on every object outside the open. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-sf-comparison-open-tensor-coherence.json, using restriction, complementary stalks, adjunction normalization, and full faithfulness. Statement, hypotheses, coefficient categories, base-change morphism, dependencies, and edge cases check.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52962901d",
+  "group": "NE",
+  "result": "pass",
+  "note": "All node clauses match the Lean: Λ:Type(u+1) CommRing Finite; Scheme.{u}, IsOpenImmersion j; arbitrary unbounded K,N; A_T = D(comparisonUpperStar); e = mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso (OpenCover.lean:205, localization of the recorded openImmersionLowerShriekComparisonUpperStarIso); t_T = derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso (asIso leftDerivedTensorComparison of strong monoidal ν^*); a_j = comparisonOpenDerivedPullbackIso, the localization of the recorded supportSiteComparisonCoefficientPullbackIso with canonical L≅D isos; h = (1⊗a)∘t_U; γ^e, γ^p = .inv of the recorded projection isos; both composites in node order with common endpoints. No extra hypotheses; edge cases admitted; universes bound. Helpers have real data, only sorry is the theorem, docstrings have source, blueprint id and 5 steps, statement verbatim, node delta only lean, dep records identical to live, report sections present, not yet landed elsewhere. nt_compile --json clean 7.6 s; axioms propext/sorryAx/choice/Quot.sound; control with flipped γ^p direction errs. Advisories: t_T via framework leftDerivedTensorComparison rather than .choose of the ∃! record (same canonical map, accepted before); private proof-only import OpenTensorNormalization: retry landing if it times out under load."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ComparisonOpenTensorCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_open_tensor_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonOpenDerivedPullbackIso",
+   "AlgebraicGeometry.ProEtale.comparisonOpenTensorIso",
+   "AlgebraicGeometry.ProEtale.comparison_open_tensor_coherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ComparisonOpenTensorCoherence.lean",
+  "statement": "theorem comparison_open_tensor_coherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (K : Etale.DerivedCategoryModule Λ U) (N : Etale.DerivedCategoryModule Λ X) : D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X).map (((Etale.derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} Λ) j).inv.app K).app N) ≫ (mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).hom.app (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) U).obj K).obj (L(Etale.upperStar (ModuleCat.{u + 1} Λ) j).obj N)) ≫ D(openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).map (comparisonOpenTensorIso Λ j K N).hom = (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso (ModuleCat.{u + 1} Λ) (D(Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).obj K)).hom.app N ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).map ((mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).hom.app K)).app (D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj N) ≫ ((derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} Λ) j).inv.app (D(comparisonUpperStar (ModuleCat.{u + 1} Λ) U).obj K)).app (D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

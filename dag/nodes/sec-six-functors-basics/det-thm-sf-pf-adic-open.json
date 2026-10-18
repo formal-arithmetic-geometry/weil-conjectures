@@ -38,7 +38,8 @@
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-constructible",
   "det-def-sfb-constructible-tor-amplitude",
-  "sk-def-pe-derived-completion"
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-coefficient-change"
  ],
  "proof": [
   {
@@ -400,5 +401,28 @@
   "sk-prop-sfb-cartesian-coefficients",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-restriction-of-scalars-exact"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-052c55ba1",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause: prime l, char k prime and != l, separated finite-type over-k U/X/j, finite E with continuous condensed O_E (DerivedNakayama.integerRing), F_E = quotientRing 1 (level 0 = exponent 1), qc open immersion, K in constantModelBoundedConstructible (same Dbc rendering as Q97/Q98 PASS). Conclusions: IsDerivedComplete (canonical augmentation); exists-unique c : T_X(Rj_*K) -> Rj_*^B(T_U K) with IsIso and equation theta >> L_B c >> eps_B = T_U eps_A, where theta = reductionPullbackMap = inverse mate of the unconditional derivedComapUpperStarIso along L(Ext) -| D(Res); direction and types checked, theta invertible so c is the canonical projection-formula map; no flatness (published derivedPullIso/derivedPushHom need flatness, so no duplicate); Rj_*K bounded constructible; Dbc = Dbc meet finiteTorAmplitude = predicate of ConstantModelConstructibleFiniteTor. Node diff vs live: only lean and stmt_deps (+ landed sk-def-sfb-coefficient-change, actually used). Statement verbatim; proof-dep modules imported privately; helper has real data; theorem sorry only; docstrings carry source, blueprint id and 11-step proof; no extra universe restriction; real pro-etale site. Edge cases: empty U/X, j = id, E = Q_l, torsion K. nt_compile --json: rc 0, 7.1 s, no warnings. Advisory: CoefficientExtensionFinite is imported only transitively; the second reading is a same-worker self-check."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralOpenDirectImage.integral_open_direct_image",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralOpenDirectImage.reductionPullbackMap",
+   "AlgebraicGeometry.ProEtale.IntegralOpenDirectImage.integral_open_direct_image"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralOpenDirectImage.lean",
+  "statement": "theorem integral_open_direct_image (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [j.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j] (K : DerivedCategory (AdicCompletion.Modules l E U)) (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) U K) : IsDerivedComplete l E X ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj K) ∧ (∃! c : (AdicCompletion.derivedReduction l E X 0).obj ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj K) ⟶ (CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.quotientRing l E 1) j).obj ((AdicCompletion.derivedReduction l E U 0).obj K), IsIso c ∧ (reductionPullbackMap l E j).app ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj K) ≫ (CondensedRing.upperStar (DerivedNakayama.quotientRing l E 1) j).mapDerivedCategory.map c ≫ ((CondensedRing.derivedUpperStarLowerStarAdjunction (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory (DerivedNakayama.quotientRing l E 1) j)).counit.app ((AdicCompletion.derivedReduction l E U 0).obj K) = (AdicCompletion.derivedReduction l E U 0).map (((CondensedRing.derivedUpperStarLowerStarAdjunction (DerivedNakayama.integerRing l E) j).ofNatIsoLeft (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory (DerivedNakayama.integerRing l E) j)).counit.app K)) ∧ constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj K) ∧ constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X = (constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X ⊓ DerivedCategory.finiteTorAmplitude (AdicCompletion.Modules l E X))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical residue comparison is specified by its adjunction equation (unique invertible arrow), using the actual nonflat quotient and the canonical exact scalar-restriction pullback square. Completed integral coefficients, finite constant scalar models, and generic finite Tor amplitude are the existing recorded notions. No mathematical statement is corrected; the already landed coefficient-change definition is added to stmt_deps to expose the canonical comparison construction."
+ }
 }
