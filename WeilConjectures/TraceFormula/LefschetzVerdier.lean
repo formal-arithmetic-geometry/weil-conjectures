@@ -208,6 +208,94 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X �
     (CategoryTheory.map_unit_comp_conjugateIsoEquiv_inv_app _ _ _ _)
     (boundedConstructibleUpperStarId _ ℓ Y) K
 
+
+variable (ℓ) in
+/-- The exceptional half of the global operator (blueprint `thm-trf-fixed-point-localization`,
+proof): for a square `g ≫ 𝟙 = c₁ ≫ f`, the exchange map `E : Rg_* Rc₁^! ⟶ R(𝟙)^! Rf_*`, read on
+`Rg_!` and `Rf_!` through `R(𝟙)^! ≅ 𝟭`, is the composition isomorphism followed by the counit
+of `Rc₁_! ⊣ Rc₁^!`. -/
+lemma lowerStarUpperShriekExchange_app_id_aux (c₁ : C ⟶ X) (f : X ⟶ Y) (g : C ⟶ Y)
+    [IsProper f.left] [IsProper g.left] (w : g ≫ 𝟙 Y = c₁ ≫ f)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).hom.app _ ≫
+        (lowerStarUpperShriekExchange ℓ w).app K ≫
+        (boundedConstructibleUpperShriekId ℓ Y).hom.app _ ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app K =
+      eqToHom (by rw [← w, Category.comp_id]) ≫
+        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f).hom.app _ ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            c₁).counit.app K) := by
+  have e1 : boundedConstructibleUpperShriekId ℓ Y = conjugateIsoEquiv
+      (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y)) Adjunction.id
+      (boundedConstructibleLowerShriekId ℓ Y).symm := rfl
+  have e2 : lowerStarUpperShriekExchange ℓ w = CategoryTheory.mateEquiv
+      (boundedConstructibleUpperShriekAdjunction _ ℓ c₁)
+      (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y))
+      (lowerStarLowerShriekCompIso ℓ w).hom := rfl
+  have e3 : lowerStarLowerShriekCompIso ℓ w =
+      Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).symm _ ≪≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (𝟙 Y)).symm ≪≫
+      eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ) w) ≪≫
+      boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f) := rfl
+  rw [e1, e2, e3]
+  have h := CategoryTheory.mateEquiv_app_comp_eq_aux
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y))
+    (boundedConstructibleUpperShriekAdjunction _ ℓ c₁)
+    (boundedConstructibleLowerShriekId ℓ Y)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (𝟙 _))
+    (eqToHom (by rw [Category.comp_id]))
+    (fun M ↦ by rw [boundedConstructibleLowerShriekComp_padicAlgCl_id_right_inv_app, eqToHom_app])
+    (eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ) w))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f) K
+  refine h.trans ?_
+  simp only [eqToIso.hom, eqToHom_app, eqToHom_trans_assoc]
 end Coherence
+
+namespace Correspondence
+
+variable {X : Over (Spec (.of k))} [QuasiCompact X.hom] [IsProper X.hom]
+  {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
+
+/-- The support of an endocorrespondence of a proper scheme with proper ordinary leg is proper. -/
+instance isProper_C_hom [IsProper c.c₂.left] : IsProper c.C.hom := by
+  rw [← Over.w c.c₂]
+  infer_instance
+
+/-- The proper pushforward diagram `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` to the point
+(blueprint `thm-trf-fixed-point-localization`, proof). -/
+noncomputable abbrev toPointDiagram [IsProper c.c₂.left] : c.ProperPushforwardDiagram (point k) where
+  f := toPoint X
+  D := point k
+  b₁ := 𝟙 _
+  b₂ := 𝟙 _
+  g := toPoint c.C
+  w₁ := toPoint_ext _ _
+  w₂ := toPoint_ext _ _
+
+/-- The exceptional half of the global operator (blueprint `thm-trf-fixed-point-localization`,
+proof): the exceptional half `δ` of the coefficient pushforward along `(a_X, a_C)`, read on
+`Ra_{C!}` and `Ra_{X!}`, is the composition isomorphism followed by the counit of
+`Rc₁_! ⊣ Rc₁^!`. -/
+lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c₂.left] :
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ ≫
+        c.toPointDiagram.pushforwardCoeffCounit ≫
+        (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _ ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K =
+      (boundedConstructibleLowerShriekCompToPoint ℓ c.c₁).inv.app _ ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            c.c₁).counit.app K) := by
+  rw [boundedConstructibleLowerShriekCompToPoint_inv_app, Category.assoc]
+  have e1 : c.toPointDiagram.pushforwardCoeffCounit =
+      (lowerStarUpperShriekExchange ℓ c.toPointDiagram.w₁).app K := rfl
+  have e2 : lowerStarUpperShriekExchange ℓ c.toPointDiagram.w₁ = lowerStarUpperShriekExchange ℓ
+      (toPoint_ext _ _ : toPoint c.C ≫ 𝟙 (point k) = c.c₁ ≫ toPoint X) := rfl
+  rw [e1, e2]
+  exact lowerStarUpperShriekExchange_app_id_aux ℓ c.c₁ (toPoint X) (toPoint c.C) _ K
+end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
