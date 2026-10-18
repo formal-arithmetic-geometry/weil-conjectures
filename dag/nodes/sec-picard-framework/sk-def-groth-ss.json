@@ -137,5 +137,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck",
+  "declaration": "CategoryTheory.Functor.IsAcyclicComposablePair",
+  "declarations": [
+   "CategoryTheory.Functor.IsAcyclicComposablePair",
+   "CategoryTheory.Functor.rightAcyclic",
+   "CategoryTheory.SpectralSequence.pageInfinity",
+   "CategoryTheory.SpectralSequence.Abutment",
+   "CategoryTheory.SpectralSequence.AbutsTo"
+  ],
+  "statement": "def Functor.IsAcyclicComposablePair (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] : Prop",
+  "branch": "slopmaster2",
+  "by": "Q87",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing definitions: IsAcyclicComposablePair in the recorded module; rightAcyclic in WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic; pageInfinity, Abutment and AbutsTo in WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic (all publicly imported by the recorded module). The double-complex paragraph is also already formalized: HomologicalComplex₂.columnFiltration in WeilConjectures.Algebra.Homology.ExactCouple.TotalComplexFiltration; HomologicalComplex₂.firstSpectralSequence, firstSpectralSequenceAbutment, firstSpectralSequenceAbutment_filtration, flipFirstSpectralSequenceAbutment and flipFirstSpectralSequenceAbutment_filtration in WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex. Import the latter module for that paragraph. Its exact-couple construction, derived-couple pages, convergence and image filtration were read from the live source and checked with scompile.py. See the worker report for the complete clause correspondence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-178a3572b",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Existing-declaration binding; the commit changes only the node's lean record and the report. Statement matches the blueprint section word for word; no stmt_deps; no repair note. IsAcyclicComposablePair body (all injectives I, all q>0, IsZero of G.rightDerived q applied to F I) matches the node; A's unused Grothendieck instance is dropped, which is more general; universes independent; no left exactness. rightAcyclic covers degrees q+1. pageInfinity is page p+q+2. Abutment stores a real filtration (decreasing, F0=top, F(n+1)=bot) with each quotient isomorphic (Nonempty) to E-infinity for p+q=n; AbutsTo is its Nonempty. The double-complex paragraph is covered by columnFiltration, firstSpectralSequence, first/flipFirstSpectralSequenceAbutment and their _filtration theorems (image filtration along canonical isos); axioms are only propext/choice/Quot.sound. lean.statement is verbatim. Two nt_compile --json scratch checks were clean with no warnings (recorded module alone: all 5 declarations resolve; plus DoubleComplex: all bodies and fields printed). The Second reading section defers to the maintainer review per the 2026-10-17 policy. No findings need correction."
  }
 }

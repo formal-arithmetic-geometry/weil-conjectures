@@ -220,5 +220,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-daa5f3c2d (reviewer sub-agent of L); spot-checked: Read the full delivery, cited nodes, unit/chapter route, and Stacks sources. The five-step proof correctly establishes the base-field Bézout identity, extends coefficients to L, applies the valid Mathlib divisor-splitting leaf, selects a prescribed root, and proves g is nonzero at that same root. Hypotheses and edge cases check out; no duplicate, circularity, route-pivot machinery, forbidden SGA citation, or long hidden lemma was found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ResidueFactorRootSelection",
+  "declaration": "Polynomial.exists_residue_factor_root_selection",
+  "file": "lean/Sheaf/FieldTheory/ResidueFactorRootSelection.lean",
+  "statement": "theorem exists_residue_factor_root_selection {k : Type u} [Field k] {L : Type v} [Field L] [Algebra k L] (f g : k[X]) (hf : f.Monic) {I : Type w} [Fintype I] (α : I → L) (hfactor : f.map (algebraMap k L) = ∏ i : I, (X - C (α i))) (f₁ : k[X]) (hirr : Irreducible f₁) (hdiv : f₁ ∣ f) (havoid : ¬ f₁ ∣ g) : ∃ i : I, f₁.eval₂ (algebraMap k L) (α i) = 0 ∧ g.eval₂ (algebraMap k L) (α i) ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6df582892",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match of Polynomial.exists_residue_factor_root_selection with the node: Field k, Algebra k L (recorded match of def-pc-field-extension), f.Monic, Fintype I with no Nonempty, f.map algebraMap = ∏ (X - C (α i)), Mathlib Irreducible (nonzero follows in k[X]), f₁ ∣ f, ¬ f₁ ∣ g, ∃ i with eval₂ f₁ = 0 ∧ eval₂ g ≠ 0 at the same index. No extra hypotheses; universes u v w independent and bound. Source Stacks 00UF final paragraph checked. Edge cases (empty I, f=0, g=0, constant f₁, inseparable, any characteristic) covered. Mathematics is true and the five-step docstring proof is sound. No definitions; sorry-only; source and blueprint docstrings present; lean.statement verbatim; node differs from the repository only in lean; no name collision. Report has a Worker report and the standard 2026-10-17 Second reading note. nt_compile.py --json on the snapshot content: clean, no errors, 1.2 s; error injection confirmed the tool reports diagnostics. No findings."
  }
 }

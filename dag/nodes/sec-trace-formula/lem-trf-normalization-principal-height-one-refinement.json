@@ -254,5 +254,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-6d59bcdbf (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All six steps follow from the cited statements; Swanson–Huneke 4.8.4/4.10.5 and Stacks sources support the normalization and height arguments. No circularity, new nodes, long steps, or forbidden machinery. Accepted the declared localization-correspondence tool use; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement",
+  "declaration": "Ideal.exists_heightOne_prime_le_of_mem_integralClosure",
+  "file": "lean/Sheaf/RingTheory/NormalizationPrincipalHeightOneRefinement.lean",
+  "statement": "theorem exists_heightOne_prime_le_of_mem_integralClosure (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] [Field K] [Algebra R K] [IsFractionRing R K] (b : integralClosure R K) (_hb : b ≠ 0) (P : Ideal (integralClosure R K)) [P.IsPrime] (_hbP : b ∈ P) : ∃ Q : Ideal (integralClosure R K), Q.IsPrime ∧ Q ≤ P ∧ b ∈ Q ∧ Q ≠ ⊥ ∧ ∀ q : Ideal (integralClosure R K), q.IsPrime → q < Q → q = ⊥",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fb5ca534",
+  "group": "NW",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause: R is a commutative Noetherian local domain; K satisfies IsFractionRing; N = integralClosure R K; b ≠ 0 lies in the prime P; there is Q prime with Q ≤ P, b ∈ Q, Q ≠ ⊥, and every prime below Q is ⊥, which is the node's own height-one definition and the same predicate the citer NormalizationIntegralClosureKrull uses. No Noetherian assumption on N and no extra instances; universes u and v are independent. lean.statement is verbatim and only the node's lean field changed. Docstrings carry the source place, the blueprint reference and the six proof steps; the proof is sorry only; no definitions; imports follow the rules. Swanson–Huneke 4.10.5 subclaim checked. nt_compile --json: rc=0, 2.4 s, no errors. No findings."
  }
 }

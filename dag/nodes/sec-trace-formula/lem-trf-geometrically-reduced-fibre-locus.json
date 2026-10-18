@@ -280,5 +280,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-973901b18 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all eight steps against cited statements and Stacks 0576–0579, 053Z, 054I and affine fibre-product sources. Verified hypotheses, structural projections, edge cases, duplicate candidates and acyclicity. No long steps, forbidden machinery or repairs found. Detailed checks and accepted tool_uses are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyReducedFibreLocus",
+  "declaration": "AlgebraicGeometry.geometricallyReduced_fibre_locus_constructible_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyReducedFibreLocus.lean",
+  "statement": "theorem geometricallyReduced_fibre_locus_constructible_baseChange (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FinitePresentation A B] : Topology.IsConstructible {p : PrimeSpectrum A | GeometricallyReduced (Spec.map (CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber B))))} ∧ ∀ (A' : Type u) [CommRing A'] [Algebra A A'], @_root_.id (∀ [Algebra A' (B ⊗[A] A')], Prop) (fun [Algebra A' (B ⊗[A] A')] ↦ {q : PrimeSpectrum A' | GeometricallyReduced (Spec.map (CommRingCat.ofHom (algebraMap q.asIdeal.ResidueField (q.asIdeal.Fiber (B ⊗[A] A')))))} = PrimeSpectrum.comap (algebraMap A A') ⁻¹' {p : PrimeSpectrum A | GeometricallyReduced (Spec.map (CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber B))))}) (Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A'))",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-099a5e977",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Statement matches node clause-by-clause: [Algebra.FinitePresentation A B] only hypothesis; fibre = Ideal.Fiber (κ(p)⊗[A]B, structure map x↦x⊗1, rfl-checked); GeometricallyReduced of Spec.map structure morphism (fields in universe u, non-vacuous); IsConstructible first conjunct; ∀ A' : Type u, any ring map, B⊗[A]A' with rightAlgebra (a'↦1⊗a', rfl-checked) via accepted @id idiom; equality with PrimeSpectrum.comap preimage. No flat/Noetherian/injectivity assumptions; universes bound, A' universe fine by ULift invariance. Edge cases A=0, B=0, n=0, identity, non-flat base change covered. Node copy differs from side only by lean record; lean.statement verbatim. No definitions, proof sorry only, docstrings carry Stacks 0579/0576/054C, blueprint id and 8 proof steps. Not a duplicate of Q140's scheme-level constructibility theorem or the base-change lemma. nt_compile --json: rc 0, 2.5 s, no warnings; probe confirms signature and axioms (sorryAx only). No findings."
  }
 }

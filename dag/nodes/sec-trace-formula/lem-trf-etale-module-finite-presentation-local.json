@@ -204,5 +204,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-843cfddea (reviewer sub-agent of L); spot-checked: Mathematics and route pass full review. Correct the item’s top-level source locator from inherited incorrect Tags 01PC, 02L2, 03C4 to the verified Tags 01BQ, 05B0, 03WT, 0218, and 022B; corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-module-finite-presentation-local.json. Full checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleFinitePresentationLocal",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isFinitePresentation_neighbourhood_iff_etale_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleFinitePresentationLocal.lean",
+  "statement": "theorem exists_isFinitePresentation_neighbourhood_iff_etale_pullback {X' X : Scheme.{u}} (g : X' ⟶ X) [Etale g] (x' : X') (x : X) (_hg : g x' = x) [IsIso (g.residueFieldMap x')] (M : X.Modules) [M.IsQuasicoherent] : (∃ U : X.Opens, x ∈ U ∧ (M.over U).IsFinitePresentation) ↔ ∃ U' : X'.Opens, x' ∈ U' ∧ (((tensorPullback g).obj M).over U').IsFinitePresentation",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32fadd083",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node and Stacks Tag 057T (flat.tex): Etale g; g x' = x; IsIso of the induced residueFieldMap; M quasi-coherent (the same notion pqf-def-coherent uses, without its finite-type clause); finite presentation via (M.over U).IsFinitePresentation, the recorded Mathlib class and the idiom of the landed sibling module; pullback is the recorded tensorPullback; iff with independent open neighbourhoods. Nothing stronger is assumed; universes are clean. Edge cases checked: zero module, empty scheme, empty opens, non-quasi-compact etale maps. Gates pass: proof is only sorry, no definitions, source/blueprint docstrings follow the node's 4 proof steps, lean.statement appears verbatim, only the node's lean field changed, report has both required sections, no pro-etale substitute. nt_compile.py --json on the snapshot: 3.7 s, exit 0, clean. Non-blocking: the node's top-level source.place still cites old tags 01PC/02L2/03C4 (a stage-1 correction that was never applied, not caused by this delivery)."
  }
 }

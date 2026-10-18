@@ -214,5 +214,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-4232d969e (reviewer sub-agent of L); spot-checked: Reviewed the item, full unit route, all cited node statements, Stacks Tags 0H74/07M7/09XI/0A02, edge cases, Mathlib searches, duplicates, and route constraints. The five proof steps correctly establish the specified quotient-compatible lift with all hypotheses preserved; no hidden long lemma, circularity, SGA citation, route-pivot machinery, or repair is needed. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianSmoothAlgebraLifting",
+  "declaration": "Algebra.Smooth.exists_lift_of_henselianRing",
+  "file": "lean/Sheaf/RingTheory/HenselianSmoothAlgebraLifting.lean",
+  "statement": "theorem exists_lift_of_henselianRing (R : Type u) [CommRing R] (S : Type v) [CommRing S] [Algebra R S] [Algebra.Smooth R S] (A : Type w) [CommRing A] [Algebra R A] (I : Ideal A) [HenselianRing A I] (τ : S →ₐ[R] A ⧸ I) : ∃ τ' : S →ₐ[R] A, (Ideal.Quotient.mkₐ R I).comp τ' = τ",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a05b7b8f7",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Algebra.Smooth.exists_lift_of_henselianRing matches the node and Stacks 0H74 (more-algebra.tex:3439) clause by clause, using the recorded dependency declarations Algebra.Smooth and HenselianRing, with independent universes u v w and no extra hypotheses. Edge cases (I=bot, I=top, zero rings) are covered. No definitions; proof is sorry only; module and theorem docstrings give the source place, blueprint id and all 5 proof steps; public imports are the statement dependencies, non-public imports are the proof-dependency modules (stage-2 rule 7); lines <=100; node lean.statement matches the file verbatim. Duplicate search in Mathlib and the side clone found nothing (the FormallySmooth lifts need nilpotent or adic-complete ideals). nt_compile --json is clean, and the tool reported an injected error, confirming it checks the file. No findings."
  }
 }

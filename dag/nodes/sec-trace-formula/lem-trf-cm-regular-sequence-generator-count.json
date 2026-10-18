@@ -124,5 +124,23 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q91-493888e22 (reviewer sub-agent of L); spot-checked: Two repairable faults: Step 1 implicitly identifies Mathlib’s WithBot ℕ∞ supremum with the source Krull dimension without citing or explaining the existing Krull-dimension node; corrected item JSON adds that dependency and explanation. The new leaf’s created.item incorrectly names lem-trf-regular-local-surjection-kernel-comparison; corrected JSON sets it to this delivery’s item. Repairs are under fixes/dag/nodes/sec-trace-formula/; full checks are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsRegularIffDimensionDrop",
+  "declaration": "RingTheory.Sequence.isRegular_iff_dimension_drop",
+  "file": "lean/Sheaf/RingTheory/IsRegularIffDimensionDrop.lean",
+  "statement": "theorem isRegular_iff_dimension_drop {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (hdepth : (d : ℕ∞) ≤ IsLocalRing.depth (R := R) R) (xs : List R) (hmem : ∀ x ∈ xs, x ∈ IsLocalRing.maximalIdeal R) : IsRegular R xs ↔ ringKrullDim (R ⧸ Ideal.ofList xs) + (xs.length : WithBot ℕ∞) = (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18405491e",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Only change: new module Sheaf.RingTheory.IsRegularIffDimensionDrop (one theorem, proof sorry) plus the item's lean record; the statement field is verbatim the file signature. Checked against Stacks 02JN: Noetherian local R, finite d via ringKrullDim = d, depth >= d via the recorded IsLocalRing.depth, list xs in the maximal ideal, IsRegular R xs (resolves to RingTheory.Sequence.IsRegular) iff dim(R/ofList xs) + length = d. The additive form is exactly the integer d - r (bottom/top excluded, r>d impossible on both sides), not truncated subtraction. Hypotheses match the recorded converse isRegular_of_dimension_drop exactly. Edge cases r=0, d=0, r>d, zero ring and a single universe u all checked. Docstrings carry 02JN and the blueprint id; no definitions; only sorry; report has Worker report and Second reading by Q111. No name collision in the project or Mathlib. nt_compile.py --json: clean, 1.6 s; a broken probe copy did report its error, so diagnostics are shown. No findings."
  }
 }

@@ -151,5 +151,25 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-59dd1fcfe (reviewer sub-agent of L); spot-checked: Read the full item, Stacks Tags 0D5Q/0D5P, dependencies, downstream citer, unit, chapter, packet, and instructions. All hypotheses and conclusions match; three elementary proof steps correctly establish the quotient relation, basis topology, continuity, and empty cases. Searches found no duplicate or Mathlib match. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.DerivedBasisOpenSubcollectionMap",
+  "declaration": "exists_derivedBasisOpenSubcollectionMap",
+  "statement": "theorem exists_derivedBasisOpenSubcollectionMap (X : Scheme.{u}) (C : Set (Set X)) (hopen : ∀ U ∈ C, IsOpen U) (hcover : ⋃₀ C = (Set.univ : Set X)) (hinter : ∀ U ∈ C, ∀ V ∈ C, U ∩ V = ⋃₀ {W : Set X | W ∈ C ∧ W ⊆ U ∩ V}) : ∃ (Y : Type u) (tY : TopologicalSpace Y) (f : X → Y), @Continuous X Y _ tY f ∧ (∀ U ∈ C, @IsOpen Y tY (f '' U)) ∧ (∀ U ∈ C, f ⁻¹' (f '' U) = U) ∧ @TopologicalSpace.IsTopologicalBasis Y tY (Set.image (Set.image f) C)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/Topology/DerivedBasisOpenSubcollectionMap.lean",
+  "note": "Maintainer-review fix: the delivered `X : Scheme` received its own universe parameter independent of `Y : Type u`, so the statement asserted the quotient in every universe; with C all opens of a large discrete scheme in universe 1 (so f is injective) and u = 0 it is false. The fixed module states `X : Scheme.{u}` with `Y : Type u`, the universe of the quotient of the points of X (Stacks 0D5Q). Statement otherwise unchanged.",
+  "fixed_by": "NT-stage2-cc-f0a8f93e7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0a8f93e7",
+  "group": "Q130",
+  "result": "fix",
+  "note": "Lean matches node and Stacks 0D5Q clause by clause (hopen, hcover, hinter with ⊆, continuity, f''U open, f⁻¹'(f''U)=U, IsTopologicalBasis of image(image f) C); dep def-pc-scheme→AlgebraicGeometry.Scheme correct; docstrings, sorry-only, report sections OK; no Mathlib/project duplicate. Fault: X : Scheme got its own universe independent of Y : Type u (pp.universes #check shows .{u_1,u_2}), so the statement claimed a quotient in every universe; this is false (a large discrete scheme in universe 1 with C = all opens makes f injective, so Y cannot be a Type 0). Fixed module states X : Scheme.{u} with Y : Type u (+ docstring line); record file only carries a note. Both delivered and fixed files compile cleanly with nt_compile.py; fixed theorem has one universe parameter."
  }
 }

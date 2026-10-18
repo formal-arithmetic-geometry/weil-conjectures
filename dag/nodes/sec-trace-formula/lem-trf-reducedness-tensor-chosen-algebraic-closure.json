@@ -153,5 +153,23 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-ea90bc9e1 (reviewer sub-agent of L); spot-checked: Step 2 cited the new node for an induced tensor equivalence that its statement does not assert. Corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-reducedness-tensor-chosen-algebraic-closure.json; it now cites only the stated reducedness equivalence and explains the tensor transport separately. Full source, hypothesis, edge-case, duplicate, and route checks passed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ReducednessTensorChosenAlgebraicClosure",
+  "declaration": "Algebra.isReduced_tensorProduct_chosen_algebraicClosure_iff",
+  "file": "lean/Sheaf/TraceFormula/ReducednessTensorChosenAlgebraicClosure.lean",
+  "statement": "theorem isReduced_tensorProduct_chosen_algebraicClosure_iff (k : Type u) (A : Type v) (Ω : Type w) [Field k] [CommRing A] [Algebra k A] [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] : IsReduced (A ⊗[k] Ω) ↔ IsReduced (A ⊗[k] (AlgebraicClosure k))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d329c364",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Node clauses (field k; commutative k-algebra A; arbitrary Ω with IsAlgClosure k Ω; IsReduced (A ⊗[k] Ω) ↔ IsReduced (A ⊗[k] AlgebraicClosure k)) rendered exactly, no extra hypotheses, independent universes u/v/w, A=0 and all characteristics covered. lean.statement verbatim in file; docstrings carry Stacks 09GV (verified in fields.tex/tags) and blueprint id plus both proof steps; sorry-only theorem, no definitions; stmt_deps are the three Mathlib leaves used. No exact Mathlib/project duplicate (isGeometricallyReduced_field_iff is related, not this statement). nt_compile.py --json: clean, 1.6 s, no errors or warnings. Report has Worker report and Second reading by Q03. No findings."
  }
 }

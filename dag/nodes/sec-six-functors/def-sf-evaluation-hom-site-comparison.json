@@ -85,15 +85,16 @@
   "module": "Sheaf.AlgebraicGeometry.EvaluationHomSiteComparison",
   "declaration": "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom",
   "file": "lean/Sheaf/AlgebraicGeometry/EvaluationHomSiteComparison.lean",
-  "statement": "def siteComparisonEvaluationHom (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] (T : Scheme.{u}) [(comparisonUpperStar A T).PreservesFlat] (K M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) : (comparisonUpperStar A T).mapDerivedCategory.obj (((Etale.derivedHom A T).obj (op K)).obj M) ⟶ ((derivedHom A T).obj (op ((comparisonUpperStar A T).mapDerivedCategory.obj K))).obj ((comparisonUpperStar A T).mapDerivedCategory.obj M)",
+  "statement": "def siteComparisonEvaluationHom (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat] (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) : (comparisonUpperStar A X).mapDerivedCategory.obj (((Etale.derivedHom A X).obj (op K)).obj M) ⟶ ((derivedHom A X).obj (op ((comparisonUpperStar A X).mapDerivedCategory.obj K))).obj ((comparisonUpperStar A X).mapDerivedCategory.obj M)",
   "branch": "newtargets-dag",
-  "by": "Q27",
-  "date": "2026-10-16",
+  "by": "Q63",
+  "date": "2026-10-17",
   "existing": false,
   "declarations": [
+   "AlgebraicGeometry.ProEtale.siteComparisonTensorIso",
    "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom"
   ],
-  "note": "The generic upstream coefficient-category interface avoids a costly redundant specialization declaration. At ModuleCat Λ all structures are the existing canonical instances and flat preservation follows from finiteness. The assigned theorem uses this specialization directly."
+  "note": "§1(B): the recorded module imports legacy Derived.ComparisonMonoidal; compiling with the fixed-coefficient exceptional functor fails because UpperLowerStar.Iso duplicates upperStarIsoLowerStarInv from FiniteCoefficient.UpperLowerStar.Iso. Retain the evaluation-defined map and construct its identical canonical tensor comparison using the comparison site adjunction and generic derived monoidal API, without importing scheme-pullback coherence. No extra mathematical hypothesis or arbitrary comparison is introduced. The combined consumer also exposed duplicate laxMonoidal_Q from the legacy Derived.Tensor and FiniteCoefficient.Derived.Tensor. All direct ProEtale.Derived/UpperLowerStar imports in this repaired module now consistently use the published FiniteCoefficient paths; the canonical functors, structures, signatures, and equations are unchanged."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -104,11 +105,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-332f7d2f6",
-  "group": "Q27",
-  "result": "pass",
-  "note": "Recorded review.md. Canonical evaluation map, hypotheses, dependencies, universes and edge cases agree with the node. All three immutable modules compile; signatures match exactly. No delivery faults found. Confirmed the separately reported deliver2.py substring-check bug.; reverted the delivery's change of existing node(s) lem-sf-comparison-pullback-exact (--revert-nodes; kept as on newtargets-dag)"
+  "reviewer": "NT-stage2-cc-3fdc5fdc7",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
  }
 }

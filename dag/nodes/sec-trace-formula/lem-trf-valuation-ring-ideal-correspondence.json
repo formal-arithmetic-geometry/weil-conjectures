@@ -132,5 +132,23 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-6310c7416 (reviewer sub-agent of L); spot-checked: The correspondence and all four proof steps are mathematically correct and source-checked against Stacks Tags 00IE/00IH. The item omitted existing statement dependencies def-trf-valuation-ring and def-trf-totally-ordered-abelian-group; corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-ring-ideal-correspondence.json. Full review: review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationRingIdealCorrespondence",
+  "declaration": "ValuationSubring.exists_ideal_orderEquiv_valueGroup",
+  "file": "lean/Sheaf/RingTheory/ValuationRingIdealCorrespondence.lean",
+  "statement": "theorem exists_ideal_orderEquiv_valueGroup {K : Type u} [Field K] (A : ValuationSubring K) : ∃ e : Ideal A ≃o {I : Set (Additive (OrderDual A.ValueGroupˣ)) // I ⊆ Set.Ici 0 ∧ IsUpperSet I}, (∀ (J : Ideal A) (x : Kˣ), Additive.ofMul (OrderDual.toDual (Units.map A.valuation.toMonoidWithZeroHom.toMonoidHom x)) ∈ (e J).1 ↔ ∃ a : A, a ∈ J ∧ (a : K) = (x : K)) ∧ (∀ J : Ideal A, J.IsPrime ↔ 0 ∉ (e J).1 ∧ ∀ γ δ : Additive (OrderDual A.ValueGroupˣ), 0 ≤ γ → 0 ≤ δ → γ + δ ∈ (e J).1 → γ ∈ (e J).1 ∨ δ ∈ (e J).1)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e325a31e7",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause check against Stacks 00IE/00IH and the node. ValuationSubring K is exactly the node's valuation ring. Additive (OrderDual A.ValueGroupˣ) is K×/A× with [x]≤[y] iff y/x∈A (checked against valuation_le_iff); its zero is [1]. The subtype is Ici 0 plus IsUpperSet. Ideal A ≃o is an inclusion-preserving bijection, and the carrier formula ([x]∈eJ iff x∈J) fixes e uniquely because Units.map v is surjective. The prime iff covers both directions and both Stacks clauses. Edge cases (A=K, zero and unit ideals, field zero excluded) hold; no extra assumptions; universe u bound. No duplicate in Mathlib, the side tree or slopmaster2. Docstrings carry the source and blueprint tags; proof is sorry only; the lean.statement field is verbatim; the report has both required sections (the second reading is the author's own pass; not a fault). nt_compile --json: rc 0, 1.6 s, no messages; a broken copy produced an error. No findings."
  }
 }

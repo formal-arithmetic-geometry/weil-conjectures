@@ -224,5 +224,23 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-a0afc440b (reviewer sub-agent of L); spot-checked: Read the complete split and cited statements; checked Stacks 0D6X, 00XR, 00WV, 03AW and 03F9. All four steps, coefficients, variance, edge cases and generic tool uses hold. No new nodes, duplicate, cycle or repair needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.PullbackInjectiveEvaluationAcyclic",
+  "declaration": "CategoryTheory.sitePullback_injective_evaluation_isZero",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PullbackInjectiveEvaluationAcyclic.lean",
+  "statement": "theorem sitePullback_injective_evaluation_isZero {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsContinuous J.toGrothendieck K.toGrothendieck] [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] (I : Sheaf K.toGrothendieck AddCommGrpCat.{u}) [Injective I] (U : C) (p : ℕ) (hp : 0 < p) : IsZero (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p).obj ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).obj I))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fced4d30c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read node, Stacks 0D6X source, all 5 statement deps and the adjunction proof-dep Lean. Every clause matches with nothing weaker or stronger: small sites in common universe u, continuity as hcover/hpullback (same form as the dependency records), cocontinuity alone via Mathlib IsCocontinuous, injective I in Sheaf K AddCommGrpCat.{u}, all U, p : Nat with 0 < p, IsZero of rightDerived p of sheafToPresheaf composed with evaluation at op U. Inverse image is f.sheafPushforwardContinuous = precomposition, the canonical g^-1 by 00XR, correct direction. The IsContinuous instance is implied by 00WW (remark only). Statement field unchanged; only lean changed; lean.statement verbatim. No hollow definitions, sorry only, docstrings with source/blueprint and proof steps, no duplicate, no pro-etale substitute; Worker report and Second reading present. nt_compile.py --json rc=0 with no messages (warn.sorry=false); an injected unknown identifier gave the expected error, so the file is really elaborated."
  }
 }

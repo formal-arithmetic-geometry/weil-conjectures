@@ -397,25 +397,26 @@
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass",
   "declaration": "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean",
+  "statement": "theorem exists_comparisonClassAdjunction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-18",
+  "existing": false,
   "declarations": [
    "AlgebraicGeometry.ProEtale.ComparisonClassAdjunction",
    "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean",
-  "statement": "theorem exists_comparisonClassAdjunction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
-  "branch": "newtargets-dag",
-  "by": "Q97",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "Section 1(B), repair F1: retain the current finite-coefficient import-only repair (legacy derived imports caused duplicate derivedComparisonAdjunctionPlus). Additionally replace the old chosen Nonempty-derived compact-support comparison in homEquiv_normalized by compactSupportSiteComparison, the existing canonical comparison constructed from fixedComparisonDirectImageMatePlus. This repairs the specified normalized Hom chain rather than permitting an arbitrary Hom-bijection family. All other structure fields and the existence theorem signature are retained."
+  "note": "§1(B): the recorded module is repaired to use the canonical mate-based compact-support comparison. It imports FixedComparisonDirectImageMate and defines the normalized Hom chain with fixedCompactSupportComparisonIso, whose proper component is the specified fixedComparisonDirectImageMatePlus mate. The ComparisonClassAdjunction datum now includes the boundedBelow conclusion for the transported right functor on every bounded-below target. The theorem statement and proof plan are unchanged; the added output is a field of the Nonempty datum.",
+  "fixed_by": "NT-stage2-cc-3fdc5fdc7"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ee25470e6",
-  "group": "Q97",
+  "reviewer": "NT-stage2-cc-3fdc5fdc7",
+  "group": "Q63",
   "result": "fix",
-  "note": "Substantive audit passed. Fixed the item’s private import of CanonicalCompactSupportSiteComparison; the complete replacement under fixes/lean/Sheaf/AlgebraicGeometry compiles cleanly with scompile.py."
+  "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
  },
  "split_report": {
   "date": "2026-10-17",

@@ -158,5 +158,24 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-b204a881e (reviewer sub-agent of L); spot-checked: Mathematics and Stacks checks pass, including all hypotheses and empty-product cases. Corrected DAG metadata at fixes/dag/nodes/sec-trace-formula/lem-trf-coherent-product-flat.json: created.item and created.group incorrectly said lem-trf-product-noetherian-flat-mittag-leffler/Q11; fixed to this item/Q77.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoherentProductFlat",
+  "declaration": "coherent_product_flat",
+  "file": "lean/Sheaf/RingTheory/CoherentProductFlat.lean",
+  "statement": "theorem coherent_product_flat (R : Type u) [CommRing R] (hcoh : ∀ (I : Ideal R), I.FG → Module.FinitePresentation R I) (A : Type v) (Q : A → Type w) [∀ a, AddCommGroup (Q a)] [∀ a, Module R (Q a)] (hflat : ∀ a, Module.Flat R (Q a)) : Module.Flat R (∀ a, Q a)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-ff7f8e604"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff7f8e604",
+  "group": "Q113",
+  "result": "fix",
+  "note": "Statement verified clause by clause against the node and Stacks 05CZ (1)=>(2): CommRing R; coherence inline as forall I : Ideal R, I.FG -> Module.FinitePresentation R I (Stacks 05CW; no coherent-ring DAG node exists); A : Type v with no Nonempty/Finite; Q : A -> Type w with AddCommGroup/Module; hflat : forall a, Module.Flat R (Q a); conclusion Module.Flat R (forall a, Q a). Empty index, zero factors and the zero ring are covered; universes u v w are independent and bound; lean.statement is verbatim; recorded Mathlib deps are used directly; my own Mathlib/side/slopmaster2 searches found no existing result; the only proof is sorry; imports are Mathlib; report has Worker report and Second reading sections. Finding H8: the theorem docstring lacked the node's proof step by step. Fixed in fixes/CoherentProductFlat.lean (complete replacement, signature unchanged) with the 3 proof steps citing lem-weil-pbc-flat-fg-ideal-criterion, def-sc-finitely-presented-module, lem-trf-finite-presentation-tensor-products, def-weil-pbc-flat-ring-map, def-weil-pbc-module-tensor-product. nt_compile.py --json: delivered file clean (2.2 s), fixed file clean (1.8 s); error reporting confirmed with a deliberate test error."
  }
 }

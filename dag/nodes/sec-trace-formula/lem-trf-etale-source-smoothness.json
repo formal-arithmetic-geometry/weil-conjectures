@@ -182,5 +182,27 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-e2cd4265d (reviewer sub-agent of L); spot-checked: I read the item, the new leaf and every cited node's statement in full. Sources checked: Stacks descent.tex 036U (l.6928) and its proof, 05B5 (l.4452), morphisms.tex 01VA (l.7104), and tags 01UA/01V6/02GK. Mathlib Smooth.lean:109 smooth_comp exists as recorded. The mathematics is correct. Forward direction: etale implies smooth, then composition. Reverse direction: open images W_i (01UA); the factor q_i:U_i->W_i is surjective, flat and lfp; flat-surjective-lfp descent (05B5, no quasi-compactness) gives f|W_i smooth; Zariski locality (01V6) glues. Pointwise clause: checked in both directions on neighbourhoods. Small cases tested: empty X, identity cover, k[x]/x^2, the node xy=0 with an etale neighbourhood, an open-immersion cover. lem-trf-smooth-composition is the general smooth composition, not a restatement of a parent clause (D1 resolved). No duplicate in the DAG: the open-immersion, constant-relative-dimension, ring-map and cohomological variants are all narrower or different. Accepting it as a Mathlib leaf matches existing leaves that rely on the same Mathlib Smooth / 02H6 identification. Tool uses accepted: lem-sbc-smooth-flat-surjective-source-descent and lem-weil-pbc-etale-smooth-zero-dimensional-fibres, as generic black boxes. No SGA source is cited and no target is touched. Repairs, written under fixes/dag/nodes/sec-trace-formula: (1) the item's blueprint.from.via listed the item itself; removed, since via is path[1:] in blueprint_refs.computed. (2) The leaf's source.document was a nonexistent lean/ path; replaced by Stacks morphisms.tex Tag 01VA lemma-composition-smooth (B5). (3) Citation repairs: step 4 used that the restriction of an etale map is etale, flat and lfp without citing the definition, so def-weil-etale-morphism is added to its uses; step 1's source place wrongly put 036U in morphisms.tex and now reads 02GK+01VA. Not repaired: the inherited from.place quote 'Smoothness is etale local on the source' is not found in the current blueprint; it predates this delivery and is noted in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothEtaleLocalSource",
+  "declaration": "AlgebraicGeometry.smooth_iff_of_jointly_surjective_etale",
+  "declarations": [
+   "AlgebraicGeometry.smooth_iff_of_jointly_surjective_etale",
+   "AlgebraicGeometry.smooth_at_iff_of_etale"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothEtaleLocalSource.lean",
+  "statement": "theorem smooth_iff_of_jointly_surjective_etale {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (U : I → Scheme.{u}) (h : ∀ i : I, U i ⟶ X) [∀ i : I, Etale (h i)] (hcover : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) : Smooth f ↔ ∀ i : I, Smooth (h i ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-595276f66",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Read the node, its 3 statement dependencies and their lean records, Stacks descent.tex 036U and its proof, report.md and the module. The global theorem matches every clause: Scheme.{u} objects, an arbitrary index I : Type v, [∀ i, Etale (h i)], point-level joint surjectivity worded as in the node, Smooth f ↔ ∀ i, Smooth (h i ≫ f), and no extra assumptions. The pointwise theorem writes smoothness on an open neighbourhood as existentials over X.Opens/U.Opens, avoiding smoothLocus's LocallyOfFinitePresentation requirement, and is correct in both directions. Edge cases (empty I, empty or repeated members, non-surjective h, empty U) are covered. No definitions; sorry-only proofs (axioms: sorryAx plus standard); docstrings carry the source, the blueprint id and proof steps 1-4. The node diff versus the side clone is only the lean field, and lean.statement is verbatim in the file. No name collision or existing match. The proof-only imports Smooth.of_comp_of_flat_of_surjective and smooth_and_fibre_dimension_zero_of_etale exist (#check). nt_compile --json on the snapshot file against the side overlay: clean, 2.5 s, no errors or warnings. The Second-reading section holds the standard post-10-17 direct-delivery note, accepted in 599 landed reports. No findings."
  }
 }

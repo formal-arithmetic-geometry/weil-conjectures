@@ -219,5 +219,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-3fb8ba1f0 (reviewer sub-agent of L); spot-checked: Read all three nodes and checked every step against Stacks 059S, 0AS6 and 059G. Repaired the countable-only ML citation, malformed TeX arrows, and missing Lazard tool declaration. Mathematical argument, edge cases, duplicate checks and dependency checks pass. Full findings in review.md; corrected JSON files under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.FlatMittagLefflerCriterion",
+  "declaration": "Module.flat_mittag_leffler_criterion",
+  "file": "lean/Sheaf/SecTraceFormula/FlatMittagLefflerCriterion.lean",
+  "statement": "theorem flat_mittag_leffler_criterion (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Flat R M] : Module.IsMittagLeffler.{u, v, max u w, t} R M ↔ ∀ (F : Type (max u z)) [AddCommGroup F] [Module R F], (∃ n : ℕ, Nonempty (F ≃ₗ[R] (Fin n → R))) → ∀ x : F ⊗[R] M, ∃ G₀ : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G₀.subtype) ∧ ∀ G : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G.subtype) → G₀ ≤ G",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8571fa57d",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Every clause matches Stacks 059S and the node: flatness via Module.Flat, Module.IsMittagLeffler, F ≃ₗ Fin n → R with n=0 allowed, rTensor of G.subtype, least (not minimal) submodule. Universes w,t,z are bound and the iff holds at every level (0AS6 index/quotients and the Hom duals transport into the allowed universes). Edge cases n=0, x=0, M=0 and the zero ring pass; no extra assumptions. No definitions, sorry-only proof, docstrings carry the source place, blueprint tag and six proof steps. lean.statement matches the file verbatim and only the lean field changed. No duplicate in Mathlib or the side Sheaf tree. nt_compile (side overlay) is clean; #print axioms shows only sorryAx beyond the standard axioms. The Second-reading section is the standard post-10-17 note. No findings."
  }
 }

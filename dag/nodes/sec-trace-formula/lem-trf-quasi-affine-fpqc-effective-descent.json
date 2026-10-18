@@ -291,5 +291,23 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-95ed42ee3 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass for all 10 steps and both new nodes. Fixed the item’s copied created metadata (Q52 / lem-trf-separated-lqf-fppf-effective-descent) in fixes/dag/nodes/sec-trace-formula/lem-trf-quasi-affine-fpqc-effective-descent.json; no proof or statement changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_isQuasiAffineHom_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineFpqcDescent.lean",
+  "statement": "theorem isEffective_of_isQuasiAffineHom_fpqc {A B : Scheme.{u}} (p : A ⟶ B) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage B) {V : Over A} [IsQuasiAffineHom V.hom] (D : Over.DescentDatum p V) : D.IsEffective",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d6f59785",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0247 (singleton fpqc): p : A ⟶ B with Presieve.singleton p ∈ Scheme.fpqcPrecoverage B (recorded fpqc leaf, not strengthened to QuasiCompact/affine); V : Over A with [IsQuasiAffineHom V.hom] (recorded def-nagata-quasi-affine-morphism, preimages of affine opens are Scheme.IsQuasiAffine = qc open in affine); D : Over.DescentDatum p V (recorded def-pd-descent-datum, transport form with cocycle; transport_self implied); conclusion D.IsEffective = ∃ V₀ over B, Cartesian square plus invariance, i.e. V₀×_B A ≅ V inducing φ. No lfp/finite-type/Noetherian/affine assumptions; single universe u, no unbound variables; lean.statement verbatim equal to signature. Edge cases (empty V/B, identity p, non-affine A/B) covered. No definitions, proof is only sorry, docstrings have source place, blueprint tag and the 10 proof steps; proof-only imports AffineFpqcDescent and FpqcDescendingTypesMorphisms exist; report has Worker report and Second reading by N9. nt_compile.py --json on the snapshot file: rc=0, no errors (~3 s); control with an injected unknown identifier showed the tool reports errors. No findings."
  }
 }

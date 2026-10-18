@@ -13,7 +13,8 @@
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
@@ -250,5 +251,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-b5dc2d960 (reviewer sub-agent of L); spot-checked: Read the item, report, route files, cited nodes, unit/chapter, and Stacks Tag 0E38. All six proof steps are mathematically valid with hypotheses checked, empty and small cases tested, citations matching statements, no duplicate/new-node issue, no route-lock violation, and no long hidden lemma. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents",
+  "declaration": "AlgebraicGeometry.complementary_pure_subcurve_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplementaryPureSubcurveComponents.lean",
+  "statement": "theorem complementary_pure_subcurve_components (X Y Z : Scheme.{u}) [IsReduced X] [IsNoetherian X] (hX : X.IsPureDimension 1) (iY : Y ⟶ X) [IsClosedImmersion iY] [IsReduced Y] (hY : Y.IsPureDimension 1) (iZ : Z ⟶ X) [IsClosedImmersion iZ] [IsReduced Z] (hZ : Set.range iZ = closure (Set.range iY)ᶜ) : (irreducibleComponents X).Finite ∧ (∃ I : Set (Set X), I ⊆ irreducibleComponents X ∧ Set.range iY = ⋃₀ I ∧ Set.range iZ = ⋃₀ (irreducibleComponents X \\ I)) ∧ Z.IsPureDimension 1 ∧ ∃ φ : Y ≅ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure (Set.range iZ)ᶜ)).subscheme, φ.hom ≫ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure (Set.range iZ)ᶜ)).subschemeι = iY",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22bcf7535",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: IsReduced, IsNoetherian (exactly locally Noetherian + compact), IsPureDimension 1 for X/Y/Z, reduced closed immersions; Z given by its image, which is equivalent by the reduced-induced uniqueness clause; component finiteness, I with range iY = ⋃₀I and range iZ = ⋃₀(components \\ I), and the double complement as an iso over X with the canonical vanishingIdeal subscheme. No stronger assumptions; universe u bound; empty cases covered; checked against Stacks Tag 0E38. Only node change: lean record plus added stmt_dep def-weil-pure-dimension (existing landed node); lean.statement verbatim. No definitions, only sorry, docstrings with source and blueprint, no pro-etale content. Report has a Worker report and a short but substantive Second reading by Q119. nt_compile clean in 1.7 s, with the parse confirmed by #check. No findings requiring change."
  }
 }

@@ -218,5 +218,24 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-6d09af0eb (reviewer sub-agent of L); spot-checked: Read the complete item, unit, cited nodes, Tag 058G source, definitions, searches, and packet/report. All eight construction and universal-property steps are mathematically valid, hypotheses and edge cases check out, no new nodes or route violations occur, and the finite-presentation colimit statement is correctly supported. The report has a minor file-list imprecision, but citations and searches are embedded in the item record and the DAG split is sound."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ModuleFinitelyPresentedDirectedColimit",
+  "declaration": "Module.exists_directed_colimit_finitelyPresented_modules",
+  "file": "lean/Sheaf/RingTheory/ModuleFinitelyPresentedDirectedColimit.lean",
+  "statement": "theorem exists_directed_colimit_finitelyPresented_modules (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] : ∃ (I : Type (max u v)) (_ : PartialOrder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (F : I ⥤ ModuleCat.{max u v} R), (∀ i : I, Module.FinitePresentation R (F.obj i)) ∧ ∃ (c : Cocone F), Nonempty (c.pt ≃ₗ[R] M) ∧ Nonempty (IsColimit c)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing sibling Module.exists_small_directed_colimit_finitePresentation forces stages into ModuleCat.{v} R for a module M : Type v and an independently larger ring R : Type u; this is not the source construction in that universe case. The present statement puts stages in max u v and identifies the cocone vertex with M by a cross-universe linear equivalence. The natural-language statement is unchanged; see the report for the existing-interface fault and complete clause matching."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-114dcf951",
+  "group": "NN",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 058G clause by clause: CommRing R : Type u, module M : Type v (independent universes), ∃ I : Type (max u v) with PartialOrder, Nonempty, IsDirected, F : I ⥤ ModuleCat.{max u v} R with Module.FinitePresentation stages, a colimit cocone whose vertex is linearly equivalent to M (equivalent to compatible maps identifying M with the colimit). Statement is true via the source construction in max u v. Node diff vs side clone: only the lean record is added; statement unchanged; lean.statement matches the file. Edge cases (M=0, zero ring, modules not finitely generated, u>v and v>u) covered without extra assumptions. Docstrings carry source place, blueprint tag and the 8 proof steps; no definitions; proof is sorry; no pro-etale content. nt_compile.py --json: compiles in 2.0 s, no errors. Outside this delivery: the sibling Module.exists_small_directed_colimit_finitePresentation (stages in ModuleCat.{v} R) is false when u>v and needs its own repair."
  }
 }

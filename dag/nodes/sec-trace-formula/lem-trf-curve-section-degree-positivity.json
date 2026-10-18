@@ -217,5 +217,23 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-5acd5b99a (reviewer sub-agent of L); spot-checked: One repairable citation omission: Step 1 uses the equivalence between the zero scheme’s nonemptiness and the nonvanishing locus being proper without citing lem-pc-zero-scheme-properties. Added that citation and proof dependency in fixes/dag/nodes/sec-trace-formula/lem-trf-curve-section-degree-positivity.json. Full mathematical review and source checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveSectionDegreePositivity",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_section_degree_nonneg_and_pos_of_nonvanishingLocus_ne_univ",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveSectionDegreePositivity.lean",
+  "statement": "theorem curve_section_degree_nonneg_and_pos_of_nonvanishingLocus_ne_univ {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = (1 : WithBot ℕ∞)) (L : C.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (hs : s ≠ 0) : 0 ≤ degree k L ∧ (nonvanishingLocus L s ≠ Set.univ → 0 < degree k L)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e67b81036",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Checked the Lean statement clause by clause against the node and Stacks 0B40 (1),(2) (varieties.tex 9934-9963). Every object is the recorded dependency declaration: Field, IsIntegral, IsProper (C ↘ Spec k), topologicalKrullDim C = 1, IsInvertible, Γ(L,⊤) with s≠0, Modules.degree = χ(L)-χ(O), nonvanishingLocus. Conclusion is 0≤deg ∧ (C_s≠univ → 0<deg), same quantifiers and no extra assumptions. Edge cases: empty scheme excluded by integrality, s=0 excluded, nowhere-vanishing trivial case consistent, non-rational points covered, the shared universe u is forced by the degree interface. No definitions, sorry only, source and blueprint docstrings with the 4-step proof, lean.statement verbatim, imports correct. nt_compile.py --json compiled clean in 2.4 s, and an injected-error control run confirms the tool reports errors. The Second reading section only states the 2026-10-17 policy; accepted. No findings."
  }
 }

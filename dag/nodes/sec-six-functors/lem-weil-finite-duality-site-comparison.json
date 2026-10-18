@@ -23,7 +23,11 @@
   "def-weil-finite-tor-amplitude",
   "def-pur-derived-internal-hom",
   "def-weil-exceptional-inverse-image",
-  "lem-weil-duality-pairing"
+  "lem-weil-duality-pairing",
+  "def-sf-evaluation-hom-site-comparison",
+  "lem-sf-hom-comparison-finite-free",
+  "thm-sf-ambient-adjoint-class",
+  "cor-pur-general-admissibility-datum"
  ],
  "proof": [
   {
@@ -447,5 +451,35 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-d6b6d1131 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, both blueprint snapshots (identical text; paragraph 1 is the closed comparison, paragraph 2 the locally closed sentence) and unit sk-prop-sf-rf-shriek-preservation. Item statement unchanged and not weakened. It is not a target, so no master base-change declaration applies; the coefficient category is constant A_{E,n} on the small et/proet sites throughout; no SGA. New node lem-weil-finite-duality-closed-comparison is true. Proof: map the nu^* image of the etale support triangle to the proet support triangle; prop-weil-pbc-comparison-direct-image handles Rj_* (T Noetherian, j qcqs); Hom(i_*X,Rj_*Y)=0 makes the fibre map i_*alpha; full faithfulness of proet i_* finishes. It is not a duplicate of lem-coef-site-closed-counit-transport, which compares with the transported J, not the ambient sections-with-support Ri^!. New node lem-weil-finite-duality-locally-closed-comparison is true: closed comparison pasted with open restriction, then eta_M and uniqueness of adjoints. Neither node restates a parent clause. Edge cases Z empty, Z=T, s open, s closed and S empty all behave correctly. B1-B9 hold; no cycle (DFS); proof_deps equals the union of uses; no step over 2000 characters. Steps 4 (preservation clause (1) plus constructible origin plus D^+ full faithfulness), 7, 8, 9 and 10 check against the cited statements. One C1 fault, fixed: step 5 produced generators Rg_*j_!L_0 (open into closure, then closed) but steps 3 and 8 use Rs_!=v_!Rc_* (closed, then open), and nothing cited the identification. I added lem-weil-pbc-closed-immersion-finite (Mathlib leaf), lemma-weil-pbc-finite-direct-image-exact and lem-sfb-etale-locally-closed-extension-comparison, a sentence that the identification suffices by naturality of beta in K, and two split_report.tool_uses. Accepted tool uses: lem-weil-pbc-comparison-direct-image-canonical-mate plus the two I added. Corrected item in fixes/dag/nodes/sec-six-functors/; full checks in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteDualitySiteComparison",
+  "declaration": "WeilConjectures.finite_duality_site_comparison",
+  "declarations": [
+   "CategoryTheory.finiteDualitySingleTransport",
+   "AlgebraicGeometry.ProEtale.finiteDualityBaseUnit",
+   "AlgebraicGeometry.ProEtale.finiteDualityEtaleObject",
+   "AlgebraicGeometry.ProEtale.finiteDualityProEtaleObject",
+   "AlgebraicGeometry.ProEtale.finiteDualityObjectMap",
+   "AlgebraicGeometry.ProEtale.FiniteDualityCompatibility",
+   "AlgebraicGeometry.ProEtale.FiniteDualityComparisonData",
+   "WeilConjectures.FiniteDualitySiteComparison",
+   "WeilConjectures.finite_duality_site_comparison"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteDualitySiteComparison.lean",
+  "statement": "theorem finite_duality_site_comparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : FiniteDualitySiteComparison D l hl E n hn X",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers expose the prescribed dualizing objects, their canonical comparison arrow from the comparison adjunction unit, and both evaluation/biduality commuting diagrams. The theorem uses the evaluation-defined Hom comparison, fixed-scalar finite-Tor predicates, and comparison-class exceptional functor; no ambient pro-etale adjoint is assumed. Generic helper parameters are fixed by the final coefficient specialization. Constant-unit transport composes the published exact-functor single-functor comparison with the existing degree-zero unit identifications and canonical constant-unit map. This avoids expensive conversion checks without changing the theorem or any mathematical clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fdc5fdc7",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
  }
 }

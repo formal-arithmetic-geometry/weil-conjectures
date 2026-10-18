@@ -128,5 +128,27 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-2f13fe2e9 (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, Tag 05BC and Tag 058K sources, unit route, and required stage documents. All hypotheses and four proof steps check out; edge cases and Artin–Rees lifting were verified. No new nodes, duplicates, cycles, route-pivot machinery, or SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedFreeIntoProductUniversallyInjective",
+  "declaration": "AdicCompletion.completedFreeToProduct_lTensor_injective",
+  "declarations": [
+   "AdicCompletion.completedFreeToProduct",
+   "AdicCompletion.completedFreeToProduct_lTensor_injective"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletedFreeIntoProductUniversallyInjective.lean",
+  "statement": "theorem completedFreeToProduct_lTensor_injective {R : Type u} [CommRing R] [IsNoetherianRing R] (I : Ideal R) [IsAdicComplete I R] (A : Type v) (Q : Type (max u v w)) [AddCommGroup Q] [Module R Q] : Function.Injective ((completedFreeToProduct I A).lTensor Q)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c581e9327",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Delivery c581e9327a16 adds only the module, the node's lean record (statement verbatim in file, no statement_change) and a report with Worker report and Second reading sections. All Tag 05BC/node clauses match: CommRing + IsNoetherianRing + arbitrary ideal + IsAdicComplete I R, arbitrary A, F = A →₀ R, AdicCompletion I (A →₀ R), product A → R, lTensor Q injective; no stronger hypotheses. completedFreeToProduct is real canonical data (pi of the inverse ofLinearEquiv after completed evaluation); compiled check proves it sends of f to f coordinatewise. Q : Type (max u v w) is no real restriction (ULift) and matches universally_injective_tensor_iff's interface. Edge cases (A empty or finite, I=0, I=R, Q=0) covered. No duplicate in Mathlib or the project. Docstrings carry the source place, blueprint and all 4 proof steps; single sorry; no pro-etale. nt_compile --json: module clean in 1.7 s, helper def sorry-free. No findings."
  }
 }

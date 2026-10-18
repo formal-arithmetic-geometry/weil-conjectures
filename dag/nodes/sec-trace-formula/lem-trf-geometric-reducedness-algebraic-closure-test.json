@@ -168,5 +168,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-ad6cc2b1b (reviewer sub-agent of L); spot-checked: Reviewed the item, all three new nodes, cited statements, Stacks Tags 035X/020I/09GV, Mathlib matches, unit/chapter route, hypotheses, edge cases, duplicates, and route constraints. Wrote review.md; no repairs or tool uses accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest",
+  "declaration": "AlgebraicGeometry.geometricallyReduced_iff_isReduced_algebraicClosure_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyReducedAlgebraicClosureTest.lean",
+  "statement": "theorem geometricallyReduced_iff_isReduced_algebraicClosure_baseChange {k Ω : Type u} [Field k] [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (X : Scheme.{u}) [X.Over (Spec (.of k))] : GeometricallyReduced (X ↘ Spec (.of k)) ↔ IsReduced (pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k Ω))))",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-758a80422",
+  "group": "Q155",
+  "result": "pass",
+  "note": "All node clauses match the Lean: field k; scheme X over k via X.Over and X ↘ Spec k; chosen closure Ω with IsAlgClosure k Ω; Mathlib GeometricallyReduced (proved in a probe to be reducedness of the pullback along Spec.map (algebraMap k K) for every field K over k); IsReduced of the pullback to Spec Ω; iff. No extra hypotheses. Empty scheme, all characteristics and k = Ω are allowed. The single universe u is forced by Spec and loses no generality. lean.statement matches the file verbatim and the node differs from the side clone only in lean. Imports are those of the statement and proof deps; docstrings name the source and blueprint id and carry the 4 proof steps; proof is sorry only. nt_compile.py: clean, about 2 s. Probe: signature checked, only sorryAx beyond standard axioms. Searches found no existing statement or name collision. Note only: the Second reading section is a placeholder under the 2026-10-17 policy."
  }
 }
