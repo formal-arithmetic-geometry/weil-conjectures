@@ -20,9 +20,222 @@
   "def-weil-geometric-point",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow T$ with complement $j$, write $P_ZF=\\ker(F\\to j_*j^*F)$ and $i^!_0F=i^*P_ZF$. The supported-kernel adjunction gives $P_ZF=i_*i^!_0F$, exactness of $i_*$, and $i_*\\dashv i^!_0$ on abelian sheaves. These assertions extend to constant $\\Lambda$-module sheaves: all maps are natural in $F$, so commute with multiplication by each scalar; the Hom bijection restricts to linear maps because a map commutes with each scalar exactly when its transpose does. Exact coefficient forgetting detects exactness. Thus these are the same supported kernels in the module category, not a different coefficient theory.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, support adjunction in its proof; scalar-linear restriction of that adjunction"
+   }
+  },
+  {
+   "text": "The inverse image $i^*$ is exact and left adjoint to $i_*$. Therefore $i_*$ preserves injectives. Since $i_*$ is exact and left adjoint to $i^!_0$, the latter also preserves injectives. Consequently $P_Z=i_*i^!_0$ preserves injectives. On a bounded-below injective representative $I$ of $L$ put $P_Z^RL=P_ZI=i_*Ri^!L$. This specifies the derived sheaf of supported sections on $T$. All its cohomology sheaves are supported on $|Z|$, since the terms vanish on the complementary open.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic; injective-model construction of derived supported sheaves"
+   }
+  },
+  {
+   "text": "The same representative gives $R\\Gamma_Z(T,L)=R\\Gamma(T,P_Z^RL)$: both are represented by $\\Gamma(T,P_ZI)$, since $P_ZI$ is a bounded-below complex of injectives. If $W\\subseteq |Z|$ is closed, it also gives $R\\Gamma_W(T,P_Z^RL)=R\\Gamma_W(T,L)$, since a section supported on $W$ already lies in $P_ZI$, so $\\Gamma_W(T,P_ZI)=\\Gamma_W(T,I)$ in every degree. These identities depend only on the closed subsets, not on nilpotents in their scheme structures, because the defining restriction kernel uses only the complementary open.",
+   "uses": [
+    "def-pur-etale-derived-supported-sections",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, section-cohomology-support; the two composite-functor identities on injective complexes"
+   }
+  },
+  {
+   "text": "We will use the following elementary calculation from the injective representative, for either global sections or sections with a fixed closed support, or the sheaf functor $P_Z$. If $L\\in D^{\\geq q}$, take $J^r=0$ for $r<q$ in such a representative. For a left exact functor $F$, $FJ$ vanishes below $q$ and $H^q(FJ)=\\ker(FJ^q\\to FJ^{q+1})=F(\\ker(J^q\\to J^{q+1}))=F(\\mathcal H^qL)$. Thus $RF(L)$ has the same lower bound and its bottom cohomology is the underived functor of the bottom cohomology. No spectral sequence, convergence, or dimension bound is needed.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-pur-etale-derived-supported-sections",
+    "lem-pur-etale-supported-kernel-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI and 05TC, lemma-enough-injectives-right-derived and lemma-negative-vanishing; bottom-degree kernel calculation"
+   }
+  },
+  {
+   "text": "For an etale map $v:T'\\to T$, restriction sends injective module sheaves to injectives. Sectionwise the kernels satisfy $(P_ZF)|_{T'}=P_{Z\\times_TT'}(F|_{T'})$: on an etale object $B\\to T'$ both are the kernel of $F(B)\\to F(B\\setminus (Z\\times_T B))$. Applying this to an injective representative gives $v^*P_Z^RL=P_{Z\\times_TT'}^R(v^*L)$ and the corresponding formulas for supported sections on etale objects. Exactness of inverse image identifies its cohomology sheaves with the inverse images of the cohomology sheaves.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, section-cohomology-support, definition on etale objects; restriction of injective representatives"
+   }
+  },
+  {
+   "text": "All affine etale schemes used below are Noetherian. Indeed, etale maps are locally of finite presentation; their affine source has a finite cover by affine charts with finitely presented, hence finite-type, coordinate algebras over Noetherian affine charts of the base. Those algebras are Noetherian. For an affine Noetherian $T=\\operatorname{Spec}B$ and a geometric point $\\bar t$ over the prime $\\mathfrak p$, the affine strict-local comparison identifies the ring of $T_{(\\bar t)}$, as a $B$-algebra, with a strict henselization of $B_{\\mathfrak p}$; $B_{\\mathfrak p}$ is Noetherian by localization, and its strict henselization by the strict-henselization theorem. For an affine scheme $T$, its strict-localization map $T_{(\\bar t)}\\to T$ is affine and ind-etale by the affine-chart strict-henselization lemma. These verify the hypotheses of the ind-etale supported base-change theorem whenever we use it.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Strict-localization prerequisites; Noetherian local rings and affine ind-etale strict localizations"
+   }
+  },
+  {
+   "text": "Here is the geometry at a generic point of a closed support. Let $T=\\operatorname{Spec}B$, $E=V(J)$, and let $t=\\mathfrak p$ be a generic point of an irreducible component of $E$, so $\\mathfrak p$ is minimal among primes containing $J$. Let $C$ be the ring of $T_{(\\bar t)}$. The affine strict-local comparison gives a $B$-algebra isomorphism of $C$ with a strict henselization of $B_{\\mathfrak p}$, so every element of $B$ outside $\\mathfrak p$, already a unit in $B_{\\mathfrak p}$, is a unit in $C$; the chart maximal-ideal lemma (with the identity chart of $T$, whose ring map is the structural one) gives that the maximal ideal of $C$ is $\\mathfrak p C$. A prime of $C$ lying over $E$ therefore contracts to a prime containing $J$ and contained in $\\mathfrak p$; by minimality its contraction is $\\mathfrak p$, so it contains $\\mathfrak p C$ and is the maximal ideal. Hence the inverse image of $E$ in $T_{(\\bar t)}$ is exactly its closed point. This argument applies also to $E=\\overline{\\{t\\}}$ for any $t$.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Strict localization at the generic point of a support; the maximal-ideal formula in the strict-henselization construction"
+   }
+  },
+  {
+   "text": "For the strict-localization map $g:T'\\to T$ of an affine Noetherian scheme and a closed immersion $i:Z\\hookrightarrow T$, ind-etale supported base change gives $h^*Ri^!L\\cong Ri'^!g^*L$. The same theorem specifies the closed direct-image base-change isomorphism $g^*i_*\\cong i'_*h^*$. Combining them gives $g^*P_Z^RL\\cong P_{Z\\times_TT'}^R(g^*L)$. For an etale $v:T\\to X$, the strict-local invariance theorem identifies $T_{(\\bar t)}$ with $X_{(v\\bar t)}$ over $X$. Thus the closed-point supported cohomology after either strict localization is the costalk in the statement.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q9, 0A45 and 09XQ, ind-etale support base change and strict-local invariance"
+   }
+  },
+  {
+   "text": "Assume (1) and fix affine etale $u:V\\to X$ and $Z$ as in (2). Put $L=u^*K$, $M=P_Z^RL$. Fix $b$ with $K\\in D^{\\geq b}$; Steps 4 and 5 give $M\\in D^{\\geq b}$. If some $\\mathcal H^qM\\ne0$ with $q\\leq a$, choose the least such $q$ (among the integers at least $b$), so $M\\in D^{\\geq q}$. A nonzero sheaf has a nonzero section $s$ on some affine etale $W\\to V$ (restrict any nonzero section to an affine cover). The zero-open lemma shows that its support $E\\subset W$ is nonempty and closed and that its germ is nonzero at every point of $E$. Since $\\mathcal H^qM$ is supported on $Z$, $E\\subseteq Z\\times_VW$. Choose an irreducible component of $E$ and its generic point $w$, using finite decomposition of closed subsets and sobriety. Then $u(w)\\in S$.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04FR and 04FT, zero locus and closed support of a section; generic point of that closed support"
+   }
+  },
+  {
+   "text": "Choose a geometric $\\bar w$ over $w$ and pull $M|_W$ and $s$ back to $T=W_{(\\bar w)}$. Its pullback $N$ is in $D^{\\geq q}$ by exactness. The pulled-back section of $\\mathcal H^qN$ is supported at the closed point by Step 7: it is zero off the inverse image of $E$, since $s$ was already zero on $W\\setminus E$. Its closed-point germ is nonzero by inverse-image compatibility with germs. Thus $\\Gamma_{\\{w_0\\}}(T,\\mathcal H^qN)\\ne0$. Step 4 identifies this with $H^qR\\Gamma_{\\{w_0\\}}(T,N)$. Steps 5 and 8 identify $N$ with $P_{Z_T}^R(K|_T)$, and $w_0\\in Z_T$. Step 3 then identifies this nonzero group with $H^qR\\Gamma_{\\{w_0\\}}(T,K|_T)=H^q(C_{u\\bar w}K)$. This contradicts (1). Hence $M\\in D^{\\geq a+1}$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04FR, 03Q9, 09XQ and 0A45; the generic-support section produces a nonzero bottom costalk"
+   }
+  },
+  {
+   "text": "By Step 3, $R\\Gamma_Z(V,u^*K)=R\\Gamma(V,M)$. Global sections is left exact, so the injective calculation in Step 4 applied to $M\\in D^{\\geq a+1}$ makes this complex concentrated in degrees at least $a+1$. This is precisely (2).",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing; global sections of a complex with a lower cohomological bound"
+   }
+  },
+  {
+   "text": "Conversely assume (2). Let $V\\to X$ be affine etale and let $Z\\subseteq V$ be closed with image in $S$. Then $M=P_Z^R(K|_V)$ is in $D^{\\geq a+1}$. To see this, otherwise choose its first nonzero $\\mathcal H^qM$, $q\\leq a$, as in Step 9, and a nonzero section on an affine etale $W\\to V$. Steps 4 and 5 identify this section group with $H^qR\\Gamma(W,M|_W)=H^qR\\Gamma_{Z_W}(W,K|_W)$, the latter by Step 3. Replace $Z_W$ by the reduced induced closed subscheme: Step 3 shows that the complex is unchanged. The composite $W\\to X$ is affine etale as an object of the small site (its source is affine), and the image of this reduced support is in $S$. Hypothesis (2) makes the displayed group zero, a contradiction. This proves the claimed sheaf bound for every such $Z$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, section-cohomology-support, bottom-degree detection by sections on affine etale objects; reduction does not change the complement"
+   }
+  },
+  {
+   "text": "Fix $x\\in S$ and any geometric $\\bar x$ over $x$. Choose an affine open $V\\subseteq X$ containing $x$ and give $Z=\\overline{\\{x\\}}\\cap V$ its reduced induced structure. Specialization stability ensures $Z\\subseteq S$. Step 12 gives $P_Z^R(K|_V)\\in D^{\\geq a+1}$. Pull this to $T=V_{(\\bar x)}$, which the strict-local invariance theorem for the open (hence etale) immersion $V\\hookrightarrow X$ identifies with $X_{(\\bar x)}$ over $X$, closed point to closed point. By Step 7, the inverse image of $Z$ is the closed point; Step 8 identifies the pullback with $P_{\\{x_0\\}}^R(K|_T)$. Its lower bound is preserved by exact pullback. Taking derived global sections preserves that bound by Step 4. Step 3 identifies the result with $C_{\\bar x}K$. Thus $H^mC_{\\bar x}K=0$ for $m\\leq a$, proving (1). The choice of $\\bar x$ was arbitrary.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-per-ind-etale-closed-support-base-change",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09XQ and 0A45; strict localization of the closure of a point and the supported base-change comparison"
+   }
+  },
+  {
+   "text": "Finally take a bounded-below injective representative $I$ of $K$. Exact etale extension and restriction form the adjunction $u_!\\dashv u^*$; in particular $u^*I$ is injective termwise. The localization-to-derived-Hom bijection computes $\\operatorname{Hom}_D(u_!i_*\\Lambda_Z[-m],K)$ by chain maps into $I$ modulo homotopy. Termwise adjunction identifies its Hom complex with $\\operatorname{Hom}_V(i_*\\Lambda_Z,u^*I)$. The scalar-linear supported adjunction of Step 1 identifies this complex with $\\Gamma(Z,i^!_0u^*I)=\\Gamma_Z(V,u^*I)$: a linear map from the rank-one constant module is determined by the image of $1$, and conversely any global section gives such a map. Taking $H^m$ proves the stated natural group isomorphism; the shift $[-m]$ places its source in degree $m$. All identifications are functorial (adjunctions, kernels and evaluation at $1$), so the isomorphism is natural in $K$. None of these steps uses excellence, constructibility, invertibility of a coefficient characteristic, or finite dimension.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-etale-supported-kernel-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, support adjunction; Modules on Sites Tags 03DH and 03DJ, exact etale extension; Hom into bounded-below injective complexes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-pur-etale-derived-supported-sections",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-sc-etale-section-zero-open",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII 5.2, printed p. 287, cosupport condition. Agent-written generic-support argument from the cited Stacks inputs; this detailed equivalence is not asserted to be printed in XVII 5.2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +271,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected the returned signatures; ordinary derived t-structures, module local cohomology, sheaf generators without support constraints, and open immersions do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of low degree etale cohomology with closed supports detected by exceptional costalks at all geometric points",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isZero_of_isGE\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"costalk\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lower vanishing bound on derived supported sections of an etale complex is detected by local cohomology at geometric points",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isZero_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isGE\", \"CochainComplex.isStrictlyGE_iff\", \"CochainComplex.isStrictlyLE_iff\", \"CochainComplex.isStrictlyGE_of_ge\", \"CochainComplex.isZero_of_isGE\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bottom cohomology of a right derived left exact functor is the underived functor applied to the bottom cohomology object",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived local cohomology at a point is a filtered colimit of cohomology supported on its closure over pointed etale neighborhoods",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.hasColimitDiagram\", \"localCohomology.ofDiagram\", \"localCohomology.diagram\", \"localCohomology.ofSelfLERadical\", \"localCohomology\", \"ModuleCat.Tilde.toStalk\", \"localCohomology.isoSelfLERadical\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded below etale complex vanishing of geometric costalks in degrees at most a is equivalent to vanishing of cohomology with every closed support in a specialization closed set",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isZero_of_isGE\", \"CochainComplex.isZero_of_isLE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\", \"CochainComplex.isGE_iff\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern ordinary t-structure bounds, ring-module local cohomology or zeroth derived functors, not the equivalence for arbitrary etale supported cohomology and geometric costalks."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-perversity-localization-calculus",
@@ -85,5 +340,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-supported-generators-costalk-detection",
+  "worker": "stage1",
+  "summary": "Proved both directions by the first nonzero supported cohomology sheaf, using the closed support of a section and its generic point; gave the scalar-linear support adjunction, injective transitivity, bottom calculation and the shifted Hom identification explicitly. Reused existing nodes throughout; no new nodes. Statement unchanged.",
+  "blueprint": "Realizes the dimension-normalized middle t-structure input of lem-per-artin-gabber-affine-curve, through the supported-generator cosupport equivalence used in lem-per-perversity-localization-calculus. Follows the existing ancestor route; no replacement of unit steps.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-sc-etale-section-zero-open",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic injective-resolution, module-sheaf, support, stalk or Noetherian geometry input used as a black box in this costalk-detection proof; the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic identification of an affine strict localization with the algebraic strict henselization of the local ring (Steps 6, 7); the unit gives no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "why": "Generic statement that the maximal ideal of a strict localization at an affine chart is the extension of the prime (Step 7); the unit gives no replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-sc-etale-section-zero-open",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-dde59df6c",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-dde59df6c (reviewer sub-agent of L); spot-checked: Read the item and all 14 steps in full against Travaux de Gabber XVII 5.2 (printed p.287), whose coaisle condition is RΓ_x(K) in D^{>=p(x)}; the equivalence itself and the Hom formula are the agent's own proof. Checked every cited statement and the parent's use (perversity-localization Step 2: Hom(G[k],B)=H^{a-k}RΓ_Z). The statement is kept verbatim. Small cases hold: separably closed point, S empty, Z empty, Hom check through Ri^!. The mathematics is correct: least nonzero degree, the closed support of one section and its generic point, the prime argument at the strict localization, ind-etale supported base change, and the bottom-degree calculation. Repaired three citation faults (C3/C1); the fixed item file is under fixes/dag/nodes/sec-deligne-laumon-a1/. Step 6: the claim that the strict localization is Noetherian had no bridge from T_(t) to (B_p)^sh; it now cites lem-exc-affine-strict-local-ring-comparison. Step 7: it cited the triples-colimit node instead of the ring of T_(t); it now cites that comparison (units outside p) and lem-weil-pbc-strict-henselization-chart-maximal-ideal (m_C=pC), and lem-weil-pbc-strict-henselization-triples is dropped from proof_deps and tool_uses. Step 13: the identification V_(x)=X_(x) was uncited; it now cites lem-trf-ind-etale-strict-local-invariance. Batch-5 flags accepted: lem-trf-bounded-below-derived-adjunction is the generic derived adjunction for an exact left adjoint, and lem-trf-ind-etale-strict-local-invariance is general strict-localization algebra; neither is part of the trace formula or Poincare duality or their proofs. The closures of the two added nodes contain no trace-formula, Poincare or target node and do not contain the item. No SGA source is used, and the declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
