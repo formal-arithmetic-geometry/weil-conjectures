@@ -16342,3 +16342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:13 L: returned deliver/N1/Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange (reviewer RETURN: (the landing tools, head 27dfde335) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 09:13 L: returned deliver/R9/Sheaf.AlgebraicGeometry.RelativeTorsorCohomology (reviewer RETURN: (the landing tools, head 128da7203) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 09:13 L: returned deliver/S1/Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison (reviewer RETURN: (the landing tools, head 4bc4ab451) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
+- 09:13 L: returned deliver/U7/Sheaf.Paper.ProjectiveCurveBettiCardinalities (reviewer RETURN: (the landing tools, head 95ccdff38) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
