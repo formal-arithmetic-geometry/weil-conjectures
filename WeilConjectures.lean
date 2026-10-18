@@ -7644,6 +7644,7 @@ public import WeilConjectures.RingTheory.EtaleSectionIdempotentSplitting
 public import WeilConjectures.RingTheory.EtaleSectionLiftingOfGabberRoots
 public import WeilConjectures.RingTheory.EtaleSectionLocalization
 public import WeilConjectures.RingTheory.EtaleSectionNeighbourhoodRefinement
+public import WeilConjectures.RingTheory.Excellent
 public import WeilConjectures.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 public import WeilConjectures.RingTheory.ExistsCoefficientSubring
 public import WeilConjectures.RingTheory.ExistsCompleteLocalFlatPresentation
@@ -7853,10 +7854,12 @@ public import WeilConjectures.RingTheory.FrobeniusForm
 public import WeilConjectures.RingTheory.FsAdicClosedFiberModel
 public import WeilConjectures.RingTheory.FsAdicLiftOverFiniteCoefficientMap
 public import WeilConjectures.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRingAnalyticallyUnramified
 public import WeilConjectures.RingTheory.GRingCompletionRegular
 public import WeilConjectures.RingTheory.GRingEquiv
 public import WeilConjectures.RingTheory.GRingMaximalIdealComparison
 public import WeilConjectures.RingTheory.GRingMaximalIdealCriterion
+public import WeilConjectures.RingTheory.GRingNagata
 public import WeilConjectures.RingTheory.GRingPairsBackward
 public import WeilConjectures.RingTheory.GRingPairsForward
 public import WeilConjectures.RingTheory.GRingPairsOfPrimes
