@@ -29,15 +29,17 @@ namespace AlgebraicGeometry.ProEtale
 variable {l : ℕ} [Fact l.Prime]
 
 -- Stated for arbitrary `j`, `a`, `b` and `c`: for the geometric Frobenii the kernel times out on
--- the same proof.
+-- the same proof. Proved by `rw` rather than `simp only`: the `simp` proof has the
+-- definitionally unfolded statement as its type, and the kernel needs ~40 s to convert it back.
 private lemma lowerStarExchange_hom_app_hom {X Y : Scheme.{u}} (j : X ⟶ Y) (a : X ≅ X)
     (b : Y ≅ Y) (c : j ≫ b.inv = a.inv ≫ j) (M : AdicSheaf l X) :
     ((adicLowerStarComp l j b.inv ≪≫ adicLowerStarCongr l c ≪≫
       (adicLowerStarComp l a.inv j).symm).hom.app M).hom =
       (lowerStarComp (WeilCoefficients.{u} l) j b.inv).hom.app M.X ≫
         (lowerStarCongr _ c).hom.app M.X ≫ (lowerStarComp _ a.inv j).inv.app M.X := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
-    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  rw [Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, NatTrans.comp_app,
+    Mod.comp_hom', Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarComp_inv_app_hom]
 
 variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
   {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
