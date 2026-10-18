@@ -42,126 +42,63 @@
  ],
  "proof": [
   {
-   "text": "If $X$ is empty, take $k'=k$ and $I=\\varnothing$; every component assertion is vacuous and the empty disjoint union is its normalization. Otherwise replace $X$ by $X_{\\mathrm{red}}$. Its irreducible components with reduced induced structures, and hence their function fields and normalizations, are unchanged. The same holds after any field extension: on an affine chart $X=\\operatorname{Spec}A$, put $J=\\sqrt{0}$. The quotient after scalar extension is $(A\\otimes_k k')/(J(A\\otimes_k k'))$. Each generator of this extended ideal is nilpotent, and each element is a finite sum of multiples of such generators, hence nilpotent by the binomial theorem. Quotienting by a nil ideal does not change the reduced quotient; therefore $((X_{\\mathrm{red}})_{k'})_{\\mathrm{red}}=(X_{k'})_{\\mathrm{red}}$.",
+   "text": "Apply the projective geometrically normal core construction to X. Base change the completion and its dense open immersion along the finite purely inseparable extension. Projectivity survives base change. The projections are homeomorphisms, so the dimension bound survives and the base-changed open immersion still has dense image.",
    "uses": [
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-scheme-coproduct-family"
+    "lem-weil-pbc-field-curve-completion-core",
+    "lem-pc-projective-base-change",
+    "lem-pc-homeo-pure-insep"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, first paragraph: replace by reduction; empty case made explicit"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply dense projective completion to $X_{\\mathrm{red}}$ to obtain a reduced projective $C$ of dimension at most one containing it as a dense open. Every irreducible component of $C$ meets this open, and contains its corresponding generic point. Choose $k'/k$ by the geometric-normalization theorem applied to $C$. Projectivity survives base change by the projective-base-change theorem (both projectivity definitions here are embeddings in finite-dimensional projective space). The projection $C_{k'}\\to C$ is a homeomorphism because the extension is purely inseparable, so the base-changed open still contains every generic point and $\\dim C_{k'}\\le1$. Let $N$ be the normalization of $C_{k'}$; it is geometrically normal over $k'$.",
+   "text": "Apply the finite-component geometric-normality theorem. Each projective normalized component is integral, nonempty, of dimension at most one, and geometrically normal. The number of components vanishes exactly when the base-changed completion is empty.",
    "uses": [
-    "lem-weil-pbc-curve-projective-dense-completion",
-    "lem-weil-pbc-normalization-geonormal-insep",
-    "lem-pc-homeo-pure-insep",
-    "lem-pc-projective-base-change"
+    "lem-weil-pbc-projective-geonormal-components"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, first paragraph: choose completion; second paragraph: choose inseparable extension"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the projective-normalization theorem to $C_{k'}$ to write $N=\\coprod_{i\\in I}N_i$ with $I$ finite, each $N_i$ nonempty normal integral, projective and proper over $k'$ and of dimension at most one. Geometric normality restricts to each open-and-closed component: after any extension its local rings are local rings of $N_L$. The dimension-one geometric-normality theorem therefore makes every $N_i$ smooth and geometrically reduced over $k'$.",
+   "text": "Refine each projective normalized component to its finite separable constant field. The refined structure map is smooth, projective and geometrically irreducible, with the canonical structure-map factorization.",
    "uses": [
-    "lem-weil-pbc-normalization-projective-components",
-    "lem-weil-pbc-geonormal-dim-one-smooth"
+    "lem-weil-pbc-geonormal-projective-curve-constants"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, second paragraph: projective normalization and geometric regularity imply smoothness"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $k_i=\\Gamma(N_i,\\mathcal O_{N_i})$. Each $N_i$ is an integral separated finite type scheme over $k'$, hence a variety; the proper-variety global-sections theorem says $k_i/k'$ is a finite field extension. The separability theorem applies because $N_i$ is proper and geometrically reduced and these global sections form a field, giving separability. The canonical Stein map $q_i:N_i\\to\\operatorname{Spec}k_i$ has geometrically connected fibres by the affine Stein-factorization theorem. Since the base is the spectrum of a field, this says $N_i$ is geometrically connected over $k_i$. The finite-separable base-refinement theorem makes $q_i$ smooth and projective (hence proper).",
+   "text": "Restrict the components to the base-changed original dense open and normalize them. The component supports are closed, distinct, and enumerate the irreducible components of the base-changed original scheme. Their normalizations form dense nonempty opens in the chosen smooth projective components, compatibly with normalization maps.",
    "uses": [
-    "lem-pc-h0-proper-variety",
-    "lem-pc-proper-geometrically-reduced-global-sections-separable",
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-finite-separable-base-refinement"
+    "lem-weil-pbc-normalization-dense-open-components"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, last paragraph: constant fields and baby Stein factorization"
-   }
+   "elementary": false
   },
   {
-   "text": "For every extension $L/k_i$, put $P=\\operatorname{Spec}(k_i\\otimes_{k'}L)$. The spectrum map for $k_i/k'$ is etale by the singleton case of the etale-coproduct theorem, so $\\pi:P\\to\\operatorname{Spec}L$ is etale by the etale-base-change theorem. It is separated: $P$ is affine over $L$, and its diagonal is induced by the surjective multiplication homomorphism $(k_i\\otimes_{k'}L)\\otimes_L(k_i\\otimes_{k'}L)\\to k_i\\otimes_{k'}L$. The homomorphism $a\\otimes b\\mapsto ab$, using the specified embedding $k_i\\hookrightarrow L$, defines a section $s$ of $\\pi$, since $1\\otimes b\\mapsto b$. The section theorem makes $s$ an open-and-closed immersion. Pull it back along the canonical map $N_i\\times_{k'}\\operatorname{Spec}L\\to P$: the fibre-product defining maps identify that pullback with $N_i\\times_{k_i}\\operatorname{Spec}L$, since the two maps from $k_i$ must then agree. Preimages of the complementary open subsets of $P$ are complementary open subsets of the pullback source, with the restricted structure sheaves. Thus $N_i\\times_{k_i}\\operatorname{Spec}L$ is an open-and-closed subscheme of $N_i\\times_{k'}\\operatorname{Spec}L$ and inherits its normal local rings. This holds for every $L/k_i$, proving geometric normality over $k_i$. Apply the connectedness clause of the geometric-normality theorem to $N_i$ over $k_i$: its finite type follows from the projectivity in step 4, its absolute dimension is at most one by step 3, and every scalar extension is connected and nonempty by step 4. Consequently $N_i$ is geometrically irreducible over $k_i$.",
-   "uses": [
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-exc-etale-coproduct-etale",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-geonormal-dim-one-smooth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, last sentence: geometric irreducibility from normality and geometric connectedness"
-   }
+   "text": "Define Y_i as the normalization of the restricted component and B_i as that of the projective component, with identity normalization isomorphism e_i. Define p_i by composing the open immersion with the projective structure map. Define ν as the coproduct of the component normalization maps. The restriction comparison equation and the pullback projection equation give the first commutativity identity, and the constant-field factorization gives the second.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Define $Y_i$ to be the inverse image of $(X_{\\mathrm{red}})_{k'}$ in $N_i$, and set $\\overline Y_i=N_i$. The base-changed open contains every generic point of $C_{k'}$, hence each $Y_i$ contains the generic point of $N_i$ and is nonempty dense; $j_i$ is its open inclusion. Put $W=((X_{\\mathrm{red}})_{k'})_{\\mathrm{red}}$, the open subscheme of $(C_{k'})_{\\mathrm{red}}$ corresponding to $X_{k'}$. On each reduced irreducible component $D$ of $(C_{k'})_{\\mathrm{red}}$, the corresponding reduced component of $W$ is the nonempty open $D\\cap W$, with the same function field. Normalization on open subschemes therefore identifies the restriction of $D^\\nu\\to D$ with $(D\\cap W)^\\nu\\to D\\cap W$. Taking their disjoint union shows that $\\coprod_iY_i\\to X_{k'}$ is exactly the componentwise normalization in the statement. This proves the omitted restriction argument without requiring normalization to commute with arbitrary inseparable base change.",
-   "uses": [
-    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-scheme-coproduct-family"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, first paragraph, details omitted: restrict normalization to the original dense open"
-   }
+   "text": "Over a field, the projective components are locally Noetherian and compact, hence Noetherian. Their open subschemes are Noetherian by topological embeddings. Mathlib finite-presentation and Noetherian-space instances therefore give local finite presentation, quasi-compactness and quasi-separatedness of p_i. Local finite presentation passes to the coproduct by source locality; its source is compact as a finite union of compact component images, and is locally Noetherian by local finite type over the field, giving quasi-compactness and quasi-separatedness. For the projective refined maps, finite field maps and original base-change projection, the same properties follow from properness, finiteness, composition and base change over the Noetherian field. These are direct Mathlib instances, not uses of the previously imported statement-only Noetherian lemmas.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "All schemes in the diagram are separated and of finite type over $k'$: the completion and its normalization are projective, the $Y_i$ are open subschemes of these Noetherian finite type schemes and thus Noetherian and quasi-compact by the Noetherian-open-subscheme theorem, and the fields $k_i$ are finite extensions. For $X_{k'}$ itself, choose the finite affine cover of $X$ supplied by finite type; scalar extension replaces each coordinate algebra $A$ by $A\\otimes_k k'$, generated over $k'$ by the original finite generating set. These finitely many affine opens prove finite type directly. Over the Noetherian scheme $\\operatorname{Spec}k'$, local finite type implies local finite presentation; together with quasi-compactness and separatedness this is finite presentation. The morphisms commute since all are restrictions of the normalization map and the canonical structural maps to the constant fields. If $X$ is nonempty, the dense completion and its surjective normalization are nonempty and hence $I$ is nonempty; combined with step 1 this gives the required empty-index equivalence.",
-   "uses": [
-    "pqf-lem-lft-fp-locnoeth",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-normalization-projective-components",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assemble diagram; finite-presentation and empty-index clarifications"
-   }
+   "text": "If n=0, the projective base change is empty, and surjectivity of X_K→X and the map X_K→T_K force X empty. Conversely, if X is empty, density of X→T forces T empty, hence T_K empty and n=0.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-reduction",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-curve-projective-dense-completion",
-  "lem-weil-pbc-normalization-geonormal-insep",
-  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-field-curve-completion-core",
   "lem-pc-projective-base-change",
-  "lem-weil-pbc-normalization-projective-components",
-  "lem-weil-pbc-geonormal-dim-one-smooth",
-  "lem-pc-h0-proper-variety",
-  "lem-pc-proper-geometrically-reduced-global-sections-separable",
-  "lem-weil-pbc-stein-factorization-affine",
-  "lem-weil-pbc-finite-separable-base-refinement",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-exc-etale-coproduct-etale",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-  "pqf-lem-lft-fp-locnoeth",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-projective-geonormal-components",
+  "lem-weil-pbc-geonormal-projective-curve-constants",
+  "lem-weil-pbc-normalization-dense-open-components"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, proof, with restriction details written out"
+  "place": "Tag 0GK5; completion, normalization, constant fields, and restriction to the original dense open"
  },
  "mathlib_searches": [
   {
@@ -278,19 +215,12 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-pc-homeo-pure-insep",
   "lem-pc-projective-base-change",
   "lem-pc-h0-proper-variety",
   "lem-pc-proper-geometrically-reduced-global-sections-separable",
-  "lem-weil-pbc-stein-factorization-affine",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-exc-etale-coproduct-etale",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-  "pqf-lem-lft-fp-locnoeth",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+  "lem-weil-pbc-stein-factorization-affine"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -329,5 +259,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261018T071223-L-1677444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
