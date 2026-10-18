@@ -16,9 +16,105 @@
   "def-sc-function-field",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the normalization $\\nu:X=Y^\\nu\\to Y$. Apply the normalized-tower geometry lemma with length zero and $d=2$: $X$ is normal, integral, Noetherian and excellent of dimension $2$, and $\\nu$ is finite and induces the identity extension of the function field. Let $R=Y_{\\rm reg}$. Excellence makes $R$ open by the J-2 clause of the definition, applied on affine opens to the identity finite type algebra. Every local ring on $R$ is normal by regular-implies-normal. Thus $\\nu^{-1}R\\to R$ is an isomorphism by the normal-open clause of the tower geometry lemma. This verifies that resolving $X$ without touching its regular locus will not change $R$.",
+   "uses": [
+    "lem-per-excellent-normalized-blowup-tower",
+    "def-exc-excellent-ring",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGP proof (4) implies (3), initial replacement by normalization; openness and normality of R are spelled out."
+   }
+  },
+  {
+   "text": "Apply the excellent-normal-surface local-data lemma to $X$. Its singular set is a finite set of closed points $\\{x_1,\\ldots,x_r\\}$, and $A_i=\\mathcal O_{X,x_i}$ and $\\widehat A_i$ are Noetherian normal local domains of dimension $2$, with $\\widehat A_i$ complete. All hypotheses of the complete-local resolution theorem are now available. If $r=0$, the later choices are empty and the global tower is the identity. The open $\\nu^{-1}R$ consists of regular points, since it is isomorphic to the regular scheme $R$, so it contains none of the $x_i$.",
+   "uses": [
+    "lem-per-excellent-normal-surface-local-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGP proof (4) implies (3), choosing the finitely many singular points and their completed local rings."
+   }
+  },
+  {
+   "text": "For each $i$, apply resolution for complete normal local surfaces to $\\widehat A_i$. This gives a proper birational morphism $T_i\\to\\operatorname{Spec}\\widehat A_i$ with integral regular source. Apply the normalized-refinement theorem to this resolution, whose base is a Noetherian normal local domain of dimension $2$. Obtain a finite sequence $Z_{i,n_i}\\to\\cdots\\to Z_{i,0}=\\operatorname{Spec}\\widehat A_i$ of proper normalized point blowups, with regular endpoint and all centers over the closed point. These centers and the regular endpoint are supplied by the refinement theorem, rather than by an unsupported termination assertion.",
+   "uses": [
+    "lem-per-complete-normal-surface-resolution",
+    "lem-per-surface-resolution-normalized-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGP proof (4) implies (3), application of Tags 0BGN and 0BGM."
+   }
+  },
+  {
+   "text": "For each $i$, descend this finite sequence along $A_i\\to\\widehat A_i$ by the normalized-blowup completion-descent lemma. The requisite normal completion was verified in Step 2. The result is a sequence $T_{i,n_i}\\to\\cdots\\to\\operatorname{Spec}A_i$ of proper normalized point blowups, based over $x_i$, whose completed sequence is the one in Step 3. Its endpoint $T_{i,n_i}$ is regular by the final clause of the descent lemma. Properness, required for this regularity comparison and for the subsequent globalization, is part of that lemma's conclusion.",
+   "uses": [
+    "lem-per-normalized-blowup-completion-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGP proof (4) implies (3), Tags 0BGA and 0BG6."
+   }
+  },
+  {
+   "text": "Globalize the finitely many local towers using the local-normalized-blowup globalization theorem for the normal integral Noetherian scheme $X$ and its distinct closed points $x_i$. It produces a global tower $V=X_N\\to\\cdots\\to X_0=X$, supported above these points, with composite $g:V\\to X$ an isomorphism over $X\\setminus\\{x_i\\}$. The endpoint over $\\operatorname{Spec}A_i$ is the regular scheme $T_{i,n_i}$. To check regularity of $V$, take $v\\in V$. If $g(v)$ is outside $\\{x_i\\}$, its local ring is that of the regular open of $X$. Otherwise $g(v)=x_i$, and the local-ring clause of globalization identifies $\\mathcal O_{V,v}$ with the local ring of a point of $T_{i,n_i}$, which is regular. These alternatives exhaust every point, so $V$ is regular by definition.",
+   "uses": [
+    "lem-per-local-normalized-blowups-globalize",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGP proof (4) implies (3), Tag 0BFZ and the final local-ring argument."
+   }
+  },
+  {
+   "text": "Concatenate $\\nu:X\\to Y$ with the chosen global tower and apply the normalized-tower geometry lemma over $Y$. It says that $V$ is integral and that $r=\\nu\\circ g$ is projective in the projective-bundle sense and induces an isomorphism of function fields. Since $Y$ admits an ample invertible sheaf by hypothesis, the existing projective-bundle-to-H-projective theorem applies to $r$: for some finite $m$ there is a closed immersion $V\\hookrightarrow\\mathbf P^m_Y$ over $Y$. This proves exactly the stated projectivity convention. No ampleness of an intermediate normalized blowup is assumed.",
+   "uses": [
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Projectivity refinement of Tag 0BGP: tower geometry and morphisms.tex Tag 087S, clause (1)."
+   }
+  },
+  {
+   "text": "The centers of $g$ lie over the singular points $x_i$, which are disjoint from $\\nu^{-1}R$ by Step 2. Thus the isomorphism $g^{-1}(X\\setminus\\{x_i\\})\\to X\\setminus\\{x_i\\}$ from Step 5 restricts to an isomorphism over $\\nu^{-1}R$. Composing with the isomorphism $\\nu^{-1}R\\to R$ from Step 1 shows that $r^{-1}R\\to R$ is an isomorphism. Together with Step 5 and Step 6, this gives every required clause. In the empty-singular-set case $g$ is the identity and the same calculation applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Conclusion: restriction and composition of the isomorphisms established in Steps 1 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "lem-per-complete-normal-surface-resolution",
+  "lem-per-excellent-normal-surface-local-data",
+  "lem-per-excellent-normalized-blowup-tower",
+  "lem-per-local-normalized-blowups-globalize",
+  "lem-per-normalized-blowup-completion-descent",
+  "lem-per-surface-resolution-normalized-refinement",
+  "lem-trf-projective-bundle-to-h-projective",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BGP, resolve-theorem-resolve, proof (4) implies (3); projectivity refined using Tags 02NS, 0B3I, 0C4P and 087S."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +143,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "desingular|resolution.of.singular|normalized.?blowup",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of singularities of two dimensional excellent integral schemes by normalization and point blowups",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext; logged digest dd1d4c9222ec4ae7",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingular\"",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-excellent-surface-desingularization: an excellent integral Noetherian scheme of dimension two with an ample line bundle admits a projective regular birational resolution isomorphic over its regular locus",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; logged digest f2e6df260639697c",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-supported-presentation",
@@ -75,5 +199,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-excellent-surface-desingularization",
+  "worker": "stage1",
+  "summary": "Expanded the complete-local-to-global Lipman argument of Stacks 0BGP into seven steps, keeping the entire item statement unchanged. Six statement-only inputs record local singular data, complete local resolution, normalized refinement, completion descent, globalization and the geometry of already chosen towers. Reused the existing 087S conversion to obtain the required finite-projective-space embedding. Checked the regular-open condition, all completion normality and dimension hypotheses, and the zero-length/empty-singular-set cases.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Steps 1–5 realize 0BGP (4) implies (3); Steps 6–7 verify the stronger projectivity convention and preservation of the regular open required by the ILO XVII 3.4.1 input.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-implies-normal fact used only for the regular open; not a replacement for the unit route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic 087S conversion of the tower projectivity to the finite-projective-space convention over the given ample base; the unit has no such scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-trf-projective-bundle-to-h-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-ef847f7db",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-ef847f7db (reviewer sub-agent of L); spot-checked: PASS: I read the item and all six new nodes in full against Stacks resolve.tex (0BBS/0BFT, 0BFV–0BFZ, 0BG6, 0BGA, 0BGM, 0BGN, and 0BGP with its proof) and more-algebra 0C23. The item statement is unchanged from base (same md5 as earlier snapshots), so the target is not weakened. The seven steps follow the 0BGP (4)⇒(3) argument correctly. Step 1: normalization is finite and the regular locus is open and normal, so it is unchanged. Step 2: the local data hold (finitely many closed singular points; O_{X,x} and its completion are normal of dimension 2). Steps 3–4: 0BGN, then 0BGM, then 0BGA plus 0BG6(3); properness puts the centres over the closed point. Step 5: 0BFZ applies because S is normal, so the local towers are isomorphisms off s_i; regularity is checked at every point. Step 6: the tower is projective in the bundle sense (0B3I/02NS/0C4P), and 087S over the ample base Y gives an embedding in P^m_Y. Step 7 is genuinely elementary. Each new node is a true statement with exactly its Stacks hypotheses. None restates a clause of the item, and none duplicates an existing node: the Q25 quasi-projective normalized-blowup node needs an affine base, and the trf normalized-blowup node is over Q. No SGA is cited and there is no cycle. Batch-5: def-trf-projective-bundle-morphism is a general definition (01W8), and lem-trf-projective-bundle-to-h-projective is generic 087S. Their closures contain only five trf nodes (projective-bundle definitions, H-projective composition, globally generated bundle, Proj invertible twist) and no trace-formula, Poincaré-duality, trace-transport or batch-4 node, so I accept both. Accepted tool_uses: rem-pc-regular-normal and lem-trf-projective-bundle-to-h-projective. No fixes."
  }
 }
