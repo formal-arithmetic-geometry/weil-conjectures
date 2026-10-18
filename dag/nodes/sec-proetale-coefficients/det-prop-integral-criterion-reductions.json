@@ -22,7 +22,9 @@
   "lem-pur-derived-change-of-rings",
   "sk-def-sfb-constructible",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-derived-complete-integral-detailed"
+  "def-weil-derived-complete-integral-detailed",
+  "def-sfb-integral-comparison-coefficients",
+  "def-sfb-integral-comparison-normalization"
  ],
  "proof": [
   {
@@ -321,5 +323,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCriterionReductions",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_reductions_constructible_iff",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousIntegralConstructible",
+   "AlgebraicGeometry.ProEtale.ContinuousIntegralConstructible",
+   "AlgebraicGeometry.ProEtale.integralLimitAbComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.integralLimitAbComparison",
+   "AlgebraicGeometry.ProEtale.integralSectionAbIdentifications",
+   "AlgebraicGeometry.ProEtale.integralSectionRingIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.integralSectionRingIso",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_properties",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_additive",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_isEquivalence",
+   "AlgebraicGeometry.ProEtale.integralSectionDerivedEquivalence",
+   "AlgebraicGeometry.ProEtale.continuousIntegralConstructible_iff_sfIntegralConstructible",
+   "AlgebraicGeometry.ProEtale.integral_reductions_constructible_iff",
+   "AlgebraicGeometry.ProEtale.continuousIntegralConstructible_iff_first_reduction",
+   "AlgebraicGeometry.ProEtale.sfIntegralConstructible_iff_first_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCriterionReductions.lean",
+  "statement": "theorem integral_reductions_constructible_iff (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (AdicCompletion.Modules l E X)) (_hK : IsDerivedComplete l E X K) : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X ((AdicCompletion.derivedReduction l E X 0).obj K) ↔ (∀ n : ℕ, constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X ((AdicCompletion.derivedReduction l E X n).obj K)) ∧ ∃ r s : ℤ, r ≤ s ∧ ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((AdicCompletion.derivedReduction l E X n).obj K))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of immutable return 6b489a2b3917: the ring isomorphism is fixed by equality of its forgotten abelian-sheaf map, with explicit endpoint equality transport. Existing coefficient and normalization definitions have dedicated definition-node records, replacing the unused pullback theorem statement dependency. The main mathematical statement and all original dependency records are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-988f85825",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of 6b489a2b. R1 fixed: the HEq pin is replaced by a same-category Ab equation (sheafCompose forget₂).map e.hom = eqToHom h.1 ≫ integralLimitAbComparison.hom ≫ eqToHom h.2.symm. The new sorry'd integralSectionAbIdentifications is provable: part 2 is rfl (probe clean); part 1 is proved in a probe from equality of the absval.toNormedField and spectralNorm.normedField topologies on O_E, which share the norm (absval = spectralMulAlgNorm). So integralSectionRingIso is pinned, not arbitrary. R2 fixed: theorem stmt_dep det-prop-sfb-qlbar-colimit-x-pullback dropped; new existing:true def nodes def-sfb-integral-comparison-coefficients (ProEtaleIntegralCoefficientLimit, 9 plain defs) and def-sfb-integral-comparison-normalization (SfbIntegralComparison). Statements verbatim in live, all used owner decls listed, deps existing def nodes, no cycle, source exists. The other 10 stmt_dep records are byte-identical to live (N3 untouched). Main theorem unchanged and correct (Noetherian X, finite E, derived complete K, n+1 indexing, r,s before n, edge cases); lean.statement verbatim; 8/8 proofs sorry; docstrings ok. nt_compile --json clean 4.4 s."
  }
 }

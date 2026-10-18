@@ -30,7 +30,8 @@
   "det-lem-formal-closed-support-derived",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-sfb-integral-derived-coefficient-data"
  ],
  "proof": [
   {
@@ -493,5 +494,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralStratumHomFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_filtration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumDerivedSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumDual",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumDualTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_filtration",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_hom_formula"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralStratumHomFormula.lean",
+  "statement": "theorem integral_stratum_filtration (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (C : integralDerived l E X) (hC : constantModelBoundedConstructible (integralCoefficientRing l E) X C) : ∃ (S : X.FiniteLocallyClosedStratification) (m : ℕ) (F : Fin (m + 1) → integralDerived l E X) (T : Fin m → Triangle (integralDerived l E X)), IsZero (F 0) ∧ Nonempty (F (Fin.last m) ≅ C) ∧ ∀ r : Fin m, T r ∈ Pretriangulated.distinguishedTriangles ∧ (T r).obj₁ = F r.castSucc ∧ (T r).obj₂ = F r.succ ∧ ∃ (a : Fin S.n) (Z : Scheme.{u}) (v : S.domain a ⟶ Z) (i : Z ⟶ X) (_ : IsOpenImmersion v) (_ : IsClosedImmersion i), v ≫ i = S.immersion a ∧ ∃ (L : pulledBackModuleObjects (integralCoefficientRing l E) (S.domain a)) (n : ℤ), IsConstantModelConstructible (integralCoefficientRing l E) (S.domain a) L ∧ HasFiniteConstantLocalModel (integralCoefficientRing l E) (S.domain a) L ∧ (DerivedCategory.homologyConcentratedIn 0 0 C → n = 0) ∧ Nonempty ((T r).obj₃ ≅ ((DerivedCategory.singleFunctor _ 0).obj ((lowerStar (integralCoefficientRing l E) i).obj ((openImmersionLowerShriek (integralCoefficientRing l E) v).obj L))) ⟦n⟧)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Both clauses are in lean.declarations. The filtration has one common finite stratification and actual distinguished triangles, with zero shifts for degree-zero inputs. The formula is a natural isomorphism in the arbitrary unbounded target. Filtered colimits are degreewise colimits on a K-flat tensor model, not ordinary categorical colimits in a triangulated category. The strict-tower clause preserves the Roos triangle with its induced projection map. The added landed coefficient-data node supplies canonical aliases without a new coefficient construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-250964054",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, the source place sk-lem-int-ext-formula.md, all 19 stmt_dep records and the declarations used in the side clone. Clause (1): constructible Dbc input; one common FiniteLocallyClosedStratification; a real Fin-indexed filtration of distinguished triangles from zero to C; graded pieces ≅ single(i_* u_! L)⟦n⟧ with v ≫ i equal to the stratum immersion, v open, i closed, L constructible with a finite constant local model; n = 0 forced when C is concentrated in degree 0. Clause (2): natural iso derivedHom(a_!L) ⋙ RΓ_X ≅ RΓ_Z ⋙ v^* ⋙ (L^∨ ⊗ −) ⋙ RΓ_S on unbounded D(X), with RΓ = total right derived functor of Hom(O,−) (real helper; no existing global-sections functor for these module objects) and L^∨ = RHom(L, unit); Tor amplitude [0,1] correct in cohomological convention (O/π dual is O/π[−1]); filtered colimits via a K-flat model; strict-tower Roos triangles preserved with canonical projections. No hollow definitions, only the two theorems are sorry, docstrings carry source and proof steps, lines ≤100, imports map to proof-dependency records, no name collisions, lean.statement verbatim. Only lean and stmt_deps changed; the added stmt_dep is an already landed definition node (allowed). nt_compile --json clean, 16.7 s at load ~72. Advisory: closedModuleSectionsWithSupport lives in a lemma node's module (existing DAG design); a common stratification is the natural reading and is what the proof builds."
  }
 }

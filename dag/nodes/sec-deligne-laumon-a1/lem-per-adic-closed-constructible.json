@@ -14,7 +14,9 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-integral-scalar-extension",
-  "lem-pur-integral-operations-scalar-extension"
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-pur-completed-pullback-tensor-comparison"
  ],
  "proof": [
   {
@@ -392,5 +394,37 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-4b959f2e8 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the full proof of lem-pur-integral-operations-scalar-extension, the unit record and the parent node. Source check: local Bhatt–Scholze §6.3, Def. 6.5.1, Lemmas 6.5.3–6.5.5, the §6.7 standing assumption (complete Noetherian local R with residue characteristic ℓ) and Lemmas 6.7.11–6.7.13. The item statement is unchanged and true for any field. The coefficient ring is the completed sheaf \\widehat R_T, identified with BS D_cons through lem-weil-pbc-integral-stratified-perfect-characterization. No SGA source is used. Steps 1–4 and 6–9 check out. Step 4 applies the new node at n=1 over the residue field; Step 5 keeps one interval for every n through the long exact sequence; Step 7 uses the Day-reflection condition C(CA⊗D)≅C(A⊗D); Steps 8–9 use the finite-free comparison and evaluation-transposed Hom base change. One fault (E6/C4), repaired: Step 5 used lem-sfb-discrete-noetherian-constructible-serre, whose constructibility is affine-local, but def-weil-finite-torsion-constructibility and the derived-origin lemma need a global partition. The fixed Step 5 writes out why the two agree on the Noetherian T (restrict to affines; refine a finite affine cover with Z_{i,a} minus the earlier opens; over the finite ring, finite and finitely presented modules coincide) and cites the definition, also added to proof_deps. The step is now 1846 characters. New node lem-per-finite-tor-internal-hom-any-field: statement-only, true by BS 6.7.13 with R=O_E/ϖ^n (constructible with finite Tor amplitude means perfect on strata; finite type over a field is quasi-excellent). Small cases tested: X empty, n=1, k=Q, and Z/ℓ over Z/ℓ² (unbounded, correctly excluded by the finite-Tor hypothesis). Not a duplicate: the existing nodes assume characteristic p>0, k=\\bar F_q or k separably closed; lem-per-finite-residue-dualizing, missing from the report, gives only H(−,Ω). Not a restatement of the item; all search kinds are recorded. Accepted the declared generic tool_uses. Advisory: the item names 'the tensor comparison of lem-pur-integral-operations-scalar-extension', but that lemma's statement does not pin a formula. Step 8 uses the canonical pure-tensor map that the lemma's proof constructs. The ambiguity comes from the unchanged item statement; the maintainer should pin the formula in that lemma's statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicClosedConstructible",
+  "declaration": "WeilConjectures.AdicClosed.closed_symmetric_monoidal",
+  "declarations": [
+   "WeilConjectures.AdicClosed.residueInvertible",
+   "WeilConjectures.AdicClosed.hom_constructible",
+   "WeilConjectures.AdicClosed.tensor",
+   "WeilConjectures.AdicClosed.hom",
+   "WeilConjectures.AdicClosed.transpose_existsUnique",
+   "WeilConjectures.AdicClosed.transpose",
+   "WeilConjectures.AdicClosed.evaluation",
+   "WeilConjectures.AdicClosed.closed_symmetric_monoidal",
+   "WeilConjectures.AdicClosed.extend",
+   "WeilConjectures.AdicClosed.homScalar",
+   "WeilConjectures.AdicClosed.scalar_laws",
+   "WeilConjectures.AdicClosed.scalar_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/AdicClosedConstructible.lean",
+  "statement": "theorem closed_symmetric_monoidal : ∃ S : CoefficientClosedStructure (hom l k T E), Nonempty (@SymmetricCategory _ _ S.monoidal) ∧ ∃ hTensor : S.tensor = tensor l k T E, S.monoidal.tensorUnit.obj = (DerivedCategory.singleFunctor (integralTowerModules l E T) 0).obj (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T)) ∧ ∀ (M P Q : sfIntegralConstructibleCategory l E T) (f : (tensor l k T E).obj (M, P) ⟶ Q), (S.transpose M P Q (eqToHom (congrArg (fun F ↦ F.obj (M, P)) hTensor) ≫ f)).hom = transpose l k T E M P Q f.hom",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf9831c10",
+  "group": "NP",
+  "result": "pass",
+  "note": "Matched every node clause to the Lean. Hypotheses: any field k, ℓ prime and invertible in k (mapped to residue fields by residueInvertible), E finite over Q_l, T separated finite type over k; no extra or stronger assumptions, no extra universe restriction. hom_constructible: ambient internal Hom closure. closed_symmetric_monoidal pins the tensor (= constructibleIntegralTensor), the unit (degree-0 SheafOfModules.unit of the completed ring) and every transpose, via transpose_existsUnique, to ordinary ringed-site transposition after the completion unit (adjunction unit, reductionTensor, inverse Roos model). scalar_laws: naturality in P and Q, evaluation normalization, all transposes. scalar_coherence: identity and tower cases, inverse directions checked. Mechanical finding: sfIntegralScalarComp/Unit are .exists.choose of lem-weil-scalar-extension-composition's ∃! theorems, so the statement depends on objects that theorem constructs; PASS on that point. No duplicate: finiteTor_stability_integral_hom assumes a finite-field datum. No hollow definitions; 5 theorems, all sorry; docstrings have source and blueprint id; lean.statement verbatim; only lean and stmt_deps differ from the live node, both added deps landed. nt_compile --json: clean, 8.7 s, exit 0, no warnings. Advisories: associator/unitors/braiding are not pinned (node only says closed symmetric monoidal); proof-only import IntegralHomReduction dropped because it currently fails to compile; some declarations used are owned by nodes outside stmt_deps (CoefficientClosedStructure, integralDerivedInternalHom, integralCompletedTensor, sfConstructibleIntegralScalarExtension)."
  }
 }
