@@ -1,0 +1,78 @@
+{
+ "id": "lem-a1-integral-residue-extension-algebraic",
+ "kind": "statement",
+ "title": "Integral ring maps induce algebraic residue-field extensions",
+ "statement": "Let $\\varphi:D\\to E$ be a homomorphism of commutative rings such that every element of $E$ satisfies a monic polynomial with coefficients in $\\varphi(D)$ [def-weil-pbc-integral-closure]. Let $\\mathfrak q\\subset E$ be a prime ideal and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Write $\\kappa(\\mathfrak p)$ and $\\kappa(\\mathfrak q)$ for the residue fields of the corresponding affine-scheme points [def-weil-residue-field, def-weil-affine-spectrum]. Then the canonical field extension $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ [def-pc-field-extension] is algebraic: every element of $\\kappa(\\mathfrak q)$ is a root of a nonzero polynomial over $\\kappa(\\mathfrak p)$. No injectivity, finiteness or Noetherian hypothesis on $\\varphi$ is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BL (groupoids-lemma-points), final proof paragraph: integrality of A over C implies algebraicity of the residue extensions. General algebra statement checked in Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean:62-83."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective integral ring homomorphism admits extension of every homomorphism to an algebraically closed field, and residue field extensions are algebraic",
+   "results": "8 hits: IsAlgClosed.ringHom_bijective_of_isIntegral, instIsAlgebraicResidueFieldOfIsIntegral, IsPurelyInseparable.of_injective_comp_algebraMap, IsAlgClosed.algebraMap_bijective_of_isIntegral, IsAlgClosed.lift_def, IsAlgClosed.lift, Algebra.IsIntegral.isField_iff_isField, isField_of_isIntegral_of_isField",
+   "date": "2026-10-18",
+   "verdict": "match: instIsAlgebraicResidueFieldOfIsIntegral states the residue-field clause without injectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral ring extensions induce algebraic field extensions on residue fields at prime ideals",
+   "results": "8 hits: instIsAlgebraicResidueFieldOfIsIntegral, instIsAlgebraicQuotientIdealResidueField, Ideal.ResidueField.mapₐ, Ideal.Fiber, Ideal.Quotient.algebra_isIntegral_of_liesOver, Ideal.primesOver.isMaximal, Ideal.ResidueField, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-18",
+   "verdict": "match: instIsAlgebraicResidueFieldOfIsIntegral"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"instIsAlgebraicResidueFieldOfIsIntegral\"",
+   "results": "1 hits: instIsAlgebraicResidueFieldOfIsIntegral",
+   "date": "2026-10-18",
+   "verdict": "match: exact residue-field algebraicity instance"
+  },
+  {
+   "tool": "grep",
+   "query": "Algebra.IsIntegral A B",
+   "results": "1 hits: Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean. Searched RingTheory/LocalRing/ResidueField; read the declaration and its canonical localization-algebra hypotheses at lines 62-83.",
+   "date": "2026-10-18",
+   "verdict": "match: residue-field algebraicity instance at Instances.lean:70"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsAlgebraicResidueFieldOfIsIntegral",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean",
+  "line": 70,
+  "how": "specializes in one line: equip E with the D-algebra structure phi.toAlgebra, p with q.comap phi, and the localizations and residue fields with their canonical lies-over algebra structures; the instance at lines 70-83 states Algebra.IsAlgebraic p.ResidueField q.ResidueField from Algebra.IsIntegral D E. The surrounding variables at lines 62-64 are the canonical localized-algebra and lies-over instances, not extra geometric hypotheses. Source read 2026-10-18."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-orbit-fibres",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical 03XX affine-quotient support branch, through lem-a1-finite-flat-affine-relation-quotient: Tag 03BL, the first and last proof paragraphs, integral residue extensions used to lift geometric points",
+   "via": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

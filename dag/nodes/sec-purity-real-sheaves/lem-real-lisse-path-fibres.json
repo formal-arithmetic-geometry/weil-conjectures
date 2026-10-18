@@ -17,9 +17,150 @@
   "def-weil-finite-coefficient-point",
   "cor-galois-lisse-representations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scheme $X$ is connected, so [lem-wf-fibre-functor-basepoint-transport] gives a natural isomorphism between the fibre functors on finite locally constant sheaves of sets at $a$ and $b$. The fibre-compatible equivalence [thm-galois-lc-etale] identifies these with the finite-etale fibre functors, giving the required path. Conversely, any given path $p$ on finite etale covers extends to finite locally constant set sheaves through this equivalence. Explicitly choose $M\\cong h_P$ and conjugate $p_P$ by the stalk maps. Full faithfulness makes the result independent of the presentation: a second presentation gives an isomorphism of covers, and the equality is the naturality square for that isomorphism. Thus $p$ defines a natural family of bijections $p_M:M_a\\to M_b$. The following steps spell out the compatibility formulas and the additional pro-etale/framework and automorphism assertions.",
+   "uses": [
+    "lem-wf-fibre-functor-basepoint-transport",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, pione-theorem-fundamental-group (2), and Tag 03RV, etale-cohomology-lemma-characterize-finite-locally-constant; explicit functorial construction."
+   }
+  },
+  {
+   "text": "Let $M$ be a finite locally constant sheaf of modules over a finite ring $A$. Fibre functors preserve finite limits by [thm-galois-fundamental], so the map on $M\\times M$ is $(x,y)\\mapsto(p_Mx,p_My)$, as follows by composing with both projections. Naturality for addition, zero, and the endomorphism given by each $c\\in A$ shows $p_M(x+y)=p_Mx+p_My$, $p_M0=0$ and $p_M(cx)=cp_Mx$. Thus $p_M$ is $A$-linear, with inverse induced by $p^{-1}$. Naturality for every module-sheaf map is the underlying set-sheaf naturality. On a constant finite sheaf $S$, every $s\\in S$ comes from a map from the terminal sheaf, so naturality fixes $s$; hence $p_S=1$.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, pione-theorem-fundamental-group (2), and Tag 03RV, etale-cohomology-lemma-characterize-finite-locally-constant; explicit functorial construction."
+   }
+  },
+  {
+   "text": "For a homomorphism $A\\to B$ of finite rings, use the stalk/scalar-extension isomorphism of [lem-pod-lisse-tensor-and-scalar-extension](3). For each $c\\in B$, the map of underlying finite locally constant sheaves $M\\to B\\otimes_A M$, $m\\mapsto c\\otimes m$, is a set-sheaf map. Naturality from step 1 gives $p_{B\\otimes_A M}(c\\otimes m)=c\\otimes p_M(m)$. Pure tensors generate the stalk module and step 2 gives additivity, so $p_{B\\otimes_A M}=1\\otimes p_M$. The same formula twice proves compatibility with composites of coefficient homomorphisms.",
+   "uses": [
+    "lem-pod-lisse-tensor-and-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, pione-theorem-fundamental-group (2), and Tag 03RV, etale-cohomology-lemma-characterize-finite-locally-constant; explicit functorial construction."
+   }
+  },
+  {
+   "text": "For a lisse integral model $\\mathcal M=(M_r,t_r)$, apply step 2 to each $M_r$ and naturality to every $t_r$. It gives a well-defined $R$-linear bijection $p_{\\mathcal M}:(m_r)_r\\mapsto(p_{M_r}(m_r))_r$ between inverse-limit fibres, with coordinatewise inverse. These are precisely the fibres of [def-pod-lisse-l-adic-sheaves]. Define $p_L=p_{\\mathcal M}\\otimes_R E$ on $L=\\mathcal M\\otimes E$. A morphism in this rational category is a finite sum of tensors $u\\otimes c$ of integral morphisms and scalars; the equality for $u$ at each level gives the equality for $u\\otimes c$ by $E$-linearity. Thus the construction is a natural isomorphism on the rationalized category, including isomorphisms between different models. The reconstruction of [lem-pod-adic-limit-finite-modules](1) ensures the integral fibres are finitely generated and complete. Identities and composites are preserved because every coordinate has these properties; this also proves the corresponding equalities after localization.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) b)-d), pp. 146-147; fibre/representation convention (1.1.6); coordinatewise argument."
+   }
+  },
+  {
+   "text": "For $E\\subset E'$ use the scalar-extension construction of [def-pod-lisse-l-adic-sheaves](3): its level $m$ is scalar extension of level $\\lceil m/e\\rceil$, where $e$ is the ramification index. Step 3 identifies the path map on this level with $1\\otimes p_{M_{\\lceil m/e\\rceil}}$. The fibre/scalar identifications supplied by [cor-galois-lisse-representations](2) are compatible with those finite reductions; completeness and the reconstruction isomorphisms of [lem-pod-adic-limit-finite-modules] therefore identify the limit map with the scalar extension of $p_{\\mathcal M}$, and after inverting uniformizers identify it with $p_L\\otimes_E E'$. Equality can be checked after every finite reduction, so the result also respects successive extensions. In the common-finite-stage category of [def-pod-lisse-l-adic-sheaves](4), represent two objects and a morphism over one common finite field. The just-proved compatibility makes transport independent of enlarging that field. Extending its vector-space fibres to $\\overline{\\mathbf Q}_\\ell$ gives the asserted algebraically closed coefficient compatibility.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "cor-galois-lisse-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) b)-d), pp. 146-147; fibre/representation convention (1.1.6); coordinatewise argument."
+   }
+  },
+  {
+   "text": "For a scheme automorphism $h$, let $\\tau_{a,P}:F_a(h^*P)\\cong F_{h(a)}(P)$ be the canonical pullback-fibre bijection of [lem-galois-pi1-functoriality], and similarly at $b$. Define $h(p)_P=\\tau_{b,P}\\,p_{h^*P}\\,\\tau_{a,P}^{-1}$. Naturality of $\\tau$ and $p$ makes this a path. Under the base-change-compatible equivalence [thm-galois-lc-etale], precisely this formula holds for underlying finite module sheaves. Thus $\\tau_b p_{h^*M}=h(p)_M\\tau_a$ at each finite coefficient level. Apply the coordinatewise limits and scalar localizations of steps 4-5 to get $p_{h^*L}=(h(p))_L$ under the canonical fibre identifications. Iterating this equation gives the assertion for every nonnegative iterate, and applying it to $h^{-1}$ gives negative iterates. The finite-cover bijections come from the fibre-product projections and their composites, so their composition identifications agree. Nothing here assumes $h$ is $k$-linear.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, pione-theorem-fundamental-group (2), and Tag 03RV, etale-cohomology-lemma-characterize-finite-locally-constant; explicit functorial construction."
+   }
+  },
+  {
+   "text": "For a loop $\\delta\\in\\operatorname{Aut}(F_a)$, [cor-galois-lisse-representations] specifies its action on every finite coefficient sheaf to be evaluation of that natural automorphism on the underlying finite locally constant set sheaf. This is exactly step 2 applied to $\\delta$; its adic action is specified to be the same action at every finite level. Consequently the rational transport for $\\delta$ is $\\rho_a(\\delta)$. Evaluate the composite natural automorphism $p\\delta p^{-1}$ on each finite sheaf: its value is $p_M\\delta_Mp_M^{-1}$. Step 4 preserves composition and inverses, so passing to limits and localizing gives $\\rho_b(p\\delta p^{-1})=p_L\\rho_a(\\delta)p_L^{-1}$.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) b)-d), pp. 146-147; fibre/representation convention (1.1.6); coordinatewise argument."
+   }
+  },
+  {
+   "text": "To compare with ordinary pro-etale sheaves, first replace a classical rational lisse sheaf by a finite-free integral model. Under [cor-galois-lisse-representations](2) it corresponds to a finite-dimensional continuous $E$-representation of the profinite group $\\pi_1(X,a)$. The stable lattice of [lem-pod-profinite-stable-lattice] is finite free, and its finite reductions give a lisse integral sheaf by the integral equivalence in that same corollary. After rationalization this sheaf is isomorphic to the original one. Step 4 already proves naturality for this isomorphism, so this replacement does not change transport. The argument includes a zero-dimensional representation and does not assume the initially chosen integral model is torsion-free.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), Lemmas 7.4.7 and 7.4.10; explicit comparisons as specified in the cited DAG statements."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-smooth-lisse-integral-lattice] with $K_0=K=k$ and $T_0=X$ (the identity field extension). It supplies a globally lisse finite-free completed-integral lattice for every ordinary pro-etale lisse $E_X$-module. The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. It is separated by hypothesis, and $\\ell$ is invertible. Thus [lem-per-lisse-completed-system-comparison] applies: reduction identifies these lattices with the finite-free etale towers, and rational realization is fully faithful. Use steps 1-4 on that tower to define ordinary lisse transport. If two lattices realize isomorphic rational objects, full faithfulness expresses their comparison as a rationalized integral morphism, and step 4 intertwines it; hence the result is independent of the lattice. The pullback and coefficient comparisons in that node are induced by the same finite-level maps, so steps 3, 5 and 6 give their compatibilities. Step 8 shows that for every classical rational lisse sheaf its realization has exactly the transport constructed above.",
+   "uses": [
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), Lemmas 7.4.7 and 7.4.10; explicit comparisons as specified in the cited DAG statements."
+   }
+  },
+  {
+   "text": "For a geometric point $x:\\operatorname{Spec}\\Omega\\to X$, the pullback compatibility of [lem-per-lisse-completed-system-comparison] identifies the pulled-back integral lattice with the inverse limit of the pulled-back finite etale tower. By [thm-galois-lc-etale] and [lem-galois-geometric-fibre], a pulled-back finite locally constant sheaf is the constant sheaf of its fibre at $x$. Sections of this inverse limit are the inverse limit of the finite fibres, because limits of sheaves are computed on sections. The reconstructed module is finite free; its associated completed coefficient-module sheaf and its localization give respectively the same integral and rational point fibres. The path map on them is therefore exactly $(m_r)\\mapsto(p_{M_r}m_r)$ followed by inversion of $\\varpi$. This uses pullback compatibility for lisse towers, not commutation of arbitrary stalks with infinite limits. Finally [lem-tw-lisse-rational-realization] identifies framework lisse objects, ordinary module pullbacks, finite coefficient extension and the point fibres $\\operatorname{Fib}_s(Lx^*L)$ for $s=\\operatorname{Spec}k$, naturally in maps. Conjugating our transport by these specified point comparisons proves the framework assertions, including $h$ and its iterates; the preceding tower description is the analogous interpretation at arbitrary geometric points.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "thm-galois-lc-etale",
+    "lem-galois-geometric-fibre",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), Lemmas 7.4.7 and 7.4.10; explicit comparisons as specified in the cited DAG statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-a1-smooth-lisse-integral-lattice",
+  "lem-galois-geometric-fibre",
+  "lem-galois-pi1-functoriality",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-pod-profinite-stable-lattice",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BND(2) together with Weil II (1.1.1), Bhatt-Scholze Proposition 6.8.4 and Lemmas 7.4.7, 7.4.10; explicit naturality and compatibility argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +203,38 @@
    "results": "Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean; subdirectory CategoryTheory/Galois",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|etalePath|étale path",
+   "results": "Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Data/Rel/Separated.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"lisse\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale path between geometric points induces natural linear transport on lisse l-adic sheaf fibres compatible with coefficient extension and pullback",
+   "results": "CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse",
+   "results": "No hits; subdirectory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "p-real-operations",
@@ -82,5 +251,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-real-lisse-path-fibres",
+  "worker": "stage1",
+  "summary": "Constructed transport by naturality on finite locally constant sheaves, then coordinatewise inverse limits and scalar localization; checked scalar extension, non-k-linear automorphism pullback and loop conjugacy explicitly. Reused the newly synced basepoint-transport node for existence and existing global-lattice and normalized realization interfaces for the pro-etale/framework assertions. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the second proof paragraph of p-real-operations: the path comparison between the closed-point and generic-point stalks used before identifying the local Frobenius operator. The enclosing unit key node is p-real-operations, so its realized fields are not edited.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-fibre-functor-basepoint-transport",
+    "why": "Generic connected-scheme path existence and classical finite/adic fibre transport. Reused after the delivery duplicate gate found the newly synced node; this unit still needs the explicit arbitrary-automorphism and pro-etale/framework comparisons."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic finite-etale/finite-locally-constant equivalence, including fibres and arbitrary base change, used to extend a given path."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Finite-limit compatibility of the fibre functor, needed to recover addition from finite products."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Finite coefficient scalar-extension stalk formula; used on pure tensors."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Reconstruction and completeness of finite adic module towers, used to compare maps through finite reductions."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Normalization of loop actions, fibre/scalar comparisons, and replacement of rational objects by a free stable lattice."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "Natural geometric pullback-fibre bijection for arbitrary scheme morphisms; no linearity over k is assumed."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Compact profinite monodromy has a finite-free stable lattice, so the finite-free realization comparison applies."
+   },
+   {
+    "node": "lem-a1-smooth-lisse-integral-lattice",
+    "why": "Global lattice existence for smooth separated finite-type schemes, used with the identity field extension."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks the Noetherian hypothesis of the integral realization comparison."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Normalized finite-free integral tower equivalence and fully faithful rational realization, with pullback and coefficient compatibility."
+   },
+   {
+    "node": "lem-galois-geometric-fibre",
+    "why": "Finite etale schemes over an algebraically closed geometric point split into copies of that point."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Specified framework/ordinary lisse comparison and point-fibre compatibility; the source unit has no alternate realization construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-fibre-functor-basepoint-transport",
+  "thm-galois-lc-etale",
+  "thm-galois-fundamental",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-pod-adic-limit-finite-modules",
+  "cor-galois-lisse-representations",
+  "lem-galois-pi1-functoriality",
+  "lem-pod-profinite-stable-lattice",
+  "lem-a1-smooth-lisse-integral-lattice",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-galois-geometric-fibre",
+  "lem-tw-lisse-rational-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-68601e121",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-68601e121 (reviewer sub-agent of L); spot-checked: I read the item and all 10 steps in full, plus the statement of every cited node. Sources checked at the cited places: Stacks 0BND(2) in pione.tex (an isomorphism between fibre functors exists), Bhatt-Scholze Prop 6.8.4(1),(4) and Lemmas 7.4.7 and 7.4.10, and Weil II (1.1.1). Step-by-step: (1) path existence comes from lem-wf-fibre-functor-basepoint-transport, which needs only connectedness, and thm-galois-lc-etale moves it to finite etale covers. (2) Linearity follows from thm-galois-fundamental's compatibility with finite limits and from naturality for addition, zero and multiplication by scalars; this is genuinely elementary. (3) Finite scalar extension uses clause (3) of lem-pod-lisse-tensor-and-scalar-extension on pure tensors. (4) The integral transport is built level by level, then inverting the uniformizer gives the rational one; torsion integral models are covered. (5) Coefficient extension uses the level ceil(m/e) and the reconstruction results of lem-pod-adic-limit-finite-modules. (6) For an automorphism h, the fibre bijection tau comes from lem-galois-pi1-functoriality, which allows any morphism, so h need not be k-linear. I checked the orientation: tau_b p_{h*L} = h(p)_L tau_a. Negative iterates come from h^{-1}. (7) The loop action and the conjugation formula follow from the cor-galois-lisse-representations normalization. (8) A free stable lattice exists because pi_1 is profinite and the action is jointly continuous. (9) The global lattice comes from lem-a1 with K_0=K=k. Its hypotheses hold, as do the Noetherian and separated hypotheses of lem-per (X is Noetherian by lem-weil-pbc-finite-type-over-noetherian); full faithfulness then makes the transport independent of the lattice. (10) At an arbitrary geometric point the fibre is computed through the pullback of the finite tower; the framework comparison of lem-tw is applied only at s=Spec k, which matches the statement's own scope. Edge cases checked: X a point, identity and inverse paths, rank 0, torsion models, ramified E'/E, negative iterates. There are no new nodes. The overlap with lem-wf-fibre-functor-basepoint-transport is partial: that node lacks the h-pullback equation and the pro-etale/framework comparison, so the item is not a duplicate. Batch-5 check: the closures of lem-a1 (reaching lem-trf-smooth-geometrically-normal through algebraic spaces and descent), lem-per (reaching the general definition def-pod-lisse-l-adic-sheaves), lem-pod-adic-limit-finite-modules, lem-pod-lisse-tensor-and-scalar-extension and lem-pod-profinite-stable-lattice contain only general foundations. None of them states the trace formula or Poincare duality or is a cohomological step of their proofs, and the item is not a step of either proof, so all five are accepted (the unit sk-p-real-operations also lists sec-poincare-duality in its uses). All 13 declared tool_uses are accepted as generic black boxes. No fixes."
  }
 }

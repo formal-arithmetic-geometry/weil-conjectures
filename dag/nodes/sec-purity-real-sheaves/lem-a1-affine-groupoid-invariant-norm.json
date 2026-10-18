@@ -1,0 +1,82 @@
+{
+ "id": "lem-a1-affine-groupoid-invariant-norm",
+ "kind": "statement",
+ "title": "The source norm of a target pullback is groupoid-invariant",
+ "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum]. Suppose morphisms $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] make $U(H)$ and $R(H)$ the objects and arrows of a groupoid, functorially in every test scheme $H$, with the indicated source, target, identity, inverse and composition. Assume $s,t$ are finite locally free [def-pc-finite-locally-free], and put $\\sigma=s^\\sharp$, $\\tau=t^\\sharp:A\\to B$ and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. For $b\\in B$, let $N_\\sigma(b)\\in A$ be the norm section of [lem-pd-finite-locally-free-norm-charts]: on every affine open where $B$ via $\\sigma$ is finite free it is the determinant of multiplication by $b$ [def-weil-endomorphism-determinant]. Then for every $f\\in A$,\n$$N_\\sigma(\\tau(f))\\in C,$$\nthat is, $\\sigma(N_\\sigma(\\tau(f)))=\\tau(N_\\sigma(\\tau(f)))$. No constant-rank, reducedness or freeness of the arrow relation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BH (groupoids-lemma-determinant-trick); norm construction in Divisors Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), applied locally on rank strata."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "lem-pd-finite-locally-free-norm-charts",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free affine groupoid the norm along source of the target pullback of any function is invariant, and formation of the norm commutes with base change",
+   "results": "8 hits: Rep.norm_comm_apply, Algebra.norm_localization, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, Ideal.relNorm_comap_algEquiv, groupCohomology.norm_ofAlgebraAutOnUnits_eq, Ideal.relNorm_map_algEquiv, Algebra.norm_eq_iff, Algebra.intNorm_map_algEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match: representation norms and localization of free algebra norms do not assert groupoid invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The norm N_s of t pullback of a regular function belongs to the equalizer of source and target for an affine finite flat groupoid",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, CategoryTheory.regularTopology.mapToEqualizer_eq_comp, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, CategoryTheory.regularTopology.mapToEqualizer, CategoryTheory.regularTopology.MapToEqualizer, CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv_symm_ι_apply, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, CategoryTheory.regularTopology.EqualizerCondition.bijective_mapToEqualizer_pullback",
+   "date": "2026-10-18",
+   "verdict": "no match: the equalizer and affine-limit hits have no algebra norm or groupoid-scheme hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant norm of a function pulled back by the target of a finite locally free groupoid is invariant under source and target",
+   "results": "8 hits: LinearEquiv.det_conj, Matrix.det_map, LinearMap.det_conj, Module.Basis.det_reindex, LinearMap.det_dualMap, Representation.norm_comp_self, Representation.self_comp_norm, LinearEquiv.det_mul_det_symm",
+   "date": "2026-10-18",
+   "verdict": "no match: determinant conjugacy and finite-group representation sums are only ingredients or different norms"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, RingHom",
+   "results": "12 hits: Algebra.norm_algebraMap_of_basis, Algebra.norm_algebraMap, Algebra.IsQuadraticExtension.sq_eq_trace_smul_sub_norm, Algebra.IsQuadraticExtension.sq_sub_trace_smul_add_norm_eq_zero, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis, WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis, Algebra.PowerBasis.norm_gen_eq_prod_roots. Read Norm/Defs.lean:57-98: Algebra.norm is a determinant, with free-module scalar formulas; it does not supply the groupoid comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match: the algebra norm identities do not state this groupoid invariant-norm lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*norm|norm.*groupoid|determinant.trick",
+   "results": "8 hits: Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear.lean, Mathlib/Geometry/Manifold/ConformalGroupoid.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern normal subgroupoids or differential geometry, not affine groupoid norms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-orbit-fibres",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical 03XX affine-quotient support branch, through lem-a1-finite-flat-affine-relation-quotient: Tag 03BL, the norm separating geometric orbits",
+   "via": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
