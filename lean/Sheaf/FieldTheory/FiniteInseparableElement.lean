@@ -8,6 +8,7 @@ module
 public import Sheaf.FieldTheory.FieldTower
 public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.FieldTheory.Separable
+import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 
 /-!
 # An inseparable element in a finite nonseparable field extension
@@ -34,6 +35,20 @@ theorem exists_not_isSeparable_of_not_isSeparableExtension
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (hfinite : degree k K ≠ ⊤) (hnot : ¬ Algebra.IsSeparableExtension k K) :
     ∃ α : K, ¬ IsSeparable k α := by
-  sorry
+  classical
+  have : Module.Finite k K := by
+    by_contra hf
+    exact hfinite (by simp [degree, hf])
+  by_contra h
+  push Not at h
+  apply hnot
+  have : Algebra.IsSeparable k K := ⟨h⟩
+  intro F _
+  refine ⟨∅, ?_, ?_⟩
+  · refine ⟨algebraicIndependent_empty_type_iff.mpr (algebraMap k F).injective, ?_⟩
+    intro s hs _
+    have : IsEmpty s := hs.isEmpty_of_isAlgebraic
+    simpa only [Set.range_eq_empty] using (Set.isEmpty_coe_sort.mp this).symm
+  · exact Algebra.isSeparable_tower_top_of_isSeparable k _ F
 
 end FieldExtension
