@@ -35,6 +35,8 @@ universe u
 
 open CategoryTheory
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry.Etale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀)) (d : ℕ)
@@ -52,7 +54,7 @@ a morphism of Weil objects from the datum induced by the canonical datum of `Λ_
 `Ra_!` and the shift by `2d`) to `τ`. -/
 theorem exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace :
     ∃ (γ : TateOrientation Λ f.geometricFiberToAlgebraicClosure d)
-      (τ : (L((specGeometricFrobenius k₀).hom)^*[ModuleCat.{u + 1} Λ]).obj
+      (τ : (L(((specGeometricFrobenius k₀).hom)^*[ModuleCat.{u + 1} Λ])).obj
           (tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)) ⟶
         tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)),
       IsWeilMorphism (specGeometricFrobenius k₀).hom

@@ -33,6 +33,117 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
+namespace AlgebraicGeometry.Etale
+
+open Opposite
+
+variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+
+/-- The identification `forget(Λ_X) ≅ Λ_X` of abelian sheaves sends the generators of the constant
+presheaf `Λ` to the generators of the constant presheaf `Λ`. -/
+lemma toSheafify_comp_sheafForget₂ConstantRingIso_hom (U : X.Etaleᵒᵖ) :
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).map
+        ((toSheafify X.smallEtaleTopology
+          ((Functor.const X.Etaleᵒᵖ).obj (ModuleCat.of Λ Λ))).app U) ≫
+      (sheafForget₂ConstantRingIso Λ X).hom.hom.app U =
+    (toSheafify X.smallEtaleTopology
+      ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of Λ))).app U := by
+  let V := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  let r : ℤ →+* Λ := Int.castRingHom Λ
+  let R := ModuleCat.restrictScalars.{u + 1} r
+  let T := forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
+  have : R.IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{0, 0, u + 1} r).isLeftAdjoint
+  have : V.IsLeftAdjoint := inferInstanceAs (R ⋙ T).IsLeftAdjoint
+  have : X.smallEtaleTopology.PreservesSheafification V :=
+    Sheaf.preservesSheafification_of_adjunction _ (Adjunction.ofIsLeftAdjoint V)
+  have h := sheafComposeIso_inv_fac X.smallEtaleTopology V
+    ((Functor.const X.Etaleᵒᵖ).obj (ModuleCat.of Λ Λ))
+  have hn := toSheafify_naturality X.smallEtaleTopology
+    (Functor.constComp X.Etaleᵒᵖ (ModuleCat.of Λ Λ) V).hom
+  have he := congrArg (fun k ↦ k ≫ sheafifyMap X.smallEtaleTopology
+    (Functor.constComp X.Etaleᵒᵖ (ModuleCat.of Λ Λ) V).hom) h
+  rw [Category.assoc, ← hn] at he
+  have he' := congrArg (fun k ↦ k.app U) he
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.constComp_hom_app,
+    Category.id_comp] at he'
+  show V.map _ ≫ ((constantCommuteCompose X.smallEtaleTopology V).hom.app _).hom.app U = _
+  rw [constantCommuteCompose_hom_app_hom]
+  exact he'
+
+/-- The global section of `Λ_X` corresponding to the identity is the generator `1`. -/
+lemma constantRingHomEquiv_id :
+    Sheaf.constantRingHomEquiv X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ _ (𝟙 _) =
+      ((toSheafify X.smallEtaleTopology
+        ((Functor.const X.Etaleᵒᵖ).obj (ModuleCat.of Λ Λ))).app (op (terminalEtale X))).hom
+          (1 : Λ) := by
+  rfl
+
+/-- The global section of `ℤ_X` corresponding to the identity is the generator `1`. -/
+lemma constantIntHomEquiv_id :
+    Sheaf.constantIntHomEquiv X.smallEtaleTopology (terminalEtaleIsTerminal X) _ (𝟙 _) =
+      ((toSheafify X.smallEtaleTopology
+        ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app
+          (op (terminalEtale X))).hom (ULift.up 1) := by
+  rfl
+
+/-- The class `ℤ_X ⟶ Λ_X` of `1` is the constant sheaf map of `ℤ ⟶ Λ`. -/
+lemma constantIntToRing_comp_sheafForget₂ConstantRingIso_hom :
+    Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ ≫
+        (sheafForget₂ConstantRingIso Λ X).hom =
+      (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom)) := by
+  apply (Sheaf.constantIntHomEquiv X.smallEtaleTopology (terminalEtaleIsTerminal X) _).injective
+  rw [Sheaf.constantIntHomEquiv_comp, Sheaf.constantIntToRing]
+  erw [Equiv.apply_symm_apply,
+    constantRingHomEquiv_id]
+  conv_rhs => rw [← Category.id_comp ((constantSheaf _ _).map _), Sheaf.constantIntHomEquiv_comp,
+    constantIntHomEquiv_id]
+  have hK := congrArg (fun k ↦ k.hom (1 : Λ))
+    (toSheafify_comp_sheafForget₂ConstantRingIso_hom Λ X (op (terminalEtale X)))
+  have hN := congrArg (fun k ↦ (k.app (op (terminalEtale X))).hom (ULift.up (1 : ℤ)))
+    (toSheafify_naturality X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).map
+      (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom))))
+  dsimp at hK hN
+  refine hK.trans (Eq.trans ?_ hN)
+  exact congrArg _ (Int.cast_one (R := Λ)).symm
+
+/-- If `ℤ ⟶ Λ` is surjective, the class `ℤ_X ⟶ Λ_X` of `1` is an epimorphism. -/
+lemma epi_constantIntToRing (hΛ : Function.Surjective (Int.cast : ℤ → Λ)) :
+    Epi (Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ) := by
+  have h := constantIntToRing_comp_sheafForget₂ConstantRingIso_hom Λ X
+  rw [← Iso.eq_comp_inv] at h
+  rw [h]
+  have : Epi (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom)) := by
+    rw [AddCommGrpCat.epi_iff_surjective]
+    intro y
+    obtain ⟨n, rfl⟩ := hΛ y
+    exact ⟨ULift.up n, rfl⟩
+  have := (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
+    (terminalEtaleIsTerminal X)).isLeftAdjoint
+  exact epi_comp _ _
+
+/-- The map `Λ'_X ⟶ Λ_X` of underlying abelian sheaves induced by `φ : Λ' ⟶ Λ` is the constant
+sheaf map of `φ`, if `ℤ ⟶ Λ'` is surjective. -/
+lemma constantRingForgetMap_comp_sheafForget₂ConstantRingIso_hom {Λ' : Type (u + 1)}
+    [CommRing Λ']
+    (φ : Λ' →+* Λ) (hΛ' : Function.Surjective (Int.cast : ℤ → Λ')) :
+    constantRingForgetMap φ X ≫ (sheafForget₂ConstantRingIso Λ X).hom =
+      (sheafForget₂ConstantRingIso Λ' X).hom ≫
+        (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+          (AddCommGrpCat.ofHom φ.toAddMonoidHom) := by
+  have := epi_constantIntToRing Λ' X hΛ'
+  rw [← cancel_epi (Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ'),
+    reassoc_of% (constantIntToRing_comp_constantRingForgetMap φ X),
+    constantIntToRing_comp_sheafForget₂ConstantRingIso_hom,
+    reassoc_of% (constantIntToRing_comp_sheafForget₂ConstantRingIso_hom Λ' X),
+    ← Functor.map_comp]
+  congr 1
+  ext x
+  simp
+
+end AlgebraicGeometry.Etale
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicInt
@@ -40,7 +151,8 @@ open Scheme PadicInt
 variable (l : ℕ) [Fact l.Prime] (m : ℕ) (S : Scheme.{u})
 
 /-- The reduction `Hⁿ(S, ℤ/ℓᵐ⁺¹) ⟶ Hⁿ(S, ℤ/ℓᵐ)` of the coefficients. -/
-noncomputable def finiteAdicHTransition (n : ℕ) : FiniteAdicH S l (m + 1) n →+ FiniteAdicH S l m n :=
+noncomputable def finiteAdicHTransition (n : ℕ) :
+    FiniteAdicH S l (m + 1) n →+ FiniteAdicH S l m n :=
   Sheaf.H.map (continuousSheafMap S
     (openAddSubgroupQuotientMap (powOpenAddSubgroup l) (powOpenAddSubgroup_succ_le l) m)) n
 
@@ -190,6 +302,7 @@ noncomputable def zmodTransitionRingHom :
     ULift.{u + 1} (ZMod (l ^ (m + 1))) →+* ULift.{u + 1} (ZMod (l ^ m)) :=
   (ZMod.castHom (pow_dvd_pow l (Nat.le_succ m)) (ZMod (l ^ m))).ulift
 
+/-- The cup product of classes of `Extⁿ_Λ(Λ_S, Λ_S)` is their Yoneda product. -/
 lemma finiteAdicHCup_extAddEquivFiniteAdicH {i j k : ℕ} (h : i + j = k)
     (z : Ext (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m))))
       (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m)))) i)
@@ -209,7 +322,8 @@ lemma mapExactFunctor_extRingChange {Λ' Λ : Type (u + 1)} [CommRing Λ'] [Comm
         (Etale.constantRingMap φ S))).comp
       ((Etale.extRingChange φ S n z).mapExactFunctor
         (Etale.sheafForget₂ Λ S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S)) (zero_add n) =
-      (z.mapExactFunctor (Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S)).comp
+      (z.mapExactFunctor
+          (Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S)).comp
         (Ext.mk₀ ((Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S).map
           (Etale.constantRingMap φ S))) (add_zero n) := by
   have h := congrArg (fun e ↦ e.mapExactFunctor
@@ -220,9 +334,11 @@ lemma mapExactFunctor_extRingChange {Λ' Λ : Type (u + 1)} [CommRing Λ'] [Comm
   exact h
 
 omit [Fact l.Prime] [CompactSpace S] [QuasiSeparatedSpace S] in
+/-- The class `ℤ ⟶ ν^* Λ` of `1` is compatible with the reduction `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ`. -/
 lemma forgetComparisonUpperStarUnit_comp_map_constantRingMap :
     forgetComparisonUpperStarUnit l (m + 1) S ≫ (forgetComparisonUpperStar l (m + 1) S).map
-      (Etale.constantRingMap (zmodTransitionRingHom l m) S) = forgetComparisonUpperStarUnit l m S := by
+      (Etale.constantRingMap (zmodTransitionRingHom l m) S) =
+      forgetComparisonUpperStarUnit l m S := by
   have h := Etale.constantIntToRing_comp_constantRingForgetMap (zmodTransitionRingHom l m) S
   dsimp only [Etale.constantRingForgetMap, Etale.sheafRestrictScalarsCompSheafForget₂Iso,
     Iso.refl_hom, NatTrans.id_app] at h
@@ -232,13 +348,74 @@ lemma forgetComparisonUpperStarUnit_comp_map_constantRingMap :
   erw [h]
   rfl
 
+omit [CompactSpace S] [QuasiSeparatedSpace S] in
+/-- The isomorphism of the constant pro-étale sheaf with `U ↦ C(U, A)` is natural in `A`. -/
+lemma constantSheaf_map_comp_constantSheafToContinuousSheaf {A B : Type} [TopologicalSpace A]
+    [AddCommGroup A] [IsTopologicalAddGroup A] [TopologicalSpace B] [AddCommGroup B]
+    [IsTopologicalAddGroup B] (f : ContinuousAddMonoidHom A B) :
+    (constantSheaf (ProEt.topology S) AddCommGrpCat.{u + 1}).map (AddCommGrpCat.ofHom
+        (AddEquiv.ulift.symm.toAddMonoidHom.comp
+          ((f : A →+ B).comp AddEquiv.ulift.toAddMonoidHom))) ≫
+      constantSheafToContinuousSheaf S B =
+    constantSheafToContinuousSheaf S A ≫ continuousSheafMap S f := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ (continuousSheaf S B).property
+  change toSheafify _ _ ≫ sheafifyMap _ _ ≫ _ = toSheafify _ _ ≫ _ ≫ _
+  erw [← toSheafify_naturality_assoc, toSheafify_constantSheafToContinuousSheaf,
+    ← Category.assoc, toSheafify_constantSheafToContinuousSheaf]
+  rfl
+
+/-- `ℤ/ℓᵐ ≅ ℤ_ℓ/ℓᵐ` sends the class of an integer to its class. -/
+lemma zmodAddEquivQuotientPowOpenAddSubgroup_intCast (n : ℤ) :
+    zmodAddEquivQuotientPowOpenAddSubgroup l m (n : ZMod (l ^ m)) =
+      QuotientAddGroup.mk (n : ℤ_[l]) := by
+  rw [← AddEquiv.eq_symm_apply, zmodAddEquivQuotientPowOpenAddSubgroup, AddEquiv.symm_trans_apply,
+    AddEquiv.symm_symm]
+  exact (map_intCast (PadicInt.toZModPow m) n).symm
+
+/-- The identifications `ℤ/ℓᵐ ≅ ℤ_ℓ/ℓᵐ` are compatible with the reductions. -/
+lemma zmodAddEquivQuotientPowOpenAddSubgroup_castHom (x : ZMod (l ^ (m + 1))) :
+    zmodAddEquivQuotientPowOpenAddSubgroup l m
+        (ZMod.castHom (pow_dvd_pow l (Nat.le_succ m)) (ZMod (l ^ m)) x) =
+      openAddSubgroupQuotientMap (PadicInt.powOpenAddSubgroup l)
+        (PadicInt.powOpenAddSubgroup_succ_le l) m
+        (zmodAddEquivQuotientPowOpenAddSubgroup l (m + 1) x) := by
+  obtain ⟨n, rfl⟩ := ZMod.intCast_surjective x
+  rw [map_intCast, zmodAddEquivQuotientPowOpenAddSubgroup_intCast,
+    zmodAddEquivQuotientPowOpenAddSubgroup_intCast]
+  rfl
+
+omit [CompactSpace S] [QuasiSeparatedSpace S] in
+/-- The identifications `ν^* Λ_S ≅ C(-, ℤ_ℓ/ℓᵐ)` are compatible with the reductions. -/
 lemma forgetComparisonUpperStarConstantRingIso_transition :
     (forgetComparisonUpperStar l (m + 1) S).map
         (Etale.constantRingMap (zmodTransitionRingHom l m) S) ≫
       (forgetComparisonUpperStarConstantRingIso l m S).hom =
     (forgetComparisonUpperStarConstantRingIso l (m + 1) S).hom ≫ continuousSheafMap S
-      (openAddSubgroupQuotientMap (powOpenAddSubgroup l) (powOpenAddSubgroup_succ_le l) m) := by
-  sorry
+      (openAddSubgroupQuotientMap (PadicInt.powOpenAddSubgroup l)
+        (PadicInt.powOpenAddSubgroup_succ_le l) m) := by
+  have h1 : (forgetComparisonUpperStar l (m + 1) S).map
+      (Etale.constantRingMap (zmodTransitionRingHom l m) S) =
+      (comparisonUpperStar AddCommGrpCat.{u + 1} S).map
+        (Etale.constantRingForgetMap (zmodTransitionRingHom l m) S) := by
+    simp only [Etale.constantRingForgetMap, Etale.sheafRestrictScalarsCompSheafForget₂Iso,
+      Iso.refl_hom, NatTrans.id_app]
+    erw [Category.comp_id]
+    rfl
+  rw [h1]
+  simp only [forgetComparisonUpperStarConstantRingIso, sheafForget₂ConstantRingIsoQuotient,
+    Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc,
+    constantSheafIsoContinuousSheaf, asIso_hom]
+  rw [← constantSheaf_map_comp_constantSheafToContinuousSheaf, ← NatTrans.naturality_assoc,
+    Functor.comp_map, ← Functor.map_comp_assoc]
+  erw [← Functor.map_comp_assoc]
+  congr 2
+  rw [reassoc_of% (Etale.constantRingForgetMap_comp_sheafForget₂ConstantRingIso_hom _ S _
+    (surjective_intCast_ulift_zmod l (m + 1))), Category.assoc, ← Functor.map_comp,
+    ← Functor.map_comp]
+  congr 2
+  ext x
+  exact zmodAddEquivQuotientPowOpenAddSubgroup_castHom l m x.down
 
 /-- The comparison `Extⁿ_Λ(Λ_S, Λ_S) ≅ Hⁿ(S_proét, ℤ_ℓ/ℓᵐ)` intertwines the change of rings
 `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` with the reduction of the coefficients. -/
@@ -272,7 +449,8 @@ lemma extAddEquivFiniteAdicH_extRingChange (n : ℕ)
 theorem finiteAdicHTransition_finiteAdicHCup {i j k : ℕ} (h : i + j = k)
     (x : FiniteAdicH S l (m + 1) i) (y : FiniteAdicH S l (m + 1) j) :
     finiteAdicHTransition l m S k (finiteAdicHCup l (m + 1) S h x y) =
-      finiteAdicHCup l m S h (finiteAdicHTransition l m S i x) (finiteAdicHTransition l m S j y) := by
+      finiteAdicHCup l m S h (finiteAdicHTransition l m S i x)
+        (finiteAdicHTransition l m S j y) := by
   obtain ⟨z, rfl⟩ := (extAddEquivFiniteAdicH l (m + 1) S i).surjective x
   obtain ⟨z', rfl⟩ := (extAddEquivFiniteAdicH l (m + 1) S j).surjective y
   refine (congrArg (finiteAdicHTransition l m S k)
