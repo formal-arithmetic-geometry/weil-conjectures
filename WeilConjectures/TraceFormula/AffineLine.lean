@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.ModelDecomposition
+public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
@@ -188,6 +189,75 @@ theorem traceFormula_open_of_isCompl [IsSepClosed k] {ΦU : U ⟶ U} {ΦZ : Z �
   exact add_right_cancel hXeq
 
 end WeilBoundedConstructible
+
+/-! ### The restriction of the extension by zero -/
+
+section Restriction
+
+/-- The abstract shape of the restriction of the Weil extension by zero: for `j_! ⊣ j^*` with
+invertible unit, an exchange `b : j_! ⋙ Φ_Y^* ≅ Φ_U^* ⋙ j_!` whose restriction is the comparison
+`c : j^* ⋙ Φ_U^* ≅ Φ_Y^* ⋙ j^*`, the inverse of the unit intertwines the structure maps. -/
+lemma restrict_extendByZero_aux {CU CX : Type*} [Category CU] [Category CX] {jS : CU ⥤ CX}
+    {jU : CX ⥤ CU} (adj : jS ⊣ jU) [IsIso adj.unit] {ΦU : CU ⥤ CU} {ΦY : CX ⥤ CX}
+    (b : jS ⋙ ΦY ≅ ΦU ⋙ jS) (c : jU ⋙ ΦU ≅ ΦY ⋙ jU) (K : CU)
+    (hL : adj.unit.app (ΦU.obj K) ≫ jU.map (b.inv.app K) =
+      ΦU.map (adj.unit.app K) ≫ c.hom.app (jS.obj K)) (φ : ΦU.obj K ⟶ K) :
+    ΦU.map (inv (adj.unit.app K)) ≫ φ =
+      (c.hom.app (jS.obj K) ≫ jU.map (b.hom.app K ≫ jS.map φ)) ≫ inv (adj.unit.app K) := by
+  have hn := (asIso adj.unit).inv.naturality φ
+  simp only [Functor.comp_map, Functor.id_map, asIso_inv, NatIso.isIso_inv_app] at hn
+  have h2 : c.hom.app (jS.obj K) ≫ jU.map (b.hom.app K) ≫ inv (adj.unit.app (ΦU.obj K)) =
+      ΦU.map (inv (adj.unit.app K)) := by
+    rw [← cancel_epi (ΦU.map (adj.unit.app K)), ← Functor.map_comp, IsIso.hom_inv_id,
+      CategoryTheory.Functor.map_id, ← reassoc_of% hL, ← jU.map_comp_assoc, Iso.inv_hom_id_app]
+    simp
+  rw [Functor.map_comp, Category.assoc, Category.assoc, hn, ← reassoc_of% h2]
+
+variable {U Y : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+  [IsSeparated U.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {ΦU : U ⟶ U} {ΦY : Y ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j.left]
+
+
+/-- The inverse of `a⁻¹ ≫ eqToHom h ≫ b` is `b⁻¹ ≫ eqToHom h' ≫ a`. -/
+lemma Iso.symm_trans_eqToIso_trans_symm {C : Type*} [Category C] {S T P P' : C} (a : P ≅ S)
+    (h : P = P') (b : P' ≅ T) (h' : P' = P) :
+    (a.symm ≪≫ eqToIso h ≪≫ b).symm = b.symm ≪≫ eqToIso h' ≪≫ a := by
+  ext
+  simp
+
+omit [IsOpenImmersion j.left] in
+/-- The pullback comparison of the flipped Frobenius square is the inverse of that of the square. -/
+theorem boundedConstructiblePullbackSquareComparison_symm_eq_flip (hw : ΦU ≫ j = j ≫ ΦY) :
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (CommSq.mk hw)).symm =
+      boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (CommSq.mk hw).flip :=
+  Iso.symm_trans_eqToIso_trans_symm _ _ _ _
+
+omit [IsOpenImmersion j.left] in
+/-- The Frobenius comparison of the pullback along `j` is the pullback comparison of the flipped
+cartesian square. -/
+lemma weilUpperStarComparison_hom_app_eq_flip (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilUpperStarComparison ℓ ΦU ΦY j hw).hom.app K =
+      (boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq.flip).hom.app K :=
+by
+  -- UNFINISHED: the kernel times out on the proof-irrelevant comparison of the two squares
+  sorry
+
+variable (ℓ) in
+/-- **The restriction of the Weil extension by zero** (blueprint `def-trf-weil-extension-zero`):
+`j^* (j_! K, j_! φ ∘ b) ≅ (K, φ)` as Weil objects, through the unit of `j_! ⊣ Lj^*`. -/
+noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
+    (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
+  IsoAlgebra.isoMk
+    (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j).unit.app K.carrier)).symm
+    -- UNFINISHED: `restrict_extendByZero_aux` with `unit_comp_map_openSquareExchange_inv`
+    sorry
+
+end Restriction
 
 section Model
 
