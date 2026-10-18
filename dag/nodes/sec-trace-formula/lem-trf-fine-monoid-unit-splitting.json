@@ -210,5 +210,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-0fef7bc40 (reviewer sub-agent of L); spot-checked: I read the item, all three cited nodes and the parent lem-trf-sharpening-fan-bijection in full, plus ILO VIII 3.1.11–3.1.16 and 3.1.24–3.1.28 (printed pp.100–102). The statement is unchanged from the Q02 creation and is true. Both torsion-free hypotheses are necessary: P=Z/2 fails without the first, and P=<(±2,0),(0,1),(1,1)> in Z^2 fails without the second, since there U=2Z×0 and B^gp=Z/2⊕Z, so no section exists. ILO does not state this algebra; it only uses local lifting in 3.1.11 and 3.1.26. The node therefore correctly records proof_origin as agent. Step 1: ker(G→B^gp)=U via the injection B→G/U, elementary. Step 2: the leaf lem-trf-fg-torsionfree-group-free (Module.basisOfFiniteTypeTorsionFree') gives a finite basis of the f.g. torsion-free B^gp. Step 3: lifting the basis gives a group section t. Step 4: t(b)−p lies in U⊂P, so the restriction j of t is a monoid section with qj=1. Step 5: explicit inverse maps E and F. Step 6: any generator appearing in a unit is a unit (a_i+(v−u)=0), so U is finitely generated and torsion free, and the leaf gives U≅Z^s. No new nodes. There are no duplicates among face-localization-units, fs-face-sharpening, fs-chart-free-factorization or the subgroup-free leaf. The parent's steps 2, 4, 9 and 14 use exactly this conclusion. The route stays inside unit sk-i-curve-zero, there are no SGA citations, no tool_uses, and proof_deps equals the union of uses. Small cases checked: P=0, P a group, P sharp, and <2,3>⊂N."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.FineMonoidUnitSplitting",
+  "declaration": "AlgebraicGeometry.FineFan.fine_monoid_unit_splitting",
+  "file": "lean/Sheaf/GroupTheory/FineMonoidUnitSplitting.lean",
+  "statement": "theorem fine_monoid_unit_splitting (P : Type u) [CommMonoid P] (hP : IsFine P) [IsMulTorsionFree (Algebra.GrothendieckGroup P)] [IsMulTorsionFree (Algebra.GrothendieckGroup (Associates P))] : ∃ s : ℕ, (∃ e : P ≃* (Associates P × Multiplicative (Fin s → ℤ)), ∀ p : P, (e p).1 = Associates.mk p) ∧ ∃ j : Associates P →* P, (∀ b : Associates P, Associates.mk (j b) = b) ∧ (∃ f : (Associates P × Pˣ) ≃* P, ∀ (b : Associates P) (u : Pˣ), f (b, u) = j b * (u : P)) ∧ Nonempty (Pˣ ≃* Multiplicative (Fin s → ℤ))",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37681a762",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Lean matches every clause of lem-trf-fine-monoid-unit-splitting: recorded IsFine; IsMulTorsionFree on GrothendieckGroup P and GrothendieckGroup (Associates P); Associates P = P/U (Associated = differ by a unit); e : P ≃* Associates P × Multiplicative (Fin s → ℤ) with first projection = Associates.mk; monoid section j with mk ∘ j = id; f(b,u) = j b * u fixed by formula; Pˣ ≃* ℤ^s with the same s. No extra hypotheses or universe restriction; statement true; edge cases trivial monoid, free abelian group, sharp <2,3>, ℕ×ℤ checked; both torsion-free hypotheses necessary. Only the lean record changed and its statement is verbatim; docstrings carry source, blueprint tag and all six steps; proof is sorry only; imports are the statement dependency plus the stated proof dependencies (allowed); no line over 100 characters; no duplicate found. nt_compile --json: clean in 3.6 s, exit 0; broken control copy fails as expected."
  }
 }

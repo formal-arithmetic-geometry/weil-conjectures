@@ -1,0 +1,125 @@
+{
+ "id": "def-per-projective-bundle-quotient-data",
+ "kind": "definition",
+ "title": "Tautological quotient data and quotient-preserving classification on a projective bundle",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $E$ a quasi-coherent $\\mathcal O_S$-module [pqf-def-coherent]. Let $A_S(E)$ be its canonical symmetric graded algebra [def-trf-canonical-symmetric-graded-algebra], and let $p:P=\\operatorname{Proj}_S A_S(E)\\to S$ be the relative Proj [def-nagata-relative-proj]. A tautological quotient datum consists of an invertible module $D.L$ on $P$ [def-sc-invertible-module], a surjection $D.q:p^*E\\to D.L$ (using the module pullback [def-pc-module-pullback]), and, on each affine open $U\\subseteq S$, an isomorphism from the restriction of $D.L$ to the degree-one Proj twist $\\mathcal O(1)$ [def-weil-pbc-proj-twisting-sheaf]. The chart isomorphism sends the pullback of each local section $e\\in E(U)$ through $D.q$ to the degree-one homogeneous section $\\iota(e)/1$ of that twist. For any scheme $T$, morphisms $h:T\\to S$ and $a:T\\to P$, and equality $h_a:p\\circ a=h$, define the pulled quotient $h^*E\\to a^*D.L$ by the canonical identification $h^*E\\simeq a^*p^*E$ followed by $a^*D.q$. Given a module $L$ on $T$ and a map $q:h^*E\\to L$, say that $a$ classifies $(L,q)$ relative to $D$ if there exist $h_a:p\\circ a=h$ and an isomorphism $v:a^*D.L\\simeq L$ such that the pulled quotient followed by $v$ equals $q$. This defines the datum, the pulled map and the classification relation; it asserts neither existence of a datum nor the projective-bundle universal property.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01OB, definition-projective-bundle and the following tautological quotient and quotient-preserving classification; affine twist normalization Tags 01NR and 01O4."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tautological invertible quotient of the pullback of a quasi-coherent module on its projective bundle and quotient preserving classification",
+   "results": "hits=8; top=['instInvertibleReprₛ', 'Module.Invertible.instProjective', 'Projectivization', 'Submodule.unitsQuotEquivRelPic', 'Submodule.unitsQuotEquivRelPic_apply_coe', 'SheafOfModules.isQuasicoherent', 'TensorProduct.quotientTensorQuotientEquiv_symm_apply_mk_tmul', 'SheafOfModules.instIsQuasicoherentOfIsFinitePresentation']; note=",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TautologicalQuotient\"",
+   "results": "hits=0; top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "TautologicalQuotient|pulledQuotient|Classifies",
+   "results": "hits=0; top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "TautologicalQuotient|pulledQuotient|def Classifies in WeilConjectures/ and lean/Sheaf/AlgebraicGeometry",
+   "results": "No upstream matches. Sheaf/AlgebraicGeometry/ProjectiveBundleQuotientGeometry.lean has TautologicalQuotient at line 59, pulledQuotient at line 94 and Classifies at line 107. Reuse these existing declarations.",
+   "date": "2026-10-18",
+   "verdict": "exact existing definitions in the side library"
+  },
+  {
+   "tool": "grep",
+   "query": "DAG TautologicalQuotient|pulledQuotient|Classifies; blueprint_refs.py search tautological quotient",
+   "results": "Only lem-trf-projective-bundle-quotient-geometry records these three auxiliary declarations; it is a theorem node. No definition node owns them. Blueprint search returns only lemma-nagata-relative-proj-invertible-tensor-powers, which concerns a different algebra.",
+   "date": "2026-10-18",
+   "verdict": "new definition node required by return H2; no new Lean construction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-flag-blowup-geometry",
+  "date": "2026-10-18",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tautological quotient and quotient-preserving projective identifications for the exceptional divisors and hyperplane in the regular-flag blowup geometry, ILO XVI pp.234-237.",
+   "via": [
+    "lem-per-regular-flag-blowup-geometry",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.TautologicalQuotient",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.TautologicalQuotient",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.pulledQuotient",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.Classifies"
+  ],
+  "statement": "structure TautologicalQuotient",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Return H2: records the existing plain data structure and its two definition interfaces, not the theorem projective_bundle_quotient_geometry. The theorem remains a proof dependency of the item. No Lean module is added or duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66415307f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66415307f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after the 6ff66e28 RETURN. R1 fixed: new def node def-per-projective-bundle-quotient-data (existing:true on the unchanged Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry; TautologicalQuotient/pulledQuotient/Classifies; check_existing clean; all owner-module decls used by the item are listed; statement matches the code and binders; deps are definitions; no cycle; no live owner race) replaces lem-trf-projective-bundle-quotient-geometry in stmt_deps, with the theorem kept in proof_deps. A1 fixed: 8 unused imports dropped, no other Lean change. Mechanical finding: lem-weil-pbc-affine-conormal-sections is a genuine conclusion dependence (conormalQuasicoherent := (affine_conormal_sections i).1, required by the [IsQuasicoherent] binders of gradedAlgebraData/TautologicalQuotient) -> PASS on this point. lean.statement verbatim; all 11 dep records identical to live; nt_compile --json clean in 18.8 s, exit 0. Advisory A2 (intersectionProjective pinned only over Z) remains optional."
+ }
+}

@@ -16,7 +16,9 @@
   "def-nagata-strict-transform",
   "def-weil-pbc-proj-twisting-sheaf",
   "def-pc-module-pullback",
-  "def-trf-canonical-symmetric-graded-algebra"
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-per-projective-bundle-quotient-data",
+  "lem-weil-pbc-affine-conormal-sections"
  ],
  "proof": [
   {
@@ -346,5 +348,35 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-27ed04cda (reviewer sub-agent of L); spot-checked: PASS. I read all 12 steps and the statements of all 15 cited nodes, and checked them against ILO XVI pp.234-237 (PDF 240-243). The item's statement matches both blowup diagrams in the source: the kernels E/E' and the canonical isomorphism i'^*E≅E', the conormal of P' in P equal to p'^*N_{Y/Z}, π^*I≅I_P⊗Ĩ compatible with the trivializations off π^{-1}Y, and the hyperplane ideal K⊗O(-1). ILO prints N_{Bl/P'} where it means N_{Bl/P}; the item uses N_{B/P}, which is correct. Step checks: the hypotheses of the localization, permutation and 061L neighbourhood lemmas hold at points of the centre and over R/(f). The 0BIQ chart presentation is applied with the pivot placed first. t is a nonzerodivisor because C_k⊂R_t, and C_k/t=(R/h)[u]. In the kernel matrices the kernel is free on e_l-u_l e_k, of rank n-1, for both maps. In the divisor case the a-chart (pivot 0) is empty, the strict-transform ideal is (u), u is a nonzerodivisor via a∈R_t, the intersection is transverse Cartier, (t)⊗(u)→(a) is an isomorphism, and the O(-1) twist is correct. Small cases tested: c=0, n=1, m=n=1, m=1, and a non-reduced base. There are no new nodes and no cycle. The existing unsplit node lem-per-cartier-blowup-polynomials is a cohomological statement that overlaps only in its n=1 geometric hypotheses, so it is not a duplicate; its geometric clauses should cite this item when it is split. Batch-5: the closure of the three trf citations (def-trf-canonical-symmetric-graded-algebra, lem-trf-blowup-chart-regular-sequence-presentation = Stacks 0BIQ, lem-trf-projective-bundle-quotient-geometry = Stacks 01OB/01OE) contains only 9 generic Proj/algebraic-space trf nodes. It contains no Poincaré-duality node, no assumption leaf and no cohomology. These are general definitions and algebra outside both assumptions, so I accept them. No SGA source is cited. The worker wrote split_report.tool_uses itself (C8). All entries are general algebra/geometry tools and I accept them, but the maintainer should confirm them at merge."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularFlagBlowupGeometry",
+  "declaration": "AlgebraicGeometry.RegularFlagBlowupGeometry.regular_flag_blowup_geometry",
+  "declarations": [
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.conormal",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.conormalQuasicoherent",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.IsConormalMap",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.squarePullbackIso",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.ConormalSequence",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.IsReesTwist",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.FirstBlowup",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.IsIdealProduct",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.DivisorBlowup",
+   "AlgebraicGeometry.RegularFlagBlowupGeometry.regular_flag_blowup_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularFlagBlowupGeometry.lean",
+  "statement": "theorem regular_flag_blowup_geometry : (∀ (V W : Scheme.{u}) [IsNoetherian V] [IsNoetherian W] (k : W ⟶ V) [IsClosedImmersion k] (c : ℕ), (∀ w : W, ∃ U : V.affineOpens, k w ∈ U.1 ∧ ∃ f : List Γ(V, U.1), f.length = c ∧ RingTheory.Sequence.IsRegular Γ(V, U.1) f ∧ Ideal.ofList f = k.ker.ideal U) → (conormal k).IsFiniteLocallyFreeOfRank c) ∧ (∀ (X Y Z : Scheme.{u}) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (i : Z ⟶ Y) (j : Y ⟶ X) (m n : ℕ) [IsRegularImmersion m i] [IsRegularImmersion n j], 0 < m → 0 < n → ∃ S : ConormalSequence i j m n, FirstBlowup i j m n S ∧ (n = 1 → DivisorBlowup i j m n S))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66415307f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after the 6ff66e28 RETURN. R1 fixed: new def node def-per-projective-bundle-quotient-data (existing:true on the unchanged Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry; TautologicalQuotient/pulledQuotient/Classifies; check_existing clean; all owner-module decls used by the item are listed; statement matches the code and binders; deps are definitions; no cycle; no live owner race) replaces lem-trf-projective-bundle-quotient-geometry in stmt_deps, with the theorem kept in proof_deps. A1 fixed: 8 unused imports dropped, no other Lean change. Mechanical finding: lem-weil-pbc-affine-conormal-sections is a genuine conclusion dependence (conormalQuasicoherent := (affine_conormal_sections i).1, required by the [IsQuasicoherent] binders of gradedAlgebraData/TautologicalQuotient) -> PASS on this point. lean.statement verbatim; all 11 dep records identical to live; nt_compile --json clean in 18.8 s, exit 0. Advisory A2 (intersectionProjective pinned only over Z) remains optional."
  }
 }
