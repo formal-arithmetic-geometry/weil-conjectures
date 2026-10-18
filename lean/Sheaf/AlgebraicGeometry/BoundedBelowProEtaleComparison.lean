@@ -45,15 +45,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.AlgebraicGeometry.ProEtaleAffineContinuity
+import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 
 /-!
 # Bounded-below pro-etale comparison
@@ -136,7 +130,19 @@ theorem boundedBelowComparison (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] :
     IsIso (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit ∧
       Nonempty (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.FullyFaithful ∧
       IsIso (boundedBelowComparisonGlobalSections X Λ) := by
-  sorry
+  have hu := isIso_comparisonAdjunction_unit (ModuleCat.{u + 1} Λ) X
+  have hunit : IsIso (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    exact Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic
+      (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
+        (fun _ _ ↦ inferInstance)
+        (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective
+          (ModuleCat.{u + 1} Λ) X I) K
+  refine ⟨hunit, ⟨Adjunction.fullyFaithfulLOfIsIsoUnit
+    (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus⟩, ?_⟩
+  unfold boundedBelowComparisonGlobalSections
+  infer_instance
 
 /-- Section complexes, as a functor on the opposite site, constructed by evaluation in
 each degree. Source: Stacks 099W and 03Q6 (blueprint: sk-prop-sf-comparison). -/
@@ -197,6 +203,86 @@ noncomputable def affineComparisonResolutionCocone (X : Scheme.{u})
     (Functor.whiskerLeft D.op (comparisonResolutionSections X Λ I J j))).obj
       ((comparisonSectionComplexes (Scheme.ProEt.topology X) Λ J).mapCocone c.op)
 
+-- Exact filtered colimits commute with homology. This adapts the proof of
+-- CategoryTheory.shortComplexHomologyPreserves in DirectedColimitHomology from abelian
+-- groups to arbitrary left modules, and then takes the adjacent short complex.
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem filteredHomologyPreserves (Λ : Type (u + 1)) [Ring Λ]
+    {B : Type u} [SmallCategory B] [IsFiltered B] (n : ℤ) :
+    PreservesColimitsOfShape B
+      (HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} Λ) (.up ℤ) n) := by
+  classical
+  have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+    AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
+  have : PreservesColimitsOfShape B
+      (ShortComplex.homologyFunctor (ModuleCat.{u + 1} Λ)) := by
+    refine ⟨fun {F} ↦ ?_⟩
+    let S := (ShortComplex.functorEquivalence B (ModuleCat.{u + 1} Λ)).inverse.obj F
+    let e : S.homology ≅ F ⋙ ShortComplex.homologyFunctor (ModuleCat.{u + 1} Λ) :=
+      NatIso.ofComponents
+        (fun b ↦ (S.mapHomologyIso ((evaluation B (ModuleCat.{u + 1} Λ)).obj b)).symm)
+        (by
+          intro b b' f
+          have h := S.homologyMap_mapNatTrans ((evaluation B (ModuleCat.{u + 1} Λ)).map f)
+          change ShortComplex.homologyMap (F.map f) = _ at h
+          change S.homology.map f ≫
+            (S.mapHomologyIso ((evaluation B (ModuleCat.{u + 1} Λ)).obj b')).inv =
+            (S.mapHomologyIso ((evaluation B (ModuleCat.{u + 1} Λ)).obj b)).inv ≫
+              ShortComplex.homologyMap (F.map f)
+          rw [h]
+          simp)
+    let a : colimit (F ⋙ ShortComplex.homologyFunctor (ModuleCat.{u + 1} Λ)) ≅
+        (ShortComplex.colimitCocone F).pt.homology :=
+      (colim.mapIso e).symm ≪≫ (S.mapHomologyIso colim).symm
+    refine preservesColimit_of_preserves_colimit_cocone
+      (ShortComplex.isColimitColimitCocone F) ?_
+    apply IsColimit.ofIsoColimit (colimit.isColimit _)
+    refine Cocone.ext a ?_
+    intro b
+    have h := S.homologyMap_mapNatTrans (colim.ι (C := ModuleCat.{u + 1} Λ) b)
+    change ShortComplex.homologyMap ((ShortComplex.colimitCocone F).ι.app b) = _ at h
+    change colimit.ι _ b ≫ a.hom =
+      ShortComplex.homologyMap ((ShortComplex.colimitCocone F).ι.app b)
+    rw [h]
+    simp [a, e]
+  have : PreservesColimitsOfShape B
+      (HomologicalComplex.shortComplexFunctor (ModuleCat.{u + 1} Λ) (.up ℤ) n) := by
+    refine ⟨fun {F} ↦ ⟨fun {s} hs ↦ ⟨?_⟩⟩⟩
+    apply ShortComplex.isColimitOfIsColimitπ
+    · exact isColimitOfPreserves (HomologicalComplex.eval _ _ _) hs
+    · exact isColimitOfPreserves (HomologicalComplex.eval _ _ _) hs
+    · exact isColimitOfPreserves (HomologicalComplex.eval _ _ _) hs
+  exact preservesColimitsOfShape_of_natIso
+    (HomologicalComplex.homologyFunctorIso (ModuleCat.{u + 1} Λ) (.up ℤ) n).symm
+
+-- The quotient comparisons and the derived-functor unit are all natural.
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem derivedEvaluationUnit_naturality (X : Scheme.{u})
+    (Λ : Type (u + 1)) [Ring Λ] (V : X.ProEt)
+    {L M : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ}
+    (f : L ⟶ M) :
+    DerivedCategory.Q.map
+      ((((sheafSections (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+        (op V)).mapHomologicalComplex (.up ℤ)).map f) ≫
+      affineContinuityDerivedUnit V M =
+    affineContinuityDerivedUnit V L ≫
+      ((sheafSections (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+        (op V)).rightDerivedFunctor.map (DerivedCategory.Q.map f) := by
+  unfold affineContinuityDerivedUnit
+  simp only [Category.assoc]
+  erw [(DerivedCategory.quotientCompQhIso (ModuleCat.{u + 1} Λ)).inv.naturality_assoc]
+  have h := ((sheafSections (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+    (op V)).rightDerivedFunctorUnit.naturality
+      ((HomotopyCategory.quotient _ _).map f)
+  dsimp only [Functor.comp_map] at h ⊢
+  rw [Functor.mapHomotopyCategory_map] at h
+  erw [reassoc_of% h]
+  erw [← Functor.map_comp,
+    (DerivedCategory.quotientCompQhIso _).hom.naturality f, Functor.map_comp]
+  rfl
+
 /-- The affine filtered derived-colimit formula, with its cohomology assertion.
 Source: blueprint main-20261015, sk-prop-sf-comparison, final two paragraphs; Stacks 03Q6
 (blueprint: sk-prop-sf-comparison).
@@ -240,7 +326,70 @@ theorem affineBoundedBelowComparison (X : Scheme.{u})
         ((HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} Λ)
           (ComplexShape.up ℤ) n).mapCocone
             (affineComparisonResolutionCocone X Λ I J j D c))) := by
-  sorry
+  classical
+  obtain ⟨a, ha⟩ := hI
+  obtain ⟨b, hb⟩ := hJ
+  have : I.IsStrictlyGE a := ha
+  have : J.IsStrictlyGE b := hb
+  have : J.IsKInjective := CochainComplex.isKInjective_of_injective J b
+  let K : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    DerivedCategory.Plus.Q.obj ⟨I, ⟨a, ha⟩⟩
+  have hcont := (proEtaleAffineContinuity X Λ D c hc K I a (Iso.refl _)).2.1
+  let E := (sheafSections (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj (op c.pt)
+  have hE : IsIso (affineContinuityDerivedUnit c.pt J) := by
+    unfold affineContinuityDerivedUnit
+    infer_instance
+  let p := colimit.desc _ (affineComparisonResolutionCocone X Λ I J j D c)
+  have hfac : DerivedCategory.Q.map p ≫ affineContinuityDerivedUnit c.pt J =
+      affineContinuityProEtaleMap D c K.obj I (Iso.refl _) ≫
+        E.rightDerivedFunctor.map
+          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryFactors.hom.app I ≫
+            DerivedCategory.Q.map j) := by
+    let q := colimit.desc _ (affineContinuityProEtaleCocone D c I)
+    have hpq : p = q ≫ (E.mapHomologicalComplex (.up ℤ)).map j := by
+      apply colimit.hom_ext
+      intro k
+      dsimp only [p, q]
+      erw [colimit.ι_desc_assoc, colimit.ι_desc]
+      apply HomologicalComplex.Hom.ext
+      funext n
+      change
+        (((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app (I.X n)).hom.app
+          (op (D.obj k.unop)) ≫
+          (j.f n).hom.app (op ((toProEt X).obj (D.obj k.unop)))) ≫
+          (J.X n).obj.map (c.π.app k.unop).op =
+        ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app (I.X n)).hom.app
+          (op (D.obj k.unop)) ≫
+          (((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj (I.X n)).obj.map
+            (c.π.app k.unop).op ≫ (j.f n).hom.app (op c.pt))
+      erw [Category.assoc, (j.f n).hom.naturality]
+      rfl
+    rw [hpq, Functor.map_comp, Category.assoc, derivedEvaluationUnit_naturality]
+    unfold affineContinuityProEtaleMap affineContinuityTargetComparison
+    dsimp only [E, q]
+    simp only [Iso.refl_hom]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    conv_rhs =>
+      erw [Category.assoc, Category.assoc, ← CategoryTheory.Functor.map_comp,
+        Iso.inv_hom_id_app_assoc]
+  have hp : IsIso (DerivedCategory.Q.map p) := by
+    have : IsIso (DerivedCategory.Q.map p ≫ affineContinuityDerivedUnit c.pt J) := by
+      rw [hfac]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (affineContinuityDerivedUnit c.pt J)
+  refine ⟨hp, ?_⟩
+  intro n
+  let H := HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} Λ) (.up ℤ) n
+  have : QuasiIso p := (DerivedCategory.isIso_Q_map_iff_quasiIso _ p).1 hp
+  have : IsIso (H.map p) :=
+    (quasiIsoAt_iff_isIso_homologyMap p n).1 inferInstance
+  have : PreservesColimitsOfShape Bᵒᵖ H := filteredHomologyPreserves Λ n
+  refine ⟨(isColimitOfPreserves H (colimit.isColimit _)).ofIsoColimit
+    (Cocone.ext (asIso (H.map p)) fun i ↦ ?_)⟩
+  change H.map (colimit.ι _ i) ≫ H.map p = _
+  rw [← H.map_comp, colimit.ι_desc]
+  rfl
 
 end AlgebraicGeometry.ProEtale
 
