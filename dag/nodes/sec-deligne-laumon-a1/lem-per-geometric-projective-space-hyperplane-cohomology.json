@@ -13,7 +13,11 @@
   "def-weil-pbc-derived-categories",
   "lem-asd-etale-finite-twist-pullback",
   "def-kun-derived-tensor",
-  "lem-amb-kummer-any-base"
+  "lem-amb-kummer-any-base",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-per-ordinary-kummer-first-chern",
+  "def-per-ordered-shifted-tate-powers",
+  "def-per-ordered-tate-cup-powers"
  ],
  "proof": [
   {
@@ -243,5 +247,30 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-3b9f40cb0 (reviewer sub-agent of L); spot-checked: Read the delivery in full: the item, both new nodes, every cited node's statement, and all 17 proof steps of lem-per-noetherian-supported-product-calculus. Milne LEC places checked: §16 opening, Thm 16.1, Cor 16.2 and Ex 16.3 (Kummer on A^1, Künneth acyclicity of A^m, Gysin induction for P^m); §23 direct cycle map and its Kummer agreement; Thm 23.2 proof, first paragraph. Milne works over any algebraically closed k, so the full statement (char 0, any transcendence degree) is sourced. No SGA. Steps 1, 3, 4, 5 are correct. Step 1: O(D)=O(1) transition checked, sign positive. Step 3: induction (m,q,t)->(m-1,q-2,t-1), base A^0; checked q odd, q>2m, q<0, all t. Step 4: i_*(1)=h by the purity/lem-asd normalization; i^*h=h_D (m=1 trivial); the projection identity matches G(u)=e∘i_*u with e=c_{D,Λ} (product-calculus steps 13-15). Step 5: even-degree cups commute, h^{m+1}=0, kernel (T^{m+1}). One fault, repaired (C1/C4): step 2 combined the abelian-sheaf localization sequence of thm-pur-with-support-exactness with the module-derived H_D and H^* of the purity and affine nodes without citing the comparison. The FIX adds lem-pur-module-restriction-kernel-comparison to step 2: no cycle, same unit as the already-declared localization tool, already in the batch-5 closure. It is declared in tool_uses and proof_deps is updated; the statement is unchanged. New nodes are true and needed. Affine acyclicity: the existing nodes are dimension 1 only (thm-pur-kummer-affine-line) or use F_q-bar conventions (lem-pur-affine-line-ordinary-invariance, prop-pur-gm-relative-kummer). Smooth-divisor purity: the Gysin/absolute-purity nodes are ancestors (cycle), and thm-pur-regular-immersion-purity uses finite-field conventions; empty D and q<2 checked. Neither new node restates a clause of the item. Route: every off-unit statement is declared in tool_uses, and I accept them as generic. Batch-5: (1) lem-asd-ordinary-supported-kummer (item and purity node) reaches lem-pod-etale-stalk-tensor-scalar, which is generic stalk/tensor sheaf theory, not Poincaré duality. (2) lem-per-noetherian-supported-product-calculus reaches lem-trf-oriented-closed-base-localization, which is generic closed-subtopos theory, not the trace formula. All four nodes are already in the b5 closure with the item removed, so the delivery adds nothing; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricProjectiveSpaceHyperplaneCohomology",
+  "declaration": "AlgebraicGeometry.Etale.geometricProjectiveSpaceHyperplaneCohomology",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricProjectiveExponentUnit",
+   "AlgebraicGeometry.Etale.geometricProjectiveHyperplanePower",
+   "AlgebraicGeometry.Etale.geometricProjectiveDiagonal",
+   "AlgebraicGeometry.Etale.geometricProjectiveSpaceHyperplaneCohomology"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricProjectiveSpaceHyperplaneCohomology.lean",
+  "statement": "theorem geometricProjectiveSpaceHyperplaneCohomology (k : Type u) [Field k] [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (n : ℕ) (hn : 1 ≤ n) (hl : IsUnit (l : k)) (m : ℕ) : (∀ a : ℕ, a ≤ m → Function.Bijective (fun b : ULift.{u + 1} (ZMod (l ^ n)) ↦ b • geometricProjectiveHyperplanePower k l n m hl a)) ∧ (∀ q t : ℤ, Odd q ∨ (2 * m : ℤ) < q ∨ q < 0 → Subsingleton (ordinaryFiniteUnit (ULift.{u + 1} (ZMod (l ^ n))) (ProjectiveSpace (ULift.{u} (Fin (m + 1))) (Spec (.of k))) ⟶ ((DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateSheaf (ULift.{u + 1} (ZMod (l ^ n))) (l ^ n) (ProjectiveSpace (ULift.{u} (Fin (m + 1))) (Spec (.of k))) (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (l ^ n))) (l ^ n)) t))⟦q⟧)) ∧ (∀ x : (⨁ a : ℕ, geometricProjectiveDiagonal k l n m a), ∃ p : Polynomial (ULift.{u + 1} (ZMod (l ^ n))), ∀ a : ℕ, x a = p.coeff a • geometricProjectiveHyperplanePower k l n m hl a) ∧ (∀ p : Polynomial (ULift.{u + 1} (ZMod (l ^ n))), (∀ a : ℕ, p.coeff a • geometricProjectiveHyperplanePower k l n m hl a = 0) ↔ Polynomial.X ^ (m + 1) ∣ p)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of H2 on d301f65e260a: cites three existing:true definition nodes for the canonical Kummer class, ordered shifted Tate targets, and ordered cup powers, plus def-asd-ordinary-finite-p1-kummer-class for ordinaryFiniteUnit. The two theorem nodes are absent from stmt_deps; their conclusions are not used. Mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a76cd778b",
+  "group": "N5",
+  "result": "fix",
+  "note": "Re-delivery after H2 RETURN on d301f65e260a. Lean unchanged apart from 3 added public imports; statement re-checked clause by clause against the node and Milne §16/§23 (alg-closed k any char, IsUnit l, n>=1, P^m with m+1 coords, positive Kummer c1(O(1)), b->b h^a bijective for a<=m, vanishing for q odd/>2m/<0 all t, polynomial presentation with kernel (X^(m+1))); edge cases m=0, q=2m+1, negative q,t ok; universes ok; statement verbatim; nt_compile --json clean 5.5 s; no hollow defs, sorry only. H2 repaired: three existing:true definition nodes over unchanged modules (kummerFirstChern, affineLinearBaseCoefficient, projectiveBundleOrderedCup/UnitDiagonal/CupPowerRaw), def-asd-ordinary-finite-p1-kummer-class cited, theorem nodes dropped; closure adds only the 3 nodes, no cycle, no trf/pod, no competing delivery. FIX (whole node JSONs in fixes/): (1) def-per-ordinary-kummer-first-chern declarations add the helper kummerFirstChernRealization_bijective used by the def body; (2) def-per-ordered-shifted-tate-powers lean.statement trimmed to the exact signature (it overran into affineLinearLineDescent); (3) def-per-ordered-tate-cup-powers 'left unitor' -> right unitor (derivedTensorSingleUnitIso). check_existing clean on all three after the fixes."
  }
 }
