@@ -16157,3 +16157,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.SequentialTowerEvaluationFull (stage 3; reviewer PASS; first push; landing 20261018T062911-L-675969 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S5/Sheaf.AlgebraicGeometry.AffineLocusOfCompatibleComponentSections (stage 3; reviewer PASS; first push; landing 20261018T062911-L-676339 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S6/Sheaf.AlgebraicGeometry.AmplePositiveTensorPower (stage 3; reviewer PASS; first push; landing 20261018T062912-L-676573 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/S7/Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection (stage 3; reviewer PASS; first push; landing 20261018T062912-L-676797 (proof); batch 20261018T062645; modules 1; new nodes 0)

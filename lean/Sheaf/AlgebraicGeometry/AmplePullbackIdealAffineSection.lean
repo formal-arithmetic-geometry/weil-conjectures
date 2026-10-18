@@ -8,15 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import all Sheaf.AlgebraicGeometry.AmpleIso
+import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import WeilConjectures.AlgebraicGeometry.AmpleIso
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Ideal-supported affine sections of ample pullbacks
@@ -121,7 +116,14 @@ private theorem pullback_ideal_section {X Y : Scheme.{u}} (f : Y ⟶ X)
       nonvanishingLocus (((tensorPullback f).obj L).tensorPow n)
           ((J.toModulesι ▷ ((tensorPullback f).obj L).tensorPow n ≫
             (λ_ (((tensorPullback f).obj L).tensorPow n)).hom).app ⊤ v) := by
-  sorry
+  classical
+  let a := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
+    (pullbackPushforwardAdjunction f)
+  obtain ⟨b⟩ := nonempty_pullback_tensorPow_iso f L n
+  obtain ⟨c⟩ := tensorPow_iso (a.app L).symm n
+  let e := (a.app (L.tensorPow n) ≪≫ b ≪≫ c).symm
+  refine ⟨(J.toModules ◁ e.hom).app ⊤ v, ?_⟩
+  rw [ideal_image_map, nonvanishingLocus_iso e]
 
 /-- An ample pullback admits ideal-supported affine power sections outside the ideal support.
 
@@ -155,6 +157,36 @@ theorem exists_ample_pullback_ideal_affine_section
             ((J.toModulesι ▷ (tensorPullback f).obj (L.tensorPow n) ≫
               (λ_ ((tensorPullback f).obj (L.tensorPow n))).hom).app ⊤ v) ∧
           Disjoint (V : Set Y) (J.support : Set Y) := by
-  sorry
+  classical
+  let M := (tensorPullback f).obj L
+  let _ : CompactSpace Y := hL.1
+  obtain ⟨p, hp, u, v, huv, hyu⟩ := J.exists_section_of_ample_ideal M hL hy
+  simp only [tensorHom_id] at huv
+  obtain ⟨q, hq, t, U, hyU, hUa, hUt⟩ := hL.2 y
+  obtain ⟨V, hVa, hV⟩ := (affine_cap_section_open Y (M.tensorPow p) u U hUa).1
+  let e := (M.tensorPowAddIso p q).symm
+  let w₀ := (α_ J.toModules (M.tensorPow p) (M.tensorPow q)).hom.app ⊤
+    (tmulSection v t)
+  let w := (J.toModules ◁ e.hom).app ⊤ w₀
+  have hw : nonvanishingLocus (M.tensorPow (p + q))
+      ((J.toModulesι ▷ M.tensorPow (p + q) ≫
+        (λ_ (M.tensorPow (p + q))).hom).app ⊤ w) =
+      nonvanishingLocus (M.tensorPow p) u ∩
+        nonvanishingLocus (M.tensorPow q) t := by
+    dsimp only [w, w₀]
+    rw [ideal_image_map, nonvanishingLocus_iso e, ideal_image_tensor, ← huv,
+      nonvanishing_tensor]
+  have hVy : y ∈ V := (hV y).mpr ⟨hyU, hyu⟩
+  have hVw : (V : Set Y) = nonvanishingLocus (M.tensorPow (p + q))
+      ((J.toModulesι ▷ M.tensorPow (p + q) ≫
+        (λ_ (M.tensorPow (p + q))).hom).app ⊤ w) := by
+    rw [hw]
+    ext x
+    exact (hV x).trans (and_comm.trans (and_congr_right fun _ ↦ hUt x))
+  have hd : Disjoint (V : Set Y) (J.support : Set Y) := by
+    rw [hVw]
+    exact ideal_image_disjoint J (M.tensorPow (p + q)) w
+  obtain ⟨w', hw'⟩ := pullback_ideal_section f L J (p + q) w
+  exact ⟨p + q, Nat.add_pos_left hp q, w', V, hVy, hVa, hVw.trans hw'.symm, hd⟩
 
 end AlgebraicGeometry.Scheme.Modules
