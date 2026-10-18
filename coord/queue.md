@@ -1,6 +1,6 @@
 # Work queue
 
-1496 items; claim with `tools/claim.py next <group> [--stage N]`.
+1498 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1496)
+## Stage 3: modules to prove (1498)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -1242,6 +1242,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SecSmoothPurity.RestrictionTransitionTranspose` | - | 1 | proof | 5 |
 | `Sheaf.SixFunctors.FieldTensor` | - | 1 | proof | 5 |
 | `Sheaf.SixFunctors.GeoCartierCoeffExtension` | - | 1 | proof | 5 |
+| `Sheaf.SixFunctors.IntegralRealizationShiftCoherence` | - | 1 | proof | 5 |
 | `Sheaf.SixFunctors.OpenFactorCoherence` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ExceptionalBaseChangeCartesianOpenInjectiveAcyclic` | 8 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageFormula` | 9 | 1 | proof | 6 |
@@ -1326,6 +1327,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.IntegralRealizationRecursion` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.OpenAdjunctionShift` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.SynchronizedCanonicalMaps` | - | 2 | proof | 6 |
+| `Sheaf.SixFunctors.SystemPrimitiveComparisonShift` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection` | 9 | 3 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology` | 10 | 1 | proof | 7 |
 | `Sheaf.Paper.IndHeartIIVanishing` | 10 | 1 | proof | 7 |
@@ -1511,7 +1513,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (51)
+## Stage 3: waiting for statements of dependencies (50)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1567,7 +1569,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | `lem-sf-ambient-proper-open-pasting` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.IntegralRealizationShiftCoherence` | - | 1 | `lem-pur-system-primitive-comparison-shift` |
 
 ## Stage 3: held for an open upstream PR (14)
 
