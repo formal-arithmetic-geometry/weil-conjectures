@@ -1,0 +1,123 @@
+{
+ "id": "lem-cbc-proper-support-geometric-stalk-image-core",
+ "kind": "statement",
+ "title": "Injective proper-support restriction with exact fibre range",
+ "statement": "In the setting of lem-cbc-proper-support-geometric-stalk-image, the induced restriction map ((pointSmallEtale y).sheafFiber.map i ≫ c.app F) on the geometric stalk is injective, and an element of its target lies in its linear range if and only if it has proper support on the geometric fibre.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+ },
+ "stmt_deps": [
+  "lem-cbc-closed-proper-support-locality",
+  "def-cbc-etale-section-proper-support"
+ ],
+ "proof": [
+  {
+   "text": "Represent a geometric-stalk element on a pointed étale neighbourhood and restrict it to the fibre. The inverse-image germ formula and proper-support locality show that the resulting support is proper. Conversely, shrink a properly supported fibre section to a quasi-compact open, give its support the reduced induced closed structure, compactify the open immersion by Nagata, and glue the section with zero outside its proper support. The resulting representative lies in G by hG and restricts to the original fibre section. The same zero-extension argument shows that a stalk element restricting to zero is already zero after refinement, proving injectivity.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-cbc-closed-proper-support-locality",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lemma-nagata-proper-to-separated-target",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, first three paragraphs and open-subscheme extension argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-cbc-closed-proper-support-locality",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-proper-to-separated-target",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective proper support geometric stalk restriction exact range",
+   "results": "No exact match; service returned no applicable geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.range Submodule proper support stalk",
+   "results": "Generic linear range lemmas only; no geometric proper-support theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport_geometricStalk_image_core|proper support geometric stalk",
+   "results": "No existing declaration; this core statement is new.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk",
+  "date": "2026-10-18",
+  "group": "E2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proper-support-geometric-stalk-image",
+   "place": "support-image paragraph",
+   "via": [
+    "lem-cbc-proper-support-geometric-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportGeometricStalkCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportGeometricStalkCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.properSupport_geometricStalk_image_core",
+  "statement": "theorem properSupport_geometricStalk_image_core (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (i : G ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f).obj F) (hi : Mono i) (hG : ∀ (V : Y.Etale) (s : F.obj.obj (op (f.Etale.obj V))), (∃ t, i.hom.app (op V) t = s) ↔ SectionHasProperSupport Λ F (f.Etale.obj V) (pullback.fst V.hom f) s) (c : lowerStar (ModuleCat.{u + 1} Λ) f ⋙ (Scheme.pointSmallEtale y).sheafFiber ⟶ upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f y) ⋙ (sheafSections (pullback f y).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (Scheme.Etale.mk (𝟙 (pullback f y))))) (hc : ∀ (V : Y.Etale) (v : (Scheme.pointSmallEtale y).fiber.obj V) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (Scheme.pointSmallEtale y).toPresheafFiber V v ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ c.app F = geometricFibreSectionRestriction Λ (IsPullback.of_hasPullback f y).toCommSq F V v) : Function.Injective (((Scheme.pointSmallEtale y).sheafFiber.map i ≫ c.app F).hom) ∧ ∀ s, s ∈ LinearMap.range (((Scheme.pointSmallEtale y).sheafFiber.map i ≫ c.app F).hom) ↔ SectionHasProperSupport Λ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f y)).obj F) (Scheme.Etale.mk (𝟙 (pullback f y))) (pullback.snd f y) s",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261018T091359-L-3253746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261018T091359-L-3253746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
