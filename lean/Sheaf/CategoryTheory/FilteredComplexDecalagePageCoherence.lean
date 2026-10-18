@@ -7,9 +7,14 @@ module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalagePageIso
 import Sheaf.CategoryTheory.FilteredComplexDecalageIntervalMaps
+import all Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 import all Sheaf.CategoryTheory.FilteredComplexDecalagePageData
 import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 import Sheaf.CategoryTheory.FilteredComplexDecalageTower
+import Sheaf.CategoryTheory.FilteredComplexDecalagePageDifferentialCoherence
+import Sheaf.CategoryTheory.FilteredComplexDecalagePageSuccessorCoherence
+import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 
 /-! # Differential and successor compatibility of the normalized decalage pages
 
@@ -330,6 +335,204 @@ private theorem representative_class_transition
     simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ Q'.homologyπ (p + q)) hz
   exact hclass
 
+private theorem first_page_uniform
+    (X : Abelian.SpectralObject C EInt) (p q : ℤ)
+    (a b : EInt) (ha : a = (q : EInt)) (hb : b = ((q + 1 : ℤ) : EInt)) :
+    (X.spectralSequenceFirstPageXIso Abelian.SpectralObject.coreE₂Cohomological
+      (p, q) (q : EInt) b rfl (by rw [hb]; rfl) (p + q) rfl).hom =
+    (X.spectralSequencePageXIso Abelian.SpectralObject.coreE₂Cohomological 2 le_rfl
+      (p, q) a (q : EInt) ((q + 1 : ℤ) : EInt) b
+      (by dsimp; simpa using ha) rfl rfl (by rw [hb]; dsimp; congr 1; omega)
+      (p + q - 1) (p + q) (p + q + 1) rfl).hom ≫
+    (X.kernelSequenceE
+      (homOfLE (by simp [ha] : a ≤ (q : EInt)))
+      (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))
+      (homOfLE (by simp [hb] : ((q + 1 : ℤ) : EInt) ≤ b))
+      (homOfLE (by simp [hb] : (q : EInt) ≤ b))
+      (Subsingleton.elim _ _) (p + q - 1) (p + q) (p + q + 1)).f := by
+  subst a b
+  rw [X.spectralSequenceFirstPageXIso_hom Abelian.SpectralObject.coreE₂Cohomological
+    (p, q) (q : EInt) ((q + 1 : ℤ) : EInt) rfl rfl
+    (p + q - 1) (p + q) (p + q + 1) rfl]
+  simp only [Abelian.SpectralObject.kernelSequenceE_f]
+  have he : (X.EIsoH (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))
+      (p + q - 1) (p + q) (p + q + 1)).hom =
+      X.ιE (𝟙 (q : EInt)) (homOfLE (by simp)) (𝟙 ((q + 1 : ℤ) : EInt))
+        (p + q - 1) (p + q) (p + q + 1) ≫
+      X.fromOpcycles (homOfLE (by simp)) (𝟙 ((q + 1 : ℤ) : EInt))
+        (homOfLE (by simp)) (by simp) (p + q) := by
+    apply (cancel_mono (X.opcyclesIsoH (homOfLE (by simp)) (p + q - 1) (p + q)).inv).1
+    simp only [Category.assoc, Abelian.SpectralObject.opcyclesIsoH_hom_inv_id,
+      Category.comp_id, Abelian.SpectralObject.EIsoH_hom_opcyclesIsoH_inv]
+  rw [he]
+  rfl
+
+private noncomputable def spectral_interval_embedding
+    (Y : Abelian.SpectralObject C EInt) (p q r : ℤ) (hr : 2 ≤ r) :
+    (Y.E₂SpectralSequence.page r hr).X (p, q) ⟶
+      (Y.H (p + q)).obj (ComposableArrows.mk₁
+        (homOfLE (by simp; omega : (q : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))) :=
+  (Y.spectralSequencePageXIso Abelian.SpectralObject.coreE₂Cohomological r hr (p, q)
+    ((q - r + 2 : ℤ) : EInt) (q : EInt) ((q + 1 : ℤ) : EInt)
+    ((q + (r - 1) : ℤ) : EInt) rfl rfl rfl (by dsimp; congr 1; omega)
+    (p + q - 1) (p + q) (p + q + 1) rfl).hom ≫
+  Y.ιE (homOfLE (by simp; omega : ((q - r + 2 : ℤ) : EInt) ≤ (q : EInt)))
+    (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))
+    (homOfLE (by simp; omega : ((q + 1 : ℤ) : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))
+    (p + q - 1) (p + q) (p + q + 1) ≫
+  Y.fromOpcycles (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))
+    (homOfLE (by simp; omega : ((q + 1 : ℤ) : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))
+    (homOfLE (by simp; omega : (q : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))
+    (Subsingleton.elim _ _) (p + q)
+
+private theorem spectral_interval_successor
+    (Y : Abelian.SpectralObject C EInt) (p q r : ℤ) (hr : 2 ≤ r) :
+    (Y.E₂SpectralSequence.page r hr).iCycles (p, q) ≫
+        spectral_interval_embedding Y p q r hr ≫
+        (Y.H (p + q)).map (ComposableArrows.twoδ₂Toδ₁'
+          (q : EInt) ((q + (r - 1) : ℤ) : EInt) ((q + ((r + 1) - 1) : ℤ) : EInt)
+          (by simp; omega) (by simp)) =
+      (Y.E₂SpectralSequence.page r hr).homologyπ (p, q) ≫
+        (Y.E₂SpectralSequence.iso r (r + 1) (p, q) rfl hr).hom ≫
+          spectral_interval_embedding Y p q (r + 1) (by omega) := by
+  let D := Y.spectralSequenceHomologyData Abelian.SpectralObject.coreE₂Cohomological
+    r (r + 1) rfl hr
+    ((ComplexShape.up' (r, 1 - r)).prev (p, q)) (p, q)
+    ((ComplexShape.up' (r, 1 - r)).next (p, q)) rfl rfl
+    ((q - (r + 1) + 2 : ℤ) : EInt) ((q - r + 2 : ℤ) : EInt)
+    (q : EInt) ((q + 1 : ℤ) : EInt) ((q + (r - 1) : ℤ) : EInt)
+    ((q + ((r + 1) - 1) : ℤ) : EInt)
+    rfl rfl rfl rfl (by dsimp; congr 1; omega) (by dsimp; congr 1; omega)
+    (p + q - 1) (p + q) (p + q + 1) rfl
+  rw [Y.spectralSequence_iso Abelian.SpectralObject.coreE₂Cohomological
+    r (r + 1) rfl hr
+    ((ComplexShape.up' (r, 1 - r)).prev (p, q)) (p, q)
+    ((ComplexShape.up' (r, 1 - r)).next (p, q)) rfl rfl
+    ((q - (r + 1) + 2 : ℤ) : EInt) ((q - r + 2 : ℤ) : EInt)
+    (q : EInt) ((q + 1 : ℤ) : EInt) ((q + (r - 1) : ℤ) : EInt)
+    ((q + ((r + 1) - 1) : ℤ) : EInt)
+    rfl rfl rfl rfl (by dsimp; congr 1; omega) (by dsimp; congr 1; omega)
+    (p + q - 1) (p + q) (p + q + 1) rfl]
+  dsimp only [spectral_interval_embedding]
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    Iso.inv_hom_id_assoc, HomologicalComplex.homologyIsoSc'_eq_refl,
+    Iso.refl_hom, Category.id_comp]
+  change _ = _ ≫ D.left.homologyIso.hom ≫ _
+  erw [D.left.homologyπ_comp_homologyIso_hom_assoc]
+  have hc := D.left.cyclesIso_hom_comp_i
+  change D.left.cyclesIso.hom ≫ D.left.i =
+    (Y.E₂SpectralSequence.page r hr).iCycles (p, q) at hc
+  rw [← hc]
+  simp only [Category.assoc]
+  simp only [D, Abelian.SpectralObject.spectralSequenceHomologyData_left_i,
+    Abelian.SpectralObject.spectralSequenceHomologyData_left_π,
+    Category.assoc, Iso.inv_hom_id_assoc]
+  simp only [Abelian.SpectralObject.mapFourδ₁Toδ₀', Abelian.SpectralObject.mapFourδ₄Toδ₃']
+  rw [Y.map_ιE_assoc _ _ _ _ _ _ _ (𝟙 _) (p + q - 1) (p + q) (p + q + 1)]
+  rw [Y.opcyclesMap_id, Category.id_comp]
+  rw [Y.map_ιE_assoc _ _ _ _ _ _ _
+    (ComposableArrows.threeδ₃Toδ₂' (q : EInt) ((q + 1 : ℤ) : EInt)
+      ((q + (r - 1) : ℤ) : EInt) ((q + ((r + 1) - 1) : ℤ) : EInt)
+      (by simp) (by simp; omega) (by simp)) (p + q - 1) (p + q) (p + q + 1)]
+  rw [Y.opcyclesMap_fromOpcycles _ _ _ _ _ _ _ _ _
+    (ComposableArrows.twoδ₂Toδ₁' (q : EInt) ((q + (r - 1) : ℤ) : EInt)
+      ((q + ((r + 1) - 1) : ℤ) : EInt) (by simp; omega) (by simp)) (p + q)]
+
+private theorem page_embedding_uniform
+    (U : FilteredObject (CochainComplex C ℤ)) (p q r : ℤ) (hr : 2 ≤ r) :
+    let X := (filteredComplexDecalageSpectralObjectFunctor C).obj U
+    filteredComplexDecalagePageEmbedding U p q r hr =
+      (X.spectralSequencePageXIso Abelian.SpectralObject.coreE₂Cohomological r hr (p, q)
+        ((q - r + 2 : ℤ) : EInt) (q : EInt) ((q + 1 : ℤ) : EInt)
+        ((q + (r - 1) : ℤ) : EInt) rfl rfl rfl (by dsimp; congr 1; omega)
+        (p + q - 1) (p + q) (p + q + 1) rfl).hom ≫
+      (X.kernelSequenceE
+        (homOfLE (by simp; omega : ((q - r + 2 : ℤ) : EInt) ≤ (q : EInt)))
+        (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))
+        (homOfLE (by simp; omega : ((q + 1 : ℤ) : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))
+        (homOfLE (by simp; omega : (q : EInt) ≤ ((q + (r - 1) : ℤ) : EInt)))
+        (Subsingleton.elim _ _) (p + q - 1) (p + q) (p + q + 1)).f ≫
+      (filteredComplexDecalageIntervalIso U (q : EInt) ((q + (r - 1) : ℤ) : EInt)
+        (by simp; omega) (p + q)).hom := by
+  dsimp only
+  by_cases h : r = 2
+  · subst r
+    rw [filteredComplexDecalagePageEmbedding_two]
+    simpa only [Category.assoc] using congrArg (fun f ↦ f ≫
+      (filteredComplexDecalageIntervalIso U (q : EInt) ((q + (2 - 1) : ℤ) : EInt)
+        (by simp) (p + q)).hom)
+      (first_page_uniform ((filteredComplexDecalageSpectralObjectFunctor C).obj U) p q
+        ((q - 2 + 2 : ℤ) : EInt) ((q + (2 - 1) : ℤ) : EInt)
+        (by congr 1; omega) (by congr 1))
+  · unfold filteredComplexDecalagePageEmbedding
+    rw [dif_neg h]
+
+private theorem page_embedding_eq
+    (U : FilteredObject (CochainComplex C ℤ)) (p q r : ℤ) (hr : 2 ≤ r) :
+    filteredComplexDecalagePageEmbedding U p q r hr =
+      spectral_interval_embedding ((filteredComplexDecalageSpectralObjectFunctor C).obj U)
+        p q r hr ≫
+      (filteredComplexDecalageIntervalIso U (q : EInt) ((q + (r - 1) : ℤ) : EInt)
+        (by simp; omega) (p + q)).hom := by
+  simpa only [spectral_interval_embedding, Abelian.SpectralObject.kernelSequenceE_f,
+    Category.assoc] using page_embedding_uniform U p q r hr
+
+private theorem interval_successor
+    (U : FilteredObject (CochainComplex C ℤ)) (p q r : ℤ) (hr : 2 ≤ r) :
+    let α := ComposableArrows.homMk₁
+      (F := ComposableArrows.mk₁
+        (homOfLE (by simp; omega : (q : EInt) ≤ ((q + (r - 1) : ℤ) : EInt))))
+      (G := ComposableArrows.mk₁
+        (homOfLE (by simp; omega : (q : EInt) ≤ ((q + ((r + 1) - 1) : ℤ) : EInt))))
+      (𝟙 (q : EInt))
+      (homOfLE (by simp : ((q + (r - 1) : ℤ) : EInt) ≤
+        ((q + ((r + 1) - 1) : ℤ) : EInt))) (Subsingleton.elim _ _)
+    let S := ((filteredComplexDecalageSpectralObjectFunctor C).obj U).E₂SpectralSequence
+    (S.page r hr).iCycles (p, q) ≫ filteredComplexDecalagePageEmbedding U p q r hr ≫
+        HomologicalComplex.homologyMap
+          (filteredComplexDecalageIntervalHom U (by simp; omega) (by simp; omega) α).τ₃
+          (p + q) =
+      (S.page r hr).homologyπ (p, q) ≫ (S.iso r (r + 1) (p, q) rfl hr).hom ≫
+        filteredComplexDecalagePageEmbedding U p q (r + 1) (by omega) := by
+  dsimp only
+  rw [page_embedding_eq, page_embedding_eq]
+  simp only [Category.assoc]
+  rw [← filteredComplexDecalageIntervalIso_map]
+  have hα : ComposableArrows.homMk₁
+      (F := ComposableArrows.mk₁
+        (homOfLE (by simp; omega : (q : EInt) ≤ ((q + (r - 1) : ℤ) : EInt))))
+      (G := ComposableArrows.mk₁
+        (homOfLE (by simp; omega : (q : EInt) ≤
+          ((q + ((r + 1) - 1) : ℤ) : EInt))))
+      (𝟙 (q : EInt))
+      (homOfLE (by simp : ((q + (r - 1) : ℤ) : EInt) ≤
+        ((q + ((r + 1) - 1) : ℤ) : EInt))) (Subsingleton.elim _ _) =
+      ComposableArrows.twoδ₂Toδ₁'
+        (q : EInt) ((q + (r - 1) : ℤ) : EInt)
+        ((q + ((r + 1) - 1) : ℤ) : EInt) (by simp; omega) (by simp) := by
+    ext <;> simp
+  rw [hα]
+  simpa only [Category.assoc] using congrArg (fun f ↦ f ≫
+    (filteredComplexDecalageIntervalIso U (q : EInt)
+      ((q + ((r + 1) - 1) : ℤ) : EInt) (by simp; omega) (p + q)).hom)
+      (spectral_interval_successor
+        ((filteredComplexDecalageSpectralObjectFunctor C).obj U) p q r hr)
+
+private theorem representatives_successor_le
+    (U : FilteredObject (CochainComplex C ℤ)) (p n r : ℤ) :
+    U.filtration.complexCycleRepresentatives p n (r + 1) ≤
+      U.filtration.complexCycleRepresentatives p n r := by
+  unfold DecreasingFiltration.complexCycleRepresentatives
+  apply (Subobject.pullback _).monotone
+  apply inf_le_inf_left
+  apply (Subobject.pullback _).monotone
+  have h := imageSubobject_comp_le
+    ((Subobject.ofLE (U.filtration.step (p + (r + 1))) (U.filtration.step (p + r))
+      (U.filtration.antitone_step (by omega))).f (n + 1))
+    ((U.filtration.step (p + r)).arrow.f (n + 1))
+  simpa only [DecreasingFiltration.complexStep, ← HomologicalComplex.comp_f,
+    Subobject.ofLE_arrow] using h
+
 /-- The two compatibility equations for the already fixed, normalized page isomorphisms. -/
 structure FilteredComplexDecalagePageCoherence
     (U : FilteredObject (CochainComplex C ℤ)) : Prop where
@@ -401,6 +604,8 @@ No convergence, finite filtration or first-quadrant condition is used. -/
 theorem filteredComplex_decalage_page_coherence
     (U : FilteredObject (CochainComplex C ℤ)) :
     FilteredComplexDecalagePageCoherence U := by
-  sorry
+  constructor
+  · exact filteredComplex_decalage_page_differential_coherence U
+  · exact filteredComplex_decalage_page_successor_coherence U
 
 end CategoryTheory

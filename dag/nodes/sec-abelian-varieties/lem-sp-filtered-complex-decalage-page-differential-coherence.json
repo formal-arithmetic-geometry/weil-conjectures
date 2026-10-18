@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-filtered-complex-decalage-page-differential-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-complex-decalage-page-coherence",
+   "place": "Decomposition of the differential and successor clauses of the parent proof",
+   "via": [
+    "lem-sp-filtered-complex-decalage-page-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Differential compatibility of the fixed normalized decalage page isomorphisms.",
+ "statement": "Let C be abelian and U a filtered cochain complex. For every r ≥ 2 and bidegrees i,j, the fixed normalized decalage page isomorphisms commute with the page differential.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Stacks Project, Tag 012K, section-filtered-complex, displayed differential formula."
+ },
+ "stmt_deps": [
+  "lem-sp-filtered-complex-decalage-page-iso",
+  "lem-sp-filtered-complex-canonical-model",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed differential formula",
+  "note": "Split-off component of parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized decalage comparison of filtered complex spectral sequence pages commutes with the differential and successor homology isomorphism",
+   "results": "8 generic hits, including HomologicalComplex.Hom.comm_from, dFrom_comp_xNextIso and Triangulated.SpectralObject.Hom.comm. No compatibility theorem for the fixed concrete page comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized decalage page isomorphisms of a filtered complex preserve the spectral sequence differential and successor homology comparisons",
+   "results": "8 generic hits, including HomologicalComplex.isoSc', homologyIsoSc'_hom_ι, dFrom_comp_xNextIso, xPrevIso_comp_dTo, and connect/total-complex index maps. None proves the normalized decalage compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage",
+   "results": "0 Mathlib hits. The generic spectral-object and subobject APIs were read separately; none states this specialized decalage result.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic APIs used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexDecalagePageCoherence",
+  "date": "2026-10-18",
+  "group": "P4"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexDecalagePageDifferentialCoherence",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexDecalagePageDifferentialCoherence.lean",
+  "declaration": "CategoryTheory.filteredComplex_decalage_page_differential_coherence",
+  "statement": "theorem filteredComplex_decalage_page_differential_coherence\n    (U : FilteredObject (CochainComplex C ℤ)) :\n    ∀ (r : ℤ) (hr : 2 ≤ r) (i j : ℤ × ℤ),\n    (filteredComplexDecalagePageIso U i.1 i.2 r hr).hom ≫\n        ((((filteredComplexDecalageSpectralObjectFunctor C).obj U).E₂SpectralSequence).page\n          r hr).d i j =\n      (((filteredComplexCanonicalModel C).S.obj U).page r hr).d i j ≫\n        (filteredComplexDecalagePageIso U j.1 j.2 r hr).hom",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-18"
+ },
+ "proof": [
+  {
+   "text": "Compare the spectral and canonical differential composites on unquotiented cycle representatives; the connecting-map and normalized representative equations identify them, and cancellation gives the result.",
+   "uses": [
+    "lem-sp-filtered-complex-decalage-page-iso",
+    "lem-sp-filtered-complex-canonical-model",
+    "def-sp-filtered-complex-decalage-page-data",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed differential formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-decalage-page-iso",
+  "lem-sp-filtered-complex-canonical-model",
+  "def-sp-filtered-complex-decalage-page-data",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261018T071209-L-1673722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261018T071209-L-1673722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
