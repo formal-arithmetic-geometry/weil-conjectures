@@ -6,6 +6,8 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.Paper.RingedTensorSquarePresentation
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Tensor compatibility of a ringed square on flat K-flat representatives

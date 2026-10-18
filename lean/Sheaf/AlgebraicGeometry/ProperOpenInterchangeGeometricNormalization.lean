@@ -8,6 +8,15 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
+import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
+import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
+import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.RightDerivedPlusCube
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 
 /-!

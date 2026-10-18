@@ -2,6 +2,7 @@ module
 public import Sheaf.CategoryTheory.FilteredComplexDecalagePageIso
 public import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 public import Sheaf.CategoryTheory.FilteredComplexDecalagePageData
+import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 /-! Successor compatibility split from the normalized decalage page coherence.
 Source: Stacks Project, Tag 015X, Remark 13.26.15; blueprint:
 lem-sp-filtered-complex-decalage-page-successor-coherence. -/

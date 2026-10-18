@@ -19,6 +19,8 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.LocallyConstantTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # One step of the coefficient-ideal filtration
 

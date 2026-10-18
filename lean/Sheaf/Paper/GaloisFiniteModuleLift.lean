@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.InternalModule
 public import Sheaf.CategoryTheory.FiniteContinuousModule
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 import Sheaf.CategoryTheory.EquivalenceInternalModule
+import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 
 /-! # Finite module lifting of the Galois fibre equivalence -/
 

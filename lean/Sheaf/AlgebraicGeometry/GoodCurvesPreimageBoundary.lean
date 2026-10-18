@@ -14,6 +14,9 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ProperCoproduct
 
 /-!
 # Geometric compactification of the inverse image of a good-curves open

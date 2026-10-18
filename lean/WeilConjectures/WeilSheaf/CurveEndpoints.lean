@@ -9,6 +9,16 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import Sheaf.Paper.GaloisLisseRepresentations
+import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+import WeilConjectures.DeligneLaumon.AffineLine.Defs
+import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
+import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.WeilSheaf.Cohomology
 
 /-!
 # The two endpoints of the compactly supported cohomology of a direct image on a curve

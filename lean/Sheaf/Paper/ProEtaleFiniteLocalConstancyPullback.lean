@@ -10,6 +10,8 @@ public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 import Sheaf.Paper.ProEtaleConstantModulePullbackHomology
 import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
 
 /-!
 # Finite local constancy under inverse image

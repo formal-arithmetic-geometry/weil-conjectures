@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.FilteredHomologyCoupleData
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! # Normalization of the concrete filtered homology couple
 

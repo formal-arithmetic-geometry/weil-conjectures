@@ -8,6 +8,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Defs
+import Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum
 
 /-! An explicit finite spanning family after shrinking at a minimal prime.
 (blueprint: lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away-aux)

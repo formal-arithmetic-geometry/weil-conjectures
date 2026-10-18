@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.RingComplexGodementCech
 import Sheaf.Paper.RingComplexCechBaseChange
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.CategoryTheory.RingedExtendedCech
+import Sheaf.Paper.RingComplexSemilinearExtension
 
 /-!
 # The derived Čech comparison for a sheafified Godement ring model

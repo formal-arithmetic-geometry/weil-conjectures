@@ -9,6 +9,8 @@ public import Sheaf.Paper.GaloisLisseCorrespondenceData
 import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
 import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
+import Sheaf.Paper.LisseAdicFiberFunctors
+import Sheaf.RepresentationTheory.LAdic
 
 /-! # Adic reconstruction from finite Galois modules -/
 

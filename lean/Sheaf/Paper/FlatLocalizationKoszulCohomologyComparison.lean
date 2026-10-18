@@ -10,6 +10,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
 /-! # Flat comparison on torsion Koszul cohomology
 

@@ -7,6 +7,9 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupPrimeCases
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits

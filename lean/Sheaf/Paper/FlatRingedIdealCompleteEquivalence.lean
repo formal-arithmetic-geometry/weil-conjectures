@@ -30,6 +30,7 @@ import Sheaf.Paper.RestrictedCoefficientHomComplex
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
+import Sheaf.Paper.RestrictedCoefficientHom
 
 /-!
 # Flat ringed-site equivalence on locally derived complete objects

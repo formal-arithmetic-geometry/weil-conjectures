@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
+import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 
 /-!

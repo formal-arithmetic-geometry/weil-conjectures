@@ -10,6 +10,8 @@ public import Sheaf.CategoryTheory.AugmentedComplexGluing
 public import Sheaf.CategoryTheory.RingedDerivedRestriction
 import Sheaf.Paper.RingFamilyLocallyEqualModels
 import Sheaf.Paper.RingFamilyRestriction
+import Sheaf.CategoryTheory.ModuleSheafificationLocalIso
+import Sheaf.CategoryTheory.ModuleSheafificationRestriction
 
 /-! # Descent from locally equal section ideals
 

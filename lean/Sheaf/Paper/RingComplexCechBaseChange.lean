@@ -9,6 +9,8 @@ public import Sheaf.Paper.RingComplexSemilinearExtension
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Paper.RingComplexCechData
 
 /-! # Base change detected by augmented ordered localization models -/
 

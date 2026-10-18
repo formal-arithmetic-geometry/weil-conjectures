@@ -16,6 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 
 /-!
 # Compatible changes of ring sheaves and derived adjunctions

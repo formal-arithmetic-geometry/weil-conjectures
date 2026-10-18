@@ -6,6 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.Paper.LisseRationalScalarFiberMaps
+import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 
 /-!
 # Endomorphisms of geometric fibres under coefficient extension

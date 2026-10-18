@@ -6,6 +6,12 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.Paper.RingedModelRestriction
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.KFlatRHomCurrying
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Paper.RingedModelCurrying
 
 /-! # Restriction preserves evaluation-normalized currying
 

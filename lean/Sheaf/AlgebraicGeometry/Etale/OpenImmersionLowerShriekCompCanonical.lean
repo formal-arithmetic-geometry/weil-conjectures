@@ -3,6 +3,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 @[expose] public section
 

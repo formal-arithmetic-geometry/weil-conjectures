@@ -6,6 +6,9 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # Coherence of the specified compact-support graph map

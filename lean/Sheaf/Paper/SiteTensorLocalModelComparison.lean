@@ -18,6 +18,8 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 
 /-! # Comparing tensor cohomology with local finite free models
 

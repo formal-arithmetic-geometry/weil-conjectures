@@ -11,6 +11,15 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.ConstructibleSheaf.Refinement
+import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Deligne's generic constructibility for an open immersion

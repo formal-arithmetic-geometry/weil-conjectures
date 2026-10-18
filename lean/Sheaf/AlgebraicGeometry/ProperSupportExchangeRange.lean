@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProperSupportSectionCalculus
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # The image of the ordinary exchange on proper-support sections
 

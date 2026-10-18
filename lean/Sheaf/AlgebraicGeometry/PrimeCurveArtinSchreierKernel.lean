@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
 import Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # The degree-one Artin--Schreier kernel in a smooth proper curve family

@@ -6,6 +6,7 @@ module
 
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Spectrum.Prime.Module
+import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 
 /-!
 # A finitely generated ideal cutting out the support of a finitely presented module

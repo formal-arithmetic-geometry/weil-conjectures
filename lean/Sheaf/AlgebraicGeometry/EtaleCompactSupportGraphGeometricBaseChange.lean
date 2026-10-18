@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # The graph comparison under geometric base change

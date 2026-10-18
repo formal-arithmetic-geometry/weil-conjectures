@@ -6,6 +6,10 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
+import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProperOpenSection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Unit normalization of the proper/open restriction identification

@@ -36,6 +36,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 
 /-!
 

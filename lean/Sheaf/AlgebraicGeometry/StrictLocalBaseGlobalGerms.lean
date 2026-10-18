@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
+import Sheaf.AlgebraicGeometry.StrictLocalBaseAffine
+import Sheaf.AlgebraicGeometry.StrictLocalBaseIndEtale
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
 
 /-! # Global germs on a geometric strict-local base
 Source: Stacks Project, Tag 0EZV, corrected all-lifts proof, steps 1--3; Tag 03PN.

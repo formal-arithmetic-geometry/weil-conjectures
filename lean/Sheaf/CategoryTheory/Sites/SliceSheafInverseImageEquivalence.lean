@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.Limits
+import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
 
 /-!
 # Inverse image on sheaf slice categories

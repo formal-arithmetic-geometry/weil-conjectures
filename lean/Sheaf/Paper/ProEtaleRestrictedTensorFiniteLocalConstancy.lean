@@ -14,6 +14,9 @@ import Sheaf.Paper.LocallyConstantTensor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 import Sheaf.Algebra.Homology.KFlatResolutionGeneral
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Finite local constancy of a restricted derived tensor

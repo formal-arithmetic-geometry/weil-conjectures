@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
+import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.GenericQuasiSeparatedness
+import Sheaf.AlgebraicGeometry.ReductionGenericFibre
+import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 
 /-! # Affine model with a geometrically reduced generic fibre
 

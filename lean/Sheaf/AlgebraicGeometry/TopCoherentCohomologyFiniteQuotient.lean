@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Sheaf.AlgebraicGeometry.TopDegreeOpenRestrictionSurjective
+import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 
 @[expose] public section
 

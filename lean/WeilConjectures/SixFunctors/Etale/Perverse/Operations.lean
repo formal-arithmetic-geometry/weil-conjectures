@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
 import Sheaf.Paper.LisseAdicSheaves
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 
 /-!
 # The perverse classes under the operations

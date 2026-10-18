@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
 import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 
 @[expose] public section
 

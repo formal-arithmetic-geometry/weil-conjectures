@@ -9,6 +9,14 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Sheaf.AlgebraicGeometry.CohomologyPullbackExactConservative
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictLocalBaseAffine
+import Sheaf.AlgebraicGeometry.StrictLocalBaseIndEtale
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Pointwise comparison for strict-local geometric fibres
 

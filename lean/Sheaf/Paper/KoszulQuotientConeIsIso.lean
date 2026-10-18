@@ -13,6 +13,7 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Invertibility of the explicit Koszul quotient cone comparison
 

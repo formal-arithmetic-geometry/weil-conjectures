@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! The mate calculation used in the composition law for proper-open comparisons.
 

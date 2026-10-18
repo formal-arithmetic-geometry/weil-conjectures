@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.RingComplexGodementConstruction
 import Sheaf.Paper.RingComplexGodementModelMaps
+import Sheaf.Paper.RingComplexCechData
 
 /-! # Functorial maps of the concrete Godement ring complex -/
 

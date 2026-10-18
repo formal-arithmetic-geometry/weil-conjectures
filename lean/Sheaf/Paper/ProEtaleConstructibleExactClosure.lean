@@ -7,6 +7,12 @@ module
 
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
+import Sheaf.RingTheory.WeaklyEtaleField
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-!
 # Exactness closure of globally constructible pro-etale sheaves

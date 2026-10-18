@@ -7,6 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
+import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
+import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 
 /-! # Construction of the normalized additive comparison map
 

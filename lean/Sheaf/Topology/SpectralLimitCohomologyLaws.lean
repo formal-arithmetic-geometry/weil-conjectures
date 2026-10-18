@@ -14,6 +14,7 @@ public import Sheaf.Topology.SpectralLimitCohomologyZeroLaws
 import Sheaf.Topology.SpectralLimitCohomologyDegreeZero
 import Sheaf.CategoryTheory.SiteCohomologyPullbackComposite
 import Sheaf.CategoryTheory.SiteCohomologyPullbackUnique
+import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 
 /-! # Functor and cocone laws for normalized cohomology maps
 

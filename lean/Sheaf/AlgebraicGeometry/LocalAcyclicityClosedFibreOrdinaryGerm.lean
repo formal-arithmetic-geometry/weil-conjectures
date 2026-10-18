@@ -6,6 +6,17 @@ Authors: SHEAF group B5
 module
 
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
+import Sheaf.AlgebraicGeometry.LocalAcyclicityStrictFibreComparison
+import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
+import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm
+import Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+import Sheaf.CategoryTheory.DerivedAdjunctionSingleZero
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The unit map on closed-fibre stalks
 

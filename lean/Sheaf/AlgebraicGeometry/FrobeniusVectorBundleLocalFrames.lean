@@ -13,6 +13,7 @@ public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
 
 /-! # Local Frobenius equations on finite locally free modules -/
 

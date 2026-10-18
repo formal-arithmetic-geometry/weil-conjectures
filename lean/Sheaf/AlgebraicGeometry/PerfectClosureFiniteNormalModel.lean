@@ -20,6 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.DescendFinite
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # A finite normal model over a finite part of a perfect closure

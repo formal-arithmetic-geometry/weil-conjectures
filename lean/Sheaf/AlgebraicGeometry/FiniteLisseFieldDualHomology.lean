@@ -8,6 +8,11 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Data.ZMod.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Cohomology of site-perfect duals over a field
 

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalAbelianTotalExchange
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 public import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-! # Local strict-henselian stalk criterion for exchange
 

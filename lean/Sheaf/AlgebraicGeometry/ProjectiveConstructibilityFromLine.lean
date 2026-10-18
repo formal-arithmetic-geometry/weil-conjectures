@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImagesComp
 import Sheaf.AlgebraicGeometry.NoetherianSymmetricProductFiniteSurjective
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 
 /-!
 # Projective constructibility from the projective line
