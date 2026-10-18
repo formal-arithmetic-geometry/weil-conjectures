@@ -25,64 +25,39 @@
  ],
  "proof": [
   {
-   "text": "Use the objects and morphisms of [def-weil-pbc-small-proetale-site]. For each scheme $U$ [def-pc-scheme] take the ring $\\mathcal O_U(U)$; for a morphism $h:V\\to U$, take the component $\\mathcal O_U(U)\\to\\mathcal O_V(h^{-1}U)=\\mathcal O_V(V)$ of its morphism of structure sheaves. It is a ring homomorphism by the definition of a scheme morphism. The identity morphism gives the identity component, and for $k:W\\to V$ the component for $h\\circ k$ is $k^\\sharp\\circ h^\\sharp$ by the definition of composition of ringed-space morphisms. Thus these values and restrictions form the required presheaf of commutative rings.",
+   "text": "Restrict the global-sections functor Scheme.Γ along the opposite of the forgetful functor from the small pro-etale site [def-weil-pbc-small-proetale-site] to schemes [def-pc-scheme]. This is exactly proEtaleStructurePresheaf, so the values and restriction maps are unchanged.",
    "uses": [
     "def-weil-pbc-small-proetale-site",
     "def-pc-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definitions 03P4 (definition-additive-sheaf), part (1), and 04HS (definition-structure-sheaf); definition of scheme morphism; small-site objects from 098K (proetale.tex, definition-big-small-proetale)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-morphism-into-affine-scheme] to the arbitrary scheme $U$ and the commutative ring $\\mathbf Z[t]$. It gives a bijection between morphisms $U\\to\\operatorname{Spec}\\mathbf Z[t]$ and ring maps $\\mathbf Z[t]\\to\\Gamma(U,\\mathcal O_U)$. Evaluation at $t$ identifies the latter with $\\Gamma(U,\\mathcal O_U)$: the inverse sends $s$ to the map $\\sum a_jt^j\\mapsto\\sum a_js^j$. For $h:V\\to U$ the element corresponding to $a\\circ h$ is $h^\\sharp(a^\\sharp(t))$, because pullback of global sections respects composition. Thus the bijections commute with every restriction map. This proves representability on the category of all schemes and the claimed natural identification on the small site; it does not assert that the representing affine line is itself a weakly etale object over $S$.",
+   "text": "For every commutative ring R, the affine-target adjunction [lem-weil-pbc-morphism-into-affine-scheme] identifies the presheaf U ↦ Hom(R, Γ(U, O_U)) naturally with Hom(U, Spec R). The source library packages this as ΓSpec.representableBy. The big pro-etale topology is subcanonical: it is coarser than the fpqc topology, whose representable descent is [lem-weil-pbc-fpqc-representable-descent]. Hence each of these Hom presheaves is a sheaf. By the definition of the sheaf condition for a category-valued presheaf, Scheme.Γ is therefore a ring-valued sheaf. This is precisely the proved source-library theorem Scheme.isSheaf_Γ applied to proetaleTopology.",
    "uses": [
-    "lem-weil-pbc-morphism-into-affine-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I1 (lemma-morphism-into-affine); polynomial evaluation, applied to the presheaf of 03P4 (1)"
-   }
-  },
-  {
-   "text": "Let $\\{f_i:U_i\\to U\\}$ be a covering family of the small site, and let $s_i\\in\\Gamma(U_i,\\mathcal O_{U_i})$ be a matching family. Its overlaps $U_i\\times_U U_j$ are objects of the small site: the projection to $U_i$ is the base change of the weakly etale map $f_j$ and is weakly etale; its composite to $S$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. The maps $f_j$ are weakly etale by the morphism clause of [def-weil-pbc-small-proetale-site]. Step 2 turns the $s_i$ into maps $a_i:U_i\\to\\operatorname{Spec}\\mathbf Z[t]$ whose two restrictions to each overlap agree. The covering is fpqc by [def-weil-pbc-small-proetale-site], so [lem-weil-pbc-fpqc-representable-descent], with $T=U$ and $X=\\operatorname{Spec}\\mathbf Z[t]$, gives a unique map $a:U\\to X$ restricting to the $a_i$. Step 2 then gives a unique section $s$ restricting to all $s_i$. This proves existence and uniqueness of gluing on each covering family.",
-   "uses": [
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "def-weil-pbc-small-proetale-site",
+    "lem-weil-pbc-morphism-into-affine-scheme",
     "lem-weil-pbc-fpqc-representable-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "03O3 (lemma-representable-sheaf-fpqc), equivalently descent.tex 023Q (lemma-fpqc-universal-effective-epimorphisms); more-morphisms.tex 094T (lemma-composition-weakly-etale) and 094U (lemma-base-change-weakly-etale)"
-   }
+   "elementary": false
   },
   {
-   "text": "The gluing just proved is compatible with rings: if $s_i$ and $t_i$ glue to $s,t$, the sum $s+t$ restricts to $s_i+t_i$, the product $st$ to $s_it_i$, and $0,1$ restrict to $0,1$. Uniqueness therefore makes the inverse of the restriction-to-matching-families bijection a ring homomorphism. Equivalently, for any commutative ring $R$, glue a matching family of ring maps $R\\to\\mathcal O_S(U_i)$ one element at a time; the same separatedness calculation proves that the glued function preserves $+,\\cdot,0,1$, and is unique. Hence the presheaf satisfies the ring-valued sheaf condition on these covering families. To verify every covering sieve, let $\\mathscr R$ cover $U$ and let $(x_h)$ be a matching family on it. By [def-weil-pbc-small-proetale-site], choose a covering family $f_i:U_i\\to U$ contained in $\\mathscr R$, and glue $(x_{f_i})$ to $s$. For $h:V\\to U$ in $\\mathscr R$, the pullback along $h$ of the sieve generated by $(f_i)$ covers $V$ by the pullback axiom of a Grothendieck topology. Choose a covering family $g_j:V_j\\to V$ contained in that pullback sieve, again using the cited description of covering sieves. Each $h\\circ g_j$ factors as $f_{i(j)}\\circ q_j$ for some $q_j:V_j\\to U_{i(j)}$. Functoriality and the matching-family equations give $g_j^\\sharp(h^\\sharp(s))=q_j^\\sharp(f_{i(j)}^\\sharp(s))=q_j^\\sharp(x_{f_{i(j)}})=x_{h\\circ g_j}=g_j^\\sharp(x_h)$. Separatedness from step 3 applied to $(g_j)$ gives $h^\\sharp(s)=x_h$. Uniqueness follows by restricting to $(f_i)$. Thus the presheaf satisfies the sheaf condition for every covering sieve.",
+   "text": "The forgetful functor ProEt.forget S ⋙ Over.forget S is continuous from the small pro-etale topology [def-weil-pbc-small-proetale-site] to the big pro-etale topology, as proved in Mathlib.AlgebraicGeometry.Sites.Proetale. Apply Functor.op_comp_isSheaf_of_isSheaf to the ring-valued sheaf of the previous step. Its conclusion is definitionally the sheaf condition of proEtaleStructurePresheaf S. Bundle that presheaf with this proof to obtain proEtaleStructureSheaf S.",
    "uses": [
     "def-weil-pbc-small-proetale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definitions 03P4 (1), 04HS; elementary gluing verification for commutative rings, with the covering-sieve convention of the small-site definition 098K"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-small-proetale-site",
   "def-pc-scheme",
   "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-pbc-fpqc-representable-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Definitions 03P4 (1), 04HS and Lemma 03O3, with Lemma 01I1 and descent 023Q/weakly-etale 094T/094U for the expanded proof"
+  "place": "Definitions 03P4 (1), 04HS and Lemma 03O3; affine-target correspondence 01I1. Lean proof reuses Scheme.isSheaf_Γ from WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc and continuous restriction from Mathlib.AlgebraicGeometry.Sites.Proetale."
  },
  "mathlib_searches": [
   {
@@ -243,7 +218,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-pbc-fpqc-representable-descent"
  ],
  "reviewed": {
@@ -277,5 +251,15 @@
   "group": "Q16",
   "result": "pass",
   "note": "Reviewed node, dependencies, source, four Lean modules, report sections, edge cases, universes, canonical constructions, and scompile evidence; no substantive or mechanical defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261018T135206-L-2846639",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

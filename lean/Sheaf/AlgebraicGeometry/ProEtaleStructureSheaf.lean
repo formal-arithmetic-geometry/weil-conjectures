@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+
 /-! # The structure sheaf on the small pro-etale site
 
 Source: Stacks Project, Tags 03O3 and 098K
@@ -35,7 +37,8 @@ site, whose coverings are fpqc coverings. The forgetful functor from commutative
 creates limits and reflects isomorphisms, so set-valued descent gives ring-valued descent. -/
 theorem proEtaleStructurePresheaf_isSheaf (S : Scheme.{u}) :
     Presheaf.IsSheaf (ProEt.topology S) (proEtaleStructurePresheaf S) := by
-  sorry
+  exact Functor.op_comp_isSheaf_of_isSheaf _ _ proetaleTopology _
+    (isSheaf_Γ proetaleTopology)
 
 /-- The pro-etale structure sheaf, with sections `Γ(U, O_U)` and the usual restriction maps.
 Source: Stacks Project, Tags 03O3 and 098K
