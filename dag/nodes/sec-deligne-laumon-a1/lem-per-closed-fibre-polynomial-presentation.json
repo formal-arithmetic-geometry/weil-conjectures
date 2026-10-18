@@ -12,9 +12,109 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-finite-type-algebra], write $S=W^{-1}(P/I)$ with $P=R[x_1,\\ldots,x_n]$. Put $\\mathfrak q=(P\\to S)^{-1}(\\mathfrak m_S)$, a prime ideal containing $I$. Every element of $P\\setminus\\mathfrak q$ maps to a unit of the local ring $S$, so there is a map $P_{\\mathfrak q}/IP_{\\mathfrak q}\\to S$. It is surjective: each fraction $\\bar a/w$ defining an element of $S$ is its image, since a lift of $w\\in W$ is outside $\\mathfrak q$. It is injective: if $a/u$ maps to zero, some $w\\in W$ annihilates $\\bar a$ in $P/I$; its lift is outside $\\mathfrak q$, hence is invertible in $P_{\\mathfrak q}$, giving $a/u=0$ modulo $IP_{\\mathfrak q}$. Thus $S\\cong P_{\\mathfrak q}/IP_{\\mathfrak q}$ as an $R$-algebra. It suffices to find a polynomial ring $Q$ over $R$, a prime $\\mathfrak q_Q$ and a maximal ideal $\\mathfrak n\\supseteq\\mathfrak q_Q$ over $\\mathfrak m_R$, with $Q_{\\mathfrak q_Q}\\cong P_{\\mathfrak q}$ as $R$-algebras. The fraction constructions used here are those in [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: first paragraph, reduction to a polynomial local ring; reduction spelled out"
+   }
+  },
+  {
+   "text": "First record the sufficient condition used in both charts. For a polynomial ring $Q$ and a prime $\\mathfrak q_Q$, suppose $\\mathfrak q_Q+\\mathfrak m_RQ\\ne Q$. Apply [lem-weil-pbc-proper-ideal-contained-in-maximal] to this proper ideal to choose a maximal ideal $\\mathfrak n$ containing it. Its contraction to $R$ is proper and contains the maximal ideal $\\mathfrak m_R$, so is exactly $\\mathfrak m_R$. Because $\\mathfrak q_Q\\subseteq\\mathfrak n$, the ring $Q_{\\mathfrak q_Q}$ is a localization of $Q_{\\mathfrak n}$: invert the images of all elements of $Q\\setminus\\mathfrak q_Q$. Both rings of fractions have exactly the same fractions $a/u$ after this inversion, with the same equality relation of [def-weil-pbc-localization-at-prime]. In particular, if $\\mathfrak q+\\mathfrak m_RP\\ne P$, take $Q=P$ and $\\mathfrak q_Q=\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: first paragraph, the proper-ideal case"
+   }
+  },
+  {
+   "text": "It remains to handle $\\mathfrak q+\\mathfrak m_RP=P$. Set $K=\\kappa(\\mathfrak q)$ as in [def-weil-pbc-localization-at-prime], and let $B$ be the image of $R\\to K$. Its kernel is a proper prime ideal $\\mathfrak p\\subseteq\\mathfrak m_R$, and $B\\cong R/\\mathfrak p$ is a local domain with maximal ideal the image of $\\mathfrak m_R$: elements outside that image are images of units of $R$. Apply [lemma-nagata-local-domain-valuation-dominates] to obtain a valuation ring $V\\subseteq\\operatorname{Frac}(B)$ dominating $B$. The inclusion $B\\subseteq K$ extends to $\\operatorname{Frac}(B)\\hookrightarrow K$ by $b/c\\mapsto b/c$. Apply [lemma-nagata-valuation-ring-extension] to obtain a valuation ring $A\\subseteq K$ with fraction field $K$ dominating $V$. Hence $A$ contains $B$, and $\\mathfrak m_A\\cap B=\\mathfrak m_B$, by contracting first to $V$ and then to $B$. In particular the inverse image of $\\mathfrak m_A$ in $R$ is $\\mathfrak m_R$. Write $\\lambda_j$ for the image of $x_j$ in $K$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lemma-nagata-local-domain-valuation-dominates",
+    "lemma-nagata-valuation-ring-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: second paragraph, valuation ring dominating the image of R; Tag 00IA, lemma-dominate"
+   }
+  },
+  {
+   "text": "If all $\\lambda_j$ belong to $A$, evaluation gives $P\\to A$. Its composition into $K$ has kernel $\\mathfrak q$, so $\\mathfrak q+\\mathfrak m_RP$ is contained in the proper inverse image of $\\mathfrak m_A$, contrary to the remaining case. Thus some $\\lambda_j$ is outside $A$, and is nonzero. Choose a nonzero pivot $\\lambda_i$ for which $\\lambda_i^{-1}\\in A$ and every $\\lambda_j/\\lambda_i\\in A$ as follows. Start with one coordinate outside $A$, whose inverse is in $A$ by [def-trf-valuation-ring]. Process the other coordinates in order. Keep the pivot if the next coordinate divided by it belongs to $A$ (in particular if that coordinate is zero). Otherwise replace it by that coordinate: the old pivot divided by the new one is in $A$ by the same valuation-ring alternative. Multiplying previously obtained ratios and the old inverse by this ratio preserves all required memberships. Finite induction supplies the claimed pivot, without a value-group theorem. This is also why the remaining case cannot occur for $n=0$.",
+   "uses": [
+    "def-trf-valuation-ring",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: second paragraph, selection of a coordinate of minimum valuation, expanded using the valuation-ring alternative"
+   }
+  },
+  {
+   "text": "Put $Q=R[y_0,y_j\\ (1\\le j\\le n,\\ j\\ne i)]$, again a polynomial ring in $n$ variables. Since $\\lambda_i\\ne0$, $x_i\\notin\\mathfrak q$. Using [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-localization-at-prime], define $Q\\to P_{\\mathfrak q}$ by $y_0\\mapsto x_i^{-1}$ and $y_j\\mapsto x_j/x_i$, and let $\\mathfrak q_Q$ be the inverse image of $\\mathfrak qP_{\\mathfrak q}$. Then $y_0\\notin\\mathfrak q_Q$. The explicit maps $Q[1/y_0]\\rightleftarrows P[1/x_i]$ with $y_0\\mapsto1/x_i$, $y_j\\mapsto x_j/x_i$ in one direction and $x_i\\mapsto1/y_0$, $x_j\\mapsto y_j/y_0$ in the other are inverse: their compositions fix coefficients and every variable. Under these maps the primes induced by $\\mathfrak q_Q$ and $\\mathfrak q$ correspond, since both are kernels of the compatible maps to $K$. The same fraction maps therefore induce mutually inverse maps $Q_{\\mathfrak q_Q}\\rightleftarrows P_{\\mathfrak q}$: a denominator outside either prime has nonzero image in $K$ and its transformed numerator is outside the other prime. This proves the required local-ring isomorphism as an $R$-algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: last paragraph, the chart change and the inverse maps on localizations"
+   }
+  },
+  {
+   "text": "The map $Q\\to K$ from Step 5 takes $y_0$ to $\\lambda_i^{-1}$ and $y_j$ to $\\lambda_j/\\lambda_i$, all in $A$ by Step 4; the coefficients also lie in $A$. By the polynomial universal property [def-weil-pbc-mv-polynomial-ring] it factors through $Q\\to A$. Its kernel as a map to $K$ is $\\mathfrak q_Q$: an element has zero residue in $P_{\\mathfrak q}$ precisely when it belongs to $\\mathfrak qP_{\\mathfrak q}$. Thus $\\mathfrak q_Q$ and $\\mathfrak m_RQ$ lie in the inverse image of $\\mathfrak m_A$. That inverse image is proper because $1\\notin\\mathfrak m_A$. Therefore $\\mathfrak q_Q+\\mathfrak m_RQ\\ne Q$, and the criterion in Step 2 applies to this new chart.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: last paragraph, the new prime has a specialization in the special fibre"
+   }
+  },
+  {
+   "text": "We now have in either case an $R$-algebra isomorphism $Q_{\\mathfrak q_Q}\\cong P_{\\mathfrak q}$, and a maximal ideal $\\mathfrak n\\supseteq\\mathfrak q_Q$ of $Q$ contracting to $\\mathfrak m_R$. Let $J$ be the ideal of $Q_{\\mathfrak q_Q}$ corresponding to $IP_{\\mathfrak q}$, and let $J_0$ be its inverse image in $Q_{\\mathfrak n}$. After inverting the images of $Q\\setminus\\mathfrak q_Q$, the extension of $J_0$ is $J$: if $a/u\\in J$ with $a\\in Q_{\\mathfrak n}$ and $u$ inverted, then $a=u(a/u)\\in J_0$. The canonical fraction map consequently gives $S\\cong Q_{\\mathfrak q_Q}/J\\cong T^{-1}(Q_{\\mathfrak n}/J_0)$, where $T$ is the image of the multiplicative subset generated by $Q\\setminus\\mathfrak q_Q$. Surjectivity is the representation by fractions; injectivity is the same cross-multiplication criterion in the quotient. These are exactly the localization definitions [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-localization-at-prime]. Rename the $n$ variables of $Q$ as $x_1,\\ldots,x_n$. This proves the statement, including the $n=0$ case handled in Step 2.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof: first and last paragraphs, return from the polynomial local ring to its original quotient"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-valuation-ring-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUG, lemma-localization-at-closed-point-special-fibre, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +150,45 @@
    "results": "{\"t\": \"2026-10-18T18:56:27Z\", \"tool\": \"leansearch\", \"query\": \"Local essentially finite type algebra is localization of a quotient at a closed point of the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.of_isLocalization\", \"Algebra.EssFiniteType.mk\", \"Algebra.essFiniteType_cond_iff\", \"Algebra.QuasiFinite.of_isLocalization\", \"RingHom.EssFiniteType.holdsForLocalization\", \"algebra_finiteType_of_liesOver\", \"Algebra.EssFiniteType.cond\", \"Algebra.EssFiniteType.isLocalization\"], \"digest\": \"24588329b9713e6a\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially finite type local algebra over a local ring is a localization of a quotient of a polynomial ring localized at a maximal ideal over the base maximal ideal",
+   "results": "{\"t\": \"2026-10-18T21:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"An essentially finite type local algebra over a local ring is a localization of a quotient of a polynomial ring localized at a maximal ideal over the base maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEssFiniteTypeLocalization\", \"Algebra.EssFiniteType.isLocalization\", \"Algebra.EssFiniteType.cond\", \"RingHom.EssFiniteType.residueFieldMap\", \"RingHom.EssFiniteType.holdsForLocalization\", \"Algebra.essFiniteType_iff_exists_subalgebra\", \"Algebra.EssFiniteType.of_isLocalization\", \"RingHom.finiteType_isLocal\"], \"digest\": \"9b1bae4a394f440a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsLocalRing",
+   "results": "{\"t\": \"2026-10-18T21:05:35Z\", \"tool\": \"loogle\", \"query\": \"Algebra.EssFiniteType, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.map_maximalIdeal\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"8a0324ebaaf4cdf0\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "EssFiniteType|closed.fib[er]+|closed.point",
+   "results": "{\"t\": \"2026-10-18T21:05:45Z\", \"tool\": \"grep\", \"query\": \"EssFiniteType|closed.fib[er]+|closed.point\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\"], \"digest\": \"1efc1758f1f22010\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local essentially finite type algebra polynomial presentation at a closed point of the special fibre",
+   "results": "{\"t\": \"2026-10-18T21:05:50Z\", \"tool\": \"leansearch\", \"query\": \"Local essentially finite type algebra polynomial presentation at a closed point of the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.of_finiteType\", \"Algebra.EssFiniteType.mk\", \"Algebra.EssFiniteType.of_isLocalization\", \"AlgHom.FinitePresentation\", \"Algebra.EssFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"Algebra.Presentation.ofFinitePresentation\", \"RingHom.EssFiniteType.finset\"], \"digest\": \"e3a984078f4dfef4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial local ring change affine chart invert largest valuation coordinate gives closed special fibre point",
+   "results": "{\"t\": \"2026-10-18T21:06:57Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial local ring change affine chart invert largest valuation coordinate gives closed special fibre point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.Spec_closedPoint\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"], \"digest\": \"74e7d1d7c50cc751\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ratliff-formal-catenarity",
@@ -77,5 +212,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-closed-fibre-polynomial-presentation",
+  "worker": "stage1",
+  "summary": "Split Stacks 0AUG along its algebraic valuation-ring and affine-chart proof. Reused existing closed domination and extension nodes and the maximal-ideal Mathlib leaf; wrote the finite pivot induction, inverse chart maps, initial local quotient presentation and final quotient/localization fraction argument explicitly. No statement change or new nodes. Exact searches of project Lean and Mathlib found no attachment or whole-item Mathlib match.",
+  "blueprint": "Realizes the polynomial-presentation ingredient of the inherited Ratliff formal-catenarity branch (lem-per-ratliff-formal-catenarity, converse; originally placed under proof Step 3 of lem-per-artin-gabber-affine-curve). The current ancestor blueprint has no standalone polynomial-presentation lemma. This below-unit algebraic argument follows its cited source Stacks 0AUG; it changes no chapter or unit record."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-1f82bf2c4",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1f82bf2c4 (reviewer sub-agent of L); spot-checked: I read Stacks 0AUG (algebra.tex 12931-12976) in full; the item statement matches it hypothesis by hypothesis and is unchanged. All 7 steps were checked against the cited statements. S1: the reduction to P_q/IP_q, both surjectivity and injectivity checked. S2: the proper-ideal leaf; the contraction of the maximal ideal is m_R. S3: domination of B=R/p in Frac(B), then the closed Nagata extension node into kappa(q), so m_A meets R in m_R. S4: finite pivot induction from the x-or-x^-1 clause of def-trf-valuation-ring; the ratio algebra checks out, and no value-group lemma is needed. S5: the chart inverse maps Q[1/y0] and P[1/xi], checked on generators, then localized at the corresponding primes. S6: Q maps to A, so q_Q + m_R Q is proper. S7: J = T'^{-1}J_0, so S is a localization of a quotient of Q_n. Edge cases tested: n=0, R a field, R not a domain, nilpotents, and R=k[t]_(t), S=k(t), q=(tx-1), where the chart y=1/x works. No duplicate (0AUG appears only in the item and its Ratliff citer) and no cycle. The two Nagata nodes are Lean-closed tools, not route. Batch-5 flag: def-trf-valuation-ring is a general definition (valuation ring), outside both assumed statements and their proofs, so accepted. No SGA source, no fixes."
  }
 }
