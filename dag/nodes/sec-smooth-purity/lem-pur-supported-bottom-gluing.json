@@ -15,7 +15,8 @@
   "def-coefficient-twists-detailed",
   "def-weil-pbc-site-comparison-morphism",
   "lem-amb-finite-tate-site-descent",
-  "lem-pur-derived-support-comparison-direct-image"
+  "lem-pur-derived-support-comparison-direct-image",
+  "lem-pur-etale-supported-kernel-adjunction"
  ],
  "proof": [
   {
@@ -417,5 +418,62 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-e8572ca13 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all 13 steps, cited statements and sources. Accepted the coefficient descent, bottom-edge gluing and canonical supported comparison, including boundary compatibility. Corrected Step 9’s source list to include homology.tex for Tag 015Z. Review and whole corrected JSON written; no mathematical changes or new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7ca0b1ba2",
+  "group": "NY",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacement report in fixes/lem-pur-supported-bottom-gluing.report.md, resolving H11’s missing independent reading. Mathematics, dependencies, canonical maps, universes, edge cases and verbatim signature pass. scompile.py passed both checks without diagnostics. Lean and node unchanged; delivery ref remains at the requested SHA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedBottomGluing",
+  "declaration": "AlgebraicGeometry.supported_bottom_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.bottomProTwist",
+   "AlgebraicGeometry.bottomForgetEt",
+   "AlgebraicGeometry.bottomForgetPro",
+   "AlgebraicGeometry.bottomProKernel",
+   "AlgebraicGeometry.bottomEvalEt",
+   "AlgebraicGeometry.bottomEvalPro",
+   "AlgebraicGeometry.bottomComplexPresheaf",
+   "AlgebraicGeometry.bottomProComplexPresheaf",
+   "AlgebraicGeometry.SupportedBottomEdge",
+   "AlgebraicGeometry.bottomCoefficient",
+   "AlgebraicGeometry.bottomEtaleTwist",
+   "AlgebraicGeometry.bottomProLine",
+   "AlgebraicGeometry.bottomNu",
+   "AlgebraicGeometry.bottomEtaleEvaluation",
+   "AlgebraicGeometry.SignedFiniteTateComparison",
+   "AlgebraicGeometry.bottomLocalCoefficientEt",
+   "AlgebraicGeometry.bottomLocalCoefficientPro",
+   "AlgebraicGeometry.bottomCoefficientUnit",
+   "AlgebraicGeometry.bottomSupportInclusion",
+   "AlgebraicGeometry.bottomRestrictionEvaluationEt",
+   "AlgebraicGeometry.bottomRestrictionEvaluationPro",
+   "AlgebraicGeometry.bottomRestrictionEt_additive",
+   "AlgebraicGeometry.bottomRestrictionPro_additive",
+   "AlgebraicGeometry.SupportedLocalResolution",
+   "AlgebraicGeometry.SupportedLocalResolution.groupIso",
+   "AlgebraicGeometry.SupportedBottomModel",
+   "AlgebraicGeometry.SupportedBottomModel.etaleComplex",
+   "AlgebraicGeometry.SupportedBottomModel.proComplex",
+   "AlgebraicGeometry.SupportedBottomModel.supportComplexIso",
+   "AlgebraicGeometry.SupportedBottomModel.comparison",
+   "AlgebraicGeometry.SupportedBottomModel.proEdge",
+   "AlgebraicGeometry.SupportedBottomModel.etaleEdgeAt",
+   "AlgebraicGeometry.SupportedBottomModel.proEdgeAt",
+   "AlgebraicGeometry.SupportedBottomModel.etaleTateEdgeAt",
+   "AlgebraicGeometry.SupportedBottomModel.proTateEdgeAt",
+   "AlgebraicGeometry.supported_bottom_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedBottomGluing.lean",
+  "statement": "theorem supported_bottom_gluing (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of P.field.k))] {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (a : ℤ) (r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : bottomCoefficient P) = 0) : ∃ (Theta : SignedFiniteTateComparison P) (M : SupportedBottomModel P X i r hA a Theta), ∀ d : ℕ, (∀ q : ℕ, q < d → IsZero (M.etaleComplex.homology q)) → Nonempty (SupportedBottomEdge M.etaleComplex d) ∧ Presheaf.IsSheaf X.smallEtaleTopology (bottomProComplexPresheaf M.proComplex d)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The statement packages the signed coefficient comparisons and the normalized injective models. The edge and supported comparison are natural isomorphisms of presheaves, with cocycle, evaluation, augmentation and kernel-inclusion equations fixing the canonical maps. Local supported groups on U are exposed by etaleEdgeAt and proEdgeAt. No data is chosen from the postponed existence theorem."
  }
 }
