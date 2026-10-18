@@ -6345,6 +6345,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectn
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInjective
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TopDegree
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
