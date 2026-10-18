@@ -51,6 +51,21 @@ lemma mk₀CompMk₀_add {X' X Y Y' : C} {n : ℕ} (a : X' ⟶ X) (y y' : Ext.{w
   simp [mk₀CompMk₀, add_comp, comp_add]
 
 
+lemma mk₀_comp_mk₀CompMk₀ {X'' X' X Y Y' : C} {n : ℕ} (a' : X'' ⟶ X') (a : X' ⟶ X)
+    (y : Ext.{w} X Y n) (b : Y ⟶ Y') :
+    (mk₀ a').comp (mk₀CompMk₀ a y b) (zero_add n) = mk₀CompMk₀ (a' ≫ a) y b := by
+  simp [mk₀CompMk₀]
+
+lemma mk₀CompMk₀_comp_mk₀ {X' X Y Y' Y'' : C} {n : ℕ} (a : X' ⟶ X) (y : Ext.{w} X Y n)
+    (b : Y ⟶ Y') (b' : Y' ⟶ Y'') :
+    (mk₀CompMk₀ a y b).comp (mk₀ b') (add_zero n) = mk₀CompMk₀ a y (b ≫ b') := by
+  simp [mk₀CompMk₀, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
+
+lemma mk₀_comp_comp_mk₀ {X' X Y Y' : C} {n : ℕ} (a : X' ⟶ X) (y : Ext.{w} X Y n)
+    (b : Y ⟶ Y') :
+    ((mk₀ a).comp y (zero_add n)).comp (mk₀ b) (add_zero n) = mk₀CompMk₀ a y b :=
+  comp_assoc_of_third_deg_zero _ _ _ _
+
 end Comp
 
 variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D]
