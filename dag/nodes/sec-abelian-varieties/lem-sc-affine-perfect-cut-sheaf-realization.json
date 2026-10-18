@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-affine-perfect-cut-sheaf-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: cut a perfect complex after the degree-zero fibre map is surjective",
+   "via": [
+    "lem-sc-perfect-degree-zero-fibre-criterion",
+    "lem-sc-perfect-cut-complex-degree-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sheaf realization of a supplied localized perfect cut",
+ "statement": "Let X,K,s,U,A,M and the affine model comparison be as in [lem-sc-affine-principal-model-comparison]. Suppose f is outside the prime of s. Write N=A_f tensor_A M [def-pc-ring-tensor-cohomology]. Assume a supplied splitting Q(N) isomorphic to Q(tau_le_0 N) direct-sum Q(tau_ge_1 N), and a supplied bounded complex T of finite projective A_f-modules, zero below degree one, representing Q(tau_ge_1 N). Then on some open neighbourhood V of s, K restricted to V splits as its canonical nonpositive truncation direct-sum P, where P is perfect [def-pc-perfect-complex] and has derived tensor cohomology [def-pc-derived-tensor-cohomology-vanishes] zero below degree one. No Tor-amplitude or fibre-map hypothesis on K is used: the localization splitting and positive model are explicit hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-sc-affine-principal-model-comparison",
+  "def-pc-ring-tensor-cohomology",
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [
+  {
+   "text": "Use the principal-open comparison to obtain V and exact additive associated-sheaf functor F preserving finite free modules. Apply its derived functor to the supplied splitting; it preserves biproducts and identifies the whole object with K restricted to V.",
+   "uses": [
+    "lem-sc-affine-principal-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+   }
+  },
+  {
+   "text": "A finite projective module is a retract of a finite free module. Apply F to the splitting maps in each degree of T. Restricting to the whole-open over-site gives strictly perfect local models with the bounds of T. Thus Q(F(T)) is perfect. These retracts are flat; the upper bound gives K-flatness. Tensoring with a sheaf in degree zero preserves the zero terms below one, so its homology vanishes there.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+   }
+  },
+  {
+   "text": "Exactness puts the image of tau_le_0 N in D_le_0, and the model T puts the other summand in D_ge_1. Apply tau_lt_1 to the splitting: it is identity on the first summand and zero on the second. This identifies the first summand with tau_lt_1 of K restricted to V. Substitute that isomorphism into the splitting.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-principal-model-comparison",
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor sends a split nonpositive and positive complex to the canonical t-structure splitting, and sends a bounded positive projective complex to a perfect sheaf complex of positive Tor amplitude",
+   "results": "8 hits for DerivedCategory.TStructure.t, DerivedCategory.IsGE, exactness of homological functors and single-functor bounds; no scheme-level cut realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits for truncLE, truncLE homology and truncation inclusion; these supply categorical components but no geometric realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLE_iff_isIso_truncLT|isZero_truncLT_obj_of_isGE|mapBiprod",
+   "results": "25 hits include TStructure.isLE_iff_isIso_truncLTι_app, TStructure.isZero_truncLT_obj_of_isGE, and functor mapBiprod. These prove the categorical identification used in the realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A supplied splitting of a localized perfect complex into nonpositive and positive projective complexes gives a sheaf splitting with positive Tor amplitude",
+   "results": "8 hits for ShortComplex.Splitting and ShortExact.splittingOfProjective. These concern ordinary short complexes, not realization of a localized derived perfect cut on a scheme.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; components available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectCutComplexDegreeZero",
+  "date": "2026-10-18",
+  "group": "C9"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectCutSheafRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectCutSheafRealization.lean",
+  "declaration": "AlgebraicGeometry.affine_perfect_cut_sheaf_realization",
+  "statement": "theorem affine_perfect_cut_sheaf_realization (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ (U : X.Opens) (V : U.toScheme.Opens),\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (K : schemeDerivedCategory X) (s : X)\n    (U : X.Opens) (hsU : s ∈ U) (hU : IsAffineOpen U)\n    [∀ f : X.presheaf.obj (.op U),\n      HasDerivedCategory.{u} (ModuleCat.{u} (Localization.Away f))]\n    (M : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op U))) ℤ)\n    (eM : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅\n        DerivedCategory.Q.obj\n          (((Scheme.affinePerfectSheafification X U hU).mapHomologicalComplex\n            (.up ℤ)).obj M)))\n    (f : X.presheaf.obj (.op U)) (hf : f ∉ (hU.isoSpec.hom ⟨s, hsU⟩).asIdeal)\n    (esplit : Nonempty\n      (DerivedCategory.Q.obj ((RingTensorCohomology.extend _ (Localization.Away f)).obj M) ≅\n        DerivedCategory.Q.obj\n          (((RingTensorCohomology.extend _ (Localization.Away f)).obj M).truncLE 0) ⊞\n        DerivedCategory.Q.obj\n          (((RingTensorCohomology.extend _ (Localization.Away f)).obj M).truncGE 1)))\n    (hpos : ∃ (T : CochainComplex (ModuleCat.{u} (Localization.Away f)) ℤ) (b : ℤ),\n      T.IsStrictlyGE 1 ∧ T.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Projective (Localization.Away f) (T.X i) ∧\n        Module.Finite (Localization.Away f) (T.X i)) ∧\n      Nonempty (DerivedCategory.Q.obj\n        (((RingTensorCohomology.extend _ (Localization.Away f)).obj M).truncGE 1) ≅\n          DerivedCategory.Q.obj T)) :\n    ∃ V : X.Opens, s ∈ V ∧ ∃ P : schemeDerivedCategory V.toScheme,\n      Scheme.IsPerfect V.toScheme P ∧\n      (∀ F : SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace),\n        ∀ i : ℤ, i < 1 → schemeDerivedTensorCohomologyVanishes V.toScheme P F i) ∧\n      Nonempty\n        (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n            (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv V)).mapDerivedCategory.obj K ≅\n          (DerivedCategory.TStructure.t.truncLT 1).obj\n            (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V) ⋙\n              Equivalence.functor\n                (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n                (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n                (Scheme.Modules.overEquiv V)).mapDerivedCategory.obj K) ⊞ P)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T071140-L-1664922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T071140-L-1664922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

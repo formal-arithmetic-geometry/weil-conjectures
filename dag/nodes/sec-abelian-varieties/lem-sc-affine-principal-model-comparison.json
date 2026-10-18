@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-affine-principal-model-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: cut a perfect complex after the degree-zero fibre map is surjective",
+   "via": [
+    "lem-sc-perfect-degree-zero-fibre-criterion",
+    "lem-sc-perfect-cut-complex-degree-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact associated-sheaf comparison on a principal affine neighbourhood",
+ "statement": "Let X be a scheme [def-pc-scheme], K a derived module-sheaf object [def-pc-derived-category], s in an affine open U, and M any complex of A=Gamma(X,U)-modules. Suppose the associated-sheaf complex [lem-pc-affine-perfect-module-model] represents K on the over-site of U. If f is outside the prime corresponding to s, there are an open V containing s and an additive exact functor F from A_f-modules to module sheaves on V which sends every finite free A_f-module of rank m to the finite free structure-sheaf module of rank m, such that K restricted to V is isomorphic to Q(F applied termwise to A_f tensor_A M) [def-pc-ring-tensor-cohomology]. The assertion has no boundedness, flatness, perfection or splitting hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01HV and 01IB, associated sheaf localization and affine equivalence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-affine-perfect-module-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Let j:Spec(A_f)->Spec(A), compose with the inverse affine chart and U->X, and take V to be its open image. Since f is not in the prime of s, s lies in V. The open immersion induces e:Spec(A_f) isomorphic to V. Set F to tilde followed by restriction along e inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV and 01IB, associated sheaf localization and affine equivalence"
+   }
+  },
+  {
+   "text": "Associated sheaf preserves finite limits, and its adjunction gives preservation of colimits. Restriction along an open immersion is exact. Their composite F is additive and exact. Tilde of a finite free module is finite free; restriction preserves this identification.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV and 01IB, associated sheaf localization and affine equivalence"
+   }
+  },
+  {
+   "text": "Factor V->X through U. The over-site equivalences and restriction composition identify restriction to V of the original sheafification with tilde_A followed by restriction along Spec(A_f)->Spec(A) and e inverse. The natural tilde-pullback isomorphism identifies this with extension of scalars A->A_f followed by F. Apply this isomorphism termwise, pass to derived categories using exactness, and compose with the supplied model isomorphism.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV and 01IB, associated sheaf localization and affine equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01HV and 01IB, associated sheaf localization and affine equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact associated sheafification of a localized module complex on a principal open of an affine scheme",
+   "results": "8 hits: IsLocalizedModule.map_exact and localized module exactness, ModuleCat.Tilde descriptions; no supplied affine-complex derived comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.isoOpensRange",
+   "results": "10 hits including isoOpensRange, isoOpensRange_inv_comp and isoOpensRange_hom_ι. These implement the open-image chart but not the sheaf-model comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyBaseChange|tildePullbackIso|isoOpensRange",
+   "results": "21 Mathlib hits for isoOpensRange and its identities; no cohomologyBaseChange or tildePullbackIso (both are project-local).",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an affine associated sheaf complex to a principal open is exact sheafification of its localized module complex",
+   "results": "8 hits: module sheafification, ModuleCat.Tilde.toOpen, Scheme.Modules.restrict and restrict_obj, and Gamma_restrict_isLocalization. These provide components but no full natural derived model comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; components available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectCutComplexDegreeZero",
+  "date": "2026-10-18",
+  "group": "C9"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePrincipalModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePrincipalModelComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_principal_model_comparison",
+  "statement": "theorem affine_principal_model_comparison (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (K : schemeDerivedCategory X) (s : X)\n    (U : X.Opens) (hsU : s ∈ U) (hU : IsAffineOpen U)\n    (M : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op U))) ℤ)\n    (eM : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅\n        DerivedCategory.Q.obj\n          (((Scheme.affinePerfectSheafification X U hU).mapHomologicalComplex\n            (.up ℤ)).obj M)))\n    (f : X.presheaf.obj (.op U)) (hf : f ∉ (hU.isoSpec.hom ⟨s, hsU⟩).asIdeal) :\n    ∃ V : X.Opens, s ∈ V ∧\n      ∃ F : ModuleCat.{u} (Localization.Away f) ⥤\n        SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace),\n        ∃ hF : F.Additive, PreservesFiniteLimits F ∧ PreservesFiniteColimits F ∧\n        (∀ m : ℕ, Nonempty (F.obj\n          (ModuleCat.of (Localization.Away f) (ULift.{u} (Fin m) →₀ Localization.Away f)) ≅\n          SheafOfModules.free (R := moduleRings V.toScheme.toRingedSpace)\n            (ULift.{u} (Fin m)))) ∧\n        letI : F.Additive := hF\n        Nonempty\n          (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V) ⋙\n            Equivalence.functor\n              (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n              (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n              (Scheme.Modules.overEquiv V)).mapDerivedCategory.obj K ≅\n            DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj\n              ((RingTensorCohomology.extend _ (Localization.Away f)).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T071140-L-1664922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T071140-L-1664922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

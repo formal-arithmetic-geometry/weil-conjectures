@@ -27,45 +27,61 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood of s on which K is represented by a bounded complex of finite free modules with one term for each residue-field cohomology rank, using the finite-free residue model (Tag 0BCD). Since K has Tor-amplitude in [0,infinity), the negative-degree ranks are zero, so after shrinking the complex is concentrated in degrees >=0. The given sheaf fibre map becomes the corresponding surjection on H^0 of the localized complex.",
+   "text": "At s take a strictly perfect local model of K and refine it to a bounded finite-free model on an affine open. Lift that complex through fully faithful affine sheafification, choosing the free module of each finite rank and conjugating/lifting its differentials. Faithfulness proves square-zero and transfers the upper bound. This gives the bounded-above finite-free module complex needed for the affine cut.",
    "uses": [
-    "lem-sc-perfect-finite-free-residue-model"
+    "lem-pc-strictly-perfect-finite-free-refinement",
+    "lem-pc-affine-perfect-module-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
    }
   },
   {
-   "text": "Apply the affine cut lemma to this finite-free complex at the prime corresponding to s. It gives an element f outside that prime such that after restricting to U = Spec(R_f), K|_U is isomorphic to tau_{<=0}(K|_U) direct-sum tau_{>=1}(K|_U), and the latter is perfect of Tor-amplitude in [1,infinity).",
+   "text": "The fibre comparison identifies the given sheaf degree-zero fibre-surjectivity condition with epimorphy of the canonical module cohomology base-change map for this affine free representative. Apply the ring-level affine cut to obtain a principal localization splitting and a bounded positive finite-projective representative of the right summand.",
    "uses": [
+    "lem-sc-affine-perfect-fibre-surjectivity",
     "lem-pc-affine-perfect-cut-degree-zero"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
    }
   },
   {
-   "text": "Because K has no negative cohomology, tau_{<=0}(K|_U) is H^0(K)|_U placed in degree zero. Substituting this identification into the splitting gives K|_U isomorphic to H^0(K)|_U direct-sum P, where P=tau_{>=1}(K|_U) has the asserted perfectness and Tor-amplitude.",
+   "text": "Realize the supplied algebraic splitting on an open neighbourhood, obtaining a positive perfect sheaf summand and the canonical nonpositive truncation as the other summand.",
+   "uses": [
+    "lem-sc-affine-perfect-cut-sheaf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
+   }
+  },
+  {
+   "text": "Tensor the K-flat witness of negative tensor vanishing with the unit sheaf. The tensor unitor proves that K has no negative homology. Exact open restriction preserves this. The nonpositive truncation is consequently concentrated in degree zero; its H^0 is H^0(K) restricted to the open, by exactness of restriction. The standard derived-category single-functor identification gives the required splitting.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A1U, conclusion of Lemma better-cut-complex-in-two"
+    "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-pc-affine-perfect-cut-degree-zero"
+  "lem-pc-strictly-perfect-finite-free-refinement",
+  "lem-pc-affine-perfect-module-model",
+  "lem-sc-affine-perfect-fibre-surjectivity",
+  "lem-pc-affine-perfect-cut-degree-zero",
+  "lem-sc-affine-perfect-cut-sheaf-realization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0A1U, Lemma better-cut-complex-in-two"
+  "place": "Tag 0A1U, Lemma better-cut-complex-in-two, affine reduction and conclusion"
  },
  "mathlib_searches": [
   {
@@ -150,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T071140-L-1664922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
