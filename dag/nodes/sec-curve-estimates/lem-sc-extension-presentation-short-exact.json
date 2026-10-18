@@ -1,0 +1,102 @@
+{
+ "id": "lem-sc-extension-presentation-short-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-torsor-pushout-extension",
+   "place": "Steps 0-3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Short exactness of extension presentation",
+ "statement": "The canonical extension presentation gives a short exact sequence.",
+ "stmt_deps": [
+  "def-sc-torsor-extension-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03AJ"
+ },
+ "proof": [
+  {
+   "text": "Use the universal presentation property to construct the canonical cokernel map and verify the exactness and fibre properties required by the Stacks 03AJ argument.",
+   "uses": [
+    "def-sc-torsor-extension-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-torsor-extension-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence from universal presentation",
+   "results": "no direct match; cokernel and ShortExact.mk are available",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact",
+   "results": "generic short exact constructors",
+   "date": "2026-10-18",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "ExtensionPresentation generator fibre",
+   "results": "no existing declaration",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension",
+  "by": "worker",
+  "date": "2026-10-18",
+  "group": "K5"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ExtensionPresentationShortExact",
+  "declaration": "CategoryTheory.Sheaf.Torsor.extension_presentation_shortExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ExtensionPresentationShortExact.lean",
+  "statement": "theorem extension_presentation_shortExact (S : AlgebraicGeometry.Scheme.{u})\n    {G : Sheaf S.smallEtaleTopology AddCommGrpCat.{max u w + 1}} {T : Torsor G}\n    (E : ExtensionPresentation.{u, w} S T) :\n    (ShortComplex.mk E.inclusion E.projection E.inclusion_projection).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261018T071201-L-1671186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261018T071201-L-1671186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
