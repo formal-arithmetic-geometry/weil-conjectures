@@ -14,7 +14,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Geometric stalks as inverse images
@@ -58,6 +58,27 @@ theorem geometricStalk_as_pullback (T : Scheme.{u}) (Ω : Type u)
       (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
         (((pointSmallEtale t).ulift.{u + 1}).sheafFiber (A := AddCommGrpCat.{u + 1}))
         (((pointSmallEtale t).ulift.{u + 1}).sheafFiber_additive) _ _)) := by
-  sorry
+  obtain ⟨e⟩ := (geometricPoint_pullback_stalk Ω).2.2.2.2 T t
+  let U := AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} t
+  let G := Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}
+  let S := ((pointSmallEtale t).ulift.{u + 1}).sheafFiber
+    (A := AddCommGrpCat.{u + 1})
+  let eΓ := Sheaf.ΓNatIsoSheafSections (Spec (.of Ω)).smallEtaleTopology
+    AddCommGrpCat.{u + 1}
+      (MorphismProperty.Over.mkIdTerminal (@AlgebraicGeometry.Etale) _)
+  let eS : U ⋙ G ≅ S := Functor.isoWhiskerLeft U eΓ ≪≫ e ≪≫
+    ((pointSmallEtale t).uliftSheafFiberIso.{u + 1} AddCommGrpCat.{u + 1}).symm
+  have : ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (op (Etale.mk (𝟙 (Spec (.of Ω)))))).IsEquivalence :=
+    (geometricPoint_pullback_stalk Ω).1
+  have : G.IsEquivalence := Functor.isEquivalence_of_iso eΓ.symm
+  have : G.Additive := by dsimp [G]; infer_instance
+  have : S.Additive := (pointSmallEtale t).ulift.sheafFiber_additive
+  refine ⟨⟨e⟩, ?_⟩
+  change Nonempty (U.mapDerivedCategory ⋙ G.rightDerivedFunctor ≅ S.mapDerivedCategory)
+  exact ⟨Functor.isoWhiskerLeft U.mapDerivedCategory
+      G.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+    (Functor.mapDerivedCategoryCompIso U G).symm ≪≫
+      Functor.mapDerivedCategoryNatIso eS⟩
 
 end AlgebraicGeometry.Scheme

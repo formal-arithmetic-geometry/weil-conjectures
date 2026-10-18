@@ -15925,3 +15925,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/B2/Sheaf.RingTheory.DerivedCompleteProductsTriangles (stage 3; reviewer PASS; first push; landing 20261018T062658-L-630687 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:26 L: merged deliver/B3/Sheaf.AlgebraicGeometry.EtaleLocalNormalForm (stage 3; reviewer PASS; first push; landing 20261018T062659-L-630878 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence (stage 3; reviewer PASS; first push; landing 20261018T062700-L-631028 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/B4/Sheaf.AlgebraicGeometry.GeometricStalkAsPullback (stage 3; reviewer PASS; first push; landing 20261018T062700-L-631153 (proof); batch 20261018T062645; modules 1; new nodes 0)
