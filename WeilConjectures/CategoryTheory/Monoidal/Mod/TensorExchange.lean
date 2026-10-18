@@ -119,7 +119,8 @@ lemma tensorLeftCompMapModComapIso_exchange
       (θ.app X ⊗ₘ θ.app Y) ≫ μ G (F.obj X) (F.obj Y) ≫ G.map (μ F X Y))
     (E : ∀ M : Mod C A, (mapModComap σ').obj ((mapModComap ρ).obj M) ⟶
       (mapModComap ρ).obj ((mapModComap σ).obj M))
-    (hE : ∀ M, (E M).hom = θ.app M.X) (P M : Mod C A) :
+    (P M : Mod C A) (hEP : (E P).hom = θ.app P.X) (hEM : (E M).hom = θ.app M.X)
+    (hEPM : (E ((tensorLeft M).obj P)).hom = θ.app ((tensorLeft M).obj P).X) :
     (mapModComap σ').map ((tensorLeftCompMapModComapIso ρ hβ M).hom.app P) ≫
         (tensorLeftCompMapModComapIso σ' hβF' ((mapModComap ρ).obj M)).hom.app
           ((mapModComap ρ).obj P) ≫
@@ -131,7 +132,7 @@ lemma tensorLeftCompMapModComapIso_exchange
   refine mapModComap_mapModComap_tensorLeft_hom_ext ρ σ' hβ hβF' ?_
   have n₁ : F'.map (G.map (tensorπ P M)) ≫ (E ((tensorLeft M).obj P)).hom =
       θ.app (P.X ⊗ M.X) ≫ G.map (F.map (tensorπ P M)) := by
-    rw [hE]
+    rw [hEPM]
     exact θ.naturality (tensorπ P M)
   have m := hθ P.X M.X
   have k : μ G (F.obj P.X) (F.obj M.X) ≫ G.map (μ F P.X M.X) ≫
@@ -157,7 +158,7 @@ lemma tensorLeftCompMapModComapIso_exchange
       ((mapModComap ρ).obj M)
   simp only [Mod.comp_hom']
   erw [reassoc_of% L, reassoc_of% n₁, reassoc_of% m, k, tensorπ_tensorLeftMap_assoc,
-    tensorπ_map, ← tensorHom_def'_assoc, hE, hE]
+    tensorπ_map, ← tensorHom_def'_assoc, hEP, hEM]
 
 /-- `CategoryTheory.Mod.tensorLeftCompMapModComapIso_exchange` for a monoidal natural
 transformation `θ`. -/
@@ -169,7 +170,8 @@ lemma tensorLeftCompMapModComapIso_exchange_of_isMonoidal
     (θ : G ⋙ F' ⟶ F ⋙ G) [NatTrans.IsMonoidal θ]
     (E : ∀ M : Mod C A, (mapModComap σ').obj ((mapModComap ρ).obj M) ⟶
       (mapModComap ρ).obj ((mapModComap σ).obj M))
-    (hE : ∀ M, (E M).hom = θ.app M.X) (P M : Mod C A) :
+    (P M : Mod C A) (hEP : (E P).hom = θ.app P.X) (hEM : (E M).hom = θ.app M.X)
+    (hEPM : (E ((tensorLeft M).obj P)).hom = θ.app ((tensorLeft M).obj P).X) :
     (mapModComap σ').map ((tensorLeftCompMapModComapIso ρ hβ M).hom.app P) ≫
         (tensorLeftCompMapModComapIso σ' hβF' ((mapModComap ρ).obj M)).hom.app
           ((mapModComap ρ).obj P) ≫
@@ -180,6 +182,6 @@ lemma tensorLeftCompMapModComapIso_exchange_of_isMonoidal
           ((mapModComap σ).obj P) :=
   tensorLeftCompMapModComapIso_exchange ρ σ σ' hβ hβF hβF' θ
     (fun X Y ↦ by simpa only [Functor.LaxMonoidal.comp_μ, Category.assoc] using
-      NatTrans.IsMonoidal.tensor (τ := θ) X Y) E hE P M
+      NatTrans.IsMonoidal.tensor (τ := θ) X Y) E P M hEP hEM hEPM
 
 end CategoryTheory.Mod

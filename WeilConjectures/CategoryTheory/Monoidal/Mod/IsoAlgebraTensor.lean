@@ -132,80 +132,46 @@ variable {G : C ⥤ D} [G.LaxMonoidal] [∀ X Y : C, IsIso (μ G X Y)]
   (hβF' : ∀ X Y : D, μ F' X Y ≫ F'.map (β_ X Y).hom =
     (β_ (F'.obj X) (F'.obj Y)).hom ≫ μ F' Y X)
 
-/-- The comparison `Γ (L ⊗ K) ≅ Γ L ⊗ Γ K` is compatible with the structure isomorphisms of
-tensor products and of the transports along `e`. -/
-lemma isoAlgebraTensorCompMapOfNatIso_comm (θ : G ⋙ F' ⟶ F ⋙ G) [NatTrans.IsMonoidal θ]
-    (e : mapModComap ρ ⋙ mapModComap σ' ≅ mapModComap σ ⋙ mapModComap ρ)
-    (he : ∀ M, (e.hom.app M).hom = θ.app M.X) (K L : IsoAlgebra (mapModComap σ)) :
-    (mapModComap σ').map ((tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.app L.carrier) ≫
-        (isoAlgebraTensorStr σ' hβF' ((IsoAlgebra.mapOfNatIso e).obj K)
-          ((IsoAlgebra.mapOfNatIso e).obj L)).hom =
-      e.hom.app _ ≫ (mapModComap ρ).map (isoAlgebraTensorStr σ hβF K L).hom ≫
-        (tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.app L.carrier := by
+/-- The comparison `Γ (L ⊗ K) ≅ Γ L ⊗ Γ K` is compatible with the structure morphisms
+`Φ (L ⊗ K) ⟶ L ⊗ K` of tensor products, built from morphisms `sK : Φ K ⟶ K` and `sL : Φ L ⟶ L`,
+and with their transports along a lift `E` of a monoidal natural transformation `θ`. -/
+lemma tensorLeftCompMapModComapIso_tensorStr_comm (θ : G ⋙ F' ⟶ F ⋙ G)
+    [NatTrans.IsMonoidal θ]
+    (E : ∀ M : Mod C A, (mapModComap σ').obj ((mapModComap ρ).obj M) ⟶
+      (mapModComap ρ).obj ((mapModComap σ).obj M)) (K L : Mod C A)
+    (hEK : (E K).hom = θ.app K.X) (hEL : (E L).hom = θ.app L.X)
+    (hEKL : (E ((tensorLeft K).obj L)).hom = θ.app ((tensorLeft K).obj L).X)
+    (sK : (mapModComap σ).obj K ⟶ K) (sL : (mapModComap σ).obj L ⟶ L) :
+    (mapModComap σ').map ((tensorLeftCompMapModComapIso ρ hβ K).hom.app L) ≫
+        (tensorLeftCompMapModComapIso σ' hβF' ((mapModComap ρ).obj K)).hom.app
+          ((mapModComap ρ).obj L) ≫
+        (tensorLeftMap (E K ≫ (mapModComap ρ).map sK)).app _ ≫
+        (tensorLeft ((mapModComap ρ).obj K)).map (E L ≫ (mapModComap ρ).map sL) =
+      E ((tensorLeft K).obj L) ≫ (mapModComap ρ).map
+          ((tensorLeftCompMapModComapIso σ hβF K).hom.app L ≫ (tensorLeftMap sK).app _ ≫
+            (tensorLeft K).map sL) ≫
+        (tensorLeftCompMapModComapIso ρ hβ K).hom.app L := by
   have hx := tensorLeftCompMapModComapIso_exchange_of_isMonoidal ρ σ σ' hβ hβF hβF' θ
-    (fun M ↦ e.hom.app M) he L.carrier K.carrier
-  beta_reduce at hx
-  have n₁ : (tensorLeftMap ((mapModComap ρ).map K.str.hom)).app _ ≫
-      (tensorLeft ((mapModComap ρ).obj K.carrier)).map (e.hom.app L.carrier) =
-      (tensorLeft ((mapModComap ρ).obj ((mapModComap σ).obj K.carrier))).map
-        (e.hom.app L.carrier) ≫ (tensorLeftMap ((mapModComap ρ).map K.str.hom)).app _ :=
-    ((tensorLeftMap ((mapModComap ρ).map K.str.hom)).naturality (e.hom.app L.carrier)).symm
-  have n₂ := map_tensorLeftMap_app_tensorLeftCompMapModComapIso_hom_app ρ hβ K.str.hom
-    ((mapModComap σ).obj L.carrier)
-  have n₃ : (mapModComap ρ).map ((tensorLeft K.carrier).map L.str.hom) ≫
-      (tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.app L.carrier =
-      (tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.app ((mapModComap σ).obj L.carrier) ≫
-        (tensorLeft ((mapModComap ρ).obj K.carrier)).map ((mapModComap ρ).map L.str.hom) :=
-    (tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.naturality L.str.hom
-  have hK : ((IsoAlgebra.mapOfNatIso e).obj K).str.hom =
-      e.hom.app K.carrier ≫ (mapModComap ρ).map K.str.hom := by
-    rw [IsoAlgebra.mapOfNatIso_obj_str]
-    rfl
-  have hL : ((IsoAlgebra.mapOfNatIso e).obj L).str.hom =
-      e.hom.app L.carrier ≫ (mapModComap ρ).map L.str.hom := by
-    rw [IsoAlgebra.mapOfNatIso_obj_str]
-    rfl
-  have t (X : IsoAlgebra (mapModComap σ')) :
-      (tensorLeftMapIso X.str).hom = tensorLeftMap X.str.hom := rfl
-  have t' (X : IsoAlgebra (mapModComap σ)) :
-      (tensorLeftMapIso X.str).hom = tensorLeftMap X.str.hom := rfl
-  simp only [isoAlgebraTensorStr, tensorStrOfIso, Iso.trans_hom, Iso.app_hom,
-    Functor.mapIso_hom, t, t', Functor.map_comp, Category.assoc]
-  rw [hK, hL, tensorLeftMap_comp, NatTrans.comp_app, Functor.map_comp]
+    E L K hEL hEK hEKL
+  have n₁ : (tensorLeftMap ((mapModComap ρ).map sK)).app _ ≫
+      (tensorLeft ((mapModComap ρ).obj K)).map (E L) =
+      (tensorLeft ((mapModComap ρ).obj ((mapModComap σ).obj K))).map (E L) ≫
+        (tensorLeftMap ((mapModComap ρ).map sK)).app _ :=
+    ((tensorLeftMap ((mapModComap ρ).map sK)).naturality (E L)).symm
+  have n₂ := map_tensorLeftMap_app_tensorLeftCompMapModComapIso_hom_app ρ hβ sK
+    ((mapModComap σ).obj L)
+  have n₃ : (mapModComap ρ).map ((tensorLeft K).map sL) ≫
+      (tensorLeftCompMapModComapIso ρ hβ K).hom.app L =
+      (tensorLeftCompMapModComapIso ρ hβ K).hom.app ((mapModComap σ).obj L) ≫
+        (tensorLeft ((mapModComap ρ).obj K)).map ((mapModComap ρ).map sL) :=
+    (tensorLeftCompMapModComapIso ρ hβ K).hom.naturality sL
+  rw [tensorLeftMap_comp, NatTrans.comp_app, Functor.map_comp, Functor.map_comp,
+    Functor.map_comp]
   simp only [Category.assoc]
   slice_lhs 4 5 => erw [n₁]
   slice_lhs 1 4 => erw [hx]
   slice_lhs 3 4 => erw [← n₂]
   slice_lhs 4 5 => erw [← n₃]
-
-/-- **The transport along `e` commutes with tensor products**: `Γ (L ⊗ K) ≅ Γ L ⊗ Γ K`, as an
-isomorphism of functors of modules with structure isomorphisms. -/
-noncomputable def isoAlgebraTensorCompMapOfNatIsoIso (θ : G ⋙ F' ⟶ F ⋙ G)
-    [NatTrans.IsMonoidal θ]
-    (e : mapModComap ρ ⋙ mapModComap σ' ≅ mapModComap σ ⋙ mapModComap ρ)
-    (he : ∀ M, (e.hom.app M).hom = θ.app M.X) (K : IsoAlgebra (mapModComap σ)) :
-    isoAlgebraTensor σ hβF K ⋙ IsoAlgebra.mapOfNatIso e ≅
-      IsoAlgebra.mapOfNatIso e ⋙ isoAlgebraTensor σ' hβF' ((IsoAlgebra.mapOfNatIso e).obj K) :=
-  NatIso.ofComponents (fun L ↦ IsoAlgebra.isoMk
-      ((tensorLeftCompMapModComapIso ρ hβ K.carrier).app L.carrier) (by
-        dsimp only [Functor.comp_obj]
-        simp only [Iso.app_hom]
-        erw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, isoAlgebraTensor_obj_str,
-          IsoAlgebra.mapOfNatIso_obj_str, isoAlgebraTensor_obj_str]
-        simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, isoAlgebraTensor_obj_carrier,
-          Category.assoc]
-        exact isoAlgebraTensorCompMapOfNatIso_comm ρ hβ σ hβF σ' hβF' θ e he K L))
-    fun f ↦ IsoAlgebra.hom_ext ((tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.naturality
-      f.hom.f)
-
-@[simp]
-lemma isoAlgebraTensorCompMapOfNatIsoIso_hom_app_hom_f (θ : G ⋙ F' ⟶ F ⋙ G)
-    [NatTrans.IsMonoidal θ]
-    (e : mapModComap ρ ⋙ mapModComap σ' ≅ mapModComap σ ⋙ mapModComap ρ)
-    (he : ∀ M, (e.hom.app M).hom = θ.app M.X) (K L : IsoAlgebra (mapModComap σ)) :
-    ((isoAlgebraTensorCompMapOfNatIsoIso ρ hβ σ hβF σ' hβF' θ e he K).hom.app L).hom.f =
-      (tensorLeftCompMapModComapIso ρ hβ K.carrier).hom.app L.carrier :=
-  rfl
 
 end Exchange
 
