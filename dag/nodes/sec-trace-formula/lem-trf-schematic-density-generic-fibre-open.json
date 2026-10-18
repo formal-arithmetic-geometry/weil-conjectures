@@ -15,9 +15,128 @@
   "def-pc-scheme-fibre",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace $Y$ by its reduction and $X,U$ by their base changes. By the definition of reduction, on an affine chart this replaces $A$ by $A/\\sqrt{0}$. Every map $A\\to\\kappa(y)$ kills $\\sqrt{0}$, and the local quotient $(A/\\sqrt{0})_{\\mathfrak p/\\sqrt{0}}$ has residue field $\\kappa(\\mathfrak p)$. Thus the point sets, residue fields, and fibre products defining $X_y,U_y$ are unchanged. Finite type survives this base change. The reduced irreducible base is integral by the integral-scheme characterization. Restrict to a nonempty affine open of it, obtaining $Y=\\operatorname{Spec}A$ with $A$ a domain and fraction field $K$. The open eventually found here is also an open of the original base.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, proof, first paragraph; reduction quotient calculation written out"
+   }
+  },
+  {
+   "text": "Finite type over affine $Y$ gives a finite affine cover $X=\\bigcup_{r=1}^N X_r$ with each $X_r=\\operatorname{Spec}B_r$ finite type over $A$. The sheaf injection on the generic fibre restricts to each $(X_r)_\\eta$; after proving the result on each chart, intersect the finitely many base opens. Fix one chart and write $B=B_r$. Its generic fibre is $\\operatorname{Spec}(B\\otimes_A K)$. A field is Noetherian since its only ideals are $0$ and $K$, so finite-type permanence makes $B_K$ Noetherian. Its spectrum is Noetherian and every subset, in particular $U_\\eta\\cap(X_r)_\\eta$, is quasi-compact. Cover $U\\cap X_r$ by principal opens $D(g)\\subseteq U\\cap X_r$ using the principal-open basis on $\\operatorname{Spec}B$. Their inverse images cover $U_\\eta\\cap(X_r)_\\eta$; quasi-compactness chooses finitely many $g_1,\\ldots,g_m\\in B$. Hence $D(g_i)\\subseteq U\\cap X_r$ holds on the total chart, and their generic fibres cover its $U_\\eta$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, proof, second and third paragraphs"
+   }
+  },
+  {
+   "text": "Apply the affine density criterion on the generic fibre. It gives injectivity of $\\mu_K:B_K\\to B_K^{\\oplus m}$, $b\\mapsto(g_1b,\\ldots,g_mb)$. Define $\\mu:B\\to B^{\\oplus m}$ by the same formula and $M=\\operatorname{coker}\\mu$. The images of the $m$ standard basis vectors generate $M$ as a $B$-module, including $M=0$ when $m=0$.",
+   "uses": [
+    "lem-trf-affine-schematic-density-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, proof, third paragraph; Algebra Tag 0565 and Morphisms Tags 056C, 01RE"
+   }
+  },
+  {
+   "text": "Obtain the simultaneous flatness needed in Tag 0573 from the existing algebra generic-flatness tool as follows. Form the square-zero algebra $E=B\\oplus M$ with $(b,u)(c,v)=(bc,bv+cu)$ and unit $(1,0)$; associativity follows by expanding each side to $(bcd,bcw+bdv+cdu)$. If $b_j$ generate $B$ over $A$ and $u_i$ generate $M$ over $B$, then $(b_j,0)$ and $(0,u_i)$ generate $E$ over $A$: products with $(b,0)$ give every $(0,bu_i)$. Apply algebra generic flatness to $A\\to E$, obtaining nonzero $a\\in A$ with $E_a$ flat over $A$. Fractions identify $E_a=B_a\\oplus M_a$ as $A$-modules. For any injection $P\\to Q$, its tensor with $E_a$ is injective by flatness; the maps on the two summands are therefore injective separately. By the definition of flatness, both $B_a$ and $M_a$ are flat over $A$. All subsequent arguments are on $D(a)$, where tensoring with $\\kappa(y)$ or $K$ is unchanged by this localization. No finite-presentation conclusion is needed.",
+   "uses": [
+    "lem-sbc-finite-type-algebra-generic-flatness",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, generic-flatness paragraph; agent-written square-zero specialization of the algebra case of Tag 051T"
+   }
+  },
+  {
+   "text": "The localized map $\\mu_a:B_a\\to B_a^{\\oplus m}$ is injective. Indeed, for nonzero $s\\in A$, multiplication by $s$ on $A$ is injective; tensor with the flat $A$-module $B_a$ to see that multiplication by $s$ on $B_a$ is injective. Thus $B_a$ is torsion-free. The map $B_a\\to B_K$ is injective: a fraction mapping to zero is killed by a nonzero base scalar, and hence is zero. If $b\\in\\ker\\mu_a$, its image in $B_K$ lies in $\\ker\\mu_K=0$, so $b=0$. Fractions also identify $\\operatorname{coker}\\mu_a=M_a$: every localized cokernel class lifts from a fraction in $B^{\\oplus m}$, and a class is zero precisely when a power of $a$ puts its numerator in $\\operatorname{im}\\mu$. Consequently $0\\to B_a\\xrightarrow{\\mu_a}B_a^{\\oplus m}\\to M_a\\to0$ is exact.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, fourth paragraph; flat-implies-torsion-free argument and localization exactness written out"
+   }
+  },
+  {
+   "text": "For $y\\in D(a)$ tensor this short exact sequence over $A$ with $\\kappa(y)$. The flat-quotient tensor theorem applies because $M_a$ is flat over $A$. It makes the map $B\\otimes_A\\kappa(y)\\to(B\\otimes_A\\kappa(y))^{\\oplus m}$, $b\\mapsto((g_i\\otimes1)b)_i$, injective. The affine criterion says that $W_y=\\bigcup_i D(g_i\\otimes1)$ has injective structure-sheaf restriction from $X_y$. Since the total-space opens $D(g_i)$ were chosen inside $U$, we have $W_y\\subseteq U_y$. A section on any open of $X_y$ vanishing on its intersection with $U_y$ vanishes on its intersection with $W_y$, and hence is zero. This proves the required sheaf injection for the chart.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-trf-affine-schematic-density-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, final paragraph; Algebra Tag 00HL"
+   }
+  },
+  {
+   "text": "For each chart take the resulting nonempty base open, and intersect all finitely many of them. This intersection contains the generic point: every nonempty open of an irreducible scheme contains its generic point. Thus it is nonempty. For a fibre over this intersection, the chart fibres cover $X_y$. A section in the kernel of $\\mathcal O_{X_y}\\to(j_y)_*\\mathcal O_{U_y}$ restricts to zero on every chart by the previous step, and is zero by the sheaf axiom. The same applies on every open of $X_y$, giving the claimed sheaf injection. If there are no charts, $X$ is empty and any nonempty affine base open works.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, affine-cover reduction and final conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-trf-affine-schematic-density-criterion",
+  "lem-sbc-finite-type-algebra-generic-flatness",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0573 proof, with the simultaneous flatness input obtained by the explicit square-zero specialization of algebra generic flatness (Tag 051T)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +175,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-fibre-geometrically-reduced-open",
@@ -68,7 +187,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The Stacks 0578 input to the Stacks 0579 constructibility alternative in the ancestor semistable-alteration/flattening branch: final sentence of 0578, applying 0573 to the smooth open of the generic fibre.",
+   "place": "The final sentence of the Tag 0578 generic-fibre alternative in the constructibility input: apply Tag 0573 to the smooth open of the generic fibre.",
    "via": [
     "lem-trf-generic-fibre-geometrically-reduced-open",
     "lem-trf-generic-constancy-geometric-reducedness",
@@ -90,5 +209,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-schematic-density-generic-fibre-open",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0573 into seven steps. Chose the finite principal cover inside the total-space open, used existing algebra generic flatness on the explicitly constructed square-zero algebra B plus M, proved flat-implies-torsion-free and cokernel localization by fractions, and applied the existing flat-quotient tensor theorem. One new unsplit node is the affine finite-principal-open density criterion; the proposed generic-flatness pair child was removed as elementary from an existing tool. The statement and hypotheses are unchanged.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, proof route through the generic-fibre alternative of Tag 0578 in the constructibility input: this item realizes the final application of Tag 0573, with its affine algebra argument expanded into the two child inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-type-algebra-generic-flatness",
+    "why": "Generic commutative algebra input in Tag 0573: applied to the explicit finite-type square-zero algebra B plus M to obtain the two flat summands. The trace-formula unit supplies no generic-flatness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-type-algebra-generic-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-4d8b6409b",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-4d8b6409b (reviewer sub-agent of L); spot-checked: Read Stacks 0573 (more-morphisms l.6563) in full, plus Algebra 0565, Morphisms 056C and 01RE, with tags checked against tags/tags. The item statement is byte-identical to an earlier unsplit copy and matches 0573, with density written as O→j_*O_U injective per 01RE; no hypothesis was added. The 7 steps follow 0573 and each cited statement says what is used. (1) Reduction keeps the points and residue fields, so the fibres are the same; the reduced irreducible base is integral; restrict to a domain chart. (2) Use the finite affine cover from the finite-type definition; B_K is Noetherian, so U_η∩(X_r)_η is quasi-compact; the principal opens D(g)⊆U∩X_r are chosen on the total chart. (3) The new criterion gives injectivity of μ_K. (4) Apply the generic-flatness tool (domain, finite type, no fp) to the square-zero algebra E=B⊕M; E_a is flat over A, so its summands B_a and M_a are flat; this is a valid replacement for the 051T use. (5) Torsion-freeness gives B_a⊂B_K, so ker μ_a=0 and coker μ_a=M_a by fractions. (6) The flat-quotient tensor lemma with N=κ(y) and the criterion give W_y⊆U_y, and density passes from W_y to U_y by testing sections. (7) Intersect the finitely many D(a_r), which contain η, and glue by the sheaf axiom. New node lem-trf-affine-schematic-density-criterion is true; I tested n=0, n=1, k[x]/(x²) and k[x,y]/(xy) and checked the sheaf clause directly. It is statement-only, self-contained and smaller than the item. The DAG grep for 0565/01RE/056C/0573 and for density keywords found no duplicate (the Nagata qc-only definition and the topological lem-sbc-generic-open-fibre-density are different statements). Tool use lem-sbc-finite-type-algebra-generic-flatness is accepted: generic algebra not supplied by the sk-i-curve-zero unit. There is no cycle and no SGA citation. No fixes."
  }
 }
