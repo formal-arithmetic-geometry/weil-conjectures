@@ -13,9 +13,48 @@
   "def-weil-etale-morphism",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any representable etale morphism $v:V\\to E$ with $V$ a scheme, and write $g=f\\circ v:V\\to T$. The chartwise hypothesis on $f$ says that $g$ is etale. By [def-weil-etale-morphism], being etale includes being unramified, so $g$ is an unramified morphism of schemes. No surjectivity or quasi-compactness of this chart is needed.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GK (lemma-etale-smooth-unramified), as used in Tag 03WS (lemma-etale-locally-quasi-finite); unramifiedness is also an explicit conjunct in def-weil-etale-morphism."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to the scheme morphism $g:V\\to T$ from step 1. Its only extra hypothesis is unramifiedness, already established there. It follows that $g$ is quasi-finite at every point of $V$, equivalently locally quasi-finite.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V5 (lemma-unramified-quasi-finite), the second input in the proof of Tag 03WS (lemma-etale-locally-quasi-finite)."
+   }
+  },
+  {
+   "text": "The morphism $v:V\\to E$ was arbitrary among all the representable etale maps from schemes in the hypothesis. Therefore every such composite $V\\to T$ is locally quasi-finite. This is exactly the chartwise conclusion stated in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XU (lemma-etale-locally-quasi-finite), final sentence: local quasi-finiteness follows by definition; here both chartwise quantifiers are explicit in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XU (lemma-etale-locally-quasi-finite), specialized to the item's explicit chartwise hypotheses, using Morphisms Tag 03WS and its proof via Tags 02GK and 02V5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +83,66 @@
    "results": "Mathlib hits IsEtale and scheme LocallyQuasiFinite constructors; no algebraic-space theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite|IsEtale",
+   "results": "5 hits. 27, 32, 34, 36, 63 Search scope: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. Single-file rg output was parsed without a filename; the five hits are documentation headers, not theorem matches.",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale morphism of schemes is locally quasi finite",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsEtale\"",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of algebraic spaces is locally quasi-finite, tested on etale scheme charts",
+   "results": "8 hits. AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every etale morphism of schemes is locally quasi-finite",
+   "results": "8 hits. AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every etale morphism from an algebraic space to a scheme is locally quasi finite on scheme charts",
+   "results": "8 hits. AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"LocallyQuasiFinite\"",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem about algebraic spaces; scheme-level classes and constructors do not state the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-separated-etale-space-scheme",
@@ -66,5 +161,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-etale-space-locally-quasi-finite",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four definition dependencies unchanged. Followed Stacks 03XU and 03WS: for each scheme chart the hypothesis gives an etale scheme map, the existing etale definition gives unramifiedness, and the existing stronger theorem 02V5 gives local quasi-finiteness. Universal introduction completes the chartwise conclusion. No new nodes, no Mathlib leaf claim, and no Lean attachment.",
+  "blueprint": "Realizes the 03XU auxiliary input to lem-a1-separated-etale-space-scheme in the historical ancestry of lem-a1-affine-hc0; the source reduction to scheme charts and 03WS is expanded through the already existing 02V5 node. The chapter and unit route and their records are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme-morphism theorem 02V5: apply unramified implies locally quasi-finite to each etale scheme chart. It is the scheme input in 03WS used by 03XU; no node of sk-p-real-rankin supplies this general scheme theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-0d936f053",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0d936f053 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements and the parent in full. The item statement is unchanged; it is chartwise 03XU with a scheme target. Sources checked: Stacks spaces-morphisms.tex l.7760-7775 (03XU) and morphisms.tex l.8161-8172 (03WS: 02GK etale implies unramified, then 02V5 at l.7778-7788 unramified implies locally quasi-finite). Step 1 takes the unramified conjunct out of def-weil-etale-morphism (lfp, flat and unramified via def-weil-unramified-morphism); it is correctly marked elementary. Step 2: lem-weil-pbc-unramified-quasi-finite-at-points needs only an unramified scheme morphism, uses the same unramified node, and concludes pqf-def-quasifinite(2) as the item requires. Step 3 is universal introduction over every chart and never uses atlas surjectivity. Edge cases checked: empty E; E=h_T, which reduces to 03WS; an infinite disjoint union, where the conclusion stays lqf and nothing claims quasi-compactness. The parent lem-a1-separated-etale-space-scheme uses exactly this statement. There are no new nodes. The rg search finds no scheme-level 03WS duplicate, so reusing the more general 02V5 node is right. I accept the declared tool use of lem-weil-pbc-unramified-quasi-finite-at-points (unit sk-thm-p1): it is a generic scheme fact used as a black box, it replaces no step of sk-p-real-rankin, and other nodes already use it the same way. Blueprint fields are filled, nothing cites SGA, proof_deps equals the union of the uses, and I made no fixes."
  }
 }
