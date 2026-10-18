@@ -1,0 +1,113 @@
+{
+ "id": "def-sfb-completed-constant-stratified",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking the integral criterion: the finite-stratification local-model notion for completed coefficient sheaves used to express bounded constructible cohomology.",
+   "via": [
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Completed constant stratified module sheaf",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $A$ be a commutative ring, let $I\\subset A$ be an ideal, and put $B_X=\\varprojlim_{n\\geq1}(A/I^n)_X$ on the pro-étale site [def-weil-pbc-proetale-site]. For a $B_X$-module sheaf $M$, say that $M$ is *completed-constant stratified* if there are a finite stratification $X=\\coprod_{a<n}S_a$ by locally closed subschemes [def-constructible-stratification] whose strata are constructible, and, for each $a$, a pro-étale covering sieve of $S_a$ [def-weil-pbc-proetale-site] such that on every member of that cover the restriction of $M$ is isomorphic to $B_{S_a}\\otimes_A P$ for some finitely presented $A$-module $P$ [def-sc-finitely-presented-module], using the finite constant local-model convention of [sk-def-sfb-constructible].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10, finite constructible stratification and finite constant local models; Proposition 6.8.11(3) coefficient specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite stratification module sheaf inverse limit completed constant ring finitely presented local models",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.IsFiniteType; condensed locally constant module constructions; no declaration for the completed pro-etale finite-stratification predicate.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteLocallyClosedStratification, Module.FinitePresentation, adicLisseCompletedRing",
+   "results": "0 hits; unknown identifier FiniteLocallyClosedStratification.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompletedConstantStratified|completedAdicChange|FiniteLocallyClosedStratification in Mathlib",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompletedConstantStratified|completedAdicChange in WeilConjectures and lean/Sheaf",
+   "results": "No IsCompletedConstantStratified declaration in WeilConjectures or shared lean/Sheaf; completedAdicChange only supplies scalar extension and no predicate.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite completed constant pro-etale module sheaf stratification with finitely presented local models",
+   "results": "No exact declaration; results were generic finite-presentation and sheaf constructions.",
+   "date": "2026-10-18",
+   "verdict": "no exact match for the completed-ring finite-stratification predicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-cohomological-adic-criterion",
+  "date": "2026-10-18",
+  "group": "N4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstantConstructibility",
+  "declaration": "AlgebraicGeometry.Scheme.IsCompletedConstantStratified",
+  "file": "lean/Sheaf/Paper/CompletedConstantConstructibility.lean",
+  "statement": "def IsCompletedConstantStratified (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) (M : proEtaleRingModules X (adicLisseCompletedRing X I)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "New definition node required by the returned delivery: the completed-ring-sheaf finite-stratification predicate used by the item. It specializes the recorded finite constant local-model notion to the actual inverse-limit coefficient sheaf, with genuine immersion inverse image and slice restriction, ordinary scalar extension of finitely presented modules, and no perfectness or torsion-freeness assumption."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9c9fc08d",
+  "group": "N4",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9c9fc08d",
+  "group": "N4",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN of 6854bf38. R1 repaired: lem-sfb-adic-stratified-perfect is no longer a stmt_dep (it stays in proof_deps); the new def node def-sfb-adic-stratified-perfect-data gives an existing:true record (no file) on the unchanged live AdicStratifiedPerfect module, with 6 plain def/abbrev declarations and the IsSfbAdicConstructible statement verbatim (l.150-151). R2 repaired: sk-def-sfb-constructible is JSON-equal to the live N7 record, and the new def node def-sfb-completed-constant-stratified owns IsCompletedConstantStratified, citing the 4 prescribed defs plus def-pc-scheme. Both new nodes meet the H12 field rules. Against live side the item differs only in lean and stmt_deps (+2 new nodes); def-pc-scheme differs only in whitespace. The item Lean is byte-identical to the returned delivery and its statement was re-checked against the node: l prime; E finite over Q_l; R = ULift O_E with ideal span{pi}; Noetherian X; B = actual limit; condition (1) = bounded + stratified finitely presented local models on every H^q; condition (2) = complete + bounded constructible etale k-complex + residue iso along nu + Tor test against every N; iff. Edge cases and universes are OK. nt_compile --json exit 0, clean (7.9 s / 12.4 s; dependency modules up to 23.6 s). Advisory only: CompletedConstantConstructibility's public import of CondensedConstantConstructibility is unused."
+ }
+}
