@@ -16,7 +16,8 @@
   "def-galois-categories",
   "def-galois-fibre-functor",
   "lem-galois-pi1-functoriality",
-  "thm-galois-lc-etale"
+  "thm-galois-lc-etale",
+  "lem-wf-finite-etale-field-limit-descent"
  ],
  "proof": [
   {
@@ -345,5 +346,41 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-7dfa97c6e (reviewer sub-agent of L); spot-checked: I read the item's statement (unchanged and not weakened) and all 12 steps against the statement of every cited node and against Stacks pione.tex 0BTX (l.3469), 0BTV (l.3428), 0BN3, 0BND, 0BNE and 0BQ9. The tags and labels match. I recomputed the conventions myself. In step 2, the permutation is left multiplication u_N(1)τ, which gives r(g)∘τ, and it is a homomorphism. In step 6, s^{-1} moves the label iσ|_E to i|_E. Step 9 gives s^{-1}gs. Step 10 gives λ_{as}=λ_s∘a^{-1}. Step 11: s=tb^{-1} recovers any path λ, and λ_{as}=λ_s forces a=1 because h_σ^* is an equivalence. Every hypothesis holds where it is used: Y_E and Y_0 are connected by step 1; L/K is separable, algebraic and normal because K is perfect; Y_0 is separated of finite type for both limit nodes. The new node lem-wf-pi1-algebraic-field-limit is the second assertion of 0BTV, specialised to the constant-field system. Its extra assumption that X_L is connected is harmless and holds where step 4 uses it. I tested it on L=K and on finite L/K. It has no proof, its searches are recorded, its blueprint fields are correct, it does not restate a clause of the item, and rg over the DAG finds no duplicate of it or of the 0BTX exact sequence. The item is not a duplicate of the finite-field transport and twisted-path nodes either. Accepted tool uses: the six declared ones, and the undeclared generic off-unit Galois-category nodes lem-galois-pi1-functoriality, lem-galois-finite-etale-connected-object and lem-fet-galois-category. Batch-5 check: the new citation lem-wf-finite-etale-field-limit-descent reaches lem-trf-finite-morphism-finite-presentation, which only says that a finite, locally finitely presented morphism is finitely presented (Stacks 01TR/01TQ). That is a general scheme fact; neither the trace-formula nor the Poincaré-duality assumption gives it, and it is not a step specific to their proofs, so I judge it outside the assumed statements. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/ArithmeticLiftFibrePath.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticLiftFibrePath",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticBaseProjection",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticLiftMap",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticFibreAut",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticConstantAlgebra",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticModelCover",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticModelFiber_over",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticModelFiber",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticLiftMap_basepoint",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticMovedModelFiber",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticStalk",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticUnderlying",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticUnderlyingIso",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticStalkComparison",
+   "AlgebraicGeometry.Scheme.FiniteEtale.arithmeticLiftFibrePath"
+  ],
+  "statement": "theorem arithmeticLiftFibrePath {K L : Type u} [Field K] [PerfectField K] [Field L] [Algebra K L] [IsAlgClosure K L] [Algebra.IsAlgebraic K L] {X₀ : Over (Spec (.of K))} [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [ConnectedSpace (fieldExtensionBase X₀ L)] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] [Algebra L Ω] [Algebra K Ω] [IsScalarTower K L Ω] (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) (i : L →ₐ[K] Ω) (hi : s ≫ Limits.pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K L))) = Spec.map (CommRingCat.ofHom i.toRingHom)) : ∃ (j : Aut (fiber s) →* Aut (fiber (s ≫ arithmeticBaseProjection (L := L) X₀))) (r : Aut (fiber (s ≫ arithmeticBaseProjection (L := L) X₀)) →* (L ≃ₐ[K] L)), Continuous j ∧ Continuous r ∧ (∀ a : Aut (fiber s), j a = fiberAutBaseChange (arithmeticBaseProjection (L := L) X₀) s a) ∧ (∀ (g : Aut (fiber (s ≫ arithmeticBaseProjection (L := L) X₀))) (E : IntermediateField K L) [FiniteDimensional K E] (τ : E →ₐ[K] L) (z : (fiber (s ≫ arithmeticBaseProjection (L := L) X₀)).obj (constantCover X₀.hom (arithmeticConstantAlgebra E))), (fiberConstantCoverEquiv X₀.hom (s ≫ arithmeticBaseProjection X₀) (arithmeticConstantAlgebra E) z).1 = i.toRingHom.comp τ.toRingHom → (fiberConstantCoverEquiv X₀.hom (s ≫ arithmeticBaseProjection X₀) (arithmeticConstantAlgebra E) (g.hom.app _ z)).1 = i.toRingHom.comp ((r g).toRingHom.comp τ.toRingHom)) ∧ Function.Injective j ∧ Function.Surjective r ∧ Set.range j = {g | r g = 1} ∧ (∀ (σ : L ≃ₐ[K] L), ∃ (Φ : (r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) ≃ (fiber (s ≫ arithmeticLiftMap X₀ σ) ≅ fiber s)), (∀ (E : IntermediateField K L) [FiniteDimensional K E] (Q : (fieldExtensionBase X₀ E).FiniteEtale), Function.Injective (arithmeticModelFiber X₀ E Q s s rfl) ∧ Function.Injective (arithmeticMovedModelFiber X₀ E Q s σ) ∧ Set.range (arithmeticModelFiber X₀ E Q s s rfl) = {z | z.left ≫ Q.obj.hom ≫ Limits.pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K E))) = Spec.map (CommRingCat.ofHom (i.toRingHom.comp E.val.toRingHom))} ∧ Set.range (arithmeticMovedModelFiber X₀ E Q s σ) = {z | z.left ≫ Q.obj.hom ≫ Limits.pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K E))) = Spec.map (CommRingCat.ofHom (i.toRingHom.comp (σ.toRingHom.comp E.val.toRingHom)))} ∧ ∀ (t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) (z : (fiber (s ≫ arithmeticLiftMap X₀ σ)).obj ((pullback (fieldExtensionBaseMap X₀ E.val)).obj Q)), arithmeticModelFiber X₀ E Q s s rfl ((Φ t).hom.app _ z) = (t.1⁻¹).hom.app (arithmeticModelCover X₀ E Q) (arithmeticMovedModelFiber X₀ E Q s σ z)) ∧ (∀ (t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) (a : Aut (fiber s)), ∃ c : Aut (fiber s), j c = t.1⁻¹ * j a * t.1 ∧ ∀ (Q : (fieldExtensionBase X₀ L).FiniteEtale) (z : (fiber (s ≫ arithmeticLiftMap X₀ σ)).obj Q), (Φ t).hom.app Q ((arithmeticFibreAut X₀ σ s a).hom.app Q z) = c.hom.app Q ((Φ t).hom.app Q z)) ∧ (∀ (a : Aut (fiber s)) (t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) (h : r (j a * t.1) = σ), Φ ⟨j a * t.1, h⟩ = arithmeticFibreAut X₀ σ s (a⁻¹) ≪≫ Φ t) ∧ (∀ (e : (fieldExtensionBase X₀ L).FiniteEtale ≌ (fieldExtensionBase X₀ L).FLC) (α : e.functor ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι _ ⋙ (fieldExtensionBase X₀ L).smallEtaleTopology.uliftYoneda.{u + 1}), ∃ (Ψ : (r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) ≃ (arithmeticStalk (s ≫ arithmeticLiftMap X₀ σ) ≅ arithmeticStalk s)), (∀ t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L)), Functor.isoWhiskerLeft e.functor (Ψ t) = arithmeticStalkComparison (s ≫ arithmeticLiftMap X₀ σ) e α ≪≫ arithmeticUnderlyingIso (Φ t) ≪≫ (arithmeticStalkComparison s e α).symm) ∧ ∀ a : Aut (fiber s), ∃ (A : Aut (arithmeticStalk s)) (B : Aut (arithmeticStalk (s ≫ arithmeticLiftMap X₀ σ))), Functor.isoWhiskerLeft e.functor A = arithmeticStalkComparison s e α ≪≫ arithmeticUnderlyingIso a ≪≫ (arithmeticStalkComparison s e α).symm ∧ Functor.isoWhiskerLeft e.functor B = arithmeticStalkComparison (s ≫ arithmeticLiftMap X₀ σ) e α ≪≫ arithmeticUnderlyingIso (arithmeticFibreAut X₀ σ s a) ≪≫ (arithmeticStalkComparison (s ≫ arithmeticLiftMap X₀ σ) e α).symm ∧ (∀ t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L)), ∃ (c : Aut (fiber s)) (C : Aut (arithmeticStalk s)), j c = t.1⁻¹ * j a * t.1 ∧ Functor.isoWhiskerLeft e.functor C = arithmeticStalkComparison s e α ≪≫ arithmeticUnderlyingIso c ≪≫ (arithmeticStalkComparison s e α).symm ∧ B ≪≫ Ψ t = Ψ t ≪≫ C) ∧ (∀ (t : r ⁻¹' ({σ} : Set (L ≃ₐ[K] L))) (h : r (j a * t.1) = σ), Ψ ⟨j a * t.1, h⟩ = B.symm ≪≫ Ψ t)))",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of 49a227fccd8b: canonical structure-map characterization and Krull continuity; explicit finite-model injections, their scalar-labelled images, and inverse-action evaluation normalization; canonical Yoneda/stalk comparison, stalk-path bijection and both identities; full twelve-step proof docstring including bijectivity.",
+  "fixed_by": "NT-stage2-Codex-eab1328a5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eab1328a5",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Reviewed immutable files, sources, dependencies, every statement clause, universes and edge cases. Fixed H6 local proofs using named sorry helpers; main signature unchanged. Complete fixes and review.md written. Original and corrected modules compile cleanly through scompile.py."
  }
 }
