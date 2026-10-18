@@ -36,4 +36,8 @@ noncomputable def map {Z : C} (R : InjectiveResolution Z) : InjectiveResolution 
     (F.mapHomologicalComplex _).map R.ι
   quasiIso := inferInstance
 
+lemma map_cocomplex_d {Z : C} (R : InjectiveResolution Z) (i j : ℕ) :
+    (R.map F).cocomplex.d i j = F.map (R.cocomplex.d i j) :=
+  rfl
+
 end CategoryTheory.InjectiveResolution

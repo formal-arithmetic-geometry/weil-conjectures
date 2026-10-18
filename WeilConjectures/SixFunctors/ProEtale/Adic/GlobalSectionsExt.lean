@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Global sections of sheaves of `ℚ̄_ℓ`-modules as morphisms out of `ℤ`
@@ -73,5 +74,56 @@ lemma constantIntHomAddEquivΓ_comp {M N : Sheaf (Scheme.ProEt.topology X) (Weil
     Adjunction.homEquiv_naturality_right, AddCommGrpCat.uliftZMultiplesAddEquiv_comp]
   simp only [ConcreteCategory.comp_apply] at h
   exact h _
+
+section Sections
+
+variable {X}
+
+/-- The constant abelian sheaf `ℤ_X` on the pro-étale site. -/
+noncomputable abbrev constantIntSheaf (X : Scheme.{u}) :
+    Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
+  (constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))
+
+/-- Morphisms `ℤ_X ⟶ N` of abelian sheaves are the sections of `N` over the terminal object. -/
+noncomputable def constantIntSheafHomAddEquiv
+    (N : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) :
+    (constantIntSheaf X ⟶ N) ≃+ N.obj.obj (op (Scheme.ProEt.mk (𝟙 X))) :=
+  ((constantSheafAdj _ AddCommGrpCat.{u + 1} (Scheme.ProEt.isTerminalMkId X)).homAddEquiv _ _).trans
+    (AddCommGrpCat.uliftZMultiplesAddEquiv _)
+
+lemma constantIntSheafHomAddEquiv_comp
+    {N N' : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
+    (f : constantIntSheaf X ⟶ N) (φ : N ⟶ N') :
+    constantIntSheafHomAddEquiv _ (f ≫ φ) =
+      φ.hom.app (op (Scheme.ProEt.mk (𝟙 X))) (constantIntSheafHomAddEquiv _ f) := by
+  simp only [constantIntSheafHomAddEquiv, AddEquiv.trans_apply, Adjunction.homAddEquiv_apply,
+    Adjunction.homEquiv_naturality_right]
+  rfl
+
+variable {X' : Scheme.{u}} (g : X ⟶ X')
+
+/-- The map `ℤ_{X'} ⟶ g_* ℤ_X` whose global section is the restriction of `1` along
+`X ×_{X'} X' ≅ X`. -/
+noncomputable def constantIntSheafToLowerStar :
+    constantIntSheaf X' ⟶ (g)_*[AddCommGrpCat.{u + 1}].obj (constantIntSheaf X) :=
+  (constantIntSheafHomAddEquiv _).symm
+    ((constantIntSheaf X).obj.map (overPullbackObjMkIdIso g).hom.op
+    (constantIntSheafHomAddEquiv _ (𝟙 _)))
+
+/-- Composing with `ℤ_{X'} ⟶ g_* ℤ_X` and pushing forward restricts the global section along
+`X ×_{X'} X' ≅ X`. -/
+lemma constantIntSheafHomAddEquiv_constantIntSheafToLowerStar_comp
+    {N : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}} (f : constantIntSheaf X ⟶ N) :
+    constantIntSheafHomAddEquiv _
+        (constantIntSheafToLowerStar g ≫ (g)_*[AddCommGrpCat.{u + 1}].map f) =
+      N.obj.map (overPullbackObjMkIdIso g).hom.op (constantIntSheafHomAddEquiv _ f) := by
+  rw [constantIntSheafHomAddEquiv_comp, constantIntSheafToLowerStar, AddEquiv.apply_symm_apply]
+  have h := ConcreteCategory.congr_hom (f.hom.naturality (overPullbackObjMkIdIso g).hom.op)
+    (constantIntSheafHomAddEquiv _ (𝟙 _))
+  simp only [ConcreteCategory.comp_apply] at h
+  rw [← Category.id_comp f, constantIntSheafHomAddEquiv_comp, Category.id_comp]
+  exact h
+
+end Sections
 
 end AlgebraicGeometry.ProEtale
