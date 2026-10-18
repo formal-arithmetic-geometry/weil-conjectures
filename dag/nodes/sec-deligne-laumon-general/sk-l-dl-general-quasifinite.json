@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-l-dl-general-quasifinite",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-zl-quasi-finite"
+  ]
  },
  "kind": "statement",
  "title": "Quasi-finite morphisms",
@@ -13,24 +15,239 @@
   "place": "node sk-l-dl-general-quasifinite, order 3161"
  },
  "stmt_deps": [
-  "sk-d-dl-general-weights"
+  "sk-d-dl-general-weights",
+  "def-weil-weil-sheaf-complex",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "Compact-support base change identifies the stalks with cohomology of a\nfinite geometric fiber, concentrated in degree zero. Thus $f_{0!}$ is\nexact. At a closed point $y$, Frobenius permutes the stalk summands.\nFor an orbit of length $e$, an eigenvalue $\\alpha$ upstairs gives\neigenvalues $\\beta$ downstairs with $\\beta^e=\\alpha$; since\n$q_x=q_y^e$, their normalized weights agree. Hence an upper bound $w$\non the weights of all local Frobenius eigenvalues of $F$ passes to\n$f_{0!}F$, pure sheaves stay pure, and exactness transports a mixed\nfiltration.",
-   "uses": [],
-   "elementary": null
+   "text": "The target $Y_0$ is quasi-compact because it is of finite type over a field, and is quasi-separated by hypothesis. Apply [thm-pqf-zmt-factorization] to obtain $X_0\\xrightarrow{j_0}T_0\\xrightarrow{p_0}Y_0$, with $j_0$ quasi-compact open, $p_0$ finite, and $f_0=p_0j_0$. This is a compactification since a finite morphism is proper [lem-weil-pbc-finite-proper]. It is over $k_0$, giving compatible geometric base changes. No absolute separatedness of $Y_0$ or $T_0$ is inferred. The false inference in the blueprint proof of lem-zl-quasi-finite is avoided: the identity of the affine line with doubled origin is a finite morphism whose source is not separated over $k_0$. The compact-support operation of [def-weil-integral-rational-qbar-compact-support] depends on a chosen compactification; by the comparison stated in [def-zl-weil-compact-support-cohomology] (for two compactifications of $f_0$, with no separatedness of $X_0,Y_0$ assumed, the higher images $R^n_cf_!F$ are isomorphic as Weil sheaves), every assertion of the item for an arbitrary compactification follows from the same assertion for $c_0=(j_0,p_0)$: vanishing, punctual bounds and mixedness are invariant under isomorphism of Weil sheaves. Steps 3-10 compute with $c_0$.",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "lem-weil-pbc-finite-proper",
+    "def-zl-weil-compact-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "first paragraph, finite compactification; correction of the false absolute-separatedness inference"
+   }
+  },
+  {
+   "text": "For each affine open $V_0\\subseteq Y_0$, put $T_{V_0}=T_0\\times_{Y_0}V_0$ and $X_{V_0}=X_0\\times_{Y_0}V_0$. By [lem-weil-pbc-finite-morphism-permanence], $p_{V_0}:T_{V_0}\\to V_0$ is finite and $T_{V_0}$ is affine. By [lem-weil-pbc-open-immersion-base-change], $j_{V_0}:X_{V_0}\\hookrightarrow T_{V_0}$ is open. Both $V_0$ and $T_{V_0}$ are separated over $k_0$ by [lem-weil-pbc-affine-source-morphism-separated]; $X_{V_0}$ is separated over $k_0$ because its diagonal is the restriction of the closed diagonal of $T_{V_0}$. These schemes are finite type over $k_0$: $Y_0$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], its open $V_0$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian] and locally finite type, $T_{V_0}$ is finite over $V_0$, and $X_{V_0}$ is a quasi-compact open of $T_{V_0}$. Their geometric base changes remain separated and finite type by [lem-pod-separated-finite-type-base-change]. The affine opens cover $Y_0$ by [lem-weil-pbc-affine-opens-basis].",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "finite factorization, restricted to affine target opens before applying separated-scheme results"
+   }
+  },
+  {
+   "text": "For $V=V_0\\times_{k_0}k$, put $u:X_V\\hookrightarrow X$ and $v:V\\hookrightarrow Y$. The four schemes and the finite compactification scheme $T$ are Noetherian and finite-dimensional by [lem-weil-pbc-finite-type-over-noetherian] and [lem-kun-dimension-finite-type]; $\\ell$ is invertible. Apply [lem-zl-framework-pbc-open-exchange-comparison] to the supplied finite compactification. It identifies the actual framework functor $R\\lim_n\\operatorname{Res}_n Rp_{*,n}j_!K_n$ with the completed PBC $Rp_*j_!$ under the coefficient-presentation equivalences $J$. For the two composite functors it supplies the specified endpoint isomorphisms $S,T$ and the equation $\\operatorname{Ex}^{\\mathrm{pbc}}J\\circ S=T\\circ J(\\operatorname{Ex}^{\\mathrm{sf}})$. Thus the exchange comparison includes the strict quotient transitions and the proper/open mates before taking the derived limit. This is the comparison of functors and arrows needed here; equality of their finite evaluations alone is not used.",
+   "uses": [
+    "lem-zl-framework-pbc-open-exchange-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Common-stage compact-support exchange, with its previously missing framework/PBC comparison exposed as a separate lemma"
+   }
+  },
+  {
+   "text": "Apply [thm-cbc-qbar] to $J_XF$ in the PBC common-stage category. The hypotheses of its finite-stage theorem [thm-cbc-finite-extension] were checked in Step 3; these hypotheses impose relative separatedness of $f$, without absolute separatedness of $X,Y$. Its specified exchange $\\operatorname{Ex}^{\\mathrm{pbc}}$ is invertible. The equation in Step 3 expresses $J(\\operatorname{Ex}^{\\mathrm{sf}})=T^{-1}\\operatorname{Ex}^{\\mathrm{pbc}}J\\,S$, so the equivalence $J$ reflects invertibility and gives $v^*Rf_!F\\simeq Rf_{V!}u^*F$ for the framework functors. The comparison lemma also identifies their Weil structures. Explicitly, the two pastings of the open square with geometric Frobenius are the same square, because $V_0$ and the compactification are over $k_0$. Identity/pasting coherence of the specified exchange in [thm-cbc-finite-extension] makes the composites equal; compose this equation with the image of the Weil arrow of $F$. Naturality of $S,T$ under the semilinear diagram isomorphisms gives the same equality in the framework category. Hence this is an isomorphism of Weil complexes, using [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "thm-cbc-qbar",
+    "thm-cbc-finite-extension",
+    "lem-zl-framework-pbc-open-exchange-comparison",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Common-stage base change and compatibility with the geometric-Frobenius square"
+   }
+  },
+  {
+   "text": "On the separated finite-type schemes of Step 2, the composition and properness laws of [prop-functor-package] give $Rf_{V!}\\simeq Rp_{V*}j_{V!}$. Clause (2) of [lem-zl-immersion-weil-local-behavior] identifies the open compact-support operation with the exact $j_{V!}$ on constructible Weil sheaves, without any assumption on a coefficient embedding. The finite direct image is standard-$t$-exact and exact on the constructible heart by [lem-zl-finite-adic-direct-image]. Consequently for every constructible Weil sheaf $A$ on $X_{V_0}$, $Rf_{V!}A\\simeq p_{V*}j_{V!}A$ is a sheaf in degree zero, and $A\\mapsto p_{V*}j_{V!}A$ is exact. Every invocation of these three statements is now on absolutely separated finite-type schemes, including $T_{V_0}$ and its geometric base change.",
+   "uses": [
+    "prop-functor-package",
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-zl-finite-adic-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "proof of (1), exactness after affine target restriction"
+   }
+  },
+  {
+   "text": "Restriction to $V$ commutes with cohomology and is exact on constructible hearts by [lem-a1-constructible-pullback-t-exact]. Steps 4 and 5 therefore show that every cohomology sheaf $\\mathcal H^i(Rf_!F)$ with $i\\ne0$ restricts to zero on each $V$. The restrictions form compatible local-heart data: for nested opens, the transition isomorphisms are the restrictions of the same global object, and their identity and cocycle equations are the restriction/pasting equations of Step 4. The open-cover exactness criterion in [lem-dl-a1-constructible-fibres-exact] detects its vanishing: apply it to the short complex $0\\to\\mathcal H^i(Rf_!F)\\to0$, which is exact on each member of this separated open cover. Thus $Rf_!F$ lies in the constructible heart, and in particular $R^if_{0!}F=0$ for $i>0$. For any short exact sequence of constructible Weil sheaves on $X_0$, restriction to $X_V$ is exact by the pullback statement. By Step 5 its direct-image sequence is exact over each $V$. Applying the same open-cover criterion to that sequence proves that $f_{0!}=R^0f_{0!}$ is an exact functor globally. These checks are on constructible adic sheaves, not arbitrary pro-etale sheaves.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "proof of (1), local detection of vanishing and exactness on a possibly nonseparated target"
+   }
+  },
+  {
+   "text": "Fix the arbitrary field embedding $\\iota:\\Omega\\hookrightarrow\\mathbf C$ of [sk-d-dl-general-weights]; no surjectivity is assumed. Suppose $F$ has punctual upper bound $w$, or is punctually pure of weight $w$, in the eigenvalue sense spelled out there. Restrict to $X_{V_0}$. A closed point of this open is closed in $X_0$: on both finite-type schemes this means its residue field is finite over $k_0$ by [lem-kun-closed-point-field]. Its stalk and local Frobenius are unchanged. Clause (2) of [lem-zl-immersion-weil-local-behavior] says that $B=j_{V!}(F|_{X_V})$ has that identical stalk and local Frobenius on $X_{V_0}$, and zero stalk elsewhere in $T_{V_0}$. Thus $B$ has the same bound or purity for this very embedding $\\iota$. This uses the weight-free stalk assertion, not a weight-preservation theorem stated only for an isomorphism with $\\mathbf C$.",
+   "uses": [
+    "sk-d-dl-general-weights",
+    "lem-kun-closed-point-field",
+    "lem-zl-immersion-weil-local-behavior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "Paragraph (2), open-immersion stalk argument; applied using the weight-free immersion statement and the original arbitrary embedding"
+   }
+  },
+  {
+   "text": "Fix closed $y\\in V_0$, set $k_y=\\kappa(y)$, and put $Z_0=T_{V_0}\\times_{V_0}\\operatorname{Spec}k_y$. The natural finite-fibre formula of [lem-zl-finite-adic-direct-image] identifies $(p_{V*}B)_{\\bar y}$ with $H^0(Z,B|_Z)$, including its Frobenius action by the stated semilinear naturality. The fibre is finite, hence proper, so this is also $H_c^0$ by the properness law of [prop-functor-package]. Give $B|_Z$ the Weil arrow $\\theta_B^{[d_y]}$, where $d_y=[k_y:k_0]$, and apply [lem-a1-finite-weil-sections-decomposition] over $k_y$, with algebraic closure $k$. For $x\\in|Z_0|$, it gives a block of $e=[\\kappa(x):k_y]$ summands on which $F_y$ acts cyclically and $F_y^e$ on each summand is $F_x$. The same-residue-field case of [lem-fd-weil-pullback-local-frobenius] for $Z_0\\to T_{V_0}$ identifies its stalk operators over $k_0$. Over $k_y$, $e$ iterations of $\\theta_B^{[d_y]}$ give $\\theta_B^{[ed_y]}$, exactly the original $F_x$ of [def-weil-local-frobenius-trace]. The point $x$ is closed in $T_{V_0}$, and $q_x=q_y^e$ because a $k_y$-basis of the degree-$e$ residue extension identifies its underlying set with $k_y^e$. If $\\beta$ is an eigenvalue on this block, choose an eigenvector and a nonzero stalk component. The equation $F_y^ev=\\beta^ev$ on that component shows that $\\alpha=\\beta^e$ is an eigenvalue of $F_x$. For the bound, multiplicativity of the given embedding and the complex absolute value gives $|\\iota(\\beta)|^e=|\\iota(\\alpha)|\\le q_x^{w/2}=(q_y^{w/2})^e$. Taking the positive $e$-th root proves $|\\iota(\\beta)|\\le q_y^{w/2}$. For purity use equality throughout. This works for every real $w$ and uses no surjectivity of $\\iota$.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "prop-functor-package",
+    "lem-a1-finite-weil-sections-decomposition",
+    "def-weil-local-frobenius-trace",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-fd-weil-pullback-local-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Closed-point finite-stalk formula and Frobenius orbit calculation from the paragraph beginning \"It remains to check\" through the displayed absolute-value equation; same calculation with inequalities for an upper bound, using only multiplicativity of the original embedding"
+   }
+  },
+  {
+   "text": "By Steps 4 and 5, $p_{V*}B$ is the restriction of $f_{0!}F$ to $V_0$, as a Weil sheaf. Every closed point of $Y_0$ is in an affine $V_0$, with the same residue field, stalk and local Frobenius as on $Y_0$. Thus Steps 7 and 8 show that $f_{0!}$ preserves punctual upper bounds and punctual purity globally for the original arbitrary embedding. There is no assertion about descent of local mixed filtrations; the punctual predicates are exactly the closed-point eigenvalue inequalities/equalities of [sk-d-dl-general-weights].",
+   "uses": [
+    "sk-d-dl-general-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/_section.md",
+    "place": "Unit proof paragraph: the sentences on Frobenius orbits, q_x=q_y^e, agreement of normalized weights and preservation of purity; checked on affine target opens"
+   }
+  },
+  {
+   "text": "If $F$ is mixed of weights at most $w$, choose its global finite filtration $0=G_0\\subset\\cdots\\subset G_n=F$ with punctually pure quotients $Q_i$ of weights $u_i\\le w$, as in [sk-d-dl-general-weights]. Exactness from Step 6 sends each $0\\to G_{i-1}\\to G_i\\to Q_i\\to0$ to $0\\to f_{0!}G_{i-1}\\to f_{0!}G_i\\to f_{0!}Q_i\\to0$. Thus the inclusions give a finite filtration of $f_{0!}F$ with quotients $f_{0!}Q_i$. Step 9 shows that these quotients are punctually pure of the same $u_i$. This is exactly the mixed upper bound $w$ of [sk-d-dl-general-weights]. A zero quotient can be omitted. In particular this argument applies one global input filtration; it does not assume descent or uniqueness of independently chosen local mixed filtrations.",
+   "uses": [
+    "sk-d-dl-general-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "final mixed-filtration paragraph, using global exactness and purity established above"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-compact-support-cohomology",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-a1-finite-weil-sections-decomposition",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-fd-weil-pullback-local-frobenius",
+  "lem-kun-closed-point-field",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-zl-finite-adic-direct-image",
+  "lem-zl-framework-pbc-open-exchange-comparison",
+  "lem-zl-immersion-weil-local-behavior",
+  "prop-functor-package",
+  "sk-d-dl-general-weights",
+  "thm-cbc-finite-extension",
+  "thm-cbc-qbar",
+  "thm-pqf-zmt-factorization"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/_section.md",
-  "place": "## Proof"
+  "place": "Unit finite-fibre/base-change argument, expanded using its finite compactification proof and affine target restriction to repair absolute separatedness; no use of the disputed proof of lem-zl-quasi-finite"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherLowerShriek|HasWeightsAtMost|IsMixedOfWeightsAtMost",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite compactly supported pushforward is exact and preserves weights of constructible Weil sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; RingHom.QuasiFinite; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.instLocallyQuasiFiniteCompScheme; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite; AlgebraicGeometry.Scheme.Hom.support_ker",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, LocallyQuasiFinite",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated quasi-finite morphisms over a finite field higher compact support direct images vanish and preserve mixed Weil sheaves and Frobenius upper weight bounds",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|PunctuallyPure|compactlySupportedCohomology",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius eigenvalues and purity are preserved by exact lower shriek for a quasi-finite scheme morphism",
+   "results": "minpoly.frobenius_of_isSeparable; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite; Algebra.QuasiFiniteAt.comap_algEquiv; WittVector.IsocrystalEquiv.frob_equivariant; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.LocallyQuasiFinite; RingHom.map_frobeniusEquiv_symm; IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyQuasiFinite",
+   "results": "0 hits; loogle: unknown identifier 'LocallyQuasiFinite'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image with compact support along a quasi-finite map of schemes is concentrated in degree zero and Frobenius eigenvalue weights are unchanged",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.LocallyQuasiFinite.of_comp; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -205,5 +422,129 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-l-dl-general-quasifinite",
+  "worker": "stage1",
+  "summary": "Repairs returned head c1dde7e4a9: exposes the normalized framework/PBC functor-and-exchange comparison in one new statement-only lemma, then applies compact-support base change through its explicit conjugacy equation; replaces isomorphism-only weight inputs by weight-free stalk formulas and the finite-field Frobenius-cycle calculation for the original arbitrary embedding. Retains the affine-chart repair and the exact item statement. F1 repair of d219aca8d8: report now embeds the exact dropped-node manifest, applicable resolved ordinary-derived repair notes, immutable historical proof exhibits and a root-by-root dependency audit; corrected Steps 7–9 source locations to the actual weight argument. Mathematical statements, proof text and dependencies are unchanged. Landing-repair rebase from returned head 875cbf575e onto current DAG ff7bd2474d: reread the two changed citation interfaces and their added dependencies; Step 6 now explicitly checks compatible local-heart restriction data before using the cover criterion. The arbitrary-embedding weight definition and all quoted conclusions are unchanged.",
+  "blueprint": "Steps 1-2 retain the finite compactification and affine-target localization repair. Steps 3-4 realize the unit compact-support base-change sentence with the actual framework coefficient functors and exchange maps. Steps 5-6 realize concentration in degree zero and exactness. Steps 7-9 realize the finite-fibre orbit calculation and equality of normalized weights for arbitrary iota. Step 10 realizes the global input mixed filtration.",
+  "tool_uses": [
+   {
+    "node": "def-weil-local-frobenius-trace",
+    "why": "Identifies the residue-degree local operators used in the cycle calculation."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Open restriction commutes with cohomology and preserves short exact sequences in the actual rational constructible category."
+   },
+   {
+    "node": "lem-a1-finite-weil-sections-decomposition",
+    "why": "Explicit finite-scheme Frobenius orbit decomposition over the residue field; no coefficient embedding or semisimplicity hypothesis."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Its explicit separated-open-cover criterion detects global vanishing and exactness without assuming that the target is separated."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Closed points of the finite-type opens have the same residue-field test as those of the ambient scheme."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Verifies the finite-dimensional hypothesis of compact-support exchange."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Geometric base change preserves the separated finite-type domain required by the local functors."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine target opens cover the possibly nonseparated target."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Affine charts and finite schemes over them are separated over the field."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finite base change and affineness put the compactification over each affine target in the separated scheme domain."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Finite compactification has proper outer map; this is a generic morphism fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian hypotheses for compact-support exchange are generic geometric prerequisites."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Ensures target opens remain quasi-compact finite-type schemes."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "The compactifying open remains open on an affine target chart."
+   },
+   {
+    "node": "lem-zl-finite-adic-direct-image",
+    "why": "Exactness and t-exactness of finite direct image at rational/common-stage adic coefficients are generic inputs not supplied by the unit itself."
+   },
+   {
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "Weight-free t-exactness, constructibility and Frobenius-compatible open-extension stalks on the verified separated affine charts."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only its composition and properness law on separated charts is used to compute the local compact-support operation."
+   },
+   {
+    "node": "thm-cbc-finite-extension",
+    "why": "Its explicit scheme hypotheses and identity/pasting coherence justify the open comparison and Weil compatibility at a common finite stage."
+   },
+   {
+    "node": "thm-cbc-qbar",
+    "why": "This is the coefficient-appropriate compact-support base-change input named by the unit, used for open restriction with no absolute separatedness hypothesis."
+   },
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Finite compactification is the generic geometric input to the same-unit finite-fibre calculation."
+   },
+   {
+    "node": "lem-fd-weil-pullback-local-frobenius",
+    "why": "The finite fibre inclusion has the same residue field and therefore the same local Frobenius on the pulled-back stalk; this statement has no embedding hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-local-frobenius-trace",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-a1-finite-weil-sections-decomposition",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-kun-closed-point-field",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-zl-finite-adic-direct-image",
+  "lem-zl-immersion-weil-local-behavior",
+  "prop-functor-package",
+  "thm-cbc-finite-extension",
+  "thm-cbc-qbar",
+  "thm-pqf-zmt-factorization",
+  "lem-fd-weil-pullback-local-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-44e119ab4",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-44e119ab4 (reviewer sub-agent of L); spot-checked: I read the item (10 steps), the new node, the unit, the main-20261015 unit section and the lem-zl-quasi-finite proof, the statement of every cited node, and the earlier runs. The statement is byte-identical to the base and the unit. The source error is confirmed: the lem-zl-quasi-finite proof wrongly says the ZMT compactification is separated over k_0 (counterexample: the identity of the doubled-origin line). Steps 1-2: the ZMT hypotheses hold (Y_0 is qcqs); T_V, V and X_V are affine/separated and of finite type. Steps 3-4: the new node's hypotheses hold (quasi-compact open v and j, finite p, Noetherian, finite-dimensional, l invertible); Ex^pbc S = T J(Ex^sf) typechecks; thm-cbc-finite-extension needs only f separated; J reflects invertibility. Step 5: prop-functor-package, the immersion lemma and the finite-image lemma are used only on separated charts. Step 6: the pullback t-exactness lemma has no separatedness hypothesis, and the separated-open-cover criterion of lem-dl-a1-constructible-fibres-exact applies. Steps 7-10: the orbit calculation checks out (e_z F_y^e = F_x e_z, beta^e = alpha, q_x = q_y^e), using only multiplicativity of iota; one global filtration is pushed forward. Edge cases: empty X_0, zero sheaf, doubled origin, e=1, negative w, nonreduced fibre, F_{q^2}/F_q. The new node is statement-only and self-contained and does not restate the item. fix-lem-exchanges clause 1 is a neighbour, not a duplicate: it has no J/S/T and adds etale-origin witness hypotheses. FIX: the 875c review's Step 1 repair was lost when the landing failed. I re-applied it: Step 1 now cites def-zl-weil-compact-support-cohomology, whose comparison gives compactification independence with no separatedness, and that id is added to the step's uses and to proof_deps. No cycle, no route issue. Batch 5: none of the 7 flagged citations has a trace-formula or Poincare-duality theorem in its closure, and all are already in the batch-5 closure. def-weil-local-frobenius-trace and def-pod-lisse-l-adic-sheaves are general definitions. lem-pod-texact-truncation-comparison, lem-pod-proper-coincidence-frobenius and the lem-trf Frobenius-transport coherence lemmas are generic infrastructure. Accepted. The declared tool_uses are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
