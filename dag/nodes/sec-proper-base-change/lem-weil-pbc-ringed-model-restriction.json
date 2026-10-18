@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-ringed-model-restriction",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "Canonical coefficient and tensor-complex transports along a further slice"
+  },
+  "same_as": []
+ },
+ "title": "Canonical coefficient and tensor-complex transports along a further slice",
+ "statement": "Let (C,J) be a small site, R a sheaf of commutative rings, a:V→U an arrow and W restriction from R_U-module sheaves to R_V-module sheaves. Given any S on C/U, T on C/V and xi:WS≅T, construct the isomorphism W^D(Q_U S[0])≅Q_V T[0] and a natural isomorphism Q_U(S tensor P|U)|V≅Q_V(T tensor P|V) for every cochain complex P of R-modules. The tensors here are ordinary tensor complexes. Use exact restriction, its canonical successive-slice comparison and the natural tensor restriction isomorphism [lem-weil-pbc-slice-tensor-natural, lem-weil-pbc-ringed-internal-hom-exact-restriction], with the coefficient and complex conventions [lem-weil-pbc-ringed-model-currying]. No K-flatness is required for these ordinary-complex transports.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 0A90, 0A96, and the module-sheaf constructions 03CY, 03DH, 04IX."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-model-currying",
+  "lem-weil-pbc-slice-tensor-natural",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Restrict S[0] using the exact-functor comparison and single-complex restriction, then apply xi. For tensor complexes apply the natural tensor restriction comparison followed by xi tensor the identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-model-currying",
+    "lem-weil-pbc-slice-tensor-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the tensor comparison to complexes, compose with the canonical equality between successive slice restrictions, and apply Q. Exactness of overMap supplies its derived factorization and makes the final comparison natural in the entire complex.",
+   "uses": [
+    "lem-weil-pbc-ringed-model-currying",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-model-currying",
+  "lem-weil-pbc-slice-tensor-natural"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The indicated construction in the parent proof; direct formal implementation of its representative, evaluation, tensor, or sheafification comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "currying.*restriction|restriction.*currying|homComplex.*overMap",
+   "results": "{\"t\": \"2026-10-18T07:01:14Z\", \"tool\": \"grep\", \"query\": \"currying.*restriction|restriction.*currying|homComplex.*overMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.derivedInternalHom",
+   "results": "{\"t\": \"2026-10-18T07:01:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.derivedInternalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.derivedInternalHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site preserves the canonical derived tensor Hom currying isomorphism for K-flat sheaf complexes",
+   "results": "{\"t\": \"2026-10-18T07:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to a slice site preserves the canonical derived tensor Hom currying isomorphism for K-flat sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CategoryTheory.sheafToPresheaf_μ\"], \"digest\": \"61ab3461a3e36d77\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products, including localization coefficients",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products, including localization coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafify\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafifyMap\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.Tilde.toOpen\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.restrictScalars\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\"], \"digest\": \"c61cbbc70539ef21\"}",
+   "date": "2026-10-18",
+   "verdict": "Returned module sheafification, adjunction and scalar-restriction interfaces are used as constituents. No canonical tensor and sheafification restriction comparison with this varying coefficient ring is returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedModelRestriction",
+  "file": "lean/Sheaf/Paper/RingedModelRestriction.lean",
+  "declaration": "CategoryTheory.LocalizationRHom.coefficientDerivedComplexIso",
+  "declarations": [
+   "CategoryTheory.LocalizationRHom.moduleOverMap",
+   "CategoryTheory.LocalizationRHom.moduleOverMap_additive",
+   "CategoryTheory.LocalizationRHom.moduleOverMap_limits",
+   "CategoryTheory.LocalizationRHom.moduleOverMap_colimits",
+   "CategoryTheory.LocalizationRHom.derivedCoefficientIso",
+   "CategoryTheory.LocalizationRHom.restrictionTensorIso",
+   "CategoryTheory.LocalizationRHom.coefficientComplexIso",
+   "CategoryTheory.LocalizationRHom.coefficientDerivedComplexIso"
+  ],
+  "statement": "def coefficientDerivedComplexIso {U V : C} (a : V ⟶ U)\n    (S : localizationModules (R.over U)) (T : localizationModules (R.over V))\n    (ξ : (moduleOverMap R a).obj S ≅ T) :\n    coefficientComplex R U S ⋙ localizationQ (R.over U) ⋙\n      localizationDerivedOverMap R a ≅ coefficientComplex R V T ⋙\n        localizationQ (R.over V)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}

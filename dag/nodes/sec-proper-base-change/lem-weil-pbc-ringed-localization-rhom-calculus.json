@@ -33,115 +33,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a representative of $N$ and a K-injective resolution $N^\\bullet\\to I^\\bullet$, using [prop-pur-kinjective-resolutions-exist]. By [def-pur-derived-internal-hom], $H^\\bullet=\\mathcal Hom^\\bullet(P^\\bullet,I^\\bullet)$ represents $R\\mathcal Hom(P,N)$. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], so $I|_U$ represents $N|_U$, and it is K-injective by [lem-pur-kinjective-restrict-localized]. For $V\\to U$, the slice defining the sheaf Hom over $V/U$ is $\\mathcal C/V$ by [def-pur-localized-ringed-site]. Thus the sheaf Hom formula [def-pur-sheaf-hom] identifies each restricted factor with the corresponding sheaf Hom of restricted modules. Products of sheaves are sectionwise, and the differential $d_I\\varphi-(-1)^n\\varphi d_P$ is unchanged [def-pur-hom-complex]. Hence $H|_U=\\mathcal Hom^\\bullet(P|_U,I|_U)$ as complexes, giving the first claimed canonical isomorphism.",
+   "text": "Reuse the unchanged explicit localization and derived models. Sectionwise localization flatness, sheafification, finite coproducts and exact slice restriction prove the K-flat certificates. The single-total-tensor comparison and the already proved product-localization calculation give the ordinary-complex derived-tensor model and summand calculation. These declarations are reexported from RingedLocalizationModels without a change in their meaning.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pur-kinjective-restrict-localized",
-    "def-pur-localized-ringed-site",
-    "def-pur-sheaf-hom",
-    "def-pur-hom-complex"
+    "lem-weil-pbc-ringed-localization-complex-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08FI (lemma-restrict-K-injective-to-open), Section 08J7"
-   }
+   "elementary": false
   },
   {
-   "text": "For a global section h of a ring sheaf R, each module R(V)[1/h] is flat by [lem-weil-pbc-localization-flat], hence tensoring with it preserves finite limits in ModuleCat (Mathlib RingTheory.Flat.CategoryTheory). Evaluation functors on module presheaves jointly reflect limits, so tensoring with the localization presheaf preserves finite limits. Apply [lem-pc-sites-modules-sheafification-flat] to the identity map on the ring presheaf to obtain a flat sheafified localization. A finite sum of these sheaves is flat by [lem-pc-sites-modules-coproduct-flat], including the empty sum. Use the displayed isomorphism in IsBoundedLocalizationComplex to transport flatness to every term of P.",
+   "text": "Use the canonical K-flat currying natural isomorphism, transported through exact restriction and the single-total-tensor comparison. Naturality of that natural isomorphism supplies exactly the chain-map and derived-target naturality equation of the statement.",
    "uses": [
-    "lem-weil-pbc-localization-flat",
-    "lem-pc-sites-modules-sheafification-flat",
-    "lem-pc-sites-modules-coproduct-flat",
-    "def-pc-flat-sheaf-modules"
+    "lem-weil-pbc-ringed-localization-natural-currying"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0GMW (lemma-sheafification-tensor), 03EI (lemma-sheafification-exact), 03EO (lemma-internal-hom-adjoint-tensor); algebra.tex Tag 00HT (lemma-flat-localization)"
-   }
+   "elementary": false
   },
   {
-   "text": "Use slice restriction preserving flatness [lem-weil-pbc-slice-restriction-flat] on the flat terms obtained in step 2. Restriction preserves zero objects, so the original upper bound remains an upper bound after restriction. Apply [lem-pc-bounded-above-flat-kflat-site] to the restricted complex. The coefficient localization is flat by step 2; its complex concentrated in degree zero is bounded above by zero and flat in every degree (zero terms are flat), so the same K-flatness lemma applies. The source-library isomorphism CochainComplex.mapBifunctorSingle₁Iso identifies total tensor with a degree-zero left factor with termwise tensor: the unique nonzero first-degree summand gives the terms and differential of localizationSliceComplex. Thus identity K-flat replacements compute the stated derived tensor.",
+   "text": "Restrict the localization coefficient by its canonical fraction-presheaf and sheafification comparison. The coefficient and ordinary tensor-complex derived transports are the explicit comparisons constructed from this sheaf isomorphism. Specialize preservation of the fixed model currying comparison to those localization coefficients and to the proved K-flat certificates. The component formula for the natural currying comparison identifies it with modelCurryIso, giving the displayed further-restriction equation and the successive restriction law.",
    "uses": [
-    "lem-weil-pbc-slice-restriction-flat",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-weil-pbc-ringed-localization-restriction",
+    "lem-weil-pbc-ringed-model-restriction",
+    "lem-weil-pbc-ringed-model-currying-coherence",
+    "lem-weil-pbc-ringed-localization-natural-currying",
+    "lem-weil-pbc-ringed-localization-complex-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); sites-modules.tex Tags 03CY (lemma-sheafification-presheaf-modules), 04IX (definition-localize-ringed-site)"
-   }
-  },
-  {
-   "text": "For any commutative ring A, Mathlib IsLocalization.Away.mul' identifies A[1/f] tensor_A A[1/g] as a localization of A at powers of f*g. IsLocalization.algEquiv therefore gives its A-algebra isomorphism with A[1/(f*g)], including zero divisors and the zero localization. For every restriction ring homomorphism, compare the two composites from the tensor localization by IsLocalization.ringHom_ext: both send every a in A to the restricted a. The equality on pure tensors proves naturality as module-presheaf maps. Sheafify the resulting presheaf isomorphism and compose with [lem-pc-sites-module-sheafification-tensor]. On a slice, ring maps preserve products, so the restricted section of f*g equals the product of the restricted sections. This proves ringedLocalization_tensor_product. The finite-sum assertion follows from tensor being a left adjoint [lem-pc-sheaf-modules-tensor-closed].",
-   "uses": [
-    "lem-pc-sites-module-sheafification-tensor",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0996 (lemma-map-twice-localize), proof of (3); fraction calculation made explicit"
-   }
-  },
-  {
-   "text": "Work now on $\\mathcal C/U$ and put $J=I|_U$ and $Q=P|_U$. The complex $J$ is K-injective by step 1 and $Q$ is K-flat by step 3. Hence $\\mathcal Hom^\\bullet(Q,J)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. Applying [def-pur-derived-internal-hom] twice, the left side of the desired currying formula is represented by $\\mathcal Hom^\\bullet(S[0],\\mathcal Hom^\\bullet(Q,J))$. The right side is represented by $\\mathcal Hom^\\bullet(P_f,J)$. The natural chain isomorphism [lem-sc-derived-hom-tensor-total] with $\\mathcal K=S[0]$, $\\mathcal L=Q$, $\\mathcal M=J$ identifies these complexes, since its total tensor argument is $P_f$ by step 3. In degree $n$ the map sends $\\varphi$ to the maps $s\\otimes q\\mapsto\\varphi(s)^p(q)$ into $J^{p+n}$; its differential is $d_J\\varphi(s)^p(q)-(-1)^n\\varphi(s)^{p+1}(d_Qq)$ on both sides because $S$ has degree zero. Localizing this chain isomorphism gives precisely the second claimed canonical isomorphism.",
-   "uses": [
-    "lem-pur-hom-kflat-into-kinjective",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-hom-tensor-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A90 (lemma-compose)"
-   }
-  },
-  {
-   "text": "The chain isomorphism in step 5 is natural in the three complexes by [lem-sc-derived-hom-tensor-total]. Choose the functorial K-injective resolutions of [prop-pur-kinjective-resolutions-exist]; their maps and chain maps of $P$ therefore give the required naturality squares. The definition [def-pur-derived-internal-hom] identifies other representatives and resolutions canonically; in particular it sends quasi-isomorphisms in each variable to isomorphisms, so the same naturality holds for morphisms of $N$ in the derived category. For $V\\to U$, apply the restriction computation of step 1 to $J$ and to $\\mathcal Hom^\\bullet(Q,J)$, both K-injective, using [lem-pur-kinjective-restrict-localized]. On a further object $W\\to V$, both iterated restrictions evaluate the map in step 5 by exactly $s\\otimes q\\mapsto\\varphi(s)(q)$, and evaluate the fraction maps of step 4 by the same fractions. The relocalization identity [def-pur-localized-ringed-site] makes these equality statements identities over $\\mathcal C/W$, so the entire comparison commutes with further slice restriction. No step uses a bound on $J$ or on $N$: boundedness was used only for $P$ in step 3.",
-   "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-kinjective-restrict-localized",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 and 08JB, functoriality and restriction of the construction; sites-modules.tex Definition 04IX and sites.tex Lemma 03EH"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-hom",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-pc-sites-modules-coproduct-flat",
-  "lem-pc-sites-modules-sheafification-flat",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-slice-restriction-flat",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-ringed-localization-complex-models",
+  "lem-weil-pbc-ringed-localization-natural-currying",
+  "lem-weil-pbc-ringed-localization-restriction",
+  "lem-weil-pbc-ringed-model-currying-coherence",
+  "lem-weil-pbc-ringed-model-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 and 08JB, with the chain models of 0A90 and 0A96; algebraization.tex Tag 0996(3) for localization. Steps 2-4 use the existing sheafification-flat and flat-coproduct interfaces and Mathlib localization universal properties; the proof of steps 1, 5 and 6 remains to be completed in Lean."
+  "place": "Tags 08J9, 08JB, 0A90 and 0A96; the original representative proof implemented by canonical natural comparisons. W3 isolates only preservation of evaluation-normalized currying as the remaining obligation."
  },
  "mathlib_searches": [
   {
@@ -320,30 +247,15 @@
   "module": "Sheaf.Paper.RingedLocalizationRHomCalculus",
   "declaration": "CategoryTheory.ringedLocalizationRHom_calculus",
   "declarations": [
-   "CategoryTheory.localizationModules",
-   "CategoryTheory.localizationDerived",
-   "CategoryTheory.localizationQ",
-   "CategoryTheory.localizationRHom",
-   "CategoryTheory.localizationComplexRestriction",
-   "CategoryTheory.localizationDerivedRestriction",
-   "CategoryTheory.IsBoundedLocalizationComplex",
-   "CategoryTheory.localizationTensorComplex",
-   "CategoryTheory.localizationSliceCoefficient",
-   "CategoryTheory.localizationSliceComplex",
-   "CategoryTheory.localizationSliceDerivedCoefficient",
-   "CategoryTheory.localizationDerivedOverMap",
-   "CategoryTheory.localizationRestrictionCompIso",
-   "CategoryTheory.ringedLocalization_kflat_models",
-   "CategoryTheory.ringedLocalization_tensor_product",
    "CategoryTheory.ringedLocalizationRHom_calculus"
   ],
   "file": "lean/Sheaf/Paper/RingedLocalizationRHomCalculus.lean",
-  "statement": "theorem ringedLocalizationRHom_calculus (R : Sheaf J CommRingCat.{u}) : ∃ (e : ∀ U : C, localizationRHom R ⋙ localizationDerivedRestriction R U ≅ ((localizationDerivedRestriction R U).op.prod (localizationDerivedRestriction R U)) ⋙ localizationRHom (R.over U)) (s : ∀ (U V : C) (a : V ⟶ U), localizationRHom (R.over U) ⋙ localizationDerivedOverMap R a ≅ ((localizationDerivedOverMap R a).op.prod (localizationDerivedOverMap R a)) ⋙ localizationRHom (R.over V)) (c : ∀ (U : C) (f : R.obj.obj (op U)) (P : CochainComplex (localizationModules R) ℤ), IsBoundedLocalizationComplex R P → ∀ N : localizationDerived R, (localizationRHom (R.over U)).obj (op (localizationSliceDerivedCoefficient R U f), (localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)) ≅ (localizationRHom (R.over U)).obj (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)), (localizationDerivedRestriction R U).obj N)), (∀ (U V : C) (a : V ⟶ U) (L M : localizationDerived R), (localizationDerivedOverMap R a).map ((e U).hom.app (op L, M)) ≫ (s U V a).hom.app (op ((localizationDerivedRestriction R U).obj L), (localizationDerivedRestriction R U).obj M) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj L)), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj M))) (Y := (op ((localizationDerivedRestriction R V).obj L), (localizationDerivedRestriction R V).obj M)) (((localizationRestrictionCompIso R a).inv.app L).op, (localizationRestrictionCompIso R a).hom.app M) = (localizationRestrictionCompIso R a).hom.app ((localizationRHom R).obj (op L, M)) ≫ (e V).hom.app (op L, M)) ∧ (∀ (U : C) (f : R.obj.obj (op U)) (P P' : CochainComplex (localizationModules R) ℤ) (hP : IsBoundedLocalizationComplex R P) (hP' : IsBoundedLocalizationComplex R P') (a : P' ⟶ P) (N N' : localizationDerived R) (b : N ⟶ N'), (c U f P hP N).hom ≫ (localizationRHom (R.over U)).map (((localizationQ (R.over U)).map ((localizationSliceComplex R U f).map a)).op, (localizationDerivedRestriction R U).map b) = (localizationRHom (R.over U)).map (𝟙 (op (localizationSliceDerivedCoefficient R U f)), (localizationRHom (R.over U)).map (((localizationDerivedRestriction R U).map ((localizationQ R).map a)).op, (localizationDerivedRestriction R U).map b)) ≫ (c U f P' hP' N').hom) ∧ ∀ (U V : C) (a : V ⟶ U) (f : R.obj.obj (op U)), ∃ (l : (localizationDerivedOverMap R a).obj (localizationSliceDerivedCoefficient R U f) ≅ localizationSliceDerivedCoefficient R V (R.obj.map a.op f)) (t : localizationSliceComplex R U f ⋙ localizationQ (R.over U) ⋙ localizationDerivedOverMap R a ≅ localizationSliceComplex R V (R.obj.map a.op f) ⋙ localizationQ (R.over V)), ∀ (P : CochainComplex (localizationModules R) ℤ) (hP : IsBoundedLocalizationComplex R P) (N : localizationDerived R), (localizationDerivedOverMap R a).map ((c U f P hP N).hom) ≫ (s U V a).hom.app (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)), (localizationDerivedRestriction R U).obj N) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P))), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj N))) (Y := (op ((localizationQ (R.over V)).obj ((localizationSliceComplex R V (R.obj.map a.op f)).obj P)), (localizationDerivedRestriction R V).obj N)) ((t.inv.app P).op, (localizationRestrictionCompIso R a).hom.app N) = (s U V a).hom.app (op (localizationSliceDerivedCoefficient R U f), (localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj (localizationSliceDerivedCoefficient R U f)), (localizationDerivedOverMap R a).obj ((localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)))) (Y := (op (localizationSliceDerivedCoefficient R V (R.obj.map a.op f)), (localizationRHom (R.over V)).obj (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R V).obj N))) (l.inv.op, (s U V a).hom.app (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P))), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj N))) (Y := (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R V).obj N)) (((localizationRestrictionCompIso R a).inv.app ((localizationQ R).obj P)).op, (localizationRestrictionCompIso R a).hom.app N)) ≫ (c V (R.obj.map a.op f) P hP N).hom",
+  "statement": "theorem ringedLocalizationRHom_calculus (R : Sheaf J CommRingCat.{u}) :\n    ∃ (e : ∀ U : C,\n      localizationRHom R ⋙ localizationDerivedRestriction R U ≅\n        ((localizationDerivedRestriction R U).op.prod\n          (localizationDerivedRestriction R U)) ⋙ localizationRHom (R.over U))\n      (s : ∀ (U V : C) (a : V ⟶ U),\n        localizationRHom (R.over U) ⋙ localizationDerivedOverMap R a ≅\n          ((localizationDerivedOverMap R a).op.prod (localizationDerivedOverMap R a)) ⋙\n            localizationRHom (R.over V))\n      (c : ∀ (U : C) (f : R.obj.obj (op U))\n        (P : CochainComplex (localizationModules R) ℤ), IsBoundedLocalizationComplex R P →\n        ∀ N : localizationDerived R,\n        (localizationRHom (R.over U)).obj\n          (op (localizationSliceDerivedCoefficient R U f),\n            (localizationRHom (R.over U)).obj\n              (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                (localizationDerivedRestriction R U).obj N)) ≅\n        (localizationRHom (R.over U)).obj\n          (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)),\n            (localizationDerivedRestriction R U).obj N)),\n      (∀ (U V : C) (a : V ⟶ U) (L M : localizationDerived R),\n        (localizationDerivedOverMap R a).map ((e U).hom.app (op L, M)) ≫\n          (s U V a).hom.app\n            (op ((localizationDerivedRestriction R U).obj L),\n              (localizationDerivedRestriction R U).obj M) ≫\n          (localizationRHom (R.over V)).map\n            (X := (op ((localizationDerivedOverMap R a).obj\n              ((localizationDerivedRestriction R U).obj L)),\n              (localizationDerivedOverMap R a).obj\n                ((localizationDerivedRestriction R U).obj M)))\n            (Y := (op ((localizationDerivedRestriction R V).obj L),\n              (localizationDerivedRestriction R V).obj M))\n            (((localizationRestrictionCompIso R a).inv.app L).op,\n              (localizationRestrictionCompIso R a).hom.app M) =\n        (localizationRestrictionCompIso R a).hom.app\n          ((localizationRHom R).obj (op L, M)) ≫ (e V).hom.app (op L, M)) ∧\n      (∀ (U : C) (f : R.obj.obj (op U))\n        (P P' : CochainComplex (localizationModules R) ℤ)\n        (hP : IsBoundedLocalizationComplex R P) (hP' : IsBoundedLocalizationComplex R P')\n        (a : P' ⟶ P) (N N' : localizationDerived R) (b : N ⟶ N'),\n        (c U f P hP N).hom ≫ (localizationRHom (R.over U)).map\n          (((localizationQ (R.over U)).map ((localizationSliceComplex R U f).map a)).op,\n            (localizationDerivedRestriction R U).map b) =\n        (localizationRHom (R.over U)).map\n          (𝟙 (op (localizationSliceDerivedCoefficient R U f)),\n            (localizationRHom (R.over U)).map\n              (((localizationDerivedRestriction R U).map ((localizationQ R).map a)).op,\n                (localizationDerivedRestriction R U).map b)) ≫ (c U f P' hP' N').hom) ∧\n      ∀ (U V : C) (a : V ⟶ U) (f : R.obj.obj (op U)),\n        ∃ (l : (localizationDerivedOverMap R a).obj\n              (localizationSliceDerivedCoefficient R U f) ≅\n            localizationSliceDerivedCoefficient R V (R.obj.map a.op f))\n          (t : localizationSliceComplex R U f ⋙ localizationQ (R.over U) ⋙\n              localizationDerivedOverMap R a ≅\n            localizationSliceComplex R V (R.obj.map a.op f) ⋙ localizationQ (R.over V)),\n          ∀ (P : CochainComplex (localizationModules R) ℤ)\n            (hP : IsBoundedLocalizationComplex R P) (N : localizationDerived R),\n          (localizationDerivedOverMap R a).map ((c U f P hP N).hom) ≫\n            (s U V a).hom.app\n              (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)),\n                (localizationDerivedRestriction R U).obj N) ≫\n            (localizationRHom (R.over V)).map\n              (X := (op ((localizationDerivedOverMap R a).obj\n                ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P))),\n                (localizationDerivedOverMap R a).obj\n                  ((localizationDerivedRestriction R U).obj N)))\n              (Y := (op ((localizationQ (R.over V)).obj\n                ((localizationSliceComplex R V (R.obj.map a.op f)).obj P)),\n                (localizationDerivedRestriction R V).obj N))\n              ((t.inv.app P).op, (localizationRestrictionCompIso R a).hom.app N) =\n          (s U V a).hom.app\n            (op (localizationSliceDerivedCoefficient R U f),\n              (localizationRHom (R.over U)).obj\n                (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                  (localizationDerivedRestriction R U).obj N)) ≫\n            (localizationRHom (R.over V)).map\n              (X := (op ((localizationDerivedOverMap R a).obj\n                (localizationSliceDerivedCoefficient R U f)),\n                (localizationDerivedOverMap R a).obj ((localizationRHom (R.over U)).obj\n                  (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R U).obj N))))\n              (Y := (op (localizationSliceDerivedCoefficient R V (R.obj.map a.op f)),\n                (localizationRHom (R.over V)).obj\n                  (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R V).obj N)))\n              (l.inv.op,\n                (s U V a).hom.app\n                  (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R U).obj N) ≫\n                (localizationRHom (R.over V)).map\n                  (X := (op ((localizationDerivedOverMap R a).obj\n                    ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P))),\n                    (localizationDerivedOverMap R a).obj\n                      ((localizationDerivedRestriction R U).obj N)))\n                  (Y := (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R V).obj N))\n                  (((localizationRestrictionCompIso R a).inv.app ((localizationQ R).obj P)).op,\n                    (localizationRestrictionCompIso R a).hom.app N)) ≫\n            (c V (R.obj.map a.op f) P hP N).hom",
   "branch": "newtargets-dag",
   "by": "NB",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The main comparison family, ringedLocalization_kflat_models and ringedLocalization_tensor_product jointly state the node. The transparent size abbreviations reuse the recorded module/derived categories, RHom and exact slice functors. The K-flat certificates and ordinary total-tensor isomorphism specify the identity-replacement computation of derived tensor. The newly landed localization, exact restriction and slice-flatness interfaces are cited rather than duplicated."
+  "note": "The unchanged model definitions and the two already proved K-flat/tensor assertions now live in, and are publicly reexported from, RingedLocalizationModels; its node is a proof dependency. The main statement is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -356,11 +268,11 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-17569",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261018T062842-L-667586",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
  }
 }

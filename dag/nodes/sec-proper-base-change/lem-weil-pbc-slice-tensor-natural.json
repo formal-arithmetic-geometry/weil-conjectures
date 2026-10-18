@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-slice-tensor-natural",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "The natural tensor comparison for continuous cocontinuous module restriction"
+  },
+  "same_as": []
+ },
+ "title": "The natural tensor comparison for continuous cocontinuous module restriction",
+ "statement": "Let (C,J) and (D,K) be small sites in the same universe, F:C→D continuous and cocontinuous, R a sheaf of commutative rings on D, and V restriction of R-module sheaves to the restricted ring on C. For all M,N there is a specified isomorphism theta(M,N):V(M tensor N)≅VM tensor VN, constructed from the presheaf tensor restriction map and the canonical sheafification comparisons [lem-weil-pbc-slice-module-sheafification, lem-pc-sites-module-sheafification-tensor]. For morphisms f:M→Mprime and g:N→Nprime it satisfies V(f tensor g)≫theta(Mprime,Nprime).hom = theta(M,N).hom≫(Vf tensor Vg).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03DH and 04IX; tensor/sheafification and continuous restriction."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-slice-module-sheafification",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse presheaf tensor structure map, which is an isomorphism for continuous presheaf restriction. Compare the underlying restricted module sheaves with the restricted underlying presheaves using restriction of scalars along the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose restriction of the tensor/sheafification isomorphism, the continuous cocontinuous sheafification comparison, the presheaf tensor comparison and its two underlying comparisons, and the inverse target tensor/sheafification isomorphism.",
+   "uses": [
+    "lem-weil-pbc-slice-module-sheafification",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the four generic square lemmas already proved in OpenRestrictionTensorNatural, now publicly accessible there: compose_four_squares, inverse_square, tensorObjIsoSheafification_natural and tensor_square. Compose the naturality squares for sheafification restriction, the presheaf tensorator and the underlying module comparison; invert the final tensor/sheafification square. No copy of any of these generic lemmas is declared.",
+   "uses": [
+    "lem-weil-pbc-slice-module-sheafification",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pc-open-localized-tensor-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-localized-tensor-natural",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-weil-pbc-slice-module-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The indicated construction in the parent proof; direct formal implementation of its representative, evaluation, tensor, or sheafification comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*pushforward|pushforward.*sheafification",
+   "results": "{\"t\": \"2026-10-18T07:09:13Z\", \"tool\": \"grep\", \"query\": \"sheafification.*pushforward|pushforward.*sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\"], \"digest\": \"aa732aea3bf9527b\"}",
+   "date": "2026-10-18",
+   "verdict": "The generic sheaf compatibility is relevant, but does not directly handle the varying ring-module coefficients. Use the proved module-sheaf adjunction and tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.sheafification",
+   "results": "{\"t\": \"2026-10-18T07:09:14Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SheafOfModules.sheafification'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "The generic sheaf compatibility is relevant, but does not directly handle the varying ring-module coefficients. Use the proved module-sheaf adjunction and tensor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products",
+   "results": "{\"t\": \"2026-10-18T07:09:14Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\"], \"digest\": \"93c708611372c7bc\"}",
+   "date": "2026-10-18",
+   "verdict": "The generic sheaf compatibility is relevant, but does not directly handle the varying ring-module coefficients. Use the proved module-sheaf adjunction and tensor comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products, including localization coefficients",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Continuous cocontinuous restriction of module sheaves commutes with sheafification and tensor products, including localization coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafify\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafifyMap\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.Tilde.toOpen\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.restrictScalars\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\"], \"digest\": \"c61cbbc70539ef21\"}",
+   "date": "2026-10-18",
+   "verdict": "Returned module sheafification, adjunction and scalar-restriction interfaces are used as constituents. No canonical tensor and sheafification restriction comparison with this varying coefficient ring is returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SliceTensorNatural",
+  "file": "lean/Sheaf/Algebra/Homology/SliceTensorNatural.lean",
+  "declaration": "SheafOfModules.sliceTensorIso_natural",
+  "declarations": [
+   "SheafOfModules.slicePresheafTensorIso",
+   "SheafOfModules.sliceCommModuleRestriction",
+   "SheafOfModules.sliceRestrictionUnderlyingIso",
+   "SheafOfModules.sliceTensorIso",
+   "SheafOfModules.sliceTensorIso_natural"
+  ],
+  "statement": "theorem sliceTensorIso_natural\n    {M M' N N' : SheafOfModules.{u} A} (f : M ⟶ M') (g : N ⟶ N') :\n    letI := monoidalCategory R\n    let := monoidalCategory (R')\n    (sliceCommModuleRestriction (J := J) F R).map (f ⊗ₘ g) ≫\n        (sliceTensorIso (J := J) F R M' N').hom =\n      (sliceTensorIso (J := J) F R M N).hom ≫\n        ((sliceCommModuleRestriction (J := J) F R).map f ⊗ₘ\n          (sliceCommModuleRestriction (J := J) F R).map g)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}

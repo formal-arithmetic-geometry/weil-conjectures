@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-kflat-rhom-currying",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "Evaluation-normalized natural currying on K-flat representatives"
+  },
+  "same_as": []
+ },
+ "title": "Evaluation-normalized natural currying on K-flat representatives",
+ "statement": "Let (C,J) be a small site and R a sheaf of commutative rings, and use its module-sheaf category and an unbounded derived category. If L and P are K-flat cochain complexes [def-pc-kflat-complex], there is a specified isomorphism RHom(QL,RHom(QP,N)) ≅ RHom(Q Tot(L tensor P),N) for every unbounded derived N [def-pur-derived-internal-hom]. It is natural in both contravariant K-flat complexes and the covariant derived target. Construct it by the degreewise pure-tensor evaluation map, its differential compatibility and naturality [lem-sc-hom-tensor-degreewise, lem-sc-hom-tensor-differential, lem-sc-hom-tensor-naturality], using actual functorial K-injective target models and localization comparisons. For a K-injective I, Hom(P,I) is K-injective [lem-pur-hom-kflat-into-kinjective], which gives the representative comparison for nested Hom.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 0A90, 0A96, and the module-sheaf constructions 03CY, 03DH, 04IX."
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-differential",
+  "lem-sc-hom-tensor-naturality",
+  "lem-pur-rhom-well-defined",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual functorial K-injective resolution and the localization factorization to compare derived Hom with its chosen chain model. For an already K-injective target, invert its resolution coaugmentation under Q; naturality gives a natural comparison.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degreewise currying map is an isomorphism and respects the differential, so forms a chain isomorphism. Its three-variable naturality gives a natural isomorphism of the representative functors.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-hom-tensor-differential",
+    "lem-sc-hom-tensor-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K-flat L and K-injective I, Hom(L,I) is K-injective. Apply the representative comparisons twice to compute nested Hom, compose with chain currying, and descend through the fully faithful precomposition functor induced by derived localization of the target.",
+   "uses": [
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-differential",
+  "lem-sc-hom-tensor-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The indicated construction in the parent proof; direct formal implementation of its representative, evaluation, tensor, or sheafification comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"grep\", \"query\": \"homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Analysis/Normed/Lp/PiLp.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"08a0d9c0ade7b00c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedInternalHom",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"loogle\", \"query\": \"derivedInternalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'derivedInternalHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom tensor currying natural isomorphism on a ringed site",
+   "results": "{\"t\": \"2026-10-18T06:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom tensor currying natural isomorphism on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihom_map_val_app\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\"], \"digest\": \"5419e25f7759db13\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom tensor currying is a natural isomorphism on K-flat complexes and an unbounded derived target",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom tensor currying is a natural isomorphism on K-flat complexes and an unbounded derived target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv\", \"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.MonoidalCategory.Functor.curriedTensorPreIsoPost\", \"CategoryTheory.internalizeHom\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"CategoryTheory.curryingIso\"], \"digest\": \"c16e4e3f05979d66\"}",
+   "date": "2026-10-18",
+   "verdict": "Abstract monoidal closed currying is present, but it does not identify this project’s concrete derived internal-Hom functor or its representative comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatRHomCurrying",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatRHomCurrying.lean",
+  "declaration": "CategoryTheory.KFlatRHom.curryIso",
+  "declarations": [
+   "CategoryTheory.KFlatRHom.flat",
+   "CategoryTheory.KFlatRHom.resolution",
+   "CategoryTheory.KFlatRHom.toResolution",
+   "CategoryTheory.KFlatRHom.representativeIso",
+   "CategoryTheory.KFlatRHom.chainIso",
+   "CategoryTheory.KFlatRHom.total",
+   "CategoryTheory.KFlatRHom.left",
+   "CategoryTheory.KFlatRHom.right",
+   "CategoryTheory.KFlatRHom.representativeFunctor",
+   "CategoryTheory.KFlatRHom.injectiveRepresentativeIso",
+   "CategoryTheory.KFlatRHom.chainIso_natural",
+   "CategoryTheory.KFlatRHom.representativeCurryIso",
+   "CategoryTheory.KFlatRHom.curryIso"
+  ],
+  "statement": "def curryIso : left R ≅ right R",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}

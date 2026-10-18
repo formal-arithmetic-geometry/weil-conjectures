@@ -29,7 +29,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace SheafOfModules
 
-private theorem compose_four_squares {D : Type*} [Category* D]
+/-- Composing four commutative squares gives the outer commutative rectangle. -/
+theorem compose_four_squares {D : Type*} [Category* D]
     {A₀ A₁ A₂ A₃ A₄ B₀ B₁ B₂ B₃ B₄ : D}
     (a₀ : A₀ ⟶ A₁) (a₁ : A₁ ⟶ A₂) (a₂ : A₂ ⟶ A₃) (a₃ : A₃ ⟶ A₄)
     (b₀ : B₀ ⟶ B₁) (b₁ : B₁ ⟶ B₂) (b₂ : B₂ ⟶ B₃) (b₃ : B₃ ⟶ B₄)
@@ -41,7 +42,8 @@ private theorem compose_four_squares {D : Type*} [Category* D]
   simp only [Category.assoc]
   rw [reassoc_of% h₀, reassoc_of% h₁, reassoc_of% h₂, h₃]
 
-private theorem inverse_square {D : Type*} [Category* D]
+/-- A commutative square of isomorphisms also commutes with the inverses. -/
+theorem inverse_square {D : Type*} [Category* D]
     {A B A' B' : D} (e : A ≅ B) (e' : A' ≅ B') (f : A ⟶ A') (g : B ⟶ B')
     (h : f ≫ e'.hom = e.hom ≫ g) : g ≫ e'.inv = e.inv ≫ f := by
   rw [Iso.comp_inv_eq, Category.assoc, h, Iso.inv_hom_id_assoc]
@@ -67,7 +69,8 @@ private theorem presheafRestrictionTensorIso_natural
           (PresheafOfModules.pushforward₀OfCommRingCat F R).map g) :=
   (Functor.OplaxMonoidal.δ_natural _ f g).symm
 
-private theorem tensorObjIsoSheafification_natural
+/-- The tensor/sheafification comparison is natural in both module arguments. -/
+theorem tensorObjIsoSheafification_natural
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
@@ -106,7 +109,8 @@ private theorem restrictionUnderlyingIso_natural
   ext W x
   rfl
 
-private theorem tensor_square {D : Type*} [Category* D] [MonoidalCategory D]
+/-- Tensoring two commutative squares of isomorphisms gives a commutative square. -/
+theorem tensor_square {D : Type*} [Category* D] [MonoidalCategory D]
     {M N M' N' P Q P' Q' : D} (f : M ⟶ M') (g : N ⟶ N')
     (f' : P ⟶ P') (g' : Q ⟶ Q')
     (a : M ≅ P) (b : N ≅ Q) (a' : M' ≅ P') (b' : N' ≅ Q')

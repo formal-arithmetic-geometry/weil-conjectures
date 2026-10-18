@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-ringed-localization-complex-models",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "The unchanged localization complex models and K-flat coefficient certificate"
+  },
+  "same_as": []
+ },
+ "title": "The unchanged localization complex models and K-flat coefficient certificate",
+ "statement": "Let (C,J) be a small site, R a sheaf of commutative rings and R_U its restriction to C/U. Use module sheaves and their standard unbounded derived category, with Q its complex localization and F_U the exact slice restriction. For a section f on U let S_f be the sheafification of V ↦ R_U(V)[1/f|V] [def-weil-pbc-ringed-section-localization]. Its degree-zero complex is K-flat. If P is bounded and each term is a finite coproduct of global section localizations, then F_U(P) is K-flat and Tot(S_f[0] tensor F_U(P)) is canonically isomorphic to the ordinary complex S_f tensor F_U(P). The coefficient tensor S_f tensor S_g is canonically isomorphic to S_(fg). The model definitions, exact restriction functors, standard derived functors and successive restriction comparison are exactly the unchanged constructions extracted from the parent module. Flatness and K-flatness use [lem-weil-pbc-localization-flat, lem-pc-sites-modules-sheafification-flat, lem-pc-bounded-above-flat-kflat-site, lem-weil-pbc-slice-restriction-flat, lem-pc-sites-modules-coproduct-flat]; tensor products commute with sheafification [lem-pc-sites-module-sheafification-tensor].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 0A90, 0A96, and the module-sheaf constructions 03CY, 03DH, 04IX."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Sectionwise localization is flat; evaluation jointly reflects limits, and sheafification of the flat presheaf is flat. The single complex in degree zero is bounded above and has flat terms, including its zero terms, hence is K-flat.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-sites-modules-sheafification-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the existing proofs: finite sums of localizations are flat, slice restriction preserves flatness and the upper bound, and the single-total tensor comparison identifies the ordinary tensor complex. Sectionwise localization tensor products identify with localization at the product and sheafify.",
+   "uses": [
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-slice-restriction-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The indicated construction in the parent proof; direct formal implementation of its representative, evaluation, tensor, or sheafification comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"grep\", \"query\": \"homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Analysis/Normed/Lp/PiLp.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"08a0d9c0ade7b00c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedInternalHom",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"loogle\", \"query\": \"derivedInternalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'derivedInternalHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom tensor currying natural isomorphism on a ringed site",
+   "results": "{\"t\": \"2026-10-18T06:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom tensor currying natural isomorphism on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihom_map_val_app\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\"], \"digest\": \"5419e25f7759db13\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafified localization is flat, bounded above flat sheaf complexes are K-flat, and localization tensor products invert the product",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Sheafified localization is flat, bounded above flat sheaf complexes are K-flat, and localization tensor products invert the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"IsLocalization.flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.localizedModule\", \"Module.flat_iff_of_isLocalization\", \"Module.flat_of_isLocalized_span\", \"Localization.flat\"], \"digest\": \"0e87f64cb8b5fd5c\"}",
+   "date": "2026-10-18",
+   "verdict": "Localization flatness is a Mathlib constituent already used in the retained proof. No sheaf-level bounded localization complex model theorem is returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedLocalizationModels",
+  "file": "lean/Sheaf/Paper/RingedLocalizationModels.lean",
+  "declaration": "CategoryTheory.localizationSliceCoefficient_kflat",
+  "declarations": [
+   "CategoryTheory.localizationModules",
+   "CategoryTheory.localizationDerived",
+   "CategoryTheory.localizationQ",
+   "CategoryTheory.localizationRHom",
+   "CategoryTheory.localizationComplexRestriction",
+   "CategoryTheory.localizationDerivedRestriction",
+   "CategoryTheory.IsBoundedLocalizationComplex",
+   "CategoryTheory.localizationTensorComplex",
+   "CategoryTheory.localizationSliceCoefficient",
+   "CategoryTheory.localizationSliceComplex",
+   "CategoryTheory.localizationSliceDerivedCoefficient",
+   "CategoryTheory.localizationDerivedOverMap",
+   "CategoryTheory.localizationRestrictionCompIso",
+   "CategoryTheory.localizationSliceCoefficient_kflat",
+   "CategoryTheory.ringedLocalization_kflat_models",
+   "CategoryTheory.ringedLocalization_tensor_product"
+  ],
+  "statement": "theorem localizationSliceCoefficient_kflat (R : Sheaf J CommRingCat.{u}) (U : C)\n    (f : R.obj.obj (op U)) :\n    CochainComplex.IsAcyclicTensorKFlat\n      ((HomologicalComplex.single (localizationModules (R.over U)) (.up ℤ) 0).obj\n        (localizationSliceCoefficient R U f))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ringed-model-currying-coherence",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "Proof steps 1 and 6: normalize restriction by local evaluation, and show that it preserves currying."
+  },
+  "same_as": []
+ },
+ "title": "Restriction preserves the constructed K-flat coefficient currying comparison",
+ "statement": "On a small ringed site let modelCurryIso be the evaluation-normalized derived currying comparison constructed from K-flat representatives [lem-weil-pbc-ringed-model-currying]. There are natural derived internal-Hom restriction isomorphisms e_U and s_a, compatible with the canonical successive-slice comparison. For any arrow a:V→U, any sheaf coefficients S on C/U and T on C/V with K-flat degree-zero complexes, any isomorphism xi:S|V≅T, any complex P whose restrictions to C/U and C/V are K-flat, and any unbounded derived object N, restriction of modelCurryIso(S,P,N) equals modelCurryIso(T,P,N) after the already constructed coefficient and tensor-complex transports [lem-weil-pbc-ringed-model-restriction]. The currying, coefficient and tensor isomorphisms, and currying naturality, are already constructed; this assertion supplies the restriction comparisons and their compatibility with those fixed maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB, 0A90 and 0A96; the sectionwise evaluation argument in the proof of 08JB and the tensor-Hom composition comparison."
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-ringed-model-currying",
+  "lem-weil-pbc-ringed-model-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Choose functorial K-injective target models. Exact slice restriction preserves the models and K-injectivity. Compare Hom complexes by the product projections and the equivalence between an iterated slice over W and C/W. The differential and both module maps are unchanged; descend these natural chain comparisons to obtain e and s. On one further slice the two successive restrictions evaluate exactly the same local maps, giving their composition equation.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-flatness of P|U implies that Hom(P|U,I|U) is K-injective. Thus the nested derived Hom is computed by the two nested Hom complexes. In the construction of modelCurryIso, the chain currying map evaluates phi(s)(p). Restricting this evaluation, or evaluating after restriction, gives the same section on each W over V. The prescribed xi acts on the coefficient and its inverse acts contravariantly on Hom. The constructed tensor restriction is the sheafification of restriction of presheaf pure tensors, so these transports give the same equation.",
+   "uses": [
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-weil-pbc-kflat-rhom-currying",
+    "lem-weil-pbc-ringed-model-currying",
+    "lem-weil-pbc-ringed-model-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pure tensors before sheafification to prove equality of the tensor maps, then the coproduct and product universal properties to prove equality of chain maps. Apply Q and use naturality of the exact-restriction factors and the canonical representative comparisons to cancel the transports. Localization gives the equation for every derived target N. No boundedness, nonzero-ring, or nonempty-site condition was used.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-kflat-rhom-currying",
+    "lem-weil-pbc-ringed-model-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB, 0A90 and 0A96; isolated from the restriction-coherence portion of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site preserves the canonical derived tensor Hom currying isomorphism for K-flat sheaf complexes",
+   "results": "{\"t\": \"2026-10-18T07:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to a slice site preserves the canonical derived tensor Hom currying isomorphism for K-flat sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CategoryTheory.sheafToPresheaf_μ\"], \"digest\": \"61ab3461a3e36d77\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching coherence interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.derivedInternalHom",
+   "results": "{\"t\": \"2026-10-18T07:01:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.derivedInternalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.derivedInternalHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Project-specific derived Hom is not indexed by the Mathlib service."
+  },
+  {
+   "tool": "grep",
+   "query": "currying.*restriction|restriction.*currying|homComplex.*overMap",
+   "results": "{\"t\": \"2026-10-18T07:01:14Z\", \"tool\": \"grep\", \"query\": \"currying.*restriction|restriction.*currying|homComplex.*overMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; local project search found only the interfaces reviewed in the report."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice ringed site preserves derived internal Hom currying and its evaluation map",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to a slice ringed site preserves derived internal Hom currying and its evaluation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.restrict\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict\", \"AlgebraicGeometry.StructureSheaf.res_apply\", \"ModuleCat.Tilde.res_apply\", \"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.restrictScalars\"], \"digest\": \"0a4ceeae816a5a3c\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching slice derived-Hom evaluation-coherence theorem; returned topological restrictions and scalar restriction interfaces are different statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedModelCurryingCoherence",
+  "file": "lean/Sheaf/Paper/RingedModelCurryingCoherence.lean",
+  "declaration": "CategoryTheory.LocalizationRHom.modelCurrying_restriction",
+  "statement": "theorem modelCurrying_restriction (R : Sheaf J CommRingCat.{u}) :\n    ∃ (e : ∀ U : C,\n      localizationRHom R ⋙ localizationDerivedRestriction R U ≅\n        ((localizationDerivedRestriction R U).op.prod\n          (localizationDerivedRestriction R U)) ⋙ localizationRHom (R.over U))\n      (s : ∀ (U V : C) (a : V ⟶ U),\n        localizationRHom (R.over U) ⋙ localizationDerivedOverMap R a ≅\n          ((localizationDerivedOverMap R a).op.prod (localizationDerivedOverMap R a)) ⋙\n            localizationRHom (R.over V)),\n      (∀ (U V : C) (a : V ⟶ U) (L M : localizationDerived R),\n        (localizationDerivedOverMap R a).map ((e U).hom.app (op L, M)) ≫\n          (s U V a).hom.app\n            (op ((localizationDerivedRestriction R U).obj L),\n              (localizationDerivedRestriction R U).obj M) ≫\n          (localizationRHom (R.over V)).map\n            (X := (op ((localizationDerivedOverMap R a).obj\n              ((localizationDerivedRestriction R U).obj L)),\n              (localizationDerivedOverMap R a).obj\n                ((localizationDerivedRestriction R U).obj M)))\n            (Y := (op ((localizationDerivedRestriction R V).obj L),\n              (localizationDerivedRestriction R V).obj M))\n            (((localizationRestrictionCompIso R a).inv.app L).op,\n              (localizationRestrictionCompIso R a).hom.app M) =\n        (localizationRestrictionCompIso R a).hom.app\n          ((localizationRHom R).obj (op L, M)) ≫ (e V).hom.app (op L, M)) ∧\n      ∀ (U V : C) (a : V ⟶ U)\n        (S : localizationModules (R.over U)) (T : localizationModules (R.over V))\n        (ξ : (moduleOverMap R a).obj S ≅ T)\n        (hS : KFlatRHom.flat (R.over U)\n          ((HomologicalComplex.single (localizationModules (R.over U)) (.up ℤ) 0).obj S))\n        (hT : KFlatRHom.flat (R.over V)\n          ((HomologicalComplex.single (localizationModules (R.over V)) (.up ℤ) 0).obj T))\n        (P : CochainComplex (localizationModules R) ℤ)\n        (hPU : KFlatRHom.flat (R.over U) ((localizationComplexRestriction R U).obj P))\n        (hPV : KFlatRHom.flat (R.over V) ((localizationComplexRestriction R V).obj P))\n        (N : localizationDerived R),\n          (localizationDerivedOverMap R a).map ((modelCurryIso R U S hS P hPU N).hom) ≫\n            (s U V a).hom.app\n              (op ((localizationQ (R.over U)).obj ((coefficientComplex R U S).obj P)),\n                (localizationDerivedRestriction R U).obj N) ≫\n            (localizationRHom (R.over V)).map\n              (X := (op ((localizationDerivedOverMap R a).obj\n                ((localizationQ (R.over U)).obj ((coefficientComplex R U S).obj P))),\n                (localizationDerivedOverMap R a).obj\n                  ((localizationDerivedRestriction R U).obj N)))\n              (Y := (op ((localizationQ (R.over V)).obj\n                ((coefficientComplex R V T).obj P)),\n                (localizationDerivedRestriction R V).obj N))\n              (((coefficientDerivedComplexIso R a S T ξ).inv.app P).op,\n                (localizationRestrictionCompIso R a).hom.app N) =\n          (s U V a).hom.app\n            (op (derivedCoefficient R U S),\n              (localizationRHom (R.over U)).obj\n                (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                  (localizationDerivedRestriction R U).obj N)) ≫\n            (localizationRHom (R.over V)).map\n              (X := (op ((localizationDerivedOverMap R a).obj\n                (derivedCoefficient R U S)),\n                (localizationDerivedOverMap R a).obj ((localizationRHom (R.over U)).obj\n                  (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R U).obj N))))\n              (Y := (op (derivedCoefficient R V T),\n                (localizationRHom (R.over V)).obj\n                  (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R V).obj N)))\n              ((derivedCoefficientIso R a S T ξ).inv.op,\n                (s U V a).hom.app\n                  (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R U).obj N) ≫\n                (localizationRHom (R.over V)).map\n                  (X := (op ((localizationDerivedOverMap R a).obj\n                    ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P))),\n                    (localizationDerivedOverMap R a).obj\n                      ((localizationDerivedRestriction R U).obj N)))\n                  (Y := (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)),\n                    (localizationDerivedRestriction R V).obj N))\n                  (((localizationRestrictionCompIso R a).inv.app ((localizationQ R).obj P)).op,\n                    (localizationRestrictionCompIso R a).hom.app N)) ≫\n            (modelCurryIso R V T hT P hPV N).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-weil-pbc-kflat-rhom-currying",
+  "lem-weil-pbc-ringed-model-currying",
+  "lem-weil-pbc-ringed-model-restriction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}

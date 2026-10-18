@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ringed-model-currying",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-localization-rhom-calculus",
+   "place": "Currying with a specified K-flat coefficient sheaf"
+  },
+  "same_as": []
+ },
+ "title": "Currying with a specified K-flat coefficient sheaf",
+ "statement": "Let (C,J) be a small site, R a sheaf of commutative rings, U an object, S an R_U-module sheaf whose single complex S[0] is K-flat, and P a complex of R-module sheaves with K-flat restriction to C/U [lem-weil-pbc-ringed-localization-complex-models]. For every unbounded derived N construct an evaluation-normalized isomorphism RHom(S[0],RHom(P|U,N|U))≅RHom(S tensor P|U,N|U), where the last tensor is the ordinary termwise tensor complex. It is the component of a single natural isomorphism on the full subcategory of complexes with K-flat restriction, paired with the derived target category. Thus it is natural in every chain map of those complexes and every derived target morphism. The construction is canonical K-flat currying [lem-weil-pbc-kflat-rhom-currying], transported by exact restriction and the single-total-tensor comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 0A90, 0A96, and the module-sheaf constructions 03CY, 03DH, 04IX."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-localization-complex-models",
+  "lem-weil-pbc-kflat-rhom-currying"
+ ],
+ "proof": [
+  {
+   "text": "Apply canonical K-flat currying to S[0], P|U and N|U. Transport the first restricted derived object through the exact restriction factorization, and the total tensor through the single-left-factor tensor isomorphism. These fixed maps define the claimed isomorphism without selecting an arbitrary witness.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-complex-models",
+    "lem-weil-pbc-kflat-rhom-currying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the comparison once as a natural isomorphism on complexes with K-flat restriction, paired with derived targets. Define each model comparison by component projection. Its naturality is then the naturality of this shared structure, with only the explicit functor-map equations unfolded. This avoids repeatedly unfolding the entire derived comparison term.",
+   "uses": [
+    "lem-weil-pbc-kflat-rhom-currying",
+    "lem-weil-pbc-ringed-localization-complex-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kflat-rhom-currying",
+  "lem-weil-pbc-ringed-localization-complex-models"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The indicated construction in the parent proof; direct formal implementation of its representative, evaluation, tensor, or sheafification comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"grep\", \"query\": \"homComplex.*[Tt]ensor|[Cc]urry.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Order/Hom/Basic.lean\", \"Mathlib/Analysis/Normed/Lp/PiLp.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"08a0d9c0ade7b00c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedInternalHom",
+   "results": "{\"t\": \"2026-10-18T06:29:59Z\", \"tool\": \"loogle\", \"query\": \"derivedInternalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'derivedInternalHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom tensor currying natural isomorphism on a ringed site",
+   "results": "{\"t\": \"2026-10-18T06:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom tensor currying natural isomorphism on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihom_map_val_app\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\"], \"digest\": \"5419e25f7759db13\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface; use the source-library constructions and prove the comparison explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom tensor currying is a natural isomorphism on K-flat complexes and an unbounded derived target",
+   "results": "{\"t\": \"2026-10-18T07:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom tensor currying is a natural isomorphism on K-flat complexes and an unbounded derived target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv\", \"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.MonoidalCategory.Functor.curriedTensorPreIsoPost\", \"CategoryTheory.internalizeHom\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"CategoryTheory.curryingIso\"], \"digest\": \"c16e4e3f05979d66\"}",
+   "date": "2026-10-18",
+   "verdict": "Abstract monoidal closed currying is present, but it does not identify this project’s concrete derived internal-Hom functor or its representative comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedModelCurrying",
+  "file": "lean/Sheaf/Paper/RingedModelCurrying.lean",
+  "declaration": "CategoryTheory.LocalizationRHom.modelCurryIso",
+  "declarations": [
+   "CategoryTheory.LocalizationRHom.derivedCoefficient",
+   "CategoryTheory.LocalizationRHom.coefficientComplex",
+   "CategoryTheory.LocalizationRHom.modelObjects",
+   "CategoryTheory.LocalizationRHom.modelRestrictedFlat",
+   "CategoryTheory.LocalizationRHom.modelCoefficientFlat",
+   "CategoryTheory.LocalizationRHom.modelInputs",
+   "CategoryTheory.LocalizationRHom.modelSource",
+   "CategoryTheory.LocalizationRHom.modelTarget",
+   "CategoryTheory.LocalizationRHom.modelCurryNatIso",
+   "CategoryTheory.LocalizationRHom.modelCurryIso",
+   "CategoryTheory.LocalizationRHom.modelCurryIso_natural"
+  ],
+  "statement": "def modelCurryIso (U : C) (S : localizationModules (R.over U))\n    (hS : KFlatRHom.flat (R.over U)\n      ((HomologicalComplex.single (localizationModules (R.over U)) (.up ℤ) 0).obj S))\n    (P : CochainComplex (localizationModules R) ℤ)\n    (hP : KFlatRHom.flat (R.over U) ((localizationComplexRestriction R U).obj P))\n    (N : localizationDerived R) :\n    (localizationRHom (R.over U)).obj\n      (op (derivedCoefficient R U S), (localizationRHom (R.over U)).obj\n        (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)),\n          (localizationDerivedRestriction R U).obj N)) ≅\n    (localizationRHom (R.over U)).obj\n      (op ((localizationQ (R.over U)).obj ((coefficientComplex R U S).obj P)),\n        (localizationDerivedRestriction R U).obj N)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-17569",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T101338-L-3972963",
+  "kind": "interface",
+  "note": "independent cc review: Main theorem signature byte-identical to the clone; moved model definitions textually identical in RingedLocalizationModels and publicly reexported; OpenRestrictionTensorNatural diff only drops private on 4 helpers; remaining sorry modelCurrying_restriction checked against its node and judged true (canonical modelCurryIso, ξ enters both transports consistently); 11 delivered modules plus 5 direct importers compile clean; axioms show sorryAx only through modelCurrying_restriction"
+ }
+}
