@@ -9,31 +9,12 @@ public import Sheaf.CategoryTheory.RingedKoszulSystem
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.TelescopeColimit
 
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.CategoryTheory.RingedKoszulColimitCech
+import Sheaf.CategoryTheory.RingedKoszulDualFlatTerms
+import Sheaf.CategoryTheory.RingedKoszulCechLocalModel
+import Sheaf.CategoryTheory.RingedCechNormalizedRestriction
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Extended Cech complex and the strict Koszul dual limit
@@ -152,6 +133,106 @@ structure RingedKoszulCechComparison where
         (targetRestriction V).hom
   empty_identity : r = 0 → ∀ E, IsIso (presentation.unit E)
 
+private theorem normalizedRestriction_injective
+    {A B : Type*} [Category A] [Category B]
+    (L : A ⥤ A) (R : A ⥤ B) (M : B ⥤ B)
+    (eta : ∀ E, E ⟶ L.obj E) (mu : ∀ E, E ⟶ M.obj E)
+    (h : ∀ E X, Function.Injective
+      (fun f : M.obj E ⟶ M.obj X ↦ mu E ≫ f))
+    (beta : L ⋙ R ≅ R ⋙ M)
+    (hnorm : ∀ E, R.map (eta E) ≫ beta.hom.app E = mu (R.obj E))
+    (E : A) (X : B) : Function.Injective
+      (fun f : R.obj (L.obj E) ⟶ M.obj X ↦ R.map (eta E) ≫ f) := by
+  intro f g hfg
+  apply (cancel_epi (beta.inv.app E)).1
+  apply h (R.obj E) X
+  have hm : mu (R.obj E) ≫ beta.inv.app E = R.map (eta E) := by
+    rw [← hnorm E]
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    exact Category.comp_id _
+  simpa only [← Category.assoc, hm] using hfg
+
+private theorem normalizedRestriction_coherence
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    (L : A ⥤ A) (M : B ⥤ B) (N : D ⥤ D)
+    (R : A ⥤ B) (S : A ⥤ D) (F : B ⥤ D) (rho : R ⋙ F ≅ S)
+    (eta : ∀ E, E ⟶ L.obj E) (mu : ∀ E, E ⟶ M.obj E)
+    (nu : ∀ E, E ⟶ N.obj E)
+    (hnat : ∀ E E' (f : E ⟶ E'), nu E ≫ N.map f = f ≫ nu E')
+    (beta : L ⋙ R ≅ R ⋙ M) (delta : L ⋙ S ≅ S ⋙ N)
+    (hb : ∀ E, R.map (eta E) ≫ beta.hom.app E = mu (R.obj E))
+    (hd : ∀ E, S.map (eta E) ≫ delta.hom.app E = nu (S.obj E))
+    (hi : ∀ E X, Function.Injective
+      (fun f : S.obj (L.obj E) ⟶ N.obj X ↦ S.map (eta E) ≫ f))
+    (gamma : M ⋙ F ≅ F ⋙ N)
+    (hg : ∀ E, F.map (mu E) ≫ gamma.hom.app E = nu (F.obj E)) :
+    Functor.whiskerRight beta.hom F ≫ Functor.whiskerLeft R gamma.hom ≫
+        Functor.whiskerRight rho.hom N =
+      Functor.whiskerLeft L rho.hom ≫ delta.hom := by
+  apply NatTrans.ext
+  funext E
+  change F.map (beta.hom.app E) ≫ gamma.hom.app (R.obj E) ≫
+      N.map (rho.hom.app E) = rho.hom.app (L.obj E) ≫ delta.hom.app E
+  apply (cancel_epi (rho.inv.app (L.obj E))).1
+  apply hi E (S.obj E)
+  have hr : S.map (eta E) ≫ rho.inv.app (L.obj E) =
+      rho.inv.app E ≫ F.map (R.map (eta E)) := rho.inv.naturality (eta E)
+  calc
+    S.map (eta E) ≫ rho.inv.app (L.obj E) ≫
+        F.map (beta.hom.app E) ≫ gamma.hom.app (R.obj E) ≫ N.map (rho.hom.app E) =
+        rho.inv.app E ≫ F.map (mu (R.obj E)) ≫
+          gamma.hom.app (R.obj E) ≫ N.map (rho.hom.app E) := by
+      rw [← Category.assoc, hr]
+      simp only [Category.assoc]
+      rw [← Category.assoc (F.map _) (F.map _), ← F.map_comp, hb]
+    _ = rho.inv.app E ≫ nu (F.obj (R.obj E)) ≫ N.map (rho.hom.app E) := by
+      rw [← Category.assoc (F.map _) _, hg]
+    _ = nu (S.obj E) := by
+      calc
+        _ = rho.inv.app E ≫ (rho.hom.app E ≫ nu (S.obj E)) := by
+          exact congrArg (fun f ↦ rho.inv.app E ≫ f) (hnat _ _ (rho.hom.app E))
+        _ = _ := by simp
+    _ = S.map (eta E) ≫ rho.inv.app (L.obj E) ≫
+        rho.hom.app (L.obj E) ≫ delta.hom.app E := by
+      simpa only [← Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using (hd E).symm
+
+private theorem normalizedTransport_unit
+    {A B : Type*} [Category A] [Category B]
+    (L M : A ⥤ A) (L' M' : B ⥤ B) (R : A ⥤ B)
+    (eta : ∀ E, E ⟶ L.obj E) (mu : ∀ E, E ⟶ M.obj E)
+    (eta' : ∀ E, E ⟶ L'.obj E) (mu' : ∀ E, E ⟶ M'.obj E)
+    (theta : L ≅ M) (theta' : L' ≅ M')
+    (ht : ∀ E, eta E ≫ theta.hom.app E = mu E)
+    (ht' : ∀ E, eta' E ≫ theta'.hom.app E = mu' E)
+    (sigma : L ⋙ R ≅ R ⋙ L')
+    (hs : ∀ E, R.map (eta E) ≫ sigma.hom.app E = eta' (R.obj E)) :
+    ∀ E, R.map (mu E) ≫
+      (Functor.isoWhiskerRight theta.symm R ≪≫ sigma ≪≫ Functor.isoWhiskerLeft R theta').hom.app E =
+        mu' (R.obj E) := by
+  intro E
+  have hi : mu E ≫ theta.inv.app E = eta E := by
+    rw [← ht E, Category.assoc, Iso.hom_inv_id_app]
+    exact Category.comp_id _
+  change R.map (mu E) ≫ (R.map (theta.inv.app E) ≫
+    (sigma.hom.app E ≫ theta'.hom.app (R.obj E))) = mu' (R.obj E)
+  rw [← Category.assoc, ← R.map_comp, hi, ← Category.assoc, hs, ht']
+
+private theorem normalizedModel_unique
+    {A : Type*} [Category A] (L M : A ⥤ A)
+    (eta : ∀ E, E ⟶ L.obj E) (mu : ∀ E, E ⟶ M.obj E)
+    (theta : L ≅ M) (ht : ∀ E, eta E ≫ theta.hom.app E = mu E)
+    (hi : ∀ E X, Function.Injective (fun f : M.obj E ⟶ M.obj X ↦ mu E ≫ f))
+    (theta' : L ≅ M) (ht' : ∀ E, eta E ≫ theta'.hom.app E = mu E) : theta' = theta := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext E
+  apply (cancel_epi (theta.inv.app E)).1
+  apply hi E E
+  have h : mu E ≫ theta.inv.app E = eta E := by
+    rw [← ht E, Category.assoc, Iso.hom_inv_id_app]
+    exact Category.comp_id _
+  simpa only [← Category.assoc, h] using (ht' E).trans (ht E).symm
+
 /-- The augmented extended Cech complex is the filtered colimit and homotopy colimit of
 its finite positive Koszul system; internal Hom from it is canonically the strict total
 derived inverse limit of tensor with its finite duals. The supplied normalized comparison
@@ -216,6 +297,84 @@ theorem ringed_cech_koszul_dual_limit :
         QuasiIso t) ∧
     (∀ m : ℕ, CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧
     Nonempty (RingedKoszulCechComparison O r b) := by
-  sorry
+  classical
+  obtain ⟨alpha, halpha⟩ := ringedKoszul_colimit_cech O r b
+  obtain ⟨t, ht, _, hqt⟩ :=
+    CochainComplex.quasiIso_telescopeColimit O (ringedKoszulDiagram O r b)
+  have hflat (m : ℕ) :
+      CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m)) := by
+    obtain ⟨hb, hf⟩ := ringedKoszulDual_flat_terms O r b m
+    exact CochainComplex.isKFlat_of_boundedAbove_flat _ ⟨0, hb⟩ hf
+  refine ⟨⟨alpha, halpha, t ≫ alpha.hom, ?_, ?_⟩, hflat, ?_⟩
+  · rw [← Category.assoc, ht]
+  · have : QuasiIso t := hqt
+    infer_instance
+  obtain ⟨D, theta, htheta, hfaith, hnat, hempty⟩ := ringedKoszul_cech_local_model O r b
+  choose Ds thetas hthetas hfaiths hnats hemptys using
+    (fun U : C ↦ ringedKoszul_cech_local_model (O.over U) r
+      (fun i ↦ ringedKoszulSliceSection O (b i) U))
+  obtain ⟨sigma, tau, hsigma, htau⟩ := ringedCech_normalized_restriction O r b
+  let beta (U : C) : D.completion ⋙ ringedDerivedRestriction O U ≅
+      ringedDerivedRestriction O U ⋙ (Ds U).completion :=
+    Functor.isoWhiskerRight theta.symm (ringedDerivedRestriction O U) ≪≫ sigma U ≪≫
+      Functor.isoWhiskerLeft (ringedDerivedRestriction O U) (thetas U)
+  have hbeta (U : C) : ∀ E,
+      (ringedDerivedRestriction O U).map (D.unit E) ≫ (beta U).hom.app E =
+        (Ds U).unit ((ringedDerivedRestriction O U).obj E) :=
+    normalizedTransport_unit _ _ _ _ _ _ _ _ _ theta (thetas U)
+      htheta (hthetas U) (sigma U) (hsigma U)
+  let gamma (U V : C) (f : V ⟶ U) :
+      (Ds U).completion ⋙ ringedKoszulDerivedOverMap O f ≅
+        ringedKoszulDerivedOverMap O f ⋙ (Ds V).completion :=
+    Functor.isoWhiskerRight (thetas U).symm (ringedKoszulDerivedOverMap O f) ≪≫ tau U V f ≪≫
+      Functor.isoWhiskerLeft (ringedKoszulDerivedOverMap O f) (thetas V)
+  have hgamma (U V : C) (f : V ⟶ U) : ∀ E,
+      (ringedKoszulDerivedOverMap O f).map ((Ds U).unit E) ≫
+          (gamma U V f).hom.app E = (Ds V).unit ((ringedKoszulDerivedOverMap O f).obj E) :=
+    normalizedTransport_unit _ _ _ _ _ _ _ _ _ (thetas U) (thetas V)
+      (hthetas U) (hthetas V) (tau U V f) (htau U V f)
+  have hinj (U : C) := normalizedRestriction_injective _ _ _ D.unit (Ds U).unit
+    (hfaiths U) (beta U) (hbeta U)
+  have hcoherence := fun U V F rho gamma' hgamma' ↦
+    normalizedRestriction_coherence D.completion (Ds U).completion (Ds V).completion
+      (ringedDerivedRestriction O U) (ringedDerivedRestriction O V) F rho D.unit
+      (Ds U).unit (Ds V).unit (hnats V) (beta U) (beta V) (hbeta U) (hbeta V)
+      (hinj V) gamma' hgamma'
+  refine ⟨{
+    presentation := D
+    theta := theta
+    unit := htheta
+    theta_unique := normalizedModel_unique _ _ _ _ theta htheta hfaith
+    slicePresentation := Ds
+    sliceTheta := thetas
+    slice_unit := hthetas
+    sourceRestriction := sigma
+    targetRestriction := beta
+    source_unit := hsigma
+    target_unit := hbeta
+    restriction_square := ?_
+    target_unique := ?_
+    target_coherence := hcoherence
+    furtherTarget := gamma
+    further_unit := hgamma
+    further_coherence := ?_
+    empty_identity := hempty }⟩
+  · intro U
+    apply NatTrans.ext
+    funext E
+    change (ringedDerivedRestriction O U).map (theta.hom.app E) ≫
+        ((ringedDerivedRestriction O U).map (theta.inv.app E) ≫
+          ((sigma U).hom.app E ≫ (thetas U).hom.app _)) = _
+    rw [← Category.assoc, ← Functor.map_comp]
+    simp
+  · intro U beta' hb'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext E
+    apply hinj U E ((ringedDerivedRestriction O U).obj E)
+    exact (hb' E).trans (hbeta U E).symm
+  · intro U V f
+    exact hcoherence U V _ (ringedKoszulDerivedOverComparison O f) (gamma U V f)
+      (hgamma U V f)
 
 end CategoryTheory
