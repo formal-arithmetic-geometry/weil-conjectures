@@ -4392,6 +4392,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.CompactLatticeBasis
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDualityFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
@@ -4404,6 +4405,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicEtale
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicEtaleEquiv
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
