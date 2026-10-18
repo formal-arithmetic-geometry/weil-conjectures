@@ -16333,3 +16333,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 16:26 L: batch 20261018T071125 dependency take-out
 - 08:28 L: returned deliver/J4/Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization (reviewer RETURN: (reviewer C-30a0f, head 30a0f75ae) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
+- 08:35 L: returned deliver/G2/Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction (reviewer RETURN: (reviewer C-e16b2, head e16b2ff48) H9 (brief point 5, unused import): in lean/Sheaf/Paper/DerivedScalarExtensionRestrict)
