@@ -136,5 +136,24 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-17c10b4b8 (reviewer sub-agent of L); spot-checked: Read the item, report, chapter/unit route, current blueprint proof, and every cited node/source. The finite-map transport proof is correct with the stated coefficient category, properness, compact-support composition, and exact finite direct image. Edge cases and duplicate/generalization checks pass; no SGA citations or target weakening. Wrote review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cc9566a9",
+  "group": "Q76",
+  "result": "fix",
+  "note": "H3: the delivered statement gave only the degreewise H_c^i Frobenius equivalence and dropped the node's main clause RΓ_c(C,F) ≃ RΓ_c(A1,g_*j_!F), although the project has it (WeilComplex.derivedLowerShriek along the structure morphism, the object compactlySupportedCohomology is defined from, and the upstream proof in FiniteMap.lean builds this iso). fixes/Composition.lean adds the conjunct Nonempty((derivedLowerShriek k0 l (C0 ↘ Spec k0)).obj (toComplex.obj F) ≅ (derivedLowerShriek k0 l (affineLine k0 ↘ Spec k0)).obj (toComplex.obj ((lowerStar g).obj ((extensionByZero j).obj F)))) before the unchanged ∀ i clause, plus `attribute [local instance 1100] CategoryTheory.instOverClass` (side-framework idiom) and an updated docstring; the record statement is refit by merge_delivery. The report fix keeps both sections and adds a fix note. All hypotheses match the node and none is stronger (curves, dense open j with finite complement, finite generically étale g, lisse punctually pure F; ι a ring hom, weaker than the node's iso). Objects are the published lowerStar/extensionByZero/compactlySupportedCohomology (= .2 of the recorded ordinaryCompactWeilSheafCohomology). The node differs from main only in lean; no definitions; docstrings carry source and blueprint; proof sorry only. nt_compile: delivered rc 0 7.1 s clean; fixed rc 0 6.7 s clean."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.Reduction.Composition",
+  "declaration": "AlgebraicGeometry.WeilSheaf.reductionComposition",
+  "file": "lean/Sheaf/DeligneLaumon/Reduction/Composition.lean",
+  "statement": "theorem reductionComposition {C₀ C'₀ : Scheme.{u}} [C₀.Over (Spec (CommRingCat.of k₀))] [C'₀.Over (Spec (CommRingCat.of k₀))] [IsSeparated (C₀ ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (C₀ ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (C₀ ↘ Spec (CommRingCat.of k₀))] [IsSeparated (C'₀ ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (C'₀ ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (C'₀ ↘ Spec (CommRingCat.of k₀))] [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (CommRingCat.of k₀))] [GeometricallyConnected (C₀ ↘ Spec (CommRingCat.of k₀))] [IsAffine C₀] [SmoothOfRelativeDimension 1 (C'₀ ↘ Spec (CommRingCat.of k₀))] [GeometricallyConnected (C'₀ ↘ Spec (CommRingCat.of k₀))] (j : C₀ ⟶ C'₀) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (_hj : DenseRange j.base) (_hboundary : (Set.range j.base)ᶜ.Finite) (g : C'₀ ⟶ affineLine k₀) [g.IsOver (Spec (CommRingCat.of k₀))] [IsFinite g] (_hgen : ∃ U : C'₀.Opens, Dense (U : Set C'₀) ∧ Etale (U.ι ≫ g)) (ι : PadicAlgCl l →+* ℂ) (w : ℝ) (F : WeilSheaf k₀ l C₀) (_hF : F.IsLisse) (_hpure : F.IsPunctuallyPureOfWeight ι w) : Nonempty ((WeilComplex.derivedLowerShriek k₀ l (C₀ ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F) ≅ (WeilComplex.derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj ((lowerStar g).obj ((extensionByZero j).obj F)))) ∧ ∀ i : ℤ, Nonempty ((F.compactlySupportedCohomology i).Equiv (((lowerStar g).obj ((extensionByZero j).obj F)).compactlySupportedCohomology i))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3cc9566a9"
  }
 }

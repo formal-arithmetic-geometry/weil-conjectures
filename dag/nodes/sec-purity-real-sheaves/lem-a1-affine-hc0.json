@@ -16,7 +16,8 @@
   "def-weil-ordinary-compact-cohomology",
   "def-weil-weil-sheaf-complex",
   "def-pod-lisse-l-adic-sheaves",
-  "d-real-setup"
+  "d-real-setup",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -238,20 +239,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-246b2c54f (reviewer sub-agent of L); spot-checked: Full source, DAG, route, hypothesis, coefficient-model, edge-case, duplicate, and cycle checks passed. Review written to review.md; no repairs needed."
  },
  "lean": {
-  "module": "WeilConjectures.WeilSheaf.Curve",
-  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero",
-  "statement": "theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]\n    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]\n    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)\n    (hF : F.IsLisse) :\n    Subsingleton (F.compactlySupportedCohomology 0).carrier :=",
-  "branch": "slopmaster2",
-  "by": "Q44",
+  "module": "Sheaf.Paper.AffineCurveHcZero",
+  "declaration": "RealSheaves.Setup.subsingleton_affineCurveHcZero",
+  "declarations": [
+   "RealSheaves.Setup.cohomologyFieldDatum",
+   "RealSheaves.Setup.geometricCurveLocallyOfFiniteType",
+   "RealSheaves.Setup.geometricCurveQuasiCompact",
+   "RealSheaves.Setup.geometricCurveIsSeparated",
+   "RealSheaves.Setup.subsingleton_affineCurveHcZero"
+  ],
+  "file": "lean/Sheaf/Paper/AffineCurveHcZero.lean",
+  "statement": "theorem Setup.subsingleton_affineCurveHcZero (S : Setup.{u, u}) (U₀ : Over (Spec (.of S.k₀))) [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] [IsSeparated U₀.hom] [IsAffine U₀.left] (hU : S.IsCurve U₀.left) (F : WeilConjectures.sfCommonStageWeilSheaf S.cohomologyFieldDatum S.l S.l_ne_p U₀ S.Qbar) (hF : WeilConjectures.HasCommonStageLisseLattice S.l S.Qbar (S.cohomologyFieldDatum.geometricFiber U₀).left ((WeilConjectures.sfCommonStageWeilForget S.cohomologyFieldDatum S.l S.l_ne_p U₀ S.Qbar).obj F.obj)) (c : Compactification (S.cohomologyFieldDatum.geometricFiber U₀).hom) : Subsingleton ((WeilConjectures.qbarWeilSheafCohomology S.cohomologyFieldDatum S.l S.l_ne_p S.Qbar U₀ c F 0).2)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
   "date": "2026-10-18",
-  "existing": true
+  "existing": false,
+  "note": "Uses the recorded qbarWeilSheafCohomology and fixed-pair Weil sheaf, rather than the older upstream derived-of-Weil-sheaves model. The field-datum conversion preserves all chosen fields; the three instance helpers expose standard pullback properties only."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b466d801d",
-  "group": "Q44",
+  "reviewer": "NT-stage2-cc-8e51b9f93",
+  "group": "Q95",
   "result": "pass",
-  "note": "Existing-record delivery: only lean changed. It binds the upstream AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero (WeilConjectures.WeilSheaf.Curve; statement verbatim up to ':='). Every clause matches node lem-a1-affine-hc0 and the blueprint source (order 2659): finite k0 with ringChar != l prime; separated, finite type, SmoothOfRelativeDimension 1, GeometricallyConnected, IsAffine U; F : WeilSheaf k0 l U with IsLisse (pro-etale locally Qbar_l^n); H_c^0 = F.compactlySupportedCohomology 0, which is .2 of the recorded Q43 dependency ordinaryCompactWeilSheafCohomology; '= 0' as Subsingleton carrier. No extra hypotheses or universe restriction; edge cases (zero sheaf, proper case excluded by affine, any p != l) fine. Upstream WeilSheaf/IsLisse are forced by the recorded cohomology interface and agree with the node's notions; no duplicate in lean/Sheaf. nt_compile.py rejects files outside the side tree, so the check was run with lcompile.py against the live build: exit 0, signature matches exactly, axioms include sorryAx (acceptable at stage 2). Report has Worker report and the standard Second reading note. Non-blocking: the report's list of consulted dependency declarations is inaccurate."
+  "note": "Read node, 5 stmt_deps incl. new def-a1-common-stage-lisse-lattice, both modules, report (Worker report + Second reading by Q95), RealSheavesSetup/OrdinaryCompactCohomology/SfWeilSheafComplex/LocallyFree declarations. Clauses match: IsCurve (nonempty, separated, smooth, finite type, pure dim 1, geometrically connected) + IsAffine; F = recorded sfCommonStageWeilSheaf; conclusion = compact (.2) component of qbarWeilSheafCohomology in degree 0, for every compactification. rfl-verified that IsCurve's structure morphism is U0.hom and that cohomologyFieldDatum.geometricFiber U0 = S.geometricCurve U0.left. The new lisse predicate (finite locally free O^_E lattice in degree 0, rationalized, iso in the common-stage category) matches the global-lattice def-pod notion via BS 6.8.4; it is not stronger, needs no Frobenius-stable lattice, allows rank 0; no duplicate predicate found. Setup.{u,u} is forced by the cohomology API (Omega : Type u) and documented. No hollow definitions; only the theorem is sorry; docstrings OK; statements verbatim; node diff only lean + stmt_dep. nt_compile --json: rc 0, no errors or warnings (2.7 s / 3.9 s). Observation: the dependency's main record is now Q43's upstream-WeilSheaf cohomology; this item correctly uses the still-imported qbarWeilSheafCohomology consistent with sfCommonStageWeilSheaf."
  }
 }

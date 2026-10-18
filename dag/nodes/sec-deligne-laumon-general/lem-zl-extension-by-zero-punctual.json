@@ -16,7 +16,10 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-integral-rational-qbar-compact-support",
   "lem-per-adic-heart-pullback-fibres",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-weil-compact-support-cohomology",
+  "def-pur-completed-coefficient-presentation-transport"
  ],
  "proof": [
   {
@@ -306,5 +309,38 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-025fb935a (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, report, all cited node statements, and cited Stacks/Bhatt–Scholze sources. Seven proof steps are valid, hypotheses and coefficient categories match, Frobenius is correctly restricted to closed points, edge cases were checked, no forbidden route machinery or duplicate/new-node faults found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExtensionByZeroPunctual",
+  "declaration": "WeilConjectures.extensionByZero_punctual",
+  "declarations": [
+   "WeilConjectures.zlOpen_quasiCompact",
+   "WeilConjectures.zlOpenFiber_isOpenImmersion",
+   "WeilConjectures.zlOpenWeilPull_isRightAdjoint",
+   "WeilConjectures.zlOpenWeilShriek",
+   "WeilConjectures.zlWeilHeartCarrier",
+   "WeilConjectures.zlFiniteWeilHeartCarrier",
+   "WeilConjectures.zlWeilStageSquare_naturality",
+   "WeilConjectures.zlWeilStageSquare",
+   "WeilConjectures.zlWeilHeartStage_mem",
+   "WeilConjectures.zlWeilHeartStage",
+   "WeilConjectures.zlClosedCoefficientFiber",
+   "WeilConjectures.ZlPunctualUpperBound",
+   "WeilConjectures.extensionByZero_punctual"
+  ],
+  "file": "lean/Sheaf/Paper/ExtensionByZeroPunctual.lean",
+  "statement": "theorem extensionByZero_punctual (iota : Qbar ≃+* ℂ) : (zlOpenWeilShriek D l hl Qbar j₀).Additive ∧ PreservesFiniteLimits (zlOpenWeilShriek D l hl Qbar j₀) ∧ PreservesFiniteColimits (zlOpenWeilShriek D l hl Qbar j₀) ∧ (∀ (F : sfCommonStageWeilSheaf D l hl U₀ Qbar) (L : Padic.FiniteCoefficientFields l Qbar) (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) (D.geometricFiber U₀).left), Nonempty (F.obj.carrier ≅ (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj ((sfRationalConstructibleLocalization l _ (D.geometricFiber U₀).left).obj K)) → Nonempty (((zlOpenWeilShriek D l hl Qbar j₀).obj F).obj.carrier ≅ sfQbarCompactSupportValue l (X := (D.geometricFiber U₀).left) (Y := (D.geometricFiber X₀).left) (f := zlFiberMap D j₀) D.k (zlClosurePrimeUnit D l hl) Qbar (Compactification.ofIsOpenImmersion (zlFiberMap D j₀)) L K)) ∧ (∃ (FU : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], (Spec (.of Ω) ⟶ (D.geometricFiber U₀).left) → (generalAlgebraicallyClosedConstructibleCategory l Qbar (D.geometricFiber U₀).left ⥤ ModuleCat.{max (u + 1) v} Qbar)) (FX : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], (Spec (.of Ω) ⟶ (D.geometricFiber X₀).left) → (generalAlgebraicallyClosedConstructibleCategory l Qbar (D.geometricFiber X₀).left ⥤ ModuleCat.{max (u + 1) v} Qbar)), (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left), SfAdicCommonFiberSpec l (D.geometricFiber U₀).left x Qbar (FU Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber X₀).left), SfAdicCommonFiberSpec l (D.geometricFiber X₀).left x Qbar (FX Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left), Nonempty (zlOpenWeilShriek D l hl Qbar j₀ ⋙ zlWeilHeartCarrier D l hl Qbar X₀ ⋙ FX Ω (x ≫ zlFiberMap D j₀) ≅ zlWeilHeartCarrier D l hl Qbar U₀ ⋙ FU Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber X₀).left), Set.range x.base ⊆ (Set.range (zlFiberMap D j₀).base)ᶜ → ∀ F : sfCommonStageWeilSheaf D l hl U₀ Qbar, IsZero ((FX Ω x).obj (((zlOpenWeilShriek D l hl Qbar j₀).obj F).obj.carrier)))) ∧ (∀ L : Padic.FiniteCoefficientFields l Qbar, ∃ J : sfWeilSheaf D l hl U₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) ⥤ sfWeilSheaf D l hl X₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L), Nonempty (J ⋙ zlFiniteWeilHeartCarrier D l hl _ X₀ ≅ zlFiniteWeilHeartCarrier D l hl _ U₀ ⋙ sfCompactSupportFiniteFunctor l (X := (D.geometricFiber U₀).left) (Y := (D.geometricFiber X₀).left) (f := zlFiberMap D j₀) D.k (zlClosurePrimeUnit D l hl) (Compactification.ofIsOpenImmersion (zlFiberMap D j₀)) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L)) ∧ Nonempty (zlWeilHeartStage D l hl Qbar U₀ L ⋙ zlOpenWeilShriek D l hl Qbar j₀ ≅ J ⋙ zlWeilHeartStage D l hl Qbar X₀ L) ∧ ∀ (u : {u : U₀.left // u ∈ closedPoints U₀.left}) (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (ιU : U₀.left.residueField u.val →+* D.k) (hU : ιU.comp (U₀.hom.residueFieldAlgebraMap u.val) = algebraMap D.k₀ D.k) (ιX : X₀.left.residueField x.val →+* D.k) (hX : ιX.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k), j₀.left.base u.val = x.val → localClosedPoint D U₀ u ιU hU ≫ zlFiberMap D j₀ = localClosedPoint D X₀ x ιX hX → ∃ e : J ⋙ zlClosedCoefficientFiber D l hl _ X₀ x ιX hX ≅ zlClosedCoefficientFiber D l hl _ U₀ u ιU hU, ∀ K : sfWeilSheaf D l hl U₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L), localClosedFrobeniusCohomology l _ D hl X₀ (J.obj K).obj x ιX hX 0 ≫ e.hom.app K = e.hom.app K ≫ localClosedFrobeniusCohomology l _ D hl U₀ K.obj u ιU hU 0) ∧ (∀ (w : ℝ) (F : sfCommonStageWeilSheaf D l hl U₀ Qbar), (ZlPunctualUpperBound D l hl Qbar U₀ iota F w → ZlPunctualUpperBound D l hl Qbar X₀ iota ((zlOpenWeilShriek D l hl Qbar j₀).obj F) w) ∧ (SfIsPunctuallyPureOfWeight D l hl Qbar U₀ iota F w → SfIsPunctuallyPureOfWeight D l hl Qbar X₀ iota ((zlOpenWeilShriek D l hl Qbar j₀).obj F) w))",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f5d8924d",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Read the node, the dependency nodes, the report and all three delivered modules, plus the live declarations they use. Hypotheses match the node (separated finite-type k0-schemes, open immersion j0, l != p, Qbar with iota); quasi-compactness of j0 is derived, and no properness, Noetherian or universe restriction is added. j_! is the left adjoint of the recorded zlWeilPull on the sfCommonStageWeilSheaf hearts: canonical, not hollow, mathematically j_!. Conclusions present: exactness (additive, finite limits, finite colimits); carrier iso with sfQbarCompactSupportValue for (j,id) plus a natural finite-stage comparison with sfCompactSupportFiniteFunctor; natural fibre iso inside U and zero fibre outside U at every geometric point; natural closed-fibre iso intertwining localClosedFrobeniusCohomology at closed points of U0; preservation of upper bounds and purity for all real w with q_x = card of the residue field. Edge cases (empty U, identity immersion, zero sheaf, any w, eigenvalues outside the field of definition) are covered. Section 1(B) repairs are justified: the punctual-weights node is re-pointed from the old WeilSheaf predicates to the recorded heart and its definitions match the node; the adic-fibre node's new module re-exports the original, repeats its twelve clauses verbatim and adds the intrinsic fibre via purCoefficientModel. Item changes only in lean and stmt_deps (three landed nodes added, as the brief allows); statements verbatim; new names unique; docstrings, sorry-only proofs, imports and line lengths conform. nt_compile.py on the three snapshot files: clean, 4.3/3.6/11.2 s, reproduced twice. Minor notes only: landed citers still use the old upstream weight predicates (a stage-3 bridge); the Frobenius clause is stated on the recorded local-Frobenius fibre, which is where that operator lives."
  }
 }

@@ -1,0 +1,112 @@
+{
+ "id": "def-a1-common-stage-lisse-lattice",
+ "kind": "definition",
+ "title": "Integral lisse-lattice realization in the common-stage coefficient category",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, let $\\Omega$ be an algebraic closure of $\\mathbf Q_\\ell$, and let $X$ be a scheme. Use the coefficient extensions [def-weil-l-adic-coefficient-extension], completed coefficient modules [def-weil-completed-integral-coefficients] and [def-weil-sheaf-of-modules-category], integral constructible category [def-weil-derived-complete-integral-detailed], raw rationalization [def-weil-rationalization-karoubi] and common-stage category [def-weil-algebraically-closed-coefficients]. An object $K$ of the latter category has an integral lisse-lattice realization if there exist a finite coefficient stage $E\\subset\\Omega$, an integral constructible object $M$, and a finite locally free module $N$ over the completed $\\mathcal O_E$ coefficient sheaf, such that $M\\cong N[0]$ in the completed integral derived category and $K$ is isomorphic to the image of $M$ under rationalization and common-stage inclusion. Finite locally free allows zero and varying finite local ranks. This is the completed-coefficient presentation of an integral lattice in a lisse adic sheaf [def-pod-lisse-l-adic-sheaves]; it does not require that the lattice be preserved by an additional Weil structure.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3; Proposition 6.8.4(1),(4); for the smooth normal curve application, Lemma 7.4.10 and Remark 7.4.8. Weil II (1.1.1) b)--d) gives the original inverse-system convention."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraically closed ell-adic constructible derived object is lisse if it is the rationalization of a finite locally free completed integral module in degree zero",
+   "results": "BDeRham, BDeRhamPlus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree, CondensedMod.IsSolid, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, Condensed.profiniteSolid",
+   "date": "2026-10-17",
+   "verdict": "No exact common-stage lisse-lattice predicate; hits are general module-sheaf or condensed-coefficient infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFree",
+   "results": "; loogle: unknown identifier 'SheafOfModules.IsFiniteLocallyFree'",
+   "date": "2026-10-17",
+   "verdict": "No exact common-stage lisse-lattice predicate; hits are general module-sheaf or condensed-coefficient infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfLisse|sfLisse|IsLisseCommonStage",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "No exact common-stage lisse-lattice predicate; hits are general module-sheaf or condensed-coefficient infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse algebraic ell-adic sheaf is the common finite coefficient stage image of an integral finite locally free completed module in degree zero",
+   "results": "SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, ModuleCat.tildeInModuleCat, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.ιFree",
+   "date": "2026-10-18",
+   "verdict": "No exact common-stage lisse-lattice predicate; hits are general module-sheaf or condensed-coefficient infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsCommonStageLisse|sfLisse|lisse.*commonStage|commonStage.*lisse in Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search lisse; rg common.stage.*lisse|lisse.*common.stage dag/nodes",
+   "results": "No predicate of a generalAlgebraicallyClosedConstructibleCategory object with a completed finite locally free integral lattice. Related nodes: def-pod-lisse-l-adic-sheaves (inverse systems), def-weil-pbc-adic-lisse-module (modules over a completed ring), lem-tw-lisse-rational-realization (comparison statement, no Lean record), lem-per-adic-lisse-cohomology-calculus (realization comparison), def-wf-middle-extension (curve-specific ordinary pushforward).",
+   "date": "2026-10-18",
+   "verdict": "Missing interface between existing notions; no duplicate definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-hc0",
+  "date": "2026-10-18",
+  "group": "Q95"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Statement: the lisse hypothesis, interpreted in the recorded completed/rationalized common-stage cohomology model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageLisse",
+  "declaration": "WeilConjectures.HasCommonStageLisseLattice",
+  "file": "lean/Sheaf/Paper/CommonStageLisse.lean",
+  "statement": "def HasCommonStageLisseLattice (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : Scheme.{u}) (K : generalAlgebraicallyClosedConstructibleCategory l Ω X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e51b9f93",
+  "group": "Q95",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e51b9f93",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps incl. new def-a1-common-stage-lisse-lattice, both modules, report (Worker report + Second reading by Q95), RealSheavesSetup/OrdinaryCompactCohomology/SfWeilSheafComplex/LocallyFree declarations. Clauses match: IsCurve (nonempty, separated, smooth, finite type, pure dim 1, geometrically connected) + IsAffine; F = recorded sfCommonStageWeilSheaf; conclusion = compact (.2) component of qbarWeilSheafCohomology in degree 0, for every compactification. rfl-verified that IsCurve's structure morphism is U0.hom and that cohomologyFieldDatum.geometricFiber U0 = S.geometricCurve U0.left. The new lisse predicate (finite locally free O^_E lattice in degree 0, rationalized, iso in the common-stage category) matches the global-lattice def-pod notion via BS 6.8.4; it is not stronger, needs no Frobenius-stable lattice, allows rank 0; no duplicate predicate found. Setup.{u,u} is forced by the cohomology API (Omega : Type u) and documented. No hollow definitions; only the theorem is sorry; docstrings OK; statements verbatim; node diff only lean + stmt_dep. nt_compile --json: rc 0, no errors or warnings (2.7 s / 3.9 s). Observation: the dependency's main record is now Q43's upstream-WeilSheaf cohomology; this item correctly uses the still-imported qbarWeilSheafCohomology consistent with sfCommonStageWeilSheaf."
+ }
+}
