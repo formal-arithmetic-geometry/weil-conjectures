@@ -13,9 +13,115 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the affine Noetherian-space lemma, $|X|$ is Noetherian, since $\\Gamma(X,\\mathcal O_X)=A$. The compact-subsets lemma therefore makes $U$ and every $U\\cap V$ quasi-compact, for every open $V\\subseteq X$. In particular $U$ is retrocompact and its inclusion $j:U\\hookrightarrow X$ is quasi-compact: the inverse image of an affine open $V$ is $U\\cap V$. The diagonal $U\\to U\\times_XU$ is an isomorphism, since an open inclusion is a monomorphism. An isomorphism preserves quasi-compactness of opens, so this diagonal is quasi-compact and $j$ is quasi-separated.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N9, quasi-compactness hypothesis and the application of Tag 01LC; Algebra Tag 00FQ (lemma-Noetherian-topology), Topology Tag 04ZA (lemma-Noetherian-quasi-compact)"
+   }
+  },
+  {
+   "text": "For $x=\\mathfrak p\\in X$, clause (1) of the affine-stalk localization lemma identifies $\\mathcal O_{X,x}$ with $A_{\\mathfrak p}$. This ring is Noetherian directly from the definition: given an ideal $J\\subseteq A_{\\mathfrak p}$, let $I=\\{a\\in A:a/1\\in J\\}$. Choose finite generators $a_1,\\ldots,a_r$ of $I$. For $a/s\\in J$, the unit $s/1$ gives $a/1\\in J$, so $a\\in I$; writing $a=\\sum_i b_ia_i$ gives $a/s=\\sum_i(b_i/s)(a_i/1)$. Thus $a_i/1$ generate $J$.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), localization argument in the first sentence of proof; applied to the stalks in Tag 09N9"
+   }
+  },
+  {
+   "text": "The stalk-dimension lemma expresses $\\dim\\mathcal O_{X,x}$ as the supremum of lengths of chains $\\overline{\\{x\\}}=Z_0\\subsetneq\\cdots\\subsetneq Z_n$ of irreducible closed subsets of $X$. Every such chain is among the chains defining $\\dim X$. Therefore $\\dim\\mathcal O_{X,x}\\leq\\dim X\\leq1$ for every $x\\in X$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ (lemma-codimension-local-ring); comparison of the two chain suprema supplies the local-dimension hypothesis of Tag 09N9"
+   }
+  },
+  {
+   "text": "Fix an arbitrary quasi-coherent $\\mathcal O_U$-module $\\mathcal F$. The retrocompactness established in Step 1 and the local-ring conclusions of Steps 2 and 3 verify every hypothesis of the retrocompact-open higher-direct-image vanishing lemma. Applying it gives $R^qj_*\\mathcal F=0$ for every $q>0$.",
+   "uses": [
+    "lem-a1-open-dimension-one-higher-image-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N9, first application in its proof: Tag 09N8 (lemma-affine)"
+   }
+  },
+  {
+   "text": "Since $j$ is quasi-compact and quasi-separated by Step 1, the quasi-coherent pushforward theorem makes $j_*\\mathcal F$ quasi-coherent on $X$. The affine vanishing theorem, applied to the affine open $X\\subseteq X$ and the module $j_*\\mathcal F$, gives $H^p(X,j_*\\mathcal F)=0$ for all $p>0$.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N9, the applications of Schemes Tag 01LC (lemma-push-forward-quasi-coherent) and Cohomology of Schemes Tag 01XB (lemma-quasi-coherent-affine-cohomology-zero)"
+   }
+  },
+  {
+   "text": "Apply the acyclic-pushforward Leray comparison with $p=j:U\\to X$, $f=\\mathrm{id}_X:X\\to X$, and coefficient module $\\mathcal F$. Step 4 supplies its hypothesis that all positive higher direct images vanish. It gives $H^p(U,\\mathcal F)\\cong H^p(X,j_*\\mathcal F)$ in every degree. Step 5 therefore gives $H^p(U,\\mathcal F)=0$ for every $p>0$.",
+   "uses": [
+    "lem-pc-m1-leray-acyclic-pushforward-linear-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F4 (lemma-apply-Leray), part (1), exactly as used in Tag 09N9"
+   }
+  },
+  {
+   "text": "In particular, take $\\mathcal F=\\mathcal I$ for each quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_U$ in Step 6 to obtain $H^1(U,\\mathcal I)=0$. Since $U$ is quasi-compact by Step 1, the quasi-compact $H^1$ affineness criterion applies and proves that $U$ is affine. No step assumes that $U$ is nonempty; thus this includes the empty open.",
+   "uses": [
+    "lem-pqf-quasicompact-h1-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XF (lemma-quasi-compact-h1-zero-covering), used at the end of Tag 09N9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-a1-open-dimension-one-higher-image-vanishing",
+  "pqf-lem-pushforward-qcoh",
+  "pqf-lem-affine-vanishing",
+  "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+  "lem-pqf-quasicompact-h1-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09N9, lemma-open-in-affine-curve-affine, proof at lines 7778-7794; Noetherian affine specialization, with its local-ring and quasi-compactness hypotheses verified explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +164,24 @@
    "results": "9 hits; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; logged digest 99de9f0318a70f60",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffine.*(krull|[dD]im)|([kK]rull|[dD]im).*IsAffine|09N9",
+   "results": "9 hits; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; logged digest 99de9f0318a70f60",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every open subscheme of a Noetherian affine scheme of Krull dimension at most one is affine",
+   "results": "8 hits; AlgebraicGeometry.instIsAffineToSchemeValOpensMemSetAffineOpens; AlgebraicGeometry.noetherianSpace_of_isAffineOpen; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.instIsLocallyNoetherianToScheme; AlgebraicGeometry.IsNoetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.noetherianSpace_of_isAffine; logged digest 2fece6a5d035beb6",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-middle-extension-endpoints",
@@ -78,5 +198,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-curve-open-affine",
+  "worker": "stage1",
+  "summary": "Verified the unchanged Noetherian affine specialization of Stacks 09N9, including the empty open. Seven steps explicitly check retrocompactness, quasi-separatedness, Noetherian stalks, and local dimension, then use 09N8, quasi-coherent pushforward, affine vanishing, Leray and Serre. Reused all matching DAG tools; added only the statement-only 09N8 higher-direct-image lemma, which does not assert affineness. Searches found no exact project attachment or Mathlib match.",
+  "blueprint": "Realizes the opening-paragraph assertion in lem-a1-middle-extension-endpoints that removing finitely many closed points from an affine curve leaves an affine open. This item proves the general Noetherian dimension-at-most-one fact used there, along Stacks 09N9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Clause (1) identifies affine stalks with prime localizations, independently of any domain hypothesis. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic qcqs quasi-coherent pushforward theorem, Stacks 01LC. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic affine quasi-coherent cohomology vanishing, Stacks 01XB. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+    "why": "Generic scheme-module Leray comparison, Stacks 01F4(1), used with the auxiliary map identity on X. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-pqf-quasicompact-h1-zero",
+    "why": "Generic quasi-compact Serre criterion, Stacks 01XF. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Generic affine Noetherian topology theorem. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic compactness theorem for all subsets of a Noetherian space. The endpoints unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Generic local dimension and codimension comparison via chains of irreducible closed subsets. The endpoints unit supplies no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "pqf-lem-pushforward-qcoh",
+  "pqf-lem-affine-vanishing",
+  "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+  "lem-pqf-quasicompact-h1-zero",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-5c15b6de5",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-5c15b6de5 (reviewer sub-agent of L); spot-checked: Read both nodes fully; checked all seven steps against Stacks 09N8/09N9 and supporting sources, hypotheses, edge cases, duplicates, and generic tools. Corrected one invalid Loogle query’s verdict from no match to unavailable. Review and whole corrected JSON written. Snapshot lacks the route-pivot list/history; that verification limitation is documented.; 1 file(s) fixed by the reviewer"
  }
 }
