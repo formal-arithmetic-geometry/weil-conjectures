@@ -1,0 +1,110 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-profinite-stable-lattice",
+   "place": "split algebraic construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, pp. 2-3"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ProfiniteStableLattice",
+  "date": "2026-10-18",
+  "group": "J3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite stable lattice compact group representation DVR",
+   "results": "8 hits: Valued.integer.isDiscreteValuationRing_of_compactSpace, Valued.integer.locallyFiniteOrder_units_mrange_of_isCompact_integer, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField, IsNonarchimedeanLocalField.instCompactSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation, DivisionRing.finite_of_compactSpace_of_t2Space, Valued.integer.totallyBounded_iff_finite_residueField, Valued.integer.properSpace_iff_compactSpace_integer, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for the complete statement; hits are relevant component lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.FG Module.Free",
+   "results": "12 hits: Submodule.fg_iff_addSubmonoid_fg, Module.Finite.fg_top, Module.Finite.of_fg_top, Module.finite_def, Submodule.fg_iff_addSubgroup_fg, Submodule.fg_def, Submodule.fg_iff_exists_fin_generating_family, Submodule.fg_iff_exists_finite_generating_family",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for the complete statement; hits are relevant component lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_stable_lattice|stable_lattice_topology",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for the complete statement; hits are relevant component lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite stable lattice compact group representation DVR",
+   "results": "8 hits: Valued.integer.isDiscreteValuationRing_of_compactSpace, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField, IsDedekindDomainDvr.toIsNoetherian, DivisionRing.finite_of_compactSpace_of_t2Space, PadicInt.instIsDiscreteValuationRing, IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation, CategoryTheory.PreGaloisCategory.has_decomp_quotients, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for the complete statement; hits are relevant component lemmas."
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, pp. 2-3"
+ },
+ "id": "lem-pod-profinite-stable-lattice-core",
+ "title": "Algebraic construction of a stable lattice",
+ "statement": "Under the hypotheses of lem-pod-profinite-stable-lattice, there exists a finitely generated O_E-submodule Lambda spanning V over E, free of rank dim_E V, and stable under rho.",
+ "proof": [
+  {
+   "text": "Choose a basis, use the open stabilizer, take finitely many translates from compactness, and apply the DVR finite torsion-free freeness theorem.",
+   "uses": [
+    "lem-pod-lattice-stabilizer-open",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-lattice-stabilizer-open",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProfiniteStableLatticeCore",
+  "declaration": "Padic.exists_stable_lattice_core",
+  "file": "lean/Sheaf/RepresentationTheory/ProfiniteStableLatticeCore.lean",
+  "statement": "theorem exists_stable_lattice_core (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] (V : Type w) [AddCommGroup V] [Module E V] [FiniteDimensional E V] : letI := spectralNorm.nontriviallyNormedField ℚ_[l] E letI : TopologicalSpace V := moduleTopology E V let O := coefficientExtensionIntegers l E letI : Module O V := Module.compHom V O.subtype ∀ (ρ : G →* (V ≃ₗ[E] V)), Continuous (fun p : G × V ↦ ρ p.1 p.2) → ∃ Λ : Submodule O V, Λ.FG ∧ Submodule.span E (Λ : Set V) = ⊤ ∧ Module.Free O Λ ∧ Module.finrank O Λ = Module.finrank E V ∧ (∀ g : G, (ρ g) '' (Λ : Set V) = (Λ : Set V))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261018T071158-L-1670225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261018T071158-L-1670225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

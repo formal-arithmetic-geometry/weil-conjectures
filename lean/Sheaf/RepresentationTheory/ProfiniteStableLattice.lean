@@ -10,7 +10,8 @@ public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.Topology.Algebra.Group.Basic
-import Sheaf.NumberTheory.Padics.LatticeStabilizerOpen
+import Sheaf.RepresentationTheory.ProfiniteStableLatticeCore
+import Sheaf.RepresentationTheory.ProfiniteStableLatticeTopology
 
 /-!
 # Stable lattices for compact groups
@@ -24,6 +25,7 @@ Source: Stanford Weil II seminar, lecture 19 (D. Dore), Proposition 1.1.9, pp. 2
 universe u v w
 
 namespace Padic
+
 
 /-- Every jointly continuous linear representation of a compact group over a finite extension
 of `ℚ_[l]` preserves a finite free lattice of the expected rank. Its maximal-ideal-adic
@@ -59,6 +61,11 @@ theorem exists_stable_lattice (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
         (letI := (coefficientExtensionMaximalIdeal l E).adicModuleTopology Λ
          ∃ a : G × Λ → Λ, Continuous a ∧
            ∀ p : G × Λ, (a p : V) = ρ p.1 (p.2 : V)) := by
-  sorry
+  dsimp
+  intro ρ hρ
+  obtain ⟨Λ, hfg, hspan, hfree, hrank, hstable⟩ :=
+    exists_stable_lattice_core l E G V ρ hρ
+  obtain ⟨htop, hact⟩ := stable_lattice_topology l E G V ρ hρ Λ hfg hspan hfree hrank hstable
+  exact ⟨Λ, hfg, hspan, hfree, hrank, hstable, htop, hact⟩
 
 end Padic
