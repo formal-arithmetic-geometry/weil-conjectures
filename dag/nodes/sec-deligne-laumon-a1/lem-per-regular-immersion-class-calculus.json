@@ -16,9 +16,181 @@
   "thm-amb-etale-exceptional-adjoint",
   "lem-asd-ordinary-supported-kummer"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $c>0$ the conormal $N=I/I^2$ is a rank-$c$ vector bundle by [lem-per-regular-flag-blowup-geometry] (its assertion about a single regular immersion). Define $\\eta_{i,n}$ as the adjoint of the supported class $\\gamma_{i,N}$ of [lem-per-modified-blowup-generalized-class]. The supported-Hom identification [lem-amb-closed-support-hom] and the right adjoint [thm-amb-etale-exceptional-adjoint] identify $H_Z^{2c}(X,\\Lambda_n(c))$ with the required morphism set. This gives a global construction, not a gluing of unspecified derived morphisms. For $c=0$ the ideal is zero near $Z$, so $Z$ is open and closed and the class is the adjoint of the evident restriction/projection on the corresponding summand.",
+   "uses": [
+    "lem-per-regular-flag-blowup-geometry",
+    "lem-per-modified-blowup-generalized-class",
+    "lem-amb-closed-support-hom",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 2.3.1"
+   }
+  },
+  {
+   "text": "For an effective Cartier divisor $D$, its conormal is the restriction of $I=\\mathcal I_D$. The modified blowup is $X$, $\\mathcal O(1)=I$, and $Q_I=-1$. Thus $\\gamma_{i,I}=-e_D(I,1)=e_D(\\mathcal O_X(D),1)$ by [lem-per-modified-blowup-generalized-class, lem-per-noetherian-supported-product-calculus]. The latter is exactly the class of $c_{D,\\Lambda_n}$ of [lem-asd-ordinary-supported-kummer]. Forgetting the support gives $+c_1(\\mathcal O_X(D))$. This checks the sign before any composition argument.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-asd-ordinary-supported-kummer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "sections 2.1-2.2 and Definition 2.3.1"
+   }
+  },
+  {
+   "text": "We prove composition for $Z\\xrightarrow iY\\xrightarrow jX$, of codimensions $m,n$. Products below are the nested supported products of [lem-per-noetherian-supported-product-calculus]. By its supported-Hom clause and the pasted adjunctions of [lem-cat-right-adjoint-composition], the desired equation is $\\gamma_{ji}=\\gamma_i\\cdot\\gamma_j$. If $m=0$ or $n=0$, it is restriction followed by the given class, so follows from the definition. Suppose $m,n>0$. First prove the case $n=1$; no composition theorem is assumed in doing so.",
+   "uses": [
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.3.2, setup"
+   }
+  },
+  {
+   "text": "Assume $n=1$. Blow up $Z$ in $X$. In the notation of [lem-per-regular-flag-blowup-geometry], $P=P(N_{X/Z})$, $\\widetilde Y=\\operatorname{Bl}_Z Y$, $P'=P(N_{Y/Z})$, and $\\pi^*I=\\mathcal I_P\\otimes\\mathcal I_{\\widetilde Y}$ as trivialized lines off the inverse image of $Y$. Put $F=N_{Y/Z}$ (rank $m$), $K=i^*N_{X/Y}$ (rank one), $H=N_{X/Z}$, and $\\xi=c_1(\\mathcal O_P(1))$. Then $0\\to K\\to H\\to F\\to0$, and the ideal of $P'$ in $P$ is $K\\otimes\\mathcal O_P(-1)$. The pullback on cohomology supported at $Z$ is injective by [lem-per-modified-blowup-generalized-class], with $E=H$ and $C=Z$.",
+   "uses": [
+    "lem-per-regular-flag-blowup-geometry",
+    "lem-per-modified-blowup-generalized-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.3.2, pp. 236-237"
+   }
+  },
+  {
+   "text": "Write $S_F(\\xi)=\\sum_{a=0}^{m-1}(-1)^ac_a(F)\\xi^{m-1-a}$, so $Q_F=-S_F$. Let $G_P$ be the ideal-normalized pseudo-divisor operator for $P\\subset\\operatorname{Bl}_Z X$. By [lem-per-modified-blowup-generalized-class], $\\pi^*\\gamma_{ji}=G_P(Q_H)$. Expand the pulled-back ideal class of $j$ using the trivialized-line factorization of Step 4 and additivity in [lem-per-noetherian-supported-product-calculus]. Its two summands give\n$$\\pi^*(\\gamma_i\\cdot\\gamma_j)=\\alpha+\\beta,\\quad\n\\alpha=G_P(-\\gamma_i|_P),\\quad\n\\beta=-G_{\\widetilde Y\\subset B}G_{P'\\subset\\widetilde Y}(Q_F).$$\nHere the minus is precisely $\\gamma_j=-e(I,1)$ from Step 2; the class of $i$ on $\\widetilde Y$ is $G_{P'}(Q_F)$ by its defining blowup characterization, without using composition. Transverse Cartier interchange in [lem-per-noetherian-supported-product-calculus] rewrites $\\beta=G_P(-G_{P'\\subset P}(Q_F))$.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.3.2, p. 236, alpha and beta"
+   }
+  },
+  {
+   "text": "The restriction formula in [lem-per-modified-blowup-generalized-class] gives $\\gamma_i|_P=(-1)^mc_m(F)$ (pullbacks from $Z$ are suppressed). The ideal of $P'$ in $P$ is $K\\otimes\\mathcal O_P(-1)$, so its ordinary Chern class is $c_1(K)-\\xi$, by [lem-per-noetherian-etale-chern-identities] and the line additivity of [lem-per-noetherian-supported-product-calculus]. Forgetting this support therefore gives\n$$\\alpha=G_P((-1)^{m+1}c_m(F)),\\quad\n\\beta=G_P((c_1(K)-\\xi)S_F(\\xi)).$$\nWhitney gives $c_a(H)=c_a(F)+c_1(K)c_{a-1}(F)$, with $c_{-1}=0$. Substitute into $Q_H$ and collect coefficients of $\\xi$:\n$$Q_H=(c_1(K)-\\xi)S_F(\\xi)+(-1)^{m+1}c_m(F).$$\nApplying the additive operator $G_P$ proves $\\pi^*\\gamma_{ji}=\\alpha+\\beta$; injectivity from Step 4 proves composition for $n=1$.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-etale-chern-identities",
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.3.2, p. 237, final polynomial calculation"
+   }
+  },
+  {
+   "text": "For arbitrary $n>0$, blow up $Y$ in $X$, with exceptional $j':P\\hookrightarrow B$ and inverse image $i':P'\\hookrightarrow P$ of $Z$. By [lem-per-regular-flag-blowup-geometry], these have codimensions $1,m$, and the conormal surjections have kernels $K,K'$ of rank $n-1$ with $i'^*K=K'$. The supported pullback on $H_Z^{2(m+n)}(X,\\Lambda(m+n))$ is injective by [lem-per-modified-blowup-generalized-class], now taking $E=N_{X/Y}$ and $C=Z$. Its base-change and excess formulas, and $c_{n-1}(K^\\vee)=(-1)^{n-1}c_{n-1}(K)$ from [lem-per-noetherian-etale-chern-identities], yield\n$$\\pi^*\\gamma_{ji}=c_{n-1}(K'^\\vee)\\gamma_{j'i'},\\qquad \\pi^*\\gamma_j=c_{n-1}(K^\\vee)\\gamma_{j'}.$$\nThe projection $p:P\\to Y$ is flat and pulls $N_{Y/Z}$ back to $N_{P/P'}$, so the base-change formula also gives $p^*\\gamma_i=\\gamma_{i'}$.",
+   "uses": [
+    "lem-per-regular-flag-blowup-geometry",
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-etale-chern-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 2.3.3, pp. 234-235"
+   }
+  },
+  {
+   "text": "Step 6 applies to the pair $i',j'$ because the outer immersion $j'$ has codimension one, so $\\gamma_{j'i'}=\\gamma_{i'}\\cdot\\gamma_{j'}$. Use $i'^*K=K'$ and the projection and associativity identities in [lem-per-noetherian-supported-product-calculus] to obtain\n$$\\pi^*\\gamma_{ji}=c_{n-1}(K'^\\vee)\\gamma_{i'}\\cdot\\gamma_{j'}\n=\\gamma_{i'}\\cdot c_{n-1}(K^\\vee)\\gamma_{j'}\n=p^*\\gamma_i\\cdot\\pi^*\\gamma_j=\\pi^*(\\gamma_i\\cdot\\gamma_j).$$\nThe injection in Step 7 proves general composition. Step 3 then translates it into the precise exceptional-transitivity equation in the statement.",
+   "uses": [
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 2.3.3, conclusion"
+   }
+  },
+  {
+   "text": "On a chart cut out by a regular sequence $t_1,\\ldots,t_c$, the quotient by its first $k-1$ elements makes $t_k$ a nonzerodivisor, by [def-weil-pbc-regular-sequence]. Its next vanishing subscheme is therefore Cartier. Apply the just-proved composition successively to this flag, beginning with the identity at $k=0$. Step 2 identifies every factor with the specified supported Kummer map. The resulting flag composite equals the globally constructed $\\gamma_{i,N}$. In particular any two regular-generator flags, including any reordered flag that is regular, give the same class; when discussing an arbitrary permutation, shrink near $Z$ so the permuted generators are regular. Thus no gluing or local-detection assertion about arbitrary derived morphisms is used to construct the global class.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 2.3.1 and Theorem 2.3.2, Cartier-flag consequence"
+   }
+  },
+  {
+   "text": "For a flat base change of pairs, regularity and the codimension are preserved by [lem-per-regular-lci-geometric-calculus], and its conormal pulls back to the new conormal: flat tensor applied to $0\\to I\\to\\mathcal O_X\\to\\mathcal O_Z\\to0$ identifies the pulled ideal with the new ideal, and then its quotient by the square with $v_Z^*(I/I^2)$. The arbitrary-base-change formula of [lem-per-modified-blowup-generalized-class] therefore gives $v^*\\gamma_{i,N}=\\gamma_{i',N'}$. Open restriction is included; on a Cartier flag it also follows factor by factor from [lem-asd-ordinary-supported-kummer]. The twist comparison is the specified one in [lem-asd-etale-finite-twist-pullback].",
+   "uses": [
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-per-modified-blowup-generalized-class",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 2.2.3.1 and Definition 2.3.1"
+   }
+  },
+  {
+   "text": "For a localization or strict localization use its affine ind-etale system of neighbourhoods. On the local and strict-local Noetherian schemes, [lem-per-ind-etale-closed-support-base-change] identifies the exceptional targets by the closed-counit mate and respects successive restrictions. Step 10 identifies the supported classes because these maps are flat. To read this as continuity, apply [lemma-weil-pbc-etale-cohomology-continuity] to the pair and its open complement; [lem-amb-closed-support-hom] expresses support by their shifted cone. Filtered colimits of the two localization long exact sequences identify the supported groups as well. The constants and Tate lines pull back by [lem-asd-etale-finite-twist-pullback], and every class considered is the pullback of the fixed finite-stage construction. This gives precisely the stated canonical continuity compatibility, not a compact-support adjoint for a non-finite-type localization map.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lemma-weil-pbc-etale-cohomology-continuity",
+    "lem-amb-closed-support-hom",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "section 3.2, before Definition 3.2.2; Stacks Tag 03Q6, lemma-directed-colimit-cohomology"
+   }
+  },
+  {
+   "text": "For $N\\geq n$, keep the same conormal and modified blowup. Coefficient reduction carries the defining polynomial $Q_{E,N}$ and its pseudo-divisor image $G_N(Q_{E,N})$ to $Q_{E,n}$ and $G_n(Q_{E,n})$ by [lem-per-noetherian-etale-chern-identities, lem-per-noetherian-supported-product-calculus]. The triangle and its maps in [lem-per-modified-blowup-generalized-class] are coefficient-natural. Both the reduction of $\\gamma_{i,N}$ and $\\gamma_{i,n}$ therefore pull back to the same element; its uniqueness (the supported injection) makes them equal. This proves reduction for supported classes directly, with no assertion that coefficient reduction commutes invertibly with $i^!$ on arbitrary complexes. Under adjunction it is equality using the canonical counit-defined comparison. The root map and the comparisons for all signed twists are [lem-asd-etale-finite-twist-pullback]; for a negative twist take the dual of a rank-one line. When $N=n$ this is the identity, and successive power maps compose since their exponents multiply.",
+   "uses": [
+    "lem-per-noetherian-etale-chern-identities",
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-per-modified-blowup-generalized-class",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "coefficient naturality of sections 1-2.3; coefficient square of Proposition 3.3.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "lem-amb-closed-support-hom",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-cat-right-adjoint-composition",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-modified-blowup-generalized-class",
+  "lem-per-noetherian-etale-chern-identities",
+  "lem-per-noetherian-supported-product-calculus",
+  "lem-per-regular-flag-blowup-geometry",
+  "lem-per-regular-lci-geometric-calculus",
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Definition 2.3.1, Theorem 2.3.2 and Lemma 2.3.3, pp. 233-237; coefficient/continuity details expanded using the cited interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +226,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{motive : (M : Type v) → [AddCommGroup M] → [Module R M] → (rs : List R) → IsRegular M rs → Sort*}\\n  (nil : (M : Type v) → [AddCommGroup M] → [Module R M] → [Nontrivial M] → motive M [] (nil R M))\\n  (cons :\\n    {M : Type v} →\\n      [AddCommGroup M] →\\n        [Module R M] →\\n          (r : R) →\\n      \", \"doc\": \"A recursive function that constructs proofs or structures for regular sequences in a module over a commutative ring by induction. For the base case, the empty sequence is regular if the module is non-\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} → (M : Type u_3) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → List R → Prop\", \"doc\": \"A predicate indicating that a sequence of elements in a commutative ring $ R $ is regular on an $ R $-module $ M $, meaning each element in the sequence is a non-zerodivisor on the quotient of $ M $ b\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{motive : (M : Type v) → [AddCommGroup M] → [Module R M] → (rs : List R) → Sort*}\\n  (nil : (M : Type v) → [AddCommGroup M] → [Module R M] → [Nontrivial M] → motive M [])\\n  (cons :\\n    {M : Type v} →\\n      [AddCommGroup M] →\\n        [Module R M] →\\n          (r : R) →\\n            (rs : List R) →\\n     \", \"doc\": \"A non-dependent recursive function that constructs proofs or structures for regular sequences in a module over a commutative ring by induction. For the base case, the empty sequence is regular if the \"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.recOn\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              (t : RingTheory.Sequence.IsRegular M rs) →\\n                ((to\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for sequences constructed from weak regularity and the condition that the ideal generated by the sequence does not \"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.rec\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              ((toIsWeaklyRegular : RingTheory.Sequence.IsWeaklyRegular M rs)\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for a sequence constructed from weak regularity and the condition that the ideal generated by the sequence does not\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.casesOn\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              (t : RingTheory.Sequence.IsRegular M rs) →\\n                ((to\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for sequences constructed from weak regularity and the condition that the ideal generated by the sequence does not \"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {rs : List R},\\n  (∀ (i : ℕ) (h : i < rs.length), IsSMulRegular (M ⧸ Ideal.ofList (List.take i rs) • ⊤) rs[i]) →\\n    RingTheory.Sequence.IsWeaklyRegular M rs\", \"doc\": \"Given a commutative ring $ R $, an $ R $-module $ M $, and a list $ rs $ of elements in $ R $, if for every index $ i $ the element $ rs_i $ is injective in scalar multiplication on the quotient modul\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not state this node or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular immersion supported fundamental class composition flat base change coefficient reduction on noetherian schemes",
+   "results": "Recorded service result: 8 hits. AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern other objects and do not supply this etale-cohomology or blowup statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\", \"comp\"",
+   "results": "Recorded service result: 0 hits. . ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern other objects and do not supply this etale-cohomology or blowup statement"
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalClass|fundamental_class|Gysin|gysin",
+   "results": "Recorded service result: 3 hits. Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern other objects and do not supply this etale-cohomology or blowup statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometry of the blowup of nested regular immersions strict transform conormal bundle",
+   "results": "Recorded service result: 8 hits. Manifold.IsImmersionAtOfComplement, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.IsImmersion.instMorphismRestrict, Manifold.IsImmersionAt.instNormedSpaceComplement, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.IsImmersion.instToImage, AlgebraicGeometry.isImmersion_eq_inf. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern other objects and do not supply this etale-cohomology or blowup statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-absolute-gysin-purity",
@@ -80,5 +280,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-immersion-class-calculus",
+  "worker": "stage1",
+  "summary": "Q65 retained the earlier item and actual search log, checked ILO XVI and nearby nodes, and supplied the modified-blowup construction and the two-stage composition proof with its polynomial calculation. Four statement-only supporting lemmas distinguish arbitrary Noetherian bases from the existing field/excellent purity interfaces. No Lean or compiler was used.",
+  "blueprint": "Realizes the regular-immersion Kummer class input to the regular finite-torsion local model in the inherited ancestry of lem-per-artin-gabber-affine-curve, proof Step 3; the item-specific proof follows ILO XVI 2.2-2.3.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic Closed support as a relative section complex interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic Right adjoint of a composite interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   },
+   {
+    "node": "lemma-weil-pbc-etale-cohomology-continuity",
+    "why": "Generic Etale cohomology continuity interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint interface on ordinary etale sites, used only for the operation named in this proof; the perverse-curve unit does not provide this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-closed-support-hom",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-cat-right-adjoint-composition",
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-d80deaee4",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d80deaee4 (reviewer sub-agent of L); spot-checked: FIX: I read the item, all four new nodes, every cited statement and ILO Exposé XVI pp. 225–237 (§1, §2.1–2.3). The item follows ILO Def. 2.3.1 and Thm 2.3.2. The coefficients are ordinary étale Z/ℓ^n with μ twists and the exceptional functor is the right adjoint of Ri_*; nothing is weakened. The Kummer sign is consistent: γ_D = −e(I,1) = e(O(D),1) = c_{D,Λ}, whose composite with the unit is +c_1. I recomputed Q_H = (c_1(K)−ξ)S_F + (−1)^{m+1}c_m(F) = α̃+β̃, ξQ_E = (−1)^r c_r and the excess/base-change chain of Lemma 2.3.3, and checked the blowup geometry on A² ⊃ V(y) ⊃ 0. Three repairable faults, fixed in the new-node statements only: (1) C4: Step 1 took conormal local freeness from lem-per-regular-flag-blowup-geometry, which only covered a flag with m,n>0; a single-immersion clause is added. (2) C4: Step 6 needs forget-support of G_{L,s}(x|_C) = x·c_1(L); added to lem-per-noetherian-supported-product-calculus. (3) B2: the excess formula in lem-per-modified-blowup-generalized-class now says γ_{i,E'} uses the composite surjection E'↠E↠I/I², and ℓ is declared prime in two nodes. Batch-5 flags accepted: lem-pod-etale-stalk-tensor-scalar (stalks of tensor and scalar extension; lem-asd-ordinary-supported-kummer was already in the item's base stmt_deps) and lem-trf-bounded-below-derived-adjunction (a generic D^+ adjunction) are generic, not steps of trace-formula or Poincaré-duality proofs. No SGA is cited. tool_uses accepted as generic black boxes. Maintainer note: the new Z/ℓ^n nodes generalize Q49's F_ℓ lem-per-generalized-blowup-class and lem-per-cartier-blowup-polynomials, which the report did not mention; same-family overlap, not a duplicate; consider repointing or merging.; 3 file(s) fixed by the reviewer"
  }
 }
