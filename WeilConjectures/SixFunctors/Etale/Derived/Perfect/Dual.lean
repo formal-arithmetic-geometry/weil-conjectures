@@ -74,7 +74,8 @@ namespace Etale.DerivedCategory
 
 /-- Blueprints `def-sf-pf` and `def-pod-coefficient-dual-on-x`: the coefficient dual
 `K^∨ = RHom(K, Λ_X)` of a complex of étale sheaves, where `Λ_X` is the monoidal unit of
-`D(X_ét)`. The Verdier dual of the same blueprint definition is `AlgebraicGeometry.Etale.verdierDual`. -/
+`D(X_ét)`. The Verdier dual of the same blueprint definition is
+`AlgebraicGeometry.Etale.verdierDual`. -/
 noncomputable def coefficientDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
