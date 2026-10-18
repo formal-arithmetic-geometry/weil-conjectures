@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import Sheaf.CategoryTheory.RestrictionRingedToposModuleDirectImage
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
@@ -27,6 +29,7 @@ Modules on Sites, lemma-adjoint-push-pull-modules
 -/
 
 @[expose] public section
+
 
 universe u
 
@@ -198,6 +201,43 @@ private theorem homotopyFactors_inv_id
     (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app K =
       𝟙 ((HomotopyCategory.quotient B (.up ℤ)).obj
         ((F.mapHomologicalComplex (.up ℤ)).obj K)) := rfl
+
+private theorem chainDerivedUnit_isIso
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ B) [F.Additive] (K : CochainComplex A ℤ) [K.IsKInjective] :
+    IsIso (chainDerivedUnit F K) := by
+  dsimp only [chainDerivedUnit]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem chainDerivedUnit_isIso_of_resolution
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ B) [F.Additive] (K J : CochainComplex A ℤ) [J.IsKInjective]
+    (j : K ⟶ J) [QuasiIso j]
+    [QuasiIso ((F.mapHomologicalComplex (.up ℤ)).map j)] :
+    IsIso (chainDerivedUnit F K) := by
+  let q := HomotopyCategory.quotient A (.up ℤ)
+  have hj : IsIso (DerivedCategory.Qh.map (q.map j)) := by
+    change IsIso (DerivedCategory.Q.map j)
+    infer_instance
+  have hFj : IsIso (DerivedCategory.Qh.map
+      ((F.mapHomotopyCategory (.up ℤ)).map (q.map j))) := by
+    change IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map j))
+    infer_instance
+  have hn := F.rightDerivedFunctorUnit.naturality (q.map j)
+  dsimp only [Functor.comp_map] at hn
+  have hJ : IsIso (F.rightDerivedFunctorUnit.app (q.obj J)) := inferInstance
+  have hcomp : IsIso (F.rightDerivedFunctorUnit.app (q.obj K) ≫
+      F.rightDerivedFunctor.map (DerivedCategory.Qh.map (q.map j))) := by
+    rw [← hn]
+    infer_instance
+  have : IsIso (F.rightDerivedFunctorUnit.app (q.obj K)) :=
+    IsIso.of_isIso_comp_right _ (F.rightDerivedFunctor.map (DerivedCategory.Qh.map (q.map j)))
+  dsimp only [chainDerivedUnit]
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -812,6 +852,261 @@ noncomputable def proEtaleRingDirectImageDerivedUnit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem ringed_resolution
+    {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]
+    (T : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (S : GrothendieckTopology E)
+    (R : Sheaf T CommRingCat.{u}) (Z : Sheaf K CommRingCat.{u})
+    (W : Sheaf S CommRingCat.{u})
+    (r : RingedToposMorphism
+      ((sheafCompose T (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj Z))
+    (p : RingedToposMorphism
+      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj Z)
+      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj W)) :
+    letI := r.additive
+    letI := p.additive
+    ∀ (I : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose T (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ),
+      I.IsKInjective →
+    ∀ (J : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj Z)) ℤ),
+      J.IsKInjective →
+    ∀ j : (r.modules.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
+      QuasiIso j → QuasiIso ((p.modules.mapHomologicalComplex (.up ℤ)).map j) := by
+  have := r.additive
+  have := p.additive
+  intro I hI J hJ j hj
+  let := HasDerivedCategory.standard (SheafOfModules.{u}
+    ((sheafCompose T (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+  let := HasDerivedCategory.standard (SheafOfModules.{u}
+    ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj Z))
+  let := HasDerivedCategory.standard (SheafOfModules.{u}
+    ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj W))
+  obtain ⟨Rf, Rg, Rgf, ηf, ηg, ηgf, hf, hg, hgf, hIf, hIg, κ, hκ, _⟩ :=
+    ringedToposDerivedPushforwardComposition T K S R Z W r p
+  exact (hκ.2 I hI J hJ j).1
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem quasiIso_map_of_models
+    {M A B M' A' B' : Type*}
+    [Category M] [Category A] [Category B] [Category M'] [Category A'] [Category B']
+    [Abelian M] [Abelian A] [Abelian B] [Abelian M'] [Abelian A'] [Abelian B']
+    (FM : M ⥤ M') (FA : A ⥤ A') (FB : B ⥤ B')
+    [FM.Additive] [FA.Additive] [FB.Additive]
+    [FA.PreservesHomology] [FB.PreservesHomology] [FB.ReflectsIsomorphisms]
+    [FM.PreservesKInjectiveComplexes] [FA.PreservesKInjectiveComplexes]
+    (r : M' ⥤ A') (p : A' ⥤ B') [r.Additive] [p.Additive]
+    (H : M ⥤ A) (G : A ⥤ B) [H.Additive] [G.Additive]
+    (α : FM ⋙ r ≅ H ⋙ FA) (β : FA ⋙ p ≅ G ⋙ FB)
+    (h : ∀ (I : CochainComplex M' ℤ), I.IsKInjective →
+      ∀ (J : CochainComplex A' ℤ), J.IsKInjective →
+      ∀ j : (r.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
+      QuasiIso j → QuasiIso ((p.mapHomologicalComplex (.up ℤ)).map j))
+    (I : CochainComplex M ℤ) [I.IsKInjective]
+    (J : CochainComplex A ℤ) [J.IsKInjective]
+    (j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j] :
+    QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map j) := by
+  let αc := Functor.mapHomologicalComplexCompIso (F := FM) (G := r) α (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (H ⋙ FA)) (.up ℤ)).symm
+  let βc := Functor.mapHomologicalComplexCompIso (F := FA) (G := p) β (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (G ⋙ FB)) (.up ℤ)).symm
+  let Mc := FM.mapHomologicalComplex (.up ℤ)
+  let Ac := FA.mapHomologicalComplex (.up ℤ)
+  let Bc := FB.mapHomologicalComplex (.up ℤ)
+  let pc := p.mapHomologicalComplex (.up ℤ)
+  let vc := G.mapHomologicalComplex (.up ℤ)
+  have : QuasiIso (Ac.map j) := HomologicalComplex.quasiIso_map_of_preservesHomology j FA
+  let j' := αc.hom.app I ≫ Ac.map j
+  have : QuasiIso j' := by
+    dsimp only [j']
+    infer_instance
+  have hMI : CochainComplex.IsKInjective (Mc.obj I) := inferInstance
+  have hAJ : CochainComplex.IsKInjective (Ac.obj J) := inferInstance
+  have hq : QuasiIso (pc.map j') := h (Mc.obj I) hMI (Ac.obj J) hAJ j' inferInstance
+  have : QuasiIso (pc.map (αc.hom.app I) ≫ pc.map (Ac.map j)) := by
+    simpa only [j', Functor.map_comp] using hq
+  have : QuasiIso (pc.map (Ac.map j)) :=
+    quasiIso_of_comp_left (pc.map (αc.hom.app I)) _
+  have hn := βc.hom.naturality j
+  dsimp only [Functor.comp_map] at hn
+  have hq' : QuasiIso (pc.map (Ac.map j) ≫ βc.hom.app J) := inferInstance
+  rw [hn] at hq'
+  have : QuasiIso (Bc.map (vc.map j)) :=
+    quasiIso_of_comp_left (βc.hom.app _) _
+  exact (HomologicalComplex.quasiIso_map_iff_of_preservesHomology
+    (vc.map j) FB).mp inferInstance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem restriction_directImage_quasiIso
+    (I : CochainComplex (proEtaleRingModules U SU) ℤ) [I.IsKInjective]
+    (J : CochainComplex (proEtaleRingModules U RU) ℤ) [J.IsKInjective]
+    (j : ((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj I ⟶ J)
+    [QuasiIso j] :
+    QuasiIso (((proEtaleRingModuleDirectImage f RV RU cR).mapHomologicalComplex (.up ℤ)).map
+      j) := by
+  -- Present restriction and direct image on small sites; both transports retain sections.
+  let eu := AsSmall.equiv.{u, u + 1, u + 1} (C := U.ProEt)
+  let ev := AsSmall.equiv.{u, u + 1, u + 1} (C := V.ProEt)
+  let T := proEtaleModelTopology U
+  let S := proEtaleModelTopology V
+  let F := proEtaleModelBaseChange f
+  have : F.IsContinuous S T := proEtaleModelBaseChange_isContinuous f
+  have : (AsSmall.down : proEtaleSiteModel V ⥤ V.ProEt).IsEquivalence :=
+    inferInstanceAs ev.inverse.IsEquivalence
+  have : (AsSmall.up : U.ProEt ⥤ proEtaleSiteModel U).IsEquivalence :=
+    inferInstanceAs eu.functor.IsEquivalence
+  have : PreservesFiniteLimits F := by
+    dsimp only [F, proEtaleModelBaseChange]
+    infer_instance
+  have : RepresentablyFlat F := flat_of_preservesFiniteLimits _
+  let L := Functor.sheafPullbackConstruction.sheafPullback F (Type (u + 1)) S T
+  have : PreservesFiniteLimits L := by dsimp only [L]; infer_instance
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    F (Type (u + 1)) S T
+  have : (AsSmall.down : proEtaleSiteModel U ⥤ U.ProEt).IsContinuous
+      T (ProEt.topology U) :=
+    by
+      dsimp only [T]
+      infer_instance
+  have : (AsSmall.down : proEtaleSiteModel V ⥤ V.ProEt).IsContinuous
+      S (ProEt.topology V) :=
+    by
+      dsimp only [S]
+      infer_instance
+  let TU := (AsSmall.down : proEtaleSiteModel U ⥤ U.ProEt).sheafPushforwardContinuous
+    CommRingCat.{u + 1} T (ProEt.topology U)
+  let TV := (AsSmall.down : proEtaleSiteModel V ⥤ V.ProEt).sheafPushforwardContinuous
+    CommRingCat.{u + 1} S (ProEt.topology V)
+  let R := TU.obj SU
+  let Z := TU.obj RU
+  let W := TV.obj RV
+  let φ : W ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} S T).obj Z :=
+    TV.map (proEtaleRingDirectImageMap f RV RU cR)
+  obtain ⟨p, hp⟩ := continuousRingedToposModuleDirectImage_exists F L adj Z W φ
+  let a := (sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+    (TU.map aU)
+  obtain ⟨r, hr⟩ := restrictionRingedToposModuleDirectImage_exists a
+  let P := p.modules
+  let A := r.modules
+  let eM := (proEtaleModuleModelEquivalence U
+    ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj SU)).symm
+  let eA := (proEtaleModuleModelEquivalence U
+    ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)).symm
+  let eB := (proEtaleModuleModelEquivalence V
+    ((sheafCompose (ProEt.topology V) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).symm
+  let EM := proEtaleModuleToModel
+    ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj SU)
+  let EA := proEtaleModuleToModel
+    ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
+  let EB := proEtaleModuleToModel
+    ((sheafCompose (ProEt.topology V) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
+  have : EM.IsEquivalence := inferInstanceAs eM.functor.IsEquivalence
+  have : EA.IsEquivalence := inferInstanceAs eA.functor.IsEquivalence
+  have : EB.IsEquivalence := inferInstanceAs eB.functor.IsEquivalence
+  have : EM.Additive := EM.additive_of_preserves_binary_products
+  have : EA.Additive := EA.additive_of_preserves_binary_products
+  have : EB.Additive := EB.additive_of_preserves_binary_products
+  have : PreservesFiniteLimits EA := inferInstance
+  have : PreservesFiniteColimits EA := inferInstance
+  have : EA.PreservesHomology := inferInstance
+  have : PreservesFiniteLimits EB := inferInstance
+  have : PreservesFiniteColimits EB := inferInstance
+  have : EB.PreservesHomology := inferInstance
+  have : EB.ReflectsIsomorphisms := inferInstance
+  have : EM.PreservesKInjectiveComplexes := inferInstance
+  have : EA.PreservesKInjectiveComplexes := inferInstance
+  have : P.Additive := p.additive
+  have : A.Additive := r.additive
+  let H := proEtaleRingRestrictScalars aU
+  let G := proEtaleRingModuleDirectImage f RV RU cR
+  have : H.Additive := inferInstanceAs (proEtaleRingRestrictScalars aU).Additive
+  have : G.Additive := inferInstanceAs (proEtaleRingModuleDirectImage f RV RU cR).Additive
+  let α : EM ⋙ A ≅ H ⋙ EA := by
+    dsimp only [A]
+    rw [hr]
+    exact NatIso.ofComponents
+      (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+        (PresheafOfModules.isoMk (fun W ↦ Iso.refl _) (by
+          intro W W' a
+          ext x
+          rfl))) (by
+        intro M N h
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro W
+        ext x
+        rfl)
+  let β : EA ⋙ P ≅ G ⋙ EB := by
+    dsimp only [P]
+    rw [hp]
+    exact NatIso.ofComponents
+      (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+        (PresheafOfModules.isoMk (fun W ↦ Iso.refl _) (by
+          intro W W' a
+          ext x
+          rfl))) (by
+        intro M N h
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro W
+        ext x
+        rfl)
+  exact quasiIso_map_of_models EM EA EB A P H G α β
+    (ringed_resolution T T S R Z W r p) I J j
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+@[irreducible] private noncomputable def canonicalDerivedMate :
+    proEtaleRingDerivedDirectImage f SV SU cS ⋙
+        (proEtaleRingRestrictScalars aV).mapDerivedCategory ⟶
+      (proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+        proEtaleRingDerivedDirectImage f RV RU cR :=
+  (mateEquiv (proEtaleRingDerivedAdjunction f SV SU cS)
+    (proEtaleRingDerivedAdjunction f RV RU cR)
+    (TwoSquare.mk _ _ _ _
+      (proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm).inv)).natTrans
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem canonicalDerivedMate_factors
+    (K : CochainComplex (proEtaleRingModules U SU) ℤ) :
+      (proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+          (chainDerivedUnit (proEtaleRingModuleDirectImage f SV SU cS) K) ≫
+        (canonicalDerivedMate f RV SV RU SU aV aU cR cS comm).app (DerivedCategory.Q.obj K) ≫
+        (proEtaleRingDerivedDirectImage f RV RU cR).map
+          ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app K) =
+      (proEtaleRingRestrictScalars aV).mapDerivedCategoryFactors.hom.app
+          (((proEtaleRingModuleDirectImage f SV SU cS).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex
+            (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm)
+              (.up ℤ)).hom.app K) ≫
+        chainDerivedUnit (proEtaleRingModuleDirectImage f RV RU cR)
+          (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K) := by
+  let e := asIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)
+  let b := (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
+    (proEtaleRingModulePullback f RV RU cR)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫
+      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
+        (proEtaleRingRestrictScalars aU)
+  have hb : (proEtaleRingRestrictionDerivedPullback
+      f RV SV RU SU aV aU cR cS comm).inv = b.hom := by
+    dsimp [proEtaleRingRestrictionDerivedPullback, b]
+    rw [Category.assoc]
+    rfl
+  have h := derived_mate_factors (proEtaleRingModuleAdjunction f SV SU cS)
+    (proEtaleRingModuleAdjunction f RV RU cR) e K
+  dsimp only [e, asIso_hom] at h
+  rw [restrictionPullback_mate f RV SV RU SU aV aU cR cS comm] at h
+  rw [canonicalDerivedMate, hb]
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem derivedDirectImageComparison_unique
     {d d' : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -864,14 +1159,15 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Existence of the normalized derived direct-image comparison.
 Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
-Proof: apply the general ringed-topos derived direct-image composition theorem to the two
-factorizations of the compatible coefficient-change morphism. Identify the exact restriction
-direct image with termwise restriction and identify the two underived composite module direct
-images by the sectionwise identity isomorphism. Transport the resulting composition comparison
-across the canonical right-derived-functor uniqueness isomorphisms. The defining unit equation
-of the general theorem becomes exactly the displayed equation after expanding the canonical
-quotient identifications in `proEtaleRingDirectImageDerivedUnit`. The K-injective resolution
-clause supplies invertibility on representatives and hence a natural isomorphism. -/
+Proof: form the mate of the termwise descended inverse-image comparison. The proved
+mate-factorization identity gives its displayed unit normalization on every complex.
+Present scalar restriction and direct image as ringed-topos morphisms on the AsSmall
+sites. The resolution clause of the general composition theorem says that direct image
+sends a K-injective resolution of the restriction of a K-injective complex to a
+quasi-isomorphism. Naturality of the derived unit then makes the unit on the restricted
+complex invertible. In the normalization all other arrows are invertible on K-injective
+complexes, so the mate is invertible there. Every derived object has a K-injective
+representative, and naturality gives invertibility everywhere. -/
 theorem proEtaleRingRestrictionDerivedDirectImage_exists :
     ∃ d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -891,7 +1187,56 @@ theorem proEtaleRingRestrictionDerivedDirectImage_exists :
                 (.up ℤ)).hom.app K) ≫
           proEtaleRingDirectImageDerivedUnit f RV RU cR
             (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  let m := canonicalDerivedMate f RV SV RU SU aV aU cR cS comm
+  have hm := canonicalDerivedMate_factors f RV SV RU SU aV aU cR cS comm
+  have hI (I : CochainComplex (proEtaleRingModules U SU) ℤ) [I.IsKInjective] :
+      IsIso (m.app (DerivedCategory.Q.obj I)) := by
+    obtain ⟨J, hJ, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective
+      (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj I)
+    have : J.IsKInjective := hJ
+    have : QuasiIso j := hj
+    have : QuasiIso (((proEtaleRingModuleDirectImage f RV RU cR).mapHomologicalComplex
+        (.up ℤ)).map j) := restriction_directImage_quasiIso f RV RU SU aU cR I J j
+    have : IsIso (chainDerivedUnit (proEtaleRingModuleDirectImage f RV RU cR)
+        (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj I)) :=
+      chainDerivedUnit_isIso_of_resolution _ _ J j
+    have : IsIso (chainDerivedUnit (proEtaleRingModuleDirectImage f SV SU cS) I) :=
+      chainDerivedUnit_isIso _ I
+    have hi := hm I
+    have : IsIso
+        ((proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+            (chainDerivedUnit (proEtaleRingModuleDirectImage f SV SU cS) I) ≫
+          m.app (DerivedCategory.Q.obj I) ≫
+          (proEtaleRingDerivedDirectImage f RV RU cR).map
+            ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app I)) := by
+      rw [hi]
+      infer_instance
+    have : IsIso (m.app (DerivedCategory.Q.obj I) ≫
+        (proEtaleRingDerivedDirectImage f RV RU cR).map
+          ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app I)) :=
+      IsIso.of_isIso_comp_left
+        ((proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+          (chainDerivedUnit (proEtaleRingModuleDirectImage f SV SU cS) I)) _
+    exact IsIso.of_isIso_comp_right _
+      ((proEtaleRingDerivedDirectImage f RV RU cR).map
+        ((proEtaleRingRestrictScalars aU).mapDerivedCategoryFactors.hom.app I))
+  have (X : DerivedCategory (proEtaleRingModules U SU)) : IsIso (m.app X) := by
+    obtain ⟨I, hInj, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective X
+    have : I.IsKInjective := hInj
+    have : IsIso (m.app (DerivedCategory.Q.obj I)) := hI I
+    have hn := m.naturality eI.hom
+    have : IsIso (m.app X ≫
+        ((proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+          proEtaleRingDerivedDirectImage f RV RU cR).map eI.hom) := by
+      rw [← hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (((proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
+        proEtaleRingDerivedDirectImage f RV RU cR).map eI.hom)
+  have : IsIso m := NatIso.isIso_of_isIso_app _
+  refine ⟨asIso m, ?_⟩
+  intro K
+  exact hm K
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1002,16 +1347,9 @@ theorem proEtaleRingSheafChangeAdjunction :
         (by rw [Functor.comp_map]; infer_instance)
     exact isIso_of_reflects_iso _ (proEtaleRingRestrictScalars aV)
   refine ⟨hDerivedU, hDerivedV, ?_⟩
-  let e := asIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)
-  let b := (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
-    (proEtaleRingModulePullback f RV RU cR)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
-        (proEtaleRingRestrictScalars aU)
-  let m := mateEquiv (proEtaleRingDerivedAdjunction f SV SU cS)
-    (proEtaleRingDerivedAdjunction f RV RU cR) (TwoSquare.mk _ _ _ _ b.hom)
+  let m := canonicalDerivedMate f RV SV RU SU aV aU cR cS comm
   have hd : (proEtaleRingRestrictionDerivedDirectImage
-      f RV SV RU SU aV aU cR cS comm).hom = m.natTrans := by
+      f RV SV RU SU aV aU cR cS comm).hom = m := by
     apply derived_comp_ext (proEtaleRingModuleDirectImage f SV SU cS)
       (proEtaleRingRestrictScalars aV)
       ((proEtaleRingRestrictScalars aU).mapDerivedCategory ⋙
@@ -1022,21 +1360,16 @@ theorem proEtaleRingSheafChangeAdjunction :
     have hn := (Classical.choose_spec
       (proEtaleRingRestrictionDerivedDirectImage_existsUnique
         f RV SV RU SU aV aU cR cS comm)).1 K
-    have hm := derived_mate_factors (proEtaleRingModuleAdjunction f SV SU cS)
-      (proEtaleRingModuleAdjunction f RV RU cR) e K
-    dsimp only [e, asIso_hom] at hm
-    rw [restrictionPullback_mate f RV SV RU SU aV aU cR cS comm] at hm
+    have hm := canonicalDerivedMate_factors f RV SV RU SU aV aU cR cS comm K
     simpa only [proEtaleRingDirectImageDerivedUnit, chainDerivedUnit,
-      proEtaleRingRestrictionDerivedDirectImage, proEtaleRingDerivedAdjunction,
-      m, b, e, Category.assoc] using hn.trans hm.symm
+      proEtaleRingRestrictionDerivedDirectImage, m, Category.assoc] using hn.trans hm.symm
   intro M N t
-  have hb : (proEtaleRingRestrictionDerivedPullback
-      f RV SV RU SU aV aU cR cS comm).inv = b.hom := by
-    dsimp [proEtaleRingRestrictionDerivedPullback, b]
-    rw [Category.assoc]
-    rfl
-  rw [hb, hd]
+  rw [hd]
+  dsimp only [m]
+  rw [canonicalDerivedMate]
   exact mate_adjunct (proEtaleRingDerivedAdjunction f SV SU cS)
-    (proEtaleRingDerivedAdjunction f RV RU cR) (TwoSquare.mk _ _ _ _ b.hom) M N t
+    (proEtaleRingDerivedAdjunction f RV RU cR)
+    (TwoSquare.mk _ _ _ _
+      (proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm).inv) M N t
 
 end AlgebraicGeometry.Scheme
