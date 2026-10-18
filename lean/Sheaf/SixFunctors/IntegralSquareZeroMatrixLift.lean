@@ -38,4 +38,46 @@ theorem integral_square_zero_matrix_lift
     B * (C * (1 - N)) = 1 ∧
       (1 - P) * C * B = 1 ∧
       C * (1 - N) = (1 - P) * C := by
-  sorry
+  let N : Matrix (Fin r) (Fin r) R := B * C - 1
+  let P : Matrix (Fin r) (Fin r) R := C * B - 1
+  have hmapC : C.map I.ringCon.mk' = D := by
+    ext i j
+    exact hC i j
+  have hmapN : N.map I.ringCon.mk' = 0 := by
+    change I.ringCon.mk'.mapMatrix (B * C - 1) = 0
+    rw [map_sub, map_mul, map_one]
+    change B.map I.ringCon.mk' * C.map I.ringCon.mk' - 1 = 0
+    rw [hmapC, hBD, sub_self]
+  have hmapP : P.map I.ringCon.mk' = 0 := by
+    change I.ringCon.mk'.mapMatrix (C * B - 1) = 0
+    rw [map_sub, map_mul, map_one]
+    change C.map I.ringCon.mk' * B.map I.ringCon.mk' - 1 = 0
+    rw [hmapC, hDB, sub_self]
+  have hsquare (M : Matrix (Fin r) (Fin r) R)
+      (hM : M.map I.ringCon.mk' = 0) : M * M = 0 := by
+    have hmem (i j : Fin r) : M i j ∈ I := by
+      apply (I.mem_iff _).mpr
+      apply I.ringCon.eq.mp
+      change I.ringCon.mk' (M i j) = I.ringCon.mk' 0
+      rw [map_zero]
+      exact congrFun (congrFun hM i) j
+    ext i j
+    change ∑ k, M i k * M k j = 0
+    apply Finset.sum_eq_zero
+    intro k _
+    exact hI _ _ (hmem i k) (hmem k j)
+  have hN : N * N = 0 := hsquare N hmapN
+  have hP : P * P = 0 := hsquare P hmapP
+  have hBC : B * C = 1 + N := by dsimp [N]; abel
+  have hCB : C * B = 1 + P := by dsimp [P]; abel
+  change B * (C * (1 - N)) = 1 ∧ (1 - P) * C * B = 1 ∧
+    C * (1 - N) = (1 - P) * C
+  refine ⟨?_, ?_, ?_⟩
+  · rw [← mul_assoc, hBC]
+    simp only [add_mul, mul_sub, one_mul, mul_one, hN]
+    abel
+  · rw [mul_assoc, hCB]
+    simp only [mul_add, sub_mul, mul_one, one_mul, hP]
+    abel
+  · dsimp [N, P]
+    simp only [mul_sub, sub_mul, mul_one, one_mul, mul_assoc]
