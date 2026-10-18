@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-per-artin-gabber-affine-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine pushforward is perverse up to the relative dimension",
@@ -35,59 +35,120 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-per-perverse-subcategories",
+  "pqf-def-affine-morphism",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension"
  ],
  "proof": [
   {
-   "text": "This is Artin–Gabber in the form *the compact-support\npushforward along an affine morphism with fibers of dimension at most\n$d$ has perverse amplitude $\\le d$* (Beilinson–Bernstein–Deligne,\n*Faisceaux pervers*, Asterisque 100 (1982), Chapitre 4, § 4.1.2;\nthe proof is the one summarized below). The cohomological dimension input\nof that classical statement has the following Stacks Project entries, read\nverbatim: the affine vanishing theorem for an affine scheme of finite type\nover a field is Proposition 59.95.6,\n[Tag 0F0V](https://stacks.math.columbia.edu/tag/0F0V)\n($\\operatorname{cd}(X)\\leq\\dim(X)+\\operatorname{cd}(K)$); its relative form\nfor an affine morphism of finite type over a field is Lemma 59.95.8,\n[Tag 0F0X](https://stacks.math.columbia.edu/tag/0F0X) (if\n$\\mathcal F$ is supported in the locus $E_a(X)$ of points of\ntranscendence degree $\\leq a$, then $R^qf_*\\mathcal F$ is supported in\n$E_{a-q}(Y)$); the notion of cohomological dimension is Definition 59.95.1,\n[Tag 0F0Q](https://stacks.math.columbia.edu/tag/0F0Q); and the vanishing\non such loci is Lemma 59.95.7,\n[Tag 0F0W](https://stacks.math.columbia.edu/tag/0F0W). The estimates\nquoted in Step 1 below are the ones proved in this blueprint\n([lem-sc-cohomological-dimension]).",
+   "text": "Write $\\mathcal C_T=D^b_c(T,\\overline{\\mathbf Q}_\\ell)$ for $T=X,Y$. Use the actual completed and common-finite-stage operations. The adjunction $Lf^*\\dashv Rf_*$, with both functors preserving these constructible categories, is [lem-per-qbar-ordinary-adjunction]. Relative Verdier duality, biduality and $D_YRf_!\\cong Rf_*D_X$ over the same arbitrary field $k$ are [lem-per-qbar-arbitrary-field-duality]. The middle classes of [def-per-support-condition, def-per-perverse-subcategories] form the bounded t-structure of [lem-per-qbar-middle-tstructure]. Thus $D_T$ interchanges ${}^pD^{\\le n}$ and ${}^pD^{\\ge -n}$: one implication is the definition of cosupport and the converse follows by biduality. No algebraic-closedness or finite-field assumption is imposed on $k$. The Verdier dual in the cosupport condition of [def-per-support-condition] is there the finite-field dual of the Six-Functors chapter, defined only over $k=\\overline{\\mathbf F}_q$ and at finite coefficients $A_{E,n}$; on $\\mathcal C_T$ over the field $k$ of the statement the cosupport condition is read with $D_T$ of [lem-per-qbar-arbitrary-field-duality], exactly as [lem-per-qbar-middle-tstructure] defines ${}^pD^{\\ge n}(T)$. This reading of the imported definition is recorded for the maintainer.",
    "uses": [
-    "lem-sc-cohomological-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 1 (the fibre range). The fibers of $f$ have dimension at most\n$d$, and over the base of the finite-type morphism the relative\ncohomological range is that of a scheme of dimension $\\le d$: for a\nconstructible sheaf $G$ on $X$ the higher direct images satisfy\n$R^af_!G=0$ for $a>2d$ (the cohomological dimension estimates\n$\\operatorname{cd}_\\ell\\le2\\dim$ of\n[lem-sc-cohomological-dimension] of the Jacobian chapter at the\nfinite-torsion levels, with the adic passage of the etale-cohomology\ncontinuity [lemma-weil-pbc-etale-cohomology-continuity] of\nthe ambient-foundations chapter; for $d=0$ this is the concentration of a finite\nscheme, for $d=1$ the range of a curve $a\\le2$ – for the affine\nfibers of the affine morphism $f$ the sharper affine-Lefschetz\nrange $a\\le1$ applies as well, but the $2d$-bound is the one that\nis needed below, since the relative degree contribution of the blocks\nabsorbs the shift by $d$ but not $2d$).",
-   "uses": [
-    "lem-sc-cohomological-dimension",
-    "lemma-weil-pbc-etale-cohomology-continuity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 2 (the $\\le$-direction on the generating blocks). By the middle\nperverse $t$-structure on a curve, in the form of the perverse\ntruncation functors and of the generating blocks of the perverse heart\n(the punctual objects $i_{x,*}H$, the extensions by zero\n$j_!\\mathcal F[1]$, and the middle extensions $j_*\\mathcal F[1]$,\nBeilinson–Bernstein–Deligne, *Faisceaux pervers*, Chapitre 1,\n§§ 1.3–1.4), it suffices to check the two inclusions of\n[def-per-perverse-subcategories] on those blocks and to use the\nextension closure: a punctual block\n$K=i_{x,*}H$ has $Rf_!K$ supported in finitely many points with\nthe same degree behaviour (the finite-morphism behaviour of the closed\npoint, degree concentration $a=0$), which lies in ${}^pD^{\\le d}$;\na middle-extension block of the open type $j_*\\mathcal F[1]$ with\nthe relative curve sits over the relative open with fibers of\ndimension at most one and the relative degree range of Step 1 (degree\ncontribution $a\\le1$), whose support dimension plus the relative\ndimension contribution is shifted by exactly the $d=1$ amount, so\nthat the object lies in ${}^pD^{\\le1}$. The extension closure and\nthe truncation induction complete the $\\le$-direction in the\nstandard Artin–Gabber argument.",
-   "uses": [
+    "lem-per-qbar-ordinary-adjunction",
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-per-qbar-middle-tstructure",
+    "def-per-support-condition",
     "def-per-perverse-subcategories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.0 and 4.2.4: relative duality and the middle t-structure; modern adic domains specified in the cited helpers"
+   }
   },
   {
-   "text": "Step 3 (the $\\ge$-direction). By the duality symmetry of the middle\nperverse $t$-structure (Beilinson–Bernstein–Deligne, *Faisceaux\npervers*, Chapitre 1, § 1.3.6), $K\\in{}^pD^{\\ge0}(X)$ is equivalent to\n$D_XK\\in{}^pD^{\\le0}(X)$, and the Verdier exchange\n[fix-cor-verdier-exchange] for the affine morphism gives\n$D_Y(Rf_!K)\\cong Rf_*(D_XK)$. The cosupport condition of $Rf_!K$\nis therefore equivalent to the support condition of $Rf_*(D_XK)$,\ni.e. to the *$\\le$-assertion for $Rf_*$* applied to\n$D_XK$. That assertion is proved by the argument of Step 2 with\n$f_!$ replaced by $f_*$: the duality symmetry also exchanges the\nroles of $f_!$ and $f_*$ in the block analysis (a punctual block\nis finite on either side, and a middle-extension block satisfies the\nsame degree range with $j_*$ as it does with $j_!$, the difference\nbeing concentrated in the relative boundary, whose contribution is\nabsorbed in the same $d$-shift by the open–closed recollement\ntriangle [def-weil-open-closed-recollement] (at $\\Qlb$, [prop-sf-open-closed-triangle-all-stages]), in the form of the\nboundary sequence of the middle extension of loc. cit., § 1.4).\nHence $Rf_!K\\in{}^pD^{\\ge -d}(Y)$.",
+   "text": "Let $A\\in{}^pD^{\\le0}(Y)$. For each integer $i$ put $F=\\mathcal H^{-i}A$, and let $Z$ be the reduced closed support of $F$. By [def-per-support-condition], $\\dim Z\\le i$. If $i<0$, or $Z$ is empty, then $F=0$. Otherwise [lem-per-adic-heart-pullback-fibres] gives $\\mathcal H^{-i}(Lf^*A)\\cong f^*F$ and its fibre formula shows that its support is contained in the closed inverse image $X\\times_Y Z$. Its fibres over $Z$ have dimension at most $d$: they are fibres of $f$ followed by residue-field extension, and [lem-sc-fibre-dimension-after-base-change] identifies their local dimensions with the original ones. Apply the second inequality of [lem-zl-finite-type-fibre-image-dimension-bounds] to $X\\times_Y Z\\to Z$ to obtain $\\dim\\operatorname{Supp}\\mathcal H^{-i}(Lf^*A)\\le i+d$. This is $Lf^*A\\in{}^pD^{\\le d}(X)$ by [def-per-perverse-subcategories]. Since pullback commutes with shifts, $Lf^*({}^pD^{\\le n}(Y))\\subset{}^pD^{\\le n+d}(X)$ for all $n$. This is BBD's $Lf^*[d]$ support bound, without a smoothness assumption.",
    "uses": [
-    "fix-cor-verdier-exchange",
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages"
+    "def-per-support-condition",
+    "def-per-perverse-subcategories",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: the dimension estimate for pullback, expressed using closed supports"
+   }
+  },
+  {
+   "text": "Let $B\\in{}^pD^{\\ge0}(X)$ and $A\\in{}^pD^{\\le-d-1}(Y)$. Step 2 gives $Lf^*A\\in{}^pD^{\\le-1}(X)$. Orthogonality in [lem-per-qbar-middle-tstructure] gives $\\operatorname{Hom}(Lf^*A,B)=0$. By [lem-per-qbar-ordinary-adjunction], $\\operatorname{Hom}(A,Rf_*B)=0$. As this holds for every such $A$, the orthogonal characterization in [lem-per-qbar-middle-tstructure] gives $Rf_*B\\in{}^pD^{\\ge-d}(Y)$. This writes out the adjunction argument of BBD 1.3.17(iii).",
+   "uses": [
+    "lem-per-qbar-middle-tstructure",
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.17(iii) and 4.2.4: adjunction transfers the pullback support bound"
+   }
+  },
+  {
+   "text": "Let $K\\in{}^pD^{\\le0}(X)$. By Step 1, $D_XK\\in{}^pD^{\\ge0}(X)$, so Step 3 gives $Rf_*D_XK\\in{}^pD^{\\ge-d}(Y)$. The isomorphism $D_YRf_!K\\cong Rf_*D_XK$ of [lem-per-qbar-arbitrary-field-duality] identifies its left side with this object. Apply $D_Y$, use biduality, and use the interchange of shifted classes from Step 1 to obtain $Rf_!K\\in{}^pD^{\\le d}(Y)$. This proves the upper inclusion. No boundary term or induction is needed.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "def-per-perverse-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: the diagonal duality implication from the ordinary direct-image lower bound"
+   }
+  },
+  {
+   "text": "Now use that $f$ is affine. If $K\\in{}^pD^{\\le0}(X)$, let $F_i=\\mathcal H^{-i}K$. Its closed support has dimension at most $i$ by [def-per-support-condition]; a nonzero $F_i$ has $i\\ge0$. For $q\\ge0$, [lem-per-qbar-affine-support-bound] gives $\\dim\\operatorname{Supp}\\mathcal H^q(Rf_*F_i)\\le i-q$, and it gives zero in negative degrees. The object $Rf_*F_i[i]$ has degree $j=q-i$, so this inequality is exactly $\\dim\\operatorname{Supp}\\mathcal H^j(Rf_*F_i[i])\\le-j$. Thus $Rf_*F_i[i]\\in{}^pD^{\\le0}(Y)$ by [def-per-perverse-subcategories]. The bounded standard t-structure of [lem-per-adic-heart-pullback-fibres] and the truncation triangles of [lem-weil-heart-short-exact-triangles] build $K$ from the finitely many $F_i[i]$. Apply the exact triangulated functor $Rf_*$ of [lem-per-qbar-ordinary-adjunction] and extension closure in [lem-per-qbar-middle-tstructure]. It follows that $Rf_*K\\in{}^pD^{\\le0}(Y)$, the full affine Artin bound.",
+   "uses": [
+    "def-per-support-condition",
+    "def-per-perverse-subcategories",
+    "lem-per-qbar-affine-support-bound",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-per-qbar-ordinary-adjunction",
+    "lem-per-qbar-middle-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 4.1.1: the sheaf support estimate and bounded ordinary truncations"
+   }
+  },
+  {
+   "text": "For $K\\in{}^pD^{\\ge0}(X)$, Step 1 gives $D_XK\\in{}^pD^{\\le0}(X)$. Step 5 and [lem-per-qbar-arbitrary-field-duality] yield $D_YRf_!K\\cong Rf_*D_XK\\in{}^pD^{\\le0}(Y)$. By [def-per-support-condition, def-per-perverse-subcategories], this says $Rf_!K\\in{}^pD^{\\ge0}(Y)$. Since $d\\ge0$, this class is contained in ${}^pD^{\\ge-d}(Y)$ by the shifted t-structure of [lem-per-qbar-middle-tstructure]. This proves the requested lower inclusion, with the stronger affine bound of BBD 4.1.2. If $X$ is empty both inclusions hold for the zero object. The bounds specialize to $d=0$ and $d=1$; applying them to the projection of two affine lines and its stated base changes gives the claimed relative-dimension-one instance.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "def-per-support-condition",
+    "def-per-perverse-subcategories",
+    "lem-per-qbar-middle-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Corollary 4.1.2 and the relative-dimension-one specialization"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-cohomological-dimension",
-  "lemma-weil-pbc-etale-cohomology-continuity",
   "def-per-perverse-subcategories",
-  "fix-cor-verdier-exchange",
-  "def-weil-open-closed-recollement",
-  "prop-sf-open-closed-triangle-all-stages"
+  "def-per-support-condition",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-qbar-affine-support-bound",
+  "lem-per-qbar-arbitrary-field-duality",
+  "lem-per-qbar-middle-tstructure",
+  "lem-per-qbar-ordinary-adjunction",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "4.2.4 and 1.3.17(iii) for the upper bound; 4.1.1--4.1.2 for the lower bound, using modern adic categories over arbitrary fields"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -161,5 +222,39 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-artin-gabber-affine-curve",
+  "worker": "stage1",
+  "summary": "Repaired every point of the return at 60a5315a70. Replaced the invalid compactification-boundary induction by the complete pullback-dimension, ordinary-adjunction and duality argument of BBD 4.2.4. Proved the stronger affine lower bound by the sheaf Artin estimate and bounded truncations. Added arbitrary-field adic structural lemmas instead of applying finite-field-only exchange. Corrected both retained helper statements, their coefficient domains, searches and sources; removed the false equivalence and the ordinary-cohomology citation. All formulas have math delimiters. Statement unchanged.",
+  "blueprint": "Blueprint Step 1 (the ordinary 2d fibre range) is not used by the conclusion and is not carried; the reviewer removed the decorative step and its helper. Steps 1--4 replace the incorrect support/generating-block inference of blueprint Step 2 by its named BBD source 4.2.4. Steps 5--6 realize blueprint Step 3 with the actual affine Rf_* bound and arbitrary-field exchange. Source errors and explicit counterexamples are recorded in the report.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "General finite-type dimension inequality for the inverse image of each cohomology support in the BBD 4.2.4 pullback argument; the perverse unit gives no such scheme dimension theorem."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Relates the scheme-theoretic fibres used in the dimension inequality to the geometric-fibre bound in the item."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Supplies bounded ordinary truncation triangles used to pass the affine sheaf estimate to complexes; it is applied to the standard t-structure, not a finite-field model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-f0aa142b4",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-f0aa142b4 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, every cited statement, the unit sk-p-dl-a1-perverse, the main-20261015 blueprint text and proof, BBD 4.1.1/4.1.2 and 4.2.4 (PDF p.109: f^* ≤ d from dim x ≤ dim f(x)+d, then 1.3.17(iii) adjunction and duality), and Bhatt–Scholze 6.7.2, 6.7.19, 6.7.20, 6.8.14 and 6.8.15. This head is a re-push. Its node files have the same sha256 as f39937b4, which got a FIX that L approved; landing refused it for a tool reason ('--apply-fixes …/-: no such directory'). The base moved from 925e557 to c08162d, but no cited node changed its statement and the unit did not change, so I re-applied the same repair. The item statement is the blueprint's verbatim, and no target is weakened. The BBD 4.2.4 route checks out. Step 2: pullback support bound through lem-sc-fibre-dimension-after-base-change and clause 2 of lem-zl-finite-type-fibre-image-dimension-bounds, with i<0 and empty support removed first. Step 3: adjunction puts Rf_* into pD≥-d. Step 4: exchange and biduality put Rf_! into pD≤d. Step 5: the affine Rf_* sheaf estimate plus bounded truncations give pD≤0. Step 6: duality gives Rf_! into pD≥0 ⊂ pD≥-d. Tested on A^1→Spec k with Q̄ℓ[1], on p_2 with Q̄ℓ[2], on G_m→A^1, and on d=0. The four kept helpers are true for arbitrary k and are not duplicates: every existing exchange, biduality and adjunction node is over F̄_q, finite or ctf coefficients, or ambient. FIX 1: delivered Step 1 (the ordinary 2d range) is unused, as the step itself says. It was the only carrier of the batch-5-flagged lem-dg-compact-support-amplitude, so I removed it, its tool_use and the now uncited helper lem-per-qbar-fibre-compact-support-amplitude. FIX 2 (E6): def-per-support-condition defines cosupport with def-trf-dualizing-complex, which exists only over F̄_q at A_{E,n}. Step 1 now says explicitly that cosupport is read with the arbitrary-field D_T. Batch-5: the lem-per-adic-heart-pullback-fibres citations reach only the general definition def-pod-lisse-l-adic-sheaves, so they are kept; the lem-dg citation is gone; the citation from the fibre helper goes with the dropped node. No SGA is cited. Accepted tool_uses: lem-zl-finite-type-fibre-image-dimension-bounds, lem-sc-fibre-dimension-after-base-change, lem-weil-heart-short-exact-triangles. Maintainer: (1) def-per-support-condition needs an arbitrary-field Q̄ℓ dual; (2) record the blueprint source error (affine range a≤1 is false for H_c, since H_c^2(A^1)≠0; the curve blocks do not cover higher dimension); (3) check the landing's --apply-fixes argument before landing, since it caused the previous refusal.; 1 file(s) fixed by the reviewer"
  }
 }
