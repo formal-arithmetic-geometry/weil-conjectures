@@ -31,6 +31,8 @@ in terms of the roots of the characteristic polynomial counted with multiplicity
 - `LinearMap.trace_pow_eq_sum_pow_roots_charpoly` and its matrix counterpart
   `Matrix.trace_pow_eq_sum_pow_roots_charpoly`: the trace of the `m`-th power is the `m`-th power
   sum `∑ λ ^ m` of the roots.
+- `LinearMap.trace_pow_eq_of_charpoly_eq`: these traces only depend on the characteristic
+  polynomial.
 - `Matrix.charpolyRev_eq_prod_one_sub_smul`: the reciprocal characteristic polynomial
   `det (1 - t • A)` of a matrix is `∏ (1 - λ * t)`.
 -/
@@ -120,6 +122,14 @@ theorem trace_pow_eq_sum_pow_roots_charpoly (f : Module.End K V) (m : ℕ) :
       ← Multiset.count_ne_zero, count_roots, ← LinearMap.finrank_maxGenEigenspace_eq, ne_eq,
       Submodule.finrank_eq_zero]
   · rw [count_roots, ← LinearMap.finrank_maxGenEigenspace_eq, nsmul_eq_mul, mul_comm]
+
+/-- Over an algebraically closed field the traces of the powers of an endomorphism depend only
+on its characteristic polynomial. -/
+theorem trace_pow_eq_of_charpoly_eq {W : Type*} [AddCommGroup W] [Module K W]
+    [FiniteDimensional K W] {f : Module.End K V} {g : Module.End K W}
+    (h : f.charpoly = g.charpoly) (k : ℕ) :
+    LinearMap.trace K V (f ^ k) = LinearMap.trace K W (g ^ k) := by
+  rw [trace_pow_eq_sum_pow_roots_charpoly, trace_pow_eq_sum_pow_roots_charpoly, h]
 
 end LinearMap
 
