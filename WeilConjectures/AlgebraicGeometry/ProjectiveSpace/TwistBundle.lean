@@ -876,6 +876,25 @@ lemma hyperplane_comp_twistBundleSectionAux_none {m : Type u} :
     simp [hyperplaneSections, Scheme.CoordinateCover.zeroSection]
 
 
+/-- The morphism defined by sections `σ` of a coordinate cover pulls back the ratio `T_a / T_c` to
+`σ_a / σ_c` on a chart `U k` where `σ_c` is the trivialising section. -/
+lemma _root_.AlgebraicGeometry.Scheme.CoordinateCover.hom_appLE_coordRatio {X : Scheme.{u}}
+    {ι α : Type u} (𝒟 : X.CoordinateCover ι) (σ : α → 𝒟.Section 1)
+    (hσ : ∀ i, Ideal.span (Set.range fun a ↦ (σ a).s i) = ⊤) (g : X ⟶ S) (k : ι) (c : α)
+    (hc : (𝒟.U k).topIso.inv ((σ c).s k) = 1) (a : α) (h) :
+    (Scheme.CoordinateCover.hom σ hσ g).appLE (standardOpen α S c) (𝒟.U k) h
+      (coordRatio α S c a) = (σ a).s k := by
+  apply (𝒟.U k).topIso.commRingCatIsoToRingEquiv.symm.injective
+  change (𝒟.U k).topIso.inv _ = (𝒟.U k).topIso.inv _
+  have e₁ : (𝒟.U k).topIso.inv =
+      (𝒟.U k).ι.appLE (𝒟.U k) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  conv_lhs => rw [e₁, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+  rw [appLE_eq_of_eq (Scheme.CoordinateCover.ι_hom σ hσ g k)]
+  exact homOfSections_appLE_coordRatio (S := S) ((𝒟.U k).ι ≫ g)
+    (fun a ↦ (𝒟.U k).topIso.inv ((σ a).s k)) (Scheme.CoordinateCover.span_topIso_inv σ hσ k) hc a _
+
 /-! ### Renaming the homogeneous coordinates -/
 
 section Reindex
@@ -951,6 +970,30 @@ lemma reindexHom_comp_reindexHom_symm (e : α ≃ β) :
       (Scheme.CoordinateCover.span_topIso_inv _ (span_reindexSections S e) i)
       (by simp [(standardCoordinateCover α S).ratio_self i]) _ _).trans ?_
     simp [Scheme.CoordinateCover.coord_s, standardCoordinateCover_ratio]
+
+/-- The isomorphism `ℙ(α; S) ≅ ℙ(β; S)` renaming the homogeneous coordinates along `e`. -/
+noncomputable def reindexIso (e : α ≃ β) : ℙ(α; S) ≅ ℙ(β; S) where
+  hom := reindexHom S e
+  inv := reindexHom S e.symm
+  hom_inv_id := reindexHom_comp_reindexHom_symm S e
+  inv_hom_id := by simpa using reindexHom_comp_reindexHom_symm S e.symm
+
+lemma reindexHom_appLE_coordRatio (e : α ≃ β) (i : α) (c b : β) (hc : e.symm c = i) (h) :
+    (reindexHom S e).appLE (standardOpen β S c) (standardOpen α S i) h (coordRatio β S c b) =
+      coordRatio α S i (e.symm b) := by
+  subst hc
+  exact Scheme.CoordinateCover.hom_appLE_coordRatio (S := S) (standardCoordinateCover α S)
+    (fun b ↦ (standardCoordinateCover α S).coord (e.symm b)) (span_reindexSections S e) _
+    (e.symm c) c (by
+      simp only [Scheme.CoordinateCover.coord_s, (standardCoordinateCover α S).ratio_self]
+      exact map_one _) b h
+
+lemma hyperplane_appLE_coordRatio (i : α) (b : Option α) (h) :
+    (hyperplane α S).appLE (standardOpen (Option α) S (some i)) (standardOpen α S i) h
+      (coordRatio (Option α) S (some i) b) = (hyperplaneSections α S b).s i :=
+  Scheme.CoordinateCover.hom_appLE_coordRatio (S := S) (standardCoordinateCover α S)
+    (hyperplaneSections α S) (span_hyperplaneSections α S) _ i (some i)
+    (hyperplaneSections_some_s_self α S i) b h
 
 end Reindex
 
