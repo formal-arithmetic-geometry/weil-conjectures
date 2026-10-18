@@ -14,40 +14,33 @@
  },
  "proof": [
   {
-   "text": "Use the exact Gabriel--Popescu presentation and its derived exact localization. The source is a compactly generated module derived category.",
+   "text": "Use the existing exact compact localization model of the Grothendieck derived category. Its source is compactly generated, the localization has an invertible counit, and the image of its compact generating family generates the target by the compact-generator telescope theorem.",
    "uses": [
-    "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
-    "lem-g2-grothendieck-derived-exact-localization"
+    "lem-g2-grothendieck-derived-compact-localization-model",
+    "new-sfb-compact-generators-localization-generation-b4"
    ],
    "elementary": false
   },
   {
-   "text": "Generate the localization kernel by the bounded-above torsion free-complex set of Alonso--Jeremias--Souto Proposition 5.1, then use Neeman Theorem 0.2 to obtain small perfect well-generators of the quotient.",
+   "text": "Apply the ambient perfect small class theorem to the essentially small image of the source compact generators. The resulting canonical alpha-compact class is essentially small, triangulated and closed under bounded coproducts; the alpha-compact API gives smallness and the coproduct factorization class. Since the image generators generate, every localizing class containing the canonical class is all of the derived category.",
    "uses": [
-    "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
-    "lem-g2-grothendieck-derived-exact-localization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a common uncountable regular support bound and close the generating family under smaller coproducts and isomorphisms. Its skeleton is small, support bounds follow from regularity, shifts preserve it, and Krause Lemma 4 gives G4. Its localizing closure is the whole derived category.",
-   "uses": [
-    "lem-sfb-alpha-compact-object-api",
-    "lem-grothendieck-derived-has-coproducts"
+    "new-sfb-derived-perfect-small-class-core",
+    "new-sfb-derived-perfect-small-class-properties",
+    "new-sfb-compact-generators-localization-generation-b4"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
-  "lem-g2-grothendieck-derived-exact-localization",
-  "lem-sfb-alpha-compact-object-api",
-  "lem-grothendieck-derived-has-coproducts"
+  "lem-g2-grothendieck-derived-compact-localization-model",
+  "new-sfb-derived-perfect-small-class-core",
+  "new-sfb-derived-perfect-small-class-properties",
+  "new-sfb-compact-generators-localization-generation-b4"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-  "place": "Neeman, On the derived category of sheaves on a manifold, Theorem 0.2 and Section 2; Alonso--Jeremias--Souto, Localization in categories of complexes and unbounded resolutions, Proposition 5.1; Krause (2001), Theorem A, Theorem C and Lemma 4."
+  "place": "Neeman Theorem 0.2 and Krause Sections 6.2-6.3, reduced in Lean using the existing compact localization model and perfect alpha-compact class API."
  },
  "mathlib_searches": [
   {
@@ -131,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "C-de4e2",
-  "group": "A2",
+  "reviewer": "COMPILER",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261017T210422-L-1009146",
+  "landing": "20261018T002706-L-2157785",
   "kind": "interface",
-  "note": "independent cc review: Delivered statements of derived_exists_alphaCompactClass_core / _perfectSmallClass_core / _perfectSmallClass_properties and the new Krause IsAlphaCompact API against their nodes, change records and Krause 2001 G3/G4, Lemmas 4-5 / Neeman Thm 0.2; all 9 modules plus the unchanged importer DerivedPerfectSmallClass compiled; axioms: sorryAx only through the two new sorry statements"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

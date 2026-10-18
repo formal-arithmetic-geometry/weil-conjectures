@@ -1,0 +1,108 @@
+{
+ "id": "new-sfb-derived-perfect-well-generators-support-b4",
+ "kind": "statement",
+ "title": "Small factorization class for compact localization images",
+ "statement": "For a Grothendieck abelian category A with a v-small derived category, choose the exact compact localization model L : B ⥤ D(A) with compact generating family E. There exist a regular cardinal κ in universe v and an essentially v-small object property G on D(A) such that G is stable under integer shifts, every G-object is κ-small, G is a coproduct factorization class, and every L.obj (E j) belongs to G.",
+ "stmt_deps": [
+  "lem-g2-grothendieck-derived-compact-localization-model",
+  "def-sfb-alpha-compact-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Neeman, Theorem 0.2; Krause, Sections 6.2-6.3"
+ },
+ "proof": [
+  {
+   "text": "Apply the canonical alpha-compact class argument to a small image of the source compact generators and bound the resulting regular cardinal.",
+   "uses": [
+    "lem-g2-grothendieck-derived-compact-localization-model",
+    "def-sfb-alpha-compact-object"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-g2-grothendieck-derived-compact-localization-model",
+  "def-sfb-alpha-compact-object"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Neeman Theorem 0.2 / Krause Sections 6.2-6.3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical alpha compact objects above a regular cardinal are essentially small and coproduct factorization class",
+   "sub": "",
+   "results": "No exact theorem found; the proof uses the repository alpha-compact API.",
+   "date": "2026-10-18",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsAlphaCompact factorizationClass alpha small",
+   "sub": "",
+   "results": "CategoryTheory.IsAlphaCompact.factorizationClass and CategoryTheory.IsAlphaCompact.isAlphaSmall.",
+   "date": "2026-10-18",
+   "verdict": "Used as the factorization and smallness API."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_exists_perfectSmallClass_core",
+   "sub": "Sheaf/CategoryTheory",
+   "results": "Existing repository theorem derived_exists_perfectSmallClass_core.",
+   "date": "2026-10-18",
+   "verdict": "Used by the supporting construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sfb-derived-perfect-well-generators",
+   "place": "Supporting small-class construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGeneratorsSupport",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedPerfectWellGeneratorsSupport.lean",
+  "declaration": "CategoryTheory.exists_small_factorization_class_of_compact_localization",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18",
+  "statement": "theorem exists_small_factorization_class_of_compact_localization\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] :\n    ∃ (B : Type (max u (v + 1))) (cB : Category.{v} B),\n      letI := cB\n      ∃ (zB : HasZeroObject B) (sB : HasShift B ℤ) (pB : Preadditive B),\n      letI := zB\n      letI := sB\n      letI := pB\n      ∃ aB : ∀ n : ℤ, (shiftFunctor B n).Additive,\n      letI := aB\n      ∃ tB : Pretriangulated B,\n      letI := tB\n      ∃ (iB : IsTriangulated B) (sumsB : HasCoproducts.{v} B),\n      letI := iB\n      letI := sumsB\n      ∃ (J : Type v) (E : J → B),\n        (∀ j, IsCompactObject (E j)) ∧ IsTriangulatedGeneratingFamily E ∧\n        ∃ (L : B ⥤ DerivedCategory A) (R : DerivedCategory A ⥤ B)\n          (adj : L ⊣ R) (sL : L.CommShift ℤ),\n          letI := sL\n          L.IsTriangulated ∧ IsIso adj.counit ∧\n          ∃ (G : ObjectProperty (DerivedCategory A)) (κ : Cardinal.{v})\n            (_ : Fact κ.IsRegular),\n            ObjectProperty.EssentiallySmall.{v} G ∧ G.IsStableUnderShift ℤ ∧\n            (∀ U, G U → IsAlphaSmall U κ) ∧\n            G.IsCoproductFactorizationClass ∧\n            ∀ j, G (L.obj (E j))"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T002706-L-2157785",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T002706-L-2157785",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
