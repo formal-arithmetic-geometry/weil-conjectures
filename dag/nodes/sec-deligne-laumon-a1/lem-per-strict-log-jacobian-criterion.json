@@ -13,9 +13,81 @@
   "def-weil-pbc-geometric-stalks",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=h^*\\omega_{Y/S}$, $F=\\omega_{X/S}$ and let $u:E\\to F$ send $da$ to $d(h^*a)$ and $d\\log m$ to $d\\log h^\\flat m$. The logarithmic calculus gives finite locally free modules. Choose strict etale neighborhoods at the given point on which they have finite bases. The hypothesis says the resulting finite matrix has full column rank over the geometric residue field, hence also over the residue field of the point on the chosen neighborhood: scalar extension by a field is faithful, as a nonzero vector remains nonzero. Apply the finite-free residue-localization lemma to shrink this neighborhood so that $u$ has a left inverse $r:F\\to E$. Finite sections and the inverse identities spread from an etale stalk to an etale neighborhood by the definition of that stalk (only finitely many entries and equalities occur). Denote this etale neighborhood by $U\\to X$ and replace $X$ by $U$ for the following lifting calculation. Log smoothness over $S$ and the calculus persist under this localization.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-pc-finite-free-map-residue-localization-strong"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+   }
+  },
+  {
+   "text": "The map $h:U\\to Y$ is locally of finite presentation. Indeed the calculus gives this for $U\\to S$ and $Y\\to S$. Work over a common affine open $\\operatorname{Spec}R\\subset S$, and affine opens $\\operatorname{Spec}B\\subset Y$, $\\operatorname{Spec}C\\subset U$ with $h(\\operatorname{Spec}C)\\subset\\operatorname{Spec}B$. The affine-open finite-presentation theorem gives that $B$ and $C$ are finitely presented over $R$, so $B$ is of finite type over $R$. The intermediate-algebra finite-presentation theorem applied to $R\\to B\\to C$ gives that $C$ is finitely presented over $B$. These neighborhoods cover $U$.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+   }
+  },
+  {
+   "text": "Take any affine square-zero thickening $i:T_0\\hookrightarrow T$, ideal $\\mathcal I$, and scheme maps $a_0:T_0\\to U$, $b:T\\to Y$ with $ha_0=bi$. Endow $T$ with $b^*M_Y$ and $T_0$ with its pullback. These are fine log structures on arbitrary test schemes: a finite integral chart for $M_Y$ pulls back to the same prelog chart followed by association with the units. Since $h$ is strict, $a_0$ has the canonical log map, and $i$ is strict. Concretely $b^*M_Y$ is the sheafification of the pushout $b^{-1}M_Y\\oplus_{\\beta^{-1}\\mathcal O_T^\\times}\\mathcal O_T^\\times$; a compatible map out is determined by its maps on the two factors. Apply the calculus to $U\\to S$. Etale locally on $T$ there is a log lift $a:T\\to U$ of $a_0$ over $S$. It need not yet be a lift over $Y$. All subsequent calculations take place on this covering, which suffices for the etale-local smoothness criterion.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-etale-local-infinitesimal-lifts-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+   }
+  },
+  {
+   "text": "The two log maps $ha$ and $b$ to $Y$ are lifts over $S$ of the same map $ha_0$. The torsor assertion for $Y\\to S$ gives their unique difference $\\delta:(ha_0)^*\\omega_{Y/S}\\to\\mathcal I$, with the sign convention $ha=b+\\delta$. Pull back $r$ along $a_0$ and put $\\epsilon=-\\delta\\circ a_0^*r:a_0^*\\omega_{U/S}\\to\\mathcal I$. The torsor assertion for $U\\to S$ defines a new lift $a'=a+\\epsilon$. For a regular function $v$ on $Y$, the change in $(ha)^\\sharp(v)$ is $\\epsilon(dh^*v)$; for a log section $m$ it is multiplication by $1+\\epsilon(d\\log h^\\flat m)$. Thus the difference of $ha'$ from $ha$ is $\\epsilon\\circ a_0^*u=-\\delta$, since $ru=1$. Additivity follows directly from $(1+s)(1+t)=1+s+t$ for $s,t\\in\\mathcal I$. Consequently $ha'=b$ both on functions and on log sections, and $a'|_{T_0}=a_0$. This proves existence of solutions etale locally for every test square, with no Noetherian hypothesis on the tests.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+   }
+  },
+  {
+   "text": "Apply the etale-local infinitesimal smoothness lemma to $U\\to Y$, using its local finite presentation from Step 2 and the lifts constructed in Steps 3--4. It is smooth. The pointwise etale-source locality theorem, applied to $U\\to X$ and $h:X\\to Y$, implies that the original $h$ is smooth at the image of our chosen point of $U$. By the meaning of smooth at a point, there is an open neighborhood of $\\bar x$ on which $h$ is smooth. No assertion that an arbitrary etale-local lift automatically descends was used: that descent is exactly the content of the new general scheme lemma.",
+   "uses": [
+    "lem-per-etale-local-infinitesimal-lifts-smooth",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-log-smooth-infinitesimal-calculus",
+  "lem-pc-finite-free-map-residue-localization-strong",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-per-etale-local-infinitesimal-lifts-smooth",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed p.138; agent expansion of the strict logarithmic Jacobian argument into infinitesimal lifts."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-log-smooth-chart",
@@ -82,5 +154,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-strict-log-jacobian-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the cited Jacobian criterion by choosing a local cotangent retraction, lifting over S, measuring the Y-defect and cancelling it by a logarithmic derivation. One general etale-local infinitesimal scheme criterion isolated, all other ingredients reused. Statement unchanged.",
+  "blueprint": "Realizes the strict smooth comparison in Expose X Proposition 1.2 p.138 used in the ancestor artin-gabber-affine-curve Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-free-map-residue-localization-strong",
+    "why": "Finite matrix injection splits near the point; generic commutative algebra, not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Allows compatible affine charts of the two lfp structure maps."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "why": "Gives finite presentation of the comparison over the intermediate affine algebra."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Descends smoothness at a point from the etale neighborhood on which the differential map splits."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-free-map-residue-localization-strong",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-e2d562e9a",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-e2d562e9a (reviewer sub-agent of L); spot-checked: PASS: the item statement is unchanged and every step checks out; no fixes or dropped nodes. Statement: it is byte-identical to the Q84-created version and matches ILO X Prop 1.2 proof, printed p.138: b′ strict, X and X′ log smooth over Y, k(x)⊗Ω injective, hence smooth at x. Same hypotheses as the source, nothing weakened. Steps: (1) The calculus gives étale-local bases for ω. Injectivity over the geometric residue field k implies injectivity over κ(u) because κ(u)⊂k. Stacks 00O0 (residue-localization-strong) then gives a left inverse r with r∘u=1. (2) U→Y is lfp, from 01TQ on U→S and Y→S plus 00F4(4) applied to R→B→C over compatible affine opens. (3) Give T the structure b^*M_Y, which is fine, and T₀ its pullback, so the thickening is strict. Strictness of h makes a₀ a log map over S. The calculus gives étale-local lifts a. (4) The torsor clause for Y/S gives δ with ha=b+δ. Put ε=−δ∘a₀^*r. Then h(a+ε)−ha=ε∘a₀^*u=−δ, so ha′=b; I checked the signs on both functions and log sections. (5) The new node applied to U→Y, plus the pointwise étale-source clause, gives smoothness near x̄. New node lem-per-etale-local-infinitesimal-lifts-smooth: it is true by the 02H6 torsor proof on T_ét. The sheaf Hom(a₀^*Ω,I) is quasi-coherent because Ω is finitely presented (f lfp), and its H¹ vanishes on affine T by 03P2. It is statement-only and self-contained, with no SGA. It is not a duplicate: 02HX at-point needs global Artinian lifts, lem-per-fs-log-infinitesimal-criterion is the log notion, and def-sbc-smooth needs a global lift. It is not a restated clause of the item. Batch-5 flag on lem-trf-etale-source-smoothness: it is generic Stacks 036U. Its 119-node closure contains only generic scheme nodes plus the Mathlib leaf lem-trf-smooth-composition: no trace-transport node, no Poincaré node and no batch-4 target. It is outside the assumed statements and their proofs, so I accept it. The worker's tool_uses are accepted: residue-localization, the two Mathlib fp leaves, and 036U. No cycle. Minor: the report mentions a citations.json that the commit does not contain."
  }
 }
