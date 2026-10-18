@@ -32,101 +32,89 @@
  ],
  "proof": [
   {
-   "text": "Assume $F$ constructible in the precise sense of [def-weil-pbc-etale-constructible-sheaf]. Choose its finite stratification $(i_k:Z_k\\to U)_{k<n}$ with constructible images $T_k$ and finite locally constant module restrictions. By [lemma-constructible-pullback-stratification], the base changes $i'_k:Z_k\\times_U V\\to V$ form a stratification with images $u^{-1}(T_k)$. Each image is constructible by [lem-pur-scheme-constructible-preimage], applied to $u$ and $T_k$. Put $v_k:Z_k\\times_U V\\to Z_k$. Clauses (1)--(2) of [prop-weil-pbc-inverse-image-modules-exact] identify constant-coefficient module inverse image with sheaf pullback. Since $u i'_k=i_k v_k$, clause (2) of [lem-weil-pbc-inverse-image-composition-module-linear] gives $(i'_k)^{-1}u^{-1}F\\cong v_k^{-1}i_k^{-1}F$ as module sheaves. By (1) iff (2) of [lem-weil-pbc-finite-locally-constant-module-values], $i_k^{-1}F$ is locally constant with finite stalks in the coefficient category $\\mathrm{Mod}_\\Lambda$. Applying [lemma-constructible-pullback-locally-constant] and [lemma-constructible-pullback-finite] to $v_k$ preserves these two properties. By [lemma-constructible-iso-invariance] and the reverse direction of [lem-weil-pbc-finite-locally-constant-module-values], $(i'_k)^{-1}u^{-1}F$ has finite constant module values on an etale covering. This verifies both conditions of [def-weil-pbc-etale-constructible-sheaf] on the pulled-back strata. Thus $u^{-1}F$ is constructible. This argument works for any scheme morphism, without surjectivity.",
+   "text": "Use the comparison of finite-constant-value constructibility with IsConstructibleSheaf, and the proved arbitrary-morphism preservation IsConstructibleSheaf.upperStar, to obtain the forward implication and preservation for every constructible presentation object.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lemma-constructible-pullback-stratification",
-    "lem-pur-scheme-constructible-preimage",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-constructible-pullback-finite",
-    "lemma-constructible-iso-invariance"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095G, label lemma-pullback-constructible; Tag 095Q, label lemma-check-constructible, first sentence"
+    "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
    }
   },
   {
-   "text": "Assume $u^{-1}F$ constructible. The finite ring $\\Lambda$ is Noetherian, since an ascending chain of ideals is a chain of subsets of a finite set and therefore stabilizes. Fix the coefficient universe $u+1$ for $U,V:\\mathrm{Scheme}_u$ and all module values and small diagrams below. More generally let $H$ be any module sheaf on $U$ with $u^{-1}H$ constructible. By [lem-weil-pbc-module-sheaf-colimit-constructible] write $H$ as the colimit of a diagram $(H_a)$ of constructible module sheaves indexed by a small filtered category $A$, with legs $a_a:H_a\\to H$. Clause (3) of [prop-weil-pbc-inverse-image-modules-exact] makes module inverse image a left adjoint. By [lem-weil-pbc-left-adjoint-preserves-colimits], $(u^{-1}H,(u^{-1}a_a))$ is a colimit of the pulled-back diagram. Apply [lem-weil-pbc-constructible-large-colimit-factorization] on the qcqs scheme $V$ to the identity of the constructible sheaf $u^{-1}H$. It factors as $u^{-1}H\\xrightarrow{s}u^{-1}H_a\\xrightarrow{u^{-1}a_a}u^{-1}H$ for some $a$, with composite identity. Thus $u^{-1}a_a$ is a split epimorphism.",
+   "text": "For any H whose pullback is constructible, choose its filtered colimit presentation by constructible module sheaves. The coefficient-category inverse image Etale.upperStar is a left adjoint, so the mapped cocone is colimiting. Constructible-source factorization applied to the identity on its pullback gives a split epimorphic pulled-back colimit leg.",
    "uses": [
     "lem-weil-pbc-module-sheaf-colimit-constructible",
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-weil-pbc-constructible-large-colimit-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095Q, label lemma-check-constructible, filtered-colimit paragraph; Tag 03SA, label lemma-torsion-colimit-constructible (3); Tag 09Z4, label lemma-constructible-is-compact; Categories Tag 0038"
+    "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
    }
   },
   {
-   "text": "For the map $a_a:H_a\\to H$ selected in step 2, set $Q=\\operatorname{Coker}(a_a)$ in the abelian module-sheaf category [def-weil-pbc-etale-sheaves]. Exactness of module inverse image [prop-weil-pbc-inverse-image-modules-exact] gives $u^{-1}Q=\\operatorname{Coker}(u^{-1}a_a)=0$. For each point $y$ of $U$, surjectivity [def-weil-surjective-morphism] supplies $x$ of $V$ over $y$; choose an algebraic closure $\\Omega_x$ of $\\kappa(x)$ and the resulting geometric point $\\bar x$ of $V$. The composite $\\bar y=u\\bar x$ is a geometric point above $y$. Module inverse image is compatible with abelian inverse image, so [lem-weil-pbc-inverse-image-stalk-germ] applied to the underlying abelian sheaf of $Q$ identifies $Q_{\\bar y}$ with $(u^{-1}Q)_{\\bar x}=0$. The family of these $\\bar y$ covers $U$. Apply [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] to the underlying map $Q\\to0$: all its stalk maps are bijections of singleton sets, hence it is an isomorphism. For every etale object $W$, the bijection $Q(W)\\to0(W)$ says that $Q(W)$ has only its zero section. Its inverse sends zero to zero and therefore preserves addition and every $\\Lambda$-scalar action, compatibly with restrictions. Thus $Q\\cong0$ as a module sheaf. Consequently $a_a$ is an epimorphism. Steps 2--3 therefore give, for every such $H$, a constructible sheaf mapping epimorphically to $H$.",
+   "text": "Surjectivity makes module pullback faithful by the existing geometric-stalk theorem. A faithful functor reflects epimorphisms, so the selected colimit leg itself is epi. Thus every H with constructible pullback admits an epimorphism from a constructible module sheaf.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-surjective-module-pullback-faithful",
     "def-weil-surjective-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095Q, label lemma-check-constructible, stalk argument; Tags 03Q1, label lemma-stalk-pullback (3), and 03PU, label theorem-exactness-stalks"
+    "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
    }
   },
   {
-   "text": "Apply steps 2--3 first to $H=F$, obtaining an epimorphism $p:G\\to F$ with $G$ constructible. Put $K=\\operatorname{Ker}(p)$. Exactness [prop-weil-pbc-inverse-image-modules-exact] identifies $u^{-1}K$ with $\\operatorname{Ker}(u^{-1}p)$. The source $u^{-1}G$ is constructible by the arbitrary-morphism argument of step 1, and the target $u^{-1}F$ is constructible by hypothesis. The kernel clause of [thm-constructible-serre], on $V$ with the same finite commutative coefficient ring, makes $u^{-1}K$ constructible. Apply the already proved general conclusion of steps 2--3 to $H=K$; this gives an epimorphism $r:C\\to K$ with $C$ constructible. This second application is not an invocation of the theorem being proved: steps 2--3 only establish a constructible quotient presentation, not constructibility of $H$.",
+   "text": "Apply the quotient-presentation argument first to F to obtain p:G→F. Pullback preserves kernels, and the two pulled-back sheaves are constructible, so the kernel clause of the constructible Serre theorem shows that the pullback of ker(p) is constructible. Apply the same quotient-presentation argument to ker(p), obtaining r:C→ker(p) epi with C constructible.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "thm-constructible-serre"
+    "def-weil-pbc-inverse-image",
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lemma-constructible-iso-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095Q, label lemma-check-constructible, final paragraph (kernel case); Tag 03RZ, label lemma-constructible-abelian (3)"
+    "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
    }
   },
   {
-   "text": "Let $i:K\\to G$ be the kernel inclusion. Since $r$ is an epimorphism, the image of $ir:C\\to G$ is exactly $K=\\operatorname{Ker}(p)$. Since $p$ is an epimorphism, it follows in the abelian category [def-weil-pbc-etale-sheaves] that $F\\cong\\operatorname{Coker}(ir)$. Explicitly, a map out of $G$ annihilates $ir$ exactly when it annihilates $i$, because $r$ is epi; the cokernel of the kernel inclusion of the epimorphism $p$ is $p$. Both $C$ and $G$ are constructible, so the cokernel clause of [thm-constructible-serre] makes $F$ constructible. Together with step 1 this proves the equivalence.",
+   "text": "The cokernel of r followed by the kernel inclusion is isomorphic to the cokernel of that inclusion because r is epi. Since p is epi in the abelian category of module sheaves, the latter cokernel is F. The constructible cokernel clause and invariance under isomorphism therefore show F is constructible; compare back to finite constant values.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
-    "thm-constructible-serre"
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lemma-constructible-iso-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095Q, label lemma-check-constructible, last sentence; Tag 03RZ, label lemma-constructible-abelian (3)"
+    "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lemma-constructible-pullback-stratification",
-  "lem-pur-scheme-constructible-preimage",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lemma-constructible-pullback-locally-constant",
-  "lemma-constructible-pullback-finite",
-  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
   "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "def-weil-pbc-inverse-image",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-constructible-large-colimit-factorization",
-  "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-surjective-module-pullback-faithful",
   "def-weil-surjective-morphism",
-  "thm-constructible-serre"
+  "thm-constructible-serre",
+  "lemma-constructible-iso-invariance",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095Q, label lemma-check-constructible (3), quotient-and-kernel proof; the epimorphism selection is made explicit via compactness Tag 09Z4 instead of eventual constancy Tag 03SB."
+  "place": "Tag 095Q, lemma-check-constructible (3), quotient-and-kernel argument. Identity factorization uses Tag 09Z4. Existing source comparison, constructible pullback, and faithful surjective pullback package the stratification and stalk subarguments."
  },
  "mathlib_searches": [
   {
@@ -263,12 +251,8 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-module-sheaf-colimit-constructible",
-  "lem-weil-pbc-constructible-large-colimit-factorization",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-finite-locally-constant-module-values"
+  "lem-weil-pbc-constructible-large-colimit-factorization"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -295,5 +279,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261018T062829-L-661912",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

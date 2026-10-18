@@ -12,19 +12,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.AlgebraicGeometry.ConstructibleColimitFactorization
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import Sheaf.AlgebraicGeometry.ConstructibleColimitFactorization
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Constructibility descends through surjective pullback
@@ -48,32 +41,19 @@ Source: Stacks Project, Tag 095Q, lemma-check-constructible (3)
 (blueprint: lem-weil-pbc-etale-constructible-surjective-pullback).
 
 Proof:
-1. For the forward direction pull back the finite locally closed stratification
-   (`lemma-constructible-pullback-stratification`). Its strata remain constructible
-   (`lem-pur-scheme-constructible-preimage`). Module inverse image and its composition
-   isomorphism (`prop-weil-pbc-inverse-image-modules-exact`,
-   `lem-weil-pbc-inverse-image-composition-module-linear`) identify the stratum restrictions.
-   Finite locally constant module values remain so, by
-   `lem-weil-pbc-finite-locally-constant-module-values`,
-   `lemma-constructible-pullback-locally-constant`, `lemma-constructible-pullback-finite`,
-   and `lemma-constructible-iso-invariance`. This direction needs no surjectivity.
-2. For any sheaf H with constructible pullback, present H as a filtered colimit of
-   constructible module sheaves (`lem-weil-pbc-module-sheaf-colimit-constructible`).
-   Inverse image is a left adjoint (`prop-weil-pbc-inverse-image-modules-exact`) and preserves
-   this colimit (`lem-weil-pbc-left-adjoint-preserves-colimits`). Apply
-   `lem-weil-pbc-constructible-large-colimit-factorization` to the identity of the pullback
-   of H: one pulled-back colimit leg is a split epimorphism.
-3. Exactness of inverse image makes the cokernel of that leg vanish after pullback.
-   Surjectivity supplies a geometric point above every point of U. The stalk comparison
-   (`lem-weil-pbc-inverse-image-stalk-germ`) and detection of isomorphisms on these stalks
-   (`lem-weil-pbc-sets-etale-iso-on-geometric-stalks`) make the cokernel zero already on U.
-   Thus every such H is a quotient of a constructible module sheaf.
-4. Apply this to F to obtain an epimorphism G to F with G constructible. Its kernel K
-   has constructible pullback, by exactness and the kernel clause of
-   `thm-constructible-serre`. Apply steps 2 and 3 to K to obtain an epimorphism C to K
-   with C constructible.
-5. The composite C to K to G has cokernel F. The cokernel clause of
-   `thm-constructible-serre` therefore makes F constructible, proving the converse. -/
+1. Compare finite constant values with the source library's finite-stalk constructibility
+   predicate and use `IsConstructibleSheaf.upperStar` for preservation by arbitrary pullback.
+2. Present any sheaf H with constructible pullback as a filtered colimit of constructible
+   sheaves. Pullback preserves this colimit since it is a left adjoint. Factor the identity
+   of its constructible pullback through a pulled-back colimit leg, making that leg a split
+   epimorphism. Surjective module pullback is faithful by the geometric-stalk comparison,
+   so it reflects epimorphisms. Thus H is a quotient of a constructible sheaf.
+3. Apply this to F, obtaining an epimorphism p : G ⟶ F with G constructible. Exactness of
+   pullback and constructibility of kernels show that the pullback of kernel p is
+   constructible. Apply step 2 again to obtain an epimorphism r : C ⟶ kernel p with C
+   constructible.
+4. The cokernel of r followed by the kernel inclusion is the cokernel of the kernel
+   inclusion, hence F, since p is epi. Constructibility of cokernels completes the proof. -/
 theorem isConstructibleEtaleModuleSheaf_iff_surjective_pullback
     {U V : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U]
     [CompactSpace V] [QuasiSeparatedSpace V] (f : V ⟶ U) [Surjective f]
@@ -81,6 +61,51 @@ theorem isConstructibleEtaleModuleSheaf_iff_surjective_pullback
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsConstructibleEtaleModuleSheaf F ↔
       IsConstructibleEtaleModuleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  sorry
+  classical
+  let L := Etale.upperStar (ModuleCat.{u + 1} Λ) f
+  have : L.Faithful := Etale.faithful_upperStar_of_surjective Λ f f.surjective
+  have pullback_constructible
+      (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      (hG : IsConstructibleEtaleModuleSheaf G) :
+      IsConstructibleEtaleModuleSheaf (L.obj G) := by
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hG
+    exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (IsConstructibleSheaf.upperStar f G)
+  refine ⟨pullback_constructible F, fun hF ↦ ?_⟩
+  have quotient_presentation
+      (H : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      (hH : IsConstructibleEtaleModuleSheaf (L.obj H)) :
+      ∃ (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        (p : G ⟶ H), IsConstructibleEtaleModuleSheaf G ∧ Epi p := by
+    obtain ⟨A, hA, hfiltered, D, hD, ι, ⟨hc⟩⟩ :=
+      exists_filtered_colimit_constructible H
+    let := hA
+    let := hfiltered
+    have hLc := Limits.isColimitOfPreserves L hc
+    obtain ⟨a, q, hq⟩ := exists_constructible_hom_of_isColimit
+      (L.obj H) hH hLc (𝟙 (L.obj H))
+    have : Epi (L.map (ι.app a)) := epi_of_epi_fac hq
+    exact ⟨D.obj a, ι.app a, hD a, L.epi_of_epi_map inferInstance⟩
+  obtain ⟨G, p, hG, hp⟩ := quotient_presentation F hF
+  let := hp
+  have hGp := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp
+    (pullback_constructible G hG)
+  have hFp := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hF
+  have hKp := IsConstructibleSheaf.kernel (L.map p)
+  have hK : IsConstructibleEtaleModuleSheaf (L.obj (Limits.kernel p)) := by
+    apply (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+    exact IsConstructibleSheaf.of_iso (Limits.PreservesKernel.iso L p).symm
+  obtain ⟨C, r, hC, hr⟩ := quotient_presentation (Limits.kernel p) hK
+  let := hr
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hG
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hC
+  have := IsConstructibleSheaf.cokernel (r ≫ Limits.kernel.ι p)
+  apply (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  apply IsConstructibleSheaf.of_iso (F := Limits.cokernel (r ≫ Limits.kernel.ι p))
+  exact Limits.cokernelEpiComp r (Limits.kernel.ι p) ≪≫
+    (Limits.cokernelIsCokernel (Limits.kernel.ι p)).coconePointUniqueUpToIso
+      (Abelian.epiIsCokernelOfKernel
+        (Limits.KernelFork.ofι (Limits.kernel.ι p) (Limits.kernel.condition p))
+        (Limits.kernelIsKernel p))
 
 end AlgebraicGeometry.Scheme
