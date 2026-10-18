@@ -83,6 +83,28 @@ noncomputable def localFrobenius (W : StrictWeilComplex (ModuleCat.{u + 1} R) g)
 variable (S : Type (u + 1)) [CommRing S] [Algebra R S] [Finite R] [Finite S]
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent R X]
 
+/-- The comparison map `ξ : RΓ_c(X, K) ⊗ᴸ_R S ⟶ RΓ_c(X, K_S)` carries `F_{c,m} ⊗ᴸ_R S` to the
+global Frobenius operator `F_{c,m}` of the scalar extension `(K_S, φ_S)`. -/
+theorem globalFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R) g) (m : ℕ) :
+    L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).map (W.globalFrobenius c hi hg m) ≫
+        (rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S c).app W.obj.obj =
+      (rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S c).app W.obj.obj ≫
+        (W.extendScalars S aX).globalFrobenius c hi hg m := by
+  rw [globalFrobenius, globalFrobenius, compactFrobenius_extendScalarsWeilDatum,
+    extendScalars_frobenius_hom, extendScalarsWeilDatum_weilDatumIterate]
+
+/-- At a point `x` fixed by `g^m`, the isomorphism `(K_S)_x̄ ≅ K_x̄ ⊗ᴸ_R S` carries the local
+Frobenius operator `F_{x,m}` of the scalar extension `(K_S, φ_S)` to `F_{x,m} ⊗ᴸ_R S`. -/
+theorem localFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R) g) (m : ℕ)
+    (x : Spec (.of k) ⟶ X) (hx : x ≫ iterateHom g.hom m = x) :
+    (W.extendScalars S aX).localFrobenius m x hx ≫
+        (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj.obj =
+      (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj.obj ≫
+        L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).map (W.localFrobenius m x hx) := by
+  rw [localFrobenius, localFrobenius, extendScalars_frobenius_hom,
+    ← extendScalarsWeilDatum_weilDatumIterate]
+  exact stalkFrobenius_extendScalarsWeilDatum_comp R S hx _
+
 /-- Blueprint `sk-p-trace-coeff`: **finite-level coefficient change**. Let `R → S` be a
 homomorphism of finite commutative rings whose exponent is invertible on `X`, `(K, φ)` a strict
 Weil complex over `R` and `(K_S, φ_S)` its scalar extension. Then compact cohomology and the
@@ -105,14 +127,9 @@ theorem extendScalars_compactCohomology_stalk (W : StrictWeilComplex (ModuleCat.
             (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj.obj =
           (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj.obj ≫
             L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).map
-              (W.localFrobenius m x hx) := by
-  refine ⟨isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app R S c
-    W.obj.property, ?_, fun x hx ↦ ?_⟩
-  · rw [globalFrobenius, globalFrobenius, compactFrobenius_extendScalarsWeilDatum,
-      extendScalars_frobenius_hom, extendScalarsWeilDatum_weilDatumIterate]
-  · rw [localFrobenius, localFrobenius, extendScalars_frobenius_hom,
-      ← extendScalarsWeilDatum_weilDatumIterate]
-    exact stalkFrobenius_extendScalarsWeilDatum_comp R S hx _
+              (W.localFrobenius m x hx) :=
+  ⟨isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app R S c W.obj.property,
+    globalFrobenius_extendScalars c hi hg S W m, localFrobenius_extendScalars S W m⟩
 
 end StrictWeilComplex
 
