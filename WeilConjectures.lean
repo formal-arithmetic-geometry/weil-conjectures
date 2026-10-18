@@ -10214,6 +10214,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorHomEquiv
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorTensorComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DescentLimit
