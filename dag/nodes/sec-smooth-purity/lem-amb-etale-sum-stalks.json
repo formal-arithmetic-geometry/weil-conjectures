@@ -26,23 +26,8 @@
  ],
  "proof": [
   {
-   "text": "Put $P(V)=\\bigoplus_{a:V\\to U\\text{ over }X}F(V,a)$, with restrictions as in the definition of sum extension, and put $L=\\varinjlim_{(V,\\bar v)}P(V)$ in $A$-modules. Fix a small presentation of the small etale site in the universe used for these stalk colimits. Module sheafification has underlying abelian sheaf the abelian sheafification, by the module-sheafification definition. The sheafification unit therefore induces an isomorphism $\\theta:L\\to(u_!F)_{\\bar x}$ by preservation of geometric stalks under abelian sheafification. This map is $A$-linear since the unit and all restriction maps are $A$-linear. An inverse of a bijective $A$-linear map is $A$-linear: apply $\\theta$ to the additivity and scalar identities for the proposed inverse.",
+   "text": "For a presheaf F on U_et, let P be its left Kan extension along the opposite of the localization functor b : U_et -> X_et, and let B be the direct sum of the fibres of F over the lifts z of x. At W in U_et and v : x -> b(W), send a section to its germ at v.left followed by the inclusion of the summand z = v composed with the structure map of W. A refinement over U leaves z unchanged, and the stalk colimit relation identifies the restricted section with the original germ. Therefore the assignment gives a natural transformation from F to b.op composed with the skyscraper presheaf at x with value B.",
    "uses": [
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0710, lemma-stalk-j-shriek, first displayed colimit; Tag 03CY, lemma-sheafification-presheaf-modules; lemma-stalk-exact-modules (3)"
-   }
-  },
-  {
-   "text": "Write $B=\\bigoplus_{u\\bar z=\\bar x}F_{\\bar z}$. For every pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ and every $X$-map $a:V\\to U$, etale cancellation makes $a$ etale, so $(V,\\bar v)$ over $U$ is a pointed neighbourhood of $\\bar z=a\\bar v$. Send the $a$-summand section $s$ to its germ in the $\\bar z$-summand of $B$, and extend by finite sums. If $h:(V\\prime,\\bar v\\prime)\\to(V,\\bar v)$ is a refinement, then $(ah)\\bar v\\prime=a\\bar v$ and the germs of $s$ and $h^*s$ agree by the stalk colimit relations. These maps are thus a cocone, yielding an $A$-linear map $e:L\\to B$.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-etale-sum-extension",
     "def-weil-pbc-geometric-stalks",
     "def-weil-pbc-category-colimit"
@@ -54,9 +39,8 @@
    }
   },
   {
-   "text": "For each lift $\\bar z$, construct a map $i_{\\bar z}:F_{\\bar z}\\to L$ as follows. A pointed etale neighbourhood $(W,\\bar w)$ of $\\bar z$ has structure map $b:W\\to U$. Since both $b$ and $u$ are etale, $ub:W\\to X$ is etale; view $(W,\\bar w)$ as a neighbourhood of $\\bar x$. Send $t\\in F(W,b)$ to the class in $L$ of $t$ in the $b$-summand of $P(W)$. For every pointed $U$-map $h:W\\prime\\to W$, restriction in $P$ sends that summand to the $bh$-summand and the colimit relation identifies the two classes. The maps are a cocone for the stalk diagram defining $F_{\\bar z}$, so they uniquely induce $i_{\\bar z}$. Taking finite sums defines $i:B\\to L$.",
+   "text": "Apply the universal property of the left Kan extension to this natural transformation, and then the stalk-skyscraper hom equivalence. This constructs a linear map e from the fibre of P at x to B, with the asserted formula on every section germ. The same two universal properties prove that linear maps out of the fibre of P are equal if they agree on all section germs arising from F(W) for W in U_et and v : x -> b(W). This is the hom_ext helper, using Mathlib Functor.hom_ext_of_isLeftKanExtension and Point.skyscraperPresheafHomEquiv.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-etale-sum-extension",
     "def-weil-pbc-geometric-stalks",
     "def-weil-pbc-category-colimit"
@@ -64,49 +48,60 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0710, lemma-stalk-j-shriek, final colimit indexed by (phi:V to U,y) with u(phi)(y)=x; explicit inverse to the displayed regrouping"
+    "place": "Tag 0710, lemma-stalk-j-shriek, first colimit and canonical map to the regrouped direct sum"
    }
   },
   {
-   "text": "For a section $t\\in F(W,b)$ at a neighbourhood of $\\bar z$, $e i_{\\bar z}$ sends its germ to that same germ in the $\\bar z$-summand. The colimit universal property gives $e i_{\\bar z}$ equal to the summand inclusion for every $\\bar z$, hence $ei=\\mathrm{id}_B$ by finite sums. Conversely, for $s\\in F(V,a)$ in any summand of $P(V)$ at $(V,\\bar v)$, $ie$ sends its class first to its germ at $a\\bar v$, then back to its original class, using precisely the same neighbourhood $(V,a,\\bar v)$ in the definition of $i_{a\\bar v}$. Thus $ie$ is the identity on every summand of every coprojection $P(V)\\to L$, and hence on $L$ by the colimit universal property. Therefore $e$ and $i$ are inverse $A$-linear isomorphisms.",
+   "text": "For each lift z and pointed U-neighbourhood (W,w) of z, forget its map to U to get the pointed X-neighbourhood (b(W),w). Send F(W) through the Kan-extension unit to P(b(W)) and then to its fibre at x. Naturality of the unit and the stalk colimit relation show compatibility with refinements. The fibre colimit universal property gives a linear map i_z from F_z, and the direct-sum universal property combines these into i : B -> P_x.",
    "uses": [
-    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-etale-sum-extension",
     "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-etale-sum-extension"
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710, lemma-stalk-j-shriek, inverse to the final regrouping of colimits"
+   }
+  },
+  {
+   "text": "On the germ of a section in a fixed F_z, the composite i_z followed by e is precisely the inclusion into the z summand. Stalk extensionality and direct-sum extensionality give i followed by e equal to the identity of B. Conversely, on each generator F(W) -> P_x indexed by v, e followed by i returns the same germ using the same W and v. The section-germ hom_ext statement from step 2 gives e followed by i equal to the identity of P_x. Thus e and i form a linear isomorphism. For a presheaf morphism alpha, its fibre maps commute with summand inclusion by DirectSum.lmap_lof and with germs by Point.toPresheafFiber_naturality. Naturality of the Kan-extension unit, followed by the same section-germ extensionality, proves naturality of e.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0710, lemma-stalk-j-shriek, the two final displayed equalities, with inverse identities expanded"
+    "place": "Tag 0710, lemma-stalk-j-shriek, final two displayed equalities and their inverse generator maps"
    }
   },
   {
-   "text": "The required isomorphism is $e\\theta^{-1}$. A section $s$ in the $a$-summand of $P(V)$ represents $\\theta([s])$ in the sheaf stalk, so this isomorphism sends it to its germ in the $a\\bar v$-summand, exactly as asserted. For a morphism $\\alpha:F\\to G$, both composites in the naturality square send each such $s$ to the germ of $\\alpha_{(V,a)}(s)$ in the same summand. Equality follows first on finite sums, then from the stalk colimit universal property. Sheafification-unit naturality identifies this square with the one for $(u_!F)_{\\bar x}$.",
+   "text": "Specialize F to a sheaf. Mathlib Point.presheafToSheafCompSheafFiberIso, equivalently the IsIso instance for the fibre of toSheafify, identifies P_x with the fibre of its sheafification, which is u_!F. Compose its inverse with e. Naturality of toSheafify and of e proves naturality of this sheaf isomorphism. Point.toPresheafFiber_naturality identifies the germ of a sheafified Kan-unit section with the image under the sheafification fibre map of its presheaf germ; cancelling the sheafification isomorphism gives exactly the displayed section formula.",
    "uses": [
     "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-sheafification-geometric-stalk",
     "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-category-colimit",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S5, proposition-describe-jshriek, last paragraph (etale-cohomology.tex); Tag 0710, lemma-stalk-j-shriek, generator formula"
+    "place": "Tag 03S5, proposition-describe-jshriek, last paragraph; Tag 0710, lemma-stalk-j-shriek, sheafification and generator formula"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sum-extension",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-sheafification-geometric-stalk",
+  "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-geometric-stalks"
+  "lem-weil-pbc-sheafification-geometric-stalk"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0710, lemma-stalk-j-shriek, proof; generator formula in etale-cohomology.tex Tag 03S5, proposition-describe-jshriek"
+  "place": "Tag 0710, lemma-stalk-j-shriek; Tag 03S5, proposition-describe-jshriek, generator formula. S3 realizes the colimit regrouping using the Kan-extension and stalk-skyscraper universal properties in Mathlib."
  },
  "mathlib_searches": [
   {
@@ -400,9 +395,7 @@
   ]
  },
  "tool_uses": [
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-etale-composition-cancellation"
+  "def-weil-pbc-etale-sum-extension"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -429,5 +422,15 @@
   "group": "NP",
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable statement, all six dependencies, source clauses, germ formula, naturality, universes, edge cases, records and maintainer gates. Server-only compile reproduced cleanly in 1.9 seconds. No corrections needed; branch and project clones unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261018T062908-L-674693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
