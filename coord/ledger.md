@@ -16512,3 +16512,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: merged deliver/Y5/Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties (stage 3; reviewer PASS; first push; landing 20261018T144427-L-3508340 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/Z5/Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect (stage 3; reviewer PASS; first push; landing 20261018T144429-L-3509128 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/Z7/Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect (stage 3; reviewer PASS; first push; landing 20261018T144430-L-3509599 (proof); batch 20261018T144352; modules 1; new nodes 1)
+- 14:50 L: returned deliver/E9/Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism (reviewer RETURN: (the landing tools, head ef3ed2071) the delivery did not land: lean/Sheaf/CategoryTheory/ConstantRealizationReflectsIsom)
