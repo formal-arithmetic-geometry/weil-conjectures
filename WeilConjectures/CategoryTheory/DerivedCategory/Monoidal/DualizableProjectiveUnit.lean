@@ -256,7 +256,9 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
     congr 1
     refine ((s' i ⊗ₘ t i) ≫= HomologicalComplex.ι_mapBifunctorMap j (𝟙 F) _ _
       (p i) (q i) 0 (hpq i)).trans ?_
-    simp [← hs' i, tensorHom_def]
+    simp only [tensorHom_def, whiskerRight_id, Category.assoc, curriedTensor_obj_obj,
+      curriedTensor_map_app, HomologicalComplex.id_f, curriedTensor_obj_map, whiskerLeft_id,
+      Category.id_comp, ← hs' i, Iso.cancel_iso_hom_left]
     rw [whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
   have hj : ∀ k, Mono ((j ▷ F).f k) := mono_whiskerRight_f j F hFflat
   have hd : x' ≫ (L ⊗ F).d 0 1 = 0 := by
