@@ -1,0 +1,126 @@
+{
+ "id": "src-sbc-exact-functor-plus-unit",
+ "kind": "statement",
+ "title": "The bounded-below right-derived unit of an exact functor is invertible",
+ "statement": "Let C,D be abelian categories with supplied derived categories [def-pc-derived-category], assume C has enough injectives [def-sp-injective-resolutions], and let F:C to D be additive and exact [def-sp-left-exact-additive]. Then the canonical natural transformation F.rightDerivedFunctorPlusUnit from termwise F followed by Qh to Qh followed by the bounded-below right derived functor is an isomorphism. In particular every component on the bounded-below homotopy category is invertible.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, exact functors and their derived functors"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "An exact functor induces mapDerivedCategory, and its homology comparison shows that it preserves bounded-below objects. Restrict to obtain mapDerivedCategoryPlus with the natural isomorphism mapDerivedCategoryPlusFactorsh from Qh followed by the induced functor to the termwise functor followed by Qh.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded-below factorization exhibits the termwise functor as one already inverting quasi-isomorphisms. Its inverse is therefore a right-derived unit. Uniqueness of right derived functors compares this pair to rightDerivedFunctorPlus. The existing source proof constructs rightDerivedFunctorPlusIsoMapDerivedCategoryPlus and proves that the derived unit followed by this isomorphism equals mapDerivedCategoryPlusFactorsh.inv. Cancel the second factor, an isomorphism, to obtain invertibility of the canonical unit.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusExact.lean",
+  "place": "Existing complete proof of CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of the bounded below right derived functor of an exact functor is invertible",
+   "results": "Generic totalRightDerivedUnit and degree-zero units; no exact bounded-below comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact additive functor the unit of its bounded below right derived functor is an isomorphism",
+   "results": "Degree-zero right-derived unit lemmas only.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_rightDerivedFunctorPlusUnit in lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor",
+   "results": "Found proved instance in PlusExact.lean:104 and its canonical factorization equation.",
+   "date": "2026-10-18",
+   "verdict": "Exact source-library match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact",
+  "date": "2026-10-18",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-integral-etale-direct-image-exact",
+   "place": "Reuse existing source-library proof in the integral exactness and derived comparison argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact",
+  "declaration": "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit",
+  "statement": "instance isIso_rightDerivedFunctorPlusUnit : IsIso F.rightDerivedFunctorPlusUnit",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-18",
+  "note": "Attachment to an existing proved declaration; no Lean source or new hole is added."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261018T062727-L-641115",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261018T062727-L-641115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

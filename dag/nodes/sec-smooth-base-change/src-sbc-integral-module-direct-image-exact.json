@@ -1,0 +1,145 @@
+{
+ "id": "src-sbc-integral-module-direct-image-exact",
+ "kind": "statement",
+ "title": "Integral direct image is exact for module coefficients",
+ "statement": "Let X,Y be schemes in universe u, f:X to Y an integral morphism [def-weil-finite-integral-morphism], and Lambda a commutative ring in universe u+1. The direct image on sheaves of Lambda-modules on the small etale sites [def-weil-pbc-etale-site], given by restriction along base change [def-weil-pbc-direct-image], preserves finite colimits. No finiteness or surjectivity assumption on f is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04C2, lemma-what-integral, exactness for abelian and module sheaves"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The attached declaration already has a complete Lean proof. Its geometric input, Scheme.Hom.Nbhd.exists_hom_disjoint_cover in the source library, is itself proved: restrict the pointed neighbourhood to an affine open; choose a finite standard-etale subcover by quasi-compactness; descend its algebras to a finite subalgebra of the integral algebra; use lying over to retain covering; choose split pieces refining that finite cover; pull those pieces back. The maps to the original members are constructed by the tensor-product pullback universal property. This is a reuse of completed source proofs, not an additional unproved geometric obligation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an epimorphism of module sheaves, represent a germ of its direct image by a section on a pointed etale neighbourhood. The local-surjectivity criterion makes its image sieve covering. Apply the completed geometric refinement just described and choose local lifts on its disjoint opens.",
+   "uses": [
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass to the underlying set sheaves. The disjoint-cover compatibility lemma and the sheaf unique-amalgamation property glue the chosen lifts, including for an empty cover. Naturality and uniqueness show that their image is the original section. The stalk coprojection equations then show that the new germ lifts the chosen germ.",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The algebraically closed geometric points jointly reflect epimorphisms. At each point the preceding germ argument gives a surjection of module stalks, hence an epimorphism. Thus integral module direct image preserves epimorphisms.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct image is already additive and left exact. The source proof applies preservesHomology_of_preservesEpis_and_kernels, then preservesFiniteColimits_of_preservesHomology, giving the displayed finite-colimit preservation.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-disjoint-etale-sections-product",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-direct-image-left-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/Integral/Exact.lean",
+  "place": "Existing complete proof of AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct image along an integral morphism of schemes is exact on sheaves of modules on the small etale site",
+   "results": "Only integral-morphism and scheme-module pushforward tools; no small-etale exactness theorem.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; reuse source-library theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image functor on abelian etale sheaves along an integral morphism preserves epimorphisms and is exact",
+   "results": "Generic preservesFiniteColimits_iff_forall_exact_map_and_epi and exactness criteria; no integral pushforward theorem.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_lowerStar_of_isIntegralHom; integral.*exact in lean/WeilConjectures",
+   "results": "Found proved Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom in WeilConjectures/SixFunctors/Integral/Exact.lean:171.",
+   "date": "2026-10-18",
+   "verdict": "Exact source-library match for module coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact",
+  "date": "2026-10-18",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-integral-etale-direct-image-exact",
+   "place": "Reuse existing source-library proof in the integral exactness and derived comparison argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Integral.Exact",
+  "declaration": "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom",
+  "statement": "theorem Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom : PreservesFiniteColimits (f)_*[ModuleCat.{u + 1} Λ]",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-18",
+  "note": "Attachment to an existing proved declaration; no Lean source or new hole is added."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261018T062727-L-641115",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261018T062727-L-641115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
