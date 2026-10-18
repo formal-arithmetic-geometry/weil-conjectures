@@ -17,9 +17,131 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $y\\mapsto x$, and put $R=\\mathcal O_{X,x}$, $S=\\mathcal O_{Y,y}$, $k=\\kappa(x)$ and $k'=\\kappa(y)$. Choose affine neighbourhoods of $y$ and $x$ on which $f$ is given by an etale ring map, as allowed by [def-weil-etale-morphism]. By [lem-sc-etale-local-dimension] the dimensions of $R,S$ are the same integer $d$, and by [lem-weil-pbc-etale-algebra-residue-field-separable] $k'/k$ is finite separable. Both local schemes are regular Noetherian by [def-weil-regular-scheme]. Their closed-point immersions are regular by [lem-per-regular-lci-geometric-calculus]; their codimension is $d$ because the maximal ideals of these regular local rings have $d$ generators. Write $\\eta_R:A_k\\to j_R^!A_R(d)[2d]$ and $\\eta_S:A_{k'}\\to j_S^!A_S(d)[2d]$ for the classes in the statement. Thus no dimension shift or Tate twist changes between the two purity tests.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sc-etale-local-dimension",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-regular-scheme",
+    "lem-per-regular-lci-geometric-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "Take any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ above $y$ and put $\\bar x=f\\bar y$. An etale algebra is an ind-etale algebra by the constant one-object filtered presentation. Hence [lem-trf-ind-etale-strict-local-invariance], applied to $f$, gives the canonical isomorphism $Y_{(\\bar y)}\\cong X_{(\\bar x)}$ over $X$. By [lem-exc-affine-strict-local-ring-comparison], these are the spectra of the algebraic strict henselizations of $S$ and $R$ respectively, with their specified residue embeddings into $\\Omega$. Denote the common strict local scheme by $C$. This use of the comparison includes its equality on residue-field evaluations; it does not identify the two ordinary local schemes or the two residue fields.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "The maps $\\rho_R:C\\to\\operatorname{Spec}R$ and $\\rho_S:C\\to\\operatorname{Spec}S$ are affine and ind-etale by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale], applied to each local scheme. The scheme $C$ is Noetherian by [lem-sc-strict-henselization-noetherian] and regular by [lem-sc-strict-henselization-regular]; its dimension is $d$ by [lem-sc-strict-henselization-dimension]. Apply [lem-trf-closed-immersion-strict-localization-cartesian] to $j_R$ and to $j_S$. Their base changes to $C$ are both the closed point $c\\hookrightarrow C$: the strict localization of a residue-field spectrum at the chosen geometric point is its separable-closure spectrum. For a field the maximal ideal is zero, so [lem-sc-ring-strict-henselization-local-maximal-ideal] says its strict henselization has zero maximal ideal and is a field; [lem-exc-affine-strict-local-ring-comparison] identifies its residue field with the chosen separable closure and identifies the geometric evaluation. In particular these are Cartesian squares of pairs, not squares obtained by replacing a whole etale fibre by one point.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "Write $i:c\\hookrightarrow C$, $a_R:c\\to\\operatorname{Spec}k$ and $a_S:c\\to\\operatorname{Spec}k'$ for the arrows of those squares. Apply [lem-per-ind-etale-closed-support-base-change] to each square, with finite coefficient ring $A=\\mathbf F_\\ell$ and complex $A_R(d)[2d]$ or $A_S(d)[2d]$. Its hypotheses hold by Step 3, with no excellence or constructibility requirement. Using [lem-asd-etale-finite-twist-pullback] to identify the pulled-back constant Tate lines gives\n$$a_R^*j_R^!A_R(d)[2d]\\cong i^!A_C(d)[2d]\\cong a_S^*j_S^!A_S(d)[2d].$$\nUnder these specific base-change comparisons, [lem-per-regular-immersion-class-calculus] identifies both $a_R^*\\eta_R$ and $a_S^*\\eta_S$ with $\\eta_i:A_c\\to i^!A_C(d)[2d]$. Its strict-localization compatibility preserves the Kummer normalization. Thus it is the maps themselves that agree, not just their source and target objects.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "Let $h:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$. Take geometric fibres of the two equal maps in Step 4 at $\\operatorname{Spec}\\Omega\\to c$. By [lem-weil-pbc-inverse-image-stalk-germ] these fibres are the fibres of $\\eta_R$ at $\\bar x$ and $\\eta_S$ at $\\bar y$; the same stalk comparison identifies the first with the fibre of $h^*\\eta_R$ at $\\bar y$. Inverse image on constant-$A$ module sheaves is exact and agrees with abelian inverse image by [prop-weil-pbc-inverse-image-modules-exact], and stalks are exact by [prop-weil-pbc-geometric-stalks-exact]. Thus these comparisons also identify every cohomology map of the fibres. Since $\\bar y$ was arbitrary, [lem-weil-pbc-derived-stalk-conservative] shows that $\\eta_S$ is an isomorphism if and only if $h^*\\eta_R$ is. Apply that criterion to the underlying abelian complexes: a bijective $A$-linear cohomology map has $A$-linear inverse, so it detects the same isomorphisms in the coefficient category.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "The functor $h^*$ reflects isomorphisms here. Indeed, for any geometric point $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$, [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] extends its embedding $k\\to\\Omega$ to $k'\\to\\Omega$, since $k'/k$ is finite separable by Step 1 and hence algebraic. This supplies a lift to $\\operatorname{Spec}k'$. The stalk comparison [lem-weil-pbc-inverse-image-stalk-germ] and exactness [prop-weil-pbc-inverse-image-modules-exact, prop-weil-pbc-geometric-stalks-exact] identify all cohomology stalk maps downstairs with those upstairs at these lifts. The criterion [lem-weil-pbc-derived-stalk-conservative] therefore reflects invertibility. Conversely any functor preserves an inverse. Combining this with Step 5 gives $\\eta_S$ invertible if and only if $\\eta_R$ invertible, proving the assertion at $y$ and $x$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244; strict-henselization invariance"
+   }
+  },
+  {
+   "text": "If $X$ is punctually pure, apply the pointwise equivalence just proved to every $y\\in Y_\\alpha$ for each $\\alpha$, so that each $Y_\\alpha$ is punctually pure. Conversely, suppose every $Y_\\alpha$ is punctually pure. For any $x\\in X$, joint surjectivity gives an $\\alpha$ and a point $y\\in Y_\\alpha$ over $x$. The pointwise equivalence gives purity of $X$ at $x$. Quantifying over $x$ proves the converse. Empty schemes and an empty covering of the empty scheme are included: all relevant pointwise assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definition 3.2.2 and the etale-local conclusion following Proposition 3.6.5, p.253"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-regular-scheme",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Definitions 3.2.1--3.2.2, p.244: details of the stated strict-henselization invariance, using existing DAG strict-local and support-base-change interfaces; etale-cover application p.253."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +177,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: returned algebraic etale, valuation, polynomial-support, or unrelated topology declarations do not state cohomological punctual purity"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|costalk|strictHenseli.*[Ee]tale",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic etaleness, cotangent vanishing and henselian ring declarations do not express the supported Kummer purity map or its invertibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"costalk\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic etaleness, cotangent vanishing and henselian ring declarations do not express the supported Kummer purity map or its invertibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Punctual cohomological purity of regular local schemes is invariant under etale neighborhoods",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Etale, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic etaleness, cotangent vanishing and henselian ring declarations do not express the supported Kummer purity map or its invertibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale invariance of local cohomological purity via strict henselization",
+   "results": "Actual search: 8 hits; HenselianLocalRing, HenselianLocalRing.toIsLocalRing, RingHom.Etale, HenselianLocalRing.mk, instHenselianRingMaximalIdeal, RingHom.Etale.propertyIsLocal, RingHom.Etale.respectsIso, Algebra.Etale.of_isLocalizationAway",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic etaleness, cotangent vanishing and henselian ring declarations do not express the supported Kummer purity map or its invertibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization identifies etale local neighborhoods and the associated cohomology with supports",
+   "results": "Actual search: 8 hits; Algebra.etaleLocus_eq_compl_support, Algebra.mem_etaleLocus_iff, RingHom.Etale.propertyIsLocal, Algebra.etaleLocus, RingHom.Etale.ofLocalizationSpan, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic etaleness, cotangent vanishing and henselian ring declarations do not express the supported Kummer purity map or its invertibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-smooth-trait-punctual-purity",
@@ -83,5 +240,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctual-purity-etale-locality",
+  "worker": "stage1",
+  "summary": "Q47 expanded ILO XVI strict-henselization invariance into an explicit comparison of the Kummer maps on the common strict local pair, followed by geometric-stalk conservativity and residue-field lifting. All facts are existing nodes. The statement and its hypotheses are unchanged; no new node, Lean writing, or compilation.",
+  "blueprint": "Realizes the inherited ancestor lem-per-artin-gabber-affine-curve proof Step 3, the regular finite-torsion local input, through the etale-local arrows in the proof of ILO XVI Theorem 3.6.2 after Proposition 3.6.5.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic Affine-chart comparison of geometric and algebraic strict local rings interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic Étale localizations preserve dimension interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "why": "Generic Local structure of a ring strict henselization interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic Strict henselization preserves local Krull dimension interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic Strict henselization preserves regular local rings interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Generic Strict localization of a closed subscheme is the base change of the ambient strict localization interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic Strict localizations are invariant under ind-etale morphisms interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Generic An algebraic extension embeds into an algebraically closed extension interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Generic Residue field extensions of an etale algebra are finite separable interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic Strict henselization is ind-etale over an affine chart interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact interface used for strict-local geometry, coefficients or stalk detection; the perverse-curve unit supplies no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-1f856032f",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-1f856032f (reviewer sub-agent of L); spot-checked: Read ILO XVI Def 3.2.1/3.2.2 (printed p.244, including the strict-henselization invariance sentence) and the p.253 reduction from 3.6.5 to 3.6.2. The statement is unchanged from base, there are no new nodes, no SGA is cited, and all steps are under 2000 chars. Step 1: etale chart, dimension equality (lem-sc-etale-local-dimension), finite separable k'/k, closed-point immersions regular of codimension d. Step 2: f is ind-etale, so lem-trf-ind-etale-strict-local-invariance plus the affine strict-local comparison give a common C = Spec R^sh = Spec S^sh. Step 3: C is Noetherian, regular, of dimension d, and ind-etale over both local schemes; 05WS Cartesian squares give the same closed point c, since the strict henselization of a field is its separable closure (via the local-max-ideal lemma). Step 4: ind-etale closed-support base change, Tate-line pullback and the class-calculus strict-localization compatibility identify a_R^*eta_R = eta_i = a_S^*eta_S as maps. Advisory: equating the item's adjoint j^! with the derived supported kernel on D^+ is elementary, by uniqueness of adjoints and t-exactness of i_*. Steps 5-6: geometric-stalk conservativity over all geometric points above y, plus lifting geometric points of Spec k to Spec k' (k'/k algebraic), give eta_S iso iff h^*eta_R iso iff eta_R iso. Step 7 is elementary. Edge cases checked: d=0, nontrivial residue extensions, f not surjective, no excellence, empty schemes. No duplicate: lem-per-punctual-strict-completion-test is the completion statement, not etale locality. Batch 5: the closure with and without the item proof is the same (16626 nodes, diff 0). Ind-etale support base change (via the generic D^+ adjunction), ind-etale strict-local invariance (05WR) and the closed-immersion strict-localization Cartesian node (05WS algebra, no other trf node in its closure) are generic and outside both assumptions, so all three are accepted. I accept the 16 generic tool_uses."
  }
 }
