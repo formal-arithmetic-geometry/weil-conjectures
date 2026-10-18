@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NH
+Authors: SHEAF groups NH, P4
 -/
 module
 
@@ -10,14 +10,16 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.Algebra.Homology.HomComplex
+public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.CategoryTheory.Monoidal.Dualizable
+import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
+import WeilConjectures.Algebra.Homology.Monoidal.Dual
+import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Tensoring K-injectives with bounded split-projective complexes
@@ -35,33 +37,59 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+private lemma isDualizable_finite_power
+    {A : Type*} [Category A] [Preadditive A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [HasFiniteBiproducts A]
+    (U : A) (hU : IsDualizable U) (n : ℕ) :
+    IsDualizable (∏ᶜ fun _ : Fin n ↦ U) := by
+  let : HasBinaryBiproducts A := HasBinaryBiproducts.of_hasBinaryProducts
+  induction n with
+  | zero =>
+    apply IsZero.isDualizable
+    rw [IsZero.iff_id_eq_zero]
+    apply Pi.hom_ext
+    intro i
+    exact Fin.elim0 i
+  | succ n hn =>
+    let V := ∏ᶜ fun _ : Fin n ↦ U
+    let e : U ⊞ V ≅ ∏ᶜ (fun _ : Fin (n + 1) ↦ U) :=
+      { hom := Pi.lift (Fin.cases biprod.fst (fun i ↦ biprod.snd ≫ Pi.π _ i))
+        inv := biprod.lift (Pi.π _ 0) (Pi.lift fun i : Fin n ↦ Pi.π _ i.succ)
+        hom_inv_id := by
+          apply biprod.hom_ext
+          · simp
+          · apply Pi.hom_ext
+            intro i
+            simp
+        inv_hom_id := by
+          apply Pi.hom_ext
+          intro i
+          refine Fin.cases ?_ (fun j ↦ ?_) i
+          · simp
+          · simp }
+    exact (hU.biprod hn).of_iso e
+
+set_option synthInstance.maxSize 2048 in
 /-- Tensoring a K-injective complex with a bounded complex of finite-free retracts
 preserves K-injectivity. Neither boundedness of `I` nor a zero differential on `P` is required.
 Source: Stacks Project, Tags 0A96, 06YQ, 0FPR, 0FNY, 0FNK
 (blueprint: lem-weil-pbc-split-perfect-tensor-kinjective).
 
 Proof:
-1. Form `D = Hom(P, R[0])` using `def-pur-hom-complex`. Its term in degree `q` is
-   the dual of `P.X (-q)`, with differential `(-1)^(q+1)` times precomposition.
-   If `P` is supported in `[a,b]`, then `D` is supported in `[-b,-a]`.
-   Dualizing the given retraction exhibits each term of `D` as a finite-free retract.
-2. Tensoring with such a retract is a retract of a finite direct sum of the identity
-   functor, hence is exact (`def-pc-flat-sheaf-modules`). Thus every term of `D` is flat.
-3. Apply `lem-pc-bounded-above-flat-kflat-site` to conclude that `D` is K-flat.
-4. Write `c_j = p(e_j)` and let `lambda_j` be the coordinates of `i`.
-   Evaluation sends `x tensor y` to `(phi maps to x phi(y))`; its inverse sends `f`
-   to the sum of `f(lambda_j) tensor c_j`. The retraction identity proves both inverse
-   identities, compatibly with restrictions (`def-pur-sheaf-tensor-product`,
-   `def-pur-sheaf-hom`). Finite support identifies the total sums with the Hom products.
-   Multiply evaluation on `I.X a tensor P.X r` by `(-1)^r` to obtain `alpha`.
-5. The Hom differential (`def-pur-hom-complex`) gives components
-   `(-1)^r d_I(x) phi(y)` and `(-1)^(a+r+1) x phi(d_P(y))`. These equal the images
-   under `alpha` of the two terms of the signed tensor differential
-   (`def-pc-tensor-complex-sheaves`). Thus `alpha` is an isomorphism of complexes.
-6. Apply `lem-pur-hom-kflat-into-kinjective` to `D` and `I`. Any map from an acyclic
-   complex into the tensor total complex becomes null-homotopic after composing with
-   `alpha`. Compose the homotopy with `alpha` inverse to obtain a null homotopy of the
-   original map (`def-pur-kinjective-complex`). -/
+1. Finite powers of the tensor unit are dualizable, by induction using the zero object
+   and binary biproducts. Dualizability passes to the given retracts, so every term of
+   `P` has a right dual.
+2. Use the source library's `P.rightDual` and `exactPairingRightDual` to construct a
+   dual complex `D` and its evaluation and coevaluation. The boundedness of `P` gives
+   bounds `[-b,-a]` for `D`. This construction includes the differential signs.
+3. Every term of `D` is dualizable, hence flat. The bounded-above flat criterion
+   (`lem-pc-bounded-above-flat-kflat-site`) therefore makes `D` K-flat.
+4. The monoidal quotient to the homotopy category preserves the dual pair. Thus
+   tensoring on the right with `D` is left adjoint to tensoring on the right with `P`.
+   For acyclic `A`, a map `A → I ⊗ P` corresponds to a map `A ⊗ D → I` there.
+   The latter is zero because `A ⊗ D` is acyclic and `I` is K-injective. The adjunction
+   preserves zero, so the original map is zero in the homotopy category and hence
+   admits a null homotopy. -/
 theorem isKInjective_mapBifunctor_of_bounded_splitFree
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
@@ -77,7 +105,52 @@ theorem isKInjective_mapBifunctor_of_bounded_splitFree
         SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))
           ⟶ P.X r, i ≫ p = 𝟙 (P.X r)) :
     (mapBifunctor I P
-      (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory R))).IsKInjective :=
-  sorry
+      (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory R))).IsKInjective := by
+  classical
+  let M := SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let : MonoidalPreadditive M :=
+    { whiskerLeft_zero := fun {X Y Z} ↦ (MonoidalCategory.tensorLeft X).map_zero Y Z
+      zero_whiskerRight := fun {X Y Z} ↦ (MonoidalCategory.tensorRight X).map_zero Y Z
+      whiskerLeft_add := fun {X Y Z} f g ↦ (MonoidalCategory.tensorLeft X).map_add (f := f) (g := g)
+      add_whiskerRight := fun {X Y Z} f g ↦
+        (MonoidalCategory.tensorRight X).map_add (f := f) (g := g) }
+  -- Closedness supplies preservation of coproducts for the total tensor construction.
+  let : MonoidalClosed M := SheafOfModules.monoidalClosed.{u} (R := R)
+  let : HasFiniteBiproducts M := HasFiniteBiproducts.of_hasFiniteProducts
+  have hdual (n : ℤ) : IsDualizable (P.X n) := by
+    obtain ⟨N, i, p, hip⟩ := hsplit n
+    exact IsDualizable.of_retract ⟨i, p, hip⟩
+      (isDualizable_finite_power _ (isDualizable_unit) N)
+  let : ∀ n, HasRightDual (P.X n) := fun n ↦ (hdual n).some
+  obtain ⟨a, b, hab⟩ := hbounded
+  have : P.IsStrictlyGE a := (isStrictlyGE_iff P a).2 (fun n hn ↦ hab n (Or.inl hn))
+  have : P.IsStrictlyLE b := (isStrictlyLE_iff P b).2 (fun n hn ↦ hab n (Or.inr hn))
+  let D := P.rightDual
+  have hDflat (n : ℤ) : SheafOfModules.IsFlat (D.X n) := by
+    have hd : IsDualizable (D.X n) :=
+      ⟨{ rightDual := P.X (-n)
+         exact := BraidedCategory.exactPairing_swap (P.X (-n)) (P.X (-n))ᘁ }⟩
+    exact hd.flat.2
+  have hD : D.IsAcyclicTensorKFlat := isKFlat_of_boundedAbove_flat D
+    ⟨-a, fun n hn ↦ D.isZero_of_isStrictlyLE (-a) n hn⟩ hDflat
+  let := exactPairingRightDual P a b
+  let := BraidedCategory.exactPairing_swap P D
+  let Q := HomotopyCategory.quotient M (.up ℤ)
+  let : ExactPairing (Q.obj D) (Q.obj P) := ExactPairing.map Q D P
+  let adj := tensorRightAdjunction (Q.obj D) (Q.obj P)
+  have := adj.isLeftAdjoint
+  refine ⟨fun {A} f hA ↦ ⟨HomotopyCategory.homotopyOfEq _ _ ?_⟩⟩
+  change Q.map f = Q.map 0
+  rw [Functor.map_zero]
+  apply (adj.homEquiv (Q.obj A) (Q.obj I)).symm.injective
+  have hg : (adj.homEquiv (Q.obj A) (Q.obj I)).symm (Q.map f) = 0 := by
+    apply IsKInjective.rightOrthogonal I
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 (hD A hA)
+  rw [hg]
+  symm
+  simp only [Adjunction.homEquiv_counit, Functor.map_zero, zero_comp]
 
 end CochainComplex

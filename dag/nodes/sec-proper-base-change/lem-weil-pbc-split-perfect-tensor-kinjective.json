@@ -22,91 +22,64 @@
  ],
  "proof": [
   {
-   "text": "Define $D^\\bullet=\\mathcal Hom^\\bullet(P^\\bullet,R[0])$ by [def-pur-hom-complex]. Thus $D^q=\\mathcal Hom_R(P^{-q},R)$ and $d_D^q(\\phi)=(-1)^{q+1}\\phi\\circ d_P^{-q-1}$. If $P$ is supported in $[u,v]$, then $D$ is supported in $[-v,-u]$. Precomposition with $p_{-q}$ and $i_{-q}$ gives $D^q\\to\\mathcal Hom_R(R^{N_{-q}},R)\\to D^q$ with composite the identity. Coordinate evaluation identifies the middle module with $R^{N_{-q}}$, so every $D^q$ is a retract of a finite free module.",
+   "text": "In the additive symmetric monoidal category of sheaves of modules [def-pur-sheaf-tensor-product], finite powers of the tensor unit are dualizable. For rank zero the product is a zero object. For successor rank, explicitly identify the product with the binary biproduct of the unit and the smaller product, and use closure of dualizable objects under biproducts. The given retractions and the proved source theorem IsDualizable.of_retract then make every term of P dualizable. The additive tensor instances are supplied by the source MonoidalFree module.",
    "uses": [
-    "def-pur-hom-complex"
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0FNY, example-dual, duality for finite-free direct summands; implemented using WeilConjectures.CategoryTheory.Monoidal.Dualizable"
+   }
+  },
+  {
+   "text": "Choose the right dual structure on each term from its proved dualizability. The source construction CochainComplex.rightDual produces a genuine complex D with terms the right duals of P in the opposite degrees, and with its signed transposed differential [def-pc-tensor-complex-sheaves]. The bounds a and b on P give bounds -b and -a on D. The proved source theorem exactPairingRightDual supplies evaluation and coevaluation satisfying the triangle identities for P and D. Symmetry reverses this to a dual pair D, P.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPR, example-dual; dual differential from Tag 0FNK, more-algebra-lemma-left-dual-complex"
+    "place": "Tag 0FPR, example-dual; Tag 0FNK, more-algebra-lemma-left-dual-complex; implemented using WeilConjectures.Algebra.Homology.Monoidal.Dual"
    }
   },
   {
-   "text": "For any module sheaf $E$ that is a retract of $R^N$, tensoring a short exact sequence with $E$ gives a retract of its $N$-fold direct sum. The latter is exact, and kernels and images in a split direct sum are computed summandwise, so the retract is exact. Hence $E$ is flat by [def-pc-flat-sheaf-modules]. Apply this to every $D^q$ using Step 1.",
+   "text": "Each term of D has P in the opposite degree as a right dual, by swapping the termwise pairing using symmetry. A dualizable object has exact tensor functors (proved source theorem IsDualizable.flat), hence the terms of D are flat [def-pc-flat-sheaf-modules]. Since D is bounded above by -a, [lem-pc-bounded-above-flat-kflat-site] makes D K-flat.",
    "uses": [
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FNY, sites-modules-example-dual, finite-free/direct-summand calculation"
-   }
-  },
-  {
-   "text": "The complex $D$ is bounded above by Step 1 and has flat terms by Step 2. Therefore [lem-pc-bounded-above-flat-kflat-site] implies that $D$ is K-flat.",
-   "uses": [
+    "def-pc-flat-sheaf-modules",
     "lem-pc-bounded-above-flat-kflat-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; flatness of dualizable objects from the tensor adjunctions"
    }
   },
   {
-   "text": "For $E=P^r$, write $c_j=p_r(e_j)$ and let $\\lambda_j:E\\to R$ be the $j$th coordinate of $i_r$, so $\\sum_j\\lambda_j(y)c_j=y$ and $\\sum_j\\phi(c_j)\\lambda_j=\\phi$ for $\\phi\\in E^\\vee$. For any module sheaf $B$, evaluation $B\\otimes_R E\\to\\mathcal Hom_R(E^\\vee,B)$ sends $x\\otimes y$ to $(\\phi\\mapsto x\\phi(y))$; its inverse sends $f$ to $\\sum_j f(\\lambda_j)\\otimes c_j$, and the two displayed identities give both inverse equations. These formulas commute with restriction on the site, and the bilinear formula induces a sheaf-tensor map by [def-pur-sheaf-tensor-product]; internal Hom is [def-pur-sheaf-hom]. Since $P$ has finite support, the sums in total degree and the products in Hom degree have only finitely many nonzero factors. Thus these evaluation isomorphisms, multiplied on the summand $I^a\\otimes P^r$ by $(-1)^r$, give degreewise isomorphisms $\\alpha^n:\\operatorname{Tot}(I\\otimes_R P)^n\\to\\mathcal Hom^n(D,I)$, with nonzero component at $q=-r$, sending $x\\otimes y$ to $(\\phi\\mapsto(-1)^r x\\phi(y))$.",
+   "text": "Let Q be the monoidal quotient to the homotopy category. The source theorem ExactPairing.map transports the dual pair D, P through Q, giving the adjunction between right tensoring by Q(D) and right tensoring by Q(P). Given an acyclic A and a map f from A to the tensor complex I tensor P [def-pc-tensor-complex-sheaves], its class corresponds under this adjunction to a map from Q(A tensor D) to Q(I). K-flatness makes A tensor D acyclic. The characterization IsKInjective.rightOrthogonal of [def-pur-kinjective-complex] makes this adjunct zero. The inverse adjunction bijection sends zero to zero because its tensor functor is a left adjoint and preserves zero morphisms. Injectivity of that bijection makes Q(f) zero, and HomotopyCategory.homotopyOfEq yields a null homotopy of f. This is exactly K-injectivity of I tensor P.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom",
     "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FNY, sites-modules-example-dual; Tag 0FPR, example-dual, termwise finite-free retract evaluation"
-   }
-  },
-  {
-   "text": "Let $x$ have degree $a$, $y$ degree $r$, and $n=a+r$. Using the differential of [def-pur-hom-complex], the $q=-r$ component of $d_{\\rm Hom}\\alpha(x\\otimes y)$ sends $\\phi$ to $(-1)^r d_Ix\\,\\phi(y)$. Its $q=-r-1$ component sends $\\phi$ to $-(-1)^n(-1)^r(-1)^r x\\phi(d_Py)=(-1)^{a+r+1}x\\phi(d_Py)$; all other components vanish. These are exactly the images under $\\alpha$ of $d_Ix\\otimes y$ and $(-1)^a x\\otimes d_Py$ in [def-pc-tensor-complex-sheaves]. Consequently $d_{\\rm Hom}\\alpha=\\alpha d_{\\rm Tot}$, and the degreewise inverses in Step 4 also commute with differentials by multiplying this equality by the inverses. Thus $\\alpha$ is an isomorphism of complexes.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FNK, more-algebra-lemma-left-dual-complex, differential sign; Tag 0FPR, example-dual"
-   }
-  },
-  {
-   "text": "By Step 3, $D$ is K-flat, and $I$ is K-injective by hypothesis; [lem-pur-hom-kflat-into-kinjective] therefore makes $\\mathcal Hom^\\bullet(D,I)$ K-injective. For any map $f:A\\to\\operatorname{Tot}(I\\otimes_R P)$ from an acyclic complex, $\\alpha f$ has a null homotopy $h$ by [def-pur-kinjective-complex]. Composing each $h^k$ with $(\\alpha^{k-1})^{-1}$ gives a null homotopy of $f$, since $\\alpha^{-1}$ is a chain map. This proves K-injectivity of the total complex without a boundedness assumption on $I$.",
-   "uses": [
-    "lem-pur-hom-kflat-into-kinjective",
     "def-pur-kinjective-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective; isomorphism invariance directly from derived-definition-K-injective"
+    "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective, tensor-adjunction and null-homotopy argument"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
   "def-pc-flat-sheaf-modules",
   "lem-pc-bounded-above-flat-kflat-site",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-hom-kflat-into-kinjective",
   "def-pur-kinjective-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0A96 and 06YQ, with duality from Tags 0FPR, 0FNY, and 0FNK"
+  "place": "Tags 0A96 and 06YQ, with duality from Tags 0FPR, 0FNY, and 0FNK. The Lean proof uses the proved source-library dual-pair construction and the tensor adjunction in the homotopy category in place of constructing an internal Hom comparison."
  },
  "mathlib_searches": [
   {
@@ -202,8 +175,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-hom-kflat-into-kinjective"
+  "lem-pc-bounded-above-flat-kflat-site"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -242,5 +214,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, all statement clauses, dependencies, sources, universes, edge cases, docstrings, and maintainer gates. Statement field matches verbatim; server-only compile reproduced cleanly in 1.8 seconds. No defects or fixes; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261018T062846-L-668611",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
