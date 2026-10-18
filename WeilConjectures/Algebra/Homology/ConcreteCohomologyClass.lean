@@ -72,10 +72,12 @@ def evalHom {X Y : A} (x : ToType X) : (X ⟶ Y) →+ ToType Y where
   map_zero' := hA.zero_apply x
   map_add' f g := hA.add_apply f g x
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma sum_apply {X Y : A} {ι : Type*} (s : Finset ι) (f : ι → (X ⟶ Y)) (x : ToType X) :
     (∑ i ∈ s, f i) x = ∑ i ∈ s, f i x :=
   map_sum (hA.evalHom x) f s
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma zsmul_apply {X Y : A} (c : ℤ) (f : X ⟶ Y) (x : ToType X) : (c • f) x = c • f x :=
   map_zsmul (hA.evalHom x) c f
 

@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
@@ -26,7 +27,7 @@ endomorphisms of the monoidal unit), so the unit is itself an isomorphism.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -62,25 +63,67 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
+section Generic
 
-/-- `Λ_X(m)[2m] ≅ Λ_X` for `m = 0`. -/
-noncomputable def tateObjectShiftIsoOfEqZero (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m : ℤ) (hm : m = 0) : (tateObject Λ X m)⟦2 * m⟧ ≅ constantComplex Λ X := by
-  subst hm
-  exact (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).app _ ≪≫ HasTateTwist.twistObjectZeroIso X
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-/-- test -/
-noncomputable def tateObjectShiftTensorIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m m' : ℤ) (h : m + m' = 0) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X m)⟦2 * m⟧)).obj
-        ((tateObject Λ X m')⟦2 * m'⟧) ≅ constantComplex Λ X :=
-  shiftTateObjectAddIso Λ X m m' ≪≫ tateObjectShiftIsoOfEqZero Λ X _ h
+attribute [local instance] derivedBraidedCategory
 
-/-- `Λ_X(-m)[-2m]` is a left dual of `Λ_X(m)[2m]`. -/
-noncomputable def tateObjectShiftExactPairing (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m : ℤ) : ExactPairing ((tateObject Λ X (-m))⟦2 * (-m)⟧) ((tateObject Λ X m)⟦2 * m⟧) :=
-  exactPairingOfTensorIso (tateObjectShiftTensorIso Λ X (-m) m (by ring))
-    (tateObjectShiftTensorIso Λ X m (-m) (by ring))
+/-- `RHom(Λ, K) ≅ K`. -/
+lemma nonempty_iso_derivedHom_unit (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty ((RHom(X)[A].obj (op (𝟙_ _))).obj K ≅ K) :=
+  ⟨MonoidalClosed.ihomObjIsoTensor (𝟙_ _) (𝟙_ _) K ≪≫ λ_ K⟩
+
+/-- `RHom(T, T) ≅ Λ` for an invertible `T`. -/
+lemma nonempty_iso_derivedHom_self_of_isInvertible
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) :
+    Nonempty ((RHom(X)[A].obj (op T)).obj T ≅ 𝟙_ _) := by
+  have := MonoidalClosed.isIso_ihomUnitToIhomTensor (𝟙_ _) hT
+  obtain ⟨e⟩ := nonempty_iso_derivedHom_unit (A := A) (X := X) (𝟙_ _)
+  exact ⟨(MonoidalClosed.internalHom.flip.obj T).mapIso (λ_ T).op ≪≫
+    (asIso (MonoidalClosed.ihomUnitToIhomTensor (𝟙_ _) T)).symm ≪≫ e⟩
+
+end Generic
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ]
+
+/-- `RHom(Λ(m)[2m], Λ(m)[2m]) ≅ Λ`: the twisting objects are invertible. -/
+lemma nonempty_iso_derivedHom_tateObjectShift (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+    (d : ℕ) :
+    Nonempty ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op ((tateObject Λ X d)⟦(2 * d : ℤ)⟧))).obj
+      ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ≅ constantComplex Λ X) :=
+  nonempty_iso_derivedHom_self_of_isInvertible (isInvertible_tateObject_shift Λ X d)
+
+variable [Finite Λ] [HasTateTwist.IsNormalized Λ]
+
+/-- For relative affine space `p : 𝔸^d_Y ⟶ Y` over a separated scheme of finite type over a
+field, `Rp_* Λ ≅ Λ_Y`: by the tensor–Hom exchange,
+`Rp_* RHom(Λ(d)[2d], Rp^! Λ) ≅ RHom(Rp_! Λ(d)[2d], Λ)`, where `Rp^! Λ ≅ Λ(d)[2d]` (purity) and
+`Rp_! Λ(d)[2d] ≅ Λ` (the affine-space trace). -/
+theorem nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace
+    {k : Type u} [Field k] (d : ℕ)
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [HasInvertibleExponent Λ Y] :
+    Nonempty ((R((𝔸(ULift.{u} (Fin d); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+      (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y)) ≅ constantComplex Λ Y) := by
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); Y) := .of_hom (𝔸(ULift.{u} (Fin d); Y) ↘ Y)
+  obtain ⟨th⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ (𝔸(ULift.{u} (Fin d); Y) ↘ Y)
+    ((twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y)))
+    (constantComplex Λ Y)
+  obtain ⟨ω⟩ := nonempty_iso_dualizingComplex_affineSpace Λ d Y aY
+  obtain ⟨tr⟩ := nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_fin Λ d Y
+  obtain ⟨hP⟩ := nonempty_iso_derivedHom_tateObjectShift Λ 𝔸(ULift.{u} (Fin d); Y) d
+  obtain ⟨hΛ⟩ := nonempty_iso_derivedHom_unit (A := ModuleCat.{u + 1} Λ) (𝟙_ _ : _root_.DerivedCategory
+    (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+  let eM : (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))
+      ≅ (tateObject Λ 𝔸(ULift.{u} (Fin d); Y) d)⟦(2 * d : ℤ)⟧ :=
+    (shiftFunctor _ (2 * (d : ℤ))).mapIso (derivedTensorLeftUnitor _ _ _)
+  let e₁ := (RHom(_)[ModuleCat.{u + 1} Λ].obj (op ((twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj
+      (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))))).mapIso (ω ≪≫ eM) ≪≫
+    (RHom(_)[ModuleCat.{u + 1} Λ].mapIso eM.symm.op).app _ ≪≫ hP
+  exact ⟨(R((𝔸(ULift.{u} (Fin d); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso e₁.symm ≪≫ th ≪≫
+    (RHom(Y)[ModuleCat.{u + 1} Λ].mapIso tr.symm.op).app _ ≪≫ hΛ⟩
 
 end AlgebraicGeometry.Etale

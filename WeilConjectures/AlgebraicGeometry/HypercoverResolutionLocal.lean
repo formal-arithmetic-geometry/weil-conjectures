@@ -52,6 +52,7 @@ variable [HasSheafify X.smallEtaleTopology A]
   [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
   [X.smallEtaleTopology.WEqualsLocallyBijective A]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 /-- In an exact sequence of sheaves, cocycles are locally coboundaries. -/
 lemma imageSieve_mem_of_exact (S : ShortComplex (Sheaf X.smallEtaleTopology A)) (hS : S.Exact)
     (T : X.Etale) (s : ToType (S.X₂.obj.obj (op T))) (hs : S.g.hom.app (op T) s = 0) :
@@ -67,6 +68,7 @@ lemma imageSieve_mem_of_exact (S : ShortComplex (Sheaf X.smallEtaleTopology A)) 
     exact (congrArg (fun φ ↦ φ.hom) (kernel.lift_ι S.g S.f S.zero)).symm
   rw [e, NatTrans.comp_app, ConcreteCategory.comp_apply, ht, NatTrans.naturality_apply, hk]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 /-- An injective resolution is locally exact in positive degrees. -/
 lemma locallyExactPos_of_injectiveResolution {F : Sheaf X.smallEtaleTopology A}
     (I : InjectiveResolution F) : LocallyExactPos I.cocomplex :=

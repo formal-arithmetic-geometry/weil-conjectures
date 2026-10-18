@@ -67,6 +67,7 @@ lemma mono_tensorLeft_biproduct_map {n : ℕ} (M : Fin n → Mod C A) {N N' : Mo
   rw [← Category.comp_id g, ← NatTrans.id_app, ← htot, NatTrans.app_sum, Preadditive.comp_sum]
   exact Finset.sum_eq_zero fun i _ ↦ by rw [NatTrans.comp_app, ← Category.assoc, hi, zero_comp]
 
+omit [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 /-- `- ⊗_A M` preserves monomorphisms for `M` free of finite rank. -/
 lemma mono_tensorLeft_map_of_iso_biproduct {M : Mod C A} {n : ℕ}
     (e : M ≅ ⨁ fun _ : Fin n ↦ regular A) {N N' : Mod C A} (f : N ⟶ N') [Mono f] :
@@ -95,7 +96,9 @@ def leftActHom : (tensorRight A M.X).obj (regular A) ⟶ M :=
       A ◁ act (A := A) M.X ≫ act (A := A) M.X
     rw [Category.assoc, mul_act, Iso.inv_hom_id_assoc])
 
-omit [Abelian C] [MonoidalPreadditive C] [IsGrothendieckAbelian.{v, v, u} C] [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorLeft X)] [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
+omit [Abelian C] [MonoidalPreadditive C] [IsGrothendieckAbelian.{v, v, u} C]
+  [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorLeft X)]
+  [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 lemma tensorRightMap_act_comp_leftActHom :
     (tensorRightMap A (act (A := A) M.X)).app (regular A) ≫ leftActHom M =
       (tensorRightRightAct A M.X).app (regular A) ≫ leftActHom M := by

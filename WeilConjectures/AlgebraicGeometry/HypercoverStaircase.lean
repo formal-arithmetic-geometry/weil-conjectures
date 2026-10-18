@@ -85,7 +85,9 @@ section Elem
 variable (hA : ElementwiseAbelian A)
 include hA
 
-omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_totMapF_apply {U V : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (p r n : ℕ) (h : p + r = n) (x : ToType (U.totObj L n)) :
     V.totπ L p r n h (totMapF L f n x) = resMap f (L.X r) p (U.totπ L p r n h x) := by
@@ -105,13 +107,17 @@ lemma totMapF_comp {U V W : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simp
   rw [← Functor.map_comp, ← op_comp]
   rfl
 
-omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totMapF_comp_apply {U V W : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (g : W.simplicial ⟶ V.simplicial) (n : ℕ) (x : ToType (U.totObj L n)) :
     totMapF L (g ≫ f) n x = totMapF L g n (totMapF L f n x) := by
   rw [totMapF_comp, ConcreteCategory.comp_apply]
 
-omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totD_totMapF_apply {U V : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (n : ℕ) (x : ToType (U.totObj L n)) :
     V.totD L n (totMapF L f n x) = totMapF L f (n + 1) (U.totD L n x) := by
@@ -134,19 +140,19 @@ lemma stair_step (hL : LocallyExactPos L) (U : FiniteSplitEtaleHypercover X) (k 
     cases k with
     | zero =>
       obtain rfl : m = b := by omega
-      rwa [U.totπ_totD_zero_apply L hA] at hd
+      rwa [U.totπ_totD_zero_apply L] at hd
     | succ k' =>
       rw [U.totπ_totD_succ_succ_apply L hA k' (b + 1) (m + 1) (by omega),
         hx k' (b + 2) (by omega) (by omega), map_zero, zero_add] at hd
       exact zsmul_neg_one_pow_eq_zero _ hd
   obtain ⟨V, f, t, ht⟩ := exists_refinement_dVert_eq L hL U k b _ hdv
   refine ⟨V, f, ((-1 : ℤ) ^ k) • V.totι L k b m hm t, fun p r hpr hp ↦ ?_⟩
-  rw [map_sub, totπ_totMapF_apply L hA, map_zsmul, V.totD_totι_apply L hA, map_zsmul, map_add,
+  rw [map_sub, totπ_totMapF_apply L, map_zsmul, V.totD_totι_apply L hA, map_zsmul, map_add,
     map_zsmul]
   by_cases hpk : p = k
   · subst hpk
     obtain rfl : r = b + 1 := by omega
-    rw [V.totπ_totι_ne L hA (p + 1) b p (b + 1) (m + 1) _ _ (by omega), V.totπ_totι_self L hA,
+    rw [V.totπ_totι_ne L hA (p + 1) b p (b + 1) (m + 1) _ _ (by omega), V.totπ_totι_self L,
       ← ht, zero_add, smul_smul, ← pow_add, ← two_mul, pow_mul]
     simp
   · rw [hx p r hpr (by omega), map_zero,
@@ -173,10 +179,10 @@ lemma staircase (hL : LocallyExactPos L) (U : FiniteSplitEtaleHypercover X) (m :
   | succ j ih =>
     obtain ⟨V, f, y, hy⟩ := ih (by omega)
     obtain ⟨W, g, y', hy'⟩ := stair_step L hA hL V j (m - j) m (by omega) _ hy (by
-      rw [map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L hA]
+      rw [map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L]
       exact hD V f j (m - j) (by omega))
     refine ⟨W, g ≫ f, totMapF L g m y + y', ?_⟩
-    rw [totMapF_comp_apply L hA, map_add, ← sub_sub, totD_totMapF_apply L hA, ← map_sub]
+    rw [totMapF_comp_apply L, map_add, ← sub_sub, totD_totMapF_apply L, ← map_sub]
     exact hy'
 
 
@@ -191,27 +197,35 @@ lemma ι_dHor (U : SplitEtaleHypercover X) (n : ℕ) :
   ((AlgebraicTopology.alternatingCofaceMapComplex A).map
     (Functor.whiskerLeft U.simplicial.rightOp ι.hom)).comm n (n + 1)
 
-omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totRow_f_apply (U : SplitEtaleHypercover X) (n : ℕ) (w : ToType ((U.secComplex F).X n)) :
     (U.totRow ι hι).f n w = U.totι L n 0 n (add_zero n) (ι.hom.app _ w) := by
   rw [show (U.totRow ι hι).f n = ι.hom.app (op (U.simplicial _⦋n⦌)) ≫
       U.totι L n 0 n (add_zero n) from rfl, ConcreteCategory.comp_apply]
   rfl
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_totRow_self (U : SplitEtaleHypercover X) (n : ℕ) (w : ToType ((U.secComplex F).X n)) :
     U.totπ L n 0 n (add_zero n) ((U.totRow ι hι).f n w) = ι.hom.app _ w := by
-  rw [totRow_f_apply L hA, U.totπ_totι_self L hA]
+  rw [totRow_f_apply L, U.totπ_totι_self L]
   rfl
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)] in
 lemma totπ_totRow_ne (U : SplitEtaleHypercover X) (n p r : ℕ) (h : p + r = n) (hp : p ≠ n)
     (w : ToType ((U.secComplex F).X n)) : U.totπ L p r n h ((U.totRow ι hι).f n w) = 0 := by
-  rw [totRow_f_apply L hA, U.totπ_totι_ne L hA n 0 p r n _ _ (Ne.symm hp)]
+  rw [totRow_f_apply L, U.totπ_totι_ne L hA n 0 p r n _ _ (Ne.symm hp)]
 
 variable (hglob : ∀ (T : X.Etale) (s : ToType ((L.X 0).obj.obj (op T))),
     (L.d 0 1).hom.app (op T) s = 0 → ∃ w, ι.hom.app (op T) w = s)
   (hinj : ∀ T : X.Etale, Function.Injective (ι.hom.app (op T)))
 
 include hglob hinj in
+omit [X.smallEtaleTopology.HasSheafCompose (forget A)] in
 /-- A total cocycle concentrated in the last column comes from a cocycle of `C(U, F)`. -/
 lemma exists_totRow_eq_of_suppGE (U : SplitEtaleHypercover X) (n : ℕ)
     (x : ToType (U.totObj L n)) (hx : SuppGE L U n n x) (w' : ToType ((U.secComplex F).X (n + 1)))
@@ -223,7 +237,7 @@ lemma exists_totRow_eq_of_suppGE (U : SplitEtaleHypercover X) (n : ℕ)
     cases n with
     | zero =>
       have := congrArg (U.totπ L 0 1 1 rfl) hdx
-      rwa [U.totπ_totD_zero_apply L hA, h0] at this
+      rwa [U.totπ_totD_zero_apply L, h0] at this
     | succ m =>
       have := congrArg (U.totπ L (m + 1) 1 (m + 2) rfl) hdx
       rw [U.totπ_totD_succ_succ_apply L hA m 0 (m + 1) rfl, hx m 1 (by omega) (by omega),
@@ -232,7 +246,7 @@ lemma exists_totRow_eq_of_suppGE (U : SplitEtaleHypercover X) (n : ℕ)
   obtain ⟨w, hw⟩ := hglob _ _ h1
   have h2 : U.dHor L n 0 (U.totπ L n 0 n (by omega) x) = ι.hom.app _ w' := by
     have := congrArg (U.totπ L (n + 1) 0 (n + 1) rfl) hdx
-    rwa [U.totπ_totD_succ_zero_apply L hA, totπ_totRow_self L hA] at this
+    rwa [U.totπ_totD_succ_zero_apply L, totπ_totRow_self L] at this
   refine ⟨w, hinj _ ?_, U.tot_ext L hA _ _ fun p r hpr ↦ ?_⟩
   · have e := congrArg (fun φ ↦ φ w) (ι_dHor L ι U n)
     simp only [ConcreteCategory.comp_apply] at e
@@ -242,11 +256,12 @@ lemma exists_totRow_eq_of_suppGE (U : SplitEtaleHypercover X) (n : ℕ)
   · by_cases hp : p = n
     · subst hp
       obtain rfl : r = 0 := by omega
-      exact (totπ_totRow_self L hA ι hι U p w).trans hw
+      exact (totπ_totRow_self L ι hι U p w).trans hw
     · rw [totπ_totRow_ne L hA, hx p r hpr (by omega)]
       exact hp
 
 include hglob hinj in
+omit [X.smallEtaleTopology.HasSheafCompose (forget A)] in
 /-- Surjectivity on cohomology in degree `0`. -/
 lemma exists_totRow_eq_zero (U : SplitEtaleHypercover X) (x : ToType (U.totObj L 0))
     (hx : U.totD L 0 x = 0) :
@@ -267,18 +282,19 @@ lemma exists_refinement_totRow_eq (hL : LocallyExactPos L) (U : FiniteSplitEtale
     rw [hx, map_zero, map_zero])
   obtain ⟨w, hw, hwx⟩ := exists_totRow_eq_of_suppGE L hA ι hι hglob hinj V.toSplitEtaleHypercover
     (m + 1) _ hy 0 (by
-      rw [map_zero, map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L hA, hx,
+      rw [map_zero, map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L, hx,
         map_zero])
   exact ⟨V, f, w, y, hw, hwx⟩
 
 include hglob hinj in
 omit hglob in
+omit [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
 /-- Injectivity on cohomology in degree `0`. -/
 lemma eq_zero_of_totRow_eq_zero (U : SplitEtaleHypercover X) (w : ToType ((U.secComplex F).X 0))
     (hw : (U.totRow ι hι).f 0 w = 0) : w = 0 := by
   apply hinj
   rw [map_zero]
-  exact (totπ_totRow_self L hA ι hι U 0 w).symm.trans (by rw [hw, map_zero])
+  exact (totπ_totRow_self L ι hι U 0 w).symm.trans (by rw [hw, map_zero])
 
 include hglob hinj in
 /-- Injectivity on cohomology in positive degrees, after refinement. -/
@@ -308,7 +324,7 @@ lemma exists_refinement_secComplex_d_eq (hL : LocallyExactPos L)
       rw [hy, hrow, totπ_totRow_ne L hA _ _ _ _ _ _ _ (by omega)])
     obtain ⟨v, hv, -⟩ := exists_totRow_eq_of_suppGE L hA ι hι hglob hinj V.toSplitEtaleHypercover
       (m + 1) _ hy' ((secMap f F).f (m + 2) w) (by
-        rw [map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L hA, hy, hrow])
+        rw [map_sub, V.totD_totD_apply L hA, sub_zero, totD_totMapF_apply L, hy, hrow])
     exact ⟨V, f, v, hv⟩
 
 end Row

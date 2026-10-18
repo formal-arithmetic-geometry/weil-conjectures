@@ -243,7 +243,8 @@ lemma freeSheafComplex_exactAt (n : ℕ) : (U.freeSheafComplex Free).ExactAt (n 
   · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
     exact U.freeSheafComplex_d Free n
 
-omit [HasSheafify X.smallEtaleTopology A] [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+omit [HasSheafify X.smallEtaleTopology A]
+  [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
 lemma freeComplex_d_comp_augmentation :
     (U.freeComplex Free).d 1 0 ≫ (freePresheaf Free).map (terminal.from (U.simplicial _⦋0⦌)) =
       0 := by
@@ -285,6 +286,7 @@ include FA CA in
 omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
 omit [(forget A).PreservesMonomorphisms] in
 omit [Abelian A] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma epi_freeSheaf_map_augmentation :
     Epi ((freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌))) := by
   have : Presheaf.IsLocallySurjective X.smallEtaleTopology
@@ -305,7 +307,8 @@ variable [HasSheafify X.smallEtaleTopology A] [X.smallEtaleTopology.WEqualsLocal
   (adj : Free ⊣ forget A)
 
 include hsub in
-omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [(forget A).PreservesMonomorphisms] in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [(forget A).PreservesMonomorphisms]
+  in
 lemma zero_apply_of_sub {X Y : A} (x : ToType X) : (0 : X ⟶ Y) x = 0 := by
   have := hsub (0 : X ⟶ Y) 0 x
   rw [sub_zero, sub_self] at this
@@ -331,7 +334,12 @@ noncomputable def sectionsEquiv (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
   ((sheafificationAdjunction X.smallEtaleTopology A).homEquiv _ _).trans
     (((adj.whiskerRight X.Etaleᵒᵖ).homEquiv _ _).trans uliftYonedaEquiv.{w + 1})
 
-omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [Abelian A] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] [(forget A).PreservesMonomorphisms] in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [Abelian A]
+  [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] [(forget A).PreservesMonomorphisms]
+  in
 omit [(X : A) → AddCommGroup (CA X)] in
 lemma sectionsEquiv_apply (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
     (φ : (freeSheaf Free).obj V ⟶ I) :
@@ -342,7 +350,12 @@ lemma sectionsEquiv_apply (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
   erw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   rfl
 
-omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [Abelian A] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] [(forget A).PreservesMonomorphisms] in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [Abelian A]
+  [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] [(forget A).PreservesMonomorphisms]
+  in
 omit [(X : A) → AddCommGroup (CA X)] in
 lemma sectionsEquiv_naturality (I : Sheaf X.smallEtaleTopology A) {V V' : X.Etale}
     (f : V' ⟶ V) (φ : (freeSheaf Free).obj V ⟶ I) :
@@ -357,6 +370,8 @@ omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X]
   [X.smallEtaleTopology.WEqualsLocallyBijective A]
   [X.smallEtaleTopology.HasSheafCompose (forget A)]
   [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [(forget A).PreservesMonomorphisms]
+  in
 lemma sectionsEquiv_add (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
     (φ ψ : (freeSheaf Free).obj V ⟶ I) :
     sectionsEquiv Free adj I V (φ + ψ) =
@@ -374,6 +389,8 @@ noncomputable def sectionsAddEquiv (I : Sheaf X.smallEtaleTopology A) (V : X.Eta
   { sectionsEquiv Free adj I V with map_add' := sectionsEquiv_add Free hsub adj I V }
 
 include hsub in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [(forget A).PreservesMonomorphisms]
+  in
 lemma sum_zsmul_apply_of_sub {X Y : A} {ι : Type*} (s : Finset ι) (c : ι → ℤ)
     (f : ι → (X ⟶ Y)) (x : ToType X) :
     (∑ i ∈ s, c i • f i) x = ∑ i ∈ s, c i • f i x := by
@@ -384,6 +401,11 @@ lemma sum_zsmul_apply_of_sub {X Y : A} {ι : Type*} (s : Finset ι) (c : ι → 
   change ev (∑ i ∈ s, c i • f i) = ∑ i ∈ s, c i • ev (f i)
   simp only [map_sum, map_zsmul]
 
+omit [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [(forget A).PreservesMonomorphisms]
+  in
 lemma sectionsEquiv_d (I : Sheaf X.smallEtaleTopology A) (p : ℕ)
     (φ : (freeSheaf Free).obj (U.simplicial _⦋p⦌) ⟶ I) :
     sectionsAddEquiv Free hsub adj I (U.simplicial _⦋p + 1⦌)

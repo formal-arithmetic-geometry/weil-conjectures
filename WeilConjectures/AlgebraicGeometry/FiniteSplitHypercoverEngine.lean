@@ -194,10 +194,12 @@ def matchingMap (n : ℕ) :
     (W (step hY S hS)) _⦋n⦌ ⟶ matchingObj (obj (step hY S hS) n) n :=
   (isMatchingCone_cone hY S hS n).lift (BoundaryCone.ofSimplex (𝟙 _))
 
+omit [QuasiSeparatedSpace ↥X] in
 lemma precomp_matchingMap (n : ℕ) :
     (cone hY S hS n).precomp (matchingMap hY S hS n) = BoundaryCone.ofSimplex (𝟙 _) :=
   (isMatchingCone_cone hY S hS n).precomp_lift _
 
+omit [QuasiSeparatedSpace ↥X] in
 lemma sigmaDesc_φ_eq (n : ℕ) :
     Sigma.desc (data hY S hS n).φ = cellι (step hY S hS) n ≫ matchingMap hY S hS n := by
   refine (isMatchingCone_cone hY S hS n).hom_ext ?_

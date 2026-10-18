@@ -51,6 +51,7 @@ lemma totπ_totι_ne (p r p' r' n : ℕ) (h : p + r = n) (h' : p' + r' = n) (hp 
   rw [← ConcreteCategory.comp_apply, U.totι_totπ_of_ne L p r p' r' n h h' hp]
   exact hA.zero_apply y
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma tot_ext {n : ℕ} (x x' : ToType (U.totObj L n))
     (h : ∀ p r (hpr : p + r = n), U.totπ L p r n hpr x = U.totπ L p r n hpr x') : x = x' := by
   have key : ∀ y : ToType (U.totObj L n), y = ∑ j : TotIdx n,
@@ -65,6 +66,7 @@ lemma tot_ext {n : ℕ} (x x' : ToType (U.totObj L n))
   congr 1
   exact h j.1.1 j.1.2 (Finset.mem_antidiagonal.1 j.2)
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma totD_totι_apply (a b n : ℕ) (h : a + b = n) (w : ToType (U.dObj L a b)) :
     U.totD L n (U.totι L a b n h w) =
       U.totι L (a + 1) b (n + 1) (by omega) (U.dHor L a b w) +
@@ -86,6 +88,7 @@ lemma totπ_totD_succ_zero_apply (p : ℕ) (x : ToType (U.totObj L p)) :
       U.dHor L p 0 (U.totπ L p 0 p (by omega) x) := by
   rw [← ConcreteCategory.comp_apply, U.totD_totπ_succ_zero L p p rfl, ConcreteCategory.comp_apply]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma totπ_totD_succ_succ_apply (p s n : ℕ) (h : p + s + 1 = n) (x : ToType (U.totObj L n)) :
     U.totπ L (p + 1) (s + 1) (n + 1) (by omega) (U.totD L n x) =
       U.dHor L p (s + 1) (U.totπ L p (s + 1) n (by omega) x) +
@@ -111,7 +114,7 @@ lemma totπ_totD_of_suppLE (n k r : ℕ) (hkr : k + 1 + r = n + 1) (x : ToType (
   cases r with
   | zero =>
     obtain rfl : k = n := by omega
-    exact U.totπ_totD_succ_zero_apply L hA (k + 1) x
+    exact U.totπ_totD_succ_zero_apply L (k + 1) x
   | succ s =>
     rw [U.totπ_totD_succ_succ_apply L hA (k + 1) s (n + 1) (by omega),
       hx (k + 2) s (by omega) (by omega), map_zero, smul_zero, add_zero]
@@ -140,7 +143,7 @@ lemma reduce_step (n k r : ℕ) (hkr : k + r = n) (x : ToType (U.totObj L (n + 1
   by_cases hpk : p = k + 1
   · subst hpk
     obtain rfl : r' = r := by omega
-    rw [U.totπ_totι_self L hA, U.totπ_totι_ne L hA k (r' + 1) (k + 1) r' (n + 1) _ _ (by omega),
+    rw [U.totπ_totι_self L, U.totπ_totι_ne L hA k (r' + 1) (k + 1) r' (n + 1) _ _ (by omega),
       smul_zero, add_zero, hw, sub_self]
   · rw [hx p r' hpr' (by omega), U.totπ_totι_ne L hA (k + 1) r p r' (n + 1) _ _ (by omega),
       U.totπ_totι_ne L hA k (r + 1) p r' (n + 1) _ _ (by omega), smul_zero, add_zero, sub_zero]
@@ -191,22 +194,25 @@ lemma resTop_dVert_apply (r : ℕ) (z : ToType ((L.X r).obj.obj (op (⊤_ X.Etal
     (L.d r (r + 1)).hom.naturality _
   rw [e]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma totπ_totAug_ne (n p r : ℕ) (h : p + r = n) (hp : 1 ≤ p)
     (z : ToType ((L.X n).obj.obj (op (⊤_ X.Etale)))) :
     U.totπ L p r n h ((U.totAug L).f n z) = 0 := by
-  rw [totAug_f_apply U L hA]
+  rw [totAug_f_apply U L]
   exact U.totπ_totι_ne L hA 0 n p r n _ h (by omega) _
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_zero_totAug (n : ℕ) (z : ToType ((L.X n).obj.obj (op (⊤_ X.Etale)))) :
     U.totπ L 0 n n (zero_add n) ((U.totAug L).f n z) = U.resTop (L.X n) 0 z := by
-  rw [totAug_f_apply U L hA, totπ_totι_self U L hA]
+  rw [totAug_f_apply U L, totπ_totι_self U L]
 
 lemma totπ_one_totD_of_suppLE_zero (n : ℕ) (x : ToType (U.totObj L n))
     (hx : U.SuppLE L n 0 x) :
     U.totπ L 1 n (n + 1) (by omega) (U.totD L n x) =
       U.dHor L 0 n (U.totπ L 0 n n (by omega) x) := by
   cases n with
-  | zero => exact U.totπ_totD_succ_zero_apply L hA 0 x
+  | zero => exact U.totπ_totD_succ_zero_apply L 0 x
   | succ m =>
     rw [U.totπ_totD_succ_succ_apply L hA 0 m (m + 1) (by omega), hx 1 m (by omega) (by omega),
       map_zero, smul_zero, add_zero]
@@ -224,7 +230,7 @@ lemma exists_totAug_eq_of_suppLE_zero (n : ℕ) (x : ToType (U.totObj L n))
   by_cases hp : p = 0
   · subst hp
     obtain rfl : r = n := by omega
-    rw [totπ_zero_totAug U L hA, hz]
+    rw [totπ_zero_totAug U L, hz]
   · rw [totπ_totAug_ne U L hA n p r hpr (by omega), hx p r hpr (by omega)]
 
 
@@ -250,7 +256,7 @@ theorem isIso_homologyMap_totAug (n : ℕ) :
         rw [← hw, HomologicalComplex.shape _ _ _ (by simp)]
         exact hA.zero_apply w
       have hz0 : z = 0 := hrow0 0 (by
-        rw [map_zero, ← totπ_zero_totAug U L hA, hw0, map_zero])
+        rw [map_zero, ← totπ_zero_totAug U L, hw0, map_zero])
       subst hz0
       exact (HomologicalComplex.IsCls.eq_zero_iff hA _ 0 0 (by simp) hz).2 ⟨0, map_zero _⟩
     | succ m =>
@@ -273,8 +279,8 @@ theorem isIso_homologyMap_totAug (n : ℕ) :
         exact totπ_totAug_ne U L hA _ 1 m _ le_rfl z)
       have key : U.resTop (L.X (m + 1)) 0 ((L.d m (m + 1)).hom.app (op (⊤_ X.Etale)) g) =
           U.resTop (L.X (m + 1)) 0 z := by
-        rw [← resTop_dVert_apply, ← totπ_zero_totAug U L hA m g, hg,
-          ← totπ_totD_zero_apply U L hA m w', hw'd, totπ_zero_totAug U L hA]
+        rw [← resTop_dVert_apply, ← totπ_zero_totAug U L m g, hg,
+          ← totπ_totD_zero_apply U L m w', hw'd, totπ_zero_totAug U L]
       exact (HomologicalComplex.IsCls.eq_zero_iff hA _ m (m + 1) (by simp) hz).2 ⟨g, hrow0 _ key⟩
   · intro y
     obtain ⟨x, hx⟩ := HomologicalComplex.exists_isCls hA (U.totComplex L) n y
@@ -304,8 +310,8 @@ theorem isIso_homologyMap_totAug (n : ℕ) :
       rw [hx'd]
       exact map_zero _)
     have hdz : (L.d n (n + 1)).hom.app (op (⊤_ X.Etale)) z = 0 := hrow0 (n + 1) (by
-      rw [map_zero, ← resTop_dVert_apply, ← totπ_zero_totAug U L hA n z, hz,
-        ← totπ_totD_zero_apply U L hA n x', hx'd, map_zero])
+      rw [map_zero, ← resTop_dVert_apply, ← totπ_zero_totAug U L n z, hz,
+        ← totπ_totD_zero_apply U L n x', hx'd, map_zero])
     obtain ⟨yz, hyz⟩ := HomologicalComplex.exists_isCls_of_d_eq_zero hA (gammaComplex L) n
       (n + 1) (by simp) z hdz
     refine ⟨yz, ?_⟩

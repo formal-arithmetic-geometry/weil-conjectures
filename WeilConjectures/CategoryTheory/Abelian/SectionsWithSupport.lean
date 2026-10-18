@@ -150,6 +150,7 @@ noncomputable def functor : 𝒳 ⥤ 𝒵 :=
         ext; simp
       simp [this])
 
+omit [iLow.Additive] in
 /-- The value of `Γ_Z` on `M` is `i^* ker(M ⟶ j_* j^* M)`. -/
 lemma functor_obj (M : 𝒳) :
     (functor adjI adjJ h₀ hdet).obj M = iUp.obj (kernel (adjJ.unit.app M)) :=
@@ -159,6 +160,7 @@ lemma functor_obj (M : 𝒳) :
 noncomputable def adjunction : iLow ⊣ functor adjI adjJ h₀ hdet :=
   Adjunction.adjunctionOfEquivRight _ _
 
+omit [iLow.Additive] in
 /-- `Γ_Z` is left exact, being a right adjoint. -/
 lemma preservesFiniteLimits_functor : PreservesFiniteLimits (functor adjI adjJ h₀ hdet) :=
   have := (adjunction adjI adjJ h₀ hdet).isRightAdjoint
@@ -198,6 +200,7 @@ lemma mono_comparison [PreservesFiniteLimits jShriek] [jShriek.Additive]
   exact IsZero.of_mono (iUp.map (kernel.ι m)) hz
 
 include adjI h₀ hdet adjS in
+set_option linter.unusedSectionVars false in
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (3): for an injective object `I`, the
 unit `I ⟶ j_* j^* I` is an epimorphism (indeed a split epimorphism). The counit
 `j_! j^* I ⟶ I` extends along the monomorphism `j_! j^* I ⟶ j_* j^* I` to `s : j_* j^* I ⟶ I`,

@@ -52,14 +52,22 @@ omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] in
 lemma resι_d : resι I ≫ I.cocomplex.d 0 1 = 0 := I.ι_f_zero_comp_complex_d
 
 include hA in
-omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X]
+  [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma resι_glob (T : X.Etale) (s : ToType ((I.cocomplex.X 0).obj.obj (op T)))
     (hs : (I.cocomplex.d 0 1).hom.app (op T) s = 0) :
     ∃ w, (resι I).hom.app (op T) w = s :=
   exists_kernel_elem hA (w := I.ι_f_zero_comp_complex_d) I.isLimitKernelFork T s hs
 
 include hA in
-omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X]
+  [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma resι_inj (T : X.Etale) : Function.Injective ((resι I).hom.app (op T)) := by
   have : Mono (resι I) := Fork.IsLimit.mono I.isLimitKernelFork
   have : Mono (resι I).hom := (sheafToPresheaf X.smallEtaleTopology A).map_mono (resι I)
@@ -111,10 +119,12 @@ noncomputable def augIso (U : SplitEtaleHypercover X)
   have := U.isIso_homologyMap_totAug L hA h.1 h.2.1 h.2.2 n
   asIso (HomologicalComplex.homologyMap (U.totAug L) n)
 
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma augIso_hom (U : SplitEtaleHypercover X)
     (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) [∀ r, Injective (L.X r)] (n : ℕ) :
     (augIso hA Free adj hfin U L n).hom = HomologicalComplex.homologyMap (U.totAug L) n := rfl
 
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma augIso_inv_naturality (U : SplitEtaleHypercover X)
     {L L' : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ} [∀ r, Injective (L.X r)]
     [∀ r, Injective (L'.X r)] (φ : L ⟶ L') (n : ℕ) :
@@ -125,6 +135,7 @@ lemma augIso_inv_naturality (U : SplitEtaleHypercover X)
     ← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp,
     totAug_totMapL]
 
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma augIso_inv_totMap {U V : SplitEtaleHypercover X} (f : U.simplicial ⟶ V.simplicial)
     (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) [∀ r, Injective (L.X r)] (n : ℕ) :
     HomologicalComplex.homologyMap (totMap L f) n ≫ (augIso hA Free adj hfin U L n).inv =
@@ -144,6 +155,7 @@ noncomputable def cmap (U : FiniteSplitEtaleHypercover X) (F : Sheaf X.smallEtal
       ((injectiveResolution F).isoRightDerivedObj Γ' q).inv
 
 omit [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] in
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma cmap_naturality_aux (U : SplitEtaleHypercover X) {F G : Sheaf X.smallEtaleTopology A}
     (g : F ⟶ G) (I : InjectiveResolution F) (J : InjectiveResolution G)
     (φ : I.cocomplex ⟶ J.cocomplex) (hφ : I.ι.f 0 ≫ φ.f 0 = g ≫ J.ι.f 0) :
@@ -186,6 +198,7 @@ noncomputable def cnat (U : FiniteSplitEtaleHypercover X) :
     rw [key]
 
 omit [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] in
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma cmap_refinement_aux {U V : SplitEtaleHypercover X} (f : U.simplicial ⟶ V.simplicial)
     {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F) :
     HomologicalComplex.homologyMap (secMap f F) q ≫
@@ -196,6 +209,7 @@ lemma cmap_refinement_aux {U V : SplitEtaleHypercover X} (f : U.simplicial ⟶ V
   rw [← Category.assoc, ← HomologicalComplex.homologyMap_comp, ← totRow_totMap,
     HomologicalComplex.homologyMap_comp, Category.assoc, augIso_inv_totMap]
 
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma cnat_refinement {U V : FiniteSplitEtaleHypercover X} (f : U.Refinement V) :
     cohomologyRefinement A f q ≫ cnat hA Free adj hfin q U = cnat hA Free adj hfin q V := by
   refine NatTrans.ext (funext fun F ↦ ?_)
@@ -214,6 +228,7 @@ omit [HasSheafify X.smallEtaleTopology A] [X.smallEtaleTopology.WEqualsLocallyBi
   [(CategoryTheory.forget A).PreservesMonomorphisms]
   [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] adj hfin in
 omit [Abelian A] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma iso_inv_hom_apply {Y Z : A} (e : Y ≅ Z) (y : ToType Y) : e.inv (e.hom y) = y := by
   rw [← ConcreteCategory.comp_apply, e.hom_inv_id, ConcreteCategory.id_apply]
 
@@ -238,7 +253,7 @@ lemma cmap_surjective (F : Sheaf X.smallEtaleTopology A)
     refine ⟨V, x, ?_⟩
     simp only [cmap, ConcreteCategory.comp_apply]
     erw [hx]
-    exact iso_inv_hom_apply hA _ y
+    exact iso_inv_hom_apply _ y
   cases q with
   | zero =>
     obtain ⟨w, hw0, hwt⟩ := exists_totRow_eq_zero I.cocomplex hA (resι I) (resι_d I)
@@ -251,7 +266,7 @@ lemma cmap_surjective (F : Sheaf X.smallEtaleTopology A)
     rw [hwt] at hm
     rw [(HomologicalComplex.IsCls.eq_iff hA _ 0 0 (by simp) hm ht).2
       ⟨0, by rw [map_zero, sub_self]⟩]
-    exact iso_inv_hom_apply hA _ y₀
+    exact iso_inv_hom_apply _ y₀
   | succ m =>
     obtain ⟨V, f, w, y', hw0, hwt⟩ := exists_refinement_totRow_eq I.cocomplex hA (resι I)
       (resι_d I) (resι_glob hA I) (resι_inj hA I)
@@ -267,7 +282,7 @@ lemma cmap_surjective (F : Sheaf X.smallEtaleTopology A)
         rw [map_neg, hwt, totComplex_d, totMap_f]
         exact (sub_sub_cancel_left _ _).symm⟩]
     rw [← ConcreteCategory.comp_apply, augIso_inv_totMap]
-    exact iso_inv_hom_apply hA _ y₀
+    exact iso_inv_hom_apply _ y₀
 
 /-- A class of `H^q(C(U, F))` mapping to zero in `R^qΓ(F)` dies on a refinement of `U`. -/
 lemma cmap_injective (U : FiniteSplitEtaleHypercover X) (F : Sheaf X.smallEtaleTopology A)
@@ -292,7 +307,7 @@ lemma cmap_injective (U : FiniteSplitEtaleHypercover X) (F : Sheaf X.smallEtaleT
   | zero =>
     obtain ⟨y, hy⟩ := (HomologicalComplex.IsCls.eq_zero_iff hA _ 0 0 (by simp) hm).1 rfl
     rw [HomologicalComplex.shape _ _ _ (by simp), hA.zero_apply] at hy
-    have hw0 := eq_zero_of_totRow_eq_zero I.cocomplex hA (resι I) (resι_d I) (resι_glob hA I)
+    have hw0 := eq_zero_of_totRow_eq_zero I.cocomplex (resι I) (resι_d I)
       (resι_inj hA I) U.toSplitEtaleHypercover w hy.symm
     subst hw0
     have hx0 : x = 0 := (HomologicalComplex.IsCls.eq_zero_iff hA _ 0 0 (by simp) hw).2

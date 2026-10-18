@@ -208,6 +208,7 @@ end Transport
 omit [HasExactColimitsOfShape I A] in
 omit [Abelian A] [F.IsHomological] in
 omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [Preadditive C] in
 /-- Continuity on a cocone implies continuity on its shifts. -/
 lemma IsContinuousOn.shift {G : I ⥤ C} {s : Cocone G} (hs : F.IsContinuousOn s) (a : ℤ) :
     F.IsContinuousOn ((shiftFunctor C a).mapCocone s) := by
@@ -228,6 +229,7 @@ lemma IsContinuousOn.of_triangle₁ (h₂ : F.IsContinuousOn (Triangle.π₂.map
 omit [HasExactColimitsOfShape I A] in
 omit [Abelian A] [F.IsHomological] in
 omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [Preadditive C] in
 /-- Continuity is invariant under isomorphism of the functors along which a cocone is mapped. -/
 lemma isContinuousOn_mapCocone_iff_of_iso {D : Type*} [Category D] {Φ Φ' : D ⥤ C} (e : Φ ≅ Φ')
     {G : I ⥤ D} (s : Cocone G) :
