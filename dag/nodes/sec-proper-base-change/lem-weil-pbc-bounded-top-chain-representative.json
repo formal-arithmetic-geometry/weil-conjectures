@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-bounded-top-chain-representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification; the local constant complex representation used by Tag 094H via Tag 094G; the boundary representative in the cohomological induction",
+   "via": [
+    "lem-weil-pbc-site-bounded-constant-graded-model",
+    "lem-weil-pbc-site-bounded-constant-model",
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Actual chain representatives of derived maps from the top degree",
+ "statement": "Let A be an abelian category with a chosen derived category [def-weil-abstract-derived-category], let P be an integer cochain complex, and let n be an integer such that P^i=0 for every i>n. For every object X of A and every derived morphism phi:Q(P) -> Q(X[-n]), there is an actual chain map f:P -> X[-n] with Q(f)=phi. Here X[-n] is the single complex in degree n. No projectivity or injectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant, construction of the final differential from the derived boundary"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Let P be zero above n. Its outgoing differential d^n is zero, so the canonical homology inclusion H^n(P) -> opcycles^n(P) is invertible. Compose the quotient P^n -> opcycles^n(P) with its inverse to obtain P^n -> H^n(P). Transport H^n(phi) through the comparison between complex and derived homology, and through the homology isomorphism of the target single complex, to obtain a morphism H^n(P) -> X. Its composite with the quotient kills every incoming differential and hence defines a chain map f from P to X in degree n [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, construction of the final differential from the derived boundary"
+   }
+  },
+  {
+   "text": "The map f induces exactly the prescribed top homology map. To check this, cancel the epimorphism cycles^n(P) -> H^n(P) and the monomorphism from the target homology to its opcycles. Naturality of the opcycles and homology maps reduces the equality to H^n(P) -> opcycles^n(P) composed with its inverse, followed by the standard single-complex homology isomorphism. These are inverse-isomorphism identities.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, construction of the final differential from the derived boundary"
+   }
+  },
+  {
+   "text": "For the standard t-structure [def-sbc-standard-tstructure-derived-category], Q(P) is <=n and the target single complex is >=n. The generic source-library theorem DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE says H^n is bijective on these morphisms. Its argument uses the truncation projection of the source to >=n and the truncation inclusion of the target from <=n: both induce H^n isomorphisms, and truncation orthogonality gives unique factorization through these maps. The intermediate objects lie in the shifted heart, where the single-complex functor is fully faithful and H^n is its inverse. Thus H^n is injective on the original morphism set. Apply that injectivity to Q(f) and phi, using Step 2 and naturality of the complex-to-derived homology comparison, to get Q(f)=phi.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, construction of the final differential from the derived boundary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant, construction of the final differential from the derived boundary"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cochain complex with zero terms above n, every derived morphism to an object placed in degree n is represented by a chain map",
+   "results": "ChainComplex.toSingle₀Equiv and HomologicalComplex.mkHomToSingle construct chain maps, but do not identify arbitrary derived maps with them. DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective has an extra injective-target assumption and a different conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mkHomToSingle\"",
+   "results": "HomologicalComplex.mkHomToSingle and its component formula; these do not state surjectivity after derived localization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_bijective_of_isLE_of_isGE|mkHomToSingle|to_single.*surject",
+   "results": "The chain-map constructor and instances using injective targets; the general derived top-degree chain-representative statement is absent from Mathlib. The source-library homologyFunctor_map_bijective_of_isLE_of_isGE supplies its injectivity step.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteBoundedConstantModel",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedTopMorphisms",
+  "file": "lean/Sheaf/Paper/BoundedTopMorphisms.lean",
+  "declaration": "DerivedCategory.exists_chainMap_to_single_of_isStrictlyLE",
+  "statement": "theorem exists_chainMap_to_single_of_isStrictlyLE\n    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    (P : CochainComplex A ℤ) (n : ℤ) [P.IsStrictlyLE n] (X : A)\n    (φ : Q.obj P ⟶ Q.obj ((CochainComplex.singleFunctor A n).obj X)) :\n    ∃ f : P ⟶ (CochainComplex.singleFunctor A n).obj X, Q.map f = φ",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T071208-L-1673571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T071208-L-1673571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

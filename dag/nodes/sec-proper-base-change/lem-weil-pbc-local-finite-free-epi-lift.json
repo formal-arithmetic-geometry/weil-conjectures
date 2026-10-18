@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-local-finite-free-epi-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification; the local constant complex representation used by Tag 094H via Tag 094G; finite-generator lifting in the bounded-model induction",
+   "via": [
+    "lem-weil-pbc-site-bounded-constant-graded-model",
+    "lem-weil-pbc-site-bounded-constant-model",
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local finite-free lifts through epimorphisms of module-valued sheaves",
+ "statement": "Let C be a small category with Grothendieck topology J, B a commutative ring, T an object of C, and r a nonnegative integer [def-weil-pbc-sites-and-cohomology, def-weil-pbc-free-module]. Let p:F -> G be an epimorphism of B-module-valued sheaves, and phi:constant(B^r) -> G a sheaf morphism [def-weil-pbc-constant-sheaf]. There is a covering sieve S on T such that, for every f:U -> T in S, the restriction of phi lifts through p|U as a sheaf map psi:constant(B^r) -> F|U on C/U [def-pur-localized-ringed-site]. More precisely psi followed by p|U equals phi|U precomposed with the canonical constant-sheaf restriction isomorphism. Rank zero and empty covering members are allowed; no Noetherian or points hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Let eta be the original morphism from the constant presheaf B^r to G, obtained by precomposing phi with the constant-sheafification unit [def-weil-pbc-constant-sheaf]. At T evaluate eta on each standard basis vector. An epimorphism of module-valued sheaves is locally surjective by Mathlib Sheaf.isLocallySurjective_iff_epi'. Its image sieve for each of these finitely many sections is covering. Their finite intersection S is covering [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+   }
+  },
+  {
+   "text": "For each f:U -> T in S, choose preimages z_i in F(U) of all the restricted basis-image sections. The standard basis of B^r [def-weil-pbc-free-module] extends i -> z_i uniquely to a B-linear map l:B^r -> F(U). This includes r=0, when the covering intersection is the maximal sieve and l is the zero map.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+   }
+  },
+  {
+   "text": "The constant-sheaf adjunction on C/U [def-weil-pbc-constant-sheaf, def-pur-localized-ringed-site] turns l into psi:constant(B^r) -> F|U. To compare psi followed by p|U with the restriction of phi, apply this adjunction, which is a bijection on Hom sets. Compatibility of the constant-restriction map with the sheafification unit identifies the second adjunct with eta at U. The first adjunct is l followed by p(U).",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+   }
+  },
+  {
+   "text": "These two linear maps agree on every standard basis vector: the preimage equation gives p(U)(z_i)=G(f)(eta_T(e_i)), and naturality of eta gives G(f)(eta_T(e_i))=eta_U(e_i). Basis extensionality gives equality of linear maps, and the adjunction gives the asserted equality of sheaf maps. No nonempty-slice, Noetherian or points hypothesis has been used.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant, lifting finite top-cohomology generators (the source omits the details)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from a constant finite free module sheaf lifts locally across an epimorphism of sheaves of modules",
+   "results": "Sheaf.isLocallySurjective_iff_epi and SheafOfModules.freeHomEquiv supply ingredients; no single theorem states this constant-module local lifting and its restriction compatibility.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "The local-surjectivity definition and epi characterizations, but no finite-free constant source lifting statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*lift|lift.*finite.*free|locally.*[Ll]ift|[Ll]ift.*locally",
+   "results": "The sites source search finds local section lifting terminology but not the finite-free source morphism lifting theorem. The project finite-free internal Hom exactness theorem uses the ringed-module encoding, not this constant ModuleCat-valued signature.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteBoundedConstantModel",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFiniteEpiLifts",
+  "file": "lean/Sheaf/Paper/LocalFiniteEpiLifts.lean",
+  "declaration": "CategoryTheory.exists_local_lift_from_constant_finite_free",
+  "statement": "theorem exists_local_lift_from_constant_finite_free\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (B : Type u) [CommRing B] (T : C) (r : ℕ)\n    (F G : Sheaf J (ModuleCat.{u} B)) (p : F ⟶ G) [Epi p]\n    (φ : (constantSheaf J (ModuleCat.{u} B)).obj\n      (ModuleCat.of B (Fin r → B)) ⟶ G) :\n    ∃ S ∈ J T, ∀ ⦃U : C⦄ (f : U ⟶ T), S f →\n      ∃ ψ : (constantSheaf (J.over U) (ModuleCat.{u} B)).obj\n          (ModuleCat.of B (Fin r → B)) ⟶ (J.overPullback (ModuleCat.{u} B) U).obj F,\n        ψ ≫ (J.overPullback (ModuleCat.{u} B) U).map p =\n          constantSheafOverHom J (ModuleCat.{u} B) U\n            (ModuleCat.of B (Fin r → B)) ≫\n              (J.overPullback (ModuleCat.{u} B) U).map φ",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T071208-L-1673571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T071208-L-1673571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
