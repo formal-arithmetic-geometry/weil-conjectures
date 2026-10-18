@@ -12,31 +12,15 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import Sheaf.Paper.RingedTopoiDerivedTensorPullback
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistLocalBases
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistSignedCoherence
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistExponentLine
 /-!
 # Finite Tate sheaves and inverse image
 Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,
@@ -48,6 +32,120 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Scheme
+open scoped ChangeOfRings
+
+private noncomputable def finiteTwistRootsIso (m : ℕ) (hm : 0 < m)
+    {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤))) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} v).obj (T.rootsOfUnitySheaf m) ≅
+      T'.rootsOfUnitySheaf m := by
+  letI : NeZero m := ⟨hm.ne'⟩
+  haveI := isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit m v hT
+  exact asIso (upperStarRootsOfUnitySheafToRootsOfUnitySheaf m v)
+
+private theorem finiteTwistRootsIso_normalization (m : ℕ) (hm : 0 < m)
+    {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤))) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} v).map (kernel.ι (m • 𝟙 T.gmSheaf)) ≫
+        upperStarGmSheafToGmSheaf v =
+      (finiteTwistRootsIso m hm v hT).hom ≫ kernel.ι (m • 𝟙 T'.gmSheaf) :=
+  (upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι m v).symm
+
+private noncomputable def finiteTwistRootPower (m m' : ℕ) (hdiv : m ∣ m')
+    (T : Scheme.{u}) : T.rootsOfUnitySheaf m' ⟶ T.rootsOfUnitySheaf m :=
+  kernel.lift (m • 𝟙 T.gmSheaf) ((m' / m) • kernel.ι (m' • 𝟙 T.gmSheaf)) (by
+    have hz : m' • kernel.ι (m' • 𝟙 T.gmSheaf) = 0 := by
+      simpa only [Preadditive.comp_nsmul, Category.comp_id] using
+        kernel.condition (m' • 𝟙 T.gmSheaf)
+    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.comp_id,
+      smul_smul, Nat.div_mul_cancel hdiv, hz])
+
+private theorem finiteTwistRootPower_normalization (m m' : ℕ) (hdiv : m ∣ m')
+    (T : Scheme.{u}) :
+    finiteTwistRootPower m m' hdiv T ≫ kernel.ι (m • 𝟙 T.gmSheaf) =
+      (m' / m) • kernel.ι (m' • 𝟙 T.gmSheaf) :=
+  kernel.lift_ι _ _ _
+
+private theorem finiteTwistDualEvaluation
+    {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
+    {X Y : C} (e : X ≅ Y) (U : C) :
+    tensorHom e.hom (MonoidalClosed.ihomIsoOfIsoLeft e U).hom ≫ (ihom.ev Y).app U =
+      (ihom.ev X).app U := by
+  change tensorHom e.hom ((MonoidalClosed.pre e.inv).app U) ≫ _ = _
+  rw [MonoidalCategory.tensorHom_def, Category.assoc, MonoidalClosed.id_tensor_pre_app_comp_ev,
+    ← comp_whiskerRight_assoc, e.hom_inv_id, id_whiskerRight, Category.id_comp]
+
+private noncomputable def finiteTwistNonnegativeIso
+    (A : Type (u + 1)) [CommRing A] (m m' : ℕ) (T : Scheme.{u})
+    (hA : (m : A) = 0) (hA' : (m' : A) = 0)
+    (e : finiteEtaleTateLine T m' A hA' ≅ finiteEtaleTateLine T m A hA) :
+    ∀ n : ℕ, finiteEtaleTateTwist T m' A hA' n ≅ finiteEtaleTateTwist T m A hA n
+  | 0 => Iso.refl _
+  | 1 => e
+  | n + 2 => tensorIso (finiteTwistNonnegativeIso A m m' T hA hA' e (n + 1)) e
+
+private noncomputable def finiteTwistSignedIso
+    (A : Type (u + 1)) [CommRing A] (m m' : ℕ) (T : Scheme.{u})
+    (hA : (m : A) = 0) (hA' : (m' : A) = 0)
+    (e : finiteEtaleTateLine T m' A hA' ≅ finiteEtaleTateLine T m A hA) :
+    ∀ a : ℤ, finiteEtaleTateSheaf A m' T hA' a ≅ finiteEtaleTateSheaf A m T hA a
+  | .ofNat n => finiteTwistNonnegativeIso A m m' T hA hA' e n
+  | .negSucc n => MonoidalClosed.ihomIsoOfIsoLeft
+      (finiteTwistNonnegativeIso A m m' T hA hA' e (n + 1))
+      (finiteEtaleTateSheaf A m T hA 0)
+
+private theorem finiteTwistSignedIso_evaluation
+    (A : Type (u + 1)) [CommRing A] (m m' : ℕ) (T : Scheme.{u})
+    (hA : (m : A) = 0) (hA' : (m' : A) = 0)
+    (e : finiteEtaleTateLine T m' A hA' ≅ finiteEtaleTateLine T m A hA) (n : ℕ) :
+    tensorHom (finiteTwistSignedIso A m m' T hA hA' e (.ofNat (n + 1))).hom
+        (finiteTwistSignedIso A m m' T hA hA' e (.negSucc n)).hom ≫
+      (ihom.ev (finiteEtaleTateSheaf A m T hA (.ofNat (n + 1)))).app
+        (finiteEtaleTateSheaf A m T hA 0) =
+      (ihom.ev (finiteEtaleTateSheaf A m' T hA' (.ofNat (n + 1)))).app
+        (finiteEtaleTateSheaf A m' T hA' 0) :=
+  finiteTwistDualEvaluation (finiteTwistNonnegativeIso A m m' T hA hA' e (n + 1)) _
+
+private theorem finiteTwistDerivedComparison
+    (A : Type (u + 1)) [CommRing A] {T T' : Scheme.{u}} (v : T' ⟶ T)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (F' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (e : (Etale.upperStar (ModuleCat.{u + 1} A) v).obj F ≅ F') (b : ℤ) :
+    ∃ d : ((Etale.derivedTensorRight (ModuleCat.{u + 1} A) T
+        ((DerivedCategory.singleFunctor _ 0).obj F) ⋙ shiftFunctor _ b) ⋙
+        (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor ≅
+      (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor ⋙
+        Etale.derivedTensorRight (ModuleCat.{u + 1} A) T'
+          ((DerivedCategory.singleFunctor _ 0).obj F') ⋙ shiftFunctor _ b),
+      ∀ K : Etale.DerivedCategoryModule A T,
+        d.app K =
+          ((Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.commShiftIso b).app
+            (((Etale.derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj
+              ((DerivedCategory.singleFunctor _ 0).obj F)) ≪≫
+          (shiftFunctor _ b).mapIso
+            (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) v K
+              ((DerivedCategory.singleFunctor _ 0).obj F) ≪≫
+            ((Etale.derivedTensor (ModuleCat.{u + 1} A) T').obj
+              ((Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.obj K)).mapIso
+              ((Etale.singleFunctorCompLeftDerivedUpperStarIso
+                (ModuleCat.{u + 1} A) v).app F ≪≫
+              (DerivedCategory.singleFunctor _ 0).mapIso e)) := by
+  let L := (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor
+  let M := (DerivedCategory.singleFunctor _ 0).obj F
+  let ee := (Etale.singleFunctorCompLeftDerivedUpperStarIso
+    (ModuleCat.{u + 1} A) v).app F ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e
+  let d := Functor.isoWhiskerLeft (Etale.derivedTensorRight (ModuleCat.{u + 1} A) T M)
+      (L.commShiftIso b) ≪≫
+    Functor.isoWhiskerRight
+      (Etale.derivedTensorRightCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) v M)
+      (shiftFunctor _ b) ≪≫
+    Functor.isoWhiskerLeft L (Functor.isoWhiskerRight
+      ((Etale.derivedTensorRightFunctor (ModuleCat.{u + 1} A) T').mapIso ee)
+      (shiftFunctor _ b))
+  refine ⟨d, ?_⟩
+  intro K
+  apply Iso.ext
+  simp [d, Etale.derivedTensorRightCompLeftDerivedUpperStarIso,
+    Etale.derivedTensorRightFunctor, Etale.derivedTensorRight, ee, L, M]
+
 set_option synthInstance.maxSize 2048 in
 /-- Finite Tate sheaves are locally free lines, with the normalized inverse-image
 comparisons, their signed tensor products, and exponent-change comparisons.
@@ -228,6 +326,25 @@ theorem etaleFiniteTwistPullback (A : Type (u + 1)) [CommRing A] (m : ℕ)
             (finiteEtaleTateSheaf A m' T
           ((CharP.cast_eq_zero_iff A (ringChar A) m').mpr
             (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)) 0))) := by
-  sorry
+  rcases finiteEtaleTwistSignedCoherence A m hm hA with
+    ⟨c, p, hgen, hzero, hpos, hneg, hid, hcomp, hleft, hright, hsucc, hassoc,
+      hsymm, hev, htensor⟩
+  refine ⟨fun v hT ↦ finiteTwistRootsIso m hm v hT, c, p,
+    finiteEtaleTwistCommonLocalBases A m hm hA,
+    fun v hT ↦ finiteTwistRootsIso_normalization m hm v hT,
+    hgen, hzero, hpos, hneg, hid, hcomp, hleft, hright, hsucc, hassoc, hsymm, hev,
+    htensor, ?_, ?_⟩
+  · intro T T' v hT hT' a b
+    exact finiteTwistDerivedComparison A v _ _ (c v hT hT' a) b
+  · intro m' hm' hdiv T hT
+    let hA' : (m' : A) = 0 := (CharP.cast_eq_zero_iff A (ringChar A) m').mpr
+      (dvd_trans ((CharP.cast_eq_zero_iff A (ringChar A) m).mp hA) hdiv)
+    let q := finiteTwistRootPower m m' hdiv T
+    have hq := finiteTwistRootPower_normalization m m' hdiv T
+    obtain ⟨e, he⟩ := finiteEtaleTwistExponentLine A m m' hm hm' hdiv hA hA' T hT q hq
+    refine ⟨q, finiteTwistSignedIso A m m' T hA hA' e, hq, he, rfl, ?_, ?_⟩
+    · intro n
+      rfl
+    · exact finiteTwistSignedIso_evaluation A m m' T hA hA' e
 
 end AlgebraicGeometry.Scheme

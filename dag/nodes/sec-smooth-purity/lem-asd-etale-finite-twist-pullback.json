@@ -30,150 +30,76 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-asd-finite-etale-twist-line] with its finite coefficient ring equal to $\\mathbf Z/m\\mathbf Z$, $N=m$ and $r=1$. The tensor-unit maps $u\\otimes c\\mapsto c u$ and $u\\mapsto u\\otimes1$, with the power action written additively, identify its Tate line with $\\mu_{m,T}$ itself. Hence there is an etale cover on which $\\mu_{m,T}\\cong(\\mathbf Z/m)_T$. Restriction commutes with the sheaf tensor and sheaf Hom constructions: on a localized site the section tensor presheaf and its local representatives are the restrictions of the original ones, and the Hom rule is literally the rule on further localized sites. Tensor the cyclic trivialization with $A_T$. Since $mA=0$, the ring map $\\mathbf Z/m\\to A$ is defined, and $c\\otimes a\\mapsto ca$ with inverse $a\\mapsto1\\otimes a$ identifies the scalar-extended line with $A$. This does not require $A$ to be finite or flat over $\\mathbf Z/m$. Tensor powers of this local basis give a basis for every positive twist; for the negative twist the linear functional sending this basis to $1$ is a basis of its sheaf dual. The zero twist is the constant sheaf by definition. Thus the same cover trivializes every $A_T(a)$, including negative integers.",
+   "text": "Take the common signed local bases from lem-asd-finite-twist-common-local-bases.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
+    "lem-asd-finite-twist-common-local-bases"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PK section-kummer; scalar extension and signed tensor powers of the finite cyclic local system"
+    "place": "Tag 03PK, section-kummer; finite scalar extension and signed powers"
    }
   },
   {
-   "text": "Check the roots comparison over an affine open $V=\\operatorname{Spec}R$ of $T$. The local inverses of $m$ glue, so $m$ is a unit in $R$. Put $P=\\operatorname{Spec}(R[t]/(t^m-1))$. Apply [lem-sbc-root-split-away-cover-etale] with $g=1$ and $n=m$: its distinguished open is all of $P$, so $P\\to V$ is etale. By [lem-asd-affine-roots-representability], $h_P$ is the underlying roots sheaf $\\mu_{m,V}$, via pullback of the universal root, on every etale test scheme, including nonaffine ones. For $V'=T'\\times_TV$ the same lemma identifies $h_{V'\\times_VP}$ with $\\mu_{m,V'}$.",
+   "text": "Define r by asIso of the canonical roots comparison, using lem-asd-source-roots-pullback-invertible-exponent. Its normalization is the source kernel lift equation, reversed to match the statement.",
    "uses": [
-    "lem-sbc-root-split-away-cover-etale",
-    "lem-asd-affine-roots-representability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity (including its base-change paragraph); etale-cohomology.tex Tag 03PK, section-kummer"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-etale-representable-pullback-normalization] to $v_V:V'\\to V$ and the etale object $P\\to V$ from Step 2. Its comparison $v_V^{-1}h_P\\to h_{V'\\times_VP}$ is an isomorphism and its adjunct sends each test morphism to its base change. Under the two root identifications of [lem-asd-affine-roots-representability], that adjunct pulls back the universal root, hence pulls back every root section. It is therefore precisely the defining roots comparison $c_{v_V}$, not an unspecified isomorphism. Multiplication and powers are preserved because ring pullback preserves them. This proves the normalized affine roots comparison. Both representing schemes are objects of their small etale sites, as required for Yoneda evaluation in the normalization lemma.",
-   "uses": [
-    "lem-asd-etale-representable-pullback-normalization",
-    "lem-asd-affine-roots-representability"
+    "lem-asd-source-roots-pullback-invertible-exponent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1, lemma-stalk-pullback (4), its displayed adjunction/Yoneda proof; sites.tex Tag 04D3, lemma-pullback-representable-sheaf"
+    "place": "Tag 03PK, section-kummer; finite scalar extension and signed powers"
    }
   },
   {
-   "text": "Define $c_v:v^{-1}\\mu_{m,T}\\to\\mu_{m,T'}$ globally by the inverse-image adjunction: on an etale $U\\to T$ its adjunct sends $z$ to the pullback of $z$ on $T'\\times_TU$. [lem-weil-pbc-etale-inverse-image-algebraic-structures] identifies the underlying set inverse image with the abelian inverse image and their units, so this sectionwise group map has the required abelian adjunct. For an affine-open cover $V_i\\to T$, [lem-weil-pbc-etale-covering-base-change] gives the etale cover $V_i'=T'\\times_TV_i$ of $T'$. The restriction and composition-unit comparisons of [lem-weil-pbc-sets-etale-inverse-image-restriction] and [lem-weil-pbc-sets-etale-inverse-image-composition-units] identify $c_v|_{V_i'}$ with $c_{v_{V_i}}$ from Step 3: both adjuncts pull back the same root section along the same projection. [lem-weil-pbc-etale-cover-detects-iso] proves $c_v$ invertible. It is linear over the pulled-back constant $\\mathbf Z/m$ because $(z^i)|_{U'}=(z|_{U'})^i$, with locally constant residues handled by local restriction. Identity and composite morphisms give the identity and composite comparisons: after taking adjuncts, both sides pull a section through the same composite ring map; the composition-unit node identifies the units in precisely this order. This also proves compatibility with every power-transition map of roots, by $(z^q)|_{U'}=(z|_{U'})^q$.",
+   "text": "Take the ordinary c and p and all thirteen coherence identities from lem-asd-finite-twist-signed-coherence. Their root normalization uses the very same canonical map as r, whose asIso hom is definitionally that map.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-sets-etale-inverse-image-restriction",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-etale-cover-detects-iso"
+    "lem-asd-finite-twist-signed-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1 lemma-stalk-pullback (1),(2),(4); sites.tex Tag 03CB lemma-composition-morphisms-sites; projection pullback of roots"
+    "place": "Tag 03PK, section-kummer; finite scalar extension and signed powers"
    }
   },
   {
-   "text": "Choose a universe containing the objects and morphisms of both small etale sites and a larger universe for the sheaf values, as required by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. The base-change site functor satisfies the finite-limit and covering hypotheses by [lem-weil-pbc-etale-base-change-finite-limits] and [lem-weil-pbc-etale-base-change-continuous]. Hence [lem-weil-pbc-left-exact-site-inverse-image-tensor] supplies its exact, colimit-preserving, strong symmetric monoidal abelian inverse image and monoidal identity/composition comparisons. [prop-weil-pbc-inverse-image-modules-exact] identifies the pulled-back constant rings with their constants on $T'$ and identifies module pullback with this exact inverse image. The absolute tensor comparison also descends to tensor over a constant ring $R$: $F\\otimes_{R_T}G$ is the coequalizer of the two action maps from $F\\otimes_{\\mathbf Z}R_T\\otimes_{\\mathbf Z}G$ to $F\\otimes_{\\mathbf Z}G$. This follows from the balancing relations in [def-pur-sheaf-tensor-product]. Inverse image preserves this coequalizer and its action maps, so gives the canonical comparison over $R$. Apply it first with $R=\\mathbf Z/m$ to $\\mu_m\\otimes A$ and then with $R=A$ to positive tensor powers. Together with $c_v$ this yields $c_{v,1}:v^{-1}A_T(1)\\cong A_{T'}(1)$, $c_{v,0}$ the constant-ring comparison, and $c_{v,a}=c_{v,1}^{\\otimes a}$ for every $a>0$. These are the maps normalized on local pure tensors by pullback of the root section and of its coefficient.",
+   "text": "For each a,b, form a natural isomorphism by whiskering the shift-commutation isomorphism, the fixed-factor tensor comparison of lem-asd-source-derived-tensor-fixed-factor, and the tensor-right image of the single-complex pullback comparison followed by single(c_v,a). Iso.ext and the definitions of the fixed-factor source comparison give exactly the required component formula. This is the proved private finiteTwistDerivedComparison.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL lemma-tensor-product-pullback; etale-cohomology.tex Tag 03Q1; balanced tensor comparison from the absolute monoidal comparison"
-   }
-  },
-  {
-   "text": "For a locally free line $L$, put $L^\\vee=\\mathcal Hom_A(L,A_T)$. On a trivializing object with basis $e$, every functional is uniquely $a e^\\vee$, where $e^\\vee(e)=1$, by [def-pur-sheaf-hom]. Its evaluation $L^\\vee\\otimes L\\to A_T$ is an isomorphism locally (it sends $e^\\vee\\otimes e$ to $1$), hence globally by [lem-weil-pbc-etale-cover-detects-iso]. Pull back this evaluation using Step 5. It defines the canonical map $v^{-1}L^\\vee\\to(v^{-1}L)^\\vee$: a pulled-back functional acts on a pulled-back section by the pulled-back value, extended $A_{T'}$-linearly. This is well-defined by the tensor comparison and the sheaf-Hom rule. The pulled-back cover remains a cover by [lem-weil-pbc-etale-covering-base-change]; on it, $v^{-1}L$ has basis $v^{-1}e$ and the displayed map sends $v^{-1}e^\\vee$ to its dual basis, so it is an isomorphism. For $L=A_T(a)$, $a>0$, compose this dual comparison with the dual of $c_{v,a}^{-1}$ to obtain $c_{v,-a}:v^{-1}A_T(-a)\\cong A_{T'}(-a)$. Its normalization is the evaluation identity $\\operatorname{ev}(c_{v,-a}(\\lambda),c_{v,a}(x))=c_{v,0}(v^{-1}\\operatorname{ev}(\\lambda,x))$.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-etale-cover-detects-iso",
-    "lem-weil-pbc-etale-covering-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04TT section-internal-hom and Tag 03EM lemma-internal-hom; evaluation and dual comparison computed on a single local basis"
-   }
-  },
-  {
-   "text": "The signed tensor-product identifications $A_T(a)\\otimes A_T(c)\\cong A_T(a+c)$ are defined by concatenating positive tensor powers, tensoring dual powers, and contracting a basis with its dual in mixed signs. On a local basis $e$ of $A_T(1)$ they send $e^{[a]}\\otimes e^{[c]}$ to $e^{[a+c]}$, where negative exponents denote dual basis powers. Changing $e$ to $u e$ multiplies $e^{[a]}$ by $u^a$ for every signed integer $a$, so these maps do not depend on the chosen basis and glue. Associativity, symmetry, units and evaluation all reduce to multiplication of their coefficients on this basis. The maps of Steps 5 and 6 send these basis tensors to the corresponding pulled-back basis tensors and preserve their coefficient multiplication; thus they respect these identifications and evaluation. For successive morphisms $w$ and $v$, Step 4 gives the composition law on the root line and Step 5 gives it on positive powers. For negative powers, the two paths are the dual of the same positive comparison, since their evaluations with the image of every local basis vector agree; the image of the dual basis is thereby uniquely determined. Identity comparisons obey the same calculation. These are equalities of sheaf morphisms checked on local bases and glued, not an inference from stalkwise equality of derived morphisms.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK section-tensor-product and Tag 04TT section-internal-hom; explicit signed tensor and evaluation coherence"
-   }
-  },
-  {
-   "text": "By [prop-weil-pbc-inverse-image-modules-exact], $v^{-1}$ is exact and is module pullback for the isomorphism of constant coefficient rings. Applying it degreewise therefore preserves quasi-isomorphisms and gives the same functor as $Lv^*$ on the unbounded derived category. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism of ringed topoi, with $F=K$ and $G=A_T(a)[0]$. Exactness identifies $Lv^*(A_T(a)[0])$ with $(v^{-1}A_T(a))[0]$, and $c_{v,a}$ then gives $v^{-1}(K\\otimes_A^LA_T(a))\\cong v^{-1}K\\otimes_A^LA_{T'}(a)$. This is natural in $K$ and applies to arbitrary unbounded $K$. The shift comparison is degreewise: $K[b]^n=K^{n+b}$ has differential $(-1)^b d_K$, and the additive inverse image preserves that sign. It gives the asserted formula with $[b]$. For tensor and composition coherence choose the K-flat resolutions with flat terms supplied in the tensor-pullback node. Pullback preserves that class of resolutions. Its tensor comparison is the total-complex comparison of [def-pc-tensor-complex-sheaves], with constituents the sheaf tensor maps of Step 5, direct sums preserved by the left adjoint. The composition and tensor diagrams therefore commute term by term by Steps 4–7 and the monoidal-composition assertion of [lem-weil-pbc-left-exact-site-inverse-image-tensor]; the signs in the total differentials are unchanged. Passing to the derived localization preserves those equalities. Thus the derived identifications have the same coherence, without a boundedness or constructibility assumption.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-asd-source-derived-tensor-fixed-factor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 lemma-pullback-tensor-product and Tag 0G7E lemma-pullback-K-flat; exact coefficient inverse image and total-complex coherence"
+    "place": "Tags 07A4 and 0G7E; source derived comparison and functor whiskering"
    }
   },
   {
-   "text": "Finally let $m'=qm$ be invertible on $T$. Step 1 with coefficient ring $\\mathbf Z/m'$ gives a cover and an isomorphism $\\theta:(\\mathbf Z/m')_U\\cong\\mu_{m',U}$. Put $\\zeta=\\theta(1)$. Inside $\\mu_{m'}$, the subsheaf $\\mu_m$ is precisely the kernel of multiplication by $m$, because it consists of roots $z$ with $z^m=1$. In the cyclic trivialization that kernel is $q(\\mathbf Z/m')$, and $a\\bmod m\\mapsto qa\\bmod m'$ is an isomorphism $\\mathbf Z/m\\cong q(\\mathbf Z/m')$. Thus $\\zeta^q$ trivializes $\\mu_m$. The transition $z\\mapsto z^q$ sends $\\zeta^i$ to $(\\zeta^q)^i$, so in these two bases it is reduction $\\mathbf Z/m'\\to\\mathbf Z/m$, not multiplication by $q$ on the final coefficient module. Its semilinearity over that reduction gives a well-defined map $\\mu_{m'}\\otimes_{\\mathbf Z/m'}A\\to\\mu_m\\otimes_{\\mathbf Z/m}A$, since $mA=0$; in the chosen bases it is the identity on $A$, hence invertible by [lem-weil-pbc-etale-cover-detects-iso]. This defines the comparison canonically, independently of $\\theta$, from the power map itself. Tensoring gives all positive powers, taking its inverse dual gives the negative powers, and the evaluation identity of Step 6 fixes the dual comparison. Powers of units commute with ring pullback (Step 4), and powers compose by $ (z^{q_1})^{q_2}=z^{q_1q_2}$; tensor, dual, and derived comparisons consequently respect these transition maps. This proves the final clause and its compatibility with the preceding constructions.",
+   "text": "Construct q concretely with kernel.lift on (mprime/m) times the kernel inclusion. Its kernel condition is nsmul_comp, comp_nsmul and (mprime/m)*m=mprime. Apply lem-asd-finite-twist-exponent-line only to obtain the degree-one e. Define t at zero to be reflexivity, at one to be e, at higher nonnegative degrees recursively by tensorIso, and at negative degrees by ihomIsoOfIsoLeft of the corresponding positive isomorphism. The positive equations are definitional. The negative evaluation equation is id_tensor_pre_app_comp_ev followed by cancellation of e.hom with e.inv, proved in finiteTwistDualEvaluation and finiteTwistSignedIso_evaluation. These parts introduce no new holes.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
+    "lem-asd-finite-twist-exponent-line",
     "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-etale-cover-detects-iso"
+    "def-pur-sheaf-hom"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PK section-kummer; cyclic-kernel calculation for a divisible exponent, scalar extension, tensor and dual powers"
+    "place": "Tag 03PK, section-kummer; finite scalar extension and signed powers"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-hom",
   "def-pur-sheaf-tensor-product",
-  "lem-asd-affine-roots-representability",
-  "lem-asd-etale-representable-pullback-normalization",
-  "lem-asd-finite-etale-twist-line",
-  "lem-sbc-root-split-away-cover-etale",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-cover-detects-iso",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-asd-finite-twist-common-local-bases",
+  "lem-asd-finite-twist-exponent-line",
+  "lem-asd-finite-twist-signed-coherence",
+  "lem-asd-source-derived-tensor-fixed-factor",
+  "lem-asd-source-roots-pullback-invertible-exponent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03PK section-kummer and 03Q1 lemma-stalk-pullback (4); sites-modules.tex Tags 03EL and 04TT; sites-cohomology.tex Tags 07A4 and 0G7E; explicit scalar, dual, signed-power and exponent-transition arguments"
+  "place": "Source-library roots pullback and derived tensor comparisons; proved common local bases, two smaller ordinary coefficient obligations and explicit kernel, tensor and inverse-dual constructions, E3 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -428,23 +354,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-galois-inverse-image-representable",
-  "lem-sbc-root-split-away-cover-etale",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-cover-detects-iso",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -482,5 +392,15 @@
   "by": "NJ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T071147-L-1666607",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
