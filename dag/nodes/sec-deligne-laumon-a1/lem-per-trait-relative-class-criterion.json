@@ -13,7 +13,6 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-weil-regular-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
   "def-pc-integral-scheme",
   "def-weil-closed-immersion",
   "def-weil-pbc-regular-sequence",
@@ -24,9 +23,97 @@
   "def-weil-pbc-krull-dimension-ring",
   "lem-per-regular-immersion-class-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on a nonempty affine open $U$ of $T$. The trait $S$ is regular: its generic local ring is a field and its closed local ring has dimension one and a principal maximal ideal, so both satisfy [def-weil-regular-scheme]. The finite-type-over-Noetherian theorem [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian, and [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes $U$ Noetherian. Regularity restricts because its local rings are unchanged; integrality restricts by the domain characterization in [def-pc-integral-scheme]. By [lem-weil-pbc-lft-affine-pairs], the affine coordinate ring of $U$ is a finitely generated $R$-algebra, so $U\\to S$ is finite type. Apply [lem-per-regular-lci-geometric-calculus] to this morphism of regular affine schemes $U\\to S$: it factors as a regular closed immersion $i:U\\hookrightarrow Y=\\mathbf A^N_S$ followed by projection $q$. Here $q$ is smooth of pure relative dimension $N$ by [sbc-lem-affine-space-smooth]. Both $U$ and $Y$ are integral regular finite-type quasi-projective $S$-schemes: the coordinate ring of $Y$ is a polynomial ring over the domain $R$, and the displayed closed immersion gives quasi-projectivity of $U$. The intrinsic-dimension assertion of the geometric calculus and [lem-per-prepurity-lci-classes] give $e_U=e_T=N-c$, where $c$ is the codimension of $i$; thus $c$ is constant on $U$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-pc-integral-scheme",
+    "lem-per-regular-lci-geometric-calculus",
+    "sbc-lem-affine-space-smooth",
+    "lem-per-prepurity-lci-classes",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.5 proof, first sentence; affine-local version of the smooth/regular factorization."
+   }
+  },
+  {
+   "text": "The ambient $Y$ is punctually pure. Indeed choose a uniformizer $\\pi$ of $R$ and specialize [lem-per-monomial-trait-punctual-purity] to $n=N+1$ and exponents $(1,0,\\ldots,0)$. Its affine coordinate ring is $R[T_1,\\ldots,T_{N+1}]/(T_1-\\pi)$, identified with $R[T_2,\\ldots,T_{N+1}]$ by substitution $T_1=\\pi$ and the inverse inclusion of the remaining variables. This identifies the scheme in that statement with $Y$ and identifies its local rings and Kummer maps with those defining punctual purity on $Y$. The exponent tuple is nonzero, and zero exponents are expressly allowed. This also covers $N=0$, when the quotient is $R$. We use only this affine-space specialization of the existing node, not any assertion about the relative class $c_U$.",
+   "uses": [
+    "lem-per-monomial-trait-punctual-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.2, printed p.248; the identical affine-space assertion is also the exponent-(1,0,...,0) specialization of Proposition 3.5.12, printed pp.250--251."
+   }
+  },
+  {
+   "text": "Write $\\eta_i:A_U\\to i^!A_Y(c)[2c]$ for the Kummer class. The smooth orientation [lem-per-ordinary-smooth-orientation] gives the specified isomorphism $\\gamma_q:A_Y(N)[2N]\\xrightarrow{\\sim}q^!A_S$. Its hypotheses hold: $Y$ and $S$ are Noetherian, $\\ell$ is invertible, and affine space is separated and compactifiable by $\\mathbf P^N_S$. Apply $i^!$, then shift and twist by $(-e_T)[-2e_T]$, and use exceptional transitivity [lem-cat-right-adjoint-composition]. With $N-e_T=c$, this gives an isomorphism\n$$b:i^!A_Y(c)[2c]\\xrightarrow{\\sim}p_U^!A_S(-e_T)[-2e_T]=K_U.$$\nThe signed Tate identifications are those of [lem-asd-etale-finite-twist-pullback]. Commuting a Tate line with $i^!$ can be checked on an etale cover trivializing that rank-one line, where the comparison is the identity, and these identities glue. The class composition formula of [lem-per-prepurity-lci-classes], with $e_i=-c$ and $e_q=N$, says exactly $c_U=b\\circ\\eta_i$. Its regular-immersion clause identifies the first factor with the normalized Kummer class of [lem-per-regular-immersion-class-calculus], and its smooth clause identifies the second with this diagonal-class orientation. Therefore $c_U$ is an isomorphism if and only if $\\eta_i$ is; this compares the actual maps with their fixed normalization.",
+   "uses": [
+    "lem-per-ordinary-smooth-orientation",
+    "lem-cat-right-adjoint-composition",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-per-prepurity-lci-classes",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.5 proof, commutative triangle and smooth Gysin isomorphism; composition is Theorem 2.5.12."
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctual-purity-two-of-three] to $i:U\\hookrightarrow Y$. Both schemes are regular Noetherian with $\\ell$ invertible and $i$ has constant codimension $c$, as checked above. Its condition (c) holds because $Y$ is punctually pure at all its points by Step 2. Consequently its conditions (a) and (b) are equivalent: (a) and (c) imply (b), and (b) and (c) imply (a). In its notation (a) is exactly invertibility of $\\eta_i$ and (b) is punctual purity of $U$. Combining with Step 3 proves that $c_U$ is an isomorphism if and only if $U$ is punctually pure.",
+   "uses": [
+    "lem-per-punctual-purity-two-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.5 proof, last sentence, applying Proposition 3.2.3 and Corollary 3.5.3."
+   }
+  },
+  {
+   "text": "Take an affine open cover by such $U$. Punctual purity of $T$ is equivalent to that of every $U$, since at a point $t\\in U$ the local scheme $\\operatorname{Spec}\\mathcal O_{U,t}$ is the same as $\\operatorname{Spec}\\mathcal O_{T,t}$, so the defining map is unchanged. By open restriction in [lem-per-prepurity-lci-classes], $c_T|_U=c_U$ under the canonical identification $K_T|_U=K_U$. A morphism in $D^+$ is invertible exactly when it is invertible on this open cover: apply [lem-weil-pbc-derived-stalk-conservative] to its underlying abelian complexes, since every geometric point lies over a member of the cover and forgetting the $A$-module structure is exact and reflects isomorphisms. Step 4 now gives both implications globally. No step assumes that $T\\to S$ is flat. In particular for $T$ supported on the closed point the same factorization works, and $e_T=N-c$ can be negative; all twist-shifts above are signed, so no case is excluded.",
+   "uses": [
+    "lem-per-prepurity-lci-classes",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.5 and its proof, with open-local descent spelled out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-pc-integral-scheme",
+  "lem-per-regular-lci-geometric-calculus",
+  "sbc-lem-affine-space-smooth",
+  "lem-per-prepurity-lci-classes",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-per-monomial-trait-punctual-purity",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-cat-right-adjoint-composition",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-punctual-purity-two-of-three",
+  "lem-weil-pbc-derived-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI, Proposition 3.5.5, printed pp.248--249: affine-local expansion of its proof; affine-space purity cited via the existing monomial node, Proposition 3.5.12."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +156,45 @@
    "results": "Actual recorded hits: ",
    "date": "2026-10-18",
    "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|punctuallyPure|absolutePurity|fundamentalClass",
+   "results": "Actual logged hits: Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned signatures; scheme germ-injectivity, affine-space integrality, normalization, etale algebra definitions and a finestTopologySingle substring collision do not state an etale supported Kummer or relative exceptional Gysin assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctual etale cohomological purity and the exceptional inverse image relative fundamental class over a trait",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Etale, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt.comp, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale, Algebra.Etale.of_isLocalizationAway, RingHom.Etale",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned signatures; scheme germ-injectivity, affine-space integrality, normalization, etale algebra definitions and a finestTopologySingle substring collision do not state an etale supported Kummer or relative exceptional Gysin assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "Actual logged hits: CategoryTheory.Sheaf.finestTopologySingle",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned signatures; scheme germ-injectivity, affine-space integrality, normalization, etale algebra definitions and a finestTopologySingle substring collision do not state an etale supported Kummer or relative exceptional Gysin assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular scheme over a discrete valuation trait is punctually pure if and only if its relative Gysin class is an isomorphism",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.IsGermInjective, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.Scheme.IsGermInjectiveAt, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, AlgebraicGeometry.Scheme.IsGermInjective.Spec",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned signatures; scheme germ-injectivity, affine-space integrality, normalization, etale algebra definitions and a finestTopologySingle substring collision do not state an etale supported Kummer or relative exceptional Gysin assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular closed subscheme of affine space over a trait punctual absolute purity is equivalent to invertibility of the relative dualizing Gysin morphism",
+   "results": "Actual logged hits: AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.IsGermInjective.Spec, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "date": "2026-10-19",
+   "verdict": "no match: read all returned signatures; scheme germ-injectivity, affine-space integrality, normalization, etale algebra definitions and a finestTopologySingle substring collision do not state an etale supported Kummer or relative exceptional Gysin assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-proper-degree-descent",
@@ -97,5 +219,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trait-relative-class-criterion",
+  "worker": "stage1",
+  "summary": "Expanded ILO XVI Proposition 3.5.5 into affine regular/smooth factorization, affine-space punctual purity, the normalized transitivity triangle, two-of-three and open-local descent. Reused existing nodes only; retained the statement, including vertical schemes and signed virtual dimensions. Removed the unused properness definition dependency.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3 regular finite-torsion duality input, through the recorded ancestry to proper-degree descent: this item supplies its relative-class criterion. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic geometry or derived-category tool used only for its stated property in the affine-local proof of ILO XVI 3.5.5, not to replace a unit step; no same-unit node states this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic geometry or derived-category tool used only for its stated property in the affine-local proof of ILO XVI 3.5.5, not to replace a unit step; no same-unit node states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-derived-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-86b502bb8",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-86b502bb8 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, and ILO XVI 3.5.1–3.5.13 (printed pp.248–251). The delivery has no new nodes, the statement is unchanged, and the only stmt_dep change drops the unused def-weil-proper-morphism. The proof is the ILO 3.5.5 argument done on affine opens. Step 1: U↪A^N_S is a regular immersion by the regular-lci geometric calculus (all schemes Noetherian; U is integral, finite type and quasi-projective), and e_U=e_T=N−c by intrinsic virtual dimension, so c is constant. Step 2: the monomial node with (1,0,…,0) gives R[T]/(T_1−π)≅R[T_2..], which is A^N_S; zero exponents are allowed and N=0 gives S. Step 3: the prepurity composition formula with e_i=−c and e_q=N gives c_U=b∘η_i, with b iso via γ_q (smooth, separated, compactifiable by P^N, D^+). Step 4: two-of-three with (c) from Step 2 gives (a)⇔(b). Step 5: open restriction and stalk conservativity. I checked the edge cases N=0, c=0, T=S, and vertical T with e<0 (non-flat), and the routing: the per citations are on the unit, the other nodes are Mathlib/closed tools, and I accept the declared tool_uses (twist pullback, derived-stalk conservativity). There is no cycle and no SGA citation. Batch 5: the stmt-dep closure (through prepurity, which defines c_T) already contains all three flagged trf nodes, and the new citations add 0 trf/pod nodes. regular-sequence-dimension-formula is a Mathlib leaf (commutative algebra). finite-ring-section-deformation is the DNC smooth-orientation construction that defines c_T: neither assumption gives it, and Q06/Q64 accepted the same chain. bounded-below-derived-adjunction is the generic derivedPlus adjunction. All three are accepted. Maintainer notes: (1) ILO proves 3.5.12 using Cor 3.5.6, which rests on this item. When lem-per-monomial-trait-punctual-purity is split, its zero-exponent case must go through V(e)×A^m with smooth base change of pair purity and 3.5.13(iv), not through 3.5.6, or it creates a cycle. (2) Step 3's sentence on commuting Tate lines with i^! by local gluing is loose, but the prepurity composition clause (with its twist identifications) already covers it."
  }
 }
