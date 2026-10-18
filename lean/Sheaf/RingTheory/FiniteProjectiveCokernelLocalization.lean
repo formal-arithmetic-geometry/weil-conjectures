@@ -96,6 +96,10 @@ private theorem spread_split
 /-- Source: Stacks Project, Algebra, Tag 00O0, Lemma `cokernel-flat`, parts (1) and (3)
 (blueprint: lem-pc-finite-projective-cokernel-localization).
 
+The finite-projective-source version is Tag 00O0. The source here need only be
+finite: Mathlib's `IsLocalRing.split_injective_iff_lTensor_residueField_injective`
+already has this generality, and the denominator argument uses only its finiteness.
+
 Proof: At the prime, the projective target is finite free. The residue-field
 injectivity criterion gives a left inverse over the local ring. Finite presentation
 of the target clears the denominators of this inverse; finiteness of the source clears
@@ -107,7 +111,6 @@ presentation spreads this isomorphism to a principal neighborhood. -/
 theorem finiteProjectiveCokernel_residue_localization
     {R : Type u} [CommRing R]
     {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁]
-    [Module.Projective R P₁]
     {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂]
     [Module.Projective R P₂]
     (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] :

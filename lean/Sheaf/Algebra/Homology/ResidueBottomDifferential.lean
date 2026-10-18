@@ -62,6 +62,7 @@ theorem residue_bottom_differential
         (.up ℤ)).obj P
       IsZero (Pp.homology a)) :
     Mono (P.d a (a + 1)) ∧ Module.Projective R (P.opcycles (a + 1)) := by
+  have : Module.Projective R (P.X a) := hp₀
   have hfibre : ∀ (p : Ideal R) [p.IsPrime],
       Function.Injective ((P.d a (a + 1)).hom.baseChange p.ResidueField) := by
     intro p hp

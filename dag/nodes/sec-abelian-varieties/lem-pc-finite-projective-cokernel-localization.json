@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Residue-field rank criteria for finite-projective maps",
- "statement": "Let $R$ be a ring and let $\\varphi:P_1\\to P_2$ be a homomorphism of finite projective $R$-modules (finite projective means a direct summand of a finite free module). For a prime ideal $\\mathfrak p$ write $\\kappa(\\mathfrak p)$ for its residue field. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is injective, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f:(P_1)_f\\to(P_2)_f$ is injective and $\\operatorname{Coker}(\\varphi)_f$ is finite projective over $R_f$. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is an isomorphism, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f$ is an isomorphism.",
+ "statement": "Let $R$ be a commutative ring and let $\\varphi:P_1\\to P_2$ be a homomorphism from a finite $R$-module $P_1$ to a finite projective $R$-module $P_2$ (finite projective means a direct summand of a finite free module). For a prime ideal $\\mathfrak p$ write $\\kappa(\\mathfrak p)$ for its residue field. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is injective, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f:(P_1)_f\\to(P_2)_f$ is injective and $\\operatorname{Coker}(\\varphi)_f$ is finite projective over $R_f$. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is an isomorphism, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00O0, Algebra, Lemma cokernel-flat, parts (1) and (3)"
@@ -39,8 +39,8 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "Mathlib local splitting, finite presentation spreading, and Nakayama; Stacks Tag 00O0 supplies the statement",
-  "place": "B3 second reading, 2026-10-14: direct Mathlib route below the unit level"
+  "document": "Mathlib local splitting, finite presentation spreading, and Nakayama; literature/stacks-project/algebra.tex Tag 00O0 is the finite-projective-source specialization",
+  "place": "B3 proof retained; E7 2026-10-18 removes its unused source projectivity assumption"
  },
  "mathlib_searches": [
   {
@@ -94,9 +94,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-projective-prime-local-free"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-11",
   "by": "L",
@@ -109,10 +107,10 @@
   "module": "Sheaf.RingTheory.FiniteProjectiveCokernelLocalization",
   "declaration": "Module.finiteProjectiveCokernel_residue_localization",
   "file": "lean/Sheaf/RingTheory/FiniteProjectiveCokernelLocalization.lean",
-  "statement": "theorem finiteProjectiveCokernel_residue_localization {R : Type u} [CommRing R] {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁] [Module.Projective R P₁] {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂] [Module.Projective R P₂] (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] : (Function.Injective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (φ.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f))) ∧ Module.Projective (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f)))) ∧ (Function.Bijective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (φ.baseChange (Localization.Away f)))",
+  "statement": "theorem finiteProjectiveCokernel_residue_localization {R : Type u} [CommRing R] {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁] {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂] [Module.Projective R P₂] (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] : (Function.Injective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (φ.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f))) ∧ Module.Projective (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f)))) ∧ (Function.Bijective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (φ.baseChange (Localization.Away f)))",
   "branch": "sheaf-dag",
-  "by": "S1",
-  "date": "2026-10-11",
+  "by": "E7",
+  "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
@@ -136,13 +134,35 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-1c76a",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261013T165638-L-1806958",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261018T062738-L-645175",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and strengthened FPCL lemma (binder [Module.Projective R P₁] removed) with nodes lem-pc-affine-perfect-cut-degree-zero / lem-pc-finite-projective-cokernel-localization, change record and compiles of delivery + importers PerfectCutComplexDegreeZero, ResidueConnectiveProjectiveOpcycles; original ResidueBottomDifferential warns hp₀ unused against changed dep, adapted one-line fix clean; axioms: only sorryAx via pre-existing derivedSplittingUnique"
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "E7 stage 2",
+  "old_statement": "Let $R$ be a ring and let $\\varphi:P_1\\to P_2$ be a homomorphism of finite projective $R$-modules (finite projective means a direct summand of a finite free module). For a prime ideal $\\mathfrak p$ write $\\kappa(\\mathfrak p)$ for its residue field. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is injective, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f:(P_1)_f\\to(P_2)_f$ is injective and $\\operatorname{Coker}(\\varphi)_f$ is finite projective over $R_f$. If $\\varphi\\otimes_R\\kappa(\\mathfrak p)$ is an isomorphism, then there is $f\\notin\\mathfrak p$ such that $\\varphi_f$ is an isomorphism.",
+  "what": "Strengthen the existing proved theorem to finite source and finite projective target. The source projectivity instance is unused throughout the existing Mathlib proof. This permits application to the finite image of a differential without choosing bases. No target or consumer statement changes.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 00O0, finite-projective-source specialization; generalization via Mathlib IsLocalRing.split_injective_iff_lTensor_residueField_injective and spreading a retraction"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-residue-bottom-differential",
+    "holds": true,
+    "note": "Only the source projectivity hypothesis is removed; the conclusions and all existing finite-projective-source applications are unchanged."
+   },
+   {
+    "id": "lem-pc-affine-perfect-cut-degree-zero",
+    "holds": true,
+    "note": "Only the source projectivity hypothesis is removed; the conclusions and all existing finite-projective-source applications are unchanged."
+   }
+  ]
  }
 }

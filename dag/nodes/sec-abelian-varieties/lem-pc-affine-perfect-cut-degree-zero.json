@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Write kappa for kappa(p). By the bounded-above finite-free hypothesis, inspect the three consecutive terms K^{−1} to K^0 to K^1. In K^0 tensor_R kappa define V as the image of K^{−1} tensor_R kappa and W as the kernel of K^0 tensor_R kappa to K^1 tensor_R kappa. Choose x_a in K^{−1} whose differentials form a basis of V, choose y_b in Ker(d^0) mapping to a basis of W/V using the assumed surjectivity of H^0(K) tensor_R kappa to H^0(K tensor_R^L kappa), and choose z_c in K^0 lifting a basis of (K^0 tensor_R kappa)/W. Then the d^0(z_c) are linearly independent in K^1 tensor_R kappa.",
+   "text": "Put F = kappa(p) tensor_R -. The assumed epimorphism on H^0 makes the canonical map F(Z^0 K) to Z^0(FK) epic: compare the right-exact rows K^{-1} -> Z^0 K -> H^0 K and FK^{-1} -> Z^0(FK) -> H^0(FK), and apply the three lemma. Compare next F(Z^0 K) -> FK^0 -> F(im d^0) with the exact row Z^0(FK) -> FK^0 -> FK^1. The middle comparison is the identity, the first comparison is epic, and the top last arrow is epic. The four lemma gives that F(im d^0) -> FK^1 is monic. These are the private cycles and image comparison lemmas; they require no freeness.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "Let $\\psi:R^{\\oplus(r+s+t)}\\to K^0$ send the standard basis to the elements $d^{-1}(x_a),y_b,z_c$. Its residue-field map is an isomorphism, so the isomorphism clause of [lem-pc-finite-projective-cokernel-localization] gives, after shrinking by $f\\notin\\mathfrak p$, that these elements form an $R_f$-basis of $(K^0)_f$. Apply the injective-fibre clause of the same node to $R^{\\oplus t}\\to K^1$, sending the standard basis to $d^0(z_c)$; after a further shrinking, these elements are $R_f$-linearly independent and their cokernel $E^1$ is finite projective. Since $d^0$ kills $d^{-1}(x_a)$ and $y_b$, $E^1=\\operatorname{Coker}(d^0)$. Thus $\\tau_{\\geq1}(K^\\bullet\\otimes_RR_f)$ is represented by the bounded complex with $E^1$ in degree $1$ and the original finite free terms in higher degrees (bounded because $K$ is bounded above), hence by finite projectives in degrees $[1,b]$ for some $b$. Such a complex is strictly perfect on $\\operatorname{Spec}(R_f)$, so $\\tau_{\\geq1}(K^\\bullet\\otimes_RR_f)$ is perfect; its terms are flat and vanish below degree $1$, so tensoring with any $R_f$-module has no cohomology below degree $1$, i.e. its Tor-amplitude is in $[1,\\infty)$.",
+   "text": "The image of d^0 is finite as a quotient of finite K^0, while K^1 is finite projective. Apply the finite-source version of [lem-pc-finite-projective-cokernel-localization] to the image inclusion and the injectivity just proved. For some f outside p its cokernel is finite projective. Extension of scalars preserves epimorphisms, so the cokernel of the localized image inclusion is the cokernel of the localized differential, namely the degree-one opcycles. Thus P = truncGE 1 of the localized complex has finite projective degree-one term, the original localized finite free terms above one, and zero terms below one. The original upper bound gives a bound b = max(c,1). P itself is the required representative and proves perfectness. Its projective terms are flat, so torAmplitudeIn_Q_obj_of_flat gives the requested tensor lower bound.",
    "uses": [
     "lem-pc-finite-projective-cokernel-localization"
    ],
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "The truncation triangle tau_{<=0}(K tensor_R R_f) to K tensor_R R_f to tau_{>=1}(K tensor_R R_f) to tau_{<=0}(K tensor_R R_f)[1] is distinguished. The right-hand object has projective-amplitude in [1,b] for some b, while the left-hand object has no cohomology in degrees greater than 0. The derived splitting statement [lem-pc-derived-splitting-unique], with a=1, therefore supplies a canonical direct-sum isomorphism K tensor_R R_f isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f).",
+   "text": "Use the distinguished triangle obtained from the short exact truncation sequence. Its third object is canonically isomorphic to Q(P). The finite projective terms of P are categorically projective and vanish outside [1,b]. The first object Q(truncLE 0) has zero cohomology in degrees at least two. Apply the splitting clause of [lem-pc-derived-splitting-unique] with a = 1 and transport the right summand along the canonical isomorphism. This proves the stated direct-sum isomorphism.",
    "uses": [
     "lem-pc-derived-splitting-unique"
    ],
@@ -62,9 +62,9 @@
   "lem-pc-derived-splitting-unique"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+  "place": "Tag 0A1U; E7, 2026-10-18: replace explicit basis choices by three/four lemmas and the finite-source strengthening of Tag 00O0"
  },
  "mathlib_searches": [
   {
@@ -193,5 +193,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-1c76a",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261018T062738-L-645175",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and strengthened FPCL lemma (binder [Module.Projective R P₁] removed) with nodes lem-pc-affine-perfect-cut-degree-zero / lem-pc-finite-projective-cokernel-localization, change record and compiles of delivery + importers PerfectCutComplexDegreeZero, ResidueConnectiveProjectiveOpcycles; original ResidueBottomDifferential warns hp₀ unused against changed dep, adapted one-line fix clean; axioms: only sorryAx via pre-existing derivedSplittingUnique"
  }
 }
