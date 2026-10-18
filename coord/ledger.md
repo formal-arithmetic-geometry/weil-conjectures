@@ -16180,3 +16180,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/U2/Sheaf.AlgebraicGeometry.DerivedSquareIsoCommShift (stage 3; reviewer PASS; first push; landing 20261018T062924-L-683486 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/U2-derived-square-shift-local-helpers.md)
 - 06:29 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition (stage 3; reviewer PASS; first push; landing 20261018T062924-L-683720 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/U3/Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop (stage 3; reviewer PASS; first push; landing 20261018T062925-L-683980 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/U3/Sheaf.Topology.SpectralDirectedLimit (stage 3; reviewer PASS; first push; landing 20261018T062926-L-684180 (proof); batch 20261018T062645; modules 1; new nodes 0)
