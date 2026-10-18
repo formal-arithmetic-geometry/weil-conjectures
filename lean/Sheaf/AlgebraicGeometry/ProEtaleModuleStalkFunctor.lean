@@ -6,6 +6,7 @@ Authors: SHEAF group Q19
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Functorial module stalks on the pro-etale site
@@ -44,7 +45,24 @@ The forgetful functor on module sheaves is additive, and so is their composite. 
 theorem geometricRingModuleStalkFunctor_additive (y : Spec (.of Ω) ⟶ Y)
     (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (geometricRingModuleStalkFunctor y O).Additive := by
-  sorry
+  have : (PresheafOfModules.constFunctor
+      (colimit.cocone (proEtaleGeometricStalkRingDiagram y O))).Additive := by
+    constructor
+    intro M N f g
+    ext X
+    rfl
+  have : (PresheafOfModules.colimitFunctor
+      (colimit.isColimit (proEtaleGeometricStalkRingDiagram y O))).Additive :=
+    (PresheafOfModules.colimitAdjunction
+      (colimit.isColimit (proEtaleGeometricStalkRingDiagram y O))).left_adjoint_additive
+  have : (PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y)
+      (O.obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).Additive := by
+    constructor
+    intro M N f g
+    ext X
+    rfl
+  unfold geometricRingModuleStalkFunctor
+  infer_instance
 
 attribute [instance] geometricRingModuleStalkFunctor_additive
 
