@@ -27,38 +27,24 @@
  ],
  "proof": [
   {
-   "text": "Put $R=A(W)$. Apply [det-pe-sections-limits-colimits] with the given ring sheaf $A$ and affine weakly contractible $W$. It gives preservation of all limits and all colimits for the module-valued evaluation $E:M\\mapsto M(W)$. By [def-weil-sheaf-of-modules-category], morphisms evaluate to $R$-linear maps and evaluation is additive: $(f+g)_W=f_W+g_W$. The hypotheses use weak contractibility of the site object, without assuming that its coordinate ring is w-contractible, and impose no commutativity on $A$.",
+   "text": "Apply [det-pe-sections-limits-colimits] to the given ring sheaf R and affine weakly contractible W, once for universe-zero diagrams and once for the specified diagram universes. Install the resulting preservation of limits and colimits for the module-valued evaluation functor E. The category and evaluated linear maps are those of [def-weil-sheaf-of-modules-category].",
    "uses": [
     "det-pe-sections-limits-colimits",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
-    "place": "First paragraph, exact sections; the existing stronger sections theorem also supplies the direct-sum and colimit conclusions."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $0\\to M\\xrightarrow{f}N\\xrightarrow{g}P\\to0$ be short exact in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. Its first map is a kernel of $g$ and its second is a cokernel of $f$. The limit and colimit preservation of Step 1 give the same kernel and cokernel diagrams in $R$-modules. A kernel of an $R$-linear map is its subgroup of elements sent to zero, with the restricted action; a cokernel is the quotient by its image, with the quotient action. Their underlying additive groups are therefore the abelian-group kernel and cokernel as well. Hence $0\\to M(W)\\to N(W)\\to P(W)\\to0$ is short exact in abelian groups. This proves the stated exactness.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
-    "place": "First paragraph, exactness, with the passage from module values to underlying abelian groups written explicitly."
-   }
-  },
-  {
-   "text": "For any small diagram $D:I\\to R\\text{-}\\mathrm{Mod}$, form $B=\\bigoplus_{i\\in\\mathrm{Ob}I}D(i)$ and $C=\\bigoplus_{u:i\\to j}D(i)$ on underlying additive groups, and define $d:C\\to B$ on the $u$-summand by $x\\mapsto\\iota_jD(u)(x)-\\iota_i(x)$. Direct sums carry coordinatewise $R$-action; $d$ is linear, so $L=B/\\operatorname{im}d$ carries the quotient action. By [def-weil-pbc-category-colimit], $L$ is the colimit both in modules and in abelian groups: a homomorphism $B\\to H$ is a family $h_i$, and it kills $d$ exactly when $h_jD(u)=h_i$ for each arrow; if $H$ is a module and the $h_i$ are linear, the induced quotient map is linear. Thus the forgetful functor to abelian groups preserves these colimit cocones. Apply this to $D=E\\circ F$ for any small diagram $F$ of $A$-module sheaves: Step 1 identifies $E(\\operatorname{colim}F)$ with this module colimit, with the evaluated cocone maps. After forgetting, it is still the colimit cocone, so its comparison into abelian groups is exactly the canonical isomorphism. This includes the empty diagram, for which $B=C=L=0$, every discrete diagram (direct sums), and every filtered diagram.",
+   "text": "Let U forget the action of R(W). Mathlib ModuleCat.restrictCoextendScalarsAdj for Int.castRingHom R(W) makes restriction to integer modules a left adjoint. The forgetful functor from integer modules to abelian groups is an equivalence (ModuleCat.forget₂AddCommGroupIsEquivalence), hence a left adjoint. Their composite is naturally isomorphic to U by identity maps on the underlying groups. Transport the composite adjunction along this natural isomorphism. Adjunction.leftAdjoint_preservesColimits gives preservation of colimits of the specified size and of universe-zero diagrams. The module universe max (u+1) r v contains the section-ring universe r, so coextension is available without constraining either diagram universe. These are the colimit universal properties of [def-weil-pbc-category-colimit].",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
-    "place": "Second paragraph, explicit cokernel presentation; same presentation proves preservation when forgetting the section-ring action."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Mathlib ModuleCat.forget₂AddCommGroup_preservesLimits gives preservation of finite limits by U. Its universe-zero colimit preservation gives preservation of finite colimits. Compose these with the finite-limit and finite-colimit preservation of E and apply exactFunctor_iff. Finally compose the arbitrary-size colimit preservation of E and U using comp_preservesColimits. Both conjuncts concern exactly E followed by U, including empty, discrete and filtered diagrams; no commutativity assumption on R is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -69,7 +55,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
-  "place": "The two blueprint proof paragraphs, reusing the stronger result det-pe-sections-limits-colimits of the explicitly cited sk-cor-pe-sections unit, and writing out the underlying additive-group passage."
+  "place": "Same stronger module-evaluation route as the existing plan. The underlying-group colimit passage is implemented through Mathlib restriction/coextension and the integer-module equivalence, avoiding a duplicate direct-sum presentation and retaining unrestricted diagram universes."
  },
  "mathlib_searches": [
   {
@@ -213,5 +199,15 @@
   "group": "Q31",
   "result": "pass",
   "note": "Item properHeartContinuitySections matches the node clause by clause: ProEt site object W, IsAffine W.left, IsWeaklyContractible (recorded sk-def-pe-weak-contractible decl; universe max(u+1) r v >= u gives an equivalent condition and matches the dependency), arbitrary noncommutative RingCat.{r} sheaf, exactFunctor (finite limits and colimits) plus PreservesColimitsOfSize.{wJ,uJ} of evaluation then forget2 AddCommGrpCat, same functor and universes in both conjuncts. All five universes bound, module universe follows def-weil-size-convention, site universes not equated. Dependency module peSectionsLimitsColimits states the det-pe-sections-limits-colimits node exactly; that node changed only in lean, with a note; both lean.statement verbatim; adding it to stmt_deps is acyclic and permitted by the 2026-10-16 rule and stage2_delivery.py. Near-duplicate affine_weaklyContractible_evaluation_colimits needs CommRingCat.{u+1}, so not an exact match; no name clashes. No defs, sorry-only proofs, docstrings carry source place, blueprint id and proof steps, lines <=100, imports are Mathlib/WeilConjectures/Sheaf, real pro-etale site, real Worker report and Second reading by Q31. nt_compile --json compiled both files separately, clean except sorry; pp.universes and #print axioms probe confirmed universes and axioms (propext, sorryAx, choice, Quot.sound). No fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261018T140713-L-3103316",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

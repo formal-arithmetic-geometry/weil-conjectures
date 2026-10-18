@@ -5,13 +5,16 @@ Authors: SHEAF group Q31
 -/
 module
 
-import Sheaf.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
+import Sheaf.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Exact and cocontinuous sections on weakly contractible affines
@@ -54,6 +57,28 @@ theorem properHeartContinuitySections {X : Scheme.{u}}
       PreservesColimitsOfSize.{wJ, uJ}
         (SheafOfModules.evaluation R (op W) ⋙ forget₂ _
           AddCommGrpCat.{max (u + 1) r v}) := by
-  sorry
+  have hE := peSectionsLimitsColimits.{u, r, v, 0, 0} R W hW
+  have := hE.1
+  have := hE.2
+  have hE' := peSectionsLimitsColimits.{u, r, v, wJ, uJ} R W hW
+  have := hE'.2
+  let U := forget₂ (ModuleCat.{max (u + 1) r v} (R.obj.obj (op W)))
+    AddCommGrpCat.{max (u + 1) r v}
+  let A := (ModuleCat.restrictCoextendScalarsAdj.{max (u + 1) r v}
+    (Int.castRingHom (R.obj.obj (op W)))).comp
+    (forget₂ (ModuleCat.{max (u + 1) r v} ℤ)
+      AddCommGrpCat.{max (u + 1) r v}).asEquivalence.toAdjunction
+  let B := A.ofNatIsoLeft
+    (show U ≅ _ from NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
+  have : PreservesColimitsOfSize.{wJ, uJ} U := B.leftAdjoint_preservesColimits
+  have : PreservesColimitsOfSize.{0, 0} U := B.leftAdjoint_preservesColimits
+  have : PreservesFiniteLimits U := inferInstance
+  have : PreservesFiniteColimits U :=
+    PreservesColimitsOfSize.preservesFiniteColimits U
+  constructor
+  · change exactFunctor _ _ (SheafOfModules.evaluation R (op W) ⋙ U)
+    exact (exactFunctor_iff _).2
+      ⟨comp_preservesFiniteLimits _ U, comp_preservesFiniteColimits _ U⟩
+  · exact comp_preservesColimits (SheafOfModules.evaluation R (op W)) U
 
 end CategoryTheory
