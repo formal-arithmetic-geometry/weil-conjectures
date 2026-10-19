@@ -22,27 +22,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
-import Sheaf.Paper.ComparisonPullbackExact
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Ulift
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.Paper.SupportedSectionsHom
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Supported cohomology as morphisms
@@ -62,6 +45,30 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory Opposite
+
+private noncomputable def exactPostcompositionDerivedIso.{uC, uD, uE, vC, vD, vE, wC, wD, wE}
+    {C : Type uC} {D : Type uD} {E : Type uE}
+    [Category.{vC} C] [Category.{vD} D] [Category.{vE} E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
+    [HasDerivedCategory.{wE} E]
+    [EnoughInjectives C] (F : C ⥤ D) [F.Additive]
+    (G : D ⥤ E) [G.Additive]
+    [CategoryTheory.Limits.PreservesFiniteLimits G]
+    [CategoryTheory.Limits.PreservesFiniteColimits G] :
+    (F ⋙ G).rightDerivedFunctorPlus ≅
+      F.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus := by
+  let e : (F ⋙ G).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ≅
+      F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ G.mapDerivedCategoryPlus :=
+    Functor.isoWhiskerRight
+        (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ G.mapDerivedCategoryPlusFactorsh.symm
+  exact Functor.rightDerivedNatIso _ _
+    (F ⋙ G).rightDerivedFunctorPlusUnit
+    (Functor.whiskerRight F.rightDerivedFunctorPlusUnit G.mapDerivedCategoryPlus ≫
+      (Functor.associator _ _ _).hom)
+    (HomotopyCategory.Plus.quasiIso C) e
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -201,6 +208,38 @@ theorem supported_cohomology_hom (P : WeilConjectures.PurityFiniteSetting.{u})
             (op ((DerivedCategory.singleFunctor
               (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)) 0).obj
                 ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constant Z)))))) := by
-  sorry
+  classical
+  let C := Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)
+  let B : C := (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constant Z)
+  let G : ModuleCat.{u + 1} P.Coefficient ⥤ AddCommGrpCat.{u + 1} :=
+    forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}
+  let : CategoryTheory.Limits.PreservesFiniteLimits G := inferInstance
+  let : CategoryTheory.Limits.PreservesColimitsOfSize.{u + 1, u + 1} G :=
+    ModuleCat.forget₂PreservesColimitsOfSize.{u + 1, u + 1, u + 1, u + 1} P.Coefficient
+  let : CategoryTheory.Limits.PreservesFiniteColimits G :=
+    CategoryTheory.Limits.PreservesColimitsOfSize.preservesFiniteColimits.{u + 1, u + 1} G
+  let V := preadditiveCoyoneda.obj (op B)
+  let H := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u + 1} a
+  obtain ⟨θ⟩ := supported_sections_hom P i
+  let eD : derivedSupportSections i P.Coefficient ⋙ G.mapDerivedCategoryPlus ≅
+      V.rightDerivedFunctorPlus :=
+    (exactPostcompositionDerivedIso (supportSections i P.Coefficient) G).symm ≪≫
+      Functor.rightDerivedFunctorPlusNatIso θ
+  let eH : derivedSupportSections i P.Coefficient ⋙
+      DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} P.Coefficient) a ⋙ G ≅
+        V.rightDerivedFunctorPlus ⋙ H :=
+    Functor.isoWhiskerLeft (derivedSupportSections i P.Coefficient)
+        (G.mapDerivedCategoryPlusHomologyFunctorIso a) ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eD H
+  obtain ⟨ψ, hnat, _⟩ := Functor.exists_rhom_hom_derived_roof B
+  let eR : V.rightDerivedFunctorPlus ⋙ H ≅
+      DerivedCategory.Plus.ι ⋙ shiftFunctor (ModuleDerivedCategory X P.Coefficient) a ⋙
+        preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor C 0).obj B)) :=
+    NatIso.ofComponents (fun F ↦ (ψ F a).toAddCommGrpIso)
+      (by
+        intro F F' g
+        ext x
+        exact hnat F F' g a x)
+  exact ⟨eH ≪≫ eR⟩
 
 end AlgebraicGeometry.ProEtale
