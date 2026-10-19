@@ -68,6 +68,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.Paper.StrictTowerExchangeMateNormalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import Mathlib.Analysis.Normed.Field.TransferInstance
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.CategoryTheory.DirectedTriangulatedImage
@@ -324,6 +326,67 @@ variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
 variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
 
+private lemma bounded_comap {X : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj S]
+    [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] [IsIso a]
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) S))
+    (hK : boundedConstructible S K) :
+    boundedConstructible R ((Mod.comap a).mapDerivedCategory.obj K) := by
+  refine ⟨(Mod.comap a).bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
+  exact constructible_of_iso
+    (((Mod.comap a).mapDerivedCategoryHomologyFunctorIso n).app K)
+    (constructible_comap a (hK.2 n))
+
+private lemma bounded_iso {X : Scheme.{u}}
+    {R : Sheaf (ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) R)}
+    (e : K ≅ L) (hK : boundedConstructible R K) : boundedConstructible R L := by
+  exact ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e hK.1,
+    fun n ↦ constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e) (hK.2 n)⟩
+
+private lemma bounded_comap_iff {X : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj S]
+    [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] [IsIso a]
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) S)) :
+    boundedConstructible R ((Mod.comap a).mapDerivedCategory.obj K) ↔
+      boundedConstructible S K := by
+  refine ⟨fun h ↦ ?_, bounded_comap a K⟩
+  let i : 𝟭 (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) S) ≅
+      Mod.comap a ⋙ Mod.comap (asIso a).inv :=
+    (Mod.comapId S).symm ≪≫ Mod.comapCongr (by simp) ≪≫
+      Mod.comapComp (asIso a).inv a
+  let e := (Functor.mapDerivedCategoryIdIso _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  exact bounded_iso (e.app K).symm (bounded_comap (asIso a).inv _ h)
+
+private lemma leftAdjoint_of_coefficientIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (a : Λ ⟶ Λ') [IsMonHom a] [IsIso a] [IsFinitenessCoefficient l Λ]
+    (T U : Base k) (h : T.scheme ⟶ U.scheme) [h.IsOver (Spec (.of k))] :
+    (boundedConstructibleUpperStar Λ' l (Base.map T U h)).IsLeftAdjoint := by
+  have hflat (X : Scheme.{u}) :
+      PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X)) :=
+    preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv (coefficientMap a X)).symm
+  have hp (K : DerivedCategory (Mod (Sheaf (ProEt.topology T.scheme) Ab.{u + 1})
+      (condensedRingObj Λ' T.scheme))) (hK : boundedConstructible _ K) :
+      boundedConstructible (condensedRingObj Λ' U.scheme)
+        ((CondensedRing.lowerStar Λ' h).rightDerivedFunctor.obj K) := by
+    apply (bounded_comap_iff (coefficientMap a U.scheme) _).mp
+    exact bounded_iso ((derivedComapLowerStarIso a h).app K).symm
+      (boundedConstructible_rightDerivedLowerStar_obj Λ l (Base.map T U h) _
+        (bounded_comap (coefficientMap a T.scheme) K hK))
+  let G := (boundedConstructible (condensedRingObj Λ' U.scheme)).lift
+    ((boundedConstructible (condensedRingObj Λ' T.scheme)).ι ⋙
+      (CondensedRing.lowerStar Λ' h).rightDerivedFunctor) (fun K ↦ hp K.obj K.property)
+  exact (Adjunction.restrictFullyFaithful (derivedUpperStarLowerStarAdjunction Λ' h)
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (boundedConstructibleUpperStarCompatibility Λ' l (Base.map T U h)).symm
+    (show G ⋙ (boundedConstructible _).ι ≅ _ from
+      ObjectProperty.liftCompιIso _ _ _).symm).isLeftAdjoint
+
 /-- The actual bounded continuous-E inverse image has a constructible right adjoint,
 including finite extensions represented in the scheme universe.
 Source: BS 6.8.14(2), 6.8.15 (blueprint: lem-weil-pbc-condensed-e-realization).
@@ -341,7 +404,59 @@ theorem fieldUpperStar_isLeftAdjoint (T U : Base k) (h : T.scheme ⟶ U.scheme)
     (boundedConstructibleUpperStar (Profinite.continuousCoefficientRingObj E) l
       (X := T.model) (Y := U.model)
       (Base.map T U h)).IsLeftAdjoint := by
-  sorry
+  classical
+  have : Small.{0} E := small_of_injective (Module.finBasis ℚ_[l] E).equivFun.injective
+  let e : Shrink.{0} E ≃ E := (equivShrink E).symm
+  let : NormedField (Shrink.{0} E) := e.normedField
+  let : NormedAlgebra ℚ_[l] (Shrink.{0} E) :=
+    { toAlgebra := e.algebra ℚ_[l]
+      norm_smul_le := fun a x ↦ by
+        change ‖e (a • x)‖ ≤ ‖a‖ * ‖e x‖
+        rw [show e (a • x) = a • e x from
+          (e.algEquiv ℚ_[l]).toLinearEquiv.map_smul a x]
+        exact norm_smul_le a (e x) }
+  let ea : Shrink.{0} E ≃ₐ[ℚ_[l]] E := e.algEquiv ℚ_[l]
+  have : FiniteDimensional ℚ_[l] (Shrink.{0} E) :=
+    FiniteDimensional.of_injective ea.toLinearMap ea.injective
+  have he : Isometry e := by
+    intro x y
+    rfl
+  have hei : Isometry e.symm := fun x y ↦ by
+    simpa only [e.apply_symm_apply] using (he (e.symm x) (e.symm y)).symm
+  let q : Profinite.continuousMapRingSheaf.{u} (Shrink.{0} E) ≅
+      Profinite.continuousCoefficientRingSheaf E :=
+    { hom := ⟨
+        { app := fun _ ↦ RingCat.ofHom
+            (ULift.ringEquiv.symm.toRingHom.comp
+              ((ea.toRingHom.compLeftContinuous _ he.continuous).comp
+                ULift.ringEquiv.toRingHom))
+          naturality := fun _ _ _ ↦ rfl }⟩
+      inv := ⟨
+        { app := fun _ ↦ RingCat.ofHom
+            (ULift.ringEquiv.symm.toRingHom.comp
+              ((ea.symm.toRingHom.compLeftContinuous _ hei.continuous).comp
+                ULift.ringEquiv.toRingHom))
+          naturality := fun _ _ _ ↦ rfl }⟩
+      hom_inv_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ea.symm_apply_apply (f.down x)
+      inv_hom_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ea.apply_symm_apply (f.down x) }
+  let a := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map q.hom
+  have : IsMonHom a := Sheaf.isMonHom_sheafCompose_map _ q.hom
+  have : IsIso a := by
+    change IsIso ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso q).hom
+    infer_instance
+  exact leftAdjoint_of_coefficientIso l k a T U h
 
 /-- Continuous-E direct image, specified up to unique adjunction-compatible iso.
 Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
