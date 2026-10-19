@@ -23,82 +23,46 @@
  ],
  "proof": [
   {
-   "text": "Let $U_T$ denote derived coefficient forgetting and put $L=U_TK$. The exact conservative functor and its cohomology identifications are supplied by [lem-kun-unbounded-abelian-exchange-comparison]. Bounded constructibility [def-weil-pbc-constructible-complexes] gives integers $a\\le b$ with $\\mathcal H^q(K)=0$ outside $[a,b]$; hence $\\mathcal H^q(L)=U_T\\mathcal H^q(K)$ vanishes there too and $L$ is bounded below. For every element $x$ of every stalk of $\\mathcal H^q(K)$, the elementary module calculation $N x=(N:\\Lambda)x=0$ shows that its underlying abelian stalk is killed by the positive integer $N$. By [sbc-def-coefficient-conventions], $N$ is invertible on $S$. Thus every $\\mathcal H^q(L)$ is a torsion abelian sheaf of orders invertible on $S$: if an element has order $d$, then $d\\mid N$, so write $N=dm$. In $\\Gamma(S,\\mathcal O_S)$, the image of $d$ has inverse $mN^{-1}$, since $d(mN^{-1})=NN^{-1}=1$. Thus its order is invertible on $S$. This argument uses the module action directly and needs no stratification or extension-by-zero argument.",
+   "text": "Extract the lower cohomological bound $a$ from [def-weil-pbc-constructible-complexes]. The standard derived-category criterion `DerivedCategory.isGE_iff` proves $K\\in D^{\\ge a}$, so form the bounded-below object $K^+=\\langle K,a\\rangle$. The chosen pullback isomorphism and its projection equations give `IsPullback e h g f` by `IsPullback.of_iso_pullback` and symmetry. No constructibility conversion or bound on either output is needed.",
    "uses": [
-    "lem-kun-unbounded-abelian-exchange-comparison",
-    "def-weil-pbc-constructible-complexes",
-    "sbc-def-coefficient-conventions"
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [sbc-def-coefficient-conventions], $N>0$, $(N:\\Lambda)=0$, and $N$ is a unit on $S$. For every sheaf of $\\Lambda$-modules, including every $H^j(K^+)$, `Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero` supplies the invertible-order torsion structure: on each geometric stalk, $Nx=(N:\\Lambda)x=0$. Apply the already proved upstream theorem `Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder` to $K^+$ and the exchanged square. Its smooth and qcqs hypotheses are exactly the given ones. This packaged theorem reduces to [sbc-thm-smooth-base-change] on sheaves and extends it by triangulated truncation devissage and the cohomological truncation criterion; it directly handles ModuleCat coefficients. Thus the canonical bounded-below module exchange at $K^+$ is invertible, with no new theorem or sorry.",
+   "uses": [
+    "sbc-def-coefficient-conventions",
+    "sbc-thm-smooth-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6J, lemma-modules-abelian-unbounded; coefficient calculation in the standing conventions"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean",
+    "place": "Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero and Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder"
    }
   },
   {
-   "text": "For each $q$ apply [sbc-thm-smooth-base-change] to the abelian sheaf $\\mathcal H^q(L)$. Its allowable torsion hypothesis was checked in Step 1; the square is cartesian, $f$ is smooth, and $g$ is quasi-compact and quasi-separated by the statement. For every $p\\ge0$ this gives an isomorphism of the actual degreewise exchange $f^{-1}R^pg_*\\mathcal H^q(L)\\longrightarrow R^ph_*e^{-1}\\mathcal H^q(L)$, with the degreewise map understood exactly as in [sbc-def-base-change-map].",
+   "text": "The source-library equality `baseChange_eq_derivedBaseChangeMapPlus` identifies that bounded-below map with `derivedBaseChangeMapPlus`. The proved generic module comparison `isIso_derivedBaseChangeMap_app_ι_obj_iff` identifies its invertibility with that of the exact specified ambient map [sbc-def-base-change-map], evaluated at $K=(\\iota K^+)$. This comparison uses the canonical inverse-image and right-derived-direct-image endpoint isomorphisms and full faithfulness of $D^+\\to D$. Apply its reverse implication to the isomorphism of Step 2. This proves the unchanged target arrow directly, without forgetting coefficients or using the abelian spectral-sequence machinery.",
    "uses": [
-    "sbc-thm-smooth-base-change",
     "sbc-def-base-change-map"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYU, theorem-smooth-base-change"
-   }
-  },
-  {
-   "text": "To apply the generic abelian spectral-sequence nodes, rename their $(X_0,Y_0,X'_0,Y'_0;f_0,f'_0,g_0,g'_0)$ as $(T,S,Y,X;g,h,f,e)$. Apply [lem-weil-pbc-truncation-couple-morphism] to $L$: its clauses (1) and (2) supply the two exact couples and the morphism induced by the canonical bounded-below exchange, and clause (3) identifies its $E_2$ arrows with the degreewise arrows in Step 2. Apply [lemma-weil-pbc-hypercohomology-convergence] with the lower bound $a$ and the torsion cohomology verified in Step 1. Both spectral sequences vanish unless $p\\ge0$ and $q\\ge a$ and converge with finite filtrations in every total degree. Consequently all their $E_2$ arrows are isomorphisms: for $p\\ge0$ use Step 2, and for $p<0$ both sides are zero by the cited quadrant assertion.",
-   "uses": [
-    "lem-weil-pbc-truncation-couple-morphism",
-    "lemma-weil-pbc-hypercohomology-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015J, lemma-two-ss-complex-functor; truncation-couple formulation in the cited nodes"
-   }
-  },
-  {
-   "text": "With this same renaming, $L\\in D^+(T_{\\Et})$, the bounds $[a,b]$, and the $E_2$ morphism just checked satisfy every hypothesis of [sbc-lem-finite-range-comparison]. It follows that the bounded-below abelian exchange $\\operatorname{BC}^{+}_{f,g}(L)$ is an isomorphism. Now [lem-sbc-abelian-derived-exchange-plus-compatibility] identifies the unbounded abelian exchange at $L$ with the composite $Df(c_g^{-1}(L))$, followed by the bounded-below inclusion of $\\operatorname{BC}^{+}_{f,g}(L)$, followed by $c_h(De^+L)$. Every factor is invertible, so $\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)$ is invertible in the ambient abelian derived category. Only $L$ needs a finite cohomological interval; no bounded-above assertion for $Rg_*L$ or $Rh_*e^{-1}L$ is used.",
-   "uses": [
-    "sbc-lem-finite-range-comparison",
-    "lem-sbc-abelian-derived-exchange-plus-compatibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F09, lemma-smooth-base-change-general, spectral-sequence argument using Tag 015J; bounded-below/unbounded mate comparison in the cited compatibility node"
-   }
-  },
-  {
-   "text": "The definition [sbc-def-base-change-map] identifies the required module map with the canonical unbounded exchange on the renamed square. Apply [lem-kun-unbounded-abelian-exchange-comparison] on that square to $K$. Its canonical endpoint isomorphisms $s_K,t_K$ satisfy $t_K\\circ U_X(\\operatorname{BC}^{\\Lambda}_{f,g}(K))=\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)\\circ s_K$. Step 4 makes the right-hand side invertible, hence $U_X(\\operatorname{BC}^{\\Lambda}_{f,g}(K))=t_K^{-1}\\circ\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)\\circ s_K$ is invertible. The cited node states conservativity of $U_X$, so the specified module exchange itself is an isomorphism, as required.",
-   "uses": [
-    "sbc-def-base-change-map",
-    "lem-kun-unbounded-abelian-exchange-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6J and 07A7; canonical coefficient/exchange coherence and conservativity in the cited node"
+    "document": "lean/WeilConjectures/SixFunctors/BaseChange/DerivedUnboundedPlus.lean",
+    "place": "Etale.isIso_derivedBaseChangeMap_app_ι_obj_iff; baseChange_eq_derivedBaseChangeMapPlus is in DerivedComparison.lean"
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-unbounded-abelian-exchange-comparison",
   "def-weil-pbc-constructible-complexes",
   "sbc-def-coefficient-conventions",
   "sbc-thm-smooth-base-change",
-  "sbc-def-base-change-map",
-  "lem-weil-pbc-truncation-couple-morphism",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "sbc-lem-finite-range-comparison",
-  "lem-sbc-abelian-derived-exchange-plus-compatibility"
+  "sbc-def-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-derived-smooth-base-change.md",
-  "place": "Proof: sheaf smooth base change and hypercohomology comparison; coefficient hypotheses restored from sbc-def-coefficient-conventions; canonical abelian/module and bounded-below/unbounded comparisons made explicit (Stacks 0EYU, 0F09, 015J, 0D6J, 07A7)."
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean",
+  "place": "Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder, with the canonical module D+/unbounded comparison in DerivedUnboundedPlus.lean. Reuses the upstream triangulated truncation proof of derived smooth base change rather than the redundant abelian exact-couple route."
  },
  "mathlib_searches": [
   {
@@ -306,15 +270,10 @@
   ]
  },
  "tool_uses": [
-  "lem-kun-unbounded-abelian-exchange-comparison",
   "def-weil-pbc-constructible-complexes",
   "sbc-def-coefficient-conventions",
   "sbc-thm-smooth-base-change",
-  "sbc-def-base-change-map",
-  "lem-weil-pbc-truncation-couple-morphism",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "sbc-lem-finite-range-comparison",
-  "lem-sbc-abelian-derived-exchange-plus-compatibility"
+  "sbc-def-base-change-map"
  ],
  "reviewed": {
   "date": "2026-10-15",
@@ -341,5 +300,15 @@
   "by": "N9",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T093512-L-2318955",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

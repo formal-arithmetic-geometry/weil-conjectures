@@ -11,23 +11,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
-import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
-import Sheaf.AlgebraicGeometry.HypercohomologyConvergence
-import Sheaf.AlgebraicGeometry.FiniteRangeComparison
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
-import Sheaf.AlgebraicGeometry.AbelianDerivedExchangePlusCompatibility
-import Sheaf.AlgebraicGeometry.HypercohomologyConvergenceStatement
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedPlus
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-!
 # Bounded derived smooth base change
@@ -55,27 +47,14 @@ Tags 0EYU, 0F09, 015J, 0D6J and 07A7
 (blueprint: sbc-thm-bounded-derived-smooth-base-change).
 
 Proof:
-1. By `lem-kun-unbounded-abelian-exchange-comparison`, exact conservative derived
-coefficient forgetting sends K to an abelian complex L with the same cohomological
-bounds [a,b]. Each stalk element of H^q(L) is killed by N, since (N : Λ) = 0.
-Its order d divides N, and d is invertible on S: writing N = dm, its inverse is m/N.
-This uses `sbc-def-coefficient-conventions` and `def-weil-pbc-constructible-complexes`.
-2. Apply `sbc-thm-smooth-base-change` to every H^q(L). Smoothness of f and the qcqs
-hypotheses on g give isomorphisms of the degreewise exchange maps for p ≥ 0.
-3. Rename the generic square (X₀,Y₀,X'₀,Y'₀;f₀,f'₀,g₀,g'₀) as (T,S,Y,X;g,h,f,e).
-Use `lem-weil-pbc-truncation-couple-morphism` for the morphism of truncation couples
-induced by the actual bounded-below exchange. Its E₂ arrows are those of step 2.
-By `lemma-weil-pbc-hypercohomology-convergence`, both sequences lie in p ≥ 0, q ≥ a
-and converge with finite filtrations in each total degree. For p < 0 both terms vanish.
-4. Apply `sbc-lem-finite-range-comparison` to obtain invertibility of the bounded-below
-abelian exchange. By `lem-sbc-abelian-derived-exchange-plus-compatibility`, the unbounded
-abelian exchange is its bounded-below inclusion conjugated by the canonical endpoint
-isomorphisms, and is therefore invertible. No upper bound on either output is used.
-5. By `sbc-def-base-change-map` the map below is precisely the module exchange on this
-renamed square. The canonical endpoint isomorphisms in
-`lem-kun-unbounded-abelian-exchange-comparison` intertwine its forgotten arrow with the
-abelian exchange of step 4. That forgotten arrow is thus invertible. Conservativity
-of coefficient forgetting gives invertibility of the specified module exchange. -/
+1. The lower cohomological bound in bounded constructibility makes K an object of D+.
+2. Every sheaf of Λ-modules is torsion of invertible order: N is positive, kills Λ,
+   and is invertible on S. Apply the existing module-coefficient bounded-below smooth
+   base-change theorem to all cohomology sheaves of K. Its proof uses sheaf smooth
+   base change and triangulated truncation devissage.
+3. The upstream comparison identifies the bounded-below and unbounded canonical
+   module exchanges up to invertible endpoint comparisons. Their invertibility is
+   therefore equivalent at K, giving the asserted unbounded exchange isomorphism. -/
 theorem isIso_derivedBaseChangeMap_of_boundedConstructible_of_smooth
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y S T : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S}
@@ -84,6 +63,18 @@ theorem isIso_derivedBaseChangeMap_of_boundedConstructible_of_smooth
     (hcoeff : IsSmoothBaseChangeCoefficients N Λ S)
     (K : DerivedCategoryModule Λ T) (hK : DerivedCategory.isBoundedConstructible Λ T K) :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app K) := by
-  sorry
+  obtain ⟨a, _, _, hbounds⟩ := hK.2
+  have ha : K.IsGE a := (_root_.DerivedCategory.isGE_iff K a).2
+    (fun q hq ↦ hbounds q (Or.inl hq))
+  let Kplus : _root_.DerivedCategory.Plus
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := ⟨K, ⟨a, ha⟩⟩
+  apply (isIso_derivedBaseChangeMap_app_ι_obj_iff (ModuleCat.{u + 1} Λ)
+    sq.toCommSq.flip Kplus).2
+  rw [← baseChange_eq_derivedBaseChangeMapPlus]
+  exact isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ f
+    (CategoryTheory.IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback
+      sq.hom_fst sq.hom_snd).flip Kplus (fun _ ↦
+        Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N
+          (Nat.ne_of_gt hcoeff.1) hcoeff.2.2.1 hcoeff.2.2.2 _)
 
 end AlgebraicGeometry.Etale
