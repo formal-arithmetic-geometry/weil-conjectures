@@ -217,5 +217,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5054b4046 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing; review.md is written. The item's statement is byte-identical to the main-20261015 blueprint .md (order 1629). Its stmt_deps and proof_deps equal the blueprint uses list: lem-sfb-extend-scalars-kflat, def-sfb-derived-extend-restrict-adjunction and def-sfb-derived-restrict-levelwise. There are no new nodes and no SGA. The three steps carry out the one-paragraph blueprint proof: transport L(Ext) ⊣ R(Res) along R(Res) ≅ D(Res). This is also the route in the last sentence of the unit's proof. Step 1: the hypotheses of the cited adjunction node (closed symmetric monoidal Grothendieck abelian, additive tensor, functorial flat resolution with flat values and an epimorphism onto M, morphism of commutative monoid objects) match the lemma's situation one by one. The adjunction is taken from that node's statement, not its proof. Step 2: the levelwise node states a canonical isomorphism of functors D(Mod_S) → D(Mod_R) in the right direction. Step 3: I checked b = ρ∘a, its inverse a^{-1}(ρ^{-1}∘−), the two-variable naturality, the unit ρ_{FK}η_K and the counit ε_N F(ρ_N^{-1}). They are all correct and match Mathlib Adjunction.ofNatIsoRight. Edge cases φ = id, S = 0 and Z → Z/n all hold, and no flatness or boundedness is used. I computed the full dependency closure of the item over the snapshot DAG (336 nodes) and the item is not in it, so there is no cycle. The parent unit node sk-def-sfb-derived-extension-of-scalars already states and proves this adjunction as its last clause. Both are imported blueprint nodes, so this is not a new-node duplicate, and it is correctly recorded in same_as without being cited. The six Mathlib search records are plausible and their 'no exact match' verdicts are correct. No Lean attachment is claimed, which is right because the slopmaster2 declaration rests on a sorry. Advisory: step 1's 'by definition F = S⊗^L_R −' relies on notation that only the unit node defines. tool_uses: none."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+  "declaration": "CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction",
+  "statement": "noncomputable def derivedExtendMapDerivedCategoryAdjunction :\n    (extendScalars φ).leftDerivedFunctor ⊣ (comap φ).mapDerivedCategory",
+  "branch": "slopmaster2",
+  "by": "NP",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Exact existing upstream adjunction, read locally and with scompile.py --source. The full checked type has precisely the ambient hypotheses of lem-sfb-extend-scalars-kflat. Its body is (derivedExtendRestrictAdjunction φ).ofNatIsoRight (rightDerivedComapIsoMapDerivedCategory φ), using both recorded dependencies and exactly the canonical transport in the blueprint. A clean server probe under explicitly bound independent object/morphism universes applies it for arbitrary φ and φ = identity. No replacement module, new assumption, or statement correction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f5045049",
+  "group": "NP",
+  "result": "pass",
+  "note": "existing:true record on CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction; statement verbatim = side-live DerivedExtendScalars.lean:200-201; binders exactly the situation of lem-sfb-extend-scalars-kflat (closed symmetric monoidal Grothendieck abelian, MonoidalPreadditive, HasFunctorialFlatResolution, commutative MonObj R S, IsMonHom φ), independent universes u v, no flatness/boundedness; body = derivedExtendRestrictAdjunction.ofNatIsoRight rightDerivedComapIsoMapDerivedCategory = the node's 3 proof steps using the recorded deps; only the lean field differs from the live node; unit node sk-def-sfb-derived-extension-of-scalars lists the same decl (unit/detail sharing, same_as); nt_compile --json probe for arbitrary φ and φ=id clean 3.8 s, axioms propext/choice/Quot.sound only (no sorry). Advisory: the Second reading section is policy text only."
  }
 }
