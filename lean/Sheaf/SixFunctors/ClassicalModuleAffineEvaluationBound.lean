@@ -6,12 +6,6 @@ Authors: SHEAF group Q72
 module
 
 public import Sheaf.SixFunctors.ClassicalDefinition
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.Topology.KrullDimension
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp

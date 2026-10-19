@@ -5,17 +5,13 @@ Authors: SHEAF group Q15
 -/
 module
 
-public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.SupportLocalizationTriangle
 public import Sheaf.AlgebraicGeometry.FiniteComparisonClassAdjunction
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import WeilConjectures.Compactification.Refinement
 
 /-!
 # Closed support and the transported exceptional inverse image

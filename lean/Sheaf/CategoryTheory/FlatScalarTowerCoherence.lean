@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.CategoryTheory.SheafTensor
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
