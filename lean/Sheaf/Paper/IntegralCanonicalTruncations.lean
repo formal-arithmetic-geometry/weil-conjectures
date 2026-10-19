@@ -9,20 +9,10 @@ public import Sheaf.Paper.PbcRationalCategory
 public import Sheaf.Paper.SequentialDerivedInverseLimitCompleted
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import Sheaf.Paper.FiniteReductionReconstructionCompleted
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.BoundedConstructibleTower
-import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.KoszulReconstruction
-import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 /-! # Integral canonical truncations and their conditional tower computation
 
 Source: blueprint, smooth base change, order 1430; Stacks Tags 0118 and 08J5
@@ -52,21 +42,21 @@ abbrev pbcAmbientTStructure :=
 /-- The canonical ambient truncations remain in the integral full subcategory.
 Source: blueprint order 1430, canonical-truncation clause
 (blueprint: thm-weil-pbc-integral-truncations).
-Proof: use the stratified perfect characterization on each common bounded local model.
-Over the completed DVR, kernels of maps of finite free modules are finite free after
-local refinement. Canonical truncation therefore preserves the local finite models,
-uniform bounds and their quotient-compatible identifications. Exact comparison inverse
-image preserves the bounded-below etale origins and their quotient cocycle. Intrinsic
-completeness is preserved by these bounded truncations, by the local finite models.
-These are the three defining membership conditions. This closure assertion uses ambient
-truncations, not commutation of arbitrary reductions with truncation. -/
+Proof: stalkwise invertibility of l implies invertibility of its global section.
+Apply the standard-truncation clause of integralStratifiedPerfectClosure to K.property,
+using the supplied finite-dimensional bound. This uses ambient truncation closure and
+does not require commutation with coefficient reduction. -/
 theorem pbcIntegralCanonicalTruncations_mem
     (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) (m : ℤ) :
     PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)
         (((pbcAmbientTStructure T l E).truncLE m).obj K.obj) ∧
       PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)
         (((pbcAmbientTStructure T l E).truncGE m).obj K.obj) := by
-  sorry
+  have hl : IsUnit (l : Γ(T, ⊤)) := by
+    apply T.toRingedSpace.isUnit_of_isUnit_germ
+    intro t ht
+    simpa using (hInv.out t)
+  exact (integralStratifiedPerfectClosure T l E hDim.out hl).2.2.1 K.obj K.property m
 
 /-- Restriction of the actual ambient lower truncation, with all ambient maps.
 Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations). -/
@@ -112,7 +102,29 @@ theorem pbc_integral_truncation_properties (m : ℤ) :
         (((pbcAmbientTStructure T l E).truncGE (m + 1)).obj K.obj))) ∧
       ((pbcAmbientTStructure T l E).triangleLTGE (m + 1)).obj K.obj ∈
         distTriang (PbcCompletedDerived T (pbcIntegralDatum l E)) := by
-  sorry
+  have hLE : (pbcIntegralTruncLE T l E m).Additive := by
+    constructor
+    intro X Y f g
+    apply ObjectProperty.hom_ext
+    change ((pbcAmbientTStructure T l E).truncLE m).map (f.hom + g.hom) = _
+    exact Functor.map_add _
+  have hGE : (pbcIntegralTruncGE T l E (m + 1)).Additive := by
+    constructor
+    intro X Y f g
+    apply ObjectProperty.hom_ext
+    change ((pbcAmbientTStructure T l E).truncGE (m + 1)).map (f.hom + g.hom) = _
+    exact Functor.map_add _
+  refine ⟨hLE, hGE, fun K ↦ ⟨?_, ?_, ?_, ?_, ?_⟩⟩
+  · intro i hi
+    exact DerivedCategory.isIso_homologyFunctor_map_truncLTι_app K.obj (m + 1) i
+      (by omega)
+  · intro i hi
+    exact DerivedCategory.isZero_of_isLE _ m i hi
+  · intro i hi
+    exact DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K.obj (m + 1) i hi
+  · intro i hi
+    exact DerivedCategory.isZero_of_isGE _ (m + 1) i (by omega)
+  · exact (pbcAmbientTStructure T l E).triangleLTGE_distinguished (m + 1) K.obj
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
@@ -197,7 +209,31 @@ Proof: apply countableProducts_exact to pbcAdicCompletion. Its product-of-epimor
 clause, together with sectionwise kernels, is precisely CountableAB4Star. -/
 theorem pbcCompletedCountableAB4Star : CountableAB4Star
     (pbcModules T (pbcAdicCompletion T d)) := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  have : HasCountableProducts (pbcModules T (pbcAdicCompletion T d)) :=
+    (ProEt.countableProducts_exact.{u, u, 0} T (pbcAdicCompletion T d)).1
+  have : (lim (J := Discrete ℕ)
+      (C := pbcModules T (pbcAdicCompletion T d))).PreservesEpimorphisms :=
+    { preserves := by
+        intro F G f hf
+        have h := (ProEt.countableProducts_exact.{u, u, 0} T
+          (pbcAdicCompletion T d)).2.2 ℕ (fun n ↦ F.obj ⟨n⟩)
+            (fun n ↦ G.obj ⟨n⟩) (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+        have he : lim.map f = (Pi.isoLimit _).inv ≫
+            Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+          apply limit.hom_ext
+          intro ⟨n⟩
+          simp
+        rw [he]
+        infer_instance }
+  have : HasFiniteBiproducts (pbcModules T (pbcAdicCompletion T d)) :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have := hasExactLimitsOfShape_of_preservesEpi
+    (pbcModules T (pbcAdicCompletion T d)) (Discrete ℕ)
+  exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
 
 /-- Countable products in the ambient derived category, fixed by their limit property.
 Source: order 1430, Tag 07KC (blueprint: thm-weil-pbc-integral-truncations). -/

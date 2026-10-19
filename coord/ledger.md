@@ -16668,3 +16668,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/E6/Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback (stage 3; reviewer PASS; first push; landing 20261019T002535-L-2150105 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/E6/Sheaf.AlgebraicGeometry.ProEtalePointPullback (stage 3; reviewer PASS; first push; landing 20261019T002535-L-2150210 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/E7/Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback (stage 3; reviewer PASS; first push; landing 20261019T002536-L-2150310 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/E7/Sheaf.Paper.IntegralCanonicalTruncations (stage 3; reviewer PASS; first push; landing 20261019T002536-L-2150417 (proof); batch 20261019T002449; modules 1; new nodes 0)
