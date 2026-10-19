@@ -8,15 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.CategoryTheory.Triangulated.LeftCompleteHeartUpperBound
-import Sheaf.Paper.AmbientIndDerivedSums
-import Sheaf.Paper.AmbientIndDerivedTriangulated
-import Sheaf.Paper.IntegralConstructibleCompactness
-import Sheaf.Paper.IntegralProperDirectSums
-import Sheaf.Paper.ProperHeartBound
-import Sheaf.Paper.ProperIndConstructibleUnbounded
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 
 /-! # Uniform upper bound for the discarded lower tail
 
@@ -47,6 +39,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 include ℓ k hΛ
 
+set_option linter.unusedSectionVars false in
 /-- The direct image of a sufficiently low lower tail has no cohomology in
 degree `q` or above, uniformly on the bounded constructible localizing hull.
 
@@ -90,6 +83,40 @@ theorem ellAdic_proper_lowerTail_bound :
       boundedConstructibleLocalizingClosure Λ Z.left K →
       ((R((g.left)_*⟦Λ⟧)).obj
         ((DerivedCategory.TStructure.t.truncLT (q - (c : ℤ))).obj K)).IsLE (q - 1) := by
-  sorry
+  have : IsNoetherian Y.left := isNoetherian_of_locallyOfFiniteType Y.hom
+  have hheart : ProperLowerStarHeartHypotheses Λ g.left := by
+    cases hΛ with
+    | continuous E =>
+      exact properLowerStarHeartHypotheses_continuousMapRingObj ℓ E Y.hom g.left
+    | integral E =>
+      exact properLowerStarHeartHypotheses_padicIntegersRingObj ℓ E Y.hom g.left
+    | algebraicClosure =>
+      exact properLowerStarHeartHypotheses_padicAlgClRingObj ℓ Y.hom g.left
+  obtain ⟨d, hd⟩ := hheart.1
+  let P := constructibleCoproductClosure Λ Z.left
+  have hclosure : boundedConstructibleLocalizingClosure Λ Z.left ≤
+      DerivedCategory.homologyProperty P := by
+    apply boundedConstructibleLocalizingClosure_le
+    intro K hK n
+    exact ObjectProperty.le_weakSerreCoproductClosure _ _ (hK.2 n)
+  -- The coarse Milnor bound costs one extra degree, absorbed in the existential constant.
+  refine ⟨d.toNat + 1, fun q K hK ↦ ?_⟩
+  let a : ℤ := q - ((d.toNat + 1 : ℕ) : ℤ)
+  let L := (DerivedCategory.TStructure.t.truncLT a).obj K
+  have hL : DerivedCategory.homologyProperty P L :=
+    (DerivedCategory.homologyProperty P).prop_of_iso
+      ((DerivedCategory.TStructure.t.truncLEIsoTruncLT (a - 1) a (by omega)).app K)
+      (DerivedCategory.homologyProperty_truncLE (hclosure K hK) (a - 1))
+  have : L.IsLE (a - 1) :=
+    DerivedCategory.TStructure.t.isLE_truncLT_obj K a (a - 1) (by omega)
+  have hbound : ((R((g.left)_*⟦Λ⟧)).obj L).IsLE (a - 1 + d + 1) := by
+    apply DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE
+    intro n
+    exact DerivedCategory.isLE_obj_of_isLE_of_homologyProperty
+      (R((g.left)_*⟦Λ⟧)) d P hd _
+      ⟨⟨-(n : ℤ), inferInstance⟩, ⟨a - 1, inferInstance⟩⟩
+      (DerivedCategory.homologyProperty_truncGE hL _) (a - 1)
+  exact DerivedCategory.TStructure.t.isLE_of_le
+    ((R((g.left)_*⟦Λ⟧)).obj L) (a - 1 + d + 1) (q - 1) (by dsimp [a]; omega)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

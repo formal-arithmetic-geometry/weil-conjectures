@@ -1,161 +1,149 @@
 {
-  "id": "lem-sfb-adic-proper-truncation-bound",
-  "kind": "statement",
-  "title": "Uniform upper amplitude of discarded proper adic truncation tails",
-  "statement": "Fix universes u and u+1, a prime $\\ell$, and a field $k$ in universe u whose characteristic is a positive prime different from $\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes, with a proper $k$-morphism $g:Z\\to Y$ [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring, with its specified multiplication, certified to be one of the three adic coefficient families [def-sfb-adic-coefficient-certificate]. Put $\\Lambda_T=p_T^*\\Lambda$ and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, the ordinary unbounded module-object derived category, for $T=Z,Y$ [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal L_Z$ be the replete triangulated localizing hull of bounded constructible complexes in $D_Z$, using ambient coproducts indexed in universe u+1 [def-sfb-bounded-constructible-localizing-closure]. Write $Rg_*:D_Z\\to D_Y$ for total right derived module-object pushforward. For the standard good truncation $\\tau_{<a}$ [def-kun-truncations], there exists a natural number c, independent of q and K, such that for every integer q and every $K\\in\\mathcal L_Z$, the object $Rg_*\\tau_{<q-c}K$ has cohomology only in degrees at most q-1. Equivalently, $H^r(Rg_*\\tau_{<q-c}K)=0$ for every $r\\ge q$. No boundedness or completeness condition is imposed on K.",
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "def-sfb-adic-coefficient-certificate",
-    "sk-def-sfb-module-derived-pushpull",
+ "id": "lem-sfb-adic-proper-truncation-bound",
+ "kind": "statement",
+ "title": "Uniform upper amplitude of discarded proper adic truncation tails",
+ "statement": "Fix universes u and u+1, a prime $\\ell$, and a field $k$ in universe u whose characteristic is a positive prime different from $\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes, with a proper $k$-morphism $g:Z\\to Y$ [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring, with its specified multiplication, certified to be one of the three adic coefficient families [def-sfb-adic-coefficient-certificate]. Put $\\Lambda_T=p_T^*\\Lambda$ and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, the ordinary unbounded module-object derived category, for $T=Z,Y$ [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal L_Z$ be the replete triangulated localizing hull of bounded constructible complexes in $D_Z$, using ambient coproducts indexed in universe u+1 [def-sfb-bounded-constructible-localizing-closure]. Write $Rg_*:D_Z\\to D_Y$ for total right derived module-object pushforward. For the standard good truncation $\\tau_{<a}$ [def-kun-truncations], there exists a natural number c, independent of q and K, such that for every integer q and every $K\\in\\mathcal L_Z$, the object $Rg_*\\tau_{<q-c}K$ has cohomology only in degrees at most q-1. Equivalently, $H^r(Rg_*\\tau_{<q-c}K)=0$ for every $r\\ge q$. No boundedness or completeness condition is imposed on K.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "def-kun-truncations"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+  "place": "Arbitrary K and the window isomorphism; integral analogue in sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md, (1)-(2)."
+ },
+ "proof": [
+  {
+   "text": "Finite type and quasi-compactness of Y over the field give that Y is Noetherian. Eliminate the coefficient certificate and use the corresponding existing ProperLowerStarHeartHypotheses theorem. Retain its first conjunct, obtaining an integer d and a heart upper bound on S, the weak Serre coproduct closure of constructible modules.",
+   "uses": [
+    "lem-sfb-proper-serre-heart-continuous",
+    "lem-sfb-proper-serre-heart-integral",
+    "lem-sfb-proper-serre-heart-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The predicate H^*(K)∈S is replete, triangulated and closed under ambient coproducts: S is a weak Serre class closed under coproducts, and ordinary module-derived cohomology commutes with these sums. It contains bounded constructible complexes. The intersection universal property of boundedConstructibleLocalizingClosure puts every K in the hull in this predicate. Good truncation preserves the predicate, using τ<a≅τ≤a-1 and zero membership.",
+   "uses": [
     "def-sfb-bounded-constructible-localizing-closure",
     "def-kun-truncations"
-  ],
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "Arbitrary K and the window isomorphism; integral analogue in sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md, (1)-(2)."
+   ],
+   "elementary": true
   },
-  "proof": [
-    {
-      "text": "In each coefficient-certificate case, the schemes and their strata are Noetherian. In the rational cases the class of complexes with ind-constructible cohomology is replete, triangulated, closed under ambient sums, and contains bounded constructible complexes, so it contains the localizing hull. The integral ind-realization and its derived cohomology class give the same containment for integral coefficients. These are ordinary sheaf colimits.",
-      "uses": [
-        "det-ambient-ind-derived-sums",
-        "det-ambient-ind-derived-triangulated",
-        "det-prop-int-compactness-compact",
-        "def-sfb-bounded-constructible-localizing-closure"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Choose a natural uniform geometric fibre-dimension bound d. In the rational cases the proper heart bound gives cohomology in [0,2d+1] for ind-constructible sheaves. In the integral case use the local free resolutions to put derived torsion reductions in degrees [-1,0], the proper upper bound 2d, and the Milnor sequence for their countable derived inverse limit; bounded-below continuity passes this to filtered colimits of constructible sheaves. Set c=2d+1.",
-      "uses": [
-        "lem-fin-finite-type-fibre-dimension-bound",
-        "sk-lem-proper-heart-bound",
-        "det-prop-int-compactness-direct-sums"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The arbitrary-complex proper upper bound extends the heart bound to complexes with ind-constructible cohomology supported in degrees at most b: the image is supported in degrees at most b+c. Finite lower-truncation intervals give this bound first for bounded complexes. Left completeness expresses an arbitrary complex as the derived limit of its lower truncations. The discarded layer at stage n has image supported above by 2d-n. For a fixed output degree r, choose n≥max(0,2d-r+2); the degree-r and degree-(r-1) transition maps are then invertible. The Roos map 1-shift for an eventually invertible tower is split surjective by recursive lifting on its tail and finite backward recursion, so its first derived limit vanishes. This is also the integral argument; it uses the class-relative heart upper-bound lemma, not a cohomological-dimension bound on all ambient sheaves.",
-      "uses": [
-        "det-proper-unbounded-window-arbitrary",
-        "lem-sfb-left-complete-heart-upper-bound",
-        "det-prop-int-compactness-direct-sums"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Good truncations preserve ind-constructible cohomology. Apply the preceding class-relative upper bound to τ<q-c K. This lower tail is supported in degrees at most q-c-1, so its direct image is supported in degrees at most q-1. This proves the asserted upper amplitude. Zero complexes and empty fibres satisfy the same calculation.",
-      "uses": [
-        "det-ambient-ind-derived-sums",
-        "def-kun-truncations"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "def-kun-truncations",
-    "def-sfb-bounded-constructible-localizing-closure",
-    "det-ambient-ind-derived-sums",
-    "det-ambient-ind-derived-triangulated",
-    "det-prop-int-compactness-compact",
-    "det-prop-int-compactness-direct-sums",
-    "det-proper-unbounded-window-arbitrary",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-sfb-left-complete-heart-upper-bound",
-    "sk-lem-proper-heart-bound"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "Arbitrary K and the window isomorphism; integral analogue in sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md, (1)-(2)."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "preservesColimitsOfShape_rightDerivedFunctor|isIso_homologyMap_mor₂|lowerTail|HeartUpperBound",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Triangulated.TStructure.truncLT",
-      "results": "12 hits: CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.instAdditiveTruncLT, CategoryTheory.Triangulated.TStructure.isZero_truncLT_obj_of_isGE, CategoryTheory.Triangulated.TStructure.isGE_iff_isZero_truncLT_obj, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLT, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHAddIntOfNat, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat",
-      "date": "2026-10-17",
-      "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A derived right adjoint of uniformly bounded cohomological dimension on a Serre class sends the sufficiently low truncation tail to zero in a fixed cohomology degree",
-      "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
-      "date": "2026-10-17",
-      "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Upper amplitude of a derived right adjoint on the low truncation tail of a complex with ind constructible cohomology, from a uniform cohomological bound on the heart",
-      "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, HomologicalComplex.ιTruncLE, CochainComplex.ιTruncLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.truncGE, HomologicalComplex.truncGE'.truncGE'_hasHomology",
-      "date": "2026-10-17",
-      "verdict": "Component support, representative and additive-functor lemmas only; no exact statement of the proposed theorem."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts",
-    "date": "2026-10-17",
-    "group": "C1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
-      "place": "Identity compactification, proper coproduct-preservation step: the uniform truncation window, before the direct-sum comparison.",
-      "via": [
-        "lem-sfb-adic-proper-localizing-coproducts"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-cor-existence-ii",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
-    "file": "lean/Sheaf/AlgebraicGeometry/EllAdicProperTruncationBound.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_proper_lowerTail_bound",
-    "statement": "theorem ellAdic_proper_lowerTail_bound :\n    ∃ c : ℕ, ∀ (q : ℤ)\n      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})\n        (condensedRingObj Λ Z.left))),\n      boundedConstructibleLocalizingClosure Λ Z.left K →\n      ((R((g.left)_*⟦Λ⟧)).obj\n        ((DerivedCategory.TStructure.t.truncLT (q - (c : ℤ))).obj K)).IsLE (q - 1)",
-    "branch": "sheaf-dag",
-    "by": "C1",
-    "date": "2026-10-17"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C1",
-    "result": "pass",
-    "landing": "20261017T141636-L-3673008",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C1",
-    "result": "pass",
-    "landing": "20261017T141636-L-3673008",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Put c=d.toNat+1, a=q-c and L=τ<a K. Then L is at most a-1. Each τ≥-n L is bounded with upper bound a-1 and with cohomology in S. Bounded dévissage gives Rg_*τ≥-n L at most a-1+d. The derived pushforward is triangulated and a right adjoint, hence preserves countable products; ordinary pro-etale module categories have exact countable products. Apply the existing left-completeness Milnor bound to obtain Rg_*L at most a-1+d+1. Since d≤d.toNat, this is at most q-1. This extra Milnor degree is absorbed in c; no optimality of c was asserted. The argument includes zero objects and empty fibres.",
+   "uses": [
+    "lem-sfb-bounded-heart-amplitude-devissage",
+    "lem-sfb-derived-left-complete-truncation-bound",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-serre-heart-continuous",
+  "lem-sfb-proper-serre-heart-integral",
+  "lem-sfb-proper-serre-heart-qbar",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "def-kun-truncations",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+  "place": "Arbitrary K and lower-tail clause, using the existing source Serre-heart inputs and coarse Milnor bound; existential c absorbs one extra degree. A6 Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape_rightDerivedFunctor|isIso_homologyMap_mor₂|lowerTail|HeartUpperBound",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.truncLT",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.instAdditiveTruncLT, CategoryTheory.Triangulated.TStructure.isZero_truncLT_obj_of_isGE, CategoryTheory.Triangulated.TStructure.isGE_iff_isZero_truncLT_obj, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLT, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHAddIntOfNat, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived right adjoint of uniformly bounded cohomological dimension on a Serre class sends the sufficiently low truncation tail to zero in a fixed cohomology degree",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper amplitude of a derived right adjoint on the low truncation tail of a complex with ind constructible cohomology, from a uniform cohomological bound on the heart",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, HomologicalComplex.ιTruncLE, CochainComplex.ιTruncLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.truncGE, HomologicalComplex.truncGE'.truncGE'_hasHomology",
+   "date": "2026-10-17",
+   "verdict": "Component support, representative and additive-functor lemmas only; no exact statement of the proposed theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts",
+  "date": "2026-10-17",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Identity compactification, proper coproduct-preservation step: the uniform truncation window, before the direct-sum comparison.",
+   "via": [
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicProperTruncationBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_proper_lowerTail_bound",
+  "statement": "theorem ellAdic_proper_lowerTail_bound :\n    ∃ c : ℕ, ∀ (q : ℤ)\n      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})\n        (condensedRingObj Λ Z.left))),\n      boundedConstructibleLocalizingClosure Λ Z.left K →\n      ((R((g.left)_*⟦Λ⟧)).obj\n        ((DerivedCategory.TStructure.t.truncLT (q - (c : ℤ))).obj K)).IsLE (q - 1)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T141636-L-3673008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261019T231030-L-540869",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
