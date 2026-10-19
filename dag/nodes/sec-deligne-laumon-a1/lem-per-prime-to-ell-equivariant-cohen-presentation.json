@@ -17,9 +17,173 @@
   "def-weil-finitely-generated-module",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the regularity calculation for any field or complete DVR $\\Lambda$. For $S_j=\\Lambda[[t_1,\\ldots,t_j]]$, the cited power-series nodes give a Noetherian local domain, complete for its maximal ideal (apply completeness with coefficient ideal $0$ or $(\\varpi)$). By the unit criterion and the quotient-by-variables statement, its maximal ideal is $(t_1,\\ldots,t_j)$ over a field and $(t_1,\\ldots,t_j,\\varpi)$ over a DVR. The generator bound gives dimension at most $j$ or $j+1$. The chain $(0)\\subsetneq(t_1)\\subsetneq\\cdots\\subsetneq(t_1,\\ldots,t_j)$, appending $(t_1,\\ldots,t_j,\\varpi)$ in the DVR case, gives the reverse inequality: each quotient before the last is a power-series domain, the last quotient is a field, and the next variable or uniformizer is nonzero in the preceding quotient. Thus the dimensions are $j$ and $j+1$, and these maximal-ideal generators prove regularity by its cited definition. This includes $j=0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-noetherian-local-dimension-le-generators",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.1.3; regular power-series base, with the parameter-chain calculation expanded"
+   }
+  },
+  {
+   "text": "In equal characteristic $p>0$, apply the tame equivariant Cohen–Gabber node to $C=A$, $e=d$ and the trivial group. A domain is reduced and equidimensional. Take $V=s(k)$, $B=A^+=A$, $r=d$, and use its finite injective local parameter map. Its generic algebra is a finite product of finite separable fields. Apply the finite-algebra étale-neighbourhood node at the zero prime of $R=V[[T_1,\\ldots,T_d]]$; $R$ is Noetherian by step 1, the local base is its fraction field, and torsion freeness and the generic-fibre hypothesis come from Cohen–Gabber. It gives $f\\ne0$ with $R[1/f]\\to A[1/f]$ étale. Reduction modulo $\\mathfrak m_V=0$ is nonzero. The residue-field isomorphism is the section property. The quotient degree is $1$.",
+   "uses": [
+    "lem-per-tame-equivariant-cohen-gabber",
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.1–2.1.2 and 2.2.2 (trivial group case)"
+   }
+  },
+  {
+   "text": "In equal characteristic zero use the complete-local-domain finite-over-regular node. Its coefficient ring is a field $V$: a Cohen DVR with prime uniformizer cannot map locally into a ring of residue characteristic zero. It gives a finite injective local map $R=V[[T_1,\\ldots,T_r]]\\to A$ with residue isomorphism. Finiteness implies integrality, and integral injective maps preserve dimension; step 1 therefore gives $r=d$. Set $B=A^+=A$ and $H=\\{1\\}$. The fraction-degree node gives a finite field extension $\\operatorname{Frac}(A)/\\operatorname{Frac}(R)$, separable by the characteristic-zero node. Moreover $A\\otimes_R\\operatorname{Frac}(R)=\\operatorname{Frac}(A)$: the localized domain is finite-dimensional over the base field, so multiplication by a nonzero element is an injective and hence bijective linear map. Apply the finite-algebra étale-neighbourhood node at $(0)$, alternative (ii), to obtain $f\\ne0$. Again reduction modulo the coefficient maximal ideal is unchanged.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-trf-finite-domain-fraction-degree",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Equal characteristic zero: Stacks 032D (lemma-complete-local-Noetherian-domain-finite-over-regular), 00GK, 00OK and generic separability"
+   }
+  },
+  {
+   "text": "Suppose now $A$ has mixed characteristic $(0,p)$. Since $\\ell$ is a unit, $\\ell\\ne p$. Apply the Galois Epp preparation node to obtain $A\\hookrightarrow B$, $W\\hookrightarrow B$, a group $G$, a uniformizer $\\pi$ of $W$, and $D=B/\\pi B$ reduced equidimensional of dimension $e=d-1\\geq1$, with perfect subfield $k_0=W/\\pi W$. The residue field is $k'=B/\\mathfrak n_B$, and $\\dim B=d$. Choose an $\\ell$-Sylow subgroup $H\\leq G$ by the cited Sylow node. Its order is a power of $\\ell$, hence invertible in $W$, in $B$ and in $k'$. Restrict the compatible actions to $H$. The ideal $\\pi B$ is stable even if $\\pi$ itself is not fixed, because every local automorphism of $W$ preserves its maximal ideal.",
+   "uses": [
+    "lem-per-galois-epp-reduced-fibre-cover",
+    "lem-weil-pbc-sylow-subgroup-prime-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.3–4.3.5, Galois Epp base change and choice of an ℓ-Sylow"
+   }
+  },
+  {
+   "text": "Apply tame equivariant Cohen–Gabber to $D$ with its $H$-action. It gives an equivariant section $s:k'\\to D$, respecting $k_0$, and fixed parameters $u_1,\\ldots,u_e$ with finite injective generically separable map $k'[[T_1,\\ldots,T_e]]\\to D$. Apply the equivariant Cohen coefficient-lift node to $(W,B,H,s)$: completeness and Noetherianity are supplied by step 4, the order is a unit in $W$, and $s$ is precisely the required equivariant $k_0$-section. Obtain $V$ with residue field $k'$, uniformizer $\\pi$, and an equivariant local map $\\psi:V\\to B$ lifting $s$. It is injective: every nonzero element of $V$ is a unit times a power of $\\pi$ by the cited DVR node, while the image of $\\pi$ is nonzero in the domain $B$. For each $u_i$ choose a lift $b_i\\in\\mathfrak n_B$ and replace it by $x_i=|H|^{-1}\\sum_{h\\in H}h(b_i)$. This is $H$-fixed, lies in $\\mathfrak n_B$, and reduces to $u_i$.",
+   "uses": [
+    "lem-per-tame-equivariant-cohen-gabber",
+    "lem-per-equivariant-cohen-coefficient-lift",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.5–4.3.6: equivariant special-fibre parameters, coefficient lift and averaged variable lifts"
+   }
+  },
+  {
+   "text": "Evaluate formal series using $\\psi$ and the $x_i$ by the power-series universal-property node, giving $\\varphi:R=V[[T_1,\\ldots,T_e]]\\to B$. The evaluation formula shows equivariance term by term, since $\\psi$ is equivariant and the $x_i$ are fixed. Its reduction modulo $\\pi$ is the Cohen–Gabber map of step 5: coefficientwise reduction identifies $R/\\pi R$ with $k'[[T]]$ (lift each coefficient; the kernel consists exactly of series divisible by $\\pi$). Since $\\sqrt{(u_1,\\ldots,u_e)D}=\\mathfrak n_D$, we have $\\sqrt{(\\pi,x_1,\\ldots,x_e)B}=\\mathfrak n_B$. Apply case (b) of the formal-normalization node, with $\\dim B=e+1$, to conclude that $\\varphi$ is injective, local, module-finite, torsion free and a residue-field isomorphism. Thus $r=e=d-1$.",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "lem-per-parameter-ideal-formal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.7 and 4.2.5: lift the parameter map and check formal normalization"
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak p=\\pi R$ has domain quotient $k'[[T_1,\\ldots,T_e]]$ by the domain node and the coefficient reduction of step 6. Multiplication by $\\pi$ in $R$ is injective coefficientwise. The principal-prime localization node therefore gives that $R_{\\mathfrak p}$ is a DVR. Its residue field is $K=\\operatorname{Frac}(k'[[T]])$. The fibre $B\\otimes_R\\kappa(\\mathfrak p)$ is $D\\otimes_{k'[[T]]}K$, identified by the quotient and localization presentations, and is a finite product of finite separable extensions of $K$ by step 5. Use alternative (ii) of the finite-algebra étale-neighbourhood node; the base is Noetherian by step 1 and finiteness and torsion freeness are supplied by step 6. It gives $f\\notin\\pi R$ with $R[1/f]\\to B[1/f]$ étale. Its reduction modulo $\\mathfrak m_V=(\\pi)$ is exactly nonzero, as required.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "lem-sbc-regular-principal-prime-localization-dvr",
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.7: étaleness over a p-dense base open"
+   }
+  },
+  {
+   "text": "Put $A^+=B^H$. It contains $A$. As an $A$-submodule of the finite module $B$, it is finite by the Noetherian submodule node. An element of $B^H$ is a unit there exactly when it is a unit in $B$, because its inverse is again fixed. Thus $B^H$ is local with maximal ideal $\\mathfrak n_B\\cap B^H$, and $A\\to B^H$ is local and injective. For normality, if $z\\in\\operatorname{Frac}(B^H)$ is integral over $B^H$, its same monic equation makes it integral over $B$; normality of $B$ gives $z\\in B$, and writing $z$ as a quotient of fixed elements makes it fixed. Also $\\operatorname{Frac}(B^H)=\\operatorname{Frac}(B)^H$: for fixed $a/b$, multiply numerator and denominator by $\\prod_{h\\ne1}h(b)$ to make the denominator $\\prod_hh(b)$ fixed; the resulting numerator is then fixed too. By Galois Epp, $L=\\operatorname{Frac}(B)$ is finite Galois over $K=\\operatorname{Frac}(A)$ with full group $G$. The finite-Galois fixed-field node gives $L^G=K$ and $[L:K]=|G|$; the fixed-degree node applied to the faithful subgroup $H$ gives $[L:L^H]=|H|$. Degree multiplicativity gives $[L^H:K]=[G:H]$, prime to $\\ell$ by step 4. This proves the quotient clause.",
+   "uses": [
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.7 and V 3.2.3(i): invariant quotient and generic prime-to-ℓ degree"
+   }
+  },
+  {
+   "text": "It remains to describe $\\Lambda=V^H$ in mixed characteristic. Use the DVR unit-times-uniformizer-power node to write $v$ for the exponent valuation on $\\operatorname{Frac}(V)$. Local automorphisms preserve $v$. Fixed nonzero fractions are quotients of fixed elements by the norm-denominator calculation of step 8, so $F=\\operatorname{Frac}(V)^H=\\operatorname{Frac}(\\Lambda)$, and $\\Lambda=\\{z\\in F:v(z)\\geq0\\}$. The nonzero element $\\prod_hh(\\pi)\\in\\Lambda$ has positive valuation; let $a\\in\\Lambda$ have the least positive valuation $q$. For any nonzero element of $F$, divide its valuation by $q$; after dividing by a power of $a$, a positive remainder would give an element of $\\Lambda$ of valuation strictly between $0$ and $q$. Thus $v(F^\\times)=q\\mathbf Z$, and every nonzero ideal of $\\Lambda$ is generated by an element of least valuation. It is a nonfield local PID, hence a DVR by the cited definition. Finally $\\Lambda\\cap\\pi^nV=a^{\\lceil n/q\\rceil}\\Lambda$. A compatible system modulo powers of $a$ is therefore Cauchy in $V$ and converges there by completeness. Its limit is fixed, since every $h$ preserves all powers of $\\pi$, and lies in $\\Lambda$. Separation follows from separation of $V$. This proves that $\\Lambda$ is a complete DVR.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Invariant coefficient calculation from IV 2.2.3, expanded directly by valuations and completeness"
+   }
+  },
+  {
+   "text": "In equal characteristic $H$ is trivial, so $\\Lambda=V$ is the coefficient field. In either case the action on $R$ is coefficientwise with every variable fixed, and equality of series is equality of coefficients; hence $R^H=\\Lambda[[t_1,\\ldots,t_r]]$. The prime $\\ell$ is a unit in $V$: in equal characteristic it is nonzero in the coefficient field, while in mixed characteristic $p\\ne\\ell$ and $V$ has residue characteristic $p$. Its inverse is fixed, so $\\ell$ is a unit in $\\Lambda$ and in each of its power-series rings. Apply step 1 to $\\Lambda$ for every $0\\leq j\\leq r$ to obtain the final completeness, regularity, Noetherianity and dimension clauses. Both values of $r$ are positive since $d\\geq2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.1–3.2.4: fixed formal ring; coefficient and variable checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-regular-scheme",
+  "lem-per-equivariant-cohen-coefficient-lift",
+  "lem-per-finite-algebra-etale-near-field-or-dvr",
+  "lem-per-galois-epp-reduced-fibre-cover",
+  "lem-per-parameter-ideal-formal-normalization",
+  "lem-per-tame-equivariant-cohen-gabber",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-noetherian-local-dimension-le-generators",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-wf-finite-field-action-fixed-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IV 2.2.2, 4.3.3–4.3.7, V 3.2.1; equal characteristic zero Stacks 032D. Invariant DVR and power-series calculations expanded directly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +212,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: returned declarations concern standard etale presentations, invariants, or completion terminology; none constructs this formal presentation or its marked algebraization. The complete returned types were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete normal local domain has a finite prime-to-ell equivariant Cohen presentation with invariant power series ring",
+   "results": "Search succeeded; returned BDeRham, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, BDeRhamPlus, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, Algebra.IsStandardSmooth.finitePresentation, IsAdicComplete.henselianRing, PowerSeries.fg_iff_of_isPrime. Read the logged results and the prior attempt discussion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these declarations do not construct the finite prime-to-ell equivariant formal presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber Cohen presentation for a complete normal local domain with finite ell-group action and prime-to-ell invariant fraction degree",
+   "results": "Search succeeded; returned Algebra.IsInvariant.isIntegral, IsLocalRing.ResidueField.residue_smul, Algebra.isInvariant_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup, Representation.toCoinvariants.congr_simp, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsGaloisGroup.of_isFractionRing, IsGaloisGroup.iff_isFractionRing. Read the logged results and the prior attempt discussion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these declarations do not construct the finite prime-to-ell equivariant formal presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Cohen Gabber presentation over a field or complete DVR with etale generic locus",
+   "results": "Search succeeded; returned StandardEtalePresentation.mapEquiv, Algebra.Etale.finitePresentation, StandardEtalePresentation.mk, StandardEtalePresentation.toPresentation, StandardEtalePresentation, StandardEtalePresentation.toPresentation_relation, StandardEtalePresentation.toSubmersivePresentation, StandardEtalePresentation.toPresentation_val. Read the logged results and the prior attempt discussion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these declarations do not construct the finite prime-to-ell equivariant formal presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"fixedPoints\", \"IsDiscreteValuationRing\"",
+   "results": "Search succeeded; returned no hits. Read the logged results and the prior attempt discussion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these declarations do not construct the finite prime-to-ell equivariant formal presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenGabber|equivariant.*power.series|prime.to.*ell.*degree|fixed.*subring",
+   "results": "Search succeeded; returned no hits. Read the logged results and the prior attempt discussion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these declarations do not construct the finite prime-to-ell equivariant formal presentation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-marked-algebraization",
@@ -78,5 +277,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
+  "worker": "stage1",
+  "summary": "Repaired prior dry-run failure by replacing the source-only theorem applications with three proper auxiliary inputs: tame equivariant characteristic-p Cohen–Gabber, Galois Epp reduced-fibre preparation and equivariant Cohen coefficient lifting. The item assembles the formal map, checks its normalization and etale special-fibre open, computes the Sylow quotient degree, and proves the invariant DVR and power-series clauses. Original statement retained.",
+  "blueprint": "Supports the Gabber finiteness branch in ancestor lem-per-artin-gabber-affine-curve Step 3 via the formal input preceding marked algebraization; follows ILO IV 4.3.5–4.3.7 as used in V 3.2.1. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic commutative algebra input for the formal presentation calculation, not a replacement of the perverse/Fourier unit route; no node of this unit provides this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-adea5a2ff",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-adea5a2ff (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes, every cited statement and the source places: ILO IV 2.2.2–2.2.6, 4.1.7–4.1.9, 4.2.3–4.2.5, 4.3.1–4.3.7, V 3.2.1–3.2.3. New nodes. (1) The tame equivariant Cohen–Gabber node is IV 2.2.2 restricted to equidimensional rings. The extra clauses (injective, torsion free, √(u) = 𝔫, generic algebra separable) follow from equidimensionality and reducedness. The perfect-subfield clause holds because every coefficient field contains each perfect subfield (p^n-th root argument plus Krull intersection). (2) The Galois Epp node is IV 4.3.3–4.3.5: Frac(W₀^ν) is algebraically closed in Frac(A), so Frac(C)/Frac(A) is Galois with the full group G. The special fibre is reduced by Epp and IV 4.2.4, and equidimensional because complete domains are catenary. (3) The equivariant coefficient-lift node is IV 4.3.5–4.3.6: the Galois action lifts to I(k′), and isobarycentres of lifts exist because |H| is invertible mod p. All three were tested on small cases, including Saito's IV 4.3.2 example and trivial or non-faithful H. None duplicates an existing node: lem-per-mixed-reduced-special-fibre-cover, lem-per-perfect-residue-coefficient-dvr and lem-per-cohen-gabber-finite-presentations are non-equivariant special cases, noted as overlaps. None restates an item clause. Steps 1–10: every hypothesis checks against the cited statements. Specifically: char-p and char-0 cases via the étale-neighbourhood node at (0); case (b) of parameter-ideal normalization with dim B = e+1; the principal-prime DVR node at πR; the degree [G:H] via the Galois fixed-field, fixed-degree and multiplicativity nodes; Λ = V^H a complete DVR via valuations, including H acting trivially on V; ℓ ∈ Λ^×. All clauses and all three characteristic cases are covered. There is no cycle and no Lean declaration states the item or a new node. Batch 5: lem-trf-finite-domain-fraction-degree and lem-trf-noetherian-submodule-finitely-presented are generic Mathlib leaves (finite fraction-field degree; Stacks 00FP). The parameter-ideal node's 47-node closure reaches only the first of them. Neither is part of the trace formula or Poincaré duality, so all three citations are accepted. The 6 generic split_report.tool_uses are accepted. Advisories only: step 3's source document names the ILO pdf while its place cites Stacks 032D; the tame node does not define 'torsion free' inline."
  }
 }

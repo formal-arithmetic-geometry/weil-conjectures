@@ -1,0 +1,100 @@
+{
+ "id": "lem-per-equivariant-cohen-coefficient-lift",
+ "kind": "statement",
+ "title": "Equivariant Cohen coefficient extension and lift of a section",
+ "statement": "Let $W$ be a complete discrete valuation ring of mixed characteristic $(0,p)$, with uniformizer $\\pi$ and perfect residue field $k_0=W/\\pi W$ [def-sc-discrete-valuation-ring] [def-weil-pbc-adically-complete-ring]. Let $(C,\\mathfrak n)$ be a complete Noetherian local $W$-algebra with local structure map and residue field $k'=C/\\mathfrak n$ [def-weil-pbc-noetherian-ring]. Let a finite group $H$, of order invertible in $W$, act by local ring automorphisms on $W$ and $C$, compatibly with the structure map, hence on $k_0$ and $k'$. Suppose there is an $H$-equivariant $k_0$-algebra section $s:k'\\to C/\\pi C$ of the residue map. Then there exist a complete discrete valuation ring $V$ with local injective map $W\\to V$, an identification $V/\\pi V\\cong k'$ (so $\\pi$ is a uniformizer of $V$), and an $H$-action on $V$ compatible with the given actions on $W$ and $k'$. The map $W\\to V$ is formally smooth for the maximal-ideal-adic topology [def-weil-pbc-formally-smooth-adic]. There is an $H$-equivariant local $W$-algebra homomorphism $\\psi:V\\to C$ whose reduction modulo $\\pi$ is $V\\to k'\\xrightarrow{s}C/\\pi C$. Perfect means bijective Frobenius on $k_0$. No injectivity of $\\psi$ is assumed or asserted for general $C$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 4.3.5, p.60: Cohen rings I(k′H)→I(k′), lifted residue action and V=W⊗_{W(k0)}I(k′); equivariant lifting by isobarycentres, with square-zero lift torsor Lemma 4.3.6. Formal smoothness and the complete DVR property are the coefficient construction of 4.2.5 and 4.1.3–4.1.8."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complete discrete valuation ring with perfect residue field and a finite group acting compatibly on a residue field extension admits an equivariant formally smooth Cohen coefficient extension",
+   "results": "Search succeeded; returned ValuationSubring.pointwise_smul_toSubring, integralClosure.coe_smul, Algebra.FormallySmooth.inst, ValuationSubring.pointwiseMulAction, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, IsLocalRing.ResidueField.residue_smul, ValuationSubring.pointwiseHasSMul. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary lifting, invariants or ramification results, without this construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Cohen coefficient ring extension of a complete discrete valuation ring with perfect residue field to any residue field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"Tilt.instField\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] →\\n            (hv : v.Integers O) →\\n              (p : ℕ) → [inst_3 : Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Field (Tilt K v O hv p)\", \"doc\": \"Given a field $ K $ equipped with a valuation $ v $ trivial on a commutative ring $ O $, and a prime $ p $ such that $ v(p) \\neq 1 $, the tilt of $ K $ with respect to $ v $, $ O $, and $ p $ is a fiel\"}\n  {\"name\": \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {K : outParam (Type u_5)} {L : outParam (Type u_6)} {Γ₀ : outParam (Type u_7)} {Γ₁ : outParam (Type u_8)}\\n  [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [inst_3 : LinearOrderedCommGroupWithZero Γ₀]\\n  [inst_4 : LinearOrderedCommGroupWithZero Γ₁] (vK : Valuation K Γ₀) (vL : Valuation L\", \"doc\": \"For any element $x$ in the valuation subring $K_0$, the composition of the algebra map from the residue field of $K_0$ to the residue field of $L_0$ with the residue map of $K_0$ equals the compositio\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: semantic hits do not construct this equivariant algebraic input"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame finite group equivariant coefficient field section lifts to an equivariant local map from a formally smooth complete discrete valuation coefficient ring",
+   "results": "Search succeeded; returned Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, galLift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Tilt, PreTilt.untilt, BDeRham, fontaineThetaInvertP, PreTilt.mk_comp_untilt_eq_coeff_zero. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: semantic hits do not construct this equivariant algebraic input"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Cohen ring lifting from a residue coefficient section into a complete local ring by averaging square zero lifts",
+   "results": "Search succeeded; returned derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, derivationToSquareZeroEquivLift_symm_apply_apply_coe, IsAdicComplete.liftRingHom.congr_simp, IsAdicComplete.liftRingHom, TrivSqZeroExt.liftEquivOfComm, IsAdicComplete.StrictMono.liftRingHom.congr_simp, IsAdicComplete.mk_liftRingHom. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary lifting, invariants or ramification results, without this construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsDiscreteValuationRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no declarations match the requested combination"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*equivariant|equivariant.*Cohen|CohenRing|Cohen.Ring",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no relevant theorem; substring hits, if any, are unrelated identifiers"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*lift|equivariant.*lift|FormallySmooth.*fixed",
+   "results": "Search succeeded; returned no hits. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: no relevant theorem; substring hits, if any, are unrelated identifiers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
+  "date": "2026-10-19",
+  "group": "Q99"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, Gabber finiteness input: the formal Cohen presentation used by ILO V 3.2.1, expanded through IV 4.3.5. Exposé IV 4.3.5, p.60: Cohen rings I(k′H)→I(k′), lifted residue action and V=W⊗_{W(k0)}I(k′); equivariant lifting by isobarycentres, with square-zero lift torsor Lemma 4.3.6. Formal smoothness and the complete DVR property are the coefficient construction of 4.2.5 and 4.1.3–4.1.8.",
+   "via": [
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

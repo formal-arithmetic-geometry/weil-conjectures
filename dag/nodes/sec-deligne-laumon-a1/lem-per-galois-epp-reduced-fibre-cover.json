@@ -1,0 +1,82 @@
+{
+ "id": "lem-per-galois-epp-reduced-fibre-cover",
+ "kind": "statement",
+ "title": "Galois Epp preparation with reduced special fibre",
+ "statement": "Let $(A,\\mathfrak m)$ be a complete Noetherian normal local domain of dimension $d\\geq2$ and mixed characteristic $(0,p)$ [def-weil-pbc-noetherian-ring] [def-weil-pbc-adically-complete-ring] [def-weil-pbc-krull-dimension-ring]. Normal means integrally closed in its fraction field. There exist a complete Noetherian normal local domain $(C,\\mathfrak n)$, an injective module-finite local map $A\\to C$, a complete discrete valuation ring $W$ of mixed characteristic $(0,p)$ with perfect residue field $k_0$, an injective local map $W\\to C$, and a finite group $G$ acting compatibly on $W$ and $C$ by local automorphisms and fixing $A$ pointwise [def-weil-finitely-generated-module] [def-sc-discrete-valuation-ring]. The fraction-field extension $\\operatorname{Frac}(C)/\\operatorname{Frac}(A)$ is finite Galois with $G$ identified with its full group of automorphisms; finite Galois means finite-dimensional, normal and separable algebraic [def-pc-field-extension] [def-weil-pbc-separable-algebraic-extension]. For a uniformizer $\\pi$ of $W$, $C/\\pi C$ is reduced and equidimensional of dimension $d-1$, $\\dim C=d$, and $C/\\mathfrak n$ is finite over $A/\\mathfrak m$ and contains $k_0$. Reduced means no nonzero nilpotents; equidimensional means all quotients by minimal prime ideals have the indicated dimension; perfect means bijective Frobenius. No formal power-series presentation is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 4.3.3–4.3.5, p.60: finite constant extension made Galois before normalized base change, together with the reduced-fibre argument 4.2.3–4.2.4 and the generic Galois observation in 4.3.7, p.61. Equivalently one can take a component and its decomposition group."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finitely-generated-module",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complete normal local domain of mixed characteristic has a finite Galois cover and a complete discrete valuation coefficient subring with perfect residue field and reduced special fibre",
+   "results": "Search succeeded; returned IsGalois.to_normal, IsNonarchimedeanLocalField.instCompleteSpace, Ring.instIsGaloisFractionRingNormalClosure, separableClosure.isGalois, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, IsGalois, IsSepClosure.isGalois. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary lifting, invariants or ramification results, without this construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois Epp extension removes multiplicities from the special fibre of a mixed characteristic complete normal local domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Ideal.inertiaDegIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] {p : Ideal A} [p.IsMaximal]\\n  [IsDomain A] [Module.IsTorsionFree A B] [Module.Finite A B] [Nontrivial\", \"doc\": \"Let $ A $ be an integral domain, $ B $ a non-trivial finitely generated torsion-free $ A $-module, and $ p $ a maximal ideal of $ A $. Then the inertia degree $ \\\\text{inertiaDegIn}(p, B) $ is non-zero\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: semantic hits do not construct this equivariant algebraic input"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGalois\", \"IsDiscreteValuationRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no declarations match the requested combination"
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|elimination.*ramification|reduced.*special.*fibre",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"line\": \"316\", \"text\": \"  let ePp : A ⊗[R] S ≃ₐ[S] S ⊗[R] A :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"line\": \"324\", \"text\": \"      (AlgebraTensorModule.congr (.refl S _) ePp.symm.toLinearEquiv).restrictScalars R ≪≫ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"line\": \"343\", \"text\": \"        dsimp [e₄', ePp, φ]\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/ZMod.lean\", \"line\": \"150\", \"text\": \"character, agrees with `expZeta (j / N)` on `1 < re s`. Private since it is a stepping-stone to\"}\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"384\", \"text\": \"This is a stepping stone for the proof of the next result, which is strictly stronger. -/\"}\n  {\"file\": \"Mathlib/Util/AtLocation.lean\", \"line\": \"31\", \"text\": \"  `Lean.MVarId.getNondepPropHyps`) and then at the target.\"}\n  {\"file\": \"Mathlib/Util/AtLocation.lean\", \"line\": \"34\", \"text\": \"def Lean.Elab.Tactic.withNondepPropLocation (loc : Location) (atLocal : FVarId → TacticM Unit)\"}\n  {\"file\": \"Mathlib/Util/AtLocation.lean\", \"line\": \"42\", \"text\": \"    for hyp in ← (← getMainGoal).getNondepPropHyps do\"}\n  {\"file\": \"Mathlib/Util/AtLocation.lean\", \"line\": \"132\", \"text\": \"def transformAtNondepPropLocation (m : Expr → ReaderT Simp.Context MetaM Simp.Result)\"}\n  {\"file\": \"Mathlib/Util/AtLocation.lean\", \"line\": \"139\", \"text\": \"  withNondepPropLocation loc\"}\n  {\"file\": \"Mathlib/Combinatorics/SetFamily/FourFunctions.lean\", \"line\": \"49\", \"text\": \"Prove the Fishburn-Shepp inequality.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"93\", \"text\": \"  let ePp : Pp ≃ₐ[P] P ⊗[R] 𝓀[R] := { __ := TensorProduct.comm _ _ _, commutes' _ := rfl }\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean\", \"line\": \"25\", \"text\": \"The results in this file are to be treated as implementation-only, and they only serve as stepping\"}\n  {\"file\": \"Mathlib/Computability/TuringMachine/ToPartrec.lean\", \"line\": \"1134\", \"text\": \"under forward simulation, i.e. stepping forward through evaluation starting from any state in `K`\"}\n  {\"file\": \"Mathlib/Tactic/ReduceModChar.lean\", \"line\": \"299\", \"text\": \"  transformAtNondepPropLocation (derive (expensive := false) ·) \\\"reduce_mod_char\\\" loc\"}\n  {\"file\": \"Mathlib/Tactic/ReduceModChar.lean\", \"line\": \"303\", \"text\": \"  transformAtNondepPropLocation (derive (expensive := true) ·) \\\"reduce_mod_char\\\"\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/Core.lean\", \"line\": \"264\", \"text\": \"  transformAtNondepPropLocation (fun e ctx ↦ deriveSimp ctx useSimp e) \\\"norm_num\\\" loc\"}\n  {\"file\": \"Mathlib/Tactic/PPWithUniv.lean\", \"line\": \"31\", \"text\": \"  let enablePPUnivOnHead subExpr :=\"}\n  {\"file\": \"Mathlib/Tactic/PPWithUniv.lean\", \"line\": \"35\", \"text\": \"  withTheReader SubExpr enablePPUnivOnHead delabApp\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Unitary/Span.lean\", \"line\": \"68\", \"text\": \"/-- A stepping stone to `CStarAlgebra.exists_sum_four_unitary` that specifies the unitary\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"line\": \"66\", \"text\": \"This lemma is mostly a stepping stone en route to `RootPairing.linearIndepOn_root_baseOf` (where\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/RiemannLebesgueLemma.lean\", \"line\": \"219\", \"text\": \"via dual space. **Do not use** -- it is only a stepping stone to\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Affine/Isometry.lean\", \"line\": \"578\", \"text\": \"theorem trans_assoc (ePP₂ : P ≃ᵃⁱ[𝕜] P₂) (eP₂G : P₂ ≃ᵃⁱ[𝕜] P₃) (eGG' : P₃ ≃ᵃⁱ[𝕜] P₄) :\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Affine/Isometry.lean\", \"line\": \"579\", \"text\": \"    ePP₂.trans (eP₂G.trans eGG') = (ePP₂.trans eP₂G).trans eGG' :=\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean\", \"line\": \"14\", \"text\": \"The monotone convergence theorem (aka Beppo Levi lemma) states that the Lebesgue integral and\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no relevant theorem; substring hits, if any, are unrelated identifiers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
+  "date": "2026-10-19",
+  "group": "Q99"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, Gabber finiteness input: the formal Cohen presentation used by ILO V 3.2.1, expanded through IV 4.3.5. Exposé IV 4.3.3–4.3.5, p.60: finite constant extension made Galois before normalized base change, together with the reduced-fibre argument 4.2.3–4.2.4 and the generic Galois observation in 4.3.7, p.61. Equivalently one can take a component and its decomposition group.",
+   "via": [
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

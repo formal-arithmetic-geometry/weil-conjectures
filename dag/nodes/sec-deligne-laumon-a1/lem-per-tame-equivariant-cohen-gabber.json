@@ -1,0 +1,83 @@
+{
+ "id": "lem-per-tame-equivariant-cohen-gabber",
+ "kind": "statement",
+ "title": "Tame equivariant Cohen–Gabber for a reduced equidimensional ring",
+ "statement": "Let $(C,\\mathfrak n)$ be a reduced complete Noetherian local ring of characteristic $p>0$, equidimensional of dimension $e\\geq1$, with residue field $k=C/\\mathfrak n$ [def-weil-pbc-noetherian-ring] [def-weil-pbc-adically-complete-ring] [def-weil-pbc-krull-dimension-ring]. Reduced means no nonzero nilpotents, and equidimensional means $\\dim(C/\\mathfrak q)=e$ for every minimal prime $\\mathfrak q$. Let a finite group $H$ act on $C$ by local ring automorphisms, with $|H|$ invertible in $k$. There exist an $H$-equivariant field section $s:k\\hookrightarrow C$ of the residue map and $H$-fixed elements $u_1,\\ldots,u_e\\in\\mathfrak n$ such that the continuous evaluation map $k[[T_1,\\ldots,T_e]]\\to C$, with coefficient map $s$ and $T_i\\mapsto u_i$, is injective, local, module-finite and torsion free, and induces the identity on residue fields [def-weil-pbc-multivariate-power-series] [def-weil-finitely-generated-module]. The radical of $(u_1,\\ldots,u_e)C$ is $\\mathfrak n$. For $K=\\operatorname{Frac}(k[[T_1,\\ldots,T_e]])$, the generic algebra $C\\otimes_{k[[T]]}K$ is a finite product of finite separable extensions of $K$ [def-weil-module-base-change] [def-pc-field-extension] [def-weil-pbc-separable-algebraic-extension]. Here $H$ acts on $k$ through the residue action and fixes every $T_i$. If an $H$-stable perfect subfield $k_0\\subseteq C$ is specified, $s$ restricts to its given inclusion after identifying $k_0$ with its residue image; perfect means that $x\\mapsto x^p$ is bijective.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV Theorem 2.2.2 and proof 2.2.4–2.2.6, pp.53–55, restricted to the equidimensional case; generic separability is the generically étale assertion. Compatibility with a perfect subfield is the unique compatible p-power-root argument of IV 2.1.4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Cohen Gabber theorem for a reduced complete Noetherian local ring of positive characteristic with finite group action invertible order and fixed parameters",
+   "results": "Search succeeded; returned IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.arithFrobAt, split_by_characteristic_localRing, arithFrobAt, PerfectRing.ofFiniteOfIsReduced, IsArithFrobAt, PreTilt, PreTilt.instPerfectRing. Returned types read in tool output.",
+   "date": "2026-10-19",
+   "verdict": "no match: semantic hits do not construct this equivariant algebraic input"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Cohen Gabber theorem in positive characteristic with a finite tame group and invariant formal parameters",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.toCoinvariants_mk\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \"(g : G) (x : V) : toCoinvariants ρ S g (Coinvariants.mk _ x) = Coinvariants.mk _ (ρ g x)\", \"doc\": \"For any element $g$ in the monoid $G$ and any element $x$ in the module $V$, the action of $g$ on the coinvariants of $x$ equals the coinvariants of the action of $g$ on $x$. Formally, $\\\\text{toCoinva\"}\n  {\"name\": \"Representation.Coinvariants.hom_ext_iff\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} {W : Type u_4} [inst : CommRing k] [inst_1 : Monoid G]\\n  [inst_2 : AddCommGroup V] [inst_3 : Module k V] [inst_4 : AddCommGroup W] [inst_5 : Module k W]\\n  {ρ : Representation k G V} {f g : ρ.Coinvariants →ₗ[k] W},\\n  f = g ↔ f ∘ₗ Representation.Coinvaria\", \"doc\": \"Two $k$-linear maps from the coinvariants of a representation to a module $W$ are equal if and only if their compositions with the canonical quotient map $V \\to V/\\text{Coinvariants. ker }\\rho$ are equal\"}\n  {\"name\": \"Representation.Coinvariants.induction_on\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \"{motive : Coinvariants ρ → Prop} (x : Coinvariants ρ) (h : ∀ v : V, motive (mk ρ v)) : motive x\", \"doc\": \"For any property $ P $ defined on the coinvariants module $ V_{G} $ of a representation $ \\\\rho: G \\\\to \\\\text{End}_k(V) $, if $ P([v]) $ holds for all $ v \\\\in V $, then $ P(x) $ holds for all $ x \\\\in V_\"}\n  {\"name\": \"Representation.linHom.mem_invariants_iff_comm\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{X Y : Rep k G} (f : X.V →ₗ[k] Y.V) (g : G) : (linHom X.ρ Y.ρ) g f = f ↔ f.comp (X.ρ g) = (Y.ρ g).comp f\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, a linear map $f : X \\to Y$ is invariant under the action of $G$ (i.e., $\\\\rho_Y(g) \\\\circ f = f \\\\circ \\\\rho_X(g)$ for all $g \\\\in\"}\n  {\"name\": \"Representation.Coinvariants.mk_self_apply\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \"(g : G) (x : V) : mk ρ (ρ g x) = mk ρ x\", \"doc\": \"For any element $g \\\\in G$ and $x \\\\in V$, the equivalence class of $\\\\rho(g)(x)$ in the coinvariants module $V / \\\\text{Coinvariants. ker }\\\\rho$ equals the equivalence class of $x$, i.e., $[\\\\rho(g)x] = [\"}\n  {\"name\": \"Representation.Coinvariants.mk_tmul_inv\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \"(x : V) (y : W) (g : G) : Coinvariants.mk (ρ.tprod τ) (x ⊗ₜ[k] τ g⁻¹ y) = Coinvariants.mk (ρ.tprod τ) (ρ g x ⊗ₜ[k] y)\", \"doc\": \"For any elements $ x \\\\in V $, $ y \\\\in W $, and $ g \\\\in G $, the coinvariants map applied to $ x \\\\otimes \\\\tau(g^{-1})y $ equals the coinvariants map applied to $ \\\\rho(g)x \\\\otimes y $ in the tensor prod\"}\n  {\"name\": \"Algebra.FormallyEtale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] (e : A ≃ₐ[R] B) : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $ and there exists an algebra equivalence $ e : A \\\\simeq_R B $, then $ B $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary lifting, invariants or ramification results, without this construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"MulSemiringAction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no declarations match the requested combination"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenGabber|Cohen.Gabber|equivariant.*parameter",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: no relevant theorem; substring hits, if any, are unrelated identifiers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
+  "date": "2026-10-19",
+  "group": "Q99"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, Gabber finiteness input: the formal Cohen presentation used by ILO V 3.2.1, expanded through IV 4.3.5. Exposé IV Theorem 2.2.2 and proof 2.2.4–2.2.6, pp.53–55, restricted to the equidimensional case; generic separability is the generically étale assertion. Compatibility with a perfect subfield is the unique compatible p-power-root argument of IV 2.1.4.",
+   "via": [
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
