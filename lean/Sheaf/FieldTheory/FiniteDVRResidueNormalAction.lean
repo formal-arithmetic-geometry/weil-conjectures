@@ -133,6 +133,21 @@ theorem residue_normal_action
     Normal (A ⧸ IsLocalRing.maximalIdeal A)
         (integralClosure A L ⧸ n) ∧
       Function.Surjective (residueNormalActionHom A K L n) := by
-  sorry
+  have : Algebra.IsInvariant A (integralClosure A L) (Gal(L / K)) := by
+    constructor
+    intro b hb
+    have hf : ∀ σ : Gal(L / K), σ (b : L) = (b : L) := fun σ ↦
+      congrArg (fun x : integralClosure A L ↦ (x : L)) (hb σ)
+    obtain ⟨k, hk⟩ := (IsGalois.mem_range_algebraMap_iff_fixed (F := K) (b : L)).mpr hf
+    have hi : IsIntegral A k := by
+      apply (isIntegral_algebraMap_iff (algebraMap K L).injective).mp
+      rw [hk]
+      exact b.property
+    obtain ⟨a, ha⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral hi
+    refine ⟨a, Subtype.ext ?_⟩
+    change algebraMap A L a = (b : L)
+    rw [IsScalarTower.algebraMap_apply A K L a, ha, hk]
+  exact ⟨Ideal.Quotient.normal (Gal(L / K)) (IsLocalRing.maximalIdeal A) n,
+    Ideal.Quotient.stabilizerHom_surjective (Gal(L / K)) (IsLocalRing.maximalIdeal A) n⟩
 
 end IsDiscreteValuationRing
