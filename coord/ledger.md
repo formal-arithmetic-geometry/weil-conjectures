@@ -17070,3 +17070,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: returned deliver/Q144/lem-per-rig-etale-compatible-model-tower (reviewer RETURN: Route pivot: the item is itself dropped. In side coord/route-pivot-dropped.txt, section '2026-10-19 artin-gabber' (the h)
 - 04:00 L: returned deliver/Q89/lem-per-gabber-graded-model-approximation (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-gabber-graded-model-approximation: lem-per-gab)
 - 04:01 L: returned deliver/Q138/lem-trf-valued-decompletion-etale (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-valued-decompletion-etale: lem-trf-valued-deco)
+- 04:01 L: returned deliver/Q08/lem-trf-analytic-uniformization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-analytic-uniformization: lem-trf-analytic-unif)
