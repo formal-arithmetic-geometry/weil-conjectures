@@ -25,9 +25,219 @@
   "def-pc-geometrically-irreducible",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-marked-curve-finite-type-model] to $(X,H)/S$. Its quasi-compact and quasi-separated base hypotheses hold because $S$ is Noetherian. Obtain an integral finite-type $\\mathbf Z$-scheme $B$, a dominant map $S\\to B$, and a multipointed curve $(C,D)/B$ with smooth generic curve and etale generic marking whose pullback is $(X,H)$. Write $F=k(B)$ and fix a separable closure $L/F$. We construct a stable modification over a generically separable alteration of $B$, then select a generic component after pulling back to $S$. No geometric integrality of the descended generic curve is required.",
+   "uses": [
+    "lem-trf-marked-curve-finite-type-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3; expanded by Temkin proof of Theorem 1.5, first paragraph, pp. 35--36 (noetherian approximation)."
+   }
+  },
+  {
+   "text": "By [lem-trf-riemann-zariski-finite-refinement], every point $x$ of $RZ_L(B)$ corresponds to a centred finite-height valuation ring $V\\subset L$. By [lem-trf-semistable-marked-base-change], the pullback of $(C,D)$ to $\\operatorname{Spec}V$ is multipointed with smooth generic curve and etale generic marking. Since $L$ is separably closed and $V$ has finite height, [lem-trf-valuation-stable-reduction] gives a stable generic modification there. Apply [lem-trf-stable-modification-spreading] to this specified modification. It gives an $L$-quasi-model $U_x\\to B$ carrying a stable modification and a dense base open $U_x^\\circ$ over which both pair maps are isomorphisms; the corresponding valuation open contains $x$.",
+   "uses": [
+    "lem-trf-riemann-zariski-finite-refinement",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-stable-modification-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3; Temkin Proposition 4.5.1 and Theorem 1.5 proof, p. 36 (valuation models and spreading)."
+   }
+  },
+  {
+   "text": "Quasi-compactness in [lem-trf-riemann-zariski-finite-refinement] gives finitely many $U_i$ whose valuation opens cover $RZ_L(B)$. Its common-refinement assertion gives a proper integral $L$-model $B'\\to B$ covered by open subschemes $W_i$ with dominant maps $W_i\\to U_i$. In particular $k(B')/F$ is finite separable, since the generic field lies in $L$. Pull the specified models back to $W_i$. Semistability and the geometric stability condition persist by [lem-trf-semistable-marked-base-change]; properness of both pair maps persists by [lem-weil-pbc-proper-fp-permanence](b). Their generic maps are still isomorphisms. The inverse image of $U_i^\\circ$ is a dense open of the integral $W_i$, over which both maps are isomorphisms.",
+   "uses": [
+    "lem-trf-riemann-zariski-finite-refinement",
+    "lem-trf-semistable-marked-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3; Temkin Proposition 3.2.6 and Theorem 1.5 proof, last paragraph, p. 36."
+   }
+  },
+  {
+   "text": "Normalize $B'$ in its own function field using [lem-weil-pbc-normalization-in-residue-field-extension] at its generic point, obtaining $N\\to B'$ integral and birational with $N$ normal integral. On an affine chart of $B'$, the ring is an integral finite-type $\\mathbf Z$-algebra. Its integral closure in the same fraction field is finite by [lem-weil-pbc-finite-type-z-domain-normalization-finite]. Thus $N\\to B'$ is finite, hence proper by [lem-weil-pbc-finite-proper], and its composition with $B'\\to B$ is proper by [lem-weil-pbc-proper-fp-permanence](a). Its function field is still $k(B')$, so no inseparable extension was introduced. Finite-type permanence [lem-weil-pbc-finite-type-over-noetherian] makes $N$ Noetherian. Put $V_i=N\\times_{B'}W_i$; these are normal integral opens covering $N$. Pull the local models back to them, retaining properness, semistability, geometric stability and the dense-base-open generic isomorphisms by the same two permanence nodes.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3 (normalization); Temkin Theorem 1.5 proof, p. 36; Stacks 035H/035I, 0335 and 01WM."
+   }
+  },
+  {
+   "text": "The isomorphism opens just obtained are schematically dense in both members of each pair map. Indeed, for an affine chart $\\operatorname{Spec}A$ of an integral base and an affine chart $\\operatorname{Spec}R$ of a flat source above it, [lem-weil-pbc-flat-morphism-affine-criterion] makes $R$ flat over $A$. By [lem-trf-flat-module-torsionfree-domain], $R\\to R\\otimes_A\\operatorname{Frac}(A)$ is injective: an element in the kernel is killed by a nonzero scalar of $A$. An open containing the generic fibre therefore has injective structure-sheaf restriction, tested on such affine charts. Apply this to the curves and the markings on both sides, all flat by [lem-trf-semistable-marked-base-change]. Together with properness and the generic identifications, this proves that the local pair maps really are stable generic modifications in [def-trf-multipointed-curve-modification].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-trf-semistable-marked-base-change",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Temkin Theorem 1.5 proof, p. 36, justification of pulled-back modifications; affine density argument, Stacks 01U5 and definition of schematic density."
+   }
+  },
+  {
+   "text": "On $V_i\\cap V_j$ the two local models are stable generic modifications of the same pulled-back $(C,D)$. The base is normal integral quasi-compact quasi-separated, since it is an open of the Noetherian $N$. Its generic pair is smooth with etale marking by [lem-trf-semistable-marked-base-change]. Thus [lem-trf-stable-modification-uniqueness-normal] supplies a unique isomorphism over $(C,D)$. On a triple intersection the composite and the direct isomorphism agree by uniqueness. Apply [lem-weil-pbc-glue-schemes] to the curves and separately to their markings, with overlap opens given by inverse images of $V_i\\cap V_j$. The compatible pair maps glue, as do the marking closed immersions, which locally are quotients by the same ideal sheaves. This gives a pair $(Y,E)/N$ mapping to $(C,D)\\times_B N$.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Steps 3 and 5; Temkin Corollary 1.3(i) and Theorem 1.5 proof, final sentence, p. 36; Stacks 01JB/01JC."
+   }
+  },
+  {
+   "text": "The glued source is multipointed semistable and has no exceptional contracted component by the open-local assertions of [lem-trf-semistable-marked-base-change]. Each pair map is proper: the finite-type and closed-diagonal conditions can be checked on the open cover pulled back from the $V_i$, and after any base change the image of a closed subset is closed on that cover because the restricted maps are proper. This is exactly [def-weil-proper-morphism]. There is a dense open $N^\\circ\\subset N$ over which both pair maps are isomorphisms: choose one nonempty local isomorphism base open inside one $V_i$ and regard it as an open of $N$. Since the glued restriction on $V_i$ is that specified model, it is an isomorphism over this open. The affine injection argument of Step 5 gives schematic density on all four schemes. Thus the global pair map is a stable generic modification.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Temkin Theorem 1.5 proof, final paragraph, p. 36 (local verification after gluing)."
+   }
+  },
+  {
+   "text": "The proper map $N\\to B$ has generic fibre $\\operatorname{Spec}F'$ with $F'=k(N)=k(B')$ finite separable over $F$. Indeed, this fibre $N_F$ is a nonempty integral scheme of finite type over $F$ (its local rings are local rings of $N$) with function field $F'$. A nonempty affine open $\\operatorname{Spec}A\\subset N_F$ has $A$ a domain inside $F'$; each $a\\in A$ is algebraic over $F$, so $F[a]$ is a field and $A$ is a field. Hence $N_F$ is one point with residue field $F'$. Apply [thm-sc-proper-finite-fibre-finite-neighbourhood] at the generic point of the Noetherian $B$; obtain a dense open $B^\\circ$ over which it is finite. Form $Q=S\\times_B N$, proper over $S$ by [lem-weil-pbc-proper-fp-permanence](b). Its generic fibre is $\\operatorname{Spec}(K\\otimes_F F')$. A single finite separable spectrum is etale by [lem-exc-etale-coproduct-etale]; its base change is etale by [lem-weil-pbc-etale-ring-base-change]. By [lem-weil-pbc-etale-algebra-over-field-product], $K\\otimes_F F'$ is a finite product of finite separable extensions of $K$. It is nonzero (tensoring vector spaces over a field preserves a nonzero basis), so choose one field factor $K_1$.",
+   "uses": [
+    "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-exc-etale-coproduct-etale",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3 (separable alteration) and Step 4 (base change); Temkin Theorem 1.5; Stacks 02GL, 00U3 and 02OH."
+   }
+  },
+  {
+   "text": "Let $S_1$ be the reduced closed closure in $Q$ of the generic point $\\operatorname{Spec}K_1$ chosen in Step 8. It is integral: affine-locally the ideal is the prime ideal of functions vanishing at that point. The morphism $r:S_1\\to S$ is proper by [lem-weil-pbc-proper-fp-permanence](a),(c). Its closed image contains the generic point of $S$, so it is surjective. Its function field is $K_1$: over an affine chart of $S$, localization at all nonzero base functions gives exactly the chosen factor $K_1$. Over the inverse image of $B^\\circ$, $Q\\to S$ is finite by the affine tensor description of finite maps, and a closed subscheme of a finite affine scheme is finite (a quotient of a finite module is finite). Thus $r$ is finite over a dense open. It is finite type, so $S_1$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and excellent by [lem-exc-finite-type-localization-excellent] on its finite-type affine charts over the excellent $S$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Steps 3--4, generic-component pullback; Stacks 01T6 and 07QU; affine finite base-change and quotient calculation written out."
+   }
+  },
+  {
+   "text": "Pull $(Y,E)$ and its pair map back along $S_1\\to N$, obtaining $(Z,J)\\to(X,H)\\times_S S_1$. The generic point maps to the generic point of $N$ by the choice of $K_1$ as a factor of $K\\otimes_F F'$. Hence both generic maps remain isomorphisms and their common base isomorphism open is the inverse image of $N^\\circ$, dense in $S_1$. Properness of both maps persists by [lem-weil-pbc-proper-fp-permanence](b). All source and target structural maps are flat and finitely presented with the specified pure dimensions, and semistability and the no-exceptional-component condition persist, by [lem-trf-semistable-marked-base-change]. Apply the Step 5 affine injection argument to their isomorphism opens. Both pair maps are modifications as well as generic isomorphisms, so the result is stable in [def-trf-multipointed-curve-modification].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-semistable-marked-base-change",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Steps 3--4; Temkin §1.2 and Theorem 1.5, base change from the finite-type model."
+   }
+  },
+  {
+   "text": "The curve map $m:Z\\to X\\times_S S_1$ is projective in the required projective-bundle sense. Since $S_1\\to S$ sends generic point to generic point, the first clause of [lem-trf-semistable-marked-base-change] makes $(X,H)\\times_S S_1$ a multipointed curve with smooth generic curve and etale generic marking. Then [lem-trf-marked-nodal-dualizing-degrees] applied to the stable generic modification of Step 10 gives the invertible sheaf $\\omega_{Z/S_1}(J)$ with positive degree on the normalization of every one-dimensional component of every geometric $m$-fibre. Source and target are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], being finite type over $S_1$. Such fibres have dimension at most one: a geometric $m$-fibre is a closed subscheme of the geometric curve fibre over the same base point, after extending its field of definition, and that curve fibre has pure dimension one. The hypotheses of [lem-trf-proper-fibrewise-ample-projective] therefore hold. It supplies a closed immersion $Z\\hookrightarrow\\mathbf P_{X\\times_S S_1}(\\mathcal E)$ for a finite-type quasi-coherent module $\\mathcal E$, proving exactly the claimed projectivity.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-proper-fibrewise-ample-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 3, projectivity via Temkin Theorem 1.1, pp. 2--3; fibrewise dualizing-degree criterion."
+   }
+  },
+  {
+   "text": "Let $T\\to S_1$ be dominant with $T$ normal integral excellent Noetherian. The generic point of $T$ maps to that of $S_1$. Properness of the two pulled-back pair maps follows from [lem-weil-pbc-proper-fp-permanence](b), and their generic pair is $(X_\\eta,H_\\eta)\\times_K k(T)$ by associativity of fibre products and the generic identifications in Step 10. The inverse image of the dense base isomorphism open from Step 10 is a dense open of $T$. By [lem-trf-semistable-marked-base-change], all four schemes are flat over $T$, the source is semistable, and its geometric stability condition persists. The affine injection argument in Step 5 makes both isomorphism opens schematically dense. Consequently the pullback is again a stable generic modification by [def-trf-multipointed-curve-modification]. This checks the modification condition separately from geometric stability; normality is allowed but not needed for this part.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-semistable-marked-base-change",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 3.4 Step 4; Temkin §1.2; dominant integral-base pullback and the explicit density argument of Step 5."
+   }
+  },
+  {
+   "text": "The curve over $T$ in Step 12 is integral. For a nonempty affine chart $\\operatorname{Spec}R$ above an affine domain chart $\\operatorname{Spec}A\\subset T$, [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-trf-flat-module-torsionfree-domain] give an injection $R\\hookrightarrow R\\otimes_A k(T)$. The right side is nonzero, since otherwise $1$ would be killed by a nonzero base scalar. It is the coordinate ring of a nonempty affine open in the integral generic curve: geometric integrality of $X_\\eta$ gives integrality after the field extension $k(T)/K$ by [def-pc-geometrically-irreducible]. Thus $R$ is a domain. The generic curve is nonempty; moreover it is dense by the same injection argument, so its irreducibility implies that of the total curve. These affine domain charts make the curve reduced, hence integral by [def-pc-integral-scheme]. Finally it is finite type over the excellent Noetherian $T$, so it is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and excellent by [lem-exc-finite-type-localization-excellent].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Stacks 0BCM (divisors.tex, lemma-flat-over-integral-integral-fibre), its short affine proof written out; 01U5, 01T6 and 07QU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-exc-etale-coproduct-etale",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-marked-curve-finite-type-model",
+  "lem-trf-marked-nodal-dualizing-degrees",
+  "lem-trf-proper-fibrewise-ample-projective",
+  "lem-trf-riemann-zariski-finite-refinement",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-stable-modification-spreading",
+  "lem-trf-stable-modification-uniqueness-normal",
+  "lem-trf-valuation-stable-reduction",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 3.4 Step 3 and Step 4; expanded valuation/spreading/gluing argument of Temkin Theorem 1.5 and projectivity of Theorem 1.1, read at https://arxiv.org/pdf/0707.3953 (pp. 2--4,35--36); elementary dominant-pullback density and integrality arguments added."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +266,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: inspected the returned types; they concern base-change permanence, ordinary normalization, or separated morphisms, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable reduction of marked relative curves after a generically etale alteration of an excellent integral base, with a projective stable modification",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, WeierstrassCurve.reduction, AlgebraicGeometry.Scheme.Etale, WeierstrassCurve.IsGoodReduction, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern ordinary etale/smooth base change or Weierstrass integral models, not stable modifications of arbitrary marked relative curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsProjective\"",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern ordinary etale/smooth base change or Weierstrass integral models, not stable modifications of arbitrary marked relative curves."
+  },
+  {
+   "tool": "grep",
+   "query": "stableModification|stable_modification|[Ss]emistable|[Mm]ultipointed",
+   "results": "Search returned 0 hits under AlgebraicGeometry: ",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern ordinary etale/smooth base change or Weierstrass integral models, not stable modifications of arbitrary marked relative curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A family of curves with smooth generic fibre has a stable marked model after finite separable extension and modification of the base",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.mk, RingHom.isStandardSmooth_isStableUnderBaseChange, WeierstrassCurve.integralModel.congr_simp, WeierstrassCurve.integralModel, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern ordinary etale/smooth base change or Weierstrass integral models, not stable modifications of arbitrary marked relative curves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-nodal-alteration",
@@ -86,5 +324,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-separable-stable-modification-flat-pair",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the separable stable-modification construction using existing finite-type model, finite-height valuation reduction, Riemann--Zariski refinement, spreading, normal-base uniqueness and gluing nodes. Kept separability throughout normalization and generic-component selection, obtained projective-bundle projectivity by the existing dualizing-degree criterion, and verified modification density, stability and integrality after dominant normal integral base change. No new nodes.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, Step 3 finiteness/duality branch, through the recorded chain and lem-per-equivariant-marked-nodal-alteration: realizes the ILO IX 1.2 nodal-model input by X 3.4 Steps 3--5, using Temkin 1.5 and 1.1. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-coproduct-etale",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 8: Coproducts of finite separable etale field spectra are etale. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 9, 13: Excellence is preserved by finite type algebras and localization. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 5, 13: Flat modules over domains are torsion-free. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-marked-curve-finite-type-model",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 1: Finite-type integral models of multipointed curves. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-marked-nodal-dualizing-degrees",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 11: Marked dualizing line bundle and contracted-component degrees. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-proper-fibrewise-ample-projective",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 11: Positive fibre degrees give a projective-bundle embedding. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-riemann-zariski-finite-refinement",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 2, 3: Valuation neighbourhoods and common finite Riemann--Zariski refinement. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-semistable-marked-base-change",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 2, 3, 4, 5, 6, 7, 10, 12: Arbitrary base change of semistable marked curves and fibrewise stability. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-stable-modification-spreading",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 2: Spreading a prescribed stable valuation model to a quasi-alteration. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-stable-modification-uniqueness-normal",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 6: Uniqueness of stable modifications over a normal integral base. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-trf-valuation-stable-reduction",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 2: Stable reduction over finite-height separably closed valuation fields. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 8: An etale algebra over a field is a finite product of finite separable extensions. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 8: Base change of an etale ring map is etale. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 4: Finite morphisms are proper. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 4, 9, 11, 13: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 4: The normalization of a domain of finite type over Z is finite. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 5, 13: Flatness of a scheme morphism on affine charts. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 6: Glueing schemes along open subschemes. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 4: The normalization of a scheme in a finite extension of a residue field is a normal integral scheme, integral over the base, with the extension as generic point. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 3, 4, 8, 9, 10, 12: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   },
+   {
+    "node": "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "why": "Generic geometric/algebraic tool in proof Step(s) 8: Proper morphism with a finite fibre is finite near the base point. The perverse-curve unit supplies no replacement for this input to the ILO/Temkin stable-modification route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-coproduct-etale",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-marked-curve-finite-type-model",
+  "lem-trf-marked-nodal-dualizing-degrees",
+  "lem-trf-proper-fibrewise-ample-projective",
+  "lem-trf-riemann-zariski-finite-refinement",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-stable-modification-spreading",
+  "lem-trf-stable-modification-uniqueness-normal",
+  "lem-trf-valuation-stable-reduction",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-43e1605ad",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-43e1605ad (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item and its report, no new nodes, statement and stmt_deps unchanged. I checked it against ILO X §3.2.2 and Thm 3.4 Steps 2–5 (pdf pp. 164–167, separable alteration plus projective stable modification from Temkin 1.5/1.1). I read all 26 cited statements in full. The 13 steps are correct. (1) The finite-type model's qcqs hypothesis holds because S is Noetherian. (2) The RZ points are finite-height valuations of the separable closure L, and the valuation stable-reduction and spreading nodes apply to them. (3) Common refinement plus base change of semistable curves and of properness. (4) Normalizing B' is finite by 0335; the node's integral Y sits between A and its integral closure, so it is finite either way. (5) Schematic density holds because flat over a domain is torsion-free and the generic-fibre map factors through any open containing it. (6) On the normal qcqs overlaps the uniqueness node gives the gluing, with the cocycle by uniqueness. (7) Properness and density of the glued map. (8)–(9) 02OH, the étale algebra K⊗F' splits into fields, and the closure of one factor gives S_1: integral, proper surjective, finite over a dense open, Noetherian and excellent by 07QU. (10) The generic point of S_1 maps to the generic point of N, so the stable modification of (X,H)×_S S_1 pulls back. (11) Projectivity in the projective-bundle sense via the dualizing-degree and fibrewise-ample nodes; no H-projectivity is claimed. (12)–(13) Dominant normal T keeps stability, density and integrality, since R embeds in R⊗k(T) and X_η is geometrically integral. Edge cases checked: H empty, S a field, rational curves with few special points, positive characteristic, non-normal S, non-flat T. No SGA source. The 21 tool uses are generic and I accept them. Batch-5 flags: none of the closures of the nine trf nodes or of thm-sc-proper-finite-fibre-finite-neighbourhood reaches thm-trf-*, nt-assume-* or a batch-4 target. They reach the trace-transport and pod chapters only through definition chains (def-trf-orgogozo-induction-data → …) and generic proper base change or duality lemmas. Temkin stable modification, Riemann–Zariski, the 0C5B/0B5Y/02OH facts and torsion-freeness are not given by the trace formula or Poincaré duality, so all ten are accepted. The FIX touches only the item file and changes no statement, stmt_deps or proof_deps. Step 8 now proves that the generic fibre of N→B is Spec F': an integral finite-type F-scheme with algebraic function field is one point. Step 11 now states, by clause 1 of lem-trf-semistable-marked-base-change (added to the step's uses), that (X,H)×_S S_1 has smooth generic curve and étale generic marking, as the dualizing-degree node requires.; 1 file(s) fixed by the reviewer"
  }
 }
