@@ -210,8 +210,15 @@ def, the `unfold`-proved characterizing lemma and two interface proofs, and it r
 
 ## Verification of the applied fix
 
-Pending: `lake build` of `Comparison` and all modules that import it directly was still running
-when this report was committed. The result will be added in a follow-up commit.
+`lake build` of `Comparison` together with all 11 modules that import it directly
+(`UpperStarMonoidal`, `…/Shift`, `…/Comp`, `…/CompUnit`, `Exchange`, `WeilComplexTensorHom`,
+`LowerStarProjectionUnit`, `CompactConstructible`, `Kunneth/Comparisons`, `Perfect/Pullback`,
+`Perfect/SitePerfect`), plus their dependencies: **Build completed successfully (13774 jobs)**,
+with no errors and no warnings on `Comparison`. Downstream proofs that use
+`leftDerivedUpperStarOplaxMonoidal` (now built with `ofLaxSquareHδ`) or the comparison lemmas are
+unaffected. In this build, `Comparison` itself took 469 s under `lake build` (default
+`Elab.async`, sharing the loaded machine with the parallel build). The whole build took 2 h 3 min
+wall and 9.2 GB peak, mostly rebuilding dependencies on the loaded machine.
 
 ## Reproduction
 
