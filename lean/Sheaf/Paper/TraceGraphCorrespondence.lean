@@ -8,7 +8,6 @@ module
 public import Sheaf.Paper.TraceFixedScheme
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Sheaf.Paper.IntrinsicRealizationOriginComparison
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-!
 # Graph cohomological correspondences

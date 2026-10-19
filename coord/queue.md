@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (29)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -30,7 +30,6 @@
 | `fix-lem-tensor-adjunction` | 1 | state | 1 |
 | `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
-| `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
 | `lem-pur-flag-local-comparison` | 1 | state | 0 |
@@ -45,20 +44,20 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 120 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1072)
+## Stage 3: modules to prove (1073)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 6 | 1 | repair | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 4 | 1 | disputed | route |
 | `Sheaf.Paper.ProjectionFormulaCompactified` | 5 | 3 | disputed | route |
 | `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction` | 9 | 3 | disputed | route |
 | `Sheaf.SixFunctorsBasics.BrownHypotheses` | 7 | 1 | disputed | 5 |
 | `Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase` | 2 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | proof | route |
 | `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses` | 3 | 3 | proof | route |
 | `Sheaf.AlgebraicGeometry.AffineSpaceTopTrace` | 3 | 1 | proof | route |
@@ -576,6 +575,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath` | - | 3 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.OrdinaryTriangleCounitCone` | - | 1 | proof | 2 |
+| `Sheaf.Paper.AdicCompactificationSectionRealization` | - | 1 | proof | 2 |
 | `Sheaf.Paper.AdicSectionClosedSupport` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 33 | proof | 2 |
 | `Sheaf.Paper.CompletedStalkReparametrizationCoherence` | - | 8 | proof | 2 |
@@ -1153,7 +1153,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.AlgebraicGeometry.FiniteCoefficientEtaleProjectionFormula` | - | 1 | `def-sf-pf` |
 | `Sheaf.DeligneLaumon.QbarCurveDuality` | - | 2 | `cor-coef-verdier-weil-equivariance` |
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | - | 2 | `fix-prop-projection-formula` |
-| `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-a1-adic-compactification-section-realization` |
+| `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.DegreeZeroCompactSupportSections` | - | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
