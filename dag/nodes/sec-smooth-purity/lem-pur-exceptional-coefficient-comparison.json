@@ -154,6 +154,17 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
     "place": "Counit-transpose argument of (2), applied to the compact-support base-change square; agent-written base-change supplement"
    }
+  },
+  {
+   "text": "For the auxiliary theorem compactSupportMap_isIso, the proper morphism c.g has Noetherian source: finite type preserves local Noetherianity and quasi-compactness over the compact target gives compactness. Apply lem-asd-proper-finite-coefficient-extension to the finite quotient map and the open extension of M. Its first clause proves that the scalarMate component in compactSupportMap is invertible. The other factor is proper direct image of the isomorphism openIso. Their composite is invertible. This avoids a separate bounded-flat-model or totalization argument for this auxiliary theorem; the domain calculations in the main theorem remain open.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open construction"
+   }
   }
  ],
  "proof_deps": [
@@ -161,6 +172,7 @@
   "det-pe-finite-tor-comparison-noetherian",
   "lem-amb-proper-coproducts-projection",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-proper-finite-coefficient-extension",
   "lem-kun-flat-bounded-tor-amplitude",
   "lem-pur-etale-open-derived-tensor",
   "lem-pur-finite-reduction-constructibility",
@@ -181,7 +193,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "(2) quotient cocycle and (3) tensor-map comparison; domain and mixed base-change calculations expanded using Stacks 07A4, 07A7, 0E46, 0E48, 0GL1, 0GL6, 0F7L"
+  "place": "Original main-theorem plan retained. S4 proves compactSupportMap_isIso by the existing properFiniteCoefficientExtension theorem (Stacks 0GL6) and openIso; the remaining four proof holes are unchanged."
  },
  "mathlib_searches": [
   {
@@ -434,5 +446,15 @@
   "group": "Q71",
   "result": "fix",
   "note": "Read node, 10 proof steps, source compatibilities.proof.md (2)-(3), module, report, prior return review, and dependency declarations. All hypotheses (prime l, 1<=m<=r, IsNoetherian X/Y, smooth of rel. dim d, separated, finite type, HasCompactification, l invertible on Y, cocycle hb with both associators) and all six conclusions (domain preservation, IsIso b at G_A K plus counit equation defining c, naturality, three-level quotient cocycle, tensor compatibility via recorded smoothTensorDualityMap, Cartesian base change via recorded smoothExceptionalBaseChangeMap) match the node. Statement field verbatim; no hollow def; all theorems sorry; docstrings complete; ordinary-etale; added stmt_deps are landed and acyclic. Zero fallback of comparisonInverse is never used where the theorem asserts something. H4 fixed: pullbackMap/pullbackMap_isIso/pullbackIso/properMap duplicated the recorded scalarPullbackIso/scalarMate (lem-pur-etale-scalar-mate-projection, landed 22:35, before delivery 23:23); removed and replaced (compactSupportMap uses scalarMate; tensorDomainMap/BaseChangeCompatibility use scalarPullbackIso.inv); main statement unchanged. nt_compile: delivered 37.3 s clean; fixed module 37.4 s clean (PurEtaleScalarMateProjection timed out once at load ~208, then 52.3 s OK); HEq probe timed out, argued by definition. Fixes: module, lean-record.json (22 declarations, note), report with Maintainer review fix section."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261019T005421-L-2766819",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -16854,3 +16854,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/S3/Sheaf.Paper.IntegralModelSurjectiveClosedReflection (stage 3; reviewer PASS; first push; landing 20261019T005419-L-2766383 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/integral-model-surjective-closed-reflection-proof-transparency.md)
 - 00:54 L: merged deliver/S3/Sheaf.Paper.WitnessCompatibility (stage 3; reviewer PASS; first push; landing 20261019T005420-L-2766512 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/S3/Sheaf.SixFunctors.FlatModelGeneration (stage 3; reviewer PASS; first push; landing 20261019T005420-L-2766697 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/S4/Sheaf.Paper.ExceptionalCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261019T005421-L-2766819 (proof); batch 20261019T005255; modules 1; new nodes 0)

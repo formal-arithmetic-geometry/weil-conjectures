@@ -14,21 +14,7 @@ public import Sheaf.Paper.PurEtaleScalarMateProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
-import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
 
 /-! # Exceptional coefficient comparisons
 
@@ -238,10 +224,13 @@ def unitIso (T : Scheme.{u}) :
 
 /-- Invertibility of the specified b on its bounded constructible finite-Tor domain.
 Source: Stacks 0GL6 (blueprint: lem-pur-exceptional-coefficient-comparison).
-Proof: choose a bounded flat model of M. The open comparison is identity on the
-open and zero outside. For the proper factor apply the finite-coefficient projection
-formula to that flat model; its transpose is exactly scalarMate. Finite totalization
-commutes with tensor even for a non-flat quotient. Compose the two isomorphisms. -/
+Proof: the proper map c.g has Noetherian source: it is of finite type over the
+Noetherian target and is quasi-compact. Apply properFiniteCoefficientExtension
+to the quotient homomorphism and the open extension of M; its first conclusion
+says that the specified scalarMate component is invertible. The open comparison
+is an isomorphism by construction, and proper direct image preserves it. The
+definition of compactSupportMap is the composite of these two invertible maps.
+This argument works on every input; no flatness of the quotient is used. -/
 theorem compactSupportMap_isIso
     (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (_hm : 1 ≤ m)
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -251,7 +240,15 @@ theorem compactSupportMap_isIso
     (c : Compactification f) (M : DerivedCategoryModule (FiniteReduction.Coeff l r) X)
     (hM : DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) X M) :
     IsIso (compactSupportMap (FiniteReduction.quotient l hmr) c M) := by
-  sorry
+  have _ := hM
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have := (properFiniteCoefficientExtension (FiniteReduction.quotient l hmr) c.g).1
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r))
+      c.i).mapDerivedCategory.obj M)
+  unfold compactSupportMap
+  infer_instance
 
 /-- Tensor associator for actual consecutive quotient maps, with scalar-adjunction
 normalization. Source: blueprint compatibilities (2)
