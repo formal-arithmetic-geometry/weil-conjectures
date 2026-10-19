@@ -34,12 +34,32 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
+/-- The square comparison is uniquely fixed by the explicit compositor formula.
+Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows).
+Proof: the displayed composite is a witness, and its defining equality gives uniqueness. -/
+theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
+    ∃! e : pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k,
+      e = (moduleGComp R φ r i).symm ≪≫ eqToIso (congrArg (pull R φ) h.symm) ≪≫
+        moduleGComp R φ k p := by
+  exact ⟨_, rfl, fun _ he ↦ he⟩
+
 /-- Canonical comparison of the two iterated inverse images around any commutative square.
 Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows). -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k :=
-  (moduleGComp R φ r i).symm ≪≫ eqToIso (congrArg (pull R φ) h.symm) ≪≫ moduleGComp R φ k p
+  (moduleSquareG_existsUnique R φ k r p i h).choose
+
+/-- The square comparison retains exactly its original compositor formula.
+Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows).
+Proof: this is the defining equality of the uniquely specified comparison. -/
+theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
+    moduleSquareG R φ k r p i h =
+      (moduleGComp R φ r i).symm ≪≫ eqToIso (congrArg (pull R φ) h.symm) ≪≫
+        moduleGComp R φ k p :=
+  (moduleSquareG_existsUnique R φ k r p i h).choose_spec.1
 
 /-- The inverse cartesian open comparison is defined by precisely the open-unit transpose.
 Source: Stacks, Tags 09AE and 07A7
@@ -63,7 +83,17 @@ theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
     (M N : Modules R φ U) (f : M ⟶ N) :
     (pull R φ gU ⋙ extension R φ j').map f ≫ moduleBetaInvApp R φ gU j' j g h N =
       moduleBetaInvApp R φ gU j' j g h M ≫ (extension R φ j ⋙ pull R φ g).map f := by
-  sorry
+  unfold moduleBetaInvApp
+  apply (moduleJAdj R φ j').homEquiv_naturality_right_square
+  have hu := (moduleJAdj R φ j).unit.naturality f
+  change f ≫ (moduleJAdj R φ j).unit.app N =
+    (moduleJAdj R φ j).unit.app M ≫
+      (pull R φ j).map ((extension R φ j).map f) at hu
+  rw [← Category.assoc, ← Functor.map_comp, hu, Functor.map_comp, Category.assoc]
+  simp only [Category.assoc]
+  have hn := (moduleSquareG R φ gU j' j g h).inv.naturality ((extension R φ j).map f)
+  simp only [Functor.comp_map] at hn ⊢
+  rw [hn]
 
 /-- The inverse comparison as a natural transformation with the specified transpose.
 Source: Stacks, Tag 09AE (blueprint: def-sp-varying-ring-proper-open-arrows). -/
@@ -142,7 +172,8 @@ open-immersion instances and hence the chosen universal-property functors. -/
 theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     extension R φ f = extension R φ g := by
-  sorry
+  subst g
+  rfl
 
 /-- The canonical equality transport for ordinary extension by zero.
 Source: Stacks 03DI (blueprint: def-sp-varying-ring-proper-open-arrows). -/
