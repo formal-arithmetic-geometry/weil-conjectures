@@ -76,7 +76,7 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-integral-criterion",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientData",
   "declaration": "AlgebraicGeometry.ProEtale.sfbCondensedIntegers",
   "declarations": [
    "AlgebraicGeometry.ProEtale.sfbFiniteConstantSets",
@@ -94,7 +94,8 @@
   "by": "N5",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Exact existing definition-only interface from the published integral-limit module. This record gives the helper notions their own definition node; it asserts no integral-limit theorem and introduces no duplicate construction."
+  "note": "The original nine definitions are relocated verbatim and re-exported by the integral-limit module.",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntegralCoefficientData.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -111,5 +112,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Re-delivery of 6b489a2b. R1 fixed: the HEq pin is replaced by a same-category Ab equation (sheafCompose forget₂).map e.hom = eqToHom h.1 ≫ integralLimitAbComparison.hom ≫ eqToHom h.2.symm. The new sorry'd integralSectionAbIdentifications is provable: part 2 is rfl (probe clean); part 1 is proved in a probe from equality of the absval.toNormedField and spectralNorm.normedField topologies on O_E, which share the norm (absval = spectralMulAlgNorm). So integralSectionRingIso is pinned, not arbitrary. R2 fixed: theorem stmt_dep det-prop-sfb-qlbar-colimit-x-pullback dropped; new existing:true def nodes def-sfb-integral-comparison-coefficients (ProEtaleIntegralCoefficientLimit, 9 plain defs) and def-sfb-integral-comparison-normalization (SfbIntegralComparison). Statements verbatim in live, all used owner decls listed, deps existing def nodes, no cycle, source exists. The other 10 stmt_dep records are byte-identical to live (N3 untouched). Main theorem unchanged and correct (Noetherian X, finite E, derived complete K, n+1 indexing, r,s before n, edge cases); lean.statement verbatim; 8/8 proofs sorry; docstrings ok. nt_compile --json clean 4.4 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-4776c",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261019T231114-L-548537",
+  "kind": "interface",
+  "note": "independent cc review: four delivered modules (compile clean, axioms propext/choice/Quot.sound only) against live item module (9 defs byte-identical relocated and publicly re-exported, theorem statement byte-identical), node records and change record; 24 direct importers compiled: 22 clean, DiagonalTowerTrace clean after building its unpublished chain, IntegralModels pre-existing IsFlat import clash"
  }
 }

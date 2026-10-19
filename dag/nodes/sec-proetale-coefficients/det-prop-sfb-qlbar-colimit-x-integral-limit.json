@@ -24,126 +24,45 @@
  ],
  "proof": [
   {
-   "text": "Put $Y_T=X[T]=\\coprod_T X$ for finite $T$, using the terminal finite quotient $T\\to T$ in [def-sfb-profinite-test-objects]. Thus $Y_T$ is an object of the small pro-étale site. By [det-pe-topos-functoriality-site], $H_T=h_{Y_T}$ is a sheaf. By [lem-galois-coproduct-copies-morphisms-clopen], a section $f\\in H_T(U)$ is exactly a clopen decomposition $U=\\coprod_{t\\in T}U_t$, and on $U_t$ it is the constant section labelled $t$. The coprojections $X\\to Y_T$ form a finite Zariski covering, hence a pro-étale covering by [sk-def-pe-site] (also for $T=\\varnothing$, when this is the empty covering of the empty object). Base change of this covering along $f:U\\to Y_T$ exists in the site and is a covering by [det-pe-topos-functoriality-site]. Its members are exactly the clopen pieces $U_t=U\\times_{Y_T}X$, so each $U_t$ is a site object and the family $\\{U_t\\to U\\}_{t\\in T}$ is a pro-étale covering. If $t\\ne t'$, then $U_t\\times_U U_{t'}=\\varnothing$.",
+   "text": "Use proEtaleFiniteConstantRepresentableIso and the finite test-object comparison to construct the natural finite representation. Construct the positive tower cone on the integers by the topological ring identification with compatible residues. Prove its universal property coordinatewise, then preserve it through the locally constant ring right adjoint, Spec and relative base change.",
    "uses": [
     "def-sfb-profinite-test-objects",
-    "det-pe-topos-functoriality-site",
-    "lem-galois-coproduct-copies-morphisms-clopen",
-    "def-weil-pbc-proetale-covering",
-    "sk-def-pe-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 1: finite constant sheaves; Groupoids Tag 03YW, example-constant-group"
-   }
-  },
-  {
-   "text": "Let $c$ send $t$ in the constant presheaf to the constant section of $H_T$. To verify that $(H_T,c)$ is its sheafification, let $G$ be any sheaf and $a$ any natural map from the constant presheaf to $G$. For $f:U\\to Y_T$, glue $a_{U_t}(t)\\in G(U_t)$ over the covering of Step 1. They agree on overlaps: on equal labels they are the same section, and on unequal labels the overlap is empty, where a sheaf has one section because the empty family covers the empty object. The glued section is natural in $U$, since pulling back the labelled pieces gives the labelled pieces for the restricted $f$. This gives $H_T\\to G$ extending $a$. Every such extension has these restrictions on every $U_t$, so uniqueness follows from the sheaf condition. By [def-weil-pbc-sheafification], $H_T\\cong T_X$, the constant sheaf of [def-weil-pbc-constant-sheaf]. For $T=\\varnothing$ sections exist only on $U=\\varnothing$, and the same empty-cover argument applies. The identification sends a map of finite sets to the map of coproducts carrying its labelled summands identically to the corresponding summands.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-proetale-covering"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 1: explicit sheafification universal property; Sites Tag 00WH, proposition-sheafification-adjoint"
-   }
-  },
-  {
-   "text": "Write $A_n=\\cO_E/\\pi_E^n$, $q_n\\colon\\cO_E\\to A_n$ for the reductions, and $S=\\cO_E$. The topology of $S$ in the statement is that of the extending absolute value $|\\cdot|_E$, which is the unique absolute value on $E$ extending $|\\cdot|_\\ell$ by [lem-weil-l-adic-extension-absolute-value]. By [lem-sfb-integers-profinite-tower] (1) and (2), $q$ is an isomorphism of topological rings $S\\cong\\varprojlim_nA_n$ with finite discrete levels, and $S$ is profinite, so $S$ is an object of the profinite test category and the displayed presentation of the statement holds. By [lem-sfb-integers-profinite-tower] (3), every finite continuous quotient of $S$ factors uniquely through some $q_n$, and then through every $q_m$, $m\\ge n$; the $q_n$ are surjective by [lem-weil-valued-dvr-finite-quotients]. Hence the quotients $q_n$ form a cofinal subsystem of the cofiltered system of finite quotients of $S$, and the limit over the finite quotients in [def-sfb-profinite-test-objects] is the limit over this subsystem: $X[S]=\\varprojlim_nY_{A_n}$, with the reduction transitions. For every site object $U$, the universal property of this scheme limit gives $\\operatorname{Hom}_X(U,X[S])\\cong\\varprojlim_n\\operatorname{Hom}_X(U,Y_{A_n})$. Substitute Step 2, which is natural in the finite set, so in the transition maps. The index category $\\mathbf N_{\\ge1}^{op}$ is small, so [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] identifies the right side with $(\\varprojlim_n(A_n)_X)(U)$. Subcanonicity [det-pe-topos-functoriality-site] makes the left side a sheaf. This proves clause (1), naturally in all reduction projections; the underlying set sheaf of the constant ring sheaf $(A_n)_X$ is the constant set sheaf by Step 6.",
-   "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
     "lem-sfb-integers-profinite-tower",
-    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-proetale-finite-constant-representable",
+    "lem-weil-pbc-profinite-locally-constant-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commute the abelian inverse image with forgetting, using uniqueness of left adjoints and the sheafification/Kan extension comparison. Left Kan extension sends the represented condensed integers to the represented relative test object. For the completion, finite comparison naturality identifies the two diagrams; forgetting preserves limits and Yoneda preserves the relative cone, so uniqueness of limits gives the completed representation. Prove the canonical pullback representation sends unit sections to X[f] using the unit equation for left-adjoint uniqueness and the Yoneda adjunct. Prove the completed representation sends every finite projection to composition with the reduction by the inverse comparison equation for limiting cones.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
     "def-sfb-profinite-test-objects",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "det-pe-topos-functoriality-site"
+    "def-sfb-integral-comparison-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 2: limits of representables; Sites Tag 00W2, lemma-limit-sheaf; the presentation of O_E is the new node lem-sfb-integers-profinite-tower"
-   }
+   "elementary": false
   },
   {
-   "text": "Work with small skeletons in the larger sheaf universe of [def-weil-size-convention]. The functor $u$ in [sk-def-sfb-pullback-from-point] preserves finite limits and covers. Its composite $u_X$ with base change along $X\\to\\operatorname{Spec}\\mathbf Z$ also does, by [det-pe-topos-functoriality-inverse-image] (1); this composite is [def-sfb-profinite-test-objects]. Thus [lem-weil-pbc-left-exact-site-inverse-image-tensor] supplies a finite-limit-preserving left adjoint $L$ on set sheaves to $RG(P)=G(X[P])$. For any profinite $P$ whose represented presheaf $h_P$ is a sheaf, and any sheaf $G$ on $X_{\\mathrm{proét}}$, the adjunction [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] and [lem-galois-yoneda-hom-bijection] give $\\operatorname{Hom}(Lh_P,G)\\cong\\operatorname{Hom}(h_P,RG)\\cong RG(P)=G(X[P])\\cong\\operatorname{Hom}(h_{X[P]},G)$. The other representable is a sheaf by [det-pe-topos-functoriality-site]. The displayed bijections are natural in $P$ and $G$. Apply [lem-galois-yoneda-fully-faithful] to the opposite of the sheaf category to obtain the natural isomorphism $Lh_P\\cong h_{X[P]}$. In particular this isomorphism carries $Lh_g$ to $h_{u_X(g)}$ for every continuous $g:P\\to P'$. This is the representable-pullback argument of Stacks Tag 04D3, written here using existing adjunction and Yoneda nodes.",
+   "text": "Apply the ring-lifting lemma to the two explicitly normalized underlying representations and the genuine reduction cone. It supplies an additive sheaf morphism whose underlying map is their specified composite, preserving multiplication and one. This underlying map is an isomorphism. Forgetting abelian groups and including sheaves both reflect isomorphisms, so the additive morphism is invertible and its inverse is a monoid homomorphism. Evaluate its underlying-map equation on a unit section; use the proved pullback-unit formula and completed inverse-projection formula to prove the required normalization. For uniqueness apply the point adjunction, evaluate at every profinite test object, and use joint injectivity of finite ring-limit projections, cancelling the finite representation isomorphisms.",
    "uses": [
-    "def-weil-size-convention",
-    "sk-def-sfb-pullback-from-point",
-    "det-pe-topos-functoriality-inverse-image",
-    "def-sfb-profinite-test-objects",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-galois-yoneda-hom-bijection",
-    "det-pe-topos-functoriality-site",
-    "lem-galois-yoneda-fully-faithful"
+    "lem-sfb-integral-ring-comparison-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 3: representable pullback; Sites Tags 00WX (lemma-adjoint-sheaves), 00X6 (proposition-get-morphism), 04D3 (lemma-pullback-representable-sheaf); Categories Tag 001P"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-sheaf-algebraic-structures-objects] and [lem-weil-pbc-adjunction-lifts-group-ring-objects] to $L\\dashv R$ from Step 4. They give the abelian and commutative-ring inverse images with underlying set functor $L$, preserving the operations through the finite-product comparison. Their right adjoints are restriction $G\\mapsto(P\\mapsto G(X[P]))$. By [sk-def-sfb-pullback-from-point], the prescribed abelian $p_X^*$ is a left adjoint to that same restriction; therefore the adjunction comparison identifies it with this lifted abelian inverse image. The canonical strong monoidal comparison is the one in [lem-weil-pbc-left-exact-site-inverse-image-tensor]: multiplication after this comparison is induced by the pulled-back bilinear multiplication map. Hence the ring object of [sk-def-sfb-pulled-back-coefficients] is precisely the ring obtained by applying $L$ to the set-level addition, zero, negation, multiplication and unit maps. For $S=\\cO_E$, [sk-def-sfb-condensed-ring] says its underlying condensed set is $h_S$, with these pointwise operations. Step 4 now identifies the underlying set sheaf of $\\cO_{E,X}=p_X^*\\underline{\\cO_E}$ with $h_{X[S]}$, proving clause (2).",
-   "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "sk-def-sfb-pullback-from-point",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-condensed-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Steps 3–4: compatibility of inverse images and ring transport; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
-   }
-  },
-  {
-   "text": "For each reduction $q_n:S\\to A_n$, the naturality in Step 4 identifies its pulled-back map with the represented map $X[q_n]:X[S]\\to Y_{A_n}$. Under Step 2, the ring operations on $Y_{A_n}$ are the finite-label operations: for $U\\to Y_{A_n}$ and $U\\to Y_{A_n}$, refine their two labelled clopen partitions by intersections, and on the part labelled $(a,b)$ addition has label $a+b$, multiplication has label $ab$, and negation has label $-a$; $0,1$ are the corresponding constant labels. The ring sheaf just described is the constant ring sheaf of [def-weil-pbc-constant-sheaf], not only a sheaf with the correct set sections: any map from the constant ring presheaf into a ring sheaf extends uniquely by the gluing of Step 2, and the same intersection refinement shows that this extension preserves addition, multiplication, negation and the constants. Thus it has the ring-sheafification universal property of [def-weil-pbc-sheafification]. The maps $q_n$ preserve all these operations. Step 5 therefore gives a cone of ring sheaves from $\\cO_{E,X}$ to $(A_n)_X$ whose underlying set cone is the limit cone of Step 3. Its underlying set isomorphism respects all operations: composing either candidate operation with every projection gives the same finite-level operation, and the limit projections jointly distinguish sections. More explicitly, in the sectionwise limit $B(U)=\\{(b_n):b_n\\in(A_n)_X(U),\\ b_{n+1}\\bmod\\pi_E^n=b_n\\}$ define every ring operation coordinatewise. The ring identities hold coordinatewise; restrictions are ring maps; and a map into $B$ is a ring map exactly when all its projections are, by the last clause of [lem-weil-pbc-sheaf-algebraic-structures-objects]. Thus this set-limit sheaf is also the limit in ring sheaves and the cone map from $\\cO_{E,X}$ is a ring isomorphism. This proves clause (3), with the canonical reduction projections specifying the isomorphism.",
-   "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 4: ring structures; coordinatewise verification of the ring-limit universal property"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sfb-profinite-test-objects",
-  "det-pe-topos-functoriality-site",
-  "lem-galois-coproduct-copies-morphisms-clopen",
-  "def-weil-pbc-proetale-covering",
-  "sk-def-pe-site",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-l-adic-extension-absolute-value",
   "lem-sfb-integers-profinite-tower",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "def-weil-size-convention",
-  "sk-def-sfb-pullback-from-point",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-condensed-ring"
+  "lem-weil-pbc-proetale-finite-constant-representable",
+  "lem-weil-pbc-profinite-locally-constant-right-adjoint",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "def-sfb-integral-comparison-coefficients",
+  "lem-sfb-integral-ring-comparison-exists"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-  "place": "Steps 1–4, expanded by explicit sheafification and adjunction arguments; Stacks Tags 03YW, 00WH, 00W2, 00WX, 04D3, 00X6, 00YV and 001P"
+  "place": "D9: finite representation, coordinate limits, adjunction/Yoneda, and proved ring-operation compatibility"
  },
  "mathlib_searches": [
   {
@@ -271,15 +190,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-galois-coproduct-copies-morphisms-clopen",
-  "det-pe-topos-functoriality-site",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-l-adic-extension-integers-dvr"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -312,15 +223,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit",
   "declaration": "AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.sfbFiniteConstantSets",
-   "AlgebraicGeometry.ProEtale.sfbFiniteRepresentables",
-   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteLevel",
-   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteTower",
-   "AlgebraicGeometry.ProEtale.sfbIntegralProfinite",
-   "AlgebraicGeometry.ProEtale.sfbCondensedIntegers",
-   "AlgebraicGeometry.ProEtale.sfbCompletedIntegersAb",
-   "AlgebraicGeometry.ProEtale.sfbIntegralPointAdjunction",
-   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteRepresentation",
    "AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntegralCoefficientLimit.lean",
@@ -330,5 +232,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "All three clauses, with natural finite-label representation and the positive reduction tower. The ring-object isomorphism with the existing ring-sheaf limit is uniquely specified by its adjunction mate on every profinite test object. Uses the already landed universe-general continuous-map sheaf, the profinite integer tower, and the unrestricted completion without imposing a finite-field datum."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-4776c",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261019T231114-L-548537",
+  "kind": "interface",
+  "note": "independent cc review: four delivered modules (compile clean, axioms propext/choice/Quot.sound only) against live item module (9 defs byte-identical relocated and publicly re-exported, theorem statement byte-identical), node records and change record; 24 direct importers compiled: 22 clean, DiagonalTowerTrace clean after building its unpublished chain, IntegralModels pre-existing IsFlat import clash"
  }
 }
