@@ -17,139 +17,80 @@
  ],
  "proof": [
   {
-   "text": "Choose the given finite affine cover $Y=\\bigcup_{a\\in A}V_a$, $V_a=\\operatorname{Spec}R_a$, with $R_a$ Noetherian. By [def-weil-finite-type-morphism], for each $a$ choose a finite affine cover $p^{-1}(V_a)=\\bigcup_{b\\in B_a}U_{ab}$ with $U_{ab}=\\operatorname{Spec}S_{ab}$ and $S_{ab}$ a finite type $R_a$-algebra. The combined family is finite and covers $T$. By [def-weil-pbc-finite-type-algebra], choose generators $s_{ab,1},\\ldots,s_{ab,n_{ab}}$ and a surjective evaluation map $R_a[x_1,\\ldots,x_{n_{ab}}]\\twoheadrightarrow S_{ab}$. Set $e=\\max(\\{0\\}\\cup\\{n_{ab}:a\\in A,b\\in B_a\\})$. All these choices, including $e$, are made before choosing a geometric point. Empty index sets cause no problem.",
+   "text": "The finite Noetherian affine cover of Y makes Y Noetherian, hence compact and locally Noetherian. A locally finite-type morphism over Y has locally Noetherian source, and quasi-compactness of p makes T compact. Choose a finite subcover of its affine opens; their section rings are Noetherian. This is the first conclusion. The Lean proof uses isNoetherian_iff_of_finite_iSup_eq_top, LocallyOfFiniteType.isLocallyNoetherian and IsLocallyNoetherian.component_noetherian, implementing the finite affine cover argument of the original plan.",
    "uses": [
     "def-weil-finite-type-morphism",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T1, definition-finite-type, and the preceding recollection of finite type ring maps"
-   }
-  },
-  {
-   "text": "For each pair $(a,b)$, apply [lem-weil-pbc-finite-type-algebra-noetherian] to the Noetherian ring $R_a$ and its finite type algebra $S_{ab}$. Thus every $S_{ab}$ is Noetherian, and the finite cover of step 1 is the required finite Noetherian affine cover of $T$. This uses neither separatedness nor affineness of intersections of charts.",
-   "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian"
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FN, lemma-Noetherian-permanence; compare Morphisms Tag 01T6, lemma-finite-type-noetherian"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, finite type over a locally Noetherian base; finite affine cover criterion"
    }
   },
   {
-   "text": "Choose a nonnegative integer $D$ with $\\dim Y\\le D$, possible by the finite-dimension hypothesis and the empty-space convention. By [lem-weil-pbc-open-subspace-dimension-monotone] and [lem-weil-pbc-spec-topological-krull-dimension-ring], $\\dim R_a=\\dim V_a\\le D$. By [lem-sf-noetherian-polynomial-dimension], the polynomial ring in step 1 has dimension $\\dim R_a+n_{ab}\\le D+e$. A strict chain of primes of $S_{ab}$ pulls back under its surjective evaluation map to a strict chain of primes of this polynomial ring: inverse images are prime, and strictness follows by taking a preimage of an element in each difference of consecutive primes. Hence the definition [def-weil-pbc-krull-dimension-ring] gives $\\dim S_{ab}\\le D+e$. The spectrum comparison then gives $\\dim U_{ab}\\le D+e$. Zero coordinate rings have dimension $-\\infty$ and satisfy the same inequalities.",
+   "text": "Fix a natural bound D on dim Y. For each x in T choose affine neighbourhoods V of p(x) and U of x with U contained in p^{-1}(V), and restrict p to U -> V. The algebra Gamma(U) is finite type over the Noetherian ring Gamma(V), hence a quotient of Gamma(V)[X_1,...,X_n]. The affine spectrum comparison and open-subspace monotonicity give dim Gamma(V) <= D. Pullback of prime chains along the quotient map gives dim Gamma(U) <= dim Gamma(V)[X_1,...,X_n] = dim Gamma(V)+n <= D+n. Thus U has a natural dimension bound. Compactness of T chooses finitely many such U. Take the maximum of their bounds, zero for the empty family, and apply the sober T0 open-cover dimension bound. This proves a natural bound d on dim T. The Lean private helpers affine_dimension_bound and finiteType_source_dimension_bound implement this argument in full.",
    "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-finite-type-algebra",
     "lem-weil-pbc-open-subspace-dimension-monotone",
     "lem-weil-pbc-spec-topological-krull-dimension-ring",
     "lem-sf-noetherian-polynomial-dimension",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00KE, definition-Krull (prime chains); polynomial dimension: MvPolynomial.ringKrullDim_of_isNoetherianRing, Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-dimension-bound-open-cover] to the finite open cover $(U_{ab})$ of $T$ and the bound $D+e$ from step 3. Its quasi-sober and $T_0$ hypotheses hold because schemes are sober by [lem-sc-scheme-sober]. More explicitly, generic-point existence is quasi-sobriety; uniqueness implies $T_0$, since two points with the same closure would be two generic points of that irreducible closed subset. Thus $\\dim T\\le D+e<\\infty$. If $T$ is empty its dimension is $-\\infty$, so the conclusion still holds.",
-   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
     "lem-weil-pbc-dimension-bound-open-cover",
     "lem-sc-scheme-sober"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, open-cover consequence; Schemes Tag 01IS, lemma-scheme-sober"
-   }
-  },
-  {
-   "text": "Fix any algebraically closed field $\\Omega$ and any $h:\\operatorname{Spec}\\Omega\\to Y$. Its source has one point by [def-weil-affine-spectrum], so choose $a$ with its image $y$ in $V_a$. Then $h$ factors through the open subscheme $V_a$: its topological map and sheaf map simply restrict, with the local maps unchanged. Write $F=T\\times_Y\\operatorname{Spec}\\Omega$. Apply [lem-weil-pbc-open-fibre-product] with base open $V_a$, source open $U_{ab}$ and the entire second factor $\\operatorname{Spec}\\Omega$. It identifies $W_b=U_{ab}\\times_{V_a}\\operatorname{Spec}\\Omega$ with the inverse image of $U_{ab}$ in $F$. These opens cover $F$: the image in $T$ of every point of $F$ lies over $y$ and hence belongs to some $U_{ab}$. By [lem-weil-pbc-fibre-product-affine-spectra], $W_b\\cong\\operatorname{Spec}(S_{ab}\\otimes_{R_a}\\Omega)$ with the structural maps given by the two tensor inclusions.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JR, lemma-open-fibre-product, and 01I4, lemma-fibre-product-affine-schemes; affine cover formulation: lemma-affine-covering-fibre-product"
-   }
-  },
-  {
-   "text": "For each $b$, the algebra $S_{ab}\\otimes_{R_a}\\Omega$ is generated over $\\Omega$ by $s_{ab,i}\\otimes1$, with the scalar inclusion $c\\mapsto1\\otimes c$. Indeed its underlying tensor module is generated by pure tensors, and if $s=P(s_{ab,1},\\ldots,s_{ab,n_{ab}})$ then $s\\otimes c=(1\\otimes c)P_\\Omega(s_{ab,1}\\otimes1,\\ldots,s_{ab,n_{ab}}\\otimes1)$, where the coefficients of $P_\\Omega$ are the images in $\\Omega$ of those of $P$; the tensor balancing relation moves each coefficient to the second factor. Finite sums of such expressions give every tensor. The multiplication and scalar inclusions are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property], on the tensor module of [def-weil-module-base-change]. Evaluation, as in [def-weil-pbc-mv-polynomial-ring], therefore gives a surjection $\\Omega[x_1,\\ldots,x_{n_{ab}}]\\twoheadrightarrow S_{ab}\\otimes_{R_a}\\Omega$. This is a generator calculation, requiring no flatness of $R_a\\to\\Omega$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-module-base-change",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I4, lemma-fibre-product-affine-schemes, tensor-ring universal property and the generator calculation for its ring"
-   }
-  },
-  {
-   "text": "A field is Noetherian and has ring dimension zero: an ideal containing a nonzero element contains its inverse multiple $1$, so its only ideals are $(0)$ and $(1)$, and its only prime is $(0)$. Thus [lem-sf-noetherian-polynomial-dimension] applied to $\\Omega$ gives $\\dim\\Omega[x_1,\\ldots,x_{n_{ab}}]=n_{ab}$. Pulling a strict chain of primes back along the surjection in step 6 preserves its length by exactly the inverse-image and element-lifting argument of step 3. Consequently [def-weil-pbc-krull-dimension-ring] gives $\\dim(S_{ab}\\otimes_{R_a}\\Omega)\\le n_{ab}\\le e$, and [lem-weil-pbc-spec-topological-krull-dimension-ring] gives $\\dim W_b\\le e$. A zero tensor ring has empty spectrum and dimension $-\\infty$, which also satisfies this bound.",
-   "uses": [
-    "lem-sf-noetherian-polynomial-dimension",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-spec-topological-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00KE, definition-Krull; field polynomial dimension: MvPolynomial.ringKrullDim_of_isNoetherianRing, Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
+    "place": "Tag 00KE, prime chains and the quotient inequality; MvPolynomial.ringKrullDim_of_isNoetherianRing"
    }
   },
   {
-   "text": "The fibre product $F$ is a scheme, so [lem-sc-scheme-sober] gives the quasi-sober and $T_0$ hypotheses as in step 4. Apply [lem-weil-pbc-dimension-bound-open-cover] to the open cover $(W_b)$ from step 5 with the common bound $e$ from step 7. It gives $\\dim F\\le e$. Since $e$ was fixed in step 1 independently of $\\Omega$ and $h$, this proves the required uniform bound for every geometric fibre. Empty $F$, empty members, and even an empty cover of an empty $F$ are included in the cited open-cover statement. No comparison between ordinary and geometric fibre dimensions has been assumed.",
+   "text": "Use the already proved source theorem AlgebraicGeometry.topologicalKrullDim_pullback_le in WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension. For every field-valued point h it gives dim(T times_Y Spec Omega) <= dim T, so the natural number d from the preceding step also bounds every geometric fibre. Its proof factors h through the residue field kappa(y); pullback associativity identifies the pullback with the field extension of p.fiber y. The closed source realization topologicalKrullDim_pullback_eq_of_field of [lem-pc-dim-base-change] preserves its dimension, and the fibre homeomorphism with the subspace p^{-1}({y}) gives dimension at most dim T. This route uses no algebraic-closedness assumption and covers empty fibres.",
    "uses": [
-    "lem-sc-scheme-sober",
-    "lem-weil-pbc-dimension-bound-open-cover"
+    "lem-pc-dim-base-change",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions; the affine-presentation refinement of Morphisms Tag 0A3V to arbitrary field-valued points"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/FieldBaseChangeDimension.lean",
+    "place": "topologicalKrullDim_pullback_le, lines 131-147; field-extension comparison from Algebra Tag 00P3"
    }
   },
   {
-   "text": "Finally, for each $t\\in T$ the scheme morphism induces a unital local ring homomorphism $\\mathcal O_{Y,p(t)}\\to\\mathcal O_{T,t}$ by [def-pc-scheme] (a morphism of locally ringed spaces). If $Nv=1$ in $\\mathcal O_{Y,p(t)}$, its image satisfies $N\\varphi(v)=\\varphi(Nv)=1$. Thus $N$ is invertible in every local ring of $T$. When $T$ is empty this assertion is vacuous.",
+   "text": "For each t in T, the stalk map p.stalkMap t is a unital ring homomorphism from O_{Y,p(t)} to O_{T,t}. Apply IsUnit.map to the inverse of the image of N; preservation of integer casts identifies the result with N in the target stalk. If T is empty this conclusion is vacuous.",
    "uses": [
     "def-pc-scheme"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01IJ, definition-scheme: morphisms are morphisms of locally ringed spaces; images of multiplicative inverses"
+    "place": "Tag 01IJ; morphisms of locally ringed spaces and preservation of units"
    }
   }
  ],
  "proof_deps": [
   "def-weil-finite-type-morphism",
-  "def-weil-pbc-finite-type-algebra",
   "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-pbc-finite-type-algebra",
   "lem-weil-pbc-open-subspace-dimension-monotone",
   "lem-weil-pbc-spec-topological-krull-dimension-ring",
   "lem-sf-noetherian-polynomial-dimension",
   "def-weil-pbc-krull-dimension-ring",
   "lem-weil-pbc-dimension-bound-open-cover",
   "lem-sc-scheme-sober",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "def-weil-module-base-change",
-  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pc-dim-base-change",
+  "def-pc-fibre-product",
   "def-pc-scheme"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0A3V and affine generator refinement: source-dimension and arbitrary-field fibre bounds from finite polynomial presentations; Noetherianity follows Tag 01T6 / Algebra Tag 00FN."
+  "place": "Finite affine polynomial presentations give the source bound; the proved source theorem topologicalKrullDim_pullback_le (FieldBaseChangeDimension.lean) then gives the geometric bound using Algebra Tag 00P3. Written in Lean by S5, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -285,5 +226,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, sorry-only proof, and compiler reproducibility all checked; no faults found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261019T005422-L-2767163",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
