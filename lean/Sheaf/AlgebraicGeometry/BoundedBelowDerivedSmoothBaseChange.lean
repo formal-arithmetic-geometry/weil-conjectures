@@ -8,12 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import Sheaf.AlgebraicGeometry.AllowableTorsionDerivedCategories
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
-import Sheaf.AlgebraicGeometry.BoundedBelowTruncationCriterion
 import Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange
 import Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage
 import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -188,6 +188,25 @@ private lemma allowable_derived_directImage {U V : Scheme.{u}} (g : U ⟶ V)
     (R(lowerStar AddCommGrpCat.{u + 1} g).map
       ((DerivedCategory.TStructure.t.truncLEι n).app K)))) (hKn.1 n)
 
+private lemma truncation_homology_isIso
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (hF : ∀ (E : DerivedCategory A) (a : ℤ), E.IsGE a → (F.obj E).IsGE a)
+    (E : DerivedCategory A) (n : ℤ) :
+    IsIso ((DerivedCategory.homologyFunctor B n).map
+      (F.map ((DerivedCategory.TStructure.t.truncLEι n).app E))) := by
+  let T := (DerivedCategory.TStructure.t.triangleLEGT n).obj E
+  have hbound : (F.obj T.obj₃).IsGE (n + 1) :=
+    hF _ _ (inferInstanceAs
+      (DerivedCategory.TStructure.t.IsGE
+        ((DerivedCategory.TStructure.t.truncGT n).obj E) (n + 1)))
+  exact DerivedCategory.isIso_homologyMap_mor₁ _
+    (F.map_distinguished _ (DerivedCategory.TStructure.t.triangleLEGT_distinguished n E))
+    (n - 1) n (by omega)
+    (DerivedCategory.isZero_of_isGE (F.obj T.obj₃) (n + 1) _ (by omega))
+    (DerivedCategory.isZero_of_isGE (F.obj T.obj₃) (n + 1) _ (by omega))
+
 /-- Smooth base change in the bounded-below allowable-torsion category on X.
 Source: blueprint, sec-smooth-base-change, sk-rem-rest, order 1440
 (blueprint: sbc-thm-bounded-below-derived-smooth-base-change).
@@ -196,8 +215,9 @@ Proof:
 1. Truncate K above each n. The truncation is bounded and retains allowable-torsion
 cohomology, by the standard truncation triangle and its cohomology isomorphisms.
 2. Apply bounded allowable-torsion smooth base change to each truncation. The
-bounded-below truncation criterion compares both images in degree n. Naturality
-of the canonical exchange transformation makes the comparison square commute,
+standard truncation triangle compares both images in degree n: their functors
+preserve lower bounds, so the upper tail has zero cohomology in degrees n-1 and n.
+Naturality of the canonical exchange transformation makes the comparison square commute,
 so its remaining edge is an isomorphism. Cohomology detects derived isomorphisms.
 3. For a sheaf in degree zero, qcqs higher direct images preserve allowable prime
 torsion. The plus/unbounded comparison identifies this with total derived direct
@@ -222,6 +242,53 @@ theorem boundedBelow_derived_smooth_baseChange
         (R(lowerStar AddCommGrpCat.{u + 1} h).obj
           (D(upperStar AddCommGrpCat.{u + 1} e).obj K.obj)) ∧
       IsIso (abelianDerivedBaseChangeArrow sq K.obj) := by
-  sorry
+  let : (allowableTorsionSheafProperty T S.invertiblePrimes).IsClosedUnderIsomorphisms :=
+    ⟨fun i hi ↦ allowable_iso i hi⟩
+  let : (allowableTorsionSheafProperty T S.invertiblePrimes).ContainsZero :=
+    ⟨0, Limits.isZero_zero _, allowable_zero _ (Limits.isZero_zero _)⟩
+  have hiso : IsIso (abelianDerivedBaseChangeArrow sq K.obj) := by
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    obtain ⟨a, ha⟩ := K.property.2
+    have : K.obj.IsGE a := ha
+    let Kn := (DerivedCategory.TStructure.t.truncLE n).obj K.obj
+    have hKn : allowableTorsionBoundedProperty T S.invertiblePrimes Kn :=
+      ⟨DerivedCategory.homologyProperty_truncLE K.property.1 n,
+        ⟨⟨a, inferInstanceAs (DerivedCategory.TStructure.t.IsGE
+          ((DerivedCategory.TStructure.t.truncLE n).obj K.obj) a)⟩,
+          ⟨n, inferInstance⟩⟩⟩
+    have : IsIso (abelianDerivedBaseChangeArrow sq Kn) :=
+      (isIso_abelianDerivedBaseChangeArrow_of_bounded_allowable_torsion sq ⟨Kn, hKn⟩).1
+    let F := R(lowerStar AddCommGrpCat.{u + 1} g) ⋙
+      D(upperStar AddCommGrpCat.{u + 1} f)
+    let G := D(upperStar AddCommGrpCat.{u + 1} e) ⋙
+      R(lowerStar AddCommGrpCat.{u + 1} h)
+    have hF (E : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))
+        (a : ℤ) (ha : E.IsGE a) : (F.obj E).IsGE a := by
+      have : E.IsGE a := ha
+      have := rightDerived_isGE g E a
+      exact (upperStar AddCommGrpCat.{u + 1} f).isGE_mapDerivedCategory_obj _ a
+    have hG (E : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))
+        (a : ℤ) (ha : E.IsGE a) : (G.obj E).IsGE a := by
+      have : E.IsGE a := ha
+      have := (upperStar AddCommGrpCat.{u + 1} e).isGE_mapDerivedCategory_obj E a
+      exact rightDerived_isGE h _ a
+    let v := (DerivedCategory.TStructure.t.truncLEι n).app K.obj
+    have : IsIso ((DerivedCategory.homologyFunctor _ n).map (F.map v)) :=
+      truncation_homology_isIso F hF K.obj n
+    have : IsIso ((DerivedCategory.homologyFunctor _ n).map (G.map v)) :=
+      truncation_homology_isIso G hG K.obj n
+    have hw : (DerivedCategory.homologyFunctor _ n).map (F.map v) ≫
+        (DerivedCategory.homologyFunctor _ n).map (abelianDerivedBaseChangeArrow sq K.obj) =
+        (DerivedCategory.homologyFunctor _ n).map (abelianDerivedBaseChangeArrow sq Kn) ≫
+          (DerivedCategory.homologyFunctor _ n).map (G.map v) := by
+      simpa only [Functor.map_comp, Functor.id_obj, Functor.comp_map, Functor.comp_obj,
+        F, G, Kn] using congrArg ((DerivedCategory.homologyFunctor _ n).map)
+          (abelian_exchange_naturality sq v)
+    exact IsIso.of_isIso_fac_left hw
+  have hs := allowable_derived_upperStar f S.invertiblePrimes _
+    (allowable_derived_directImage g S.invertiblePrimes K.obj K.property)
+  exact ⟨hs, (allowableTorsionPlusProperty X S.invertiblePrimes).prop_of_iso
+    (asIso (abelianDerivedBaseChangeArrow sq K.obj)) hs, hiso⟩
 
 end AlgebraicGeometry.Etale

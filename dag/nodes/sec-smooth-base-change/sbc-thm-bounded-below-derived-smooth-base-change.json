@@ -32,10 +32,12 @@
    }
   },
   {
-   "text": "Apply bounded allowable-torsion smooth base change to Kn. Flip the chosen Cartesian square to the convention of the bounded-below truncation criterion, which identifies Hn of both comparison maps from Kn to K. The abelian exchange is the component of the explicit unit/comparison/counit natural transformation. Its naturality gives a commutative square on Hn. Three edges are isomorphisms, so the fourth is one. DerivedCategory.isIso_iff detects isomorphisms directly on all cohomology objects; no separate stalk conservativity theorem is needed.",
+   "text": "Apply bounded allowable-torsion smooth base change to Kn. For any triangulated functor F preserving lower bounds, apply F to the standard triangle tau_le_n K -> K -> tau_gt_n K. The last term remains >= n+1, so its H^(n-1) and H^n vanish, and the long exact sequence makes H^n(F(tau_le_n K)) -> H^n(F(K)) invertible. Both Rg followed by exact inverse image and exact inverse image followed by Rh preserve lower bounds, by rightDerivedFunctorPlusCompatibility and exact-functor compatibility. Apply this elementary truncation-triangle argument to both sides of the exchange. Naturality of abelianDerivedBaseChangeTransformation gives a commutative square on H^n. Its two vertical maps and its bounded exchange are invertible, so the remaining exchange is invertible. DerivedCategory.isIso_iff detects the resulting ambient isomorphism. This does not use the spectral-sequence support clause of sbc-lem-bounded-below-truncation-criterion.",
    "uses": [
     "sbc-thm-bounded-allowable-torsion",
-    "sbc-lem-bounded-below-truncation-criterion",
+    "def-sbc-standard-tstructure-derived-category",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-weil-pbc-exact-functor-bounded-below",
     "sbc-def-base-change-map"
    ],
    "elementary": false,
@@ -100,19 +102,18 @@
   "sbc-def-derived-categories-with-allowable-torsion",
   "def-sbc-standard-tstructure-derived-category",
   "sbc-thm-bounded-allowable-torsion",
-  "sbc-lem-bounded-below-truncation-criterion",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "sbc-def-base-change-map",
   "lem-weil-pbc-geometric-point-field-extension",
   "lem-sbc-qcqs-higher-images-prime-torsion",
-  "src-right-derived-functor-plus-compatibility",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-exact-functor-bounded-below",
   "lem-sbc-allowable-torsion-upper-star"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-  "place": "A4 stage-3 proof: original bounded-to-bounded-below route; allowable typing by bounded triangulated devissage and truncation, using the proved source-library APIs; allowable_upperStar is relocated unchanged to the shared AllowableTorsionInverseImage module."
+  "place": "E4 stage-3 proof: bounded smooth base change on upper truncations; direct long-exact-sequence proof of both truncation comparisons for lower-bound-preserving triangulated functors; exchange naturality and cohomology detection. Existing allowable-torsion preservation helpers supply both output membership assertions. No statement or definition changes."
  },
  "mathlib_searches": [
   {
@@ -224,13 +225,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-097f0d2e1 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, route and source passages in full. All seven steps check; the S-to-X output correction is justified. No new nodes or repairs. Accepted generic tool uses are recorded in review.md. Separate master target coefficient/morphism comparisons remain uncertified."
  },
- "tool_uses": [
-  "sbc-lem-bc-naturality",
-  "lem-weil-pbc-derived-stalk-conservative",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "prop-weil-pbc-inverse-image-exact"
- ],
+ "tool_uses": [],
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
@@ -250,13 +245,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-85906",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261015T174646-L-626596",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules compile cleanly; target and existing signatures are preserved, proofs and DAG nodes agree, adaptations are minimal, and no mechanical findings remain."
+  "landing": "20261019T093342-L-2299814",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
