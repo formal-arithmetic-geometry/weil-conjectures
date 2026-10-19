@@ -49,6 +49,12 @@ cokernels of the homology maps vanish locally and hence globally; therefore `u` 
 quasi-isomorphism. The theorem is isolated because this local-to-global comparison is the
 only nontrivial remaining step in the parent construction.
 -/
+/- STATEMENT-DISPUTED: The augmentation equation alone does not force a quasi-isomorphism.
+A formal biproduct argument shows this universal conclusion would force every target
+homology object to be zero: apply it to `T` and to `T ⊞ T` with the first injection.
+The source requires the specific scalar-extended Cech model and its comparison map,
+which are absent from this declaration. -/
+-- STATEMENT-DISPUTED: augmentation compatibility alone is insufficient.
 theorem flat_ringedCech_baseChange_data_quasiIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
