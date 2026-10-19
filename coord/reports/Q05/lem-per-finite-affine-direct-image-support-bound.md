@@ -1,0 +1,63 @@
+# Stage-1 report: lem-per-finite-affine-direct-image-support-bound
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-finite-affine-direct-image-support-bound.json`: statement; split; Mathlib has no matching affine etale derived support theorem in the searches run. Ten proof steps, all shorter than 1000 characters.
+- `citations.json`: 23 entries, one for each cited node in each numbered proof step; each quote is the full verbatim statement actually read.
+- `searches.jsonl`: six genuine msearch calls, including two semantic phrasings, LeanSearch, Loogle, a scoped grep and a whole-Mathlib grep. All services responded. The exact queries, hit counts and names are preserved; no earlier log was present to reuse.
+- `report.md`: this report. `write_split.py` is a sandbox-only generation helper, not a project/tool modification.
+
+New nodes: 0. Mathlib leaves: 0. The item statement is unchanged. No unit record is changed: this item is a supporting lemma, not its unit's key statement.
+
+## Attachments
+
+None. I searched the exact item id and its support/affine/direct-image concepts under the specified slopmaster2 `WeilConjectures/`, and read `SixFunctors/Etale/Perverse/Operations.lean`. Its Artin–Gabber `isPerverseLE_lowerShriek` and `isPerverseGE_lowerShriek` have `sorry`, and concern compact-support pushforward, not the full statement of this item. `isPerverseLE_upperStar` there is smooth pullback. None supplies an attachment. Upstream master was used only as reference material.
+
+## WANTED
+
+None. All literature used was available read-only in the shared repository.
+
+## Problems corrected in the proposed proof
+
+The statement is mathematically consistent, including its D+ rather than initially bounded input. I did not weaken or alter it.
+
+The seeded Step 2 cited `lem-weil-pbc-etale-module-cohomology-forget`, whose statement compares global cohomology groups. That does not itself state the needed identification of higher-direct-image sheaves. I replaced it with the existing `lem-sbc-higher-direct-image-forget-comparison`, which explicitly identifies the underlying abelian sheaf of every module higher direct image with the abelian higher direct image. No new comparison node is needed.
+
+The seeded Step 2 referred to Step 1 of the compact-support sibling for the assertion that generic points of closed supports have nonzero stalks. That is an argument inside another proof, not its statement. Steps 5–6 now prove exactly that elementary topological assertion from the existing constructible-support, finite-components and scheme-sobriety statements. They distinguish the stalk support S from its closure Z. Step 6 writes out the finite locally-closed union argument rather than hiding it in a new lemma. I searched the whole DAG by support, generic-point and constructibility concepts and source tags and used the existing nodes; no duplicate or restated clause is introduced.
+
+The seeded last step did not cite a statement for triangulatedness of the module right derived functor. Step 8 now cites `lem-weil-pbc-derived-direct-image-triangulated`, whose statement is for any additive left exact functor between abelian categories with enough injectives, so it applies to module direct image. Step 10 sets out the actual finite truncation induction with its zero base and terminal object. Step 2 applies constructibility only after Step 1 has proved the input bounded.
+
+The current main-20261015 ancestor proof contains an unsupported block substitution in its cosupport discussion. I retain the maintainer's explicit route decision of 2026-10-19 encoded in the item's creation and ancestor: use the Stacks 0F0X affine higher-direct-image estimate for finite torsion coefficients, then the BBD cohomology-sheaf reduction. This is the route already assigned to this item. No SGA source is used or cited as an input.
+
+## Unfinished work
+
+None in the one-level split. Existing unsplit child nodes remain other items; they are cited for their statements, without pretending their pending proofs are complete. No Lean file was written and no compiler, Lake or build tool was run.
+
+## Not duplicates
+
+No new nodes were created. In particular the existing higher-direct-image coefficient comparison and constructible-module support theorem replace potential duplicate helper nodes. The generic-point step is a short finite-union argument, not a new node or an application of the whole item under another name.
+
+## Review by Q05
+
+I read the chapter and unit records, the current main-20261015 ancestor statement and proof, the human route decision recorded in the current DAG, BBD 4.1.1 on printed pp. 102–103 (the reduction to H^r(K)[-r]), and the full statement and proof of Stacks Tag 0F0X in `etale-cohomology.tex`, label `lemma-interlude-I`. BBD gives the complex-to-sheaf argument; the actual finite-torsion affine estimate is the cited Stacks theorem already represented by `lem-kun-affine-direct-image-support-bound`. I do not repeat its proof or its strict-local-model constructions inside this item. There are no new nodes requiring additional source reviews.
+
+For the coefficient bridge I read Stacks 03FD, `sites-cohomology.tex`, `lemma-cohomology-modules-abelian-agree`, including its assertion on every site object, and opened the existing higher-direct-image comparison node. That node's statement, not merely its proof, gives the required sheaf comparison for arbitrary commutative Lambda, every integer q and arbitrary morphisms. For the support passage I read 09YS(3), `lemma-support-constructible`, 005K, `topology.tex`, `lemma-generic-point-in-constructible`, 01IS, `schemes.tex`, `lemma-scheme-sober`, 0BA8, `properties.tex`, `lemma-Noetherian-irreducible-components`, and 01T6, `morphisms.tex`, `lemma-finite-type-noetherian`. For dimension I read 0A21(6)/0B1C, `varieties.tex`, `lemma-dimension-locally-algebraic`; its existing closed-subset node already states precisely the version needed here. For exactness I read 05SE, `derived.tex`, `proposition-derived-functor`, and the generic existing triangulated derived-functor node, together with the standard-t-structure and heart/truncation statements.
+
+I checked each proof step against the complete statements copied to citations.json:
+
+1. `lemma-weil-pbc-geometric-stalk-conservative` detects the zero sheaf by applying its isomorphism criterion to 0 -> F. Its use for a module sheaf is on the underlying abelian sheaf, whose being zero is equivalent to the module sheaf being zero. `def-weil-pbc-derived-categories` provides the lower cohomology bound; `def-weil-pbc-constructible-complexes` gives the definition of bounded constructible. The upper bound is obtained from the hypothesis, not assumed. Empty closed support is the zero case.
+2. `thm-dg-finite-type-constructibility` explicitly accepts finite rings annihilated by an integer invertible in the field and morphisms between finite-type schemes, and concludes bounded constructibility for the ordinary etale direct image. The ring exponent is just such an integer. Step 1 has established its bounded input. Each F_i[0] also is bounded constructible. `lem-weil-pbc-finite-type-over-noetherian` supplies Noetherianity over Spec k; Spec k is Noetherian because k is a field. Finite type supplies quasi-compactness and the assumed separatedness supplies quasi-separatedness.
+3. `def-kun-support` defines the nonzero-geometric-stalk support and E_i. `lem-sc-closed-irreducible-dimension-trdeg` applies to the closed irreducible subset closure{x} in the finite-type k-scheme X with generic point x. Its dimension is at most that of the closed support. The torsion condition follows directly from the coefficient exponent acting as zero on sections.
+4. `lem-sbc-higher-direct-image-forget-comparison` states the underlying-sheaf comparison; `lem-kun-affine-direct-image-support-bound` states exactly the E_{i-q} conclusion for the torsion abelian sheaf verified in Step 3. The nonnegative bound a=i is checked. Both schemes and the affine k-morphism meet its stated hypotheses. `def-kun-support` fixes the meaning of the support set; no closed-support assertion is extracted from the Stacks estimate itself.
+5. Stalk conservativity identifies the closed support with closure S. `lem-weil-pbc-constructible-module-support-constructible` says S is constructible for finite Lambda on a qcqs scheme, precisely the case obtained in Step 2. `lem-sc-noetherian-closed-subset-finite-components` applies to this closed subset of the Noetherian scheme Y, and `lem-sc-scheme-sober` gives generic points for its nonempty irreducible closed components.
+6. `def-weil-constructible-subset` explicitly says constructible sets are finite unions of locally closed subsets. After removing the other finitely many components, density of S implies density on the chosen component. Irreducibility makes one of the locally closed pieces dense there; a dense locally closed piece is open and contains the generic point. This is the few-line elementary proof of the precise subclaim, not a citation to another item's proof and not a hidden standard comparison.
+7. `lem-sc-closed-irreducible-dimension-trdeg` now applies to each C_j in the finite-type k-scheme Y. Its generic point lies in S by Step 6, so the bound is the one already obtained in Step 4. The finite-union dimension assertion is justified directly by containment of every finite irreducible chain in a component. If i-q is negative, S is already empty and conservativity gives zero. No transcendence-degree assertion at a point of zero stalk is used.
+8. `lem-weil-pbc-derived-direct-image-triangulated` is generic in the abelian categories and additive left exact functor; `def-weil-pbc-direct-image` explicitly includes module direct image, its left exactness and its injective-resolution construction. Hence the generic theorem applies to modules. The shift is checked: H^{-m}(Rf_*(F_i[i])) = R^{i-m}f_*F_i. Negative q vanishes by the nonnegative injective resolution, not by applying a q>=0 theorem outside its range.
+9. Clause (5) of `lem-weil-heart-short-exact-triangles` states the long exact cohomology sequence of every distinguished triangle. Restricting the exact segment to an open where both outer sheaves vanish forces the middle one to vanish. The support bound for the finite union was established in Step 7. This argument is elementary after that cited exact sequence.
+10. `def-sbc-standard-tstructure-derived-category` identifies the ordinary cohomology t-structure, and clause (1) of `lem-weil-heart-short-exact-triangles` supplies its truncations. Apply these to the successive truncations to isolate H^r(L)[-r]. The cohomology bound makes the bottom truncation zero and the top equal to L. The generic triangulated-direct-image node transports these triangles, and Steps 8–9 prove the finite induction. Thus the conclusion is the original full support condition, with bounded constructibility from Step 2.
+
+I tested the argument for L=0, empty X or Y, the zero coefficient ring (exponent 1), the identity affine morphism, sheaves supported on finitely many closed points (i=0), q=0, q>i, all negative m, and N=0. For example a lisse sheaf F on a positive-dimensional integral X does not have closed support of dimension zero; the proof does not mistake a dense collection of closed points for a zero-dimensional closed support. Constructibility is essential in Steps 5–6 and is explicitly obtained before using those steps. The field need not be algebraically or separably closed, and no finite Tor dimension is imposed or used.
+
+I checked delivery-errors B–E against the resulting files: self-contained unchanged statement; all cited notions exist; no new nodes or fabricated searches; no Mathlib-leaf claim; no relabelling, argument moved into a child, or circular dependency; no use of a cited node's proof in place of its statement; no extra coefficient, separation or boundedness hypothesis; exact shift signs; and explicit support conversion. I ran a read-only reachability check from every cited dependency and found no path back to this item. Non-elementary steps have lengths 566–951 characters, so none exceeds the 2000-character threshold. Generic tools outside the unit are declared in split_report.tool_uses with their role, preserving the stipulated 0F0X/BBD route.
+
+The Mathlib hits were read: they concern scheme finite-type coordinate maps, affine limits, quasi-coherent ideal-sheaf supports, or the cotangent-complex description of the etale locus. Those are different objects and do not provide the finite-coefficient etale derived support estimate. Loogle returned no hit. The second semantic phrasing and whole-Mathlib grep did not produce a candidate.

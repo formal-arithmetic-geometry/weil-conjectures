@@ -25,66 +25,199 @@
  ],
  "proof": [
   {
-   "text": "For $i<0$ the closed support of $\\mathcal H^{-i}L$ has dimension $<0$, so it is empty and $\\mathcal H^{-i}L=0$. As $L$ is bounded below, it has only finitely many nonzero cohomology sheaves $F_i=\\mathcal H^{-i}L$, $0\\le i\\le N$, each constructible with closed support $Z_i$ of dimension at most $i$.",
+   "text": "Put $F_i=\\mathcal H^{-i}L$. If $i<0$, its closed support has negative dimension and is therefore empty: any nonempty space has a chain consisting of one nonempty irreducible closed subset and has dimension at least zero. Thus every geometric stalk of $F_i$ is zero and [lemma-weil-pbc-geometric-stalk-conservative], applied to the underlying abelian sheaf, gives $F_i=0$. Since $L$ is bounded below [def-weil-pbc-derived-categories], choose $N\\ge0$ such that $\\mathcal H^rL=0$ for $r<-N$. The only possibly nonzero cohomology sheaves are the constructible $F_i$ for $0\\le i\\le N$ [def-weil-pbc-constructible-complexes], and their closed supports $Z_i$ have dimension at most $i$. In particular $L\\in D^b_c(X,\\Lambda)$. The zero complex is covered by taking $N=0$.",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-per-support-condition"
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-constructible-complexes"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "2.1.2: the support condition bounds the degrees"
+    "place": "2.1.2 and 4.1.1: support condition and reduction to the finitely many cohomology sheaves"
    }
   },
   {
-   "text": "Fix $i$ and $q\\ge0$. A point $x$ with $(F_i)_{\\bar x}\\ne0$ lies in $Z_i$, so $\\overline{\\{x\\}}\\subset Z_i$ and $\\operatorname{trdeg}_k\\kappa(x)=\\dim\\overline{\\{x\\}}\\le i$ [lem-sc-closed-irreducible-dimension-trdeg]: the support of $F_i$ in the sense of [def-kun-support] lies in $E_i(X)$. Cohomology of $\\Lambda$-module sheaves agrees with that of the underlying abelian sheaves [lem-weil-pbc-etale-module-cohomology-forget], which are torsion, so [lem-kun-affine-direct-image-support-bound] shows that every point $y$ with $(R^qf_*F_i)_{\\bar y}\\ne0$ has $\\operatorname{trdeg}_k\\kappa(y)\\le i-q$. The sheaf $R^qf_*F_i$ is constructible [thm-dg-finite-type-constructibility], so its closed support is the finite union of the closures of the generic points of its components, which have nonzero stalks (as in Step 1 of [lem-per-finite-compact-support-fibre-support-bound]); each has dimension $\\operatorname{trdeg}_k\\kappa(y)\\le i-q$ by [lem-sc-closed-irreducible-dimension-trdeg]. Thus the closed support of $R^qf_*F_i$ has dimension at most $i-q$.",
+   "text": "The positive additive exponent $e$ of the finite ring $\\Lambda$ annihilates $\\Lambda$ and is invertible in $k$, exactly the coefficient hypothesis of [thm-dg-finite-type-constructibility]. Apply that theorem both to $L$ and to every degree-zero sheaf $F_i$: $Rf_*L$ and $Rf_*F_i$ are bounded constructible. In particular $G_{i,q}:=R^qf_*F_i$ is constructible for every $q$. Since a field is Noetherian (its only ideals are $0$ and the whole field), [lem-weil-pbc-finite-type-over-noetherian] applied to $X\\to\\operatorname{Spec}k$ and $Y\\to\\operatorname{Spec}k$ makes $X,Y$ Noetherian. They are quasi-compact and quasi-separated: quasi-compactness is part of finite type, and separatedness is assumed. These are the hypotheses needed below for constructible supports and finite irreducible decompositions.",
    "uses": [
-    "lem-sc-closed-irreducible-dimension-trdeg",
-    "def-kun-support",
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-kun-affine-direct-image-support-bound",
     "thm-dg-finite-type-constructibility",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0F0X (Lemma 59.95.8): the support of R^q f_* F lies in E_{a-q}(Y)"
-   }
-  },
-  {
-   "text": "Hence $\\mathcal H^{j}(Rf_*(F_i[i]))=R^{i+j}f_*F_i$ has closed support of dimension at most $-j$ and vanishes for $i+j<0$: $Rf_*(F_i[i])$ satisfies the support condition. The truncation triangles of the standard t-structure [lem-weil-heart-short-exact-triangles] build $L$ from the finitely many $F_i[i]$; $Rf_*$ is triangulated, and the support condition is closed under extensions (the middle cohomology sheaf of a triangle vanishes where both outer ones vanish). So $Rf_*L$ satisfies the support condition. It is bounded with constructible cohomology by [thm-dg-finite-type-constructibility].",
-   "uses": [
-    "lem-weil-heart-short-exact-triangles",
-    "thm-dg-finite-type-constructibility",
-    "def-per-support-condition"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Theorem 4.1.1: the sheaf estimate and the truncation induction"
+    "place": "4.1.1 and its bounded constructible setting; finite-type constructibility is the existing theorem thm-dg-finite-type-constructibility"
+   }
+  },
+  {
+   "text": "Fix $0\\le i\\le N$. Write $S(F_i)$ for the set of points with a nonzero geometric stalk, as in [def-kun-support]. If $x\\in S(F_i)$, then $x\\in Z_i$ and the irreducible closed subset $\\overline{\\{x\\}}$ is contained in $Z_i$. Its generic point is $x$, so [lem-sc-closed-irreducible-dimension-trdeg] gives $\\operatorname{trdeg}_k\\kappa(x)=\\dim\\overline{\\{x\\}}\\le\\dim Z_i\\le i$. Consequently $S(F_i)\\subset E_i(X)$. The underlying abelian sheaf of $F_i$ is torsion: multiplication by the positive integer $e$ of Step 2 kills every section, because it kills $1\\in\\Lambda$.",
+   "uses": [
+    "def-kun-support",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0X, lemma-interlude-I: translate the closed-support bound into the E_i support hypothesis"
+   }
+  },
+  {
+   "text": "For $q\\ge0$, [lem-sbc-higher-direct-image-forget-comparison] identifies the underlying abelian sheaf of $G_{i,q}$ with the abelian higher direct image $R^qf_*(F_i)_{\\mathrm{ab}}$. Apply [lem-kun-affine-direct-image-support-bound] with $K=k$, $a=i$ and the torsion abelian sheaf $(F_i)_{\\mathrm{ab}}$. Both schemes are finite type over $k$, $f$ is affine, $i\\ge0$, and Step 3 verifies precisely the required stalk-support containment. It follows that $S(G_{i,q})\\subset E_{i-q}(Y)$. In particular every point $y$ with nonzero geometric stalk has $\\operatorname{trdeg}_k\\kappa(y)\\le i-q$. If $i-q<0$, this set is empty by the convention in the cited estimate.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-kun-affine-direct-image-support-bound",
+    "def-kun-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0X, lemma-interlude-I; coefficient comparison supplied by the existing higher-direct-image comparison node"
+   }
+  },
+  {
+   "text": "Put $S=S(G_{i,q})$ and $Z=\\overline S$. This $Z$ is the closed support in the statement: on an open $U$ disjoint from $S$, all geometric stalks of $G_{i,q}|_U$ vanish, hence the restriction vanishes by [lemma-weil-pbc-geometric-stalk-conservative]; conversely a zero restriction has zero stalks. By [lem-weil-pbc-constructible-module-support-constructible], $S$ is constructible (the coefficient ring is finite, the sheaf constructible by Step 2, and $Y$ qcqs). By [lem-sc-noetherian-closed-subset-finite-components], write $Z=C_1\\cup\\cdots\\cup C_r$ for its finitely many distinct irreducible components. Each $C_j$ has a generic point $\\eta_j$ by [lem-sc-scheme-sober]. When $Z$ is empty there are no components.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-constructible-module-support-constructible",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YS, lemma-support-constructible (3); closed support and irreducible components"
+   }
+  },
+  {
+   "text": "Every $\\eta_j$ of Step 5 belongs to $S$. Here are the elementary topological details, rather than an appeal to another proof. Remove all components other than $C_j$: the open $V=Y\\setminus\\bigcup_{h\\ne j}C_h$ meets $C_j$ in a nonempty open, and $S\\cap V$ is dense there since $\\overline S=Z$. Therefore $S\\cap C_j$ is dense in $C_j$. By [def-weil-constructible-subset], write $S$ as a finite union of locally closed subsets. Their intersections with $C_j$ are locally closed and their closures cover $C_j$; irreducibility forces one of these closures to equal $C_j$. That intersection, being locally closed and dense, is a nonempty open of $C_j$, and so contains its generic point $\\eta_j$. Hence $\\eta_j\\in S$. This argument proves exactly the generic-point fact needed here from the finite-union definition; it does not assume that a constructible sheaf has closed stalk support.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005K, lemma-generic-point-in-constructible, elementary finite-union argument written out"
+   }
+  },
+  {
+   "text": "For every component $C_j$ of $Z$, Steps 4 and 6 and [lem-sc-closed-irreducible-dimension-trdeg] give $\\dim C_j=\\operatorname{trdeg}_k\\kappa(\\eta_j)\\le i-q$. Thus $\\dim Z\\le i-q$. Indeed any chain of irreducible closed subsets of a finite union of closed subsets lies in one member: its largest irreducible subset lies in one member by irreducibility, and then so does the whole chain. Hence the dimension of a finite union is the maximum of their dimensions. For $i-q<0$, Step 4 instead gives $S=\\varnothing$, so $Z=\\varnothing$ and $G_{i,q}=0$ by [lemma-weil-pbc-geometric-stalk-conservative]. We have proved the closed-support bound for every $R^qf_*F_i$, including the vanishing when $q>i$.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1C in Tag 0A21, lemma-dimension-locally-algebraic (6); combined with Tag 0F0X via Step 4"
+   }
+  },
+  {
+   "text": "The derived direct image commutes with shifts and carries distinguished triangles to distinguished triangles by [lem-weil-pbc-derived-direct-image-triangulated], applied to the additive left exact module direct image of [def-weil-pbc-direct-image]. For $m\\in\\mathbf Z$ put $q=i-m$. Then $\\mathcal H^{-m}(Rf_*(F_i[i]))=R^qf_*F_i$. If $q\\ge0$, Step 7 bounds its closed-support dimension by $i-q=m$. If $q<0$, this sheaf vanishes: compute the right derived functor on an injective resolution $F_i\\to I^0\\to I^1\\to\\cdots$ as in [def-weil-pbc-direct-image]; the direct-image complex has zero terms in negative degrees. Therefore every $Rf_*(F_i[i])$ satisfies the required support condition.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1.1, cohomology-sheaf reduction; exactness and shifts of the derived direct image"
+   }
+  },
+  {
+   "text": "The support condition is closed under extensions. For a distinguished triangle $A\\to B\\to C\\to A[1]$, the long exact cohomology sequence of [lem-weil-heart-short-exact-triangles] gives an exact segment $\\mathcal H^{-m}A\\to\\mathcal H^{-m}B\\to\\mathcal H^{-m}C$. On the open complement of the union of the two outer closed supports the outer sheaves vanish, so exactness forces the middle sheaf to vanish. Its closed support is contained in that finite union, whose dimension is at most $m$ when both outer objects satisfy the condition (the finite-union dimension argument was written in Step 7). This proves extension closure directly, for all integers $m$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3-1.3.6 and 4.1.1: extension closure from the cohomological functor"
+   }
+  },
+  {
+   "text": "Use the standard t-structure [def-sbc-standard-tstructure-derived-category] and the truncation triangles [lem-weil-heart-short-exact-triangles]. Since Step 1 gives cohomology only in $[-N,0]$, the successive standard truncations have triangles $\\tau^{\\le r-1}L\\to\\tau^{\\le r}L\\to(\\mathcal H^rL)[-r]\\to(\\tau^{\\le r-1}L)[1]$ for $-N\\le r\\le0$. Their bottom object $\\tau^{\\le-N-1}L$ is zero (all its cohomology is zero), and their top object $\\tau^{\\le0}L$ is $L$. The third objects are exactly the $F_i[i]$ with $i=-r$. Apply $Rf_*$, using its triangulated property from Step 8. Starting at zero, Step 8 supplies the support condition on every third object and Step 9 supplies the induction step. After the finitely many values of $r$, $Rf_*L$ satisfies the support condition. Its boundedness and constructible cohomology were already established in Step 2. No finite Tor-amplitude hypothesis on $L$ or separable-closure hypothesis on $k$ has been used.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1.1, reduction to H^r(L)[-r], with the standard truncation construction of 1.3.2(i)"
    }
   }
  ],
  "proof_deps": [
   "def-kun-support",
-  "def-per-support-condition",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-constructible-subset",
   "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
   "lem-kun-affine-direct-image-support-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
   "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
   "lem-weil-heart-short-exact-triangles",
-  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "thm-dg-finite-type-constructibility"
  ],
  "proof_origin": {
-  "by": "L (route decision of the human, 2026-10-19)",
+  "by": "agent",
   "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "Theorem 4.1.1 with the finite-coefficient calculation of Stacks Tag 0F0X"
+  "place": "Theorem 4.1.1, ordinary cohomology-sheaf reduction; the sheaf estimate is Stacks Tag 0F0X, and the closed-support conversion is written out from constructibility and finite irreducible decomposition."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine finite type morphism of schemes over a field the derived direct image preserves the perverse support condition with finite etale coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|affine.*support|support.*affine",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean. Source grep scoped to Mathlib/AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, CategoryTheory.Sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin affine vanishing etale cohomology direct image support dimension",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin vanishing theorem higher direct images of torsion etale sheaves along affine morphisms have support bounded by transcendence degree minus cohomological degree",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(vanish|support)|Artin.*vanish|[Pp]erverse",
+   "results": "5 hits: Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results concern scheme morphisms, ideal/module supports or affine limits, not this etale derived support estimate"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "L",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -102,5 +235,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-affine-direct-image-support-bound",
+  "worker": "stage1 Q05",
+  "summary": "Kept the finite-coefficient statement and the stipulated BBD/Stacks affine-support route. Proved boundedness of the input, used finite-type constructibility, replaced global-cohomology forgetting by the existing higher-direct-image comparison, proved the constructible stalk-to-closed-support conversion explicitly, and finished by a finite standard-truncation induction. Reused every required theorem: no new nodes.",
+  "blueprint": "Realizes the affine Rf_* support estimate invoked in Step 4 (cosupport side) of lem-per-artin-gabber-affine-curve; main-20261015 proof Step 3, via the human route decision of 2026-10-19. Follows BBD 4.1.1 and Stacks 0F0X rather than the unsupported block substitution in the imported sketch.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-affine-direct-image-support-bound",
+    "why": "Generic input for the finite-coefficient affine support argument: the stipulated Stacks 0F0X sheaf estimate; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic input for the finite-coefficient affine support argument: comparison of module and abelian higher direct images; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic input for the finite-coefficient affine support argument: Dimension of an irreducible closed subset from its generic residue field; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic input for the finite-coefficient affine support argument: A closed subset of a Noetherian scheme has finitely many irreducible components; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic input for the finite-coefficient affine support argument: Schemes are sober; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic input for the finite-coefficient affine support argument: standard truncations and their cohomological exact sequences; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-support-constructible",
+    "why": "Generic input for the finite-coefficient affine support argument: The support of a constructible sheaf of modules on a qcqs scheme is well defined and constructible; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic input for the finite-coefficient affine support argument: The derived direct image on bounded below derived categories is a triangulated functor; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic input for the finite-coefficient affine support argument: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6); the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic input for the finite-coefficient affine support argument: Conservativity of geometric stalks; the perverse unit has no replacement for this general tool."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Generic input for the finite-coefficient affine support argument: bounded constructibility for finite-coefficient direct images; the perverse unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-affine-direct-image-support-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-7b0a7d478",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-7b0a7d478 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one item, no new nodes, no fixes, and the statement is byte-identical to the base. The item is not in route-pivot-dropped.txt, and nothing in its closure (11,891 nodes) is a dropped id or forms a cycle; its only citer, the artin-gabber parent, applies it in Step 4 to a D^+ constructible SuppCon L, matching its hypotheses. Mechanical route check: 'gabber' appears only as the parent id in created.item and blueprint.from; 't-structure' means the ordinary standard t-structure (Steps 9-10), not the middle one. Coefficients stay finite, and nothing uses Qbar_l, an adic category, biduality, Gabber finiteness, uniformization or alterations. The closures of thm-dg-finite-type-constructibility, lem-kun-affine-direct-image-support-bound, lem-sbc-higher-direct-image-forget-comparison and lem-weil-pbc-constructible-module-support-constructible are free of those routes. No SGA is cited; BBD 4.1.1 (pp. 102-103) is cited only for the truncation reduction, and the sheaf estimate is Stacks 0F0X lemma-interlude-I, whose statement I checked. Steps: Step 1 gives boundedness (negative-dimensional support is empty). Step 2 applies dg-constructibility with exponent e (e=1 covers the zero ring) and gets X, Y Noetherian hence qcqs. Step 3 shows S(F_i) is in E_i via the trdeg node, and the underlying sheaf is torsion. Step 4 uses the sheaf-level forget comparison plus 0F0X to get E_{i-q}. Steps 5-6 identify the closed support with the closure of S and show each generic point lies in S, using constructibility, finite components, sobriety and a correct density argument. Step 7 bounds dim Z by the maximum over components, and the sheaf is 0 when i-q<0. Step 8 checks the shift H^{-m}(Rf_*(F_i[i])) = R^{i-m}f_*F_i, which vanishes for q<0. Step 9 proves extension closure from the long exact sequence. Step 10 is the finite truncation induction from tau^{<=-N-1}L=0 up to L. Edge cases checked: L=0, Lambda=0, q>i, f=id, lisse sheaf on a curve. The 11 tool_uses are all generic inputs and accepted. The delivery correctly replaced the base's global-cohomology forget citation with the sheaf-level comparison and wrote out the generic-point argument instead of pointing to another node's proof. Advisory: the unchanged statement says 'morphism between k-schemes', which I read as a k-morphism, as in Stacks and in the parent."
  }
 }
