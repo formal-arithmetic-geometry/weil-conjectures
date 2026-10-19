@@ -15,13 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Paper.SfCommonStageWeilCohomology
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Exactness of the etale to pro-etale comparison pullback
@@ -68,48 +61,125 @@ noncomputable def comparisonConstantRingMap (T : Scheme.{u}) (Λ : Type (u + 1))
             ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of Λ))).app
               (Opposite.op (Scheme.ProEt.mk (𝟙 T)))))
 
+private noncomputable def tensorSectionMap
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {A B : Sheaf J CommRingCat.{u + 1}} (c : A ≅ B)
+    (M : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (W : Cᵒᵖ) :
+    ((ModuleCat.extendScalars (c.hom.hom.app W).hom).obj (M.val.obj W)) →+
+      M.val.obj W := by
+  letI : Module (A.obj.obj W) (B.obj.obj W) :=
+    Module.compHom (B.obj.obj W) (c.hom.hom.app W).hom
+  let e : A.obj.obj W ≃+* B.obj.obj W :=
+    (((sheafToPresheaf J CommRingCat.{u + 1}).mapIso c).app W).commRingCatIsoToRingEquiv
+  let f : B.obj.obj W →+ M.val.obj W →+ M.val.obj W :=
+    { toFun := fun b ↦
+        { toFun := fun m ↦ e.symm b • m
+          map_zero' := smul_zero _
+          map_add' := smul_add _ }
+      map_zero' := by ext m; simp
+      map_add' := by intro b d; ext m; simp [add_smul] }
+  exact TensorProduct.liftAddHom f (by
+    intro r b m
+    change B.obj.obj W at b
+    change e.symm (e r * b) • m = e.symm b • (r • m)
+    rw [map_mul, e.symm_apply_apply, mul_smul, smul_comm])
+
+private theorem tensorSectionMap_tmul
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {A B : Sheaf J CommRingCat.{u + 1}} (c : A ≅ B)
+    (M : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (W : Cᵒᵖ)
+    (b : B.obj.obj W) (m : M.val.obj W) :
+    tensorSectionMap c M W (b ⊗ₜ[_, (c.hom.hom.app W).hom] m) =
+      c.inv.hom.app W b • m := rfl
+
+private noncomputable def tensorSectionIso
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {A B : Sheaf J CommRingCat.{u + 1}} (c : A ≅ B)
+    (M : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (W : Cᵒᵖ) :
+    AddCommGrpCat.of ((ModuleCat.extendScalars (c.hom.hom.app W).hom).obj
+      (M.val.obj W)) ≅ AddCommGrpCat.of (M.val.obj W) := by
+  letI : Module (A.obj.obj W) (B.obj.obj W) :=
+    Module.compHom (B.obj.obj W) (c.hom.hom.app W).hom
+  let e : A.obj.obj W ≃+* B.obj.obj W :=
+    (((sheafToPresheaf J CommRingCat.{u + 1}).mapIso c).app W).commRingCatIsoToRingEquiv
+  let back : M.val.obj W →+ ((ModuleCat.extendScalars (c.hom.hom.app W).hom).obj
+      (M.val.obj W)) :=
+    { toFun := fun m ↦ (1 : B.obj.obj W) ⊗ₜ[_, (c.hom.hom.app W).hom] m
+      map_zero' := TensorProduct.tmul_zero _ _
+      map_add' := TensorProduct.tmul_add _ }
+  refine ⟨AddCommGrpCat.ofHom (tensorSectionMap c M W), AddCommGrpCat.ofHom back, ?_, ?_⟩
+  · ext z
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b m =>
+      change B.obj.obj W at b
+      change (1 : B.obj.obj W) ⊗ₜ[_, (c.hom.hom.app W).hom] (e.symm b • m) = b ⊗ₜ m
+      rw [← TensorProduct.smul_tmul]
+      change (e (e.symm b) * 1) ⊗ₜ m = b ⊗ₜ m
+      rw [e.apply_symm_apply, mul_one]
+    | add z w hz hw =>
+      change back (tensorSectionMap c M W (z + w)) = z + w
+      change back (tensorSectionMap c M W z) = z at hz
+      change back (tensorSectionMap c M W w) = w at hw
+      rw [map_add, map_add, hz, hw]
+  · ext m
+    change tensorSectionMap c M W ((1 : B.obj.obj W) ⊗ₜ[_, (c.hom.hom.app W).hom] m) = m
+    rw [tensorSectionMap_tmul, map_one, one_smul]
+
+private noncomputable def tensorPresheafIso
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+    [HasWeakSheafify J AddCommGrpCat.{u + 1}]
+    {A B : Sheaf J CommRingCat.{u + 1}} (c : A ≅ B)
+    (M : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) :
+    (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1}
+      c.hom M).presheaf ≅ M.val.presheaf := by
+  refine NatIso.ofComponents (tensorSectionIso c M) ?_
+  intro X Y i
+  ext z
+  change tensorSectionMap c M Y
+    (SheafOfModules.changeOfRingsMapOfUniverses c.hom M i z) =
+      M.val.map i (tensorSectionMap c M X z)
+  induction z using TensorProduct.induction_on with
+  | zero => simp
+  | tmul b m =>
+    change B.obj.obj X at b
+    erw [SheafOfModules.changeOfRingsMap_tmulOfUniverses c.hom M i b m]
+    rw [tensorSectionMap_tmul, tensorSectionMap_tmul]
+    have hn := ConcreteCategory.congr_hom (c.inv.hom.naturality i) b
+    change c.inv.hom.app Y (B.obj.map i b) = A.obj.map i (c.inv.hom.app X b) at hn
+    rw [hn]
+    exact ((M.val.restrictₛₗ i).map_smulₛₗ _ _).symm
+  | add z w hz hw =>
+    simp only [map_add, hz, hw]
+
 /-- The inverse image along the etale/pro-etale comparison is exact on finite
 coefficient module sheaves and commutes with cohomology sheaves.
 
 Source: Stacks Project, Tags 04JC and 03D2; Pro-etale Cohomology, Tags 099R and
 0GLZ (blueprint: lem-sf-comparison-pullback-exact).
-Proof, following the node's six steps:
-1. In the common larger universe, the comparison-morphism node supplies the
-   finite-limit-preserving left adjoint L and restriction right adjoint R.
-   Lift the adjunction to ring objects by
-   lem-weil-pbc-adjunction-lifts-group-ring-objects and identify them with ring
-   sheaves by lem-weil-pbc-sheaf-algebraic-structures-objects (Tag 00YV).
-2. Since R preserves sections at the terminal object, the constant-sheaf
-   adjunction (lem-weil-pbc-constant-sheaf-maps-global-sections, Tag 0H7J)
-   identifies Hom(L(Λ_et), G) with Hom(Λ_proet, G), naturally in G. The images
-   of identity maps give inverse ring maps. The forward map is exactly
-   comparisonConstantRingMap: its adjunct extends the constant scalar sections.
-3. The module-adjunction theorem
-   lem-weil-pbc-ringed-topoi-module-adjunction identifies ringed pullback with
-   scalar extension of the induced inverse-image module (Tags 03D2 and 03D7).
-   For any module M over L(Λ_et), the map on sectionwise tensors sends
-   b tensor m to c.inv(b) times m; the inverse sends m to 1 tensor m.
-   The balanced relation gives both inverse identities and the formulas commute
-   with restriction. Sheafification gives the displayed abelian-sheaf isomorphism.
-   This formula also identifies the induced scalar action; for constant λ it is
-   L of multiplication by λ, as in the comparison-morphism node. Uniqueness on
-   local pure tensors gives naturality in M. Thus scalar extension along c has
-   the same underlying abelian sheaves and is exact, expressing flatness.
-4. Apply lem-weil-pbc-site-pullback-abelian-exact (Tag 04JC). By
-   def-weil-sheaf-of-modules-category, kernels and sheafified cokernels have
-   the same underlying abelian sheaves. The module inverse image therefore
-   preserves both and is additive. Finite limits are kernels between finite
-   biproducts, and finite colimits are their cokernel analogues, including the
-   empty diagram. This proves the three exact-functor clauses.
-5. Apply lem-weil-pbc-exact-functor-complex-cohomology to each three-term
-   segment of an arbitrary complex. It identifies pulled-back cycles and
-   boundaries and hence their quotient, naturally in the complex. These are
-   the cohomology sheaves of def-weil-derived-cohomology-sheaves, with the
-   specified direction of the natural isomorphism and no boundedness condition.
-6. For a quasi-isomorphism, naturality conjugates the pulled-back homology
-   map to the image of its invertible homology map. For vanishing below a,
-   the same isomorphism and preservation of zero give vanishing in every i < a.
-   This includes every negative degree and proves both final clauses. -/
+Proof:
+1. Compose the constant-sheaf adjunction on the etale site with the ring-valued
+   comparison adjunction. Restriction preserves sections at the terminal object,
+   so uniqueness of left adjoints identifies the composite with the pro-etale
+   constant-sheaf functor. The hom-equivalence formula for this identification
+   shows that its forward map is exactly comparisonConstantRingMap.
+2. Sectionwise tensor contraction sends b tensor m to c.inv(b) times m and its
+   inverse sends m to 1 tensor m. The balanced relation proves the inverse
+   identities. Naturality of c.inv and semilinearity of restrictions give an
+   isomorphism of abelian presheaves. Sheafify this isomorphism and compose with
+   the sheafification counit. Naturality of the unit and the triangle identity
+   give the required formula on the original pure tensors.
+3. The existing comparisonUpperStar instances prove additivity and preservation
+   of finite limits and finite colimits, directly for fixed coefficient modules.
+4. Mathlib's mapHomologyIso on each three-term segment gives the natural
+   cohomology isomorphism. Preservation of quasi-isomorphisms is its existing
+   consequence; preservation of zero objects and the same isomorphism give
+   vanishing in every degree below the specified bound. -/
 theorem comparisonPullbackExact (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] :
     (∃ c :
@@ -188,6 +258,52 @@ theorem comparisonPullbackExact (T : Scheme.{u}) (Λ : Type (u + 1))
             IsZero
               ((((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapHomologicalComplex
                   (ComplexShape.up ℤ)).obj K).homology i)) := by
-  sorry
+  let F := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T
+  refine ⟨?_, inferInstance, inferInstance, inferInstance, ?_, ?_, ?_⟩
+  · let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Scheme.toProEt T) CommRingCat.{u + 1} T.smallEtaleTopology (Scheme.ProEt.topology T)
+    let adjEt := constantSheafAdj T.smallEtaleTopology CommRingCat.{u + 1}
+      (Scheme.Etale.isTerminalMkId T)
+    let adjPro := constantSheafAdj (Scheme.ProEt.topology T) CommRingCat.{u + 1}
+      ((Scheme.Etale.isTerminalMkId T).isTerminalObj (Scheme.toProEt T))
+    let e := (adjEt.comp adj).leftAdjointUniq adjPro
+    refine ⟨e.app (CommRingCat.of Λ), ?_, ?_⟩
+    · apply (adj.homEquiv _ _).injective
+      dsimp only [comparisonConstantRingMap]
+      rw [Equiv.apply_symm_apply]
+      apply (adjEt.homEquiv _ _).injective
+      change (adjEt.comp adj).homEquiv _ _ (e.hom.app (CommRingCat.of Λ)) = _
+      rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+      rw [Equiv.apply_symm_apply]
+      rfl
+    · intro M
+      let c := e.app (CommRingCat.of Λ)
+      let P := SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} c.hom M
+      let Q := (SheafOfModules.toSheaf _).obj M
+      let p := tensorPresheafIso c M
+      let a := CategoryTheory.sheafificationAdjunction (Scheme.ProEt.topology T)
+        AddCommGrpCat.{u + 1}
+      refine ⟨(presheafToSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).mapIso p ≪≫
+        asIso (a.counit.app Q), ?_⟩
+      intro W b m
+      let z : P.obj W := b ⊗ₜ[_, (c.hom.hom.app W).hom] m
+      have hn := congrArg (fun f ↦ f.app W z) (a.unit_naturality p.hom)
+      have hc (y : Q.obj.obj W) :=
+        congrArg (fun f ↦ f.app W y) (a.right_triangle_components Q)
+      change (a.counit.app Q).hom.app W
+        (((presheafToSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).map p.hom).hom.app W
+          ((toSheafify (Scheme.ProEt.topology T) P.presheaf).app W z)) =
+            c.inv.hom.app W b • m
+      exact (congrArg ((a.counit.app Q).hom.app W) hn).trans
+        ((hc (p.hom.app W z)).trans (tensorSectionMap_tmul c M W b m))
+  · intro i
+    exact ⟨NatIso.ofComponents (fun K ↦ (K.sc i).mapHomologyIso F)
+      (fun f ↦ ShortComplex.mapHomologyIso_hom_naturality
+        ((HomologicalComplex.shortComplexFunctor _ _ i).map f) F)⟩
+  · intro K L f hf
+    have : QuasiIso f := hf
+    exact HomologicalComplex.quasiIso_map_of_preservesHomology f F
+  · intro a K hK i hi
+    exact (F.map_isZero (hK i hi)).of_iso ((K.sc i).mapHomologyIso F)
 
 end AlgebraicGeometry

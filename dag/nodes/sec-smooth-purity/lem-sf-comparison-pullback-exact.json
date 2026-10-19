@@ -31,103 +31,47 @@
  ],
  "proof": [
   {
-   "text": "Work in the larger universe in which the chosen site representatives are small. Write $L=\\nu_T^{-1}$ and $R=\\nu_{T,*}$. The comparison-morphism node gives $L\\dashv R$, with $L$ preserving finite limits and $R$ given by restriction along the inclusion of sites. In particular the terminal object $T/T$ is sent to $T/T$, so $(RG)(T)=G(T)$. Apply the finite-product adjunction lifting theorem to obtain the adjunction on commutative ring objects. Under the equivalence between ring objects of the sheaf topos and ring sheaves, this is an adjunction $L_{\\mathrm{ring}}\\dashv R_{\\mathrm{ring}}$ on ring sheaves, with underlying set functor $L$. This use is a generic algebraic-structure tool, not an assertion of module exactness.",
+   "text": "Compose the constant-sheaf adjunction on the etale site with the constructed comparison adjunction on commutative-ring sheaves. Its right adjoint is evaluation at the pro-etale terminal object, definitionally because restriction does not change that object. Uniqueness of left adjoints gives the constant-ring isomorphism. Apply the two hom-equivalences and homEquiv_leftAdjointUniq_hom_app to identify its hom with comparisonConstantRingMap.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, ring-object construction and adjunction; comparison sites: proetale.tex Tag 099R, section-comparison"
-   }
-  },
-  {
-   "text": "Put $A=\\Lambda_{T_{\\mathrm{et}}}$ and $B=\\Lambda_{T_{\\mathrm{proet}}}$. For every pro-etale sheaf of commutative rings $G$, the ring adjunction and the constant-sheaf universal property give natural bijections\n$$\\operatorname{Hom}(L_{\\mathrm{ring}}A,G)\\cong\\operatorname{Hom}(A,R_{\\mathrm{ring}}G)\\cong\\operatorname{Hom}_{\\mathrm{CRing}}(\\Lambda,G(T))\\cong\\operatorname{Hom}(B,G).$$\nDenote this natural bijection by $\\Phi_G$, put $X=L_{\\mathrm{ring}}A$, and set $c=\\Phi_B^{-1}(\\mathrm{id}_B):X\\to B$ and $d=\\Phi_X(\\mathrm{id}_X):B\\to X$. Naturality gives $\\Phi_X(dc)=d\\Phi_B(c)=d=\\Phi_X(\\mathrm{id}_X)$ and $cd=c\\Phi_X(\\mathrm{id}_X)=\\Phi_B(c)=\\mathrm{id}_B$; injectivity of $\\Phi_X$ gives $dc=\\mathrm{id}_X$. Hence $c:L_{\\mathrm{ring}}A\\xrightarrow{\\sim}B$ is a ring-sheaf isomorphism. More explicitly its adjoint $A\\to R_{\\mathrm{ring}}B$ is the map extending $\\lambda\\mapsto\\lambda\\in B(T)$, so this is the canonical constant-coefficient comparison, with its ring structure and all constant sections fixed. The only calculation here is composition of the cited natural bijections.",
-   "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
     "lem-weil-pbc-constant-sheaf-maps-global-sections"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf; Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
-   }
+   "elementary": true
   },
   {
-   "text": "For an $A$-module sheaf $F$, apply $L$ to its addition, zero, negation and action $A\\times F\\to F$. The finite-product comparisons identify the latter map with $L_{\\mathrm{ring}}A\\times LF\\to LF$; applying $L$ to each module-axiom diagram proves the module axioms, and applying $L$ to the action-compatibility square proves functoriality. This is the induced module structure of the comparison-morphism node, expressed as a variable-ring action. Give $LF$ the $B$-action $b\\cdot m=c^{-1}(b)m$, using $c$ from step 2. To check agreement with the fixed-$\\Lambda$ construction, let $a_\\lambda:*\\to A$ and $b_\\lambda:*\\to B$ be the constant sections associated to $\\lambda\\in\\Lambda$. The description of the adjunct of $c$ in step 2 and naturality of the adjunction unit give $c\\circ L(a_\\lambda)=b_\\lambda$, using $L(*)\\cong *$. Therefore multiplication by $b_\\lambda$ on $LF$ is $L$ of multiplication by $a_\\lambda$ on $F$, exactly the scalar endomorphism specified in the comparison-morphism node. The module adjunction theorem identifies ringed-site pullback with $LF\\otimes_{L_{\\mathrm{ring}}A}B$, whose canonical map to the transported $LF$ is $m\\otimes b\\mapsto c^{-1}(b)m$ and whose inverse is $m\\mapsto m\\otimes1$. The tensor relation makes these maps inverse on each sectionwise tensor product; they commute with restrictions and hence on the associated sheaves. For any module sheaf over $L_{\\mathrm{ring}}A$ these formulas identify extension of scalars along $c$ with the same underlying abelian sheaf endowed with the displayed $B$-action, with inverse restriction along $c$. Kernels and sheafified sectionwise cokernels retain their underlying abelian sheaves by the module-category node, so this extension of scalars is exact. Equivalently $B$ is flat over $L_{\\mathrm{ring}}A$, which is precisely flatness of this morphism of ringed sites. This proves clause 1.",
+   "text": "For an arbitrary module sheaf over the inverse-image ring, define sectionwise additive tensor contraction b tensor m mapped to c inverse(b) times m. Its balanced relation follows from multiplicativity of c inverse and commuting scalar actions. The inverse m mapped to 1 tensor m has both inverse identities by the tensor relation and the ring-isomorphism inverse laws. Naturality of c inverse and semilinearity of module restrictions make these isomorphisms an isomorphism of underlying abelian presheaves. Sheafification and its counit give the required abelian-sheaf isomorphism; unit naturality and the right triangle identity prove the specified pure-tensor formula.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "def-pur-sheaf-tensor-product",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D2, lemma-pullback-module; Tag 03D7, lemma-adjoint-pullback-pushforward-modules; definition-flat-morphism immediately before Tag 04JC, lemma-flat-pullback-exact"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the abelian inverse-image exactness theorem to the comparison morphism. Its hypotheses are satisfied by step 1: this is a morphism of sites inducing a finite-limit-preserving left adjoint. Hence $L_{\\mathrm{Ab}}$ is additive and preserves kernels and cokernels of abelian sheaves. After forgetting module actions, the functor of step 3 is exactly $L_{\\mathrm{Ab}}$: both act by $L$ on the underlying sheaf and on its group operations. Kernels of module maps are the sectionwise kernels with restricted scalar action; cokernels are the sheafifications of sectionwise quotients with the descended scalar action, as specified by the module-category node. These are also the underlying abelian kernels and cokernels, because the same inclusions and quotient maps have those universal properties after forgetting scalars. Therefore the kernel and cokernel comparisons for $\\nu_T^*$ are isomorphisms: they are module maps and are isomorphisms on underlying abelian sheaves; the inverse of a bijective module homomorphism is linear. Additivity follows from $L_{\\mathrm{Ab}}$ and faithfulness of forgetting. An additive functor preserves zero and finite biproducts: apply it to the identities for biproduct injections and projections. For a finite diagram $D:J\\to\\operatorname{Mod}(A)$, its limit is the kernel of the map $\\bigoplus_{j\\in\\mathrm{Ob}(J)}D(j)\\to\\bigoplus_{(a:j\\to k)\\in\\mathrm{Mor}(J)}D(k)$ with $a$-component $D(a)x_j-x_k$: factoring through this kernel says exactly that the components form a cone. Its colimit is the cokernel of $\\bigoplus_{(a:j\\to k)\\in\\mathrm{Mor}(J)}D(j)\\to\\bigoplus_{j\\in\\mathrm{Ob}(J)}D(j)$, sending an element $y$ in the $a$-summand to $D(a)y$ in the $k$-summand minus $y$ in the $j$-summand: killing these relations says exactly that a map is a cocone. These formulas include the empty diagram, with empty biproduct equal to zero. Thus $\\nu_T^*$ preserves finite limits and finite colimits, proving clause 2.",
+   "text": "Use the already proved source-library instances additive_comparisonUpperStar, preservesFiniteLimits_comparisonUpperStar and the comparison left-adjoint instance for the three exactness clauses. They apply directly to ModuleCat of the coefficient ring, so no lift to algebraic objects or separate abelian exactness theorem is needed.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC, lemma-flat-pullback-exact, first paragraph of proof; Tag 03DA, lemma-abelian, kernel/cokernel description and forgetful functor"
-   }
+   "elementary": true
   },
   {
-   "text": "The two module-sheaf categories are abelian by the module-category node, and step 4 makes $\\nu_T^*$ an exact additive functor between them. Apply the exact-functor complex-cohomology theorem in every integer degree. It gives\n$$c_K^i:\\mathcal H^i(\\nu_T^*K)\\xrightarrow{\\sim}\\nu_T^*\\mathcal H^i(K),$$\nnatural in $K$, with the indicated direction. In concrete terms the theorem identifies the kernel of the pulled-back differential with the pulled-back cycle sheaf and the image of the preceding differential with the pulled-back boundary sheaf, then identifies their quotient. Thus these are the cohomology sheaves defined in the cohomology-sheaf node, not cohomology of the presheaves of sections. The theorem applies to arbitrary cochain complexes, with no boundedness assumption.",
+   "text": "Apply ShortComplex.mapHomologyIso to each K.sc i and use mapHomologyIso_hom_naturality on shortComplexFunctor.map to assemble the requested natural isomorphism. Apply HomologicalComplex.quasiIso_map_of_preservesHomology to quasi-isomorphisms. Apply Functor.map_isZero and transport along the same homology isomorphism to prove vanishing below every integer bound.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-derived-cohomology-sheaves"
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; applied to each three-term segment of K; sites-modules.tex Tag 03DA"
-   }
-  },
-  {
-   "text": "For a quasi-isomorphism $h:K\\to K'$, naturality of the isomorphisms in step 5 gives $c_{K'}^i\\mathcal H^i(\\nu_T^*h)=\\nu_T^*(\\mathcal H^i(h))c_K^i$. The right-hand cohomology map is an isomorphism because every functor preserves inverse pairs. Consequently the pulled-back map is a quasi-isomorphism. If $\\mathcal H^i(K)=0$ for $i<a$, step 5 and $\\nu_T^*0=0$ give $\\mathcal H^i(\\nu_T^*K)=0$ for every $i<a$. This proves both final assertions of clause 3, including arbitrary negative degrees.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-pbc-derived-categories"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; derived.tex Tag 015F, lemma-right-derived-exact-functor, preservation of quasi-isomorphisms"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-derived-categories"
+  "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 04JC, lemma-flat-pullback-exact: exact abelian inverse image followed by extension of scalars; Tag 03D2, lemma-pullback-module; sites.tex Tags 00YV and 0H7J for the constant ring; homology.tex Tag 010N for complexes."
+  "place": "Tags 03D2 and 04JC; sites.tex Tag 0H7J; homology.tex Tag 010N. Lean realization uses the source-library comparison exactness instances and Mathlib adjunction uniqueness and homology API."
  },
  "mathlib_searches": [
   {
@@ -267,11 +211,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-site-pullback-abelian-exact"
+  "lem-weil-pbc-constant-sheaf-maps-global-sections"
  ],
  "reviewed": {
   "date": "2026-10-15",
@@ -303,5 +243,15 @@
    "AlgebraicGeometry.comparisonPullbackExact"
   ],
   "note": "Second reading restores clause 1: canonical constant-ring map from the two existing adjunctions, and the scalar-extension identification on all inverse-ring module sheaves, characterized on local pure tensors. This identifies the induced action and expresses flatness without identifying the distinct site object and morphism universes. No mathematical node statement change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T005312-L-2750480",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
