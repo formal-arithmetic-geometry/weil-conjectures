@@ -1,0 +1,115 @@
+{
+ "id": "def-sp-tower-class-pullback",
+ "kind": "definition",
+ "title": "Normalized pullback of coefficient-tower Tate lines",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$ and a morphism $f:X\\to Y$. Use the recorded normalized tower geometry [det-sp-tower-shriek-levels] and the finite Tate-line realizations of [def-sp-tower-class-diagonal]. Pull a pro-etale chart $U\\to Y$ back to $X$; the root restriction is the map on roots induced by the actual global-sections ring homomorphism. Evaluate the ordinary adjunction transpose of a tower module map using the recorded direct-image evaluation comparison. Define line-pullback data as an isomorphism from the ordinary inverse image of the scalar-extended root line on $Y$ to that on $X$, whose evaluated adjoint on every pure tensor $a\\otimes z$ is precisely $f^*(a)\\otimes f^*(z)$ under the fixed finite Tate-line realizations. No free root map, scalar map, adjunction or finite comparison is chosen.",
+ "stmt_deps": [
+  "def-sp-tower-class-diagonal",
+  "det-sp-tower-shriek-levels"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+  "place": "node det-sp-tower-classes, order None"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite evaluation of the adjunction for Tate line pullback on pro-etale coefficient towers",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.constantSheafAdj, CategoryTheory.constantPresheafAdj, TopCat.Presheaf.pushforwardPullbackAdjunction, CompHausLike.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.evaluationAdjunctionLeft; ",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The general adjunctions do not specify the coefficient-tower finite pure-tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinePullback, ordinaryAdjoint, evaluatedAdjoint",
+   "results": "0 hits; ; loogle: unknown identifier 'LinePullback'",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The general adjunctions do not specify the coefficient-tower finite pure-tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "LinePullback|evaluatedAdjoint|adjointSection",
+   "results": "0 hits; ; ",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The general adjunctions do not specify the coefficient-tower finite pure-tensor comparison."
+  },
+  {
+   "tool": "rg",
+   "query": "LinePullback|evaluatedAdjoint|adjointSection|canonical.*Tate.*pullback in lean/WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "No LinePullback or evaluatedAdjoint declaration. Other matches include finite etale costalkTateLinePullback and unrelated scheme-module adjointSection; their signatures were read and do not define the tower comparison.",
+   "date": "2026-10-19",
+   "verdict": "No exact tower interface."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "Tate line pullback",
+   "results": "0 blueprint nodes match 'Tate line pullback'",
+   "date": "2026-10-19",
+   "verdict": "The constituent normalization belongs to det-sp-tower-classes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-classes",
+  "date": "2026-10-19",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "classes (4), normalized pullback of the line before forming its projection mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.TowerClassPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.LinePullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.chart",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.restrictRoot",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.ordinaryAdjoint",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.evaluatedAdjoint",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.adjointSection",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.LinePullback"
+  ],
+  "file": "lean/Sheaf/Paper/TowerClassPullback.lean",
+  "statement": "structure LinePullback {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43e4035c0",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43e4035c0",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read all 11 modules, the 10 new def-node records, the item (16 steps) and dependency declarations (SpTowerShriek Base/Geometry, DiagonalTowerSystem boundary = -extClass positive roof, CartierPoleBoundarySpec beta=extClass, ScalarData, toCohomologicalPicardGroup). The H5/H3 faults of 7d49898/ca826686 are repaired. (1) Kummer maps pinned componentwise, exact field. (2) c1 = scalar extension of unitIso^-1 ≫ T_R(lambda_L) ≫ rootIso; Reduction (left adjoint of a section-pinned forget, universal derived functor, transpose-pinned adjunction), rootModule/rootForget and the iso fields are unique up to unique iso; targetNormalization = singleδ⟦1⟧ (= -pv^-1, step 6); FiniteChernNormalization is a genuine level-n characterization. (3) diagonalBoundary = a[1](-pv^-1) via the negated dependency roof; sourceIso pinned by the unit; chern_normalization = c1(O(Δ)); finite diagonal equality. (4) bq = biprod.desc(unit, untwisted adjoint c1(O(1))), IsIso field; trace = projection^-1, T(bq^-1)[2], snd, contraction, with types as in the node; trace_unit/trace_chern characterize the finite trace of det-sp-p1-trace(2). No added hypotheses or universe restriction; only sorry proofs; source/blueprint docstrings throughout; 16-step main docstring; not dropped; only new def nodes added to stmt_deps. nt_compile --json, 11 files: exit 0, clean, max 28.6 s, repeat run within ±2 s. Advisories: decls owned by non-stmt_dep nodes (cartierUnitsComparison in theorem lem-sp-cartier-reduction-site-comparison's module, cartierIntegralSourceIso, supportedIntegralUnit, tateFiniteLine, base-era det-* statement nodes' plain defs); HEq-∃ finiteBoundaryEquality has endpoint types traced as identical (Lean probe inconclusive: 60 s timeouts under load), elaboration-cost workaround; second-reading section is a self-check; maxHeartbeats in Pullback; tower-level boundary compatibility implied by the normalizations, not a separate field."
+ }
+}

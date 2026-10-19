@@ -17284,3 +17284,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:13 L: batch 20261019T093237: K7/Sheaf.SixFunctors.FlatModel taken out (own fault, red build)
 
 - 18:30 L: batch 20261019T093237 dependency take-out
+- 10:35 L: merged deliver/ND/det-sp-tower-classes (stage 2; reviewer PASS; parallel immutable checks)
