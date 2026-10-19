@@ -71,13 +71,11 @@
    }
   },
   {
-   "text": "Let $h:\\mathcal F\\to\\mathcal G$ be a morphism of abelian sheaves killed by $N$, with the $R$-module structures of step 3. For every $U$, the additive map $h_U$ is $A$-linear by [lem-weil-pbc-zmod-module-structure-killed-by-n] (4). By step 4, the restriction of the action on $\\mathcal G$ along $\\eta$ is precisely this $A$-action, so $h$ is a morphism of presheaves of $P$-modules from the presheaf of step 2 to the scalar restriction of $\\mathcal G$. The factorization clause of [lem-pc-sites-module-sheafification-interface] gives an $R$-linear sheaf map $\\widetilde h:\\mathcal F\\to\\mathcal G$ whose composite with the abelian sheafification unit is $h$. That unit is the identity by step 1, hence $\\widetilde h=h$ as abelian sheaf maps. Thus every abelian sheaf morphism in question is $R$-linear. Conversely an $R$-linear sheaf morphism is an abelian sheaf morphism by [def-weil-sheaf-of-modules-category]. Together with steps 3 and 4, this proves clause (2) with the same morphisms.",
+   "text": "Let $h:\\mathcal F\\to\\mathcal G$ be an additive sheaf morphism with normalized module structures from step 3. Transporting any normalized action by an additive sheaf automorphism preserves its integer normalization and semilinear restrictions, since the automorphism and its inverse commute with restrictions and integer multiples. Uniqueness from step 3 makes the transported action equal to the original one, so every such automorphism is linear. Form the direct sum $H$ of the given module sheaves [def-weil-sheaf-of-modules-category], and forget to its underlying abelian sheaf. Step 4 shows that $H$ is killed by $N$, and its action is normalized because a unital ring homomorphism preserves integer casts. Write $i,p,j,q$ for its first inclusion, first projection, second inclusion and second projection. The additive endomorphism $t=j\\circ h\\circ p$ has $t^2=0$ since $p\\circ j=0$. Hence $1+t$ is an additive sheaf automorphism with inverse $1-t$ and is linear by the preceding argument. The composite $q\\circ(1+t)\\circ i$ is $h$, since $q\\circ i=0$, $p\\circ i=1$ and $q\\circ j=1$. Inclusions and projections are module morphisms, so $h$ is linear. Conversely, module morphisms are additive by [def-weil-sheaf-of-modules-category].",
    "uses": [
-    "lem-weil-pbc-zmod-module-structure-killed-by-n",
-    "lem-pc-sites-module-sheafification-interface",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
@@ -92,9 +90,11 @@
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R9",
+  "date": "2026-10-19",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03CY (lemma-sheafification-presheaf-modules), applied to the constant ring presheaf and the identity sheafification of an abelian sheaf; the elementary scalar algebra is the existing Mathlib leaf lem-weil-pbc-zmod-module-structure-killed-by-n."
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules). Steps 1-4 retain the existing construction plan; existence and uniqueness remain open in Lean. Step 5 is a proved elementary consequence of uniqueness using transport by automorphisms and the square-zero shear on a direct sum. The specification and converse annihilation are proved directly."
  },
  "mathlib_searches": [
   {
@@ -213,5 +213,15 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-a1b8fd6a6 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited nodes, unit/chapter route, Stacks 03CY source, Mathlib leaves, searches, edge cases, and coefficient/sheafification compatibility. Five proof steps are correct; no new nodes or repairs are needed. Wrote review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T005417-L-2765783",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
