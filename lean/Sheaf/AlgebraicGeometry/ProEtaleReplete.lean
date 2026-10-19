@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.CategoryTheory.RepleteSheafTopos
 import Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible
-import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
+import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Sheaf.AlgebraicGeometry.WContractibleAffineCover
 
 /-!
@@ -50,6 +50,20 @@ Proof:
 -/
 theorem isReplete_proEtale (X : Scheme.{u}) :
     CategoryTheory.GrothendieckTopology.IsReplete.{u + 1, u, w} (ProEt.topology X) := by
-  sorry
+  intro F hF m
+  apply (CategoryTheory.Sheaf.isLocallySurjective_iff_epi _).1
+  constructor
+  intro U y
+  obtain ⟨I, W, f, hcov, hW⟩ := ProEt.exists_wContractible_affine_cover X U
+  have hcov' : CategoryTheory.Sieve.ofArrows W f ∈ ProEt.topology X U :=
+    CategoryTheory.Precoverage.generate_mem_toGrothendieck hcov
+  apply (ProEt.topology X).superset_covering _ hcov'
+  rintro V g ⟨_, a, _, ⟨i⟩, rfl⟩
+  obtain ⟨D, hD, e, _⟩ := hW i
+  have : IsWContractibleRing D := hD
+  have hw : (ProEt.topology X).IsWeaklyContractible.{max (u + 1) w} (W i) :=
+    ProEt.isWeaklyContractible_of_iso e.symm
+  exact (CategoryTheory.Presheaf.imageSieve _ y).downward_closed
+    ((proetale_surjective_sections_of_epi_tower X F hF (W i) hw).2 m _) a
 
 end AlgebraicGeometry.Scheme
