@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-proper-open-tower-refinement",
+ "kind": "statement",
+ "title": "Naturality of the proper/open tower map under one refining tower",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $A$ be a collection of schemes and $F$ a proper/open calculus on it [def-sp-proper-open-calculus]. Let $f:X\\to Y$ and $g:Y\\to Z$ be quasi-compact scheme morphisms between members of $A$, and let $T,R$ be compatible binary compactification towers for $(f,g)$, all their ambient schemes belonging to $A$. For a tower refinement $r:R\\to T$, consisting of the three proper compactification refinements commuting with the two tower arrows, write $\\rho_f,\\rho_g,\\rho_{gf}$ for the associated refinement isomorphisms and $\\alpha_T,\\alpha_R$ for the tower composition maps, all defined by the calculus. Then $\\alpha_T\\,\\rho_{gf}=(\\rho_f\\star\\rho_g)\\,\\alpha_R$, in diagrammatic composition order, as an equality of natural transformations. No geometric existence or cartesianness assumption on the refinement squares is required.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, six-square diagram and final naturality calculation"
+ },
+ "stmt_deps": [
+  "def-sp-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Consider a refining tower $T_+\\to T_-$, writing its proper maps as $h:\\overline X_+\\to\\overline X_-$, $k:\\overline Y_+\\to\\overline Y_-$ and $t:V_+\\to V_-$. The supplied TowerRefinement records properness of all three maps and the equations\n$$h a_+=a_-,\\quad k i_+=i_-,\\quad t j_+=j_-,\\quad h b_+=b_-t,\\quad p_-h=kp_+,\\quad r_-t=r_+,\\quad q_-k=q_+.$$\nLet $A$ be the square $(j_+,j_-;\\mathrm{id}_X,t)$, $F$ the square $(b_+,b_-;t,h)$, $D$ the square $(i_+,i_-;\\mathrm{id}_Y,k)$, and $E$ the square $(a_+,a_-;\\mathrm{id}_X,h)$; in this notation the first pair is the top/bottom open maps and the second is the left/right proper maps. Let $B=Q_-$ and $C=Q_+$ be the tower squares $(b_-,i_-;r_-,p_-)$ and $(b_+,i_+;r_+,p_+)$. Every square has open horizontal and proper vertical maps, so its supplied $\\gamma$ applies. In particular, no pullback property is needed for $A,D,E,F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, the six squares A,B,C,D,E,F of the refinement diagram"
+   }
+  },
+  {
+   "text": "The square $E$ is the horizontal paste of $A,F$, since $b_\\pm j_\\pm=a_\\pm$. Horizontal pasting therefore gives\n$$\\gamma_E=(\\gamma_FJ_{j_+})\\circ(J_{b_-}\\gamma_A).$$\nThe vertical pastes of $F$ above $B$ and of $C$ above $D$ have the same boundary: top $b_+$, bottom $i_-$, left $r_+$, right $p_-h=kp_+$. Vertical pasting gives the equality\n$$(P_{p_-}\\gamma_F)\\circ(\\gamma_BP_t)=(P_k\\gamma_C)\\circ(\\gamma_DP_{r_+}).$$\nThese are direct instances of the assumed axioms for the squares just listed, including the proper compositors for the equality of the right boundary maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C, 0F7D and 0F7J; lemma-shriek-composition, final two pasting equalities"
+   }
+  },
+  {
+   "text": "Let $\\alpha_\\pm:H_{g,\\pm}H_{f,\\pm}\\to H_{gf,\\pm}$ denote the displayed tower transformations in the statement. Their ingredients are respectively $\\gamma_B,\\gamma_C$. The refinement comparisons for $f,g,gf$ use respectively $\\gamma_A,\\gamma_D,\\gamma_E$. Naturality of $\\gamma_B$ at the morphism $(\\gamma_A)_M:J_{j_-}M\\to P_tJ_{j_+}M$, for each $M\\in\\mathcal D_X$, is exactly\n$$(P_{p_-}J_{b_-}\\gamma_A)\\circ(\\gamma_BJ_{j_-})=(\\gamma_BP_tJ_{j_+})\\circ(J_{i_-}P_{r_-}\\gamma_A).$$\nExpand $\\rho_h\\alpha_-$ using the first equality of step 6, use this naturality equation, and then use the second equality of step 6, whiskered by $P_{q_-}$ and $J_{j_+}$. The result is\n$$\\rho_h\\alpha_-=\\alpha_+\\circ(\\rho_k\\star\\rho_t),$$\nwhere $\\star$ is the horizontal composite: first change the $f$ factor by $\\rho_t$ and then the $g$ factor by $\\rho_k$. The identity $q_-k=q_+$ identifies the outer proper functors. The remaining proper and open compositors agree by their supplied associativity and naturality. Thus this is an equality of natural transformations, proved componentwise, not inferred from objectwise invertibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, calculation gamma_E gamma_B = gamma_C gamma_D with the naturality interchange written out"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, six-square diagram and final naturality calculation; local formal extraction of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent proper open natural isomorphisms compactification refinement composition independence",
+   "results": "8 hits, including TopologicalSpace.Opens.mapComp and generic compact Hausdorff constructions; no matching compactification calculus theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of proper open interchange on compactification refining towers and staircase associativity",
+   "results": "8 hits, including Oplax.StrongTrans.naturality_comp_assoc, ComposableArrows.naturality'_assoc and TopologicalSpace.Opens.mapComp_hom_app; none states either local compactification calculation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*coher|proper.*open.*pasting",
+   "results": "0 hits. Project ripgrep also found only the assigned statement and its calculus definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence",
+  "date": "2026-10-18",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "refinement comparison calculation in the compactification coherence used by det-sp-tower-gluing",
+   "via": [
+    "lem-sp-compactification-refinement-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenTowerRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenTowerRefinement.lean",
+  "declaration": "AlgebraicGeometry.ProperOpenCalculus.properOpen_tower_refinement",
+  "statement": "theorem properOpen_tower_refinement {A : Scheme.{u} → Prop}\n    (F : ProperOpenCalculus.{u, v, w} A)\n    (X Y Z : {X : Scheme.{u} // A X})\n    {f : X.1 ⟶ Y.1} {g : Y.1 ⟶ Z.1} [QuasiCompact f] [QuasiCompact g]\n    (T R : Compactification.Triangle f g)\n    (hT : TriangleObjects (A := A) T) (hR : TriangleObjects (A := A) R)\n    (r : TowerRefinement R T) :\n    (F.towerIso X Y Z T hT).hom ≫ (F.rho X Z hT.2.2 hR.2.2 r.rfg).hom =\n      NatTrans.hcomp (F.rho X Y hT.1 hR.1 r.rf).hom\n        (F.rho Y Z hT.2.1 hR.2.1 r.rg).hom ≫ (F.towerIso X Y Z R hR).hom",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

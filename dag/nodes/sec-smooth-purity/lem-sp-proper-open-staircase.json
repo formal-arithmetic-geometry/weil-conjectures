@@ -1,0 +1,110 @@
+{
+ "id": "lem-sp-proper-open-staircase",
+ "kind": "statement",
+ "title": "Associativity of the proper/open tower maps on one supplied staircase",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $A$ be a collection of schemes and $F$ a proper/open calculus on it [def-sp-proper-open-calculus]. Let $f:X\\to Y$, $g:Y\\to Z$, $h:Z\\to W$ be quasi-compact scheme morphisms between members of $A$. Supply a compatible three-map compactification staircase $T$, with all six ambient schemes belonging to $A$. For each of its four binary towers write $\\alpha$ for the tower isomorphism defined from the calculus. Then $(\\alpha_{f,g}\\star H_h)\\,\\alpha_{fg,h}$ equals the functor associator followed by $(H_f\\star\\alpha_{g,h})\\,\\alpha_{f,gh}$, as natural transformations from $(H_f H_g)H_h$ to $H_{fgh}$. The statement assumes the staircase and uses no geometric existence hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7K, lemma-pseudo-functor, staircase and final interchange calculation"
+ },
+ "stmt_deps": [
+  "def-sp-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Specialize vertical pasting to the middle and bottom squares and horizontal pasting to the first and middle squares. Transport named proper and open composites by equality induction. Cancel inverse compositors to obtain the two pasting equations without inverse factors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At an arbitrary object N in the first ambient category, use naturality of the bottom gamma at the component of the first gamma. Substitute both pasting equations and naturality of the proper compositor at the open compositor. This proves the core component identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the four tower isomorphisms componentwise. Naturality moves the outer proper compositor to the right, and pAssoc makes the final proper compositor common; cancel it. Naturality moves the initial open compositor to the right, and jAssoc identifies its product with the alternative open composite. Apply the core identity and naturality of the proper compositor. Extensionality proves equality of natural transformations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7K, lemma-pseudo-functor: Q5 componentwise Lean proof using two pasting equations, naturality, and proper/open compositor associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent proper open natural isomorphisms compactification refinement composition independence",
+   "results": "8 hits, including TopologicalSpace.Opens.mapComp and generic compact Hausdorff constructions; no matching compactification calculus theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of proper open interchange on compactification refining towers and staircase associativity",
+   "results": "8 hits, including Oplax.StrongTrans.naturality_comp_assoc, ComposableArrows.naturality'_assoc and TopologicalSpace.Opens.mapComp_hom_app; none states either local compactification calculation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*coher|proper.*open.*pasting",
+   "results": "0 hits. Project ripgrep also found only the assigned statement and its calculus definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence",
+  "date": "2026-10-18",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "three-map associativity calculation in the compactification coherence used by det-sp-tower-gluing",
+   "via": [
+    "lem-sp-compactification-refinement-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenStaircase",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenStaircase.lean",
+  "declaration": "AlgebraicGeometry.ProperOpenCalculus.properOpen_staircase",
+  "statement": "theorem properOpen_staircase {A : Scheme.{u} → Prop}\n    (F : ProperOpenCalculus.{u, v, w} A)\n    (X Y Z W : {X : Scheme.{u} // A X})\n      (f : X.1 ⟶ Y.1) (g : Y.1 ⟶ Z.1) (h : Z.1 ⟶ W.1)\n      [QuasiCompact f]\n      [QuasiCompact g]\n      [QuasiCompact h]\n      (T : Compactification.Tower f g h) (hT : TowerObjects (A := A) T) :\n      Functor.whiskerRight\n          (F.towerIso X Y Z T.fg ⟨hT.1, hT.2.1, hT.2.2.2.1⟩).hom\n          (F.H Z W T.ch hT.2.2.1) ≫\n          (F.towerIso X Z W T.fg_h ⟨hT.2.2.2.1, hT.2.2.1, hT.2.2.2.2.2⟩).hom =\n        (Functor.associator _ _ _).hom ≫\n          Functor.whiskerLeft (F.H X Y T.cf hT.1)\n            (F.towerIso Y Z W T.gh ⟨hT.2.1, hT.2.2.1, hT.2.2.2.2.1⟩).hom ≫\n          (F.towerIso X Y W T.f_gh ⟨hT.1, hT.2.2.2.2.1, hT.2.2.2.2.2⟩).hom",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

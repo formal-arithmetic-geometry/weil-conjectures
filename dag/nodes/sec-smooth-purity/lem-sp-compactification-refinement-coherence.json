@@ -22,121 +22,43 @@
  ],
  "proof": [
   {
-   "text": "We compose transformations right to left. All formulas below are between fixed parenthesizations; juxtaposed functors are connected using the supplied proper/open compositors. Their assumed associativity and unit laws identify the different parenthesizations appearing in each displayed formula. For a refinement $v:c'\\to c$, write $\\tau_v:J_j\\to P_vJ_{j'}$ for its square's $\\gamma$ after inserting $P_{\\mathrm{id}_X}\\simeq\\mathrm{id}$. Thus $\\rho_v$ is $P_p\\tau_v$ followed by $P_pP_v\\simeq P_{pv}$. All its factors are natural isomorphisms. The identity-square axiom gives $\\tau_{\\mathrm{id}}=\\mathrm{id}$ and $\\rho_{\\mathrm{id}}=\\mathrm{id}$. For $w:c''\\to c'$, vertical pasting of the two refinement squares gives\n$$\\tau_{vw}=(P_v\\tau_w)\\circ\\tau_v.$$\nApply $P_p$ and its associative compositor to obtain\n$$\\rho_{vw}=\\rho_w\\circ\\rho_v.$$\nThis uses only the pasting and composition identities assumed in the statement.",
+   "text": "Insert the identity isomorphism in rho, specialize verticalIdentity and pLeft, and cancel the inverse proper unit. For composition, apply vertical pasting to the two refinement squares; naturality moves the inserted proper identity across gamma, pLeft cancels it, and pAssoc combines the outer proper compositors. These are the proved refinementOpenIso_comp and rho_comp calculations.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C and 0F7J, lemma-shriek-proper-and-open-compose and lemma-shriek-composition; refinement-square specialization of the supplied axioms"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $v,v':c'\\to c$ be parallel refinement arrows. The cofilteredness hypothesis (also stated for precisely this compactification category in [lem-cbc-compactifiable-cofiltered]) gives $t:e\\to c'$ with $vt=v't$. Step 1 gives $\\rho_t\\rho_v=\\rho_{vt}=\\rho_{v't}=\\rho_t\\rho_{v'}$. Cancel the isomorphism $\\rho_t$ to obtain $\\rho_v=\\rho_{v'}$. This argument does not assume that refinement arrows are unique or that their open squares are cartesian.",
+   "text": "For parallel arrows, use Geometry.equalize to find a common precomposition on which they agree. The composition law and cancellation of its rho show their rho maps agree. For two common refinements use Geometry.common, compute comparisons on that refinement and use parallel independence. Compute all three terms of the cocycle on one common refinement and cancel the middle inverse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the local single-tower refinement equation to both arrows from the supplied common refining tower. Cancel the output refinement isomorphism and use horizontal-composition exchange to cancel the two input inverses. This proves the comparison equation for arbitrary supplied towers.",
    "uses": [
-    "lem-cbc-compactifiable-cofiltered"
+    "lem-sp-proper-open-tower-refinement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, common-refinement argument; parallel-arrow equalization made explicit"
-   }
+   "elementary": false
   },
   {
-   "text": "For $v_i:d\\to c_i$ put $T_{12}^{d}=\\rho_{v_1}^{-1}\\rho_{v_2}:H_{c_2}\\to H_{c_1}$. A further $t:e\\to d$ changes this expression to\n$$(\\rho_t\\rho_{v_1})^{-1}(\\rho_t\\rho_{v_2})=T_{12}^{d}.$$\nFor a second common refinement $v_i':d'\\to c_i$, choose $s:e\\to d$ and $s':e\\to d'$ by [lem-cbc-compactifiable-cofiltered]. Step 2 applied to the parallel arrows $v_i s,v_i's'$ gives $\\rho_s\\rho_{v_i}=\\rho_{s'}\\rho_{v_i'}$ for each $i$. Substituting these two equalities into the preceding cancellation shows $T_{12}^{d}=T_{12}^{d'}$. This also handles different arrows out of the same common refinement.",
+   "text": "Apply the supplied-staircase calculation to the given Tower.",
    "uses": [
-    "lem-cbc-compactifiable-cofiltered"
+    "lem-sp-proper-open-staircase"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, independence of common refining diagrams"
-   }
+   "elementary": false
   },
   {
-   "text": "For three compactifications, take a common refinement $e$ of all three by applying the pairwise cofilteredness assumption twice. If its arrows are $a_i:e\\to c_i$, step 3 lets every comparison be computed on $e$. Hence\n$$T_{12}T_{23}=(\\rho_{a_1}^{-1}\\rho_{a_2})(\\rho_{a_2}^{-1}\\rho_{a_3})=\\rho_{a_1}^{-1}\\rho_{a_3}=T_{13}.$$\nThe same formula gives $T_{ii}=\\mathrm{id}$ and $T_{21}=T_{12}^{-1}$. No existence of a categorical limit or smallness of an indexing category is used.",
+   "text": "For the left identity tower use jLeft and pLeft, naturality of pId, and verticalIdentity. For the right identity tower use jRight and pRight and horizontalIdentity. Extensionality of natural transformations identifies the components.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition; elementary cancellation for the cocycle"
-   }
-  },
-  {
-   "text": "Consider a refining tower $T_+\\to T_-$, writing its proper maps as $h:\\overline X_+\\to\\overline X_-$, $k:\\overline Y_+\\to\\overline Y_-$ and $t:V_+\\to V_-$. The exact statement [lem-cbc-compactifiable-compatible-tower] supplies properness of all three maps and the equations\n$$h a_+=a_-,\\quad k i_+=i_-,\\quad t j_+=j_-,\\quad h b_+=b_-t,\\quad p_-h=kp_+,\\quad r_-t=r_+,\\quad q_-k=q_+.$$\nLet $A$ be the square $(j_+,j_-;\\mathrm{id}_X,t)$, $F$ the square $(b_+,b_-;t,h)$, $D$ the square $(i_+,i_-;\\mathrm{id}_Y,k)$, and $E$ the square $(a_+,a_-;\\mathrm{id}_X,h)$; in this notation the first pair is the top/bottom open maps and the second is the left/right proper maps. Let $B=Q_-$ and $C=Q_+$ be the tower squares $(b_-,i_-;r_-,p_-)$ and $(b_+,i_+;r_+,p_+)$. Every square has open horizontal and proper vertical maps, so its supplied $\\gamma$ applies. In particular, no pullback property is needed for $A,D,E,F$.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, the six squares A,B,C,D,E,F of the refinement diagram"
-   }
-  },
-  {
-   "text": "The square $E$ is the horizontal paste of $A,F$, since $b_\\pm j_\\pm=a_\\pm$. Horizontal pasting therefore gives\n$$\\gamma_E=(\\gamma_FJ_{j_+})\\circ(J_{b_-}\\gamma_A).$$\nThe vertical pastes of $F$ above $B$ and of $C$ above $D$ have the same boundary: top $b_+$, bottom $i_-$, left $r_+$, right $p_-h=kp_+$. Vertical pasting gives the equality\n$$(P_{p_-}\\gamma_F)\\circ(\\gamma_BP_t)=(P_k\\gamma_C)\\circ(\\gamma_DP_{r_+}).$$\nThese are direct instances of the assumed axioms for the squares just listed, including the proper compositors for the equality of the right boundary maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D and 0F7J; lemma-shriek-composition, final two pasting equalities"
-   }
-  },
-  {
-   "text": "Let $\\alpha_\\pm:H_{g,\\pm}H_{f,\\pm}\\to H_{gf,\\pm}$ denote the displayed tower transformations in the statement. Their ingredients are respectively $\\gamma_B,\\gamma_C$. The refinement comparisons for $f,g,gf$ use respectively $\\gamma_A,\\gamma_D,\\gamma_E$. Naturality of $\\gamma_B$ at the morphism $(\\gamma_A)_M:J_{j_-}M\\to P_tJ_{j_+}M$, for each $M\\in\\mathcal D_X$, is exactly\n$$(P_{p_-}J_{b_-}\\gamma_A)\\circ(\\gamma_BJ_{j_-})=(\\gamma_BP_tJ_{j_+})\\circ(J_{i_-}P_{r_-}\\gamma_A).$$\nExpand $\\rho_h\\alpha_-$ using the first equality of step 6, use this naturality equation, and then use the second equality of step 6, whiskered by $P_{q_-}$ and $J_{j_+}$. The result is\n$$\\rho_h\\alpha_-=\\alpha_+\\circ(\\rho_k\\star\\rho_t),$$\nwhere $\\star$ is the horizontal composite: first change the $f$ factor by $\\rho_t$ and then the $g$ factor by $\\rho_k$. The identity $q_-k=q_+$ identifies the outer proper functors. The remaining proper and open compositors agree by their supplied associativity and naturality. Thus this is an equality of natural transformations, proved componentwise, not inferred from objectwise invertibility.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, calculation gamma_E gamma_B = gamma_C gamma_D with the naturality interchange written out"
-   }
-  },
-  {
-   "text": "Given two arbitrary towers, choose a common refining tower as in [lem-cbc-compactifiable-compatible-tower]. Apply step 7 to its maps to the two towers, and invert the refinement comparisons on the input and output factors. The resulting equation identifies the two $\\alpha$ maps under $T$ on each of the three compactification factors. These $T$ maps are independent of the common tower and its arrows by step 3, and compose by step 4. Thus the equation proves the asserted compatibility with all common-refinement comparisons, rather than only with a fixed refining arrow.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, reduction from two towers to a common refining diagram"
-   }
-  },
-  {
-   "text": "For $X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hT$, use the three-map staircase whose existence is assumed. Write its ambient proper chain as $\\overline X\\xrightarrow p\\overline Y\\xrightarrow q\\overline Z\\xrightarrow sT$, with opens $a:X\\to\\overline X$, $e:Y\\to\\overline Y$, $o:Z\\to\\overline Z$. Write $W$ for the inverse image of $Z$ in $\\overline Y$, with maps $k:W\\hookrightarrow\\overline Y$, $u:W\\to Z$, and $i:Y\\hookrightarrow W$, so $e=ki$. Write $U\\subset V\\subset\\overline X$ for the inverse images of $Y\\subset W\\subset\\overline Y$, with opens $c:U\\to V$, $b:V\\to\\overline X$, $j:X\\to U$ and proper maps $r:U\\to Y$, $t:V\\to W$. Thus $a=bcj$. The staircase supplies properness of $r,t,u,p,q,s$ and the three squares\n$$A=(c,i;r,t),\\qquad B=(b,k;t,p),\\qquad C=(k,o;u,q).$$\nThey satisfy $tc=ir$, $pb=kt$, $qk=ou$. Their horizontal paste $A+B$ and vertical paste $B+C$ are exactly the squares used for the two composite morphisms. This is the staircase of Tag 0F7K; no geometric existence result is being deduced from the $P,J,\\gamma$ axioms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, lemma-pseudo-functor, the staircase and its three squares"
-   }
-  },
-  {
-   "text": "Work first before the final compositors, from $P_sJ_oP_uJ_iP_rJ_j$ to $P_sP_qP_pJ_bJ_cJ_j$. The two iterated tower maps use $A$ then $B+C$, or $C$ then $A+B$. Pasting gives\n$$\\gamma_{A+B}=(\\gamma_BJ_c)\\circ(J_k\\gamma_A),\\qquad\\gamma_{B+C}=(P_q\\gamma_B)\\circ(\\gamma_CP_t).$$\nAfter substituting these formulas, the two maps have the common final factor $P_sP_q\\gamma_BJ_cJ_j$. Their preceding factors agree by\n$$(\\gamma_CP_tJ_c)\\circ(J_oP_u\\gamma_A)=(P_qJ_k\\gamma_A)\\circ(\\gamma_CJ_iP_r),$$\nwhiskered by $P_s$ and $J_j$. At $M\\in\\mathcal D_U$ this is precisely naturality of $\\gamma_C:J_oP_u\\to P_qJ_k$ at the morphism $(\\gamma_A)_M:J_iP_rM\\to P_tJ_cM$ in $\\mathcal D_W$. Composing with the proper/open compositors to $P_{sqp}J_a$ preserves the equality; their two parenthesizations agree by the assumed associativity. This proves the three-map identity on the chosen staircase by two pasting equations and one naturality square.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D and 0F7K, lemma-pseudo-functor, final interchange calculation"
-   }
-  },
-  {
-   "text": "If either iterated construction uses other compatible towers, compare each binary tower with the one induced by the fixed staircase using step 8. Insert those comparison equations in the two composites; every internal $T^{-1}T$ cancels, and step 4 identifies the outside comparisons. Step 10 then identifies the two maps. Thus the identity holds under the stated comparisons for arbitrary choices. For an identity morphism use its trivial compactification and an identity tower. Its interchange square has either both vertical maps identities or both horizontal maps identities, so the identity-square axiom makes $\\gamma$ the identity after the supplied unitors. The resulting tower map is the unitor on the other factor. Step 8 transports this statement to other identity towers. This proves both identity laws.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7K, independence of choices and identity-square specialization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-cbc-compactifiable-cofiltered",
-  "lem-cbc-compactifiable-compatible-tower"
+  "lem-sp-proper-open-tower-refinement",
+  "lem-sp-proper-open-staircase"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7J (lemma-shriek-composition) and 0F7K (lemma-pseudo-functor), formal extraction for the supplied P,J,gamma axioms; cofiltered cancellation expanded"
+  "place": "Tags 0F7J/0F7K: Q5 Lean proof of cofiltered cancellation, identity laws, single refining-tower compatibility and staircase associativity. Both local calculations are proved in the delivered helper modules."
  },
  "mathlib_searches": [
   {
@@ -286,5 +208,15 @@
   "by": "Q02",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
