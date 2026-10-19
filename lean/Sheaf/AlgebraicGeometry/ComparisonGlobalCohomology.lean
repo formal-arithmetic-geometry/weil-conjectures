@@ -40,6 +40,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import
+  WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 
 /-!
 # Global cohomology under the etale to pro-etale comparison
@@ -102,6 +104,15 @@ comparison maps are natural, so their composite is a natural isomorphism. -/
 theorem isIso_comparisonGlobalSections (T : Scheme.{u})
     (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] :
     IsIso (comparisonGlobalSections T Λ) := by
-  sorry
+  let adj := T.proEtaleSiteComparisonModules Λ
+  obtain ⟨_, _, hunit, hacyclic⟩ := siteComparison_finiteLevel T Λ
+  have : IsIso adj.derivedPlus.unit := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    exact adj.isIso_derivedPlus_unit_app_of_rightAcyclic
+      (fun I _ ↦ hunit I)
+      (fun I _ n ↦ hacyclic I inferInstance (n + 1) (Nat.succ_pos n)) K
+  unfold comparisonGlobalSections
+  infer_instance
 
 end AlgebraicGeometry.ProEtale
