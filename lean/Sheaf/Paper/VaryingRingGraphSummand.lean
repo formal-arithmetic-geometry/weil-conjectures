@@ -24,6 +24,8 @@ public import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
 public import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
+import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+import Sheaf.CategoryTheory.DiagramSiteTopology
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
@@ -70,7 +72,19 @@ on one vertical slice, where this is precisely continuity of composition. -/
 theorem sumSite_continuous {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
     (sumSite e).IsContinuous (coefficientSequenceTopology (ProEt.topology U))
       (coefficientSequenceTopology (ProEt.topology T)) := by
-  sorry
+  have : (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e)).IsContinuous
+      (ProEt.topology U) (ProEt.topology T) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale e)
+  constructor
+  intro G
+  rw [← isSheaf_iff_isSheaf_of_type]
+  apply (verticalDiagramSite_isSheaf_iff ℕ U.ProEt (ProEt.topology U) _).2
+  intro n
+  have hG := (verticalDiagramSite_isSheaf_iff ℕ T.ProEt (ProEt.topology T) G.obj).1
+    G.property n
+  exact Functor.op_comp_isSheaf_of_isSheaf
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e))
+      (ProEt.topology U) (ProEt.topology T) _ hG
 
 attribute [instance] sumSite_continuous
 
@@ -251,7 +265,26 @@ theorem graph_clopen {U T : Scheme.{u}} {e : U ⟶ T} [Etale e] [IsSeparated e]
     [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e)
     (V : T.ProEt) (t : V.left ⟶ U) (ht : t ≫ e = V.hom) :
     IsOpenImmersion (graph c V t ht) ∧ IsClosedImmersion (graph c V t ht) := by
-  sorry
+  let s : V.left ⟶ pullback V.hom e := pullback.lift (𝟙 _) t (by simpa using ht.symm)
+  have hs : s ≫ pullback.fst V.hom e = 𝟙 _ := pullback.lift_fst _ _ _
+  have : Etale (s ≫ pullback.fst V.hom e) := by rw [hs]; infer_instance
+  have : Etale s := Etale.of_comp s (pullback.fst V.hom e)
+  have : Mono s := mono_of_mono_fac hs
+  have : IsOpenImmersion s := IsOpenImmersion.of_flat_of_mono s
+  let j := pullback.map V.hom e V.hom c.g (𝟙 _) c.i (𝟙 _)
+    (by simp) (by simpa using c.comm)
+  have hj : IsOpenImmersion j := by
+    dsimp only [j]
+    apply Scheme.pullback_map_isOpenImmersion
+  have hg : graph c V t ht = s ≫ j := by
+    apply pullback.hom_ext <;> simp [graph, s, j]
+  have hopen : IsOpenImmersion (graph c V t ht) := by rw [hg]; infer_instance
+  have hsection : graph c V t ht ≫ pullback.fst V.hom c.g = 𝟙 _ :=
+    pullback.lift_fst _ _ _
+  have : IsClosedImmersion (graph c V t ht ≫ pullback.fst V.hom c.g) := by
+    rw [hsection]
+    infer_instance
+  exact ⟨hopen, IsClosedImmersion.of_comp _ (pullback.fst V.hom c.g)⟩
 
 /-- The graph as a morphism on the compactification's small pro-etale site.
 Source: Stacks 0F4L (blueprint: lem-sp-varying-ring-graph-summand). -/
@@ -268,7 +301,7 @@ def graphArrow {U T : Scheme.{u}} {e : U ⟶ T} [Etale e] (c : Compactification 
 Source: Stacks 0F4L, 0F4Y (blueprint: lem-sp-varying-ring-graph-summand).
 Proof: the graph and its complement are a disjoint open cover. Glue the image of m
 under the open-extension unit on the graph and zero on the complement. The sheaf
-axiom gives existence and uniqueness. This construction is additive and linear in
+the characterization gives existence and uniqueness. This construction is additive and linear in
 the scalar map for each lift. Sum the extensions on the direct-sum presheaf, then
 use module sheafification. Graphs pull back to graphs, so the maps commute with all
 site restrictions. Uniqueness also makes them commute with sheaf morphisms and
@@ -338,7 +371,30 @@ theorem theta_existsUnique {U T : Scheme.{u}} (e : U ⟶ T) [Etale e]
       SemilinearProperOpen.J C τ c.i ⋙ SemilinearProperOpen.R C τ c.g,
       ∀ K : HomotopyCategory (SemilinearProperOpen.Modules C τ U) (.up ℤ),
         θ.app (DerivedCategory.Qh.obj K) = onHomotopy C τ e c K := by
-  sorry
+  let δ : DerivedCategory.Qh ⋙ (sum C τ e).mapDerivedCategory ⟶
+      DerivedCategory.Qh ⋙ (SemilinearProperOpen.J C τ c.i ⋙
+        SemilinearProperOpen.R C τ c.g) :=
+    (sum C τ e).mapDerivedCategoryFactorsh.hom ≫
+    Functor.whiskerRight ((graphMap C τ e c).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh ≫
+    Functor.whiskerRight
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv DerivedCategory.Qh ≫
+    Functor.whiskerLeft ((SemilinearProperOpen.extension C τ c.i).mapHomotopyCategory (.up ℤ))
+      (SemilinearProperOpen.push C τ c.g).rightDerivedFunctorUnit ≫
+    Functor.whiskerRight (SemilinearProperOpen.extension C τ c.i).mapDerivedCategoryFactorsh.inv
+      (SemilinearProperOpen.push C τ c.g).rightDerivedFunctor
+  let W := HomotopyCategory.quasiIso (SemilinearProperOpen.Modules C τ U) (.up ℤ)
+  have := Localization.full_whiskeringLeft DerivedCategory.Qh W
+    (DerivedCategory (SemilinearProperOpen.Modules C τ T))
+  let θ := ((Functor.whiskeringLeft _ _ _).obj DerivedCategory.Qh).preimage δ
+  have hθ : ∀ K, θ.app (DerivedCategory.Qh.obj K) = onHomotopy C τ e c K := by
+    intro K
+    exact congr_app
+      (Functor.map_preimage ((Functor.whiskeringLeft _ _ _).obj DerivedCategory.Qh) δ) K
+  refine ⟨θ, hθ, ?_⟩
+  intro θ' hθ'
+  apply Localization.natTrans_ext DerivedCategory.Qh W
+  intro K
+  exact (hθ' K).trans (hθ K).symm
 
 /-- The uniquely representative-normalized graph natural transformation.
 Source: Stacks 0GKM (blueprint: lem-sp-varying-ring-graph-summand). -/
@@ -401,7 +457,7 @@ therefore preserves the sheaf condition, with values in any category of types. -
 theorem levelSite_continuous {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
     (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e)).IsContinuous
       (ProEt.topology U) (ProEt.topology T) := by
-  sorry
+  exact ProEt.isContinuous_overMap (inferInstance : WeaklyEtale e)
 
 attribute [instance] levelSite_continuous
 
@@ -541,7 +597,30 @@ theorem levelTheta_existsUnique (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u
         (StrictTower.moduleDirectImage A c.g).rightDerivedFunctor,
       ∀ K : HomotopyCategory (StrictTower.Modules A U) (.up ℤ),
         θ.app (DerivedCategory.Qh.obj K) = levelOnHomotopy A e c K := by
-  sorry
+  let δ : DerivedCategory.Qh ⋙ (levelSum A e).mapDerivedCategory ⟶
+      DerivedCategory.Qh ⋙ ((StrictTower.moduleJ A c.i).mapDerivedCategory ⋙
+        (StrictTower.moduleDirectImage A c.g).rightDerivedFunctor) :=
+    (levelSum A e).mapDerivedCategoryFactorsh.hom ≫
+    Functor.whiskerRight ((levelGraphMap A e c).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh ≫
+    Functor.whiskerRight
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv DerivedCategory.Qh ≫
+    Functor.whiskerLeft ((StrictTower.moduleJ A c.i).mapHomotopyCategory (.up ℤ))
+      (StrictTower.moduleDirectImage A c.g).rightDerivedFunctorUnit ≫
+    Functor.whiskerRight (StrictTower.moduleJ A c.i).mapDerivedCategoryFactorsh.inv
+      (StrictTower.moduleDirectImage A c.g).rightDerivedFunctor
+  let W := HomotopyCategory.quasiIso (StrictTower.Modules A U) (.up ℤ)
+  have := Localization.full_whiskeringLeft DerivedCategory.Qh W
+    (DerivedCategory (StrictTower.Modules A T))
+  let θ := ((Functor.whiskeringLeft _ _ _).obj DerivedCategory.Qh).preimage δ
+  have hθ : ∀ K, θ.app (DerivedCategory.Qh.obj K) = levelOnHomotopy A e c K := by
+    intro K
+    exact congr_app
+      (Functor.map_preimage ((Functor.whiskeringLeft _ _ _).obj DerivedCategory.Qh) δ) K
+  refine ⟨θ, hθ, ?_⟩
+  intro θ' hθ'
+  apply Localization.natTrans_ext DerivedCategory.Qh W
+  intro K
+  exact (hθ' K).trans (hθ K).symm
 
 /-- The unique single-ring graph natural transformation.
 Source: Stacks 0GKM (blueprint: lem-sp-varying-ring-graph-summand). -/
