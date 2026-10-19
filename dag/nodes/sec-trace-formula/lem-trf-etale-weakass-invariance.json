@@ -11,9 +11,115 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For ascent, assume $\\mathfrak a\\in\\operatorname{WeakAss}_A(L)$. Put $R=A_{\\mathfrak a}$, $S=B_{\\mathfrak b}$, $M=L_{\\mathfrak a}$ and $N=L\\otimes_A B$. By [lem-sc-weakass-localization], there is $x\\in M$ with $\\sqrt{I}=\\mathfrak aR$, where $I=\\operatorname{Ann}_R(x)$. The etale hypothesis [def-weil-etale-morphism] gives flatness of the spectrum morphism; [lem-weil-pbc-flat-ring-map-iff-flat-affine] gives flatness of $A\\to B$, and [lem-weil-pbc-flat-local-ring-maps] gives flatness of the induced local map $R\\to S$. All these statements allow arbitrary rings; neither $L$ nor its localization is assumed finite.",
+   "uses": [
+    "lem-sc-weakass-localization",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05F0, lemma-weakly-ass-pullback, proof, first two sentences; Tag 0566, lemma-weakly-ass-local"
+   }
+  },
+  {
+   "text": "The map $R/I\\to M$, $[r]\\mapsto rx$, is injective by the definition of $I$. Flatness [def-weil-pbc-flat-ring-map] therefore makes $(R/I)\\otimes_R S\\to M\\otimes_R S$ injective. The tensor definition identifies its source with $S/IS$: $[r]\\otimes s\\mapsto[rs]$, with inverse $[s]\\mapsto[1]\\otimes s$. The relations on both sides verify these maps are well defined and inverse. If $y=x\\otimes1$, injectivity gives $\\operatorname{Ann}_S(y)=IS$. Also $M\\otimes_R S\\cong N_{\\mathfrak b}$: the map $(l/u)\\otimes(b/v)\\mapsto(l\\otimes b)/(\\varphi(u)v)$ has inverse $(l\\otimes b)/v\\mapsto(l/1)\\otimes(b/v)$, extended additively. The fraction relations and tensor balancing verify the two inverse formulas. Here $u\\notin\\mathfrak a$, $v\\notin\\mathfrak b$, so every displayed denominator is invertible.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05F0, lemma-weakly-ass-pullback, proof: the annihilator after tensoring; fraction and quotient identifications written out"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-prime-generates-maximal], $(\\mathfrak aR)S=\\mathfrak bS$. Thus $IS\\subseteq\\mathfrak bS$. For $z\\in\\mathfrak bS$, write $z=\\sum_{i=1}^k s_i a_i$ with $a_i\\in\\mathfrak aR$. Since $\\sqrt I=\\mathfrak aR$, choose $e_i\\ge1$ with $a_i^{e_i}\\in I$. Every term in the expansion of $z^{1+\\sum_i(e_i-1)}$ contains some $a_i^{e_i}$, so this power lies in $IS$ (and $z=0$ is immediate). Hence $\\sqrt{IS}=\\mathfrak bS$. The element $y$ of step 2 is therefore a radical-annihilator witness in $N_{\\mathfrak b}$, and [lem-sc-weakass-localization] gives $\\mathfrak b\\in\\operatorname{WeakAss}_B(N)$. This proves ascent without a finite-generation assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-sc-weakass-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05F0, lemma-weakly-ass-pullback, proof, last sentences; for etale maps the fibre maximal ideal is zero, Tag 00U4"
+   }
+  },
+  {
+   "text": "For descent, assume $\\mathfrak b\\in\\operatorname{WeakAss}_B(N)$. Apply [lem-weil-pbc-etale-locally-standard] to choose $g\\notin\\mathfrak b$ and an $A$-algebra isomorphism $B_g\\cong C_h$, where $C=A[t]/(f)$ and $f$ is monic. Let $\\mathfrak b_g$ be the prime in $B_g$ consisting of fractions whose numerator lies in $\\mathfrak b$. This is well defined and prime because $g\\notin\\mathfrak b$; its inverse image in $B$ is $\\mathfrak b$. Transport it to a prime of $C_h$ and contract to $\\mathfrak r\\subset C$. Then $h\\notin\\mathfrak r$, its extension is the transported prime (a fraction belongs exactly when its numerator does), and $\\mathfrak r\\cap A=\\mathfrak a$. By [lem-weil-pbc-monic-quotient-free], $C$ is a finite free $A$-module with power basis $e_1,\\ldots,e_n$. The existence of $\\mathfrak r$ rules out $n=0$, for the monic degree-zero polynomial is $1$ and its quotient is the zero ring.",
+   "uses": [
+    "lem-weil-pbc-etale-locally-standard",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FP, lemma-etale-weak-assassin-up-down, proof: standard etale chart and the finite free algebra A[t]/(f)"
+   }
+  },
+  {
+   "text": "Put $K=L\\otimes_A C$. Localization at the displayed primes gives $B_{\\mathfrak b}\\cong(B_g)_{\\mathfrak b_g}\\cong(C_h)_{\\mathfrak rC_h}\\cong C_{\\mathfrak r}$. These identifications follow directly from fractions: if $s$ is outside a prime, inverting $s$ and then all elements outside the extended prime is the same as inverting all elements outside the original prime, with $(a/s^i)/(b/s^j)\\mapsto as^j/(bs^i)$. Tensoring with $L$ has the analogous explicit identification $(l\\otimes c)/v\\leftrightarrow l\\otimes(c/v)$; its inverse and balancing follow from the same fraction relation. Thus $N_{\\mathfrak b}\\cong K_{\\mathfrak r}$, compatibly with the local ring isomorphism and their maximal ideals. By [lem-sc-weakass-localization] applied first to $(B,N,\\mathfrak b)$ and then to $(C,K,\\mathfrak r)$, the assumed weak association at $\\mathfrak b$ gives weak association at $\\mathfrak r$: the radical-annihilator witness in the first localized module maps to one in the second, and the converse localization criterion returns $\\mathfrak r\\in\\operatorname{WeakAss}_C(K)$.",
+   "uses": [
+    "lem-sc-weakass-localization",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FP, lemma-etale-weak-assassin-up-down, reduction to the finite free algebra; Tag 0566, lemma-weakly-ass-local, provides the localization criterion"
+   }
+  },
+  {
+   "text": "The map $A\\to C$ is finite by step 4. Apply [lem-trf-finite-ring-map-weakass-contraction] to the arbitrary $C$-module $K$ and its weakly associated prime $\\mathfrak r$. Its contraction is $\\mathfrak a$, so $\\mathfrak a\\in\\operatorname{WeakAss}_A(K)$, where $K$ now denotes the module with its restricted $A$-action. This step uses finiteness of $C$ over $A$, not finiteness of $K$ over either ring.",
+   "uses": [
+    "lem-trf-finite-ring-map-weakass-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map; this is the finite-pushforward step of Tag 05FN"
+   }
+  },
+  {
+   "text": "The basis from step 4 identifies $K$ with $L^n$: $l\\otimes\\sum_i a_i e_i\\mapsto(a_i l)_i$, with inverse $(l_i)_i\\mapsto\\sum_i l_i\\otimes e_i$. The tensor relations verify these are inverse $A$-linear maps. Choose a witness $(l_1,\\ldots,l_n)$ for step 6, and set $I_i=\\operatorname{Ann}_A(l_i)$. Its annihilator is $J=\\bigcap_i I_i$, and $\\mathfrak a$ is minimal over $J$. Since $\\prod_i I_i\\subseteq J\\subseteq\\mathfrak a$ and $\\mathfrak a$ is prime, some $I_j\\subseteq\\mathfrak a$: otherwise choose $a_i\\in I_i\\setminus\\mathfrak a$ and their product contradicts primality. Any prime $\\mathfrak p$ with $I_j\\subseteq\\mathfrak p\\subseteq\\mathfrak a$ contains $J$, so minimality over $J$ forces $\\mathfrak p=\\mathfrak a$. Thus $\\mathfrak a$ is minimal over $\\operatorname{Ann}_A(l_j)$, proving $\\mathfrak a\\in\\operatorname{WeakAss}_A(L)$. Together with step 3 this proves both directions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FN, lemma-finite-flat-weak-assassin-up-down, proof: weak association of a positive finite direct sum; the annihilator argument is expanded here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-weakass-localization",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-ring-localization-away",
+  "lem-trf-finite-ring-map-weakass-contraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FP, lemma-etale-weak-assassin-up-down, through the finite-free argument of Tag 05FN; ascent expanded using divisors.tex Tag 05F0 and etale maximal-ideal equality Tag 00U4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-tensor-weakass-fibre",
@@ -78,5 +184,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-etale-weakass-invariance",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-ring and arbitrary-module statement. Proved ascent by a localized annihilator witness and the etale equality of maximal ideals, and descent by the standard-etale finite-free presentation, finite-map weak-assassin contraction, and the finite-intersection annihilator argument. Reused the existing localization, flatness and monic-quotient nodes. Created only the independent finite-map contraction ingredient, with actual logged searches.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): the fibre-generic detection of vertical principal ideals in the strict semistable overlap argument; this node supplies the general flat-tensor weak-assassin theorem used on scalar quotients. Supporting algebra: Weak association is preserved and reflected by etale algebra maps. The seven steps provide the etale weak-assassin tool in the historical semistable algebra branch; they do not change the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-weakass-localization",
+    "why": "Tag 0566 is the generic arbitrary-module localization criterion needed to pass between a prime and its local module; the unit has no other such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-weakass-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-5332d9325",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-5332d9325 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged and agrees with Stacks 05FP in affine form, and all 7 steps follow the 05FP route (standard-étale chart, then the finite free algebra, then the 05FN argument), with no SGA cited. Ascent (steps 1-3): lem-sc-weakass-localization (1)⇒(3), flatness of A_a→B_b through the three cited flatness statements, Ann_S(x⊗1)=IS by flatness, and aS_b=bS_b by lem-weil-pbc-etale-prime-generates-maximal; the explicit radical expansion then gives √(IS)=bS_b. Descent: step 4 uses lem-weil-pbc-etale-locally-standard (same hypothesis, A-algebra isomorphism, so r∩A=a) and lem-weil-pbc-monic-quotient-free (n=0 excluded because C would be 0); step 5 identifies the localizations B_b≅C_r and N_b≅K_r; step 6 applies the new node to K; step 7 passes from the free sum L^n back to L through a primality and minimality argument, which I checked. New node lem-trf-finite-ring-map-weakass-contraction is exactly the image⊆ half of Stacks 05E1 (algebra.tex l.16212, statement and proof read); it is true, not elementary, and not a restatement of its parent. Small case: for k[x]→k[x]×k the minimal prime k[x]×0 contracts to the non-minimal prime (x), which is still weakly associated through (0,1). It is statement-only, self-contained (WeakAss inline; def-sc-weakly-associated-primes covers M=A only), searches cover three kinds, blueprint from/via correct, same_as=[]. Duplicate grep for 05E1/05EZ/05FN/05FP and WeakAss over dag/nodes found no node stating it. Accepted tool_use: lem-sc-weakass-localization (generic 0566 localization criterion). Maintainer note: the item belongs to the inherited historical semistable branch under lem-trf-local-term-locality (via lem-trf-flat-tensor-weakass-fibre); whether that branch is retired after the 10-18 route pivot is the maintainer's call, not a fault of this delivery. No fixes."
  }
 }
