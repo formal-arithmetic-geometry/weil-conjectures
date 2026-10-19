@@ -1,0 +1,150 @@
+{
+ "id": "lem-exc-kernel-invariants-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "third paragraph; DAG steps 3--5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison by exact kernel invariants",
+ "statement": "Let A be a finite ring annihilated by ell^s, G a profinite group, B a profinite group in universe zero, and pi:G -> B a continuous surjective homomorphism. Suppose every finite continuous quotient Q of ker(pi) (in the universe of G) has order coprime to ell. For every discrete continuous A[G]-module M, form the actual fixed submodule N=M^ker(pi) with its descended B-action. There is an isomorphism H^q(G,M) ~= H^q(B,N) for every natural q, where H is [def-exc-continuous-cohomology].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "third paragraph; DAG steps 3--5"
+ },
+ "stmt_deps": [
+  "def-exc-continuous-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Define N as the intersection of the kernels of rho(h)-id for h in ker(pi). Normality makes it G-stable and the trivial kernel action descends it to B. The continuous surjection from compact G to Hausdorff B is a quotient map, so each stabilizer in B is open. Equivariant maps restrict to N, defining the kernel-invariants functor T.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "third paragraph; DAG steps 3--5"
+   }
+  },
+  {
+   "text": "For a lift x of a kernel-fixed y, choose an open normal subgroup U of ker(pi) contained in the stabilizer of x. Sum rho(q)x over the finite quotient Q=ker(pi)/U. Left translation permutes the summands, so the sum is fixed; its image is |Q|y. Choose a,b with a|Q|+b ell^s=1, and multiply the sum by a. Since ell^s annihilates all A-modules, this is a fixed lift of y. Use underlying-module detection of exactness to conclude T preserves exact sequences and homology.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "third paragraph; DAG steps 3--5"
+   }
+  },
+  {
+   "text": "Inflation along pi preserves coefficient modules and monomorphisms. Restrict an equivariant map from an inflated module to the fixed submodule, or compose with its inclusion, to give the adjunction inflation left adjoint to T. The adjunction transports injective extension problems and shows T preserves injectives.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "third paragraph; DAG steps 3--5"
+   }
+  },
+  {
+   "text": "The all-invariants submodule of M is naturally linearly equivalent to the B-invariants of T(M), by inclusion of fixed elements in both directions. Use the natural identifications of the invariant functors from the continuous-cochain comparison to obtain a natural isomorphism of these functors. Apply T to an injective resolution: exactness makes its augmentation a quasi-isomorphism, and its terms are injective. Termwise identification of all-invariants now identifies the homology computing both right derived functors.",
+   "uses": [
+    "def-exc-continuous-cohomology",
+    "def-sp-left-exact-additive",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "third paragraph; DAG steps 3--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "def-sp-injective-resolutions",
+  "def-exc-continuous-cohomology",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "third paragraph; DAG steps 3--5; details formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous cohomology is unchanged by passing to invariants of a closed normal pro prime to ell subgroup for ell primary discrete modules",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.invariants, ContinuousCohomology.homogeneousCochains, groupCohomology.H0Iso, Representation.toInvariants, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, continuousCohomology",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cohomology invariant submodule under kernel exact inflation preserves injective objects quotient",
+   "results": "8 hits: groupCohomology.instMonoModuleCatFH1InfRes, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.H1InfRes_X₁, groupCohomology.instMonoModuleCatFShortComplexH0, groupCohomology.d₀₁_ker_eq_invariants, groupCohomology.infNatTrans_app, groupCohomology.subtype_comp_d₀₁_apply, groupCohomology.H1InfRes_f",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.Coprime, IsUnit",
+   "results": "5 hits: ZMod.isUnit_iff_coprime, ZMod.eq_one_or_isUnit_sub_one, IsUnit.natCast_of_isNilpotent_of_coprime, IsPrimitiveRoot.geom_sum_isUnit, IsPrimitiveRoot.geom_sum_isUnit'",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*invariants|invariants.*exact",
+   "results": "3 hits: Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DvrGalois",
+  "date": "2026-10-19",
+  "group": "Y2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.KernelInvariantsCohomology",
+  "file": "lean/Sheaf/RepresentationTheory/KernelInvariantsCohomology.lean",
+  "declaration": "Rep.kernelFixed_cohomology_iso",
+  "statement": "theorem kernelFixed_cohomology_iso [Finite A]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (B₀ : Type) [Group B₀] [TopologicalSpace B₀] [IsTopologicalGroup B₀]\n    [CompactSpace B₀] [T2Space B₀] [TotallyDisconnectedSpace B₀]\n    (π : G →* B₀) (hπ : Function.Surjective π) (hc : Continuous π)\n    (l s : ℕ) (hA : (l ^ s : ℕ) • (1 : A) = 0)\n    (hcop : ∀ (Q : Type u) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q]\n      [Finite Q] (f : π.ker →* Q), Continuous f → Function.Surjective f →\n        Nat.Coprime l (Nat.card Q))\n    (M : DiscreteContinuousRep.{v, u, max u w} A G) (q : ℕ) :\n    Nonempty ((discreteContinuousCohomologyFunctor.{u, v, w} G A q).obj M ≅\n      (discreteContinuousCohomologyFunctor.{0, v, max u w} B₀ A q).obj\n        (kernelFixedDiscreteRep π hπ hc M))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

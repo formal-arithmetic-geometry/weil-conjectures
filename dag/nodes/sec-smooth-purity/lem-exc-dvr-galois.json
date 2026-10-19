@@ -26,87 +26,36 @@
  ],
  "proof": [
   {
-   "text": "The strictly henselian ring in the statement is henselian by [def-weil-pbc-henselian-terminology]. Apply [lem-exc-henselian-dvr-tame-sequence] to this excellent DVR $R$ with its algebraically closed residue field of characteristic $p>0$ and fraction field $F$. Fix the continuous surjection $\\theta:G\\to T=\\prod_{r\\neq p}(\\mathbf Z_r,+)$ supplied by that lemma, with closed normal pro-$p$ kernel $P$ and topological quotient $G/P\\cong T$.",
+   "text": "Use the tame quotient, finite-quotient averaging and the exact invariants comparison to construct N with H^q(G,M) isomorphic to H^q(Z_ell,N) in every degree; finiteness of M implies finiteness of N.",
    "uses": [
-    "lem-exc-henselian-dvr-tame-sequence",
-    "def-weil-pbc-henselian-terminology"
+    "lem-exc-dvr-galois-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, first two paragraphs; finite and infinite ramification calculation made a structural dependency"
+    "place": "first three paragraphs"
    }
   },
   {
-   "text": "Let $B=\\prod_{r\\neq p,\\ell}\\mathbf Z_r$, and let $H=\\ker(\\operatorname{pr}_{\\ell}\\circ\\theta)$, a closed normal subgroup of $G$. Then $H/P\\cong B$ and $G/H\\cong(\\mathbf Z_\\ell,+)$ as topological groups. For a finite continuous quotient $Q$ of $H$, the image of $P$ is a finite continuous quotient of $P$, hence a $p$-group by Step 1. The quotient of $Q$ by this image is a finite continuous quotient of $B$. Its kernel is open, so it contains a basic open subgroup restricting only finitely many coordinates to $r^{n_r}\\mathbf Z_r$; consequently this quotient is a quotient of a finite product of groups $\\mathbf Z/r^{n_r}\\mathbf Z$ with $r\\neq\\ell$. Its order is prime to $\\ell$. The order formula for a finite group and a normal subgroup now shows $\\ell\\nmid |Q|$. The topological quotient identifications follow from the continuous surjections between compact Hausdorff groups.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, second paragraph, construction of H and its finite quotients"
-   }
-  },
-  {
-   "text": "Write $\\mathcal C_G$ and $\\mathcal C_{G/H}$ for the categories in [lem-exc-discrete-modules-abelian]. Choose $s\\geq0$ with $\\ell^s A=0$. Define $V:\\mathcal C_G\\to\\mathcal C_{G/H}$ by $V(N)=N^H$ with the induced action and restriction on morphisms. Restrictions of sums of morphisms are sums, so $V$ is additive. Normality of $H$ makes $N^H$ stable under $G$; its stabilizers in $G/H$ are open because their preimages are the open stabilizers in $G$ of its elements. Kernels are preserved: an element of the kernel is $H$-fixed exactly when it belongs to the kernel of the restricted map. For a surjection $N\\to N'$ and $y\\in(N')^H$, choose a lift $x\\in N$. The $H$-orbit of $x$ is finite because its stabilizer is open in the compact group $H$. The $A$-span $L$ of this orbit is a finite, $H$-stable module, since $A$ is finite. Intersect the stabilizers of all elements of $L$ to obtain an open normal subgroup $U\\triangleleft H$ acting trivially on $L$. Thus $Q=H/U$ acts on $L$, and Step 2 gives $\\ell\\nmid |Q|$. Choose integers $a,b$ with $a|Q|+b\\ell^s=1$, where $\\ell^sA=0$. The element $x_0=a\\sum_{q\\in Q}qx$ is independent of coset representatives, is fixed by $H$, and maps to $a|Q|y=y$. This proves surjectivity on fixed elements. Exactness on underlying modules is exactness in both categories by the cited node, so $V$ is exact.",
+   "text": "Apply the vanishing and finiteness consequences of the procyclic two-term computation to N. Transfer the zero objects through the comparison isomorphisms; transfer finiteness through the underlying linear equivalences of the same isomorphisms.",
    "uses": [
-    "lem-exc-discrete-modules-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, third paragraph, the averaging argument with its finite quotient and inverse of the group order written out"
-   }
-  },
-  {
-   "text": "Let $\\operatorname{Inf}:\\mathcal C_{G/H}\\to\\mathcal C_G$ be inflation along $G\\to G/H$: it keeps the underlying $A$-module and precomposes the action. The inverse image of an open stabilizer is open, so inflation is defined. It preserves monomorphisms, since these are underlying injections by [lem-exc-discrete-modules-abelian]. A $G$-equivariant map $\\operatorname{Inf}(X)\\to N$ has image in $N^H$, and factoring through this submodule gives exactly a $(G/H)$-equivariant map $X\\to V(N)$; the two operations are inverse. To check that $V(I)$ is injective when $I$ is injective, take a monomorphism $X\\hookrightarrow Y$ and a map $X\\to V(I)$. The corresponding map $\\operatorname{Inf}(X)\\to I$ extends to $\\operatorname{Inf}(Y)\\to I$ by the definition of injectivity in [def-sp-injective-resolutions]. Factoring the extension through $V(I)$ extends the original map. This proves that $V(I)$ is injective.",
-   "uses": [
-    "lem-exc-discrete-modules-abelian",
-    "def-sp-injective-resolutions"
+    "lem-exc-procyclic-cohomology-conclusions"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, third paragraph, exact inflation and preservation of injectives by the fixed-submodule functor"
-   }
-  },
-  {
-   "text": "Choose an injective resolution $M\\to I^\\bullet$ in $\\mathcal C_G$, which exists by [lem-exc-discrete-modules-abelian]. Step 3 makes $M^H\\to V(I^\\bullet)$ exact, and Step 4 makes every $V(I^n)$ injective in $\\mathcal C_{G/H}$; thus it is an injective resolution there. For each term one has $(I^n)^G=((I^n)^H)^{G/H}$ as the very same submodule of $I^n$, and the differentials on these submodules are the same restrictions. By the injective-resolution definition of continuous cohomology in [def-exc-continuous-cohomology] and of right derived functors in [def-sp-left-exact-additive], this single complex therefore computes both $H^q(G,M)$ and $H^q(G/H,M^H)$. Identifying $G/H$ with $\\mathbf Z_\\ell$ from Step 2 just relabels the action through the topological group isomorphism: the equivariant maps and fixed submodules are identical under that relabelling. Consequently $H^q(G,M)\\cong H^q(\\mathbf Z_\\ell,M^H)$ for every $q\\geq0$.",
-   "uses": [
-    "lem-exc-discrete-modules-abelian",
-    "def-exc-continuous-cohomology",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, third paragraph, comparison by the same injective-resolution complex"
-   }
-  },
-  {
-   "text": "The submodule $M^H$ is a discrete continuous $A[\\mathbf Z_\\ell]$-module by Step 3 and the topological identification of Step 2, and $\\ell^sM^H=0$ because $\\ell^sA=0$. Apply [lem-exc-procyclic-two-term] with the prime $\\ell$, the finite ring $A$, and this module, using the generator $1\\in\\mathbf Z_\\ell$. Its two-term complex $[M^H\\xrightarrow{\\tau-1}M^H]$ computes the right-hand cohomology of Step 5. The complex is zero outside degrees zero and one, so its cohomology vanishes in every degree $q>1$. Its degree-zero cohomology is $\\ker(\\tau-1)$ and its degree-one cohomology is $M^H/(\\tau-1)M^H$. If $M$ is finite, its submodule $M^H$ is finite, and these kernel and quotient sets are finite. The identification in Step 5 proves both finiteness clauses and the required vanishing for $G$.",
-   "uses": [
-    "lem-exc-procyclic-two-term"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, final two paragraphs, procyclic calculation and finiteness"
+    "place": "last two paragraphs"
    }
   }
  ],
  "proof_deps": [
-  "lem-exc-henselian-dvr-tame-sequence",
-  "def-weil-pbc-henselian-terminology",
-  "lem-exc-discrete-modules-abelian",
-  "def-sp-injective-resolutions",
-  "def-exc-continuous-cohomology",
-  "def-sp-left-exact-additive",
-  "lem-exc-procyclic-two-term"
+  "lem-exc-dvr-galois-comparison",
+  "lem-exc-procyclic-cohomology-conclusions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-  "place": "All paragraphs, with Stacks Tag 0BUB for the ramification dependency and explicit averaging and injective-resolution arguments"
+  "place": "All paragraphs; Y2 formalization retains all six original steps through proved helpers."
  },
  "mathlib_searches": [
   {
@@ -225,5 +174,15 @@
   "declarations": [
    "Rep.isZero_dvr_galois_cohomology"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,144 @@
+{
+ "id": "lem-exc-dvr-galois-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "second and third paragraphs; DAG steps 1--5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local Galois cohomology and the ell-adic quotient",
+ "statement": "Let R be an excellent strictly henselian DVR with algebraically closed residue field of prime characteristic p. Let ell be a prime different from p and A a finite ring annihilated by some power of ell. For every discrete continuous A-module M over the absolute Galois group G of Frac(R), there exists a discrete continuous A-module N for the additive ell-adic integers such that finiteness of M implies finiteness of N and H^q(G,M) is isomorphic to H^q(Z_ell,N) in every natural degree. Here H is [def-exc-continuous-cohomology]; N is constructed as invariants under the kernel of the ell-coordinate of a tame quotient.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "second and third paragraphs; DAG steps 1--5"
+ },
+ "stmt_deps": [
+  "def-exc-continuous-cohomology",
+  "def-exc-excellent-ring",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Strict henselianity supplies henselianity. Apply the tame Galois sequence to the fraction field and its separable closure, and compose the continuous surjection with the ell-coordinate projection. This projection is continuous and surjective.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "second and third paragraphs; DAG steps 1--5"
+   }
+  },
+  {
+   "text": "Every finite continuous quotient of the coordinate kernel has order coprime to ell by the tame-coordinate lemma.",
+   "uses": [
+    "lem-exc-tame-ell-coordinate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "second and third paragraphs; DAG steps 1--5"
+   }
+  },
+  {
+   "text": "Construct N as the kernel-fixed submodule and use exact-kernel-invariants comparison in each degree. If M is finite, N is finite because it is a subtype of M.",
+   "uses": [
+    "lem-exc-kernel-invariants-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "second and third paragraphs; DAG steps 1--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-exc-henselian-dvr-tame-sequence",
+  "lem-exc-tame-ell-coordinate",
+  "lem-exc-kernel-invariants-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "second and third paragraphs; DAG steps 1--5; details formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous cohomology quotient isomorphism when finite quotients of the kernel have order invertible in the coefficient ring",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.coindIso, groupCohomology.H0Iso, groupCohomology.cocyclesIso₀, groupCohomology.isoCocycles₁, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, continuousCohomology, groupCohomology.π_comp_H1Iso_hom_apply",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cohomology of a profinite group agrees with quotient cohomology when the kernel has finite quotients prime to the torsion coefficients",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, continuousCohomology, groupCohomology.H1InfRes_X₁, groupCohomology.H1InfRes_X₂, groupCohomology.π_comp_H1Iso_hom_apply, groupCohomology, groupCohomology.H1InfRes_f, groupCohomology.H1InfRes_X₃",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.Coprime, IsUnit",
+   "results": "5 hits: ZMod.isUnit_iff_coprime, ZMod.eq_one_or_isUnit_sub_one, IsUnit.natCast_of_isNilpotent_of_coprime, IsPrimitiveRoot.geom_sum_isUnit, IsPrimitiveRoot.geom_sum_isUnit'",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*invariants|invariants.*exact",
+   "results": "3 hits: Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DvrGalois",
+  "date": "2026-10-19",
+  "group": "Y2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DvrGaloisComparison",
+  "file": "lean/Sheaf/RepresentationTheory/DvrGaloisComparison.lean",
+  "declaration": "Rep.nonempty_dvr_galois_cohomology_iso",
+  "statement": "theorem nonempty_dvr_galois_cohomology_iso\n    (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]\n    (hR : IsExcellent R) [IsStrictlyHenselianLocalRing R]\n    [IsAlgClosed (IsLocalRing.ResidueField R)]\n    (p : ℕ) [Fact p.Prime] [CharP (IsLocalRing.ResidueField R) p]\n    (ell : ℕ) [Fact ell.Prime] (hell : ell ≠ p)\n    (A : Type v) [Ring A] [Finite A]\n    (hA : ∃ s : ℕ, (ell ^ s : ℕ) • (1 : A) = 0)\n    (M : DiscreteContinuousRep.{v, u, max u w} A\n      (Gal(SeparableClosure (FractionRing R)/FractionRing R))) :\n    ∃ N : DiscreteContinuousRep.{v, 0, max u w} A (Multiplicative ℤ_[ell]),\n      (Finite M.obj.V → Finite N.obj.V) ∧\n      ∀ q : ℕ, Nonempty\n        (((discreteContinuousCohomologyFunctor\n          (Gal(SeparableClosure (FractionRing R)/FractionRing R)) A q).obj M) ≅\n        ((discreteContinuousCohomologyFunctor\n          (Multiplicative ℤ_[ell]) A q).obj N))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

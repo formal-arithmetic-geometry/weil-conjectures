@@ -1,0 +1,123 @@
+{
+ "id": "lem-exc-tame-ell-coordinate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "second paragraph; DAG step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Prime-to-ell finite quotients of a tame coordinate kernel",
+ "statement": "Let p and ell be distinct primes and let G be a topological group. Suppose a surjective homomorphism theta from G to the product of the additive r-adic integers over primes r different from p has the following property: every finite continuous quotient of ker(theta) has p-power order. Compose theta with its ell-coordinate projection to obtain pi. Every finite continuous quotient Q of ker(pi) has order coprime to ell. The r-adic integers are those of [def-weil-l-adic-numbers].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "second paragraph; DAG step 2"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication by ell is invertible in each r-adic factor for r different from ell. Define its inverse coordinatewise; on the omitted ell-coordinate put zero. This proves surjectivity of the ell-th power map on the kernel of the coordinate projection.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "second paragraph; DAG step 2"
+   }
+  },
+  {
+   "text": "For a finite quotient Q of ker(pi), let D be the image of ker(theta). It is a normal subgroup, a finite continuous quotient of ker(theta), and therefore has p-power order. The quotient Q/D factors surjectively through the other tame coordinates. Its ell-th power map is surjective, and hence injective because Q/D is finite. If ell divided its order, Cauchy would give an element of order ell contradicting injectivity. Thus its order is coprime to ell. The product formula for the order of Q gives the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "second paragraph; DAG step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "second paragraph; DAG step 2; details formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of the ell coordinate of a tame Galois quotient with pro p kernel has finite quotients of order coprime to ell",
+   "results": "8 hits: Subgroup.finiteIndex_ker, InfiniteGalois.profiniteGalGrp, InfiniteGalois.mk_toAlgEquivAux, InfiniteGalois.normalAutEquivQuotient, Group.fintypeOfKerOfCodom, InfiniteGalois.proj, InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois, AddGroup.fintypeOfKerOfCodom",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Existing finite-group, homology and cohomology infrastructure is used in the Lean proof; it does not state this profinite finite-coefficient conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite continuous quotients of the kernel of projection from product of r adic integers to ell adic integers",
+   "results": "8 hits: AdicCompletion.piEquivFin, Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField, AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, AdicCompletion.piEquivOfFintype_apply, Ideal.finite_quotient_prod, instFiniteQuotientIdealOfIsMaximal",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Existing finite-group, homology and cohomology infrastructure is used in the Lean proof; it does not state this profinite finite-coefficient conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.Coprime, Nat.card",
+   "results": "12 hits: AddSubgroup.inf_eq_bot_of_coprime, Subgroup.inf_eq_bot_of_coprime, AddSubgroup.disjoint_of_coprime_natCard, Subgroup.disjoint_of_coprime_natCard, nsmulCoprime, powCoprime, Nat.Coprime.nsmul_right_bijective, Nat.Coprime.pow_left_bijective",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Existing finite-group, homology and cohomology infrastructure is used in the Lean proof; it does not state this profinite finite-coefficient conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelFixed|tameCoordinate|procyclic_cohomology_conclusions",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Existing finite-group, homology and cohomology infrastructure is used in the Lean proof; it does not state this profinite finite-coefficient conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DvrGalois",
+  "date": "2026-10-19",
+  "group": "Y2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.GroupTheory.TameEllCoordinate",
+  "file": "lean/Sheaf/GroupTheory/TameEllCoordinate.lean",
+  "declaration": "ProfiniteGroup.tameCoordinate_finite_quotients",
+  "statement": "theorem tameCoordinate_finite_quotients\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hlp : l ≠ p)\n    (θ : G →* Multiplicative (∀ r : {r : Nat.Primes // (r : ℕ) ≠ p},\n      @PadicInt r.1 (Fact.mk r.1.2))) (hθ : Surjective θ)\n    (hwild : ∀ (Q : Type w) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q]\n      [Finite Q] (f : θ.ker →* Q), Continuous f → Surjective f →\n        ∃ n : ℕ, Nat.card Q = p ^ n) :\n    let π := (tameCoordinate p l hlp).comp θ\n    ∀ (Q : Type w) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q] [Finite Q]\n      (f : π.ker →* Q), Continuous f → Surjective f → Nat.Coprime l (Nat.card Q)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

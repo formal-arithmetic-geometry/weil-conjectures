@@ -1,0 +1,115 @@
+{
+ "id": "lem-exc-procyclic-cohomology-conclusions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "final paragraph; DAG step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Vanishing and finiteness for procyclic cohomology",
+ "statement": "Let ell be prime and A a finite ring killed by ell^s. For every discrete continuous A-module M for the additive ell-adic integers [def-weil-l-adic-numbers], H^q(M) is zero for q>1; if M is finite, H^0(M) and H^1(M) are finite. Cohomology is [def-exc-continuous-cohomology].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "final paragraph; DAG step 6"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-exc-continuous-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two-term computation. Above degree one the term of the complex is zero, so the complex is exact at that degree and its homology is zero. If M is finite, the two terms in degrees zero and one are finite by the given linear equivalences. Each homology is a quotient of the kernel of the next differential, a submodule of a finite term, so it is finite. Transfer both conclusions through the computation isomorphisms.",
+   "uses": [
+    "lem-exc-procyclic-two-term"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "final paragraph; DAG step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-procyclic-two-term"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "final paragraph; DAG step 6; details formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex of modules with finite terms has finite homology",
+   "results": "8 hits: CategoryTheory.CategoryWithHomology.hasHomology, HomologicalComplex.instHasFiniteLimits, CategoryTheory.InjectiveResolution.hasHomology, CochainComplex.HomComplex, CategoryTheory.ShortComplex.Exact.hasHomology, HomologicalComplex.HasHomology, groupCohomology, CategoryTheory.ShortComplex.HasHomology",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex concentrated in degrees zero and one with finite terms has finite cohomology and vanishes above degree one",
+   "results": "8 hits: CochainComplex.exactAt_succ_single_obj, CochainComplex.isZero_of_isLE, DerivedCategory.isZero_of_isLE, CochainComplex.isZero_of_isGE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, CochainComplex.instIsStrictlyGEObjHomologicalComplexIntUpSingle, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ExactAt.of_isZero",
+   "results": "1 hits: HomologicalComplex.ExactAt.of_isZero",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*homology|finite.*[Hh]omology",
+   "results": "24 hits: Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this profinite comparison or its finite-cohomology consequences. Applicable finite-group, homology, adjunction and derived-functor infrastructure is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DvrGalois",
+  "date": "2026-10-19",
+  "group": "Y2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DvrGaloisProcyclic",
+  "file": "lean/Sheaf/RepresentationTheory/DvrGaloisProcyclic.lean",
+  "declaration": "Rep.procyclic_cohomology_conclusions",
+  "statement": "theorem procyclic_cohomology_conclusions\n    (l : ℕ) [Fact l.Prime] (s : ℕ) (A : Type v) [Ring A] [Finite A]\n    (hA : (l ^ s : ℕ) • (1 : A) = 0)\n    (M : DiscreteContinuousRep.{v, 0, w} A (Multiplicative ℤ_[l])) :\n    (∀ q : ℕ, 1 < q →\n      IsZero ((discreteContinuousCohomologyFunctor.{0,v,w}\n        (Multiplicative ℤ_[l]) A q).obj M)) ∧\n      (Finite M.obj.V →\n        Finite (((discreteContinuousCohomologyFunctor.{0,v,w}\n          (Multiplicative ℤ_[l]) A 0).obj M).carrier) ∧\n        Finite (((discreteContinuousCohomologyFunctor.{0,v,w}\n          (Multiplicative ℤ_[l]) A 1).obj M).carrier))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T192855-L-1878877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

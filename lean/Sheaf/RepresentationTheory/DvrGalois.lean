@@ -11,11 +11,8 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.Galois.Profinite
-import Sheaf.CategoryTheory.DiscreteModulesAbelian
-import Sheaf.RepresentationTheory.ProcyclicTwoTerm
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.FieldTheory.HenselianDVRTameSequence
+import Sheaf.RepresentationTheory.DvrGaloisComparison
+import Sheaf.RepresentationTheory.DvrGaloisProcyclic
 
 /-!
 # Prime-to-characteristic local Galois cohomology
@@ -28,7 +25,6 @@ Stacks Project, Tag 09E3 (blueprint: lem-exc-dvr-galois).
 @[expose] public section
 
 set_option autoImplicit false
-set_option warningAsError true
 
 universe u v w
 
@@ -36,6 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Rep
 
+set_option warningAsError true in
 /-- (blueprint: lem-exc-dvr-galois) Let `R` be an excellent strictly henselian DVR
 with algebraically closed residue field of positive characteristic `p`. For a finite
 prime-power-torsion coefficient ring at a different prime `ell`, continuous cohomology
@@ -95,6 +92,27 @@ theorem isZero_dvr_galois_cohomology
           (Gal(SeparableClosure (FractionRing R)/FractionRing R)) A 0).obj M).carrier) ∧
           Finite (((discreteContinuousCohomologyFunctor
             (Gal(SeparableClosure (FractionRing R)/FractionRing R)) A 1).obj M).carrier)) := by
-  sorry
+  obtain ⟨s, hs⟩ := hA
+  obtain ⟨N, hMN, hcomp⟩ := nonempty_dvr_galois_cohomology_iso
+    R hR p ell hell A ⟨s, hs⟩ M
+  have hpro := procyclic_cohomology_conclusions ell s A hs N
+  constructor
+  · intro q hq
+    obtain ⟨e⟩ := hcomp q
+    exact IsZero.of_iso (hpro.1 q hq) e
+  · intro hM
+    have hN : Finite N.obj.V := hMN hM
+    exact ⟨by
+      obtain ⟨e⟩ := hcomp 0
+      have : Finite (((discreteContinuousCohomologyFunctor
+          (Multiplicative ℤ_[ell]) A 0).obj N).carrier) :=
+        (hpro.2 hN).1
+      exact Finite.of_equiv _ e.toLinearEquiv.toEquiv.symm,
+      by
+        obtain ⟨e⟩ := hcomp 1
+        have : Finite (((discreteContinuousCohomologyFunctor
+            (Multiplicative ℤ_[ell]) A 1).obj N).carrier) :=
+          (hpro.2 hN).2
+        exact Finite.of_equiv _ e.toLinearEquiv.toEquiv.symm⟩
 
 end Rep
