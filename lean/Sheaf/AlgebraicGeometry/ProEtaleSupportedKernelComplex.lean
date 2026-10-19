@@ -11,11 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Data.ZMod.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison
-import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleSupportedModuleUnits
 
 /-!
 # Supported kernels and their natural short exact complex sequences
@@ -56,7 +52,8 @@ Proof: compose both maps with the target kernel inclusion. The kernel map equati
 reduces both composites to the same inclusion; cancel its monomorphism. -/
 theorem finiteSupportedKernelMap_id (N : FiniteCoefficientModules T A) :
     finiteSupportedKernelMap j A (𝟙 N) = 𝟙 _ := by
-  sorry
+  apply (cancel_mono (kernel.ι ((finiteModuleAdjunction j A).unit.app N))).1
+  simp [finiteSupportedKernelMap]
 
 /-- Kernel maps preserve composition.
 Source: blueprint support-triangle, supported-kernel paragraph
@@ -67,7 +64,8 @@ theorem finiteSupportedKernelMap_comp {N N' N'' : FiniteCoefficientModules T A}
     (a : N ⟶ N') (b : N' ⟶ N'') :
     finiteSupportedKernelMap j A (a ≫ b) =
       finiteSupportedKernelMap j A a ≫ finiteSupportedKernelMap j A b := by
-  sorry
+  apply (cancel_mono (kernel.ι ((finiteModuleAdjunction j A).unit.app N''))).1
+  simp [finiteSupportedKernelMap, Category.assoc]
 
 /-- The sectionwise kernel of the actual open unit, with its induced maps.
 Source: blueprint support-triangle, supported-kernel paragraph
@@ -86,7 +84,10 @@ Proof: after composition with the target kernel inclusion, the kernel map equati
 and distributivity identify the map of a sum with the sum of the maps. Cancel the
 monic inclusion. This is the additive structure of the kernel functor in Step 4. -/
 theorem finiteSupportedKernel_additive : (finiteSupportedKernel j A).Additive := by
-  sorry
+  constructor
+  intro N N' a b
+  apply (cancel_mono (kernel.ι ((finiteModuleAdjunction j A).unit.app N'))).1
+  simp [finiteSupportedKernel, finiteSupportedKernelMap, Preadditive.add_comp]
 
 attribute [instance] finiteSupportedKernel_additive
 
@@ -100,7 +101,7 @@ theorem finiteSupportedKernelInclusion_naturality
     (finiteSupportedKernel j A).map a ≫
         kernel.ι ((finiteModuleAdjunction j A).unit.app N') =
       kernel.ι ((finiteModuleAdjunction j A).unit.app N) ≫ a := by
-  sorry
+  simp [finiteSupportedKernel, finiteSupportedKernelMap]
 
 /-- The natural kernel inclusion into the original module sheaf.
 Source: blueprint support-triangle, supported-kernel paragraph
@@ -239,6 +240,57 @@ theorem finiteSupportedKernelComplex_shortExact
             (Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A)
               (finiteOpenComplexUnit j A)) w).map ((evaluation _ _).obj I)).map
                 (HomologicalComplex.eval _ (ComplexShape.up ℤ) q)).ShortExact := by
-  sorry
+  obtain ⟨hc, hz, hop⟩ := finiteSupportedModuleUnits i j A hU hB
+  have hk (N : FiniteCoefficientModules T A) :
+      IsZero ((finiteCoefficientModulePullback j A).obj
+        ((finiteSupportedKernel j A).obj N)) := by
+    have := (finiteCoefficientModulePullback_exact j A).1
+    exact (isZero_kernel_of_mono ((finiteCoefficientModulePullback j A).map
+      ((finiteModuleAdjunction j A).unit.app N))).of_iso
+        (PreservesKernel.iso (finiteCoefficientModulePullback j A) _)
+  have hu (N : FiniteCoefficientModules T A) :
+      IsIso ((finiteModuleAdjunction i A).unit.app
+        ((finiteSupportedKernel j A).obj N)) := hc _ (hk N)
+  let v : finiteSupportedKernel j A ⟶
+      finiteSupportedH i j A ⋙ finiteModulePushforward i A :=
+    Functor.whiskerLeft (finiteSupportedKernel j A) (finiteModuleAdjunction i A).unit
+  have hv (N : FiniteCoefficientModules T A) : IsIso (v.app N) := hu N
+  have : IsIso v := NatIso.isIso_of_isIso_app _
+  let e : finiteOpenEpicComplexInclusion j A ⋙ finiteSupportedKernelComplex j A ≅
+      finiteOpenEpicComplexInclusion j A ⋙
+        (finiteSupportedH i j A ⋙ finiteModulePushforward i A).mapHomologicalComplex
+          (ComplexShape.up ℤ) :=
+    Functor.isoWhiskerLeft (finiteOpenEpicComplexInclusion j A)
+      (NatIso.mapHomologicalComplex (asIso v) (ComplexShape.up ℤ))
+  refine ⟨hc, hz, e, ?_, ?_⟩
+  · intro I q
+    rfl
+  · have w : (e.inv ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A)
+          (finiteSupportedKernelComplexInclusion j A)) ≫
+        Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A)
+          (finiteOpenComplexUnit j A) = 0 := by
+      ext I q
+      simp [finiteSupportedKernelComplexInclusion, finiteOpenComplexUnit,
+        finiteSupportedKernelInclusion, Category.assoc]
+    refine ⟨w, ?_⟩
+    intro I
+    have hd (q : ℤ) : (((ShortComplex.mk
+          (e.inv ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A)
+            (finiteSupportedKernelComplexInclusion j A))
+          (Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A)
+            (finiteOpenComplexUnit j A)) w).map ((evaluation _ _).obj I)).map
+              (HomologicalComplex.eval _ (ComplexShape.up ℤ) q)).ShortExact := by
+      have : Epi ((finiteModuleAdjunction j A).unit.app (I.obj.X q)) := I.property q
+      let f := (finiteModuleAdjunction j A).unit.app (I.obj.X q)
+      let s := ShortComplex.mk (kernel.ι f) f (kernel.condition f)
+      have hs : s.ShortExact := { exact := ShortComplex.exact_kernel f }
+      apply ShortComplex.shortExact_of_iso _ hs
+      let eq := (HomologicalComplex.eval _ (ComplexShape.up ℤ) q).mapIso (e.app I)
+      refine ShortComplex.isoMk eq (Iso.refl _) (Iso.refl _) ?_ ?_
+      · change eq.hom ≫ eq.inv ≫ kernel.ι f = kernel.ι f ≫ 𝟙 _
+        simp only [Iso.hom_inv_id_assoc, Category.comp_id]
+      · change 𝟙 _ ≫ f = f ≫ 𝟙 _
+        simp only [Category.id_comp, Category.comp_id]
+    exact ⟨HomologicalComplex.shortExact_of_degreewise_shortExact _ hd, hd⟩
 
 end AlgebraicGeometry.ProEtale
