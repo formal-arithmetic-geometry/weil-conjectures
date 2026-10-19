@@ -13,6 +13,8 @@ public import Sheaf.Paper.EtaleOriginWitness
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 
 /-!
 # Normalized finite coefficient and etale-origin transport
@@ -167,9 +169,11 @@ theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
   let J := Scheme.ProEt.topology X
   let D := sheafCompose J (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
   let adj := sheafificationAdjunction J AddCommGrpCat.{u + 1}
-  let e : C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅ D :=
+  let e₀ : (D ⋙ sheafToPresheaf J AddCommGrpCat.{u + 1}) ⋙
+      presheafToSheaf J AddCommGrpCat.{u + 1} ≅ D :=
     NatIso.ofComponents (fun F ↦ asIso (adj.counit.app (D.obj F)))
       (fun f ↦ adj.counit.naturality (D.map f))
+  let e : C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅ D := e₀
   have he (F : Sheaf J (ModuleCat.{u + 1} Λ)) :
       toSheafify J (D.obj F).obj ≫ (e.hom.app F).hom = 𝟙 _ :=
     adj.right_triangle_components (D.obj F)
@@ -184,6 +188,7 @@ theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
     apply sheafify_hom_ext J _ _ (D.obj F).property
     ext U m
     exact (he' F U m).trans (ConcreteCategory.congr_hom (congr_app (he F) U) m).symm
+
 
 /-- The specified underlying-sheaf identification, fixed on all unit sections.
 Source: Stacks, Tag 03DA
@@ -437,6 +442,152 @@ noncomputable def hPullbackInv {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 
     (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
       (coefficients B X) (constantRingIso B f))).symm (hDirect B f Λ φ)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem fixedPullbackUnit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (Λ : Type (u + 1)) [CommRing Λ]
+    (G : Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) :
+    IsIso (((cbcProEtaleComparisonAdjunction AddCommGrpCat.{u + 1} f).homEquiv
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj G))).symm
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+        ((cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G))) := by
+  have key {a : ModuleCat.{u + 1} Λ} {b : AddCommGrpCat.{u + 1}}
+      (x : (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj a ⟶ b) :
+      (forget₂ _ _).map ((ModuleCat.forget₂CoinduceAdj Λ).unit.app a) ≫
+        (forget₂ _ _).map ((ModuleCat.coinduce Λ).map x) ≫
+          (ModuleCat.forget₂CoinduceAdj Λ).counit.app b = x := by
+    have h := ((ModuleCat.forget₂CoinduceAdj Λ).homEquiv a b).symm_apply_apply x
+    rwa [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit, Functor.map_comp_assoc] at h
+  rw [isIso_iff_coyoneda_map_bijective]
+  intro T
+  let adjX := Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology X) Λ
+  let adjY := Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology Y) Λ
+  let e := (adjX.homEquiv _ T).trans
+    (((cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv G _).trans
+      (adjY.homEquiv G ((ProEtale.lowerStar AddCommGrpCat.{u + 1} f).obj T)).symm)
+  have he (g) : ((cbcProEtaleComparisonAdjunction AddCommGrpCat.{u + 1} f).homEquiv
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj G))).symm
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+        ((cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G)) ≫ g =
+      ((cbcProEtaleComparisonAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm (e g) := by
+    rw [← Adjunction.homEquiv_naturality_right_symm]
+    congr 1
+    apply Sheaf.hom_ext
+    ext U : 2
+    simp only [e, adjX, adjY, Sheaf.forget₂CoinduceAdj, Equiv.trans_apply,
+      Adjunction.homEquiv_unit]
+    erw [Adjunction.homEquiv_counit]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, sheafCompose_map_hom,
+      Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
+      sheafComposeAdjunction_counit_app_hom, Functor.whiskerLeft_app]
+    congr 1
+    exact (key _).symm
+  have : (fun g ↦ ((cbcProEtaleComparisonAdjunction AddCommGrpCat.{u + 1} f).homEquiv
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj G))).symm
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+        ((cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G)) ≫ g) =
+      ((cbcProEtaleComparisonAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm ∘ e :=
+    funext he
+  rw [this]
+  exact (Equiv.bijective _).comp e.bijective
+
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem cPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
+    IsIso ((mateEquiv (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
+      (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
+        (coefficients B X) (constantRingIso B f))).symm (cDirect B f Λ φ).hom).natTrans := by
+  let a := cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f
+  let b := Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
+    (coefficients B X) (constantRingIso B f)
+  let ab := Scheme.proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}
+  let TY := SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B Y))
+  let TX := SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B X))
+  let DY := sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  let s := ((mateEquiv a b).symm (cDirect B f Λ φ).hom).natTrans
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  let N := (modulePullback B f).obj ((C B Y Λ φ).obj M)
+  let N' := (C B X Λ φ).obj ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj M)
+  let g := (cUnderlying B Y Λ φ).inv.app M ≫ TY.map (b.unit.app ((C B Y Λ φ).obj M))
+  let h := DY.map (a.unit.app M) ≫
+    (cUnderlying B Y Λ φ).inv.app ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f ⋙
+      ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj M) ≫
+    TY.map ((cDirect B f Λ φ).hom.app
+      ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj M))
+  have hd (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+      (cUnderlying B Y Λ φ).inv.app ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≫
+        TY.map ((cDirect B f Λ φ).hom.app F) =
+      (Scheme.proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B X Λ φ).inv.app F) := by
+    apply (cancel_mono ((Scheme.proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}).map
+      ((cUnderlying B X Λ φ).hom.app F))).1
+    simp only [← Functor.map_comp, Iso.inv_hom_id_app]
+    ext W m
+    have hn := (Classical.choose_spec (cDirect_existsUnique B f Λ φ)).1 F W
+      (((cUnderlying B Y Λ φ).inv.app
+        ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).hom.app W m)
+    have hi := ConcreteCategory.congr_hom (congr_app
+      (congrArg (sheafToPresheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B Y Λ φ).inv_hom_id_app
+          ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))) W) m
+    change _ = m at hi
+    change _ = m
+    exact hn.trans hi
+  have hg : IsIso ((ab.homEquiv _ _).symm g) := by
+    dsimp only [g]
+    rw [Adjunction.homEquiv_naturality_left_symm]
+    have hi : IsIso ((ab.homEquiv _ _).symm
+        (TY.map (b.unit.app ((C B Y Λ φ).obj M)))) :=
+      Scheme.ringUnitComparison f (coefficients B Y) (coefficients B X)
+        (constantRingIso B f) b ((C B Y Λ φ).obj M)
+    exact IsIso.comp_isIso' (inferInstance : IsIso
+      ((Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B Y Λ φ).inv.app M))) hi
+  have hh : IsIso ((ab.homEquiv _ _).symm h) := by
+    dsimp only [h]
+    simp only [Functor.comp_obj]
+    erw [hd, Adjunction.homEquiv_naturality_right_symm]
+    have hi : IsIso ((ab.homEquiv (DY.obj M)
+        ((sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+            ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj M))).symm
+              (DY.map (a.unit.app M))) := by
+      dsimp only [ab, DY, a]
+      exact fixedPullbackUnit_isIso f Λ M
+    exact IsIso.comp_isIso' hi (inferInstance : IsIso
+      ((cUnderlying B X Λ φ).inv.app
+        ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj M)))
+  have hk : g ≫ (Scheme.proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}).map
+      (TX.map (s.app M)) = h := by
+    have hu := unit_mateEquiv_symm a b (cDirect B f Λ φ).hom M
+    have ht := congrArg TY.map hu
+    simp only [Functor.map_comp] at ht
+    dsimp only [g, h]
+    rw [Category.assoc]
+    change (cUnderlying B Y Λ φ).inv.app M ≫
+      (TY.map (b.unit.app ((C B Y Λ φ).obj M)) ≫
+        TY.map ((moduleDirectImage B f).map (s.app M))) = _
+    erw [← ht]
+    rw [← Category.assoc]
+    exact congrArg (fun k ↦ k ≫ TY.map ((cDirect B f Λ φ).hom.app
+      ((cbcProEtaleComparisonPullback (ModuleCat.{u + 1} Λ) f).obj M)))
+      ((cUnderlying B Y Λ φ).inv.naturality (a.unit.app M)).symm
+  have : IsIso (TX.map (s.app M)) := isoOfAdjunct ab g h (TX.map (s.app M)) hg hh hk
+  exact isIso_of_reflects_iso (s.app M) TX
+
 /-- The specified coefficient/site pullback comparison is invertible.
 Source: Stacks, Tags 03EK and 099R
 (blueprint: def-cbc-finite-constant-coefficient-transport).
@@ -448,7 +599,23 @@ No flatness and no preservation of injectives by scalar restriction is used. -/
 theorem hPullbackInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     IsIso (hPullbackInv B f Λ φ) := by
-  sorry
+  let a := cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f
+  let b := cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f
+  let c := Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
+    (coefficients B X) (constantRingIso B f)
+  let α := (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv
+  let β := ((mateEquiv b c).symm (cDirect B f Λ φ).hom)
+  have : IsIso β.natTrans := cPullback_isIso B f Λ φ
+  have h := mateEquiv_vcomp a b c α β
+  rw [Equiv.apply_symm_apply] at h
+  have he : hPullbackInv B f Λ φ = (TwoSquare.hComp α β).natTrans := by
+    apply (mateEquiv a c).injective
+    change (mateEquiv a c) ((mateEquiv a c).symm (hDirect B f Λ φ)) = _
+    rw [Equiv.apply_symm_apply]
+    exact h.symm
+  rw [he]
+  dsimp only [TwoSquare.hComp, TwoSquare.mk]
+  infer_instance
 
 /-- The inverse open comparison is the open-adjunction inverse mate of pullback.
 Source: Stacks, Tag 09AF
