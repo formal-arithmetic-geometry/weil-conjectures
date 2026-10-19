@@ -77,6 +77,47 @@ theorem adjointMate
         (∀ d : C₂, F₁.map (β'.hom.app d) ≫ α.hom.app (G₂.obj d) ≫
           adj₂.counit.app d = adj₁.counit.app d) →
         β' = β) := by
-  sorry
+  let β := conjugateIsoEquiv adj₁ adj₂ α.symm
+  have hunit (c : C₁) :
+      adj₁.unit.app c ≫ β.hom.app (F₁.obj c) ≫ G₂.map (α.hom.app c) =
+        adj₂.unit.app c := by
+    change adj₁.unit.app c ≫ (conjugateEquiv adj₁ adj₂ α.inv).app _ ≫ _ = _
+    rw [← Category.assoc, unit_conjugateEquiv]
+    simp [Category.assoc, ← G₂.map_comp]
+  refine ⟨β, ?_, ?_, hunit, ?_, ?_, ?_, ?_⟩
+  · intro d
+    simp [β, conjugateEquiv_apply_app]
+  · intro d
+    simp [β, conjugateEquiv_apply_app]
+  · intro d
+    change F₁.map ((conjugateEquiv adj₁ adj₂ α.inv).app d) ≫ _ ≫ _ = _
+    rw [α.hom.naturality_assoc, conjugateEquiv_counit]
+    simp
+  · intro c
+    change adj₂.unit.app c ≫ (conjugateEquiv adj₂ adj₁ α.hom).app _ ≫ _ = _
+    rw [← Category.assoc, unit_conjugateEquiv]
+    simp [Category.assoc, ← G₁.map_comp]
+  · intro d
+    change F₂.map ((conjugateEquiv adj₂ adj₁ α.hom).app d) ≫ _ ≫ _ = _
+    rw [α.inv.naturality_assoc, conjugateEquiv_counit]
+    simp
+  · intro β' hunit' _
+    have h (c : C₁) : adj₁.unit.app c ≫ β'.hom.app (F₁.obj c) =
+        adj₁.unit.app c ≫ β.hom.app (F₁.obj c) := by
+      apply (cancel_mono (G₂.map (α.hom.app c))).mp
+      simpa only [Category.assoc] using (hunit' c).trans (hunit c).symm
+    apply Iso.ext
+    ext d
+    calc
+      β'.hom.app d = adj₁.unit.app (G₁.obj d) ≫
+          β'.hom.app (F₁.obj (G₁.obj d)) ≫ G₂.map (adj₁.counit.app d) := by
+        rw [← β'.hom.naturality, ← Category.assoc]
+        simp
+      _ = adj₁.unit.app (G₁.obj d) ≫
+          β.hom.app (F₁.obj (G₁.obj d)) ≫ G₂.map (adj₁.counit.app d) := by
+        rw [← Category.assoc, h, Category.assoc]
+      _ = β.hom.app d := by
+        rw [← β.hom.naturality, ← Category.assoc]
+        simp
 
 end CategoryTheory
