@@ -17150,3 +17150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/C4/Sheaf.Paper.OpenExtensionFiniteTor (stage 3; reviewer PASS; first push; landing 20261019T093306-L-2289921 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C5/Sheaf.AlgebraicGeometry.ConstructibleSheafDevissage (stage 3; reviewer PASS; first push; landing 20261019T093307-L-2290319 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C5/Sheaf.AlgebraicGeometry.NormalOpenLisseImage (stage 3; reviewer PASS; first push; landing 20261019T093308-L-2290672 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/C5/Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed (stage 3; reviewer PASS; first push; landing 20261019T093310-L-2291211 (proof); batch 20261019T093237; modules 1; new nodes 0)
