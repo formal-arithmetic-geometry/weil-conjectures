@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 

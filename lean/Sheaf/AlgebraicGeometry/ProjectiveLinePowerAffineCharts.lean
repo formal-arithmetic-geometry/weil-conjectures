@@ -9,9 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 
 /-!
 # Standard affine charts of a fibre power of the projective line

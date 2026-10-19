@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 
 /-! # Finite cohomology of a single projective twist over an affine base
 

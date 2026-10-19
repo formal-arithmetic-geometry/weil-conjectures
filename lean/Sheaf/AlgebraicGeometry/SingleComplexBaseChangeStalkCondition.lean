@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Mathlib.Algebra.Homology.Monoidal
 import Sheaf.Algebra.Homology.KFlatPullback
 

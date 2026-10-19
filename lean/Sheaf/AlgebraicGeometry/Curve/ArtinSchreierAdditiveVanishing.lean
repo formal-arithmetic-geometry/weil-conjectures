@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.Algebra.Category.Grp.Ulift
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom

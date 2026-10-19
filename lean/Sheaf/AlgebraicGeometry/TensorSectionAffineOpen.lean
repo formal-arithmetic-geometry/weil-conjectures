@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.RingTheory.Flat.Basic
 

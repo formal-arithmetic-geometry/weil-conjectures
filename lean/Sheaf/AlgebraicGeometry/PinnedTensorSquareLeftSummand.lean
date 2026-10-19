@@ -10,9 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import Sheaf.AlgebraicGeometry.PinnedStalkTensor
 import Sheaf.AlgebraicGeometry.ModulePinnedTensorStalkSquare
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 

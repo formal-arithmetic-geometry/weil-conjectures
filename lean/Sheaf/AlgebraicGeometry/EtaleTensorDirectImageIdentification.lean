@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality

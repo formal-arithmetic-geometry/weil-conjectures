@@ -14,8 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ConductorSectionsRestriction
 import Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections
-import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Extending conductor-supported sections from one component

@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.CategoryTheory.RingedSiteModules
@@ -27,7 +27,7 @@ import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import Sheaf.AlgebraicGeometry.PerfectDegreeZeroFibreCriterion

@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 @[expose] public section
 universe v

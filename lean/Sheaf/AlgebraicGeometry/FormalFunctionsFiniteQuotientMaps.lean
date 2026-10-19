@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization
 
 /-! # Finite pullback of the local germ formula

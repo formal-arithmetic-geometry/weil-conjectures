@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.Paper.ModuleCupResolutionFMap
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.Paper.ModuleCupPullbackFlasqueComplexes
 import all Sheaf.Paper.ModuleCupPairingExists
 

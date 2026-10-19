@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-!
 # Continuity of sections of étale sheaves of sets

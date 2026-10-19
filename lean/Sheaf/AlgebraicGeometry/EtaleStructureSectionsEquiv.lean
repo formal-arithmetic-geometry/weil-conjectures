@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import Mathlib.Algebra.Category.Grp.Ulift

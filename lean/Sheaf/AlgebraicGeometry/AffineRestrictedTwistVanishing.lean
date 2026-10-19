@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 
-import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
+import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

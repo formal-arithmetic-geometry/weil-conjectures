@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale

@@ -52,7 +52,7 @@ import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.RingTheory.Artinian.Module
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.CategoryTheory.Limits.MorphismProperty
-import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
+import WeilConjectures.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
@@ -78,7 +78,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
-import WeilConjectures.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.RingTheory.SimpleFiltration
 /-!

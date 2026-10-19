@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleStalkFlat
 import Sheaf.AlgebraicGeometry.FlatSheafStalk
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
 import Mathlib.RingTheory.Flat.Localization

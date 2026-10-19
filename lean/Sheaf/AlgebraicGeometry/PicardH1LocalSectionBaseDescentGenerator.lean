@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 import Sheaf.AlgebraicGeometry.PicardH1BaseDescentFibreGenerator
 import Sheaf.AlgebraicGeometry.PicardH1BaseDescentSectionLifting
 import Sheaf.AlgebraicGeometry.TensorPullbackGeneratorReflection
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Combining fibre triviality and local section lifting
 Source: Stacks Project, Tag 0BF2.

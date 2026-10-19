@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.Algebra.Homology.KFlatTensorProduct
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 

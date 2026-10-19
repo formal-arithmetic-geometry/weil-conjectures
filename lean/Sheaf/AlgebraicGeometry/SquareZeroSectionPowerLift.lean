@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology
 import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerObstruction
 

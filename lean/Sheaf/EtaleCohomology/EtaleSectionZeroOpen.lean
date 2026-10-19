@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
 
 /-! # The zero locus of an étale section is Zariski open
 

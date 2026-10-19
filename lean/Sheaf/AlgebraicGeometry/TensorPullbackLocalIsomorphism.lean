@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.RestrictedTensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.RestrictedTensorPullbackStalk
 
 /-! # Tensor pullback preserves a local isomorphism
 

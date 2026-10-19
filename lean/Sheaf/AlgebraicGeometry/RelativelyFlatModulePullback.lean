@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
 import Sheaf.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
 

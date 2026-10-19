@@ -5,11 +5,11 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import all Sheaf.AlgebraicGeometry.SectionRingProjPreimageForward
-import all Sheaf.AlgebraicGeometry.SectionRingProjPreimageReverse
+import all WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageForward
+import all WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageReverse
 
 /-! # Underlying maps of section-ring quotient charts
 

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
-import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit

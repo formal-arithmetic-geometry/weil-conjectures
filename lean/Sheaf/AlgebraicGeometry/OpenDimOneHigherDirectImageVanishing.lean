@@ -17,7 +17,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 import Sheaf.AlgebraicGeometry.LocalSpectrumOpenClassification
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import Sheaf.AlgebraicGeometry.LocalPullbackAdjointStalkIso

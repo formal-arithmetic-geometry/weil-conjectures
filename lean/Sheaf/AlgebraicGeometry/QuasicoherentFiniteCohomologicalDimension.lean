@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 

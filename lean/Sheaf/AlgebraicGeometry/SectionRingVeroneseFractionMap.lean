@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-! # The explicit map from Veronese numerator sections to homogeneous fractions

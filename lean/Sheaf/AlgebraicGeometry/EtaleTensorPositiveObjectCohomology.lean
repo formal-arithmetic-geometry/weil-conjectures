@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation

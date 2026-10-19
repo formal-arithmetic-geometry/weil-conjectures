@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
+public import WeilConjectures.AlgebraicGeometry.Modules.ResidueFiber
 import Sheaf.AlgebraicGeometry.StalkFiniteFree
 import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 

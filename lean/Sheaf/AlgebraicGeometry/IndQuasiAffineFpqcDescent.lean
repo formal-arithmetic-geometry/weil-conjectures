@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms
-import Sheaf.AlgebraicGeometry.AffineFpqcDescent
+import WeilConjectures.AlgebraicGeometry.FpqcDescendingTypesMorphisms
+import WeilConjectures.AlgebraicGeometry.AffineFpqcDescent
 import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import WeilConjectures.AlgebraicGeometry.InvariantOpenEffectiveDescent
 import Sheaf.AlgebraicGeometry.FpqcInvariantIntersectionNeighbourhoods

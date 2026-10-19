@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 import Sheaf.AlgebraicGeometry.EtaleSetCartesianUnitEquality
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 

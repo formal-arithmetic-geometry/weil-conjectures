@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.AffineFpqcDescent
+import WeilConjectures.AlgebraicGeometry.AffineFpqcDescent
 import WeilConjectures.AlgebraicGeometry.InvariantOpenEffectiveDescent
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Noetherian

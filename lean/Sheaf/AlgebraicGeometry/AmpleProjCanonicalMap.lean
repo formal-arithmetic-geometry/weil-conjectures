@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.AmpleProjPreimage
+import WeilConjectures.AlgebraicGeometry.AmpleProjPreimage
 import Sheaf.AlgebraicGeometry.AmpleProjChartFormula
 
 /-!

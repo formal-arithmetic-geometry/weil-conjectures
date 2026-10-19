@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 

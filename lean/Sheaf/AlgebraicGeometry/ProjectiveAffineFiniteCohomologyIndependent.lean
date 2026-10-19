@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.AlgebraicGeometry.ProjectiveFiniteSourceCohomologySegment
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 

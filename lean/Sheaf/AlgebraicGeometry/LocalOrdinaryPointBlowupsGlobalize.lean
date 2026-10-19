@@ -14,7 +14,7 @@ public import WeilConjectures.Blowup.Gluing
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Data.Fin.SuccPred
 public import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Blowup.Complement
 import WeilConjectures.Blowup.Proper

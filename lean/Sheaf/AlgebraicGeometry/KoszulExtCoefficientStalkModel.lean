@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel
-import Sheaf.AlgebraicGeometry.AffineModelTensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.AffineModelTensorPullbackStalk
 
 /-! # A commuting stalk model for Koszul coefficient reduction
 

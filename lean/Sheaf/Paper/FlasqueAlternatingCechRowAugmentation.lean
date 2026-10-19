@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
-import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
+import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import all Sheaf.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation

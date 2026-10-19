@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import all Sheaf.AlgebraicGeometry.InvertibleSectionRing
+import all WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower
 import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 

@@ -12,7 +12,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 /-! # Tensor pullback counit in one K-flat coordinate

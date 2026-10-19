@@ -109,13 +109,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineModelStalkPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelStalkPresentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineModelStalkPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineModelStalkPresentation.lean",
   "declaration": "AlgebraicGeometry.exists_affine_model_stalk_presentation",
   "statement": "theorem exists_affine_model_stalk_presentation\n    {Y : Scheme.{u}} (x : Y) (U : Y.affineOpens) (hx : x ∈ U.1) :\n    let A := (Γ(Y, U.1) : Type u)\n    let S := (Y.presheaf.stalk x : Type u)\n    letI : Algebra A S := (Y.presheaf.germ U.1 x hx).hom.toAlgebra\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    ∃ δ : ∀ (F : Y.Modules) (M : ModuleCat.{u} A),\n      ((Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M) →\n        (S ⊗[A] M) ≃ₗ[S] F.presheaf.stalk x,\n      ∀ (F G : Y.Modules) (M N : ModuleCat.{u} A) (c : F ⟶ G) (d : M ⟶ N)\n        (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M)\n        (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj N),\n        (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map d →\n        ∀ t, c.stalkLinearMap x (δ F M eF t) =\n          δ G N eG (d.hom.baseChange S t)",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineModelStalkPresentation; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -4,13 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
-import Sheaf.AlgebraicGeometry.AmpleSeparated
+import WeilConjectures.AlgebraicGeometry.AmpleSeparated
 import Sheaf.AlgebraicGeometry.SectionRingLocalizationBijective
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 

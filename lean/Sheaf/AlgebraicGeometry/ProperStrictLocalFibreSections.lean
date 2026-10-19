@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
 import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 
 /-! # Proper sections over a strictly local base and its geometric closed fibre

@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import Sheaf.AlgebraicGeometry.ScalarSectionsIsoTransport

@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison

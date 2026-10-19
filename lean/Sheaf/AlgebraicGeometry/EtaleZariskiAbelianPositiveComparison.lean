@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale

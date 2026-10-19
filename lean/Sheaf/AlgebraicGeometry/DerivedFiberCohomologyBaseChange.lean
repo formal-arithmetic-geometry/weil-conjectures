@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.DerivedPullback

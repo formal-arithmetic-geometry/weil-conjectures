@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext

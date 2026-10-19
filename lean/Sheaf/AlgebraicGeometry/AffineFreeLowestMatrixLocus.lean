@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.AffineFreeKernelRankLocus
+import WeilConjectures.AlgebraicGeometry.AffineFreeKernelRankLocus
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

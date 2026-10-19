@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism

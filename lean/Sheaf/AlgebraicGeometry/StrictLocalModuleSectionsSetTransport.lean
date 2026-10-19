@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Coefficient and symmetry transport for strict-local sections
 Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.

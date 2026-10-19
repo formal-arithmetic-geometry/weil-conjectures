@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.RingTheory.Ideal.GoingDown

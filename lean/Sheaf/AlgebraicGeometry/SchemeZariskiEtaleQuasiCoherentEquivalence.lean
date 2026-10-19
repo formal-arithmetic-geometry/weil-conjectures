@@ -6,7 +6,7 @@ Authors: SHEAF group Q131
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 public import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiConstructions
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
@@ -18,7 +18,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.AlgebraicSpace
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar

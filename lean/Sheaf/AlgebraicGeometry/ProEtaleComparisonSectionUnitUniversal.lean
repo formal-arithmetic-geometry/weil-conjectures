@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonDiagonalSection
-import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 
 /-! # The concrete diagonal unit and its unique-extension property
 

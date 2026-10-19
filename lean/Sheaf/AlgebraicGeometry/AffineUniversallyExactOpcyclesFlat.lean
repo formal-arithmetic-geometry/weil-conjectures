@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
-import Sheaf.AlgebraicGeometry.AffineUniversalTensorExact
-import Sheaf.AlgebraicGeometry.AffineOpcyclesFlatFromSections
+import WeilConjectures.AlgebraicGeometry.AffineUniversalTensorExact
+import WeilConjectures.AlgebraicGeometry.AffineOpcyclesFlatFromSections
 
 /-! # Flat opcycles of a universally exact affine complex
 

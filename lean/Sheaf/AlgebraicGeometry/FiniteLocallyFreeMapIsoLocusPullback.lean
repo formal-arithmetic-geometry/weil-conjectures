@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleMapIsoLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkBaseChangeReflectsIso
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood
 

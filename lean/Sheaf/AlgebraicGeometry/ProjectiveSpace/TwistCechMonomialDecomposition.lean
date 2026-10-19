@@ -6,7 +6,7 @@ Authors: SHEAF worker T1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
-public import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 public import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist

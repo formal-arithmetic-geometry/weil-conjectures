@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.Paper.ModuleCohomologyCupProduct
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.Paper.ModuleCupPairingExists
 import Sheaf.Paper.ModuleCupPullbackResolutionMaps

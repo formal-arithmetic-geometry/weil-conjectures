@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
 
 /-!

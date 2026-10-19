@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 import Sheaf.Paper.FiniteStructureTensorPowersSupported
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 /-! # Existence of a lifted finite-structure product
 

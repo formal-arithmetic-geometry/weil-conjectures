@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
+import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve

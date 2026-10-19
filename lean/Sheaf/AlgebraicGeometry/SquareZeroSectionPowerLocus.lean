@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLift
-import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
+import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 

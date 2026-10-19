@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Flat module pullback is exact and direct image preserves injectives
 

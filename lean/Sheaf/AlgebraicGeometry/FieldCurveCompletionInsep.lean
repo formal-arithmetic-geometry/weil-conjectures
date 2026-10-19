@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
+import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
 import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
@@ -32,7 +32,6 @@ import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import Sheaf.AlgebraicGeometry.NormalizationProjectiveComponents
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
-import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 
 /-!
 # Smooth projective completions after an inseparable field extension

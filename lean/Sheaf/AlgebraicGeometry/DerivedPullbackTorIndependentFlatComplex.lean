@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat

@@ -7,14 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 import WeilConjectures.AlgebraicGeometry.Descent
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible

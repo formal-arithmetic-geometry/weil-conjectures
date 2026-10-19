@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
-import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
 import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts

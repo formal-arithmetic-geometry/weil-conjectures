@@ -2,7 +2,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.EtaleULiftInjective

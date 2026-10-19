@@ -99,13 +99,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalFunctionFieldDiagonalPullback.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineLocalFunctionFieldDiagonalPullback.lean",
   "declaration": "AlgebraicGeometry.Scheme.isPullback_affine_local_functionField_diagonal",
   "statement": "theorem Scheme.isPullback_affine_local_functionField_diagonal\n    (X : Scheme.{u}) [IsIntegral X]\n    (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U]\n    (x : X) (hx : x ∉ U)\n    [IsNoetherianRing (X.presheaf.stalk x)]\n    (hdim : ringKrullDim (X.presheaf.stalk x) = 1) :\n    let A : Type u := Γ(X, U)\n    let B : Type u := X.presheaf.stalk x\n    let K : Type u := X.functionField\n    let φ : TensorProduct ℤ A B →ₐ[ℤ] K :=\n      Algebra.TensorProduct.lift\n        (X.germToFunctionField U).hom.toIntAlgHom\n        (algebraMap B K).toIntAlgHom\n        (fun _ _ => Commute.all _ _)\n    IsPullback (X.fromSpecStalk (genericPoint X))\n      (Spec.map (CommRingCat.ofHom φ.toRingHom))\n      (prod.lift (𝟙 X) (𝟙 X))\n      (prod.lift\n        (Spec.map (CommRingCat.ofHom\n          (Algebra.TensorProduct.includeLeftRingHom : A →+* TensorProduct ℤ A B)) ≫\n          hU.fromSpec)\n        (Spec.map (CommRingCat.ofHom\n          (Algebra.TensorProduct.includeRight.toRingHom : B →+* TensorProduct ℤ A B)) ≫\n          X.fromSpecStalk x))",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

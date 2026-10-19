@@ -5,10 +5,10 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import all Sheaf.AlgebraicGeometry.SectionRingProjPreimageForward
+import all WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageForward
 import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # Free denominators on inverse images of section-ring charts

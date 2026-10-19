@@ -19,7 +19,7 @@ import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Off-rank vanishing of pulled-back Koszul Ext stalks
 

@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.FppfAffineRefinement
 import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import WeilConjectures.AlgebraicGeometry.FpqcCanonicalPullbackDatum
 import WeilConjectures.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
-import Sheaf.AlgebraicGeometry.FpqcEffectivityOpenLocal
+import WeilConjectures.AlgebraicGeometry.FpqcEffectivityOpenLocal
 import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!

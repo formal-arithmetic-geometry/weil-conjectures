@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.Paper.ModuleCupPullbackAugmentedPairings
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial

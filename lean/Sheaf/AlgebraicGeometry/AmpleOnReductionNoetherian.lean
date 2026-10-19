@@ -9,11 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Mathlib.RingTheory.Noetherian.Nilpotent
 import WeilConjectures.AlgebraicGeometry.AmpleIso
-import Sheaf.AlgebraicGeometry.AmplePullback
+import WeilConjectures.AlgebraicGeometry.AmplePullback
 import Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening
 
 /-! # Ampleness on a Noetherian reduction

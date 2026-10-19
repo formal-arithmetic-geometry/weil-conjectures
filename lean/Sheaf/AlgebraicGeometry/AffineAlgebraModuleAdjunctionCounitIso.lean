@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineModuleTensorExtensionEpi
+import WeilConjectures.AlgebraicGeometry.AffineModuleTensorExtensionEpi
 import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Canonical affine algebra module adjunction component
 

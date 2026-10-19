@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.Paper.ModuleCupGodementModelsExist
 import Sheaf.Paper.ModuleCupGodementFMapSummands
 import Sheaf.Paper.ModuleCupGodementModelQuasiIso

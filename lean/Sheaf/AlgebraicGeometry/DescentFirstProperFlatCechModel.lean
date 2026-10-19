@@ -7,12 +7,12 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import Sheaf.RingTheory.FiniteProjectiveComplexFreeModel
+public import WeilConjectures.RingTheory.FiniteProjectiveComplexFreeModel
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 public import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
-public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 public import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 public import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso

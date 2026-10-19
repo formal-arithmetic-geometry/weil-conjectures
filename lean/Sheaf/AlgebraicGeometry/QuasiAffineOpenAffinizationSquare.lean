@@ -4,7 +4,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Mathlib.AlgebraicGeometry.QuasiAffine
-import Sheaf.AlgebraicGeometry.InvertibleSectionLocalization
+import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
 
 /-! # Cartesian affinization square for an open inside a quasi-affine scheme
 

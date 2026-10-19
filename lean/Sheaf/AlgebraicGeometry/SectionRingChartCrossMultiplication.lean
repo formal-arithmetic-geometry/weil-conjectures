@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.ProjChartPullbackFractionRelation
 

@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 import Sheaf.AlgebraicGeometry.SymmetricProductOverBase

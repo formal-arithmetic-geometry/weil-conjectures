@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OpenSectionFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.AffineSectionLocalization
+import WeilConjectures.AlgebraicGeometry.AffineSectionLocalization
 import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction
 import WeilConjectures.AlgebraicGeometry.NonvanishingLocusRestrict
 

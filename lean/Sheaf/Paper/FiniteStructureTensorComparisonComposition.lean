@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Tensor compatibility of the pinned composition comparison

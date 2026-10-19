@@ -10,7 +10,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Global sections of residue-point tensor pullback
 

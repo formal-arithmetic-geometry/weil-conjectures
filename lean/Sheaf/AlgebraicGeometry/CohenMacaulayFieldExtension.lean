@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion

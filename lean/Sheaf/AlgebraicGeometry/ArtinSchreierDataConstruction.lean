@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Sheaf.AlgebraicGeometry.EtaleStructureSectionsEquiv

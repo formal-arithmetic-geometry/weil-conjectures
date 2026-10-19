@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import Sheaf.AlgebraicGeometry.ProjInvertibleMapTwistIso

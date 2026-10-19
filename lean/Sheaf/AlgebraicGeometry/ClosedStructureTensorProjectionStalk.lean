@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # The local calculation for the closed structure tensor projection

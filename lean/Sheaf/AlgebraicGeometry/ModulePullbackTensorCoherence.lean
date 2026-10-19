@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 

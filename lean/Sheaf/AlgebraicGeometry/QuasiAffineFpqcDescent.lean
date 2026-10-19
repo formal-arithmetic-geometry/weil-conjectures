@@ -16,8 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.AlgebraicGeometry.AffineFpqcDescent
-import Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms
+import WeilConjectures.AlgebraicGeometry.AffineFpqcDescent
+import WeilConjectures.AlgebraicGeometry.FpqcDescendingTypesMorphisms
 import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
 
 /-!

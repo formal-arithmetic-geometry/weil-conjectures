@@ -6,7 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.ReductionIdealPowerQuotient
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.CategoryTheory.Abelian.Exact
 import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization

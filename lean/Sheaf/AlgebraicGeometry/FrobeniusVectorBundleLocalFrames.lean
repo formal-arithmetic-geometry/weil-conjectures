@@ -5,7 +5,7 @@ Authors: SHEAF group V8
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Ulift
@@ -13,7 +13,7 @@ public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-! # Local Frobenius equations on finite locally free modules -/
