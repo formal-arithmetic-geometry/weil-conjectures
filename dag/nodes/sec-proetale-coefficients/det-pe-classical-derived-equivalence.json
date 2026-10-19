@@ -22,132 +22,33 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\Mod(X_{\\Et},\\Lambda)$ and $\\mathcal B=\\Mod(X_{\\Proet},\\Lambda_X)$, where $\\Lambda_X=\\nu_X^*\\Lambda_{X,\\Et}$. Work in one enlarged universe in which the underlying site categories are small relative to the modules. By [lem-pur-ringed-site-grothendieck-abelian] these are Grothendieck abelian categories, and [lem-sfb-grothendieck-k-injective] provides K-injective resolutions. The right derived direct image can therefore be computed by these resolutions, as in [def-sfb-right-derived-functor]. Write $F=\\nu_X^*$ for both the underived inverse image and its termwise derived functor, and $R=R\\nu_{X,*}$. The adjunction $F\\dashv R$ and its unit $\\eta$ and counit $\\varepsilon$ are the bounded-below derived adjunction named in the hypothesis; we assume $\\eta_L$ is invertible for every $L\\in D^+(\\mathcal A)$ throughout. By [det-pe-classical-sheaves-modules], the underived $F$ is exact and its essential image is precisely the classical module sheaves. Its underived right adjoint $\\nu_{X,*}$ is additive and left exact: the adjunction identifies maps $T\\to\\nu_{X,*}(\\ker u)$ with maps $FT\\to\\operatorname{dom}u$ killed by $u$, hence with maps $T\\to\\ker(\\nu_{X,*}u)$; the same argument gives preservation of zero and finite products. Additivity also follows directly by applying direct image to the addition of module sections.",
+   "text": "The exact comparison inverse image has classical cohomology, including the comparison between small and standard derived-category homology models.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sfb-grothendieck-k-injective",
-    "def-sfb-right-derived-functor",
-    "det-pe-classical-sheaves-modules"
+    "lem-pe-classical-derived-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (1): coefficient categories and hypotheses for the derived functors; Stacks 07A5/03DA/03DB supply the ringed-site input"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-exact-functor-bounded-below], $H^q(FL)\\cong F(H^qL)$ naturally in $L$, and $F$ preserves every lower cohomological bound. The module-sheaf essential image in step 1 shows that these cohomology sheaves are classical, including the zero sheaf $F(0)$; by [sk-def-pe-classical-definition], $FL\\in D^+_{\\mathrm{class}}(\\mathcal B)$. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to the additive left exact functor $\\nu_{X,*}:\\mathcal B\\to\\mathcal A$, with the Grothendieck categories and resolution computation of step 1: if $H^i(K)=0$ for $i<a$, then $H^i(RK)=0$ for $i<a$. Thus $R$ takes all of $D^+(\\mathcal B)$ to $D^+(\\mathcal A)$, and $FR$ preserves lower cohomological bounds as well.",
+   "text": "The derived counit is invertible on classical bounded-below objects by truncation induction and the upper-tail comparison.",
    "uses": [
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "sk-def-pe-classical-definition",
-    "lem-weil-pbc-derived-functor-negative-vanishing"
+    "lem-pe-classical-derived-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (1); Stacks 015F and 05TC(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The termwise derived functor $F$ is triangulated and satisfies $F(M[-q])\\cong F(M)[-q]$ by [lem-sf-exact-functor-derived-triangulated]. Give its right adjoint $R$ the coherent shift isomorphisms supplied by [lem-weil-pbc-adjunction-shift-compatibility-unique](iii); with these isomorphisms both the unit and counit commute with shifts. Then [lem-sf-triangulated-right-adjoint] makes $R$ triangulated with precisely these shifts. Applying $R$ and then $F$ to a distinguished triangle gives a distinguished triangle for $FR$. By [lem-weil-pbc-commshift-nattrans-triangle-morphism], the three components of $\\varepsilon:FR\\to\\mathrm{id}$ give a morphism from this image triangle to the original triangle. This verifies the connecting-map compatibility needed below, rather than assuming that arbitrary natural transformations preserve connecting morphisms.",
-   "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-adjunction-shift-compatibility-unique",
-    "lem-sf-triangulated-right-adjoint",
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (3), sentence concerning the counit as a transformation of triangulated functors; Stacks 0A8D"
-   }
-  },
-  {
-   "text": "For a classical module sheaf $G$, [det-pe-classical-sheaves-modules] gives a module sheaf $M\\in\\mathcal A$ and an isomorphism $F(M)\\cong G$. For any integer $q$, [lem-sf-exact-functor-derived-triangulated] identifies $G[-q]$ with $F(M[-q])$. The triangle identity for $F\\dashv R$ reads $\\varepsilon_{F(M[-q])}\\circ F(\\eta_{M[-q]})=\\mathrm{id}$. Since $M[-q]\\in D^+(\\mathcal A)$, the assumed unit is invertible there, so $\\varepsilon_{F(M[-q])}=F(\\eta_{M[-q]})^{-1}$. Naturality transports this isomorphism across $F(M[-q])\\cong G[-q]$. Thus the counit is invertible on every shifted classical sheaf. In particular its component on zero is invertible, by taking $M=0$.",
-   "uses": [
-    "det-pe-classical-sheaves-modules",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (2), one sheaf and its shifts"
-   }
-  },
-  {
-   "text": "Fix a bounded classical $K$ and integers $a\\leq b$ with $H^q(K)=0$ outside $[a,b]$. Put $K_q=\\tau_{\\leq q}K$. By [lem-weil-pbc-truncation-cohomology], $H^i(K_q)=H^i(K)$ for $i\\leq q$ and is zero for $i>q$. Thus every $K_q$ is bounded below and classical, and $K_{a-1}$ has zero cohomology in all degrees. The map $0\\to K_{a-1}$ is an isomorphism by [lem-weil-pbc-derived-plus-iso-on-cohomology]; naturality of the counit and step 4 imply that $\\varepsilon_{K_{a-1}}$ is invertible. We induct on the integer $q$ from $a$ to $b$ to show that $\\varepsilon_{K_q}$ is invertible.",
-   "uses": [
-    "lem-weil-pbc-truncation-cohomology",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (3), bounded induction: lower bound, induction claim and zero base"
-   }
-  },
-  {
-   "text": "For $a\\leq q\\leq b$, use the distinguished triangle $K_{q-1}\\to K_q\\to H^q(K)[-q]\\to K_{q-1}[1]$ of [lem-weil-pbc-truncation-triangle]. Step 3 makes its counit components a morphism of distinguished triangles, so [lem-weil-pbc-derived-cohomology-ladder] gives a commutative ladder of long exact cohomology sequences. The first and third vertical maps are isomorphisms: the first by induction and the third by step 4 since $H^q(K)$ is classical. In the five consecutive terms $H^{i-1}(H^q(K)[-q]),H^i(K_{q-1}),H^i(K_q),H^i(H^q(K)[-q]),H^{i+1}(K_{q-1})$, all four vertical maps other than the middle one are therefore isomorphisms. By [lem-weil-pbc-five-lemma], $H^i(\\varepsilon_{K_q})$ is invertible for every $i$. By [lem-weil-pbc-derived-plus-iso-on-cohomology], $\\varepsilon_{K_q}$ is invertible. This proves the induction. Finally $K_b\\to K$ is a cohomology isomorphism in every degree by [lem-weil-pbc-truncation-cohomology] and the upper bound on $K$, hence an isomorphism by the same detection lemma. Naturality gives invertibility of $\\varepsilon_K$.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-derived-cohomology-ladder",
-    "lem-weil-pbc-five-lemma",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology",
-    "lem-weil-pbc-truncation-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (3), bounded induction: distinguished triangle, explicit five-term ladder, and identification of the final truncation"
-   }
-  },
-  {
-   "text": "Now let $K\\in D^+_{\\mathrm{class}}(\\mathcal B)$, fix $m\\in\\mathbf Z$, and take an integer $N\\geq m$. Put $T=\\tau_{\\leq N}K$ and let $c:T\\to K$ be its inclusion. By [lem-weil-pbc-truncation-cohomology], $T$ is bounded with classical cohomology, $H^i(c)$ is an isomorphism for every $i\\leq N$, and $H^{N+1}(T)=0$. In particular $H^{N+1}(c):0\\to H^{N+1}(K)$ is a monomorphism. Apply [lem-weil-pbc-derived-functor-truncation-iso] to $v=\\nu_{X,*}$ and this $c$; its hypotheses are exactly the Grothendieck categories, left exactness and right-derived computation checked in steps 1 and 2. It gives that $H^m(Rc)$ is invertible. Under the natural cohomology isomorphisms of [lem-weil-pbc-exact-functor-bounded-below], $H^m(FRc)$ identifies with $F(H^m(Rc))$ and is therefore invertible. Also $H^m(c)$ is invertible. Step 6 gives invertibility of $\\varepsilon_T$. The naturality equation $H^m(\\varepsilon_K)\\circ H^m(FRc)=H^m(c)\\circ H^m(\\varepsilon_T)$ therefore makes $H^m(\\varepsilon_K)$ invertible. Since $m$ was arbitrary, [lem-weil-pbc-derived-plus-iso-on-cohomology] shows that $\\varepsilon_K$ is invertible. The truncation comparison cited here is exactly the lower-bound/upper-tail argument of Stacks 05TC(2); it needs no upper bound on $K$ and no finite cohomological dimension.",
-   "uses": [
-    "lem-weil-pbc-truncation-cohomology",
-    "lem-weil-pbc-derived-functor-truncation-iso",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (4), bounded-below complexes: fix a degree and use upper truncation; Stacks 05TC(2) for the same tail-vanishing comparison"
-   }
-  },
-  {
-   "text": "Step 2 gives functors $F:D^+(\\mathcal A)\\to D^+_{\\mathrm{class}}(\\mathcal B)$ and $R:D^+_{\\mathrm{class}}(\\mathcal B)\\to D^+(\\mathcal A)$. Both subcategories are full. The assumed natural isomorphism $\\eta:\\mathrm{id}\\xrightarrow{\\sim}RF$ and the natural isomorphism $\\varepsilon:FR\\xrightarrow{\\sim}\\mathrm{id}$ established in step 7 restrict to these subcategories, with the same triangle identities. These are the required mutually inverse equivalences.",
+   "text": "Lift inverse image to the full classical subcategory and restrict the given adjunction along its fully faithful inclusion. Reflect invertibility of its unit and counit through the inclusions, and apply Adjunction.toEquivalence. The forward and inverse comparison isomorphisms are the lift factorization and identity.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-    "place": "paragraph (4), final sentence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sfb-grothendieck-k-injective",
-  "def-sfb-right-derived-functor",
-  "det-pe-classical-sheaves-modules",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "sk-def-pe-classical-definition",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-adjunction-shift-compatibility-unique",
-  "lem-sf-triangulated-right-adjoint",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-truncation-cohomology",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-derived-functor-truncation-iso"
+  "lem-pe-classical-derived-image",
+  "lem-pe-classical-derived-counit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
-  "place": "Four proof paragraphs, with explicit derived-category tools from Stacks 015F, 05TC, 08J5, 0A8D, 05RS and 05QB; no change to the unit route."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.md",
+  "place": "All clauses proved in Lean: exact classical image, counit by the existing bounded-below devissage theorem, and restriction of the adjunction to an equivalence. The two support modules are fully proved."
  },
  "mathlib_searches": [
   {
@@ -255,5 +156,15 @@
   "group": "Q116",
   "result": "pass",
   "note": "Read the item node, the source (sk-cor-pe-classical-derived-equivalence.md, _section.md, sk-def-pe-classical-definition/_section.md), the six stmt_deps records, both delivered modules and the upstream comparisonAdjunction / derivedPlus / HasDerivedCategory declarations. The hunit hypothesis, clause 1 (classical image, plus the typed D+ codomain of rightDerivedFunctorPlus), clause 2 (counit iso on ClassicalPlus) and the equivalence with both functors identified all match the node. No extra assumptions; universes match the recorded boundedBelowComparison (Λ : Type (u+1)). The §1(B) module ClassicalDerivedDefinitions has real predicates (IsIso of continuityMap on every AffinePresentation, all integer degrees) that follow the source's module clause. Statements match the files exactly, node copies differ only in lean, only one sorry, docstrings and both report sections present. nt_compile --json on both files: exit 0, no warnings. Non-blocking: IsClassicalModuleFor runs parallel to the IsClassical-of-underlying-set encoding in det-pe-classical-sheaves-modules, so stage 3 needs a bridging lemma; the replaced sk-def record no longer lists IsClassical, but the module re-exports it."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ac1f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T034257-L-416624",
+  "kind": "interface",
+  "note": "independent cc review: item classicalDerivedEquivalence + new classicalDerivedImage/classicalDerivedCounit (Lean, nodes, axioms) against node det-pe-classical-derived-equivalence, unit sk-cor-pe-classical-derived (realized empty) and the 8 direct importers (all compile)"
  }
 }

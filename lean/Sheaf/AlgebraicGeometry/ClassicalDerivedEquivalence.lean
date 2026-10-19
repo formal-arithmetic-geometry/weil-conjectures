@@ -11,24 +11,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Shift.Adjunction
-import Mathlib.CategoryTheory.Triangulated.Adjunction
-import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import WeilConjectures.CategoryTheory.TruncationTriangle
-import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
-import Sheaf.SixFunctors.ClassicalDefinition
+import Sheaf.AlgebraicGeometry.ClassicalDerivedImage
+import Sheaf.AlgebraicGeometry.ClassicalDerivedCounit
+import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-!
 # Bounded-below classical pro-étale complexes
@@ -112,7 +98,43 @@ theorem classicalDerivedEquivalence (X : Scheme.{u}) (Λ : Type (u + 1))
         (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus) ∧
       Nonempty (e.inverse ≅ (ClassicalPlus X Λ).ι ⋙
         (comparisonLowerStar (ModuleCat.{u + 1} Λ) X).rightDerivedFunctorPlus)) := by
-  sorry
+  classical
+  have himage := classicalDerivedImage X Λ hunit
+  have hcounit := classicalDerivedCounit X Λ hunit
+  refine ⟨himage, hcounit, ?_⟩
+  let P := ClassicalPlus X Λ
+  let L := ObjectProperty.lift P
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus himage
+  let R := P.ι ⋙ (comparisonLowerStar (ModuleCat.{u + 1} Λ) X).rightDerivedFunctorPlus
+  let adj := (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus
+  let radj : L ⊣ R := adj.restrictFullyFaithful
+    (Functor.FullyFaithful.id _) P.fullyFaithfulι (Iso.refl _) (Iso.refl _)
+  let hu : ∀ K, IsIso (radj.unit.app K) := by
+    intro K
+    have hi : IsIso ((𝟭 _).map (radj.unit.app K)) := by
+      rw [Adjunction.map_restrictFullyFaithful_unit_app]
+      dsimp
+      let : IsIso (adj.unit.app K) := hunit K
+      infer_instance
+    exact isIso_of_reflects_iso (radj.unit.app K) (𝟭 _)
+  let hc : ∀ K, IsIso (radj.counit.app K) := by
+    intro K
+    have hi : IsIso (P.ι.map (radj.counit.app K)) := by
+      rw [Adjunction.map_restrictFullyFaithful_counit_app]
+      dsimp
+      let : IsIso (adj.counit.app K.obj) := hcounit K.obj K.property
+      change IsIso (𝟙 _ ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.map
+          (𝟙 _) ≫ adj.counit.app K.obj)
+      rw [Category.id_comp]
+      rw [CategoryTheory.Functor.map_id, Category.id_comp]
+      exact hcounit K.obj K.property
+    exact isIso_of_reflects_iso (radj.counit.app K) P.ι
+  let e := radj.toEquivalence
+  refine ⟨e, ?_, ?_⟩
+  · exact ⟨ObjectProperty.liftCompιIso P
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus himage⟩
+  · exact ⟨Iso.refl _⟩
 
 end AlgebraicGeometry.ProEtale
 

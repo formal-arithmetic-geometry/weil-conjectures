@@ -1,0 +1,109 @@
+{
+ "id": "lem-pe-classical-derived-image",
+ "kind": "statement",
+ "title": "Classical cohomology of comparison inverse image",
+ "statement": "theorem classicalDerivedImage (X : Scheme.{u}) (Λ : Type (u + 1))\n    [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]\n    (_hunit : ∀ L : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      IsIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit.app L)) :\n    ∀ L : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      ClassicalPlus X Λ\n        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj L)",
+ "stmt_deps": [
+  "sk-prop-sf-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-pe-classical-definition",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+  "place": "Proof paragraph (1): exact inverse image commutes with cohomology, which is classical."
+ },
+ "proof": [
+  {
+   "text": "Apply the module-valued clause of proEtaleClassicalSheaves to the cohomology sheaf of the source. Exact inverse image commutes with bounded-below derived homology. Naturality of continuityMap transports classicality along this isomorphism. The definition uses standard-model cohomology; identify it with small-model cohomology by cancelling the localization functor in their common factorization through complex homology and the ShrinkHoms equivalence.",
+   "uses": [
+    "sk-thm-pe-classical-sheaves",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-classical-sheaves",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+  "place": "Four proof paragraphs, with explicit derived-category tools from Stacks 015F, 05TC, 08J5, 0A8D, 05RS and 05QB; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image from etale to proetale sheaves has classical cohomology and derived counit is an isomorphism on bounded below complexes with classical cohomology",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app, CategoryTheory.Equivalence.sheafCongr.counitIso_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.counitIso, CategoryTheory.Equivalence.sheafCongr_counitIso, CompHausLike.LocallyConstant.counit, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPreregular_counitIso_inv_app_val_app. No classical derived image or counit theorem; the sheafCongr hits are equivalences induced by site equivalences.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_app_of_forall_homology\"",
+   "results": "0 hits: . No classical derived image or counit theorem; the sheafCongr hits are equivalences induced by site equivalences.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "classicalDerived|proEtaleClassical",
+   "results": "0 hits: . No classical derived image or counit theorem; the sheafCongr hits are equivalences induced by site equivalences.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence",
+  "date": "2026-10-19",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-classical-derived-equivalence",
+   "place": "Proof paragraph (1): exact inverse image commutes with cohomology, which is classical.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-classical-derived",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClassicalDerivedImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalDerivedImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalDerivedImage",
+  "statement": "theorem classicalDerivedImage (X : Scheme.{u}) (Λ : Type (u + 1))\n    [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]\n    (_hunit : ∀ L : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      IsIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit.app L)) :\n    ∀ L : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      ClassicalPlus X Λ\n        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj L)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ac1f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T034257-L-416624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ac1f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T034257-L-416624",
+  "kind": "interface",
+  "note": "independent cc review: item classicalDerivedEquivalence + new classicalDerivedImage/classicalDerivedCounit (Lean, nodes, axioms) against node det-pe-classical-derived-equivalence, unit sk-cor-pe-classical-derived (realized empty) and the 8 direct importers (all compile)"
+ }
+}
