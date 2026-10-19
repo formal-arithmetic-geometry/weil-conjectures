@@ -25,12 +25,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
 /-!
 # Exceptional adjunction on the comparison class
 
@@ -183,6 +178,21 @@ theorem exists_comparisonClassAdjunction
           (DerivedCategory.plusEtaleOrigin
             (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X)
           _root_.DerivedCategory.TStructure.t.plus) := by
-  sorry
+  let Λ := Padic.coefficientExtensionRing l E n
+  let : Finite Λ := Padic.finite_coefficientExtensionRing l E n _hn
+  have h := exists_fixedComparisonClassAdjunction D l _hl E n _hn aX aY f _hf c d _hd
+  refine ⟨h.1, ?_⟩
+  obtain ⟨G, adj, ⟨z⟩⟩ := h.2
+  exact ⟨G, adj, ⟨{
+    boundedBelow := z.boundedBelow
+    homEquiv := z.homEquiv
+    homEquiv_normalized := z.homEquiv_normalized
+    naturality_left := z.naturality_left
+    naturality_right := z.naturality_right
+    comparison := z.comparison
+    comparison_normalized := z.comparison_normalized
+    comparison_refl := z.comparison_refl
+    comparison_trans := z.comparison_trans
+    comparison_homEquiv := z.comparison_homEquiv }⟩⟩
 
 end AlgebraicGeometry.ProEtale
