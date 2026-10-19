@@ -16,21 +16,8 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.Algebra.Homology.FilteredColimitDerivedTensor
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.Paper.OpenTorBoundFiniteConstantTests
+import Sheaf.Paper.OpenTorBoundStalkFilteredExtension
 
 /-!
 # Open direct image Tor bound over an arbitrary field
@@ -143,6 +130,8 @@ theorem open_tor_bound_arbitrary_field
     DerivedCategory.hasTorAmplitudeIn A T a (b + e)
       ((rightDerivedLowerStar (ModuleCat.{u + 1} A) j).obj
         (DerivedCategory.Plus.ι.obj L)) := by
-  sorry
+  apply open_tor_bound_stalk_filtered_extension A a (b + e)
+  exact open_tor_bound_finite_constant_tests p k l _hl A hA aV aT j _hj a b e _hab _he L _hL
+    _hvanish _hproj
 
 end AlgebraicGeometry.Etale

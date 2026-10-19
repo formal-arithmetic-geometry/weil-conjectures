@@ -16863,3 +16863,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/S9/Sheaf.Paper.LevelwiseAdicTruncations (stage 3; reviewer PASS; first push; landing 20261019T005424-L-2767899 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/T2/Sheaf.Paper.OpenExtensionConstantModelConstructible (stage 3; reviewer PASS; first push; landing 20261019T005425-L-2768093 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/T2-open-extension-proof-scopes.md)
 - 00:54 L: merged deliver/T3/Sheaf.AlgebraicGeometry.ProEtale.BasisDerivedDetection (stage 3; reviewer PASS; first push; landing 20261019T005425-L-2768280 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/T3/Sheaf.Paper.OpenTorBoundArbitraryField (stage 3; reviewer PASS; first push; landing 20261019T005426-L-2768453 (interface); batch 20261019T005255; modules 3; new nodes 2)

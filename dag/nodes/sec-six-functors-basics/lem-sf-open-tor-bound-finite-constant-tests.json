@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-open-tor-bound-finite-constant-tests",
+ "kind": "statement",
+ "title": "Finite constant-module Tor tests for an open direct image",
+ "statement": "Let $k$ be a field of characteristic $p>0$, let $\\ell\\ne p$ be prime, let $A$ be a finite commutative ring annihilated by a power of $\\ell$, and let $j:V\\hookrightarrow T$ be a quasi-compact open immersion [def-weil-open-immersion] of finite-type $k$-schemes [def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small étale sites and their derived categories [def-weil-pbc-derived-categories]. Let $a\\le b$ be integers and $e\\ge0$ an integer. Let $L\\in D^+(V_{\\mathrm{et}},A)$ have Tor amplitude $[a,b]$ [def-kun-tor-amplitude]. Suppose $R^qj_*F=0$ [def-weil-pbc-direct-image] for every $A$-module sheaf $F$ and every $q>e$. Suppose also that, for every finite $A$-module $M$, the natural projection map [def-kun-projection-formula-map] for the derived tensor [def-kun-derived-tensor]\n$$ (Rj_*L)\\otimes_A^{\\mathbf L}M_T\\longrightarrow Rj_*(L\\otimes_A^{\\mathbf L}M_V) $$\nis an isomorphism, where $M_S$ denotes the constant module sheaf on $S_{\\mathrm{et}}$ [def-kun-constant-sheaf]. Then, for every finite A-module M and every integer q with q<a or b+e<q, the cohomology sheaf H^q((Rj_*L) tensor_A^L M_T) vanishes. This is the finite-constant-test part of the all-module-sheaf Tor bound.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Step 3, passage from finite constant-module Tor tests for Rj_* L to all module sheaves by stalks and filtered unions."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-kun-tor-amplitude",
+  "def-kun-constant-sheaf",
+  "def-weil-open-immersion",
+  "def-weil-pbc-direct-image",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=Rj_*L$. For a finite $A$-module $M$ set $E_M=L\\otimes_A^{\\mathbf L}M_V$. The constant sheaf $M_V$ is one of the degree-zero sheaves allowed in the Tor-amplitude hypothesis. Thus $\\mathcal H^r(E_M)=0$ for $r\\notin[a,b]$. In particular $E_M$ is bounded below, even though finite $A$-modules need not have finite projective dimension.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-kun-derived-tensor",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude (1), applied to the constant module sheaf"
+   }
+  },
+  {
+   "text": "Represent E_M by a bounded-below injective complex I zero below a using the bounded-below injective representative theorem. Its underlying complex is K-injective. The source library computes the existing unbounded right derived functor on I by Q(j_*I). Additivity preserves zero terms, hence gives the lower cohomological bound a. This uses the source rightDerivedFunctorObjQIso directly and the existing Grothendieck-abelian instances; no comparison with a ringed-site module encoding is required.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic)"
+   }
+  },
+  {
+   "text": "The source homologyRightDerivedFunctorObjSingleFunctorIso identifies the given degree-zero cohomological vanishing with vanishing of the classical right derived functors. Apply finiteCDDerivedUpperBound with N=e. To identify its functor with the existing unbounded rightDerivedFunctor, factor termwise j_* followed by localization through the homotopy quotient. Fully faithful precomposition gives the factorization its left Kan extension property. Composing with the existing derived-functor Kan extension gives a cochain-level right derived functor; uniqueness compares it with the functor supplied by finiteCDDerivedUpperBound. Transport its upper bound b+e. Finally singleFunctorCompLeftDerivedUpperStarIso and constantSheafCompUpperStarIso identify the derived pullback of M_T[0] with M_V[0]. Apply the tensor functor and Rj_* to this comparison, compose with the assumed projection isomorphism, and transport both cohomological bounds to (Rj_*L) tensor^L M_T.",
+   "uses": [
+    "lem-sf-finite-cd-derived-upper-bound",
+    "def-kun-constant-sheaf",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived (4)(c), with n=e+1; the projection isomorphism is an explicit hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sf-finite-cd-derived-upper-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Detailed proof of lem-sf-open-tor-bound-arbitrary-field, steps 1--3; formalization and comparisons by T3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite constant modules detect Tor amplitude of sheaf complexes using geometric stalks and filtered colimits",
+   "date": "2026-10-18",
+   "results": "HomologicalComplex.instHasFilteredColimitsOfSize; ModuleCat.FilteredColimits.colimit; ModuleCat.FilteredColimits.M; ModuleCat.FilteredColimits.M.mk; ModuleCat.FilteredColimits.colimitCoconeIsColimit; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; Module.isLocallyConstant_rankAtStalk; SheafOfModules.IsFinitePresentation.mk",
+   "verdict": "no match: the returned declarations do not state this finite constant-module Tor test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude tested on finite constant sheaves via stalks filtered colimits",
+   "date": "2026-10-18",
+   "results": "DerivedCategory.IsGE; SheafOfModules.isFinitePresentation; DerivedCategory.IsLE; SheafOfModules.IsFiniteType; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.TStructure.t; DerivedCategory.isGE_iff",
+   "verdict": "no match: the returned declarations do not state this finite constant-module Tor test"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|hasTorAmplitudeIn|finiteCDDerivedUpperBound",
+   "date": "2026-10-18",
+   "results": "No hits",
+   "verdict": "no match: the returned declarations do not state this finite constant-module Tor test"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenTorBoundArbitraryField",
+  "date": "2026-10-19",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Closed-support paragraph, Tor interval assertion; detailed lem-sf-open-tor-bound-arbitrary-field steps 1--3",
+   "via": [
+    "lem-sf-open-tor-bound-arbitrary-field"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenTorBoundFiniteConstantTests",
+  "file": "lean/Sheaf/Paper/OpenTorBoundFiniteConstantTests.lean",
+  "declaration": "AlgebraicGeometry.Etale.open_tor_bound_finite_constant_tests",
+  "statement": "theorem open_tor_bound_finite_constant_tests\n    (p : ℕ) [Fact p.Prime]\n    (k : Type u) [Field k] [CharP k p]\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ p)\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (_hA : ∃ n : ℕ, ∀ x : A, (l ^ n) • x = 0)\n    {V T : Scheme.{u}}\n    (aV : V ⟶ Spec (.of k)) (aT : T ⟶ Spec (.of k))\n    [LocallyOfFiniteType aV] [QuasiCompact aV]\n    [LocallyOfFiniteType aT] [QuasiCompact aT]\n    (j : V ⟶ T) (_hj : j ≫ aT = aV) [IsOpenImmersion j] [QuasiCompact j]\n    (a b e : ℤ) (_hab : a ≤ b) (_he : 0 ≤ e)\n    (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (_hL : DerivedCategory.hasTorAmplitudeIn A V a b\n      (DerivedCategory.Plus.ι.obj L))\n    (_hvanish : ∀ (q : ℤ)\n      (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)),\n      e < q → IsZero\n        ((_root_.DerivedCategory.homologyFunctor\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj\n          ((rightDerivedLowerStar (ModuleCat.{u + 1} A) j).obj\n            ((_root_.DerivedCategory.singleFunctor\n              (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj F))))\n    (_hproj : ∀ (M : ModuleCat.{u + 1} A), Finite M → IsIso\n      (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app\n        (DerivedCategory.Plus.ι.obj L)).app\n        ((_root_.DerivedCategory.singleFunctor\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj\n          ((constantSheaf T.smallEtaleTopology\n            (ModuleCat.{u + 1} A)).obj M)))) :\n    ∀ (M : ModuleCat.{u + 1} A), Finite M → ∀ (q : ℤ),\n      q < a ∨ b + e < q → IsZero\n        ((_root_.DerivedCategory.homologyFunctor\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj\n          (((derivedTensor (ModuleCat.{u + 1} A) T).obj\n            ((rightDerivedLowerStar (ModuleCat.{u + 1} A) j).obj\n              (DerivedCategory.Plus.ι.obj L))).obj\n            ((_root_.DerivedCategory.singleFunctor\n              (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj\n              ((constantSheaf T.smallEtaleTopology\n                (ModuleCat.{u + 1} A)).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T005426-L-2768453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T005426-L-2768453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

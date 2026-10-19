@@ -19,110 +19,28 @@
  ],
  "proof": [
   {
-   "text": "Put $Q=Rj_*L$. For a finite $A$-module $M$ set $E_M=L\\otimes_A^{\\mathbf L}M_V$. The constant sheaf $M_V$ is one of the degree-zero sheaves allowed in the Tor-amplitude hypothesis. Thus $\\mathcal H^r(E_M)=0$ for $r\\notin[a,b]$. In particular $E_M$ is bounded below, even though finite $A$-modules need not have finite projective dimension.",
+   "text": "Apply the finite constant-module test theorem to the data in the statement. Its hypotheses are precisely the given Tor amplitude, uniform direct-image vanishing and finite projection isomorphisms, so all finite constant tensor tests of Rj_*L vanish outside [a,b+e].",
    "uses": [
-    "def-kun-constant-sheaf",
-    "def-kun-derived-tensor",
-    "def-kun-tor-amplitude"
+    "lem-sf-open-tor-bound-finite-constant-tests"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude (1), applied to the constant module sheaf"
-   }
+   "elementary": true
   },
   {
-   "text": "The category of $A$-module sheaves on $V_{\\mathrm{et}}$ has enough injectives. Since $E_M$ has no cohomology below $a$, choose an injective representative $I_M$ with $I_M^r=0$ for $r<a$. The bounded-below derived-functor computation gives $Rj_*E_M\\cong Q_T(j_*I_M)$, where $Q_T$ is localization from complexes to the derived category, not the object $Q$. Additivity of $j_*$ gives $j_*0=0$, so this representing complex is zero below $a$. Consequently $\\mathcal H^r(Rj_*E_M)=0$ for $r<a$.",
+   "text": "Apply the stalk and filtered-colimit extension theorem with Q=Rj_*L and interval [a,b+e] to those finite tests. It gives the required Tor amplitude against every module sheaf.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-sf-open-tor-bound-stalk-filtered-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K (lemma-injective-resolutions-exist), 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic)"
-   }
-  },
-  {
-   "text": "Apply the finite-cohomological-dimension derived upper-bound lemma to $F=j_*:\\operatorname{Mod}(A_V)\\to\\operatorname{Mod}(A_T)$, $N=e$, $t=b$, and $E=E_M$. Its abelian-category and enough-injectives hypotheses hold for these module-sheaf categories; $j_*$ is additive and left exact, $e\\ge0$, and the required vanishing $R^qj_*F'=0$ for every module sheaf $F'$ and $q>e$ is precisely the hypothesis of the item. Step 1 supplies the upper bound $b$ on $E_M$, so the lemma gives $H^r(Rj_*^{\\mathrm{tot}}E_M)=0$ for $r>b+e$, where $Rj_*^{\\mathrm{tot}}$ is its unbounded total right derived functor. This is the same object as the bounded-below $Rj_*E_M$ of step 2 and as the unbounded K-injective $Rj_*E_M$ in the target of the projection morphism: K-injective resolutions exist for every complex of module sheaves, any two are chain-homotopy equivalent, and the bounded-below injective complex $I_M$ of step 2 is K-injective; every total right derived functor of $K(j_*)$ is computed on K-injective complexes, so $Rj_*^{\\mathrm{tot}}(Q_VI_M)\\cong Q_T(j_*I_M)$, and an additive functor carries a homotopy equivalence to a homotopy equivalence, so the K-injective formula of the projection morphism also gives $Q_T(j_*I_M)$. Hence $\\mathcal H^r(Rj_*E_M)=0$ for $r>b+e$. Together with step 2 this puts $Rj_*E_M$ in $D^{[a,b+e]}$. For this finite $M$ the assumed projection morphism is an isomorphism, so $Q\\otimes_A^{\\mathbf L}M_T$ has the same cohomological interval. Only the projection isomorphisms assumed in the item have been used.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-sf-finite-cd-derived-upper-bound",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived (4)(c), with n=e+1; the projection isomorphism is an explicit hypothesis"
-   }
-  },
-  {
-   "text": "Fix a geometric point $\\bar t$ of $T$ and put $C=Q_{\\bar t}\\in D(A)$. The derived stalk is pullback to the point and commutes with derived tensor. The stalk of $M_T$ is $M$: the stated abelian-group identification is $A$-linear because it is natural for each scalar endomorphism of $M$. Stalks commute with cohomology. The cited cohomology assertion for abelian sheaves applies to module sheaves after forgetting scalar action: kernels, images and their quotient have the same underlying abelian sheaves and their induced scalar actions. Therefore step 3 gives\n$$H^r(C\\otimes_A^{\\mathbf L}M)=0\\qquad(r\\notin[a,b+e])$$\nfor every finite $A$-module $M$.",
-   "uses": [
-    "lem-kun-stalk-as-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "lem-kun-stalks-of-cohomology",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product; etale-cohomology.tex Tag 03PT, lemma-stalk-exact (2),(3)"
-   }
-  },
-  {
-   "text": "Let $N$ be any $A$-module in the fixed universe. Its finitely generated submodules form a small directed poset: $0$ is one of them, and $N_1+N_2$ contains any pair. Every element lies in its cyclic submodule, so $N=\\varinjlim N_i$. If $N_i$ has $m$ generators, it is a quotient of $A^m$, a finite set because $A$ is finite; thus each $N_i$ is a finite module, as required in step 4. Choose any complex of $A$-modules representing $C$. Apply the filtered-colimit derived-tensor theorem with its rings $R=A$ and its algebra also $A$, and with the complexes $N_i$ concentrated in degree zero. For every $r$ it identifies\n$$H^r(C\\otimes_A^{\\mathbf L}N)\\cong\\varinjlim_i H^r(C\\otimes_A^{\\mathbf L}N_i).$$\nFor $r\\notin[a,b+e]$ the right side is zero by step 4. Hence the same vanishing holds for every module $N$. This argument takes filtered colimits only in the category of modules at a stalk; it needs no commutation of $Rj_*$ with colimits.",
-   "uses": [
-    "lem-pc-filtered-colimit-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "K-flat derived tensor and exact filtered colimits; specialization of lem-pc-filtered-colimit-derived-tensor (source Tags 06Y6, 06YR)"
-   }
-  },
-  {
-   "text": "Let $F$ be an arbitrary degree-zero $A_T$-module sheaf. At each geometric point $\\bar t$ choose the module $N=F_{\\bar t}$ in step 5. Derived pullback compatibility and the stalk-cohomology identity give\n$$\\mathcal H^r(Q\\otimes_A^{\\mathbf L}F)_{\\bar t}\\cong H^r(Q_{\\bar t}\\otimes_A^{\\mathbf L}F_{\\bar t})=0\\qquad(r\\notin[a,b+e]).$$\nThese comparisons apply to ordinary unbounded derived tensor, so no boundedness of this tensor is being assumed. Geometric stalks detect isomorphisms of abelian etale sheaves: apply that assertion to the map from the underlying abelian sheaf of $\\mathcal H^r(Q\\otimes_A^{\\mathbf L}F)$ to zero. Its stalk maps are isomorphisms, so the sheaf is zero, also as an $A_T$-module. Since $F$ was arbitrary, this is exactly Tor amplitude $[a,b+e]$ for $Rj_*L$.",
-   "uses": [
-    "lem-kun-stalk-as-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "lem-kun-stalks-of-cohomology",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-kun-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact), 03PU (theorem-exactness-stalks); sites-cohomology.tex Tags 07A4 and 08FZ"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-constant-sheaf",
-  "def-kun-derived-tensor",
-  "def-kun-tor-amplitude",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-sf-finite-cd-derived-upper-bound",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-stalks-of-cohomology",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-pc-filtered-colimit-derived-tensor",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-sf-open-tor-bound-finite-constant-tests",
+  "lem-sf-open-tor-bound-stalk-filtered-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-  "place": "Explicit stalk and filtered-union argument for the finite-constant-module Tor test, using Stacks-derived-functor and tensor lemmas."
+  "place": "Composition of the proved finite-test bound (original steps 1--3) with the stalk and filtered-union extension (original steps 4--6), T3."
  },
  "mathlib_searches": [
   {
@@ -265,20 +183,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-stalks-of-cohomology",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-pc-filtered-colimit-derived-tensor",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -304,5 +209,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "Clause-by-clause match of node and Lean. Field of char p>0 via Fact p.Prime + CharP; l≠p prime; finite comm A : Type (u+1) with ∃n, l^n•x=0 (checked as ℕ-smul); V,T finite type over Spec k (LocallyOfFiniteType+QuasiCompact) with j over k; j qc open immersion; a≤b and 0≤e in ℤ; L in DerivedCategory.Plus; Tor amplitude via the existing Etale.DerivedCategory.hasTorAmplitudeIn (Coefficients.lean:69, tests all module sheaves, q<a ∨ b<q); R^q j_*F=0 for all F on V and q>e; IsIso of the recorded rightDerivedLowerStarProjectionMap at (ι L, M_T[0]) for Finite M; conclusion hasTorAmplitudeIn A T a (b+e) of rightDerivedLowerStar(ι L). The unbounded rightDerivedLowerStar is the same R(p_*) as in the projection map, agrees with Rj_* on D+, and is widely used in landed modules; no new definition. No extra assumptions; single universe u; no autoImplicit. Edge cases A=0, empty V/T, j=id with e=0, a=b, L=0, M=0, Z/l^2 and non-separably-closed k all covered. No definitions; sorry only; axioms propext/sorryAx/choice/Quot.sound; docstrings carry source place, blueprint tag and all six proof steps; lean.statement verbatim; node changed only in lean; ordinary étale coefficients, no pro-étale; report has Worker report and Second reading by Q60. nt_compile.py --json: rc 0, no errors or warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T005426-L-2768453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
