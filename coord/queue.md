@@ -64,6 +64,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
 | `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | repair | route |
 | `Sheaf.SixFunctorsBasics.BrownHypotheses` | 5 | 1 | repair | route |
+| `Sheaf.Paper.IntegralOperationsWellDefined` | 6 | 2 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.AlgebraicGeometry.AffineSpaceTopTrace` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction` | 3 | 1 | proof | route |
@@ -125,7 +126,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FinitePerfectQuotientModels` | 6 | 1 | proof | route |
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 6 | 35 | proof | route |
 | `Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness` | 6 | 1 | proof | route |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | 6 | 2 | proof | route |
 | `Sheaf.Paper.LisseEConstructibleIntegralLattice` | 6 | 1 | proof | route |
 | `Sheaf.Paper.PbcScalarExtension` | 6 | 17 | proof | route |
 | `Sheaf.Paper.SfLocalizationAllStages` | 6 | 2 | proof | route |
