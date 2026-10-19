@@ -17065,3 +17065,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: returned deliver/Q118/lem-trf-affinoid-powerbounded-integral (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-affinoid-powerbounded-integral: lem-trf-affino)
 - 04:00 L: returned deliver/Q103/lem-trf-curve-centred-valuation-dvr (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-curve-centred-valuation-dvr: lem-trf-curve-cen)
 - 04:00 L: returned deliver/Q103/lem-trf-partially-defined-module-adjoint (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-partially-defined-module-adjoint: lem-trf-part)
+- 04:00 L: returned deliver/NB/lem-trf-restricted-quotient-complete (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-restricted-quotient-complete: lem-trf-restrict)
