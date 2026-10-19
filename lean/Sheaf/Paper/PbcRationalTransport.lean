@@ -16,9 +16,7 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Algebra.Homology.DerivedCategory.Linear
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.CategoryTheory.SemilinearScalarLocalization
 
 /-! # Functorial transport to finite rational coefficients
 
@@ -283,7 +281,78 @@ theorem transport_exact
         [G.CommShift ℤ] [G.IsTriangulated] (η : F ⟶ G),
       ∃! e : transport R p F ⟶ transport R p G,
         ∀ K : C, e.app ⟨K⟩ = (1 : Localization.Away p) ⊗ₜ[R] η.app K) := by
-  sorry
+  classical
+  refine ⟨inferInstance, inferInstance, ?_, ?_, ?_, ?_⟩
+  · intro K L f a
+    exact LinearMap.baseChange_tmul _ _ _
+  · let dataC := exists_triangulated_scalarLocalization R C p
+    let dataD := exists_triangulated_scalarLocalization R D p
+    let := dataC.choose
+    let := dataD.choose
+    let := dataC.choose_spec.choose
+    let := dataD.choose_spec.choose
+    let := dataC.choose_spec.choose_spec.2.choose
+    let := dataD.choose_spec.choose_spec.2.choose
+    let := dataC.choose_spec.choose_spec.2.choose_spec.choose
+    let := dataD.choose_spec.choose_spec.2.choose_spec.choose
+    let := dataC.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose
+    let := dataD.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose
+    let := dataC.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose_spec.1
+    let := dataD.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose_spec.1
+    have hF : IsSemilinear (RingHom.id R) F := fun K L a f ↦ F.map_smul a f
+    have hc : coefficientMap p p (RingHom.id R)
+        (IsLocalization.Away.algebraMap_isUnit p) = RingHom.id (Localization.Away p) := by
+      symm
+      apply (coefficientMap_unique _ _ _ _ _).1
+      rfl
+    have he : transport R p F = extension p p (RingHom.id R)
+        (IsLocalization.Away.algebraMap_isUnit p) F hF := by
+      apply extension_unique
+      · intro K L a f
+        rw [hc]
+        exact (transport R p F).map_smul a f
+      · intro K
+        rfl
+      · apply Functor.ext (fun _ ↦ rfl)
+    have ht := extension_exact p p (RingHom.id R)
+      (IsLocalization.Away.algebraMap_isUnit p)
+      dataC.choose_spec.choose_spec.1 dataD.choose_spec.choose_spec.1
+      dataC.choose_spec.choose_spec.2.choose_spec.choose_spec.1
+      dataD.choose_spec.choose_spec.2.choose_spec.choose_spec.1
+      dataC.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose_spec.2.2
+      dataD.choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose_spec.2.2 F hF
+    let P (J : ScalarLocalization R C p ⥤ ScalarLocalization R D p) : Prop :=
+      ∃ cs : J.CommShift ℤ,
+        (fun [commInst : J.CommShift ℤ] ↦ J.IsTriangulated ∧ ∀ K : C,
+          HEq ((J.commShiftIso (1 : ℤ)).hom.app ⟨K⟩)
+            ((1 : Localization.Away p) ⊗ₜ[R] (F.commShiftIso (1 : ℤ)).hom.app K))
+          (commInst := cs)
+    exact (congrArg P he).mpr ht
+  · intro H _ _ hobj hmap
+    exact transport_unique R p F H hobj hmap
+  · intro G _ _ _ _ η
+    exact transportNat_unique R p η
+
+private theorem transport_map_smul_localization (K L : C) (f : K ⟶ L)
+    (a : Localization.Away p) :
+    (transport R p F).map (a • (localization R C p).map f) = a ⊗ₜ[R] F.map f := by
+  change transportHom R p F K L (a • ((1 : Localization.Away p) ⊗ₜ[R] f)) = _
+  simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one, transportHom,
+    LinearMap.baseChange_tmul, Functor.mapLinearMap_apply]
+  rfl
+
+private theorem transport_comp {B : Type u₃} [Category.{v₃} B]
+    [Preadditive B] [Linear R B] (F : C ⥤ D) [F.Additive] [F.Linear R]
+    (G : D ⥤ B) [G.Additive] [G.Linear R] :
+    transport R p F ⋙ transport R p G = transport R p (F ⋙ G) := by
+  apply transport_unique R p (F ⋙ G)
+  · intro K
+    rfl
+  · intro K L f
+    apply heq_of_eq
+    change transportHom R p G _ _ (transportHom R p F _ _ (1 ⊗ₜ[R] f)) = _
+    simp only [transportHom, LinearMap.baseChange_tmul, Functor.mapLinearMap_apply]
+    rfl
 
 end CategoryTheory.ScalarLocalization
 
@@ -399,6 +468,26 @@ namespace WeilConjectures
 
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 
+private theorem ulift_localization_module (A : Type r) [CommRing A]
+    (p : ULift.{r + 1} A) :
+    (ULift.module : Module (ULift.{r + 1} A) (Localization.Away p)) =
+      (OreLocalization.instModuleOfIsScalarTower :
+        Module (ULift.{r + 1} A) (Localization.Away p)) := by
+  apply Module.ext'
+  intro a x
+  induction x using OreLocalization.ind with
+  | _ b s => simp only [ULift.smul_def, OreLocalization.smul_oreDiv]
+
+private theorem ulift_tmul_heq (A : Type r) [CommRing A] (p : ULift.{r + 1} A)
+    {M : Type u₁} [AddCommMonoid M] [Module (ULift.{r + 1} A) M]
+    (a : Localization.Away p) (f : M) :
+    HEq (@TensorProduct.tmul (ULift.{r + 1} A) _ (Localization.Away p) M _ _
+      OreLocalization.instModuleOfIsScalarTower _ a f)
+      (@TensorProduct.tmul (ULift.{r + 1} A) _ (Localization.Away p) M _ _
+        ULift.module _ a f) := by
+  rw [ulift_localization_module A p]
+
+
 variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 variable (X Y : Scheme.{u}) [IsNoetherian X] [IsNoetherian Y]
@@ -495,7 +584,60 @@ theorem pbcRationalTransport [F.CommShift ℤ] [F.IsTriangulated] :
         ∀ K : PbcIntegralCategory l E X hX iX,
           HEq (e.app ⟨K⟩) ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[
             PbcIntegralRing l E] η.app K)) := by
-  sorry
+  classical
+  let : Module (PbcIntegralRing l E) (Localization.Away (pbcUniformizer l E)) :=
+    OreLocalization.instModuleOfIsScalarTower
+  refine ⟨inferInstance, ?_, ?_, ?_, ?_, ?_⟩
+  · constructor
+    intro K L f a
+    exact (pbcRationalExtension l E X Y hX iX hY iY F).map_smul
+      ((pbcRationalCoefficientEquiv l E).symm a) f
+  · intro K L f a
+    have hg := ScalarLocalization.transport_map_smul_localization
+      (PbcIntegralRing l E) (pbcUniformizer l E) (F := F) K L f a
+    have hm := @ulift_tmul_heq _ _ (pbcUniformizer l E)
+      (F.obj K ⟶ F.obj L) (Preadditive.homGroup _ _).toAddCommMonoid
+      (Linear.homModule (R := PbcIntegralRing l E) _ _) a (F.map f)
+    change HEq ((ScalarLocalization.transport (PbcIntegralRing l E)
+      (pbcUniformizer l E) F).map
+      (a • ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[PbcIntegralRing l E] f))) _
+    exact (heq_of_eq hg).trans hm
+  · obtain ⟨cs, hcs, hσ⟩ :=
+      (ScalarLocalization.transport_exact (PbcIntegralRing l E) (pbcUniformizer l E) F).2.2.2.1
+    refine ⟨cs, hcs, ?_⟩
+    intro K
+    have hσK := hσ K
+    have htm := @ulift_tmul_heq _ _ (pbcUniformizer l E)
+      (_ ⟶ _)
+      (Preadditive.homGroup _ _).toAddCommMonoid
+      (Linear.homModule (R := PbcIntegralRing l E) _ _) 1
+      ((F.commShiftIso (1 : ℤ)).hom.app K)
+    exact hσK.trans htm
+  · intro H _ _ hobj hmap
+    let : H.Linear (Localization.Away (pbcUniformizer l E)) :=
+      { map_smul := fun {K L} f a ↦ by
+          have hs := H.map_smul (pbcRationalCoefficientEquiv l E a) f
+          change H.map ((pbcRationalCoefficientEquiv l E).symm
+              (pbcRationalCoefficientEquiv l E a) • f) =
+            (pbcRationalCoefficientEquiv l E).symm
+              (pbcRationalCoefficientEquiv l E a) • H.map f at hs
+          simpa only [RingEquiv.symm_apply_apply] using hs }
+    apply ScalarLocalization.transport_unique
+      (PbcIntegralRing l E) (pbcUniformizer l E) F H hobj
+    intro K L f
+    have hm := @ulift_tmul_heq _ _ (pbcUniformizer l E)
+      (F.obj K ⟶ F.obj L) (Preadditive.homGroup _ _).toAddCommMonoid
+      (Linear.homModule (R := PbcIntegralRing l E) _ _) 1 (F.map f)
+    exact (hmap K L f).trans hm.symm
+  · intro G _ _ _ _ η
+    obtain ⟨e, he, hu⟩ := ScalarLocalization.transportNat_unique
+      (PbcIntegralRing l E) (pbcUniformizer l E) η
+    have hm (K) := @ulift_tmul_heq _ _ (pbcUniformizer l E)
+      (F.obj K ⟶ G.obj K) (Preadditive.homGroup _ _).toAddCommMonoid
+      (Linear.homModule (R := PbcIntegralRing l E) _ _) 1 (η.app K)
+    refine ⟨e, fun K ↦ (heq_of_eq (he K)).trans (hm K), ?_⟩
+    intro e' he'
+    exact hu e' (fun K ↦ eq_of_heq ((he' K).trans (hm K).symm))
 
 variable (X' Y' : Scheme.{u}) [IsNoetherian X'] [IsNoetherian Y']
 variable (hX' : ∃ d : ℕ, topologicalKrullDim X' ≤ d)
@@ -543,6 +685,25 @@ theorem pbcRationalExchange
       ∀ K : PbcIntegralCategory l E X hX iX,
         HEq (e.app ⟨K⟩) ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[
           PbcIntegralRing l E] Ex.app K) := by
-  sorry
+  classical
+  refine ⟨(pbcRationalTransport l E X Y hX iX hY iY Rf).2.2.2.1,
+    (pbcRationalTransport l E X' Y' hX' iX' hY' iY' Rf').2.2.2.1,
+    (pbcRationalTransport l E Y Y' hY iY hY' iY' Lg).2.2.2.1,
+    (pbcRationalTransport l E X X' hX iX hX' iX' Lg').2.2.2.1, ?_⟩
+  change ∃! e :
+      ScalarLocalization.transport (PbcIntegralRing l E) (pbcUniformizer l E) Rf ⋙
+        ScalarLocalization.transport (PbcIntegralRing l E) (pbcUniformizer l E) Lg ⟶
+      ScalarLocalization.transport (PbcIntegralRing l E) (pbcUniformizer l E) Lg' ⋙
+        ScalarLocalization.transport (PbcIntegralRing l E) (pbcUniformizer l E) Rf', _
+  rw [ScalarLocalization.transport_comp, ScalarLocalization.transport_comp]
+  obtain ⟨e, he, hu⟩ := ScalarLocalization.transportNat_unique
+    (PbcIntegralRing l E) (pbcUniformizer l E) Ex
+  refine ⟨e, fun K ↦ (heq_of_eq (he K)).trans
+    (ulift_tmul_heq (Padic.coefficientExtensionIntegers l E)
+      (pbcUniformizer l E) 1 (Ex.app K)), ?_⟩
+  intro e' he'
+  exact hu e' (fun K ↦ eq_of_heq ((he' K).trans
+    (ulift_tmul_heq (Padic.coefficientExtensionIntegers l E)
+      (pbcUniformizer l E) 1 (Ex.app K)).symm))
 
 end WeilConjectures
