@@ -18,135 +18,93 @@
  ],
  "proof": [
   {
-   "text": "By [def-pur-conventions], $E$ and $B$ are finite-type $k$-schemes and $\\pi$ is a separated finite-type $k$-morphism. Form the cartesian compact-support square [def-cbc-compact-support-square] with $g=\\bar b:\\operatorname{Spec}\\Omega\\to B$, $X'=E_{\\bar b}=E\\times_B\\operatorname{Spec}\\Omega$, $f'=\\pi_{\\bar b}:E_{\\bar b}\\to\\operatorname{Spec}\\Omega$ and $g'=i_{\\bar b}:E_{\\bar b}\\to E$; by [lem-pod-separated-finite-type-base-change] $\\pi_{\\bar b}$ is separated of finite type, so $E_{\\bar b}$ is a finite-type $\\Omega$-scheme, and $\\ell$ is invertible in $\\Omega\\supseteq k$. Fix a compactification $c=(j,p)$ of $\\pi$ as supplied by [def-compact-support-direct-image-detailed]; its base change $c'=(j',p')$ is a compactification of $\\pi_{\\bar b}$ [def-cbc-compact-support-square], so $R(\\pi_{\\bar b})_!$ is the compact-support direct image of [def-compact-support-direct-image-detailed] over the field $K_0=\\Omega$ (and its coefficient forms). The two sides of the display are read as follows: $K|_{E_{\\bar b}}=Li_{\\bar b}^*K$ is the derived pullback of the coefficient stage [def-weil-derived-pullback-tensor-hom], and $R\\Gamma_c(E_{\\bar b},K|_{E_{\\bar b}})$ is $R(\\pi_{\\bar b})_!(K|_{E_{\\bar b}})$ on $\\operatorname{Spec}\\Omega$. The stalk $(R\\pi_!K)_{\\bar b}$ is the filtered-neighborhood stalk of [def-weil-pbc-geometric-stalks] (at finite level on the etale witness, on each cohomology sheaf). By [lem-weil-pbc-inverse-image-stalk-germ], applied to $f=\\bar b$ and the tautological geometric point $\\mathrm{id}$ of $\\operatorname{Spec}\\Omega$, it is the stalk of $\\bar b^{-1}R\\pi_!K$ at that point. Since $\\Omega$ is separably closed, an etale $U\\to\\operatorname{Spec}\\Omega$ is a disjoint union of copies of $\\operatorname{Spec}\\Omega$, and a lift of $\\mathrm{id}$ picks one copy, so $(\\operatorname{Spec}\\Omega,\\mathrm{id})$ is final among pointed etale neighbourhoods and that stalk is the value on $\\operatorname{Spec}\\Omega$. At the integral and field stages the stalk is likewise the stage pullback $L\\bar b^*R\\pi_!K$ on $\\operatorname{Spec}\\Omega$. So in every stage the displayed comparison is the compact-support exchange $L\\bar b^*R\\pi_!K\\to R(\\pi_{\\bar b})_!Li_{\\bar b}^*K$ of this square, read on $\\operatorname{Spec}\\Omega$, and it suffices to show that this exchange is an isomorphism.",
+   "text": "Use the literal pullback X_s = X times_Y Spec Omega and the base-changed compactification c.baseChange s. The unchanged definitions compactFiberProperSquare and compactFiberOpenSquare supply the proper and open Cartesian squares. The unchanged four Lean statements already express the stalk/fibre formula as invertibility of their specified exchange arrows on Spec Omega, so no further stalk or endpoint comparison is needed in these proofs.",
    "uses": [
     "def-pur-conventions",
-    "def-cbc-compact-support-square",
-    "lem-pod-separated-finite-type-base-change",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-    "place": "Proof paragraph, first sentence and compactification setup"
-   }
-  },
-  {
-   "text": "At finite level $\\Lambda=A_{E,n}$, $D^b_c(E,A_{E,n})$ is the intrinsic bounded constructible pro-etale category, so $K$ has a bounded constructible etale-origin witness $(L,\\alpha)$ by [lem-sf-proetale-constructible-origin] (ii). Apply [thm-cbc-finite-level-proetale] ($\\Lambda=A_{E,n}$ finite, $\\pi$ separated of finite type, $g=\\bar b$ arbitrary, compactification $c$ given) to the square of Step 1. Its canonical exchange is an isomorphism $\\bar b^{-1}R\\pi_!K\\simeq R(\\pi_{\\bar b})_!\\,i_{\\bar b}^{-1}K$, and $i_{\\bar b}^{-1}K$ carries the witness $(i_{\\bar b}^{-1}L,i_{\\bar b}^{-1}\\alpha)$ [def-weil-pbc-etale-origin-witness]. Taking the value on $\\operatorname{Spec}\\Omega$ as in Step 1 gives the comparison with $R\\Gamma_c(E_{\\bar b},K|_{E_{\\bar b}})$. This is the route of the source: after writing $R\\pi_!=Rp_*j_!$, the proper factor is the geometric-fibre formula [cor-weil-pbc-geometric-fiber-finite] applied to $p$ and the witness $j_!L$, and the open factor is the extension-by-zero part of the same exchange.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "thm-cbc-finite-level-proetale",
-    "cor-weil-pbc-geometric-fiber-finite",
-    "def-weil-pbc-etale-origin-witness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-    "place": "Proof paragraph, compatibility of geometric stalks with compact-support functors and proper direct image"
-   }
-  },
-  {
-   "text": "Let $\\Lambda=\\mathcal O_E$. The four schemes $E,B,E_{\\bar b},\\operatorname{Spec}\\Omega$ are of finite type over the field $k$ or $\\Omega$, hence noetherian [lem-weil-pbc-finite-type-over-noetherian] and finite-dimensional [lem-kun-dimension-finite-type], and $\\ell$ is invertible on them. In particular every open subscheme of $E$ is quasi-compact, so $j$ is a quasi-compact open immersion. By [lem-weil-pbc-integral-stratified-perfect-characterization], over each of them the category $D^b_c(-,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed] is the category of [def-weil-pbc-bounded-constructible-complete], with the same completed ring sheaf and reductions. So $K$ is derived $\\varpi_E$-complete and its reductions $K_n$ carry compatible etale-origin witnesses. Apply [thm-cbc-complete-proetale] with $(A,I)=(\\mathcal O_E,(\\varpi_E))$ to the square of Step 1 and to $c$: the completed exchange $L\\bar b^*_{\\mathrm{comp}}Rp_*j_!K\\to Rp'_*j'_!Li^*_{\\bar b,\\mathrm{comp}}K$ is an isomorphism. Its ends are those of Step 1.\n\n(a) Pullbacks: the integral pullback of [def-weil-derived-pullback-tensor-hom] is $R\\varprojlim_n\\operatorname{Res}_nLf_n^*(K\\otimes^L_{\\mathcal O_E}A_{E,n})$. [def-weil-pbc-completed-pullback] defines $Lf^*_{\\mathrm{comp}}K$ as $R\\lim$ of the strict tower whose $n$-th evaluation is $Lf_n^*K_n$. These are the derived limit of the same tower.\n\n(b) Direct images: by [lem-cbc-completed-extension-zero-comparison] (identity square of the quasi-compact $j$), $j_!K$ is complete, so its completion unit identifies it with $J^c_jK$. Transport through the restriction-of-scalars equivalence on complete objects of [lem-weil-pbc-constant-completion-equivalence]. Then [lem-sf-cbc-extension-zero-completion] gives $J^c_jK\\cong R\\lim(j_!K_n)_n$ with the reduction transitions, and [prop-weil-pbc-direct-image-limits] gives $Rp_*R\\lim\\cong R\\lim Rp_*^{\\mathrm{Tow}}$. Hence $Rp_*j_!K\\cong R\\varprojlim_n\\operatorname{Res}_nRp_{*,n}j_!K_n$, which is $R\\pi_!K$ of [def-weil-integral-rational-qbar-compact-support] for the compactification $c$. The same argument applies to $\\pi_{\\bar b}$, $c'$ and the complete object $Li^*_{\\bar b,\\mathrm{comp}}K$.\n\nUnder these identifications the isomorphism of [thm-cbc-complete-proetale] is the integral comparison of Step 1. Its value on $\\operatorname{Spec}\\Omega$ gives the displayed isomorphism at integral coefficients.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-pbc-bounded-constructible-complete",
-    "thm-cbc-complete-proetale",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-pbc-completed-pullback",
-    "lem-cbc-completed-extension-zero-comparison",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-sf-cbc-extension-zero-completion",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-integral-rational-qbar-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-    "place": "Proof paragraph, coefficient-tower interpretation (transport of the compactification exchange to integral coefficients per def-pur-conventions)"
-   }
-  },
-  {
-   "text": "Let $\\Lambda=E$, the coefficient field (not the scheme $E$). Over the four schemes of Step 3 the integral categories agree by [lem-weil-pbc-integral-stratified-perfect-characterization]. So the raw rationalizations of [def-weil-rationalization-karoubi] and [def-weil-pbc-rational-category] are one category: the same objects and $\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$. By [def-weil-integral-rational-qbar-compact-support] the rational $R\\pi_!$ is the integral one on objects, and the rational pullback is formed on integral representatives. By the uniqueness clause of [prop-weil-pbc-rational-transport] these are the $E$-linear extensions used in [thm-cbc-finite-extension], and the rational exchange is the extension of the integral exchange of Step 3. The hypotheses of [thm-cbc-finite-extension] hold: all four schemes are noetherian, finite-dimensional and have $\\ell$ invertible (Step 3), $\\pi$ is separated of finite type, and $g=\\bar b$ is arbitrary. So $\\operatorname{Ex}_{!,E}(K)$ is an isomorphism for every $K\\in D^b_c(E,E)=D^b_{ctf}(E,E)$, and its value on $\\operatorname{Spec}\\Omega$ is the displayed comparison.\n\nLet $\\Lambda=\\overline{\\mathbf Q}_\\ell$. By [def-weil-algebraically-closed-coefficients], $D^b_c(-,\\overline{\\mathbf Q}_\\ell)$ is the finite-stage pair category formed with the rational stages above and their scalar extensions. With the stage categories identified and the scalar extensions compared by [def-pur-completed-coefficient-presentation-transport], it is the category of [def-weil-pbc-qbar-category]. On an object $(E',K_{E'})$, $R\\pi_!(E',K_{E'})=(E',R\\pi_!K_{E'})$ is the value of the descended functor of [prop-weil-pbc-descent-functors]. [thm-cbc-qbar] (finite-stage hypotheses as just checked) shows that the descended exchange is an isomorphism. After a finite overfield $M$ it is represented by the isomorphism of [thm-cbc-finite-extension] for $T_{M/E'}K_{E'}$, independently of $E'$, $M$ and the representative. Its value on $\\operatorname{Spec}\\Omega$ is the displayed comparison.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-rationalization-karoubi",
-    "def-weil-pbc-rational-category",
-    "def-weil-integral-rational-qbar-compact-support",
-    "prop-weil-pbc-rational-transport",
-    "thm-cbc-finite-extension",
-    "def-weil-algebraically-closed-coefficients",
-    "def-pur-completed-coefficient-presentation-transport",
-    "def-weil-pbc-qbar-category",
-    "prop-weil-pbc-descent-functors",
-    "thm-cbc-qbar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-    "place": "Proof paragraph, coefficient transports (per def-pur-conventions, transport section)"
-   }
-  },
-  {
-   "text": "All comparisons used above are the canonical compactification, witness, stalk, and coefficient-transport maps, so their composite is the displayed canonical map. Naturality in $K$ follows from naturality of each cited exchange and stalk comparison. Edge cases: for an empty fibre both sides are $0$; for $K=0$ both sides are $0$; for $\\pi=\\mathrm{id}$ the compactification is $(\\mathrm{id},\\mathrm{id})$ and both sides are $K_{\\bar b}$; for $B=\\operatorname{Spec}\\Omega$ and $\\bar b=\\mathrm{id}$ the square is the identity square and the exchange is the identity.",
-   "uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-pbc-geometric-stalks",
-    "thm-cbc-finite-level-proetale",
-    "thm-cbc-complete-proetale",
-    "thm-cbc-finite-extension",
-    "thm-cbc-qbar"
+    "def-cbc-compact-support-square"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-    "place": "Proof paragraph, canonicality and compatibility conclusion"
+    "place": "Step 1: geometric fibre and compactification"
+   }
+  },
+  {
+   "text": "At finite coefficients, extract bounds a and b from intrinsic bounded constructibility. Cohomology vanishes outside [min(a,b),b]. Apply lem-weil-pbc-finite-ring-constructible-derived-origin to obtain a bounded constructible etale complex L and its intrinsic-realization isomorphism to K. Undo intrinsic realization with the unit of sfIntrinsicDerivedEquivalence and the canonical derived-composition isomorphism. The lower bound of L supplies its D-plus membership. Apply the published ProEtale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app to this bounded-below etale-origin witness and the literal pullback square. Its arrow is definitionally compactFiberFiniteMap. This is the finite-level compact-support base-change route, with proper and open factors packaged by that published theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "place": "Step 2: finite coefficients"
+   }
+  },
+  {
+   "text": "At integral coefficients, finite type over the fixed field gives Noetherianness and finite Krull dimension of X. The coefficient prime is a unit in each stalk by the purity setting, and hence a unit in global sections. Apply integralStratifiedPerfectDetailed, the detailed-category clause of lem-weil-pbc-integral-stratified-perfect-characterization, to K. This gives bounded constructible complete membership of its unchanged integralDetailedTransport image, including compatible etale-origin reductions. For every requested generating tuple, the general auxiliary theorem wfConstructible_complete of def-wf-tensor-product gives cbcCompleteProperty: WfIsComplete and cbcCompleteProperty use exactly the same intrinsic unit and canonical representative. Apply completeCompactSupportProetale_isIso to this object and its compatible origins. Project its first conclusion to obtain invertibility of the exact completedCompactSupportExchange displayed in compactFiber_integral. No new coefficient object or map is chosen.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-wf-tensor-product",
+    "thm-cbc-complete-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "place": "Step 3: integral coefficients"
+   }
+  },
+  {
+   "text": "A raw rational object has its original integral constructible object K.obj. Repeat Step 3 for that object; no finite-Tor input is needed by the completed exchange theorem. Localize the resulting invertible completedCompactSupportExchange by the actual ScalarLocalization.localization functor in the unchanged statement. Functors preserve isomorphisms, giving compactFiber_rational. This uses the integral representative directly and does not require a separate rational-transport theorem.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-wf-tensor-product",
+    "thm-cbc-complete-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "place": "Step 4: rational coefficients"
+   }
+  },
+  {
+   "text": "For Qbar, finite type gives Noetherianness of X, Y and the geometric fibre, and finite dimension of X, Y, Spec Omega and the geometric fibre. Base change supplies finite type of the fibre projection; the purity setting gives invertibility of the coefficient prime on all four schemes. Specialize qbarCompactSupportBaseChange to c, c.baseChange s and the literal proper/open squares. Its first conclusion supplies Nonempty of the normalized exchange model, without choosing a model as data. For every model D and object K, project its descended-component IsIso conclusion. These are exactly the two conclusions of CompactFiberQbarFormula. All four proofs retain the given canonical maps and therefore apply to zero inputs, empty fibres and identity squares without exceptional choices.",
+   "uses": [
+    "def-pur-conventions",
+    "def-cbc-compact-support-square",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-pod-separated-finite-type-base-change",
+    "thm-cbc-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "place": "Step 4 and Step 5: algebraically closed coefficients and canonicality"
    }
   }
  ],
  "proof_deps": [
-  "cor-weil-pbc-geometric-fiber-finite",
   "def-cbc-compact-support-square",
-  "def-compact-support-direct-image-detailed",
-  "def-pur-completed-coefficient-presentation-transport",
   "def-pur-conventions",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-etale-origin-witness",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-rational-category",
   "def-weil-rationalization-karoubi",
-  "lem-cbc-completed-extension-zero-comparison",
+  "def-wf-tensor-product",
   "lem-kun-dimension-finite-type",
   "lem-pod-separated-finite-type-base-change",
-  "lem-sf-cbc-extension-zero-completion",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "prop-weil-pbc-descent-functors",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-rational-transport",
   "thm-cbc-complete-proetale",
-  "thm-cbc-finite-extension",
   "thm-cbc-finite-level-proetale",
   "thm-cbc-qbar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-  "place": "Proof paragraph, expanded by coefficient stage"
+  "place": "E7 stage-3 specialization of the published exchange theorems, by coefficient stage"
  },
  "mathlib_searches": [
   {
@@ -291,5 +249,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The four coefficient clauses are compactFiber_finite, _integral, _rational and _qbar. Each states invertibility of the specified compactification exchange over the geometric point, the stalk/fibre reading fixed by Step 1 of this node. Integral input is the original detailed finite-Tor object transported by integralDetailedTransport. Rational input is the original raw sfRationalConstructibleCategory, and its map is actual localization of the completed arrow. The Qbar clause uses the published unit/scalar-normalized common-stage model and asserts its existence; no model is an extra hypothesis. Helpers construct only the literal proper/open fibre squares and specialize existing canonical maps. All chapter hypotheses are retained explicitly by include; no new coefficient category, arbitrary comparison or proof is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T231131-L-551756",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

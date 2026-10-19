@@ -15,37 +15,12 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import Sheaf.Paper.CompletedCompactSupportExchange
 public import Sheaf.Paper.CompletedCoefficientPresentationTransport
 public import Sheaf.Paper.QbarCompactSupportBaseChange
-import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import WeilConjectures.Compactification.BaseChange
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.QcqsCompactSupportRealization
-import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import Sheaf.Paper.PbcQbarCategory
-import Sheaf.Paper.PbcRationalCategory
 public import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.CompletedOpenExchangeTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Paper.SfCbcExtensionZeroCompletion
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.Paper.PbcDescentFunctors
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.CompleteCompactSupportProetale
-import Sheaf.Paper.FiniteExtensionCompactSupportBaseChange
-import Sheaf.Paper.GlobalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.WeilTensorProduct
 
 /-!
 # The geometric fibre of compactly supported direct image
@@ -123,6 +98,7 @@ def compactFiberFiniteMap (c : Compactification f)
       ((sfIntrinsicDerivedEquivalence X P.Ring).inverse.obj K)
 
 include hXft hXqc hYft hYqc hfOver hfSep hfft hfqc in
+set_option linter.unusedSectionVars false in
 /-- The finite-level stalk formula for every bounded constructible finite-Tor input.
 The quantification over compactifications is presentation independence, not an
 additional compactifiability assumption.
@@ -143,9 +119,55 @@ the identity map and the identity geometric-point square give the identity. -/
 theorem compactFiber_finite
     (K : finiteTorConstructibleCategory P.coefficients.l P.extension P.level P.level_pos X) :
     ∀ c : Compactification f, IsIso (compactFiberFiniteMap P f Omega s c K.obj) := by
-  sorry
+  have : Finite P.Ring :=
+    Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
+  have : Finite P.Coefficient := Equiv.ulift.finite_iff.mpr (inferInstance : Finite P.Ring)
+  have hK := K.property.1
+  obtain ⟨a, ha⟩ := hK.1.bddBelow
+  obtain ⟨b, hb⟩ := hK.1.bddAbove
+  have hz (q : ℤ) (hq : q < min a b ∨ b < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K.obj) := by
+    by_contra hn
+    rcases hq with hq | hq
+    · exact (not_le_of_gt (lt_of_lt_of_le hq (min_le_left _ _))) (ha hn)
+    · exact (not_le_of_gt hq) (hb hn)
+  obtain ⟨L, ⟨e⟩⟩ := ((finiteRing_constructibleDerived_origin X P.Ring).2.2.1 K.obj).mpr
+    ⟨hK.2, min a b, b, min_le_right _ _, hz⟩
+  let F := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X
+  let R := ProEtale.finiteCoefficientIntrinsicRealization X P.Ring
+  have : R.Additive := ProEtale.finiteCoefficientIntrinsicRealization_additive X P.Ring
+  have : PreservesFiniteLimits R :=
+    (ProEtale.finiteCoefficientIntrinsicRealization_exact X P.Ring).2.2.1
+  have : PreservesFiniteColimits R :=
+    (ProEtale.finiteCoefficientIntrinsicRealization_exact X P.Ring).2.2.2
+  let E := sfIntrinsicDerivedEquivalence X P.Ring
+  let e' : F.mapDerivedCategory.obj L.obj ≅ E.inverse.obj K.obj :=
+    (E.unitIso.app _) ≪≫ E.inverse.mapIso
+      ((Functor.mapDerivedCategoryCompIso F R).symm.app L.obj ≪≫ e)
+  have hL : DerivedCategory.TStructure.t.plus L.obj := by
+    obtain ⟨a, b, _, hv⟩ := L.property.2
+    exact ⟨a, (DerivedCategory.isGE_iff _ a).mpr (fun q hq ↦ hv q (Or.inl hq))⟩
+  intro c
+  exact ProEtale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
+    P.Coefficient (IsPullback.of_hasPullback f s) c (E.inverse.obj K.obj)
+    ⟨L.obj, hL, ⟨e'⟩⟩
+
+private theorem compactFiber_integral_membership
+    (K : sfIntegralConstructibleCategory P.coefficients.l P.extension X) :
+    PbcIsBoundedConstructibleComplete X (pbcIntegralDatum P.coefficients.l P.extension)
+      ((integralDetailedTransport X P.coefficients.l P.extension).obj K.obj) := by
+  have : IsNoetherian X :=
+    isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of P.field.k))
+  have hl : IsUnit (P.coefficients.l : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    simpa only [map_natCast] using
+      P.coefficientPrime_isUnit_stalk X (X ↘ Spec (.of P.field.k)) x
+  exact (integralStratifiedPerfectDetailed X P.coefficients.l P.extension
+    (exists_topologicalKrullDim_le (X ↘ Spec (.of P.field.k))) hl K.obj).mp K.property
 
 include hXft hXqc hYft hYqc hfOver hfSep hfft hfqc in
+set_option linter.unusedSectionVars false in
 /-- The integral formula uses the original finite-Tor category and the recorded
 projection-normalized completed coefficient transport. Completeness is asserted,
 not assumed, for every generating tuple of the uniformizer ideal.
@@ -176,9 +198,18 @@ theorem compactFiber_integral
           c (c.baseChange s) (pullback.fst c.g s)
           (compactFiberProperSquare c s) (compactFiberOpenSquare c s) r a ha
           ⟨(integralDetailedTransport X P.coefficients.l P.extension).obj K.obj, hc⟩) := by
-  sorry
+  intro c r a ha
+  have hK := compactFiber_integral_membership P ⟨K.obj, K.property.1⟩
+  have hc : cbcCompleteProperty (pbcIntegralDatum P.coefficients.l P.extension) X r a ha
+      ((integralDetailedTransport X P.coefficients.l P.extension).obj K.obj) :=
+    wfConstructible_complete X (pbcIntegralDatum P.coefficients.l P.extension) r a ha ⟨_, hK⟩
+  exact ⟨hc, (completeCompactSupportProetale_isIso
+    (pbcIntegralDatum P.coefficients.l P.extension) c (c.baseChange s)
+    (pullback.fst c.g s) (compactFiberProperSquare c s) (compactFiberOpenSquare c s)
+    r a ha ⟨_, hc⟩ hK.2.2).1⟩
 
 include hXft hXqc hYft hYqc hfOver hfSep hfft hfqc in
+set_option linter.unusedSectionVars false in
 /-- Rational stalk formula on the unchanged integral objects of the actual raw
 rationalization. The arrow is localization of the canonical completed exchange.
 Localization of the ambient completed category has the same Hom tensor products
@@ -210,7 +241,16 @@ theorem compactFiber_rational
             c (c.baseChange s) (pullback.fst c.g s)
             (compactFiberProperSquare c s) (compactFiberOpenSquare c s) r a ha
             ⟨(integralDetailedTransport X P.coefficients.l P.extension).obj K.obj.obj, hc⟩)) := by
-  sorry
+  intro c r a ha
+  have hK := compactFiber_integral_membership P K.obj
+  have hc : cbcCompleteProperty (pbcIntegralDatum P.coefficients.l P.extension) X r a ha
+      ((integralDetailedTransport X P.coefficients.l P.extension).obj K.obj.obj) :=
+    wfConstructible_complete X (pbcIntegralDatum P.coefficients.l P.extension) r a ha ⟨_, hK⟩
+  have := (completeCompactSupportProetale_isIso
+    (pbcIntegralDatum P.coefficients.l P.extension) c (c.baseChange s)
+    (pullback.fst c.g s) (compactFiberProperSquare c s) (compactFiberOpenSquare c s)
+    r a ha ⟨_, hc⟩ hK.2.2).1
+  exact ⟨hc, inferInstance⟩
 
 /-- The common-stage formulation of the Qbar stalk comparison. The local instances
 are consequences of the fixed geometric setting, constructed from the recorded
@@ -241,6 +281,9 @@ def CompactFiberQbarFormula : Prop :=
       IsIso ((StageSystem.Morphism.descNatTrans D.exchange).app K)
 
 include hXft hXqc hYft hYqc hfOver hfSep hfft hfqc in
+set_option linter.unusedSectionVars false in
+set_option maxHeartbeats 10000 in
+-- Bound reduction while specializing the normalized common-stage exchange.
 /-- The Qbar geometric-stalk comparison is the descended normalized exchange, on
 all common-stage objects. Source: main-20261015, lem-pur-cfiber-stalk.md
 (blueprint: lem-pur-cfiber-stalk).
@@ -259,7 +302,34 @@ Step 1 reads the endpoints on Spec Omega as the stalk and fibre compact support.
 Step 5 identifies the map as the canonical comparison and covers the zero, empty,
 and identity cases. -/
 theorem compactFiber_qbar : CompactFiberQbarFormula P f Omega s := by
-  sorry
-
+  have : IsNoetherian X :=
+    isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of P.field.k))
+  have : IsNoetherian Y :=
+    isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (.of P.field.k))
+  have : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) :=
+    ⟨exists_topologicalKrullDim_le (X ↘ Spec (.of P.field.k))⟩
+  have : Fact (∀ x : X, IsUnit (P.coefficients.l : X.presheaf.stalk x)) :=
+    ⟨P.coefficientPrime_isUnit_stalk X (X ↘ Spec (.of P.field.k))⟩
+  have : Fact (∃ n : ℕ, topologicalKrullDim (Spec (.of Omega)) ≤ (n : WithBot ℕ∞)) :=
+    ⟨exists_topologicalKrullDim_le (𝟙 (Spec (.of Omega)))⟩
+  have : Fact (∀ x : Spec (.of Omega),
+      IsUnit (P.coefficients.l : (Spec (.of Omega)).presheaf.stalk x)) :=
+    ⟨P.coefficientPrime_isUnit_stalk (Spec (.of Omega)) (s ≫ (Y ↘ Spec (.of P.field.k)))⟩
+  have : LocallyOfFiniteType (pullback.snd f s) := inferInstance
+  have : IsNoetherian (pullback f s) :=
+    isNoetherian_of_locallyOfFiniteType (pullback.snd f s)
+  unfold CompactFiberQbarFormula
+  intro c
+  have h := qbarCompactSupportBaseChange P.coefficients.l P.coefficients.Qbar
+    (X' := pullback f s) (X := X) (Y' := Spec (.of Omega)) (Y := Y)
+    (g' := pullback.fst f s) (f' := pullback.snd f s) (f := f) (g := s)
+    c (c.baseChange s) (pullback.fst c.g s)
+    (compactFiberProperSquare c s) (compactFiberOpenSquare c s)
+    (exists_topologicalKrullDim_le (Y ↘ Spec (.of P.field.k)))
+    (exists_topologicalKrullDim_le (pullback.snd f s))
+    (P.coefficientPrime_isUnit_stalk Y (Y ↘ Spec (.of P.field.k)))
+    (P.coefficientPrime_isUnit_stalk (pullback f s)
+      (pullback.fst f s ≫ (X ↘ Spec (.of P.field.k))))
+  exact ⟨h.1, fun D K ↦ (h.2 D).2.2.1 K⟩
 
 end WeilConjectures.PurityFiniteSetting
