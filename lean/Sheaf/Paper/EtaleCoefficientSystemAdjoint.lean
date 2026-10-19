@@ -12,31 +12,11 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.Compactification.Refinement
 public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.RingedTopoiModuleAdjunctionRepair
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Paper.EtaleDerivedScalarTensor
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.EtaleExceptionalConstantTensor
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.NumberTheory.Padics.PadicIntegersIntegralClosure
+import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+import Mathlib.RingTheory.TensorProduct.Quotient
+import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.SystemLevelLeftExtension
-import Sheaf.Paper.SemilinearDerivedSections
 /-!
 # The strict étale coefficient-system adjoint
 Source: Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,
@@ -173,7 +153,11 @@ Thus its composite with the quotient homomorphism vanishes on that ideal. -/
 theorem strictCoefficientMap_kills (n : ℕ) (x : O)
     (hx : x ∈ (Ideal.span ({ell} : Set O)) ^ (n + 1)) :
     Ideal.Quotient.mk ((Ideal.span ({φ ell} : Set O')) ^ (n + 1)) (φ x) = 0 := by
-  sorry
+  apply Ideal.Quotient.eq_zero_iff_mem.mpr
+  rw [Ideal.span_singleton_pow] at hx ⊢
+  obtain ⟨y, rfl⟩ := Ideal.mem_span_singleton.mp hx
+  apply Ideal.mem_span_singleton.mpr
+  exact ⟨φ y, by simp⟩
 /-- The actual homomorphism on coefficient quotients.
 Source: Zheng, Construction 4.1 and Proposition 2.29(2)
 (blueprint: lem-pur-etale-coefficient-system-adjoint). -/
@@ -1222,7 +1206,20 @@ on E. The integer rings are their unit balls, so the embedding preserves members
 theorem strictEtaleIntegerMap_mem (i : E →ₐ[Padic l] F)
     (x : Padic.coefficientExtensionIntegers l E) :
     i (x : E) ∈ Padic.coefficientExtensionIntegers l F := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hF := (Padic.extension_integers_dvr l F
+    (Padic.coefficientExtensionAbsoluteValue l F)
+    (spectralNorm_extends (K := Padic l) (L := F))).choose_spec.choose_spec
+  apply (hF.1 _).mpr
+  change spectralNorm (Padic l) F (i (x : E)) ≤ 1
+  have hmap : spectralNorm (Padic l) F (i (x : E)) =
+      spectralNorm (Padic l) E (x : E) := by
+    unfold spectralNorm
+    rw [minpoly.algHom_eq i i.injective]
+  rw [hmap]
+  exact (hE.1 _).mp x.property
 /-- Restrict the actual field embedding to the integer rings.
 Source: Zheng, Proposition 2.29(2); Serre, Local Fields II.2
 (blueprint: lem-pur-etale-coefficient-system-adjoint). -/
@@ -1282,7 +1279,52 @@ theorem strictEtaleScalarLevelModule_finiteFree
           Set (Padic.coefficientExtensionIntegers l E))) ^ (n + 1))
       (strictEtaleScalarLevelModule (Padic.coefficientExtensionUniformizer l E)
         (strictEtaleIntegerMap l i) n)) := by
-  sorry
+  classical
+  let A := Padic.coefficientExtensionIntegers l E
+  let B := Padic.coefficientExtensionIntegers l F
+  let phi : A →+* B := strictEtaleIntegerMap l i
+  let : Algebra E F := i.toRingHom.toAlgebra
+  let : Algebra A F := (i.toRingHom.comp A.subtype).toAlgebra
+  let : Algebra A B := phi.toAlgebra
+  have : IsScalarTower A E F := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower A B F := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower (Padic l) E F :=
+    IsScalarTower.of_algebraMap_eq fun x ↦ (i.commutes x).symm
+  have : FiniteDimensional E F := Module.Finite.of_restrictScalars_finite (Padic l) E F
+  have hA := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have : IsFractionRing A E := hA.2.2.2.2.2.2.1
+  have : IsPrincipalIdealRing A := hA.2.2.2.2.2.2.2.2.1
+  have : CharZero E := charZero_of_injective_algebraMap (algebraMap (Padic l) E).injective
+  have : IsIntegralClosure B A F := by
+    refine ⟨Subtype.val_injective, ?_⟩
+    intro x
+    change x ∈ integralClosure A F ↔ ∃ y : B, (y : F) = x
+    rw [← Padic.padic_integers_integralClosure l E F i x]
+    exact ⟨fun hx ↦ ⟨⟨x, hx⟩, rfl⟩, fun ⟨y, hy⟩ ↦ hy ▸ y.property⟩
+  have : Module.Finite A B := IsIntegralClosure.finite A E F B
+  have : Module.Free A B := IsIntegralClosure.module_free A E F B
+  let I : Ideal A := (Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set A)) ^
+    (n + 1)
+  let J : Ideal B := (Ideal.span ({phi (Padic.coefficientExtensionUniformizer l E)} : Set B)) ^
+    (n + 1)
+  have hJ : I.map (algebraMap A B) = J := by
+    simp only [I, J, Ideal.map_pow, Ideal.map_span, Set.image_singleton]
+    rfl
+  let Q := strictEtaleScalarLevelModule (Padic.coefficientExtensionUniformizer l E) phi n
+  let : Module (A ⧸ I) (B ⧸ J) :=
+    Module.compHom (B ⧸ J) (strictCoefficientRingMap
+      (Padic.coefficientExtensionUniformizer l E) phi n)
+  let e : (B ⧸ I.map (algebraMap A B)) ≃ₗ[A ⧸ I] Q :=
+    (Ideal.quotEquivOfEq hJ).toAddEquiv.toLinearEquiv (by
+      intro a x
+      obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+      obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+      rfl)
+  exact ⟨Module.finrank A B,
+    ⟨((Module.finBasis A B).baseChange (A ⧸ I)).map
+      ((Algebra.TensorProduct.quotIdealMapEquivQuotTensor B I).symm.toLinearEquiv.trans e)⟩⟩
 /-- The canonical finite-extension comparison is invertible on actual derived systems.
 The target uses the image of the original uniformizer, not the target uniformizer.
 Source: Zheng, Construction 5.15 and Proposition 2.29(2)

@@ -16848,3 +16848,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/R8/Sheaf.Paper.RingedKunnethFactorizations (stage 3; reviewer PASS; first push; landing 20261019T005416-L-2765672 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/r8-ringed-kunneth-public-imports.md)
 - 00:54 L: merged deliver/R9/Sheaf.CategoryTheory.TorsionSheafConstantModule (stage 3; reviewer PASS; first push; landing 20261019T005417-L-2765783 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R9/Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison (stage 3; reviewer PASS; first push; landing 20261019T005417-L-2765883 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/S1/Sheaf.Paper.EtaleCoefficientSystemAdjoint (stage 3; reviewer PASS; first push; landing 20261019T005418-L-2765981 (proof); batch 20261019T005255; modules 1; new nodes 0)
