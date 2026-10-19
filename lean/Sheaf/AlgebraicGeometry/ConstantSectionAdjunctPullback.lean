@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
-public import WeilConjectures.ConstructibleSheaf.Defs

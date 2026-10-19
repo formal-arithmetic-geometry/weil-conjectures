@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ClosedImmersionOfLocalizedSectionMap
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.Algebra.Module.LocalizedModule.Basic

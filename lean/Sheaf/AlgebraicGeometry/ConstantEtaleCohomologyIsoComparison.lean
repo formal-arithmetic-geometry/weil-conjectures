@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

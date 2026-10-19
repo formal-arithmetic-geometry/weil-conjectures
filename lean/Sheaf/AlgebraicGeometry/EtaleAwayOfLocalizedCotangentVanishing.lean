@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale

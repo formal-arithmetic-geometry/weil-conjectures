@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf

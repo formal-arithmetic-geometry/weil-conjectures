@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

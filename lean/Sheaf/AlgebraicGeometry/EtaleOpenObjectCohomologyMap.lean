@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
-public import Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

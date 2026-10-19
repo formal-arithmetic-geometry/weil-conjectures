@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstructibleFiniteStalkAnnihilatorDetection
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.RingTheory.Ideal.Maps

@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients

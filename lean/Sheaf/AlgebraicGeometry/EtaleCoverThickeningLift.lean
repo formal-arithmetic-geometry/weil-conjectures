@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleCoverThickeningLift
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Sites.Etale

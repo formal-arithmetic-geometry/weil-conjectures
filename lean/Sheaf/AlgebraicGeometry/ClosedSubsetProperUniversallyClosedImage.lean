@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperUniversallyClosedImage
-public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase

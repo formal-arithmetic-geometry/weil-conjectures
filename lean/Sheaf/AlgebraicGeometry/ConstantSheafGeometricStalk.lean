@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify

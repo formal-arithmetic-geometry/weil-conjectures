@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf

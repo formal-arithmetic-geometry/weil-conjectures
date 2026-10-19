@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf

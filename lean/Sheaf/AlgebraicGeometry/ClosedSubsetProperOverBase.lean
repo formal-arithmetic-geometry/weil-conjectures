@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme

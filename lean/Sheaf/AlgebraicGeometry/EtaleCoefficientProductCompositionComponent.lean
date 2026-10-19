@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientProductCompositionComponent
-public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData

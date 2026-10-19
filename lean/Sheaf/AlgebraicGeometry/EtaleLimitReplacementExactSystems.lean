@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleLimitReplacementExactSystems
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass

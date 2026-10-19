@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ClassicalPullbackResolutionSections
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange

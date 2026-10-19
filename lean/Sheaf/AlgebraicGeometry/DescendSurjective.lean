@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.DescendSurjective
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-public import Mathlib.CategoryTheory.Comma.Over.Pullback

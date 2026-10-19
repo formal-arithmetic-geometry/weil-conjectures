@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ElementaryLocalizeSplitPoints
-public import Mathlib.AlgebraicGeometry.Fiber
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.FieldTheory.PurelyInseparable.Basic
