@@ -24,9 +24,15 @@
   "def-weil-proetale-inverse-image",
   "def-pur-proetale-structure-sheaf"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The canonical section equivalences commute with restriction: evaluate naturality of the kernel inclusion, replace inclusions by the defining section-equivalence formula, and project from the lifted units. For each opposite-site arrow, pullback.lift_fst proves commutativity of the base-change projection square. Apply appTop, use Hom.comp_appTop, and evaluate at the underlying unit to obtain naturality of the sectionwise roots map. Conjugate these maps by the section equivalences to construct a presheaf map, hence a sheaf map. Its projection formula is apply_symm_apply. Any other such sheaf map agrees at every section by injectivity of the target section equivalence, so it is equal by sheaf and additive-hom extensionality. Finally choose this uniquely characterized map and take its adjunct under the recorded inverse-image adjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "Explicit Lean proof by kernel-inclusion naturality, pullback.lift_fst, functoriality of global sections, section-equivalence injectivity, and inverse-image adjunction; no new intermediate obligations.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -187,5 +193,15 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-d2f0cf690 (reviewer sub-agent of L); spot-checked: Read the definition, report, six dependency statements, property pointer, chapter/unit route, and cited sources in full. Projection pullback, naturality, and the abelian-sheaf adjunct are correctly typed. Checked trivial roots, empty schemes, identity maps, and nonreduced characteristic-p cases. No new nodes, duplicate construction, dependency cycle, category identification, or target weakening found. Detailed checks are in review.md; no repairs or tool_uses needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T002611-L-2158580",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
