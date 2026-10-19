@@ -9,8 +9,11 @@ public import Sheaf.Paper.IsomorphismDerivedPullback
 public import Sheaf.Paper.SfWeilSheafComplex
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.Paper.SfConstructibleHeart
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Sheaf.Paper.FrobeniusCoefficientTwistsCanonical
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 
 /-! # Canonical Weil structure on constant coefficients
 
@@ -84,6 +87,7 @@ def constantWeilIntegralComplex (Y : Scheme.{u}) :=
   (CochainComplex.singleFunctor (integralTowerModules l E Y) 0).obj
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The regular coefficient complex is a permitted K-flat representative with flat terms.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure).
 Proof: its only nonzero term is the regular module. Tensoring with it is naturally the
@@ -91,7 +95,31 @@ identity on complexes, so it preserves acyclicity. The regular module is flat, a
 other terms are zero and flat. This proves both clauses of integralOperationsGoodComplex. -/
 theorem constantWeilIntegralComplex_good (Y : Scheme.{u}) :
     integralOperationsGoodComplex l E Y (constantWeilIntegralComplex l E Y) := by
-  sorry
+  let R := completedIntegralCommRingSheafUnrestricted.{u, u} l E Y
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let : MonoidalCategory (integralTowerModules.{u, u} l E Y) :=
+    SheafOfModules.monoidalCategory R
+  let : MonoidalPreadditive (integralTowerModules.{u, u} l E Y) :=
+    SheafOfModules.tensorPreadditive R
+  have hflat (i : ℤ) : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := R)
+      ((constantWeilIntegralComplex l E Y).X i) := by
+    have hcat : ObjectProperty.flat ((constantWeilIntegralComplex l E Y).X i) := by
+      dsimp only [constantWeilIntegralComplex]
+      by_cases hi : i = 0
+      · subst i
+        exact ObjectProperty.prop_of_iso _
+          (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).symm
+          (ObjectProperty.prop_unit ObjectProperty.flat)
+      · exact ObjectProperty.flat_of_isZero
+          (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R _).symm hcat.2
+  have : (constantWeilIntegralComplex l E Y).IsStrictlyLE 0 := by
+    dsimp only [constantWeilIntegralComplex]
+    infer_instance
+  exact ⟨SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    R _ 0 hflat, hflat⟩
 
 /-- The specified good representative; only its K-flatness proof is postponed.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure). -/
@@ -132,6 +160,258 @@ def constantWeilReducedUnitSection (Y : Scheme.{u}) (n : ℕ) (V : Y.ProEt) :
       (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y)) (op V) 1
       (1 : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V)))
 
+set_option backward.isDefEq.respectTransparency.types false in
+private def regularPullIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    ((FrobeniusCoefficientTwists.modulePull l E g).mapHomologicalComplex (.up ℤ)).obj
+        (constantWeilIntegralComplex l E Y) ≅ constantWeilIntegralComplex l E X :=
+  (HomologicalComplex.singleMapHomologicalComplex
+    (FrobeniusCoefficientTwists.modulePull l E g) (.up ℤ) 0).app
+    (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y)) ≪≫
+    (HomologicalComplex.single _ (.up ℤ) 0).mapIso (FrobeniusCoefficientTwists.positiveLineMaps l
+      E g 0)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem moduleSection_natural {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {M N : integralTowerModules l E Y} (a : M ⟶ N) (V : Y.ProEt)
+    (x : M.val.obj (op V)) :
+    ((FrobeniusCoefficientTwists.modulePull l E g).map a).val.app (op ((proEtaleBaseChange g).obj
+      V))
+        (FrobeniusCoefficientTwists.moduleSection l E g M V x) =
+      FrobeniusCoefficientTwists.moduleSection l E g N V (a.val.app (op V) x) := by
+  exact congrArg (fun f ↦ f.val.app (op V) x)
+    ((proEtaleRingModuleAdjunction g
+      ((PurCompactSupport.completed l E).ring Y)
+      ((PurCompactSupport.completed l E).ring X)
+      ((PurCompactSupport.completed l E).pull g)).unit.naturality a).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem regularPullIso_unit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (V : Y.ProEt) :
+    ((regularPullIso l E g).hom.f 0).val.app (op ((proEtaleBaseChange g).obj V))
+      (FrobeniusCoefficientTwists.moduleSection l E g ((constantWeilIntegralComplex l E Y).X 0) V
+        (constantWeilUnitSection l E Y V)) =
+      constantWeilUnitSection l E X ((proEtaleBaseChange g).obj V) := by
+  have h := (FrobeniusCoefficientTwists.existsUnique_positiveLineMaps l E g).exists.choose_spec 0
+    V 1
+    (fun i ↦ Fin.elim0 i)
+  simp only [FrobeniusCoefficientTwists.generator, map_one] at h
+  dsimp only [regularPullIso, Iso.trans_hom, HomologicalComplex.comp_f,
+    Functor.mapIso_hom, Iso.app_hom, CochainComplex.singleFunctor]
+  rw [HomologicalComplex.single_map_f_self,
+    HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X))).inv.val.app
+        (op ((proEtaleBaseChange g).obj V)))
+    (((FrobeniusCoefficientTwists.positiveLineMaps l E g 0).hom.val.app _)
+      (((FrobeniusCoefficientTwists.modulePull l E g).map
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+          (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))).hom
+          ).val.app _
+        (FrobeniusCoefficientTwists.moduleSection l E g _ V (constantWeilUnitSection l E Y V)))) = _
+  rw [moduleSection_natural]
+  have hcancel :
+      ((HomologicalComplex.singleObjXSelf (.up ℤ) 0
+        (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))).hom.val.app
+          (op V)) (constantWeilUnitSection l E Y V) =
+      (1 : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V)) := by
+    change (((HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))).inv ≫
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))).hom
+      ).val.app (op V))
+        (1 : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V)) = _
+    simp
+  rw [hcancel]
+  apply congrArg
+    ((HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X))).inv.val.app
+        (op ((proEtaleBaseChange g).obj V)))
+  exact h
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem regular_hom_ext_baseChange {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    {M : integralTowerModules l E X}
+    {a b : SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X) ⟶ M}
+    (h : ∀ V : Y.ProEt,
+      a.val.app (op ((proEtaleBaseChange g).obj V))
+        (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _) =
+        b.val.app (op ((proEtaleBaseChange g).obj V))
+        (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _)) : a = b := by
+  have : (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤
+      (inferInstance : WeaklyEtale g)).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence g).1
+  have : (proEtaleBaseChange g).IsEquivalence :=
+    (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+      (inferInstance : WeaklyEtale g) trivial).isEquivalence_right_of_isEquivalence_left
+  apply (SheafOfModules.unitHomEquiv M).injective
+  apply PresheafOfModules.sections_ext
+  intro W
+  let e := (proEtaleBaseChange g).objObjPreimageIso W.unop
+  have ha := ((SheafOfModules.unitHomEquiv M) a).property e.inv.op
+  have hb := ((SheafOfModules.unitHomEquiv M) b).property e.inv.op
+  change M.val.map e.inv.op
+    (a.val.app _ (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _)) =
+    a.val.app W (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _) at ha
+  change M.val.map e.inv.op
+    (b.val.app _ (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _)) =
+    b.val.app W (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _) at hb
+  change a.val.app W (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _) =
+    b.val.app W (1 : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj _)
+  rw [← ha, ← hb, h]
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem regular_single_hom_ext_baseChange {X Y : Scheme.{u}}
+    (g : X ⟶ Y) [IsIso g] {K : CochainComplex (integralTowerModules l E X) ℤ}
+    {a b : constantWeilIntegralComplex l E X ⟶ K}
+    (h : ∀ V : Y.ProEt,
+      (a.f 0).val.app (op ((proEtaleBaseChange g).obj V))
+          (constantWeilUnitSection l E X ((proEtaleBaseChange g).obj V)) =
+        (b.f 0).val.app (op ((proEtaleBaseChange g).obj V))
+          (constantWeilUnitSection l E X ((proEtaleBaseChange g).obj V))) : a = b := by
+  apply HomologicalComplex.from_single_hom_ext
+  rw [← cancel_epi
+    (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X))).inv]
+  apply regular_hom_ext_baseChange l E g
+  exact h
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem reductionTensor_unit_natural (Y : Scheme.{u}) (n : ℕ)
+    {M N : integralTowerModules l E Y} (a : M ⟶ N) (U : Y.ProEtᵒᵖ)
+    (x : M.val.obj U) :
+    ((unrestrictedIntegralReductionFunctor l E Y n).map a).val.app U
+        (unrestrictedIntegralTensorSection l E Y n M U 1 x) =
+      unrestrictedIntegralTensorSection l E Y n N U 1 (a.val.app U x) := by
+  let φ := completedIntegralCommRingProjectionUnrestricted l E Y n
+  let h : ∀ M : integralTowerModules l E Y,
+      (unrestrictedIntegralReductionFunctor l E Y n).obj M =
+        SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M :=
+    (unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose
+  have ha := (unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose_spec.choose a
+  change (unrestrictedIntegralReductionFunctor l E Y n).map a = _ at ha
+  let b : SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ N :=
+    { app := fun V ↦ (ModuleCat.extendScalars (φ.hom.app V).hom).map (a.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality.{u, u + 1, u + 1} φ M a }
+  let adjS := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 (integralCoefficientSheaf l E Y n).obj)
+  have hn := congrArg (fun t ↦ t.app U
+    ((1 : (integralCoefficientCommRingSheaf l E Y n).obj.obj U) ⊗ₜ[
+      (completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U, (φ.hom.app U).hom] x))
+      (adjS.unit.naturality b)
+  have hc : eqToHom (h M).symm ≫ (unrestrictedIntegralReductionFunctor l E Y n).map a =
+      SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} φ M a ≫ eqToHom (h N).symm := by
+    rw [ha]
+    simp
+    rfl
+  have hc' := congrArg (fun t : SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M ⟶
+      (unrestrictedIntegralReductionFunctor l E Y n).obj N ↦ t.val.app U
+        ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+          (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M).presheaf).app U
+            ((1 : (integralCoefficientCommRingSheaf l E Y n).obj.obj U) ⊗ₜ[
+              (completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
+                (φ.hom.app U).hom] x))) hc
+  change _ = _ at hn
+  change _ = _ at hc'
+  dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hc'
+  apply hc'.trans
+  exact congrArg ((eqToHom (h N).symm).val.app U) hn.symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem cocone_hom_ext {A : Type*} [Category A] [Abelian A]
+    {P Q K : CochainComplex A ℤ} (φ : P ⟶ Q)
+    {a b : K ⟶ CochainComplex.mappingCocone φ}
+    (hfst : a ≫ CochainComplex.mappingCocone.fst φ =
+      b ≫ CochainComplex.mappingCocone.fst φ)
+    (hsnd : ∀ i : ℤ, a.f i ≫
+      (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) =
+        b.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega)) : a = b := by
+  ext i
+  have hfst' := congrArg (fun f ↦ f.f i) hfst
+  change a.f i ≫ (CochainComplex.mappingCocone.fst φ).f i =
+    b.f i ≫ (CochainComplex.mappingCocone.fst φ).f i at hfst'
+  calc
+    a.f i = a.f i ≫
+        ((CochainComplex.mappingCocone.fst φ).f i ≫
+            (CochainComplex.mappingCocone.inl φ).v i i (by omega) +
+          (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) ≫
+            (CochainComplex.mappingCocone.inr φ).1.v (i - 1) i (by omega)) := by
+      rw [CochainComplex.mappingCocone.id_X, Category.comp_id]
+    _ = b.f i ≫
+        ((CochainComplex.mappingCocone.fst φ).f i ≫
+            (CochainComplex.mappingCocone.inl φ).v i i (by omega) +
+          (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) ≫
+            (CochainComplex.mappingCocone.inr φ).1.v (i - 1) i (by omega)) := by
+      simp only [Preadditive.comp_add, ← Category.assoc, hfst', hsnd]
+    _ = b.f i := by rw [CochainComplex.mappingCocone.id_X, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency.types false in
+private def regularChainUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    constantWeilIntegralComplex l E X ⟶
+      (integralOperationsPullbackComplexFunctor l E g).obj
+        (constantWeilIntegralComplex l E Y) :=
+  (regularPullIso l E g).inv ≫
+    (FrobeniusCoefficientTwists.pullbackAugmentation l E g).app (constantWeilIntegralComplex l E Y)
+
+set_option maxHeartbeats 800000 in
+-- The finite-generator equations contain the dependent scalar-extension transports.
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem regularChainUnit_spec {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (∀ (n : ℕ) (V : Y.ProEt),
+        (((regularChainUnit l E g).f 0 ≫
+          (CochainComplex.mappingCocone.fst
+            (constantWeilPullbackRoosEndomorphism l E g)).f 0 ≫
+          (Pi.π (fun m ↦ (constantWeilPullbackTower l E g).obj (op m)) n).f 0).val.app
+            (op ((proEtaleBaseChange g).obj V)))
+          (constantWeilUnitSection l E X ((proEtaleBaseChange g).obj V)) =
+        integralOperationsPullbackGenerator l E g n
+          (((unrestrictedIntegralFiniteComplex l E Y n).obj
+            (constantWeilIntegralComplex l E Y)).X 0) V
+          (constantWeilReducedUnitSection l E Y n V)) ∧
+      (∀ i : ℤ, (regularChainUnit l E g).f i ≫
+        (CochainComplex.mappingCocone.snd
+          (constantWeilPullbackRoosEndomorphism l E g)).v i (i - 1) (by omega) = 0) := by
+  let C := constantWeilIntegralComplex l E Y
+  let e := regularPullIso l E g
+  let α := (FrobeniusCoefficientTwists.pullbackAugmentation l E g).app C
+  have hη (V : Y.ProEt) :
+      (e.inv.f 0).val.app (op ((proEtaleBaseChange g).obj V))
+          (constantWeilUnitSection l E X ((proEtaleBaseChange g).obj V)) =
+        FrobeniusCoefficientTwists.moduleSection l E g (C.X 0) V (constantWeilUnitSection l E Y V)
+          := by
+    have h := congrArg (fun x ↦ (e.inv.f 0).val.app
+      (op ((proEtaleBaseChange g).obj V)) x) (regularPullIso_unit l E g V)
+    change ((e.hom ≫ e.inv).f 0).val.app _
+        (FrobeniusCoefficientTwists.moduleSection l E g (C.X 0) V (constantWeilUnitSection l E Y
+          V)) = _ at h
+    rw [e.hom_inv_id] at h
+    exact h.symm
+  have hnorm := (FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation l E
+    g).exists.choose_spec
+  constructor
+  · intro n V
+    change ((α.f 0 ≫ _ ≫ _).val.app _)
+      ((e.inv.f 0).val.app _ (constantWeilUnitSection l E X _)) = _
+    rw [hη]
+    have h := hnorm.1 C 0 n V (constantWeilUnitSection l E Y V)
+    have hred := reductionTensor_unit_natural l E Y n
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+        (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))).inv
+      (op V) (1 : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V))
+    exact h.trans (congrArg (integralOperationsPullbackGenerator l E g n
+      (((unrestrictedIntegralFiniteComplex l E Y n).obj C).X 0) V) hred.symm)
+  · intro i
+    change (e.inv.f i ≫ α.f i) ≫ _ = 0
+    rw [Category.assoc]
+    have hz := hnorm.2 C i
+    change α.f i ≫ (CochainComplex.mappingCocone.snd
+      (constantWeilPullbackRoosEndomorphism l E g)).v i (i - 1) (by omega) = 0 at hz
+    exact (congrArg (fun f ↦ e.inv.f i ≫ f) hz).trans (HasZeroMorphisms.comp_zero _ _)
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical comparison into the strict completed pullback is uniquely fixed by the
 finite-level unit generators and by its zero shifted component. This is the inverse of
 the desired derived structure map on the regular coefficient object.
@@ -163,13 +443,49 @@ theorem constantWeilChainUnit_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
       (∀ i : ℤ, η.f i ≫
         (CochainComplex.mappingCocone.snd
           (constantWeilPullbackRoosEndomorphism l E g)).v i (i - 1) (by omega) = 0) := by
-  sorry
+  let η := regularChainUnit l E g
+  have hspec := regularChainUnit_spec l E g
+  refine ⟨η, hspec, ?_⟩
+  intro β hβ
+  apply cocone_hom_ext (constantWeilPullbackRoosEndomorphism l E g)
+  · apply Limits.Pi.hom_ext
+    intro n
+    apply regular_single_hom_ext_baseChange l E g
+    intro V
+    exact (hβ.1 n V).trans (hspec.1 n V).symm
+  · intro i
+    exact (hβ.2 i).trans (hspec.2 i).symm
 
 /-- The uniquely normalized strict chain map, with real source and target complexes.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure). -/
 def constantWeilChainUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   (constantWeilChainUnit_existsUnique l E g).exists.choose
 
+set_option backward.isDefEq.respectTransparency.types false in
+private def auxiliaryFiniteFieldDatum (p : ℕ) [Fact p.Prime] : FiniteFieldDatum.{0} where
+  p := p
+  a := 1
+  q := p
+  prime := Fact.out
+  exponent_pos := le_refl 1
+  cardinality_eq := (pow_one p).symm
+  k₀ := ZMod p
+  card_base := by simp [Nat.card_eq_fintype_card, ZMod.card]
+  k := AlgebraicClosure (ZMod p)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem regular_constructible (Y : Scheme.{u}) :
+    sfIntegralConstructible l E Y (DerivedCategory.Q.obj
+      (constantWeilIntegralComplex l E Y)) := by
+  by_cases h : l = 2
+  · let : Fact (Nat.Prime 3) := ⟨by decide⟩
+    exact (integralConstantCoefficient_constructible l E Y
+      (auxiliaryFiniteFieldDatum 3) (by simp [auxiliaryFiniteFieldDatum, h])).2.1
+  · let : Fact (Nat.Prime 2) := ⟨by decide⟩
+    exact (integralConstantCoefficient_constructible l E Y
+      (auxiliaryFiniteFieldDatum 2) h).2.1
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified unit is a quasi-isomorphism.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure).
 Proof: finite pullback takes the regular module to the regular module by the canonical
@@ -180,7 +496,21 @@ to that completed sheaf in degree zero. The normalized map above is precisely th
 comparison. The empty scheme is allowed; the same calculation is vacuous there. -/
 theorem constantWeilChainUnit_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     IsIso (DerivedCategory.Q.map (constantWeilChainUnit l E g)) := by
-  sorry
+  have heq : constantWeilChainUnit l E g = regularChainUnit l E g :=
+    (constantWeilChainUnit_existsUnique l E g).unique
+      (constantWeilChainUnit_existsUnique l E g).exists.choose_spec
+      (regularChainUnit_spec l E g)
+  rw [heq]
+  have : IsIso (DerivedCategory.Q.map ((FrobeniusCoefficientTwists.pullbackAugmentation l E g).app
+      (constantWeilIntegralComplex l E Y))) :=
+    FrobeniusCoefficientTwists.pullbackAugmentation_isIso l E g _
+      (constantWeilIntegralComplex_good l E Y)
+      (regular_constructible l E Y)
+  change IsIso (DerivedCategory.Q.map ((regularPullIso l E g).inv ≫
+    (FrobeniusCoefficientTwists.pullbackAugmentation l E g).app (constantWeilIntegralComplex l E
+      Y)))
+  rw [Functor.map_comp]
+  infer_instance
 
 /-- Canonical derived integral coefficient structure: invert the strict unit, then use
 the specified good-representative comparison of the recorded completed derived pullback.
