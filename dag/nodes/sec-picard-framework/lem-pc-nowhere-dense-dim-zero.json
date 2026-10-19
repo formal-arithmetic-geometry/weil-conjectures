@@ -25,57 +25,42 @@
  ],
  "proof": [
   {
-   "text": "If $X$ is empty then $Z$ is empty and the conclusion is immediate. Otherwise, the finite-type morphism $X\\to\\operatorname{Spec}k$ makes $X$ a Noetherian scheme by [lem-weil-pbc-finite-type-over-noetherian] (the field spectrum is Noetherian). Thus $X$ has finitely many irreducible components $C_1,\\ldots,C_r$ by [lem-weil-pbc-noetherian-finitely-many-components], and they cover $X$ by [lem-sc-irreducible-components-cover]. For each $C_i$, the complement in $C_i$ of the union of the other components is a nonempty open subset: it is open because there are finitely many components, and nonempty because an irreducible component is not contained in the finite union of the other maximal irreducible closed subsets.",
+   "text": "The finite-type structure morphism to Spec k makes X locally Noetherian and compact by [lem-weil-pbc-finite-type-over-noetherian], hence Noetherian. Convert scheme dimension to topological Krull dimension using [lem-pc-scheme-dimension-local-rings]. The closed embedding underlying i identifies the topological Krull dimension of Z with that of its closed image in X [def-kun-topological-krull-dimension].",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-sc-irreducible-components-cover"
+    "lem-pc-scheme-dimension-local-rings",
+    "def-kun-topological-krull-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T6 and 0BA8, together with Topology Tag 004W, as used in the proof of Varieties Tag 0AYY"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-pc-scheme-dimension-local-rings] applied to $X$, the underlying space of $X$ has Krull dimension [def-kun-topological-krull-dimension] at most 1. Assume that $Z$ contains a strict chain $W_0\\subsetneq W_1$ of nonempty irreducible closed subsets (with the subspace topology). Since $Z$ is closed in $X$, these are also irreducible closed subsets of $X$. By the component cover, $W_1\\subseteq C_i$ for some $i$. If $W_1$ is strictly contained in $C_i$, then $W_0\\subsetneq W_1\\subsetneq C_i$ is a chain of irreducible closed subsets of $X$ of length 2, contradicting the preceding dimension bound. If $W_1=C_i$, then $C_i\\subseteq Z$, so $Z$ contains $U_i=X\\setminus\\bigcup_{j\\ne i}C_j$, which is open in $X$ because the union is finite and closed, and is nonempty by step 1. This contradicts that the underlying set of $Z$ is nowhere dense in $X$: since $Z$ is closed, its interior would contain the nonempty open set $U_i$. Hence no such chain exists, so the underlying space of $Z$ has topological dimension at most zero. By [lem-pc-scheme-dimension-local-rings], this is the asserted $\\dim Z\\le0$.",
+   "text": "If the topological Krull dimension of X is at most zero, monotonicity along the inducing map i already bounds the dimension of Z by zero. This includes empty X. Otherwise positivity supplies a nonempty irreducible closed subset and hence Nonempty X. The successor inequalities in WithBot ENat, together with dim X <= 1, give dim X = 1. Apply the already proved [lem-sc-hilbert-nowhere-dense-dimension-drop] with d = 1 to the closed nowhere-dense image of i. Its dimension is < 1, equivalently <= 0. Transport back along the embedding and then [lem-pc-scheme-dimension-local-rings] to obtain Z.dim <= 0.",
    "uses": [
-    "lem-sc-irreducible-components-cover",
-    "def-pc-dimension",
     "def-kun-topological-krull-dimension",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
     "lem-pc-scheme-dimension-local-rings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY (varieties, Lemma degree-effective-Cartier-divisor), proof: 'Since D is nowhere dense in X we see that dim(D) <= 0'"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $k$ be a field, let $X$ be a scheme of finite type over $k$, and let $Z\\to X$ be a closed immersion with underlying closed subset of dimension at most zero. Applying [lem-sc-dim0-finite] to these explicitly stated hypotheses shows that every point of $Z$ is closed in $Z$ (and also covers the empty case).",
+   "text": "Apply [lem-sc-dim0-finite] to the closed image of i in the Noetherian T0 space X and the zero-dimensional bound just obtained. Every image point i(z) is closed in X. The closed-embedding characterization of closed subsets, applied to the image of the singleton {z}, shows that {z} is closed in Z. The empty subscheme requires no separate case.",
    "uses": [
     "lem-sc-dim0-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 06LH (Varieties, Lemma algebraic-scheme-dim-0), applied to the closed finite-type subscheme Z"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-irreducible-components-cover",
-  "def-pc-dimension",
-  "def-kun-topological-krull-dimension",
   "lem-pc-scheme-dimension-local-rings",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
   "lem-sc-dim0-finite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0AYY (varieties, Lemma degree-effective-Cartier-divisor), proof sentence 'Since D is nowhere dense in X we see that dim(D) <= 0'"
+  "place": "Tag 0AYY, dimension-drop sentence, specialized via the proved lem-sc-hilbert-nowhere-dense-dimension-drop; closed points from the proved lem-sc-dim0-finite (Tag 06LH). G5, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -140,8 +125,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-irreducible-components-cover",
   "lem-pc-scheme-dimension-local-rings",
   "lem-sc-dim0-finite"
  ],
@@ -182,5 +165,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261019T093417-L-2307925",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

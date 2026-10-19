@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.GDelta.Basic
 public import Sheaf.AlgebraicGeometry.Dimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
 
 /-!
 # Nowhere-dense closed subschemes in dimension at most one
@@ -51,6 +52,32 @@ theorem dim_le_zero_of_isNowhereDense {k : Type u} [Field k] {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] (hX : X.dim ≤ 1)
     (hnow : IsNowhereDense (Set.range i.base)) : Z.dim ≤ 0 ∧
       ∀ z : Z, IsClosed ({z} : Set Z) := by
-  sorry
+  -- Reuse the proved general dimension-drop theorem for the component argument above.
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  have hi := i.isClosedEmbedding
+  have hrange := hi.isEmbedding.topologicalKrullDim_eq_range
+  have hdim : topologicalKrullDim Z ≤ 0 := by
+    by_cases hzero : topologicalKrullDim X ≤ 0
+    · exact hi.isInducing.topologicalKrullDim_le.trans hzero
+    · have hpos : 0 < topologicalKrullDim X := lt_of_not_ge hzero
+      obtain ⟨A, B, hAB⟩ := Order.krullDim_pos_iff.mp hpos
+      obtain ⟨x, _⟩ := A.isIrreducible.nonempty
+      have : Nonempty X := ⟨x⟩
+      have hone : topologicalKrullDim X = 1 := by
+        apply le_antisymm
+        · simpa only [Scheme.dim_eq_topologicalKrullDim] using hX
+        · simpa using (ENat.WithBot.add_one_le_iff (n := 0)).mpr hpos
+      have hdrop := X.topologicalKrullDim_lt_of_isNowhereDense 1 hone
+        (Set.range i.base) hi.isClosed_range hnow
+      rw [← hrange] at hdrop
+      exact ENat.WithBot.lt_add_one_iff.mp (by simpa using hdrop)
+  refine ⟨by rwa [Scheme.dim_eq_topologicalKrullDim], fun z ↦ ?_⟩
+  have hpoint :=
+    (hi.isClosed_range.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
+      (by rwa [← hrange])).2 (i z) ⟨z, rfl⟩
+  apply hi.isClosed_iff_image_isClosed.mpr
+  simpa only [Set.image_singleton] using hpoint
 
 end AlgebraicGeometry
