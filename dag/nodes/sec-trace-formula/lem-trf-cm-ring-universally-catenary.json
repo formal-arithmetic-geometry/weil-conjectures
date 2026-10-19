@@ -17,92 +17,78 @@
  ],
  "proof": [
   {
-   "text": "Fix an integer $n\\ge0$ and put $P=R[x_1,\\ldots,x_n]$. The hypotheses of [lem-trf-polynomial-algebra-cm] are precisely the Noetherianity and local depth-equals-dimension hypotheses on $R$. Hence $P$ is Noetherian and every $P_{\\mathfrak r}$ is Cohen–Macaulay. We prove directly that $P$ is catenary; Steps 2–4 apply to this fixed $P$ and arbitrary comparable primes in it.",
+   "text": "For a finite type R-algebra A, choose a surjective algebra map f from P=R[x_1,...,x_n]. Apply [lem-trf-polynomial-algebra-cm] to obtain Noetherianity of P and depth equal to dimension at all its prime localizations.",
    "uses": [
+    "def-weil-pbc-finite-type-algebra",
     "lem-trf-polynomial-algebra-cm"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NM, lemma-CM-ring-catenary, first sentence, using Tag 00ND, lemma-CM-polynomial-algebra."
+    "place": "Tag 00NM, lemma-CM-ring-catenary: a Noetherian Cohen–Macaulay ring is universally catenary; the proof applies the polynomial-algebra Cohen–Macaulay result and the maximal-chain formula."
    }
   },
   {
-   "text": "Fix primes $\\mathfrak p\\subseteq\\mathfrak q$ in $P$. The rings $P_{\\mathfrak p}$ and $P_{\\mathfrak q}$ are local by [def-weil-pbc-localization-at-prime] and Noetherian: for an ideal $J$ in either localization, let $I=\\{a\\in P:a/1\\in J\\}$. If $a/s\\in J$, multiplication by the unit $s/1$ shows $a\\in I$, so $J=IP_{\\mathfrak r}$; finite generators of $I$ give finite generators of $J$. By [lem-weil-pbc-noetherian-local-finite-krull-dimension], $d_{\\mathfrak p}=\\dim P_{\\mathfrak p}$ and $d_{\\mathfrak q}=\\dim P_{\\mathfrak q}$ are finite nonnegative integers. The inclusion-preserving prime bijection [lem-weil-pbc-primes-of-localization](1), whose inverse is extension, identifies all primes below $\\mathfrak q$ with those of $P_{\\mathfrak q}$. Thus every finite strict prime chain between $\\mathfrak p$ and $\\mathfrak q$ has length at most $d_{\\mathfrak q}$.",
+   "text": "In the Noetherian ring P every prime has finite height (Mathlib Ideal.finiteHeight_of_isNoetherianRing). For any saturated LTSeries c from p to q choose a prefix a ending at p with length height(p), using Mathlib Ideal.exists_ltSeries_length_eq_height. The full-height formula Order.height_eq_index_of_length_eq_height_last implies that a starts at a minimal prime and its consecutive pairs are covers: an intermediate prime would increase height by at least two between consecutive indices.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-    "lem-weil-pbc-primes-of-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NM, lemma-CM-ring-catenary, localizations at the two primes; finite chain bounds from Tag 00KQ, proposition-dimension, and prime correspondence Tag 00E3, lemma-spec-localization."
-   }
-  },
-  {
-   "text": "Choose a finite strict chain ending at $\\mathfrak p$ of greatest possible length $m$. Such a chain exists: the singleton chain has length zero, and by the same localization correspondence and finite-dimension bound of Step 2 all these lengths lie in $\\{0,\\ldots,d_{\\mathfrak p}\\}$. Its first prime is minimal in $P$, and each adjacent pair is saturated, since prepending or inserting a prime would increase its length. Under the correspondence for $P_{\\mathfrak p}$ it is therefore a maximal chain: any prime below its first term or between consecutive terms would contract to such an insertion, and the last prime is the maximal ideal. Similarly a chain of greatest length between $\\mathfrak p$ and $\\mathfrak q$ exists by Step 2, so there is at least one saturated chain between these endpoints.",
-   "uses": [
-    "lem-weil-pbc-primes-of-localization"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NM, lemma-CM-ring-catenary: choose a maximal chain ending at the lower prime; existence written out from the finite bounds and the definition of chain length."
+    "place": "Tag 00NM, lemma-CM-ring-catenary: a Noetherian Cohen–Macaulay ring is universally catenary; the proof applies the polynomial-algebra Cohen–Macaulay result and the maximal-chain formula."
    }
   },
   {
-   "text": "Let $\\mathfrak p=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t=\\mathfrak q$ be any saturated chain between the endpoints. Concatenate it with the chain of length $m$ from Step 3, counting $\\mathfrak p$ only once. The resulting chain has length $m+t$, minimal first prime, saturated adjacent pairs and last prime $\\mathfrak q$. Under [lem-weil-pbc-primes-of-localization](1) it is a maximal chain in $P_{\\mathfrak q}$: any missing prime that could extend the chain is either below the first term, between two consecutive terms, or above its maximal last term; each possibility is excluded. Apply [lem-weil-pbc-cm-local-maximal-chain-length] first to the prefix in $P_{\\mathfrak p}$ and then to the concatenation in $P_{\\mathfrak q}$. These rings are Noetherian local of finite dimensions $d_{\\mathfrak p}$ and $d_{\\mathfrak q}$ by Step 2, and have depth equal to dimension by Step 1, hence satisfy the cited lemma’s depth-at-least-dimension hypothesis. It gives $m=d_{\\mathfrak p}$ and $m+t=d_{\\mathfrak q}$. Consequently every such chain has length $t=d_{\\mathfrak q}-d_{\\mathfrak p}$. Together with the finite bound from Step 2 this proves that $P$ is catenary.",
+   "text": "Smash a and c at p. The resulting chain b has minimal head, saturated consecutive pairs, last term q, and length height(p)+length(c). Under [lem-weil-pbc-primes-of-localization], view b as a chain bl in P_q. Its head remains minimal, its last term is maximal, and it remains saturated, hence its range is a maximal chain. Mathlib IsLocalization.AtPrime.ringKrullDim_eq_height identifies dim(P_q) with height(q); this is a natural number d because q has finite height. Local depth equals dimension, so [lem-weil-pbc-cm-local-maximal-chain-length] applied once to bl gives length(a)+length(c)=d. Therefore length(c)=height(q)-height(p). The prefix already has length height(p), so no separate application of the maximal-chain formula in P_p is needed.",
    "uses": [
     "lem-weil-pbc-primes-of-localization",
+    "def-weil-pbc-localization-at-prime",
     "lem-weil-pbc-cm-local-maximal-chain-length"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NM, lemma-CM-ring-catenary, first assertion: concatenate the two chains and apply Tag 00N9, lemma-maximal-chain-CM, twice."
+    "place": "Tag 00NM, lemma-CM-ring-catenary: a Noetherian Cohen–Macaulay ring is universally catenary; the proof applies the polynomial-algebra Cohen–Macaulay result and the maximal-chain formula."
    }
   },
   {
-   "text": "Now let $A$ be an arbitrary finite type $R$-algebra. By [def-weil-pbc-finite-type-algebra] choose a surjective $R$-algebra homomorphism $\\pi:P=R[x_1,\\ldots,x_n]\\to A$ and put $I=\\ker\\pi$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], inverse image under $\\pi$ bijects the primes of $A$ with the primes of $P$ containing $I$, with inverse given by image under $\\pi$. Both inverse image and image preserve inclusion, so this is an order isomorphism. For comparable primes $\\mathfrak a\\subseteq\\mathfrak b$ of $A$, every prime of $P$ between $\\pi^{-1}(\\mathfrak a)$ and $\\pi^{-1}(\\mathfrak b)$ contains $I$ because the lower endpoint does. Thus the correspondence identifies the whole intervals, preserving strict chain lengths and whether an intermediate prime can be inserted. By Step 4, chains in that interval of $P$ have a finite bound and all saturated ones have equal length; the same is true in $A$. Hence $A$ is catenary.",
+   "text": "Use the order isomorphism of [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] for the surjection f. Lift each finite prime chain in A to P by comap. Its length is bounded by the finite height of the lifted upper endpoint, by Order.length_le_height_last. A lifted saturated chain stays saturated: every intermediate prime contains ker(f), so the inverse order isomorphism would give an intermediate prime in A. Step 3 assigns every such chain the same difference of the lifted endpoint heights. Thus all saturated chains in each interval of A have equal natural-number lengths.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
     "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NM, opening reduction to polynomial algebras, expanded using Tag 00NK, lemma-quotient-catenary, whose proof is the prime correspondence of Tag 00E5, lemma-spec-closed."
+    "place": "Tag 00NM, lemma-CM-ring-catenary: a Noetherian Cohen–Macaulay ring is universally catenary; the proof applies the polynomial-algebra Cohen–Macaulay result and the maximal-chain formula."
    }
   },
   {
-   "text": "The algebra $A$ in Step 5 was arbitrary. Therefore every finite type commutative $R$-algebra is catenary, and $R$ is Noetherian by hypothesis. This is universal catenarity as defined in [def-exc-excellent-ring], including the explicitly stated finite bound for each pair of primes. If $R=0$, its polynomial rings and unital $R$-algebras are zero, have no primes, and all the prime-chain assertions are vacuous.",
+   "text": "The bounds and equal saturated-chain lengths prove IsCatenaryRing A for every finite type R-algebra A. Together with the given Noetherianity of R this is [def-exc-excellent-ring], namely IsUniversallyCatenary R. No nontriviality hypothesis was added: the zero ring has no primes, and the equal-endpoint and zero-variable cases are covered by the same argument.",
    "uses": [
     "def-exc-excellent-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NL, definition-universally-catenary, and Tag 00NM, conclusion of the first assertion."
+    "place": "Tag 00NM, lemma-CM-ring-catenary: a Noetherian Cohen–Macaulay ring is universally catenary; the proof applies the polynomial-algebra Cohen–Macaulay result and the maximal-chain formula."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-polynomial-algebra-cm",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-  "lem-weil-pbc-primes-of-localization",
-  "lem-weil-pbc-cm-local-maximal-chain-length",
   "def-weil-pbc-finite-type-algebra",
+  "lem-trf-polynomial-algebra-cm",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-primes-of-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-cm-local-maximal-chain-length",
   "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
   "def-exc-excellent-ring"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00NM, lemma-CM-ring-catenary, first assertion; polynomial input 00ND and maximal-chain input 00N9. Its quotient reduction is expanded using the proof of lemma-quotient-catenary and 00E5."
+  "place": "Tag 00NM, lemma-CM-ring-catenary, first assertion, using 00ND and 00N9; quotient correspondence 00E5. F2 Lean proof uses a full-height prefix and finite prime heights from Mathlib, so only the upper localization needs 00N9."
  },
  "mathlib_searches": [
   {
@@ -285,5 +271,15 @@
   "by": "Q31",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231140-L-554375",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
