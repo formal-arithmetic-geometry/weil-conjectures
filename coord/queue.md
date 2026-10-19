@@ -1,17 +1,16 @@
 # Work queue
 
-964 items; claim with `tools/claim.py next <group> [--stage N]`.
+966 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (4)
+## Stage 1: nodes to split (3)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-constructible-cocone-hom-inj` | - | sorry_here |
 | `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
-| `lem-a1-lisse-sections-stalk-evaluation` | - | none |
 | `lem-trf-regular-hilbert-coefficient-data` | - | none |
 
-## Stage 2: nodes to state (27)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -32,6 +31,7 @@
 | `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `det-sp-tower-p1-adjunction` | 1 | state | 0 |
+| `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
 | `lem-sfb-constructible-cocone-obj` | 1 | state | 0 |
@@ -43,9 +43,9 @@
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 300 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 300 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (933)
+## Stage 3: modules to prove (935)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -151,6 +151,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SitePerfectTorWindow` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 6 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.BertiniSmoothMember` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback` | 6 | 1 | proof | route |
@@ -352,6 +353,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstantTowerDirectImageNormalization` | 15 | 3 | proof | route |
 | `Sheaf.Paper.ExternalRHomConePairing` | 15 | 1 | proof | route |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | 15 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 20 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 20 | 1 | proof | route |
 | `Sheaf.Paper.DenseOpenPiOneSurjective` | - | 8 | proof | route |
 | `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison` | 3 | 1 | proof | 1 |
@@ -570,7 +573,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompatibleFiniteDerivedTrivializations` | 5 | 1 | proof | 3 |
 | `Sheaf.Paper.CompletedConstantFiniteComplexRealization` | 5 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.BertiniIrreducibleMember` | 6 | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.BertiniSmoothMember` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.IntegralModelsStacks` | 6 | 1 | proof | 3 |
 | `Sheaf.Paper.CompactSupportFiniteAction` | 6 | 5 | proof | 3 |
