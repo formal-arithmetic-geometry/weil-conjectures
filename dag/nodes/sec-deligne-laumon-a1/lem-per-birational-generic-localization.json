@@ -11,9 +11,95 @@
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-spec-irreducible-components-minimal-primes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=B\\setminus\\mathfrak q$, $W=\\varphi(S)$, $C=W^{-1}A=A_{\\mathfrak q}$, and $\\lambda:A\\to C$. These are multiplicative subsets, and $W\\cap\\mathfrak p=\\emptyset$ because $\\varphi^{-1}(\\mathfrak p)=\\mathfrak q$. The fraction formulas give maps $\\theta:B_{\\mathfrak q}\\to C$, $b/s\\mapsto\\varphi(b)/\\varphi(s)$, and $\\psi:C\\to A_{\\mathfrak p}$, $a/\\varphi(s)\\mapsto a/\\varphi(s)$. They are well defined: an equality of fractions witnessed by $u\\in S$, respectively $w\\in W$, remains such an equality after applying $\\varphi$, respectively the map to $A_{\\mathfrak p}$. They preserve the fraction addition and multiplication. The composite $\\psi\\theta$ is exactly the assumed isomorphism $h:B_{\\mathfrak q}\\to A_{\\mathfrak p}$, by this formula.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAB, lemma-birational-generic-fibres, affine-ring paragraph"
+   }
+  },
+  {
+   "text": "Apply the localization prime correspondence to $A\\to C$ at $W$, using $W\\cap\\mathfrak p=\\emptyset$. It gives a prime ideal $J=\\mathfrak pC$ with $\\lambda^{-1}(J)=\\mathfrak p$. Apply the same correspondence to $A\\to A_{\\mathfrak p}$: the contraction of $\\mathfrak pA_{\\mathfrak p}$ is $\\mathfrak p$. In both applications the maps are the specified fraction localizations, so all three localization hypotheses (units, fraction representatives, and the annihilator criterion) in the cited statement hold.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization"
+   }
+  },
+  {
+   "text": "Let $\\rho:C\\to\\kappa(\\mathfrak p)$ be $\\psi$ followed by the residue quotient $A_{\\mathfrak p}\\to A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$. The composite $\\rho\\theta$ is surjective since $h$ is an isomorphism and the quotient map is surjective; hence $\\rho$ is surjective. For $a/w\\in C$, $\\rho(a/w)=0$ iff $a/1\\in\\mathfrak pA_{\\mathfrak p}$ (the denominator has nonzero residue), iff $a\\in\\mathfrak p$ by Step 2. Also $a/w\\in J$ iff $a/1\\in J$ since $w/1$ is a unit, iff $a\\in\\mathfrak p$ by Step 2. Thus $\\ker\\rho=J$. To see directly that $J$ is maximal, take an ideal $I$ strictly containing $J$ and $x\\in I\\setminus J$; lift $\\rho(x)^{-1}$ to $y\\in C$. Then $1-xy\\in J\\subseteq I$, so $1\\in I$ and $I=C$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAB, lemma-birational-generic-fibres, affine-ring paragraph"
+   }
+  },
+  {
+   "text": "For any prime ideal $P\\subset C$, the localization prime correspondence gives the prime $Q=\\lambda^{-1}(P)\\subset A$ and the equality $P=QC$. Every prime of $A$ contains a minimal prime, by the cited minimal-prime-existence result with ideal zero. Since $\\mathfrak p$ is the unique minimal prime of $A$, this gives $\\mathfrak p\\subseteq Q$, and therefore $J=\\mathfrak pC\\subseteq QC=P$. Extension preserves inclusion directly because the generating images of $\\mathfrak p$ lie among those of $Q$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization) and 00E0 (lemma-Zariski-topology), part (4)"
+   }
+  },
+  {
+   "text": "Steps 3 and 4 imply that every prime ideal $P$ of $C$ equals $J$: it contains the maximal ideal $J$ and is proper. Thus $J$ is the only prime ideal of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAB, lemma-birational-generic-fibres, affine-ring paragraph"
+   }
+  },
+  {
+   "text": "For $t\\in A\\setminus\\mathfrak p$, Step 2 gives $\\lambda(t)\\notin J$. It is a unit in $C$. Indeed, if it were a nonunit, its principal ideal would be proper and hence contained in a maximal ideal $M$ by the cited result. A maximal ideal is prime: if $xy\\in M$ and $x\\notin M$, maximality gives $1=m+rx$ with $m\\in M$, so $y=my+rxy\\in M$. Thus Step 5 gives $M=J$, contradicting $\\lambda(t)\\notin J$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, part (2) and proof of part (8)"
+   }
+  },
+  {
+   "text": "Define $\\eta:A_{\\mathfrak p}\\to C$ by $a/t\\mapsto\\lambda(a)\\lambda(t)^{-1}$, using Step 6. If $a/t=a^{\\prime}/t^{\\prime}$, there is $v\\notin\\mathfrak p$ with $v(at^{\\prime}-a^{\\prime}t)=0$. Applying $\\lambda$ and cancelling the units $\\lambda(v)$, $\\lambda(t)$ and $\\lambda(t^{\\prime})$ proves that this formula is independent of representatives. The addition and multiplication fraction formulas prove it is a unital ring map. On a fraction $a/t$ of $A_{\\mathfrak p}$, $\\psi\\eta$ sends it back to $a/t$; on a fraction $a/w$ of $C$, $\\eta\\psi$ sends it back to $a/w$. Hence $\\psi$ is an isomorphism. Since $h=\\psi\\theta$ is an isomorphism by hypothesis, $\\theta=\\psi^{-1}h$ is an isomorphism, as required.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAB, lemma-birational-generic-fibres, affine-ring paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAB, lemma-birational-generic-fibres, affine-ring paragraph; prime correspondence and existence from algebra.tex Tags 00E3 and 00E0; inverse localization map expanded by fractions."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +128,59 @@
    "results": "{\"t\": \"2026-10-18T22:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"If a ring map has unique minimal primes and is an isomorphism on the localizations at the minimal primes, then the localization of the target algebra at the base minimal prime equals the base local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"Localization.localRingHom_unique\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"IsLocalization.minimalPrimes_map\", \"IsLocalization.minimalPrimes_comap\", \"IsLocalization.AtPrime.coe_orderIsoOfPrime_apply_coe\"], \"digest\": \"68c1a783b4274faa\"}",
    "date": "2026-10-19",
    "verdict": "no match: only general localization results; the exact ring claim is not a Mathlib theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_primeSpectrum|localizationLocalizationAtPrimeIsoLocalization|isUnit_iff",
+   "results": "{\"t\": \"2026-10-18T23:16:22Z\", \"tool\": \"grep\", \"query\": \"subsingleton_primeSpectrum|localizationLocalizationAtPrimeIsoLocalization|isUnit_iff\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\"], \"digest\": \"963d5183b41a6130\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: general localization and prime correspondence candidates do not state the item or give a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring map with unique minimal primes and isomorphic local rings at those primes is an isomorphism after localizing the target at the source minimal prime",
+   "results": "{\"t\": \"2026-10-18T23:16:28Z\", \"tool\": \"leanfinder\", \"query\": \"A ring map with unique minimal primes and isomorphic local rings at those primes is an isomorphism after localizing the target at the source minimal prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"RingHom.OfLocalizationPrime\", \"RingHom.HoldsForLocalization.localRingHom\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"Localization.localRingHom_unique\", \"RingHom.IsStandardOpenImmersion.of_bijective\", \"IsLocalization.minimalPrimes_map\", \"bijective_of_isLocalization_isMaximal\"], \"digest\": \"b2559aaaacb5b8ea\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: general localization and prime correspondence candidates do not state the item or give a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Ideal.IsPrime, RingHom.Bijective",
+   "results": "{\"t\": \"2026-10-18T23:19:13Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, Ideal.IsPrime, RingHom.Bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingHom.Bijective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "invalid query: loogle: unknown identifier 'RingHom.Bijective'; no absence conclusion drawn"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring map with unique minimal primes and isomorphic generic local rings induces an isomorphism after localizing at the base minimal prime",
+   "results": "{\"t\": \"2026-10-18T23:19:13Z\", \"tool\": \"leansearch\", \"query\": \"A ring map with unique minimal primes and isomorphic generic local rings induces an isomorphism after localizing at the base minimal prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"Localization.isLocalHom_localRingHom\", \"Localization.localRingHom_unique\", \"IsLocalization.minimalPrimes_map\", \"PrimeSpectrum.localizationMapOfSpecializes\", \"Localization.localRingHom\", \"AlgebraicGeometry.Spec_map_localization_isIso\", \"AlgebraicGeometry.localRingHom_comp_stalkIso\"], \"digest\": \"4449458fc3115932\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: general localization and prime correspondence candidates do not state the item or give a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring map B to A which is an isomorphism on local rings at the unique minimal primes q and p, localization of A at B minus q is equal to A localized at p",
+   "results": "{\"t\": \"2026-10-18T23:19:14Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative ring map B to A which is an isomorphism on local rings at the unique minimal primes q and p, localization of A at B minus q is equal to A localized at p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization\", \"PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton\", \"IsLocalization.minimalPrimes_map\", \"Localization.localRingHom_unique\"], \"digest\": \"84c0199e84627e8c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: general localization and prime correspondence candidates do not state the item or give a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.localRingHom_unique",
+   "results": "{\"t\": \"2026-10-18T23:25:37Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.localRingHom_unique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsLocalization.localRingHom_unique'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "invalid query: loogle: unknown identifier 'IsLocalization.localRingHom_unique'; no absence conclusion drawn"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.localRingHom_unique",
+   "results": "{\"t\": \"2026-10-18T23:27:59Z\", \"tool\": \"loogle\", \"query\": \"Localization.localRingHom_unique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Localization.localRingHom_unique\"], \"digest\": \"36fad4bcb0b85a48\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: only uniqueness of an induced local map, not this birational localization assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-birational-common-dense-opens",
@@ -64,5 +199,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-birational-generic-localization",
+  "worker": "stage1",
+  "summary": "Expanded the exact affine-ring argument of Stacks 0BAB into seven steps. The residue-field surjection makes the extended minimal prime maximal; the localization prime correspondence and existence of minimal primes show it is the only prime. A maximal-ideal argument makes every element outside the original minimal prime invertible, and explicit fractions give the inverse localization map. Reused four existing nodes; no new nodes and no changed statement or added hypotheses.",
+  "blueprint": "The inherited ancestor is lem-per-artin-gabber-affine-curve, proof Step 1, through lem-per-birational-common-dense-opens. This split realizes the generic-fibre localization paragraph (Stacks 0BAB) used in that common-open reduction; the inherited blueprint.from place/via are preserved. The current main-20261015 ancestor was read and is not used as a source for the ring proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Uses only clause (1), the general localization prime correspondence including extension/contraction identities; the perverse-curve unit has no commutative-ring localization lemma. This is a generic algebraic tool within the inherited 0BAB common-open argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-1f9f3fede",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-1f9f3fede (reviewer sub-agent of L); spot-checked: I read the item's 7-step split in full. Its statement and stmt_deps are unchanged from the Q115-created record, and it adds no new nodes. Source check: Stacks morphisms.tex Tag 0BAB lemma-birational-generic-fibres, affine paragraph. The steps expand it faithfully: residue-field surjection, so pA_q is maximal; prime correspondence plus minimal-prime existence, so pA_q is the only prime; elements outside p are units; explicit inverse fractions, so the canonical map θ=ψ⁻¹h is an iso. Cited statements read: def-weil-pbc-localization-at-prime, clause (1) of lem-weil-pbc-localization-prime-residue-field-iso, and the Mathlib leaves lem-weil-pbc-prime-contains-minimal-prime and lem-weil-pbc-proper-ideal-contained-in-maximal. None carries a hidden hypothesis, and proof_deps equal the union of the steps' uses. I accept the declared tool use: lem-weil-pbc-localization-prime-residue-field-iso (sk-thm-p1) is a generic 00E3 correspondence with no node in the perverse unit. Small cases check out: k[x,e]/(e^2,xe) over k[x] and the reverse map work, so the proof needs neither reducedness nor injectivity. No duplicate: lem-trf-unique-prime-localization needs a finite map. No SGA citation, no long step, no weakened target."
  }
 }
