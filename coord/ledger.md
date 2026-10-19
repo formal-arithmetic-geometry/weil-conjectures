@@ -17020,3 +17020,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q39/lem-per-singular-curve-point-blowup-step (reviewer RETURN: F / route pivot of 2026-10-19. The item lem-per-singular-curve-point-blowup-step is itself on the drop list (side coord/)
 - 03:58 L: returned deliver/Q82/lem-per-rational-point-blowup-normality (reviewer RETURN: Route-pivot drop; the maths itself is sound. The item lem-per-rational-point-blowup-normality is itself listed in clones)
 - 03:58 L: returned deliver/Q45/lem-per-projective-bundle-relative-ample (reviewer RETURN: Returned because the item was dropped by the human's route decision, not for a mathematical fault. The item lem-per-proj)
+- 03:58 L: returned deliver/Q04/lem-per-admissible-modification-fujiwara-valuative-local (reviewer RETURN: I return this delivery because the item itself was dropped in the 2026-10-19 route pivot. It is at line 1393 of side coo)
