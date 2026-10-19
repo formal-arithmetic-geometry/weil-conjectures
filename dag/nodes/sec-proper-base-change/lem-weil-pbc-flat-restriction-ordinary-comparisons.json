@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-flat-restriction-ordinary-comparisons",
+ "kind": "statement",
+ "title": "FlatRestrictionOrdinaryComparisons",
+ "statement": "For a flat ringed diagram input x [def-weil-pbc-flat-ringed-diagram-input] and a small category J, there exist ordinary natural isomorphisms b0:inverseS⋙restrictU ≅ restrictV⋙inverseR and d0:directS⋙restrictV ≅ restrictU⋙directR. On each diagram component their underlying maps obey exactly OrdinaryComparisonsNormalized: b0 is the composite of the S inverse-image comparison, sameInverse, and the inverse R comparison; d0 is the analogous direct-image comparison through sameDirect. No derived-category assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, naturality of the geometric adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ringed-diagram-input"
+ ],
+ "proof": [
+  {
+   "text": "Compose the underlying inverse-image module isomorphisms through sameInverse. The operation comparison equations give additivity; the coefficient square gives R-linearity. The inverse is linear by the inverse identities. Naturality of those comparisons gives an isomorphism b0 on diagrams, retaining every J arrow.",
+   "uses": [
+    "def-weil-pbc-flat-ringed-diagram-input",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, naturality of the geometric adjunction"
+   }
+  },
+  {
+   "text": "Form the direct comparison as the mate of b0 inverse under the termwise module adjunctions. Apply the general adjunct-mate identity to the S counit; its transpose is the identity. The inverse normalization of b0, the two input transpose equations, and sameAdjunction give the direct underlying-sheaf normalization. Its underlying map is an isomorphism by that equation. The underlying-set functor reflects isomorphisms, hence the mate is an isomorphism on every diagram component, every diagram and therefore as a natural transformation. This constructs d0 with the required normalization.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-flat-ringed-diagram-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, naturality of the geometric adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ringed-diagram-input",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, naturality of the geometric adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar restriction for sheaves of modules has an exact left adjoint and derived coefficient comparisons are mates",
+   "results": "{\"top\": [\"ModuleCat.instIsLeftAdjointRestrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-18",
+   "verdict": "The results provide ordinary scalar restriction and module scalar-extension adjunctions, but no normalized sheaf-diagram comparison or exact sheaf scalar extension matching this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "{\"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\"], \"note\": \"\", \"n_hits\": 4}",
+   "date": "2026-10-18",
+   "verdict": "Found the actual scalar restriction functor, additivity and its object/map formulas; no comparison isomorphism with the required normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Pp]reserve|[Pp]reserve.*restrictScalars",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\"], \"note\": \"\", \"n_hits\": 19}",
+   "date": "2026-10-18",
+   "verdict": "Matches concern module change of rings and presheaf restriction; no normalized comparison for the specified ringed-topos diagram input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FlatRingedDiagramRestriction",
+  "date": "2026-10-19",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+   "place": "proof step 5: ordinary coefficient comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatRestrictionOrdinaryComparisons",
+  "file": "lean/Sheaf/CategoryTheory/FlatRestrictionOrdinaryComparisons.lean",
+  "declaration": "CategoryTheory.FlatRingedDiagramInput.flatRestriction_ordinary_comparisons",
+  "statement": "theorem flatRestriction_ordinary_comparisons :\n    ∃ (b0 : x.inverseS J ⋙ x.restrictU J ≅ x.restrictV J ⋙ x.inverseR J)\n      (d0 : x.directS J ⋙ x.restrictV J ≅ x.restrictU J ⋙ x.directR J),\n      x.OrdinaryComparisonsNormalized J b0 d0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093444-L-2313687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093444-L-2313687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

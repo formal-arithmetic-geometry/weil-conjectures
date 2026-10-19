@@ -29,154 +29,50 @@
  ],
  "proof": [
   {
-   "text": "Work in the diagram categories themselves. By [lem-weil-pbc-diagram-site-realization] they are abelian categories of module sheaves on small diagram sites, and kernels and cokernels are componentwise in $J$. By [def-weil-sheaf-of-modules-category], a module kernel is the sectionwise kernel and a module cokernel is the sheafification of the sectionwise cokernel. Restriction [def-pc-sheaf-restrict-scalars] changes neither underlying abelian sheaf nor maps. The sectionwise kernels have the restricted action. The same underlying cokernel sheaf, with its induced restricted action, is a cokernel after restriction: its universal factorization is linear because the quotient map is locally surjective and the original map is linear. Thus $r_T$ preserves kernels and cokernels and is exact. This also shows that exactness of a sequence of $S_T$-module sheaves is detected after restriction to $R_T$.",
+   "text": "Restriction is exact: use sheafification and the underlying abelian-sheaf functor to prove preservation of finite limits and colimits, then lift these properties to diagram categories by whiskering. This is proved directly in Lean.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
+    "def-pc-sheaf-restrict-scalars",
     "def-weil-sheaf-of-modules-category",
-    "def-pc-sheaf-restrict-scalars"
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian; section on change of rings, Tag 03CZ"
-   }
+   "elementary": true
   },
   {
-   "text": "Define $E_T$ on a diagram $M$ by $(E_TM)(j)=S_T\\otimes_{R_T}M(j)$, with the sheaf tensor of [def-pur-sheaf-tensor-product]. Sectionwise the two maps in [lem-weil-pbc-scalar-extension-hom] send $h$ to $m\\mapsto h(1\\otimes m)$ and send $f$ to $s\\otimes m\\mapsto sf(m)$. They commute with site restrictions and diagram arrows: the latter formula applied to $s\\otimes M(\\alpha)m$ is $s f_k(M(\\alpha)m)=sN(\\alpha)f_j(m)$. The universal property in [def-weil-presheaf-modules-sheafification] therefore gives inverse natural bijections $\\operatorname{Hom}(E_TM,N)=\\operatorname{Hom}(M,r_TN)$ on diagram sheaves. Hence $E_T\\dashv r_T$. The hypothesis [def-pc-flat-sheaf-modules] says that its underlying $R_T$-module tensor functor is exact; exactness is detected on underlying module sheaves by step 1, and is componentwise in $J$. Consequently $E_T$ is exact as an $S_T$-module-valued functor.",
+   "text": "Obtain an additive finite-limit-preserving scalar-extension left adjoint separately on U and V. Whisker its adjunction by J. The left adjoint preserves finite colimits by adjunction and finite limits pointwise, so the right-adjoint K-injective criterion proves K-injective preservation for both restrictions.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-scalar-extension-hom",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; flatness as defined in the statement"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to the additive adjunction $E_T\\dashv r_T$ of step 2. Its left adjoint is exact by flatness, and its categories are abelian by step 1. Therefore $r_T$ preserves K-injective complexes of diagrams. This is K-injectivity in the whole diagram category, not an inference from the K-injectivity of separate evaluations.",
-   "uses": [
+    "lem-weil-pbc-flat-restriction-exact-left-adjoint",
     "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives"
-   }
+   "elementary": false
   },
   {
-   "text": "For $B=R,S$, [lem-weil-pbc-geometric-module-transport], with ring identification $c_B^{-1}$ and structural map the identity of $B_U$, gives the prescribed $L_B\\dashv F_B$, whose underlying Hom bijection is the given sheaf adjunction. These Hom bijections commute with every $J$-arrow by their naturality, so restrict to diagram morphisms. The underlying set sheaf of $L_B$ is $u^{-1}$ of the underlying set sheaf. Kernels of module maps are equalizers with the zero map by [def-weil-sheaf-of-modules-category]; finite-limit preservation of $u^{-1}$ therefore shows that $L_B$ preserves kernels and zero objects. It preserves cokernels as well: maps $L_BN\\to H$ killing $L_Bf$ correspond under the adjunction exactly to maps $N\\to F_BH$ killing $f$, which factor uniquely through its cokernel. Thus $L_R,L_S$ are exact, also on diagrams. By [lem-weil-pbc-right-adjoint-preserves-kinjective], $F_R,F_S$ preserve K-injectives.",
+   "text": "Obtain the normalized ordinary comparisons b0 and d0. Construct rU and rV using the exact functor mapDerivedCategory, with its canonical factor isomorphisms. Conjugate Q(b0) by qLS,qU,qV,qLR and descend this isomorphism through the localization fully faithful precomposition functor. The component formula for liftNatIso proves the inverse normalization equation.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-flat-restriction-ordinary-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; derived.tex Tag 08BJ"
-   }
+   "elementary": true
   },
   {
-   "text": "Construct the ordinary $b^0:r_UL_S\\simeq L_Rr_V$ by the identity on the identified underlying $u^{-1}$ sheaves. Its $R_U$-linearity is precisely $a_Uc_R=c_Su^{-1}a_V$. Write $\\rho_R:R_V\\to u_*R_U$ and $\\rho_S:S_V\\to u_*S_U$ for the adjoints of $c_R,c_S$. Naturality of the sheaf adjunction gives $u_*(a_U)\\rho_R=\\rho_Sa_V$. Hence the two $R_V$-actions on the same sheaf $u_*N$ agree: one uses $a_V$ then $\\rho_S$ and the other uses $\\rho_R$ then $u_*a_U$ before the $S_U$-action. This gives the ordinary comparison $q:r_VF_S\\simeq F_Rr_U$, the identity with these actions identified. All identifications on objects and maps are those in [lem-weil-pbc-geometric-module-transport] and [def-pc-sheaf-restrict-scalars]. They are natural in the module, hence commute with every diagram arrow.",
+   "text": "Form delta as the mate of b inverse. The derived-mate lemma proves its invertibility and direct normalization. Set d=asIso(delta). The general unit-mate identity, followed by naturality, proves the adjunct equation for every M,N,t. Package these constructions with the preceding exactness and K-injective proofs.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "def-pc-sheaf-restrict-scalars"
+    "lem-weil-pbc-flat-restriction-derived-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; naturality of the underlying adjunction"
-   }
-  },
-  {
-   "text": "Let $\\eta^R,\\eta^S$ be the ordinary units. The normalization in [lem-weil-pbc-geometric-module-transport] says that their underlying sheaf maps are both the unit of $u^{-1}\\dashv u_*$. Since $b^0$ and $q$ in step 5 are the identity under those same identifications, faithfulness of the underlying-sheaf functor gives\n$$F_R((b^0_M)^{-1})\\eta^R_{r_VM}=q_{L_SM}\\,r_V(\\eta^S_M).$$\nFor any module diagram map $h:L_SM\\to N$, apply $F_Rr_U(h)$ to this equation. Naturality of $q$ gives\n$$F_R(r_U(h)(b^0_M)^{-1})\\eta^R_{r_VM}\n=q_Nr_V(F_S(h)\\eta^S_M).$$\nThese are exactly the ordinary adjunct formulas. By [lem-weil-pbc-termwise-adjunction-homotopy] they remain the formulas on complexes and homotopy classes, with the same comparisons $b^0,q$ applied degreewise.",
-   "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; derived.tex Tag 0DVC, lemma-pre-derived-adjoint-functors"
-   }
-  },
-  {
-   "text": "Apply [prop-pur-kinjective-resolutions-exist] on each small ringed diagram site supplied by [lem-weil-pbc-diagram-site-realization]. This gives functorial K-injective resolutions in all four diagram categories. Applying an additive functor to complexes preserves shifts and mapping cones (the cone uses only finite direct sums and the differential matrix), so its functor from the homotopy category to the target derived category is exact triangulated. Thus [lem-weil-pbc-kinjective-total-derived] supplies $RF_R,RF_S$ and their normalized computation isomorphisms on K-injectives. For the exact functors $r_T,L_R,L_S$ use [lem-weil-pbc-exact-functor-derived-functor]: their termwise localizations compute their derived functors on every complex. In particular, localizing $b^0$ gives the required $b$. These are the representing data that [lem-pc-pre-derived-adjoint-functors-general] requires. For $F=F_R,F_S$ let $\\beta:QF_h\\to RF\\,Q$ be the comparison of [lem-weil-pbc-kinjective-total-derived], invertible on K-injectives. For a complex $K$ and a quasi-isomorphism $s:K\\to I'$ put $p_s=RF(Qs)^{-1}\\beta_{I'}$, a cocone by naturality of $\\beta$. Fix a K-injective resolution $s_0:K\\to I_0$ and $\\rho=\\beta_{I_0}^{-1}RF(Qs_0)$, so $p_{s_0}\\rho=1$. Given $s$, filteredness and a further K-injective resolution give $s_k:K\\to I_k$, $I_k$ K-injective, with $a:I_0\\to I_k$, $c:I'\\to I_k$ under $K$; naturality of $\\beta$ at $a$ and invertibility of $\\beta_{I_k}$ give $QF_h(a)\\rho p_s=QF_h(c)$, the transition map. So $p$ exhibits the ind-system as essentially constant [def-pc-essentially-constant-ind-diagram]; for K-injective $K$ and $s=\\mathrm{id}$, $p_{\\mathrm{id}}=\\beta_K$. Dually, for $G=L_R,L_S$ with comparison $\\varphi:G_DQ\\simeq QG$ and a quasi-isomorphism $t:P\\to M$, put $u_t=QG(t)^{-1}\\varphi_M$ (invertible since $G$ is exact), a cone; with $t_0=\\mathrm{id}$, $r=\\varphi_M^{-1}$ and $k=t$ the pro condition of [def-pc-essentially-constant-pro-diagram] is $u_tr\\,QG(t)=1$.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "def-pc-essentially-constant-ind-diagram",
-    "def-pc-essentially-constant-pro-diagram",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070Y, lemma-K-injective-defined, and 070K, lemma-enough-K-injectives-implies; ringed-site resolutions via injectives.tex Tag 079P; Tag 0FND proof (essentially constant ind/pro systems)"
-   }
-  },
-  {
-   "text": "For a complex $N$ choose a K-injective resolution $N\\to I$ from step 7. Exactness makes $r_UN\\to r_UI$ a quasi-isomorphism, and step 3 makes $r_UI$ K-injective. Hence [lem-weil-pbc-kinjective-total-derived] computes the two sides of $d_N$ as $Q(r_VF_SI)$ and $Q(F_Rr_UI)$ respectively. Define $d_N$ by $Q(q_I)$ under these computation isomorphisms. It is invertible. A morphism between K-injective representatives has a unique homotopy class representing a given derived morphism by [lem-weil-pbc-kinjective-hom-derived]; naturality of $q$ makes this square commute on that class. Every derived object has such a representative, and a quasi-isomorphism between two of them is a homotopy equivalence by the same cited lemma. The comparisons therefore define a natural isomorphism on the whole derived category, independent of resolution through the canonical comparison maps. On $N=QI$ it is exactly the comparison induced by the underived identity required in the statement.",
-   "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I, lemma-K-injective, 070Y, lemma-K-injective-defined, and 070K, lemma-enough-K-injectives-implies"
-   }
-  },
-  {
-   "text": "To check adjuncts, represent $M$ by a complex $C$ and $N$ by $QI$ with $I$ K-injective in the $S_U$ diagram category. By [lem-weil-pbc-kinjective-hom-derived], $t$ is represented by a chain map $h:L_SC\\to I$. Under the normalization formula in [lem-pc-pre-derived-adjoint-functors-general], taking its source quasi-isomorphism to be the identity and its target to be this K-injective representative, $t^\\sharp$ is represented by $f=F_S(h)\\eta^S_C:C\\to F_SI$, followed by the K-injective computation isomorphism. The same formula for $L_R\\dashv RF_R$ computes the adjunct of $r_U(t)b_M^{-1}$ using $r_UI$, which is K-injective by step 3, as\n$$F_R(r_U(h)(b^0_C)^{-1})\\eta^R_{r_VC}.$$\nStep 6 identifies this chain map with $q_Ir_V(f)$. Localizing and inserting exactly the computation isomorphisms used in step 8 gives $d_Nr_V(t^\\sharp)$. Functoriality in both localized variables, included in the normalized-adjunction lemma, transports the equality back along the representing isomorphisms for $M,N$.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, explicit representative formula; Tag 070I, lemma-K-injective"
-   }
-  },
-  {
-   "text": "All functors, resolutions and chain maps used above live in the category of $J$-diagrams. In particular $b^0$ and $q$ commute with the transition corresponding to $\\alpha:j\\to k$ by their module naturality; the degreewise maps in their complex versions retain that equality. The chosen resolutions are resolutions of diagrams, so their structure maps and comparison maps are diagram morphisms too. Localization is a functor and preserves these equalities. Thus $b,d$ and the adjunct equation are statements in derived diagram categories, with every transition retained; no reconstruction of a derived diagram from its separate evaluations was used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND and 0DVC; explicit diagram-functor construction of the preceding steps"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-diagram-site-realization",
-  "def-weil-sheaf-of-modules-category",
   "def-pc-sheaf-restrict-scalars",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-presheaf-modules-sheafification",
-  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-flat-restriction-exact-left-adjoint",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-geometric-module-transport",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "def-pc-essentially-constant-ind-diagram",
-  "def-pc-essentially-constant-pro-diagram",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-flat-restriction-ordinary-comparisons",
+  "lem-weil-pbc-flat-restriction-derived-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0FND, 0DVC, 08BJ, 070I, 070Y and 070K; sites-modules.tex Tags 03CZ and 03D3, applied to compatible coefficient changes on small diagram sites"
+  "place": "J1 reduction of Tags 0FND and 08BJ, with ordinary scalar extension and comparisons from sites-modules.tex 03CZ and 03D3; exact localization and the mate unit identity are proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -352,9 +248,7 @@
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-pre-derived-adjoint-functors-general"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -385,5 +279,15 @@
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-e0dd71a2a"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093444-L-2313687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

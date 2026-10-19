@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-flat-restriction-exact-left-adjoint",
+ "kind": "statement",
+ "title": "FlatRestrictionExactLeftAdjoint",
+ "statement": "For a small site K and a morphism a from a sheaf of commutative rings R to such a sheaf S, assume the restricted unit S is flat in the sense of [def-pc-flat-sheaf-modules]. There exists an additive functor E from Mod(R) to Mod(S) [def-weil-sheaf-of-modules-category] preserving finite limits, together with an adjunction having E as left adjoint to the actual scalar-restriction functor r [def-pc-sheaf-restrict-scalars].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ and 03ER(3)"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sheafified scalar-extension functor. Sectionwise scalar extension and restriction have the natural Hom bijection f↦(m↦f(1 tensor m)), with inverse g↦(s tensor m↦s g(m)). These maps commute with site restrictions. Module sheafification extends the bijection to sheaves, giving the adjunction and additivity.",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ and 03ER(3)"
+   }
+  },
+  {
+   "text": "Compare the underlying abelian presheaf of scalar extension with the sectionwise tensor of M and the restricted unit S by tensor symmetry. The pure-tensor formula gives naturality in site restrictions and in M. Whisker this natural isomorphism with abelian sheafification. It identifies E followed by the underlying abelian-sheaf functor with siteSheafTensorRight of the restricted unit, followed by the same forgetful functor. Flatness implies that this composite preserves finite limits. The faithful underlying-sheaf functor reflects finite limits, so E does also. Its adjunction supplies zero preservation; finite-limit preservation then gives additivity. The complete construction is proved in Lean.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ and 03ER(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ and 03ER(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar restriction for sheaves of modules has an exact left adjoint and derived coefficient comparisons are mates",
+   "results": "{\"top\": [\"ModuleCat.instIsLeftAdjointRestrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-18",
+   "verdict": "The results provide ordinary scalar restriction and module scalar-extension adjunctions, but no normalized sheaf-diagram comparison or exact sheaf scalar extension matching this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar extension left adjoint to restriction of sheaves of modules when the coefficient algebra is flat",
+   "results": "{\"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"comonadicExtendScalars\", \"SheafOfModules.instIsLeftAdjointPullback\", \"ModuleCat.extendRestrictScalarsAdj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-18",
+   "verdict": "Found scalar-extension adjunctions for modules and geometric pullback. No exact left adjoint for this sheaf coefficient restriction is supplied directly."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Pp]reserve|[Pp]reserve.*restrictScalars",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\"], \"note\": \"\", \"n_hits\": 19}",
+   "date": "2026-10-18",
+   "verdict": "Matches give change-of-rings exactness for ordinary modules and restriction for presheaves. The sheafified scalar-extension construction and its flatness comparison must be proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FlatRingedDiagramRestriction",
+  "date": "2026-10-19",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+   "place": "proof steps 2-3: exact scalar extension left adjoint to restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatRestrictionExactLeftAdjoint",
+  "file": "lean/Sheaf/CategoryTheory/FlatRestrictionExactLeftAdjoint.lean",
+  "declaration": "SheafOfModules.flatRestriction_exact_leftAdjoint",
+  "statement": "theorem flatRestriction_exact_leftAdjoint\n    {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}\n    {R S : Sheaf K CommRingCat.{u}} (a : R ⟶ S)\n    (hflat : IsFlatOnSite.{u, u, u, u}\n      ((restrictScalars.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).map a)).obj\n        (unit.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S)))) :\n    ∃ E : SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R) ⥤\n        SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S),\n      E.Additive ∧ PreservesFiniteLimits E ∧\n        Nonempty (E ⊣ restrictScalars.{u}\n          ((sheafCompose K (forget₂ CommRingCat RingCat)).map a))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093444-L-2313687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093444-L-2313687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
