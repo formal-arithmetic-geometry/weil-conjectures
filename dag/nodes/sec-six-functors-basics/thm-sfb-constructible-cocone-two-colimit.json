@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sfb-constructible-cocone-two-colimit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The constructible cocone is a filtered 2-colimit",
@@ -18,20 +18,134 @@
  ],
  "proof": [
   {
-   "text": "The three defining conditions are [lem-sfb-constructible-cocone-obj],\n[lem-sfb-constructible-cocone-hom-surj] and [lem-sfb-constructible-cocone-hom-inj].",
-   "uses": [],
-   "elementary": false
+   "text": "Use [def-sfb-constructible-cocone] to write $\\mathcal C_E=D_{\\mathrm{cons}}(X,E)$, $\\mathcal D=D_{\\mathrm{cons}}(X,\\Qlb)$, $\\Phi_E=T_{E,\\Qlb}$ and $\\theta_{EF}\\colon\\Phi_F\\circ T_{E,F}\\cong\\Phi_E$. These are exactly the cocone data to which [sk-def-sfb-filtered-two-colimit] applies; its predicate asks for (Obj), (Hom-surj) and (Hom-inj).",
+   "uses": [
+    "def-sfb-constructible-cocone",
+    "sk-def-sfb-filtered-two-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
+    "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
+   }
+  },
+  {
+   "text": "For any $K\\in\\mathcal D$, [lem-sfb-constructible-cocone-obj] gives a finite extension $E/\\mathbf Q_\\ell$ in $\\Qlb$, an object $K_E\\in\\mathcal C_E$ and an isomorphism $K\\cong\\Phi_E(K_E)$. The lemma applies since $\\ell$ is prime and the underlying topological space of $X$ is Noetherian. This is (Obj) for our cocone.",
+   "uses": [
+    "lem-sfb-constructible-cocone-obj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
+    "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
+   }
+  },
+  {
+   "text": "Fix finite stages $E,F$, objects $K_E\\in\\mathcal C_E$, $L_F\\in\\mathcal C_F$, and a morphism $\\varphi\\colon\\Phi_E(K_E)\\to\\Phi_F(L_F)$. Under the same hypotheses, [lem-sfb-constructible-cocone-hom-surj] gives a finite $H\\supseteq E,F$ and $g\\colon T_{E,H}K_E\\to T_{F,H}L_F$ whose image is $\\varphi$ up to the transitivity isomorphisms. In the notation of step 1 this equality is $\\varphi=\\theta_{FH,L_F}\\circ\\Phi_H(g)\\circ\\theta_{EH,K_E}^{-1}$. The inverse first carries $\\Phi_E(K_E)$ to $\\Phi_H(T_{E,H}K_E)$, and the last isomorphism carries $\\Phi_H(T_{F,H}L_F)$ to $\\Phi_F(L_F)$. Thus the equality is precisely (Hom-surj), including its comparison maps.",
+   "uses": [
+    "lem-sfb-constructible-cocone-hom-surj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
+    "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
+   }
+  },
+  {
+   "text": "Fix a finite stage $H$, $K,L\\in\\mathcal C_H$, and $g,g^{\\prime}\\colon K\\to L$ with $\\Phi_H(g)=\\Phi_H(g^{\\prime})$. The hypotheses of [lem-sfb-constructible-cocone-hom-inj] are exactly these together with the prime and Noetherian hypotheses already in force. It gives a finite $H^{\\prime}\\supseteq H$ with $T_{H,H^{\\prime}}(g)=T_{H,H^{\\prime}}(g^{\\prime})$. This is (Hom-inj).",
+   "uses": [
+    "lem-sfb-constructible-cocone-hom-inj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
+    "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
+   }
+  },
+  {
+   "text": "Steps 2, 3 and 4 supply respectively (Obj), (Hom-surj) and (Hom-inj) for the single cocone fixed in step 1. Their conjunction is the definition of a filtered 2-colimit in [sk-def-sfb-filtered-two-colimit]. Therefore the constructible cocone is a filtered 2-colimit as asserted. This last step is only introduction of the three fields of that predicate.",
+   "uses": [
+    "sk-def-sfb-filtered-two-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
+    "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-constructible-cocone",
+  "sk-def-sfb-filtered-two-colimit",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-constructible-cocone-hom-surj",
+  "lem-sfb-constructible-cocone-hom-inj"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md",
-  "place": "## Proof"
+  "place": "Assembly of the three defining conditions; unit sk-thm-sfb-qlbar-two-colimit, proof (4)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleCocone|IsFilteredTwoColimit|CategoryCocone",
+   "results": "none. No matching declaration in the searched Mathlib source.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes on a Noetherian scheme with algebraic closure l-adic coefficients form the filtered two colimit of finite coefficient fields",
+   "results": "HomologicalComplex.instHasFilteredColimitsOfSize; ModuleCat.FilteredColimits.colimit; AddCommGrpCat.FilteredColimits.colimit; CommRingCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.M.mk; CommRingCat.FilteredColimits.colimit; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; CommSemiRingCat.FilteredColimits.colimit. Hits concern ordinary filtered colimits of modules or homological complexes, sheaf pullback, or descent data; none states finite-field descent for bounded constructible pro-etale derived categories.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryCocone, IsFilteredTwoColimit",
+   "results": "none; loogle: unknown identifier 'CategoryCocone'. No match; Loogle reports the requested project-specific identifier is unknown.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constructible derived category over the algebraic closure of Q_l is the filtered 2-colimit of the constructible derived categories over finite extensions of Q_l",
+   "results": "Condensed.profiniteSolid; Condensed.instAB5CondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; localCohomology.ofDiagram; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; localCohomology.diagram; Condensed.hasExactColimitsOfShape. Hits concern condensed modules and ordinary colimits, Kan extension of profinite functors, or local cohomology; none states this constructible cocone is a filtered two-colimit.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Cc]olimit|[Cc]olimit.*constructible|[Tt]wo[Cc]olimit|2.colimit",
+   "results": "none. No matching declaration in the searched Mathlib source.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible l-adic sheaves descend to a finite coefficient extension and morphisms descend compatibly",
+   "results": "CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv; SheafOfModules.sheafificationCompPullback; LightCondensed; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CondensedSet.LocallyConstant.iso; CategoryTheory.Sheaf.instHasFiniteLimits; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; LightProfinite.hasSheafify. Hits concern ordinary filtered colimits of modules or homological complexes, sheaf pullback, or descent data; none states finite-field descent for bounded constructible pro-etale derived categories.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Constructible, DerivedCategory",
+   "results": "none; loogle: unknown identifier 'Constructible'. No match; Loogle reports the requested project-specific identifier is unknown.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of objects and morphisms in bounded constructible derived categories to finite extensions of the l-adic coefficient field gives a two colimit of categories",
+   "results": "LightCondensed.fintypeCatAsCofanIsColimit; Profinite.Extend.isColimitCocone; LightProfinite.Extend.isColimitCocone; localCohomology.hasColimitDiagram; LightCondensed.instHasColimitsOfShapeCostructuredArrowOppositeFintypeCatLightProfiniteOpToLightProfiniteType; LightCondensed.isColimitLocallyConstantPresheafDiagram; Condensed.isColimitLocallyConstantPresheafDiagram; localCohomology.ofDiagram. Hits concern condensed modules and ordinary colimits, Kan extension of profinite functors, or local cohomology; none states this constructible cocone is a filtered two-colimit.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -337,5 +451,20 @@
   "landing": "20261019T005301-L-2748077",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "thm-sfb-constructible-cocone-two-colimit",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two statement dependencies verbatim. Expanded the imported one-line assembly into explicit cocone data, object descent, morphism descent with the correctly oriented transitivity comparisons, eventual equality, and conjunction introduction. Reused the three existing same-unit clause lemmas, with matching prime and Noetherian hypotheses; created no nodes. Searched Mathlib with two phrasings and all prescribed search services. No Lean edits or compilation.",
+  "blueprint": "Realizes the imported proof sentence naming lem-sfb-constructible-cocone-obj, lem-sfb-constructible-cocone-hom-surj and lem-sfb-constructible-cocone-hom-inj, and unit proof (4), by assembling their stated conditions. The item is a detail theorem, not the unit key node; unit realization fields are untouched."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NV-ca24b1319",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-ca24b1319 (reviewer sub-agent of L); spot-checked: The item is not in the 2026-10-19 drop list. Live and side-live still show it as imported, and no competing split exists. The statement is verbatim against main-20261015 (sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/thm-sfb-constructible-cocone-two-colimit.md, order 1773), and the stmt_deps are unchanged. The 5 steps follow the blueprint proof and unit proof (4) exactly. Step 1 (elementary) reads the cocone data from def-sfb-constructible-cocone; theta_EF: Phi_F∘T_EF ≅ Phi_E has the orientation required by sk-def-sfb-filtered-two-colimit, which needs no coherence. Steps 2, 3 and 4 cite the statements of lem-sfb-constructible-cocone-obj, -hom-surj and -hom-inj. Each states (Obj), (Hom-surj) or (Hom-inj) verbatim under the same hypotheses (ℓ prime, Noetherian |X|). The explicit Hom-surj formula theta_FH∘Phi_H(g)∘theta_EH^{-1} typechecks against the definition. Step 5 is conjunction introduction. No proof contents are used (C3 OK). The stmt+proof closures of all 5 deps (up to 973 nodes) exclude the item, so there is no cycle. There are no new nodes and no off-unit tool use. The 8 Mathlib searches cover all four tools. The live Lean in TwoColimit.lean:663-667 assembles exactly the three clause declarations. Maintainer note (B10): the node already has lean.existing:true (G7) with reviewed_proof pass, so it should not have been dispatched; the split itself is correct."
  }
 }
