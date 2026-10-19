@@ -17702,3 +17702,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: merged deliver/H3/Sheaf.Paper.AdicSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261019T231212-L-560654 (interface); batch 20261019T231019; modules 2; new nodes 1; change records: coord/changes/adic-smooth-base-change-proof-interface.md)
 - 23:12 L: merged deliver/H6/Sheaf.Paper.CompletedPullback (stage 3; reviewer PASS; first push; landing 20261019T231214-L-560879 (interface); batch 20261019T231019; modules 2; new nodes 1)
 - 23:12 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ClosedPointSupportDetection (stage 3; reviewer PASS; first push; landing 20261019T231216-L-561160 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:12 L: merged deliver/J2/Sheaf.Paper.FlatLocalizationKoszulCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261019T231218-L-561515 (proof); batch 20261019T231019; modules 1; new nodes 0)
