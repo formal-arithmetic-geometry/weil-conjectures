@@ -25,15 +25,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectI
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.Algebra.CharP.Basic
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Direct image and finite Tor amplitude
@@ -54,6 +50,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] derivedTensor
+-- Use the canonical ring instance when specializing generic lemmas to quotient coefficients.
+-- Alternate instance paths otherwise make kernel checking unfold the quotient repeatedly.
+attribute [local instance 20000] CommRing.toRing
+-- Match the braidings in the existing derived tensor and residue-test constructions.
+attribute [local instance 20000] SymmetricCategory.toBraidedCategory sheafBraidedCategory
 
 private theorem torAmplitude_cohomology
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) (a b : ℤ)
@@ -178,6 +179,34 @@ private theorem residue_finite
           (Padic.coefficientExtensionRing l E n))))
     Ideal.Quotient.mk_surjective
 
+private theorem directImage_torAmplitude_of_residue_test
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℤ) (hN : 0 ≤ N)
+    (hUDV : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (r : ℤ), N < r →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
+        ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj M))))
+    (a b : ℤ) (K : DerivedCategoryModule A X)
+    (hK : DerivedCategory.isBoundedConstructible A X K)
+    (hTor : DerivedCategory.hasTorAmplitudeIn A X a b K)
+    (M : ModuleCat.{u + 1} A) [Finite M]
+    (htest : (∀ i : ℤ, i < a ∨ b + N < i →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
+        (((derivedTensor (ModuleCat.{u + 1} A) Y).obj
+          ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj K)).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))))) →
+      DerivedCategory.hasTorAmplitudeIn A Y a (b + N)
+        ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj K)) :
+    DerivedCategory.hasTorAmplitudeIn A Y a (b + N)
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj K) := by
+  have : IsNoetherianRing A := isNoetherian_of_finite A A
+  have : Module.Finite A M := Module.Finite.of_finite
+  have : Module.FinitePresentation A M := Module.finitePresentation_of_finite A M
+  obtain ⟨c, d, _, hvan⟩ := hK.2
+  exact htest (directImage_tensor_vanishing A f N hN hUDV a b K hTor
+    ⟨d, fun i hi ↦ hvan i (Or.inr hi)⟩ M)
+
 /-- Direct image sends a bounded constructible complex of Tor amplitude `[a,b]` to a
 bounded constructible complex of Tor amplitude `[a,b+N]`, assuming uniform vanishing
 above `N` on every module sheaf.
@@ -227,7 +256,17 @@ theorem sf_directImage_torAmplitude
           (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) ∧
       DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a (b + N)
         ((rightDerivedLowerStar
-          (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) :=
-  sorry
+          (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) := by
+  have : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n hn
+  have hR := isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
+    k (Padic.coefficientExtensionRing l E n) (l ^ n)
+    (coefficient_hcoeff k l _hl E n hn) aX aY f _hf K _hK
+  refine ⟨hR, ?_⟩
+  have : Finite (Padic.coefficientExtensionResidueModule l E n) :=
+    residue_finite l E n hn
+  exact directImage_torAmplitude_of_residue_test (Padic.coefficientExtensionRing l E n)
+    f N _hN _hUDV a b K _hK _hTor (Padic.coefficientExtensionResidueModule l E n)
+    (residue_tor_amplitude_test l E n hn Y a (b + N) _ hR).2
 
 end AlgebraicGeometry.Etale
