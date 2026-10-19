@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "Put $\\mathcal L=\\Loc(\\mathcal G)$ and $\\mathcal L'=\\Loc(\\mathcal G')$, and let $\\mathcal S$ be the full subcategory of $\\mathcal T$ on $K\\in\\mathcal L$ with $F(K)\\in\\mathcal L'$. The hypothesis puts every object of $\\mathcal G$ in $\\mathcal S$. Exactness means that $F$ is additive, commutes with shifts, and maps distinguished triangles to distinguished triangles [def-weil-triangulated-category]. In particular $F(0)\\simeq0$, so zero lies in $\\mathcal S$; $F(K[n])\\simeq F(K)[n]$ shows shift closure. If $K\\to L\\to M\\to K[1]$ is distinguished and $K,M\\in\\mathcal S$, $K,M\\in\\mathcal L$ imply $L\\in\\mathcal L$ by triangle closure; its image is distinguished, and $F(K),F(M)\\in\\mathcal L'$ force $F(L)\\in\\mathcal L'$. Thus $L\\in\\mathcal S$, which is the full triangulated-subcategory criterion [def-weil-triangulated-subcategory]. An isomorphism $K\\simeq L$ induces $F(K)\\simeq F(L)$, proving repleteness. For any small family $K_i\\in\\mathcal S$, its sum belongs to $\\mathcal L$ and $F(\\bigoplus_iK_i)\\simeq\\bigoplus_iF(K_i)$ belongs to $\\mathcal L'$; hence its sum lies in $\\mathcal S$. Thus $\\mathcal S$ is a localizing candidate containing $\\mathcal G$. Minimality from step 1 gives $\\mathcal L\\subseteq\\mathcal S$, proving $F(\\mathcal L)\\subseteq\\mathcal L'$.",
+   "text": "Put L = Loc(G) and L' = Loc(G'). The full inverse image of L' under F is a localizing candidate: exactness gives triangulation and shift closure [def-weil-triangulated-category, def-weil-triangulated-subcategory], functoriality preserves isomorphisms, and preservation of coproducts identifies the image of a coproduct with the coproduct of the images. The generator hypothesis makes this candidate contain G. Apply the defining intersection directly to this candidate to obtain F(L) ⊆ L'. Intersecting the candidate with L, as in the source, gives the same inclusion but is unnecessary.",
    "uses": [
     "def-weil-triangulated-category",
     "def-weil-triangulated-subcategory"
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "For the final example use exactly the ambient module-object derived category and $\\Dctf$ specified in [sk-def-localizing-closure], not a category of derived-complete objects. It is an unbounded derived category under that convention, and has all small direct sums by [det-def-localizing-closure-existence] (1). Its closure of $\\Dctf$ is the same full replete coproduct-closed triangulated intersection by [sk-def-localizing-closure]. Thus steps 1--4 apply with this $\\mathcal T$ and $\\mathcal G$, whenever $F$ satisfies the stated hypotheses. No particular functor, geometric preservation theorem, or additional conclusion about coefficients is asserted.",
+   "text": "Use the unbounded module-object derived category and generators of [sk-def-localizing-closure]. Clause (1) of [det-def-localizing-closure-existence] supplies the u+1-indexed ambient coproducts. Compare the two closure conventions explicitly. In a category with u+1-small Hom types, the nonzero summands of any existing larger coproduct inject into its endomorphisms: its coordinate projections composed with coprojections give distinct idempotents, since composing an equality with one inclusion and projection would force that nonzero summand's identity to vanish. Remove zero summands by extending maps by zero in the coproduct universal property, and shrink the remaining index type. A replete property closed under u+1-indexed sums is therefore closed under every existing larger sum. Conversely shrink or universe-lift a u+1-indexed family into the object universe. Thus the two sets of localizing candidates and their intersections agree. Rewrite by this equality and apply the general principle from steps 1--4; no derived-completeness or geometric assertion is used.",
    "uses": [
     "sk-def-localizing-closure",
     "det-def-localizing-closure-existence"
@@ -84,7 +84,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
-  "place": "both paragraphs; intersection and coproduct universal properties expanded, generic definitions supplied inline"
+  "place": "both paragraphs; intersection and full-subcategory APIs in Mathlib; explicit small-support comparison from proof step 4 of det-def-localizing-closure-existence; Q2 Lean proof 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -245,5 +245,15 @@
   "group": "Q90",
   "result": "fix",
   "note": "Mathematics correct: every clause of maps_localizingClosure matches the node (independent universes, one free sum-index universe w, ObjectProperty generators, CommShift+IsTriangulated, PreservesColimitsOfShape (Discrete I), canonical lift exact and sum-preserving as conclusions); the pro-etale specialization uses the recorded DerivedCategory (homs u+1) and Dctf; sorry-only, docstrings and record verbatim. Blocking mechanical fault: delivered LocalizingAdmissibleCoefficients drops the import of Sheaf.Paper.LocalizingClosure and redeclares IsLocalizingSubcategory/localizingClosure/localizingClosureProEtale, which that unchanged file still declares; RestrictionLocal fails with 'environment already contains CategoryTheory.IsLocalizingSubcategory' (5 importers affected) and two pro-etale closure definitions (u+1/u+2) result. Fix: LAC restored to main plus only IsLocalizingSubcategoryOfSize/localizingClosureOfSize with docstrings (OfSize.{u} = localizingClosure by rfl); item statements textually unchanged, specialization now uses the recorded localizingClosureProEtale with the size identification in its docstring proof; report gets a fix section. nt_compile --json: fixed pair rc 0; with unchanged RestrictionLocal, BrownHypotheses, UnboundedBaseChangeExtension rc 0. Dependency-record note is stale (the fix tool cannot edit it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261019T005402-L-2762204",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
