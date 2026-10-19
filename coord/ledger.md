@@ -17740,3 +17740,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/R4/Sheaf.CategoryTheory.KunDescentLimit (stage 3; reviewer PASS; first push; landing 20261019T231322-L-573709 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/R4/Sheaf.Paper.StratumAmbientHom (stage 3; reviewer PASS; first push; landing 20261019T231324-L-573996 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/StratumAmbientHomEtalePresentation.md)
 - 23:13 L: merged deliver/R5/Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization (stage 3; reviewer PASS; first push; landing 20261019T231326-L-574292 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:13 L: merged deliver/R6/Sheaf.Paper.CompletedReductionSquare (stage 3; reviewer PASS; first push; landing 20261019T231328-L-574549 (proof); batch 20261019T231019; modules 1; new nodes 0)

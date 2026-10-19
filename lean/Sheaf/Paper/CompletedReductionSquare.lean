@@ -113,7 +113,8 @@ remaining two factors are the canonical direct-image/limit and pullback/tower is
 No completeness assumption on ordinary pullback is used. -/
 theorem AdicCoefficientDatum.completionDirectImageComparison_isIso (K : d.derived X) :
     IsIso (d.completionDirectImageComparison (g' := g') (f' := f') K) := by
-  sorry
+  unfold AdicCoefficientDatum.completionDirectImageComparison
+  infer_instance
 
 attribute [instance] AdicCoefficientDatum.completionDirectImageComparison_isIso
 
