@@ -12,10 +12,14 @@ public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarPairing
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProperCohomology
-import WeilConjectures.WeilSheaf.LowerStarPairing
-import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
-import Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison
+import Sheaf.WeilSheaf.AdicFiniteCoefficientBound
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+import WeilConjectures.WeilSheaf.Operations
+import WeilConjectures.WeilSheaf.OpenClosedTriangle
+import WeilConjectures.WeilSheaf.UpperStarConstant
+import WeilConjectures.AlgebraicGeometry.DenseCompactification
+import WeilConjectures.ConstructibleSheaf.LisseLocus
 
 /-!
 # Finiteness of the cohomology of Weil complexes and Frobenius
@@ -61,7 +65,7 @@ only that a Frobenius-equivariant isomorphism exists.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
@@ -194,6 +198,109 @@ noncomputable def WeilSheaf.homologySheafZeroDerivedLowerStarIso {Y Z : Scheme.{
     ((ProEtaleWeilSheaf.lowerStar k₀ l φ).homologyRightDerivedFunctorObjSingleFunctorIso
         F.obj 0 ≪≫ (ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedZeroIsoSelf.app _)
 
+/-- Transfer the finite etale bound to a complex with constant adic underlying object. -/
+private theorem unitOrdinaryBound {Y : Scheme.{u}}
+    [Y.Over (Spec (.of k₀))] [QuasiCompact (Y ↘ Spec (.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (.of k₀))]
+    (K : WeilComplex k₀ l Y) (e : ℕ)
+    (he : topologicalKrullDim (Y ↘ Spec (.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
+    (hK : WeilComplex.forget.obj K ≅ (DerivedCategory.singleFunctor _ 0).obj
+      (ProEtale.AdicSheaf.unit l (Y ↘ Spec (.of k₀)).geometricFiber)) :
+    (WeilComplex.forget.obj
+      ((WeilComplex.derivedLowerStar (Y ↘ Spec (.of k₀))).obj K)).IsLE (2 * e : ℕ) := by
+  let a := Y ↘ Spec (.of k₀)
+  let f := Scheme.Hom.geometricFiberMap a (comp_over a (Spec (.of k₀)))
+  let s := (Spec (.of k₀) ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure
+  have : IsIso s := by
+    change IsIso (pullback.snd (𝟙 (Spec (.of k₀))) _)
+    infer_instance
+  have hb := ProEtale.isLE_rightDerivedFunctor_adicLowerStar_unit_of_finite_bound s f
+    (ringChar_algebraicClosure_ne (k₀ := k₀) (l := l)) (2 * e)
+    (fun Λ _ _ F ↦ by
+      rw [DerivedCategory.isLE_iff]
+      intro r hr
+      have hvan := Etale.hasUniformDirectImageVanishingLE_two_mul Λ f
+        a.geometricFiberToAlgebraicClosure s
+        (Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure a
+          (comp_over a (Spec (.of k₀)))) e he F r hr
+      let C := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+      let νX := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) a.geometricFiber
+      let νY := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ)
+        (Spec (.of k₀) ↘ Spec (.of k₀)).geometricFiber
+      refine IsZero.of_iso (Functor.map_isZero νY hvan)
+        ((DerivedCategory.homologyFunctor _ r).mapIso
+          ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.mapIso
+            ((νX.mapDerivedCategorySingleFunctor 0).app F).symm ≪≫
+            ((ProEtale.rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).app
+              C).symm) ≪≫
+          ((νY.mapDerivedCategoryHomologyFunctorIso r).app _).symm))
+  obtain ⟨E⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso
+    (k₀ := k₀) (l := l) a
+  exact DerivedCategory.TStructure.t.isLE_of_iso
+    (E.app K ≪≫ (ProEtale.adicLowerStar l f).rightDerivedFunctor.mapIso hK).symm _
+
+/-- Forgetting the Weil action identifies the constant complex with the adic unit. -/
+private noncomputable def forgetConstantIso (Y : Scheme.{u}) [Y.Over (Spec (.of k₀))] :
+    WeilComplex.forget.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
+      (DerivedCategory.singleFunctor _ 0).obj
+        (ProEtale.AdicSheaf.unit l (Y ↘ Spec (.of k₀)).geometricFiber) :=
+  ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app _
+
+/-- Pullback preserves the constant underlying adic object. -/
+private noncomputable def pullbackConstantIso {Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of k₀))] [Z.Over (Spec (.of k₀))]
+    (g : Z ⟶ Y) [g.IsOver (Spec (.of k₀))] :
+    WeilComplex.forget.obj ((WeilComplex.upperStar g).obj
+      (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))) ≅
+      (DerivedCategory.singleFunctor _ 0).obj
+        (ProEtale.AdicSheaf.unit l (Z ↘ Spec (.of k₀)).geometricFiber) :=
+  WeilComplex.forget.mapIso
+    ((WeilSheaf.toComplexCompUpperStarIso g).app (WeilSheaf.adicConstant k₀ l Y) ≪≫
+      WeilSheaf.toComplex.mapIso (WeilSheaf.upperStarAdicConstantIso g)) ≪≫
+    forgetConstantIso Z
+
+/-- A zero underlying homology object has zero geometric sections. -/
+private theorem subsingleton_cohomology_of_forget_homology_isZero
+    (K : WeilComplex k₀ l (Spec (.of k₀))) (r : ℤ)
+    (hz : IsZero ((DerivedCategory.homologyFunctor _ r).obj (WeilComplex.forget.obj K))) :
+    Subsingleton (K.cohomologyFrobeniusModule r).carrier := by
+  apply WeilSheaf.subsingleton_globalSections_of_isZero
+  rw [WeilSheaf.isZero_iff_isZero_carrier]
+  exact hz.of_iso
+    (((Endofunctor.IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso r).app K.obj)
+
+/-- For a proper scheme the constant ordinary upper bound also bounds compact support. -/
+private theorem properUnitVanishing {Y : Scheme.{u}}
+    [Y.Over (Spec (.of k₀))] [IsProper (Y ↘ Spec (.of k₀))]
+    (K : WeilComplex k₀ l Y) (e : ℕ)
+    (he : topologicalKrullDim (Y ↘ Spec (.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
+    (hK : WeilComplex.forget.obj K ≅ (DerivedCategory.singleFunctor _ 0).obj
+      (ProEtale.AdicSheaf.unit l (Y ↘ Spec (.of k₀)).geometricFiber))
+    (r : ℤ) (hr : 2 * (e : ℤ) < r) :
+    Subsingleton (K.compactlySupportedCohomology r).carrier := by
+  have := unitOrdinaryBound K e he hK
+  apply subsingleton_cohomology_of_forget_homology_isZero
+  exact (DerivedCategory.isZero_of_isLE _ (2 * e : ℕ) r hr).of_iso
+    ((DerivedCategory.homologyFunctor _ r).mapIso
+      (WeilComplex.forget.mapIso (WeilComplex.derivedLowerShriekObjIsoOfIsProper K)))
+
+/-- Empty geometric fibers have zero compactly supported cohomology. -/
+private theorem properEmptyVanishing {Y : Scheme.{u}}
+    [Y.Over (Spec (.of k₀))] [IsProper (Y ↘ Spec (.of k₀))]
+    [IsEmpty (Y ↘ Spec (.of k₀)).geometricFiber]
+    (K : WeilComplex k₀ l Y) (r : ℤ) :
+    Subsingleton (K.compactlySupportedCohomology r).carrier := by
+  obtain ⟨E⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso
+    (k₀ := k₀) (l := l) (Y ↘ Spec (.of k₀))
+  have hz : IsZero (WeilComplex.forget.obj
+      ((WeilComplex.derivedLowerStar (Y ↘ Spec (.of k₀))).obj K)) :=
+    (Functor.map_isZero _ (ProEtale.isZero_of_isEmpty l (WeilComplex.forget.obj K))).of_iso
+      (E.app K)
+  apply subsingleton_cohomology_of_forget_homology_isZero
+  exact (Functor.map_isZero (DerivedCategory.homologyFunctor _ r) hz).of_iso
+    ((DerivedCategory.homologyFunctor _ r).mapIso
+      (WeilComplex.forget.mapIso (WeilComplex.derivedLowerShriekObjIsoOfIsProper K)))
+
 section Separated
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -251,24 +358,106 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     exact (DerivedCategory.isZero_of_isGE
       (g.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj (i.obj F.obj)))
       0 r hr).of_iso ((DerivedCategory.homologyFunctor _ r).mapIso E)
-  · have hfinite (n : ℕ) :
-        Subsingleton (finiteLevelCompactSupportSections (k₀ := k₀) l X n r) := by
-      let Λ := ULift.{u + 1} (ZMod (l ^ (n + 1)))
-      let f := (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure
-      have : Finite Λ := inferInstance
-      have : HasCompactification f := by
-        dsimp only [f, Scheme.Hom.geometricFiberToAlgebraicClosure]
-        infer_instance
-      have hz := Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt
-        Λ f f (𝟙 _) (Category.comp_id _) e
-        (fun Ω _ _ s ↦ (topologicalKrullDim_pullback_le_of_field f s).trans he)
-        (MonoidalCategory.tensorUnit _) r hr
-      have hΓ := (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map_isZero hz
-      exact ModuleCat.isZero_iff_subsingleton.1
-        ((ModuleCat.restrictScalars _).map_isZero hΓ)
-    obtain ⟨f, hf⟩ :=
-      exists_injective_compactSupportFiniteCoefficientComparison (k₀ := k₀) l X r
-    exact hf.subsingleton
+  · classical
+    obtain ⟨Y, p, j, hp, hj, hcomm, hdense, hdim⟩ :=
+      exists_dense_compactification (X ↘ Spec (.of k₀))
+    let : Y.Over (Spec (.of k₀)) := ⟨p⟩
+    let : p.IsOver (Spec (.of k₀)) := ⟨Category.comp_id p⟩
+    let : IsProper p := hp
+    let : IsProper (Y ↘ Spec (.of k₀)) := hp
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian p
+    have : IsNoetherian Y := ⟨⟩
+    let : IsOpenImmersion j := hj
+    let : j.IsOver (Spec (.of k₀)) := ⟨hcomm⟩
+    let U := j.opensRange
+    let Z := (Scheme.IdealSheafData.vanishingIdeal U.compl).subscheme
+    let i : Z ⟶ Y := U.closedComplement
+    let : Z.Over (Spec (.of k₀)) := ⟨i ≫ p⟩
+    let : i.IsOver (Spec (.of k₀)) := ⟨rfl⟩
+    have : IsClosedImmersion i := inferInstanceAs (IsClosedImmersion U.closedComplement)
+    have : IsProper (Z ↘ Spec (.of k₀)) := inferInstanceAs (IsProper (i ≫ p))
+    have hY : topologicalKrullDim (Y ↘ Spec (.of k₀)).geometricFiber ≤
+        (e : WithBot ℕ∞) := by
+      have hy := topologicalKrullDim_pullback_eq_of_field p (Scheme.specAlgebraicClosure k₀).hom
+      have hx := topologicalKrullDim_pullback_eq_of_field
+        (X ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom
+      change topologicalKrullDim (pullback p (Scheme.specAlgebraicClosure k₀).hom : Scheme) ≤ _
+      rw [hy, hdim]
+      exact hx.symm.le.trans he
+    let K := toComplex.obj (adicConstant k₀ l Y)
+    have : QuasiCompact (j ≫ p) := hcomm.symm ▸ inferInstance
+    have : QuasiCompact j := QuasiCompact.of_comp j p
+    obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+      WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i
+        (by
+          change IsCompl (U : Set Y) (Set.range U.closedComplement.base)
+          rw [U.range_closedComplement]
+          exact isCompl_compl) p K
+    let E₁ : T.obj₁ ≅ (WeilComplex.derivedLowerShriek k₀ l
+        (X ↘ Spec (.of k₀))).obj ((WeilComplex.upperStar j).obj K) :=
+      e₁ ≪≫ (WeilComplex.derivedLowerShriekIsoOfEq hcomm).app _
+    let E₃ : T.obj₃ ≅ (WeilComplex.derivedLowerShriek k₀ l
+        (Z ↘ Spec (.of k₀))).obj ((WeilComplex.upperStar i).obj K) :=
+      e₃
+    have h₂' := properUnitVanishing K e hY (forgetConstantIso Y) r hr
+    have h₂ : Subsingleton (T.obj₂.cohomologyFrobeniusModule r).carrier :=
+      ⟨fun x y ↦ (WeilComplex.cohomologyEquivOfIso e₂ r).toLinearEquiv.injective
+        (h₂'.elim _ _)⟩
+    have h₃' : Subsingleton
+        (((WeilComplex.upperStar i).obj K).compactlySupportedCohomology (r - 1)).carrier := by
+      by_cases hne : Nonempty (Z ↘ Spec (.of k₀)).geometricFiber
+      · have : Nonempty Z := ⟨(Z ↘ Spec (.of k₀)).geometricFiberProj hne.some⟩
+        have : Nonempty Y := ⟨i (Nonempty.some inferInstance)⟩
+        have hzdim : topologicalKrullDim Z < (e : WithBot ℕ∞) := by
+          rw [i.isClosedEmbedding.isEmbedding.topologicalKrullDim_eq_range]
+          change topologicalKrullDim (Set.range U.closedComplement.base) < _
+          rw [U.range_closedComplement]
+          have hlt := topologicalKrullDim_compl_lt_of_dense
+            (topologicalKrullDim_ne_top_of_compactSpace p) hdense j.isOpenEmbedding.isOpen_range
+          refine hlt.trans_le ?_
+          rw [hdim]
+          exact (topologicalKrullDim_pullback_eq_of_field
+            (X ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom).symm.le.trans he
+        obtain ⟨z, hz⟩ : ∃ z : ℕ, topologicalKrullDim Z = (z : WithBot ℕ∞) := by
+          obtain ⟨d, hd⟩ := WithBot.ne_bot_iff_exists.1
+            (ne_bot_of_le_ne_bot (by simp) (topologicalKrullDim_nonneg (X := Z)))
+          obtain ⟨z, rfl⟩ := ENat.ne_top_iff_exists.1
+            (show d ≠ ⊤ by
+              intro h
+              subst d
+              rw [← hd] at hzdim
+              exact not_lt_of_ge le_top hzdim)
+          exact ⟨z, hd.symm⟩
+        have hze : z < e := by exact_mod_cast hz ▸ hzdim
+        have hZdim : topologicalKrullDim
+            (Z ↘ Spec (.of k₀)).geometricFiber ≤ (z : WithBot ℕ∞) := by
+          change topologicalKrullDim
+            (pullback (Z ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom : Scheme) ≤ _
+          rw [topologicalKrullDim_pullback_eq_of_field, hz]
+        apply properUnitVanishing ((WeilComplex.upperStar i).obj K) z hZdim
+          (pullbackConstantIso i)
+        omega
+      · let := not_nonempty_iff.1 hne
+        exact properEmptyVanishing ((WeilComplex.upperStar i).obj K) (r - 1)
+    have h₃ : Subsingleton (T.obj₃.cohomologyFrobeniusModule (r - 1)).carrier :=
+      ⟨fun x y ↦ (WeilComplex.cohomologyEquivOfIso E₃ (r - 1)).toLinearEquiv.injective
+        (h₃'.elim _ _)⟩
+    have hinj : Function.Injective (WeilComplex.cohomologyMap T.mor₁ r) := by
+      rw [injective_iff_map_eq_zero]
+      intro x hx
+      obtain ⟨y, rfl⟩ :=
+        (WeilComplex.exact_cohomologyδ_right T (r - 1) r (by omega) hT x).1 hx
+      rw [h₃.elim y 0, map_zero]
+    let eU : (WeilComplex.upperStar j).obj K ≅
+        toComplex.obj (adicConstant k₀ l X) :=
+      (toComplexCompUpperStarIso j).app (adicConstant k₀ l Y) ≪≫
+        toComplex.mapIso (upperStarAdicConstantIso j)
+    let EU := WeilComplex.cohomologyEquivOfIso
+      (E₁ ≪≫ (WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (.of k₀))).mapIso eU) r
+    have : Subsingleton (T.obj₁.cohomologyFrobeniusModule r).carrier :=
+      ⟨fun x y ↦ hinj (h₂.elim _ _)⟩
+    exact EU.toLinearEquiv.symm.injective.subsingleton
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 

@@ -87,59 +87,54 @@
    }
   },
   {
-   "text": "*Step 5 (constant coefficients, compact support, integral finite level).* Let $K=E_Y$ and assume $\\dim Y\\leq e$ [def-kun-dimension]. By [lem-weil-constant-coefficient-objects-constructible] (2), $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ whose reductions are $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ in degree $0$; for every sheaf $\\mathcal M$ of $A_{E,n}$-modules, $(A_{E,n})_Y\\otimes^L_{A_{E,n}}\\mathcal M=\\mathcal M$ sits in degree $0$, so all reductions have Tor amplitude in $[0,0]$ [def-weil-finite-tor-amplitude]. Apply [lem-coef-integral-compact-support] to $f=a_Y$ (separated of finite type, $\\dim Y\\leq e$) and $\\widehat{\\mathcal O}_{E,Y}$ with Tor interval $[0,0]$: $N:=Ra_{Y!}\\widehat{\\mathcal O}_{E,Y}\\in D^b_c(s,\\mathcal O_E)$ (the integral compact-support functor of [def-weil-integral-rational-qbar-compact-support]), $N\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong Ra_{Y!,n}(A_{E,n})_Y$, and these reductions have Tor amplitude in $[0,2e]$. For $n=1$, $A_{E,1}$ is the residue field of $\\mathcal O_E$; taking $\\mathcal M=(A_{E,1})_s$ in the definition of Tor amplitude gives $\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1})=0$ for $r\\notin[0,2e]$.",
+   "text": "Step 5 (ordinary constant-adic upper bound). For any finite-type scheme T over k0 of geometric dimension at most d, apply lem-sf-etale-direct-image-vanishing to its geometric structure map. The etale/pro-etale derived direct-image comparison transfers this bound to pro-etale sheaves of etale origin, for every finite coefficient ring. Apply lem-pod-adic-unit-direct-image-finite-bound with b=2d. Forgetting the Weil action commutes with ordinary derived direct image by prop-weil-operations, so the constant Weil complex, and any complex whose forgotten object is that constant unit in degree zero, has ordinary cohomology zero above 2d. All identifications are functorial isomorphisms; no arbitrary lattice is selected.",
    "uses": [
-    "def-kun-dimension",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "def-weil-finite-tor-amplitude",
-    "lem-coef-integral-compact-support",
-    "def-weil-integral-rational-qbar-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 15.1, p. 105 (cd(X) <= 2 dim X for a variety over an algebraically closed field) and Proposition 18.3, p. 120, at finite level, here through lem-coef-integral-compact-support; the blueprint ## Proof, Steps 2 and 7 ('For K=E_Y Step 2 gives H^i_c(Y,E)=0 for i>2e')"
-   }
-  },
-  {
-   "text": "*Step 6 (passage to the point and to $\\mathcal O_E$-modules).* Put $C=\\Gamma(s,N)=\\operatorname{Fib}_s(N)\\in D^b_{\\mathrm{fg}}(\\mathcal O_E)$ ([def-weil-finite-coefficient-point] item 2, [def-weil-point-fg-complete-complexes]): $H^r(C)=0$ for all but finitely many $r$ and each $H^r(C)$ is a finitely generated $\\mathcal O_E$-module. By [lem-pod-point-sections-derived-reduction] (with $n=1$), $H^r(C\\otimes^L_{\\mathcal O_E}A_{E,1})\\cong\\Gamma(s,\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1}))$, which is $0$ for $r\\notin[0,2e]$ by Step 5. Since $\\mathcal O_E$ is a discrete valuation ring with uniformizer $\\varpi_E$ and residue field $A_{E,1}$ [def-weil-l-adic-coefficient-extension], [lem-pod-dvr-complex-amplitude-mod-uniformizer] (with $a=0$, $b=2e$) gives $H^r(C)=0$ for $r\\notin[0,2e]$.",
-   "uses": [
-    "def-weil-finite-coefficient-point",
-    "def-weil-point-fg-complete-complexes",
-    "lem-pod-point-sections-derived-reduction",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-pod-dvr-complex-amplitude-mod-uniformizer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4"
-   }
-  },
-  {
-   "text": "*Step 7 (rationalization: $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$).* $E_Y$ is the image of $\\widehat{\\mathcal O}_{E,Y}$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-constant-weil-structure], so by [def-weil-integral-rational-qbar-compact-support] $Ra_{Y!}E_Y$ is the object $N$ of Step 5 regarded in $D^b_c(s,E)$, and by [def-weil-finite-coefficient-point] (item 3) $\\RGammac(Y,E_Y)=\\operatorname{Fib}_s(N)=\\Gamma(s,N)\\otimes_{\\mathcal O_E}E=C\\otimes_{\\mathcal O_E}E$ [def-weil-ordinary-compact-cohomology]. $E=\\mathcal O_E[1/\\varpi_E]$ is a localization, hence flat over $\\mathcal O_E$, so $H^r(C\\otimes_{\\mathcal O_E}E)=H^r(C)\\otimes_{\\mathcal O_E}E$, which vanishes for $r\\notin[0,2e]$ by Step 6. Thus $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$.",
-   "uses": [
+    "lem-sf-etale-direct-image-vanishing",
+    "lem-pod-adic-unit-direct-image-finite-bound",
+    "prop-weil-operations",
     "def-weil-constant-weil-structure",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorems 15.1 and 19.2; §8.15 and Proposition 18.3(a), with §18 for compactification and proper coincidence"
+   }
+  },
+  {
+   "text": "Step 6 (a proper compactification and its boundary). Choose a dense proper compactification j:X -> Y with dim Y=dim X, using exists_dense_compactification from the proved dense-open dimension comparison. Let Z be its reduced closed complement. Field extension preserves dimension. Hence dim Y <= e. If the geometric fiber of Z is nonempty, Z and Y are nonempty, and the proved theorem topologicalKrullDim_compl_lt_of_dense gives dim Z < dim Y <= e. Since Z is finite type and nonempty its dimension is some natural number z<e. By Step 5 and proper compact-support coincidence, H_c^r(Y)=0 and H_c^(r-1)(Z)=0 for r>2e, since r-1>2z. If the geometric fiber of Z is empty its adic sheaf category is zero, so its compact-support cohomology vanishes in every degree. Pullback of the constant Weil object along j and Z -> Y is constant.",
+   "uses": [
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "def-kun-dimension",
+    "prop-weil-proper-compact-coincidence",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorems 15.1 and 19.2; §8.15 and Proposition 18.3(a), with §18 for compactification and proper coincidence"
+   }
+  },
+  {
+   "text": "Step 7 (compact-support vanishing by localization). Apply Ra_Y! to the open-closed triangle for the constant Weil complex on Y. The long exact cohomology sequence has H_c^(r-1)(Z) -> H_c^r(X) -> H_c^r(Y). Both outer groups vanish by Step 6, so the second map is injective into zero and H_c^r(X)=0. For r<0 use exact extension by zero followed by a right derived ordinary direct image of an object in degree zero; its negative homology is zero. This proves the unchanged constant compact-support range. The stronger comparison embedding lem-pod-compact-support-finite-coefficient-comparison is unused and withdrawn. The unit perfectness claims remain untouched.",
+   "uses": [
+    "prop-functor-package",
     "def-weil-ordinary-compact-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "p. 124: H^r(X,Q_l) = H^r(X,Z_l) (x) Q_l; Deligne, Weil I, (1.10), p. 277 (zero for i > 2 dim X)"
+    "place": "Theorems 15.1 and 19.2; §8.15 and Proposition 18.3(a), with §18 for compactification and proper coincidence"
    }
   },
   {
-   "text": "*Step 8 (ordinary cohomology of proper $Y$, and the case of $X$).* If $Y$ is proper, [prop-weil-proper-compact-coincidence] gives $H^i(Y,E)\\cong H^i_c(Y,E)$, so $H^i(Y,E)=0$ for $i<0$ or $i>2e$ by Step 7. Now let $X_0$ be smooth, proper, geometrically connected of pure dimension $d$ [def-weil-geometric-hypotheses], $X=X_0\\times_{k_0}k$, and $E=\\Ql$. By [def-weil-geometric-hypotheses] every irreducible component of $X$ has Krull dimension $d$ [def-weil-pure-dimension]; a chain of nonempty irreducible closed subsets of $X$ lies in an irreducible component (its largest member is irreducible, hence contained in a maximal irreducible closed subset), so $\\dim X\\leq d$ [def-kun-dimension]. $X$ is proper by [lem-weil-pbc-proper-base-change]. The case $Y=X$, $e=d$, $E=\\Ql$ of the first sentence gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. Implementation of the smooth constant-sheaf ordinary range at Qbar_ell: negative degrees vanish because a right derived functor applied to a sheaf in degree zero is nonnegative. For positive degrees use the dimension bound for the smooth geometric fiber and [lem-sf-etale-direct-image-vanishing], transport the resulting finite-coefficient etale bound to pro-etale sheaves by the comparison isomorphism, then apply [lem-pod-adic-unit-direct-image-finite-bound] with b=2d. Forgetting Weil structures commutes with this derived direct image. Its cohomology sheaf is zero, hence so are its global sections. This implements the ordinary smooth clause without invoking the compact-support comparison in that clause; the previous steps still serve the other claims of this proposition.",
+   "text": "*Step 8 (ordinary cohomology of proper $Y$, and the case of $X$).* If $Y$ is proper, [prop-weil-proper-compact-coincidence] gives $H^i(Y,E)\\cong H^i_c(Y,E)$, so $H^i(Y,E)=0$ for $i<0$ or $i>2e$ by Step 7. Now let $X_0$ be smooth, proper, geometrically connected of pure dimension $d$ [def-weil-geometric-hypotheses], $X=X_0\\times_{k_0}k$, and $E=\\Ql$. By [def-weil-geometric-hypotheses] every irreducible component of $X$ has Krull dimension $d$ [def-weil-pure-dimension]; a chain of nonempty irreducible closed subsets of $X$ lies in an irreducible component (its largest member is irreducible, hence contained in a maximal irreducible closed subset), so $\\dim X\\leq d$ [def-kun-dimension]. $X$ is proper by [lem-weil-pbc-proper-base-change]. The case $Y=X$, $e=d$, $E=\\Ql$ of the first sentence gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$.",
    "uses": [
     "prop-weil-proper-compact-coincidence",
     "def-weil-geometric-hypotheses",
     "def-weil-pure-dimension",
     "def-kun-dimension",
-    "lem-weil-pbc-proper-base-change",
-    "lem-sf-etale-direct-image-vanishing",
-    "lem-pod-adic-unit-direct-image-finite-bound"
+    "lem-weil-pbc-proper-base-change"
    ],
    "elementary": true,
    "source": {
@@ -180,19 +175,14 @@
   "lem-weil-pbc-proper-base-change",
   "prop-weil-proper-compact-coincidence",
   "lem-pod-proper-coincidence-frobenius",
-  "def-kun-dimension",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "def-weil-finite-tor-amplitude",
-  "lem-coef-integral-compact-support",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-point-fg-complete-complexes",
-  "lem-pod-point-sections-derived-reduction",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-pod-dvr-complex-amplitude-mod-uniformizer",
-  "def-weil-geometric-hypotheses",
-  "def-weil-pure-dimension",
   "lem-sf-etale-direct-image-vanishing",
   "lem-pod-adic-unit-direct-image-finite-bound",
+  "prop-weil-operations",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "def-kun-dimension",
+  "prop-functor-package",
+  "def-weil-geometric-hypotheses",
+  "def-weil-pure-dimension",
   "lem-weil-geometrically-connected-algebraic-closure",
   "def-weil-finite-field-fiber",
   "lem-pod-connected-constant-h0",
@@ -200,8 +190,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-  "place": "Original proof, with Step 8 ordinary smooth Qbar_ell implementation by F3, 2026-10-16"
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Theorems 15.1 and 19.2; §8.15 and Proposition 18.3(a); Y5 uses the existing ordinary finite-coefficient bound, dense compactification and localization. Steps 5-7 follow the Lean proof in Finiteness; other clauses are retained."
  },
  "mathlib_searches": [
   {
@@ -269,18 +259,17 @@
  "unit": "sk-lem-finite",
  "tool_uses": [
   "prop-weil-proper-compact-coincidence",
-  "lem-pod-point-sections-derived-reduction",
   "lem-pod-proper-coincidence-frobenius"
  ],
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "C-6d218",
+  "group": "Y5",
   "result": "pass",
-  "landing": "20261015T194213-L-1175013",
+  "landing": "20261019T112624-L-3962618",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn item module and adapted unclaimed Finiteness (unchanged signatures, 6 sorry-free private helpers, localization route) against the base, both node files, the change record and unit sk-lem-finite; compiled the delivery and all 14 importers of Finiteness; #print axioms shows only sorryAx from statements that were already sorry; all 8 new imports needed"
  },
  "lean": {
   "branch": "master",
