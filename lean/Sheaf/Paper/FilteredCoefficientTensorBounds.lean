@@ -98,7 +98,20 @@ theorem filteredCoefficientTensorComplex_laws (R : Sheaf (ProEt.topology Y) Comm
     (∀ i j k : ℤ,
       filteredCoefficientTensorDifferential Y B R ρ P U i j ≫
         filteredCoefficientTensorDifferential Y B R ρ P U j k = 0) := by
-  sorry
+  constructor
+  · intro i j hij
+    unfold filteredCoefficientTensorDifferential
+    rw [SheafOfModules.changeOfRingsComplex_shape ρ P i j hij]
+    exact
+      (SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms
+        ((adicLisseConstantModules Y B).obj U)).map_zero _ _
+  · intro i j k
+    unfold filteredCoefficientTensorDifferential
+    rw [← Functor.map_comp]
+    rw [SheafOfModules.changeOfRingsComplex_comp ρ P i j k]
+    exact
+      (SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms
+        ((adicLisseConstantModules Y B).obj U)).map_zero _ _
 
 /-- The actual B_Y-complex P tensor_R U_Y, formed by ordinary sheaf tensors.
 Its associative presentation first extends P to B_Y and then tensors with U_Y.
