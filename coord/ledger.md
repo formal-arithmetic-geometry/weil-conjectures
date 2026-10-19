@@ -16998,3 +16998,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: returned deliver/Q38/lem-per-nisnevich-cover-limit-descent (reviewer RETURN: Route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json). The listed finding is confirmed: )
 - 03:57 L: returned deliver/Q81/lem-per-oriented-special-fibre-totalization (reviewer RETURN: I return this delivery because the item has been dropped from the route; the mathematics is not the problem. Side coord/)
 - 03:57 L: returned deliver/Q66/lem-per-normal-surface-modification-torsion-bound (reviewer RETURN: Route-pivot fault (F1 / route-pivot rule): the item itself is in the 2026-10-19 artin-gabber section of coord/route-pivo)
+- 03:57 L: returned deliver/Q126/lem-per-locally-noetherian-closed-specialization (reviewer RETURN: F (route correction of 2026-10-19, coord/repair-notes/lem-per-artin-gabber-affine-curve.json). The mechanical finding is)
