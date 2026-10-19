@@ -6,16 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageFinitenessInput
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 
@@ -63,7 +58,67 @@ theorem hasDirectImageFinitenessInput_of_isSepClosed
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (hΛ : ∀ a : Λ, N • a = 0) :
     HasDirectImageFinitenessInput k N hN Λ hΛ := by
-  sorry
+  have hpos : 0 < N.natAbs := by
+    apply Int.natAbs_pos.mpr
+    intro h
+    apply hN.ne_zero
+    simp [h]
+  have hcast : (N : Λ) = 0 := by
+    simpa only [zsmul_eq_mul, mul_one] using hΛ 1
+  have habs : (N.natAbs : Λ) = 0 ∧ IsUnit (N.natAbs : k) := by
+    rcases Int.natAbs_eq N with h | h
+    · rw [h] at hcast hN
+      exact ⟨by simpa using hcast, by simpa using hN⟩
+    · rw [h] at hcast hN
+      exact ⟨by simpa using hcast, by simpa using hN⟩
+  have hcoeff : Etale.IsSmoothBaseChangeCoefficients N.natAbs Λ (Spec (.of k)) := by
+    refine ⟨hpos, inferInstance, habs.1, ?_⟩
+    simpa using habs.2.map (ΓSpecIso (.of k)).inv.hom
+  constructor
+  · intro S T aS aT _ _ _ _ uST _ _ hu F hF q
+    have : IsConstructibleSheaf F := (isConstructibleEtaleModuleSheaf_iff F).1 hF
+    have hs := Etale.DerivedCategory.boundedConstructible_singleFunctor_obj F 0
+    have hsingle : Etale.DerivedCategory.isBoundedConstructible Λ S
+        ((DerivedCategory.singleFunctor _ 0).obj F) := by
+      refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff _).2 (hs.2 i),
+        0, 0, le_rfl, fun i hi ↦ ?_⟩
+      rcases hi with hi | hi
+      · exact DerivedCategory.isZero_of_isGE _ 0 i hi
+      · exact DerivedCategory.isZero_of_isLE _ 0 i hi
+    exact (Etale.isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
+      k Λ N.natAbs hcoeff aS aT uST hu _ hsingle).1 (q : ℤ)
+  · intro d K _ _ _ W aW _ _ hd
+    let : W.Over (Spec (.of K)) := ⟨aW⟩
+    have : LocallyOfFiniteType (W ↘ Spec (.of K)) :=
+      inferInstanceAs (LocallyOfFiniteType aW)
+    have : QuasiCompact (W ↘ Spec (.of K)) := inferInstanceAs (QuasiCompact aW)
+    cases isEmpty_or_nonempty W with
+    | inl hW =>
+      intro F _ q _
+      have : (Etale.rightDerivedGlobalSections AddCommGrpCat.{u + 1} W).Additive :=
+        inferInstanceAs ((Sheaf.Γ W.smallEtaleTopology
+          AddCommGrpCat.{u + 1}).rightDerivedFunctor.Additive)
+      have : (Etale.cohomology AddCommGrpCat.{u + 1} W q).Additive :=
+        inferInstanceAs ((_ ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1}
+          (q : ℤ)).Additive)
+      apply AddCommGrpCat.isZero_iff_subsingleton.mp
+      exact (Etale.cohomology AddCommGrpCat.{u + 1} W q).map_isZero
+        ((DerivedCategory.singleFunctor _ 0).map_isZero
+          (Scheme.Etale.isZero_sheaf_of_isEmpty F))
+    | inr hW =>
+      have hbot : topologicalKrullDim W ≠ ⊥ := by
+        rw [topologicalKrullDim, Ne, Order.krullDim_eq_bot_iff, not_isEmpty_iff]
+        obtain ⟨x⟩ := hW
+        exact ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+      obtain ⟨m, hm⟩ := WithBot.ne_bot_iff_exists.mp hbot
+      have hmle : m ≤ (d : ℕ∞) := by exact_mod_cast hm.trans_le hd
+      have hmtop : m ≠ ⊤ := ne_top_of_le_ne_top (ENat.natCast_ne_top d) hmle
+      obtain ⟨e, rfl⟩ := ENat.ne_top_iff_exists.mp hmtop
+      have he : e ≤ d := by exact_mod_cast hmle
+      have hbound := hasTorsionEtaleCohomologicalDimensionLE_of_finiteType K 0 e
+        (hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed K) W hm.symm
+      intro F hF q hq
+      exact hbound F hF q (by omega)
 
 end AlgebraicGeometry.Scheme
 
