@@ -16,7 +16,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.RingTheory.PowerSeriesNormalDomain
+import WeilConjectures.RingTheory.PowerSeriesNormalDomain
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
 import Sheaf.AlgebraicGeometry.NormalizationSingularSkyscraper
 

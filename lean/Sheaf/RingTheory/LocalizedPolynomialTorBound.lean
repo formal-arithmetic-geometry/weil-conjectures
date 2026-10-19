@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.RingTheory.PolynomialTorBound
-import Sheaf.RingTheory.TorVanishingLocalizedBase
+import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Transfer of Tor bounds to localized polynomial rings
 Source: Stacks Project, Tag 068X.

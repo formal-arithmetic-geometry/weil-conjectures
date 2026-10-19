@@ -21,7 +21,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 
 import Sheaf.Paper.LimitTowerEssentiallyFinitePresentation
 import Sheaf.Algebra.FinitePresentationColimit
-import Sheaf.RingTheory.TensorLocalizationTowerTransition
+import WeilConjectures.RingTheory.TensorLocalizationTowerTransition
 import Mathlib.RingTheory.RingHom.EssFiniteType
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Localization.Submodule

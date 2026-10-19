@@ -6,8 +6,8 @@ Authors: SHEAF group W3
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
-import Sheaf.AlgebraicGeometry.FreeSheafDualTranspose
-public import Sheaf.AlgebraicGeometry.AffineBasisDualMatrix
+import WeilConjectures.AlgebraicGeometry.FreeSheafDualTranspose
+public import WeilConjectures.AlgebraicGeometry.AffineBasisDualMatrix
 
 /-! # Finite basis dual comparison on an affine open
 

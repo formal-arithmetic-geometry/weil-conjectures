@@ -87,13 +87,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.ClosedEmbeddingRestrictionTransport",
-  "file": "lean/Sheaf/Topology/ClosedEmbeddingRestrictionTransport.lean",
+  "module": "WeilConjectures.Topology.ClosedEmbeddingRestrictionTransport",
+  "file": "lean/WeilConjectures/Topology/ClosedEmbeddingRestrictionTransport.lean",
   "declaration": "TopCat.closed_embedding_restriction_transport_square",
   "statement": "theorem closed_embedding_restriction_transport_square\n    {X Z : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsEmbedding i)\n    (Y : TopCat.{u + 1}) (e : Y ≃ₜ X) :\n    letI : ∀ P : (Opens X)ᵒᵖ ⥤ Type (u + 1),\n        (Opens.map i).op.HasPointwiseLeftKanExtension P :=\n      fun P U ↦ @Types.hasColimit.{u, u + 1, u}\n        (CostructuredArrow.{u, u, u, u} (Opens.map i).op U)\n        inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)\n    let A := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Opens.map i) (Type (u + 1))\n      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)\n    let D : Set Y := e ⁻¹' Set.range i\n    let j : TopCat.of D ⟶ Y := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩\n    let B := Sheaf.pullbackPushforwardAdjunction (Type (u + 1)) j\n    ∀ G : X.Sheaf (Type (u + 1)),\n      ∃ (F : Y.Sheaf (Type (u + 1)))\n        (a : G.1.obj (op ⊤) ≃ F.1.obj (op ⊤))\n        (b : ((Functor.sheafPullbackConstruction.sheafPullback (Opens.map i)\n          (Type (u + 1)) (Opens.grothendieckTopology X)\n          (Opens.grothendieckTopology Z)).obj G).1.obj (op ((Opens.map i).obj ⊤)) ≃\n          ((Sheaf.pullback (Type (u + 1)) j).obj F).1.obj (op ((Opens.map j).obj ⊤))),\n        ∀ s, b ((A.unit.app G).hom.app (op ⊤) s) =\n          (B.unit.app F).hom.app (op ⊤) (a s)",
   "branch": "sheaf-dag",
   "by": "U2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ClosedEmbeddingRestrictionTransport; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

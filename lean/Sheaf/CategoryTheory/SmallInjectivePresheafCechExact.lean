@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
-import Sheaf.CategoryTheory.SmallCechFreeComparison
+import WeilConjectures.CategoryTheory.SmallCechFreeComparison
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!

@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.Algebra.FiniteRelationMatrixLift
-import Sheaf.Algebra.FiniteRelationQuotientComparison
+import WeilConjectures.Algebra.FiniteRelationMatrixLift
+import WeilConjectures.Algebra.FiniteRelationQuotientComparison
 
 /-!
 # Descent of a finite relation cokernel

@@ -11,9 +11,9 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.RingTheory.CompletionRestrictionFlatQuotients
+import WeilConjectures.RingTheory.CompletionRestrictionFlatQuotients
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.Flat.FlatModulePowers
+import WeilConjectures.RingTheory.Flat.FlatModulePowers
 
 /-!
 # Flatness of completion along a flat local map

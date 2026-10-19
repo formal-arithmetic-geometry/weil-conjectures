@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.AffinePushforwardStalkLocalization
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardStalkLocalization
 import Mathlib.RingTheory.Regular.Flat
 
 /-! # Boundary depth transferred from a finite structure algebra

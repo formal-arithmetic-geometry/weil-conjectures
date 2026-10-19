@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExact
+import WeilConjectures.CategoryTheory.Sites.SiteCechFreeComplexExact
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
 
 /-!

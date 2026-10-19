@@ -92,13 +92,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedLowerTruncationUnitBridge",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedLowerTruncationUnitBridge.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationUnitBridge",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedLowerTruncationUnitBridge.lean",
   "declaration": "AlgebraicGeometry.derived_lower_truncation_unit_bridge",
   "statement": "theorem derived_lower_truncation_unit_bridge\n    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    (I : CochainComplex C ℤ) (n : ℤ) :\n    let J := (F.mapHomologicalComplex (.up ℤ)).obj I\n    let H := DerivedCategory.homologyFunctor D n\n    let e := ((HomotopyCategory.homologyFunctorFactors D (.up ℤ) n).app J).symm ≪≫\n      ((DerivedCategory.homologyFunctorFactorsh D n).app\n        ((HomotopyCategory.quotient D (.up ℤ)).obj J)).symm\n    let U := F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj I)\n    let q := F.rightDerivedFunctor.map\n      ((DerivedCategory.quotientCompQhIso C).hom.app I ≫\n        (DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj I))\n    ∃ d : ((F.mapHomologicalComplex (.up ℤ)).obj (I.truncGE n)).homology n ≅\n        H.obj (F.rightDerivedFunctor.obj\n          ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj I))),\n      e.hom ≫ H.map U ≫ H.map q =\n        HomologicalComplex.homologyMap\n          ((F.mapHomologicalComplex (.up ℤ)).map (I.πTruncGE n)) n ≫ d.hom",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.DerivedLowerTruncationUnitBridge; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

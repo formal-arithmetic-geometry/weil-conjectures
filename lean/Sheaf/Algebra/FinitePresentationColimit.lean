@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.Algebra.FiniteRelationCokernelColimit
-import Sheaf.Algebra.FinitePresentationRestrictedHomColimit
-import Sheaf.Algebra.FiniteTensorVanishingColimit
+import WeilConjectures.Algebra.FinitePresentationRestrictedHomColimit
+import WeilConjectures.Algebra.FiniteTensorVanishingColimit
 
 /-!
 # Finitely presented modules over a directed ring colimit

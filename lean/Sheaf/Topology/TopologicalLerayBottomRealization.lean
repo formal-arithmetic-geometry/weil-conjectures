@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
 import Sheaf.Topology.TopologicalLerayCartanEilenbergCocycle
-import Sheaf.Topology.TopologicalResolutionCocycleLift
+import WeilConjectures.Topology.TopologicalResolutionCocycleLift
 
 /-! # Realization of the canonical Leray bottom edge -/
 

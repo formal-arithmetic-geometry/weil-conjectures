@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.Topology.SpectralClosedRestriction
-import Sheaf.Topology.ClosedEmbeddingRestrictionTransport
+import WeilConjectures.Topology.ClosedEmbeddingRestrictionTransport
 
 /-!
 # Zariski restriction along a closed immersion with connected point closures

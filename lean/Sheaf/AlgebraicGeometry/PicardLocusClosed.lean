@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.ClosedImmersionOfValuativeFactorization
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionOfValuativeFactorization
 import Sheaf.AlgebraicGeometry.PicardLocusClosedValuativeFactorization
 
 /-!

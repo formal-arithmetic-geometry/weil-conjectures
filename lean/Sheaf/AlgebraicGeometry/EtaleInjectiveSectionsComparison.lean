@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
-import Sheaf.AlgebraicGeometry.EtaleSectionsTriangleNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 
 /-! # Termwise sections and derived pullback cohomology
 

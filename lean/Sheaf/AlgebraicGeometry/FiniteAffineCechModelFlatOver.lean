@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.AffineAssociatedModuleFlatOver
+import WeilConjectures.AlgebraicGeometry.AffineAssociatedModuleFlatOver
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.RingHom.Flat
 

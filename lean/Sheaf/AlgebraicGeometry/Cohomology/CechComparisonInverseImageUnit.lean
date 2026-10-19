@@ -6,7 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 import Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement
 import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor

@@ -16,7 +16,7 @@ import Mathlib.LinearAlgebra.Prod
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
-import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 
 /-!
 # Local bijectivity of split determinant linear maps

@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
-import Sheaf.AlgebraicGeometry.LeftExactTruncationCycleFormula
-import Sheaf.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
+import WeilConjectures.AlgebraicGeometry.LeftExactTruncationCycleFormula
+import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
 
 /-! # The cycle formula for the bottom derived comparison
 

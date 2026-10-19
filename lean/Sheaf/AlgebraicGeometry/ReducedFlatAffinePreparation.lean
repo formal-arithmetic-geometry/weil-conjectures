@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
-import Sheaf.AlgebraicGeometry.AffineReductionPreparation
-import Sheaf.AlgebraicGeometry.AffinePreparationRestriction
+import WeilConjectures.AlgebraicGeometry.AffineReductionPreparation
+import WeilConjectures.AlgebraicGeometry.AffinePreparationRestriction
 
 /-! # Reduction and the first generic-flat shrinking
 

@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Mathlib.RingTheory.Noetherian.Nilpotent
-import Sheaf.AlgebraicGeometry.AmpleIso
+import WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmplePullback
 import Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening
 

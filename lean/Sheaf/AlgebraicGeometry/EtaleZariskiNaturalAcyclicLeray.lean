@@ -13,8 +13,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
-import Sheaf.AlgebraicGeometry.EtaleCohomologyNaturalDerivedEvaluation
-import Sheaf.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyNaturalDerivedEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray
 
 /-! # Natural acyclic Leray with two Ext models
 

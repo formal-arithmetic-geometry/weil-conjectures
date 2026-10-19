@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import Sheaf.AlgebraicGeometry.SignedCechExtension
+import WeilConjectures.AlgebraicGeometry.SignedCechExtension
 
 /-!
 # Ordered restriction admits a cochain section

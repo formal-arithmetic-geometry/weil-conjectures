@@ -85,13 +85,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LeftExactTruncationCycleFormula",
-  "file": "lean/Sheaf/AlgebraicGeometry/LeftExactTruncationCycleFormula.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LeftExactTruncationCycleFormula",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LeftExactTruncationCycleFormula.lean",
   "declaration": "AlgebraicGeometry.leftExact_truncation_cycle_formula",
   "statement": "theorem leftExact_truncation_cycle_formula\n    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [Abelian D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    (I : CochainComplex C ℤ) (n : ℤ) :\n    let J := (F.mapHomologicalComplex (.up ℤ)).obj I\n    let K := (F.mapHomologicalComplex (.up ℤ)).obj (I.truncGE n)\n    let c := (J.sc n).liftCycles (F.map (I.sc n).homologyData.left.i) (by\n      change F.map (I.sc n).homologyData.left.i ≫ F.map (I.sc n).g = 0\n      rw [← F.map_comp, (I.sc n).homologyData.left.wi, F.map_zero]) ≫\n      (J.sc n).homologyπ\n    ∃ a : K.homology n ≅ F.obj (I.sc n).homologyData.left.H,\n      c ≫ HomologicalComplex.homologyMap\n        ((F.mapHomologicalComplex (.up ℤ)).map (I.πTruncGE n)) n ≫ a.hom =\n        F.map (I.sc n).homologyData.left.π",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.LeftExactTruncationCycleFormula; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

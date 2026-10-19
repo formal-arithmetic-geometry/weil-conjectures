@@ -6,9 +6,9 @@ Authors: SHEAF group NJ
 module
 
 public import Sheaf.RingTheory.IndEtaleUniverseTransport
-public import Sheaf.RingTheory.ProEtale.ClosedLiftMap
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction
+import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.RingTheory.HenselianOfEtaleSectionLifting
 import Mathlib.RingTheory.Etale.Basic

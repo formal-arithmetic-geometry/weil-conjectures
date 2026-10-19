@@ -13,7 +13,7 @@ public import Mathlib.Algebra.DirectSum.Module
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.Algebra.Homology.TensorKunnethNat
-import Sheaf.Algebra.Homology.TensorTotalExtendNaturalIso
+import WeilConjectures.Algebra.Homology.TensorTotalExtendNaturalIso
 
 /-! # Tensor Kunneth in natural degrees
 

@@ -30,7 +30,7 @@ import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
-import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
+import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Cohen-Macaulay loci under extension of fields and base change

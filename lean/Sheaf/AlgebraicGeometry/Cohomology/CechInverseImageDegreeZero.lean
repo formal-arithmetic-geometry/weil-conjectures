@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 
 /-! # Degree-zero normalization under inverse image
 
