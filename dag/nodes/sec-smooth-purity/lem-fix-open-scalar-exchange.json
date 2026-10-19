@@ -20,72 +20,32 @@
  ],
  "proof": [
   {
-   "text": "For each $T$, [lem-pur-sheaf-ring-derived-coefficient-adjunction] gives $S_T\\dashv\\operatorname{Res}_T$ on the ordinary unbounded categories, with unit $x\\mapsto x\\otimes1$ on K-flat representatives. By [lem-cbc-proetale-extension-zero], $j_!^R\\dashv j_R^{-1}$. The two composite left adjoints $S_Xj_!^A$ and $j_!^BS_U$ therefore have right adjoints $j_A^{-1}\\operatorname{Res}_X$ and $\\operatorname{Res}_Uj_B^{-1}$, identified by the inverse-image comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. Taking the adjoint of this identity gives the canonical isomorphism $\\beta_j$; the inverse identity gives its inverse, since the adjunction bijections [def-weil-pbc-adjunction-mate] and triangle identities carry their composites to identities. This is the specified normalization: under the scalar adjunction the tensor inverse-image comparison preserves $x\\mapsto x\\otimes1$, so transposing $\\beta_j^{-1}$ under $j_!^B\\dashv j_B^{-1}$ gives exactly $\\delta_j=\\lambda_j^{-1}\\circ S_U\\eta_j^A$ in the statement. For an object $M$ on $X$, the comparison between restriction and $j^{-1}$ is the scalar-adjoint transpose of $\\lambda_{j,M}^{-1}$: on a K-flat model of $M$ both unit formulas are $j^{-1}x\\mapsto j^{-1}x\\otimes1$. Applying this at $M=j_!^AK$ and composing with the open unit gives the displayed $\\delta_j$, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The same construction gives $\\beta_{j'}$.",
+   "text": "The scalar/open comparison is the unique comparison of composite left adjoints. Prove its inverse open-unit transpose using unit_leftAdjointUniq_hom_app, scalar-adjunction injectivity, naturality of the scalar unit and unit_mateEquiv_symm. This is scalarOpenTranspose and its specialization openScalarIso_unit.",
    "uses": [
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
     "lem-cbc-proetale-extension-zero",
     "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); scalar/open composite adjunction calculation"
-   }
-  },
-  {
-   "text": "Use abbreviations $F_R=j_!^R$, $F'_R=j'_!{}^R$, $J_R=j_R^{-1}$, $J'_R=j_R'{}^{-1}$, $G_R=g_R^{-1}$ and $H_R=h_R^{-1}$. Identify $J'_RG_R=H_RJ_R$ by the cartesian inverse-image comparison. The canonical tensor comparisons satisfy\n$$J'_B\\lambda_g^{-1}\\circ\\lambda_{j'}^{-1}G_A=H_B\\lambda_j^{-1}\\circ\\lambda_h^{-1}J_A.\\tag{C}$$\nHere both sides go from $S_{U'}J'_AG_A$ to $J'_BG_BS_X$. This is the composition identity for these particular tensor maps: choose a flat-term K-flat representative $P$ on $X$. The inverse images remain K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. In each degree both paths send the local generator $(gj')^{-1}p\\otimes b$ to $(gj')^{-1}(p\\otimes b)$, with $gj'=jh$; the balanced tensor relations and restrictions are identical. Thus the maps of tensor complexes agree and give (C) in the derived category. The same formula shows naturality of each $\\lambda_u$ in its input.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-cbc-open-immersion-square"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); degreewise composition of canonical tensor maps"
-   }
-  },
-  {
-   "text": "Let $L$ and $R$ be the left and right composites in the asserted equality, and put $N=F_AK$. They are isomorphisms by step 1, the tensor comparison, and [lem-cbc-proetale-extension-zero-base-change]. Their inverses are\n$$L^{-1}=G_B(\\beta_j^{-1})\\circ(e_j^B)^{-1}\\circ F'_B(\\lambda_h^{-1}),\\qquad R^{-1}=\\lambda_g^{-1}\\circ S_{X'}((e_j^A)^{-1})\\circ\\beta_{j'}^{-1}.$$\nBoth have source $F'_BS_{U'}H_AK$ and target $G_BS_XN$, so they can be transposed under $F'_B\\dashv J'_B$ [lem-cbc-proetale-extension-zero, def-weil-pbc-adjunction-mate]. The inverse of the actual canonical $e_j^R$ has transpose $H_R\\eta_j^R$ by [lem-cbc-finite-open-exchange-scalars], applied with the identity coefficient map $R\\to R$. Its complex-level unit formula descends termwise to the derived category because the open extensions and identified-coefficient inverse images are exact. Consequently the transpose of $L^{-1}$ is\n$$J'_BG_B(\\beta_{j,K}^{-1})\\circ H_B(\\eta^B_{j,S_UK})\\circ\\lambda_{h,K}^{-1}\n=H_B(\\delta_{j,K})\\circ\\lambda_{h,K}^{-1}.$$\nFor the equality use $J'_BG_B=H_BJ_B$ and the defining adjunct equation $J_B(\\beta_j^{-1})\\circ\\eta_j^B=\\delta_j$. This transposes the inverses, whose source is an open extension, rather than the original maps whose target is an open extension.",
-   "uses": [
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-cbc-proetale-extension-zero",
-    "def-weil-pbc-adjunction-mate",
-    "lem-cbc-finite-open-exchange-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change); inverse-map unit normalization and adjunction naturality; the exact inverse-mate normalization is the statement of lem-cbc-finite-open-exchange-scalars."
-   }
-  },
-  {
-   "text": "The transpose of $R^{-1}$ under the same adjunction is\n$$J'_B(\\lambda_{g,N}^{-1})\\circ J'_BS_{X'}((e_{j,K}^A)^{-1})\\circ\\delta_{j',H_AK}.$$\nSubstitute $\\delta_{j',H_AK}=\\lambda_{j',F'_AH_AK}^{-1}\\circ S_{U'}(\\eta^A_{j',H_AK})$. Naturality of $\\lambda_{j'}^{-1}$ moves $(e_{j,K}^A)^{-1}$ past it, and the inverse normalization of [lem-cbc-finite-open-exchange-scalars] gives\n$$J'_A((e_{j,K}^A)^{-1})\\circ\\eta^A_{j',H_AK}=H_A(\\eta^A_{j,K}).$$\nThus the transpose is exactly\n$$J'_B(\\lambda_{g,N}^{-1})\\circ\\lambda_{j',G_AN}^{-1}\\circ S_{U'}H_A(\\eta^A_{j,K}).$$\nAll these are equalities of morphisms in $D(U'_{\\mathrm{proet}},B)$, using only naturality and the two specified unit normalizations [def-weil-pbc-adjunction-mate, lem-cbc-proetale-extension-zero]; the canonical open comparison is the one in [lem-cbc-proetale-extension-zero-base-change].",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-cbc-finite-open-exchange-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change); explicit right-composite inverse transpose; the exact inverse-mate normalization is the statement of lem-cbc-finite-open-exchange-scalars."
-   }
-  },
-  {
-   "text": "Apply (C) at $N$ to the last formula. It becomes\n$$H_B(\\lambda_{j,N}^{-1})\\circ\\lambda_{h,J_AN}^{-1}\\circ S_{U'}H_A(\\eta^A_{j,K})\n=H_B(\\lambda_{j,N}^{-1})\\circ H_BS_U(\\eta^A_{j,K})\\circ\\lambda_{h,K}^{-1}\n=H_B(\\delta_{j,K})\\circ\\lambda_{h,K}^{-1}.$$\nThe middle equality is precisely naturality of $\\lambda_h^{-1}$ on $\\eta^A_{j,K}$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. This is the transpose computed for $L^{-1}$ in step 3. The adjunction bijection [def-weil-pbc-adjunction-mate] gives $L^{-1}=R^{-1}$ and hence $L=R$, the displayed equality in $D(X'_{\\mathrm{proet}},B)$. Every map used is natural in $K$. K-flat representatives and exact inverse images work for unbounded complexes and arbitrary $A\\to B$; no flatness of $B$ or finite projective-dimension hypothesis has entered.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); naturality and injectivity of the open-adjunction transpose"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use the descended inverse open-base-change unit equation at coefficients A and B, and the tensor-square coherence at N=j_! K.",
+   "uses": [
+    "lem-fix-open-base-change-derived-unit",
+    "lem-fix-tensor-pullback-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the inverses of the two asserted composites, then apply injectivity of the open B-adjunction Hom equivalence. Naturality of its unit and the B base-change unit equation calculate the first transpose; naturality of the inverse-image compositor and openScalarIso_unit reduce it to lambda_h.inv followed by H_B(S_U eta_A), H_B(lambda_j.inv), and c_B.inv. For the second transpose use openScalarIso_unit at j-prime, naturality of lambda_j-prime.inv, the A base-change unit equation, tensor-square coherence and naturality of lambda_h.inv. The results agree. Equality of the inverse isomorphisms gives equality of the original maps.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-cbc-proetale-extension-zero",
+    "lem-fix-open-base-change-derived-unit",
+    "lem-fix-tensor-pullback-square"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -93,15 +53,13 @@
   "lem-cbc-proetale-extension-zero",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-cbc-open-immersion-square",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-cbc-finite-open-exchange-scalars"
+  "lem-fix-open-base-change-derived-unit",
+  "lem-fix-tensor-pullback-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-fix-compact-support-coefficient-change.proof.md",
-  "place": "Final compatibility paragraph; expanded using Stacks 03S6, 07A4, 0G7E and 07A6. The scalar/open inverse-transpose calculation is supplied here, not asserted to be a statement of 03S6."
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6 and parent normalized inverse-transpose proof; Lean scalarOpenTranspose, openScalarIso_unit and openScalarExchange."
  },
  "mathlib_searches": [
   {
@@ -205,8 +163,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-cbc-finite-open-exchange-scalars"
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -245,5 +202,15 @@
   "group": "Q108",
   "result": "fix",
   "note": "Checked every clause against the node, the nine dependency records and Stacks 03S6/07A4/07A6/09AE. Objects, directions and composition order in openScalarExchange all match, lean.statement is verbatim, there are no extra hypotheses, and Type u for finite rings is harmless. Finding (H4/dependency): openBaseChangeIso was a private second construction of e_j (an ambient-pullback mate) with an un-noded postponed theorem openBaseChangeMate_isIso, instead of the recorded StrictTower.singleBeta of lem-cbc-proetale-extension-zero-base-change, which proof steps 3-4 rely on through lem-cbc-finite-open-exchange-scalars. Fixed: openBaseChangeIso := StrictTower.singleBeta (ULift A) gU j' j g sq.w (IsPullback.of_iso_pullback ...), which is definitionally in the same coordinates (confirmed by compilation); openBaseChangeMate and openBaseChangeMate_isIso removed and lean.declarations updated. Also added source/blueprint docstrings to the helpers and the node proof steps to the theorem docstring (H8), and appended a fix section to the report. nt_compile --json: delivered file 9.0 s and 10.9 s clean (first try timed out on a dependency override under load); fixed file 3.7 s clean. Fix files: OpenScalarExchange.lean, lem-fix-open-scalar-exchange.lean-record.json, lem-fix-open-scalar-exchange.report.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

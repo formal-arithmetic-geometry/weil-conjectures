@@ -1,0 +1,143 @@
+{
+ "id": "lem-fix-ordinary-restriction-pullback-square",
+ "kind": "statement",
+ "title": "Ordinary restriction of scalars respects the inverse-image square compositor",
+ "statement": "Let $A,B$ be commutative rings and $\\varphi:A\\to B$ a ring homomorphism. Let $h:U'\\to U$, $j':U'\\to X'$, $j:U\\to X$ and $g:X'\\to X$ form an open-immersion square [def-cbc-open-immersion-square]. Write $P_R(f)$ for ordinary constant-ring module inverse image [def-weil-pbc-proetale-operations], $R_T$ for restriction along $\\varphi$ [lem-weil-pbc-ring-sheaf-change-adjunction], $q_f:P_A(f)R_W\\to R_VP_B(f)$ for its specified restriction/pullback mate for $f:V\\to W$, and $c_R:P_R(j')P_R(g)\\cong P_R(h)P_R(j)$ for the specified moduleSquareG [lem-cbc-proetale-extension-zero-base-change]. For every $B$-module sheaf $M$ on $X$,\n$$q_{j',P_B(g)M}\\circ P_A(j')(q_{g,M})\\circ c_{A,R_XM}^{-1}=R_{U'}(c_{B,M}^{-1})\\circ q_{h,P_B(j)M}\\circ P_A(h)(q_{j,M}).$$\nThe assertion uses no derived category, tensor extension, or open extension, and includes empty schemes and zero rings.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules) and 03D8 (lemma-push-pull-composition-modules)."
+ },
+ "stmt_deps": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The canonical restriction/direct-image comparison is identity on each section by proEtaleRingRestrictionDirectImage_existsUnique. The direct-image compositor is restriction along fibre-product pasting by moduleRComp_existsUnique. Hence the two coefficient-change/composition pastings are equal, using the same restriction map on the same section.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse pullback comparison is by definition the mate of this direct-image comparison. The generic mateSquare calculation and mateEquiv_hcomp transfer the preceding equality to compatibility with moduleGComp, using conjugateEquiv_leftAdjointCompIso_inv.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply composition compatibility to (h,j) and (j-prime,g). The generic proved pasteTransport lemma substitutes the equality of composites and cancels the composition isomorphisms. Pass moduleSquareG and its proved defining equation as explicit arguments, retaining the compositor folded in the final specialization.",
+   "uses": [
+    "def-cbc-open-immersion-square",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-fix-constant-square-compositor-specification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-cbc-open-immersion-square",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-fix-constant-square-compositor-specification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules) and 03D8 (lemma-push-pull-composition-modules)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes coherently with composition of sheaf module inverse images",
+   "results": "['SheafOfModules.restrictScalars_map_val', 'SheafOfModules.restrictScalars', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', \"ModuleCat.restrictScalarsComp'App_inv_naturality\", 'SheafOfModules.restrictScalars_obj_val', 'PresheafOfModules.map_comp', \"ModuleCat.restrictScalarsComp'App_inv_naturality_assoc\", 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app']",
+   "date": "2026-10-19",
+   "verdict": "No exact match; generic mate pasting or sectionwise scalar restriction only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "['CategoryTheory.mateEquiv_hcomp']",
+   "date": "2026-10-19",
+   "verdict": "No exact match; generic mate pasting or sectionwise scalar restriction only."
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictionPullback|moduleRComp",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No exact match; generic mate pasting or sectionwise scalar restriction only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars is compatible with composition of inverse images of sheaf modules",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictScalars.map', RestrictScalars, PresheafOfModules.restrictScalars, ModuleCat.restrictScalars, ModuleCat.restrictScalarsComp'_inv_app, RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.restrictScalarsComp",
+   "date": "2026-10-19",
+   "verdict": "Generic adjunction, localization, and restriction lemmas; no theorem states this project-specific comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.OpenScalarExchange",
+  "date": "2026-10-19",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-tensor-pullback-square",
+   "place": "Ordinary coefficient-change compatibility underlying inverse-image composition.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.OrdinaryRestrictionPullbackSquare",
+  "file": "lean/Sheaf/SecSmoothPurity/OrdinaryRestrictionPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryRestrictionPullbackSquare",
+  "statement": "theorem ordinaryRestrictionPullbackSquare {A B : Type u} [CommRing A] [CommRing B]\n    (φ : A →+* B)\n    {U' U X' X : Scheme.{u}}\n    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    (sq : OpenImmersionSquare gU j' j g)\n    (M : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X B)) :\n    (StrictTower.moduleSquareG (ULift.{u + 1, u} A) gU j' j g sq.toCommSq.w).inv.app\n        ((ordinaryScalarRestriction φ X).obj M) ≫\n      (ordinaryConstantPullback A j').map ((ordinaryRestrictionComparison φ g).app M) ≫\n        (ordinaryRestrictionComparison φ j').app ((ordinaryConstantPullback B g).obj M) =\n      (ordinaryConstantPullback A gU).map ((ordinaryRestrictionComparison φ j).app M) ≫\n        (ordinaryRestrictionComparison φ gU).app ((ordinaryConstantPullback B j).obj M) ≫\n        (ordinaryScalarRestriction φ U').map\n          ((StrictTower.moduleSquareG (ULift.{u + 1, u} B) gU j' j g sq.toCommSq.w).inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ordinaryScalarRestriction",
+   "AlgebraicGeometry.ProEtale.ordinaryConstantPullback",
+   "AlgebraicGeometry.ProEtale.coeffSquare",
+   "AlgebraicGeometry.ProEtale.ordinaryRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.ordinaryRestrictionPullbackSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

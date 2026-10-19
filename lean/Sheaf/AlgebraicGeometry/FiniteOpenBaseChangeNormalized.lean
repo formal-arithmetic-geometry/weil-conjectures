@@ -32,14 +32,36 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
+/-- The square compositor is uniquely determined by its explicit composition formula.
+Source: Stacks, Tag 09AE
+(blueprint: lem-fix-constant-square-compositor-specification).
+Proof: the displayed composite witnesses existence, and the required equality gives uniqueness. -/
+theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
+    ∃! e : modulePullback B i ⋙ modulePullback B r ≅
+        modulePullback B p ⋙ modulePullback B k,
+      e = (moduleGComp B r i).symm ≪≫ eqToIso (congrArg (modulePullback B) h.symm) ≪≫
+        moduleGComp B k p := by
+  exact ⟨_, rfl, fun _ he ↦ he⟩
+
 /-- The canonical single-level pullback-square identification.
 Source: Stacks, Tag 09AE
 (blueprint: lem-cbc-proetale-extension-zero-base-change). -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     modulePullback B i ⋙ modulePullback B r ≅ modulePullback B p ⋙ modulePullback B k :=
-  (moduleGComp B r i).symm ≪≫ eqToIso (congrArg (modulePullback B) h.symm) ≪≫
-    moduleGComp B k p
+  (moduleSquareG_existsUnique B k r p i h).choose
+
+/-- The specified square compositor equals the original explicit composite.
+Source: Stacks, Tag 09AE
+(blueprint: lem-fix-constant-square-compositor-specification).
+Proof: this is the equality clause of the unique specification. -/
+theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
+    moduleSquareG B k r p i h =
+      (moduleGComp B r i).symm ≪≫ eqToIso (congrArg (modulePullback B) h.symm) ≪≫
+        moduleGComp B k p :=
+  (moduleSquareG_existsUnique B k r p i h).choose_spec.1
 
 /-- The inverse open-base-change component, specified by the original open-unit transpose.
 Source: Stacks, Tag 09AE

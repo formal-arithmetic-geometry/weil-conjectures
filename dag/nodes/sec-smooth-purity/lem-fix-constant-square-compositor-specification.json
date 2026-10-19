@@ -1,0 +1,116 @@
+{
+ "id": "lem-fix-constant-square-compositor-specification",
+ "kind": "statement",
+ "title": "The fixed constant-ring square compositor has its explicit equality specification",
+ "statement": "For a commutative ring $B$ and scheme maps $k:V\\to W$, $r:V\\to S$, $p:W\\to T$, $i:S\\to T$ with $h:k p=r i$, use the constant-ring module pullbacks $P_B$ and their canonical compositors $a_B$ [def-cbc-strict-constant-tower-operations]. There is a unique natural isomorphism $e:P_B(r)P_B(i)\\cong P_B(k)P_B(p)$ equal to $a_B(k,p)\\circ\\operatorname{eqToIso}(h^{-1})\\circ a_B(r,i)^{-1}$. The moduleSquareG of [lem-cbc-proetale-extension-zero-base-change] is this specified object and equals that explicit composite.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8 (lemma-push-pull-composition-modules); equality specification of the recorded square compositor."
+ },
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Take the explicit composite as witness; the equation specifies every other witness to be equal to it. The chosen unique witness therefore equals the same original composite.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8, equality specification of the original compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism specified by equality to a fixed composite exists uniquely",
+   "results": "['CategoryTheory.NatIso.cancel_natIso_hom_left', 'CategoryTheory.NatIso.cancel_natIso_hom_right', 'CategoryTheory.Iso.ext', 'CategoryTheory.NatIso.ofComponents', 'CategoryTheory.Functor.ext_of_iso', 'CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq', \"CategoryTheory.conj_eqToHom_iff_heq'\", 'CategoryTheory.conj_eqToHom_iff_heq']",
+   "date": "2026-10-19",
+   "verdict": "Generic categorical isomorphism and existence-uniqueness lemmas; no project-specific compositor API."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_eq|existsUnique.*Eq",
+   "results": "['Mathlib/Algebra/QuadraticDiscriminant.lean', 'Mathlib/Logic/ExistsUnique.lean', 'Mathlib/Logic/ExistsUnique.lean', 'Mathlib/Logic/ExistsUnique.lean', 'Mathlib/Logic/ExistsUnique.lean', 'Mathlib/Logic/ExistsUnique.lean', 'Mathlib/Geometry/Euclidean/Circumcenter.lean', 'Mathlib/Geometry/Euclidean/Circumcenter.lean']",
+   "date": "2026-10-19",
+   "verdict": "Generic categorical isomorphism and existence-uniqueness lemmas; no project-specific compositor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExistsUnique",
+   "results": "['ExistsUnique', 'existsUnique_false', 'existsUnique_eq', \"existsUnique_eq'\", 'existsUnique_prop', 'existsUnique_const', 'existsUnique_prop_of_true', 'ExistsUnique.exists']",
+   "date": "2026-10-19",
+   "verdict": "Generic categorical isomorphism and existence-uniqueness lemmas; no project-specific compositor API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a unique object equal to a specified object",
+   "results": "8 hits: existsUnique_eq, existsUnique_eq', Unique.subtypeEq', ExistsUnique.intro, ExistsUnique, Unique.default_eq, ExistsUnique.choose_eq_iff, Unique.uniq",
+   "date": "2026-10-19",
+   "verdict": "Generic existence-uniqueness lemmas apply to the explicit equality specification; no project-specific compositor declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.OpenScalarExchange",
+  "date": "2026-10-19",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-ordinary-restriction-pullback-square",
+   "place": "Folded API for the canonical square compositor in the final pasting calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenBaseChangeNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.moduleSquareG_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.moduleSquareG_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.moduleSquareG_eq"
+  ],
+  "statement": "theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)\n    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :\n    ∃! e : modulePullback B i ⋙ modulePullback B r ≅\n        modulePullback B p ⋙ modulePullback B k,\n      e = (moduleGComp B r i).symm ≪≫ eqToIso (congrArg (modulePullback B) h.symm) ≪≫\n        moduleGComp B k p",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

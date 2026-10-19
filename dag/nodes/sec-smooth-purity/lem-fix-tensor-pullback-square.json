@@ -1,0 +1,136 @@
+{
+ "id": "lem-fix-tensor-pullback-square",
+ "kind": "statement",
+ "title": "Tensor inverse-image comparisons commute around an open square",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings. Let $h:U'\\to U$, $j':U'\\to X'$, $j:U\\to X$ and $g:X'\\to X$ form an open-immersion square [def-cbc-open-immersion-square], so $jh=gj'$ and $j,j'$ are open immersions. Use ordinary unbounded constant-ring module derived categories $D_R(T)$ and their exact inverse images [def-weil-pbc-proetale-operations]. Put $S_T=-\\otimes^L_{A_T}B_T$ [lem-pur-derived-change-of-rings] and let $\\lambda_f:f_B^{-1}S_V\\xrightarrow{\\sim}S_Tf_A^{-1}$ be the canonical tensor inverse-image comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Write $H_R=h_R^{-1}$, $G_R=g_R^{-1}$, $J_R=j_R^{-1}$ and $J'_R=j_R'{}^{-1}$. Let $c_R:J'_RG_R\\xrightarrow{\\sim}H_RJ_R$ be the descended comparison `mapDerivedCategorySquareIso(moduleSquareG)` of [lem-cbc-proetale-extension-zero-base-change]. Then, for every $N\\in D_A(X)$, the following morphisms from $S_{U'}H_AJ_AN$ to $J'_BG_BS_XN$ are equal:\n$$J'_B(\\lambda_{g,N}^{-1})\\circ\\lambda_{j',G_AN}^{-1}\\circ S_{U'}(c_{A,N}^{-1})\n= c_{B,S_XN}^{-1}\\circ H_B(\\lambda_{j,N}^{-1})\\circ\\lambda_{h,J_AN}^{-1}.$$\nNo flatness of $B$ over $A$ is assumed. This is an inverse-image and tensor coherence statement and uses no extension-by-zero exchange.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); parent proof step 2 with compositors displayed"
+ },
+ "stmt_deps": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary restriction/pullback square commutes with the specified compositor by ordinaryRestrictionPullbackSquare.",
+   "uses": [
+    "lem-fix-ordinary-restriction-pullback-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Descend this equality through the exact functors. The proved generic tripleComparison_left and tripleComparison_right identities express the two pastings as mapDerivedCategoryNatIso of the corresponding ordinary pastings, conjugated by the same triple comparisons. The ordinary equality identifies these pastings. Cancel the common triple comparison and evaluate at each derived object.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the four derived scalar-extension/restriction adjunctions. The proved generic mateCube calculation applies the last Hom equivalence injectively; its four unit-mate equations and naturality transform the descended restriction cube into the left-mate cube. These left mates are precisely the inverses of proEtaleReductionPullbackIso, giving the claimed tensor-square equation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-ordinary-restriction-pullback-square",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03D8; ordinary restriction coherence, exact derived composition coherence and scalar-adjunction mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor inverse image comparison is compatible with composition of inverse image functors",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Pi.comapComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "1 hits: CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|unit_mateEquiv",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taking adjunction mates preserves commutative cubes of natural transformations",
+   "results": "8 hits: CategoryTheory.Bicategory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.CommSq.right_adjoint, CategoryTheory.CommSq.left_adjoint, CategoryTheory.mateEquiv_square, CategoryTheory.Bicategory.toNatTrans_mateEquiv, CategoryTheory.Adjunction.toCat_unit_toNatTrans",
+   "date": "2026-10-19",
+   "verdict": "Generic adjunction, localization, and restriction lemmas; no theorem states this project-specific comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.OpenScalarExchange",
+  "date": "2026-10-18",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Final compatibility paragraph; scalar/open base-change compatibility, expanded parent proof steps 2--4.",
+   "via": [
+    "lem-fix-open-scalar-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.TensorPullbackSquare",
+  "file": "lean/Sheaf/SecSmoothPurity/TensorPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.tensorPullbackSquare",
+  "statement": "theorem tensorPullbackSquare {A B : Type u} [CommRing A] [CommRing B]\n    (φ : A →+* B)\n    {U' U X' X : Scheme.{u}}\n    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    (sq : OpenImmersionSquare gU j' j g)\n    [IsOpenImmersion j] [IsOpenImmersion j']\n    (N : DerivedCategory (Scheme.proEtaleRingModules X (CR X A))) :\n    let S (T : Scheme.{u}) := Scheme.proEtaleRingDerivedExtension\n      (Scheme.proEtaleConstantRingMap (T := T) φ)\n    let c (R : Type u) [CommRing R] := Functor.mapDerivedCategorySquareIso\n      (StrictTower.moduleSquareG (ULift.{u + 1, u} R) gU j' j g sq.toCommSq.w)\n    let lam {V W : Scheme.{u}} (f : V ⟶ W) :=\n      Scheme.proEtaleReductionPullbackIso f (CR W A) (CR W B) (CR V A) (CR V B)\n        (Scheme.proEtaleConstantRingMap (T := W) φ)\n        (Scheme.proEtaleConstantRingMap (T := V) φ) (CC f A) (CC f B) (by\n          simpa [Scheme.proEtaleConstantRingComparison, Scheme.proEtaleConstantRingMap] using\n            (Scheme.proEtaleConstantInverseImageMap_naturality f\n              (a := CommRingCat.ofHom (RingHom.ulift φ))).symm)\n    (S U').map ((c A).inv.app N) ≫\n      (lam j').inv.app ((PB A g).obj N) ≫ (PB B j').map ((lam g).inv.app N) =\n    (lam gU).inv.app ((PB A j).obj N) ≫\n      (PB B gU).map ((lam j).inv.app N) ≫ (c B).inv.app ((S X).obj N)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

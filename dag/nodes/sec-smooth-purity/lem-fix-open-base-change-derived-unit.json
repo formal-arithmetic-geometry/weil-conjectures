@@ -1,0 +1,123 @@
+{
+ "id": "lem-fix-open-base-change-derived-unit",
+ "kind": "statement",
+ "title": "The descended finite open exchange retains its original unit transpose",
+ "statement": "Let $A$ be a finite commutative ring. Let $h:U'\\to U$, $j':U'\\to X'$, $j:U\\to X$ and $g:X'\\to X$ form an open-immersion square [def-cbc-open-immersion-square]. Use ordinary unbounded constant-ring module derived categories and their exact inverse images [def-weil-pbc-proetale-operations]. Write $F=j_!$, $F'=j'_!$, $H=h^{-1}$, $G=g^{-1}$, $J=j^{-1}$ and $J'=j'{}^{-1}$. Let $\\eta,\\eta'$ be the units of the recorded open adjunctions [lem-cbc-proetale-extension-zero]. Let $c:J'G\\xrightarrow{\\sim}HJ$ be `mapDerivedCategorySquareIso(moduleSquareG)` and $e:GF\\xrightarrow{\\sim}F'H$ the recorded `singleBeta`, both from [lem-cbc-proetale-extension-zero-base-change]. For every $K\\in D_A(U)$,\n$$J'(e_K^{-1})\\circ\\eta'_{HK}=c_{FK}^{-1}\\circ H(\\eta_K).$$\nThus exact descent preserves the prescribed original open-unit transpose of the inverse exchange.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, lemma-shriek-base-change; exact localization of the inverse-unit normalization in lem-cbc-finite-open-exchange-scalars"
+ },
+ "stmt_deps": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The sheaf inverse exchange is singleBetaInvApp. The inverse law of the ordinary open Hom equivalence gives its unit equation directly from its definition, without using inverse_unit_transpose.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved private lemmas squareQFac and unitQ compute the exact functor comparisons and localized adjunction unit on Q of a complex. The proved localizedMateQ carries an ordinary unit equation to this formula by cancellation of factorization isomorphisms and equality in each degree. localizedMate transports it to all derived objects by essential surjectivity and naturality. Apply it to the inverse exchange and the inverse moduleSquareG; normalization of the derived isomorphisms gives the result.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6; Lean localization proof adapted from the proved exact-derived mate calculation in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate, using the direct complex-localized adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor inverse image comparison is compatible with composition of inverse image functors",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Pi.comapComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "1 hits: CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|unit_mateEquiv",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic mate and ordinary pullback composition lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization preserves the unit equation for an adjunction mate",
+   "results": "8 hits: CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived', CategoryTheory.ObjectProperty.isLocal_adj_unit_app",
+   "date": "2026-10-19",
+   "verdict": "Generic adjunction, localization, and restriction lemmas; no theorem states this project-specific comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.OpenScalarExchange",
+  "date": "2026-10-18",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Final compatibility paragraph; scalar/open base-change compatibility, expanded parent proof steps 2--4.",
+   "via": [
+    "lem-fix-open-scalar-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.OpenBaseChangeDerivedUnit",
+  "file": "lean/Sheaf/SecSmoothPurity/OpenBaseChangeDerivedUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openBaseChangeDerivedUnit",
+  "statement": "theorem openBaseChangeDerivedUnit {A : Type u} [CommRing A] [Finite A]\n    {U' U X' X : Scheme.{u}}\n    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    (sq : OpenImmersionSquare gU j' j g)\n    [IsOpenImmersion j] [IsOpenImmersion j']\n    (K : DerivedCategory (Scheme.proEtaleRingModules U (CR U A))) :\n    (AD j' (CR X' A) (CR U' A) (CC j' A)).unit.app ((PB A gU).obj K) ≫\n      (PB A j').map\n        ((StrictTower.singleBeta (ULift.{u + 1, u} A) gU j' j g sq.toCommSq.w\n          (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback\n            sq.hom_fst sq.hom_snd)).inv.app K) =\n      (PB A gU).map ((AD j (CR X A) (CR U A) (CC j A)).unit.app K) ≫\n        (Functor.mapDerivedCategorySquareIso\n          (StrictTower.moduleSquareG (ULift.{u + 1, u} A) gU j' j g\n            sq.toCommSq.w)).inv.app ((OE j (CR X A) (CR U A) (CC j A)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T192830-L-1874347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
