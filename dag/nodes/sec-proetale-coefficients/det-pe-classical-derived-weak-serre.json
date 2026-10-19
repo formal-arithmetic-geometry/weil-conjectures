@@ -17,8 +17,9 @@
  ],
  "proof": [
   {
-   "text": "By [det-pe-classical-sheaves-modules], a module sheaf is classical exactly when it lies in the essential image of the exact fully faithful functor $\\nu_X^*$. The zero sheaf is $\\nu_X^*0$, hence is classical.",
+   "text": "Use [lem-weil-pbc-proetale-constant-module-encoding] to identify intrinsic constant-ring modules with ModuleCat-valued sheaves. Restriction retains their underlying additive sheaves, and its inverse does so up to the equivalence counit. By [det-pe-classical-sheaves-modules], classicality is therefore the essential image of the composite T of the exact fully faithful comparison inverse image L and this encoding equivalence. T preserves zero, kernels and cokernels.",
    "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
     "det-pe-classical-sheaves-modules"
    ],
    "elementary": false,
@@ -39,13 +40,13 @@
    }
   },
   {
-   "text": "Use the small site presentations and common universes of [def-weil-size-convention], containing the schemes and coefficient ring under consideration. For each of the two constant commutative ring sheaves, [lem-pur-ringed-site-grothendieck-abelian] makes its module-sheaf category Grothendieck abelian, and [lem-sp-grothendieck-enough-injectives] gives enough injectives. The functor $R=\\nu_{X,*}$ is additive and left exact: it is restriction on sections by [def-weil-pbc-site-comparison-morphism], so it preserves addition and the sectionwise kernels of [def-weil-sheaf-of-modules-category]. Put $L=\\nu_X^*$; its exactness and the module adjunction $L\\dashv R$ are [det-pe-classical-sheaves-modules].",
+   "text": "Use the universe convention [def-weil-size-convention] with ModuleCat in universe u+1. The module category is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian], and its pro-etale sheaf category is Grothendieck abelian by [lem-sfb-proetale-sheaves-grothendieck]. Thus [lem-sp-grothendieck-enough-injectives] gives enough injectives. The comparison adjunction R is additive and left exact, as restriction on sections in [def-weil-pbc-site-comparison-morphism]; its exact fully faithful left adjoint L is [det-pe-classical-sheaves-modules]. The extension argument can be made in ModuleCat-valued sheaves and transported back by the encoding equivalence.",
    "uses": [
     "def-weil-size-convention",
-    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-sfb-proetale-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives",
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-sheaf-of-modules-category",
     "det-pe-classical-sheaves-modules"
    ],
    "elementary": false,
@@ -103,12 +104,13 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
   "det-pe-classical-sheaves-modules",
   "def-weil-size-convention",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-sheaf-of-modules-category",
   "sk-prop-sf-comparison",
   "lem-sp-derived-functor-single-identification",
   "def-weil-abstract-derived-category",
@@ -119,7 +121,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
-  "place": "Opening paragraph, Kernels and cokernels paragraph, and Extensions paragraph; the elementary cohomology and counit calculations are written explicitly."
+  "place": "Opening paragraph, Kernels and cokernels paragraph, and Extensions paragraph; the elementary cohomology and counit calculations are written explicitly. Lean realization by G4: use the existing pro-etale constant-module encoding; prove kernel/cokernel closure generically; transport short exact sequences to fixed modules, apply the derived-unit degree-one vanishing and the full long exact sequence, and apply the counit short five lemma."
  },
  "mathlib_searches": [
   {
@@ -203,7 +205,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-weil-pbc-derived-functor-long-exact",
   "lem-sp-derived-functor-single-identification"
  ],
@@ -244,5 +245,15 @@
   "by": "Q121",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T002608-L-2157789",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
