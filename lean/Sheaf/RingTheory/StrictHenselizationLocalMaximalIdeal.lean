@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
 

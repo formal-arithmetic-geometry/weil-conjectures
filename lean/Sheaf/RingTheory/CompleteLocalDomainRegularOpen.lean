@@ -17,7 +17,7 @@ import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 import WeilConjectures.AlgebraicGeometry.DegreePExtensionRegular
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 
 /-!
 # A complete Noetherian local domain has a nonempty regular open

@@ -3,7 +3,7 @@ module
 public import Sheaf.RingTheory.PopescuResolution
 public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
-import Sheaf.RingTheory.ImprovePresentation
+import WeilConjectures.RingTheory.ImprovePresentation
 import WeilConjectures.RingTheory.PopescuPolynomialQuotientSmooth
 import Mathlib.RingTheory.FiniteType
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination

@@ -9,7 +9,7 @@ import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
 import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.KrullAkizukiNoetherian
-import Sheaf.RingTheory.NagataOfCompleteLocal
+import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 import Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement
 import Sheaf.TraceFormula.NormalizationFiniteLocalModel

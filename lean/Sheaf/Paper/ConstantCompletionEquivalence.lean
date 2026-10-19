@@ -40,7 +40,7 @@ import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.RingTheory.LimitFlatModules
+import WeilConjectures.RingTheory.LimitFlatModules
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct

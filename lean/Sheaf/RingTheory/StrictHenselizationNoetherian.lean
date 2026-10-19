@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian

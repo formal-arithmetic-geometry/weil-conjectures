@@ -5,12 +5,12 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.RingTheory.FlatModuleCompletion
+import WeilConjectures.RingTheory.FlatModuleCompletion
 import Sheaf.RingTheory.StrictHenselizationModPowerFree
 
 /-!

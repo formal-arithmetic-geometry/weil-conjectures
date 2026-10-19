@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
+import WeilConjectures.RingTheory.GeometricallyRegularOverFieldFlat
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.RingTheory.Localization.LocalizationLocalization

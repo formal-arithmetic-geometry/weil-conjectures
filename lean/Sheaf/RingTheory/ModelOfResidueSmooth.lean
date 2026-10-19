@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicLift
-import Sheaf.RingTheory.FormallySmoothAdicULift
+import WeilConjectures.RingTheory.FormallySmoothAdicULift
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.AdicCompletion.Topology
 

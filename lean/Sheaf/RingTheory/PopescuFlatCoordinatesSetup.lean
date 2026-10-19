@@ -3,7 +3,7 @@ public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 @[expose] public section

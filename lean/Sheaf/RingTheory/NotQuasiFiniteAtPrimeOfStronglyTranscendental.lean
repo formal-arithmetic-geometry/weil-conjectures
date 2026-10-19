@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.IsolatedPrimeResidueFinite
 import WeilConjectures.RingTheory.QuasiFiniteFourRings
 

@@ -28,7 +28,7 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.ExcellentRing
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.PopescuSmoothing
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Mathlib.RingTheory.Smooth.Basic
@@ -38,7 +38,7 @@ import WeilConjectures.RingTheory.SmoothFibreRegularLocal
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
 import Mathlib.AlgebraicGeometry.Noetherian

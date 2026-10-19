@@ -11,12 +11,12 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.RingTheory.GRing
 import Mathlib.Algebra.CharP.Invertible
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.QuasiFinite.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import WeilConjectures.RingTheory.FormalFibreQuasiFiniteAscent
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
 import Sheaf.RingTheory.RegularLocalLocalization
 

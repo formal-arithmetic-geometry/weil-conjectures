@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Localization.Algebra
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Mathlib.RingTheory.TensorProduct.Pi
 
 /-! # The total-fraction localization as a product of residue-field fibres

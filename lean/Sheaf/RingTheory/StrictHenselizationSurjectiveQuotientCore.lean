@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 import Sheaf.RingTheory.PointedEtaleQuotientFinal
 
 @[expose] public section

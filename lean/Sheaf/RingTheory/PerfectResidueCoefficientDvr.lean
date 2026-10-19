@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicLift
-import Sheaf.RingTheory.FormallySmoothAdicFlat
+import WeilConjectures.RingTheory.FormallySmoothAdicFlat
 import WeilConjectures.RingTheory.CompleteLocalQuotient
 import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
 import WeilConjectures.RingTheory.ExistsLiftOfFieldCharP

@@ -8,10 +8,10 @@ module
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalGRing
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.RegularThroughLocalization
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.LocalizationRegular
+import WeilConjectures.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.RegularThroughLocalization
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 

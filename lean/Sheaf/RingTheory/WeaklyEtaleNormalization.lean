@@ -21,7 +21,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import WeilConjectures.RingTheory.ProEtale.WeakDimension
 import Sheaf.RingTheory.WeaklyEtaleField
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!

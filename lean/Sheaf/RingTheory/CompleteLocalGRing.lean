@@ -8,8 +8,8 @@ module
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FiniteSubringGenericFormalFiber
-import Sheaf.RingTheory.GRingPairsOfPrimes
+import WeilConjectures.RingTheory.FiniteSubringGenericFormalFiber
+import WeilConjectures.RingTheory.GRingPairsOfPrimes
 import Sheaf.RingTheory.RegularPowerSeriesGenericFormalFiber
 
 /-!

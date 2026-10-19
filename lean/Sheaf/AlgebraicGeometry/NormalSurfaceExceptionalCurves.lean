@@ -38,7 +38,7 @@ import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
 import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 

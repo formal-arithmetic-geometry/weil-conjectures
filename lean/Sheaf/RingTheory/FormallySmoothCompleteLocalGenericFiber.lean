@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Algebraic.Integral
 import Mathlib.RingTheory.Localization.Finiteness
 import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap
 import Sheaf.RingTheory.FormallySmoothRegularCompleteFiniteFieldRegular
 

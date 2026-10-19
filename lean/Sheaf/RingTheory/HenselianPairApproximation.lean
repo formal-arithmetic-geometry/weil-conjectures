@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.GRing
 import Sheaf.Paper.SmoothSectionEtaleLift
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.EtaleSectionLiftingOfGabberRoots
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.SmoothPolynomialFactorization
 import Mathlib.RingTheory.AdicCompletion.Completeness
 

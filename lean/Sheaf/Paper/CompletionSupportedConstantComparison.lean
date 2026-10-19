@@ -15,7 +15,7 @@ public import Sheaf.Paper.SupportedAffineLineHomotopy
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import WeilConjectures.RingTheory.GeometricallyRegularFieldExtension
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful

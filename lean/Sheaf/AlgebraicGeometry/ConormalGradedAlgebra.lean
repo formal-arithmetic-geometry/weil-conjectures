@@ -46,7 +46,7 @@ import Sheaf.Topology.StalkDirectSums
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

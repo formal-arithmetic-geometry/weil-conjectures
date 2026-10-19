@@ -3,7 +3,7 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibreRingNoetherian
 @[expose] public section
 universe u
 namespace Polynomial

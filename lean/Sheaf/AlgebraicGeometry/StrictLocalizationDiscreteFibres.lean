@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.RingTheory.Localization.Submodule

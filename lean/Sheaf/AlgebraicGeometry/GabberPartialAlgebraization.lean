@@ -20,8 +20,8 @@ import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.FiniteHenselianAlgebraLocalModel
 import Sheaf.RingTheory.WeierstrassHenselianCylinder
 import WeilConjectures.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Spectrum.Prime.Topology

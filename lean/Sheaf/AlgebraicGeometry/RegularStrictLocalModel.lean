@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.SmoothColimitRegular
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
@@ -24,12 +24,12 @@ import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
-import Sheaf.RingTheory.RegularLocalMaximal
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.RegularLocalMaximal
+import WeilConjectures.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.RegularComposition
 import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
-import Sheaf.RingTheory.GeometricRegularitySeparableExtension
-import Sheaf.RingTheory.RegularBaseChange
+import WeilConjectures.RingTheory.GeometricRegularitySeparableExtension
+import WeilConjectures.RingTheory.RegularBaseChange
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.RingHom.Flat

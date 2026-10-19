@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.Topology.NoetherianSpace
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 
 /-!
 # Reduced base change along a geometrically reduced algebra

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Constructors
 public import Mathlib.CategoryTheory.MorphismProperty.Limits
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 import Mathlib.AlgebraicGeometry.Noetherian

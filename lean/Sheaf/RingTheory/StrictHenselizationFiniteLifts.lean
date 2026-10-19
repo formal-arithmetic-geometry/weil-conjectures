@@ -19,12 +19,12 @@ import Sheaf.RingTheory.HenselianFiniteEtaleFieldLift
 import Mathlib.RingTheory.Ideal.GoingUp
 import Sheaf.RingTheory.HenselianFiniteEtaleMapBijective
 import WeilConjectures.RingTheory.FiniteLocalHenselian
-import Sheaf.RingTheory.FilteredColimitHenselianPair
+import WeilConjectures.RingTheory.FilteredColimitHenselianPair
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesStrictHenselization
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Mathlib.FieldTheory.SeparableClosure
 import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence

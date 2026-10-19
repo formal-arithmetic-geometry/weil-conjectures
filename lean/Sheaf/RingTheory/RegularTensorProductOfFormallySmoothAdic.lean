@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.GRing
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
 import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic

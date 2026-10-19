@@ -22,7 +22,7 @@ public import Sheaf.AlgebraicGeometry.RelativeAssassin
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.AlgebraicGeometry.AffineScheme

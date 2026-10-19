@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Derivation.Basic
 
 import WeilConjectures.RingTheory.FiniteSubalgebraFractionField
-import Sheaf.RingTheory.FormalFiberDerivationExtension
+import WeilConjectures.RingTheory.FormalFiberDerivationExtension
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete

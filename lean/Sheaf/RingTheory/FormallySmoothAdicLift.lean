@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 import WeilConjectures.RingTheory.CompleteLocalMapRegularPresentation
 import WeilConjectures.RingTheory.CompleteLocalBaseChangeFiber
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
 import Sheaf.RingTheory.RegularPresentationFlatFiber
 

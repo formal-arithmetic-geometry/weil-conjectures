@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Comma
 import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage
 import Sheaf.RingTheory.FiniteTypeIntGRing
 import Sheaf.RingTheory.HenselizationPairGRing
-import Sheaf.RingTheory.HenselizationUniversalProperty
+import WeilConjectures.RingTheory.HenselizationUniversalProperty
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!

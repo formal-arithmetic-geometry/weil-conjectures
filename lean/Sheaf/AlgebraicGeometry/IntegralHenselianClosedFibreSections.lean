@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction

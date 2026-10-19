@@ -5,7 +5,7 @@ Authors: SHEAF group Q97
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 
 /-! # A specified pointed-algebra presentation of a strict henselization
 

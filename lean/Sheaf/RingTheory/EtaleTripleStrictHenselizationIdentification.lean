@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationComparison
-import Sheaf.RingTheory.EtaleResidueTriplesLocalization
+import WeilConjectures.RingTheory.EtaleResidueTriplesLocalization
 import WeilConjectures.RingTheory.PairHenselizationCompletionData
 
 /-!

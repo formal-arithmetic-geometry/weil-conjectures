@@ -114,13 +114,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FlatPolynomialAppendOfFibreRegularSequence",
-  "file": "lean/Sheaf/RingTheory/FlatPolynomialAppendOfFibreRegularSequence.lean",
+  "module": "WeilConjectures.RingTheory.FlatPolynomialAppendOfFibreRegularSequence",
+  "file": "lean/WeilConjectures/RingTheory/FlatPolynomialAppendOfFibreRegularSequence.lean",
   "declaration": "Algebra.flat_polynomial_append_of_fibre_regular_sequence",
   "statement": "theorem flat_polynomial_append_of_fibre_regular_sequence\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (q : Ideal Λ) [q.IsPrime]\n    (t e : ℕ) (xs : Fin t → Λ) (zs : Fin e → Λ)\n    (hzq : ∀ i, zs i ∈ q)\n    (hflat : (Localization.localRingHom\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom) q\n      (MvPolynomial.aeval (R := k) xs).toRingHom rfl).Flat)\n    (hseq : RingTheory.Sequence.IsRegular (Localization.AtPrime q ⧸\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q)).comp\n          (MvPolynomial.aeval (R := k) xs).toRingHom))\n      (List.ofFn (fun i : Fin e ↦ Ideal.Quotient.mk\n        ((q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n          ((algebraMap Λ (Localization.AtPrime q)).comp\n            (MvPolynomial.aeval (R := k) xs).toRingHom))\n        (algebraMap Λ (Localization.AtPrime q) (zs i))))) :\n    let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=\n      MvPolynomial.aeval (Fin.addCases xs zs)\n    (Localization.localRingHom (q.comap φ.toRingHom) q φ.toRingHom rfl).Flat",
   "branch": "sheaf-dag",
   "by": "J2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FlatPolynomialAppendOfFibreRegularSequence; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

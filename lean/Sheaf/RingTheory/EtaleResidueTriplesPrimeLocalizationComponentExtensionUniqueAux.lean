@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel
+import WeilConjectures.RingTheory.PrimeLocalizationEtaleAlgebraModel
 
 @[expose] public section
 universe u

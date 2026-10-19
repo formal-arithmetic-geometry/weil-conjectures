@@ -14,7 +14,7 @@ import Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients
 import Sheaf.RingTheory.RegularRingUniversallyCatenary
 import WeilConjectures.RingTheory.CohenStructurePowerSeriesSurjection
 import Sheaf.RingTheory.CompleteLocalGRing
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.CompleteLocalDomainRegularOpen

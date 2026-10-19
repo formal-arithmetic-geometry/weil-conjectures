@@ -17,8 +17,8 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Topology.GDelta.Basic
 import Sheaf.CategoryTheory.Sites.GrothendieckTopos
-import Sheaf.RingTheory.RegularBaseChange
-import Sheaf.RingTheory.RegularLocalMaximal
+import WeilConjectures.RingTheory.RegularBaseChange
+import WeilConjectures.RingTheory.RegularLocalMaximal
 import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
@@ -26,8 +26,8 @@ import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Flat.Localization
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.RegularComposition
 import Sheaf.AlgebraicGeometry.AlterationGeneratorsReducedBaseChange
 import Sheaf.AlgebraicGeometry.SNCBoundaryParameterCriterion
 

@@ -29,7 +29,7 @@ import WeilConjectures.RingTheory.FiniteFreeResolution
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.RingTheory.LimitFlatModules
+import WeilConjectures.RingTheory.LimitFlatModules
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback

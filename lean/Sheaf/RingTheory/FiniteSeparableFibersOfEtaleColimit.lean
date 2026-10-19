@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.Separable
-import Sheaf.RingTheory.FibrePrimesResidueFields
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.FilteredEtaleFiberStructure
 import Sheaf.RingTheory.FilteredEtaleFiberSeparableImage
 import Mathlib.RingTheory.HopkinsLevitzki

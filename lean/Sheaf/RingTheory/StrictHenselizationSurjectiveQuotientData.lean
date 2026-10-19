@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 
 @[expose] public section
 universe u

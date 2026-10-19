@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.FiniteLocalizationFreeStep
+import WeilConjectures.RingTheory.FiniteLocalizationFreeStep
 import Sheaf.RingTheory.StabilizedFiniteFreeTower
 
 /-! # Finite-free models at finitely many localizations

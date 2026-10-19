@@ -29,7 +29,7 @@ import WeilConjectures.RingTheory.PowerSeriesCompleteOverCompleteBase
 import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import Sheaf.RingTheory.IntegralExtensionDimension
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 
 /-!
 # Formal normalization for supplied parameter ideals

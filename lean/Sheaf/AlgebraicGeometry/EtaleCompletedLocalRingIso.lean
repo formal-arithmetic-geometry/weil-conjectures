@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.FlatLocalCompletionIso
+import WeilConjectures.RingTheory.FlatLocalCompletionIso
 
 /-!
 # Étale invariance of completed local rings at rational points

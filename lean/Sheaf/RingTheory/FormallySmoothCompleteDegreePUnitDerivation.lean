@@ -23,7 +23,7 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import WeilConjectures.RingTheory.Derivation.FormallySmoothAdicExtension
 import WeilConjectures.RingTheory.FiniteModuleComplete
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
 import WeilConjectures.RingTheory.Derivation.Localization
 
 /-!

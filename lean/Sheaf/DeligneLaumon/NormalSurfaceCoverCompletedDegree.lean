@@ -26,7 +26,7 @@ import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.IntegralExtensionDimension
 import WeilConjectures.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.RegularRingNormal

@@ -6,10 +6,10 @@ Authors: SHEAF group U2, SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 

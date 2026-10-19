@@ -10,8 +10,8 @@ public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular

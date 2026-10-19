@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.CategoryTheory.EssentiallySmall
 
 import Mathlib.Algebra.Category.CommAlgCat.FiniteType

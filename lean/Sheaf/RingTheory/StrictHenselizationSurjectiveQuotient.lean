@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientData
 import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientCore
 

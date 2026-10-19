@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.RingTheory.PopescuInitialFlatCoordinates
-import Sheaf.RingTheory.FlatRegularFibreParameterSelection
+import WeilConjectures.RingTheory.FlatRegularFibreParameterSelection
 import Mathlib.Algebra.MvPolynomial.Rename
 
 /-!

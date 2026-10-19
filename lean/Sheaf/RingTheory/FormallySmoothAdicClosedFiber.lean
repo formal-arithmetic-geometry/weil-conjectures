@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.GRing
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
-import Sheaf.RingTheory.FormallySmoothAdicFlat
+import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
+import WeilConjectures.RingTheory.FormallySmoothAdicFlat
 import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
 
 /-!

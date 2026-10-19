@@ -116,15 +116,16 @@
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along the proof of 0AGX, three new nodes: the Mathlib leaf lem-weil-pbc-local-completion-local-ring (05GI(1)/05GG: the completion of a Noetherian local ring is local with maximal ideal m R^ and the same residue field; AdicCompletion/LocalRing.lean:85, maximalIdeal_eq_map :95, residueField_map_bijective :151, verified) and two unsplit nodes for 0394 (finiteness after completion) and 0AGW (completion of a flat module over a Noetherian ring is flat over the completion, with the Tor_1 verification folded in since Mathlib has no Tor criterion). B^ is the m_A-adic completion of B since m_A B = m_B; finite then flat then free over A^ (lem-weil-pbc-finite-flat-local-free, 00NZ); rank 1 by 05GG and the residue-field isomorphism; the generator is a unit multiple of 1, so phi^ is bijective."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.FlatLocalCompletionIso",
+  "module": "WeilConjectures.RingTheory.FlatLocalCompletionIso",
   "declaration": "RingHom.flat_local_completion_iso",
-  "file": "lean/Sheaf/RingTheory/FlatLocalCompletionIso.lean",
+  "file": "lean/WeilConjectures/RingTheory/FlatLocalCompletionIso.lean",
   "statement": "theorem flat_local_completion_iso {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] (φ : A →+* B) (hflat : φ.Flat) [IsLocalHom φ] (hmax : Ideal.map φ (IsLocalRing.maximalIdeal A) = IsLocalRing.maximalIdeal B) (hres : Function.Bijective (Ideal.quotientMap (IsLocalRing.maximalIdeal B) φ (IsLocalRing.maximalIdeal_comap φ).ge)) : ∃ (φhat : AdicCompletion (IsLocalRing.maximalIdeal A) A →+* AdicCompletion (IsLocalRing.maximalIdeal B) B), (∀ (n : ℕ) (x : AdicCompletion (IsLocalRing.maximalIdeal A) A) (a : A), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal A) n x = Ideal.Quotient.mk (IsLocalRing.maximalIdeal A ^ n) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal B) n (φhat x) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal B ^ n) (φ a)) ∧ Function.Bijective φhat ∧ φhat.comp (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) = (algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B)).comp φ",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-flc1041"
+  "fixed_by": "R-flc1041",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FlatLocalCompletionIso; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

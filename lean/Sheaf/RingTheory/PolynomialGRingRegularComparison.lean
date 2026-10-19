@@ -10,11 +10,11 @@ public import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.PolynomialAlgebra
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularBaseChange
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.RegularThroughLocalization
+import WeilConjectures.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.LocalizationRegular
+import WeilConjectures.RingTheory.RegularBaseChange
+import WeilConjectures.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.RegularThroughLocalization
 
 /-!
 # The regular comparison localization for a polynomial ring over a G-ring

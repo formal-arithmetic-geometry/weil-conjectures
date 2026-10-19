@@ -13,13 +13,13 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.HenselianFactorizationCriterion
+import WeilConjectures.RingTheory.HenselianFactorizationCriterion
 import Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.RingTheory.StrictlyHenselianQuotient
-import Sheaf.RingTheory.HenselianPairPrimeConnected
+import WeilConjectures.RingTheory.HenselianPairPrimeConnected
 import Sheaf.Topology.WLocalComponents
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
-import Sheaf.RingTheory.FactorsThroughLocalization
+import WeilConjectures.RingTheory.FactorsThroughLocalization
 import Sheaf.RingTheory.WLocalClopenPartitions
 import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.RingTheory.HenselianSmoothAlgebraLifting

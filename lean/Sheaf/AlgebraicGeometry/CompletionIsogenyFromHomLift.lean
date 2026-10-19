@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.RingTheory.FormalGlueingComplexExact
+import WeilConjectures.RingTheory.FormalGlueingComplexExact
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

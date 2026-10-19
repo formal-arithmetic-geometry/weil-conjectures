@@ -17,7 +17,7 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

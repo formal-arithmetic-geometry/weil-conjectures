@@ -25,7 +25,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.RingTheory.CompleteLocalQuotient
 import WeilConjectures.RingTheory.FiniteAfterCompletion
 import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.FlatCompletion
+import WeilConjectures.RingTheory.FlatCompletion
 import WeilConjectures.RingTheory.FlatModInjective
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 import Mathlib.RingTheory.Localization.Submodule

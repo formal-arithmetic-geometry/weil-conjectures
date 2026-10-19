@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.PunctualPurity
 import Sheaf.RingTheory.FieldsExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.ExcellentRing
-import Sheaf.RingTheory.GRingCompletionRegular
-import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import WeilConjectures.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GeometricallyRegularFieldExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Compactification.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace

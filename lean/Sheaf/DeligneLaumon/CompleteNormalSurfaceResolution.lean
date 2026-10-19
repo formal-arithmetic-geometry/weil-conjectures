@@ -23,10 +23,10 @@ import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Mathlib.RingTheory.Algebraic.Integral
 import Sheaf.TraceFormula.ProjectiveBundleProper
 import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.NagataOfCompleteLocal
+import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.FieldTheory.PurelyInseparableDegreePIntermediate
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Mathlib.RingTheory.Noetherian.Basic

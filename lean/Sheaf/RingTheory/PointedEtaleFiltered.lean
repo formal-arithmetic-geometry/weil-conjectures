@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Mathlib.RingTheory.RingHom.Etale
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected

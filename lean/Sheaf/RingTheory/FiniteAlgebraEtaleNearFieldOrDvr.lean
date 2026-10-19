@@ -24,7 +24,7 @@ import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.FlatModuleAtPrime
+import WeilConjectures.RingTheory.FlatModuleAtPrime
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Pullbacks

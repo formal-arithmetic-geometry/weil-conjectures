@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.FinitePresentationStalkLocalizationModel
 import WeilConjectures.AlgebraicGeometry.PolynomialChartClosedFiberModuleFlat
-import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import WeilConjectures.RingTheory.FlatOfFlatClosedFiber
 
 @[expose] public section
 universe u

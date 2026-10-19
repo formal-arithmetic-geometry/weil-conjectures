@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules

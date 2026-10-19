@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.PolynomialResidueFiniteCoefficientModel
 import Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 
 /-!
 # Finite product presentation of extended polynomial formal fibres

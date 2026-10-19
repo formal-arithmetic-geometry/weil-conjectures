@@ -15,7 +15,7 @@ import Mathlib.Algebra.Polynomial.Derivation
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
 import WeilConjectures.RingTheory.PolynomialNonzeroFibreHypersurface

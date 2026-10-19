@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import Sheaf.RingTheory.StrictHenselizationLocalizedDivisorQuotient

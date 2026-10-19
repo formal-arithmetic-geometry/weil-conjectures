@@ -28,7 +28,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.RingTheory.StrictHenselizationRegular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
+import WeilConjectures.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.AlgebraicGeometry.AffineScheme

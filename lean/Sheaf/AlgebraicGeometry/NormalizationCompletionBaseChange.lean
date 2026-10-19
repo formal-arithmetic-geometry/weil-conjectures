@@ -16,11 +16,11 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.RingTheory.FormalGlueingData
 import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
 import WeilConjectures.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataOfCompleteLocal
+import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.NagataUniversallyJapanese
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 

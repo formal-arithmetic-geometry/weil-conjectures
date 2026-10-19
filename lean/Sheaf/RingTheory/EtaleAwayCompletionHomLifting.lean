@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Filtration
 import Sheaf.RingTheory.ConormalTorsionAlgebraization
 import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
 import WeilConjectures.RingTheory.HenselizationStageMap
-import Sheaf.RingTheory.HenselianFactorizationCriterion
+import WeilConjectures.RingTheory.HenselianFactorizationCriterion
 import Sheaf.RingTheory.CompletedRetractionConormalTorsion
 
 /-!

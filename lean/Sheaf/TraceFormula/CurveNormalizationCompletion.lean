@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.PolynomialNagata
 import WeilConjectures.RingTheory.FiniteOverNagata
 import WeilConjectures.RingTheory.NagataLocalization
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import WeilConjectures.RingTheory.CompletionOfDVR
 import WeilConjectures.RingTheory.CompletionFiniteExtension

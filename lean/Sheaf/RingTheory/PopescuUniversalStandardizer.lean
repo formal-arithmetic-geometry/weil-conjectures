@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.RingTheory.PopescuStandardizerSmoothOpens
 import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
-import Sheaf.RingTheory.ImprovePresentation
+import WeilConjectures.RingTheory.ImprovePresentation
 import WeilConjectures.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
 import WeilConjectures.RingTheory.StrictlyStandardBaseChange
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic

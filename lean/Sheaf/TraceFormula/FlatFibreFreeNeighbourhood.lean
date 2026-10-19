@@ -10,7 +10,7 @@ public import Sheaf.TraceFormula.FlatAssociatedEquidimensional
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
-import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import WeilConjectures.RingTheory.FlatOfFlatClosedFiber
 import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 

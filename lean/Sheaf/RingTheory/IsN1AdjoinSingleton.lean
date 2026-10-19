@@ -8,8 +8,8 @@ module
 public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AsSubring
-import Sheaf.RingTheory.IsN1OfFiniteDomainExtension
-import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
+import WeilConjectures.RingTheory.IsN1OfFiniteDomainExtension
+import WeilConjectures.RingTheory.IsN1OfIsAnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.AdjoinSingletonLocalUnramified
 import WeilConjectures.RingTheory.AdjoinSingletonMaximalFiniteCover

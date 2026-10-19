@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
-import Sheaf.RingTheory.FlatCompletion
+import WeilConjectures.RingTheory.FlatCompletion
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.PresentationFittingIdeal
 import Sheaf.RingTheory.SeparableClosedPointFormalPresentation

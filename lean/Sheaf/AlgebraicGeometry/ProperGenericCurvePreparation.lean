@@ -53,7 +53,7 @@ import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.FiniteDegree.Algebra
 

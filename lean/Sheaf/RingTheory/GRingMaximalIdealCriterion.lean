@@ -6,8 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.RingTheory.GRing
-import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.RegularPermanence
+import WeilConjectures.RingTheory.FlatCompletion
+import WeilConjectures.RingTheory.RegularPermanence
 import Sheaf.RingTheory.GRingMaximalIdealComparison
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 

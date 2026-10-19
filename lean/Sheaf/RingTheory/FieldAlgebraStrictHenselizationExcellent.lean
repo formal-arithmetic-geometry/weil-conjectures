@@ -6,7 +6,7 @@ Authors: SHEAF group NK
 module
 
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.StrictHenselizationNoetherian

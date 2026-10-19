@@ -11,7 +11,7 @@ import Sheaf.RingTheory.FiniteTypeGRing
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
+import WeilConjectures.RingTheory.IsN1OfIsAnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.RegularMapReducedTarget
 import Sheaf.RingTheory.UniversallyJapaneseN1Criterion

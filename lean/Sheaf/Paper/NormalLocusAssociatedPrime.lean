@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Spectrum.Prime.Defs
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import all Sheaf.RingTheory.FlatFiberLocalDepth
+import all WeilConjectures.RingTheory.FlatFiberLocalDepth
 import Sheaf.RingTheory.SerreCriterionNormal
 import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

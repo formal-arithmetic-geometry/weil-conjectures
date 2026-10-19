@@ -5,12 +5,12 @@ Authors: SHEAF groups C1 and F1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Defs
 import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.FlatAlgebraPowerBasis
+import WeilConjectures.RingTheory.FlatAlgebraPowerBasis
 
 /-!
 # Fixed bases for strict henselization quotients

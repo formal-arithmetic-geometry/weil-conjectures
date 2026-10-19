@@ -19,7 +19,7 @@ import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.NumberTheory.DvrGaloisDegreeData
 import Sheaf.FieldTheory.FiniteDVRTameInertia

@@ -2,7 +2,7 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
+import WeilConjectures.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
 import Mathlib.RingTheory.Localization.BaseChange
 import all Sheaf.RingTheory.SmoothLocalCompleteIntersection
 

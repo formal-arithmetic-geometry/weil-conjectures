@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.FormallySmoothAdicClosedFiberCompletion
+import WeilConjectures.RingTheory.FlatCompletion
+import WeilConjectures.RingTheory.FormallySmoothAdicClosedFiberCompletion
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiberComplete
 
 /-!

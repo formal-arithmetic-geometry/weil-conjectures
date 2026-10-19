@@ -121,13 +121,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PolynomialAppendClosedFibreParameters",
-  "file": "lean/Sheaf/RingTheory/PolynomialAppendClosedFibreParameters.lean",
+  "module": "WeilConjectures.RingTheory.PolynomialAppendClosedFibreParameters",
+  "file": "lean/WeilConjectures/RingTheory/PolynomialAppendClosedFibreParameters.lean",
   "declaration": "Algebra.polynomial_append_closed_fibre_parameters",
   "statement": "theorem polynomial_append_closed_fibre_parameters\n    (k : Type u) [Field k] (t e : ℕ)\n    (p₀ : Ideal (MvPolynomial (Fin t) k)) [p₀.IsPrime]\n    (p₁ : Ideal (MvPolynomial (Fin (t + e)) k)) [p₁.IsPrime]\n    (hc : p₀ = p₁.comap (MvPolynomial.rename (Fin.castAdd e)).toRingHom)\n    (hz : ∀ i : Fin e, MvPolynomial.X (Fin.natAdd t i) ∈ p₁) :\n    let α := Localization.localRingHom p₀ p₁\n      (MvPolynomial.rename (Fin.castAdd e)).toRingHom hc\n    let J := (IsLocalRing.maximalIdeal (Localization.AtPrime p₀)).map α\n    let C := Localization.AtPrime p₁ ⧸ J\n    let xs := List.ofFn (fun i : Fin e ↦ Ideal.Quotient.mk J\n      (algebraMap (MvPolynomial (Fin (t + e)) k) (Localization.AtPrime p₁)\n        (MvPolynomial.X (Fin.natAdd t i))))\n    ∃ h : IsRegularLocalRing C,\n      letI := h\n      ringKrullDim C = (e : WithBot ℕ∞) ∧\n        Ideal.ofList xs = IsLocalRing.maximalIdeal C",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PolynomialAppendClosedFibreParameters; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

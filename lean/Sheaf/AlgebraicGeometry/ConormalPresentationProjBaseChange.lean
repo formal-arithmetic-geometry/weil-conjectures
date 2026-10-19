@@ -30,7 +30,7 @@ import Mathlib.RingTheory.LocalRing.Module
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic

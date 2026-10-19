@@ -13,7 +13,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import WeilConjectures.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
-import Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent
+import WeilConjectures.RingTheory.FractionFieldCompleteIntersectionCotangent
 
 /-!
 # Cartier equality

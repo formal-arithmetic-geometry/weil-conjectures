@@ -99,13 +99,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FlatClosedFiberPowerSeriesModel",
-  "file": "lean/Sheaf/RingTheory/FlatClosedFiberPowerSeriesModel.lean",
+  "module": "WeilConjectures.RingTheory.FlatClosedFiberPowerSeriesModel",
+  "file": "lean/WeilConjectures/RingTheory/FlatClosedFiberPowerSeriesModel.lean",
   "declaration": "RingHom.exists_flat_closedFiber_powerSeries_model",
   "statement": "theorem exists_flat_closedFiber_powerSeries_model\n    (A : Type u) (B : Type v) [CommRing A] [CommRing B]\n    [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]\n    (f : A →+* B) [IsLocalHom f] (hflat : f.Flat)\n    (ΛR ΛS : Type w) [CommRing ΛR] [CommRing ΛS] (n m : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]\n    [IsRegularLocalRing (MvPowerSeries (Fin m) ΛS)]\n    (q : MvPowerSeries (Fin n) ΛR →+* A) [IsLocalHom q]\n    (b : MvPowerSeries (Fin m) ΛS →+* B) [IsLocalHom b]\n    (i : MvPowerSeries (Fin n) ΛR →+* MvPowerSeries (Fin m) ΛS) [IsLocalHom i]\n    (hq : Function.Surjective q) (hb : Function.Surjective b)\n    (hcomm : b.comp i = f.comp q)\n    (t : List (MvPowerSeries (Fin n) ΛR))\n    (z : List (MvPowerSeries (Fin m) ΛS))\n    (ht : IsRegularSystemOfParameters t)\n    (hz : IsRegularSystemOfParameters (t.map i ++ z))\n    (hcoeff : (IsField ΛR ∧ IsField ΛS ∧ CharZero ΛR ∧ CharZero ΛS) ∨\n      ∃ p : ℕ, p.Prime ∧ IsCohenRing p ΛR ∧ IsCohenRing p ΛS ∧\n        t.head? = some (p : MvPowerSeries (Fin n) ΛR)) :\n    letI : Algebra A B := f.toAlgebra\n    let I : Ideal B := Ideal.map f (maximalIdeal A)\n    letI : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal A ≤ I.comap (algebraMap A B))\n    Algebra.FormallySmoothAdic (A ⧸ maximalIdeal A) (B ⧸ I)\n        (Ideal.map (Ideal.Quotient.mk I) (maximalIdeal B)) →\n    ∃ m' : ℕ, let T := MvPowerSeries (Fin m') ΛS\n      ∃ (_ : IsRegularLocalRing T)\n        (v : T →+* B) (j : MvPowerSeries (Fin n) ΛR →+* T),\n        Function.Surjective v ∧ IsLocalHom j ∧\n        v.comp j = f.comp q ∧ RingHom.ker v = (RingHom.ker q).map j ∧\n        ∃ y : List T, IsRegularSystemOfParameters (t.map j ++ y) ∧\n          (let R := MvPowerSeries (Fin n) ΛR\n           letI : Algebra R T := j.toAlgebra\n           let L : Ideal T := (maximalIdeal R).map j\n           letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n             Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n               maximalIdeal R ≤ L.comap (algebraMap R T))\n           Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n             ((maximalIdeal T).map (Ideal.Quotient.mk L)))",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FlatClosedFiberPowerSeriesModel; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

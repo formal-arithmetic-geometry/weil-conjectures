@@ -22,7 +22,7 @@ import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherianOfQuotient
 import Sheaf.RingTheory.NormalizationCompletedBranchLift
-import Sheaf.RingTheory.NagataOfCompleteLocal
+import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import WeilConjectures.RingTheory.JapaneseDomain
 
 /-!

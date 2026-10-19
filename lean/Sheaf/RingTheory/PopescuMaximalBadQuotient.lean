@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.RegularBaseChange
+import WeilConjectures.RingTheory.RegularBaseChange
 import Mathlib.RingTheory.TensorProduct.Quotient
 import WeilConjectures.Algebra.IndSmoothQuotientCompatibility
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent

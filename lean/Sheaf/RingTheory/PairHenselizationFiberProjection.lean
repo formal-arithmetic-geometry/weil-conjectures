@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.PairHenselizationFiltered
 import WeilConjectures.RingTheory.PairHenselizationEssentiallySmall
 import WeilConjectures.RingTheory.FilteredEtaleFiberStructure
-import Sheaf.RingTheory.FibrePrimesResidueFields
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.RingTheory.TensorProduct.Pi
 

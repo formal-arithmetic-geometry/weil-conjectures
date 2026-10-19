@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FormallySmoothCompleteDegreePRegular
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.Submodule
 

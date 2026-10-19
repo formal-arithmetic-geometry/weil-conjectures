@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.PointCount
 import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale

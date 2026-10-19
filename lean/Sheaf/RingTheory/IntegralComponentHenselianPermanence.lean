@@ -14,7 +14,7 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.RingTheory.FilteredColimitHenselianPair
+import WeilConjectures.RingTheory.FilteredColimitHenselianPair
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.FieldTheory.Separable
 import Mathlib.FieldTheory.IsSepClosed

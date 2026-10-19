@@ -8,12 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
 import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion
-import Sheaf.RingTheory.HenselianPairPrimeConnected
+import WeilConjectures.RingTheory.HenselianPairPrimeConnected
 import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-! # Integral schemes over strictly henselian local rings

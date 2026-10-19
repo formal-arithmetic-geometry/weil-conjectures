@@ -9,11 +9,11 @@ public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
-import Sheaf.RingTheory.IsN2OfFiniteExtension
+import WeilConjectures.RingTheory.IsN2OfFiniteExtension
 import Sheaf.RingTheory.PolynomialPurelyInseparableIntegralClosureFinite
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Mathlib.RingTheory.Polynomial.IsIntegral
-import Sheaf.RingTheory.N2CharPPurelyInseparableCriterion
+import WeilConjectures.RingTheory.N2CharPPurelyInseparableCriterion
 
 /-!
 # Polynomial rings over Noetherian Japanese domains

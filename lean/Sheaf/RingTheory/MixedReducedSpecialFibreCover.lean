@@ -26,11 +26,11 @@ import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Mathlib.RingTheory.Localization.Integral
-import Sheaf.RingTheory.NagataOfCompleteLocal
+import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import WeilConjectures.RingTheory.NagataRing
 import WeilConjectures.RingTheory.JapaneseDomain
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Mathlib.RingTheory.IntegralClosure.GoingDown
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic

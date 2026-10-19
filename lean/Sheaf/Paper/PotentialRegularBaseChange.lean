@@ -32,7 +32,7 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.RingTheory.RegularBaseChange
+import WeilConjectures.RingTheory.RegularBaseChange
 import Sheaf.AlgebraicGeometry.RegularEtaleDirectImageBaseChange
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.RingTheory.StrictHenselizationTriples

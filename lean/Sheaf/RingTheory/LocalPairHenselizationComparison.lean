@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.PairHenselization
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
-import Sheaf.RingTheory.HenselizationUniversalProperty
+import WeilConjectures.RingTheory.HenselizationUniversalProperty
 
 /-!
 # Comparison of local and pair henselization

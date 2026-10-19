@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import WeilConjectures.RingTheory.FormalFibreQuasiFiniteAscent
 
 /-! Reduction to a regular complete local coefficient subring.
 Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraphs 3--4.

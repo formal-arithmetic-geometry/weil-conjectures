@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
-import Sheaf.RingTheory.HenselianPairPrimeConnected
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.RingTheory.HenselianPairPrimeConnected
+import WeilConjectures.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.Topology.SpectralClosedRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 

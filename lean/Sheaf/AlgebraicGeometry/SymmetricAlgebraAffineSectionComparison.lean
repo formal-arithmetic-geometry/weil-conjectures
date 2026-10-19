@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineComparisonMap
 import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 
 /-! # Sectionwise comparison before sheafification
 

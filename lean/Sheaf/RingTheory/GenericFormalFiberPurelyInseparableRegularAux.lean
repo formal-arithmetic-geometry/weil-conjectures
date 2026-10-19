@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
-import Sheaf.RingTheory.GeometricRegularityFieldIso
+import WeilConjectures.RingTheory.GeometricRegularityFieldIso
 import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.CompletionRegularLocal
 

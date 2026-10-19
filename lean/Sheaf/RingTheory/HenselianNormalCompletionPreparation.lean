@@ -20,8 +20,8 @@ public import Mathlib.Topology.Sober
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 import WeilConjectures.RingTheory.PairHenselization
-import Sheaf.RingTheory.HenselizationUniversalProperty
-import Sheaf.RingTheory.HenselianFactorizationCriterion
+import WeilConjectures.RingTheory.HenselizationUniversalProperty
+import WeilConjectures.RingTheory.HenselianFactorizationCriterion
 import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.RingTheory.CompletionDimension

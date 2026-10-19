@@ -27,7 +27,7 @@ import Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.NormalizationInseparableBaseChange
 import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
 

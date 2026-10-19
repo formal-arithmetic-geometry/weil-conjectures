@@ -5,10 +5,10 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.Etale.LocalDimension
-import Sheaf.RingTheory.FilteredColimitPrimeChainDimension
+import WeilConjectures.RingTheory.FilteredColimitPrimeChainDimension
 import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationTriples

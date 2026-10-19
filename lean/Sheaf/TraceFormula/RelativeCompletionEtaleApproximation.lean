@@ -25,11 +25,11 @@ import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegersExcellent
 import Sheaf.RingTheory.CompleteLocalGRing
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.RingTheory.LocalizationRegular
+import WeilConjectures.RingTheory.LocalizationRegular
 import Sheaf.RingTheory.PopescuSmoothing
-import Sheaf.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.RegularComposition
 
 /-! # Relative étale approximation from an isomorphism of completed local rings
 

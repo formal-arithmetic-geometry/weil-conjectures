@@ -17,7 +17,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.SerreCriterionNormal
 import Mathlib.RingTheory.Localization.Submodule

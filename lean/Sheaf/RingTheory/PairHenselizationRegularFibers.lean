@@ -10,8 +10,8 @@ public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.PairHenselizationFiberLocalization
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.GeometricRegularitySeparableExtension
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.GeometricRegularitySeparableExtension
 import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!

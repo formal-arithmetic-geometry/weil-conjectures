@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PopescuResolution
 import Sheaf.RingTheory.PopescuSeparablePreparationCore
-import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
+import WeilConjectures.RingTheory.ExistsGeneratorsWithControlledAnnihilators
 public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs

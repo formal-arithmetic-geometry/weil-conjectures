@@ -10,15 +10,15 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
-import Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget
+import WeilConjectures.RingTheory.FormallySmoothAdicCompleteSourceTarget
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
-import Sheaf.RingTheory.GeometricRegularityFieldIso
-import Sheaf.RingTheory.GeometricallyRegularFieldExtension
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.GeometricRegularitySeparableExtension
+import WeilConjectures.RingTheory.GeometricRegularityFieldIso
+import WeilConjectures.RingTheory.GeometricallyRegularFieldExtension
+import WeilConjectures.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.LocalizationOfRegularRing
+import WeilConjectures.RingTheory.GeometricRegularitySeparableExtension
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Etale.Field

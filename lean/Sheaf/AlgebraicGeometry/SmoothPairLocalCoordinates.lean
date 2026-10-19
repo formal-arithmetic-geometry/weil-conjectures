@@ -24,7 +24,7 @@ import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.RingTheory.MiracleFlatness
-import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import WeilConjectures.RingTheory.FlatOfFlatClosedFiber
 import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
 import Sheaf.AlgebraicGeometry.SmoothPairRegularEquations
 import Sheaf.RingTheory.RelativeRegularEquationsBaseChange

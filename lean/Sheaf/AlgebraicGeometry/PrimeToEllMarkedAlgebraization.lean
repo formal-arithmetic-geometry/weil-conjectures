@@ -27,13 +27,13 @@ import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
 import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
-import Sheaf.RingTheory.LocalizationRegular
+import WeilConjectures.RingTheory.LocalizationRegular
 import Sheaf.Paper.NormalLocusOpen
-import Sheaf.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.RegularComposition
 import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic

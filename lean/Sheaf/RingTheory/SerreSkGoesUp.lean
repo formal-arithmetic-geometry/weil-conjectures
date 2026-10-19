@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.SerreConditions
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Sheaf.RingTheory.FlatFiberLocalDepth
+import WeilConjectures.RingTheory.FlatFiberLocalDepth
 import WeilConjectures.RingTheory.FlatFiberPrimeHeight
 
 /-!

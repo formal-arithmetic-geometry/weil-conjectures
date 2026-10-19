@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
-import Sheaf.RingTheory.RegularRingEquiv
+import WeilConjectures.RingTheory.RegularRingEquiv
 
 /-!
 # G-rings on affine opens of a scheme

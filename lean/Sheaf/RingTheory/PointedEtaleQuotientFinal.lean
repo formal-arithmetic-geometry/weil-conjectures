@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Sheaf.RingTheory.SurjectiveQuotientBaseChange
 public import Mathlib.CategoryTheory.Limits.Final
 import Sheaf.RingTheory.PointedEtaleQuotientPoint

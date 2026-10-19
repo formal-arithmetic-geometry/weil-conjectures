@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.IsStrictHenselization
+public import WeilConjectures.RingTheory.IsStrictHenselization
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected

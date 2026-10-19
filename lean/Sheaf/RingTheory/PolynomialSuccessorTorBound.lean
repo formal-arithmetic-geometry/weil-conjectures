@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.RingTheory.FlatScalarExtensionTorComparison
+import WeilConjectures.RingTheory.FlatScalarExtensionTorComparison
 import WeilConjectures.RingTheory.PolynomialInducedPresentation
 import all WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.Algebra.MvPolynomial.Equiv

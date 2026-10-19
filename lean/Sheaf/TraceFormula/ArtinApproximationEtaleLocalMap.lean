@@ -19,10 +19,10 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.RingTheory.GRingCompletionRegular
+import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.PopescuSmoothing
 import Sheaf.Paper.SmoothSectionEtaleLift
-import Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel
+import WeilConjectures.RingTheory.PrimeLocalizationEtaleAlgebraModel
 
 /-!
 # Artin approximation by an étale local algebra

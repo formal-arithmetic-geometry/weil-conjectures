@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.CohenRing
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-import Sheaf.RingTheory.FormallySmoothAdicSmallKernelCriterion
+import WeilConjectures.RingTheory.FormallySmoothAdicSmallKernelCriterion
 import Sheaf.RingTheory.PowerSeriesParameterPreservingRingLift
 import Sheaf.RingTheory.ClosedFiberDefectDerivationExtension
 

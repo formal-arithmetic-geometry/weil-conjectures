@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.GRing
 public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.RingTheory.GenericFormalFiberNoetherian
+import WeilConjectures.RingTheory.GenericFormalFiberNoetherian
 import Sheaf.RingTheory.GenericFormalFiberPurelyInseparableRegular
 
 /-!

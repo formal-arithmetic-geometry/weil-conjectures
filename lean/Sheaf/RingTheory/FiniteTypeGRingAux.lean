@@ -2,14 +2,14 @@ module
 
 public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.FlatCompletion
+import WeilConjectures.RingTheory.FlatCompletion
 import Sheaf.RingTheory.PolynomialGRingComparison
-import Sheaf.RingTheory.GRingEquiv
+import WeilConjectures.RingTheory.GRingEquiv
 import Sheaf.RingTheory.GRingMaximalIdealCriterion
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.Algebra.MvPolynomial.Equiv
-import Sheaf.RingTheory.QuotientGRing
-import Sheaf.RingTheory.RegularPermanence
+import WeilConjectures.RingTheory.QuotientGRing
+import WeilConjectures.RingTheory.RegularPermanence
 
 /-! Auxiliary formal-fibre step for finite type algebras over G-rings.
 

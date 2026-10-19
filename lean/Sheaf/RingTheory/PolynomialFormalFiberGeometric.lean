@@ -2,7 +2,7 @@ module
 public import Mathlib.Algebra.Polynomial.Basic
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
 import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth

@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.ExcellentRing
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
-import Sheaf.RingTheory.IntGRing
+import WeilConjectures.RingTheory.IntGRing
 import WeilConjectures.RingTheory.IntegerPrimeLocalizations
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.RegularRingUniversallyCatenary

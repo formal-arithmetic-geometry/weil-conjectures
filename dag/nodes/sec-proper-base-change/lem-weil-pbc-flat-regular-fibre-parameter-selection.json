@@ -140,13 +140,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FlatRegularFibreParameterSelection",
-  "file": "lean/Sheaf/RingTheory/FlatRegularFibreParameterSelection.lean",
+  "module": "WeilConjectures.RingTheory.FlatRegularFibreParameterSelection",
+  "file": "lean/WeilConjectures/RingTheory/FlatRegularFibreParameterSelection.lean",
   "declaration": "Algebra.exists_flat_regular_fibre_parameter_selection",
   "statement": "theorem exists_flat_regular_fibre_parameter_selection\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (q : Ideal Λ) [q.IsPrime]\n    (t r : ℕ) (xs : Fin t → Λ) (ys : Fin r → Λ)\n    (hyq : ∀ i, ys i ∈ q)\n    (hys : Ideal.span (Set.range (fun i ↦ algebraMap Λ (Localization.AtPrime q) (ys i))) =\n      q.map (algebraMap Λ (Localization.AtPrime q)))\n    (hflat : (Localization.localRingHom\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom) q\n      (MvPolynomial.aeval (R := k) xs).toRingHom rfl).Flat)\n    (hfibre : IsRegularLocalRing (Localization.AtPrime q ⧸\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q)).comp\n          (MvPolynomial.aeval (R := k) xs).toRingHom))) :\n    ∃ (e : ℕ) (s : Fin e → Fin r),\n      let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=\n        MvPolynomial.aeval (Fin.addCases xs (fun i ↦ ys (s i)))\n      (Localization.localRingHom (q.comap φ.toRingHom) q φ.toRingHom rfl).Flat ∧\n        q.map (algebraMap Λ (Localization.AtPrime q)) =\n          (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n              ((algebraMap Λ (Localization.AtPrime q)).comp\n                (MvPolynomial.aeval (R := k) xs).toRingHom) ⊔\n            Ideal.span (Set.range (fun i ↦\n              algebraMap Λ (Localization.AtPrime q) (ys (s i))))",
   "branch": "sheaf-dag",
   "by": "C1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FlatRegularFibreParameterSelection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

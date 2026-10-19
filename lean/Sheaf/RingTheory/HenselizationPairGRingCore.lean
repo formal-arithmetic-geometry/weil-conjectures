@@ -8,13 +8,13 @@ module
 public import Sheaf.RingTheory.GRingMaximalIdealCriterion
 public import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
 import Sheaf.RingTheory.PairHenselizationRegularFibers
-import Sheaf.RingTheory.FlatLocalCompletionIso
-import Sheaf.RingTheory.RegularThroughLocalization
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularRingEquiv
+import WeilConjectures.RingTheory.FlatLocalCompletionIso
+import WeilConjectures.RingTheory.RegularThroughLocalization
+import WeilConjectures.RingTheory.RegularComposition
+import WeilConjectures.RingTheory.LocalizationRegular
+import WeilConjectures.RingTheory.RegularRingEquiv
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 
 /-!

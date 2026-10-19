@@ -22,7 +22,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Sheaf.RingTheory.FlatModuleAtPrime
+import WeilConjectures.RingTheory.FlatModuleAtPrime
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.Ideal.GoingUp
 import WeilConjectures.RingTheory.FlatLocalDepthFormula

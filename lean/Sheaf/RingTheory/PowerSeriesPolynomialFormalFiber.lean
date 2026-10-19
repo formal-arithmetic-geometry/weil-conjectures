@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
+import WeilConjectures.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberGeometricComponent
 
 /-!

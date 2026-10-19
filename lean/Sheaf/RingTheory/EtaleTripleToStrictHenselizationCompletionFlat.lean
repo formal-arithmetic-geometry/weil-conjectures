@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Unramified.Finite
-import Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization
+import WeilConjectures.RingTheory.EtaleResidueTriplesStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationCompletionFlatOverBase
 
 /-!

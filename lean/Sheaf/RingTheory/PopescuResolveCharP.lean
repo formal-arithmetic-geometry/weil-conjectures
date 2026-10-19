@@ -10,7 +10,7 @@ public import Sheaf.RingTheory.PopescuResolution
 import Sheaf.RingTheory.PopescuCharPPreparation
 import Sheaf.RingTheory.PopescuDelocalizeHeightZero
 import Sheaf.RingTheory.PopescuLiftSolution
-import Sheaf.RingTheory.FactorsThroughSmooth
+import WeilConjectures.RingTheory.FactorsThroughSmooth
 
 /-!
 # Resolving Popescu's local problem in positive characteristic
