@@ -22,10 +22,8 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with the fixed constant finite ring $A$. The inverse images $u_{\\mathrm{et}}^{-1}$ and $\\nu_T^*$ are exact on abelian sheaves: use [prop-weil-pbc-inverse-image-exact] for the former and [lem-weil-pbc-site-pullback-abelian-exact] for the latter, since [def-weil-pbc-site-comparison-morphism] makes $\\nu_T$ a geometric morphism. These inverse images act on fixed-$A$ module sheaves by transporting the scalar endomorphisms. Their exactness on modules follows from the sectionwise kernel and sheafified cokernel description of [def-weil-sheaf-of-modules-category]: the underlying abelian sheaves of these kernels and cokernels are the corresponding abelian kernels and cokernels, with the induced $A$-action. Thus preserving those underlying kernels and cokernels preserves the module ones. For $u$ on the pro-etale site, [def-weil-pbc-proetale-operations] gives the exact module inverse image $u^*$; the specified identification $u^{-1}A_X\\cong A_U$ makes its scalar extension transport along a ring isomorphism. In particular it is the fixed-$A$ inverse image $u_{\\mathrm{proet}}^{-1}$.",
+   "text": "Use the published exact fixed-scalar inverse-image functors Etale.upperStar, ProEtale.upperStar and ProEtale.comparisonUpperStar. Their Additive, PreservesFiniteLimits and PreservesFiniteColimits instances provide the exactness required by mapDerivedCategory and mapDerivedCategoryPlus directly. No passage through underlying abelian sheaves or separately transported intrinsic modules is needed.",
    "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact",
     "def-weil-pbc-site-comparison-morphism",
     "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-proetale-operations"
@@ -37,10 +35,10 @@
    }
   },
   {
-   "text": "For each of the given open immersions $e=i,j$, [lem-weil-pbc-extension-by-zero-exact] makes $e_!^{\\mathrm{et}}$ exact on $A$-module sheaves, and [lem-weil-extension-by-zero-exact] makes $e_!^{\\mathrm{proet}}$ exact on the constant-$A$ pro-etale module sheaves. The coefficient hypothesis of the latter is satisfied because $A=A_{E,n}$ is a finite commutative ring. These are the two extension functors used in the statement.",
+   "text": "Use the published fixed-scalar openImmersionLowerShriek functors on both sites. Their additive and finite-limit-preserving instances, together with preservation of colimits as left adjoints, give exactness directly for ModuleCat A. The intrinsic finite-ring extension is not used: the supplied FixedEtaleOriginWitness and the conclusion already use fixed-scalar sheaves.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact"
+    "def-weil-extension-by-zero"
    ],
    "elementary": false,
    "source": {
@@ -49,7 +47,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functors in steps 1 and 2. Their termwise functors carry quasi-isomorphisms to quasi-isomorphisms and induce functors on the derived categories, with the stated natural identifications on representing complexes. By [def-weil-pbc-proetale-operations], the induced functor for $u^*$ is precisely the $Lu^*$ in the statement. Apply [lem-weil-pbc-exact-functor-bounded-below] to every one of these exact functors: $\\mathcal H^r(F_D B)\\cong F(\\mathcal H^rB)$. Hence, whenever $\\mathcal H^r(B)=0$ for $r<N$, the same is true after any of these operations and their composites. They therefore restrict to the indicated $D^+$ categories. This uses cohomological boundedness, so an arbitrary representative of $B$ need not itself vanish in low degrees.",
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functors in steps 1 and 2. Their termwise functors carry quasi-isomorphisms to quasi-isomorphisms and induce functors on the derived categories, with the stated natural identifications on representing complexes. By [def-weil-pbc-proetale-operations], the induced functor for $u^*$ is precisely the $Lu^*$ in the statement. Apply [lem-weil-pbc-exact-functor-bounded-below] to every one of these exact functors: $\\mathcal H^r(F_D B)\\cong F(\\mathcal H^rB)$. Hence, whenever $\\mathcal H^r(B)=0$ for $r<N$, the same is true after any of these operations and their composites. They therefore restrict to the indicated $D^+$ categories. This uses cohomological boundedness, so an arbitrary representative of $B$ need not itself vanish in low degrees. In Lean these are Functor.mapDerivedCategory and Functor.mapDerivedCategoryPlus; the latter stores the bounded-below condition.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
     "def-weil-pbc-proetale-operations",
@@ -62,7 +60,7 @@
    }
   },
   {
-   "text": "Let $C$ be a complex of etale $A$-module sheaves on $X$. Apply the natural sheaf isomorphism $c_u$ of [lem-weil-pbc-comparison-pullback] in every degree. Each component $c_{u,C^r}$ is $A$-linear: both composites act on fixed-$A$ module sheaves by applying the functors to each scalar endomorphism $\\lambda_a$ ($a\\in A$) as in step 1, and naturality of $c_u$ for the sheaf maps $\\lambda_a$ says exactly that $c_{u,C^r}$ commutes with them. Its naturality for $d_C^r$ says $u_{\\mathrm{proet}}^{-1}\\nu_X^*(d_C^r)\\,c_{u,C^r}=c_{u,C^{r+1}}\\,\\nu_U^*u_{\\mathrm{et}}^{-1}(d_C^r)$, so these components define a chain map. The inverse sheaf comparisons form its chain inverse. Naturality for each component of a chain map gives naturality on complexes. After localization these are isomorphisms between the two composites of step 3. Part (2) of [lem-weil-pbc-localization-universal-property] lifts this natural isomorphism uniquely through the localization of the source complexes, using the factorization isomorphisms of step 3. This is $\\kappa_u$, with the pro-etale inverse image identified with $Lu^*$ as above. The lift evaluated on $QC$ is exactly the localized termwise comparison under those factorization isomorphisms. The uniqueness assertion and part (3) of the same lemma show that the construction is independent of the representing complex.",
+   "text": "Let $C$ be a complex of etale $A$-module sheaves on $X$. Apply the natural sheaf isomorphism $c_u$ of [lem-weil-pbc-comparison-pullback] in every degree. Each component $c_{u,C^r}$ is $A$-linear: both composites act on fixed-$A$ module sheaves by applying the functors to each scalar endomorphism $\\lambda_a$ ($a\\in A$) as in step 1, and naturality of $c_u$ for the sheaf maps $\\lambda_a$ says exactly that $c_{u,C^r}$ commutes with them. Its naturality for $d_C^r$ says $u_{\\mathrm{proet}}^{-1}\\nu_X^*(d_C^r)\\,c_{u,C^r}=c_{u,C^{r+1}}\\,\\nu_U^*u_{\\mathrm{et}}^{-1}(d_C^r)$, so these components define a chain map. The inverse sheaf comparisons form its chain inverse. Naturality for each component of a chain map gives naturality on complexes. After localization these are isomorphisms between the two composites of step 3. Part (2) of [lem-weil-pbc-localization-universal-property] lifts this natural isomorphism uniquely through the localization of the source complexes, using the factorization isomorphisms of step 3. This is $\\kappa_u$, with the pro-etale inverse image identified with $Lu^*$ as above. The lift evaluated on $QC$ is exactly the localized termwise comparison under those factorization isomorphisms. The uniqueness assertion and part (3) of the same lemma show that the construction is independent of the representing complex. Concretely apply Functor.mapDerivedCategoryNatIso to supportSiteComparisonCoefficientPullbackIso, conjugate by the inverse and forward mapDerivedCategoryCompIso, and whisker left by DerivedCategory.Plus.ι. This is definitionally the required normalization.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
     "lem-weil-pbc-localization-universal-property"
@@ -74,7 +72,7 @@
    }
   },
   {
-   "text": "Fix $e:S\\hookrightarrow T$ equal to $i$ or $j$. Let $C$ be a complex of etale $A$-module sheaves on $S$. Apply [lem-cbc-proetale-extension-zero-comparison] in each degree, obtaining $a_C^r:\\nu_T^*e_!^{\\mathrm{et}}C^r\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*C^r$. Naturality of that sheaf comparison gives $(e_!^{\\mathrm{proet}}\\nu_S^*d_C^r)a_C^r=a_C^{r+1}(\\nu_T^*e_!^{\\mathrm{et}}d_C^r)$. Thus $a_C$ and its componentwise inverse are inverse chain maps, natural in chain maps. The two composites invert quasi-isomorphisms by steps 1--3. Part (2) of [lem-weil-pbc-localization-universal-property] therefore gives a natural isomorphism $\\delta_e$ on the derived categories whose component on $QC$ is the image of $a_C$ under localization, with the factorization identifications. Uniqueness and part (3) of that lemma show independence from the representative. Restrict to $D^+$ by step 3. This constructs both displayed $\\delta$ maps with precisely their prescribed normalization.",
+   "text": "Fix $e:S\\hookrightarrow T$ equal to $i$ or $j$. Let $C$ be a complex of etale $A$-module sheaves on $S$. Apply [lem-cbc-proetale-extension-zero-comparison] in each degree, obtaining $a_C^r:\\nu_T^*e_!^{\\mathrm{et}}C^r\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*C^r$. Naturality of that sheaf comparison gives $(e_!^{\\mathrm{proet}}\\nu_S^*d_C^r)a_C^r=a_C^{r+1}(\\nu_T^*e_!^{\\mathrm{et}}d_C^r)$. Thus $a_C$ and its componentwise inverse are inverse chain maps, natural in chain maps. The two composites invert quasi-isomorphisms by steps 1--3. Part (2) of [lem-weil-pbc-localization-universal-property] therefore gives a natural isomorphism $\\delta_e$ on the derived categories whose component on $QC$ is the image of $a_C$ under localization, with the factorization identifications. Uniqueness and part (3) of that lemma show independence from the representative. Restrict to $D^+$ by step 3. This constructs both displayed $\\delta$ maps with precisely their prescribed normalization. Use the identical construction with openImmersionLowerShriekComparisonUpperStarIso for j and i; both normalization equalities are reflexivity.",
    "uses": [
     "lem-cbc-proetale-extension-zero-comparison",
     "lem-weil-pbc-localization-universal-property"
@@ -86,7 +84,7 @@
    }
   },
   {
-   "text": "Put $L_u=u_{\\mathrm{et}}^{-1}L$ and $M=Lu^*K$. Step 4 gives $\\kappa_{u,L}:\\nu_U^*L_u\\xrightarrow{\\sim}Lu^*\\nu_X^*L$. Applying the functor $Lu^*$ to the given isomorphism $\\alpha$ gives an isomorphism $Lu^*\\alpha:Lu^*\\nu_X^*L\\xrightarrow{\\sim}M$, whose inverse is $Lu^*(\\alpha^{-1})$. Their composite is $\\alpha_u=(Lu^*\\alpha)\\circ\\kappa_{u,L}$, with inverse $\\kappa_{u,L}^{-1}\\circ Lu^*(\\alpha^{-1})$. This has source $\\nu_U^*L_u$ and target $M$, so $(L_u,\\alpha_u)$ is the witness of [def-weil-pbc-etale-origin-witness]. Both objects are bounded below by step 3.",
+   "text": "Put $L_u=u_{\\mathrm{et}}^{-1}L$ and $M=Lu^*K$. Step 4 gives $\\kappa_{u,L}:\\nu_U^*L_u\\xrightarrow{\\sim}Lu^*\\nu_X^*L$. Applying the functor $Lu^*$ to the given isomorphism $\\alpha$ gives an isomorphism $Lu^*\\alpha:Lu^*\\nu_X^*L\\xrightarrow{\\sim}M$, whose inverse is $Lu^*(\\alpha^{-1})$. Their composite is $\\alpha_u=(Lu^*\\alpha)\\circ\\kappa_{u,L}$, with inverse $\\kappa_{u,L}^{-1}\\circ Lu^*(\\alpha^{-1})$. This has source $\\nu_U^*L_u$ and target $M$, so $(L_u,\\alpha_u)$ is the witness of [def-weil-pbc-etale-origin-witness]. Both objects are bounded below by step 3. Construct pulled.complex and pulled.iso explicitly; pulled_complex is rfl and pulled_iso is HEq.rfl.",
    "uses": [
     "def-weil-pbc-etale-origin-witness"
    ],
@@ -97,7 +95,7 @@
    }
   },
   {
-   "text": "For any witness $(B,\\beta:\\nu_S^*B\\xrightarrow{\\sim}N)$ just considered, step 5 gives $\\delta_{e,B}:\\nu_T^*e_!^{\\mathrm{et}}B\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*B$. Composing with $e_!^{\\mathrm{proet}}\\beta$ gives an isomorphism to $e_!^{\\mathrm{proet}}N$; its inverse is $\\delta_{e,B}^{-1}\\circ e_!^{\\mathrm{proet}}(\\beta^{-1})$. This is exactly the data required by [def-weil-pbc-etale-origin-witness]. Substituting $(e,B,N,\\beta)=(j,L,K,\\alpha)$ gives the second displayed pair. Substituting $(e,B,N,\\beta)=(i,L_u,M,\\alpha_u)$ gives the third. Choose an integer $N_0$ below the cohomology of both original objects $L,K$ (take the smaller of their two lower bounds). Step 3 shows that $L_u,M,j_!^{\\mathrm{et}}L,j_!K,i_!^{\\mathrm{et}}L_u,i_!M$ and all comparison sources belong to $D^{\\ge N_0}$. Thus all three pairs are bounded below witnesses, with the exact formulas asserted.",
+   "text": "For any witness $(B,\\beta:\\nu_S^*B\\xrightarrow{\\sim}N)$ just considered, step 5 gives $\\delta_{e,B}:\\nu_T^*e_!^{\\mathrm{et}}B\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*B$. Composing with $e_!^{\\mathrm{proet}}\\beta$ gives an isomorphism to $e_!^{\\mathrm{proet}}N$; its inverse is $\\delta_{e,B}^{-1}\\circ e_!^{\\mathrm{proet}}(\\beta^{-1})$. This is exactly the data required by [def-weil-pbc-etale-origin-witness]. Substituting $(e,B,N,\\beta)=(j,L,K,\\alpha)$ gives the second displayed pair. Substituting $(e,B,N,\\beta)=(i,L_u,M,\\alpha_u)$ gives the third. Choose an integer $N_0$ below the cohomology of both original objects $L,K$ (take the smaller of their two lower bounds). Step 3 shows that $L_u,M,j_!^{\\mathrm{et}}L,j_!K,i_!^{\\mathrm{et}}L_u,i_!M$ and all comparison sources belong to $D^{\\ge N_0}$. Thus all three pairs are bounded below witnesses, with the exact formulas asserted. Construct the other two FixedEtaleOriginWitness records explicitly; all retained-complex and HEq equalities are reflexivity. Carry out the construction locally for an arbitrary commutative ring before specializing to ULift T.coefficientRing, avoiding expansion of the concrete coefficient ring.",
    "uses": [
     "def-weil-pbc-etale-origin-witness"
    ],
@@ -109,13 +107,11 @@
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-site-pullback-abelian-exact",
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
+  "def-weil-extension-by-zero",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-comparison-pullback",
@@ -125,8 +121,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "J8",
+  "date": "2026-10-19",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
-  "place": "Proof *(3)*, first sentence: expanded sheaf-comparison localization and bounded-below witness transport; exactness from Stacks 04JC, 03DJ, 015F and existing nodes."
+  "place": "Proof (3), first sentence; the same seven-step comparison-localization and explicit-witness route, using the existing exact fixed-scalar APIs."
  },
  "mathlib_searches": [
   {
@@ -264,10 +262,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-comparison-pullback",
   "lem-cbc-proetale-extension-zero-comparison"
@@ -301,5 +296,15 @@
   "group": "Q18",
   "result": "pass",
   "note": "Checked every node clause against the Lean: A_{E,n} as ULift.{u+1,u} T.coefficientRing; U,X,V,Y over Spec k with LocallyOfFiniteType+QuasiCompact+IsSeparated; IsOpenImmersion j.left and i.left; K in DerivedCategory.Plus with FixedEtaleOriginWitness kept as data. kappa, deltaJ and deltaI orientations are correct (nu_U^* u^-1 => Lu^* nu_X^*; nu_T^* e_! => e_! nu_S^*), and their normalizations equal mapDerivedCategoryNatIso (Localization.liftNatIso of the termwise comparisons) of the recorded supportSiteComparisonCoefficientPullbackIso and openImmersionLowerShriekComparisonUpperStarIso. The three witness formulas are in diagrammatic order and all objects are in D+ via mapDerivedCategoryPlus. A scratch sorry-free proof of Nonempty WitnessedOpenPullbackData (fields by rfl and HEq.rfl; axioms propext, Classical.choice, Quot.sound only) shows the HEq fields are well-typed and the statement is satisfiable. Node statement, stmt_deps and proof are byte-identical to base; only lean was added and lean.statement is verbatim in the file. Fixed-scalar ProEtale.upperStar and openImmersionLowerShriek match the recorded witness interface, and sfIntrinsicExtensionByZero is literally their conjugate. No duplicate found; no hollow definition; only sorry; source and blueprint docstrings with the seven-step plan; no line over 100 characters. nt_compile: module 9.0 s, no errors. Remarks: the second-reading section is a short self-reread; Lu^* is the fixed-scalar upperStar, which the node's proof step 1 identifies with the recorded pullback."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-16462",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T231222-L-562341",
+  "kind": "interface",
+  "note": "independent cc review: delivered TrfWitnessedOpenPullback.lean vs live clone (imports removed + proof only; structure/signature identical) and node lem-trf-witnessed-open-pullback vs live (proof/proof_deps/proof_origin, tool_uses removals only); compile 8.4 s clean; axioms propext/choice/Quot.sound; unit sk-thm-trace-formula realized empty, ProEtaleSiteComparison still public via SupportComparisonPullbackCoherence"
  }
 }
