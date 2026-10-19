@@ -274,5 +274,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-9e83a6b1a (reviewer sub-agent of L); spot-checked: I read the whole item and the new node. The item states Eakin–Nagata: if i:B→A is injective, A is Noetherian and A is a finite B-module, then B is Noetherian. It is true, and the delivery leaves the statement unchanged. The parent lem-per-finite-quotient-strict-local-invariants Step 1 applies it with exactly these hypotheses (D=R^G inside R). The proof is Formanek's argument, written by the agent and marked as such; the Eakin paper and Matsumura §3 are WANTED. I checked all 8 steps. Step 3 takes a maximal extended ideal I_0A inside the Noetherian ring A, so it does not assume the conclusion. Step 4 proves J=Ann(M), JA=I_0A, and that LA strictly contains I_0A for every nonzero H. Step 5 applies Zorn to faithful quotients; a chain union stays faithful because M has finitely many generators, and the cited Zorn node includes the empty chain. Step 6 shows Q is not Noetherian (through Step 2 and the submodule-finite leaf), and Step 7 shows every submodule of Q is finite, which gives the contradiction. Step 2 uses an injective evaluation map into V^s, and Step 8 lifts generators back along the injective i. Every cited node is a Mathlib leaf or a definition and says what its step uses, so there is no cycle, no route departure and no tool_uses entry. No SGA source is cited. The new node lem-per-noetherian-module-finite-product is an exact Mathlib leaf for isNoetherian_pi at Mathlib/RingTheory/Noetherian/Basic.lean:177, where the section assumes Ring R and AddCommGroup and line 175 assumes Finite ι; IsNoetherian is defined in Defs.lean:62 as every submodule being finitely generated. The node allows any scalar ring, which Step 2 needs: the existing Noetherian-module nodes assume a Noetherian scalar ring and would make Step 2 circular. Searching dag/nodes for Eakin, isNoetherian_pi and isNoetherian_prod finds no duplicate; the only other hits are recorded search logs. The new node is not a restated clause of the item. Small cases: A=0 forces B=0; nilpotent extensions work because no domain assumption is used; dropping injectivity fails for k[x_1,x_2,...]→k; dropping finiteness fails for k[x,xy,xy^2,...] inside k[x,y]. The stacks examples.tex lines 1505–1512 only invoke Eakin's theorem and are correctly not used as a proof source. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteInjectiveNoetherianDescent",
+  "declaration": "RingHom.isNoetherianRing_of_injective_of_finite",
+  "file": "lean/Sheaf/RingTheory/FiniteInjectiveNoetherianDescent.lean",
+  "statement": "theorem isNoetherianRing_of_injective_of_finite {B : Type u} {A : Type v} [CommRing B] [CommRing A] (i : B →+* A) (hi : Function.Injective i) [IsNoetherianRing A] (hfinite : @Module.Finite B A _ _ (@Algebra.toModule B A _ _ i.toAlgebra)) : IsNoetherianRing B",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c9b98495",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Statement matches node exactly: CommRing B (u), CommRing A (v), i : B →+* A, Function.Injective i, [IsNoetherianRing A], Module.Finite via i.toAlgebra's canonical action ⇒ IsNoetherianRing B; no extra hypotheses, independent universes, A=0/s=0 edge cases covered; lean.statement verbatim. Node copy differs from live only in the new lean record. No Mathlib/side Eakin–Nagata declaration (only ascent/surjective/ringEquiv results), no name collision. Docstrings carry source place + blueprint tag and all 8 proof steps verbatim; sorry-only; minimal public imports. nt_compile --json clean in 1.7 s; broken control copy errors. No findings."
  }
 }

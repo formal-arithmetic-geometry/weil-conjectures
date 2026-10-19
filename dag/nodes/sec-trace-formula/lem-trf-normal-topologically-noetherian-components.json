@@ -298,5 +298,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-c1703be49 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 13 cited statements in full; there are no new nodes. Sources: Stacks 0357 (properties.tex l.933) and 030C (algebra.tex l.8275), plus the tags for 0052, 00ES, 01HV, 01HF and 01ON. The statement is true and is a correct form of 0357 with |Z| topologically Noetherian, which gives 0357's finiteness on quasi-compact opens. It never assumes the ring is Noetherian, so it is not a duplicate of the Noetherian results rem-pc-regular-normal(2) (033M), lem-sbc-normal-sections-finite-product or lem-a1-normal-etale-components-clopen. Tested on: the empty scheme, Spec of a normal domain, Spec(A×B), a rank-1 non-discrete valuation ring, and xy=0, which is excluded and shows normality is needed. Steps: S2 gets finitely many minimal primes via the injective map q↦V(q). S3 gets reducedness from the equivalence written in def-pc-reduced-scheme and normality from the localization clause (c) of affine-open-stalk-localization. S4 applies 030C (1)⇒(3) with its hypotheses checked. S5 is a correct idempotent calculation: K_i minimal, V(K_i)=D(e_i), n=0 handled. S6–S7 do the open-subspace correspondence and the gluing (open, disjoint, covering, finite). S8 uses unchanged stalks on the open subscheme and the integral-scheme equivalence. proof_deps equals the union of uses, there is no cycle and no SGA. Advisories only: the DCC ⇒ minimal-element step for lem-sc is a one-line elementary argument; S6's 0B7I source pointer is weak, but the cited node carries the content. Accepted tool_uses: spec-components/minimal-primes, affine-stalk-localization and 030C, all generic algebra used as black boxes. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalTopologicallyNoetherianComponents",
+  "declaration": "AlgebraicGeometry.normal_topologicallyNoetherian_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalTopologicallyNoetherianComponents.lean",
+  "statement": "theorem normal_topologicallyNoetherian_components (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z] (hnormal : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) : (irreducibleComponents Z).Finite ∧ (irreducibleComponents Z).Pairwise Disjoint ∧ ∀ C ∈ irreducibleComponents Z, ∃ hC : IsOpen C, IsClosed C ∧ IsIntegral (Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)) ∧ ∀ z : (Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)), IsDomain ((Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)).presheaf.stalk z) ∧ IsIntegrallyClosed ((Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)).presheaf.stalk z)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e63809302",
+  "group": "NH",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node and Stacks 0357/0052: Scheme.{u}, topological NoetherianSpace (not IsNoetherian), local rings IsDomain ∧ IsIntegrallyClosed; finitely many components, pairwise disjoint, each open and closed, IsIntegral open subscheme with normal stalks; empty scheme allowed; no extra hypotheses. lean.statement matches the file verbatim, and the only record change is the new lean field. No duplicate in Mathlib or the project: regular_normal_and_normal_decomposition needs IsNoetherian, normal_etale_components_clopen needs IsLocallyNoetherian. No definitions, proof is sorry only, docstrings give the source places, the blueprint id and all 8 steps. nt_compile --json clean (2.3 s, exit 0). Advisory: the Second reading section was written by the same worker."
  }
 }
