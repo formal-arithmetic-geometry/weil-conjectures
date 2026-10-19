@@ -23,94 +23,45 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and $\\mathcal O=\\Lambda_X$. For each $i$, clause (1) of [lem-weil-proetale-weakly-etale-localization] identifies $(U_i)_{\\mathrm{proet}}$ with $\\mathcal C/U_i$. Clause 1 of [lem-sfb-proetale-object-inverse-image-restriction] identifies $u_i^{-1}G$ naturally with $G|_{U_i}$ for every abelian sheaf and every ring sheaf $G$. In particular, compose $u_i^{-1}\\mathcal O\\cong\\mathcal O|_{U_i}$ with the ring isomorphism $\\alpha_{u_i}$ of [sk-def-sfb-coefficient-morphisms] to identify $\\mathcal O|_{U_i}$ with $\\Lambda_{U_i}$. By [def-weil-pbc-proetale-operations], the module inverse image is exact, and extension along this ring isomorphism just transports the action: $m\\otimes r\\mapsto\\alpha_{u_i}^{-1}(r)m$ has inverse $m\\mapsto m\\otimes1$. Thus $u_i^*$ on module sheaves is exact slice restriction with this coefficient identification, and $Lu_i^*$ is its termwise functor on the unbounded derived categories. The constant-ring clauses of the localization and inverse-image lemmas are not used.",
+   "text": "For each covering arrow f_i, the published source theorem ProEtale.upperStarIsoLocalizationRestriction identifies pullback of abelian sheaves with localization restriction, for every weakly etale arrow. This avoids the separate slice-site and constant-ring comparison infrastructure. The canonical coefficient map condensedPullbackHom is an isomorphism; Mod.extendScalarsIsoComapInv identifies extension along it with restriction along its inverse. Forgetting actions identifies this latter map with the ordinary abelian sheaf pullback map.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "sk-def-sfb-coefficient-morphisms",
-    "def-weil-pbc-proetale-operations"
+    "sk-def-sfb-coefficient-morphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Section 3, paragraph beginning If f:Y -> X is any morphism of schemes; Lemma 4.5 proof, the functor j*"
-   }
+   "elementary": false
   },
   {
-   "text": "For every object $V\\to X$ of $\\mathcal C$, clause 1 of [det-pe-topos-functoriality-site] says that $\\{V\\times_X U_i\\to V\\}_i$ is a covering. Each domain admits its projection to $U_i$. Therefore the sieve of arrows $W\\to V$ whose domain admits a morphism to some $U_i$ contains a covering family and is a covering sieve. This is exactly the covering hypothesis in [lem-sfb-sheaf-cover-local-isomorphism]. The site and index family are taken in the common universe of [def-weil-pbc-proetale-site], so this is a small-site application.",
+   "text": "Use ProEtale.isIso_of_isIso_localizationRestriction from WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative on the underlying abelian sheaf map, using exactly the given proetalePrecoverage presieve. That proved source theorem already supplies the base-changed covering-sieve argument of the general cover-local isomorphism criterion. Reflect the resulting isomorphism with Mod.forget. This is the private proved helper module_cover_reflects_iso.",
    "uses": [
-    "det-pe-topos-functoriality-site",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-sheaf-cover-local-isomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5 proof, conservativity; base change of the covering to every site object"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $a:M\\to N$ be a morphism of $\\mathcal O$-module sheaves whose restrictions to all $U_i$ are isomorphisms. Forget the actions and apply [lem-sfb-sheaf-cover-local-isomorphism] with value category abelian groups and the covering condition of Step 2. It gives an inverse $b:N\\to M$ of the underlying abelian-sheaf map. This inverse is $\\mathcal O$-linear: for every object $V$, $r\\in\\mathcal O(V)$ and $y\\in N(V)$, $a_V(b_V(ry))=ry=a_V(r b_V(y))$, so injectivity of $a_V$ gives $b_V(ry)=r b_V(y)$. By the definition of module morphisms in [def-weil-sheaf-of-modules-category], $b$ is a module morphism and $a$ is an isomorphism of module sheaves.",
-   "uses": [
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; cover-local isomorphism criterion as stated by lem-sfb-sheaf-cover-local-isomorphism"
-   }
-  },
-  {
-   "text": "Write $r_i$ for the exact module restriction of Step 1. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain $H^n(r_i C)\\cong r_i H^n(C)$ naturally in every cochain complex $C$, for every integer $n$. These isomorphisms descend to the derived categories: cohomology and termwise exact restriction invert quasi-isomorphisms, and the two composites are the factorizations through the localization of [def-weil-abstract-derived-category]. Naturality holds for images of chain maps by the cited lemma; it also holds for inverses of quasi-isomorphisms by inverting the same naturality square, hence for their composites, which generate the localization. Consequently, for any derived morphism $f:K\\to L$, the map $H^n(u_i^*f)$ is identified with $r_i(H^n(f))$.",
+   "text": "For each integer n use the published exact-functor mapDerivedCategoryHomologyFunctorIso, which is natural for all derived morphisms. Invertibility of each derived restriction implies invertibility of the restriction of each homology map. Apply the module helper to get invertibility of every homology map and DerivedCategory.isIso_iff to get invertibility of the original derived morphism. The forward direction is preservation of isomorphisms by a functor.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; degreewise homology comparison, followed by the defining localization of the derived category"
-   }
-  },
-  {
-   "text": "Suppose every $u_i^*f$ is invertible. For every integer $n$, its cohomology $H^n(u_i^*f)$ is invertible, since cohomology is a functor. Step 4 then says that all restrictions $r_i(H^n(f))$ are invertible. Apply Step 3 to the module-sheaf morphism $H^n(f)$: it is invertible for every $n$. The unbounded criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category of $\\Lambda_X$-module sheaves, now gives that $f$ is invertible. Conversely every functor $u_i^*$ preserves inverses, so invertibility of $f$ implies invertibility of all $u_i^*f$.",
-   "uses": [
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RT, lemma-acyclic; the equivalent cohomology criterion of DerivedCategory.isIso_iff"
-   }
+   "elementary": false
   },
   {
-   "text": "If $K|_{U_i}=0$ for every $i$, apply Step 5 to the unique morphism $K\\to0$. Exact additive restriction preserves the zero object, so every restriction of this morphism is an isomorphism between zero objects. Hence $K\\to0$ is an isomorphism and $K=0$. This argument includes the empty cover of the empty scheme: Step 2 still supplies a covering sieve at every object, and the sheaf condition forces the only section group on the empty object to be zero. No boundedness of complexes or quasi-compactness of $X$ was assumed.",
+   "text": "Apply the just-proved derived isomorphism criterion to the zero map K to the zero object. Every restriction has zero source by hypothesis and zero target because the exact additive derived pullback preserves zero objects. A morphism between zero objects is invertible, hence K to zero is invertible and K is zero. No index is chosen; empty covering families are included.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5 proof, conservativity, expressed as detection of zero objects"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-proetale-object-inverse-image-restriction",
   "sk-def-sfb-coefficient-morphisms",
-  "def-weil-pbc-proetale-operations",
-  "det-pe-topos-functoriality-site",
-  "lem-sfb-sheaf-cover-local-isomorphism",
   "def-weil-pbc-proetale-site",
-  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-sheaf-cover-local-isomorphism",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-abstract-derived-category",
   "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Section 3 and Lemma 4.5 proof; explicit arbitrary-cover cohomology argument using Stacks 04TQ, 010N and 05RT"
+  "place": "Section 3 and Lemma 4.5 proof; implemented by the already-proved source restriction/conservativity and exact derived homology comparison theorems, M3, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -229,10 +180,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "det-pe-topos-functoriality-site"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -258,5 +206,15 @@
   "by": "NM",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261019T112455-L-3943584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
