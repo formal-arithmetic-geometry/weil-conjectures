@@ -155,5 +155,28 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-955153c1d (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item's statement matches Stacks Tag 08R1 (cotangent.tex lemma-bootstrap) hypothesis by hypothesis and is not weakened. I tested it on A=B, k[t]→k[t]/t (Tor_1≠0, so the hypothesis correctly fails), A→A[x] (L_{B/B⊗B}≠0, consistent with L_{B/A}=Ω≠0), localizations and the zero ring. The nearest existing node is lem-trf-derived-diagonal-cotangent-vanishing (08R0), which has a different hypothesis and is not a duplicate. There are no new nodes. Step 1's use of 08QQ via lem-trf-cotangent-flat-base-change matches that node's quasi-isomorphism hypothesis and its base-change map β. I fixed three faults in one corrected item JSON under fixes/. (1) C4/E5: Step 3 cited lem-sfb-derived-monoidal, which only gives the monoidal structure of a single category, not the composition of derived scalar extension along B→D→B. Step 3 now computes this on the free-term K-flat model K=s(Ω⊗B) of L_{B/A}, citing resolution-coherence, the polynomial Kähler basis leaf, lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit. It writes out the explicit inverse rebracketing (k⊗d)⊗b↦μ(d)bk. The monoidal tool use is withdrawn. (2) C1: Step 1 now derives the Tor ⇔ derived-tensor quasi-isomorphism from a free resolution, citing def-weil-pbc-tor-modules, and fixes the factor maps ι1/ι2. Step 2 now transports L_{B/B}≅L_{{1}^{-1}B/B} through the resolution-coherence functoriality and cites the Mathlib long exact sequence leaf lem-sf-derived-homology-long-exact. (3) stmt_deps: the unused transitivity triangle is removed and def-weil-pbc-tor-modules added. I also filled blueprint.from.place in the same chain format as the sibling nodes. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit, both generic and already accepted on lem-trf-cotangent-flat-base-change. There is no cycle (the cited closure has 272 nodes and does not contain the item), and no SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentBootstrap",
+  "declaration": "Algebra.CotangentResolution.cotangentComplex_isZero_of_tor_and_diagonal",
+  "declarations": [
+   "Algebra.CotangentResolution.arrowModule",
+   "Algebra.CotangentResolution.diagonalCotangentArrow",
+   "Algebra.CotangentResolution.cotangentComplex_isZero_of_tor_and_diagonal"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentBootstrap.lean",
+  "statement": "theorem cotangentComplex_isZero_of_tor_and_diagonal [∀ R : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} R)] (C : Coherence.{u}) (f : Arrow CommRingCat.{u}) (hTor : ∀ i : ℕ, 0 < i → IsZero (((CategoryTheory.Tor' (ModuleCat.{u} (f.left : Type u)) i).obj (arrowModule f)).obj (arrowModule f))) (hDiagonal : IsZero (cotangentComplex C (diagonalCotangentArrow f))) : IsZero (cotangentComplex C f)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3508b30c",
+  "group": "Q91",
+  "result": "pass",
+  "note": "The statement matches Stacks 08R1 and the node clause by clause. Tor^A_i(B,B) for i>0 is Tor' on B restricted along f. The diagonal hypothesis is the cotangent complex of the actual lmul' multiplication B⊗[A]B→B. The conclusion is IsZero (cotangentComplex C f), with the same Coherence C for both complexes. No assumptions are added beyond the dependency's interface. The helpers contain real canonical data; I found no named duplicate (searched lmul' and restrictScalars in side Sheaf). The proof is only sorry, the docstrings carry the source place and blueprint tag and all 3 proof steps, and lean.statement is verbatim in the file. nt_compile --json: clean, 2.1 s, exit 0. Advisory: the flat-base-change and transitivity-triangle nodes now have side declarations (2026-10-19); they are proof-only imports for stage 3."
  }
 }
