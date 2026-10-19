@@ -14,6 +14,8 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+
 /-!
 # Completed integral coefficient sheaves
 
@@ -165,7 +167,22 @@ theorem completedIntegralCoefficient_mul_commUnrestricted
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (a b : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U) :
     a * b = b * a := by
-  sorry
+  let D := integralCoefficientSheafSystem l E Y
+  let ev := sheafToPresheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      RingCat.{max u (t + 1)} ⋙
+    (evaluation (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ RingCat.{max u (t + 1)}).obj U
+  apply Concrete.isLimit_ext (D ⋙ ev)
+    (isLimitOfPreserves ev (limit.isLimit D)) (a * b) (b * a)
+  intro j
+  obtain ⟨n⟩ := j
+  change ((limit.π D (op n)).hom.app U) (a * b) =
+    ((limit.π D (op n)).hom.app U) (b * a)
+  rw [map_mul, map_mul]
+  exact @mul_comm
+    (((constantSheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      CommRingCat.{max u (t + 1)}).obj
+        (CommRingCat.of (ULift.{t + 1}
+          (Padic.coefficientExtensionRing l E (n + 1))))).obj.obj U) _ _ _
 
 /-- The commutative structure on the existing completed ring, with unchanged ring data.
 Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
@@ -210,7 +227,7 @@ theorem completedIntegralCoefficient_mul_comm
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (a b : (completedIntegralCoefficientSheaf l E Y D hl).obj.obj U) :
     a * b = b * a := by
-  sorry
+  exact completedIntegralCoefficient_mul_commUnrestricted l E Y U a b
 
 /-- The commutative structure on the existing completed ring, with unchanged ring data.
 Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/

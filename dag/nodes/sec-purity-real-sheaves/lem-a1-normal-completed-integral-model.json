@@ -1,0 +1,179 @@
+{
+ "id": "lem-a1-normal-completed-integral-model",
+ "kind": "statement",
+ "title": "Abstract completed integral models on normal Noetherian schemes",
+ "statement": "Let $T$ be a Noetherian separated scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties] such that every stalk of its structure sheaf is an integrally closed domain [def-weil-pbc-normal-ring]. Let $\\ell$ be a prime invertible in all these stalks and let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $A$ and recorded uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site [def-weil-pbc-proetale-site] set $B_T=\\varprojlim_{n\\ge1}(A/\\varpi^n)_T$ [def-weil-completed-integral-coefficients], and let $s$ be the image of the constant $\\varpi$ section under the canonical constant-to-completion map. For every locally finite free $B_T[1/s]$-module sheaf $L$ [def-weil-pbc-ringed-section-localization, def-weil-sheaf-of-modules-category], there is a locally finite free $B_T$-module sheaf $M$ and an isomorphism $B_T[1/s]\\otimes_{B_T}M\\cong L$. This asserts an abstract integral model, with no embedding in $L$ and no injectivity assertion. Site and coefficient universes are independent, with values in a common containing universe. The empty scheme and locally varying rank, including rank zero, are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 7.4.7 and 7.4.10, pp. 70-71, and Proposition 6.8.4(1),(4), pp. 59-60; geometric input: Stacks varieties.tex Tag 056T (lemma-smooth-geometrically-normal), morphisms.tex Tag 01VB (lemma-base-change-smooth), properties.tex Tag 0BQ3 (lemma-normal-geometrically-unibranch). Compact profinite monodromy admits an integral lattice."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-normal-ring",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "A Noetherian scheme has finitely many clopen connected components by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal, lem-sfb-noetherian-connected-components-open]. Each component is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], normal and separated by restriction of stalks and affine charts. The constant quotient sheaves, their limit, the constant uniformizer, and localization restrict to the same constructions on each open component. It is enough to construct abstract models there and then glue them. The empty scheme uses the empty gluing.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF, 04ME and 0052, the Noetherian connected-component decomposition"
+   }
+  },
+  {
+   "text": "Fix one component $X$ and a geometric point $\\bar x$ (take an algebraic closure of the residue field at any of its points). Apply [lem-a1-normal-proetale-monodromy] to $L|_X$. All its hypotheses were checked in the assumptions and the preceding step. It gives a finite-dimensional $E$-space $V=\\Phi_X(L|_X)$ with jointly continuous action of the profinite group $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$. In particular, the rank on this component is the finite integer $\\dim_E V$, possibly zero. The normality hypothesis is essential here: it is what permits profinite etale monodromy for a pro-etale lisse sheaf.",
+   "uses": [
+    "lem-a1-normal-proetale-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 7.4.7 and 7.4.10, with Stacks Tag 0BQ3"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-profinite-stable-lattice] to the compact group $\\Pi$ acting on $V$. Obtain a stable finite free $A$-lattice $\\Lambda\\subset V$, spanning $V$, whose restricted action is continuous for its $\\varpi$-adic topology. For every $n\\geq1$, $\\Lambda/\\varpi^n\\Lambda$ is a finite free $A/\\varpi^n$-module with continuous action for the discrete topology: the quotient map is continuous and the action descends. Clause (1) of [cor-galois-lisse-representations] supplies the corresponding finite locally constant etale sheaf $F_n$. Its compatibility with coefficient extension identifies $F_{n+1}\\otimes_{A/\\varpi^{n+1}}A/\\varpi^n$ with $F_n$. The quotient maps are compatible, by full faithfulness and their equality on modules. Thus $(F_n)_n$ is an actual normalized tower of rank $\\dim_E V$, not merely a list of unrelated sheaves.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "First sentence of proof of Lemma 7.4.7 and Proposition 6.8.4(1); compact-lattice argument: literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, second bullet"
+   }
+  },
+  {
+   "text": "By [lem-per-lisse-completed-system-comparison], the sheaf $N=\\varprojlim_n\\nu_X^*F_n$ is a lisse $B_X$-module of this rank. The separated Noetherian and invertibility hypotheses of that comparison hold by the preceding steps. The normalization clause of [lem-a1-normal-proetale-monodromy] identifies $\\Phi_X(N[1/\\varpi])$ with the representation $V=\\Phi_X(L|_X)$. Full faithfulness of that equivalence therefore supplies an $E_X$-linear isomorphism $\\alpha:N[1/\\varpi]\\xrightarrow{\\sim}L|_X$. This uses the completed coefficient sheaf, rather than the constant sheaf of the abstract ring $A$. The coefficient isomorphisms of [lem-sfb-integral-lisse-reduction-equivalence] identify the continuous-function coefficients with the displayed completed ring and its localization, compatibly with the constant uniformizer.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-sfb-integral-lisse-reduction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4) and Lemma 7.4.7, integral normalization of the representation equivalence"
+   }
+  },
+  {
+   "text": "On each component the preceding steps give a locally finite free integral module and a rationalization isomorphism. For an object $U\\to T$, use the product of its restrictions to the finitely many component pullbacks; restrictions are componentwise. The sheaf condition follows factorwise, and the component trivializing covers together give a finite-free local covering. Scalar extension and the rationalization isomorphisms glue by their local tensor formulas. Empty and zero-rank components contribute the zero sheaf. To accommodate independent coefficient universes, choose a small representative of the finite extension $E/\\mathbf Q_\\ell$ using a finite basis. Transport its ring, algebra and spectral topology along the resulting algebra isomorphism. The constant quotient sheaves and their limit are carried by the induced coefficient isomorphisms. Locally finite free modules and their maps are transported through the sectionwise module equivalences on a small model of the site; they are determined on a free cover by finitely many coefficient sections. Extend back to the given common universe and undo the coefficient isomorphisms. The tensor universal property transports the rationalization isomorphism. This step constructs no integral embedding.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3 and elementary sheaf gluing over a finite disjoint clopen cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-a1-normal-proetale-monodromy",
+  "lem-pod-profinite-stable-lattice",
+  "cor-galois-lisse-representations",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 7.4.7, 7.4.10 and Proposition 6.8.4(1),(4); abstract integral-model portion of the original lattice argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal.*integral.*model|integral.*model.*normal",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match: these are ordinary scheme module constructions or lattices of subobjects; none constructs a completed integral model for a lisse rational pro-etale sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse rational sheaf on a normal Noetherian scheme is the rationalization of a locally free integral model",
+   "results": "AlgebraicGeometry.Scheme.Modules; AlgebraicGeometry.structureSheafInType; ModuleCat.tildeInModuleCat; ModuleCat.tilde; ModuleCat.Tilde.isLocallyFraction; SheafOfModules.ιFree; SheafOfModules.free; AlgebraicGeometry.isReduced_of_isIntegral",
+   "date": "2026-10-19",
+   "verdict": "no match: these are ordinary scheme module constructions or lattices of subobjects; none constructs a completed integral model for a lisse rational pro-etale sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"lattice\"",
+   "results": "PresheafOfModules.Submodule.instCompleteLattice; SheafOfModules.Submodule.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup; AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf",
+   "date": "2026-10-19",
+   "verdict": "no match: these are ordinary scheme module constructions or lattices of subobjects; none constructs a completed integral model for a lisse rational pro-etale sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothLisseIntegralLattice",
+  "date": "2026-10-19",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof, first sentence: a class in H_c^0 is a global section; global lisse integral models on the smooth geometric fibre needed for the finite-level comparison; abstract normal integral-model construction, before the submodule embedding",
+   "via": [
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalCompletedIntegralModel",
+  "file": "lean/Sheaf/Paper/NormalCompletedIntegralModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_normal_completed_integral_model",
+  "statement": "theorem exists_normal_completed_integral_model\n    (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{u}) [IsNoetherian T] [T.IsSeparated]\n    (hnormal : ∀ x : T,\n      IsDomain (T.presheaf.stalk x) ∧ IsIntegrallyClosed (T.presheaf.stalk x))\n    (hl : ∀ x : T, IsUnit (l : T.presheaf.stalk x))\n    (s : ((WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T).obj ⋙\n      forget CommRingCat).sections)\n    (hs : ∀ U : T.ProEtᵒᵖ, s.val U =\n      ((WeilConjectures.integralConstantToCompletionOfUniverses l E T).hom.app U)\n        ((toSheafify (Scheme.ProEt.topology T)\n          ((Functor.const T.ProEtᵒᵖ).obj\n            (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))))).app U\n              (ULift.up (Padic.coefficientExtensionUniformizer l E))))\n    (L : ringedSiteModules.{max v (u + 1)}\n      ((sheafCompose (Scheme.ProEt.topology T)\n        (forget₂ CommRingCat.{max v (u + 1)} RingCat.{max v (u + 1)})).obj\n        (ringedLocalizationRingOfUniverses.{max v (u + 1), u + 1, u}\n          (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T) s)))\n    (hL : L.IsFiniteLocallyFree) :\n    ∃ M : ringedSiteModules.{max v (u + 1)}\n        (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E T),\n      M.IsFiniteLocallyFree ∧\n      Nonempty (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1,\n        max v (u + 1), max v (u + 1)}\n        (ringedLocalizationRingUnitOfUniverses.{max v (u + 1), u + 1, u}\n          (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T) s) M ≅ L)",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261019T231355-L-579479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261019T231355-L-579479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

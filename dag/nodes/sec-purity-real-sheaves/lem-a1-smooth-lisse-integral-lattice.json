@@ -33,72 +33,32 @@
    }
   },
   {
-   "text": "Every nonempty set of closed subsets of $|T|$ has a minimal element by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; equivalently every ascending chain of open subsets stabilizes. Hence $|T|$ has finitely many connected components, each open, by [lem-sfb-noetherian-connected-components-open]. Components are always closed, so these give a finite disjoint clopen covering $T=\\coprod_i X_i$ by nonempty connected schemes; each $X_i$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and separated and normal by restriction of the affine charts and local rings. It suffices to construct the desired submodule on each $X_i$. If $T$ is empty, the zero sheaf is already the required lattice. On a component write $B_X=\\varprojlim_n(A/\\varpi^n)_X$ and $E_X=B_X[1/\\varpi]$; restricting the coefficient constructions to an open subscheme gives these same sheaves, because constant sheaves, objectwise limits and sheaf localization restrict to the corresponding constructions on the open slice.",
+   "text": "Apply [lem-a1-normal-completed-integral-model] to $T$, its normal stalks, the unit $\\ell$, and the recorded constant uniformizer section. Obtain a locally finite free integral model $M$ and a scalar-extension isomorphism $e:M[1/\\varpi]\\cong L$. This supplies only an abstract model, so an embedding remains to be proved.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-sfb-noetherian-connected-components-open",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 04MF, 04ME and 0052, the Noetherian connected-component decomposition"
-   }
-  },
-  {
-   "text": "Fix one component $X$ and a geometric point $\\bar x$ (take an algebraic closure of the residue field at any of its points). Apply [lem-a1-normal-proetale-monodromy] to $L|_X$. All its hypotheses were checked in steps 1–2. It gives a finite-dimensional $E$-space $V=\\Phi_X(L|_X)$ with jointly continuous action of the profinite group $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$. In particular, the rank on this component is the finite integer $\\dim_E V$, possibly zero. The normality hypothesis is essential here: it is what permits profinite etale monodromy for a pro-etale lisse sheaf.",
-   "uses": [
-    "lem-a1-normal-proetale-monodromy"
+    "lem-a1-normal-completed-integral-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 7.4.7 and 7.4.10, with Stacks Tag 0BQ3"
+    "place": "Lemmas 7.4.7 and 7.4.10, pp. 70-71, and Proposition 6.8.4(1),(4), pp. 59-60; geometric input: Stacks varieties.tex Tag 056T (lemma-smooth-geometrically-normal), morphisms.tex Tag 01VB (lemma-base-change-smooth), properties.tex Tag 0BQ3 (lemma-normal-geometrically-unibranch). Compact profinite monodromy admits an integral lattice."
    }
   },
   {
-   "text": "Apply [lem-pod-profinite-stable-lattice] to the compact group $\\Pi$ acting on $V$. Obtain a stable finite free $A$-lattice $\\Lambda\\subset V$, spanning $V$, whose restricted action is continuous for its $\\varpi$-adic topology. For every $n\\geq1$, $\\Lambda/\\varpi^n\\Lambda$ is a finite free $A/\\varpi^n$-module with continuous action for the discrete topology: the quotient map is continuous and the action descends. Clause (1) of [cor-galois-lisse-representations] supplies the corresponding finite locally constant etale sheaf $F_n$. Its compatibility with coefficient extension identifies $F_{n+1}\\otimes_{A/\\varpi^{n+1}}A/\\varpi^n$ with $F_n$. The quotient maps are compatible, by full faithfulness and their equality on modules. Thus $(F_n)_n$ is an actual normalized tower of rank $\\dim_E V$, not merely a list of unrelated sheaves.",
-   "uses": [
-    "lem-pod-profinite-stable-lattice",
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "First sentence of proof of Lemma 7.4.7 and Proposition 6.8.4(1); compact-lattice argument: literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, second bullet"
-   }
-  },
-  {
-   "text": "By [lem-per-lisse-completed-system-comparison], the sheaf $N=\\varprojlim_n\\nu_X^*F_n$ is a lisse $B_X$-module of this rank. The separated Noetherian and invertibility hypotheses of that comparison hold by steps 1–2. The normalization clause of [lem-a1-normal-proetale-monodromy] identifies $\\Phi_X(N[1/\\varpi])$ with the representation $V=\\Phi_X(L|_X)$. Full faithfulness of that equivalence therefore supplies an $E_X$-linear isomorphism $\\alpha:N[1/\\varpi]\\xrightarrow{\\sim}L|_X$. This uses the completed coefficient sheaf, rather than the constant sheaf of the abstract ring $A$.",
-   "uses": [
-    "lem-per-lisse-completed-system-comparison",
-    "lem-a1-normal-proetale-monodromy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1),(4) and Lemma 7.4.7, integral normalization of the representation equivalence"
-   }
-  },
-  {
-   "text": "It remains to obtain a submodule, not just an abstract integral model. By the coefficient isomorphisms of [lem-sfb-integral-lisse-reduction-equivalence], $B_X$ is the continuous-function sheaf $A_X$ of [def-weil-pbc-lisse-lattice-coefficients]. Multiplication by $\\varpi$ on it is injective: a continuous function with $\\varpi f=0$ is zero pointwise since $A\\subset E$ is a domain. On a trivializing cover $N\\cong B_X^r$, multiplication by every power of $\\varpi$ is consequently injective. The canonical map $N\\to N[1/\\varpi]$ is then a monomorphism: a section mapping to zero is locally killed by a power of $\\varpi$, and so is locally zero and hence zero. Compose it with $\\alpha$ and let $M_X$ be its image inside $L|_X$. This is a $B_X$-submodule isomorphic to $N$, hence lisse. After inverting $\\varpi$ the first map becomes the identity localization isomorphism, so the inclusion $M_X[1/\\varpi]\\to L|_X$ is exactly the isomorphism induced by $\\alpha$.",
-   "uses": [
-    "lem-sfb-integral-lisse-reduction-equivalence",
-    "def-weil-pbc-lisse-lattice-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1),(2); elementary torsion-free localization on a free chart"
-   }
-  },
-  {
-   "text": "For an object $U\\to T$ put $U_i=U\\times_T X_i$. The finitely many disjoint opens $U_i$ cover $U$, so the sheaf condition gives $L(U)=\\prod_i L|_{X_i}(U_i)$ and the analogous equality for $B_T(U)$. Define $M(U)$ to be the submodule $\\prod_i M_{X_i}(U_i)$ under these equalities, with restrictions componentwise. This is a sheaf because each factor is, and $M|_{X_i}=M_{X_i}$. Their trivializing covers together trivialize $M$, and their inclusion-induced rationalization isomorphisms glue to $M[1/\\varpi]\\xrightarrow{\\sim}L$. If a component has rank zero its factor is zero. For the empty scheme the product is the unique zero module sheaf, as already noted. Ranks therefore may vary between components exactly as in the statement.",
+   "text": "Multiplication by $\\varpi$ is injective on $B_T$. In a domain, if $\\varpi x=0$ modulo $\\varpi^{n+2}$, cancelling the nonzero $\\varpi$ shows that $x$ maps to zero modulo $\\varpi^{n+1}$. This statement passes to constant sheafifications: lift a section locally to a constant, then refine once more so its annihilator equation holds in the original ring, and use separatedness to descend its zero image. Applying this to all adjacent levels of the completed limit makes every projection of a $\\varpi$-annihilated section zero. The recorded DVR generator is nonzero because it generates the nonzero maximal ideal. Thus all powers of the uniformizer are regular. Sectionwise localization is injective, and sheafification preserves this injectivity: equality after sheafification holds in the localizations on a covering, hence in $B_T$ there, and then globally by separatedness.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.3 and elementary sheaf gluing over a finite disjoint clopen cover"
+    "place": "Lemma 6.8.2(1),(2), proved directly for the recorded constant quotient limit"
+   }
+  },
+  {
+   "text": "Define $i:M\\to\\operatorname{Res}(L)$ as the adjoint of $e$: on sections it sends $m$ to $e(1\\otimes m)$, with the tensor presheaf followed by its sheafification unit. Naturality and the defining pure-tensor equation follow from this adjunction. To prove injectivity, equality of images gives equality after sheafification of $1\\otimes m$ and $1\\otimes n$, hence equality on a covering in the tensor presheaf. Refine by a finite free chart for $M$. On this chart tensoring its basis identifies this map with a finite product of the injective coefficient localization maps, so the two restricted sections coincide. The sheaf separatedness condition gives $m=n$. Sectionwise injectivity gives that $i$ is monic. The original local freeness of $M$, the given isomorphism $e$, and its defining tensor equation give precisely the required witnesses. No image object or arbitrary integral witness is used in a definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2) and Definition 6.8.3; torsion-free localization on finite free charts"
    }
   }
  ],
@@ -106,20 +66,12 @@
   "lem-pod-separated-finite-type-base-change",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-trf-smooth-geometrically-normal",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-sfb-noetherian-connected-components-open",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-a1-normal-proetale-monodromy",
-  "lem-pod-profinite-stable-lattice",
-  "cor-galois-lisse-representations",
-  "lem-per-lisse-completed-system-comparison",
-  "lem-sfb-integral-lisse-reduction-equivalence",
-  "def-weil-pbc-lisse-lattice-coefficients"
+  "lem-a1-normal-completed-integral-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 7.4.7 and 7.4.10; Proposition 6.8.4(1),(4); assembled with the compact-monodromy lattice argument of Stanford lecture 19, Proposition 1.1.9"
+  "place": "Normal abstract integral model, followed by explicit coefficient regularity, local tensor injectivity and adjunction; original statement unchanged"
  },
  "mathlib_searches": [
   {
@@ -294,5 +246,15 @@
   "by": "N1",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261019T231355-L-579479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
