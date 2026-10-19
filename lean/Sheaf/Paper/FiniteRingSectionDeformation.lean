@@ -206,7 +206,10 @@ theorem isIso_specialization (N : ℕ) (hN : 0 < N)
         (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
           (sectionInvariant A g s)) (hκ : Normalized A g s hs κ) :
     IsIso (specialization A g s κ) := by
-  sorry
+  have _hκ := hκ
+  have : IsIso (atZero A g s) := (lines_and_fibres N hN A hA hS d g s hs).2.2.2
+  unfold specialization
+  infer_instance
 
 /-- Arbitrary Noetherian base change supplies all the geometric instances needed
 below; no compactifiability or regularity condition is imposed on the change of base.
@@ -224,7 +227,12 @@ theorem baseChange_geometry_exists {V S : Scheme.{u}} [IsNoetherian S]
     ∃ hc : IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs b),
       @Geometry (pullback g b) S' d (pullback.snd g b)
         (Scheme.Hom.baseChangeSection g s hs b) hc := by
-  sorry
+  have hc : IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs b) := by
+    exact MorphismProperty.of_isPullback
+      (Scheme.Hom.isPullback_baseChangeSection g s hs b).flip inferInstance
+  have : HasCompactification (pullback.snd g b) := by infer_instance
+  exact ⟨hc, geometry d (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)
+    (Scheme.Hom.baseChangeSection_snd g s hs b)⟩
 
 /-- Arbitrary base change preserves the Rees deformation, its sections and its normal
 cone. This establishes the auxiliary class instances used in the naturality interface;
@@ -263,7 +271,36 @@ theorem baseChange_geometry
         (Scheme.Hom.normalConeProj g s) b ∧
       (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection ≫
           normalMap g s hs b sq = b ≫ s.normalConeZeroSection := by
-  sorry
+  obtain ⟨hc, G⟩ := baseChange_geometry_exists d g s hs b
+  have := hc
+  have := G
+  have sq : IsPullback (deformationMap g s hs b)
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b))
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b) := by
+    apply Scheme.IdealSheafData.isPullback_deformationSpaceMap_proj
+    · intro x
+      obtain ⟨U', U, hU, hx, _, H⟩ :=
+        Scheme.Hom.exists_isPushout_extendedReesAlgebraMap_baseChange g s hs b d x
+      exact ⟨U', U, hU, hx, H⟩
+    · exact IsPullback.of_hasPullback g b
+  refine ⟨hc, inferInstance, inferInstance, sq, ?_, ?_⟩
+  · have hp := (Scheme.Hom.isPullback_normalConeToDeformationSpace
+      (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)).paste_horiz sq
+    rw [AffineSpace.zeroSection_comp_map] at hp
+    exact hp.of_right' (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+  · apply (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).hom_ext
+    · simp only [normalMap, Category.assoc, IsPullback.lift_fst]
+      simp only [← Category.assoc,
+        Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace]
+      simp only [Category.assoc]
+      unfold deformationMap
+      rw [Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection,
+        ← Category.assoc, AffineSpace.zeroSection_comp_map, Category.assoc]
+    · simp only [normalMap, Category.assoc, IsPullback.lift_snd]
+      rw [← Category.assoc, Scheme.Hom.normalConeZeroSection_normalConeProj
+        (Scheme.Hom.baseChangeSection_snd g s hs b), Category.id_comp,
+        Scheme.Hom.normalConeZeroSection_normalConeProj hs, Category.comp_id]
 
 /-- Both normalized comparisons commute with arbitrary Noetherian base change under the
 canonical exceptional mates. The first equation is b_F followed by kappa', equal to
@@ -387,7 +424,18 @@ theorem etalePair_ideal {U X S : Scheme.{u}} (h : U ⟶ X) (s : S ⟶ X)
     (sq : IsPullback s' (𝟙 S) h s) :
     ∀ ⦃U' : U.AffineZariskiSite⦄ ⦃W : X.AffineZariskiSite⦄ (hW : U'.1 ≤ h ⁻¹ᵁ W.1),
       (s.ker.siteIdeal W).map (h.appLE W.1 U'.1 hW).hom ≤ s'.ker.siteIdeal U' := by
-  sorry
+  intro U' W hW
+  rw [Ideal.map_le_iff_le_comap]
+  intro x hx
+  have hx' := s.ideal_ker_le ⟨W.1, W.2⟩ hx
+  rw [RingHom.mem_ker] at hx'
+  rw [Ideal.mem_comap, Scheme.IdealSheafData.siteIdeal, Scheme.Hom.ker_apply,
+    RingHom.mem_ker, Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply,
+    Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_congr_hom sq.w,
+    Scheme.Hom.comp_appLE, CommRingCat.comp_apply]
+  · rw [hx', map_zero]
+  · rw [← sq.w, Scheme.Hom.comp_preimage]
+    exact s'.preimage_mono hW
 
 /-- The canonical Rees map of an etale map of pairs; its ring map fixes t and sends
 b/t to h-sharp(b)/t. Source: sk-thm-dnc, etale maps of pairs
@@ -423,7 +471,63 @@ theorem etaleDeformationMap_spec {U X S : Scheme.{u}}
       Scheme.Hom.deformationSpaceProj (h ≫ g) s' ∧
     s'.deformationSpaceSection ≫ etaleDeformationMap h s s' sq =
       s.deformationSpaceSection := by
-  sorry
+  have hk : s'.ker = s.ker.comap h := by
+    rw [← sq.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso,
+      Scheme.IdealSheafData.ker_fst_of_isClosedImmersion]
+  have hp : IsPullback (etaleDeformationMap h s s' sq) s'.ker.deformationSpaceProj
+      s.ker.deformationSpaceProj h := by
+    apply Scheme.AffineZariskiSite.PullbackData.isPullback_comparison
+    intro x
+    obtain ⟨W, hW, hxW, _⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+      X.isBasis_affineOpens (U := ⊤) (show h x ∈ (⊤ : X.Opens) from trivial)
+    obtain ⟨W', hW', hxW', hle⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+      U.isBasis_affineOpens (U := h ⁻¹ᵁ W) hxW
+    refine ⟨⟨W', hW'⟩, ⟨W, hW⟩, hle, hxW', ?_⟩
+    have he : s'.ker.siteIdeal ⟨W', hW'⟩ =
+        (s.ker.siteIdeal ⟨W, hW⟩).map (h.appLE W W' hle).hom := by
+      rw [Scheme.IdealSheafData.siteIdeal, hk,
+        Scheme.IdealSheafData.ideal_comap_appLE s.ker h ⟨W, hW⟩ ⟨W', hW'⟩ hle]
+    change IsPushout _ _ _ (CommRingCat.ofHom
+      ((s.ker.siteIdeal ⟨W, hW⟩).extendedReesAlgebraMap (h.appLE W W' hle).hom
+        (s'.ker.siteIdeal ⟨W', hW'⟩) _))
+    generalize_proofs hbound
+    dsimp only [Scheme.IdealSheafData.toReesPresheaf]
+    generalize s'.ker.siteIdeal ⟨W', hW'⟩ = J at he hbound ⊢
+    subst J
+    exact Ideal.isPushout_extendedReesAlgebraMap_of_flat _ (h.flat_appLE hW hW' hle) _
+  have het : Etale (etaleDeformationMap h s s' sq) :=
+    MorphismProperty.of_isPullback hp.flip inferInstance
+  have hsep : IsSeparated (etaleDeformationMap h s s' sq) :=
+    MorphismProperty.of_isPullback hp.flip inferInstance
+  refine ⟨hp, het, hsep, inferInstance, ?_, ?_, ?_⟩
+  · exact MorphismProperty.of_isPullback hp.flip inferInstance
+  · simpa only [etaleDeformationMap, Scheme.Hom.deformationSpaceProj,
+      AffineSpace.map_id, Category.comp_id, Category.assoc] using
+      Scheme.IdealSheafData.deformationSpaceMap_proj h s.ker s'.ker
+        (etalePair_ideal h s s' sq) g (h ≫ g) (𝟙 S) (by simp)
+  · open Scheme.AffineZariskiSite Scheme.IdealSheafData in
+    have hq : s'.affineSpaceToQuotientPolynomialSpec ≫
+        (Scheme.IdealSheafData.quotientPolynomialPullbackData h s.ker s'.ker
+          (etalePair_ideal h s s' sq)).comparison _ _ =
+        s.affineSpaceToQuotientPolynomialSpec := by
+      rw [← cancel_mono (relativeGluingMap X.coequifibered_toPolynomialPresheaf
+        s.ker.coequifibered_toQuotientPolynomialAlgebra s.ker.polynomialToQuotientPolynomial),
+        Category.assoc, PullbackData.comparison_comp_relativeGluingMap
+          (H := X.coequifibered_toPolynomialPresheaf)
+          (H' := U.coequifibered_toPolynomialPresheaf) _ _ _ _ _ _
+          (polynomialToQuotientPolynomial_comp_quotientPolynomialPullbackData_map _ _ _ _),
+        Scheme.Hom.affineSpaceToQuotientPolynomialSpec_toPolynomialSpec_assoc,
+        Scheme.Hom.affineSpaceToQuotientPolynomialSpec_toPolynomialSpec,
+        ← Scheme.polynomialSpecMap,
+        (IsIso.eq_comp_inv _).mpr (Scheme.polynomialSpecMap_polynomialSpecToAffineSpace h)]
+      simp only [Category.assoc, IsIso.inv_hom_id_assoc, ← AffineSpace.map_comp_assoc]
+      rw [sq.w, Category.id_comp]
+    rw [Scheme.Hom.deformationSpaceSection, Scheme.Hom.deformationSpaceSection,
+      Category.assoc, etaleDeformationMap, Scheme.IdealSheafData.deformationSpaceMap,
+      ← Scheme.AffineZariskiSite.PullbackData.comparison_comp_relativeGluingMap
+        (HG := s.ker.coequifibered_toQuotientPolynomialAlgebra) _ _ _ _ _ _ _
+        (Scheme.IdealSheafData.reesToQuotientPolynomial_comp_quotientPolynomialPullbackData_map
+          _ _ _ _), ← Category.assoc, hq]
 
 /-- The fixed Rees map is compatible with the zero fibre. This is the lift condition
 used to define the induced normal-bundle map, not an independent choice of a linear map.
@@ -441,7 +545,8 @@ theorem etaleNormalMap_condition {U X S : Scheme.{u}}
         Scheme.Hom.deformationSpaceProj g s =
       Scheme.Hom.normalConeProj (h ≫ g) s' ≫
         AffineSpace.zeroSection (ULift.{u} (Fin 1)) S := by
-  sorry
+  rw [Category.assoc, (etaleDeformationMap_spec h g s s' sq).2.2.2.2.2.1]
+  exact (Scheme.Hom.isPullback_normalConeToDeformationSpace (h ≫ g) s').w
 
 /-- The induced map on normal bundles, defined by the zero-fibre universal property.
 On associated graded algebras it sends [b] to [h-sharp(b)] in degree one; this is exactly
@@ -634,7 +739,43 @@ theorem coordinateDeformationMap_spec {X S : Scheme.{u}} [IsNoetherian S]
         (affineTraceAffineSpaceIso (AffineSpace (ULift.{u} (Fin 1)) S) d).hom =
       AffineSpace.zeroSection (ULift.{u} (Fin d))
         (AffineSpace (ULift.{u} (Fin 1)) S) := by
-  sorry
+  have : IsNoetherian (AffineSpace (ULift.{u} (Fin d)) S) := by
+    have := LocallyOfFiniteType.isLocallyNoetherian
+      (AffineSpace (ULift.{u} (Fin d)) S ↘ S)
+    have := QuasiCompact.compactSpace_of_compactSpace
+      (AffineSpace (ULift.{u} (Fin d)) S ↘ S)
+    exact ⟨⟩
+  have q := etaleDeformationMap_spec e
+    (AffineSpace (ULift.{u} (Fin d)) S ↘ S)
+    (AffineSpace.zeroSection (ULift.{u} (Fin d)) S) s sq
+  have := q.2.1
+  have := q.2.2.1
+  have := q.2.2.2.1
+  have := q.2.2.2.2.1
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · unfold coordinateDeformationMap
+    infer_instance
+  · unfold coordinateDeformationMap
+    infer_instance
+  · unfold coordinateDeformationMap
+    infer_instance
+  · unfold coordinateDeformationMap
+    infer_instance
+  · unfold coordinateDeformationMap
+    have hproj : (affineTraceAffineSpaceIso (AffineSpace (ULift.{u} (Fin 1)) S) d).inv ≫
+        affineTraceProjection (AffineSpace (ULift.{u} (Fin 1)) S) d =
+        (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) S) ↘ _) := by
+      apply (cancel_epi
+        (affineTraceAffineSpaceIso (AffineSpace (ULift.{u} (Fin 1)) S) d).hom).1
+      rw [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+      exact (AffineSpace.homOfVector_over _ _).symm
+    rw [Category.assoc, Category.assoc, hproj,
+      Scheme.Hom.deformationSpaceToAffineSpace_over,
+      q.2.2.2.2.2.1, w]
+  · simp only [coordinateDeformationMap, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id]
+    rw [← Category.assoc, q.2.2.2.2.2.2,
+      Scheme.Hom.deformationSpaceSection_comp_deformationSpaceToAffineSpace]
 
 /-- The canonical family chart orientation from the pulled-back Tate line.
 Source: sk-thm-dnc, coordinate normalization
@@ -674,7 +815,15 @@ theorem coordinateTower_over {X S : Scheme.{u}} (d : ℕ) (g : X ⟶ S)
     (e : X ⟶ AffineSpace (ULift.{u} (Fin d)) S)
     (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) S ↘ S) = g) :
     (e ≫ (affineTraceAffineSpaceIso S d).inv) ≫ affineTraceProjection S d = g := by
-  sorry
+  have hproj : (affineTraceAffineSpaceIso S d).inv ≫ affineTraceProjection S d =
+      (AffineSpace (ULift.{u} (Fin d)) S ↘ S) := by
+    apply (cancel_epi (affineTraceAffineSpaceIso S d).hom).1
+    rw [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    change affineTraceProjection S d =
+      affineTraceToAffineSpace S d ≫
+        (AffineSpace (ULift.{u} (Fin d)) S ↘ S)
+    exact (AffineSpace.homOfVector_over _ _).symm
+  rw [Category.assoc, hproj, w]
 
 /-- The source chart's adjoint orientation through the fixed polynomial coordinate tower.
 Source: sk-thm-dnc, chart normalization
@@ -818,7 +967,9 @@ that equality with the affine zero section, whose composite with the projection 
 identity. This also treats d=0 using the canonical zero-dimensional affine-space map. -/
 theorem standardZero_over (S : Scheme.{u}) (d : ℕ) :
     standardZero S d ≫ affineTraceProjection S d = 𝟙 S := by
-  sorry
+  unfold standardZero
+  apply coordinateTower_over d (𝟙 S)
+  exact AffineSpace.zeroSection_comp_over (ULift.{u} (Fin d)) S
 
 /-- Frame coordinates carry the zero section of the standard bundle to the actual zero
 section. Source: sk-thm-dnc, orientation gluing
@@ -832,7 +983,13 @@ theorem bundleFrame_zero (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (e : VectorBundleZeroSection.Trivialization S d M W) :
     standardZero W.toScheme d ≫ vectorIntegrationChart S d M W e =
       W.ι ≫ VectorBundleZeroSection.zero S d M := by
-  sorry
+  have := (VectorBundleZeroSection.trivializationMap_spec S d M W e).1
+  have hz := (VectorBundleZeroSection.trivializationMap_spec S d M W e).2.2
+  simp only [standardZero, vectorIntegrationChart, Category.assoc,
+    Iso.inv_hom_id_assoc]
+  rw [← hz]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  exact Scheme.Hom.resLE_comp_ι _ _
 
 /-- The zero-section exceptional comparison on a bundle frame, using the actual
 Cartesian square and its augmentation-compatible section.
@@ -976,6 +1133,11 @@ theorem finiteRingSectionDeformation (N : ℕ) (hN : 0 < N)
     [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
     (hs : s ≫ g = 𝟙 S) :
     ∃ G : Geometry d g s, @Conclusions A _ _ V S d g _ _ s _ hs G := by
-  sorry
+  let G : Geometry d g s := geometry d g s hs
+  have hlines := lines_and_fibres N hN A hA hS d g s hs
+  have hnorm := existsUnique_normalized N hN A hA hS d g s hs
+  refine ⟨G, hlines.1, hlines.2.1, hlines.2.2.1, hlines.2.2.2, hnorm, ?_⟩
+  intro κ hκ
+  exact isIso_specialization N hN A hA hS d g s hs κ hκ
 
 end AlgebraicGeometry.Etale.FiniteRingSectionDeformation
