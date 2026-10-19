@@ -16,11 +16,124 @@
   "def-weil-finite-integral-morphism",
   "def-nagata-global-blowup",
   "def-nagata-strict-transform",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $Y$ is Noetherian. Take a finite affine open cover $\\operatorname{Spec}A_j$ of $X$ by Noetherian rings. By [def-weil-closed-immersion], its inverse images in $Y$ are affine schemes $\\operatorname{Spec}(A_j/J_j)$, and they cover $Y$. Each quotient is Noetherian: the preimage in $A_j$ of any ideal of $A_j/J_j$ has finitely many generators by [def-weil-pbc-noetherian-ring], and their images generate the quotient ideal. This is a finite affine Noetherian cover of $Y$, so $Y$ is locally Noetherian and quasi-compact by [pqf-def-locnoeth] and [def-weil-pbc-quasi-compact-scheme].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI5, hypotheses: the closed curve in the Noetherian ambient scheme"
+   }
+  },
+  {
+   "text": "Put $N=Y^\\nu$ and write $\\nu:N\\to Y$. By [lem-per-finite-curve-normalization-regular], $N$ is an integral Noetherian regular curve and $\\nu$ is finite and birational. By [lem-weil-pbc-finite-pushforward-coherent], the module $\\mathcal M=\\nu_*\\mathcal O_N$ is coherent on the Noetherian scheme $Y$. The parenthetical structure-sheaf case of that node applies directly; no excellence or field-of-definition assumption is required.",
+   "uses": [
+    "lem-per-finite-curve-normalization-regular",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI4, proof: start from the finite normalization resolution"
+   }
+  },
+  {
+   "text": "Construct an intrinsic tower starting at $C_0=Y$ with $r_0=\\nu:N\\to C_0$. Maintain that $C_i$ is an integral Noetherian curve, $r_i$ is finite and birational, and $f_i:C_i\\to Y$ is finite and birational with $f_ir_i=\\nu$. If $C_i$ is not regular, choose a singular point $c_i$. It is closed: on an integral one-dimensional scheme every nongeneric point is closed, and the generic local ring is a field and hence regular. Apply [lem-per-singular-curve-point-blowup-step] to $(C_i,N,r_i,c_i)$. This produces the nonisomorphic finite birational blowup $b_i:C_{i+1}\\to C_i$ and the finite birational factor $r_{i+1}$. Set $f_{i+1}=f_ib_i$. Finiteness of the composite can also be checked directly from [def-weil-finite-integral-morphism]: on an affine of $Y$, the two inverse images are affine, and products of finite module generators for the two successive ring extensions generate the composite. The generic field maps compose to an isomorphism. Thus the invariant holds at the next stage.",
+   "uses": [
+    "lem-per-singular-curve-point-blowup-step",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI4, proof: inductive construction of the factorizations"
+   }
+  },
+  {
+   "text": "For each stage regard $\\mathcal A_i=f_{i,*}\\mathcal O_{C_i}$ as a submodule of $\\mathcal M$ using $r_i$. Indeed, on an affine open $V=\\operatorname{Spec}A\\subseteq Y$, finiteness identifies $f_i^{-1}V=\\operatorname{Spec}B_i$ and $\\nu^{-1}V=\\operatorname{Spec}D$; the ring maps $A\\to B_i\\to D$ are injections because all schemes are integral and all maps induce isomorphisms of function fields. Compatibility $b_ir_{i+1}=r_i$ gives $\\mathcal A_i\\subseteq\\mathcal A_{i+1}\\subseteq\\mathcal M$. Each $\\mathcal A_i$ is coherent, hence quasi-coherent, by [lem-weil-pbc-finite-pushforward-coherent] applied to $f_i$. If adjacent submodules were equal, the induced map $B_i\\to B_{i+1}$ would be an isomorphism on every affine open of $Y$. Taking spectra gives that $b_i$ is an isomorphism, contrary to its construction. Thus every step made while singular gives a strict inclusion. These are affine ring identifications using the definition of a finite morphism, rather than a claim that arbitrary scheme morphisms are detected by their global functions.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI4, proof: the increasing sequence of coherent submodules"
+   }
+  },
+  {
+   "text": "If no stage were regular, the preceding recursive construction would give an infinite strictly increasing sequence $\\mathcal A_0\\subsetneq\\mathcal A_1\\subsetneq\\cdots\\subseteq\\mathcal M$ of quasi-coherent submodules of a coherent module on the fixed Noetherian scheme $Y$. This contradicts [lem-weil-pbc-noetherian-acc-quasi-coherent]. Hence it stops at some finite $n$ with $C_n$ regular. If $Y$ was regular initially, take $n=0$. This proves termination of the intrinsic construction, including its choice of singular reduced point at each nontrivial step.",
+   "uses": [
+    "lem-weil-pbc-noetherian-acc-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI4, proof: stabilization by coherent.tex Tag 01Y8 (lemma-acc-coherent)"
+   }
+  },
+  {
+   "text": "Lift this finite tower to the ambient scheme by induction. Start with $X_0=X$ and the given closed immersion $C_0=Y\\hookrightarrow X_0$. Suppose $X_i$ is Noetherian and $C_i\\hookrightarrow X_i$ is a closed immersion. The reduced point $\\operatorname{Spec}\\kappa(c_i)\\hookrightarrow C_i\\hookrightarrow X_i$ is a closed immersion by [lem-weil-pbc-closed-immersion-comp], so its image is closed in $X_i$. Its ideal is of finite type, since ideals on Noetherian affine opens are finitely generated. Blow up this reduced closed point to obtain $X_{i+1}\\to X_i$. This blowup is proper by [thm-nagata-global-blowup-proper], hence of finite type by [def-weil-proper-morphism]; consequently $X_{i+1}$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The point centre is also finitely presented: on any affine its quotient algebra has finitely many defining ideal generators. The extended centre ideal on $C_i$ is exactly $\\mathcal I_{c_i}$: on a local affine presentation $A\\twoheadrightarrow B=A/J$ with point ideal $\\mathfrak m$ containing $J$, the extended ideal is $\\mathfrak m B=\\mathfrak m/J$, the ideal of that same reduced point on $C_i$. By [thm-nagata-strict-transform-is-blowup], the strict transform is therefore canonically $\\operatorname{Bl}_{\\mathcal I_{c_i}}C_i=C_{i+1}$. By [def-nagata-strict-transform] it is closed in $C_i\\times_{X_i}X_{i+1}$; the latter is closed in $X_{i+1}$ by [lem-weil-pbc-closed-immersion-base-change]. Composition of these closed immersions again uses [lem-weil-pbc-closed-immersion-comp]. This establishes the induction with the requisite scheme structures, not merely equality of underlying point sets.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp",
+    "thm-nagata-strict-transform-is-blowup",
+    "def-nagata-strict-transform",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "thm-nagata-global-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI5 (resolve-lemma-blowup-curve), proof: lift the intrinsic point blowups using strict-transform compatibility"
+   }
+  },
+  {
+   "text": "The resulting successive strict transform $Y_n\\subseteq X_n$ is isomorphic to the regular curve $C_n$. Every chosen ambient centre is the reduced closed point $c_i$, which was singular on the current transform $C_i$. The finite ambient tower therefore has both asserted properties; the empty tower covers the initially regular case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI5, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-per-finite-curve-normalization-regular",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-per-singular-curve-point-blowup-step",
+  "def-weil-finite-integral-morphism",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-weil-pbc-closed-immersion-comp",
+  "thm-nagata-strict-transform-is-blowup",
+  "def-nagata-strict-transform",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "thm-nagata-global-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0BI4 (resolve-lemma-resolve-curve), proof of (4) implies (3), and 0BI5 (resolve-lemma-blowup-curve), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -38,10 +151,10 @@
   },
   {
    "tool": "loogle",
-   "query": "\"normalization\"",
-   "results": "Loogle returned Aesop normalization internals, no algebraic-geometry resolution theorem.",
+   "query": "normalization, AlgebraicGeometry.IsRegular, AlgebraicGeometry.Scheme.IdealSheafData.blowup",
+   "results": "0 hits: . loogle: unknown identifier 'normalization'",
    "date": "2026-10-19",
-   "verdict": "no match"
+   "verdict": "no match: Loogle reported unknown identifier normalization; semantic searches and grep give the substantive absence check"
   },
   {
    "tool": "grep",
@@ -52,7 +165,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-embedded-surface-curve-resolution",
@@ -78,5 +191,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-surface-curve-regularization-by-blowups",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BI4 and 0BI5 without strengthening the hypotheses: a fixed finite regular normalization dominates each singular-point blowup, coherent subalgebras strictly increase, Noetherian ACC forces termination, and the strict-transform comparison lifts the tower into the ambient scheme. Two statement-only inputs isolate normalization regularity and the single-step blowup; the termination argument stays in the item. Reused coherent pushforward, ACC, and closed-immersion/strict-transform nodes.",
+  "blueprint": "Technical curve input under lem-per-artin-gabber-affine-curve via the recorded potential-dualizing/embedded-resolution ancestry; realizes the regularization step of the parent embedded-surface resolution through Tags 0BI4 and 0BI5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Generic coherent direct-image tool for the finite normalization and finite intermediate curves; the perverse unit contains no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "why": "Generic Noetherian coherent-module ACC, exactly the termination tool used in Stacks 0BI4."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Generic composition of closed immersions to retain embedded curves and reduced centres."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic base change of a closed immersion to embed the strict transform into the ambient blowup."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Closed source-library strict-transform comparison, exactly the tool required by Stacks 0BI5."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Generic properness of blowups in finite-type ideals to keep the ambient tower Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian preservation under finite-type morphisms for the ambient blowups."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "thm-nagata-strict-transform-is-blowup",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-0ae025c97",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-0ae025c97 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: resolve.tex 0BI4/0BI5 in full, plus 0BX2, 0AB7, 0BXC and 080E. Item statement unchanged; it matches 0BI5 under 0BI4(4) and is not weakened. Steps: (1) Y is Noetherian, elementary. (2) Normalization node plus finite pushforward coherence. (3) Explicit induction with base f_0=id, r_0=ν, invariant f_i r_i=ν; singular points are closed in an integral dimension-1 scheme. (4) The subalgebras A⊂B_i⊂D increase strictly, otherwise b_i is an isomorphism on every affine. (5) ACC on the fixed Noetherian Y. (6) The point centre is a finite-type, finitely presented ideal, so the blowup is proper, finite type and Noetherian; the extended ideal is I_c; strict transform ≅ Bl_{I_c}C_i (blueprint_update of thm-nagata-strict-transform-is-blowup and 080E), closed in X_{i+1} by base change and composition. (7) Elementary conclusion. New node lem-per-finite-curve-normalization-regular is true (035Q, finite over Noetherian, dimension preserved, 0BX2); tested on the cusp and a DVR. New node lem-per-singular-curve-point-blowup-step is true: m_c O_R is invertible on a regular curve, giving r^+ by the universal property; b is finite by 0AB7; r^+ is finite via graph plus base change; b is not an isomorphism, else m_c would be principal and O_{C,c} regular. Tested on the cusp and on a regular point (where the singularity hypothesis is needed). Neither node restates the item. No duplicate: componentwise-normalization-properties has no regularity, the trf curve nodes are over a field, generically-finite-proper is 0AB7 only. The seven off-unit tool_uses declared in split_report (sk-thm-p1 and nagata generic tools) are accepted. Blueprint from/via correct, no SGA used, no A–F error found."
  }
 }
