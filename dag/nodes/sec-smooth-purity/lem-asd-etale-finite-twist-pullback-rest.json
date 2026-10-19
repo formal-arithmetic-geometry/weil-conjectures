@@ -49,25 +49,39 @@
  ],
  "proof": [
   {
-   "text": "Construct the canonical local root, scalar-extension, tensor and dual comparisons as described in the corresponding proof steps of lem-asd-etale-finite-twist-pullback. The declaration is left as a named intermediate theorem for the unresolved construction.",
+   "text": "Compose the existing derived inverse-image tensor comparison with the single-complex pullback comparison induced by c. Whisker the pullback/shift comparison and these two comparisons to construct d; functoriality gives exactly its asserted component formula.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-kun-inverse-image-monoidal"
    ],
    "elementary": false
+  },
+  {
+   "text": "Write m′=m*k. Both m and k are units on T, so Kummer exactness makes multiplication by m and k on G_m epimorphic. Define q:ker(m*k)→ker(m) by restricting multiplication by k. Using lifts along these epimorphisms, prove that q is epimorphic and that ker(q) is the image of multiplication by m on ker(m*k). Thus q is the cokernel of that multiplication map.",
+   "uses": [
+    "lem-amb-kummer-any-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the sheafification and scalar-extension adjunctions, maps from the coefficient root line into an A-module sheaf P correspond naturally to additive maps from roots of unity into the underlying abelian sheaf of P. As mA=0, every such map from ker(m*k) annihilates multiplication by m and hence factors uniquely through q. The induced coefficient-line morphism is therefore an isomorphism by the coyoneda criterion. The adjunction formula at 1 tensor z gives the generator equation for coefficient 1; A-linearity gives the equation for every coefficient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the line isomorphism recursively by tensor products in nonnegative degrees and by precomposition with the inverse in negative degrees. The zero and positive recursion equations are definitional. Naturality of evaluation followed by cancellation of an isomorphism with its inverse proves the dual evaluation equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-kun-inverse-image-monoidal",
+  "lem-amb-kummer-any-base"
  ],
  "proof_origin": {
-  "by": "D3 stage 3",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 07A4 and 0G7E; derived tensor comparison and exponent changes",
-  "note": "Strict decomposition of the parent proof; the target combines this package with the other named package."
+  "by": "agent T5 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03PK (Kummer exactness), Tag 07A4 (derived tensor pullback)",
+  "note": "Use the existing scheme-level derived monoidal API. The exponent quotient, adjunction, tensor-power and dual arguments are proved as private helpers in the item module. No further proof obligations are split off."
  },
  "created": {
   "by": "worker",
@@ -96,12 +110,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "T5",
   "result": "pass",
-  "landing": "20261018T103142-L-4174771",
+  "landing": "20261019T122642-L-480624",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
