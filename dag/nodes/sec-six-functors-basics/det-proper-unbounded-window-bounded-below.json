@@ -29,9 +29,10 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A_Z=\\Mod_{\\Lambda_Z}$ for $Z=X,Y$. The module-object action is equivalently a sheafwise ring-module action: by the universal property of the sheaf tensor product, a map $\\Lambda_Z\\otimes M\\to M$ is a bilinear sheaf action, with the same unit and associativity equations. Thus the ringed-site Grothendieck theorem [lem-pur-ringed-site-grothendieck-abelian] applies to these categories. The functor $p_*$ is additive and left exact by [def-sfb-module-lower-star], and $Rp_*$ is computed on K-injective resolutions in this very module category by [sk-def-sfb-module-derived-pushpull]. Choose $a_0\\in\\mathbf Z$ with $\\mathcal H^v(K)=0$ for $v<a_0$; canonical truncation below $a_0$ replaces a representative of K by a quasi-isomorphic bounded-below complex. Apply [thm-sp-truncation-e2] to obtain $E_2^{u,v}=R^up_*\\mathcal H^v(K)\\Longrightarrow\\mathcal H^{u+v}(Rp_*K)$, supported in $u\\geq0$, $v\\geq a_0$. Parts (5) and (6) give a finite exhaustive separated decreasing filtration $F^u\\mathcal H^n(Rp_*K)$, with $F^0=\\mathcal H^n(Rp_*K)$, $F^u=0$ for sufficiently large u, and $F^u/F^{u+1}\\cong E_\\infty^{u,n-u}$.",
+   "text": "Use the existing Grothendieck instances for pro-etale abelian sheaves [lem-sfb-proetale-sheaves-grothendieck] and their internal module objects [lem-sfb-modobj-grothendieck]. The module pushforward and total right derived functor are [def-sfb-module-lower-star] and [sk-def-sfb-module-derived-pushpull]. For a bounded-below representative, apply [thm-sp-truncation-e2] to obtain positionwise E2 comparisons, page recursion, stable-page comparisons, and finite exhaustive separated abutment filtrations.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "lem-sfb-modobj-grothendieck",
     "def-sfb-module-lower-star",
     "sk-def-sfb-module-derived-pushpull",
     "thm-sp-truncation-e2"
@@ -39,22 +40,22 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-    "place": "proof, first paragraph: the hypercohomology spectral sequence and its finite abutment filtration"
+    "place": "proof, first paragraph: bounded-below representative and hypercohomology spectral sequence"
    }
   },
   {
-   "text": "For every v, the sheaf $\\mathcal H^v(K)$ lies in $\\IndCons(X,\\Lambda)$ because K is an object of $\\Dic(X,\\Lambda)$. Applying [sk-lem-proper-heart-bound] to this sheaf gives $E_2^{u,v}=R^up_*\\mathcal H^v(K)=0$ for $u>2d+1$ and places every nonzero $E_2^{u,v}$ in $\\IndCons(Y,\\Lambda)$.",
+   "text": "For every cohomological degree, apply [sk-lem-proper-heart-bound] to the ind-constructible heart object. Thus every E2 position is in IndCons and all columns above 2d+1 vanish.",
    "uses": [
     "sk-lem-proper-heart-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-    "place": "proof, first paragraph: application of sk-lem-proper-heart-bound to the E2-page"
+    "place": "proof, first paragraph: proper-heart bound on E2"
    }
   },
   {
-   "text": "Set $c=2d+1$. Starting with the E2-page of Step 2, induct on $r\\geq2$. By [def-sp-exact-couple] the next page is $E_{r+1}^{u,v}=\\ker(d_r^{u,v})/\\operatorname{im}(d_r^{u-r,v+r-1})$, and the incoming image lies in the outgoing kernel because $d_r^2=0$. For a differential $f:A\\to B$ between page terms, [det-ind-heart-kernels-cokernels] puts $\\ker f$ and $\\coker f$ in $\\IndCons(Y,\\Lambda)$; then $\\operatorname{im}f=\\ker(B\\to\\coker f)$ lies there too. Apply the same closure to the map from the incoming image into the outgoing kernel: its cokernel is $E_{r+1}^{u,v}$, hence is ind-constructible. This also shows that a zero page position stays zero, so every page is supported in $0\\leq u\\leq c$. Since $d_r$ has bidegree $(r,1-r)$ by [thm-sp-truncation-e2], when $r>c$ every differential between these columns has zero source or zero target. Choose an integer $R\\geq2$ with $R>c$. All pages from R onward coincide; thus $E_\\infty^{u,v}=E_R^{u,v}$ is ind-constructible by the finite induction, including when the column interval is empty.",
+   "text": "Induct on exact-couple pages using [def-sp-exact-couple]. Each next page term is the cokernel of the incoming differential lifted from its page term into the outgoing kernel, so [det-ind-heart-kernels-cokernels] propagates IndCons; the same recursion propagates zero terms. The stable-page isomorphisms supplied by [thm-sp-truncation-e2] then give IndCons stable terms positionwise.",
    "uses": [
     "def-sp-exact-couple",
     "thm-sp-truncation-e2",
@@ -63,31 +64,34 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-    "place": "proof, first paragraph: passage from E2 to Er and E-infinity by kernels and cokernels"
+    "place": "proof, first paragraph: page recursion and stable terms"
    }
   },
   {
-   "text": "For fixed n, use the finite decreasing filtration of Step 1. Its graded pieces $E_\\infty^{u,n-u}$ are ind-constructible by Step 3; those outside $0\\leq u\\leq2d+1$ are zero. Start with $F^N=0$ for sufficiently large N, which is ind-constructible since the zero sheaf is constructible. For each $u=N-1,\\ldots,0$ the short exact sequence $0\\to F^{u+1}\\to F^u\\to E_\\infty^{u,n-u}\\to0$ has ind-constructible left and right terms. Apply [det-ind-heart-extensions] at each of these finitely many steps. It follows that $F^0=\\mathcal H^n(Rp_*K)$ lies in $\\IndCons(Y,\\Lambda)$.",
+   "text": "For any property containing zero and closed under short exact extensions, induct down a finite decreasing filtration from its zero end. Apply [thm-sp-truncation-e2] and [det-ind-heart-extensions] to assemble each abutment object from its graded stable-page pieces. For IndCons, zero and kernel/cokernel closure are supplied by [det-ind-heart-kernels-cokernels].",
    "uses": [
     "thm-sp-truncation-e2",
-    "det-ind-heart-extensions"
+    "det-ind-heart-extensions",
+    "det-ind-heart-kernels-cokernels"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-    "place": "proof, first paragraph: finite filtration and closure under extensions"
+    "place": "proof, first paragraph: finite filtration"
    }
   },
   {
-   "text": "If $\\mathcal H^v(K)=0$ for $v<a$ and $n<a$, then any position $u+v=n$ with $u\\geq0$ has $v\\leq n<a$, so its E2-term is zero. Page recursion preserves this zero, and all graded pieces of the finite filtration of $\\mathcal H^n(Rp_*K)$ vanish. Descending through that filtration gives $\\mathcal H^n(Rp_*K)=0$. If instead $\\mathcal H^v(K)=0$ for $v>b$ and $n>b+2d+1$, then in each possible column $0\\leq u\\leq2d+1$ one has $v=n-u>b$, while all remaining columns are zero by Step 2. Thus all E2-terms of total degree n are zero, all corresponding stable terms are zero, and every successive quotient in the finite abutment filtration is zero. Starting at its zero end and descending to $F^0$ gives $\\mathcal H^n(Rp_*K)=0$.",
+   "text": "The compatibility of bounded-below and total right-derived functors gives the lower IsGE bound. For the upper IsLE bound, in total degree n>b+2d+1 every nonzero E2 column would have cohomological degree above b, while columns above 2d+1 vanish by [sk-lem-proper-heart-bound]. Zero page positions remain zero through the exact-couple recursion and the finite filtration, proving the upper bound.",
    "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-lem-proper-heart-bound",
     "thm-sp-truncation-e2",
-    "sk-lem-proper-heart-bound"
+    "def-sp-exact-couple"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-    "place": "proof, second paragraph: the two amplitude bounds read from the spectral-sequence support"
+    "place": "proof, second paragraph: amplitude bounds"
    }
   }
  ],
@@ -96,7 +100,8 @@
   "def-sp-exact-couple",
   "det-ind-heart-extensions",
   "det-ind-heart-kernels-cokernels",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "sk-def-sfb-module-derived-pushpull",
   "sk-lem-proper-heart-bound",
   "thm-sp-truncation-e2"
@@ -104,7 +109,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
-  "place": "proof, first and second paragraphs"
+  "place": "Both proof paragraphs, implemented by private exact-couple, filtration, and derived-functor helpers."
  },
  "mathlib_searches": [
   {
@@ -201,8 +206,7 @@
  "tool_uses": [
   "thm-sp-truncation-e2",
   "det-ind-heart-kernels-cokernels",
-  "det-ind-heart-extensions",
-  "lem-pur-ringed-site-grothendieck-abelian"
+  "det-ind-heart-extensions"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -281,5 +285,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The two statements instantiate the canonical condensed finite intermediate field and finite-subextension-valued algebraic-closure rings. Dic and IndCons are expressed directly using the existing cohomology functor, finite constant-model predicate and ObjectProperty.ind; no arbitrary predicate or pushforward is assumed. The geometric fibre bound uses the canonical algebraic closure of each residue field and sends negative integer bounds to bottom, retaining the empty-source case."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762437",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
