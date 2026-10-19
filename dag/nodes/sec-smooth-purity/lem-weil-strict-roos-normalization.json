@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-strict-roos-normalization",
+ "kind": "statement",
+ "title": "StrictRoosNormalization",
+ "statement": "Let C,J,R,A=Mod(R), exact countable products and the two derived categories satisfy the hypotheses of the module-sheaf strict Roos construction [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let F, χ, a, and ι be its explicit cone functor, coordinates, chain evaluations and ordinary-limit inclusion [def-weil-strict-roos-model], constructed using [def-weil-tower-transition-endomorphism]. Suppose CF:D(Tow(A))→D(A) has descent κ:F⋙Q_A≅Q_Tow⋙CF, is total right derived limit with unit Q(ι)κ, and ι_I is a quasi-isomorphism for every K-injective tower complex I with injective degree terms. For any other total right derived limit RF with unit η there exist a natural isomorphism ρ:CF≅RF and morphisms e_(X,n):RF(QX)→Q(X_n) such that, writing θ_X=κ_Xρ_(QX), θ_X e_(X,n)=Q(a_(X,n)). For every quasi-isomorphism q:X→I with I K-injective and degreewise injective, there exist an inclusion j:lim I_n→F(I), an isomorphism ε:Q(lim I_n)≅Q(F(I)), and d:Q(lim I_n)≅RF(QX), with χ-coordinates of j equal to (0,(π_n)_n), F(q) and j quasi-isomorphisms, ε.hom=Q(j), d.hom RF(Qq)=η_I, and θ_X=Q(F(q))ε.inv d.hom. For each n there is an isomorphism υ_n:Q(X_n)≅Q(I_n) with υ_n.hom=Q(q_n) and d.hom e_(X,n)=Q(π_n)υ_n.inv. Every compatible family γ_n:P→X_n admits b:P→F(X) with coordinates (0,(γ_n)_n) and λ:P→lim I_n with λπ_n=γ_n q_n, satisfying Q(b)θ_X=Q(λ)d.hom. Finally, for another such resolution q′:X→J, any dJ:Q(lim J_n)≅RF(QX) with dJ.hom RF(Qq′)=η_J, and any v:I→J with qv homotopic to q′, one has Q(lim v)dJ.hom=d.hom.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof and strict naturality refinement"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib Functor.rightDerivedUnique and its unit equation to obtain ρ. Write θ=κ composed with Q-whiskered ρ and define e by θ inverse followed by localized roosEval. On a resolution q:X→I, θ naturality implies roosF(q) becomes invertible; hι makes Q(roosι I) invertible, and the unit identity makes η(I) invertible. Define εI=asIso(Q(roosι I)) and dI=asIso(η(I)) composed with the inverse of RF(Qq). Naturality and cancellation give the normalization. Evaluation naturality and roosι_eval give its projection formula. Choose the explicit roosAugment and its ordinary-limit lift followed by lim(q); roosAugment_eq and roosι_natural give the augmentation identity. Finally Q(q) Q(v)=Q(q′) by the supplied homotopy. Cancel RF(Qq′) and use η naturality to prove transport. The proof uses only localization of a supplied homotopy; no K-injective comparison-existence theorem is needed.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, explicit strict-cone refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "0 hits; ; loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted mapping cone of one minus shift on countable products of a strict tower computes derived inverse limit with exact products",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "roosComplex|mappingFiber|rightDerived.*Iso",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Roos shifted mapping cone of one minus shift on products computes the right derived inverse limit of strict towers of complexes",
+   "results": "8 hits; CochainComplex.mappingCone; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.shiftTrianglehIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftTriangleIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃_assoc; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "1 hits; CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.StrictRoosComparison",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-direct-image-composition",
+   "place": "Steps 5--8",
+   "via": [
+    "lem-weil-strict-roos-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StrictRoosNormalization",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosNormalization.lean",
+  "declaration": "CategoryTheory.strictRoosNormalization",
+  "statement": "theorem strictRoosNormalization\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (R : Sheaf J RingCat.{max uC vC r})\n    (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)\n    [HasDerivedCategory.{w} (ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{w}\n      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)]\n    (RF : DerivedCategory.{w}\n      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤\n        DerivedCategory.{w} (ringedSiteModules.{max uC vC r} R))\n    (η : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙\n      (lim : (ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ) ⥤ CochainComplex\n        (ringedSiteModules.{max uC vC r} R) ℤ) ⋙\n        DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RF)\n    (_hRF : RF.IsRightDerivedFunctor η\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) (ComplexShape.up ℤ)))\n    (CF : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤\n      DerivedCategory.{w} (ringedSiteModules.{max uC vC r} R))\n    (κ : roosF ⋙ DerivedCategory.Q.{w} ≅ DerivedCategory.Q.{w} ⋙ CF)\n    (_hCF : CF.IsRightDerivedFunctor (roosDerivedUnit κ)\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)\n        (ComplexShape.up ℤ)))\n    (_hι : ∀ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ)\n      [I.IsKInjective] (_hIinj : ∀ p : ℤ, Injective (I.X p)), QuasiIso (roosι I)) :\n    ∃ (ρ : CF ≅ RF)\n      (e : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (n : ℕ), RF.obj\n        (DerivedCategory.Q.obj X) ⟶\n        DerivedCategory.Q.obj (X.asFunctor.obj (op n))),\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (n : ℕ), κ.hom.app X ≫\n        ρ.hom.app (DerivedCategory.Q.obj X) ≫ e X n =\n        DerivedCategory.Q.map (roosEval X n)) ∧\n      (∀ (X I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ)\n        (q : X ⟶ I) [QuasiIso q] [I.IsKInjective]\n        (_hIinj : ∀ p : ℤ, Injective (I.X p)),\n        ∃ (ι : limit I.asFunctor ⟶ roosF.obj I)\n          (εI : DerivedCategory.Q.{w}.obj (limit I.asFunctor) ≅\n            DerivedCategory.Q.obj (roosF.obj I))\n          (dI : DerivedCategory.Q.{w}.obj (limit I.asFunctor) ≅\n            RF.obj (DerivedCategory.Q.obj X)),\n          (∀ p : ℤ, ι.f (p + 1) ≫ (roosχ I p).hom =\n            biprod.lift 0\n              ((Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))).f (p + 1))) ∧\n          QuasiIso (roosF.map q) ∧ QuasiIso ι ∧\n          εI.hom = DerivedCategory.Q.map ι ∧\n          dI.hom ≫ RF.map (DerivedCategory.Q.map q) = η.app I ∧\n          κ.hom.app X ≫ ρ.hom.app (DerivedCategory.Q.obj X) =\n            DerivedCategory.Q.map (roosF.map q) ≫ εI.inv ≫ dI.hom ∧\n          (∀ n : ℕ, ∃ υ : DerivedCategory.Q.{w}.obj (X.asFunctor.obj (op n)) ≅\n              DerivedCategory.Q.obj (I.asFunctor.obj (op n)),\n            υ.hom = DerivedCategory.Q.map\n              ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app (op n)) ∧\n            dI.hom ≫ e X n =\n              DerivedCategory.Q.map (limit.π I.asFunctor (op n)) ≫ υ.inv) ∧\n          (∀ (P : CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ)\n            (γ : ∀ n : ℕ, P ⟶ X.asFunctor.obj (op n))\n            (_hγ : ∀ n : ℕ, γ (n + 1) ≫\n              X.asFunctor.map (homOfLE (Nat.le_succ n)).op = γ n),\n            ∃ (b : P ⟶ roosF.obj X) (lam : P ⟶ limit I.asFunctor),\n              (∀ p : ℤ, b.f (p + 1) ≫ (roosχ X p).hom =\n                biprod.lift 0 ((Pi.lift γ).f (p + 1))) ∧\n              (∀ n : ℕ, lam ≫ limit.π I.asFunctor (op n) = γ n ≫\n                (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app (op n)) ∧\n              DerivedCategory.Q.map b ≫ κ.hom.app X ≫\n                  ρ.hom.app (DerivedCategory.Q.obj X) =\n                DerivedCategory.Q.map lam ≫ dI.hom) ∧\n          (∀ (J' : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ)\n            (q' : X ⟶ J') [QuasiIso q'] [J'.IsKInjective]\n            (_hJinj : ∀ p : ℤ, Injective (J'.X p))\n            (dJ : DerivedCategory.Q.{w}.obj (limit J'.asFunctor) ≅\n              RF.obj (DerivedCategory.Q.obj X))\n            (_hdJ : dJ.hom ≫ RF.map (DerivedCategory.Q.map q') = η.app J')\n            (v : I ⟶ J') (_hv : Nonempty (Homotopy (q ≫ v) q')),\n            DerivedCategory.Q.map\n                (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map v)) ≫\n              dJ.hom = dI.hom))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

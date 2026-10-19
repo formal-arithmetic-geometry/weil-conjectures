@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-strict-roos-derivation",
+ "kind": "statement",
+ "title": "StrictRoosDerivation",
+ "statement": "Let C be a site, small in a common universe containing its object, morphism and coefficient universes, and R a sheaf of commutative rings. Assume abelian sheafification and the locally-bijective characterization of its equivalences. Let A=Mod(R) [def-weil-sheaf-of-modules-category], assume exact countable products, and fix derived categories of A and Tow(A) in a common localization universe [def-weil-abstract-derived-category]. Let F be the explicit strict Roos functor, ι_X:lim X_n→F(X) its canonical zero-first-coordinate inclusion [def-weil-strict-roos-model], and u its one-minus-transition endomorphism [def-weil-tower-transition-endomorphism]. There exist a functor CF:D(Tow(A))→D(A) and a natural isomorphism κ:F⋙Q_A≅Q_Tow⋙CF such that the unit ν_X=Q_A(ι_X)κ_X makes CF a total right derived functor of ordinary termwise tower limit followed by Q_A, relative to quasi-isomorphisms. Moreover ι_I is a quasi-isomorphism for every K-injective complex I of towers whose degree terms I^p are injective objects of Tow(A).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof and strict naturality refinement"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "The explicit product functor takes quasi-isomorphisms to quasi-isomorphisms because countable products are exact. Apply the mapping-cone triangle and two-out-of-three, then shift, to show roosF preserves quasi-isomorphisms. Localize roosF followed by Q to obtain CF and the natural factorization κ.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the kernel universal property of the ordinary-limit inclusion into the product using adjacent compatibility and induction. Transport the product and kernel to every degree and compute the signed differential of the shifted cone. Apply roosComplex_quasiIso to this data; its coordinate equation identifies its canonical map with roosι. Thus roosι is a quasi-isomorphism for every K-injective tower.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-weil-derived-limit-roos-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module sheaves are Grothendieck abelian. For a small diagram category, evaluation left adjoints applied to a separator form a separating family; their coproduct is a separator, and filtered colimits are exact pointwise. Lift the natural-number index category to the module universe and transport back along its equivalence. Apply functorial K-injective resolutions in this Grothendieck tower category.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the left Kan universal property directly. For β:G→Q E, a resolution q:X→T X and ν:G→F invertible on resolutions, define the component F(q) ν(T X)^{-1} β(T X) E(Qq)^{-1}. Naturality follows from q, ν and β. Fully faithful whiskering along Q descends this transformation to CF→E; its factorization follows from ν and β naturality. Uniqueness holds on resolved objects by cancellation of ν and κ, then on every object by naturality along Qq. Use ν=Q(roosι), whose resolution components are invertible by the preceding step.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-abstract-derived-category",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, explicit strict-cone refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "0 hits; ; loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted mapping cone of one minus shift on countable products of a strict tower computes derived inverse limit with exact products",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "roosComplex|mappingFiber|rightDerived.*Iso",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Roos shifted mapping cone of one minus shift on products computes the right derived inverse limit of strict towers of complexes",
+   "results": "8 hits; CochainComplex.mappingCone; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.shiftTrianglehIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftTriangleIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃_assoc; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "1 hits; CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.StrictRoosComparison",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-direct-image-composition",
+   "place": "Steps 2--5",
+   "via": [
+    "lem-weil-strict-roos-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StrictRoosDerivation",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosDerivation.lean",
+  "declaration": "CategoryTheory.strictRoosDerivation",
+  "statement": "theorem strictRoosDerivation\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (R : Sheaf J RingCat.{max uC vC r})\n    (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)\n    [HasDerivedCategory.{w} (ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{w}\n      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)]\n    : ∃ (CF : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤\n        DerivedCategory.{w} (ringedSiteModules.{max uC vC r} R))\n      (κ : roosF ⋙ DerivedCategory.Q.{w} ≅ DerivedCategory.Q.{w} ⋙ CF),\n      CF.IsRightDerivedFunctor (roosDerivedUnit κ)\n        (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)\n          (ComplexShape.up ℤ)) ∧\n      ∀ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ)\n        [I.IsKInjective] (_hIinj : ∀ p : ℤ, Injective (I.X p)), QuasiIso (roosι I)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

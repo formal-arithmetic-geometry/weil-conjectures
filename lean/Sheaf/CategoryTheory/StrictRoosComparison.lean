@@ -13,13 +13,8 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.StrictRoosDerivation
+import Sheaf.CategoryTheory.StrictRoosNormalization
 
 /-!
 # Natural strict Roos comparison with total derived inverse limit
@@ -202,6 +197,17 @@ theorem strictRoosComparison
             DerivedCategory.Q.map
                 (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map v)) ≫
               dJ.hom = dI.hom)) := by
-  sorry
+  obtain ⟨CF, κ, hCF, hι⟩ :=
+    strictRoosDerivation.{uC, vC, r, w} J R _hcomm
+  obtain ⟨ρ, e, he, hr⟩ :=
+    strictRoosNormalization.{uC, vC, r, w} J R _hcomm RF η _hRF CF κ hCF hι
+  refine ⟨roosF, (fun _ ↦ rfl), roosχ, CF, κ, ρ, roosEval, e,
+    (fun _ _ ↦ ?_), roosF_map_χ, roosEval_f, he, ?_, hr⟩
+  · simp [roosχ]
+  · intro X Y f
+    have hκ := κ.hom.naturality f
+    have hρ := ρ.hom.naturality (DerivedCategory.Q.map f)
+    dsimp only [Functor.comp_map] at hκ hρ
+    rw [← Category.assoc, hκ, Category.assoc, hρ]
 
 end CategoryTheory

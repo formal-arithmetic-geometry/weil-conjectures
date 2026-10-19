@@ -1,0 +1,116 @@
+{
+ "id": "def-weil-strict-roos-model",
+ "kind": "definition",
+ "title": "StrictRoosModel",
+ "statement": "Let A be an abelian category with countable products. For a cochain complex X of strict towers (functors from the opposite natural-number order to A), write X_n for its evaluated complex and t_n:X_(n+1)→X_n for its transition. Put P(X)=∏_n X_n and let u(X):P(X)→P(X) have nth component π_n−π_(n+1)t_n [def-weil-tower-transition-endomorphism]. Define F(X)=Cone(u(X))[-1] [def-weil-abstract-derived-category]. For a strict morphism f:X→Y, define F(f) by the shifted cone map induced by ∏_n f_n on both products. The canonical shift and cone coordinates, followed by the biproduct braiding, identify F(X)^(p+1) with P(X)^p⊕P(X)^(p+1). In these coordinates the differential is (y,z)↦(−dy−u(z),dz), maps are diagonal product maps, and evaluation at n is the second projection followed by π_n. If A also has tower limits, define the inclusion lim X_n→F(X) by coordinates (0,(π_n)_n). For any compatible family γ_n:P→X_n, define its strict augmentation P→F(X) by coordinates (0,(γ_n)_n), and its ordinary-limit lift by the limit universal property. These are explicit constructions, natural in strict tower maps. When the derived categories exist, localizing this inclusion and composing with a descent factorization κ defines the natural transformation roosDerivedUnit κ. The module-sheaf context is the specialization of these constructions to [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof and strict naturality refinement"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct products and 1-s, use strict naturality to define the cone functor, shift by -1, and use canonical shift and biproduct isomorphisms. The mapping-cocone lift defines the limit inclusion and augmentations. Verify all equations coordinatewise.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, explicit strict-cone refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "0 hits; ; loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted mapping cone of one minus shift on countable products of a strict tower computes derived inverse limit with exact products",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "roosComplex|mappingFiber|rightDerived.*Iso",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Roos shifted mapping cone of one minus shift on products computes the right derived inverse limit of strict towers of complexes",
+   "results": "8 hits; CochainComplex.mappingCone; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.shiftTrianglehIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.shiftTriangleIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃_assoc; CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "1 hits; CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-18",
+   "verdict": "Generic cone and derived-functor ingredients; rightDerivedUnique is used for normalization. No complete strict normalized Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.StrictRoosComparison",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-direct-image-composition",
+   "place": "Explicit cone construction",
+   "via": [
+    "lem-weil-strict-roos-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StrictRoosModel",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosModel.lean",
+  "declaration": "CategoryTheory.roosF",
+  "statement": "def roosF : CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
