@@ -5,7 +5,7 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

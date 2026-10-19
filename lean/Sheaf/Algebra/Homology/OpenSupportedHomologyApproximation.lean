@@ -6,7 +6,7 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.OpenExtensionCounitStalk

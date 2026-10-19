@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.Paper.PurityDiagonalBaseChangeCompared
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality

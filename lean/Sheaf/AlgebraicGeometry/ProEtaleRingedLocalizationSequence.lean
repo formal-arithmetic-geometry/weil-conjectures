@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.Algebra.Homology.ExactSequence

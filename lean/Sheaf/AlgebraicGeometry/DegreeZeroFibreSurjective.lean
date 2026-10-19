@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange

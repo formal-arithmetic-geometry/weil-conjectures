@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift
 import WeilConjectures.AlgebraicGeometry.FiniteZeroDifferentialAssembly
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Formality of modules on disjoint clopen rank strata
 

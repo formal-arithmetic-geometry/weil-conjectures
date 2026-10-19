@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

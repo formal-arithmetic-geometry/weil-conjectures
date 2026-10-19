@@ -13,12 +13,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Sheaf.Paper.LocalizeRingedSiteMorphism
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions

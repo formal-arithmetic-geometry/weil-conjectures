@@ -6,7 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived

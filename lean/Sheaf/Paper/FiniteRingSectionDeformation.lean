@@ -34,7 +34,7 @@ import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.RingedTopoiDerivedTensorPullback
 import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 

@@ -17,7 +17,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles
 import Sheaf.AlgebraicGeometry.PicardDirectImageTestSections
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 

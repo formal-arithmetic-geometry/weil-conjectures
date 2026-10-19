@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Free
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.SiteBoundedTruncationModels
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Finiteness.Basic

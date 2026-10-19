@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.Algebra.Homology.AffineTensorPullbackHomologySheafIso
-import Sheaf.Algebra.Homology.AffineTildeGlobalSectionsStalkCoordinates
+import WeilConjectures.Algebra.Homology.AffineTildeGlobalSectionsStalkCoordinates
 import Sheaf.Algebra.Homology.AffineBaseChangeGlobalSectionsFactorization
 
 /-! # AffineTensorPullbackStalkCoordinates

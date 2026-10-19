@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks

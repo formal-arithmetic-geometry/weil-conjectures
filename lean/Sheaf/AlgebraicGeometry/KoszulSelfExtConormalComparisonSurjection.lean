@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparison
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # A surjective Koszul comparison from the dual exterior conormal
 

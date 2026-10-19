@@ -6,7 +6,7 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Products of formal kernel representatives

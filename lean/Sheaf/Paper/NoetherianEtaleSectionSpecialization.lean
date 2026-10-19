@@ -30,7 +30,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.PurityConventions
 public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
 import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality

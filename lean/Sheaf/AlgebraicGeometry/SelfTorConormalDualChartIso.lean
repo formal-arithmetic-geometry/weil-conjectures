@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.SelfTorChartSquareDualization
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # Chart factorizations of the canonical exterior-to-self-Tor comparison
 

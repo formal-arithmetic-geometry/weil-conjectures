@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Topology.RingedModuleSkyscraper
 
 /-!

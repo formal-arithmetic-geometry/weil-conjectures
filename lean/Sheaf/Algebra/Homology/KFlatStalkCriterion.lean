@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.Additive
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkTensorComplex
 import WeilConjectures.Topology.SkyscraperComplex
 

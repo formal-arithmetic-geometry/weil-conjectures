@@ -15,7 +15,7 @@ import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Paper.LocalizeRingedSiteMorphism
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 

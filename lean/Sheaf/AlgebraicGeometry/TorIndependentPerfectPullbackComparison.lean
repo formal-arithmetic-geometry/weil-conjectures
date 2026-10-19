@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.TorIndependentKFlatTensorComparison
 import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat

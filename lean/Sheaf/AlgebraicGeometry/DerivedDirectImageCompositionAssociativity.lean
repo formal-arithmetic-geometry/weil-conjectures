@@ -6,7 +6,6 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 

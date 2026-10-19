@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Topology.Sheaves.Stalks
 
 /-! # Vanishing of derived restriction away from cohomological support

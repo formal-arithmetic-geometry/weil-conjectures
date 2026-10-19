@@ -5,7 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Sheaf.AlgebraicGeometry.LocalizedOpenSheafification
 import Mathlib.CategoryTheory.Localization.Monoidal.Functor

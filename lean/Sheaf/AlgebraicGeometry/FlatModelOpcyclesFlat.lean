@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFlatModuleStalkFlat
 import Sheaf.AlgebraicGeometry.FlatSheafStalk
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
 import Mathlib.RingTheory.Flat.Localization
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution

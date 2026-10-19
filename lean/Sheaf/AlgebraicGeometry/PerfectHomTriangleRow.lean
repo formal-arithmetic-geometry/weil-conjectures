@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ExactSequence
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Five-term additive Hom rows and their triangle presentations
 

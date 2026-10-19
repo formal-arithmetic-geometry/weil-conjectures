@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation
+public import WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 /-! # The source-only localized affine comparison
 

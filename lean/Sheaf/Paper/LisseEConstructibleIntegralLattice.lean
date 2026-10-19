@@ -37,7 +37,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Algebra.Homology.HomComplex
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective

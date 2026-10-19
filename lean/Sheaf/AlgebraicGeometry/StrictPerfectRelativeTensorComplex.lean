@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 

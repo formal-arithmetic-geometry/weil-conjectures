@@ -9,10 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 @[expose] public section
 

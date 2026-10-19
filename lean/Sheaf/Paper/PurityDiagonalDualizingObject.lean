@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.SmoothPurity.TensorMateEtalePrecomp
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension

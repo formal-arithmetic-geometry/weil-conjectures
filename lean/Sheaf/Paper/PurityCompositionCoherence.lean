@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
 import Sheaf.Paper.PurTwistSheafLocallyFree
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Paper.CanonicalOriginCompactSupportComposition
 import Sheaf.Paper.CartesianCoefficientTwists
 import Sheaf.Paper.CohomologicalSmoothComposition

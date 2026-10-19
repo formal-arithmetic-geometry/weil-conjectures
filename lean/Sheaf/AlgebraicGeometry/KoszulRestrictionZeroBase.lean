@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.AlgebraicGeometry.KoszulBasicOpenExact
 import Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact
