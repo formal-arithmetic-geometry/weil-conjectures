@@ -28,20 +28,50 @@
  ],
  "proof": [
   {
-   "text": "Use the pure-tensor normalization and tensor universal property, respectively existence and uniqueness of the unit map.",
+   "text": "Identify the underlying sheaf of I(R) with RI using moduleUnderlying at the rank-one module and ringUnderlying. Test moduleSMul on r times 1 equals r and use ringOne to show that the inverse underlying isomorphism sends r to r times the image of 1. This makes it a linear isomorphism from the unit RI-module to I(R), natural under restrictions. This construction also covers zero rings and empty sites.",
    "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the scalar-extension unit isomorphism from the sectionwise linear equivalences S tensor_RI RI to S (AlgebraTensorModule.rid), and sheafify. The sheafification unit naturality and triangle identity show that its map sends the insertion of r to c(r). Compose this with scalar extension of the inverse of the preceding isomorphism, and transport along hobj to obtain j.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The sheafification monoidal functor laws and counit triangle identity show that the right unitor sends a pure tensor m tensor r to r times m. Express q as the scalar-extension unit transported along hobj; use hmap and naturality to make q natural. The scalar-extension adjunction shows that equality of module maps can be tested after q.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-pur-sheaf-tensor-product",
     "def-weil-pbc-canonical-ringed-tensor-comparison"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Precompose the desired equation with L of the inverse right unitor. Test it after q, using the preceding extensionality. Take the generalized test sheaf to be the underlying sheaf of M, with x the identity, y the constant section 1, and z the inverse right unitor. The pure equation for k, naturality of q and moduleUnderlying, and ringOne identify the resulting tensor with q(m) tensor an element sent to 1 by j. Apply tensor-map naturality and the right-unitor pure formula to obtain q(m). Cancel the invertible precomposition to conclude the original equation, with its statement unchanged.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 and 0G7E as before; ordinary normalization and uniqueness use sites-modules Tag 03EL, with construction separated from the proved uniqueness argument"
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, ordinary unit normalization; explicit rank-one, scalar-extension, and generalized-section calculation by K1, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -137,9 +167,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-closure"
- ],
+ "tool_uses": [],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitExistence",
@@ -159,12 +187,12 @@
   "note": "Full review recorded in review.md. Mathematics, canonical normalizations, universes and signatures are correct. Complete fixes repair H9 missing proof-dependency imports and update the report. Original and replacement modules compile cleanly through scompile.py. Branch head unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261018T071237-L-1682332",
+  "landing": "20261019T192758-L-1866923",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
