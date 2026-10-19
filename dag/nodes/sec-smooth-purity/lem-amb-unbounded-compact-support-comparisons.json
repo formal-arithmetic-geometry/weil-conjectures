@@ -186,7 +186,7 @@
    }
   },
   {
-   "text": "For successive changes of base $Y''\\xrightarrow{w}Y'\\xrightarrow{v}Y$, choose $c$, then its two successive base changes. For the proper factor, [def-kun-unbounded-exchange] defines exchange as the mate of the inverse-image square; horizontal pasting in [lem-weil-pbc-mate-pasting] gives $\\operatorname{Ex}_{r,vw}=(\\operatorname{Ex}_{r_v,w}\\bar v^*)\\circ(w^*\\operatorname{Ex}_{r,v})$. For the open factor the two comparisons are the same: under the adjunction $Dj''_!\\dashv j''^*$ constructed in Step 1, compare the maps in the direction $Dj''_!\\to(\\text{inverse image})Dj_!$ before inverting them. Both the single map and the pasted pair of maps of [def-weil-pbc-etale-shriek-base-change-map] have adjunct the composite open unit followed by the iterated inverse-image identification. Thus those maps agree, and so do their inverses used in $C$. The units satisfy the triangle identities, and their degreewise equations descend by Step 1. Substituting these two equalities in Step 10's formula, with naturality to interchange the middle factors, yields\n$$C_{f,vw}=(C_{f_v,w}v'^*)\\circ w^*C_{f,v}.$$\nFor the identity base change, the identity clause of mate pasting and the identity open unit make both factors identities. Step 11 gives the same assertions after any compactification comparisons.",
+   "text": "For successive changes of base $Y''\\xrightarrow{w}Y'\\xrightarrow{v}Y$, choose $c$, then its two successive base changes. For the proper factor, [def-kun-unbounded-exchange] defines exchange as the mate of the inverse-image square; horizontal pasting in [lem-weil-pbc-mate-pasting] gives $\\operatorname{Ex}_{r,vw}=(\\operatorname{Ex}_{r_v,w}\\bar v^*)\\circ(w^*\\operatorname{Ex}_{r,v})$. For the open factor the two comparisons are the same: under the adjunction $Dj''_!\\dashv j''^*$ constructed in Step 1, compare the maps in the direction $Dj''_!\\to(\\text{inverse image})Dj_!$ before inverting them. Both the single map and the pasted pair of maps of [def-weil-pbc-etale-shriek-base-change-map] have adjunct the composite open unit followed by the iterated inverse-image identification. Thus those maps agree, and so do their inverses used in $C$. The units satisfy the triangle identities, and their degreewise equations descend by Step 1. Substituting these two equalities in Step 10's formula, with naturality to interchange the middle factors, yields\n$$C_{f,vw}=(C_{f_v,w}v'^*)\\circ w^*C_{f,v}.$$\nFor the identity base change, specialize the successive-base-change equation to two identity squares. The termwise inverse-image composition maps satisfy the unit laws, by upperStarComp_id_left and the coherence of mapDerivedCategory. After these unit identifications, the equation says that the exchange is idempotent. It is invertible by Step 9, so cancellation makes it the identity. In Lean, a generic identity_exchange_of_pasting lemma performs this cancellation; upperStar_comp_id_unit supplies the descended unit equation. Step 11 gives the same assertions after any compactification comparisons.",
    "uses": [
     "def-kun-unbounded-exchange",
     "lem-weil-pbc-mate-pasting",
@@ -267,7 +267,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7I, 0F7J, 0F7K, 0F7L, using the unbounded torsion-ring case in Tag 0F7H; explicit mate normalizations and the omitted factor-pasting details are written out in the steps."
+  "place": "Tags 0F7I, 0F7J, 0F7K, 0F7L, using the unbounded torsion-ring case in Tag 0F7H; explicit mate normalizations and the omitted factor-pasting details are written out in the steps. Stage-3 Y8: step 10 identity normalization is obtained from the same pasting law and Step 9 invertibility by cancellation, rather than expanding its mate a second time."
  },
  "mathlib_searches": [
   {
@@ -627,5 +627,15 @@
   "group": "Q28",
   "result": "pass",
   "note": "Wrote review.md. Checked all 24 declarations, fifteen statement dependencies, source normalizations, hypotheses, edge cases, universes, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library forms. No findings; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261019T034403-L-427919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

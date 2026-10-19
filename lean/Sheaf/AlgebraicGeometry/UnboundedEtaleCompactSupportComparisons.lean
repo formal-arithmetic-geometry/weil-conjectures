@@ -48,10 +48,13 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Paper.CompactSupportStaircaseExpansion
-import Sheaf.Paper.UnboundedProperOpenInterchange
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.Paper.UnboundedProperOpenInterchange
+import Sheaf.Paper.CompactSupportStaircaseExpansion
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 # Unbounded ordinary etale compact-support comparisons
@@ -76,6 +79,133 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+private lemma mate_ofNatIsoLeft
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L₁ L₁' : C ⥤ D} {R₁ : D ⥤ C} {L₂ L₂' : E ⥤ F} {R₂ : F ⥤ E}
+    {G : C ⥤ E} {H : D ⥤ F}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
+    (α : TwoSquare G L₁' L₂' H) :
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+  ext K
+  simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
+    Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
+
+private lemma mate_whiskerTop
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    {G G' : C ⥤ E} {H : D ⥤ F}
+    (α : TwoSquare G' L₁ L₂ H) (γ : G ⟶ G') (K : D) :
+    (mateEquiv adj₁ adj₂ (α.whiskerTop γ)).app K =
+      γ.app (R₁.obj K) ≫ (mateEquiv adj₁ adj₂ α).app K := by
+  simp [mateEquiv, TwoSquare.whiskerTop]
+
+private lemma mate_whiskerBottom
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    {G : C ⥤ E} {H H' : D ⥤ F}
+    (α : TwoSquare G L₁ L₂ H) (δ : H ⟶ H') (K : D) :
+    (mateEquiv adj₁ adj₂ (α.whiskerBottom δ)).app K =
+      (mateEquiv adj₁ adj₂ α).app K ≫ R₂.map (δ.app K) := by
+  simp [mateEquiv, TwoSquare.whiskerBottom, ← Functor.map_comp, δ.naturality]
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma inverse_mates_unit
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    {F₁ : C ⥤ E} {U₁ : E ⥤ C} {F₂ : D ⥤ F} {U₂ : F ⥤ D}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
+    (e : L₁ ⋙ F₂ ≅ F₁ ⋙ L₂)
+    (α : TwoSquare U₁ L₂ L₁ U₂)
+    (hα : ∀ K, adj₄.unit.app (L₁.obj K) ≫ U₂.map (e.hom.app K) =
+      L₁.map (adj₃.unit.app K) ≫ α.natTrans.app (F₁.obj K)) (K : D) :
+    (adj₃.homEquiv _ _
+      ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app K)) ≫
+      (mateEquiv adj₂ adj₁ α).natTrans.app (F₂.obj K) = R₁.map (adj₄.unit.app K) := by
+  let γ := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans
+  change (adj₃.homEquiv _ _ (γ.app K)) ≫ _ = _
+  simp only [Adjunction.homEquiv_unit, mateEquiv_apply, NatTrans.comp_app,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc]
+  change adj₃.unit.app (R₁.obj K) ≫ U₁.map (γ.app K) ≫
+    adj₁.unit.app (U₁.obj (R₂.obj (F₂.obj K))) ≫
+    R₁.map (α.natTrans.app (R₂.obj (F₂.obj K))) ≫
+    R₁.map (U₂.map (adj₂.counit.app (F₂.obj K))) = _
+  rw [reassoc_of% (adj₁.unit.naturality (U₁.map (γ.app K)))]
+  rw [reassoc_of% (adj₁.unit.naturality (adj₃.unit.app (R₁.obj K)))]
+  simp only [← R₁.map_comp]
+  rw [reassoc_of% (α.natTrans.naturality (γ.app K))]
+  rw [← Category.assoc (L₁.map _) (α.natTrans.app _) _, ← hα]
+  rw [Category.assoc]
+  rw [← U₂.map_comp (L₂.map (γ.app K)) (adj₂.counit.app (F₂.obj K))]
+  rw [mateEquiv_counit]
+  simp only [TwoSquare.mk, Functor.map_comp]
+  have hc : R₁.map (U₂.map (e.hom.app (R₁.obj K))) ≫
+      R₁.map (U₂.map (e.inv.app (R₁.obj K))) = 𝟙 _ := by
+    rw [← R₁.map_comp, ← U₂.map_comp, Iso.hom_inv_id_app, U₂.map_id, R₁.map_id]
+  rw [reassoc_of% hc]
+  rw [← R₁.map_comp, adj₄.unit_naturality]
+  rw [R₁.map_comp, adj₁.right_triangle_components_assoc]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma exact_exchange_transport
+    (A : Type (u + 1)) [CommRing A]
+    {X X' Y Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X}
+    (sq : CommSq g' f' f g) :
+    Functor.whiskerLeft (rightDerivedLowerStar (ModuleCat.{u + 1} A) f)
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g).inv ≫
+      derivedBaseChangeMap (ModuleCat.{u + 1} A) sq ≫
+      Functor.whiskerRight
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g').hom _ =
+      exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq := by
+  let B := ModuleCat.{u + 1} A
+  let α := TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq).hom
+  have hs :
+      ((((α.whiskerTop (leftDerivedUpperStarIsoMapDerivedCategory B g).hom).whiskerBottom
+        (leftDerivedUpperStarIsoMapDerivedCategory B g').inv).whiskerRight
+        (leftDerivedUpperStarIsoMapDerivedCategory B f').hom).whiskerLeft
+        (leftDerivedUpperStarIsoMapDerivedCategory B f).inv) =
+      TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso B sq).hom := by
+    ext M
+    simp only [α, TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
+      TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app, TwoSquare.mk]
+    simp only [derivedSquareUpperStarIso, leftDerivedUpperStarComp,
+      exactDerivedSquareUpperStarIso, squareUpperStarIso,
+      Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso,
+      leftDerivedUpperStarIsoMapDerivedCategory, Iso.trans_hom, Iso.trans_inv,
+      Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Category.assoc,
+      Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
+      Iso.inv_hom_id_app_assoc]
+    rw [← (upperStar B g').leftDerivedFunctorIsoMapDerivedCategory.inv.naturality]
+  have hm := mate_ofNatIsoLeft
+    (derivedUpperStarLowerStarAdjunction B f) (derivedUpperStarLowerStarAdjunction B f')
+    (leftDerivedUpperStarIsoMapDerivedCategory B f)
+    (leftDerivedUpperStarIsoMapDerivedCategory B f')
+    ((α.whiskerTop (leftDerivedUpperStarIsoMapDerivedCategory B g).hom).whiskerBottom
+      (leftDerivedUpperStarIsoMapDerivedCategory B g').inv)
+  rw [← mapDerivedUpperStarLowerStarAdjunction_eq,
+    ← mapDerivedUpperStarLowerStarAdjunction_eq, hs] at hm
+  change _ = derivedBaseChangeMap B sq at hm
+  rw [← hm]
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  rw [mate_whiskerBottom, mate_whiskerTop]
+  change _ = (mateEquiv (mapDerivedUpperStarLowerStarAdjunction B f)
+    (mapDerivedUpperStarLowerStarAdjunction B f') α).app K
+  dsimp only [B, rightDerivedLowerStar, Functor.comp_obj]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  simp only [Iso.inv_hom_id_app_assoc]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Assemble the canonical proper/open tower comparison, using the closure compactification
 `ofComp`, and compare the input and output with the chosen compactifications. This is the
@@ -315,6 +445,80 @@ noncomputable def unboundedEtaleUpperStarIdIso
       𝟭 (DerivedCategoryModule A X) :=
   Functor.mapDerivedCategoryNatIso (upperStarId (ModuleCat.{u + 1} A) X) ≪≫
     Functor.mapDerivedCategoryIdIso _
+
+private lemma upperStar_comp_id_unit
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    (Functor.mapDerivedCategoryNatIso
+        (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _).hom ≫
+        Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
+          (unboundedEtaleUpperStarIdIso A X).hom = 𝟙 _ := by
+  rw [upperStarComp_id_left]
+  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans,
+    Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+  rw [reassoc_of% Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+    unboundedEtaleUpperStarIdIso, Iso.trans_hom]
+  simp only [Functor.mapDerivedCategoryNatIso_symm, Iso.inv_hom_id_app_assoc]
+  have hr : (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).rightUnitor = Iso.refl _ := rfl
+  rw [hr]
+  have he : Functor.mapDerivedCategoryNatIso
+      (Iso.refl ((upperStar (ModuleCat.{u + 1} A) (𝟙 X)) ⋙ 𝟭 _)) = Iso.refl _ := by
+    apply Iso.ext
+    exact Functor.mapDerivedCategoryNatIso_refl
+  rw [he]
+  erw [Category.id_comp]
+  exact congr_app (Functor.mapDerivedCategoryCompIso_comp_id
+    (upperStar (ModuleCat.{u + 1} A) (𝟙 X))) K
+
+private lemma identity_exchange_of_pasting
+    {D E : Type*} [Category D] [Category E]
+    (F : D ⥤ E) (I : D ⥤ D) (J : E ⥤ E)
+    (C : F ⋙ J ⟶ I ⋙ F) [IsIso C]
+    (e : I ≅ 𝟭 D) (d : J ≅ 𝟭 E) (δ : I ≅ I ⋙ I) (ε : J ≅ J ⋙ J)
+    (hδ : δ.hom ≫ Functor.whiskerLeft I e.hom = 𝟙 _)
+    (hε : ε.hom ≫ Functor.whiskerLeft J d.hom = 𝟙 _)
+    (hp : ∀ K, C.app K = ε.hom.app (F.obj K) ≫ J.map (C.app K) ≫
+      C.app (I.obj K) ≫ F.map (δ.inv.app K)) :
+    C ≫ Functor.whiskerRight e.hom F ≫ (Functor.leftUnitor F).hom =
+      Functor.whiskerLeft F d.hom ≫ (Functor.rightUnitor F).hom := by
+  have : J.Faithful := Functor.Faithful.of_iso d.symm
+  ext K
+  have hδ' : δ.inv.app K = I.map (e.hom.app K) := by
+    have h := congr_app hδ K
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at h
+    have he : e.hom.app (I.obj K) = I.map (e.hom.app K) := by
+      apply (cancel_mono (e.hom.app K)).1
+      exact (e.hom.naturality (e.hom.app K)).symm
+    rw [he] at h
+    apply (cancel_epi (δ.hom.app K)).1
+    exact (δ.hom_inv_id_app K).trans h.symm
+  let c := C.app K ≫ F.map (e.hom.app K)
+  have h := hp K
+  rw [hδ'] at h
+  have hn : J.map (F.map (e.hom.app K)) ≫ C.app K =
+      C.app (I.obj K) ≫ F.map (I.map (e.hom.app K)) :=
+    C.naturality (e.hom.app K)
+  rw [← hn, ← Category.assoc (J.map _) (J.map _) _, ← J.map_comp] at h
+  have hc : ε.hom.app (F.obj K) ≫ J.map c = 𝟙 _ := by
+    apply (cancel_mono (C.app K)).1
+    simpa only [c, Category.id_comp, Category.assoc] using h.symm
+  have hd : ε.hom.app (F.obj K) ≫ J.map (d.hom.app (F.obj K)) = 𝟙 _ := by
+    have hd := congr_app hε (F.obj K)
+    have he : d.hom.app (J.obj (F.obj K)) = J.map (d.hom.app (F.obj K)) := by
+      apply (cancel_mono (d.hom.app (F.obj K))).1
+      exact (d.hom.naturality (d.hom.app (F.obj K))).symm
+    simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app, he] using hd
+  have hcd : c = d.hom.app (F.obj K) := by
+    apply J.map_injective
+    apply (cancel_epi (ε.hom.app (F.obj K))).1
+    exact hc.trans hd.symm
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_hom_app]
+  change C.app K ≫ F.map (e.hom.app K) ≫ 𝟙 _ =
+    d.hom.app (F.obj K) ≫ 𝟙 _
+  simpa only [Category.comp_id] using hcd
 
 /-- The chosen-compactification exchange with exact inverse images. This extends the
 existing `exactCompactSupportExchange` from the chosen fibre product to an arbitrary
@@ -602,24 +806,6 @@ theorem unboundedEtaleCompactSupport_baseChange
           (rightDerivedLowerShriekIso A (c.ofIsPullback sq)).hom := by
   sorry
 
-/-- Identity base changes give identity exchange after the canonical pullback unit maps.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: step 10 expands the exchange for an identity square. The inverse-image square is the
-identity, and the unit and counit cancel by their triangle identity. The open factor is
-also its identity normalization. Compactification independence removes the chosen model. -/
-theorem unboundedEtaleCompactSupport_baseChange_id
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
-    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [HasCompactification f] (sq : IsPullback (𝟙 X) f f (𝟙 Y)) :
-    unboundedEtaleCompactSupportBaseChange A sq ≫
-        Functor.whiskerRight (unboundedEtaleUpperStarIdIso A X).hom _ ≫
-        (Functor.leftUnitor _).hom =
-      Functor.whiskerLeft _ (unboundedEtaleUpperStarIdIso A Y).hom ≫
-        (Functor.rightUnitor _).hom := by
-  sorry
-
 /-- The proper open-restriction map, followed by the inverse of the open unit. It is the
 map called lambda in the tower normalization, formed from the specified exact-derived mate.
 Source: Stacks Project, Tag 0F7B, case (b)
@@ -658,8 +844,46 @@ theorem unboundedEtaleCompactSupport_tower_adjunct
         _ _ ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq.flip).app K) ≫
       unboundedEtaleProperOpenRestriction A sq K =
         𝟙 ((rightDerivedLowerStar (ModuleCat.{u + 1} A) r).obj K) := by
-  sorry
+  let B := ModuleCat.{u + 1} A
+  let e := mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B sq.flip
+  let α := TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).hom
+  have := isIso_openImmersionLowerShriekBaseChangeMap B sq.flip
+  have hα (M : DerivedCategoryModule A W) :
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction B k).unit.app
+          ((upperStar B r).mapDerivedCategory.obj M) ≫
+        (upperStar B k).mapDerivedCategory.map (e.hom.app M) =
+      (upperStar B r).mapDerivedCategory.map
+          ((derivedOpenImmersionLowerShriekUpperStarAdjunction B i).unit.app M) ≫
+        α.natTrans.app ((openImmersionLowerShriek B i).mapDerivedCategory.obj M) := by
+    exact Adjunction.mapDerivedCategoryAdjunction_mate
+      (openImmersionLowerShriekUpperStarAdjunction B i)
+      (openImmersionLowerShriekUpperStarAdjunction B k)
+      (squareUpperStarIso B sq.toCommSq)
+      (asIso (openImmersionLowerShriekBaseChangeMap B sq.flip.toCommSq))
+      (unit_map_openImmersionLowerShriekBaseChangeMap_app B sq.flip.toCommSq) M
+  have h := inverse_mates_unit
+    (mapDerivedUpperStarLowerStarAdjunction B r)
+    (mapDerivedUpperStarLowerStarAdjunction B p)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction B i)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction B k) e α hα K
+  change _ ≫ ((mateEquiv (mapDerivedUpperStarLowerStarAdjunction B p)
+      (mapDerivedUpperStarLowerStarAdjunction B r) α).app
+        ((openImmersionLowerShriek B k).mapDerivedCategory.obj K) ≫
+      (rightDerivedLowerStar B r).map
+        ((asIso (derivedOpenImmersionLowerShriekUpperStarAdjunction B k).unit).inv.app K)) = _
+  dsimp only [openImmersionLowerShriekLowerStarExchange]
+  rw [← Category.assoc]
+  erw [h]
+  dsimp only [rightDerivedLowerStar, Functor.comp_obj, Functor.comp_map, Functor.id_obj]
+  rw [← Functor.map_comp]
+  have hc : (derivedOpenImmersionLowerShriekUpperStarAdjunction B k).unit.app K ≫
+      (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunction B k).unit).inv.app K = 𝟙 K :=
+    (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunction B k).unit).hom_inv_id_app K
+  rw [hc]
+  exact CategoryTheory.Functor.map_id _ _
 
+
+set_option backward.isDefEq.respectTransparency false in
 /-- On a compactification, exchange is exactly proper exchange followed by the inverse
 of the degreewise open-extension comparison, with the displayed canonical associators.
 Source: Stacks Project, Tag 0F7L
@@ -688,7 +912,29 @@ theorem unboundedEtaleCompactSupport_exchange_normalization
           (c.isPullback_i_ofIsPullback sq)).inv
         (rightDerivedLowerStar (ModuleCat.{u + 1} A) (c.ofIsPullback sq).g) ≫
       (Functor.associator _ _ _).hom := by
-  sorry
+  ext K
+  have h := congrArg (fun η ↦ η.app
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj K))
+    (exact_exchange_transport A (IsPullback.of_hasPullback c.g v).toCommSq)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h
+  simp only [unboundedEtaleCompactSupportExchange,
+    rightDerivedLowerShriekOfCompactificationBaseChangeMap,
+    derivedOpenImmersionLowerShriekBaseChangeIso, Iso.trans_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.map_comp,
+    Category.id_comp, Category.comp_id, Category.assoc]
+  dsimp only [rightDerivedLowerShriekOfCompactification, rightDerivedLowerStar,
+    Functor.comp_obj, Functor.comp_map] at h ⊢
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app]
+  simp only [Functor.map_comp]
+  rw [← h]
+  simp only [Category.assoc]
+  rw [((openImmersionLowerShriek (ModuleCat.{u + 1} A)
+    (c.ofIsPullback sq).i).mapDerivedCategory).map_id]
+  erw [CategoryTheory.Functor.map_id]
+  rw [Category.comp_id]
+  rfl
 
 /-- Successive changes of base give the composite exchange, with the termwise
 inverse-image composition identifications.
@@ -723,6 +969,49 @@ theorem unboundedEtaleCompactSupport_baseChange_comp
       Functor.whiskerRight (unboundedEtaleUpperStarCompIso A w' v').inv
         (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'') := by
   sorry
+
+attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
+
+set_option backward.isDefEq.respectTransparency true in
+/-- Identity base changes give identity exchange after the canonical pullback unit maps.
+Source: Stacks Project, Tag 0F7L
+(blueprint: lem-amb-unbounded-compact-support-comparisons).
+Proof: step 10 expands the exchange for an identity square. The inverse-image square is the
+identity, and the unit and counit cancel by their triangle identity. The open factor is
+also its identity normalization. Compactification independence removes the chosen model. -/
+theorem unboundedEtaleCompactSupport_baseChange_id
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] (sq : IsPullback (𝟙 X) f f (𝟙 Y)) :
+    unboundedEtaleCompactSupportBaseChange A sq ≫
+        Functor.whiskerRight (unboundedEtaleUpperStarIdIso A X).hom _ ≫
+        (Functor.leftUnitor _).hom =
+      Functor.whiskerLeft _ (unboundedEtaleUpperStarIdIso A Y).hom ≫
+        (Functor.rightUnitor _).hom := by
+  let F := rightDerivedLowerShriek (ModuleCat.{u + 1} A) f
+  let I := (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
+  let J := (upperStar (ModuleCat.{u + 1} A) (𝟙 Y)).mapDerivedCategory
+  let C := unboundedEtaleCompactSupportBaseChange A sq
+  have : IsIso C := (unboundedEtaleCompactSupport_baseChange A sq).1
+  apply identity_exchange_of_pasting F I J C
+    (unboundedEtaleUpperStarIdIso A X) (unboundedEtaleUpperStarIdIso A Y)
+    (Functor.mapDerivedCategoryNatIso
+      (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
+        Functor.mapDerivedCategoryCompIso _ _)
+    (Functor.mapDerivedCategoryNatIso
+      (upperStarComp (ModuleCat.{u + 1} A) (𝟙 Y) (𝟙 Y) (𝟙 Y) (by simp)) ≪≫
+        Functor.mapDerivedCategoryCompIso _ _)
+    (upperStar_comp_id_unit A X) (upperStar_comp_id_unit A Y)
+  intro K
+  have h := unboundedEtaleCompactSupport_baseChange_comp A sq sq
+    (by simpa only [Category.id_comp] using sq)
+  have hK := congr_app h K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    unboundedEtaleUpperStarCompIso] at hK
+  dsimp only [F, I, J, C]
+  exact hK
 
 /-- Base change is compatible with the specified compact-support composition maps.
 Source: Stacks Project, Tag 0F7L
@@ -857,6 +1146,6 @@ theorem unboundedEtaleCompactSupport_open_beta
     openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} A)
         (IsPullback.of_hasPullback v j).flip.toCommSq =
       etaleLowerShriekBaseChangeMap A v j := by
-  sorry
+  rfl
 
 end AlgebraicGeometry.Etale
