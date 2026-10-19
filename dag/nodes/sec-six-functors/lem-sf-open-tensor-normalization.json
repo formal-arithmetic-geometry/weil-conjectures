@@ -210,9 +210,22 @@
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tags 04IE and 03D7, with the sectionwise restriction calculation of 04J0; sites-cohomology.tex Tags 06YY and 0G7E, applied directly to ringed diagram sites."
    }
+  },
+  {
+   "text": "Lean infrastructure: identify the generated vertical topology with covering vertical slices. Extend a vertical matching family horizontally and use separatedness to prove the componentwise sheaf criterion. Transfer continuity and cocontinuity from the ordinary site. The product site adjunction and the identity scalar map make module restriction a left adjoint, hence colimit preserving; reflect finite limits through abelian sheaves and obtain additivity from finite products. Transport the chosen pullback cone along its compatible isomorphism using IsPullback.of_iso_pullback. Finally assemble the ordinary, systems and finite conclusions from exists_normalized and finite_compatibility; these two construction theorems remain open. All these infrastructure proofs are complete, without new assumptions.",
+   "uses": [
+    "def-cbc-open-immersion-square",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4 and 00Z8; Mathlib Sites.Continuous, Sites.CoverLifting, Sheaf.PushforwardContinuous and IsPullback.of_iso_pullback."
+   }
   }
  ],
  "proof_deps": [
+  "def-cbc-open-immersion-square",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
@@ -245,8 +258,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Open-factor normalization in the projection diamond, expanded to arbitrary ringed localized sites and strict coefficient systems using the cited Stacks lemmas."
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Existing normalization construction plan retained. V6 formalized continuity, restriction exactness, Cartesian universal property and final assembly using the vertical sheaf criterion and Mathlib adjunction/limit APIs."
  },
  "mathlib_searches": [
   {
@@ -376,9 +389,7 @@
   "def-weil-proetale-inverse-image",
   "lem-cbc-extension-zero-projection-formula",
   "lem-cbc-proetale-extension-zero-base-change",
-  "lem-coef-semilinear-derived-sections",
   "lem-pc-kflat-resolution",
-  "lem-pur-coefficient-system-derived-comparison",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-conjugate-iso-unit-equation",
@@ -867,5 +878,15 @@
   "result": "pass",
   "note": "Finite clause now pinned: FiniteRealization uses the constant-section map; pullback, open and tensor comparisons are each fixed by their section, mate, unit and representative conditions; the leftover central-unit rescaling cancels in both route equations; beta and gamma are fixed by their adjunct formulas; the HEq in finiteTensorModel has definitionally equal types (braided instances equal by rfl, compiled). Mechanical finding: the diagram-site theorem's module has no definitions and is typed for small categories only; the item uses that theorem's conclusion (the vertical topology it constructs), built here as the local helper verticalCoverage; PASS on that point. Section 1(C) correction is source-based; 48/48 citers audited, 3 spot-checked. Module compiles clean (28-34 s), 7 named sorry theorems, statement verbatim, all docstrings present. Minor: report cites nonexistent sheafProductVerticalSiteEquiv; sectionUnit wording overstated; trailing whitespace on 13 lines.",
   "statement_corrected": true
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034328-L-421903",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

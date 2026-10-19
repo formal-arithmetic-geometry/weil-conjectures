@@ -12,32 +12,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.CategoryTheory.DiagramSiteRealization
 
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSheafSliceAdjunction
 
 /-!
 # Normalized open extension, tensor and base change
@@ -79,7 +54,7 @@ def Site (m : Mode) (X : Scheme.{u}) : Type (u + 1) :=
   | .systems => ℕ × X.ProEt
 
 /-- The site category instance for ordinary and vertical sites.
-Source: the product-site construction (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: the product-site construction (blueprint: lem-sf-open-tensor-normalization). -/
 instance (m : Mode) (X : Scheme.{u}) : Category.{u} (Site m X) := by
   cases m <;> dsimp [Site] <;> infer_instance
 
@@ -123,12 +98,147 @@ def openInclusion (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
   | .systems => (𝟭 ℕ).prod
       (proEtaleOpenComposition j)
 
+-- The following vertical-sieve calculation is the universe-independent version of
+-- DiagramSiteTopology: Stacks 00Z4 and 00Z8. Only proof helpers are introduced.
+set_option backward.isDefEq.respectTransparency false in
+private def verticalTopology (C : Type (u + 1)) [Category.{u} C]
+    (K : GrothendieckTopology C) : GrothendieckTopology (ℕ × C) where
+  sieves X := {S | S.functorPullback (Prod.sectR X.1 C) ∈ K X.2}
+  top_mem' X := by
+    change (⊤ : Sieve X.2) ∈ K X.2
+    exact K.top_mem _
+  pullback_stable' {X Y} {S} f hS := by
+    apply K.superset_covering _ (K.pullback_stable f.2 hS)
+    intro Z g hg
+    change S (Prod.mkHom (𝟙 Y.1) g ≫ f)
+    change S (Prod.mkHom (𝟙 X.1) (g ≫ f.2)) at hg
+    simpa using S.downward_closed hg (Prod.mkHom f.1 (𝟙 Z))
+  transitive' {X} {S} hS R hR := by
+    apply K.transitive hS
+    intro Y f hf
+    have H := hR (show S ((Prod.sectR X.1 C).map f) from hf)
+    change (R.pullback ((Prod.sectR X.1 C).map f)).functorPullback
+      (Prod.sectR X.1 C) ∈ K Y at H
+    rwa [Sieve.functorPullback_pullback] at H
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem verticalSheaf_iff
+    (C : Type (u + 1)) [Category.{u} C]
+    (K : GrothendieckTopology C) (P : (ℕ × C)ᵒᵖ ⥤ Type (u + 1)) :
+    Presieve.IsSheaf (verticalTopology C K) P ↔
+      ∀ j : ℕ, Presieve.IsSheaf K ((Prod.sectR j C).op ⋙ P) := by
+  constructor
+  · intro hP j U S hS x hx
+    let R : Sieve (j, U) := S.functorPullback (X := (j, U)) (CategoryTheory.Prod.snd ℕ C)
+    have hR : R ∈ verticalTopology C K (j, U) := by
+      change S ∈ K U
+      exact hS
+    let y : Presieve.FamilyOfElements P R.arrows := fun Y f hf ↦
+      P.map (Prod.mkHom f.1 (𝟙 Y.2)).op (x f.2 hf)
+    have hy : y.Compatible := by
+      apply (Presieve.compatible_iff_sieveCompatible y).2
+      rintro ⟨y₀, V₁⟩ ⟨z, W⟩ f g hf
+      have H := hx.to_sieveCompatible f.2 g.2 hf
+      dsimp only [y, Prod.sectR, Functor.comp_map, Functor.op_map] at H ⊢
+      simp only [prod_comp_fst, prod_comp_snd]
+      change P.map (Prod.mkHom (g.1 ≫ f.1) (𝟙 W)).op (x (g.2 ≫ f.2) _) = _
+      rw [H]
+      change (P.map (Prod.mkHom (𝟙 j) g.2).op ≫
+        P.map (Prod.mkHom (g.1 ≫ f.1) (𝟙 W)).op) (x f.2 hf) =
+        (P.map (Prod.mkHom f.1 (𝟙 V₁)).op ≫ P.map g.op) (x f.2 hf)
+      rw [← P.map_comp, ← P.map_comp, ← op_comp, ← op_comp]
+      congr 2
+      ext; simp
+    obtain ⟨t, ht, hut⟩ := hP R hR y hy
+    refine ⟨t, ?_, ?_⟩
+    · intro V f hf
+      have H := ht ((Prod.sectR j C).map f) hf
+      simpa [y, Prod.sectR, ← prod_id] using H
+    · intro t' ht'
+      change P.obj (op (j, U)) at t'
+      apply hut t'
+      rintro ⟨k, V₁⟩ f hf
+      dsimp only [y]
+      have H := ht' f.2 hf
+      dsimp only [Prod.sectR, Functor.comp_map, Functor.op_map] at H
+      rw [← H]
+      change P.map f.op t' = (P.map (Prod.mkHom (𝟙 j) f.2).op ≫
+        P.map (Prod.mkHom f.1 (𝟙 V₁)).op) t'
+      rw [← P.map_comp, ← op_comp]
+      congr 2
+      ext; simp
+  · rintro hP ⟨j, U⟩ R hR x hx
+    let V := Prod.sectR j C
+    have hV := hP j (R.functorPullback V) hR
+    obtain ⟨t, ht, hut⟩ := hV (x.functorPullback V) (hx.functorPullback V)
+    refine ⟨t, ?_, ?_⟩
+    · rintro ⟨k, V₀⟩ f hf
+      apply ((hP k).isSeparated (Sieve.pullback f.2 (R.functorPullback V))
+        (K.pullback_stable f.2 hR)).ext
+      intro Z g hg
+      change P.map (Prod.mkHom (𝟙 k) g).op (P.map f.op t) =
+        P.map (Prod.mkHom (𝟙 k) g).op (x f hf)
+      have H := hx (Prod.mkHom f.1 (𝟙 Z)) (Prod.mkHom (𝟙 k) g) hg hf
+        (by ext <;> simp [V])
+      have ht₀ := ht (g ≫ f.2) hg
+      change P.map (V.map (g ≫ f.2)).op t = x (V.map (g ≫ f.2)) hg at ht₀
+      rw [← H, ← ht₀]
+      dsimp only [Prod.sectR, V]
+      simp only [← Functor.map_comp_apply, ← op_comp]
+      congr 1
+      simp
+    · intro t' ht'
+      apply hut t'
+      intro Y f hf
+      exact ht' (V.map f) hf
+
+private theorem topology_systems_eq (X : Scheme.{u}) :
+    topology .systems X = verticalTopology X.ProEt (ProEt.topology X) := by
+  apply le_antisymm
+  · apply Precoverage.toGrothendieck_le_iff_le_toPrecoverage.mpr
+    intro W P hP
+    obtain ⟨S, hS, rfl⟩ := hP
+    apply (ProEt.topology X).superset_covering _ hS
+    intro V f hf
+    exact Sieve.le_generate _ _ _ (show W.1 = W.1 ∧ S f from ⟨rfl, hf⟩)
+  · intro W S hS
+    let P : Presieve W := fun V a ↦ V.1 = W.1 ∧
+      S ((Prod.sectR W.1 X.ProEt).map a.2)
+    have hP : P ∈ verticalCoverage X W :=
+      ⟨S.functorPullback (Prod.sectR W.1 X.ProEt), hS, rfl⟩
+    apply (topology .systems X).superset_covering _
+      (Precoverage.generate_mem_toGrothendieck hP)
+    apply (Sieve.generate_le_iff _ _).mpr
+    rintro ⟨n, V⟩ f ⟨hn, hf⟩
+    dsimp only at hn
+    subst n
+    have hfmap : (Prod.sectR W.1 X.ProEt).map f.2 = f := by
+      ext
+      · exact Subsingleton.elim _ _
+      · rfl
+    rwa [hfmap] at hf
+
+private theorem system_continuous {X Y : Scheme.{u}} (F : X.ProEt ⥤ Y.ProEt)
+    [F.IsContinuous (ProEt.topology X) (ProEt.topology Y)] :
+    ((𝟭 ℕ).prod F).IsContinuous (topology .systems X) (topology .systems Y) := by
+  rw [topology_systems_eq X, topology_systems_eq Y]
+  constructor
+  intro G
+  apply (verticalSheaf_iff X.ProEt (ProEt.topology X) _).2
+  intro n
+  have hG := (verticalSheaf_iff Y.ProEt (ProEt.topology Y) G.obj).1
+    ((isSheaf_iff_isSheaf_of_type _ _).1 G.property) n
+  have h := F.op_comp_isSheaf_of_isSheaf_type (ProEt.topology X) hG
+  exact h
+
 /-- Continuity is tested on the vertical covering families and follows from
 continuity of pro-etale base change; the coefficient index is unchanged.
 Source: Stacks 09A5 and 00Z4 (blueprint: lem-sf-open-tensor-normalization). -/
 theorem baseChange_continuous (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (baseChange m f).IsContinuous (topology m Y) (topology m X) := by
-  sorry
+  cases m with
+  | ordinary => exact proEtaleBaseChange_isContinuous f
+  | systems => exact system_continuous (proEtaleBaseChange f)
 
 /-- Open postcomposition preserves sheaves, since coverings and sections are
 those on the localized site. The same check is vertical for systems.
@@ -136,7 +246,11 @@ Source: Stacks 0F6Z, 00Z4 (blueprint: lem-sf-open-tensor-normalization). -/
 theorem openInclusion_continuous (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     (openInclusion m j).IsContinuous (topology m U) (topology m X) := by
-  sorry
+  have : (proEtaleOpenComposition j).IsContinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  cases m with
+  | ordinary => exact this
+  | systems => exact system_continuous (proEtaleOpenComposition j)
 
 attribute [instance] baseChange_continuous openInclusion_continuous
 
@@ -271,7 +385,7 @@ def ordinaryInput {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
 (blueprint: lem-sf-open-tensor-normalization). -/
 instance {m : Mode} (d : Input.{u} m) : IsOpenImmersion d.j := d.j_open
 /-- The ambient open-immersion instance inherited from the chosen square.
-Source: `OpenImmersionSquare` (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: `OpenImmersionSquare` (blueprint: lem-sf-open-tensor-normalization). -/
 instance {m : Mode} (d : Input.{u} m) : IsOpenImmersion d.j' := d.j'_open
 
 /-- First fibre-product projection, with the coefficient index unchanged.
@@ -306,6 +420,41 @@ def cornerCoefficient {m : Mode} {d : Input.{u} m} (t : SiteSquare d) :
   ⟨Functor.whiskerLeft (openInclusion m d.j).op d.coefficient.hom ≫
     Functor.whiskerRight (NatTrans.op t.iso.inv) d.S.obj⟩
 
+private theorem system_cocontinuous {X Y : Scheme.{u}} (F : X.ProEt ⥤ Y.ProEt)
+    [F.IsCocontinuous (ProEt.topology X) (ProEt.topology Y)] :
+    ((𝟭 ℕ).prod F).IsCocontinuous (topology .systems X) (topology .systems Y) := by
+  rw [topology_systems_eq X, topology_systems_eq Y]
+  constructor
+  intro W S hS
+  exact F.cover_lift (ProEt.topology X) (ProEt.topology Y) hS
+
+set_option backward.isDefEq.respectTransparency false in
+private def systemAdjunction {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G) : (𝟭 ℕ).prod F ⊣ (𝟭 ℕ).prod G where
+  unit :=
+    { app X := Prod.mkHom (𝟙 X.1) (a.unit.app X.2)
+      naturality := by
+        intro X Y f
+        ext
+        · simp
+        · exact a.unit.naturality f.2 }
+  counit :=
+    { app X := Prod.mkHom (𝟙 X.1) (a.counit.app X.2)
+      naturality := by
+        intro X Y f
+        ext
+        · simp
+        · exact a.counit.naturality f.2 }
+  left_triangle_components X := by
+    ext
+    · simp
+    · exact a.left_triangle_components X.2
+  right_triangle_components X := by
+    ext
+    · simp
+    · exact a.right_triangle_components X.2
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction is sectionwise and exact: kernels and finite limits are
 sectionwise; cokernels commute with restriction by slice sheafification.
 The same calculation is vertical for systems. Source: Stacks 03DJ, 0F6Z
@@ -314,20 +463,45 @@ theorem restriction_exact (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) :
     (restrict m j R).Additive ∧ PreservesFiniteLimits (restrict m j R) ∧
       PreservesFiniteColimits (restrict m j R) := by
-  sorry
+  have hc : (proEtaleOpenComposition j).IsCocontinuous
+      (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  have : (openInclusion m j).IsCocontinuous (topology m U) (topology m X) := by
+    cases m with
+    | ordinary => exact hc
+    | systems => exact system_cocontinuous (proEtaleOpenComposition j)
+  have : (openInclusion m j).IsLeftAdjoint := by
+    cases m with
+    | ordinary => exact a.isLeftAdjoint
+    | systems => exact (systemAdjunction a).isLeftAdjoint
+  have : (restrict m j R).IsLeftAdjoint := by
+    unfold restrict
+    infer_instance
+  have : PreservesFiniteLimits (restrict m j R) := by
+    let V := toSheaf ((sheafCompose (topology m U)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (restrictRing m j R))
+    have : PreservesFiniteLimits (restrict m j R ⋙ V) := by
+      change PreservesFiniteLimits (toSheaf _ ⋙
+        (openInclusion m j).sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+          (topology m U) (topology m X))
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ V
+  exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Restriction is additive because it is sectionwise pushforward.
-Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : (restrict m j R).Additive :=
   (restriction_exact m j R).1
 /-- Restriction preserves finite limits sectionwise.
-Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : PreservesFiniteLimits (restrict m j R) :=
   (restriction_exact m j R).2.1
 /-- Restriction preserves finite colimits by localized sheafification.
-Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 03DJ (blueprint: lem-sf-open-tensor-normalization). -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : PreservesFiniteColimits (restrict m j R) :=
   (restriction_exact m j R).2.2
@@ -340,19 +514,19 @@ structure OpenDerived {m : Mode} (d : Input.{u} m) where
   extension' : OpenExtension m d.j' d.S
 
 /-- The derived extension by zero component of `OpenDerived`.
-Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.jShriek {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   o.extension.ordinary.mapDerivedCategory
 /-- The derived extension by zero component for the base-changed open.
-Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.jShriek' {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   o.extension'.ordinary.mapDerivedCategory
 /-- The derived restriction component of `OpenDerived`.
-Source: Stacks 0F6Z (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 0F6Z (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.jStar {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
   (restrict m d.j d.R).mapDerivedCategory
 /-- The derived restriction component for the base-changed open.
-Source: Stacks 0F6Z (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 0F6Z (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.jStar' {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
   (restrict m d.j' d.S).mapDerivedCategory
 
@@ -375,11 +549,11 @@ def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]
     F.mapDerivedCategory G.mapDerivedCategory
 
 /-- The derived extension/restriction adjunction on the ambient site.
-Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.adj {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   exactDerivedAdjunction o.extension.adjunction
 /-- The derived extension/restriction adjunction on the base-changed site.
-Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.adj' {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   exactDerivedAdjunction o.extension'.adjunction
 
@@ -514,7 +688,7 @@ Source: Stacks 09AE; the two recorded finite-coefficient dependencies.
 abbrev FiniteModules (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :=
   Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A)
 /-- The fixed-scalar ordinary derived category.
-Source: Stacks 09AE (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: Stacks 09AE (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev FiniteD (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :=
   DerivedCategory (FiniteModules A X)
 
@@ -525,7 +699,7 @@ def finiteShriek (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] : FiniteD A U ⥤ FiniteD A X :=
   (ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory
 /-- The canonical finite-scalar derived pullback functor.
-Source: the recorded finite pullback declaration (blueprint: lem-sf-open-tensor-normalization). -/ 
+Source: the recorded finite pullback declaration (blueprint: lem-sf-open-tensor-normalization). -/
 def finitePull (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) : FiniteD A Y ⥤ FiniteD A X :=
   (ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
@@ -593,7 +767,7 @@ Source: the definition of a Cartesian square
 theorem square_isPullback {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} (sq : OpenImmersionSquare gU j' j g) :
     IsPullback gU j' j g := by
-  sorry
+  exact IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
 
 /-- The published finite projection arrow in the direction of the node's gamma.
 This is its actual inverse projection map, with explicit endpoints to keep
@@ -1091,6 +1265,8 @@ theorem openTensorNormalization :
       ∃ (t : SiteSquare (finiteInput A gU j' j g sq))
         (o : Operations (finiteInput A gU j' j g sq) t) (a : Assertion o)
         (e : FiniteComparisons A o), FiniteCompatibility A o a e) := by
-  sorry
+  refine ⟨exists_normalized .ordinary, exists_normalized .systems, ?_⟩
+  intro A _ _ U' U X' X gU j' j g sq
+  exact finite_compatibility A gU j' j g sq
 
 end SheafOfModules
