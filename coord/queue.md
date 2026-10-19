@@ -1,6 +1,6 @@
 # Work queue
 
-1002 items; claim with `tools/claim.py next <group> [--stage N]`.
+1000 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (6)
 
@@ -48,7 +48,7 @@
 
 Not open yet: 295 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (968)
+## Stage 3: modules to prove (966)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -727,7 +727,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.EtaleGenericHomTriangle` | 8 | 5 | proof | 4 |
 | `Sheaf.SixFunctors.EtaleGenericPerfectHom` | 8 | 1 | proof | 4 |
 | `Sheaf.TraceFormula.IntegralConeCounitRealization` | 8 | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.FieldDiscreteModules` | 9 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial` | 9 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SupportLocalizationTriangle` | 9 | 5 | proof | 4 |
 | `Sheaf.Paper.AcyclicFlatProperCoefficientModel` | 9 | 1 | proof | 4 |
@@ -792,7 +791,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PointSectionsReconstruction` | 9 | 1 | proof | 5 |
 | `Sheaf.RepresentationTheory.DvrGalois` | 9 | 1 | proof | 5 |
 | `Sheaf.SixFunctors.EtaleHomComplexPullback` | 9 | 7 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint` | 10 | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy` | - | 5 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ArbitraryBaseP1Integrals` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange` | - | 1 | proof | 5 |
