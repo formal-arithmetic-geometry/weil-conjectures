@@ -17048,3 +17048,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: returned deliver/Q90/lem-per-nagata-surface-normalized-domination (reviewer RETURN: Route pivot, finding 1 (dropped node cited), unrepairable. The item itself is dropped: side coord/route-pivot-dropped.tx)
 - 03:59 L: returned deliver/Q68/lem-per-rdp-blowup-conic-structure (reviewer RETURN: Route-pivot RETURN (F, coord/repair-notes/lem-per-artin-gabber-affine-curve.json): the item lem-per-rdp-blowup-conic-str)
 - 03:59 L: returned deliver/NC/lem-trf-algclosed-curve-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-algclosed-curve-model: lem-trf-algclosed-curve)
+- 03:59 L: returned deliver/Q11/lem-trf-composed-valuation-etale (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-composed-valuation-etale: lem-trf-composed-val)
