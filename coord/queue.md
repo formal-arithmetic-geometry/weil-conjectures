@@ -1,6 +1,6 @@
 # Work queue
 
-998 items; claim with `tools/claim.py next <group> [--stage N]`.
+994 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (4)
 
@@ -46,7 +46,7 @@
 
 Not open yet: 295 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (966)
+## Stage 3: modules to prove (962)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -112,7 +112,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.DeligneLaumon.SmoothAffineFrontierStratification` | 5 | 1 | proof | route |
 | `Sheaf.Paper.AdicHeartIntrinsicFibres` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CanonicalOriginCompactSupportComposition` | 5 | 4 | proof | route |
-| `Sheaf.Paper.CompactSupportDirectImageTriangulated` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompactSupportReductionTower` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompactificationCoherence` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompleteCompactSupportProetale` | 5 | 13 | proof | route |
@@ -202,7 +201,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProEtaleSectionModuleFunctors` | 6 | 3 | proof | route |
 | `Sheaf.Paper.SbcCompletedOperations` | 6 | 15 | proof | route |
 | `Sheaf.Paper.SfBidualityClass` | 6 | 1 | proof | route |
-| `Sheaf.Paper.SfLocalizationAllStages` | 6 | 3 | proof | route |
+| `Sheaf.Paper.SfLocalizationAllStages` | 6 | 2 | proof | route |
 | `Sheaf.Paper.SfScalarExtensionComposition` | 6 | 2 | proof | route |
 | `Sheaf.Paper.StratumAmbientHom` | 6 | 2 | proof | route |
 | `Sheaf.Paper.TwistPreservesFiniteness` | 6 | 1 | proof | route |
@@ -255,7 +254,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralProperProjectionFormula` | 7 | 1 | proof | route |
 | `Sheaf.Paper.IntegralTensorProduct` | 7 | 1 | proof | route |
 | `Sheaf.Paper.IntegralTensorPullback` | 7 | 8 | proof | route |
-| `Sheaf.Paper.IntegralTensorShriek` | 7 | 2 | proof | route |
 | `Sheaf.Paper.IntegralTwistScalarCoherence` | 7 | 1 | proof | route |
 | `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 7 | 8 | proof | route |
 | `Sheaf.Paper.MateOpenRestriction` | 7 | 1 | proof | route |
@@ -720,7 +718,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RingedStrictTowerProjectionMorphism` | 8 | 1 | proof | 4 |
 | `Sheaf.Paper.SiteComparisonEdgeSection` | 8 | 1 | proof | 4 |
 | `Sheaf.Paper.SystemNormalizedTensorClosure` | 8 | 2 | proof | 4 |
-| `Sheaf.SecSmoothPurity.CochainCoefficientArrows` | 8 | 1 | proof | 4 |
 | `Sheaf.SixFunctors.CtfStabilityDirectImages` | 8 | 1 | proof | 4 |
 | `Sheaf.SixFunctors.EtaleGenericHomTriangle` | 8 | 5 | proof | 4 |
 | `Sheaf.SixFunctors.EtaleGenericPerfectHom` | 8 | 1 | proof | 4 |
@@ -789,7 +786,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PointSectionsReconstruction` | 9 | 1 | proof | 5 |
 | `Sheaf.RepresentationTheory.DvrGalois` | 9 | 1 | proof | 5 |
 | `Sheaf.SixFunctors.EtaleHomComplexPullback` | 9 | 7 | proof | 5 |
-| `Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy` | - | 5 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ArbitraryBaseP1Integrals` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback` | - | 2 | proof | 5 |
