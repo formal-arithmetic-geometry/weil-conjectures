@@ -17457,3 +17457,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:21 L: returned deliver/NO/fix-lem-tensor-adjunction (reviewer RETURN: L: independent stage-2 immutable head dc185ea524b5: H3 (F1): Model.projection is free at the integral/rational/closed st)
 - 15:25 L: merged deliver/Q56/lem-sf-constant-semilinear-generator-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 15:39 L: returned deliver/E7/Sheaf.TraceFormula.IntegralConeCounitRealization (reviewer RETURN: (the landing tools, head 636ec9019) the delivery did not land: lean/Sheaf/TraceFormula/IntegralConeCounitRealization.lea)
+- 15:40 L: merged deliver/A3/Sheaf.FieldTheory.GeometricIrreducibilityTranscendental (stage 3; reviewer PASS; first push; landing 20261019T154001-L-3023253 (proof); batch 20261019T153958; modules 1; new nodes 0)

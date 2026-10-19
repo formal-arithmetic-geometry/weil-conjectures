@@ -16,149 +16,106 @@
  ],
  "proof": [
   {
-   "text": "We use the geometric definition literally: the affine fibre-product formula identifies the base change of $\\operatorname{Spec}L$ along $\\operatorname{Spec}F'\\to\\operatorname{Spec}F$ with $\\operatorname{Spec}(L\\otimes_F F')$. Thus $L/F$ is geometrically irreducible exactly when these spectra are nonempty and irreducible for all field extensions $F'/F$. It suffices first to prove the two implications for the formal variable $t$; a transcendental element gives the same fraction field by evaluation, since no nonzero polynomial vanishes at it.",
+   "text": "For a field extension L/F, use the affine pullback isomorphism to identify each field base change of Spec L with Spec(L tensor_F E). Geometric irreducibility is therefore equivalent to irreducibility of every such tensor spectrum. We use the nilradical criterion for irreducibility. An injective ring map reflects nilpotence, so the source nilradical is the inverse image of the target nilradical; its primality, and thus irreducibility, descends. For a localization A -> B with B nonzero, localization commutes with radicals. If the nilradical of A is prime, it is disjoint from the denominator set: otherwise a unit in the nonzero ring B would be nilpotent. Its localized ideal is the prime nilradical of B. This proves the localization step without assuming reducedness.",
    "uses": [
     "def-pc-geometrically-irreducible",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-rational-function-field",
-    "def-kun-transcendence-degree"
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G31, forward localization argument; Tag 00ES, nilradical criterion; Mathlib IsLocalization.map_radical and isPrime_of_isPrime_disjoint"
+   }
+  },
+  {
+   "text": "Extend the tensor criterion from test fields in the universe of k to arbitrary larger test fields E. Put Omega = AlgebraicClosure k. The original hypothesis makes Spec(Omega tensor_k K) irreducible. Embed Omega and E over k into a common field M. Over the separably closed field Omega, the tensor-irreducibility theorem makes Spec(M tensor_Omega (Omega tensor_k K)) irreducible. Tensor reassociation identifies this with Spec(M tensor_k K). Flatness of vector spaces preserves the injection E -> M after tensoring with K; the injection argument of step 1 descends irreducibility to Spec(E tensor_k K). Commuting the factors gives the form used below.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-common-extension-fields",
+    "lem-zl-sepclosed-algebras-tensor-irreducible",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 037L (definition-geometrically-irreducible); Tag 0G31, statement and proof"
+    "place": "Tag 0G31, the arbitrary field test in the forward argument; Tag 00I7; universe enlargement via common extensions"
    }
   },
   {
-   "text": "Put $R=K\\otimes_k k(t)$ and $S_0=k[T]\\setminus\\{0\\}$. There is a $K$-algebra isomorphism $R\\cong S_0^{-1}K[T]$ sending $a\\otimes f(t)/g(t)$ to $af(T)/g(T)$. Its inverse sends $h(T)/g(T)$ to $\\sum_i h_i\\otimes t^i/g(t)$, where $h=\\sum_i h_iT^i$. The tensor universal property verifies the first map; the fraction relation verifies the second, and the two formulas compose to the identity. Under this identification, inverting in $R$ the images of all nonzero polynomials of $K[T]$ gives $K(t)$: every fraction is $h/g$ with $g\\ne0$, and the two successive denominator sets together invert exactly these polynomials. These are explicit fraction constructions, valid over any field $k$ and any extension $K$.",
+   "text": "For the given family t, put P = k[T_1,...,T_r], Q = K[T_1,...,T_r], F = k(t_1,...,t_r), and L = K(t_1,...,t_r). Algebraic independence over K restricts to k. The canonical evaluation equivalences from FractionRing(P) to F and FractionRing(Q) to L give actual fraction-field structures, and their polynomial maps commute with the displayed inclusion F -> L: check constants and variables after embedding both fields into the ambient field. Polynomial scalar extension is a pushout k -> K, P -> Q. Thus, for every E/F, tensor pushout cancellation identifies Q tensor_P E with K tensor_k E, whose spectrum is irreducible by step 2.",
    "uses": [
+    "def-kun-transcendence-degree",
     "def-weil-polynomial-ring",
     "def-weil-rational-function-field",
-    "def-weil-pbc-module-localization",
     "lem-weil-pbc-algebra-tensor-base-change-universal-property"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, forward proof: K(t) is a localization of K tensor_k k(t); explicit fraction calculation supplying that sentence"
+    "place": "Tag 0G31, polynomial and fraction-field calculation, performed for all finite variables at once; Mathlib AlgebraicIndependent.aevalEquivField and MvPolynomial polynomial pushout"
    }
   },
   {
-   "text": "Assume $K/k$ is geometrically irreducible and let $F/k(t)$ be any field extension. Set $A=K\\otimes_k F$ and $B=K(t)\\otimes_{k(t)}F$. The spectrum of $A$ is irreducible by step 1, since $F$ is also a field extension of $k$. Give $A$ the $R$-algebra map $a\\otimes v\\mapsto a\\otimes v$. The localization base-change lemma applied to $R\\to K(t)$ shows that $A\\otimes_R K(t)$ is a localization of $A$. This ring is isomorphic to $B$: send $(a\\otimes f)\\otimes u$ to $au\\otimes f$, with inverse $u\\otimes f\\mapsto(1\\otimes f)\\otimes u$. Balancing over $R$ and over $k(t)$ verifies these maps, and their composites are the identity on pure tensors. Finally $B\\ne0$ by the nonzero-vector-space tensor theorem over the field $k(t)$, since both $K(t)$ and $F$ are nonzero vector spaces. No reducedness of $A$ or $B$ is asserted.",
+   "text": "Base change of the localization Q -> L shows that L tensor_P E is a localization of Q tensor_P E. Since F is a localization of P and both L and E are F-algebras, tensoring them over P or over F gives canonically isomorphic rings. The latter tensor product is nonzero by nontriviality of a tensor product of nonzero vector spaces over a field. Step 1 therefore gives irreducibility of Spec(L tensor_F E). The tensor criterion proves L/F geometrically irreducible. This argument includes the empty family and does not require induction or any additional transcendence assertion.",
    "uses": [
-    "def-pc-geometrically-irreducible",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-localization",
     "lem-weil-pbc-localization-base-change",
     "lem-weil-pbc-algebra-tensor-base-change-universal-property",
-    "lem-pur-field-vector-space-tensor-nontrivial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, forward proof, localization after scalar extension; Tag 00DK (lemma-tensor-localization)"
-   }
-  },
-  {
-   "text": "Write $B=M^{-1}A$ as in step 3. We check irreducibility rather than assuming that every nonempty subspace of an irreducible space is irreducible. By the component/minimal-prime theorem, irreducibility of $\\operatorname{Spec}A$ gives a unique minimal prime $\\mathfrak p$ and $V(\\mathfrak p)=\\operatorname{Spec}A$. Since $B\\ne0$, apply existence of a minimal prime over the proper ideal $(0)$ in $B$ to get a point $\\mathfrak q$ of its spectrum. The localization-spectrum theorem gives $\\mathfrak q\\cap A$ disjoint from $M$. Every prime of $A$ contains a minimal prime, hence contains $\\mathfrak p$; in particular $\\mathfrak p\\cap M=\\varnothing$. The same localization theorem identifies $\\operatorname{Spec}B$ with $D=\\{\\mathfrak r:\\mathfrak r\\cap M=\\varnothing\\}$, which therefore contains $\\mathfrak p$. Every closed subset of $\\operatorname{Spec}A$ containing $\\mathfrak p$ is all of $\\operatorname{Spec}A$: if it is $V(I)$ then $I\\subseteq\\mathfrak p$ and every prime contains $I$. Consequently every relatively closed subset of $D$ containing $\\mathfrak p$ is $D$. In any cover of $D$ by two relatively closed subsets, one contains $\\mathfrak p$ and is therefore $D$. Thus $D$ is nonempty and irreducible, as required. Since $F/k(t)$ was arbitrary, $K(t)/k(t)$ is geometrically irreducible.",
-   "uses": [
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-    "lem-weil-pbc-prime-contains-minimal-prime",
-    "lem-weil-pbc-minimal-prime-over-proper-ideal",
-    "lem-weil-pbc-localization-spectrum-embedding",
-    "def-weil-irreducible-components",
+    "lem-pur-field-vector-space-tensor-nontrivial",
     "def-pc-geometrically-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, forward proof: irreducibility of the localization; expanded using Tags 00ES, 00E0 and 00E3"
+    "place": "Tag 0G31, forward localization after scalar extension; Mathlib IsLocalization.algebraTensorEquiv"
    }
   },
   {
-   "text": "For a family $t_1,\\ldots,t_r$ algebraically independent over $K$, put $K_i=K(t_1,\\ldots,t_i)$ and $k_i=k(t_1,\\ldots,t_i)$. The induction claim is that $K_i/k_i$ is geometrically irreducible for $0\\le i\\le r$. The base case $i=0$ is the hypothesis. Algebraic independence implies that $t_{i+1}$ is transcendental over $K_i$: a polynomial relation over $K_i$ could be multiplied by a common nonzero polynomial denominator to give a nonzero polynomial relation over $K$ among the first $i+1$ variables. Apply the one-variable forward implication of steps 1--4 to $K_i/k_i$ to obtain the next case. This proves the finite-family assertion, including the empty family.",
+   "text": "For descent, a nonconstant rational function over k is transcendental over k (Mathlib RatFunc.transcendental_of_ne_C). Hence every element of k(t) algebraic over k is constant. The algebraically-closed-subfield criterion gives geometric irreducibility of k(t)/k. Compose this with the assumed geometric irreducibility of K(t)/k(t) to obtain geometric irreducibility of K(t)/k. The coefficient map used in the statement is exactly a k-algebra homomorphism by RatFunc.mapAlgHom, which supplies the scalar tower. For each E/k the injection K -> K(t) remains injective on tensoring with E. Step 1 descends irreducibility from Spec(K(t) tensor_k E) to Spec(K tensor_k E). The tensor criterion concludes geometric irreducibility of K/k.",
    "uses": [
-    "def-kun-transcendence-degree",
-    "def-weil-rational-function-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, forward implication, iterated finitely many times; Tag 0G32 (lemma-geometrically-irreducible-add-transcendental), fraction-field interpretation"
-   }
-  },
-  {
-   "text": "For the converse assume $K(t)/k(t)$ geometrically irreducible, and fix any field extension $k'/k$. Put $C=K\\otimes_k k'$, $D=K(t)\\otimes_k k'$ and $E=k(t)\\otimes_k k'$. The fraction calculation of step 2, with $K$ replaced by $k'$ and the tensor factors interchanged, identifies $E$ with $S_0^{-1}k'[T]$. Its natural map $i:E\\to k'(t)$ is injective: the coefficient map $k[T]\\to k'[T]$ is injective, so every denominator from $S_0$ is nonzero in the polynomial domain $k'[T]$; a fraction $h/g$ that vanishes in the fraction field must have $h=0$ and was already zero in the localization. This proves the needed injection without identifying $E$ with all of $k'(t)$.",
-   "uses": [
-    "def-pc-field-extension",
-    "def-weil-polynomial-ring",
     "def-weil-rational-function-field",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, converse proof: details omitted for the injective tensor map, first fraction calculation"
-   }
-  },
-  {
-   "text": "Every module over a field is flat by the cited field-flatness statement. Tensor the injective $k$-linear map $K\\hookrightarrow K(t)$ with the flat $k$-module $k'$; flat tensor exactness gives an injection $C\\hookrightarrow D$. There is a $k(t)$-algebra isomorphism $D\\cong K(t)\\otimes_{k(t)}E$: the map back sends $u\\otimes(v\\otimes a)$ to $uv\\otimes a$ and its inverse sends $u\\otimes a$ to $u\\otimes(1\\otimes a)$, as checked by the tensor balancing relations. Now tensor the injection $i:E\\hookrightarrow k'(t)$ from step 6 over $k(t)$ with the flat $k(t)$-module $K(t)$. Flat tensor exactness gives a second injection $D\\hookrightarrow B'=K(t)\\otimes_{k(t)}k'(t)$. Their composite $C\\hookrightarrow B'$ sends $a\\otimes b$ to $a\\otimes b$. This supplies the exact omitted injectivity assertion in Tag 0G31 for arbitrary, including inseparable, $k'/k$.",
-   "uses": [
-    "lem-pc-flat-field",
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-geometric-irreducibility-transitive",
     "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
-    "def-pc-field-extension",
-    "def-weil-rational-function-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, converse proof: details omitted for injectivity, supplied using Tag 00HD (lemma-flat), equivalence (1)--(2)"
-   }
-  },
-  {
-   "text": "Since $k'(t)/k(t)$ is a field extension, the hypothesis and the affine base-change formula imply that $\\operatorname{Spec}B'$ is irreducible. For the injection $C\\hookrightarrow B'$ of step 7, the injective-minimal-prime lifting theorem hits every minimal prime of $C$; the dense-range criterion therefore says that $\\operatorname{Spec}B'\\to\\operatorname{Spec}C$ has dense image. Its continuity is functoriality of the affine spectrum. To check the conclusion explicitly, if $\\operatorname{Spec}C=Z_1\\cup Z_2$ is a closed cover, inverse images give a closed cover of the irreducible source, so one inverse image is the whole source. Its dense image lies in the corresponding closed $Z_i$, forcing $Z_i=\\operatorname{Spec}C$. The target is nonempty since the source is nonempty. Thus $\\operatorname{Spec}C$ is irreducible for every $k'/k$, which is precisely geometric irreducibility of $K/k$.",
-   "uses": [
-    "def-pc-geometrically-irreducible",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-injective-minimal-prime-lift",
-    "lem-pc-dense-range-comap-minimal-primes",
-    "def-weil-affine-spectrum",
-    "def-weil-irreducible-components"
+    "def-pc-geometrically-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0G31, final sentence; Tags 00FK (lemma-injective-minimal-primes-in-image) and 00FL (lemma-image-dense-generic-points)"
+    "place": "Tag 0G31, converse; shorter descent via Tags 037P and 0G30, with the rational-function relative-algebraic-closure fact from Mathlib RatFunc.transcendental_of_ne_C"
    }
   }
  ],
  "proof_deps": [
   "def-kun-transcendence-degree",
-  "def-pc-field-extension",
   "def-pc-geometrically-irreducible",
-  "def-weil-affine-spectrum",
-  "def-weil-irreducible-components",
   "def-weil-pbc-module-localization",
   "def-weil-polynomial-ring",
   "def-weil-rational-function-field",
-  "lem-pc-dense-range-comap-minimal-primes",
-  "lem-pc-flat-field",
+  "lem-pc-algebraic-closure-exists-unique",
   "lem-pur-field-vector-space-tensor-nontrivial",
+  "lem-weil-common-extension-fields",
   "lem-weil-pbc-algebra-tensor-base-change-universal-property",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-injective-minimal-prime-lift",
   "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-spectrum-embedding",
-  "lem-weil-pbc-minimal-prime-over-proper-ideal",
-  "lem-weil-pbc-prime-contains-minimal-prime",
-  "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-geometric-irreducibility-transitive",
+  "lem-zl-sepclosed-algebras-tensor-irreducible",
+  "lem-zl-spectrum-irreducible-nilradical-prime"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0G31, both implications; explicit fraction and flat-tensor arguments supply the omitted injectivity details, with the finite-family induction written out"
+  "place": "Tag 0G31 forward localization proof implemented for a multivariable polynomial pushout; converse shortened using Tags 037P and 0G30 and Mathlib RatFunc.transcendental_of_ne_C; universe enlargement uses Tag 00I7 and a common extension field. Lean proof written by A3, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -286,5 +243,15 @@
   "group": "Q85",
   "result": "pass",
   "note": "Read node, Stacks 0G31 (algebra.tex), 5 stmt deps, module and report. Only the lean field changed vs live/side; lean.statement verbatim in file. Forward conjunct: GeometricallyIrreducible of Spec.map(algebraMap k K) implies, for all Ω : Type (max u v) with tower k→K→Ω, r : ℕ, t : Fin r → Ω AlgebraicIndependent over K, GeometricallyIrreducible of the canonical IntermediateField.inclusion adjoin k (range t) → adjoin K (range t), which equals k(t)→K(t) by aevalEquivField. r=0 allowed (probe: adjoin = ⊥). Converse: RatFunc.mapRingHom (coefficient map) k(t)→K(t), separate premise. No extra assumptions, universes bound, no definitions, sole proof by sorry (axioms: sorryAx + standard), docstrings carry source, blueprint id and 8 proof steps. nt_compile.py --json at library path: clean, exit 0; a probe with a false lemma showed the tool reports errors. Informational: the 'Second reading by Q85' section is the author's self-reading; no correction needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T154001-L-3023253",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
