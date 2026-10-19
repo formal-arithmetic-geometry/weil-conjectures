@@ -16,78 +16,56 @@
  ],
  "proof": [
   {
-   "text": "We first prove the assertion of the statement that $\\iota$ is a quasi-isomorphism. Fix a degree $p$ and write $J=I^p_\\bullet$, an injective object of $\\operatorname{Tow}(\\mathcal A)$ with transitions $t^J_n:J_{n+1}\\to J_n$. For an object $F$ of $\\mathcal A$ and $n\\geq1$ let $T_n(F)$ be the tower equal to $F$ at levels $1,\\ldots,n$ with identity transitions there and $0$ above $n$. A tower map $T_n(F)\\to J$ is determined by its level-$n$ component $F\\to J_n$, the lower components being forced to be the transitions composed with it; conversely every map $F\\to J_n$ arises. The map $T_n(F)\\to T_{n+1}(F)$ which is the identity at levels $\\leq n$ and $0\\to F$ at level $n+1$ is a tower map and is levelwise monic, hence a monomorphism of $\\operatorname{Tow}(\\mathcal A)$ by [lem-weil-tower-category-levelwise-abelian]. Restriction along it sends the tower map with top component $\\psi:F\\to J_{n+1}$ to the one with level-$n$ component $t^J_n\\psi$. Taking $F=J_n$ and the map corresponding to $\\mathrm{id}_{J_n}$, injectivity of $J$ [def-sp-injective-resolutions] gives $\\sigma_n:J_n\\to J_{n+1}$ with $t^J_n\\sigma_n=\\mathrm{id}_{J_n}$. Let $\\Pi^p=\\prod_mJ_m$ (products of module sheaves exist, computed sectionwise) and define $\\tau:\\Pi^p\\to\\Pi^p$ by the product universal property with $\\mathrm{pr}_1\\tau=0$ and recursively $\\mathrm{pr}_{n+1}\\tau=\\sigma_n(\\mathrm{pr}_n\\tau-\\mathrm{pr}_n)$. Then $\\mathrm{pr}_n(1-s)\\tau=\\mathrm{pr}_n\\tau-t^J_n\\mathrm{pr}_{n+1}\\tau=\\mathrm{pr}_n$, so $(1-s)\\tau=\\mathrm{id}$ and $1-s:\\prod_mI_m\\to\\prod_mI_m$ is an epimorphism in every degree; $\\tau$ need not commute with differentials and is used only degreewise. The degreewise kernel of $1-s$ consists of the compatible families, i.e. it is the termwise inverse limit $\\lim_mI_m$ with its inclusion into the product. Since $1-s$ is a chain map (the differentials of $I_\\bullet$ commute with transitions), [lem-weil-degreewise-epi-kernel-cocone-qis] applied to $f=1-s$ says that the map with zero shifted-product component and the kernel inclusion as product component, which is $\\iota$, is a quasi-isomorphism $\\lim I_\\bullet\\to\\operatorname{Cone}(1-s)[-1](I_\\bullet)$. No exactness of countable products is used.",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-sp-injective-resolutions",
-    "lem-weil-degreewise-epi-kernel-cocone-qis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), proof: transitions of an injective tower are split surjective, so $1-s$ is surjective on the product with kernel the limit"
-   }
-  },
-  {
-   "text": "Let $\\bar\\theta:P\\to\\lim_m I_m$ be the unique chain map whose $m$-th projection is $q_m\\circ\\theta_m$. The maps $q_m\\circ\\theta_m$ are compatible because $q$ is a strict map of towers and the family $\\theta_m$ satisfies $t_m\\circ\\theta_{m+1}=\\theta_m$. Thus the ordinary termwise inverse-limit universal property gives $\\bar\\theta$, and its uniqueness is part of that universal property. The termwise inverse-limit model computes $R\\lim C_\\bullet$ for the chosen K-injective tower resolution by [lem-weil-pbc-ringed-strict-tower-homotopy-limit].",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, derived inverse-limit cone construction; the compatible-family universal property is the first paragraph's strict tower model"
-   }
-  },
-  {
-   "text": "Put $H_I=\\operatorname{Cone}(1-s)[-1](I_\\bullet)$. On the strict chain level, $\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta$ has zero shifted-product component and product component $(q_m\\circ\\theta_m)_m$. By the definition of $\\bar\\theta$ in Step 2, the inclusion $\\iota$ with zero shifted-product component has exactly the same two components after composing with $\\bar\\theta$. Hence\n$$\\iota\\circ\\bar\\theta=\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta.$$\nThe compatibility equations make $(1-s)(q_m\\theta_m)_m=0$, so both sides are indeed chain maps; this coordinate calculation uses no exactness of countable products.",
+   "text": "The Lean statement supplies QuasiIso ι, the coordinate identities, the actual strict tower map thetaDelta, and the counit formula. Thus the injective-tower proof of QuasiIso ι is not needed in this implication. Apply complexOfFunctorsToFunctorToComplex to thetaDelta followed by q. Its naturality gives a cone with vertex P over I.asFunctor. Let b be its limit lift. In degree p its nth projection is θ_n followed by q_n, by hthetaDelta and limit.lift_π.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, explicit Roos cone map and compatible-family calculation"
+    "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
    }
   },
   {
-   "text": "Passing the equality of Step 3 to the derived category and using the quasi-isomorphism $\\iota$ of Step 1, we obtain\n$$[\\iota]^{-1}\\circ[\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta]=[\\bar\\theta].$$\nBy the definition of $r_\\theta$, this says $r_\\theta=[\\bar\\theta]$.",
+   "text": "Product extensionality gives b followed by the product of the limit projections equal to the product of θ followed by strictRoosProductMap q. In degree p+1, compose b ι and θLift ρ with strictRoosCoordinates I p. Use hι, hρ and hθLift. Both first biproduct coordinates vanish; the second coordinates agree by the product identity. Cancel the coordinate isomorphism and use extensionality of complex morphisms to obtain b ι = θLift ρ.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, derived-category realization of the Roos cone"
+    "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
    }
   },
   {
-   "text": "Let $\\lambda_I:\\Delta\\lim_m I_m\\to I_\\bullet$ be the ordinary limit-cone map. For every level $m$, the $m$-component of $\\lambda_I\\circ\\Delta(\\bar\\theta)$ is the projection of $\\bar\\theta$, namely $q_m\\circ\\theta_m$. The $m$-component of $q\\circ\\theta^\\Delta$ is also $q_m\\circ\\theta_m$. Equality of strict tower maps is levelwise, so\n$$\\lambda_I\\circ\\Delta(\\bar\\theta)=q\\circ\\theta^\\Delta.$$",
+   "text": "Apply DerivedCategory.Q to this chain equality. Its image of ι is invertible because QuasiIso ι is an explicit hypothesis. The formula hrTheta and cancellation give rTheta = DerivedCategory.Q.map b.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, naturality of the ordinary limit cone with compatible maps"
+    "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
    }
   },
   {
-   "text": "The counit in the statement is $\\epsilon_C=[q]^{-1}\\circ[\\lambda_I]$. Combining this definition with Steps 4 and 5 gives\n$$\\epsilon_C\\circ\\Delta(r_\\theta)=[q]^{-1}\\circ[\\lambda_I]\\circ\\Delta([\\bar\\theta])=[q]^{-1}\\circ[q]\\circ[\\theta^\\Delta]=[\\theta^\\Delta].$$\nThus the equality holds in the derived category of strict towers, before any further functor or passage to individual quotient derived categories.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
+   "text": "The nth degree-p component of the constant-complex map of b followed by lambdaMap is b.f p followed by the nth limit projection, by hlambdaMap. This equals (θ n).f p followed by (q.f p).app (op n), and hence equals the component of thetaDelta followed by q, by hthetaDelta. Extensionality of natural transformations and complex morphisms gives Δ(b) lambdaMap = thetaDelta q.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, counit and functoriality of the derived inverse-limit construction"
+    "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
+   }
+  },
+  {
+   "text": "Use Mathlib Functor.mapDerivedCategoryFactors_hom_naturality for b. The comparison inverse and hom at P cancel, identifying the conjugated derived image of Q.map b with Q.map (Δ(b)). Substitute hepsilon, combine the first two localized chain maps using functoriality, use the preceding strict chain equality, and cancel Q.map q with its inverse. This proves exactly Q.map thetaDelta in the derived category of strict towers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-tower-category-levelwise-abelian",
-  "def-sp-injective-resolutions",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, derived inverse-limit cone and functoriality; the counit realization is the explicit componentwise calculation above"
+  "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone; E7 Lean proof uses the supplied quasi-isomorphism and strict tower map, the ordinary limit universal property, biproduct coordinates, and naturality of the exact constant-functor localization comparison."
  },
  "mathlib_searches": [
   {
@@ -159,10 +137,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-degreewise-epi-kernel-cocone-qis"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -189,5 +164,15 @@
   "existing": false,
   "file": "lean/Sheaf/TraceFormula/IntegralConeCounitRealization.lean",
   "note": "Repair of return L at immutable head 8c212d4cbbbe: the conclusion uses the canonical exact constant-tower functor through Functor.mapDerivedCategory and its canonical localization comparison; arbitrary deltaOf/deltaRTheta are removed. The source hypothesis of injective tower terms is explicit, and no exactness of countable products is assumed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T231133-L-552170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

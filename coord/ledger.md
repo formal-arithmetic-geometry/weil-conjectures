@@ -17681,3 +17681,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:11 L: merged deliver/E5/Sheaf.Paper.LocalizedTopChern (stage 3; reviewer PASS; first push; landing 20261019T231127-L-550763 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:11 L: merged deliver/E5/Sheaf.Paper.MiddleExtensionHcZero (stage 3; reviewer PASS; first push; landing 20261019T231129-L-551280 (interface); batch 20261019T231019; modules 2; new nodes 1)
 - 23:11 L: merged deliver/E7/Sheaf.Paper.CompactFiberStalk (stage 3; reviewer PASS; first push; landing 20261019T231131-L-551756 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:11 L: merged deliver/E7/Sheaf.TraceFormula.IntegralConeCounitRealization (stage 3; reviewer PASS; after a return; landing 20261019T231133-L-552170 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/integral-cone-counit-warning-option.md)
