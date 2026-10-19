@@ -118,12 +118,13 @@
    }
   },
   {
-   "text": "For naturality under a map $f:A\\to A'$, take a simultaneous flat-term K-flat replacement of its arrow diagram (the indexing category has two objects and one arrow, hence is small). The induced map of the degreewise short exact multiplication sequences of step 3 makes their triangles commute by the naturality clause of the complex short-exact-sequence theorem. Writing $\\widetilde f:P_A\\to P_{A'}$ for the strict resolved arrow and $c_A,c_{A'}$ for the resolution isomorphisms of step 3, functoriality of the derived change-of-rings comparison gives $c_{A'}\\circ Lq(f)\\circ c_A^{-1}=\\widetilde f\\otimes1$. Thus the map of multiplication triangles is the one induced by $f$, independently of the simultaneous replacement. The kernel, cokernel and truncation maps in steps 4–5 are functorial. For a map $b:B\\to B'$ commuting with multiplication by $n$, the equation defining $H^{-1}(t)$ in step 6 commutes with $b$ and with $H=\\ker n\\to H'=\\ker n$; monicity of $i':H'\\to B'$ forces the two resulting cohomology maps to agree. Shifted single-complex fully faithfulness then gives naturality of $\\alpha_B$. Thus both $\\alpha_F$ and the normalized $\\alpha_B$ are natural, rather than depending on the TR3 choice.",
+   "text": "For a map of extensions f and compatible maps h:H→H' and q:Fbar→Fbar', prove the two normalized identification squares by injectivity of the derived scalar adjunction's Hom equivalence. For alphaF, the adjuncts agree after the invertible single/restriction comparison: naturality of eta and the quotient-unit equations reduce this to f_3 followed by p' equals p followed by Res(q). For alphaB, naturality of eta and the Kummer-unit equations reduce the adjuncts to f_1 followed by kappa' equals kappa followed by Res(h[1]). The latter is naturality of the canonical single short-exact triangle for the map of Kummer sequences with components Res(h), f_1, f_1, followed by naturality of the single/restriction and shift comparisons. Thus no simultaneous K-flat diagram replacement is needed: the normalization equations already determine all the relevant morphisms by the adjunction.",
    "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-derived-ses-triangle",
     "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": false,
    "source": {
@@ -196,7 +197,6 @@
   "lem-sf-derived-ses-triangle",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-diagram-kflat-replacements",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
@@ -205,7 +205,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "Paragraphs 4–5; agent homological-algebra expansion using Stacks K-flat resolutions, canonical short-exact triangles and derived adjunction."
+  "place": "Paragraphs 4–5; agent homological-algebra expansion using Stacks K-flat resolutions, canonical short-exact triangles and derived adjunction. Step 7 simplified by C6: use the normalized adjunction and naturality of canonical single triangles directly, instead of diagram K-flat replacements."
  },
  "mathlib_searches": [
   {
@@ -434,7 +434,6 @@
   "lem-weil-pbc-complex-ses-triangle",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-diagram-kflat-replacements",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "reviewed": {
@@ -506,5 +505,15 @@
   "by": "NA",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261019T002518-L-2145246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

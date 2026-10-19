@@ -19,7 +19,6 @@ public import Mathlib.Data.ZMod.Basic
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
@@ -28,7 +27,7 @@ import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-!
 # Derived reduction of an extension by a divisible sheaf
@@ -56,6 +55,30 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
   {Z R : Sheaf J CommRingCat.{r}} (q : Z ⟶ R)
 
+omit [EssentiallySmall.{r} C]
+  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
+private theorem scalarForget_preservesFiniteColimits (A : Sheaf J RingCat.{r}) :
+    PreservesFiniteColimits (toSheaf.{r} A) := by
+  constructor
+  intro K _ _
+  constructor
+  intro F
+  let L := PresheafOfModules.sheafification.{r} (𝟙 A.obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{r} (𝟙 A.obj)
+  let G := F ⋙ (SheafOfModules.forget A ⋙ PresheafOfModules.restrictScalars (𝟙 A.obj))
+  let e : G ⋙ L ≅ F := Functor.isoWhiskerLeft F (asIso adj.counit) ≪≫ F.rightUnitor
+  have : PreservesColimitsOfShape K (presheafToSheaf J AddCommGrpCat.{r}) :=
+    (sheafificationAdjunction J AddCommGrpCat.{r}).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have : PreservesColimit G (L ⋙ toSheaf.{r} A) :=
+    preservesColimit_of_natIso G (PresheafOfModules.sheafificationCompToSheaf (𝟙 A.obj)).symm
+  let hc := colimit.isColimit G
+  have : PreservesColimit (G ⋙ L) (toSheaf.{r} A) :=
+    preservesColimit_of_preserves_colimit_cocone (isColimitOfPreserves L hc)
+      (isColimitOfPreserves (L ⋙ toSheaf.{r} A) hc)
+  exact preservesColimit_of_iso_diagram (toSheaf.{r} A) e
+
+set_option linter.unusedSectionVars false in
 /-- Restriction is exact: it retains the underlying abelian sheaf.
 Source: Stacks 03D7 and 015F (blueprint: lem-sfb-divisible-extension-derived-reduction).
 Proof: kernels are sectionwise kernels with restricted action. Cokernels are the
@@ -66,7 +89,18 @@ theorem sheafScalarRestriction_exact :
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)) ∧
     PreservesFiniteColimits (restrictScalars.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)) := by
-  sorry
+  let Z' := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj Z
+  let R' := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R
+  let res := restrictScalars.{r}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)
+  have := scalarForget_preservesFiniteColimits Z'
+  have := scalarForget_preservesFiniteColimits R'
+  have : PreservesFiniteLimits (res ⋙ toSheaf Z') :=
+    inferInstanceAs (PreservesFiniteLimits (toSheaf.{r} R'))
+  have : PreservesFiniteColimits (res ⋙ toSheaf Z') :=
+    inferInstanceAs (PreservesFiniteColimits (toSheaf.{r} R'))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves res (toSheaf Z'),
+    preservesFiniteColimits_of_reflects_of_preserves res (toSheaf Z')⟩
 
 /-- Exact restriction preserves finite limits.
 Source: Stacks 015F (blueprint: lem-sfb-divisible-extension-derived-reduction). -/
@@ -379,20 +413,96 @@ theorem boundary_adjunct [HasTerminal C] (hn : 1 ≤ n) (P : Presentation (J := 
           (derivedRestriction n).map
             ((shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app
               ((DerivedCategory.singleFunctor (Residue J n) 0).obj P.H)) := by
-  sorry
+  classical
+  let F := DerivedCategory.singleFunctor (Integral J) 0
+  let G := DerivedCategory.singleFunctor (Residue J n) 0
+  let R := derivedRestriction (J := J) n
+  let c := (restriction J n).mapDerivedCategorySingleFunctor 0
+  let I := identifications n D hn P
+  let e := coefficientIso n D hn
+  have he : eta n D (integerUnit J) ≫ R.map e.hom ≫ c.hom.app (residueUnit J n) =
+      F.map (coefficientUnit J n) :=
+    (Classical.choose_spec (coefficientIso_existsUnique n D hn)).1
+  let b := e.inv ≫ D.T.map (F.map s) ≫ I.alphaF.hom
+  let sbar := G.preimage b
+  have hb : G.map sbar = b := G.map_preimage b
+  refine ⟨sbar, ⟨?_, hb, ?_⟩, ?_⟩
+  · apply F.map_injective
+    simp only [Functor.map_comp]
+    rw [← he]
+    simp only [Category.assoc]
+    have hc : R.map (G.map sbar) ≫ c.hom.app P.Q =
+        c.hom.app (residueUnit J n) ≫ F.map ((restriction J n).map sbar) :=
+      c.hom.naturality sbar
+    rw [← hc, ← R.map_comp_assoc, hb]
+    change eta n D (integerUnit J) ≫
+      R.map (e.hom ≫ (e.inv ≫ D.T.map (F.map s) ≫ I.alphaF.hom)) ≫ c.hom.app P.Q = _
+    simp only [Iso.hom_inv_id_assoc, Functor.map_comp, Category.assoc]
+    rw [← Category.assoc (eta n D (integerUnit J)),
+      show eta n D (integerUnit J) ≫ R.map (D.T.map (F.map s)) =
+        F.map s ≫ eta n D P.S.X₃ from
+          ((sheafScalarDerivedAdjunction (projection J n) D).unit.naturality
+            (F.map s)).symm]
+    simp only [Category.assoc]
+    exact congrArg (fun z ↦ F.map s ≫ z) I.quotient_unit
+  · let ad := sheafScalarDerivedAdjunction (projection J n) D
+    have : ad.CommShift ℤ := ad.commShift_of_rightAdjoint ℤ
+    have hinput : e.hom ≫ G.map sbar ≫ boundary n D hn P =
+        D.T.map (F.map s ≫ P.exact.singleδ) ≫
+          (D.T.commShiftIso (1 : ℤ)).hom.app (F.obj P.S.X₁) ≫
+          I.alphaB.hom⟦(1 : ℤ)⟧' ≫
+          (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app
+            (G.obj P.H) := by
+      rw [hb]
+      change e.hom ≫ (e.inv ≫ D.T.map (F.map s) ≫ I.alphaF.hom) ≫
+        (I.alphaF.inv ≫ D.T.map P.exact.singleδ ≫ _ ≫ _ ≫ _) = _
+      simp only [Category.assoc, Iso.hom_inv_id_assoc, Functor.map_comp]
+      rfl
+    rw [Adjunction.homEquiv_unit]
+    change ad.unit.app (F.obj (integerUnit J)) ≫
+      R.map (e.hom ≫ G.map sbar ≫ boundary n D hn P) = _
+    rw [hinput]
+    rw [R.map_comp]
+    have hnat : ad.unit.app (F.obj (integerUnit J)) ≫
+        R.map (D.T.map (F.map s ≫ P.exact.singleδ)) =
+        (F.map s ≫ P.exact.singleδ) ≫ ad.unit.app ((F.obj P.S.X₁)⟦(1 : ℤ)⟧) :=
+      (ad.unit.naturality (F.map s ≫ P.exact.singleδ)).symm
+    rw [← Category.assoc, hnat]
+    simp only [Functor.map_comp]
+    simp only [Category.assoc]
+    have hunit : ad.unit.app ((F.obj P.S.X₁)⟦(1 : ℤ)⟧) ≫
+        R.map ((D.T.commShiftIso (1 : ℤ)).hom.app (F.obj P.S.X₁)) =
+        (eta n D P.S.X₁)⟦(1 : ℤ)⟧' ≫
+          (R.commShiftIso (1 : ℤ)).inv.app (D.T.obj (F.obj P.S.X₁)) := by
+      apply (cancel_mono ((R.commShiftIso (1 : ℤ)).hom.app _)).1
+      simp only [Category.assoc, Iso.inv_hom_id_app]
+      simp only [Functor.comp_obj]
+      rw [show eta n D P.S.X₁ = ad.unit.app (F.obj P.S.X₁) from rfl]
+      erw [Category.comp_id]
+      change ad.unit.app ((F.obj P.S.X₁)⟦(1 : ℤ)⟧) ≫
+          R.map ((D.T.commShiftIso (1 : ℤ)).hom.app (F.obj P.S.X₁)) ≫
+          (R.commShiftIso (1 : ℤ)).hom.app (D.T.obj (F.obj P.S.X₁)) =
+        (ad.unit.app (F.obj P.S.X₁))⟦(1 : ℤ)⟧'
+      simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+        ad.unit_app_commShiftIso_hom_app ℤ (1 : ℤ) (F.obj P.S.X₁)
+    rw [reassoc_of% hunit]
+    rw [← reassoc_of% R.commShiftIso_inv_naturality I.alphaB.hom (1 : ℤ)]
+    rw [← (shiftFunctor (DerivedCategory (Integral J)) (1 : ℤ)).map_comp_assoc,
+      I.kummer_unit]
+  · intro t ht
+    apply G.map_injective
+    exact ht.2.1.trans hb.symm
 
 /-- Naturality for every morphism of the short exact extensions, with the maps
 on torsion and quotient specified by their kernel and cokernel squares.
 Source: Cartier proof, paragraphs 4 and 5
 (blueprint: lem-sfb-divisible-extension-derived-reduction).
-Proof: replace the arrow diagram by a simultaneous flat-term K-flat diagram
-(lem-weil-pbc-diagram-kflat-replacements). Its multiplication triangles commute
-by the functorial complex short-exact-sequence triangle. Kernels, cokernels and
-truncations are functorial, and monicity of the target kernel inclusion fixes
-the normalized torsion identification. The extension boundary is functorial by
-singleTriangle.map. Applying Lq and composing the resulting squares gives the
-last equation. Thus this includes both identification squares and the square
-for the reduced boundary, rather than only naturality of its cohomology class. -/
+Proof: apply the scalar adjunction's injective hom equivalence to each
+identification square. Naturality of its unit, the quotient normalization and
+the given quotient square prove the first. The Kummer normalization reduces
+the second to naturality of singleTriangle.map for the Kummer sequences.
+Naturality of singleTriangle.map for the extensions then gives the boundary
+square after functoriality of Lq, its shift comparison, and [1][1] = [2]. -/
 theorem boundary_natural [HasTerminal C] (hn : 1 ≤ n)
     (P P' : Presentation (J := J) n) (f : P.S ⟶ P'.S)
     (h : P.H ⟶ P'.H) (q : P.Q ⟶ P'.Q)
@@ -409,7 +519,85 @@ theorem boundary_natural [HasTerminal C] (hn : 1 ≤ n)
     (DerivedCategory.singleFunctor (Residue J n) 0).map q ≫ boundary n D hn P' =
       boundary n D hn P ≫
         ((DerivedCategory.singleFunctor (Residue J n) 0).map h)⟦(2 : ℤ)⟧' := by
-  sorry
+  let F := DerivedCategory.singleFunctor (Integral J) 0
+  let G := DerivedCategory.singleFunctor (Residue J n) 0
+  let R := derivedRestriction (J := J) n
+  let c := (restriction J n).mapDerivedCategorySingleFunctor 0
+  let I := identifications n D hn P
+  let I' := identifications n D hn P'
+  have hF : D.T.map (F.map f.τ₃) ≫ I'.alphaF.hom =
+      I.alphaF.hom ≫ G.map q := by
+    apply (sheafScalarDerivedAdjunction (projection J n) D).homEquiv _ _ |>.injective
+    simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+    change eta n D P.S.X₃ ≫ R.map (D.T.map (F.map f.τ₃)) ≫ R.map I'.alphaF.hom =
+      eta n D P.S.X₃ ≫ R.map I.alphaF.hom ≫ R.map (G.map q)
+    apply (cancel_mono (c.hom.app P'.Q)).1
+    rw [← Category.assoc (eta n D P.S.X₃),
+      show eta n D P.S.X₃ ≫ R.map (D.T.map (F.map f.τ₃)) =
+        F.map f.τ₃ ≫ eta n D P'.S.X₃ from
+          ((sheafScalarDerivedAdjunction (projection J n) D).unit.naturality
+            (F.map f.τ₃)).symm]
+    simp only [Category.assoc]
+    rw [I'.quotient_unit]
+    rw [show R.map (G.map q) ≫ c.hom.app P'.Q =
+      c.hom.app P.Q ≫ F.map ((restriction J n).map q) from c.hom.naturality q]
+    rw [reassoc_of% I.quotient_unit,
+      ← F.map_comp, ← F.map_comp, hp]
+  have hk : F.map f.τ₁ ≫ kappa n P' =
+      kappa n P ≫ R.map ((G.map h)⟦(1 : ℤ)⟧') := by
+    let k : ShortComplex.mk P.i (n • 𝟙 P.S.X₁) P.wi ⟶
+        ShortComplex.mk P'.i (n • 𝟙 P'.S.X₁) P'.wi :=
+      { τ₁ := (restriction J n).map h
+        τ₂ := f.τ₁
+        τ₃ := f.τ₁
+        comm₁₂ := hi
+        comm₂₃ := by simp }
+    have hk := (ShortComplex.ShortExact.singleTriangle.map P.kummer P'.kummer k).comm₃
+    change P.kummer.singleδ ≫ (F.map ((restriction J n).map h))⟦(1 : ℤ)⟧' =
+      F.map f.τ₁ ≫ P'.kummer.singleδ at hk
+    dsimp only [kappa]
+    rw [← reassoc_of% hk]
+    simp only [Category.assoc]
+    rw [← (shiftFunctor (DerivedCategory (Integral J)) (1 : ℤ)).map_comp_assoc]
+    rw [show F.map ((restriction J n).map h) ≫ c.inv.app P'.H =
+      c.inv.app P.H ≫ R.map (G.map h) from c.inv.naturality h]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [Functor.commShiftIso_inv_naturality]
+  have hB : D.T.map (F.map f.τ₁) ≫ I'.alphaB.hom =
+      I.alphaB.hom ≫ (G.map h)⟦(1 : ℤ)⟧' := by
+    apply (sheafScalarDerivedAdjunction (projection J n) D).homEquiv _ _ |>.injective
+    simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+    change eta n D P.S.X₁ ≫ R.map (D.T.map (F.map f.τ₁)) ≫ R.map I'.alphaB.hom =
+      eta n D P.S.X₁ ≫ R.map I.alphaB.hom ≫ R.map ((G.map h)⟦(1 : ℤ)⟧')
+    rw [← Category.assoc (eta n D P.S.X₁),
+      show eta n D P.S.X₁ ≫ R.map (D.T.map (F.map f.τ₁)) =
+        F.map f.τ₁ ≫ eta n D P'.S.X₁ from
+          ((sheafScalarDerivedAdjunction (projection J n) D).unit.naturality
+            (F.map f.τ₁)).symm]
+    rw [Category.assoc, I'.kummer_unit, ← Category.assoc, I.kummer_unit]
+    exact hk
+  refine ⟨hF, hB, ?_⟩
+  have hFi : G.map q ≫ I'.alphaF.inv = I.alphaF.inv ≫ D.T.map (F.map f.τ₃) := by
+    apply (cancel_epi I.alphaF.hom).1
+    rw [← Category.assoc, ← hF]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
+  have hδ : F.map f.τ₃ ≫ P'.exact.singleδ =
+      P.exact.singleδ ≫ (F.map f.τ₁)⟦(1 : ℤ)⟧' :=
+    (ShortComplex.ShortExact.singleTriangle.map P.exact P'.exact f).comm₃.symm
+  dsimp only [boundary]
+  simp only [Category.assoc]
+  rw [reassoc_of% hFi]
+  rw [← D.T.map_comp_assoc, hδ, D.T.map_comp]
+  simp only [Category.assoc]
+  rw [Functor.commShiftIso_hom_naturality_assoc]
+  rw [← (shiftFunctor (DerivedCategory (Residue J n)) (1 : ℤ)).map_comp_assoc, hB]
+  simp only [Functor.map_comp, Category.assoc]
+  have hshift : ((G.map h)⟦(1 : ℤ)⟧')⟦(1 : ℤ)⟧' ≫
+      (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app (G.obj P'.H) =
+      (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app (G.obj P.H) ≫
+        (G.map h)⟦(2 : ℤ)⟧' :=
+    (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.naturality (G.map h)
+  rw [hshift]
 
 section InverseImage
 
