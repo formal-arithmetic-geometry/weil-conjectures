@@ -18,51 +18,47 @@
  ],
  "proof": [
   {
-   "text": "The finite coefficient quotient has the two-term finite free resolution over $\\mathcal O_E$ given by [lem-weil-pbc-standard-quotients-perfect], with the notation $\\varpi=\\pi_E$. The exact sequence of [det-pe-derived-nakayama-resolution] gives the corresponding resolution on $X_{\\Proet}$: the complex $P_n=[\\mathcal O_{E,X}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,X}]$ in degrees $-1,0$, with augmentation the reduction to $(\\mathcal O_E/\\pi_E^n)_X$, is a quasi-isomorphism, so $P_n$ represents $(\\mathcal O_E/\\pi_E^n)_X[0]$. Its terms in degrees $-1,0$ are free of rank one over $\\mathcal O_{E,X}$, with all other terms zero. Hence $P_n$ is perfect in the sense of [def-weil-pbc-strict-perfect-coefficient-package] for the ringed site $(X_{\\Proet},\\mathcal O_{E,X})$: for every object $V$ take the one-member covering $\\{V\\to V\\}$ and the identity quasi-isomorphism of $P_n|_V$, a bounded complex whose terms $\\mathcal O_{E,V}=\\mathcal O_{E,V}^{\\oplus1}$ are finite free (package data $N_r=1$, $i_r=p_r=\\mathrm{id}$ in degrees $-1,0$). The same statement of [det-pe-derived-nakayama-resolution] identifies $K_n$ naturally with the cone of $\\pi_E^n\\colon K\\to K$.",
+   "text": "Apply [det-pe-derived-nakayama-resolution] with its single specified uniformizer endomorphism d. At exponent n+1 transport the short exact coefficient sequence by regularPullbackIso, identifying its quotient morphism with finiteUnit by Mod.hom_ext. Form the two-term complex using Mathlib HomologicalComplex.double with regular terms in degrees -1 and 0. Its augmentation has degree-zero component the specified quotient. ShortComplex.quasiIso_iff_of_zeros' and transported exactness give the degree-zero quasi-isomorphism; monicity gives vanishing in degree -1, and the other terms are zero. This proves precisely the explicit bounded rank-one resolution in the statement. Keep the natural cone isomorphism supplied by the same dependency.",
    "uses": [
-    "lem-weil-pbc-standard-quotients-perfect",
-    "det-pe-derived-nakayama-resolution",
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "det-pe-derived-nakayama-resolution"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.md",
-    "place": "node det-pe-derived-nakayama-resolution and the finite-free resolution clause of lem-weil-pbc-standard-quotients-perfect"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama.proof.md",
+    "place": "First sentence, coefficient exact sequence and two-term resolution"
    }
   },
   {
-   "text": "If $K$ is derived complete and $K_1=0$, the vanishing assertion of [det-pe-derived-nakayama-first-reduction] gives $K_n=0$ for every $n\\geq1$ and $K=0$.",
+   "text": "The first-reduction dependency uses derived scalar extension while this theorem uses relative derived tensor. Identify the pulled-back finite quotient module with restriction of its regular module, using mapModComapIso and the identity comparison on regular modules. On a K-flat representative P of K, QObjTensorSingleFunctorObjIso computes tensor reduction by the termwise tensor complex. The braiding switches tensor sides, and Mod.extendForgetTensorIso identifies the underlying complex with the scalar-extension complex. Exact faithful forgetting detects acyclicity. The derived scalar-extension counit is invertible on P, so zero tensor reduction gives zero derived scalar extension. Apply the vanishing assertion of [det-pe-derived-nakayama-first-reduction] and project its IsZero K conclusion. All comparison and acyclicity glue is proved in the private helper isZero_derivedReduction_of_isZero_tensor; no additional assertion is assumed.",
    "uses": [
     "det-pe-derived-nakayama-first-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.md",
-    "place": "Vanishing"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama.proof.md",
+    "place": "Second sentence, induction and completeness vanishing; K-flat reduction computation in the resolution proof, On X"
    }
   },
   {
-   "text": "For a morphism $f\\colon K\\to L$ of derived-complete complexes whose first derived reduction $f_1$ is an isomorphism, the final assertion of [det-pe-derived-nakayama-first-reduction] directly gives that $f$ is an isomorphism.",
+   "text": "Complete f to a distinguished triangle T. By the cone-closure clause of [det-pe-derived-nakayama-first-reduction], its third object is derived complete. Relative derived tensor is triangulated (DerivedCategory.isTriangulated_tensorRight), so apply it to T. Since its first morphism is the given invertible reduced f, the zero-cone criterion makes its third object zero. Use the K-flat comparison of step 2 and the vanishing clause of the same dependency to kill the original third object. Apply Triangle.isZero₃_iff_isIso₁ to T to conclude that f is invertible.",
    "uses": [
     "det-pe-derived-nakayama-first-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.md",
-    "place": "Isomorphisms"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama.proof.md",
+    "place": "Third sentence, completeness of cones and the zero-cone argument"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-perfect-coefficient-package",
   "det-pe-derived-nakayama-first-reduction",
-  "det-pe-derived-nakayama-resolution",
-  "lem-weil-pbc-standard-quotients-perfect"
+  "det-pe-derived-nakayama-resolution"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/_section.md",
-  "place": "## Proof; expanded using the existing resolution and first-reduction nodes"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama.proof.md",
+  "place": "Entire unit proof; explicit two-term construction and K-flat comparison between the two existing reduction interfaces; U6, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -152,9 +148,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-standard-quotients-perfect"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -192,5 +186,15 @@
   "by": "Q21",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T112547-L-3955560",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
