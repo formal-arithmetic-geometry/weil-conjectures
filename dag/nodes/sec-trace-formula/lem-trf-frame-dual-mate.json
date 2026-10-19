@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "For a homogeneous \\(\\varphi\\in R^\\vee\\) of degree \\(j\\) and \\(x\\in P^{-j-1}\\), the dual differential gives\n\\[\n(d_P^\\vee(f^\\vee\\varphi))(x)=(-1)^{j+1}\\varphi(f(d_Px))=(-1)^{j+1}\\varphi(d_R(fx))=((d_R^\\vee\\varphi)\\circ f)(x).\n\\]\nThe middle equality is the chain-map identity for \\(f\\). Both sides vanish on the other degrees by the grading conventions. Thus precomposition \\(f^\\vee(\\varphi)=\\varphi\\circ f\\) is a degree-zero chain map \\(R^\\vee\\to P^\\vee\\).",
+   "text": "Use the already constructed chain map moduleHomPrecomp, whose homogeneous components are composition with Cochain.ofHom f. Its chain-map proof is moduleHomPrecomp_comm; no new construction or finite-frame calculation is required here.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "On a homogeneous pure tensor \\(\\varphi\\otimes x\\) with \\(\\varphi\\in(R^\\vee)^j\\) and \\(x\\in P^{-j}\\), the two composites in the evaluation equation both have value \\(\\varphi(fx)\\): the left side is \\(\\operatorname{ev}_P((f^\\vee\\varphi)\\otimes x)\\) and the right side is \\(\\operatorname{ev}_R(\\varphi\\otimes f(x))\\). On all other total degrees both evaluations are zero by definition. Since pure tensors generate the tensor product and the canonical associators and unitors only reparenthesize them, this proves\n\\[\n\\operatorname{ev}_P\\circ(f^\\vee\\otimes1_P)=\\operatorname{ev}_R\\circ(1_{R^\\vee}\\otimes f).\n\\]",
+   "text": "Prove the evaluation mate equation degree by degree. Away from degree zero both evaluation components vanish by hEvPzero and hEvRzero. In degree zero use mapBifunctor.hom_ext to test every tensor summand, write its degrees as (-i,i), and use ModuleCat.hom_ext and TensorProduct.ext' to test pure tensors. The two evaluation formulas reduce the equality to ((Cochain.ofHom f).comp phi).v i 0 applied to x = phi.v i 0 applied to f.f i x; zero_cochain_comp_v and ofHom_v prove this equality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "If a degree-zero chain map \\(u:R^\\vee\\to P^\\vee\\) satisfies the displayed evaluation equation, then for every homogeneous \\(\\varphi\\in(R^\\vee)^j\\) and every \\(x\\in P^{-j}\\) it gives \\((u\\varphi)(x)=\\varphi(fx)\\). Thus \\(u\\varphi\\) and \\(f^\\vee\\varphi\\) agree on all of \\(P^{-j}\\), hence are equal as degree-\\(j\\) functionals. This holds in every degree, so \\(u=f^\\vee\\); the precomposition map is the unique chain map with the mate property.",
+   "text": "Use the given triangle identities to install ExactPairing and HasRightDual structures with exactly the specified evaluation and coevaluation maps. For any v satisfying the evaluation mate equation, apply Mathlib tensorRightHomEquiv to that equation. Its whiskerRight_comp_evaluation and whiskerLeft_comp_evaluation lemmas give v followed by the inverse left unitor = rightAdjointMate f followed by the same inverse left unitor. Cancel the unitor to obtain v = rightAdjointMate f. Applying this to frameDualMap f and to an arbitrary solution proves uniqueness.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "Write the chosen frames as \\((e^P_{i,a},\\epsilon^P_{i,a})\\) and \\((e^R_{k,b},\\epsilon^R_{k,b})\\). Evaluating the left side of the coevaluation identity at \\(1\\) and expanding each \\(f(e^P_{i,a})\\) in the \\(R^i\\)-frame gives\n\\[\n\\sum_{i,a,b}e^R_{i,b}\\,\\epsilon^R_{i,b}(f(e^P_{i,a}))\\otimes\\epsilon^P_{i,a}.\n\\]\nFor the right side, expand each functional \\(\\epsilon^R_{i,b}\\circ f\\) in the \\(P^i\\)-frame; the frame identity gives\n\\[\n\\epsilon^R_{i,b}\\circ f=\\sum_a\\epsilon^R_{i,b}(f(e^P_{i,a}))\\,\\epsilon^P_{i,a}.\n\\]\nTherefore its value at \\(1\\) is the same finite sum. Since both maps have source \\(A[0]\\), equality at \\(1\\) proves\n\\[\n(f\\otimes1_{P^\\vee})\\circ\\operatorname{coev}_P=(1_R\\otimes f^\\vee)\\circ\\operatorname{coev}_R.\n\\]",
+   "text": "The evaluation equation and the identification in the preceding step give frameDualMap f = rightAdjointMate f. Substitute this into the desired coevaluation equation and apply Mathlib coevaluation_comp_rightAdjointMate, with the local exact pairings. Thus explicit finite-frame expansion is unnecessary once the triangle identities are assumed.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -55,8 +55,11 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
+  "group": "A2",
+  "date": "2026-10-19",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
-  "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+  "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism.",
+  "note": "Componentwise evaluation calculation followed by Mathlib exact-pairing mate identities; all signatures unchanged."
  },
  "mathlib_searches": [
   {
@@ -160,5 +163,15 @@
   "group": "Q141",
   "result": "fix",
   "note": "All node clauses match the Lean: ring, bounded finitely generated projective complexes, per-degree dual frames empty on zero terms, ev/coev pinned by component formulas, triangle identities in ExactPairing order, ev-mate, uniqueness among chain maps and coev identity. Precomposition reuses moduleHomPrecomp (real data). Signs match Mathlib (delta has (-1)^{j+1}; tensor eps2 = (-1)^p; associator and unitors unsigned), so the canonical ev/coev satisfy the hypotheses and the theorem is not vacuous. Edge cases (zero complexes, empty intervals, non-free projectives, char 2, one declared universe) covered; docstrings, single sorry, statement verbatim, citer chain_supertrace interface consistent. nt_compile: delivered file clean in 5.4 s. Finding H9: import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric unused (the file compiles without it). fixes/FrameDualMate.lean removes it and compiles clean in 5.5 s, statement unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261019T231023-L-539718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

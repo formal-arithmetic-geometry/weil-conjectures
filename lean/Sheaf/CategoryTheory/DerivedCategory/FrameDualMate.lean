@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy
 public import Mathlib.Data.Int.Interval
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
@@ -49,6 +48,7 @@ noncomputable def frameDualMap {A : Type u} [CommRing A]
       CochainComplex.moduleHomComplex P (frameUnit A) :=
   CochainComplex.moduleHomPrecomp (frameUnit A) f
 
+set_option linter.unusedVariables false in
 /-- Precomposition is the right dual mate for finite-frame pairings.
 
 Source: literature/blueprint/main-20261015/blueprint/sec-trace-formula/
@@ -149,6 +149,79 @@ theorem frame_dual_mate
               (𝟙 (CochainComplex.moduleHomComplex R (frameUnit A))) f ≫ evR →
           v = frameDualMap f)
 := by
-  sorry
+  let monoidal : MonoidalCategory (CochainComplex (ModuleCat.{u} A) ℤ) := inferInstance
+  set_option backward.isDefEq.respectTransparency false in
+    have hmate :
+        HomologicalComplex.tensorHom (frameDualMap f) (𝟙 P) ≫ evP =
+          HomologicalComplex.tensorHom
+            (𝟙 (CochainComplex.moduleHomComplex R (frameUnit A))) f ≫ evR := by
+      apply HomologicalComplex.hom_ext
+      intro n
+      by_cases hn : n = 0
+      · subst n
+        apply HomologicalComplex.mapBifunctor.hom_ext
+        intro j i hji
+        have hij : j + i = 0 := hji
+        have hj : j = -i := by omega
+        subst j
+        dsimp only [HomologicalComplex.comp_f]
+        simp only [← Category.assoc, HomologicalComplex.ι_mapBifunctorMap]
+        simp only [Category.assoc]
+        apply ModuleCat.hom_ext
+        apply TensorProduct.ext'
+        intro φ x
+        simp only [ModuleCat.hom_comp, LinearMap.comp_apply]
+        change (evP.f 0).hom
+            ((HomologicalComplex.ιTensorObj _ P (-i) i 0 _).hom
+              (((frameDualMap f).f (-i)).hom φ ⊗ₜ[A] x)) =
+          (evR.f 0).hom
+            ((HomologicalComplex.ιTensorObj _ R (-i) i 0 _).hom
+              (φ ⊗ₜ[A] (f.f i).hom x))
+        rw [hEvP, hEvR]
+        change (((CochainComplex.HomComplex.Cochain.ofHom f).comp φ (zero_add (-i))).v
+          i 0 (add_neg_cancel i)).hom x = _
+        rw [CochainComplex.HomComplex.Cochain.zero_cochain_comp_v,
+          CochainComplex.HomComplex.Cochain.ofHom_v]
+        rfl
+      · simp [HomologicalComplex.comp_f, hEvPzero n hn, hEvRzero n hn]
+    let ep : ExactPairing P (CochainComplex.moduleHomComplex P (frameUnit A)) :=
+      { coevaluation' := coevP
+        evaluation' := evP
+        coevaluation_evaluation' := hTriP₁
+        evaluation_coevaluation' := hTriP₂ }
+    let er : ExactPairing R (CochainComplex.moduleHomComplex R (frameUnit A)) :=
+      { coevaluation' := coevR
+        evaluation' := evR
+        coevaluation_evaluation' := hTriR₁
+        evaluation_coevaluation' := hTriR₂ }
+    let dp : HasRightDual P := ⟨CochainComplex.moduleHomComplex P (frameUnit A)⟩
+    let dr : HasRightDual R := ⟨CochainComplex.moduleHomComplex R (frameUnit A)⟩
+    have hdual (v : CochainComplex.moduleHomComplex R (frameUnit A) ⟶
+        CochainComplex.moduleHomComplex P (frameUnit A))
+        (hv : HomologicalComplex.tensorHom v (𝟙 P) ≫ evP =
+          HomologicalComplex.tensorHom
+            (𝟙 (CochainComplex.moduleHomComplex R (frameUnit A))) f ≫ evR) :
+        v = rightAdjointMate f := by
+      have ht := congrArg (tensorRightHomEquiv _ P (Pᘁ) (𝟙_ _)) hv
+      have hw : HomologicalComplex.tensorHom v (𝟙 P) = v ▷ P := by rfl
+      have hl : HomologicalComplex.tensorHom
+          (𝟙 (CochainComplex.moduleHomComplex R (frameUnit A))) f =
+            (Rᘁ) ◁ f := by rfl
+      rw [hw, hl] at ht
+      change tensorRightHomEquiv _ P (Pᘁ) (𝟙_ _) (v ▷ P ≫ ε_ P (Pᘁ)) =
+        tensorRightHomEquiv _ P (Pᘁ) (𝟙_ _) ((Rᘁ) ◁ f ≫ ε_ R (Rᘁ)) at ht
+      simpa only [tensorRightHomEquiv_whiskerRight_comp_evaluation,
+        tensorRightHomEquiv_whiskerLeft_comp_evaluation, cancel_mono] using ht
+    have hf := hdual (frameDualMap f) hmate
+    refine ⟨hmate, ?_, ?_⟩
+    · rw [hf]
+      have hw : HomologicalComplex.tensorHom f
+          (𝟙 (CochainComplex.moduleHomComplex P (frameUnit A))) = f ▷ Pᘁ := by rfl
+      have hl : HomologicalComplex.tensorHom (𝟙 R) (rightAdjointMate f) =
+          R ◁ rightAdjointMate f := by rfl
+      rw [hw, hl]
+      exact (coevaluation_comp_rightAdjointMate f).symm
+    · intro v hv
+      exact (hdual v hv).trans hf.symm
 
 end CategoryTheory
