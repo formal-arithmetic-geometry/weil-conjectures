@@ -180,5 +180,23 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-bad6e98a9 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-algebraic-field-dualizing-shift and every cited statement in full, against Stacks dualizing.tex 0A7F (l.2702), 0AX0 (l.2808), 0A7L (l.2886) and 0A7M (l.2906). The three steps follow the 0A7L proof: transfer to the residue field, the field case unique up to shift, then normalization by shifting. Step 1: the hypotheses of the 0AX0 transfer node are exactly clauses (i)-(iii) of def-per-algebraic-normalized-dualizing. Step 2: restriction of scalars from D(κ) to D(A) is exact and recovers RHom_A(κ[0],Ω). Step 3: I[-s] is K-injective by the Mathlib leaf; Hom^•(κ[0],I[-s]) = Hom^•(κ,I)[-s]; the (-1)^{tn} reindexing is a chain isomorphism that preserves the scalar action. I checked the sign convention on a DVR (s=-1, A[1] is normalized) and on a field (k[r] gives s=r). The new field node is true: over a field K is a sum of shifted H^j, and End in degree 0 equal to k forces exactly one H^j, of dimension 1. It fails correctly for 0, k⊕k[1] and k^2. It is statement-only, self-contained, has source tags and searches, and is strictly smaller than the item with no cycle. Searching the DAG (0A7F/0A7L/0AX0, 'scalar-action map', 'algebraic dualizing', 'unique up to shift') found no duplicate. Batch-5 flag on lem-trf-finite-map-dualizing-transfer: it is generic 0AX0 commutative algebra, unsplit with empty proof_deps, and its 179-node closure contains no other trf, Poincaré or sk node (the item's 183-node closure neither). It is not part of the trace formula or Poincaré duality, so I accept it. I accept both declared tool uses (the transfer node and the bounded-injective ⇒ K-injective Mathlib leaf). No SGA is used, and the target statement is unchanged. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AlgebraicLocalDualizingNormalization",
+  "declaration": "DerivedCategory.algebraic_local_dualizing_normalization",
+  "file": "lean/Sheaf/Algebra/Homology/AlgebraicLocalDualizingNormalization.lean",
+  "statement": "theorem algebraic_local_dualizing_normalization (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [HasDerivedCategory.{u} (RingSiteModules A)] (Ω : DerivedCategory (RingSiteModules A)) (hΩ : IsAlgebraicDualizing A Ω) : ∃ s : ℤ, Nonempty ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf A) ((DerivedCategory.singleFunctor (RingSiteModules A) 0).obj (algebraicDualizingModuleSheaf A (ModuleCat.of A (IsLocalRing.ResidueField A))))).obj Ω ≅ ((DerivedCategory.singleFunctor (RingSiteModules A) 0).obj (algebraicDualizingModuleSheaf A (ModuleCat.of A (IsLocalRing.ResidueField A))))⟦s⟧) ∧ IsNormalizedAlgebraicDualizing A (Ω⟦-s⟧)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-501f9379d",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0A7L/0A7M clause by clause: Noetherian local A (IsLocalRing gives nonzero), IsAlgebraicDualizing hypothesis, ∃ s with Nonempty(RHom(κ[0],Ω) ≅ κ[0]⟦s⟧) and IsNormalizedAlgebraicDualizing A (Ω⟦-s⟧) for the same s; κ[0] and SignedRingedHom.hom are the same expressions as in the dependency's normalization predicate; variable order checked via the scalar-action adjunction; DVR sign check s=-1. Only the lean field changed vs the live node, statement verbatim, docstrings with source and blueprint and the 3 proof steps, sorry-only, proof-dep KInjective import allowed by rule 7, no duplicate on side. nt_compile --json: clean, 2.0 s."
  }
 }

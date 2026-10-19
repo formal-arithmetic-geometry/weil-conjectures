@@ -21,7 +21,8 @@
   "def-weil-finite-type-morphism",
   "def-nagata-projective-space-base-change",
   "def-weil-residue-field",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-pc-dimension"
  ],
  "proof": [
   {
@@ -340,5 +341,23 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-5f16caaf5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and the Stacks sources: 02NS with its proof, 0892 with its full proof, 01VH and 07RL. Steps 1-10 are correct. Step 1: the ideal is finite type and nonzero. Step 2: 087S needs an ample sheaf on X, which is assumed; properness gives finite type and 01T6 gives Noetherian; excellence comes from 07QU on the charts R[I/a]. Step 4: flat base change to Spec A with explicit local-ring equality. Step 5: 0BIQ charts A[t]/(xt-y), and x is a nonzerodivisor because C_x is inside A_x. Step 6: the exceptional fibre is glued from k[t] and k[u] into P^1_k. Step 7: regularity lifts by 00NU. Step 8: dimension is 2 by 00KW. Steps 9-10: support and strict transform, with edge cases W=p, W=X, Y=p and Y disjoint from p. Batch-5 flags: lem-trf-projective-bundle-to-h-projective (087S) and lem-trf-blowup-chart-regular-sequence-presentation (0BIQ) are generic projective geometry and commutative algebra. Their own closures (179 and 18 nodes) reach no trace-formula proof step, no sec-poincare-duality node, no nt-assume leaf and no sk-thm-trace-transport, so both are accepted. New node lem-per-relative-ample-absolute-twist matches 0892(1) and is kept. New node lem-per-blowup-tautological-relative-ample (02NS(2)) is true but unneeded: step 3 only needs some b-relatively ample module, and the existing same-unit node lem-per-projective-bundle-relative-ample (07RL, landed by Q01) gives one, because step 2 already makes b projective in the projective-bundle sense. FIX: step 3 now cites lem-per-integral-blowup-projective-geometry, lem-per-projective-bundle-relative-ample and lem-per-relative-ample-absolute-twist; proof_deps and summary updated; the item was the only citer of the dropped node. The six tool_uses (087S, 07QU, 00NQ, 0BIQ, 01NG, 00NU) are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurfacePointBlowupGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.surface_point_blowup_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurfacePointBlowupGeometry.lean",
+  "statement": "theorem surface_point_blowup_geometry (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hRegular : IsRegularScheme X) (hExcellent : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) (hDimension : X.dim = 2) (hAmple : ∃ (L : X.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple X L hL) (p : X) (hp : IsClosed ({p} : Set X)) (hpDimension : ringKrullDim (X.presheaf.stalk p) = 2) (I : X.IdealSheafData) (hI : I = (X.fromSpecResidueField p).ker) : IsIntegral I.blowup ∧ IsRegularScheme I.blowup ∧ (∀ U : I.blowup.affineOpens, IsExcellent Γ(I.blowup, U)) ∧ IsNoetherian I.blowup ∧ I.blowup.dim = 2 ∧ (∃ (L : I.blowup.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple I.blowup L hL) ∧ (LocallyOfFiniteType I.blowupMap ∧ QuasiCompact I.blowupMap) ∧ IsHProjective I.blowupMap ∧ (∃ e : pullback I.blowupMap (X.fromSpecResidueField p) ≅ ProjectiveLine (Spec (X.residueField p)), e.hom ≫ (ProjectiveLine (Spec (X.residueField p)) ↘ Spec (X.residueField p)) = pullback.snd I.blowupMap (X.fromSpecResidueField p)) ∧ IsRegularScheme (pullback I.blowupMap (X.fromSpecResidueField p)) ∧ (∀ W : X.IdealSheafData, p ∈ W.support → ((W.comap I.blowupMap).support : Set I.blowup) = Set.range (pullback.fst I.blowupMap (X.fromSpecResidueField p)) ∪ Set.range (strictTransformMap W.subschemeι I.blowupMap I.support.compl)) ∧ (∀ (Y : X.IdealSheafData) [IsIntegral Y.subscheme], ∃ e : I.strictTransform Y.subschemeι ≅ (I.comap Y.subschemeι).blowup, e.hom ≫ (I.comap Y.subschemeι).blowupMap = strictTransformToSource Y.subschemeι I.blowupMap I.support.compl)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd28715c2",
+  "group": "NV",
+  "result": "pass",
+  "note": "Delivery adds one sorry-only theorem module and changes only the item's lean record and stmt_deps (+ landed def-pc-dimension); proof, proof_deps and split_report keep the landed stage-1 FIX. Every hypothesis and conclusion matches the node through its dependency records: integral, regular, excellent on affine opens, Noetherian, dim 2, ample invertible module; closed p with local dim 2; centre ideal = kernel of the residue-field point map, i.e. the reduced point; finite type = LocallyOfFiniteType ∧ QuasiCompact; IsHProjective; E = fibre over Spec κ(p) ≅ P^1 over κ(p), commuting with the maps to Spec κ(p), and E regular; support union for every closed W containing p via comap; Tag 080E strict-transform iso over Y. Edge cases W=p, W=X, Y=p and Y avoiding p hold, and no universe restriction is added. Orgogozo.IsExcellentScheme is a trf helper with the same inline formula, not an H4 duplicate. lean.statement equals the file signature. nt_compile --json: clean, 2.5 s, exit 0. Q10's parallel head 43ff285f was RETURNed and never landed, so there is no race."
  }
 }

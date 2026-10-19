@@ -18,7 +18,8 @@
   "def-nagata-strict-transform",
   "def-weil-regular-scheme",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-trf-ordinary-resolution-rule"
  ],
  "proof": [
   {
@@ -245,5 +246,23 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-0ae025c97 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: resolve.tex 0BI4/0BI5 in full, plus 0BX2, 0AB7, 0BXC and 080E. Item statement unchanged; it matches 0BI5 under 0BI4(4) and is not weakened. Steps: (1) Y is Noetherian, elementary. (2) Normalization node plus finite pushforward coherence. (3) Explicit induction with base f_0=id, r_0=ν, invariant f_i r_i=ν; singular points are closed in an integral dimension-1 scheme. (4) The subalgebras A⊂B_i⊂D increase strictly, otherwise b_i is an isomorphism on every affine. (5) ACC on the fixed Noetherian Y. (6) The point centre is a finite-type, finitely presented ideal, so the blowup is proper, finite type and Noetherian; the extended ideal is I_c; strict transform ≅ Bl_{I_c}C_i (blueprint_update of thm-nagata-strict-transform-is-blowup and 080E), closed in X_{i+1} by base change and composition. (7) Elementary conclusion. New node lem-per-finite-curve-normalization-regular is true (035Q, finite over Noetherian, dimension preserved, 0BX2); tested on the cusp and a DVR. New node lem-per-singular-curve-point-blowup-step is true: m_c O_R is invertible on a regular curve, giving r^+ by the universal property; b is finite by 0AB7; r^+ is finite via graph plus base change; b is not an isomorphism, else m_c would be principal and O_{C,c} regular. Tested on the cusp and on a regular point (where the singularity hypothesis is needed). Neither node restates the item. No duplicate: componentwise-normalization-properties has no regularity, the trf curve nodes are over a field, generically-finite-proper is 0AB7 only. The seven off-unit tool_uses declared in split_report (sk-thm-p1 and nagata generic tools) are accepted. Blueprint from/via correct, no SGA used, no A–F error found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurfaceCurveRegularizationByBlowups",
+  "declaration": "AlgebraicGeometry.exists_surface_curve_regularization_by_blowups",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurfaceCurveRegularizationByBlowups.lean",
+  "statement": "theorem exists_surface_curve_regularization_by_blowups (X Y : Scheme.{u}) [IsNoetherian X] [IsIntegral Y] (j : Y ⟶ X) [IsClosedImmersion j] (hDim : topologicalKrullDim Y = 1) [IsFinite Y.fromNormalization] : ∃ A : OrdinaryBlowupTower X, ∃ C : Fin (A.length + 1) → Scheme.{u}, ∃ ι : ∀ i, C i ⟶ A.level i, ∃ e₀ : C 0 ≅ Y, ι 0 ≫ A.initial.hom = e₀.hom ≫ j ∧ (∀ i, IsClosedImmersion (ι i)) ∧ (∀ i : Fin A.length, ∃ p : C i.castSucc, IsClosed ({p} : Set (C i.castSucc)) ∧ ¬ IsRegularLocalRing ((C i.castSucc).presheaf.stalk p) ∧ (A.center i).radical = A.center i ∧ ((A.center i).support : Set (A.level i.castSucc)) = {ι i.castSucc p} ∧ ∃ e : C i.succ ≅ (A.center i).strictTransform (ι i.castSucc), e.hom ≫ strictTransformMap (ι i.castSucc) (A.center i).blowupMap (A.center i).support.compl = ι i.succ ≫ (A.blowupIso i).hom) ∧ IsRegularScheme (C (Fin.last A.length))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c65ecf271",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BI4/0BI5 clause by clause: IsNoetherian X, IsIntegral Y, closed immersion j, topologicalKrullDim Y = 1, IsFinite Y.fromNormalization (canonical normalization in the function field). Conclusion: an OrdinaryBlowupTower X whose curves C_i are pinned by e0 and j and by isos to (A.center i).strictTransform (ι i) compatible with strictTransformMap and blowupIso, so there are no free arrows. Centres are radical with support a single closed point, which is the reduced point; singularity is ¬IsRegularLocalRing on the curve; final curve IsRegularScheme. No extra hypotheses, one universe. Provable via exists_blowup_comap_iso_strictTransform (080E). Node diff vs live: only the lean record and stmt_dep def-trf-ordinary-resolution-rule (landed, reviewed). Statement verbatim; proof-only imports = proof_deps modules. No duplicate in Mathlib or side. Docstrings with source, blueprint and 7-step plan; sorry only. nt_compile --json clean 1.9 s; broken-identifier control fails. Report sections present. No findings."
  }
 }

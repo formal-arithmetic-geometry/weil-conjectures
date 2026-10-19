@@ -14,7 +14,8 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-ring-localization-away",
   "def-weil-affine-spectrum",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -257,5 +258,23 @@
   "group": "Q119",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-7f753f34d (reviewer sub-agent of L); spot-checked: Read restricted.tex in full at the cited places: naive cotangent section, 0GAE lemma-NL-up-to-homotopy and its proof, 0GAF lemma-NL-is-completion and its proof, 0AJU(3) and 0ALQ(2) with its proof. The item statement is unchanged and matches 0ALQ(2) with condition 0AJU(3), with no weakening. New node lem-per-completed-jacobian-homology-comparison: true by 0GAF (C→Ĉ is flat, so the homology of the completed complex is the completion of M_i) and 0GAE (any A-algebra surjection P→Ĉ is automatically I-adically continuous, so morphisms of presentations exist both ways). I tested it with r=0, s=0, I=0 and I=A. It is self-contained and does not restate the item (D1). I grepped the snapshot DAG for 0GAF, 0GAE, 0ALQ and rig-étale and found no duplicate among the 8 rig-étale nodes or the 3 completed-differential nodes. Steps 1-5 and 7 are correct; I checked each against the cited statements. Step 3's argument (N̂=0 from a surjection followed by an injection with zero composite, then the constant tower of N/LN) does not assume faithfulness; I tested it on k[t], N=C/(t−1). Nakayama 1+L, localization at v=gā and the cover by D(ā) of the preimage of Spec A∖V(I) are also correct. FIX (C4) in Step 6: H_1(L_{C_v/A}) in def-weil-pbc-smooth-ring-map is ker δ into ⊕C_v d[s], while the homotopy node works with C_v⊗Ω for the canonical presentation, whose variables form an infinite set. The cited Kähler basis node covers only finitely many variables. I added the existing Mathlib leaf lem-weil-pbc-polynomial-ring-kahler-basis-any-variables to Step 6's text, uses and proof_deps; this is the only change. Batch-5 flag lem-trf-noetherian-submodule-finitely-presented: a Mathlib leaf (Stacks 00FP) with empty proof_deps whose closure is only definitions. It is generic algebra, neither assumption gives it and it is no step of their proofs, so I accepted it. I accepted the declared tool_uses (completion exactness, principal-localization NL, NL homotopy) as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobianTorsionEtaleShrink",
+  "declaration": "AlgebraicGeometry.jacobian_torsion_etale_shrink",
+  "file": "lean/Sheaf/RingTheory/JacobianTorsionEtaleShrink.lean",
+  "statement": "theorem jacobian_torsion_etale_shrink (A : Type u) (C : Type v) [CommRing A] [CommRing C] [Algebra A C] [IsNoetherianRing A] [Algebra.FiniteType A C] (I : Ideal A) (r : ℕ) (J : Ideal (rigPolynomialCompletion I r)) (_e : (rigPolynomialCompletion I r ⧸ J) ≃ₐ[A] AdicCompletion (I.map (algebraMap A C)) C) (c : ℕ) (_hker : I ^ c ≤ Module.annihilator A (LinearMap.ker (rigJacobianDifferential r I J))) (_hcoker : I ^ c ≤ Module.annihilator A ((Fin r → (rigPolynomialCompletion I r ⧸ J)) ⧸ LinearMap.range (rigJacobianDifferential r I J))) : ∃ g : C, g - 1 ∈ I.map (algebraMap A C) ∧ ∀ a : A, a ∈ I → RingHom.Etale (algebraMap A (Localization.Away (g * algebraMap A C a)))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e3829a35",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches Stacks restricted.tex 0ALQ(2) with 0AJU(3) clause by clause: Noetherian A; finite-type C with independent universe; P = rigPolynomialCompletion I r; any A-algebra iso P/J ≃ AdicCompletion(IC) C; I^c ≤ A-annihilator of the kernel and cokernel of the landed canonical rigJacobianDifferential (each ∂_i is the .choose of a true ∃!, unique continuous extension); conclusion ∃ g, g-1 ∈ IC and ∀ a ∈ I, A → C[1/(g·a)] étale, equivalent to étale over Spec A ∖ V(I) through the D(a) cover (same convention as the Q93 citer). Edge cases r=0, c=0, I=0, I=A, J=P, C=0 covered; no extra assumptions. Only node changes: the lean record and the added stmt_dep def-per-completed-polynomial-conormal (landed, genuinely used). lean.statement matches the file verbatim. No duplicate declaration found; docstrings carry the source place, blueprint tag and 7 steps; proof is sorry only. nt_compile --json clean, 2.1 s, exit 0. Advisory only: step-3 docstring wording slightly garbled."
  }
 }
