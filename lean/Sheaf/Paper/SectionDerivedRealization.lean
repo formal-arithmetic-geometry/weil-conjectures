@@ -17,29 +17,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.Paper.ProjectionMateExact
 
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Sheaf.Paper.RingedTopoiTensorComparisonData
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Mathlib.CategoryTheory.Monoidal.Functor
-import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.SheafTensor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Canonical derived section-module realization
@@ -179,6 +156,7 @@ def conjugatePushIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.isoWhiskerRight (derivedEquivalence Λ X).counitIso (derivedPushforward Λ f) ≪≫
     Functor.leftUnitor (derivedPushforward Λ f)
 
+set_option linter.unusedSectionVars false in
 /-- Exact sequential colimits transfer through the fixed section equivalence.
 Source: Stacks 00YV (blueprint: def-pd-section-derived-realization).
 Proof: transfer each diagram and its colimit along the exact equivalence. Its
@@ -186,7 +164,7 @@ inverse preserves finite limits, so the exactness of internal sequential colimit
 implies exactness of the section-module colimits. -/
 @[instance] theorem section_hasExactSequentialColimits (X : Scheme.{u}) :
     HasExactColimitsOfShape ℤ (modules Λ X) := by
-  sorry
+  exact HasExactColimitsOfShape.of_codomain_equivalence ℤ (equivalence Λ X)
 
 /-- The canonical derived adjunction of the ordinary ringed module adjunction.
 Its left adjoint is expressed by exact localization using the canonical comparison.
