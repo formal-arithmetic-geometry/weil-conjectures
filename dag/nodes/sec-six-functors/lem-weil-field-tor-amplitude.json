@@ -46,9 +46,8 @@
    }
   },
   {
-   "text": "Fix any sheaf $M$ of $F_Y$-modules in degree zero. Choose a complex representing $K_F$ and a K-flat resolution $P^\\bullet$ of that complex by [lem-pc-kflat-resolution], with the site $Y_{\\mathrm{proet}}$ and ring sheaf $F_Y$. By [def-weil-derived-tensor], $P^\\bullet\\otimes_{F_Y}M$ represents $K_F\\otimes^L_{F_Y}M$. Apply [lem-exc-constant-field-sheaf-tensor-cohomology] with $\\kappa=F$, $C^\\bullet=P^\\bullet$ and $N=M$. Its hypotheses concern an arbitrary small site, an arbitrary field and an arbitrary module sheaf, so it applies on the chosen small pro-etale site without a constructibility or finite-dimensionality hypothesis on $M$. Since $P^\\bullet$ represents $K_F$, it gives\n$$\\mathcal H^r(K_F\\otimes^L_{F_Y}M)\\cong\\mathcal H^r(P^\\bullet)\\otimes_{F_Y}M\\cong\\mathcal H^r(K_F)\\otimes_{F_Y}M.$$\nFor $r\\notin[a,b]$, Step 2 makes the last sheaf zero: every local tensor generator with first component in the zero module is zero. The interval is independent of $M$, so this is Tor amplitude in $[a,b]$ by [def-weil-proetale-tor-amplitude].",
+   "text": "Fix any representative L of the realized object K_F, any quasi-isomorphism f:P→L with P K-flat, and any degree-zero module sheaf M, as quantified by def-weil-proetale-tor-amplitude. The derived homology comparison and f identify H^i(P) with H^i(K_F). Apply lem-exc-constant-field-sheaf-tensor-cohomology to P and M over the lifted constant field. Outside the interval from Step 2 its source H^i(P) tensor M is zero. The localization tensor and the sectionwise sheafified tensor are naturally isomorphic (compose the sheafification counit isomorphism, functorial right tensoring, the monoidal sheafification comparison, and the sectionwise presheaf tensor isomorphism; each is natural). The single-factor total-tensor comparison identifies P tensor M[0] with this termwise tensor. Finally the standard derived homology comparison gives the vanishing in def-weil-proetale-tor-amplitude. This proves every quantified resolution test directly; no new K-flat resolution is chosen.",
    "uses": [
-    "lem-pc-kflat-resolution",
     "def-weil-derived-tensor",
     "lem-exc-constant-field-sheaf-tensor-cohomology",
     "def-weil-proetale-tor-amplitude"
@@ -63,7 +62,6 @@
  "proof_deps": [
   "def-weil-finite-tor-amplitude",
   "lem-sf-field-stage-ordinary-realization",
-  "lem-pc-kflat-resolution",
   "def-weil-derived-tensor",
   "lem-exc-constant-field-sheaf-tensor-cohomology",
   "def-weil-proetale-tor-amplitude"
@@ -71,7 +69,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
-  "place": "Proof, with the missing realization and sheaf-level tensor-cohomology comparison isolated as cited statements"
+  "place": "Proof, implemented using the quantified K-flat representative tests, constant-field tensor-cohomology, and the proved single-factor total-tensor comparison"
  },
  "mathlib_searches": [
   {
@@ -169,7 +167,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
   "lem-exc-constant-field-sheaf-tensor-cohomology"
  ],
  "reviewed": {
@@ -198,5 +195,15 @@
   "group": "Q102",
   "result": "fix",
   "note": "Review written to review.md. Complete fixes add the missing proof docstring, proof imports, and report evidence. The theorem signature is unchanged; original and corrected modules compile successfully. No substantive defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-bbb64",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T132227-L-1203898",
+  "kind": "proof",
+  "note": "independent cc review: delivered FieldTorAmplitude.lean (signature identical to the node's lean.statement, proof complete) with the node proof/proof_deps, the unit realized list (empty), axioms (sorryAx only via the cited exists_constantFieldTensorCohomology and the statement dependency exists_ordinaryFieldRealization), and the compile of the importer WeilFourierInversion"
  }
 }

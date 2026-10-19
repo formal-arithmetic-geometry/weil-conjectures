@@ -17413,3 +17413,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/B9/Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage (stage 3; reviewer PASS; first push; landing 20261019T132224-L-1202871 (proof); batch 20261019T132218; modules 1; new nodes 3)
 - 13:22 L: merged deliver/C1/Sheaf.Paper.ZlFrobeniusCompactSupportComparison (stage 3; reviewer PASS; first push; landing 20261019T132225-L-1203258 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/C7/Sheaf.AlgebraicGeometry.ProEtalePairFlasque (stage 3; reviewer PASS; first push; landing 20261019T132226-L-1203574 (interface); batch 20261019T132218; modules 2; new nodes 1)
+- 13:22 L: merged deliver/D3/Sheaf.Paper.FieldTorAmplitude (stage 3; reviewer PASS; first push; landing 20261019T132227-L-1203898 (proof); batch 20261019T132218; modules 1; new nodes 0; change records: coord/changes/D3-field-tor-amplitude-proof-context.md)
