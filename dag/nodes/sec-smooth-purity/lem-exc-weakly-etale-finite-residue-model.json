@@ -1,0 +1,160 @@
+{
+ "id": "lem-exc-weakly-etale-finite-residue-model",
+ "kind": "statement",
+ "title": "Finite normal residue models for weakly etale Nagata algebras",
+ "statement": "Let A and B be commutative Noetherian rings [def-weil-pbc-noetherian-ring], f:A->B weakly etale [def-weil-pbc-ind-etale-algebra], and A Nagata [def-weil-pbc-nagata-ring]. For any prime q of B and finite extension L/kappa(q), there is a B-subalgebra D of L, finite over B and an integrally closed domain [def-weil-pbc-normal-ring], with fraction field L. Moreover there is a domain R finite over A and an injective weakly etale map R->D. R can be chosen in the universe of A; no finiteness of kappa(q)/kappa(f^-1(q)) is assumed.",
+ "source": {
+  "document": "Silvio Greco, Two theorems on excellent rings; Stacks Project, Algebra and More on Algebra",
+  "place": "Greco Theorem 5.3(ii), pp. 146–147, normalization construction in the existing parent node steps 3–7; Stacks Tags 092Q, 0C22, 030C for field fibres, normality ascent and normal factors. The finite-generator and fraction-field glue is written out in this node."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "For p=f^-1(q), base change to kappa(p). The fibre is absolutely flat. Localize the fibre at the kernel of its map to kappa(q): the localization is a weakly etale field extension, hence algebraic. Images of B are integral over kappa(p); their fractions give algebraicity of kappa(q). Adjoin a finite kappa(q)-spanning set of L over kappa(p), obtaining a finite subextension L0 with kappa(q)L0=L. Shrink L0 to Type u using Module.Finite.small and Shrink.algEquiv.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize A/p in the small finite field L0. The Nagata hypothesis makes this integral closure R finite over A/p, hence over A. The finite-extension normalization lemmas make R an integrally closed domain with fraction field L0; it is Noetherian by module finiteness.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set C=R tensor_A B. Base change makes R->C weakly etale; finite tensor base change makes C finite over B and Noetherian. Every fibre is absolutely flat, so its prime localizations are fields and are normal. Normality of prime localizations of R and flat normal-fibre ascent give normality of C.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map C to L by multiplication, with image D and kernel Q. The restriction to R is injective, so Q contracts to zero. Any prime below Q also contracts to zero. The fibre order isomorphism over the zero prime sends both to comparable primes in an absolutely flat ring, whose primes are maximal. Hence they agree, and Q is minimal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The normal Noetherian ring C is reduced and has finitely many minimal primes. The normal decomposition theorem writes it as a finite product of normal domains. A product prime selects a factor; minimality of Q identifies Q with that projection kernel. Thus D is isomorphic to a normal domain factor. The projection is localization at its coordinate idempotent, by IsLocalization.away_of_isIdempotentElem_of_mul. Composition makes R->D weakly etale and its restriction remains injective.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image D is finite over B as the surjective image of the finite B-module C. Embed its fraction field in L and call the image F. It contains images of B and fractions thereof, hence kappa(q); it contains R and its fractions, hence L0. The finite kappa(q)-spanning set chosen for L lies in L0, so F=L. Represent each element by a fraction in D, with nonzero denominator.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-weak-etale-field",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Algebra and More on Algebra",
+  "place": "Finite normalization construction from the parent proof steps 3–7, combined with Tags 092Q, 0C22 and 030C; formalized with the existing normality and decomposition declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite field extensions of residue fields of weakly etale algebras over Nagata rings have finite normal domain models",
+   "results": "{\"t\": \"2026-10-19T07:21:57Z\", \"tool\": \"leansearch\", \"query\": \"Finite field extensions of residue fields of weakly etale algebras over Nagata rings have finite normal domain models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.finite_of_finite\", \"FiniteField.instFiniteExtension\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"FiniteField.instFiniteExtension_1\"], \"digest\": \"dcb3a1b5f5971a19\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. The finite normalization construction is supplied here; existing field, normality and finite-product theorems are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of a residue field of a weakly etale algebra over a Nagata ring has a finite normal model weakly etale over a finite source algebra",
+   "results": "{\"t\": \"2026-10-19T07:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of a residue field of a weakly etale algebra over a Nagata ring has a finite normal model weakly etale over a finite source algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"fab2e860f354e1c4\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. The finite normalization construction is supplied here; existing field, normality and finite-product theorems are used."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_residue_model|Nagata.*weakly|WeaklyEtale.*[Nn]agata",
+   "results": "{\"t\": \"2026-10-19T07:23:05Z\", \"tool\": \"grep\", \"query\": \"finite_residue_model|Nagata.*weakly|WeaklyEtale.*[Nn]agata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. The finite normalization construction is supplied here; existing field, normality and finite-product theorems are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NagataJTwoOfWeaklyEtale",
+  "date": "2026-10-19",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Normalization models for weakly etale Nagata and J-2 ascent, parent node proof steps 3–7.",
+   "via": [
+    "lem-exc-weakly-etale-nagata-j2",
+    "lem-exc-weakly-etale-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WeaklyEtaleFiniteResidueModel",
+  "file": "lean/Sheaf/RingTheory/WeaklyEtaleFiniteResidueModel.lean",
+  "declaration": "RingHom.exists_finite_residue_model_of_weaklyEtale",
+  "statement": "theorem exists_finite_residue_model_of_weaklyEtale\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B]\n    [IsNoetherianRing A] [IsNoetherianRing B]\n    (f : A →+* B) (hf : f.WeaklyEtale) (hNagata : IsNagataRing A)\n    (q : Ideal B) [q.IsPrime] (L : Type v) [Field L]\n    [Algebra q.ResidueField L] [Algebra B L] [IsScalarTower B q.ResidueField L]\n    [Module.Finite q.ResidueField L] :\n    ∃ D : Subalgebra B L, Module.Finite B D ∧ IsIntegrallyClosed D ∧\n      (∀ x : L, ∃ b c : D, (c : L) ≠ 0 ∧ x = (b : L) / (c : L)) ∧\n      ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : Algebra A R),\n        Module.Finite A R ∧ ∃ (_ : Algebra R D),\n          Algebra.WeaklyEtale R D ∧ Function.Injective (algebraMap R D)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T154020-L-3027942",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T154020-L-3027942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

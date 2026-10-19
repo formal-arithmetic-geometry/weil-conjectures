@@ -28,222 +28,60 @@
  ],
  "proof": [
   {
-   "text": "First establish the field-fibre calculation, for reuse below. Let $k\\to F$ be any weakly etale algebra over a field. By [lem-weil-pbc-weak-etale-field], $F$ is reduced, every finitely generated $k$-subalgebra is finite etale, and its residue fields are separable algebraic over $k$. Apply [lem-weil-pbc-finite-algebra-is-integral] to the finite subalgebra $k[x]$, for each $x\\in F$: every element of $F$ is integral over $k$. For any prime $P$ of $F$, the domain $F/P$ is therefore algebraic over $k$. For $0\\ne z\\in F/P$, choose a monic relation of least degree. Its constant term is nonzero, since otherwise cancellation of $z$ gives a lower-degree relation. Solving this relation for $z^{-1}$ shows that $F/P$ is a field. Thus every prime of $F$ is maximal, and no two distinct primes are comparable; every prime is also minimal. Now [lem-weil-pbc-minimal-prime-reduced-localization-field] says that $F_P$ is a field for each $P$. In particular these local rings are normal domains by [def-weil-pbc-normal-ring], and regular local rings by [lem-weil-pbc-field-regular-ring]. If $F$ is Noetherian, it is consequently both normal and regular, with every prime maximal.",
+   "text": "Apply the finite normalization construction to each prime q of B and each finite extension of kappa(q). It gives D finite over B, integrally closed, with fraction field L, and an injective weakly etale map R->D from a domain R finite over A. For the Nagata clause, transport the canonical quotient fraction field to kappa(q). Since D is integral over B/q and normal with fraction field L, its elements are precisely the integral closure of B/q in L. More explicitly that integral closure embeds B-linearly into D, so it is finite over B and then over B/q. Every B/q is Japanese.",
    "uses": [
-    "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-field-regular-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 092Q (lemma-absolutely-flat-over-field), with algebra.tex Tags 00GK (lemma-finite-is-integral) and 00EU (lemma-minimal-prime-reduced-ring); elementary inverse-polynomial calculation is written out"
-   }
-  },
-  {
-   "text": "For any weakly etale map $U\\to V$ of Noetherian rings and any $U$-algebra $U'$, the affine instance of [lem-weil-pbc-weakly-etale-composition-base-change], identified by [lem-weil-pbc-affine-chart-base-change-iso], makes $U'\\to V\\otimes_U U'$ weakly etale. In particular its fibre at $p\\subset U$ is $F_p=V\\otimes_U\\kappa(p)=(U\\setminus p)^{-1}(V/pV)$. This ring is Noetherian: $V/pV$ is a cyclic finite $V$-algebra, so [lem-weil-pbc-finite-algebra-noetherian] applies, and then [lem-weil-pbc-localization-noetherian] applies. Step 1 shows that every $F_p$ is normal, regular, and has all primes maximal. Its residue fields are separable algebraic over $\\kappa(p)$. For $q\\subset V$ over $p$, the fibre prime is the extension of $q/pV$; its residue field is $\\operatorname{Frac}(V/q)=\\kappa(q)$: localizing $V/q$ first at $U\\setminus p$ and then at all its nonzero elements gives exactly the same fractions as localizing at all nonzero elements at once. Thus $\\kappa(q)/\\kappa(p)$ is algebraic, including when it is infinite.",
-   "uses": [
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-affine-chart-base-change-iso",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 094U (lemma-base-change-weakly-etale); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); algebra.tex Tag 00FN (lemma-Noetherian-permanence). Fibre fractions are displayed explicitly"
-   }
-  },
-  {
-   "text": "Fix a prime $q\\subset B$, put $p=f^{-1}(q)$, $k=\\kappa(p)=\\operatorname{Frac}(A/p)$ and $E=\\kappa(q)=\\operatorname{Frac}(B/q)$, and fix an arbitrary finite field extension $L/E$. Step 2 gives that $E/k$ is algebraic. There is a finite subextension $L_0/k$ inside $L$ with $L=EL_0$: choose a finite $E$-basis $x_1,\\ldots,x_r$ of $L$. Each $x_i$ satisfies a monic polynomial over $E$; the finitely many coefficients of these polynomials lie in a finite extension $k_1/k$ inside $E$, because adjoining finitely many algebraic elements is spanned successively by bounded powers. The ring $k_1[x_1,\\ldots,x_r]$ is finite dimensional over $k_1$ by the same bounded-power spanning argument and is a domain, hence a field: multiplication by a nonzero element is an injective endomorphism of a finite-dimensional vector space and is surjective. It is therefore a finite extension of $k$, and so is its subfield $L_0=k(x_1,\\ldots,x_r)$. Finally $EL_0=L$ since $EL_0$ contains the chosen $E$-basis. No finite degree for $E/k$ is asserted.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Agent finite-generator field calculation for the finite models used in the J-2 criterion, Tag 07PC (lemma-J-2); does not assume a finite residue extension"
-   }
-  },
-  {
-   "text": "Let $R\\subset L_0$ be the integral closure of $A/p$ in $L_0$. Since $A$ is Nagata, [def-weil-pbc-nagata-ring] gives that $A/p$ is Japanese; [def-weil-pbc-japanese-domain] gives that $R$ is finite over $A/p$, hence over $A$. The precise normalization lemma [lem-weil-pbc-integral-closure-finite-extension-normal] gives that $R$ is a normal domain with fraction field $L_0$. By [lem-weil-pbc-finite-algebra-noetherian], $R$ is Noetherian. By [lem-weil-pbc-localization-normal-domain], each prime localization of $R$ is a normal domain, so $R$ is a normal ring as required by the normality ascent lemma.",
-   "uses": [
+    "lem-exc-weakly-etale-finite-residue-model",
     "def-weil-pbc-nagata-ring",
     "def-weil-pbc-japanese-domain",
-    "lem-weil-pbc-integral-closure-finite-extension-normal",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-localization-normal-domain"
+    "lem-weil-pbc-finite-algebra-is-integral"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 032R (definition-nagata), 032F (definition-N), 034L (lemma-integral-closure-in-normal), 00FN (lemma-Noetherian-permanence), 00GY (lemma-localize-normal-domain); fraction-field clause from the cited existing normalization node"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $C=B\\otimes_A R$. Step 2 gives that $R\\to C$ is weakly etale. If $r_1,\\ldots,r_s$ generate $R$ as an $A$-module, the elements $1\\otimes r_j$ generate $C$ as a $B$-module, by expanding each pure tensor and then each sum of pure tensors. Thus $C$ is finite over the Noetherian ring $B$, and [lem-weil-pbc-finite-algebra-noetherian] makes $C$ Noetherian. Its fibre rings over $R$ are normal by step 2; the map $R\\to C$ is flat by [def-weil-pbc-ind-etale-algebra]. All five hypotheses of [lem-weil-pbc-flat-normal-fibres-noetherian-normal] are now present: $R,C$ Noetherian, flatness, normal fibres, and $R$ normal. Consequently $C$ is normal.",
+   "text": "For each finite purely inseparable residue extension use the same D and R. J-2 for A makes the regular locus of R open, since a finite A-algebra is of finite type. Pull this locus back along Spec D->Spec R. It contains the zero prime because R->D is injective and the zero-prime localization of the domain R is a field, hence regular. It is thus a nonempty open.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0C22 (lemma-normal-goes-up-noetherian); the finite base-change spanning calculation is written out"
-   }
-  },
-  {
-   "text": "The maps $B\\to B/q\\subset E\\subset L$ and $R\\subset L_0\\subset L$ agree on $A$ and give $h:C\\to L$, $b\\otimes r\\mapsto\\bar b r$. Write $Q=\\ker h$ and $D=h(C)=C/Q\\subset L$. Then $Q\\cap R=0$ and $Q\\cap B=q$. The prime $Q$ is minimal: if $Q_0\\subseteq Q$ is another prime of $C$, both avoid every nonzero element of $R$. Their extensions in $C\\otimes_R L_0$ are primes, since the quotients embed in localizations of the domains $C/Q_i$. These extensions contract back to $Q_i$: if $sc\\in Q_i$ with $0\\ne s\\in R$, primality gives $c\\in Q_i$. But the generic fibre $C\\otimes_R L_0$ has every prime maximal by step 2. The two extended primes, one contained in the other, must be equal, hence $Q_0=Q$. This proves minimality without claiming that $h$ is surjective onto $L$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Agent prime-ideal calculation from the zero-dimensional generic fibre established in step 2; compare Tag 092Q"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $C$ has finitely many minimal primes. It is reduced, since every prime localization of the normal ring $C$ is a domain and the maps to those localizations are jointly injective by [lem-weil-pbc-prime-localizations-jointly-injective]. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to obtain $C\\cong\\prod_{i=1}^t C_i$ with each $C_i$ a normal domain. A prime in a finite product chooses one factor: of the orthogonal idempotents $e_i$ summing to $1$, exactly one is outside a prime; all other factors vanish in the quotient. Since $Q$ is minimal, its prime in the selected domain factor is $(0)$. Thus $D=C/Q$ is that normal domain factor. It is finite over $B/q$, generated by the images of $1\\otimes r_j$. Its fraction field inside $L$ contains $E$ because it contains $B/q$, and contains $L_0$ because it contains $R$. It therefore equals $EL_0=L$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-prime-localizations-jointly-injective",
-    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00FR (lemma-Noetherian-irreducible-components) and 030C (lemma-characterize-reduced-ring-normal), together with the source of lem-weil-pbc-prime-localizations-jointly-injective; product-prime and fraction-field identifications are written out"
-   }
-  },
-  {
-   "text": "The finite algebra $D$ is integral over $B/q$ by [lem-weil-pbc-finite-algebra-is-integral]. Conversely any $x\\in L$ integral over $B/q$ satisfies the same monic polynomial over the larger subring $D$, so lies in $D$, since $D$ is normal with fraction field $L$. Therefore $D$ is exactly the integral closure of $B/q$ in $L$, and it is finite over $B/q$. The prime $q$ and finite extension $L/E$ were arbitrary. By [def-weil-pbc-japanese-domain] every $B/q$ is Japanese. With the assumed Noetherianity of $B$, [def-weil-pbc-nagata-ring] gives that $B$ is Nagata. This part of the argument has not needed J-2.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "def-weil-pbc-japanese-domain",
-    "def-weil-pbc-nagata-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00GK (lemma-finite-is-integral), 032F (definition-N), 032R (definition-nagata); equality with the integral closure is proved in the step"
-   }
-  },
-  {
-   "text": "Retain the construction for the arbitrary $q$ and $L/E$. The finite $A$-algebra $R$ is of finite type: its finite module generators also generate it as an algebra. Since $A$ is J-2, [def-exc-excellent-ring] makes $\\operatorname{Reg}(R)$ open. It contains the zero prime because $R_{(0)}=L_0$ is a regular field by [lem-weil-pbc-field-regular-ring]. By [lem-weil-pbc-spec-localization-away-basic-open], choose $0\\ne a\\in R$ with $D_R(a)\\subseteq\\operatorname{Reg}(R)$.",
-   "uses": [
+    "lem-exc-weakly-etale-finite-residue-model",
     "def-exc-excellent-ring",
     "lem-weil-pbc-field-regular-ring",
-    "lem-weil-pbc-spec-localization-away-basic-open"
+    "lem-weil-pbc-finite-algebra-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07P7 (definition-J); algebra.tex Tags 00E0 (lemma-Zariski-topology), 00E4 (lemma-standard-open)"
-   }
+   "elementary": false
   },
   {
-   "text": "For any prime $P$ of $R_a$, apply part (2) of [lem-weil-pbc-localization-prime-residue-field-iso] with $A=R$, $W=\\{1,a,a^2,\\ldots\\}$ and $A\\prime=R_a$. It identifies $(R_a)_P$ with $R_p$, where $p$ is the contracted prime. The image of $a$ is a unit, so $a\\notin p$ and $R_p$ is regular local by step 9. The ring $R_a$ is Noetherian by [lem-weil-pbc-localization-noetherian]; hence $R_a$ is regular by [def-weil-regular-scheme].",
+   "text": "All fibres of R->D are absolutely flat weakly etale field algebras. They are Noetherian, as quotients of localizations of D, and their prime localizations are fields, hence regular. For any q in the pulled-back open, localize the flat map at q and its contraction. Identify its closed fibre with the localization of the corresponding fibre ring via Ideal.Fiber.algEquivAux₂. Apply flat local regularity ascent to get regularity of D_q.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-regular-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00E3 (lemma-spec-localization), 00C9 (item-localization-localization), 00FN (lemma-Noetherian-permanence)"
-   }
-  },
-  {
-   "text": "The ring $C_a$ is Noetherian by [lem-weil-pbc-localization-noetherian]. The map $R_a\\to C_a=R_a\\otimes_R C$ is weakly etale by step 2, flat by [def-weil-pbc-ind-etale-algebra], and has regular fibres by step 2. The base $R_a$ is regular by step 10. All hypotheses of [lem-weil-pbc-regular-map-ascent] therefore hold, so $C_a$ is regular.",
-   "uses": [
-    "lem-weil-pbc-localization-noetherian",
     "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-regular-map-ascent"
+    "lem-weil-pbc-field-regular-ring",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031E (lemma-flat-over-regular-with-regular-fibre)"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $C\\cong D\\times H_0$ using step 7 and let the image of $a$ be $(a_D,a_H)$. Localizing this product gives $C_a\\cong D_{a_D}\\times (H_0)_{a_H}$: the map sends $(d,h)/a^n$ to $(d/a_D^n,h/a_H^n)$; the inverse sends $(d/a_D^n,h/a_H^m)$ to $(d a_D^m,h a_H^n)/a^{n+m}$. These fraction formulas respect the localization equivalence relation and are inverse by multiplication of denominators. Put $H=(H_0)_{a_H}$ and write $D_a=D_{a_D}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Elementary fraction calculation for localization of the finite product from step 7"
-   }
-  },
-  {
-   "text": "For a prime $\\mathfrak t$ of $D_a$, apply [lem-weil-pbc-product-prime-localization] to the two factors in step 12, selecting $D_a$. It identifies $(D_a)_{\\mathfrak t}$ with $(C_a)_{\\mathfrak t\\times H}$, which is regular local since $C_a$ is regular. Also $D_a$ is a cyclic quotient algebra of the Noetherian ring $C_a$, so [lem-weil-pbc-finite-algebra-noetherian] makes it Noetherian. By [def-weil-regular-scheme], $D_a$ is regular.",
-   "uses": [
-    "lem-weil-pbc-product-prime-localization",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "def-weil-regular-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0CYA (lemma-finite-product-normal, local-ring calculation); Tag 00FN (lemma-Noetherian-permanence)"
-   }
-  },
-  {
-   "text": "The image of $a$ in $D\\subset L$ is nonzero. For a prime $\\mathfrak d$ of $D$ avoiding $a$, part (1) of [lem-weil-pbc-localization-prime-residue-field-iso] gives the prime $\\mathfrak dD_a$ with contraction $\\mathfrak d$; part (2) identifies $D_{\\mathfrak d}$ with $(D_a)_{\\mathfrak dD_a}$. The latter is regular local by step 13. By [lem-weil-pbc-spec-localization-away-basic-open], $D_D(a)$ is open; it contains $(0)$ and all its local rings are regular local. This supplies the required nonempty regular open in $\\operatorname{Spec}D$.",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-spec-localization-away-basic-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00E3 (lemma-spec-localization), 00C9 (item-localization-localization), 00E4 (lemma-standard-open)"
-   }
-  },
-  {
-   "text": "In particular, for every prime $q\\subset B$ and every finite purely inseparable extension $L/\\kappa(q)$, steps 3–7 and 9–14 produce the $B$-subalgebra $D\\subset L$, finite as a $B$-module, with fraction field exactly $L$ and a nonempty open subset of its spectrum consisting of regular local rings. (The construction works for all finite extensions, so it applies to these.) These are exactly the hypotheses, with $R=B$, of [lem-exc-j2-residue-field-criterion]. Since $B$ is Noetherian by assumption, that lemma proves that $B$ is J-2. Combining with step 8 gives both requested clauses. If $B$ is the zero ring there are no primes; the Japanese conditions and the criterion are vacuous, and every unital $B$-algebra is zero, so the same conclusion holds.",
+   "text": "The finite models D have fraction field L and a nonempty regular open. Apply the residue-field criterion for J-2. Combine this conclusion with the Nagata clause. The case B=0 has no primes and is covered by the same quantified statements.",
    "uses": [
     "lem-exc-j2-residue-field-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PC (lemma-J-2), implication (4) implies (1)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field",
-  "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-field-regular-ring",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-affine-chart-base-change-iso",
-  "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-weakly-etale-finite-residue-model",
   "def-weil-pbc-nagata-ring",
   "def-weil-pbc-japanese-domain",
-  "lem-weil-pbc-integral-closure-finite-extension-normal",
-  "lem-weil-pbc-localization-normal-domain",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-prime-localizations-jointly-injective",
-  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-finite-algebra-is-integral",
   "def-exc-excellent-ring",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-regular-map-ascent",
-  "lem-weil-pbc-product-prime-localization",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
   "lem-exc-j2-residue-field-criterion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Agent proof of Greco Theorem 5.3(ii) using Stacks 092Q, 0C22, 030C and 07PC: finite normalization models and a regular principal open. The shared literature tree has no document copies; authoritative online sources were read and are listed as WANTED in report.md. This is not claimed to reproduce Greco 1971, which was not available."
+  "document": "Stacks Project, Algebra and More on Algebra",
+  "place": "The original finite normalization construction (steps 3–7) is proved in the new finite-residue-model lemma; Nagata follows by integral closedness, and J-2 by Tag 07PC and local regularity ascent Tag 031E on the inverse image of the regular locus. No principal-open localization is required."
  },
  "mathlib_searches": [
   {
@@ -453,23 +291,10 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-weak-etale-field",
   "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field",
   "lem-weil-pbc-field-regular-ring",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-affine-chart-base-change-iso",
   "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-integral-closure-finite-extension-normal",
-  "lem-weil-pbc-localization-normal-domain",
-  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-prime-localizations-jointly-injective",
-  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-regular-map-ascent",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
+  "lem-weil-pbc-localization-noetherian"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -508,5 +333,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T154020-L-3027942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

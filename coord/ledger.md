@@ -17474,3 +17474,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/M2/Sheaf.Paper.EtaleLocallyClosedShriek (stage 3; reviewer PASS; first push; landing 20261019T154016-L-3027227 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/M3/Sheaf.AlgebraicGeometry.ProperSmoothCurvesFiniteModule (stage 3; reviewer PASS; first push; landing 20261019T154017-L-3027457 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/P1/Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre (stage 3; reviewer PASS; first push; landing 20261019T154019-L-3027632 (interface); batch 20261019T153958; modules 5; new nodes 4)
+- 15:40 L: merged deliver/P5/Sheaf.RingTheory.NagataJTwoOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T154020-L-3027942 (interface); batch 20261019T153958; modules 2; new nodes 1)

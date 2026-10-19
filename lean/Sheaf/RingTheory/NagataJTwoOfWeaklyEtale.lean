@@ -9,30 +9,14 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import Sheaf.RingTheory.NagataRing
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.WeaklyEtaleField
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.RingTheory.WeaklyEtaleFiniteResidueModel
+import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import Sheaf.RingTheory.JTwoResidueFieldCriterion
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.CategoryTheory.MorphismProperty.Composition
-import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.Localization.Integral
-import Sheaf.RingTheory.NormalOfFlatNormalFibers
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.Spectrum.Maximal.Localization
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.RingTheory.RegularMapAscent
-import Sheaf.RingTheory.JTwoResidueFieldCriterion
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.IndEtaleUniverseTransport
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-!
 # Nagata and J-2 ascent along weakly etale homomorphisms
@@ -49,6 +33,127 @@ set_option autoImplicit false
 universe u v
 
 namespace RingHom
+
+private theorem regularAt_of_flat_of_regular_fibers
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
+    [IsNoetherianRing S] (q : Ideal S) [q.IsPrime]
+    (hreg : IsRegularLocalRing
+      (Localization.AtPrime (q.comap (algebraMap R S))))
+    (hflat : (algebraMap R S).Flat)
+    (hfibres : ∀ (p : Ideal R) [p.IsPrime], IsRegularRing (p.Fiber S)) :
+    IsRegularLocalRing (Localization.AtPrime q) := by
+  have : IsRegularLocalRing
+      (Localization.AtPrime (q.comap (algebraMap R S))) := hreg
+  have hq : q.IsPrime := inferInstance
+  let p := q.comap (algebraMap R S)
+  have hp : p.IsPrime := Ideal.comap_isPrime _ q
+  have : Module.Flat R S := flat_algebraMap_iff.mp hflat
+  have : q.LiesOver p := ⟨rfl⟩
+  have : IsRegularRing (p.Fiber S) := hfibres p
+  obtain ⟨Q, hQ⟩ : ∃ Q : PrimeSpectrum (p.Fiber S),
+      Q.asIdeal.comap Algebra.TensorProduct.includeRight = q := by
+    let x : PrimeSpectrum.comap (algebraMap R S) ⁻¹' {⟨p, hp⟩} :=
+      ⟨⟨q, hq⟩, rfl⟩
+    refine ⟨PrimeSpectrum.preimageEquivFiber R S ⟨p, hp⟩ x, ?_⟩
+    exact congrArg (fun x ↦ x.1.asIdeal)
+      ((PrimeSpectrum.preimageEquivFiber R S ⟨p, hp⟩).left_inv x)
+  let f := Localization.localRingHom p q (algebraMap R S) rfl
+  let J := (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map f
+  have hJ : J = (p.map (algebraMap R S)).map
+      (algebraMap S (Localization.AtPrime q)) := by
+    dsimp only [J]
+    rw [← IsLocalization.AtPrime.map_eq_maximalIdeal p, Ideal.map_map, Ideal.map_map]
+    apply congrArg (fun g : R →+* Localization.AtPrime q ↦ p.map g)
+    ext x
+    exact Localization.localRingHom_to_map p q (algebraMap R S) rfl x
+  have transport (r t : Ideal S) [r.IsPrime] [t.IsPrime] (hrt : r = t) :
+      (Localization.AtPrime r ⧸ (p.map (algebraMap R S)).map
+        (algebraMap S (Localization.AtPrime r))) ≃+*
+      (Localization.AtPrime t ⧸ (p.map (algebraMap R S)).map
+        (algebraMap S (Localization.AtPrime t))) := by
+    subst t
+    exact RingEquiv.refl _
+  have e : Localization.AtPrime Q.asIdeal ≃+* (Localization.AtPrime q ⧸ J) :=
+    (Ideal.Fiber.algEquivAux₂ p Q.asIdeal).toRingEquiv |>.trans
+      ((transport _ _ hQ).trans (Ideal.quotientEquivAlgOfEq S hJ.symm).toRingEquiv)
+  have hclosed : IsRegularLocalRing (Localization.AtPrime q ⧸ J) :=
+    IsRegularLocalRing.of_ringEquiv e
+  exact IsRegularLocalRing.of_flat_of_regular_closedFiber f
+    (hflat.localRingHom q p rfl) hclosed
+
+private theorem regular_fibers_of_weaklyEtale
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
+    [IsNoetherianRing S] [Algebra.WeaklyEtale R S]
+    (p : Ideal R) [p.IsPrime] : IsRegularRing (p.Fiber S) := by
+  have : Algebra.WeaklyEtale p.ResidueField (p.Fiber S) := inferInstance
+  have : Ring.AbsolutelyFlat (p.Fiber S) :=
+    Ring.AbsolutelyFlat.of_flat_lmul' p.ResidueField (p.Fiber S)
+      (Algebra.WeaklyEtale.flat_lmul' p.ResidueField (p.Fiber S))
+  have : IsNoetherianRing (Localization (Algebra.algebraMapSubmonoid S p.primeCompl)) :=
+    IsLocalization.isNoetherianRing (Algebra.algebraMapSubmonoid S p.primeCompl) _
+      inferInstance
+  have : IsNoetherianRing (p.Fiber S) :=
+    letI : Algebra S (p.Fiber S) := Algebra.TensorProduct.rightAlgebra
+    isNoetherianRing_of_ringEquiv _ (Ideal.Fiber.algEquivQuotient (S := S) p).toRingEquiv.symm
+  apply isRegularRing_iff.mpr
+  intro q hq
+  let : Field (Localization.AtPrime q) :=
+    (Ring.AbsolutelyFlat.isField_of_isLocalization_prime
+      (p.Fiber S) q (Localization.AtPrime q)).toField
+  infer_instance
+
+private theorem exists_nonempty_regular_open_of_injective_weaklyEtale
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsDomain R] [IsDomain S]
+    [Algebra R S] [IsNoetherianRing S] [Algebra.WeaklyEtale R S]
+    (hinj : Function.Injective (algebraMap R S))
+    (hopen : IsOpen {p : PrimeSpectrum R |
+      IsRegularLocalRing (Localization.AtPrime p.asIdeal)}) :
+    ∃ U : Set (PrimeSpectrum S), IsOpen U ∧ U.Nonempty ∧
+      ∀ q ∈ U, IsRegularLocalRing (Localization.AtPrime q.asIdeal) := by
+  let p₀ : PrimeSpectrum R := ⟨⊥, Ideal.isPrime_bot⟩
+  have hreg₀ : IsRegularLocalRing (Localization.AtPrime p₀.asIdeal) := by
+    let : Field (Localization.AtPrime p₀.asIdeal) := IsField.toField <| by
+      simp [p₀, IsLocalRing.isField_iff_maximalIdeal_eq, ← Localization.AtPrime.map_eq_maximalIdeal]
+    infer_instance
+  let U := PrimeSpectrum.comap (algebraMap R S) ⁻¹'
+    {p : PrimeSpectrum R | IsRegularLocalRing (Localization.AtPrime p.asIdeal)}
+  refine ⟨U, hopen.preimage (PrimeSpectrum.continuous_comap _), ?_, ?_⟩
+  · refine ⟨⟨⊥, Ideal.isPrime_bot⟩, ?_⟩
+    have heq : (⊥ : Ideal S).comap (algebraMap R S) = (⊥ : Ideal R) :=
+      (RingHom.injective_iff_ker_eq_bot _).mp hinj
+    have heq' : PrimeSpectrum.comap (algebraMap R S)
+        ⟨⊥, Ideal.isPrime_bot⟩ = p₀ := PrimeSpectrum.ext heq
+    change IsRegularLocalRing (Localization.AtPrime
+      (PrimeSpectrum.comap (algebraMap R S) ⟨⊥, Ideal.isPrime_bot⟩).asIdeal)
+    rw [heq']
+    exact hreg₀
+  · intro q hq
+    exact regularAt_of_flat_of_regular_fibers q.asIdeal hq
+      (RingHom.flat_algebraMap_iff.mpr inferInstance) regular_fibers_of_weaklyEtale
+
+private theorem finite_integralClosure_of_normal_finite_model
+    {B : Type v} [CommRing B] [IsNoetherianRing B]
+    (q : Ideal B) [q.IsPrime] (L : Type v) [Field L]
+    [Algebra (B ⧸ q) L] [Algebra B L] [IsScalarTower B (B ⧸ q) L]
+    (D : Subalgebra B L) [Module.Finite B D] [IsIntegrallyClosed D]
+    (hfrac : ∀ x : L, ∃ b c : D, (c : L) ≠ 0 ∧ x = (b : L) / (c : L)) :
+    Module.Finite (B ⧸ q) (integralClosure (B ⧸ q) L) := by
+  have : IsFractionRing D L := IsFractionRing.of_field D L fun x ↦ by
+    obtain ⟨b, c, _, hbc⟩ := hfrac x
+    exact ⟨b, c, hbc⟩
+  have hmem (x : integralClosure (B ⧸ q) L) : (x : L) ∈ D := by
+    have hx : _root_.IsIntegral B (x : L) := isIntegral_trans _ x.property
+    obtain ⟨d, hd⟩ := (isIntegrallyClosed_iff L).mp
+      (inferInstance : IsIntegrallyClosed D) (hx.tower_top (A := D))
+    exact hd ▸ d.property
+  let j : integralClosure (B ⧸ q) L →ₗ[B] D :=
+    { toFun := fun x ↦ ⟨x, hmem x⟩
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun _ _ ↦ rfl }
+  have : Module.Finite B (integralClosure (B ⧸ q) L) :=
+    Module.Finite.of_injective j (fun x y h ↦ Subtype.ext
+      (show (x : L) = (y : L) from congrArg (fun d : D ↦ (d : L)) h))
+  exact Module.Finite.of_restrictScalars_finite B (B ⧸ q) _
 
 /-- Nagata and J-2 ascend together along a weakly etale map of Noetherian rings.
 J-2 is expanded exactly as the open-regular-locus clause of `IsQuasiExcellent`.
@@ -178,6 +283,42 @@ theorem isNagataRing_and_jTwo_of_weaklyEtale
     IsNagataRing B ∧
       ∀ (C : Type v) [CommRing C] [Algebra B C] [Algebra.FiniteType B C],
         IsOpen {p : PrimeSpectrum C | IsRegularLocalRing (Localization.AtPrime p.asIdeal)} := by
-  sorry
+  refine ⟨⟨inferInstance, ?_⟩, ?_⟩
+  · intro q _ L _ _ _ _ _
+    let e : q.ResidueField ≃ₐ[B ⧸ q] FractionRing (B ⧸ q) :=
+      IsLocalization.algEquiv (nonZeroDivisors (B ⧸ q)) q.ResidueField
+        (FractionRing (B ⧸ q))
+    let : Algebra B L := ((algebraMap (B ⧸ q) L).comp (Ideal.Quotient.mk q)).toAlgebra
+    have : IsScalarTower B (B ⧸ q) L := IsScalarTower.of_algebraMap_eq' rfl
+    let : Algebra q.ResidueField L :=
+      ((algebraMap (FractionRing (B ⧸ q)) L).comp e.toRingHom).toAlgebra
+    have : IsScalarTower B q.ResidueField L := IsScalarTower.of_algebraMap_eq' (by
+      ext b
+      change algebraMap (B ⧸ q) L (Ideal.Quotient.mk q b) =
+        algebraMap (FractionRing (B ⧸ q)) L (e (algebraMap B q.ResidueField b))
+      rw [← Ideal.algebraMap_quotient_residueField_mk, e.commutes,
+        IsScalarTower.algebraMap_apply (B ⧸ q) (FractionRing (B ⧸ q)) L])
+    have : Module.Finite q.ResidueField L :=
+      Module.Finite.of_equiv_equiv e.symm.toRingEquiv (RingEquiv.refl L) (by
+        ext x
+        change algebraMap (FractionRing (B ⧸ q)) L (e (e.symm x)) = _
+        simp)
+    obtain ⟨D, hDfinite, hDnormal, hDfrac, _⟩ :=
+      exists_finite_residue_model_of_weaklyEtale f hf hNagata q L
+    have : Module.Finite B D := hDfinite
+    have : IsIntegrallyClosed D := hDnormal
+    exact finite_integralClosure_of_normal_finite_model q L D hDfrac
+  · intro C _ _ _
+    apply isOpen_regularLocus_of_residueField_finite_models.{v, v} B
+    intro q _ L _ _ _ _ _ _
+    obtain ⟨D, hDfinite, _, hDfrac, R, hRring, hRdomain, hRalg, hRfinite,
+        hRDalg, hRDwe, hRDinj⟩ :=
+      exists_finite_residue_model_of_weaklyEtale f hf hNagata q L
+    have : Module.Finite B D := hDfinite
+    have : Module.Finite A R := hRfinite
+    have : IsNoetherianRing D := IsNoetherianRing.of_finite B D
+    have : Algebra.FiniteType A R := inferInstance
+    exact ⟨D, hDfinite, hDfrac,
+      exists_nonempty_regular_open_of_injective_weaklyEtale hRDinj (hJTwo R)⟩
 
 end RingHom
