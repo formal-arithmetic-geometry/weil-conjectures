@@ -1,0 +1,135 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+  "place": "Proof (1), coefficient presentation transport needed before applying canonical generation"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+  "place": "Proof (1), transport of the canonical generation theorem along the given ring-object isomorphism"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FieldTensor",
+  "date": "2026-10-19",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-field-tensor",
+   "place": "Proof (1), coefficient presentation transport needed before applying canonical generation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-field",
+ "id": "lem-sf-constructible-coefficient-transport",
+ "title": "Constructible coefficient presentation transport",
+ "statement": "Let $X$ be any scheme and let $\\Lambda,\\Gamma$ be commutative condensed ring objects [sk-def-sfb-condensed-ring] with a ring-object isomorphism $i:\\Lambda\\simeq\\Gamma$. There exists an equivalence $e:D(\\operatorname{Mod}_{\\Lambda_X})\\simeq D(\\operatorname{Mod}_{\\Gamma_X})$ whose functor is strong monoidal for the derived tensors [sk-def-sfb-derived-tensor-hom], and such that $e(K)$ is bounded constructible with finite constant models [sk-def-sfb-constructible] if and only if $K$ is. No rationality or characteristic hypothesis is needed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Pull i and its inverse to X. Restriction of scalars along these isomorphisms gives inverse additive exact module equivalences. Apply the existing exact-equivalence derived-category construction.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar squares commute with inverse image from the point and with restriction to each pro-etale covering member. A finite presentation transports to the same finite presentation with entries changed by i, because the regular module transports to the regular module and the equivalences preserve finite sums and cokernels. Thus finite constant local models correspond on the same covers and strata, and in the affine-local convention on each affine open. Exactness identifies cohomology and preserves boundedness. This proves the constructibility biconditional.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction equivalence along the inverse ring isomorphism is strong monoidal and preserves flat objects. The existing residue-derived monoidal construction and the comparison between the left derived functor and the exact termwise functor give a strong monoidal structure on the induced derived functor. Use the derived equivalence unit to prove reflection of bounded constructibility.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of condensed coefficient ring objects induces an exact equivalence on derived sheaf modules preserving constructibility and locally closed lisse generators",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.isDiscrete_tfae, LightCondMod.LocallyConstant.functorIsoDiscrete, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CondensedSet.LocallyConstant.iso, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, instAbelianCondensedMod",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"IsIso\"",
+   "results": "0 hits: ",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "constantModelBoundedConstructible|coefficientHeartLocallyClosedExtension",
+   "results": "0 hits: ",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring object isomorphism induces a monoidal equivalence of derived module categories preserving constructibility",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, MoritaEquivalence.linear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.mapDerivedCategory",
+   "verdict": "Generic exact derived functors and linearity; no constructibility-preserving monoidal coefficient equivalence.",
+   "date": "2026-10-19"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstructibleCoefficientTransport",
+  "file": "lean/Sheaf/SixFunctors/ConstructibleCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleCoefficientTransport",
+  "statement": "theorem constructibleCoefficientTransport\n    (Λ Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]\n    (i : Mon.mk Λ ≅ Mon.mk Γ) (X : Scheme.{u}) :\n    ∃ e : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ≌\n      DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Γ X)),\n      Exists fun [_hmon : e.functor.Monoidal] ↦\n        ∀ K, constantModelBoundedConstructible Γ X (e.functor.obj K) ↔\n          constantModelBoundedConstructible Λ X K",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T112501-L-3944951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T112501-L-3944951",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
