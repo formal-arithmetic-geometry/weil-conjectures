@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-integral-ind-derived-stability",
+ "kind": "statement",
+ "title": "Truncation and sum stability of integral ind-constructible cohomology",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite intermediate extension in the fixed algebraic closure [def-weil-l-adic-coefficient-extension], and $k$ a field of characteristic $p_0>0$ with $p_0\\ne\\ell$. Let $X$ be a separated finite-type $k$-scheme [sk-def-sfb-dc-setting]. Write $\\Lambda=\\underline{\\mathcal O_E}$ for the continuous condensed ring of integers, $\\Lambda_X$ for its pullback to $X_{\\mathrm{pro\\acute et}}$, and $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ for its internal module category [sk-def-sfb-condensed-ring] [sk-def-sfb-pulled-back-coefficients] [sk-def-sfb-module-objects]. Let $H_X$ be the finite constant-model constructible predicate and $B_X$ the bounded constructible predicate in $D(\\mathcal A_X)$ [sk-def-sfb-constructible] [sk-def-sfb-derived-categories]. Define $\\operatorname{IndCons}_X=H_X.\\mathrm{ind}$ using small filtered diagrams in the hom universe, and $\\operatorname{Dic}_X=\\{K\\mid \\forall n\\in\\mathbf Z,\\ H^n(K)\\in\\operatorname{IndCons}_X\\}$ [def-weil-size-convention]. Then $\\operatorname{Dic}_X$ is closed under every upper good truncation $\\tau_{\\le a}$, for $a\\in\\mathbf Z$, and under every ambient coproduct indexed in the hom universe, for any colimiting cofan. Moreover $\\operatorname{Loc}(B_X)\\subseteq\\operatorname{Dic}_X$ [det-def-localizing-closure-existence] [def-kun-truncations].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (2)-(3), Dic closed under sums and truncations and containing Loc(Dbc); compactness proof (2)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-size-convention",
+  "sk-def-sfb-derived-categories",
+  "det-def-localizing-closure-existence",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the weak Serre and coproduct closure of IndCons. The homologyProperty API makes Dic replete and triangulated, and its upper truncations still belong to Dic, since the removed homology is zero.",
+   "uses": [
+    "lem-sfb-integral-ind-heart-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Grothendieck module objects admit derived coproducts and cohomology preserves them. Apply heart coproduct closure to the image cofan in each degree. For a larger existing coproduct, its nonzero indices inject into End of its vertex via the mutually orthogonal idempotents inj_i projection_i. Shrink that support and drop the zero summands. Thus the same coproduct closure holds in the object universe required by the localizing definition. Finally B_X is contained in Dic by constant filtered presentations of constructible homology, so minimality gives Loc(B_X) contained in Dic.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-sfb-integral-ind-heart-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-ind-heart-closure",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (2)-(3), Dic closed under sums and truncations and containing Loc(Dbc); compactness proof (2); categorical glue formalized by F5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor with finite cohomological dimension preserves coproducts on unbounded complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Cc]oproduct|[Cc]oproduct.*preserves",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Monoidal.lean; Mathlib/CategoryTheory/GradedObject/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper integral adic direct image cohomology upper bound 2d+1 and constructibility",
+   "results": "PrimeSpectrum.ConstructibleSetData.degBound; AdicCompletion; AdicCompletion.of_injective_iff; IsAdicComplete.casesOn; IsDedekindDomain.HeightOneSpectrum.intAdicAbv; IsDedekindDomain.HeightOneSpectrum.isNonarchimedean_adicAbv; IsAdicComplete.recOn; IsDedekindDomain.HeightOneSpectrum.isNonarchimedean_intAdicAbv",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complexes with ind constructible cohomology closed under coproducts and truncations contain the localizing closure of bounded constructible complexes",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty_truncLE|homologyProperty_isTriangulated|preservesColimitsOfShape_homologyFunctor",
+   "results": "No matches",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind constructible cohomology closed under coproducts truncation localizing closure",
+   "results": "CategoryTheory.instHasCoproductsIndOfHasFiniteCoproducts; CategoryTheory.Limits.closedUnderLimitsOfShape_walkingParallelPair_isIndObject; CategoryTheory.instHasFilteredColimitsInd; CategoryTheory.instCategoryInd; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; AlgebraicGeometry.LocallyRingedSpace.coproduct; CategoryTheory.Limits.isClosedUnderLimitsOfShape_isIndObject_walkingParallelPair; CategoryTheory.Limits.isGrothendieckAbelian_ind",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of a full weak Serre subcategory closed under kernels cokernels extensions",
+   "results": "CategoryTheory.ObjectProperty.IsSerreClass; CategoryTheory.ObjectProperty.instIsSerreClassTop; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions; CategoryTheory.ObjectProperty.isoModSerre; CategoryTheory.ObjectProperty.monoModSerre; CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperDirectSums",
+  "date": "2026-10-19",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-direct-sums",
+   "place": "Proof (2)-(3), Dic closed under sums and truncations and containing Loc(Dbc); compactness proof (2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralIndConstructibleStability",
+  "file": "lean/Sheaf/Paper/IntegralIndConstructibleStability.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralIndConstructibleStability",
+  "statement": "theorem integralIndConstructibleStability\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] :\n    let Λ := Profinite.padicIntegersRingObj ℓ E\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)\n    let S : ObjectProperty (DerivedCategory A) := fun K ↦ ∀ n : ℤ,\n      ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X)\n        ((DerivedCategory.homologyFunctor A n).obj K)\n    (∀ K : DerivedCategory A, S K → ∀ a : ℤ,\n      S ((DerivedCategory.TStructure.t.truncLE a).obj K)) ∧\n    (∀ (I : Type (u + 1)) (K : I → DerivedCategory A), (∀ i, S (K i)) →\n      ∀ c : Cofan K, IsColimit c → S c.pt) ∧\n    (∀ K : DerivedCategory A, localizingClosure (constantModelBoundedConstructible Λ X) K →\n      S K)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261019T231147-L-555911",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261019T231147-L-555911",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

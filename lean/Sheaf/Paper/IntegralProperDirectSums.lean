@@ -14,44 +14,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
+import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.Paper.IntegralProperCohomologicalBounds
+import Sheaf.Paper.IntegralIndConstructibleStability
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Paper.DerivedNakayamaResolution
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
-import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence
-import Sheaf.AlgebraicGeometry.ProperHeartContinuityDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import Sheaf.AlgebraicGeometry.ProEtaleLeftComplete
-import Sheaf.CategoryTheory.Triangulated.LeftCompleteHeartUpperBound
-import Sheaf.Paper.LocalizingClosureExistence
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.IntegralCohomologicalAdicCriterion
-import Sheaf.Paper.IntegralProperBaseChange
-import Sheaf.Paper.IntegralConstructibleHeart
 
 /-!
 # Integral proper direct image on localizing categories
@@ -117,57 +86,362 @@ def IntegralProperDirectImageAssertions
     (∀ i : I, localizingClosure C₁ (K i)) →
     ∃ c : Cofan K, Nonempty (IsColimit c) ∧ Nonempty (IsColimit (F.mapCocone c)))
 
+private theorem coproduct_isGE
+    {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
+    {I : Type*} [HasColimitsOfShape (Discrete I) (DerivedCategory A)]
+    [∀ n : ℤ, PreservesColimitsOfShape (Discrete I) (DerivedCategory.homologyFunctor A n)]
+    (K : I → DerivedCategory A) (a : ℤ)
+    (hK : ∀ i, (K i).IsGE a) : (∐ K).IsGE a := by
+  apply (DerivedCategory.isGE_iff (∐ K) a).2
+  intro q hq
+  exact (isColimitOfPreserves (DerivedCategory.homologyFunctor A q)
+    (coproductIsCoproduct K)).isZero_pt
+    (Functor.isZero _ fun i ↦ (DerivedCategory.isGE_iff (K i.as) a).1 (hK i.as) q hq)
+
+private theorem truncGE_preservesCoproducts
+    {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
+    {I : Type*} [HasColimitsOfShape (Discrete I) (DerivedCategory A)]
+    [∀ n : ℤ, PreservesColimitsOfShape (Discrete I) (DerivedCategory.homologyFunctor A n)]
+    (a : ℤ) :
+    PreservesColimitsOfShape (Discrete I) ((DerivedCategory.TStructure.t (C := A)).truncGE a) := by
+  let t := DerivedCategory.TStructure.t (C := A)
+  let T := t.truncGE a
+  let π := t.truncGEπ a
+  have hK (K : I → DerivedCategory A) : PreservesColimit (Discrete.functor K) T := by
+    let L := fun i ↦ T.obj (K i)
+    have : (∐ L).IsGE a := coproduct_isGE L a (fun i ↦ inferInstance)
+    let f : ∐ K ⟶ ∐ L := Sigma.desc (fun i ↦ π.app (K i) ≫ Sigma.ι L i)
+    let r : T.obj (∐ K) ⟶ ∐ L := t.descTruncGE f a
+    let c := sigmaComparison T K
+    have hc : IsIso c := by
+      refine ⟨⟨r, ?_, ?_⟩⟩
+      · apply Sigma.hom_ext
+        intro i
+        change Sigma.ι L i ≫ (c ≫ r) = Sigma.ι L i ≫ 𝟙 _
+        rw [← Category.assoc, ι_comp_sigmaComparison]
+        apply t.from_truncGE_obj_ext
+        simp only [Category.comp_id]
+        rw [← Category.assoc]
+        change (π.app (K i) ≫ T.map (Sigma.ι K i)) ≫ r =
+          π.app (K i) ≫ Sigma.ι L i
+        rw [← π.naturality (Sigma.ι K i)]
+        change (Sigma.ι K i ≫ (t.truncGEπ a).app (∐ K)) ≫ t.descTruncGE f a = _
+        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_desc]
+      · apply t.from_truncGE_obj_ext
+        dsimp only [r]
+        rw [← Category.assoc, t.π_descTruncGE]
+        apply Sigma.hom_ext
+        intro i
+        change Sigma.ι K i ≫ f ≫ c = Sigma.ι K i ≫ π.app (∐ K) ≫ 𝟙 _
+        calc
+          _ = π.app (K i) ≫ (Sigma.ι L i ≫ c) := by simp [f]
+          _ = π.app (K i) ≫ T.map (Sigma.ι K i) := by
+            rw [ι_comp_sigmaComparison]
+          _ = _ := by simpa using (π.naturality (Sigma.ι K i)).symm
+    exact PreservesCoproduct.of_iso_comparison T K
+  let : ∀ K : I → DerivedCategory A, PreservesColimit (Discrete.functor K) T := hK
+  exact preservesColimitsOfShape_of_discrete T
+
+
+private theorem sumsOfLowerWindow
+    {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
+    [HasCoproducts.{v} (DerivedCategory A)] [HasCoproducts.{v} (DerivedCategory B)]
+    [HasCoproducts.{v} B]
+    [∀ (I : Type v) (q : ℤ),
+      PreservesColimitsOfShape (Discrete I) (DerivedCategory.homologyFunctor A q)]
+    [∀ (I : Type v) (q : ℤ),
+      PreservesColimitsOfShape (Discrete I) (DerivedCategory.homologyFunctor B q)]
+    (S : ObjectProperty (DerivedCategory A))
+    (F : DerivedCategory A ⥤ DerivedCategory B)
+    (c : ℤ)
+    (hS : ∀ (I : Type v) (K : I → DerivedCategory A), (∀ i, S (K i)) → S (∐ K))
+    (hw : ∀ K, S K → ∀ q : ℤ,
+      IsIso ((F ⋙ DerivedCategory.homologyFunctor B q).map
+        ((DerivedCategory.TStructure.t.truncGEπ (q - c)).app K)))
+    (hb : ∀ (I : Type v) (a : ℤ) (K : I → DerivedCategory A),
+      (∀ i, (K i).IsGE a) → PreservesColimit (Discrete.functor K) F)
+    (I : Type v) (K : I → DerivedCategory A) (hK : ∀ i, S (K i)) :
+    ∃ c : Cofan K, Nonempty (IsColimit c) ∧ Nonempty (IsColimit (F.mapCocone c)) := by
+  have hcomp : IsIso (sigmaComparison F K) := by
+    apply (DerivedCategory.isIso_iff B _).2
+    intro q
+    let H := DerivedCategory.homologyFunctor B q
+    let G := F ⋙ H
+    let t := DerivedCategory.TStructure.t (C := A)
+    let T := t.truncGE (q - c)
+    let π := t.truncGEπ (q - c)
+    have : PreservesColimitsOfShape (Discrete I) T := truncGE_preservesCoproducts _
+    have : PreservesColimit (Discrete.functor (fun i ↦ T.obj (K i))) F :=
+      hb I (q - c) _ (fun i ↦ inferInstance)
+    have : PreservesColimit (Discrete.functor K ⋙ T) F :=
+      preservesColimit_of_iso_diagram F (Discrete.natIso (fun _ ↦ Iso.refl _) :
+        Discrete.functor (fun i ↦ T.obj (K i)) ≅ Discrete.functor K ⋙ T)
+    have : PreservesColimit (Discrete.functor K) (T ⋙ G) := inferInstance
+    let d := sigmaComparison (T ⋙ G) K
+    let l := Limits.Sigma.map (fun i ↦ G.map (π.app (K i)))
+    let r := G.map (π.app (∐ K))
+    have hd : IsIso d := inferInstance
+    have hl (i : I) : IsIso (G.map (π.app (K i))) := hw _ (hK i) q
+    have : IsIso l := by dsimp only [l]; infer_instance
+    have : IsIso r := hw _ (hS I K hK) q
+    have square : sigmaComparison G K ≫ r = l ≫ d := by
+      apply Sigma.hom_ext
+      intro i
+      simp only [l, d, r, ι_comp_sigmaComparison_assoc, Sigma.ι_map_assoc]
+      change G.map (Sigma.ι K i) ≫ G.map (π.app (∐ K)) =
+        G.map (π.app (K i)) ≫
+          Sigma.ι (fun i ↦ (T ⋙ G).obj (K i)) i ≫ sigmaComparison (T ⋙ G) K
+      rw [ι_comp_sigmaComparison]
+      simpa only [Functor.comp_map, ← G.map_comp, Functor.id_map] using
+        congrArg G.map (π.naturality (Sigma.ι K i))
+    have : IsIso (sigmaComparison G K ≫ r) := by rw [square]; infer_instance
+    have : IsIso (sigmaComparison G K) := IsIso.of_isIso_comp_right _ r
+    have heq : sigmaComparison G K =
+        sigmaComparison H (fun i ↦ F.obj (K i)) ≫ H.map (sigmaComparison F K) :=
+      (sigmaComparison_map_desc H (fun i ↦ F.obj (K i)) _
+        (fun i ↦ F.map (Sigma.ι K i))).symm
+    have : IsIso (sigmaComparison H (fun i ↦ F.obj (K i)) ≫
+        H.map (sigmaComparison F K)) := by rw [← heq]; infer_instance
+    exact IsIso.of_isIso_comp_left (sigmaComparison H (fun i ↦ F.obj (K i))) _
+  have : PreservesColimit (Discrete.functor K) F := PreservesCoproduct.of_iso_comparison F K
+  exact ⟨Cofan.mk (∐ K) (Sigma.ι K), ⟨coproductIsCoproduct K⟩,
+    ⟨isColimitOfPreserves F (coproductIsCoproduct K)⟩⟩
+
+private theorem smallSupport
+    {C : Type u₁} [Category.{v} C] [Preadditive C] [LocallySmall.{v} C]
+    {I : Type u₂} (K : I → C) (t : Cofan K) (ht : IsColimit t) :
+    Small.{v} {i // ¬ IsZero (K i)} := by
+  classical
+  let p (i : I) : t.pt ⟶ K i := ht.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
+  have hp (i j : I) : t.inj j ≫ p i =
+      Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
+    ht.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
+  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ t.inj i.val)
+  intro i j hij
+  apply Subtype.ext
+  by_contra hne
+  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
+  have hi : t.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
+  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
+  have hid : 𝟙 (K i.val) = 0 := by
+    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
+  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
+
+private theorem preservesCofanOnClass
+    {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D]
+    [Preadditive C] [Preadditive D] [LocallySmall.{v} C]
+    (S : ObjectProperty C) (F : C ⥤ D) [F.PreservesZeroMorphisms]
+    (hsmall : ∀ (J : Type v) (K : J → C), (∀ j, S (K j)) →
+      ∃ c : Cofan K, Nonempty (IsColimit c) ∧ Nonempty (IsColimit (F.mapCocone c)))
+    {I : Type u} (K : I → C) (hK : ∀ i, S (K i)) (t : Cofan K) (ht : IsColimit t) :
+    Nonempty (IsColimit (F.mapCocone t)) := by
+  classical
+  have := smallSupport K t ht
+  let J := {i // ¬ IsZero (K i)}
+  let U : J → C := fun i ↦ K i.val
+  let r : Cofan U := Cofan.mk t.pt (fun i ↦ t.inj i.val)
+  have hr : IsColimit r := by
+    refine Cofan.IsColimit.mk r (fun s ↦ ht.desc (Cofan.mk s.pt
+      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
+    · intro s i
+      obtain ⟨i, hi⟩ := i
+      change t.ι.app (Discrete.mk i) ≫ _ = _
+      rw [ht.fac]
+      simp only [Cofan.mk_ι_app, dif_pos hi]
+    · intro s m hm
+      apply ht.hom_ext
+      intro ⟨i⟩
+      rw [ht.fac]
+      by_cases hi : ¬ IsZero (K i)
+      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+          using hm ⟨i, hi⟩
+      · exact (not_not.mp hi).eq_of_src _ _
+  let e := (equivShrink.{v} J).symm
+  let V : Shrink.{v} J → C := fun j ↦ U (e j)
+  let r' : Cofan V := Cofan.mk t.pt (fun j ↦ r.inj (e j))
+  have hr' : IsColimit r' := (Cofan.isColimitEquivOfEquiv e r) hr
+  obtain ⟨c, ⟨hc⟩, ⟨hFc⟩⟩ := hsmall (Shrink.{v} J) V (fun j ↦ hK (e j).val)
+  have : PreservesColimit (Discrete.functor V) F :=
+    preservesColimit_of_preserves_colimit_cocone hc hFc
+  let q : Cofan (fun j ↦ F.obj (U j)) :=
+    Cofan.mk (F.obj t.pt) (fun j ↦ F.map (r.inj j))
+  have hq' : IsColimit (Cofan.mk (F.obj t.pt) (fun j ↦ F.map (r'.inj j))) :=
+    isColimitCofanMkObjOfIsColimit F V _ hr'
+  have hq : IsColimit q := (Cofan.isColimitEquivOfEquiv e q).symm hq'
+  refine ⟨{ desc := fun s ↦ hq.desc (Cofan.mk s.pt
+      (fun j ↦ s.ι.app (Discrete.mk j.val))), fac := ?_, uniq := ?_ }⟩
+  · intro s ⟨i⟩
+    by_cases hi : ¬ IsZero (K i)
+    · exact hq.fac (Cofan.mk s.pt (fun j ↦ s.ι.app (Discrete.mk j.val)))
+        (Discrete.mk ⟨i, hi⟩)
+    · exact (F.map_isZero (not_not.mp hi)).eq_of_src _ _
+  · intro s m hm
+    apply Cofan.IsColimit.hom_ext hq
+    intro i
+    exact (hm (Discrete.mk i.val)).trans
+      (hq.fac (Cofan.mk s.pt (fun j ↦ s.ι.app (Discrete.mk j.val)))
+        (Discrete.mk i)).symm
+
+private theorem mapsLocalizingOfRelativeSums
+    {C D : Type u₁} [Category.{v} C] [Category.{v} D] [LocallySmall.{v} C]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (C₁ : ObjectProperty C) (C₂ : ObjectProperty D)
+    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+    (h₁ : IsLocalizingSubcategory (localizingClosure C₁))
+    (h₂ : IsLocalizingSubcategory (localizingClosure C₂))
+    (hsmall : ∀ (I : Type v) (K : I → C),
+      (∀ i, localizingClosure C₁ (K i)) →
+      ∃ c : Cofan K, Nonempty (IsColimit c) ∧ Nonempty (IsColimit (F.mapCocone c)))
+    (hgen : ∀ K, C₁ K → localizingClosure C₂ (F.obj K)) :
+    ∀ K, localizingClosure C₁ K → localizingClosure C₂ (F.obj K) := by
+  let P : ObjectProperty C := localizingClosure C₁ ⊓
+    (localizingClosure C₂).inverseImage F
+  have := h₁.1
+  have := h₁.2.1
+  have := h₂.1
+  have := h₂.2.1
+  have hP : IsLocalizingSubcategory P := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I G hG hGP
+    let := hG
+    refine ⟨h₁.2.2 G hG (fun i ↦ (hGP i).1), ?_⟩
+    let K : I → C := fun i ↦ G.obj ⟨i⟩
+    let e : G ≅ Discrete.functor K := Discrete.natIsoFunctor
+    let t : Cofan K := (Cocone.precompose e.inv).obj (colimit.cocone G)
+    have ht : IsColimit t := (IsColimit.precomposeInvEquiv e _).symm
+      (colimit.isColimit G)
+    obtain ⟨hf⟩ := preservesCofanOnClass (localizingClosure C₁) F hsmall K
+      (fun i ↦ (hGP i).1) t ht
+    have : PreservesColimit (Discrete.functor K) F :=
+      preservesColimit_of_preserves_colimit_cocone ht hf
+    have : PreservesColimit G F := preservesColimit_of_iso_diagram F e.symm
+    have hf' : IsColimit (F.mapCocone (colimit.cocone G)) :=
+      isColimitOfPreserves F (colimit.isColimit G)
+    let hGF : HasColimit (G ⋙ F) := ⟨F.mapCocone (colimit.cocone G), hf'⟩
+    let := hGF
+    exact (localizingClosure C₂).prop_of_iso
+      (hf'.coconePointUniqueUpToIso (colimit.isColimit (G ⋙ F))).symm
+      (h₂.2.2 (G ⋙ F) hGF (fun i ↦ (hGP i).2))
+  intro K hK
+  exact (hK P hP (fun L hL ↦ ⟨fun Q hQ hCQ ↦ hCQ L hL, hgen L hL⟩)).2
+
+private theorem rightDerivedPreservesLower
+    {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
+    [EnoughInjectives A] [Abelian.HasKInjectiveResolutions A]
+    (G : A ⥤ B) [G.Additive]
+    (L : DerivedCategory A) (a : ℤ) (hL : L.IsGE a) :
+    (G.rightDerivedFunctor.obj L).IsGE a := by
+  let K : DerivedCategory.Plus A := ⟨L, ⟨a, hL⟩⟩
+  have : K.IsGE a := (DerivedCategory.Plus.isGE_ι_obj_iff K a).mp hL
+  apply (DerivedCategory.isGE_iff _ _).mpr
+  intro q hq
+  exact (G.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K a hq).of_iso
+    ((DerivedCategory.homologyFunctor B q).mapIso
+      (G.rightDerivedFunctorPlusCompatibility.app K)).symm
+
+private theorem lowerWindowOfBounds
+    {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
+    (S : ObjectProperty (DerivedCategory A))
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (c : ℤ)
+    (hupper : ∀ (L : DerivedCategory A) (b : ℤ), S L → L.IsLE b →
+      (F.obj L).IsLE (b + c))
+    (htrunc : ∀ (L : DerivedCategory A), S L → ∀ a : ℤ,
+      S ((DerivedCategory.TStructure.t.truncLE a).obj L))
+    (K : DerivedCategory A) (hK : S K) (q : ℤ) :
+    IsIso ((F ⋙ DerivedCategory.homologyFunctor B q).map
+      ((DerivedCategory.TStructure.t.truncGEπ (q - c)).app K)) := by
+  let t := DerivedCategory.TStructure.t (C := A)
+  let T := (t.triangleLEGE (q - c - 1) (q - c) (by omega)).obj K
+  let U := F.mapTriangle.obj T
+  have hU : U ∈ distTriang _ :=
+    F.map_distinguished T (t.triangleLEGE_distinguished _ _ (by omega) K)
+  have hle := hupper ((t.truncLE (q - c - 1)).obj K) (q - c - 1)
+    (htrunc K hK _) inferInstance
+  have h₀ : IsZero ((DerivedCategory.homologyFunctor B q).obj U.obj₁) :=
+    (DerivedCategory.isLE_iff _ _).1 hle _ (by omega)
+  have h₁ : IsZero ((DerivedCategory.homologyFunctor B (q + 1)).obj U.obj₁) :=
+    (DerivedCategory.isLE_iff _ _).1 hle _ (by omega)
+  have : Mono ((DerivedCategory.homologyFunctor B q).map U.mor₂) :=
+    (DerivedCategory.HomologySequence.mono_homologyMap_mor₂_iff U hU q).2
+      (h₀.eq_of_src _ _)
+  have : Epi ((DerivedCategory.homologyFunctor B q).map U.mor₂) :=
+    (DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff
+      U hU q (q + 1) rfl).2 (h₁.eq_of_tgt _ _)
+  exact isIso_of_mono_of_epi ((DerivedCategory.homologyFunctor B q).map U.mor₂)
+
+private theorem finiteWindowOfBounds
+    {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
+    (S : ObjectProperty (DerivedCategory A))
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (c : ℤ)
+    (hlower : ∀ (L : DerivedCategory A) (a : ℤ), L.IsGE a → (F.obj L).IsGE a)
+    (hupper : ∀ (L : DerivedCategory A) (b : ℤ), S L → L.IsLE b →
+      (F.obj L).IsLE (b + c))
+    (htrunc : ∀ (L : DerivedCategory A), S L → ∀ a : ℤ,
+      S ((DerivedCategory.TStructure.t.truncLE a).obj L))
+    (K : DerivedCategory A) (hK : S K) (q : ℤ) :
+    IsIso ((DerivedCategory.homologyFunctor B q).map
+      (F.map ((DerivedCategory.TStructure.t.truncLEι q).app K))) ∧
+    IsIso ((DerivedCategory.homologyFunctor B q).map
+      (F.map ((DerivedCategory.TStructure.t.truncGEπ (q - c)).app
+        ((DerivedCategory.TStructure.t.truncLE q).obj K)))) := by
+  let t := DerivedCategory.TStructure.t (C := A)
+  constructor
+  · let T := (t.triangleLEGE q (q + 1) rfl).obj K
+    let U := F.mapTriangle.obj T
+    have hU : U ∈ distTriang _ :=
+      F.map_distinguished T (t.triangleLEGE_distinguished q (q + 1) rfl K)
+    have hge : (F.obj ((t.truncGE (q + 1)).obj K)).IsGE (q + 1) :=
+      hlower _ _ inferInstance
+    have h₀ : IsZero ((DerivedCategory.homologyFunctor B (q - 1)).obj U.obj₃) :=
+      (DerivedCategory.isGE_iff _ _).1 hge _ (by omega)
+    have h₁ : IsZero ((DerivedCategory.homologyFunctor B q).obj U.obj₃) :=
+      (DerivedCategory.isGE_iff _ _).1 hge _ (by omega)
+    have : Mono ((DerivedCategory.homologyFunctor B q).map U.mor₁) :=
+      (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff
+        U hU (q - 1) q (by omega)).2 (h₀.eq_of_src _ _)
+    have : Epi ((DerivedCategory.homologyFunctor B q).map U.mor₁) :=
+      (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff U hU q).2
+        (h₁.eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi ((DerivedCategory.homologyFunctor B q).map U.mor₁)
+  · exact lowerWindowOfBounds S F c hupper htrunc _ (htrunc K hK q) q
+
 /-- Integral proper direct image has the heart bound `[0,2d+1]`, the canonical
 finite-window property, and preserves arbitrary sums on Dic and on Loc(Dbc).
 Source: blueprint main-20261015, sk-prop-int-compactness-direct-sums, all three clauses
 (blueprint: det-prop-int-compactness-direct-sums).
 
-Proof plan, following the eleven steps of the DAG:
-1. Properness gives finite type and separatedness, hence qcqs. The module pushforward
-   is left exact, and the exact coefficient-compatible pullback gives the derived
-   adjunction. Thus F = Rp_* preserves products, is triangulated, and preserves
-   lower cohomological bounds. Internal modules identify with sectionwise module
-   sheaves, which are Grothendieck abelian and have unbounded K-injective resolutions.
-2. The integral heart and proper-base-change preservation put FN in Dbc for N in Cons.
-   Finite type over the Noetherian field makes X Noetherian. The integral adic criterion,
-   integral coefficient limit, one-generator Koszul-completion reflector and two-term
-   quotient resolution identify N with the reduction tower's derived limit. The strict
-   tower theorem supplies its Roos triangle with the prescribed transitions.
-3. Each reduction N_n is the cone of pi^n on N and has cohomology in [-1,0].
-   Its first reduction is classical by the adic criterion. Quotient-resolution triangles
-   and the exact fully faithful classical comparison lift all reductions to etale
-   torsion complexes C_n with cohomology in [-1,0]. No flatness of N is assumed.
-4. The proper torsion bound gives upper bound 2d for Rp_et,* C_n. Dimension base change
-   and affine-cover dimension turn the geometric-fibre hypothesis into its fibre bound.
-   Discrete direct-image comparison and ringed-topos composition with exact coefficient
-   restriction identify the underlying abelian images, hence FN_n is at most 2d.
-5. Apply F to the Roos triangle; product preservation retains its projections and
-   transitions. Exact countable products and the derived-product theorem compute
-   these products termwise. Represent the image tower by a strict K-injective tower;
-   TR3 identifies its product cone with FN. The Milnor sequence gives upper bound
-   2d+1, and negative vanishing gives the lower bound zero.
-6. Present N in IndCons as a small filtered colimit of constructibles. Proper heart
-   continuity, then exact colimit-preserving restriction along O_Y -> p_*O_X,
-   identifies H^q FN with the filtered colimit of H^q FN_i. This proves both membership
-   in IndCons and the bound, and supplies sheaf-level direct-sum continuity.
-7. Exact countable products, the derived-product theorem and pro-etale left completeness
-   allow the class-relative heart-upper-bound lemma to extend this bound to any
-   bounded-above L in Dic, including an unbounded negative tail. Good truncations
-   remain in Dic by integral constructible compactness.
-8. Apply the upper truncation triangle at q: lower-bound preservation kills its tail
-   in degrees q-1 and q. Apply the lower triangle at q-2d-1: step 7 puts its tail
-   at most q-1. The long exact sequences give precisely the two asserted IsIso maps.
-9. Induct on a common finite cohomological interval for a family. The one-degree case
-   is step 6; summed truncation triangles and the five lemma give the induction step.
-   Exact filtered colimits make sums exact, commuting with cohomology and truncations.
-10. In each output degree q replace every summand and its sum by the common window
-    [q-2d-1,q]. Step 9 handles that bounded family. Naturality of both actual truncation
-    arrows identifies the canonical comparison, hence it is an iso in every degree
-    and therefore an iso in the derived category.
-11. Integral compactness puts Loc(Dbc_X) inside Dic. The full subcategory of objects
-    in Loc(Dbc_X) whose F-images belong to Loc(Dbc_Y) contains Dbc_X by proper
-    preservation and is replete, triangulated and sum closed by steps 1 and 10.
-    Minimality of the localizing closure proves preservation; step 10 gives its sums. -/
+Proof:
+1. Integral proper cohomological bounds supply the two heart estimates,
+   constructible preservation and the bound b+2d+1 on bounded-above Dic objects.
+   Integral ind-constructible stability supplies upper truncation and sum closure
+   of Dic and its containment of Loc(Dbc). Compatibility with bounded-below right
+   derivation gives preservation of every lower cohomological bound.
+2. Apply the triangulated direct image to the upper truncation triangle at q.
+   Lower-bound preservation kills its last vertex in degrees q-1 and q, making
+   the first actual window arrow an isomorphism on H^q. For the lower truncation
+   at q-2d-1, the upper estimate bounds the discarded vertex by q-1. The homology
+   exact sequence makes the second actual window arrow an isomorphism on H^q.
+3. For coproducts only the lower truncation at q-2d-1 is needed. It preserves sums
+   by its reflection universal property: cohomology preserves sums, so its aisle
+   is sum closed. The resulting family has a common lower bound and the existing
+   qcqs coproduct-continuity theorem applies. Naturality gives a square of canonical
+   comparison maps; three sides are isomorphisms, hence so is the fourth.
+   Homology detects isomorphisms, giving the mapped colimit cofan.
+4. Intersect Loc(Dbc_X) with the inverse image of Loc(Dbc_Y). This is replete and
+   triangulated. For an existing coproduct in the larger object universe, its
+   nonzero support injects into the small endomorphism set of its vertex via the
+   orthogonal idempotents. Shrink that support and use the small-sum result to
+   prove sum closure. Proper preservation puts every Dbc_X generator in this
+   intersection; minimality of localizingClosure gives the last two assertions. -/
 theorem integralProperDirectSums
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -187,6 +461,54 @@ theorem integralProperDirectSums
       (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X)
       (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Y)
       (CondensedRing.lowerStar (Profinite.padicIntegersRingObj ℓ E) p).rightDerivedFunctor d := by
-  sorry
+  let Λ := Profinite.padicIntegersRingObj ℓ E
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  let B := Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)
+  let F := (CondensedRing.lowerStar Λ p).rightDerivedFunctor
+  let C₁ := constantModelBoundedConstructible Λ X
+  let C₂ := constantModelBoundedConstructible Λ Y
+  let S : ObjectProperty (DerivedCategory A) := fun K ↦ ∀ n : ℤ,
+    ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X)
+      ((DerivedCategory.homologyFunctor A n).obj K)
+  have : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
+  have : HasColimitsOfSize.{u + 1, u + 1} B := IsGrothendieckAbelian.hasColimits B
+  have : HasCoproducts.{u + 1} A := fun I ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete I)
+  have : HasCoproducts.{u + 1} B := fun I ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete I)
+  have : HasCoproducts.{u + 1} (DerivedCategory A) := derived_hasCoproducts
+  have : HasCoproducts.{u + 1} (DerivedCategory B) := derived_hasCoproducts
+  obtain ⟨hC, hI, hgen, hupper⟩ :=
+    integralProperCohomologicalBounds ℓ E k p₀ hp₀ hpℓ X Y p d hd
+  obtain ⟨htrunc, hsum, hloc⟩ :=
+    integralIndConstructibleStability ℓ E k p₀ hp₀ hpℓ X
+  have hlower (K : DerivedCategory A) (a : ℤ) (hK : K.IsGE a) :
+      (F.obj K).IsGE a := rightDerivedPreservesLower _ K a hK
+  have hsums := sumsOfLowerWindow S F (2 * (d : ℤ) + 1)
+    (fun I K hK ↦ hsum I K hK _ (coproductIsCoproduct K))
+    (lowerWindowOfBounds S F _ hupper htrunc)
+    (fun I a K hK ↦ CondensedRing.condensed_boundedBelow_preservesCoproduct Λ p I a K hK)
+  have hlocsums (I : Type (u + 1)) (K : I → DerivedCategory A)
+      (hK : ∀ i, localizingClosure C₁ (K i)) :
+      ∃ c : Cofan K, Nonempty (IsColimit c) ∧ Nonempty (IsColimit (F.mapCocone c)) :=
+    hsums I K (fun i ↦ hloc _ (hK i))
+  have hX := (localizingClosure_exists Λ X C₁).2.2.2.1
+  have hY := (localizingClosure_exists Λ Y C₂).2.2.2.1
+  have hmaps := mapsLocalizingOfRelativeSums C₁ C₂ F hX hY hlocsums
+    (fun K hK P hP hCP ↦ hCP _ (hgen K hK))
+  refine ⟨?_, ?_, ?_, hsums, hmaps, hlocsums⟩
+  · intro N hN
+    obtain ⟨hc, hb⟩ := hC N hN
+    exact ⟨hc, hlower _ 0 inferInstance, hb⟩
+  · intro N hN
+    obtain ⟨hi, hb⟩ := hI N hN
+    exact ⟨hi, hlower _ 0 inferInstance, hb⟩
+  · intro K hK q
+    have he : q - (2 * (d : ℤ) + 1) = q - 2 * (d : ℤ) - 1 := by omega
+    have hw := finiteWindowOfBounds S F (2 * (d : ℤ) + 1) hlower hupper htrunc K hK q
+    refine ⟨hw.1, ?_⟩
+    exact (congrArg (fun a : ℤ ↦ IsIso ((DerivedCategory.homologyFunctor B q).map
+      (F.map ((DerivedCategory.TStructure.t.truncGEπ a).app
+        ((DerivedCategory.TStructure.t.truncLE q).obj K))))) he).mp hw.2
 
 end AlgebraicGeometry.ProEtale
