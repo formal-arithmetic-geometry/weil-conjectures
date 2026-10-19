@@ -123,8 +123,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartCanonicalHomNaturality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineChartCanonicalHomNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineChartCanonicalHomNaturality.lean",
   "declaration": "AlgebraicGeometry.affine_chart_canonical_hom_naturality",
   "declarations": [
    "AlgebraicGeometry.scalarExtensionCompOfEq",
@@ -136,7 +136,8 @@
   "statement": "theorem affine_chart_canonical_hom_naturality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    (M N : (U.X a).Modules)\n    (hMq : M.IsQuasicoherent)\n    (hNq : N.IsQuasicoherent)\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by\n      let k := rep.obj t\n      let r := Spec.map (R.map (homOfLE k.property))\n      change ModuleCat.{u} Γ(pullback r g, ⊤)\n      exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)\n    let P := B M\n    let Q := B N\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    ∃ α : ((ModuleCat.extendScalars r₀).obj P ⟶\n        (ModuleCat.extendScalars r₀).obj Q) ≃\n      ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M ⟶\n        (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N),\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        ∃ β : ((ModuleCat.extendScalars r).obj P ⟶\n            (ModuleCat.extendScalars r).obj Q) ≃\n          ((Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n            (Scheme.Modules.pullback (U.pullbackHom q a)).obj N),\n          ∀ (s : (ModuleCat.extendScalars r).obj P ⟶\n              (ModuleCat.extendScalars r).obj Q),\n            chartOrdinaryMapRecovery q p q₀ w U a M N\n              (α ((colimitScalarExtensionComp F (homOfLE htx) P).hom ≫\n                (ModuleCat.extendScalars r₁).map s ≫\n                (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s)",
   "branch": "sheaf-dag",
   "by": "P4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality retired; now WeilConjectures.AlgebraicGeometry.AffineChartCanonicalHomNaturality."
  },
  "reviewed": {
   "date": "2026-10-13",

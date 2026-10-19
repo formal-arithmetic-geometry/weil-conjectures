@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
-import Sheaf.AlgebraicGeometry.AffineTopTensorSections
+import WeilConjectures.AlgebraicGeometry.AffineTopTensorSections
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

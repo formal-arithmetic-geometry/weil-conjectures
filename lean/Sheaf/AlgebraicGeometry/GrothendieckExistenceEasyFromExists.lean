@@ -20,7 +20,6 @@ import Sheaf.RingTheory.FormalGlueingIsogeny
 import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModule

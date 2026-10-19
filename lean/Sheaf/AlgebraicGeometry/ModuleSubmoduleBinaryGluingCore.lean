@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # A concrete pullback for extending an open submodule

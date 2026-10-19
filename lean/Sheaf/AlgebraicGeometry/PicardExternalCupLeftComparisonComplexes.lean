@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison
 import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections

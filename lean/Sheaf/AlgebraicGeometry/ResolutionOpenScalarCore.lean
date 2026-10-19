@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ResolutionOpenComparisonMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.ResolutionSectionsHomologyScalar
+import WeilConjectures.AlgebraicGeometry.ResolutionSectionsHomologyScalar
 import Mathlib.Algebra.Homology.ShortComplex.Linear
 import Mathlib.Algebra.Homology.Linear
 

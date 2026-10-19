@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
 

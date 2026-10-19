@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology
 import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport

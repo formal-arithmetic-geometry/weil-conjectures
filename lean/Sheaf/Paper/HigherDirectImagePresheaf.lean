@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify

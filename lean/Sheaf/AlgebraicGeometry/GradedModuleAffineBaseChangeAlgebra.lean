@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.DirectSum.Module
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
 import Sheaf.Paper.GradedModuleQuasicoherentRealization

@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 

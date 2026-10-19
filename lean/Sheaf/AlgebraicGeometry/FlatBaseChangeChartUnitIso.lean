@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization
 

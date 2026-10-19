@@ -5,7 +5,7 @@ Authors: SHEAF group R4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.Grp.EpiMono

@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective
-import Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap
+import WeilConjectures.AlgebraicGeometry.AffineResolutionSectionBijective
+import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 import Sheaf.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Normalized Leray edge on a smaller target open

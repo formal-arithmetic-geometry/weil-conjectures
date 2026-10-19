@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
@@ -39,7 +39,6 @@ import Sheaf.AlgebraicGeometry.LeraySpectralSequence
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 

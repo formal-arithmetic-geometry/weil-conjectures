@@ -6,9 +6,9 @@ Authors: SHEAF groups M1 and M2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.RingTheory.IsTensorProduct
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

@@ -5,7 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.LocalDerivedStalkTransport
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType

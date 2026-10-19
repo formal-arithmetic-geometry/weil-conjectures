@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparison

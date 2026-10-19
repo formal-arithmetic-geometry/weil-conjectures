@@ -3,10 +3,10 @@ public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
+import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
+import WeilConjectures.AlgebraicGeometry.AffineCohomologySectionEquiv
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 @[expose] public section
 universe u

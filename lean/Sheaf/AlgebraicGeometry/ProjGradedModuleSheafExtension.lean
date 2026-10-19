@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartGluing
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent

@@ -5,7 +5,7 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # Naturality of the concrete higher-direct-image resolution section map
 

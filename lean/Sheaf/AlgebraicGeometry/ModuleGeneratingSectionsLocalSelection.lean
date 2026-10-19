@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalLift
 import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport
 

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.AlgebraicGeometry.SheafExt
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Mathlib.AlgebraicGeometry.Noetherian

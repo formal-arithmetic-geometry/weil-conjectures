@@ -6,7 +6,7 @@ Authors: SHEAF group D3
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineUnion
 import Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import Mathlib.CategoryTheory.Abelian.Images

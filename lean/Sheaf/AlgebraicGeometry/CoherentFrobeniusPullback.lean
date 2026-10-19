@@ -6,7 +6,7 @@ Authors: SHEAF group Q4
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality

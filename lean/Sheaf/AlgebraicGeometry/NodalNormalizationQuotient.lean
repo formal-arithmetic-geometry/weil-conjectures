@@ -6,7 +6,7 @@ Authors: SHEAF group Q136
 module
 
 public import Sheaf.AlgebraicGeometry.ReducedNormalization
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

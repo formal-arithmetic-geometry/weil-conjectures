@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso

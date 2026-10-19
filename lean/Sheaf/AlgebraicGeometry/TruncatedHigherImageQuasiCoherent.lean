@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
-import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
+import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 

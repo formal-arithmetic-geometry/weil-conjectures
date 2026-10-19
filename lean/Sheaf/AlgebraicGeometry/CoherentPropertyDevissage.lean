@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Properties

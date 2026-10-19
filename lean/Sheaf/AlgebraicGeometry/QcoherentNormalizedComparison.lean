@@ -6,7 +6,7 @@ Authors: SHEAF group Z7
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
