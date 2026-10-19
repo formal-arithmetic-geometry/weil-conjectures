@@ -17445,3 +17445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:26 L: merged deliver/N0/lem-fd-stalk-formula (reviewer FIX; first push; new nodes: 0)
 
 - 22:34 L: batch 20261019T142202 dependency take-out
+- 14:40 L: merged deliver/A8/Sheaf.Paper.SfLocalizationAllStages (stage 3; reviewer PASS; first push; landing 20261019T144014-L-2345990 (proof); batch 20261019T144009; modules 1; new nodes 0)

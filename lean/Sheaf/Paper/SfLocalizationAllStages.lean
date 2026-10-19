@@ -483,6 +483,7 @@ def sfLocalizationExceptionalTransition (n : ℕ) :
     (sfDerivedReductionTransition l E Z n).app (S.supported.exceptional.obj K).obj ≫
     (sfLocalizationExceptionalComparison S K n).hom
 
+set_option linter.unusedVariables false in
 /-- The displayed Rlim formula with its actual reduction projections, not just
 an isomorphism to an unspecified limit object. Source: blueprint localization (2)
 (blueprint: prop-sf-localization-all-stages).
@@ -505,7 +506,59 @@ theorem sfLocalizationExceptionalLimit :
             (Pi.lift (fun n ↦ (sfDerivedReductionUnit l E Z n).app
               (S.supported.exceptional.obj K).obj ≫
                 (sfLocalizationExceptionalComparison S K n).hom)) δ) (hprod := hp) := by
-  sorry
+  -- Completeness supplies the canonical Roos triangle, including its reduction projections.
+  obtain ⟨hp, δ, hδ⟩ := (S.supported.exceptional.obj K).property.1
+  let := hp
+  let e := sfLocalizationExceptionalComparison S K
+  have hp' : HasProduct (sfLocalizationExceptionalTerm S K) :=
+    hasProduct_of_equiv_of_iso
+      (fun n ↦ (sfDerivedReductionRestricted l E Z n).obj
+        (S.supported.exceptional.obj K).obj)
+      (sfLocalizationExceptionalTerm S K) (Equiv.refl ℕ) (fun n ↦ (e n).symm)
+  refine ⟨hp', ?_⟩
+  let := hp'
+  let a : (∏ᶜ fun n ↦ (sfDerivedReductionRestricted l E Z n).obj
+      (S.supported.exceptional.obj K).obj) ≅ ∏ᶜ (sfLocalizationExceptionalTerm S K) :=
+    { hom := Limits.Pi.map (fun n ↦ (e n).hom)
+      inv := Limits.Pi.map (fun n ↦ (e n).inv)
+      hom_inv_id := by
+        rw [Limits.Pi.map_comp_map]
+        simp only [Iso.hom_inv_id, Limits.Pi.map_id]
+      inv_hom_id := by
+        rw [Limits.Pi.map_comp_map]
+        simp only [Iso.inv_hom_id, Limits.Pi.map_id] }
+  -- The prescribed quotient transitions are conjugate through the reduction comparisons.
+  have ha : a.hom ≫ towerTransitionEndomorphism (sfLocalizationExceptionalTransition S K) =
+      towerTransitionEndomorphism
+        (fun n ↦ (sfDerivedReductionTransition l E Z n).app
+          (S.supported.exceptional.obj K).obj) ≫ a.hom := by
+    dsimp only [a]
+    apply towerTransitionEndomorphism_natural_backward
+      (fun n ↦ (sfDerivedReductionTransition l E Z n).app
+        (S.supported.exceptional.obj K).obj)
+      (sfLocalizationExceptionalTransition S K) (fun n ↦ (e n).hom)
+    intro n
+    change (e (n + 1)).hom ≫
+        ((e (n + 1)).inv ≫ _ ≫ (e n).hom) = _
+    simp only [Iso.hom_inv_id_assoc]
+  -- Transport all three arrows; in particular, retain the specified first-map components.
+  refine ⟨a.inv ≫ δ, ?_⟩
+  apply Pretriangulated.isomorphic_distinguished _ hδ
+  refine Triangle.isoMk _ _ (Iso.refl _) a.symm a.symm ?_ ?_ ?_
+  · change (Pi.lift (fun n ↦ (sfDerivedReductionUnit l E Z n).app
+        (S.supported.exceptional.obj K).obj ≫ (e n).hom)) ≫ a.inv =
+      𝟙 _ ≫ Pi.lift (fun n ↦ (sfDerivedReductionUnit l E Z n).app
+        (S.supported.exceptional.obj K).obj)
+    apply Pi.hom_ext
+    intro n
+    simp [a, Category.assoc]
+  · change towerTransitionEndomorphism (sfLocalizationExceptionalTransition S K) ≫
+        a.inv = a.inv ≫ towerTransitionEndomorphism _
+    apply (cancel_mono a.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [← ha, Iso.inv_hom_id_assoc]
+  · change (a.inv ≫ δ) ≫ (shiftFunctor _ (1 : ℤ)).map (𝟙 _) = a.inv ≫ δ
+    rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 end IntegralLimit
 
