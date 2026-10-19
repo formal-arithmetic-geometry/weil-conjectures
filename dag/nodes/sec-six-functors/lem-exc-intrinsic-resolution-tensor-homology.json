@@ -1,0 +1,131 @@
+{
+ "id": "lem-exc-intrinsic-resolution-tensor-homology",
+ "kind": "statement",
+ "title": "Tensor cohomology in the intrinsic coefficient presentation",
+ "statement": "For a finite commutative ring A and a scheme T, let F be the canonical intrinsic realization of fixed-scalar pro-etale module sheaves [def-weil-pbc-proetale-modules]. Let K be any fixed-scalar derived object; let L,P be intrinsic complexes, eL:Q(L) ≅ D(F)(K), and f:P → L a quasi-isomorphism with P K-flat. For a fixed-scalar module sheaf N, an intrinsic module sheaf M and eM:F(N) ≅ M, for every integer i there exists an isomorphism H^i(derivedTensor(L,M[0],P,f)) ≅ F(H^i(K tensor^L N[0])). No boundedness, Tor bound or etale-origin hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-sf-comparison-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 08FZ; coefficient presentation via Modules on Sites, Tag 00YV"
+ },
+ "proof": [
+  {
+   "text": "Use the exact additive equivalence F from the coefficient presentation. Its inverse on complexes takes P to a complex P′ with F(P′) ≅ P. For any acyclic fixed-scalar complex V, F(V) is acyclic; the ordinary total tensor comparison identifies F(V tensor P′) with F(V) tensor P. The intrinsic K-flat hypothesis on P makes this acyclic. Exactness and faithfulness of F reflect acyclicity, so P′ is K-flat.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-exc-intrinsic-realization-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quasi-isomorphism P → L and the given eL produce D(F)(Q(P′)) ≅ D(F)(K). Full faithfulness of the derived equivalence lifts this to Q(P′) ≅ K. The source-library K-flat single-tensor representative theorem computes K tensor^L N[0] using P′. Apply ordinary tensor comparison and the single-complex comparison, then the supplied eM to identify the other factor. This gives an isomorphism of derived objects before any cohomology is taken.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-exc-intrinsic-realization-tensor-complex",
+    "lem-weil-pbc-source-kflat-tensor-single-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived homology in degree i and the exact-functor homology isomorphism. This proves the stated single-test comparison for arbitrary P, without choosing a resolution of K.",
+   "uses": [
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-exc-intrinsic-realization-tensor-complex",
+  "lem-weil-pbc-source-kflat-tensor-single-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "K-flat total tensor computation (Tags 06YS and 06YU); transport by the inverse exact equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaves transports K-flat derived tensor cohomology and Tor amplitude",
+   "results": "8 hits: Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.Flat.rTensor_exact",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyConcentratedIn\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|IsAcyclicTensorKFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of module sheaves preserves derived tensor product and homology",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.hom_ext, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, SheafOfModules.mk.inj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Equivalence.sheafCongr, PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComparisonTorInterval",
+  "date": "2026-10-18",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-comparison-tor-interval",
+   "place": "Proof, first paragraph: the comparison preserves the finite Tor condition; transport from fixed-scalar sheaves to the recorded intrinsic presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-cor-sf-direct-image-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicResolutionTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicResolutionTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsic_resolution_tensor_homology_iso",
+  "statement": "theorem intrinsic_resolution_tensor_homology_iso\n    (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})\n    (K : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))\n    (L P : CochainComplex\n      (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T A)) ℤ)\n    (eL : _root_.DerivedCategory.Q.obj L ≅\n      (finiteCoefficientIntrinsicRealization T A).mapDerivedCategory.obj K)\n    (f : P ⟶ L) (hf : QuasiIso f)\n    (hP : CochainComplex.IsAcyclicTensorKFlat P)\n    (N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))\n    (M : Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T A))\n    (eM : (finiteCoefficientIntrinsicRealization T A).obj N ≅ M) (i : ℤ) :\n    Nonempty\n      ((_root_.DerivedCategory.homologyFunctor _ i).obj\n        (Scheme.derivedTensor T A L\n          ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj M) P f hf hP) ≅\n        (finiteCoefficientIntrinsicRealization T A).obj\n          ((_root_.DerivedCategory.homologyFunctor _ i).obj\n            (((ProEtale.derivedTensor\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).obj K).obj\n              ((_root_.DerivedCategory.singleFunctor _ 0).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "independent cc review: item comparison_torAmplitudeIn_iff proved via source torAmplitudeIn_mapDerivedCategory_iff + hasTorAmplitudeIn_iff_torAmplitudeIn + new proved intrinsic transport chain (3 new nodes); unclaimed ProEtaleFiniteModuleIntrinsicComparison exact proved with private helpers; all axiom-clean, 5 modules + 27 direct importers compile; unit realized empty so no bypass"
+ }
+}

@@ -16,19 +16,9 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
 
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
-import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
-import Sheaf.Algebra.Homology.DerivedTensor
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+import Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport
 
 /-!
 # Comparison preserves and detects Tor intervals
@@ -105,6 +95,22 @@ theorem comparison_torAmplitudeIn_iff
       Scheme.HasProEtaleTorAmplitude T A
         ((finiteCoefficientIntrinsicRealization T A).mapDerivedCategory.obj
           ((siteComparisonDerivedPullbackPlus T (ULift.{u + 1, u} A)).obj K).obj) a b := by
-  sorry
+  let F := comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
+  let e := F.mapDerivedCategoryPlusCompatibility.app K
+  have hp := intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn A T a b _hab
+    (((siteComparisonDerivedPullbackPlus T (ULift.{u + 1, u} A)).obj K).obj)
+  have he : ProEtale.DerivedCategory.torAmplitudeIn
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T a b
+        (F.mapDerivedCategory.obj K.obj) ↔
+      ProEtale.DerivedCategory.torAmplitudeIn
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T a b
+          (((siteComparisonDerivedPullbackPlus T (ULift.{u + 1, u} A)).obj K).obj) := by
+    constructor
+    · exact (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e.symm
+    · exact (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e
+  exact (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn (Λ := ULift.{u + 1, u} A)
+    (K := K.obj)).trans
+    ((ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+      (Λ := ULift.{u + 1, u} A) a b K.obj).symm.trans (he.trans hp.symm))
 
 end AlgebraicGeometry.ProEtale

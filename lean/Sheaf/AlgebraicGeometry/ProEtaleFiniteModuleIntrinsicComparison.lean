@@ -45,6 +45,63 @@ noncomputable def finiteCoefficientIntrinsicScalarMap (T : Scheme.{u})
       ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B))))
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
 
+private noncomputable def intrinsicModulePresheafFullyFaithful
+    (C : Type (u + 1)) [Category.{u} C] (Λ : Type (u + 1)) [Ring Λ] :
+    (finiteCoefficientModulePresheaf C Λ).FullyFaithful where
+  preimage φ :=
+    { app := φ.app
+      naturality _ _ f := by ext x; exact ConcreteCategory.congr_hom (φ.naturality f) x }
+  map_preimage φ := by ext U x; rfl
+  preimage_map φ := by ext U x; rfl
+
+private theorem intrinsicRealization_isEquivalence
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    (Λ : Type (u + 1)) [Ring Λ] (R : Sheaf J RingCat.{u + 1})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
+    [HasSheafify J AddCommGrpCat.{u + 1}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] :
+    (sheafToPresheaf J (ModuleCat.{u + 1} Λ) ⋙
+      finiteCoefficientModulePresheaf C Λ ⋙
+      PresheafOfModules.sheafification.{u + 1} α).IsEquivalence := by
+  have : (finiteCoefficientModulePresheaf C Λ).Full :=
+    (intrinsicModulePresheafFullyFaithful C Λ).full
+  have : (finiteCoefficientModulePresheaf C Λ).Faithful :=
+    (intrinsicModulePresheafFullyFaithful C Λ).faithful
+  let E := sheafToPresheaf J (ModuleCat.{u + 1} Λ) ⋙
+    finiteCoefficientModulePresheaf C Λ
+  let S := PresheafOfModules.sheafification.{u + 1} α
+  let G := SheafOfModules.forget R ⋙ PresheafOfModules.restrictScalars α
+  have hunit (F : Sheaf J (ModuleCat.{u + 1} Λ)) :
+      IsIso ((PresheafOfModules.sheafificationAdjunction α).unit.app (E.obj F)) := by
+    rw [← isIso_iff_of_reflects_iso _ (PresheafOfModules.toPresheaf _)]
+    simp only [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+    apply isIso_toSheafify
+    exact ((sheafCompose J
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).property
+  let η : E ⟶ (E ⋙ S) ⋙ G :=
+    Functor.whiskerLeft E (PresheafOfModules.sheafificationAdjunction α).unit
+  have : IsIso η := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact hunit
+  have : (E ⋙ S).Faithful := Functor.Faithful.of_comp_iso (asIso η).symm
+  have : (E ⋙ S).Full := Functor.Full.of_comp_faithful_iso (asIso η).symm
+  have : (E ⋙ S).EssSurj := by
+    refine ⟨fun M ↦ ?_⟩
+    let P := (PresheafOfModules.restrictScalars α).obj M.val
+    let F : Cᵒᵖ ⥤ ModuleCat.{u + 1} Λ :=
+      { obj := P.obj
+        map f := P.map f
+        map_id U := by ext x; exact ConcreteCategory.congr_hom (P.presheaf.map_id U) x
+        map_comp f g := by ext x; exact ConcreteCategory.congr_hom (P.presheaf.map_comp f g) x }
+    let F' : Sheaf J (ModuleCat.{u + 1} Λ) :=
+      ⟨F, Presheaf.isSheaf_of_isSheaf_comp J F
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) M.isSheaf⟩
+    refine ⟨F', ⟨?_⟩⟩
+    exact asIso ((PresheafOfModules.sheafificationAdjunction α).counit.app M)
+  change (E ⋙ S).IsEquivalence
+  exact Functor.IsEquivalence.mk
+
 variable (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
 
 /-- Local injectivity for the canonical associated-module-sheaf construction.
@@ -70,6 +127,7 @@ noncomputable def finiteCoefficientIntrinsicRealization :
   sheafToPresheaf _ _ ⋙ finiteCoefficientModulePresheaf T.ProEt (ULift.{u + 1, u} B) ⋙
     PresheafOfModules.sheafification (finiteCoefficientIntrinsicScalarMap T B)
 
+set_option linter.unusedSectionVars false in
 /-- This is an additive exact equivalence of the two presentations of module sheaves.
 Source: Stacks, Tag 00YV (blueprint: def-weil-pbc-proetale-modules).
 Proof: fixed scalar actions extend uniquely to locally constant scalar sections of the
@@ -83,7 +141,12 @@ theorem finiteCoefficientIntrinsicRealization_exact :
     (finiteCoefficientIntrinsicRealization T B).Additive ∧
     PreservesFiniteLimits (finiteCoefficientIntrinsicRealization T B) ∧
     PreservesFiniteColimits (finiteCoefficientIntrinsicRealization T B) := by
-  sorry
+  have : (finiteCoefficientIntrinsicRealization T B).IsEquivalence :=
+    intrinsicRealization_isEquivalence (Scheme.ProEt.topology T) (ULift.{u + 1, u} B)
+      ((sheafCompose (Scheme.ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (Scheme.proEtaleConstantRing T B)) (finiteCoefficientIntrinsicScalarMap T B)
+  exact ⟨this, Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Additivity of the canonical coefficient realization.
 Source: Stacks, Tag 00YV (blueprint: def-weil-pbc-proetale-modules). -/

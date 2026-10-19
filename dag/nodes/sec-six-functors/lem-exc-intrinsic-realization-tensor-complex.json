@@ -1,0 +1,114 @@
+{
+ "id": "lem-exc-intrinsic-realization-tensor-complex",
+ "kind": "statement",
+ "title": "Intrinsic realization commutes with ordinary total tensor complexes",
+ "statement": "For a finite commutative ring A and scheme T, let F be the canonical intrinsic realization [def-weil-pbc-proetale-modules]. For any two unbounded cochain complexes V,W of fixed-scalar pro-etale module sheaves there is a chain isomorphism F(Tot(V tensor W)) ≅ Tot(F(V) tensor F(W)), for the ordinary sheaf tensors and direct-sum totalizations on both sides [def-pc-tensor-complex-sheaves]. No K-flatness, resolution, derived object or cohomological bound is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW (sheaf tensor and module sheafification); sites-cohomology.tex, Tag 06YN (total tensor of complexes)"
+ },
+ "proof": [
+  {
+   "text": "Apply the canonical module-sheafification tensor isomorphism to the constant-scalar unit. The fixed-scalar module-presheaf functor identifies presheaf tensors sectionwise. The ordinary sheafification unit becomes invertible under module sheafification, since its underlying additive map is locally bijective. Hence F(M tensor N) ≅ F(M) tensor F(N), naturally in both sheaves. On local pure tensors the two constructions send x tensor y to the images of x and y.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-sf-proetale-sheafification-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "F is additive and an equivalence, so it preserves the coproducts over pairs of integers contributing to each total degree. Apply the general total-bifunctor comparison to the natural tensor isomorphism from step 1. Its additivity accounts for the Koszul signs, and its naturality for both differentials. The invertibility statement gives the required chain isomorphism.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-pc-total-bifunctor-comparison-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-sf-proetale-sheafification-tensor-comparison",
+  "lem-pc-total-bifunctor-comparison-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW followed by the direct-sum total tensor comparison in Tag 06YN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of module sheaves preserves derived tensor product and homology",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.hom_ext, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, SheafOfModules.mk.inj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Equivalence.sheafCongr, PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; use the module-sheafification tensor and total-bifunctor comparison declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coefficient realization commutes with total tensor cochain complexes of module sheaves",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, HomologicalComplex.ιTensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObjMap, HomologicalComplex.HasTensor",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; use the module-sheafification tensor and total-bifunctor comparison declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*tensor|mapBifunctorComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; use the module-sheafification tensor and total-bifunctor comparison declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComparisonTorInterval",
+  "date": "2026-10-18",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-comparison-tor-interval",
+   "place": "Proof step 4: identify fixed-scalar and intrinsic coefficient sheaf tensors; ordinary total tensor part of this identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-cor-sf-direct-image-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicRealizationTensorComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicRealizationTensorComplex.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsic_realization_tensor_complex_iso",
+  "statement": "theorem intrinsic_realization_tensor_complex_iso\n    (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})\n    (V W : CochainComplex\n      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :\n    let F := finiteCoefficientIntrinsicRealization T A\n    letI := SheafOfModules.monoidalCategory (Scheme.proEtaleConstantRing T A)\n    Nonempty ((F.mapHomologicalComplex (.up ℤ)).obj\n      (CochainComplex.mapBifunctor V W (CategoryTheory.MonoidalCategory.curriedTensor _)) ≅\n        CochainComplex.mapBifunctor ((F.mapHomologicalComplex (.up ℤ)).obj V)\n          ((F.mapHomologicalComplex (.up ℤ)).obj W)\n          (CategoryTheory.MonoidalCategory.curriedTensor _))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "independent cc review: item comparison_torAmplitudeIn_iff proved via source torAmplitudeIn_mapDerivedCategory_iff + hasTorAmplitudeIn_iff_torAmplitudeIn + new proved intrinsic transport chain (3 new nodes); unclaimed ProEtaleFiniteModuleIntrinsicComparison exact proved with private helpers; all axiom-clean, 5 modules + 27 direct importers compile; unit realized empty so no bypass"
+ }
+}

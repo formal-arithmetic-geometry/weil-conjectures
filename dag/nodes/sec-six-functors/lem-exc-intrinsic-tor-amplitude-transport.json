@@ -1,0 +1,131 @@
+{
+ "id": "lem-exc-intrinsic-tor-amplitude-transport",
+ "kind": "statement",
+ "title": "Transport of intrinsic Tor intervals",
+ "statement": "For a finite commutative ring A, a scheme T, integers a ≤ b and any fixed-scalar pro-etale derived object K, the intrinsic realization D(F)(K) has HasProEtaleTorAmplitude [a,b] if and only if K has the standard fixed-scalar pro-etale derived Tor amplitude [a,b]. Both predicates test all module sheaves in their respective presentation. No comparison-origin or boundedness hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-sf-comparison-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 08FZ; coefficient presentation via Modules on Sites, Tag 00YV"
+ },
+ "proof": [
+  {
+   "text": "Convert the standard Tor amplitude from lower and upper t-structure bounds into the separate homology-vanishing tests in degrees i<a or b<i. The characterization of the standard derived t-structure by homology gives both directions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the forward implication, choose a representative of D(F)(K′) and a K-flat resolution. For each fixed-scalar test sheaf N, test the intrinsic predicate at F(N). The single-test tensor-homology comparison identifies the zero object with F of the fixed-scalar tensor homology. Faithfulness and additivity of the equivalence reflect zero objects.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-exc-intrinsic-resolution-tensor-homology",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the reverse implication and each intrinsic test sheaf M, essential surjectivity supplies N and F(N) ≅ M. For every representative and every K-flat resolution in the intrinsic predicate, apply the same single-test comparison. The fixed-scalar Tor bound and preservation of zero objects give vanishing. Adjoin the ordered interval hypothesis.",
+   "uses": [
+    "lem-exc-intrinsic-resolution-tensor-homology",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-exc-intrinsic-resolution-tensor-homology",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "K-flat derived tensor and homology, applied to the canonical scalar-unit equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaves transports K-flat derived tensor cohomology and Tor amplitude",
+   "results": "8 hits: Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.Flat.rTensor_exact",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyConcentratedIn\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|IsAcyclicTensorKFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of module sheaves preserves derived tensor product and homology",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.hom_ext, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, SheafOfModules.mk.inj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Equivalence.sheafCongr, PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match for intrinsic coefficient realization and K-flat tensor cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComparisonTorInterval",
+  "date": "2026-10-18",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-comparison-tor-interval",
+   "place": "Proof, first paragraph: the comparison preserves the finite Tor condition; transport from fixed-scalar sheaves to the recorded intrinsic presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-cor-sf-direct-image-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicTorAmplitudeTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn",
+  "statement": "theorem intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn\n    (A : Type u) [CommRing A] [Finite A]\n    (T : Scheme.{u}) (a b : ℤ) (hab : a ≤ b)\n    (K : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    Scheme.HasProEtaleTorAmplitude T A\n        ((finiteCoefficientIntrinsicRealization T A).mapDerivedCategory.obj K) a b ↔\n      ProEtale.DerivedCategory.torAmplitudeIn\n        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T a b K",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3c5fb",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T112450-L-3942606",
+  "kind": "interface",
+  "note": "independent cc review: item comparison_torAmplitudeIn_iff proved via source torAmplitudeIn_mapDerivedCategory_iff + hasTorAmplitudeIn_iff_torAmplitudeIn + new proved intrinsic transport chain (3 new nodes); unclaimed ProEtaleFiniteModuleIntrinsicComparison exact proved with private helpers; all axiom-clean, 5 modules + 27 direct importers compile; unit realized empty so no bypass"
+ }
+}
