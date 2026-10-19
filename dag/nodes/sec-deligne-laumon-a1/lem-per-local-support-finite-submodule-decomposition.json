@@ -1,0 +1,121 @@
+{
+ "id": "lem-per-local-support-finite-submodule-decomposition",
+ "kind": "statement",
+ "title": "Removing the finite submodule with isolated-intersection support",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], $I\\subsetneq A$ an ideal such that $A$ is $I$-adically complete [def-weil-pbc-adic-completion], and $M$ a finite $A$-module [def-weil-finitely-generated-module]. Work in the ordinary module derived category $D(A)$ [def-weil-abstract-derived-category]. Put $\\Gamma_K(N)=\\{x\\in N:K^r x=0\\text{ for some }r\\geq1\\}$, write $R\\Gamma_K$ for its right derived functor, and put $H_K^i(N)=H^i(R\\Gamma_K(N[0]))$ [def-sbc-ideal-power-torsion-functor]. For $L\\in D(A)$ use the functorial derived completion $F_I(L)=R\\varprojlim_{n\\geq1}(L\\otimes_A^{\\mathbf L}A/I^n)$, with K-flat tensor resolutions [def-pc-kflat-complex] and the mapping fibre of $1-\\mathrm{shift}$ on termwise products for the derived limit [def-weil-derived-limit], and its canonical map $\\eta_L:L\\to F_I(L)$. Write $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$ [def-weil-affine-spectrum]. For an $A$-module $Q$ put $\\operatorname{Supp}(Q)=\\{\\mathfrak p:Q_{\\mathfrak p}\\ne0\\}$ [def-weil-pbc-module-localization], and put\n$$T=V(I)\\cup\\{\\mathfrak p:V(\\mathfrak p)\\cap V(I)=\\{\\mathfrak m\\}\\},\\qquad P=\\{x\\in M:\\operatorname{Supp}(Ax)\\subseteq T\\}.$$\nThen $P$ is a finite submodule, $P_{\\mathfrak p}=0$ outside $T$, and every associated prime of $M/P$ lies outside $T$; here an associated prime means the annihilator of a nonzero module element [def-weil-pbc-annihilator-associated-primes]. There exists an ideal $L$ with $V(L)\\cap V(I)=\\{\\mathfrak m\\}$ and $\\operatorname{Supp}(P)\\subseteq V(I)\\cup V(L)$. For every $J\\subseteq L$ with $V(J)\\cap V(I)=\\{\\mathfrak m\\}$ there is an exact sequence [def-weil-pbc-exact-sequence] $0\\to P_1\\oplus P_2\\to P\\to Q\\to0$, with $P_1$ killed by a power of $J$, $P_2$ by a power of $I$, and $Q$ by a power of $\\mathfrak m$; moreover the canonical map $R\\Gamma_J(P[0])\\to F_I(R\\Gamma_J(P[0]))$ is an isomorphism in every degree.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXP (lemma-algebraize-local-cohomology), paragraph beginning Let M prime be the submodule of elements whose support; the finite support-submodule reduction and its three torsion pieces, with sufficiently small J made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-pc-kflat-complex",
+  "def-weil-derived-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-support-completion-comparison",
+  "date": "2026-10-19",
+  "group": "Q149"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite module whose support is contained in the union of V(I) and V(J) has a submodule decomposition into I-power torsion, J-power torsion, and maximal-ideal torsion pieces",
+   "results": "Module.support_quotient and torsion decomposition hits for Dedekind domains; no general support decomposition",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite module decomposition by support in two closed subsets and their isolated intersection",
+   "results": "Module.support and Finsupp.supported_union; no finite-module decomposition",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support, Ideal.radical, Module.Finite",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*radical|associatedPrimes|Module.Finite",
+   "results": "AssociatedPrime and Support files; no exact theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal submodule supported on a specialization closed subset of a finite module has quotient with associated primes outside the subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.support_quotSMulTop\", \"module\": \"Mathlib/RingTheory/Support\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  (x : R), Module.support R (QuotSMulTop x M) = Module.support R M ∩ PrimeSpectrum.zeroLocus {x}\", \"doc\": \"For any element $ x $ in a commutative semiring $ R $ and an $ R $-module $ M $, the support of the quotient module $ M/(xM) $ is equal to the intersection of the support of $ M $ and the zero locus o\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    Module.supportDim R (QuotSMulTop x M) + 1 ≤ Module.supportDim R M\", \"doc\": \"If an element $x$ in the ring $R$ is not contained in any minimal prime ideal of the annihilator of the module $M$, then the Krull dimension of the support of the quotient module $M/(xM)$ satisfies $\\\\\"}\n  {\"name\": \"Module.support_quotient\", \"module\": \"Mathlib/RingTheory/Support\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  (I : Ideal R), Module.support R (M ⧸ I • ⊤) = Module.support R M ∩ PrimeSpectrum.zeroLocus ↑I\", \"doc\": \"For a commutative semiring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the support of the quotient module $ M/(I \\\\cdot M) $ is equal to the intersection of the support of $ M $ and the \"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ (Module.annihilator R M).jacobson → Module.supportDim R (QuotSMulTop x M) + 1 = Mo\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. For an element $ x $ in the annihilator of $ M $ such that $ x $ belongs to the Jacobson radical of the annihilator but does not lie in a\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R (QuotSMu\", \"doc\": \"If $ x $ is an element of the maximal ideal of a local ring $ R $ that does not belong to any minimal prime ideal of the annihilator of an $ R $-module $ M $, then the Krull dimension of the support o\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] {x : R},\\n  x ∈ (Module.annihilator R M).jacobson → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"If an element $ x $ is in the Jacobson radical of the annihilator ideal of a module $ M $ over a commutative semiring $ R $, then the Krull dimension of the support of $ M $ is at most one greater tha\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and an element $ x $ in the maximal ideal of $ R $, the Krull dimension of the support of $ M $ is at most the Krull dimension of the support of th\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite module support decomposition into two closed subsets with intersection at a closed point and derived completion of local cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.isClosed_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[Module.Finite R M] : IsClosed (Module.support R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology. This means the s\"}\n  {\"name\": \"Module.support\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": Set (PrimeSpectrum R)\", \"doc\": \"The support of a module $ M $ over a commutative semiring $ R $ is the subset of the prime spectrum of $ R $ consisting of all prime ideals $ \\\\mathfrak{p} $ such that the localization of $ M $ at the \"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[IsLocalRing R] [Nontrivial M] : IsLocalRing.closedPoint R ∈ Module.support R M\", \"doc\": \"Let $ R $ be a commutative semiring that is a local ring, and let $ M $ be a nontrivial module over $ R $. The unique maximal ideal of $ R $ (viewed as a closed point in the prime spectrum of $ R $) b\"}\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": IsClosed {closedPoint R}\", \"doc\": \"In the prime spectrum of a local ring equipped with the Zariski topology, the singleton set containing the unique closed point (the maximal ideal) is a closed set. This follows because the maximal ide\"}\n  {\"name\": \"Finsupp.supported_inter\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.Supported\", \"type\": \"(s t : Set α) : supported M R (s ∩ t) = supported M R s ⊓ supported M R t\", \"doc\": \"For any two subsets $s$ and $t$ of a type $\\\\alpha$, the supported submodule over the intersection $s \\\\cap t$ is equal to the intersection of the supported submodules over $s$ and $t$. Formally, $\\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \": StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"Module.mem_support_iff_of_finite\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": p ∈ Module.support R M ↔ Module.annihilator R M ≤ p.asIdeal\", \"doc\": \"For a finitely generated module $M$ over a commutative semiring $R$, a prime ideal $\\\\mathfrak{p}$ belongs to the support of $M$ if and only if the annihilator ideal of $M$ is contained in $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support, associatedPrimes",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "support|associatedPrimes",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"18\", \"line\": \"# Support of a module\", \"text\": \"\"}\n  {\"file\": \"21\", \"line\": \"- `Module.support`\", \"text\": \" The support of an `R`-module as a subset of `Spec R`.\"}\n  {\"file\": \"22\", \"line\": \"- `Module.mem_support_iff_exists_annihilator`\", \"text\": \" `p ∈ Supp M ↔ ∃ m, Ann(m) ≤ p`.\"}\n  {\"file\": \"23\", \"line\": \"- `Module.support_eq_empty_iff`\", \"text\": \" `Supp M = ∅ ↔ M = 0`\"}\n  {\"file\": \"24\", \"line\": \"- `Module.support_of_exact`\", \"text\": \" `Supp N = Supp M ∪ Supp P` for an exact sequence `0 → M → N → P → 0`.\"}\n Subdirectory argument: RingTheory/Support.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology algebraization for a finite module supported on the completion locus union a closed subset with isolated intersection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"Module.Finite.of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (M : Type u_2) [inst_2 : AddCommMonoid M]\\n  [inst_3 : Module R M] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_4 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_5 : (P : Ideal R) → [inst_5 : P.IsMa\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of a commutative semiring $R$, the localization $M_\\\\mathfrak{m}$ is a finitely generated module over $R_\\\\mathfrak{m}$, then the module $M$ is finitely generat\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"Module.Finite.of_localizationSpan'\", \"module\": \"Mathlib/RingTheory/Localization/Finiteness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type w} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] (t : Set R),\\n  Ideal.span t = ⊤ →\\n    ∀ {Mₚ : ↑t → Type u_1} [inst_3 : (g : ↑t) → AddCommMonoid (Mₚ g)] [inst_4 : (g : ↑t) → Module R (Mₚ g)]\\n      {Rₚ : ↑t → Type u} [inst_5 : (g : ↑t) → CommRing (Rₚ g)\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Let $t$ be a subset of $R$ such that the ideal generated by $t$ is the whole ring $R$. If for every element $g \\\\in t$, the localization of $M$ a\"}\n  {\"name\": \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} {A : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A) (s : Set A)\\n  [Module.Finite R (A ⧸ Ideal.span s)] [Module.Free R (A ⧸ Ideal.span s)],\\n  ∃ t,\\n    PrimeSpectrum.comap (algebraMap R A) '' (PrimeSpectrum.zeroLocus s \\\\ PrimeSpectrum.zeroLocus {f})\", \"doc\": \"Let $ A $ be a commutative ring over $ R $, $ s \\\\subseteq A $, and $ f \\\\in A $. If the quotient ring $ A / \\\\langle s \\\\rangle $ is a finite and free $ R $-module, then there exists a finite subset $ t \"}\n  {\"name\": \"Module.Finite.of_localizationSpan_finite'\", \"module\": \"Mathlib/RingTheory/Localization/Finiteness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type w} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] (t : Finset R),\\n  Ideal.span ↑t = ⊤ →\\n    ∀ {Mₚ : ↥t → Type u_1} [inst_3 : (g : ↥t) → AddCommMonoid (Mₚ g)] [inst_4 : (g : ↥t) → Module R (Mₚ g)]\\n      {Rₚ : ↥t → Type u} [inst_5 : (g : ↥t) → CommRing (R\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Let $t \\\\subset R$ be a finite set of elements that generate the unit ideal. If for every $g \\\\in t$, the localization $M_g$ is a finitely generat\"}\n  {\"name\": \"LocalizedModule.exists_subsingleton_away\", \"module\": \"Mathlib/RingTheory/Support\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  (p : Ideal R) [inst_4 : p.IsPrime] [Subsingleton (LocalizedModule p.primeCompl M)],\\n  ∃ f ∉ p, Subsingleton (LocalizedModule (Submonoid.powers f) M)\", \"doc\": \"If the localization of a module $ M $ with respect to the complement of a prime ideal $ \\\\mathfrak{p} $ in a semiring $ R $ is trivial (i.e., has at most one element), then there exists an element $ f \"}\n  {\"name\": \"Submodule.fg_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] {M : Type u_2} [inst_2 : AddCommMonoid M]\\n  [inst_3 : Module R M] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_4 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_5 : (P : Ideal R) → [inst_5 : P.IsMa\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ an $ R $-module, and $ N $ a submodule of $ M $. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the localization of $ N $ at the complement of $ \\\\math\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tag 0DXP (lemma-algebraize-local-cohomology), paragraph beginning Let M prime be the submodule of elements whose support; the finite support-submodule reduction and its three torsion pieces, with sufficiently small J made explicit.",
+   "via": [
+    "lem-per-local-support-completion-comparison",
+    "lem-per-formal-punctured-idempotent-algebraization",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -19,9 +19,137 @@
   "def-weil-pbc-localization-at-prime",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $I$ is proper, $I\\subseteq\\mathfrak m$, and [lem-sbc-complete-local-subideal] makes $A$ $I$-adically complete. The statement of [lem-per-completed-affine-localization-diagram] supplies the natural identification $F_I(R\\Gamma_J(N[0]))\\cong C(N)=F_I(R\\Gamma_{\\mathfrak m}(N[0]))$ for every admissible $J$ and finite $N$, with the specified canonical completion map. Exactness and compatibility with triangles can be seen on the models: [lem-per-affine-support-cech-localization] represents $R\\Gamma_J$ by tensor with the augmented localization complex, which commutes with cones. Use strict diagram K-flat replacements [lem-weil-pbc-diagram-kflat-replacements]; cones remain K-flat by [lem-pc-kflat-cone-direct-sum]. Tensoring those cones with $A/I^n$ and taking the exact derived tower limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit] again preserves triangles. The quotient maps $A\\to A/I^n$ commute with these constructions, so completion gives morphisms of triangles. The natural support identification above commutes with them. By [lem-weil-pbc-derived-cohomology-ladder], every short exact sequence of finite modules therefore gives the commutative comparison of long exact cohomology sequences for $\\alpha_J:R\\Gamma_J\\to C$.",
+   "uses": [
+    "lem-sbc-complete-local-subideal",
+    "lem-per-completed-affine-localization-diagram",
+    "lem-per-affine-support-cech-localization",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-derived-cohomology-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, first paragraph of proof and natural comparison diagrams, using the existing completed localization diagram and the strict derived-functor cone models."
+   }
+  },
+  {
+   "text": "We first prove a degree-zero assertion for EVERY finite $N$, without depth hypotheses. Apply [lem-per-local-support-completion-h0] with $J=\\mathfrak m$: $H^0(C(N))$ is the union of $H_K^0(N)\\subseteq N$ over ideals $K\\subseteq\\mathfrak m$ with $V(K)\\cap V(I)=\\{\\mathfrak m\\}$. This family is directed: replacing two ideals by their product enlarges both torsion submodules and preserves the intersection condition. By [lem-weil-pbc-noetherian-finite-module-acc] the family has a maximal member, say $H_{K_N}^0(N)$; directedness makes it equal to the entire union. Hence $H_J^0(N)\\to H^0(C(N))$ is an isomorphism whenever $J\\subseteq K_N$ is admissible. Indeed $H_{K_N}^0(N)\\subseteq H_J^0(N)\\subseteq H^0(C(N))$ are inclusions of submodules of $N$. Both functors have zero negative cohomology on $N$, the completed one by the same cited formula.",
+   "uses": [
+    "lem-per-local-support-completion-h0",
+    "lem-weil-pbc-noetherian-finite-module-acc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, degree-zero base case, expanded via Dualizing Complexes Tags 0EEW and 0EEX."
+   }
+  },
+  {
+   "text": "Apply [lem-per-local-support-finite-submodule-decomposition] to $M$. It gives $0\\to P\\to M\\to B\\to0$, an admissible ideal $L$, and an isomorphism $\\alpha_J(P)$ in every degree for every admissible $J\\subseteq L$. It also gives $P_{\\mathfrak p}=0$ and hence $B_{\\mathfrak p}=M_{\\mathfrak p}$ at every $\\mathfrak p\\notin T$. Thus $B$ satisfies precisely the stated depth alternative at these primes, and its associated primes are outside $T$. It suffices to prove the degree-one assertion for $B$: the natural long exact sequences from Step 1 have identical $P$ terms, so their kernel/cokernel chase transports any eventual isomorphisms for $B$ to those for $M$. We henceforth prove it for $B$, returning to $M$ in the last step.",
+   "uses": [
+    "lem-per-local-support-finite-submodule-decomposition",
+    "lem-per-completed-affine-localization-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, finite support-submodule reduction paragraph."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-per-local-support-kill-colimit] hold for $B$ with $s=1$ and $d=q$. To verify the isolated-intersection dimension hypothesis, [lem-weil-pbc-noetherian-local-finite-krull-dimension] makes $\\dim A$ finite, and [lem-per-isolated-intersection-dimension-bound] gives $\\dim(A/\\mathfrak p)\\leq\\operatorname{cd}(A,I)\\leq q$. The last inequality is exactly the stipulated uniform vanishing above $q$. Obtain an admissible $J_1$ and $t\\geq1$ such that all admissible $J\\subseteq J_1$ have $H^1_{J_1}(B)\\cong H^1_J(B)$ and $(J_1I)^tH^1_J(B)=0$. No identification with $H^1_{\\mathfrak m}(B)$ and no annihilation by a power of $I$ alone is asserted.",
+   "uses": [
+    "lem-per-local-support-kill-colimit",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-per-isolated-intersection-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, application of Tag 0DXM; isolated-intersection hypothesis verified by Tag 0DXF."
+   }
+  },
+  {
+   "text": "For $\\mathfrak p\\in\\operatorname{Ass}(B)$ choose $0\\ne z\\in B$ with annihilator $\\mathfrak p$. Its localization $z/1$ is nonzero (otherwise an element outside $\\mathfrak p$ kills $z$), and is killed by the maximal ideal of $A_{\\mathfrak p}$. The localized generators of $B$ generate $B_{\\mathfrak p}$, so this is a finite, nonzero local module. By [lem-weil-pbc-nakayama-jacobson], its maximal ideal cannot generate the whole module. Consequently no element of that maximal ideal acts injectively on $B_{\\mathfrak p}$, so the regular-sequence definition [def-weil-pbc-depth] gives depth zero. Step 3 puts $\\mathfrak p$ outside $T$, so the stated depth alternative forces $\\dim(A/\\mathfrak p)>q+1$. Applying [lem-per-local-support-inductive-nonzerodivisor] with $s=1,d=q$ shows that the ideal $\\mathfrak a=\\operatorname{Ann}_A H^1(C(B))$ is not contained in any associated prime of $B$.",
+   "uses": [
+    "lem-per-local-support-inductive-nonzerodivisor",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, associated-prime application of Tag 0DXK."
+   }
+  },
+  {
+   "text": "Each $\\mathfrak p\\in\\operatorname{Ass}(B)$ avoids $I$, by Step 3. It also cannot contain $J_1$, since that would give $\\{\\mathfrak m\\}\\subseteq V(\\mathfrak p)\\cap V(I)\\subseteq V(J_1)\\cap V(I)=\\{\\mathfrak m\\}$, contradicting $\\mathfrak p\\notin T$. For each such prime choose $a\\in\\mathfrak a\\setminus\\mathfrak p$, $b\\in J_1\\setminus\\mathfrak p$, and $c\\in I\\setminus\\mathfrak p$; then $a(bc)^t\\notin\\mathfrak p$. Thus $\\mathfrak a(J_1I)^t$ is contained in none of these primes. For $B\\ne0$ their set is nonempty: $0$ is a zerodivisor and the cited union theorem puts it in an associated prime. Their set is finite by [lem-weil-pbc-noetherian-associated-primes-finite]. Prime avoidance [lem-weil-pbc-prime-avoidance] gives a single $f\\in\\mathfrak a(J_1I)^t$ outside their union. By [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes], $f$ acts injectively on $B$. It kills $H^1(C(B))$ and every $H_J^1(B)$ for admissible $J\\subseteq J_1$. If $B=0$ the comparison is already an isomorphism and no choice of $f$ is needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, prime avoidance and uniform choice of f after support stabilization."
+   }
+  },
+  {
+   "text": "Put $D=B/fB$, a finite module, and apply Step 2 to $B,D,M$. Let $J_0=LJ_1K_BK_DK_M$. Every factor has isolated intersection with $V(I)$, so their product does too, since its vanishing set is the union of theirs. For any admissible $J\\subseteq J_0$, apply the natural derived-functor transformation of Step 1 to $0\\to B\\xrightarrow f B\\to D\\to0$. Because $f$ annihilates the two degree-one groups, the resulting exact rows end in\n$$H_J^0(B)\\longrightarrow H_J^0(D)\\longrightarrow H_J^1(B)\\longrightarrow0,\\qquad H^0(C(B))\\longrightarrow H^0(C(D))\\longrightarrow H^1(C(B))\\longrightarrow0.$$\nThe first two vertical arrows are isomorphisms by Step 2, so the induced arrow on cokernels is an isomorphism: this is $H^1(\\alpha_J(B))$. Both rows come from the same fixed $f$, chosen before $J_0$, so the conclusion holds for every such $J$.",
+   "uses": [
+    "lem-per-completed-affine-localization-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, final comparison diagram; its degree-one conclusion is an explicit cokernel argument."
+   }
+  },
+  {
+   "text": "Finally use $0\\to P\\to M\\to B\\to0$. Since $\\alpha_J(P)$ is an isomorphism in every degree, the kernels and cokernels of $\\alpha_J(M)$ and $\\alpha_J(B)$ agree via the natural comparison diagram (equivalently, their mapping cones are isomorphic). Thus Step 7 gives the degree-one isomorphism for $M$. The degree-zero isomorphism follows from $J\\subseteq K_M$ in Step 2. All support identifications are those of Step 1 and commute with completion maps. Hence the resulting isomorphisms are induced by the exact canonical composite $\\alpha_J$ in the statement being proved.",
+   "uses": [
+    "lem-per-local-support-finite-submodule-decomposition",
+    "lem-per-completed-affine-localization-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXP, return from the support-submodule reduction and conclusion for s=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-per-affine-support-cech-localization",
+  "lem-per-completed-affine-localization-diagram",
+  "lem-per-isolated-intersection-dimension-bound",
+  "lem-per-local-support-completion-h0",
+  "lem-per-local-support-finite-submodule-decomposition",
+  "lem-per-local-support-inductive-nonzerodivisor",
+  "lem-per-local-support-kill-colimit",
+  "lem-sbc-complete-local-subideal",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXP (lemma-algebraize-local-cohomology), s=1, with degree-zero stabilization expanded using Tags 0EEW and 0EEX."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +195,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-formal-punctured-idempotent-algebraization",
@@ -79,7 +207,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: The local-cohomology input 0DXP with s=1 underlying the formal-sections comparison 0DXR used in the first half of 0ECR.",
+   "place": "Tag 0DXP, lemma-algebraize-local-cohomology, s=1; the complete-local specialization and its completion identification.",
    "via": [
     "lem-per-formal-punctured-idempotent-algebraization",
     "lem-per-complete-local-connectedness-bound",
@@ -94,5 +222,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-support-completion-comparison",
+  "worker": "stage1",
+  "summary": "Repaired the preserved split against Tag 0DXP: weak support stabilization gives J1I-power annihilation, not maximal-support equality; separated completed-support invariance, replaced the false low-degree completion helper by its H0 filtered-union formula, exposed the finite support-submodule reduction and the actual completion annihilator, and chose f uniformly before shrinking J0. The item statement is unchanged. The existing completed affine localization diagram supplies the required support identification; no duplicate support-invariance node is delivered.",
+  "blueprint": "Carries the formal-sections/local-cohomology input of the ancestry under lem-per-artin-gabber-affine-curve, specifically Tag 0DXP with s=1: completion support identification, degree-zero base, support-submodule removal, annihilator and cokernel induction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-cone-direct-sum",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-sbc-complete-local-subideal",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-ladder",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-associated-primes-finite",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-module-acc",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic commutative-algebra or derived-functor tool, used with its exact stated hypotheses on the one-object ringed site for A; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Nakayama for the nonzero finite localization excludes the infinite-depth convention before the elementary associated-prime depth-zero argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-sbc-complete-local-subideal",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-56fb6bfc0",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-56fb6bfc0 (reviewer sub-agent of L); spot-checked: The mathematics is correct: the item is Stacks 0DXP with s=1 on a complete local ring (0BFR), its statement is unchanged and the target is not weakened. Each of the eight steps was checked against the 0DXP proof. Step 2 is the degree-0 base case (0EEX union plus ACC and directedness), Step 3 removes the support submodule, Step 4 is 0DXM with s=1, d=q, the dimension hypothesis coming from the finite local Krull dimension and the 0DXF bound. Step 5 gets depth 0 at associated primes (Nakayama rules out the depth-infinity case), then applies 0DXK. Step 6 picks f by prime avoidance in a(J1 I)^t, and f is fixed before J0. Step 7 is the cokernel argument for B/fB. Step 8 is the five lemma using P in all degrees and H0 of B. The four new nodes match 0EEW/0EEX, 0DXM (support maps oriented as inclusions, which is only notation), 0DXK and the support paragraph of 0DXP. The set T is closed under specialization, P is the source's submodule M', and Ass(M/P) misses T. I tested them on k[[x,y]] with I=(x), N=A and N=A/y, on the M=A/(y,z) counterexample, and on M_p=0. No new node duplicates an existing one or restates the parent. Batch-5 flag: isolated-intersection-dimension-bound reaches lem-trf-regular-local-bounded-injective-resolution (0AWX, a regular local ring has finite injective dimension) through 0DXE. That is general commutative algebra, outside both assumptions and their proofs, and the item's ancestor complete-local-connectedness-bound already cites it, so I accepted it. The generic tool_uses were accepted. FIX: Step 6 JSON had '$B\\ne0$' with a single backslash, which decodes to a newline plus 'e0' and breaks the LaTeX. It is re-escaped in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-local-support-completion-comparison.json and nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }

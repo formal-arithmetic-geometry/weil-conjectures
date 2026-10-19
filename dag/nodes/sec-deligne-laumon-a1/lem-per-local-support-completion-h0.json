@@ -1,0 +1,118 @@
+{
+ "id": "lem-per-local-support-completion-h0",
+ "kind": "statement",
+ "title": "Degree-zero formal local sections as a filtered union",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I,J\\subseteq A$ ideals, and $N$ a finite $A$-module [def-weil-finitely-generated-module]. Assume $A\\cong\\varprojlim_n A/I^n$ via its canonical map [def-weil-pbc-adic-completion]. Work in the ordinary module derived category $D(A)$ [def-weil-abstract-derived-category]. Put $\\Gamma_K(N)=\\{x\\in N:K^r x=0\\text{ for some }r\\geq1\\}$, write $R\\Gamma_K$ for its right derived functor, and put $H_K^i(N)=H^i(R\\Gamma_K(N[0]))$ [def-sbc-ideal-power-torsion-functor]. For $L\\in D(A)$ use the functorial derived completion $F_I(L)=R\\varprojlim_{n\\geq1}(L\\otimes_A^{\\mathbf L}A/I^n)$, with K-flat tensor resolutions [def-pc-kflat-complex] and the mapping fibre of $1-\\mathrm{shift}$ on termwise products for the derived limit [def-weil-derived-limit], and its canonical map $\\eta_L:L\\to F_I(L)$. Write $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$ [def-weil-affine-spectrum]. Then $F_I(R\\Gamma_J(N[0]))$ has zero cohomology in negative degrees, and there is a natural isomorphism\n$$H^0(F_I(R\\Gamma_J(N[0])))\\cong\\mathop{\\mathrm{colim}}_{K\\subseteq J,\\ V(K)\\cap V(I)=V(J)\\cap V(I)}H_K^0(N).$$\nThe indexing set consists of ideals of $A$, ordered by reverse inclusion. Each transition is inclusion of torsion submodules of $N$, so the colimit is their union inside $N$. Under this identification the degree-zero completion map is the inclusion $H_J^0(N)\\to\\bigcup_K H_K^0(N)$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0EEW (lemma-completion-local), negative-degree assertion, and 0EEX (lemma-completion-local-H0), including the kernel identification in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-pc-kflat-complex",
+  "def-weil-derived-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a derived I-adically complete complex with low-degree local cohomology killed by a power of I, the canonical map from local cohomology to its derived completion is an isomorphism on H0 and H1",
+   "results": "localCohomology.isoSelfLERadical; AdicCompletion.of_bijective, of_bijective_iff; no derived local-cohomology comparison",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of an I-power torsion local cohomology module is unchanged in low degrees",
+   "results": "AdicCompletion and AdicCompletion.of_bijective; no derived low-degree theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, localCohomology",
+   "results": "0 hits; unknown identifier H",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*completion|IsAdicComplete",
+   "results": "Mathlib/RingTheory/AdicCompletion/*.lean lines 36,39,55-56,647; no local-cohomology comparison",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over a Noetherian adically complete ring degree zero of derived completed local cohomology is the filtered union of sections with enlarged support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.submodule\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Submodule R ((n : ℕ) → M ⧸ I ^ n • ⊤)\", \"doc\": \"The submodule of the product $\\\\prod_{n \\\\in \\\\mathbb{N}} M/I^nM$ consisting of compatible sequences $\\\\{x_n\\\\}$ where each $x_n \\\\in M/I^nM$ and for all $m \\\\leq n$, the transition map sends $x_n$ to $x_m$.\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero of derived completed local cohomology as a colimit over ideals with the same intersection with the completion ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : ModuleCat.{max u v} R ⥤ ModuleCat.{max u v} R\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : HasColimit (diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(J : Ideal R) (i : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.val_zero\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": (0 : AdicCompletion I M).val = 0\", \"doc\": \"The zero element in the adic completion of $ M $ with respect to the ideal $ I $ is equal to the sequence of zero elements in each quotient module $ M/I^nM $.\"}\n  {\"name\": \"AdicCompletion.mk_zero_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : AdicCauchySequence I M) (h : ∃ k : ℕ, ∀ n ≥ k, ∃ m ≥ n, ∃ l ≥ n, f m ∈ (I ^ l • ⊤ : Submodule R M)) :\\n  AdicCompletion.mk I M f = 0\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and $M$ an $R$-module. Let $f$ be an $I$-adic Cauchy sequence in $M$. If there exists a natural number $k$ such that for every $n \\\\ge k$, there exis\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(J : Ideal R) (i : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"CategoryTheory.Limits.IsColimit.ofIsZero\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms\", \"type\": \"(c : Cocone F) (hF : IsZero F) (hc : IsZero c.pt) : IsColimit c\", \"doc\": \"In a category equipped with zero morphisms, if a diagram $ F $ is a zero object and a cocone for $ F $ has a zero object as its apex, then this cocone is a colimit. The mediating morphism to any other\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "completion|colimit|derived",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"8\", \"line\": \"public import Mathlib.Algebra.Category.ModuleCat.Colimits\", \"text\": \"\"}\n  {\"file\": \"44\", \"line\": \"    * the right-derived functor definition\", \"text\": \"\"}\n  {\"file\": \"71\", \"line\": \"/-- The diagram we will take the colimit of to define local cohomology, corresponding to the\", \"text\": \"\"}\n  {\"file\": \"80\", \"line\": \"-- We momentarily need to work with a type inequality, as later we will take colimits\", \"text\": \"\"}\n  {\"file\": \"84\", \"line\": \"lemma hasColimitDiagram (I \", \"text\": \" D ⥤ Ideal R) (i : ℕ) :\"}\n Subdirectory argument: Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal sections supported near a closed subset computed by the kernel in the completed Cech complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.partialSections.closed\", \"module\": \"Mathlib/Topology/Category/TopCat/Limits/Konig\", \"type\": \"∀ {J : Type u} [inst : CategoryTheory.SmallCategory J] (F : CategoryTheory.Functor J TopCat)\\n  [∀ (j : J), T2Space ↑(F.obj j)] {G : Finset J} (H : Finset (TopCat.FiniteDiagramArrow✝ G)),\\n  IsClosed (TopCat.partialSections F H)\", \"doc\": \"Given a diagram $F : \\\\mathcal{J} \\\\to \\\\mathbf{Top}$ where each object $F(j)$ is a Hausdorff space, and for any finite set $G \\\\subseteq \\\\mathrm{Obj}(\\\\mathcal{J})$ and finite set $H$ of morphisms between\"}\n  {\"name\": \"TopCat.partialSections\", \"module\": \"Mathlib/Topology/Category/TopCat/Limits/Konig\", \"type\": \"{J : Type u} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    (F : CategoryTheory.Functor J TopCat) →\\n      {G : Finset J} → Finset (TopCat.FiniteDiagramArrow✝ G) → Set ((j : J) → ↑(F.obj j))\", \"doc\": \"Given a small category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathbf{Top}$ of topological spaces, a finite set $G \\\\subseteq \\\\mathrm{Obj}(\\\\mathcal{J})$ of objects, and a finite set $H$ of morph\"}\n  {\"name\": \"TopCat.Presheaf.IsCompatible.sectionPairwise\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"{X : TopCat} →\\n  {F : TopCat.Presheaf (Type u_4) X} →\\n    {ι : Type u_5} →\\n      {U : ι → TopologicalSpace.Opens ↑X} →\\n        {sf : (i : ι) → CategoryTheory.ToType (F.obj (Opposite.op (U i)))} →\\n          F.IsCompatible U sf → ↑((CategoryTheory.Pairwise.diagram U).op.comp F).sections\", \"doc\": \"Given a presheaf $\\\\mathcal{F}$ on a topological space $X$, an open cover $\\\\{U_i\\\\}$ of an open set $U \\\\subseteq X$, and a compatible family of sections $\\\\{s_i\\\\} \\\\in \\\\mathcal{F}(U_i)$, this constructs a\"}\n  {\"name\": \"TopCat.partialSections.nonempty\", \"module\": \"Mathlib/Topology/Category/TopCat/Limits/Konig\", \"type\": \"∀ {J : Type u} [inst : CategoryTheory.SmallCategory J] (F : CategoryTheory.Functor J TopCat)\\n  [CategoryTheory.IsCofilteredOrEmpty J] [h : ∀ (j : J), Nonempty ↑(F.obj j)] {G : Finset J}\\n  (H : Finset (TopCat.FiniteDiagramArrow✝ G)), (TopCat.partialSections F H).Nonempty\", \"doc\": \"Let $\\\\mathcal{J}$ be a small category that is cofiltered or empty, and let $F : \\\\mathcal{J} \\\\to \\\\mathbf{Top}$ be a diagram of topological spaces where each object $j \\\\in \\\\mathcal{J}$ satisfies $F(j) \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}\n  {\"name\": \"TopCat.Presheaf.IsGluing\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {FC : C → C → Type u_2} →\\n      {CC : C → Type u_3} →\\n        [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] →\\n          [inst_2 : CategoryTheory.ConcreteCategory C FC] →\\n            {X : TopCat} →\\n              (F : TopCa\", \"doc\": \"Given a presheaf $F$ on a topological space, a family of open sets $\\\\{U_i\\\\}_{i \\\\in I}$, their union $U = \\\\bigcup_{i \\\\in I} U_i$, and sections $s_i \\\\in F(U_i)$, the gluing condition asserts that there \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-support-completion-comparison",
+  "date": "2026-10-19",
+  "group": "Q149"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tags 0EEW (lemma-completion-local), negative-degree assertion, and 0EEX (lemma-completion-local-H0), including the kernel identification in its proof.",
+   "via": [
+    "lem-per-local-support-completion-comparison",
+    "lem-per-formal-punctured-idempotent-algebraization",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

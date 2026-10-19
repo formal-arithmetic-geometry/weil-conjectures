@@ -1,0 +1,121 @@
+{
+ "id": "lem-per-local-support-kill-colimit",
+ "kind": "statement",
+ "title": "Stabilization and product-ideal annihilation for shrinking support",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], complete for its maximal-ideal topology [def-weil-pbc-adic-completion]. Let $I\\subsetneq A$ be an ideal, $M$ a finite $A$-module [def-weil-finitely-generated-module], and $s,d\\geq0$ integers. Work in the ordinary module derived category $D(A)$ [def-weil-abstract-derived-category]. Put $\\Gamma_K(N)=\\{x\\in N:K^r x=0\\text{ for some }r\\geq1\\}$, write $R\\Gamma_K$ for its right derived functor, and put $H_K^i(N)=H^i(R\\Gamma_K(N[0]))$ [def-sbc-ideal-power-torsion-functor]. For $L\\in D(A)$ use the functorial derived completion $F_I(L)=R\\varprojlim_{n\\geq1}(L\\otimes_A^{\\mathbf L}A/I^n)$, with K-flat tensor resolutions [def-pc-kflat-complex] and the mapping fibre of $1-\\mathrm{shift}$ on termwise products for the derived limit [def-weil-derived-limit], and its canonical map $\\eta_L:L\\to F_I(L)$. Write $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$ [def-weil-affine-spectrum]. Assume that every prime $\\mathfrak p\\notin V(I)$ with $V(\\mathfrak p)\\cap V(I)=\\{\\mathfrak m\\}$ satisfies $\\dim\\operatorname{Spec}(A/\\mathfrak p)\\leq d$. For every prime $\\mathfrak p\\notin V(I)$ with $V(\\mathfrak p)\\cap V(I)\\ne\\{\\mathfrak m\\}$, assume\n$$\\operatorname{depth}_{A_{\\mathfrak p}}M_{\\mathfrak p}\\geq s\\quad\\text{or}\\quad\\operatorname{depth}_{A_{\\mathfrak p}}M_{\\mathfrak p}+\\dim\\operatorname{Spec}(A/\\mathfrak p)>d+s,$$\nusing regular-sequence depth [def-weil-pbc-depth], prime localization [def-weil-pbc-localization-at-prime], and topological Krull dimension [def-kun-topological-krull-dimension]. Then there are an ideal $J_1$ with $V(J_1)\\cap V(I)=\\{\\mathfrak m\\}$ and an integer $t\\geq1$ such that for every $J\\subseteq J_1$ with $V(J)\\cap V(I)=\\{\\mathfrak m\\}$ and every $0\\leq i\\leq s$, the natural map $H_{J_1}^i(M)\\to H_J^i(M)$ is an isomorphism and $(J_1I)^tH_J^i(M)=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXM (lemma-kill-colimit-weak), specialized to complete local rings using Tag 0BFR (dualizing-lemma-ubiquity-dualizing), case (2); natural transition maps oriented as inclusions of supports."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-pc-kflat-complex",
+  "def-weil-derived-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-topological-krull-dimension"
+ ],
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-support-completion-comparison",
+  "date": "2026-10-19",
+  "group": "Q149"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian complete local ring, finite module, ideal I of bounded local cohomological dimension, and depth-dimension alternatives away from V(I), there is J0 with V(J0) intersect V(I) maximal and H_J^0,H_J^1 equal H_m and killed by a power of I",
+   "results": "IsHausdorff.of_isLocalRing, localCohomology.isoSelfLERadical, localCohomology, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing; no support-shrinking theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local cohomology support shrinking and annihilation by powers of I under depth dimension hypotheses",
+   "results": "localCohomology, Module.supportDim, Module.annihilator_le_of_mem_support; no comparison theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology, IsNoetherian, Ideal.radical",
+   "results": "localCohomology.isoOfSameRadical only",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|annihilator.*local",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean lines 58,92,94,146,149",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology support shrinking stabilizes in degrees at most s under depth dimension bounds and is killed by a power of the product of two ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.idealPowersToSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → (J : Ideal R) → CategoryTheory.Functor ℕᵒᵖ (localCohomology.SelfLERadical J)\", \"doc\": \"The functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subseteq \\\\sqrt{J'} $, constructed by lifting the ideal powers diag\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and an element $ x $ in the maximal ideal of $ R $, the Krull dimension of the support of $ M $ is at most the Krull dimension of the support of th\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ n ≥ n₀, F.N n = I ^ (n - n₀) • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ by an ideal $I$, there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the submodule $I^n M$ is equal to $I^{n - n_0} \\\\cdot I^{n_0} M$.\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ (k : ℕ), F.N (n₀ + k) = I ^ k • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$, there exists an integer $n_0$ such that for all $k \\\\geq 0$, the equality $I^k \\\\bullet\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faltings local cohomology annihilator and stabilization of support away from an isolated intersection",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.annihilator_le_of_mem_support\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \"(hp : p ∈ Module.support R M) : Module.annihilator R M ≤ p.asIdeal\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in the support of a module $ M $ over a commutative semiring $ R $, then the annihilator ideal of $ M $ is contained in $ \\\\mathfrak{p} $. Formally, $ \\\\text{Ann}_R(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \": StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"Module.support_eq_zeroLocus\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": Module.support R M = zeroLocus (Module.annihilator R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum of $ R $ is equal to the zero locus of the annihilator ideal of $ M $. This means the set of prime idea\"}\n  {\"name\": \"Module.mem_support_iff_of_finite\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": p ∈ Module.support R M ↔ Module.annihilator R M ≤ p.asIdeal\", \"doc\": \"For a finitely generated module $M$ over a commutative semiring $R$, a prime ideal $\\\\mathfrak{p}$ belongs to the support of $M$ if and only if the annihilator ideal of $M$ is contained in $\\\\mathfrak{p\"}\n  {\"name\": \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [Module.Finite R M] (h : I ≠ ⊤) : (⨅ i : ℕ, I ^ i • ⊤ : Submodule R M) = ⊥\", \"doc\": \"In a Noetherian local ring $ R $ with maximal ideal $ I $ and a finitely generated $ R $-module $ M $, the intersection of the submodules $ I^i M $ over all natural numbers $ i $ is trivial, i.e., $\\\\b\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.KrullDimension.Regular\", \"type\": \"{x : R} (hn : ∀ p ∈ (annihilator R M).minimalPrimes, x ∉ p) : supportDim R (QuotSMulTop x M) + 1 ≤ supportDim R M\", \"doc\": \"If an element $x$ in the ring $R$ is not contained in any minimal prime ideal of the annihilator of the module $M$, then the Krull dimension of the support of the quotient module $M/(xM)$ satisfies $\\\\\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology, Ideal",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"`localCohomology J i` is `i`-th the local cohomology module of a module `M` over\\na commutative ring `R` with support in the ideal `J` of `R`, defined as the direct limit\\nof `Ext^i(R/J^t, M)` over all \"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) [IsNoetherian R R] (i : ℕ) : localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"Local cohomology (defined in terms of powers of `J`) agrees with local\\ncohomology computed over all ideals with radical containing `J`.\"}\n  {\"name\": \"localCohomology.isoOfSameRadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} [IsNoetherian R R] (hJK : J.radical = K.radical) (i : ℕ) : localCohomology J i ≅ localCohomology K i\", \"doc\": \"Local cohomology agrees on ideals with the same radical.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|annihilat",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"58\", \"text\": \"namespace localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"92\", \"text\": \"in an ideal `J`, `localCohomology` and `localCohomology.ofSelfLERadical`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"94\", \"text\": \"/-- `localCohomology.ofDiagram I i` is the functor sending a module `M` over a commutative\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"146\", \"text\": \"end localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"149\", \"text\": \"the powers of `J` (`localCohomology`), then in terms of *all* ideals with radical\"}\n Subdirectory argument: Algebra/Homology",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete local ring local cohomology with varying closed support stabilizes under depth assumptions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"localCohomology.idealPowersToSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → (J : Ideal R) → CategoryTheory.Functor ℕᵒᵖ (localCohomology.SelfLERadical J)\", \"doc\": \"The functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subseteq \\\\sqrt{J'} $, constructed by lifting the ideal powers diag\"}\n  {\"name\": \"localCohomology.isoOfSameRadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {J K : Ideal R} → [IsNoetherian R R] → J.radical = K.radical → (i : ℕ) → localCohomology J i ≅ localCohomology K i\", \"doc\": \"Given a Noetherian commutative ring $ R $, ideals $ J $ and $ K $ with equal radicals ($ \\\\sqrt{J} = \\\\sqrt{K} $), and a natural number $ i $, this constructs a natural isomorphism between the $ i $-th \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tag 0DXM (lemma-kill-colimit-weak), specialized to complete local rings using Tag 0BFR (dualizing-lemma-ubiquity-dualizing), case (2); natural transition maps oriented as inclusions of supports.",
+   "via": [
+    "lem-per-local-support-completion-comparison",
+    "lem-per-formal-punctured-idempotent-algebraization",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

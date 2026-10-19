@@ -1,0 +1,121 @@
+{
+ "id": "lem-per-local-support-inductive-nonzerodivisor",
+ "kind": "statement",
+ "title": "Completed local-cohomology annihilator away from a prime",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], complete for its maximal-ideal topology [def-weil-pbc-adic-completion]. Let $I\\subsetneq A$ be an ideal, $M$ a finite $A$-module [def-weil-finitely-generated-module], $\\mathfrak p$ a prime ideal, and $s,d\\geq0$ integers. Work in the ordinary module derived category $D(A)$ [def-weil-abstract-derived-category]. Put $\\Gamma_K(N)=\\{x\\in N:K^r x=0\\text{ for some }r\\geq1\\}$, write $R\\Gamma_K$ for its right derived functor, and put $H_K^i(N)=H^i(R\\Gamma_K(N[0]))$ [def-sbc-ideal-power-torsion-functor]. For $L\\in D(A)$ use the functorial derived completion $F_I(L)=R\\varprojlim_{n\\geq1}(L\\otimes_A^{\\mathbf L}A/I^n)$, with K-flat tensor resolutions [def-pc-kflat-complex] and the mapping fibre of $1-\\mathrm{shift}$ on termwise products for the derived limit [def-weil-derived-limit], and its canonical map $\\eta_L:L\\to F_I(L)$. Write $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$ [def-weil-affine-spectrum]. Assume $H_I^j(N)=0$ for every $A$-module $N$ and $j>d$. If\n$$\\operatorname{depth}_{A_{\\mathfrak p}}M_{\\mathfrak p}+\\dim\\operatorname{Spec}(A/\\mathfrak p)>d+s,$$\nwhere depth, localization and dimension mean [def-weil-pbc-depth, def-weil-pbc-localization-at-prime, def-kun-topological-krull-dimension], then there exists $g\\in A\\setminus\\mathfrak p$ such that $gH^i(F_I(R\\Gamma_{\\mathfrak m}(M[0])))=0$ for every $i\\leq s$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXK (lemma-kill-completion), specialized using Tag 0BFR (dualizing-lemma-ubiquity-dualizing), case (2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-pc-kflat-complex",
+  "def-weil-derived-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-topological-krull-dimension"
+ ],
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-support-completion-comparison",
+  "date": "2026-10-19",
+  "group": "Q149"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Induction on low-degree local cohomology using a nonzerodivisor chosen outside the associated primes of a finite module and the short exact sequence by f",
+   "results": "associated-prime finiteness and localCohomology; no exact induction theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose a nonzerodivisor from an annihilator avoiding associated primes and compare local cohomology by the exact sequence 0 to M to M to M/fM",
+   "results": "associatedPrimes, IsAssociatedPrime, Module.supportDim_quotSMulTop_succ_eq; no exact comparison",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Associated, IsSMulRegular, Ideal.annihilator",
+   "results": "0 hits; unknown identifier Module.Associated",
+   "date": "2026-10-19",
+   "verdict": "invalid query: Loogle reported an unknown identifier; this entry is not evidence of absence. The other search tools and the second semantic phrasing were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|IsSMulRegular|nonzerodivisor",
+   "results": "Mathlib/RingTheory/Ideal/AssociatedPrime and related files; no local-cohomology induction theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth at a prime plus dimension of its closure greater than local cohomological dimension plus s implies completed local cohomology is annihilated by an element outside that prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R (QuotSMu\", \"doc\": \"If $ x $ is an element of the maximal ideal of a local ring $ R $ that does not belong to any minimal prime ideal of the annihilator of an $ R $-module $ M $, then the Krull dimension of the support o\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and an element $ x $ in the maximal ideal of $ R $, the Krull dimension of the support of $ M $ is at most the Krull dimension of the support of th\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    Module.supportDim R (QuotSMulTop x M) + 1 ≤ Module.supportDim R M\", \"doc\": \"If an element $x$ in the ring $R$ is not contained in any minimal prime ideal of the annihilator of the module $M$, then the Krull dimension of the support of the quotient module $M/(xM)$ satisfies $\\\\\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] {x : R},\\n  x ∈ (Module.annihilator R M).jacobson → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"If an element $ x $ is in the Jacobson radical of the annihilator ideal of a module $ M $ over a commutative semiring $ R $, then the Krull dimension of the support of $ M $ is at most one greater tha\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ (Module.annihilator R M).jacobson → Module.supportDim R (QuotSMulTop x M) + 1 = Mo\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. For an element $ x $ in the annihilator of $ M $ such that $ x $ belongs to the Jacobson radical of the annihilator but does not lie in a\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Annihilator of derived completed local cohomology avoids a prime under a depth dimension inequality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.annihilator_le_of_mem_support\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \"(hp : p ∈ Module.support R M) : Module.annihilator R M ≤ p.asIdeal\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in the support of a module $ M $ over a commutative semiring $ R $, then the annihilator ideal of $ M $ is contained in $ \\\\mathfrak{p} $. Formally, $ \\\\text{Ann}_R(\"}\n  {\"name\": \"Module.annihilator\", \"module\": \"Mathlib.RingTheory.Ideal.Maps\", \"type\": \": Ideal R\", \"doc\": \"The annihilator of a module $M$ over a semiring $R$ is defined as the kernel of the canonical ring homomorphism from $R$ to the endomorphism ring of the additive monoid of $M$. This homomorphism maps \"}\n  {\"name\": \"Submodule.annihilator\", \"module\": \"Mathlib.RingTheory.Ideal.Maps\", \"type\": \"(N : Submodule R M) : Ideal R\", \"doc\": \"The annihilator of a submodule $ N $ of an $ R $-module $ M $ is the ideal in $ R $ consisting of all elements $ r $ such that $ r \\\\cdot n = 0 $ for every $ n \\\\in N $.\"}\n  {\"name\": \"IsAssociatedPrime.annihilator_le\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \"(h : IsAssociatedPrime I M) : (⊤ : Submodule R M).annihilator ≤ I\", \"doc\": \"If $\\\\mathfrak{p}$ is an associated prime of the module $M$, then the annihilator of the entire module $M$ is contained in $\\\\mathfrak{p}$, i.e., $\\\\mathrm{Ann}(M) \\\\subseteq \\\\mathfrak{p}$.\"}\n  {\"name\": \"exists_le_isAssociatedPrime_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \"[H : IsNoetherianRing R] (x : M) (hx : x ≠ 0) :\\n  ∃ P : Ideal R, IsAssociatedPrime P M ∧ (⊥ : Submodule R M).colon { x } ≤ P\", \"doc\": \"In a Noetherian ring $ R $, for any non-zero element $ x $ in an $ R $-module $ M $, there exists an associated prime ideal $ \\\\mathfrak{p} $ of $ M $ such that the annihilator of $ x $ (i.e., $ \\\\{ r \\\\\"}\n  {\"name\": \"Submodule.annihilator_quotient\", \"module\": \"Mathlib.RingTheory.Ideal.Colon\", \"type\": \": Module.annihilator R (M ⧸ N) = N.colon Set.univ\", \"doc\": \"The annihilator of the quotient module $ M/N $ is equal to the colon ideal $ (N : M) $, i.e., $ \\\\operatorname{Ann}_R(M/N) = (N : M) $.\"}\n  {\"name\": \"Ideal.bot_lt_annihilator_of_disjoint_nonZeroDivisors\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness\", \"type\": \"{I : Ideal A} (h : Disjoint (I : Set A) (nonZeroDivisors A)) : ⊥ < Module.annihilator A I\", \"doc\": \"If an ideal $ I $ in a commutative ring $ A $ is disjoint from the set of non-zero divisors of $ A $, then the annihilator of $ I $ strictly contains the zero ideal.\"}\n  {\"name\": \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Localization\", \"type\": \"[IsNoetherianRing R] [Module.Finite R M] : (Module.annihilator R M).minimalPrimes ⊆ associatedPrimes R M\", \"doc\": \"For a Noetherian ring $ R $ and a finitely generated $ R $-module $ M $, the minimal prime ideals containing the annihilator ideal of $ M $ are contained within the set of associated primes of $ M $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology, annihilator",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'annihilator'\n",
+   "date": "2026-10-19",
+   "verdict": "invalid query: Loogle reported an unknown identifier; this entry is not evidence of absence. The other search tools and the second semantic phrasing were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|annihilator",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"58\", \"text\": \"namespace localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"92\", \"text\": \"in an ideal `J`, `localCohomology` and `localCohomology.ofSelfLERadical`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"94\", \"text\": \"/-- `localCohomology.ofDiagram I i` is the functor sending a module `M` over a commutative\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"146\", \"text\": \"end localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"149\", \"text\": \"the powers of `J` (`localCohomology`), then in terms of *all* ideals with radical\"}\n Subdirectory argument: Algebra/Homology",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local cohomology vanishes after localization at a prime with large depth dimension sum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"LocalizedModule.exists_subsingleton_away\", \"module\": \"Mathlib/RingTheory/Support\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  (p : Ideal R) [inst_4 : p.IsPrime] [Subsingleton (LocalizedModule p.primeCompl M)],\\n  ∃ f ∉ p, Subsingleton (LocalizedModule (Submonoid.powers f) M)\", \"doc\": \"If the localization of a module $ M $ with respect to the complement of a prime ideal $ \\\\mathfrak{p} $ in a semiring $ R $ is trivial (i.e., has at most one element), then there exists an element $ f \"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and an element $ x $ in the maximal ideal of $ R $, the Krull dimension of the support of $ M $ is at most the Krull dimension of the support of th\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R (QuotSMu\", \"doc\": \"If $ x $ is an element of the maximal ideal of a local ring $ R $ that does not belong to any minimal prime ideal of the annihilator of an $ R $-module $ M $, then the Krull dimension of the support o\"}\n  {\"name\": \"support_of_supportDim_eq_zero\", \"module\": \"Mathlib/RingTheory/KrullDimension/Module\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (N : Type u_3) [inst_1 : AddCommGroup N] [inst_2 : Module R N]\\n  [inst_3 : IsLocalRing R],\\n  Module.supportDim R N = 0 → Module.support R N = PrimeSpectrum.zeroLocus ↑(IsLocalRing.maximalIdeal R)\", \"doc\": \"For a local ring $ R $ and an $ R $-module $ N $, if the Krull dimension of the support of $ N $ is zero, then the support of $ N $ coincides with the zero locus of the maximal ideal $ \\\\mathfrak{m} $ \"}\n  {\"name\": \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular M rs →\\n    Module.supportDim R (M ⧸ Ideal.ofList rs • ⊤) + ↑rs.length = Module.supportDim R M\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $ and a regular sequence $ rs $ on $ M $, the Krull dimension of the support of the quotient module $ M/(rs) $ plus the length of $ rs $ equals the K\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits do not state this derived local-cohomology assertion; ordinary adic completion, support identities, and Ext-colimit localCohomology do not specialize to it in one line."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tag 0DXK (lemma-kill-completion), specialized using Tag 0BFR (dualizing-lemma-ubiquity-dualizing), case (2).",
+   "via": [
+    "lem-per-local-support-completion-comparison",
+    "lem-per-formal-punctured-idempotent-algebraization",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
