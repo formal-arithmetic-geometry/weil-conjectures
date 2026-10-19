@@ -16,10 +16,6 @@ public import Sheaf.Paper.SfDerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
-import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 
 /-!
 # Tensoring a trace transpose and the exceptional tensor arrow
@@ -106,6 +102,134 @@ noncomputable def tensorTraceIntegrated
         (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K :=
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ K
     (tensorTraceProjection Λ f L K t)
+
+-- Keep the mate calculation abstract so rewriting does not unfold derived tensor.
+private theorem trace_calculation_abstract
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : D ⥤ C} {G : C ⥤ D} {H : D ⥤ C} (adj : G ⊣ H)
+    (π : ∀ (M : C) (N : D), G.obj M ⊗ N ⟶ G.obj (M ⊗ F.obj N))
+    [∀ M N, IsIso (π M N)]
+    (hπ : ∀ {M M' : C} (q : M ⟶ M') (N : D),
+      G.map q ▷ N ≫ π M' N = π M N ≫ G.map (q ▷ F.obj N))
+    (M : C) (N : D) (t : G.obj M ⟶ 𝟙_ D) :
+    F.obj N ◁ adj.homEquiv M (𝟙_ D) t ≫ (β_ _ _).hom ≫
+        (adj.projectionTensorMap π (𝟙_ D) N ≫ H.map (λ_ N).hom) =
+      adj.homEquiv _ N
+        (G.map (β_ (F.obj N) M).hom ≫ inv (π M N) ≫
+          (β_ (G.obj M) N).hom ≫ (N ◁ t) ≫ (ρ_ N).hom) := by
+  let Q := adj.homEquiv M (𝟙_ D) t
+  have hQ : G.map Q ≫ adj.counit.app (𝟙_ D) = t :=
+    (adj.homEquiv _ _).symm_apply_apply t
+  have hi : G.map (Q ▷ F.obj N) ≫ inv (π (H.obj (𝟙_ D)) N) =
+      inv (π M N) ≫ (G.map Q ▷ N) := by
+    rw [← cancel_epi (π M N), ← cancel_mono (π (H.obj (𝟙_ D)) N)]
+    simp only [Category.assoc, IsIso.hom_inv_id_assoc, IsIso.inv_hom_id,
+      Category.comp_id]
+    exact (hπ Q N).symm
+  rw [BraidedCategory.braiding_naturality_right_assoc]
+  unfold Adjunction.projectionTensorMap
+  rw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_left,
+    ← adj.homEquiv_naturality_left]
+  apply congrArg (adj.homEquiv _ N)
+  simp only [Category.assoc]
+  rw [reassoc_of% hi, ← comp_whiskerRight_assoc, hQ]
+  congr 2
+  rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+
+private theorem trace_naturality_abstract
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : D ⥤ C} (G : C ⥤ D)
+    (π : ∀ (M : C) (N : D), G.obj M ⊗ N ⟶ G.obj (M ⊗ F.obj N))
+    [∀ M N, IsIso (π M N)]
+    (hπ : ∀ (M : C) {N N' : D} (a : N ⟶ N'),
+      G.obj M ◁ a ≫ π M N' = π M N ≫ G.map (M ◁ F.map a))
+    (M : C) {N N' : D} (a : N ⟶ N') (t : G.obj M ⟶ 𝟙_ D) :
+    (G.map (β_ (F.obj N) M).hom ≫ inv (π M N) ≫
+        (β_ (G.obj M) N).hom ≫ (N ◁ t) ≫ (ρ_ N).hom) ≫ a =
+      G.map (F.map a ▷ M) ≫
+        (G.map (β_ (F.obj N') M).hom ≫ inv (π M N') ≫
+          (β_ (G.obj M) N').hom ≫ (N' ◁ t) ≫ (ρ_ N').hom) := by
+  have hi : inv (π M N) ≫ (G.obj M ◁ a) =
+      G.map (M ◁ F.map a) ≫ inv (π M N') := by
+    rw [← cancel_epi (π M N), ← cancel_mono (π M N')]
+    simp only [Category.assoc, IsIso.hom_inv_id_assoc, IsIso.inv_hom_id,
+      Category.comp_id]
+    exact hπ M a
+  have hb := BraidedCategory.braiding_naturality_left (F.map a) M
+  have hu (N : D) : (β_ _ N).hom ≫ (N ◁ t) ≫ (ρ_ N).hom =
+      t ▷ N ≫ (λ_ N).hom := by
+    rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hu N), hu N']
+  rw [← leftUnitor_naturality, ← whisker_exchange_assoc]
+  rw [reassoc_of% hi]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  apply congrArg (fun z ↦ G.map z ≫ _)
+  exact hb.symm
+
+private theorem trace_calculation
+    {A : Type uA} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+    {FC : A → A → Type*} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {V S : Scheme.{u}} (f : V ⟶ S) [HasCompactification f]
+    [(rightDerivedLowerShriek A f).IsLeftAdjoint] [IsIso (projectionMap A f)]
+    (L : _root_.DerivedCategory (Sheaf V.smallEtaleTopology A))
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A))
+    (t : (rightDerivedLowerShriek A f).obj L ⟶ 𝟙_ _) :
+    ((derivedTensor A V).obj ((upperStar A f).leftDerivedFunctor.obj K)).map
+        ((rightDerivedUpperShriekAdjunction A f).homEquiv L (𝟙_ _) t) ≫
+      (tensorTraceSymmetry A V _ _).hom ≫ dualizingComplexTensorMapOfIsIso f K =
+    (rightDerivedUpperShriekAdjunction A f).homEquiv _ K
+      ((rightDerivedLowerShriek A f).map (tensorTraceSymmetry A V _ L).hom ≫
+        inv (((projectionMap A f).app L).app K) ≫
+        (tensorTraceSymmetry A S _ K).hom ≫ ((derivedTensor A S).obj K).map t ≫
+        (derivedTensorRightUnitor A S K).hom) := by
+  let := derivedBraidedCategory A V
+  let := derivedBraidedCategory A S
+  exact trace_calculation_abstract (rightDerivedUpperShriekAdjunction A f)
+    (fun M N ↦ ((projectionMap A f).app M).app N)
+    (fun q N ↦ NatTrans.congr_app ((projectionMap A f).naturality q) N) L K t
+
+private theorem trace_projection_naturality
+    {A : Type uA} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+    {FC : A → A → Type*} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {V S : Scheme.{u}} (f : V ⟶ S) [HasCompactification f]
+    [IsIso (projectionMap A f)]
+    (L : _root_.DerivedCategory (Sheaf V.smallEtaleTopology A))
+    {K K' : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)} (a : K ⟶ K')
+    (t : (rightDerivedLowerShriek A f).obj L ⟶ 𝟙_ _) :
+    ((rightDerivedLowerShriek A f).map (tensorTraceSymmetry A V _ L).hom ≫
+      inv (((projectionMap A f).app L).app K) ≫
+      (tensorTraceSymmetry A S _ K).hom ≫ ((derivedTensor A S).obj K).map t ≫
+      (derivedTensorRightUnitor A S K).hom) ≫ a =
+    (rightDerivedLowerShriek A f).map
+        (((derivedTensor A V).map ((upperStar A f).leftDerivedFunctor.map a)).app L) ≫
+      ((rightDerivedLowerShriek A f).map (tensorTraceSymmetry A V _ L).hom ≫
+        inv (((projectionMap A f).app L).app K') ≫
+        (tensorTraceSymmetry A S _ K').hom ≫ ((derivedTensor A S).obj K').map t ≫
+        (derivedTensorRightUnitor A S K').hom) := by
+  let := derivedBraidedCategory A V
+  let := derivedBraidedCategory A S
+  exact trace_naturality_abstract (rightDerivedLowerShriek A f)
+    (fun M N ↦ ((projectionMap A f).app M).app N)
+    (fun M {_ _} a ↦ ((projectionMap A f).app M).naturality a) L a t
 
 end AlgebraicGeometry.Etale
 
@@ -227,6 +351,21 @@ theorem tensorTraceTranspose
             (((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) V).map
               ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.map
                 a)).app L₀ ≫ Etale.tensorTraceIntegrated P.Coefficient f L₀ K₁ t) := by
-  sorry
+  let := c.hasCompactification
+  intro t
+  constructor
+  · apply congrArg _
+    simpa only [Etale.tensorTraceTheta, Etale.tensorTraceIntegrated,
+      Etale.tensorTraceProjection, Etale.dualizingComplexTensorMap,
+      Etale.dualizingComplex, Category.assoc] using
+      Etale.trace_calculation (A := ModuleCat.{u + 1} P.Coefficient) f L₀ K₀ t
+  · intro K₁ _ _ a
+    apply congrArg _
+    unfold Etale.tensorTraceIntegrated
+    rw [← Adjunction.homEquiv_naturality_right,
+      ← Adjunction.homEquiv_naturality_left]
+    apply congrArg _
+    exact Etale.trace_projection_naturality
+      (A := ModuleCat.{u + 1} P.Coefficient) f L₀ a t
 
 end AlgebraicGeometry.ProEtale
