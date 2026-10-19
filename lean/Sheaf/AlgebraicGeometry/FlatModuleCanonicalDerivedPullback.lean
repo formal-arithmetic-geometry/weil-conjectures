@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
-import Sheaf.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
 /-! # The canonical derived pullback comparison at a flat module
 

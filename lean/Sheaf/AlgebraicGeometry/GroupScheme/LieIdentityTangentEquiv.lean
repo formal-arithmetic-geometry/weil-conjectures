@@ -1,8 +1,8 @@
 module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 import Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentTransport
-import Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentOperations
+import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentOperations
 @[expose] public section
 universe u
 open CategoryTheory

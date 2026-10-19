@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.InverseImageStructureStalkIso
+import WeilConjectures.AlgebraicGeometry.InverseImageStructureStalkIso
 import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkKFlatTensorHomology

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.Thickening
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeThickening
 import Sheaf.AlgebraicGeometry.ThickeningIntegral
 
 /-!

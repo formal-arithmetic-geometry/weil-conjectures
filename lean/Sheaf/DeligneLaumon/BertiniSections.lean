@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-public import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+public import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple

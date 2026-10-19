@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AffineComplementReciprocalCover
 import Sheaf.AlgebraicGeometry.ReciprocalCoverLineBundle
-import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 
 /-! # Globally generated invertible modules with a prescribed affine section locus
 

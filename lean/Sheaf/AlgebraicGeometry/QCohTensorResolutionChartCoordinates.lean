@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
-public import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 @[expose] public section
 universe u

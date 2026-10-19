@@ -83,13 +83,14 @@
  "unit": "sk-i-cartier",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentAddition",
-  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IdentityTangentAddition.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentAddition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/IdentityTangentAddition.lean",
   "declaration": "AlgebraicGeometry.GrpObj.identity_tangent_transport_addition",
   "statement": "theorem identity_tangent_transport_addition\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    ∀ F : infPoints G → schemeTangentSpace k G.left G.hom x,\n      (∀ v : infPoints G, (F v).val =\n        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom r)) ≫\n          (infPointsEquivTangentGroup G v).val.left) →\n      ∀ v w, F (v * w) = F v + F w",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentAddition; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 import Sheaf.AlgebraicGeometry.FiniteEtaleThickeningLift
-import Sheaf.AlgebraicGeometry.InfinitesimalTransitionThickening
+import WeilConjectures.AlgebraicGeometry.InfinitesimalTransitionThickening
 
 /-!
 # Compatible finite étale covers of the infinitesimal fibres

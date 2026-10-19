@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
 module
-public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso

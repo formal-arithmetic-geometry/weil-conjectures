@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration
 import WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero

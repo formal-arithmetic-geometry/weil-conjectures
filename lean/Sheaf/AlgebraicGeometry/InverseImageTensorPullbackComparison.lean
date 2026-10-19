@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
+public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 public import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Inverse image as tensor pullback along the identity adjoint ring map

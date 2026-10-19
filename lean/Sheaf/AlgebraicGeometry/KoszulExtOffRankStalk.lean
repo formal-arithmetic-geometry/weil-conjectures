@@ -6,7 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Mathlib.Topology.LocallyConstant.Basic
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom

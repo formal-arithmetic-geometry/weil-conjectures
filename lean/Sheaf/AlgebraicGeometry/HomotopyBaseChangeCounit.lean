@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.HomotopyPullbackSquareLocalization
-public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Localization of the canonical homotopy pullback square

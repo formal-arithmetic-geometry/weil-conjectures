@@ -5,8 +5,8 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulQuotientCoefficientComplex
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

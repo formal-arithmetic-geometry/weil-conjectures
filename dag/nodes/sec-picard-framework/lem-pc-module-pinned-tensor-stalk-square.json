@@ -96,13 +96,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ModulePinnedTensorStalkSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModulePinnedTensorStalkSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ModulePinnedTensorStalkSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModulePinnedTensorStalkSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.module_pinned_tensor_stalk_square",
   "statement": "theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (x : X) (M N : Y.Modules) :\n    let SX := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n    let SY := RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)\n    let E := ModuleCat.extendScalars.{u, u, u} (f.stalkMap x).hom\n    let p := Classical.choose (exists_tensorPullback_stalk_iso f x)\n    let tx := Classical.choose (SheafOfModules.stalkTensorIso X.toRingedSpace x)\n    let ty := Classical.choose (SheafOfModules.stalkTensorIso Y.toRingedSpace (f x))\n    let c := Classical.choose (module_pullback_tensor f)\n    (Functor.Monoidal.μIso E (SY.obj M) (SY.obj N)).hom ≫\n        E.map (ty M N).inv ≫ p.inv.app (M ⊗ N) ≫ SX.map (c M N).hom ≫\n        (tx ((tensorPullback f).obj M) ((tensorPullback f).obj N)).hom =\n      p.inv.app M ⊗ₘ p.inv.app N",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ModulePinnedTensorStalkSquare; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

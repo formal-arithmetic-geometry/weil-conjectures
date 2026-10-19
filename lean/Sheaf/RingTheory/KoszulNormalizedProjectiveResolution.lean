@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.RingTheory.Ideal.Quotient.Defs

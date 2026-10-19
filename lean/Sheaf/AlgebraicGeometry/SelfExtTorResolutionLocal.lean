@@ -3,7 +3,7 @@ module
 public import Sheaf.Algebra.Homology.HomologyEvaluation
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact

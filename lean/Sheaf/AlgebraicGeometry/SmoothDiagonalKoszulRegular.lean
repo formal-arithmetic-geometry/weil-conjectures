@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
 import Sheaf.AlgebraicGeometry.SmoothDiagonalRegularGenerators

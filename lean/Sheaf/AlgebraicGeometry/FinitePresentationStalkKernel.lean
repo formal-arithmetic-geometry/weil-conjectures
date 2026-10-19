@@ -12,9 +12,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation
+import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
 import Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk
-import Sheaf.AlgebraicGeometry.InternalHomGermZeroFiniteType
+import WeilConjectures.AlgebraicGeometry.InternalHomGermZeroFiniteType
 import Sheaf.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation
 import Mathlib.LinearAlgebra.LeftExact
 

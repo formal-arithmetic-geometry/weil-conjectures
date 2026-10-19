@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux
 import Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor

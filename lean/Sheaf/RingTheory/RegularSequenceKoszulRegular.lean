@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Sheaf.RingTheory.KoszulTensorConeCoordinates

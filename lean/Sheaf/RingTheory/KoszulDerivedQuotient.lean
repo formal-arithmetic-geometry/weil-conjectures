@@ -5,7 +5,7 @@ Authors: SHEAF group Q153
 -/
 module
 
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.TensorProduct.Quotient
@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.RingTheory.KoszulBaseChangeIso
+import WeilConjectures.RingTheory.KoszulBaseChangeIso
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-!

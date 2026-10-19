@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.LocalSpectrumOpenClassification
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
-import Sheaf.AlgebraicGeometry.LocalPullbackAdjointStalkIso
+import WeilConjectures.AlgebraicGeometry.LocalPullbackAdjointStalkIso
 import Mathlib.Topology.Sheaves.Abelian
 
 /-!

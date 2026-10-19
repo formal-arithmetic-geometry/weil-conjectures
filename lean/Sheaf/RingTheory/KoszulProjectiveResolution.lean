@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

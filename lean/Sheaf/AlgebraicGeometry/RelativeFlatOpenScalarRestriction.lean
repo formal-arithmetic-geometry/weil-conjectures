@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.OpenScalarRestrictionStalkCriterion
-import Sheaf.AlgebraicGeometry.InverseImageStructureStalkIso
+import WeilConjectures.AlgebraicGeometry.InverseImageStructureStalkIso
 import Mathlib.RingTheory.RingHom.Flat
 
 /-! # Relative flatness on an open localized site

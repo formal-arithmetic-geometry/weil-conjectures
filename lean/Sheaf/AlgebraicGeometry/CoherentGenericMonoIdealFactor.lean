@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Paper.SchemeTheoreticSupport
-import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Factoring an ideal multiple through a generic coherent inclusion

@@ -12,7 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.FiniteFreeLocalStalkMapLift
 import WeilConjectures.AlgebraicGeometry.FiniteFreeLocalHomZero
-import Sheaf.AlgebraicGeometry.LocalStalkFactorizationGermComparison
+import WeilConjectures.AlgebraicGeometry.LocalStalkFactorizationGermComparison
 
 /-! # Spreading one linear map of stalks from a finitely presented source
 

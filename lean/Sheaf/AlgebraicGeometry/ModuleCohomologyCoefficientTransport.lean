@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientFactor
-import Sheaf.AlgebraicGeometry.ModuleCohomologyExtCoefficientFactor
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtCoefficientFactor
 
 /-! # Transport of coefficient naturality through the edge comparison
 

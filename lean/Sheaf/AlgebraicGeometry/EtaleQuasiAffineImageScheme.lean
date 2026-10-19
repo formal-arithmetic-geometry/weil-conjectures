@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence
 import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 import Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism

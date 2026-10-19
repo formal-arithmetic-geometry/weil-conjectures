@@ -6,7 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalNestedCharts
-import Sheaf.AlgebraicGeometry.KoszulRegularAffineRefinement
+import WeilConjectures.AlgebraicGeometry.KoszulRegularAffineRefinement
 
 /-! # A compatible regular Koszul comparison cover
 

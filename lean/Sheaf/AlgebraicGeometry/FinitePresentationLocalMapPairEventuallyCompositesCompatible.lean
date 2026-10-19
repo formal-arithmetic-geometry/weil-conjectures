@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalMapPairDefect
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
-import Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange
+import WeilConjectures.AlgebraicGeometry.LocalMapPairOverlapBaseChange
 
 @[expose] public section
 

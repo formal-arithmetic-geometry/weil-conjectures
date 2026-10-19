@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
-import Sheaf.AlgebraicGeometry.Modules.QuasiAffineLocallyFreeEmbedding
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiAffineLocallyFreeEmbedding
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf

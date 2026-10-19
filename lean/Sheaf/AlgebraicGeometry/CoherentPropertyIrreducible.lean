@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.Dimension.Finite
 import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Property devissage on an irreducible closed support

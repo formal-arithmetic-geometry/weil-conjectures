@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.Algebra.Polynomial.BigOperators
 import Sheaf.AlgebraicGeometry.SymmetricProductSectionsNonvanishing
 import Sheaf.AlgebraicGeometry.SymmetricProductSectionsPermutation
-import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 

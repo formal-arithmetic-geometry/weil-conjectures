@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality

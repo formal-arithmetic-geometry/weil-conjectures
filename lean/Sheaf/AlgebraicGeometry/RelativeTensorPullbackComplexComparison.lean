@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
+public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 import Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap

@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 public import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
-public import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.AlgebraicGeometry.AffineTildeTotalTensor
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

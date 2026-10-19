@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison
-import Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology
+import WeilConjectures.AlgebraicGeometry.InjectiveModuleSheafHCohomology
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-! # Affine case of restricted injective acyclicity

@@ -6,7 +6,7 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalComparisonMap
 import Sheaf.RingTheory.KoszulConormalComparisonQuasiIso
 

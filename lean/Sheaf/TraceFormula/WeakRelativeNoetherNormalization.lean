@@ -26,7 +26,7 @@ import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.KrullDimension.PID
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.RingTheory.LimitModuleFinitePresentation
 import Sheaf.RingTheory.PowerPerturbationFibreDimension

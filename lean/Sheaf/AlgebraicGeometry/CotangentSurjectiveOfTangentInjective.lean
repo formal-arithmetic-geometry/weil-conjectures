@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.Ideal.Cotangent
 import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality

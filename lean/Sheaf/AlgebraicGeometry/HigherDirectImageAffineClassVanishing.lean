@@ -5,9 +5,9 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageLocalClassVanishing
-import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
 
 /-! # Eventual vanishing of affine higher-image sections
 

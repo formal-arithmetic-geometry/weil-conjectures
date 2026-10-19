@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import Sheaf.AlgebraicGeometry.CoherentPropertyIrreducible
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 
 @[expose] public section
 

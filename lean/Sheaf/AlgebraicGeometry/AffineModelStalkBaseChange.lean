@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # Canonical base change through an affine stalk
 

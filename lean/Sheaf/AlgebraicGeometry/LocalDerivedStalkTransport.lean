@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-import Sheaf.AlgebraicGeometry.LocalPullbackAdjointStalkIso
+import WeilConjectures.AlgebraicGeometry.LocalPullbackAdjointStalkIso
 import Sheaf.AlgebraicGeometry.LocalDirectImageStalkCohomology
 
 /-! # Transport of an arbitrary sheaf comparison to local total cohomology

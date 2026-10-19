@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 

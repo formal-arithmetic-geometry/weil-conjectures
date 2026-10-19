@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleMapIsoLocus
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.ModuleMapIsoLocusPullback
+import WeilConjectures.AlgebraicGeometry.ModuleMapIsoLocusPullback
 import WeilConjectures.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.ResidueField

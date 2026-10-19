@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.SixFunctors.SchemeFrobenius
 public import Sheaf.Paper.TraceFixedScheme
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.RingTheory.Length
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Mathlib.AlgebraicGeometry.Pullbacks

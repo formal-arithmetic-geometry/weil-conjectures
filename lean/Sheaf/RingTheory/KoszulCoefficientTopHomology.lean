@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
+public import WeilConjectures.RingTheory.KoszulQuotientCoefficientComplex
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Determinant
 import Mathlib.Algebra.Category.ModuleCat.Projective

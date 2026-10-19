@@ -6,8 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
 
 /-! # Invertibility of the non-iterated direct-image base-change map
 Source: Stacks Project, Tags 08HY and 0BDP.

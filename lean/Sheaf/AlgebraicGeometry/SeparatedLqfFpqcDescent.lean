@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
+import WeilConjectures.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent

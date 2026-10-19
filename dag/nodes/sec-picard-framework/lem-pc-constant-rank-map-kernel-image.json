@@ -95,13 +95,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapKernelImage",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ConstantRankMapKernelImage.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ConstantRankMapKernelImage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ConstantRankMapKernelImage.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.kernel_image_pullback_of_constantRank",
   "statement": "theorem kernel_image_pullback_of_constantRank\n    {Y Z : Scheme.{u}} [IsReduced Y] {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ)\n    (hrank : ∀ z : Z, ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),\n      Set.range g.base = {j.base z} ∧\n      ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank = a) :\n    (kernel ((Modules.pullback j).map φ)).IsFiniteLocallyFreeOfRank (m - a) ∧\n    (Abelian.image ((Modules.pullback j).map φ)).IsFiniteLocallyFreeOfRank a ∧\n    ∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧\n      IsSplitMono ((restrictFunctor U.ι).map\n        (Abelian.image.ι ((Modules.pullback j).map φ)))",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Modules.ConstantRankMapKernelImage; points at its upstream twin."
  },
  "lean_audit": {
   "master": {

@@ -112,13 +112,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ConstantRankMapNormalFormNonempty.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ConstantRankMapNormalFormNonempty.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_normal_form_of_constantRank_nonempty",
   "statement": "theorem exists_local_normal_form_of_constantRank_nonempty\n    {Y Z : Scheme.{u}} [IsReduced Y] [Nonempty Z] {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ)\n    (hrank : ∀ z : Z, ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),\n      Set.range g.base = {j.base z} ∧\n      ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank = a) :\n    ∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin (m - a))) ⊞ free (ULift.{u} (Fin a)))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =\n          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty; points at its upstream twin."
  },
  "proof_deps": [
   "def-weil-additive-category",

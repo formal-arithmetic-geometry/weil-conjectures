@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf

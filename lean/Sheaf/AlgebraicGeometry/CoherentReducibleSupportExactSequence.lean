@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Splitting a coherent module with reducible closed support
 

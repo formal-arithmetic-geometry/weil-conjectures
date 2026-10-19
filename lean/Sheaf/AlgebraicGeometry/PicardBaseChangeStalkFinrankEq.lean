@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.AlgebraicGeometry.PullbackCarrier
-import all Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import all WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk

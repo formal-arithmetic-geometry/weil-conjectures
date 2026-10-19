@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 

@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+public import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Mathlib.RingTheory.Finiteness.Ideal

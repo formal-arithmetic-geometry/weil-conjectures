@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 import Sheaf.AlgebraicGeometry.TensorPullbackOpenTriangle
 import Sheaf.AlgebraicGeometry.TensorPullbackOpenSquare
 

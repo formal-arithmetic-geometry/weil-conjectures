@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
+import WeilConjectures.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 /-!

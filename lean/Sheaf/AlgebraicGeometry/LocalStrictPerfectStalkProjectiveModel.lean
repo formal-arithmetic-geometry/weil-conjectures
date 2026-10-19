@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Module.Projective
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Category.ModuleCat.Biproducts

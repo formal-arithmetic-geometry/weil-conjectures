@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation
+import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
 import Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel
 
 /-!

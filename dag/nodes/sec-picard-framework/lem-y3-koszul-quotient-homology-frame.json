@@ -120,13 +120,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulQuotientHomologyFrame",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulQuotientHomologyFrame.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulQuotientHomologyFrame",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulQuotientHomologyFrame.lean",
   "declaration": "AlgebraicGeometry.koszul_quotient_homology_frame",
   "statement": "theorem koszul_quotient_homology_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens) (n m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex\n      (Γ(Y, U.1) : Type u) (i.ker.ideal U) m f).homology n\n    Nonempty (T.obj Q ≅ (Scheme.Modules.restrictFunctor U.1.ι).obj\n      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B))",
   "branch": "sheaf-dag",
   "by": "Y3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.KoszulQuotientHomologyFrame; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

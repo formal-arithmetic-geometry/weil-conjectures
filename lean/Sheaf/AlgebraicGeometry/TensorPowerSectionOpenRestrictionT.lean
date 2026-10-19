@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 import Sheaf.AlgebraicGeometry.TensorPowerOpenRestrictionAddition
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 @[expose] public section

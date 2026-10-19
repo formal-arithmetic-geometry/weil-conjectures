@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 
 /-!

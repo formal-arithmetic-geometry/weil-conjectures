@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Splitting the support of a coherent module into two closed pieces
 

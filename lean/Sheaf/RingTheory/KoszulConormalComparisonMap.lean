@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalBasis
 import Mathlib.LinearAlgebra.Determinant
 

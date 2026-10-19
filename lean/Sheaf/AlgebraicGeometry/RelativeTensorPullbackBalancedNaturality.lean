@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
+public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed

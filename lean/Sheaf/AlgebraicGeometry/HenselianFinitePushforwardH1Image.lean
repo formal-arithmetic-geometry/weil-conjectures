@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift
-import Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1
+import WeilConjectures.AlgebraicGeometry.InjectiveModuleSheafH1
 
 /-!
 # Images of finite constant pushforwards in restricted injectives

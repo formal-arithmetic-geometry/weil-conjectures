@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!

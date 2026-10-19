@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulCoefficientExtensionChi
 import Sheaf.RingTheory.KoszulCoefficientExtensionNu

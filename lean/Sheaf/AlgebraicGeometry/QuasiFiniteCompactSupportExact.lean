@@ -41,7 +41,7 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale

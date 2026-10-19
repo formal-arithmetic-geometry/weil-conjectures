@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionAffineModel
-public import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor

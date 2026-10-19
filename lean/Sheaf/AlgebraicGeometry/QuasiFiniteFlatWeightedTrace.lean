@@ -71,7 +71,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization
 import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous

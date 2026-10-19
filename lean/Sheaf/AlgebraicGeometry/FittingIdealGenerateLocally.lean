@@ -18,7 +18,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
-import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Mathlib.LinearAlgebra.Matrix.Adjugate
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Mathlib.AlgebraicGeometry.OpenImmersion

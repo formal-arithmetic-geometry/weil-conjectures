@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 import Sheaf.AlgebraicGeometry.ProductTangentSpaceDirectSum
 import WeilConjectures.AlgebraicGeometry.TangentMapLinear

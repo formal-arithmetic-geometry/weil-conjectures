@@ -6,10 +6,10 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulConormalBasis
-import Sheaf.RingTheory.KoszulRegularFlatBaseChange
+import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.LinearAlgebra.Determinant
 

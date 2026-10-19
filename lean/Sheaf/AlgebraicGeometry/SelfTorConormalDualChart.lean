@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module

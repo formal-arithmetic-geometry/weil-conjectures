@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.IsProperOfFieldBaseChange
+import WeilConjectures.AlgebraicGeometry.IsProperOfFieldBaseChange
 import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
 import WeilConjectures.AlgebraicGeometry.GenericFlatness
 import Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink

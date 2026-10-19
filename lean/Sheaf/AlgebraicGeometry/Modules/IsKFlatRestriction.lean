@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # K-flatness under open restriction
 

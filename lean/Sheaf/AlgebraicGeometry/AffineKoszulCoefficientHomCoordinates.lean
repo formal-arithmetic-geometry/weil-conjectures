@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
+public import WeilConjectures.RingTheory.KoszulQuotientCoefficientComplex
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

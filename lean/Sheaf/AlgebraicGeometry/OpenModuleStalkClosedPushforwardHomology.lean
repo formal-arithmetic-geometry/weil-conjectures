@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

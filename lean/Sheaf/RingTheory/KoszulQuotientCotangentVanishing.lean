@@ -6,7 +6,7 @@ Authors: SHEAF group Q98
 module
 
 public import Sheaf.RingTheory.CotangentResolutionCoherence
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.RingTheory.KoszulConormalBasis

@@ -21,7 +21,7 @@ import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
-import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
+import WeilConjectures.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.RingTheory.Regular.RegularSequence

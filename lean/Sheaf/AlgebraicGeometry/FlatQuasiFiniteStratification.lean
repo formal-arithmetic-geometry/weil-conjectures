@@ -8,12 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import all WeilConjectures.AlgebraicGeometry.FlatFpLqfBoundedStratification
-import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
 import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompact
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 
 /-!
 # Stratifying flat quasi-finite separated morphisms by degree

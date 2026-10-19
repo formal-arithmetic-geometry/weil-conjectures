@@ -5,15 +5,15 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionDegreeZero
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 
 /-! # Ordinary flat exchange with a prescribed adjunction

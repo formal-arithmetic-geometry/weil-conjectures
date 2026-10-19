@@ -138,13 +138,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalMapPairOverlapBaseChange.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalMapPairOverlapBaseChange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalMapPairOverlapBaseChange.lean",
   "declaration": "AlgebraicGeometry.localMapPairOverlapDefect_baseChange_iff",
   "statement": "theorem localMapPairOverlapDefect_baseChange_iff\n    {X Y : Scheme.{u}} (U : X.OpenCover.{u}) (F G : X.Modules)\n    (r₀ : ∀ x, (Scheme.Modules.pullback (U.f x)).obj F ⟶\n      (Scheme.Modules.pullback (U.f x)).obj G) (a b : U.I₀) (q : Y ⟶ X) :\n    let W := pullback (U.f a) (U.f b)\n    let t : W ⟶ X := pullback.fst (U.f a) (U.f b) ≫ U.f a\n    let V := U.pullback₁ q\n    let Q := modulesPseudofunctor.toDescentData V.f\n    let C := Scheme.Modules.tensorPullback q\n    let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦\n      let e := Scheme.Modules.openCoverTensorPullbackComparison q U x\n      e.inv.app F ≫ (Scheme.Modules.pullback (U.pullbackHom q x)).map (r₀ x) ≫\n        e.hom.app G\n    Pseudofunctor.DescentData.PairCompatibility r a b ↔\n      (Scheme.Modules.pullback (pullback.fst t q)).map\n        (localMapPairOverlapDefect U F G r₀ a b) = 0",
   "branch": "sheaf-dag",
   "by": "F2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

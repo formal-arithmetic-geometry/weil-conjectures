@@ -6,7 +6,7 @@ Authors: SHEAF group Q38
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-public import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+public import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus

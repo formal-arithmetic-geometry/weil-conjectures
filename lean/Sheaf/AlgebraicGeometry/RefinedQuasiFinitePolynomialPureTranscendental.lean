@@ -20,7 +20,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite

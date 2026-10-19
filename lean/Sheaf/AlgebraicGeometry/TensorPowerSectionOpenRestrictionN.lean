@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-public import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 @[expose] public section
 

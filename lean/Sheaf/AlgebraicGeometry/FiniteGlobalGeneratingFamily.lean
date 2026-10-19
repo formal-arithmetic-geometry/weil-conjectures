@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import WeilConjectures.AlgebraicGeometry.FiniteSectionsCover
-import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 
 /-! # Finite global generating families for invertible modules
 

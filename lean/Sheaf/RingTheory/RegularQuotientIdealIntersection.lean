@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import Sheaf.RingTheory.KoszulRegularSequence
+import WeilConjectures.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
 

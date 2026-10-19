@@ -13,8 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
 import WeilConjectures.AlgebraicGeometry.FlatFpLqfBoundedStratification
-import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 
 /-!
 # Constructible finite stratifications of flat quasi-finite morphisms

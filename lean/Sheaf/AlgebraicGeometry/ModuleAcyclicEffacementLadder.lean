@@ -4,7 +4,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import WeilConjectures.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 @[expose] public section

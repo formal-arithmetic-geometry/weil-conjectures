@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 
 /-! Auxiliary linear independence and spanning result for conormal generators.
 (blueprint: lem-sc-koszul-conormal-basis-data)

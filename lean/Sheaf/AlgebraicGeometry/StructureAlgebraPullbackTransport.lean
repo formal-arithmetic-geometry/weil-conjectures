@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Transport of the structure algebra through an invertible base-change map
 

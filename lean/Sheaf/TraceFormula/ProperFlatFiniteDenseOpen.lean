@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.TraceFormula.FlatFpRelativeDimensionDenseOpen
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

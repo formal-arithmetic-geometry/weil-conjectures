@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import all Sheaf.RingTheory.KoszulBaseChangeIso
+import all WeilConjectures.RingTheory.KoszulBaseChangeIso
 
 /-! # Basis calculation for quotient-coefficient Koszul homology
 

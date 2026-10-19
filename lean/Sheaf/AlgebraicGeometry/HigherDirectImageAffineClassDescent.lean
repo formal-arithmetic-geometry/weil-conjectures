@@ -5,9 +5,9 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi
-import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitRepresentative
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale

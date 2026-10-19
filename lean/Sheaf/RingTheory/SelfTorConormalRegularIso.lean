@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.SelfTorConormalComparison
-public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulNormalizedProjectiveResolution
 import Sheaf.RingTheory.KoszulQuotientTensorHomologyBasis
