@@ -1,0 +1,130 @@
+{
+ "id": "def-weil-pbc-source-derived-isomorphism-evaluation",
+ "kind": "definition",
+ "title": "Canonical evaluation of source-site derived Isom sheaves",
+ "statement": "For a scheme X and a commutative ring B in Type(u+1), identify the slice-site and actual-source-site local derived Isom presheaves naturally, and hence identify their sheafifications [def-weil-pbc-derived-local-isomorphism-sheaf], [def-weil-pbc-derived-morphism-sheaf-comparison]. For any derived module sheaves A,D on X_et, an affine weakly contractible U in X_proet, and a section s over U of the comparison inverse image of the source-site Isom sheaf, define sourceDerivedIsoEvaluation(s) as an actual isomorphism between localProEtaleComparison(U.hom,B)(A) and localProEtaleComparison(U.hom,B)(D). The map is the comparison-slice evaluation transported through the localization equivalence [lem-weil-proetale-weakly-etale-localization]. There is no boundedness, finite-coefficient or nonempty-stalk hypothesis. The inverse of the pro-etale sheafification unit is unique; no arbitrary witness is chosen.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 0F63; localization of etale and pro-etale sites, Tags 098K and 094T."
+ },
+ "proof": [
+  {
+   "text": "Construct the source/slice sheaf equivalences by the etale over-site equivalence and pro-etale weakly-etale localization. Their functors are additive sectionwise. Derive their exact equivalences and their comparison with the canonical inverse-image functors.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-derived-local-isomorphism-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a morphism of etale objects, the localization comparison is the identity on sections. The upperStar composition coherence gives the underived path equation. Functoriality of mapDerivedCategory transports it to derived categories. Conjugating local isomorphisms by that equation proves naturality. Full faithfulness supplies the inverse, giving an isomorphism of Isom presheaves and hence of sheafifications.",
+   "uses": [
+    "def-weil-pbc-derived-local-isomorphism-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the section along the inverse sheaf isomorphism and comparison pullback. Apply derivedIsoEvaluation, which uses the uniquely invertible pro-etale sheafification unit on weakly contractible affines. Map the resulting actual isomorphism through the pro-etale localization equivalence and conjugate by the derived restriction comparison. Its endpoints are precisely localProEtaleComparison.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 0F63, source/slice localization transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"overSheafEquiv\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "No complete source/slice derived Isom-presheaf transport. Use the existing overSheafEquiv, localization composition coherence, exact derivation and slice evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of local derived isomorphisms on slice sites is naturally isomorphic to that on the small sites of the source schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a scheme constructed via Zariski gluing data to a sheaf $ F $ is an isomorphism. This follows from the universal property of the glued scheme and the naturali\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N} {U : X.Opens} [CategoryTheory.IsIso φ],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the induced map $\\\\phi_U$ on sections over $U$ is an isomorphism of abelian groups.\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {K : CategoryTheory.GrothendieckTopology D} →\\n          {A : Type u_4} →\\n            [inst_2 : CategoryTheory.Category.{v_4, u_4} A] →\\n             \", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and any two sheaves $ \\\\mathcal{F}, \\\\mathcal{F}' : \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N},\\n  CategoryTheory.IsIso φ ↔ ∀ (U : X.Opens), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a scheme $X$, a homomorphism $\\\\phi : M \\\\to N$ is an isomorphism in the category of sheaves if and only if for every open subset $U \\\\subseteq X$, the induced\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafIso_hom_val\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D} {A : Type u_4}\\n  [inst_2 : CategoryTheory.Category.{v_4, u_4} A] {G : CategoryTheory.Functor C D} [inst_3 : G.IsCoverDense K]\\n  \", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, and sheaves $ \\\\mathcal{F}, \\\\mathcal{F}' : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\m\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.isoOver\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {K : CategoryTheory.GrothendieckTopology D} →\\n          {A : Type u_4} →\\n            [inst_2 : CategoryTheory.Category.{v_4, u_4} A] →\\n             \", \"doc\": \"Given an isomorphism $\\\\alpha : G^{\\\\text{op}} \\\\circ \\\\mathcal{F} \\\\Rightarrow G^{\\\\text{op}} \\\\circ \\\\mathcal{F}'$ between the compositions of the opposite functor $G^{\\\\text{op}}$ with the underlying preshe\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {K : CategoryTheory.GrothendieckTopology D} →\\n          {G : CategoryTheory.Functor C D} →\\n            [G.IsCoverDense K] →\\n              [G.IsLocal\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and a cover-dense and locally full functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an iso\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso_hom_val\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D}\\n  {G : CategoryTheory.Functor C D} [inst_2 : G.IsCoverDense K] [inst_3 : G.IsLocallyFull K]\\n  {ℱ ℱ' : CategoryTheory.Sheaf K (Ty\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and a cover-dense and locally full functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, if two sheaves $\\\\mathc\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete source/slice derived Isom-presheaf transport. Use the existing overSheafEquiv, localization composition coherence, exact derivation and slice evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "overSheafEquiv|upperStarIsoLocalizationRestriction_comp|derivedIsoEvaluation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "No complete source/slice derived Isom-presheaf transport. Use the existing overSheafEquiv, localization composition coherence, exact derivation and slice evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of local derived isomorphisms on slice sites is naturally isomorphic to the sheaf on small sites of source schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{ℱ ℱ' : Sheaf K (Type v)} (i : G.op ⋙ ℱ.val ≅ G.op ⋙ ℱ'.val) : ℱ ≅ ℱ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and a cover-dense and locally full functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an iso\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafIso\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{ℱ ℱ' : Sheaf K A} (i : G.op ⋙ ℱ.val ≅ G.op ⋙ ℱ'.val) : ℱ ≅ ℱ'\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and any two sheaves $ \\\\mathcal{F}, \\\\mathcal{F}' : \\\\ma\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.presheafIso\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{ℱ ℱ' : Sheaf K A} (i : G.op ⋙ ℱ.val ≅ G.op ⋙ ℱ'.val) : ℱ.val ≅ ℱ'.val\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and any two sheaves $ \\\\mathcal{F}, \\\\mathcal{F}' : \\\\ma\"}\n  {\"name\": \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": (e.sheafCongr J K A).functor ⋙ sheafToPresheaf K A ⋙ e.op.congrLeft.inverse ≅ sheafToPresheaf J A\", \"doc\": \"A natural isomorphism between the composition of functors $\\\\text{Sh}(\\\\mathcal{C}, J, \\\\mathcal{A}) \\\\xrightarrow{\\\\simeq} \\\\text{Sh}(\\\\mathcal{D}, K, \\\\mathcal{A}) \\\\xrightarrow{\\\\iota} \\\\text{PSh}(\\\\mathcal{D}\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.counitIso\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": inverse J K e A ⋙ functor J K e A ≅ 𝟭 (Sheaf _ A)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where $e^{-1}$ is a dense subsite, this natural isomor\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where $e^{-1}$ is a dense subsite, the composition of \"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": Sheaf J A ≌ Sheaf K A\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete derived source/slice Isom comparison. DenseSubsite.sheafIso requires a presheaf isomorphism as input; this module constructs that missing isomorphism and its derived coherence."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompatibleFiniteDerivedTrivializations",
+  "date": "2026-10-19",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Compatible normalized local models, proof (c).",
+   "via": [
+    "lem-weil-pbc-compatible-finite-derived-trivializations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedLocalIsomorphismSourceEvaluation",
+  "file": "lean/Sheaf/Paper/DerivedLocalIsomorphismSourceEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sourceDerivedIsoEvaluation",
+  "statement": "def sourceDerivedIsoEvaluation\n    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (U : X.ProEt) (ha : IsAffine U.left)\n    (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)\n    (s : ((comparisonSetUpperStar X).obj\n      (derivedLocalIsomorphismSheaf A D)).obj.obj (op U)) :\n    (localProEtaleComparison U.hom B).obj A ≅\n      (localProEtaleComparison U.hom B).obj D",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

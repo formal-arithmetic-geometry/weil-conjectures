@@ -33,109 +33,36 @@
  ],
  "proof": [
   {
-   "text": "Work over each affine open $V=\\operatorname{Spec}A$ of $X$; these opens cover $X$. The hypotheses on $\\mathcal I_n$ restrict to $V$. By [lem-weil-pbc-finite-locally-constant-sets-representability] choose finite etale $P_n\\to V$ and isomorphisms $h_{P_n}\\cong\\mathcal I_n|_V$, where $h_{P_n}(W)=\\operatorname{Mor}_V(W,P_n)$. Use [lem-galois-yoneda-fully-faithful] on $V_{\\mathrm{et}}$ to turn $r_n$ into a $V$-map $p_n:P_{n+1}\\to P_n$: it is the image of $\\mathrm{id}_{P_{n+1}}$ under the corresponding natural transformation. Naturality says that every value of this transformation is postcomposition with $p_n$, so all iterated reduction maps correspond to the composites of the $p_n$. No surjectivity of $p_n$ is asserted.",
+   "text": "Apply [lem-weil-pbc-normalized-derived-isomorphism-section-reduction] to obtain reduction morphisms r_n obeying the normalization square for the canonical, separately constructed sourceDerivedIsoEvaluation.",
    "uses": [
-    "lem-weil-pbc-finite-locally-constant-sets-representability",
-    "lem-galois-yoneda-fully-faithful"
+    "lem-weil-pbc-normalized-derived-isomorphism-section-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "etale-cohomology.tex Tag 03RV, lemma-characterize-finite-locally-constant; categories.tex Tag 001P, lemma-yoneda; represent the given finite isomorphism sheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $P_n=\\operatorname{Spec}A_n$ (finite morphisms are affine by [def-weil-finite-integral-morphism]). Form $C=\\varinjlim_n A_n$ in commutative $A$-algebras by [lem-weil-pbc-commutative-algebras-colimits-exist], with transitions $p_n^\\#$. Then [lem-weil-pbc-spec-small-colimit-limit] identifies $P=\\operatorname{Spec}C$ with $\\varprojlim_n P_n$, with projections $\\pi_n$ satisfying $p_n\\pi_{n+1}=\\pi_n$. Every $A_n$ is etale over $A$, so $A\\to C$ is ind-etale by its definition, and [lem-weil-pbc-ind-etale-stability] makes $P\\to V$ weakly etale. Open immersions are etale by [lem-weil-pbc-open-immersion-etale]; their local ring maps and their diagonals are isomorphisms, hence flat, so they are weakly etale by [def-weil-weakly-etale-morphism]. The stability node therefore makes $P\\to X$ weakly etale by composition. The countable diagram and its colimit are small in the fixed universe: the colimit is a quotient of a set of finite words in the disjoint union of the $A_n$. Thus $P$ is a legitimate affine pro-etale site object.",
+   "text": "Apply [lem-weil-pbc-finite-lisse-tower-section-cover] to the finite lisse local Isom sheaves, their reduction morphisms, and the supplied nonempty geometric stalks. Package its Type u covering family as Scheme.Cover.",
    "uses": [
-    "def-weil-pbc-finite-etale-category",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-commutative-algebras-colimits-exist",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-proetale-site",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-weakly-etale-morphism"
+    "lem-weil-pbc-finite-lisse-tower-section-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 01YW, limits.tex lemma-directed-inverse-system-affine-schemes-has-limit; Tag 097N, lemma-ind-etale-implies"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $\\bar v:\\operatorname{Spec}\\Omega\\to V$. Put $S_n=(\\mathcal I_n)_{\\bar v}$, finite and nonempty by hypothesis. For $m\\geq n$ let $r_{m,n}$ be the composite stalk transition and put $T_n=\\bigcap_{m\\geq n}\\operatorname{im}(r_{m,n})$. These are nonempty: the images are nested nonempty subsets of the finite $S_n$, hence eventually constant. The restricted map $T_{n+1}\\to T_n$ is surjective: given $t\\in T_n$, choose $m\\geq n+1$ beyond stabilization for both levels, lift $t$ to $s\\in S_m$, and take $r_{m,n+1}(s)\\in T_{n+1}$. Apply [lem-galois-inverse-limit-surjective] to the $T_n$ to choose a compatible tuple $(t_n)$. By [def-weil-pbc-geometric-stalks], each $t_n$ is a germ represented by a section on a pointed etale neighbourhood $(W,\\bar w)$. Under $\\mathcal I_n|_V\\cong h_{P_n}$ this section is a map $W\\to P_n$; composing with $\\bar w$ gives an $\\Omega$-point of $P_n$. This depends only on the germ, since two representatives of the same germ agree on a common pointed refinement. It commutes with $r_n$ and $p_n$ by the postcomposition description in step 1. The resulting compatible $\\Omega$-points give $\\operatorname{Spec}\\Omega\\to P$ by the limit property in [lem-weil-pbc-spec-small-colimit-limit]. Every point of $V$ admits a geometric point, so $P\\to V$ is surjective. Being affine and weakly etale, it is a singleton pro-etale covering by [def-weil-pbc-proetale-site]; on any affine open $V'\\subset V$, its inverse image is affine and surjects onto $V'$, giving the required finite covering witness.",
+   "text": "Evaluate its sections on each affine weakly contractible covering object. Substitute the section compatibility into the normalization/evaluation square. This is precisely the stated equation, with the original canonical maps.",
    "uses": [
-    "lem-galois-inverse-limit-surjective",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-source-derived-isomorphism-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BV, lemma-weird, stable-image argument applied separately to finite stalk sets; categories.tex Tag 086J, lemma-nonempty-limit"
-   }
-  },
-  {
-   "text": "Let $a_n\\in\\mathcal I_n(P_n)$ be the universal section corresponding to $\\mathrm{id}_{P_n}$. The explicit presheaf-colimit formula of [def-weil-pbc-site-comparison-morphism], at the pair $(P_n,\\pi_n:P\\to P_n)$, gives a section $s_n\\in(\\nu_X^*\\mathcal I_n)(P)$ after sheafification. Its reduction is represented by $r_n(a_{n+1})$, which corresponds to $p_n:P_{n+1}\\to P_n$. In that colimit it equals the image of $a_n$ along this arrow; since $p_n\\pi_{n+1}=\\pi_n$, it is exactly $s_n$. Consequently $(\\nu_X^*r_n)(s_{n+1})=s_n$ for every $n$. This construction uses the actual universal projections and gives one simultaneous compatible tuple, without taking a limit through the inverse-image functor.",
-   "uses": [
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BV, lemma-weird, compatible sections; explicit inverse-image colimit and universal projections"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-proetale-affine-wcontractible-covering-family] in the full site $X_{\\mathrm{proet}}$ to $P$. It gives a covering $\\{U_j\\to P\\}$ with affine $U_j$ weakly contractible for this full site. Compose with the singleton cover $P\\to V$, and then with the affine open covering of $X$. This gives the required covering of $X$. Pull back the sections $s_n$ to each $U_j$; the same compatibility equations still hold, since restrictions commute with sheaf morphisms.",
-   "uses": [
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0990, lemma-proetale-enough-w-contractible; refinement of the simultaneous-section cover"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation] with $B=B_n,E=E_n,K=K_n$ on each $U_j$. Its isomorphism bijection turns $s_n|_{U_j}$ into an actual derived isomorphism $e_{jn}:\\underline E_n|_{U_j}\\simeq(\\nu_X^*K_n)|_{U_j}$. All boundedness and finiteness assumptions are the supplied levelwise assumptions. For scalar extension $B_{n+1}\\to B_n$, the resulting objects are bounded because they identify with $E_n,K_n$ through $\\eta_n,\\rho_n$. The natural tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies the pulled-back etale reduction with the pro-etale derived reduction. By the bridge's scalar-extension and composition clauses, the section $(\\nu_X^*r_n)(s_{n+1}|_{U_j})$ corresponds precisely to\n$\\rho_n|_{U_j}\\circ(e_{j,n+1}\\otimes^L_{B_{n+1}}B_n)\\circ(\\underline{\\eta_n}|_{U_j})^{-1}$.\nSince it equals $s_n|_{U_j}$, injectivity of the bridge's bijection gives that displayed composite equal to $e_{jn}$, which is the asserted compatibility. The empty $X$ is handled by the empty covering. Bounds need not be uniform in $n$, and neither the original reductions nor the scheme projections need be surjective.",
-   "uses": [
-    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Agent bounded-derived adaptation of Tag 09BV; sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product; actual isomorphisms and explicit compatibility"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-locally-constant-sets-representability",
-  "lem-galois-yoneda-fully-faithful",
-  "def-weil-pbc-finite-etale-category",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-commutative-algebras-colimits-exist",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-proetale-site",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-weakly-etale-morphism",
-  "lem-galois-inverse-limit-surjective",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-normalized-derived-isomorphism-section-reduction",
+  "lem-weil-pbc-finite-lisse-tower-section-cover",
+  "def-weil-pbc-source-derived-isomorphism-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Adaptation of Tag 09BV: finite stalk stable images, finite etale inverse limit, and weakly contractible refinement; actual derived evaluation is a separate bounded finite-source bridge"
+  "place": "W2 formal reduction of Tag 09BV: finite etale covering cones, adjunction-unit universal sections and normalization-compatible evaluation; 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -278,5 +205,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Wrote review.md. Checked all three modules, dependency interfaces, canonical constructions, statement clauses, universes, edge cases, docstrings, report sections, and verbatim signatures. Per-file scompile.py compilation reproduced cleanly. No defects found; no fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

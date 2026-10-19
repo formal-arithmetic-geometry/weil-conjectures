@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompatibleFiniteDerivedTrivializations",
+  "date": "2026-10-19",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Compatible normalized local models, proof (c).",
+   "via": [
+    "lem-weil-pbc-compatible-finite-derived-trivializations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-constant-derived-normalization-universal",
+ "title": "Constant derived realization preserves universal coefficient arrows",
+ "statement": "For any site C of object universe u+1 and morphism universe u, coefficient map q:R→S, and universal derived module arrow d:E→Res_q E', the canonically specified normalizationConstantArrow J q d is universal for exact scalar restriction on fixed-ring module-valued sheaves. Definitions: [def-weil-pbc-derived-normalization-arrows].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4, 0G7E, 098K, 09BV and 0F63; compatible finite derived trivializations, step 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Construct the exact equivalence from modules over the constant commutative ring sheaf to fixed-ring module-valued sheaves by restriction along the canonical ring isomorphism followed by constantRingModuleRestriction. Construct the constant comparison by sheafifying realizationRingUnit and the module sheafification unit; local bijectivity proves invertibility. The existing ringed constant-realization scalar-extension theorem makes its derived comparison invertible with the stated unit equation.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check compatibility of the constant comparison with coefficient restriction on constant sections, using the normalization of restrictionIso. Apply mapDerivedCategorySquareIso_hom_app_comp to obtain the exact derived coefficient identity. Universality of d identifies its target with module scalar extension. The ringed comparison and its unit identity make ringedNormalization universal. The exact comparison equivalences induce an equivalence of structured-arrow categories; the derived coefficient identity identifies its image with normalizationConstantArrow, which is therefore universal.",
+   "uses": [
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit constant-ring comparison by sheafification units; exact-localization pasting and universal-arrow adjunctions, using the existing constant realization scalar-extension theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact constant sheaf realization commutes with derived extension of coefficient scalars and preserves universal arrows to scalar restriction",
+   "results": "No matching Mathlib theorem; only general exact functor and condensed-module tools. Library ConstantRealizationDerivedScalarExtension provides the ringed-module comparison.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing ringed realization theorem and compare the fixed-ring presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUniversal\"",
+   "results": "StructuredArrow.IsUniversal.desc, fac, hom_desc and existsUnique supply universal-arrow uniqueness.",
+   "date": "2026-10-19",
+   "verdict": "Generic universal-arrow tools, no site/constant specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Uu]niversal|[Uu]niversal.*constant|constantRealizationDerivedScalarExtension",
+   "results": "msearch Mathlib: no hits. Local library: ConstantRealizationDerivedScalarExtension.lean.",
+   "date": "2026-10-19",
+   "verdict": "No fixed-coefficient normalization statement; compare the two presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact constant sheaf realization preserves universal arrows for derived restriction of coefficient scalars",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.constantCommuteCompose\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \": constantSheaf J D ⋙ sheafCompose J U ≅ U ⋙ constantSheaf J B\", \"doc\": \"There is a natural isomorphism between the composition of the constant sheaf functor with values in $ D $ followed by sheaf composition with $ U $, and the composition of $ U $ with the constant sheaf\"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : PresheafOfModules.{v} R' ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, this defines a functor from the category of presheaves of modules over $R'$ to the category o\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_forget\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"[constantSheaf J D |>.Faithful] [constantSheaf J D |>.Full] [constantSheaf J B |>.Faithful] [constantSheaf J B |>.Full]\\n  [(sheafCompose J U).ReflectsIsomorphisms] [((sheafCompose J U).obj F).IsConstant J] {T : C} (hT : IsTerminal T) :\\n  F.IsConstant J\", \"doc\": \"If the constant sheaf functors are fully faithful, the sheaf composition functor reflects isomorphisms, and the composition of a sheaf $ F $ with a functor $ U $ yields a constant sheaf, then $ F $ it\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.HasWeakSheafify J D}\\n  {F : CategoryTheory.Sheaf J D} [self : CategoryTheory.Sheaf.IsConstant J F],\\n  (\", \"doc\": \"Any constant sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$, equipped with a Grothendieck topology $J$, is isomorphic to the image of some object in $\\\\mathcal{D}$ under the constan\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {F : CategoryTheory.Sheaf J D}, (CategoryTheory.constantSheaf J D).essImage F → \", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, lies in the essential image of the constant sheaf functor, then $ F $\"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}",
+   "date": "2026-10-19",
+   "verdict": "constantCommuteCompose is the underived coefficient comparison used in the proof. No complete derived universal-arrow theorem; use the existing library ringed scalar-extension theorem and prove the presentation comparison."
+  }
+ ],
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantDerivedNormalizationUniversal",
+  "file": "lean/Sheaf/Paper/ConstantDerivedNormalizationUniversal.lean",
+  "declaration": "CategoryTheory.normalizationConstantArrow_isUniversal",
+  "statement": "theorem normalizationConstantArrow_isUniversal\n    (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R] [CommRing S]\n    (q : R →+* S) {E : DerivedCategory (ModuleCat.{u + 1} R)}\n    {E' : DerivedCategory (ModuleCat.{u + 1} S)}\n    (d : E ⟶ (normalizationModuleRestrict q).obj E')\n    (h : Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk d))) :\n    Nonempty (StructuredArrow.IsUniversal\n      (StructuredArrow.mk (normalizationConstantArrow J q d)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

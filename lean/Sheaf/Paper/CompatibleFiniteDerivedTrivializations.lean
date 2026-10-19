@@ -16,26 +16,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
-import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Mathlib.CategoryTheory.CofilteredSystem
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.AlgebraicGeometry.FiniteLisseTowerSectionCover
+import Sheaf.Paper.NormalizedDerivedIsomorphismSectionReduction
 
 /-! # Compatible finite derived trivializations
 
@@ -128,6 +110,24 @@ theorem compatible_finite_derived_trivializations
           localProEtaleNormalization (𝒰.f j) (q n)
               (normalizationConstantArrow X.smallEtaleTopology (q n) (dE n)) ≫
             (normalizationRestrict (ProEt.topology (𝒰.X j)) (q n)).map (e j n).hom := by
-  sorry
+  classical
+  have _ := hq
+  have _ := hE
+  have _ := hK
+  have _ := hEf
+  have _ := hKf
+  obtain ⟨r, hev⟩ := normalized_derived_isomorphism_section_reduction X B q E K dE dK hη hρ
+  obtain ⟨J, U, hcov, ha, hw, s, hs⟩ := finite_lisse_tower_section_cover X
+    (fun n ↦ derivedLocalIsomorphismSheaf
+      ((normalizationConstant X.smallEtaleTopology).obj (E n)) (K n)) r hI hInonempty
+  let 𝒰 : Cover.{u} proetalePrecoverage X :=
+    ⟨⟨J, fun j ↦ (U j).left, fun j ↦ (U j).hom⟩, hcov⟩
+  refine ⟨𝒰, fun j n ↦ sourceDerivedIsoEvaluation X (B n)
+    ((normalizationConstant X.smallEtaleTopology).obj (E n)) (K n)
+    (U j) (ha j) (hw j) (s j n), ?_⟩
+  intro j n
+  have h := hev n (U j) (ha j) (hw j) (s j (n + 1))
+  rw [hs j n] at h
+  exact h
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-finite-etale-tower-cone-cover",
+ "kind": "statement",
+ "title": "A covering cone over a finite etale tower",
+ "statement": "Let X be a scheme in universe u, P_n finite etale X-schemes and p_n:P_(n+1)→P_n X-maps. Suppose at every separably closed geometric point of X all fibers of P_n are finite and nonempty. Then there is a pro-etale cover indexed by Type u and maps from each covering object to every P_n, commuting with all p_n. No transition is assumed surjective. Definitions: [def-weil-pbc-etale-site], [def-weil-pbc-proetale-site], [def-weil-finite-integral-morphism], [def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 01YW and 097N, affine inverse limits; Tag 09BV finite-stalk stable-image adaptation; original compatible-trivializations steps 2--3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the affine cover of X and pull back every finite etale stage. These pullbacks are affine and form a tower W in AffineProEt over each affine open. Use the explicit source-library AffineProEt.seqLimit, Spec of the colimit of the global-section ring sequence. Its proAffineEtale structure supplies weak etaleness; both source and base are affine, so its structure map is quasi-compact. The concrete constructor is AlgebraicGeometry.Scheme.AffineProEt.seqLimit in WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit; its data is constructed, not selected from an existence assertion. Its indEtale_colimit_ι_zero proof uses the source-library RingHom.IndEtale.of_isColimit and proAffineEtale_Spec_iff of [sk-def-pe-morphisms]. The separate principal-Zariski/ind-etale aggregate is not used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "sk-def-pe-morphisms",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a separably closed geometric point over an affine open, projection to the original finite etale stage injects the pullback Hom fiber into the original finite fiber; the pullback lift supplies a point from any original fiber point. Thus all pullback Hom fibers are finite and nonempty. Apply Mathlib nonempty_sections_of_finite_inverse_system to the ofOpSequence tower followed by the Over-category geometric-point Hom functor. Map compatibility gives a cocone of global-section rings. Its colimit desc and toSpecΓ define a map to seqLimit; colimit.ι_desc and toSpecΓ_naturality prove every projection equation. At each base point take the separable closure of its residue field; the lifted geometric point proves surjectivity of the limit structure map.",
+   "uses": [
+    "lem-trf-cofiltered-finite-sets-section",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine limit structure map is surjective, quasi-compact and weakly etale, hence its singleton belongs to proetalePrecoverage. Bind these singleton covers with the affine open cover. Compose the sequential-limit projections with the pullback first projections to obtain maps to the original P_n. Congruence on seqLimitπ_comp followed by pullback.lift_fst proves compatibility. All covering indices stay in Type u.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "sk-def-pe-morphisms",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-cofiltered-finite-sets-section",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 01YW and 097N, affine inverse limits; Tag 09BV finite-stalk stable-image adaptation; original compatible-trivializations steps 2--3. Actual Lean route: WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit, seqLimit and seqLimitπ_comp; Mathlib.CategoryTheory.CofilteredSystem, nonempty_sections_of_finite_inverse_system."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of finite locally constant sheaves of sets with nonempty geometric stalks admits compatible sections on a pro etale cover",
+   "results": "{\"t\": \"2026-10-18T13:43:14Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse sequence of finite locally constant sheaves of sets with nonempty geometric stalks admits compatible sections on a pro etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nonempty_sections_of_finite_inverse_system\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.exists_locallyConstant_finite_aux\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.exists_locallyConstant_fin_two\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"602c3176937231db\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMittagLeffler\"",
+   "results": "{\"t\": \"2026-10-18T13:44:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsMittagLeffler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_iff_subset_range_comp\"], \"digest\": \"5f0cd6fe8a0c6804\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*section|finite.*inverse.*system|inverse.*finite.*etale",
+   "results": "{\"t\": \"2026-10-18T13:45:36Z\", \"tool\": \"grep\", \"query\": \"compatible.*section|finite.*inverse.*system|inverse.*finite.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Konig.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafOfFunctions.lean\"], \"digest\": \"28c0e8511ffb0c37\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale towers with nonempty geometric fibers have a compatible cone on a weakly contractible proetale cover",
+   "results": "{\"t\": \"2026-10-18T14:41:12Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale towers with nonempty geometric fibers have a compatible cone on a weakly contractible proetale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.asLimitCone\", \"Profinite.asLimitCone'\", \"Profinite.indexCone\", \"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected\", \"AlgebraicGeometry.opensCone\", \"Profinite.lim'\", \"Profinite.asLimit'\", \"Profinite.asLimitindexConeIso\"], \"digest\": \"45c3a183d0f9dbd8\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompatibleFiniteDerivedTrivializations",
+  "date": "2026-10-18",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Compatible normalized local models, proof (c).",
+   "via": [
+    "lem-weil-pbc-compatible-finite-derived-trivializations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTowerConeCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTowerConeCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_etale_tower_cone_cover",
+  "statement": "theorem finite_etale_tower_cone_cover\n    (X : Scheme.{u}) (P : ℕ → X.Etale) (p : ∀ n : ℕ, P (n + 1) ⟶ P n)\n    (hfin : ∀ n : ℕ, IsFinite (P n).hom)\n    (hpoints : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ X) (n : ℕ),\n      Finite ((pointSmallEtale x).fiber.obj (P n)) ∧\n        Nonempty ((pointSmallEtale x).fiber.obj (P n))) :\n    ∃ (J : Type u) (U : J → X.ProEt),\n      Presieve.ofArrows (fun j ↦ (U j).left) (fun j ↦ (U j).hom) ∈\n          proetalePrecoverage X ∧\n      ∃ a : ∀ (j : J) (n : ℕ), U j ⟶ (toProEt X).obj (P n),\n        ∀ (j : J) (n : ℕ), a j (n + 1) ≫ (toProEt X).map (p n) = a j n",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

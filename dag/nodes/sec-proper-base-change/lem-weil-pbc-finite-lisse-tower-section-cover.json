@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-finite-lisse-tower-section-cover",
+ "kind": "statement",
+ "title": "Compatible sections of finite lisse sheaf towers",
+ "statement": "Let I_n be finite locally constant set sheaves on the small etale site of a scheme X, with morphisms r_n:I_(n+1)→I_n and nonempty geometric stalks. There is an affine weakly contractible pro-etale cover indexed by Type u and compatible sections of all comparison inverse images of I_n on each member. No epimorphism condition on r_n is required. Definitions: [def-weil-pbc-etale-sheaves], [def-constructible-locally-constant], [def-weil-pbc-proetale-site], [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 03RV representability; Tag 09BV compatible universal sections; original compatible-trivializations steps 1 and 4--5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Represent I_n by finite etale P_n and turn r_n into p_n by full faithfulness of uliftYoneda. The stalk of a representable maps surjectively to the lifted geometric fiber: a germ (V,z,f) is sent to f(z), and every fiber point is represented by the identity at P_n. The representing isomorphism therefore transfers finiteness and nonemptiness from I_n to the geometric fibers.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-sets-representability",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-etale-tower-cover] to obtain compatible maps a_jn:U_j→P_n.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-tower-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Send the universal section t_n corresponding to the identity of P_n through the comparison adjunction unit, then restrict along a_jn. Yoneda gives r_n(t_(n+1))=p_n^*(t_n). Naturality of the unit in sheaves and in site objects, followed by a_j(n+1)≫p_n=a_jn, proves the required section equation.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-locally-constant-sets-representability",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-finite-etale-tower-cover",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 03RV representability; Tag 09BV compatible universal sections; original compatible-trivializations steps 1 and 4--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of finite locally constant sheaves of sets with nonempty geometric stalks admits compatible sections on a pro etale cover",
+   "results": "{\"t\": \"2026-10-18T13:43:14Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse sequence of finite locally constant sheaves of sets with nonempty geometric stalks admits compatible sections on a pro etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nonempty_sections_of_finite_inverse_system\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.exists_locallyConstant_finite_aux\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.exists_locallyConstant_fin_two\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"602c3176937231db\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMittagLeffler\"",
+   "results": "{\"t\": \"2026-10-18T13:44:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsMittagLeffler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_iff_subset_range_comp\"], \"digest\": \"5f0cd6fe8a0c6804\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*section|finite.*inverse.*system|inverse.*finite.*etale",
+   "results": "{\"t\": \"2026-10-18T13:45:36Z\", \"tool\": \"grep\", \"query\": \"compatible.*section|finite.*inverse.*system|inverse.*finite.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Konig.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafOfFunctions.lean\"], \"digest\": \"28c0e8511ffb0c37\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale towers with nonempty geometric fibers have a compatible cone on a weakly contractible proetale cover",
+   "results": "{\"t\": \"2026-10-18T14:41:12Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale towers with nonempty geometric fibers have a compatible cone on a weakly contractible proetale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.asLimitCone\", \"Profinite.asLimitCone'\", \"Profinite.indexCone\", \"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected\", \"AlgebraicGeometry.opensCone\", \"Profinite.lim'\", \"Profinite.asLimit'\", \"Profinite.asLimitindexConeIso\"], \"digest\": \"45c3a183d0f9dbd8\"}",
+   "date": "2026-10-18",
+   "verdict": "Partial tools only; no matching theorem for the complete geometric or derived assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompatibleFiniteDerivedTrivializations",
+  "date": "2026-10-18",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Compatible normalized local models, proof (c).",
+   "via": [
+    "lem-weil-pbc-compatible-finite-derived-trivializations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLisseTowerSectionCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLisseTowerSectionCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_lisse_tower_section_cover",
+  "statement": "theorem finite_lisse_tower_section_cover\n    (X : Scheme.{u}) (I : ℕ → Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (r : ∀ n : ℕ, I (n + 1) ⟶ I n)\n    (hI : ∀ n : ℕ, IsLisseEtaleSheafOfSets (I n))\n    (hne : ∀ (n : ℕ) (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ X), Nonempty ((pointSmallEtale x).sheafFiber.obj (I n))) :\n    ∃ (J : Type u) (U : J → X.ProEt),\n      Presieve.ofArrows (fun j ↦ (U j).left) (fun j ↦ (U j).hom) ∈\n          proetalePrecoverage X ∧\n      (∀ j : J, IsAffine (U j).left) ∧\n      (∀ j : J, (ProEt.topology X).IsWeaklyContractible.{u + 1} (U j)) ∧\n      ∃ s : ∀ (j : J) (n : ℕ),\n        ((Functor.sheafPullbackConstruction.sheafPullback (toProEt X)\n          (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj (I n)).obj.obj\n            (op (U j)),\n        ∀ (j : J) (n : ℕ),\n          ((Functor.sheafPullbackConstruction.sheafPullback (toProEt X)\n            (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).map (r n)).hom.app\n              (op (U j)) (s j (n + 1)) = s j n",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T192848-L-1877148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
