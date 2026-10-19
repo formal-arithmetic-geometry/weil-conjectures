@@ -63,6 +63,54 @@ theorem normalGeometricCoverComponents
         IsClosed (C c : Set Z) ∧ ConnectedSpace (C c).toScheme ∧
         IsFinite ((C c).ι ≫ q) ∧ Etale ((C c).ι ≫ q) ∧ Surjective ((C c).ι ≫ q)) ∧
       Nonempty (IsColimit (Cofan.mk Z (fun c : ConnectedComponents Z ↦ (C c).ι))) := by
-  sorry
+  classical
+  have hclopen (z : Z) : IsClopen (connectedComponent z) := by
+    have hmax : Maximal _root_.IsConnected (connectedComponent z) := by
+      refine ⟨isConnected_connectedComponent, ?_⟩
+      intro s hs hsub
+      exact hs.subset_connectedComponent (hsub mem_connectedComponent)
+    exact ((normal_etale_components_clopen.{u, u} hnormal q).2.2.2 _ hmax).2
+  have hfib (c : ConnectedComponents Z) :
+      IsClopen (ConnectedComponents.mk ⁻¹' {c}) := by
+    obtain ⟨z, rfl⟩ := ConnectedComponents.surjective_coe c
+    simpa only [connectedComponents_preimage_singleton] using hclopen z
+  let C : ConnectedComponents Z → Z.Opens := fun c ↦
+    ⟨ConnectedComponents.mk ⁻¹' {c}, (hfib c).isOpen⟩
+  have hC (c : ConnectedComponents Z) :
+      (C c : Set Z) = ConnectedComponents.mk ⁻¹' {c} := rfl
+  refine ⟨C, ?_, ?_⟩
+  · intro c
+    obtain ⟨z, hz⟩ := ConnectedComponents.surjective_coe c
+    have hcomp : (C c : Set Z) = connectedComponent z := by
+      rw [hC, ← hz, connectedComponents_preimage_singleton]
+    have hconn : _root_.IsConnected (C c : Set Z) := by
+      rw [hcomp]
+      exact isConnected_connectedComponent
+    have : ConnectedSpace (C c).toScheme := Subtype.connectedSpace hconn
+    obtain ⟨hqc, hp, hfin⟩ :=
+      geometricCoverComponentQcProper hnormal q hval (C c) ⟨z, hcomp⟩
+    have : IsProper ((C c).ι ≫ q) := hp
+    have : IsFinite ((C c).ι ≫ q) :=
+      (IsFinite.iff_isProper_and_finite_preimage_singleton _).mpr ⟨hp, hfin⟩
+    have : Etale ((C c).ι ≫ q) := inferInstance
+    have hrange : IsClopen (Set.range ((C c).ι ≫ q)) :=
+      ⟨((C c).ι ≫ q).isClosedMap.isClosed_range,
+        ((C c).ι ≫ q).isOpenMap.isOpen_range⟩
+    have hsurj : Surjective ((C c).ι ≫ q) :=
+      ⟨Set.range_eq_univ.mp (hrange.eq_univ (Set.range_nonempty _))⟩
+    exact ⟨hC c, (hfib c).isClosed, inferInstance, inferInstance, inferInstance, hsurj⟩
+  · apply nonempty_isColimit_cofanMk_of
+    · apply TopologicalSpace.Opens.ext
+      ext z
+      simp only [Scheme.Opens.opensRange_ι, TopologicalSpace.Opens.coe_iSup,
+        Set.mem_iUnion, TopologicalSpace.Opens.coe_top, Set.mem_univ, iff_true]
+      exact ⟨ConnectedComponents.mk z, rfl⟩
+    · intro c d hne
+      simp only [Scheme.Opens.opensRange_ι]
+      apply disjoint_iff.mpr
+      apply TopologicalSpace.Opens.ext
+      ext z
+      change (ConnectedComponents.mk z = c ∧ ConnectedComponents.mk z = d) ↔ False
+      exact ⟨fun h ↦ hne (h.1.symm.trans h.2), False.elim⟩
 
 end AlgebraicGeometry
