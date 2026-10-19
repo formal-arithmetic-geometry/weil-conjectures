@@ -12,9 +12,123 @@
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $f$ is locally of finite presentation, then each $h_i$ has this property by hypothesis, so [lem-sbc-locally-finite-presentation-composition] applied to $h_i$ and $f$ proves that $f\\circ h_i$ is locally of finite presentation. For the converse, assume this for every $i$.",
+   "uses": [
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N, proof, composition condition; Morphisms Tag 01TR (lemma-composition-finite-presentation)."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$. By [lem-weil-pbc-affine-opens-basis], choose affine opens $V=\\operatorname{Spec}R\\subseteq S$ and $W=\\operatorname{Spec}A\\subseteq X$ with $f(x)\\in V$, $x\\in W$ and $W\\subseteq f^{-1}(V)$. For each $i$, cover the open subset $h_i^{-1}(W)$ by affine opens $T_{i,\\alpha}=\\operatorname{Spec}B_{i,\\alpha}$ of $U_i$ contained in $h_i^{-1}(W)$, using the same basis assertion. By [def-sbc-locally-finite-presentation], it suffices to show $R\\to A$ is finitely presented for every such choice around $x$. If $X$ is empty there are no points to check and that definition already gives the result, including an empty covering family.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N via Tag 036H (lemma-properties-morphisms-local-source), reduction to affine source and target; expanded as in Tag 02KL (lemma-flat-finitely-presented-permanence)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-morphism-affine-criterion] to $h_i$ and the affine pair $(T_{i,\\alpha},W)$ to obtain flatness of $A\\to B_{i,\\alpha}$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to $h_i$ with this pair and to $f\\circ h_i$ with the pair $(T_{i,\\alpha},V)$. Thus $A\\to B_{i,\\alpha}$ and $R\\to B_{i,\\alpha}$ are finitely presented. These are compatible ring towers $R\\to A\\to B_{i,\\alpha}$ because the second scheme morphism is the composite $f\\circ h_i$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N, affine condition (4), with Morphisms Tags 01U5 (lemma-flat-characterize) and 01TQ (lemma-locally-finite-presentation-characterize)."
+   }
+  },
+  {
+   "text": "Each $h_i$ is open by [lem-weil-pbc-flat-lfp-open]. Hence the subsets $h_i(T_{i,\\alpha})$ are open in $X$ and contained in $W$. Joint surjectivity and the affine covers of $h_i^{-1}(W)$ imply that these images cover $W$: lift any $w\\in W$ to some $u\\in U_i$ and choose $T_{i,\\alpha}$ containing $u$. By [lem-weil-pbc-affine-scheme-qcqs], $W$ is quasi-compact. Choose finitely many pairs $(i_j,\\alpha_j)$ whose images cover $W$, and write $T_j=\\operatorname{Spec}B_j$ for the selected affine opens. Only $W$ is required to be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036H, affine refinement of an fppf family; Tag 02KL, proof, open images and finite affine selection; Morphisms Tag 01UA (lemma-fppf-open)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-scheme-coproduct-family] to form $Z=\\coprod_j T_j$ and the maps $q:Z\\to W$ and $p:Z\\to V$ induced by the component maps. Uniqueness in the coproduct universal property gives $p=(f|_W)\\circ q$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $Z\\cong\\operatorname{Spec}B$ with $B=\\prod_jB_j$ and the specified component projections. The component images in $Z$ are open and closed and cover $Z$. The selected image covering of $W$ says exactly that $q$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, replacement by the finite affine coproduct, supplying the refinement in Tag 036H; Schemes Tags 01JB and 01JC (disjoint gluing)."
+   }
+  },
+  {
+   "text": "At a point of the component $T_j\\subseteq Z$, the local-ring map of $q$ is the local-ring map of the corresponding $h_{i_j}$, since source and target were restricted to open neighbourhoods. It is flat, so [def-weil-flat-morphism] gives flatness of $q$. The affine neighbourhood $T_j$ of that point has a finitely presented $A$-algebra by Step 3. With target $W$, this is exactly the pointwise definition [def-sbc-locally-finite-presentation] for $q$. The same neighbourhood has a finitely presented $R$-algebra by Step 3; with target $V$ it gives local finite presentation of $p$ by that definition.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, elementary justification of replacing the source by its selected disjoint affine opens; Morphisms Tags 01U3 and 01TP (definitions)."
+   }
+  },
+  {
+   "text": "All three schemes $Z,W,V$ are affine. Applying [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-weil-pbc-lfp-affine-opens-finite-presentation] to their full affine opens gives that $A\\to B$ is flat and finitely presented, and that $R\\to B$ is finitely presented. Surjectivity of $q$ is precisely surjectivity of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ under the affine identifications. Hence [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $A\\to B$ faithfully flat. The compatibility $p=(f|_W)q$ identifies $R\\to B$ with the composite $R\\to A\\to B$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N, affine condition reduced to Tag 02KK; Algebra Tag 00HQ (lemma-ff-rings), flat and surjective on spectra implies faithfully flat."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-presentation-fppf-source-algebra] to $R\\to A\\to B$. Step 7 provides all three hypotheses: finite presentation of $R\\to B$, faithful flatness of $A\\to B$, and finite presentation of $A\\to B$. Conclude that $R\\to A$ is finitely presented. The neighbourhoods $x\\in W$ and $f(x)\\in V$ from Step 2 therefore witness finite presentation of $f$ at $x$ in [def-sbc-locally-finite-presentation]. Since $x$ was arbitrary, $f$ is locally of finite presentation. This proves the converse.",
+   "uses": [
+    "lem-trf-finite-presentation-fppf-source-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N, final sentence invoking Tag 02KK (lemma-flat-finitely-presented-permanence-algebra); affine descent expanded as in Tag 02KL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-trf-finite-presentation-fppf-source-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 036N (lemma-locally-finite-presentation-fppf-local-source), expanding the affine-family reduction of Tag 036H by the finite affine selection in Tag 02KL and its algebra input Tag 02KK."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-etale-source-locality",
@@ -85,5 +199,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-lfp-fppf-source-locality",
+  "worker": "stage1",
+  "summary": "Proved both directions for an arbitrary jointly surjective flat lfp family by finite affine refinement over each affine source neighbourhood and faithful-flat algebraic source descent. Reused all geometric inputs and created one statement-only algebra node, with an existing project declaration recorded for transitive audit. No statement change or extra finiteness hypothesis.",
+  "blueprint": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 036N, lemma-locally-finite-presentation-fppf-local-source.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-7b4ed409a",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-7b4ed409a (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults, so no fixes were made; full review in review.md. Item statement: it matches Stacks 036N exactly as defined in 036H, i.e. an arbitrary jointly surjective flat locally-finitely-presented family with no added quasi-compactness, separatedness or Noetherian hypothesis, and empty cases allowed; it is unchanged from the base. Steps: I checked all eight against the cited statements. Step 1 is the composition leaf. Steps 2-4 choose affine opens V and W and refine over W using openness of flat lfp maps and quasi-compactness of W, which is the selection in the proof of 02KL. Step 5 builds the finite affine coproduct Z = Spec of the product of the B_j, with p equal to f restricted to W composed with q, by uniqueness. Step 6 is correctly marked elementary: it uses only the definitions, through stalks and the witness pairs from step 3. Step 7 gets A->B flat and finitely presented, R->B finitely presented, and A->B faithfully flat from the affine criteria and Module.FaithfullyFlat.of_comap_surjective. Step 8 applies the new node. proof_deps equals the union of the uses and there is no cycle. New node lem-trf-finite-presentation-fppf-source-algebra: it is exactly Stacks 02KK (descent.tex line 4261, proof read). I tested A=B, B=0 (forcing A=0, and R->0 is finitely presented) and R=A. It carries a statement only, and its definition citations are correct. It is not in Mathlib: grep finds only the tensor-product (base-change) descent. The 02KK declaration is project code at WeilConjectures/Mathlib/RingTheory/Finiteness/Descent.lean:231-265; that file contains no sorry, and attaching the declaration is left to the maintainer. It is not a duplicate: lem-a1-finite-type-fppf-source-algebra is the finite-type statement of Tag 0367, lem-weil-pbc-finite-presentation-descends-faithfully-flat is base-change descent, and lem-a1-lft-flat-lfp-source-descent is a scheme-level finite-type statement. It is strictly smaller than the item (no D1 fault), and its blueprint ancestor and via are correct. Route: every cited lemma from another unit is a Mathlib leaf, so tool_uses [] is right and nothing needs accepting. The parent lem-trf-nodal-family-etale-source-locality step 2 uses the item exactly as stated. No SGA source is used."
  }
 }
