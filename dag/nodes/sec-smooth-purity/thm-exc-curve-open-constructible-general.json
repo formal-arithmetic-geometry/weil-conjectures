@@ -23,188 +23,48 @@
  ],
  "proof": [
   {
-   "text": "Write $k$ for the ground field and choose the prime $\\ell$ and an integer $N\\geq1$ with $\\ell^N A=0$ as in the hypotheses. By [pqf-lem-locnoeth-lft], $T$ is locally Noetherian, since the spectrum of a field is locally Noetherian; finite type includes quasi-compactness by [def-weil-finite-type-morphism]. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open of $T$ is Noetherian. Thus $j$ is quasi-compact (intersect $U$ with any affine open of $T$) and quasi-separated (its diagonal is an isomorphism). These are the hypotheses needed for the stalk formula below. For $q<0$, the injective-resolution formula of [def-weil-pbc-direct-image] gives zero: a sheaf placed in degree zero has an injective resolution in nonnegative degrees, so its termwise direct image has no negative cohomology. Degree zero is [thm-fin-open-degree-zero], and degrees $q>1$ vanish by [thm-exc-curve-open-dimension-general]; the zero sheaf is lisse. It remains to prove constructibility of $G=R^1j_*F$.",
+   "text": "First handle the empty scheme T: the empty covering axiom makes every etale module sheaf on T zero, hence constructible. Otherwise choose n from the coefficient hypothesis. The positive integer N = ell^n annihilates A, since N times 1 equals zero, and is a unit on T, since ell is a unit. If its image in k were zero, its image in the nonzero local ring at any point of T would be both zero and a unit, a contradiction. Thus N is nonzero in k and is invertible on Spec k. In Lean this uses the proved HasInvertibleExponent.of_hom_of_nonempty, with no hypothesis on the characteristic or dimension beyond those already given.",
    "uses": [
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "thm-fin-open-degree-zero",
-    "thm-exc-curve-open-dimension-general",
-    "def-weil-pbc-direct-image",
-    "def-weil-finite-type-morphism"
+    "sbc-def-coefficient-conventions",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Place the constructible sheaf F in degree zero. Its only nonzero cohomology is F itself, so it is bounded constructible. Use lem-weil-pbc-constructible-etale-module-sheaf-comparison to pass between finite constant values and the source library IsConstructibleSheaf predicate. The source library boundedConstructible_singleFunctor_obj supplies the standard t-structure bounds a,b; the interval [min a b,max a b] yields the explicit bounds required by def-weil-pbc-constructible-complexes. Apply cor-fin-deligne-open-finite-coefficients over k to the open immersion j and F[0]. Its conclusion gives constructibility of the q-th homology sheaf for every integer q.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "cor-fin-deligne-open-finite-coefficients"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "first paragraph: degree zero and degrees greater than one; hypotheses of the stalk formula"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.md",
+    "place": "Statement, specialized to the sheaf F in degree zero."
    }
   },
   {
-   "text": "Put $C=\\overline U$ and $Z=C\\setminus U$, both closed subsets of $T$. The closed subsets $C$ and $Z$ have finite irreducible decompositions by [lem-sc-noetherian-closed-subset-finite-components], and each component has a generic point by [lem-sc-scheme-sober]. Every generic point of a component $C_i$ of $C$ belongs to $U$: the nonempty open part of $C_i$ outside the other components meets $U$ by its density in $C$, and an open meeting an irreducible component contains its generic point. If an irreducible component $D$ of $Z$ were not a singleton, its generic point $d$ would have a proper specialization $e$. Then $\\overline{\\{e\\}}\\subsetneq D\\subsetneq C_i$ for a component $C_i$ containing $D$, the second inclusion being strict because its generic point lies in $U$. This contradicts the dimension bound in [def-kun-topological-krull-dimension]. Thus $Z$ is a finite union of closed singletons, hence a finite set of closed points of $T$. This proves the boundary fact directly; it creates no node.",
-   "uses": [
-    "lem-sc-noetherian-closed-subset-finite-components",
-    "lem-sc-scheme-sober",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "second paragraph: the boundary is a finite set of closed points"
-   }
-  },
-  {
-   "text": "The restriction $j^{-1}G$ is zero. Indeed, compute $Rj_*F$ by $j_*I^\\bullet$ using [def-weil-pbc-direct-image]; exactness of inverse image on constant-$A$ modules is [prop-weil-pbc-inverse-image-modules-exact]. The counit $j^{-1}j_*\\to\\mathrm{id}$ is a natural isomorphism on abelian sheaves by the first clause of [lem-kun-open-immersion-restriction]. By [prop-weil-pbc-inverse-image-modules-exact], the module inverse-image/direct-image adjunction has this same underlying counit. It therefore gives an $A$-linear isomorphism in each degree; naturality with respect to the differentials makes these a chain isomorphism $j^{-1}(j_*I^\\bullet)\\cong I^\\bullet$. Its positive cohomology is zero, since $I^\\bullet$ resolves $F$ in degree zero. On $W=T\\setminus C$ the same representative restricts to zero termwise: every etale object over $W$ has empty fibre product with $U$, and the direct-image formula evaluates each $I^n$ on that empty object, giving zero. Restriction to $W$ is exact by the same inverse-image theorem. Consequently $G$ is zero on the open $V=T\\setminus Z=U\\amalg W$.",
+   "text": "The proved natural isomorphism Functor.rightDerivedFunctorPlusCompatibility identifies the bounded-below derived direct image, included in the ordinary derived category, with the ordinary derived direct image. The degree-zero single functors and homology functors agree under that inclusion by their definitions. Apply the q-th homology functor to the comparison isomorphism and transport the constructibility found in step 2 through its inverse. This proves exactly the unchanged statement. The hypotheses restricting the field and dimension are not used. This node is not a realized statement or proof step of sk-prop-a1-kummer, so its broader existing open-image input changes no realized unit route.",
    "uses": [
     "def-weil-pbc-direct-image",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-open-immersion-restriction"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "second paragraph: vanishing on U and outside its closure"
-   }
-  },
-  {
-   "text": "Fix $t\\in Z$ and a geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ above it. Put $S=T_{(\\bar t)}$. The coefficient-forgetting comparison [lem-sbc-higher-direct-image-forget-comparison] and the strict-local stalk formula [prop-weil-pbc-strict-henselization-stalk-formula] identify the underlying group of $G_{\\bar t}$ with $H^1(U\\times_T S,F_S)$, where $F_S$ is the underlying abelian pullback of $F$. The hypotheses of the latter formula hold: $j$ is qcqs by step 1, and the sheaf is torsion since $\\ell^N A=0$.",
-   "uses": [
-    "lem-sbc-higher-direct-image-forget-comparison",
-    "prop-weil-pbc-strict-henselization-stalk-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "Paragraph 1: strict-local stalk formula, Stacks Tag 03Q9 (theorem-higher-direct-images)."
-   }
-  },
-  {
-   "text": "Choose an affine chart $i:\\operatorname{Spec}D\\hookrightarrow T$ containing $t$ with $D$ a finitely generated $k$-algebra, as in [def-weil-finite-type-morphism]. Let $\\mathfrak p$ be its prime corresponding to $t$, and $K$ the separable closure of $\\kappa(t)$ inside $\\Omega$. Apply [lem-exc-affine-strict-local-ring-comparison] to this chart and geometric point. It identifies $S$ over $T$ with $\\operatorname{Spec}R$, where $R=(D_{\\mathfrak p})^{\\mathrm{sh}}$, and gives its strictly henselian local structure and residue field $K$. Under this identification the closed point maps to $t$ by [lem-weil-pbc-strict-henselization-closed-fiber-backward].",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "lem-exc-affine-strict-local-ring-comparison",
-    "lem-weil-pbc-strict-henselization-closed-fiber-backward"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "Paragraph 1: the geometric/algebraic strict-local comparison needed before the branch lemma; Stacks Tag 04HX (lemma-describe-etale-local-ring)."
-   }
-  },
-  {
-   "text": "The point $t$ is closed by step 2, so [lem-kun-closed-point-field](a) gives that $\\kappa(t)$ is finite over $k$. If $k$ is finite, then $\\kappa(t)$ is finite and [lem-sfb-finite-field-separable-closure-algebraic] says that this very separable closure $K$ is an algebraic closure. If $k$ is algebraically closed, every element of the finite extension $\\kappa(t)/k$ has a linear minimal polynomial, so $\\kappa(t)=k$; the same argument in the algebraic extension $K/k$ gives $K=k$. Thus $K$ is algebraically closed in both cases, of positive characteristic $p=\\operatorname{char}k$.",
-   "uses": [
-    "lem-kun-closed-point-field",
-    "lem-sfb-finite-field-separable-closure-algebraic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "Paragraph 1: algebraically closed positive-characteristic residue field for the branch lemma; finite-field case is Stacks Tag 030Z (algebra-lemma-perfect)."
-   }
-  },
-  {
-   "text": "By [lem-exc-field-algebra-strict-henselization-excellent], both $R$ and $B=R/\\sqrt{(0)}$ are excellent and Noetherian. Since $\\sqrt{(0)}$ lies in the maximal ideal, [lem-weil-pbc-strictly-henselian-quotient] makes $B$ local and strictly henselian with residue field $K$. By [lem-weil-pbc-affine-open-stalk-localization](c), $D_{\\mathfrak p}\\cong\\mathcal O_{T,t}$. Apply [lem-pc-scheme-dimension-local-rings] to $T$ and [lem-sc-strict-henselization-dimension] to $D_{\\mathfrak p}$ to obtain $\\dim R=\\dim\\mathcal O_{T,t}\\leq\\dim T\\leq1$. The ring $B$ is reduced: if a power of a class is nilpotent, its representative is nilpotent. Every prime of $R$ contains the nilradical, so taking inverse images along $R\\to B$ identifies prime chains of $B$ with those of $R$, preserving strict inclusions. Hence $\\dim B=\\dim R\\leq1$.",
-   "uses": [
-    "lem-exc-field-algebra-strict-henselization-excellent",
-    "lem-weil-pbc-strictly-henselian-quotient",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-sc-strict-henselization-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "Paragraph 1: local-algebra hypotheses for the branch lemma; Stacks Tags 04MU (properties-lemma-dimension), 06LK (more-algebra-lemma-henselization-dimension), and the cited excellence and quotient interfaces."
-   }
-  },
-  {
-   "text": "Put $V_R=U\\times_T\\operatorname{Spec}R$ and $P=V_R\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B$. By [lem-weil-pbc-reduction-universal-homeomorphism], $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ and its base change $P\\to V_R$ are universal homeomorphisms. Therefore [prop-weil-pbc-universal-homeomorphism-topos] identifies $H^1(V_R,F_S)$ with $H^1(P,F_P)$, with $F_P$ the pulled-back sheaf retaining its $A$-action. The closed point of $\\operatorname{Spec}B$ maps to the closed point of $\\operatorname{Spec}R$, hence to $t\\notin U$ by steps 5-7; thus $P$ misses it. If $\\dim B=0$, every prime equals the maximal ideal and that ideal is zero because $B$ is reduced. Hence $B$ is a field and $P$ is empty, so the stalk is zero (the empty-cover sheaf axiom gives only the zero abelian sheaf and zero cohomology). Otherwise $\\dim B=1$. The ring $B$ is reduced, excellent, local and strictly henselian with algebraically closed residue field of positive characteristic by steps 5-7, exactly the hypotheses of [lem-exc-punctured-curve-branches]. Its punctured spectrum is therefore a finite disjoint union $\\coprod_{i\\in I}\\operatorname{Spec}K_i$, each $K_i$ the fraction field of an excellent strictly henselian DVR with that same residue field. Since $P$ is an open of this puncture and every field spectrum is a single point, $P=\\coprod_{i\\in I_U}\\operatorname{Spec}K_i$ for a subset $I_U\\subseteq I$, possibly empty. No density or irreducibility of $T$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "prop-weil-pbc-universal-homeomorphism-topos",
-    "lem-exc-punctured-curve-branches"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "first paragraph: reduction to branch fields; reduction invariance is Stacks Tag 03SI (etale-cohomology-proposition-topological-invariance)."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-finite-coproduct-cohomology-assembly], $H^1(P,F_P)=\\prod_{i\\in I_U}H^1(\\operatorname{Spec}K_i,F_i)$ for the underlying abelian sheaves. Each $F_i$ has finite geometric fibre: [lem-weil-pbc-inverse-image-stalk-germ] identifies a pullback stalk with its original stalk, and [lem-weil-pbc-constructible-module-finite-stalks] gives finiteness of every original geometric fibre of the constructible $A$-module sheaf $F$. The exact, sections-compatible equivalence [lem-exc-field-discrete-modules] identifies $F_i$ with a finite discrete continuous $A[G_i]$-module $M_i$ and its section functor with invariants. An exact equivalence preserves injectives: transport a lifting problem across its exact inverse, solve it in the original injective, and transport the lift back. Applying this to injective resolutions identifies module-sheaf cohomology with the derived invariants defining continuous cohomology in [def-exc-continuous-cohomology]. By [lem-weil-pbc-etale-module-cohomology-forget], its underlying group is the abelian cohomology occurring above. Since $\\ell$ is invertible on $T$ it differs from $p$, the common residue characteristic of these branch DVRs. The finite-module clause of [lem-exc-dvr-galois] gives finiteness of each $H^1(G_i,M_i)$. Their finite product is finite, including the empty product. Steps 4-9 show that $G_{\\bar t}$ is finite for every geometric point above every $t\\in Z$.",
-   "uses": [
-    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-constructible-module-finite-stalks",
-    "lem-exc-field-discrete-modules",
-    "def-exc-continuous-cohomology",
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-exc-dvr-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "first paragraph: finiteness of branch-field first cohomology and the stalk. Field/Galois comparison: Stacks Tags 03QT and 03QU (etale-cohomology.tex)."
-   }
-  },
-  {
-   "text": "Give each singleton $\\{t\\}\\subseteq Z$ its reduced point-scheme structure $\\operatorname{Spec}\\kappa(t)$. The restriction of $G$ there has finite geometric fibre by step 9 and [lem-weil-pbc-inverse-image-stalk-germ]. Put $G_t=\\operatorname{Gal}(\\kappa(t)^{\\rm sep}/\\kappa(t))$. Under [lem-exc-field-discrete-modules] the restriction is a finite continuous $A[G_t]$-module $M_t$. Intersect the finitely many open stabilizers of all elements of $M_t$ to obtain the open kernel $H$ of $G_t\\to\\operatorname{Aut}_A(M_t)$. As a kernel it is normal, and $G_t/H$ is finite because it embeds into the permutation group of the finite set $M_t$. Apply [lem-exc-etale-field-galois-classification] to the finite transitive continuous set $G_t/H$: it supplies a finite separable extension $L/\\kappa(t)$ with stabilizer $H$ after choosing the embedding. Its spectrum is an etale cover by [lem-weil-pbc-finite-separable-extension-etale]. The geometric fibre over $L$ has the same underlying module with the action restricted to $H$, since a geometric automorphism over $L$ acts on the same fibre. Thus this cover trivializes the module sheaf by the field equivalence, so the restriction to the point is finite locally constant. Finally $V$ and these finitely many point schemes form a finite locally closed constructible partition: constructibility of these subsets follows from the Noetherian clause of [def-weil-constructible-subset]. On $V$, $G=0$ by step 3; on the point strata it is finite locally constant as just proved. The definition [def-weil-pbc-constructible-complexes] gives constructibility of $G$, completing degree one and hence all degrees.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-exc-field-discrete-modules",
-    "lem-exc-etale-field-galois-classification",
-    "lem-weil-pbc-finite-separable-extension-etale",
-    "def-weil-constructible-subset",
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-    "place": "second paragraph: finite continuous Galois modules give lisse point strata and a finite constructible partition"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-exc-continuous-cohomology",
-  "def-kun-topological-krull-dimension",
-  "def-weil-constructible-subset",
-  "def-weil-finite-type-morphism",
+  "cor-fin-deligne-open-finite-coefficients",
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-direct-image",
-  "lem-exc-affine-strict-local-ring-comparison",
-  "lem-exc-dvr-galois",
-  "lem-exc-etale-field-galois-classification",
-  "lem-exc-field-algebra-strict-henselization-excellent",
-  "lem-exc-field-discrete-modules",
-  "lem-exc-punctured-curve-branches",
-  "lem-kun-closed-point-field",
-  "lem-kun-open-immersion-restriction",
-  "lem-pc-scheme-dimension-local-rings",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-sc-noetherian-closed-subset-finite-components",
-  "lem-sc-scheme-sober",
-  "lem-sc-strict-henselization-dimension",
-  "lem-sfb-finite-field-separable-closure-algebraic",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-constructible-module-finite-stalks",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "lem-weil-pbc-strict-henselization-closed-fiber-backward",
-  "lem-weil-pbc-strictly-henselian-quotient",
-  "pqf-lem-locnoeth-lft",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "prop-weil-pbc-universal-homeomorphism-topos",
-  "thm-exc-curve-open-dimension-general",
-  "thm-fin-open-degree-zero"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "sbc-def-coefficient-conventions"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-exc-curve-open-constructible-general.proof.md",
-  "place": "Both proof paragraphs, retaining the boundary/branch-field/Galois route; returned local step replaced by four short applications of explicit comparison, field-closure and dimension nodes."
+  "group": "J4",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.md",
+  "place": "Statement applied to F[0], using the already proved source-library comparison of ordinary and bounded-below derived direct images. Shorter route found by reading the existing library; no new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -447,29 +307,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-exc-etale-field-galois-classification",
-  "lem-kun-closed-point-field",
-  "lem-kun-open-immersion-restriction",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-sc-noetherian-closed-subset-finite-components",
-  "lem-sc-scheme-sober",
-  "lem-sc-strict-henselization-dimension",
-  "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "lem-weil-pbc-strict-henselization-closed-fiber-backward",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-strictly-henselian-quotient",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-universal-homeomorphism-topos",
-  "lem-weil-pbc-constructible-module-finite-stalks",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-pc-scheme-dimension-local-rings"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -495,5 +333,15 @@
   "group": "N6",
   "result": "pass",
   "note": "Audited the immutable node, all dependencies, source, Lean module, docstrings, edge cases, searches, and report sections. Reproduced scompile.py successfully with local side-overlay compilation; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261019T093451-L-2315198",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
