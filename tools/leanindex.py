@@ -157,7 +157,59 @@ def tokens(s: str) -> list[str]:
     return out
 
 
+# 2026-10-19 (hot path: tools/queue.py write took 113 s, ~70% in lex() of the same 20k sources three times per run):
+# sorry_count, imports_of, public_imports_of and decls_in_text are pure functions of the text; their results are
+# memoized by a digest of the text, in-process and across runs in local/leanindex-text-cache.pickle (entries this
+# run used are kept; the file is rewritten atomically at exit when something new was computed).
+_TC = {"d": None, "dirty": False, "used": set()}
+
+
+def _tc():
+    if _TC["d"] is None:
+        import pickle, atexit
+        try:
+            with open(ROOT / "local" / "leanindex-text-cache.pickle", "rb") as f:
+                _TC["d"] = pickle.load(f)
+        except Exception:
+            _TC["d"] = {}
+        atexit.register(_tc_save)
+    return _TC["d"]
+
+
+def _tc_save():
+    if not _TC["dirty"]:
+        return
+    import pickle
+    d = _TC["d"]
+    if len(d) > 120000:
+        d = {k: v for k, v in d.items() if k in _TC["used"]}
+    try:
+        out = ROOT / "local" / "leanindex-text-cache.pickle"
+        tmp = out.with_name(out.name + f".{os.getpid()}.tmp")
+        with open(tmp, "wb") as f:
+            pickle.dump(d, f, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(tmp, out)
+    except Exception:
+        pass
+
+
+def _memo(kind, text, fn):
+    import hashlib
+    k = hashlib.blake2b(text.encode("utf-8", "surrogatepass"), digest_size=16).digest()
+    d = _tc(); _TC["used"].add(k)
+    e = d.get(k)
+    if e is None:
+        e = d[k] = {}
+    if kind not in e:
+        e[kind] = fn(text); _TC["dirty"] = True
+    return e[kind]
+
+
 def sorry_count(s: str) -> int:
+    return _memo("sorry", s, _sorry_count)
+
+
+def _sorry_count(s: str) -> int:
     code = strip(s)
     code = "".join(" " if k in ("string", "char") else code[a:b] for k, a, b in lex(code))
     return len(re.findall(r"(?<![\w.'])(?:sorry|admit)(?![\w'])", code))
@@ -172,13 +224,17 @@ _IMPORT = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)"
 
 
 def imports_of(text: str) -> set[str]:
-    return set(_IMPORT.findall(strip(text)))
+    return set(_memo("imports", text, lambda x: frozenset(_IMPORT.findall(strip(x)))))
 
 
 _PUBLIC_IMPORT = re.compile(r"^public\s+(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)
 
 
 def public_imports_of(text: str) -> set[str]:
+    return set(_memo("public_imports", text, lambda x: frozenset(_public_imports_of(x))))
+
+
+def _public_imports_of(text: str) -> set[str]:
     """The imports that the modules importing this one see. In a file of Lean's module system (first command
     `module`) these are the `public import` lines; a plain `import` there serves the file's own proofs only, so adding
     or removing one changes nothing for other modules. In any other file every import is visible."""
@@ -188,6 +244,10 @@ def public_imports_of(text: str) -> set[str]:
 
 
 def decls_in_text(text: str) -> set[str]:
+    return set(_memo("decls", text, lambda x: frozenset(_decls_in_text(x))))
+
+
+def _decls_in_text(text: str) -> set[str]:
     """Namespace-qualified names of the non-private declarations in one source text."""
     out, stack = set(), []
     for line in strip(text).split("\n"):
