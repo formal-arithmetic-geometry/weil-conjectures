@@ -17137,3 +17137,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:32 L: merged deliver/B2/Sheaf.Paper.PbcVerdierAxioms (stage 3; reviewer PASS; first push; landing 20261019T093249-L-2286708 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/B3/Sheaf.CategoryTheory.CompositeTensorTranspose (stage 3; reviewer PASS; first push; landing 20261019T093250-L-2286914 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/B3/Sheaf.CategoryTheory.SiteTruncationDerivedLimit (stage 3; reviewer PASS; first push; landing 20261019T093251-L-2287138 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:32 L: merged deliver/B3/Sheaf.Paper.OpenComplementUnconditional (stage 3; reviewer PASS; first push; landing 20261019T093252-L-2287286 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/B3-open-complement-import-pruning.md)
