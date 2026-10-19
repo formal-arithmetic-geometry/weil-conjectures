@@ -18,9 +18,161 @@
   "def-weil-pbc-constant-sheaf",
   "def-exc-continuous-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a sufficiently large fixed universe and a small skeleton of $V_{\\mathrm{Et}}$, including the countably many objects and fibre powers used below. The single map $V_r\\to V$ is a cover because it is etale and surjective. Choose a nonnegative injective resolution $A_V\\to I^\\bullet$ in abelian sheaves on this site. For an etale $W\\to V$, the slice site is $W_{\\mathrm{Et}}$: an etale $V$-scheme over $W$ is an etale $W$-scheme and conversely. Restriction to this slice preserves injectives and the constant sheaf restricts to $A_W$. Thus the section complex $I^\\bullet(W)$ computes precisely the ordinary cohomology $H^b(W,A)$, naturally in maps $W'\\to W$. A nonnegative injective resolution is also K-injective, so this agrees with the cohomology convention in the statement.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open; injective existence: injectives.tex Tag 01DP, theorem-sheaves-injectives"
+   }
+  },
+  {
+   "text": "Let $W_r^a=V_r^{\\times_V(a+1)}$. Form the Cech-resolution double complex $D_r^{a,b}=I^b(W_r^a)$, with horizontal differential the alternating sum of pullbacks along deletion of a factor and vertical differential that of $I$. It is first-quadrant; its commuting differentials give total differential $d_h+(-1)^a d_v$. A transition $t_{sr}:V_s\\to V_r$ induces $(t_{sr}^{\\times(a+1)})^*:D_r^{a,b}\\to D_s^{a,b}$. These maps commute with deletion and with $d_v$, and compose because the $t_{sr}$ do. Each augmentation $I^\\bullet(V)\\to D_r^{0,\\bullet}$ is pullback along $p_r$, and the augmentations commute with every transition since $p_rt_{sr}=p_s$.",
+   "uses": [
+    "def-sc-cech-resolution-double-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AS, lemma-cech-map-into, proof: augmented Cech-resolution double complex"
+   }
+  },
+  {
+   "text": "For $g\\in G_r$ write $a_g(v)=gv$. Use the left action $g\\cdot x=a_g^*x$ on sections and cohomology; this is a left action since $G_r$ is abelian. The torsor isomorphism iterated gives\n$$V_r\\times G_r^a\\simeq W_r^a,\\quad(v,g_1,\\ldots,g_a)\\mapsto(v,g_1v,(g_1g_2)v,\\ldots,(g_1\\cdots g_a)v).$$\nThe inverse takes successive displacements of the vertices, unique by the torsor property. Sheaf gluing on this finite disjoint union identifies $D_r^{a,b}$ with $\\operatorname{Map}(G_r^a,I^b(V_r))$. Deleting vertex zero sends the first coordinate to $g_1v$ and removes $g_1$; deleting an internal vertex multiplies its two adjacent displacements; deleting the last removes $g_{a+1}$. Consequently the horizontal differential in these coordinates is\n$$(d_hc)(g_1,\\ldots,g_{a+1})=g_1c(g_2,\\ldots,g_{a+1})+\\sum_{i=1}^{a}(-1)^ic(g_1,\\ldots,g_ig_{i+1},\\ldots,g_{a+1})+(-1)^{a+1}c(g_1,\\ldots,g_a).$$\nEquivariance of $t_{sr}$ sends this chart to the chart with all $g_i$ reduced to $G_r$, and sends coefficients by $t_{sr}^*$. This fixes the action and sign convention throughout.",
+   "uses": [
+    "lem-exc-finite-galois-sheaf-sections-coproduct",
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AZ, lemma-cech-spectral-sequence, torsor-nerve coordinates; explicit agent calculation"
+   }
+  },
+  {
+   "text": "Take the degreewise colimit $D^{a,b}=\\varinjlim_rD_r^{a,b}$. Exactness of filtered colimits implies that taking row or column cohomology commutes with this colimit: apply exactness to kernels, images, and the quotient of cycles by boundaries. For each fixed $b$, injective Cech acyclicity says that the augmented row $I^b(V)\\to D_r^{\\bullet,b}$ has $H^0=I^b(V)$ and $H^a=0$ for $a>0$. Its transition maps on $H^0$ are identity by the commuting augmentations in Step 2. The same assertions therefore hold for $D^{\\bullet,b}$. The second spectral sequence of $D$ has only the Cech-degree-zero row-cohomology terms, namely the complex $I^\\bullet(V)$. Its finite filtration consequently identifies $H^n(\\operatorname{Tot}D)$ with $H^n(I^\\bullet(V))=H^n(V,A)$; the identification is induced by the augmentation, since its map on this sole surviving graded piece is identity. There are only $n+1$ summands in total degree $n$, so no unbounded-totalization or inverse-limit assertion is involved.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AW, lemma-injective-trivial-cech; algebra.tex Tag 00DB, lemma-directed-colimit-exact; homology.tex Tag 0132, lemma-first-quadrant-ss"
+   }
+  },
+  {
+   "text": "Column cohomology of the Cech-resolution complex is Cech cochains of the presheaf $W\\mapsto H^b(W,A)$. In the finite disjoint-union coordinates of Step 3 this gives $H_v^b(D_r^{a,\\bullet})=\\operatorname{Map}(G_r^a,H^b(V_r,A))$: finite products commute with kernels and images component by component. Applying filtered-colimit exactness once more gives\n$$H_v^b(D^{a,\\bullet})=\\varinjlim_r\\operatorname{Map}(G_r^a,H^b(V_r,A)).$$\nThe induced differential is the formula of Step 3 on cohomology, and the transition sends $c$ to $t_{sr}^*c$ after reduction of every argument. Each class represented at level $r$ is fixed by $\\ker(G\\to G_r)$; hence $M^b$ has the required discrete continuous action. This uses no injectivity of cohomological pullback.",
+   "uses": [
+    "lem-sc-cech-resolution-columns",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AZ, lemma-cech-spectral-sequence, column computation; algebra.tex Tag 00DB, lemma-directed-colimit-exact"
+   }
+  },
+  {
+   "text": "Apply the finite-quotient cochain-colimit comparison with $U_r=\\ell^r\\mathbf Z_\\ell$, $Q_r=G_r$, and $N_r=H^b(V_r,A)$. These $U_r$ are a cofinal descending open-normal basis; the equivariance required of coefficient transitions is exactly that checked in Step 3. It identifies the whole horizontal complex $H_v^b(D)$, including its differential, with $C^\\bullet_{\\mathrm{cont}}(G,M^b)$. The continuous-cochain/derived-invariants comparison therefore identifies $H_h^aH_v^b(D)$ with $H^a_{\\mathrm{cont}}(G,M^b)$. The first spectral sequence of $D$ now has the asserted $E_2$ page and abuts, by Step 4, to $H^{a+b}(V,A)$. First-quadrant convergence supplies a finite filtration in every total degree.",
+   "uses": [
+    "lem-per-finite-quotient-cochain-colimit",
+    "lem-exc-cochains-derived-invariants",
+    "def-weil-l-adic-numbers",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology; homology.tex Tag 0132, lemma-first-quadrant-ss; agent tower application"
+   }
+  },
+  {
+   "text": "The construction is natural for compatible equivariant maps of the torsor towers: pullback on each nerve commutes with all face maps and with the common augmentation. The displayed finite-quotient comparison is natural as well. To change the injective resolution, use the homotopy equivalence of K-injective resolutions under $A_V$; applying evaluation on every nerve gives a comparison of double complexes. It induces the canonical identity on every $H^b(W,A)$, hence the same comparison on $E_1$ and on all later pages. Homotopic comparison maps give identical column-cohomology maps. Functoriality of the double-complex spectral sequences and the augmentation then gives the identity on $H^n(V,A)$. Thus the spectral sequence from $E_2$ onward and its edge maps are independent of this choice and natural for the tower data.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-etale-cohomology",
+    "lem-per-finite-quotient-cochain-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, lemma-first-quadrant-ss and functorial filtered-complex construction; resolution comparison: injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Under the additional hypotheses, all $M^b$ with $b>0$ vanish, and $M^0=A$ via the given constant-section maps. Deck transformations fix constants, so the $G$-action on $M^0$ is trivial. The first spectral sequence is concentrated on its bottom row at $E_2$, and the first-quadrant row-collapse lemma gives the edge isomorphisms $H^a_{\\mathrm{cont}}(G,A)\\simeq H^a(V,A)$. In degree zero the augmentation used throughout is pullback of sections; the class of $a\\in A$ is represented on every $V_r$ by the same constant section. Descent identifies it with the constant section $a$ on $V$, proving the specified degree-zero normalization.",
+   "uses": [
+    "lem-weil-pbc-first-quadrant-row-collapse",
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, lemma-first-quadrant-ss, single-row degeneration; sites-cohomology.tex Tag 03AS, augmentation"
+   }
+  },
+  {
+   "text": "For degree one, the character $\\chi(g)=g\\bmod\\ell$ is represented already at level $r=1$ by the function $G_1\\to H^0(V_1,A)$ sending $g$ to the constant $g$. In the chart $(v,g)\\mapsto(v,gv)$ of Step 3 its Cech representative on $V_1\\times_VV_1$ is the unique displacement $c(v_0,v_1)$ such that $v_1=c(v_0,v_1)v_0$. The identity $c(v_0,v_2)=c(v_0,v_1)+c(v_1,v_2)$ proves it is a cocycle; equivariance makes its pullback to every later nerve the representative of the inflated character. In the resolution double complex it lies in bidegree $(1,0)$ through $A_V\\to I^0$, so the bottom-row edge is exactly its Cech-to-cohomology image followed by the inverse augmentation of Step 4. The finite-etale torsor is a torsor for the constant sheaf, and its tautological local section over $V_1$ has these transition sections: the second projection equals $c$ acting on the first. The torsor/$H^1$ comparison identifies their Cech class with the class of $V_1\\to V$. Thus the image is this torsor class with the positive displacement convention, also when $\\ell$ is odd.",
+   "uses": [
+    "lem-galois-etale-torsor-sheaf-torsor",
+    "lem-sc-torsor-h1",
+    "def-sc-cech-resolution-double-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; lemma-cech-h1 (Tag 0A6G), transition-section formula; Tag 03AS, lemma-cech-map-into"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-cech-resolution-double-complex",
+  "def-sp-double-complex-total",
+  "lem-exc-finite-galois-sheaf-sections-coproduct",
+  "def-exc-continuous-cohomology",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sc-cech-resolution-columns",
+  "lem-per-finite-quotient-cochain-colimit",
+  "lem-exc-cochains-derived-invariants",
+  "def-weil-l-adic-numbers",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-galois-etale-torsor-sheaf-torsor",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AS/03AW/03AZ: Cech-resolution construction, with agent-formulated filtered-colimit and torsor-coordinate argument; Tag 03AJ and lemma-cech-h1 for degree one"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +215,38 @@
    "results": "{\"t\": \"2026-10-18T22:26:42Z\", \"tool\": \"grep\", \"query\": \"Cartan.?Leray|Hochschild.?Serre|Galois.*spectral|spectral.*Galois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"72c7f4390aeb0604\"}",
    "date": "2026-10-19",
    "verdict": "no match: read returned signatures; algebraic Kummer extensions, etale algebras, finite cyclic group cohomology and continuous-cohomology definitions do not state this geometric tower assertion or its comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.?Leray|Hochschild.?Serre|etale.*[Cc]ohom|[Cc]ohom.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-18T23:16:14Z\", \"tool\": \"grep\", \"query\": \"Cartan.?Leray|Hochschild.?Serre|etale.*[Cc]ohom|[Cc]ohom.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"72c7f4390aeb0604\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures read; continuous cohomology definitions and etale algebra declarations do not assert descent for a torsor tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology",
+   "results": "{\"t\": \"2026-10-18T23:16:14Z\", \"tool\": \"loogle\", \"query\": \"continuousCohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.map_id\", \"ContinuousCohomology.map\", \"ContinuousCohomology.π_map\", \"ContinuousCohomology.map_comp\", \"ContinuousCohomology.π_map_assoc\", \"ContinuousCohomology.map_comp_assoc\", \"ContinuousCohomology.zeroIso\"], \"digest\": \"2188447747fabf03\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures read; continuous cohomology definitions and etale algebra declarations do not assert descent for a torsor tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology computed by continuous group cohomology of a pro Galois covering tower",
+   "results": "{\"t\": \"2026-10-18T23:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology computed by continuous group cohomology of a pro Galois covering tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.homogeneousCochains\", \"CategoryTheory.PresheafOfGroups.H1\", \"groupCohomology\", \"InfiniteGalois.profiniteGalGrp\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\"], \"digest\": \"59e5c308ca81afe2\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures read; continuous cohomology definitions and etale algebra declarations do not assert descent for a torsor tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Leray spectral sequence for towers of finite etale torsors",
+   "results": "{\"t\": \"2026-10-18T23:16:20Z\", \"tool\": \"leanfinder\", \"query\": \"Cartan Leray spectral sequence for towers of finite etale torsors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.comp\", \"Algebra.H1Cotangent.exact_map_δ\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.FormallyEtale.comp\", \"Algebra.Extension.H1Cotangent.map_comp\"], \"digest\": \"1d807f5f4e234e4b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures read; continuous cohomology definitions and etale algebra declarations do not assert descent for a torsor tower"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-semistable-coordinate-divisor-purity",
@@ -93,5 +273,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-procyclic-torsor-tower-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed a single filtered-colimit Cech-resolution double complex; injective Cech acyclicity identifies its abutment, and finite torsor coordinates plus the new purely algebraic cochain-colimit lemma identify its E2 page. Proved collapse and both edge normalizations explicitly, without assuming injective transition maps or forming the inverse-limit scheme. Read the cited statements and the Stacks sources; no exact upstream attachment or Mathlib match found.",
+  "blueprint": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.5.12 proof, printed p.251, all-one semistable case, with Lemma 3.5.13(iv). The source cites Illusie (2004), Theorem 1.4, and Rapoport--Zink (1982), Satz 2.21. Auxiliary input in the coordinate-component split: Cartan--Leray descent for a procyclic tower of finite etale torsors. Steps 1-7 supply the auxiliary tower computation in the coordinate-component purity input; Steps 8-9 supply its acyclic case and normalized first torsor class.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic The localized small etale site at an etale open is the small etale site of the open interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic Cohomology over an object is cohomology on its localized site interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-exc-finite-galois-sheaf-sections-coproduct",
+    "why": "Generic Sections on a finite open-and-closed coproduct in a small etale site interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-injective-cech-acyclic",
+    "why": "Generic Injective abelian sheaves on a site have trivial higher Cech cohomology interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic The two spectral sequences of a first-quadrant double complex interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-sc-cech-resolution-columns",
+    "why": "Generic Column cohomology of the specified Cech resolution double complex interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-exc-cochains-derived-invariants",
+    "why": "Generic Continuous cochains compute derived invariants for discrete profinite modules interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic A first-quadrant spectral sequence concentrated in the row q = 0 collapses interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-galois-etale-torsor-sheaf-torsor",
+    "why": "Generic Finite etale M-torsors and torsors under the constant sheaf M interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic First cohomology classifies torsors interface used in the Cech/continuous-cochain calculation; it does not replace any step of the perverse-unit route, and this unit has no equivalent local interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-exc-finite-galois-sheaf-sections-coproduct",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sc-cech-resolution-columns",
+  "lem-exc-cochains-derived-invariants",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-galois-etale-torsor-sheaf-torsor",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N9-842293d44",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-842293d44 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, and the Stacks sources at 03AS, 03AW, 03AZ, 03AJ, 0A6G (lemma-cech-h1), 03F3, 0DVG, 00DB and 0132; all tags are correct and no SGA source is cited. The statement, stmt_deps and blueprint are unchanged from the Q63 parent snapshot. Steps 1-5 check: the localization/restriction/over-object nodes identify I(W) with H^b(W,A) in the K-injective convention; the Step 2 double complex and total sign follow from the two definitions; I recomputed the Step 3 face maps and they give the standard inhomogeneous differential, with g.x=a_g^* a left action because G_r is abelian, and transition equivariance checked; Step 4 colimit rows are exact by injective Cech acyclicity and filtered exactness, so the second spectral sequence collapses onto I(V) through the augmentation; Step 5 column cohomology is colim_r Map(G_r^a, H^b(V_r,A)). Steps 6-9 check: Step 6 applies the new node with U_r = l^r Z_l and N_r = H^b(V_r,F_l); Step 7 gets independence from the K-injective homotopy equivalence; the Step 8 collapse uses trivial action on constants; in Step 9 the displacement cocycle c, with v1 = c.v0, gives +[V_1] by Stacks lemma-cech-h1 (s01.s0 = s1), confirmed against the delta_T(1) description in lem-sc-torsor-h1. New node lem-per-finite-quotient-cochain-colimit is true: compactness gives finite image and factorization through some Q_s^a, values lift to a common N_t, injectivity holds at a finite level, and non-injective f_sr, a=0 and infinite N were checked. It is self-contained, unsplit, carries the three kinds of search, and is not a restated clause. It is not a duplicate of det-base-field-cd-cochains (clause 3 has a fixed M and trivial N-action), lem-sc-group-cohomology-filtered-union or the inflation nodes. I accept the 12 declared tool_uses as generic Cech/site/spectral-sequence/torsor black boxes below unit sk-p-dl-a1-perverse. Advisory only: lem-exc-cochains-derived-invariants appears in the new node's stmt_deps for the differential formula alone. No changes."
  }
 }
