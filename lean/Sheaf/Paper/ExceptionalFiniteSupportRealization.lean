@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.Paper.ExceptionalFiniteRealization
+import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Compact-support realization of the actual finite adjunction
 Source: blueprint def-weil-exceptional-inverse-image.
 (blueprint: def-pur-adic-support-realization).
@@ -15,6 +17,90 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModules
+private theorem supportTransposeMate
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {F : C ⥤ C'} {G : D ⥤ D'} (a : L ⊣ R) (b : L' ⊣ R')
+    (α : F ⋙ L' ⟶ L ⋙ G) (β : R ⋙ F ⟶ G ⋙ R')
+    (hu : ∀ M, F.map (a.unit.app M) ≫ β.app (L.obj M) =
+      b.unit.app (F.obj M) ≫ R'.map (α.app M))
+    (M : C) (N : D) (h : L.obj M ⟶ N) :
+    b.homEquiv _ _ (α.app M ≫ G.map h) =
+      F.map (a.homEquiv _ _ h) ≫ β.app N := by
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  have hn := β.naturality h
+  dsimp only [Functor.comp_map] at hn
+  rw [hn]
+  simpa only [Category.assoc] using
+    congrArg (fun f ↦ f ≫ R'.map (G.map h)) (hu M).symm
+
+private theorem supportRightMate
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {F : C ⥤ C'} {G : D ⥤ D'} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (α : F ⋙ L' ≅ L ⋙ G) :
+    ∃! e : R ⋙ F ≅ G ⋙ R', ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
+      b.homEquiv _ _ (α.hom.app M ≫ G.map h) =
+        F.map (a.homEquiv _ _ h) ≫ e.hom.app N := by
+  let β := (mateEquiv a b α.hom).natTrans
+  have : IsIso β := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful a b F G α
+  let e := asIso β
+  have he : ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
+      b.homEquiv _ _ (α.hom.app M ≫ G.map h) =
+        F.map (a.homEquiv _ _ h) ≫ e.hom.app N :=
+    supportTransposeMate a b α.hom β (unit_mateEquiv a b α.hom)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext N
+  have h := (he' (R.obj N) N (a.counit.app N)).symm.trans
+    (he (R.obj N) N (a.counit.app N))
+  simpa [Adjunction.homEquiv_unit, ← F.map_comp] using h
+
+private theorem supportLeftMate
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {F : C ⥤ C'} {G : D ⥤ D'} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (β : R ⋙ F ≅ G ⋙ R') :
+    ∃! e : L ⋙ G ≅ F ⋙ L', ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
+      b.homEquiv _ _ (e.inv.app M ≫ G.map h) =
+        F.map (a.homEquiv _ _ h) ≫ β.hom.app N := by
+  let α := ((mateEquiv a b).symm β.hom).natTrans
+  have : IsIso α := isIso_inverseMate_of_equivalences a b β
+  let e := (asIso α).symm
+  have he : ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
+      b.homEquiv _ _ (e.inv.app M ≫ G.map h) =
+        F.map (a.homEquiv _ _ h) ≫ β.hom.app N :=
+    supportTransposeMate a b α β.hom (unit_mateEquiv_symm a b β.hom)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  have hi : e'.inv = e.inv := by
+    ext M
+    apply (b.homEquiv _ _).injective
+    simpa using (he' M (L.obj M) (𝟙 _)).trans (he M (L.obj M) (𝟙 _)).symm
+  apply Iso.ext
+  simpa using (congrArg (fun t ↦ e'.hom ≫ t ≫ e.hom) hi).symm
+
+private theorem supportLocalizationComparison
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
+    {L R : D ⥤ E} {T : C ⥤ E} (a : Q ⋙ R ≅ T) (b : Q ⋙ L ≅ T) :
+    ∃! e : L ≅ R, ∀ J, e.hom.app (Q.obj J) ≫ a.hom.app J = b.hom.app J := by
+  let ff := Localization.fullyFaithfulWhiskeringLeft Q W E
+  let d := b ≪≫ a.symm
+  let e := ff.preimageIso d
+  have he (J) : e.hom.app (Q.obj J) ≫ a.hom.app J = b.hom.app J := by
+    have hd := congr_app (ff.map_preimage d.hom) J
+    change e.hom.app (Q.obj J) = d.hom.app J at hd
+    rw [hd]
+    simp [d]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply Localization.natTrans_ext Q W
+  intro J
+  exact (cancel_mono (a.hom.app J)).mp ((he' J).trans (he J).symm)
+
 namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -47,7 +133,9 @@ theorem integralExceptionalEtaleOpen_existsUnique (n : ℕ) :
         (integralExceptionalEtaleRealization l E X n).map
           ((S.val.levelOpenAdjunction n).homEquiv _ _ h) ≫
           (integralExceptionalEtaleInverse l E c.i S.openImage n).hom.app N := by
-  sorry
+  exact supportLeftMate (S.val.levelOpenAdjunction n)
+    (Etale.openImmersionLowerShriekUpperStarAdjunction _ c.i)
+    (integralExceptionalEtaleInverse l E c.i S.openImage n)
 
 /-- The ordinary open-extension mate, fixed by its transpose equation.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
@@ -102,7 +190,60 @@ theorem integralExceptionalEtaleDerivedOpen_existsUnique (n : ℕ) :
         (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
           (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c.i).mapDerivedCategory,
       IsIntegralExceptionalEtaleDerivedOpen l E g c S n e := by
-  sorry
+  let γ : (S.val.levelOpen n).mapHomologicalComplex (.up ℤ) ⋙
+      (integralExceptionalEtaleRealization l E c.Z n).mapHomologicalComplex (.up ℤ) ≅
+      (integralExceptionalEtaleRealization l E X n).mapHomologicalComplex (.up ℤ) ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+            c.i).mapHomologicalComplex (.up ℤ) :=
+    NatIso.mapHomologicalComplex (integralExceptionalEtaleOpen l E g c S n) (.up ℤ)
+  let a : DerivedCategory.Q ⋙
+      ((integralExceptionalEtaleRealization l E X n).mapDerivedCategory ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c.i).mapDerivedCategory) ≅
+      ((integralExceptionalEtaleRealization l E X n).mapHomologicalComplex (.up ℤ) ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+            c.i).mapHomologicalComplex (.up ℤ)) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (integralExceptionalEtaleRealization l E X n).mapDerivedCategoryFactors _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+          c.i).mapDerivedCategoryFactors ≪≫
+    (Functor.associator _ _ _).symm
+  let b : DerivedCategory.Q ⋙ (S.levelDerivedOpen n ⋙
+      (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory) ≅
+      ((integralExceptionalEtaleRealization l E X n).mapHomologicalComplex (.up ℤ) ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+            c.i).mapHomologicalComplex (.up ℤ)) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (S.val.levelOpenFactors n) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategoryFactors ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight γ _
+  obtain ⟨e, he, hu⟩ := supportLocalizationComparison DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) a b
+  have hγ : γ.hom = NatTrans.mapHomologicalComplex
+      (integralExceptionalEtaleOpen l E g c S n).hom (.up ℤ) := rfl
+  have normalize (e : S.levelDerivedOpen n ⋙
+      (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ≅
+      (integralExceptionalEtaleRealization l E X n).mapDerivedCategory ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c.i).mapDerivedCategory) :
+      IsIntegralExceptionalEtaleDerivedOpen l E g c S n e ↔
+        ∀ J, e.hom.app (DerivedCategory.Q.obj J) ≫ a.hom.app J = b.hom.app J := by
+    dsimp only [IsIntegralExceptionalEtaleDerivedOpen]
+    simp only [a, b, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
+      Category.comp_id, hγ]
+  exact ⟨e, (normalize e).mpr he, fun e' he' ↦ hu e' ((normalize e').mp he')⟩
 
 /-- The exact derived open comparison, specified by its representative square.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
@@ -179,7 +320,8 @@ theorem integralExceptionalEtaleRightAdjoint_existsUnique (n : ℕ)
     ∃! e : G.levelRight n ⋙ (integralExceptionalEtaleRealization l E X n).mapDerivedCategory ≅
       (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ⋙ H,
       IsIntegralExceptionalEtaleRightAdjoint l E g c S n G H adj e := by
-  sorry
+  exact supportRightMate (G.levelAdjunction n) adj
+    (integralExceptionalEtaleSupportComparison l E g c S n).symm
 
 /-- The finite right-adjoint comparison, fixed by the compact-support counit equation.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
