@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.LocalFrobeniusTrace
 public import Mathlib.CategoryTheory.Widesubcategory
 public import Mathlib.CategoryTheory.Pi.Basic
+import Mathlib.Algebra.CharP.CharAndCard
+import Mathlib.Algebra.CharP.Invertible
 
 /-! # Locally constructible adic sheaves as compatible local heart objects
 
@@ -39,7 +41,14 @@ Source: blueprint coefficient conventions
 Proof: its image in the fixed algebraic closure is the unit finiteFieldDatumPrimeUnit.
 The field embedding reflects units, giving the asserted unit in k0. -/
 theorem dlAdicBasePrimeUnit : IsUnit (c.l : D.k₀) := by
-  sorry
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hc : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hc
+  exact (CharP.isUnit_natCast_iff D.prime).2 (by
+    intro hdiv
+    exact c.different ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : c.l.Prime)).1 hdiv).symm)
 
 /-- Transport the base-field unit to each residue field through the structure map.
 Source: BS 6.8.6 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
@@ -130,7 +139,14 @@ first the compatibility of the first arrow and then of the second; associativity
 preservation of composition by completed pullback give the required square. -/
 theorem dlAdicLocalCompatible_multiplicative :
     (dlAdicLocalCompatible D c T).IsMultiplicative := by
-  sorry
+  refine { id_mem := ?_, comp_mem := ?_ }
+  · intro F U V h
+    simp
+  · intro F G H f g hf hg U V h
+    dsimp [dlAdicLocalCompatible] at hf hg ⊢
+    change (F.restriction h).hom ≫ ((f.hom U).hom ≫ (g.hom U).hom) = _
+    rw [← Category.assoc, hf h, Category.assoc, hg h]
+    simp [Functor.map_comp, Category.assoc]
 
 /-- The preceding closure proof supplies the category laws for compatible arrows.
 Source: BS 6.8, descent (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
@@ -151,7 +167,54 @@ integral stage; its rational and common-stage map formulas preserve zero.
 Both composites in the compatibility square are therefore zero. -/
 theorem dlAdicLocalCompatible_zero (F G : DlAdicLocalRaw D c T) :
     dlAdicLocalCompatible D c T (InducedCategory.homMk (fun U ↦ (0 : F.value U ⟶ G.value U))) :=
-  by sorry
+  by
+    have hz (S : Scheme.{u})
+        (A B : GeneralAlgebraicallyClosedCoefficients.Pair c.l c.Qbar S)
+        (L : AlgebraicallyClosedCoefficients.Index c.l c.Qbar)
+        (hA : A.stage ≤ L) (hB : B.stage ≤ L) :
+        GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB 0 = 0 := by
+      apply (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B).injective
+      have hcoord :=
+        (GeneralAlgebraicallyClosedCoefficients.homCoordinates_existsUnique A B).exists.choose_spec
+          L hA hB 0
+      change (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B)
+        (GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB 0) = _ at hcoord
+      rw [hcoord]
+      change GeneralAlgebraicallyClosedCoefficients.colimitOf A B L hA hB 0 =
+        (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B)
+          ((GeneralAlgebraicallyClosedCoefficients.homCoordinates A B).symm 0)
+      simp [GeneralAlgebraicallyClosedCoefficients.colimitOf]
+    intro U V h
+    let := dlAdicBaseResidueInvertible D c U.val.toScheme
+    let := dlAdicBaseResidueInvertible D c V.val.toScheme
+    let A := (F.value V).obj
+    let B := (G.value V).obj
+    obtain ⟨L, hA, hB⟩ := exists_ge_ge A.stage B.stage
+    let : (rationalDerivedPullback c.l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} c.l c.Qbar L)
+        (T.left.homOfLE h)).Additive :=
+      (rationalDerivedPullback_existsUnique c.l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} c.l c.Qbar L)
+        (T.left.homOfLE h)).exists.choose_spec.1
+    have he := (commonStageDerivedPullback_existsUnique c.l c.Qbar
+      (T.left.homOfLE h)).exists.choose_spec.2 A B L hA hB 0
+    rw [hz] at he
+    simp only [Functor.map_zero, comp_zero, zero_comp, hz] at he
+    have hez {P P' Q Q' : generalAlgebraicallyClosedConstructibleCategory
+        c.l c.Qbar U.val.toScheme} (hP : P = P') (hQ : Q = Q') :
+        HEq (0 : P ⟶ Q) (0 : P' ⟶ Q') := by
+      subst P'
+      subst Q'
+      rfl
+    have hm : (dlAdicOpenPull D c T h).map (0 : A ⟶ B) = 0 :=
+      eq_of_heq (he.trans (hez
+        ((commonStageDerivedPullback_existsUnique c.l c.Qbar
+          (T.left.homOfLE h)).exists.choose_spec.1 A).symm
+        ((commonStageDerivedPullback_existsUnique c.l c.Qbar
+          (T.left.homOfLE h)).exists.choose_spec.1 B).symm))
+    change (F.restriction h).hom ≫ 0 =
+      (dlAdicOpenPull D c T h).map (0 : A ⟶ B) ≫ (G.restriction h).hom
+    rw [hm, comp_zero, zero_comp]
 
 /-- The chosen zero is the literal componentwise zero family.
 Source: BS 6.8.7 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
@@ -167,7 +230,15 @@ theorem dlAdicLocalZeroLaws :
       (Z : DlLocallyConstructibleAdicHeart D c T), f ≫ (0 : Y ⟶ Z) = 0) ∧
     (∀ (X : DlLocallyConstructibleAdicHeart D c T)
       {Y Z : DlLocallyConstructibleAdicHeart D c T} (f : Y ⟶ Z), (0 : X ⟶ Y) ≫ f = 0) := by
-  sorry
+  constructor
+  · intro X Y f Z
+    ext U
+    change (f.hom.hom U).hom ≫ 0 = 0
+    exact comp_zero
+  · intro X Y Z f
+    ext U
+    change 0 ≫ (f.hom.hom U).hom = 0
+    exact zero_comp
 
 /-- Zero arrows are literally the componentwise zero arrows.
 Source: BS 6.8.7 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
@@ -191,7 +262,7 @@ its underlying arrow in the ambient constructible category is zero. -/
 theorem dlAdicLocalEvaluation_zero (U : DlAdicFiniteOpen D T)
     (F G : DlLocallyConstructibleAdicHeart D c T) :
     (dlAdicLocalEvaluation D c T U).map (0 : F ⟶ G) = 0 := by
-  sorry
+  rfl
 
 /-- Evaluation preserves the explicit componentwise zero arrows.
 Source: BS 6.8.7 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/

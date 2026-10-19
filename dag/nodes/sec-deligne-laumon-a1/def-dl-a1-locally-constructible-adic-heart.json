@@ -15,9 +15,45 @@
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite base field has characteristic p: its cardinality is p^a, so apply Mathlib charP_of_card_eq_prime_pow. By CharP.isUnit_natCast_iff the coefficient prime l is a unit, since distinct primes p and l do not divide one another. This proves dlAdicBasePrimeUnit directly from the finite-field datum.",
+   "uses": [
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For dlAdicLocalCompatible_multiplicative, identities satisfy compatibility by map_id. For composition, reassociate the square, substitute the two compatibility equations, then use map_comp. These are the category and functor laws on the explicit families.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For dlAdicLocalCompatible_zero, first show that ofHom of a zero representative is zero: apply the injective Hom-coordinate equivalence, use its representative equation, and use that the direct-limit injection is additive. Choose a common coefficient stage for the two objects. The rational pullback is additive by its existing uniqueness specification, so maps the zero representative to zero. The common-stage pullback representative formula conjugates this zero by the comparison isomorphisms, hence also gives zero. Transport across the specified object equalities using HEq. Both sides of the compatibility square are consequently zero.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For dlAdicLocalZeroLaws, use extensionality through the wide subcategory, induced category, and component family. At every open the equations are comp_zero and zero_comp in the ambient common-stage category. Evaluation of the literal zero family is definitionally zero, proving dlAdicLocalEvaluation_zero by reflexivity.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, local-heart description; formal category-law verification and common-stage representative calculation by R9, 2026-10-19."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -123,5 +159,15 @@
   "group": "N6",
   "result": "pass",
   "note": "Re-delivery of returned f563ae1b5612; all three findings fixed. F1: lem-weil-pbc-condensed-e-realization removed from stmt_deps, its module and import dropped, compile error quoted in report. F2: the SmoothPurityQbar import and smoothQbarResidueInvertible are replaced by dlAdicGeometricResidueInvertible in the new definition node (k0 unit mapped through k0->k->residue field; Invertible is a subsingleton, so the data is canonical; the helper is listed in lean.declarations and named in the node statement). F3: landed def-weil-derived-pullback-tensor-hom and def-wf-middle-extension added to stmt_deps. The item statement field equals the base; only lean and stmt_deps differ; all 12 dependency-node copies match the side clone. The theorem signature is unchanged and the earlier clause and edge-case check still holds (all Spec k points, exact finite-dimensional fibres, joint conservativity, zero-map detection, short-exact iff fibrewise, Weil via forget, locality on locally finite-type k0-schemes with arbitrary covers). lean.statement appears verbatim once per file and all declarations exist. nt_compile --json: DlLocallyConstructibleAdicHeart 10.8 s and DlConstructibleFibresExact 7.6 s, both clean, exit 0."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T093558-L-2329591",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
