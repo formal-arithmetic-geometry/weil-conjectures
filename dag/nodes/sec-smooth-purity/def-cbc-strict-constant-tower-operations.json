@@ -19,9 +19,65 @@
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change), open-immersion cases; derived strict-tower and pro-etale refinement of these statements, with the mate construction of sites-cohomology.tex Tag 07A7 (remark-base-change) and proetale.tex Tag 09AE (definition-extension-zero). The source states the etale result; the tower realization, finite-evaluation normalization and pro-etale extension are additional assertions to be proved, not quotations from the source.; strict-tower proof steps introducing these operations."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify inverse image of the constant ring sheaf with the constant ring sheaf using the constant-sheaf/evaluation adjunction at the terminal pro-etale object and uniqueness of left adjoints. Compute the composite comparison by the adjunction formula and pullback-pasting restrictions; this proves constantRing_isIso and constantRingIso_comp for the specified maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Work at the original site and coefficient universes. The category of modules is Grothendieck abelian by the existing ringed-site theorem. Filtered colimits in towers are exact pointwise. The coproduct of the evaluation left adjoints applied to a module separator is a tower separator: transpose a detecting map at an index. Thus towers are Grothendieck abelian, and the existing general resolution instance gives unbounded K-injective resolutions.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The already exact module inverse-image functor preserves finite limits and colimits after postcomposition on the functor category. This proves towerPullback_exact pointwise without a diagram-site replacement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the existing arbitrary-ring-sheaf pullback/direct-image composition theorem to the constant coefficient isomorphisms and their proved compositor equality. Extract its section-normalized ordinary direct-image isomorphism. Any two such isomorphisms agree by extensionality on modules, site objects and sections.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity, identify the adjoint coefficient map with the constant direct-image map using the adjunction hom equivalence. Sheafification naturality identifies that map with restriction along the identity pullback isomorphism. Apply pushforwardCongr₂ along the inverse graph and then pushforwardId; their component formula is exactly the required normalization. Extensionality proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation commutes definitionally with the termwise inverse-image functor. The ordinary mate of its inverse comparison is the identity by the right adjunction triangle.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the derived mate after the right-derived units using the derived adjunction mate factorization. The exact-square factorization follows from the derived composition and natural-isomorphism factorization lemmas; the homotopy mate is the termwise ordinary mate. Every derived tower has a K-injective representative, evaluation preserves its K-injectivity, and both derived units on these representatives are invertible. Since the ordinary evaluation mate is the identity, the factorization is a composite of isomorphisms. Cancel the invertible factors and transport across the representative isomorphism to prove evalR_isIso.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 079P and 07A7, together with the original blueprint strict-tower evaluation argument; realized using the existing Grothendieck/K-injective, adjunction, and normalized arbitrary-ring-sheaf composition declarations. The diagram-site route is replaced by the direct functor-category generator argument."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -316,5 +372,15 @@
   "group": "N4",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261019T093459-L-2316304",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
