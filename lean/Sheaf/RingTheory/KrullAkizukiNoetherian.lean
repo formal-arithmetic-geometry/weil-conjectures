@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.FieldTheory.Finite.Basic
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Finiteness.Ideal
-import Sheaf.RingTheory.FiniteLengthGlobalSubmodule
+import WeilConjectures.RingTheory.FiniteLengthGlobalSubmodule
 
 /-!
 # Krull–Akizuki Noetherianity for intermediate rings

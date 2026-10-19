@@ -28,7 +28,7 @@ import Sheaf.Paper.ProjectionFormulaArrows
 import Sheaf.Paper.ProjectionFormulaTotalization
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Mathlib.Algebra.Homology.Functor
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Paper.ConstantCompletionEquivalence

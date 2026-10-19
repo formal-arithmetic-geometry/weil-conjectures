@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapPositive
 @[expose] public section
 set_option autoImplicit false

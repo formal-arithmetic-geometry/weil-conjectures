@@ -91,13 +91,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PowerSeriesSubringIntersection",
-  "file": "lean/Sheaf/RingTheory/PowerSeriesSubringIntersection.lean",
+  "module": "WeilConjectures.RingTheory.PowerSeriesSubringIntersection",
+  "file": "lean/WeilConjectures/RingTheory/PowerSeriesSubringIntersection.lean",
   "declaration": "RingTheory.powerSeriesSubringIntersection",
   "statement": "theorem powerSeriesSubringIntersection\n    (p : ℕ) [Fact p.Prime]\n    (k : Type u) [Field k] [CharP k p]\n    (I : Type w) (t : I → k)\n    (hpb : ∃ b : Module.Basis\n      {E : I →₀ ℕ // ∀ i : I, E i < p}\n      (IntermediateField.adjoin (ZMod p) (Set.range (fun x : k => x ^ p))) k,\n      ∀ E, b E = (E : I →₀ ℕ).prod (fun i e => t i ^ e))\n    (n m : ℕ) (kJ : Finset I → Subfield k)\n    (hkJ : ∀ J, kJ J = Subfield.closure\n      (Set.range (fun x : k => x ^ p) ∪ {x : k | ∃ i : I, i ∉ J ∧ t i = x}))\n    (AJ : Finset I → Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))\n    (hAJ : ∀ J f, f ∈ AJ J ↔\n      ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),\n        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧\n        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →\n          (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :\n    ∀ f : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k),\n      (∀ J, f ∈ AJ J) ↔ ∃ h, h ^ p = f",
   "branch": "sheaf-dag",
   "by": "M2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PowerSeriesSubringIntersection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

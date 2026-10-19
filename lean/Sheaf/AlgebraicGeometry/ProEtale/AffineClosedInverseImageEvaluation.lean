@@ -5,7 +5,7 @@ Authors: SHEAF group NE
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+public import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.CategoryTheory.InverseMateEquivalence

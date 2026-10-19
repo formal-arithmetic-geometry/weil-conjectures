@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.FlatColimitRings
+import WeilConjectures.RingTheory.FlatColimitRings
 import Sheaf.RingTheory.PointedEtaleSmallFiltered
 import Sheaf.RingTheory.PointedEtaleCompletionStageFlat
 import Mathlib.CategoryTheory.Limits.Preserves.Over

@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.RingTheory.DvrUnitRootWeaklyUnramifiedDiagram
-import Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal
+import WeilConjectures.RingTheory.DvrUniformizerRootCompositumMaximalIdeal
 
 /-! # The local maximal-ideal conclusion of Abhyankar's lemma
 

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
-import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 
 /-!
 # Existence of normalized resolution comparisons

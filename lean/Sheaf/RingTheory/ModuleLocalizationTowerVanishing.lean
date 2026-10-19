@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.Algebra.Module.ULift
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.RingTheory.ModuleLocalizationFilteredColimit
 import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom

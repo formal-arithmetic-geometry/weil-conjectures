@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.Linear
 import Mathlib.Algebra.Homology.ShortComplex.Linear

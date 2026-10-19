@@ -10,7 +10,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import all Sheaf.CategoryTheory.DerivedModuleDirectSums
+import all WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Countable coproduct preservation for the two flat comparison functors
 

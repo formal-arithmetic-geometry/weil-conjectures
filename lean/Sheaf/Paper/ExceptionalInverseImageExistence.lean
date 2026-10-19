@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Sheaf.CategoryTheory.CompactObject
-public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.SixFunctorsBasics.BrownHypotheses
 import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.Paper.FiniteLocalizingExceptionalPreservation

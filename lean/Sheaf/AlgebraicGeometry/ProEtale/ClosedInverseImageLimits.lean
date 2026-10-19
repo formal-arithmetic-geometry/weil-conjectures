@@ -5,7 +5,7 @@ Authors: SHEAF group NO
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules

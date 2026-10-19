@@ -9,9 +9,9 @@ public import Sheaf.RingTheory.PairHenselization
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Algebra.Ring.Idempotent
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.PairHenselizationFiltered
-import Sheaf.RingTheory.PairHenselizationEssentiallySmall
-import Sheaf.RingTheory.FilteredEtaleFiberStructure
+import WeilConjectures.RingTheory.PairHenselizationFiltered
+import WeilConjectures.RingTheory.PairHenselizationEssentiallySmall
+import WeilConjectures.RingTheory.FilteredEtaleFiberStructure
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.HopkinsLevitzki

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
 module
-public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink

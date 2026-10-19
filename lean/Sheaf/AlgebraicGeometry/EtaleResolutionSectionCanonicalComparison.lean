@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 
 /-!
 # Canonical comparison specified on resolution cocycles

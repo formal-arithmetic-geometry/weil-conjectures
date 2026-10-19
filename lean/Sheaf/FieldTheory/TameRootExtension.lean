@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
-import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Mathlib.RingTheory.Polynomial.RationalRoot
 import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
 import Mathlib.RingTheory.Polynomial.GaussLemma

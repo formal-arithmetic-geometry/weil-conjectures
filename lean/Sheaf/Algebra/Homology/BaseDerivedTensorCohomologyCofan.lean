@@ -6,7 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Sheaf.CategoryTheory.DerivedModuleHomologyCoproduct
 import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction

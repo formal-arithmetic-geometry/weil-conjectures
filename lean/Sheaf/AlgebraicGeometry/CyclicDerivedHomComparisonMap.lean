@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-! # The explicit free-representable cohomology comparison map

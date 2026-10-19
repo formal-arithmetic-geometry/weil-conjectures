@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
-import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
+import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import WeilConjectures.RingTheory.FilteredColimitAlgebrasUnderlyingModule
 import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 

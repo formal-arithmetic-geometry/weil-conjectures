@@ -5,9 +5,9 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftCore
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftCore
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLocal
 
 /-! # Extending degreewise stalk maps

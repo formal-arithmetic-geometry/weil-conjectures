@@ -21,7 +21,7 @@ public import Sheaf.AlgebraicGeometry.KummerModuleCoefficients
 public import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 public import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
-public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
+public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!

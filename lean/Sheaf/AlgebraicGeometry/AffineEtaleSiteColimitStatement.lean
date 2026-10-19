@@ -6,10 +6,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 public import Mathlib.CategoryTheory.Sites.Continuous
-public import Sheaf.CategoryTheory.FinitePrecoverage
-public import Sheaf.CategoryTheory.ArrowsFunctor
-import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
-import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+import WeilConjectures.AlgebraicGeometry.AffineEtaleBaseChangeSystem
+import WeilConjectures.AlgebraicGeometry.AffineEtaleDescentData
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineEtaleFiniteColimitConstruction
 

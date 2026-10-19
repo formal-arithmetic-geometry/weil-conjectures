@@ -2,7 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransferExtClass
 import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback
 

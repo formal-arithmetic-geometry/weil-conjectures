@@ -5,7 +5,7 @@ Authors: SHEAF groups A2, S4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift
 
 /-! # Local representatives of positive-rank finite free stalk maps

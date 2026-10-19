@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.Algebra.Homology.Functor
@@ -22,10 +22,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Total derived inverse limits of strict towers on a ringed site

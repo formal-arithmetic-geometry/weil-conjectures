@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import all Sheaf.CategoryTheory.DerivedModuleDirectSums
+import all WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Coproducts of complexes in the derived category of module sheaves
 

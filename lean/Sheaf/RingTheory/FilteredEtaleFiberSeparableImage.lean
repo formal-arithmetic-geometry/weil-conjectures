@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.FieldTheory.Separable
 import Mathlib.RingTheory.Etale.Field
-import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
 
 /-! # Separable images of filtered etale fibres
 Source: Stacks Project, More on Algebra, Tag 0AH1, final sentence.

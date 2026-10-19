@@ -5,9 +5,8 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Sheaf.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence
-import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 
 /-! # Compatibility of the canonical comparison with smaller opens

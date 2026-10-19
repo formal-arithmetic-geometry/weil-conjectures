@@ -28,7 +28,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleOpenTensor

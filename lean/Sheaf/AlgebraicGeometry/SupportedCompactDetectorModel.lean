@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.CompactObject
-public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux

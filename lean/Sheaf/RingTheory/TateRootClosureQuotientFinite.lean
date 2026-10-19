@@ -7,8 +7,8 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.TateRootIdealPrime
-import Sheaf.RingTheory.PrincipalPrimeQuotientFractionFinite
+import WeilConjectures.RingTheory.TateRootIdealPrime
+import WeilConjectures.RingTheory.PrincipalPrimeQuotientFractionFinite
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Finiteness.Small

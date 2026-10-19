@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Sheaf.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Mathlib.Algebra.Homology.Functor
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.CategoryTheory.SiteCoveringAxioms

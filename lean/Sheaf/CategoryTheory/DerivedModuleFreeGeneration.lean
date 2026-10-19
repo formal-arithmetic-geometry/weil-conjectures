@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Retract
 import Sheaf.CategoryTheory.DerivedModuleCellularFiltration
-import Sheaf.CategoryTheory.DerivedModuleFiltrationTelescope
+import WeilConjectures.CategoryTheory.DerivedModuleFiltrationTelescope
 
 /-! # Generation of a module derived category by shifts of the ring
 

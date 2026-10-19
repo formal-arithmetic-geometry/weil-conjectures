@@ -5,8 +5,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat
-import Sheaf.RingTheory.FlatColimitRings
-import Sheaf.RingTheory.PairHenselizationCompletionData
+import WeilConjectures.RingTheory.FlatColimitRings
+import WeilConjectures.RingTheory.PairHenselizationCompletionData
 import Mathlib.CategoryTheory.Limits.Preserves.Over
 
 /-!

@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.AdicCompletionRingEquiv
+import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import Sheaf.RingTheory.RegularRingEquiv
 
 /-!

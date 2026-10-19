@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import WeilConjectures.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
-import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 
 /-!

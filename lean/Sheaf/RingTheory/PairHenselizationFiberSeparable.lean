@@ -9,8 +9,8 @@ public import Sheaf.RingTheory.PairHenselization
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.PairHenselizationFiltered
-import Sheaf.RingTheory.PairHenselizationEssentiallySmall
+import WeilConjectures.RingTheory.PairHenselizationFiltered
+import WeilConjectures.RingTheory.PairHenselizationEssentiallySmall
 import WeilConjectures.RingTheory.ProEtale.IndEtale
 
 /-!

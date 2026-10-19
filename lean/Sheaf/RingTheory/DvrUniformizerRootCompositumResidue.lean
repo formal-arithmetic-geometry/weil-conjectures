@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
-import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
-import Sheaf.RingTheory.DvrStandardRootUnramifiedModel
-import Sheaf.RingTheory.DvrUnramifiedCompositumBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.RingTheory.DvrStandardRootUnramifiedModel
+import WeilConjectures.RingTheory.DvrUnramifiedCompositumBaseChange
 
 /-! # Tame residue separability over a uniformizer-root base
 
