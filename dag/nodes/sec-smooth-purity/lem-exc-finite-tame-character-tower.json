@@ -47,10 +47,11 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-integral-closure-algebraic-extension-normal], $B_L$ and $B_M$ are normal domains with fraction fields $L$ and $M$. Moreover $B_M$ is the integral closure of $B_L$ in $M$: an element of $B_M$ is integral over $A\\subseteq B_L$ by [def-weil-pbc-integral-closure]; conversely an $x\\in M$ integral over $B_L\\subseteq B_M$ satisfies that same monic equation over $B_M$, and hence belongs to $B_M$ by its integral closedness. The extension $M/L$ is finite Galois: minimal polynomials over $L$ divide the corresponding separable split minimal polynomials over $K$.",
+   "text": "The extension $M/L$ is finite Galois by the tower properties of normality and separability. If $b\\in B_M$ is fixed by $\\operatorname{Gal}(M/L)$, [lem-weil-pbc-finite-galois-fixed-field] gives $y\\in L$ with image $b$. Integrality over $A$ descends along the injective field embedding $L\\hookrightarrow M$, so $y\\in B_L$ by [def-weil-pbc-integral-closure]. Thus $B_L\\to B_M$ satisfies Mathlib's invariant-ring predicate for $\\operatorname{Gal}(M/L)$. This permits the prime-conjugacy and quotient-residue-automorphism lifting clauses of [lem-exc-finite-galois-prime-residue-lifting] directly, without constructing fraction fields of the normalizations.",
    "uses": [
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "def-weil-pbc-integral-closure"
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "def-weil-pbc-integral-closure",
+    "lem-exc-finite-galois-prime-residue-lifting"
    ],
    "elementary": false,
    "source": {
@@ -59,7 +60,7 @@
    }
   },
   {
-   "text": "For $\\gamma\\in D_L$, [lem-weil-pbc-normal-subextension-automorphism-extends] lifts $\\gamma$ to $\\tau\\in\\operatorname{Gal}(M/K)$. The primes $\\tau(\\mathfrak n_M)$ and $\\mathfrak n_M$ of $B_M$ both contract to $\\mathfrak n_L$, since $\\gamma$ stabilizes $\\mathfrak n_L$. Apply the prime-conjugacy clause of [lem-exc-finite-galois-prime-residue-lifting] with normal base $B_L$, fraction field $L$, finite Galois extension $M/L$, and normalization $B_M$ as established in Step 3. It gives $\\rho\\in\\operatorname{Gal}(M/L)$ with $\\rho\\tau(\\mathfrak n_M)=\\mathfrak n_M$. Thus $\\sigma_0=\\rho\\tau\\in D_M$ restricts to $\\gamma$, proving decomposition surjectivity.",
+   "text": "For $\\gamma\\in D_L$, [lem-weil-pbc-normal-subextension-automorphism-extends] lifts $\\gamma$ to $\\tau\\in\\operatorname{Gal}(M/K)$. The primes $\\tau(\\mathfrak n_M)$ and $\\mathfrak n_M$ of $B_M$ both contract to $\\mathfrak n_L$, since $\\gamma$ stabilizes $\\mathfrak n_L$. Apply the prime-conjugacy clause of [lem-exc-finite-galois-prime-residue-lifting] using the invariant-ring structure of $B_L\\to B_M$ for the finite Galois group $\\operatorname{Gal}(M/L)$ established in Step 3. It gives $\\rho\\in\\operatorname{Gal}(M/L)$ with $\\rho\\tau(\\mathfrak n_M)=\\mathfrak n_M$. Thus $\\sigma_0=\\rho\\tau\\in D_M$ restricts to $\\gamma$, proving decomposition surjectivity.",
    "uses": [
     "lem-weil-pbc-normal-subextension-automorphism-extends",
     "lem-exc-finite-galois-prime-residue-lifting"
@@ -71,7 +72,7 @@
    }
   },
   {
-   "text": "If $\\gamma\\in I_L$, construct $\\sigma_0\\in D_M$ as in Step 4. Its residue automorphism $\\overline{\\sigma_0}$ of $k_M$ fixes the embedded $k_L$, since its restriction is $\\gamma$. The residue-lifting clause of [lem-exc-finite-galois-prime-residue-lifting], again for $B_L\\subset B_M$ and $M/L$, gives $\\eta\\in\\operatorname{Gal}(M/L)$ stabilizing $\\mathfrak n_M$ and inducing $\\overline{\\sigma_0}$. Then $\\eta^{-1}\\sigma_0$ acts identically on $k_M$ and restricts to $\\gamma$, so it belongs to $I_M$. Restriction preserves stabilizers by contraction and preserves trivial residue action by the injection $k_L\\hookrightarrow k_M$. Thus both restriction maps are well-defined surjective homomorphisms, with the required $I_M\\twoheadrightarrow I_L$.",
+   "text": "If $\\gamma\\in I_L$, construct $\\sigma_0\\in D_M$ as in Step 4. Its residue automorphism $\\overline{\\sigma_0}$ of $k_M$ fixes the embedded $k_L$, since its restriction is $\\gamma$. The residue-lifting clause of [lem-exc-finite-galois-prime-residue-lifting], again with the invariant-ring structure of Step 3 and the quotient residue fields (the primes are maximal), gives $\\eta\\in\\operatorname{Gal}(M/L)$ stabilizing $\\mathfrak n_M$ and inducing $\\overline{\\sigma_0}$. Then $\\eta^{-1}\\sigma_0$ acts identically on $k_M$ and restricts to $\\gamma$, so it belongs to $I_M$. Restriction preserves stabilizers by contraction and preserves trivial residue action by the injection $k_L\\hookrightarrow k_M$. Thus both restriction maps are well-defined surjective homomorphisms, with the required $I_M\\twoheadrightarrow I_L$.",
    "uses": [
     "lem-exc-finite-galois-prime-residue-lifting"
    ],
@@ -138,15 +139,15 @@
  "proof_deps": [
   "def-weil-pbc-integral-closure",
   "lem-exc-finite-dvr-tame-inertia",
-  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-weil-pbc-finite-galois-fixed-field",
   "lem-exc-finite-galois-prime-residue-lifting",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
   "def-sc-discrete-valuation-ring"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0BU7 and 0BU8, with the restriction proof of Tag 0BSX written out using the finite prime-conjugacy and residue-lifting clauses of Tag 0BRK, and an explicit elementary coprime-power wild lift."
+  "place": "Tags 0BU7 and 0BU8, with the restriction proof of Tag 0BSX written out using the finite prime-conjugacy and residue-lifting clauses of Tag 0BRK, and an explicit elementary coprime-power wild lift. In Lean the fixed-field theorem supplies the invariant-ring hypothesis directly; quotient residue fields suffice because both primes are maximal."
  },
  "mathlib_searches": [
   {
@@ -386,5 +387,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T093504-L-2317143",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
