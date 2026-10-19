@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleConstantSheafPullbackUnitContinuousMap
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf

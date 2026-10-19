@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology
-import Sheaf.AlgebraicGeometry.PositiveDirectImageOfObjectAcyclic
+import WeilConjectures.AlgebraicGeometry.PositiveDirectImageOfObjectAcyclic
 
 /-! # Positive direct-image vanishing
 

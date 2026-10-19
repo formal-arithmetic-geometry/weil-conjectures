@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescent
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentData
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale

@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteSplittingClosedImmersionDescent
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism

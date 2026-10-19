@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibility
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver

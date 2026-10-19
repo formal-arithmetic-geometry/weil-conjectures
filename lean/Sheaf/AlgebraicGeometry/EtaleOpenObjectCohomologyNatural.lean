@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
-import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
+import WeilConjectures.AlgebraicGeometry.FieldExtensionFpqcCover
 import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 import Sheaf.AlgebraicGeometry.UnramifiedOrdinaryFibreCriterion

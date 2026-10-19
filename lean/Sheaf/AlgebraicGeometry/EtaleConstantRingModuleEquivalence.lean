@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.CategoryTheory.Sites.LocallyBijective

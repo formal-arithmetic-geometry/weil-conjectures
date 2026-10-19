@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
+import WeilConjectures.AlgebraicGeometry.FieldExtensionFpqcCover
 import WeilConjectures.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 

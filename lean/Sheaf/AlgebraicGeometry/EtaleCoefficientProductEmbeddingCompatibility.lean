@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientProductEmbeddingCompatibility
-public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientProductTransitions

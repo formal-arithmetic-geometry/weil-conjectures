@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteOpenCoverDegreeSum
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree

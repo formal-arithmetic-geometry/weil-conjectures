@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech

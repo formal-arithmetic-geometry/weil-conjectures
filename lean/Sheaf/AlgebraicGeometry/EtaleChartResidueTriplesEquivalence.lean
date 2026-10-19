@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples

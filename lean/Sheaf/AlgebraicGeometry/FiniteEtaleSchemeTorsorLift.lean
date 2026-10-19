@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions

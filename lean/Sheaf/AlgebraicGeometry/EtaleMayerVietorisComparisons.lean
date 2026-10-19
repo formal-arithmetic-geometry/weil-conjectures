@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisComparisons
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Mathlib.CategoryTheory.Abelian.RightDerived

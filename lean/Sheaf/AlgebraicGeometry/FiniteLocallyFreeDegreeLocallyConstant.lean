@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree

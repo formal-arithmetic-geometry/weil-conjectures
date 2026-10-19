@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility
-public import WeilConjectures.SixFunctors.BaseChange.Square

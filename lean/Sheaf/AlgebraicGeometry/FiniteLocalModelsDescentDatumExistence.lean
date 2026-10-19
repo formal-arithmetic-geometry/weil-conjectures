@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumExistence
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-public import Mathlib.AlgebraicGeometry.Cover.Sigma

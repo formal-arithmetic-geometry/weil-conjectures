@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijective
+import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijective
 
 @[expose] public section
 

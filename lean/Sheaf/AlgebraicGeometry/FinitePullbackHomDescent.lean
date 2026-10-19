@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FinitePullbackHomDescent
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

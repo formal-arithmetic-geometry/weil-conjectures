@@ -10,7 +10,7 @@ public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Sheaf.RingTheory.FreeComplexModNonzerodivisorExact
+import WeilConjectures.RingTheory.FreeComplexModNonzerodivisorExact
 import Sheaf.RingTheory.NonzerodivisorInInjectiveMaximalMinors
 import Mathlib.RingTheory.Noetherian.Basic
 

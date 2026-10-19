@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteSectionCoproductLocalPermutation
-public import Mathlib.AlgebraicGeometry.Limits

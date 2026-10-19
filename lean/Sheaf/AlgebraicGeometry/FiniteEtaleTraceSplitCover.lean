@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitCover
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite

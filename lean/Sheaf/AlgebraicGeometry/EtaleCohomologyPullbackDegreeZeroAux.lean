@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-public import Mathlib.Algebra.Homology.Single

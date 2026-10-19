@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

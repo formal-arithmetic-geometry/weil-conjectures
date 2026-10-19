@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
-public import Mathlib.AlgebraicGeometry.PullbackCarrier
