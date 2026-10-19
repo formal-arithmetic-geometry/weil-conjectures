@@ -13,10 +13,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
+import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # Finite-Tor constructible objects generate the ordinary étale derived category
@@ -89,6 +89,75 @@ theorem finiteTorConstructible_etale_localizing_eq_top
       P.IsClosedUnderIsomorphisms ∧ P.IsTriangulated ∧
       ∀ I : Type (u + 1), Nonempty (P.IsClosedUnderColimitsOfShape (Discrete I))} =
         (⊤ : ObjectProperty (DerivedCategoryModule A X)) := by
-  sorry
+  classical
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hcard : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hcard
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  have hunit : IsUnit (ℓ : D.k) := by
+    apply isUnit_iff_ne_zero.mpr
+    exact CharP.cast_ne_zero_of_ne_of_prime D.k hℓprime hℓne.symm
+  -- The finite-ring theorem supplies the detecting family and ambient coproducts.
+  obtain ⟨hcoprod, hsmall, _, S, E, hE, hdetect⟩ :=
+    finiteRing_compactGenerators ℓ hℓprime hunit (X ↘ Spec (CommRingCat.of D.k)) hA
+  let := hcoprod
+  let := hsmall
+  let : Zero (DerivedCategoryModule A X) := HasZeroObject.zero' _
+  obtain ⟨_, hcompact⟩ := finiteTorConstructible_etale_compact D ℓ hℓprime hℓne X A hA
+  -- Vanishing maps out of the coproduct force the zero map to K to be an isomorphism.
+  have hgenerate : IsTriangulatedGeneratingFamily E := by
+    intro K hK
+    by_contra! hn
+    have hzero (s : S) (n : ℤ) (f : E s ⟶ K⟦n⟧) : f = 0 := by
+      have h := congrArg (fun g ↦ Sigma.ι E s ≫ g)
+        (hn n (Sigma.desc (Pi.single s f)))
+      simpa using h
+    have hshift (s : S) (n : ℤ) (f : (E s)⟦n⟧ ⟶ K) : f = 0 := by
+      let e := (shiftEquiv (DerivedCategoryModule A X) n).toAdjunction.homEquiv (E s) K
+      apply e.injective
+      rw [hzero s (-n) (e f)]
+      simp [e, Adjunction.homEquiv_apply]
+    have : IsIso (0 : (0 : DerivedCategoryModule A X) ⟶ K) := by
+      apply hdetect
+      intro s n
+      constructor
+      · intro f g _
+        exact (isZero_zero _).eq_of_tgt f g
+      · intro f
+        refine ⟨0, ?_⟩
+        simp only [zero_comp, hshift s n f]
+    exact hK ((isZero_zero _).of_iso (asIso (0 : (0 : DerivedCategoryModule A X) ⟶ K)).symm)
+  -- Each candidate contains every stage of the compact-generator telescope.
+  apply top_unique
+  apply le_sInf
+  intro P hP K _
+  obtain ⟨hcontains, hiso, htri, hsums⟩ := hP
+  let := hiso
+  let := htri
+  have hsum {I : Type (u + 1)} (F : I → DerivedCategoryModule A X)
+      (hF : ∀ i, P (F i)) : P (∐ F) := by
+    let := (hsums I).some
+    exact P.prop_colimit (Discrete.functor F) (fun i ↦ hF i.as)
+  have hshift (s : S) (n : ℤ) : P ((E s)⟦n⟧) :=
+    P.le_shift n _ (hcontains _ (hE s).1 (hE s).2)
+  obtain ⟨Y, t, hstart, hsteps, q, r, htel⟩ :=
+    compactGenerators_buildObjects.{u + 1, u + 1} E
+      (fun s ↦ hcompact _ (hE s).1 (hE s).2) hgenerate K
+  have hshape (Z : DerivedCategoryModule A X)
+      (hZ : ∃ (J : Type (u + 1)) (i : J → S) (m : J → ℤ),
+        Nonempty (Z ≅ ∐ fun j : J ↦ (E (i j))⟦m j⟧)) : P Z := by
+    obtain ⟨J, i, m, ⟨e⟩⟩ := hZ
+    exact P.prop_of_iso e.symm (hsum _ (fun j ↦ hshift (i j) (m j)))
+  obtain ⟨Z, a, b, hZ, hdist⟩ := hsteps
+  have hY (n : ℕ) : P (Y n) := by
+    induction n with
+    | zero => exact hshape _ hstart
+    | succ n ih =>
+      exact P.ext_of_isTriangulatedClosed₃ _ (hdist n) (hshape _ (hZ n)) ih
+  have hPsum := hsum (fun n : ULift.{u + 1} ℕ ↦ Y n.down) (fun n ↦ hY n.down)
+  exact P.ext_of_isTriangulatedClosed₃ _ htel hPsum hPsum
 
 end AlgebraicGeometry.Etale
