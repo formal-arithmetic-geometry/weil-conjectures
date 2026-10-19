@@ -8,17 +8,16 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.NoetherianSpace
 
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.Algebra.Polynomial.CancelLeads
 
 /-!
 # Finite type algebras preserve Noetherian spectra
 
 Source: J. Ohm and R. L. Pendleton, *Rings with Noetherian spectrum*,
 Theorem 2.5 and Corollary 2.6 (the paper is not in the local collection).
-The proof below is the independent agent proof recorded in the DAG, serving paragraph (2) of
-`det-lem-coefficient-heart-closure` in the main-20261015 blueprint
-(blueprint: lem-sfb-finite-type-noetherian-spectrum).
+The independent agent proof below uses least-degree polynomials and Noetherian induction,
+serving paragraph (2) of `det-lem-coefficient-heart-closure` in main-20261015.
+(blueprint: lem-sfb-finite-type-noetherian-spectrum)
 -/
 
 @[expose] public section
@@ -29,63 +28,278 @@ open TopologicalSpace
 
 namespace AlgebraicGeometry
 
+open Polynomial _root_.PrimeSpectrum in
+/-- A least-degree polynomial controls membership in primes away from its leading coefficient.
+Cancel leading terms and induct on the degree of the other polynomial. -/
+private theorem polynomial_ideal_generic_principal (R : Type u) [CommRing R]
+    (I : Ideal R[X]) (hI : I ≠ ⊥) :
+    ∃ f ∈ I, f ≠ 0 ∧ ∀ q : PrimeSpectrum R[X],
+      C f.leadingCoeff ∉ q.asIdeal → (f ∈ q.asIdeal ↔ I ≤ q.asIdeal) := by
+  classical
+  obtain ⟨g, hg, hg0⟩ := (Submodule.ne_bot_iff _).mp hI
+  have hex : ∃ n : ℕ, ∃ f ∈ I, f ≠ 0 ∧ f.natDegree = n :=
+    ⟨g.natDegree, g, hg, hg0, rfl⟩
+  obtain ⟨f, hf, hf0, hfn⟩ := Nat.find_spec hex
+  have hmin (g : R[X]) (hg : g ∈ I) (hg0 : g ≠ 0) : f.natDegree ≤ g.natDegree := by
+    rw [hfn]
+    exact Nat.find_min' hex ⟨g, hg, hg0, rfl⟩
+  refine ⟨f, hf, hf0, fun q ha ↦ ⟨?_, fun h ↦ h hf⟩⟩
+  intro hfq g hg
+  have main (n : ℕ) : ∀ g : R[X], g.natDegree = n → g ∈ I → g ∈ q.asIdeal := by
+    induction n using Nat.strong_induction_on with
+    | h n ih =>
+      intro g hgn hg
+      by_cases hg0 : g = 0
+      · simp [hg0]
+      have hfg := hmin g hg hg0
+      by_cases hn : n = 0
+      · have hfdeg : f.natDegree = 0 := by omega
+        have hfc : f = C f.leadingCoeff := by
+          simpa [leadingCoeff, hfdeg] using eq_C_of_natDegree_eq_zero hfdeg
+        exact (ha (hfc ▸ hfq)).elim
+      have hnpos : 0 < g.natDegree := by omega
+      have hr : f.cancelLeads g ∈ I := by
+        unfold cancelLeads
+        exact I.sub_mem (I.mul_mem_left _ hg) (I.mul_mem_left _ hf)
+      have hrd : (f.cancelLeads g).natDegree < n := by
+        rw [← hgn]
+        exact natDegree_cancelLeads_lt_of_natDegree_le_natDegree hfg hnpos
+      have hrq := ih _ hrd (f.cancelLeads g) rfl hr
+      have ht : C g.leadingCoeff * X ^ (g.natDegree - f.natDegree) * f ∈ q.asIdeal :=
+        q.asIdeal.mul_mem_left _ hfq
+      have hm : C f.leadingCoeff * g ∈ q.asIdeal := by
+        have he : f.cancelLeads g = C f.leadingCoeff * g -
+            C g.leadingCoeff * X ^ (g.natDegree - f.natDegree) * f := by
+          simp [cancelLeads, Nat.sub_eq_zero_of_le hfg]
+        rw [he] at hrq
+        simpa only [sub_add_cancel] using q.asIdeal.add_mem hrq ht
+      exact (q.isPrime.mem_or_mem hm).resolve_left ha
+  exact main g.natDegree g rfl hg
+
+open Polynomial _root_.PrimeSpectrum in
+/-- If the complements of the nonzero coefficient basic opens are Noetherian, so is the spectrum.
+For an open U, the least-degree polynomial for the ideal defining its complement identifies
+U intersected with one such basic open with a compact basic open. -/
+private theorem polynomial_noetherian_of_complements (R : Type u) [CommRing R]
+    (hproper : ∀ a : R, a ≠ 0 →
+      NoetherianSpace ↥((basicOpen (C a : R[X]) : Set (PrimeSpectrum R[X]))ᶜ)) :
+    NoetherianSpace (PrimeSpectrum R[X]) := by
+  classical
+  apply (noetherianSpace_iff_opens _).mpr
+  intro U
+  let I := vanishingIdeal (U : Set (PrimeSpectrum R[X]))ᶜ
+  have hzero : zeroLocus (I : Set R[X]) = (U : Set (PrimeSpectrum R[X]))ᶜ := by
+    exact (zeroLocus_vanishingIdeal_eq_closure _).trans U.isOpen.isClosed_compl.closure_eq
+  by_cases hI : I = ⊥
+  · have hU : (U : Set (PrimeSpectrum R[X])) = ∅ := by
+      apply compl_injective
+      rw [← hzero, hI, zeroLocus_bot, Set.compl_empty]
+    rw [hU]
+    exact isCompact_empty
+  obtain ⟨f, hf, hf0, hgen⟩ := polynomial_ideal_generic_principal R I hI
+  let a := f.leadingCoeff
+  have ha : a ≠ 0 := leadingCoeff_ne_zero.mpr hf0
+  let D : Set (PrimeSpectrum R[X]) := basicOpen (C a)
+  have heq : (U : Set (PrimeSpectrum R[X])) ∩ D =
+      (basicOpen (C a * f) : Set (PrimeSpectrum R[X])) := by
+    ext q
+    have hmem : q ∈ (U : Set (PrimeSpectrum R[X])) ↔ ¬ I ≤ q.asIdeal := by
+      have h := Set.ext_iff.mp hzero q
+      simpa only [mem_zeroLocus, SetLike.coe_subset_coe, Set.mem_compl_iff, not_not]
+        using not_congr h.symm
+    change (q ∈ (U : Set (PrimeSpectrum R[X])) ∧ C a ∉ q.asIdeal) ↔
+      C a * f ∉ q.asIdeal
+    rw [q.isPrime.mul_mem_iff_mem_or_mem, not_or]
+    constructor
+    · rintro ⟨hU, ha⟩
+      exact ⟨ha, fun hfq ↦ (hmem.mp hU) ((hgen q ha).mp hfq)⟩
+    · rintro ⟨ha, hfq⟩
+      exact ⟨hmem.mpr (fun hi ↦ hfq (hi hf)), ha⟩
+  have hc : IsCompact ((U : Set (PrimeSpectrum R[X])) ∩ D) := by
+    rw [heq]
+    exact isCompact_basicOpen _
+  have hDc : NoetherianSpace ↥(Dᶜ) := hproper a ha
+  have hc' : IsCompact ((U : Set (PrimeSpectrum R[X])) ∩ Dᶜ) :=
+    (noetherianSpace_set_iff Dᶜ).mp hDc _ Set.inter_subset_right
+  have hcover : (U : Set (PrimeSpectrum R[X])) =
+      ((U : Set (PrimeSpectrum R[X])) ∩ D) ∪ ((U : Set (PrimeSpectrum R[X])) ∩ Dᶜ) := by
+    exact (Set.inter_union_compl _ _).symm
+  rw [hcover]
+  exact hc.union hc'
+
+open Polynomial _root_.PrimeSpectrum in
+/-- The coefficientwise quotient identifies its spectrum with the inverse image of V(p). -/
+private theorem polynomial_quotient_range (R : Type u) [CommRing R] (p : Ideal R) :
+    Set.range (comap (mapRingHom (Ideal.Quotient.mk p))) =
+      comap (C : R →+* R[X]) ⁻¹' zeroLocus (p : Set R) := by
+  rw [range_comap_of_surjective _ _ (map_surjective _ Ideal.Quotient.mk_surjective),
+    ker_mapRingHom, Ideal.mk_ker]
+  ext q
+  change p.map C ≤ q.asIdeal ↔ p ≤ q.asIdeal.comap C
+  exact Ideal.map_le_iff_le_comap
+
+open Polynomial _root_.PrimeSpectrum in
+/-- Contraction to coefficients commutes with the coefficientwise quotient. -/
+private theorem polynomial_quotient_square (R : Type u) [CommRing R] (p : Ideal R)
+    (x : PrimeSpectrum (R ⧸ p)[X]) :
+    comap C (comap (mapRingHom (Ideal.Quotient.mk p)) x) =
+      comap (Ideal.Quotient.mk p) (comap C x) := by
+  ext r
+  change (mapRingHom (Ideal.Quotient.mk p)) (C r) ∈ x.asIdeal ↔
+    C (Ideal.Quotient.mk p r) ∈ x.asIdeal
+  rw [coe_mapRingHom, map_C]
+
+/-- A union of two Noetherian subspaces is Noetherian, by compactness of all its subsets. -/
+private theorem noetherian_union {X : Type*} [TopologicalSpace X] (s t : Set X)
+    [NoetherianSpace s] [NoetherianSpace t] : NoetherianSpace (s ∪ t : Set X) := by
+  apply (noetherianSpace_set_iff _).mpr
+  intro v hv
+  have heq : v = (v ∩ s) ∪ (v ∩ t) := by
+    rw [← Set.inter_union_distrib_left, Set.inter_eq_left.mpr hv]
+  rw [heq]
+  exact ((noetherianSpace_set_iff s).mp inferInstance _ Set.inter_subset_right).union
+    ((noetherianSpace_set_iff t).mp inferInstance _ Set.inter_subset_right)
+
+open Polynomial _root_.PrimeSpectrum in
+/-- Noetherian induction on closed subsets of the coefficient spectrum.
+In the irreducible case quotient by its defining prime, then use the proper closed V(a)
+for each nonzero coefficient a in the quotient domain. -/
+private theorem polynomial_noetherian (R : Type u) [CommRing R]
+    [NoetherianSpace (PrimeSpectrum R)] : NoetherianSpace (PrimeSpectrum R[X]) := by
+  classical
+  let π := comap (C : R →+* R[X])
+  have main (Z : Closeds (PrimeSpectrum R)) : NoetherianSpace (π ⁻¹' (Z : Set _)) := by
+    refine wellFounded_lt.induction (C := fun Z : Closeds (PrimeSpectrum R) ↦
+      NoetherianSpace (π ⁻¹' (Z : Set (PrimeSpectrum R)))) Z ?_
+    intro Z ih
+    by_cases hZ : Z = ⊥
+    · subst Z
+      simp only [Closeds.coe_bot, Set.preimage_empty]
+      infer_instance
+    by_cases hirr : IsPreirreducible (Z : Set (PrimeSpectrum R))
+    · have hZi : IsIrreducible (Z : Set (PrimeSpectrum R)) :=
+        ⟨Closeds.coe_nonempty.mpr hZ, hirr⟩
+      let p := vanishingIdeal (Z : Set (PrimeSpectrum R))
+      have hp : p.IsPrime := isIrreducible_iff_vanishingIdeal_isPrime.mp hZi
+      have hZeq : zeroLocus (p : Set R) = (Z : Set (PrimeSpectrum R)) :=
+        (zeroLocus_vanishingIdeal_eq_closure _).trans Z.isClosed.closure_eq
+      let j := comap (Ideal.Quotient.mk p)
+      let k := comap (mapRingHom (Ideal.Quotient.mk p))
+      have hj := isClosedEmbedding_comap_of_surjective (R ⧸ p)
+        (Ideal.Quotient.mk p) Ideal.Quotient.mk_surjective
+      have hk := isClosedEmbedding_comap_of_surjective (R ⧸ p)[X]
+        (mapRingHom (Ideal.Quotient.mk p))
+        (map_surjective _ Ideal.Quotient.mk_surjective)
+      have hrangej : Set.range j = (Z : Set (PrimeSpectrum R)) := by
+        rw [show j = comap (Ideal.Quotient.mk p) from rfl,
+          range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker, hZeq]
+      have hrangek : Set.range k = π ⁻¹' (Z : Set (PrimeSpectrum R)) := by
+        rw [show k = comap (mapRingHom (Ideal.Quotient.mk p)) from rfl,
+          polynomial_quotient_range, hZeq]
+      have hquot : NoetherianSpace (PrimeSpectrum (R ⧸ p)[X]) := by
+        apply polynomial_noetherian_of_complements
+        intro a ha
+        let W : Closeds (PrimeSpectrum R) :=
+          ⟨j '' zeroLocus ({a} : Set (R ⧸ p)),
+            hj.isClosedMap _ (isClosed_zeroLocus _)⟩
+        have hWZ : W ≤ Z := by
+          intro x hx
+          change x ∈ (Z : Set (PrimeSpectrum R))
+          rw [← hrangej]
+          exact Set.image_subset_range j _ hx
+        have hWne : W ≠ Z := by
+          intro heq
+          let x : PrimeSpectrum (R ⧸ p) := ⟨⊥, Ideal.isPrime_bot⟩
+          have hxZ : j x ∈ (Z : Set (PrimeSpectrum R)) := hrangej ▸ ⟨x, rfl⟩
+          have hxW : j x ∈ (W : Set (PrimeSpectrum R)) := heq ▸ hxZ
+          obtain ⟨y, hy, hxy⟩ := hxW
+          have hyx : y = x := hj.injective hxy
+          subst y
+          exact ha (by simpa [mem_zeroLocus, x] using hy)
+        have hW := ih W (lt_of_le_of_ne hWZ hWne)
+        let D : Set (PrimeSpectrum (R ⧸ p)[X]) :=
+          (basicOpen (C a) : Set (PrimeSpectrum (R ⧸ p)[X]))ᶜ
+        have hmap (x : D) : k x.val ∈ π ⁻¹' (W : Set (PrimeSpectrum R)) := by
+          change π (k x.val) ∈ j '' zeroLocus ({a} : Set (R ⧸ p))
+          refine ⟨comap C x.val, ?_, ?_⟩
+          · rw [mem_zeroLocus, Set.singleton_subset_iff]
+            have hx : ¬ C a ∉ x.val.asIdeal := x.property
+            exact not_not.mp hx
+          · exact (polynomial_quotient_square R p x.val).symm
+        exact ((hk.isInducing.comp Topology.IsInducing.subtypeVal).codRestrict hmap).noetherianSpace
+      let := hquot
+      have hr := NoetherianSpace.range k hk.continuous
+      rwa [hrangek] at hr
+    · simp only [isPreirreducible_iff_isClosed_union_isClosed,
+        not_forall, not_or] at hirr
+      obtain ⟨z₁, z₂, hz₁, hz₂, hcover, hz₁', hz₂'⟩ := hirr
+      let Z₁ : Closeds (PrimeSpectrum R) := ⟨z₁, hz₁⟩
+      let Z₂ : Closeds (PrimeSpectrum R) := ⟨z₂, hz₂⟩
+      have hlt₁ : Z ⊓ Z₁ < Z := inf_lt_left.mpr (show ¬ Z ≤ Z₁ from hz₁')
+      have h₁ := ih (Z ⊓ Z₁) hlt₁
+      have hlt₂ : Z ⊓ Z₂ < Z := inf_lt_left.mpr (show ¬ Z ≤ Z₂ from hz₂')
+      have h₂ := ih (Z ⊓ Z₂) hlt₂
+      have heq : (Z : Set (PrimeSpectrum R)) =
+          ((Z ⊓ Z₁ : Closeds _) : Set _) ∪ ((Z ⊓ Z₂ : Closeds _) : Set _) := by
+        change (Z : Set _) = ((Z : Set _) ∩ z₁) ∪ ((Z : Set _) ∩ z₂)
+        rw [← Set.inter_union_distrib_left, Set.inter_eq_left.mpr hcover]
+      rw [heq, Set.preimage_union]
+      let := h₁
+      let := h₂
+      exact noetherian_union _ _
+  have h := main ⊤
+  simpa only [Closeds.coe_top, Set.preimage_univ, noetherian_univ_iff] using h
+
 /-- A finite type algebra over a ring with Noetherian spectrum has Noetherian spectrum.
 
 Source: J. Ohm and R. L. Pendleton, *Rings with Noetherian spectrum*, Theorem 2.5 and
-Corollary 2.6 (original paper unavailable locally). The following is the independent agent
-proof recorded in the DAG for paragraph (2) of `det-lem-coefficient-heart-closure`.
+Corollary 2.6 (original paper unavailable locally). The following independent agent proof
+serves paragraph (2) of `det-lem-coefficient-heart-closure`.
 
-1. Work with descending chains of closed sets, equivalently ascending chains of opens.
-   Closed subspaces of Noetherian spaces are Noetherian. A union of two Noetherian subspaces
-   is Noetherian: restrict a descending closed chain to both pieces and take the larger
-   stabilization index. Noetherian induction on closed sets is valid, since a nonempty
-   family with no minimal member would produce a strictly descending closed chain.
-2. First handle one variable. Set X = Spec R, Y = Spec R[T], with the continuous contraction
-   map pi : Y → X. Continuity follows from pi⁻¹(V(J)) = V(JR[T]). Induct on closed subsets
-   Z of X with claim P(Z): pi⁻¹(Z) is Noetherian. The empty case is immediate. If Z is
-   reducible, write it as the union of two proper closed subsets; induction and step 1
-   apply. It remains to treat nonempty irreducible Z.
-3. Write Z = V(J). By `lem-weil-pbc-spec-quotient-homeomorphism-zero-locus`, Spec(R/J)
-   is homeomorphic to Z. By `lem-weil-pbc-spec-irreducible-components-minimal-primes`, its
-   irreducible whole space is V(q) for a minimal prime q. Pulling q back gives a prime p
-   of R with Z = V(p). Thus C = R/p is a domain. The coefficientwise surjection R[T] → C[T]
-   has kernel pR[T]: coefficients in p give precisely finite sums of constants in p times
-   powers of T. The quotient-spectrum result identifies pi⁻¹(Z) with Spec C[T], compatibly
-   with contraction to Z = Spec C.
-4. For a nonzero ideal I of C[T], choose nonzero f in I of least degree n and leading
-   coefficient a ≠ 0. In C_a, the localization of `def-weil-ring-localization-away`,
-   h = a⁻¹f is monic of degree n. By `lem-weil-pbc-monic-quotient-free`, division modulo h
-   expresses each g in I as qh + r, with r zero or of degree less than n. Choose N ≥ 1
-   large enough to clear the finitely many denominators in a^N r and a^(N-1) q. Then
-   a^N r = a^N g - (a^(N-1) q) f lies in I in C[T]. Localization is injective because C is
-   a domain and a ≠ 0. If r were nonzero, a^N r would contradict the minimal degree of f.
-   Hence r = 0 and I C_a[T] = (h). If n = 0 the quotient basis is empty and r is zero.
-5. Given a descending closed chain F_i in Spec C[T], let I_i be the intersection of its
-   primes (the whole ring for the empty set). Then I_i is increasing and V(I_i) = F_i:
-   writing F_i = V(K_i) gives K_i ⊆ I_i, and each prime in F_i contains I_i. Their union
-   I is an ideal. If I = 0 all F_i agree. Otherwise choose f, a, h as in step 4, and i₀
-   with f in I_i₀. For i ≥ i₀, (h) ⊆ I_i C_a[T] ⊆ I C_a[T] = (h). Coefficientwise
-   localization identifies (C[T])_a with C_a[T], since finitely many coefficients have a
-   common denominator and equality is coefficientwise. By clause (ii) of
-   `lem-weil-pbc-spec-localization-away-basic-open`, its spectrum is D(a). Containment of
-   I_i in a contracted prime is equivalent to containment of its extension in that prime.
-   Thus all F_i ∩ D(a) agree for i ≥ i₀.
-6. The zero prime of C does not contain a, so V(a) is a proper closed subset of Spec C.
-   Its image Z' in Z is proper closed, hence closed in X. Induction P(Z') says its inverse
-   image is Noetherian; under step 3 this is V(a) in Spec C[T], by contraction of primes.
-   The restrictions F_i ∩ V(a) therefore stabilize. Combining this with step 5 and
-   D(a) ∪ V(a) = Spec C[T] proves stabilization of F_i. This proves P(Z) in the irreducible
-   case, completing the induction and proving the one-variable assertion.
-7. Induct on the finite number d of generators to obtain Noetherianity of the spectrum of
-   R[x₁, …, x_d], with d = 0 the given hypothesis. Finite type gives a surjection from
-   this polynomial ring to B. By `lem-weil-pbc-spec-quotient-homeomorphism-zero-locus`,
-   Spec B is homeomorphic to the closed zero locus of the kernel, so is Noetherian by
-   step 1. For B = 0 this is empty; if R = 0, unitality forces B = 0.
+First prove the one-variable case by Noetherian induction on closed subsets Z of Spec R,
+with claim that the inverse image under contraction Spec R[X] → Spec R is Noetherian.
+The empty case is immediate; a reducible closed subset is a union of two smaller ones.
+For irreducible Z, its vanishing ideal p is prime and Z = V(p). The coefficientwise
+quotient R[X] → (R/p)[X] identifies its spectrum with the inverse image of Z.
+
+For a nonzero ideal I in a polynomial ring choose a nonzero f in I of least natural degree,
+with leading coefficient a. For any prime q avoiding C(a), membership f ∈ q implies I ⊆ q:
+induct on the degree of g ∈ I and cancel the leading terms of f and g. The resulting
+polynomial belongs to I and has smaller degree than g, so belongs to q by induction;
+the other term is a multiple of f, hence C(a)g ∈ q, and primality gives g ∈ q.
+When g has degree zero, so does f, and f = C(a) contradicts q avoiding C(a).
+
+For an open U in Spec (R/p)[X], let I be the vanishing ideal of its closed complement.
+If I = 0, U is empty. Otherwise the previous calculation gives U ∩ D(C(a)) = D(C(a)f),
+which is compact. The image of V(a) in Spec R is a proper closed subset of Z, since
+R/p is a domain and a ≠ 0. Induction says its inverse image is Noetherian; hence
+U ∩ V(C(a)) is also compact. Their union is U, proving the one-variable assertion.
+
+Induct on the finite number of variables, using the standard polynomial-ring equivalences.
+A finite type algebra is a quotient of such a polynomial ring; the induced closed embedding
+of spectra transfers Noetherianity. Empty spectra, zero rings and zero variables are included.
 (blueprint: lem-sfb-finite-type-noetherian-spectrum) -/
 theorem noetherianSpace_primeSpectrum_of_finiteType
     (R : Type u) (B : Type v) [CommRing R] [CommRing B]
     (f : R →+* B) [NoetherianSpace (PrimeSpectrum R)]
     (hf : f.FiniteType) : NoetherianSpace (PrimeSpectrum B) := by
-  sorry
+  let := f.toAlgebra
+  have : Algebra.FiniteType R B := hf
+  have hmv (n : ℕ) : NoetherianSpace (PrimeSpectrum (MvPolynomial (Fin n) R)) := by
+    induction n with
+    | zero =>
+      exact (noetherianSpace_iff_of_homeomorph
+        (PrimeSpectrum.homeomorphOfRingEquiv (MvPolynomial.isEmptyRingEquiv R (Fin 0)))).mpr
+          inferInstance
+    | succ n ih =>
+      let := ih
+      let := polynomial_noetherian (MvPolynomial (Fin n) R)
+      exact (noetherianSpace_iff_of_homeomorph
+        (PrimeSpectrum.homeomorphOfRingEquiv
+          (MvPolynomial.finSuccEquiv R n).toRingEquiv)).mpr inferInstance
+  obtain ⟨n, g, hg⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp ‹_›
+  let := hmv n
+  have he := PrimeSpectrum.isClosedEmbedding_comap_of_surjective B g.toRingHom hg
+  exact he.isInducing.noetherianSpace
 
 end AlgebraicGeometry

@@ -23,90 +23,69 @@
  ],
  "proof": [
   {
-   "text": "We use the descending-closed-chain form of Noetherianity, equivalent to the stated ascending-open-chain form by complements. Three elementary consequences will be used explicitly. A closed subspace of a Noetherian space is Noetherian, since its closed subsets are closed in the ambient space. A space which is the union of two Noetherian subspaces is Noetherian: restrict a descending chain of closed subsets to the two subspaces, take the maximum of their stabilization indices, and take their union. Finally, induction on closed subsets of a Noetherian space is valid: a nonempty collection of counterexamples without a minimal member would, by recursively choosing a strictly smaller member, give a strictly descending chain of closed subsets, contrary to the hypothesis.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Noetherian spaces, definition-noetherian and lemma-Noetherian (Tag 0052); the chain and induction arguments are written here."
-   }
-  },
-  {
-   "text": "First prove the one-variable assertion for an arbitrary ring $R$ with Noetherian spectrum. Put $X=\\operatorname{Spec}R$, $Y=\\operatorname{Spec}R[T]$, and let $\\pi:Y\\to X$ be contraction along the constant-polynomial map. This is continuous because $\\pi^{-1}(V(J))=V(JR[T])$ for every ideal $J\\subseteq R$, directly by membership of constants in a prime. For each closed subset $Z\\subseteq X$, the inductive claim $P(Z)$ is that $\\pi^{-1}(Z)$, with its subspace topology, is Noetherian. Assume $P(Z')$ for every proper closed subset $Z'\\subsetneq Z$. If $Z=\\varnothing$ the claim holds. If $Z$ is nonempty and reducible, write $Z=Z_1\\cup Z_2$ with both $Z_i$ proper closed subsets of $Z$, hence of $X$. The induction hypothesis applies to both inverse images, and the union argument in step 1 proves $P(Z)$. It remains to prove $P(Z)$ for nonempty irreducible $Z$.",
+   "text": "Use the equivalent criterion that every open subset is compact. Every subset of a Noetherian space is compact, so every subspace is Noetherian; the union of two Noetherian subspaces is Noetherian by intersecting an arbitrary subset with both pieces and taking the union of the two compact intersections. Set pi:Spec R[T] to Spec R to be contraction along constants. Induct on closed subsets Z of Spec R, with claim that pi inverse image of Z is Noetherian. The empty case is immediate. If Z is reducible, cover it by two proper closed intersections and use induction and the union argument.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-    "place": "Paragraph (2), affine-chart Noetherianity input; agent proof, induction claim and its empty/reducible cases."
+    "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1."
    }
   },
   {
-   "text": "Write the remaining nonempty irreducible closed subset as $Z=V(J)$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}(R/J)$ is homeomorphic to $Z$. It is irreducible, so its entire space is an irreducible component. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], that component is $V(\\mathfrak q)$ for a minimal prime $\\mathfrak q\\subset R/J$. Pull $\\mathfrak q$ back to the prime $\\mathfrak p\\subset R$; the quotient prime correspondence in the first cited statement gives $Z=V(\\mathfrak p)$. Put $C=R/\\mathfrak p$, an integral domain: the quotient is nonzero and a product of two nonzero classes cannot be zero by primality of $\\mathfrak p$. The coefficientwise surjection $R[T]\\to C[T]$ has kernel $\\mathfrak pR[T]$: a polynomial lies in that kernel exactly when all its finitely many coefficients lie in $\\mathfrak p$, and such a polynomial is the sum of those coefficients times powers of $T$. Apply the same quotient-spectrum statement to this surjection. It identifies $\\pi^{-1}(Z)=V(\\mathfrak pR[T])$ homeomorphically with $\\operatorname{Spec}C[T]$. In these identifications the contraction maps to $Z=\\operatorname{Spec}C$ agree, since they take the same constant coefficients to the same prime ideals.",
+   "text": "For nonempty irreducible closed Z, [lem-weil-pbc-spec-irreducible-closed-subsets-primes] gives Z=V(p) with p prime; concretely take the vanishing ideal of Z. The quotient C=R/p is a domain. The coefficientwise quotient R[T] to C[T] is surjective, with kernel p.map C because its coefficients vanish precisely when they lie in p. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], its spectrum is a closed embedding with range pi inverse image of Z. Contraction along the quotient commutes with contraction to constant polynomials, as checked on each constant.",
    "uses": [
-    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00E5 (lemma-spec-closed) and 00ES (lemma-irreducible, part (3)); polynomial quotient identification written coefficientwise."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1."
    }
   },
   {
-   "text": "Here is the algebraic argument needed over this domain $C$; it requires no Noetherian-ring hypothesis. Let $I\\subseteq C[T]$ be any nonzero ideal. Choose a nonzero $f\\in I$ of least degree $n$, and let $a\\ne0$ be its leading coefficient. In the localization $C_a$ of [def-weil-ring-localization-away], put $h=a^{-1}f$, which is monic of degree $n$. By [lem-weil-pbc-monic-quotient-free], the classes of $1,T,\\ldots,T^{n-1}$ form a $C_a$-basis of $C_a[T]/(h)$. Thus any $g\\in I$ has an expression $g=qh+r$ in $C_a[T]$, with $r=0$ or $\\deg r<n$: represent the class of $g$ in that basis, and the difference is in the kernel $(h)$ of the quotient map. Multiply $g-qa^{-1}f=r$ by a sufficiently large $a^N$ so that every coefficient of $a^Nr$ and $a^{N-1}q$ belongs to $C$: choose $N\\ge1$ larger than the finitely many denominator exponents. Then\n$$a^Nr=a^Ng-(a^{N-1}q)f\\in I\\subseteq C[T].$$\nLocalization is injective because $C$ is a domain and $a\\ne0$, by the fraction equality in the localization definition. Therefore a nonzero $r$ would give a nonzero polynomial $a^Nr\\in I$ of degree less than $n$, contrary to minimality. Hence $r=0$. Every image of $g\\in I$ is divisible by $h$, and $h=a^{-1}f$ itself belongs to the extended ideal, so $IC_a[T]=(h)$. If $n=0$ the quotient basis is empty and $r$ is already zero. The argument is carried by this step and is not a new node.",
+   "text": "For any nonzero ideal I of A[T], choose a nonzero f in I of least natural degree and put a=leadingCoeff(f), which is nonzero. For a prime q avoiding C(a), show f in q implies I contained in q by strong induction on the natural degree of g in I. The case g=0 is immediate. Otherwise minimality gives deg f <= deg g. If deg g=0 then f=C(a), contradicting f in q. In positive degree cancel the leading terms: r=C(a)g-C(leadingCoeff(g))T^(deg g-deg f)f lies in I and has smaller natural degree than g. Induction gives r in q, so C(a)g in q and primality gives g in q. Now for an open U of Spec A[T], let I be the vanishing ideal of its closed complement. Its zero locus is that complement. If I=0 then U is empty. Otherwise the preceding equivalence gives U intersect D(C(a)) = D(C(a)f). This intersection is compact: [lem-weil-pbc-spec-localization-away-basic-open] identifies a basic open with a localization spectrum, and [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] makes that spectrum compact (Mathlib packages this as PrimeSpectrum.isCompact_basicOpen).",
    "uses": [
-    "def-weil-ring-localization-away",
-    "lem-weil-pbc-monic-quotient-free"
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00CO (definition-localization); Tag 04GG (lemma-characterize-henselian), finite free monic-quotient fact used by the cited node. Agent minimal-degree argument, written out."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1."
    }
   },
   {
-   "text": "Take an arbitrary descending chain $F_1\\supseteq F_2\\supseteq\\cdots$ of closed subsets of $\\operatorname{Spec}C[T]$. For each $i$ let $I_i$ be the intersection of all prime ideals belonging to $F_i$, taking the whole ring if $F_i=\\varnothing$. Then $I_i$ is an ideal, $I_i\\subseteq I_{i+1}$, and $V(I_i)=F_i$. Indeed, write $F_i=V(K_i)$; every prime in $F_i$ contains $I_i$ by definition, while $K_i\\subseteq I_i$ implies $V(I_i)\\subseteq V(K_i)$. The increasing union $I=\\bigcup_i I_i$ is an ideal. If $I=0$, every $I_i=0$ and the chain is constant. Otherwise take $f,a,h$ from step 4, and choose $i_0$ with $f\\in I_{i_0}$. For every $i\\ge i_0$, the extended ideal $I_iC_a[T]$ contains $h$ and is contained in $IC_a[T]=(h)$, so it equals $(h)$. Coefficientwise localization identifies $(C[T])_a$ with $C_a[T]$: a polynomial with fraction coefficients has a common denominator $a^N$, and equality follows coefficientwise from the fraction relation proved for this localization in step 4. By [lem-weil-pbc-spec-localization-away-basic-open](ii), $\\operatorname{Spec}C_a[T]$ is the open $D(a)\\subseteq\\operatorname{Spec}C[T]$. A localized prime contains $I_iC_a[T]$ exactly when its contracted prime contains $I_i$. Consequently all the restrictions $F_i\\cap D(a)$ agree for $i\\ge i_0$.",
-   "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E4 (lemma-standard-open); agent increasing-ideal and least-degree stabilization argument."
-   }
-  },
-  {
-   "text": "The complementary closed subset $V(a)\\subseteq\\operatorname{Spec}C$ is proper because the zero prime of the domain $C$ does not contain $a\\ne0$. Under $\\operatorname{Spec}C=Z$ its image is a proper closed subset $Z'\\subsetneq Z$, hence closed in $X$. The induction hypothesis $P(Z')$ says that $\\pi^{-1}(Z')$ is Noetherian. Under step 3's identification this is exactly $V(a)\\subseteq\\operatorname{Spec}C[T]$: both consist of primes whose contraction contains $a$. Thus the restricted chain $F_i\\cap V(a)$ stabilizes, say for $i\\ge i_1$. Step 5 and the cover $\\operatorname{Spec}C[T]=D(a)\\cup V(a)$ now give $F_i=F_{\\max(i_0,i_1)}$ for all larger $i$. The case $I=0$ was already constant. Every descending closed chain therefore stabilizes, establishing $P(Z)$ in the irreducible case. The induction of step 2 gives $P(X)$, that is, $\\operatorname{Spec}R[T]$ is Noetherian. Only topological Noetherianity of $\\operatorname{Spec}R$ was assumed.",
+   "text": "Apply the preceding open-subset argument to A=C=R/p. For every nonzero a in C the image W of V(a) in Spec R is closed and contained properly in Z: the zero prime of the domain C lies outside V(a), and the quotient spectrum embedding is injective. Induction makes pi inverse image of W Noetherian. Restricting the coefficientwise quotient embedding to V(C(a)) in Spec C[T] gives an inducing map into pi inverse image of W, since the contractions agree on constants. Hence V(C(a)) is Noetherian. For each open U, its intersection with V(C(a)) is compact; its intersection with D(C(a)) is compact by the preceding step, so U is compact. Thus Spec C[T], and its image pi inverse image of Z, are Noetherian. This completes the closed-set induction and proves the one-variable assertion.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-    "place": "Paragraph (2), affine-chart Noetherianity input; agent proof, closed complement and completion of the explicitly stated induction."
+    "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1."
    }
   },
   {
-   "text": "Apply the one-variable result repeatedly, starting with $R$ and adjoining $x_1,\\ldots,x_d$. Ordinary induction on $d$ shows that $\\operatorname{Spec}R[x_1,\\ldots,x_d]$ is Noetherian; the zero-variable case is the given $\\operatorname{Spec}R$. By finite generation in the hypothesis, there is a surjection $R[x_1,\\ldots,x_d]\\to B$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}B$ is homeomorphic to the closed subset defined by its kernel. It is Noetherian by the closed-subspace chain argument of step 1. If $B=0$ the closed subspace is empty. If $R=0$, a unital $R$-algebra is also zero. Thus all the permitted zero-ring cases are included, proving exactly the stated conclusion.",
+   "text": "Induct on n using the ring equivalences R[Fin 0]=R and R[Fin(n+1)]=(R[Fin n])[T], transporting Noetherianity along their spectrum homeomorphisms. For a finite type homomorphism f:R to B use its algebra structure and the finite-type presentation theorem to obtain a surjection R[Fin n] to B. The induced closed embedding of [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] transfers Noetherianity to Spec B. No nontriviality assumption was introduced: empty spectra, zero rings, and zero variables are covered.",
    "uses": [
     "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E5 (lemma-spec-closed); agent finite-variable induction and finite-type quotient step."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1."
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
   "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
-  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-  "def-weil-ring-localization-away",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-spec-localization-away-basic-open"
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-  "place": "Paragraph (2), through its affine-chart Noetherian-spectrum input; independent one-variable minimal-degree argument and Noetherian induction because the original Ohm–Pendleton paper is unavailable."
+  "place": "Paragraph (2), affine-chart Noetherianity input; independent agent proof formalized by H1. Least-degree leading-term cancellation, compactness of opens, Noetherian induction, finite-variable induction and the finite-type quotient; all steps proved in Lean without new holes."
  },
  "mathlib_searches": [
   {
@@ -291,5 +270,15 @@
   "by": "Q18",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261019T002614-L-2159534",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
