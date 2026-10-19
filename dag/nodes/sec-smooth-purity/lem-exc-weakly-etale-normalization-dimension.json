@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak p$ be the unique maximal ideal of $C$. By [def-weil-pbc-integral-closure], $C\\subset C'$ is a subring inclusion inside $K=\\operatorname{Frac}(C)$ and every element of $C'$ satisfies a monic polynomial over $C$. The inclusions $C\\subset C'\\subset K$ identify $\\operatorname{Frac}(C')=K$: fractions from $C$ already generate $K$, while fractions of elements of $C'$ lie in $K$. By [def-weil-pbc-finite-type-algebra], a finite module generating set for $C'$ also generates it as an algebra, since its $C$-linear span already equals $C'$. Because $\\mathfrak m$ is maximal and contracts to $\\mathfrak p$, the residue extension is $C/\\mathfrak p\\subset C'/\\mathfrak m$. Reducing the monic integral equation of any $x\\in C'$ modulo $\\mathfrak m$ gives a monic equation for its residue over $C/\\mathfrak p$. Thus every residue is algebraic. For the transcendence-degree definition [def-kun-transcendence-degree], every $x=a/b\\in K$, with $a,b\\in C$ and $b\\ne0$, satisfies the nonzero polynomial $bT-a$, and every residue satisfies its nonzero monic equation. Hence no nonempty algebraically independent set exists in either extension, so both $\\operatorname{trdeg}_C C'$ and $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak m)$ are zero.",
+   "text": "Set C′ = integralClosure C K and p = maximalIdeal C. The map C → C′ is injective because its composite with C′ → K is the injective fraction-ring map. Module finiteness makes C′ a finite-type integral C-algebra [def-weil-pbc-finite-type-algebra, def-weil-pbc-integral-closure], hence algebraic, so trdeg_C C′ = 0 [def-kun-transcendence-degree]. Equip κ(m) with the κ(p)-algebra structure from Ideal.ResidueField.map and hm.symm. Its compatibility with the original algebra maps gives the scalar tower C → κ(p) → κ(m). Since m is maximal, κ(m) is finite over C′, hence finite and integral over C. Integrality ascends the scalar tower, so κ(m) is integral and algebraic over κ(p), and its transcendence degree is zero. This uses Mathlib Module.Finite.trans, Algebra.IsIntegral.tower_top, Algebra.IsIntegral.isAlgebraic and trdeg_eq_zero.",
    "uses": [
     "def-weil-pbc-integral-closure",
     "def-kun-transcendence-degree",
@@ -55,10 +55,9 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(C'_{\\mathfrak m})$ is the supremum of the lengths of strict prime chains of $C'$ whose last member is contained in $\\mathfrak m$. Appending $\\mathfrak m$ to such a chain when its last member is strictly smaller than $\\mathfrak m$ gives a chain ending at $\\mathfrak m$ of greater length, and a chain ending at $\\mathfrak m$ is such a chain; so this supremum is $\\operatorname{ht}(\\mathfrak m)$ as defined in the formula applied in Step 2 (the supremum over chains ending at $\\mathfrak m$). Every prime ideal of $C$ is contained in a maximal ideal by [lem-weil-pbc-proper-ideal-contained-in-maximal], and this must be $\\mathfrak p$ because $C$ is local. Thus every strict prime chain of $C$ ends at an ideal contained in $\\mathfrak p$. If its last ideal is strictly smaller than $\\mathfrak p$, append $\\mathfrak p$ to obtain a chain ending at $\\mathfrak p$ of greater length; if it already ends at $\\mathfrak p$, retain it. Conversely, every chain ending at $\\mathfrak p$ is a chain of $C$. The two suprema are therefore equal, so $\\dim C=\\operatorname{ht}(\\mathfrak p)$. Step 2 gives $\\dim(C'_{\\mathfrak m})=\\dim C$. This includes $\\dim C=0$ without change.",
+   "text": "Use IsLocalization.AtPrime.ringKrullDim_eq_height [lem-weil-pbc-localization-dimension-chains-below-prime] to identify dim(C′_m) with height(m). Mathlib IsLocalRing.maximalIdeal_height_eq_ringKrullDim identifies height(p) with dim C. Rewrite by the height equality of Step 2. No chain construction or positive-dimension hypothesis is necessary.",
    "uses": [
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false,
    "source": {
@@ -72,13 +71,12 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-integral-closure",
   "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Stacks Tag 02IJ specialized to the finite birational normalization, with Tag 00KF/00E3 for localization dimension."
+  "place": "Tag 02IJ specialized to the finite normalization, implemented by R9 using Mathlib finite-module algebraicity and the localization/local-maximal height identities; no new intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -213,5 +211,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T034305-L-417961",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
