@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Localization.Module
 public import Sheaf.RingTheory.LocalizedApproximationColimits
 
-import Sheaf.RingTheory.LocalizedRingColimitComparison
+import WeilConjectures.RingTheory.LocalizedRingColimitComparison
 import Sheaf.RingTheory.LocalizedModuleColimitComparison
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic

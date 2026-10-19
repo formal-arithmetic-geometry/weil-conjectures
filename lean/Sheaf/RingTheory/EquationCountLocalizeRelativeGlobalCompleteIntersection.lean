@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
-import Sheaf.RingTheory.EquationCountLocalizePresentation
+import WeilConjectures.RingTheory.EquationCountLocalizePresentation
 import Sheaf.RingTheory.EquationCountLocalizeRGCI
 
 /-!

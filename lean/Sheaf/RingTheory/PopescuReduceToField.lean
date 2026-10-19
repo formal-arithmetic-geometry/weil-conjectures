@@ -5,7 +5,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.DesingularizeStrictlyStandard
-import Sheaf.RingTheory.FilteredColimitOfFactorization
+import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuMaximalBadQuotient
 import Sheaf.Algebra.PopescuLiftNilpotent

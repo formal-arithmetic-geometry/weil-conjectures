@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.CechModuleSheafComparison
-import Sheaf.AlgebraicGeometry.CechModuleSheafTerms
+import WeilConjectures.AlgebraicGeometry.CechModuleSheafTerms
 /-! # Construction of the augmented module-sheaf Čech complex
 
 Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.

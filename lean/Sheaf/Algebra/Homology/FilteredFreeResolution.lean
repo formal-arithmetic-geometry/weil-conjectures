@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Sheaf.Algebra.Homology.FreeCoverBicomplex
+import WeilConjectures.Algebra.Homology.FreeCoverBicomplex
 import Sheaf.Algebra.Homology.TotalFreeFiltration
 import Sheaf.Paper.DerivedTotalResolutionQuasiIso
 

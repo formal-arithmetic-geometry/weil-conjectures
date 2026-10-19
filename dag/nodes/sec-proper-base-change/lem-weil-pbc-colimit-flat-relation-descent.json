@@ -96,13 +96,14 @@
  },
  "lean": {
   "existing": true,
-  "module": "Sheaf.RingTheory.ColimitFlatRelationDescentElementwise",
-  "file": "lean/Sheaf/RingTheory/ColimitFlatRelationDescentElementwise.lean",
+  "module": "WeilConjectures.RingTheory.ColimitFlatRelationDescentElementwise",
+  "file": "lean/WeilConjectures/RingTheory/ColimitFlatRelationDescentElementwise.lean",
   "declaration": "RingTheory.exists_stage_flat_relation_factorization_of_preserves",
   "statement": "theorem exists_stage_flat_relation_factorization_of_preserves\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [PreservesColimit A (forget CommRingCat.{v})]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) {ι : Type t} [Fintype ι] (a : ι → A.obj i) (x : ι → N.obj i)\n    (hx : ∑ p, (φ i) (a p) • x p = 0) :\n    ∃ (j : Λ) (f : i ⟶ j) (m : ℕ)\n      (c : ι → Fin m → A.obj j) (y : Fin m → N.obj j),\n      (∀ p, (N.map f).hom (x p) = ∑ q, (φ j) (c p q) • y q) ∧\n      (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.ColimitFlatRelationDescentElementwise; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

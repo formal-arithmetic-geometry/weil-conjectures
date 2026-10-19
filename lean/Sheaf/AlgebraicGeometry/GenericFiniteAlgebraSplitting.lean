@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Spec
 import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension
 import Sheaf.AlgebraicGeometry.SpreadPurelyInseparableFactors
-import Sheaf.FieldTheory.GenericSeparableAlgebraSplitting
+import WeilConjectures.FieldTheory.GenericSeparableAlgebraSplitting
 import Sheaf.AlgebraicGeometry.SpreadGenericProductDomains
-import Sheaf.AlgebraicGeometry.RefineFiniteDomainSplitting
+import WeilConjectures.AlgebraicGeometry.RefineFiniteDomainSplitting
 
 /-!
 # Generic splitting of a finite algebra after an étale base change

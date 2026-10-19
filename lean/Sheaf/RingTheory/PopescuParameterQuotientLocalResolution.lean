@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 
 import Sheaf.Algebra.PopescuLiftNilpotent
 import Sheaf.RingTheory.PopescuParameterQuotientLocalFlatFiberData
-import Sheaf.RingTheory.IndSmoothFinitePresentationFactorization
+import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Mathlib.RingTheory.Noetherian.Nilpotent
 import Mathlib.Algebra.Algebra.Shrink

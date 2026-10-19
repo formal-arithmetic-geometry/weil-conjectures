@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.FlatOfLocalCriterionBaseChange
-import Sheaf.RingTheory.ColimitMaximalKernelDescent
+import WeilConjectures.RingTheory.ColimitMaximalKernelDescent
 
 /-!
 # Flatness at a stage of a directed colimit

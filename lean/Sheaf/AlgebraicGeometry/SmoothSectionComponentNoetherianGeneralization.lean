@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
-import Sheaf.AlgebraicGeometry.SmoothTraitSectionComponents
+import WeilConjectures.AlgebraicGeometry.SmoothTraitSectionComponents
 
 /-!
 # Generalization of a smooth section component over a noetherian base

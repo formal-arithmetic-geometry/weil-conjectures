@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.CategoryTheory.RingedSiteModules
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
-import Sheaf.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.LinearAlgebra.TensorProduct.Vanishing
 import Mathlib.RingTheory.TensorProduct.DirectLimitFG

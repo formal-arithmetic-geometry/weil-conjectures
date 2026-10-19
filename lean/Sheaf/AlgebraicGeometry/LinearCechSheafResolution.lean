@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.LinearCechSheafConstruction
+import WeilConjectures.AlgebraicGeometry.LinearCechSheafConstruction
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso

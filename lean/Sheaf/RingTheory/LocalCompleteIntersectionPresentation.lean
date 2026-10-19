@@ -6,9 +6,9 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.Logic.Equiv.Fin.Basic
-import Sheaf.RingTheory.LocalGeneratorsClearing
-import Sheaf.RingTheory.QuotientAwayClearing
-import Sheaf.RingTheory.EquationCountLocalizePresentation
+import WeilConjectures.RingTheory.LocalGeneratorsClearing
+import WeilConjectures.RingTheory.QuotientAwayClearing
+import WeilConjectures.RingTheory.EquationCountLocalizePresentation
 
 /-!
 # Presentation of a principal localization from a local regular sequence

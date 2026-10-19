@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
-import Sheaf.AlgebraicGeometry.LisseGenericKernel
+import WeilConjectures.AlgebraicGeometry.LisseGenericKernel
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 

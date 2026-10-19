@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.IsLimit
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.FieldTheory.SeparablyGenerated
-import Sheaf.RingTheory.FilteredColimitOfFactorization
+import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuReduceToField
 import Sheaf.RingTheory.PopescuResolveCharP

@@ -110,13 +110,14 @@
  "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions] and F an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves] with locally constant underlying set sheaf [def-weil-pbc-etale-sheaves]. Let U be an etale X-scheme, a a section of F on U, and v a lift to U of a geometric point t:Spec Ω→X with Ω algebraically closed. Assume the geometric germ of a at v [def-weil-pbc-geometric-stalks] is nonzero. There is a morphism r:V→U of etale X-schemes with V nonempty such that the germ of the restriction F(r)(a) is nonzero at every geometric lift to V.",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RefineNonzeroGerm",
-  "file": "lean/Sheaf/AlgebraicGeometry/RefineNonzeroGerm.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RefineNonzeroGerm",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RefineNonzeroGerm.lean",
   "declaration": "AlgebraicGeometry.Scheme.refine_section_nonzero_germs",
   "statement": "theorem refine_section_nonzero_germs (X : Scheme.{u})\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF : IsLocallyConstantEtaleSheafOfSets\n      ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F))\n    (U : X.Etale) (a : F.obj.obj (op U))\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ X) (v : (pointSmallEtale t).fiber.obj U)\n    (ha : (pointSmallEtale t).toPresheafFiber U v F.obj a ≠ 0) :\n    ∃ (V : X.Etale) (r : V ⟶ U), Nonempty V.left ∧\n      ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω']\n        (t' : Spec (.of Ω') ⟶ X) (v' : (pointSmallEtale t').fiber.obj V),\n        (pointSmallEtale t').toPresheafFiber V v' F.obj\n          (F.obj.map r.op a) ≠ 0",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RefineNonzeroGerm; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

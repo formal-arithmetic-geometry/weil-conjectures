@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Abelian.Basic
 
-import Sheaf.Algebra.Homology.CyclePullbackLaws
+import WeilConjectures.Algebra.Homology.CyclePullbackLaws
 import Sheaf.Algebra.Homology.CyclePullbackTowerComparison
 
 /-!

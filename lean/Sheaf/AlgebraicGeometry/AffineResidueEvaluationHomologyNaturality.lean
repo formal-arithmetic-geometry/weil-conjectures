@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.AffineResidueQuotientHomologyNaturality
-import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 
 /-! # Natural residue homology after transport to the scheme residue field
 

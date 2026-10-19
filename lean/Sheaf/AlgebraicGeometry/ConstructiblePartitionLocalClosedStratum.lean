@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.Constructible
-import Sheaf.Topology.ConstructibleIsRetrocompact
+import WeilConjectures.Topology.ConstructibleIsRetrocompact
 
 /-!
 # An affine neighborhood on which the selected constructible stratum is closed

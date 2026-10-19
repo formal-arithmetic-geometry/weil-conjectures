@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CechModuleSheafFunctor
+public import WeilConjectures.AlgebraicGeometry.CechModuleSheafFunctor
 
 /-! # Comparing the sheaf and sectionwise Čech complexes
 

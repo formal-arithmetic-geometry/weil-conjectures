@@ -15,7 +15,7 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.Algebra.Category.ModuleCat.Injective
 import Mathlib.RingTheory.SimpleModule.InjectiveProjective
 import Mathlib.Algebra.Homology.BifunctorHomotopy
-import Sheaf.CategoryTheory.SplitCategoryNullHomotopy
+import WeilConjectures.CategoryTheory.SplitCategoryNullHomotopy
 
 /-!
 # Generation of total homology by product classes

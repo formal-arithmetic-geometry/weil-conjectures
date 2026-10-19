@@ -93,13 +93,14 @@
  "unit": "sk-prop-h2",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FpqcAffineModelTransitions",
-  "file": "lean/Sheaf/AlgebraicGeometry/FpqcAffineModelTransitions.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FpqcAffineModelTransitions",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FpqcAffineModelTransitions.lean",
   "declaration": "AlgebraicGeometry.fpqc_affine_model_transition",
   "statement": "theorem fpqc_affine_model_transition\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)\n    {V : Over X} (D : Over.DescentDatum f V)\n    (E : ∀ U : S.affineOpens,\n      Over.DescentDatum (pullback.snd f U.1.ι)\n        (Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))))\n    (hcompat : ∀ U : S.affineOpens,\n        ∀ {T : Scheme.{u}} (a b : T ⟶ pullback f U.1.ι)\n          (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n          (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n          (D.transport (a ≫ pullback.fst f U.1.ι) (b ≫ pullback.fst f U.1.ι)\n            (by simp only [Category.assoc, pullback.condition]; rw [← Category.assoc,\n              ← Category.assoc, hab])\n            (Over.homMk (x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n              (by simpa [Category.assoc, pullback.condition] using\n                  congrArg (fun z ↦ z ≫ pullback.fst f U.1.ι) (Over.w x)))).left =\n            ((E U).transport a b hab x).left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n    (W : ∀ U : S.affineOpens, Over U.1.toScheme)\n    (r : ∀ U : S.affineOpens,\n      pullback V.hom (pullback.fst f U.1.ι) ⟶ (W U).left)\n    (hp : ∀ U, IsPullback (r U) (pullback.snd V.hom (pullback.fst f U.1.ι))\n      (W U).hom (pullback.snd f U.1.ι))\n    (hinv : ∀ (U : S.affineOpens) {T : Scheme.{u}}\n      (a b : T ⟶ pullback f U.1.ι)\n      (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n      (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n      ((E U).transport a b hab x).left ≫ r U = x.left ≫ r U)\n    {U B : S.affineOpens} (i : U ⟶ B) :\n    ∃ t : (W U).left ⟶ (W B).left,\n      IsPullback t (W U).hom (W B).hom (S.directedAffineCover.trans i) ∧\n      Scheme.Cover.trans ((S.directedAffineCover.pullback₁ f).pullback₁ V.hom) i ≫ r B =\n        r U ≫ t",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FpqcAffineModelTransitions; points at its upstream twin."
  },
  "proof_deps": [
   "def-pc-fibre-product",

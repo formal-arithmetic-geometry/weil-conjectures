@@ -12,7 +12,7 @@ public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
 import Sheaf.RepresentationTheory.LocallyConstantCochainsStructure
-import Sheaf.RepresentationTheory.LocallyConstantCochainsDegreewiseExact
+import WeilConjectures.RepresentationTheory.LocallyConstantCochainsDegreewiseExact
 
 
 /-!

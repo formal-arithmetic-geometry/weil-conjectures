@@ -11,7 +11,7 @@ public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Algebra
 import Sheaf.RingTheory.TotalFractionFiberDecomposition
-import Sheaf.RingTheory.IndSmoothFiniteProductTransport
+import WeilConjectures.RingTheory.IndSmoothFiniteProductTransport
 
 /-! # Ind-smoothness over a total fraction ring
 Source: Stacks Project, Smoothing Ring Maps, Tag 07F5, third paragraph.

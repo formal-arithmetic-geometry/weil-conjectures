@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
-import Sheaf.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor

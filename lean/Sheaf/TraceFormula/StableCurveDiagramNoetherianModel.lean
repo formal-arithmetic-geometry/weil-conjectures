@@ -28,7 +28,7 @@ import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.TraceFormula.StableModificationConstructibility
 import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible

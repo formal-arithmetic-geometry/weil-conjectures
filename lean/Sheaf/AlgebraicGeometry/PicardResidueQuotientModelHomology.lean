@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 @[expose] public section
 set_option autoImplicit false

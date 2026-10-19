@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Module
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Sheaf.RingTheory.LocalizedApproximationCocones
-import Sheaf.RingTheory.LocalizedApproximationTransitions
+import WeilConjectures.RingTheory.LocalizedApproximationTransitions
 import Mathlib.RingTheory.Localization.Submodule
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs

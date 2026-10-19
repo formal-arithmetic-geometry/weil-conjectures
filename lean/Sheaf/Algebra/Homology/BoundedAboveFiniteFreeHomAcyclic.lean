@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Sheaf.Algebra.Homology.FiniteFreeInternalHomExactSequence
+import WeilConjectures.Algebra.Homology.FiniteFreeInternalHomExactSequence
 import Sheaf.Algebra.Homology.BoundedHomExactColumns
 
 /-! # Hom from bounded-above finite free complexes preserves bounded-below acyclicity

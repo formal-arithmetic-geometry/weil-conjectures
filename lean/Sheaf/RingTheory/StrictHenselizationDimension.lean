@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.RingTheory.Etale.LocalDimension
 import Sheaf.RingTheory.FilteredColimitPrimeChainDimension
-import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationTriplesPresentation

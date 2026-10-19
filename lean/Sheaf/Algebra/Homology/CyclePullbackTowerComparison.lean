@@ -5,7 +5,7 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.Algebra.Homology.CyclePullbackTower
+public import WeilConjectures.Algebra.Homology.CyclePullbackTower
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 

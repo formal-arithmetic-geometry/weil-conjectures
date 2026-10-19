@@ -6,7 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-import Sheaf.AlgebraicGeometry.PullbackTensorUnitSection
+import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Section normalization of the boundary pullback tensor comparison
 

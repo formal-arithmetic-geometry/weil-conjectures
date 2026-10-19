@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import Mathlib.GroupTheory.Index
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 import Sheaf.AlgebraicGeometry.FreeFiniteGroupAffineQuotient
 

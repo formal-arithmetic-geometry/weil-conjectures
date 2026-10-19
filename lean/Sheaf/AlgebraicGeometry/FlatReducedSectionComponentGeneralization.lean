@@ -27,7 +27,7 @@ import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait
-import Sheaf.AlgebraicGeometry.ConnectedGenericFibreTrait
+import WeilConjectures.AlgebraicGeometry.ConnectedGenericFibreTrait
 
 /-!
 # Generalization stability of a section component in a flat geometrically reduced family

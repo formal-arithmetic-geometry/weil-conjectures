@@ -16,7 +16,7 @@ public import Mathlib.FieldTheory.Galois.Basic
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres
 import Sheaf.AlgebraicGeometry.FiniteFlatAffineRelationQuotient
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite

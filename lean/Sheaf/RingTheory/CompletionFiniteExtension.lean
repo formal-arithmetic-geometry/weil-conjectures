@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FiniteAfterCompletion
 import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
-import Sheaf.RingTheory.CompletionFiniteExtensionTensor
+import WeilConjectures.RingTheory.CompletionFiniteExtensionTensor
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!

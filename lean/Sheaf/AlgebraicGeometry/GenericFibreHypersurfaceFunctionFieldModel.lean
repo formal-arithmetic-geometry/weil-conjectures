@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 
 public import Mathlib.RingTheory.Localization.FractionRing
 
-import Sheaf.AlgebraicGeometry.FieldHypersurfaceFunctionFieldModel
-import Sheaf.AlgebraicGeometry.GenericPolynomialHypersurfaceDescent
+import WeilConjectures.AlgebraicGeometry.FieldHypersurfaceFunctionFieldModel
+import WeilConjectures.AlgebraicGeometry.GenericPolynomialHypersurfaceDescent
 
 @[expose] public section
 

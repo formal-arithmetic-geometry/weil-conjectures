@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
-import Sheaf.AlgebraicGeometry.PullbackTensorComposition
+import WeilConjectures.AlgebraicGeometry.PullbackTensorComposition
 
 /-! # Composition coherence for Picard pullback comparisons
 

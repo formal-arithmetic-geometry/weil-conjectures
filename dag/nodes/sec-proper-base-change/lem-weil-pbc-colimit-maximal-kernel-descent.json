@@ -118,13 +118,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
-  "file": "lean/Sheaf/RingTheory/ColimitMaximalKernelDescent.lean",
+  "module": "WeilConjectures.RingTheory.ColimitMaximalKernelDescent",
+  "file": "lean/WeilConjectures/RingTheory/ColimitMaximalKernelDescent.lean",
   "declaration": "RingTheory.exists_stage_maximal_kernel_vanishes",
   "statement": "theorem exists_stage_maximal_kernel_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [PreservesColimit A (forget CommRingCat.{v})]\n    [∀ i, IsLocalRing (A.obj i)]\n    [∀ i, IsNoetherianRing (A.obj i)] [∀ i, IsNoetherianRing (B.obj i)]\n    [∀ i, Module (B.obj i) (N.obj i)] [∀ i, Module.Finite (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z})) (i : Λ) :\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      let I := IsLocalRing.maximalIdeal (A.obj i)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        (∀ k : I ⊗[A.obj i] N.obj i,\n          TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →\n            θ k = 0)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.ColimitMaximalKernelDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

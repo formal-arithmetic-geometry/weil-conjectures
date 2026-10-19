@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.ConstructibleSheaf.Pullback

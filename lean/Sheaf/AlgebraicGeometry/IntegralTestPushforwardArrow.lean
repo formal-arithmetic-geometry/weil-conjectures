@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import WeilConjectures.SixFunctors.Integral.BaseChange
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients

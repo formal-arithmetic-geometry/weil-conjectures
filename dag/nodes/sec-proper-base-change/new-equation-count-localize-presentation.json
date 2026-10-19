@@ -131,14 +131,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.RingTheory.EquationCountLocalizePresentation",
+  "module": "WeilConjectures.RingTheory.EquationCountLocalizePresentation",
   "declaration": "Algebra.exists_localization_presentation",
-  "file": "lean/Sheaf/RingTheory/EquationCountLocalizePresentation.lean",
+  "file": "lean/WeilConjectures/RingTheory/EquationCountLocalizePresentation.lean",
   "statement": "theorem exists_localization_presentation\n    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    (h : MvPolynomial (Fin n) R) :\n      let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)\n      let g : S := Ideal.Quotient.mk _ h\n      let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R :=\n        Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1)\n          (fun i ↦ MvPolynomial.rename some (f i))\n      let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations)\n      ∃ e : T ≃ₐ[R] Localization.Away g,\n        (∀ i : Fin n,\n          e (Ideal.Quotient.mk _ (MvPolynomial.X (some i))) =\n            algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧\n        e (Ideal.Quotient.mk _ (MvPolynomial.X none)) = IsLocalization.Away.invSelf g",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.EquationCountLocalizePresentation; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

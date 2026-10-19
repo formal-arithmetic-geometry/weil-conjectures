@@ -13,9 +13,9 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Mathlib.Algebra.Module.TransferInstance
-import Sheaf.RingTheory.LocalizedRingColimitComparison
+import WeilConjectures.RingTheory.LocalizedRingColimitComparison
 import Sheaf.RingTheory.LocalizedModuleColimitComparison
-import Sheaf.RingTheory.FlatSemilinearEquiv
+import WeilConjectures.RingTheory.FlatSemilinearEquiv
 
 /-! # Canonical diagrams localized at contracted primes
 

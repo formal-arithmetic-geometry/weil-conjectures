@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
 
 /-!

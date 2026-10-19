@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Topology.Constructible
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.SixFunctors.ExistsFiniteRefinementTree
-import Sheaf.Topology.ConstructibleIsRetrocompact
+import WeilConjectures.Topology.ConstructibleIsRetrocompact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 @[expose] public section

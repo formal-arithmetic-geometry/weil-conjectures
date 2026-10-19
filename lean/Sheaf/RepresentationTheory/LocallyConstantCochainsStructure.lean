@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
-import Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
+import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
 
 /-!
 # Construction of locally constant inhomogeneous cochains

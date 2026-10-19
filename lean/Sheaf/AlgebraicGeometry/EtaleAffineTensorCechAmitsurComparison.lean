@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 
-import Sheaf.AlgebraicGeometry.EtaleOverCoproductCechComparison
+import WeilConjectures.AlgebraicGeometry.EtaleOverCoproductCechComparison
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorAmitsur
 
 /-! # Affine tensor-section Čech complexes as Amitsur complexes

@@ -18,7 +18,7 @@ import Sheaf.RingTheory.MiracleFlatness
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.DepthLeSupportDimension
-import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-! # Fibre flatness on a quasi-finite polynomial chart

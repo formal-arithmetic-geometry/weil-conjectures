@@ -12,7 +12,7 @@ import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
 import Sheaf.RingTheory.FactorsThroughLocalization
 import Mathlib.Topology.Separation.DisjointCover
 import Mathlib.RingTheory.Idempotents
-import Sheaf.RingTheory.FilteredColimitOfFactorization
+import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 
 /-! # Local-ring identifications with w-local target
 

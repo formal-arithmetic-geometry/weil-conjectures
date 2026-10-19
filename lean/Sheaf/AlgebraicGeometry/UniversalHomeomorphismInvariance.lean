@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
+import WeilConjectures.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismIdentity
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismComposition
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismPullback
