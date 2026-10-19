@@ -233,5 +233,23 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-7ffac9f53 (reviewer sub-agent of L); spot-checked: I read Stacks divisors.tex 02ND (l.8529), 02NS(1) (l.8623) and 0804 (l.8322), and algebra.tex 052R (l.17323). The unchanged statement matches 02ND+02NS(1). 'Projective' is in the projective-bundle sense (def-trf-projective-bundle-morphism = 01W8(1)), which is what 02NS proves; it does not claim H-projective. Step 1 is correct: the 052R domain argument holds and a chart with f_i=0 is empty. Step 2 is correct: by thm-nagata-global-blowup-complement b^{-1}(U)≅U; b^{-1}(U)∩Spec A[I/f_i]=D(f_i), which is nonempty and dense; the charts are domains, so B is reduced and irreducible. Step 3 follows the 02NS route (Sym→Rees surjection, relative-Proj clause 3, projective-bundle definition with E=𝓘). There are no new nodes and no duplicate anywhere in the DAG; no SGA is cited; I accept the tool_uses. FIX, two C1/C4 citation gaps plus one provenance regression. (1) Steps 1 and 3 identified b^{-1}(V) and B with Bl_{I_V}(V) and Proj_T(R) without citing the gluing (def-nagata-global-blowup, glue-data, lem-weil-pbc-relative-glueing-affine-opens) or def-nagata-relative-proj with clause 1 of prop-nagata-relative-proj-functoriality. Step 3 also lacked Γ(V,𝓘^n)=I_V^n and the Sym grading (lem-weil-pbc-symmetric-algebra-graded). Step 1 did not justify that a nonzero generator exists. I rewrote both steps with these citations, re-unioned proof_deps and added two tool_uses entries. (2) The worker replaced blueprint.from.place with a generic sentence, although the base place (0BFT tower input) was accurate. I restored it. The statement and stmt_deps are unchanged and the fix creates no cycle. Fixed file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-integral-blowup-projective-geometry.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.integral_blowup_projectiveBundle",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralBlowupProjectiveGeometry.lean",
+  "statement": "theorem integral_blowup_projectiveBundle {T : AlgebraicGeometry.Scheme.{u}} [AlgebraicGeometry.IsIntegral T] (I : T.IdealSheafData) (_hI : I ≠ ⊥) (_hft : I.toModules.IsQuasiCoherentFiniteType) : AlgebraicGeometry.IsIntegral I.blowup ∧ AlgebraicGeometry.IsProjectiveBundle I.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4364c7bb2",
+  "group": "NP",
+  "result": "pass",
+  "note": "Matches Stacks 02ND+02NS(1) clause by clause: IsIntegral T, IdealSheafData I, I≠⊥, I.toModules.IsQuasiCoherentFiniteType (live pqf-def-coherent record; the qcoh conjunct is redundant but true), conclusion IsIntegral I.blowup ∧ IsProjectiveBundle I.blowupMap (live def-trf record). Single universe, no extra assumptions; empty, zero and unit ideal cases fine. Node record unchanged apart from lean; statement verbatim; sorry only; docstrings with source, blueprint tag and proof steps. No duplicate (upstream Proper.lean says projectivity is unformalized; only clauses inside larger specialized statements). nt_compile --json clean 4.0 s; #check/#print axioms probe clean. No findings."
  }
 }

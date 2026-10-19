@@ -11,7 +11,8 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -256,5 +257,27 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-d4dd79b2e (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited node statements and restricted.tex remark-take-bar, 0AJU (l.1593), lemma-zero-after-modding-out and 0GB2 (l.1831). The statement is 0GB2 for the closed map A→A/H, with rig-étale written as 0AJU(3). The base-change morphism is the source's own B/HB, as remark-take-bar identifies it. The hypotheses match: A Noetherian, V(IA_0)=V(K), E complete. Nothing is weakened. Step 1 (Noetherianity and completeness of P) and Step 2 (the finite-module tensor node over E and over R) give E/HE complete and P/HP≅(R_0)^∧_I. Step 3 (radical powers plus change of ideal) gives K-completeness and π:P↠P_0 with kernel HP, so the presentation exists with s=r. Step 4: q is well defined and surjective, ∂ commutes with reduction and with cofinal reindexing, and δ_0q=ρδ. Step 5: δh=hδ=a² with h=aα; I recomputed both. Step 6: the homotopy descends through the surjections q and ρ, with no flatness used. Step 7: pigeonhole gives (I^c)^{t+1}⊆(b_i²), so d=vc(t+1). I checked the edge cases r=0, H=0, H=A, I=0, I=A, c=0 and t=0. The parent (rig-etale-jacobian-algebraization, Step 4, H=(a^m)) uses the item consistently. A grep of the DAG for 0GB2, 0AJU, rig-étale and conormal found no duplicate. The declared tool_uses are generic sk-thm-p1 algebra nodes, and I accept them. No SGA source is cited, there are no new nodes, and I wrote no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobianTorsionClosedBaseChange",
+  "declaration": "Algebra.jacobianTorsion_closedBaseChange",
+  "declarations": [
+   "Algebra.CompletedPolynomialClosedQuotient",
+   "Algebra.jacobianTorsion_closedBaseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/JacobianTorsionClosedBaseChange.lean",
+  "statement": "theorem jacobianTorsion_closedBaseChange {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (r : ℕ) (J : Ideal (rigPolynomialCompletion I r)) [IsAdicComplete I (rigPolynomialCompletion I r ⧸ J)] (c : ℕ) (hker : I ^ c • (rigJacobianDifferential r I J).ker ≤ ⊥) (hcoker : I ^ c • (⊤ : Submodule A ((Fin r → (rigPolynomialCompletion I r ⧸ J)) ⧸ (rigJacobianDifferential r I J).range)) ≤ ⊥) (H : Ideal A) (K : Ideal (A ⧸ H)) (hV : PrimeSpectrum.zeroLocus ((I.map (Ideal.Quotient.mk H)) : Set (A ⧸ H)) = PrimeSpectrum.zeroLocus (K : Set (A ⧸ H))) : IsAdicComplete K (CompletedPolynomialClosedQuotient I r J H) ∧ ∃ (s : ℕ) (J0 : Ideal (rigPolynomialCompletion K s)), Nonempty ((rigPolynomialCompletion K s ⧸ J0) ≃ₐ[A ⧸ H] CompletedPolynomialClosedQuotient I r J H) ∧ ∃ d : ℕ, (K ^ d • (rigJacobianDifferential s K J0).ker ≤ ⊥) ∧ (K ^ d • (⊤ : Submodule (A ⧸ H) ((Fin s → (rigPolynomialCompletion K s ⧸ J0)) ⧸ (rigJacobianDifferential s K J0).range)) ≤ ⊥)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e7d3dbce",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after RETURN bdf7484b9dfd. Both corrections made: the duplicate def node was dropped and the item restated over Q93 def-per-completed-polynomial-conormal (rigPolynomialCompletion/rigJacobianDifferential), with stmt_dep added and hker/hcoker in the parent rigEtaleJacobianAlgebraization's exact form; the duplicate quotient-algebra instance was replaced by Mathlib's algebraQuotientMapQuotient. All hypotheses and conclusion clauses match the node (E I-complete, hV via zeroLocus, K-completeness of E/HE, ∃ s J0 with an A/H-algebra iso, ∃ d with K^d killing ker and coker of the canonical δ0), with no added assumptions, one universe u, and edge cases r=s=0, c=d=0, H=⊥/⊤ admitted. Node diff vs live: only stmt_deps and lean. lean.statement verbatim. Docstrings carry the source and blueprint tag and all 7 steps; only sorry; no hollow def. nt_compile --json: 7.5 s, exit 0, clean. Advisory: six proof-only non-public imports."
  }
 }

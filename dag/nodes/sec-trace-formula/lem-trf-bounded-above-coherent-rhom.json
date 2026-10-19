@@ -11,7 +11,8 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-abstract-derived-category",
   "def-weil-finitely-generated-module",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-hom-extension-shared-definitions"
  ],
  "proof": [
   {
@@ -220,5 +221,24 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-97711e5af (reviewer sub-agent of L); spot-checked: I read the item and new node in full, plus Stacks 0D0C (perfect.tex lemma-coherent-internal-hom) and 0G1Y/0G20 (injectives.tex l.2356-2380). The item statement is the 0D0C algebra problem with explicit bounds u,v on ordinary A-modules: R Hom is def-pur-derived-internal-hom on the one-object identity-cover site, where module sheaves are A-modules. Its vanishing for r<v-u is sharp (k[-u], k[-v]), and an unbounded-below K is handled. Step 1 (subquotient/extension finite generation) is elementary over 00IK. Step 2 uses the new node's E2 = Ext^i(H^{-j}K,N) with lem-sc-ext-noetherian-finite; its hypotheses (Noetherian, two finite modules, i>=0) hold. Step 3 uses page induction, stabilization from the node and the finite filtration -u<=j<=t. Step 4 specializes lem-per-bounded-above-rhom-hyperext with r=u, c=v; its E2 equals the new node's abutment with N=H^q L, on the same derived-internal-hom. Step 5: I re-derived the differential bounds (incoming zero for s>p+u, outgoing zero for s>q-v+1) and the range v<=q<=n+u, which is empty for n<v-u. New node lem-trf-source-hyperext-module-target is a faithful specialization of 0G20 (M=K in D^-, second argument N[0]). The zero abutment for t<-u holds by t-structure orthogonality. It is statement-only and self-contained, with blueprint from/via checked by script, four kinds of search logged, and no duplicate in the DAG (searched 0G20/0G1Y, Ext(H^{-j}...) and spectral-sequence/Ext statements). It is a general tool, not a clause of the item. I accept the declared tool_use lem-per-bounded-above-rhom-hyperext: it is a generic second-variable hyper-Ext tool, used by 0D0C itself. There is no SGA citation and no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedAboveCoherentRHom",
+  "declaration": "DerivedCategory.boundedAbove_coherent_rhom",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedAboveCoherentRHom.lean",
+  "statement": "theorem boundedAbove_coherent_rhom (A : Type u) [CommRing A] [IsNoetherianRing A] [HasDerivedCategory.{w} (RingSiteModules A)] (K L : DerivedCategory (RingSiteModules A)) (a b : ℤ) (hK : ∀ j : ℤ, Module.Finite A (((homologyFunctor (RingSiteModules A) j).obj K).val.obj (op ⟨PUnit.unit⟩))) (hL : ∀ j : ℤ, Module.Finite A (((homologyFunctor (RingSiteModules A) j).obj L).val.obj (op ⟨PUnit.unit⟩))) (hKa : ∀ j : ℤ, a < j → IsZero ((homologyFunctor (RingSiteModules A) j).obj K)) (hLb : ∀ j : ℤ, j < b → IsZero ((homologyFunctor (RingSiteModules A) j).obj L)) : (∀ r : ℤ, Module.Finite A (((homologyFunctor (RingSiteModules A) r).obj ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf A)).obj (op K, L))).val.obj (op ⟨PUnit.unit⟩))) ∧ (∀ r : ℤ, r < b - a → IsZero ((homologyFunctor (RingSiteModules A) r).obj ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf A)).obj (op K, L))))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The ordinary module category is presented by the existing RingSiteModules one-object identity-covering site, exactly as in its consumer coherent_rhom_finite_injective_dimension. Evaluation at the unique object gives the cohomology A-modules. The explicit arbitrary bounds a,b are the node bounds u,v; the conclusion is finiteness and vanishing for r < b-a. Added the already recorded owning node of RingSiteModules to stmt_deps; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df48f4ad7",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 0D0C algebra problem: Noetherian CommRing A; K,L in D(RingSiteModules A) (one-object bottom-topology site = A-modules, same presentation as landed consumer coherent_rhom_finite_injective_dimension); hK/hL finite cohomology in all degrees; explicit bounds a<j / j<b; RHom = recorded derivedInternalHomOfUniverses.{u,u,u,w} on onePointRingSheaf A with op K first; conclusions finite H^r for all r and IsZero for r<b-a (sharp, checked with A[-a],A[-b]). No extra hypotheses, universes u/w as in consumer, consumer's use matches signature. Node changes only lean + stmt_dep def-pc-ring-hom-extension-shared-definitions (precedent); 5 dep records identical to live; statement verbatim; docstrings carry source, blueprint and 5 steps; sorry only; plain imports = proof_deps' Mathlib matches. No duplicate in side Sheaf/WeilConjectures or Mathlib. nt_compile --json rc 0, 6.7 s, clean. Advisory: onePointRingSheaf owned by theorem node lem-pc-kflat-tensor-quasi-iso, reached via RingSiteModules as in precedents."
  }
 }
