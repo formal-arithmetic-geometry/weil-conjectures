@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Kernels
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-!
 # Étale sections with closed support
@@ -64,7 +65,15 @@ both sides to the addition identity for global sections. Cancel the monomorphism
 @[instance]
 theorem supportedEtaleSections_additive (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) : (supportedEtaleSections R X W).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  have : Mono ((supportedEtaleSectionsι R X W).app N) := by
+    dsimp [supportedEtaleSectionsι]
+    infer_instance
+  apply (cancel_mono ((supportedEtaleSectionsι R X W).app N)).1
+  rw [Preadditive.add_comp, (supportedEtaleSectionsι R X W).naturality,
+    (supportedEtaleSectionsι R X W).naturality,
+    (supportedEtaleSectionsι R X W).naturality, Functor.map_add, Preadditive.comp_add]
 
 /-- Sections with closed support form a left exact functor.
 Source: blueprint lem-pur-support-restriction-triangle, proof step 1; Stacks Tag 0G6Y.
@@ -78,7 +87,20 @@ two finite-limit-preserving section functors preserves finite limits as well. -/
 theorem supportedEtaleSections_preservesFiniteLimits (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) :
     PreservesFiniteLimits (supportedEtaleSections R X W) := by
-  sorry
+  let D := parallelPair
+    (Sheaf.natTransΓRes X.smallEtaleTopology (ModuleCat.{u + 1} R)
+      (op (Scheme.Etale.mk W.ι))) 0
+  have : PreservesFiniteLimits D.flip := by
+    apply preservesFiniteLimits_of_evaluation
+    intro j
+    cases j
+    · change PreservesFiniteLimits (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} R))
+      infer_instance
+    · change PreservesFiniteLimits
+        (sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⋙
+          (evaluation _ _).obj (op (Scheme.Etale.mk W.ι)))
+      infer_instance
+  exact preservesFiniteLimits_of_natIso (limitIsoFlipCompLim D).symm
 
 /-- The bounded below derived functor of sections supported on the complement of `W`,
 viewed in the full derived category of coefficient modules.
