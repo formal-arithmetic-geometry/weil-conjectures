@@ -17737,3 +17737,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/R2/Sheaf.Paper.EtaleCompactSupportCoefficientChange (stage 3; reviewer PASS; first push; landing 20261019T231317-L-572627 (interface); batch 20261019T231019; modules 4; new nodes 3)
 - 23:13 L: merged deliver/R2/Sheaf.Paper.SmoothPurityMap (stage 3; reviewer PASS; first push; landing 20261019T231318-L-573057 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/R3/Sheaf.Paper.CoefTowerCoaugmentation (stage 3; reviewer PASS; first push; landing 20261019T231320-L-573320 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:13 L: merged deliver/R4/Sheaf.CategoryTheory.KunDescentLimit (stage 3; reviewer PASS; first push; landing 20261019T231322-L-573709 (proof); batch 20261019T231019; modules 1; new nodes 0)
