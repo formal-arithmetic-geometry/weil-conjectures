@@ -25,118 +25,63 @@
  ],
  "proof": [
   {
-   "text": "By clause (1) of [lem-weil-proetale-weakly-etale-localization], composition with $r$ identifies $W_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/W$, including its coverings. In particular the composite $U\\to X$ is an object of the ambient site. By [def-pur-localized-ringed-site], restriction of a sheaf to this slice is a sheaf, with value $G(U)$ at $U\\to W$, for sets, abelian groups, rings and modules over the restricted ring. We use this identification throughout. There is no requirement that $r$ be an open immersion or a monomorphism.",
+   "text": "Use composition left adjoint to base change. The distinguished structured arrow is its unit; the hom-set equivalence gives a unique arrow from it to every indexing object. This proves initiality directly.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site"
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XZ (section-localize), definition-localize and the restriction formula following it; applied to the site equivalence in the cited localization lemma."
-   }
+   "elementary": true
   },
   {
-   "text": "Fix $U\\xrightarrow{s}W$. The pair $t_U=(U\\to X,\\varphi_0)$ is an object of $\\mathcal I_U$ of [def-weil-proetale-inverse-image], because $\\varphi_0=(s,\\mathrm{id}_U):U\\to W\\times_XU$ is a $W$-morphism. For any $(V,\\varphi)$ in $\\mathcal I_U$, put $a_\\varphi=\\mathrm{pr}_V\\varphi:U\\to V$. This is an $X$-morphism. The maps $u_r(a_\\varphi)\\varphi_0$ and $\\varphi$ have the same projections $s$ and $a_\\varphi$, so are equal by [def-pc-fibre-product]. Thus $a_\\varphi$ is an arrow $t_U\\to(V,\\varphi)$. Conversely any such arrow $a$ satisfies $a=\\mathrm{pr}_V\\varphi$ after applying the second projection to its defining equality. This proves initiality, including uniqueness, directly from the indexing-category definition.",
+   "text": "Whisker the opposite site adjunction by the value category. Both precomposition by composition and the presheaf left Kan extension are left adjoints to precomposition by base change. Uniqueness of left adjoints yields the presheaf comparison. The homEquiv formula identifies its components with the distinguished coprojections, naturally in site objects and sheaves.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "def-pc-fibre-product"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE (lemma-localize-given-products), proof of the adjunction by the product universal property; Tag 00VC (section-functoriality-PSh), equation-colim-category."
-   }
+   "elementary": true
   },
   {
-   "text": "Use exactly the colimit over $\\mathcal I_U^{\\mathrm{op}}$ specified by [def-weil-proetale-inverse-image], in each of sets, abelian groups and rings. Write $i_{V,\\varphi}:G(V)\\to(u_{r,p}G)(U)$ for its coprojections and $\\alpha_U=i_{t_U}$. For an indexing arrow $b:(V,\\varphi)\\to(V',\\varphi')$ we have $a_{\\varphi'}=b a_\\varphi$, hence $G(a_{\\varphi'})=G(a_\\varphi)G(b)$. The maps $G(a_\\varphi):G(V)\\to G(U)$ therefore form a cocone and give $\\beta_U:(u_{r,p}G)(U)\\to G(U)$ with $\\beta_U i_{V,\\varphi}=G(a_\\varphi)$. Since $a_{\\varphi_0}=\\mathrm{id}_U$, $\\beta_U\\alpha_U=\\mathrm{id}$. The colimit relation for $a_\\varphi:t_U\\to(V,\\varphi)$ is $\\alpha_U G(a_\\varphi)=i_{V,\\varphi}$; checking on all coprojections gives $\\alpha_U\\beta_U=\\mathrm{id}$. This proves the colimit comparison without assuming arbitrary ring colimits are computed on underlying sets.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00VC (section-functoriality-PSh), colimit definition and its coprojections; Tag 03CE (lemma-localize-given-products)."
-   }
-  },
-  {
-   "text": "For a $W$-morphism $b:U'\\to U$, the restriction rule of [def-weil-proetale-inverse-image] sends $i_{V,\\varphi}$ to $i_{V,\\varphi b}$. Since $a_{\\varphi b}=a_\\varphi b$, the maps $\\beta_U$ commute with restriction: on each coprojection both composites are $G(b)G(a_\\varphi)$. Thus $\\beta:u_{r,p}G\\to G|_W$ and its inverse $\\alpha$ are presheaf morphisms. A morphism $h:G\\to H$ satisfies $h_U G(a_\\varphi)=H(a_\\varphi)h_V$, so the same coprojection check proves naturality in $G$. In particular these comparisons preserve all operations whenever the values carry abelian-group or ring structures.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00VC (section-functoriality-PSh), restriction maps on coprojections; Tag 03CE (lemma-localize-given-products)."
-   }
-  },
-  {
-   "text": "By steps 1 and 4, $P=u_{r,p}G$ is already a sheaf. Let $q:P\\to P^\\#$ be the canonical map of [def-weil-pbc-sheafification]. Its universal property extends $\\mathrm{id}_P$ uniquely to $e:P^\\#\\to P$, with $eq=\\mathrm{id}_P$. The maps $qe$ and $\\mathrm{id}_{P^\\#}$ agree after precomposition with $q$, so uniqueness gives $qe=\\mathrm{id}_{P^\\#}$. Thus $q$ is an isomorphism. The definition $r^{-1}G=P^\\#$ in [def-weil-proetale-inverse-image] and the isomorphism $\\alpha:G|_W\\to P$ give clause (1), naturally in $G$, for each stated category of values.",
+   "text": "Restriction preserves sheaves. Transport the sheaf condition along the presheaf isomorphism; the sheafification unit of this already-sheaf presheaf is an isomorphism. Compose these maps and lift through the fully faithful sheaf inclusion to construct the specified normalized sheaf comparison.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WH (proposition-sheafification-adjoint), its universal property; Tag 00XZ (section-localize)."
-   }
+   "elementary": true
   },
   {
-   "text": "We verify the particular structure map, not merely the existence of a ring isomorphism. Write $R=A_X|_W$ and let $e:A_W\\to R$ be the ring isomorphism in clause (2) of [lem-weil-proetale-weakly-etale-localization]. Under step 5 let $d:R\\to A_W$ be $c_A^r$. Its definition in [def-weil-proetale-inverse-image] is adjunction applied to $\\rho:A_X\\to r_*A_W$. Explicitly, its composite with the coprojection at $(V,\\varphi)$ is $A_W(\\varphi)\\rho_V$: these maps form a cocone by naturality of $\\rho$, are natural in $U$, and their value at $(V,\\mathrm{id}_{u_r(V)})$ recovers $\\rho_V$, which is the defining adjunction correspondence: by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] the bijection is the composite of $u_p\\dashv u^p$, whose unit at $V$ is the coprojection at $(V,\\mathrm{id}_{u_r(V)})$, and of sheafification. At $t_U$ this is $A_W(\\varphi_0)\\rho_U$, and it sends the constant section $a$ to $a$, since $\\rho$ does so by definition. The map $e$ also sends constant sections to themselves. Therefore $de:A_W\\to A_W$ agrees with the identity on the constant presheaf. Since $A_W$ is its sheafification [def-weil-pbc-constant-sheaf], uniqueness in [def-weil-pbc-sheafification] gives $de=\\mathrm{id}$. As $e$ is an isomorphism, $d=e^{-1}$, proving clause (2).",
+   "text": "Sheafification commutes with continuous cocontinuous composition restriction, giving the constant-ring localization isomorphism and its constant-section unit equation. To identify the specified coefficient map, use its inverse-image adjunction transpose, whose constant-presheaf normalization is definitional. Naturality at the distinguished index and the Kan-unit formula show that e followed by the inverse sheaf comparison and the coefficient map fixes constant sections. Sheafification uniqueness gives the identity, and cancellation gives the claimed coefficient equation.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
     "def-weil-proetale-inverse-image",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
+    "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE (lemma-localize-given-products) and Tag 0H7J (example-constant-sheaf); structure map via the adjunction of Tag 00VC (section-functoriality-PSh)."
-   }
+   "elementary": true
   },
   {
-   "text": "Let $G$ be an $A_X$-module sheaf. The comparison of steps 3-5 on its underlying abelian sheaf identifies $r^{-1}G$ with $M=G|_W$. This identifies its $r^{-1}A_X$-action with the original $R=A_X|_W$-action: by [def-weil-proetale-inverse-image] the inverse-image action is obtained from the original action map by the finite-product comparison. Evaluate both factors at the distinguished pair $t_U$. The comparison sends a pair $(a,m)\\in A_X(U)\\times G(U)$ to the pair of their distinguished coprojections, and the image of the action sends it to the coprojection of $am$. Consequently the identified action is $(a,m)\\mapsto am$. This holds at every object and commutes with restrictions by step 4, and with module homomorphisms by its naturality.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D2 (lemma-pullback-module), in literature/stacks-project/sites-modules.tex: action by applying inverse image to the multiplication map and its product comparison."
-   }
-  },
-  {
-   "text": "Give $M=G|_W$ its $A_W$-action through $d^{-1}:A_W\\to R$, where $d:R\\to A_W$ is step 6. By [def-weil-proetale-inverse-image] and [def-pur-sheaf-tensor-product], $r^*G$ is the sheafification of $U\\mapsto M(U)\\otimes_{R(U)}A_W(U)$. Define on this presheaf $m\\otimes a\\mapsto d_U^{-1}(a)m$, with inverse $m\\mapsto m\\otimes1$. Balancing proves the first map well defined. Their composites are identities: one gives $m$, the other sends $m\\otimes a$ to $d_U^{-1}(a)m\\otimes1=m\\otimes a$. Both are $A_W(U)$-linear, commute with restrictions, and commute with homomorphisms in $G$. Thus this tensor presheaf is already isomorphic to the sheaf $M$. By the universal property of sheafification of presheaves of modules [def-weil-presheaf-modules-sheafification], as in step 5, its sheafification is $M$. This proves the natural $A_W$-module isomorphism of clause (3), and hence the assertion on underlying abelian sheaves.",
+   "text": "The coefficient comparison equation proves the specified coefficient inverse-image map is an isomorphism. Sheafification uniqueness on constant presheaf sections proves that the normalized localization ring map and the specified direct-image coefficient map satisfy the unit and counit compatibility equations for composition left adjoint to base change. Forget commutativity and apply Mathlib SheafOfModules.pushforwardPushforwardAdj, obtaining restriction left adjoint to the specified module direct image. The existing proEtaleRingModuleAdjunction is an adjunction for exactly the tensor-sheafification pullback in the statement. Its coefficient direct-image map equals the specified one by the ring adjunction inverse law. Uniqueness of left adjoints now gives the natural module isomorphism, with naturality inherited from that natural isomorphism. This proves the final clause and assembles the original conjunction.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), defining sectionwise tensor followed by sheafification, in literature/stacks-project/sites-modules.tex."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-operations",
   "def-weil-pbc-sheafification",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-19",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 03CE (lemma-localize-given-products), with Tags 00VC (section-functoriality-PSh), 00XZ (section-localize), 00WH (proposition-sheafification-adjoint), 0H7J (example-constant-sheaf); Sites Modules Tags 03D2 (lemma-pullback-module) and 03EK (section-tensor-product). The initial-object and cocone computations expand the product adjunction in 03CE."
+  "place": "Sites Tags 03CE, 00VC, 00WH, 0H7J; Modules on Sites, lemma-adjoint-push-pull-modules (Tag 03D3). Adjunction uniqueness gives both comparisons; coefficient compatibility follows from sheafification uniqueness on constant sections. No new theorem or split-off is needed."
  },
  "mathlib_searches": [
   {
@@ -256,5 +201,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "All three clauses, including the distinguished initial index, canonical coprojection and sheafification-unit normalizations, the specified coefficient structure map, and natural module-sheaf isomorphisms. Helpers package these assertions or specialize the existing sectionwise pushforward; no coefficient finiteness or monomorphism is assumed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261019T005434-L-2771588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
