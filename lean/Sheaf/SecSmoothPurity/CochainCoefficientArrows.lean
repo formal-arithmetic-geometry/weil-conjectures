@@ -60,7 +60,29 @@ theorem extensionFunctor_laws {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
       (∀ (M N H : Modules A) (b : M ⟶ N) (c : N ⟶ H),
         SheafOfModules.changeOfRingsHom a M (b ≫ c) =
           SheafOfModules.changeOfRingsHom a M b ≫
-            SheafOfModules.changeOfRingsHom a N c) := sorry
+            SheafOfModules.changeOfRingsHom a N c) := by
+  constructor
+  · intro M
+    unfold SheafOfModules.changeOfRingsHom
+    have h : (show SheafOfModules.changeOfRingsPresheaf a M ⟶
+        SheafOfModules.changeOfRingsPresheaf a M from
+      { app := fun U ↦ (ModuleCat.extendScalars (a.hom.app U).hom).map
+          ((show M ⟶ M from 𝟙 M).val.app U)
+        naturality := SheafOfModules.changeOfRingsHom_naturality a M (𝟙 M) }) =
+          𝟙 _ := by
+      apply PresheafOfModules.hom_ext
+      intro U
+      exact (ModuleCat.extendScalars (a.hom.app U).hom).map_id _
+    exact (congrArg (fun b ↦ (PresheafOfModules.sheafification
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj)).map b) h).trans
+        (Functor.map_id _ _)
+  · intro M N H b c
+    unfold SheafOfModules.changeOfRingsHom
+    rw [← Functor.map_comp]
+    congr 1
+    apply PresheafOfModules.hom_ext
+    intro U
+    exact (ModuleCat.extendScalars (a.hom.app U).hom).map_comp _ _
 
 /-- Actual scalar extension, with the scalar placed first by the existing API.
 Source: Stacks 03CY (blueprint: def-pur-cochain-coefficient-arrows). -/
@@ -87,6 +109,145 @@ noncomputable def extensionTmul {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
       (SheafOfModules.changeOfRingsPresheaf a M)).app U)
         (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x)
 
+set_option backward.isDefEq.respectTransparency false in
+open SheafOfModules in
+private theorem tensorRestriction_tmul
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S) (M : Modules A)
+    {X Y : Cᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
+    (changeOfRingsPresheaf c M).map i (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
+      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
+  Classical.choose_spec (exists_changeOfRingsMap c M i) s m
+
+open SheafOfModules in
+private noncomputable def tensorToRestriction
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    (M : Modules A) (H : Modules S)
+    (f : changeOfRingsPresheaf c M ⟶ H.val) : M ⟶ (restrictionFunctor c).obj H where
+  val :=
+    { app := fun W ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
+        (c.hom.app W).hom (f.app W)
+      naturality := by
+        intro X Y i
+        ext m
+        change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
+          M.val.map i m) = H.val.map i (f.app X
+            ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
+        have h := PresheafOfModules.naturality_apply f i
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)
+        rw [tensorRestriction_tmul, map_one] at h
+        exact h }
+
+open SheafOfModules in
+private noncomputable def restrictionToTensor
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    (M : Modules A) (H : Modules S)
+    (g : M ⟶ (restrictionFunctor c).obj H) : changeOfRingsPresheaf c M ⟶ H.val where
+  app W := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+    (c.hom.app W).hom (g.val.app W)
+  naturality := by
+    intro X Y i
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    have h := PresheafOfModules.naturality_apply g.val i m
+    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+      (c.hom.app Y).hom (g.val.app Y)
+        ((changeOfRingsPresheaf c M).map i
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)) =
+      H.val.map i (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+        (c.hom.app X).hom (g.val.app X)
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
+    rw [tensorRestriction_tmul, map_one]
+    have atOne (W : Cᵒᵖ) (n : M.val.obj W) :
+        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+          (c.hom.app W).hom (g.val.app W)
+            ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n) = g.val.app W n := by
+      exact congrArg (fun f : M.val.obj W ⟶
+        (ModuleCat.restrictScalars (c.hom.app W).hom).obj (H.val.obj W) ↦ f n)
+        ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv (c.hom.app W).hom).apply_symm_apply
+          (g.val.app W))
+    rw [atOne, atOne]
+    exact h
+
+open SheafOfModules in
+private noncomputable def tensorPresheafHomEquiv
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    (M : Modules A) (H : Modules S) :
+    (changeOfRingsPresheaf c M ⟶ H.val) ≃ (M ⟶ (restrictionFunctor c).obj H) where
+  toFun := tensorToRestriction c M H
+  invFun := restrictionToTensor c M H
+  left_inv f := by
+    ext W : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (c.hom.app W).hom).symm_apply_apply
+      (f.app W)
+  right_inv g := by
+    apply SheafOfModules.hom_ext
+    ext W : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (c.hom.app W).hom).apply_symm_apply
+      (g.val.app W)
+
+open SheafOfModules in
+private noncomputable def tensorHomEquiv
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    (M : Modules A) (H : Modules S) :
+    ((extensionFunctor c).obj M ⟶ H) ≃ (M ⟶ (restrictionFunctor c).obj H) :=
+  ((PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).homEquiv _ _).trans
+    (tensorPresheafHomEquiv c M H)
+
+open SheafOfModules in
+private theorem tensorHomEquiv_naturality_left
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    {M N : Modules A} (a : M ⟶ N)
+    (H : Modules S) (f : (extensionFunctor c).obj N ⟶ H) :
+    tensorHomEquiv c M H ((extensionFunctor c).map a ≫ f) =
+      a ≫ tensorHomEquiv c N H f := by
+  change tensorPresheafHomEquiv c M H
+      ((PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).homEquiv _ _
+        ((PresheafOfModules.sheafification
+          (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).map
+          ((show SheafOfModules.changeOfRingsPresheaf c M ⟶
+          SheafOfModules.changeOfRingsPresheaf c N from
+        { app := fun U ↦ (ModuleCat.extendScalars (c.hom.app U).hom).map (a.val.app U)
+          naturality := SheafOfModules.changeOfRingsHom_naturality c M a })) ≫ f)) = _
+  rw [Adjunction.homEquiv_naturality_left]
+  ext W m
+  change ((PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).homEquiv
+    (changeOfRingsPresheaf c N) H f).app W
+      ((ModuleCat.extendScalars (c.hom.app W).hom).map (a.val.app W)
+        ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) = _
+  rw [ModuleCat.ExtendScalars.map_tmul]
+  rfl
+
+open SheafOfModules in
+private theorem tensorHomEquiv_naturality_right
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S)
+    (M : Modules A)
+    {H H' : Modules S}
+    (f : (extensionFunctor c).obj M ⟶ H) (b : H ⟶ H') :
+    tensorHomEquiv c M H' (f ≫ b) =
+      tensorHomEquiv c M H f ≫ (restrictionFunctor c).map b := by
+  change tensorPresheafHomEquiv c M H'
+      ((PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).homEquiv _ _
+        (f ≫ b)) = _
+  rw [Adjunction.homEquiv_naturality_right]
+  rfl
+
+open SheafOfModules in
+private noncomputable def tensorAdjunction
+    {A S : Sheaf J CommRingCat.{w}} (c : A ⟶ S) : extensionFunctor c ⊣ restrictionFunctor c :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv := tensorHomEquiv c
+      homEquiv_naturality_left_symm := by
+        intro M N H a g
+        apply (tensorHomEquiv c M H).injective
+        rw [Equiv.apply_symm_apply, tensorHomEquiv_naturality_left,
+          Equiv.apply_symm_apply]
+      homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
+
+
 /-- The scalar-extension adjunction normalized by `x ↦ 1 ⊗ x`.
 Source: Stacks 03CY and 03D7
 (blueprint: def-pur-cochain-coefficient-arrows).
@@ -96,7 +257,17 @@ The unit determines the counit, so an adjunction with this formula is unique. -/
 theorem extensionAdjunction_existsUnique {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     ∃! adj : extensionFunctor a ⊣ restrictionFunctor a,
       ∀ (M : Modules A) (U : Cᵒᵖ) (x : M.val.obj U),
-        (adj.unit.app M).val.app U x = extensionTmul a M U 1 x := sorry
+        (adj.unit.app M).val.app U x = extensionTmul a M U 1 x := by
+  have hunit : ∀ (M : Modules A) (U : Cᵒᵖ) (x : M.val.obj U),
+      ((tensorAdjunction a).unit.app M).val.app U x = extensionTmul a M U 1 x := by
+    intro M U x
+    rw [← Adjunction.homEquiv_id, tensorAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+    rfl
+  refine ⟨tensorAdjunction a, hunit, ?_⟩
+  intro adj hadj
+  apply Adjunction.ext
+  ext M U x
+  exact (hadj M U x).trans (hunit M U x).symm
 
 /-- The unique normalized scalar-extension adjunction.
 Source: Stacks 03CY (blueprint: def-pur-cochain-coefficient-arrows). -/
@@ -116,7 +287,8 @@ theorem extensionFunctor_mapPresentation {A B : Sheaf J CommRingCat.{w}} (a : A 
     {M N : Modules A} (b : M ⟶ N) :
     (extensionFunctor a).map b = eqToHom (rfl :
       (extensionFunctor a).obj M = SheafOfModules.changeOfRings a M) ≫
-        SheafOfModules.changeOfRingsHom a M b ≫ eqToHom rfl := sorry
+        SheafOfModules.changeOfRingsHom a M b ≫ eqToHom rfl := by
+  simp [extensionFunctor]
 
 /-- Scalar extension as the actual ringed identity-topos pullback.
 Source: Stacks 03CY (blueprint: def-pur-cochain-coefficient-arrows). -/
@@ -294,6 +466,120 @@ noncomputable def restrictionTensorModule {A B : Sheaf J CommRingCat.{w}} (a : A
         ((extensionAdjunction a).counit.app M ⊗ₘ
           (extensionAdjunction a).counit.app N))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem restrictionTensorModule_naturality
+    {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
+    {M M' N N' : Modules B} (f : M ⟶ M') (g : N ⟶ N') :
+    ((restrictionFunctor a).map f ⊗ₘ (restrictionFunctor a).map g) ≫
+        restrictionTensorModule a M' N' =
+      restrictionTensorModule a M N ≫ (restrictionFunctor a).map (f ⊗ₘ g) := by
+  unfold restrictionTensorModule
+  rw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
+  apply congrArg ((extensionAdjunction a).homEquiv _ _)
+  have h := (extensionComparison a).naturality
+    ((restrictionFunctor a).map f) ((restrictionFunctor a).map g)
+  dsimp only [extensionPullback] at h
+  rw [← Category.assoc, h, Category.assoc, Category.assoc]
+  rw [tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+  have hf : (extensionFunctor a).map ((restrictionFunctor a).map f) ≫
+      (extensionAdjunction a).counit.app M' =
+        (extensionAdjunction a).counit.app M ≫ f :=
+    (extensionAdjunction a).counit.naturality f
+  have hg : (extensionFunctor a).map ((restrictionFunctor a).map g) ≫
+      (extensionAdjunction a).counit.app N' =
+        (extensionAdjunction a).counit.app N ≫ g :=
+    (extensionAdjunction a).counit.naturality g
+  rw [hf, hg]
+
+
+universe uA vA uB vB
+
+section
+
+variable {A : Type uA} [Category.{vA} A] [Abelian A] [MonoidalCategory A]
+  {B : Type uB} [Category.{vB} B] [Abelian B] [MonoidalCategory B]
+  [MonoidalPreadditive A] [MonoidalPreadditive B]
+  [HasCoproducts.{0} A] [HasCoproducts.{0} B]
+  (L : A ⥤ B) [L.Additive]
+  (e : ∀ X Y : A, L.obj X ⊗ L.obj Y ⟶ L.obj (X ⊗ Y))
+
+
+private noncomputable def laxTotalComponent (P Q : CochainComplex A ℤ) (n : ℤ) :
+    (CochainComplex.mapBifunctor
+      ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+      ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) (curriedTensor B)).X n ⟶
+        L.obj ((CochainComplex.mapBifunctor P Q (curriedTensor A)).X n) :=
+  HomologicalComplex.mapBifunctorDesc (fun a b h ↦
+    e (P.X a) (Q.X b) ≫
+      L.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) a b n h))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+
+private theorem laxTotalComponent_comm
+    (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
+      e X Y ≫ L.map (f ⊗ₘ g) = (L.map f ⊗ₘ L.map g) ≫ e X' Y')
+    (P Q : CochainComplex A ℤ) (n m : ℤ) :
+    laxTotalComponent L e P Q n ≫
+        L.map ((CochainComplex.mapBifunctor P Q (curriedTensor A)).d n m) =
+      (CochainComplex.mapBifunctor
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) (curriedTensor B)).d n m ≫
+          laxTotalComponent L e P Q m := by
+  by_cases hnm : (ComplexShape.up ℤ).Rel n m
+  · change n + 1 = m at hnm
+    subst m
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro a b hab
+    change a + b = n at hab
+    simp only [laxTotalComponent,
+      HomologicalComplex.ι_mapBifunctorDesc_assoc,
+      HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
+      Preadditive.add_comp, HomologicalComplex.mapBifunctor.ι_D₁_assoc,
+      HomologicalComplex.mapBifunctor.ι_D₂_assoc]
+    simp only [L.map_add, Preadditive.comp_add, Category.assoc]
+    rw [← L.map_comp, HomologicalComplex.mapBifunctor.ι_D₁,
+      ← L.map_comp, HomologicalComplex.mapBifunctor.ι_D₂]
+    rw [HomologicalComplex.mapBifunctor.d₁_eq P Q _ _
+        (show (ComplexShape.up ℤ).Rel a (a + 1) from rfl) b (n + 1)
+        (by change a + 1 + b = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₂_eq P Q _ _ a
+        (show (ComplexShape.up ℤ).Rel b (b + 1) from rfl) (n + 1)
+        (by change a + (b + 1) = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₁_eq
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) _ _
+        (show (ComplexShape.up ℤ).Rel a (a + 1) from rfl) b (n + 1)
+        (by change a + 1 + b = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₂_eq
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) _ _ a
+        (show (ComplexShape.up ℤ).Rel b (b + 1) from rfl) (n + 1)
+        (by change a + (b + 1) = n + 1; omega)]
+    simp only [
+      ComplexShape.ε₁_def, ComplexShape.ε₂_def, ComplexShape.ε_up_ℤ,
+      one_smul, Functor.map_units_smul, Functor.map_comp,
+      Linear.comp_units_smul, Linear.units_smul_comp, Category.assoc,
+      HomologicalComplex.ι_mapBifunctorDesc]
+    simp only [curriedTensor_map_app, curriedTensor_obj_map,
+      Functor.mapHomologicalComplex_obj_d, ← tensorHom_id, ← id_tensorHom]
+    dsimp only [Functor.mapHomologicalComplex, curriedTensor_obj_obj]
+    apply congrArg₂ (· + ·)
+    · simpa only [L.map_id, Category.assoc] using
+        congrArg (fun f ↦ f ≫ L.map
+          (CochainComplex.ιMapBifunctor P Q (curriedTensor A)
+            (a + 1) b (n + 1) (by omega))) (he (P.d a (a + 1)) (𝟙 (Q.X b)))
+    · simpa only [L.map_id, Category.assoc, Linear.units_smul_comp,
+        Linear.comp_units_smul] using
+        congrArg (fun f ↦ a.negOnePow • (f ≫ L.map
+          (CochainComplex.ιMapBifunctor P Q (curriedTensor A)
+            a (b + 1) (n + 1) (by omega)))) (he (𝟙 (P.X a)) (Q.d b (b + 1)))
+  · rw [HomologicalComplex.shape _ n m hnm, HomologicalComplex.shape _ n m hnm,
+      L.map_zero, comp_zero, zero_comp]
+
+end
+
 /-- Sum of the canonical restriction tensor maps over a total degree.
 Source: Stacks 03EK and 07A4
 (blueprint: def-pur-cochain-coefficient-arrows). -/
@@ -306,6 +592,8 @@ noncomputable def restrictionTensorComponent {A B : Sheaf J CommRingCat.{w}} (a 
       (restrictionFunctor a).map
         (CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules B)) p q n hpq))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction's tensor comparison commutes with the signed total differential.
 Source: Stacks 03EK and 07A4
 (blueprint: def-pur-cochain-coefficient-arrows).
@@ -317,7 +605,9 @@ theorem restrictionTensorComponent_comm {A B : Sheaf J CommRingCat.{w}} (a : A �
     restrictionTensorComponent a P Q n ≫
         (restrictionFunctor a).map ((P ⊗ Q).d n m) =
       ((restrictComplex a).obj P ⊗ (restrictComplex a).obj Q).d n m ≫
-        restrictionTensorComponent a P Q m := sorry
+        restrictionTensorComponent a P Q m := by
+  exact laxTotalComponent_comm (restrictionFunctor a) (restrictionTensorModule a)
+    (fun f g ↦ (restrictionTensorModule_naturality a f g).symm) P Q n m
 
 /-- The usual restriction-of-scalars tensor map on total complexes.
 It sends a homogeneous pure tensor `x ⊗ y` to `x ⊗ y` and is not asserted invertible.
