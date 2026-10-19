@@ -8,19 +8,7 @@ module
 public import Sheaf.Paper.PbcQbarCategory
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
-import Sheaf.CategoryTheory.ScalarLocalization
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.CommonStageCalculus
-import Sheaf.Paper.PbcVerdierAxioms
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.IntrinsicQbarCategory
 import Sheaf.Paper.PbcQbarIdempotentComplete
-import Sheaf.Paper.PbcScalarExtension
 
 /-! # Idempotent-complete triangulation over the algebraic closure
 
@@ -38,6 +26,24 @@ set_option autoImplicit false
 universe w u
 
 open CategoryTheory CategoryTheory.Idempotents CategoryTheory.StageSystem
+
+private theorem qbarScalarHom_inclusion
+    (l : ℕ) [Fact l.Prime] (Qbar : Type w)
+    [Field Qbar] [Algebra ℚ_[l] Qbar] [IsAlgClosure ℚ_[l] Qbar]
+    {C : Padic.FiniteCoefficientFields l Qbar → Type u}
+    [∀ E, Category* (C E)] [∀ E, Preadditive (C E)] [∀ E, Linear E.val (C E)]
+    (S : StageSystem C) [IsDirectedOrder (Padic.FiniteCoefficientFields l Qbar)]
+    (hS : QbarScalarCompatible l Qbar S)
+    (E : Padic.FiniteCoefficientFields l Qbar) {K L : C E} (f : K ⟶ L) (a : E.val) :
+    qbarScalarHom l Qbar S hS (a : Qbar) ((S.ι E).map f) =
+      (S.ι E).map (a • f) := by
+  rw [ι_map_eq (S := S) (le_rfl : E ≤ E) f,
+    qbarScalarHom_mkHom l Qbar S hS (a : Qbar)
+      (X := ⟨E, K⟩) (Y := ⟨E, L⟩) E le_rfl le_rfl
+      ((S.T le_rfl).map f) E le_rfl a.property]
+  rw [tr_map (S := S) (hi := (le_rfl : E ≤ E)) le_rfl f]
+  rw [ι_map_eq (S := S) (le_rfl : E ≤ E) (a • f), hS le_rfl a f]
+  rfl
 
 namespace AlgebraicGeometry.Scheme
 
@@ -101,6 +107,19 @@ theorem pbcIdempotentCompleteTriangulation
       ∀ {K L : pbcStageCategory l Qbar T E} (f : K ⟶ L) (a : E.val),
         ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map (a • f) =
           (a : Qbar) • ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map f) := by
-  sorry
+  let S := pbcScalarSystem l Qbar T hDim.out hInv.out
+  have hS : QbarScalarCompatible l Qbar S :=
+    pbcQbarScalarCompatible l Qbar T
+  have hK := pbcQbarIdempotentComplete l Qbar T
+  refine ⟨?_, ?_, ⟨inferInstance⟩, (pbcVerdierAxioms l Qbar T).1,
+    hK.1, hK.2.2.2.1, hK.2.2.2.2, ?_⟩
+  · intro α X Y r s h
+    exact qbarScalarRep_rel l Qbar _ hS α h
+  · intro α X Y M hX hY f N hMN hα
+    exact qbarScalarHom_mkHom l Qbar _ hS α M hX hY f N hMN hα
+  · intro E
+    refine ⟨(pbcVerdierAxioms l Qbar T).2.1 E, inferInstance, ?_⟩
+    intro K L f a
+    exact (qbarScalarHom_inclusion l Qbar S hS E f a).symm
 
 end AlgebraicGeometry.Scheme
