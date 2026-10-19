@@ -257,5 +257,29 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-34840204f (reviewer sub-agent of L); spot-checked: Read Stacks 07AC (full proof), 0D6X, 0793 and 0794 at their labels. The item statement is unchanged. Step 1 (exactness of g^{-1}): epi in Mod iff epi in Ab via the cokernel description, then local lifting refined by cocontinuity; correct. Step 2: Hom(E_U,M)=M(U) from free Yoneda and sheafification; the sum over pairs (U,s) is epic; P contains 0 and is closed under finite sums. Step 3: 0793 applied with L(⊕E_{U_i})=⊕E_{uU_i}; additivity and colimit preservation are argued. Step 4: the module form of 0D6X with the same E_U; g^{-1}I is not assumed injective. Step 5: the Hom complex is acyclic, carried across the adjunction, and acyclicity is detected by injectives through a cocycle that is not a coboundary; I checked it line by line. Step 6: hypotheses (1)-(5) of 0794 all hold (both categories are Grothendieck). Step 7: the cone-matrix argument plus left-derived exactness gives triangulatedness. Step 8: in pre-derived-adjoint-general take F=g^{-1}, G=g_!, p_s=Q(g^{-1}s)^{-1}; I verified essential constancy (j0=id, k=s). With s=t=1 the theorem gives e(Q(f^flat))=Q(f)∘ε_C, which is the item's normalization in the right direction. All four new nodes are true; I sketched proofs for 0793 and for the Ext-orthogonal Hom node (downward induction on the cycles). None restates an item clause, and none duplicates an existing node by grep of tags and labels. The module 0D6X node generalizes lem-trf-site-pullback-injective-evaluation-acyclic, which is its R=Z case and is not applicable to module injectives (maintainer note). No SGA. The five generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContinuousCocontinuousDerivedShriek",
+  "declaration": "CategoryTheory.continuousCocontinuous_exists_derivedShriek",
+  "declarations": [
+   "CategoryTheory.lowerShriekSourceRing",
+   "CategoryTheory.lowerShriekInverseImage",
+   "CategoryTheory.ContinuousCocontinuousDerivedShriekData",
+   "CategoryTheory.continuousCocontinuous_exists_derivedShriek"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ContinuousCocontinuousDerivedShriek.lean",
+  "statement": "theorem continuousCocontinuous_exists_derivedShriek (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] (R : Sheaf K.toGrothendieck CommRingCat.{u}) : Nonempty (ContinuousCocontinuousDerivedShriekData J.toGrothendieck K.toGrothendieck f R)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cd52fcc4",
+  "group": "NS",
+  "result": "pass",
+  "note": "Matched each node clause to the Lean: covering-site continuity (hcover/hpullback) and IsCocontinuous use the landed ordinary-adjunction convention and are equivalent to the node's family form under IsSiteForCoverings; O'=g^{-1}O is precomposition with the identity structural map; exactness, additive g_! with adjunction, Lg_! with comparison and IsLeftDerivedFunctor, definedAt is the exact 05S9 IsEssentiallyConstantProDiagram on K(O') with no boundedness; triangulated has the same ∃CommShift form as the landed 05SE node; derived adjunction is to mapDerivedCategory; normalization homEquiv(ε_M≫Q a)=Q(a♭)≫factors.inv is the node's formula in the right direction and pins the adjunction. No extra hypotheses, universes u/u+1, edge cases covered, no duplicate found in side Sheaf/WeilConjectures, no hollow def, sorry only, docstrings with all 8 steps, verbatim statement, only the lean field changed. nt_compile --json clean (16.1 s). Advisory: 5 plain Mathlib plan imports are redundant (compiles without them); the Second reading section is an author self-check (maintainer note); existential HasDerivedCategory.{u+1} fields."
  }
 }

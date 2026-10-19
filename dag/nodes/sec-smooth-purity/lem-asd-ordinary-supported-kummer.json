@@ -431,21 +431,23 @@
   "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer",
   "declaration": "AlgebraicGeometry.Etale.ordinary_supported_kummer",
   "declarations": [
-   "AlgebraicGeometry.Etale.ordinary_supported_kummer"
+   "AlgebraicGeometry.Etale.ordinary_supported_kummer",
+   "AlgebraicGeometry.Etale.ordinary_supported_kummer_uniqueBoundary"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedCartierKummer.lean",
   "statement": "theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) : ∃ (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2) (c : (ordinaryFinitePushforward A i).obj (ordinaryFiniteUnit A D) ⟶ (ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧) (c₁ : Ext (ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2) (t : OrdinaryFiniteTwistTransport A N hA), c = supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) (Scheme.finiteEtaleTateLine T N A hA) κ ∧ SupportedKummerBoundary A N hA i hI hT κ ∧ (∀ κ' : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2, SupportedKummerBoundary A N hA i hI hT κ' → κ' = κ) ∧ (Ext.mk₀ (ordinaryFiniteIntegralGenerator A T)).comp (c₁.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2) = supportedKummerChern A N hA i hI hT ∧ supportedDerivedUnit A i ≫ c = c₁.hom ∧ (∀ {D' T' : Scheme.{u}} (i' : D' ⟶ T') [IsClosedImmersion i'] (v : T' ⟶ T) (w : D' ⟶ D) (sq : IsPullback w i' i v) (hI' : i'.ker.IsInvertible), ∃ κ' : Ext ((lowerStar (ModuleCat.{u + 1} A) i').obj (ordinaryFiniteConstant A D')) (Scheme.finiteEtaleTateLine T' N A hA) 2, SupportedKummerBoundary A N hA i' hI' (by simpa using hT.map v.appTop.hom) κ' ∧ IsIso (supportedConstantExchange A i i' v w sq.toCommSq) ∧ (Ext.mk₀ (supportedConstantExchange A i i' v w sq.toCommSq)).comp κ' (zero_add 2) = (κ.mapExactFunctor (upperStar (ModuleCat.{u + 1} A) v)).comp (Ext.mk₀ (t.line v hT).hom) (add_zero 2)) ∧ (∀ [NeZero N], ∃ κ₀ : Ext ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod N))) i).obj (ordinaryFiniteConstant (ULift.{u + 1} (ZMod N)) D)) (Scheme.finiteEtaleTateLine T N (ULift.{u + 1} (ZMod N)) (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N))) 2, SupportedKummerBoundary (ULift.{u + 1} (ZMod N)) N (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N)) i hI hT κ₀ ∧ SupportedKummerScalar ((Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom) N (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N)) hA i κ₀ κ)",
   "branch": "newtargets-dag",
-  "by": "Q39",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q35",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "§1(B): expose the existing unique-relative-boundary clause as a separately typed theorem. Choosing its representative from the nested original theorem forces normalization of unrelated pullback and scalar witnesses and exceeds the 60 s consumer limit. The appended helper states exactly its existence-and-uniqueness clause; the original theorem and all original declarations are unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a7425a3eb",
-  "group": "Q39",
+  "reviewer": "NT-stage2-cc-7c180b283",
+  "group": "Q35",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signatures. All four modules reproduced clean per-file scompile.py checks. No fixes required; repository and branch head unchanged."
+  "note": "Re-delivery fixes the 1f7ae2a4 RETURN: H2 removed the lem-asd-etale-finite-twist-pullback stmt_dep; H13 no longer delivers EtaleFiniteTwistPullback.lean or its Q03 record; H4 deleted the four punctual-purity duplicates (owned by landed def-per-punctual-purity). The theorem matches ILO XVI 3.4.3 clause by clause: ℓ prime, ULift ZMod ℓ, regular Noetherian X,Y, ℓ a unit, IsFiniteLocallyFreeOfDegree d with d>0 and ℓ∤d, regular Cartier D via i.ker.IsInvertible, D' = nilradical subscheme of the pullback with regular Cartier hypotheses, IsIso of the transpose of the unique SupportedKummerBoundary class (the c=1 class of the class-calculus node) from (Y,D') to (X,D); no generic-étale assumption; lean.statement verbatim. Mechanical finding: lem-exc-closed-ambient (rightAdjoint of its IsLeftAdjoint instance) and lem-asd-ordinary-supported-kummer (Classical.choose of its ∃!) are genuine; both modules contain only theorems, so PASS on that point. §1(B) helper ordinary_supported_kummer_uniqueBoundary is the exact existence+uniqueness clause, with a sorry and a docstring. nt_compile --json at load ~61-79 clean: Kummer 24.1 s, RegularImmersionClassCalculus 42.8 s, item 37.3 s. Advisories: the Kummer record's by changed Q39→Q35 (provenance only); supportedExactDerivedMap belongs to def-asd-ordinary-supported-kummer-system, which is reached only through the cited Kummer node."
  }
 }
