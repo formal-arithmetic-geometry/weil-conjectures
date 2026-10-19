@@ -12,9 +12,106 @@
   "def-sp-injective-resolutions",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-algebraic-dualizing-torsion-hull] to $(A,\\mathfrak m,\\omega)$. It gives an injective hull $\\kappa\\hookrightarrow E_0$ and $R\\Gamma_{\\mathfrak m}(\\omega)\\cong E_0[0]$, proving the existence clause. Now fix any injective hull $\\kappa\\hookrightarrow E$ as in the statement. By the injective extension property [def-sp-injective-resolutions], the map $\\kappa\\to E$ extends along $\\kappa\\hookrightarrow E_0$ to $u:E_0\\to E$. Its kernel meets $\\kappa$ trivially and is therefore zero by essentiality of $\\kappa\\hookrightarrow E_0$. Injectivity of $E_0$ extends the inverse $u(E_0)\\to E_0$ to $v:E\\to E_0$, so $vu=1$. Hence $E=u(E_0)\\oplus\\ker v$: explicitly $e=u(v(e))+(e-u(v(e)))$. The second summand meets the image of $\\kappa$ trivially, so essentiality of $\\kappa\\hookrightarrow E$ gives $\\ker v=0$. Thus $u$ is an isomorphism, and $R\\Gamma_{\\mathfrak m}(\\omega)\\cong E[0]$ for this arbitrary $E$.",
+   "uses": [
+    "lem-per-algebraic-dualizing-torsion-hull",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A82 (lemma-local-cohomology-of-dualizing), used at the start of theorem-local-duality; Tag 08Y4 (lemma-injective-hull-unique), uniqueness argument written from the injective extension property."
+   }
+  },
+  {
+   "text": "Put $K=M[0]$ and $B=R\\operatorname{Hom}_A(K,\\omega)$. The only nonzero cohomology of $K$ is the finite module $M$, while [def-per-algebraic-normalized-dualizing] supplies finite cohomology and a bounded injective representative for $\\omega$. Therefore [lem-trf-coherent-rhom-finite-injective-dimension] applies with $L=\\omega$: every $H^j(B)=\\operatorname{Ext}^j_A(M,\\omega)$ is finitely generated. No assertion that $A$ is complete is used.",
+   "uses": [
+    "def-per-algebraic-normalized-dualizing",
+    "lem-trf-coherent-rhom-finite-injective-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AAK (lemma-special-case-local-duality), first sentence; the finite-generation input is Tag 0G4H (lemma-finite-ext-into-bounded-injective)."
+   }
+  },
+  {
+   "text": "Choose generators $f_1,\\ldots,f_r$ of $\\mathfrak m$, which exist since $A$ is Noetherian [def-weil-pbc-noetherian-ring]. Use the complex $C_A(f_1,\\ldots,f_r;A)$ defined in [lem-per-ideal-torsion-cech-computation] and write $\\Lambda(X)=R\\operatorname{Hom}_A(C_A(f_1,\\ldots,f_r;A),X)$. Apply [lem-per-algebraic-completion-rhom] with $I=\\mathfrak m$, $K=M[0]$, $L=\\omega$ to obtain $\\Lambda(B)\\cong R\\operatorname{Hom}_A(\\Lambda(K),\\Lambda(\\omega))$. Next [lem-per-algebraic-torsion-completion-hom] identifies this with $R\\operatorname{Hom}_A(R\\Gamma_{\\mathfrak m}(K),R\\Gamma_{\\mathfrak m}(\\omega))$. Substituting the isomorphism of Step 1 in the second variable, using the derived Hom functor [def-pur-derived-internal-hom], yields $\\Lambda(B)\\cong R\\operatorname{Hom}_A(R\\Gamma_{\\mathfrak m}(K),E[0])$. Both comparison lemmas allow arbitrary objects of $D(A)$; their only ring hypothesis is satisfied.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-per-ideal-torsion-cech-computation",
+    "lem-per-algebraic-completion-rhom",
+    "lem-per-algebraic-torsion-completion-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "theorem-local-duality, its proof using more-algebra.tex Tag 0A6E (lemma-completion-RHom) and Tag 0A6Y (lemma-compare-RHom); ideal torsion is the model in Tag 0955 (lemma-local-cohomology-noetherian)."
+   }
+  },
+  {
+   "text": "On the one-object site with only the identity covering and ring sheaf $A$, apply [lem-weil-pbc-extended-cech-completion-model] to the augmented complex $C$ of Step 3. It says that $B\\to\\Lambda(B)$ is the reflection into objects $Y$ with $R\\operatorname{Hom}_A(A[1/f],Y)=0$ for every $f\\in\\mathfrak m$. The final paragraph of [lem-weil-pbc-constant-completion-equivalence], specialized to this same site and ideal, says that $B\\to F_{\\mathfrak m}(B)=R\\varprojlim_n(B\\otimes_A^{\\mathbf L}A/\\mathfrak m^n)$ is the completion unit for precisely that condition. Both objects therefore have the same universal property. It gives maps $u:\\Lambda(B)\\to F_{\\mathfrak m}(B)$ and $v:F_{\\mathfrak m}(B)\\to\\Lambda(B)$ preserving the units; uniqueness gives $vu=1$ and $uv=1$. The strict-tower product-fibre comparison [lem-weil-pbc-ringed-strict-tower-homotopy-limit] exhibits this total derived limit as a fibre of $1-s$ on $\\prod^D_n$; since products of $A$-modules are exact, the termwise product of the strict tower of complexes represents $\\prod^D_n$, so it is isomorphic to the fibre model used by [lem-per-derived-completion-finite-cohomology]. Step 2 verifies its finite-cohomology hypothesis. Applying it in degree $-i$ and using $u$ gives $H^{-i}(\\Lambda(B))\\cong\\varprojlim_{n\\geq1}\\operatorname{Ext}^{-i}_A(M,\\omega)/\\mathfrak m^n\\operatorname{Ext}^{-i}_A(M,\\omega)=\\widehat{\\operatorname{Ext}^{-i}_A(M,\\omega)}$.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-per-derived-completion-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06 (lemma-derived-completion-pseudo-coherent); algebraization.tex Tags 099F (proposition-derived-completion), 0A0E (lemma-derived-completion-koszul); proetale.tex Tag 099M (lemma-naive-completion); sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "Put $T=R\\Gamma_{\\mathfrak m}(M[0])$, represented by the complex obtained by applying $\\Gamma_{\\mathfrak m}$ to an injective resolution of $M$ [def-sbc-ideal-power-torsion-functor]; thus $H^i(T)=H^i_{\\mathfrak m}(M)$. The injective resolution and the single-term complex $E[0]$ are bounded below with injective terms, hence K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]; so $T$ is also the K-injective model of $R\\Gamma_{\\mathfrak m}(K)$ used in Step 3. Consequently [def-pur-derived-internal-hom] computes $R\\operatorname{Hom}_A(T,E[0])$ by $\\operatorname{Hom}^\\bullet_A(T^\\bullet,E[0])$. Set $Z^i=\\ker d_T^i$ and $B^i=\\operatorname{im}d_T^{i-1}$. Its degree $-i$ cycles are exactly maps $T^i/B^i\\to E$. Restriction to $Z^i/B^i$ is surjective by the injective extension property [def-sp-injective-resolutions]. Its kernel consists of maps vanishing on $Z^i$; each factors through $\\operatorname{im}d_T^i$ and extends from that submodule to $T^{i+1}$, again by injectivity. These are precisely the degree $-i$ boundaries, with the sign in the Hom differential absorbed by negating the extension when necessary. Thus restriction induces an $A$-linear isomorphism $H^{-i}R\\operatorname{Hom}_A(T,E[0])\\cong\\operatorname{Hom}_A(Z^i/B^i,E)=\\operatorname{Hom}_A(H^i_{\\mathfrak m}(M),E)$.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-functor",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AAK (lemma-special-case-local-duality), exactness of Hom into E, with the cycles, boundaries and extension argument written out."
+   }
+  },
+  {
+   "text": "Take cohomology in degree $-i$ of the isomorphism of Step 3, use the inverse of the identification in Step 4 on its source, and the identification in Step 5 on its target. Their composite is the required $A$-linear isomorphism $\\widehat{\\operatorname{Ext}^{-i}_A(M,\\omega)}\\cong\\operatorname{Hom}_A(H^i_{\\mathfrak m}(M),E)$. Step 1 treated every injective hull, and the argument applies to each $i\\geq0$, including $i=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AAK (lemma-special-case-local-duality), conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-algebraic-dualizing-torsion-hull",
+  "def-sp-injective-resolutions",
+  "def-per-algebraic-normalized-dualizing",
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-ideal-torsion-cech-computation",
+  "lem-per-algebraic-completion-rhom",
+  "lem-per-algebraic-torsion-completion-hom",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-per-derived-completion-finite-cohomology",
+  "def-sbc-ideal-power-torsion-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0AAK (lemma-special-case-local-duality), restricted to M[0], with the proof of theorem-local-duality expanded into its two generic comparison inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-top-nonvanishing",
@@ -81,5 +178,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-algebraic-local-duality",
+  "worker": "stage1",
+  "summary": "Retained the exact completed-Ext statement over possibly noncomplete local rings. Read Stacks 0AAK and the proof of theorem-local-duality; split the derived comparison into completion-RHom and torsion-completion inputs, realized the hull by local torsion of the normalized dualizing complex, reused the existing finite-cohomology RHom lemma, and wrote out hull uniqueness and the injective Hom cohomology computation. Added three statement-only inputs, each searched using two semantic phrasings, Loogle, LeanSearch and source grep. Removed the saved coherent-completion helper after the current DAG supplied its finite-cohomology theorem, and cited existing reflector and tower-model comparisons to identify its completion model. No Lean attachment or statement dispute.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXE (lemma-cd-maximal), the top-degree nonvanishing assertion. Supporting input in Tag 0DXE: the local-duality formula in the last paragraph; the completion on Ext is retained. This split supplies its completed-Ext local-duality input; Steps 1 and 3 realize the derived duality comparison and Steps 2, 4, 5 and 6 its ordinary-cohomology specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coherent-rhom-finite-injective-dimension",
+    "why": "Generic module-theoretic finite-generation theorem for RHom into a bounded injective coherent complex, used exactly in Step 2; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic homological-algebra tool showing that E[0] computes derived Hom, used in Step 5; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-extended-cech-completion-model",
+    "why": "Generic reflector description specialized to the one-object ringed site; identifies the Cech RHom model without any geometric hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Its final paragraph identifies the quotient-tower completion unit with reflection into derived complete objects for any Noetherian ring and any small site; used on the one-object site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic product-fibre comparison for total derived inverse limits, aligning the two existing completion statements on the one-object site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-1e550f8c1",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-1e550f8c1 (reviewer sub-agent of L); spot-checked: I read Stacks 0AAK (statement and proof), theorem-local-duality, 0A82, 0A6E, 0A6Y (under lemma-complete-and-local) and 0G4H. The item is 0AAK for K=M[0] and is unchanged: completion is kept, A need not be complete, and every injective hull is allowed. The three new unsplit nodes are true, have no proof text and introduce all their own objects. The hull node is 0A82 with 0955; I checked it on a field, an Artinian ring and k[t]_(t) with ω=A[1]. Completion-rhom is 0A6E with the 091V Čech model; torsion-completion-hom is 0A6Y with 0955. I checked both at r=0 and with a unit generator. Searching the snapshot DAG for 0A6E, 0A6Y, 0A82, 08Y3/4, 0AAK, 091V, 0A6R, Greenlees and injective hull found no duplicate. Each new node is strictly smaller than the item. Step checks: Step 1's hull-uniqueness argument (extend, kernels zero by essentiality, splitting) is correct. Step 2 meets the 0G4H hypotheses with K=M[0] and ω bounded injective with finitely generated cohomology. Step 3 composes the two comparisons with Step 1. In Step 4 two reflections into the same local-completeness condition are uniquely isomorphic, and Step 2 supplies the finite-cohomology hypothesis. In Step 5 the cycles and boundaries of the Hom complex into injective E, including the sign, are right. Small case: DVR, M=A, i=1 gives Â on both sides. Batch-5 flag: lem-trf-coherent-rhom-finite-injective-dimension is Stacks 0G4H, pure commutative algebra, unsplit, with only definition nodes in its closure. Neither assumption gives it and it is no trace-formula step, so it is accepted like the earlier 0A6A(3) and 0AFZ flags. The five declared tool_uses are generic black boxes and accepted. FIX, proof field only: Step 5 now says the injective resolution is bounded below with injective terms, hence K-injective, so T is Step 3's RΓ_m(K) model. Step 4 now says module products are exact, so termwise products represent ∏^D and the fibre models agree. Both steps stay under 2000 characters. Base note for the maintainer: lem-per-local-cohomology-cech-bound and lem-per-ideal-torsion-cech-computation both state 0956 for modules and are merge candidates.; 1 file(s) fixed by the reviewer"
  }
 }
