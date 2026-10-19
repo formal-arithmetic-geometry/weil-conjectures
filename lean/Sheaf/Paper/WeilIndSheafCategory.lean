@@ -15,6 +15,8 @@ public import Mathlib.CategoryTheory.Category.ULift
 public import Mathlib.CategoryTheory.Abelian.Transfer
 public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
+import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
+import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 
 /-! # Ambient equivariant ind-sheaves for the recorded common-stage Weil heart
 
@@ -94,7 +96,11 @@ theorem zlStagePull_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
       (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
         ((sfRationalConstructibleLocalization l _ X).obj
           ((constructibleIntegralPullback l _ f).obj K)) := by
-  sorry
+  refine ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 _).trans ?_
+  change (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
+    ((rationalDerivedPullback l _ f).obj _) = _
+  exact congrArg (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
+    ((rationalDerivedPullback_existsUnique l _ f).exists.choose_spec.2.1 _)
 
 /-- The object comparison is an equality comparison, never a chosen automorphism.
 Source: blueprint common-stage pullback prescription
@@ -155,7 +161,11 @@ theorem zlFrobenius_naturality {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
     (D.geometricFrobenius X₀).hom ≫ zlFiberMap D f₀ =
       zlFiberMap D f₀ ≫ (D.geometricFrobenius Y₀).hom := by
-  sorry
+  apply pullback.hom_ext
+  · simp [zlFiberMap, FiniteFieldDatum.geometricFrobenius,
+      FiniteFieldDatum.galoisMap, Over.pullback_map_left, baseChangeMap, Category.assoc]
+  · simp [zlFiberMap, FiniteFieldDatum.geometricFrobenius,
+      FiniteFieldDatum.galoisMap, Over.pullback_map_left, baseChangeMap, Category.assoc]
 
 /-- The canonical pullback square, composed from normalized composition comparisons.
 Source: blueprint Frobenius equivariance of pullback
@@ -185,7 +195,43 @@ theorem zlWeilPull_mem {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (K : sfCommonStageWeilSheaf D l hl Y₀ Ω) :
     sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
       (((IsoAlgebra.mapOfNatIso (zlFrobeniusSquare D l hl Ω f₀)).obj K.obj).carrier) := by
-  sorry
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : (D.geometricFiber Y₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber Y₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  have hc := (constructible_pullback_t_exact D l hl Ω (Classical.arbitrary _)
+    (W := (D.geometricFiber X₀).left) (X := (D.geometricFiber Y₀).left)
+    (zlFiberMap D f₀)).2
+  dsimp only [ConstructibleCommonStagePullbackComparison] at hc
+  have hX : constructiblePullbackResidueUnits D l hl (D.geometricFiber X₀).left =
+      (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x) := Subsingleton.elim _ _
+  have hY : constructiblePullbackResidueUnits D l hl (D.geometricFiber Y₀).left =
+      (fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y) := Subsingleton.elim _ _
+  rw [hX, hY] at hc
+  obtain ⟨c⟩ := hc
+  let A : sfCommonStageHeart l (D.geometricFiber Y₀).left Ω :=
+    ⟨K.obj.carrier, K.property⟩
+  have h : (c.heart.obj A).obj = (zlPull D l hl Ω f₀).obj A.obj :=
+    congrArg (fun F : sfCommonStageHeart l (D.geometricFiber Y₀).left Ω ⥤
+      generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left ↦
+        F.obj A) c.heart_fac
+  change sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
+    ((zlPull D l hl Ω f₀).obj A.obj)
+  have hp := (c.heart.obj A).property
+  rw [← h]
+  exact hp
 
 /-- Canonical inverse image on the recorded Weil hearts; only the heart condition
 is supplied by a theorem. The objects, morphisms and Frobenius actions are explicit.
@@ -235,7 +281,41 @@ theorem zlPull_mem {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (K : sfCommonStageHeart l (D.geometricFiber Y₀).left Ω) :
     sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
       ((zlPull D l hl Ω f₀).obj K.obj) := by
-  sorry
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : (D.geometricFiber Y₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber Y₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  have hc := (constructible_pullback_t_exact D l hl Ω (Classical.arbitrary _)
+    (W := (D.geometricFiber X₀).left) (X := (D.geometricFiber Y₀).left)
+    (zlFiberMap D f₀)).2
+  dsimp only [ConstructibleCommonStagePullbackComparison] at hc
+  have hX : constructiblePullbackResidueUnits D l hl (D.geometricFiber X₀).left =
+      (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x) := Subsingleton.elim _ _
+  have hY : constructiblePullbackResidueUnits D l hl (D.geometricFiber Y₀).left =
+      (fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y) := Subsingleton.elim _ _
+  rw [hX, hY] at hc
+  obtain ⟨c⟩ := hc
+  have h : (c.heart.obj K).obj = (zlPull D l hl Ω f₀).obj K.obj :=
+    congrArg (fun F : sfCommonStageHeart l (D.geometricFiber Y₀).left Ω ⥤
+      generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left ↦
+        F.obj K) c.heart_fac
+  change sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
+    ((zlPull D l hl Ω f₀).obj K.obj)
+  have hp := (c.heart.obj K).property
+  rw [← h]
+  exact hp
 
 /-- The actual underlying heart inverse image.
 Source: blueprint composition proof
@@ -257,7 +337,31 @@ theorem zlHeartFrobenius_mem (X₀ : Over (Spec (.of D.k₀)))
     (K : sfCommonStageHeart l (D.geometricFiber X₀).left Ω) :
     sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
       ((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj K.obj) := by
-  sorry
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  have hc := (constructible_pullback_t_exact D l hl Ω (Classical.arbitrary _)
+    (W := (D.geometricFiber X₀).left) (X := (D.geometricFiber X₀).left)
+    (D.geometricFrobenius X₀).hom).2
+  dsimp only [ConstructibleCommonStagePullbackComparison] at hc
+  have hX : constructiblePullbackResidueUnits D l hl (D.geometricFiber X₀).left =
+      (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x) := Subsingleton.elim _ _
+  rw [hX] at hc
+  obtain ⟨c⟩ := hc
+  have h : (c.heart.obj K).obj = (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj K.obj :=
+    congrArg (fun F : sfCommonStageHeart l (D.geometricFiber X₀).left Ω ⥤
+      generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left ↦
+        F.obj K) c.heart_fac
+  change sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
+    ((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj K.obj)
+  have hp := (c.heart.obj K).property
+  rw [← h]
+  exact hp
 
 /-- Geometric Frobenius restricted to the actual underlying heart.
 Source: blueprint composition proof
@@ -280,7 +384,20 @@ theorem zlHeartSquare_existsUnique {X₀ Y₀ : Over (Spec (.of D.k₀))}
     ∃! e : zlHeartPull D l hl Ω f₀ ⋙ zlHeartFrobenius D l hl Ω X₀ ≅
         zlHeartFrobenius D l hl Ω Y₀ ⋙ zlHeartPull D l hl Ω f₀,
       ∀ K, (e.hom.app K).hom = (zlFrobeniusSquare D l hl Ω f₀).hom.app K.obj := by
-  sorry
+  let e : zlHeartPull D l hl Ω f₀ ⋙ zlHeartFrobenius D l hl Ω X₀ ≅
+      zlHeartFrobenius D l hl Ω Y₀ ⋙ zlHeartPull D l hl Ω f₀ :=
+    NatIso.ofComponents (fun K ↦ (sfCommonStageHeartProperty l
+      (D.geometricFiber X₀).left Ω).isoMk
+        ((zlFrobeniusSquare D l hl Ω f₀).app K.obj))
+      (fun a ↦ ObjectProperty.hom_ext _
+        ((zlFrobeniusSquare D l hl Ω f₀).hom.naturality a.hom))
+  refine ⟨e, fun _ ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext
+  exact he' K
 
 /-- The canonical heart square, with its specified underlying arrow.
 Source: blueprint composition proof, Frobenius equivariance
@@ -316,7 +433,17 @@ inherited structure over D.k; no extra hypothesis is imposed. -/
 theorem zlSmallHeart_abelian (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     Nonempty (Abelian (zlSmallHeart D l Ω hl X₀)) := by
-  sorry
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let := (sfCommonStageHeart_properties l (D.geometricFiber X₀).left Ω D hl).2.2.some
+  exact ⟨inferInstanceAs (Abelian (AsSmall.{0}
+    (sfCommonStageHeart l (D.geometricFiber X₀).left Ω)))⟩
 
 /-- The canonical abelian structure on the small heart presentation.
 Source: blueprint constructible-heart convention
@@ -357,7 +484,11 @@ colimit of the given functor. The universal cocones determine its comparison. -/
 @[instance]
 theorem zlIndMap_hasLeftKanExtension (F : C ⥤ B) :
     Functor.HasLeftKanExtension (Ind.yoneda (C := C)) (F ⋙ Ind.yoneda) := by
-  sorry
+  have hc : Nonempty (Abelian C) := ⟨inferInstance⟩
+  have hb : Nonempty (Abelian B) := ⟨inferInstance⟩
+  obtain ⟨_⟩ := hc
+  obtain ⟨_⟩ := hb
+  infer_instance
 
 /-- The canonical ind-extension, including its Kan universal property.
 Source: SGA 4, XVII, sheaf resolutions
@@ -374,7 +505,9 @@ terminal presentation. Its colimit is the original functor value. Thus every
 component of the Kan unit is invertible. -/
 theorem zlIndMap_unit_isIso (F : C ⥤ B) :
     IsIso (Functor.leftKanExtensionUnit (Ind.yoneda (C := C)) (F ⋙ Ind.yoneda)) := by
-  sorry
+  exact (Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension
+    (Functor.leftKanExtension (Ind.yoneda (C := C)) (F ⋙ Ind.yoneda))
+    (Functor.leftKanExtensionUnit (Ind.yoneda (C := C)) (F ⋙ Ind.yoneda))).isIso_hom
 
 /-- The comparison with Yoneda is the inverse of the actual Kan unit.
 Source: SGA 4, XVII, sheaf resolutions
@@ -424,7 +557,25 @@ theorem zlSmallSquare_existsUnique {X₀ Y₀ : Over (Spec (.of D.k₀))}
         zlSmallFrobenius D l hl Ω Y₀ ⋙ zlSmallPull D l hl Ω f₀,
       ∀ K, (e.hom.app K).down.hom =
         (zlFrobeniusSquare D l hl Ω f₀).hom.app (AsSmall.down.obj K).obj := by
-  sorry
+  let e : zlSmallPull D l hl Ω f₀ ⋙ zlSmallFrobenius D l hl Ω X₀ ≅
+      zlSmallFrobenius D l hl Ω Y₀ ⋙ zlSmallPull D l hl Ω f₀ :=
+    NatIso.ofComponents (fun K ↦
+      AsSmall.up.mapIso ((sfCommonStageHeartProperty l
+        (D.geometricFiber X₀).left Ω).isoMk
+          ((zlFrobeniusSquare D l hl Ω f₀).app (AsSmall.down.obj K).obj)))
+      (fun a ↦ by
+        apply ULift.ext
+        apply ObjectProperty.hom_ext
+        exact (zlFrobeniusSquare D l hl Ω f₀).hom.naturality
+          (AsSmall.down.map a).hom)
+  refine ⟨e, fun _ ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ULift.ext
+  apply ObjectProperty.hom_ext
+  exact he' K
 
 /-- The normalized small-presentation square.
 Source: blueprint Frobenius equivariance
@@ -468,7 +619,17 @@ theorem zlIndWeilHeart_grothendieck (X₀ : Over (Spec (.of D.k₀)))
     Nonempty (Abelian (zlIndWeilHeart D l hl Ω X₀)) ∧
       (∀ a : Abelian (zlIndWeilHeart D l hl Ω X₀),
         @IsGrothendieckAbelian.{max (u + 2) v} _ _ a) := by
-  sorry
+  obtain ⟨hadd, hlim, hcolim, hequiv⟩ := zlIndFrobenius_exact D l hl Ω X₀
+  let := hadd
+  let := hlim
+  let := hcolim
+  let := hequiv
+  let a₀ : Abelian (zlIndWeilHeart D l hl Ω X₀) := inferInstance
+  have h : @IsGrothendieckAbelian.{max (u + 2) v} _ _ a₀ :=
+    IsoAlgebra.isGrothendieckAbelian (zlIndMap (zlSmallFrobenius D l hl Ω X₀))
+  refine ⟨⟨a₀⟩, fun a₁ ↦ ?_⟩
+  exact @IsGrothendieckAbelian.of_equivalence _ _ _ _ a₀ a₁ h
+    (CategoryTheory.Equivalence.refl)
 
 /-- The canonical abelian structure on equivariant ind-sheaves.
 Source: blueprint fixed-pair convention
@@ -486,6 +647,40 @@ instance zlIndWeilHeartGrothendieck (X₀ : Over (Spec (.of D.k₀)))
     IsGrothendieckAbelian.{max (u + 2) v} (zlIndWeilHeart D l hl Ω X₀) :=
   (zlIndWeilHeart_grothendieck D l hl Ω X₀).2 inferInstance
 
+private def zlWeilSmallPairsModel (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
+    sfCommonStageWeilSheaf D l hl X₀ Ω ⥤
+    IsoAlgebra (zlSmallFrobenius D l hl Ω X₀) :=
+  { obj := fun K ↦ IsoAlgebra.mk ⟨⟨K.obj.carrier, K.property⟩⟩
+      { hom := ⟨ObjectProperty.homMk K.obj.str.hom⟩
+        inv := ⟨ObjectProperty.homMk K.obj.str.inv⟩
+        hom_inv_id := by
+          apply ULift.ext
+          apply ObjectProperty.hom_ext
+          exact K.obj.str.hom_inv_id
+        inv_hom_id := by
+          apply ULift.ext
+          apply ObjectProperty.hom_ext
+          exact K.obj.str.inv_hom_id }
+    map := fun a ↦ ObjectProperty.homMk
+      { f := ⟨ObjectProperty.homMk a.hom.hom.f⟩
+        h := by
+          apply ULift.ext
+          apply ObjectProperty.hom_ext
+          exact a.hom.hom.h }
+    map_id := fun _ ↦ by
+      apply ObjectProperty.hom_ext
+      apply Algebra.Hom.ext
+      apply ULift.ext
+      apply ObjectProperty.hom_ext
+      rfl
+    map_comp := fun _ _ ↦ by
+      apply ObjectProperty.hom_ext
+      apply Algebra.Hom.ext
+      apply ULift.ext
+      apply ObjectProperty.hom_ext
+      rfl }
+
 /-- Passage to the small presentation with literally the same carrier and Weil arrow.
 Source: blueprint fixed-pair convention
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -501,7 +696,38 @@ theorem zlWeilSmallPairs_existsUnique (X₀ : Over (Spec (.of D.k₀)))
       (∀ K, HEq (F.obj K).str.hom.down.hom K.obj.str.hom) ∧
       ∀ (K L : sfCommonStageWeilSheaf D l hl X₀ Ω) (a : K ⟶ L),
         HEq (F.map a).hom.f.down.hom a.hom.hom.f := by
-  sorry
+  let F := zlWeilSmallPairsModel D l hl Ω X₀
+  refine ⟨F, ⟨fun _ ↦ rfl, fun _ ↦ HEq.rfl, fun _ _ _ ↦ HEq.rfl⟩, ?_⟩
+  intro F' hF'
+  have obj_ext (A B : IsoAlgebra (zlSmallFrobenius D l hl Ω X₀))
+      (h : A.carrier = B.carrier)
+      (hs : HEq A.str.hom.down.hom B.str.hom.down.hom) : A = B := by
+    rcases A with ⟨⟨a, sa⟩, ha⟩
+    rcases B with ⟨⟨b, sb⟩, hb⟩
+    change a = b at h
+    cases h
+    have hstr : sa = sb := by
+      apply ULift.ext
+      apply ObjectProperty.hom_ext
+      exact eq_of_heq hs
+    cases hstr
+    rfl
+  have ho : ∀ K, F'.obj K = F.obj K := fun K ↦
+    obj_ext (F'.obj K) (F.obj K) (hF'.1 K) (hF'.2.1 K)
+  apply CategoryTheory.Functor.hext ho
+  intro K L a
+  have hom_ext {A B A' B' : IsoAlgebra (zlSmallFrobenius D l hl Ω X₀)}
+      (hA : A = A') (hB : B = B') (f : A ⟶ B) (g : A' ⟶ B')
+      (h : HEq f.hom.f.down.hom g.hom.f.down.hom) : HEq f g := by
+    cases hA
+    cases hB
+    apply heq_of_eq
+    apply ObjectProperty.hom_ext
+    apply Algebra.Hom.ext
+    apply ULift.ext
+    apply ObjectProperty.hom_ext
+    exact eq_of_heq h
+  exact hom_ext (ho K) (ho L) (F'.map a) (F.map a) (hF'.2.2 K L a)
 
 /-- The literal small-presentation functor, with no changed Weil action.
 Source: blueprint fixed-pair convention
@@ -563,7 +789,9 @@ theorem zlIndWeilPush_additive {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
     (zlIndWeilPush D l hl Ω f₀).Additive := by
-  sorry
+  let := zlIndWeilPull_isLeftAdjoint D l hl Ω f₀
+  change (zlIndWeilPull D l hl Ω f₀).rightAdjoint.Additive
+  exact Functor.additive_of_preserves_binary_products _
 
 /-- Open inverse image has exact extension by zero as its left adjoint.
 Source: SGA 4, XVII, compact-support construction
@@ -632,7 +860,32 @@ theorem zlWeilIndEmbedding_full_faithful (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (zlWeilIndEmbedding D l hl Ω X₀).Full ∧
       (zlWeilIndEmbedding D l hl Ω X₀).Faithful := by
-  sorry
-
+  let F := zlWeilSmallPairsModel D l hl Ω X₀
+  have hF : zlWeilSmallPairs D l hl Ω X₀ = F :=
+    (zlWeilSmallPairs_existsUnique D l hl Ω X₀).unique
+      (zlWeilSmallPairs_existsUnique D l hl Ω X₀).exists.choose_spec
+      ⟨fun _ ↦ rfl, fun _ ↦ HEq.rfl, fun _ _ _ ↦ HEq.rfl⟩
+  let ff : F.FullyFaithful :=
+    { preimage := fun g ↦ ObjectProperty.homMk (ObjectProperty.homMk
+        { f := g.hom.f.down.hom
+          h := congrArg (fun f ↦ f.down.hom) g.hom.h })
+      map_preimage := fun g ↦ by
+        apply ObjectProperty.hom_ext
+        apply Algebra.Hom.ext
+        apply ULift.ext
+        apply ObjectProperty.hom_ext
+        rfl
+      preimage_map := fun a ↦ by
+        apply ObjectProperty.hom_ext
+        apply ObjectProperty.hom_ext
+        apply Algebra.Hom.ext
+        rfl }
+  let gg := IsoAlgebra.fullyFaithfulMapOfNatIso
+    (zlIndMapIso (zlSmallFrobenius D l hl Ω X₀))
+    (Functor.FullyFaithful.ofFullyFaithful Ind.yoneda)
+  change (zlWeilSmallPairs D l hl Ω X₀ ⋙ _).Full ∧
+    (zlWeilSmallPairs D l hl Ω X₀ ⋙ _).Faithful
+  rw [hF]
+  exact ⟨(ff.comp gg).full, (ff.comp gg).faithful⟩
 
 end WeilConjectures
