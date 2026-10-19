@@ -18,3 +18,8 @@ Workers and reviewers: if one of your modules is listed here, this is why it cha
 
 ## Green-fix pass after the sync (follow-up commits)
 - Take-out batch 20261019T034248 (abandoned; red since 12:26): restored `@[reducible]` on Sheaf.NumberTheory.Padics.CoefficientExtension.coefficientExtensionRing, which H2 (Sheaf.Paper.DirectImageTorAmplitude, landing 20261019T034300-L-417146) had removed. Its two named instances (CommRing, Algebra) stay. The defs that failed without it are DerivedNakayamaResolution.quotientRingSheaf/quotientModule, CompactSupportCoefficientChange.finiteReductionCompactSupportComparison and ExceptionalAdjointAdmissibility.ExceptionalFiniteReductionsCompatible, plus the proof of IntegersProfiniteTower.coefficientExtension_integers_profinite_tower.
+- Sorried proofs (statements unchanged; each is now a stage-3 item):
+  - Sheaf.AlgebraicGeometry.AffineSupportVanishing.affine_support_vanishing: used the private lemma Etale.residueFieldHomOfOver_eq, which upstream removed from Sites/SupportDimension.
+  - Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange.smooth_exceptional_base_change: used isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension, which upstream #1549 replaced (SmoothDuality/BaseChange*).
+  - Sheaf.Paper.PurEtaleLisseStratumCompact.isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf: DerivedCategory.braidedCategory is no longer visible (the primed instance is in Monoidal.Instances.DerivedCategoryBraided).
+- Sheaf.Paper.CondensedCompactSupportProjection: import Compactification.RefinementCategory (the Refinement structure moved there upstream).

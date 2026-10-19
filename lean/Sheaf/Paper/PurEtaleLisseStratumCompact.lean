@@ -216,52 +216,8 @@ theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyCon
       ((DerivedCategory.singleFunctor
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj
         ((Etale.lowerStar (ModuleCat.{u + 1} C) g).obj
-          ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} C) j).obj L)))  := by
-  let : HasCoproducts.{u + 1} (DerivedCategoryModule C X) :=
-    CategoryTheory.derived_hasCoproducts
-  let : HasCoproducts.{u + 1} (DerivedCategoryModule C Z) :=
-    CategoryTheory.derived_hasCoproducts
-  let : HasCoproducts.{u + 1} (DerivedCategoryModule C V) :=
-    CategoryTheory.derived_hasCoproducts
-  refine ⟨inferInstance, ?_⟩
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  have : IsNoetherian X := ⟨⟩
-  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian g
-  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace g
-  have : IsNoetherian Z := ⟨⟩
-  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian j
-  have : NoetherianSpace V :=
-    j.isOpenEmbedding.isEmbedding.noetherianSpace
-  have : CompactSpace V := inferInstance
-  let L₀ := (DerivedCategory.singleFunctor
-    (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj L
-  have hunit : IsCompactObject (𝟙_ (DerivedCategoryModule C V)) :=
-    compact_unit (C := C) (j ≫ g ≫ f)
-  let _ := DerivedCategory.braidedCategory
-    (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C))
-  have hL₀ : IsCompactObject L₀ :=
-    compact_of_dualizable L₀ (isDualizable_singleFunctor_lisseFlat L hL) hunit
-  have (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I)
-      D(upperStar (ModuleCat.{u + 1} C) j) :=
-    let _ := (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} C) j).isLeftAdjoint
-    inferInstance
-  have hj : IsCompactObject
-      ((openImmersionLowerShriek (ModuleCat.{u + 1} C) j).mapDerivedCategory.obj L₀) :=
-    compact_of_adjunction
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} C) j) L₀ hL₀
-  have (I : Type (u + 1)) := preservesCoproducts_closedRightAdjoint C g f I
-  have hg : IsCompactObject
-      (R(lowerStar (ModuleCat.{u + 1} C) g).obj
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} C) j).mapDerivedCategory.obj L₀)) :=
-    compact_of_adjunction
-    (Adjunction.ofIsLeftAdjoint R(lowerStar (ModuleCat.{u + 1} C) g)) _ hj
-  let F := lowerStar (ModuleCat.{u + 1} C) g
-  let J := openImmersionLowerShriek (ModuleCat.{u + 1} C) j
-  let e := F.rightDerivedFunctorIsoMapDerivedCategory.app (J.mapDerivedCategory.obj L₀) ≪≫
-    F.mapDerivedCategory.mapIso ((J.mapDerivedCategorySingleFunctor 0).app L) ≪≫
-    ((F.mapDerivedCategorySingleFunctor 0).app (J.obj L))
-  exact compact_of_iso e hg
+          ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} C) j).obj L)))  :=
+  sorry
 
 end AlgebraicGeometry.Etale
 

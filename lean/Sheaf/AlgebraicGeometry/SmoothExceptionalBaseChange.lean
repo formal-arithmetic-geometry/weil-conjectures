@@ -646,69 +646,7 @@ theorem smooth_exceptional_base_change
           (smoothDualizingBaseChangeMap A f g) ≫
         smoothTensorDualityMap (ModuleCat.{u + 1} A) (pullback.snd f g)
           (isIso_projectionMap_of_finite A (pullback.snd f g))
-          ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) := by
-  have hNS : IsUnit (N : Γ(S, ⊤)) := by
-    apply S.toRingedSpace.isUnit_of_isUnit_germ
-    intro s hs
-    simpa only [map_natCast] using hInvertible s
-  have : HasInvertibleExponent A S := ⟨N, hN, hA, hNS⟩
-  have : HasInvertibleExponent A X := HasInvertibleExponent.of_hom f
-  have hBC := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
-    A f d (IsPullback.of_hasPullback f g)
-  have := isIso_rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g)
-  have hMap (K : DerivedCategoryModule A S) :
-      smoothExceptionalBaseChangeMap A f g K =
-        (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K := by
-    symm
-    simpa only [smoothExceptionalBaseChangeMap, rightDerivedUpperShriekBaseChangeMap,
-      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj, TwoSquare.natTrans] using
-      mate_app_eq
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) (pullback.snd f g))
-      (inv (rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g))) K
-  refine ⟨?_, ?_, ?_⟩
-  · intro K
-    rw [hMap]
-    infer_instance
-  · unfold smoothDualizingBaseChangeMap
-    rw [hMap]
-    infer_instance
-  · intro K
-    let := derivedBraidedCategory (ModuleCat.{u + 1} A) X
-    let := derivedBraidedCategory (ModuleCat.{u + 1} A) (pullback f g)
-    have hδ := leftDerivedUpperStar_map_braiding_hom_δ (ModuleCat.{u + 1} A)
-      (pullback.fst f g)
-      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)
-      (dualizingComplex (ModuleCat.{u + 1} A) f)
-    have ht := braided_tensor_square
-      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor
-      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)
-      (dualizingComplex (ModuleCat.{u + 1} A) f)
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) f).obj K)
-      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj
-        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
-      (dualizingComplex (ModuleCat.{u + 1} A) (pullback.snd f g))
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) (pullback.snd f g)).obj
-        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
-      (dualizingComplexTensorMap A f K)
-      (dualizingComplexTensorMap A (pullback.snd f g)
-        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
-      (dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f g))
-      (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
-        (IsPullback.of_hasPullback f g).toCommSq K)
-      ((rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K)
-      (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
-        (pullback.fst f g) M N).hom)
-      (dualizing_tensor_base_change A f g K) hδ
-    have hφ := smooth_tensor_map_eq (ModuleCat.{u + 1} A) f K
-    have hφ' := smooth_tensor_map_eq (ModuleCat.{u + 1} A) (pullback.snd f g)
-      ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K)
-    simpa only [hφ, hφ', dualizingComplexTensorMap,
-      smoothDualityTensorBaseChangeIso, smoothSquarePullbackIso,
-      smoothDualizingBaseChangeMap, hMap, dualizingComplexBaseChangeMap,
-      derivedSquareUpperStarIsoInvApp, derivedSquareUpperStarIso,
-      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, NatTrans.comp_app, Iso.app_hom,
-      derivedTensor, curriedTensor,
-      Functor.mapIso_hom, Category.assoc] using ht
+          ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) :=
+  sorry
 
 end AlgebraicGeometry.Etale

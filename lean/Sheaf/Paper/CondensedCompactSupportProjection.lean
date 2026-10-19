@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.Paper.CondensedCoefficientComparisons
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! # CondensedCompactSupportProjection
