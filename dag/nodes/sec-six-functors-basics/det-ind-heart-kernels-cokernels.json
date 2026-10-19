@@ -26,14 +26,12 @@
  ],
  "proof": [
   {
-   "text": "Ambient category and size. Write $\\mathcal M=\\Mod(X_{\\mathrm{proét}},\\Lambda)$ and $\\mathcal A=\\Cons(X,\\Lambda)$. Use the small-site/universe convention of [def-weil-size-convention]. The coefficient $\\Lambda_X$ is a commutative ring object by [sk-def-sfb-pulled-back-coefficients], and $\\mathcal M$ means its internal modules [sk-def-sfb-module-objects]. The sheafified tensor and monoidal sheafification are those of [sk-def-sfb-sheaf-tensor]. Thus [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies $\\mathcal M$ with sectionwise module sheaves over the reconstructed ring sheaf, without changing underlying abelian sheaves. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to this ring sheaf on the small site. It gives an abelian category with all small colimits and exact small filtered colimits. These properties transport across the equivalence: limits and colimits are characterized by their Hom universal properties, and kernels, cokernels and exactness are consequently preserved. No discreteness or finiteness of the coefficient ring is assumed here.",
+   "text": "Use the existing Grothendieck abelian instance for internal modules, lem-sfb-modobj-grothendieck, specialized to the canonical pulled-back coefficient. It supplies the ambient abelian structure and small exact filtered colimits.",
    "uses": [
-    "def-weil-size-convention",
+    "lem-sfb-modobj-grothendieck",
     "sk-def-sfb-pulled-back-coefficients",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-ring-sheaves-grothendieck"
+    "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
@@ -42,10 +40,11 @@
    }
   },
   {
-   "text": "Smallness and filteredness of $P_f$. By [sk-lem-coefficient-heart], $\\mathcal A$ is essentially small and abelian, and its inclusion into $\\mathcal M$ is exact. Choose representatives in a small skeleton. Objects of $P_f$ are tuples $(C,D,v,c,d)$ with $dv=fc$; morphisms to $(\\widetilde C,\\widetilde D,\\widetilde v,\\widetilde c,\\widetilde d)$ are pairs $(a,b)$ with $\\widetilde v a=bv$, $\\widetilde c a=c$, $\\widetilde d b=d$. All choices of $v,c,d$ are sets, so $P_f$ is essentially small too. It contains $(0,0,0,0,0)$. Two objects map to their componentwise direct sum, with maps to $B,B'$ given by the two pairs of structure maps. For parallel arrows $(a,b),(a',b'):p_1\\rightrightarrows p_2$, let $q_C:C_2\\to\\coker(a-a')$ and $q_D:D_2\\to\\coker(b-b')$. The map $q_Dv_2$ kills $a-a'$ because $v_2(a-a')=(b-b')v_1$, so it induces $\\bar v$ between these cokernels. Also $c_2(a-a')=0$ and $d_2(b-b')=0$, so $c_2,d_2$ descend to $\\bar c,\\bar d$, and $\\bar d\\bar v=f\\bar c$ follows after precomposing the epimorphism $q_C$. Both cokernels are constructible; exactness of the inclusion makes them the ambient cokernels as well. Thus $(q_C,q_D)$ equalizes the parallel arrows in $P_f$. These are exactly the nonemptiness, common-successor and parallel-equalization conditions for filteredness [def-weil-pbc-category-colimit]. All colimits below use the resulting small skeletons.",
+   "text": "The closure theorem gives an abelian constructible category whose inclusion preserves finite colimits, and the smallness theorem gives essential smallness. Map arrows preserves finite colimits componentwise. Thus the costructured arrow category has finite colimits and is filtered (IsFiltered.of_hasFiniteColimits). Essential smallness follows by passing Arrow to the small constructible model and the Mathlib smallness instance for CostructuredArrow.",
    "uses": [
-    "sk-lem-coefficient-heart",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "det-lem-coefficient-heart-closure",
+    "det-lem-coefficient-heart-small"
    ],
    "elementary": false,
    "source": {
@@ -84,10 +83,10 @@
    }
   },
   {
-   "text": "Kernels, cokernels and ind-constructibility. For each $p\\in P_f$, put $K_p=\\ker v_p$, $I_p=\\operatorname{im}v_p$ and $Q_p=\\coker v_p$ in $\\mathcal M$. A commutative square induces maps on all three objects by the kernel, image and cokernel universal properties, giving diagrams of short exact sequences $0\\to K_p\\to C_p\\to I_p\\to0$ and $0\\to I_p\\to D_p\\to Q_p\\to0$. Step 1 applies because the index category is small and filtered by Step 2. Exactness after taking colimits makes $\\varinjlim I_p\\to B'$ monic and $B\\to\\varinjlim I_p$ epic, with composite $f$ by Step 5. Hence the first sequence identifies $\\varinjlim K_p$ with $\\ker f$, and the second identifies $\\varinjlim Q_p$ with $\\coker f$. More explicitly, write $K=\\varinjlim K_p$ and $Q=\\varinjlim Q_p$. The map $K\\to B$ just obtained restricts on $K_p$ to $K_p\\hookrightarrow C_p\\xrightarrow{c_p}B$, and it is a kernel of $f$; its unique isomorphism to $\\ker f$ is therefore the canonical kernel comparison. If $q:B'\\to Q$ is the cokernel just obtained and $\\rho_p:Q_p\\to Q$ its colimit legs, then $q d_p=\\rho_p(D_p\\twoheadrightarrow Q_p)$. Thus the isomorphism $Q\\to\\coker f$ restricts on $Q_p$ to the unique map whose composite with $D_p\\twoheadrightarrow Q_p$ is $D_p\\xrightarrow{d_p}B'\\twoheadrightarrow\\coker f$; it is the canonical cokernel comparison. By [sk-lem-coefficient-heart], each $K_p,Q_p$ is constructible and the constructible and ambient kernels/cokernels coincide. Both displayed colimits are therefore filtered colimits of constructible sheaves. They belong to $\\IndCons(X,\\Lambda)$ by its definition, as recorded in [det-ind-heart-full-faithfulness](2).",
+   "text": "Apply lem-sfb-arrow-exact-colimits to the essentially small filtered square category, transporting exactness from its small model. The mapped canonical arrow cocones under ker and coker are colimits. Their diagrams consist of constructible objects by det-lem-coefficient-heart-closure. ObjectProperty.of_essentiallySmall_index reindexes each specified colimit presentation over the small model and proves ind-constructibility directly from its definition.",
    "uses": [
-    "sk-lem-coefficient-heart",
-    "det-ind-heart-full-faithfulness"
+    "det-lem-coefficient-heart-closure",
+    "lem-sfb-arrow-exact-colimits"
    ],
    "elementary": false,
    "source": {
@@ -97,21 +96,20 @@
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
+  "lem-sfb-modobj-grothendieck",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "sk-lem-coefficient-heart",
+  "def-weil-size-convention",
   "def-weil-pbc-category-colimit",
+  "det-lem-coefficient-heart-closure",
+  "det-lem-coefficient-heart-small",
   "det-ind-heart-canonical-presentation",
-  "det-ind-heart-full-faithfulness"
+  "lem-sfb-arrow-exact-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
-  "place": "All four proof paragraphs, with initial comma objects replacing the lift-choice argument and explicit ambient exactness citations"
+  "place": "Six-step argument implemented by explicit projection finality, comma finite colimits, canonical presentations and the generic exact-colimit lemma."
  },
  "mathlib_searches": [
   {
@@ -208,9 +206,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -294,5 +290,15 @@
    "det-ind-heart-canonical-presentation",
    "def-weil-pbc-category-colimit"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261019T005342-L-2755976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
