@@ -22,9 +22,146 @@
   "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply clause (1) of [lem-per-normal-modification-codimension-one] to $f$ and $g$. Each target is Noetherian, each source is reduced, and each map is birational because it is dominant between integral schemes and identifies their generic local fields. Intersect the resulting isomorphism opens to get an open $U\\subset X$ containing the generic point, with $Y_U=X'_U=U$. By the fibre-product universal property [def-pc-fibre-product], $P_U=U$. The closure of its generic point is irreducible; its reduced induced scheme $W$ is integral [def-pc-integral-scheme], and $W_U=U$. Thus the projections $W\\to Y$, $W\\to X'$ and $W\\to X$ identify generic local fields with $K$ [def-sc-function-field].",
+   "uses": [
+    "lem-per-normal-modification-codimension-one",
+    "def-pc-fibre-product",
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, normalized dominating component in the third proof paragraph; Tag 0BFP (1)"
+   }
+  },
+  {
+   "text": "Both projections of $P$ are proper by [lem-weil-pbc-proper-base-change]. Their restrictions to the closed subscheme $W$ are proper by [lem-weil-pbc-closed-immersion-proper], and $W\\to X$ is proper by [lem-weil-pbc-proper-composition]. Apply [lem-per-normal-surface-exceptional-curves] to this last morphism: its target is the given normal integral excellent Noetherian surface, its source $W$ is integral, and its function-field map is an isomorphism by Step 1. It gives finiteness and properness of $\\nu$, and normality, integrality, excellence, Noetherianness and dimension $2$ of $Y'$. Composing $\\nu$ with $W\\to Y$ and $W\\to X'$ gives proper $p,f'$ by [lem-weil-pbc-proper-composition]. Normalization in $K$ preserves that generic field, as also asserted by [lem-per-normal-surface-exceptional-curves]; hence both projections are birational, with the specified identifications in $K$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-per-normal-surface-exceptional-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, first and third proof paragraphs (normalization and proper projections)"
+   }
+  },
+  {
+   "text": "Fix $C'\\in B(f')$ and put $x'=f'(C')$. Apply [lem-per-normal-surface-exceptional-curves] to $f':Y'\\to X'$; its normalization is an isomorphism since $Y'$ is normal. Therefore $x'$ is closed and $\\operatorname{trdeg}_{\\kappa(x')}\\kappa(\\eta_{C'})=1$. Put $x=g(x')$. Properness makes $g$ closed [pqf-lem-proper-basic], so $x$ is closed. The fibre $X'_x$ is of finite type over $\\kappa(x)$ by [lem-weil-pbc-proper-base-change] and [pqf-lem-proper-basic]. The point $x'$ is closed in this fibre, so [lem-kun-closed-point-field] gives $[\\kappa(x'):\\kappa(x)]<\\infty$. The commuting projections give $fp(C')=\\{x\\}$.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves",
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-proper-base-change",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, third proof paragraph; Morphisms Tag 01TB (lemma-closed-point-fibre-locally-finite-type) for residue fields"
+   }
+  },
+  {
+   "text": "Suppose $p(C')=\\{y\\}$. Since $p$ is closed [pqf-lem-proper-basic], $y$ is closed in $Y$. Applying [lem-kun-closed-point-field] to the proper fibre $Y_x$ (proper by [lem-weil-pbc-proper-base-change], finite type by [pqf-lem-proper-basic]) gives $[\\kappa(y):\\kappa(x)]<\\infty$. Write $z=\\eta_{C'}$ and $w=\\nu(z)\\in W\\subset P$. The residue-field point of $w$ lies over $(y,x')$. By [lem-weil-pbc-fibre-product-affine-spectra], the scheme of pairs of residue-field points is $Q=\\operatorname{Spec}(\\kappa(y)\\otimes_{\\kappa(x)}\\kappa(x'))$. Its points correspond precisely to points of $P$ over $(y,x')$, with the same residue fields (and the closed immersion $W\\subset P$ does not change the residue field [def-weil-closed-immersion]): on affine charts this is localization at the two primes and quotient by them. This last description follows directly from the displayed tensor-product model. The algebra defining $Q$ is finite-dimensional over $\\kappa(x)$, generated as a vector space by tensors of members of finite bases. Its quotient by any prime is a finite-dimensional domain, hence a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. Consequently $\\kappa(w)$ is finite over $\\kappa(x)$.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, third proof paragraph: why a contracted curve cannot map to a point under both projections"
+   }
+  },
+  {
+   "text": "For completeness compute the residue extension for the finite map $\\nu$ at $z$ rather than assuming that an arbitrary morphism has finite residue fields. Take an affine neighbourhood $\\operatorname{Spec}A\\subset W$ of $w$. Its inverse image is $\\operatorname{Spec}B$ with $B$ finite over $A$ [def-weil-finite-integral-morphism]. If $\\mathfrak q\\subset B$ represents $z$ and $\\mathfrak p=\\mathfrak q\\cap A$, the algebra $D=B\\otimes_A\\kappa(\\mathfrak p)$ is spanned over $\\kappa(\\mathfrak p)$ by the images of finite $A$-module generators of $B$. Its quotient by the prime representing $z$ is a finite-dimensional domain, hence a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. This quotient is therefore already its own fraction field $\\kappa(z)$, proving $[\\kappa(z):\\kappa(w)]<\\infty$. Under the supposition in Step 4 it follows that $\\kappa(z)$ is finite over $\\kappa(x)$, hence over its intermediate subfield $\\kappa(x')$. Its transcendence degree over $\\kappa(x')$ is then zero, contradicting the value $1$ from Step 3. Thus $p(C')$ is not a point. This computation is just finite generation, base extension and the cited field criterion; it does not require a further geometric comparison lemma.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, third proof paragraph: finiteness of normalization excludes simultaneous contraction"
+   }
+  },
+  {
+   "text": "Let $C=p(C')$ with its reduced induced structure. Properness of $p$ makes this an irreducible closed subset of $Y$ [pqf-lem-proper-basic]. It is proper since $f(C)=\\{x\\}$ whereas $f$ is dominant onto a two-dimensional scheme. From [def-kun-topological-krull-dimension], every chain of irreducible closed subsets in $C$ can be prolonged by $Y$, so $\\dim C\\leq1$. Step 5 excludes a singleton. An irreducible zero-dimensional closed subset of a scheme is a singleton: if it contained a different point from its generic point, that point's closure would be a nonempty proper irreducible closed subset. Existence and uniqueness of that generic point is [lem-sc-scheme-sober]. Thus $\\dim C=1$. Its reduced irreducible structure is integral [def-pc-integral-scheme], so $C\\in B(f)$. The identities $x=f(C)$ and $g(x')=x$, and the closedness and residue-field finiteness demanded in the statement, are exactly those established in Step 3.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-scheme-sober",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, third proof paragraph: the reduced image belongs to BadCurves(f)"
+   }
+  },
+  {
+   "text": "Apply [lem-per-normal-surface-exceptional-curves] to $f:Y\\to X$. Because $Y$ is normal its normalization is an isomorphism, so for the curve $C\\in B(f)$ it supplies that $\\mathcal O_{Y,\\eta_C}$ is a discrete valuation ring [def-sc-discrete-valuation-ring]. The point $\\eta_C$ has codimension one in the sense of [lem-per-normal-modification-codimension-one], namely $\\dim\\mathcal O_{Y,\\eta_C}=1$ [def-weil-pbc-krull-dimension-ring]: in a local principal ideal domain that is not a field, $0$ is prime, every nonzero prime is maximal and hence equals $\\mathfrak m\\neq0$, so the longest chain of primes is $0\\subsetneq\\mathfrak m$. Apply clause (2) of [lem-per-normal-modification-codimension-one] to $p:Y'\\to Y$: $Y$ is Noetherian, and $p$ is proper birational with reduced source by Step 2. There is an open neighbourhood $V_C$ of $\\eta_C$ such that $p^{-1}(V_C)\\to V_C$ is an isomorphism.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-per-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, third proof paragraph, codimension-one isomorphism; Tag 0BFP (2)"
+   }
+  },
+  {
+   "text": "The continuous closed map $p$ sends the closure of $\\eta_{C'}$ to the closure of its image, so $p(\\eta_{C'})$ is the unique generic point $\\eta_C$ [pqf-lem-proper-basic, def-sc-generic-point, lem-sc-scheme-sober]. Step 7 gives exactly one point above $\\eta_C$. Consequently any two curves in $B(f')$ with image $C$ have the same generic point, hence the same underlying closure and the same reduced induced closed subscheme. This proves injectivity. The same open isomorphism identifies their generic local rings by the actual structural stalk map. Its map at the generic point of the whole integral surface is the identity of the already identified field $K$ (Step 2); taking germs embeds both local rings into this $K$ [def-sc-function-field]. Thus the identification is the equality $\\mathcal O_{Y,\\eta_C}=\\mathcal O_{Y',\\eta_{C'}}\\subset K$ required in the statement.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "def-sc-generic-point",
+    "lem-sc-scheme-sober",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, displayed injection BadCurves(f′) to BadCurves(f), and equality of valuation rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-function-field",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-kun-closed-point-field",
+  "lem-per-normal-modification-codimension-one",
+  "lem-per-normal-surface-exceptional-curves",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "pqf-lem-proper-basic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), third proof paragraph; finite-residue-field details expanded using Morphisms Tag 01TB and affine tensor products"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -53,10 +190,24 @@
    "results": "0 hits: none; ; logged digest 4f53cda18c2baa0c",
    "date": "2026-10-19",
    "verdict": "no match: normalizationPullback compares relative normalization with base change (an isomorphism for smooth maps); it does not assert a birational dominating-component construction or an injection of exceptional curves; the DVR hits only define/transport DVR structures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational normalized dominating graph of normal surfaces injects contracted curves into those of either projection",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; logged digest c283132c842774a9",
+   "date": "2026-10-19",
+   "verdict": "no match: these hits concern relative normalization or structural stalk maps, not exceptional curves or a proper birational surface graph"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transforms of exceptional curves under proper birational maps of normal surfaces have the same generic local ring",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso; logged digest 57ae13f225487fe2",
+   "date": "2026-10-19",
+   "verdict": "no match: these hits concern relative normalization or structural stalk maps, not exceptional curves or a proper birational surface graph"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-normalized-domination",
@@ -84,5 +235,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normalized-surface-graph-exceptional-injection",
+  "worker": "stage1",
+  "summary": "Expanded the normalized dominating graph construction and proved the exceptional-curve injection using existing normal-surface and codimension-one tools. The double-contraction obstruction is proved by explicit residue-field tensor and finite-algebra calculations. Checked closed contraction points and finiteness of their residue extensions. No new nodes, no changed statement, no Lean attachment.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BGM, resolve-lemma-existence-implies-existence-by-normalized-blowing-ups; normalized blowups are resolve-definition-normalized-blowup (Tag 0BBS). Supporting Tag 0BGM proof, complete case: the first normalized tower dominating the given regular model. Technical sublemma: Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof third paragraph and its injection BadCurves(f′) to BadCurves(f). The construction is the normalization of the reduced component dominating X, to make the asserted birational projections valid. It works for an arbitrary proper birational g between normal excellent surfaces; no point-blowup or termination assertion is included.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic proper-morphism stability used for the two projections and the fibres; no unit-specific theorem replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic properness of restriction to the closed dominating component W."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic composition of the normalization and proper projections."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic closedness and finite-type consequences of properness."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The field-valued Nullstellensatz applied to closed points of proper fibres over arbitrary residue fields, with no separable-closure assumption."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine tensor-product model for the residue-field pair in P."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic finite-dimensional algebra criterion for the residue-field computations."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Unique generic points of irreducible closed subsets, used to identify curves by their generic points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-composition",
+  "pqf-lem-proper-basic",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-17932794f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-17932794f (reviewer sub-agent of L); spot-checked: Read the item's statement, which is unchanged from base, and all 8 steps against every cited statement, Stacks 0BBT (third proof paragraph) and 0BFP (all four clauses). The mathematics is correct. Steps 1-2: the codim-one node, clause (1), applied to f and g gives an isomorphism open U with P_U = U, so the dominating component W is integral with function field K. lem-per-normal-surface-exceptional-curves applies to W->X, with no dim W = 2 assumed, and gives finite nu, a normal excellent 2-dimensional Y' and proper birational p, f'. Steps 3-5: x' and x are closed and kappa(x') is finite over kappa(x) by lem-kun-closed-point-field (a) on the finite-type fibre. If p(C') were a point, the residue fields of the tensor-product model and of the finite map nu would make kappa(eta_C') finite over kappa(x'), contradicting trdeg 1. Step 6: C is in B(f), using chain dimension and sobriety. Step 8: closed map plus a single point in the fibre gives injectivity and equality of local rings inside K. Edge cases checked: g = id, f = id, blowing up a point that f does not contract. The parent's uses all match the statement. No new nodes; the 0BBT/BadCurves grep finds no duplicate. FIX (C4/C1): Step 7 proved topological codimension one, but the codim-one node, clause (2), needs dim O_{Y,eta_C} = 1, and nothing cited links the two. Rewrote Step 7 to read dim = 1 off the DVR clause (local PID, not a field, so its primes are 0 and m), citing def-sc-discrete-valuation-ring and def-weil-pbc-krull-dimension-ring, and recomputed proof_deps. Accepted tool_uses (generic scheme theory): lem-kun-closed-point-field, lem-sc-scheme-sober, pqf-lem-proper-basic, lem-weil-pbc-proper-base-change, -proper-composition, -closed-immersion-proper, lem-weil-pbc-fibre-product-affine-spectra, -finite-dimensional-domain-is-field. Batch-5 flag (via lem-per-normal-modification-codimension-one): the item's whole closure reaches only three trf/pod nodes. They are lem-trf-proper-finite-fibre-finite-near (Stacks 02UP), lem-trf-affine-dimension-inequality (commutative algebra) and lem-pod-separated-finite-type-base-change. All three are general scheme theory or algebra and no step of the trace formula or Poincare duality proof; no trace-transport, batch-4 target or assume node is reached. Accepted. No SGA cited.; 1 file(s) fixed by the reviewer"
  }
 }
