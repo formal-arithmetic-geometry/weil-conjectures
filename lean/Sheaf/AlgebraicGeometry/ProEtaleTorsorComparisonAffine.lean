@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
-public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover

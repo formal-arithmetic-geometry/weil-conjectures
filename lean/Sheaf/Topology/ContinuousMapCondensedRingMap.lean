@@ -6,7 +6,6 @@ Authors: SHEAF group Q116
 module
 
 public import Sheaf.Topology.ContinuousMapCondensedRing
-import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 
 /-!
 # Functoriality of continuous-map condensed rings

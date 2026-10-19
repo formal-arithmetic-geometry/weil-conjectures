@@ -6,13 +6,7 @@ Authors: SHEAF group Q52
 module
 
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-! # Algebraic dualizing complexes and local normalization
 

@@ -6,17 +6,9 @@ Authors: SHEAF group Q35
 module
 
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
-public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
-import Sheaf.Paper.IntegralResidueDerivedMonoidal
 import Mathlib.Analysis.Normed.Field.TransferInstance
-import Mathlib.Algebra.Algebra.TransferInstance
-import Mathlib.RingTheory.Finiteness.Small
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Internal Hom finiteness for finite coefficient extensions in the scheme universe
