@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Sheaf.Paper.FourierAdicArtinSchreier
 public import Sheaf.Paper.CommonStageWeilShriek
 public import Sheaf.Paper.CompletedPullbackTensorComparison
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 
 /-! # Fourier transform on the recorded adic fixed-pair category
 
@@ -42,7 +44,19 @@ Proof: the cardinality q=p^a fixes characteristic p on k0. Since l differs from 
 l is a unit in k0, hence in every residue-field k0-algebra of the model. -/
 theorem fourierModelPrime_isUnit (X₀ : Over (Spec (.of F.field.k₀))) :
     ∀ x : X₀.left, IsUnit (F.coefficients.l : X₀.left.residueField x) := by
-  sorry
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  let : Fact F.field.p.Prime := ⟨F.field.prime⟩
+  have : CharP F.field.k₀ F.field.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      F.field.card_base.trans F.field.cardinality_eq)
+  have hunit : IsUnit (F.coefficients.l : F.field.k₀) :=
+    (CharP.cast_ne_zero_of_ne_of_prime F.field.k₀
+      (Fact.out : F.coefficients.l.Prime) F.coefficients.different.symm).isUnit
+  intro x
+  simpa only [map_natCast] using hunit.map
+    ((Scheme.ΓSpecIso (CommRingCat.of F.field.k₀)).inv ≫ X₀.hom.appTop ≫
+      X₀.left.Γevaluation x).hom
 
 /-- The inherited residue-field unit, adding no hypothesis.
 Source: sk-def-ft, coefficient convention (blueprint: def-fd-transform). -/
@@ -67,7 +81,9 @@ theorem fourierModelProjection_frobenius (X₀ : Over (Spec (.of F.field.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (F.field.geometricFrobenius X₀).hom ≫ fourierModelProjection F X₀ =
       fourierModelProjection F X₀ := by
-  sorry
+  let := Fintype.ofFinite F.field.k₀
+  exact (F.field.galoisMap_projections X₀.hom
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic F.field.k₀ F.field.k)).1
 
 /-- The canonical Weil pair attached to a complex defined on the finite-field model.
 Its structure is the inverse normalized composition comparison followed by the
@@ -142,7 +158,19 @@ theorem fourierTensorFrobenius_naturality (X₀ : Over (Spec (.of F.field.k₀))
         (sfCommonStageWeilFrobeniusPullback F.field F.coefficients.l
           F.coefficients.different X₀ F.coefficients.Qbar ⋙
             fourierTensorUnderlying F X₀ N).map f := by
-  sorry
+  let := sfWeilPrimeInvertible F.field F.coefficients.l F.coefficients.different X₀
+  obtain ⟨e, he⟩ := (derivedPullbackTensorIso F.coefficients.l (fourierCoefficient F)
+    (F.field.geometricFrobenius X₀).hom 0 F.coefficients.Qbar).2.2.2.2.2.2.2.1
+  have h := e.hom.naturality (Prod.mkHom f (𝟙 N.carrier))
+  change _ ≫ (e.app (Q, N.carrier)).hom = (e.app (P, N.carrier)).hom ≫ _ at h
+  rw [he Q N.carrier, he P N.carrier] at h
+  dsimp [fourierTensorUnderlying, fourierTensorFrobeniusComponent,
+    sfCommonStageWeilFrobeniusPullback] at h ⊢
+  rw [← Category.assoc, h]
+  simp only [Category.assoc, ← Functor.map_comp]
+  congr 1
+  congr 1
+  ext <;> simp
 
 /-- The normalized natural tensor/Frobenius isomorphism.
 Source: sk-def-ft (blueprint: def-fd-transform). -/
@@ -220,21 +248,24 @@ Source: sk-def-ft (blueprint: def-fd-transform).
 Proof: affine space in finitely many variables is finite type over its base field. -/
 @[instance] theorem fourierAffineModel_finiteType (n : Type u) [Finite n] :
     LocallyOfFiniteType (fourierAffineModel F n).hom := by
-  sorry
+  dsimp [fourierAffineModel]
+  infer_instance
 
 /-- The affine model is quasi-compact over its field.
 Source: sk-def-ft (blueprint: def-fd-transform).
 Proof: its structure morphism is affine, hence quasi-compact. -/
 @[instance] theorem fourierAffineModel_quasiCompact (n : Type u) :
     QuasiCompact (fourierAffineModel F n).hom := by
-  sorry
+  dsimp [fourierAffineModel]
+  infer_instance
 
 /-- The affine model is separated over its field.
 Source: sk-def-ft (blueprint: def-fd-transform).
 Proof: affine morphisms are separated. -/
 @[instance] theorem fourierAffineModel_separated (n : Type u) :
     IsSeparated (fourierAffineModel F n).hom := by
-  sorry
+  dsimp [fourierAffineModel]
+  infer_instance
 
 /-- The product of the model with its coordinate dual, over k0.
 Source: sk-def-ft, standard evaluation pairing (blueprint: def-fd-transform). -/
@@ -250,7 +281,18 @@ theorem fourierSquareModel_geometry (n : Type u) [Finite n] :
     LocallyOfFiniteType (fourierSquareModel F n).hom ∧
       QuasiCompact (fourierSquareModel F n).hom ∧
       IsNoetherian (fourierSquareModel F n).left := by
-  sorry
+  have hft : LocallyOfFiniteType (fourierSquareModel F n).hom := by
+    dsimp [fourierSquareModel]
+    infer_instance
+  have hqc : QuasiCompact (fourierSquareModel F n).hom := by
+    dsimp [fourierSquareModel]
+    infer_instance
+  let : IsLocallyNoetherian (fourierSquareModel F n).left :=
+    LocallyOfFiniteType.isLocallyNoetherian (fourierSquareModel F n).hom
+  let : QuasiCompact (fourierSquareModel F n).hom := hqc
+  let : CompactSpace (fourierSquareModel F n).left :=
+    QuasiCompact.compactSpace_of_compactSpace (fourierSquareModel F n).hom
+  exact ⟨hft, hqc, ⟨⟩⟩
 
 /-- The standard pairing scheme has characteristic p, including in rank zero.
 Source: sk-def-ft, characteristic-p base (blueprint: def-fd-transform).
@@ -258,7 +300,19 @@ Proof: k0 has cardinality p^a, with a positive, hence characteristic p. Global
 functions on its affine product are a nonzero k0-algebra and have characteristic p. -/
 theorem fourierSquareModel_characteristic (n : Type u) :
     CharP Γ((fourierSquareModel F n).left, ⊤) F.field.p := by
-  sorry
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  let : Fact F.field.p.Prime := ⟨F.field.prime⟩
+  have : CharP F.field.k₀ F.field.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      F.field.card_base.trans F.field.cardinality_eq)
+  let z := AffineSpace.zeroSection n (Spec (.of F.field.k₀))
+  let s : Spec (.of F.field.k₀) ⟶ (fourierSquareModel F n).left :=
+    pullback.lift z z rfl
+  have : Nontrivial Γ((fourierSquareModel F n).left, ⊤) := s.appTop.hom.domain_nontrivial
+  exact CharP.of_ringHom_of_ne_zero
+    ((Scheme.ΓSpecIso (CommRingCat.of F.field.k₀)).inv ≫
+      (fourierSquareModel F n).hom.appTop).hom F.field.p F.field.prime.ne_zero
 
 /-- The first projection, over the finite field.
 Source: sk-def-ft (blueprint: def-fd-transform). -/
@@ -299,6 +353,11 @@ Source: sk-def-fourier-set and sk-def-char (blueprint: def-fd-transform).
 Proof: k0 is a finite field of cardinality p^a, with p prime and a positive;
 the unique prime dividing its cardinality is its characteristic. -/
 theorem fourierBaseCharacteristic : CharP F.field.k₀ F.field.p := by
-  sorry
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  let : Fact F.field.p.Prime := ⟨F.field.prime⟩
+  exact charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      F.field.card_base.trans F.field.cardinality_eq)
 
 end WeilConjectures

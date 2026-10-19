@@ -36,9 +36,41 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the coefficient-prime and base-characteristic obligations using Mathlib charP_of_card_eq_prime_pow and the recorded equality #k0=p^a. The distinct prime l has nonzero image in k0 by CharP.cast_ne_zero_of_ne_of_prime, so its image in each model residue field under the structure map is a unit. No finite-type assumption on the model is used for this unit assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For fourierModelProjection_frobenius, specialize galoisMap_projections of [def-weil-frobenius-detailed] to the inverse q-power automorphism. Its first projection equation is exactly the required equality of scheme morphisms. This supplies the equality used in the already constructed descent Weil structure.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fourierTensorFrobenius_naturality, take the common-stage natural isomorphism in [lem-pur-derived-pullback-tensor-iso], whose components equal canonicalCommonStagePullbackTensor. Apply naturality to (f,id_N). Postcompose with tensor(id,N.str), reassociate, and use functoriality of tensor. The two product arrows coincide componentwise by the identity and composition laws. This proves naturality of the specified components, rather than choosing different components.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-model finite-type, quasi-compact and separated assertions follow from the existing affine-space instances. Base change and composition give the product structure morphism finite type and quasi-compact. Its source is locally Noetherian over the finite field and compact over the compact spectrum, hence Noetherian. For the characteristic of its global sections, the pair of zero sections gives a section Spec(k0) -> W, so the global-section ring is nontrivial. Apply CharP.of_ringHom_of_ne_zero to k0 -> Gamma(W,O_W). The zero-section argument also covers the empty coordinate type, and the characteristic assertion requires no finiteness assumption on that type.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-ft/_section.md",
+  "place": "Definition sk-def-ft; formal verification of coefficient units, Frobenius descent, tensor naturality and affine-model geometry by C9, using the existing specified common-stage pullback/tensor natural isomorphism"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -216,5 +248,15 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-2482ad30b (reviewer sub-agent of L); spot-checked: I read the whole item. It is a definition split with no new nodes. Its statement matches its stored blueprint_update and the main-20261015 text (sk-def-ft/def-fd-transform.md and _section.md) clause by clause: any commutative Lambda with p invertible, arbitrary V->S and V'->S, p=0 on W, b in Gamma(W), Psi on F_p, one chosen compactification of p2 whose open immersion need not be quasi-compact (I checked the BU of def-nagata-compactification), FT(K)=Rp2!(p1^*K (x)^L K_psi[0])[r] with r in Z, plus the vector-bundle rank, A^1 and Psi^-1 remarks. It drops the old D^b_c(V,E) and qbar category as the BU requires, and the report names that change. Laumon (1.2.1.1), PDF pp. 10-11, has the same order: pullback, tensor, R!, then [r]. The slopmaster2 FourierTransform/Defs.lean lines 229-273 build the same composite. Checks of each cited node: prop-weil-pbc-inverse-image-modules-exact (1)-(3) plus lem-weil-pbc-exact-functor-derived-factorization give exact p1^* on unbounded D for any u and any R. def-kun-derived-tensor covers any Lambda and any T on the small etale site. def-weil-pbc-extension-by-zero and lem-weil-pbc-extension-by-zero-exact cover any open immersion. The module q_* of def-weil-pbc-direct-image, the K-injectives of prop-weil-pbc-kinjective-resolutions-exist and lem-weil-pbc-kinjective-total-derived give Rq_*; the exactness of Q o K(q_*) is elementary (cones and shifts are preserved termwise), the same pattern as def-sfb-right-derived-functor. def-fd-kernel is cited through its BU (Lambda-module AS sheaf, valid by def-fd-artin-schreier-sheaf's BU). Edge cases: W empty (p=0 holds, which is why the Lean's CharP is rightly not required), Lambda=0, p=2, trivial Psi, r<=0, and FT(delta_0)=Lambda[1] on A^1. No cycle, no SGA, Mathlib searches recorded, same_as=[sk-def-ft] correct, unit record untouched, no tool_uses needed. FIX: the item attributed the cochain shift convention to def-weil-triangulated-category, which defines only an abstract shift. The corrected file now cites def-weil-abstract-derived-category for the cochain shift and adds it to stmt_deps. For the maintainer: the base's stage-2 lean record (WeilComplex.fourierTransformOfPairing, PadicAlgCl coefficients) no longer matches the ordinary-etale definition, and adic/Weil citers (lem-fd-base-change, cor-fd-origin-stationary-phase) rely on reading the formula with adic operations; stage 2 should reopen both.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T093322-L-2295019",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
