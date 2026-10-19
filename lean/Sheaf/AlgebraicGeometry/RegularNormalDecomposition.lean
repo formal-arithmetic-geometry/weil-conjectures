@@ -13,13 +13,9 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.Topology.Irreducible
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Gluing
-import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularRingNormal
 
 /-!
 # Regular schemes and the normal decomposition
@@ -32,7 +28,8 @@ Normality is the normal-domain condition on every stalk. Regularity uses the aff
 condition recorded by `def-weil-regular-scheme`. The coproduct assertion uses the canonical
 open inclusions as the legs of a colimiting cofan, so it specifies a scheme decomposition.
 
-This module records the stage-2 statement; its proof is intentionally postponed.
+The proof uses the source library's normal decomposition and identifies its pieces with the
+irreducible components. Mathlib supplies the coproduct universal property of a disjoint open cover.
 -/
 
 @[expose] public section
@@ -104,6 +101,60 @@ theorem regular_normal_and_normal_decomposition (X : Scheme.{u}) :
         Nonempty (IsColimit (Cofan.mk X (fun i : Fin n ↦ (U i).ι)))) ∧
     ((∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧ IsRegularRing Γ(X, U)) →
       IsNoetherian X → Nonempty X → PreconnectedSpace X → IrreducibleSpace X) := by
-  sorry
+  classical
+  have hnormal
+      (hreg : ∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧
+        IsRegularRing Γ(X, U)) (x : X) :
+      IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x) := by
+    obtain ⟨U, hx, hR⟩ := hreg x
+    have := hR
+    let := X.presheaf.algebra_section_stalk (⟨x, hx⟩ : (U : X.Opens))
+    have := U.2.isLocalization_stalk ⟨x, hx⟩
+    obtain ⟨hd, hc⟩ := IsRegularRing.isNormalRing Γ(X, U)
+      (U.2.primeIdealOf ⟨x, hx⟩).asIdeal
+    have := hd
+    have := hc
+    let e := (IsLocalization.algEquiv (U.2.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
+      (Localization.AtPrime (U.2.primeIdealOf ⟨x, hx⟩).asIdeal)
+      (X.presheaf.stalk x)).toRingEquiv
+    exact ⟨e.symm.injective.isDomain e.symm.toRingHom, IsIntegrallyClosed.of_equiv e⟩
+  refine ⟨hnormal, ?_, ?_⟩
+  · intro hnoeth hn
+    have := hnoeth
+    obtain ⟨n, U, hcl, hdisj, hcover, hprop⟩ :=
+      X.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk hn
+    have hirr (i : Fin n) : IsIrreducible (U i : Set X) := by
+      have := (hprop i).1
+      simpa only [Set.image_univ, Scheme.Opens.range_ι] using
+        (IrreducibleSpace.isIrreducible_univ (U i).toScheme).image (U i).ι
+          (U i).ι.continuous.continuousOn
+    have hmem (i : Fin n) : (U i : Set X) ∈ irreducibleComponents X := by
+      refine ⟨hirr i, fun T hT hUT ↦ ?_⟩
+      obtain ⟨x, hx⟩ := (hirr i).nonempty
+      exact hT.2.isPreconnected.subset_isClopen (hcl i) ⟨x, hUT hx, hx⟩
+    refine ⟨n, U, ?_, fun i ↦ (hcl i).isClosed, fun i j hij ↦ hdisj hij,
+      hcover, ?_, ?_⟩
+    · apply Set.Subset.antisymm
+      · rintro _ ⟨i, rfl⟩
+        exact hmem i
+      · intro T hT
+        obtain ⟨x, hx⟩ := hT.1.nonempty
+        have hxcover : x ∈ ⨆ i, U i := by rw [hcover]; trivial
+        obtain ⟨i, hxi⟩ := TopologicalSpace.Opens.mem_iSup.mp hxcover
+        have hTU := hT.1.2.isPreconnected.subset_isClopen (hcl i) ⟨x, hx, hxi⟩
+        exact ⟨i, Set.Subset.antisymm (hT.2 (hirr i) hTU) hTU⟩
+    · intro i
+      have := (hprop i).1
+      exact ⟨inferInstance, fun x ↦ ⟨inferInstance, (hprop i).2 x⟩⟩
+    · apply nonempty_isColimit_cofanMk_of
+      · simpa using hcover
+      · intro i j hij
+        simpa using hdisj hij
+  · intro hreg hnoeth hne hconn
+    have := hnoeth
+    have := hne
+    have := hconn
+    have : ConnectedSpace X := ⟨hne⟩
+    exact irreducibleSpace_of_isDomain_stalk X (fun x ↦ (hnormal hreg x).1)
 
 end AlgebraicGeometry
