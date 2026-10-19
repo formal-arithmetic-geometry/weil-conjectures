@@ -17194,3 +17194,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/F9/Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood (stage 3; reviewer PASS; first push; landing 20261019T093407-L-2304807 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ProEtaleReplete (stage 3; reviewer PASS; first push; landing 20261019T093409-L-2305105 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion (stage 3; reviewer PASS; first push; landing 20261019T093410-L-2305544 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:34 L: merged deliver/G2/Sheaf.CategoryTheory.DerivedCategory.PerfectOverDerivedCompleteRing (stage 3; reviewer PASS; first push; landing 20261019T093411-L-2305927 (proof); batch 20261019T093237; modules 1; new nodes 0)
