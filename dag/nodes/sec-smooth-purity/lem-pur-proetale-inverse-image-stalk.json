@@ -32,147 +32,65 @@
  ],
  "proof": [
   {
-   "text": "Write $u(V)=X\\times_YV$ and $P=u_{f,p}F$ for the presheaf of [def-weil-proetale-inverse-image], so $f^{-1}F=P^\\#$ with unit $\\theta:P\\to P^\\#$. For any presheaf $Q$ on $X_{\\mathrm{proet}}$, write $Q_{\\bar x}$ for the colimit of the same pointed-neighbourhood diagram used in [def-weil-proetale-geometric-stalk]; this notation requires no sheaf condition. We use colimits in sets for sets and in abelian groups for abelian groups. The opposite neighbourhood category is filtered by the latter definition. All comma categories and pointed-neighbourhood categories are small in the larger universe by [def-weil-size-convention] and the inverse-image definition. Choose the value universe to contain this site data, as required by the set sheafification result used in step 3. A lift $\\bar v:\\operatorname{Spec}\\Omega\\to V$ of $\\bar y$ determines a unique lift $\\widetilde v=(\\bar x,\\bar v)$ into $u(V)$ by the fibre-product universal property. Conversely the second projection recovers $\\bar v$ from any lift into $u(V)$. These operations are inverse and respect arrows, since their composites with both projections do so.",
+   "text": "Construct the pro-etale site point attached to the geometric point x. Its fibre assigns to each neighbourhood the arrows from x to that neighbourhood, lifted to the larger universe. The point axioms use finite-limit preservation and the fact that every pro-etale covering lifts the algebraically closed field point; the latter is the existing weakly-etale section theorem, applied after the fpqc/base-change description of the pro-etale topology.",
    "uses": [
-    "def-weil-proetale-inverse-image",
     "def-weil-proetale-geometric-stalk",
-    "def-weil-size-convention",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0F4F, lemma-point-functor, first equality; Tag 05V1, lemma-point-morphism-sites; proetale.tex Tag 0F6B, lemma-cofinal-etale"
-   }
-  },
-  {
-   "text": "We verify fixed-field lifting for the set case. Let $\\{W_i\\to U\\}$ cover a pointed neighbourhood $(U,\\bar u)$ of $\\bar x$. The site definition says this is an fpqc family of weakly etale arrows. Base change along $\\bar u$ gives an fpqc cover $\\{Z_i=W_i\\times_U\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega\\}$. The definition of fpqc covering, applied to the nonempty affine $\\operatorname{Spec}\\Omega$, ensures some $Z_i$ has a point $z$. Its structure map is weakly etale by base change. Choose an affine open $W=\\operatorname{Spec}B$ of $Z_i$ containing $z$; source locality makes $W\\to\\operatorname{Spec}\\Omega$ weakly etale. By the affine equivalence in [def-weil-pbc-ind-etale-algebra] and [lem-weil-pbc-weak-etale-field], $\\kappa(z)/\\Omega$ is separable algebraic. The algebraically closed field $\\Omega$ is separably closed, since a nonconstant separable polynomial is a nonconstant polynomial. Apply [lem-weil-pbc-separable-extension-embeds-separably-closed] with $k=\\Omega$, $M=\\kappa(z)$ and the identity extension $\\Omega/k$ to get an $\\Omega$-embedding $\\kappa(z)\\to\\Omega$. The geometric-point description, together with affine-spectrum functoriality, gives $\\operatorname{Spec}\\Omega\\to W\\to Z_i\\to W_i$. Its composite to $U$ is exactly $\\bar u$, by the pullback equation. Thus the cover has a member with a lift over the original field, and that member remains a site object. Finite products, source opens and the chosen lift are within the fixed bound. Replacing $W_i$ by a skeleton representative transports its lift by the inverse representative isomorphism and changes none of these equations.",
-   "uses": [
     "def-weil-pbc-proetale-site",
     "def-weil-pbc-fpqc-covering",
-    "lem-galois-fpqc-covering-base-change",
+    "lem-fix-weakly-etale-algclosed-section",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The category of elements of this point is equivalent to the pointed pro-etale neighbourhood category. The resulting final-colimit isomorphism identifies the point sheaf fibre with the geometric stalk, and its germ equation identifies each colimit coprojection with evaluation at the corresponding pointed neighbourhood.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback adjunction on over-categories identifies maps from x to the base change of V with maps from x followed by f to V. This natural bijection is inverseImagePointFiberIso, implemented by Adjunction.compCoyonedaIso (Over.mapPullbackAdj f). On the specified lifted neighbourhood it sends z to its first projection, which is N.hom by the hypothesis of the germ clause. Hence the comapped point is isomorphic to the point of x followed by f. Base change preserves finite limits and covers by the declarations in the inverse-image module. All categories of elements are initially small in universe u+1; equivalences transport the needed colimits.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
     "def-pc-fibre-product",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-weakly-etale-source-locality",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-separable-extension-embeds-separably-closed",
-    "def-weil-geometric-point",
-    "def-weil-affine-spectrum",
     "def-weil-size-convention"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0F6C, lemma-geometric-lift-to-cover; expanded using more-algebra.tex Tag 092Q, lemma-absolutely-flat-over-field; more-morphisms.tex Tags 094S, 094U; fields.tex Tag 09GU, lemma-map-into-algebraic-closure"
-   }
+   "elementary": true
   },
   {
-   "text": "For set-valued $P$, the sheafification unit induces a bijection $t_F:P_{\\bar x}\\to(P^\\#)_{\\bar x}$. Indeed [lem-weil-pbc-site-sheafification-sections-local] represents every section of $P^\\#(U)$ locally by sections of $P$. Step 2 lifts the fixed $\\bar u$ to one of those covering members; its local representative has the same stalk class, proving surjectivity. For injectivity, suppose two $P$-classes have equal images. In a filtered set colimit, equality is equality at a common refinement: the quotient relation is generated by restrictions, any finite chain has a common refinement, and parallel arrows are equalized by filteredness. Apply this first to the images in $P^\\#$, obtaining representatives $s,t\\in P(U)$ with $\\theta(s)=\\theta(t)$. The last assertion of the cited local-sections theorem gives a covering on which $s=t$. Step 2 lifts $\\bar u$ to one covering member, so the original $P$-classes agree. This proves injectivity. Naturality of $t_F$ follows from naturality of the sheafification unit: on each section class both composites are represented by its image under the presheaf map followed by $\\theta$.",
+   "text": "Apply the general site-point inverse-image comparison and its proved unit-germ formula to proEtaleBaseChange f. The comparison is the composite of the stalk identification, the generic sheaf-fibre comparison, the point isomorphism induced by the fibre equivalence, and the inverse stalk identification. The germ equation follows from the upstream unit-germ lemma; naturality is the naturality of the composite isomorphism, and equality reflection follows by cancellation.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-proetale-geometric-stalk",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WK, lemma-sections-sheafification, and Tag 00WB, theorem-plus (local equality); proetale.tex Tag 0F6C; Tag 00Y8, lemma-point-pushforward-sheaf, clause (3)"
-   }
-  },
-  {
-   "text": "For abelian $P$, apply [lem-cbc-proetale-sheafification-geometric-stalk] on $X$ with this same $\\bar x$ and $P$. It states precisely that $t_F=\\varinjlim\\theta$ is an isomorphism of abelian groups, natural in $P$. Its colimit uses all pointed weakly etale neighbourhoods, exactly as here. Thus in either coefficient category we have a natural isomorphism $t_F:P_{\\bar x}\\xrightarrow{\\sim}(f^{-1}F)_{\\bar x}$. No assertion about arbitrary group colimits being computed on underlying sets is needed.",
-   "uses": [
-    "lem-cbc-proetale-sheafification-geometric-stalk",
+    "lem-cbc-site-point-comap-germ",
     "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0F6B, 0F6C and paragraph before Tag 0993; sites.tex Tag 00Y8, lemma-point-pushforward-sheaf (3), as provided by the cited abelian theorem"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct $a_F:P_{\\bar x}\\to F_{\\bar y}$ using only colimit universal properties. For each $(U,\\bar u)$ and each object $(V,\\phi:U\\to u(V))$ of $\\mathcal I_U$, let $\\bar v=\\operatorname{pr}_V\\phi\\bar u$. The equality defining the pullback gives $\\bar v$ over $\\bar y$. Send $s\\in F(V)$ to its germ $[V,\\bar v,s]\\in F_{\\bar y}$. For an arrow $r:(V,\\phi)\\to(V',\\phi')$ we have $\\phi'=u(r)\\phi$ and hence $\\bar v'=r\\bar v$; the germ of $F(r)(s')$ at $(V,\\bar v)$ equals the germ of $s'$ at $(V',\\bar v')$. These maps therefore form a cocone for the inner, opposite-indexed colimit defining $P(U)$. For a pointed $b:(U',\\bar u')\\to(U,\\bar u)$, restriction replaces $\\phi$ by $\\phi b$ and gives the same $\\bar v$ since $b\\bar u'=\\bar u$. The induced maps $P(U)\\to F_{\\bar y}$ are therefore a cocone on the outer neighbourhood diagram and define $a_F$. For abelian $F$, all maps out of $F(V)$ are the homomorphisms into its abelian stalk colimit, so both descents take place in abelian groups.",
+   "text": "Specialize the generic construction first to Type (u+1), where the required products and sheafification exist, and then to AddCommGrpCat. The latter specialization is an isomorphism in the coefficient category, hence additive, and both satisfy the displayed naturality and reflection clauses.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "def-weil-proetale-geometric-stalk",
-    "def-pc-fibre-product",
-    "def-weil-pbc-category-colimit"
+    "def-weil-proetale-geometric-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0F4F, lemma-point-functor, proof of the third equality; cocone maps written out instead of invoking a combined-colimit or cofinality theorem"
-   }
-  },
-  {
-   "text": "Construct $b_F:F_{\\bar y}\\to P_{\\bar x}$. On the diagram object $F(V)$ indexed by $(V,\\bar v)$, use the coprojection $F(V)\\to P(u(V))$ corresponding to $(V,\\mathrm{id}_{u(V)})\\in\\mathcal I_{u(V)}$, followed by the stalk coprojection at $(u(V),\\widetilde v)$. For a pointed $r:(V,\\bar v)\\to(V',\\bar v')$, the induced pointed arrow $u(r):(u(V),\\widetilde v)\\to(u(V'),\\widetilde v')$ identifies the latter germ with the restriction of the coprojection for $(V',\\mathrm{id})$. By the inverse-image restriction formula this restriction is the coprojection for $(V',u(r))\\in\\mathcal I_{u(V)}$. The arrow $(V,\\mathrm{id})\\to(V',u(r))$ identifies it with the coprojection for $(V,\\mathrm{id})$ applied to $F(r)(s')$. Thus these maps form a cocone on $\\mathcal N_{\\bar y}^{\\mathrm{op}}$, giving $b_F$ in either category.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-proetale-geometric-stalk",
-    "def-pc-fibre-product",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0F4F, lemma-point-functor: right inverse (V,v) maps to (u(V),v,V,id); explicit compatibility on arrows"
-   }
-  },
-  {
-   "text": "The composite $a_Fb_F$ is the identity on every stalk coprojection from $F(V)$, since the second projection of $\\widetilde v$ is $\\bar v$. For the other composite it suffices, twice by the colimit universal property, to check the composite from $F(V)$ into $P(U)$ into $P_{\\bar x}$ for each $(U,\\bar u)$ and $(V,\\phi)\\in\\mathcal I_U$. The map $b_Fa_F$ replaces this composite by the coprojection at $(u(V),\\widetilde v)$ indexed by $(V,\\mathrm{id})$. But $\\phi:(U,\\bar u)\\to(u(V),\\widetilde v)$ is pointed: its two projections agree with those of $\\widetilde v$. Restricting that coprojection along $\\phi$ gives exactly the original coprojection indexed by $(V,\\phi)$ in $P(U)$. Their images in the outer colimit are equal. Hence $b_Fa_F=\\mathrm{id}$. Put $c_{f,\\bar x,F}=a_Ft_F^{-1}$, an isomorphism in sets, respectively in abelian groups. This construction singles out the canonical germ comparison without choosing representatives for the inner colimits.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-proetale-geometric-stalk",
-    "def-pc-fibre-product",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 0F4F, lemma-point-functor, and 05V1, lemma-point-morphism-sites: explicit inverse equations for the third and second equalities of the first proof"
-   }
-  },
-  {
-   "text": "Let $h:F\\to G$. On each inner coprojection indexed by $(U,\\bar u,V,\\phi)$, both $a_G\\circ P(h)_{\\bar x}$ and $h_{\\bar y}\\circ a_F$ send $s$ to $[V,\\operatorname{pr}_V\\phi\\bar u,h_V(s)]$. Applying the inner and outer colimit universal properties gives equality of these maps. Steps 3 and 4 give naturality of $t$, so composing with $t_F^{-1}$ and $t_G^{-1}$ gives $c_{f,\\bar x,G}\\circ(f^{-1}h)_{\\bar x}=h_{\\bar y}\\circ c_{f,\\bar x,F}$. The abelian comparison is additive because $a_F$, $t_F$ and their inverses are abelian-group homomorphisms. If $h,k:F\\to G$ satisfy $f^{-1}h=f^{-1}k$, their stalk maps at $\\bar x$ are equal. The displayed formula then gives $h_{\\bar y}=c_{f,\\bar x,G}(f^{-1}h)_{\\bar x}c_{f,\\bar x,F}^{-1}=c_{f,\\bar x,G}(f^{-1}k)_{\\bar x}c_{f,\\bar x,F}^{-1}=k_{\\bar y}$. Only $\\bar y=f\\bar x$ is asserted; no lift of an arbitrary point of $Y$ is required.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-proetale-geometric-stalk",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 05V1, lemma-point-morphism-sites, functorial identification; Tag 0F4F, lemma-point-functor, functoriality made explicit"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-proetale-inverse-image",
   "def-weil-proetale-geometric-stalk",
-  "def-weil-size-convention",
   "def-pc-fibre-product",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-fpqc-covering",
-  "lem-galois-fpqc-covering-base-change",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-weakly-etale-source-locality",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-separable-extension-embeds-separably-closed",
-  "def-weil-geometric-point",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-cbc-site-point-comap-germ",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-sheafification",
-  "lem-cbc-proetale-sheafification-geometric-stalk"
+  "def-weil-size-convention"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 05V1, lemma-point-morphism-sites, first proof; Tag 0F4F, lemma-point-functor, expanded into two explicit cocone maps; proetale.tex Tags 0F6B/0F6C and paragraph before 0993"
+  "place": "Tags 05V1 and 0F4F, using the generic point comparison and its unit-germ formula; proetale.tex Tag 0F6C for geometric lifting"
  },
  "mathlib_searches": [
   {
@@ -375,15 +293,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-galois-fpqc-covering-base-change",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-weakly-etale-source-locality",
-  "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-separable-extension-embeds-separably-closed",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-cbc-proetale-sheafification-geometric-stalk"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -426,5 +336,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T005426-L-2768671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
