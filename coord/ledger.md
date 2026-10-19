@@ -17031,3 +17031,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q83/lem-per-dualizing-trace-annihilator-bound (reviewer RETURN: This is a byte-identical re-push of b0086f499c7f, which was already RETURNed: the item json, the new node and the report)
 - 03:58 L: returned deliver/Q80/lem-per-rational-canonical-trace-generation (reviewer RETURN: Route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json, the human): the item lem-per-ratio)
 - 03:58 L: returned deliver/Q111/lem-per-finite-normalization-codimension-one-purity (reviewer RETURN: Route-pivot RETURN (F, dropped machinery), even though the mathematics is sound. The item lem-per-finite-normalization-c)
+- 03:58 L: returned deliver/Q123/lem-per-finite-type-jacobian-torsion-etale-away (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-finite-type-jacobian-torsion-etale-away: lem-p)
