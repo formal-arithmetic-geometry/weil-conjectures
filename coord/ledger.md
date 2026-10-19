@@ -17600,3 +17600,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:18 L: merged deliver/O4/sk-thm-sf-global-duality (stage 2; reviewer PASS; parallel immutable checks)
 
 - 05:04 L: batch 20261019T192638 dependency take-out
+- 21:13 L: returned deliver/B5/Sheaf.Paper.PreservationConstructible (reviewer RETURN: (reviewer C-acb12, head acb128f53) H4/H12 (brief points 4, 5): (1) the sorry theorem AlgebraicGeometry.Scheme.pbc_unifor)
