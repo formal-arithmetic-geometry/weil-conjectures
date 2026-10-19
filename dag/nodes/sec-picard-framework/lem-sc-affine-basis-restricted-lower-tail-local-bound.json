@@ -86,13 +86,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisRestrictedLowerTailLocalBound.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisRestrictedLowerTailLocalBound.lean",
   "declaration": "AlgebraicGeometry.affineBasisRestrictedLowerTail_local_bound",
   "statement": "theorem affineBasisRestrictedLowerTail_local_bound\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    (F : CochainComplex X.Modules ℤ)\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))\n    (a : ℤ) :\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let E := (schemeOpenRestriction X V).mapDerivedCategory.obj\n      ((t.truncLT a).obj (DerivedCategory.Q.obj F))\n    ∃ (B : Set (Opens V.toScheme)),\n      IsTopologicalBasis ((fun U : Opens V.toScheme => (U : Set V.toScheme)) '' B) ∧\n      ∀ (U : Opens V.toScheme), U ∈ B → ∀ (p : ℕ), 0 < p → ∀ (q : ℤ), q < 0 →\n        IsZero ((RingedSpace.openModuleCohomology V.toScheme.toRingedSpace p U).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) q).obj E))",
   "branch": "sheaf-dag",
   "by": "A4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound retired; now WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound."
  },
  "reviewed": {
   "date": "2026-10-13",

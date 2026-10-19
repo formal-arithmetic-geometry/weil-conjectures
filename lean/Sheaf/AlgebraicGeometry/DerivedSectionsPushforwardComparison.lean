@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.Topology.OpenModuleDerivedSections
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic

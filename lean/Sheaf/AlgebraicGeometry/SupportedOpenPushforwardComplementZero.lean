@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import all Sheaf.AlgebraicGeometry.PerfectRestrictionClassesSmall
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero

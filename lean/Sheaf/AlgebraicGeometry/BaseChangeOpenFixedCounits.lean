@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 import Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility
 /-! # Open restriction for the fixed derived pullback counits

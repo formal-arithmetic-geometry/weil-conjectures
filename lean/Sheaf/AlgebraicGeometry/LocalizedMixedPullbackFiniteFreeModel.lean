@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.LocalizedMixedDerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct

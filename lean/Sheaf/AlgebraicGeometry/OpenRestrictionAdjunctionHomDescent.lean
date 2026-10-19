@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses

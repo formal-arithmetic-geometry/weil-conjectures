@@ -6,7 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Mathlib.AlgebraicGeometry.Restrict
 

@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat

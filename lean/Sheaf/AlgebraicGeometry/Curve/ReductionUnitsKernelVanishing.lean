@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsFiltration
 import Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift
 import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 

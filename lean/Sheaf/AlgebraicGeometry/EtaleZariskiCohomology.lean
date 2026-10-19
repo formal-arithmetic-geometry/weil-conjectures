@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
 
 /-!

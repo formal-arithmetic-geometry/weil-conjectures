@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Coherent comparison data for two open restrictions
 

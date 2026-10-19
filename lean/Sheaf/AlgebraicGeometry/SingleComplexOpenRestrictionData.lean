@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 

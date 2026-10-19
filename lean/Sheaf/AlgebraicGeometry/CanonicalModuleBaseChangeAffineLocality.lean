@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison
 import Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction

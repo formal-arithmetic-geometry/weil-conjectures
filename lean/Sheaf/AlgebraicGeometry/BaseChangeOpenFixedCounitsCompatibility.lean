@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeSquare
 import Sheaf.AlgebraicGeometry.ModulePullbackComparisonDegreeAutomorphism
 /-! General open restriction compatibility used by fixed counits.

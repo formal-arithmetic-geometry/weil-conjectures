@@ -6,7 +6,7 @@ Authors: SHEAF group J2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact

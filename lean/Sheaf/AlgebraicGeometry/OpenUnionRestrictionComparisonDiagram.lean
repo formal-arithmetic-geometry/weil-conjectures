@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonData
 import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 

@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian

@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction

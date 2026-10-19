@@ -4,7 +4,7 @@ Copyright (c) 2026 The SHEAF contributors.
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 @[expose] public section
 set_option autoImplicit false

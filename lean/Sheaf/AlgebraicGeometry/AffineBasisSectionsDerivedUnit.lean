@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono
+import WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono
 import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi
 
 /-! # Unbounded section comparison from affine-basis acyclicity

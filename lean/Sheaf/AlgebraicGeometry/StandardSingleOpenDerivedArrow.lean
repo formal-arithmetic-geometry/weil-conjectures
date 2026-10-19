@@ -4,7 +4,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
 
 /-! # Open restriction of the canonical single-module derived arrow

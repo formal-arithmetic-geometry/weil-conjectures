@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Localized derived pullback with independent universes

@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.Data.Int.Interval
 import Mathlib.Algebra.Category.Grp.Zero

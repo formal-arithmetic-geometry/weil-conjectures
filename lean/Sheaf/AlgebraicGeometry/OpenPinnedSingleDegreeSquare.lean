@@ -3,7 +3,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 

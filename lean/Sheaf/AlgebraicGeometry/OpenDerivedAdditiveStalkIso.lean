@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

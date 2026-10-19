@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Localization.LocallySmall
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction

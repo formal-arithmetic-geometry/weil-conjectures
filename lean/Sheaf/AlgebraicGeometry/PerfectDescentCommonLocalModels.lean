@@ -6,7 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel

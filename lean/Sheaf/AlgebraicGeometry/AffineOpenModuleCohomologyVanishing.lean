@@ -10,7 +10,7 @@ public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
 
 /-! # Vanishing of higher module cohomology on affine opens
 

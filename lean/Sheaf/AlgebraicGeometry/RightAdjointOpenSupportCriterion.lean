@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.RightAdjointOpenUnitConeTest
 import Sheaf.AlgebraicGeometry.RightAdjointOpenSupportOfBounded
 
