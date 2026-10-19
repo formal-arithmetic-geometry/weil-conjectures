@@ -8,35 +8,10 @@ module
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.Paper.IntegralScalarExtension
 
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.NormalizedDVRTower
+import Sheaf.Paper.IntegralScalarExtensionConstructible
+import Sheaf.Paper.CompletedCoefficientPresentationTransport
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Paper.IntegralScalarExtensionWellDefined
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.FiniteFieldSheafScalarExtension
-import Sheaf.Paper.IntegralScalarExtensionUniverses
-import Sheaf.Paper.ProEtaleConstructibleSheaf
 /-!
 # Integral scalar extension preserves intrinsic bounded constructibility
 
@@ -53,6 +28,99 @@ universe u
 open CategoryTheory
 
 namespace WeilConjectures
+
+-- Transport the prescribed augmentation, retaining its product and tower.
+open CategoryTheory.Limits CategoryTheory.Pretriangulated in
+private theorem unrestricted_iso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{u})
+    {K K' : DerivedCategory (scalarReductionSource.{u, u} l E Y)}
+    (f : K ≅ K') (hK : IsDerivedCompleteUnrestricted l E Y K) :
+    IsDerivedCompleteUnrestricted l E Y K' := by
+  obtain ⟨D, hl, P, G, q, hq, e, hp, δ, hδ⟩ := hK
+  let := hp
+  refine ⟨D, hl, P, G, q, hq, e ≪≫ f, hp, δ ≫ f.hom⟦(1 : ℤ)⟧', ?_⟩
+  apply isomorphic_distinguished _ hδ _
+  refine Triangle.isoMk _ _ f.symm (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
+  · apply Pi.hom_ext
+    intro n
+    simp [Cone.extend, Category.assoc]
+  · simp
+  · simp [Category.assoc, ← Functor.map_comp]
+
+open CategoryTheory.Limits CategoryTheory.Pretriangulated in
+private theorem augmentedRoos_iso {C : Type*} [Category C] [HasZeroObject C]
+    [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] (F : ℕ → C ⥤ C)
+    (η : ∀ n, 𝟭 C ⟶ F n) (τ : ∀ n, F (n + 1) ⟶ F n)
+    {K L : C} (e : K ≅ L)
+    (h : ∃ hp : HasProduct (fun n ↦ (F n).obj K),
+      let := hp
+      ∃ δ : (∏ᶜ fun n ↦ (F n).obj K) ⟶ K⟦(1 : ℤ)⟧,
+        IsDerivedLimitTriangle (fun n ↦ (τ n).app K) K
+          (Pi.lift (fun n ↦ (η n).app K)) δ) :
+    ∃ hp : HasProduct (fun n ↦ (F n).obj L),
+      let := hp
+      ∃ δ : (∏ᶜ fun n ↦ (F n).obj L) ⟶ L⟦(1 : ℤ)⟧,
+        IsDerivedLimitTriangle (fun n ↦ (τ n).app L) L
+          (Pi.lift (fun n ↦ (η n).app L)) δ := by
+  obtain ⟨hp, δ, hδ⟩ := h
+  let := hp
+  let : HasProduct (fun n ↦ (F n).obj L) :=
+    hasProduct_of_equiv_of_iso (fun n ↦ (F n).obj K)
+      (fun n ↦ (F n).obj L) (Equiv.refl ℕ) (fun n ↦ (F n).mapIso e.symm)
+  let p : (∏ᶜ fun n ↦ (F n).obj K) ≅ (∏ᶜ fun n ↦ (F n).obj L) :=
+    { hom := Limits.Pi.map (fun n ↦ (F n).map e.hom)
+      inv := Limits.Pi.map (fun n ↦ (F n).map e.inv)
+      hom_inv_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc, ← Functor.map_comp]
+      inv_hom_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc, ← Functor.map_comp] }
+  refine ⟨inferInstance, p.inv ≫ δ ≫ (shiftFunctor C (1 : ℤ)).map e.hom, ?_⟩
+  apply isomorphic_distinguished _ hδ _
+  refine Triangle.isoMk _ _ e.symm p.symm p.symm ?_ ?_ ?_
+  · apply Pi.hom_ext
+    intro n
+    simpa [p, Category.assoc] using ((η n).naturality e.inv).symm
+  · exact towerTransitionEndomorphism_natural_backward
+      (fun n ↦ (τ n).app L) (fun n ↦ (τ n).app K)
+      (fun n ↦ (F n).map e.inv) (fun n ↦ (τ n).naturality e.inv) |>.symm
+  · simp [p, Category.assoc, ← Functor.map_comp]
+
+open CategoryTheory.Limits CategoryTheory.Pretriangulated in
+private theorem sf_closed_iso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{u}) :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsSfDerivedComplete l E Y) := by
+  constructor
+  intro K L e hK
+  exact augmentedRoos_iso (sfDerivedReductionRestricted l E Y)
+    (sfDerivedReductionUnit l E Y) (sfDerivedReductionTransition l E Y) e hK
+
+private theorem complete_iff
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{u})
+    (K : DerivedCategory (scalarReductionSource.{u, u} l E Y)) :
+    IsDerivedCompleteUnrestricted l E Y K ↔ IsSfDerivedComplete l E Y K := by
+  have := sf_closed_iso l E Y
+  let e := purCoefficientModel l E Y
+  have h := purCoefficientModel_predicates l E Y (e.inverse.obj K)
+  have h' : IsDerivedCompleteUnrestricted l E Y (e.functor.obj (e.inverse.obj K)) ↔
+      IsSfDerivedComplete l E Y (e.functor.obj (e.inverse.obj K)) :=
+    h.1.symm.trans h.2
+  constructor
+  · intro hc
+    exact (ObjectProperty.prop_iff_of_iso (IsSfDerivedComplete l E Y)
+      (e.counitIso.app K)).mp
+        (h'.mp (unrestricted_iso l E Y (e.counitIso.app K).symm hc))
+  · intro hc
+    exact unrestricted_iso l E Y (e.counitIso.app K)
+      (h'.mpr ((ObjectProperty.prop_iff_of_iso (IsSfDerivedComplete l E Y)
+        (e.counitIso.app K)).mpr hc))
 
 /-- Completed integral scalar extension preserves the intrinsic bounded constructible
 predicate over arbitrary schemes.
@@ -178,7 +246,11 @@ theorem sfIntegralScalarExtension_constructible
     (hK : sfIntegralConstructible l E Y K) :
     sfIntegralConstructible l L Y
       ((integralScalarExtension l E L ι Y).obj K) := by
-  sorry
+  obtain ⟨D, hl, hc⟩ := (complete_iff l E Y K).mpr hK.1
+  have hlegacy : boundedConstructibleDerivedCompleteIntegral D l hl E Y K :=
+    ⟨hc, hK.2⟩
+  have hout := integralScalarExtension_constructible D l hl E L ι Y ⟨K, hlegacy⟩
+  exact ⟨(complete_iff l L Y _).mp ⟨D, hl, hout.1⟩, hout.2⟩
 
 /-- The completed scalar extension restricted to intrinsic bounded constructible
 objects. Its object map is the ambient extension and its morphism map is inherited.
