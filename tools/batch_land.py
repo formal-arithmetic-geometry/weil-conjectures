@@ -1385,7 +1385,9 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
         except recovery.Conflict as x:   # the tip moved on these paths; the next red build tries again
             res = {}
             log(f"batch {b['id']}: fail-forward could not be written ({x}); next step retries")
-            b['handled'] = [h for h in b['handled'] if h != (ld.read_json(ld.B / 'last.json') or {}).get('time')]
+            cur = ld.read_json(ld.B / 'last.json') or {}
+            b['handled'] = [h for h in b['handled'] if h != cur.get('time')]
+            b['handled_sources'] = [h for h in b.get('handled_sources', []) if h != cur.get('source_fingerprint')]
         for e in stuck:
             r = res.get(key(e))
             if r is None or not r['actions']:
@@ -1424,6 +1426,14 @@ def closure_fallback(b, last, log, imports=None):
     log(f"batch {b['id']}: ALERT; {len(chosen)} closure deliveries waiting; build remaining tree")
 
 
+def seen_red(b: dict, last: dict) -> bool:
+    """This red result was handled already: the same build, or build.py's cached result for a source tree already
+    handled (2026-10-19: a cached red rewrites last.json with a new time and the same failure was handed to triage
+    again)."""
+    fp = last.get("source_fingerprint")
+    return last.get("time") in b["handled"] or bool(fp and fp in b.get("handled_sources", []))
+
+
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
     repairs.reconcile()
@@ -1454,7 +1464,7 @@ def step(cache: dict, log) -> str:
     if b.get('await_recovery'):
         last = ld.read_json(ld.B / 'last.json') or {}
         removed = {e['landing'] for e in b['entries'] if e['state'] in ('returned', 'waiting', 'reverted')}
-        fresh = last.get('time') not in b['handled'] and not removed & set(last.get('included') or [])
+        fresh = not seen_red(b, last) and not removed & set(last.get('included') or [])
         if not fresh: return 'waiting'
         if last.get('result') == 'green': b.pop('await_recovery', None)
         elif not pend: return 'waiting'
@@ -1489,7 +1499,7 @@ def step(cache: dict, log) -> str:
     # none that was taken out since (a snapshot from before the last round), and was not handled already
     last = ld.read_json(ld.B / "last.json")
     inc = set((last or {}).get("included") or [])
-    if not last or last.get("result") != "red" or last.get("time") in b["handled"]:
+    if not last or last.get("result") != "red" or seen_red(b, last):
         return "waiting"
     if not {e["landing"] for e in pend} & inc or {e["landing"] for e in b["entries"] if e["state"] in ("returned", "reverted", "waiting")} & inc:
         return "waiting"
@@ -1502,6 +1512,8 @@ def step(cache: dict, log) -> str:
         return "waiting"
     log(f"batch {b['id']}: RED build (round {b['round'] + 1}); failing {' '.join((last.get('failing') or [])[:8])}")
     b["handled"].append(last.get("time"))
+    if last.get("source_fingerprint"):
+        b.setdefault("handled_sources", []).append(last["source_fingerprint"])
     if T['unattributed'] or b['round'] >= 4:
         closure_fallback(b, last, log, imports)
         return 'returned'
