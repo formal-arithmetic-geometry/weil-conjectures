@@ -13,9 +13,124 @@
   "def-weil-irreducible-components",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every open subset $U\\subseteq Z$ is topologically Noetherian: write a descending sequence of relatively closed subsets as $F_n=U\\cap H_n$ with $H_n$ closed in $Z$, replace $H_n$ by $H_1\\cap\\cdots\\cap H_n$, and use stabilization in $Z$. The resulting traces are still $F_n$. This uses only the given descending-chain condition, not Noetherianness of any ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, lemma-Noetherian, proof of (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-noetherian-finite-irreducible-components] to $|Z|$ and to the underlying space of each affine open $U$. Thus both have finitely many irreducible components. Write $U=\\operatorname{Spec}R$, with $R=\\mathcal O_Z(U)$, using [lem-weil-pbc-affine-open-spec-points]. By [lem-weil-pbc-spec-irreducible-components-minimal-primes] these affine components are exactly $V(\\mathfrak q)$ for minimal primes $\\mathfrak q$ of $R$. Distinct minimal primes give distinct subsets: $\\mathfrak q\\in V(\\mathfrak q)$, and equality of two such sets gives both inclusions of their primes. Therefore $R$ has finitely many minimal primes.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, lemma-Noetherian (2); algebra.tex Tag 00ES, lemma-irreducible (3)"
+   }
+  },
+  {
+   "text": "Every local ring of $Z$ is a domain, hence is reduced: $a^n=0$ in a domain implies $a=0$. The equivalence in [def-pc-reduced-scheme] therefore gives that every section ring, in particular $R=\\mathcal O_Z(U)$, is reduced. For each prime $\\mathfrak p$ of $R$, [lem-weil-pbc-affine-open-stalk-localization] identifies $R_{\\mathfrak p}$ with $\\mathcal O_{Z,x}$ at the corresponding point $x\\in U$. It is a normal domain by hypothesis. Thus $R$ is a normal ring in precisely the prime-localization sense of [def-weil-pbc-normal-ring].",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J0/01J1, definition-reduced and lemma-reduced; Tag 01HV, lemma-spec-sheaves (6)"
+   }
+  },
+  {
+   "text": "The affine section ring $R$ is now reduced, normal, and has finitely many minimal primes. Apply implication (1) to (3) of [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to obtain $R\\simeq\\prod_{i=1}^n A_i$ with each $A_i$ a normal domain. These are exactly the hypotheses of that node; no ring-theoretic Noetherian hypothesis occurs. The zero ring is the empty product.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, lemma-characterize-reduced-ring-normal, (1) implies (3); used in properties.tex Tag 0357, affine case"
+   }
+  },
+  {
+   "text": "Here is the elementary component calculation for this product. Let $e_i$ be the coordinate idempotents, so $e_i e_j=0$ for $i\\ne j$ and $\\sum_i e_i=1$. Every prime $\\mathfrak p$ omits exactly one $e_i$; it contains all the others, hence contains $K_i=\\ker(R\\to A_i)$. Each $K_i$ is prime since $A_i$ is a domain. Moreover $K_i$ is minimal: if a prime $\\mathfrak p\\subseteq K_i$ omits $e_j$, then $j=i$ (otherwise $e_i\\in\\mathfrak p\\subseteq K_i$), and so $K_i\\subseteq\\mathfrak p$. Conversely any minimal prime equals the $K_i$ it contains. Thus [lem-weil-pbc-spec-irreducible-components-minimal-primes] says that the components of $U$ are exactly $V(K_i)$. By the Zariski topology of [def-weil-affine-spectrum], $V(K_i)=D(e_i)$: a prime containing $K_i$ omits $e_i$, and a prime omitting $e_i$ contains $K_i$. They are therefore pairwise disjoint open and closed subsets covering $U$. When $n=0$, $R$ is the zero ring and has no prime ideals, so the same assertion holds for the empty affine open.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, affine case; expanded elementary prime/idempotent calculation after algebra.tex Tag 030C"
+   }
+  },
+  {
+   "text": "For an affine open $U\\subseteq Z$, use the order-preserving bijection [lem-weil-pbc-open-subspace-irreducible-closed-correspondence]. If $C$ is a component of $Z$ meeting $U$, then $C\\cap U$ is a component of $U$: an irreducible closed set of $U$ containing it would have closure containing $C$, hence equal to $C$ by maximality. Conversely, if $T$ is a component of $U$, its closure in $Z$ is a component of $Z$, because any larger irreducible closed set still meets $U$ and would intersect $U$ in a larger irreducible closed set. Thus the components meeting $U$ correspond exactly to its components, with intersection and closure as inverses.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, general case; topology.tex Tag 0B7I, lemma-dimension-supremum-local-dimensions, open-subspace correspondence"
+   }
+  },
+  {
+   "text": "Fix a component $C$ of $Z$. On every affine open $U$ its intersection is either empty or one of the open components obtained in Step 5, by Step 6. Since affine opens cover a scheme [def-pc-scheme], $C$ is open in $Z$. It is closed by [def-weil-irreducible-components]. Distinct components cannot meet: at a point of intersection choose an affine neighbourhood $U$; their intersections with $U$ are components, hence are disjoint or equal by Step 5, while equality forces equality of their closures by Step 6. Finally every point lies on a component: in an affine neighbourhood it lies on one of the $V(K_i)$ of Step 5, whose closure is a component of $Z$ by Step 6. Together with the global finiteness from Step 2 this proves the finite disjoint open-and-closed decomposition.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, last paragraph"
+   }
+  },
+  {
+   "text": "Give each component $C$ its open subscheme structure. By [def-weil-open-immersion] its structure sheaf is $\\mathcal O_Z|_C$; at $x\\in C$ the neighbourhoods contained in $C$ are cofinal among neighbourhoods of $x$ in $Z$, so its stalk equals $\\mathcal O_{Z,x}$. Hence $C$ is normal and reduced, the latter by [def-pc-reduced-scheme]. It is nonempty and irreducible by [def-weil-irreducible-components], so the equivalence in [def-pc-integral-scheme] makes it integral. If $Z$ is empty it has no nonempty irreducible subset and hence zero components; all the component assertions are vacuous. This also shows directly why no local Noetherian assumption on the structure sheaf was used.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, conclusion; Tag 01ON, lemma-characterize-integral; schemes.tex Tag 01HF, example-open-subspace"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "def-weil-irreducible-components",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, with the affine algebra input Tag 030C and finiteness from topology.tex Tag 0052"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +187,52 @@
    "results": "{\"t\": \"2026-10-18T00:10:34Z\", \"tool\": \"grep\", \"query\": \"normal.*components|components.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: the hits give finiteness for algebraically Noetherian schemes, integrality iff reduced and irreducible, and normalization open covers; none deduces disjointness or openness from normal local rings. The first Loogle query reports an unknown normal-scheme identifier; the second Loogle query and the targeted normal-ring and component greps have no hits. No matching declaration or one-line specialization was found.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*components|components.*normal|IsNormal",
+   "results": "{\"t\": \"2026-10-18T23:06:53Z\", \"tool\": \"grep\", \"query\": \"normal.*components|components.*normal|IsNormal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme with domain integrally closed local rings and finitely many irreducible components is a finite disjoint union of normal integral open subschemes",
+   "results": "{\"t\": \"2026-10-18T23:06:53Z\", \"tool\": \"leansearch\", \"query\": \"A scheme with domain integrally closed local rings and finitely many irreducible components is a finite disjoint union of normal integral open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"9691d514100b7ef2\"}; Hits give topological finiteness or integrality criteria, or require algebraic Noetherianness. None proves the normal-scheme component decomposition under the item hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal schemes with Noetherian underlying topological space have finitely many pairwise disjoint open and closed normal integral irreducible components",
+   "results": "{\"t\": \"2026-10-18T23:06:55Z\", \"tool\": \"leanfinder\", \"query\": \"Normal schemes with Noetherian underlying topological space have finitely many pairwise disjoint open and closed normal integral irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"6b0cba339d9d1b4b\"}; Hits give topological finiteness or integrality criteria, or require algebraic Noetherianness. None proves the normal-scheme component decomposition under the item hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, irreducibleComponents",
+   "results": "{\"t\": \"2026-10-18T23:06:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|NormalRing",
+   "results": "{\"t\": \"2026-10-18T23:09:02Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|NormalRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme with domain local rings distinct irreducible components are disjoint when the underlying space is Noetherian",
+   "results": "{\"t\": \"2026-10-18T23:09:08Z\", \"tool\": \"leanfinder\", \"query\": \"In a scheme with domain local rings distinct irreducible components are disjoint when the underlying space is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\"], \"digest\": \"74793a4d54b25563\"}; Hits give topological finiteness or integrality criteria, or require algebraic Noetherianness. None proves the normal-scheme component decomposition under the item hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ordered-nodal-branch-overlap",
@@ -107,5 +264,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-normal-topologically-noetherian-components",
+  "worker": "stage1",
+  "summary": "Proved the topologically Noetherian version by the affine argument of Stacks 0357 and existing algebraic Tag 030C node. Expanded the idempotent component calculation and open-subspace gluing, checked the empty scheme and avoided algebraic Noetherian assumptions. Reused all inputs; no new nodes. Statement unchanged.",
+  "blueprint": "Historical auxiliary branch recorded in blueprint.from.place: isolate a normal branch-family component through a chosen point. This split proves that input only; the current main-20261015 lem-trf-local-term-locality and sk-i-curve-zero contracting-correspondence route is not replaced or reinterpreted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic affine-spectrum component/minimal-prime correspondence; the trace-formula unit has no such commutative-algebra interface."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine stalk/localization identification to check normality of the section ring; no lemma of the trace-formula unit provides it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic finite normal-ring decomposition used in the affine case of Stacks 0357; no trace-formula unit lemma replaces this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-c1703be49",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-c1703be49 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 13 cited statements in full; there are no new nodes. Sources: Stacks 0357 (properties.tex l.933) and 030C (algebra.tex l.8275), plus the tags for 0052, 00ES, 01HV, 01HF and 01ON. The statement is true and is a correct form of 0357 with |Z| topologically Noetherian, which gives 0357's finiteness on quasi-compact opens. It never assumes the ring is Noetherian, so it is not a duplicate of the Noetherian results rem-pc-regular-normal(2) (033M), lem-sbc-normal-sections-finite-product or lem-a1-normal-etale-components-clopen. Tested on: the empty scheme, Spec of a normal domain, Spec(A×B), a rank-1 non-discrete valuation ring, and xy=0, which is excluded and shows normality is needed. Steps: S2 gets finitely many minimal primes via the injective map q↦V(q). S3 gets reducedness from the equivalence written in def-pc-reduced-scheme and normality from the localization clause (c) of affine-open-stalk-localization. S4 applies 030C (1)⇒(3) with its hypotheses checked. S5 is a correct idempotent calculation: K_i minimal, V(K_i)=D(e_i), n=0 handled. S6–S7 do the open-subspace correspondence and the gluing (open, disjoint, covering, finite). S8 uses unchanged stalks on the open subscheme and the integral-scheme equivalence. proof_deps equals the union of uses, there is no cycle and no SGA. Advisories only: the DCC ⇒ minimal-element step for lem-sc is a one-line elementary argument; S6's 0B7I source pointer is weak, but the cited node carries the content. Accepted tool_uses: spec-components/minimal-primes, affine-stalk-localization and 030C, all generic algebra used as black boxes. No files changed."
  }
 }
