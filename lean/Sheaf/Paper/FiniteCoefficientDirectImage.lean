@@ -13,6 +13,7 @@ public import Sheaf.Paper.FiniteDirectImageComposition
 public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
+import Sheaf.Paper.EtaleProEtaleScalarMate
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
@@ -56,6 +57,89 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
+
+private theorem coefficient_existsUnique
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (P : A ⥤ B) (Q : B ⥤ A) (adjA : Q ⊣ P)
+    (P' : C ⥤ D) (Q' : D ⥤ C) (adjB : Q' ⊣ P')
+    (S : B ⥤ D) (R : D ⥤ B) (adjX : S ⊣ R)
+    (S' : A ⥤ C) (R' : C ⥤ A) (adjT : S' ⊣ R')
+    (e : R ⋙ Q ≅ Q' ⋙ R')
+    (hk : IsIso (((mateEquiv adjX adjT).symm
+      (TwoSquare.mk _ _ _ _ e.hom)).natTrans)) (K : A) :
+    ∃! c : S.obj (P.obj K) ⟶ P'.obj (S'.obj K),
+      Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
+        R'.map (Q'.map c ≫ adjB.counit.app (S'.obj K)) =
+          adjA.counit.app K ≫ adjT.unit.app K := by
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  have : IsIso k := hk
+  let t := inv (k.app (P.obj K)) ≫ S'.map (adjA.counit.app K)
+  let c := adjB.homEquiv _ _ t
+  have hunit := unit_mateEquiv_symm adjX adjT (TwoSquare.mk _ _ _ _ e.hom) (P.obj K)
+  have hc : Q'.map c ≫ adjB.counit.app (S'.obj K) = t := by
+    exact (adjB.homEquiv _ _).symm_apply_apply t
+  have eqn (d : S.obj (P.obj K) ⟶ P'.obj (S'.obj K)) :
+      Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
+        R'.map (Q'.map d ≫ adjB.counit.app (S'.obj K)) =
+      adjT.homEquiv _ _ (k.app (P.obj K) ≫
+        (Q'.map d ≫ adjB.counit.app (S'.obj K))) := by
+    rw [Adjunction.homEquiv_unit]
+    rw [← Category.assoc, hunit]
+    simp only [Functor.map_comp, Category.assoc]
+    rfl
+  refine ⟨c, ?_, ?_⟩
+  · dsimp only
+    rw [eqn, hc]
+    dsimp only [t]
+    rw [IsIso.hom_inv_id_assoc, Adjunction.homEquiv_unit]
+    exact adjT.unit.naturality (adjA.counit.app K) |>.symm
+  · intro d hd
+    rw [eqn] at hd
+    have hc' : adjT.homEquiv _ _ (k.app (P.obj K) ≫
+        (Q'.map c ≫ adjB.counit.app (S'.obj K))) =
+        adjA.counit.app K ≫ adjT.unit.app K := by
+      rw [hc]
+      dsimp only [t]
+      rw [IsIso.hom_inv_id_assoc, Adjunction.homEquiv_unit]
+      exact adjT.unit.naturality (adjA.counit.app K) |>.symm
+    apply (adjB.homEquiv _ _).symm.injective
+    apply (cancel_epi (k.app (P.obj K))).mp
+    exact (adjT.homEquiv _ _).injective (hd.trans hc'.symm)
+
+private theorem coefficient_naturality
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (P : A ⥤ B) (Q : B ⥤ A) (adjA : Q ⊣ P)
+    (P' : C ⥤ D) (Q' : D ⥤ C) (adjB : Q' ⊣ P')
+    (S : B ⥤ D) (R : D ⥤ B) (adjX : S ⊣ R)
+    (S' : A ⥤ C) (R' : C ⥤ A) (adjT : S' ⊣ R')
+    (e : R ⋙ Q ≅ Q' ⋙ R')
+    (hk : IsIso (((mateEquiv adjX adjT).symm
+      (TwoSquare.mk _ _ _ _ e.hom)).natTrans))
+    (c : ∀ K, S.obj (P.obj K) ⟶ P'.obj (S'.obj K))
+    (hu : ∀ K (d : S.obj (P.obj K) ⟶ P'.obj (S'.obj K)),
+      Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
+        R'.map (Q'.map d ≫ adjB.counit.app (S'.obj K)) =
+          adjA.counit.app K ≫ adjT.unit.app K → d = c K)
+    {K L : A} (h : K ⟶ L) :
+    S.map (P.map h) ≫ c L = c K ≫ P'.map (S'.map h) := by
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  have : IsIso k := hk
+  let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv)).natTrans
+  have heq (M : A) : γ.app M = c M := by
+    apply hu M
+    have hunit := unit_mateEquiv_symm adjX adjT
+      (TwoSquare.mk _ _ _ _ e.hom) (P.obj M)
+    change Q.map (adjX.unit.app (P.obj M)) ≫ e.hom.app (S.obj (P.obj M)) =
+      adjT.unit.app (Q.obj (P.obj M)) ≫ R'.map (k.app (P.obj M)) at hunit
+    have hc := mateEquiv_counit adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv) M
+    change Q'.map (γ.app M) ≫ adjB.counit.app (S'.obj M) =
+      (asIso k).inv.app (P.obj M) ≫ S'.map (adjA.counit.app M) at hc
+    rw [hc, ← Category.assoc, hunit, Category.assoc, ← R'.map_comp]
+    change adjT.unit.app _ ≫
+      R'.map ((asIso k).hom.app _ ≫ (asIso k).inv.app _ ≫ _) = _
+    rw [Iso.hom_inv_id_app_assoc]
+    exact (adjT.unit.naturality (adjA.counit.app M)).symm
+  simpa only [Functor.comp_map, heq] using γ.naturality h
 
 /-- Explicit size witness for the small etale site; no universe equality is imposed.
 Source: Mathlib essentiallySmall_of_small_of_locallySmall; blueprint order 2130
@@ -135,7 +219,12 @@ theorem finiteCoefficientDirectImageMap_existsUnique
       (R(lowerStar (ModuleCat.{u + 1} B) f)).obj
         ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension (T.smallEtaleTopology) φ).obj K),
       IsFiniteCoefficientDirectImageMap φ f K c := by
-  sorry
+  exact coefficient_existsUnique _ _
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f) _ _
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f) _ _
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)) _ _
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
+    (finiteCoefficientRestrictionPullback φ f) (ProEtale.scalarPullbackReverse_isIso φ f).2 K
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
 uniquely determines it by the extended counit. Only that proof is postponed.
@@ -206,7 +295,29 @@ theorem finiteCoefficientDirectImageMap_existsUnique
       (R(lowerStar (ModuleCat.{u + 1} B) f)).obj
         ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension (Scheme.ProEt.topology T) φ).obj K),
       IsFiniteCoefficientDirectImageMap φ f K c := by
-  sorry
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let aa := derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} A) f
+  let ab := derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} B) f
+  let ax := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) φ)
+  let adt := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) φ)
+  let e := leftDerivedUpperStarRestrictScalarsIso.{u} φ f
+  have hk := (scalarPullbackReverse_isIso.{u} φ f).1
+  exact @coefficient_existsUnique.{u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1}
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} B)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)))
+    inferInstance inferInstance inferInstance inferInstance
+    (R(lowerStar (ModuleCat.{u + 1} A) f)) (L(upperStar (ModuleCat.{u + 1} A) f)) aa
+    (R(lowerStar (ModuleCat.{u + 1} B) f)) (L(upperStar (ModuleCat.{u + 1} B) f)) ab
+    (pbcFixedScalarExtension (Scheme.ProEt.topology X) φ)
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ) ax
+    (pbcFixedScalarExtension (Scheme.ProEt.topology T) φ)
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ) adt e hk K
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
 uniquely determines it by the extended counit. Only that proof is postponed.
@@ -244,7 +355,15 @@ theorem finiteCoefficientDirectImageMap_naturality
         (R(lowerStar (ModuleCat.{u + 1} B) f)).map
           ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension (T.smallEtaleTopology) φ).map h) :=
           by
-  sorry
+  refine coefficient_naturality _ _
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f) _ _
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f) _ _
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (X.smallEtaleTopology) φ)) _ _
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (T.smallEtaleTopology) φ))
+    (finiteCoefficientRestrictionPullback φ f) (ProEtale.scalarPullbackReverse_isIso φ f).2
+    (finiteCoefficientDirectImageMap φ f) ?_ h
+  · intro K d hd
+    exact (finiteCoefficientDirectImageMap_existsUnique φ f K).choose_spec.2 d hd
 
 /-- Geometric composition coherence, with the canonical direct-image compositors.
 Source: blueprint order 2130, composition clause and proof Step 3
@@ -321,7 +440,35 @@ theorem finiteCoefficientDirectImageMap_naturality
         (R(lowerStar (ModuleCat.{u + 1} B) f)).map
           ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension (Scheme.ProEt.topology T) φ).map h)
           := by
-  sorry
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let aa := derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} A) f
+  let ab := derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} B) f
+  let ax := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) φ)
+  let adt := Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) φ)
+  let e := leftDerivedUpperStarRestrictScalarsIso.{u} φ f
+  have hk := (scalarPullbackReverse_isIso.{u} φ f).1
+  have hu (M : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))
+      (d : (pbcFixedScalarExtension (Scheme.ProEt.topology X) φ).obj
+        ((R(lowerStar (ModuleCat.{u + 1} A) f)).obj M) ⟶
+        (R(lowerStar (ModuleCat.{u + 1} B) f)).obj
+          ((pbcFixedScalarExtension (Scheme.ProEt.topology T) φ).obj M))
+      (hd : IsFiniteCoefficientDirectImageMap φ f M d) :
+      d = finiteCoefficientChangeDirectImageMap φ f M :=
+    (finiteCoefficientDirectImageMap_existsUnique φ f M).choose_spec.2 d hd
+  have hn := @coefficient_naturality.{u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1}
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} B)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)))
+    inferInstance inferInstance inferInstance inferInstance
+    _ _ aa _ _ ab _ _ ax _ _ adt e hk
+    (finiteCoefficientChangeDirectImageMap φ f) hu K L h
+  exact hn
 
 /-- Geometric composition coherence, with the canonical direct-image compositors.
 Source: blueprint order 2130, composition clause and proof Step 3
@@ -541,6 +688,29 @@ theorem finiteCoefficientDirectImageMap_restriction_projection
     (R(lowerStar (ModuleCat.{u + 1} A) f)).map
       ((Adjunction.ofIsRightAdjoint
         (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)).unit.app K) := by
-  sorry
+  let adjA := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
+  let adjB := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f
+  let e := finiteCoefficientRestrictionPullback φ f
+  let S := ProEtale.pbcFixedScalarExtension T.smallEtaleTopology φ
+  have hc := (finiteCoefficientDirectImageMap_existsUnique φ f K).choose_spec.1
+  change IsFiniteCoefficientDirectImageMap φ f K
+    (finiteCoefficientDirectImageMap φ f K) at hc
+  apply (adjA.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [show L(upperStar (ModuleCat.{u + 1} A) f).map
+      ((finiteCoefficientRestrictionDirectImageMap φ f).app (S.obj K)) ≫
+      adjA.counit.app _ =
+      e.hom.app _ ≫
+        (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).map
+          (adjB.counit.app (S.obj K)) from
+    mateEquiv_counit adjB adjA e.hom (S.obj K)]
+  rw [← Functor.comp_map,
+    e.hom.naturality_assoc (finiteCoefficientDirectImageMap φ f K)]
+  simp only [Functor.comp_map]
+  rw [← Functor.map_comp]
+  exact hc.trans (adjA.counit.naturality
+    ((Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)).unit.app K)).symm
+
 
 end AlgebraicGeometry.Etale

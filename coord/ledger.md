@@ -17576,3 +17576,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:27 L: merged deliver/G3/Sheaf.Paper.PurityDncComparisons (stage 3; reviewer PASS; after a return; landing 20261019T192740-L-1862566 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:27 L: merged deliver/G6/Sheaf.Paper.NilpotentReductionStep (stage 3; reviewer PASS; first push; landing 20261019T192742-L-1862821 (interface); batch 20261019T192638; modules 1; new nodes 0; change records: coord/changes/G6-nilpotent-reduction-private-proof-scopes.md)
 - 19:27 L: merged deliver/G7/Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation (stage 3; reviewer PASS; first push; landing 20261019T192743-L-1863090 (interface); batch 20261019T192638; modules 4; new nodes 3)
+- 19:27 L: merged deliver/G8/Sheaf.Paper.FiniteCoefficientDirectImage (stage 3; reviewer PASS; first push; landing 20261019T192745-L-1863453 (proof); batch 20261019T192638; modules 1; new nodes 0)
