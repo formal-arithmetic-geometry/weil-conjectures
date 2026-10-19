@@ -20,11 +20,171 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-etale-sheaves",
   "def-weil-residue-field",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $V=\\operatorname{Spec}D\\subseteq B$ containing the image of $\\bar t$. Pointed etale neighbourhoods inside $V$ are cofinal: restrict any neighbourhood to the inverse image of $V$ and choose an affine open about its distinguished point. Thus the strict-localization construction gives the same $T=\\operatorname{Spec}H$ over $V$. The affine-pairs criterion makes $D$ a finite-type $C$-algebra. The complete-local excellence theorem makes $C$ excellent, and finite-type/localization permanence makes $D$ and each $D_{\\mathfrak p}$ excellent. The geometric strict-local presentation identifies $H$ with an algebraic strict henselization of some $D_{\\mathfrak p}$, and the triples presentation of such a strict henselization exhibits $H$ as the colimit over etale residue triples, which is the strict henselization meant in the Noetherianness theorem. Since excellence includes Noetherianness, strict-henselization Noetherianness makes $H$ Noetherian. These are applications to a complete Noetherian local ring and its finite-type algebra; no assertion about a nonexcellent DVR is used.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-sbc-geometric-strict-henselization-local-presentation",
+    "lem-sc-strict-henselization-triples-presentation",
+    "lem-sc-strict-henselization-noetherian",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (proposition-ubiquity-excellent), 07QU (lemma-finite-type-over-excellent), 06LJ (lemma-henselization-noetherian); geometric presentation: Tag 04HX in etale-cohomology.tex"
+   }
+  },
+  {
+   "text": "The structural map $D\\to H$ is ind-etale by the affine-chart strict-henselization theorem, hence weakly etale by ind-etale stability. Apply weakly-etale excellence ascent to this map: its source is excellent by Step 1 and its target is Noetherian by Step 1. Thus $H$ is excellent. For each $j\\geq0$, set $P_j=\\operatorname{Spec}H[x_1,\\ldots,x_j]=\\mathbf A^j_T$. Its coordinate ring is excellent by finite-type permanence. The excellent affine-cover criterion shows that every affine open of $P_j$ has excellent, hence quasi-excellent, coordinate ring. The $P_j$ are quasi-compact and quasi-separated by the affine qcqs theorem. The projection $p_j:P_{j+1}\\to P_j$ is of finite presentation: its coordinate algebra is the polynomial algebra on one generator with no relations. These observations check the finiteness theorem's base and presentation hypotheses at every stage. The projection is affine on these affine charts; affine-morphism permanence supplies its quasi-compactness and quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "def-exc-excellent-ring",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I 5.1 (permanence); the weakly-etale ascent is the separately cited generic excellence theorem; polynomial presentation is explicit"
+   }
+  },
+  {
+   "text": "For $z\\in P_j$ put $\\delta_j(z)=\\delta_T(a_j(z))+\\operatorname{trdeg}_{\\kappa(a_j(z))}\\kappa(z)$. We prove by induction on $j$ the following assertion, for every integer $c$: if $N$ is a constructible $\\mathbf F_\\ell$-sheaf on $P_j$ and its nonzero stalks have $\\delta_j\\leq c$, then $H^q(P_j,N)=0$ for $q\\geq0$ with $q>c$. For $j=0$, $P_0=T$. Strict-henselization functoriality makes $H$ strictly henselian local. Exactness of strict-local sections kills all positive cohomology. At its closed point $s$ one has $\\delta_T(s)=0$. If $c<0$, the support hypothesis forces $N_{\\bar s}=0$; the sections-to-closed-stalk isomorphism gives $H^0(T,N)=0$ as well. If $c\\geq0$, any $q>c$ is already positive. This proves the base for all integers, including negative bounds.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-strictly-henselian-sections-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian; agent coordinate induction"
+   }
+  },
+  {
+   "text": "Assume the assertion of Step 3 for $j=m$, for every bound $c$, and let $N$ on $P_{m+1}$ have support bound $c$. For every $r\\geq0$ set $N_r=R^rp_{m*}N$. Quasi-excellent direct-image finiteness, with coefficient field $\\mathbf F_\\ell$, implies that the module higher direct image $R^rp_{m*}N$ is constructible; by the forgetful comparison of higher direct images its underlying abelian sheaf is the abelian $R^rp_{m*}N$ used in Step 5 and in the one-coordinate estimate, so $N_r$ is a constructible $\\mathbf F_\\ell$-sheaf with that underlying abelian sheaf. Indeed $p_m$ is finitely presented, both schemes are qcqs, its target is quasi-excellent by Step 2, and $\\ell$ remains invertible because all schemes are over $T$. The one-coordinate support estimate gives $\\delta_m(v)\\leq c-r$ at every nonzero geometric stalk of $N_r$. The inductive hypothesis is therefore applicable to each $N_r$ with the integer bound $c-r$, even when that integer is negative.",
+   "uses": [
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-per-trait-affine-line-support-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII 1.1.1 (constructibility), XV 1.1.2 and Remark 1.1.3 (the one-coordinate trait support estimate)"
+   }
+  },
+  {
+   "text": "Apply the etale Leray spectral sequence to $p_m$, with global sections on $P_m$:\n$$E_2^{a,r}=H^a(P_m,N_r)\\Longrightarrow H^{a+r}(P_{m+1},N),\\qquad a,r\\geq0.$$\nFor a fixed $q>c$ and every $a+r=q$, the inequality $a>c-r$ makes $E_2^{a,r}$ zero by Step 4 and the induction hypothesis. The corresponding stable terms are subquotients of zero. The convergent first-quadrant sequence gives a finite filtration on $H^q(P_{m+1},N)$, with these stable terms as its graded pieces; starting with the zero last filtration term shows successively that every term, including the whole group, is zero. This proves the induction step and hence the assertion for all $j$. Only one coordinate is eliminated at each step; no bound by the relative fibre dimension alone is asserted.",
+   "uses": [
+    "sk-thm-groth-ss"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray (etale ringed-topos Leray spectral sequence); finite zero-diagonal filtration argument expanded by Q47"
+   }
+  },
+  {
+   "text": "Since $T=\\operatorname{Spec}H$ is affine and $f$ is affine, $Y=\\operatorname{Spec}A$ is affine. The affine-pairs criterion applied to $f$ makes $A$ a finite-type $H$-algebra. Choose generators $a_1,\\ldots,a_n$; evaluation gives a surjection $H[x_1,\\ldots,x_n]\\twoheadrightarrow A$. By the affine description of closed immersions its spectrum is a closed immersion $i:Y\\hookrightarrow P_n$, and the inclusion of constants shows $f=a_n\\circ i$. This construction also allows $Y$ empty and $n=0$. As a module over the polynomial ring, the quotient $A$ is generated by $1$, so $i$ is finite. Its target coordinate ring is Noetherian by Step 2; the finite-type/finite-presentation theorem makes the quotient algebra finitely presented. Thus $i$ is finite and finitely presented, and both its source and target are qcqs affines. Affine-morphism permanence supplies the quasi-compactness and quasi-separatedness required for finite presentation.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (lemma-locally-finite-type-characterize), Tag 01QO (affine closed-immersion criterion); Tag 00FP in algebra.tex"
+   }
+  },
+  {
+   "text": "Let $G=i_*F$, with its induced $\\mathbf F_\\ell$-module structure. Finite finitely presented pushforward preserves constructible module sheaves, so $G$ is constructible on $P_n$. The finite-pushforward stalk formula says that $G_{\\bar z}=0$ outside the image of $i$, while at $z=i(y)$ it is the stalk of $F$ at the unique lifted geometric point. A closed immersion induces $\\kappa(z)\\cong\\kappa(y)$: on an affine chart both are the fraction field of the same prime quotient of $H[x_1,\\ldots,x_n]$. Since the maps to $T$ agree, this gives $\\delta_n(i(y))=\\delta_Y(y)$. Consequently every nonzero stalk of $G$ has $\\delta_n\\leq b$ by the original support hypothesis. No extra dimension from the chosen ambient affine space is added.",
+   "uses": [
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "sk-lem-pbc-finite",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095R, lemma-finite-pushforward-constructible; Tag 03QP, proposition-finite-higher-direct-image-zero and its stalk formula"
+   }
+  },
+  {
+   "text": "Apply the polynomial-space assertion proved in Steps 3--5 with $j=n$, $N=G$ and $c=b$. Step 7 verifies its support condition, so $H^q(P_n,G)=0$ for all $q\\geq0$ with $q>b$. The finite-pushforward cohomology theorem for $i$ gives $H^q(P_n,i_*F)\\cong H^q(Y,F)$ on the underlying abelian etale sheaves. This proves the asserted vanishing with precisely the original $b$. The argument covers $F=0$, the empty $Y$, a zero-variable presentation, and negative $b$.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5D, lemma-finite-pushforward-statements, cohomology identification using 03QP and Leray"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "lem-sc-strict-henselization-triples-presentation",
+  "lem-sc-strict-henselization-noetherian",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-per-trait-affine-line-support-estimate",
+  "sk-thm-groth-ss",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "sk-lem-pbc-finite",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-pushforward-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Coordinate-projection induction and affine closed-embedding reduction, using the trait support theorem recorded in XV 1.1.3, the formulation XV 1.1.2--1.2.2 and XIII 1.1.1. This expanded reduction is Q47’s argument; the unavailable original Illusie 2003 proof is not claimed to have been read."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -118,10 +278,276 @@
    },
    "date": "2026-10-19",
    "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine Lefschetz vanishing for constructible etale sheaves over a strict localization of a finite type scheme over a trait",
+   "results": {
+    "t": "2026-10-18T23:22:31Z",
+    "tool": "leanfinder",
+    "query": "Affine Lefschetz vanishing for constructible etale sheaves over a strict localization of a finite type scheme over a trait",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine",
+     "AlgebraicGeometry.exists_lift_of_germInjective",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen"
+    ],
+    "digest": "f33652ee7864fbfc"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale sheaf cohomology affine morphism vanishing bounded by dimension of support",
+   "results": {
+    "t": "2026-10-18T23:24:53Z",
+    "tool": "leansearch",
+    "query": "Constructible etale sheaf cohomology affine morphism vanishing bounded by dimension of support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.IsAffineHom.mk",
+     "AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support",
+     "AlgebraicGeometry.sourceAffineLocally",
+     "AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine",
+     "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom"
+    ],
+    "digest": "ca59efd2bc6135f7"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one variable polynomial scheme projection over a strictly localized trait model satisfies the affine etale cohomological support estimate",
+   "results": {
+    "t": "2026-10-18T23:31:35Z",
+    "tool": "leanfinder",
+    "query": "A one variable polynomial scheme projection over a strictly localized trait model satisfies the affine etale cohomological support estimate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+     "StandardEtalePair.hasMap_X",
+     "Algebra.Etale.of_isLocalizationAway",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.Etale.of_isLocalization_Away",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "RingHom.Etale.ofLocalizationSpan",
+     "RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial"
+    ],
+    "digest": "a591e57f0ac34c6a"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"IsAffineHom\"",
+   "results": {
+    "t": "2026-10-18T23:31:41Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"IsAffineHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine line projection higher direct image constructible etale sheaf support dimension bound over discrete valuation ring",
+   "results": {
+    "t": "2026-10-18T23:32:02Z",
+    "tool": "leansearch",
+    "query": "Affine line projection higher direct image constructible etale sheaf support dimension bound over discrete valuation ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace.isOpenMap_over",
+     "AlgebraicGeometry.sourceAffineLocally",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.IsAffineHom.casesOn",
+     "AlgebraicGeometry.HasAffineProperty.affineAnd_le_isAffineHom",
+     "AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.AffineSpace.toSpecMvPoly",
+     "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange"
+    ],
+    "digest": "546ded1c4562c6ea"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the affine line projection over a scheme essentially of finite type over a trait, higher direct images of constructible finite etale sheaves lower support dimension by the cohomological degree",
+   "results": {
+    "t": "2026-10-18T23:32:04Z",
+    "tool": "leanfinder",
+    "query": "For the affine line projection over a scheme essentially of finite type over a trait, higher direct images of constructible finite etale sheaves lower support dimension by the cohomological degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType"
+    ],
+    "digest": "a12653650cee0172"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "grep",
+   "query": "(Lefschetz|[Aa]rtin.*vanishing|[Ee]tale.*[Cc]onstructible|[Cc]onstructible.*[Ee]tale)",
+   "results": {
+    "t": "2026-10-18T23:32:08Z",
+    "tool": "grep",
+    "query": "(Lefschetz|[Aa]rtin.*vanishing|[Ee]tale.*[Cc]onstructible|[Cc]onstructible.*[Ee]tale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/FieldTheory/AxGrothendieck.lean"
+    ],
+    "digest": "df646c1b65bdacf5"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "grep",
+   "query": "(higherDirectImage|higher_direct_image|etaleTopology|Lefschetz|IsAffineHom)",
+   "results": {
+    "t": "2026-10-19T00:06:40Z",
+    "tool": "grep",
+    "query": "(higherDirectImage|higher_direct_image|etaleTopology|Lefschetz|IsAffineHom)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/AffineSpace.lean",
+     "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+     "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean"
+    ],
+    "digest": "57ed34c5fb7e30f3"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Gabber affine line projection support dimension estimate for higher direct images of constructible etale sheaves over a discrete valuation ring",
+   "results": {
+    "t": "2026-10-19T00:14:01Z",
+    "tool": "leansearch",
+    "query": "Artin Gabber affine line projection support dimension estimate for higher direct images of constructible etale sheaves over a discrete valuation ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.supportDim_le_of_surjective",
+     "Module.supportDim_le_supportDim_quotSMulTop_succ",
+     "Module.supportDim_le_of_injective",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.Hom.support_ker",
+     "IsDedekindDomainDvr.ring_dimensionLEOne",
+     "AlgebraicGeometry.IsLocallyArtinian.casesOn",
+     "AlgebraicGeometry.IsEtale"
+    ],
+    "digest": "698a5326babf85d5"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"cohomology\"",
+   "results": {
+    "t": "2026-10-19T00:14:01Z",
+    "tool": "loogle",
+    "query": "\"AffineSpace\", \"cohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible finite etale sheaf on an affine line over a strict localization of a trait model, higher direct images lower dimension of support by the cohomological degree",
+   "results": {
+    "t": "2026-10-19T00:14:02Z",
+    "tool": "leanfinder",
+    "query": "For a constructible finite etale sheaf on an affine line over a strict localization of a trait model, higher direct images lower dimension of support by the cohomological degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "Algebra.etaleLocus_eq_compl_support",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs"
+    ],
+    "digest": "c06bbc26db57a736"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: the returned affine-limit, etale-locus, basic site and module-support declarations do not estimate higher direct images of etale sheaves over a trait"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-affine-open-strict-local-constant-bound",
@@ -142,5 +568,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trait-affine-lefschetz",
+  "worker": "stage1",
+  "summary": "Retained the previous sandbox and all actual search records. Kept the statement unchanged. Replaced the empty proof by excellence preparation, a coordinate-by-coordinate support/Leray induction with the negative-bound base case, and a finite closed-embedding reduction preserving support weights. One genuinely one-variable support estimate is a new statement-only node; generic finiteness, strict-local acyclicity, geometry and finite pushforward inputs are reused.",
+  "blueprint": "Realizes the sharper affine-Lefschetz input of lem-per-artin-gabber-affine-curve proof Step 1 through the existing strict-local constant-bound ancestry. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-sbc-geometric-strict-henselization-local-presentation",
+    "why": "Generic Geometric strict henselization over a prime localization input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic Strict henselization is ind-etale over an affine chart input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic Excellence ascends along weakly etale maps of Noetherian rings input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Generic Excellence of a scheme is detected on an affine open cover input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic Strict henselizations at a geometric point and their functoriality input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic Etale cohomology of a strictly henselian local scheme vanishes in positive degrees input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "sk-thm-groth-ss",
+    "why": "Generic Grothendieck spectral sequence and its Leray specialization input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "why": "Generic Finite finitely presented pushforward preserves constructible etale modules input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "sk-lem-pbc-finite",
+    "why": "Generic Finite morphisms input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-cohomology",
+    "why": "Generic Finite direct image does not change etale cohomology (edge map) input in the explicit trait affine-Lefschetz reduction; it supplies geometry, cohomological functoriality or finite pushforward, without replacing the unit’s affine-Lefschetz route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-triples-presentation",
+    "why": "Generic bridge (added by the maintainer reader): identifies the algebraic strict henselization of the geometric presentation with the residue-triple colimit to which strict-henselization Noetherianness applies; no unit node gives this identification."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic comparison (added by the maintainer reader): the module higher direct image of the finiteness theorem has the abelian higher direct image of the Leray sequence and of the one-coordinate estimate as underlying sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "sk-thm-groth-ss",
+  "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "sk-lem-pbc-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-sc-strict-henselization-triples-presentation",
+  "lem-sbc-higher-direct-image-forget-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-290ea8452",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-290ea8452 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps, the new node and every cited statement. Sources checked: ILO XV 1.1.1-1.2.6 (pp.219-220) and XIV 2.4.4-2.5.2. The item is the trait case of XV Cor 1.2.2 (Remark 1.1.3). New node lem-per-trait-affine-line-support-estimate: it is exactly XV Thm 1.1.2 for the projection p_m. delta_T is a dimension function by XIV 2.4.5 because T is excellent, hence universally catenary. p_m^*delta_m = delta_{m+1} by trdeg transitivity, and P_m is quasi-excellent. So the node is true. I tested it on the affine line over a strictly henselian DVR, and M=0 or b<0 are vacuous. It is not a duplicate: lem-kun-affine-direct-image-support-bound (0F0X) and lem-per-qbar-affine-support-bound are over a field, and the affine-open strict-local cd nodes are a different statement. It is not D1: stalk by stalk it is the item for an affine line over another strict localization, and the steps do real work to get the general case (closed embedding into A^n preserving delta, induction on coordinates via Leray). Steps 2, 3 and 5-8 are correct. Hypotheses checked: weakly-etale ascent has a Noetherian target from Step 1; the negative-bound base case uses the closed-stalk sections iso; the closed-immersion stalk formula and residue fields preserve delta; the finite pushforward cohomology iso holds. No cycle; no SGA cited. FIX, two C1/C4 citations: (1) Step 1 applied strict-henselization Noetherianness, which is stated for the triples model, to a def-sc strict henselization; I added lem-sc-strict-henselization-triples-presentation as the bridge. (2) Step 4 got constructibility of the module R^r p_* from the finiteness theorem but used the abelian R^r p_* in Leray and in the new node; I added lem-sbc-higher-direct-image-forget-comparison. Both were added to proof_deps and tool_uses. Batch-5 flags are all generic and accepted: complete-local excellence reaches only regular/CM universally-catenary algebra; lem-trf-excellent-scheme-affine-cover is Zariski-locality of excellence (its closure has only the g-ring/j2/catenary cover lemmas); Gabber's finiteness theorem is a finiteness hypothesis-type result whose closure reaches no thm-trf, sk-thm-trace-transport, nt-assume or Poincare theorem. Maintainer note: the new node must later be split via Illusie 2003 Thm 2.4 (WANTED), never via ILO XV 1.2.3-1.2.4 or lem-per-affine-open-strict-local-constant-bound, which cites this item (latent cycle).; 1 file(s) fixed by the reviewer"
  }
 }
