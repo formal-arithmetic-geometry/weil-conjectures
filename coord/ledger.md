@@ -17018,3 +17018,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: returned deliver/Q44/lem-per-closed-fibre-stalk-completion (reviewer RETURN: Route fault, not a maths fault. The item lem-per-closed-fibre-stalk-completion is itself on the human's 2026-10-19 artin)
 - 03:58 L: returned deliver/Q72/lem-per-trait-affine-line-support-estimate (reviewer RETURN: Route-pivot fault (F, rule 3 of the 2026-10-19 route decision). The item lem-per-trait-affine-line-support-estimate is i)
 - 03:58 L: returned deliver/Q39/lem-per-singular-curve-point-blowup-step (reviewer RETURN: F / route pivot of 2026-10-19. The item lem-per-singular-curve-point-blowup-step is itself on the drop list (side coord/)
+- 03:58 L: returned deliver/Q82/lem-per-rational-point-blowup-normality (reviewer RETURN: Route-pivot drop; the maths itself is sound. The item lem-per-rational-point-blowup-normality is itself listed in clones)
