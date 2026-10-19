@@ -16981,3 +16981,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Z5/Sheaf.RingTheory.DerivedCompleteModuleFinite (stage 3; reviewer PASS; first push; landing 20261019T034410-L-429021 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Z6/Sheaf.Paper.CompletedPullbackTensorComparison (stage 3; reviewer PASS; first push; landing 20261019T034411-L-429152 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Z6/Sheaf.Paper.ConstantWeilStructure (stage 3; reviewer PASS; first push; landing 20261019T034412-L-429282 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:44 L: merged deliver/Z6/Sheaf.Paper.IntegralStratifiedPerfectCharacterization (stage 3; reviewer PASS; first push; landing 20261019T034413-L-429484 (proof); batch 20261019T034248; modules 1; new nodes 0)
