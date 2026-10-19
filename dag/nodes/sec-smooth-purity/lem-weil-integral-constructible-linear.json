@@ -25,85 +25,41 @@
  ],
  "proof": [
   {
-   "text": "Apply clause (2) of lem-pod-adic-limit-finite-modules to the free rank-one module $M=\\mathcal O_E$. Its finite-generation hypothesis holds because $1$ generates $M$. It identifies the canonical reduction map $\\mathcal O_E\\to\\varprojlim_n A_{E,n}$ with an isomorphism. This is a ring isomorphism, since each coordinate is the quotient ring homomorphism and addition and multiplication of compatible sequences are coordinatewise.",
-   "uses": [
-    "lem-pod-adic-limit-finite-modules",
-    "def-weil-l-adic-coefficient-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 031B (algebra-lemma-when-finite-module-complete-over-complete-ring), 00MA (algebra-lemma-completion-tensor); specialization of the cited coefficient-module completeness statement"
-   }
-  },
-  {
-   "text": "For each object $U$ of $Y_{\\mathrm{proet}}$, map $a\\in\\mathcal O_E$ to the sequence of constant sections $(a\\bmod\\varpi_E^n)_U$ in $(A_{E,n})_Y(U)$. These sections come from the constant-presheaf-to-sheaf map in the definition of $(A_{E,n})_Y$. The reduction maps take the $(n+1)$st coordinate to the $n$th. The sectionwise inverse-limit description therefore gives an element $c_U(a)$ of $\\widehat{\\mathcal O}_{E,Y}(U)$. Coordinatewise ring operations make $c_U$ a unital ring homomorphism, and restriction along $V\\to U$ takes $c_U(a)$ to $c_V(a)$. At the terminal object $Y$ this is precisely the stated map to global sections, using the identification of Step 1. No equality between the constant sheaf $(\\mathcal O_E)_Y$ and the completed sheaf is asserted.",
+   "text": "Reuse the published canonical ambient structure integralCoefficientLinear on the definitionally identical scalarReductionSource. The theorem integralCoefficientLinear_existsUnique characterizes precisely its scalar action; Exists.choose_spec gives the constant-section formula for every ambient derived morphism. The constant-section construction and derived localization arguments of the original Steps 1-4 remain in that legacy interface rather than being repeated here.",
    "uses": [
     "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit"
+    "def-weil-linear-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-    "place": "constant-section construction in the missing integral-linearity justification; limits as in the cited definition"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $\\mathcal O=\\widehat{\\mathcal O}_{E,Y}$. On morphisms $f:M\\to N$ of $\\mathcal O$-module sheaves set $(a f)_U(x)=c_U(a)f_U(x)$. Each $A_{E,n}$ is commutative; local representatives in its constant sheaf therefore commute, and multiplication in their inverse limit is coordinatewise. Hence $\\mathcal O$ is commutative, so $(a f)_U$ is $\\mathcal O(U)$-linear. Semilinearity of restriction and $c_U(a)|_V=c_V(a)$ show that these components commute with restriction. All module identities hold sectionwise: $(a+b)f=af+bf$, $a(f+g)=af+ag$, $(ab)f=a(bf)$ and $1f=f$. For composable $f,g$, linearity of $g_U$ gives $g_U(c_U(a)f_U(x))=c_U(a)g_U(f_U(x))$, hence $g\\circ(af)=a(g\\circ f)=(ag)\\circ f$. Addition is sectionwise as well. Thus the sheaf category is $\\mathcal O_E$-linear; its abelian structure is supplied by the cited module-category statement in a universe large enough for the site.",
+   "text": "Use integralCoefficientShift_linear for every integer n, with the same canonical ambient linear structure. This is the existing ambient shift-linearity clause of the node; no new scalar action or identification of completed and discrete coefficients is introduced.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-linear-category",
-    "def-weil-completed-integral-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CW (sites-modules-definition-sheaf-modules), Tag 03DA (sites-modules-lemma-abelian); the scalar calculation is written here, with linearity as in Tag 09MJ"
-   }
-  },
-  {
-   "text": "Apply lem-weil-linear-abelian-derived-category with $R=\\mathcal O_E$ and $\\mathcal A=\\Mod(\\widehat{\\mathcal O}_{E,Y})$, using the abelian category and scalar action of Step 3. The derived category here is exactly $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ by the completed-coefficients definition. Take the localization universe from the abstract-derived-category convention. The lemma makes this category linear, its localization functor linear, and every integer shift linear. To identify the action, multiplication by $c_U(a)$ on each term defines a cochain endomorphism $\\mu_{a,K}$, since the differentials are module maps; already on complexes $\\mu_{a,K}=a\\,\\mathrm{id}_K$. Consequently $Q(\\mu_{a,K})=a\\,\\mathrm{id}_{QK}$. For any derived morphism $f:QK\\to QL$, bilinearity now gives $af=Q(\\mu_{a,L})\\circ f=f\\circ Q(\\mu_{a,K})$. Thus it is exactly the action through the constant global sections constructed above, including on morphisms introduced by localization.",
-   "uses": [
-    "lem-weil-linear-abelian-derived-category",
     "def-weil-completed-integral-coefficients",
-    "def-weil-abstract-derived-category"
+    "def-weil-linear-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
-    "place": "lines 24-40; derived-category notion: Stacks Tag 05RU (derived-definition-unbounded-derived-category)"
-   }
+   "elementary": true
   },
   {
-   "text": "By def-weil-derived-complete-integral-detailed, $D^b_c(Y,\\mathcal O_E)$ is a full subcategory of the ambient derived category. Give each of its Hom groups exactly the ambient module structure: sums, scalar multiples and compositions still have the same source and target, so all module and bilinearity identities are the ambient identities. By lem-weil-integral-constructible-triangulated it is closed under every integer shift and has the induced triangulated structure. Its shift maps on Hom groups are therefore the ambient shift maps, and $[m](af)=a[m](f)$ is the identity proved in Step 4. This proves the final assertion without imposing a new boundedness, finite-Tor-dimension, or coefficient hypothesis.",
+   "text": "The intrinsic sfIntegralConstructibleCategory is a full subcategory with the ambient Hom module structures. Mathlib fullSubcategoryInclusionLinear makes its inclusion linear. Use the recorded integral triangulation for its inherited shifts and the inclusion commShiftIso. Transfer linearity of inclusion followed by the ambient shift across this natural isomorphism using Functor.linear_of_iso, obtaining linearity of the subcategory shift followed by inclusion. Apply faithfulness of inclusion to map_smul to conclude linearity of the subcategory shift itself. Pair these four clauses to obtain sfIntegralConstructible_linear.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "lem-weil-integral-constructible-triangulated",
     "def-weil-linear-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-    "place": "application of the O_E-linear triangulated-category hypothesis to D^b_c(Y,O_E); inherited full-subcategory calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pod-adic-limit-finite-modules",
-  "def-weil-l-adic-coefficient-extension",
   "def-weil-completed-integral-coefficients",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-linear-category",
-  "lem-weil-linear-abelian-derived-category",
-  "def-weil-abstract-derived-category",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-integral-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-  "place": "The blueprint assumes integral linearity without proving it; supplied by the explicit constant-section and module-morphism calculations, existing coefficient completeness, and the Mathlib derived linearity theorem."
+  "place": "V8 stage 3: reuse the canonical ambient action and shift statements already in IntegralConstructibleLinear, then prove inherited intrinsic shift linearity by the faithful linear inclusion and its commutation with shifts. No unit statement or step changes."
  },
  "mathlib_searches": [
   {
@@ -205,9 +161,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pod-adic-limit-finite-modules"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -278,5 +232,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Statement, intrinsic dependency interfaces, canonical scalar action, docstrings, edge cases, and per-file compilation all checked successfully; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261019T034332-L-422588",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

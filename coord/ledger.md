@@ -16932,3 +16932,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/V7/Sheaf.Paper.FiniteFieldSheafScalarExtension (stage 3; reviewer PASS; first push; landing 20261019T034330-L-422210 (interface); batch 20261019T034248; modules 2; new nodes 1; change records: coord/changes/finite-field-scalar-extension-proof.md)
 - 03:43 L: merged deliver/V7/Sheaf.SixFunctors.ProEtale.DerivedCompletion (stage 3; reviewer PASS; first push; landing 20261019T034331-L-422373 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V8/Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit (stage 3; reviewer PASS; first push; landing 20261019T034332-L-422484 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/V8/Sheaf.Paper.SfIntegralConstructibleLinear (stage 3; reviewer PASS; first push; landing 20261019T034332-L-422588 (proof); batch 20261019T034248; modules 1; new nodes 0)

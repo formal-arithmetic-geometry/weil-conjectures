@@ -10,13 +10,6 @@ public import Sheaf.Paper.SfIntegralConstructibleTriangulated
 public import Sheaf.Paper.CompletedIntegralCoefficientGerm
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.CategoryTheory.Linear.Basic
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Homology.DerivedCategory.Linear
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.SfIntegralConstructible
 
 /-!
 # Constant-section linearity of the intrinsic integral constructible category
@@ -106,7 +99,22 @@ theorem sfIntegralConstructible_linear :
     Functor.Linear (Padic.coefficientExtensionIntegers l E) (sfIntegralConstructible l E Y).ι ∧
     (∀ n : ℤ, Functor.Linear (Padic.coefficientExtensionIntegers l E)
       (shiftFunctor (sfIntegralConstructibleCategory l E Y) n)) := by
-  sorry
+  refine ⟨?_, ?_, inferInstance, ?_⟩
+  · exact (integralCoefficientLinear_existsUnique l E Y).exists.choose_spec
+  · intro n
+    exact integralCoefficientShift_linear l E Y n
+  · intro n
+    let P := sfIntegralConstructible l E Y
+    let R := Padic.coefficientExtensionIntegers l E
+    let : (shiftFunctor (DerivedCategory (scalarReductionSource l E Y)) n).Linear R :=
+      integralCoefficientShift_linear l E Y n
+    let : (shiftFunctor P.FullSubcategory n ⋙ P.ι).Linear R :=
+      Functor.linear_of_iso R (P.ι.commShiftIso n).symm
+    constructor
+    intro X Z f a
+    apply P.ι.map_injective
+    rw [P.ι.map_smul]
+    exact (shiftFunctor P.FullSubcategory n ⋙ P.ι).map_smul a f
 
 /-- Every inherited integer shift is linear for the canonical constant-section action.
 This is the final clause of `sfIntegralConstructible_linear`.
