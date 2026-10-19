@@ -9,11 +9,8 @@ public import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Mathlib.CategoryTheory.Shift.Adjunction
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Paper.CoefficientRingedSequenceSite
 
 /-! # Shift compatibility of the open adjunction on coefficient systems
 
@@ -88,6 +85,35 @@ theorem openAdjunctionShift
     (j : U ⟶ W) [IsOpenImmersion j.left] [QuasiCompact j.left]
     (o : Operations l E) :
     ((o.extension j.left).adj).CommShift ℤ := by
-  sorry
+  let F := (o.extension j.left).ordinary
+  let G := pullbackTensorSequenceInverse l E j.left
+  let a := (o.extension j.left).adjunction
+  change (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a).CommShift ℤ
+  let b := SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a
+  refine Adjunction.CommShift.mk' b ℤ ?_
+  have e : Functor.whiskerLeft DerivedCategory.Q b.unit =
+      (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+        Functor.whiskerRight (a.mapHomologicalComplex (.up ℤ)).unit DerivedCategory.Q ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+          G.mapDerivedCategoryFactors.inv ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight F.mapDerivedCategoryFactors.inv G.mapDerivedCategory ≫
+        (Functor.associator _ _ _).hom := by
+    ext X
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.rightUnitor_hom_app,
+      Functor.leftUnitor_inv_app, Functor.comp_obj, Functor.id_obj, Category.id_comp,
+      Category.comp_id]
+    let : CatCommSq (F.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+        DerivedCategory.Q F.mapDerivedCategory := ⟨F.mapDerivedCategoryFactors.symm⟩
+    let : CatCommSq (G.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+        DerivedCategory.Q G.mapDerivedCategory := ⟨G.mapDerivedCategoryFactors.symm⟩
+    exact (a.mapHomologicalComplex (.up ℤ)).localization_unit_app _ _ _ _ _ _ X
+  have : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Q b.unit) ℤ := by
+    rw [e]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Q
+    (fun X ↦ ⟨_, (DerivedCategory.Q.objObjPreimageIso X).inv, inferInstance⟩)
 
 end WeilConjectures.IntegralSystemRealization
