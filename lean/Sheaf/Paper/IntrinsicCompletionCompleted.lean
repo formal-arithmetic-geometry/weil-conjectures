@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 
@@ -56,7 +57,11 @@ Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
 Proof: addition and zero hold on the constant presheaves, then on their sheafification;
 scalar extension is additive by its specified tensor/restriction adjunction. -/
 theorem completedKoszulConstant_additive : (completedKoszulConstant X d).Additive := by
-  sorry
+  let := CompletedConstantReduction.constant_additive X A
+  exact Functor.Additive.mk (by
+    intro M N f g
+    dsimp [completedKoszulConstant]
+    rw [Functor.map_add, Functor.map_add])
 attribute [instance] completedKoszulConstant_additive
 
 /-- The cohomologically reindexed Koszul complex of the positive power m+1.
@@ -79,6 +84,36 @@ def completedKoszulGenerator (r : ℕ) (f : Fin r → A) :
     (Fin r →₀ A) →ₗ[A] (Fin r →₀ A) :=
   Finsupp.linearCombination (A) (fun j ↦ Finsupp.single j (f j))
 
+private theorem completedKoszulExteriorMap_coe (R : Type*) [CommRing R] (r n : ℕ)
+    (g : (Fin r →₀ R) →ₗ[R] (Fin r →₀ R)) (x : ⋀[R]^n (Fin r →₀ R)) :
+    (exteriorPower.map n g x : ExteriorAlgebra R (Fin r →₀ R)) =
+      ExteriorAlgebra.map g (x : ExteriorAlgebra R (Fin r →₀ R)) := by
+  have h : (⋀[R]^n (Fin r →₀ R)).subtype.comp (exteriorPower.map n g) =
+      (ExteriorAlgebra.map g).toLinearMap.comp (⋀[R]^n (Fin r →₀ R)).subtype := by
+    apply exteriorPower.linearMap_ext
+    ext v
+    simp only [LinearMap.compAlternatingMap_apply, LinearMap.comp_apply,
+      Submodule.subtype_apply, exteriorPower.map_apply_ιMulti,
+      exteriorPower.ιMulti_apply_coe, AlgHom.toLinearMap_apply,
+      ExteriorAlgebra.map_apply_ιMulti]
+  exact LinearMap.congr_fun h x
+
+private theorem completedKoszulContract_natural (R : Type*) [CommRing R] (r : ℕ)
+    (g : (Fin r →₀ R) →ₗ[R] (Fin r →₀ R))
+    (φ ψ : (Fin r →₀ R) →ₗ[R] R) (h : ψ.comp g = φ)
+    (x : ExteriorAlgebra R (Fin r →₀ R)) :
+    CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin r →₀ R))) ψ
+        (ExteriorAlgebra.map g x) =
+      ExteriorAlgebra.map g
+        (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin r →₀ R))) φ x) := by
+  induction x using CliffordAlgebra.left_induction with
+  | algebraMap c => simp
+  | add x y hx hy => simp only [map_add, hx, hy]
+  | ι_mul x v hx =>
+    have hv : ψ (g v) = φ v := LinearMap.congr_fun h v
+    simp only [map_mul, ExteriorAlgebra.map_apply_ι, CliffordAlgebra.contractLeft_ι_mul,
+      hv, hx, map_sub, map_smul]
+
 /-- The power transition commutes with Koszul contraction.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
 Proof: on each exterior generator, contraction on the target multiplies the removed
@@ -91,7 +126,34 @@ theorem completedKoszulTransition_comm (r : ℕ) (f : Fin r → A) (m i j : ℕ)
     (ExteriorAlgebra.koszulComplex (A) r
       (fun k ↦ f k ^ (m + 2))).d i j ≫
         ModuleCat.ofHom (exteriorPower.map j (completedKoszulGenerator (A := A) r f)) := by
-  sorry
+  by_cases hij : i = j + 1
+  · subst i
+    dsimp only [ExteriorAlgebra.koszulComplex]
+    rw [ChainComplex.of_d, ChainComplex.of_d]
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    apply Subtype.ext
+    change (ExteriorAlgebra.koszulBoundary A r
+        (fun k ↦ f k ^ (m + 1)) j
+        (exteriorPower.map (j + 1) (completedKoszulGenerator (A := A) r f) x) :
+          ExteriorAlgebra A (Fin r →₀ A)) =
+      (exteriorPower.map j (completedKoszulGenerator (A := A) r f)
+        (ExteriorAlgebra.koszulBoundary A r
+          (fun k ↦ f k ^ (m + 2)) j x) : ExteriorAlgebra A (Fin r →₀ A))
+    simp only [completedKoszulExteriorMap_coe, ExteriorAlgebra.koszulBoundary,
+      LinearMap.codRestrict_apply, LinearMap.comp_apply, Submodule.subtype_apply]
+    apply completedKoszulContract_natural
+    apply Finsupp.lhom_ext
+    intro k c
+    simp only [LinearMap.comp_apply, completedKoszulGenerator,
+      Finsupp.linearCombination_single, map_smul, smul_eq_mul]
+    congr 1
+    simpa [Nat.add_assoc, mul_comm] using (pow_succ (f k) (m + 1)).symm
+  · have hn : ¬ (ComplexShape.down ℕ).Rel i j := by
+      simpa only [ComplexShape.down_Rel, eq_comm] using hij
+    rw [HomologicalComplex.shape _ i j hn, HomologicalComplex.shape _ i j hn,
+      zero_comp, comp_zero]
 
 /-- The specified exterior-algebra transition, followed by cohomological reindexing.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
@@ -114,7 +176,35 @@ theorem completedKoszulOne_exists :
         adicDatumTensorSection X (adicDatumScalar X d)
           ((adicLisseConstantModules X A).obj (ModuleCat.of A A)) U 1
           (completedConstantGenerator X A (ModuleCat.of A A) U 1) := by
-  sorry
+  let M := (completedKoszulConstant X d).obj (ModuleCat.of A A)
+  let s : M.sections := PresheafOfModules.sectionsMk
+    (fun U ↦ adicDatumTensorSection X (adicDatumScalar X d)
+      ((adicLisseConstantModules X A).obj (ModuleCat.of A A)) U 1
+      (completedConstantGenerator X A (ModuleCat.of A A) U 1)) (by
+        intro U V g
+        let N := (adicLisseConstantModules X A).obj (ModuleCat.of A A)
+        let u := adicDatumOrdinaryUnit X (adicDatumScalar X d) N
+        have hu := (adicDatumOrdinaryUnit_exists X (adicDatumScalar X d) N).exists.choose_spec
+        rw [← hu U, ← hu V]
+        have hn := u.val.naturality g
+        have hg : N.val.map g (completedConstantGenerator X A (ModuleCat.of A A) U 1) =
+            completedConstantGenerator X A (ModuleCat.of A A) V 1 := by
+          exact (ConcreteCategory.congr_hom
+            ((toSheafify (ProEt.topology X)
+              ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of A))).naturality g) (1 : A)).symm
+        change M.val.map g (u.val.app U _) = u.val.app V _
+        exact (ConcreteCategory.congr_hom hn _).symm.trans (congrArg (u.val.app V) hg))
+  refine ⟨M.unitHomEquiv.symm s, ?_, ?_⟩
+  · intro U
+    exact congrArg (fun z : M.sections ↦ z.val U)
+      (M.unitHomEquiv.apply_symm_apply s)
+  · intro u hu
+    apply M.unitHomEquiv.injective
+    apply PresheafOfModules.sections_ext
+    intro U
+    exact (hu U).trans
+      (congrArg (fun z : M.sections ↦ z.val U)
+        (M.unitHomEquiv.apply_symm_apply s)).symm
 
 /-- The canonical degree-zero unit of the extended Koszul complex.
 Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
@@ -140,7 +230,14 @@ zero is zero. -/
 theorem completedKoszulSheafUnitZero_closed (r : ℕ) (f : Fin r → A) (m : ℕ)
     (j : ℤ) (hj : (ComplexShape.up ℤ).Rel 0 j) :
     completedKoszulSheafUnitZero X d r f m ≫ (completedKoszulPowerSheaf X d r f m).d 0 j = 0 := by
-  sorry
+  have _hj := hj
+  have hd : (completedKoszulPower (A := A) r f m).d 0 j = 0 := by
+    apply HomologicalComplex.extend_d_from_eq_zero _ ComplexShape.embeddingDownNat
+      0 j 0 rfl
+    simp [ComplexShape.down_Rel]
+  change _ ≫ (completedKoszulConstant X d).map
+    ((completedKoszulPower (A := A) r f m).d 0 j) = 0
+  rw [hd, Functor.map_zero, comp_zero]
 
 /-- The complex unit into each constant Koszul complex.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
@@ -190,7 +287,30 @@ theorem completedKoszulTensorUnitComponent_comm (r : ℕ) (f : Fin r → A)
     (p q : ℤ) (hpq : (ComplexShape.up ℤ).Rel p q) :
     completedKoszulTensorUnitComponent X d r f C m p ≫ (completedKoszulTensor X d r f C m).d p q =
       C.d p q ≫ completedKoszulTensorUnitComponent X d r f C m q := by
-  sorry
+  let := SheafOfModules.isMonoidal_W_independentCoefficients (adicDatumRing X d)
+  let := SheafOfModules.monoidalCategory (adicDatumRing X d)
+  dsimp only [completedKoszulTensorUnitComponent, completedKoszulTensor]
+  rw [HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add]
+  simp only [Category.assoc, HomologicalComplex.mapBifunctor.ι_D₁,
+    HomologicalComplex.mapBifunctor.ι_D₂]
+  rw [HomologicalComplex.mapBifunctor.d₁_eq _ _ _ _ hpq 0 q (add_zero q),
+    HomologicalComplex.mapBifunctor.d₂_eq _ _ _ _ p (show
+      (ComplexShape.up ℤ).Rel 0 1 from rfl) q (by
+        change p + 1 = q
+        exact hpq)]
+  have hε : ComplexShape.ε₁ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+      (ComplexShape.up ℤ) (p, 0) = 1 := rfl
+  rw [hε, one_smul]
+  simp only [curriedTensor_obj_map, curriedTensor_map_app]
+  have hz : C.X p ◁ completedKoszulSheafUnitZero X d r f m ≫
+      C.X p ◁ (completedKoszulPowerSheaf X d r f m).d 0 1 = 0 := by
+    rw [← whiskerLeft_comp, completedKoszulSheafUnitZero_closed X d r f m 1 rfl]
+    exact Functor.map_zero ((curriedTensor _).obj (C.X p)) _ _
+  simp only [Linear.comp_units_smul]
+  rw [← Category.assoc (C.X p ◁ completedKoszulSheafUnitZero X d r f m)
+      (C.X p ◁ (completedKoszulPowerSheaf X d r f m).d 0 1), hz,
+    zero_comp, comp_zero, smul_zero, add_zero]
+  rw [whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
 
 /-- The tensor unit gives c ↦ c tensor 1 in each level.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
