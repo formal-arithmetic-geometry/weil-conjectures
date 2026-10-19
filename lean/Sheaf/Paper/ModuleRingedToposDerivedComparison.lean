@@ -18,39 +18,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.Paper.ProjectionMateExact
 
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Sheaf.Paper.RingedTopoiTensorComparisonData
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Mathlib.CategoryTheory.Monoidal.Functor
-import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.SheafTensor
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.SectionModuleOperationsData
 /-! # Module-object and ringed-topos derived comparison
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
@@ -104,8 +74,20 @@ theorem ordinary_exact_flat_kflat (X : Scheme.{u}) :
       IsKFlatModuleObject X (CommMon.mk (condensedRingObj Λ X)) P ↔
         CochainComplex.IsKFlatIndependentCoefficients
           (((equivalence Λ X).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  have h := InternalAbelianSheafModule.internal_section_tensor_comparison.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+  obtain ⟨e, e₀, hpure, hunit, hnat, hassoc, hl, hr, hb, ht, ha, hf, hk⟩ := h.2
+  refine ⟨inferInstance, h.1, hf, ?_⟩
+  intro P
+  rw [← hk P]
+  constructor
+  · intro hP N hN
+    exact (hP N hN).of_iso (β_ P N)
+  · intro hP N hN
+    exact (hP N hN).of_iso (β_ N P)
 
+set_option maxHeartbeats 800000 in
+-- Comparing the two normalized monoidal witnesses elaborates the sheaf tensor constraints.
 /-- The chosen ordinary tensor maps obey all symmetric-monoidal coherence diagrams.
 Source: Stacks 03EK (blueprint: lem-pd-module-ringed-topos-derived-comparison).
 Proof: these are exactly the maps chosen from internal_section_tensor_comparison,
@@ -137,7 +119,21 @@ theorem ordinary_monoidal (X : Scheme.{u}) :
       (ordinaryTensorComparison Λ X M N).hom ≫ (β_ _ _).hom =
         (equivalence Λ X).functor.map (β_ M N).hom ≫
           (ordinaryTensorComparison Λ X N M).hom) := by
-  sorry
+  have h := InternalAbelianSheafModule.internal_section_tensor_comparison.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+  obtain ⟨e, e₀, hpure, hunit, hnat, hassoc, hleft, hright, hbraid, _⟩ := h.2
+  have he (M N : internalModules Λ X) : e M N = ordinaryTensorComparison Λ X M N :=
+    (ordinaryTensorComparison_existsUnique Λ X M N).unique (hpure M N)
+      (ordinaryTensorComparison_existsUnique Λ X M N).exists.choose_spec
+  have he₀ : e₀ = ordinaryUnitComparison Λ X :=
+    (ordinaryUnitComparison_existsUnique Λ X).unique hunit
+      (ordinaryUnitComparison_existsUnique Λ X).exists.choose_spec
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · simpa only [he] using hnat
+  · simpa only [he] using hassoc
+  · simpa only [he, he₀] using hleft
+  · simpa only [he, he₀] using hright
+  · simpa only [he] using hbraid
 
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
@@ -151,7 +147,9 @@ and naturality give invertibility on arbitrary unbounded derived objects. -/
 @[instance] theorem internalDelta_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : DerivedCategory (internalModules Λ Y)) :
     IsIso (((internalDelta Λ f).app M).app N) := by
-  sorry
+  let _ := (inferInstance : ∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X))
+  unfold internalDelta
+  infer_instance
 
 /-- The actual module-object proper projection arrow, the adjoint of counit after delta.
 Source: Stacks 0B56 (blueprint: lem-pd-module-ringed-topos-derived-comparison). -/
@@ -242,8 +240,22 @@ theorem mu_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N) ≫
         (derivedPullback Λ f).map ((tensorComparison Λ Y).inv.app (M, N)) ≫
         (derivedPullComparison Λ f).inv.app (((CondensedRing.derivedTensor Λ Y).obj M).obj N) := by
-  sorry
+  have h :
+      (derivedEquivalence Λ X).functor.mapIso (asIso (((internalDelta Λ f).app M).app N)) ≪≫
+          (tensorComparison Λ X).app
+            ((internalDerivedPullback Λ f).obj M, (internalDerivedPullback Λ f).obj N) ≪≫
+          (tensor Λ X).mapIso (Iso.prod ((derivedPullComparison Λ f).app M)
+            ((derivedPullComparison Λ f).app N)) =
+        (derivedPullComparison Λ f).app (((CondensedRing.derivedTensor Λ Y).obj M).obj N) ≪≫
+          (derivedPullback Λ f).mapIso ((tensorComparison Λ Y).app (M, N)) ≪≫
+          (tensorPullComparison Λ f).app
+            ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N) :=
+    Iso.ext (delta_comparison Λ f M N)
+  simpa only [Iso.trans_inv, Functor.mapIso_inv, Iso.prod_inv, Iso.app_inv,
+    asIso_inv, internalMu, Category.assoc] using congrArg Iso.inv h
 
+set_option maxHeartbeats 1600000 in
+-- The comparison instances contain large sheaf tensor constraints.
 /-- The module-object proper projection is the precise ringed projection mate alpha.
 This statement makes no invertibility assertion about the projection arrow.
 Source: Stacks 0B56 (blueprint: lem-pd-module-ringed-topos-derived-comparison).
@@ -268,8 +280,113 @@ theorem projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
           (𝟙 ((derivedEquivalence Λ Y).functor.obj L))) ≫
         projection Λ f ((derivedEquivalence Λ X).functor.obj K)
           ((derivedEquivalence Λ Y).functor.obj L) := by
-  sorry
+  let d := Functor.curry.map (tensorPullComparison Λ f).hom ≫
+    (Functor.curryObjProdComp (derivedPullback Λ f) (derivedPullback Λ f)
+      (tensor Λ X)).hom
+  let tX := ((Functor.postcompose₂.obj (derivedEquivalence Λ X).functor).map
+      (Functor.currying.unitIso.hom.app (CondensedRing.derivedTensor Λ X))) ≫
+    Functor.curry.map (tensorComparison Λ X).hom ≫
+    (Functor.curryObjProdComp (derivedEquivalence Λ X).functor
+      (derivedEquivalence Λ X).functor (tensor Λ X)).hom
+  let tY := ((Functor.postcompose₂.obj (derivedEquivalence Λ Y).functor).map
+      (Functor.currying.unitIso.hom.app (CondensedRing.derivedTensor Λ Y))) ≫
+    Functor.curry.map (tensorComparison Λ Y).hom ≫
+    (Functor.curryObjProdComp (derivedEquivalence Λ Y).functor
+      (derivedEquivalence Λ Y).functor (tensor Λ Y)).hom
+  have hX (M N : DerivedCategory (internalModules Λ X)) :
+      (tX.app M).app N = (tensorComparison Λ X).hom.app (M, N) := by
+    change (derivedEquivalence Λ X).functor.map (𝟙 _) ≫
+      (tensorComparison Λ X).hom.app (M, N) ≫ 𝟙 _ = _
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hY (M N : DerivedCategory (internalModules Λ Y)) :
+      (tY.app M).app N = (tensorComparison Λ Y).hom.app (M, N) := by
+    change (derivedEquivalence Λ Y).functor.map (𝟙 _) ≫
+      (tensorComparison Λ Y).hom.app (M, N) ≫ 𝟙 _ = _
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hd (M N : DerivedCategory (modules Λ Y)) :
+      (d.app M).app N = (tensorPullComparison Λ f).hom.app (M, N) := by
+    exact Category.comp_id _
+  have hs : ∀ M N,
+      (derivedPullback Λ f).map ((tY.app M).app N) ≫
+        (d.app ((derivedEquivalence Λ Y).functor.obj M)).app
+          ((derivedEquivalence Λ Y).functor.obj N) ≫
+        ((Functor.curry.obj (tensor Λ X)).map
+          ((derivedPullComparison Λ f).inv.app M)).app _ ≫
+        ((Functor.curry.obj (tensor Λ X)).obj _).map
+          ((derivedPullComparison Λ f).inv.app N) =
+      (derivedPullComparison Λ f).inv.app _ ≫
+        (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
+        (tX.app _).app _ := by
+    intro M N
+    rw [hX, hY, hd]
+    change (derivedPullback Λ f).map
+        ((tensorComparison Λ Y).hom.app (M, N)) ≫
+      ((tensorPullComparison Λ f).hom.app
+        ((derivedEquivalence Λ Y).functor.obj M,
+          (derivedEquivalence Λ Y).functor.obj N)) ≫
+      (tensor Λ X).map (Prod.mkHom ((derivedPullComparison Λ f).inv.app M) (𝟙 _)) ≫
+      (tensor Λ X).map (Prod.mkHom (𝟙 _) ((derivedPullComparison Λ f).inv.app N)) =
+      (derivedPullComparison Λ f).inv.app _ ≫
+        (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
+        ((tensorComparison Λ X).hom.app
+          ((internalDerivedPullback Λ f).obj M, (internalDerivedPullback Λ f).obj N))
+    rw [← (tensor Λ X).map_comp]
+    simp only [prod_comp, Category.comp_id, Category.id_comp]
+    rw [← cancel_epi ((derivedPullComparison Λ f).hom.app
+      (((CondensedRing.derivedTensor Λ Y).obj M).obj N))]
+    simp only [Iso.hom_inv_id_app_assoc]
+    rw [← reassoc_of% (delta_comparison Λ f M N)]
+    simp only [← (tensor Λ X).map_comp, prod_comp, Iso.hom_inv_id_app, ← prod_id]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have hc : ∀ A,
+      (derivedPullback Λ f).map ((derivedPushComparison Λ f).hom.app A) ≫
+        (derivedAdjunction Λ f).counit.app ((derivedEquivalence Λ X).functor.obj A) =
+      (derivedPullComparison Λ f).inv.app _ ≫
+        (derivedEquivalence Λ X).functor.map
+          ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app A) := by
+    intro A
+    have h := derived_homEquiv Λ f _ A
+      ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app A)
+    rw [← (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).homEquiv_symm_id A,
+      Equiv.apply_symm_apply, CategoryTheory.Functor.map_id, Category.id_comp] at h
+    have hh := congrArg ((derivedAdjunction Λ f).homEquiv _ _).symm h
+    rw [Equiv.symm_apply_apply] at hh
+    simpa only [Adjunction.homEquiv_counit, CategoryTheory.Functor.map_id,
+      Category.id_comp] using hh.symm
+  have h := Adjunction.rightAdjointProjectionMap_mate
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f) (derivedAdjunction Λ f)
+    (T₂ := Functor.curry.obj (tensor Λ X)) (S₂ := Functor.curry.obj (tensor Λ Y))
+    (U := (derivedEquivalence Λ Y).functor) (V := (derivedEquivalence Λ X).functor)
+    (internalDelta Λ f) d tY tX (derivedPullComparison Λ f).inv
+    (derivedPushComparison Λ f).hom hs hc K L
+  have hh := congrArg (fun q ↦ q ≫ (derivedPushforward Λ f).map
+    ((tensor Λ X).map (Prod.mkHom (𝟙 ((derivedEquivalence Λ X).functor.obj K))
+      ((derivedPullComparison Λ f).hom.app L)))) h
+  rw [hX, hY] at hh
+  change ((derivedEquivalence Λ Y).functor.map (internalProjection Λ f K L) ≫
+      (derivedPushComparison Λ f).hom.app _ ≫
+      (derivedPushforward Λ f).map ((tensorComparison Λ X).hom.app
+        (K, (internalDerivedPullback Λ f).obj L))) ≫
+      (derivedPushforward Λ f).map ((tensor Λ X).map (Prod.mkHom (𝟙 _)
+        ((derivedPullComparison Λ f).hom.app L))) =
+    ((tensorComparison Λ Y).hom.app ((internalDerivedPushforward Λ f).obj K, L) ≫
+      (tensor Λ Y).map (Prod.mkHom ((derivedPushComparison Λ f).hom.app K) (𝟙 _)) ≫
+      projection Λ f ((derivedEquivalence Λ X).functor.obj K)
+        ((derivedEquivalence Λ Y).functor.obj L) ≫
+      (derivedPushforward Λ f).map ((tensor Λ X).map (Prod.mkHom (𝟙 _)
+        ((derivedPullComparison Λ f).inv.app L)))) ≫
+      (derivedPushforward Λ f).map ((tensor Λ X).map (Prod.mkHom (𝟙 _)
+        ((derivedPullComparison Λ f).hom.app L))) at hh
+  simp only [Category.assoc, ← (derivedPushforward Λ f).map_comp,
+    ← (tensor Λ X).map_comp, prod_comp, Category.id_comp, Iso.inv_hom_id_app,
+    ← prod_id] at hh
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.comp_id] at hh
+  simpa only [(derivedPushforward Λ f).map_comp] using hh
 
+
+set_option maxHeartbeats 800000 in
+-- Comparing the two localized mate squares elaborates the section-module constraints.
 /-- Equality of the specified open Hom bijections, hence of their units and counits.
 Source: Stacks 03DI and 03DJ
 (blueprint: lem-pd-module-ringed-topos-derived-comparison).
@@ -286,7 +403,38 @@ theorem open_homEquiv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
           (derivedEquivalence Λ X).functor.map q) =
       (derivedEquivalence Λ U).functor.map ((internalOpenAdjunction Λ j).homEquiv _ _ q) ≫
         (derivedPullComparison Λ j).hom.app N := by
-  sorry
+  have hunit := Adjunction.mapDerivedCategoryAdjunction_mate
+    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j)
+    (openAdjunction Λ j) (pullComparison Λ j) (extensionComparison Λ j).symm
+    (fun A ↦ by
+      have h := (InternalModuleOperations.internal_module_operations_transport Λ).2.2.1 j
+      rw [← h.2.1 A]
+      simp only [extensionComparison, ordinaryExtensionComparison, Iso.symm_hom,
+        Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+      erw [CategoryTheory.Functor.map_id, Category.comp_id]) M
+  let i := CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ j
+  let e := Functor.mapDerivedCategorySquareIso (pullComparison Λ j)
+  let a :=
+    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).mapDerivedCategoryAdjunction
+  rw [internalOpenAdjunction, Adjunction.homEquiv_ofNatIsoRight_apply]
+  change (derivedOpenAdjunction Λ j).homEquiv _ _
+      ((derivedExtensionComparison Λ j).inv.app M ≫
+        (derivedEquivalence Λ X).functor.map q) =
+    (derivedFunctor Λ U).map ((a.homEquiv _ _ q) ≫ i.inv.app N) ≫
+      ((derivedFunctor Λ U).map (i.hom.app N) ≫ e.hom.app N)
+  rw [← Functor.map_comp_assoc, Category.assoc, Iso.inv_hom_id_app,
+    Category.comp_id]
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp,
+    ← Category.assoc]
+  have he : (derivedExtensionComparison Λ j).inv.app M =
+      (Functor.mapDerivedCategorySquareIso (extensionComparison Λ j).symm).hom.app M := by
+    simp only [derivedExtensionComparison, Functor.mapDerivedCategorySquareIso,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+      Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+  erw [he, hunit, Category.assoc]
+  erw [← e.hom.naturality q]
+  erw [← Category.assoc, ← Functor.map_comp]
+  rfl
 
 /-- The actual internal adjoint-of-unit open projection arrow, using inverse delta.
 Source: Stacks 03DJ and 0B56
@@ -314,6 +462,8 @@ def openProjection {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
         (𝟙 ((derivedPullback Λ j).obj L))) ≫
       (tensorPullComparison Λ j).inv.app ((derivedExtension Λ j).obj K, L))
 
+set_option maxHeartbeats 1600000 in
+-- The curried tensor and derived adjunction interfaces have large instance arguments.
 /-- Equality of the actual adjoint-of-unit open projection morphisms.
 Source: Stacks 03DJ and 0B56
 (blueprint: lem-pd-module-ringed-topos-derived-comparison).
@@ -337,7 +487,140 @@ theorem openProjection_comparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmers
           ((derivedPullComparison Λ j).hom.app L))) ≫
         openProjection Λ j ((derivedEquivalence Λ U).functor.obj K)
           ((derivedEquivalence Λ X).functor.obj L) := by
-  sorry
+  let : ∀ M, IsIso ((internalDelta Λ j).app M) :=
+    fun M ↦ NatIso.isIso_of_isIso_app _
+  let : IsIso (internalDelta Λ j) := NatIso.isIso_of_isIso_app _
+  let d₁ :
+      (((Functor.whiskeringLeft₂ _).obj (internalDerivedPullback Λ j)).obj
+        (internalDerivedPullback Λ j)).obj (CondensedRing.derivedTensor Λ U) ⟶
+      (Functor.postcompose₂.obj (internalDerivedPullback Λ j)).obj
+        (CondensedRing.derivedTensor Λ X) := inv (internalDelta Λ j)
+  let d₂ := (Functor.curryObjProdComp (derivedPullback Λ j)
+      (derivedPullback Λ j) (tensor Λ U)).inv ≫
+    Functor.curry.map (tensorPullComparison Λ j).inv
+  let tU := (Functor.postcompose₂.obj (derivedEquivalence Λ U).functor).map
+      (Functor.currying.unitIso.hom.app (CondensedRing.derivedTensor Λ U)) ≫
+    Functor.curry.map (tensorComparison Λ U).hom ≫
+    (Functor.curryObjProdComp (derivedEquivalence Λ U).functor
+      (derivedEquivalence Λ U).functor (tensor Λ U)).hom
+  let tX := (Functor.postcompose₂.obj (derivedEquivalence Λ X).functor).map
+      (Functor.currying.unitIso.hom.app (CondensedRing.derivedTensor Λ X)) ≫
+    Functor.curry.map (tensorComparison Λ X).hom ≫
+    (Functor.curryObjProdComp (derivedEquivalence Λ X).functor
+      (derivedEquivalence Λ X).functor (tensor Λ X)).hom
+  have hU (M N : DerivedCategory (internalModules Λ U)) :
+      (tU.app M).app N = (tensorComparison Λ U).hom.app (M, N) := by
+    change (derivedEquivalence Λ U).functor.map (𝟙 _) ≫
+      (tensorComparison Λ U).hom.app (M, N) ≫ 𝟙 _ = _
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hX (M N : DerivedCategory (internalModules Λ X)) :
+      (tX.app M).app N = (tensorComparison Λ X).hom.app (M, N) := by
+    change (derivedEquivalence Λ X).functor.map (𝟙 _) ≫
+      (tensorComparison Λ X).hom.app (M, N) ≫ 𝟙 _ = _
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hb : ∀ A,
+      (derivedOpenAdjunction Λ j).unit.app ((derivedEquivalence Λ U).functor.obj A) ≫
+        (derivedPullback Λ j).map ((derivedExtensionComparison Λ j).inv.app A) =
+      (derivedEquivalence Λ U).functor.map ((internalOpenAdjunction Λ j).unit.app A) ≫
+        (derivedPullComparison Λ j).hom.app ((internalDerivedExtension Λ j).obj A) := by
+    intro A
+    have h := open_homEquiv Λ j A _ (𝟙 ((internalDerivedExtension Λ j).obj A))
+    simp only [CategoryTheory.Functor.map_id, Adjunction.homEquiv_unit] at h
+    erw [Category.comp_id, Category.comp_id] at h
+    exact h
+  have ht : ∀ M N,
+      (derivedEquivalence Λ U).functor.map ((d₁.app M).app N) ≫
+        (derivedPullComparison Λ j).hom.app
+          (((CondensedRing.derivedTensor Λ X).obj M).obj N) ≫
+        (derivedPullback Λ j).map ((tX.app M).app N) =
+      (tU.app ((internalDerivedPullback Λ j).obj M)).app
+          ((internalDerivedPullback Λ j).obj N) ≫
+        ((Functor.curry.obj (tensor Λ U)).map ((derivedPullComparison Λ j).hom.app M)).app _ ≫
+        ((Functor.curry.obj (tensor Λ U)).obj _).map
+          ((derivedPullComparison Λ j).hom.app N) ≫
+        (d₂.app ((derivedEquivalence Λ X).functor.obj M)).app
+          ((derivedEquivalence Λ X).functor.obj N) := by
+    intro M N
+    rw [hU, hX]
+    dsimp only [d₁]
+    rw [NatIso.isIso_inv_app, NatIso.isIso_inv_app]
+    change (derivedEquivalence Λ U).functor.map (internalMu Λ j M N) ≫
+        (derivedPullComparison Λ j).hom.app _ ≫
+        (derivedPullback Λ j).map ((tensorComparison Λ X).hom.app (M, N)) =
+      (tensorComparison Λ U).hom.app
+          ((internalDerivedPullback Λ j).obj M, (internalDerivedPullback Λ j).obj N) ≫
+        (tensor Λ U).map (Prod.mkHom ((derivedPullComparison Λ j).hom.app M) (𝟙 _)) ≫
+        (tensor Λ U).map (Prod.mkHom (𝟙 _) ((derivedPullComparison Λ j).hom.app N)) ≫
+        (𝟙 _ ≫ (tensorPullComparison Λ j).inv.app
+          ((derivedEquivalence Λ X).functor.obj M, (derivedEquivalence Λ X).functor.obj N))
+    rw [Category.id_comp, ← (tensor Λ U).map_comp_assoc]
+    simp only [prod_comp, Category.comp_id, Category.id_comp]
+    rw [← cancel_epi ((tensorComparison Λ U).inv.app
+      ((internalDerivedPullback Λ j).obj M, (internalDerivedPullback Λ j).obj N))]
+    simp only [Iso.inv_hom_id_app_assoc]
+    let ei := (tensor Λ U).mapIso (Iso.prod ((derivedPullComparison Λ j).app M).symm
+      ((derivedPullComparison Λ j).app N).symm)
+    have : IsIso ((tensor Λ U).map (Prod.mkHom
+        ((derivedPullComparison Λ j).inv.app M) ((derivedPullComparison Λ j).inv.app N))) := by
+      change IsIso ei.hom
+      infer_instance
+    rw [← cancel_epi ((tensor Λ U).map (Prod.mkHom
+      ((derivedPullComparison Λ j).inv.app M) ((derivedPullComparison Λ j).inv.app N)))]
+    rw [reassoc_of% (mu_comparison Λ j M N)]
+    have hei : (tensor Λ U).map (Prod.mkHom
+          ((derivedPullComparison Λ j).inv.app M) ((derivedPullComparison Λ j).inv.app N)) ≫
+        (tensor Λ U).map (Prod.mkHom
+          ((derivedPullComparison Λ j).hom.app M) ((derivedPullComparison Λ j).hom.app N)) =
+        𝟙 _ := ei.hom_inv_id
+    simp only [Iso.inv_hom_id_app_assoc]
+    rw [reassoc_of% hei, ← (derivedPullback Λ j).map_comp, Iso.inv_hom_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have h := Adjunction.projectionMap_mate
+    (internalOpenAdjunction Λ j) (derivedOpenAdjunction Λ j)
+    (internalDerivedPullback Λ j) (derivedPullback Λ j)
+    (T₂ := Functor.curry.obj (tensor Λ U)) (T'₂ := Functor.curry.obj (tensor Λ X))
+    (U := (derivedEquivalence Λ U).functor) (V := (derivedEquivalence Λ X).functor)
+    d₁ d₂ tU tX (derivedPullComparison Λ j).hom (derivedPullComparison Λ j).hom
+    (derivedExtensionComparison Λ j).inv hb ht K L
+  have hi : (((internalOpenAdjunction Λ j).projectionMap
+        (internalDerivedPullback Λ j) (CondensedRing.derivedTensor Λ U)
+        (CondensedRing.derivedTensor Λ X) d₁).app K).app L =
+      internalOpenProjection Λ j K L := by
+    rw [Adjunction.projectionMap_app_app, Adjunction.projectionMapTranspose_app_app]
+    simp only [d₁, NatIso.isIso_inv_app]
+    rfl
+  have ho : (((derivedOpenAdjunction Λ j).projectionMap (derivedPullback Λ j)
+        (Functor.curry.obj (tensor Λ U)) (Functor.curry.obj (tensor Λ X)) d₂).app
+        ((derivedEquivalence Λ U).functor.obj K)).app
+        ((derivedEquivalence Λ X).functor.obj L) =
+      openProjection Λ j ((derivedEquivalence Λ U).functor.obj K)
+        ((derivedEquivalence Λ X).functor.obj L) := by
+    rw [Adjunction.projectionMap_app_app, Adjunction.projectionMapTranspose_app_app]
+    change ((derivedOpenAdjunction Λ j).homEquiv _ _).symm
+      (_ ≫ (𝟙 _ ≫ _)) = _
+    rw [Category.id_comp]
+    rfl
+  rw [hi, ho, hU, hX] at h
+  change (derivedExtensionComparison Λ j).inv.app _ ≫
+      (derivedEquivalence Λ X).functor.map (internalOpenProjection Λ j K L) ≫
+      (tensorComparison Λ X).hom.app ((internalDerivedExtension Λ j).obj K, L) =
+    (derivedExtension Λ j).map
+        ((tensorComparison Λ U).hom.app (K, (internalDerivedPullback Λ j).obj L)) ≫
+      (derivedExtension Λ j).map ((tensor Λ U).map (Prod.mkHom (𝟙 _)
+        ((derivedPullComparison Λ j).hom.app L))) ≫
+      openProjection Λ j ((derivedEquivalence Λ U).functor.obj K)
+        ((derivedEquivalence Λ X).functor.obj L) ≫
+      (tensor Λ X).map (Prod.mkHom ((derivedExtensionComparison Λ j).inv.app K) (𝟙 _)) at h
+  have hh := congrArg (fun q ↦ q ≫
+    (tensor Λ X).map (Prod.mkHom ((derivedExtensionComparison Λ j).hom.app K)
+      (𝟙 ((derivedEquivalence Λ X).functor.obj L)))) h
+  simp only [Category.assoc, ← (tensor Λ X).map_comp, prod_comp,
+    Iso.inv_hom_id_app, Category.id_comp, ← prod_id] at hh
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hh
+  rw [← cancel_epi ((derivedExtensionComparison Λ j).inv.app
+    (((CondensedRing.derivedTensor Λ U).obj K).obj ((internalDerivedPullback Λ j).obj L)))]
+  simp only [Iso.inv_hom_id_app_assoc]
+  exact hh
 
 /-- Pullback composition is identified with the canonical ringed pasting comparison.
 Source: Stacks 03D7 and 07A6
@@ -393,6 +676,6 @@ theorem module_ringed_topos_derived_comparison
         (tensorPullComparison Λ f.left).hom.app
           ((derivedEquivalence Λ Y.left).functor.obj M,
             (derivedEquivalence Λ Y.left).functor.obj N) := by
-  sorry
+  exact delta_comparison Λ f.left M N
 
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison
