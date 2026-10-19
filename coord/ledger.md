@@ -16643,3 +16643,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/D2/Sheaf.NumberTheory.Padics.IntegersProfiniteTower (stage 3; reviewer PASS; first push; landing 20261019T002521-L-2146390 (interface); batch 20261019T002449; modules 2; new nodes 1)
 - 00:25 L: merged deliver/D2/Sheaf.Paper.LocalizedTStructure (stage 3; reviewer PASS; first push; landing 20261019T002522-L-2146558 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/D3/Sheaf.Paper.ScalarExtensionTowerCoherence (stage 3; reviewer PASS; first push; landing 20261019T002522-L-2146755 (interface); batch 20261019T002449; modules 2; new nodes 1)
+- 00:25 L: merged deliver/D4/Sheaf.Paper.ScalarExtensionExactIntrinsic (stage 3; reviewer PASS; first push; landing 20261019T002523-L-2146945 (interface); batch 20261019T002449; modules 1; new nodes 0; change records: coord/changes/D4-scalar-extension-exact-proof-commands.md)

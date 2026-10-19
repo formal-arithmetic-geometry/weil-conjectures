@@ -9,16 +9,13 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.IntegralScalarExtensionWellDefined
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 
 import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Paper.SfScalarExtensionComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+import Mathlib.CategoryTheory.Shift.Localization
 /-! # Exactness of intrinsic finite scalar extension
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/
@@ -28,13 +25,87 @@ Source: literature/blueprint/master/blueprint/sec-smooth-purity/
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
-universe d u
+universe d u r v
 
 open CategoryTheory
 
+open scoped TensorProduct
+open TensorProduct
+
+private noncomputable def rawComparison
+    (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
+    [Preadditive C] [Linear R C] [Limits.HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
+  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
+  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
+    (Localization.Away p) X.obj Y.obj f
+  map_id X := by
+    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
+    simp
+  map_comp {X Y Z} f g := by
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
+      | tmul b g =>
+        change Rationalization.tensorHomEquiv _ _ _ _
+          (ScalarLocalization.composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
+        rw [ScalarLocalization.composition_tmul]
+        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
+          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
+      | add g h hg hh =>
+        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
+        simp only [_root_.map_add]
+        rw [hg, hh]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm
+    | add f h hf hh =>
+      rw [Preadditive.add_comp X Y Z f h g]
+      simp only [_root_.map_add]
+      rw [hf, hh]
+      exact (Preadditive.add_comp _ _ _ _ _ _).symm
+
+private theorem rawLocalization
+    (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
+    [Preadditive C] [Linear R C] [Limits.HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    (ScalarLocalization.localization R C p).IsLocalization
+      (Rationalization.W (Submonoid.powers p) C) := by
+  classical
+  let M := Submonoid.powers p
+  let E := rawComparison R C p
+  have : E.Full := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).surjective⟩
+  have : E.Faithful := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).injective⟩
+  have : E.EssSurj := ⟨fun X ↦ by
+    obtain ⟨Y, ⟨e⟩⟩ := Rationalization.exists_iso_obj X
+    exact ⟨⟨Y⟩, ⟨e⟩⟩⟩
+  have : E.IsEquivalence := {}
+  let Q := ScalarLocalization.localization R C p
+  have fac : Q ⋙ E ≅ Rationalization.Q M C :=
+    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      dsimp [Q, E, ScalarLocalization.localization, rawComparison]
+      simp only [Category.comp_id, Category.id_comp,
+        Rationalization.tensorHomEquiv_tmul, one_smul]
+      rfl)
+  exact Functor.IsLocalization.of_equivalence_target (Rationalization.Q M C)
+    (Rationalization.W M C) Q E.asEquivalence.symm
+    (Functor.isoWhiskerRight fac.symm E.inv ≪≫ (Functor.associator _ _ _) ≪≫
+      Functor.isoWhiskerLeft Q E.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
+
 namespace WeilConjectures
 
+attribute [local irreducible] sfRationalTriangulationDatum
+
+set_option linter.unusedVariables false in
 /-- The completed rational scalar extension preserves shifts and distinguished triangles.
 Source: blueprint order 1883; Stacks Tags 06XN, 05SE and 05R6
 (blueprint: lem-weil-scalar-extension-exact-triangulated).
@@ -115,6 +186,49 @@ theorem sfScalarExtension_exact_triangulated
     ∃ h : (sfRationalScalarExtension l E Y D.p hl L ι).CommShift ℤ,
       (fun [commShift : (sfRationalScalarExtension l E Y D.p hl L ι).CommShift ℤ] ↦
         (sfRationalScalarExtension l E Y D.p hl L ι).IsTriangulated) (commShift := h) := by
-  sorry
+  classical
+  let T := sfConstructibleIntegralScalarExtension D.p l hl E L ι Y
+  let I := (sfIntegralConstructible l L Y).ι
+  let H := (sfIntegralConstructible l E Y).ι ⋙ integralOrdinaryDerivedScalar l E L ι Y
+  let e : T ⋙ I ≅ H :=
+    (sfIntegralConstructible l L Y).liftCompιIso
+      ((sfIntegralConstructible l E Y).ι ⋙ integralScalarExtension l E L ι Y)
+      (fun X ↦ sfIntegralScalarExtension_constructible D.p l hl E L ι Y X.obj X.property) ≪≫
+      (sfIntegralOrdinaryComparison l E L ι Y).symm
+  let t : T.CommShift ℤ := Functor.CommShift.ofComp e ℤ
+  have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofComp_compatibility e ℤ
+  have : T.IsTriangulated := (Functor.isTriangulated_iff_comp_right e).2 inferInstance
+  let Q := sfRationalConstructibleLocalization l E Y
+  let Q' := sfRationalConstructibleLocalization l L Y
+  let F := sfRationalScalarExtension l E Y D.p hl L ι
+  have : Q.IsLocalization
+      (Rationalization.W (Submonoid.powers (Padic.coefficientExtensionUniformizer l E))
+        (sfIntegralConstructibleCategory l E Y)) :=
+    rawLocalization (Padic.coefficientExtensionIntegers l E)
+      (sfIntegralConstructibleCategory l E Y) (Padic.coefficientExtensionUniformizer l E)
+  have hobj := (sfRationalScalarExtension_existsUnique l E Y D.p hl L ι).exists.choose_spec.2.1
+  have hmap := (sfRationalScalarExtension_existsUnique l E Y D.p hl L ι).exists.choose_spec.2.2
+  let c : Q ⋙ F ≅ T ⋙ Q' := NatIso.ofComponents
+    (fun X ↦ eqToIso (hobj (Q.obj X))) (by
+      intro X X' f
+      change F.map (Q.map f) ≫ eqToHom (hobj (Q.obj X')) =
+        eqToHom (hobj (Q.obj X)) ≫ Q'.map (T.map f)
+      have hm := hmap X X' f 1
+      have hm' : HEq (F.map (Q.map f)) (Q'.map (T.map f)) := by
+        simp only [map_one] at hm
+        exact hm
+      exact eq_of_heq ((comp_eqToHom_heq _ _).trans
+        (hm'.trans (eqToHom_comp_heq _ _).symm)))
+  let W := Rationalization.W
+    (Submonoid.powers (Padic.coefficientExtensionUniformizer l E))
+    (sfIntegralConstructibleCategory l E Y)
+  let : Localization.Lifting Q W (T ⋙ Q') F := ⟨c⟩
+  let h : F.CommShift ℤ := Functor.commShiftOfLocalization Q W ℤ (T ⋙ Q') F
+  refine ⟨h, ?_⟩
+  have : NatTrans.CommShift c.hom ℤ :=
+    inferInstanceAs (NatTrans.CommShift (Localization.Lifting.iso Q W (T ⋙ Q') F).hom ℤ)
+  have : (Q ⋙ F).IsTriangulated := (Functor.isTriangulated_iff_of_iso c).2 inferInstance
+  have : Q.mapArrow.EssSurj := Localization.essSurj_mapArrow Q W
+  exact Functor.isTriangulated_of_precomp Q F
 
 end WeilConjectures

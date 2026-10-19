@@ -20,97 +20,53 @@
  ],
  "proof": [
   {
-   "text": "Use the completed coefficient sheaves, not discrete constant integral coefficients. Write $B_m=(A_{L,m})_Y$, with the ring maps $\\rho_m$ and restrictions $\\operatorname{Res}^L_m$ of [def-weil-integral-scalar-extension]. For any complex $P$ of $\\widehat{\\mathcal O}_{E,Y}$-modules, set $V(P)=\\prod_m\\operatorname{Res}^L_m(P\\otimes_{\\widehat{\\mathcal O}_{E,Y}}B_m)$ and $h_P=1-s_P$, and define $H(P)=\\operatorname{Cone}(h_P)[-1]$. These termwise products exist by [lem-weil-proetale-countable-products-exact]. Thus $H(P)^n=V(P)^{n-1}\\oplus V(P)^n$, with differential $(y,x)\\mapsto(-dy-h_Px,dx)$. On chain maps use the two diagonal product maps. Additivity, identities and composition follow componentwise from tensor and product functoriality. If $k$ is a chain homotopy between $u,v$, its product after tensoring is a degree $-1$ map $\\bar k$ commuting with the transition maps; the degree $-1$ map $k_H(y,x)=(-\\bar k y,\\bar k x)$ is a homotopy between $H(u),H(v)$, since the off-diagonal terms cancel and the diagonal terms are $V(u-v)$. Hence $H$ descends to homotopy categories.",
+   "text": "Use the normalized natural isomorphism sfIntegralOrdinaryComparison from ordinary derived tensor to the completed scalar functor, restricted to the intrinsic integral constructible objects. Ordinary finite free scalar extension is exact, so its Mathlib derived functor is triangulated. Transport its coherent integer shift through the comparison and the fully faithful target inclusion using Functor.CommShift.ofComp. Functor.isTriangulated_iff_comp_right proves the restricted completed integral functor T is triangulated.",
    "uses": [
     "def-weil-integral-scalar-extension",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
-    "place": "Agent expansion of the integral scalar-extension cone formula; homotopy differential calculation"
-   }
-  },
-  {
-   "text": "The shift comparison $H(P[1])\\longrightarrow H(P)[1]$ is $(y,x)\\mapsto(-y,x)$ and is natural. For a chain map $f:P\\to Q$, termwise tensoring and products commute with the finite direct sums defining its cone. Put the four coordinates of $H(C(f))^n$ in the order $(y_Q,y_P,x_Q,x_P)$. The map $(y_Q,y_P,x_Q,x_P)\\mapsto(y_Q,x_Q,-y_P,x_P)$ identifies it with $C(H(f))^n$. Indeed its differential before this permutation is $(-d_Qy_Q-fy_P-h_Qx_Q,\\ d_Py_P-h_Px_P,\\ d_Qx_Q+fx_P,\\ -d_Px_P)$, which after the permutation is exactly the cone differential of $H(f)$. Its inverse sends $(a,b,c,d)$ to $(a,-c,b,d)$. This identification respects the cone inclusion. It also respects the connecting arrow $-p$ using the displayed shift comparison: both maps on the $P$ coordinates are $(y_P,-x_P)$. Therefore $H$ carries cone triangles to cone triangles, including the last arrow. By [lem-pur-homotopy-category-triangulated], every distinguished homotopy triangle is isomorphic to such a cone triangle, and the target localization is exact. Consequently $F=Q_LH:K(\\widehat{\\mathcal O}_{E,Y})\\to D(\\widehat{\\mathcal O}_{L,Y})$ is exact.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Cone differential calculation; proposition-homotopy-category-triangulated; exact derived localization"
-   }
-  },
-  {
-   "text": "Take as resolution class the K-flat complexes with flat terms over $\\widehat{\\mathcal O}_{E,Y}$. Every complex admits a quasi-isomorphism from this class by [lem-pc-kflat-resolution]. For a quasi-isomorphism between two members, clause (1) of [lem-weil-integral-scalar-extension-well-defined] says precisely that its $H$-image is a quasi-isomorphism, hence $F$ inverts it. Apply [lem-pur-left-derived-from-kflat-class] to the exact $F$ of step 2 and this class. Its everywhere defined left derived functor is exact and is computed by $Q_LH(P)$ on every chosen K-flat resolution. This is the functor $K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$ specified in [def-weil-integral-scalar-extension], with the same induced maps and shift comparison; the comparison on resolutions is the natural derived-functor comparison, not a choice of cones in the triangulated category.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-pur-left-derived-from-kflat-class",
-    "def-weil-integral-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XN, lemma-find-existence-computes, and Tag 05SE, proposition-derived-functor"
-   }
-  },
-  {
-   "text": "The fixed prime satisfies $\\ell\\neq p$ by [def-weil-rationalization-karoubi], so the coefficient hypotheses of both following lemmas hold. By [lem-weil-integral-scalar-extension-constructible] this exact ambient functor maps $D^b_c(Y,\\mathcal O_E)$ into $D^b_c(Y,\\mathcal O_L)$. Both are full triangulated subcategories with the ambient distinguished triangles by [lem-weil-integral-constructible-triangulated], applied for each coefficient field. Thus on these subcategories its shift comparison remains a morphism, and the image of every distinguished triangle is still distinguished. Its $\\mathcal O_E$-linearity is clause (3) of [lem-weil-integral-scalar-extension-well-defined]. Denote this restricted exact linear functor by $T$.",
-   "uses": [
     "lem-weil-integral-scalar-extension-constructible",
     "lem-weil-integral-constructible-triangulated",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "def-weil-rationalization-karoubi"
+    "lem-weil-scalar-extension-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
-    "place": "Restriction to the integral constructible subcategories; rationalization blueprint proof, integral representative clause"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-weil-rationalization-karoubi], the specified rational scalar-extension functor is $T_{L/E}(K)=T(K)$ and $T_{L/E}(f\\otimes a)=T(f)\\otimes a$, where $a\\in E\\subset L$. Localize the shift comparison of $T$ and its inverse. Naturality on $f\\otimes a$ is the integral naturality equation tensored with $a$, and extends to sums by additivity. The two inverse equations also remain true after tensoring. This supplies a natural isomorphism $T_{L/E}(K[1])\\simeq T_{L/E}(K)[1]$; its iterates give all shifts. No identification of the $\\mathcal O_E$- and $\\mathcal O_L$-localizations is needed.",
-   "uses": [
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
-    "place": "Rational scalar extension on Hom modules, and explicit localized shift comparison"
-   }
-  },
-  {
-   "text": "Let $\\Delta$ be distinguished in $D^b_c(Y,E)$. By [lem-weil-linear-scalar-localization-triangulated] and [def-weil-rationalization-karoubi], it is isomorphic to $Q_E(\\Delta_0)$ for an integral distinguished triangle $\\Delta_0$. With the shift comparison of step 5, $T_{L/E}(Q_E(\\Delta_0))=Q_L(T(\\Delta_0))$: all three maps, including the connecting map, are the integral images tensored with $1$. Step 4 makes $T(\\Delta_0)$ distinguished and the cited localization theorem makes its $Q_L$-image distinguished. Applying $T_{L/E}$ to the triangle isomorphism gives another triangle isomorphism. Hence $T_{L/E}(\\Delta)$ is distinguished. Together with step 5 this proves both clauses of the item.",
+   "text": "Identify the raw tensor-Hom scalar localization with the existing Verdier rationalization using Rationalization.tensorHomEquiv. The tensor formula preserves identity and composition; the equivalences on every Hom and unchanged objects give an equivalence of categories. Its comparison with Q proves that the raw localization is a localization at Rationalization.W. This does not change any chosen rational shift or triangles.",
    "uses": [
     "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The object and pure tensor specifications of sfRationalScalarExtension give a natural isomorphism Q_E followed by rational scalar extension with T followed by Q_L: on integral morphisms use the specification with scalar one. Apply Functor.commShiftOfLocalization to descend the shift of T followed by Q_L. Its compatibility theorem says that this comparison commutes with every shift, including the connecting arrow of a triangle.",
+   "uses": [
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05R6, proposition-construct-localization, distinguished localized triangles"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Localization.essSurj_mapArrow applies to Q_E at Rationalization.W, which has the calculus of fractions of its triangulated localization. Thus every arrow is isomorphic to an image arrow. Since Q_E and Q_E followed by rational scalar extension are triangulated (the latter by the shift-compatible comparison with T followed by Q_L), Functor.isTriangulated_of_precomp proves rational scalar extension is triangulated. This lemma completes an image arrow to an integral distinguished triangle and transports its image via the standard comparison of mapped triangles; equivalently rational distinguished triangles are the isomorphic integral images.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-integral-scalar-extension",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-pc-kflat-resolution",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-pur-left-derived-from-kflat-class",
   "lem-weil-integral-scalar-extension-constructible",
   "lem-weil-integral-constructible-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-linear-scalar-localization-triangulated",
   "def-weil-rationalization-karoubi",
-  "lem-weil-linear-scalar-localization-triangulated"
+  "lem-weil-integral-constructible-linear"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent D4",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
-  "place": "Proof, integral exactness and rationalization clauses; cone calculation expanded using Stacks Tags 06XN, 05SE and 05R6"
+  "place": "Proof: integral derived tensor followed by rationalization; use the existing normalized intrinsic ordinary comparison instead of redoing the Roos cone and resolving-class construction."
  },
  "mathlib_searches": [
   {
@@ -229,14 +185,9 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-homotopy-category-triangulated",
-  "lem-pc-kflat-resolution",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-pur-left-derived-from-kflat-class",
   "lem-weil-integral-scalar-extension-constructible",
   "lem-weil-integral-constructible-triangulated",
-  "lem-weil-linear-scalar-localization-triangulated",
-  "lem-weil-proetale-countable-products-exact"
+  "lem-weil-linear-scalar-localization-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -336,5 +287,15 @@
   "note": "Uses the published intrinsic SfRationalizationKaroubi interface, repairing the archived bounded-category attachment.",
   "file": "lean/Sheaf/Paper/ScalarExtensionExactIntrinsic.lean",
   "branch": "newtargets-dag"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T002523-L-2146945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
