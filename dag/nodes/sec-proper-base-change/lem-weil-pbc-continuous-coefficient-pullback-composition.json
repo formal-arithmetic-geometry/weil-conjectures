@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-continuous-coefficient-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of canonical continuous coefficient pullback maps",
+ "statement": "Let $T$ be a topological commutative ring and $W\\\\xrightarrow{k} Z\\\\xrightarrow{h} X$ scheme morphisms [def-pc-scheme]. Write $T_X(U)=C(|U|,T)$ for the ring sheaf [lem-weil-pbc-continuous-ring-functions-sheaf]. Define $c_h:h^{-1}T_X\\\\to T_Z$ [def-weil-proetale-inverse-image] as the adjunct of precomposition by the first projection $U\\\\times_X Z\\\\to U$. Under the canonical inverse-image composition comparison, $c_{k\\\\circ h}$ equals $k^{-1}(c_h)$ followed by $c_k$. Coefficient postcomposition commutes with these pullback maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-continuous-ring-functions-sheaf",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Definition 6.8.1 and paragraph before Definition 6.8.6; composition of precomposition, transported through the inverse-image adjunction."
+ },
+ "proof": [
+  {
+   "text": "Precomposition by the first projection is natural in the pro-etale test object, by the pullback lift-first-projection identity. Adjunction therefore defines the canonical pullback map and proves its section normalization.",
+   "uses": [
+    "lem-weil-pbc-continuous-ring-functions-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the iterated pullback, the first projection composed twice equals the first projection for composite base change, after the pullback-composition isomorphism. Evaluate each continuous function at this equality of scheme points to prove equality of the direct-image maps. Apply the adjunction hom-equivalence. Naturality of that equivalence and the unit identity for conjugate mates show that the adjunct of the direct-image composite is the inverse-image composite through the canonical comparison. This is the displayed composition equation. For a continuous coefficient ring map, postcomposition commutes pointwise with precomposition; naturality of the same adjunction gives coefficient naturality.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-continuous-ring-functions-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Definition 6.8.1 and paragraph before Definition 6.8.6; composition of precomposition, transported through the inverse-image adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunct pullback maps of sheaves of continuous functions commute with composition of scheme morphisms",
+   "results": "; 8 hits: TopCat.Presheaf.pushforwardPullbackAdjunction, TopCat.Sheaf.pullback, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, TopCat.continuousFunctions.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Presheaf.stalkPullbackHom, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned Mathlib facts provide general topology and adjunction infrastructure; the pro-etale ring-sheaf construction is proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"conjugateEquiv\"",
+   "results": "; 8 hits: CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_adjunction_id_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Bicategory.conjugateEquiv_adjunction_id, CategoryTheory.Bicategory.conjugateEquiv_adjunction_id_symm",
+   "date": "2026-10-19",
+   "verdict": "supporting lemmas only: the mate and composition laws are used in the proof, not an existing pro-etale continuous coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|homEquiv_naturality|unit_conjugateEquiv",
+   "results": "; 25 hits: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/PartOrd.lean, Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "supporting lemmas only: continuous presheaves and general adjunction identities; no duplicate of this pro-etale ring-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; the coefficient sheaves and their restriction to locally closed immersions.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientPullback_comp",
+  "statement": "theorem continuousCoefficientPullback_comp (T : Type (u + 1))\n    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    {W Z X : Scheme.{u}} (k : W ⟶ Z) (h : Z ⟶ X) :\n    continuousCoefficientPullback T (k ≫ h) =\n      (proEtaleRingInverseImageComp k h).hom.app (continuousCoefficientSheaf X T) ≫\n        (proEtaleSheafInverseImage k CommRingCat.{u + 1}).map\n          (continuousCoefficientPullback T h) ≫ continuousCoefficientPullback T k",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live statement (byte-identical, now axiom-clean); ContinuousCoefficientBasic vs old item module (verbatim move, same public imports, one proof-only change); 7 direct importers compiled against delivered .lbuild (all clean); new node lean.statements vs Lean signatures"
+ }
+}

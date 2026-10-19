@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-continuous-ring-functions-sheaf",
+ "kind": "statement",
+ "title": "Continuous functions form a pro-etale sheaf of rings",
+ "statement": "Let $T$ be a topological commutative ring. On schemes, give $U$ the ring $C(|U|,T)$ of continuous functions, with restriction by precomposition. This presheaf is a sheaf for the pro-etale topology [def-weil-pbc-proetale-site]. In particular its restriction to the small pro-etale site of a scheme $X$ [def-pc-scheme] defines the ring sheaf of continuous $T$-valued functions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Lemma 4.2.12 and Definition 6.8.1; the ring-valued refinement follows pointwise from the underlying-set descent theorem."
+ },
+ "proof": [
+  {
+   "text": "The underlying set-valued presheaf is an fpqc sheaf by continuous-function descent. Pro-etale coverings are fpqc coverings, so it is also a pro-etale sheaf. The ring forgetful functor reflects its matching-family limits: the unique set-valued lift preserves each operation because its composites with every projection do. This proves ring-valued sheafhood. Restrict through the continuous small-site forgetful functor to obtain the small-site sheaf.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-cbc-continuous-functions-fpqc-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Lemma 4.2.12 and Definition 6.8.1; the ring-valued refinement follows pointwise from the underlying-set descent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions into a topological commutative ring form a sheaf on the pro-etale site of a scheme",
+   "results": "; 8 hits: TopCat.continuousFunctions, TopCat.presheafToTopCommRing, ContinuousMap.instRing.congr_simp, continuousSubring, AlgebraicGeometry.Scheme.ringCatSheaf, ContinuousMap.instRing, AlgebraicGeometry.commRingStructureSheafInTypeObj, AlgebraicGeometry.LocallyRingedSpace.𝒪",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned Mathlib facts provide general topology and adjunction infrastructure; the pro-etale ring-sheaf construction is proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"conjugateEquiv\"",
+   "results": "; 8 hits: CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_adjunction_id_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Bicategory.conjugateEquiv_adjunction_id, CategoryTheory.Bicategory.conjugateEquiv_adjunction_id_symm",
+   "date": "2026-10-19",
+   "verdict": "supporting lemmas only: the mate and composition laws are used in the proof, not an existing pro-etale continuous coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|homEquiv_naturality|unit_conjugateEquiv",
+   "results": "; 25 hits: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/PartOrd.lean, Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "supporting lemmas only: continuous presheaves and general adjunction identities; no duplicate of this pro-etale ring-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; the coefficient sheaves and their restriction to locally closed immersions.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientBasic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientBasic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.continuousMapPresheafCommRing_isSheaf",
+  "statement": "theorem continuousMapPresheafCommRing_isSheaf (T : Type v)\n    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :\n    Presheaf.IsSheaf proetaleTopology (continuousMapPresheafCommRing T)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.continuousMapPresheafCommRing",
+   "AlgebraicGeometry.Scheme.continuousMapPresheafCommRing_isSheaf",
+   "AlgebraicGeometry.Scheme.continuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.coefficientExtensionNormedField",
+   "AlgebraicGeometry.Scheme.integralCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.rationalCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.finiteCoefficientRing",
+   "AlgebraicGeometry.Scheme.finiteCoefficientRingMap",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower_map_id",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower_map_comp",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower",
+   "AlgebraicGeometry.Scheme.finiteCoefficientLimit",
+   "AlgebraicGeometry.Scheme.continuousMapRestrictionRingHom",
+   "AlgebraicGeometry.Scheme.localizedContinuousMapRestriction",
+   "AlgebraicGeometry.Scheme.localizedContinuousMap_map_id",
+   "AlgebraicGeometry.Scheme.localizedContinuousMap_map_comp",
+   "AlgebraicGeometry.Scheme.localizedContinuousMapPresheaf",
+   "AlgebraicGeometry.Scheme.localizedContinuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.integralCoefficientLocalization",
+   "AlgebraicGeometry.Scheme.finiteContinuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.continuousCoefficientValue",
+   "AlgebraicGeometry.Scheme.integralCoefficientValue",
+   "AlgebraicGeometry.Scheme.rationalCoefficientValue",
+   "AlgebraicGeometry.Scheme.finiteContinuousCoefficientValue",
+   "AlgebraicGeometry.Scheme.continuousCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.integralCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.rationalCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.integralRationalCoefficientNormalized",
+   "AlgebraicGeometry.Scheme.integralCoefficientLocalizationNormalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live statement (byte-identical, now axiom-clean); ContinuousCoefficientBasic vs old item module (verbatim move, same public imports, one proof-only change); 7 direct importers compiled against delivered .lbuild (all clean); new node lean.statements vs Lean signatures"
+ }
+}

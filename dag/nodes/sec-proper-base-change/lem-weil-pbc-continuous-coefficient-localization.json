@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-continuous-coefficient-localization",
+ "kind": "statement",
+ "title": "ContinuousCoefficientLocalization",
+ "statement": "theorem continuousCoefficientLocalization (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) :\n    ∃ b : integralCoefficientLocalization l X E ≅ rationalCoefficientSheaf l X E,\n      integralCoefficientLocalizationNormalized l E X b.hom",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-continuous-ring-functions-sheaf",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12; Lemma 6.5.8(1) (integral coefficient restriction); Definition 6.8.1; Lemma 6.8.2(1),(2); paragraph before Definition 6.8.6 (compatibility with locally closed immersions)."
+ },
+ "proof": [
+  {
+   "text": "Construct the canonical sectionwise fraction ring map by the localization universal property: the constant uniformizer has its constant field inverse. It is natural under restriction. If a fraction maps to zero, its numerator vanishes pointwise and is zero; cancellation of the localized denominator proves injectivity. For a continuous rational function s, take the opens where the norm of uniformizer^n times s is strictly less than one. These opens cover because powers of the uniformizer tend to zero. Each open defines a pro-etale test object, and the existing ProEt.mem_topology_of_openImmersion theorem makes the family a site covering. On this open, uniformizer^n times s is a continuous integral numerator. Its fraction maps to s by denominator cancellation. Thus the presheaf map is locally bijective. Extend it by the sheafification adjunction; local bijectivity makes the resulting sheaf map an isomorphism. Evaluating the adjunction unit and the localization lift on integral numerators proves exactly the required normalization. Empty objects cause no exception to these pointwise and covering arguments.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 6.5.8(1), 6.8.2(1),(2), paragraph before Definition 6.8.6; expanded elementary construction of the inverse-limit and localization maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a sheaf of continuous p-adic functions under a locally closed immersion is an isomorphism",
+   "results": "8 hits, open-immersion maps for Zariski sheaves; no pro-etale continuous coefficient comparison",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"ContinuousMap\"",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtension|continuousCoefficient",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing the sheaf of continuous functions into a p-adic valuation ring at a uniformizer gives continuous functions into its fraction field",
+   "results": "; 8 hits: PadicInt.isFractionRing, LaurentSeries.continuous_coe, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, Valued.isTopologicalDivisionRing, Padic.withValRingEquiv, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, ValuationSubring.isLocalRing, IsNonarchimedeanLocalField.instIsTopologicalDivisionRing",
+   "date": "2026-10-19",
+   "verdict": "no match: returned generic topology, p-adic completeness or Zariski facts do not state this normalized pro-etale coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; the coefficient sheaves and their restriction to locally closed immersions.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientLocalization",
+  "statement": "theorem continuousCoefficientLocalization (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) :\n    ∃ b : integralCoefficientLocalization l X E ≅ rationalCoefficientSheaf l X E,\n      integralCoefficientLocalizationNormalized l E X b.hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live statement (byte-identical, now axiom-clean); ContinuousCoefficientBasic vs old item module (verbatim move, same public imports, one proof-only change); 7 direct importers compiled against delivered .lbuild (all clean); new node lean.statements vs Lean signatures"
+ }
+}

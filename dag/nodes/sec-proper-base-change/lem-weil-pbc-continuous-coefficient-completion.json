@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-continuous-coefficient-completion",
+ "kind": "statement",
+ "title": "ContinuousCoefficientCompletion",
+ "statement": "theorem continuousCoefficientCompletion (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) :\n    ∃ i : integralCoefficientSheaf l X E ≅ finiteCoefficientLimit l X E,\n      (∀ n : ℕ, ∃ q : (CategoryTheory.constantSheaf (ProEt.topology X)\n          CommRingCat.{u + 1}).obj (finiteCoefficientRing l E n) ≅\n          finiteContinuousCoefficientSheaf l X E n,\n        (∀ (U : X.ProEtᵒᵖ) (a : finiteCoefficientRing l E n) (x : U.unop.left),\n          finiteContinuousCoefficientValue l E X n U\n            (q.hom.hom.app U ((CategoryTheory.toSheafify (ProEt.topology X)\n              ((Functor.const X.ProEtᵒᵖ).obj (finiteCoefficientRing l E n))).app U a)) x = a) ∧\n        (∀ (U : X.ProEtᵒᵖ)\n          (s : (integralCoefficientSheaf l X E).obj.obj U) (x : U.unop.left),\n          (finiteContinuousCoefficientValue l E X n U\n            ((i.hom ≫ CategoryTheory.Limits.limit.π (finiteCoefficientTower l X E)\n              (Opposite.op n) ≫ q.hom).hom.app U s) x).down =\n                Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))\n                  (integralCoefficientValue l E X U s x)))",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-continuous-ring-functions-sheaf",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12; Lemma 6.5.8(1) (integral coefficient restriction); Definition 6.8.1; Lemma 6.8.2(1),(2); paragraph before Definition 6.8.6 (compatibility with locally closed immersions)."
+ },
+ "proof": [
+  {
+   "text": "Construct the constant-functions map for every discrete commutative ring. Its local injectivity follows by evaluation on nonempty objects and the empty cover on empty objects. Its local surjectivity follows from the open fibres of each continuous function. Mathlib local-bijectivity and sheafification identify the constant sheaf with continuous functions. Naturality gives an isomorphism of residue diagrams. The fibre covers use the already proved ProEt.mem_topology_of_openImmersion theorem.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing topological ring equivalence from the valuation ring to its compatible positive residues. Show that its topology agrees with coefficientExtensionNormedField by equality of the spectral norms. Continuous functions into this compatible-family ring are exactly compatible continuous residue functions: the inverse is pointwise lifting, continuous by the subspace and product topologies. Reflect the resulting sectionwise limit through the ring forgetful functor and the sheaf inclusion. Transport the limit along the discrete constant-sheaf diagram isomorphism. The cone-point isomorphism law proves the required normalized projections; the sheafification unit proves the constants law.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-sfb-integers-profinite-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12 and 6.8.2(1); Lean proof by discrete local bijectivity and the existing profinite-tower homeomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a sheaf of continuous p-adic functions under a locally closed immersion is an isomorphism",
+   "results": "8 hits, open-immersion maps for Zariski sheaves; no pro-etale continuous coefficient comparison",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"ContinuousMap\"",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtension|continuousCoefficient",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions to a complete p-adic valuation ring are the inverse limit of locally constant functions to its finite residue rings",
+   "results": "; 8 hits: ProfiniteGrp.toLimit_fun_continuous, PadicInt.instIsAdicCompleteMaximalIdeal, PadicInt.completeSpace, Padic.adicCompletionEquiv, PadicInt.complete, PadicInt.limNthHom, Padic.complete'', Padic.coe_withValRingEquiv_symm",
+   "date": "2026-10-19",
+   "verdict": "no match: returned generic topology, p-adic completeness or Zariski facts do not state this normalized pro-etale coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; the coefficient sheaves and their restriction to locally closed immersions.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientCompletion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientCompletion",
+  "statement": "theorem continuousCoefficientCompletion (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) :\n    ∃ i : integralCoefficientSheaf l X E ≅ finiteCoefficientLimit l X E,\n      (∀ n : ℕ, ∃ q : (CategoryTheory.constantSheaf (ProEt.topology X)\n          CommRingCat.{u + 1}).obj (finiteCoefficientRing l E n) ≅\n          finiteContinuousCoefficientSheaf l X E n,\n        (∀ (U : X.ProEtᵒᵖ) (a : finiteCoefficientRing l E n) (x : U.unop.left),\n          finiteContinuousCoefficientValue l E X n U\n            (q.hom.hom.app U ((CategoryTheory.toSheafify (ProEt.topology X)\n              ((Functor.const X.ProEtᵒᵖ).obj (finiteCoefficientRing l E n))).app U a)) x = a) ∧\n        (∀ (U : X.ProEtᵒᵖ)\n          (s : (integralCoefficientSheaf l X E).obj.obj U) (x : U.unop.left),\n          (finiteContinuousCoefficientValue l E X n U\n            ((i.hom ≫ CategoryTheory.Limits.limit.π (finiteCoefficientTower l X E)\n              (Opposite.op n) ≫ q.hom).hom.app U s) x).down =\n                Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))\n                  (integralCoefficientValue l E X U s x)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-8409e",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T192754-L-1866283",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live statement (byte-identical, now axiom-clean); ContinuousCoefficientBasic vs old item module (verbatim move, same public imports, one proof-only change); 7 direct importers compiled against delivered .lbuild (all clean); new node lean.statements vs Lean signatures"
+ }
+}
