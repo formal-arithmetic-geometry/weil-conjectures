@@ -17614,3 +17614,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:12 L: returned deliver/NV/lem-sf-hom-finite-projective (reviewer RETURN: L: independent stage-2 immutable head 8dadf10680b6: H3/H4: at the finite and integral stages the node fixes P^∨ = ordina)
 - 22:25 L: merged deliver/NU/lem-pur-finite-dnc-normalization-reduction (stage 2; reviewer PASS; parallel immutable checks)
 - 22:26 L: returned deliver/Q07/lem-trf-finite-horizontal-shriek-mate (reviewer RETURN: L: independent stage-2 immutable head deed6a71b862: Statement mathematics correct (hypotheses/clauses/edge cases checked)
+- 22:28 L: returned deliver/NL/def-sf-cup (reviewer RETURN: L: independent stage-2 immutable head 096576b3292b: H2 (theorem stmt_dep finding): def-sf-cup adds theorem node lem-fix-)
