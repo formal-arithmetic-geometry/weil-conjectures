@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-two-term-self-extension-hom",
+ "kind": "statement",
+ "title": "Two-term self-extension quotient",
+ "statement": "Let $R$ be a commutative ring and $D(R)$ its derived category [def-weil-abstract-derived-category]. Let $P$ be a cochain complex of projective $R$-modules [def-weil-pbc-projective-module] vanishing outside degrees $0,1$, with specified isomorphisms $e_0:P^0\\xrightarrow{\\sim}R$ and $e_1:P^1\\xrightarrow{\\sim}R$. Suppose $e_1d^0e_0^{-1}$ is multiplication by $x\\in R$. There is an additive equivalence $e:\\operatorname{Hom}_{D(R)}(Q(P),Q(P)[1])\\xrightarrow{\\sim}R/(x)$ such that for every chain map $f:P\\to P[1]$, the value of $e$ on $Q(f)$ followed by the localization shift comparison is the residue class of $(e_1f^0e_0^{-1})(1)$, where $f^0$ is identified with a map $P^0\\to P^1$ by the specified shift isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-determination/_section.md",
+  "place": "Counterexample paragraph: Hom(P,P[1])=R/(epsilon)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate degree-one cochains at 1 using the two chosen rank-one identifications. Every component except degree 0 vanishes by the support bounds. Linear maps out of R are determined by 1; inserting multiplication by a scalar gives an inverse, and degree-two cochains vanish, so all degree-one cochains are cocycles.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a degree-zero cochain c, the scalar of its boundary is x times the difference of the normalized scalars of c in degrees 0 and 1. Conversely the cochain with multiplication by r in degree 0 and zero elsewhere has boundary scalar xr. Thus the coboundaries are exactly the inverse image of the principal ideal (x). Descending scalar evaluation gives an additive bijection from the cohomology classes to R/(x).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every term of P is projective, since it is either isomorphic to R or zero. The upper support bound makes P K-projective. Compose the hom-complex cohomology-to-homotopy equivalence with the K-projective Qh map bijection and the specified quotient and shift comparison isomorphisms. Naturality of quotientCompQhIso verifies the displayed normalization on every chain map.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-determination/_section.md",
+  "place": "Counterexample paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The group of morphisms in the derived category from a two term rank one complex to its shift is the quotient by its differential",
+   "results": "service unavailable",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective.Qh_map_bijective",
+   "results": "CochainComplex.IsKProjective.Qh_map_bijective",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "two.term.*(homotopy|quotient)|selfExtension",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination",
+  "date": "2026-10-18",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-generating-class-determination",
+   "place": "counterexample paragraph"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-determination",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.TwoTermSelfExtensionHom",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/TwoTermSelfExtensionHom.lean",
+  "declaration": "DerivedCategory.exists_twoTerm_selfExtension_hom_equiv",
+  "statement": "theorem exists_twoTerm_selfExtension_hom_equiv (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (P : CochainComplex (ModuleCat.{u} R) ℤ) (e₀ : P.X 0 ≅ ModuleCat.of R R) (e₁ : P.X 1 ≅ ModuleCat.of R R) (x : R) (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE 1) (hd : ∀ r : R, (e₀.inv ≫ P.d 0 1 ≫ e₁.hom).hom r = x * r) : ∃ e : (Q.obj P ⟶ (Q.obj P)⟦(1 : ℤ)⟧) ≃+ R ⧸ Ideal.span {x}, ∀ f : P ⟶ P⟦(1 : ℤ)⟧, e (Q.map f ≫ (Q.commShiftIso (1 : ℤ)).hom.app P) = Ideal.Quotient.mk (Ideal.span {x}) ((e₀.inv ≫ f.f 0 ≫ (P.shiftFunctorObjXIso (1 : ℤ) 0 1 rfl).hom ≫ e₁.hom).hom 1)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T005401-L-2761936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T005401-L-2761936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

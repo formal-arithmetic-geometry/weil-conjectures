@@ -16814,3 +16814,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/P8/Sheaf.Paper.ConstructibleHomContinuityDevissage (stage 3; reviewer PASS; first push; landing 20261019T005359-L-2761613 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/P8/Sheaf.Paper.PbcRationalCategory (stage 3; reviewer PASS; first push; landing 20261019T005400-L-2761714 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.IntegralConstantCompletion (stage 3; reviewer PASS; first push; landing 20261019T005400-L-2761819 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/Q1/Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination (stage 3; reviewer PASS; first push; landing 20261019T005401-L-2761936 (interface); batch 20261019T005255; modules 3; new nodes 2; change records: coord/changes/generating-class-private-proof-scopes.md)
