@@ -17028,3 +17028,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q78/lem-per-kummer-strict-local-standard-model (reviewer RETURN: Route-pivot drop (F, route decision of the human recorded in coord/repair-notes/lem-per-artin-gabber-affine-curve.json).)
 - 03:58 L: returned deliver/Q48/lem-per-regular-alteration-hypercover (reviewer RETURN: Route pivot. The item lem-per-regular-alteration-hypercover is itself in the 2026-10-19 artin-gabber section of coord/ro)
 - 03:58 L: returned deliver/Q75/lem-per-fs-product-finite-comparison (reviewer RETURN: Dropped item. lem-per-fs-product-finite-comparison is itself listed in side coord/route-pivot-dropped.txt, in the '# sec)
+- 03:58 L: returned deliver/Q83/lem-per-dualizing-trace-annihilator-bound (reviewer RETURN: This is a byte-identical re-push of b0086f499c7f, which was already RETURNed: the item json, the new node and the report)
