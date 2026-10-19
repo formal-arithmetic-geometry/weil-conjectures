@@ -14,101 +14,77 @@
  ],
  "proof": [
   {
-   "text": "For a normalized system $M$, [lem-coef-normalized-dvr-effectivity] says that the canonical counit comparisons $(\\mathcal LM)\\otimes^L_R A_n\\to M_n$ are isomorphisms and that $\\mathcal LM$ is derived complete. These are precisely the evaluations of the actual $e_M$ of [lem-coef-derived-system-evaluation-calculus]. The latter statement detects isomorphisms by derived evaluations, so $e_M$ is invertible in $D(\\mathscr S_W)$. This is detection of isomorphisms, with no assertion about detecting equality. Its evaluated isomorphisms identify the reductions of $\\mathcal LM$ with the levels of $M$, so they also give constructibility and exactly the assumed common cohomological and Tor bounds. Thus every use of $d_A(\\mathcal LM)$ below has the stipulated integral input and normalized-system hypotheses.",
+   "text": "The finite base field has characteristic p by its cardinality; the algebraic closure has the same characteristic. Since l and p are distinct primes, l is a unit in k. Map this unit along the structure map to the global sections of each scheme over k. Apply purNormalizedReconstruction, the counit clause of [lem-pur-normalized-reconstruction-adjunction-calculus], to the actual calculus of [lem-coef-derived-system-evaluation-calculus]. Good systems are normalized, so their actual counits are invertible. This uses the existing reconstruction statement rather than repeating its effectivity argument.",
    "uses": [
-    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
     "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
+    "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; agent-formulated interface, not a shift assertion quoted from the blueprint"
    }
   },
   {
-   "text": "The right triangle identity from [lem-coef-derived-system-evaluation-calculus] gives $\\mathcal L(e_M)u_{\\mathcal LM}=1$, hence $u_{\\mathcal LM}=\\mathcal L(e_M)^{-1}$. For an allowed integral $K$, its reduction $\\mathcal RK$ is one of the normalized input systems in the hypotheses. The variable-expression case of [lem-sf-integral-compactification-system-realization] supplies an isomorphism $h:\\mathcal L\\mathcal RK\\to K$. Only existence of this isomorphism is used here, not its normalization. Naturality gives $u_Kh=\\mathcal L\\mathcal R(h)u_{\\mathcal L\\mathcal RK}$. All factors on the right and $h$ are invertible, so the specified actual unit $u_K$ is invertible. This avoids identifying an arbitrary Roos-triangle lift with the actual unit.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sf-integral-compactification-system-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
-   }
-  },
-  {
-   "text": "Write $I_V=V_{\\rm int}(K_i)$ and $M_V=V(\\mathcal RK_i)$. Unpack the coefficient construction of the specified realization: at a variable its coefficient map is $q_{K_i}=1_{\\mathcal RK_i}$; at a unary or tensor node it is the successive composite of the canonical single-operation coefficient maps:\n$$q_{AV}=A(q_V)r_A(I_V),\\qquad q_{V\\otimes T}=(q_V\\otimes^Lq_T)r_\\otimes(I_V,I_T).$$\nThese are definitions of the composite comparison, not a claim that finite evaluations determine it. The single-operation maps are the actual system maps $r_A=e_{A\\mathcal RI}\\mathcal R(d_A(I)^{-1})$ of [lem-sf-generator-reduction-coherence], with its specified localized open comparison. Under the adjunction of [lem-coef-derived-system-evaluation-calculus] the transpose of $q_V:\\mathcal RI_V\\to M_V$ is\n$$b_V=\\mathcal L(q_V)u_{I_V}:I_V\\to\\mathcal LM_V,$$\nand the inverse transposition formula is $q_V=e_{M_V}\\mathcal R(b_V)$. Indeed substitution reduces this equality to naturality of $e$ and $e_{\\mathcal RI_V}\\mathcal R(u_{I_V})=1$. At a single operation the transpose is $d_A(I)^{-1}$: substitute the displayed $r_A$, move $\\mathcal R(d_A^{-1})$ past the unit, and cancel $\\mathcal L(e_N)u_{\\mathcal LN}=1$ for $N=A\\mathcal RI$. This fixes the basic normalization, including $J_j$. At a leaf $b_{K_i}=u_{K_i}$, so the realized comparison there is $b_{K_i}^{-1}=u_{K_i}^{-1}$.",
-   "uses": [
-    "lem-sf-generator-reduction-coherence",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
-   }
-  },
-  {
-   "text": "Suppose the inverse comparison $b_V:I_V\\xrightarrow{\\sim}\\mathcal LM$ has been constructed for a smaller tree, with $M=M_V$. Transpose the unary coefficient composite in step 3. The single-operation transpose calculated there first gives\n$$b_{AV}=\\mathcal LA(q_V)d_A(I_V)^{-1}.$$\nSubstitute $q_V=e_M\\mathcal R(b_V)$ and then use naturality of $d_A$ at $b_V$ to obtain\n$$b_{AV}=\\mathcal LA(e_M)\\,d_A(\\mathcal LM)^{-1}\\,A_{\\rm int}(b_V).$$\nEach factor is invertible, by steps 1-2 and the stipulated single-operation isomorphism. Inverting this equality, in reverse order, gives\n$$b_{AV}^{-1}=A_{\\rm int}(b_V^{-1})\\,d_A(\\mathcal LM)\\bigl(\\mathcal LA(e_M)\\bigr)^{-1}.$$\nThe last two factors are exactly $a_A(M)$ in the statement. The common bounds and compatible origin witnesses are those explicitly required of this intermediate system; $I_V\\cong\\mathcal LM$ also ensures that $d_A(I_V)$ is used on a complete constructible input. This calculation treats each of $P_v,S_p,J_j$ with its own prescribed $d_A$, without substituting a different open-extension comparison.",
-   "uses": [
-    "lem-sf-generator-reduction-coherence",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
-   }
-  },
-  {
-   "text": "For two smaller trees write $M=M_V$, $N=M_T$ and use their independent input slots. Transposing their binary coefficient composite gives\n$$b_{V\\otimes T}=\\mathcal L(q_V\\otimes^Lq_T)d_\\otimes(I_V,I_T)^{-1}.$$\nSubstitute $q_V=e_M\\mathcal R(b_V)$ and $q_T=e_N\\mathcal R(b_T)$. Bifunctoriality factors their tensor into $(e_M\\otimes^Le_N)(\\mathcal R(b_V)\\otimes^L\\mathcal R(b_T))$. Naturality of the two-input $d_\\otimes$ then gives\n$$b_{V\\otimes T}=\\mathcal L(e_M\\otimes^Le_N)d_\\otimes(\\mathcal LM,\\mathcal LN)^{-1}(b_V\\widehat\\otimes^Lb_T).$$\nEvery factor is invertible; in particular tensor sends the inverses of $e_M,e_N$ to the inverse of their tensor. Invert this identity to get\n$$b_{V\\otimes T}^{-1}=(b_V^{-1}\\widehat\\otimes^Lb_T^{-1})d_\\otimes(\\mathcal LM,\\mathcal LN)\\bigl(\\mathcal L(e_M\\otimes^Le_N)\\bigr)^{-1}.$$\nThis is precisely the claimed tensor recursion with $a_\\otimes(M,N)$. All tensors in the system calculation are over the ring system $((A_n)_W)_n$; the tensor on integral objects is the completed tensor specified by $d_\\otimes$.",
-   "uses": [
-    "lem-sf-generator-reduction-coherence",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
-   }
-  },
-  {
-   "text": "Induct on the number of operation vertices in the finite well-typed tree. The variable case is step 3, the unary step is step 4, and the binary step is step 5; both immediate subtrees have fewer vertices. These steps construct invertible $b_V$ on exactly the assumed domains. The canonical reduction/limit transport is $c_V=b_V^{-1}$: step 3 starts with the identity comparison of the reduction of a variable, substitutes the prescribed basic coefficient maps, and takes their adjunction transpose. This also agrees directly with the specified construction in [lem-sf-integral-compactification-system-realization]: inserting $e_M^{-1}:M\\to\\mathcal R\\mathcal LM$ before a basic $d_A$ gives exactly the last two factors of step 4, and inserting $e_M^{-1}\\otimes^Le_N^{-1}$ gives those of step 5. Thus the calculation identifies the specified comparisons themselves. It does not infer their normalization merely from the existence or generator-intertwining assertion of that node. Finally any other family satisfying the displayed identities equals this one: equality holds at variables, and at a unary or tensor node the fixed $a_A$ or $a_\\otimes$ and the induction equalities of the children give equality at that node. This proves the characterization without moving any clause into a new lemma.",
+   "text": "At a single variable, inputNormalization of [lem-sf-integral-compactification-system-realization] says that the actual unit followed by the component of the comparison is the identity. That component is invertible, so the actual unit is invertible. The right triangle identity of [lem-coef-derived-system-evaluation-calculus] likewise makes the unit at L M invertible whenever the counit at M is invertible, and identifies its inverse with L(e_M).",
    "uses": [
     "lem-sf-integral-compactification-system-realization",
-    "lem-sf-generator-reduction-coherence",
     "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
+    "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; agent-formulated interface, not a shift assertion quoted from the blueprint"
    }
   },
   {
-   "text": "The recursion is natural on the specified input domains. For a system map $f:M\\to M'$, counit naturality says $f e_M=e_{M'}\\mathcal R\\mathcal L(f)$. Apply $\\mathcal LA$ and solve for the inverse factors to get\n$$\\bigl(\\mathcal LA(e_{M'})\\bigr)^{-1}\\mathcal LA(f)=\\mathcal LA\\mathcal R\\mathcal L(f)\\bigl(\\mathcal LA(e_M)\\bigr)^{-1}.$$\nNaturality of $d_A$ now yields $a_A(M')\\mathcal LA(f)=A_{\\rm int}(\\mathcal Lf)a_A(M)$. For maps $f:M\\to M'$ and $g:N\\to N'$, tensor the two counit equations and apply the same calculation with the two-input $d_\\otimes$; it yields\n$$a_\\otimes(M',N')\\mathcal L(f\\otimes^Lg)=(\\mathcal Lf\\widehat\\otimes^L\\mathcal Lg)a_\\otimes(M,N).$$\nThe inverse-unit leaf comparison is natural because $u$ is natural. Paste these unary and binary squares with the induction squares for the children. This proves naturality of every $c_V$ in all independent leaf slots. A zero input and an empty open give the unique maps on zero objects; a single leaf gives the actual inverse unit, rather than an arbitrary automorphism of its limit. At a point with $K=R[0]$, a one-operation expression specializes to its specified $d_A$ by the triangle calculation in step 3. No level $n=0$ or shift compatibility is used.",
+   "text": "For proper image, expand properA and properD, replace inverseOrZero by the genuine inverses established above, and apply naturality of realizationModel.push at e_M. The right triangle cancels the extra unit, giving precisely the proper comparison component. For an open immersion use openNormalization from [lem-sf-integral-compactification-system-realization]. The unit at the target of openRealization is invertible by naturality along that isomorphism from the unit at L(J M). Cancel the mapped counit and target unit to identify openA with the specified openRealization component. For pullback the defining d is the isomorphism of [lem-sf-generator-reduction-coherence]. For tensor, the tensor of the two invertible counits and its image under L are invertible. These arguments give every field of OperationLaws.",
    "uses": [
+    "lem-sf-integral-compactification-system-realization",
     "lem-coef-derived-system-evaluation-calculus",
     "lem-sf-generator-reduction-coherence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
+    "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; agent-formulated interface, not a shift assertion quoted from the blueprint"
+   }
+  },
+  {
+   "text": "Induct on BasicTree. For variables inputNormalization and inverse uniqueness identify the component with the inverse actual unit. For pullback cancel the invertible L P(e_M) in the recorded pull equation of [lem-sf-integral-compactification-system-realization]. For proper image and open extension substitute the identifications of the preceding step into its push and shriek equations. For tensor cancel L(e_M tensor e_N) in its tensor equation. Admissibility supplies Good for each child, and the induction hypotheses supply all the nested Equations clauses. Compact-support vertices are excluded by BasicTree.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-generator-reduction-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; agent-formulated interface, not a shift assertion quoted from the blueprint"
+   }
+  },
+  {
+   "text": "For uniqueness induct on the same tree. At a variable, both components equal the inverse actual unit. At each unary vertex, rewrite both components by their recursion equations and apply the child equality evaluated on the restricted input object. At a tensor vertex apply the two child equalities separately, so independent input slots are retained. Componentwise equality gives equality of natural transformations and then of natural isomorphisms. Naturality is already part of these natural isomorphisms; no detection of equality by finite evaluation is used.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; agent-formulated interface, not a shift assertion quoted from the blueprint"
    }
   }
  ],
  "proof_deps": [
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
   "lem-sf-generator-reduction-coherence",
   "lem-sf-integral-compactification-system-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Agent expansion of the coefficient-comparison construction in the maps-used sentence of fix-prop-coherence.proof.md; the specified realization construction is written out in steps 3-4 of lem-sf-integral-compactification-system-realization."
+  "place": "T9 Lean proof: existing normalized reconstruction counit; recorded realization normalization equations; adjunction cancellation and structural tree induction."
  },
  "mathlib_searches": [
   {
@@ -259,5 +235,15 @@
   "group": "Q57",
   "result": "pass",
   "note": "Clause-by-clause match against the node and the 3 stmt_deps: actual unit/counit/R/L of the calculus; dependency Expression.domain (sfIntegralConstructible incl. derived complete, Good = normalized + LevelBounds + Origins at every vertex); geometric arrow conditions; BasicTree excludes compactSupport. a-maps = inverseOrZero(L A(e_M)) ≫ d_A(LM), with GeneratorReduction.pullD/tensorD; openD repeats the GeneratorReduction.openD formula with r.realizationModel (needed: GeneratorReduction.Operations requires tensor-unit data Realizations lacks); properD transports via realizationModel.push. Consistency checked from Realizations fields: inputNormalization, pull, tensor, normalization (e_M iso) + push naturality + triangle give the var/pull/tensor/push equations; open needs the stipulated open-d invertibility (generator node, proof step 4). Conjuncts: OperationLaws invertibility, equations for r.comparison, uniqueness among natural families. Statement verbatim; lines ≤98; source/blueprint docstrings; 7-step proof docstring; sorry only; no duplicate in side lean/Sheaf; universes = dependency. nt_compile --json clean (GeneratorReductionStatement 8.2 s, item 4.3 s, exit 0). Source blueprint file not in side clone, not reread (agent-formulated place, stage-1 reviewed). Advisory: OperationLaws docstring claims a naturality clause it lacks; NormalizedDVREffectivity import is unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261019T231356-L-579786",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -17758,3 +17758,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/T7/Sheaf.Paper.ProperSectionsSemilinearGerms (stage 3; reviewer PASS; first push; landing 20261019T231352-L-578832 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/T8/Sheaf.AlgebraicGeometry.ProperSupportCompactMaps (stage 3; reviewer PASS; first push; landing 20261019T231353-L-579143 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/T8/Sheaf.Paper.SmoothLisseIntegralLattice (stage 3; reviewer PASS; first push; landing 20261019T231355-L-579479 (interface); batch 20261019T231019; modules 3; new nodes 1; change records: coord/changes/T8-smooth-lattice-proof-context.md)
+- 23:13 L: merged deliver/T9/Sheaf.SixFunctors.IntegralRealizationRecursion (stage 3; reviewer PASS; first push; landing 20261019T231356-L-579786 (proof); batch 20261019T231019; modules 1; new nodes 0)

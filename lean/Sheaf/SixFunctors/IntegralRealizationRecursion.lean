@@ -8,7 +8,8 @@ module
 public import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
 public import Sheaf.SixFunctors.GeneratorReductionStatement
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-import Sheaf.Paper.NormalizedDVREffectivity
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
+import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Recursive characterization of integral realization
 
@@ -196,6 +197,171 @@ structure OperationLaws (D : FiniteFieldDatum.{u}) {o : Operations l E}
     Good l E X.left ((calculus l E X.left).systemClosed.tensor.obj (M, N)) →
     IsIso (tensorA l E X.left M N)
 
+private theorem inverseOrZero_eq_inv {C : Type*} [Category C] [Limits.HasZeroMorphisms C]
+    {A B : C} (f : A ⟶ B) [IsIso f] : GeneratorReduction.inverseOrZero f = inv f := by
+  classical
+  simp only [GeneratorReduction.inverseOrZero, dif_pos (inferInstance : IsIso f)]
+
+private theorem prime_isUnit (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (X : Over (Spec (CommRingCat.of D.k))) : IsUnit (l : Γ(X.left, ⊤)) := by
+  let := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
+    rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
+  have : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  have h : IsUnit (l : D.k) := (CharP.isUnit_natCast_iff D.prime).2
+    (fun h ↦ hl ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 h).symm)
+  let f := (Scheme.ΓSpecIso (CommRingCat.of D.k)).inv ≫ X.hom.appTop
+  simpa only [map_natCast] using h.map f.hom
+
+private theorem counit_isIso (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (X : Over (Spec (CommRingCat.of D.k))) (M : System l E X.left)
+    (hM : Good l E X.left M) : IsIso ((calculus l E X.left).adjunction.counit.app M) := by
+  exact ((purNormalizedReconstruction l E X.left (prime_isUnit l D hl X)
+    (calculus l E X.left)).1 M hM.1).2
+
+private theorem unit_limit_isIso (X : Scheme.{u}) (M : System l E X)
+    [IsIso ((calculus l E X).adjunction.counit.app M)] :
+    IsIso ((calculus l E X).adjunction.unit.app ((coefficientSequenceLimit l E X).obj M)) := by
+  exact isIso_of_comp_hom_eq_id _ ((calculus l E X).adjunction.right_triangle_components M)
+
+private theorem unit_isIso {D : FiniteFieldDatum.{u}} {o : Operations l E}
+    (r : Realizations l E D o) (X : Over (Spec (CommRingCat.of D.k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (K : Integral l E X.left)
+    (hK : sfIntegralConstructible l E X.left K)
+    (hR : Good l E X.left ((calculus l E X.left).reduction.obj K)) :
+    IsIso ((calculus l E X.left).adjunction.unit.app K) := by
+  let inputs : ULift.{u} Unit → Over (Spec (CommRingCat.of D.k)) := fun _ ↦ X
+  let e : Expression _ (ULift.{u} Unit) inputs X := .var ⟨()⟩
+  have g : e.geometric := ⟨inferInstance, inferInstance, trivial⟩
+  let A : (e.domain l E o).FullSubcategory :=
+    ⟨fun _ ↦ K, (fun _ ↦ ⟨hK, hR⟩), hR, trivial⟩
+  exact isIso_of_comp_hom_eq_id ((r.comparison e g).hom.app A)
+    (r.inputNormalization (X := inputs) ⟨()⟩ g A)
+
+private theorem openA_eq {D : FiniteFieldDatum.{u}} {o : Operations l E}
+    (r : Realizations l E D o) (hl : l ≠ D.p)
+    {X Y : Over (Spec (CommRingCat.of D.k))} (j : X ⟶ Y)
+    [IsOpenImmersion j.left] [QuasiCompact j.left] (M : System l E X.left)
+    (hM : Good l E X.left M)
+    (hJ : Good l E Y.left ((Operations.shriek l E o j.left).obj M)) :
+    openA l E r j.left M = (r.openRealization j.left inferInstance M hM hJ).hom := by
+  have := counit_isIso l E D hl X M hM
+  have := counit_isIso l E D hl Y _ hJ
+  have := unit_limit_isIso l E Y.left ((Operations.shriek l E o j.left).obj M)
+  let h := r.openRealization j.left inferInstance M hM hJ
+  have hu : IsIso ((calculus l E Y.left).adjunction.unit.app
+      ((ringedOpen l E j.left).obj ((coefficientSequenceLimit l E X.left).obj M))) :=
+    (NatTrans.isIso_app_iff_of_iso (calculus l E Y.left).adjunction.unit h).mp
+      inferInstance
+  dsimp only [openA, openD]
+  rw [inverseOrZero_eq_inv, inverseOrZero_eq_inv]
+  rw [← r.openNormalization j.left M hM hJ]
+  simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id,
+    IsIso.inv_hom_id_assoc]
+
+private theorem properA_eq {D : FiniteFieldDatum.{u}} {o : Operations l E}
+    (r : Realizations l E D o) (hl : l ≠ D.p)
+    {X Y : Over (Spec (CommRingCat.of D.k))} (p : X ⟶ Y)
+    (M : System l E X.left) (hM : Good l E X.left M) :
+    properA l E r p.left M = (r.realizationModel.push l E p.left).hom.app M := by
+  have := counit_isIso l E D hl X M hM
+  have := unit_limit_isIso l E X.left M
+  have hi : GeneratorReduction.inverseOrZero
+      ((calculus l E X.left).adjunction.unit.app
+        ((coefficientSequenceLimit l E X.left).obj M)) =
+      (coefficientSequenceLimit l E X.left).map
+        ((calculus l E X.left).adjunction.counit.app M) := by
+    rw [inverseOrZero_eq_inv]
+    apply (cancel_epi ((calculus l E X.left).adjunction.unit.app
+      ((coefficientSequenceLimit l E X.left).obj M))).1
+    rw [IsIso.hom_inv_id]
+    exact ((calculus l E X.left).adjunction.right_triangle_components M).symm
+  dsimp only [properA, properD]
+  rw [inverseOrZero_eq_inv, hi]
+  have hn := (r.realizationModel.push l E p.left).hom.naturality
+    ((calculus l E X.left).adjunction.counit.app M)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+  erw [← hn]
+  simp only [IsIso.inv_hom_id_assoc, Functor.id_obj]
+
+private theorem tensor_counit_isIso (X : Scheme.{u}) (M N : System l E X)
+    [IsIso ((calculus l E X).adjunction.counit.app M)]
+    [IsIso ((calculus l E X).adjunction.counit.app N)] :
+    IsIso ((calculus l E X).systemClosed.tensor.map
+      (Prod.mkHom ((calculus l E X).adjunction.counit.app M)
+        ((calculus l E X).adjunction.counit.app N))) := by
+  have : IsIso (Prod.mkHom ((calculus l E X).adjunction.counit.app M)
+      ((calculus l E X).adjunction.counit.app N)) :=
+    (isIso_prod_iff _ _).mpr ⟨inferInstance, inferInstance⟩
+  infer_instance
+
+private theorem comparison_equations {D : FiniteFieldDatum.{u}} (hl : l ≠ D.p)
+    {o : Operations l E} (r : Realizations l E D o)
+    {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))}
+    {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W)
+    (g : e.geometric) (K : (e.domain l E o).FullSubcategory) (hb : BasicTree e) :
+    Equations l E r r.comparison e g K := by
+  revert g K
+  induction e with
+  | var i =>
+      intro g K
+      have := isIso_of_comp_hom_eq_id ((r.comparison (.var i) g).hom.app K)
+        (r.inputNormalization i g K)
+      dsimp only [Equations]
+      rw [inverseOrZero_eq_inv]
+      exact IsIso.eq_inv_of_hom_inv_id (r.inputNormalization i g K)
+  | @pull U V f e ih =>
+      intro g K
+      have hM := e.admissibleGood l E o _ K.property.2.2
+      have := counit_isIso l E D hl V _ hM
+      constructor
+      · dsimp only [pullA]
+        rw [inverseOrZero_eq_inv]
+        apply (cancel_epi ((coefficientSequenceLimit l E U.left).map
+          ((pull l E f.left).map ((calculus l E V.left).adjunction.counit.app
+            (e.systemObj l E o ((inputReduction l E X).obj K.obj)))))).1
+        rw [Category.assoc, IsIso.hom_inv_id_assoc]
+        exact r.pull f e g.2.2.2.2.2 g K
+      · exact ih hb g.2.2.2.2.2 _
+  | @push U V p hp e ih =>
+      intro g K
+      constructor
+      · rw [properA_eq l E r hl p _ (e.admissibleGood l E o _ K.property.2.2)]
+        exact r.push p hp e g.2.2 g K
+      · exact ih hb g.2.2 _
+  | @shriek U V j hj hq e ih =>
+      intro g K
+      have := hj
+      have := hq
+      constructor
+      · rw [openA_eq l E r hl j _ (e.admissibleGood l E o _ K.property.2.2)
+          K.property.2.1]
+        exact r.shriek j e g.2.2 g K
+      · exact ih hb g.2.2 _
+  | @tensor W e t ihe iht =>
+      intro g K
+      have := counit_isIso l E D hl W _
+        (e.admissibleGood l E o _ K.property.2.2.1)
+      have := counit_isIso l E D hl W _
+        (t.admissibleGood l E o _ K.property.2.2.2)
+      have := tensor_counit_isIso l E W.left
+        (e.systemObj l E o ((inputReduction l E X).obj K.obj))
+        (t.systemObj l E o ((inputReduction l E X).obj K.obj))
+      refine ⟨?_, ihe hb.1 g.2.2.1 _, iht hb.2 g.2.2.2 _⟩
+      dsimp only [tensorA]
+      rw [inverseOrZero_eq_inv]
+      apply (cancel_epi ((coefficientSequenceLimit l E W.left).map
+        ((calculus l E W.left).systemClosed.tensor.map
+          (Prod.mkHom
+            ((calculus l E W.left).adjunction.counit.app
+              (e.systemObj l E o ((inputReduction l E X).obj K.obj)))
+            ((calculus l E W.left).adjunction.counit.app
+              (t.systemObj l E o ((inputReduction l E X).obj K.obj))))))).1
+      rw [Category.assoc, IsIso.hom_inv_id_assoc]
+      exact r.tensor e t g.2.2.1 g.2.2.2 g K
+  | compactSupport f c e ih => exact hb.elim
+
 /-- The specified comparisons obey the leaf, unary and binary recursion, and these
 identities characterize that family among natural isomorphisms. No shift law occurs.
 Source: blueprint main-20261015, fix-prop-coherence.proof.md, coefficient transport
@@ -245,7 +411,89 @@ theorem integralRealizationRecursion (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p
       ∀ {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))}
         {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W)
         (g : e.geometric), BasicTree e → c e g = r.comparison e g) := by
-  sorry
+  classical
+  refine ⟨?_, ?_, ?_⟩
+  · constructor
+    · intro X _ _ K hK hR
+      exact unit_isIso l E r X K hK hR
+    · intro X _ _ M hM
+      exact counit_isIso l E D _hl X M hM
+    · intro X Y f _ _ _ _ _ _ _ M hM _
+      have := counit_isIso l E D _hl Y M hM
+      dsimp only [pullA]
+      rw [inverseOrZero_eq_inv]
+      infer_instance
+    · intro X Y p _ _ _ _ _ M hM _
+      rw [properA_eq l E r _hl p M hM]
+      infer_instance
+    · intro X Y j _ _ _ _ _ _ M hM hJ
+      rw [openA_eq l E r _hl j M hM hJ]
+      infer_instance
+    · intro X _ _ M N hM hN _
+      have := counit_isIso l E D _hl X M hM
+      have := counit_isIso l E D _hl X N hN
+      have := tensor_counit_isIso l E X.left M N
+      dsimp only [tensorA]
+      rw [inverseOrZero_eq_inv]
+      infer_instance
+  · intro I _ X W e g K hb
+    exact comparison_equations l E _hl r e g K hb
+  · intro c hc I _ X W e
+    induction e with
+    | var i =>
+        intro g hb
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        exact (hc (.var i) g K hb).trans
+          (comparison_equations l E _hl r (.var i) g K hb).symm
+    | pull f e ih =>
+        intro g hb
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        have hchild := congrArg (fun q => q.hom.app
+          ⟨K.obj, K.property.1, K.property.2.2⟩)
+          (ih g.2.2.2.2.2 hb)
+        rw [(hc (.pull f e) g K hb).1,
+          (comparison_equations l E _hl r (.pull f e) g K hb).1, hchild]
+    | push p hp e ih =>
+        intro g hb
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        have hchild := congrArg (fun q => q.hom.app
+          ⟨K.obj, K.property.1, K.property.2.2⟩)
+          (ih g.2.2 hb)
+        rw [(hc (.push p hp e) g K hb).1,
+          (comparison_equations l E _hl r (.push p hp e) g K hb).1, hchild]
+    | shriek j hj hq e ih =>
+        intro g hb
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        have hchild := congrArg (fun q => q.hom.app
+          ⟨K.obj, K.property.1, K.property.2.2⟩)
+          (ih g.2.2 hb)
+        rw [(hc (.shriek j hj hq e) g K hb).1,
+          (comparison_equations l E _hl r (.shriek j hj hq e) g K hb).1, hchild]
+    | tensor e t ihe iht =>
+        intro g hb
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        have he := congrArg (fun q => q.hom.app
+          ⟨K.obj, K.property.1, K.property.2.2.1⟩)
+          (ihe g.2.2.1 hb.1)
+        have ht := congrArg (fun q => q.hom.app
+          ⟨K.obj, K.property.1, K.property.2.2.2⟩)
+          (iht g.2.2.2 hb.2)
+        rw [(hc (.tensor e t) g K hb).1,
+          (comparison_equations l E _hl r (.tensor e t) g K hb).1,
+          he, ht]
+    | compactSupport f cf e ih =>
+        intro _ hb
+        exact hb.elim
 
 end Recursion
 end WeilConjectures.IntegralSystemRealization
