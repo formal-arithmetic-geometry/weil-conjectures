@@ -15,53 +15,54 @@
  ],
  "proof": [
   {
-   "text": "Write $R(K)=K_\\bullet$ for the reduction-tower functor. In the adic-datum definition its underived functor on complexes is $F(P)_n=P\\otimes_{A_T}(P_n)_T$, with the quotient transitions. The definition states that $F$ preserves shifts and cone complexes and that K-flat resolutions exist and carry quasi-isomorphisms between resolving objects to tower quasi-isomorphisms. Apply the resolving-class theorem to this exact functor from the homotopy category, with K-flat complexes as the resolving class. Its conclusion says that the left derived functor $R:D(\\operatorname{Mod}(A_T))\\to D(\\operatorname{Tow}_A(T))$ is exact. Thus the given ambient distinguished triangle is sent to a distinguished triangle of strict towers, with its connecting arrow followed by the shift comparison of $R$.",
+   "text": "Use the actual completed-coefficient presentation and its unit-normalized completion reflector F, supplied by the completed-pullback interface. Let P be the intrinsic complete-object predicate. First show it is invariant under isomorphism: transport the complex representative through the completed-coefficient comparison; the new completion map is the old one precomposed by an isomorphism. The reflection identifies P(X) with invertibility of the completion unit eta_X. The already specified unit-compatible integer shift structure of F gives eta_(X[n]) as the shifted eta_X conjugated by the shift comparison. Hence P is stable under every integer shift.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "lem-pur-left-derived-from-kflat-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SE (proposition-derived-functor); reduction functor as specified in def-weil-pbc-adic-coefficient-datum"
-   }
-  },
-  {
-   "text": "Use the coefficient map $c_u:u^{-1}A_T\\to A_{T'}$ in the completed-pullback definition. The underived tower pullback $H$ applies $u^{-1}(-)\\otimes_{u^{-1}A_T}A_{T'}$ levelwise. It is additive, so on complexes it respects the shift signs and the cone differential matrix: $H(\\operatorname{Cone}(a))^q=H(Q^q)\\oplus H(P^{q+1})$ for $a:P\\to Q$, and its differential has entries $H(d_Q),H(a),-H(d_P)$. It therefore induces an exact functor from the tower homotopy category to the target tower derived category. Apply the strict-diagram K-flat replacement lemma with the small category $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, the two small pro-etale sites, their completed ring sheaves and $c_u$. It supplies replacements for every tower complex and quasi-isomorphism invariance of $H$ on that resolving class. These are exactly the two hypotheses of the resolving-class theorem. Consequently its total left derived functor $V=Lu^*_{\\operatorname{Tow}}$ is exact. This is the tower functor used in the completed-pullback definition. In particular it takes the triangle of Step 1 to a distinguished triangle in $D(\\operatorname{Tow}_A(T'))$. No exactness of underived completed-ring pullback is assumed.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-pur-left-derived-from-kflat-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SE (proposition-derived-functor), applied to the strict-diagram resolving class"
-   }
-  },
-  {
-   "text": "The derived inverse-limit proposition gives an exact functor $L=\\operatorname{Rlim}:D(\\operatorname{Tow}_A(T'))\\to D(\\operatorname{Mod}(A_{T'}))$. Apply it to the distinguished triangle of Step 2. By the completed-pullback definition, its three vertices are precisely $P_u(M),P_u(N),P_u(Q)$, since $P_u=LVR$ on derived-complete inputs. Its last arrow is $LVR$ applied to the original connecting morphism, followed successively by the images of the shift comparisons for $R$, $V$, and $L$. Thus it has the required connecting arrow for the composite shift comparison. This argument uses the strict-tower derived functor of inverse limit, not a choice of unrelated homotopy-limit cones.",
-   "uses": [
-    "prop-weil-pbc-rlim-functoriality",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); the unbounded strict-tower triangulated refinement is prop-weil-pbc-rlim-functoriality"
-   }
-  },
-  {
-   "text": "First, the complete-object domain is stable under shifts: the tensor, product and mapping-fiber formulas in the intrinsic-completion definition commute with shifting complexes (with the usual differential signs), and identify the completion unit for $K[r]$ with $\\eta_K[r]$. Thus an invertible $\\eta_K$ remains invertible after any shift. For an exact functor, its natural comparison with $[1]$ extends to all integer shifts by iteration, using the inverse comparison for $[-1]$ and the identity for $[0]$. For positive shifts the two sides of the addition identity are the same ordered string of comparisons; for negative shifts they are strings of inverses; in mixed signs the inverse adjacent factors cancel. This gives the unit and addition identities, with the usual shift associativity identifications. Let $\\sigma_R^r,\\sigma_V^r,\\sigma_L^r$ be these comparisons for the three exact functors. Define the comparison for their composite by the explicit composite $LVR(K[r])\\xrightarrow{LV(\\sigma_R^r)}LV(RK[r])\\xrightarrow{L(\\sigma_V^r)}L(VRK[r])\\xrightarrow{\\sigma_L^r}LVRK[r]$. Naturality follows by composing the three naturality squares. For $r=0$ every factor is an identity. For $r+s$, substitute each factor's addition identity into this formula; naturality moves the inner comparisons past the outer ones, producing first the displayed comparison for $r$ and then its shifted comparison for $s$. This is the required composition identity. Restricting this natural comparison to the full complete-object domain gives the claimed shifts for $P_u$; Step 3 proves distinguishedness for the same comparison at $r=1$. No scheme finiteness or constructibility assumption was used.",
-   "uses": [
-    "def-weil-triangulated-category",
     "def-weil-pbc-completed-pullback",
     "def-weil-pbc-intrinsic-completion"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (2),(5); the existing actual completion reflection and its unit-compatible shifts in PbcCompletedPullbackActual.lean"
+   }
+  },
+  {
+   "text": "Prove P equals the right orthogonal of its left orthogonal, using the reflection universal property. The inclusion P <= (leftOrthogonal P).rightOrthogonal is immediate. For X in that double orthogonal, take a distinguished triangle X --eta_X--> F(X) --g--> Z --delta--> X[1]. For every complete L and f:Z->L, injectivity of precomposition with eta_X and eta_X g=0 imply g f=0. Yoneda exactness gives f=delta a for a:X[1]->L. Surjectivity of precomposition with eta_(X[1]), together with the unit shift comparison, factors a through eta_X[1]. Since delta eta_X[1]=0, f=0. Thus Z lies in leftOrthogonal P. Orthogonal triangle closure also puts Z in its right orthogonal, since X and F(X) lie there. Applying both orthogonality conditions to id_Z gives id_Z=0. The triangle criterion for a zero third vertex implies eta_X is invertible, hence P(X). Mathlib orthogonal closure, with the shift stability from Step 1, now proves P triangulated.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+    "place": "Orthogonal closure, Yoneda exactness and the zero-vertex triangle criterion; the double-orthogonal argument is written out completely in the private helper reflective_triangulated"
+   }
+  },
+  {
+   "text": "The inclusion of the full P-subcategory is triangulated. Equip its reflection left adjoint with the shift structure obtained by adjoint mates. Mathlib Adjunction.isTriangulated_leftAdjoint makes that left adjoint triangulated; composing with inclusion makes the ambient completion reflector triangulated. For ordinary derived pullback, use its existing derived adjunction to actual derived module direct image. The latter is literally the unbounded right derived functor of the additive actual module pushforward. Apply the source-library K-injective right-derived triangulation theorem, with its own shift structure explicitly selected. Then the adjoint-mate shift and Mathlib Adjunction.isTriangulated_leftAdjoint make ordinary derived pullback triangulated.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-triangulated-category",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+    "place": "Adjunction.isTriangulated_leftAdjoint, applied to the existing completion and derived pullback adjunctions; K-injective triangulation from WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Triangulated.lean"
+   }
+  },
+  {
+   "text": "By its existing definition pbcActualCompletedPull is ordinary derived pullback followed by the completion reflector. Compose the shift structures and triangulated functor instances of Step 3. Choose that composite CommShift structure as the existential witness, and use Functor.map_distinguished on the given ambient triangle. This proves the stated conclusion for complete vertices (indeed for every ambient triangle) without any extra scheme hypothesis. The functor is unchanged: the existing unit-compatible strict-tower comparison in the completed-pullback definition remains its interpretation on complete inputs. No reconstruction of the tower exactness proof is needed.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-triangulated-category"
+   ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014V (definition-exact-functor-triangulated-categories); elementary shift and composition checks from the explicit constructions"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (2),(5), using the already published reflector presentation and strict-tower comparison; Mathlib Functor.map_distinguished"
    }
   }
  ],
@@ -70,14 +71,12 @@
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-intrinsic-completion",
   "def-weil-triangulated-category",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "prop-weil-pbc-rlim-functoriality"
+  "lem-pc-right-derived-functor-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-  "place": "Proof, sole paragraph: completed pullback is required to preserve shifts and ambient distinguished triangles; expanded using the strict-tower definition and derived-limit formalism."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (2),(5), shorter proof through the existing completion-reflector presentation, double orthogonality, and adjoint exactness; implemented by T5 on 2026-10-19. Generic exactness is supplied by Mathlib triangulated adjunctions and the source-library K-injective derived-functor theorem."
  },
  "mathlib_searches": [
   {
@@ -171,9 +170,6 @@
  "tool_uses": [
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-completed-pullback",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "prop-weil-pbc-rlim-functoriality",
   "def-weil-pbc-intrinsic-completion"
  ],
  "reviewed": {
@@ -202,5 +198,15 @@
   "group": "Q12",
   "result": "fix",
   "note": "Reviewed immutable statements, dependencies, sources, universes and edge cases. Complete fixes replace the placeholder second reading and expand proof documentation/imports; theorem signature unchanged. Original and corrected modules compile cleanly through scompile.py. Findings and evidence are in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261019T192839-L-1875814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
