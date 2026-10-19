@@ -135,6 +135,24 @@ noncomputable def compositeTensorInverseTranspose
     (K ◁ adj₂.counit.app (𝟙_ E)) ≫
     (ρ_ K).hom
 
+private theorem tensor_counit_assoc
+    {D : Type uY} [Category.{vY} D] [MonoidalCategory D]
+    (A V W : D) (e : W ⟶ 𝟙_ D) :
+    (α_ A V W).hom ≫ A ◁ (V ◁ e ≫ (ρ_ V).hom) =
+      (A ⊗ V) ◁ e ≫ (ρ_ (A ⊗ V)).hom := by
+  rw [MonoidalCategory.whiskerLeft_comp, ← associator_naturality_right_assoc,
+    ← rightUnitor_tensor_hom]
+
+private theorem tensorCounitTranspose_symm
+    {C : Type uX} [Category.{vX} C] [MonoidalCategory C]
+    {D : Type uY} [Category.{vY} D] [MonoidalCategory D]
+    (S : D ⥤ C) (P : C ⥤ D) (G : D ⥤ C)
+    [S.Monoidal] (adj : P ⊣ G) (pf : S.ProjectionFormula P) (B : D) :
+    (adj.homEquiv _ _).symm (tensorCounitTranspose S P G adj pf B) =
+      (pf.iso B (G.obj (𝟙_ D))).hom ≫ B ◁ adj.counit.app (𝟙_ D) ≫ (ρ_ B).hom := by
+  rw [tensorCounitTranspose, adj.homEquiv_naturality_right_symm,
+    pf.homEquiv_symm_theta, Category.assoc]
+
 /--
 The two tensor-counit maps obtained from coherent projection formulas for two
 successive adjunctions have the same transpose under the composite adjunction.
@@ -183,7 +201,49 @@ theorem composite_tensor_transpose
     ((adj₁.comp adj₂).homEquiv (compositeTensorSource S₁ S₂ G₁ G₂ K) K).symm
         (compositeTensorSecond S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K) =
       compositeTensorInverseTranspose S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K := by
-  sorry
+  rw [Adjunction.comp_homEquiv]
+  simp only [Equiv.symm_trans_apply]
+  dsimp only [compositeTensorFirst, compositeTensorSecond, compositeTensorSource,
+    Functor.comp_obj]
+  constructor
+  · unfold compositeTensorInverseTranspose
+    rw [adj₁.homEquiv_naturality_left_symm, tensorCounitTranspose_symm,
+      ← Category.assoc, pf.natural_left]
+    simp only [Category.assoc]
+    rw [← whisker_exchange_assoc]
+    dsimp only [Functor.id_obj]
+    erw [rightUnitor_naturality]
+    erw [← Category.assoc, ← Category.assoc,
+      adj₂.homEquiv_naturality_left_symm, tensorCounitTranspose_symm]
+    simp only [Functor.map_comp, Category.assoc]
+  · unfold compositeTensorInverseTranspose
+    rw [Adjunction.comp_homEquiv]
+    simp only [Equiv.trans_apply]
+    rw [adj₁.homEquiv_naturality_left_symm,
+      adj₁.homEquiv_naturality_left_symm,
+      adj₁.homEquiv_naturality_left_symm, Equiv.symm_apply_apply,
+      adj₂.homEquiv_naturality_left_symm, adj₂.homEquiv_naturality_left_symm,
+      adj₂.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
+    simp only [compositeProjectionIso, Iso.trans_hom, Functor.mapIso_hom,
+      Adjunction.comp_counit_app, Functor.comp_obj, Category.assoc]
+    rw [MonoidalCategory.whiskerLeft_comp, Category.assoc, ← pg.natural_right_assoc]
+    have hq :
+        P₁.map (S₁.obj (S₂.obj K) ◁
+            tensorCounitTranspose S₁ P₁ G₁ adj₁ pf (G₂.obj (𝟙_ E))) ≫
+          (pf.iso (S₂.obj K) (G₁.obj (G₂.obj (𝟙_ E)))).hom ≫
+          S₂.obj K ◁ adj₁.counit.app (G₂.obj (𝟙_ E)) =
+        (pf.iso (S₂.obj K) (S₁.obj (G₂.obj (𝟙_ E)) ⊗ G₁.obj (𝟙_ D))).hom ≫
+          S₂.obj K ◁ ((pf.iso (G₂.obj (𝟙_ E)) (G₁.obj (𝟙_ D))).hom ≫
+            G₂.obj (𝟙_ E) ◁ adj₁.counit.app (𝟙_ D) ≫ (ρ_ (G₂.obj (𝟙_ E))).hom) := by
+      rw [pf.natural_right_assoc, ← MonoidalCategory.whiskerLeft_comp]
+      erw [← adj₁.homEquiv_counit, tensorCounitTranspose_symm]
+    simp only [← P₂.map_comp_assoc]
+    rw [hq]
+    simp only [MonoidalCategory.whiskerLeft_comp]
+    erw [← P₁.map_comp_assoc, ← pf.assoc_assoc]
+    rw [← associator_naturality_right_assoc]
+    dsimp only [Functor.id_obj]
+    erw [← rightUnitor_tensor_hom]
 
 /-! ## The calculation on full domains of definition
 
@@ -398,7 +458,74 @@ theorem composite_tensor_transpose_restricted (h : d.Coherence) :
         ⟨d.S.obj ⟨d.A.obj ⊗ d.V.obj, d.hAV⟩ ⊗ d.W.obj, d.hN⟩, d.hPN⟩).symm
       ((d.homFT ⟨d.S.obj ⟨d.A.obj ⊗ d.V.obj, d.hAV⟩ ⊗ d.W.obj, d.hN⟩).symm d.second) =
       d.inverseTranspose := by
-  sorry
+  have hfirst :
+      (d.homFT ⟨_, d.hN⟩).symm d.first =
+        d.pfAV.hom ≫ (d.A.obj ⊗ d.V.obj) ◁ d.counitFOne ≫
+          (ρ_ (d.A.obj ⊗ d.V.obj)).hom ≫ d.tauG := by
+    unfold first
+    erw [d.naturalFT, Equiv.symm_apply_apply]
+    rw [← Category.assoc]
+    erw [h.natural_left]
+    simp only [Category.assoc]
+    rw [← whisker_exchange_assoc, rightUnitor_naturality]
+  constructor
+  · rw [hfirst, ← Category.assoc, ← Category.assoc]
+    erw [d.naturalGK, Equiv.symm_apply_apply]
+    unfold inverseTranspose
+    simp only [← d.Q.map_comp_assoc, Category.assoc]
+    rfl
+  · let a : (⟨_, d.hN⟩ : d.X.FullSubcategory) ⟶ ⟨_, d.hAU⟩ :=
+      ObjectProperty.homMk ((d.delta.hom ▷ d.W.obj) ≫
+        (α_ (d.S.obj d.A) (d.S.obj d.V) d.W.obj).hom ≫ d.S.obj d.A ◁ d.q)
+    have hs : d.second = a.hom ≫ d.homFT ⟨_, d.hAU⟩
+        (d.homGK ⟨_, d.hPAU⟩
+          (d.Q.map (ObjectProperty.homMk d.pfAU.hom) ≫ d.pgU.hom ≫
+            (d.K ◁ (d.Q.map (ObjectProperty.homMk d.counitFV) ≫ d.counitGOne)) ≫
+            (ρ_ d.K).hom)) := by
+      simp only [second, a, ObjectProperty.homMk_hom, Category.assoc]
+    rw [hs, d.naturalFT, Equiv.symm_apply_apply]
+    erw [d.naturalGK, Equiv.symm_apply_apply]
+    rw [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+    have hq : d.P.map (ObjectProperty.homMk d.q) ≫ d.counitFV =
+        d.pfV.hom ≫ d.V.obj ◁ d.counitFOne ≫ (ρ_ d.V.obj).hom := by
+      have hn := d.naturalFV
+        (ObjectProperty.homMk (X := ⟨_, d.hVW⟩) (Y := d.U) d.q) (𝟙 d.U.obj)
+      simpa only [ObjectProperty.homMk_hom, Category.comp_id, q,
+        Equiv.symm_apply_apply, counitFV] using hn.symm
+    let c : (⟨_, d.hN⟩ : d.X.FullSubcategory) ⟶ ⟨_, d.hAVW⟩ :=
+      ObjectProperty.homMk ((d.delta.hom ▷ d.W.obj) ≫
+        (α_ (d.S.obj d.A) (d.S.obj d.V) d.W.obj).hom)
+    let b : (⟨_, d.hAVW⟩ : d.X.FullSubcategory) ⟶ ⟨_, d.hAU⟩ :=
+      ObjectProperty.homMk (d.S.obj d.A ◁ d.q)
+    have ha : a = c ≫ b := by
+      apply ObjectProperty.hom_ext
+      simp only [a, b, c, ObjectProperty.homMk_hom,
+        ObjectProperty.FullSubcategory.comp_hom, Category.assoc]
+    have hr : d.P.map b ≫ d.pfAU.hom =
+        d.pfAQ.hom ≫ d.A.obj ◁ d.P.map (ObjectProperty.homMk d.q) := by
+      exact h.natural_right
+    have hc : d.P.map a ≫ d.pfAU.hom ≫ d.A.obj ◁ d.counitFV =
+        d.pfAV.hom ≫ (d.A.obj ⊗ d.V.obj) ◁ d.counitFOne ≫
+          (ρ_ (d.A.obj ⊗ d.V.obj)).hom := by
+      rw [ha, d.P.map_comp, Category.assoc, ← Category.assoc (d.P.map b), hr]
+      simp only [Category.assoc]
+      rw [← MonoidalCategory.whiskerLeft_comp, hq,
+        MonoidalCategory.whiskerLeft_comp, ← Category.assoc]
+      rw [← Category.assoc (d.P.map c ≫ d.pfAQ.hom)]
+      have hassoc : d.pfAV.hom ≫ (α_ d.A.obj d.V.obj (d.P.obj d.W)).hom =
+          (d.P.map c ≫ d.pfAQ.hom) ≫ d.A.obj ◁ d.pfV.hom := by
+        simpa only [c, Category.assoc] using h.assoc
+      rw [← hassoc, Category.assoc, tensor_counit_assoc]
+    rw [← Category.assoc d.pgU.hom]
+    erw [← h.natural_counit]
+    simp only [← d.Q.map_comp_assoc]
+    unfold inverseTranspose
+    simp only [Category.assoc, ← d.Q.map_comp_assoc]
+    congr 1
+    apply congrArg d.Q.map
+    apply ObjectProperty.hom_ext
+    simpa only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+      Category.assoc] using hc
 
 end CompositeTensorLocalData
 
