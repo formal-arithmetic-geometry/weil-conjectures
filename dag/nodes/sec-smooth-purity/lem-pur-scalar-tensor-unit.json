@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-scalar-tensor-unit",
+ "kind": "statement",
+ "title": "Scalar action unitor for a normalized signed tensor comparison",
+ "statement": "Let l be prime, E a finite extension of Q_l, and W a scheme. On the ringed quotient sequence site of [def-trf-integral-comparison-sequence-systems], let T be the signed direct-sum total tensor [def-coef-ringed-tensor-hom-model] and let S be termwise scalar extension for the identity E-algebra map. Let U:S ≅ Id be the action unitor fixed on every section by a tensor x ↦ a*x. Suppose sigma:T ⋙ S ≅ (S.prod S) ⋙ T is a natural isomorphism sending 1 tensor (x tensor y), in every homogeneous summand, to (1 tensor x) tensor (1 tensor y). Then sigma followed by T(U,U) equals U evaluated on T, as natural isomorphisms on cochain complexes. There are no boundedness or flatness assumptions.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral-operations clause; parent lem-pur-scalar-extension-tower-coherence proof step 7. Ordinary action-unitor calculation: Stacks 03EL, totalization: Stacks 07A4."
+ },
+ "proof": [
+  {
+   "text": "Precompose with the inverse action unitor on the total tensor. On every homogeneous pure tensor its section formula inserts the scalar one. The normalization of sigma and the action formulas for the two unitors show that the composite fixes this tensor.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tensor functor is natural on the sheafification-unit pairing. Sectionwise pure tensors generate the tensor presheaf, the sheafification adjunction detects equality of its maps to a sheaf, and the coproduct inclusions detect equality on the signed total. Chain-map and natural-transformation extensionality give equality after precomposition. Cancel the invertible unitor.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Parent strict scalar coherence proof step 7, isolated tensor action-unitor calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars tensor product natural isomorphism pullback coherence cochain complex",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; ordinary sheaf pullback generator lemmas. No signed sheaf tensor action-unitor theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars tensor comparison identity ring homomorphism action unitor",
+   "results": "ModuleCat.extendScalars_id_comp and extendScalarsId concern ordinary modules, without signed total sheaf complexes or the normalized sequence-site functor.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|extendScalars_id_comp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:954-974 and 1047-1065 prove ordinary module scalar identity laws. They do not treat sheaf tensor totalization or sequence-system models.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "date": "2026-10-19",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-scalar-extension-tower-coherence",
+   "place": "Proof step 7, identity scalar tensor comparison."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionTensorUnit",
+  "file": "lean/Sheaf/Paper/ScalarExtensionTensorUnit.lean",
+  "declaration": "WeilConjectures.scalarExtensionTensorUnit",
+  "statement": "theorem scalarExtensionTensorUnit\n    (sigma : (coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf.{u, u} l E W)) ⋙ ((integralComparisonSequenceScalarModel.{u,\n        u}\n      l E E (AlgHom.id ℚ_[l] E) W).E.mapHomologicalComplex (.up ℤ)) ≅\n        (((integralComparisonSequenceScalarModel.{u, u}\n      l E E (AlgHom.id ℚ_[l] E) W).E.mapHomologicalComplex (.up ℤ))).prod\n        ((integralComparisonSequenceScalarModel.{u, u}\n      l E E (AlgHom.id ℚ_[l] E) W).E.mapHomologicalComplex (.up ℤ)) ⋙ (coefficientTotalTensor.{u, u\n        + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf.{u, u} l E W)))\n    (h : ∀ (P Q : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ)\n      (p q : ℤ) (V : (ℕ × W.ProEt)ᵒᵖ)\n      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),\n      (((sigma.hom.app (P, Q)).f (p + q)).val.app V)\n        (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W\n          ((((coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf.{u, u} l E W))).obj (P, Q)).X (p + q)) V 1\n          (coefficientTensorGenerator.{u, u + 1, u}\n            (coefficientSequenceTopology (Scheme.ProEt.topology W))\n            (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V x y)) =\n        coefficientTensorGenerator.{u, u + 1, u}\n          (coefficientSequenceTopology (Scheme.ProEt.topology W))\n          (coefficientSequenceCommRingSheaf.{u, u} l E W)\n          ((((integralComparisonSequenceScalarModel.{u, u}\n      l E E (AlgHom.id ℚ_[l] E) W).E.mapHomologicalComplex (.up ℤ))).obj P)\n        ((((integralComparisonSequenceScalarModel.{u, u}\n      l E E (AlgHom.id ℚ_[l] E) W).E.mapHomologicalComplex (.up ℤ))).obj Q) p q (p + q) rfl V\n          (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W\n            (P.X p) V 1 x)\n          (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W\n            (Q.X q) V 1 y)) :\n    sigma ≪≫ Functor.isoWhiskerRight (NatIso.prod (NatIso.mapHomologicalComplex\n      (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ)) (NatIso.mapHomologicalComplex\n      (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ))) (coefficientTotalTensor.{u, u +\n        1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf.{u, u} l E W)) =\n      Functor.isoWhiskerLeft (coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf.{u, u} l E W)) (NatIso.mapHomologicalComplex\n      (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T002522-L-2146755",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T002522-L-2146755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

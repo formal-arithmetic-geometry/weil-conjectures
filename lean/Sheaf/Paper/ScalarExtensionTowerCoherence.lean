@@ -22,6 +22,7 @@ public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.IntegralOperationsScalarComparisons
 public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
+import Sheaf.Paper.ScalarExtensionTensorUnit
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
@@ -241,6 +242,87 @@ theorem square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     leftRoute l E L ι f = rightRoute l E L ι f := by
   sorry
 
+private theorem pull_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : coefficientSequenceModules.{u, u} l E Y)
+    (N : coefficientSequenceModules.{u, u} l E X)
+    {a b : (integralComparisonSequencePullback.{u, u} l E f).obj M ⟶ N}
+    (h : ∀ (n : ℕ) (U : Y.ProEt) (x : M.val.obj (op (n, U))),
+      a.val.app (op (n, (Scheme.proEtaleBaseChange f).obj U))
+          (pullSection l E f M n U x) =
+        b.val.app (op (n, (Scheme.proEtaleBaseChange f).obj U))
+          (pullSection l E f M n U x)) : a = b := by
+  apply ((Adjunction.ofIsRightAdjoint
+    (integralComparisonSequenceDirectImage.{u, u} l E f)).homEquiv M N).injective
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact h V.unop.1 V.unop.2 x
+
+private theorem scalar_unit_section (W : Scheme.{u})
+    (M : coefficientSequenceModules.{u, u} l E W) (V : (ℕ × W.ProEt)ᵒᵖ)
+    (s : (coefficientSequenceCommRingSheaf.{u, u} l E W).obj.obj V)
+    (x : M.val.obj V) :
+    ((integralComparisonSequenceScalarUnit.{u, u} l E W).hom.app M).val.app V
+      (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W M V s x) =
+        s • x := by
+  exact (integralComparisonSequenceScalarUnit_existsUnique.{u, u} l E W).exists.choose_spec
+    M V s x
+
+private theorem scalar_unit_inv_section (W : Scheme.{u})
+    (M : coefficientSequenceModules.{u, u} l E W) (V : (ℕ × W.ProEt)ᵒᵖ)
+    (x : M.val.obj V) :
+    ((integralComparisonSequenceScalarUnit.{u, u} l E W).inv.app M).val.app V x =
+      integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W M V 1 x := by
+  have h := scalar_unit_section l E W M V 1 x
+  have hh := congrArg
+    (fun z ↦ ((integralComparisonSequenceScalarUnit.{u, u} l E W).inv.app M).val.app V z) h
+  simpa only [one_smul, ← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
+    ← SheafOfModules.comp_val, Iso.hom_inv_id_app, SheafOfModules.id_val,
+    PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
+
+private theorem pull_section_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : coefficientSequenceModules.{u, u} l E Y} (a : M ⟶ N)
+    (n : ℕ) (U : Y.ProEt) (x : M.val.obj (op (n, U))) :
+    ((integralComparisonSequencePullback.{u, u} l E f).map a).val.app
+        (op (n, (Scheme.proEtaleBaseChange f).obj U)) (pullSection l E f M n U x) =
+      pullSection l E f N n U (a.val.app (op (n, U)) x) := by
+  have h := (Adjunction.ofIsRightAdjoint
+    (integralComparisonSequenceDirectImage.{u, u} l E f)).unit.naturality a
+  exact (congrArg (fun k ↦ (k.val.app (op (n, U))) x) h).symm
+
+private theorem scalar_pull_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    integralComparisonSequenceScalarPullback.{u, u} l E E (AlgHom.id ℚ_[l] E) f ≪≫
+        Functor.isoWhiskerRight (integralComparisonSequenceScalarUnit.{u, u} l E Y)
+          (integralComparisonSequencePullback.{u, u} l E f) =
+      Functor.isoWhiskerLeft (integralComparisonSequencePullback.{u, u} l E f)
+        (integralComparisonSequenceScalarUnit.{u, u} l E X) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (cancel_epi ((integralComparisonSequenceScalarUnit.{u, u} l E X).inv.app
+    ((integralComparisonSequencePullback.{u, u} l E f).obj M))).1
+  apply pull_hom_ext l E f M
+  intro n U x
+  dsimp
+  simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  erw [scalar_unit_inv_section l E X
+    ((integralComparisonSequencePullback.{u, u} l E f).obj M)
+    (op (n, (Scheme.proEtaleBaseChange f).obj U)) (pullSection l E f M n U x)]
+  have hk := (integralComparisonSequenceScalarPullback_existsUnique.{u, u}
+    l E E (AlgHom.id ℚ_[l] E) f).exists.choose_spec M n U x
+  change ((integralComparisonSequencePullback.{u, u} l E f).map
+      ((integralComparisonSequenceScalarUnit.{u, u} l E Y).hom.app M)).val.app _
+      (((integralComparisonSequenceScalarPullback.{u, u} l E E
+        (AlgHom.id ℚ_[l] E) f).hom.app M).val.app _ _) = _
+  erw [hk, pull_section_naturality, scalar_unit_section, one_smul]
+  symm
+  simpa only [Functor.id_obj, one_smul] using scalar_unit_section l E X
+    ((integralComparisonSequencePullback.{u, u} l E f).obj M)
+    (op (n, (Scheme.proEtaleBaseChange f).obj U)) 1 (pullSection l E f M n U x)
+
 /-- Identity extension is the identity under the actual scalar action unitors.
 Source: node proof step 7; Stacks 03EL
 (blueprint: lem-pur-scalar-extension-tower-coherence).
@@ -256,7 +338,14 @@ theorem unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((comparisons l).sigma E E (AlgHom.id ℚ_[l] E) Y ≪≫
       Functor.isoWhiskerRight (NatIso.prod (scalarUnit l E Y) (scalarUnit l E Y)) (tensor l E Y) =
       Functor.isoWhiskerLeft (tensor l E Y) (scalarUnit l E Y)) := by
-  sorry
+  constructor
+  · have h := congrArg (fun a ↦ NatIso.mapHomologicalComplex a (.up ℤ))
+      (scalar_pull_unit l E f)
+    exact h
+  · exact scalarExtensionTensorUnit l E Y
+      ((comparisons l).sigma E E (AlgHom.id ℚ_[l] E) Y)
+      (fun P Q p q V x y ↦
+        (comparisons l).sigma_formula E E (AlgHom.id ℚ_[l] E) Y P Q p q V 1 x y)
 
 /-- Direct and successive scalar comparisons agree before passing to derived limits.
 Source: node proof step 7; Stacks 03EL, 07A4

@@ -77,11 +77,13 @@
    }
   },
   {
-   "text": "For $L=E$ identify $A_m\\otimes_{A_m}K$ with $K$ by the action unitor: $a\\otimes x\\mapsto ax$. The formulas for $\\kappa$ and $\\sigma$ become the identity under these unitors. For $E\\subset L\\subset F$, let $j_m:B_m\\to C_m$ be the coefficient map of [def-weil-integral-scalar-extension] for $L\\subset F$; since all three maps are induced by the inclusions $\\mathcal O_E\\subset\\mathcal O_L\\subset\\mathcal O_F$, the map for $E\\subset F$ is $j_m\\iota_m$. Identify $C_m\\otimes_{B_m}(B_m\\otimes_{A_m}K)$ with $C_m\\otimes_{A_m}K$ by $d\\otimes(b\\otimes x)\\mapsto d\\,j_m(b)\\otimes x$. The successive $\\kappa$ formulas and the direct one multiply the same coefficients in the same order. For $\\sigma$, both the successive route on $d\\otimes(b\\otimes(x\\otimes y))$ and the direct route give $(d\\,j_m(b)\\otimes x)\\otimes(1\\otimes y)$. Balancing proves these equations on all sections. Reduction preserves $d\\,j_m(b)$, so these are strict-system equations. The coherent reduction identifications used here have exactly this transitivity and identity compatibility by [lem-pur-coefficient-extension-reduction-model].",
+   "text": "For $L=E$ identify $A_m\\otimes_{A_m}K$ with $K$ by the action unitor: $a\\otimes x\\mapsto ax$. The formulas for $\\kappa$ and $\\sigma$ become the identity under these unitors. For $E\\subset L\\subset F$, let $j_m:B_m\\to C_m$ be the coefficient map of [def-weil-integral-scalar-extension] for $L\\subset F$; since all three maps are induced by the inclusions $\\mathcal O_E\\subset\\mathcal O_L\\subset\\mathcal O_F$, the map for $E\\subset F$ is $j_m\\iota_m$. Identify $C_m\\otimes_{B_m}(B_m\\otimes_{A_m}K)$ with $C_m\\otimes_{A_m}K$ by $d\\otimes(b\\otimes x)\\mapsto d\\,j_m(b)\\otimes x$. The successive $\\kappa$ formulas and the direct one multiply the same coefficients in the same order. For $\\sigma$, both the successive route on $d\\otimes(b\\otimes(x\\otimes y))$ and the direct route give $(d\\,j_m(b)\\otimes x)\\otimes(1\\otimes y)$. Balancing proves these equations on all sections. Reduction preserves $d\\,j_m(b)$, so these are strict-system equations. The coherent reduction identifications used here have exactly this transitivity and identity compatibility by [lem-pur-coefficient-extension-reduction-model]. In Lean the scalar/pullback identity is proved by precomposing with the inverse action unitor, testing with the pullback adjunction unit, and applying the generator normalization of def-trf-integral-comparison-sequence-systems. The tensor identity uses [lem-pur-scalar-tensor-unit], specialized to the sigma field of Comparisons and its pure-tensor formula at coefficient one. The other obligations remain open.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "lem-pur-coefficient-extension-reduction-model",
-    "def-weil-integral-scalar-extension"
+    "def-weil-integral-scalar-extension",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-scalar-tensor-unit"
    ],
    "elementary": true,
    "source": {
@@ -125,6 +127,8 @@
   "lem-pur-coefficient-extension-reduction-model",
   "lem-pur-cochain-pullback-tensor-coherence",
   "def-pc-tensor-complex-sheaves",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-scalar-tensor-unit",
   "lem-pur-completed-operation-tower-substitution",
   "def-pur-integral-derived-operations",
   "lem-pur-integral-operations-scalar-extension",
@@ -133,7 +137,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral operations and compatible coefficient extensions; explicit quotient-level calculation, using Stacks Tag 07A4 (sites-cohomology, lemma-pullback-tensor-product) and its ordinary module constituents."
+  "place": "Original nine-step plan retained for the unresolved declarations; proof step 7 now records the Lean pullback-unit proof and the proved signed-tensor unit lemma (D3, 2026-10-19)."
  },
  "mathlib_match": null,
  "status": "split",
@@ -350,5 +354,15 @@
   "group": "Q55",
   "result": "pass",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T002522-L-2146755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
