@@ -340,7 +340,7 @@ def check_existing(rec: dict, git: "Git | None" = None, base: str | None = None)
         fails.append(("d", f"lean.existing is true but lean.module {mod!r} is neither Mathlib.*, WeilConjectures.* nor Sheaf.*"))
         return fails, notes
     want = {"Mathlib": "mathlib", "WeilConjectures": "slopmaster2", "Sheaf": "sheaf-dag"}[mod.split(".")[0]]
-    if rec.get("branch") != want:
+    if rec.get("branch") != want and not (want == "sheaf-dag" and rec.get("branch") == "newtargets-dag"):   # 2026-10-19: the retired side branch name stays valid
         fails.append(("d", f"lean.branch is {rec.get('branch')!r}; a declaration of {mod.split('.')[0]} has branch {want!r}"))
     if mod.startswith("Sheaf."):
         if decl.startswith("Sheaf."):
@@ -445,7 +445,7 @@ def check_record(rec, group, where: str = "lean") -> list[tuple[str, str]]:
         want = "lean/" + mod.replace(".", "/") + ".lean"
         if rec.get("file") != want:
             f(f"lean.file is {rec.get('file')!r}; the module {mod} is the file {want}")
-        if rec.get("branch") != "sheaf-dag":
+        if rec.get("branch") not in ("sheaf-dag", "newtargets-dag"):   # 2026-10-19: records written before the retirement name the side branch
             f(f"lean.branch is {rec.get('branch')!r}; a new module has branch 'sheaf-dag'")
     elif rec.get("existing") is True and "file" in rec:
         f("lean.existing is true but lean.file is set (an existing declaration delivers no file)")
