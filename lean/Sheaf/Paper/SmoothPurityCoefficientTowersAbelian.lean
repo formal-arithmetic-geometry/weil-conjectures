@@ -9,6 +9,7 @@ public import Sheaf.Paper.SmoothPurityCoefficientTowers
 public import Sheaf.CategoryTheory.SystemLevelLeftExtension
 public import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
 import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.DiagramSiteTopology
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Limits
@@ -19,8 +20,8 @@ import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # The abelian category of smooth-purity coefficient towers
@@ -82,20 +83,54 @@ def spCoefficientCommRings :
 /-- The abelian axioms for the existing componentwise preadditive structure.
 Source: blueprint, coefficient-tower lemma, clause (1); Stacks 03DA and 03DB
 (blueprint: det-sp-coefficient-towers-abelian).
-Proof: realize the recorded towers as module sheaves on the product ringed site with
-coverings at a fixed level. Kernels and sheafified cokernels are formed levelwise;
-their universal properties induce the semilinear transitions and their composition
-laws. Componentwise finite products give finite products of towers. Every monomorphism
-and epimorphism is normal because this holds at each module-sheaf level, and the same
-universal properties assemble the factorizations into tower maps. The preadditive
-structure is already the inherited full-subcategory structure on linear module maps. -/
+Proof: give ℕ × T.ProEt the vertical topology, whose sheaf condition is exactly the
+recorded levelwise condition. The actual varying coefficient presheaf is a ring sheaf:
+its restriction to level n is naturally isomorphic to the recorded ring sheaf R_n.
+Rebundle each tower as a sheaf of modules over this ring sheaf. The inverse forgets
+only the global sheaf proof and retains its levelwise form; the two functors fix all
+presheaf modules and all maps, so their unit and counit are identities. Transfer finite
+products along this equivalence and use Mathlib's abelianOfEquivalence, which uses the
+existing componentwise preadditive structure. Extract normality, finite products,
+kernels and cokernels from this abelian structure. -/
 theorem sp_coefficient_towers_abelian_axioms :
     IsNormalMonoCategory (spCoefficientTowers l E T) ∧
       IsNormalEpiCategory (spCoefficientTowers l E T) ∧
       HasFiniteProducts (spCoefficientTowers l E T) ∧
       HasKernels (spCoefficientTowers l E T) ∧
       HasCokernels (spCoefficientTowers l E T) := by
-  sorry
+  let K := verticalDiagramSiteTopology ℕ T.ProEt (Scheme.ProEt.topology T)
+  have hs (M : PresheafOfModules.{max u (t + 1)} (spCoefficientPresheaf l E T)) :
+      Presheaf.IsSheaf K M.presheaf ↔ spCoefficientTowerSheafCondition l E T M := by
+    exact verticalDiagramSite_isSheaf_iff ℕ T.ProEt (Scheme.ProEt.topology T) M.presheaf
+  let R : Sheaf K RingCat.{max u (t + 1)} :=
+    ⟨spCoefficientPresheaf l E T, by
+      apply (verticalDiagramSite_isSheaf_iff ℕ T.ProEt (Scheme.ProEt.topology T) _).2
+      intro n
+      let i : (Prod.sectR n T.ProEt).op ⋙ spCoefficientPresheaf l E T ≅
+          (spCoefficientRing l E T n).obj :=
+        NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
+          intro U V f
+          simp [spCoefficientPresheaf, spCoefficientRings, spCoefficientRing,
+            Prod.sectR]
+          rfl)
+      exact (Presheaf.isSheaf_of_iso_iff i).2 (spCoefficientRing l E T n).property⟩
+  let F : spCoefficientTowers l E T ⥤ SheafOfModules.{max u (t + 1)} R :=
+    { obj := fun M ↦ ⟨M.obj, (hs M.obj).2 M.property⟩
+      map := fun f ↦ ⟨f.hom⟩ }
+  let G : SheafOfModules.{max u (t + 1)} R ⥤ spCoefficientTowers l E T :=
+    { obj := fun M ↦ ⟨M.val, (hs M.val).1 M.isSheaf⟩
+      map := fun f ↦ ObjectProperty.homMk f.val }
+  let e : spCoefficientTowers l E T ≌ SheafOfModules.{max u (t + 1)} R :=
+    { functor := F
+      inverse := G
+      unitIso := NatIso.ofComponents (fun _ ↦ Iso.refl _)
+      counitIso := NatIso.ofComponents (fun _ ↦ Iso.refl _) }
+  have : e.functor.IsEquivalence := e.isEquivalence_functor
+  have : HasFiniteProducts (spCoefficientTowers l E T) :=
+    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence e.functor⟩
+  let a : Abelian (spCoefficientTowers l E T) := abelianOfEquivalence e.functor
+  exact ⟨a.toIsNormalMonoCategory, a.toIsNormalEpiCategory,
+    a.has_finite_products, a.has_kernels, a.has_cokernels⟩
 
 /-- The abelian structure extends the existing componentwise addition of tower maps;
 all remaining fields are proofs of the preceding named axioms.

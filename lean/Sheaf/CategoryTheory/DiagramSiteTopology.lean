@@ -15,15 +15,15 @@ construction (blueprint: lem-weil-pbc-diagram-site-topology).
 
 @[expose] public section
 
-universe u v
+universe u v uJ vJ uC vC
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
 /-- The vertical-slice topology on the product category. -/
-def diagramSiteTopology (J C : Type u) [SmallCategory J] [SmallCategory C]
-    (K : GrothendieckTopology C) : GrothendieckTopology (Jᵒᵖ × C) where
+def verticalDiagramSiteTopology (J : Type uJ) (C : Type uC) [Category.{vJ} J] [Category.{vC} C]
+    (K : GrothendieckTopology C) : GrothendieckTopology (J × C) where
   sieves X := {S | S.functorPullback (Prod.sectR X.1 C) ∈ K X.2}
   top_mem' X := by
     change (⊤ : Sieve X.2) ∈ K X.2
@@ -43,15 +43,15 @@ def diagramSiteTopology (J C : Type u) [SmallCategory J] [SmallCategory C]
     rwa [Sieve.functorPullback_pullback] at H
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem diagramSite_isSheaf_types_iff
-    (J C : Type u) [SmallCategory J] [SmallCategory C]
-    (K : GrothendieckTopology C) (P : (Jᵒᵖ × C)ᵒᵖ ⥤ Type u) :
-    Presieve.IsSheaf (diagramSiteTopology J C K) P ↔
-      ∀ j : Jᵒᵖ, Presieve.IsSheaf K ((Prod.sectR j C).op ⋙ P) := by
+private theorem verticalDiagramSite_isSheaf_types_iff
+    (J : Type uJ) (C : Type uC) [Category.{vJ} J] [Category.{vC} C]
+    (K : GrothendieckTopology C) (P : (J × C)ᵒᵖ ⥤ Type u) :
+    Presieve.IsSheaf (verticalDiagramSiteTopology J C K) P ↔
+      ∀ j : J, Presieve.IsSheaf K ((Prod.sectR j C).op ⋙ P) := by
   constructor
   · intro hP j U S hS x hx
-    let R : Sieve (j, U) := S.functorPullback (X := (j, U)) (Prod.snd Jᵒᵖ C)
-    have hR : R ∈ diagramSiteTopology J C K (j, U) := by
+    let R : Sieve (j, U) := S.functorPullback (X := (j, U)) (Prod.snd J C)
+    have hR : R ∈ verticalDiagramSiteTopology J C K (j, U) := by
       change S ∈ K U
       exact hS
     let y : Presieve.FamilyOfElements P R.arrows := fun Y f hf ↦
@@ -114,18 +114,32 @@ private theorem diagramSite_isSheaf_types_iff
       exact ht' (V.map f) hf
 
 /-- The sheaf condition for the vertical topology is componentwise. -/
+theorem verticalDiagramSite_isSheaf_iff
+    (J : Type uJ) (C : Type uC) [Category.{vJ} J] [Category.{vC} C]
+    (K : GrothendieckTopology C) {A : Type v} [Category.{u} A]
+    (P : (J × C)ᵒᵖ ⥤ A) :
+    Presheaf.IsSheaf (verticalDiagramSiteTopology J C K) P ↔
+      ∀ j : J, Presheaf.IsSheaf K ((Prod.sectR j C).op ⋙ P) := by
+  constructor
+  · intro h j E
+    exact (verticalDiagramSite_isSheaf_types_iff J C K (P ⋙ coyoneda.obj (op E))).1 (h E) j
+  · intro h E
+    exact (verticalDiagramSite_isSheaf_types_iff J C K (P ⋙ coyoneda.obj (op E))).2
+      (fun j ↦ h j E)
+
+/-- The vertical topology with the original contravariant diagram convention. -/
+def diagramSiteTopology (J C : Type u) [SmallCategory J] [SmallCategory C]
+    (K : GrothendieckTopology C) : GrothendieckTopology (Jᵒᵖ × C) :=
+  verticalDiagramSiteTopology Jᵒᵖ C K
+
+/-- The sheaf condition for the vertical topology is componentwise. -/
 theorem diagramSite_isSheaf_iff
     (J C : Type u) [SmallCategory J] [SmallCategory C]
     (K : GrothendieckTopology C) {A : Type v} [Category.{u} A]
     (P : (Jᵒᵖ × C)ᵒᵖ ⥤ A) :
     Presheaf.IsSheaf (diagramSiteTopology J C K) P ↔
-      ∀ j : Jᵒᵖ, Presheaf.IsSheaf K ((Prod.sectR j C).op ⋙ P) := by
-  constructor
-  · intro h j E
-    exact (diagramSite_isSheaf_types_iff J C K (P ⋙ coyoneda.obj (op E))).1 (h E) j
-  · intro h E
-    exact (diagramSite_isSheaf_types_iff J C K (P ⋙ coyoneda.obj (op E))).2
-      (fun j ↦ h j E)
+      ∀ j : Jᵒᵖ, Presheaf.IsSheaf K ((Prod.sectR j C).op ⋙ P) :=
+  verticalDiagramSite_isSheaf_iff Jᵒᵖ C K P
 
 /-- The coefficient sheaf, constructed by pulling back the coefficient presheaf. -/
 def diagramSiteRing (J C : Type u) [SmallCategory J] [SmallCategory C]
