@@ -20,65 +20,51 @@
  ],
  "proof": [
   {
-   "text": "Write $F=Rf_!$, $F'=Rf'_!$, $U=Lb^*$, $V=La^*$ and $u:U A_S\\xrightarrow{\\sim}A_{S'}$ for the unit comparison. All compositions below are in the stated finite constant-$A$ categories. Use the actual natural Hom bijections of [thm-sf-ambient-adjoint-class], restricted to the bounded constructible inputs of the statement as in [def-weil-exceptional-inverse-image]. In particular, this uses the constructible adjoints, not an exceptional adjunction on all pro-etale objects. By [lem-weil-pbc-adjunct-counit-identity], the inverse transpose sends $h:M\\to Rf^!A_S$ to $\\varepsilon_{f,A_S}\\circ F(h)$. Abbreviate these counits by $\\varepsilon$ and $\\varepsilon'$. Since $P$ transposes $t$, and $B$ transposes the composite specified in [def-pur-co-smoothness], we have\n$$\\varepsilon\\circ F(P)=t,\\qquad \\varepsilon'\\circ F'(B)=u\\circ U(\\varepsilon)\\circ C_{\\omega_f}^{-1}.$$\nThe same counit characterization holds for the transpose of $t'$ under the $f'$ bijection.",
-   "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
-    "lem-weil-pbc-adjunct-counit-identity",
-    "def-pur-co-smoothness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), the equivalence of corresponding morphisms with the counit formula, immediately after the definition; applied to the trace and to the defined dualizing base-change map."
-   }
-  },
-  {
-   "text": "The transformation $C$ is natural in its input. Indeed, [def-cbc-exchange-map] writes compact-support exchange as a composite of the unit, the square isomorphism, the counit, and the extension-by-zero comparison, all natural transformations. Whiskering and composing their naturality squares gives naturality of the composite. The map used here is that exchange transported to the pro-etale etale-origin class, as specified in [thm-cbc-finite-level-proetale]; composing with the natural comparison isomorphisms still gives a natural transformation. Its components at $L$ and $\\omega_f$ are invertible on the domain stipulated in the statement by the same theorem. Apply its naturality square to $P:L\\to\\omega_f$:\n$$C_{\\omega_f}\\circ U(F(P))=F'(V(P))\\circ C_L.$$\nPrecompose by $C_L^{-1}$ and postcompose by $C_{\\omega_f}^{-1}$ to obtain\n$$C_{\\omega_f}^{-1}\\circ F'(V(P))=U(F(P))\\circ C_L^{-1}.$$",
-   "uses": [
-    "def-cbc-exchange-map",
-    "thm-cbc-finite-level-proetale"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-cbc-exchange-map.md",
-    "place": "Compact-support exchange composite; naturality in the input, applied to P, and then cancellation of the invertible components."
-   }
-  },
-  {
-   "text": "Put $Q=B\\circ V(P)$. Using functoriality and the two equations of Step 1, followed by the naturality equation of Step 2, compute its inverse transpose:\n$$\\begin{aligned}\n\\varepsilon'\\circ F'(Q)\n&=\\varepsilon'\\circ F'(B)\\circ F'(V(P))\\\\\n&=u\\circ U(\\varepsilon)\\circ C_{\\omega_f}^{-1}\\circ F'(V(P))\\\\\n&=u\\circ U(\\varepsilon)\\circ U(F(P))\\circ C_L^{-1}\\\\\n&=u\\circ U(\\varepsilon\\circ F(P))\\circ C_L^{-1}\\\\\n&=u\\circ U(t)\\circ C_L^{-1}\\\\\n&=t'.\n\\end{aligned}$$\nThe last equality follows from the assumed trace equation $t'\\circ C_L=u\\circ U(t)$ by composition with $C_L^{-1}$. Thus both $Q$ and the transpose $P'$ of $t'$ have inverse transpose $t'$.",
+   "text": "Work in the etale representative K already retained in the statement. The definition purityTraceTranspose is comparison pullback of the actual etale homEquiv, conjugated by e.inv. The definition purityTraceDualizingBaseChange uses the same etale dualizingComplexBaseChangeMap. Thus no existence theorem for a pro-etale adjoint or a coefficient system is needed.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), counit formula after the definition; explicit substitution using the exchange naturality square."
+    "document": "lean/Sheaf/Paper/TraceTransposeBaseChange.lean",
+    "place": "Definitions purityTraceTranspose and purityTraceDualizingBaseChange, in the canonical comparison coordinates of the statement."
    }
   },
   {
-   "text": "Apply the injectivity of the inverse Hom bijection of [thm-sf-ambient-adjoint-class] for $f'$, source $La^*L$ and target $A_{S'}$. By the counit characterization [lem-weil-pbc-adjunct-counit-identity], Step 3 identifies the inverse images of $Q$ and $P'$. Hence $P'=Q=B\\circ La^*P$, as claimed. The calculation never inverts $B$ and never uses a Tate identification of either dualizing object.",
+   "text": "Let Ex be Etale.rightDerivedLowerShriekBaseChangeMap P.Coefficient sq. It is invertible by the already proved source-library theorem Etale.isIso_rightDerivedLowerShriekBaseChangeMap (WeilConjectures/SixFunctors/Etale/Derived/Exchange.lean). Its finite-ring hypothesis follows from comparedCoefficientFinite. Precompose the trace equation by inv (Ex.app K) and cancel, obtaining t-prime = (inv Ex).app K followed by pullback of t and the unit comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Exchange.lean",
+    "place": "isIso_rightDerivedLowerShriekBaseChangeMap, and cancellation with the inverse component."
+   }
+  },
+  {
+   "text": "Use the elementary general identity proved by the private helper trace_mate: for adjunctions L1 left adjoint R1 and L2 left adjoint R2, a square alpha: G L2 -> L1 H, t: L1 K -> N and u: H N -> N-prime, the transpose of alpha_K followed by H(t) and u equals G(transpose(t)) followed by mate(alpha)_N and R2(u). Expand homEquiv as unit followed by mapped morphism. Naturality of mate(alpha) at t moves R2(H(t)) past the mate, and Mathlib unit_mateEquiv [lem-pur-mate-unit-compatibility] replaces the remaining unit-mate composite. Apply this identity with alpha = inv Ex. By definition, the resulting mate at the coefficient unit followed by R2 of the unit comparison is precisely dualizingComplexBaseChangeMap. Substitute the trace equation from the preceding step.",
    "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-adjunct-counit-identity"
+    "lem-pur-mate-unit-compatibility"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), the equivalence of corresponding morphisms with the counit formula, immediately after the definition; applied to the trace and to the defined dualizing base-change map."
+    "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "unit_mateEquiv and mateEquiv; Adjunction.homEquiv_unit from Adjunction/Basic.lean."
+   }
+  },
+  {
+   "text": "Apply comparison pullback to the etale equality. Unfold the three trace definitions and the retained pullback-origin isomorphism. Functoriality expands the inverse-origin conjugation as pullback(e.inv) followed by purityTracePullbackComparison.hom.app K. Naturality of that comparison at the etale transpose moves its component past the mapped transpose, giving exactly the claimed equation. This never inverts the dualizing base-change morphism, and uses no ambient pro-etale adjunction or Tate identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/TraceTransposeBaseChange.lean",
+    "place": "purityTracePullbackComparison, purityTracePullbackOrigin, and naturality of the comparison isomorphism."
    }
   }
  ],
  "proof_deps": [
-  "def-cbc-exchange-map",
-  "def-pur-co-smoothness",
-  "def-weil-exceptional-inverse-image",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "thm-cbc-finite-level-proetale",
-  "thm-sf-ambient-adjoint-class"
+  "lem-pur-mate-unit-compatibility"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Tag 0037 (definition-adjoint), counit characterization of adjunction transposes; formal naturality calculation expanding the parent blueprint proof comparison J = B composed with pullback of P."
+  "place": "Tag 0037, adjunction transposes; formalized using Mathlib unit_mateEquiv and the existing etale counit-defined mate, then naturality of the retained comparison isomorphism. F6, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -174,10 +160,7 @@
    }
   ]
  },
- "tool_uses": [
-  "thm-sf-ambient-adjoint-class",
-  "thm-cbc-finite-level-proetale"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -211,5 +194,15 @@
   "group": "Q110",
   "result": "pass",
   "note": "Statement matches the node clause by clause: setting, four schemes, morphism properties, unrestricted b, Cartesian sq, the recorded comparedDualizing objects with the dependency's own compactification bindings, the étale exchange (invertible for every input), B as the actual mate of the inverse exchange plus the unit comparison with no IsIso B assumed, traces in the dependency's étale coordinates, hypothesis and conclusion P' = B ∘ La^*P in the right order. Both sides reduce by naturality of the pullback comparison to the node's four-step étale calculation, so the statement is true, neither weaker nor stronger. Edge cases covered (identity square, zero trace, L=0, empty schemes, n=1, non-invertible B, arbitrary representatives); universes consistent. Gates: the four helper defs have real data, the only sorry is the theorem, docstrings carry source place, blueprint id and the four proof steps, the node changed only in lean, lean.statement matches the file exactly, longest line 98, no pro-etale substitute, no global build or live write. nt_compile.py on the snapshot: exit 0, no diagnostics, twice (11.2 s and 10.6 s). Notes, not blocking: the two proof imports for thm-cbc-finite-level-proetale and thm-sf-ambient-adjoint-class are omitted because of a documented duplicate-declaration collision between library trees; the second-reading section is brief but names each clause checked and its one change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T154009-L-3025375",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

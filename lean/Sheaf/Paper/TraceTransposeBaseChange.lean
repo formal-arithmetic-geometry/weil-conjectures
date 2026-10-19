@@ -8,12 +8,6 @@ module
 public import Sheaf.Paper.CohomologicalSmoothnessComparison
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 
 /-!
 # Base change of a trace transpose
@@ -102,6 +96,31 @@ noncomputable def purityTraceDualizingBaseChange
     (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X').mapDerivedCategory.map
       (Etale.dualizingComplexBaseChangeMap P.Coefficient sq)
 
+/-- Naturality of an adjunction transpose across the mate of inverse exchange. -/
+private theorem trace_mate
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {F : C ⥤ D} {R : D ⥤ C} {F' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (V : C ⥤ C') (U : D ⥤ D')
+    (c : F ⋙ U ⟶ V ⋙ F') [IsIso c]
+    {K : C} {N : D} {N' : D'} (t : F.obj K ⟶ N)
+    (t' : F'.obj (V.obj K) ⟶ N') (u : U.obj N ⟶ N')
+    (h : c.app K ≫ t' = U.map t ≫ u) :
+    adj'.homEquiv _ _ t' =
+      V.map (adj.homEquiv _ _ t) ≫ (mateEquiv adj adj' (inv c)).app N ≫ R'.map u := by
+  have ht : t' = (inv c).app K ≫ U.map t ≫ u := by
+    rw [← h, ← Category.assoc]
+    simp
+  rw [ht, ← Category.assoc, adj'.homEquiv_naturality_right]
+  rw [← Category.assoc]
+  apply congrArg (fun k ↦ k ≫ R'.map u)
+  symm
+  rw [adj.homEquiv_unit, V.map_comp, Category.assoc]
+  have hn := (mateEquiv adj adj' (inv c)).natTrans.naturality t
+  simp only [Functor.comp_map] at hn
+  rw [hn, ← Category.assoc, unit_mateEquiv, Category.assoc, ← R'.map_comp,
+    adj'.homEquiv_unit]
+  rfl
+
 /-- A unit-valued trace satisfying compact-support base change has transpose
 P' = B composed with a^* P, on the original pro-etale input.
 Source: blueprint main-20261015, lem-pur-projection-purity-agreement, expanded trace
@@ -168,6 +187,30 @@ theorem purityTraceTranspose_baseChange
           ((sfFixedDerivedPullback P.Ring a).obj L) (purityTracePullbackOrigin P a K L e) t' =
         (sfFixedDerivedPullback P.Ring a).map (purityTraceTranspose P f K L e t) ≫
           purityTraceDualizingBaseChange P sq := by
-  sorry
+  let := (P.comparedCompactification f (Y ↘ Spec (.of P.field.k))).hasCompactification
+  let := ((HasCompactification.compactification f).ofIsPullback sq).hasCompactification
+  let : QuasiCompact f' :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  intro L hL K e t t' ht
+  have := Etale.isIso_rightDerivedLowerShriekBaseChangeMap P.Coefficient sq
+  have h := trace_mate
+    (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient) f)
+    (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient) f')
+    (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) a).leftDerivedFunctor
+    (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor
+    (Etale.rightDerivedLowerShriekBaseChangeMap P.Coefficient sq) t t'
+    (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} P.Coefficient) b).hom ht
+  change _ = _ ≫ Etale.dualizingComplexBaseChangeMap P.Coefficient sq at h
+  dsimp only [purityTraceTranspose, purityTracePullbackOrigin,
+    purityTraceDualizingBaseChange, Iso.trans_inv, Iso.app_inv,
+    Iso.symm_inv, Functor.mapIso_inv]
+  rw [h]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (purityTracePullbackComparison P a).hom.naturality
+    ((Etale.rightDerivedUpperShriekAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) f).homEquiv K (𝟙_ _) t)
+  dsimp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  rfl
 
 end AlgebraicGeometry.ProEtale
