@@ -1,6 +1,6 @@
 # Work queue
 
-1236 items; claim with `tools/claim.py next <group> [--stage N]`.
+1239 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (4)
 
@@ -27,7 +27,6 @@
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `det-prop-diagonal-tower-trace` | 1 | state | 3 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
-| `lem-pur-compact-support-condensed-realization` | 1 | state | 2 |
 | `lem-pur-flag-localized-product` | 1 | state | 1 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
@@ -36,14 +35,15 @@
 | `lem-per-finite-affine-direct-image-support-bound` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
+| `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `lem-zl-weil-constant-extension-frobenius` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 305 nodes that below a finished node, not needed, 2 nodes that wait for stage 1 (statement downstream not grounded), 136 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 305 nodes that below a finished node, not needed, 2 nodes that wait for stage 1 (statement downstream not grounded), 135 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1207)
+## Stage 3: modules to prove (1210)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -461,6 +461,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AdicPuritySourceReduction` | - | 2 | proof | 2 |
 | `Sheaf.Paper.AdicPurityTwistReduction` | - | 7 | proof | 2 |
 | `Sheaf.Paper.AdicSectionClosedSupport` | - | 1 | proof | 2 |
+| `Sheaf.Paper.CompactSupportCondensedRealization` | - | 33 | proof | 2 |
 | `Sheaf.Paper.CompleteProetaleStrictTowerRealization` | - | 9 | proof | 2 |
 | `Sheaf.Paper.CompletedStalkReparametrizationCoherence` | - | 8 | proof | 2 |
 | `Sheaf.Paper.DerivedNakayama` | - | 1 | proof | 2 |
@@ -697,6 +698,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedPullbackUnitTower` | - | 3 | proof | 3 |
 | `Sheaf.Paper.CompletedStalkFrobeniusReduction` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompositeIntegrationCounit` | - | 6 | proof | 3 |
+| `Sheaf.Paper.CondensedCompactSupportProjection` | - | 9 | proof | 3 |
 | `Sheaf.Paper.ConstantTowerDirectImageNormalization` | - | 3 | proof | 3 |
 | `Sheaf.Paper.FieldShriekCompositionQcqs` | - | 3 | proof | 3 |
 | `Sheaf.Paper.FieldShriekLowerBound` | - | 1 | proof | 3 |
@@ -719,6 +721,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RationalizationIdempotentComplete` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RingedCoefficientProjectionCocycle` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RingedRefinementCoefficientSquare` | - | 1 | proof | 3 |
+| `Sheaf.Paper.SemilinearCompactSupportCoefficientTransport` | - | 13 | proof | 3 |
 | `Sheaf.Paper.SfRationalBoundedConeTorsion` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SfRationalLocalGlobalPowerTorsion` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SmoothPurityCompactProjectionBaseChange` | - | 1 | proof | 3 |
