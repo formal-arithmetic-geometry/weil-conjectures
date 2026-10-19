@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.Algebra.Homology.BaseDerivedExtensionLinear
-import Sheaf.Algebra.Homology.TensorActionOfAdditiveFunctor
-import Sheaf.Algebra.Homology.BaseDerivedTensorCounitLinear
+import WeilConjectures.Algebra.Homology.TensorActionOfAdditiveFunctor
+import WeilConjectures.Algebra.Homology.BaseDerivedTensorCounitLinear
 import Mathlib.Algebra.Homology.Linear
 
 /-!

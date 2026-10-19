@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Logic.Relation
 public import Sheaf.AlgebraicGeometry.GroupoidScheme
 public import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineTensorBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteAffineTensorBaseChange
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeNormCharts
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback

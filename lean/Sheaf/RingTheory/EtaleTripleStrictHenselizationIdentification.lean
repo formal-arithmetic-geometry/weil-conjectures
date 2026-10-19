@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.StrictHenselizationComparison
 import Sheaf.RingTheory.EtaleResidueTriplesLocalization
-import Sheaf.RingTheory.PairHenselizationCompletionData
+import WeilConjectures.RingTheory.PairHenselizationCompletionData
 
 /-!
 # Strict henselization at an etale triple

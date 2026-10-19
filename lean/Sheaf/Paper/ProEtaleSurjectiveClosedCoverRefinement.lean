@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 /-! Pro-etale covering refinements across a surjective closed immersion. -/
 

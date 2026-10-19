@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Algebra.Homology.TensorActionOfAdditiveFunctor
+import WeilConjectures.Algebra.Homology.TensorActionOfAdditiveFunctor
 import Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalar
 
 /-! # Affine tensor cohomology: coefficient lifts

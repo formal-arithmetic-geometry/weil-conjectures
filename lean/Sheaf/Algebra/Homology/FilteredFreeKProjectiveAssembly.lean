@@ -4,8 +4,8 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
-import Sheaf.Algebra.Homology.CoproductKProjective
-import Sheaf.Algebra.Homology.FilteredFreeTelescopeSplitting
+import WeilConjectures.Algebra.Homology.CoproductKProjective
+import WeilConjectures.Algebra.Homology.FilteredFreeTelescopeSplitting
 
 /-! Telescope assembly sublemma for filtered K-projective complexes. -/
 

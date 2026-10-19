@@ -94,13 +94,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBasisDualMatrix",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisDualMatrix.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisDualMatrix",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisDualMatrix.lean",
   "declaration": "AlgebraicGeometry.affineBasisDualMatrix_component",
   "statement": "theorem affineBasisDualMatrix_component {Y : Scheme.{u}} (U : Y.affineOpens)\n    (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Finite I] [Finite J]\n    [DecidableEq I] [DecidableEq J]\n    (bM : Basis I Γ(Y, U.1) M) (bN : Basis J Γ(Y, U.1) N) (f : N ⟶ M)\n    (i : I) (j : J) :\n    let S := Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let T := tilde.functor Γ(Y, U.1) ⋙ S\n    let eM := affineBasisCoordinatesIso U M bM\n    let eN := affineBasisCoordinatesIso U N bN\n    let dM := affineDualBasisCoordinatesIso U M bM\n    let dN := affineDualBasisCoordinatesIso U N bN\n    SheafOfModules.ιFree i ≫ dM.inv ≫\n        T.map (ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1)\n          (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) f)) ≫ dN.hom ≫ Scheme.Modules.freeπ j =\n      SheafOfModules.ιFree j ≫ eN.inv ≫ T.map f ≫ eM.hom ≫ Scheme.Modules.freeπ i",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineBasisDualMatrix; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

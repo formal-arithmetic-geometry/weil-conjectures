@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.Algebra.Ring.Idempotent
 import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
-import Sheaf.RingTheory.PairHenselizationCompletionData
+import WeilConjectures.RingTheory.PairHenselizationCompletionData
 
 /-!
 # The idempotent selecting a finite-algebra completion factor

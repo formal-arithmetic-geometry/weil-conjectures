@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SemistableMultipointedPair
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition

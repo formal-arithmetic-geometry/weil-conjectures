@@ -11,7 +11,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.RingTheory.FiniteProjectiveComplexFreeModel
 import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
-import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
+import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Sheaf.Algebra.Homology.TorAmplitudePrincipalCover
 

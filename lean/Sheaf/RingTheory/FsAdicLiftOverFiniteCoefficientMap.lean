@@ -15,8 +15,8 @@ import Sheaf.RingTheory.FsAdicClosedFiberModel
 import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
 import Mathlib.RingTheory.Filtration
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.FiniteCoefficientTensorReductionSurjective
-import Sheaf.RingTheory.FiniteCoefficientTensorKernelReduction
+import WeilConjectures.RingTheory.FiniteCoefficientTensorReductionSurjective
+import WeilConjectures.RingTheory.FiniteCoefficientTensorKernelReduction
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.TensorProduct.Maps

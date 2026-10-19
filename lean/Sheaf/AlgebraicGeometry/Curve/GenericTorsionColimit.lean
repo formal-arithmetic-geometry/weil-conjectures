@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
+import WeilConjectures.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
 import Sheaf.AlgebraicGeometry.Curve.GenericTorsionCohomologyColimit
 
 /-! # Finite-stalk approximation for a generic torsion sheaf

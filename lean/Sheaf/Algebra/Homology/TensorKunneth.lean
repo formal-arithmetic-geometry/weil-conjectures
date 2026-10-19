@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.DirectSum.Module
-import Sheaf.Algebra.Homology.TensorHomologyPairing
+import WeilConjectures.Algebra.Homology.TensorHomologyPairing
 import Sheaf.Algebra.Homology.TensorHomologyMapBijective
 
 /-!

@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 
 @[expose] public section
 

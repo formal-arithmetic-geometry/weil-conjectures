@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.RingTheory.KoszulBaseChangeIso
+import WeilConjectures.RingTheory.KoszulBaseChangeIso
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-!

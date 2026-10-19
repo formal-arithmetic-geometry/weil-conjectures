@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Sheaf.Algebra.Homology.LargeFilteredFreeResolution
 import Sheaf.Algebra.Homology.FilteredFreeKProjective
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 

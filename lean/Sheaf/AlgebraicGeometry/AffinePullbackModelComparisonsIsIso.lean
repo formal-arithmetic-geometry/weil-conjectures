@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 
 /-! # Canonical affine model comparisons

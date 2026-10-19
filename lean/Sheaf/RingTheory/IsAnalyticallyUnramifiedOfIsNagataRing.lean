@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.NagataRing
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
-import Sheaf.RingTheory.AdicCompletionRingEquiv
+import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
 import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
 import Sheaf.RingTheory.FiniteOverNagata

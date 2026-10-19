@@ -6,8 +6,8 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Hom bijection for the two affine-module tensor operations
 
 Source: Stacks Project, Morphisms, Lemma 01SB.

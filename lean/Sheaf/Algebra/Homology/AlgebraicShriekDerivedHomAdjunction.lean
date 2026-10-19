@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedCoinductionAdjunction
 public import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.CategoryTheory.Shift.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

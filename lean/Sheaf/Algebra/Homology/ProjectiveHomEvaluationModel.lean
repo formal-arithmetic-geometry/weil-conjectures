@@ -5,7 +5,7 @@ Authors: SHEAF group Q133
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.ModuleHomComplexQuotient
+import WeilConjectures.Algebra.Homology.ModuleHomComplexQuotient
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.Flat.Basic

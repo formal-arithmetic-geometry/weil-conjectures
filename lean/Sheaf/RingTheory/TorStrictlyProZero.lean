@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import Sheaf.Algebra.TorDimensionShiftNatural
+import WeilConjectures.Algebra.TorDimensionShiftNatural
 import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.RingTheory.Filtration
 import Mathlib.LinearAlgebra.TensorProduct.Quotient

@@ -9,9 +9,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation
-import Sheaf.Topology.InverseImageRegularExtension
-import Sheaf.Topology.InverseImageOperationExt
+import WeilConjectures.AlgebraicGeometry.SheafTensorPushoutCancellation
+import WeilConjectures.Topology.InverseImageRegularExtension
+import WeilConjectures.Topology.InverseImageOperationExt
 
 /-! # Algebra base change compared with module tensor pullback
 

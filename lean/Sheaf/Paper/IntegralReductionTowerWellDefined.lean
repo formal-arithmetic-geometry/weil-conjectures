@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!

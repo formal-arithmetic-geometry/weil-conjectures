@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
-import Sheaf.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover
+import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover
 import Mathlib.Order.Shrink
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit

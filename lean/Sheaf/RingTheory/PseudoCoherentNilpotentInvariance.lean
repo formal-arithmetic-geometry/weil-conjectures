@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.RingTheory.Flat.Basic
 import Sheaf.RingTheory.NilpotentProjectiveComplexLift
 import WeilConjectures.RingTheory.NakayamaNilpotent
-import Sheaf.RingTheory.FiniteProjectiveFreeModIdeal
+import WeilConjectures.RingTheory.FiniteProjectiveFreeModIdeal
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.TensorProduct.Finite

@@ -22,7 +22,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitDivisorCharts
-import Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization
 import Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor
 
 /-!

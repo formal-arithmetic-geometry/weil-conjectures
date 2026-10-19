@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationCounit
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison

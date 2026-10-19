@@ -7,10 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality
-import Sheaf.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality
+import WeilConjectures.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality
 import Sheaf.AlgebraicGeometry.Modules.CanonicalStructureBaseChangeIsIso
-import Sheaf.AlgebraicGeometry.Modules.PullbackSectionFactorization
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackSectionFactorization
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-! # Canonical affine base change of finite étale section coordinates

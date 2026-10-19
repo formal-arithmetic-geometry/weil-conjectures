@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
-import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
+import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
 import Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
 import Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison

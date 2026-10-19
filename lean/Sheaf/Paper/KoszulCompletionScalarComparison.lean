@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.AdicReductionAdjunction
 public import Sheaf.Paper.IntrinsicKoszulCompletion
-import all Sheaf.RingTheory.KoszulBaseChangeIso
+import all WeilConjectures.RingTheory.KoszulBaseChangeIso
 import Sheaf.Paper.StrictPerfectCoefficientPackage
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts

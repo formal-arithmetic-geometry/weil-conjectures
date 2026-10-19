@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentDataExistence
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
 
 /-!

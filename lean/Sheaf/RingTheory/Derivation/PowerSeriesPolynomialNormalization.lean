@@ -14,7 +14,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.NoetherNormalizationOverDomain
+import WeilConjectures.RingTheory.NoetherNormalizationOverDomain
 import Mathlib.Algebra.CharP.Subring
 import Mathlib.Algebra.CharP.Invertible
 import Mathlib.RingTheory.AdicCompletion.Topology

@@ -15,7 +15,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import all Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison
 import Sheaf.AlgebraicGeometry.LocalKFlatPullbackModel
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # An affine K-flat model of the ambient derived residue pullback

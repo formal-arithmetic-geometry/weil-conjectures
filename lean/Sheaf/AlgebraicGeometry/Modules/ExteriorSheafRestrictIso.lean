@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData
 
 /-!
 # Exterior sheaves commute with open restriction

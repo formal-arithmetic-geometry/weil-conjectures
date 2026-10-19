@@ -6,9 +6,9 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra
+import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpenAlgebra
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary
-import Sheaf.AlgebraicGeometry.NonvanishingLocusRestrict
+import WeilConjectures.AlgebraicGeometry.NonvanishingLocusRestrict
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Affine opens intersected with section nonvanishing loci
