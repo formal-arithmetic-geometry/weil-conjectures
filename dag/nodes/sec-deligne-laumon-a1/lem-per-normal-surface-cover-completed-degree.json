@@ -23,9 +23,198 @@
   "def-weil-affine-spectrum",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On a nonempty affine open $V=\\operatorname{Spec}A$ of $Y$, the function field is $F=\\operatorname{Frac}(A)$ by [lem-sc-integral-function-field-affine-fraction]. Put $B=\\overline A^{\\,K}$. By [lem-exc-quasi-excellent-nagata], $A$ is Nagata; [lem-weil-pbc-nagata-domain-n2] and [def-weil-pbc-japanese-domain] give that $B$ is a finite $A$-module. By [lem-weil-pbc-integral-closure-finite-extension-normal], $B$ is a normal domain with fraction field $K$. The affine descriptions of [def-fin-normalization-extension] identify $\\pi^{-1}V$ with $\\operatorname{Spec}B$. Thus $\\pi$ is finite by [def-weil-finite-integral-morphism], and it is surjective by [lem-weil-pbc-integral-injective-lying-over], since $A\\subseteq B$ is integral.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-domain-n2",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "def-fin-normalization-extension",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032F (definition-N), 0334 (proposition-nagata-universally-japanese), 034L (lemma-integral-closure-in-normal), 00GQ (lemma-integral-overring-surjective); more-algebra.tex Tag 07QV (lemma-quasi-excellent-nagata)."
+   }
+  },
+  {
+   "text": "The affine pieces $\\operatorname{Spec}B$ have common generic point with residue field $K$ (the inclusions into $K$ agree on overlaps), so their glued scheme $X$ is integral and has function field $K$. Their local rings are normal domains by [lem-weil-pbc-localization-normal-domain]. Each $B$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian] and excellent by [lem-exc-finite-type-localization-excellent]: a finite list of $A$-module generators also generates $B$ as an $A$-algebra. A finite affine cover of $Y$ gives a finite such cover of $X$, hence $X$ is Noetherian. To compute dimension on each piece, [lem-weil-pbc-integral-extension-dimension] gives $\\dim B\\leq\\dim A$. Conversely lift the bottom prime of any finite chain in $A$ by [lem-weil-pbc-integral-injective-lying-over] and lift successive inclusions by [pqf-lem-going-up]. Distinct contractions force distinct lifted primes, so $\\dim B\\geq\\dim A$. Applying [lem-pc-dimension-affine-open-cover] to these two covers gives $\\dim X=\\dim Y=2$.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "pqf-lem-going-up",
+    "lem-pc-dimension-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OK (lemma-integral-sub-dim-equal), 00FN (lemma-Noetherian-permanence), and 00GQ; more-algebra.tex Tag 07QU (lemma-finite-type-over-excellent)."
+   }
+  },
+  {
+   "text": "Fix a closed $x$ as in the statement. Since $\\pi$ is a closed map by [lem-weil-pbc-finite-closed-map-finite-fibres], $y=\\pi(x)$ is closed. Choose the affine $V=\\operatorname{Spec}A$ above containing $y$, write $\\pi^{-1}V=\\operatorname{Spec}B$, and let $\\mathfrak q$ and $\\mathfrak p=\\mathfrak q\\cap A$ represent $x$ and $y$. By [lem-weil-pbc-affine-open-stalk-localization], $R=A_{\\mathfrak p}$ and $S=B_{\\mathfrak q}$. By [lem-weil-pbc-integral-incomparability], contracting a length-two prime chain ending at $\\mathfrak q$ gives a strict length-two chain ending at $\\mathfrak p$. Thus $2=\\dim S\\leq\\dim R\\leq\\dim Y=2$. The ring $R$ is regular by the hypothesis on $Y$, while $S$ is normal by Step 2. No finiteness of $R\\to S$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GT (lemma-integral-no-inclusion); morphisms.tex Tag 01WN (lemma-finite-proper); schemes.tex Tag 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "The rings $R,S$ are excellent by [lem-exc-finite-type-localization-excellent] and Noetherian by [lem-weil-pbc-localization-noetherian]. Their completions are Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with the extended maximal ideals by [lem-weil-pbc-local-completion-local-ring], and complete by [lem-weil-pbc-module-completion-complete] applied with module the ring itself (the maximal ideals are finitely generated). By [lem-weil-pbc-completion-dimension] their dimensions are two. By [lem-weil-pbc-completion-regular-local], $\\widehat R$ is regular; it is a domain by [lem-sc-regular-local-domain]. For $S$, excellence supplies the G-ring condition [def-exc-excellent-ring], so [lem-weil-pbc-g-ring-completion-regular] makes $S\\to\\widehat S$ flat with geometrically regular Noetherian fibres. Those fibres are regular by taking the identity field extension in [def-weil-pbc-g-ring], hence normal by [lem-weil-pbc-regular-ring-normal]. Apply [lem-weil-pbc-flat-normal-fibres-noetherian-normal] to deduce that $\\widehat S$ is normal. A local normal ring is a normal domain by [def-weil-pbc-normal-ring] applied at its maximal ideal.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-sc-regular-local-domain",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QU (lemma-finite-type-over-excellent), 07NV (lemma-completion-dimension), 07NY (lemma-completion-regular), 0AH2 (lemma-map-G-ring-to-completion-regular), 0C23 (lemma-completion-normal-local-ring); algebra.tex Tags 0C22, 0316, 05GG."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-extension] to the finite map $A\\subseteq B$ at $\\mathfrak p$. It gives the canonical $\\widehat R$-algebra isomorphism\n$E:=\\widehat R\\otimes_A B\\simeq\\prod_{\\mathfrak q'\\mid\\mathfrak p}\\widehat{B_{\\mathfrak q'}}$.\nIn particular $\\widehat S$ is the factor indexed by $\\mathfrak q$. If $b_1,\\ldots,b_t$ generate $B$ over $A$, the elements $1\\otimes b_j$ generate $E$ over $\\widehat R$; their projections generate $\\widehat S$. Thus the canonical completion map $\\widehat R\\to\\widehat S$ is finite. Its identification as the map induced by $R\\to S$ is part of the cited statement.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07N9 (lemma-completion-finite-extension), canonical algebra structures and product decomposition."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis $v_1,\\ldots,v_d$ of $K$. Express the finitely many generators $b_j$ of $B$ in this basis. A common nonzero denominator $a\\in A$ for their coordinates defines an injective $A$-linear map $u:B\\to A^d$, sending $b$ to $a$ times its coordinate vector: coordinates of every $A$-linear combination of the $b_j$ lie in $a^{-1}A^d$, and zero coordinates imply $b=0$. This is just finite linear algebra and clearing the finitely many displayed denominators; it does not assume $B$ free.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN (lemma-resolve-complete), omitted completed-degree comparison: explicit coordinate argument for its generic-degree bound."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-local-completion-faithfully-flat], $R\\to\\widehat R$ is faithfully flat, hence flat. Localize the injection $u$ of Step 6 at $\\mathfrak p$ using [lem-weil-pbc-localization-module-exact]. Tensor it over $R$ with the flat module $\\widehat R$; [lem-trf-flat-tensor-preserves-injection] gives an injection $E\\hookrightarrow\\widehat R^d$. In the product of Step 5, insertion in the $\\mathfrak q$ coordinate is an injective $\\widehat R$-linear map $\\widehat S\\hookrightarrow E$. Consequently $\\widehat S$ is torsion free over the domain $\\widehat R$. If a nonzero $r\\in\\widehat R$ mapped to zero in $\\widehat S$, it would annihilate $1\\in\\widehat S$, contradicting torsion freeness and the fact that $\\widehat S$ is a nonzero domain. The completion map is therefore injective.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat), 00CS (proposition-localization-exact); Mathlib Module.Flat.lTensor_preserves_injective_linearMap, used for the explicit coordinate injection."
+   }
+  },
+  {
+   "text": "Put $Q=\\operatorname{Frac}(\\widehat R)$. Localizing the injection $\\widehat S\\hookrightarrow\\widehat R^d$ of Step 7 using [lem-weil-pbc-localization-module-exact] gives an injection $H:=(\\widehat R\\setminus\\{0\\})^{-1}\\widehat S\\hookrightarrow Q^d$. Since $\\widehat R\\to\\widehat S$ is injective and $\\widehat S$ is a domain, $H$ is a nonzero domain; it has $Q$-dimension at most $d$ (a linearly independent family maps to one in $Q^d$). By [lem-weil-pbc-finite-dimensional-domain-is-field], $H$ is a field. It contains $\\widehat S$ and is contained in $\\operatorname{Frac}(\\widehat S)$, so every quotient of two elements of $\\widehat S$ already lies in $H$. Thus $H=\\operatorname{Frac}(\\widehat S)$ and $[\\operatorname{Frac}(\\widehat S):Q]\\leq d$, with the field map induced by the completion map as required.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN (lemma-resolve-complete), intermediate-field paragraph: completed local degree is smaller than the original induction degree; explicit fraction-field comparison."
+   }
+  },
+  {
+   "text": "For the final assertion let $f:Y\\to\\operatorname{Spec}C$ be the given proper morphism. On each nonempty affine $V=\\operatorname{Spec}A\\subseteq Y$, the map $C\\to A\\subseteq F$ is the prescribed inclusion, by [lem-sc-integral-function-field-affine-fraction] and the generic-point hypothesis. Every $z\\in D\\subseteq K$ is integral over $C$ because $D$ is finite over $C$; equivalently it satisfies a monic polynomial over $C$ (the finite-implies-integral clause of [lem-weil-pbc-finite-algebra-is-integral]). The same polynomial has coefficients in $A$, so $z\\in\\overline A^{\\,K}=B$. These inclusions $D\\to B$ commute with restrictions, all being inclusions in $K$. Using the affine normalization description [def-fin-normalization-extension], they therefore glue to $h:X\\to\\operatorname{Spec}D$ over $\\operatorname{Spec}C$. At the generic point the induced map is $D\\subseteq K$, hence its extension to fraction fields is the identity on $K$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN (lemma-resolve-complete), intermediate-field diagram; affine description of normalization in the finite field extension."
+   }
+  },
+  {
+   "text": "The composite $X\\xrightarrow{\\pi}Y\\xrightarrow{f}\\operatorname{Spec}C$ is proper: $\\pi$ is finite by Step 1, hence proper by [lem-weil-pbc-finite-proper], and [lem-weil-pbc-proper-composition] applies to $\\pi,f$. The morphism $\\operatorname{Spec}D\\to\\operatorname{Spec}C$ is finite, hence separated by [lem-weil-pbc-finite-closed-map-finite-fibres]. Apply [lemma-nagata-proper-to-separated-target] to the triangle $X\\xrightarrow{h}\\operatorname{Spec}D\\to\\operatorname{Spec}C$ constructed in Step 9. It proves $h$ proper, completing the last assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lemma-nagata-proper-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WN (lemma-finite-proper), 01W3 (lemma-composition-proper), 01W6 (lemma-image-proper-scheme-closed)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-normal-ring",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-regular-local-domain",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-regular-ring-normal",
+  "lemma-nagata-proper-to-separated-target",
+  "pqf-lem-going-up"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BGN, lemma-resolve-complete, intermediate-field paragraph; explicit affine-normalization and coordinate-injection proof of the omitted completed-degree comparison, using algebra.tex Tag 07N9."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +250,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDeg_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. If $ p \\neq 0 $ and there are no zero divisors in the scalar multiplication fro\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"instFiniteDimensionalFractionRingOfFinite\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [inst_3 : IsDomain R]\\n  [inst_4 : IsDomain S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S],\\n  FiniteDimensional (FractionRing R) (FractionRing S)\", \"doc\": \"If $ R $ and $ S $ are integral domains with $ S $ being a finitely generated and torsion-free $ R $-module, then the fraction field of $ S $ is a finite-dimensional vector space over the fraction fie\"}\n  {\"name\": \"exists_finite_inj_algHom_of_fg\", \"module\": \"Mathlib/RingTheory/NoetherNormalization\", \"type\": \"∀ (k : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : CommRing R] [Nontrivial R] [a : Algebra k R]\\n  [fin : Algebra.FiniteType k R], ∃ s g, Function.Injective ⇑g ∧ g.Finite\", \"doc\": \"For any finitely generated algebra $ R $ over a field $ k $, there exists a natural number $ s $ and an injective finite algebra homomorphism from the polynomial ring $ k[x_1, \\\\dots, x_s] $ to $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"Algebra.QuasiFinite.instOfIsFractionRing\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsFractionRing R S],\\n  Algebra.QuasiFinite R S\", \"doc\": \"If $ S $ is the fraction ring of a commutative semiring $ R $, then $ S $ is a quasi-finite $ R $-algebra. This means $ S $, as an $ R $-module, is finitely generated.\"}\n  {\"name\": \"Algebra.IsAlgebraic.finrank_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (R' : Type u_4) (S : Type u) [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R R'] [IsFractionRing R R'] [FaithfulSMul R S] [Algebra.IsAlgebraic R S]\\n  [NoZeroDivisors S] (S' : Type v) [inst_9 : CommRing S'] [inst_10 : Alge\", \"doc\": \"If $ S $ is an algebraic algebra over a commutative ring $ R $, and $ R' $, $ S' $ are their respective fraction rings (localizations at non-zero divisors), then the finite rank of $ S' $ as an $ R' $\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization in a finite function field extension of an excellent regular surface has completed local field degrees bounded by the generic extension degree",
+   "results": "Ideal.inertiaDeg_le_finrank, Ideal.ramificationIdx_le_finrank, FunctionField.classNumber, Ideal.relNorm_eq_pow_of_isMaximal, functionField_iff, FunctionField, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Algebra.intNorm_eq_of_isLocalization. Read returned signatures and Dedekind hypotheses in RamificationInertia/Basic.lean; none states the surface/completion theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, FractionRing, Module.Finite",
+   "results": "OK 0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*finrank|finrank.*AdicCompletion|normalization.*IsFinite",
+   "results": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean lines 38 and 157: only spanFinrank_maximalIdeal_eq (minimal number of maximal-ideal generators); read lines 145-165.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite normalization morphism over an excellent regular surface the fraction field degree of completed local rings is bounded by the function field degree",
+   "results": "Scheme.Hom.normalizationDesc, toNormalization, instIsIsoToNormalizationOfIsIntegralHom, instIsIntegralHomFromNormalization, fromNormalization; Ideal.ramificationIdx_le_finrank, inertiaDeg_le_finrank, ramificationIdx_mul_inertiaDeg_of_isLocalRing. Read Normalization.lean and RamificationInertia/Basic.lean: relative-normalization construction and Dedekind ramification degrees, not this statement.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion free algebra over a local domain decomposes after completion and each domain factor has generic rank at most the original rank",
+   "results": "IsIntegralClosure.rank, IsBaseChange.finrank_eq_of_le_nonZeroDivisors, IsLocalRing.finrank_quotient_map, Ideal.finrank_quotient_eq_sum, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, Ideal.rank_pow_quot_aux, Algebra.IsAlgebraic.rank_of_isFractionRing, Ideal.finrank_quotient_map. Read RingTheory/Algebraic/Integral.lean lines 525-557: fraction-ring localization rank, no completed local factor comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -76,7 +300,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Technical surface-resolution input to dimension-normalized Verdier duality in lem-per-artin-gabber-affine-curve, proof Step 1; via the potential-dualizing construction and ILO XVII 3.4.1. Realizes the The normalization-cover and completed-degree comparison used in Tag 0BGN, resolve-lemma-resolve-complete, intermediate-field paragraph. Finiteness of normalization: morphisms.tex Tag 035S (morphisms-lemma-nagata-normalization), with the Japanese affine description; normal surfaces: properties.tex Tag 0B3D. Completions: algebra.tex Tag 0325 and more-algebra.tex Tags 07NY, 0C23. This is the local degree comparison, not an existence theorem for regular models. input in the proof of Stacks 0BGN.",
+   "place": "Technical resolution input below lem-per-artin-gabber-affine-curve, Step 1 (dimension-normalized middle duality), through lem-per-qbar-middle-tstructure and its potential-dualizing construction: the finite normalization cover and completed-degree comparison in Stacks Tag 0BGN, intermediate-field paragraph.",
    "via": [
     "lem-per-complete-normal-surface-resolution",
     "lem-per-excellent-surface-desingularization",
@@ -91,5 +315,189 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-surface-cover-completed-degree",
+  "worker": "stage1",
+  "summary": "Continued and archived the earlier attempt, compared the current item with Stacks 0BGN, and replaced three clause-restating children with existing generic DAG inputs. Corrected the false finite-local-stalk inference and reversed degree notation in the old proof. Explicit semilocal completion decomposition plus a coordinate injection proves the bound without miracle flatness. Statement unchanged; no new nodes.",
+  "blueprint": "Below lem-per-artin-gabber-affine-curve Step 1, through the middle-tstructure/potential-dualizing/resolution chain: realizes the normalization-cover and smaller-degree sentence of Stacks 0BGN with explicit algebra rather than invoking the desired clause.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Pass excellence to finite algebras and their stalk localizations."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Convert excellence into the Nagata finiteness condition on the affine normalization rings."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Generic The dimension of a scheme is the supremum of the dimensions of the rings of an affine open cover input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Identify affine fraction fields with the given generic field; a generic algebraic-geometry tool, not a replacement for any Fourier/perverse step."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic Regular local rings are domains input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic Tensoring with a flat module preserves injective maps input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic The completion of a Noetherian ring is Noetherian input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic The completion of a Noetherian local ring has the same dimension input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Use the canonical product of completed local factors of a finite algebra; this is the generic commutative-algebra input in the 0BGN comparison."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic A Noetherian local ring is regular iff its completion is input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic A finite algebra is integral input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "Generic A module-finite algebra over a Noetherian ring is Noetherian input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic A finite morphism is separated, universally closed and has finite fibres input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic A finite-dimensional domain over a field is a field input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic Normality ascends along flat maps of Noetherian rings with normal fibres input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic The completion of a G-ring along an ideal is a regular ring map input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic The integral closure of a domain in a finite extension of its fraction field is a normal domain with that fraction field input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Generic An integral ring map does not raise Krull dimension input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-incomparability",
+    "why": "Generic Incomparability for an integral ring map input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic Lying over for an injective integral ring map input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic The completion of a Noetherian local ring is faithfully flat input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic The completion of a Noetherian local ring is local with the same residue field input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic Localization of modules is exact input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic Localizations of Noetherian rings are Noetherian input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic A localization of a normal domain is a normal domain with the same fraction field (Stacks 00GY) input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic The adic completion of a module along a finitely generated ideal is complete, with quotients M/I^nM input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-domain-n2",
+    "why": "Use the N-2 property of a Nagata domain to obtain finite integral closure in a finite field extension."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic Properness is stable under composition input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic A regular ring is normal input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Deduce properness of the constructed map from properness over C and separatedness of Spec D over C."
+   },
+   {
+    "node": "pqf-lem-going-up",
+    "why": "Generic Going up for an integral extension input in the affine normalization/completion argument; the Fourier/perverse unit has no ring-theoretic replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-regular-local-domain",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-regular-ring-normal",
+  "lemma-nagata-proper-to-separated-target",
+  "pqf-lem-going-up"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-f9c516804",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-f9c516804 (reviewer sub-agent of L); spot-checked: Read the item's 10 steps, every cited node statement and Stacks 0BGN (resolve.tex 3864-3885). The statement, stmt_deps and source are unchanged from the base; there are no new nodes and no cycle (checked by a walk over the closure). Steps 1-2: affine Ā^K is finite via 07QV, 0334 and 032F; 034L gives a normal domain with fraction field K; surjectivity by 00GQ on A⊆B; excellence by 07QU; dim 2 via 00OJ plus going-up and 04MU. Step 3: incomparability is applied to the integral A→B, not to R→S, giving ht p=2; y is closed because finite maps are closed. Step 4: R̂ is regular by 07NY; Ŝ is normal via 0AH2 (G-ring), fibres regular⇒normal and 0C22. Step 5: 07N9 product decomposition, so R̂→Ŝ is finite. Steps 6-8: the coordinate injection B↪A^d, flat tensor and the factor insertion give Ŝ↪R̂^d. So Ŝ is torsion-free and the map injective, and (R̂∖0)^{-1}Ŝ=Frac Ŝ has dimension ≤d over Frac R̂. Tested: K=F; F(√x) over A² (degree = d); F(√(1+x)) with two factors (degree < d, which is why the product is needed); purely inseparable K. Steps 9-10: D⊆Ā^K glues to h over Spec C, and h is proper by finite⇒proper, composition and cancellation. Batch-5: lem-trf-flat-tensor-preserves-injection is the Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap with empty deps. It is generic algebra, not part of the trace formula or Poincaré duality, so accepted. tool_uses are generic algebra/scheme notions; accepted. Advisory: the inherited source.place still describes the alternative CM/00R4 route, which is valid but unused, while proof_origin records the 07N9 route actually used."
  }
 }
