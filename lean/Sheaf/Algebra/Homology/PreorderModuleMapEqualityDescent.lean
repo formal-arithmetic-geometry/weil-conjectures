@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Category.Preorder
 import Mathlib.CategoryTheory.NatIso
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.Order.Antisymmetrization
-import WeilConjectures.Algebra.FinitePresentationColimit
+import Sheaf.Algebra.FinitePresentationColimit
 
 /-! # Equality descent for module maps over a directed preorder
 

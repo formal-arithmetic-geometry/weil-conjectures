@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.Morphisms.DvrRootNormalizationMaximalIdeal
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationDvrComparison
-import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkRegularBasicOpen
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkRegularBasicOpen
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-! # The tame root has nonzero first-order class -/

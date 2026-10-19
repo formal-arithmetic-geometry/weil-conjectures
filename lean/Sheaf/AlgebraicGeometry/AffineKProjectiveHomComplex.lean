@@ -6,10 +6,10 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-public import WeilConjectures.Algebra.Homology.ModuleHomComplex
+public import Sheaf.Algebra.Homology.ModuleHomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
-import WeilConjectures.Algebra.Homology.ModuleHomComplexQuotient
+import Sheaf.Algebra.Homology.ModuleHomComplexQuotient
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.CategoryTheory.Linear.Basic
 

@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
+public import Sheaf.Algebra.Homology.ConeHorizontalStepStable
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 import Sheaf.Algebra.Homology.ConeHorizontalQuotientIso

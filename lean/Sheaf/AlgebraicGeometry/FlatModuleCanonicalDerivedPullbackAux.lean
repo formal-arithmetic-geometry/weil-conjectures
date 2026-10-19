@@ -6,10 +6,10 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Left-derived counits at flat single complexes -/
 

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.Algebra.Module.LocalizedModule.Basic
-import WeilConjectures.RingTheory.CoverModuleExact
+import Sheaf.RingTheory.CoverModuleExact
 
 /-!
 # Complementary quotient for idempotent localizations away from an ideal

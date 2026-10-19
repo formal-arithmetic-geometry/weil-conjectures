@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
-import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
+import Sheaf.CategoryTheory.RightDerivedSingleZeroUnit
 
 /-!
 # Cohomology of a smooth affine curve

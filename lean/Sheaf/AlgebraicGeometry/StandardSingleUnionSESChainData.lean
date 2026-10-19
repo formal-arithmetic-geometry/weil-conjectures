@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
 import Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData
-import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRectification
+import Sheaf.CategoryTheory.DerivedCategory.HomotopySquareRectification
 
 /-! # Chain representatives of the single-module union comparison
 

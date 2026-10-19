@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.IntegralIdealAffineSections
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic

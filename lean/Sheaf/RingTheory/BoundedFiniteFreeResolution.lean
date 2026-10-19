@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.Module
 import Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction
 import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
 import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.RingTheory.FiniteFreeExactSequenceResolution
+import Sheaf.RingTheory.FiniteFreeExactSequenceResolution
 
 /-! Bounded finite free resolution construction.
 (blueprint: stage3-b4-bounded-finite-free-resolution) -/

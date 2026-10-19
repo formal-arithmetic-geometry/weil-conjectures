@@ -23,12 +23,12 @@ import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
-import WeilConjectures.AlgebraicGeometry.FibreCartierLocal
+import Sheaf.AlgebraicGeometry.FibreCartierLocal
 import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 
 /-!
 # Local regular equations for a closed immersion of smooth schemes

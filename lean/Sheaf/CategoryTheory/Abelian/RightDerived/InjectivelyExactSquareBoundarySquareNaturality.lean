@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare
+public import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 @[expose] public section

@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Sheaf.RingTheory.BoundedFiniteProjectiveResolution
 import Sheaf.RingTheory.PerfectModuleFiniteProjectiveDimension
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.AuslanderBuchsbaum
 import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound

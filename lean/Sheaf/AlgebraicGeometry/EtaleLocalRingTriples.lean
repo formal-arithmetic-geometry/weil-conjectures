@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Limits.Final
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples

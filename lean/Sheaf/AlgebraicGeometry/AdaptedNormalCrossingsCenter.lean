@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Centers adapted to a labelled normal-crossings boundary

@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.ModuleFiniteFreeLocalLift
+import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalLift
 import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport
 
 /-! # Finite support of a generating family near a point

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
@@ -30,7 +30,7 @@ import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
-import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
+import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Cohen-Macaulay loci under extension of fields and base change

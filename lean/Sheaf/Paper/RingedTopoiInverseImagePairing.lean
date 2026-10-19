@@ -6,7 +6,7 @@ module
 public import Sheaf.Paper.RingedTopoiTensorSections
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import all Sheaf.CategoryTheory.GeometricModuleConstruction
 
 /-! # Canonical pairing on the supplied algebraic inverse image

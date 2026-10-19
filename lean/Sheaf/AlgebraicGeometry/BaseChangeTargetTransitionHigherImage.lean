@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower
-import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
+import Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Single-complex normalization of target transitions
 

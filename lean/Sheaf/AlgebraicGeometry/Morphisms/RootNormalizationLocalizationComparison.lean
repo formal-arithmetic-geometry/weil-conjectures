@@ -16,7 +16,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian
-import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLocalizationPullbackStalk
+import Sheaf.AlgebraicGeometry.Morphisms.AffineLocalizationPullbackStalk
 
 /-! # Root normalization after principal-prime localization -/
 

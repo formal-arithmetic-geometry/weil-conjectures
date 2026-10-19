@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.RelativeSpecMorphismChart
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

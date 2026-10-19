@@ -19,7 +19,7 @@ import Sheaf.RingTheory.CompletionRegularLocal
 import WeilConjectures.RingTheory.SimpleFiltration
 import Sheaf.RingTheory.PowerSeriesAdicEvaluation
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import WeilConjectures.RingTheory.PowerSeriesNormalDomain
+import Sheaf.RingTheory.PowerSeriesNormalDomain
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import Sheaf.RingTheory.RegularLocalDimOneIffNormal
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth

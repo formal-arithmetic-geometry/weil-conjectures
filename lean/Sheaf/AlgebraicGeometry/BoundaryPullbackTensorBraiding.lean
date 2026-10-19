@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
+import Sheaf.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Symmetry of the boundary pullback tensor comparison
 

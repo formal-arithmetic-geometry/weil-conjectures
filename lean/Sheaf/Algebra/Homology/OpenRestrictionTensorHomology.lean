@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Algebra.Homology.Single
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.RestrictedTensorPullbackStalk
-import WeilConjectures.AlgebraicGeometry.AffineModelStalkTensorTransport
+import Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport
 
 /-! # Natural stalk comparison for the pullback of an affine tilde model
 

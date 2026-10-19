@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
 
 import Mathlib.RingTheory.TensorProduct.Finite
-import WeilConjectures.RingTheory.DvrGaloisRootTensorReduced
+import Sheaf.RingTheory.DvrGaloisRootTensorReduced
 import Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts
 
 /-! # Normalized Galois component stalks as integral-closure local factors

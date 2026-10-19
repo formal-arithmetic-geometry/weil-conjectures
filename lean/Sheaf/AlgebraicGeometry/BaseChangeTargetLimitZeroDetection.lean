@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import Sheaf.AlgebraicGeometry.BaseChangeTargetStalkHigherImageComparison
-import WeilConjectures.AlgebraicGeometry.BaseChangeTargetLimitGeometry
+import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitGeometry
 
 /-! # Finite-stage detection of zero in target stalks
 

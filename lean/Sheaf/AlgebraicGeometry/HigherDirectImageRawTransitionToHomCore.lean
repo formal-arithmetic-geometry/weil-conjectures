@@ -1,11 +1,12 @@
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawTriangleAdjunct
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitionHomologyShift
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionHomologyShift
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 @[expose] public section

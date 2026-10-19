@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.KrullDimension.LocalRing
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
+import Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization
 
 @[expose] public section
 

@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
-import WeilConjectures.RingTheory.LinearEquationLocalizationPolynomialCore
-import WeilConjectures.RingTheory.LinearEquationLocalizationPolynomialFormula
+import Sheaf.RingTheory.LinearEquationLocalizationPolynomialCore
+import Sheaf.RingTheory.LinearEquationLocalizationPolynomialFormula
 
 /-!
 # Localizing a polynomial algebra with one linear relation

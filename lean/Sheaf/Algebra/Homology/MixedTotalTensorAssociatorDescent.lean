@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-public import WeilConjectures.Algebra.Homology.MixedTotalTensor
+public import Sheaf.Algebra.Homology.MixedTotalTensor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso

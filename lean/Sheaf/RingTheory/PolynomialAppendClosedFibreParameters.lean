@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
-import WeilConjectures.RingTheory.PolynomialLocalClosedFiberEquiv
+import Sheaf.RingTheory.PolynomialLocalClosedFiberEquiv
 import Mathlib.Algebra.MvPolynomial.Equiv
 
 /-!

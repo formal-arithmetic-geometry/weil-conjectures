@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
-import WeilConjectures.Algebra.Homology.ConeHorizontalProjectionGenerator
-public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
+public import Sheaf.Algebra.Homology.ConeHorizontalProjection
+import Sheaf.Algebra.Homology.ConeHorizontalProjectionGenerator
+public import Sheaf.Algebra.Homology.ConeHorizontalStepStable
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 
 @[expose] public section

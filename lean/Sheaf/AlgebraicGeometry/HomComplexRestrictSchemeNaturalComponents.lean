@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
+import Sheaf.AlgebraicGeometry.InternalHomRestrictScheme
 import Sheaf.Algebra.Homology.HomComplexProjections
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Adjunction.Additive

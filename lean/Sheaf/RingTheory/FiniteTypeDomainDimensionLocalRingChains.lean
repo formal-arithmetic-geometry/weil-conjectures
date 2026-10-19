@@ -6,7 +6,7 @@ public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
-import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-! Common maximal-chain length part of the finite type domain dimension theorem.
 

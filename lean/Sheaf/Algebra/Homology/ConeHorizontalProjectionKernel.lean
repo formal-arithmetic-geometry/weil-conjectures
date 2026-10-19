@@ -5,8 +5,8 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
-public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
+public import Sheaf.Algebra.Homology.ConeHorizontalProjection
+public import Sheaf.Algebra.Homology.ConeHorizontalStepStable
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 
 /-! # Kernel of the signed horizontal column projection

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.LinearAlgebra.IdempotentCharpolyMulComplement
+public import WeilConjectures.LinearAlgebra.IdempotentCharpoly

@@ -14,13 +14,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestriction
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
 

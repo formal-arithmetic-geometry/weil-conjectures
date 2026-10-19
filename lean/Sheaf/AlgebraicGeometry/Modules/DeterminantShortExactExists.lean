@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
+import Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
 import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphism
 import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator

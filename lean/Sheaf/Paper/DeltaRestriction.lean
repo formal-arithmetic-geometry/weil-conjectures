@@ -36,7 +36,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Paper.KFlatRingedToposPullback
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
@@ -52,6 +52,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 

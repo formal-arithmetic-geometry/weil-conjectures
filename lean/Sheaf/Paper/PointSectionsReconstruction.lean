@@ -25,7 +25,7 @@ import Sheaf.Paper.PointSectionsDerivedReduction
 import Sheaf.Paper.PointSectionsFiniteness
 import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 import Sheaf.Paper.SfIntegralConstructible
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-!

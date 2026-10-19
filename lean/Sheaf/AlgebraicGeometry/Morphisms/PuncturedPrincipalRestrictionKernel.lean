@@ -6,10 +6,10 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
 import Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningLocalDivision
-import WeilConjectures.AlgebraicGeometry.PrincipalSectionStableAnnihilator
+import Sheaf.AlgebraicGeometry.PrincipalSectionStableAnnihilator
 
 /-! # Eventual vanishing of scalar restriction kernels on principal punctures
 

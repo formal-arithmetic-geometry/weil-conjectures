@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 

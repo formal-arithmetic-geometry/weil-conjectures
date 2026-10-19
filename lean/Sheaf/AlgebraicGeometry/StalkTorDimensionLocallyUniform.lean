@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
+public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffineSectionsFiniteTorOfStalkwise
 import Sheaf.AlgebraicGeometry.AffineSectionsTorBoundStalk

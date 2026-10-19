@@ -17,7 +17,7 @@ import Sheaf.FieldTheory.UniqueSubfieldOfClosure
 import Sheaf.RingTheory.PolynomialDistinctLinearCRT
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
+import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
 import Mathlib.Algebra.DualNumber
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth

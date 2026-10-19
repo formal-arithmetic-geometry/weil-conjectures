@@ -9,7 +9,7 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield
-import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.CategoryTheory.Sites.Torsor
 

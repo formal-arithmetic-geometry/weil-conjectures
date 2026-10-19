@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
 import Sheaf.AlgebraicGeometry.OrderedCechModuleRestrictionMap
 import Sheaf.AlgebraicGeometry.OrderedCechModuleSignedSection
-import WeilConjectures.AlgebraicGeometry.SignedCechExtension
+import Sheaf.AlgebraicGeometry.SignedCechExtension
 
 /-! # Split ordered restriction for module sheaves
 

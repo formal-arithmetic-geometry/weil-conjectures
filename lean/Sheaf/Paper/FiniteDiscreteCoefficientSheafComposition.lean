@@ -3,7 +3,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group B3 -/
 module
 public import Sheaf.Paper.FiniteDiscreteCoefficientPullbackIso
-import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
+import Sheaf.CategoryTheory.AdjunctionSquareComposition
 import Sheaf.Paper.FiniteDiscreteCoefficientRestrictionCoherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 

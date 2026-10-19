@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.AlgebraicGeometry.Curve.PowerMapPullback
+import Sheaf.AlgebraicGeometry.Curve.PowerMapPullback
 
 /-!
 # Primitive-root trivializations commute with field extension

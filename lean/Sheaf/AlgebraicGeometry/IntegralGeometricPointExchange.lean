@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.IntegralGeometricFibreSections
-import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
+import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.RingTheory.PopescuLiftInduction
-import WeilConjectures.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.StrictlyStandardBaseChange
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.RingHom.Smooth
 

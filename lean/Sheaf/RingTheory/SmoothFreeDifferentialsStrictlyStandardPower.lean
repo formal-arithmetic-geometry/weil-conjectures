@@ -7,11 +7,11 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
-public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.StrictlyStandardElement
 import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
-import WeilConjectures.RingTheory.PresentationLocalizedConormalSplit
+import Sheaf.RingTheory.PresentationLocalizedConormalSplit
 import Sheaf.RingTheory.SmoothStableConormalBasis
-import WeilConjectures.RingTheory.LocalizedConormalBasisJacobian
+import Sheaf.RingTheory.LocalizedConormalBasisJacobian
 
 /-!
 # Powers of an element with smooth free localization are strictly standard

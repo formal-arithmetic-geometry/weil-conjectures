@@ -6,8 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-public import WeilConjectures.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
-public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+public import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
+public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-! # Augmentation normalization for additive étale Čech coordinates

@@ -5,11 +5,11 @@ Authors: SHEAF group E2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.Curve.CanonicalAdditiveCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport
+import Sheaf.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport
 
 /-! # Untensored comparison of additive etale and Zariski pullback -/
 

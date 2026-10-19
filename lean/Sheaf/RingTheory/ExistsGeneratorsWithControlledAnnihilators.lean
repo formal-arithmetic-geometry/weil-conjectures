@@ -9,9 +9,9 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.Algebra.Module.LocalizedModule.Submodule
 import Mathlib.Data.Fintype.EquivFin
-import WeilConjectures.AlgebraicGeometry.Ogoma
+import Sheaf.AlgebraicGeometry.Ogoma
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import WeilConjectures.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.RegularSequencePowers
 
 /-!
 # Generators of a regular prime with controlled annihilators

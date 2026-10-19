@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Sheaf.TraceFormula.GenericCMLocusField

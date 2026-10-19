@@ -6,9 +6,9 @@ Authors: SHEAF group Q1
 module
 
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
+public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal
-import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict
 
 /-! # Local extension of one map between bounded finite free complexes
 

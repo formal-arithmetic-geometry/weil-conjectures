@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.Algebra.ChangeIdealCompletion
-import WeilConjectures.RingTheory.CompletionLocalizedAlgebraFiniteQuotients
+import Sheaf.RingTheory.CompletionLocalizedAlgebraFiniteQuotients
 
 /-!
 # Interpolation in the completion of a localized finite algebra

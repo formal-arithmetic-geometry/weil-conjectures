@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent

@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated

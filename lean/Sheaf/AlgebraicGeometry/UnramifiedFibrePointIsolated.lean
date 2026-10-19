@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.UnramifiedFibrePointIsolated
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion

@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 
 /-! # Base change preserves flat finitely presented modules with proper support

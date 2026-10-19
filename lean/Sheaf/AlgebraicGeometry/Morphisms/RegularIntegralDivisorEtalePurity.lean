@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularIntegralDivisorBoundary
+import Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorBoundary
 import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoEtaleExtension
 
 /-!

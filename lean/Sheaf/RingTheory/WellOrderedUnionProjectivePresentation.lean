@@ -4,7 +4,7 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.RingTheory.WellOrderedPresentationKernelFiltration
+import Sheaf.RingTheory.WellOrderedPresentationKernelFiltration
 import Sheaf.RingTheory.ProjectiveResolutionAugmentationKernel
 
 /-! Projective presentations for the successor well-ordered filtration argument. -/

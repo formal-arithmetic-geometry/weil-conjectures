@@ -24,7 +24,7 @@ import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.NumberTheory.DvrGaloisDegreeData
 import Sheaf.FieldTheory.FiniteDVRTameInertia
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
-import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.DeligneLaumon.TraitLogSmoothUniformizerChart
 

@@ -19,7 +19,7 @@ import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.OpenClosed.Supported
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
-import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
 
 /-! # The higher-degree projection support calculation

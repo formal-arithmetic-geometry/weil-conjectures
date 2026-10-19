@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.Linear
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Sheaf.RingTheory.KoszulTensorConeCoordinates
 import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import WeilConjectures.Algebra.Homology.ChainConeCoordinatesIso
+import Sheaf.Algebra.Homology.ChainConeCoordinatesIso
 
 /-! # A Koszul coordinate as a scalar mapping cone
 

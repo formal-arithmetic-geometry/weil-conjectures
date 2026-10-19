@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.RingTheory.GRing
-import WeilConjectures.RingTheory.AdicCompletionRingEquiv
+import Sheaf.RingTheory.AdicCompletionRingEquiv
 import Sheaf.RingTheory.RegularRingEquiv
 
 /-!

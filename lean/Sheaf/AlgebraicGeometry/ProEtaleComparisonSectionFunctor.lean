@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionDescent
 
 /-! # The section-valued comparison sheaf functor

@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.LimitPullbackSectionsColimit
-import WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
+import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
 import Mathlib.Data.Finset.Order
 
 /-!

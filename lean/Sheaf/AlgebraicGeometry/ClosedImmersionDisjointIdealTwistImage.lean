@@ -8,7 +8,7 @@ public import Mathlib.CategoryTheory.Abelian.Images
 public import Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage
 import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits

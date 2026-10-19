@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
 /-!

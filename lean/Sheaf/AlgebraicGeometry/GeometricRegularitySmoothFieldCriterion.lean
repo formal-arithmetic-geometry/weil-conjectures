@@ -20,7 +20,7 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
-import WeilConjectures.RingTheory.SmoothAtPrimeFieldExtensionDescent
+import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent
 
 /-!
 # Geometric regularity and smoothness over a field

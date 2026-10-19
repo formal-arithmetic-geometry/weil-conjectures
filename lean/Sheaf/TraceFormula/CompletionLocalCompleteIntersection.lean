@@ -6,7 +6,7 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.RingTheory.CompleteIntersectionOverField
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
@@ -18,9 +18,9 @@ import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.RingTheory.DepthQuotientNonzerodivisor
+import Sheaf.RingTheory.DepthQuotientNonzerodivisor
 import Sheaf.RingTheory.ExistsCoefficientSubring
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete

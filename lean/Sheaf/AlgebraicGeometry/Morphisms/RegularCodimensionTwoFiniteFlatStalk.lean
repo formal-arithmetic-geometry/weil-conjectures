@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel

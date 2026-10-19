@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.MvPolynomial.Rename
 import Sheaf.RingTheory.FibreDimensionNeighborhood
 import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound
-import WeilConjectures.RingTheory.EquationCountLocalizePresentation
+import Sheaf.RingTheory.EquationCountLocalizePresentation
 import Mathlib.RingTheory.Extension.Presentation.Basic
 
 /-!

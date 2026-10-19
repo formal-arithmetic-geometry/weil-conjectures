@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
@@ -18,7 +18,6 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Rank support of scalar Koszul Ext
 

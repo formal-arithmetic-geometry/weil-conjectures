@@ -11,8 +11,8 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.MvPolynomial.Localization
 import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import WeilConjectures.RingTheory.RegularSequencePowers
-import WeilConjectures.AlgebraicGeometry.Ogoma
+import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.AlgebraicGeometry.Ogoma
 
 /-!
 # Rescaling polynomial coefficients to stabilize multiplication kernels

@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeEtaleModuleStalk
+public import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.RingTheory.Finiteness.Defs

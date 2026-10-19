@@ -17,7 +17,7 @@ import all Mathlib.RingTheory.OreLocalization.Basic
 import all Mathlib.Algebra.MonoidAlgebra.Defs
 
 import Sheaf.RingTheory.FormalFiberDegreePDerivation
-import WeilConjectures.RingTheory.FormalFiberDegreePQuotient
+import Sheaf.RingTheory.FormalFiberDegreePQuotient
 
 /-!
 # Degree-p presentations of extended generic formal fibres

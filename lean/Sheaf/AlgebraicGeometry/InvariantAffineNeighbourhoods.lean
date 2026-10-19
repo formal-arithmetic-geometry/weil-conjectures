@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.DescentOrbitSaturated
-import WeilConjectures.AlgebraicGeometry.TransportLeftNaturality
+import Sheaf.AlgebraicGeometry.DescentOrbitSaturated
+import Sheaf.AlgebraicGeometry.TransportLeftNaturality
 import Sheaf.AlgebraicGeometry.DescentNormAffineShrinking
 
 /-!

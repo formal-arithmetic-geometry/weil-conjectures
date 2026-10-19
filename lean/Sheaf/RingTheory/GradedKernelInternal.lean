@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Mathlib.RingTheory.Finiteness.Basic
-import WeilConjectures.RingTheory.FiniteHomogeneousGenerators
+import Sheaf.RingTheory.FiniteHomogeneousGenerators
 import Sheaf.RingTheory.GradedKernelFinite
 
 /-!

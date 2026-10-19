@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.Algebra.Module.Torsion.Free
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkDomain
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkMapInjective
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkMapInjective
 @[expose] public section
 universe u
 open CategoryTheory

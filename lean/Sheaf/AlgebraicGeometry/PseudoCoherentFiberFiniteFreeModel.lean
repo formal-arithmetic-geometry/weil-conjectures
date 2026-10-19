@@ -14,7 +14,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.AlgebraicGeometry.PseudoCoherentFiberBoundedAboveModel
-import WeilConjectures.AlgebraicGeometry.BoundedFiniteFreeFiberModel
+import Sheaf.AlgebraicGeometry.BoundedFiniteFreeFiberModel
 
 /-! # Finite free models for one degree of derived fibres
 

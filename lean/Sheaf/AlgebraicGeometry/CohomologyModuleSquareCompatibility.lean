@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.CohomologyModuleSquareCompatibility
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

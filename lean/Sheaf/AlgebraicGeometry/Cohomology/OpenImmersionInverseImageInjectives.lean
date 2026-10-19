@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives
 /-! # Open inverse image preserves injectives
 

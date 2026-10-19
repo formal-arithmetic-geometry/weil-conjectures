@@ -5,7 +5,7 @@ Authors: SHEAF group K2
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.MixedTotalTensor
+public import Sheaf.Algebra.Homology.MixedTotalTensor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat

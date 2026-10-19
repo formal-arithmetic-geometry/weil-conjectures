@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.Paper.RingedProjectionRestriction
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

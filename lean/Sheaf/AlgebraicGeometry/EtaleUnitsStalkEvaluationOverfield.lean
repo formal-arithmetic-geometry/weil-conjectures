@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijective
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijective
 
 /-!
 # Evaluation of geometric units germs in a separable closure

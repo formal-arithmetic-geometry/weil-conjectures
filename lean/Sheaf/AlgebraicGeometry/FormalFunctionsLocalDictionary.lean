@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The geometric dictionary for stalkwise formal functions

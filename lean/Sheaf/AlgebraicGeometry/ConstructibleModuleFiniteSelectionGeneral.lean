@@ -5,7 +5,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSupportGeneral
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
-import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
+import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 
 /-! # Finite selection over a Noetherian coefficient ring

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedInjectiveRestrictionKernel
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveRestrictionKernel
 import Sheaf.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
 
 /-! # Restricting an injective module to the puncture

@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AmpleFinitePowerCover
+public import WeilConjectures.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus

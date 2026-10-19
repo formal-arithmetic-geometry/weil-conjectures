@@ -33,7 +33,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!

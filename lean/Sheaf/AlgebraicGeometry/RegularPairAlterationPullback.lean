@@ -22,7 +22,7 @@ import Sheaf.RingTheory.RegularLocalMaximal
 import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Flat.Localization

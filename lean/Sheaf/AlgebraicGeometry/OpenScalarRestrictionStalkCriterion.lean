@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.RingTheory.Flat.Basic
@@ -16,7 +16,7 @@ import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Stalk criterion for scalar restriction on an open site
 

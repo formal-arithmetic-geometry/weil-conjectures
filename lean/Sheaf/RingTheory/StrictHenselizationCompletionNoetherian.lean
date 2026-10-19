@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import WeilConjectures.RingTheory.AdicCompletionNoetherianOfQuotient
+import Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient
 import Sheaf.RingTheory.StrictHenselizationCompletionFlat
 import Sheaf.RingTheory.StrictHenselizationLocalMaximalIdeal
 import Mathlib.RingTheory.AdicCompletion.LocalRing

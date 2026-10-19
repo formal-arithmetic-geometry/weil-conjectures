@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
-import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
+import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
 import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 

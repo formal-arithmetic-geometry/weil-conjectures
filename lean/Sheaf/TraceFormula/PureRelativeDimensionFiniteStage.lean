@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.AlgebraicGeometry.PureDimension
-import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.AlgebraicGeometry.LimitFibreDimensionBound
 import Sheaf.AlgebraicGeometry.RetrocompactBoundedFibreDimension

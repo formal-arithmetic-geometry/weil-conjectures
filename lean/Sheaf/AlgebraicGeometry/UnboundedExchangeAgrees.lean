@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

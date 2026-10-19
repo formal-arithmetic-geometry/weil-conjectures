@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Regular.Flat
-import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
-import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!

@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite

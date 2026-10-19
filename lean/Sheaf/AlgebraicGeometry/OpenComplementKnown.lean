@@ -28,6 +28,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.RingTheory.Etale.LocalDimension
 import Sheaf.AlgebraicGeometry.Dimension
@@ -36,9 +37,9 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 
 /-!
 # Open-complement bounds over an algebraic closure of a finite field

@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.AlgebraicGeometry.AffineFreeMapZeroLocus
-import WeilConjectures.AlgebraicGeometry.FreeKernelMaximalRankCriterion
+import Sheaf.AlgebraicGeometry.AffineFreeMapZeroLocus
+import Sheaf.AlgebraicGeometry.FreeKernelMaximalRankCriterion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.AlgebraicGeometry.Limits
 

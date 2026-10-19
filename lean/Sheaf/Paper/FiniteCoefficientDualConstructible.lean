@@ -24,7 +24,7 @@ import Sheaf.Algebra.Homology.BoundedAboveRHomHyperExt
 import Sheaf.Paper.SfAffineChartFactorizationGluing
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Sheaf.Paper.StratumAmbientHom

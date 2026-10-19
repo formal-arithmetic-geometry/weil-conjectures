@@ -6,7 +6,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 import Sheaf.AlgebraicGeometry.ReducedFlatAffinePreparation
 import Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre
-import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
+import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 @[expose] public section

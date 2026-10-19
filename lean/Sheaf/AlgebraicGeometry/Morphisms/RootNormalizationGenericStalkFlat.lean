@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
+import Sheaf.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkTorsionFree
 import Mathlib.RingTheory.Flat.TorsionFree
 

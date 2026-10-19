@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 

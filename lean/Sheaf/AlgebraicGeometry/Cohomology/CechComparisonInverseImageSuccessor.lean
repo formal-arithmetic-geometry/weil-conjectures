@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 
 /-! # Successor step for inverse-image Čech comparison
 

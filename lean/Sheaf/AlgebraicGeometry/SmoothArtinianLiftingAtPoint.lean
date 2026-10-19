@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Length
-import WeilConjectures.AlgebraicGeometry.SmoothAtPrimeArtinianLifting
+import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLifting
 
 /-!
 # Artinian lifting criterion for smoothness at a point

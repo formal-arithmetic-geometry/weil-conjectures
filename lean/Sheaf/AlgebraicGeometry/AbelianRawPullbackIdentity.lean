@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageCoreComp
+import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImageCoreComp
 
 /-! # Identity of varying-coefficient raw pullback
 

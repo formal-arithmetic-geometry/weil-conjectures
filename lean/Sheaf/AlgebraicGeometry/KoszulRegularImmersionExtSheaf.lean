@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
@@ -18,7 +18,6 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNegative
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Cohomology sheaves of a Koszul-regular immersion
 

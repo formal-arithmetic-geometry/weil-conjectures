@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.KrullDimension.Zero
-import WeilConjectures.RingTheory.HenselianOfNilMaximalIdeal
+import Sheaf.RingTheory.HenselianOfNilMaximalIdeal
 
 /-!
 # Local rings of dimension zero are henselian

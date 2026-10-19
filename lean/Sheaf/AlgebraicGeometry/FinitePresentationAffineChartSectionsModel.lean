@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison
-import WeilConjectures.Algebra.Homology.FinitePresentationPreorderColimitModel
+import Sheaf.Algebra.Homology.FinitePresentationPreorderColimitModel
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 

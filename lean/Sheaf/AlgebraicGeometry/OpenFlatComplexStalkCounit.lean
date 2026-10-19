@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import all Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import all Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison

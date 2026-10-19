@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.DerivedCompleteModuleComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.RingTheory.DerivedCompleteProductsTriangles
 import Mathlib.RingTheory.Nilpotent.Basic
 

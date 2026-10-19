@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 

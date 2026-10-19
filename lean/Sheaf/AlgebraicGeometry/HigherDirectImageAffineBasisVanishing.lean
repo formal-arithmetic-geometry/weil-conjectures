@@ -5,14 +5,14 @@ Authors: SHEAF group U2
 -/
 module
 
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Paper.HigherDirectImagePresheaf
-import WeilConjectures.Topology.RestrictInjectiveResolution
+import Sheaf.Topology.RestrictInjectiveResolution
 
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 

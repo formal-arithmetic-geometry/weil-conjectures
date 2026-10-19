@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CartesianChartRawTransport
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageChartSystem
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
 
 /-! # Canonical pullback of chart classes
 

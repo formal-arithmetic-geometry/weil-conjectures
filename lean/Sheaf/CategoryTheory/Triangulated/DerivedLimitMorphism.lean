@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Morphisms between specified derived limits

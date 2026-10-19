@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.PullbackConstantModule
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap

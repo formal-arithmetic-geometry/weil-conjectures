@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeResolutionExact
-public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
+public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
 
 @[expose] public noncomputable section
 

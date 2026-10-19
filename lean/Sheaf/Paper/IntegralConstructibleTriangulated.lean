@@ -16,7 +16,7 @@ import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
 import Sheaf.Paper.DerivedComplete
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.Functor
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.KrullDimension.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.TraitEtaleExtension
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 
 /-!
 # FiniteNormalTraitPurity

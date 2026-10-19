@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ModuleHomComplex
+public import Sheaf.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy
 public import Mathlib.Data.Int.Interval
 public import Mathlib.Algebra.Category.ModuleCat.Colimits

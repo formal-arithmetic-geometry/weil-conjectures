@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
-import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
+import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
+import all Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of varying-coefficient raw pullbacks
 

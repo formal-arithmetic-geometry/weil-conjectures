@@ -11,10 +11,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import
+  WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution

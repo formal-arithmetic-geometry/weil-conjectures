@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeExtension
-import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestriction
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestriction
 
 @[expose] public section
 universe u

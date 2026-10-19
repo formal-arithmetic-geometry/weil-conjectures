@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.OpenScalarRestrictionStalkCriterion

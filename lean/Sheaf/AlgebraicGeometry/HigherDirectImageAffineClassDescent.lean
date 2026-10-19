@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi
 import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing

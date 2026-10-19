@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants
 import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
-import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import Mathlib.FieldTheory.Galois.Profinite
 
 /-!

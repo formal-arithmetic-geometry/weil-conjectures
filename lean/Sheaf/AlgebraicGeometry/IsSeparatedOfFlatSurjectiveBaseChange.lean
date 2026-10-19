@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact

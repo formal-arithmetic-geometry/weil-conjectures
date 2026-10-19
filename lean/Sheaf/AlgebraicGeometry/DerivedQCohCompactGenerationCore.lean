@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures
 
 /-! # The pointed etale limit presentation of a punctured root chart
 

@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
-import WeilConjectures.Topology.DimensionSupremumLocalDimensions
-import WeilConjectures.RingTheory.FibreDimensionLocalizedBound
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import Sheaf.RingTheory.FibreDimensionLocalizedBound
 
 /-!
 # A principal neighbourhood bounding all fibre dimensions

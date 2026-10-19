@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence
-import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
 
 /-!
 # The fibre of a pushed-out Zariski extension

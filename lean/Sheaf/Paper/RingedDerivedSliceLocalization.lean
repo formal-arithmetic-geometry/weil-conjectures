@@ -18,8 +18,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.CategoryTheory.RingedToposMorphism
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Paper.ProjectionMateExact
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleCoproductRepresentation
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver

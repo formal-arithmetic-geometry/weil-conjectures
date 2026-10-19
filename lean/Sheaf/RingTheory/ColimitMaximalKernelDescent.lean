@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import WeilConjectures.RingTheory.FiniteTensorKernelGenerators
+import Sheaf.RingTheory.FiniteTensorKernelGenerators
 import Sheaf.RingTheory.FiniteIdealKernelDescent
 
 /-!

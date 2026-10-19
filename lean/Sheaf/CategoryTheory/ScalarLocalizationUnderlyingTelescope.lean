@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

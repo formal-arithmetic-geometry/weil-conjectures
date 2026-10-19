@@ -13,11 +13,12 @@ public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ValuationRingNormal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
-import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
+import Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime
 import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
 import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.Localization.BaseChange
+import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
 import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!

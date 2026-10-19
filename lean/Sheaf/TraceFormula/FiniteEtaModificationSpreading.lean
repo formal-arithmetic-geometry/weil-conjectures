@@ -24,7 +24,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.RingTheory.FiniteStability
 import Sheaf.RingTheory.ColimitCategoryFpAlgebras
-import WeilConjectures.RingTheory.FiniteMapColimitDescent
+import Sheaf.RingTheory.FiniteMapColimitDescent
 import Sheaf.RingTheory.ColimitFlatRingMap
 import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 import Sheaf.AlgebraicGeometry.GeometricallyReducedFibreLocus

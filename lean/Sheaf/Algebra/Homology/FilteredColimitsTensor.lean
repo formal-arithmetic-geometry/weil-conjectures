@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumTransportDiagonal
+public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum

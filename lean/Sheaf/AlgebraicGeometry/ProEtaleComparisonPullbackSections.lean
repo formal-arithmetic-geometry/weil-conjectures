@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction
-import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalRestriction
+import Sheaf.AlgebraicGeometry.EtaleSetTerminalRestriction
 
 /-!
 # Sections of the etale-to-pro-etale inverse image

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.CoherentSheafHom
+import Sheaf.AlgebraicGeometry.CoherentSheafHom
 import Sheaf.AlgebraicGeometry.CompletionInternalHom
 import Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage

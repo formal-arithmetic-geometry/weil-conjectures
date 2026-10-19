@@ -5,11 +5,11 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # An intermediate step in continuity of étale sections

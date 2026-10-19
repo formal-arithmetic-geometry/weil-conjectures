@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion

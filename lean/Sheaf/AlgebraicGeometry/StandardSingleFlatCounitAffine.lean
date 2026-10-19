@@ -18,7 +18,7 @@ import WeilConjectures.Topology.Sheaves.CechFlasque
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Affine case of flat counit presentations
 

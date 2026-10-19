@@ -5,7 +5,7 @@ Authors: SHEAF group E4
 -/
 module
 public import Sheaf.Paper.ModuleCupNaiveMap
-import WeilConjectures.Algebra.Category.ModuleCat.CocontinuousGenerator
+import Sheaf.Algebra.Category.ModuleCat.CocontinuousGenerator
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 /-! # Tensor-counit normalization of the global pullback

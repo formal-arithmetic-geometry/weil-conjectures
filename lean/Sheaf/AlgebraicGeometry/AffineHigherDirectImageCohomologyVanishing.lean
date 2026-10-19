@@ -11,7 +11,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # The vanishing columns of Leray over an affine scheme

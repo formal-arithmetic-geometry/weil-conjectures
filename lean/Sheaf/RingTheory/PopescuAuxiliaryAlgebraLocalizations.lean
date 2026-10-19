@@ -9,8 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.Algebra
-import WeilConjectures.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart1
-import WeilConjectures.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart2
+import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart1
+import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart2
 
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization

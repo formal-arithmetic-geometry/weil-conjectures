@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.Paper.SmoothSectionEtaleLift
-import WeilConjectures.RingTheory.HenselizationStageMap
+import Sheaf.RingTheory.HenselizationStageMap
 
 /-!
 # Lifting maps from smooth algebras across henselian pairs

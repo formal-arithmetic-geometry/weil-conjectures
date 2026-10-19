@@ -6,11 +6,11 @@ Authors: SHEAF group NO
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
-import WeilConjectures.Algebra.Homology.FlatCoverFunctor
+import Sheaf.Algebra.Homology.FlatCoverFunctor
 import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 

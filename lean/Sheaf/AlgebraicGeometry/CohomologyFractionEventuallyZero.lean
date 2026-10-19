@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 import Mathlib.Algebra.Colimit.Module
 import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower
 

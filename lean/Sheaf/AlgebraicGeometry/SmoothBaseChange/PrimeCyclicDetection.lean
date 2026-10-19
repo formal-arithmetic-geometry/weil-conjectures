@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.GeometricPointModuleConstant
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.GeometricPointModuleConstant
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 

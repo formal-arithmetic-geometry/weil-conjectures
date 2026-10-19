@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 

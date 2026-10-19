@@ -35,7 +35,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 import Mathlib.RingTheory.Localization.Integral
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import WeilConjectures.RingTheory.PowerSeriesNormalDomain
+import Sheaf.RingTheory.PowerSeriesNormalDomain
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
 import Sheaf.AlgebraicGeometry.FormalPlaneAdjunctionLattice

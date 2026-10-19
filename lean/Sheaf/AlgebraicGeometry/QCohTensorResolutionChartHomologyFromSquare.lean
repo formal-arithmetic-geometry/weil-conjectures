@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologySquare
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartExtendedHomology
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyNaturality
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionExtendedCoordinates
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionPasteHomology
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionPasteHomology
 
 @[expose] public section
 universe u

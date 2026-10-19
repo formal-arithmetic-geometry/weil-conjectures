@@ -5,10 +5,10 @@ Authors: SHEAF group M4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoefficientIntersectionRingData
+public import Sheaf.AlgebraicGeometry.CoefficientIntersectionRingData
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Affine coefficient intersection computation

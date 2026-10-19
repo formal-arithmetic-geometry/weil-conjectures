@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import WeilConjectures.AlgebraicGeometry.ModulePullbackSectionComparison
+import Sheaf.AlgebraicGeometry.ModulePullbackSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
 

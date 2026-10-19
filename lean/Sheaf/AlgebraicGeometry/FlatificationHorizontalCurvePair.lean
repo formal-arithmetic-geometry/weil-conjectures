@@ -33,7 +33,7 @@ import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Scheme
-import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality

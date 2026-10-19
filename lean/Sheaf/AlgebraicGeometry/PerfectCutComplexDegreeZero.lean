@@ -12,7 +12,7 @@ import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.AffinePerfectFibreSurjectivity
 import Sheaf.AlgebraicGeometry.AffinePerfectCutSheafRealization
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Splitting a perfect complex at degree zero near a point
 

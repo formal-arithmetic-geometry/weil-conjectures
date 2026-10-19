@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import WeilConjectures.FieldTheory.PurelyInseparableDegreePIntermediate
 import Sheaf.RingTheory.CompletionRegularLocal
-import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberDegreePPresentation

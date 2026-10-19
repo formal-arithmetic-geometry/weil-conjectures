@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.Paper.FiniteStructureProperSupport
 import Sheaf.Paper.FiniteStructureSupportedUnitKernel
 

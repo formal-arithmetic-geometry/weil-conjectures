@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExists

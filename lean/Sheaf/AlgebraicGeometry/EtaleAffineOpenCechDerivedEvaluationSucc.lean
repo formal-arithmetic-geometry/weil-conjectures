@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.CategoryTheory.SpectralSequenceNatRowZero
-import WeilConjectures.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
+import Sheaf.CategoryTheory.SpectralSequenceNatRowZero
+import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
 import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal
 
 /-! # The positive-degree affine-open Čech edge comparison for étale sheaves

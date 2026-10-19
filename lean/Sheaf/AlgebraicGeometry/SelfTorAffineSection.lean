@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import WeilConjectures.RingTheory.ConormalExteriorModule
+public import Sheaf.RingTheory.ConormalExteriorModule
 
 /-! # Constant affine sections followed by tensor pullback
 

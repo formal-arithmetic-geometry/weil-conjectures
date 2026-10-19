@@ -9,9 +9,9 @@ public import WeilConjectures.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.Paper.FormalGlueingCanonicalMaps
-import WeilConjectures.RingTheory.FormalGlueingComplexExact
+import Sheaf.RingTheory.FormalGlueingComplexExact
 import WeilConjectures.RingTheory.FormalGlueingCanonicalFunctor
-import WeilConjectures.RingTheory.FormalGlueingMorphismLifting
+import Sheaf.RingTheory.FormalGlueingMorphismLifting
 import Sheaf.RingTheory.FormalGlueingEssentialSurjectivity
 
 /-!

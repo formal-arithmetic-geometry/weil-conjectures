@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.Separable
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.GaloisFiniteInvariantClopenPartition
 import Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
-import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!

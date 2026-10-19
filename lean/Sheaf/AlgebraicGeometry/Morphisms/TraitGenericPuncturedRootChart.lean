@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothTraitAffineGenericOpen
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothTraitAffineGenericOpen
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisPuncturedRootChart
 import Sheaf.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient

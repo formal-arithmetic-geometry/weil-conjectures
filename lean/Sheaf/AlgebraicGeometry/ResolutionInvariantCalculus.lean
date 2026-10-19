@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ResolutionInvariantCalculusData
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.TraceFormula.SmoothGeometricallyNormal
-import WeilConjectures.RingTheory.FlatUnderRegular
+import Sheaf.RingTheory.FlatUnderRegular
 import Mathlib.RingTheory.FiniteType
 import Mathlib.Algebra.Module.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.Regular

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import WeilConjectures.AlgebraicGeometry.ProjTwistFiniteCanonicalEval
+import Sheaf.AlgebraicGeometry.ProjTwistFiniteCanonicalEval
 import Sheaf.AlgebraicGeometry.ProjTwistFiniteValues
 
 /-!

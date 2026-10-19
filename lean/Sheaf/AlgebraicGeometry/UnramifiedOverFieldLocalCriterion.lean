@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.RingTheory.Kaehler.Basic
 import Mathlib.RingTheory.Unramified.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
+import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 import WeilConjectures.AlgebraicGeometry.Thickening
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 

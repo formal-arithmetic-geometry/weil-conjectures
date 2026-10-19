@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackAdjunction
+import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackAdjunction
 /-! # Open embeddings and injective sheaf pullback
 
 Source: Stacks Project, Tags 03DI and 03DJ.

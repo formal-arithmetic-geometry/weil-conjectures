@@ -4,11 +4,11 @@ public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
-import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
 import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import WeilConjectures.RingTheory.PolynomialLinearFormalFiberPresentation
+import Sheaf.RingTheory.PolynomialLinearFormalFiberPresentation
 import Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction
 @[expose] public section
 universe u

@@ -6,7 +6,7 @@ Authors: SHEAF group J2
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Uncurried ordinary evaluation component
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.

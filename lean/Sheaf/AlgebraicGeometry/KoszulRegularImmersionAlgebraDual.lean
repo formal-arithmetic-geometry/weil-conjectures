@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDualHomology
 import Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 /-! # Algebra-linear Koszul duality
 
 Source: Stacks Project, Tag 0BQZ, Tag 0AX3 and Tag 0AVW

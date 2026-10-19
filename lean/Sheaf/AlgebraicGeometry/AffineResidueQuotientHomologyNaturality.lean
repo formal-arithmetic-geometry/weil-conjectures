@@ -5,11 +5,10 @@ Authors: SHEAF group H4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
+public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.GroupTheory.QuotientGroup.Basic
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # The natural quotient-to-homology comparison for affine residue complexes
 

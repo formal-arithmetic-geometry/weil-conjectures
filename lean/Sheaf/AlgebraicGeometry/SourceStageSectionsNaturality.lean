@@ -6,9 +6,9 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
-import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
+import Sheaf.AlgebraicGeometry.EtaleObjectSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import WeilConjectures.AlgebraicGeometry.ObjectSectionsNaturality
+import Sheaf.AlgebraicGeometry.ObjectSectionsNaturality
 
 /-! # Restriction of the underived stage sections comparison
 

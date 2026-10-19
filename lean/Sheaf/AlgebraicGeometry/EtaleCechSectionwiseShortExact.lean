@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleCechSectionwiseShortExact
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech

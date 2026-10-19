@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Flat.Localization
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 
 /-!
 # Flat modules localized at a prime of an algebra

@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FinitePiecePersistence
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.ResidueField

@@ -25,7 +25,7 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Free
 import Sheaf.Paper.UnboundedProperOpenInterchange
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Sheaf.Paper.RingedProjectionTensorComposition
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ProperOpenSection
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

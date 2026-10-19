@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.EventuallyProper
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 

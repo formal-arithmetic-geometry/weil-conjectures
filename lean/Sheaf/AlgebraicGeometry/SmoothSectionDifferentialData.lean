@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleLiftProjectiveComplement
+import Sheaf.AlgebraicGeometry.EtaleLiftProjectiveComplement
 import Sheaf.AlgebraicGeometry.SymmetricStabilizationDifferentials
 import Sheaf.RingTheory.SymmetricAlgebraSmooth
 /-! # Free reduced differentials after stabilizing a smooth section

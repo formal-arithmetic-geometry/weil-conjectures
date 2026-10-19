@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplittingPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting

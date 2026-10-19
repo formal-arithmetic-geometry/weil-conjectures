@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleUnitStalkInclusion
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale

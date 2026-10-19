@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.ZariskisMainTheorem
 

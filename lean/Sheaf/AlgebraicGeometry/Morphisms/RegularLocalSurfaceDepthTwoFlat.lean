@@ -9,11 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.KrullDimension.Zero
 import Sheaf.RingTheory.MiracleFlatness
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Flatness of a depth-two finite model over a regular local surface

@@ -6,10 +6,11 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import WeilConjectures.RingTheory.FibrePrimesResidueFields
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.IsolatedPrimeResidueFinite
-import WeilConjectures.RingTheory.QuasiFiniteFourRings
+import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # A transcendental generator prevents quasi-finiteness for domains

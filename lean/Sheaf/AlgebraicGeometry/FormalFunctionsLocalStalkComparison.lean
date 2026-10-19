@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

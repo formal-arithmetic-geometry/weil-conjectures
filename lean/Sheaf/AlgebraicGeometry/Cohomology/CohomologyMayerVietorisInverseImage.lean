@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E2
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.LinearAlgebra.Prod
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation

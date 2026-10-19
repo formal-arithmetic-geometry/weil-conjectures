@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
-import WeilConjectures.AlgebraicGeometry.Curve.GmFiniteModificationOpenIso
+import Sheaf.AlgebraicGeometry.Curve.GmFiniteModificationOpenIso
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 
 /-! # Brauer pullback along finite modifications of reduced curves

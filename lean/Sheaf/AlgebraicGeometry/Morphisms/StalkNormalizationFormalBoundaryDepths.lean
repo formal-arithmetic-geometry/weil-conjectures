@@ -11,12 +11,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import Mathlib.RingTheory.MvPowerSeries.Equiv
-import WeilConjectures.RingTheory.MvPowerSeriesFlat
+import Sheaf.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
 import Sheaf.RingTheory.FlatLocalDepthFormula

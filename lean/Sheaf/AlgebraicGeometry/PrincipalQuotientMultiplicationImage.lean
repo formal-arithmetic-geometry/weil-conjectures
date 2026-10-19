@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.CategoryTheory.Abelian.Images
 
-import WeilConjectures.AlgebraicGeometry.StalkTensorMultiplicationRange
+import Sheaf.AlgebraicGeometry.StalkTensorMultiplicationRange
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # Image of multiplication by a principal closed-subscheme ideal

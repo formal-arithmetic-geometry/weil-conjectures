@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleClopenRestrictionRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Restrict

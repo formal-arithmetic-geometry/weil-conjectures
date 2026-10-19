@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.TensorMapPolynomialPresentation
+public import Mathlib.RingTheory.Extension.Presentation.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps

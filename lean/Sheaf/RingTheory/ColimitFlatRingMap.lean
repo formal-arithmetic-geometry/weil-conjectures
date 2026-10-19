@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.RingTheory.FiniteStability
-import WeilConjectures.RingTheory.FlatFinitePresentationModel
+import Sheaf.RingTheory.FlatFinitePresentationModel
 import Sheaf.RingTheory.FinitePresentationModelStage
 
 /-! # Flatness at a stage of a directed colimit -/

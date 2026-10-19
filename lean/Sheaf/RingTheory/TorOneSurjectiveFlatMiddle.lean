@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.RingTheory.TensorCyclesFlatCokernel
+import Sheaf.RingTheory.TensorCyclesFlatCokernel
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Algebra.Homology.ShortComplex.Linear
 import Mathlib.CategoryTheory.Linear.FunctorCategory

@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

@@ -9,10 +9,10 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.AmpleIso
+import Sheaf.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine
 import Sheaf.AlgebraicGeometry.GlueComponentLineBundles
-import WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower
+import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
 import Sheaf.AlgebraicGeometry.AffineLocusOfCompatibleComponentSections
 
 /-! # An affine section around component intersections

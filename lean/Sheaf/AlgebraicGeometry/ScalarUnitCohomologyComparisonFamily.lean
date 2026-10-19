@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # The explicit module-to-abelian comparison for unit coefficients

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
@@ -18,7 +18,6 @@ import Sheaf.AlgebraicGeometry.KoszulDualConormalRankStratum
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! Per-degree quasi-coherence for the Koszul normal determinant.
 Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0

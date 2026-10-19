@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.CechSheafLocalAugmentationKernel
+import Sheaf.AlgebraicGeometry.CechSheafLocalAugmentationKernel
 import Sheaf.AlgebraicGeometry.CechSheafLocalPositiveExact
 /-! # Local exactness of the augmented module-sheaf Čech complex
 

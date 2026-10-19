@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Naturality of the ordinary balanced tensor comparison

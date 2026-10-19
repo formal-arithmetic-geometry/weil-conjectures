@@ -5,7 +5,7 @@ Authors: SHEAF contributors
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
+public import Sheaf.AlgebraicGeometry.EtaleFieldGeometricAction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.FieldTheory.EtaleFieldGaloisClassification
 

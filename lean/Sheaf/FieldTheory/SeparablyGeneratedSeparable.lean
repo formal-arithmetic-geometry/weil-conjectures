@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
+public import WeilConjectures.FieldTheory.SeparableExtension

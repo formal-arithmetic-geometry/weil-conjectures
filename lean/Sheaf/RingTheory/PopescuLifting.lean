@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.RingTheory.SingularIdeal
+public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.PopescuLiftMaps
 import Sheaf.RingTheory.PopescuLiftSmooth

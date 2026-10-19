@@ -5,7 +5,7 @@ Authors: SHEAF group N4
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Abelian.InjectiveResolutionDerivedComparison
+public import Sheaf.CategoryTheory.Abelian.InjectiveResolutionDerivedComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Sheaf.CategoryTheory.Abelian.RightDerivedInjectiveBoundary
 

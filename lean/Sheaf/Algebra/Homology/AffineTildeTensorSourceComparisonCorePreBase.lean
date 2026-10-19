@@ -14,7 +14,7 @@ import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
 import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
 import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 

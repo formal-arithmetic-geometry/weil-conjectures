@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.AlgebraicGeometry.AffinePerfectSectionsProjectiveModel
-import WeilConjectures.AlgebraicGeometry.AffineProjectiveSectionsSheafification
+import Sheaf.AlgebraicGeometry.AffineProjectiveSectionsSheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Projective
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Module.LocalizedModule.Away
-import WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.AlgebraicGeometry.AffineOpenLocalizedTensorExact
 import Mathlib.Algebra.Category.ModuleCat.Images
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 import all Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws
 import all Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIdentity
-import all WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
+import all Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison
 
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 

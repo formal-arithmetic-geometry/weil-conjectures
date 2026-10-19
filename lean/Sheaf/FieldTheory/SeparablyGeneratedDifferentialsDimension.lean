@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.FieldTheory.SeparablyGeneratedDifferentialsDimension
+public import WeilConjectures.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs

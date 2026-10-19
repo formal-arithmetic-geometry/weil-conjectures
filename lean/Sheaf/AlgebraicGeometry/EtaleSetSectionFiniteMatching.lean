@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionPairMatchingEventually
 import Mathlib.CategoryTheory.Filtered.Final
 

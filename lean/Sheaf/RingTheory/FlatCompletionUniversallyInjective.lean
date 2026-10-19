@@ -14,7 +14,7 @@ public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 import Sheaf.RingTheory.UniversalInjectiveFiniteTest
 import Sheaf.TraceFormula.AssociatedPrimesFibreBound
 import Sheaf.RingTheory.KrullIntersectionLocalization
-import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.Algebra.Module.LocalizedModule.Basic
 

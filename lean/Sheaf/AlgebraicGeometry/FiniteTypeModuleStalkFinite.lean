@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.RingTheory.Finiteness.Basic
-import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
+import Sheaf.AlgebraicGeometry.GeneratingSectionsStalkSpan
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Finite generation of stalks of finite type module sheaves

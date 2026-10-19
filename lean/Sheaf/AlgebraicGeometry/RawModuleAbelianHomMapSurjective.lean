@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
-import WeilConjectures.CategoryTheory.Abelian.DerivedHomComparisonSurjective
+import Sheaf.CategoryTheory.Abelian.DerivedHomComparisonSurjective
 import Sheaf.AlgebraicGeometry.RawModuleFreeSourceHomBijective
 import Sheaf.AlgebraicGeometry.RawModuleFreeSourceAcyclic
 

@@ -5,8 +5,8 @@ Authors: SHEAF contributors
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
-import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricPointsDetect
+public import Sheaf.AlgebraicGeometry.EtaleFieldGeometricAction
+import Sheaf.AlgebraicGeometry.EtaleFieldGeometricPointsDetect
 import Sheaf.AlgebraicGeometry.EtaleFieldPointMapLocal
 import Mathlib.AlgebraicGeometry.Gluing
 

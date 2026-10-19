@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Sheaf.TraceFormula.SpaceLineModuleProjMap
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower
+import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
 import Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison
 import Sheaf.TraceFormula.ProjQcOpenTwistAmple
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion

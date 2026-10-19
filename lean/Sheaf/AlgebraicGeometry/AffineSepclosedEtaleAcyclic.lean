@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
-import WeilConjectures.RingTheory.StrictlyHenselianOfDimensionZero
+import Sheaf.RingTheory.StrictlyHenselianOfDimensionZero
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.Algebra.Category.Ring.FinitePresentation

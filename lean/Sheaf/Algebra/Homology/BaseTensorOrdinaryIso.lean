@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.RingTheory.TensorProduct.Basic
-import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryDegreeIso
+import Sheaf.Algebra.Homology.BaseTensorOrdinaryDegreeIso
 
 /-!
 # Ordinary base tensor associativity

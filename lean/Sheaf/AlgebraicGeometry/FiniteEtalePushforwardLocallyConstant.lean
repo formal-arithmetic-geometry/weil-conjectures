@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues

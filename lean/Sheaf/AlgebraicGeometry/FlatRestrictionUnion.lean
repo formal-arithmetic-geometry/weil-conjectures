@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 

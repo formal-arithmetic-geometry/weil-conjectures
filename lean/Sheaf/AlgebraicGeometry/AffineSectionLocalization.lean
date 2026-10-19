@@ -5,10 +5,10 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
+public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
+import Sheaf.AlgebraicGeometry.InvertibleSectionLocalization
 
 /-!
 # Degree-zero localization of sections on an affine scheme

@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.Basis.SMul
-import WeilConjectures.RingTheory.ZeroVariableConormalStabilization
+import Sheaf.RingTheory.ZeroVariableConormalStabilization
 
 /-! Auxiliary stabilization result for localized conormal bases. -/
 

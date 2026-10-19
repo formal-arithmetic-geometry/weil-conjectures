@@ -14,11 +14,12 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import Sheaf.AlgebraicGeometry.EtaleReducedCartierDescent
-import WeilConjectures.RingTheory.FlatUnderRegular
+import Sheaf.RingTheory.FlatUnderRegular
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import WeilConjectures.Blowup.Complement
 import Sheaf.AlgebraicGeometry.CoordinateBlowupBranchDrop
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.TraceFormula.CoordinateMaximalBranchStratum
 
 /-!

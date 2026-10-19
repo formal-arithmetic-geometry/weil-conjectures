@@ -13,7 +13,7 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.AlgebraicGeometry.SepClosedEtalePointComparison
 import Sheaf.CategoryTheory.ScalarStalkTransport
 import Sheaf.AlgebraicGeometry.FieldModuleSectionsInvariants
-import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 
 /-!
 # Etale modules on a field and discrete Galois modules

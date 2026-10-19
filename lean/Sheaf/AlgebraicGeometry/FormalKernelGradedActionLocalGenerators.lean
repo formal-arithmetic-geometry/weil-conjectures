@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Local degree-zero generators for the kernel action

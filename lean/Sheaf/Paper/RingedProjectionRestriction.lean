@@ -18,7 +18,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions

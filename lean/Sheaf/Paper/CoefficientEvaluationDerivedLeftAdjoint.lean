@@ -20,7 +20,7 @@ public import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.Paper.PbcCompletedPullbackActual
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral

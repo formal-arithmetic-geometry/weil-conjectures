@@ -6,8 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleSmallGeneratorSections
-import WeilConjectures.AlgebraicGeometry.EtaleSmallGeneratorSeparating
+import Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSections
+import Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSeparating
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 

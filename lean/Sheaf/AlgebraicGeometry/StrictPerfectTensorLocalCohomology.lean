@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.FiniteRetractTensorComplexTerms
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 

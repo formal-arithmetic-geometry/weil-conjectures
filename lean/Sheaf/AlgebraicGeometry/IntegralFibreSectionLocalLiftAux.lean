@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility

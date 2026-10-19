@@ -5,8 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
 import Sheaf.AlgebraicGeometry.CofilteredAffineEtaleModel
 import Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison

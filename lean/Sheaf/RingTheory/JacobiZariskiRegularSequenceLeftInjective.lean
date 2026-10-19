@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.Kaehler.JacobiZariski
 import Sheaf.RingTheory.ConormalIntersectionRegularQuotient
-import WeilConjectures.RingTheory.ComposedConormalInjectiveOfIntersection
+import Sheaf.RingTheory.ComposedConormalInjectiveOfIntersection
 
 /-!
 # Left injectivity in Jacobi–Zariski for a regular-sequence presentation

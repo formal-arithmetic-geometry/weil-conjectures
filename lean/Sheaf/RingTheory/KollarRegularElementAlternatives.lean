@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.RingTheory.Regular.IsSMulRegular
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import WeilConjectures.RingTheory.KollarFiniteExtensionFromStableIdeal
+import Sheaf.RingTheory.KollarFiniteExtensionFromStableIdeal
 import Mathlib.RingTheory.KrullDimension.Regular
 
 /-!

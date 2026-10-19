@@ -7,11 +7,11 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
-public import WeilConjectures.Topology.AbelianOpenExtensionByZero
-import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
-import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
+public import Sheaf.Topology.AbelianOpenExtensionByZero
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
 import Sheaf.Topology.ConstantSubsheafLowerLayerGenerator
-import WeilConjectures.Topology.AbelianIntegerOpenInclusion
+import Sheaf.Topology.AbelianIntegerOpenInclusion
 /-! # One layer of the integer subsheaf filtration
 
 Source: Stacks Project, Cohomology, Lemma 0A38, filtration and final paragraphs

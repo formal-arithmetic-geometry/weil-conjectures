@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.Filtration
 import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
 import Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound
 import Sheaf.AlgebraicGeometry.EtalePageMapCoherence
-import WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow
+import Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow
 import Sheaf.AlgebraicGeometry.EtalePresentationImageFiltration
 
 /-! # Coherent categorical filtrations for an etale complex diagram

@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.Galois.Basic
 
 import Mathlib.RingTheory.Etale.Field
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup
+import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup
 
 /-! # Galois field components of a finite torsor
 

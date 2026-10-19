@@ -7,9 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuotient
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuotient
 
 /-!
 # Lifting a punctured finite etale cover from a principal quotient

@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison
+import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
 
 /-! # Comparison of the cocycle Leray edge with the Grothendieck edge
 

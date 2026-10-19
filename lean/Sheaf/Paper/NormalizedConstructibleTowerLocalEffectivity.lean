@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
 import Sheaf.Paper.CompatibleFiniteDerivedTrivializations
 import Mathlib.CategoryTheory.Sites.Point.Basic
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import WeilConjectures.RingTheory.AdicCompletionNoetherianOfQuotient
+import Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.RingTheory.PseudoCoherentNormalizedAlgebraTower
 import Mathlib.RingTheory.Finiteness.Defs

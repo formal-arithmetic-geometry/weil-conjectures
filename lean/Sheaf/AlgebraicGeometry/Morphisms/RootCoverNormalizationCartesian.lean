@@ -15,8 +15,8 @@ public import Mathlib.RingTheory.Localization.FractionRing
 
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationAffineLocalization
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootCoverGenericPullback
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationAffineLocalization
+import Sheaf.AlgebraicGeometry.Morphisms.RootCoverGenericPullback
 
 /-! # Cartesian comparison of the root-cover normalizations -/
 

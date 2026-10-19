@@ -43,6 +43,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
@@ -75,7 +77,7 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
 import WeilConjectures.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant

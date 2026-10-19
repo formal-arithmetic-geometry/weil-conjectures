@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
-import WeilConjectures.RingTheory.TorIdealCycleLift
+import Sheaf.RingTheory.TorIdealCycleLift
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat

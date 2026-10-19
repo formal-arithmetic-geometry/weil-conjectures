@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import WeilConjectures.AlgebraicGeometry.ClosedFibreInteriorComponent
+import Sheaf.AlgebraicGeometry.ClosedFibreInteriorComponent
 import Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization
-import WeilConjectures.AlgebraicGeometry.NowhereDenseClosedFibreDimension
+import Sheaf.AlgebraicGeometry.NowhereDenseClosedFibreDimension
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Empty fibre interior for a flat closed family

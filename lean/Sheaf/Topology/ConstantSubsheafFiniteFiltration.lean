@@ -7,8 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
-public import WeilConjectures.Topology.AbelianOpenExtensionByZero
-import WeilConjectures.Topology.ConstantSubsheafStalkBound
+public import Sheaf.Topology.AbelianOpenExtensionByZero
+import Sheaf.Topology.ConstantSubsheafStalkBound
 import Sheaf.Topology.ConstantSubsheafPeelLayer
 import Mathlib.Data.Fin.Tuple.Basic
 import Mathlib.Algebra.Category.Grp.Zero

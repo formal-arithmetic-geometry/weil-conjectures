@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineModuleTensorHomBijective
 /-! # Canonical affine algebra module adjunction component
 

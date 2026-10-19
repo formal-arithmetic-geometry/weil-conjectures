@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore

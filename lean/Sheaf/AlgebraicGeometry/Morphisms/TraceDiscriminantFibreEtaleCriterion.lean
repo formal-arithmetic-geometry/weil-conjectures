@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Discriminant
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.TraceDiscriminantEvaluationEtaleFibre
+import Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantEvaluationEtaleFibre
 import Sheaf.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
 
 /-!

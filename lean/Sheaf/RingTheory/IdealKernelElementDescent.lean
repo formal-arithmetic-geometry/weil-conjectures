@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
-import WeilConjectures.RingTheory.ColimitFlatRelationDescentElementwise
+import Sheaf.RingTheory.ColimitFlatRelationDescentElementwise
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-!

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.LinearAlgebra.TensorProduct.Basis
-import WeilConjectures.Algebra.Homology.FinitePresentationPreorderColimitModel
+import Sheaf.Algebra.Homology.FinitePresentationPreorderColimitModel
 import Sheaf.Algebra.Homology.FinitePresentationColimitRetraction
 
 /-! # Descent of one finite projective module

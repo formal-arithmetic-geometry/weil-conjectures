@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.GenericFiniteSchemeSplitting
 import Sheaf.AlgebraicGeometry.FiniteSplitCoverLisseImage
-import WeilConjectures.AlgebraicGeometry.LisseEtaleSurjectiveDescent
+import Sheaf.AlgebraicGeometry.LisseEtaleSurjectiveDescent
 
 /-!
 # A generic locus where a finite map preserves lissity

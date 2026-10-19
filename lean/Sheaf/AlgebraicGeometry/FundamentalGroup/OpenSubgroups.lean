@@ -5,7 +5,7 @@ Authors: SHEAF group NO
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GaloisCategories
+public import Sheaf.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.GroupTheory.Index

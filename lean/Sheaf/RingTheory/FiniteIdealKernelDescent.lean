@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
-import WeilConjectures.RingTheory.ColimitFlatRelationDescentElementwise
+import Sheaf.RingTheory.ColimitFlatRelationDescentElementwise
 
 /-!
 # Descent of finite subsets of an ideal multiplication kernel

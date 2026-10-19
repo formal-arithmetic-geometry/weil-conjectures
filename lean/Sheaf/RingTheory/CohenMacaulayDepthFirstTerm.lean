@@ -1,11 +1,11 @@
 module
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Homology.ExactSequence
-import WeilConjectures.RingTheory.DepthInSES
+import Sheaf.RingTheory.DepthInSES
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Regular.Flat

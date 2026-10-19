@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PointedEtaleQuotientFunctor
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
-import WeilConjectures.RingTheory.EtaleAlgebraLift
+import Sheaf.RingTheory.EtaleAlgebraLift
 import Mathlib.RingTheory.RingHom.Etale
 import Sheaf.RingTheory.PointedEtaleQuotientPointBijective
 

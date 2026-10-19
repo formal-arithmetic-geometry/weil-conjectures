@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
-import WeilConjectures.RingTheory.LimitModuleFinitePresentation
+import Sheaf.RingTheory.LimitModuleFinitePresentation
 import Sheaf.RingTheory.IntegerApproximationFlatPointStage
 
 /-!

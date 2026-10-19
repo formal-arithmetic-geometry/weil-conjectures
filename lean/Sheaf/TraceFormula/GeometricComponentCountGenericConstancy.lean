@@ -16,7 +16,7 @@ import Sheaf.TraceFormula.GeometricFibreComponentCountBaseChange
 import Sheaf.TraceFormula.GenericFibreComponentLowerBound
 import Sheaf.AlgebraicGeometry.GenericComponentsSplit
 import Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread
-import WeilConjectures.AlgebraicGeometry.EtaleGenericResidueFieldModel
+import Sheaf.AlgebraicGeometry.EtaleGenericResidueFieldModel
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!

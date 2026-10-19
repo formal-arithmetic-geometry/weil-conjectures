@@ -5,7 +5,7 @@ Authors: SHEAF group NG
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.ModulePullbackTensorIsoE

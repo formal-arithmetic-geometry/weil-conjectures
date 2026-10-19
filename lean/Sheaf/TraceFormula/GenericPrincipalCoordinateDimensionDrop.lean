@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
+import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
 import Sheaf.RingTheory.FinitePrimeTranscendentalCoordinate

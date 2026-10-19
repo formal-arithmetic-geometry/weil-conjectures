@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.LocalRing.Quotient
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

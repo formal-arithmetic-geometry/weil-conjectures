@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
-import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
+import Sheaf.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The counit calculation for tensor-Hom duality and a right adjoint
 

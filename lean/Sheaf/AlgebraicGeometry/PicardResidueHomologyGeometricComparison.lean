@@ -15,13 +15,12 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
+public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonTargets
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Geometric naturality after passing to residue homology
 

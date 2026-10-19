@@ -5,11 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.RingTheory.ZariskisMainAway
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Global affine Zariski main theorem

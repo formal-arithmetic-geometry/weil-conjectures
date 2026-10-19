@@ -6,8 +6,8 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-import WeilConjectures.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacementCore
-import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageLocallySplitSections
+import Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacementCore
+import Sheaf.AlgebraicGeometry.Cohomology.InverseImageLocallySplitSections
 
 /-! # Cover-relative effacement of positive Čech cohomology
 

@@ -6,8 +6,8 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
-public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
+public import Sheaf.AlgebraicGeometry.ChartOrdinaryMapRecovery
+public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization

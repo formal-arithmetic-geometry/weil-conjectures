@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
+import Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
 
 /-! # Descent of a representing etale cover in an affine open system
 

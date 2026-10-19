@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import WeilConjectures.Topology.ModuleObjectOpenDescent
+import Sheaf.Topology.ModuleObjectOpenDescent
 
 /-!
 # Glueing morphisms and sheaves of modules along an open covering

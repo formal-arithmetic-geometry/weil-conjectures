@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc
-import WeilConjectures.Topology.OpenCechZerothHomology
+import Sheaf.Topology.OpenCechZerothHomology
 
 /-! # The affine-open Čech edge comparison for étale sheaves
 

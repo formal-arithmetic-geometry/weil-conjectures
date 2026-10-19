@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
@@ -25,6 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-! # Spreading finite algebras from the generic fibre

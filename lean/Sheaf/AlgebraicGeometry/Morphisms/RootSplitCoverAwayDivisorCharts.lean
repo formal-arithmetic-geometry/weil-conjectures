@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Algebra.Pi
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 
 /-!
 # Degree-one root charts away from the divisor

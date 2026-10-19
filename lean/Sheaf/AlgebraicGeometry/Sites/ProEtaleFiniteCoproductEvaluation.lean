@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections
 
 /-!

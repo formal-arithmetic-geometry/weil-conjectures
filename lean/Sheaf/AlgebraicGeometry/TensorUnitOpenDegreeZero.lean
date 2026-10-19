@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 
 /-! # Restricted tensor units in degree zero
 

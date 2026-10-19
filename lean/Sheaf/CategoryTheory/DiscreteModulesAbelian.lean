@@ -13,7 +13,7 @@ public import Mathlib.Topology.Separation.Hausdorff
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 import Mathlib.Data.Countable.Small
-import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
+import Sheaf.RepresentationTheory.OpenStabilizerAdjunction
 import Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 import Sheaf.RepresentationTheory.DiscreteRep
 

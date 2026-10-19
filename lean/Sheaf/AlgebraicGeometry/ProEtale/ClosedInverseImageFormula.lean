@@ -7,9 +7,9 @@ module
 
 public import Sheaf.Paper.RefinementCoefficientRealization
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
+public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Mathlib.CategoryTheory.Sites.Sheafification
-import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
+import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Mathlib.CategoryTheory.Adjunction.Mates

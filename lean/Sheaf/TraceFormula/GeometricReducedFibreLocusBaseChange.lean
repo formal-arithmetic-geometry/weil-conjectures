@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Properties
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 
 /-!

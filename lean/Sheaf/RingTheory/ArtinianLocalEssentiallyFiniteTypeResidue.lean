@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs

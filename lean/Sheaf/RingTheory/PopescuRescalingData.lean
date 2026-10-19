@@ -11,7 +11,7 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 import Sheaf.RingTheory.PopescuCoefficientRescaling
-import WeilConjectures.RingTheory.PolynomialParameterQuotientChart
+import Sheaf.RingTheory.PolynomialParameterQuotientChart
 
 /-!
 # Rescaling data before polynomial coefficient base change

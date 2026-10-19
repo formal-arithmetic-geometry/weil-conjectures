@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DescentNormLocusAffine
-import WeilConjectures.AlgebraicGeometry.DescentOrbitSaturated
-import WeilConjectures.AlgebraicGeometry.TransportLeftNaturality
+import Sheaf.AlgebraicGeometry.DescentOrbitSaturated
+import Sheaf.AlgebraicGeometry.TransportLeftNaturality
 
 /-!
 # Norm shrinking around finite saturated sets

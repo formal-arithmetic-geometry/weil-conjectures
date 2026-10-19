@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.AlgebraicGeometry.AffineUniversalTensorExact
 import Sheaf.AlgebraicGeometry.AffineOpcyclesFlatFromSections
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.RingTheory.Flat.CategoryTheory
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import WeilConjectures.AlgebraicGeometry.AffineTensorPullbackHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineTensorPullbackHomologyComparison
 import Mathlib.Algebra.TrivSqZeroExt.Basic
 
 /-! # Square-zero tests detect tensor exactness on an affine scheme

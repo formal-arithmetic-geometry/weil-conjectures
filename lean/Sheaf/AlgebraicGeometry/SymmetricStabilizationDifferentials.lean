@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.RingTheory.Kaehler.Basic
-import WeilConjectures.RingTheory.ReducedTensorDifferentials
-import WeilConjectures.RingTheory.SymmetricAlgebraDifferentials
+import Sheaf.RingTheory.ReducedTensorDifferentials
+import Sheaf.RingTheory.SymmetricAlgebraDifferentials
 
 /-! # Reduced differentials of symmetric-algebra stabilization
 

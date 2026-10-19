@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite
+public import WeilConjectures.SixFunctors.Finite.Stalk

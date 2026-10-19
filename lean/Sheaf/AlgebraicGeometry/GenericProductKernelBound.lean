@@ -13,8 +13,8 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 
-import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceAnnihilator
-import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceDescent
+import Sheaf.AlgebraicGeometry.GenericTensorNilpotenceAnnihilator
+import Sheaf.AlgebraicGeometry.GenericTensorNilpotenceDescent
 
 
 /-! # GenericProductKernelBound

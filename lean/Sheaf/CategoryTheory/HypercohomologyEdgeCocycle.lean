@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
+public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
 
 import Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical
 

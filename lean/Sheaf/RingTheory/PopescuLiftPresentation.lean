@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.RingTheory.SingularIdeal
+public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.CommRing
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Algebra.Equiv
-import WeilConjectures.RingTheory.SmoothAtPrimeFreeConormalBasis
+import Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis
 import Sheaf.RingTheory.PopescuClearConormalChart
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 

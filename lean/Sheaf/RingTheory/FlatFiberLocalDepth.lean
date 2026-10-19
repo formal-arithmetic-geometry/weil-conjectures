@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.FlatLocalDepthFormula
 
 /-!

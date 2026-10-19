@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomTensorDegreewiseEquation
 import Sheaf.Algebra.Homology.HomTensorDegreewiseConstruction
 import Sheaf.Algebra.Homology.HomTensorDegreewiseIso
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-!
 # Degreewise currying for the Hom-total-tensor comparison

@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # Nonnegative perfect charts for an ordinary direct image

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing

@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
-public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Pullback of strict-local representative sections

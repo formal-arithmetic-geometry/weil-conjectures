@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.MapIntoHenselianColimit
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 
 /-! # Lifting compatible residue embeddings through strict henselizations

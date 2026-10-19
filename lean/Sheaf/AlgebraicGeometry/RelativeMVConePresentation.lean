@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.RelativeMVPinnedTriangleComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.EndpointConePresentation
+import Sheaf.CategoryTheory.DerivedCategory.EndpointConePresentation
 
 /-! # A mapping-cone model of the relative Mayer--Vietoris diagram -/
 

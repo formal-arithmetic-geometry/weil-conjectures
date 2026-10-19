@@ -12,7 +12,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Irreducible
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
-import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
+import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
 import Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions

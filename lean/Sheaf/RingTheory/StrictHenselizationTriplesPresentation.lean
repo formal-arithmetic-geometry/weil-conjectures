@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
-import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
+import Sheaf.RingTheory.EtaleResidueTriplesFiltered
 
 /-!
 # Comparing two colimit presentations of strict henselization

@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparison
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparison
 import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 

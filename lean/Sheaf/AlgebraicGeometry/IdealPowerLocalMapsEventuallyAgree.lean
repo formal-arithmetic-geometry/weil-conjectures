@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

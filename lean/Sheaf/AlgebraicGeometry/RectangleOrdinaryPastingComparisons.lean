@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
 import Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricComparisons
-import WeilConjectures.CategoryTheory.EquivalenceRightAdjointCounitTransport
+import Sheaf.CategoryTheory.EquivalenceRightAdjointCounitTransport
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 

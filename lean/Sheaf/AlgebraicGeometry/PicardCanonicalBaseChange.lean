@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCupProductMap
-public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Canonical comparisons for degree-zero Picard base change
 

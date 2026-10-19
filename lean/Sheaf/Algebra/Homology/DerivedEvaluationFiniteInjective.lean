@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
+import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

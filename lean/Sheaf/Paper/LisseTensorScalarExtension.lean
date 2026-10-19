@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
+public import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import WeilConjectures.ConstructibleSheaf.MonoidalParts
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar

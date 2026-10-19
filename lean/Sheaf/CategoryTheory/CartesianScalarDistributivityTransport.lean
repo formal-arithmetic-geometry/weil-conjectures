@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.CategoryTheory.CartesianScalarDistributivityTransport
+public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts

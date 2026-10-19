@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap

@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons
 import all Sheaf.Topology.GlueSheavesOfModules

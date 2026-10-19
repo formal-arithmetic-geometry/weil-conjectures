@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 import WeilConjectures.AlgebraicGeometry.Sites.GmGenericPoint
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

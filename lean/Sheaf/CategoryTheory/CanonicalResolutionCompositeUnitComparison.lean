@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
+public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
 import Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck

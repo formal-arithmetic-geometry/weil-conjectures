@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.Dimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.AlgebraicGeometry.DimZeroFiniteOverField
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 
 /-!
 # Proper zero-dimensional schemes over a field

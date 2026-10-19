@@ -20,10 +20,10 @@ import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.RingTheory.QuotientHenselianPair
+import Sheaf.RingTheory.QuotientHenselianPair
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.AlgebraicGeometry.FieldDiscreteModules
 import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
@@ -35,6 +35,8 @@ import Sheaf.CategoryTheory.EquivalenceDerivedSections
 import Sheaf.RepresentationTheory.DvrGalois
 import Sheaf.RingTheory.FieldAlgebraStrictHenselizationExcellent
 import Sheaf.RingTheory.PuncturedCurveBranches
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Open direct-image dimension on arbitrary curves

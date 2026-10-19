@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreeCompletedQuotientLift
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing
 import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent

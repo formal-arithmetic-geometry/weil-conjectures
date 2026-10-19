@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.EtaleULiftInjective
-import WeilConjectures.AlgebraicGeometry.EtaleULiftHomology
+import Sheaf.AlgebraicGeometry.EtaleULiftHomology
 import Sheaf.CategoryTheory.Sites.CohomologyResolutionEvaluationNatural
 
 /-! # Positive-degree naturality of coefficient universe lift

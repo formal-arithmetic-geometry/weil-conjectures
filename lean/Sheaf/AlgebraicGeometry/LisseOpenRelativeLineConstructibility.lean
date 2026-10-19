@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
+import Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import WeilConjectures.Compactification.NagataCompactification
@@ -29,7 +29,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenExtensionBiproduct
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.Paper.EtaleLisseFiltrationDevissage
 import Sheaf.Paper.ProjectionCompactification
 

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.NonvanishingCommonDegree
+public import WeilConjectures.AlgebraicGeometry.Ample

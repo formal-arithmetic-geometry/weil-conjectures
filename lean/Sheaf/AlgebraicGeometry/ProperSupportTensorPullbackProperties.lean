@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
 import Mathlib.AlgebraicGeometry.PullbackCarrier

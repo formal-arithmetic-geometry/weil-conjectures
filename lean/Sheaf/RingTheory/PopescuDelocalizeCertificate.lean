@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Localization.Algebra
 public import Mathlib.RingTheory.Extension.Presentation.Submersive
 public import Mathlib.Algebra.MvPolynomial.PDeriv
-import WeilConjectures.RingTheory.PopescuDelocalizeDenominators
+import Sheaf.RingTheory.PopescuDelocalizeDenominators
 
 /-!
 # Polynomial certificates for delocalization

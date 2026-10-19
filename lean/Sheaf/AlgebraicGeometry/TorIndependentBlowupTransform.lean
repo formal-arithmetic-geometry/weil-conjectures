@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
 import Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor
 import Sheaf.RingTheory.RegularSequenceGradedPolynomial
-import WeilConjectures.RingTheory.KoszulBaseChangeIso
+import Sheaf.RingTheory.KoszulBaseChangeIso
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
 import WeilConjectures.Algebra.Homology.FreeResolutionSesSplit

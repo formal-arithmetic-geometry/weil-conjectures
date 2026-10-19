@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
-import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
+import Sheaf.RingTheory.RegularQuotientIdealIntersectionAux
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal

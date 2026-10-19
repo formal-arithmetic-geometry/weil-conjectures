@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Sheaf.RingTheory.KoszulTensorConeCoordinates
-import WeilConjectures.RingTheory.KoszulTensorZerothBoundarySaturation
+import Sheaf.RingTheory.KoszulTensorZerothBoundarySaturation
 
 /-!
 # Regular sequences are Koszul-regular

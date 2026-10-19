@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.AdjoinSingletonFiniteCoverCore
-import WeilConjectures.RingTheory.AdicCompletionRingEquiv
+import Sheaf.RingTheory.AdicCompletionRingEquiv
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!

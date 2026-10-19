@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
-import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechExact
+import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
 
 /-!
 # Čech acyclicity of injective module sheaves on a ringed site

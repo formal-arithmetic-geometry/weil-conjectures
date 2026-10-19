@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageDiagram
-import WeilConjectures.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit
+import Sheaf.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit
 
 /-!
 # Normal refinement of an absolute Noetherian approximation

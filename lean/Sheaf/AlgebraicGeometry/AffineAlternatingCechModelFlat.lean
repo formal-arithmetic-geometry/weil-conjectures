@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineAlternatingCechModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.FlatModuleTilde
 import Mathlib.RingTheory.Flat.Stability

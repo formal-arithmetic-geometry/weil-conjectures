@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectLowestMatrixCharts
-import WeilConjectures.AlgebraicGeometry.LocalClosedLocusGluing
+import Sheaf.AlgebraicGeometry.LocalClosedLocusGluing
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

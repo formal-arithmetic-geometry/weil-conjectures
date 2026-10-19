@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose
 import Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposeSingle
 import Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposePasting
-import WeilConjectures.AlgebraicGeometry.PullbackStructureUnitSquare
+import Sheaf.AlgebraicGeometry.PullbackStructureUnitSquare
 
 /-! # Pullback compatibility before evaluation of the canonical unit morphism
 

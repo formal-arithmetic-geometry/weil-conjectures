@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
-import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
+import Sheaf.CategoryTheory.MonoidalProjectionConjugate
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures

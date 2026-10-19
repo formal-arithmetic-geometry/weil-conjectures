@@ -6,11 +6,11 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 import Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement
-import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
+import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor
-import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Čech comparison and the inverse-image unit

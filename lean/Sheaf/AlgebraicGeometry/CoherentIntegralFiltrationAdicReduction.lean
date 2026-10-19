@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
+public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension

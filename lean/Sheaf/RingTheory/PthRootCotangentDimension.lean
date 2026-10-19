@@ -6,10 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.RingTheory.GRing
-public import WeilConjectures.RingTheory.PthRootAlgebraLocal
+public import Sheaf.RingTheory.PthRootAlgebraLocal
 public import Mathlib.RingTheory.Kaehler.Basic
 
-import WeilConjectures.RingTheory.PthRootFieldBaseChange
+import Sheaf.RingTheory.PthRootFieldBaseChange
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Mathlib.RingTheory.TensorProduct.Free
 import Mathlib.LinearAlgebra.Dimension.Constructions

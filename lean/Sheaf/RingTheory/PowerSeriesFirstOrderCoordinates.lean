@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.TrivSqZeroExt.Basic
-import WeilConjectures.RingTheory.PowerSeriesQuadraticIdeal
+import Sheaf.RingTheory.PowerSeriesQuadraticIdeal
 import Mathlib.RingTheory.MvPowerSeries.Derivative
 
 /-!

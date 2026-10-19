@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm
 public import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
+import Sheaf.AlgebraicGeometry.EtaleObjectSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # The underived mate on pointed neighbourhood sections -/

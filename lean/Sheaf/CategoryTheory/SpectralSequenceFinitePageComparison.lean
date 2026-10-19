@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.CategoryTheory.DirectedColimitHomology
+import Sheaf.CategoryTheory.DirectedColimitHomology
 
 /-!
 # Filtered-colimit comparison on finite spectral-sequence pages

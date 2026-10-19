@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.RingTheory.KoszulDualComplex
+public import Sheaf.RingTheory.KoszulDualComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulComplementaryEquivalences
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

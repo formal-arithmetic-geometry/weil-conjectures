@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisExact
 public import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonIso
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
-public import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+public import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor

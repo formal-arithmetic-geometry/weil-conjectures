@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.ExistsCoefficientSubring
-import WeilConjectures.RingTheory.LocalFirstOrderCoordinates
+import Sheaf.RingTheory.LocalFirstOrderCoordinates
 import Sheaf.RingTheory.PowerSeriesFirstOrderCoordinates
 import Mathlib.Algebra.CharP.Algebra
 

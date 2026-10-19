@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.RingTheory.Lasker
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact

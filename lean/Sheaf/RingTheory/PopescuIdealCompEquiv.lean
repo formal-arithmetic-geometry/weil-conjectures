@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.RingTheory.PopescuResolution
-import WeilConjectures.RingTheory.SingularIdealMapEquiv
+import Sheaf.RingTheory.SingularIdealMapEquiv
 
 @[expose] public section
 

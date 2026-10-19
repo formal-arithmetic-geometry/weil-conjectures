@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent

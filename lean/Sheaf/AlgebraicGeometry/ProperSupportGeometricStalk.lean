@@ -6,7 +6,7 @@ Authors: SHEAF group NR
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSectionProperSupport
-public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalkCore
 
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
-import WeilConjectures.LinearAlgebra.MatrixRankFieldExtension
+import Sheaf.LinearAlgebra.MatrixRankFieldExtension
 import Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty
 
 /-! # Local block normal form of a constant rank sheaf map

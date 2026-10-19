@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedEvaluationPullback
-import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
+import Sheaf.AlgebraicGeometry.EtaleObjectSections
 
 /-! # Pullback of the represented identity section
 

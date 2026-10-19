@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.FiniteFieldClosedComponentDescent
-import WeilConjectures.AlgebraicGeometry.ClosedComponentDescentTopology
+import Sheaf.AlgebraicGeometry.ClosedComponentDescentTopology
 
 /-!
 # Finite descent of irreducible components from a separable closure

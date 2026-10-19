@@ -6,11 +6,10 @@ Authors: SHEAF group Q21
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.CategoryTheory.RepleteSheafTopos
+public import Sheaf.CategoryTheory.RepleteSheafTopos
 import Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Sheaf.AlgebraicGeometry.WContractibleAffineCover
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Repleteness of the pro-étale topos

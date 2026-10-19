@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.RingTheory.FlatScalarExtensionTorComparison
-import WeilConjectures.RingTheory.PolynomialInducedPresentation
+import Sheaf.RingTheory.PolynomialInducedPresentation
 import all WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Mathlib.Logic.Equiv.Fin.Rotate

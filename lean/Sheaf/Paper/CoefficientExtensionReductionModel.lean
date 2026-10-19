@@ -16,7 +16,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

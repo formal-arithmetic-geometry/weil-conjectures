@@ -6,10 +6,10 @@ Authors: SHEAF group W4, SHEAF group N4
 module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.RingTheory.Flat.CategoryTheory
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Flat terms of the finite-projective ring dual

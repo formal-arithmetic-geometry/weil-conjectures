@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
-import WeilConjectures.CategoryTheory.RoosFinitePrefixLimits
+import Sheaf.CategoryTheory.RoosFinitePrefixLimits
 import Sheaf.CategoryTheory.RoosPrefixAcyclic
 
 /-!

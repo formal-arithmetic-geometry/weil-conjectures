@@ -4,7 +4,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.Topology.Sheaves.LerayAcyclicComparison
-import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Cohomology and closed immersion pushforward

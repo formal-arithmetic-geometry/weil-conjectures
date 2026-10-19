@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import WeilConjectures.AlgebraicGeometry.ComplexLiftConeProperties
-import WeilConjectures.AlgebraicGeometry.ComplexLiftStrictMap
-import WeilConjectures.AlgebraicGeometry.ComplexLiftConeCokernel
+import Sheaf.AlgebraicGeometry.ComplexLiftConeProperties
+import Sheaf.AlgebraicGeometry.ComplexLiftStrictMap
+import Sheaf.AlgebraicGeometry.ComplexLiftConeCokernel
 
 /-! # Acyclic enlargement with prescribed reduced cokernel
 

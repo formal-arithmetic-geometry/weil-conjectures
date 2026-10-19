@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import all WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySquare
+import all Sheaf.Algebra.Homology.SemilinearScalarExtensionHomologySquare
 
 /-! Ordinary tensor localization and homology.
 

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
 import Sheaf.RingTheory.SerreCriterionNormal
-import WeilConjectures.RingTheory.SerreS2RegularQuotientAssociatedHeight
+import Sheaf.RingTheory.SerreS2RegularQuotientAssociatedHeight
 
 /-!
 # Associated primes of principal quotients of normal domains

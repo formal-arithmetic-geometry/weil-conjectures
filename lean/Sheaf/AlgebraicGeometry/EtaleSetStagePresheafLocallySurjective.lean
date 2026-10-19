@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives

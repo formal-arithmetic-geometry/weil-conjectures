@@ -8,7 +8,7 @@ module
 public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.EssentialFiniteness
-import WeilConjectures.FieldTheory.SmoothFractionFieldLocalizations
+import Sheaf.FieldTheory.SmoothFractionFieldLocalizations
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 

@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
-import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
+import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free

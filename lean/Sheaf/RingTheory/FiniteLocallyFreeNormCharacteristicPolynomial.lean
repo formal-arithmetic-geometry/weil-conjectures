@@ -23,7 +23,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 import Mathlib.LinearAlgebra.Charpoly.BaseChange
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
-import WeilConjectures.RingTheory.CoverModuleExact
+import Sheaf.RingTheory.CoverModuleExact
 
 /-!
 # The norm characteristic polynomial of a finite locally free algebra

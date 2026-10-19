@@ -5,14 +5,14 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
+import Sheaf.RingTheory.MPseudoCoherentVanishingBase
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 import Sheaf.RingTheory.PseudoCoherentIffAllM
-import WeilConjectures.RingTheory.HomologyVanishingLocalizationSpan
+import Sheaf.RingTheory.HomologyVanishingLocalizationSpan
 import Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep
 
 /-!

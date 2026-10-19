@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Fiber
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFiniteFlat
 import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified

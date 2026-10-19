@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.SmoothCurveConnectedCoproduct
-import WeilConjectures.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare
+import Sheaf.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 
 /-! # Reduction of curve comparison to connected curves

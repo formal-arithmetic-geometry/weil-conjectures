@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineFreeBasisGerms
 import Sheaf.AlgebraicGeometry.TildeScalarSectionAction
-import WeilConjectures.AlgebraicGeometry.AffineChartScalarTransport
+import Sheaf.AlgebraicGeometry.AffineChartScalarTransport
 
 /-! # Scalar action on sections after affine sheafification
 

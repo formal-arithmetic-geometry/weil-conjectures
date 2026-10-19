@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.InternalHomOverEquiv
+import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationTensorSummands
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentOverTransport
 

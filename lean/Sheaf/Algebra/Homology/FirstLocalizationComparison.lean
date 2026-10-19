@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Algebra.Homology.FirstLocalizationMap
 import Sheaf.Algebra.Homology.FirstLocalizationOrdinarySquare
-import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
+import Sheaf.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison square for the characterized localization map
 
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8.

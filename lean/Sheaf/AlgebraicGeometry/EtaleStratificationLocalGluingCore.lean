@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Topology.Constructible

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel
-import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
+import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.Algebra.Category.Ring.FinitePresentation
 

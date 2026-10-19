@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 /-!
 # Pushforward along a closed immersion is fully faithful

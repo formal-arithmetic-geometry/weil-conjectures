@@ -51,7 +51,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses

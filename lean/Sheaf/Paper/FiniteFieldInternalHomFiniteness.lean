@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.SixFunctors.FlatModelGeneration
 import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact

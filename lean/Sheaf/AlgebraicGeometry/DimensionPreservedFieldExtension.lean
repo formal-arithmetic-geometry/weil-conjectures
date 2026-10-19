@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
-import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import Sheaf.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Dimension of an affine spectrum under field extension

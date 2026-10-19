@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Unramified.LocalStructure
-import WeilConjectures.RingTheory.QuasiFiniteLocalDimension
-import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import Sheaf.RingTheory.QuasiFiniteLocalDimension
+import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 
 /-!
 # Local dimension under an étale ring map

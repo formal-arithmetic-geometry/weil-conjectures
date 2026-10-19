@@ -9,7 +9,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Topology.LocallyConstant.Basic
 import Sheaf.Topology.InverseImageClosedPushforwardConstant
-import WeilConjectures.Topology.ClosedPushforwardConstantPresheaf
+import Sheaf.Topology.ClosedPushforwardConstantPresheaf
 
 /-!
 # Restricting a constant sheaf pushed forward from a closed subset

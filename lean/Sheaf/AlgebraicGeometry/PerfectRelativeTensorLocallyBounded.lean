@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
+public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings

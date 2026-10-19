@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionChartGenericFactor
-import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRationalPoint
+import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRationalPoint
 
 /-!
 # Cyclic local chart data along a split trait section

@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
-import WeilConjectures.Algebra.Homology.OpenOverInternalHomComparison
+import Sheaf.Algebra.Homology.OpenOverInternalHomComparison
 import Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionComparison
 import Sheaf.Algebra.Homology.OpenOverInternalHomCycleHomologySquares
 

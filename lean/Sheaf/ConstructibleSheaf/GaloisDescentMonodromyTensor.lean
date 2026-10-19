@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 
 import Sheaf.CategoryTheory.Galois.GaloisTransitive
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits

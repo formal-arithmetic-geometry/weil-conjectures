@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.RingTheory.SerreConditions
+public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem

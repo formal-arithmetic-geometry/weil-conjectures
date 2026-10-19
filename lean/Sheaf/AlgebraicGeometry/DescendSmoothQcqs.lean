@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDiagramSmoothStage
+import Sheaf.AlgebraicGeometry.Morphisms.AffineDiagramSmoothStage
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!

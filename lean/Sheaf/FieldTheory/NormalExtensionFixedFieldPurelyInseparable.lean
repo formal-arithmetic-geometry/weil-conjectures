@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.FieldTheory.NormalExtensionFixedFieldPurelyInseparable
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic

@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import Sheaf.RingTheory.Etale.LocalDimension

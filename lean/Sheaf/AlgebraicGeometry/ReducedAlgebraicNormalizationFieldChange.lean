@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
 import WeilConjectures.Mathlib.Topology.Sober
 import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 import Mathlib.AlgebraicGeometry.SpreadingOut
 import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 

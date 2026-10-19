@@ -5,9 +5,9 @@ Authors: SHEAF group N1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.LinearAlgebra.Prod
-import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisGlobalExtComparison
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisGlobalExtComparison
 import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparison
 
 /-! # Geometric Ext presentations for the Mayer--Vietoris comparison

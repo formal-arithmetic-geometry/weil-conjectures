@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
@@ -20,7 +20,6 @@ import Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDual
 import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
 import Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 

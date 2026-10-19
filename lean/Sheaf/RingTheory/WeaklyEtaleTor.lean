@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.RingTheory.WeaklyEtaleTorBoundedResolution
-import WeilConjectures.Algebra.Homology.FlatResolutionTorComparison
+import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import WeilConjectures.Algebra.Homology.DoubleComplexCokernelHomologyIso
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Sheaf.RingTheory.IndEtaleUniverseTransport

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
+public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 

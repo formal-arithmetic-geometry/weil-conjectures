@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra
-import WeilConjectures.RingTheory.FiniteAwayMaximalLocalization
+import Sheaf.RingTheory.FiniteAwayMaximalLocalization
 import Mathlib.Algebra.BigOperators.Fin
 
 /-! # Split polynomial data for a finite localized cover

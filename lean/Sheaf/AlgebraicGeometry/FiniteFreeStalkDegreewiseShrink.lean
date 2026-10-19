@@ -5,10 +5,10 @@ Authors: SHEAF group M2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
+public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteEquations
-import WeilConjectures.AlgebraicGeometry.StalkRestrictionSubopenCompatibility
+import Sheaf.AlgebraicGeometry.StalkRestrictionSubopenCompatibility
 import Mathlib.Data.Int.Interval
 
 /-! # Shrinking differential-commutativity defects

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Unramified.Field
-import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
 
 /-! # Reduced zero-dimensional fibres of filtered etale colimits
 Source: Stacks Project, More on Algebra, Tag 0AH1.

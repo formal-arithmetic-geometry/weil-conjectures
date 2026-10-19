@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-!
 # Acyclicity in a tensored cone sequence

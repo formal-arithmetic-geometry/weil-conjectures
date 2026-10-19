@@ -3,7 +3,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
-import WeilConjectures.AlgebraicGeometry.ModuleValuedInjectiveCohomology
+import Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology
 import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 

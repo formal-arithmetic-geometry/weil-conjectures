@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.GroupTheory.PGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import WeilConjectures.RepresentationTheory.FinitePrimaryDecomposition
+import Sheaf.RepresentationTheory.FinitePrimaryDecomposition
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!

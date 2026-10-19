@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex

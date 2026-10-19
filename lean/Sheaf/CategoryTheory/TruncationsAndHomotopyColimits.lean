@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.CategoryTheory.TruncationTriangle
+public import Sheaf.CategoryTheory.TruncationTriangle
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 public import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful

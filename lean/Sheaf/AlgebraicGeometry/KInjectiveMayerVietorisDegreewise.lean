@@ -6,11 +6,10 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
-import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
 import Sheaf.AlgebraicGeometry.OpenModuleImageGluing
 import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.Algebra.Homology.HomologicalComplexBiprod
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! Degreewise exactness for the concrete Mayer--Vietoris complex.
 

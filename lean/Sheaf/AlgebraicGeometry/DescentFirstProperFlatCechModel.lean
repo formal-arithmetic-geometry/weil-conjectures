@@ -16,7 +16,7 @@ public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 public import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 public import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.RingTheory.Flat.Stability
 public import Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel

@@ -9,8 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Height
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
-import WeilConjectures.RingTheory.MaximalChainLengthOfDepth
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.MaximalChainLengthOfDepth
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!

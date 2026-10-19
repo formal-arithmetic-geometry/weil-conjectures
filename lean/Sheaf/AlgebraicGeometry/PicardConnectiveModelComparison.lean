@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import WeilConjectures.AlgebraicGeometry.ConnectiveSingleHom
+import Sheaf.AlgebraicGeometry.ConnectiveSingleHom
 import Sheaf.AlgebraicGeometry.PicardTermwiseModelComparison
 
 /-! # Derived test sections and ordinary connective cycles

@@ -17,7 +17,7 @@ import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.Flat.Equalizer
 import Mathlib.RingTheory.Regular.Flat
 import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange
 import Sheaf.RingTheory.QuasiRegularNoetherianLocal
 

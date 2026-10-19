@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import WeilConjectures.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.CategoryTheory.Adjunction.Additive

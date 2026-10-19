@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # The ordinary map underlying resolution base change
 

@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.StalkFiniteFree
-import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
+import Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-! # Reflection of invertibility at a vector bundle stalk
 

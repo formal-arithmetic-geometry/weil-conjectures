@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineEtaleNormalizedCartesianComparisons
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite

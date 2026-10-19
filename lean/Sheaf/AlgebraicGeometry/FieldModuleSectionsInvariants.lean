@@ -11,7 +11,7 @@ public import Mathlib.RepresentationTheory.Invariants
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import Sheaf.AlgebraicGeometry.GaloisPointAction
-import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 
 /-!
 # Sections over a field as geometric stalk invariants

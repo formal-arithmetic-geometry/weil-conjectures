@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.RingTheory.Ideal.Maps
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections

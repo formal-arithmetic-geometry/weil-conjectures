@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

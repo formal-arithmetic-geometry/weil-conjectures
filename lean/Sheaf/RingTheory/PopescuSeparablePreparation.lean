@@ -8,10 +8,10 @@ module
 public import Sheaf.RingTheory.PopescuResolution
 import Sheaf.RingTheory.PopescuSeparablePreparationCore
 import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
-public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Preparing the polynomial lifting problem in the separable case

@@ -6,8 +6,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDescentDataCategory
 import Sheaf.AlgebraicGeometry.DescentPullbackConstruction
-import WeilConjectures.AlgebraicGeometry.FpqcDescentUnderlyingMorphism
-import WeilConjectures.AlgebraicGeometry.FpqcDescentMorphismCompatibility
+import Sheaf.AlgebraicGeometry.FpqcDescentUnderlyingMorphism
+import Sheaf.AlgebraicGeometry.FpqcDescentMorphismCompatibility
 
 /-!
 # Fully faithful pullback of descent data along an fpqc singleton

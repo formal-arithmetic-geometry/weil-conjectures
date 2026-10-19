@@ -13,12 +13,13 @@ import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
-import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
+import Sheaf.Topology.ContinuousOpenNormalStabilizer
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.ContinuousCochainsShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 
 /-!
 # Two-term continuous cohomology of the additive l-adic integers

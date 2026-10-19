@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AffineCoordinateDerivedComparison
-import WeilConjectures.CategoryTheory.CounitComparisonComposition
+import Sheaf.CategoryTheory.CounitComparisonComposition
 
 /-! # The one-model affine chart cocycle
 Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.

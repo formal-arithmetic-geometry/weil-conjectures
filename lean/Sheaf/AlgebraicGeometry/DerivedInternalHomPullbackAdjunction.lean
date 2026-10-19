@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackMateSections
-import WeilConjectures.AlgebraicGeometry.InternalHomCounitMateIso
+import Sheaf.AlgebraicGeometry.InternalHomCounitMateIso
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 

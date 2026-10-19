@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
+public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

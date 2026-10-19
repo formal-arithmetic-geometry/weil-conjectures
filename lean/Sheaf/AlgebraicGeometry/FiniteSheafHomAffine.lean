@@ -12,7 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.SheafCoinductionAdjunction
-import WeilConjectures.AlgebraicGeometry.AffineInternalHomEvaluationBijective
+import Sheaf.AlgebraicGeometry.AffineInternalHomEvaluationBijective
 
 /-!
 # Affine sheaf-Hom is right adjoint to restriction

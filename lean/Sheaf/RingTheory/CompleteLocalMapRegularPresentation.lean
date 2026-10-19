@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Sheaf.RingTheory.CompleteLocalMapCohenPresentation
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
-import WeilConjectures.CategoryTheory.CartanEilenbergAugmentedComparison
+import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
 import Sheaf.Paper.EtaleCEPrescribedQuotientPageDescent
 import Sheaf.Paper.EtaleCETotalizeAugmentedComparison
 

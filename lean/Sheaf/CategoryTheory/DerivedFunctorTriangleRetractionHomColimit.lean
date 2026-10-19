@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.TriangleMorphismCategory
-import WeilConjectures.CategoryTheory.TriangulatedHomColimitComparison
+import Sheaf.CategoryTheory.TriangulatedHomColimitComparison
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 import Mathlib.CategoryTheory.Limits.Final.Type

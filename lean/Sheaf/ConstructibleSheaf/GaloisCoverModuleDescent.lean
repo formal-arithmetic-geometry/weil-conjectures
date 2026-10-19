@@ -26,7 +26,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.FiniteTypeConstantExact
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits

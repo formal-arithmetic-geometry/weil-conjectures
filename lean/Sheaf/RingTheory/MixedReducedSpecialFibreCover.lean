@@ -37,7 +37,7 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Localization.Basic
-import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.EppFiniteFamilyTraits
 import Sheaf.RingTheory.EppPerfectCoreCompleteLocal

@@ -6,7 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphism
-import WeilConjectures.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
+import Sheaf.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
 
 /-! # Evaluation of the canonical unit morphism
 

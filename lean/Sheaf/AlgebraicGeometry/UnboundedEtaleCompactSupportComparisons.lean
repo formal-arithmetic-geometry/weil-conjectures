@@ -21,6 +21,7 @@ public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
@@ -41,12 +42,13 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Paper.UnboundedProperOpenInterchange
 import Sheaf.Paper.CompactSupportStaircaseExpansion

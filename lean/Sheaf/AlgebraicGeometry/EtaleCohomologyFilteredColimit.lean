@@ -11,7 +11,7 @@ import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 
 /-!

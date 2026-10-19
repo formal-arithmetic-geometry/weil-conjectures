@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetComparison
 import Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # surjective on cohomology for the principal-open Čech augmentation

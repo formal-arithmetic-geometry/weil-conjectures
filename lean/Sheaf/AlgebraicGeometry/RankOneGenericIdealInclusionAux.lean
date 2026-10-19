@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.LinearAlgebra.Dimension.Free
 
 @[expose] public section

@@ -7,11 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
-public import WeilConjectures.AlgebraicGeometry.LocalMapPairCompatibility
+public import Sheaf.AlgebraicGeometry.LocalMapPairCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
-public import WeilConjectures.AlgebraicGeometry.LocalMapPairDefect
+public import Sheaf.AlgebraicGeometry.LocalMapPairDefect
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible
 

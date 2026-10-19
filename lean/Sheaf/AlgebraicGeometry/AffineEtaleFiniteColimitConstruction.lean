@@ -6,9 +6,10 @@ Authors: SHEAF group W4
 module
 
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
-public import WeilConjectures.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
+public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Category.Cat
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Pullback
 import Sheaf.CategoryTheory.SiteSystemStrictificationCategory
 import Sheaf.CategoryTheory.SiteSystemFiniteSheafTransport

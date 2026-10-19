@@ -5,9 +5,9 @@ Authors: SHEAF group U1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.OpenSectionFractionPresentation
-public import WeilConjectures.AlgebraicGeometry.OpenCohomologyZeroSections
+public import Sheaf.AlgebraicGeometry.OpenCohomologyZeroSections
 
 /-! # Comparing degree-zero cohomology fractions with section fractions
 

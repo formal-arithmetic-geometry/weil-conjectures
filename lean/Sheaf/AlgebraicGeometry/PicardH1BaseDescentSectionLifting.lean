@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
 import Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation
-import WeilConjectures.RingTheory.FiniteFreeMapResidueLocalization
+import Sheaf.RingTheory.FiniteFreeMapResidueLocalization
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Local lifting of arbitrary marked-fibre sections

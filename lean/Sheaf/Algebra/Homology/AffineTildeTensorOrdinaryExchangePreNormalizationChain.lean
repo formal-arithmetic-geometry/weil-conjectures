@@ -7,7 +7,7 @@ public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! The termwise affine exchange chain map before localization.
 (blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization-chain). -/

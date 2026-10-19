@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import WeilConjectures.AlgebraicGeometry.Morphisms.BoundaryLocalizedFiniteDetector
+import Sheaf.AlgebraicGeometry.Morphisms.BoundaryLocalizedFiniteDetector
 
 @[expose] public section
 

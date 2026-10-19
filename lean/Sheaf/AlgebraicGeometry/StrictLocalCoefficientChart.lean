@@ -15,7 +15,7 @@ public import WeilConjectures.ZetaSeries
 
 import Sheaf.AlgebraicGeometry.StrictLocalRationalChart
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-import WeilConjectures.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.MapIntoHenselianColimit
 import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed

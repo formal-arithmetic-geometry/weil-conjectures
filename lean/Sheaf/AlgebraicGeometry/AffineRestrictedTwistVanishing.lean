@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.ClosedImmersionFixedDegreeVanishing
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 
 /-! # Fixed-degree affine Serre vanishing

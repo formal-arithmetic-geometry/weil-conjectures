@@ -12,7 +12,7 @@ public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
 import Sheaf.AlgebraicGeometry.GabberH0EtaleInjective
-import WeilConjectures.AlgebraicGeometry.GabberH0FiniteSection
+import Sheaf.AlgebraicGeometry.GabberH0FiniteSection
 import Sheaf.AlgebraicGeometry.GabberH0ProjectionRestrictions
 
 /-! # Finite lifts with descent data in Gabber's degree-zero argument

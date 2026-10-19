@@ -6,14 +6,13 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact
 import Sheaf.AlgebraicGeometry.ClopenRankStrataFormality
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Reconstruction from cohomology on finitely many rank strata
 

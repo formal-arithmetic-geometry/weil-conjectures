@@ -17,7 +17,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.FieldTheory.MakeSeparable
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.SmoothNormalRing
-import WeilConjectures.RingTheory.FilteredColimitNormalRing
+import Sheaf.RingTheory.FilteredColimitNormalRing
 import Mathlib.RingTheory.Localization.BaseChange
 import Sheaf.RingTheory.NormalRingFieldExtensionDescent
 

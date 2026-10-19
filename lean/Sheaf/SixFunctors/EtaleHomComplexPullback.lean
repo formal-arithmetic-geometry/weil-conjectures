@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

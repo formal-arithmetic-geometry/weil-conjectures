@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
+public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality

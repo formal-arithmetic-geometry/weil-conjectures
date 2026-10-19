@@ -24,7 +24,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitTower
 
 import Mathlib.Algebra.Homology.DerivedCategory.Basic

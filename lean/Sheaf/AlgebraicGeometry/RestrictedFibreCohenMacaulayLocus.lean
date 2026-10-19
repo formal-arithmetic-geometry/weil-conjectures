@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
 
 /-! # Openness of the fibre Cohen-Macaulay locus over a base open

@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import all Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
-import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
+import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 
 /-! # Composition of raw triangle pullbacks with arbitrary coefficient maps
 

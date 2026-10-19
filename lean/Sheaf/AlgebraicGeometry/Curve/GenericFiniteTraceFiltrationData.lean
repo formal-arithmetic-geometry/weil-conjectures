@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 import Sheaf.AlgebraicGeometry.Curve.GenericFiniteCoarseTraceFiltrationData
-import WeilConjectures.AlgebraicGeometry.Curve.GenericPrimeCoarseFiltrationRefinement
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimeCoarseFiltrationRefinement
 
 /-! Generic finite trace and filtration data. -/
 

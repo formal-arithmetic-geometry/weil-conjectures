@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

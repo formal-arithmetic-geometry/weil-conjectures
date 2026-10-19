@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.RingTheory.KoszulDualComplex
+public import Sheaf.RingTheory.KoszulDualComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt

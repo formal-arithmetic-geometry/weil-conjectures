@@ -6,7 +6,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
-import WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
 import Sheaf.AlgebraicGeometry.AffineDerivedCounitHomologyFactorization
 
 @[expose] public section

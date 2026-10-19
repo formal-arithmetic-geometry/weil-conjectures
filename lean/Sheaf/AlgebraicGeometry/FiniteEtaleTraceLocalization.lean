@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceLocalization
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceLocalSums
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite

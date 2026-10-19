@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.RingTheory.MinimalGradedPresentation
+public import Sheaf.RingTheory.MinimalGradedPresentation
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic

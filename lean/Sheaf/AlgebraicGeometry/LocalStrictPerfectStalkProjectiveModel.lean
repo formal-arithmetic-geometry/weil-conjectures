@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Module.Projective
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
-import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 

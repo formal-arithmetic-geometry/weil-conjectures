@@ -1,0 +1,9 @@
+module
+
+public import WeilConjectures.FieldTheory.TriangularFieldModelPresentation
+public import WeilConjectures.FieldTheory.TriangularFieldModelEquations
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Algebra.Polynomial.Monic

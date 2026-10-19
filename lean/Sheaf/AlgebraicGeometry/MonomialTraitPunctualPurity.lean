@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Algebra.MvPolynomial.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.Algebra.Module.FinitePresentation

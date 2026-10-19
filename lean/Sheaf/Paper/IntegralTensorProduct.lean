@@ -36,8 +36,8 @@ import Sheaf.CategoryTheory.RingedSiteDualityMaps
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Mathlib.AlgebraicGeometry.Sites.Proetale
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 import Sheaf.Paper.IntegralTensorShriek

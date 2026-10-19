@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.ClosedImageLimitSystem
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Filtered.Basic

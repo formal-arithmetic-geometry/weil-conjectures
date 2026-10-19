@@ -30,7 +30,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.Topology.Stratification

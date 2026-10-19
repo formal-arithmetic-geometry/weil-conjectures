@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
+import Sheaf.CategoryTheory.Abelian.ExtRightDerivedHom
 import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 

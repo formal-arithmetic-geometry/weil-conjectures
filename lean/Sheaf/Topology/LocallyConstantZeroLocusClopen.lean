@@ -5,7 +5,7 @@ Authors: SHEAF group Z2
 -/
 module
 
-public import WeilConjectures.Topology.AbelianOpenExtensionByZero
+public import Sheaf.Topology.AbelianOpenExtensionByZero
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Stalks
 import Sheaf.Topology.PresheafModuleStalkFunctor

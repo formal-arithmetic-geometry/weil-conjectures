@@ -25,13 +25,15 @@ import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.CategoryTheory.Sites.GlobalSections
 import Sheaf.Paper.ProjectionMateExact
-import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.CategoryTheory.TruncationTriangle
 
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Single
 import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Sheaf.Algebra.Homology.IntegerFlatRepresentative
 import Sheaf.RingTheory.Flat.LazardPresentation
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Tensoring derived global sections with a bounded-below constant integer complex

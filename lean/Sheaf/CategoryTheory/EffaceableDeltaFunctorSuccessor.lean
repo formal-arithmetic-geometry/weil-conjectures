@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorSuccessor
+public import WeilConjectures.CategoryTheory.DeltaFunctor

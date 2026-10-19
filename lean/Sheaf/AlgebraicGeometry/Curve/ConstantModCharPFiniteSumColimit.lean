@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPFiniteSumColimit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer

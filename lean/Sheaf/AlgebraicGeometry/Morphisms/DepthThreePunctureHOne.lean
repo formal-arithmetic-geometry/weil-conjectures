@@ -6,8 +6,8 @@ Authors: SHEAF group V4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.AlgebraicGeometry.Morphisms.DepthThreeLocalCohomologyVanishing
+public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.DepthThreeLocalCohomologyVanishing
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneLocalCohomologyComparison
 
 /-! # First cohomology of the structure sheaf on a depth-three puncture

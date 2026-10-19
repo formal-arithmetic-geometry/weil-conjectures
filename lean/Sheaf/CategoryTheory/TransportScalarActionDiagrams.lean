@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts

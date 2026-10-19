@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 

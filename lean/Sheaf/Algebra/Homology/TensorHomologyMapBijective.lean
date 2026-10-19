@@ -11,9 +11,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.DirectSum.Module
 
-import WeilConjectures.Algebra.Homology.TensorHomologyCoordinates
+import Sheaf.Algebra.Homology.TensorHomologyCoordinates
 import Sheaf.Algebra.Homology.TensorHomologyProductSpan
-import WeilConjectures.Algebra.Homology.TensorHomologyPairing
+import Sheaf.Algebra.Homology.TensorHomologyPairing
 
 /-!
 # Bijectivity of the canonical tensor homology map over a field

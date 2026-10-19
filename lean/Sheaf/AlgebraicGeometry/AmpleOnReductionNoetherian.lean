@@ -12,8 +12,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Mathlib.RingTheory.Noetherian.Nilpotent
-import WeilConjectures.AlgebraicGeometry.AmpleIso
-import WeilConjectures.AlgebraicGeometry.AmplePullback
+import Sheaf.AlgebraicGeometry.AmpleIso
+import Sheaf.AlgebraicGeometry.AmplePullback
 import Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening
 
 /-! # Ampleness on a Noetherian reduction

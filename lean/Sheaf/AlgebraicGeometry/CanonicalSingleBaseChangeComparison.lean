@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import Sheaf.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 

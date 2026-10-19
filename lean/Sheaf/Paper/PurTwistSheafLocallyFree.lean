@@ -34,7 +34,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.IntegralDerivedReduction
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
@@ -47,6 +47,7 @@ import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Paper.SfIntegralConstructible
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The integral Tate line on the pro-etale site

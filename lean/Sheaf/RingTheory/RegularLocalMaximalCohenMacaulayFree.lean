@@ -7,10 +7,10 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
-public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.RingTheory.CmModuleGoodElementNonzerodivisor
-import WeilConjectures.RingTheory.DepthLeSupportDimension
-import WeilConjectures.RingTheory.DepthOverQuotientRing
+public import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthOverQuotientRing
 import Mathlib.RingTheory.Regular.Free
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.LinearAlgebra.Dimension.Free

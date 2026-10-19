@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
+public import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

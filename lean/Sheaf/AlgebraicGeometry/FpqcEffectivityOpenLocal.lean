@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Cover.Directed
-import WeilConjectures.AlgebraicGeometry.FpqcAffineModelsGlue
+import Sheaf.AlgebraicGeometry.FpqcAffineModelsGlue
 
 /-! Effectivity is local on an affine open cover of the base. -/
 

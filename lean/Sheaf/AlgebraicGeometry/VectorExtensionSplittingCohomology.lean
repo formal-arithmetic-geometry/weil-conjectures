@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import WeilConjectures.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
+import Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
 import Mathlib.AlgebraicGeometry.Gluing
 import Sheaf.AlgebraicGeometry.AffineTraceTower
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives

@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
+public import WeilConjectures.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Nilpotent.Defs

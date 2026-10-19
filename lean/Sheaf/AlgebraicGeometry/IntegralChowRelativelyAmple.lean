@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
 import all Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties

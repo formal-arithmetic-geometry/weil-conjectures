@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

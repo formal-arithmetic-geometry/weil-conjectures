@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import Sheaf.Topology.DimensionSupremumLocalDimensions
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import Mathlib.AlgebraicGeometry.Sites.Etale
@@ -31,6 +31,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Proper direct-image bound for torsion étale sheaves

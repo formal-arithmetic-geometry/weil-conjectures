@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.FiniteRetractSheavesAffineTrivialization
+import Sheaf.AlgebraicGeometry.FiniteRetractSheavesAffineTrivialization
 import Mathlib.Data.Int.Interval
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Finite free refinement of a strictly perfect local model
 

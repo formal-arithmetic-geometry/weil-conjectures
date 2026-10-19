@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
-import WeilConjectures.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHom
+import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHom
 import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso
 
 /-!

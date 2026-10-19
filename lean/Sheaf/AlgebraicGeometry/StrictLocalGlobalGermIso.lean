@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.StrictLocalGlobalGermIso
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalGerm
+public import Mathlib.RingTheory.Henselian

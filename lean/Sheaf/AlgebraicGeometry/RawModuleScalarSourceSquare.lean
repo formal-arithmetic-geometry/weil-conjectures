@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
 
 import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
-import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
+import Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 public import Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 

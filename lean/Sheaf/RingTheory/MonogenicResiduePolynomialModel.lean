@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Polynomial.Basic
-import WeilConjectures.RingTheory.MonogenicResidueLeadingRelation
+import Sheaf.RingTheory.MonogenicResidueLeadingRelation
 import Sheaf.RingTheory.MonogenicPrincipalLocalizationModel
 
 /-! # Monogenic residue polynomial and finite splitting data

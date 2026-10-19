@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 import Sheaf.RingTheory.WContractibleClosedLocalization
 import Sheaf.RingTheory.IndEtaleStability

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import WeilConjectures.Algebra.FiniteTorsionExtensionInduction
+import Sheaf.Algebra.FiniteTorsionExtensionInduction
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmoduleVanishing
 
 /-!

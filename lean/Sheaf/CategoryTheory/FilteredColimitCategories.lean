@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.CategoryTheory.FilteredColimitCategories
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.CategoryTheory.FinCategory.Basic

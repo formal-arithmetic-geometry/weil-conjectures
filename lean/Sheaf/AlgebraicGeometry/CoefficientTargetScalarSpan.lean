@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.AlgebraicGeometry.CoefficientIntersectionScalarDecomposition
+import Sheaf.AlgebraicGeometry.CoefficientIntersectionScalarDecomposition
 
 /-! # Scalar transport into the coefficient generator span
 

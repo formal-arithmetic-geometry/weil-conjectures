@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
-import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual vanishing on a fixed affine cover chart

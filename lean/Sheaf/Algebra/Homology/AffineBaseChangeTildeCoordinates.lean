@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+public import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # Explicit coordinates for affine base-change cohomology
 

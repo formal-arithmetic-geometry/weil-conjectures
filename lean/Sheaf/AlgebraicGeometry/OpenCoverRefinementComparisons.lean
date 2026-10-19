@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleRecoveryComparisonIso
+public import Sheaf.AlgebraicGeometry.ModuleRecoveryComparisonIso
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 

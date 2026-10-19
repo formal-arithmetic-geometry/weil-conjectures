@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import WeilConjectures.RingTheory.CompletionFiniteExtensionTensorBijective
+import Sheaf.RingTheory.CompletionFiniteExtensionTensorBijective
 import Sheaf.RingTheory.CompletionLocalizedAlgebraProductSurjective
 
 /-!

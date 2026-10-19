@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.RingTheory.KoszulRegularSequence
-public import WeilConjectures.AlgebraicGeometry.PerfectClosedImmersion
+public import Sheaf.AlgebraicGeometry.PerfectClosedImmersion
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.Single
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
-import WeilConjectures.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
 import Sheaf.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
 
 /-!

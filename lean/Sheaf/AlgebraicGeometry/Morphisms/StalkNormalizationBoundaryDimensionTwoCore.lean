@@ -1,11 +1,11 @@
 module
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 @[expose] public section
 universe u

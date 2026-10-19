@@ -18,7 +18,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 import Sheaf.AlgebraicGeometry.NormalityPerfectClosureTest
 
 /-!

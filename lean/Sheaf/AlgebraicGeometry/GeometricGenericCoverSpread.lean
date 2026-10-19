@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Sheaf.AlgebraicGeometry.GeometricGenericCoverModel
 import Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
-import WeilConjectures.AlgebraicGeometry.CommonFieldFibreComparison
+import Sheaf.AlgebraicGeometry.CommonFieldFibreComparison
 
 /-!
 # Spreading a supplied geometric generic cover

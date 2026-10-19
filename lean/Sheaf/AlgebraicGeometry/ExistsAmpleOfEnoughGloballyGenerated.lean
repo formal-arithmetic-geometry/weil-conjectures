@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
-import WeilConjectures.AlgebraicGeometry.FiniteSectionsCover
+import Sheaf.AlgebraicGeometry.FiniteSectionsCover
 import Sheaf.AlgebraicGeometry.TensorSectionAffineOpen
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

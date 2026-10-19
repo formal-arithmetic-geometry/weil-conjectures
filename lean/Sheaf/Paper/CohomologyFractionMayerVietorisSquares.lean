@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.CohomologySectionDivision
 

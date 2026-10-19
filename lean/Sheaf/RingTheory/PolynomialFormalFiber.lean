@@ -9,12 +9,12 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompletionFiniteExtension
-import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
-import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
 import Sheaf.RingTheory.PolynomialFormalFiberNoetherian

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.PairHenselizationFlatQuotients
-import WeilConjectures.RingTheory.PairHenselizationCompletionData
+import Sheaf.RingTheory.PairHenselizationCompletionData
 import Sheaf.RingTheory.PairHenselizationCompletionFaithfullyFlat
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.TensorProduct.Maps

@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.Grp.Colimits
 import Sheaf.AlgebraicGeometry.IdealPowerComplement

@@ -6,7 +6,7 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardLeftCechCupConstruction
-import WeilConjectures.Algebra.Homology.TensorTotalExtendNat
+import Sheaf.Algebra.Homology.TensorTotalExtendNat
 
 /-! # Cochain comparison of the left and right external Cech cups
 

@@ -5,11 +5,11 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation
+import Sheaf.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Canonical base change of sections on an affine open

@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated

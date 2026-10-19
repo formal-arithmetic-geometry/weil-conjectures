@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.Algebra.TwoTermHomotopyEquivalenceDirectSum
+public import Mathlib.Algebra.DirectSum.Module

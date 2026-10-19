@@ -5,10 +5,10 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
+public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffinePolynomialResolutionOfStalkwise
-import WeilConjectures.Algebra.Homology.FlatResolutionTorComparison
+import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import Mathlib.RingTheory.Flat.Stability
 
 /-! # Affine coordinate Tor bounds from stalkwise bounds

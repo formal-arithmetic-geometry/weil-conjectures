@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationPostDifferential
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationPreDifferential
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.HomComplexProjections
 
 /-! # The ordinary evaluation differential on one tensor summand

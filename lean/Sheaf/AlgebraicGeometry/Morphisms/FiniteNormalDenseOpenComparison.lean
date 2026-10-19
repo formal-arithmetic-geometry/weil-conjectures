@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Sheaf.RingTheory.EtaleNormalRing
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 
 /-!
 # Comparing a normal finite cover with a finite etale cover

@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine

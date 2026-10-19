@@ -5,12 +5,13 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
+import Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
 
 /-! # Raw cohomology pullback and the higher-image comparison
 

@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.Localization.Ideal
 public import Mathlib.NumberTheory.RamificationInertia.Galois
 
 import Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
+import Sheaf.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
 
 /-! # A Galois integral-closure model at the root divisor generic point
 

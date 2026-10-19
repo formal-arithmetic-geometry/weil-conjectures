@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # K-flatness under restriction to an open localized site

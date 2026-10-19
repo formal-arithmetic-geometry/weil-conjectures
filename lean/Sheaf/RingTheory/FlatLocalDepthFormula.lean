@@ -5,15 +5,15 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.FlatLocalDepthReduction
-import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Depth formula for a flat local homomorphism

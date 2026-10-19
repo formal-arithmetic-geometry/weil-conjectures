@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-import WeilConjectures.AlgebraicGeometry.EtaleEvaluationSeparable
+import Sheaf.AlgebraicGeometry.EtaleEvaluationSeparable
 
 /-!
 # Evaluation of unit germs in the separable closure

@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -21,7 +22,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
@@ -60,6 +61,7 @@ import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
 import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.SixFunctors.EtaleStratifiedStalkIdentification
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!

@@ -41,7 +41,7 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
@@ -67,6 +67,7 @@ import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
 import Sheaf.AlgebraicGeometry.DimensionExtension
 import Sheaf.Paper.FiniteDirectImageComposition
@@ -87,6 +88,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
@@ -122,6 +124,8 @@ import Sheaf.Paper.DirectImageTorAmplitude
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.StratumAmbientHom
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated

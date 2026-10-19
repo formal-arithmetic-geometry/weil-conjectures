@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedTensor
 public import Sheaf.Algebra.Homology.ChangeOfRingsComplex
 public import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Noetherian.Defs

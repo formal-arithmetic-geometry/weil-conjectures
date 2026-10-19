@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.QuasiIso
-import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
+import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 

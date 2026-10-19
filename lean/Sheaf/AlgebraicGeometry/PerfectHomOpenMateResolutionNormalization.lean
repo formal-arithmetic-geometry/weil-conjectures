@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
-import WeilConjectures.CategoryTheory.DerivedExactMateCompatibility
+import Sheaf.CategoryTheory.DerivedExactMateCompatibility
 import Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit
 
 /-! # Normalization of the open-square comparison on K-injective representatives

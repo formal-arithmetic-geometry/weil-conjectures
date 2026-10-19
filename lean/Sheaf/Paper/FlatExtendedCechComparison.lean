@@ -6,7 +6,7 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Paper.ExtendedLocalizationCech
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.Paper.FlatLocalizationKoszulHomotopy

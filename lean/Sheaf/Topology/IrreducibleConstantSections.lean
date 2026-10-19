@@ -3,7 +3,7 @@ module
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.Grp.Basic
-import WeilConjectures.Topology.ConstantSheafLocallyConstantComparison
+import Sheaf.Topology.ConstantSheafLocallyConstantComparison
 
 @[expose] public section
 

@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.RingTheory.AdjoinSingletonAssociatedContraction
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic

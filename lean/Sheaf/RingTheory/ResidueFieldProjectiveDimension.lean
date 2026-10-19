@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth
 
 /-!

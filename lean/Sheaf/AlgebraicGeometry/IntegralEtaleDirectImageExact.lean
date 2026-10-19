@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 
 /-!
 # Exactness of integral étale direct image

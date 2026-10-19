@@ -8,10 +8,10 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Coprime.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import WeilConjectures.RingTheory.HenselianIntegralIdempotentLifting
+import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
 import Mathlib.Algebra.Polynomial.FieldDivision
 import Mathlib.Tactic.LinearCombination
-import WeilConjectures.RingTheory.MonicFactorizationOfIdempotent
+import Sheaf.RingTheory.MonicFactorizationOfIdempotent
 
 /-!
 # Factorization criterion for henselian pairs

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Ideal.Colon
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.LocalCompletionQuotient
-import WeilConjectures.RingTheory.FlatAssociatedPrimeDVR
+import Sheaf.RingTheory.FlatAssociatedPrimeDVR
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 
 /-!

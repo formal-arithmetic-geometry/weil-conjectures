@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 import Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Sheaf.AlgebraicGeometry.NormalSurfaceExceptionalCurves
 

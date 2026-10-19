@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 
 /-! # FlatBaseChangeOpenChoicesExist
 

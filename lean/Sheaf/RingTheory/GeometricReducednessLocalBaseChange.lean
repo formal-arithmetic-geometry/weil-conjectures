@@ -16,7 +16,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.TensorProduct.Maps
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 import Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest
 

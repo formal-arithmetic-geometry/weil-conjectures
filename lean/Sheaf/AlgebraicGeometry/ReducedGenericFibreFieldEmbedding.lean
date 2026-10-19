@@ -12,8 +12,8 @@ public import WeilConjectures.FieldTheory.SeparableExtension
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
-import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingCore
-import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingTransport
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingCore
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingTransport
 
 /-! # Affine steps in the radicial generic field construction
 

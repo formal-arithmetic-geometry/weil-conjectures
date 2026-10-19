@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.BifunctorShift
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
@@ -18,7 +18,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 
 /-!

@@ -5,9 +5,9 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RoosFinitePrefixes
+public import Sheaf.CategoryTheory.RoosFinitePrefixes
 import Mathlib.Algebra.Category.Grp.EpiMono
-import WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
+import Sheaf.CategoryTheory.InjectiveTowerEmbedding
 import Sheaf.CategoryTheory.InjectiveSplitTower
 import WeilConjectures.CategoryTheory.MittagLefflerLimitExact
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor

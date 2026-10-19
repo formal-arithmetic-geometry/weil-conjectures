@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
+import Sheaf.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Exchange and the representative restriction comparison

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Paper.SfCommonStageWeilCohomology
 

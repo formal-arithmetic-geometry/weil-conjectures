@@ -1,0 +1,8 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Ring.ULift

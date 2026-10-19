@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Tower
-import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
+import Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-!
 # A common summand for two surjections of finite free modules over a local ring

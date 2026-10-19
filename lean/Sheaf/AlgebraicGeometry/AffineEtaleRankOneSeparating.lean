@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineEtaleRankOneSeparating
+public import Mathlib.CategoryTheory.Generator.Basic
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap

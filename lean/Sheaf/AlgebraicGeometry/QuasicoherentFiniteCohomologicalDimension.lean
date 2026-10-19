@@ -10,7 +10,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 
 /-!
 # Finite cohomological dimension for quasi-coherent modules

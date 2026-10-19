@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
-import WeilConjectures.RingTheory.StrictlyHenselianOfDimensionZero
+import Sheaf.RingTheory.StrictlyHenselianOfDimensionZero
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 

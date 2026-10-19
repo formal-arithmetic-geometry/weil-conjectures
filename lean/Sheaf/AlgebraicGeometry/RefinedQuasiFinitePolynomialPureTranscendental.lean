@@ -22,8 +22,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
-import WeilConjectures.RingTheory.FibrePrimesResidueFields
-import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.RingTheory.FibrePrimesResidueFields
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import Sheaf.RingTheory.QuasiFiniteLocusOpen

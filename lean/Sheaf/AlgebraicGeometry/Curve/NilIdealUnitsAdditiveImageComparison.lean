@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
-import WeilConjectures.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel
+import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel
 import Sheaf.AlgebraicGeometry.Curve.IdealAdditiveImageRelativeKernel
 import Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeUnitsAdditiveKernel
 

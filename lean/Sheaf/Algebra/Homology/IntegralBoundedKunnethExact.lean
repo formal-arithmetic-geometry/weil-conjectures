@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.Algebra.Homology.FlatResolutionTorComparison
+import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.Algebra.Homology.SpectralSequence.Basic
 import WeilConjectures.CategoryTheory.Abelian.Filtration

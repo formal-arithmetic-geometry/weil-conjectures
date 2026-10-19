@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
-import all WeilConjectures.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
+import all Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
 
 /-! # Coefficient factors of the derived scalar pullback square
 

@@ -4,10 +4,10 @@ Released under Apache 2.0 license.
 -/
 module
 
-public import WeilConjectures.CategoryTheory.CechResolutionDoubleComplex
+public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.CategoryTheory.InjectiveCechTotalSections
-import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
+import Sheaf.CategoryTheory.ResolutionSectionCohomology
 
 /-!
 # Total cohomology of the Čech resolution double complex

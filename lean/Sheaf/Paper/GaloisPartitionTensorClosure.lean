@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.LinearAlgebra.TensorProduct.Basic
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf

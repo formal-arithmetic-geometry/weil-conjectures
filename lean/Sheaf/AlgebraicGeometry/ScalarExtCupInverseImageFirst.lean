@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
+import Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison
 
 /-! # ScalarExtCupInverseImageFirst
 

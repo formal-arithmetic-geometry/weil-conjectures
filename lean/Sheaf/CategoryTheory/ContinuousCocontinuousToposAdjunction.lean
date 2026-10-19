@@ -5,7 +5,7 @@ Authors: SHEAF group NA
 -/
 module
 
-public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
+public import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
 public import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
 import Mathlib.CategoryTheory.Sites.Sheafification

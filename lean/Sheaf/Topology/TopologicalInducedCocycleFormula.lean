@@ -4,7 +4,7 @@ public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import Sheaf.Topology.TopologicalCocycleObjectwise
-import WeilConjectures.Topology.TopologicalCocycleNaturality
+import Sheaf.Topology.TopologicalCocycleNaturality
 
 @[expose] public section
 universe u

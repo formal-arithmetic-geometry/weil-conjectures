@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineFreeFiniteStalkGeneration
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

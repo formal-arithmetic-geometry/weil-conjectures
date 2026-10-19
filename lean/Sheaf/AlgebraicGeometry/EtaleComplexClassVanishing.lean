@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Sheaf.AlgebraicGeometry.EtaleComplexFiltrationDeepening
-import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
+import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
 
 /-! # Etale complex class vanishing
 

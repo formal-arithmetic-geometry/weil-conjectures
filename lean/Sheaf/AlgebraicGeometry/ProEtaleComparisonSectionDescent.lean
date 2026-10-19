@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
-import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
+import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcDescent
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport
 
 /-! # Descent for the terminal sections of etale inverse images

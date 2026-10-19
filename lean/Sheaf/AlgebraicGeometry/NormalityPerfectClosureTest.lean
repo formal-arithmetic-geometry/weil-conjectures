@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.FieldTheory.SeparablyGenerated
 import Mathlib.RingTheory.TensorProduct.Maps

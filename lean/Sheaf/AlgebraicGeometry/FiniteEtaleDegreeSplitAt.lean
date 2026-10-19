@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDegreeSplitAt
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.AlgebraicGeometry.Sites.Etale

@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism

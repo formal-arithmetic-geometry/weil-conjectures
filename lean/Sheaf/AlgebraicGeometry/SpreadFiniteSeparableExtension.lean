@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.AlgebraicGeometry.LocalizedSeparablePolynomialModel
+import Sheaf.AlgebraicGeometry.LocalizedSeparablePolynomialModel
 import Mathlib.FieldTheory.PrimitiveElement
 import Mathlib.RingTheory.Etale.StandardEtale
 

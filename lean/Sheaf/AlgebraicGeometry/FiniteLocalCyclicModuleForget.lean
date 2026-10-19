@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Mathlib.Data.ZMod.Basic

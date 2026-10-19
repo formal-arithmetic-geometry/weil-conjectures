@@ -44,12 +44,13 @@ import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
 import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # Unbounded proper/open interchange and its canonical normalizations

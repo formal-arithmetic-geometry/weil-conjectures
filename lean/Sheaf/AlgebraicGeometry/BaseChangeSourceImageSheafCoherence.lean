@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity
-import WeilConjectures.AlgebraicGeometry.SmallEtaleAffineColimitDetection
+import Sheaf.AlgebraicGeometry.SmallEtaleAffineColimitDetection
 
 /-! # Descent of base-change source images
 

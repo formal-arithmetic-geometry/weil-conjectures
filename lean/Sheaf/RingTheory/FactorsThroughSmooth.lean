@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.RingTheory.EssentiallySmooth
-import WeilConjectures.RingTheory.FactorsThroughLocalization
+import Sheaf.RingTheory.FactorsThroughLocalization
 
 /-!
 # Maps from finitely presented algebras factor through smooth algebras

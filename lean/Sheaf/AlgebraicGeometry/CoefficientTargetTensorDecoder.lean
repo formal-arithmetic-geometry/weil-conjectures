@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.AlgebraicGeometry.CoefficientIntersectionRingPushout
+import Sheaf.AlgebraicGeometry.CoefficientIntersectionRingPushout
 import Sheaf.AlgebraicGeometry.CoefficientIntersectionSectionModel
 
 /-! # Injective of the coefficient tensor map

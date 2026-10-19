@@ -10,7 +10,7 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.TraceFormula.FsFaceSharpening
-import WeilConjectures.RingTheory.SelectedBasisOfLocalizedSplit
+import Sheaf.RingTheory.SelectedBasisOfLocalizedSplit
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
 import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup

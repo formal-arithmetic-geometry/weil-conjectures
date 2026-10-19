@@ -1,0 +1,8 @@
+module
+
+public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Connected.TotallyDisconnected

@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.MixedAffineSectionsComplexUnit
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.AlgebraicGeometry.MixedPullbackSectionsCounitUnit
 import all Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 

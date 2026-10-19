@@ -2,7 +2,7 @@ module
 
 public import Mathlib.RingTheory.Localization.InvSubmonoid
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 import all Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import Mathlib.RingTheory.QuasiFinite.Basic

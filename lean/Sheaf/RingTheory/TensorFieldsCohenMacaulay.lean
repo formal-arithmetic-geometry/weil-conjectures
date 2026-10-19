@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.Algebra.MvPolynomial.Basic
@@ -26,7 +26,7 @@ import Sheaf.RingTheory.FlatModuleAtPrime
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.Ideal.GoingUp
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Tensor products of fields are Cohen–Macaulay

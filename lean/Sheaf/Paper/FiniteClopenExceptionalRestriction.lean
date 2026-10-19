@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShrie
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.CoefficientSystemDerivedComparison
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.Paper.EtaleCoefficientSystemAdjoint
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent

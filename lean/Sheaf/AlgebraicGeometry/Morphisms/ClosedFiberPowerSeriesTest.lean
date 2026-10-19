@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart
 import Sheaf.RingTheory.FlatLocalDepthFormula

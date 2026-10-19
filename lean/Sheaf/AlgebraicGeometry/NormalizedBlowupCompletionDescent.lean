@@ -15,7 +15,7 @@ import WeilConjectures.Blowup.FlatBaseChange
 import WeilConjectures.Blowup.Complement
 import WeilConjectures.Blowup.Proper
 import Sheaf.AlgebraicGeometry.ReducedNormalization
-import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
+import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct

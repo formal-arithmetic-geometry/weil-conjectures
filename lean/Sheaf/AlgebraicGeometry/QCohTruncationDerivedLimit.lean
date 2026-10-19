@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
-import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
+import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 

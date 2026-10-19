@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Ring.ULift
 import all Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 

@@ -14,9 +14,9 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Algebra.Homology.AcyclicLift
+import Sheaf.Algebra.Homology.AcyclicLift
 import Sheaf.AlgebraicGeometry.ComplexLiftAcyclicEnlargement
-import WeilConjectures.AlgebraicGeometry.ProjectiveClassReducedSplitting
+import Sheaf.AlgebraicGeometry.ProjectiveClassReducedSplitting
 
 /-!
 # Lifting a derived complex for a projective class

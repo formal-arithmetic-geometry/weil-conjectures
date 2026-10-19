@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
-import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
+import Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.LinearAlgebra.TensorProduct.Tower

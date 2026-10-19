@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
+import Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Geometry.RingedSpace.SheafedSpace
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.Monoidal
 
 /-!

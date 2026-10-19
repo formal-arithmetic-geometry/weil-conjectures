@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 

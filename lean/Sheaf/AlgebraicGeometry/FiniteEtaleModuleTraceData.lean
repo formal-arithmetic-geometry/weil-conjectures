@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceData
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Linear.FunctorCategory

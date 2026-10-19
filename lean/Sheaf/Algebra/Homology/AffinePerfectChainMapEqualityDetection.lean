@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Algebra.Module.FinitePresentation

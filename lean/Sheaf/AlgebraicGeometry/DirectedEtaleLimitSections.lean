@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
-import WeilConjectures.AlgebraicGeometry.DirectedEtaleSectionIdentifications
+import Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # The directed continuity step for the explicit étale section cocone

@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Geometry.RingedSpace.Basic

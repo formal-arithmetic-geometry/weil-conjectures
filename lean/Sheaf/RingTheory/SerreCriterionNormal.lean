@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.RingTheory.SerreConditions
+public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.NormalLocalDepthTwo
-import WeilConjectures.RingTheory.IntegralTotalFractionLocalDenominator
-import WeilConjectures.RingTheory.SerreS2TotalFractionMembership
+import Sheaf.RingTheory.IntegralTotalFractionLocalDenominator
+import Sheaf.RingTheory.SerreS2TotalFractionMembership
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.SerreCriterionReduced
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

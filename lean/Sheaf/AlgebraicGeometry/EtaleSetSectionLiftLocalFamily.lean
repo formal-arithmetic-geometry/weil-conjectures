@@ -5,10 +5,10 @@ Authors: SHEAF group C2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Mathlib.AlgebraicGeometry.Cover.Open
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionFiniteMatching
 import Mathlib.CategoryTheory.Filtered.Final
 

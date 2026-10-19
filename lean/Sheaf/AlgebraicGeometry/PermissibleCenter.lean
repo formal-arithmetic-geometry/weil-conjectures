@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Permissible centers

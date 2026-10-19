@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 /-! # Ordinary representatives for the open-sections comparison

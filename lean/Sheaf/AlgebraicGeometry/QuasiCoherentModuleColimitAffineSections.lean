@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Filtered.Basic

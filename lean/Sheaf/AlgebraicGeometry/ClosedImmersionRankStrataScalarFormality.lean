@@ -5,14 +5,13 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift
 import Mathlib.Algebra.Homology.SingleHomology
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Scalar formality on the rank strata of a closed subscheme
 

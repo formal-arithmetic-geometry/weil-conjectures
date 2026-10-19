@@ -9,15 +9,15 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.RingTheory.ConePseudoCoherent
-import WeilConjectures.RingTheory.FiniteHomologyOfMPseudoCoherent
+import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
 import Sheaf.RingTheory.PseudoCoherentIffAllM
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.TensorProduct.Free
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.Algebra.Category.ModuleCat.Projective
-import WeilConjectures.RingTheory.FiniteScalarSurjections
-import WeilConjectures.RingTheory.FiniteConeCycleAttachmentFunctors
+import Sheaf.RingTheory.FiniteScalarSurjections
+import Sheaf.RingTheory.FiniteConeCycleAttachmentFunctors
 
 /-! # One descending step in a simultaneous finite free approximation
 

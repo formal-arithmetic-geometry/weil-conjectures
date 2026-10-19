@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 public import Mathlib.Algebra.Homology.Homotopy
 
-import WeilConjectures.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy
+import Sheaf.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread
 
 /-! # Local homotopy normal form after pullback at a good residue point

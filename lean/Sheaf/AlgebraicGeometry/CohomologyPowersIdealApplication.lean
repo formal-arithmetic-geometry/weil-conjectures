@@ -10,7 +10,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
 import Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound
 import Sheaf.AlgebraicGeometry.CohomologyPowersIdealKernelBound
 

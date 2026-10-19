@@ -6,7 +6,7 @@ Authors: SHEAF group NX
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!

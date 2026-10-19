@@ -1,0 +1,7 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FlatDescentChartComparison
+public import WeilConjectures.AlgebraicGeometry.FlatDescentChart
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Comma.Over.Pullback

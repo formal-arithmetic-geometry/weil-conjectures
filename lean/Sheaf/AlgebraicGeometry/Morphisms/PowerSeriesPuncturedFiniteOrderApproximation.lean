@@ -7,9 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteThickeningSections
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningKernel
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningKernel
 
 /-! # Finite-order approximation on the punctured zero section
 

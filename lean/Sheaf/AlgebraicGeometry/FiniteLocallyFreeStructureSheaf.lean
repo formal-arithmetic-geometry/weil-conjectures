@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import WeilConjectures.AlgebraicGeometry.FiniteAffineFibreSections
+import Sheaf.AlgebraicGeometry.FiniteAffineFibreSections
 import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 
 /-!

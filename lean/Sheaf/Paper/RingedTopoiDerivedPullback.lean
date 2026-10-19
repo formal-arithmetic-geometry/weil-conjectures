@@ -6,8 +6,8 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived

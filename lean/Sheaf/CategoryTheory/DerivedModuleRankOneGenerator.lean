@@ -3,7 +3,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
-public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.CategoryTheory.DerivedModuleRankOneNonzeroMap
 
 @[expose] public section

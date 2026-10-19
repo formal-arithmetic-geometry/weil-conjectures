@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Extension.ExtendScalars
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.Algebra.CharP.Algebra
-import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
+import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
 import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-!

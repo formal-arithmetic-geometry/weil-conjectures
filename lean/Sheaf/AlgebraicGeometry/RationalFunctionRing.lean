@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RationalFunctions
+public import Sheaf.AlgebraicGeometry.RationalFunctions
 
 /-!
 # The rational-function ring in arbitrary universes

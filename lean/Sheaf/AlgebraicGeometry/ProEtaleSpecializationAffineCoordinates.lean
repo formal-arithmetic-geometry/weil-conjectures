@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
+public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 
 import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 

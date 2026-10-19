@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.RingTheory.KoszulConormalBasis
-import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 
 /-! # Local finite-free Koszul self-Ext identifications
 

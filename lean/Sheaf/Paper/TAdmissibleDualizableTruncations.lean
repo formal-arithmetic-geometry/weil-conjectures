@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.TAdmissibleCoefficientModels
 import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.RingTheory.CoherentRingPerfectComplexCohomology
+import Sheaf.RingTheory.CoherentRingPerfectComplexCohomology
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator
 import Sheaf.AlgebraicGeometry.ProEtale.SectionsConservative
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic

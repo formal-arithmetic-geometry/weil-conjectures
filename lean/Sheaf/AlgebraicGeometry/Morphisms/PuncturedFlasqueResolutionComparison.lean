@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
+public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeSectionsComparison
 import Sheaf.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque

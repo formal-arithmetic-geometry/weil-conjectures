@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Spec
 
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.AlgebraicGeometry.GenericProductLocalization
-import WeilConjectures.AlgebraicGeometry.DescendModelLocalization
+import Sheaf.AlgebraicGeometry.DescendModelLocalization
 
 /-!
 # Spreading an injective generic product map

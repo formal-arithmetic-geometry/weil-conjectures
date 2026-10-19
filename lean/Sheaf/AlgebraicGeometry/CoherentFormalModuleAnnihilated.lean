@@ -15,7 +15,7 @@ import Mathlib.Tactic.TFAE
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleCokernel
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
+import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps
 

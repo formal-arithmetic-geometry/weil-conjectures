@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import WeilConjectures.FieldTheory.ExistsPBasis
 import WeilConjectures.RingTheory.FiniteModuleComplete
-import WeilConjectures.RingTheory.PBasisComplementMonomialBasis
+import Sheaf.RingTheory.PBasisComplementMonomialBasis
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Sheaf.RingTheory.CofinitePBasisCompletedGenericRank
 import Sheaf.RingTheory.CompletedDifferentialFiniteConormal

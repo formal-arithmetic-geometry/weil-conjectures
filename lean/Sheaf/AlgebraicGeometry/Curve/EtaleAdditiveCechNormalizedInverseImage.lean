@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCycleRealization
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer
 

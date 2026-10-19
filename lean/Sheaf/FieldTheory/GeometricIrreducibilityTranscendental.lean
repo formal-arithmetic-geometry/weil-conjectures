@@ -20,7 +20,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.RingTheory.TensorProduct.Nontrivial
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
 import Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible
 

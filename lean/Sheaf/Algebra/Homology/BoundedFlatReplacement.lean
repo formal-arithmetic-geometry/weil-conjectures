@@ -5,15 +5,15 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import WeilConjectures.Algebra.Homology.FlatCoverFunctor
+import Sheaf.Algebra.Homology.FlatCoverFunctor
 import Sheaf.Algebra.Homology.CyclePullbackResolution
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.Algebra.Homology.Refinements
 

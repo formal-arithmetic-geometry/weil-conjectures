@@ -13,7 +13,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Sheaf.Algebra.Homology.DerivedCoinductionAdjunction
 public import Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison
-import WeilConjectures.Algebra.Homology.ModuleHomComplex
+import Sheaf.Algebra.Homology.ModuleHomComplex
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees

@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdjoinRoot
 import Sheaf.AlgebraicGeometry.Morphisms.TraitGenericRootModel
-import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
 
 /-!
 # Standard root charts for a generic Galois cover of a smooth trait family

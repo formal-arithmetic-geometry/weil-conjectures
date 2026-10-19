@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Localization.Predicate

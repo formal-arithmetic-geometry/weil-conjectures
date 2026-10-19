@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
-import WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisInjective
+import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInjective
 import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage
 
 /-!

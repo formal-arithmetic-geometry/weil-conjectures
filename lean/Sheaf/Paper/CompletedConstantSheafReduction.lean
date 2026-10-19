@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Module.Projective
 import Mathlib.CategoryTheory.Sites.Abelian
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.RingTheory.LimitFlatModules
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.KFlat

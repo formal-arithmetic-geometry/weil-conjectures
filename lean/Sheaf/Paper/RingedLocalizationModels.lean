@@ -13,19 +13,19 @@ public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Mathlib.RingTheory.Flat.Localization
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 
 /-! # Local derived representatives of homology sections

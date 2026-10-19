@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.SixFunctors.IntrinsicDerivedTensor
 import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.SixFunctors.OpenClosed.Exact

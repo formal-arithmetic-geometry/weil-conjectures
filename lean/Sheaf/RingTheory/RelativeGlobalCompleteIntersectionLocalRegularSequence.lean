@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.Paper.NoetherianApproximation
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
 import Sheaf.RingTheory.RelativeCompleteIntersectionNoetherianRegularSequence
-import WeilConjectures.RingTheory.PolynomialLocalWeakRegularSequenceDescent
+import Sheaf.RingTheory.PolynomialLocalWeakRegularSequenceDescent
 
 /-!
 # Local regularity of equations of a relative global complete intersection

@@ -15,8 +15,8 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.RingTheory.MinimalPresentationTor
 import Sheaf.RingTheory.GradedKernelFinite
-import WeilConjectures.RingTheory.GradedNakayamaGeneration
-import WeilConjectures.RingTheory.MinimalGradedPresentationExists
+import Sheaf.RingTheory.GradedNakayamaGeneration
+import Sheaf.RingTheory.MinimalGradedPresentationExists
 import Mathlib.RingTheory.Finiteness.Basic
 
 /-!

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing
 import WeilConjectures.RingTheory.ProEtale.IntegralLocal
 

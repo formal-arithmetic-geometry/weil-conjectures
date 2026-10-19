@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.Paper.LisseModuleSheaves
 import Sheaf.ConstructibleSheaf.FiniteSetMonodromyTorsor
-import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
+import Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!

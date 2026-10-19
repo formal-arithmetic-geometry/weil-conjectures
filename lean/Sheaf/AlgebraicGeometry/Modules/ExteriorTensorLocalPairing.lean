@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor
+import Sheaf.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor
 
 /-!
 # Exterior pairing induced by a linear map on an open

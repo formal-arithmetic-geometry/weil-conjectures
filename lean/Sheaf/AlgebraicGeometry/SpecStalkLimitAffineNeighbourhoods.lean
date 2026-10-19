@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine

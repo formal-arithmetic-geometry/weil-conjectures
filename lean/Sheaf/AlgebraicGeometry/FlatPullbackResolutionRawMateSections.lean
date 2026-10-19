@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.FlatUnitRawSections
-import all WeilConjectures.AlgebraicGeometry.HigherDirectImageResolutionNaturality
+import all Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 
 /-! # The flat pullback unit on raw section cohomology
 

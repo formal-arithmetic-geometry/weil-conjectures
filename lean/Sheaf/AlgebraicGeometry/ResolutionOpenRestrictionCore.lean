@@ -5,11 +5,11 @@ Authors: SHEAF group E4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ResolutionOpenComparisonMap
+public import Sheaf.AlgebraicGeometry.ResolutionOpenComparisonMap
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
-import WeilConjectures.AlgebraicGeometry.ResolutionOpenRestrictionNatural
+import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionNatural
 
 /-! # The fixed comparison commutes with restriction to the scalar nonvanishing open.
 Source: Stacks Project, Tags 01E1 and 01E4.

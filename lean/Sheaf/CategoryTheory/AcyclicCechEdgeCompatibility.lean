@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.SiteCechEdgeNormalization
-public import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
+public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+public import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic

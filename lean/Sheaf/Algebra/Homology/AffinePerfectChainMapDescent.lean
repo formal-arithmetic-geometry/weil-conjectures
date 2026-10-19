@@ -5,14 +5,14 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent
+import Sheaf.Algebra.Homology.BoundedGradedMapColimitDescent
 import Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent
 
 /-! # Descent of chain maps between affine perfect complexes

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SmoothStrictNormalCrossingsDivisor
 public import Sheaf.AlgebraicGeometry.LogRegularPair
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion

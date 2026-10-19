@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses

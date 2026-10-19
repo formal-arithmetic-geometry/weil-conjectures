@@ -5,7 +5,7 @@ Authors: SHEAF groups E3, R2
 -/
 module
 
-public import WeilConjectures.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.MPseudoCoherent
 import Sheaf.RingTheory.DerivedMapLift
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 import Mathlib.Algebra.Category.ModuleCat.Projective

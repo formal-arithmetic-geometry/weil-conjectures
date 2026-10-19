@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.Smooth.Flat
 import Sheaf.RingTheory.EtaleNormalRing
-import WeilConjectures.RingTheory.FilteredColimitNormalRing
+import Sheaf.RingTheory.FilteredColimitNormalRing
 
 /-!
 # Local filtered colimits of etale algebras over normal domains

@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductData
+public import Sheaf.CategoryTheory.Sites.EtaleContractedProductData
 
 /-! # Universal property of the sheafified orbit quotient -/
 

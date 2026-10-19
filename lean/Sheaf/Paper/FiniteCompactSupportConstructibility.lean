@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.CategoryTheory.TruncationTriangle
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula

@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.Topology.Irreducible
 
 import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
 
 /-!

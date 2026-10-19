@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Unramified.Finite
 import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.PointedEtaleSmallFiltered
-import WeilConjectures.RingTheory.FlatColimitRings
+import Sheaf.RingTheory.FlatColimitRings
 import Mathlib.CategoryTheory.Limits.Preserves.Over
 
 /-!

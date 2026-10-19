@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.CoherentIdealPowerStableAnnihilator
 import Sheaf.AlgebraicGeometry.CoherentIdealProductIntersectionBound
 import Sheaf.AlgebraicGeometry.IdealPowerComplement
 import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
-import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
+import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
 import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage

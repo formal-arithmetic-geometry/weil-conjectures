@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # A residue Betti number vanishes under a universal tensor test
 

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
+import Sheaf.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.AlgebraicGeometry.SeparatedLqfFpqcDescent
 import Sheaf.SecPurity.QcMapAffineEtaleNeighbourhood
 

@@ -5,8 +5,9 @@ Authors: SHEAF group M2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 
 /-! # Coefficient factors of the derived scalar pullback square
 

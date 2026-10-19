@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.Paper.FiniteFreeKernelH1Vanishing
-import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
+import Sheaf.AlgebraicGeometry.GeneratingSectionsStalkSpan
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Finite basic-open covers generate the unit ideal under ideal H¹ vanishing

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
+import Sheaf.Algebra.Homology.DerivedFreeModuleHomology
 
 /-! # Perfect generation over an affine base
 

@@ -5,12 +5,12 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.KollarLocalDichotomy
-import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.Artinian.Module
 import Mathlib.RingTheory.KrullDimension.Field
 

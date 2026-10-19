@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTraceDiscriminantGluing
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTraceDiscriminantGluing
 import Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantFibreEtaleCriterion
 
 /-!

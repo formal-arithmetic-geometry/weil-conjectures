@@ -25,7 +25,7 @@ import Sheaf.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.ConstantModuleSectionProperties
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import Sheaf.RingTheory.FiniteModuleComplete
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Finiteness.Defs

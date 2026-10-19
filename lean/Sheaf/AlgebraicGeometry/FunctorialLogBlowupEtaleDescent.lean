@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q153
 -/
 import Sheaf.AlgebraicGeometry.StrictEtaleLogBlowupProcedure
-import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.CoherentLogIdealChartConstruction
 import Sheaf.CategoryTheory.SetSheafCoverDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver

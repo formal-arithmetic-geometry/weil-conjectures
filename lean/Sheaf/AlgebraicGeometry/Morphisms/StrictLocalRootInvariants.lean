@@ -11,7 +11,7 @@ public import Mathlib.GroupTheory.Index
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootPowerMapInvariants
+import Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants
 
 /-! # Fixed rings of a strict local root algebra
 

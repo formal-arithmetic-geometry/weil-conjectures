@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ConductorSectionsRestriction
 import Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections
-import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
+import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 

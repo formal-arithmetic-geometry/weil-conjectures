@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.SemilocalDimOneConductor
 import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 import Mathlib.Algebra.Order.Archimedean.Basic
-import WeilConjectures.RingTheory.SemilocalDedekindDvrReduction
+import Sheaf.RingTheory.SemilocalDedekindDvrReduction
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset

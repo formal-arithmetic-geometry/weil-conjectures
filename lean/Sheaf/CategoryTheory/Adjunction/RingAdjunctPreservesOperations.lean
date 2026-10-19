@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
+public import Mathlib.CategoryTheory.Monoidal.Ring
+public import Mathlib.CategoryTheory.Adjunction.Basic

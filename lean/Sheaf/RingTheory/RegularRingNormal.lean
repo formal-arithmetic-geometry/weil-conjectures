@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import WeilConjectures.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreConditions
 import Sheaf.RingTheory.SerreCriterionNormal
 
 /-!

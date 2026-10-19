@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import WeilConjectures.RingTheory.KoszulConormalComparison
+public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.RingTheory.KoszulConormalVectorBasisData

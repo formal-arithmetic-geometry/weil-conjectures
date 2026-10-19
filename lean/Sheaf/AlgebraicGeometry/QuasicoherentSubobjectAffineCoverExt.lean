@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.QuasicoherentSubobjectAffineCoverExt
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.CategoryTheory.Subobject.Basic

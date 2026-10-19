@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.Topology.PointModuleEvaluationEquivalence
 
 /-! # Global sections of tensor pullback between field spectra

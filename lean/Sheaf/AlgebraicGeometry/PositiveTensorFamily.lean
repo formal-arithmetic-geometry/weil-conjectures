@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Positive tensor products of families and their sections

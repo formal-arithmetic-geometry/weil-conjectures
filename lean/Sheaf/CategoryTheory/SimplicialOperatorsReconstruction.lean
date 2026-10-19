@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 import Mathlib.AlgebraicTopology.SimplexCategory.MorphismProperty
-import WeilConjectures.CategoryTheory.SimplexPresentationFaithful
+import Sheaf.CategoryTheory.SimplexPresentationFaithful
 
 /-!
 # Reconstruction from simplicial operators

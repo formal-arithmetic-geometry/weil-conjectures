@@ -16,8 +16,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.CategoryTheory.Limits.Final
-import WeilConjectures.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem
-import WeilConjectures.RingTheory.LimitModuleSmallOverSystem
+import Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem
+import Sheaf.RingTheory.LimitModuleSmallOverSystem
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Tower descent over a prescribed local-ring system

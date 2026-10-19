@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!

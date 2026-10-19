@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
-import WeilConjectures.RingTheory.NoetherianApproximationLocalizedDiagrams
+import Sheaf.RingTheory.NoetherianApproximationLocalizedDiagrams
 import Mathlib.RingTheory.FiniteType
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.RingTheory.ColimitEventuallyFlat

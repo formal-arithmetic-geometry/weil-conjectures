@@ -5,7 +5,7 @@ Authors: SHEAF group D4
 -/
 module
 
-public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
+public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.Algebraic.Defs

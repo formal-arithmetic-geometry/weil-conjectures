@@ -5,7 +5,7 @@ Authors: SHEAF group N6
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
+public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
-import WeilConjectures.AlgebraicGeometry.SignedCechExtension
+import Sheaf.AlgebraicGeometry.SignedCechExtension
 import Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjection
 import WeilConjectures.Topology.Sheaves.CechComparison
 

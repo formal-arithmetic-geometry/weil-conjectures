@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
+public import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 import Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits

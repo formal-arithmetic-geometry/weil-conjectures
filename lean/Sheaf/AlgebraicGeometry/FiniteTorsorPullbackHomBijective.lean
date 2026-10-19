@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 
 /-! # Hom sets between finite constant torsor sheaves

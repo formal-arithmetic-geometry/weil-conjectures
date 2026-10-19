@@ -8,7 +8,7 @@ module
 public import Sheaf.FieldTheory.BrauerScalarDefect
 import Sheaf.FieldTheory.BrauerScalarDefectTensorLifts
 import Sheaf.FieldTheory.GaloisUnitsScalarCoboundary
-import WeilConjectures.FieldTheory.GaloisMatrixCocycleSplit
+import Sheaf.FieldTheory.GaloisMatrixCocycleSplit
 
 /-!
 # Splitting the tensor product of scalar-defect realizations

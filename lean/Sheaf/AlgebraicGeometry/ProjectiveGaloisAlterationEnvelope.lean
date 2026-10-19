@@ -16,7 +16,7 @@ public import Mathlib.FieldTheory.Galois.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
-import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorDecomposition
+import Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
 import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import Sheaf.AlgebraicGeometry.ProjectiveBundleComposition

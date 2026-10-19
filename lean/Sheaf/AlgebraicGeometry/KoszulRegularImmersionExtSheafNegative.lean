@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Extend
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 @[expose] public section
 

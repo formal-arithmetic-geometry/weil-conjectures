@@ -26,7 +26,7 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Filt
 import Sheaf.AlgebraicGeometry.ZModSheafInvertibleOrders
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Artinian
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.AlgebraicGeometry.EtaleBaseChangeOpenClosed
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres

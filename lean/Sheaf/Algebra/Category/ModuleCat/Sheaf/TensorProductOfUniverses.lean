@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Tensor product and scalar extension with independent universes

@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
-public import WeilConjectures.RingTheory.CompletionMapForLocalHom
+public import Sheaf.RingTheory.CompletionMapForLocalHom
 import Sheaf.AlgebraicGeometry.SmoothArtinianLiftingAtPoint
 import Sheaf.AlgebraicGeometry.UnramifiedMaximalIdealResidueCriterion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber

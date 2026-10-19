@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper

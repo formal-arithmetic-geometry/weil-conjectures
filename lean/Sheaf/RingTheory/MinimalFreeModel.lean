@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.RingTheory.StablyFreeComplexLift
-import WeilConjectures.RingTheory.ResidueCohomologySplit
+import Sheaf.RingTheory.ResidueCohomologySplit
 import Sheaf.RingTheory.MinimalFreeComparison
 import Mathlib.RingTheory.LocalRing.Module
 

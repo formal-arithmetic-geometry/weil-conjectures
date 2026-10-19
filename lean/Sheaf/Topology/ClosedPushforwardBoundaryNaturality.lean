@@ -10,9 +10,10 @@ public import Mathlib.Topology.Sheaves.Functors
 public import Sheaf.Topology.AbelianCohomologyDeltaFunctor
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import Sheaf.Topology.ClosedImmersionPushforwardExact
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Closed-pushforward cohomology comparison and boundaries

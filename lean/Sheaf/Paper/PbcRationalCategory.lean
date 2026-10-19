@@ -6,7 +6,7 @@ Authors: SHEAF group Q06
 module
 
 public import Sheaf.Paper.BoundedConstructibleComplete
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Module.TransferInstance
 public import Mathlib.CategoryTheory.Linear.Basic

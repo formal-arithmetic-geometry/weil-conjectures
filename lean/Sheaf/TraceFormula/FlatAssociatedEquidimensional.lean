@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
-import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FlatRelativeAssociatedSpecialization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 

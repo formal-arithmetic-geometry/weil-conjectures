@@ -15,9 +15,9 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import WeilConjectures.RingTheory.EssentiallyFinitePresentationOverIntermediate
+import Sheaf.RingTheory.EssentiallyFinitePresentationOverIntermediate
 import Sheaf.Paper.LimitTowerOverLocalSystem
-import WeilConjectures.RingTheory.LocalRingColimitEssentiallyFiniteType
+import Sheaf.RingTheory.LocalRingColimitEssentiallyFiniteType
 
 /-! # Limit presentation of an essentially finitely presented local tower
 Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 00R7

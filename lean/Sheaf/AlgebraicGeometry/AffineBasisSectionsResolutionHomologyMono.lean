@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.ShortComplexSectionComparison
+import Sheaf.AlgebraicGeometry.ShortComplexSectionComparison
 import Sheaf.AlgebraicGeometry.IntegerSectionAcyclicIncomingKernelImage
 
 /-! # Mono part of affine-basis section resolution comparison

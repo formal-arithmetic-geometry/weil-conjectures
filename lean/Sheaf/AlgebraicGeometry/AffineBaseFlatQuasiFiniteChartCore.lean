@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion

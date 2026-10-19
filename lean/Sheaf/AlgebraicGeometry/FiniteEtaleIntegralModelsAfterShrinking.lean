@@ -20,7 +20,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
 import Sheaf.TraceFormula.ReducedSchemeImage
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme

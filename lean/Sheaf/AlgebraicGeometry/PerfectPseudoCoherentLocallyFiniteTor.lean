@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

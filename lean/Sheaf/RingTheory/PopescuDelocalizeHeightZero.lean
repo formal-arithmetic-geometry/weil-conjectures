@@ -13,8 +13,8 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations
 import Sheaf.RingTheory.PopescuDelocalizeHeightZeroData
 import Sheaf.RingTheory.PopescuDelocalizeWeak
-import WeilConjectures.RingTheory.SingularIdeal
-import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # Delocalizing a Popescu resolution at a prime of height zero

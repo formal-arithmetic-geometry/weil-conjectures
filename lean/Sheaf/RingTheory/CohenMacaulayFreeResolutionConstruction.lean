@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ExactSequence
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.StdBasis
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 
 @[expose] public section
 

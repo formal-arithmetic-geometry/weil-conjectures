@@ -1,10 +1,10 @@
 module
 
-public import WeilConjectures.RingTheory.KoszulConormalComparison
+public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulDualBelowTopHomology
-import WeilConjectures.RingTheory.KoszulConormalTopHomology
+import Sheaf.RingTheory.KoszulConormalTopHomology
 import Mathlib.Algebra.Homology.SingleHomology
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 

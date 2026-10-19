@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison
 import all Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
+import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits

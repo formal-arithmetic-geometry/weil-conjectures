@@ -13,8 +13,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.FieldTheory.SeparableExtension
 
 import WeilConjectures.FieldTheory.MakeSeparablyGenerated
-import WeilConjectures.AlgebraicGeometry.GenericFibreDominantField
-import WeilConjectures.AlgebraicGeometry.PurelyInseparableGenericBaseSpread
+import Sheaf.AlgebraicGeometry.GenericFibreDominantField
+import Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread
 import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding
 
 /-! # A separating generic field after a radicial base extension

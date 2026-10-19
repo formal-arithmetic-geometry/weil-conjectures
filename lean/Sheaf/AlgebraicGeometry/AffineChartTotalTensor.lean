@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor

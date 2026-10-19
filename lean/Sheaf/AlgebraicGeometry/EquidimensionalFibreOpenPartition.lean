@@ -4,9 +4,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
+import Sheaf.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionNeighbourhood
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
 

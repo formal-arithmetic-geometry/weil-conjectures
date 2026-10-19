@@ -5,13 +5,12 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Lifting scalar maps from one closed rank support
 

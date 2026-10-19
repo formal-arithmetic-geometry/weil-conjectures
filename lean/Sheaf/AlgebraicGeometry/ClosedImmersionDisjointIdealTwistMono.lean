@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Injectivity of restriction on a disjoint ideal twist

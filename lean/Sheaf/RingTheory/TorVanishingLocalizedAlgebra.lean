@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Localization.Basic
-import WeilConjectures.RingTheory.TorLocalizationDenominators
+import Sheaf.RingTheory.TorLocalizationDenominators
 
 /-! # Tor vanishing after localizing the coefficient algebra
 

@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group W2
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
-import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisGlobalExtComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisGlobalExtComparison
 import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport
-import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 /-! # Free abelian sheaves for a two-open cover
 
 Source: Stacks Project, Tag 01EB.

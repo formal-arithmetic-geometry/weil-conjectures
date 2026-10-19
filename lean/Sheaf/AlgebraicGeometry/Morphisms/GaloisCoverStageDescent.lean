@@ -8,10 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
-import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of an unpointed finite Galois torsor

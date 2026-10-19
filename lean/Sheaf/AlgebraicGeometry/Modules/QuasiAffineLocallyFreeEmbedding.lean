@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiAffineFiniteFreeQuotient
+import Sheaf.AlgebraicGeometry.Modules.QuasiAffineFiniteFreeQuotient
 import Sheaf.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding
 
 /-! # Universal finite free embeddings on Noetherian affine opens

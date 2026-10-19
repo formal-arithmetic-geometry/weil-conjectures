@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
 
 /-!
 # Direct image of an extension and its fibre torsor

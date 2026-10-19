@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.DiscreteSchemeModuleLocallyConstant
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

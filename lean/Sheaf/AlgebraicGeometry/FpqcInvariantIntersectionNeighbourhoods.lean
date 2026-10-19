@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import WeilConjectures.AlgebraicGeometry.DescentOrbitSaturated
+import Sheaf.AlgebraicGeometry.DescentOrbitSaturated
 import Sheaf.Topology.SpectralGeneralizations
 
 /-!

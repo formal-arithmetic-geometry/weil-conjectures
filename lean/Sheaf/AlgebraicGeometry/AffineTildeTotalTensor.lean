@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Tilde and the unbounded total tensor complex

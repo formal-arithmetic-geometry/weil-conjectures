@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection
 import Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases
-import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
+import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.RingTheory.KoszulConormalBasis

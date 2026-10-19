@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import all WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import all Sheaf.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Coproducts in derived categories with K-injective resolutions
 

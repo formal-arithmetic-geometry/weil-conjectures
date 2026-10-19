@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel
 import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionModuleSections
+import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 @[expose] public section

@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisCoordinates
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisCoordinates
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
 
 /-!

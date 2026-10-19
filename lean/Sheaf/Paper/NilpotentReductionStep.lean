@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Sites.Pretopology
 import Sheaf.Paper.ConstantCoefficientLisseTriangle
 import Sheaf.Paper.ConstantCoefficientLisseRestriction
 import Sheaf.Algebra.Homology.KFlatResolution
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat

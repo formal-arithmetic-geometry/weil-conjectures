@@ -5,9 +5,9 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import WeilConjectures.CategoryTheory.Abelian.DerivedSingleShiftNormalization
-import WeilConjectures.CategoryTheory.Abelian.DerivedBottomInclusion
-import WeilConjectures.CategoryTheory.Abelian.DerivedCyclesUnitNaturality
+public import Sheaf.CategoryTheory.Abelian.DerivedSingleShiftNormalization
+import Sheaf.CategoryTheory.Abelian.DerivedBottomInclusion
+import Sheaf.CategoryTheory.Abelian.DerivedCyclesUnitNaturality
 
 /-! # Canonical-cycle transport to the double truncation
 

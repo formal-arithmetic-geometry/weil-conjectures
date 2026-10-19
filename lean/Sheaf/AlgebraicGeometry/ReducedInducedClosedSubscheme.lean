@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

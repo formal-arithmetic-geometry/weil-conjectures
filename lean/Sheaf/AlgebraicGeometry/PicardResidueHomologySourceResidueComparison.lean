@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
+public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PicardResidueSourceModelHomology
@@ -22,7 +22,6 @@ import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerI
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
 import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # A strictly perfect affine model computes residue cycle homology
 

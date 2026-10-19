@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
 import Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectCore
-import WeilConjectures.AlgebraicGeometry.AffineFiniteFreePerfectComparison
+import Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectComparison
 
 /-!
 # Local strictly perfect models from bounded finite free resolutions

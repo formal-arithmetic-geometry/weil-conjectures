@@ -41,9 +41,9 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.RingTheory.LimitFlatModules
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

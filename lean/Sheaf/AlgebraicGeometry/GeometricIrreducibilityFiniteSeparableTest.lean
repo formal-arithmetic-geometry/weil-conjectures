@@ -15,7 +15,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible
 
 /-!

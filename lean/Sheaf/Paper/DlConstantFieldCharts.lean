@@ -31,7 +31,7 @@ import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
 import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct
+import Sheaf.AlgebraicGeometry.NormalSectionsFiniteProduct
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import Sheaf.Paper.IntegralPullbackComposition

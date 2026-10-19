@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc

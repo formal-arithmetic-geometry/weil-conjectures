@@ -29,7 +29,7 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.DerivedAdjunctionShift
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities

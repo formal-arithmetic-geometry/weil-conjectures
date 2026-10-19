@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechColumnStep
-import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSingletonGluing
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechColumnStep
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonGluing
 
 /-! # principal-open Čech augmentation for injective terms
 

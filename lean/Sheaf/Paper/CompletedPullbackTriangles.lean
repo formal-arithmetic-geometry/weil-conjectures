@@ -11,7 +11,7 @@ public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.CompletedRlimFunctor
 import Sheaf.Paper.PbcQbarCompletedPullback

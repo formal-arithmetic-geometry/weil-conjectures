@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import WeilConjectures.RingTheory.AffineFiniteProjectivePrimeMembership
+import Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership
 import Mathlib.RingTheory.Localization.Module
 import Mathlib.RingTheory.Ideal.Maps
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk

@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
+public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.GrothendieckCocycleComparison
 

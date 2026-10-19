@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
 import Sheaf.AlgebraicGeometry.GenericFibreBirationalHypersurfaceModel
-import WeilConjectures.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen
+import Sheaf.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen
 
 /-! # A common affine open with a generic hypersurface model
 

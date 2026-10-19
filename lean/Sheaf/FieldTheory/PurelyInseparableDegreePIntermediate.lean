@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.FieldTheory.PurelyInseparableDegreePIntermediate
+public import Mathlib.FieldTheory.PurelyInseparable.Basic

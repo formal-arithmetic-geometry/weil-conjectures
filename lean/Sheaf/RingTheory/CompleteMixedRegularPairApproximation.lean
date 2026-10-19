@@ -6,7 +6,7 @@ Authors: SHEAF group Q26
 module
 
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence

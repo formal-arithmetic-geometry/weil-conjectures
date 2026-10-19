@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.LocalRing.Module
-import WeilConjectures.RingTheory.NakayamaNilpotent
+import Sheaf.RingTheory.NakayamaNilpotent
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 

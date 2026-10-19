@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
+public import Mathlib.AlgebraicGeometry.Scheme

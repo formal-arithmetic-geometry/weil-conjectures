@@ -6,7 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 import Sheaf.AlgebraicGeometry.Picard.TensorSingleBaseChangeSquare
 import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit

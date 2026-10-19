@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 /-! # Source-open flat counit presentations

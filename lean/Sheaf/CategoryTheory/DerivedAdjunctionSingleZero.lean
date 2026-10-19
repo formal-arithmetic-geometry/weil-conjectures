@@ -6,7 +6,7 @@ Authors: SHEAF group B5
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
 /-! # The degree-zero unit of a derived adjunction
 

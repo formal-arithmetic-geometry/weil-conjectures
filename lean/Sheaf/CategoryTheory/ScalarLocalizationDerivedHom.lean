@@ -17,8 +17,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.SequenceRelativeHomTelescope
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

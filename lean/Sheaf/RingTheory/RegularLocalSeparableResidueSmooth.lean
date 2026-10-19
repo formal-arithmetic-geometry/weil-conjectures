@@ -4,8 +4,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.FieldTheory.SeparableExtension
-public import WeilConjectures.RingTheory.SingularIdeal
-import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
+public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
 import Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
 import Sheaf.RingTheory.RegularLocalFibreFinrank
 

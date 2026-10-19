@@ -8,8 +8,8 @@ module
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import WeilConjectures.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings
-import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
+import Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings
+import Sheaf.RepresentationTheory.OpenStabilizerAdjunction
 import Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 
 /-!

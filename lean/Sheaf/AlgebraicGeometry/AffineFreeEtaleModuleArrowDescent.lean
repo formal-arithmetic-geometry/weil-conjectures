@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
+import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
 import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Pullback

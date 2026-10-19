@@ -8,7 +8,7 @@ public import Sheaf.RingTheory.StrictHenselizationPresentation
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
+import Sheaf.RingTheory.EtaleResidueTriplesFiltered
 
 /-!
 # Comparing two colimit presentations of strict henselization

@@ -7,11 +7,11 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
-public import WeilConjectures.Topology.AbelianOpenExtensionByZero
+public import Sheaf.Topology.AbelianOpenExtensionByZero
 
 import Sheaf.Topology.ConstantSubsheafNormalizedPresentation
-import WeilConjectures.Topology.ConstantSubsheafLowerImageStalks
-import WeilConjectures.Topology.ConstantSubsheafQuotientSection
+import Sheaf.Topology.ConstantSubsheafLowerImageStalks
+import Sheaf.Topology.ConstantSubsheafQuotientSection
 
 /-! # The lower integer layer and its quotient generator
 

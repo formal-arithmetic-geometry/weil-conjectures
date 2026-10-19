@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.FieldTheory.Perfect
 
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.CommonExtensionFields
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 

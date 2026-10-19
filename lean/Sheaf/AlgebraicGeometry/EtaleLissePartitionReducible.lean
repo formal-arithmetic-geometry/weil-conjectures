@@ -5,12 +5,12 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleLissePartition
+public import Sheaf.AlgebraicGeometry.EtaleLissePartition
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # The reducible step for finite lisse partitions

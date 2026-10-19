@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
-import WeilConjectures.RingTheory.FlatPermanence
+import Sheaf.RingTheory.FlatPermanence
 import Sheaf.RingTheory.LocalRingHomTensorProductFieldExtensionFaithfullyFlat
 
 /-!

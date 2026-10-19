@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-public import WeilConjectures.RingTheory.SingularIdeal
+public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.PopescuLifting
 import Sheaf.RingTheory.PopescuSmoothLiftModuloEightAux
 

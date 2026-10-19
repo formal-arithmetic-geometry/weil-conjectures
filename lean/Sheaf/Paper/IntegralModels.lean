@@ -22,7 +22,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 public import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
 import Sheaf.Paper.IntegralModelsOperations

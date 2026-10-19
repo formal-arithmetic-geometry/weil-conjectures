@@ -7,9 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.Topology.Sheaves.Abelian
-import WeilConjectures.Algebra.Homology.OpenExtensionCounitStalk
+import Sheaf.Algebra.Homology.OpenExtensionCounitStalk
 
 /-! # A concentrated approximation on an open support
 

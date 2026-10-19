@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.GenericFinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!

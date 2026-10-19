@@ -6,7 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.AlgebraicGeometry.Sites.AffineLimitSheafApproximation
-import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale

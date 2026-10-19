@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.ExcellentRing
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.UniversallyCatenaryDimensionFormula
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.CompletionDimension
 import Sheaf.RingTheory.FiniteAfterCompletion

@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.Separable

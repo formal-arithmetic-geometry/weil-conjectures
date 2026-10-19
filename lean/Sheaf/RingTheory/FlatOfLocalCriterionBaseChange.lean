@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import WeilConjectures.RingTheory.LocalizedBaseChangeQuotientFlat
+import Sheaf.RingTheory.LocalizedBaseChangeQuotientFlat
 import Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.RingTheory.LocalRing.RingHom.Basic

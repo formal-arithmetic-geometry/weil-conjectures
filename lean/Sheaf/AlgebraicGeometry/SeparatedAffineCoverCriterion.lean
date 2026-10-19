@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.SeparatedAffineCoverCriterion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.AffineScheme

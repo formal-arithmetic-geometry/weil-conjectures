@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-public import WeilConjectures.AlgebraicGeometry.LocalMapPairCompatibility
+public import Sheaf.AlgebraicGeometry.LocalMapPairCompatibility
 import Sheaf.AlgebraicGeometry.OpenCoverTensorDescentComparisonCoherence
 
 /-! # Detecting pairwise compatibility on the base change of the overlap

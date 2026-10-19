@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import WeilConjectures.RingTheory.KaehlerDifferentialZeroIffPow
+import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Sheaf.RingTheory.Derivation.FiniteCoefficientPreparation
 import Mathlib.RingTheory.Localization.Integer

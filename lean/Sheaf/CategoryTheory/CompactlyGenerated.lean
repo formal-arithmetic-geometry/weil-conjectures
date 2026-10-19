@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.CompactObject
-public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-!
 # Compactly generated triangulated categories

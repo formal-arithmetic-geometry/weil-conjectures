@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 
 /-!
 # Wedging two exterior sheaves before quotient descent

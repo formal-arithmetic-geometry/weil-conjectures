@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.RingTheory.PseudoCoherentApproximationTriangle
-import WeilConjectures.RingTheory.MPseudoCoherentShift
+import Sheaf.RingTheory.MPseudoCoherentShift
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 
 /-!

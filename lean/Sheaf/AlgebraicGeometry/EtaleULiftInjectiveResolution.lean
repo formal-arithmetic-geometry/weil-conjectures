@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.Ulift
 
 import Sheaf.AlgebraicGeometry.EtaleULiftInjective
-import WeilConjectures.AlgebraicGeometry.EtaleULiftHomology
+import Sheaf.AlgebraicGeometry.EtaleULiftHomology
 
 /-!
 # Lifting an injective resolution on the small étale site

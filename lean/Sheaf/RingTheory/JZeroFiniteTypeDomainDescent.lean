@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness
-import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
+import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
 import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Module

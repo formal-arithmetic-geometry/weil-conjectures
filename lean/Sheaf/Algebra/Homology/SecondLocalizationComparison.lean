@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Algebra.Homology.SecondLocalizationMap
 import Sheaf.Algebra.Homology.SecondLocalizationOrdinarySquare
-import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
+import Sheaf.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison for second localization
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
 (blueprint: lem-pc-second-localization-comparison). -/

@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.FiniteType
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import WeilConjectures.RingTheory.CompletionAtQuasiFinitePrimeMap
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.CompletionAtQuasiFinitePrimeMap
 import Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit
 import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 

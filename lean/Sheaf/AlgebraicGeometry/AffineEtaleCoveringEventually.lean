@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineEtaleCoveringEventually
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite

@@ -22,7 +22,7 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.OpenFlatLocus
-import WeilConjectures.RingTheory.FlatFinitePresentationModel
+import Sheaf.RingTheory.FlatFinitePresentationModel
 import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
 
 /-!

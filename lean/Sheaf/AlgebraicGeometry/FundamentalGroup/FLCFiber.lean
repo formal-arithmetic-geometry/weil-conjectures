@@ -5,7 +5,7 @@ Authors: SHEAF group Q01
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GaloisCategories
+public import Sheaf.AlgebraicGeometry.GaloisCategories
 public import Sheaf.CategoryTheory.Galois.AutProfinite
 
 /-! # The geometric fibre functor on finite locally constant sheaves

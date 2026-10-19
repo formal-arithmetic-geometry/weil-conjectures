@@ -4,7 +4,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRectification
+import Sheaf.CategoryTheory.DerivedCategory.HomotopySquareRectification
 import Sheaf.AlgebraicGeometry.RelativeMVDirectImageHomotopyComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackConeSquareTransposition
 /-! # A strict relative cover comparison before cylinder replacement

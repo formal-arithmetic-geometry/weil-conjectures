@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
-import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionNormalization
+import Sheaf.CategoryTheory.DerivedCategory.AdjunctionNormalization
 
 /-! # Transport of the adjunction to the original derived-pullback counit
 

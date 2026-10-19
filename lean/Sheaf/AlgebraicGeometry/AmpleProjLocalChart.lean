@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
-import WeilConjectures.AlgebraicGeometry.AmpleSeparated
+import Sheaf.AlgebraicGeometry.AmpleSeparated
 import Sheaf.AlgebraicGeometry.SectionRingLocalizationBijective
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 

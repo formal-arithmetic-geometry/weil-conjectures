@@ -4,10 +4,10 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
-import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
+import Sheaf.RingTheory.DepthLeDimAssociatedPrime
 import Sheaf.TraceFormula.MinimalPrimesDenseSpectrum
 
 /-! # Dense Cohen--Macaulay locus for a finite type algebra over a field

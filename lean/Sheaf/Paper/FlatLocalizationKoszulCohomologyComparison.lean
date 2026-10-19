@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.Paper.ExtendedLocalizationCech
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree

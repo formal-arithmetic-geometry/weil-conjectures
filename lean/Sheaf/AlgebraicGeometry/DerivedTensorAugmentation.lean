@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Derived tensor augmentations on schemes

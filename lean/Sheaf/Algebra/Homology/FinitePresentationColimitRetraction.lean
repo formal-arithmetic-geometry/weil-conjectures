@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.CategoryTheory.Category.Preorder
-import WeilConjectures.Algebra.FinitePresentationMapCanonical
+import Sheaf.Algebra.FinitePresentationMapCanonical
 import Sheaf.Algebra.Homology.PreorderModuleMapEqualityDescent
 
 /-! # Descent of a retraction between fixed finitely presented models

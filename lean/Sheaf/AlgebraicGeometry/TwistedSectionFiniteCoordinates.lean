@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.TwistedSectionsFiniteDimensional
-import WeilConjectures.AlgebraicGeometry.TwistedSectionsConstantAction
+import Sheaf.AlgebraicGeometry.TwistedSectionsConstantAction
 
 /-! # Finite scalar coordinates for twisted coherent global sections
 

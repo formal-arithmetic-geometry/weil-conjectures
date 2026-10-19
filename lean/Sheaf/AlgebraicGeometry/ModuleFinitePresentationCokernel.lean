@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 

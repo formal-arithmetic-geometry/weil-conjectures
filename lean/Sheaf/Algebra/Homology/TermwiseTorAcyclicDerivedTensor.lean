@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.Algebra.Homology.SingleSupportTorAcyclicTensor
+import Sheaf.Algebra.Homology.SingleSupportTorAcyclicTensor
 import Sheaf.Algebra.Homology.TensorComparisonStupidTail
 
 /-!

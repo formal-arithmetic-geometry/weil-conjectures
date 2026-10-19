@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.RingTheory.CohenRing
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Sheaf.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.RingTheory.CohenPowerSeriesParameterExtension
 import Mathlib.RingTheory.AdicCompletion.Topology

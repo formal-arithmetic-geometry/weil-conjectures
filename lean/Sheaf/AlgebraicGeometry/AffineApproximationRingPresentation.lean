@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineApproximationRingPresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.FiniteType

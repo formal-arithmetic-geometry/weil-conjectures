@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLiftLocalFamily
 

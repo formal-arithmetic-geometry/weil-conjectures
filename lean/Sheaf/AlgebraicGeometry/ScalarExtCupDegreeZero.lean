@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
+import Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison
 
 /-! # ScalarExtCupDegreeZero
 

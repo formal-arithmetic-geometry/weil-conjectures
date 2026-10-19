@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDvrSpecialFiberCartier
+import Sheaf.AlgebraicGeometry.Morphisms.FlatDvrSpecialFiberCartier
 import Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity
 
 /-!

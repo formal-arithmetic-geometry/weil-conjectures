@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeImageExtension
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeApproximation

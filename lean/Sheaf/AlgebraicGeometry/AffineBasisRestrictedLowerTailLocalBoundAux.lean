@@ -1,13 +1,13 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
-import WeilConjectures.Topology.RestrictInjectiveResolution
+import Sheaf.Topology.RestrictInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 

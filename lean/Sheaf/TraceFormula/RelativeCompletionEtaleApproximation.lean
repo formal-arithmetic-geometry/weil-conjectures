@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import WeilConjectures.RingTheory.CompletionMapForLocalHom
+public import Sheaf.RingTheory.CompletionMapForLocalHom
 
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Noetherian

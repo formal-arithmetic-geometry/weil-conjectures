@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteOrderApproximation
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDetection

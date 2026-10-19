@@ -9,10 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
+import Sheaf.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 import Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus
 import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-! # Constant fibre dimension near a zero-dimensional fibre stalk
 

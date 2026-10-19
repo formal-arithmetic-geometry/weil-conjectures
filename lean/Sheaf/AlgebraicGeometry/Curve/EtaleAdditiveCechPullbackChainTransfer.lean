@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackAugmentedTransfer
-import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechCanonicalCoefficientTransfer
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCanonicalCoefficientTransfer
 
 /-! # Pullback maps of the augmented additive Čech complexes
 Source: Stacks Project, Tags 01FD, 01FB and 03P2.

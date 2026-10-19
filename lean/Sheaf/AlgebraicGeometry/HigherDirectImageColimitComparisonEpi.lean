@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 

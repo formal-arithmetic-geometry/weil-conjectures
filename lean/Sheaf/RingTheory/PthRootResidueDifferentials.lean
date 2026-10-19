@@ -6,10 +6,10 @@ Authors: SHEAF group P3
 module
 
 public import Mathlib.RingTheory.Kaehler.Basic
-public import WeilConjectures.RingTheory.PthRootAlgebraLocal
+public import Sheaf.RingTheory.PthRootAlgebraLocal
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import WeilConjectures.RingTheory.PthRootPresentationDifferentials
+import Sheaf.RingTheory.PthRootPresentationDifferentials
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.Algebra.Module.Projective
 

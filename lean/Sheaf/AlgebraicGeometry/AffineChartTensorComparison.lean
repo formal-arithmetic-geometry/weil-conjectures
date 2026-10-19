@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineChartTensorComparison
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.RingTheory.TensorProduct.Maps

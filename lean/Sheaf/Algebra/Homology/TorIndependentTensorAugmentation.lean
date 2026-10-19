@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.Algebra.Homology.TorIndependentScalarAugmentation
-import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison
+import Sheaf.Algebra.Homology.MixedTensorRestrictionComparison
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Tor independence and tensor augmentation

@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree

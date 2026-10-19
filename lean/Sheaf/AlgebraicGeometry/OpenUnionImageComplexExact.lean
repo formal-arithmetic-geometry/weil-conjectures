@@ -7,10 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullback
-import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
 import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.Algebra.Homology.HomologicalComplexBiprod
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Exactness of the concrete complex on an arbitrary open union
 

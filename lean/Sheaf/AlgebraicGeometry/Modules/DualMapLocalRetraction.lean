@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import WeilConjectures.AlgebraicGeometry.Modules.LocalSectionOfEpi
+import Sheaf.AlgebraicGeometry.Modules.LocalSectionOfEpi
 import Sheaf.AlgebraicGeometry.Modules.DualRetractionOfLocalSection
 
 @[expose] public section

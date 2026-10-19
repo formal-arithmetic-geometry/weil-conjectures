@@ -6,7 +6,7 @@ Authors: SHEAF group G2, SHEAF group H3
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 

@@ -5,8 +5,8 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
-import WeilConjectures.Topology.ModuleCohomologyTopComparison
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+import Sheaf.Topology.ModuleCohomologyTopComparison
 
 /-! # Tensor-power annihilation from zero cohomology fractions
 

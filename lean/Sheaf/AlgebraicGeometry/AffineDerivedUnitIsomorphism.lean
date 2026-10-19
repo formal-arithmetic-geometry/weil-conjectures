@@ -8,7 +8,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
 import Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso
 
 /-! # The derived affine unit

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Derivative
 public import Mathlib.RingTheory.MvPowerSeries.Inverse
 public import Mathlib.RingTheory.MvPowerSeries.Equiv
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import Sheaf.LinearAlgebra.Matrix.MinorIdeal
 import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 import Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions

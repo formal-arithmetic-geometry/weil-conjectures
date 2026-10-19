@@ -21,7 +21,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Polynomial.RationalRoot
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

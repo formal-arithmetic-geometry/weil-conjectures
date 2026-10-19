@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Regular.Flat

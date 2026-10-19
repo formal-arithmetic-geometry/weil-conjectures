@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DirectedPerfectHomIso
+public import Sheaf.AlgebraicGeometry.DirectedPerfectHomIso
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectHomContinuity
 

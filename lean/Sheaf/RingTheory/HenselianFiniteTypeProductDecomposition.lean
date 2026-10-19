@@ -6,13 +6,13 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.Algebra.Algebra.Pi
 public import Mathlib.Algebra.Algebra.Prod
-import WeilConjectures.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
 import Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting
-import WeilConjectures.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.HenselianEtaleRetraction
 
 /-!
 # Finite-type algebras over henselian local rings

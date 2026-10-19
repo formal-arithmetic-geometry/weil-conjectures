@@ -16,7 +16,7 @@ import Mathlib.RingTheory.Ideal.UFD
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+import Sheaf.RingTheory.IsRegularSystemOfParameters
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!

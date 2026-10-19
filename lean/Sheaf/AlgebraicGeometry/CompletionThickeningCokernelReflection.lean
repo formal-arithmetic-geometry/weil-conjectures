@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 /-! # Reflection of cokernel torsion on a closed thickening
 

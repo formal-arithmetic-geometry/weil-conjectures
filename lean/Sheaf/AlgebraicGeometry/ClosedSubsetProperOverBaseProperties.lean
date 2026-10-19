@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper

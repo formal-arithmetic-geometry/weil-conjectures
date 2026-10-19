@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
 
 /-! Reduction to a regular complete local coefficient subring.

@@ -7,9 +7,9 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower
-import WeilConjectures.RingTheory.FiniteIntegralConductor
+import Sheaf.RingTheory.FiniteIntegralConductor
 import Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPowerAux
-import WeilConjectures.AlgebraicGeometry.FiniteConductorMul
+import Sheaf.AlgebraicGeometry.FiniteConductorMul
 
 /-! # Conductor powers in a semilocal normalization
 

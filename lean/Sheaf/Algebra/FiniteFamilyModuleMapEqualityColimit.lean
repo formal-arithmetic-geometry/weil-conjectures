@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.CategoryTheory.Category.Preorder
-import WeilConjectures.Algebra.FiniteFamilyCommonStage
+import Sheaf.Algebra.FiniteFamilyCommonStage
 import Sheaf.Algebra.Homology.PreorderModuleMapEqualityDescent
 
 /-! # Simultaneous eventual equality of finitely many module maps

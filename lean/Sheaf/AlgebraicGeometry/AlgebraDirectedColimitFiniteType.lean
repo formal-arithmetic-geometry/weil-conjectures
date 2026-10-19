@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteTypeQuasiCoherentSubalgebras
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ModuleDirectedColimitFinitePresentation
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit

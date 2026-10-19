@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.CompactObject
-public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.CategoryTheory.CompactHomHocolim
 import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.CategoryTheory.Adjunction.Additive

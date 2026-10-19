@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.RingTheory.Ideal.Span
 import Sheaf.AlgebraicGeometry.GeneralIdealPowerAffineSections
 import Mathlib.RingTheory.Ideal.Operations

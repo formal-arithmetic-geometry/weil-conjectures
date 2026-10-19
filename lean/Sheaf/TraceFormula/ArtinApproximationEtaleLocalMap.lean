@@ -12,7 +12,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.RingTheory.GRing
-public import WeilConjectures.RingTheory.CompletionMapForLocalHom
+public import Sheaf.RingTheory.CompletionMapForLocalHom
 import Mathlib.GroupTheory.MonoidLocalization.Away
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

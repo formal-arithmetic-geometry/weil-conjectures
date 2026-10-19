@@ -6,9 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
-import WeilConjectures.Topology.ModuleMayerVietoris
+import Sheaf.Topology.ModuleMayerVietoris
 
 /-! # Mayer--Vietoris for quasi-coherent modules on an open subscheme
 

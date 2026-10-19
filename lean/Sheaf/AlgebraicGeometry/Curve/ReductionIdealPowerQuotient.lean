@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
+public import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeTransport
-import WeilConjectures.AlgebraicGeometry.InternalHomOverEquiv
+import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 
 /-! # Ordinary internal Hom complexes on an open subscheme
 

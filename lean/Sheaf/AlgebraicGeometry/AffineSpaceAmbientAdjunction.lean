@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist
 public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
@@ -33,6 +33,7 @@ import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.RingedTopoiDerivedTensorPullback

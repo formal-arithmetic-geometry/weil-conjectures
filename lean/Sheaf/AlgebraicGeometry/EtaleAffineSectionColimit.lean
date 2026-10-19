@@ -5,11 +5,11 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleStageSectionCocone
+public import Sheaf.AlgebraicGeometry.EtaleStageSectionCocone
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine
-import WeilConjectures.AlgebraicGeometry.EtaleAffineSectionSameStageEquality
+import Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 

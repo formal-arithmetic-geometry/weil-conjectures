@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
-import WeilConjectures.Topology.ConstructibleIsRetrocompact
+import Sheaf.Topology.ConstructibleIsRetrocompact
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.PerfectJumpLoci
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor

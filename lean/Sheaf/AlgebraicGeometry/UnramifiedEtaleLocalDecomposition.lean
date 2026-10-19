@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale

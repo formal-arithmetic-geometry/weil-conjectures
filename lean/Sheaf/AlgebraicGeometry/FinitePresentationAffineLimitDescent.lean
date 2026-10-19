@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
-import WeilConjectures.Algebra.FinitePresentationColimit
+import Sheaf.Algebra.FinitePresentationColimit
 import WeilConjectures.AlgebraicGeometry.Descent
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Homology.OpenCoverAdjunctionTriangle
 public import Mathlib.SetTheory.Ordinal.Basic
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit

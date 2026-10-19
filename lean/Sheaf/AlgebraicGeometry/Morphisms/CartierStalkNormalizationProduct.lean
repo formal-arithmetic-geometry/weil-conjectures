@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.NumberTheory.RamificationInertia.Galois
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
-import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup
-import WeilConjectures.AlgebraicGeometry.Morphisms.CartierStalkPuncturedComplement
+import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup
+import Sheaf.AlgebraicGeometry.Morphisms.CartierStalkPuncturedComplement
 import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkFieldCoproduct
 

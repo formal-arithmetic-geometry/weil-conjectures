@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-import WeilConjectures.RingTheory.WContractibleGeometricCriterion
+import Sheaf.RingTheory.WContractibleGeometricCriterion
 import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

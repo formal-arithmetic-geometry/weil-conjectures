@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import WeilConjectures.AlgebraicGeometry.ProjTwistLocalClearing
+import Sheaf.AlgebraicGeometry.ProjTwistLocalClearing
 import Mathlib.Data.Fintype.EquivFin
 @[expose] public section
 universe v

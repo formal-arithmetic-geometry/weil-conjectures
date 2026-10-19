@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

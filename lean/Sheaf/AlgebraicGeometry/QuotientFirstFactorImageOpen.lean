@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.QuotientFirstFactorImageOpen
+public import Mathlib.AlgebraicGeometry.Restrict

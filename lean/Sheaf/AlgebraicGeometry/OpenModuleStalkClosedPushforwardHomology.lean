@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Homology of a localized closed-pushforward stalk complex

@@ -6,11 +6,11 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing

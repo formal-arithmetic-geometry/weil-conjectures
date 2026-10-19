@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.IntegralHenselianClosedFibreSections
-import WeilConjectures.AlgebraicGeometry.EtaleModuleSectionsFieldExtension
+import Sheaf.AlgebraicGeometry.EtaleModuleSectionsFieldExtension
 
 /-! # Injectivity of integral sections over a strictly henselian base
 

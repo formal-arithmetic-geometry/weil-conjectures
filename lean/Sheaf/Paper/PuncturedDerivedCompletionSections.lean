@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import Sheaf.Topology.OpenModuleDerivedSections
-public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
+public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
 public import Sheaf.Paper.CoefTowerCoaugmentation
 import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
 import Sheaf.Paper.RingedPushforwardCompletion

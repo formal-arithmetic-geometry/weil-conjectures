@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 
-import WeilConjectures.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare
+import Sheaf.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare
 
 /-! # Flat change of the final coefficient ring of a tensor cohomology model
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Finite
 
-import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
+import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.RingTheory.HenselianLocalTargetEtaleMaps
 import Mathlib.RingTheory.TensorProduct.Pi
 

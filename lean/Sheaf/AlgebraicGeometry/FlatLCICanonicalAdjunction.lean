@@ -32,7 +32,7 @@ public import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.RelativeRegularEquationsBaseChange
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Paper.DerivedInternalHomRestrictOpen

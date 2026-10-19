@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FpqcDescendQuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Pullbacks

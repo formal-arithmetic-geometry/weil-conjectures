@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient
-import WeilConjectures.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
+import Sheaf.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # A finite quasi-coherent filtration of infinitesimal units

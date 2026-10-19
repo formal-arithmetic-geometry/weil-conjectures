@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Spec
 import Mathlib.RingTheory.Localization.BaseChange
-import WeilConjectures.AlgebraicGeometry.RefinementLocalizationGeometry
-import WeilConjectures.AlgebraicGeometry.ReducedProductLocalization
+import Sheaf.AlgebraicGeometry.RefinementLocalizationGeometry
+import Sheaf.AlgebraicGeometry.ReducedProductLocalization
 
 /-!
 # Combining finitely many localizations of a finite domain decomposition

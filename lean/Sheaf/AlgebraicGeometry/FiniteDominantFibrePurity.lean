@@ -24,7 +24,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
-import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents

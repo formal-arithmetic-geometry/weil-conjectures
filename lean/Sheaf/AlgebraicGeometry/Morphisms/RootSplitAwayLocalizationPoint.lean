@@ -2,9 +2,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationChart
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationChart
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
 
 @[expose] public section
 universe u

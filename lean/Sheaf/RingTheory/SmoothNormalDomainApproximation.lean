@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Smooth.NoetherianDescent
 import Mathlib.Algebra.Ring.ULift
 import Sheaf.RingTheory.NormalFiniteTypeSubalgebraExtension
-import WeilConjectures.RingTheory.DirectedSubalgebraTensorColimit
+import Sheaf.RingTheory.DirectedSubalgebraTensorColimit
 
 /-!
 # Noetherian approximation of smooth algebras over normal domains

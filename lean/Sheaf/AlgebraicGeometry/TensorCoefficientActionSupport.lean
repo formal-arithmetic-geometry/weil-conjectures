@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
 import Sheaf.AlgebraicGeometry.TensorKernelSectionProduct
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
 
 /-! # Homogeneous action has the expected degree support
 

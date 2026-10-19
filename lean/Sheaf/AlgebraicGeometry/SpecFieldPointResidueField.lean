@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.SpecFieldPointResidueField
+public import Mathlib.AlgebraicGeometry.ResidueField

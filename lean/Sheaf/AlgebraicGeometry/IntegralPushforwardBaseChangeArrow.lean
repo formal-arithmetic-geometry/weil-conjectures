@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
 import WeilConjectures.SixFunctors.Integral.BaseChange
-import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.ExchangeIdentityPasting
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact

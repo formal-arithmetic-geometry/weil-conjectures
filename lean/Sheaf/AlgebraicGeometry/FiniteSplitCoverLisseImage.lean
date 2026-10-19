@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import Sheaf.AlgebraicGeometry.DisjointUniversalHomeomorphismsLisseImage
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.SixFunctors.Finite.BaseChange

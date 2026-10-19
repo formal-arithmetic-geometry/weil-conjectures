@@ -14,8 +14,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
-import WeilConjectures.RingTheory.LocalizedApproximationColimits
-import WeilConjectures.RingTheory.LocalizedApproximationBaseChange
+import Sheaf.RingTheory.LocalizedApproximationColimits
+import Sheaf.RingTheory.LocalizedApproximationBaseChange
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.RingTheory.Localization.Submodule

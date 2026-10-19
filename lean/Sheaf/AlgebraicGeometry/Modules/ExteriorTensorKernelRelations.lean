@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelLocallySpanned
-import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # A generator criterion for annihilating an exterior quotient kernel

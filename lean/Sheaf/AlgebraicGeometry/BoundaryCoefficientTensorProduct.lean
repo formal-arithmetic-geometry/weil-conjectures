@@ -6,7 +6,7 @@ Authors: SHEAF groups D4 and A4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-import WeilConjectures.AlgebraicGeometry.InvertibleTensorPowerBlockInterchange
+import Sheaf.AlgebraicGeometry.InvertibleTensorPowerBlockInterchange
 import Sheaf.AlgebraicGeometry.BoundaryPullbackTensorBraiding
 import Sheaf.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 

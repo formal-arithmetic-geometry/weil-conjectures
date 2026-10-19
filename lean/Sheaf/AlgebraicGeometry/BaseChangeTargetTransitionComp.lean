@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
-import WeilConjectures.AlgebraicGeometry.BaseChangePullbackComparisonComp
+import Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp
 
 /-! # Composition of target transitions
 

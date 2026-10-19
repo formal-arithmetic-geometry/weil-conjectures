@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover

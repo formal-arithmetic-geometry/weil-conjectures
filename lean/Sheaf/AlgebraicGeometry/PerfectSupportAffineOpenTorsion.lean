@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.PerfectSupportAffineModuleModel
-import WeilConjectures.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion
+import Sheaf.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion
 
 /-! # Power torsion on an affine open
 

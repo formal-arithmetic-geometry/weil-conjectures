@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.UnramifiedEtaleFiniteNeighbourhoods
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.FieldTheory.PurelyInseparable.Basic

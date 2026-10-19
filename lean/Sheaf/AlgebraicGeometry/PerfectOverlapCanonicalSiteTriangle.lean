@@ -6,7 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellation
-public import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
+public import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 /-! # Canonical local-object site triangle
 

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.Morphisms.NormalPointedFamilyApproximation
-import WeilConjectures.AlgebraicGeometry.Morphisms.CartesianFamilyGenericLimit
+import Sheaf.AlgebraicGeometry.Morphisms.CartesianFamilyGenericLimit
 
 /-!
 # A normal Noetherian family system and its pointed generic fibres

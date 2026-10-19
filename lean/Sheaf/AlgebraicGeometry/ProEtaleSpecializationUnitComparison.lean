@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
+public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 import all Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation

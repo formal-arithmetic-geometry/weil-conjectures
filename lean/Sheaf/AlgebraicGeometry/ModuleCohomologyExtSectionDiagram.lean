@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Sheaf.Algebra.Homology.ModuleStalkFunctor

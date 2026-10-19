@@ -11,7 +11,7 @@ public import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import Sheaf.RingTheory.HenselianPairPrimeConnected
 import Sheaf.RingTheory.IntegralOverHenselianPair
-import WeilConjectures.Topology.SpectralClosedRestriction
+import Sheaf.Topology.SpectralClosedRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!

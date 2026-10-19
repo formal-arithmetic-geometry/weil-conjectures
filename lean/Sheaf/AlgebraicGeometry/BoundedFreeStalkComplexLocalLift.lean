@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.SquareZeroStalkCoefficientsSpread
+import Sheaf.AlgebraicGeometry.SquareZeroStalkCoefficientsSpread
 import Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization
 
 /-! # A bounded free complex on an affine neighbourhood of a stalk

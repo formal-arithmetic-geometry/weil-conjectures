@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleGenericIrreducibleNeighbourhood
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale

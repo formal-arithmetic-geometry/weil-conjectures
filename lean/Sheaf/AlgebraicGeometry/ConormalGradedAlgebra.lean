@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
@@ -59,9 +59,11 @@ import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.RingTheory.AssociatedGradedRing
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-!
 # The conormal graded algebra of a closed immersion

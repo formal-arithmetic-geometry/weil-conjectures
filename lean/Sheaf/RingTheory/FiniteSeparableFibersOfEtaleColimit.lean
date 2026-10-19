@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.Separable
-import WeilConjectures.RingTheory.FibrePrimesResidueFields
+import Sheaf.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FilteredEtaleFiberStructure
 import Sheaf.RingTheory.FilteredEtaleFiberSeparableImage

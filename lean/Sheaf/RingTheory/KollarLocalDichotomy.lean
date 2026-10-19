@@ -8,9 +8,9 @@ module
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Maps
-public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.RingTheory.DepthInSES
-import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+public import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.DepthInSES
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.Algebra.Ring.ULift
 import Sheaf.RingTheory.KollarRegularElementAlternatives

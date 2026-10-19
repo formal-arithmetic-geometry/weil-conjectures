@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
-import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport
 import Mathlib.Algebra.Homology.ShortComplex.Ab

@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 import Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink
-import WeilConjectures.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
+import Sheaf.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
 import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Noetherian

@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import WeilConjectures.RingTheory.DimOneResidueFieldsFinite
+import Sheaf.RingTheory.DimOneResidueFieldsFinite
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.Localization.LocalizationLocalization

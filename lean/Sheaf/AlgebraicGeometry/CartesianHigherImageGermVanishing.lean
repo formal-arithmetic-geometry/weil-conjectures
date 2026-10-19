@@ -5,7 +5,7 @@ Authors: SHEAF group S4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing
 

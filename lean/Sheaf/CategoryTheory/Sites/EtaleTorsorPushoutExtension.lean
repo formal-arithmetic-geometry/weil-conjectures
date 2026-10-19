@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
-public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
+public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 import Sheaf.CategoryTheory.Sites.ExtensionPresentationShortExact
 import Sheaf.CategoryTheory.Sites.ExtensionPresentationGeneratorFiber
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence

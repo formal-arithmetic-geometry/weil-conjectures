@@ -5,7 +5,7 @@ Authors: SHEAF group NK
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.HomologicalComplex
 
 /-!

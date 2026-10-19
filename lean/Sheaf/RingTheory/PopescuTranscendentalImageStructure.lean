@@ -5,8 +5,8 @@ Authors: SHEAF group G3
 -/
 module
 
-public import WeilConjectures.RingTheory.PopescuLocalizedPolynomialImage
-public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
+public import Sheaf.RingTheory.PopescuLocalizedPolynomialImage
+public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 public import Mathlib.RingTheory.Algebraic.Defs

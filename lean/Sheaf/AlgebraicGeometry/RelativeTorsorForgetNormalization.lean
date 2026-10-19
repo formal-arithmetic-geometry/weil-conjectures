@@ -6,7 +6,7 @@ Authors: SHEAF group R9
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeCocycleCoordinates
-public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import Sheaf.CategoryTheory.FirstResolutionExtensionClass
 
 /-!

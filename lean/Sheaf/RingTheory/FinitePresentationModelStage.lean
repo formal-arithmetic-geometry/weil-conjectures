@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
-import WeilConjectures.RingTheory.FinitePresentationComparisonSystem
-import WeilConjectures.RingTheory.FilteredPushoutBijectiveStage
+import Sheaf.RingTheory.FinitePresentationComparisonSystem
+import Sheaf.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A finitely presented comparison model reaches a stage -/
 

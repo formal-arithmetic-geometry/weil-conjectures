@@ -22,7 +22,7 @@ import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.WeaklyEtaleField
-import WeilConjectures.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.MapIntoHenselianColimit
 
 /-! # Conjugacy of generic-to-closed geometric specializations
 

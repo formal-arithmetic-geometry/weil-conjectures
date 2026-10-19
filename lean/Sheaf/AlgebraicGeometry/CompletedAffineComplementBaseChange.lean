@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.CompletedAffineComplementBaseChange
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.RingTheory.AdicCompletion.Algebra

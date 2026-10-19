@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Mathlib.RingTheory.TensorProduct.IsBaseChangePi
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.LinearAlgebra.Matrix.ToLin
-import WeilConjectures.RingTheory.UnitMaximalMinorOfDepthZero
+import Sheaf.RingTheory.UnitMaximalMinorOfDepthZero
 
 /-!
 # A nonzerodivisor in the maximal minors of an injective matrix

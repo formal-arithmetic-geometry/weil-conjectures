@@ -15,8 +15,8 @@ import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
-import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
-import WeilConjectures.AlgebraicGeometry.DegreePExtensionRegular
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.AlgebraicGeometry.DegreePExtensionRegular
 import Sheaf.RingTheory.LocalizationOfRegularRing
 
 /-!

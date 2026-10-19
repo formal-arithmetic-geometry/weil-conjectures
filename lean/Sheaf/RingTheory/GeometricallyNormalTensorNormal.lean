@@ -14,7 +14,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 import Mathlib.RingTheory.FiniteType
 import Mathlib.CategoryTheory.Limits.HasLimits
-import WeilConjectures.RingTheory.FilteredColimitNormalRing
+import Sheaf.RingTheory.FilteredColimitNormalRing
 import WeilConjectures.FieldTheory.GeometricallyReducedExtensionSeparable
 import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.RingTheory.SmoothNormalRing

@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import WeilConjectures.Algebra.FlatTorIdealCriterion
-import WeilConjectures.Algebra.TorDimensionShiftFree
+import Sheaf.Algebra.TorDimensionShiftFree
 
 /-! # Projective dimension from a Tor bound for finite modules
 Source: Stacks Project, Tags 00M5 and 058R, dimension shifting in Tag 00S2.

@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.RingHomExtensionDefs
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.RingTheory.Ideal.Quotient.Operations

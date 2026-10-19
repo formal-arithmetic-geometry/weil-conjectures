@@ -5,9 +5,9 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.RingTheory.SerreConditions
+public import Sheaf.RingTheory.SerreConditions
 import Mathlib.RingTheory.LocalProperties.Reduced
-import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Serre's criterion for reducedness

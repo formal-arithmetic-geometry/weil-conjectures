@@ -14,9 +14,9 @@ public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.Unramified.Basic
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
-import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
-import WeilConjectures.RingTheory.DvrStandardRootUnramifiedModel
-import WeilConjectures.RingTheory.DvrUnramifiedCompositumBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import Sheaf.RingTheory.DvrStandardRootUnramifiedModel
+import Sheaf.RingTheory.DvrUnramifiedCompositumBaseChange
 
 
 /-! # Weak unramifiedness over a uniformizer-root base

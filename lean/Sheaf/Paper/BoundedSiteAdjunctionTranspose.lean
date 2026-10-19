@@ -26,7 +26,7 @@ public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom

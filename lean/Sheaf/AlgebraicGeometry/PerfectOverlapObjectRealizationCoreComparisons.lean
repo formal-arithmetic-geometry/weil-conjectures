@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
-import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
+import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 /-! # Core object comparison data (without the final Hom pin).
 

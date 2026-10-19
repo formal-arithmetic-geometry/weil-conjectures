@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
+public import Sheaf.AlgebraicGeometry.ChartOrdinaryMapRecovery
 import Sheaf.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence
 
 /-! # Transporting an ordinary chart lift to tensor pullback coordinates

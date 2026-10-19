@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.RingTheory.EtaleResidueTriplesPolynomialLift
+import Sheaf.RingTheory.EtaleResidueTriplesPolynomialLift
 
 /-!
 # The residue map of the pointed etale colimit is surjective

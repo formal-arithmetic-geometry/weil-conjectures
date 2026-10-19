@@ -19,7 +19,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
+public import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
 public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic

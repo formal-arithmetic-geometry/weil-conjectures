@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Equiv
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTruncatedFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Flat

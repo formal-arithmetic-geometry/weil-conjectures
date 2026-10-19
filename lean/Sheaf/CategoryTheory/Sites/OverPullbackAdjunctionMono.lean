@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.CategoryTheory.SiteExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 
 /-!
 # Extension by zero for an arbitrary localized Grothendieck topology

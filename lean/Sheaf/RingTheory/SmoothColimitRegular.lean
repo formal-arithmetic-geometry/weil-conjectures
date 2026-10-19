@@ -14,9 +14,9 @@ import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Localization.Submodule
-import WeilConjectures.RingTheory.FilteredColimitAlgebrasUnderlyingModule
+import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
 import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
-import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing

@@ -2,7 +2,7 @@ module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
 import Sheaf.FieldTheory.CocycleMonomialCoefficients
-import WeilConjectures.FieldTheory.ProjectiveMatrixDescent
+import Sheaf.FieldTheory.ProjectiveMatrixDescent
 
 @[expose] public section
 

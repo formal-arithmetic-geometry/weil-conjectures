@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
+public import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits

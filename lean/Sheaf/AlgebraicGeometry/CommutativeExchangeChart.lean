@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass
 
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
@@ -26,6 +26,8 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Commutative-square exchange on etale cohomology charts

@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
-import WeilConjectures.RingTheory.EtaleResidueTriplesColimit
+import Sheaf.RingTheory.EtaleResidueTriplesColimit
 import Sheaf.RingTheory.EtaleResidueTriplesLocalization
-import WeilConjectures.RingTheory.EtaleResidueTriplesSimpleRoots
+import Sheaf.RingTheory.EtaleResidueTriplesSimpleRoots
 import Sheaf.RingTheory.EtaleResidueTriplesSurjective
 
 /-!

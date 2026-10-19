@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.RightDerivedInjectiveSequence
 import WeilConjectures.CategoryTheory.RightDerivedZeroTransformation
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
-import WeilConjectures.CategoryTheory.RightDerivedBaseChangeZeroUnit
+import Sheaf.CategoryTheory.RightDerivedBaseChangeZeroUnit
 
 /-! # Forgetting scalars and derived restriction kernels
 

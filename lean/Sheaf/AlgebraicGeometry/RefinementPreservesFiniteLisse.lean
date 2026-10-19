@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Refinement
 
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite local constancy under refinement
 

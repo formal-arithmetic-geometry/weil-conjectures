@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleSupport
-import WeilConjectures.AlgebraicGeometry.GeometricStalkSupport
+import Sheaf.AlgebraicGeometry.GeometricStalkSupport
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart
-import WeilConjectures.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericImage
+import Sheaf.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericImage
 
 /-!
 # Completion of a smooth section and its closed-fibre generic point

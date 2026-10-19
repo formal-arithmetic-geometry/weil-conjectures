@@ -19,10 +19,10 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
 import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.Grp.Ulift
-import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
+import Sheaf.Topology.ContinuousOpenNormalStabilizer
 import Mathlib.Algebra.Group.Subgroup.Finite
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 

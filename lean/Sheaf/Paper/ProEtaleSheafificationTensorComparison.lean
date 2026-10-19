@@ -6,7 +6,7 @@ Authors: Bin Wu, SHEAF groups H1 and G3
 module
 
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 
 /-!
 # Tensor and module sheafification in the pro-etale site universes

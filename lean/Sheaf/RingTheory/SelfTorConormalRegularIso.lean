@@ -8,7 +8,7 @@ public import Sheaf.RingTheory.SelfTorConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulNormalizedProjectiveResolution
-import WeilConjectures.RingTheory.KoszulQuotientTensorHomologyBasis
+import Sheaf.RingTheory.KoszulQuotientTensorHomologyBasis
 
 /-! # The canonical self-Tor comparison for a regular quotient
 

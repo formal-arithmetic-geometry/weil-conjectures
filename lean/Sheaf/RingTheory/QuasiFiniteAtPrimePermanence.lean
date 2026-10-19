@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finiteness at a prime over an intermediate ring

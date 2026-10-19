@@ -5,11 +5,11 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison
-import WeilConjectures.AlgebraicGeometry.TensorUnitPowerScalar
+import Sheaf.AlgebraicGeometry.TensorUnitPowerScalar
 
 /-! # Resolution sections and tensor powers of the unit
 

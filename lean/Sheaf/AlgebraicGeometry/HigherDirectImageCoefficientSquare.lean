@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitionComposition
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition
 
 /-! # Higher-image transitions around a coefficient square
 

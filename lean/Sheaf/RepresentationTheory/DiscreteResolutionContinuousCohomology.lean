@@ -10,7 +10,7 @@ public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
-import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
+import Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
 
 /-!
 # Continuous cohomology from a transported injective resolution

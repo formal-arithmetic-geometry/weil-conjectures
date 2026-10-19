@@ -27,7 +27,7 @@ import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
-import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlat

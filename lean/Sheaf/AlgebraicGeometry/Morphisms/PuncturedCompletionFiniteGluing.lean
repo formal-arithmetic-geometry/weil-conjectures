@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPuncturedIso
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent

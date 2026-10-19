@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import WeilConjectures.AlgebraicGeometry.DescendAffine
-import WeilConjectures.AlgebraicGeometry.DescendFiniteAffineOpen
+import Sheaf.AlgebraicGeometry.DescendFiniteAffineOpen
 
 /-!
 # Finiteness descends to a finite stage of a limit

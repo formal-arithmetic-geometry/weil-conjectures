@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitCharts
-import WeilConjectures.AlgebraicGeometry.Morphisms.TameRootProductResidueSeparable
+import Sheaf.AlgebraicGeometry.Morphisms.TameRootProductResidueSeparable
 import Mathlib.FieldTheory.SeparableDegree
 
 /-!

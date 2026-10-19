@@ -7,12 +7,12 @@ module
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeComparison
 import all Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
-import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
+import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeMapNaturality
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeConclusion
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeFinal
-import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeObjects
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeObjects
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Chart lifts commute with stage transitions

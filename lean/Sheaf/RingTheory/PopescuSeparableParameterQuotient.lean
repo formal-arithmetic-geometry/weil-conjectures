@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Sheaf.RingTheory.PopescuDelocalizeHeightZero
 import Sheaf.RingTheory.PopescuResolutionIdentity
-import WeilConjectures.RingTheory.PopescuParameterQuotientData
+import Sheaf.RingTheory.PopescuParameterQuotientData
 import Sheaf.RingTheory.PopescuParameterQuotientLocalResolution
 import Sheaf.RingTheory.PopescuParameterQuotientPrimeGeometry
 

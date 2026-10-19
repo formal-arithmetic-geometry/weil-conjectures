@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.DenseOpenComponentModificationsNonempty
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Properties

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Paper.NoetherianApproximation
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
 import Sheaf.RingTheory.RelativeCompleteIntersectionClosedFiberRegularSequence
-import WeilConjectures.RingTheory.PolynomialLocalFlatQuotientDescent
+import Sheaf.RingTheory.PolynomialLocalFlatQuotientDescent
 import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
 
 /-!

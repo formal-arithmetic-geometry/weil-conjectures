@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.FieldTheory.IsAlgClosed.Basic

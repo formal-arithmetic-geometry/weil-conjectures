@@ -7,7 +7,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.Galois.GaloisClosure
 
 import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent
-import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-!

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+public import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf

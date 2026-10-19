@@ -20,7 +20,7 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
 import Mathlib.Algebra.Homology.BifunctorFlip
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 

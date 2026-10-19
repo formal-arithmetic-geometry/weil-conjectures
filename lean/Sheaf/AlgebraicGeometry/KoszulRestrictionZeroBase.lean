@@ -1,11 +1,10 @@
 module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import WeilConjectures.AlgebraicGeometry.KoszulBasicOpenExact
-import WeilConjectures.AlgebraicGeometry.OpenCoverRestrictionExact
+import Sheaf.AlgebraicGeometry.KoszulBasicOpenExact
+import Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.Paper.DerivedHomMayerVietoris
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace

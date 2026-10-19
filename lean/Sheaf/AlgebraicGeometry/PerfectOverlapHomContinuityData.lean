@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-public import WeilConjectures.AlgebraicGeometry.DirectedPerfectHomIso
+public import Sheaf.AlgebraicGeometry.DirectedPerfectHomIso
 
 public import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 

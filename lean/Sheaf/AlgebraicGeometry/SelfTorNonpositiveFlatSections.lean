@@ -8,7 +8,7 @@ public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors

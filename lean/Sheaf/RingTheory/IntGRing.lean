@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.DVRCompletionRegular
-import WeilConjectures.RingTheory.IntegerPrimeLocalizations
+import Sheaf.RingTheory.IntegerPrimeLocalizations
 import Sheaf.RingTheory.LocalizationRegular
 import Mathlib.Algebra.CharP.Algebra
 

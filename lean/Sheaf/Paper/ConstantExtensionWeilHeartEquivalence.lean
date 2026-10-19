@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.AdicPunctualWeights
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorCoproduct
+import Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import Sheaf.CategoryTheory.SemilinearScalarLocalization
 import Sheaf.CategoryTheory.Triangulated.TStructure.HeartAbelianKernelSplitting

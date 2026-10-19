@@ -6,7 +6,7 @@ module
 
 public import Sheaf.RingTheory.KoszulConormalCyclePresentation
 import Sheaf.RingTheory.KoszulIdealAlternatingProducts
-import WeilConjectures.RingTheory.KoszulAugmentationLiftHomotopy
+import Sheaf.RingTheory.KoszulAugmentationLiftHomotopy
 
 /-! # Conormal relations vanish in Koszul-to-resolution homology
 

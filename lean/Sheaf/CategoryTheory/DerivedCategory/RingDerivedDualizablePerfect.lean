@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Mathlib.Algebra.Homology.BifunctorShift
-import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
+import Sheaf.Algebra.Homology.DerivedFreeModuleHomology
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatKFlat

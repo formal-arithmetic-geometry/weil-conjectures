@@ -5,12 +5,12 @@ Authors: SHEAF group C2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit
 import WeilConjectures.AlgebraicGeometry.AffineSectionsColimit
 import Mathlib.CategoryTheory.Filtered.Final
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
-import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Affine stage lifting of étale inverse-image sections
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, using Sites Tag 09YN. -/

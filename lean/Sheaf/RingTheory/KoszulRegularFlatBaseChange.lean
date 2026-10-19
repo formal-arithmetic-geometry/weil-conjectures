@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.RingTheory.KoszulBaseChangeIso
+import Sheaf.RingTheory.KoszulBaseChangeIso
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 

@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison

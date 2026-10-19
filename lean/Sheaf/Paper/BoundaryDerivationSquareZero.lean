@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts
 import Sheaf.AlgebraicGeometry.CechH1MapNatural
-import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.Paper.BoundaryDerivationAlgebraicData
 

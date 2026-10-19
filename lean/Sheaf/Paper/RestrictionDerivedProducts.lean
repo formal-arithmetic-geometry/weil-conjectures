@@ -17,7 +17,7 @@ import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
-import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Mathlib.CategoryTheory.Adjunction.Additive
 

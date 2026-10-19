@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Algebra.Module.Projective
@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 
 public import Mathlib.Algebra.Homology.Homotopy
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Algebra.Homology.AffinePerfectGradedHomDescent
+import Sheaf.Algebra.Homology.AffinePerfectGradedHomDescent
 import Sheaf.Algebra.Homology.AffinePerfectChainMapEqualityDetection
 
 /-! # Descent of homotopies between affine perfect chain maps

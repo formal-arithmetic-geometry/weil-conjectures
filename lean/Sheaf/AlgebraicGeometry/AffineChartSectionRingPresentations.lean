@@ -6,11 +6,11 @@ Authors: SHEAF group Q4
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
+public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
 import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsTail
-import WeilConjectures.AlgebraicGeometry.AffineChartSectionRingPresentationsIso
+import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsIso
 
 /-! # Ring presentations of affine upper-tail charts
 

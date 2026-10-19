@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts

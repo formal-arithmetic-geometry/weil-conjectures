@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
 import Sheaf.AlgebraicGeometry.FiniteAffineCechSectionBaseChange
 import Sheaf.AlgebraicGeometry.LinearCechSheafResolution
 import Sheaf.AlgebraicGeometry.OpenPushforwardDerivedComparison

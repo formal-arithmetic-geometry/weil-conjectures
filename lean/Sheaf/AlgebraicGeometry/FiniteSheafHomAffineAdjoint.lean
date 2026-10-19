@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.FiniteSheafHomAffine
 import Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived

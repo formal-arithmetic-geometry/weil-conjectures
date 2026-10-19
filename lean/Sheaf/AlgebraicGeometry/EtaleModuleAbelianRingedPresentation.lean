@@ -12,7 +12,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.CategoryTheory.Sites.Equivalence
-import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import all Sheaf.CategoryTheory.ContinuousRingedToposModuleDirectImage
 import all Sheaf.CategoryTheory.RestrictionRingedToposModuleDirectImage
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves

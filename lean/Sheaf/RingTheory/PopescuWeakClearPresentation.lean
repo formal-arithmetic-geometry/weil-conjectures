@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.Extension.Presentation.Submersive
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import WeilConjectures.RingTheory.PopescuWeakClearCore
-import WeilConjectures.RingTheory.PopescuWeakClearRelations
+import Sheaf.RingTheory.PopescuWeakClearCore
+import Sheaf.RingTheory.PopescuWeakClearRelations
 
 /-!
 # Clearing a local standard smooth presentation

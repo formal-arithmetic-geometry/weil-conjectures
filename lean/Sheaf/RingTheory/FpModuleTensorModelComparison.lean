@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
 
-import WeilConjectures.RingTheory.TensorModelAlgebraDescent
+import Sheaf.RingTheory.TensorModelAlgebraDescent
 import Sheaf.RingTheory.CompatibleModuleModelDescent
 
 /-! # Comparing a finite-presentation module model with prescribed stages

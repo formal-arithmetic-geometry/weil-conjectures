@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Cancellation of extension of scalars in sheaf tensor products
 

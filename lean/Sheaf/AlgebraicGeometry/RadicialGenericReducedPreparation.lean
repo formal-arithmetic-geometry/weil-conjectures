@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 import Sheaf.AlgebraicGeometry.RadicialPreparationConstruction
-import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
+import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
 
 /-! # Radicial preparation before the final generic-flat shrinking
 

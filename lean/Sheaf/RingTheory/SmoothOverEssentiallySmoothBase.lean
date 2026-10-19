@@ -2,7 +2,7 @@ module
 
 public import Sheaf.RingTheory.EssentiallySmooth
 import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import WeilConjectures.RingTheory.SmoothAlgebraFilteredColimitDescent
+import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Finiteness.Small

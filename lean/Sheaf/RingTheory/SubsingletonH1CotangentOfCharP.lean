@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 import Mathlib.Algebra.Field.ZMod
 import Mathlib.RingTheory.Smooth.Field
-import WeilConjectures.RingTheory.H1CotangentFiniteSubfields
+import Sheaf.RingTheory.H1CotangentFiniteSubfields
 
 /-!
 # Vanishing of the first cotangent homology of a field over its positive prime field

@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData
+public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtRestrictionMap
 import Sheaf.AlgebraicGeometry.Cohomology.OpenImmersionInverseImageInjectives
-import WeilConjectures.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom
-import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf
+import Sheaf.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom
+import Sheaf.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf
 /-! # Bijectivity of Ext restriction from a represented open
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.

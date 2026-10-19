@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Restrict
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 

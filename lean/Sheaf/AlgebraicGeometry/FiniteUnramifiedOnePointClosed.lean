@@ -1,0 +1,8 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedOnePointClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.PurelyInseparable.Basic

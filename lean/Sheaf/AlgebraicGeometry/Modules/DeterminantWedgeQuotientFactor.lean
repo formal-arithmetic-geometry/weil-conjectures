@@ -10,10 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorQuotient
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
-import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Factorization of the pre-quotient wedge map

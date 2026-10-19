@@ -14,13 +14,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 import Sheaf.RingTheory.NormalLocalDepthTwo
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest
 
 /-!

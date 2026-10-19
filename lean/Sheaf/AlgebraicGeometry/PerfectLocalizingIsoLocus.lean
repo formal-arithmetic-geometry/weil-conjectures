@@ -5,7 +5,7 @@ The perfect_iso and perfect_shift proofs are extracted from
 Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree (SHEAF group G1).
 -/
 module
-public import WeilConjectures.CategoryTheory.ShiftSaturatedIsoLocus
+public import Sheaf.CategoryTheory.ShiftSaturatedIsoLocus
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
 

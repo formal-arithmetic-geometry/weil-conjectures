@@ -7,14 +7,14 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import WeilConjectures.Topology.ModuleCohomologyTopComparison
+import Sheaf.Topology.ModuleCohomologyTopComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import WeilConjectures.Topology.RestrictInjectiveResolution
+import Sheaf.Topology.RestrictInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-! # Quasi-coherent vanishing over inverse images of affine opens

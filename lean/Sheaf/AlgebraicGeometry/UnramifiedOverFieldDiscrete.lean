@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Limits

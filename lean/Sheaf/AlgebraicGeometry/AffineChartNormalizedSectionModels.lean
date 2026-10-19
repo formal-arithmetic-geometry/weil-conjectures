@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
+public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits

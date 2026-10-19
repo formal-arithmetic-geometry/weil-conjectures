@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.DerivedHomPushforwardKFlatModel
-import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
+import Sheaf.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 /-! # Closed-immersion self-Ext on fixed resolution representatives
 

@@ -13,7 +13,7 @@ import Mathlib.RingTheory.HopfAlgebra.TensorProduct
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 import Sheaf.RingTheory.IntegralExtensionDimension
-import WeilConjectures.RingTheory.KrullDimension.GoingDown
+import Sheaf.RingTheory.KrullDimension.GoingDown
 
 /-!
 # The augmentation ideal has the dimension of a finite type group

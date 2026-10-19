@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SignedSheafDualCoefficientMap
 public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeCoefficientComparisons
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeCoefficientComparisons
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Finite-free affine signed dual coefficient square

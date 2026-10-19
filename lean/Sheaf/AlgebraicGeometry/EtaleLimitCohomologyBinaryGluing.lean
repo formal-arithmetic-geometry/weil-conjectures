@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
-import WeilConjectures.AlgebraicGeometry.EtaleLimitBinaryEventualZero
+import Sheaf.AlgebraicGeometry.EtaleLimitBinaryEventualZero
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Two-open gluing of continuity

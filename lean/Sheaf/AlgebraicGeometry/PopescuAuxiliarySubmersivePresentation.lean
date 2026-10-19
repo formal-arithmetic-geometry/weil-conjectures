@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.PopescuAuxiliarySubmersivePresentation
+public import Mathlib.RingTheory.Smooth.StandardSmooth

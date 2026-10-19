@@ -6,7 +6,7 @@ Authors: SHEAF group P4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

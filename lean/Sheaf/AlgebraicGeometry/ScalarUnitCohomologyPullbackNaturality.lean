@@ -9,10 +9,10 @@ public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare
 import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
-import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
 import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Pullback compatibility of the explicit unit comparison
 

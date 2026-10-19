@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.ImmersionFiberDegreeOne
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound

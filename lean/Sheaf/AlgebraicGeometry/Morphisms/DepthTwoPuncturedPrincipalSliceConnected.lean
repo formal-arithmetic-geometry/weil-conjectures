@@ -6,9 +6,9 @@ Authors: SHEAF group T3
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import WeilConjectures.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthLeSupportDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.RingTheory.Spectrum.Prime.LTSeries
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

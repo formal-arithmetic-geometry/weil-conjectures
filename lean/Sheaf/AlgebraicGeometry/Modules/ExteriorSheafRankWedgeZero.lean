@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import all WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import all Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-!

@@ -6,8 +6,8 @@ module
 
 public import Sheaf.Paper.RingedTopoiTensorSections
 import all Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 
 /-! # Scalar extension and the normalized tensor comparison
 

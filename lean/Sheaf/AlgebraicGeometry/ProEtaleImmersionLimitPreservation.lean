@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits

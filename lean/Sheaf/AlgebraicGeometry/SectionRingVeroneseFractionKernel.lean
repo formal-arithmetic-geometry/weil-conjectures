@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap
-public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
+public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 import Sheaf.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition
 
 /-! # The kernel of the explicit map on Veronese numerator sections

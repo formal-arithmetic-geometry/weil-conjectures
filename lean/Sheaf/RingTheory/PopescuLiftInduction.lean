@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.RingTheory.PopescuResolution
-public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # The induction claim for lifting Popescu resolutions

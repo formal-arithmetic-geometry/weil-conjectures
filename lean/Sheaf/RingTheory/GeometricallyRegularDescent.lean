@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
+import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
 import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.Algebra.Field.Shrink
 

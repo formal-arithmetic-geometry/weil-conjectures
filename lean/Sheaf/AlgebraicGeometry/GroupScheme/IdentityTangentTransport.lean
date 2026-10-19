@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
+import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 
 /-!
 # Transport of infinitesimal points to tangent vectors at the identity

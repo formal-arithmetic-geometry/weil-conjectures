@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Sheaf.RingTheory.FormallySmoothAdic
-import WeilConjectures.RingTheory.CompletionMapForLocalHom
+import Sheaf.RingTheory.CompletionMapForLocalHom
 import Sheaf.RingTheory.FormallySmoothAdicCompletionTransfer
 
 /-!

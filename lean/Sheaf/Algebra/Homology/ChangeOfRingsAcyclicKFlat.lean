@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 import Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic

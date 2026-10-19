@@ -5,12 +5,12 @@ Authors: SHEAF group P4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective
-import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
+import Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap
 
 /-! # Affine cohomology and higher-image sections
 

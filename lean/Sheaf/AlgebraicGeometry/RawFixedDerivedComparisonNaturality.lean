@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawFixedDerivedComparison
 public import Sheaf.AlgebraicGeometry.RawRestrictedDerivedComparisonPullback
-public import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackTransport
+public import Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import all Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport

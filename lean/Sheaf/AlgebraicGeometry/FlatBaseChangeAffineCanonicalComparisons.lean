@@ -5,14 +5,14 @@ Authors: SHEAF group V2
 -/
 module
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.TensorPullback
 /-! # Canonical affine section comparisons before flat base change

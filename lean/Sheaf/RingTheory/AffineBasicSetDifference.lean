@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.RingTheory.AffineBasicSetDifference
+public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet

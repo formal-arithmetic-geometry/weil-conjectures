@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Smooth.Flat
 import Sheaf.RingTheory.SmoothNormalDomainApproximation
 import Mathlib.RingTheory.Localization.BaseChange
-import WeilConjectures.RingTheory.FilteredColimitNormalRing
+import Sheaf.RingTheory.FilteredColimitNormalRing
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.RegularRingSmoothAscent

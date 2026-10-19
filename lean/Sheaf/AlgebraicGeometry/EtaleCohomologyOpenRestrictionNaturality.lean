@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyOpenRestrictionNaturality
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps

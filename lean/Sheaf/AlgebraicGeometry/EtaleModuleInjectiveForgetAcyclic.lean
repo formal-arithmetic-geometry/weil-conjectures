@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
-import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab

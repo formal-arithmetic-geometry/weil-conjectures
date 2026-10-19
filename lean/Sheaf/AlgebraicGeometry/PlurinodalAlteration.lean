@@ -35,7 +35,7 @@ import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
-import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperBasic
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

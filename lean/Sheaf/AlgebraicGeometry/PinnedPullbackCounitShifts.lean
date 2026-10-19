@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
+import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
 
 /-! # Shifts compatible with the composition-pinned pullback counits
 Source: Stacks Project, Tags 08HY and 0D5S.

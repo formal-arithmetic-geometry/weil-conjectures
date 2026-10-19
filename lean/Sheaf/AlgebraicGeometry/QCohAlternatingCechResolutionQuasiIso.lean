@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison

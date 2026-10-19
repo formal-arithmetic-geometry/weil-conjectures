@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.SelfTorConormalComparisonPredicate
-import WeilConjectures.RingTheory.KoszulAugmentationLiftExists
+import Sheaf.RingTheory.KoszulAugmentationLiftExists
 import Sheaf.RingTheory.KoszulConormalCycleRelations
 import Mathlib.LinearAlgebra.Isomorphisms
 

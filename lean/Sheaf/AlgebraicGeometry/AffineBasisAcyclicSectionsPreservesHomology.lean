@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

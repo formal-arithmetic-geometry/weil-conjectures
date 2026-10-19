@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
-import WeilConjectures.CategoryTheory.TruncationRawExact
+import Sheaf.CategoryTheory.TruncationRawExact
 
 /-!
 # Exactness of the truncation couple

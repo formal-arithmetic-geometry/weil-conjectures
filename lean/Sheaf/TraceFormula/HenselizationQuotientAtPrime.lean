@@ -6,7 +6,7 @@ Authors: SHEAF group NQ
 module
 
 public import Sheaf.RingTheory.HenselizationAtPrime
-import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.TraceFormula.HenselizationQuasiFiniteRing
 
 /-!

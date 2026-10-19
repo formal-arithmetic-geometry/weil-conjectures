@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlat

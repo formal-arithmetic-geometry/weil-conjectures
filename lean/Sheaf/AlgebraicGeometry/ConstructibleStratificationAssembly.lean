@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.Topology.ConstructibleInConstructible
+import Sheaf.Topology.ConstructibleInConstructible
 
 /-!
 # Assembling stratifications of the pieces of a partition

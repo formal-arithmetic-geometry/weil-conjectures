@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.SixFunctors.BaseChange.Etale
-import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.Paper.KunBaseChange
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
 import WeilConjectures.Mathlib.RingTheory.Adjoin.FG

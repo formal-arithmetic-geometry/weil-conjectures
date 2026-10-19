@@ -7,8 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
-import WeilConjectures.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime
+import Sheaf.FieldTheory.CommonExtensionFields
 
 /-!
 # Testing geometric irreducibility of a subset

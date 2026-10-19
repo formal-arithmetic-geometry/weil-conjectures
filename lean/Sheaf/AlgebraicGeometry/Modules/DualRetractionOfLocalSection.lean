@@ -6,8 +6,8 @@ Authors: SHEAF group K4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
-import WeilConjectures.AlgebraicGeometry.Modules.DualRetractionKey
+import Sheaf.AlgebraicGeometry.InternalHomRestrictScheme
+import Sheaf.AlgebraicGeometry.Modules.DualRetractionKey
 
 @[expose] public section
 

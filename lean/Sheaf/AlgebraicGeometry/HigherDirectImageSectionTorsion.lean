@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.HigherImageCohomologyPresheafLocalization
-import WeilConjectures.AlgebraicGeometry.AffineLocalizingPresheafSheafification
+import Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification
 import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Power torsion for higher direct image sections

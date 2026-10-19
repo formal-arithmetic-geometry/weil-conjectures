@@ -5,12 +5,13 @@ Authors: SHEAF group E2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 
 /-! # Raw pullback and the derived-Hom comparison
 

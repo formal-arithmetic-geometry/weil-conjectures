@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.ModuleCupResolutionData
 public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Paper.ModuleCupGodementCoefficientModels
 import Sheaf.Paper.ModuleCupGodementModelQuasiIso
 import all Sheaf.Paper.ModuleCupGodementCosimplicialInput

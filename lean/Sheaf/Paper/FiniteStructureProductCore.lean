@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.Paper.FiniteStructureTensorPowersSupported
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
 import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
 import Sheaf.Paper.FiniteStructureTensorComparisonComposition
 

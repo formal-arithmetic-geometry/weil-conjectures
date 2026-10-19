@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-import WeilConjectures.Algebra.Homology.PreciseVanishing
+import Sheaf.Algebra.Homology.PreciseVanishing
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-!

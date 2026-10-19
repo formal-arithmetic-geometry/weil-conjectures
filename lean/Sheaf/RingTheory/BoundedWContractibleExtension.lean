@@ -14,7 +14,7 @@ import Sheaf.RingTheory.StrictWCoverProperties
 import Sheaf.RingTheory.StrictWCoverSize
 import Sheaf.RingTheory.ProfiniteComponentRingPullback
 import Sheaf.Topology.BoundedExtremallyDisconnectedCover
-import WeilConjectures.RingTheory.WContractibleGeometricCriterion
+import Sheaf.RingTheory.WContractibleGeometricCriterion
 import Mathlib.RingTheory.Localization.Cardinality
 
 /-! # Bounded w-contractible extensions

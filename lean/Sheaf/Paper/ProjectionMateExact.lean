@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.Paper.RingedTensorSquarePresentation
 public import Sheaf.Paper.ProjectionFormulaArrows
 public import Mathlib.CategoryTheory.Triangulated.Functor

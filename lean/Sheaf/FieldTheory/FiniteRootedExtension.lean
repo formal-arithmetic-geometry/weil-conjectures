@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.FieldTheory.FiniteRootedExtension
+public import Mathlib.FieldTheory.PurelyInseparable.Basic

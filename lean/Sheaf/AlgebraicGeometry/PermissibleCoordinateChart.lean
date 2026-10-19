@@ -5,7 +5,7 @@ Authors: SHEAF group NC
 -/
 module
 
-public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.Blowup.Affine.ChartAlgebra
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Compactification.StrictTransform

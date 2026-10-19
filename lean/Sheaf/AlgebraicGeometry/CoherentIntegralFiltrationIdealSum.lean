@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
+public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumZero
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep

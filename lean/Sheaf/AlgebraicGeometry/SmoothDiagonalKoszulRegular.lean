@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
-import WeilConjectures.AlgebraicGeometry.SmoothDiagonalRegularGenerators
+import Sheaf.AlgebraicGeometry.SmoothDiagonalRegularGenerators
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 
 /-!

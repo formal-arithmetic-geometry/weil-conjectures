@@ -8,18 +8,18 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Sheaf.RingTheory.GlobalDimension
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors
-import WeilConjectures.RingTheory.DepthInSES
+import Sheaf.RingTheory.DepthInSES
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Mathlib.RingTheory.Regular.ProjectiveDimension
 import Sheaf.RingTheory.CohenMacaulayDepthFirstTerm
-import WeilConjectures.RingTheory.DepthExt
+import Sheaf.RingTheory.DepthExt
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 

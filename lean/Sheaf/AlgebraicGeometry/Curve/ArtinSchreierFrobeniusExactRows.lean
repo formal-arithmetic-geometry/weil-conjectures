@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
-import WeilConjectures.AlgebraicGeometry.ArtinSchreier
+import Sheaf.AlgebraicGeometry.ArtinSchreier
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected

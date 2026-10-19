@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Paper.ModuleCupGodementCodegeneracies
-import WeilConjectures.CategoryTheory.SimplexPresentationFaithful
+import Sheaf.CategoryTheory.SimplexPresentationFaithful
 import Sheaf.Paper.ModuleCupGodementRelations
 
 /-! # Realization of the concrete Godement cosimplicial operators -/

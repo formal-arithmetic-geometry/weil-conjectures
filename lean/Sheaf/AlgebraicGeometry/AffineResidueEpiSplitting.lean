@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Splitting an affine module map detected on residue fibres

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.RawRestrictedDerivedComparison
 
 /-! # Fixed-coefficient raw evaluation on an etale chart

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 import Sheaf.AlgebraicGeometry.CoefficientComparisonMorphismGenerator
 import Sheaf.AlgebraicGeometry.CoefficientComparisonMorphismFaces
-import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Canonical generators for affine coefficient comparison
 

@@ -5,9 +5,9 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageChartSystem
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality
 

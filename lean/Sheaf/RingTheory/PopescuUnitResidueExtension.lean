@@ -5,14 +5,14 @@ Authors: SHEAF group J4
 -/
 module
 
-public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
+public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Nilpotent.Defs
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.Algebraic.Defs
 
-import WeilConjectures.RingTheory.PopescuAlgebraicResidueEnlargement
+import Sheaf.RingTheory.PopescuAlgebraicResidueEnlargement
 import Sheaf.RingTheory.PopescuTranscendentalResidueEnlargement
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.KrullDimension.Zero

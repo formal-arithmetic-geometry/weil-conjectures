@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation
-import WeilConjectures.AlgebraicGeometry.AffineSpectrumCoordinateCounit
+import Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateCounit
 
 /-! # AffineSpectrumCounitCompatibility
 

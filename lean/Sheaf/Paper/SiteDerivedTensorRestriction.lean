@@ -12,9 +12,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlat

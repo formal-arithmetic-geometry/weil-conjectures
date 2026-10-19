@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.CompactObject
-public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four

@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Topology.PresheafModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify
-import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportBeta
+import Sheaf.Algebra.Homology.InverseImageStalkScalarTransportBeta
 import Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality
 
 /-!

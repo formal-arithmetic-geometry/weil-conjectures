@@ -10,7 +10,7 @@ public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Mathlib.RingTheory.LocalRing.Module
-import WeilConjectures.RingTheory.IsRegularSystemOfParameters
+import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Sheaf.RingTheory.PowerSeriesFullCoordinatesField
 
 /-! # Formal binary Morse normalization

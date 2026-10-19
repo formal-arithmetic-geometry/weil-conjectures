@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import WeilConjectures.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernel
+import Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernel
 import Sheaf.AlgebraicGeometry.Curve.SquareZeroUnitsAdditiveKernelOfSections
 
 /-! # A square-zero closed immersion identifies its unit and additive kernels.

@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties

@@ -6,7 +6,7 @@ Authors: SHEAF group Q29
 module
 
 public import Sheaf.Paper.CoefficientHeartStratificationDefs
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.Topology.Irreducible
 
 /-!

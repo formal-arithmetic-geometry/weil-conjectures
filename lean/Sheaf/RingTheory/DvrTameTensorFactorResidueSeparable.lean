@@ -19,7 +19,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Sheaf.RingTheory.DvrAbhyankarLocalResidue
-import WeilConjectures.RingTheory.DvrNormalizedCompositumLocalDiagram
+import Sheaf.RingTheory.DvrNormalizedCompositumLocalDiagram
 
 /-! # A local consequence of tame DVR base change
 

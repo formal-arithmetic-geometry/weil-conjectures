@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.LocalCoefficientTelescopeDual
 import Sheaf.CategoryTheory.SequentialTelescopeMono
 import Sheaf.RingTheory.ModuleLocalizationTowerVanishing

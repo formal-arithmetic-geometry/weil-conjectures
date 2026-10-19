@@ -10,15 +10,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import WeilConjectures.RingTheory.Depth
+public import Sheaf.RingTheory.Depth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra
 import Sheaf.RingTheory.MiracleFlatness
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import WeilConjectures.RingTheory.DepthLeSupportDimension
-import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-! # Fibre flatness on a quasi-finite polynomial chart

@@ -9,10 +9,10 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
-public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 import Sheaf.RingTheory.PopescuStandardNonzerodivisorAux
-import WeilConjectures.RingTheory.ElementaryToStrict
+import Sheaf.RingTheory.ElementaryToStrict
 import Sheaf.RingTheory.PopescuDelocalizeBase
 
 /-! # A standard nonzerodivisor from the field case of Popescu -/

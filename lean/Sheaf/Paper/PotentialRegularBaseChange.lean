@@ -23,7 +23,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import WeilConjectures.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteFreeResolution
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Sheaf.AlgebraicGeometry.DerivedGeometricStalkConservative

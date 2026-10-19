@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.RingTheory.Etale.Basic
-public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType
 import Sheaf.RingTheory.EtaleIsolatedPointRemoval
 import Mathlib.RingTheory.TensorProduct.Pi

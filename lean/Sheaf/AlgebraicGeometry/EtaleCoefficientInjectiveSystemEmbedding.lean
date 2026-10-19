@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemEmbedding
+public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData

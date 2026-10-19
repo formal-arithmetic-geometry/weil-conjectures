@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.AlgebraicGeometry.TildeScalarSectionAction
 import WeilConjectures.AlgebraicGeometry.QuasicoherentSheafHom
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.InternalHomOverEquiv
+import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 
 /-! # Affine dual and restriction

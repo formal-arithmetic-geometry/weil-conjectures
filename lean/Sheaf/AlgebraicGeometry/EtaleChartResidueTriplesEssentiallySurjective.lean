@@ -1,0 +1,6 @@
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEssentiallySurjective
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples

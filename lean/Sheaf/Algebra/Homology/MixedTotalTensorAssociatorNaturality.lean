@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q3
 -/
 module
-public import WeilConjectures.Algebra.Homology.MixedTotalTensor
+public import Sheaf.Algebra.Homology.MixedTotalTensor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.Algebra.Homology.BifunctorAssociator

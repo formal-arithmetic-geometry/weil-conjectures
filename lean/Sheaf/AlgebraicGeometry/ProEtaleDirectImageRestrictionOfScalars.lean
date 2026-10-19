@@ -19,7 +19,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 /-!
 # Derived pro-etale direct image and restriction of scalars
 

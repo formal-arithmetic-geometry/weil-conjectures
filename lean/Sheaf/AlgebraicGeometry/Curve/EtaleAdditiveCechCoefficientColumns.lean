@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap
 import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
-import WeilConjectures.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
+import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
 
 /-! # The fixed additive coefficient augmentation on vertical columns
 

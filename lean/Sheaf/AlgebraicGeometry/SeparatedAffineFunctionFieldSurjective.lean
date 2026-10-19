@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
+import Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization
 
 /-!
 # Separated affine and local charts surject onto the function field

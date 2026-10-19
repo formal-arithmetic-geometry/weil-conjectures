@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Homology.HomComplexProjections
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
 
 /-! # Ordinary evaluation data

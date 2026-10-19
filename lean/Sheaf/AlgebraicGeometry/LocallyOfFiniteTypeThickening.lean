@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.Thickening
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import WeilConjectures.Algebra.FiniteTypeLiftNilpotent
+import Sheaf.Algebra.FiniteTypeLiftNilpotent
 
 /-!
 # Local finite type across a finite order thickening

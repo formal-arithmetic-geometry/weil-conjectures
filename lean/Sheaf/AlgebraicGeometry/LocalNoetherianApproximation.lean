@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.RingTheory.FiniteStability
 import Sheaf.RingTheory.ColimitFlatRingMap
 import Mathlib.AlgebraicGeometry.Pullbacks
-import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
+import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
 import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible

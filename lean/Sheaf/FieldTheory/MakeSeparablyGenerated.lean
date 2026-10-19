@@ -1,0 +1,5 @@
+module
+
+public import WeilConjectures.FieldTheory.MakeSeparablyGenerated
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import WeilConjectures.FieldTheory.SeparableExtension

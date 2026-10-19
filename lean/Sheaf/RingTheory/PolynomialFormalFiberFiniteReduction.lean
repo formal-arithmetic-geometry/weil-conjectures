@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
-import WeilConjectures.RingTheory.PolynomialResidueFiniteCoefficientModel
+import Sheaf.RingTheory.PolynomialResidueFiniteCoefficientModel
 import Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 

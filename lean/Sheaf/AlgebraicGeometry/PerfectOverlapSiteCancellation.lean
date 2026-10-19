@@ -6,7 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
-import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
+import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 @[expose] public section
 

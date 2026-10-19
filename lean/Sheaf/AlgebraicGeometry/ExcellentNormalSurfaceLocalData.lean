@@ -24,7 +24,7 @@ import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.GRing
-import WeilConjectures.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreConditions
 
 /-!
 # Local data at singular points of an excellent normal surface

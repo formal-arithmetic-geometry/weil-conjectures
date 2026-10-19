@@ -15,7 +15,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

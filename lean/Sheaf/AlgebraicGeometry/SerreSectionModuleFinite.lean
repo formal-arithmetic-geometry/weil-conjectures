@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import WeilConjectures.AlgebraicGeometry.SerreSectionModuleConstruction
+import Sheaf.AlgebraicGeometry.SerreSectionModuleConstruction
 import Sheaf.AlgebraicGeometry.SerreSectionModuleTailFinite
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite
 import Mathlib.RingTheory.Finiteness.Basic

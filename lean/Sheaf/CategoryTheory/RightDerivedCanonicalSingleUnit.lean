@@ -6,8 +6,8 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison
-import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
-import WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift
+import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift
 
 @[expose] public section
 

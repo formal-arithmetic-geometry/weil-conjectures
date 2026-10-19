@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 import Sheaf.AlgebraicGeometry.FiniteTorsorPullbackHomBijective
-import WeilConjectures.AlgebraicGeometry.TorsorUnitEquivarianceReflection
+import Sheaf.AlgebraicGeometry.TorsorUnitEquivarianceReflection
 
 /-!
 # Finite étale equivalences and transport of torsors

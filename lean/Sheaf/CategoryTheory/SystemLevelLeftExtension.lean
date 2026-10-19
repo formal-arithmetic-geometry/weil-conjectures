@@ -25,7 +25,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors

@@ -1,0 +1,4 @@
+module
+
+public import WeilConjectures.LinearAlgebra.NonzeroMaximalMinorOfInjective
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic

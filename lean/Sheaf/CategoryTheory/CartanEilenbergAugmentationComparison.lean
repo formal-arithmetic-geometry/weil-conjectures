@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
+public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 import Sheaf.CategoryTheory.CartanEilenbergAcyclicAugmentation
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology

@@ -6,10 +6,10 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Module.Projective
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Scalar extension of bounded projective complexes on the one-object site

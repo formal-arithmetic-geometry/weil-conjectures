@@ -14,7 +14,7 @@ public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
 import Sheaf.AlgebraicGeometry.PicardFiberDirectImageRankConstructible
 import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchResidueCriterion
-import WeilConjectures.Topology.ConstructibleIsRetrocompact
+import Sheaf.Topology.ConstructibleIsRetrocompact
 
 /-! # Retrocompactness of a fixed-rank Picard point locus
 

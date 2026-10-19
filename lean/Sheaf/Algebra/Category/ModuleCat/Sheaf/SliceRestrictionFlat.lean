@@ -5,11 +5,11 @@ Authors: SHEAF group NG
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlatLimits
 
 /-!
