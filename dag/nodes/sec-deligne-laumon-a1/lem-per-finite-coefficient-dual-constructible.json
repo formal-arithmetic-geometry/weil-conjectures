@@ -16,26 +16,27 @@
  ],
  "proof": [
   {
-   "text": "Both assertions are local on $T$. For an open immersion $u:U\\to T$, $u^*\\omega_T\\cong\\omega_U$ [lem-amb-etale-adjoint-locality] and $u^*R\\mathcal Hom_\\Lambda(K,\\omega_T)\\cong R\\mathcal Hom_\\Lambda(u^*K,u^*\\omega_T)$ [lem-weil-pbc-ringed-internal-hom-exact-restriction]. A sheaf on $T$ is constructible if its restrictions to the members of a finite open cover are: intersect the strata on $U_j$ with $U_j\\setminus\\bigcup_{l<j}U_l$. So assume $T$ affine.",
+   "text": "Both assertions are local on $T$: for an open immersion $v:V\\hookrightarrow T$, $v^*\\omega_T\\cong\\omega_V$ by [lem-amb-etale-adjoint-locality], and derived internal Hom commutes with this restriction by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Constructibility glues over a finite open cover by restricting each chart's strata to $V_j\\setminus\\bigcup_{h<j}V_h$; bounds glue by taking the minimum lower and maximum upper bound. Apply [lem-sf-affine-chart-factorization-gluing] to $T\\to\\operatorname{Spec}k$: it supplies a finite affine cover whose members embed as closed subschemes of affine spaces over $k$. Work on one such member; the empty scheme is immediate.",
    "uses": [
     "lem-amb-etale-adjoint-locality",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-affine-chart-factorization-gluing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.1: the finiteness of the operations is local on the scheme"
+    "place": "§§2.2.12–2.2.13 and 4.0: finite-coefficient constructibility and duality background; the affine-space route is the human route decision of 2026-10-19"
    }
   },
   {
-   "text": "Choose a closed immersion $i:T\\hookrightarrow P=\\mathbf A^n_k$ and let $p:P\\to\\operatorname{Spec}k$ be the projection, $h:P\\setminus T\\hookrightarrow P$ the open complement. The composition isomorphism of compact supports [lem-amb-unbounded-compact-support-comparisons] and uniqueness of adjoints give $a^\\times\\cong i^\\times p^\\times$, and [cor-amb-affine-space-adjunction] gives $p^\\times\\Lambda\\cong\\Lambda_P(n)[2n]$, a lisse sheaf in one degree [def-asd-finite-etale-tate-twist]. For $M\\in D^b_c(P,\\Lambda)$ the closed-support triangle $i_*i^\\times M\\to M\\to Rh_*h^*M\\to$ [lem-exc-closed-support-triangle, lem-exc-closed-ambient] has $Rh_*h^*M$ bounded constructible by [thm-dg-finite-type-constructibility]; the cohomology sequence and [thm-constructible-serre] make $i_*i^\\times M$ bounded constructible, and $i^*i_*\\cong1$ [lem-kun-04ca] gives $i^\\times M\\in D^b_c(T,\\Lambda)$. With $M=\\Lambda_P(n)[2n]$ this proves the assertion on $\\omega_T$. No finiteness theorem beyond finite-type direct images over the field $k$ is used.",
+   "text": "Write $i:T\\hookrightarrow P=\\mathbf A^n_k$, $p:P\\to\\operatorname{Spec}k$, and $h:P\\setminus T\\hookrightarrow P$. Composition of compact supports [lem-amb-unbounded-compact-support-comparisons] and uniqueness of right adjoints identify $a^\\times\\cong Ri^!p^\\times$, where $Ri^!$ is the right adjoint of closed direct image [lem-exc-closed-ambient]. Affine-space adjunction [cor-amb-affine-space-adjunction] identifies $p^\\times\\Lambda$ with $M=\\Lambda_P(n)[2n]$. This is bounded constructible: the twist is finite locally constant of rank one by [lem-asd-etale-finite-twist-pullback], applied with the positive additive exponent of $\\Lambda$. For any bounded constructible $M$, [lem-exc-closed-support-triangle] gives $i_*Ri^!M\\to M\\to Rh_*h^*M\\to$. The third term is bounded constructible by [thm-dg-finite-type-constructibility], so the long cohomology sequence and [thm-constructible-serre] give the same for the first. Closed direct image here is termwise and exact; $i^*i_*\\cong1$ follows from [lem-kun-04ca], also for module sheaves since its unit and counit respect scalar actions. Restriction of each finite stratification to $T$ is a finite stratification. Thus $Ri^!M$ is bounded constructible, and the choice $M=\\Lambda_P(n)[2n]$ proves the assertion for $\\omega_T$. Step 1 proves it for every separated finite-type $T$.",
    "uses": [
     "lem-amb-unbounded-compact-support-comparisons",
-    "cor-amb-affine-space-adjunction",
-    "def-asd-finite-etale-tate-twist",
-    "lem-exc-closed-support-triangle",
     "lem-exc-closed-ambient",
+    "cor-amb-affine-space-adjunction",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-exc-closed-support-triangle",
     "thm-dg-finite-type-constructibility",
     "thm-constructible-serre",
     "lem-kun-04ca"
@@ -43,59 +44,122 @@
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.1 and 4.2.4: f^! of a closed immersion into affine space, computed from Rh_* and purity of affine space"
+    "place": "§§2.2.12–2.2.13 and 4.0: finite-coefficient constructibility and duality background; the affine-space route is the human route decision of 2026-10-19"
    }
   },
   {
-   "text": "$D_TK$ is bounded below, since $K$ is bounded above and $\\omega_T$ is bounded below. For constructibility, the truncation triangles of $K$ [lem-weil-heart-short-exact-triangles], the long exact sequences of $\\mathcal Ext$ sheaves and [thm-constructible-serre] reduce to $K=G$ a constructible sheaf, and then, by a finite partition into strata and the same closure, to $G=c_*u_!L$ with $u:S\\hookrightarrow V$ open, $c:V\\hookrightarrow T$ closed and $L$ lisse on $S$. Then $R\\mathcal Hom(c_*u_!L,\\omega_T)\\cong c_*Ru_*R\\mathcal Hom(L,u^*c^\\times\\omega_T)$ by the adjunctions $c_*\\dashv c^\\times$ and $u_!\\dashv u^*$ in sheafified form [lem-exc-closed-ambient, lem-amb-etale-adjoint-locality], and $c^\\times\\omega_T$ is bounded constructible by the argument of Step 2 applied to $c$ and its open complement in $T$.",
+   "text": "Choose $r,c$ with $K\\in D^{\\le r}$ and $\\omega_T\\in D^{\\ge c}$. The lower bound in [lem-per-bounded-above-rhom-hyperext] gives $D_TK\\in D^{\\ge c-r}$. For constructibility, the finite truncation tower of $K$ [lem-weil-heart-short-exact-triangles], preservation of triangles by internal Hom [lem-weil-pbc-ringed-internal-hom-exact-restriction], and [thm-constructible-serre] reduce to a constructible sheaf $G$. Its finite filtration in [lem-fin-constructible-devissage] reduces further to $G=c_*u_!L$ for $S\\xrightarrow{u}\\overline S\\xrightarrow{c}T$ (open into the closure, then closed) and a lisse finite $\\Lambda$-sheaf $L$ on $S$. Put $U=T\\setminus(\\overline S\\setminus S)$, open, so $S=\\overline S\\cap U$ is closed in $U$; write $s:S\\xrightarrow{i}U\\xrightarrow{j}T$. Closed direct image commutes with restriction to $U$, so $j^{-1}G\\cong i_*L$, and $G$ has zero stalks off $U$; hence the counit $j_!j^{-1}G\\to G$ is an isomorphism and $G\\cong j_!i_*L=Rs_!L$ in the convention of [lem-weil-stratum-ambient-hom]. The sheafified adjunction [lem-weil-stratum-ambient-hom], in its ordinary etale case, gives\n$$R\\mathcal Hom(Rs_!L,\\omega_T)\\cong Rs_*R\\mathcal Hom(L,Rs^!\\omega_T).$$\nComposition of compact supports [lem-amb-unbounded-compact-support-comparisons] and uniqueness of right adjoints identify $Rs^!\\omega_T$ with $\\omega_S$, bounded constructible by Step 2 and Step 1. Every $S$ is separated and finite type over $k$.",
+   "uses": [
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "thm-constructible-serre",
+    "lem-fin-constructible-devissage",
+    "lem-weil-stratum-ambient-hom",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "§§2.2.12–2.2.13 and 4.0: finite-coefficient constructibility and duality background; the affine-space route is the human route decision of 2026-10-19"
+   }
+  },
+  {
+   "text": "We check $N=R\\mathcal Hom(L,\\omega_S)$ has constructible cohomology. Etale locally $L$ is constant with value a finite $\\Lambda$-module $L_0$. The finite ring $\\Lambda$ is Noetherian (its ideals form a finite set), so [lem-weil-pbc-finite-free-resolution-noetherian] gives a resolution $P^\\bullet\\to L_0$ with $P^i$ finite free and $P^i=0$ for $i>0$. For a constructible sheaf $F$, [lem-weil-pbc-ringed-site-bounded-free-rhom-model] applied to $P^\\bullet$ and $F[0]$ represents $R\\mathcal Hom(L_0,F)$ by a complex whose degree $q\\ge0$ term is a finite sum of copies of $F$ and whose negative terms vanish. Its kernels, images and cokernels are constructible by [thm-constructible-serre]; hence all $\\mathcal Ext^q(L_0,F)$ are constructible. Now apply [lem-per-bounded-above-rhom-hyperext] with $K=L_0$, $r=0$, and $L=\\omega_S\\in D^{\\ge c}$. Its $E_2$ terms are the just-proved constructible Ext sheaves. Each total degree has a finite abutment filtration, and each term stabilizes after finitely many pages because $p\\ge0$, $q\\ge c$. Kernels, cokernels and extensions therefore make its abutment constructible. Internal Hom restriction [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies these local calculations with $N$. Choose finitely many affine etale trivializing charts covering the quasi-compact scheme $S$. Their disjoint union is quasi-compact and quasi-separated, so [lem-weil-pbc-etale-constructible-surjective-pullback] both preserves constructibility of the target cohomology on these charts and descends the computed cohomology sheaves to $S$. Also $N\\in D^+$ by the same lower bound.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "thm-constructible-serre",
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-etale-constructible-surjective-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free; finite free resolution from algebra.tex Tag 00LP; finite hyper-Ext filtration as stated in lem-per-bounded-above-rhom-hyperext"
+   }
+  },
+  {
+   "text": "Finally let $N\\in D^{\\ge c}(S,\\Lambda)$ have constructible cohomology, as in Step 4. For every $q$, $\\tau^{\\le q}N$ is bounded constructible. A bounded-below injective resolution of $\\tau^{\\ge q+1}N$ can be chosen zero in degrees at most $q$; its termwise direct image is still zero in those degrees. Applying $Rs_*$ to the truncation triangle thus gives\n$$\\mathcal H^q(Rs_*N)\\cong\\mathcal H^q(Rs_*\\tau^{\\le q}N).$$\nThe latter is constructible by [thm-dg-finite-type-constructibility], with the same finite coefficient ring and the finite-type schemes $S,T$ over $k$. Combine this with Step 3 and the kernel, cokernel and extension closure [thm-constructible-serre] along its finite truncation and sheaf-filtration towers. Every cohomology sheaf of $D_TK$ is constructible, as required.",
    "uses": [
     "lem-weil-heart-short-exact-triangles",
-    "thm-constructible-serre",
-    "lem-exc-closed-ambient",
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.1: devissage of a constructible sheaf along strata"
-   }
-  },
-  {
-   "text": "Etale locally $L$ is the constant sheaf of a finite $\\Lambda$-module $L_0$. Resolving $L_0$ by finite free $\\Lambda$-modules, $\\mathcal Ext^q(L_0,N)$ for $N\\in D^+$ with constructible cohomology depends only on finitely many terms of the resolution and of $N$, and each term contributes a finite sum of copies of a cohomology sheaf of $N$; so it is constructible. For $N\\in D^+$, $\\mathcal H^q(Ru_*N)=\\mathcal H^q(Ru_*\\tau^{\\le q}N)$ because $Ru_*$ maps $D^{>q}$ into $D^{>q}$, and the right side is constructible by [thm-dg-finite-type-constructibility]; $c_*$ is exact and preserves constructibility. Hence every cohomology sheaf of $D_TK$ is constructible.",
-   "uses": [
     "thm-dg-finite-type-constructibility",
-    "thm-constructible-serre",
-    "def-weil-pbc-constructible-complexes"
+    "thm-constructible-serre"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.1.1 and the finiteness of the six operations over a field used in 4.2.4"
+    "place": "§§2.2.12–2.2.13 and 4.0: finite-coefficient constructibility and duality background; the affine-space route is the human route decision of 2026-10-19"
    }
   }
  ],
  "proof_deps": [
   "cor-amb-affine-space-adjunction",
-  "def-asd-finite-etale-tate-twist",
   "def-weil-pbc-constructible-complexes",
   "lem-amb-etale-adjoint-locality",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
+  "lem-fin-constructible-devissage",
   "lem-kun-04ca",
+  "lem-per-bounded-above-rhom-hyperext",
+  "lem-sf-affine-chart-factorization-gluing",
   "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-etale-constructible-surjective-pullback",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-stratum-ambient-hom",
   "thm-constructible-serre",
   "thm-dg-finite-type-constructibility"
  ],
  "proof_origin": {
-  "by": "L (route decision of the human, 2026-10-19)",
+  "by": "agent",
   "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "closed immersion into affine space, purity of affine space and finite-type direct images over the field k"
+  "place": "The human-mandated route of 2026-10-19: closed affine embedding, affine-space purity, closed-support triangle, finite-type direct-image constructibility, and finite free resolutions; BBD §§2.2.12–2.2.13 and 4.0 supply context rather than this exact arbitrary-ring proof."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual of a bounded constructible complex of etale sheaves over a field with finite coefficients has constructible cohomology",
+   "results": "DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these results states finite-coefficient Verdier-dual constructibility"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizingComplex|constructible.*[Hh]om|[Hh]om.*constructible",
+   "results": "Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these results states finite-coefficient Verdier-dual constructibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of constructible etale sheaves with finite coefficients over a field",
+   "results": "CategoryTheory.sheafHom', CategoryTheory.sheafHom, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.internalHom, CategoryTheory.ihom, FGModuleCat.ihom_obj, CategoryTheory.Sheaf.Hom.recOn, CategoryTheory.Pseudofunctor.sheafHom",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these results states finite-coefficient Verdier-dual constructibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Constructible",
+   "results": "loogle: unknown identifier 'Constructible'",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these results states finite-coefficient Verdier-dual constructibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of Ext sheaves and exceptional inverse images for finite constructible etale sheaves",
+   "results": "SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.etaleTopology, SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these results states finite-coefficient Verdier-dual constructibility"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "L",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -113,5 +177,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-coefficient-dual-constructible",
+  "worker": "stage1",
+  "summary": "Rebased the retained split onto the current DAG and reread every cited statement. Recorded the missing perverse-unit realization via its actual heart and Fourier equivalence theorems. Replaced the special-coefficient Ext citation by the general ringed-site Hom model and finite hyper-Ext filtration; used the theorem, rather than just the definition, of local constancy of finite Tate twists. Corrected closed-adjoint notation and supplied the finite-coefficient devissage and immersion-Hom citations. No statement change or new nodes.",
+  "blueprint": "The ancestor Step 4 needs finite-coefficient Verdier-dual constructibility. Steps 1–2 realize the mandated affine embedding and purity route for the dualizing object; Steps 3–5 carry the constructible filtration, finite free Ext calculation and finite-type direct-image argument. The unit is realized by thm-a1-curve-perverse-heart and thm-a1-fourier-t-exact; this item supplies a supporting coefficient lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-affine-chart-factorization-gluing",
+    "why": "The item’s affine Step 2 needs the existing finite-type affine-chart factorization to obtain a closed immersion into affine space; this is a generic geometric tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "General ringed-site Hom-complex computation for a bounded-above finite free resolution and bounded-below target; no coefficient restriction or route change."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Generic sheafified adjunction for a locally closed immersion on ordinary etale derived categories; used after the finite stratum filtration."
+   },
+   {
+    "node": "lem-weil-pbc-etale-constructible-surjective-pullback",
+    "why": "Generic constructibility descent along the finite union of affine etale trivializing charts, both schemes qcqs; not a replacement for the affine-space duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-affine-chart-factorization-gluing",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-stratum-ambient-hom",
+  "lem-weil-pbc-etale-constructible-surjective-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-b81808a22",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-b81808a22 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes and the statement is unchanged. This re-delivers 862fa454, which the landing refused (returns/Q49.md) because the unit had no realization and proof_origin.by was not document/agent; both refusals came from my earlier fix. Both are now repaired, and review_split.py prints PASS. Statement: finite Λ with exponent invertible in an arbitrary field k; ω_T is in D^b_c and D_T K is in D^+ with constructible cohomology. D^+ is correct, not D^b: Ext^q(Z/2,Z/4) is nonzero for every q. The empty T is trivial. Step 1: locality via adjoint-locality and RHom restriction, then an affine chart cover into A^m_k. Step 2: a^× ≅ Ri^! p^× by α-composition with Ri_!=i_*; affine-space adjunction with N the invertible exponent; Λ(n) is locally free of rank one by the twist-pullback lemma; the closed-support triangle with thm-dg-finite-type-constructibility, Serre closure and i^{-1}i_*≅1. Step 3: the c−r bound from the hyper-Ext lemma, the truncation tower, and devissage for general finite Λ over k. FAULT, fixed: the devissage writes (j)_! = c_*u_! (open into the closure, then closed), but lem-weil-stratum-ambient-hom defines Rs_! = j_!i_* only for closed-then-open factorizations, and the text identified the two silently. I added the identification: U = T∖(S̄∖S), so S is closed in U; j^{-1}G ≅ i_*L; the stalks vanish off U; the counit is an isomorphism. Rs^!ω_T ≅ ω_S by compact-support composition. Step 4: Stacks 00LP resolution; the 08JI Hom model (checked in sites-cohomology.tex) with P bounded above and F[0], giving degree-q term F^{n_q}; the hyper-Ext spectral sequence with K=L_0, r=0, which is finite in each total degree; 095Q descent along a finite étale cover of qcqs schemes. The A_{E,n}-only Ext node is no longer cited. Step 5: H^q(Rs_*N) = H^q(Rs_*τ^{≤q}N) together with the finite-type direct-image theorem. The unit realization sk-p-dl-a1-perverse = [thm-a1-curve-perverse-heart, thm-a1-fourier-t-exact] is accurate: I read both statements, and they cover step 1 (the truncation classes and heart) and step 2 (t-exactness and the equivalence). I accepted it because the landing gate needs it; maintainer: realized_by names this non-key item. Route vocabulary 'gabber': it occurs only in the parent id lem-per-artin-gabber-affine-curve. The proof uses no Gabber finiteness, uniformization, alterations, stable reduction, Qbar or adic duality, biduality or middle t-structure. The coefficients are finite and the proof follows the route mandated in repair-notes/lem-per-artin-gabber-affine-curve.json. No SGA is cited. The item is not in the dropped list. Tool uses accepted: affine-chart-factorization-gluing, ringed-site-bounded-free-rhom-model, stratum-ambient-hom, etale-constructible-surjective-pullback, kun-04ca, heart-short-exact-triangles. The fix changes only the Step 3 text of the item file; there is no unit fix.; 1 file(s) fixed by the reviewer"
  }
 }
