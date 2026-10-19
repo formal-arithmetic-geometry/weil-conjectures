@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionNormalization
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenRestrictionNormalization
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
+import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
 
 /-! # Counit computation for the canonical open composition comparison
 

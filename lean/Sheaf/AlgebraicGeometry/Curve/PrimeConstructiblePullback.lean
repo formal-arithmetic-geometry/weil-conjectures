@@ -8,9 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit
-import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
+import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 
 /-! # Constructible approximation for one prime and one pullback -/
 
@@ -83,7 +83,7 @@ theorem bijective_cohomologyMap_of_constructible_prime
   have : ∀ i, IsIso ((Functor.whiskerLeft F α).app i) := by
     intro i
     have : Scheme.IsConstructibleSheaf (D.obj i) :=
-      (Scheme.isConstructibleEtaleModuleSheaf_iff (D.obj i)).mp (hD i)
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (D.obj i)).mp (hD i)
     exact (ConcreteCategory.isIso_iff_bijective _).2 (H (D.obj i) q)
   have : IsIso (Functor.whiskerLeft F α) := NatIso.isIso_of_isIso_app _
   have : IsIso (α.app c.pt) :=

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
@@ -128,7 +128,7 @@ theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     IsConstructibleEtaleModuleSheaf
       ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj
         ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
-  apply (isConstructibleEtaleModuleSheaf_iff _).2
+  apply (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
   exact isConstructibleSheaf_etaleLowerShriek_constant_core j M
 
 end AlgebraicGeometry.Scheme

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.OpenRestrictionAdjunctionHomDescent
 import Sheaf.AlgebraicGeometry.OpenRestrictionTensorCounitDescent
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Open restriction comparison for derived projection mates
 

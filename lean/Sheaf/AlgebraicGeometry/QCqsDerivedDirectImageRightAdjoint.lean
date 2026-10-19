@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration

@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionNatural
 import Mathlib.CategoryTheory.Localization.Prod
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 
 /-! # Coherent descent through open restriction
 

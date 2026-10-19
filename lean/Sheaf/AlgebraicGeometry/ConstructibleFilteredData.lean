@@ -3,7 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 
@@ -89,17 +89,17 @@ theorem exists_filtered_constructible_data
   let B := CostructuredArrow P.ι F
   have : EssentiallySmall.{u + 1} P.FullSubcategory := constructible_essentiallySmall X Λ
   have hzero : P (0 : C) :=
-    (isConstructibleEtaleModuleSheaf_iff _).mpr
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
       (IsConstructibleSheaf.of_isZero (Limits.isZero_zero _))
   have hsum (a b : P.FullSubcategory) : P (a.obj ⊞ b.obj) := by
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp a.property
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp b.property
-    exact (isConstructibleEtaleModuleSheaf_iff _).mpr
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp a.property
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp b.property
+    exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
       (IsConstructibleSheaf.biprod a.obj b.obj)
   have hcoker (a b : P.FullSubcategory) (f : a.obj ⟶ b.obj) : P (Limits.cokernel f) := by
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp a.property
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp b.property
-    exact (isConstructibleEtaleModuleSheaf_iff _).mpr (IsConstructibleSheaf.cokernel f)
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp a.property
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp b.property
+    exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (IsConstructibleSheaf.cokernel f)
   have : IsFiltered B :=
     { nonempty := ⟨CostructuredArrow.mk (Y := (⟨0, hzero⟩ : P.FullSubcategory)) (0 : (0 : C) ⟶ F)⟩
       cocone_objs := by

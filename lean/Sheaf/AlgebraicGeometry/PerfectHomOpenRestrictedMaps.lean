@@ -2,8 +2,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields
 import Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective
 import Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare
-import Sheaf.AlgebraicGeometry.DerivedOpenTestObject
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 @[expose] public section
 universe u w

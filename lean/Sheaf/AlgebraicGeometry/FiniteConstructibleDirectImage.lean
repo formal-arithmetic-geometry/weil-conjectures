@@ -13,8 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
-import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
@@ -48,7 +48,7 @@ Proof:
 3. Apply `isConstructibleSheaf_of_finite_coefficient_underlying_sets` with the zero
    ideal. The quotient Λ/0 is finite by surjectivity of the quotient map, and the zero
    ideal annihilates every section. Convert the resulting module constructibility
-   with `isConstructibleEtaleModuleSheaf_iff`.
+   with `isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`.
 4. The finite-direct-image exactness instance applies directly to ModuleCat Λ.
    Its bounded below right derived functor is therefore its levelwise derived functor,
    which commutes with homology. The degree-q homology of F[0] is zero for q > 0;
@@ -71,7 +71,7 @@ theorem finite_directImage_constructible_and_higher_vanishing
   have : Finite Λ := hcoeff.2.1
   have : IsNoetherian S := isNoetherian_of_locallyOfFiniteType (S ↘ Spec (.of k))
   constructor
-  · apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+  · apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
     have hsets := Scheme.isConstructibleEtaleSheafOfSets_of_module Λ F hF
     let E := (sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F

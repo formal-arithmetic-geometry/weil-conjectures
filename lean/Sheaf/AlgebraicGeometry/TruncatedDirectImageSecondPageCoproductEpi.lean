@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSums
 import Sheaf.AlgebraicGeometry.ModuleHigherDirectImageCoproductEpi
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure

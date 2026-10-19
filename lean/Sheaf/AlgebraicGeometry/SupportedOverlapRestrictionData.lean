@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 

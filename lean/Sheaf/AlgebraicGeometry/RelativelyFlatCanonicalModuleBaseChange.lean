@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Canonical relatively flat module base change
 

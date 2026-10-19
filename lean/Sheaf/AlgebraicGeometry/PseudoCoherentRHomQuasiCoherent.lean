@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
-import Sheaf.AlgebraicGeometry.DerivedLocallyBoundedBelowGlobal
+import WeilConjectures.AlgebraicGeometry.DerivedLocallyBoundedBelowGlobal
 import Sheaf.AlgebraicGeometry.DerivedAlgebraQCohOfUnderlying
 
 /-! # Derived internal Hom from a pseudo-coherent algebra

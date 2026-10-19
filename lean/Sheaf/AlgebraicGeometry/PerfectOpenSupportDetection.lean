@@ -10,8 +10,8 @@ public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.LocallySmall
 import Mathlib.Algebra.Category.Grp.Zero

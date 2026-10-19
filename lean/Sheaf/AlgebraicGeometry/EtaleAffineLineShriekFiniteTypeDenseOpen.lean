@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.LisseOpenRelativeLineConstructibility
 import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportOpenClosedTriangle
 import Sheaf.AlgebraicGeometry.CompactificationCategory
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
@@ -78,7 +78,7 @@ private theorem affineLine_shriek_constructible_of_finite_complement
     have hn := Etale.isConstructibleEtaleModuleSheaf_lisse_openRelativeLine_shriek
       Λ R U ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F)
       ((Scheme.finite_locally_constant_module_values_iff _).1.mpr hU) cU n
-    have hn' := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hn
+    have hn' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hn
     let e := (Functor.mapDerivedCategoryPlusSingleFunctor
       (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι) 0).app F
     exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) Y).prop_of_iso
@@ -93,20 +93,20 @@ private theorem affineLine_shriek_constructible_of_finite_complement
       ((_root_.DerivedCategory.Plus.homologyFunctor _ n).obj
         (((Etale.upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus).obj K)) := by
     intro n
-    have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hF
+    have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hF
     have hc := Etale.DerivedCategory.boundedConstructible_singleFunctor_obj F 0
     have hc' := Etale.DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar i hc
-    exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr (hc'.2 n)
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hc'.2 n)
   have : IsAffine Z := isAffine_of_isAffineHom (i ≫ f)
   have hz := Etale.constructibleCohomology_lowerShriek_of_quasiFinite Λ (i ≫ f)
     hqf _ hK cZ
   have h₃ : P T.obj₃ := by
     intro n
-    have hn := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp (hz n)
+    have hn := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hz n)
     exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) Y).prop_of_iso
       ((_root_.DerivedCategory.homologyFunctor _ n).mapIso e₃).symm hn
   have h₂ := P.ext_of_isTriangulatedClosed₂ T hT h₁ h₃
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
   exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) Y).prop_of_iso
     ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e₂) (h₂ q)
 
@@ -150,11 +150,11 @@ theorem exists_dense_open_affineLine_shriek_constructible
   let c' := c.ofIsPullback (AffineSpace.isPullback_map g)
   let F' := (Etale.upperStar (ModuleCat.{u + 1} Λ)
     (AffineSpace.map (ULift.{u} (Fin 1)) g)).obj F
-  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hF
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hF
   have := Scheme.IsConstructibleSheaf.upperStar
     (AffineSpace.map (ULift.{u} (Fin 1)) g) F
   have hF' : Scheme.IsConstructibleEtaleModuleSheaf F' :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr inferInstance
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr inferInstance
   have hij' : Set.range i.base = (Set.range U.ι.base)ᶜ := by
     rw [Scheme.Opens.range_ι]; exact hij
   have hc := affineLine_shriek_constructible_of_finite_complement
@@ -180,7 +180,7 @@ theorem exists_dense_open_affineLine_shriek_constructible
           ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
             ((Etale.upperStar (ModuleCat.{u + 1} Λ)
               (AffineSpace.map (ULift.{u} (Fin 1)) g)).obj F)))) :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hc
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hc
   let G := (_root_.DerivedCategory.Plus.homologyFunctor
     (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj
       ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj
@@ -193,7 +193,7 @@ theorem exists_dense_open_affineLine_shriek_constructible
     rw [Scheme.Opens.range_ι]; rfl
   let eV := IsOpenImmersion.isoOfRangeEq g V.ι heq
   refine ⟨V, hgd, ?_⟩
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
   have hcPull := Scheme.IsConstructibleSheaf.upperStar eV.inv
     ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj G)
   have hc'' := (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) V.toScheme).prop_of_iso

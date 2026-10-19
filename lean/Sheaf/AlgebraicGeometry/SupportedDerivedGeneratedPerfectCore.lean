@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.CategoryTheory.CompactObject
-public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.SupportedCompactDetectorModel
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects

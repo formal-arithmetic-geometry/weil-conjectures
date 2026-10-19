@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.AlgebraicGeometry.DerivedDirectImageUniformAffineTruncation
 

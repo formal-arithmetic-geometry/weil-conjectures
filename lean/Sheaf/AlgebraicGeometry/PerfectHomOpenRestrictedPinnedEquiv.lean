@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictionMap
 public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields
 import Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective
-import Sheaf.AlgebraicGeometry.DerivedOpenTestObject
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 
 /-! # Pinned restriction comparisons
 Source: Stacks Tags 079W, 08FE and 09RE.

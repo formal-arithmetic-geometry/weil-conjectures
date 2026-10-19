@@ -2,7 +2,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Coherence of supplied open-union restriction comparisons
 

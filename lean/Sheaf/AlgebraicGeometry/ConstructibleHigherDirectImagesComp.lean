@@ -6,7 +6,7 @@ Authors: SHEAF group NR
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
@@ -153,12 +153,12 @@ theorem hasConstructibleHigherDirectImages_comp
           ((lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus.obj
             ((DerivedCategory.Plus.singleFunctor _ 0).obj
               (higherDirectImage Λ f pq.2 F)))) :=
-      (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hfg
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hfg
     exact Scheme.IsConstructibleSheaf.of_iso
       (eg ≪≫ ((lowerStar (ModuleCat.{u + 1} Λ) g).rightDerived pq.1).mapIso ef ≪≫
         (h₂ pq.1 pq.2).some.symm)
   have hc := constructible_abutment E hE hpages n
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
   let e := lowerStarComp (ModuleCat.{u + 1} Λ) f g
   let e' : (((lowerStar (ModuleCat.{u + 1} Λ) f) ⋙
       lowerStar (ModuleCat.{u + 1} Λ) g).rightDerived n) ≅

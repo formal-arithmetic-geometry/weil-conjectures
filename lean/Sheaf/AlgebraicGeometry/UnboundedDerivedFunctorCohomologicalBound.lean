@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-import Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization
+import WeilConjectures.AlgebraicGeometry.DerivedFunctorTruncationStabilization
 import Sheaf.AlgebraicGeometry.QCohTruncationDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso

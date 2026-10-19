@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Bounded flat constructible models on the small etale site
@@ -75,12 +75,12 @@ theorem hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
     refine ⟨⟨⟨c, ?_⟩, ⟨d, ?_⟩⟩, fun q ↦ ?_⟩
     · exact (_root_.DerivedCategory.isGE_iff _ c).2 fun q hq ↦ hcd q (.inl hq)
     · exact (_root_.DerivedCategory.isLE_iff _ d).2 fun q hq ↦ hcd q (.inr hq)
-    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hK.1 q)
+    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hK.1 q)
   constructor
   · intro h
     obtain ⟨P, hP, hc, ⟨e⟩⟩ :=
       (hasTorAmplitudeIn_iff_exists_flatConstructibleModel Λ a b hab K hK').1 h
-    exact ⟨P, hP.2, fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+    exact ⟨P, hP.2, fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc q),
       hP.1, ⟨e.symm⟩⟩
   · rintro ⟨P, hf, -, hz, ⟨e⟩⟩
     exact (hasTorAmplitudeIn_iff_exists_flatModel Λ a b hab K hK').2

@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteEpimorphism
 import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
@@ -96,7 +96,7 @@ theorem exists_affine_free_etale_presentation
     obtain ⟨e⟩ := free_etale_module_shriek_comparison X Λ W
     have hc := isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
       (X := X) (U := W.left) W.hom (ModuleCat.of Λ Λ)
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp hc
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hc
     exact IsConstructibleSheaf.of_iso e.symm
   obtain ⟨n, U, hU, g, hg⟩ := exists_affine_free_etale_epimorphism X Λ F hF
   have : Epi g := hg
@@ -106,9 +106,9 @@ theorem exists_affine_free_etale_presentation
   have := IsConstructibleSheaf.biproduct (fun i : Fin n ↦ P (U i))
   have := IsConstructibleSheaf.of_iso
     (biproduct.isoCoproduct (fun i : Fin n ↦ P (U i)))
-  have := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
   have := IsConstructibleSheaf.kernel g
-  have hK := (isConstructibleEtaleModuleSheaf_iff (kernel g)).mpr
+  have hK := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (kernel g)).mpr
     (inferInstance : IsConstructibleSheaf (kernel g))
   obtain ⟨m, V, hV, h, hh⟩ := exists_affine_free_etale_epimorphism X Λ (kernel g) hK
   have : Epi h := hh

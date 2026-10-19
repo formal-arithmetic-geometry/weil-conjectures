@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
+import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageFunctorComparison
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageEvaluationComparison

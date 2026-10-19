@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffinePullbackPerfectDetectsIso
 import Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 
 @[expose] public section
 

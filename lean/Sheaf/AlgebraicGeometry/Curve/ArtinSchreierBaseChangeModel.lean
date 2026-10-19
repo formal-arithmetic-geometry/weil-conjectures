@@ -8,7 +8,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPrimeBaseChangeModel
-import Sheaf.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback
+import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback
 
 @[expose] public section
 

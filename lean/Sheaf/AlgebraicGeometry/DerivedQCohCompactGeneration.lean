@@ -9,13 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
+import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 
 /-! # Compact generation of the quasi-coherent derived category
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 

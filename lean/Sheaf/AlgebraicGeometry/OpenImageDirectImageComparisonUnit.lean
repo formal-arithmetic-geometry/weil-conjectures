@@ -5,9 +5,9 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
 import all Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
+import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
 
 /-! # The ordinary open-image comparison and its unit
 

@@ -21,7 +21,7 @@ import Sheaf.CategoryTheory.CompactObjectsThick
 import Sheaf.Paper.PurEtaleLisseStratumCompact
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.AlgebraicGeometry.AffineEtaleFreeDetection
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
@@ -59,7 +59,7 @@ Proof, following the node and Bhatt--Scholze, Section 6.4:
 3. Use the actual type `T.AffineEtale` as the index set. The free Yoneda sheaves are
    constructible and flat by the source library's `isConstructibleSheaf_freeYoneda`
    and `flat_freeYoneda`. Their single complexes are bounded constructible, using
-   `isConstructibleEtaleModuleSheaf_iff` to compare the constructibility conventions.
+   `isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf` to compare the constructibility conventions.
    Their explicit single flat models give Tor amplitude `[0,0]` via
    `hasTorAmplitudeIn_iff_exists_flatModel`.
 4. `lem-pur-affine-etale-free-detection` supplies only the detection of isomorphisms
@@ -144,7 +144,7 @@ theorem finiteRing_compactGenerators
     constructor
     · constructor
       · intro q
-        exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hbc.2 q)
+        exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hbc.2 q)
       · refine ⟨0, 0, le_rfl, fun q hq ↦ ?_⟩
         rcases hq with hq | hq
         · exact (_root_.DerivedCategory.isGE_iff _ 0).1 inferInstance q hq

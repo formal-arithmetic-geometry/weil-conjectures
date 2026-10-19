@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits
 import Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections

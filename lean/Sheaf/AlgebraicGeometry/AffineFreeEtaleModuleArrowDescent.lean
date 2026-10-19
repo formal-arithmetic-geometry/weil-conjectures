@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSh
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 import WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
 import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
@@ -104,9 +104,9 @@ theorem exists_affine_free_etaleModule_arrow_descent
     isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
       (X := D.obj (op i)) (U := W.left) W.hom (ModuleCat.of Λ Λ)
   have hQA (k : Fin m) : IsConstructibleSheaf (Q (WV k)) :=
-    (isConstructibleEtaleModuleSheaf_iff _).mp (hQ (WV k))
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hQ (WV k))
   have hQB (k : Fin n) : IsConstructibleSheaf (Q (WU k)) :=
-    (isConstructibleEtaleModuleSheaf_iff _).mp (hQ (WU k))
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hQ (WU k))
   have : HasFiniteBiproducts
       (Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     Abelian.hasFiniteBiproducts
@@ -125,10 +125,10 @@ theorem exists_affine_free_etaleModule_arrow_descent
     IsConstructibleSheaf.of_iso (biproduct.isoCoproduct _)
       (F := ⨁ fun k : Fin n ↦ Q (WU k))
   have hAj : IsConstructibleEtaleModuleSheaf (t.obj A₀) :=
-    (isConstructibleEtaleModuleSheaf_iff _).mpr
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
       (IsConstructibleSheaf.upperStar (D.map (homOfLE h).op) A₀)
   have hBj : IsConstructibleEtaleModuleSheaf (t.obj B₀) :=
-    (isConstructibleEtaleModuleSheaf_iff _).mpr
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
       (IsConstructibleSheaf.upperStar (D.map (homOfLE h).op) B₀)
   refine ⟨j, t.obj A₀, t.obj B₀, a, hAj, hBj,
     (E.app A₀).symm ≪≫ eA, (E.app B₀).symm ≪≫ eB, ?_⟩

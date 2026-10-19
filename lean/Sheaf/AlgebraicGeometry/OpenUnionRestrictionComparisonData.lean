@@ -2,7 +2,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Comparison data for inverse image opens of a union

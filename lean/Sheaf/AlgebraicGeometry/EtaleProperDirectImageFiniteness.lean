@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
 
@@ -89,11 +89,11 @@ theorem proper_directImage_finiteness
   have hK : ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
       ((_root_.DerivedCategory.homologyFunctor _ q).obj K.obj) := by
     intro q
-    apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+    apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
     by_cases hq : q = 0
     · subst q
       have : Scheme.IsConstructibleSheaf F :=
-        (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
       exact Scheme.IsConstructibleSheaf.of_iso (F := F)
         ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm
     · apply Scheme.IsConstructibleSheaf.of_isZero
@@ -116,10 +116,10 @@ theorem proper_directImage_finiteness
     have : Scheme.IsConstructibleSheaf
         ((_root_.DerivedCategory.homologyFunctor _ q).obj
           ((lowerStar A f).rightDerivedFunctor.obj K.obj)) := by
-      have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 hc
+      have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 hc
       exact Scheme.IsConstructibleSheaf.of_iso
         ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e)
-    apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+    apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
     exact Scheme.IsConstructibleSheaf.of_iso
       (F := (_root_.DerivedCategory.homologyFunctor _ q).obj
         ((lowerStar A f).rightDerivedFunctor.obj K.obj))

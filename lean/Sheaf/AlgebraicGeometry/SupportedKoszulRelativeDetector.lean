@@ -10,13 +10,13 @@ public import Mathlib.Topology.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine
 import Sheaf.AlgebraicGeometry.SupportedOpenExtension
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Mathlib.CategoryTheory.Localization.LocallySmall
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
-import Sheaf.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
+import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
 
 /-! # A supported Koszul relative detector
 

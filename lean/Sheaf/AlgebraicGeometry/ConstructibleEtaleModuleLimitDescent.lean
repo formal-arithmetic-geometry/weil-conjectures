@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
@@ -66,7 +66,7 @@ Proof (the module argument expands the source's instruction to use Tag 095N):
 The Lean proof uses Mathlib directly for qcqs of the given limit cone. Steps 3-6
 and the constructibility of the two descended sums in step 7 are grouped into
 `exists_affine_free_etaleModule_arrow_descent`. The comparison
-`isConstructibleEtaleModuleSheaf_iff` lets step 7 use the source library's proved
+`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf` lets step 7 use the source library's proved
 cokernel theorem. Mathlib cokernel preservation, the commuting square and uniqueness
 of colimits complete step 8. -/
 theorem exists_constructible_etaleModuleSheaf_descent
@@ -91,10 +91,10 @@ theorem exists_constructible_etaleModuleSheaf_descent
     exists_affine_free_etale_presentation c.pt Λ F hF
   obtain ⟨i, A, B, a, hA, hB, eA, eB, ha⟩ :=
     exists_affine_free_etaleModule_arrow_descent D c hc Λ n m U V hU hV f
-  have := (isConstructibleEtaleModuleSheaf_iff A).mp hA
-  have := (isConstructibleEtaleModuleSheaf_iff B).mp hB
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf A).mp hA
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf B).mp hB
   have hC : IsConstructibleEtaleModuleSheaf (cokernel a) :=
-    (isConstructibleEtaleModuleSheaf_iff (cokernel a)).mpr
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (cokernel a)).mpr
       (IsConstructibleSheaf.cokernel a)
   refine ⟨i, cokernel a, hC, ?_⟩
   let L := Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))

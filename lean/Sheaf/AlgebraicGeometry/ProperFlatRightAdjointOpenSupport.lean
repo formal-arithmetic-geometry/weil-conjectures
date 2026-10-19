@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.PerfectOpenSupportDetection
 import Sheaf.AlgebraicGeometry.AdjointTensorAnnihilatorTransport
 import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 
 /-!
 # Support preservation by the right adjoint of proper flat direct image

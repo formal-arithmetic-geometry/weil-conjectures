@@ -15,9 +15,9 @@ import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
-import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
+import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

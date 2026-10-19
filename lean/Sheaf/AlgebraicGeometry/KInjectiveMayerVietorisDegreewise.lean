@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
 import Sheaf.AlgebraicGeometry.OpenModuleImageGluing
 import Mathlib.CategoryTheory.Abelian.CommSq

@@ -10,7 +10,7 @@ public import Mathlib.Topology.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import Sheaf.AlgebraicGeometry.SupportedOpenUnitImageProperties
-import Sheaf.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
+import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 
 /-! # Support of the open unit cone
 

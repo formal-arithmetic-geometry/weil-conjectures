@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # The ordinary direct-image mate in the cartesian open square

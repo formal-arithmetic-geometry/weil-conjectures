@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PerfectUniversalH0LocalChainModel
 import Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Canonical truncation on a universally free lowest-cohomology locus
 

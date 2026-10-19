@@ -7,7 +7,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 import WeilConjectures.AlgebraicGeometry.AffineFreeFiniteStalkGeneration
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSurjectivityLocus
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
@@ -65,7 +65,7 @@ theorem exists_affine_free_etale_zero_cokernel
     obtain ⟨e⟩ := free_etale_module_shriek_comparison X Λ W
     have hc := isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
       (X := X) (U := W.left) W.hom (ModuleCat.of Λ Λ)
-    have := (isConstructibleEtaleModuleSheaf_iff _).mp hc
+    have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hc
     exact IsConstructibleSheaf.of_iso e.symm
   have hE (S : Finset I) : Topology.IsConstructible (E S) := by
     let e := (Fintype.equivFin S).symm
@@ -79,7 +79,7 @@ theorem exists_affine_free_etale_zero_cokernel
     have := IsConstructibleSheaf.of_iso
       (biproduct.isoCoproduct H ≪≫ Sigma.reindex e (fun i : S => P i.val.1.val))
     exact isConstructible_module_stalk_nonsurjective _ F
-      ((isConstructibleEtaleModuleSheaf_iff _).mpr inferInstance) hF (g S)
+      ((isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr inferInstance) hF (g S)
   have hEmpty : (⋂ S : Finset I, E S) = ∅ := by
     apply Set.eq_empty_iff_forall_notMem.mpr
     intro x hx

@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.DerivedExactStructures
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
