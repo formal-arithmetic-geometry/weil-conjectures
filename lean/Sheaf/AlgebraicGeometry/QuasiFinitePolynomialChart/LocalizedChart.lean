@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!

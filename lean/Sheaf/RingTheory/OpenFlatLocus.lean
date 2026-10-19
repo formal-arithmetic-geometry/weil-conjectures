@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.FlatPointNoetherianModel
-import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
+import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
 import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 
 /-!

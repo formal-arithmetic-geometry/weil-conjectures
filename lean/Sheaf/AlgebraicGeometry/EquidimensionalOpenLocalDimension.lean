@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 
 /-! # Local dimension of an equidimensional open in a locally algebraic scheme
 

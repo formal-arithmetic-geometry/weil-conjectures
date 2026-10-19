@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
@@ -21,8 +21,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison
 import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel
-import Sheaf.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison
-import Sheaf.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
+import WeilConjectures.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
 
 /-! # Affine depth-two hull of a finite etale pushforward
 

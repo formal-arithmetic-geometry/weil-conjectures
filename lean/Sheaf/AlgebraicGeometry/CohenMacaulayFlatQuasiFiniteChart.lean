@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore
 

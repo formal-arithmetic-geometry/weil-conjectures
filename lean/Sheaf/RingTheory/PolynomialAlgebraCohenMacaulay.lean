@@ -5,7 +5,7 @@ Authors: SHEAF group Q20
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
@@ -13,12 +13,12 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.Algebra.Polynomial.FieldDivision
 import Mathlib.RingTheory.PrincipalIdealDomain
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Mathlib.RingTheory.Flat.Basic
 
 /-!

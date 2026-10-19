@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.RingTheory.MapIntoHenselianColimit
+import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Sheaf.RingTheory.PointedEtaleFiltered
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Sheaf.RingTheory.StrictlyHenselianQuotient

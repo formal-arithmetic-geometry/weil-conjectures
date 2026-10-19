@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.HenselianEtaleRetraction
+import WeilConjectures.RingTheory.HenselianEtaleRetraction
 
 /-!
 # Ring-valued lifting from a single etale algebra

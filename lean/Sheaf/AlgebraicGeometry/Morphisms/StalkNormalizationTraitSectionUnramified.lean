@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionMaximalIdeal
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionResidueSeparable
-import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
+import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 
 /-!
 # Unramifiedness along a split trait section

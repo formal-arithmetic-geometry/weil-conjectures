@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Sheaf.RingTheory.WeaklyEtaleDimension
 import Mathlib.RingTheory.Localization.Away.Basic

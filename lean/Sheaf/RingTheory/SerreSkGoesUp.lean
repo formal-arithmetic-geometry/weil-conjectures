@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.SerreConditions
+public import WeilConjectures.RingTheory.SerreConditions
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import Sheaf.RingTheory.FlatFiberLocalDepth
-import Sheaf.RingTheory.FlatFiberPrimeHeight
+import WeilConjectures.RingTheory.FlatFiberPrimeHeight
 
 /-!
 # Ascent of Serre's condition (S_k) along flat maps

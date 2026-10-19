@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Height
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.DimensionAtPointComponents
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-!
 # Dimension at a point of a polynomial quotient

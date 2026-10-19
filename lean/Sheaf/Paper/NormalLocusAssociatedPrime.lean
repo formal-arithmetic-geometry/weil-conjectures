@@ -12,10 +12,10 @@ public import Mathlib.RingTheory.Spectrum.Prime.Defs
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 import all Sheaf.RingTheory.FlatFiberLocalDepth
 import Sheaf.RingTheory.SerreCriterionNormal
-import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.DepthQuotSMulTop
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.DepthQuotSMulTop
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 
 /-! # Associated-prime detection of non-normal localizations

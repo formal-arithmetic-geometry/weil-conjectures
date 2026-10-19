@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Finiteness.Basic
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.GenericFormalFiberFiniteSubringBase
 import Sheaf.RingTheory.GenericFormalFiberFractionFieldTransport
 

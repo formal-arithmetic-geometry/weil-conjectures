@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.ClosedFiberPowerSeriesTest
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTestFiniteExtensionFlat
 import Mathlib.RingTheory.RingHom.FaithfullyFlat

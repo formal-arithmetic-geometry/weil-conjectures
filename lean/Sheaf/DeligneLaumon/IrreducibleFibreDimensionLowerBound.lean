@@ -6,7 +6,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 
 /-!

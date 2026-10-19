@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.AlgebraicGeometry.AffinePushforwardStalkLocalization
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardStalkLocalization
 
 /-! # Stalkwise flatness over the direct-image algebra
 Source: Stacks Project, Tag 0AVW.

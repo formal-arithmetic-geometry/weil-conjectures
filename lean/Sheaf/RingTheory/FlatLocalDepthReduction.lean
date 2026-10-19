@@ -5,15 +5,15 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Sheaf.RingTheory.FlatModInjective
 import Mathlib.RingTheory.TensorProduct.Quotient
-import Sheaf.RingTheory.DepthQuotSMulTop
-import Sheaf.RingTheory.DepthOverQuotientRing
+import WeilConjectures.RingTheory.DepthQuotSMulTop
+import WeilConjectures.RingTheory.DepthOverQuotientRing
 
 /-!
 # Quotients reducing the depth induction for a flat local map

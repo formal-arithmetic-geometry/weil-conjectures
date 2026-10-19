@@ -8,10 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
-import Sheaf.RingTheory.DepthOneOfMaximalNotAssociated
+import WeilConjectures.RingTheory.DepthOneOfMaximalNotAssociated
 import Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 
 /-! # Positive depth of finite boundary submodules

@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 import Sheaf.RingTheory.FiniteTypeApproximationFlatPoint
-import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
+import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
 import Sheaf.RingTheory.OpenFlatLocus
 
 /-! # Flat loci in a finite-type approximation

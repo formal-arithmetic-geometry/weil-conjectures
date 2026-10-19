@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalFiniteLevelLift
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestrictionKernel

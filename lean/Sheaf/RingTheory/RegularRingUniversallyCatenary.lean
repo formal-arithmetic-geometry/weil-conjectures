@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.ExcellentRing
 import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.Depth
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.CohenMacaulayRingUniversallyCatenary

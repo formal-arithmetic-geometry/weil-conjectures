@@ -8,10 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteStructureAlgebraDepth
-import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStructureAlgebraDepth
+import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!

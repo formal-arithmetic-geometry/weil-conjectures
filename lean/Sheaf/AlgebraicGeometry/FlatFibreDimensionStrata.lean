@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore
-import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCover
+import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrataCover
 
 /-! # Constant relative dimension opens for a flat finitely presented morphism
 

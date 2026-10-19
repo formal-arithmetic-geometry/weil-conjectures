@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.RingTheory.FormalGlueingData
 import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
 import Sheaf.RingTheory.JapaneseDomain

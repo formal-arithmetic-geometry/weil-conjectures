@@ -2,10 +2,10 @@ module
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown
 import Sheaf.RingTheory.SmoothNormalRing
-import Sheaf.RingTheory.KrullDimension.GoingDown
+import WeilConjectures.RingTheory.KrullDimension.GoingDown
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth

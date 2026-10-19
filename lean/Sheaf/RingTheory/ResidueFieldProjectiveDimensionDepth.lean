@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.GlobalDimension
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal

@@ -5,13 +5,13 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction
 import Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM
 

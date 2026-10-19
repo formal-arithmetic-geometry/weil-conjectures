@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.EtaleFiniteFactorDecomposition
 import Sheaf.RingTheory.RetractionBaseChangeNoQuasiFinite
 import Mathlib.RingTheory.TensorProduct.Pi

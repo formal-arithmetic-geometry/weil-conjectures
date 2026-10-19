@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteFlatWeightedTrace
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
-import Sheaf.RingTheory.QuasiFiniteLocalDimension
+import WeilConjectures.RingTheory.QuasiFiniteLocalDimension
 import Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import WeilConjectures.SixFunctors.OpenClosed.Exact

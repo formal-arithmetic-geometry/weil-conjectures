@@ -9,10 +9,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore
-import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
 import Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

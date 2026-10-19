@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finite morphisms in the Stacks sense

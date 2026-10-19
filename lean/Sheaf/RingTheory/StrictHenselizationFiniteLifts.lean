@@ -25,7 +25,7 @@ import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization
-import Sheaf.RingTheory.MapIntoHenselianColimit
+import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Mathlib.FieldTheory.SeparableClosure
 import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
 import WeilConjectures.Mathlib.RingTheory.Henselian

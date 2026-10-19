@@ -21,7 +21,7 @@ public import Mathlib.RingTheory.SimpleModule.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Sheaf.AlgebraicGeometry.AffinePushforwardStalkLocalization
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardStalkLocalization
 import Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import Sheaf.RingTheory.LengthOfSupportAtMaximalIdeal

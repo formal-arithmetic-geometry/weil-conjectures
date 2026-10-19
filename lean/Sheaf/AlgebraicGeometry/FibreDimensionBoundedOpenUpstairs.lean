@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairsAux
+import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairsAux
 
 /-!
 # Fibre dimension is bounded on a neighbourhood

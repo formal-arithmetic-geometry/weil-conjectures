@@ -5,11 +5,11 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
 import Sheaf.RingTheory.FlatOverRegular
 
 /-!

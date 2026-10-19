@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineBoundarySubmoduleDepth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineRestrictionSourceDepth
-import Sheaf.RingTheory.DepthInSES
+import WeilConjectures.RingTheory.DepthInSES
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.Localization.Finiteness
 

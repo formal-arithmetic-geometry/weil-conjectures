@@ -7,9 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesLocalKernelCoefficients
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPuncturedFunctionDetection
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoPuncturedFunctionDetection
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-! # Detection of variable-ideal powers on the punctured zero section

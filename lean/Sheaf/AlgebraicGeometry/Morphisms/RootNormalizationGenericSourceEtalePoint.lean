@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Localization.Ideal
 
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkFlat
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkUnramified
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
-import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
+import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 
 @[expose] public section
 universe u

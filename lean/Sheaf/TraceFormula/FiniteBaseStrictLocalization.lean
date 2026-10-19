@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
-import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.Paper.StrictHenselizationFunctoriality

@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Extension.Presentation.Basic
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.Localization.Away.AdjoinRoot
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-! # Descending a bounded principal-open cover to a finite coefficient ring
 

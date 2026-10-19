@@ -8,13 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 
 
 /-!

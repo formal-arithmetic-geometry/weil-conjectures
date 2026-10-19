@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-!

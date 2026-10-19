@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.RingTheory.QuasiFiniteLocusOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 
 /-!
 # Openness of the quasi-finite locus

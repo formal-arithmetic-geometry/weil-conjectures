@@ -24,7 +24,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ConstructibleFiniteOpenConstantGeneration
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed

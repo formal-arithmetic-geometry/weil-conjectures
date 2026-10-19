@@ -9,13 +9,13 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.MvPowerSeriesFlat
+import WeilConjectures.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint
 
 /-!
 # Extending finite etale covers of a power-series open

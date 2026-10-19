@@ -196,14 +196,15 @@
  "reviewed": "2026-10-10 L: 8 steps checked against the 00N4 proof (induction on d; d = 1 via the kernel of g supported at m, here using 05BV instead of 00L5 plus Nakayama; d >= 2 via M/f_1M, goodness inherited, swap of f_1, g by 00LJ); hypothesis d >= 1 added: for d = 0 the goodness condition is empty and (a) fails (R = k[x]_(x), M = R/(x), g = x); the citer good-element-nonzerodivisor uses the node only for d >= 1",
  "lead_note": "Hypothesis d >= 1 added by the stage-1 split (2026-10-10): Stacks 00N4 is false for d = 0, see coord/HUMAN.md.",
  "lean": {
-  "module": "Sheaf.RingTheory.IsSMulRegularOfGoodSequence",
+  "module": "WeilConjectures.RingTheory.IsSMulRegularOfGoodSequence",
   "declaration": "Module.isSMulRegular_of_good_sequence",
-  "file": "lean/Sheaf/RingTheory/IsSMulRegularOfGoodSequence.lean",
+  "file": "lean/WeilConjectures/RingTheory/IsSMulRegularOfGoodSequence.lean",
   "statement": "theorem isSMulRegular_of_good_sequence {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (d : ℕ) (hd : 1 ≤ d) (hcm : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) = supportDim R M) (hdim : supportDim R M = ((d : ℕ∞) : WithBot ℕ∞)) (fs : List R) (hlen : fs.length = d) (hmem : ∀ f ∈ fs, f ∈ IsLocalRing.maximalIdeal R) (hreg : RingTheory.Sequence.IsRegular M fs) (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R) (hgood : ∀ i : ℕ, i < d → Order.krullDim ((Module.support R M ∩ PrimeSpectrum.zeroLocus {x : R | x ∈ g :: fs.take i}) : Set (PrimeSpectrum R)) = (((d - i - 1 : ℕ) : ℕ∞) : WithBot ℕ∞)) : IsSMulRegular M g ∧ (IsLocalRing.depth (R := R) (QuotSMulTop g M) : WithBot ℕ∞) = supportDim R (QuotSMulTop g M) ∧ IsLocalRing.depth (R := R) (QuotSMulTop g M) = (d - 1 : ℕ) ∧ supportDim R (QuotSMulTop g M) = (((d - 1 : ℕ) : ℕ∞) : WithBot ℕ∞) ∧ RingTheory.Sequence.IsRegular (QuotSMulTop g M) (fs.take (d - 1))",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.IsSMulRegularOfGoodSequence; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

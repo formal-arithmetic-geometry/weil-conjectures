@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Basic
-import Sheaf.RingTheory.HenselianEtaleRetraction
+import WeilConjectures.RingTheory.HenselianEtaleRetraction
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.TensorProduct.Quotient
 
