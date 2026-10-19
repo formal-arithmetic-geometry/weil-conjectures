@@ -16,9 +16,135 @@
   "def-pc-proj",
   "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify quasi-compactness. By [lem-sc-affine-noetherian-underlying-space], $S=\\operatorname{Spec}R$ has Noetherian underlying space. Such a space is quasi-compact: the ascending-chain condition on opens implies that the finite unions from any open cover have a maximal member, which must be the whole space. The one affine chart of $S$ makes it locally Noetherian by [pqf-def-locnoeth]. Thus $S$ is a Noetherian scheme, and [lem-weil-pbc-finite-type-over-noetherian] makes $V$ Noetherian. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open of $V$ is quasi-compact. Consequently every morphism from $V$ is quasi-compact, since inverse images of affine opens are opens of $V$.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian, and the cited Noetherian-space statements; preliminary check for the use of scheme-theoretic closure"
+   }
+  },
+  {
+   "text": "Fix the given immersion $j:V\\hookrightarrow P=\\mathbf P^n_S$ and put $X=\\prod_{g\\in H}P$. Define $J_g=j\\circ g^{-1}$ and $J=(J_g)_g:V\\to X$. This is an immersion, as follows. The group is nonempty; separate the identity factor and write $X=P\\times_S Y$, where $Y$ is the product of the remaining factors, or $S$ if there are none. Iterating [lem-chow-segre] exhibits $Y$ as a closed subscheme of a projective space; hence $Y\\to S$ is projective [def-kun-projective], proper [lem-kun-projective-implies-proper], and separated [def-weil-proper-morphism]. The graph $V\\to V\\times_S Y$ of $(J_g)_{g\\ne1}$ is the base change of the closed diagonal of $Y$, so is closed by [lem-weil-pbc-closed-immersion-base-change]. Write $j$ as a closed immersion into an open $U\\subset P$. Base change gives a closed immersion $V\\times_S Y\\to U\\times_S Y$. Composing these two closed immersions [lem-weil-pbc-closed-immersion-comp], then the open immersion $U\\times_S Y\\to P\\times_S Y$, gives precisely $J$.",
+   "uses": [
+    "lem-chow-segre",
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD, lemma-segre-embedding; graph as pullback of separated diagonal and base change of the given locally closed immersion"
+   }
+  },
+  {
+   "text": "Let $a_h$ act on $X$ by $(a_hx)_g=x_{h^{-1}g}$. Then $a_ha_k=a_{hk}$ and $J_g(hv)=j(g^{-1}hv)=(a_hJ(v))_g$, so $J$ is equivariant. Put $E=\\{0,\\ldots,n\\}^H$ and $N=|E|-1=(n+1)^{|H|}-1\\geq0$. The iterated Segre map $s:X\\to\\mathbf P^N_S$ is a closed immersion by [lem-chow-segre]; its coordinates [def-chow-segre] are $z_e=\\prod_g x_{g,e(g)}$. Define $b_h$ on projective space by $b_h^*(z_e)=z_{e\\circ L_h}$, where $L_h(g)=hg$. Substitution gives $z_e(a_hx)=\\prod_gx_{h^{-1}g,e(g)}=\\prod_kx_{k,e(hk)}$, hence $s a_h=b_hs$ as scheme morphisms (these are identities of the multihomogeneous coordinate sections). The permutations give $b_hb_k=b_{hk}$. The composite $f=sJ$ is therefore an equivariant immersion: composing the closed part of $J$ with the base change of $s$ and using [lem-weil-pbc-closed-immersion-comp] gives a closed immersion into an open of the target, namely the complement of the closed image of $X\\setminus U_X$, where $U_X$ is an open through which $J$ factors as closed.",
+   "uses": [
+    "lem-chow-segre",
+    "def-chow-segre",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD, lemma-segre-embedding, coordinate formula; elementary permutation-equivariance computation"
+   }
+  },
+  {
+   "text": "Apply [lem-chow-closed-model] to the quasi-compact immersion $f:V\\to\\mathbf P^N_S$ over the affine base $S$. Its scheme-theoretic closure $M\\hookrightarrow\\mathbf P^N_S$ contains $V$ as a scheme-theoretically dense open subscheme. Its ideal on every affine open $W$ is the kernel of $\\mathcal O(W)\\to\\mathcal O(f^{-1}W)$ by [lem-weil-pbc-scheme-image-qc-kernel]. Equivariance of $f$ identifies this kernel with the kernel on $b_h(W)$: pullback by $b_h$ on the ambient functions and by $h$ on the source gives a commutative square of restriction maps with both vertical maps invertible. Thus $b_h$ preserves the ideal sheaf of $M$, not merely its underlying set, and restricts to an automorphism of $M$. The restrictions satisfy the group law and make $V\\hookrightarrow M$ equivariant.",
+   "uses": [
+    "lem-chow-closed-model",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RG (lemma-quasi-compact-immersion) and 01R8 (lemma-quasi-compact-scheme-theoretic-image); kernel invariance is the displayed equivariance square"
+   }
+  },
+  {
+   "text": "Set $B=R[z_e\\mid e\\in E]$. Use [lem-per-projective-closed-subscheme-homogeneous-ideal] on the closed subscheme $M\\subseteq\\mathbf P^N_S$: take its specified ideal $I=\\bigoplus I_d$ of homogeneous polynomials whose chart functions vanish on $M$. That statement identifies the canonical closed immersion $\\operatorname{Proj}(B/I)\\hookrightarrow\\operatorname{Proj}(B)$ with $M\\hookrightarrow\\mathbf P^N_S$. Thus the homogeneous presentation is a presentation of the actual scheme-theoretic closure, including all nilpotents.",
+   "uses": [
+    "lem-per-projective-closed-subscheme-homogeneous-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, canonical ideal and equality as closed subschemes"
+   }
+  },
+  {
+   "text": "On $B$ define $\\rho_h(z_e)=z_{e\\circ L_{h^{-1}}}$ and let $\\rho_h$ fix $R$. These graded automorphisms satisfy $\\rho_h\\rho_k=\\rho_{hk}$ by substitution on generators; geometrically $\\rho_h=b_{h^{-1}}^*$. For $F\\in I_d$ and any $e\\in E$, the chart function $\\rho_h(F)/z_{e\\circ L_{h^{-1}}}^{d}$ is the pullback by $b_{h^{-1}}$ of $F/z_e^d$. Since $b_{h^{-1}}$ preserves $M$ as a closed subscheme by Step 4, this pulled-back function vanishes on $M$ on the corresponding chart. The coordinate permutation runs through all charts. Hence $\\rho_h(I_d)\\subseteq I_d$ by the chart criterion of [lem-per-projective-closed-subscheme-homogeneous-ideal]; applying $h^{-1}$ gives equality. Therefore $I$ is stable under every $\\rho_h$.",
+   "uses": [
+    "lem-per-projective-closed-subscheme-homogeneous-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, chart form of its kernel definition; explicit pullback calculation under coordinate permutations"
+   }
+  },
+  {
+   "text": "Put $A=B/I$. Stability gives the graded $R$-algebra automorphism $\\overline\\rho_h([F])=[\\rho_h(F)]$, with inverse $\\overline\\rho_{h^{-1}}$; the group law follows on representatives. By [prop-nagata-relative-proj-functoriality] a graded algebra equivalence induces an isomorphism of Proj. Use the usual left-action convention: $h$ acts on $\\operatorname{Proj}(A)$ by the morphism whose pullback is $\\overline\\rho_{h^{-1}}$. It is the restriction of $b_h$: on a standard chart the map on coordinate fractions is $[F]/[z_e]^d\\mapsto[\\rho_{h^{-1}}(F)]/[\\rho_{h^{-1}}(z_e)]^d$, the same coordinate substitution as on the ambient projective space. These formulas agree on overlaps because restriction is localization [def-pc-proj]. Thus the identification of Step 5 is equivariant as a scheme identification, and Step 4 gives the required equivariant open immersion into $\\operatorname{Proj}(A)$.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL and the cited Proj equivalence statement; verification on degree-zero localization charts"
+   }
+  },
+  {
+   "text": "Finally, since $I$ is homogeneous and $B_0=R$, one has $A_0=R/I_0$; the degree-zero map $R\\to A_0$ is surjective. The closed immersion from Step 5 makes $M$ projective in [def-kun-projective]. Enumerate the nonempty finite set $E$ to relabel the variables by $z_0,\\ldots,z_N$. If $V$ is empty, its kernel ideal sheaf is the unit ideal, $M$ is empty, the canonical homogeneous ideal of Step 5 is all of $B$, and $A=0$ has empty Proj. The same argument also permits $R=0$. No step divided by $|H|$ or used faithfulness; the construction therefore applies to nonfaithful actions and to characteristics dividing $|H|$.",
+   "uses": [
+    "def-kun-projective",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL; degree-zero quotient calculation and empty case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-noetherian-underlying-space",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-chow-segre",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-open-immersion",
+  "def-chow-segre",
+  "lem-chow-closed-model",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-per-projective-closed-subscheme-homogeneous-ideal",
+  "prop-nagata-relative-proj-functoriality",
+  "def-pc-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Combination of Tag 01WD, Tag 03GL, and morphisms.tex Tags 01RG and 01R8; equivariance calculated explicitly, not claimed as a verbatim theorem of these sources."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +180,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Projectivization.finite_of_finite\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"∀ (k : Type u_1) (V : Type u_2) [inst : DivisionRing k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] [Finite V],\\n  Finite (Projectivization k V)\", \"doc\": \"If $ V $ is a finite module over a division ring $ K $, then its projectivization $ \\\\mathbb{P}(K, V) $, defined as the quotient of nonzero vectors in $ V $ under scalar multiplication by invertible el\"}\n  {\"name\": \"ProjectiveSpectrum\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubmonoidClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → Type u_1\", \"doc\": \"The projective spectrum of a graded ring $ A $, constructed from a commutative ring $ A $, a set-like additive submonoid structure $ \\\\sigma $ over $ A $, and a grading $ \\\\mathcal{A} : \\\\mathbb{N} \\\\to \\\\\"}\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) {v : V} (hv : v ≠ 0),\\n  g • Projectivization.mk K v hv = Projectivization.mk K (g • v) ⋯\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Projectivization.finite_iff_of_finite\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"∀ (k : Type u_1) (V : Type u_2) [inst : DivisionRing k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] [Finite k],\\n  Finite (Projectivization k V) ↔ Finite V\", \"doc\": \"Let $ k $ be a finite division ring and $ V $ a module over $ k $. The projectivization $ \\\\mathbb{P}(V) $ of $ V $ is finite if and only if $ V $ itself is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the hits give Proj constructions, properness, or projectivizations of vector spaces, not this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a quasi projective scheme over a Noetherian affine base admits an equivariant projective closure with a graded action on its homogeneous coordinate ring",
+   "results": "8 hits; AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Projectivization.finite_of_finite, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections, Projectivization.smul_def. ",
+   "date": "2026-10-19",
+   "verdict": "no match: none of the returned declarations supplies an equivariant scheme-theoretic projective closure with a homogeneous coordinate action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"MulSemiringAction\"",
+   "results": "0 hits; . ",
+   "date": "2026-10-19",
+   "verdict": "no match: none of the returned declarations supplies an equivariant scheme-theoretic projective closure with a homogeneous coordinate action"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|lineariz|segre",
+   "results": "0 hits; . Subdirectory: AlgebraicGeometry. ",
+   "date": "2026-10-19",
+   "verdict": "no match: none of the returned declarations supplies an equivariant scheme-theoretic projective closure with a homogeneous coordinate action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant compactification by product of translates of an immersion and Segre embedding for a finite group action on a scheme",
+   "results": "8 hits; MulActionHom.prod, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.IsImmersion, MulAction.selfEquivOrbitsQuotientProd', MulAction.selfEquivOrbitsQuotientProd, AlgebraicGeometry.Scheme.IsQuasiAffine.mk, AlgebraicGeometry.isImmersion_eq_inf. ",
+   "date": "2026-10-19",
+   "verdict": "no match: none of the returned declarations supplies an equivariant scheme-theoretic projective closure with a homogeneous coordinate action"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-projective-finite-group-quotient",
@@ -83,5 +237,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-equivariant-projective-envelope",
+  "worker": "stage1",
+  "summary": "Verified the product-of-translates construction, immersion, equivariant Segre formula, invariant scheme-theoretic closure, canonical homogeneous ideal and quotient action. Added only the arbitrary-base Tag 03GL input. Statement unchanged; no Lean or builds.",
+  "blueprint": "Realizes the geometric construction in the ancestor proof Step 3, specifically the projective finite-group quotient input before taking invariants: Steps 1-3 prepare the equivariant immersion, Step 4 its closure, Steps 5-7 its stable homogeneous coordinate presentation, Step 8 the degree-zero and empty clauses. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Checks that the affine Noetherian base is topologically Noetherian before applying closure; no result in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Ensures V is Noetherian, hence its immersion is quasi-compact; a generic finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Ensures inverse images of affine charts are quasi-compact; no curve-perverse statement supplies this."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "The same Segre closed immersion used in the prescribed homogeneous-envelope construction, rather than a replacement of its route."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Supplies separatedness of the finite product via its Segre projective embedding, for the graph argument."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "The graph is a pullback of a closed diagonal; also base changes the initial closed immersion."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Combines the closed graph and initial closed immersion; generic scheme-morphism tool."
+   },
+   {
+    "node": "lem-chow-closed-model",
+    "why": "Supplies the open dense immersion into the projective scheme-theoretic closure; exact closure step of the route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "Supplies the kernel description needed for invariance of the scheme structure, beyond setwise stability."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Uses only the graded-equivalence-to-Proj-isomorphism clause to realize the quotient ring action; no unit statement gives this generic Proj tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-chow-segre",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-chow-closed-model",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-f067d2a92",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-f067d2a92 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 19 cited statements, the parent lem-per-projective-finite-group-quotient (all 9 steps) and Stacks constructions.tex Tag 03GL (l.2989-3047) in full. The item's statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit. The parent uses exactly these clauses: A is a degree-one-generated quotient of R[z], R->A_0 is surjective, V->Proj(A) is an equivariant open immersion. Step 1: V is Noetherian (affine-noetherian-space, locnoeth, finite-type-over-noetherian), so every morphism from V is quasi-compact (opens of a Noetherian scheme are quasi-compact). Step 2: the graph is the pullback of the separated diagonal of Y (Y=S for |H|=1, Y=P for |H|=2, Segre for more factors); then base change of V->U and the open pr^-1(U); the composite equals J since J_1=j. Step 3: I checked a_h a_k=a_hk, J_g(hv)=J_{h^-1 g}(v), b_h^*z_e=z_{e o L_h} and b_h b_k=b_hk; f=sJ is closed into W=P^N minus s(X\\U_X); E is nonempty. Step 4: chow-closed-model applies (affine base, quasi-compact source) and qc-kernel clause (1) applies. Since f^-1(b_h W)=h f^-1(W), the kernels match through invertible vertical maps, so the ideal itself is invariant. Steps 6-7: rho_h=b_{h^-1}^*, the group law holds, and the chart pullback D_+(z_{e o L_{h^-1}})->D_+(z_e) gives stability through the 03GL chart criterion. The left action Proj(rho_{h^-1}) is the restriction of b_h (nagata clause 2, def-pc-proj). Step 8: A_0=R/I_0; empty V gives I=B and A=0. New node: a faithful chart form of 03GL (sections of O(d) are trivialized by z_i^d), arbitrary ring, empty Z allowed. I tested Z empty (I=B), Z=P^n (I=0) and V_+(z_0^2) in P^1 (I=(z_0^2), nilpotents kept). It is not a restated clause and not a duplicate: no other DAG/live node carries 03GL, and lem-pc-projective-coordinate-model covers fields and integral schemes only. The 10 tool_uses in split_report are generic scheme tools, accepted. No SGA citations; proof_deps equals the union of uses; every step is under 2000 characters. No fixes."
  }
 }
