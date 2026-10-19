@@ -7,7 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
-import Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists
+import Sheaf.CategoryTheory.Galois.StacksMonoComplement
+import Mathlib.CategoryTheory.Galois.Prorepresentability
 
 /-!
 # Transitivity of the automorphism action
@@ -48,6 +49,44 @@ Proof steps (Stacks Project, Lemma 0BN3):
 theorem aut_fiber_transitive {C : Type u} [Category.{v} C]
     {F : C ⥤ Type w} (hCF : IsStacksGaloisCategory F) (X : C)
     [IsConnected X] : ∀ x y : F.obj X, ∃ g : Aut F, g.hom.app X x = y := by
-  sorry
+  let := hCF.hasFiniteLimits
+  let := hCF.hasFiniteColimits
+  -- Bundle finite fibers, then derive the SGA1 axioms from the Stacks axioms.
+  let F' : C ⥤ FintypeCat.{w} := ObjectProperty.lift Finite F hCF.finite_obj
+  let : Limits.PreservesFiniteLimits (F' ⋙ FintypeCat.incl) := hCF.preservesFiniteLimits
+  let : Limits.PreservesFiniteColimits (F' ⋙ FintypeCat.incl) := hCF.preservesFiniteColimits
+  let : (F' ⋙ FintypeCat.incl).ReflectsIsomorphisms := hCF.reflectsIsomorphisms
+  let : Limits.PreservesFiniteLimits F' :=
+    Limits.preservesFiniteLimits_of_reflects_of_preserves F' FintypeCat.incl
+  let : Limits.PreservesFiniteColimits F' :=
+    Limits.preservesFiniteColimits_of_reflects_of_preserves F' FintypeCat.incl
+  let : F'.ReflectsIsomorphisms := reflectsIsomorphisms_of_comp F' FintypeCat.incl
+  let : PreGaloisCategory C := {
+    monoInducesIsoOnDirectSummand := fun i ↦ stacksGalois_mono_complement F hCF i
+    hasQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.hasColimitsOfShape_of_equivalence e.toSingleObjEquiv.symm }
+  let : F'.PreservesEpimorphisms := {
+    preserves := fun f _ ↦ by
+      apply ConcreteCategory.epi_of_surjective
+      exact ((stacksGaloisCategory_axioms.{0, 0, w, v, u} F hCF).2.1 f).2.mp
+        inferInstance }
+  let : FiberFunctor F' := {
+    preservesQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.preservesColimitsOfShape_of_equiv e.toSingleObjEquiv.symm F' }
+  let : GaloisCategory C := {
+    hasFiberFunctor := ⟨F' ⋙ FintypeCat.uSwitch.{w, v}, ⟨inferInstance⟩⟩ }
+  -- Mathlib implements the prorepresentability argument described above.
+  intro x y
+  obtain ⟨g, hg⟩ := MulAction.exists_smul_eq (Aut F')
+    (show F'.obj X from x) (show F'.obj X from y)
+  exact ⟨Functor.isoWhiskerRight g FintypeCat.incl, hg⟩
 
 end CategoryTheory

@@ -18,66 +18,47 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be the set of isomorphism classes of Galois objects, choose a representative $X_i$ and an element $\\gamma_i\\in F(X_i)$ for each $i$. For $i,i'\\in I$ write $i\\ge i'$ when there is a morphism $f_{ii'}:X_i\\to X_{i'}$; since $X_{i'}$ is Galois, post-compose with an automorphism of $X_{i'}$ so that $F(f_{ii'})(\\gamma_i)=\\gamma_{i'}$. This normalized morphism is unique by clause (5) of [lem-galois-axioms]. The set $I$ is directed: for $i_1,i_2$, take a connected component of $X_{i_1}\\times X_{i_2}$ and apply [lem-galois-object-exists] to obtain a Galois object mapping to that component, hence to both factors.",
+   "text": "Bundle the finite values of F as the functor F' = ObjectProperty.lift Finite F hCF.finite_obj to FintypeCat. Its composite with FintypeCat.incl is definitionally F. The Stacks exactness and conservativity axioms therefore give preservation of finite limits and colimits and reflection of isomorphisms for F', by reflection along the fully faithful inclusion.",
+   "uses": [
+    "def-galois-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct Mathlib's PreGaloisCategory C. Finite limits give the terminal object and pullbacks, and finite colimits give finite coproducts and quotients by finite groups. For the latter, replace a finite group in the hom universe by an isomorphic finite group in Type 0 and transfer colimits along the SingleObj equivalence. The required summand axiom is exactly stacksGalois_mono_complement, from [lem-galois-stacks-mono-complement].",
    "uses": [
     "def-galois-category",
-    "lem-galois-axioms",
-    "lem-galois-object-exists"
+    "lem-galois-stacks-mono-complement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, first paragraph (lines 542-555)"
-   }
+   "elementary": false
   },
   {
-   "text": "Define $F'(Y)=\\varinjlim_{i\\in I}\\operatorname{Mor}_{\\mathcal C}(X_i,Y)$ using the transition maps given by the normalized $f_{ii'}$, and define $t_Y:F'(Y)\\to F(Y)$ by $[u:X_i\\to Y]\\mapsto F(u)(\\gamma_i)$. If two representatives have the same image, choose a common upper index $k$; the two resulting maps $X_k\\to Y$ agree on $\\gamma_k$, hence are equal by clause (5) of [lem-galois-axioms], so $t_Y$ is injective. For surjectivity, decompose $Y$ into connected components using the Galois-category axiom and choose the component containing a given element of $F(Y)$. For a connected component $Y_0$, [lem-galois-object-exists] gives a Galois object $Z\\to Y_0$; surjectivity of $F(Z)\\to F(Y_0)$ follows from clauses (2) and (4) of [lem-galois-axioms]. After identifying $Z$ with some $X_i$, the transitivity in clause (6) of [lem-galois-axioms] lets us choose the identification so that $\\gamma_i$ maps to the prescribed lift. Thus $t:F'\\xrightarrow{\\sim}F$ naturally.",
+   "text": "Construct Mathlib's FiberFunctor F'. Preservation of terminal objects, pullbacks, and finite coproducts and reflection of isomorphisms follow from the inherited exactness and conservativity. Clause (2) of [lem-galois-axioms] gives preservation of epimorphisms, since the underlying set maps of epis are surjective. Preservation of finite-group quotients follows from preservation of finite colimits after the same universe reduction as in step 2. Composing F' with FintypeCat.uSwitch supplies a fiber functor in the hom universe, hence a GaloisCategory C instance.",
    "uses": [
     "def-galois-category",
-    "lem-galois-axioms",
-    "lem-galois-object-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, paragraph beginning 'We claim that the functor F is isomorphic' (lines 557-580)"
-   }
-  },
-  {
-   "text": "Put $A_i=\\operatorname{Aut}(X_i)$. For $i\\ge i'$ and $a\\in A_i$, clause (6) of [lem-galois-axioms] gives the unique $h_{ii'}(a)\\in A_{i'}$ whose value on $\\gamma_{i'}$ is $F(f_{ii'}a)(\\gamma_i)$; clause (5) then gives $f_{ii'}a=h_{ii'}(a)f_{ii'}$. Uniqueness makes the $h_{ii'}$ compatible homomorphisms. They are surjective: for $b\\in A_{i'}$, choose $x\\in F(X_i)$ with $F(f_{ii'})(x)=F(b)(\\gamma_{i'})$ (clauses (2) and (4)); by the Galois transitivity in clause (6), choose $a\\in A_i$ with $F(a)(\\gamma_i)=x$, and clause (5) gives $h_{ii'}(a)=b$. Let $A=\\varprojlim_i A_i$. The groups $A_i$ are finite and nonempty, and the transition maps are surjective, so [lem-galois-inverse-limit-surjective] makes every projection $A\\to A_i$ surjective. An element $(a_i)_i\\in A$ acts on $F'$ by precomposition, $[u:X_i\\to Y]\\mapsto[u a_i:X_i\\to Y]$; compatibility of the $a_i$ makes this well-defined, and composition gives a homomorphism $A^{\\mathrm{op}}\\to\\operatorname{Aut}(F')=\\operatorname{Aut}(F)$. Since each $A\\to A_i$ is surjective and $A_i$ acts transitively on $F(X_i)$ by clause (6), the induced $G$-action is transitive on every $F(X_i)$.",
-   "uses": [
-    "lem-galois-axioms",
-    "lem-galois-inverse-limit-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, paragraphs beginning 'Set A_i' and 'Since elements of A act' (lines 582-607), with Categories Lemma 086J for inverse-limit projections"
-   }
-  },
-  {
-   "text": "For the original connected object $X$, [lem-galois-object-exists] supplies a Galois object $X_i$ and a morphism $q:X_i\\to X$. This is an epimorphism because both objects are connected, and $F(q)$ is therefore surjective by clauses (2) and (4) of [lem-galois-axioms]. Given $x,x'\\in F(X)$, choose lifts $y,y'\\in F(X_i)$. Transitivity on $F(X_i)$ gives $g\\in G$ with $g(y)=y'$. Naturality of $g$ with respect to $q$ gives $g(x)=F(q)(g(y))=F(q)(y')=x'$, proving transitivity on $F(X)$.",
-   "uses": [
-    "lem-galois-object-exists",
     "lem-galois-axioms"
    ],
-   "elementary": false,
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected to F' and the original connected object X. For x,y choose the resulting natural automorphism g of F'. Whiskering g with FintypeCat.incl gives a natural automorphism of F, whose component at X is the same underlying function, so it sends x to y. This uses Mathlib's already-proved prorepresentability and inverse-limit argument, without the separate Stacks Galois-object existence theorem.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, final sentence (lines 607-609), with Lemma 0BN2 for domination and Lemma 0BN0 clauses (2),(4)"
+    "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+    "place": "FiberFunctor.isPretransitive_of_isConnected, lines 455-478; Mathlib.CategoryTheory.Whiskering, isoWhiskerRight"
    }
   }
  ],
  "proof_deps": [
   "def-galois-category",
-  "lem-galois-axioms",
-  "lem-galois-object-exists",
-  "lem-galois-inverse-limit-surjective"
+  "lem-galois-stacks-mono-complement",
+  "lem-galois-axioms"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups of Schemes, Lemma 0BN3 (label lemma-tame), proof"
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+  "place": "FiberFunctor.isPretransitive_of_isConnected; the explicit Stacks-to-SGA1 instance construction follows the existing library proof of stacksGalois_functorToContAction_isEquivalence in Sheaf.CategoryTheory.Galois.AbstractEquivalence, without importing that theorem or module."
  },
  "mathlib_searches": [
   {
@@ -177,5 +158,15 @@
   "group": "F1",
   "result": "pass",
   "note": "C:Type u/Category.{v}, F:C⥤Type w = node's (C,F); hCF:IsStacksGaloisCategory F = recorded def-galois-category (Stacks 0BMY, not Mathlib GaloisCategory, so isPretransitive_of_isConnected is only a candidate, existing:false right); [IsConnected X] = Mathlib PreGaloisCategory.IsConnected, checked field by field against def-galois-connected-object (not initial; mono from non-initial Y is iso), same notion used by StacksGaloisCategory/StacksGaloisAxioms; conclusion ∀x y, ∃g:Aut F, g.hom.app X x = y = transitive action of Aut(F) on F(X), empty fibre vacuous; docstring has 0BN3 steps 1-4 and tag; header, imports, no Sheaf prefix, lines ≤100, proof sorry"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T093412-L-2306541",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
