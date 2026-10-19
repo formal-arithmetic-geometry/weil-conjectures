@@ -16601,3 +16601,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:24 L: merged deliver/A7/Sheaf.CategoryTheory.CochainCoefficientUniverseTransport (stage 3; reviewer PASS; first push; landing 20261019T002459-L-2139575 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/A8/Sheaf.AlgebraicGeometry.EtaleComparison (stage 3; reviewer PASS; first push; landing 20261019T002459-L-2139685 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/A8/Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives (stage 3; reviewer PASS; first push; landing 20261019T002500-L-2139799 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/A8/Sheaf.Paper.NormalizedEtaleOriginWitnesses (stage 3; reviewer PASS; first push; landing 20261019T002501-L-2139940 (interface); batch 20261019T002449; modules 3; new nodes 2; change records: coord/changes/A8-normalized-origin-scalar-comparisons.md)

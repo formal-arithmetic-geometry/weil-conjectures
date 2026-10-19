@@ -1,0 +1,98 @@
+{
+ "id": "def-weil-pbc-normalized-origin-scalar-comparisons",
+ "kind": "definition",
+ "title": "Canonical quotient scalar-extension unit and associator",
+ "statement": "Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum] and let $P_n=A/I^{n+1}$. On an essentially small site $J$, use the fixed scalar extension $E_J(q)$ adjoint to actual derived scalar restriction from [def-weil-pbc-witness-compatibility]. Define identity restriction by the identity maps on sections. Define its derived scalar-extension unit as the adjunction conjugate of that identity restriction. For quotient maps $q_{m,n}$ define $E_J(m,n)=E_J(q_{m,n})$, its self-extension unit $E_J(n,n)\\cong\\mathrm{id}$, and the three-level associator $E_J(k,m)E_J(m,n)\\cong E_J(k,n)$ as the canonical conjugate of composition of restrictions, using $q_{m,n}q_{k,m}=q_{k,n}$. These are exactly the five existing normalizedOrigin definitions, relocated without any change of signature or body.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09B1, lemma-compare-derived (2), coefficient refinement of the compatible-origin sentence in prop-weil-pbc-preservation-constructible; scalar restriction and mates as in Stacks Tags 06YY and 07A4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension comparison with inverse image respects the identity ring homomorphism and composition of ring homomorphisms",
+   "results": "ModuleCat.extendScalars_id_comp; ModuleCat.extendScalarsId; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_comp_id; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp",
+   "date": "2026-10-19",
+   "verdict": "Generic module scalar comparisons exist, but not their compatibility with the specified etale/proetale derived comparison mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-19",
+   "verdict": "The generic pasting theorem is useful; it does not state coherence for the specified derived sheaf functors and their chosen restriction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_comparisonUpperStar_mapDerivedCategory_map|mateEquiv_hcomp",
+   "results": "Mathlib supplies mateEquiv_hcomp and ordinary ModuleCat scalar comparison coherence; the project-specific quotient and comparison definitions occur in WitnessCompatibility and NormalizedEtaleOriginWitnesses. Blueprint search for scalar comparison coherence returned no matching blueprint node.",
+   "date": "2026-10-19",
+   "verdict": "No existing theorem states the required etale/proetale derived mate coherence. Relocate and reuse the existing definitions rather than introduce another scalar-extension construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedEtaleOriginWitnesses",
+  "date": "2026-10-19",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Compatible etale-origin witness sentence: the canonical unit and three-quotient coherence in Steps 1--2 of the normalized-origin refinement",
+   "via": [
+    "lem-weil-pbc-normalized-etale-origin-witnesses"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedOriginScalarComparisons",
+  "file": "lean/Sheaf/Paper/NormalizedOriginScalarComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalizedOriginRestrictionUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginQuotientUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginQuotientComp",
+   "AlgebraicGeometry.ProEtale.normalizedOriginReduction"
+  ],
+  "statement": "def normalizedOriginScalarUnit {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R] (φ : R →+* R) (hφ : φ = RingHom.id R) : pbcFixedScalarExtension J φ ≅ 𝟭 (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-93e24",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261019T002501-L-2139940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-93e24",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261019T002501-L-2139940",
+  "kind": "interface",
+  "note": "independent cc review: normalizedEtaleOriginWitnesses proof + coherence node/theorem + verbatim 5-def relocation (diffed vs live) against node lem-weil-pbc-normalized-etale-origin-witnesses, change record, 3 delivered modules + 6 direct importers + transitive GeoCartierCycleClass all compiled clean; axioms only via published sorry'd pbcFixedScalarExtension"
+ }
+}

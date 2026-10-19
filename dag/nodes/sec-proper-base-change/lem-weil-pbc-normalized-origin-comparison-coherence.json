@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-normalized-origin-comparison-coherence",
+ "kind": "statement",
+ "title": "Comparison reduction respects canonical scalar units and composition",
+ "statement": "Let $T$ be a scheme and $(A,I)$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], indexed by $P_n=A/I^{n+1}$. Use the ambient fixed-ring categories, $F_n=\\nu_T^*$ and canonical mate $c_{m,n}:E^p_{m,n}F_m\\cong F_nE^e_{m,n}$ of [def-weil-pbc-witness-compatibility], and the units $u^e,u^p$ and associators $a^e,a^p$ of [def-weil-pbc-normalized-origin-scalar-comparisons]. For every ambient etale object $K$ at level $n$, $F_n(u^e_n(K))=c_{n,n}^{-1}(K)\\,u^p_n(F_nK)$, in Lean composition order. For $k\\ge m\\ge n$ and every ambient etale object $K$ at level $k$, $F_n(a^e_{k,m,n}(K))\\,c_{k,n}^{-1}(K)=c_{m,n}^{-1}(E^e_{k,m}K)\\,E^p_{m,n}(c_{k,m}^{-1}(K))\\,a^p_{k,m,n}(F_kK)$, again in Lean composition order. No bound, Tor assumption, origin witness or normalized tower is an input.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09B1, lemma-compare-derived (2), coefficient refinement of the compatible-origin sentence in prop-weil-pbc-preservation-constructible; scalar restriction and mates as in Stacks Tags 06YY and 07A4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-pbc-normalized-origin-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Work first on ordinary module sheaves. Restriction along the identity and composition of restrictions have identity underlying section maps. The comparison restriction is the adjunction conjugate of the sectionwise commutation of comparison direct image with coextension. Transpose the unit and composition diagrams through these adjunctions: the two resulting diagrams of coextension maps commute sectionwise. The coextension unit sends a module element to its scalar-multiplication map and the counit evaluates at 1, so the unit triangle is evaluation of that multiplication map. In the composition diagram both orders evaluate the same nested scalar-multiplication maps and use associativity of the ring action. Thus the comparison of ordinary inverse images with scalar restriction respects the identity and composition identifications. In Lean, ordinaryRestrictionUnit is proved by conjugateEquiv_comp and whiskering identities followed by the coextension linear-map calculation. ordinaryRestrictionComp uses the same conjugation identities and then sectionwise reflexivity.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-normalized-origin-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact comparison inverse images and exact scalar restrictions termwise to cochain complexes. The ordinary commuting unit and composition diagrams remain equal in every degree and commute with differentials. Localize at quasi-isomorphisms. Uniqueness of lifted natural transformations identifies the induced diagrams with pbcDerivedComparisonRestrict, the displayed mapDerivedCategory identity comparison, and derivedRestrictScalarsCompIso; hence their derived unit and composition diagrams commute. The Lean proofs derivedRestrictionUnit and derivedRestrictionComp use the already proved mapDerivedCategorySquareIso_hom_app_id and mapDerivedCategorySquareIso_hom_app_comp, respectively.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-normalized-origin-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the derived diagrams through the scalar-extension/restriction adjunctions. The mates equivalence preserves horizontal pasting (Mathlib mateEquiv_hcomp), and conjugation preserves composition and changes of adjoint (conjugateEquiv_comp and its whiskering identities). The conjugate of identity scalar restriction is precisely normalizedOriginQuotientUnit; the conjugate of composition of restrictions is precisely normalizedOriginQuotientComp. The transposed comparison is by definition pbcComparisonReductionMap, whose invertibility is part of the supplied witness interface. Write these transposed diagrams on an object K and cancel their invertible comparison maps. The results are exactly the two stated equations with the inverse comparison mate. All formulas apply also to repeated indices and zero quotient rings. In Lean mateUnit proves the identity-mate calculation; mateComp follows from conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp and mateEquiv_hcomp. comparisonScalarComp applies it to the three derived restriction comparison inverses, then cancels the comparison isomorphisms. The public theorem specializes the resulting unit and composition equations to the actual quotient ring maps. All steps are fully proved; no residual sorry is introduced.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-normalized-origin-scalar-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-pbc-normalized-origin-scalar-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09B1, lemma-compare-derived (2), coefficient refinement of the compatible-origin sentence in prop-weil-pbc-preservation-constructible; scalar restriction and mates as in Stacks Tags 06YY and 07A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension comparison with inverse image respects the identity ring homomorphism and composition of ring homomorphisms",
+   "results": "ModuleCat.extendScalars_id_comp; ModuleCat.extendScalarsId; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_comp_id; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp",
+   "date": "2026-10-19",
+   "verdict": "Generic module scalar comparisons exist, but not their compatibility with the specified etale/proetale derived comparison mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-19",
+   "verdict": "The generic pasting theorem is useful; it does not state coherence for the specified derived sheaf functors and their chosen restriction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_comparisonUpperStar_mapDerivedCategory_map|mateEquiv_hcomp",
+   "results": "Mathlib supplies mateEquiv_hcomp and ordinary ModuleCat scalar comparison coherence; the project-specific quotient and comparison definitions occur in WitnessCompatibility and NormalizedEtaleOriginWitnesses. Blueprint search for scalar comparison coherence returned no matching blueprint node.",
+   "date": "2026-10-19",
+   "verdict": "No existing theorem states the required etale/proetale derived mate coherence. Relocate and reuse the existing definitions rather than introduce another scalar-extension construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedEtaleOriginWitnesses",
+  "date": "2026-10-19",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Compatible etale-origin witness sentence: the canonical unit and three-quotient coherence in Steps 1--2 of the normalized-origin refinement",
+   "via": [
+    "lem-weil-pbc-normalized-etale-origin-witnesses"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedOriginComparisonCoherence",
+  "file": "lean/Sheaf/Paper/NormalizedOriginComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.normalizedOriginComparisonCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalizedOriginComparisonCoherence"
+  ],
+  "statement": "theorem normalizedOriginComparisonCoherence (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : Scheme.AdicCoefficientDatum A) : (∀ (n : ℕ) (K : PbcWitnessEtale T d n), (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map ((normalizedOriginQuotientUnit T.smallEtaleTopology d n).hom.app K) = (pbcComparisonReduction T (pbcWitnessQuotientMap d n n (le_refl n))).inv.app K ≫ (normalizedOriginQuotientUnit (Scheme.ProEt.topology T) d n).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj K)) ∧ (∀ (k m n : ℕ) (hnm : n ≤ m) (hmk : m ≤ k) (K : PbcWitnessEtale T d k), (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map ((normalizedOriginQuotientComp T.smallEtaleTopology d k m n hnm hmk).hom.app K) ≫ (pbcComparisonReduction T (pbcWitnessQuotientMap d k n (hnm.trans hmk))).inv.app K = (pbcComparisonReduction T (pbcWitnessQuotientMap d m n hnm)).inv.app ((normalizedOriginReduction T.smallEtaleTopology d k m hmk).obj K) ≫ (normalizedOriginReduction (Scheme.ProEt.topology T) d m n hnm).map ((pbcComparisonReduction T (pbcWitnessQuotientMap d k m hmk)).inv.app K) ≫ (normalizedOriginQuotientComp (Scheme.ProEt.topology T) d k m n hnm hmk).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d k)) T).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-93e24",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261019T002501-L-2139940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-93e24",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261019T002501-L-2139940",
+  "kind": "interface",
+  "note": "independent cc review: normalizedEtaleOriginWitnesses proof + coherence node/theorem + verbatim 5-def relocation (diffed vs live) against node lem-weil-pbc-normalized-etale-origin-witnesses, change record, 3 delivered modules + 6 direct importers + transitive GeoCartierCycleClass all compiled clean; axioms only via published sorry'd pbcFixedScalarExtension"
+ }
+}

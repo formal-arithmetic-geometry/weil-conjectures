@@ -5,17 +5,12 @@ Authors: SHEAF group Q54
 -/
 module
 
-public import Sheaf.Paper.AdicCoefficientDatum
 public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.Paper.WitnessCompatibility
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.Paper.PbcActualScalarPullback
+public import Sheaf.Paper.NormalizedOriginScalarComparisons
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.NormalizedOriginComparisonCoherence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-!
 # Compatible etale origins of normalized finite-coefficient towers
@@ -39,70 +34,18 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Canonical identity restriction on sheaves, given by identity section maps.
-Source: Stacks 06YY, unit balancing in the coefficient refinement of Tag 09B1
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses). -/
-def normalizedOriginRestrictionUnit
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    {R : Type (u + 1)} [CommRing R] (φ : R →+* R) (hφ : φ = RingHom.id R) :
-    Sheaf.restrictScalars J φ ≅ 𝟭 (Sheaf J (ModuleCat.{u + 1} R)) :=
-  NatIso.ofComponents
-    (fun F ↦ (fullyFaithfulSheafToPresheaf J _).preimageIso
-      (Functor.isoWhiskerLeft F.obj (ModuleCat.restrictScalarsId' φ hφ) ≪≫
-        F.obj.rightUnitor))
-    (fun {F G} f ↦ by
-      apply (fullyFaithfulSheafToPresheaf J _).map_injective
-      ext U x
-      rfl)
-
-/-- Canonical self-extension unit, the adjunction mate of identity scalar restriction.
-It is the derived map x tensor a to ax, not a chosen automorphism.
-Source: Stacks 06YY, unit balancing in the coefficient refinement of Tag 09B1
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses). -/
-def normalizedOriginScalarUnit
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]
-    (φ : R →+* R) (hφ : φ = RingHom.id R) :
-    pbcFixedScalarExtension J φ ≅ 𝟭 (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
-  Adjunction.leftAdjointIdIso (Adjunction.ofIsRightAdjoint _)
-    (Functor.mapDerivedCategoryNatIso (normalizedOriginRestrictionUnit J φ hφ) ≪≫
-      Functor.mapDerivedCategoryIdIso _)
-
-/-- The canonical scalar unit at a positive quotient, including the first quotient.
-Source: Stacks 06YY and 09B1, coefficient refinement
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses). -/
-def normalizedOriginQuotientUnit
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]
-    (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
-    pbcFixedScalarExtension J (pbcWitnessQuotientMap d n n (le_refl n)) ≅ 𝟭 _ :=
-  normalizedOriginScalarUnit J _
-    (Scheme.adicQuotientMap_id d.ideal ⟨n + 1, Nat.succ_pos n⟩)
-
-/-- Canonical reassociation for three quotient levels. This is the published
-scalar-extension composition comparison, with the actual quotient-factor identity.
-Source: Stacks 06YY and 09B1, coefficient refinement
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses). -/
-def normalizedOriginQuotientComp
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]
-    (d : Scheme.AdicCoefficientDatum A) (k m n : ℕ) (hnm : n ≤ m) (hmk : m ≤ k) :
-    pbcFixedScalarExtension J (pbcWitnessQuotientMap d k m hmk) ⋙
-        pbcFixedScalarExtension J (pbcWitnessQuotientMap d m n hnm) ≅
-      pbcFixedScalarExtension J (pbcWitnessQuotientMap d k n (hnm.trans hmk)) :=
-  pbcFixedScalarExtensionComp J _ _ _
-    (Scheme.adicQuotientMap_comp d.ideal ⟨k + 1, Nat.succ_pos k⟩
-      ⟨m + 1, Nat.succ_pos m⟩ ⟨n + 1, Nat.succ_pos n⟩
-      (Nat.add_le_add_right hnm 1) (Nat.add_le_add_right hmk 1)).symm
-
-/-- Direct quotient scalar extension, in the published fixed-ring presentation.
-Source: Stacks 06YY and 09B1, coefficient refinement
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses). -/
-abbrev normalizedOriginReduction
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]
-    (d : Scheme.AdicCoefficientDatum A) (m n : ℕ) (h : n ≤ m) :=
-  pbcFixedScalarExtension J (pbcWitnessQuotientMap d m n h)
+private theorem plus_of_map
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.Faithful] (K : DerivedCategory C)
+    (hK : DerivedCategory.TStructure.t.plus (F.mapDerivedCategory.obj K)) :
+    DerivedCategory.TStructure.t.plus K := by
+  obtain ⟨a, ha⟩ := hK
+  refine ⟨a, (DerivedCategory.isGE_iff K a).2 ?_⟩
+  intro i hi
+  exact F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    ((DerivedCategory.isGE_iff _ a).1 ha i hi)
 
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   (d : Scheme.AdicCoefficientDatum A)
@@ -127,6 +70,62 @@ def NormalizedOriginCompatibility (m n : ℕ) (h : n ≤ m)
       (normalizedOriginReduction (Scheme.ProEt.topology T) d m n h).map
         (pbcFixedOriginAlpha T (PbcQuotient d m) (M m) (hM m) (W m)).hom ≫ (rho m n h).hom
 
+private def comparisonNormalizationIso (m n : ℕ) (h : n ≤ m) :
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj
+      ((normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj) ≅ M n :=
+  (pbcComparisonReduction T (pbcWitnessQuotientMap d m n h)).symm.app (W m).L.obj ≪≫
+    (normalizedOriginReduction (Scheme.ProEt.topology T) d m n h).mapIso
+      (pbcFixedOriginAlpha T (PbcQuotient d m) (M m) (hM m) (W m)) ≪≫ rho m n h
+
+include rho in
+private theorem normalizedOrigin_bounded (m n : ℕ) (h : n ≤ m) :
+    DerivedCategory.TStructure.t.plus
+      ((normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj) := by
+  apply plus_of_map (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T)
+  apply plus_of_map (finiteCoefficientRealization T (PbcQuotient d n))
+  exact DerivedCategory.TStructure.t.plus.prop_of_iso
+    ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.mapIso
+      (comparisonNormalizationIso T d M hM W rho m n h)).symm (hM n)
+
+private theorem normalizationLift (m n : ℕ) (h : n ≤ m) :
+    ∃! beta : (normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj ≅
+      (W n).L.obj, NormalizedOriginCompatibility T d M hM W rho m n h beta := by
+  let C := (normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory
+  have hC := normalizedOrigin_bounded T d M hM W rho m n h
+  let e : F.obj C ≅ F.obj (W n).L.obj :=
+    comparisonNormalizationIso T d M hM W rho m n h ≪≫
+      (pbcFixedOriginAlpha T (PbcQuotient d n) (M n) (hM n) (W n)).symm
+  obtain ⟨f, hf⟩ :=
+    (bijective_comparisonUpperStar_mapDerivedCategory_map C (W n).L.obj (W n).L.property).2
+      e.hom
+  obtain ⟨g, hg⟩ :=
+    (bijective_comparisonUpperStar_mapDerivedCategory_map (W n).L.obj C hC).2 e.inv
+  change F.map f = e.hom at hf
+  change F.map g = e.inv at hg
+  have hfg : f ≫ g = 𝟙 C :=
+    (bijective_comparisonUpperStar_mapDerivedCategory_map C C hC).1 (by
+      change F.map (f ≫ g) = F.map (𝟙 C)
+      simp only [Functor.map_comp, hf, hg, Iso.hom_inv_id]
+      exact (F.map_id _).symm)
+  have hgf : g ≫ f = 𝟙 (W n).L.obj :=
+    (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (W n).L.property).1 (by
+      change F.map (g ≫ f) = F.map (𝟙 (W n).L.obj)
+      simp only [Functor.map_comp, hf, hg, Iso.inv_hom_id]
+      exact (F.map_id _).symm)
+  let b : C ≅ (W n).L.obj := ⟨f, g, hfg, hgf⟩
+  have hb : NormalizedOriginCompatibility T d M hM W rho m n h b := by
+    change F.map f ≫ _ = _
+    rw [hf]
+    simp [e, comparisonNormalizationIso]
+  refine ⟨b, hb, ?_⟩
+  intro b' hb'
+  apply Iso.ext
+  apply (bijective_comparisonUpperStar_mapDerivedCategory_map C _ (W n).L.property).1
+  apply (cancel_mono
+    (pbcFixedOriginAlpha T (PbcQuotient d n) (M n) (hM n) (W n)).hom).1
+  exact hb'.trans hb.symm
+
 /-- Chosen bounded-below etale origins lift every normalization uniquely, with unit
 and quotient-cocycle compatibility. There is no common bound, constructibility, or
 finite Tor-dimension assumption. The natural number n denotes P_(n+1).
@@ -135,32 +134,26 @@ prop-weil-pbc-preservation-constructible.proof.md, compatible witness sentence;
 Stacks Project Tag 09B1, lemma-compare-derived (2), with coefficient-reduction refinement
 (blueprint: lem-weil-pbc-normalized-etale-origin-witnesses).
 
-Proof plan, following all six steps of the node:
-1. Compute coefficient reduction by a K-flat resolution with flat terms, using
-lem-pur-derived-change-of-rings. The canonical inverse-image tensor comparison of
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback identifies inverse image of the etale
-reduction with reduction of inverse image, including its final quotient action.
-2. The extension of a K-flat complex to a quotient remains K-flat over that quotient:
-tensoring it with an acyclic quotient complex is the original K-flat tensor after
-restriction. Ordinary balancing therefore computes the canonical comparisons. For
-three quotients both paths send ((x tensor a) tensor b) to x tensor q(a)b. This proves
-naturality, the unit x tensor a to ax, and coherence without quotient flatness.
-3. Compose the tensor comparison, the reduction of the retained origin isomorphism,
-and rho. Its target is M_n, hence bounded below. Exact comparison commutes with
-cohomology. The invertible sheaf-level unit from
-prop-weil-pbc-site-comparison-finite-level reflects zero cohomology, so the etale
-reduction is bounded below. The bound may depend on n and no uniform interval is used.
-4. Both etale objects now lie in D+. Full faithfulness from
-thm-weil-pbc-site-comparison uniquely lifts the resulting comparison isomorphism.
-Lift its inverse too; faithfulness proves the inverse identities and uniqueness.
-This is exactly NormalizedOriginCompatibility, with the canonical source comparison.
-5. At equal indices the unit comparison and rho_id make the lifted map the identity
-under normalizedOriginQuotientUnit; faithfulness proves equality.
-6. Apply comparison to the two-stage lift. Naturality and the balancing associator
-identify its image with rho_mn after the reduction of rho_km, followed by the reduced
-origin isomorphism. The assumed rho cocycle identifies it with the image of beta_kn.
-Cancel the invertible origin isomorphism and use faithfulness. This gives the displayed
-cocycle under normalizedOriginQuotientComp for every k >= m >= n.
+Proof: form the comparison-side normalization by composing the inverse canonical
+comparison-reduction mate, the reduction of the retained origin isomorphism, and rho.
+Its target is M_n. The coefficient realization and comparison inverse image are exact
+and faithful, hence reflect vanishing cohomology. Transport boundedness of M_n along
+this normalization and reflect it twice; the reduced etale object is bounded below.
+The bound may depend on n. The existing comparison Hom bijection now lifts both the
+normalization isomorphism and its inverse. Injectivity proves the inverse identities,
+and cancellation of the retained origin isomorphism proves compatibility and uniqueness.
+Choose these unique lifts for every pair of indices. For equal indices, the unit equation
+of normalizedOriginComparisonCoherence, naturality of the scalar unit, and rho_id show
+that their comparison images agree with the canonical scalar unit. For three indices,
+use naturality of the inverse comparison-reduction mate to move the first lifted map
+through the second comparison. Substitute both compatibility equations and rho_comp.
+Naturality of the scalar associator and the composition equation of
+normalizedOriginComparisonCoherence identify the result with the image of the direct
+lift preceded by the etale associator. Cancel the retained origin isomorphism and apply
+injectivity of the comparison Hom map. This proves the required unit and cocycle.
+The independent coherence theorem isolates precisely the unit and associator part of
+the argument; boundedness, existence, uniqueness and the descent of coherence are proved
+here without a uniform bound, quotient flatness or a finite Tor-dimension hypothesis.
 -/
 theorem normalizedEtaleOriginWitnesses
     (rho_id : ∀ n : ℕ, (rho n n (le_refl n)).hom =
@@ -188,6 +181,37 @@ theorem normalizedEtaleOriginWitnesses
             (beta k m hmk).hom ≫ (beta m n hnm).hom =
           (normalizedOriginQuotientComp T.smallEtaleTopology d k m n hnm hmk).hom.app
             (W k).L.obj ≫ (beta k n (hnm.trans hmk)).hom) := by
-  sorry
+  classical
+  choose beta hb hu using normalizationLift T d M hM W rho
+  refine ⟨normalizedOrigin_bounded T d M hM W rho, beta, hb, hu, ?_, ?_⟩
+  · intro n
+    apply (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (W n).L.property).1
+    apply (cancel_mono
+      (pbcFixedOriginAlpha T (PbcQuotient d n) (M n) (hM n) (W n)).hom).1
+    dsimp only
+    rw [hb n n (le_refl n),
+      (normalizedOriginComparisonCoherence T d).1, Category.assoc, rho_id]
+    congr 1
+    exact (normalizedOriginQuotientUnit (Scheme.ProEt.topology T) d n).hom.naturality _
+  · intro k m n hnm hmk
+    apply (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (W n).L.property).1
+    apply (cancel_mono
+      (pbcFixedOriginAlpha T (PbcQuotient d n) (M n) (hM n) (W n)).hom).1
+    dsimp only
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hb m n hnm, hb k n (hnm.trans hmk)]
+    have hn := (pbcComparisonReduction T (pbcWitnessQuotientMap d m n hnm)).inv.naturality
+      (beta k m hmk).hom
+    dsimp only [Functor.comp_map] at hn
+    rw [reassoc_of% hn]
+    rw [← Functor.map_comp_assoc, hb k m hmk]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [rho_comp]
+    have ha :=
+      (normalizedOriginQuotientComp (Scheme.ProEt.topology T) d k m n hnm hmk).hom.naturality
+      (pbcFixedOriginAlpha T (PbcQuotient d k) (M k) (hM k) (W k)).hom
+    dsimp only [Functor.comp_map] at ha
+    rw [reassoc_of% ha,
+      ← reassoc_of% ((normalizedOriginComparisonCoherence T d).2 k m n hnm hmk (W k).L.obj)]
 
 end AlgebraicGeometry.ProEtale
