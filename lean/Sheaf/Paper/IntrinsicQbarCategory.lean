@@ -86,6 +86,7 @@ def intrinsicQbarScalarAction (α : Ω)
   StageSystem.qbarScalarHom l Ω (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)
     (intrinsicQbarScalarCompatible l Ω Y) α f
 
+set_option linter.unusedVariables false in
 /-- The specified scalar formula determines the linear structure uniquely, on the
 existing colimit abelian-group structures. Source: blueprint scalar-action laws
 (blueprint: def-weil-pbc-qbar-category).
@@ -101,7 +102,45 @@ theorem intrinsicQbarLinear_existsUnique :
       (fun [qInst : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)] ↦
         ∀ (K L : generalAlgebraicallyClosedConstructibleCategory l Ω Y) (α : Ω) (f : K ⟶ L),
           α • f = intrinsicQbarScalarAction l Ω Y α f) (qInst := q) := by
-  sorry
+  have hp : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).pairPreadditive =
+      GeneralAlgebraicallyClosedCoefficients.preadditive (l := l) (Ω := Ω) (Y := Y) := by
+    exact Subsingleton.elim _ _
+  have laws := StageSystem.qbarScalarHom_laws l Ω
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)
+    (intrinsicQbarScalarCompatible l Ω Y)
+  rw [hp] at laws
+  let q : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y) := {
+    homModule K L :=
+      { smul := fun α f ↦ intrinsicQbarScalarAction l Ω Y α f
+        one_smul := laws.1 K L
+        mul_smul := laws.2.1 K L
+        smul_zero := laws.2.2.1 K L
+        smul_add := laws.2.2.2.1 K L
+        add_smul := laws.2.2.2.2.1 K L
+        zero_smul := laws.2.2.2.2.2.1 K L }
+    smul_comp K L M := laws.2.2.2.2.2.2.1 K L M
+    comp_smul K L M f α g := laws.2.2.2.2.2.2.2 K L M α f g
+  }
+  refine ⟨q, ?_, ?_⟩
+  · intro K L α f
+    rfl
+  · intro q' hq'
+    have hm : q'.homModule = q.homModule := by
+      funext K L
+      apply Module.ext
+      funext α f
+      exact hq' K L α f
+    have hext : ∀ (a b : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)),
+        a.homModule = b.homModule → a = b := by
+      intro a b
+      cases a
+      cases b
+      intro h
+      cases h
+      rfl
+    exact hext q' q hm
+
+
 
 /-- The scalar action is fixed on every morphism class, not chosen from mere existence.
 The inherited category and triangulation remain literally the recorded pair construction.
