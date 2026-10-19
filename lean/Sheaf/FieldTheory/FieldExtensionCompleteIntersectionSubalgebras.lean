@@ -9,7 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
-import Sheaf.RingTheory.RegularSequenceQuotientLocalizationPresentation
+import WeilConjectures.RingTheory.RegularSequenceQuotientLocalizationPresentation
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.Tactic.FieldSimp
 

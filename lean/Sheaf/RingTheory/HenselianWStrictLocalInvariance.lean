@@ -19,7 +19,7 @@ import Sheaf.RingTheory.StrictlyHenselianQuotient
 import Sheaf.RingTheory.HenselianPairPrimeConnected
 import Sheaf.Topology.WLocalComponents
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
-import Sheaf.RingTheory.FactorsThroughLocalization
+import WeilConjectures.RingTheory.FactorsThroughLocalization
 import Sheaf.RingTheory.WLocalClopenPartitions
 import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.RingTheory.HenselianSmoothAlgebraLifting

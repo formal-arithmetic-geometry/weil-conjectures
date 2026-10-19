@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.Topology.LocallyConstant.Algebra

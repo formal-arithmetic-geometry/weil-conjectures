@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.TorsorSectionEvaluation
-public import WeilConjectures.ConstructibleSheaf.TorsorSectionRepresentation

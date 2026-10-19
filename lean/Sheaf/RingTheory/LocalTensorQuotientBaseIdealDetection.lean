@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.LocalTensorQuotientComponentMap
+import WeilConjectures.RingTheory.LocalTensorQuotientComponentMap
 
 /-!
 # Detection of tensor quotients modulo the extended base ideal

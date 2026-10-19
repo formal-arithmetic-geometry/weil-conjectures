@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.ConormalSpanClearing
+import WeilConjectures.RingTheory.ConormalSpanClearing
 import Mathlib.Algebra.Module.LocalizedModule.Away
 import Mathlib.RingTheory.Etale.Kaehler
 

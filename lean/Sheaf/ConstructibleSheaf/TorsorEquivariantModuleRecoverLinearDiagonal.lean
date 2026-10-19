@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.TorsorEquivariantModuleRecoverLinearDiagonal
-public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule

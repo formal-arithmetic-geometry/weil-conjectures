@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.SquareZeroSmallModel
+import WeilConjectures.RingTheory.SquareZeroSmallModel
 
 @[expose] public section
 

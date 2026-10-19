@@ -10,7 +10,7 @@ public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology
-import Sheaf.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
+import WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
 
 /-!
 # Derived invariants and homogeneous continuous cohomology

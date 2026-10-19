@@ -1,9 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
-public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Mathlib.RingTheory.Regular.RegularSequence
-public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.Algebra.Module.LocalizedModule.Basic

@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import WeilConjectures.CategoryTheory.SiteCechComplex

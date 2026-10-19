@@ -14,7 +14,7 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.PowerSeriesFiniteSubfieldFamily
 import WeilConjectures.FieldTheory.IntersectionSubfieldsDifferentials
-import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
+import WeilConjectures.RingTheory.KaehlerDifferentialZeroIffPow
 import WeilConjectures.FieldTheory.ExistsPBasis
 import Sheaf.RingTheory.PowerSeriesRingSubfields
 

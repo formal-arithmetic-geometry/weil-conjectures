@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
-public import WeilConjectures.CategoryTheory.SiteCechComplex
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

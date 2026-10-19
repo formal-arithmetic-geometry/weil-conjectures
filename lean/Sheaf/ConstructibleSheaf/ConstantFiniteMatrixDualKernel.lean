@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernel
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits

@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.TriangularFieldModelData
-public import WeilConjectures.FieldTheory.TriangularFieldModelEquations
-public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-public import Mathlib.LinearAlgebra.LinearIndependent.Defs
-public import Mathlib.Algebra.Polynomial.Monic

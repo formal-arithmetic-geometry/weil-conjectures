@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.ProEtale.WLocal
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
-import Sheaf.RingTheory.FactorsThroughLocalization
+import WeilConjectures.RingTheory.FactorsThroughLocalization
 import Mathlib.Topology.Separation.DisjointCover
 import Mathlib.RingTheory.Idempotents
 import Sheaf.RingTheory.FilteredColimitOfFactorization

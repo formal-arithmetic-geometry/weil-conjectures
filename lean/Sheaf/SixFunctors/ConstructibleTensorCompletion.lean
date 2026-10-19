@@ -34,7 +34,7 @@ import Sheaf.Paper.WeilCompletedTensorReflector
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.CategoryTheory.TruncationTriangle
+import WeilConjectures.CategoryTheory.TruncationTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Single

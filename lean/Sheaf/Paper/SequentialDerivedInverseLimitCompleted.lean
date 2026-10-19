@@ -6,7 +6,7 @@ Authors: SHEAF group Q22
 module
 
 public import Sheaf.Paper.AdicCoefficientDatumCompleted
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits

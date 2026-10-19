@@ -6,7 +6,7 @@ Authors: SHEAF group NV
 module
 
 public import Sheaf.RingTheory.RingPseudoCoherent
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
 import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.RingTheory.AffineBasicSetsDisjointRefinement
-public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet

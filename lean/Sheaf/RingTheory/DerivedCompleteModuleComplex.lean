@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Ideal.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Derived completeness of module complexes

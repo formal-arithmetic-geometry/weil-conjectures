@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
-public import Mathlib.CategoryTheory.Triangulated.Pretriangulated

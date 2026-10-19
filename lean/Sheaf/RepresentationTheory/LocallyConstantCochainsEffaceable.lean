@@ -15,7 +15,7 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Sheaf.RepresentationTheory.LocallyConstantCochainsExact
-import Sheaf.RepresentationTheory.LocallyConstantCochainsInvariantsZero
+import WeilConjectures.RepresentationTheory.LocallyConstantCochainsInvariantsZero
 import Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding
 
 /-!

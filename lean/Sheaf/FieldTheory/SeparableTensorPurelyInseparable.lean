@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.SeparableTensorPurelyInseparable
-public import Mathlib.FieldTheory.PurelyInseparable.Basic

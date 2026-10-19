@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.FiniteConstantModel
-public import WeilConjectures.ConstructibleSheaf.Defs

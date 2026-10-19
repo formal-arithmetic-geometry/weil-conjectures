@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf
-public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule

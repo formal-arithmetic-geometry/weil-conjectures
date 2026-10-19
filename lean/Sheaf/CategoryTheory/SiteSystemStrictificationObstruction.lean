@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteSystemStrictificationObstruction
-public import Mathlib.CategoryTheory.Sites.Precoverage
-public import Mathlib.CategoryTheory.CodiscreteCategory
-public import Mathlib.CategoryTheory.Category.Preorder

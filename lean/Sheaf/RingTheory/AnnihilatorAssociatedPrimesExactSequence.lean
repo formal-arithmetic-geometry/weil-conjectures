@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesExactSequence
-public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
-public import Mathlib.Algebra.Exact.Basic

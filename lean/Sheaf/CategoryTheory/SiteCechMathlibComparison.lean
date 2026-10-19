@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteCechMathlibComparison
-public import WeilConjectures.CategoryTheory.SiteCechComplex
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
