@@ -9,24 +9,22 @@ public import Mathlib.CategoryTheory.Products.Basic
 public import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
 public import Sheaf.Paper.CompleteCoefficientDatum
 public import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.CategoryTheory.RingedToposMorphism
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.Algebra.Homology.Functor
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.CategoryTheory.DiagramSiteRealization
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+
 
 /-!
 # Constant strict towers and normalized direct image
@@ -165,7 +163,24 @@ an adjunction from exact evaluation to the diagonal. Transport a map from an acy
 complex through that adjunction and use K-injectivity to null-homotope it. -/
 @[instance] theorem delta_preservesKInjective (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).PreservesKInjectiveComplexes := by
-  sorry
+  let adj₀ : (evaluation ℕᵒᵖ (Modules A X)).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
+    { unit :=
+        { app := fun M ↦
+            { app := fun n ↦ M.map (homOfLE (Nat.zero_le n.unop)).op
+              naturality := by
+                intro i j f
+                change M.map f ≫ M.map _ = M.map _ ≫ 𝟙 _
+                rw [Category.comp_id, ← M.map_comp]
+                congr 1 }
+          naturality := by
+            intro M N f
+            apply NatTrans.ext
+            funext n
+            exact (f.naturality _).symm }
+      counit := 𝟙 _
+      left_triangle_components := by intro M; simp
+      right_triangle_components := by intro M; ext n; simp }
+  exact adj₀.preservesKInjectiveComplexes
 
 /-- The canonical derived direct-image/diagonal isomorphism. Both composition
 comparisons retain their universal derived units; the middle comparison has identity
@@ -196,7 +211,17 @@ terminal-index evaluation. Its ordinary inverse limit is J, with identity cone.
 The derived adjunction unit is the ordinary unit on this representative, hence is
 invertible. Naturality and resolving quasi-isomorphisms give every derived object. -/
 theorem deltaUnit_isIso (X : Scheme.{u}) : IsIso (deltaAdj A X).unit := by
-  sorry
+  have hff : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).rightDerivedFunctor.Full :=
+    inferInstance
+  have hfa : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).rightDerivedFunctor.Faithful :=
+    inferInstance
+  have : (delta A X).Full := Functor.Full.of_iso
+    (Functor.rightDerivedFunctorIsoMapDerivedCategory
+      (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X))
+  have : (delta A X).Faithful := Functor.Faithful.of_iso
+    (Functor.rightDerivedFunctorIsoMapDerivedCategory
+      (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X))
+  exact (deltaAdj A X).unit_isIso_of_L_fully_faithful
 
 /-- The specified identification Rlim(delta M) = M, inverse to the canonical unit.
 Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
@@ -224,6 +249,283 @@ Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normaliza
 def level (X : Scheme.{u}) (n : ℕ) : Modules A X ⥤ Modules A X :=
   reductionChange X (quotient I X n) ⋙ reductionRestrict X (quotient I X n)
 
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private def levelUnitMap (X : Scheme.{u}) (n : ℕ) (M : Modules A X) :
+    M ⟶ (level I X n).obj M := by
+  let φ := quotient I X n
+  let T := SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M
+  let h := (reductionChangeExistence X φ).choose_spec.choose M
+  let b : T ⟶ ((reductionChange X φ).obj M).val :=
+    (PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (𝟙 (reductionModuleRing X (coefficients (A ⧸ I ^ (n + 1)) X)).obj)).unit.app T ≫
+      (eqToHom h.symm).val
+  refine ⟨{ app := fun U ↦
+              ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars.{u + 1, u + 1, u + 1}
+                (φ.hom.app U).hom (b.app U)
+            naturality := ?_ }⟩
+  intro U V i
+  ext x
+  have hb := PresheafOfModules.naturality_apply b i
+    ((1 : (coefficients (A ⧸ I ^ (n + 1)) X).obj.obj U) ⊗ₜ[
+      (coefficients A X).obj.obj U, (φ.hom.app U).hom] x)
+  change b.app V (T.map i
+    ((1 : (coefficients (A ⧸ I ^ (n + 1)) X).obj.obj U) ⊗ₜ[
+      (coefficients A X).obj.obj U, (φ.hom.app U).hom] x)) = _ at hb
+  rw [show T.map i
+      ((1 : (coefficients (A ⧸ I ^ (n + 1)) X).obj.obj U) ⊗ₜ[
+        (coefficients A X).obj.obj U, (φ.hom.app U).hom] x) =
+      (1 : (coefficients (A ⧸ I ^ (n + 1)) X).obj.obj V) ⊗ₜ[
+        (coefficients A X).obj.obj V, (φ.hom.app V).hom] M.val.map i x by
+    have ht := Classical.choose_spec
+      (SheafOfModules.exists_changeOfRingsMap.{u, u + 1, u + 1} φ M i) 1 x
+    rw [map_one] at ht
+    convert! ht using 0] at hb
+  exact hb
+
+private theorem levelUnitMap_apply (X : Scheme.{u}) (n : ℕ) (M : Modules A X)
+    (U : X.ProEtᵒᵖ) (x : M.val.obj U) :
+    (levelUnitMap I X n M).val.app U x =
+      reductionTensorSection X (quotient I X n) M U 1 x := by
+  rfl
+
+open scoped ChangeOfRings in
+private theorem tensorSection_map (X : Scheme.{u}) (n : ℕ)
+    {M N : Modules A X} (a : M ⟶ N) (U : X.ProEtᵒᵖ)
+    (s : (coefficients (A ⧸ I ^ (n + 1)) X).obj.obj U) (x : M.val.obj U) :
+    ((level I X n).map a).val.app U
+        (reductionTensorSection X (quotient I X n) M U s x) =
+      reductionTensorSection X (quotient I X n) N U s (a.val.app U x) := by
+  let φ := quotient I X n
+  let h : ∀ M : Modules A X, (reductionChange X φ).obj M =
+      SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M :=
+    (reductionChangeExistence X φ).choose_spec.choose
+  have ha := (reductionChangeExistence X φ).choose_spec.choose_spec.choose a
+  change (reductionChange X φ).map a = _ at ha
+  let b : SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ N :=
+    { app := fun V ↦ (ModuleCat.extendScalars (φ.hom.app V).hom).map (a.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality.{u, u + 1, u + 1} φ M a }
+  let adjS := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 (reductionModuleRing X (coefficients (A ⧸ I ^ (n + 1)) X)).obj)
+  have hn := congrArg (fun t ↦ t.app U
+    (s ⊗ₜ[(coefficients A X).obj.obj U, (φ.hom.app U).hom] x))
+      (adjS.unit.naturality b)
+  have hc : eqToHom (h M).symm ≫ (reductionChange X φ).map a =
+      SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} φ M a ≫ eqToHom (h N).symm := by
+    rw [ha]
+    simp
+  have hc' := congrArg (fun t : SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M ⟶
+      (reductionChange X φ).obj N ↦ t.val.app U
+        ((toSheafify (ProEt.topology X)
+          (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M).presheaf).app U
+            (s ⊗ₜ[(coefficients A X).obj.obj U, (φ.hom.app U).hom] x))) hc
+  change _ = _ at hn
+  change _ = _ at hc'
+  dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hc'
+  apply hc'.trans
+  exact congrArg ((eqToHom (h N).symm).val.app U) hn.symm
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private theorem level_hom_ext (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (M N : reductionModules X R)
+    (f g : (reductionRestrict X φ).obj ((reductionChange X φ).obj M) ⟶ N)
+    (h : ∀ (U : X.ProEtᵒᵖ)
+      (s : S.obj.obj U) (x : M.val.obj U),
+      f.val.app U (reductionTensorSection X φ M U s x) =
+        g.val.app U (reductionTensorSection X φ M U s x)) : f = g := by
+  let hM := (reductionChangeExistence X φ).choose_spec.choose M
+  apply (SheafOfModules.toSheaf (reductionModuleRing X R)).map_injective
+  let adjS := sheafificationAdjunction (ProEt.topology X) AddCommGrpCat.{u + 1}
+  let j := (SheafOfModules.toSheaf _).map (eqToHom hM.symm)
+  apply (cancel_epi j).mp
+  apply (adjS.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  ext U t
+  induction t using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | add t t' ht ht' => simp only [map_add, ht, ht']
+  | tmul s x => exact h U s x
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private def scalarExtensionPresheafMap (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (M : reductionModules X R) (N : reductionModules X S)
+    (a : M ⟶ (reductionRestrict X φ).obj N) :
+    SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M ⟶ N.val := by
+  let T := SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M
+  exact
+    { app := fun U ↦
+        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+          (φ.hom.app U).hom (a.val.app U)
+      naturality := by
+        intro U V i
+        apply ModuleCat.ExtendScalars.hom_ext
+        intro x
+        have ht := Classical.choose_spec
+          (SheafOfModules.exists_changeOfRingsMap.{u, u + 1, u + 1} φ M i) 1 x
+        rw [map_one] at ht
+        symm
+        change N.val.map i
+          ((ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+            (φ.hom.app U).hom (a.val.app U))
+              ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+          (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+            (φ.hom.app V).hom (a.val.app V))
+              (T.map i ((1 : S.obj.obj U) ⊗ₜ[
+                R.obj.obj U, (φ.hom.app U).hom] x))
+        erw [ht]
+        erw [ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply.{u + 1,
+          u + 1, u + 1} (R := R.obj.obj U) (S := S.obj.obj U),
+          ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply.{u + 1,
+            u + 1, u + 1} (R := R.obj.obj V) (S := S.obj.obj V)]
+        simp only [TensorProduct.lift.tmul]
+        change N.val.map i ((1 : S.obj.obj U) •
+            (show N.val.obj U from a.val.app U x)) =
+          (1 : S.obj.obj V) •
+            (show N.val.obj V from a.val.app V (M.val.map i x))
+        simp only [one_smul]
+        convert! (PresheafOfModules.naturality_apply a.val i x).symm using 0 }
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private def scalarExtensionMap (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (M : reductionModules X R) (N : reductionModules X S)
+    (a : M ⟶ (reductionRestrict X φ).obj N) :
+    SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M ⟶ N :=
+  (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (𝟙 (reductionModuleRing X S).obj)).symm (scalarExtensionPresheafMap X φ M N a)
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private theorem scalarExtensionMap_tmul (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (M : reductionModules X R) (N : reductionModules X S)
+    (a : M ⟶ (reductionRestrict X φ).obj N) (U : X.ProEtᵒᵖ)
+    (s : S.obj.obj U) (x : M.val.obj U) :
+    (scalarExtensionMap X φ M N a).val.app U
+      (((PresheafOfModules.sheafificationAdjunction.{u + 1}
+        (𝟙 (reductionModuleRing X S).obj)).unit.app
+          (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M)).app U
+            (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+      s • (show N.val.obj U from a.val.app U x) := by
+  have h := (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (𝟙 (reductionModuleRing X S).obj)).apply_symm_apply
+      (scalarExtensionPresheafMap X φ M N a)
+  have h' := congrArg ((PresheafOfModules.toPresheaf
+    (reductionModuleRing X S).obj).map) h
+  rw [PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def] at h'
+  have he := congrArg (fun k ↦ k.app U
+    (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) h'
+  change (scalarExtensionMap X φ M N a).val.app U
+      (((PresheafOfModules.sheafificationAdjunction.{u + 1}
+        (𝟙 (reductionModuleRing X S).obj)).unit.app
+          (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M)).app U
+            (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+      (scalarExtensionPresheafMap X φ M N a).app U
+        (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) at he
+  dsimp only [scalarExtensionPresheafMap] at he
+  erw [ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply.{u + 1,
+    u + 1, u + 1} (R := R.obj.obj U) (S := S.obj.obj U)] at he
+  simp only [TensorProduct.lift.tmul] at he
+  exact he
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private theorem tensorSection_smul (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (M : reductionModules X R)
+    (U : X.ProEtᵒᵖ) (s t : S.obj.obj U)
+    (x : M.val.obj U) :
+    s • reductionTensorSection X φ M U t x =
+      reductionTensorSection X φ M U (s * t) x := by
+  let T := SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M
+  let b : T ⟶ ((reductionChange X φ).obj M).val :=
+    (PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (𝟙 (reductionModuleRing X S).obj)).unit.app T ≫
+      (eqToHom ((reductionChangeExistence X φ).choose_spec.choose M).symm).val
+  change s • b.app U (t ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) = _
+  rw [← map_smul]
+  rfl
+
+open scoped ChangeOfRings in
+set_option backward.isDefEq.respectTransparency false in
+private theorem step_map_exists (X : Scheme.{u})
+    {R S T : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : R ⟶ T) (q : S ⟶ T) (hcomp : φ ≫ q = ψ)
+    (M : reductionModules X R) (unitMap : M ⟶ (reductionRestrict X ψ).obj
+      ((reductionChange X ψ).obj M))
+    (hunit : ∀ (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      unitMap.val.app U x = reductionTensorSection X ψ M U 1 x) :
+    ∃ b : (reductionRestrict X φ).obj ((reductionChange X φ).obj M) ⟶
+        (reductionRestrict X ψ).obj ((reductionChange X ψ).obj M),
+      ∀ (U : X.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U),
+        b.val.app U (reductionTensorSection X φ M U s x) =
+          reductionTensorSection X ψ M U (q.hom.app U s) x := by
+  let N := (reductionRestrict X q).obj ((reductionChange X ψ).obj M)
+  have hq (U : X.ProEtᵒᵖ) (r : R.obj.obj U) :
+      q.hom.app U (φ.hom.app U r) = ψ.hom.app U r :=
+    ConcreteCategory.congr_hom (congrArg (fun k ↦ k.hom.app U) hcomp) r
+  let ua := (PresheafOfModules.toPresheaf (reductionModuleRing X R).obj).map unitMap.val
+  let a : M ⟶ (reductionRestrict X φ).obj N :=
+    ⟨PresheafOfModules.homMk ua (by
+        intro U r x
+        have h := (unitMap.val.app U).hom.map_smul r x
+        change unitMap.val.app U (r • x) =
+          q.hom.app U (φ.hom.app U r) •
+            (show ((reductionChange X ψ).obj M).val.obj U from unitMap.val.app U x)
+        rw [hq]
+        exact h)⟩
+  let hM : (reductionChange X φ).obj M =
+      SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M :=
+    (reductionChangeExistence X φ).choose_spec.choose M
+  let b₀ := scalarExtensionMap X φ M N a
+  let b : (reductionChange X φ).obj M ⟶ N := eqToHom hM ≫ b₀
+  let ub := (PresheafOfModules.toPresheaf (reductionModuleRing X S).obj).map b.val
+  let c : (reductionRestrict X φ).obj ((reductionChange X φ).obj M) ⟶
+      (reductionRestrict X ψ).obj ((reductionChange X ψ).obj M) :=
+    ⟨PresheafOfModules.homMk ub (by
+        intro U r x
+        have h := (b.val.app U).hom.map_smul (φ.hom.app U r) x
+        change b.val.app U ((φ.hom.app U r) •
+            (show ((reductionChange X φ).obj M).val.obj U from x)) =
+          ψ.hom.app U r •
+            (show ((reductionChange X ψ).obj M).val.obj U from b.val.app U x)
+        rw [← hq]
+        exact h)⟩
+  refine ⟨c, ?_⟩
+  intro U s x
+  change b.val.app U (reductionTensorSection X φ M U s x) = _
+  have hc : eqToHom hM.symm ≫ eqToHom hM = 𝟙 _ := by simp
+  have hcx := congrArg (fun k ↦ k.val.app U
+    (((PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (𝟙 (reductionModuleRing X S).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M)).app U
+          (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))) hc
+  dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hcx
+  change b₀.val.app U ((eqToHom hM).val.app U
+    (reductionTensorSection X φ M U s x)) = _
+  change (eqToHom hM).val.app U (reductionTensorSection X φ M U s x) = _ at hcx
+  rw [hcx]
+  simp only [SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply]
+  erw [scalarExtensionMap_tmul]
+  change q.hom.app U s •
+    (show ((reductionChange X ψ).obj M).val.obj U from unitMap.val.app U x) = _
+  rw [hunit, tensorSection_smul, mul_one]
+
+private theorem quotientStep_comp (X : Scheme.{u}) (n : ℕ) :
+    quotient I X (n + 1) ≫ quotientStep I X n = quotient I X n := by
+  dsimp only [quotient, quotientStep]
+  rw [← Functor.map_comp]
+  congr 1
+
 /-- Quotient transitions are the unique maps on sheafified pure tensors.
 Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
 Proof: quotient maps commute with the scalar maps from A, so s tensor x maps to
@@ -236,7 +538,32 @@ theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
         (τ.app M).val.app U (reductionTensorSection X (quotient I X (n + 1)) M U s x) =
           reductionTensorSection X (quotient I X n) M U
             ((quotientStep I X n).hom.app U s) x := by
-  sorry
+  let b (M : Modules A X) := (step_map_exists X (quotient I X (n + 1)) (quotient I X n)
+    (quotientStep I X n) (quotientStep_comp I X n) M (levelUnitMap I X n M)
+    (levelUnitMap_apply I X n M)).choose
+  have hb (M : Modules A X) := (step_map_exists X (quotient I X (n + 1)) (quotient I X n)
+    (quotientStep I X n) (quotientStep_comp I X n) M (levelUnitMap I X n M)
+    (levelUnitMap_apply I X n M)).choose_spec
+  let τ : level I X (n + 1) ⟶ level I X n :=
+    { app := b
+      naturality := by
+        intro M N f
+        apply level_hom_ext X (quotient I X (n + 1)) M ((level I X n).obj N)
+        intro U s x
+        change (b N).val.app U (((level I X (n + 1)).map f).val.app U
+            (reductionTensorSection X (quotient I X (n + 1)) M U s x)) =
+          ((level I X n).map f).val.app U ((b M).val.app U
+            (reductionTensorSection X (quotient I X (n + 1)) M U s x))
+        rw [tensorSection_map, hb, hb, tensorSection_map] }
+  refine ⟨τ, ?_, ?_⟩
+  · intro M U s x
+    exact hb M U s x
+  · intro τ' hτ'
+    apply NatTrans.ext
+    funext M
+    apply level_hom_ext X (quotient I X (n + 1)) M ((level I X n).obj M)
+    intro U s x
+    exact (hτ' M U s x).trans (hb M U s x).symm
 
 /-- The strict reduction functor, including all coefficient transition maps.
 Source: Stacks 099M (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
@@ -249,7 +576,14 @@ Proof: every level is scalar extension followed by additive scalar restriction.
 Evaluation jointly detects equality of maps of strict diagrams. -/
 @[instance] theorem reductionModule_additive (X : Scheme.{u}) :
     (reductionModule I X).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply NatTrans.ext
+  funext n
+  have : (level I X n.unop).Additive := by
+    dsimp [level]
+    infer_instance
+  exact (level I X n.unop).map_add
 
 /-- The homotopy functor to be left derived.
 Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
@@ -280,7 +614,57 @@ quotient construction therefore inverts resolving quasi-isomorphisms. The resolv
 class left-derived theorem gives the universal counit, invertible on these models.
 This universal property determines the derived pair up to its unique comparison. -/
 theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
-  sorry
+  let H := HomotopyCategory.quotient (Modules A X) (.up ℤ)
+  let F := reductionHomotopy I X
+  let S : Set (HomotopyCategory (Modules A X) (.up ℤ)) :=
+    { K | ∃ P : CochainComplex (Modules A X) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := coefficients A X) P ∧ H.obj P = K }
+  have hres (K : HomotopyCategory (Modules A X) (.up ℤ)) :
+      ∃ (K' : HomotopyCategory (Modules A X) (.up ℤ)) (s : K' ⟶ K),
+        K' ∈ S ∧ HomotopyCategory.quasiIso (Modules A X) (.up ℤ) s := by
+    obtain ⟨E, rfl⟩ := K.quotient_obj_surjective
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients E
+    exact ⟨H.obj P, H.map s, ⟨P, hP, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hinv (K K' : HomotopyCategory (Modules A X) (.up ℤ)) (s : K ⟶ K')
+      (hK : K ∈ S) (hK' : K' ∈ S)
+      (hs : HomotopyCategory.quasiIso (Modules A X) (.up ℤ) s) :
+      IsIso (F.map s) := by
+    obtain ⟨P, hP, rfl⟩ := hK
+    obtain ⟨P', hP', rfl⟩ := hK'
+    obtain ⟨a, rfl⟩ := H.map_surjective s
+    have ha := (HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 hs
+    have hred : QuasiIso (((reductionModule I X).mapHomologicalComplex (.up ℤ)).map a) := by
+      rw [HomologicalComplex.quasiIso_iff_evaluation]
+      intro n
+      let φ := quotient I X n.unop
+      have hchange : QuasiIso
+          (((reductionChange X φ).mapHomologicalComplex (.up ℤ)).map a) :=
+        (reductionChangeExistence X φ).choose_spec.choose_spec.choose_spec.choose_spec.1
+          a hP hP' ha
+      let R := reductionModuleRing X (coefficients A X)
+      let R' := reductionModuleRing X (coefficients (A ⧸ I ^ (n.unop + 1)) X)
+      let U := reductionRestrict X φ
+      have : PreservesFiniteLimits (U ⋙ SheafOfModules.toSheaf R) :=
+        inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf R'))
+      have : PreservesFiniteColimits (U ⋙ SheafOfModules.toSheaf R) :=
+        inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf R'))
+      have : PreservesFiniteLimits U :=
+        preservesFiniteLimits_of_reflects_of_preserves U (SheafOfModules.toSheaf R)
+      have : PreservesFiniteColimits U :=
+        preservesFiniteColimits_of_reflects_of_preserves U (SheafOfModules.toSheaf R)
+      change QuasiIso ((U.mapHomologicalComplex (.up ℤ)).map
+        (((reductionChange X φ).mapHomologicalComplex (.up ℤ)).map a))
+      infer_instance
+    dsimp only [F, reductionHomotopy, Functor.comp_map, Functor.mapHomotopyCategory_map]
+    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hred
+  let : F.CommShift ℤ := by dsimp [F, reductionHomotopy]; infer_instance
+  have : F.IsTriangulated := by dsimp [F, reductionHomotopy]; infer_instance
+  obtain ⟨_, LF, ε, hLF, _, hε⟩ :=
+    Functor.leftDerived_from_resolvingClass (Modules A X) (Derived A X) F S hres hinv
+  exact ⟨⟨LF, ε, hLF, fun P hP ↦ hε (H.obj P) ⟨P, hP, rfl⟩⟩⟩
 
 /-- Select the derived pair by its universal property, retaining its comparison.
 Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
@@ -308,7 +692,39 @@ theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
       ∀ (M : Modules A X) (n : ℕ) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
         ((η.app M).app (op n)).val.app U x =
           reductionTensorSection X (quotient I X n) M U 1 x := by
-  sorry
+  let η : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X :=
+    { app := fun M ↦ NatTrans.ofOpSequence (fun n ↦ levelUnitMap I X n M) (by
+        intro n
+        change levelUnitMap I X n M = levelUnitMap I X (n + 1) M ≫
+          ((Functor.ofOpSequence (fun k ↦ (step_existsUnique I X k).exists.choose)).map
+            (homOfLE (n.le_add_right 1)).op).app M
+        rw [Functor.ofOpSequence_map_homOfLE_succ]
+        ext U x
+        change (levelUnitMap I X n M).val.app U x =
+          (((step_existsUnique I X n).exists.choose).app M).val.app U
+            ((levelUnitMap I X (n + 1) M).val.app U x)
+        rw [levelUnitMap_apply, levelUnitMap_apply,
+          (step_existsUnique I X n).exists.choose_spec]
+        simp only [map_one])
+      naturality := by
+        intro M N a
+        apply NatTrans.ext
+        funext n
+        ext U x
+        change (levelUnitMap I X n.unop N).val.app U (a.val.app U x) =
+          ((level I X n.unop).map a).val.app U
+            ((levelUnitMap I X n.unop M).val.app U x)
+        rw [levelUnitMap_apply, levelUnitMap_apply, tensorSection_map] }
+  refine ⟨η, ?_, ?_⟩
+  · intro M n U x
+    exact levelUnitMap_apply I X n M U x
+  · intro η' hη'
+    apply NatTrans.ext
+    funext M
+    apply NatTrans.ext
+    funext n
+    ext U x
+    exact (hη' M n.unop U x).trans (levelUnitMap_apply I X n.unop M U x).symm
 
 /-- The actual ordinary quotient augmentation.
 Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/

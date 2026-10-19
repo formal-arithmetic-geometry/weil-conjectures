@@ -79,12 +79,24 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0B56 (equation-projection-formula-map); naturality and tensor-unit specialization of the counit-tensor construction, as stated in lem-weil-pbc-ringed-projection-mate-exact."
    }
+  },
+  {
+   "text": "Implementation of the auxiliary constructions: evaluation at op 0 is exact and left adjoint to constant towers, with unit given by transitions to zero and identity counit. The existing right-adjoint preservation theorem proves delta_preservesKInjective. Full faithfulness of its total right derived functor, transported to mapDerivedCategory, proves invertibility of the diagonal/limit unit. ReductionModule is additive by pointwise evaluation. For reduction_exists use the resolving class of images of K-flat complexes in the homotopy category. Existing K-flat resolutions give resolutions in this class; scalar extension inverts quasi-isomorphisms between K-flat complexes and exact scalar restriction preserves them, so evaluation proves the strict reduction functor inverts these quasi-isomorphisms. The left-derived-from-resolving-class theorem supplies the universal pair and its computation counit. The ordinary augmentation is the sheafification unit on 1 tensor x, followed by the fixed object transport. Its naturality follows from naturality of sheafification and the fixed scalar-extension map formula; its tower compatibility follows from the existing transition characterization and preservation of 1. Equality on all sections proves uniqueness. For the quotient transition, first work over arbitrary coefficient sheaves R to S to T with a commuting scalar triangle. Tensor adjunction constructs the presheaf map to the S-restriction of the T-extension, and the sheafification universal property extends it. Restrict scalars to R using the commuting triangle. The sheafification-unit formula sends s tensor x to q(s) tensor x. The underlying abelian sheafification adjunction and induction on tensor generators show extensionality, hence naturality and uniqueness. Specialize to consecutive quotient maps; their triangle commutes by the quotient factor map. Keeping coefficient sheaves abstract avoids unfolding the chosen constant sheafification or quotient ideals. The original ordinary pullback, derived pullback and final normalization obligations remain as stated.",
+   "uses": [
+    "lem-exc-kinjective-derived-fully-faithful",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-operations",
+  "lem-exc-kinjective-derived-fully-faithful",
   "lem-pc-kflat-resolution",
   "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-left-derived-from-kflat-class",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
@@ -98,7 +110,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent argument using Tags 0940, 0941, 0A07, 06YS, 07A4, 0B56 and derived.tex Tags 08BJ, 070K. Supports the compactification-composition normalization needed for blueprint fix-lem-exchanges Step 5; the blueprint does not contain the claimed direct-image-generator or final-normalization paragraphs."
+  "place": "Agent argument using Tags 0940, 0941, 0A07, 06YS, 07A4, 0B56 and derived.tex Tags 08BJ, 070K. Supports the compactification-composition normalization needed for blueprint fix-lem-exchanges Step 5; the blueprint does not contain the claimed direct-image-generator or final-normalization paragraphs. U6 stage-3 auxiliary construction proofs use the existing fully-faithful derived functor and resolving-class interfaces; three original obligations remain unchanged; the quotient transition is proved by sectionwise tensor adjunction, sheafification, and restriction along the commuting coefficient triangle."
  },
  "mathlib_searches": [
   {
@@ -330,5 +342,15 @@
   "group": "Q16",
   "result": "pass",
   "note": "Read node, all 12 stmt_deps records, the source tags (agent proof per proof_origin), the module (36 decls), report and node delta. Hypotheses: A:Type(u+1) (landed ops convention), CompleteCoefficientDatum, any f; small ProEt site, no universe equality, no finite quotients. Clause 1: chi plus K-injective identity-square predicate; clause 2: ev_n(chi) is the identity via evalR/deltaEval; clause 3: deltaLimit^-1, limitPush, L(chi^-1), deltaLimit composite is the identity; clause 4: aug_Y then projection = chi then R(aug_X), in D(towers). limitPush (conjugate of identity square, 0A07) and projection (mate of uniquely characterized reductionPull, 0B56) are canonical helpers; recorded dependency existentials unusable (equal universes / abstract corners). reduction is the universal left derived functor with its K-flat counit, not hollow. Statement verbatim, decl list exact, stmt_deps gained only a landed node. 9 sorry theorem bodies, no axioms, docstrings with source and blueprint. nt_compile clean (8.9 s / 10.1 s). Minor: thin in-thread Q16 second-reading section; stage 3 must prove the mate compatibilities."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034314-L-419582",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

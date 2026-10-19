@@ -16910,3 +16910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/U5/Sheaf.Paper.CondensedPointBasis (stage 3; reviewer PASS; first push; landing 20261019T034312-L-419059 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/U6/Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist (stage 3; reviewer PASS; first push; landing 20261019T034313-L-419160 (interface); batch 20261019T034248; modules 2; new nodes 2; change records: coord/changes/proetale-finite-type-uniform-model.md)
 - 03:43 L: merged deliver/U6/Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation (stage 3; reviewer PASS; first push; landing 20261019T034314-L-419391 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/U6/Sheaf.Paper.ConstantTowerDirectImageNormalization (stage 3; reviewer PASS; first push; landing 20261019T034314-L-419582 (proof); batch 20261019T034248; modules 1; new nodes 0)
