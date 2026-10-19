@@ -19,6 +19,7 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.RingTheory.DerivedModuleScalarAdjunction
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
@@ -76,7 +77,15 @@ adjunction. This is the identity-site specialization of derived change of rings.
 theorem restriction_properties :
     PreservesFiniteLimits (restriction J q) ∧
       PreservesFiniteColimits (restriction J q) ∧ (restriction J q).IsRightAdjoint := by
-  sorry
+  let := HasDerivedCategory.standard (realizationModules J R)
+  let := HasDerivedCategory.standard (realizationModules J S)
+  let φ := (constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q)
+  obtain ⟨hlim, hcol, h⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+  obtain ⟨E, hobj, hmap, hadd, _⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+  let := hadd
+  obtain ⟨a, _⟩ := h E hobj hmap
+  exact ⟨hlim, hcol, a.isRightAdjoint⟩
 
 /-- Exactness of actual restriction.
 Source: Stacks 03DA (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
@@ -162,7 +171,17 @@ theorem moduleComparison_naturality {M N : ModuleCat.{max u v} R} (f : M ⟶ N) 
         moduleComparison J q N =
       moduleComparison J q M ≫
         (commutativeSiteConstantModuleFunctor J S).map ((ModuleCat.extendScalars q).map f) := by
-  sorry
+  apply ((adjunction J q).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left]
+  rw [Adjunction.homEquiv_naturality_right]
+  simp only [moduleComparison, Equiv.apply_symm_apply]
+  rw [← Category.assoc]
+  rw [← (commutativeSiteConstantModuleFunctor J R).map_comp]
+  rw [← (ModuleCat.extendRestrictScalarsAdj q).unit_naturality]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  congr 1
+  exact (restrictionIso J q).inv.naturality ((ModuleCat.extendScalars q).map f)
 
 /-- The ordinary comparison is an isomorphism, with the identity-on-tensors formula.
 Scalar-first tensors in Lean are the paper's m tensor s with factors interchanged.
@@ -214,7 +233,51 @@ its right adjoint with exact restriction. Transport along the canonical equivale
 of localization universes gives the independently sized source and target. -/
 theorem derivedRestriction_isRightAdjoint :
     (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint := by
-  sorry
+  let Ft := derivedRestriction.{u, v, dR, dS} J q
+  let QAR := @DerivedCategory.Q (realizationModules J R) _ _
+    (inferInstance : HasDerivedCategory.{dR} (realizationModules J R))
+  let QBS := @DerivedCategory.Q (realizationModules J S) _ _
+    (inferInstance : HasDerivedCategory.{dS} (realizationModules J S))
+  let hA := HasDerivedCategory.standard (realizationModules J R)
+  let hB := HasDerivedCategory.standard (realizationModules J S)
+  let := hA
+  let := hB
+  let QA := @DerivedCategory.Q _ _ _ hA
+  let QB := @DerivedCategory.Q _ _ _ hB
+  let WA := HomologicalComplex.quasiIso (realizationModules J R) (.up ℤ)
+  let WB := HomologicalComplex.quasiIso (realizationModules J S) (.up ℤ)
+  let eA := Localization.uniq QA (QAR) WA
+  let eB := Localization.uniq QB (QBS) WB
+  let F := @Functor.mapDerivedCategory _ _ _ hB _ _ _ hA
+    (restriction J q) _ _ _
+  have : F.IsRightAdjoint := by
+    let φ := (constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q)
+    obtain ⟨_, _, h⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+    obtain ⟨E, hobj, hmap, hadd, _, _, LF, ε, hLF, _⟩ :=
+      SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+    let := hadd
+    obtain ⟨_, _, hd⟩ := h E hobj hmap
+    obtain ⟨d, _⟩ := hd LF ε hLF
+    exact d.isRightAdjoint
+  let G := (eB.inverse ⋙ F) ⋙ eA.functor
+  have : G.IsRightAdjoint := inferInstance
+  let H := (restriction J q).mapHomologicalComplex (.up ℤ)
+  let e : QBS ⋙ G ≅ H ⋙ QAR :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Localization.compUniqInverse QB
+          (QBS) WB) F) eA.functor ≪≫
+      Functor.isoWhiskerRight
+        (@Functor.mapDerivedCategoryFactors _ _ _ hB _ _ _ hA
+          (restriction J q) _ _ _) eA.functor ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft H
+        (Localization.compUniqFunctor QA (QAR) WA)
+  let : Localization.Lifting QBS WB
+      (H ⋙ QAR) G := ⟨e⟩
+  let i : Ft ≅ G :=
+    Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
+  exact Functor.isRightAdjoint_of_iso i.symm
 
 /-- The sheaf scalar adjunction instance, supplied by the named existence theorem.
 Source: Stacks 07A6 (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
@@ -250,7 +313,43 @@ theorem moduleDerivedRestriction_isRightAdjoint
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
     (moduleDerivedRestriction.{wR, wS, r} f).IsRightAdjoint := by
-  sorry
+  let Ft := moduleDerivedRestriction.{wR, wS, r} f
+  let QAR := @DerivedCategory.Q (ModuleCat.{r} A) _ _
+    (inferInstance : HasDerivedCategory.{wR} (ModuleCat.{r} A))
+  let QBS := @DerivedCategory.Q (ModuleCat.{r} B) _ _
+    (inferInstance : HasDerivedCategory.{wS} (ModuleCat.{r} B))
+  let hA := HasDerivedCategory.standard (ModuleCat.{r} A)
+  let hB := HasDerivedCategory.standard (ModuleCat.{r} B)
+  let := hA
+  let := hB
+  let QA := @DerivedCategory.Q _ _ _ hA
+  let QB := @DerivedCategory.Q _ _ _ hB
+  let WA := HomologicalComplex.quasiIso (ModuleCat.{r} A) (.up ℤ)
+  let WB := HomologicalComplex.quasiIso (ModuleCat.{r} B) (.up ℤ)
+  let eA := Localization.uniq QA (QAR) WA
+  let eB := Localization.uniq QB (QBS) WB
+  let F := @Functor.mapDerivedCategory _ _ _ hB _ _ _ hA
+    (ModuleCat.restrictScalars f) _ _ _
+  have : F.IsRightAdjoint := ModuleCat.derivedRestrictScalars_isRightAdjoint f
+  let G := (eB.inverse ⋙ F) ⋙ eA.functor
+  have : G.IsRightAdjoint := inferInstance
+  let H := (ModuleCat.restrictScalars f).mapHomologicalComplex (.up ℤ)
+  let e : QBS ⋙ G ≅ H ⋙ QAR :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Localization.compUniqInverse QB
+          (QBS) WB) F) eA.functor ≪≫
+      Functor.isoWhiskerRight
+        (@Functor.mapDerivedCategoryFactors _ _ _ hB _ _ _ hA
+          (ModuleCat.restrictScalars f) _ _ _) eA.functor ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft H
+        (Localization.compUniqFunctor QA (QAR) WA)
+  let : Localization.Lifting QBS WB
+      (H ⋙ QAR) G := ⟨e⟩
+  let i : Ft ≅ G :=
+    Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
+  exact Functor.isRightAdjoint_of_iso i.symm
 
 /-- The module scalar adjunction instance, supplied by the named existence theorem.
 Source: Stacks 07A6 (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
@@ -367,7 +466,17 @@ theorem comparison_naturality
       comparison.{u, v, wR, wS, dR, dS} J q M ≫
         (commutativeSiteDerivedConstantModuleFunctor.{u, v, wS, dS} J S).map
           ((moduleDerivedExtension.{wR, wS, max u v} q).map f) := by
-  sorry
+  apply ((derivedAdjunction.{u, v, dR, dS} J q).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left]
+  rw [Adjunction.homEquiv_naturality_right]
+  simp only [comparison, Equiv.apply_symm_apply]
+  rw [← Category.assoc, ← Functor.map_comp]
+  rw [← (moduleDerivedAdjunction.{wR, wS, max u v} q).unit_naturality]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  congr 1
+  exact (derivedRestrictionIso J q).inv.naturality
+    ((moduleDerivedExtension.{wR, wS, max u v} q).map f)
 
 /-- The canonical derived comparison as a natural transformation.
 Source: Stacks 0D6D (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
@@ -448,7 +557,37 @@ theorem restrictionComposition_existsUnique :
     ∃! e : restriction J b ⋙ restriction J q ≅ restriction J (b.comp q),
       ∀ (M : realizationModules J T) (V : Cᵒᵖ) (x : M.val.obj V),
         (e.hom.app M).val.app V x = x := by
-  sorry
+  let α := ((sheafCompose J
+    (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map
+      ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q)))
+  let β := ((sheafCompose J
+    (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map
+      ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom b)))
+  let γ := ((sheafCompose J
+    (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map
+      ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom (b.comp q))))
+  have hγ : γ = α ≫ β := by
+    dsimp [γ, α, β]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+  let eM (M : realizationModules J T) :
+      (restriction J b ⋙ restriction J q).obj M ≅ (restriction J (b.comp q)).obj M :=
+    (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun V ↦
+        (ModuleCat.restrictScalarsComp'App (α.hom.app V).hom (β.hom.app V).hom
+          (γ.hom.app V).hom
+          (by simpa using congrArg (fun f ↦ (f.hom.app V).hom) hγ)
+          (M.val.obj V)).symm) (by intros; ext x; rfl))
+  let e := NatIso.ofComponents eM (by intros; ext V x; rfl)
+  refine ⟨e, ?_, ?_⟩
+  · dsimp only
+    intro M V x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    ext V x
+    exact he' M V x
 
 /-- The normalized ordinary restriction composition isomorphism.
 Source: Stacks 03DA (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/

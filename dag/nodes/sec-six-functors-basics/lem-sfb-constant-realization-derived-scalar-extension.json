@@ -37,6 +37,15 @@
  ],
  "proof": [
   {
+   "text": "Establish the actual ordinary and derived restriction adjunctions before constructing their mates. The ordinary exactness and tensor adjunction follow from lem-pur-sheaf-ring-derived-coefficient-adjunction and lem-pur-derived-change-of-rings. The sheaf derived adjunction follows by applying the coefficient theorem to the everywhere-defined homotopy derived pair. On ordinary modules use lem-weil-pbc-derived-module-scalar-adjunction. For independently chosen localization sizes, conjugate the common-size derived restriction by the canonical Localization.uniq equivalences; compare the composite factorization on cochain complexes and use localization full faithfulness to identify it with actual exact derived restriction. Naturality of both comparison maps follows by applying the adjunction Hom bijection, then naturality of the scalar unit and restriction comparison. The normalized constant-restriction comparison remains the original sheafification argument in Step 6. Ordinary restriction composition is the sectionwise identity: functoriality of constant ring sheafification identifies its scalar actions, and sectionwise extensionality proves its uniqueness.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-derived-module-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Construct the geometric morphism $p:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sets}$ without assuming a terminal object of $\\mathcal C$. Its inverse image sends a set $E$ to its constant sheaf; its direct image sends $F$ to the set of compatible families $(s_U\\in F(U))_U$. A map from the constant presheaf $E$ to $F$ is exactly a function from $E$ to this set of families. The sheafification universal property [def-weil-pbc-sheafification] therefore gives $p^{-1}\\dashv p_*$. The constant-presheaf functor preserves finite limits objectwise, and sheafification preserves them by [lem-weil-pbc-sheafification-sets-exact]; thus $p^{-1}$ preserves finite limits. Applied to ring and module operations this inverse image is precisely the constant ring and module sheaf construction [def-sf-site-constant-module-functor]. In particular the ringed morphism $p_R:(\\operatorname{Sh}(\\mathcal C),\\underline R)\\to(\\operatorname{Sets},R)$ has identity coefficient map, and its module pullback is $c_R$ on modules: the extra tensor factor is removed by $m\\otimes r\\mapsto rm$, with inverse $m\\mapsto m\\otimes1$ [def-pur-sheaf-tensor-product].",
    "uses": [
     "def-weil-pbc-sheafification",
@@ -133,12 +142,13 @@
   "lem-weil-pbc-localization-universal-property",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-pur-kflat-change-of-rings",
-  "lem-sfb-successive-derived-quotient-normalization"
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-derived-module-scalar-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent assembly of the constant-sheaf specialization of Tags 0G7E and 0D6D, using sites-modules Tags 0GMW and 03CY; units normalized by Tag 07A6."
+  "place": "Tags 06YY, 07A6, 0G7E and 0D6D; Z9 proved the ordinary and derived adjunction interfaces, mate naturality and ordinary restriction composition. Remaining constant-tensor and K-flat comparison steps retain the existing plan."
  },
  "mathlib_searches": [
   {
@@ -369,5 +379,15 @@
   "group": "Q73",
   "result": "pass",
   "note": "Item Lean matches node clause by clause: κ = adjunction mate is an iso in D(C,S̲), natural; (1) flat-term K-flat P (IsKFlatForTotalTensor, equivalent to Stacks K-flat on ModuleCat) gives c_R(P) IsKFlatIndependentCoefficients plus IsFlatOnSite termwise, representative isos and the square identifying κ with Q(complexComparison), with the termwise formula in moduleComparison_tensor; (2) unit compatibility via derivedRestrictionIso; (3) transitivity theorem for arbitrary T,b. No extra hypotheses; universes independent (coefficient max u v is the recorded convention). §1(B) repair of def-sfb-site-derived-constant-module-functor justified (RingCat vs forgotten CommRingCat constant sheaf), lean-only with note, transport theorem to the old functor. Derived/ordinary extension as left adjoint of restriction is canonical: the recorded adjunction interface has no functor declaration and quantifies over presentations. No hollow defs, all theorems sorry, docstrings with source and blueprint, statements verbatim, stmt_deps gained only landed nodes. nt_compile --json on both files: rc 0, no errors or warnings. Minor non-blocking: Nonempty transport theorem, possibly unused SiteCoveringAxioms import, possibly redundant PreservesSheafification theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261019T034418-L-430511",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
