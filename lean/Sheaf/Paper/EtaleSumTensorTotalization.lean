@@ -1,7 +1,10 @@
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
-import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+-/
+module
+
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open CategoryTheory.Functor
@@ -15,7 +18,16 @@ Source: literature/stacks-project/more-etale.tex, Tag 0GKF
 -/
 
 
+@[expose] public section
+
 set_option autoImplicit false
+set_option linter.unusedSimpArgs false
+set_option linter.unnecessarySeqFocus false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option linter.style.haveILetI false
+set_option linter.style.longLine false
+set_option linter.style.whitespace false
 
 universe u
 
@@ -112,7 +124,7 @@ Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homoto
 (blueprint: lem-pur-etale-sum-tensor-totalization). -/
 noncomputable def TotalTensorHomotopyRight :
     (HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) :=
-  ((Functor.postcompose₂.obj (L.mapHomotopyCategory (.up ℤ))).obj
+  ((CategoryTheory.Functor.postcompose₂.obj (L.mapHomotopyCategory (.up ℤ))).obj
     ((((whiskeringLeft₂ _).obj (𝟭 (HomotopyCategory C (.up ℤ)))).obj
       (R.mapHomotopyCategory (.up ℤ))).obj
       (F.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))))
@@ -142,6 +154,302 @@ noncomputable def TotalTensorClauses (Ψ : TotalTensorComparison F G L R)
     TotalTensorHomotopyComparison₁ F G L R Ψ ∧
     TotalTensorHomotopyComparison₂ F G L R Ψ ∧
     TotalTensorHomotopyIso F G L R Ψ
+
+private noncomputable def totalTensorMapX
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (n : ℤ) :
+    (HomologicalComplex.mapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ)).X n ⟶
+      L.obj ((HomologicalComplex.mapBifunctor P
+        ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ)).X n) :=
+  HomologicalComplex.mapBifunctorDesc (fun p q h ↦
+    (a (P.X p) (H.X q)).hom ≫ L.map
+      (HomologicalComplex.ιMapBifunctor P
+        ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p q n h))
+
+private theorem totalTensorMapX_ι
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (p q n : ℤ) (h : p + q = n) :
+    HomologicalComplex.ιMapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ) p q n h ≫ totalTensorMapX F G L R a P H n =
+      (a (P.X p) (H.X q)).hom ≫ L.map
+        (HomologicalComplex.ιMapBifunctor P
+          ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p q n h) :=
+  HomologicalComplex.ι_mapBifunctorDesc _ _ _ _
+
+private theorem totalTensorMapX_orZero
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (p q n : ℤ) :
+    HomologicalComplex.ιMapBifunctorOrZero ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ) p q n ≫ totalTensorMapX F G L R a P H n =
+      (a (P.X p) (H.X q)).hom ≫ L.map
+        (HomologicalComplex.ιMapBifunctorOrZero P
+          ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p q n) := by
+  by_cases h : p + q = n
+  · rw [HomologicalComplex.ιMapBifunctorOrZero_eq _ _ G (.up ℤ) p q n h,
+      HomologicalComplex.ιMapBifunctorOrZero_eq _ _ F (.up ℤ) p q n h]
+    exact totalTensorMapX_ι F G L R a P H p q n h
+  · rw [HomologicalComplex.ιMapBifunctorOrZero_eq_zero _ _ G (.up ℤ) p q n h,
+      HomologicalComplex.ιMapBifunctorOrZero_eq_zero _ _ F (.up ℤ) p q n h]
+    simp
+
+private noncomputable def totalTensorInvX
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (n : ℤ) :
+    L.obj ((HomologicalComplex.mapBifunctor P
+      ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ)).X n) ⟶
+    (HomologicalComplex.mapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ)).X n :=
+  Cofan.IsColimit.desc
+    (HomologicalComplex.mapBifunctor.isColimitMapCofan (G := L) (F := F) P
+      ((R.mapHomologicalComplex (.up ℤ)).obj H) n)
+    (fun x ↦ (a (P.X x.1.1) (H.X x.1.2)).inv ≫
+      HomologicalComplex.ιMapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+        H G (.up ℤ) x.1.1 x.1.2 n x.2)
+
+private theorem totalTensorInvX_ι
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (p q n : ℤ) (h : p + q = n) :
+    L.map (HomologicalComplex.ιMapBifunctor P
+      ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p q n h) ≫
+        totalTensorInvX F G L R a P H n =
+      (a (P.X p) (H.X q)).inv ≫
+        HomologicalComplex.ιMapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+          H G (.up ℤ) p q n h := by
+  exact Cofan.IsColimit.fac
+    (HomologicalComplex.mapBifunctor.isColimitMapCofan (G := L) (F := F) P
+      ((R.mapHomologicalComplex (.up ℤ)).obj H) n)
+    (fun x ↦ (a (P.X x.1.1) (H.X x.1.2)).inv ≫
+      HomologicalComplex.ιMapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+        H G (.up ℤ) x.1.1 x.1.2 n x.2) ⟨⟨p, q⟩, h⟩
+
+private theorem totalTensorMapX_isIso
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (n : ℤ) :
+    IsIso (totalTensorMapX F G L R a P H n) := by
+  refine ⟨totalTensorInvX F G L R a P H n, ?_, ?_⟩
+  · apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    rw [← Category.assoc, totalTensorMapX_ι, Category.assoc,
+      totalTensorInvX_ι, Iso.hom_inv_id_assoc, Category.comp_id]
+  · apply HomologicalComplex.mapBifunctor.hom_ext_of_map L
+    intro p q hpq
+    rw [← Category.assoc, totalTensorInvX_ι, Category.assoc,
+      totalTensorMapX_ι, Iso.inv_hom_id_assoc, Category.comp_id]
+
+private theorem totalTensorMapX_comm
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g)))
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (n m : ℤ) :
+    (HomologicalComplex.mapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ)).d n m ≫ totalTensorMapX F G L R a P H m =
+    totalTensorMapX F G L R a P H n ≫ L.map
+      ((HomologicalComplex.mapBifunctor P
+        ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ)).d n m) := by
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  rw [← Category.assoc, HomologicalComplex.mapBifunctor.d_eq,
+    Preadditive.comp_add, HomologicalComplex.mapBifunctor.ι_D₁,
+    HomologicalComplex.mapBifunctor.ι_D₂, Preadditive.add_comp,
+    ← Category.assoc _ (totalTensorMapX F G L R a P H n),
+    totalTensorMapX_ι F G L R a P H p q n hpq,
+    Category.assoc, ← CategoryTheory.Functor.map_comp,
+    HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
+    HomologicalComplex.mapBifunctor.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂,
+    CategoryTheory.Functor.map_add, Preadditive.comp_add]
+  congr 1
+  · rw [HomologicalComplex.mapBifunctor.d₁_eq' _ _ _ _ (by rfl),
+      HomologicalComplex.mapBifunctor.d₁_eq' _ _ _ _ (by rfl),
+      Linear.units_smul_comp, Category.assoc, totalTensorMapX_orZero]
+    convert congrArg (fun z ↦
+      (ComplexShape.ε₁ (.up ℤ) (.up ℤ) (.up ℤ) (p, q)) •
+        (z ≫ L.map (HomologicalComplex.ιMapBifunctorOrZero P
+          ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) (p + 1) q m)))
+        (ha (P.d p (p + 1)) (𝟙 (H.X q))) using 1 <;>
+      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+  · rw [HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
+      HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
+      Linear.units_smul_comp, Category.assoc, totalTensorMapX_orZero]
+    convert congrArg (fun z ↦
+      (ComplexShape.ε₂ (.up ℤ) (.up ℤ) (.up ℤ) (p, q)) •
+        (z ≫ L.map (HomologicalComplex.ιMapBifunctorOrZero P
+          ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p (q + 1) m)))
+        (ha (𝟙 (P.X p)) (H.d q (q + 1))) using 1 <;>
+      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+
+private noncomputable def totalTensorIso
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g))) :
+    TotalTensorComparison F G L R := by
+  intro P H
+  let f : HomologicalComplex.mapBifunctor
+      ((L.mapHomologicalComplex (.up ℤ)).obj P) H G (.up ℤ) ⟶
+      (L.mapHomologicalComplex (.up ℤ)).obj (HomologicalComplex.mapBifunctor P
+        ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ)) :=
+    { f := totalTensorMapX F G L R a P H
+      comm' n m _ := (totalTensorMapX_comm F G L R a ha P H n m).symm }
+  have (n : ℤ) : IsIso (f.f n) := totalTensorMapX_isIso F G L R a P H n
+  have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
+  exact asIso f
+
+private theorem totalTensorIso_normalization
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g))) :
+    TotalTensorSummandNormalization F G L R (totalTensorIso F G L R a ha)
+      (fun M N ↦ (a M N).hom) := by
+  intro P H p q n h
+  exact totalTensorMapX_ι F G L R a P H p q n h
+
+private theorem totalTensor_normalization_orZero
+    (Ψ : TotalTensorComparison F G L R)
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N)))
+    (hn : TotalTensorSummandNormalization F G L R Ψ a)
+    (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (p q n : ℤ) :
+    HomologicalComplex.ιMapBifunctorOrZero ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ) p q n ≫ (Ψ P H).hom.f n =
+      a (P.X p) (H.X q) ≫ L.map
+        (HomologicalComplex.ιMapBifunctorOrZero P
+          ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p q n) := by
+  by_cases h : p + q = n
+  · rw [HomologicalComplex.ιMapBifunctorOrZero_eq _ _ G (.up ℤ) p q n h,
+      HomologicalComplex.ιMapBifunctorOrZero_eq _ _ F (.up ℤ) p q n h]
+    exact hn P H p q n h
+  · rw [HomologicalComplex.ιMapBifunctorOrZero_eq_zero _ _ _ _ _ _ _ h,
+      HomologicalComplex.ιMapBifunctorOrZero_eq_zero _ _ _ _ _ _ _ h]
+    simp
+
+private theorem totalTensor_naturality
+    (Ψ : TotalTensorComparison F G L R)
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ a M' N' =
+        a M N ≫ L.map ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g)))
+    (hn : TotalTensorSummandNormalization F G L R Ψ a) :
+    TotalTensorNaturality F G L R Ψ := by
+  intro P P' H H' f g
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp only [HomologicalComplex.comp_f, CategoryTheory.Functor.mapHomologicalComplex_map_f]
+  rw [← Category.assoc, HomologicalComplex.ι_mapBifunctorMap,
+    Category.assoc, Category.assoc, hn P' H' p q n hpq,
+    ← Category.assoc _ ((Ψ P H).hom.f n), hn P H p q n hpq,
+    Category.assoc, ← CategoryTheory.Functor.map_comp,
+    HomologicalComplex.ι_mapBifunctorMap, CategoryTheory.Functor.map_comp]
+  convert congrArg (fun z ↦ z ≫ L.map
+    (HomologicalComplex.ιMapBifunctor P'
+      ((R.mapHomologicalComplex (.up ℤ)).obj H') F (.up ℤ) p q n hpq))
+      (ha (f.f p) (g.f q)) using 1 <;>
+    simp [CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+
+private theorem totalTensor_homotopies
+    (Ψ : TotalTensorComparison F G L R)
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ a M' N' =
+        a M N ≫ L.map ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g)))
+    (hn : TotalTensorSummandNormalization F G L R Ψ a) :
+    TotalTensorHomotopyComparison₁ F G L R Ψ ∧
+      TotalTensorHomotopyComparison₂ F G L R Ψ := by
+  constructor
+  · intro P P' H f f' h i j
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    dsimp only [HomologicalComplex.mapBifunctorMapHomotopy₁]
+    rw [← Category.assoc,
+      HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁
+        _ _ _ _ _ _ _ _ _ hpq rfl]
+    rw [Linear.units_smul_comp, Category.assoc, Category.assoc,
+      totalTensor_normalization_orZero F G L R Ψ a hn,
+      ← Category.assoc _ ((Ψ P H).hom.f i), hn P H p q i hpq,
+      Category.assoc, ← CategoryTheory.Functor.map_comp,
+      HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁
+        _ _ _ _ _ _ _ _ _ hpq rfl]
+    dsimp only [CategoryTheory.Functor.mapHomotopy]
+    simp only [HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app,
+      Category.id_comp, Category.comp_id]
+    simp only [Units.smul_def, CategoryTheory.Functor.map_zsmul, Preadditive.comp_zsmul,
+      Preadditive.zsmul_comp]
+    congr 1
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+    convert congrArg (fun z ↦ z ≫ L.map
+      (HomologicalComplex.ιMapBifunctorOrZero P'
+        ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ)
+        ((ComplexShape.up ℤ).prev p) q j)) (ha (h.hom p _) (𝟙 (H.X q))) using 1 <;>
+      simp [CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+  · intro P H H' g g' h i j
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    dsimp only [HomologicalComplex.mapBifunctorMapHomotopy₂]
+    rw [← Category.assoc,
+      HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₂
+        _ _ _ _ _ _ _ _ _ hpq rfl]
+    rw [Linear.units_smul_comp, Category.assoc, Category.assoc,
+      totalTensor_normalization_orZero F G L R Ψ a hn,
+      ← Category.assoc _ ((Ψ P H).hom.f i), hn P H p q i hpq,
+      Category.assoc, ← CategoryTheory.Functor.map_comp,
+      HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₂
+        _ _ _ _ _ _ _ _ _ hpq rfl]
+    dsimp only [CategoryTheory.Functor.mapHomotopy]
+    simp only [HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app,
+      Category.id_comp, Category.comp_id]
+    simp only [Units.smul_def, CategoryTheory.Functor.map_zsmul, Preadditive.comp_zsmul,
+      Preadditive.zsmul_comp]
+    congr 1
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+    convert congrArg (fun z ↦ z ≫ L.map
+      (HomologicalComplex.ιMapBifunctorOrZero P
+        ((R.mapHomologicalComplex (.up ℤ)).obj H') F (.up ℤ)
+        p ((ComplexShape.up ℤ).prev q) j)) (ha (𝟙 (P.X p)) (h.hom q _)) using 1 <;>
+      simp [CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+
+private theorem totalTensor_descent
+    (Ψ : TotalTensorComparison F G L R)
+    (hn : TotalTensorNaturality F G L R Ψ) :
+    TotalTensorHomotopyIso F G L R Ψ := by
+  let Q := HomotopyCategory.quotient D (.up ℤ)
+  refine ⟨NatIso.ofComponents (fun P ↦ NatIso.ofComponents
+    (fun H ↦ Q.mapIso (Ψ P.as H.as)) ?_) ?_, ?_⟩
+  · intro H H' g
+    obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient D (.up ℤ)).map_surjective g
+    change Q.map (HomologicalComplex.mapBifunctorMap
+      (𝟙 ((L.mapHomologicalComplex (.up ℤ)).obj P.as)) g G (.up ℤ)) ≫
+        Q.map (Ψ P.as H'.as).hom =
+      Q.map (Ψ P.as H.as).hom ≫ Q.map
+        ((L.mapHomologicalComplex (.up ℤ)).map (HomologicalComplex.mapBifunctorMap
+          (𝟙 P.as) ((R.mapHomologicalComplex (.up ℤ)).map g) F (.up ℤ)))
+    simpa only [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_comp] using
+      congrArg ((HomotopyCategory.quotient D (.up ℤ)).map)
+        (hn P.as P.as H.as H'.as (𝟙 P.as) g)
+  · intro P P' f
+    apply NatTrans.ext
+    funext H
+    obtain ⟨f, rfl⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective f
+    change Q.map (HomologicalComplex.mapBifunctorMap
+      ((L.mapHomologicalComplex (.up ℤ)).map f) (𝟙 H.as) G (.up ℤ)) ≫
+        Q.map (Ψ P'.as H.as).hom =
+      Q.map (Ψ P.as H.as).hom ≫ Q.map
+        ((L.mapHomologicalComplex (.up ℤ)).map (HomologicalComplex.mapBifunctorMap
+          f (𝟙 ((R.mapHomologicalComplex (.up ℤ)).obj H.as)) F (.up ℤ)))
+    simpa only [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_comp] using
+      congrArg ((HomotopyCategory.quotient D (.up ℤ)).map)
+        (hn P.as P'.as H.as H.as f (𝟙 H.as))
+  · intro P H
+    rfl
 
 end GenericHomotopies
 
@@ -282,6 +590,38 @@ theorem etale_sum_tensor_totalization
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] :
     ∃ Ψ : EtaleSumTensorComparison A u hu,
       EtaleSumPreservesDirectSums A u hu ∧ EtaleSumTensorClauses A u hu Ψ := by
-  sorry
+  let L := Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu
+  let R := Etale.upperStar (ModuleCat.{u + 1} A) u
+  let F := curriedTensor (EtaleModuleSheaf U A)
+  let G := curriedTensor (EtaleModuleSheaf X A)
+  have : PreservesColimitsOfSize.{0, 0} L :=
+    (Etale.etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) u hu).leftAdjoint_preservesColimits
+  let a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)) :=
+    fun M N ↦ (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M N).symm
+  have ha : ∀ {M M' : EtaleModuleSheaf U A} {N N' : EtaleModuleSheaf X A}
+      (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g)) := by
+    intro M M' N N' f g
+    change (L.map f ⊗ₘ g) ≫
+      (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M' N').inv =
+      (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M N).inv ≫
+        L.map (f ⊗ₘ R.map g)
+    rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
+    exact (Etale.etaleLowerShriekTensorIso_hom_naturality
+      (ModuleCat.{u + 1} A) hu f g).symm
+  let Ψ := totalTensorIso F G L R a ha
+  have hn := totalTensorIso_normalization F G L R a ha
+  have hnat := totalTensor_naturality F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
+  have hh := totalTensor_homotopies F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
+  refine ⟨Ψ, ?_, hn, hnat, hh.1, hh.2, totalTensor_descent F G L R Ψ hnat⟩
+  letI : PreservesColimitsOfSize.{u + 1, u + 1}
+      (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu) :=
+    (Etale.etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) u hu).leftAdjoint_preservesColimits
+  intro β
+  infer_instance
 
 end AlgebraicGeometry
