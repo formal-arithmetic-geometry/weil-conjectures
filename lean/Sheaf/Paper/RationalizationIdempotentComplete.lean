@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 import WeilConjectures.CategoryTheory.Idempotents.TStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Sheaf.Paper.ConstructibleTruncations
-import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.Paper.ConstructibleHeart
 
 /-!
 # Idempotent completeness of rationalized constructible complexes
@@ -41,9 +40,10 @@ Source: Weil conjectures blueprint,
 node order 2114 (blueprint: lem-weil-rationalization-idempotent-complete).
 
 Proof: 1. Put `𝒯` equal to the raw rationalized category supplied by
-`def-weil-rationalization-karoubi`. The rational-stage bounded t-structure, including its
-truncations, natural maps, and distinguished truncation triangles, is supplied by the
-rational assertion of `prop-constructible-truncations`.
+`def-weil-rationalization-karoubi`. The standard-t-structure assertion of
+`def-weil-constructible-heart`, as stated by
+`rationalConstructibleStandardTStructure_existsUnique`, supplies a t-structure on this
+precise category and its objectwise boundedness. Only these two witnesses are needed.
 2. Apply `thm-weil-karoubian-bounded-t` to this triangulated category and bounded t-structure.
 Its idempotent-completeness assertion splits every idempotent, while its equivalence assertion
 says that the canonical `toKaroubi` functor is an exact equivalence. By
@@ -61,6 +61,9 @@ theorem rationalization_idempotent_complete
     IsIdempotentComplete (rationalConstructibleCategory D l hl E Y) ∧
       (toKaroubi (rationalConstructibleCategory D l hl E Y)).IsEquivalence ∧
         (toKaroubi (rationalConstructibleCategory D l hl E Y)).IsTriangulated := by
-  sorry
+  obtain ⟨t, ⟨_, ht⟩, _⟩ :=
+    rationalConstructibleStandardTStructure_existsUnique D l hl E Y
+  exact ⟨t.isIdempotentComplete_of_bounded ht,
+    t.isEquivalence_toKaroubi_and_isTriangulated_of_bounded ht⟩
 
 end WeilConjectures

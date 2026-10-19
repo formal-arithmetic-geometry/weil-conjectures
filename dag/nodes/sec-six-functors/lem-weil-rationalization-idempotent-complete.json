@@ -22,40 +22,40 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal T=D^b_c(Y,E)$. By [def-weil-rationalization-karoubi], this is the triangulated raw scalar localization of the derived-complete integral category, without formally adjoining any retracts. Apply [prop-constructible-truncations] with the fixed finite-field datum, the given finite extension $E\\subset\\Qlb$, the finite-type $k$-scheme $Y$, and $\\Lambda=E$. Its asserted truncation functors, natural maps and distinguished truncation triangles give a bounded t-structure on precisely $\\mathcal T$. Only its rational-stage bounded-t-structure assertion is used; no assertion about levelwise integral truncations or a comparison with a different coefficient category is needed.",
+   "text": "Put $\\mathcal T=D^b_c(Y,E)$, the triangulated raw scalar localization of [def-weil-rationalization-karoubi]. Apply the rational standard-t-structure assertion of [def-weil-constructible-heart], whose legacy Lean declaration WeilConjectures.rationalConstructibleStandardTStructure_existsUnique is on exactly rationalConstructibleCategory D l hl E Y. It supplies a t-structure t together with objectwise boundedness; retain only these witnesses. The finite-field datum, coefficient field, and finite-type scheme hypotheses are exactly those in the present statement. Unlike the current intrinsic prop-constructible-truncations interface, this declaration needs no comparison of coefficient categories or replacement of E by a small model.",
    "uses": [
     "def-weil-rationalization-karoubi",
-    "prop-constructible-truncations"
+    "def-weil-constructible-heart"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
-    "place": "## Proof, opening bounded-t-structure assertion; expanded with the rational-stage statement of prop-constructible-truncations (order 2432)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.proof.md",
+    "place": "Opening rationalized standard bounded t-structure assertion, using the standard-t-structure clause of def-weil-constructible-heart"
    }
   },
   {
-   "text": "Apply [thm-weil-karoubian-bounded-t] to the triangulated category $\\mathcal T$ and the bounded t-structure of step 1. This theorem supplies both assertions: every idempotent in $\\mathcal T$ splits, and the canonical fully faithful functor $\\mathcal T\\to\\Kar(\\mathcal T)$ is an exact equivalence. By [def-weil-karoubi-envelope] that functor sends $K$ to $(K,\\operatorname{id}_K)$ and acts identically on morphisms, so it is exactly the functor in the statement. In particular the conclusion concerns the raw rationalization itself, rather than merely the idempotent completeness of a formally enlarged category.",
+   "text": "Apply the two declarations of [thm-weil-karoubian-bounded-t] to t and its objectwise boundedness. TStructure.isIdempotentComplete_of_bounded gives splitting of all idempotents; TStructure.isEquivalence_toKaroubi_and_isTriangulated_of_bounded gives equivalence and exactness of the canonical functor of [def-weil-karoubi-envelope]. Combine these assertions as the required conjunction. The input and output are the original raw rationalized category, with its original triangulation.",
    "uses": [
     "thm-weil-karoubian-bounded-t",
     "def-weil-karoubi-envelope"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
-    "place": "## Proof, final bounded-t-structure argument and conclusion"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.proof.md",
+    "place": "Final sentence: the same conclusion follows from the bounded t-structure alone"
    }
   }
  ],
  "proof_deps": [
   "def-weil-rationalization-karoubi",
-  "prop-constructible-truncations",
+  "def-weil-constructible-heart",
   "thm-weil-karoubian-bounded-t",
   "def-weil-karoubi-envelope"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
-  "place": "## Proof, bounded-t-structure route, with the finite-type setting inherited from the enclosing sk-prop-sf-biduality-general unit made explicit"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.proof.md",
+  "place": "Opening bounded-standard-t-structure assertion and final bounded-t Karoubian alternative; K6 uses the existing legacy standard-t-structure declaration of def-weil-constructible-heart"
  },
  "mathlib_searches": [
   {
@@ -193,7 +193,6 @@
   ]
  },
  "tool_uses": [
-  "prop-constructible-truncations",
   "thm-weil-karoubian-bounded-t"
  ],
  "reviewed": {
@@ -221,5 +220,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Reviewed immutable files, all statement dependencies, source, exact declarations, hypotheses, conclusions, universes, edge cases, and report sections. Signature matches verbatim. scompile reproduced clean sandbox and library compiles. No faults found; review.md written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T093517-L-2320630",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
