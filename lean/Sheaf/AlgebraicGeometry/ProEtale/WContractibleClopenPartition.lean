@@ -7,13 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.RingTheory.ProEtale.WContractible
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
-import Sheaf.RingTheory.WContractibleGeometricCriterion
+import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 /-!
 # Clopen partitions refining coverings of w-contractible affine schemes
@@ -29,7 +23,7 @@ set_option autoImplicit false
 
 universe v u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
@@ -75,6 +69,80 @@ theorem proetale_wContractible_clopen_partition
       iSup W = ⊤ ∧
       ∃ (i : Fin m → I) (g : ∀ k : Fin m, (W k).toScheme ⟶ (V (i k)).left),
         ∀ k : Fin m, g k ≫ (a (i k)).left = (W k).ι := by
-  sorry
+  classical
+  have hc : Presieve.ofArrows (fun i ↦ (V i).left) (fun i ↦ (a i).left) ∈
+      proetalePrecoverage (Spec (.of D)) := by
+    rw [ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hcover
+    exact hcover
+  let E : PreZeroHypercover (Spec (.of D)) :=
+    ⟨I, fun i ↦ (V i).left, fun i ↦ (a i).left⟩
+  have : QuasiCompactCover E := presieve₀_mem_qcPrecoverage_iff.mp hc.1
+  obtain ⟨n, b, U, hU, hcov⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact E
+    (U := ⊤) isCompact_univ
+  let Y (k : Fin n) : Scheme.{u} := (U k).toScheme
+  have (k : Fin n) : IsAffine (Y k) := hU k
+  let p (k : Fin n) : Y k ⟶ Spec (.of D) := (U k).ι ≫ (a (b k)).left
+  have (k : Fin n) : WeaklyEtale ((a (b k)).left) := by
+    exact (ofArrows_mem_precoverage_iff _).mp hc.2 |>.2 (b k)
+  have (k : Fin n) : WeaklyEtale (p k) := inferInstance
+  have : WeaklyEtale (Sigma.desc p) := IsZariskiLocalAtSource.sigmaDesc fun k ↦ inferInstance
+  have : Surjective (Sigma.desc p) := by
+    apply Surjective.sigmaDesc_of_union_range_eq_univ
+    simp only [TopologicalSpace.Opens.coe_top] at hcov
+    convert hcov using 1
+    ext x
+    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_image]
+    constructor
+    · rintro ⟨k, y, rfl⟩
+      exact ⟨k, y.1, y.2, rfl⟩
+    · rintro ⟨k, y, hy, rfl⟩
+      exact ⟨k, ⟨y, hy⟩, rfl⟩
+  obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isWContractibleRing (Sigma.desc p)
+  let O (k : Fin n) : (Spec (.of D)).Opens := s ⁻¹ᵁ (Sigma.ι Y k).opensRange
+  have hdis : Pairwise (fun j k : Fin n ↦ Disjoint (O j) (O k)) := by
+    intro j k hjk T hj hk x hx
+    exact (disjoint_opensRange_sigmaι Y j k hjk).le_bot ⟨hj hx, hk hx⟩
+  have hO : ∀ x : Spec (.of D), ∃ k, x ∈ O k := by
+    intro x
+    obtain ⟨k, y, hy⟩ := (sigmaOpenCover Y).exists_eq (s x)
+    exact ⟨k, y, hy⟩
+  have hclosed (k : Fin n) : IsClosed (O k : Set (Spec (.of D))) := by
+    rw [← isOpen_compl_iff]
+    have heq : (O k : Set (Spec (.of D)))ᶜ = ⋃ j : {j : Fin n // j ≠ k}, (O j.1 : Set _) := by
+      ext x
+      simp only [Set.mem_compl_iff, Set.mem_iUnion]
+      constructor
+      · intro hx
+        obtain ⟨j, hj⟩ := hO x
+        exact ⟨⟨j, fun hjk ↦ hx (hjk ▸ hj)⟩, hj⟩
+      · rintro ⟨j, hj⟩ hk
+        exact (hdis j.2).le_bot ⟨hj, hk⟩
+    rw [heq]
+    exact isOpen_iUnion fun j ↦ (O j.1).isOpen
+  have hfactor (k : Fin n) : Set.range ((O k).ι ≫ s).base ⊆
+      Set.range (Sigma.ι Y k).base := by
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Opens.range_ι]
+    rintro _ ⟨x, hx, rfl⟩
+    exact hx
+  let t (k : Fin n) : (O k).toScheme ⟶ Y k :=
+    IsOpenImmersion.lift (Sigma.ι Y k) ((O k).ι ≫ s) (hfactor k)
+  have ht (k : Fin n) : t k ≫ p k = (O k).ι := by
+    rw [← Sigma.ι_desc p k, ← Category.assoc, IsOpenImmersion.lift_fac,
+      Category.assoc, hs, Category.comp_id]
+  let K := {k : Fin n // (O k : Set (Spec (.of D))).Nonempty}
+  let e : Fin (Nat.card K) ≃ K := (Finite.equivFin K).symm
+  refine ⟨Nat.card K, fun k ↦ O (e k).1, fun k ↦ hclosed _, fun k ↦ (e k).2, ?_, ?_,
+    fun k ↦ b (e k).1, fun k ↦ t (e k).1 ≫ (U (e k).1).ι, ?_⟩
+  · intro j k hjk
+    apply hdis
+    intro h
+    exact hjk (e.injective (Subtype.ext h))
+  · apply top_unique
+    intro x _
+    obtain ⟨k, hk⟩ := hO x
+    obtain ⟨j, hj⟩ := e.surjective ⟨k, x, hk⟩
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨j, by simpa only [hj] using hk⟩
+  · intro k
+    exact (Category.assoc _ _ _).trans (ht _)
 
 end AlgebraicGeometry.Scheme

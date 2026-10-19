@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "If $U=\\varnothing$, the empty partition, with no indices or maps to choose, proves the assertion. Assume henceforth that $U$ is nonempty. By [sk-def-pe-site], the given covering in $X_{\\mathrm{proét}}$ is an fpqc/pro-etale covering, so applying its finite affine refinement condition (equivalently [def-weil-pbc-proetale-covering]) to the affine open $W=U$ gives finitely many indices $i_1,\\ldots,i_r$ and affine open subschemes $V_k\\subset U_{i_k}$ whose images cover $U$. Here the fibre product $U_i\\times_U U$ appearing in [sk-def-pe-site] is identified with $U_i$ by its first projection, whose inverse is the pair $(\\operatorname{id}_{U_i},f_i)$, where $f_i:U_i\\to U$ is the given covering arrow; hence its affine opens are affine opens of $U_i$. The same covering definition says that every arrow $U_i\\to U$ is weakly étale. There is no assumption that the original index set $I$ is finite, and repeated selected indices are harmless.",
+   "text": "Map the covering presieve to schemes using ProEt.mem_precoverage_iff and Presieve.map_ofArrows. The quasi-compact half gives QuasiCompactCover for the original family, without shrinking its arbitrary-universe indexing type. Apply QuasiCompactCover.exists_isAffineOpen_of_isCompact to the entire affine target to obtain Fin n, selected indices b, affine opens U k and the equality of the union of their images with the target. The weakly etale half gives weak etaleness of each selected covering arrow.",
    "uses": [
     "sk-def-pe-site",
     "def-weil-pbc-proetale-covering"
@@ -29,53 +29,51 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2)"
    }
   },
   {
-   "text": "By [lem-weil-pbc-scheme-coproduct-family] form $V=\\coprod_{k=1}^r V_k$ with its open-and-closed, pairwise disjoint components and the unique map $p:V\\to U$ restricting to the given $V_k\\to U$. By clause (4) of [lem-weil-pbc-affine-morphism-permanence], this finite disjoint union of affine schemes is affine, so write $V=\\operatorname{Spec}E$. The map $p$ is surjective: every point of $U$ is in the image of one of the $V_k\\to U$, and each of these maps factors through $p$.",
+   "text": "Set Y k = (U k).toScheme and p k equal to its inclusion followed by the selected covering arrow. Form the finite coproduct of the Y k. It is affine. Mathlib open-immersion and composition instances give WeaklyEtale (p k), and IsZariskiLocalAtSource.sigmaDesc gives WeaklyEtale (Sigma.desc p). The image equality from step 1, after identifying each image with the range of p k, gives surjectivity by Surjective.sigmaDesc_of_union_range_eq_univ. These are exactly the finite-affine-cover consequences of the site definition.",
    "uses": [
+    "sk-def-pe-site",
     "lem-weil-pbc-scheme-coproduct-family",
     "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2)"
    }
   },
   {
-   "text": "Each inclusion $V_k\\hookrightarrow U_{i_k}$ is étale by [lem-weil-pbc-open-immersion-etale], hence weakly étale by clause (1) of [det-pe-morphisms-etale-comparison]. Its composite $V_k\\to U$ is weakly étale by composition stability in [sk-lem-pe-weakly-etale-stability]. The components $V_k$ form a Zariski open cover of $V$, so source locality in the same stability statement implies that $p:V\\to U$ is weakly étale. Apply clause (4) of [det-pe-morphisms-etale-comparison] to these entire affine charts: the ring map $D\\to E$ and its multiplication $E\\otimes_D E\\to E$ are flat. Thus $D\\to E$ is weakly étale in the ring sense and is flat. Since $p$ is surjective, [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $D\\to E$ faithfully flat.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "det-pe-morphisms-etale-comparison",
-    "sk-lem-pe-weakly-etale-stability",
-    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
-   }
-  },
-  {
-   "text": "The ring $D$ is w-contractible by hypothesis, and step 3 verifies both faithful flatness and weak étaleness of $D\\to E$. Apply [det-pe-wcb-split-cover] to obtain a section $s:U\\to V$ satisfying $p\\circ s=\\operatorname{id}_U$.",
+   "text": "Use AlgebraicGeometry.exists_comp_eq_id_of_isWContractibleRing from WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible, the already proved scheme-level implementation of det-pe-wcb-split-cover, to obtain s with s ≫ Sigma.desc p = identity. Its implementation identifies the affine source with its spectrum, converts weak etaleness and surjectivity into a faithfully flat weakly etale ring map, refines to an ind-etale algebra and applies IsWContractibleRing.exists_retraction. Thus it follows the required unit split-cover route and avoids importing the separate bundled comparison and stability theorems.",
    "uses": [
     "det-pe-wcb-split-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2)"
    }
   },
   {
-   "text": "For each component set $U'_k=s^{-1}(V_k)$ with its open subscheme structure. Continuity of $s$ and closedness of $V_k$ make $U'_k$ closed as well as open. Because the component subsets are pairwise disjoint with union $V$, their inverse images are pairwise disjoint with union $U$. On $U'_k$ the map on spaces of $s$ lands in $V_k$, and restricting its structure-sheaf map to these open subschemes gives $s_k:U'_k\\to V_k$; the maps on stalks are those of $s$, so they remain local. Thus $s_k$ is a scheme morphism; define $g_k$ as $s_k$ followed by $V_k\\hookrightarrow U_{i_k}$. Its composite with $U_{i_k}\\to U$ is $(p\\circ s)|_{U'_k}$, the inclusion $U'_k\\hookrightarrow U$, so it is a $U$-morphism. Discard the empty inverse images and reindex the remaining finite family. This gives exactly the asserted partition and maps.",
+   "text": "Let O k be the inverse image under s of the open range of the kth coprojection. The sigma open cover shows that these opens cover; disjoint_opensRange_sigmaι shows that they are pairwise disjoint. For each k, the complement of O k is the union of O j over j ≠ k: covering proves one containment and disjointness the other. It is open, so O k is closed. This works also for empty source and empty indexing type.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2)"
+   }
+  },
+  {
+   "text": "The range of (O k).ι ≫ s lies in the kth component. IsOpenImmersion.lift therefore gives t k into Y k. The lift equation, Sigma.ι_desc and the section equation give t k ≫ p k = (O k).ι. Restrict the finite indexing type to K = {k // (O k).Nonempty}, and use (Finite.equivFin K).symm to index it by Fin (Nat.card K). Disjointness follows from injectivity, and covering follows by choosing the original piece containing each point, which is necessarily nonempty. Compose t with the selected open inclusion to obtain the desired maps to the original covering members. Associativity proves their required equation. If the target is empty, K is empty and Nat.card K = 0.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2)"
    }
   }
  ],
@@ -84,16 +82,12 @@
   "def-weil-pbc-proetale-covering",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-open-immersion-etale",
-  "det-pe-morphisms-etale-comparison",
-  "sk-lem-pe-weakly-etale-stability",
-  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
   "det-pe-wcb-split-cover"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-clopen-partition.proof.md",
-  "place": "Both proof paragraphs, checked against Stacks Tag 098F (lemma-w-contractible-proetale-cover), forward direction; supporting facts expanded into explicit cited steps."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2); Lean construction by A9 using the existing scheme-level split-cover theorem in WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible."
  },
  "mathlib_searches": [
   {
@@ -200,10 +194,7 @@
    }
   ]
  },
- "tool_uses": [
-  "sk-lem-pe-weakly-etale-stability",
-  "det-pe-morphisms-etale-comparison"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -241,5 +232,15 @@
   "group": "Q80",
   "result": "pass",
   "note": "Read node, 5 stmt deps, Stacks 098F (proetale.tex:2781), the module and report (Worker report + Second reading by Q80 present). Lean matches clause by clause: X : Scheme.{u}; Spec (.of D) with [IsWContractibleRing D] (side WContractible.lean:40); object via WeaklyEtale f / ProEt.mk f; covering via the recorded Mathlib ProEt.precoverage (propQC WeaklyEtale), I : Type v with no finiteness or nonemptiness; clopen pieces as Opens + IsClosed, pairwise disjoint, iSup = top; U-morphisms via g k ≫ (a (i k)).left = (W k).ι. Nonempty-pieces clause is equivalent (node proof discards empties). Empty U gives m=0. No hollow defs, only sorry, docstrings and source place OK, no extra assumptions, universes bound. Statement field verbatim (scripted check). nt_compile.py --json on the snapshot file: rc 0, no errors or warnings, 2.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-91b99",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261019T002501-L-2140069",
+  "kind": "interface",
+  "note": "independent cc review: delivered proof (axioms propext/choice/Quot.sound, 3 importers compiled against delivered module) vs live module, node diff (proof/proof_deps/proof_origin/tool_uses only), unit sk-thm-pe-weakly-contractible-basis route (realized empty; stability/comparison were tool_uses; split via exists_comp_eq_id_of_isWContractibleRing = indEtale refinement + IsWContractibleRing.exists_retraction)"
  }
 }
