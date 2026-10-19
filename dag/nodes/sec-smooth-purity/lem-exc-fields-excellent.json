@@ -23,32 +23,19 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary field $k$. By [lem-weil-pbc-field-regular-ring], $k$ is Noetherian and regular, its only prime ideal is $(0)$, and $k_{(0)}\\cong k$. Under this identification the maximal ideal is zero and the residue field is $k$. By [def-weil-pbc-adic-completion], its completion is also $k$: for $n\\ge1$ all quotients $k/(0)^n$ are $k$ and all transition maps are identities, so a compatible sequence is constant. The possible $n=0$ coordinate is uniquely determined. This identifies the canonical completion homomorphism with $\\operatorname{id}_k$.",
+   "text": "A field k is Noetherian and local with maximal ideal zero. Mathlib supplies these instances and IsAdicComplete.bot; rewrite using IsLocalRing.maximalIdeal_eq_bot to obtain maximal-ideal-adic completeness [def-weil-pbc-adically-complete-ring]. Apply [lem-weil-pbc-complete-local-g-ring] to conclude IsGRing k.",
    "uses": [
-    "lem-weil-pbc-field-regular-ring",
-    "def-weil-pbc-adic-completion"
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-complete-local-g-ring"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PX (proposition-ubiquity-G-ring), field case; elementary zero-adic completion calculation from the definition."
+    "place": "Tags 07PS and 07PX; specialize the complete-local G-ring theorem using the elementary zero-adic completeness calculation."
    }
   },
   {
-   "text": "The identity map of $k$ is flat in [def-weil-pbc-flat-ring-map]: the mutually inverse maps $N\\otimes_k k\\to N$, $x\\otimes a\\mapsto ax$, and $N\\to N\\otimes_k k$, $x\\mapsto x\\otimes1$, identify tensoring any injective map with that same map. Its unique fibre is $k\\otimes_k k\\cong k$, by the analogous multiplication and unit maps. For every finite purely inseparable extension $k'/k$, the further tensor product $k'\\otimes_k k\\cong k'$ is a regular Noetherian ring by [lem-weil-pbc-field-regular-ring] applied to the field $k'$. Thus the fibre is geometrically regular by [def-weil-pbc-g-ring], without assuming that $k$ is perfect. The completion map in step 1 is therefore regular, and that definition, together with the Noetherianity in step 1 and the fact that $(0)$ is the only prime, proves that $k$ is a G-ring.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-field-regular-ring",
-    "def-weil-pbc-g-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PX (proposition-ubiquity-G-ring), proof of (1), with the identity-map, fibre and geometric-regularity verifications expanded."
-   }
-  },
-  {
-   "text": "Apply [lem-exc-j2-residue-field-criterion] to $R=k$, which is Noetherian by step 1. The only prime is $(0)$ and its residue field is $k$. Given any finite purely inseparable extension $L/k$, take the $k$-subalgebra $B=L\\subseteq L$. It is finite as a $k$-module by the finite-dimensionality assumption in [def-weil-pbc-finite-purely-inseparable-extension]. Its fractions exhaust $L$, since every $x\\in L$ is $x/1$. By [lem-weil-pbc-field-regular-ring] every localization of the field $L$ is regular local. Its spectrum is nonempty (the prime $(0)$ exists), so $U=\\operatorname{Spec}L$ is the required nonempty open regular subset. Every hypothesis of the criterion is now satisfied; its conclusion is exactly the openness of the regular locus of every finite type $k$-algebra, the J-2 condition.",
+   "text": "Apply [lem-exc-j2-residue-field-criterion] to k. Each prime p of k equals zero and is maximal, so the residue map k to kappa(p) is surjective; hence kappa(p) is module-finite over k. For each finite purely inseparable extension L/kappa(p), transitivity makes L module-finite over k [def-weil-pbc-finite-purely-inseparable-extension]. Take B to be the top k-subalgebra of L, with its canonical algebra equivalence to L. This equivalence transfers module finiteness and regularity [lem-weil-pbc-field-regular-ring]. Every x in L is x/1 with numerator and denominator in B. The entire spectrum of B is open and nonempty (its zero ideal is prime), and every prime localization is regular local. These are precisely the finite-model hypotheses of the criterion. It follows that the regular locus of every finite type k-algebra is open.",
    "uses": [
     "lem-exc-j2-residue-field-criterion",
     "def-weil-pbc-finite-purely-inseparable-extension",
@@ -57,49 +44,46 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PJ (proposition-ubiquity-J-2), proof of (1), checking condition (4) of Tag 07PC (lemma-J-2)."
+    "place": "Tag 07PJ, field case, checking condition (4) of Tag 07PC with the finite extension itself."
    }
   },
   {
-   "text": "Let $A$ be any finite type $k$-algebra. By [def-weil-pbc-finite-type-algebra], choose a surjective $k$-algebra map $\\pi:P=k[x_1,\\ldots,x_n]\\to A$, with kernel $I$. Pullback of ideals gives an order-preserving bijection between prime ideals of $A$ and primes of $P$ containing $I$: its inverse sends $Q\\supseteq I$ to $\\pi(Q)$, which is an ideal by surjectivity; $A/\\pi(Q)\\cong P/Q$ via $\\pi$, so primality is equivalent, and $\\pi^{-1}(\\pi(Q))=Q$ because $I\\subseteq Q$. For primes $\\mathfrak p\\subseteq\\mathfrak q$ of $A$ write $\\mathfrak p',\\mathfrak q'$ for their pullbacks. Every finite chain between them pulls back to a strict chain below $\\mathfrak q'$, hence has length at most $\\operatorname{ht}(\\mathfrak q')\\le n$ by [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference] and its definition of height. Saturation is preserved: any prime strictly between two pulled-back primes contains $\\mathfrak p'\\supseteq I$, so descends to an intermediate prime of $A$. That theorem now says that every saturated chain from $\\mathfrak p$ to $\\mathfrak q$ has the same length $\\operatorname{ht}(\\mathfrak q')-\\operatorname{ht}(\\mathfrak p')$. Thus every finite type $k$-algebra is catenary, including the finite-chain bound required in [def-exc-excellent-ring]; if $A=0$ there are no prime pairs and the assertion is vacuous. This proves universal catenarity of $k$.",
+   "text": "Mathlib supplies regularity of a field [lem-weil-pbc-field-regular-ring]. Apply [lem-trf-regular-ring-universally-catenary] to conclude that k is universally catenary, including finite bounds and equality of saturated-chain lengths in every prime interval of every finite type k-algebra.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
-    "def-exc-excellent-ring"
+    "lem-weil-pbc-field-regular-ring",
+    "lem-trf-regular-ring-universally-catenary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00OR (lemma-dimension-height-polynomial-ring); the elementary passage along a surjective polynomial presentation is written out. This supplies the universal-catenarity input of Tag 07QW without a new Cohen-Macaulay lemma."
+    "place": "Tags 00NQ and 00NM: regular rings are Cohen-Macaulay and hence universally catenary; this is the regular-ring route cited in 07QW."
    }
   },
   {
-   "text": "The arbitrary field $k$ is Noetherian by step 1, a G-ring by step 2, J-2 by step 3 and universally catenary by step 4. These are exactly the conditions defining excellence in [def-exc-excellent-ring]. Therefore every field is excellent.",
+   "text": "Noetherianity, the G-ring condition from step 1, and J-2 from step 2 give quasi-excellence. Together with universal catenarity from step 3 this is exactly excellence [def-exc-excellent-ring].",
    "uses": [
     "def-exc-excellent-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QT (definition-excellent) and Tag 07QW (proposition-ubiquity-excellent), clause (1)."
+    "place": "Tags 07QT and 07QW(1)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-field-regular-ring",
-  "def-weil-pbc-adic-completion",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-g-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-complete-local-g-ring",
   "lem-exc-j2-residue-field-criterion",
   "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-trf-regular-ring-universally-catenary",
   "def-exc-excellent-ring"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07QW (proposition-ubiquity-excellent), clause (1): its G-ring and J-2 route is expanded using 07PX, 07PJ and 07PC. For universal catenarity, agent assembly from the existing 00OR polynomial-chain statement and the explicit surjective-presentation prime correspondence, rather than introducing the more general 00NM Cohen-Macaulay theorem cited in 07QW."
+  "place": "Assembly following 07QW(1): J-2 by the field finite model of 07PJ, universal catenarity by the regular-ring consequence of 00NQ/00NM cited in 07QW, and the G-ring clause by the already proved complete-local G-ring theorem 07PS applied to the zero-adically complete field. No unit statement or realized step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -272,9 +256,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -312,5 +294,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261019T093356-L-2302548",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

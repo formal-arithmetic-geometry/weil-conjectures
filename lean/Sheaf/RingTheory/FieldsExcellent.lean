@@ -6,14 +6,9 @@ Authors: SHEAF group Q40
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
+import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
+import Sheaf.RingTheory.RegularRingUniversallyCatenary
 
 /-!
 # Excellence of fields
@@ -30,35 +25,41 @@ universe u
 
 /-- Every field, regarded as a commutative ring, is excellent.
 
-Source: Stacks Project, More on Algebra, Tags 07PX, 07PJ, 07QT, and 07QW, clause (1);
-Algebra, Tag 00OR (blueprint: lem-exc-fields-excellent).
+Source: Stacks Project, More on Algebra, Tags 07PS, 07PJ, and 07QW, clause (1);
+Algebra, Tags 00NQ and 00NM (blueprint: lem-exc-fields-excellent).
 
-Proof (the five steps of the node):
-1. By `lem-weil-pbc-field-regular-ring`, `k` is Noetherian and regular, its only prime
-   is zero, and its localization there is `k`. By `def-weil-pbc-adic-completion`, its
-   zero-adic completion is also `k`: all quotients in positive degree are `k`, all
-   transition maps are identities, and the degree-zero coordinate is uniquely determined.
-   The canonical completion map is therefore the identity.
-2. The identity is flat (`def-weil-pbc-flat-ring-map`): multiplication and tensoring
-   with one identify tensoring with `k` with the identity on modules. Its unique fibre
-   is `k`. For every finite purely inseparable extension `k' / k`, multiplication and
-   tensoring with one identify the base-changed fibre with the field `k'`, which is
-   Noetherian and regular by `lem-weil-pbc-field-regular-ring`. Thus the completion map
-   is regular and `k` is a G-ring by `def-weil-pbc-g-ring`, without a perfectness assumption.
-3. Apply `lem-exc-j2-residue-field-criterion` to `k`. For every finite purely inseparable
-   residue-field extension `L / k`, take the subalgebra `B = L`. It is module-finite
-   by `def-weil-pbc-finite-purely-inseparable-extension`; its fractions exhaust `L`
-   since each element is its own numerator over one. Its whole spectrum is a nonempty
-   regular open, by `lem-weil-pbc-field-regular-ring`. The criterion gives J-2.
-4. Present any finite type `k`-algebra `A` as a quotient of a polynomial ring in `n`
-   variables (`def-weil-pbc-finite-type-algebra`). Pullback identifies its prime ideals
-   with the primes containing the kernel and preserves strictness and saturation of
-   chains. By `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference`, their
-   lengths are bounded by `n`, and saturated chains between fixed endpoints have the
-   difference of the pulled-back prime heights as length. Thus `A` is catenary; for
-   the zero algebra there are no prime pairs. This gives universal catenarity of `k`.
-5. Combine Noetherianity, the G-ring condition, J-2, and universal catenarity using
-   `def-exc-excellent-ring`.
+Proof:
+1. A field is Noetherian and local, with maximal ideal zero. The zero-adic completeness
+   instance makes it complete for its maximal-ideal topology. Apply the complete-local
+   G-ring theorem `lem-weil-pbc-complete-local-g-ring`.
+2. Apply `lem-exc-j2-residue-field-criterion`. A prime of a field is maximal, so its
+   residue field is module-finite over the field. For each finite purely inseparable
+   residue-field extension L, take the top subalgebra B = L. Module finiteness is
+   transitive. Every element is a fraction with denominator one, and the whole spectrum
+   is a nonempty regular open since B is isomorphic to a field. This gives J-2.
+3. A field is a regular ring by the Mathlib instances, so
+   `lem-trf-regular-ring-universally-catenary` gives universal catenarity.
+4. Combine Noetherianity, the G-ring condition, J-2 and universal catenarity using
+   the definition of excellence.
 -/
 theorem isExcellent_of_field (k : Type u) [Field k] : IsExcellent k := by
-  sorry
+  let : IsAdicComplete (IsLocalRing.maximalIdeal k) k := by
+    rw [IsLocalRing.maximalIdeal_eq_bot]
+    infer_instance
+  refine ⟨⟨inferInstance, isGRing_of_isNoetherianRing_of_isAdicComplete k, ?_⟩,
+    IsRegularRing.isUniversallyCatenary k⟩
+  intro A _ _ _
+  apply isOpen_regularLocus_of_residueField_finite_models k ?_ A
+  intro p hp L _ _ _ _ _ _
+  let : p.IsMaximal := by simpa [p.eq_bot_of_prime] using Ideal.bot_isMaximal (K := k)
+  let : Module.Finite k L := Module.Finite.trans p.ResidueField L
+  let B : Subalgebra k L := ⊤
+  let e : B ≃ₐ[k] L := Subalgebra.topEquiv
+  let : Module.Finite k B := Module.Finite.equiv e.symm.toLinearEquiv
+  let : IsRegularRing B := IsRegularRing.of_ringEquiv e.symm.toRingEquiv
+  refine ⟨B, inferInstance, ?_, Set.univ, isOpen_univ, ?_, ?_⟩
+  · intro x
+    exact ⟨⟨x, Algebra.mem_top⟩, 1, one_ne_zero, (div_one x).symm⟩
+  · exact ⟨⟨⊥, inferInstance⟩, Set.mem_univ _⟩
+  · intro q _
+    infer_instance
