@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-finite-field-local-tensor-model",
+ "kind": "lemma",
+ "title": "Localized inverse-image constant models under field scalar extension",
+ "statement": "Let Y,X be schemes and g:X→Y any morphism [def-weil-proetale-inverse-image]. Let k→k' be a unital field map, R=k_Y and S=k'_Y the constant ring sheaves [def-weil-pbc-constant-sheaf], and T= - tensor_R S the specified ordinary scalar-extension functor [def-weil-pbc-bounded-constructible-tower]. For an R-module sheaf F, a site object V of X_proet, and a k-module M, suppose the restrictions to V of g^{-1}F and g^{-1} of the constant module sheaf M are isomorphic as modules over g^{-1}R. Then the restrictions to V of g^{-1}T(F) and g^{-1} of the constant k'-module sheaf k' tensor_k M are isomorphic as modules over g^{-1}S. The conclusion uses the actual inverse-image coefficient sheaves and the target scalar action on the k' factor. No finiteness, cover or immersion condition is imposed.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (lemma-tensor-product-pullback), 0GMW (lemma-sheafification-tensor), 093V (lemma-tensor-product-locally-constant); steps 3 and 4 of lem-sf-finite-field-sheaf-scalar-extension."
+ },
+ "proof": [
+  {
+   "text": "Construct scalar extension on the original site and its slices as the actual sectionwise tensor presheaf followed by module sheafification. Compose the sectionwise ModuleCat tensor/restriction Hom equivalences with the module-sheafification adjunction. Naturality on pure tensors proves that this gives the tensor/restriction adjunction in the independent site object and Hom universes. Uniqueness of left adjoints identifies this concrete tensor functor on a scheme with pbcExtend.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a scheme map g and a coefficient map a:R→S, naturality of the ring inverse-image adjunction unit identifies direct image over g^{-1}S followed by scalar restriction along a with scalar restriction along g^{-1}a followed by direct image over g^{-1}R. The comparison is the identity on sections, linearity being exactly that unit equation. Conjugate it by the inverse-image and scalar-extension adjunctions. This gives pbcExtend(a) followed by inverse image over S isomorphic to inverse image over R followed by pbcExtend(g^{-1}a).",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a site object V, slice restriction is left adjoint to module direct image along Over.star V, by Mathlib SheafOfModules.overPushforwardOverAdj. Scalar restriction commutes with that direct image: both scalar actions are equal by naturality of a along the product projection V×U→U. Conjugate this comparison by the tensor and slice adjunctions, obtaining extension of scalars commuting with slice restriction. Apply that slice tensor functor to the given local isomorphism.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The constant module presheaf functor is left adjoint to evaluation at the terminal site object: a morphism is determined there and all other components are its composites with restriction. Compose with module sheafification to obtain the constant-module / constant-scalar-section adjunction. Naturality of the constant-ring sheafification unit makes scalar restriction commute with constant-scalar sections. Uniqueness of left adjoints identifies scalar extension of the constant module M with the constant module k′ tensor_k M. Combine this global comparison, the inverse-image and slice comparisons, the image of the supplied local isomorphism, and the inverse comparison for the constant module. The result is over the actual inverse-image target ring, since every comparison is in that module category. No finiteness, flatness, immersion, cover or inhabited-object hypothesis enters; the zero and empty cases follow from the same adjunctions.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "V7: Tags 03EL, 0GMW and 093V. The implemented argument uses the tensor/restriction, inverse-image/direct-image, slice/direct-image and constant-module/sections adjunctions. Mathlib overPushforwardOverAdj supplies the slice adjunction; the other comparisons are constructed explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with inverse image and localization of constant module sheaves",
+   "results": "8 hits, all ordinary localized-module scalar extension (IsLocalizedModule.mapExtendScalars and LinearEquiv.extendScalarsOfIsLocalization variants). None concerns sheaves on a pro-etale slice.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"over\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(constant|pullback)|constant.*changeOfRings",
+   "results": "0 hits from msearch; local Mathlib module sheaves have scalar restriction, abstract pullback composition and localization APIs, but no stated comparison in the intrinsic coefficient presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFieldSheafScalarExtension",
+  "date": "2026-10-18",
+  "group": "V7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "last paragraph: finite residue-field change of coefficient in integral representatives; local constant-model calculation in steps 3 and 4 of lem-sf-finite-field-sheaf-scalar-extension",
+   "via": [
+    "lem-sf-finite-field-sheaf-scalar-extension",
+    "lem-weil-integral-scalar-extension-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFieldLocalTensorModel",
+  "file": "lean/Sheaf/Paper/FiniteFieldLocalTensorModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFieldScalarExtension_localModel",
+  "statement": "theorem finiteFieldScalarExtension_localModel\n    (Y : Scheme.{u}) {k k' : Type u} [Field k] [Field k'] (f : k →+* k') :\n    ∀ (X : Scheme.{u}) (g : X ⟶ Y)\n      (F : pbcModules Y (adicLisseConstantRing Y (ULift.{u + 1} k)))\n      (V : X.ProEt) (M : ModuleCat.{u + 1} (ULift.{u + 1} k)),\n      Nonempty ((SheafOfModules.overFunctor _ V).obj\n        ((proEtaleModuleInverseImage g\n          (adicLisseConstantRing Y (ULift.{u + 1} k))).obj F) ≅\n        (SheafOfModules.overFunctor _ V).obj\n          ((proEtaleModuleInverseImage g\n            (adicLisseConstantRing Y (ULift.{u + 1} k))).obj\n            ((adicLisseConstantModules Y (ULift.{u + 1} k)).obj M))) →\n      Nonempty ((SheafOfModules.overFunctor _ V).obj\n        ((proEtaleModuleInverseImage g\n          (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj\n          ((pbcExtend ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map\n            (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} f)))).obj F)) ≅\n        (SheafOfModules.overFunctor _ V).obj\n          ((proEtaleModuleInverseImage g\n            (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj\n            ((adicLisseConstantModules Y (ULift.{u + 1} k')).obj\n              ((ModuleCat.extendScalars (RingHom.ulift.{u + 1, u + 1} f)).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034330-L-422210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034330-L-422210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

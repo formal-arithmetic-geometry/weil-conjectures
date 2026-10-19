@@ -16,91 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Regard $k'$ as a $k$-module through the given unital field homomorphism. By [lem-weil-pbc-module-over-field-flat] it has a basis $(e_a)_{a\\in I}$; the basis injects into the finite set $k'$, so $I$ is finite. Apply [lem-pc-sites-module-sheafification-tensor] with the constant presheaf of rings $k$, the presheaf underlying $F$ with its constant $k$-action, and the constant presheaf $k'$. After forgetting the $k'_Y$-action it identifies $T(F)$ with the sheafification of $U\\mapsto F(U)\\otimes_k k'$. On every $U$ the mutually inverse maps are $(f_a)_a\\mapsto\\sum_a f_a\\otimes e_a$ and $f\\otimes\\sum_a c_ae_a\\mapsto(c_af)_a$. They commute with restrictions and with maps of $F$. The presheaf $U\\mapsto F(U)^I$ is already a sheaf, since its matching and gluing conditions hold componentwise. Thus, naturally in $F$, the underlying $k_Y$-module of $T(F)$ is $F^I$. This basis is used only for the exactness and finiteness checks, not to define the target coefficient action.",
+   "text": "Use the proved constant-module encoding equivalence. Naturality of the constant-section sheafification unit identifies intrinsic scalar restriction followed by encoding with encoding followed by fixed-module scalar restriction, with identity maps on sections. Conjugate the fixed-module extension/restriction adjunction by the encoding equivalences and use pbcScalarAdjunction and uniqueness of left adjoints. This identifies intrinsic scalar extension with ProEtale.sheafExtendScalars under the equivalences. A field map is flat; the proved source-library preservesFiniteLimits_sheafExtendScalars theorem gives left exactness. Equivalences reflect finite limits. The intrinsic scalar adjunction gives preservation of finite colimits.",
    "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-pbc-bounded-constructible-tower",
     "lem-weil-pbc-module-over-field-flat",
-    "lem-pc-sites-module-sheafification-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, lemma-sheafification-tensor; finite-basis specialization"
-   }
-  },
-  {
-   "text": "The module-sheaf categories are abelian and sheafification is exact by [lem-weil-pbc-site-module-presheaf-sheafification-exact]. For a map $u:F\\to G$, the kernel of $u^I$ is $(\\ker u)^I$ componentwise. Its cokernel is $(\\operatorname{coker}u)^I$: the presheaf cokernel is the finite sum of the presheaf cokernels of $u$, and sheafification commutes with this finite sum as an additive left adjoint. Therefore the natural description $T(F)=F^I$ of step 1 shows that $T$ preserves kernels and cokernels after forgetting coefficients. Kernel and cokernel actions are respectively the restricted and quotient $k'_Y$-actions; their underlying sheaves are the same kernels and cokernels after restriction to $k_Y$. Hence the canonical kernel and cokernel comparisons for $T$ are isomorphisms also as $k'_Y$-modules. Tensoring maps is additive on local pure tensors, so $T$ is exact as a functor to $k'_Y$-module sheaves.",
-   "uses": [
     "lem-weil-pbc-site-module-presheaf-sheafification-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WJ, lemma-sheafification-exact; componentwise finite-sum argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $i:Z\\to Y$ be one of the stated stratum immersions. It gives the geometric inverse image of [def-weil-proetale-inverse-image]. Apply [lem-pe-constant-left-module-inverse-image] to $k$ and $k'$: the inverse images of their constant ring sheaves are the corresponding constant ring sheaves on $Z$, carrying each constant scalar to itself. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to obtain $i^*(F\\otimes_{k_Y}k'_Y)\\cong i^*F\\otimes_{k_Z}k'_Z$. The same two cited results apply to localization at a site object $U\\to Z$ and give the analogous comparison on its slice. These comparisons respect the right $k'$-action: multiplication by a constant $b\\in k'$ on the second factor takes $f\\otimes c$ to $f\\otimes cb$ on both sides. General coefficient sections are locally constant scalars, so this equality also verifies $k'$-linearity for the full constant ring sheaf.",
+   "text": "Apply the localized tensor-model comparison on each original stratum and exactly each original covering member. A finite k-module has a finite generating set. Its scalar extension is finitely generated over k', and a finitely generated module over a finite field is finite. Retain the positive finite stratification and constructible strata, and use the tensor-extended finite modules as the new witnesses. The extra local-model clause is the same comparison, with its cover hypotheses unused.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-sf-finite-field-local-tensor-model",
+    "def-weil-proetale-constructible-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient identification from sites.tex Tag 00YV"
-   }
+   "elementary": false
   },
   {
-   "text": "On any slice where $F$ is the constant module sheaf of a $k$-module $V$, [lem-pc-sites-module-sheafification-tensor], applied to the two constant presheaves $V,k'$, identifies its scalar extension with the constant sheaf of $V\\otimes_k k'$. This holds for arbitrary $V$. Under the comparison $v\\otimes c\\mapsto v\\otimes c$, multiplication on the second factor sends both sides to $v\\otimes cb$; thus this is an isomorphism of $k'$-module sheaves. Together with step 3 this proves the asserted formula on exactly the original cover. If $V$ is finite, its elements are a finite generating set, and their tensors with $1$ generate $V\\otimes_k k'$ over $k'$: $v\\otimes c=c(v\\otimes1)$. It is a quotient of the finite set $(k')^{|V|}$ and is finite.",
+   "text": "Constructibility is invariant under isomorphism: pull the isomorphism to each stratum, restrict to each covering object, and compose it with the existing finite constant-model identification. For a cochain complex, apply ShortComplex.mapHomologyIso to its three-term short complex in each degree using exactness. Use the preceding constructibility result and isomorphism invariance. Additivity preserves zero objects, so the homology comparison transports vanishing outside the original interval. This works degreewise without boundedness assumptions on the original complex. The existing placement of quantifiers and conjunctions in the Lean statement is retained verbatim.",
    "uses": [
-    "lem-pc-sites-module-sheafification-tensor"
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-proetale-constructible-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0GMW and 093V, lemma-sheafification-tensor and lemma-tensor-product-locally-constant; explicit constant-model calculation"
-   }
-  },
-  {
-   "text": "Choose the finite stratification for constructible $F$ in [def-weil-proetale-constructible-sheaf]. On each stratum the local constant models of $F$ become the local constant models of step 4, hence $T(F)$ is locally constant there. To verify finite stalks without requiring any uniform choice of those models, apply the finite-sum description of step 1 on that stratum. By [def-weil-proetale-geometric-stalk] a stalk is a colimit in $k$-modules of the pointed-neighborhood section diagram. Such a colimit commutes with finite direct sums: maps from either object are the same finite family of compatible maps from the section diagrams. Hence the underlying stalk of $T(F)|_Z$ is $(F|_Z)_{\\bar z}^{I}$. This is finite because the original stalk and $I$ are finite. Its $k'$-module structure is already the right-factor action, and a finite module as a set is finitely generated (take every element). The same original finite partition therefore witnesses constructibility with $k'$-coefficients. Empty strata or empty site objects contribute nothing and cause no finiteness assumption on an unused local model.",
-   "uses": [
-    "def-weil-proetale-constructible-sheaf",
-    "def-weil-proetale-geometric-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093V, lemma-tensor-product-locally-constant, expanded with the intrinsic finite-stalk criterion"
-   }
-  },
-  {
-   "text": "Apply [lem-sp-exact-functor-preserves-homology] (c) to the exact functor $T$ and the three consecutive terms $C^{i-1}\\to C^i\\to C^{i+1}$. Its canonical isomorphism is $\\mathcal H^i(TC)\\cong T(\\mathcal H^i(C))$ in the target abelian category of $k'_Y$-modules, natural in $C$. There is no boundedness requirement: only these three terms enter the computation. For every $i$ the right side is constructible when $\\mathcal H^i(C)$ is constructible by step 5. Outside $[r,s]$ it is zero, since the tensor product of zero with $k'_Y$ is zero. This gives the claimed unchanged cohomological interval, including $r=s$.",
-   "uses": [
-    "lem-sp-exact-functor-preserves-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; preservation of kernels, images and their quotient"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-proetale-geometric-stalk",
-  "def-weil-proetale-inverse-image",
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-finite-field-local-tensor-model",
   "lem-sp-exact-functor-preserves-homology",
   "lem-weil-pbc-module-over-field-flat",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-proetale-constant-module-encoding",
   "lem-weil-pbc-site-module-presheaf-sheafification-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 0GMW, 03EL and 093V; expanded proof using a finite field basis, and homology.tex Tag 010N for the final comparison. Tag 093V omits its proof."
+  "place": "V7: Tags 0GMW, 03EL, 093V and homology.tex Tag 010N. Exactness via the existing constant-module encoding and proved source-library ProEtale.ScalarExtension; the local tensor comparison is fully proved in lem-sf-finite-field-local-tensor-model by adjunctions."
  },
  "mathlib_searches": [
   {
@@ -209,11 +163,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -247,5 +197,15 @@
   "date": "2026-10-17",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-8119c4f4a"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034330-L-422210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
