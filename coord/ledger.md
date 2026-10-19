@@ -17325,3 +17325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:24 L: merged deliver/M9/Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists (stage 3; reviewer PASS; first push; landing 20261019T112459-L-3944319 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/M9/Sheaf.RingTheory.LocallyNagataCatenaryOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T112500-L-3944576 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/N1/Sheaf.SixFunctors.FieldTensor (stage 3; reviewer PASS; first push; landing 20261019T112501-L-3944951 (interface); batch 20261019T112432; modules 2; new nodes 1; change records: coord/changes/N1-field-tensor-proof-context.md)
+- 11:25 L: merged deliver/N2/Sheaf.Paper.IntegralResidueTor (stage 3; reviewer PASS; first push; landing 20261019T112502-L-3945277 (interface); batch 20261019T112432; modules 2; new nodes 1)

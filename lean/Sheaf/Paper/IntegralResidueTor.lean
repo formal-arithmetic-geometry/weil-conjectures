@@ -11,14 +11,12 @@ public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Sheaf.Paper.FiniteFieldFiber
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Paper.IntegralReductionResidueHomology
 import Sheaf.Paper.ProEtaleResidueTorTest
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import Mathlib.Algebra.Field.ULift
+import Mathlib.Algebra.Field.ZMod
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
@@ -42,31 +40,34 @@ open CategoryTheory AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
+private noncomputable def residueTestDatum (p : ℕ) (hp : p.Prime) : FiniteFieldDatum.{u} := by
+  letI : Fact p.Prime := ⟨hp⟩
+  exact {
+    p := p
+    a := 1
+    q := p
+    prime := hp
+    exponent_pos := le_refl 1
+    cardinality_eq := (pow_one p).symm
+    k₀ := ULift.{u} (ZMod p)
+    card_base := by simp [Nat.card_eq_fintype_card]
+    k := AlgebraicClosure (ULift.{u} (ZMod p)) }
+
 /-- Bounds on residue cohomology give the same Tor interval at every finite level,
 and the integral constructible and integral finite-Tor full subcategories coincide.
 This does not identify constructibility with site-perfectness.
 
 Source: blueprint order 2133 (blueprint: lem-coef-integral-residue-tor).
 Proof:
-1. Choose a K-flat resolution P of a representative of K, using
-lem-pc-kflat-resolution. The reduction at exponent n+1 is represented by
-Q_n = P tensor A_{n+1}, by def-weil-integral-derived-reduction. Its bounded
-constructibility is part of def-weil-derived-complete-integral-detailed.
-2. For every acyclic A_{n+1}-complex N, restriction to the completed coefficient
-ring is acyclic. The balanced identification (P tensor A_{n+1}) tensor N = P tensor N
-makes Q_n K-flat, by def-pc-kflat-complex and def-pur-sheaf-tensor-product.
-The forward map sends (x tensor c) tensor z to x tensor cz; the inverse sends
-x tensor z to (x tensor 1) tensor z. These maps respect restrictions and differentials.
-Thus lem-pur-derived-change-of-rings computes the residue tensor of Q_n as
-P tensor kappa, representing K_1. The composite coefficient projection is the
-level-one projection, componentwise in the defining inverse limit.
-3. Apply lem-sf-proetale-residue-tor-test to every bounded constructible reduction.
-Its residue tensor has the assumed cohomology bounds, so its Tor amplitude is [a,b].
-4. The common cohomology interval in def-weil-derived-complete-integral-detailed
-bounds the residue reduction. Step 3 supplies one Tor interval for every reduction,
-which is exactly def-weil-finite-tor-amplitude. Conversely its integral predicate
-includes bounded constructible derived-complete membership. Extensionality gives
-equality of the object predicates and hence of their full subcategories. -/
+1. Represent each finite reduction by a cochain complex and choose a K-flat resolution.
+Transport its constructibility along the representative isomorphism. The coefficient
+comparison `integralReduction_residue_homology_zero_iff` identifies its residue cohomology with
+that of the first reduction. The support hypothesis makes it zero outside [a,b].
+The pro-etale residue Tor test gives amplitude [a,b]; transport it to the reduction.
+2. The common cohomology interval in the definition of integral constructibility gives
+one interval for every reduction, exactly the integral finite-Tor condition.
+3. The reverse inclusion is definitional, and extensionality gives equality of predicates.
+-/
 theorem integral_residue_tor
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -83,6 +84,63 @@ theorem integral_residue_tor
             ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b) ∧
       sfIntegralConstructible l E X =
         finiteTorConstructibleIntegral l E X := by
-  sorry
+  classical
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{u} _
+  have finiteLevel
+      (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+      (hK : sfIntegralConstructible l E X K)
+      (a b : ℤ) (hab : a ≤ b)
+      (hres : ∀ i : ℤ, i ∈ proEtaleCohomologicalSupport
+        ((scalarReductionDerivedExtension.{u, u} l E X 0).obj K) → a ≤ i ∧ i ≤ b)
+      (n : ℕ) :
+      HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
+        ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b := by
+    obtain ⟨_, r, s, hrs, hlevels⟩ := hK
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    let R := proEtaleConstantRing X A
+    let C := proEtaleRingModules X R
+    have := Localization.essSurj (DerivedCategory.Q (C := C))
+      (HomologicalComplex.quasiIso C (.up ℤ))
+    let L := (DerivedCategory.Q (C := C)).objPreimage
+      ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)
+    let e : DerivedCategory.Q.obj L ≅ (scalarReductionDerivedExtension.{u, u} l E X n).obj K :=
+      (DerivedCategory.Q (C := C)).objObjPreimageIso _
+    obtain ⟨P, f, hP, _, hf, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
+        (R := R) L
+    have hcon : intrinsicFiniteTorsionConstructible l E (n + 1)
+        (Nat.succ_le_succ (Nat.zero_le n)) X (DerivedCategory.Q.obj L) := by
+      let := Padic.finite_coefficientExtensionRing l E (n + 1)
+        (Nat.succ_le_succ (Nat.zero_le n))
+      have hclosed := (proEtale_bounded_constructible_isTriangulated X A).1
+      let W : ObjectProperty (proEtaleDerivedCategory X A) :=
+        intrinsicFiniteTorsionConstructible l E (n + 1)
+          (Nat.succ_le_succ (Nat.zero_le n)) X
+      have : W.IsClosedUnderIsomorphisms := hclosed
+      exact W.prop_of_iso e.symm (hlevels n).1
+    have ht := (proEtale_torAmplitude_iff_residue_tensor (residueTestDatum.{u} D.p D.prime) l _hl
+      E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X L P f hf hP hcon a b hab).2
+    have htor : HasProEtaleTorAmplitude X A (DerivedCategory.Q.obj L) a b := by
+      apply ht
+      intro i hi
+      apply (integralReduction_residue_homology_zero_iff l E X K n L P e f hf hP i).2
+      by_contra hz
+      have hb := hres i hz
+      omega
+    refine ⟨htor.1, ?_⟩
+    intro L' P' hL' f' hf' hP' M i hi
+    obtain ⟨e'⟩ := hL'
+    exact htor.2 L' P' ⟨e' ≪≫ e.symm⟩ f' hf' hP' M i hi
+  refine ⟨finiteLevel, ?_⟩
+  funext K
+  apply propext
+  constructor
+  · intro hK
+    refine ⟨hK, ?_⟩
+    have hK0 := hK
+    obtain ⟨_, a, b, hab, hlevels⟩ := hK0
+    exact ⟨a, b, hab, fun n ↦ finiteLevel K hK a b hab
+      (fun i hi ↦ (hlevels 0).2 hi) n⟩
+  · exact fun hK ↦ hK.1
 
 end WeilConjectures
