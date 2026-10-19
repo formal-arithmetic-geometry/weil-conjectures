@@ -23,3 +23,5 @@ Workers and reviewers: if one of your modules is listed here, this is why it cha
   - Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange.smooth_exceptional_base_change: used isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension, which upstream #1549 replaced (SmoothDuality/BaseChange*).
   - Sheaf.Paper.PurEtaleLisseStratumCompact.isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf: DerivedCategory.braidedCategory is no longer visible (the primed instance is in Monoidal.Instances.DerivedCategoryBraided).
 - Sheaf.Paper.CondensedCompactSupportProjection: import Compactification.RefinementCategory (the Refinement structure moved there upstream).
+  - Sheaf.Paper.DirectImageTorAmplitude.sf_directImage_torAmplitude (the proof delivered by H2 in the abandoned take-out batch): kernel deterministic timeout once @[reducible] is restored on coefficientExtensionRing.
+  - Sheaf.Paper.NoetherianEtaleSectionSpecialization.isIso_sectionMap (private): used isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension, which upstream #1549 replaced.

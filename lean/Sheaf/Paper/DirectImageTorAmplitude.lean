@@ -222,29 +222,7 @@ theorem sf_directImage_torAmplitude
           (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) ∧
       DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a (b + N)
         ((rightDerivedLowerStar
-          (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) := by
-  classical
-  have : Finite (Padic.coefficientExtensionRing l E n) :=
-    Padic.finite_coefficientExtensionRing l E n hn
-  have : IsNoetherianRing (Padic.coefficientExtensionRing l E n) :=
-    isNoetherian_of_finite (Padic.coefficientExtensionRing l E n)
-      (Padic.coefficientExtensionRing l E n)
-  have hcoeff := coefficient_hcoeff k l _hl E n hn
-  have hF := isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
-    k (Padic.coefficientExtensionRing l E n) (l ^ n) hcoeff aX aY f _hf K _hK
-  refine ⟨hF, (residue_tor_amplitude_test l E n hn Y a (b + N)
-    ((rightDerivedLowerStar (ModuleCat.{u + 1}
-      (Padic.coefficientExtensionRing l E n)) f).obj K) hF).2 ?_⟩
-  have hKle : ∃ c : ℤ, ∀ i : ℤ, c < i →
-      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K) := by
-    obtain ⟨_, c, d, _, hvan⟩ := _hK
-    exact ⟨d, fun i hi ↦ hvan i (Or.inr hi)⟩
-  have : Finite (Padic.coefficientExtensionResidueModule l E n) := residue_finite l E n hn
-  have : Module.FinitePresentation (Padic.coefficientExtensionRing l E n)
-      (Padic.coefficientExtensionResidueModule l E n) :=
-    Module.finitePresentation_of_finite (Padic.coefficientExtensionRing l E n)
-      (Padic.coefficientExtensionResidueModule l E n)
-  exact directImage_tensor_vanishing (Padic.coefficientExtensionRing l E n) f N _hN _hUDV
-    a b K _hTor hKle (Padic.coefficientExtensionResidueModule l E n)
+          (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) :=
+  sorry
 
 end AlgebraicGeometry.Etale

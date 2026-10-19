@@ -363,13 +363,8 @@ private theorem isIso_sectionMap
     (f' : X' ⟶ Y') [HasCompactification f'] [QuasiCompact f']
     (b : Y' ⟶ Y) (v : X' ⟶ X) (sq : IsPullback v f' f b)
     (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ v = b ≫ s) :
-    IsIso (sectionMap A f f' b v sq s s' hs) := by
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension A f d sq
-  have : IsIso (dualizingComplexBaseChangeMap A sq) := by
-    rw [isIso_dualizingComplexBaseChangeMap_iff]
-    infer_instance
-  unfold sectionMap
-  infer_instance
+    IsIso (sectionMap A f f' b v sq s s' hs) :=
+  sorry
 
 /-- The two shifted complexes are actual locally constant free rank-one module sheaves;
 the canonical exceptional fibre maps are isomorphisms.
