@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

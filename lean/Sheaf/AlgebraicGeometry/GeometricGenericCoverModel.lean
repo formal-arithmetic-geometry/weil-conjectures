@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread
+import WeilConjectures.AlgebraicGeometry.GenericFibreClosedCoverSpread
 import WeilConjectures.AlgebraicGeometry.CompatibleEtaleGenericFibreModel
 import Sheaf.AlgebraicGeometry.ClosedFamilyGeometricFibreShrink
 

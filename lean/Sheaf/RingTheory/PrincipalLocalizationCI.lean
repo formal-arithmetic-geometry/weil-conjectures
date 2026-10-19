@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
 import WeilConjectures.RingTheory.PrincipalLocalizationAlgEquiv
-import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import WeilConjectures.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Localization.BaseChange

@@ -1,6 +1,6 @@
 module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapLocal
 import Sheaf.AlgebraicGeometry.DerivedPullback
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 @[expose] public section

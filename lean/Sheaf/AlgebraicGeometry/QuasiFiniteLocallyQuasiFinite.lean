@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 /-!
 # Quasi-finite morphisms are locally quasi-finite and quasi-compact

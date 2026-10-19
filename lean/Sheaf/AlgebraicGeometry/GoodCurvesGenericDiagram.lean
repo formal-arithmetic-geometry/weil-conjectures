@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -37,7 +37,6 @@ import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
 import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous
 import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
-import WeilConjectures.AlgebraicGeometry.Thickening
 
 /-!
 # Good curve diagrams near a generic point

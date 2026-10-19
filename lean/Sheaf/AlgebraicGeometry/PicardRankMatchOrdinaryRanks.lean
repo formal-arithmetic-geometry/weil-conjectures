@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 
 /-! # Ordinary ranks under iterated Picard base change

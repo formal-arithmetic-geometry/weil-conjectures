@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels
+import WeilConjectures.AlgebraicGeometry.FinitePresentationAffineChartModels
 import Mathlib.Data.Finset.Order
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent

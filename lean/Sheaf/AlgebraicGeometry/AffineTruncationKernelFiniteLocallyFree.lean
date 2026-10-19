@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat
 import Sheaf.AlgebraicGeometry.PrincipalOpenFiniteProjectiveTilde
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Mathlib.Algebra.Category.ModuleCat.Images
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

@@ -34,7 +34,7 @@ import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Sheaf.RingTheory.LocalizationRegular
 import Sheaf.Paper.NormalLocusOpen
 import Sheaf.RingTheory.RegularComposition
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct

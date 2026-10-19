@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.TraceFormula.SmoothGeometricallyNormal
 import Sheaf.TraceFormula.ValuationCurveProjectivePreparation

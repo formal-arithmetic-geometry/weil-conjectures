@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Sheaf.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

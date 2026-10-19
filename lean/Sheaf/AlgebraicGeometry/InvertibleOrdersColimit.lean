@@ -13,14 +13,13 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Sites.Abelian
-import Sheaf.AlgebraicGeometry.GeometricStalkColimits
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import Mathlib.Algebra.Homology.Additive
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 
 /-!
 # The colimit description of invertible orders

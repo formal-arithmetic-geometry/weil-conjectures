@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleMapIsoLocus
+public import WeilConjectures.AlgebraicGeometry.ModuleMapIsoLocus
 import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Pullback preserves local invertibility on the image

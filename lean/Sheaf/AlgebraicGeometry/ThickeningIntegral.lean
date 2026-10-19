@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.ThickeningAffineScheme
 

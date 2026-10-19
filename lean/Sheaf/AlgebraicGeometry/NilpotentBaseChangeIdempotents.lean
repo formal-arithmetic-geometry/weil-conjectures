@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Ring.Idempotent
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal

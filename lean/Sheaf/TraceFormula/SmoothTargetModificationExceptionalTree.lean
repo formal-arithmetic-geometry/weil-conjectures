@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import Sheaf.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.TraceFormula.GenusZeroSmoothProperLine
 import Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction
 import Sheaf.RingTheory.ProjectiveOverLocalFree

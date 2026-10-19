@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.AlgebraicGeometry.FlatRestrictionUnion
+import WeilConjectures.AlgebraicGeometry.FlatRestrictionUnion
 import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
 import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

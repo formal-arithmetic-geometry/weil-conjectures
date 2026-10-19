@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import WeilConjectures.AlgebraicGeometry.LocalMapPairCompatibility
 public import WeilConjectures.AlgebraicGeometry.LocalMapPairDefect
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

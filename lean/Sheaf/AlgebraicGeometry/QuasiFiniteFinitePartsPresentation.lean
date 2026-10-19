@@ -5,7 +5,7 @@ Authors: SHEAF group Q01
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Sheaf.AlgebraicGeometry.EtaleSectionProperSupport
@@ -30,7 +30,7 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk
-import Sheaf.AlgebraicGeometry.GeometricStalkColimits
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
@@ -45,7 +45,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
@@ -57,7 +57,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!
 # Finite-parts generators and relations for quasi-finite proper support

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.FunctionField
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.FiniteClosedPoints
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

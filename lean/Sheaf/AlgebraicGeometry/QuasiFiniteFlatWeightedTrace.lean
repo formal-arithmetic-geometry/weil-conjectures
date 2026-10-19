@@ -5,7 +5,7 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
@@ -68,7 +68,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite

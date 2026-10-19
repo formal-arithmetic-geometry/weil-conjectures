@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeQuotientApproximation
 
 /-! Finite principal equations for a degree sublevel locus on an affine open. -/

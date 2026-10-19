@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.Algebra.FiniteTypeLiftNilpotent
 

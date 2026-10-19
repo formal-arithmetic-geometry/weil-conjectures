@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.Sober
 import Mathlib.Topology.Baire.Lemmas
-import Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
-import Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread
+import WeilConjectures.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
+import WeilConjectures.AlgebraicGeometry.GenericFibreClosedCoverSpread
 import Sheaf.AlgebraicGeometry.GenericOpenFibreDensity
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 

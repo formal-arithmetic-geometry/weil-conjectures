@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RegularClosedImmersionCodimension
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

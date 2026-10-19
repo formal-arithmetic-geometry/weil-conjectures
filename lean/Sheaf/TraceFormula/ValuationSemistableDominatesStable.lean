@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Sheaf.AlgebraicGeometry.Curve.ValuationCommonStrictSemistableRefinement
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal

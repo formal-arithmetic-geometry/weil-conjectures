@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.FlatClosedFibreInterior
 

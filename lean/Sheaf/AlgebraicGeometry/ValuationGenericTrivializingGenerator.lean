@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ValuationProperCoherentSections
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.FractionFieldSectionsBaseChange
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.LocalRing.Module

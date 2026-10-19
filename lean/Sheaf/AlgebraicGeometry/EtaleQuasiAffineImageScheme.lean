@@ -6,7 +6,7 @@ Authors: SHEAF group Q44
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -31,7 +31,7 @@ import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
 import Sheaf.AlgebraicGeometry.SpaceSeparatedLqfPermanence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData

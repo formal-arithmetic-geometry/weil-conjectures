@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!

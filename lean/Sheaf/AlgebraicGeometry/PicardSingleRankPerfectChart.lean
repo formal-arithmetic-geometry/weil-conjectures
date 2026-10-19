@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.PicardReferenceRankNeighbourhood
 import Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
 

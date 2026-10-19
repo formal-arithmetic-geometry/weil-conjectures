@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.PureDimension
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth

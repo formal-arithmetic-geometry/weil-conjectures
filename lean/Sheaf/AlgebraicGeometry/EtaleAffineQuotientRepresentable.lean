@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.AlgebraicGeometry.AffineEtaleRelationSeparatedQuasiFinite
 import Sheaf.AlgebraicGeometry.EtaleRelationKernelPair

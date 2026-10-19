@@ -21,7 +21,7 @@ import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence

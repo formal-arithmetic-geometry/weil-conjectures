@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDualPairing
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDualPairing
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Pullback of duals of finite locally free modules

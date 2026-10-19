@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.ResidueFiber
-import Sheaf.AlgebraicGeometry.StalkFiniteFree
+import WeilConjectures.AlgebraicGeometry.StalkFiniteFree
 import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-!

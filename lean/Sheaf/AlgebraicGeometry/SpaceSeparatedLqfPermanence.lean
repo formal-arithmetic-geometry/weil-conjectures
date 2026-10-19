@@ -6,12 +6,12 @@ Authors: SHEAF group Q01
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.AlgebraicGeometry.AlgebraicSpace

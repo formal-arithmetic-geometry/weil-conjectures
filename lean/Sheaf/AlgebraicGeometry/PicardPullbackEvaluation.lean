@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
 import Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
 import Sheaf.AlgebraicGeometry.PicardPullbackBaseChange
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction

@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.TensorPullbackLocalIsomorphism
-import all Sheaf.AlgebraicGeometry.TensorUnitOpenLocalization
+import all WeilConjectures.AlgebraicGeometry.TensorUnitOpenLocalization
 
 /-! # Pulling back a local isomorphism with normalized unit sections
 

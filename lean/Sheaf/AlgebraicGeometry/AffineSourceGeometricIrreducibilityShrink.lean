@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 
 import Sheaf.AlgebraicGeometry.GenericRadicialGeometricallyReducedModel
-import Sheaf.AlgebraicGeometry.GenericGeometricallyIntegralAffineChart
+import WeilConjectures.AlgebraicGeometry.GenericGeometricallyIntegralAffineChart
 import Sheaf.AlgebraicGeometry.GenericOpenGeometricFibreDensity
 
 /-! # Spreading geometric irreducibility for an affine source

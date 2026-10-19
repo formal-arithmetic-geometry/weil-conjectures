@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.RingTheory.EtaleNormalRing
 import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import Sheaf.RingTheory.DvrGaloisNormalizationRamificationDvd
 import Sheaf.RingTheory.DvrTameTensorFactorUnramified

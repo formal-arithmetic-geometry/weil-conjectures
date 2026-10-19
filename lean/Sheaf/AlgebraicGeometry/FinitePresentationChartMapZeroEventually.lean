@@ -5,7 +5,7 @@ Authors: SHEAF groups A3 and K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType

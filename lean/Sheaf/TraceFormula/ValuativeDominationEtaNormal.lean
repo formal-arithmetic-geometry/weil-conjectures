@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.TraceFormula.AbhyankarFiniteTypeFieldHeight
 import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
 import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous

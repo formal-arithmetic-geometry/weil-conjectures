@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 

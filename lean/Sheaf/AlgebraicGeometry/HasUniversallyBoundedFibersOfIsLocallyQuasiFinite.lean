@@ -5,7 +5,7 @@ Authors: SHEAF groups E1 and M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 import Mathlib.Algebra.Module.SpanRankOperations
 import WeilConjectures.AlgebraicGeometry.BoundsFiberDegreesComp

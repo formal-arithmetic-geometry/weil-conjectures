@@ -5,11 +5,11 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 /-!
 # Restriction of locally quasi-finite morphisms to open subschemes

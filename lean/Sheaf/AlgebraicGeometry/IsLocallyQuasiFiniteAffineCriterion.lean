@@ -5,12 +5,12 @@ Authors: SHEAF group Q34
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 /-!
 # Affine criterion and Zariski locality for local quasi-finiteness

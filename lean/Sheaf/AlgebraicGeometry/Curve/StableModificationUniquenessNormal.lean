@@ -6,7 +6,7 @@ Authors: SHEAF group Q61
 module
 
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.TraceFormula.StableCurveDiagramNoetherianModel

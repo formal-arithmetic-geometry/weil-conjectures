@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
-import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetApproximation
+import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveAffineTargetApproximation
 
 /-!
 # Affineness of a finite surjective image

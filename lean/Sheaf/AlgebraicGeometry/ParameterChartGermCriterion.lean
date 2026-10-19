@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.RingTheory.Depth
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
@@ -22,7 +22,7 @@ import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.RingTheory.MiracleFlatness
 import WeilConjectures.Mathlib.RingTheory.Flat.Localization

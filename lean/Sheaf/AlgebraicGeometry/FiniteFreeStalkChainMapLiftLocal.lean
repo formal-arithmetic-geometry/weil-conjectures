@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink
 
 /-! # Finite matrix extension to one neighbourhood
 

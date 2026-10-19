@@ -7,12 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
-import Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification
+import WeilConjectures.AlgebraicGeometry.FlatFpLqfBoundedStratification
 import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 

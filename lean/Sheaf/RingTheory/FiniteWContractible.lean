@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.FiniteWContractibleComponents
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.RingTheory.ProEtale.IntegralLocal
 import WeilConjectures.Mathlib.RingTheory.Idempotents
 

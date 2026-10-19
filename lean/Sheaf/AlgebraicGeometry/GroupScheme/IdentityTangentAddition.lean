@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
+import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 
 /-!
 # Compatibility of identity tangent transport with the vector-space operations

@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCupProductMap
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDualPairing
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDualPairing
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Perfect pushed-forward pairings split the evaluation counit

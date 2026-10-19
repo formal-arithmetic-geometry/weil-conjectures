@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import WeilConjectures.SixFunctors.Finite.GlobalSections
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
 import Sheaf.Paper.StrictlyHenselianEtaleAcyclic

@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.FiniteThickeningCartesian
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance

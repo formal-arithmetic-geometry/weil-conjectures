@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleMapIsoLocus
+public import WeilConjectures.AlgebraicGeometry.ModuleMapIsoLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import Sheaf.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen

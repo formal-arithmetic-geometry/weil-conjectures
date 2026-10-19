@@ -18,7 +18,7 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.RingTheory.Jacobson.Ring
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.TraceFormula.ProperCurveImagePositiveFibreComponent

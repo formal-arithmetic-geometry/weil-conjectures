@@ -28,7 +28,7 @@ import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact

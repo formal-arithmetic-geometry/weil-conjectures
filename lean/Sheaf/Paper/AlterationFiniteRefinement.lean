@@ -12,7 +12,7 @@ import WeilConjectures.Blowup.Affine.ChartAlgebra
 import WeilConjectures.Blowup.Gluing
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import WeilConjectures.AlgebraicGeometry.DenseOpenComponentCoproduct
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.ReducedSourceFactors
@@ -22,7 +22,6 @@ import WeilConjectures.Blowup.Principalization
 import Sheaf.Compactification.NagataSketchClosure
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.FiniteAfterBlowup
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Blowup.FiniteDegree.Algebra
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 

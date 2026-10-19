@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import all Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso

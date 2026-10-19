@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization
 
 /-! # Unit-compatible coefficient isomorphism on a fixed base-change chart
 

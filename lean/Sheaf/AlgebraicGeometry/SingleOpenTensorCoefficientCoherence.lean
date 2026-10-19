@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
-import Sheaf.AlgebraicGeometry.TensorPullbackCompositionAssociativity
+import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 
 /-! # Single-module coefficients in an open square
 

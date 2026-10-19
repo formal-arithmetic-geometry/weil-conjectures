@@ -85,13 +85,14 @@
  "unit": "sk-prop-sf-cbc",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SpreadGenericProductEmbedding",
-  "file": "lean/Sheaf/AlgebraicGeometry/SpreadGenericProductEmbedding.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SpreadGenericProductEmbedding",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SpreadGenericProductEmbedding.lean",
   "declaration": "exists_spread_generic_product_embedding",
   "statement": "theorem exists_spread_generic_product_embedding\n    (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (hsplit :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      Nonempty ((((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j)))\n    (c0 : A) (hc0 : c0 ≠ 0) (S0 : Subalgebra A K')\n    [IsLocalization.Away c0 S0] (A0 : Subalgebra S0 K')\n    [Module.Finite S0 A0] [Algebra.Etale S0 A0] [IsFractionRing A0 K']\n    (hsurj : Surjective (Spec.map (CommRingCat.ofHom (algebraMap S0 A0)))) :\n    ∃ (c : A) (A' : Type u) (_ : CommRing A') (_ : Algebra (Localization.Away c) A')\n      (_ : Algebra A A') (_ : IsScalarTower A (Localization.Away c) A')\n      (_ : IsDomain A') (_ : Algebra A' K'),\n      c ≠ 0 ∧ Module.Finite (Localization.Away c) A' ∧\n        Algebra.Etale (Localization.Away c) A' ∧ IsFractionRing A' K' ∧\n        Surjective (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away c) A'))) ∧\n        ∃ (_ : ∀ j, Algebra A' (L j)) (_ : ∀ j, IsScalarTower A' K' (L j)),\n          letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A')\n          ∃ f : ((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) →ₐ[A'] (∀ j, L j),\n            Function.Injective f ∧\n            (∀ j, ∃ e, ∀ i, f e i = if i = j then 1 else 0) ∧\n            (∀ j (z : L j), ∃ a : A', a ≠ 0 ∧\n              ∃ x, algebraMap A' (L j) a * z = f x j)",
   "branch": "sheaf-dag",
   "by": "K3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.SpreadGenericProductEmbedding; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

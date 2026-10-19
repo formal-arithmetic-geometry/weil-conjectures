@@ -9,12 +9,12 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent
 

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Sheaf.AlgebraicGeometry.GeometricGenericCoverModel
-import Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
+import WeilConjectures.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
 import Sheaf.AlgebraicGeometry.CommonFieldFibreComparison
 
 /-!

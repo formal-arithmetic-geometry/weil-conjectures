@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
 public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Synchronizing rank witnesses, including empty fibres

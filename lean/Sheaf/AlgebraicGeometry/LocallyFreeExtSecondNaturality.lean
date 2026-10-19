@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Sheaf.CategoryTheory.RightDerivedExactComposite

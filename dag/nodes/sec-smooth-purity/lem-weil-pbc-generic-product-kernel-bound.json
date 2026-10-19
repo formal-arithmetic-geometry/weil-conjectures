@@ -94,13 +94,14 @@
  "unit": "sk-prop-sf-cbc",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GenericProductKernelBound",
-  "file": "lean/Sheaf/AlgebraicGeometry/GenericProductKernelBound.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GenericProductKernelBound",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GenericProductKernelBound.lean",
   "declaration": "exists_generic_product_kernel_bound",
   "statement": "theorem exists_generic_product_kernel_bound\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (R0 : Type (max u v)) [CommRing R0] [IsNoetherianRing R0]\n    [IsDomain R0]\n    [Algebra A R0] [Algebra R0 K'] [IsScalarTower A R0 K']\n    [IsFractionRing R0 K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (e :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      (((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))\n    : ∃ t : R0, t ≠ 0 ∧ ∀ s : R0, t ∣ s →\n      ∀ (R : Type u) [CommRing R] [Algebra R0 R] [IsLocalization.Away s R]\n        [Algebra A R] [IsScalarTower A R0 R] [Algebra R K']\n        [IsScalarTower R0 R K'] [IsFractionRing R K']\n        [∀ j, Algebra R (L j)] [∀ j, IsScalarTower R K' (L j)],\n        letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)\n        ∀ f : ((B ⊗[A] R) ⧸ nilradical (B ⊗[A] R)) →ₐ[R] (∀ j, L j),\n            (∀ b : B, f (Ideal.Quotient.mk _ (b ⊗ₜ[A] (1 : R))) =\n              e (Ideal.Quotient.mk _ (((1 : K) ⊗ₜ[A] b) ⊗ₜ[K] (1 : K')))) →\n          Function.Injective f",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.GenericProductKernelBound; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -13,14 +13,14 @@ public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.RingTheory.Depth
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

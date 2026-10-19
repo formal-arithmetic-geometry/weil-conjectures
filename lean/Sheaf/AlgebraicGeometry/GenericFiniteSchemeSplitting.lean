@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
+import WeilConjectures.AlgebraicGeometry.GenericFiniteAlgebraSplitting
 import Sheaf.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents
 
 /-!

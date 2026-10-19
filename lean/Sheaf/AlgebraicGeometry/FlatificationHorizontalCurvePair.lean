@@ -26,7 +26,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
@@ -34,7 +34,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 import WeilConjectures.Blowup.Proper

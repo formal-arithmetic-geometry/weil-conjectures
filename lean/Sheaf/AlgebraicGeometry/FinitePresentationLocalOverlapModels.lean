@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 import Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting
 import Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence
 

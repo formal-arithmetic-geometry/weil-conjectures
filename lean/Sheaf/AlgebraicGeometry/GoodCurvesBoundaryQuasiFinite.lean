@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

@@ -8,7 +8,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 /-! # Exactness of the algebra-valued finite sheaf-Hom functor

@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.Thickening
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening
 import Sheaf.AlgebraicGeometry.ThickeningIntegral
 

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.Sober
 public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.BirationalCommonDenseOpens
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group NC
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 

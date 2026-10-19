@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 import Sheaf.RingTheory.QuasiFiniteComposition
 import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite

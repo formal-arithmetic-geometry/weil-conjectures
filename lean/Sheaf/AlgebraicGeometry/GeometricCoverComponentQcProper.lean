@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 import Sheaf.RingTheory.EtaleNormalRing

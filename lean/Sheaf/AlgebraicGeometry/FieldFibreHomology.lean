@@ -4,7 +4,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed

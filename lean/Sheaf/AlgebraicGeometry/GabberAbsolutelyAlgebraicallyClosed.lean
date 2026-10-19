@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.GabberQuotientLocalizations
+import WeilConjectures.AlgebraicGeometry.GabberQuotientLocalizations
 import Sheaf.AlgebraicGeometry.GabberQuotientPrincipalH1
 import WeilConjectures.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
 import Sheaf.Paper.GabberCriterion

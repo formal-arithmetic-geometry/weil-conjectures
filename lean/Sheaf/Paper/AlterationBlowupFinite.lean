@@ -7,7 +7,7 @@ import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Gluing
 import WeilConjectures.Compactification.StrictTransform
 import Sheaf.AlgebraicGeometry.FiniteAfterBlowup
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import WeilConjectures.Blowup.Density
 import WeilConjectures.Blowup.Proper

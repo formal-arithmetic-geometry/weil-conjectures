@@ -5,14 +5,14 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleCanonicalEventually
-import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleTransport
+import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleTransport
 
 /-! # Persistent eventual triple overlap equation
 

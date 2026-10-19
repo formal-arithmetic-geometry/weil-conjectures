@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.FinitePresentation
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.CategoryTheory.Filtered.Final
 import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound

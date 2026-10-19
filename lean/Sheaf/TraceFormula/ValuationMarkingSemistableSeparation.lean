@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.StrictlySemistableCurve
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.ValuationSemistableStableContraction
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Sheaf.TraceFormula.SmoothTargetModificationExceptionalTree

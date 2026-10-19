@@ -17,7 +17,7 @@ public import Mathlib.Topology.Irreducible
 import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.Morphisms.GenericallyFiniteQuasiFiniteOverDimensionOne
 

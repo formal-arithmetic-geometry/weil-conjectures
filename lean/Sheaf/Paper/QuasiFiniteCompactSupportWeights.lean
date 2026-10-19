@@ -6,7 +6,7 @@ Authors: SHEAF group NX
 module
 
 public import Sheaf.Paper.WeilMixedUpperBounds
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.Paper.WeilCompactSupportCohomology
 public import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.LocalFrobeniusTrace

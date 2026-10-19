@@ -108,13 +108,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeRestrictionUnitNormalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeRestrictionUnitNormalization.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.restriction_chart_unit_normalization",
   "statement": "theorem restriction_chart_unit_normalization\n    {X X' Y Z L T : Scheme.{u}}\n    (p : X' ⟶ X) (a : Y ⟶ X) (u : Z ⟶ X') (l : L ⟶ X')\n    (j : L ⟶ Z) (q : Z ⟶ Y) (t : T ⟶ Y) (σ : L ≅ T)\n    [IsOpenImmersion a] [IsOpenImmersion u] [IsOpenImmersion l]\n    [IsOpenImmersion j]\n    (eju : j ≫ u = l) (eqa : q ≫ a = u ≫ p) (ef : σ.hom ≫ t = j ≫ q)\n    (F : X.Modules)\n    (ψ : (restrictFunctor a).obj F ⟶\n      (pushforward q).obj ((restrictFunctor u).obj ((tensorPullback p).obj F)))\n    (square :\n      (restrictAdjunction a).unit.app F ≫ (pushforward a).map ψ ≫\n        (pushforwardComp q a).hom.app ((restrictFunctor u).obj ((tensorPullback p).obj F)) ≫\n        (pushforwardCongr eqa).hom.app\n          ((restrictFunctor u).obj ((tensorPullback p).obj F)) =\n      (Classical.choose (exists_tensorPullbackAdjunction p)).unit.app F ≫\n        (pushforward p).map ((restrictAdjunction u).unit.app ((tensorPullback p).obj F)) ≫\n        (pushforwardComp u p).hom.app\n          ((restrictFunctor u).obj ((tensorPullback p).obj F))) :\n    let N := (pullback a).obj F\n    let G := (tensorPullback p).obj F\n    let M := (restrictFunctor l).obj G\n    let c := (restrictFunctorComp j u).symm.app G ≪≫\n      (restrictFunctorCongr eju).app G\n    let r := (restrictAdjunction j).unit.app ((restrictFunctor u).obj G) ≫\n      (pushforward j).map c.hom\n    let b := ((restrictFunctorIsoPullback a).app F).inv ≫ ψ ≫\n      (pushforward q).map r ≫ (pushforwardComp j q).hom.app M ≫\n      (pushforwardCongr ef).inv.app M ≫ (pushforwardComp σ.hom t).inv.app M\n    let e : (σ.hom ≫ t) ≫ a = l ≫ p := by\n      rw [ef, Category.assoc, eqa, ← Category.assoc, eju]\n    let rightIso : pushforward σ.hom ⋙ pushforward t ⋙ pushforward a ≅\n        pushforward l ⋙ pushforward p :=\n      (Functor.associator _ _ _).symm ≪≫\n        Functor.isoWhiskerRight (pushforwardComp σ.hom t) (pushforward a) ≪≫\n        pushforwardComp (σ.hom ≫ t) a ≪≫ pushforwardCongr e ≪≫\n        (pushforwardComp l p).symm\n    let adj₁ := (restrictAdjunction a).comp\n      ((pullbackPushforwardAdjunction t).comp (pullbackPushforwardAdjunction σ.hom))\n    let adj₂ := (Classical.choose (exists_tensorPullbackAdjunction p)).comp\n      (restrictAdjunction l)\n    let k : (pullback σ.hom).obj ((pullback t).obj N) ≅ M :=\n      (pullback σ.hom).mapIso ((pullback t).mapIso\n        ((restrictFunctorIsoPullback a).symm.app F)) ≪≫\n        (adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm)).app F\n    (pullbackPushforwardAdjunction σ.hom).homEquiv _ _ k.hom =\n      ((pullbackPushforwardAdjunction t).homEquiv _ _).symm b",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

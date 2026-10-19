@@ -5,7 +5,7 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 
 /-! # Coherence from universal overlap tests

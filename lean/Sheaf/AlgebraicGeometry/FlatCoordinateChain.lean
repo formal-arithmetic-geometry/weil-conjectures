@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.RingTheory.Depth
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness

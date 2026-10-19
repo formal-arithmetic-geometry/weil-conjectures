@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 
 import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -27,7 +27,7 @@ import Mathlib.RingTheory.KrullDimension.PID
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.RingTheory.LimitModuleFinitePresentation
 import Sheaf.RingTheory.PowerPerturbationFibreDimension
 import Sheaf.TraceFormula.GenericPrincipalCoordinateDimensionDrop

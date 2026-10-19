@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Clopen fibre-rank and empty-fibre loci

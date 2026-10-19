@@ -17,7 +17,7 @@ public import Mathlib.Topology.Sober
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.FiniteType

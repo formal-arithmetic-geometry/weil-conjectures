@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent

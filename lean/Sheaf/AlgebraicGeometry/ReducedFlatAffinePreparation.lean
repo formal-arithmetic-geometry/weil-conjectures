@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import WeilConjectures.AlgebraicGeometry.AffineReductionPreparation
 import WeilConjectures.AlgebraicGeometry.AffinePreparationRestriction
 

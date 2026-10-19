@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FormallySmooth
+public import WeilConjectures.AlgebraicGeometry.FormallySmooth
 public import Mathlib.RingTheory.RingHom.Smooth
 import all WeilConjectures.AlgebraicGeometry.UniversalThickeningAffineCase
 

@@ -21,7 +21,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation

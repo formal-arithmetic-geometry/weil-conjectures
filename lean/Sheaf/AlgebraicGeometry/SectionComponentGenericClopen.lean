@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
-import Sheaf.AlgebraicGeometry.GenericFibreComponentSpread
+import WeilConjectures.AlgebraicGeometry.GenericFibreComponentSpread
 import Sheaf.AlgebraicGeometry.GenericPointedClopenFibres
 
 /-!

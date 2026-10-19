@@ -6,15 +6,15 @@ Authors: SHEAF group Q09
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeCoverDescentDatum
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.FppfAffineRefinement
 import Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction
 import WeilConjectures.AlgebraicGeometry.InvariantOpenEffectiveDescent
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
-import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 

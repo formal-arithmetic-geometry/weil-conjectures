@@ -93,13 +93,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineChartModels.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationAffineChartModels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationAffineChartModels.lean",
   "declaration": "AlgebraicGeometry.exists_finitePresentation_affine_chart_object_models",
   "statement": "theorem exists_finitePresentation_affine_chart_object_models\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (M : (pullback f (c.π.app (op i))).Modules)\n    (hM : M.IsFinitePresentation) (hMq : M.IsQuasicoherent)\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    ∃ (j : I) (hij : i ≤ j),\n      let U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u} :=\n        V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE hij))))\n      let p := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n      ∃ N : (U.X a).Modules,\n        N.IsFinitePresentation ∧ N.IsQuasicoherent ∧\n        Nonempty ((Scheme.Modules.pullback (U.pullbackHom p a)).obj N ≅\n          (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M)",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

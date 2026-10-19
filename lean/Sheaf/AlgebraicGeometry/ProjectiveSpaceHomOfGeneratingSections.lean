@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Sheaf.AlgebraicGeometry.GeneratingSectionsStalkSpan
+import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
 import WeilConjectures.AlgebraicGeometry.InvertibleStalkLinearEquiv
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus

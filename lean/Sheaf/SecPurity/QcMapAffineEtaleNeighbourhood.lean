@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.Defs.Filter
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover
 import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint
 import Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite

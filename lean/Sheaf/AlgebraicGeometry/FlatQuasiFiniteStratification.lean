@@ -6,12 +6,12 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import all Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+import all WeilConjectures.AlgebraicGeometry.FlatFpLqfBoundedStratification
 import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompact
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 

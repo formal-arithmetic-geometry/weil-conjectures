@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModificationFibreValuationSets
 public import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 public import Sheaf.TraceFormula.Modification
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.DominantIntegralCurveQuasiFinite
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import WeilConjectures.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Extension.Presentation.Basic
 

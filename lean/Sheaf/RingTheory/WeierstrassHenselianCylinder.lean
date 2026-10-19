@@ -22,7 +22,7 @@ import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
 import Sheaf.RingTheory.PowerSeriesAdicEvaluation
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
-import Sheaf.RingTheory.QuotientHenselianPair
+import WeilConjectures.RingTheory.QuotientHenselianPair
 import Sheaf.RingTheory.LocalPairHenselizationComparison
 import WeilConjectures.Mathlib.RingTheory.Henselian
 

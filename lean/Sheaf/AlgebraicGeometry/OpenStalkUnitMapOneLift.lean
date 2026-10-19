@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLiftBridge
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
 
 /-! # One unit-source open-site stalk map lifts on one neighbourhood
 

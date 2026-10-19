@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PicardCupProductMap
-import Sheaf.AlgebraicGeometry.StalkFiniteFree
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.StalkFiniteFree
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic

@@ -26,7 +26,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology

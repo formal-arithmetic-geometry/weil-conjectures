@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.GenericComponentsSplit
-import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension
+import WeilConjectures.AlgebraicGeometry.SpreadFiniteSeparableExtension
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!

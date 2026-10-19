@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink
 
 /-! # Spreading a finite free homotopy normal form from a stalk
 

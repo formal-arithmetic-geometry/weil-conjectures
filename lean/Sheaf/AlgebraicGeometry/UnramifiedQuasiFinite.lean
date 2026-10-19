@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 import Mathlib.RingTheory.Unramified.LocalStructure
 

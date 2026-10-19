@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
 import Sheaf.AlgebraicGeometry.PullbackDualFiniteLocallyFree
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 

@@ -5,8 +5,8 @@ Authors: SHEAF group NX
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-public import Sheaf.AlgebraicGeometry.Thickening
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite

@@ -120,13 +120,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkDegreewiseShrink.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeStalkDegreewiseShrink.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_shrink_degreewise_comm_of_stalk",
   "statement": "theorem exists_shrink_degreewise_comm_of_stalk\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (a b c e : ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hQc : Q.IsStrictlyGE c) (hQe : Q.IsStrictlyLE e)\n    (hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty\n      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (y : Y) (U : Y.Opens) (hyU : y ∈ U)\n    (g : ∀ n : ℤ,\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n)\n    (hcomm : ∀ n : ℤ,\n      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (g n) ≫\n        (((Modules.pullback (U.fromSpecStalkOfMem y hyU)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj\n          (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)).d\n            n (n + 1) =\n      (((Modules.pullback (U.fromSpecStalkOfMem y hyU)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj\n        (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)).d\n          n (n + 1) ≫ (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (g (n + 1))) :\n    ∃ (V : Y.Opens), ∃ (hyV : y ∈ V), V ≤ U ∧ ∃ (k : ∀ n : ℤ,\n      (((restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n),\n      (∀ n : ℤ, k n ≫\n        (((restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).d\n          n (n + 1) =\n        (((restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).d\n          n (n + 1) ≫ k (n + 1)) ∧\n      (∀ n : ℤ, (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map (k n) =\n        ((stalkRestrictionComplexIso V y hyV).app P).hom.f n ≫\n        ((stalkRestrictionComplexIso U y hyU).app P).inv.f n ≫\n        (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (g n) ≫\n        ((stalkRestrictionComplexIso U y hyU).app Q).hom.f n ≫\n        ((stalkRestrictionComplexIso V y hyV).app Q).inv.f n)",
   "branch": "sheaf-dag",
   "by": "M2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

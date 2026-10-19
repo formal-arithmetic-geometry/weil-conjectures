@@ -20,7 +20,7 @@ import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.RingTheory.QuotientHenselianPair
+import WeilConjectures.RingTheory.QuotientHenselianPair
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence

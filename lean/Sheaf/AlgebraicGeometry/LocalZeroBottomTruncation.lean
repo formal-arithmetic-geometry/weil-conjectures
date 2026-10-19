@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Flat bottom homology and its truncation arrow

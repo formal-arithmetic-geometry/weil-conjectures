@@ -5,7 +5,7 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 
 /-! # Canonical comparisons on pairwise base-change overlaps
 

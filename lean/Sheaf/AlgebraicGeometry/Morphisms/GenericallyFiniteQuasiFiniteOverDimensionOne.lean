@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Irreducible
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.RingTheory.AffineDimensionInequality
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso

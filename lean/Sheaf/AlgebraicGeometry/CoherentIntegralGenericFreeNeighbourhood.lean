@@ -12,8 +12,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleStalkFinite
-import Sheaf.AlgebraicGeometry.FiniteFreeModuleStalkEquiv
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleStalkFinite
+import WeilConjectures.AlgebraicGeometry.FiniteFreeModuleStalkEquiv
 import Mathlib.LinearAlgebra.Dimension.Free
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 

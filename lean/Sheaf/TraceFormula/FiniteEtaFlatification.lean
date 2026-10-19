@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Sheaf.TraceFormula.SchematicallyDenseOpen
 import Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import WeilConjectures.Blowup.AdmissibleBlowup
 import WeilConjectures.Blowup.Affine.ChartAlgebra
 import WeilConjectures.Blowup.FiniteDegree.Algebra

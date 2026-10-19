@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Finitely many ranks on an affine part of the universal rank locus
 

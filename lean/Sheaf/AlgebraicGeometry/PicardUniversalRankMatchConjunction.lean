@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
 public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 
 /-! # Synchronizing the two local rank conditions

@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import all Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
 import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Residue-field criterion for universal Picard rank matching
 

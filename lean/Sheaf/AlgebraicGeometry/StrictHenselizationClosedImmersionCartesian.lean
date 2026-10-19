@@ -15,7 +15,7 @@ import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Sheaf.RingTheory.PointedEtaleFiltered
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 
 /-!

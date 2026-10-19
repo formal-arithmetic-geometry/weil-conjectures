@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.RadicialGenericReducedPreparation
 
 /-! # A generically geometrically reduced model after a radicial base change

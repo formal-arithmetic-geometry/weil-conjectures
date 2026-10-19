@@ -6,7 +6,7 @@ Authors: SHEAF group NR
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 import Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens
 import Sheaf.AlgebraicGeometry.EtaleRelationQuotient
 import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
-import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

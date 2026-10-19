@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.PicardRankMatchDirectImage
 import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
 import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank

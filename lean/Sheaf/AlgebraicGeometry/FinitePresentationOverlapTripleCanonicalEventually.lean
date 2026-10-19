@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback

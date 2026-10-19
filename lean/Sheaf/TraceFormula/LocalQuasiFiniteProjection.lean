@@ -5,7 +5,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.TraceFormula.WeakRelativeNoetherNormalization
 
 /-!

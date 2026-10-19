@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Mathlib.Algebra.Homology.Additive
-import Sheaf.AlgebraicGeometry.GeometricStalkColimits
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Sites.Etale
@@ -34,7 +34,6 @@ import Sheaf.AlgebraicGeometry.GlobalGeneratedStalkwise
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import Sheaf.AlgebraicGeometry.SepClosedEtaleGlobalGeneration
 import Sheaf.CategoryTheory.GloballyGeneratedSheafColimit
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 
 /-!
 # Global generation of abelian étale sheaves supported on closed points

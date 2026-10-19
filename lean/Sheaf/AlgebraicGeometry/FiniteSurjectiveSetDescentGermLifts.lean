@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentCoordinatesConstant
+import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentCoordinatesConstant
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber

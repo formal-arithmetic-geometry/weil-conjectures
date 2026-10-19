@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.RingTheory.HenselianFactorizationCriterion
 import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import Sheaf.RingTheory.HenselianPairPrimeConnected
 import Sheaf.Topology.WLocalComponents
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian

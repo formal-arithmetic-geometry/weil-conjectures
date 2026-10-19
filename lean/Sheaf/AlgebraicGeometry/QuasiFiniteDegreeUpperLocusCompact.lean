@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompactAux
 
 /-! # Quasi-compactness of upper fibre-degree loci -/

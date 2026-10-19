@@ -36,12 +36,12 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegralExtensionDimension
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.AffineOpenStrictLocalConstantBound
 

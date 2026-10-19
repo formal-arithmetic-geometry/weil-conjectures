@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.ModuleMapIsoLocusPullback
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusPullback
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusPullback
 
 /-! # The universal isomorphism open of a map of vector bundles
 

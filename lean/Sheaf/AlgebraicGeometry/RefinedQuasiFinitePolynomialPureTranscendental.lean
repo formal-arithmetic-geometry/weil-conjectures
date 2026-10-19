@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Localization.FractionRing
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

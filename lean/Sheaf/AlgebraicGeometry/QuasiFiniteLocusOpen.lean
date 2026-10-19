@@ -5,7 +5,7 @@ Authors: SHEAF groups J1 and Z8
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.RingTheory.QuasiFiniteLocusOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs

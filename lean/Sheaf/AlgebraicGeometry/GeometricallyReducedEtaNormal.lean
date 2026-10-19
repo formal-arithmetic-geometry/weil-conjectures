@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 import Sheaf.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
-import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.SerreCriterionReduced
