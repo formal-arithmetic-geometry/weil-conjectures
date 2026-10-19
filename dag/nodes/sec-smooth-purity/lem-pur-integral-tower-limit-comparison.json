@@ -2,93 +2,76 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Put $A=F_f(T)_\\bullet$ and $D=W_\\bullet$, regarded as coherent derived coefficient systems. The finite module pullback in [def-pur-integral-derived-operations] is exact and its termwise complex computes $Lf_n^*$; [def-weil-derived-tensor] computes $U_n\\otimes^L_{B_{X,n}}V_n$ by the given total tensor, since $U_n$ is K-flat. Thus $A$ and $D$ are precisely the pullback and tensor systems in [lem-pur-completed-operation-tower-substitution], which states that they are normalized. The strict maps $c$ and $c^{-1}$ define mutually inverse coherent system morphisms: each is a chain map, and the required transition squares are hypotheses. The strict-system interpretation in [lem-coef-semilinear-derived-sections] applies without a boundedness or coefficient-flatness assumption. After restriction to $R_X$ these are strict tower maps: semilinearity along $q_{m,n}$ becomes $R_X$-linearity because $q_{m,n}\\pi_m=\\pi_n$.",
+   "text": "The supplied CoefficientDerivedSystemCalculus jointly detects derived isomorphisms. Mathlib's jointly conservative zero-object criterion and the proved DerivedCategory.isZero_Q_obj_iff show that its evaluations jointly detect acyclicity. Evaluation sends an acyclic test complex F to an acyclic complex by its exact derived comparison. The canonical coefficientEvaluationTensorIso identifies the evaluation of Tot(F tensor U) with Tot(F_n tensor U_n); levelwise K-flatness makes these acyclic. Joint detection proves whole-system K-flatness of U and V.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-derived-tensor",
-    "lem-pur-completed-operation-tower-substitution",
-    "lem-coef-semilinear-derived-sections"
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0941 (lemma-derived-limit-is-ok); agent identification of the supplied strict models with the existing system operations."
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
    }
   },
   {
-   "text": "Use the actual derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], on the strict $R_X$-towers just obtained. Write $\\mathcal L=\\mathcal L_X$. Since $c^{-1}c=1_A$ and $cc^{-1}=1_D$ already as strict maps, functoriality gives $\\mathcal L(c^{-1})\\mathcal L(c)=\\mathcal L(c^{-1}c)=1_{\\mathcal L A}$ and $\\mathcal L(c)\\mathcal L(c^{-1})=1_{\\mathcal L D}$. These are the maps of the fixed total derived functor, not maps chosen from a distinguished triangle.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), total right derived functor on the tower site; identity and composition laws."
-   }
-  },
-  {
-   "text": "Let $S=\\widehat F_f\\mathcal L_YT$ and $P=\\widehat T_X(\\mathcal L_XU,\\mathcal L_XV)$. Apply [lem-pur-completed-operation-tower-substitution] to the normalized inputs $T,U,V$. In its stated orientation the substitution isomorphisms are $a:S\\xrightarrow{\\sim}\\mathcal L A$ and $b:P\\xrightarrow{\\sim}\\mathcal L D$. They are obtained from $F_f(e_T)$ and $T_X(e_U,e_V)$ before taking the limit, so these are exactly the identifications specified in the item. In these coordinates the required maps are $\\mu=b^{-1}\\mathcal L(c)a:S\\to P$ and $\\nu=a^{-1}\\mathcal L(c^{-1})b:P\\to S$. Substitution of the two equations in step 2 gives $\\nu\\mu=a^{-1}1_{\\mathcal L A}a=1_S$ and $\\mu\\nu=b^{-1}1_{\\mathcal L D}b=1_P$.",
+   "text": "Apply ComparisonLaws.invertible to the one-input pullback expression and the two-input tensor expression. Their recursive comparisons simplify to the primitive pullbackComparison and tensorComparison, hence these are invertible. Compose their asIso presentations with the exact pullback mapDerivedCategoryFactors and the inverse CoefficientTensorModels.iso on the whole-system K-flat U,V. This constructs Realization with exactly a_formula and b_formula.",
    "uses": [
     "lem-pur-completed-operation-tower-substitution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); agent transport through the already stated completed-operation substitution isomorphisms."
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
    }
   },
   {
-   "text": "Write $\\mathcal R=\\mathcal R_X$. The coherent counits $e_A:\\mathcal R\\mathcal L A\\xrightarrow{\\sim}A$ and $e_D:\\mathcal R\\mathcal L D\\xrightarrow{\\sim}D$ exist by [lem-coef-normalized-dvr-effectivity], since step 1 established normalization. By [lem-pur-completed-operation-tower-substitution] the prescribed reduction identifications are $r_S=e_A\\mathcal R(a):\\mathcal RS\\to A$ and $r_P=e_D\\mathcal R(b):\\mathcal RP\\to D$. Naturality of the canonical counit at the coherent morphism $c$ is $e_D\\mathcal R\\mathcal L(c)=c e_A$. Consequently $r_P\\mathcal R(\\mu)=e_D\\mathcal R(b)\\mathcal R(b^{-1})\\mathcal R\\mathcal L(c)\\mathcal R(a)=c r_S$. The same computation for $c^{-1}$ gives $r_S\\mathcal R(\\nu)=c^{-1}r_P$. These are equations of coherent system morphisms; in particular their evaluations at every $n$ respect every quotient transition, not merely the objects at each level.",
+   "text": "Define comparison by the already specified conjugation r.a followed by the total-limit image of Q.mapIso c followed by r.b inverse. Its inverse is the inverse of this composite; both inverse equations are the ordinary Iso laws. The equations comparison.hom followed by r.b.hom and comparison.inv followed by r.a.hom follow by cancellation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
+   }
+  },
+  {
+   "text": "ComparisonLaws.normalized applied to the one-input pullback expression and the two-input tensor expression gives normalization of the derived operations. ComparisonLaws.counit makes their counits invertible; NatTrans.isIso_app_iff_of_iso transports this to the strict representatives. Hence sourceReduction and targetReduction are isomorphisms. For any counit epsilon:L followed by R to identity, the equation mu followed by b = a followed by L(c) implies R(mu) followed by R(b) followed by epsilon = R(a) followed by epsilon followed by c, by functoriality and counit naturality. Apply this once to c and once to its inverse.",
    "uses": [
-    "lem-coef-normalized-dvr-effectivity",
     "lem-pur-completed-operation-tower-substitution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); agent counit-naturality calculation in the coherent system category."
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
    }
   },
   {
-   "text": "For a commuting diagram to $(T',U',V',c')$, denote its input maps by $t,u,v$, and put $x=F_f(t):A\\to A'$ and $y=T_X(u,v):D\\to D'$. The diagram hypothesis is $yc=c'x$. The substitution identifications are natural by [lem-pur-completed-operation-tower-substitution]: if $s=\\widehat F_f(\\mathcal L_Yt)$ and $p=\\widehat T_X(\\mathcal L_Xu,\\mathcal L_Xv)$, then $a's=\\mathcal L(x)a$ and $b'p=\\mathcal L(y)b$. Functoriality from [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore yields $p\\mu=(b')^{-1}\\mathcal L(yc)a=(b')^{-1}\\mathcal L(c'x)a=\\mu's$. For inverses the same square gives $xc^{-1}=(c')^{-1}y$, hence $s\\nu=\\nu'p$. This is the required compatibility for any such diagram.",
+   "text": "The primitive pullback and tensor comparisons are components of the explicit composites of realization natural transformations with whiskered counits. Their naturality, together with mapDerivedCategoryFactors naturality and naturality of the K-flat total-tensor model, proves the two substitution squares for any realizations satisfying their formulas. Map the supplied strict square through Q and the limit functor. Cancel the target substitution isomorphism to obtain the forward comparison square, then cancel the forward comparison isomorphism to obtain the inverse square.",
    "uses": [
-    "lem-pur-completed-operation-tower-substitution",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-pur-completed-operation-tower-substitution"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); agent pasting of the substitution naturality squares."
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
    }
   },
   {
-   "text": "Finally suppose $t,u,v$ are simultaneous quasi-isomorphisms of the given flat-term K-flat representatives. They are equivalences of coherent systems by [lem-coef-semilinear-derived-sections], which detects equivalences on evaluations. The system operations in [lem-pur-completed-operation-tower-substitution] and the limit functor therefore send them to isomorphisms. The square $p\\mu=\\mu's$ of step 5 identifies the two maps after these isomorphisms. For a change of the K-flat resolutions used to define the completed input operations, [lem-pur-integral-operations-well-defined] supplies the unique natural comparison isomorphisms compatible with the displayed complex construction after localization. The substitution maps are constructed from those operations and their coherent counits, so their naturality identifies $s,p$ with these resolution comparisons. Thus the equality just proved is precisely equality under the canonical resolution identifications claimed in the item.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-completed-operation-tower-substitution",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pur-integral-operations-well-defined"
-   ],
-   "elementary": false,
+   "text": "The standard derived localization sends the three simultaneous quasi-isomorphisms to isomorphisms. Functoriality of the actual limit and completed-operation functors gives IsIso sourceMap and IsIso targetMap; the product of the two tensor-input isomorphisms is invertible by isIso_prod_iff. These are precisely the maps fixed by the existing definitions and the preceding naturality equations.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0941 (lemma-derived-limit-is-ok) and 07A4 (lemma-pullback-tensor-product); agent localization and resolution-comparison consequence of step 5."
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical proof from the recorded coherent-system comparison interfaces."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-integral-derived-operations",
-  "def-weil-derived-tensor",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-completed-operation-tower-substitution",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-operation-tower-substitution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941 (lemma-derived-limit-is-ok); categorical transport through the existing normalized-counit, completed-operation substitution and resolution-comparison statements. Tag 07A4 describes the finite comparison application, not this entire supporting lemma."
+  "place": "Tag 0941 (lemma-derived-limit-is-ok); Lean proof by evaluation detection of whole-system K-flatness, the supplied ComparisonLaws, naturality of actual representative models, and functorial transport of the strict isomorphism. Tag 07A4 describes the finite comparison application."
  },
  "mathlib_match": null,
  "status": "split",
@@ -234,11 +217,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-coef-semilinear-derived-sections"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -283,5 +262,15 @@
   "group": "Q54",
   "result": "fix",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T093446-L-2314070",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

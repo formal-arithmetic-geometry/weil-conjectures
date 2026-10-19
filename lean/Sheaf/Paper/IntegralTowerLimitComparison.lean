@@ -9,18 +9,11 @@ public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.IntegralReductionTowerCanonical
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Paper.NormalizedDVRTower
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
+import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.SemilinearDerivedSections
 /-! # Derived limit of a strict integral comparison tower
 
 Source: Stacks Project, Tag 0941, `lemma-derived-limit-is-ok`; Tag 07A4,
@@ -225,6 +218,172 @@ def Laws {M : CompletedOperations.Models l E (sites X Y)} {A : Input l E f}
     (QuasiIso d.t → QuasiIso d.u → QuasiIso d.v →
       IsIso (sourceMap l E d) ∧ IsIso (targetMap l E d))
 
+private theorem good_isKFlat (Z : Scheme.{t})
+    (S : CoefficientDerivedSystemCalculus l E Z)
+    (K : CochainComplex (coefficientSequenceModules l E Z) ℤ) (hK : Good l E Z K) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (R := coefficientSequenceCommRingSheaf l E Z) K := by
+  intro F hF
+  change ((total l E Z).obj (F, K)).Acyclic
+  apply (DerivedCategory.isZero_Q_obj_iff _).1
+  have hEval : JointlyReflectIsomorphisms (coefficientSequenceDerivedEvaluation l E Z) :=
+    ⟨fun g ↦ S.isIso_iff_evaluations g |>.2 (fun _ ↦ inferInstance)⟩
+  apply hEval.isZero_iff.2
+  intro n
+  let ev := coefficientSequenceEvaluation l E Z n
+  have hFn : ((ev.mapHomologicalComplex (.up ℤ)).obj F).Acyclic := by
+    apply (DerivedCategory.isZero_Q_obj_iff _).1
+    exact ((coefficientSequenceDerivedEvaluation l E Z n).map_isZero
+      ((DerivedCategory.isZero_Q_obj_iff F).2 hF)).of_iso
+        (ev.mapDerivedCategoryFactors.app F).symm
+  have hTensor := (hK n).1 _ hFn
+  have hz := (DerivedCategory.isZero_Q_obj_iff _).2 hTensor
+  exact hz.of_iso
+    ((ev.mapDerivedCategoryFactors.app ((total l E Z).obj (F, K))) ≪≫
+      DerivedCategory.Q.mapIso (coefficientEvaluationTensorIso l E Z n F K))
+
+private theorem pullbackComparison_isIso
+    (M : CompletedOperations.Models l E (sites X Y))
+    (hM : CompletedOperations.ComparisonLaws.{t, u, 0, 0} l E M)
+    (A : Input l E f) :
+    IsIso (CompletedOperations.pullbackComparison l E M (a := false) (b := true) f
+      (DerivedCategory.Q.obj A.T)) := by
+  let P : CompletedOperations.Expression (sites X Y) (fun _ : Unit ↦ true) false :=
+    .pullback (a := false) (b := true) f (.input ())
+  have h := (hM.invertible P (fun _ ↦ DerivedCategory.Q.obj A.T)
+    (fun _ ↦ A.normalizedT)).1
+  simpa [P, CompletedOperations.comparison, CompletedOperations.completedValue,
+    CompletedOperations.systemValue, Pi.eval] using h
+
+private theorem tensorComparison_isIso
+    (M : CompletedOperations.Models l E (sites X Y))
+    (hM : CompletedOperations.ComparisonLaws.{t, u, 0, 0} l E M)
+    (A : Input l E f) :
+    IsIso (CompletedOperations.tensorComparison l E M false
+      (DerivedCategory.Q.obj A.U) (DerivedCategory.Q.obj A.V)) := by
+  let P : CompletedOperations.Expression (sites X Y) (fun _ : Bool ↦ false) false :=
+    .tensor (.input false) (.input true)
+  let N : ∀ k : Bool, coefficientSequenceDerived l E ((sites X Y) false) :=
+    fun k ↦ if k then DerivedCategory.Q.obj A.V else DerivedCategory.Q.obj A.U
+  have hN : ∀ k, IsNormalizedCoefficientSequence l E _ (N k) := by
+    intro k
+    cases k
+    · exact A.normalizedU
+    · exact A.normalizedV
+  have h := (hM.invertible P N hN).1
+  simpa [P, N, CompletedOperations.comparison, CompletedOperations.completedValue,
+    CompletedOperations.systemValue, Pi.eval] using h
+
+private theorem source_naturality
+    (M : CompletedOperations.Models l E (sites X Y))
+    {A B : Input l E f} (r : Realization l E M A) (r' : Realization l E M B)
+    (d : Diagram l E A B) :
+    sourceMap l E d ≫ r'.a.hom = r.a.hom ≫
+      (coefficientSequenceLimit l E X).map
+        (DerivedCategory.Q.map ((pullback l E f).map d.t)) := by
+  rw [r.a_formula, r'.a_formula]
+  let L := coefficientSequenceLimit l E X
+  let F := integralComparisonDerivedSequencePullback l E f
+  let τ : coefficientSequenceLimit l E Y ⋙ integralDerivedPullback l E f ⟶ F ⋙ L :=
+    Functor.whiskerLeft (coefficientSequenceLimit l E Y)
+        (M.pullback (a := false) (b := true) f).realization.hom ≫
+      Functor.whiskerRight (Functor.whiskerRight (M.calculus true).adjunction.counit F) L
+  have hp := τ.naturality (DerivedCategory.Q.map d.t)
+  change sourceMap l E d ≫
+      CompletedOperations.pullbackComparison l E M (a := false) (b := true) f
+        (DerivedCategory.Q.obj B.T) =
+    CompletedOperations.pullbackComparison l E M (a := false) (b := true) f
+        (DerivedCategory.Q.obj A.T) ≫
+      L.map (F.map (DerivedCategory.Q.map d.t)) at hp
+  rw [← Category.assoc, hp, Category.assoc, ← L.map_comp]
+  rw [show F.map (DerivedCategory.Q.map d.t) ≫
+      (integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.app B.T =
+    (integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.app A.T ≫
+      DerivedCategory.Q.map ((pullback l E f).map d.t) from
+      (integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.naturality d.t]
+  simp only [L.map_comp, Category.assoc]
+  rfl
+
+set_option maxHeartbeats 800000 in
+-- Elaborating the two tensor presentations compares the explicit sheafification instances.
+private theorem target_naturality
+    (M : CompletedOperations.Models l E (sites X Y))
+    {A B : Input l E f} (r : Realization l E M A) (r' : Realization l E M B)
+    (d : Diagram l E A B) :
+    targetMap l E d ≫ r'.b.hom = r.b.hom ≫
+      (coefficientSequenceLimit l E X).map
+        (DerivedCategory.Q.map ((total l E X).map (d.u, d.v))) := by
+  rw [r.b_formula, r'.b_formula]
+  let L := coefficientSequenceLimit l E X
+  let T := CompletedOperations.tensor l E M false
+  let μ := CompletedOperations.tensorRealization l E M false
+  let e := (M.calculus false).adjunction.counit
+  let ee : ((L ⋙ (M.calculus false).reduction).prod
+      (L ⋙ (M.calculus false).reduction)) ⟶ 𝟭 _ := NatTrans.prod e e
+  let τ : L.prod L ⋙ IntegralOnSlice.completedTensor l E X none ⟶ T ⋙ L :=
+    Functor.whiskerLeft (L.prod L) μ.hom ≫ Functor.whiskerRight (Functor.whiskerRight ee T) L
+  have hp := τ.naturality (Prod.mkHom (DerivedCategory.Q.map d.u) (DerivedCategory.Q.map d.v))
+  change targetMap l E d ≫ CompletedOperations.tensorComparison l E M false
+      (DerivedCategory.Q.obj B.U) (DerivedCategory.Q.obj B.V) =
+    CompletedOperations.tensorComparison l E M false
+      (DerivedCategory.Q.obj A.U) (DerivedCategory.Q.obj A.V) ≫
+        L.map (T.map (Prod.mkHom (DerivedCategory.Q.map d.u)
+          (DerivedCategory.Q.map d.v))) at hp
+  let KFlat := ObjectProperty.FullSubcategory
+    (CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (R := coefficientSequenceCommRingSheaf l E X) :
+        CochainComplex (coefficientSequenceModules l E X) ℤ → Prop)
+  let h : ((⟨A.U, r.kflatU⟩, ⟨A.V, r.kflatV⟩) : KFlat × KFlat) ⟶
+      (⟨B.U, r'.kflatU⟩, ⟨B.V, r'.kflatV⟩) :=
+    Prod.mkHom (ObjectProperty.homMk d.u) (ObjectProperty.homMk d.v)
+  have hm := (M.system false).models.comparison.inv.naturality h
+  change T.map (Prod.mkHom (DerivedCategory.Q.map d.u) (DerivedCategory.Q.map d.v)) ≫
+      ((M.system false).models.iso
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))
+        (coefficientSequenceCommRingSheaf l E X) (M.system false).closed
+          B.U B.V r'.kflatU r'.kflatV).inv =
+    ((M.system false).models.iso
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))
+        (coefficientSequenceCommRingSheaf l E X) (M.system false).closed
+          A.U A.V r.kflatU r.kflatV).inv ≫
+      DerivedCategory.Q.map ((total l E X).map (d.u, d.v)) at hm
+  rw [← Category.assoc, hp, Category.assoc, ← L.map_comp, hm, L.map_comp, Category.assoc]
+
+
+private theorem reduction_conjugate
+    {C D : Type*} [Category C] [Category D] {R : C ⥤ D} {L : D ⥤ C}
+    (adj : R ⊣ L) {S P : C} {A B : D}
+    (a : S ≅ L.obj A) (b : P ≅ L.obj B) (c : A ≅ B) :
+    R.map (a ≪≫ L.mapIso c ≪≫ b.symm).hom ≫
+        (R.map b.hom ≫ adj.counit.app B) =
+      (R.map a.hom ≫ adj.counit.app A) ≫ c.hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
+    Category.assoc]
+  rw [← R.map_comp_assoc b.inv b.hom, b.inv_hom_id, R.map_id, Category.id_comp]
+  have h := adj.counit.naturality c.hom
+  dsimp only [Functor.comp_map, Functor.id_map] at h
+  rw [h]
+
+private theorem naturality_conjugate
+    {C D : Type*} [Category C] [Category D] (L : D ⥤ C)
+    {S P S' P' : C} {A B A' B' : D}
+    (a : S ≅ L.obj A) (b : P ≅ L.obj B)
+    (a' : S' ≅ L.obj A') (b' : P' ≅ L.obj B') (c : A ≅ B) (c' : A' ≅ B')
+    (s : S ⟶ S') (p : P ⟶ P') (x : A ⟶ A') (y : B ⟶ B')
+    (ha : s ≫ a'.hom = a.hom ≫ L.map x)
+    (hb : p ≫ b'.hom = b.hom ≫ L.map y)
+    (h : x ≫ c'.hom = c.hom ≫ y) :
+    s ≫ (a' ≪≫ L.mapIso c' ≪≫ b'.symm).hom =
+      (a ≪≫ L.mapIso c ≪≫ b.symm).hom ≫ p := by
+  apply (cancel_mono b'.hom).1
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id]
+  rw [← Category.assoc s, ha, Category.assoc, ← L.map_comp, h, L.map_comp]
+  congr 2
+  rw [hb, b.inv_hom_id_assoc]
+
 /-- Derived limit of the strict integral comparison tower, including coherent reduction,
 strict diagram naturality, and independence under simultaneous quasi-isomorphisms.
 The presentation is equipped with the ComparisonLaws supplied by
@@ -255,6 +414,116 @@ theorem integralTowerLimitComparison (f : X ⟶ Y)
     (M : CompletedOperations.Models l E (sites X Y))
     (_hM : CompletedOperations.ComparisonLaws.{t, u, 0, 0} l E M) (A : Input l E f) :
     ∃ r : Realization l E M A, Laws l E r := by
-  sorry
+  have hU : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (R := coefficientSequenceCommRingSheaf l E X) A.U :=
+    good_isKFlat l E X (M.calculus false) A.U A.goodU
+  have hV : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (R := coefficientSequenceCommRingSheaf l E X) A.V :=
+    good_isKFlat l E X (M.calculus false) A.V A.goodV
+  have := pullbackComparison_isIso l E M _hM A
+  have := tensorComparison_isIso l E M _hM A
+  let r : Realization l E M A :=
+    { kflatU := hU
+      kflatV := hV
+      a := asIso (CompletedOperations.pullbackComparison l E M
+        (a := false) (b := true) f (DerivedCategory.Q.obj A.T)) ≪≫
+          (coefficientSequenceLimit l E X).mapIso
+            ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.app A.T)
+      b := asIso (CompletedOperations.tensorComparison l E M false
+        (DerivedCategory.Q.obj A.U) (DerivedCategory.Q.obj A.V)) ≪≫
+          (coefficientSequenceLimit l E X).mapIso
+            (((M.system false).models.iso
+              (coefficientSequenceTopology (Scheme.ProEt.topology X))
+              (coefficientSequenceCommRingSheaf l E X) (M.system false).closed
+              A.U A.V hU hV).symm)
+      a_formula := rfl
+      b_formula := rfl }
+  let P : CompletedOperations.Expression (sites X Y) (fun _ : Unit ↦ true) false :=
+    .pullback (a := false) (b := true) f (.input ())
+  have hn : IsNormalizedCoefficientSequence l E X
+      ((CompletedOperations.systemValue l E M P).obj (fun _ ↦ DerivedCategory.Q.obj A.T)) :=
+    _hM.normalized P (fun _ ↦ DerivedCategory.Q.obj A.T) (fun _ ↦ A.normalizedT)
+  have he : IsIso ((M.calculus false).adjunction.counit.app
+      ((integralComparisonDerivedSequencePullback l E f).obj (DerivedCategory.Q.obj A.T))) := by
+    apply _hM.counit
+    change IsNormalizedCoefficientSequence l E (sites X Y false)
+      ((integralComparisonDerivedSequencePullback l E f).obj (DerivedCategory.Q.obj A.T)) at hn
+    exact @hn
+  have heA : IsIso ((M.calculus false).adjunction.counit.app
+      (DerivedCategory.Q.obj ((pullback l E f).obj A.T))) :=
+    (NatTrans.isIso_app_iff_of_iso (M.calculus false).adjunction.counit
+      ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.app A.T)).1 he
+  let PT : CompletedOperations.Expression (sites X Y) (fun _ : Bool ↦ false) false :=
+    .tensor (.input false) (.input true)
+  let N : ∀ k : Bool, coefficientSequenceDerived l E ((sites X Y) false) :=
+    fun k ↦ if k then DerivedCategory.Q.obj A.V else DerivedCategory.Q.obj A.U
+  have hN : ∀ k, IsNormalizedCoefficientSequence l E _ (N k) := by
+    intro k
+    cases k
+    · exact A.normalizedU
+    · exact A.normalizedV
+  have heT : IsIso ((M.calculus false).adjunction.counit.app
+      ((CompletedOperations.tensor l E M false).obj
+        (DerivedCategory.Q.obj A.U, DerivedCategory.Q.obj A.V))) := by
+    apply _hM.counit
+    have hnT : IsNormalizedCoefficientSequence l E X
+        ((CompletedOperations.systemValue l E M PT).obj N) := _hM.normalized PT N hN
+    change IsNormalizedCoefficientSequence l E (sites X Y false)
+      ((CompletedOperations.tensor l E M false).obj
+        (DerivedCategory.Q.obj A.U, DerivedCategory.Q.obj A.V)) at hnT
+    exact @hnT
+  have heB : IsIso ((M.calculus false).adjunction.counit.app
+      (DerivedCategory.Q.obj ((total l E X).obj (A.U, A.V)))) :=
+    (NatTrans.isIso_app_iff_of_iso (M.calculus false).adjunction.counit
+      (((M.system false).models.iso
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))
+        (coefficientSequenceCommRingSheaf l E X) (M.system false).closed A.U A.V hU hV).symm)).1 heT
+  refine ⟨r, (comparison l E r).hom_inv_id, (comparison l E r).inv_hom_id,
+    ?_, ?_, ?_, ?_, ?_⟩
+  · dsimp only [sourceReduction]
+    infer_instance
+  · dsimp only [targetReduction]
+    infer_instance
+  · exact reduction_conjugate (M.calculus false).adjunction r.a r.b
+      (DerivedCategory.Q.mapIso A.c)
+  · simpa only [comparison, Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
+      Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc, sites, sourceReduction,
+      targetReduction] using reduction_conjugate (M.calculus false).adjunction r.b r.a
+        (DerivedCategory.Q.mapIso A.c).symm
+  · intro B r' d
+    have ha := source_naturality l E M r r' d
+    have hb := target_naturality l E M r r' d
+    have hc : DerivedCategory.Q.map ((pullback l E f).map d.t) ≫
+        (DerivedCategory.Q.mapIso B.c).hom =
+      (DerivedCategory.Q.mapIso A.c).hom ≫
+        DerivedCategory.Q.map ((total l E X).map (d.u, d.v)) := by
+      simpa only [Functor.map_comp, Functor.mapIso_hom] using
+        DerivedCategory.Q.congr_map d.square
+    have hf : sourceMap l E d ≫ (comparison l E r').hom =
+        (comparison l E r).hom ≫ targetMap l E d :=
+      naturality_conjugate (coefficientSequenceLimit l E X)
+      r.a r.b r'.a r'.b (DerivedCategory.Q.mapIso A.c) (DerivedCategory.Q.mapIso B.c)
+      (sourceMap l E d) (targetMap l E d)
+      (DerivedCategory.Q.map ((pullback l E f).map d.t))
+      (DerivedCategory.Q.map ((total l E X).map (d.u, d.v))) ha hb hc
+    refine ⟨ha, hb, hf, ?_, ?_⟩
+    · apply (cancel_mono (comparison l E r').hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [hf, Iso.inv_hom_id_assoc]
+    · intro ht hu hv
+      let := ht
+      let := hu
+      let := hv
+      constructor
+      · dsimp only [sourceMap]
+        infer_instance
+      · dsimp only [targetMap]
+        have : IsIso (Prod.mkHom
+            ((coefficientSequenceLimit l E X).map (DerivedCategory.Q.map d.u))
+            ((coefficientSequenceLimit l E X).map (DerivedCategory.Q.map d.v))) :=
+          (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+        infer_instance
 
 end WeilConjectures.IntegralTowerLimit
