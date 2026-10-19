@@ -14,20 +14,12 @@ public import Sheaf.AlgebraicGeometry.EtaleSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ClosedPointSheafApproximation
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.LerayBounded
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
+import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Vanishing for abelian étale sheaves supported at closed points
 
@@ -84,6 +76,55 @@ theorem isZero_cohomology_of_support_subset_closedPoints
     IsZero ((cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).obj
       ((DerivedCategory.singleFunctor
         (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  obtain ⟨hfilt, ⟨c, e, ⟨hc⟩, _⟩, hfin⟩ :=
+    Scheme.closedPointSheaf_filteredColimit_finiteSupport (K := K) X F hF
+  let P : ObjectProperty (Subobject F) := Scheme.IsFinitelyGeneratedEtaleSubsheaf
+  have : IsFiltered P.FullSubcategory := hfilt
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  have hterm (G : P.FullSubcategory) : Subsingleton (Sheaf.H
+      (G.obj : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n + 1)) := by
+    obtain ⟨hS, hclosed, Z, i, hi, _, hrange, ⟨ei⟩⟩ := hfin G.obj G.property
+    have := hi
+    let S := Scheme.etaleSheafSupport
+      (G.obj : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    have hSc : IsClosed S := by
+      change IsClosed (Scheme.etaleSheafSupport _ )
+      rw [← hrange]
+      exact (IsClosedImmersion.isClosedEmbedding i).isClosed_range
+    let U : X.Opens := ⟨Sᶜ, hSc.isOpen_compl⟩
+    have hzero : IsZero ((upperStar AddCommGrpCat.{u + 1} U.ι).obj
+        (G.obj : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) := by
+      have hd : Disjoint (Set.range U.ι.base) (Set.range i.base) := by
+        rw [Scheme.Opens.range_ι, hrange]
+        exact disjoint_compl_left
+      exact (isZero_upperStar_lowerStar_of_disjoint_range AddCommGrpCat.{u + 1}
+        U.ι i hd _).of_iso ((upperStar AddCommGrpCat.{u + 1} U.ι).mapIso ei)
+    apply subsingleton_H_of_isZero_upperStar U
+      (by simpa [U] using hS)
+      (fun x hx ↦ hclosed (by simpa [U] using hx))
+      (fun x hx ↦ ?_) _ hzero n
+    exact (closedPoint_iff_residueField_trdeg_zero_and_finite
+      (X ↘ Spec (.of K)) x).2.2 inferInstance (hclosed (by simpa [U] using hx)) |>.2.2
+  have hH : Subsingleton (Sheaf.H c.pt (n + 1)) := by
+    apply subsingleton_of_forall_eq 0
+    intro x
+    obtain ⟨j, y, rfl⟩ := (Scheme.H_map_isColimit_of_isFiltered_of_large X hc (n + 1)).1 x
+    have hy : y = 0 := (hterm j).elim y 0
+    rw [hy, map_zero]
+  have : Subsingleton ((Sheaf.functorH.{u + 1} _ (n + 1)).obj c.pt) := hH
+  have hHF : Subsingleton (Sheaf.H F (n + 1)) :=
+    ((Sheaf.functorH.{u + 1} _ (n + 1)).mapIso e).symm.addCommGroupIsoToAddEquiv
+      |>.injective.subsingleton
+  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let d := Γ.homologyRightDerivedFunctorObjSingleFunctorIso F (n + 1)
+  let r := SheafPullbackResolution.extSectionsIso X F (n + 1) ≪≫
+    ((injectiveResolution F).isoRightDerivedObjCochainComplex Γ (n + 1)).symm
+  have : Subsingleton ((Sheaf.functorH.{u + 1} _ (n + 1)).obj F) := hHF
+  exact (AddCommGrpCat.isZero_of_subsingleton
+    ((Sheaf.functorH.{u + 1} _ (n + 1)).obj F)).of_iso (d ≪≫ r.symm)
 
 end AlgebraicGeometry.Etale
