@@ -20,12 +20,34 @@
  ],
  "proof": [
   {
-   "text": "For the identity compactification $(j,p)=(1_X,f)$, the definition gives $Rf_!^{(1,f)}E=Rf_*j_!E$, canonically identified with $Rf_*E$. Under the identity-functor identifications, $j_!$ and $Lj^*$ and their unit constraints are identities. The canonical open-piece tensor map is then the identity map on $E\\otimes^LLf^*Q$: its tensor and adjunction identity constraints have all become identities. Thus $\\theta_1=1$ and $Rf_*\\theta_1=Rf_*(\\theta_1^{-1})=1$. Substituting into the displayed ordered composite gives $1\\circ\\pi_{f,E,Q}=\\pi_{f,E,Q}$, and into the displayed reverse composite gives $\\rho_{f,E,Q}\\circ1=\\rho_{f,E,Q}$. The maps $\\pi$ and $\\rho$ are the named projection-formula arrows, with $Q$ perfect as in the cited compactified formula; no new coefficient-category comparison is used.",
+   "text": "Choose the identity coefficient identification by conjugating the canonical sheaf pushforward identity isomorphism across the sheaf adjunction. The conjugate-unit equation identifies its adjoint ring map with the inverse pushforward identity. Applying the functor isomorphism to module pushforward and then the module pushforward identity gives identityModulePushforward. Left-adjoint uniqueness gives the identity module pullback; mapping this isomorphism to derived categories gives identityDerivedPullback. Left-adjoint uniqueness for the exact derived open adjunction now gives identityDerivedOpenExtension. All these are explicit isomorphisms built from Mathlib adjunction and functor identity APIs; no witness of an arbitrary existence theorem is chosen.",
    "uses": [
+    "def-weil-pbc-proetale-operations",
     "def-weil-pbc-projection-compactification",
+    "lemma-weil-pbc-projection-formula-compactified"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "Lemma labelled lemma:weil-pbc-projection-formula-identity-compactification, statement and proof, TeX lines 5600–5616; ordered composite at lines 5558–5597."
+   }
+  },
+  {
+   "text": "Apply proEtaleProjectionFormula_compactified to Compactification.ofIsProper f, with the same coefficient ring S and tensor model on the intermediate scheme X, and with the identity coefficient identification from step 1. Its hπ gives invertibility of the canonical projection mate at j_!E. Let e : j_!E ≅ E be step 1. First-variable naturality identifies pi(j_!E) followed by Rf_*(e tensor 1) with (Rf_*e tensor 1) followed by pi(E). The left composite is invertible. The first factor of the right composite is invertible, so cancellation proves mate_isIso at E. This uses arbitrary unbounded E and site-perfect Q without a global bound.",
+   "uses": [
     "lemma-weil-pbc-projection-formula-compactified",
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-open-piece"
+    "lemma-weil-pbc-projection-formula-base-change-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "Lemma labelled lemma:weil-pbc-projection-formula-identity-compactification, statement and proof, TeX lines 5600–5616; ordered composite at lines 5558–5597."
+   }
+  },
+  {
+   "text": "In the normalized identity-open presentation, directImage is identity followed by Rf_*, so Functor.leftUnitor supplies its isomorphism with Rf_*. The definition theta is the identity. Unfold forward and theta and use Functor.map_id and Category.comp_id to obtain pi. Unfold backward and use Functor.map_id and Category.id_comp to obtain rho, the unique inverse supplied by mate_isIso. These prove the four conjuncts of identity_compactification without changing any statement or definition.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
    ],
    "elementary": true,
    "source": {
@@ -35,15 +57,18 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-operations",
   "def-weil-pbc-projection-compactification",
   "lemma-weil-pbc-projection-formula-compactified",
-  "def-weil-pbc-projection-formula-arrows",
-  "lemma-weil-pbc-projection-formula-open-piece"
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "def-weil-pbc-projection-formula-arrows"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-identity-compactification.md",
-  "place": "## Proof"
+  "group": "S1",
+  "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+  "place": "Lemma labelled lemma:weil-pbc-projection-formula-identity-compactification, statement and proof, TeX lines 5600–5616; ordered composite at lines 5558–5597.",
+  "note": "Lean proof of the existing normalized identity-open statements, with explicit identity coefficient/module/derived isomorphisms and transport by the existing mate naturality theorem."
  },
  "mathlib_searches": [
   {
@@ -144,5 +169,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T005418-L-2766141",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
