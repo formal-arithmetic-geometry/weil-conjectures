@@ -1,0 +1,142 @@
+{
+ "id": "lem-exc-weakly-etale-dimension-upper-bound",
+ "kind": "statement",
+ "title": "Weakly etale algebras do not increase Krull dimension",
+ "statement": "Let $R$ and $S$ be commutative rings and let $S$ be an $R$-algebra that is weakly etale [def-weil-pbc-ind-etale-algebra]. Then $\\dim S\\le\\dim R$, with Krull dimension as in [def-weil-pbc-krull-dimension-ring]. No Noetherian, local, nonzero, or finite-dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; Greco, Two theorems on excellent rings (1976)",
+  "place": "Tags 092I (lemma-absolutely-flat-over-absolutely-flat), 092F (lemma-absolutely-flat), and 092Q (lemma-absolutely-flat-over-field), first paragraph of its proof; Greco Lemma 5.5, printed p. 147, upper inequality in the local AF dimension comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "For every base prime p, its residue-field fibre is weakly etale by base change [lem-exc-weakly-etale-ring-base-change-composition]. Fields are absolutely flat, and flatness of tensor multiplication makes the fibre absolutely flat. This is the already proved Ring.AbsolutelyFlat.of_flat_lmul' in WeilConjectures.RingTheory.ProEtale.WeakDimension, specialized to the field kappa(p). The proved Ring.AbsolutelyFlat.tfae in that module then makes every fibre prime maximal. These are Tags 092I and 092F, read in more-algebra.tex, also the first paragraph of the proof of Tag 092Q.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-exc-weakly-etale-ring-base-change-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; Greco, Two theorems on excellent rings (1976)",
+    "place": "Tags 092I (lemma-absolutely-flat-over-absolutely-flat), 092F (lemma-absolutely-flat), and 092Q (lemma-absolutely-flat-over-field), first paragraph of its proof; Greco Lemma 5.5, printed p. 147, upper inequality in the local AF dimension comparison."
+   }
+  },
+  {
+   "text": "Contraction of primes is monotone. Suppose p < q are primes in S with the same contraction r. The order isomorphism [lem-weil-pbc-fibre-ring-primes-bijection] maps these to strictly comparable primes of the r-fibre. The smaller one is maximal by Step 1, so it cannot be strictly contained in the larger proper ideal. Therefore contraction is strictly monotone.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; Greco, Two theorems on excellent rings (1976)",
+    "place": "Tags 092I (lemma-absolutely-flat-over-absolutely-flat), 092F (lemma-absolutely-flat), and 092Q (lemma-absolutely-flat-over-field), first paragraph of its proof; Greco Lemma 5.5, printed p. 147, upper inequality in the local AF dimension comparison."
+   }
+  },
+  {
+   "text": "Apply Order.krullDim_le_of_strictMono to prime contraction. It sends every finite strict chain in Spec(S) to a chain of the same length in Spec(R), so dim S <= dim R by the supremum definition [def-weil-pbc-krull-dimension-ring]. This also handles zero rings, empty fibres, and infinite dimensions.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; Greco, Two theorems on excellent rings (1976)",
+    "place": "Tags 092I (lemma-absolutely-flat-over-absolutely-flat), 092F (lemma-absolutely-flat), and 092Q (lemma-absolutely-flat-over-field), first paragraph of its proof; Greco Lemma 5.5, printed p. 147, upper inequality in the local AF dimension comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-exc-weakly-etale-ring-base-change-composition",
+  "lem-weil-pbc-fibre-ring-primes-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex; Greco, Two theorems on excellent rings (1976)",
+  "place": "Tags 092I (lemma-absolutely-flat-over-absolutely-flat), 092F (lemma-absolutely-flat), and 092Q (lemma-absolutely-flat-over-field), first paragraph of its proof; Greco Lemma 5.5, printed p. 147, upper inequality in the local AF dimension comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale algebra has Krull dimension at most the base ring; contraction of primes is strictly monotone",
+   "results": "{\"t\": \"2026-10-19T09:51:32Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale algebra has Krull dimension at most the base ring; contraction of primes is strictly monotone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Ring.KrullDimLE.of_isLocalization\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"6df28fd39573e98d\"}",
+   "date": "2026-10-19",
+   "verdict": "No existing weakly-etale dimension bound found. The strict-monotone Krull-dimension comparison is used for the final elementary step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"WeaklyEtale\"",
+   "results": "{\"t\": \"2026-10-19T09:51:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"WeaklyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No existing weakly-etale dimension bound found. The strict-monotone Krull-dimension comparison is used for the final elementary step."
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale.*krullDim|ringKrullDim.*WeaklyEtale",
+   "results": "{\"t\": \"2026-10-19T09:51:32Z\", \"tool\": \"grep\", \"query\": \"WeaklyEtale.*krullDim|ringKrullDim.*WeaklyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No existing weakly-etale dimension bound found. The strict-monotone Krull-dimension comparison is used for the final elementary step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension does not increase under a weakly etale ring homomorphism",
+   "results": "{\"t\": \"2026-10-19T09:51:33Z\", \"tool\": \"leansearch\", \"query\": \"Krull dimension does not increase under a weakly etale ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_of_surjective\", \"ringKrullDim_eq_of_ringEquiv\", \"RingHom.Etale\", \"ringKrullDim_quotient_le\", \"RingEquiv.ringKrullDim\", \"Order.krullDim_le_of_strictMono\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim\"], \"digest\": \"b49c5626db2112f7\"}",
+   "date": "2026-10-19",
+   "verdict": "No existing weakly-etale dimension bound found. The strict-monotone Krull-dimension comparison is used for the final elementary step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension",
+  "date": "2026-10-19",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: localization and strict henselization preserve excellence; via Greco Theorem 5.3(iii)-(iv), Lemma 5.5, upper inequality of the local AF dimension comparison.",
+   "via": [
+    "lem-exc-weakly-etale-local-component-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WeaklyEtaleDimension",
+  "file": "lean/Sheaf/RingTheory/WeaklyEtaleDimension.lean",
+  "declaration": "Algebra.WeaklyEtale.ringKrullDim_le",
+  "statement": "theorem ringKrullDim_le {R S : Type*} [CommRing R] [CommRing S]\n    [Algebra R S] [Algebra.WeaklyEtale R S] : ringKrullDim S ≤ ringKrullDim R",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261019T132233-L-1205963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261019T132233-L-1205963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
