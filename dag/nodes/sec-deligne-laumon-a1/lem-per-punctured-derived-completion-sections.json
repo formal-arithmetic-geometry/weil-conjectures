@@ -16,7 +16,8 @@
   "def-weil-pbc-adic-completion",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-trf-coefficient-tower-operations"
  ],
  "proof": [
   {
@@ -233,5 +234,44 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-a9436b5d5 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and the Stacks sources: 0DXI with its proof, 0DX1, 0A0K (1)-(5) with its proof, and 07KW. The item statement is unchanged on this base: the open-V clause came from N7's FIX. The seven steps follow the 0DXI route. Step 2 uses 0A0G through lem-weil-pbc-ringed-pushforward-completion on (U,O_U)->(pt,A), the one-point quotient model, and the new 0A0K node with the coherent quotients from Step 1. Step 3 is the 0D60 Milnor sequence. Step 4 uses 0DX1(2) for j>0. Step 5 handles degree 0, which the source does not: 0DXI kills R^1lim H^0 using 0DX1, but 0DX1 covers only positive degrees. The step uses the localization triangle for K=m, the surjective images Q_n, and the equality im(B_m->B_n)=p_n^{-1}(im(C_m->C_n)); I checked that equality, and with 0DX1(1) it gives ML. Step 6 applies ML acyclicity. Step 7 is correct for V because H^{-1}=0, and the restriction square commutes by the reflection's universal property. The worker's counterexample to degree-0 ML for arbitrary towers is correct: k[[x,y]] with transitions given by x. The false clause was removed from the helper. The new nodes are 0A0K(1),(3),(4) with the 0A0F restriction compatibility, exactly 0DX1(1),(2), and 07KW(3). All three are true and none restates the item. The 07KW node generalizes the surjective-only lem-pc-tower-surjective-lim-acyclic and the finite-group lem-weil-pbc-mittag-leffler, so it is not a duplicate. Grep found no other node for 0A0K, 0DX1 or ML acyclicity. Small cases pass: A a field, M=0, I=0, I=A, negative degrees, V empty. No SGA source is used. I accept the four generic tool_uses (0D60, 01XZ, 0A0G, the one-point completion model). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PuncturedDerivedCompletionSections",
+  "declaration": "AlgebraicGeometry.PuncturedCompletion.punctured_derivedCompletion_sections",
+  "declarations": [
+   "AlgebraicGeometry.PuncturedCompletion.reductions",
+   "AlgebraicGeometry.PuncturedCompletion.reductions_additive",
+   "AlgebraicGeometry.PuncturedCompletion.reductionCone",
+   "AlgebraicGeometry.PuncturedCompletion.ordinaryUnit",
+   "AlgebraicGeometry.PuncturedCompletion.sections",
+   "AlgebraicGeometry.PuncturedCompletion.restriction",
+   "AlgebraicGeometry.PuncturedCompletion.sections_additive",
+   "AlgebraicGeometry.PuncturedCompletion.derivedSections",
+   "AlgebraicGeometry.PuncturedCompletion.derivedRestriction",
+   "AlgebraicGeometry.PuncturedCompletion.limitComparison",
+   "AlgebraicGeometry.PuncturedCompletion.cohomology",
+   "AlgebraicGeometry.PuncturedCompletion.completion",
+   "AlgebraicGeometry.PuncturedCompletion.completedCohomology",
+   "AlgebraicGeometry.PuncturedCompletion.cohomologyTower",
+   "AlgebraicGeometry.PuncturedCompletion.reductionMap",
+   "AlgebraicGeometry.PuncturedCompletion.completedRestriction",
+   "AlgebraicGeometry.PuncturedCompletion.towerRestriction",
+   "AlgebraicGeometry.PuncturedCompletion.punctured_derivedCompletion_sections"
+  ],
+  "file": "lean/Sheaf/Paper/PuncturedDerivedCompletionSections.lean",
+  "statement": "theorem punctured_derivedCompletion_sections [IsNoetherianRing A] [IsLocalRing A] (I : Ideal A) (U : (Spec (.of A)).Opens) (hU : ∀ x : Spec (.of A), x ∈ U ↔ x.asIdeal ≠ IsLocalRing.maximalIdeal A) (T : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ℕᵒᵖ ⥤ ModuleCat.{u} A)) (c : DerivedCategory.Q ⋙ T ⟶ (reductions A I).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) [T.IsLeftDerivedFunctor c (HomologicalComplex.quasiIso (ModuleCat.{u} A) (ComplexShape.up ℤ))] (η : 𝟭 (DerivedCategory (ModuleCat.{u} A)) ⟶ completion A T) (hη : ∀ P : CochainComplex (ModuleCat.{u} A) ℤ, η.app (DerivedCategory.Q.obj P) ≫ (lim : (ℕᵒᵖ ⥤ ModuleCat.{u} A) ⥤ ModuleCat.{u} A).rightDerivedFunctor.map (c.app P) = DerivedCategory.Q.map (ordinaryUnit A I P) ≫ limitComparison A (((reductions A I).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) : ∃ e : ∀ (V : (Spec (.of A)).Opens) (_ : V ≤ U) (i : ℤ) (_ : i = 0 ∨ V = U) (M : ModuleCat.{u} A) [Module.Finite A M], (completedCohomology A T V i).obj M ≅ limit (cohomologyTower A I V i M), (∀ (V : (Spec (.of A)).Opens) (hV : V ≤ U) (i : ℤ) (hi : i = 0 ∨ V = U) (M : ModuleCat.{u} A) [Module.Finite A M] (n : ℕ), ∃ a : (completion A T).obj ((derivedSections A V).obj M) ⟶ (derivedSections A V).obj (((reductions A I).obj M).obj (op n)), (η.app ((derivedSections A V).obj M) ≫ a = (derivedSections A V).map (reductionMap A I M n)) ∧ (∀ b : (completion A T).obj ((derivedSections A V).obj M) ⟶ (derivedSections A V).obj (((reductions A I).obj M).obj (op n)), η.app ((derivedSections A V).obj M) ≫ b = (derivedSections A V).map (reductionMap A I M n) → b = a) ∧ ((e V hV i hi M).hom ≫ limit.π (cohomologyTower A I V i M) (op n) = (DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).map a) ∧ ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).map (η.app ((derivedSections A V).obj M)) ≫ (e V hV i hi M).hom ≫ limit.π (cohomologyTower A I V i M) (op n) = (cohomology A V i).map (reductionMap A I M n))) ∧ (∀ (V : (Spec (.of A)).Opens) (hV : V ≤ U) (i : ℤ) (hi : i = 0 ∨ V = U) (M N : ModuleCat.{u} A) [Module.Finite A M] [Module.Finite A N] (f : M ⟶ N), (completedCohomology A T V i).map f ≫ (e V hV i hi N).hom = (e V hV i hi M).hom ≫ lim.map (Functor.whiskerRight ((reductions A I).map f) (cohomology A V i))) ∧ (∀ (V W : (Spec (.of A)).Opens) (hV : V ≤ U) (hWV : W ≤ V) (M : ModuleCat.{u} A) [Module.Finite A M], (completedRestriction A T hWV 0).app M ≫ (e W (hWV.trans hV) 0 (Or.inl rfl) M).hom = (e V hV 0 (Or.inl rfl) M).hom ≫ lim.map (towerRestriction A I hWV 0 M))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Universal left-derived strict reduction tower with its quotient-normalized completion unit; total right-derived inverse limit and shared ringed-space module category. The conclusion fixes the canonical projections by unique factorization through that unit, and explicitly states finite-module naturality and open restriction. All helper definitions have real data; only the main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c849bebe",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every node object, hypothesis and conclusion clause matches the Lean: Noetherian local A, arbitrary I, U characterized exactly as Spec A minus m by hU, finite M in ModuleCat.{u} A, derived sections as the K-injective total right derived functor of A-module sections on V, derived tensor via a universal left-derived strict reduction tower, Rlim via the recorded total right derived inverse limit, and completion unit eta pinned on every complex by hη (checked satisfiable along resolutions). The single family e covers all integer degrees on U and degree 0 on every open V. It is pinned by the unique arrow a with eta then a equal to RGamma(V, reduction), which exists because I is finitely generated and the target is derived complete. Naturality in finite M and the open restriction square are stated. The only stmt_dep added is the landed def-trf-coefficient-tower-operations, whose declarations supply the K-injective tower resolutions behind Rlim. Only lean and stmt_deps changed. lean.statement is verbatim, no line exceeds 100 characters, the only sorry is the main theorem, docstrings carry source, blueprint and the 7 proof steps, and plain imports are the proof_deps modules. No H4 duplicate: there is no existing D(A) derived completion, and the existing open derived sections are AddCommGrp-valued. Universes u, wA, wT, wX are all bound, none equated. Edge cases checked: A a field (U empty), M=0, V empty, I=0, I=A, negative degrees. nt_compile --json from the snapshot compiled clean in 14.7 s with no warnings. Advisory: the IdealPowerTorsionFunctor import exists only for unused node notation; kept because it is a recorded stmt_dep module."
  }
 }
