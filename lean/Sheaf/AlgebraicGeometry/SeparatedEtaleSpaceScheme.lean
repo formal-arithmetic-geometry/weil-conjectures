@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 import Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable
 
@@ -57,6 +57,42 @@ theorem exists_scheme_of_separated_etale {X : Scheme.{u}} (E : AlgebraicSpace X)
     (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left)
       (prod.lift (𝟙 E.obj.obj) (𝟙 E.obj.obj))) :
     ∃ Z : Over X, Nonempty (yoneda.obj Z ≅ E.obj.obj) ∧ Etale Z.hom := by
-  sorry
+  let T : Over X := Over.mk (𝟙 X)
+  let ht : IsTerminal (yoneda.obj T) := (Over.mkIdTerminal (X := X)).isTerminalObj yoneda T
+  let f : E.obj.obj ⟶ yoneda.obj T := ht.from _
+  have hw (V : Over X) (a : yoneda.obj V ⟶ E.obj.obj) :
+      (yonedaEquiv (a ≫ f)).left = V.hom := by
+    have he : yonedaEquiv (a ≫ f) = Over.mkIdTerminal.from V :=
+      Over.mkIdTerminal.hom_ext _ _
+    rw [he, Over.mkIdTerminal_from_left]
+  have hqf := chartwise_isLocallyQuasiFinite_of_etale E T f (fun V a ha ↦ by
+    rw [hw]
+    exact het V a ha)
+  have hp : IsPullback (prod.fst : E.obj.obj ⨯ E.obj.obj ⟶ E.obj.obj)
+      prod.snd f f := IsPullback.of_is_product (limit.isLimit _) ht
+  let i := hp.isoPullback
+  have hd : prod.lift (𝟙 E.obj.obj) (𝟙 E.obj.obj) ≫ i.hom = pullback.diagonal f := by
+    apply pullback.hom_ext <;> simp [i]
+  have hs : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left)
+      (pullback.diagonal f) := by
+    intro V a
+    obtain ⟨U, p, q, h, hc⟩ := hsep V (a ≫ i.inv)
+    refine ⟨U, p, q, ?_, hc⟩
+    exact h.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) i
+      (by simp) (by simp) (by simpa using hd) (by simp)
+  obtain ⟨Z, g, e, _⟩ := exists_scheme_of_separated_locally_quasi_finite T E f (by
+    intro V a ha
+    have he : yoneda.preimage (a ≫ f) = yonedaEquiv (a ≫ f) := by
+      rw [← yonedaEquiv_yoneda_map (yoneda.preimage (a ≫ f)), yoneda.map_preimage]
+    rw [he]
+    exact hqf V a ha) hs
+  refine ⟨Z, ⟨e⟩, het Z e.hom ?_⟩
+  intro V a
+  refine ⟨V, 𝟙 V, a ≫ e.inv, ?_, ?_⟩
+  · apply IsPullback.of_vert_isIso
+    constructor
+    simp
+  · change Etale (𝟙 V.left)
+    infer_instance
 
 end AlgebraicGeometry.AlgebraicSpace

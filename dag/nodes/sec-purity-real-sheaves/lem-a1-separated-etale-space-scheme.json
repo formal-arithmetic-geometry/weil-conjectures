@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "The chartwise etale hypothesis is exactly the hypothesis of [lem-a1-etale-space-locally-quasi-finite]. Therefore q is locally quasi-finite in the chartwise sense: for every representable etale scheme chart V→E, the composite V→X is locally quasi-finite.",
+   "text": "Let T be the terminal object (X,id) of Sch/X and f:E→h_T the unique natural transformation. Yoneda preserves terminal objects. For each chart a:h_V→E, its composite with f corresponds to the unique morphism V→T; its underlying scheme map is V.hom. Thus the chartwise etale hypothesis supplies the input to [lem-a1-etale-space-locally-quasi-finite], giving chartwise local quasi-finiteness. Identify the Yoneda equivalence with yoneda.preimage using yoneda.map_preimage.",
    "uses": [
     "lem-a1-etale-space-locally-quasi-finite"
    ],
@@ -27,10 +27,10 @@
    }
   },
   {
-   "text": "The assumed scheme-base-change condition on the diagonal is precisely separatedness of q: by [def-weil-proper-morphism], a morphism is separated when its diagonal is a closed immersion, and the algebraic-space meaning of closed immersion is the testwise meaning stated in the item.",
+   "text": "Because h_T is terminal, the product E×E is a pullback of f along itself. The induced product-to-pullback isomorphism carries the absolute diagonal prod.lift(id,id) to pullback.diagonal f, by the two projection identities. For every scheme test a:h_V→E×_{h_T}E, apply the given [def-weil-closed-immersion] test to a followed by the inverse comparison isomorphism, and transport its representing pullback square through the comparison isomorphism. This gives exactly the diagonal hypothesis required in step 3, in the scheme-test sense of [def-trf-algebraic-space]. No separate scheme-level properness or separatedness predicate is needed.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-closed-immersion"
+    "def-weil-closed-immersion",
+    "def-trf-algebraic-space"
    ],
    "elementary": true,
    "source": {
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Apply [lem-a1-separated-locally-qf-space-representable] with the base scheme S=X, target scheme T=X, algebraic space E, and f=q. It supplies a scheme Z over X and an isomorphism h_Z≅E over X.",
+   "text": "Apply [lem-a1-separated-locally-qf-space-representable] with base scheme S=X, target T=(X,id), algebraic space E and the unique map f. Steps 1 and 2 give its hypotheses. Obtain Z in Sch/X and e:h_Z≅E; its compatibility with T is automatic because T is terminal.",
    "uses": [
     "lem-a1-separated-locally-qf-space-representable"
    ],
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "Let $\\varphi:h_Z\\to E$ be the isomorphism over $X$ from step 3. It is a representable etale map from a scheme in the sense of [def-trf-algebraic-space]: for a scheme $T$ and a map $h_T\\to E$, the fibre product $h_Z\\times_E h_T$ is the base change of the isomorphism $\\varphi$, so the projection $h_Z\\times_Eh_T\\to h_T$ is an isomorphism; the fibre product is thus represented by $T$ and the scheme projection is an isomorphism of schemes, in particular an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). So $V=Z$ with $V\\to E$ equal to $\\varphi$ is one of the representable etale scheme charts in the item's chartwise hypothesis, and that hypothesis makes the composite $q\\circ\\varphi:Z\\to X$ an etale morphism of schemes [def-weil-etale-morphism]. Since $\\varphi$ is a map over $X$, $q\\circ\\varphi$ is the structure morphism of $Z$ over $X$, which is therefore etale.",
+   "text": "For every test a:h_V→E of the isomorphism e.hom:h_Z→E, take the representing scheme V, projection id_V and map a≫e.inv:h_V→h_Z. The resulting square is a pullback because both vertical maps are isomorphisms. Its underlying scheme projection is the identity, hence an open immersion and etale by [lem-weil-pbc-etale-composition-cancellation](1). Thus e.hom is a representable etale chart in the sense of [def-trf-algebraic-space]. Apply the original chartwise hypothesis to e.hom to obtain Etale Z.hom [def-weil-etale-morphism], and pair it with the representing isomorphism.",
    "uses": [
     "def-trf-algebraic-space",
     "lem-weil-pbc-etale-composition-cancellation",
@@ -67,7 +67,6 @@
   "def-trf-algebraic-space",
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
-  "def-weil-proper-morphism",
   "lem-a1-etale-space-locally-quasi-finite",
   "lem-a1-separated-locally-qf-space-representable",
   "lem-weil-pbc-etale-composition-cancellation"
@@ -75,7 +74,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-morphisms.tex",
-  "place": "Tags 03XU and 03XX, Section 0417 (schemehood); the final etaleness of Z over X is the item's chartwise hypothesis applied to the representing isomorphism."
+  "place": "Tags 03XU and 03XX, Section 0417 (schemehood), implemented with their declared Lean inputs. Elementary categorical glue identifies the product with the pullback over the represented terminal object of Sch/X and tests the representing isomorphism by identity projections."
  },
  "mathlib_searches": [
   {
@@ -168,5 +167,15 @@
   "by": "Q08",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261019T231031-L-541041",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
