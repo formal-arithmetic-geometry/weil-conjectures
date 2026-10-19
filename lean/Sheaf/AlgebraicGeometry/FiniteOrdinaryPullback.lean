@@ -53,7 +53,71 @@ theorem finiteOrdinaryPointComparison_existsUnique
                 ((sfIntrinsicModuleEquivalence (Spec (.of D.k)) A).unitIso.inv.app M))
           (sfIntrinsicRealizationUnit (Spec (.of D.k)) A M
             (Opposite.op (ProEt.mk (𝟙 (Spec (.of D.k))))) s) = s := by
-  sorry
+  let T := Spec (.of D.k)
+  let E := sfIntrinsicModuleEquivalence T A
+  let W := Opposite.op (ProEt.mk (𝟙 T))
+  let Q := (sheafSections (ProEt.topology T)
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj W
+  let P := pointFiniteSections D.k A
+  let B := ProEtale.finiteCoefficientModulePresheaf T.ProEt (ULift.{u + 1, u} A)
+  let adj := PresheafOfModules.sheafificationAdjunction
+    (ProEtale.finiteCoefficientIntrinsicScalarMap T A)
+  let η : Q ⟶ E.functor ⋙ P :=
+    { app M := (adj.unit.app (B.obj M.obj)).app W
+      naturality M N f := by
+        exact congrArg (fun g ↦ g.app W) (adj.unit.naturality (B.map f.hom)) }
+  have hunit (M : Sheaf (ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
+      IsIso (adj.unit.app (B.obj M.obj)) := by
+    rw [← isIso_iff_of_reflects_iso _ (PresheafOfModules.toPresheaf _)]
+    simp only [adj, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+    apply isIso_toSheafify
+    exact ((sheafCompose (ProEt.topology T)
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) AddCommGrpCat.{u + 1})).obj
+        M).property
+  have : IsIso η := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro M
+    let _ := hunit M
+    exact inferInstanceAs (IsIso ((PresheafOfModules.evaluation _ W).map
+      (adj.unit.app (B.obj M.obj))))
+  let e : P ≅ E.inverse ⋙ Q := Iso.isoInverseComp (asIso η).symm
+  have hn (M : Sheaf (ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
+      η.app M ≫ e.hom.app (E.functor.obj M) ≫
+        Q.map (E.unitIso.inv.app M) = 𝟙 (Q.obj M) := by
+    dsimp [e, Iso.isoInverseComp]
+    simp only [Category.id_comp, Category.assoc]
+    have ht := (inv η).naturality (E.unitIso.inv.app M)
+    dsimp only [Functor.comp_obj, Functor.comp_map] at ht
+    rw [← ht]
+    simp only [← P.map_comp_assoc, E.counitIso_functor_comp]
+    rw [P.map_id, Category.id_comp]
+    exact (asIso η).hom_inv_id_app M
+  refine ⟨e, ?_, ?_⟩
+  · intro M s
+    exact ConcreteCategory.congr_hom (hn M) s
+  · intro e' he'
+    change P ≅ E.inverse ⋙ Q at e'
+    have heq (M : Sheaf (ProEt.topology T)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
+        e'.hom.app (E.functor.obj M) = e.hom.app (E.functor.obj M) := by
+      apply (cancel_mono (Q.map (E.unitIso.inv.app M))).mp
+      have : IsIso (η.app M) :=
+        (NatTrans.isIso_iff_isIso_app η).mp ‹IsIso η› M
+      apply (cancel_epi (η.app M)).mp
+      rw [hn]
+      ext s
+      exact he' M s
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply (cancel_epi (P.map (E.counitIso.hom.app N))).mp
+    have h₁ := e'.hom.naturality (E.counitIso.hom.app N)
+    have h₂ := e.hom.naturality (E.counitIso.hom.app N)
+    exact h₁.trans ((congrArg
+      (fun f ↦ f ≫ (E.inverse ⋙ Q).map (E.counitIso.hom.app N))
+      (heq (E.inverse.obj N))).trans h₂.symm)
 
 /-- The unique terminal-section comparison, followed by terminal evaluation inverse.
 Source: blueprint Steps 1--2; Stacks Tag 08J6
@@ -154,6 +218,10 @@ theorem finiteOrdinaryPullback_absolute_compatibility
             M) ≫
         (finiteOrdinaryAbsoluteLeray A h).hom.app
           ((proEtaleConstantRingDerivedPullback A h).obj M) := by
-  sorry
+  dsimp [finiteOrdinaryPullback, finiteOrdinaryLeray]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [← NatTrans.naturality_assoc]
+  rfl
+
 
 end WeilConjectures
