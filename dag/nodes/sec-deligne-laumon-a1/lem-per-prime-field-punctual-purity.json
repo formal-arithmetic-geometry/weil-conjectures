@@ -14,7 +14,9 @@
   "lem-per-regular-immersion-class-calculus",
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-per-closed-support-plus-adjunction",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -256,5 +258,26 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-9377c2940 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-per-prime-field-complete-coordinate-model, every cited statement, ILO XVI 3.2.1–3.2.5 (printed pp.244–245) and Stacks 0C0S (lemma-regular-complete-containing-coefficient-field). The item statement is unchanged and matches ILO 3.2.5 for F_ell, with no excellence or finite-type hypothesis. The proof route is sound. Step 1 reduces to B, the completion of the strict henselization, through lem-per-punctual-strict-completion-test (ILO 3.2.1 remark and 3.2.4). Step 2 uses Cohen coordinates; the closed fibre B/IB=F follows because the t_i generate m. Step 3 uses excellence only for C=F[T] (07QW, 07QU, 0AH2, 0381), so h is regular. Step 4 gets a_z = z^?(a_p)^{-1} from noetherian-prime-power-smooth-duality (n=1) and the section identity of smooth-gysin-mixed-identities. Step 5 transports along h with regular-supported-base-change and the flat-base-change compatibility of the class. I checked the edge cases d=0 and X empty. The new node matches 0C0S(1) plus the I-adic completion of F[T]; I tested it on d=0, d=1 and the excluded mixed-characteristic case. It is not a duplicate: lem-weil-pbc-cohen-power-series-presentation and lem-weil-pbc-cohen-structure-power-series-surjection give only a surjection with unspecified n, and a Cohen ring in characteristic p. No cycles and no SGA. Fixes: (1) C1/C4: Step 5 silently identified the compact-support i^! of the class calculus with the closed-support i^! of the base-change theorem; I added the identification through the compactification (1,z), so Rz_!=z_*, and uniqueness of right adjoints, citing def-amb-etale-compact-support and def-per-closed-support-plus-adjunction. (2) B3: the new node cited one-variable def-weil-polynomial-ring; repointed to def-weil-pbc-mv-polynomial-ring. Batch 5: lem-trf-regular-sequence-dimension-formula, lem-trf-ambient-affine-translation-trace, lem-trf-finite-ring-section-deformation and lem-trf-bounded-below-derived-adjunction, together with the four cited per nodes, are already in the batch-5 closure through non-trf paths. That closure was computed with the walk cut at the trf/pd chapters, sk-thm-trace-transport and the batch-4 targets. The delivery adds only the pure-algebra Cohen node, and none of these citations is a step of the trace formula or of Poincare duality, so I accept them. I accept the 9 generic tool_uses. Maintainer note: the commit report coord/reports/Q35/... is stale (F). It says no new nodes and empty citations, which describes an earlier version, not this 6-step proof with one new node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeFieldPunctualPurity",
+  "declaration": "AlgebraicGeometry.Etale.primeField_punctuallyPure",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeFieldPunctualPurity.lean",
+  "statement": "theorem primeField_punctuallyPure (ℓ : ℕ) (hℓ : ℓ.Prime) (k : Type u) [Field k] (_hk : Nonempty (k ≃+* ℚ) ∨ ∃ p : ℕ, p.Prime ∧ Nonempty (k ≃+* ZMod p)) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [IsNoetherian X] (_hX : IsRegularScheme X) (_hℓX : IsUnit (ℓ : Γ(X, ⊤))) : IsPunctuallyPure ℓ hℓ X",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.primeField_punctuallyPure"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b849f692",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery fixes both findings of the 2542750d RETURN: the local punctual-purity definitions are gone, the module imports Sheaf.AlgebraicGeometry.PunctualPurity and concludes IsPunctuallyPure ℓ hℓ X; stmt_dep def-per-punctual-purity added, lem-asd-etale-finite-twist-pullback dropped; only lean/stmt_deps differ from the live node. Clauses match ILO XVI 3.2.5: prime ℓ (F_ℓ = regularClassCoefficients ℓ 1), k ≃ ℚ or ZMod p, X.Over Spec k, IsNoetherian, IsRegularScheme, ℓ a unit on Γ(X,⊤), no finite-type or excellence hypothesis; the predicate's Prop witnesses always exist on regular Noetherian X. Universes consistent; edge cases (empty X, d=0, char ℓ) OK. No duplicate theorem on side. Statement verbatim, lines ≤100, sorry-only proof, docstrings with source, blueprint tag and steps; plain proof-dep imports allowed by rule 7. Four nt_compile --json runs at load 91–108 stopped at the 60 s limit on the unchanged base dependency RegularImmersionClassCalculus before reaching the item; judged from the delivery's own clean compile (6.4/5.8 s) and the identical swap compiling in the Q30/Q31/Q49 reviews; retry landing at lower load. Advisory: imports of the landed proof-dep modules PrimeFieldCompleteCoordinateModel and PunctualStrictCompletionTest are for the maintainer to add after the next build."
  }
 }

@@ -19,7 +19,8 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product",
   "def-weil-quasi-separated-morphism",
-  "lem-trf-projective-bundle-quotient-geometry"
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-trf-relatively-very-ample"
  ],
  "proof": [
   {
@@ -297,5 +298,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-a3188a2e5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, unit/chapter route, governance files, and Stacks sources at Tags 01VU, 01VR, 01VJ, 01OB, 01OD, and 01OE. Checked every proof step, hypotheses, edge cases, searches, duplicates, route-pivot and SGA restrictions; no faults found. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAmpleVeryAmple",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relative_ample_very_ample",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAmpleVeryAmple.lean",
+  "statement": "theorem relative_ample_very_ample {Y X : Scheme.{u}} (f : Y ⟶ X) [LocallyOfFiniteType f] [QuasiCompact f] [CompactSpace X] (M : Y.Modules) [M.IsInvertible] : (((QuasiCompact f ∧ ∀ V : X.Opens, IsAffineOpen V → ∃ hM : ((tensorPullback (f ⁻¹ᵁ V).ι).obj M).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj M) hM) ↔ ∃ n : ℕ, 1 ≤ n ∧ IsRelativelyVeryAmple f (M.tensorPow n)) ∧ ((QuasiCompact f ∧ ∀ V : X.Opens, IsAffineOpen V → ∃ hM : ((tensorPullback (f ⁻¹ᵁ V).ι).obj M).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj M) hM) ↔ ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → IsRelativelyVeryAmple f (M.tensorPow n))) ∧ (∀ (Z : Scheme.{u}) (g : Z ⟶ X) [QuasiCompact g] (N : Z.Modules) [N.IsInvertible], IsRelativelyVeryAmple g N → QuasiSeparated g ∧ Epi ((tensorPullbackSectionAdjunction g).counit.app N) ∧ ∃ hF : ((pushforward g).obj N).IsQuasicoherent, ∃ r : Z ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData X ((pushforward g).obj N) hF).relProj, r ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData X ((pushforward g).obj N) hF).relProjHom = g ∧ @ProjectiveBundleQuotientGeometry.IsCanonicalMap X ((pushforward g).obj N) hF Z g N ((tensorPullbackSectionAdjunction g).counit.app N) r ∧ IsImmersion r)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-621c29823",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Item and new def node def-trf-relatively-very-ample read against Stacks 01VM/01VU/01VR. Every clause matches: finite type as LOFT+QC, compact X, f-ampleness via IsAmple on restrictions, positive and eventual very-ample powers, and the moreover clause for any quasi-compact g (quasi-separated, Epi of the normalized counit, g_*N quasi-coherent, r over X pinned by IsCanonicalMap and an immersion). The extra N.IsInvertible and ∃hM are implied. IsRelativelyVeryAmple is 01VM exactly (any quasi-coherent E, immersion, O(1) fixed by the TautologicalQuotient chart and generator conditions); not hollow. No duplicate: upstream IsVeryAmple needs a closed immersion into finite projective space; no parallel def node live or side. Edge cases (empty schemes, n0=0, non-finite E) and the single universe are fine; statements verbatim; only change vs live is the new stmt_dep and lean record. nt_compile --json: 3.4 s and 3.3 s, clean. Advisory: the new def node cites theorem lem-trf-projective-bundle-quotient-geometry for TautologicalQuotient, which def-per-projective-bundle-quotient-data owns; IsCanonicalMap has no owning def node; redundant proof-plan imports."
  }
 }
