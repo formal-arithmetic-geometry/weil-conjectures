@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ModuleAcyclicUnderlyingSections
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections

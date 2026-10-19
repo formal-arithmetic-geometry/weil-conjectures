@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteClopenOpenCoverSection
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

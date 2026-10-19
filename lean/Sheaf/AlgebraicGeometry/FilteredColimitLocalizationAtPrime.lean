@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-public import Mathlib.Algebra.Category.Ring.FilteredColimits
-public import Mathlib.RingTheory.Localization.AtPrime.Basic

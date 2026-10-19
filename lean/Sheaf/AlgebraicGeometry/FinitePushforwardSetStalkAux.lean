@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkAux
-public import WeilConjectures.SixFunctors.Finite.Stalk

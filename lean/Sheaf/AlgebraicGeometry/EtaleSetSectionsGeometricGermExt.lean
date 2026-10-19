@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint

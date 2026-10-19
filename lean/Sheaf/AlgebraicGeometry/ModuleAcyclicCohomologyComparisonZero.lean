@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections

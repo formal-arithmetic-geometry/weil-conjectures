@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
-public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.AlgebraicGeometry.Pullbacks

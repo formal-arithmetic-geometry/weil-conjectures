@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughImmersion
-public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion

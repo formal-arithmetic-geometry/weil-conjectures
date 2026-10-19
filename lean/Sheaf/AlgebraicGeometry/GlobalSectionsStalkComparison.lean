@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteOpenPartitionThickeningTransport
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite

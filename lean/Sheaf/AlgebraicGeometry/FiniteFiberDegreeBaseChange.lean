@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound

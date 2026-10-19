@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
-public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
-public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

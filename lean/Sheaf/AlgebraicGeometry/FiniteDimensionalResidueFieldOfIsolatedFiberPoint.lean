@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint
-public import Mathlib.AlgebraicGeometry.Fiber
-public import Mathlib.LinearAlgebra.FiniteDimensional.Defs

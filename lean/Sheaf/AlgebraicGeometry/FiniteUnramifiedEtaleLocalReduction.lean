@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedEtaleLocalReduction
-public import WeilConjectures.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition

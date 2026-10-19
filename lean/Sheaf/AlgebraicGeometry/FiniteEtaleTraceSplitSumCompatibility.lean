@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitSumCompatibility
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting

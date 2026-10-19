@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Mathlib.CategoryTheory.Sites.Pullback

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTracePullbackSum
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceLocalSums

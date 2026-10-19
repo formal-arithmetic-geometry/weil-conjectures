@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedNeighbourhoodsDisjointRefinement
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.FieldTheory.PurelyInseparable.Basic

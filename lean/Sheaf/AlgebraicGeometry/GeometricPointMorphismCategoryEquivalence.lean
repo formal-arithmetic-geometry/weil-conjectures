@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismCategoryEquivalence
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
