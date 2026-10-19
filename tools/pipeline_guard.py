@@ -50,3 +50,28 @@ def proof_imports_guard(root, modules=()):
                 raise RuntimeError(f'proof imports refused: unreadable landing {p.name}')
             if modules & {f['module'] for f in rec.get('files', [])}:
                 raise RuntimeError(f'proof imports refused: unverified landing {rec["id"]}')
+
+
+def frozen_modules(root) -> set[str]:
+    """Modules whose files belong to a landing the global build has not verified yet: pending or held landings
+    (local/builds/requests, inflight) and the deliveries of the open batch (local/batch/open.json, landing.json).
+    No writer other than the landing tools and the take-out may change them until the build has verified them
+    (the human, 2026-10-19: a prune of unused imports in a delivered file made the take-out conflict and live stayed
+    red for hours). Source-only and fast: reads a few hundred small records."""
+    root = pathlib.Path(root)
+    out = set()
+    for directory in ('requests', 'inflight'):
+        for p in (root / 'local/builds' / directory).glob('*.json'):
+            try:
+                out |= {f['module'] for f in json.loads(p.read_text()).get('files', []) if f.get('module')}
+            except (OSError, ValueError):
+                continue
+    for name in ('open.json', 'landing.json'):
+        try:
+            b = json.loads((root / 'local/batch' / name).read_text())
+        except (OSError, ValueError):
+            continue
+        for e in b.get('entries', []):
+            if e.get('state') in (None, 'landed', 'stuck'):
+                out |= set(e.get('modules') or [])
+    return out

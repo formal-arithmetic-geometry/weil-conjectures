@@ -92,23 +92,33 @@ def prune(m, imports, memo):
 
 def commit(done):
     if not done: return
-    import hashlib
-    ok = {}
-    for m, v in done.items():   # only if the file is still the one that was pruned (a landing may have changed it since)
-        if path(m).is_file() and hashlib.sha1(path(m).read_text().encode()).hexdigest() == v["old"]: path(m).write_text(v["new"]); ok[m] = v
-    done = ok
-    if not done: return
-    files = [str(path(m).relative_to(R)) for m in done]
-    msg = f"Prune unused imports of {len(done)} finished module(s) (tools/prune_imports.py)\n\n" + "\n".join(f"- {m}" for m in done) + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-    r = subprocess.run(["flock", "-w", "300", "coord/.merge.lock", "git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m", msg, "--", *files],
-                       cwd=R, env=dict(os.environ, SHEAF_LEAD="L-only"), capture_output=True, text=True)
+    import hashlib, mergelock
+    from pipeline_guard import frozen_modules
+    # 2026-10-19: written and committed under the merge lock, never into a file of an unverified landing (frozen)
+    with mergelock.merge_lock():
+        frozen = frozen_modules(R)
+        ok = {}
+        for m, v in done.items():   # only if the file is still the one that was pruned (a landing may have changed it since)
+            if m in frozen:
+                log(m, "| frozen: a landing of it is not verified yet; not written"); continue
+            if path(m).is_file() and hashlib.sha1(path(m).read_text().encode()).hexdigest() == v["old"]: path(m).write_text(v["new"]); ok[m] = v
+        done = ok
+        if not done: return
+        files = [str(path(m).relative_to(R)) for m in done]
+        msg = f"Prune unused imports of {len(done)} finished module(s) (tools/prune_imports.py)\n\n" + "\n".join(f"- {m}" for m in done) + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+        r = subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m", msg, "--", *files],
+                           cwd=R, env=dict(os.environ, SHEAF_LEAD="L-only"), capture_output=True, text=True)
     log("commit", "ok" if r.returncode == 0 else "FAILED " + r.stderr[-200:], len(done))
 
 
 def run(mods, do_commit):
     _, imports = li.scan(); memo = {}; done = {}
+    from pipeline_guard import frozen_modules
+    frozen = frozen_modules(R)
     for m in mods:
         if not path(m).is_file(): continue
+        if m in frozen:   # its trial compiles write the live file: never while a landing of it is unverified
+            log(m, "| frozen: a landing of it is not verified yet; skipped"); continue
         before = path(m).read_text()
         try: new, why = prune(m, imports, memo)
         except Exception as e: new, why = None, repr(e)[:150]
