@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.PolynomialTorBound
 import Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect
 import Sheaf.RingTheory.FiniteFreeResolution

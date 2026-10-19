@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen

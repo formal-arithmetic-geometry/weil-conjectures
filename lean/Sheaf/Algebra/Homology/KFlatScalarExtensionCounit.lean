@@ -7,7 +7,7 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.BifunctorShift
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Mathlib.Algebra.Category.ModuleCat.AB

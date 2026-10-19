@@ -5,7 +5,7 @@ Authors: SHEAF group Q148
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.RingTheory.RingHom.Flat

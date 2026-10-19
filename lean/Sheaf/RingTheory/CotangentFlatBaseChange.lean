@@ -6,13 +6,13 @@ Authors: SHEAF group Q94
 module
 
 public import Sheaf.RingTheory.CotangentResolutionCoherence
-public import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.RingTheory.Kaehler.Polynomial
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit

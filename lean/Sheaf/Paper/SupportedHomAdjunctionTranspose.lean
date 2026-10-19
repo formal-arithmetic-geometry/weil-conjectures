@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Sheaf.AlgebraicGeometry.SupportCohomology

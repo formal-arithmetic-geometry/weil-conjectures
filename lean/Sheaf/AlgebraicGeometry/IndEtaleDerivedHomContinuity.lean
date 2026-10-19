@@ -23,7 +23,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.AlgebraicGeometry.InjectiveComplexSliceSectionModel
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules

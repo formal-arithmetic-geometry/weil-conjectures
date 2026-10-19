@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace
 public import Mathlib.LinearAlgebra.Trace
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Algebra.Homology.ModuleHomComplex
 import Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy
 import Sheaf.CategoryTheory.DerivedCategory.FrameDualMate

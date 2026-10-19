@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
+import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 import Sheaf.Algebra.Homology.OpenRestrictionKFlat
 import Sheaf.Algebra.Homology.OpenRestrictionTensorHomology
 import Mathlib.Algebra.Homology.BifunctorFlip

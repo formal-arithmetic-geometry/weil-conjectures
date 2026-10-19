@@ -21,7 +21,7 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 import Sheaf.AlgebraicGeometry.ComplexLiftClassProjective
 import Sheaf.Algebra.Homology.BoundedAboveProjectiveModel
 import all Sheaf.Algebra.Homology.NilpotentDerivedUpperBound
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import all Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawTransportIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

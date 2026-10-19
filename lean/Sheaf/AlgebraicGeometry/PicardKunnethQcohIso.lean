@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.PicardKunnethCechModels
 
 /-! # The isomorphism clause of the quasi-coherent Kunneth theorem

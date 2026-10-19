@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 
@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology
 import Sheaf.Algebra.Homology.AffineTensorLocalizationFlat
 
 import Sheaf.Algebra.Homology.PrescribedTensorCohomologyModelRealization
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Global-to-local tensor cohomology component isomorphisms

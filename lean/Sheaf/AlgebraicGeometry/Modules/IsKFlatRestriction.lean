@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # K-flatness under open restriction

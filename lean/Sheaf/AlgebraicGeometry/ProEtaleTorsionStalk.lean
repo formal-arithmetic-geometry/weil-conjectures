@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
 import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.AlgebraicGeometry.AffineModelStalkBaseChange
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 

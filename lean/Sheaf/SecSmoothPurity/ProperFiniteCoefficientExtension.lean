@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction

@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Sheaf.Topology.PointModuleEvaluationEquivalence

@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.HomComplexRestrictScheme

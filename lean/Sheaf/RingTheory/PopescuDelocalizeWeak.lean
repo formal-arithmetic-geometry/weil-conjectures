@@ -15,7 +15,7 @@ import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuWeakClearPresentation
 import WeilConjectures.RingTheory.SingularIdealMapEquiv
 import WeilConjectures.RingTheory.PopescuWeakHomogenize
-import Sheaf.RingTheory.SmoothStandardSmoothRetract
+import WeilConjectures.RingTheory.SmoothStandardSmoothRetract
 import WeilConjectures.RingTheory.StandardSmoothIncludeGenerators
 
 /-!

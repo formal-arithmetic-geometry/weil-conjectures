@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
 import Sheaf.AlgebraicGeometry.GabberH0EtaleInjective
 import Sheaf.AlgebraicGeometry.GabberH0FiniteLift

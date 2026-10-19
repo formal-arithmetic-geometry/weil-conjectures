@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.MixedGlobalExtension

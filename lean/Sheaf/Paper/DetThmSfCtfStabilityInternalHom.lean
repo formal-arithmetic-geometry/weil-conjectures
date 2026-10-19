@@ -36,7 +36,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import WeilConjectures.ConstructibleSheaf.Refinement
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.CoefficientHeartFiltration
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.CategoryTheory.RingedSitePerfectDuality
 import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

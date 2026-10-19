@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations

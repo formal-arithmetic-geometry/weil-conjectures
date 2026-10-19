@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Mathlib.Algebra.DirectSum.Module
 import Sheaf.AlgebraicGeometry.PicardLeftCechCupHomology
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 
 /-! # External Cech cup on the factor homology generators
 

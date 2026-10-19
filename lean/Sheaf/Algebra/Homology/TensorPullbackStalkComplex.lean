@@ -10,7 +10,7 @@ public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
-import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
+import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransport
 
 /-!
 # The stalk complex of termwise tensor pullback

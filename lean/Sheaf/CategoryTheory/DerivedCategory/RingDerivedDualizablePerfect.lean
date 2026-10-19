@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingSummand
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex

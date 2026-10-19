@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.GenericFinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Finite.BaseChange
 

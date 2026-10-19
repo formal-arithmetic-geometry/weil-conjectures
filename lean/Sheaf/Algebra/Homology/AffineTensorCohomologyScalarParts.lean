@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import Mathlib.Algebra.Homology.ShortComplex.Linear

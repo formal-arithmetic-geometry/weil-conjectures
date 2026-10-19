@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V2
 -/
 module
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final

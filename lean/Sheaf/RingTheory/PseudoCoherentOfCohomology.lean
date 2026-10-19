@@ -6,11 +6,11 @@ Authors: SHEAF group NR
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Homology.Single
-import Sheaf.RingTheory.PseudoCoherentIffAllM
+import WeilConjectures.RingTheory.PseudoCoherentIffAllM
 import WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
-import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
+import WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
 import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-!

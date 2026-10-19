@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

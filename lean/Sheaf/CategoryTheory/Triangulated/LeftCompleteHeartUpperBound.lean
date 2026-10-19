@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 

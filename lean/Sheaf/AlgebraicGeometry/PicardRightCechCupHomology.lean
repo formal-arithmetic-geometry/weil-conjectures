@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardRightCechCupGenerators
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 
 /-! # Affine Cech comparison of the external cup formula
 

@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 import Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Mathlib.Algebra.Category.ModuleCat.AB

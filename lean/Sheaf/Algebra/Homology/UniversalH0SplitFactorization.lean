@@ -7,7 +7,7 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 import Mathlib.RingTheory.LocalProperties.Projective
-import Sheaf.Algebra.Homology.UniversalH0CokernelLocalFree
+import WeilConjectures.Algebra.Homology.UniversalH0CokernelLocalFree
 
 /-! Factorization data for a generalized inverse.
 

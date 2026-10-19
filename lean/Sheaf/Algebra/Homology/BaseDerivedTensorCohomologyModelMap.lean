@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 /-! # Morphisms between base-derived tensor cohomology models
 
 Source: Stacks Project, More on Algebra, Tag 06Y6, functoriality of the

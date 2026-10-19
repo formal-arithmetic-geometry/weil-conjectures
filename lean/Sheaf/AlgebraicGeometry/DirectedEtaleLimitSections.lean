@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
 import Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications
 import Mathlib.CategoryTheory.Filtered.Final

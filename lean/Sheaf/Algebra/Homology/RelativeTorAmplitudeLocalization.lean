@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.RingTheory.Ideal.Maximal
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat

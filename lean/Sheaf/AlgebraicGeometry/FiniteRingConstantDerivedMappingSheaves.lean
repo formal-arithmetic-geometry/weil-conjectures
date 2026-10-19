@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.EtaleDerivedMapPresheaves
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import Sheaf.RingTheory.FiniteConeFreeModel
+import WeilConjectures.RingTheory.FiniteConeFreeModel
 import Sheaf.Paper.FiniteFreeEtaleLocalActual
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk

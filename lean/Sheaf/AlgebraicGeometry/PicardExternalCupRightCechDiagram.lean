@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.PicardExternalRightCechExact
 import Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine

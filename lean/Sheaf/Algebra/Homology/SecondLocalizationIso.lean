@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Algebra.Homology.SecondLocalizationMap
 public import Mathlib.RingTheory.Localization.Basic
-import Sheaf.Algebra.Homology.DerivedTensorFlatSecondLocalization
+import WeilConjectures.Algebra.Homology.DerivedTensorFlatSecondLocalization
 import Sheaf.Algebra.Homology.SecondLocalizationIsoAux
 /-! # Invertibility of the second localization map
 Source: Stacks Project, Tags 06Y6 and 0DJ8.

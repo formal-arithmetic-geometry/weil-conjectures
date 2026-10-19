@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Cohomology base change for module complexes

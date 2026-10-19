@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.TensorProduct.Free
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
+import WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
 
 /-!
 # Local pseudo-coherence of a localization cone

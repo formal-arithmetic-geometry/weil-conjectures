@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.PicardAffineProjectiveBaseChange
 import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Data.ZMod.QuotientRing
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.Algebra.Module.ZMod
 public import Mathlib.LinearAlgebra.TensorProduct.Basic

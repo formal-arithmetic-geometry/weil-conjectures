@@ -46,7 +46,7 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
@@ -55,10 +55,9 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!

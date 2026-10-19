@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison
 import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel

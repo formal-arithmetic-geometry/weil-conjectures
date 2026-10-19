@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechGenerators
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 
 /-! # Natural Cech cup and its scalar-model comparison
 

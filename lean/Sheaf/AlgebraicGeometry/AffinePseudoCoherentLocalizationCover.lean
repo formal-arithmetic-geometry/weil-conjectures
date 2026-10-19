@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic

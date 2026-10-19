@@ -5,7 +5,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 import Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.HomComplexMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 

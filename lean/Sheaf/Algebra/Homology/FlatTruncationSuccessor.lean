@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.RelativeFlatExtension
+import WeilConjectures.Algebra.Homology.RelativeFlatExtension
 import Sheaf.Algebra.Homology.FlatAugmentationEpicification
 
 /-!

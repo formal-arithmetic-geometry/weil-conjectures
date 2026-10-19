@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
+import WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
 
 /-!
 # Pseudo-coherence in a distinguished triangle

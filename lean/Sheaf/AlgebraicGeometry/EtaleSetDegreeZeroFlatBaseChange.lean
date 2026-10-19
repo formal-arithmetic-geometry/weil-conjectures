@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -21,7 +21,6 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 

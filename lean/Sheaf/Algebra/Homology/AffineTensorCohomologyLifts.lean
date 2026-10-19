@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.Algebra.Homology.TensorActionOfAdditiveFunctor
 import Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalar

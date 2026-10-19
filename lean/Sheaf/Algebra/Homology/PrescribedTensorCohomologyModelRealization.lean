@@ -5,10 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.FlatScalarExtensionHomologyAdjunct

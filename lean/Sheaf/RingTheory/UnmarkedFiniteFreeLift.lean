@@ -3,7 +3,7 @@ module
 public import Sheaf.RingTheory.StablyFreeComplexLift
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.RingTheory.RingPseudoCoherent
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 @[expose] public section

@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.TensorProduct.Basic
 
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso

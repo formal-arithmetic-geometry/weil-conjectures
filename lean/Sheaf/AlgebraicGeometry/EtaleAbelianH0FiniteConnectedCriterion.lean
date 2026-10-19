@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction
 
 /-!

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
 /-! # Scalar-extension unit on affine models

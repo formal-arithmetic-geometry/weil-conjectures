@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafExists
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafUnique
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable

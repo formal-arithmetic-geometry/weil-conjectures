@@ -8,12 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
-import Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Residue cohomology computed by a free stalk representative

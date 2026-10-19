@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 import Mathlib.Algebra.Category.ModuleCat.Descent
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import WeilConjectures.RingTheory.HomologyVanishingLocalizationSpan
 
 /-!

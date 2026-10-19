@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
-import Sheaf.Algebra.Homology.TensorKunnethNaturalComplexes
+import WeilConjectures.Algebra.Homology.TensorKunnethNaturalComplexes
 import Sheaf.AlgebraicGeometry.PicardRightCechCupCycleComparison
 
 /-! # Specified external Cech cup on factor homology generators

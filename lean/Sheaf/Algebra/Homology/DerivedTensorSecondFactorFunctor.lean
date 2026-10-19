@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Sheaf.Algebra.Homology.MixedTensorPointwiseLeftDerived
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 

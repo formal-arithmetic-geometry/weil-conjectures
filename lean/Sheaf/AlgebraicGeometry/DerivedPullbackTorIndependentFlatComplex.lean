@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat

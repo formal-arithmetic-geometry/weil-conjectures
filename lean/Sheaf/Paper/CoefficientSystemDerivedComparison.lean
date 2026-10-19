@@ -18,7 +18,7 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.Paper.PbcCompletedPullbackActual

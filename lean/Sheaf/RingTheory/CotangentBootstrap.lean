@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Sheaf.RingTheory.CotangentResolutionCoherence
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.RingTheory.LocalizationCotangentVanishing
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

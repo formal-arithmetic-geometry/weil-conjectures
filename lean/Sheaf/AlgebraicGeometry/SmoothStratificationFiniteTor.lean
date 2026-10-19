@@ -22,7 +22,7 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated

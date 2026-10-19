@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.Algebra.Homology.RingPseudoCoherentSummand
+import WeilConjectures.Algebra.Homology.RingPseudoCoherentSummand
 import Sheaf.AlgebraicGeometry.AffineDerivedSummandModels
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

@@ -5,7 +5,7 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction
 import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent

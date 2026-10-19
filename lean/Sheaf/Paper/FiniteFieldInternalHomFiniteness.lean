@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.SixFunctors.FlatModelGeneration
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

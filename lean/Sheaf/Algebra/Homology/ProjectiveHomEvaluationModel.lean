@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Algebra.Homology.ModuleHomComplexQuotient
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective

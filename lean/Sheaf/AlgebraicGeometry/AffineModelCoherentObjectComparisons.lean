@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.InducedCategory
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence
 import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
 

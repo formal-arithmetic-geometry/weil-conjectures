@@ -10,7 +10,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
-import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
+import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransport
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits

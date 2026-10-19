@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.Paper.CoefficientHeartCommonStratification
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ImmersionFiberDegreeOne

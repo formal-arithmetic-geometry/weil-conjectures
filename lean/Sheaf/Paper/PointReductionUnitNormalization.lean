@@ -32,7 +32,7 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.CompletedConstantSheafReduction

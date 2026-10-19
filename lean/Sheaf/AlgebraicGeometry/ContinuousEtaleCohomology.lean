@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage

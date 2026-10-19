@@ -5,7 +5,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 
 @[expose] public section

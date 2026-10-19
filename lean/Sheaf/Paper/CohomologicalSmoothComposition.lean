@@ -32,7 +32,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

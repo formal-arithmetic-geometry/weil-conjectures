@@ -5,7 +5,7 @@ Authors: SHEAF group NV
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Sheaf.Algebra.Homology.FreeComplexResidueTensorExact

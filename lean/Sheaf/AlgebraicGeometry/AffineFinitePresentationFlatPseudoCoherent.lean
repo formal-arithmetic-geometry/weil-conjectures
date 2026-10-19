@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent

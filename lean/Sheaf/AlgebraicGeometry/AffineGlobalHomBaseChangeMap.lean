@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
 import Sheaf.AlgebraicGeometry.OriginalCounitAdjunctionTransport
 import Sheaf.AlgebraicGeometry.NormalizedInternalHomPullbackComparison

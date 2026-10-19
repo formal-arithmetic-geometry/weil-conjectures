@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Additive
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

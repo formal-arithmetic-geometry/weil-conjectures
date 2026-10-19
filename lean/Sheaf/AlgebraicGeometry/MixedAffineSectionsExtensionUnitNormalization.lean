@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.MixedAffineSectionsComplexUnit
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
 /-! # The source affine model and its extension unit normalization

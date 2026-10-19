@@ -8,8 +8,8 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Sheaf.RingTheory.DerivedCompleteModuleComplex
-import Sheaf.Algebra.Homology.RingPseudoCoherentSummand
-import Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule
+import WeilConjectures.Algebra.Homology.RingPseudoCoherentSummand
+import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 import Sheaf.RingTheory.NilpotentTorsionDerivedLimitComplete
 import Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction
 import Sheaf.RingTheory.PseudoCoherentNormalizedAlgebraTower

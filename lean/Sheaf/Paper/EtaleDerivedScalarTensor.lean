@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!

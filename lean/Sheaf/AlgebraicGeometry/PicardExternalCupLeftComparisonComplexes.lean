@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage

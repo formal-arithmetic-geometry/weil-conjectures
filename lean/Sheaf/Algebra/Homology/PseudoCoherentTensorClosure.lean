@@ -6,14 +6,14 @@ Authors: SHEAF group N8
 module
 
 public import WeilConjectures.RingTheory.MPseudoCoherent
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 

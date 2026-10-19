@@ -28,7 +28,7 @@ import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.GabberOpenImmersionSheafFiniteness
 

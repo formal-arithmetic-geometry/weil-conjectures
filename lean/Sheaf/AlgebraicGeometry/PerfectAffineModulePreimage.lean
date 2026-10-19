@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

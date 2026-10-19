@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule
+import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 
 /-! # Tor comparison for flat extension of scalars
 Source: Weibel, An Introduction to Homological Algebra, Corollary 4.3.6,

@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
-import Sheaf.RingTheory.FiniteConeFreeModel
+import WeilConjectures.RingTheory.FiniteConeFreeModel
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Abelian
 import Mathlib.RingTheory.Finiteness.Cardinality

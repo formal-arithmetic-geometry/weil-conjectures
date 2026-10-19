@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.RingTheory.FiniteLocalizationFreeStep

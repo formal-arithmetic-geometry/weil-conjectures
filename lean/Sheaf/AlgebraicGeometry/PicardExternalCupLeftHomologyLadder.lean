@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.ExactSequence
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 /-! # The external-cup five-term homology ladder in the left coefficient

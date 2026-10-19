@@ -120,13 +120,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality",
-  "file": "lean/Sheaf/Algebra/Homology/InverseImageStalkScalarTransportNaturality.lean",
+  "module": "WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportNaturality",
+  "file": "lean/WeilConjectures/Algebra/Homology/InverseImageStalkScalarTransportNaturality.lean",
   "declaration": "exists_inverseImage_stalk_comparison_natural",
   "statement": "theorem exists_inverseImage_stalk_comparison_natural\n    (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier) (x : X) :\n    let k : Y.presheaf.stalk (f x) ⟶\n        TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.carrier)\n          (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x :=\n      TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x ≫\n      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map\n        (toSheafify (Opens.grothendieckTopology X)\n          ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf))\n    ∃ (c : ∀ M : RingedSpace.Modules Y,\n      (RingedSpace.moduleStalkFunctor Y (f x)).obj M ≃+\n        TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier)\n          (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf x),\n      (∀ (M : RingedSpace.Modules Y) (r : Y.presheaf.stalk (f x))\n        (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n        c M (r • m) = k.hom r • c M m) ∧\n      ∀ (M N : RingedSpace.Modules Y) (a : M ⟶ N)\n      (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n      c N ((RingedSpace.moduleStalkFunctor Y (f x)).map a m) =\n      PresheafOfModules.stalkAddMap\n          (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m)",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

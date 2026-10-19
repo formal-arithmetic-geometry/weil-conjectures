@@ -14,7 +14,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-!

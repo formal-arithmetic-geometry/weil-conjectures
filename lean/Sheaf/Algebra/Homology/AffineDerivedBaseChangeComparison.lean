@@ -5,11 +5,11 @@ Authors: SHEAF groups C1 and Q3
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.AffineTensorCohomologyLifts
 import Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos

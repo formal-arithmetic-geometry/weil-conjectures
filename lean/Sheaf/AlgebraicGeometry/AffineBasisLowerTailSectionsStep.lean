@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.AlgebraicGeometry.OpenRestrictionModuleCohomology
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated

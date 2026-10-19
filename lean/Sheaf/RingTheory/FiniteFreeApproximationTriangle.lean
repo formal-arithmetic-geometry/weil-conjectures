@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.RingTheory.PseudoCoherentIffAllM
+import WeilConjectures.RingTheory.PseudoCoherentIffAllM
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

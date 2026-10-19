@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-!
 # A generic lisse stratum in an irreducible closed subset

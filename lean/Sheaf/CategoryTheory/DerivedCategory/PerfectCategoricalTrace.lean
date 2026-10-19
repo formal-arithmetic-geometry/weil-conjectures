@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.Paper.PointFiniteCohomologyComplexes
 public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Paper.StrictPerfectPackageOnSite
-public import Sheaf.Algebra.Homology.BoundedFlatKFlat
+public import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory

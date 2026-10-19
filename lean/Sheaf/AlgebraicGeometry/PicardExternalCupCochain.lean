@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.Bifunctor
 
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Cochain realization of the external cup product

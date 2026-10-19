@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover
 import Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

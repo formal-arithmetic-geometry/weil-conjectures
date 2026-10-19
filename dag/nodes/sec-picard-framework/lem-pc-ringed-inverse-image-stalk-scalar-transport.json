@@ -97,13 +97,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.InverseImageStalkScalarTransport",
-  "file": "lean/Sheaf/Algebra/Homology/InverseImageStalkScalarTransport.lean",
+  "module": "WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransport",
+  "file": "lean/WeilConjectures/Algebra/Homology/InverseImageStalkScalarTransport.lean",
   "declaration": "exists_ringed_inverseImage_stalk_scalar_transport",
   "statement": "theorem exists_ringed_inverseImage_stalk_scalar_transport\n    (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)\n    (α : TopCat.Sheaf.inverseImageRing f Y.sheaf ⟶ X.sheaf) (x : X) :\n    let k := TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x ≫\n      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map\n        (toSheafify (Opens.grothendieckTopology X)\n          ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf))\n    let ψ : TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.carrier)\n        (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x →+* X.presheaf.stalk x :=\n      ((TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map α.hom).hom\n    let ρ := ψ.comp k.hom\n    ∃ (c : ∀ M : RingedSpace.Modules Y,\n        (RingedSpace.moduleStalkFunctor Y (f x)).obj M ≃+\n          TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier)\n            (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf x)\n      (β : ∀ M : RingedSpace.Modules Y,\n        (ModuleCat.extendScalars ρ).obj\n            ((RingedSpace.moduleStalkFunctor Y (f x)).obj M) ≅\n          (ModuleCat.extendScalars ψ).obj\n            (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u})\n              (X := X.carrier) (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x)\n              (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier)\n                (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf x))),\n      (∀ (M : RingedSpace.Modules Y) (b : X.presheaf.stalk x)\n        (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n        (β M).hom (b ⊗ₜ[_, ρ] m) = b ⊗ₜ[_, ψ] (c M m)) ∧\n      (∀ (M N : RingedSpace.Modules Y) (a : M ⟶ N)\n        (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n        c N ((RingedSpace.moduleStalkFunctor Y (f x)).map a m) =\n          PresheafOfModules.stalkAddMap\n            (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m))",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.InverseImageStalkScalarTransport; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

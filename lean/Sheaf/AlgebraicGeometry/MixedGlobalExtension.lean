@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # Derived extension and restriction of global scalars

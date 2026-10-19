@@ -31,7 +31,7 @@ import Sheaf.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.RingTheory.FiniteFreeResolution
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.RingTheory.RingPseudoCoherent
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import Sheaf.AlgebraicGeometry.AffinePolynomialResolutionOfStalkwise

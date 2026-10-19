@@ -27,8 +27,8 @@ import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel

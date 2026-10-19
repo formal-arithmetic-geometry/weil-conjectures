@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Sheaf.Algebra.Homology.LargeFilteredFreeResolution
+import WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
 import Sheaf.Algebra.Homology.FilteredFreeKProjective
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 

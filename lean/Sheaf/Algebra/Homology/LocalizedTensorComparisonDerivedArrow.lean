@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 
 /-! # Derived naturality of localized tensor comparisons
 

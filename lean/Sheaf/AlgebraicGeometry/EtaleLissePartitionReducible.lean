@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleLissePartition
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!

@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Sheaf.CategoryTheory.DerivedModuleHomologyCoproduct
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 

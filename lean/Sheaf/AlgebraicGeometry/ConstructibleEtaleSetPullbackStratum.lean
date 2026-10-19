@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import all Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.Pullback
 

@@ -25,7 +25,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula

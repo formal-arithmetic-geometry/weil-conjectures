@@ -13,14 +13,14 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-public import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -36,7 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent

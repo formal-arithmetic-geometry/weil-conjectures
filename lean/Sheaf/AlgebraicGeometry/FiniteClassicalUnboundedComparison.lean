@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalBounds
 import Sheaf.SixFunctors.UnboundedClassicalTruncation
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

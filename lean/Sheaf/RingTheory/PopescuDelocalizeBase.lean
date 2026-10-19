@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Localization.Algebra
 public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.RingTheory.StrictlyStandardElement
-import Sheaf.RingTheory.SmoothStandardSmoothRetract
+import WeilConjectures.RingTheory.SmoothStandardSmoothRetract
 import WeilConjectures.RingTheory.StandardSmoothIncludeGenerators
 import Sheaf.RingTheory.PopescuDelocalizeCertificate
 

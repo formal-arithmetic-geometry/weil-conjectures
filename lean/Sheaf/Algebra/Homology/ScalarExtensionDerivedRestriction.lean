@@ -7,7 +7,7 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided

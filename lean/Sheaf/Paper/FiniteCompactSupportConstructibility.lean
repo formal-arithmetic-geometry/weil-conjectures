@@ -27,7 +27,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProject
 import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison

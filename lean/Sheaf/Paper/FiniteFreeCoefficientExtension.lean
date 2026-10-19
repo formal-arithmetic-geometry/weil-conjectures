@@ -41,7 +41,7 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.RingTheory.FiniteOverCompleteRing
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.EtaleUnboundedRestrictionComparison

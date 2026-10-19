@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Sheaf.Algebra.Homology.DerivedCanonicalFiltration

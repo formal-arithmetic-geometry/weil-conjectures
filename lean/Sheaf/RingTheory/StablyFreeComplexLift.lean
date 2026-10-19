@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.StablyFree.Basic
 public import Mathlib.Algebra.Homology.Additive

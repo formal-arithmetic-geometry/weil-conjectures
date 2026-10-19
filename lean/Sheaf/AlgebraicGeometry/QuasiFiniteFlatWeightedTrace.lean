@@ -55,7 +55,7 @@ import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
@@ -76,7 +76,7 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
 import WeilConjectures.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

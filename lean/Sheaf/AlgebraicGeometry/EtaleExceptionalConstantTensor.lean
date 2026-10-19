@@ -46,7 +46,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProject
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
 import WeilConjectures.ConstructibleSheaf.KernelCokernel

@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import Mathlib.RingTheory.Flat.Tensor
 import Mathlib.Algebra.Homology.DerivedCategory.Plus

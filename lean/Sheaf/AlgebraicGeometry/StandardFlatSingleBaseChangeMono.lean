@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono
 import Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

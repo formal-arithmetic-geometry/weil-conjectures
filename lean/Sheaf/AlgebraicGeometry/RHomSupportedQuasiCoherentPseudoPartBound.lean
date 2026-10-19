@@ -3,7 +3,7 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 
 @[expose] public section
 

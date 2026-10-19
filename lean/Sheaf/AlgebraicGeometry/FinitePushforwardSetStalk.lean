@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.SixFunctors.Finite.Stalk
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselization

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Homology.FlatCoverFunctor
+import WeilConjectures.Algebra.Homology.FlatCoverFunctor
 import Sheaf.Algebra.Homology.CyclePullbackResolution
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

@@ -6,7 +6,7 @@ Authors: SHEAF group C9
 module
 
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

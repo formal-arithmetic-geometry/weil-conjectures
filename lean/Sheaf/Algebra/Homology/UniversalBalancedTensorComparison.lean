@@ -6,7 +6,7 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 

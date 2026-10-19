@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 import Sheaf.AlgebraicGeometry.ProperFlatCohomologyData
 import Sheaf.AlgebraicGeometry.ProperFlatCohomologyProperties
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

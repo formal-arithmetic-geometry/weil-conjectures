@@ -13,9 +13,9 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.RingTheory.RingPseudoCoherent
 import Mathlib.Algebra.Module.Projective
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Paper.AffineProjectiveComplexDerivedHom
 import Mathlib.RingTheory.Flat.Basic

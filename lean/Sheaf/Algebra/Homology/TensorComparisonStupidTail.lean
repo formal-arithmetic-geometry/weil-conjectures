@@ -13,7 +13,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 

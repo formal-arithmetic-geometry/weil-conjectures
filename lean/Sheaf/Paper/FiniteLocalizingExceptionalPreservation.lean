@@ -25,7 +25,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.AlgebraicGeometry.ComparisonTorInterval
@@ -38,7 +38,6 @@ import Sheaf.AlgebraicGeometry.EtaleClosedSupportAmplitude
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTorBound
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalTransport
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine

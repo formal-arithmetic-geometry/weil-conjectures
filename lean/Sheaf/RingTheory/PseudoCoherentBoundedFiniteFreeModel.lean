@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 import WeilConjectures.RingTheory.FiniteFreeSplitTopCancellation
 import Mathlib.Algebra.Category.ModuleCat.Projective
 

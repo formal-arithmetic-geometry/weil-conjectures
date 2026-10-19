@@ -5,12 +5,12 @@ Authors: SHEAF group NV
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.PseudoCoherentNilpotentInvariance
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.TensorProduct.Basic

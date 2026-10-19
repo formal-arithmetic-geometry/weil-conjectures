@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.ExactSequence
 
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.PicardExternalCupRightCechDiagram
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 

@@ -5,10 +5,10 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.RingTheory.ProjectiveOverLocalFree
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.RingTheory.RingPseudoCoherent
 import Sheaf.Algebra.Homology.PseudoCoherentTensorClosure
 import Sheaf.Algebra.Homology.TopDegreeTensor
 import Sheaf.RingTheory.LocalFiniteTensorNontrivial

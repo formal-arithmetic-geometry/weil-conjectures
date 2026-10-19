@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 import Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

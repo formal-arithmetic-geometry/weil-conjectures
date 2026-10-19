@@ -8,7 +8,7 @@ import Sheaf.RingTheory.DesingularizeStrictlyStandard
 import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuMaximalBadQuotient
-import Sheaf.Algebra.PopescuLiftNilpotent
+import WeilConjectures.Algebra.PopescuLiftNilpotent
 import Mathlib.RingTheory.Noetherian.Nilpotent
 import Mathlib.RingTheory.Flat.TorsionFree
 import Sheaf.RingTheory.PopescuStandardNonzerodivisor

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Sheaf.RingTheory.FiniteProjectiveComplexFreeModel
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 public import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks

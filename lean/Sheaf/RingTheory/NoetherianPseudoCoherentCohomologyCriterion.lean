@@ -5,7 +5,7 @@ Authors: SHEAF group NE
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Noetherian.Basic

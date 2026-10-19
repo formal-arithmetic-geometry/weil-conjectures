@@ -7,11 +7,11 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.RingTheory.RingPseudoCoherent
 import Sheaf.RingTheory.FiniteProjectiveComplexFreeModel
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.RingPseudoCoherentSummand
+import WeilConjectures.Algebra.Homology.RingPseudoCoherentSummand
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Mathlib.RingTheory.Flat.Basic
 

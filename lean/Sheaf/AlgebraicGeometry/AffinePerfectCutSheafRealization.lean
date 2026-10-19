@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat

@@ -118,13 +118,14 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.TensorKunnethNat",
-  "file": "lean/Sheaf/Algebra/Homology/TensorKunnethNat.lean",
+  "module": "WeilConjectures.Algebra.Homology.TensorKunnethNat",
+  "file": "lean/WeilConjectures/Algebra/Homology/TensorKunnethNat.lean",
   "declaration": "HomologicalComplex.tensor_kunneth_nat",
   "statement": "theorem tensor_kunneth_nat {k : Type w} [Field k]\n    (A B : CochainComplex (ModuleCat.{w} k) ℤ)\n    (hA : ∀ p : ℤ, p < 0 → IsZero (A.X p))\n    (hB : ∀ q : ℤ, q < 0 → IsZero (B.X q)) (n : ℕ) :\n    ∃ e : (⨁ i : {pq : ℕ × ℕ // pq.1 + pq.2 = n},\n      (A.homology (i.val.1 : ℤ)) ⊗[k] (B.homology (i.val.2 : ℤ))) ≃ₗ[k]\n        (mapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)).homology\n          (n : ℤ),\n      ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n        (a : A.cycles (i.val.1 : ℤ)) (b : B.cycles (i.val.2 : ℤ)),\n        ∃ z : (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n            (ComplexShape.up ℤ)).cycles (n : ℤ),\n          (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n              (ComplexShape.up ℤ)).iCycles (n : ℤ) z =\n            ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)\n              (i.val.1 : ℤ) (i.val.2 : ℤ) (n : ℤ) (by\n                change (i.val.1 : ℤ) + (i.val.2 : ℤ) = (n : ℤ)\n                exact_mod_cast i.property)\n              ((A.iCycles (i.val.1 : ℤ) a) ⊗ₜ[k] (B.iCycles (i.val.2 : ℤ) b)) ∧\n          e (DirectSum.lof k _ _ i\n              ((A.homologyπ (i.val.1 : ℤ) a) ⊗ₜ[k] (B.homologyπ (i.val.2 : ℤ) b))) =\n            (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n              (ComplexShape.up ℤ)).homologyπ (n : ℤ) z",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.TensorKunnethNat; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

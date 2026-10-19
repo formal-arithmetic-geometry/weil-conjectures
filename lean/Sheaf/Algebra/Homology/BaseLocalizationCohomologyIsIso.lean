@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseLocalizationMap
 import WeilConjectures.Algebra.Homology.LocalizationRestrictionKFlat
-import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Mathlib.Algebra.Category.ModuleCat.AB

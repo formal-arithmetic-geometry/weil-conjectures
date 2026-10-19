@@ -5,12 +5,12 @@ Authors: SHEAF groups NN and C2
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Ideal.Maps
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.Algebra.Module.Projective
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.RingTheory.Flat.Basic

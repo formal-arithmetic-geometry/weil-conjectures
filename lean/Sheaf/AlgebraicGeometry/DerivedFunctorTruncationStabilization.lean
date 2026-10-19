@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 

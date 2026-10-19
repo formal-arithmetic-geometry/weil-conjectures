@@ -4,7 +4,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.RingTheory.Localization.Basic
 import Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel

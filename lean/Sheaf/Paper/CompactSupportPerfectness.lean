@@ -19,7 +19,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.Paper.FiniteCompactSupportConstructibility
 import Sheaf.Paper.PointSectionsFiniteness
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.FiniteTensorConstructibleCohomology
 import Sheaf.Paper.ProEtaleResidueTorTest

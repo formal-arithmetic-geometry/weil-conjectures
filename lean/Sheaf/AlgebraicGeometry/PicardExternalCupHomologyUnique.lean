@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
-import Sheaf.Algebra.Homology.TensorKunnethNat
+import WeilConjectures.Algebra.Homology.TensorKunnethNat
 
 /-! # Uniqueness of normalized external cup on total homology
 

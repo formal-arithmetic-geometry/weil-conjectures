@@ -5,7 +5,7 @@ public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-public import Sheaf.Algebra.Homology.BoundedFlatKFlat
+public import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 public import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor

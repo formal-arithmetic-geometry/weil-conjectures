@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 import Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.RingTheory.Flat.Stability
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 
 /-! # Tensor exactness on principal opens
 

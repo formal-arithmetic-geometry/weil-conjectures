@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Sheaf.AlgebraicGeometry.AffineSquareKFlatModelIso
 import Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 
 @[expose] public section
 universe u w

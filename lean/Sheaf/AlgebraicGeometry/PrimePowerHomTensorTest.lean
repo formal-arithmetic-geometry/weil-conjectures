@@ -24,7 +24,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import Sheaf.Algebra.Homology.RingedSiteTorFlatModel

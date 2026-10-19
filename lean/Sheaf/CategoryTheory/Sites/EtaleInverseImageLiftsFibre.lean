@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 
 /-! # The underlying fibre comparison for étale inverse image

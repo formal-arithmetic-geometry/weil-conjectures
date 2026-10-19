@@ -7,12 +7,11 @@ module
 public import Sheaf.SecSmoothPurity.ProperSupportPullbackSectionMap
 public import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk
 public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Fibre restriction compatibility for proper-support pullback

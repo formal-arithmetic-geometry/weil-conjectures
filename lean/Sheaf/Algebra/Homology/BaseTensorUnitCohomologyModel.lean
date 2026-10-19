@@ -2,7 +2,7 @@ module
 
 public import Sheaf.Algebra.Homology.LocalizationModelSemilinear
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.MixedTotalTensorScalarExtension
+import WeilConjectures.Algebra.Homology.MixedTotalTensorScalarExtension
 import Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison
 
 @[expose] public section

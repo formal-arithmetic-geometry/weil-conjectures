@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonHelpers
-import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
 import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde

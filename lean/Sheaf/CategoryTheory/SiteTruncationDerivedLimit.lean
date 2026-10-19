@@ -25,7 +25,7 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful

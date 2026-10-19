@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
-import Sheaf.Algebra.Homology.TensorRestrictExtendScalars
+import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalars
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.StalkTensorComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

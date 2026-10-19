@@ -19,8 +19,8 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
-import Sheaf.Algebra.Homology.KFlatModuleBaseChange
-import Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 import Mathlib.Algebra.Module.Torsion.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import Sheaf.Algebra.Homology.KFlatResolution

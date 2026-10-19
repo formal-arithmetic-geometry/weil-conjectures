@@ -5,12 +5,12 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.RingTheory.ConePseudoCoherent
 import WeilConjectures.RingTheory.FiniteHomologyOfMPseudoCoherent
-import Sheaf.RingTheory.PseudoCoherentIffAllM
+import WeilConjectures.RingTheory.PseudoCoherentIffAllM
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.TensorProduct.Free
 import Mathlib.RingTheory.TensorProduct.Finite

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-! Lissity on the union of the interiors of lisse strata. -/

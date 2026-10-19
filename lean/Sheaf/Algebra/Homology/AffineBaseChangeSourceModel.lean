@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
 import Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel
 import Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso
-import Sheaf.Algebra.Homology.RingTensorCohomology
+import WeilConjectures.Algebra.Homology.RingTensorCohomology
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
