@@ -759,6 +759,125 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
 
 
 set_option linter.unusedVariables false in
+/-- The joint section, derived-unit, refinement, composition, identity and
+base-change normalizations of a pair of finite proper/open comparison families.
+Naming this predicate keeps its full conjunction out of witness-selection terms. -/
+def properOpenInterchangeConditions (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
+        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar
+        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅
+        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p))
+    (γ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
+        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅ (openImmersionLowerShriek (ModuleCat.{u +
+        1} Λ) k).mapDerivedCategoryPlus ⋙ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p)) :
+    Prop :=
+    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
+        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf
+        A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (δ k i r p h).hom.app F ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).map
+        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F) ≫
+        (lowerStarComp (ModuleCat.{u + 1} Λ) k p).hom.app F =
+      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i).app ((lowerStar (ModuleCat.{u +
+        1} Λ) r).obj F) ≫
+        (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F) ∧
+    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
+        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (J :
+        HomotopyCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map ((lowerStar
+        (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnit.app J) ≫
+        (γ k i r p h).hom.app (DerivedCategory.Plus.Qh.obj J) =
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusFactorsh.hom.app
+          ((lowerStar (ModuleCat.{u + 1} Λ) r).mapHomotopyCategoryPlus.obj J) ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (δ k i r p h).hom).app J) ≫
+        (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnit.app
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapHomotopyCategoryPlus.obj J) ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p).map ((openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlusFactorsh.inv.app J)) ∧
+    (∀ {T₁ T₂ X : Scheme.{u}} (p : T₁ ⟶ T₂) [IsProper p]
+      (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+      (h : j₁ ≫ p = j₂) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+        Λ))),
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.map
+        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).inv.app K) ≫
+        (γ j₁ j₂ (𝟙 X) p (h.trans (Category.id_comp j₂).symm)).hom.app K =
+      properOpenComparison Λ p j₁ j₂ h K) ∧
+    (∀ {A B C D E F : Scheme.{u}}
+      (k : A ⟶ B) (i : C ⟶ D) (j : E ⟶ F)
+      (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B ⟶ D) (p₂ : D ⟶ F)
+      [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j]
+      [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂]
+      (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j)
+      (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j)
+      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map
+        ((Functor.rightDerivedFunctorPlusCompIso' (lowerStar (ModuleCat.{u + 1} Λ) r₁) (lowerStar
+        (ModuleCat.{u + 1} Λ) r₂) (lowerStarComp (ModuleCat.{u + 1} Λ) r₁ r₂)).hom.app K) ≫
+        (γ k j (r₁ ≫ r₂) (p₁ ≫ p₂) h).hom.app K ≫
+        (Functor.rightDerivedFunctorPlusCompIso' (lowerStar (ModuleCat.{u + 1} Λ) p₁) (lowerStar
+        (ModuleCat.{u + 1} Λ) p₂) (lowerStarComp (ModuleCat.{u + 1} Λ) p₁ p₂)).inv.app
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) =
+      (γ i j r₂ p₂ h₂).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r₁).obj K) ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p₂).map ((γ k i r₁ p₁ h₁).hom.app K)) ∧
+    (∀ {A B C D E F : Scheme.{u}}
+      (k : A ⟶ B) (l : B ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
+      (r : A ⟶ C) (p : B ⟶ D) (q : E ⟶ F)
+      [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j]
+      [IsProper r] [IsProper p] [IsProper q]
+      (h₁ : k ≫ p = r ≫ i) (h₂ : l ≫ q = p ≫ j)
+      (h : (k ≫ l) ≫ q = r ≫ (i ≫ j))
+      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (extensionZeroCompDerivedPlusIso Λ i j).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u + 1}
+        Λ) r).obj K) ≫
+        (γ (k ≫ l) (i ≫ j) r q h).hom.app K ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) q).map ((extensionZeroCompDerivedPlusIso Λ
+        k l).inv.app K) =
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map ((γ k i r p
+        h₁).hom.app K) ≫
+        (γ l j p q h₂).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ)
+        k).mapDerivedCategoryPlus.obj K)) ∧
+    (∀ {A B : Scheme.{u}} (k : A ⟶ B) [IsOpenImmersion k]
+      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (γ k k (𝟙 A) (𝟙 B) ((Category.comp_id k).trans (Category.id_comp k).symm)).hom.app K ≫
+        (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) B).hom.app ((openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) =
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map
+        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) A).hom.app K)) ∧
+    (∀ {A C : Scheme.{u}} (r : A ⟶ C) [IsProper r]
+      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (γ (𝟙 A) (𝟙 C) r r ((Category.id_comp r).trans (Category.comp_id r).symm)).hom.app K ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).map
+        ((Functor.mapDerivedCategoryPlusNatIso (Adjunction.leftAdjointIdIso
+        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 A)) (upperStarId
+        (ModuleCat.{u + 1} Λ) A)) ≪≫ Functor.mapDerivedCategoryPlusIdIso _).hom.app K) =
+      (Functor.mapDerivedCategoryPlusNatIso (Adjunction.leftAdjointIdIso
+        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 C)) (upperStarId
+        (ModuleCat.{u + 1} Λ) C)) ≪≫ Functor.mapDerivedCategoryPlusIdIso _).hom.app
+        ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj K)) ∧
+    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
+        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ {A₁ B₁ C₁ D₁ :
+        Scheme.{u}}
+      (a : B₁ ⟶ B) (b : D₁ ⟶ D) (c : C₁ ⟶ C) (d : A₁ ⟶ A)
+      (k₁ : A₁ ⟶ B₁) (i₁ : C₁ ⟶ D₁) (r₁ : A₁ ⟶ C₁) (p₁ : B₁ ⟶ D₁)
+      [IsOpenImmersion k₁] [IsOpenImmersion i₁] [IsProper r₁] [IsProper p₁]
+      (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
+      (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
+      (sr : IsPullback d r₁ r c) (sp : IsPullback a p₁ p b)
+      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (upperStar (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.map ((γ k i r p h).hom.app K) ≫
+        (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sp.toCommSq).app ((openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p₁).map
+        ((extensionZeroBaseChangeDerivedPlusIso Λ sk).hom.app K) =
+      (extensionZeroBaseChangeDerivedPlusIso Λ si).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u
+        + 1} Λ) r).obj K) ≫
+        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i₁).mapDerivedCategoryPlus.map
+        ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sr.toCommSq).app K) ≫
+        (γ k₁ i₁ r₁ p₁ h₁).hom.app ((upperStar (ModuleCat.{u + 1} Λ) d).mapDerivedCategoryPlus.obj
+        K))
+
+set_option linter.unusedVariables false in
 /-- The canonical proper/open interchange isomorphism, normalized by the derived units,
 with refinement normalization, vertical and horizontal composition, identities and base change.
 The ordinary isomorphism `δ` is fixed by equality in the common ordinary direct image.
@@ -936,118 +1055,7 @@ lem-weil-pbc-exchange-forget-coefficients, def-weil-pbc-underived-exchange,
 lem-weil-pbc-termwise-adjunction-homotopy.
 -/
 theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
-    ∃ (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
-        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar
-        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p))
-      (γ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
-        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek
-        (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅ (openImmersionLowerShriek (ModuleCat.{u +
-        1} Λ) k).mapDerivedCategoryPlus ⋙ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p)),
-    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
-        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf
-        A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (δ k i r p h).hom.app F ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).map
-        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F) ≫
-        (lowerStarComp (ModuleCat.{u + 1} Λ) k p).hom.app F =
-      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i).app ((lowerStar (ModuleCat.{u +
-        1} Λ) r).obj F) ≫
-        (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F) ∧
-    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
-        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (J :
-        HomotopyCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map ((lowerStar
-        (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnit.app J) ≫
-        (γ k i r p h).hom.app (DerivedCategory.Plus.Qh.obj J) =
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusFactorsh.hom.app
-          ((lowerStar (ModuleCat.{u + 1} Λ) r).mapHomotopyCategoryPlus.obj J) ≫
-        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (δ k i r p h).hom).app J) ≫
-        (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnit.app
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapHomotopyCategoryPlus.obj J) ≫
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p).map ((openImmersionLowerShriek
-        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlusFactorsh.inv.app J)) ∧
-    (∀ {T₁ T₂ X : Scheme.{u}} (p : T₁ ⟶ T₂) [IsProper p]
-      (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
-      (h : j₁ ≫ p = j₂) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
-        Λ))),
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.map
-        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).inv.app K) ≫
-        (γ j₁ j₂ (𝟙 X) p (h.trans (Category.id_comp j₂).symm)).hom.app K =
-      properOpenComparison Λ p j₁ j₂ h K) ∧
-    (∀ {A B C D E F : Scheme.{u}}
-      (k : A ⟶ B) (i : C ⟶ D) (j : E ⟶ F)
-      (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B ⟶ D) (p₂ : D ⟶ F)
-      [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j]
-      [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂]
-      (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j)
-      (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j)
-      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map
-        ((Functor.rightDerivedFunctorPlusCompIso' (lowerStar (ModuleCat.{u + 1} Λ) r₁) (lowerStar
-        (ModuleCat.{u + 1} Λ) r₂) (lowerStarComp (ModuleCat.{u + 1} Λ) r₁ r₂)).hom.app K) ≫
-        (γ k j (r₁ ≫ r₂) (p₁ ≫ p₂) h).hom.app K ≫
-        (Functor.rightDerivedFunctorPlusCompIso' (lowerStar (ModuleCat.{u + 1} Λ) p₁) (lowerStar
-        (ModuleCat.{u + 1} Λ) p₂) (lowerStarComp (ModuleCat.{u + 1} Λ) p₁ p₂)).inv.app
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) =
-      (γ i j r₂ p₂ h₂).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r₁).obj K) ≫
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p₂).map ((γ k i r₁ p₁ h₁).hom.app K)) ∧
-    (∀ {A B C D E F : Scheme.{u}}
-      (k : A ⟶ B) (l : B ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
-      (r : A ⟶ C) (p : B ⟶ D) (q : E ⟶ F)
-      [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j]
-      [IsProper r] [IsProper p] [IsProper q]
-      (h₁ : k ≫ p = r ≫ i) (h₂ : l ≫ q = p ≫ j)
-      (h : (k ≫ l) ≫ q = r ≫ (i ≫ j))
-      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (extensionZeroCompDerivedPlusIso Λ i j).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u + 1}
-        Λ) r).obj K) ≫
-        (γ (k ≫ l) (i ≫ j) r q h).hom.app K ≫
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) q).map ((extensionZeroCompDerivedPlusIso Λ
-        k l).inv.app K) =
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map ((γ k i r p
-        h₁).hom.app K) ≫
-        (γ l j p q h₂).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ)
-        k).mapDerivedCategoryPlus.obj K)) ∧
-    (∀ {A B : Scheme.{u}} (k : A ⟶ B) [IsOpenImmersion k]
-      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (γ k k (𝟙 A) (𝟙 B) ((Category.comp_id k).trans (Category.id_comp k).symm)).hom.app K ≫
-        (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) B).hom.app ((openImmersionLowerShriek
-        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) =
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map
-        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) A).hom.app K)) ∧
-    (∀ {A C : Scheme.{u}} (r : A ⟶ C) [IsProper r]
-      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (γ (𝟙 A) (𝟙 C) r r ((Category.id_comp r).trans (Category.comp_id r).symm)).hom.app K ≫
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).map
-        ((Functor.mapDerivedCategoryPlusNatIso (Adjunction.leftAdjointIdIso
-        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 A)) (upperStarId
-        (ModuleCat.{u + 1} Λ) A)) ≪≫ Functor.mapDerivedCategoryPlusIdIso _).hom.app K) =
-      (Functor.mapDerivedCategoryPlusNatIso (Adjunction.leftAdjointIdIso
-        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 C)) (upperStarId
-        (ModuleCat.{u + 1} Λ) C)) ≪≫ Functor.mapDerivedCategoryPlusIdIso _).hom.app
-        ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj K)) ∧
-    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
-        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ {A₁ B₁ C₁ D₁ :
-        Scheme.{u}}
-      (a : B₁ ⟶ B) (b : D₁ ⟶ D) (c : C₁ ⟶ C) (d : A₁ ⟶ A)
-      (k₁ : A₁ ⟶ B₁) (i₁ : C₁ ⟶ D₁) (r₁ : A₁ ⟶ C₁) (p₁ : B₁ ⟶ D₁)
-      [IsOpenImmersion k₁] [IsOpenImmersion i₁] [IsProper r₁] [IsProper p₁]
-      (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
-      (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
-      (sr : IsPullback d r₁ r c) (sp : IsPullback a p₁ p b)
-      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (upperStar (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.map ((γ k i r p h).hom.app K) ≫
-        (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sp.toCommSq).app ((openImmersionLowerShriek
-        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) ≫
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p₁).map
-        ((extensionZeroBaseChangeDerivedPlusIso Λ sk).hom.app K) =
-      (extensionZeroBaseChangeDerivedPlusIso Λ si).hom.app ((rightDerivedLowerStarPlus (ModuleCat.{u
-        + 1} Λ) r).obj K) ≫
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i₁).mapDerivedCategoryPlus.map
-        ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sr.toCommSq).app K) ≫
-        (γ k₁ i₁ r₁ p₁ h₁).hom.app ((upperStar (ModuleCat.{u + 1} Λ) d).mapDerivedCategoryPlus.obj
-        K)) := by
+    ∃ δ γ, properOpenInterchangeConditions Λ δ γ := by
   have hδ : (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D)
     [IsOpenImmersion k]
         [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf

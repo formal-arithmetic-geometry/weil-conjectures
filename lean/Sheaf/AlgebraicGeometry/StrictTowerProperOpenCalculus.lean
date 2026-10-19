@@ -203,7 +203,7 @@ noncomputable def secondWitness {A : Sort v} {C : Sort w} {P : A → C → Prop}
 normalizations; these determine its arrow, including the refinement case.
 Source: Stacks, Tag 0F7B
 (blueprint: lem-cbc-strict-tower-proper-open-calculus). -/
-noncomputable def finiteGamma (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+@[no_expose] noncomputable def finiteGamma (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) :
@@ -212,6 +212,16 @@ noncomputable def finiteGamma (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
       (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus ⋙
         Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p :=
   secondWitness (Etale.properOpenInterchangeCoherence Λ) k i r p h
+
+/-- The finite comparison retains the specified witness of the normalization theorem. -/
+theorem finiteGamma_eq_secondWitness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) :
+    finiteGamma Λ k r p i h =
+      secondWitness (Etale.properOpenInterchangeCoherence Λ) k i r p h := by
+  unfold finiteGamma
+  rfl
 
 /-- The canonical identification of the evaluated source with the finite etale
 source, retaining the evaluation mates and the specified origin isomorphism.
