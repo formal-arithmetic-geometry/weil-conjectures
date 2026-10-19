@@ -17201,3 +17201,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/G5/Sheaf.AlgebraicGeometry.NowhereDenseDimZero (stage 3; reviewer PASS; first push; landing 20261019T093417-L-2307925 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G6/Sheaf.AlgebraicGeometry.ExceptionalBaseChangeReducesToProper (stage 3; reviewer PASS; first push; landing 20261019T093418-L-2308280 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G6/Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen (stage 3; reviewer PASS; first push; landing 20261019T093419-L-2308576 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:34 L: merged deliver/G6/Sheaf.Paper.CommonStageConstituentNonexceptional (stage 3; reviewer PASS; first push; landing 20261019T093420-L-2308887 (proof); batch 20261019T093237; modules 1; new nodes 0)
