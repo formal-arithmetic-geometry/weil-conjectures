@@ -19,9 +19,200 @@
   "def-weil-field",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We prove the assertion by strong induction on the finite height $h$ of $R$, uniformly in all the other data, and first construct a parameter $x\\in L$ without requiring $x\\in W$. By [lem-trf-curve-separating-parameters] there is a separating parameter, and its bad-parameter subfield $D$ is proper. By [lem-trf-valuation-height-coarsening], $W$ has finite height at most $h+1$. For any transcendental $x$, [lem-trf-valuation-algebraic-height] also makes $W\\cap K(x)$ finite-height, since $L/K(x)$ is finite. Put $A=KW$. It is a valuation overring by [lem-trf-valuation-height-coarsening]. We treat $A\\ne L$ before $A=L$ at each height; the former case will not use induction.",
+   "uses": [
+    "lem-trf-curve-separating-parameters",
+    "lem-trf-valuation-height-coarsening",
+    "lem-trf-valuation-algebraic-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, finite-height proof on printed pp. 12--13; finite height of the base is already assumed here."
+   }
+  },
+  {
+   "text": "We will use the following elementary finite-height upgrade. If $V$ is a valuation ring with finitely many primes and $B$ is etale over $V$, each fibre of $\\operatorname{Spec}B$ is a finite set, by [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-etale-algebra-over-field-product]. Hence $\\operatorname{Spec}B$ is finite. For $q\\in\\operatorname{Spec}B$, choose for every prime $p\\not\\subseteq q$ an element $a_p\\in p\\setminus q$, and put $f=\\prod a_p$ (empty product $1$). Then $D(f)$ consists exactly of the primes contained in $q$; every $s\\notin q$ lies in none of these primes, so is a unit in $B_f$. Thus $B_q=B_f$. Its spectrum is an open of $\\operatorname{Spec}B$, so $V\\to B_q$ is etale by [lem-weil-pbc-etale-composition-cancellation]. Consequently a localization at a prime of an etale algebra over a finite-height valuation ring is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 2.1.1 and Lemma 2.1.6, printed pp. 7 and 10; explicit finite-prime localization argument."
+   }
+  },
+  {
+   "text": "Suppose $A\\ne L$. Apply [lem-trf-curve-centred-valuation-dvr] to the given smooth curve and the given centre of $\\operatorname{Spec}A$. It gives an etale coordinate $x$, $F=K(x)$, and $O=A\\cap F$ such that $L/F$ is finite separable, $O$ and $A$ are DVRs, $A$ is a localization of an etale $O$-algebra, and their residue fields are the same field $E$. Step 2 gives that $O\\to A$ is etale. This uses the genuine etale coordinate from the chart, not an arbitrary uniformizer.",
+   "uses": [
+    "lem-trf-curve-centred-valuation-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, non-bounded case, printed pp. 12--13; corrected coordinate choice from Stacks 054L."
+   }
+  },
+  {
+   "text": "By [lem-trf-valuation-height-coarsening], $W$ is the inverse image of a finite-height valuation ring $W_0\\subseteq E=A/\\mathfrak m_A$. Restrict this description to $F$. Since $O$ has the same residue field $E$, $W\\cap F$ is the inverse image of exactly the same $W_0$. Apply [lem-trf-composed-valuation-etale] to $F\\subseteq L$, the etale DVR extension $O\\to A$, and the identity $W_0\\to W_0$. It gives $W\\cap F\\to W$ etale. This completes the case $A\\ne L$ at every height.",
+   "uses": [
+    "lem-trf-valuation-height-coarsening",
+    "lem-trf-composed-valuation-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, end of the non-bounded paragraph; Lemma 2.1.4(i) and Proposition 2.2.2."
+   }
+  },
+  {
+   "text": "Now suppose $A=L$. If $h=0$, then $R=K\\subseteq W$, whence $KW=W=L$. Choose a separating parameter $x$ by [lem-trf-curve-separating-parameters]. The inclusion $W\\cap K(x)=K(x)\\to W=L$ is etale by [lem-weil-pbc-finite-separable-extension-etale]. This proves the induction base.",
+   "uses": [
+    "lem-trf-curve-separating-parameters",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, bounded case of height zero, printed p. 13."
+   }
+  },
+  {
+   "text": "For $h>0$, apply [lem-trf-valuation-height-coarsening] in the bounded case. Denote its compatible height-one valuation rings in $K,L$ by $R_1,A_1$, their residue fields by $k,E$, and their residual valuation rings by $R_0,W_0$. Thus $\\operatorname{height}(R_0)=h-1$, and $R,W$ are the respective inverse images of $R_0,W_0$. Give $L$ the real absolute value supplied by [lem-trf-height-one-real-absolute-value] for $A_1$ and restrict it to $K$; the restriction is nontrivial since $R_1$ has height one. Write $\\widehat K\\subseteq\\widehat L$ for the completions. By [lem-trf-sepclosed-rank-one-completion], $\\widehat K$ and $k$ are algebraically closed.",
+   "uses": [
+    "lem-trf-valuation-height-coarsening",
+    "lem-trf-height-one-real-absolute-value",
+    "lem-trf-sepclosed-rank-one-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, height-one coarsening paragraph, printed p. 13."
+   }
+  },
+  {
+   "text": "The complement of $D$ is dense for this absolute value. Indeed choose $b\\notin D$ and $c\\in K$ with $0<|c|<1$. If a ball about $a$ misses $D$ it already meets the complement; if it contains $d\\in D$, then $d+bc^n\\notin D$ for every $n$, since $D$ is a $K$-linear subspace, and these elements tend to $d$. Thus every ball in $L$ meets $L\\setminus D$. Since $L$ is dense in $\\widehat L$, every ball of $\\widehat L$ meets $L\\setminus D$ as well. This proves exactly the density needed for perturbations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, small-perturbation paragraph, printed p. 13; elementary argument replacing the source word nowhere dense by empty interior."
+   }
+  },
+  {
+   "text": "Choose a separating parameter $y\\in L$ using [lem-trf-curve-separating-parameters]. Since $L/K(y)$ is finite, [lem-trf-valued-decompletion-etale] makes $\\widehat L$ finite over the completion of $K(y)$ inside it. This completion is the closure of $\\widehat K(y)$: $K$ is dense in $\\widehat K$, and rational functions in $y$ are approximated coefficientwise with nonzero denominators. Thus, if $\\widehat L\\ne\\widehat K$, the hypotheses of [lem-trf-analytic-uniformization] apply to $\\widehat L/\\widehat K$.",
+   "uses": [
+    "lem-trf-curve-separating-parameters",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-analytic-uniformization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, application of Theorem 2.1.10, printed p. 13."
+   }
+  },
+  {
+   "text": "First suppose $E=k$. If $\\widehat L=\\widehat K$, choose any $x\\in L\\setminus D$. The closure of $K(x)$ contains the dense subfield $K$ and so equals $\\widehat L$; its completed extension is the identity. If $\\widehat L\\ne\\widehat K$, [lem-trf-analytic-uniformization] gives a parameter in $\\widehat L$ and a ball on which the completed extension is finite etale on valuation rings. Step 7 supplies $x\\in L\\setminus D$ in that ball. In both cases $L/K(x)$ is finite separable by [lem-trf-curve-separating-parameters]. Therefore [lem-trf-valued-decompletion-etale] gives $A_1\\cap K(x)\\to A_1$ etale. The residue field of $A_1\\cap K(x)$ is $k$ since it contains that of $R_1$ and lies in $E=k$. Its residual valuation ring and $W_0$ are both $R_0$. Apply [lem-trf-composed-valuation-etale] to obtain $W\\cap K(x)\\to W$ etale.",
+   "uses": [
+    "lem-trf-analytic-uniformization",
+    "lem-trf-curve-separating-parameters",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-composed-valuation-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, residue-trivial case, printed p. 13."
+   }
+  },
+  {
+   "text": "Suppose $E\\ne k$. By [lem-trf-abhyankar-inequality], $\\operatorname{trdeg}_kE\\leq1$. Since $k$ is algebraically closed, $E\\ne k$ forces $\\operatorname{trdeg}_kE=1$. Choose $\\bar y\\in E$ transcendental over $k$ and lift it to $y\\in A_1$. The residue field of $K(y)$ is $k(\\bar y)$: after dividing the coefficients of a polynomial by one of largest absolute value, its nonzero reduction cannot vanish at the transcendental $\\bar y$; apply this to numerator and denominator. Moreover $E/k(\\bar y)$ is finite: linearly independent residues lift to $K(y)$-linearly independent elements of $L$, since dividing any proposed finite relation by a coefficient of largest absolute value and reducing would contradict residue independence. Their number is therefore bounded by $[L:K(y)]<\\infty$. Thus $E/k$ is finitely generated of transcendence degree one.",
+   "uses": [
+    "lem-trf-abhyankar-inequality",
+    "lem-trf-curve-separating-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, residually transcendental case, printed p. 13; finite-generation hypothesis for induction written explicitly."
+   }
+  },
+  {
+   "text": "The ring $(R_0\\setminus\\{0\\})^{-1}W_0$ is a valuation ring of $E$ containing $k$. By [lem-trf-algclosed-curve-model], it has a centre on a smooth integral proper curve over $k$ with field $E$. Hence all hypotheses of the induction assertion hold for $k\\subseteq E$ with base valuation ring $R_0$, whose height is $h-1$. The induction hypothesis gives $\\bar x\\in W_0$, transcendental over $k$, such that $E/k(\\bar x)$ is finite and the inclusion $W_0\\cap k(\\bar x)\\to W_0$ is etale. This field extension is separable: base change the etale ring extension to the fraction field of its source. The resulting algebra is a domain algebraic over that field (as $E/k(\\bar x)$ is finite), hence is its own fraction field $E$. Now use [lem-weil-pbc-etale-scheme-base-change], and apply [lem-weil-pbc-etale-algebra-over-field-product].",
+   "uses": [
+    "lem-trf-algclosed-curve-model",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, induction on the residual valued extension, printed p. 13; model existence is Stacks 0BY1 and 0BY3."
+   }
+  },
+  {
+   "text": "Choose a lift of $\\bar x$ to $A_1$. Its full set of lifts is an open ball, so Step 7 gives a lift $x\\in L\\setminus D$ with that same residue. By [lem-trf-curve-separating-parameters], $L/K(x)$ is finite separable. Completion preserves the residue fields by [lem-trf-valued-decompletion-etale]. Now [lem-trf-analytic-uniformization], its residue-prescribed clause, makes $\\widehat L$ finite etale on valuation rings over the closure of $\\widehat K(x)$. This is the completion of $K(x)$ as in Step 8. Apply [lem-trf-valued-decompletion-etale] to get $A_1\\cap K(x)\\to A_1$ etale.",
+   "uses": [
+    "lem-trf-curve-separating-parameters",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-analytic-uniformization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, prescribed-residue application of Theorem 2.1.10(iii), then Proposition 2.2.1, printed p. 13."
+   }
+  },
+  {
+   "text": "As in Step 10, the residue field of $A_1\\cap K(x)$ is $k(\\bar x)$. The residual valuation ring obtained by restricting $W$ to $K(x)$ is therefore $W_0\\cap k(\\bar x)$, by the restriction clause of [lem-trf-valuation-height-coarsening]. Its map to $W_0$ is etale by Step 11. Both have finite height, being restrictions of the finite-height valuations in Step 1 (or by [lem-trf-valuation-algebraic-height] for the finite extension $E/k(\\bar x)$). Apply [lem-trf-composed-valuation-etale] to this residual extension and the coarsened etale extension of Step 12. This gives $W\\cap K(x)\\to W$ etale and completes the induction step.",
+   "uses": [
+    "lem-trf-valuation-height-coarsening",
+    "lem-trf-valuation-algebraic-height",
+    "lem-trf-composed-valuation-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 2.1.8, final use of Proposition 2.2.2, printed p. 13."
+   }
+  },
+  {
+   "text": "In each case we have a nonzero transcendental $x$ with $L/K(x)$ finite and $W\\cap K(x)\\to W$ etale. If $x\\in W$, take $t=x$. Otherwise the valuation-ring alternative gives $t=x^{-1}\\in W$. Inversion preserves transcendence, and $K(t)=K(x)$, so neither the finite extension nor the inclusion of valuation rings changes. This gives every clause of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, parameter paragraph, printed p. 29: replace the parameter by its inverse if necessary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-abhyankar-inequality",
+  "lem-trf-algclosed-curve-model",
+  "lem-trf-analytic-uniformization",
+  "lem-trf-composed-valuation-etale",
+  "lem-trf-curve-centred-valuation-dvr",
+  "lem-trf-curve-separating-parameters",
+  "lem-trf-height-one-real-absolute-value",
+  "lem-trf-sepclosed-rank-one-completion",
+  "lem-trf-valuation-algebraic-height",
+  "lem-trf-valuation-height-coarsening",
+  "lem-trf-valued-decompletion-etale",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 2.1.8 finite-height proof, printed pp. 12--13, and Proposition 4.3.3 parameter inversion, printed p. 29; read online at https://arxiv.org/pdf/0707.3953v3; local archival copy WANTED. The coordinate error is repaired using Stacks 054L."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +251,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-strict-semistable-local-uniformization",
@@ -88,5 +279,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-valued-curve-etale-parameter",
+  "worker": "stage1",
+  "summary": "Expanded Temkin finite-height uniformization into an explicit induction, with an unbounded smooth-centre case and bounded residual-trivial/transcendental cases. Exposed the analytic uniformization, completion criterion, composition criterion, height/coarsening structure, rank-one algebraic-closure input, separating parameters, local smooth-curve valuation chart, and proper curve model as eight statement-only inputs. Reused existing Abhyankar, real absolute-value, algebraic-height and etale field/base-change/composition nodes. Corrected the source arbitrary-uniformizer assertion without changing the item statement; used empty-interior density precisely.",
+  "blueprint": "Realizes the valued-parameter component of the nearest blueprint ancestor lem-trf-local-term-locality, through the recorded Temkin local-uniformization chain: Proposition 4.3.3 first parameter paragraph, supported by Theorem 2.1.8 and its analytic-height induction. Steps 1--13 supply the parameter proof and Step 14 supplies its integrality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale/valuative algebra tool: Open immersions are etale; etale morphisms compose and cancel. It supplies precisely the statement quoted in citations.json; the unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic etale/valuative algebra tool: Base change of an etale morphism of schemes is etale (Stacks 02GO). It supplies precisely the statement quoted in citations.json; the unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic etale/valuative algebra tool: A finite separable field extension is etale. It supplies precisely the statement quoted in citations.json; the unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic etale/valuative algebra tool: An etale algebra over a field is a finite product of finite separable extensions. It supplies precisely the statement quoted in citations.json; the unit has no replacement for this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-2b3eaa0bd",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-2b3eaa0bd (reviewer sub-agent of L); spot-checked: I read the item (14 steps) and all eight new nodes in full, plus every cited statement and the parent's step 2 use (lem-trf-valuation-strict-semistable-local-uniformization, reviewed by Q60). The item statement is byte-identical to the Q60 base, and the item is not in route-pivot-dropped. Stacks places read: 0BY1 (curves.tex l.159), 0BY3 (l.249), 054L (morphisms.tex l.8543), 0B8Y (varieties.tex l.9356). The Temkin PDF is absent, so the item is agent-origin with a WANTED line. I checked the Temkin-sourced nodes independently: separating parameters via ker d = KL^p; height/coarsening via the rank inequality and the minimal prime meeting R; composed étale as Ferrand/Milnor pinching with B⊗k=l=D⊗k; decompletion, where separability is needed (an inseparable s^{1/p} lying in F^ is a counterexample without it); completion of a separably closed field is algebraically closed; analytic residue clause via the Gauss norm, stability and e=1, tested on Artin–Schreier x=y^p+y; centred DVR with an étale coordinate (the source error is confirmed: the uniformizer T^p−a is purely inseparable); proper curve model over algebraically closed k. All steps check, including the Step 2 finite-spectrum localization, the Step 7 density, the Step 10 Gauss residue and the [E:k(ȳ)] bound, the Step 11 induction hypotheses and separability, and the Steps 9/12/13 composition data. No duplicates. lem-trf-valuation-rank-one-formal-comparison overlaps one clause of lem-trf-sepclosed-rank-one-completion; this is advisory only. I accept the four generic étale tool_uses. FIX (B3): lem-trf-curve-centred-valuation-dvr said 'finite separable' without citing def-weil-pbc-separable-algebraic-extension; the citation is added to its statement and stmt_deps. Maintainer: please record the Temkin p.12 uniformizer source error in HUMAN.md.; 1 file(s) fixed by the reviewer"
  }
 }

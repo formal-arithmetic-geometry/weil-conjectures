@@ -1,0 +1,92 @@
+{
+ "id": "lem-trf-algclosed-curve-model",
+ "kind": "statement",
+ "title": "Smooth proper models of one-variable fields over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field (every nonconstant polynomial over $k$ has a root) [def-weil-field], and let $E/k$ be a finitely generated field extension of transcendence degree one [def-kun-transcendence-degree]. There exists a smooth integral proper finite-type $k$-scheme $C$ of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism, def-kun-topological-krull-dimension] and a $k$-isomorphism $k(C)\\cong E$, where $k(C)$ is the local ring at the generic point. For every valuation ring $B\\subseteq E$ [def-trf-valuation-ring] containing $k$, the generic-point morphism $\\operatorname{Spec}E\\to C$ extends to a $k$-morphism $\\operatorname{Spec}B\\to C$ [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (theorem-curves-rational-maps), existence of a normal projective model, and Tag 0BY3 (lemma-nonsingular-model-smooth), smoothness over a perfect field; the final clause is the proper valuative criterion (lemma-nagata-proper-valuative-criterion-existence-api)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-transcendence-degree",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-trf-valuation-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every one variable finitely generated field extension of an algebraically closed field is the function field of a smooth projective integral curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"(Fq : Type u_1) → (F : Type u_2) → [inst : Field Fq] → [inst_1 : Field F] → [Algebra (RatFunc Fq) F] → Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] (Fqt : Type u_3) [inst_2 : Field Fqt]\\n  [inst_3 : Algebra (Polynomial Fq) Fqt] [IsFractionRing (Polynomial Fq) Fqt] [inst_5 : Algebra (RatFunc Fq) F]\\n  [inst_6 : Algebra Fqt F] [inst_7 : Algebra (Polynomial Fq) F] [IsScalarTower (\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {F : Type u_1} {F' : Type u_2} (E : Type u_3) [inst : Field F] [inst_1 : Field F'] [inst_2 : Field E]\\n  [inst_3 : Algebra F F'] [inst_4 : Algebra F E] [Algebra.IsAlgebraic F E] [IsAlgClosed F'],\\n  Module.finrank F F' = 2 → Nonempty (E ≃ₐ[F] F) ∨ Nonempty (E ≃ₐ[F] F')\", \"doc\": \"Let $ F $ and $ F' $ be fields with $ F' $ algebraically closed and $ [F' : F] = 2 $. If $ E $ is an algebraic extension of $ F $, then $ E $ is isomorphic to $ F $ or $ F' $ as an $ F $-algebra.\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"IsAlgClosed\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"(k : Type u) → [Field k] → Prop\", \"doc\": \"A field $ k $ is algebraically closed if every non-constant polynomial with coefficients in $ k $ has at least one root in $ k $.\"}\n  {\"name\": \"FirstOrder.Field.modelField_of_modelACF\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ (p : ℕ) (K : Type u_2) [inst : FirstOrder.Language.ring.Structure K] [h : K ⊨ FirstOrder.Language.Theory.ACF p],\\n  K ⊨ FirstOrder.Language.Theory.field\", \"doc\": \"If $ K $ is a model of the algebraically closed field theory of characteristic $ p $, then $ K $ satisfies the field axioms.\"}\n  {\"name\": \"FirstOrder.Field.instModelACFOfCharPOfIsAlgClosed\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : FirstOrder.Ring.CompatibleRing K] {p : ℕ} [CharP K p] [IsAlgClosed K],\\n  K ⊨ FirstOrder.Language.Theory.ACF p\", \"doc\": \"An algebraically closed field $ K $ of characteristic $ p $ is a model of the first-order theory ACF $ p $, which combines field axioms of characteristic $ p $ with the assertion that every non-consta\"}\n  {\"name\": \"FirstOrder.Field.isAlgClosed_of_model_ACF\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ (p : ℕ) (K : Type u_2) [inst : Field K] [inst_1 : FirstOrder.Ring.CompatibleRing K]\\n  [h : K ⊨ FirstOrder.Language.Theory.ACF p], IsAlgClosed K\", \"doc\": \"If $ K $ is a field of characteristic $ p $ and satisfies the first-order theory ACF$ p $, then $ K $ is algebraically closed.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal proper nonsingular projective model exists for any function field of transcendence degree one over a perfect field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"(Fq : Type u_1) → (F : Type u_2) → [inst : Field Fq] → [inst_1 : Field F] → [Algebra (RatFunc Fq) F] → Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] (Fqt : Type u_3) [inst_2 : Field Fqt]\\n  [inst_3 : Algebra (Polynomial Fq) Fqt] [IsFractionRing (Polynomial Fq) Fqt] [inst_5 : Algebra (RatFunc Fq) F]\\n  [inst_6 : Algebra Fqt F] [inst_7 : Algebra (Polynomial Fq) F] [IsScalarTower (\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every one variable finitely generated field extension of an algebraically closed field is the function field of a smooth projective integral curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] [Algebra.EssFiniteType F E]\\n  [Algebra.IsAlgebraic F E], Module.Finite F E\", \"doc\": \"If $ E $ is a field extension of $ F $ that is finitely generated as an $ F $-algebra and algebraic over $ F $, then $ E $ is a finite-dimensional vector space over $ F $. In other words, under the as\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"(Fqt : Type*) [Field Fqt] [Algebra Fq[X] Fqt] [IsFractionRing Fq[X] Fqt] [Algebra (RatFunc Fq) F] [Algebra Fqt F]\\n  [Algebra Fq[X] F] [IsScalarTower Fq[X] Fqt F] [IsScalarTower Fq[X] (RatFunc Fq) F] :\\n  FunctionField Fq F ↔ FiniteDimensional Fqt F\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"IntermediateField.FG\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Defs\", \"type\": \"(S : IntermediateField F E) : Prop\", \"doc\": \"The intermediate field $ S $ is finitely generated over $ F $ if there exists a finite subset $ t \\\\subseteq E $ such that the intermediate field generated by adjoining $ t $ to $ F $ is equal to $ S $\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \": IsFractionRing (ringOfIntegers Fq F) F\", \"doc\": \"For any function field $ F $ over a field $ F_q $, $ F $ is the fraction field of its ring of integers, which is the integral closure of the polynomial ring $ F_q[X] $ in $ F $.\"}\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"[Algebra (RatFunc Fq) F] : Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"FunctionField.ringOfIntegers\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"[Algebra Fq[X] F]\", \"doc\": \"The integral closure of the polynomial ring $ \\\\mathbb{F}_q[X] $ in the function field $ F $, consisting of all elements of $ F $ that are integral over $ \\\\mathbb{F}_q[X] $.\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"(R : CommRingCat.{u}) [IsDomain R] : Algebra R (Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "function[Ff]ield.*[Pp]rojective|[Pp]rojective.*function[Ff]ield|[Pp]rojective.*[Mm]odel",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-curve-etale-parameter",
+  "date": "2026-10-19",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Tag 0BY1 (theorem-curves-rational-maps), existence of a normal projective model, and Tag 0BY3 (lemma-nonsingular-model-smooth), smoothness over a perfect field; the final clause is the proper valuative criterion (lemma-nagata-proper-valuative-criterion-existence-api).",
+   "via": [
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
