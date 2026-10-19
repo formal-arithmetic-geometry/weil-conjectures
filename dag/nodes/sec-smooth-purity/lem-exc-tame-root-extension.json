@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Fix $m\\geq1$ prime to $p$. Its image in $k$ is nonzero, so $m$ is outside the maximal ideal of the local ring $R$ and hence a unit. Since $k$ is algebraically closed it is separably closed, and $R$ is strictly henselian by [def-weil-pbc-henselian-terminology]. Apply [lem-sbc-strict-local-roots-of-unity]: $\\mu_m(R)$ is cyclic of cardinality $m$. Choose a generator $\\zeta$; its image in $F$ still has order $m$, since $R\\hookrightarrow F$ is injective. The $m$ distinct elements of $\\mu_m(R)$ remain distinct in $F^{\\mathrm{sep}}$. A degree-$m$ polynomial over a field has at most $m$ roots: dividing by $X-c$ for each distinct root lowers its degree by one. Thus these already exhaust the roots of $X^m-1$ in $F^{\\mathrm{sep}}$, proving the first clause.",
+   "text": "Fix $m\\geq1$ prime to $p$. Its image in the residue field is nonzero, hence $m$ is a unit in $R$. Since the residue field is algebraically closed, it is separably closed and $R$ is strictly henselian [def-weil-pbc-henselian-terminology]. By [lem-sbc-strict-local-roots-of-unity], the group of $m$th roots of unity in $R$ has cardinality $m$. Mathlib's HasEnoughRootsOfUnity gives a primitive root $\\zeta$. Its images in $F$ and $F^{\\mathrm{sep}}$ remain primitive by injectivity. Every $m$th root in $F^{\\mathrm{sep}}$ is a power of this image, so lies in the image of $R$.",
    "uses": [
     "def-weil-pbc-henselian-terminology",
     "lem-sbc-strict-local-roots-of-unity"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Put $f=X^m-\\pi$ and $A=R[T]/(f)$, with $t$ the class of $T$. A uniformizer is irreducible in a DVR: if $\\pi=ab$ with both factors nonunits, write $a=\\pi a_1$, $b=\\pi b_1$ and cancel $\\pi\\ne0$ to get $1=\\pi a_1b_1$, a contradiction. By [lem-sbc-dvr-uniformizer-root-algebra], $A$ is a DVR domain with maximal ideal $(t)$. By [lem-weil-pbc-monic-quotient-free], its $R$-basis is $1,t,\\ldots,t^{m-1}$. Evaluation $t\\mapsto\\alpha$ defines an $R$-algebra map $j:A\\to F^{\\mathrm{sep}}$. It is injective: in the discrete-valuation description of a DVR in [def-sc-discrete-valuation-ring], every nonzero $x\\in A$ is $ut^r$ for a unit $u$ and $r\\geq0$; $j(u)$ is a unit and $j(t)=\\alpha\\ne0$ because $\\alpha^m=\\pi\\ne0$. Hence $j(x)\\ne0$. Identify $A$ with its image $R[\\alpha]$.",
+   "text": "For a chosen root $\\alpha$, put $L=F(\\alpha)$ and $a=\\alpha\\in L$. Let $f=X^m-\\pi$, $A=R[T]/(f)$ and let $t$ be the class of $T$. The uniformizer $\\pi$ is irreducible [def-sc-discrete-valuation-ring]. By [lem-sbc-dvr-uniformizer-root-algebra], $A$ is a DVR domain with maximal ideal $(t)$. Monicity gives that $A$ is finite over $R$, using the finite-module clause of [lem-weil-pbc-monic-quotient-free]. Evaluation $t\\mapsto a$ defines $j:A\\to L$. It is injective: every nonzero element of a DVR is $ut^r$ with $u$ a unit, and its image is nonzero since $a^m=\\pi\\ne0$.",
    "uses": [
     "lem-sbc-dvr-uniformizer-root-algebra",
     "lem-weil-pbc-monic-quotient-free",
@@ -52,16 +52,18 @@
    }
   },
   {
-   "text": "There is no nonzero $g\\in F[T]$ of degree less than $m$ with $g(\\alpha)=0$. Indeed write $g=\\sum_{i<m}(a_i/b_i)T^i$ with $a_i,b_i\\in R$ and $b_i\\ne0$, taking $a_i=0,b_i=1$ for absent coefficients. Put $d=\\prod_{i<m}b_i\\ne0$. Then $dg=\\sum_{i<m}a_i\\prod_{j\\ne i}b_j\\,T^i$ is a polynomial over $R$; if its evaluation is zero, injectivity in Step 2 and the basis there force every coefficient $a_i\\prod_{j\\ne i}b_j=0$, hence every $a_i=0$, so $g=0$. If the monic degree-$m$ polynomial $f$ factored over $F$ into two positive-degree polynomials, both would have degree less than $m$, while their values at $\\alpha$ multiply to zero in a field. One would vanish, contradicting what was just proved. Thus $f$ is irreducible over $F$.",
-   "uses": [],
-   "elementary": true,
+   "text": "The polynomial $f=X^m-\\pi$ is Eisenstein at the prime maximal ideal $(\\pi)$: its leading coefficient is one, all lower coefficients belong to $(\\pi)$, and its constant coefficient $-\\pi$ does not belong to $(\\pi)^2$. Indeed $\\pi=\\pi^2b$ would cancel to $1=\\pi b$, contradicting that $\\pi$ is a nonunit. Apply [lem-per-eisenstein-prime-ideal-criterion], packaged as Polynomial.IsEisensteinAt.irreducible, using primitivity of a monic polynomial. Mathlib's monic Gauss lemma (Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map) transfers irreducibility to $F[X]$. This replaces the planned coefficient-clearing argument.",
+   "uses": [
+    "lem-per-eisenstein-prime-ideal-criterion"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09EV, degree-n assertion in the proof; explicit coefficient argument using the basis and injectivity established in Step 2."
+    "document": "Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean",
+    "place": "Polynomial.IsEisensteinAt.irreducible and Polynomial.Monic.isEisensteinAt_of_mem_of_notMem; fraction-field transfer in Mathlib/RingTheory/Polynomial/GaussLemma.lean."
    }
   },
   {
-   "text": "Take the splitting field $L\\subset F^{\\mathrm{sep}}$ of $f$; it contains $\\alpha$ because it contains all the roots of $f$ in this fixed closure. Apply [lem-exc-kummer-binomial-splitting-field] with $K=F$, $n=m$, $a=\\pi$, the primitive root $\\zeta$ from Step 1 and irreducibility from Step 3. Its clauses give $L=F(\\alpha)$, $L/F$ Galois, a cyclic Galois group, and $[L:F]=m$.",
+   "text": "Construct $L=F(\\alpha)$ explicitly. The identity $a^m=\\pi$ and the primitive $m$th root from Step 1 show that $X^m-\\pi$ splits over $L$, by Mathlib's X_pow_sub_C_splits_of_isPrimitiveRoot. The integral generator $a$ is a root and generates $L$ as an $F$-algebra, so $L$ is a splitting field. Apply [lem-exc-kummer-binomial-splitting-field] with irreducibility from Step 3. It gives that $L/F$ is Galois, its Galois group is cyclic, and its degree is $m$.",
    "uses": [
     "lem-exc-kummer-binomial-splitting-field"
    ],
@@ -72,7 +74,7 @@
    }
   },
   {
-   "text": "The fraction field of the embedded $A=R[\\alpha]$ is $F(\\alpha)=L$: both are the smallest subfield of $F^{\\mathrm{sep}}$ containing $R$ and $\\alpha$, since a field containing $R$ contains all ratios from $F$. By [lem-weil-pbc-pid-noetherian-normal] applied to the DVR $A$, it is integrally closed in $L$. Let $B$ be the integral closure of $R$ in $L$. The element $\\alpha$ is integral over $R$ by $\\alpha^m-\\pi=0$; the integral elements form a subring containing $R$ by [def-weil-pbc-integral-closure], so $A=R[\\alpha]\\subseteq B$. Conversely, every $x\\in B$ satisfies a monic polynomial with coefficients in $R\\subseteq A$, hence is integral over $A$, and integral closedness gives $x\\in A$. Thus $B=A$. In particular it has the unique maximal ideal $(\\alpha)$.",
+   "text": "Extend the injection $j:A\\to L$ to a map $g:\\operatorname{Frac}(A)\\to L$. Its field range contains $F$, since every element of $F$ is a ratio of elements of $R$, and contains $a=g(t)$. Since $L=F(a)$, $g$ is surjective and hence identifies $L$ as a fraction field of $A$. By [lem-weil-pbc-pid-noetherian-normal], the DVR $A$ is integrally closed in $L$. Since $A$ is integral over $R$, it is an integral closure of $R$ in $L$: every element integral over $R$ is integral over $A$ and hence lies in $A$, and all elements of $A$ are integral over $R$. The uniqueness equivalence IsIntegralClosure.equiv identifies $A$ with the concrete integralClosure $R$ $L$ of [def-weil-pbc-integral-closure]. Transport the DVR structure across this equivalence. Its unique maximal ideal is generated by the image of $t$.",
    "uses": [
     "lem-weil-pbc-pid-noetherian-normal",
     "def-weil-pbc-integral-closure"
@@ -84,7 +86,7 @@
    }
   },
   {
-   "text": "With $B=A$ as in Step 5, its uniformizer is $\\alpha$ by Step 2, while the base uniformizer satisfies $\\pi=\\alpha^m$. Thus $\\mathfrak m_RB=(\\pi)=(\\alpha^m)=\\mathfrak m_B^m$. Equivalently the normalized valuation of $B$ has $v_B(\\alpha)=1$ and $v_B(\\pi)=m$. By the definition of the ramification index this is $e(B/R)=m$. For $m=1$, $A=R$, $\\alpha=\\pi$, $L=F$, and this computation gives index and degree one and the trivial cyclic Galois group, as required.",
+   "text": "Let $B$ be the integral closure and $q$ its maximal ideal generated by the image $b$ of $t$. Transporting $t^m=\\pi$ gives $b^m=\\pi$, so the extended maximal ideal of $R$ is $q^m$. Integrality shows that $q$ contracts to the maximal ideal of $R$. The ideal $q$ is nonzero because its irreducible generator $b$ is nonzero. In the Dedekind domain $B$, powers of the nonzero proper ideal $q$ are strictly decreasing, so the extended ideal is contained in $q^m$ but not $q^{m+1}$. Ideal.ramificationIdx'_spec and Ideal.ramificationIdx'_eq_ramificationIdx' identify its ramification index as $m$. This works for $m=1$ as well, with trivial cyclic group and degree and ramification index one.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -99,6 +101,7 @@
   "lem-sbc-dvr-uniformizer-root-algebra",
   "lem-weil-pbc-monic-quotient-free",
   "def-sc-discrete-valuation-ring",
+  "lem-per-eisenstein-prime-ideal-criterion",
   "lem-exc-kummer-binomial-splitting-field",
   "lem-weil-pbc-pid-noetherian-normal",
   "def-weil-pbc-integral-closure"
@@ -106,7 +109,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09EV standard root-algebra proof, with henselian root lifting (algebra.tex 04GG) and Kummer field theory (fields.tex 09I6); the coefficient/injectivity argument explicitly fills the degree computation. This realizes the uniformizer paragraph of pione.tex Tag 0BUB."
+  "place": "Tag 09EV standard root-algebra proof and Tag 09E4 ramification index, with strict-local root lifting from algebra.tex Tag 04GG and Mathlib Kummer theory. J9 uses Mathlib Eisenstein and monic Gauss lemmas for irreducibility, and explicitly constructs the fraction-field comparison to the integral closure."
  },
  "mathlib_searches": [
   {
@@ -304,5 +307,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T093506-L-2317609",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
