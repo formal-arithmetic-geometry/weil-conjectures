@@ -309,5 +309,24 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-7e0d93e3c (reviewer sub-agent of L); spot-checked: I read the whole item, each of its 8 steps and every node it cites. The delivery adds no new nodes, and the statement and stmt_deps are unchanged. Sources: Stacks varieties.tex 9669ff (0AYV, lemma-degree-on-proper-curve) and coherent.tex 3270ff (01YI, lemma-property). The item is 0AYV with n=1 for an integral proper curve of dimension 1, and it follows the source's proof: devissage via 01YI with witnesses O_C (Z=C) and i_*O_Z (closed points, via 0AYT and r=0). Hypotheses checked where they are used: C is Noetherian by finite type over Spec k; both sides are additive, by lem-sc-ext-tensor-exact, the first clause of lem-pc-euler-additive and stalk exactness (clauses 1 and 5) for the generic rank; the classification of integral closed subschemes uses dim C = 1, uniqueness of generic points, and the fact that a domain with one prime is a field; the closed-point witness gets coherence and support {z} from clause (1) of the closed-immersion coherent equivalence, and its stalk is κ(z) acted on through the residue map, zero at ξ, by the closed-pushforward stalk lemma; the twist of the point sheaf comes from clause 3 of lem-pc-chi-zero-dim-support with an explicit swap of tensor factors; all of devissage conditions (0), (1) and (2)(a)-(d) are supplied. Small cases: F=0, F=O_C, O(e) on P^1, point sheaves with residue field extensions, a nodal cubic. The dependency closure has no cycle and no trf nodes. Not a duplicate: degree-weighted-irreducible-components and generic-rank-leading-degree (the latter needs an ample module) are different statements. I accept all four declared tool_uses (tensor exactness, closed-immersion coherent equivalence clause (1), chi-zero-dim-support, coherent-property devissage) as generic scheme-module tools; they are the inputs named in the 0AYV proof. One minor advisory: Step 1 cites pqf-def-coherent for coherence of the twist, where the cleaner reason is the locality of qc+finite type through 01XZ, which is already in that step's uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveEulerTensorGenericRank",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_tensor_invertible_generic_rank",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveEulerTensorGenericRank.lean",
+  "statement": "theorem eulerChar_tensor_invertible_generic_rank (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = 1) (L : C.Modules) [L.IsInvertible] (F : C.Modules) (hF : RingedSpace.IsCoherent C.toRingedSpace F) (ξ : C) (hξ : closure ({ξ} : Set C) = Set.univ) : (L ⊗ F).eulerChar k = (Module.finrank (C.presheaf.stalk ξ) (F.presheaf.stalk ξ) : ℤ) * L.degree k + F.eulerChar k",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The coherent clause of pqf-def-coherent is rendered by AlgebraicGeometry.RingedSpace.IsCoherent from WeilConjectures.AlgebraicGeometry.Coherent (Stacks 01BV: finite type and finite-type kernels of maps from finite free modules on opens). The landed pqf-def-coherent Lean record is left unchanged; this item imports Coherent directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-061074ab3",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Re-delivery of ed903570217a (RETURN H13). The pqf-def-coherent overwrite is dropped: the snapshot record equals the live Q25 record. The Lean module is byte-identical. The item node differs only by the added lean.note naming RingedSpace.IsCoherent (01BV). The report corrects the tensor-instance name. Independent re-check against Stacks 0AYV n=1: field/integral/proper/topological-dim-1/invertible L/coherent F (IsCoherent = finite type + finite-type kernels, exactly the node's clause)/generic point/finrank over the generic local ring with the canonical germ action (FlatPullbackStalk)/eulerChar and degree records/conclusion all match. No extra hypotheses; lean.statement verbatim; sorry only; docstrings carry the source, blueprint id and 8 steps. nt_compile --json clean in 3.3 s; probes confirm the definitions. Advisory: the second reading is still the author's self-check. Maintainer note: the live pqf-def-coherent record is weaker than 01BV."
  }
 }

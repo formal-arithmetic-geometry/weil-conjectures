@@ -192,7 +192,8 @@
   "lem-per-qbar-arbitrary-field-duality",
   "def-pod-lisse-l-adic-sheaves",
   "lem-per-adic-lisse-cohomology-calculus",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "mathlib_searches": [
   {
@@ -335,5 +336,32 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-793e7b452 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement open. Source: ILO XVII, proof of Prop. 6.2.2.1 (reduce, excellent dense regular open, connected regular case gives K ≃ Λ(δ(η))[2δ(η)] by 2.4.4.1 and 5.1.1). Steps 1–4 (finitely many components, generic lisse opens, J-2 regular locus of X_red, dimension drop by appending C_i) are correct and use what the cited nodes state. Step 5 uses the finite reductions of lem-per-adic-exceptional-projection and the new node. Step 6 uses the Milnor epimorphic lemma, the derived-complete definition and clause 1 of derived-limit uniqueness. It holds even without tower compatibility, because the item only claims some rank-one O_α. Step 7 identifies the object with ω_X by scalar extension, rational Hom groups, the directed-colimit Hom lemma and Yoneda. Steps 8–10 do the local evaluation, the truncation induction (exact sequence checked) and the sign H^r(DL) = (H^{-r-2d}L)^∨⊗O. New node lem-per-finite-regular-reduction-dualizing is true: Spec of a purely inseparable extension gives Λ, absolute purity through a local embedding in A^N gives Λ(d)[2d], and nilpotent thickenings change nothing. It is not a duplicate of thm-pur-regular-immersion-purity, cor-pur-finite-stage-smooth-dualizing-complex or lem-per-finite-residue-dualizing, and it does not restate a clause of the item. FIX (B3): the new node said 'irreducible' without a citation; added [def-weil-irreducible-components] to its statement and stmt_deps in fixes/dag/nodes/sec-deligne-laumon-a1/. The 8 declared tool_uses are generic infrastructure and are accepted. Batch-5 flag: lem-per-lisse-completed-system-comparison reaches only def-pod-lisse-l-adic-sheaves, a general definition that the item statement already cites. The new node is regular-scheme purity over arbitrary fields with finite coefficients; nt-assume-poincare-duality (smooth, char p, Q̄_ℓ) cannot give it, and it is not a step of that proof. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.GenericDualityModel",
+  "declaration": "AlgebraicGeometry.Scheme.PerAdic.lem_per_qbar_generic_duality_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PerAdic.baseSchemeSeparated",
+   "AlgebraicGeometry.Scheme.PerAdic.genericModelConstantRank",
+   "AlgebraicGeometry.Scheme.PerAdic.genericModelCohomology",
+   "AlgebraicGeometry.Scheme.PerAdic.genericModelDualTensor",
+   "AlgebraicGeometry.Scheme.PerAdic.genericDualityClause",
+   "AlgebraicGeometry.Scheme.PerAdic.lem_per_qbar_generic_duality_model"
+  ],
+  "file": "lean/Sheaf/DeligneLaumon/GenericDualityModel.lean",
+  "statement": "theorem lem_per_qbar_generic_duality_model (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l : k))] (Qbar : Type (u + 1)) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (W : Base.{u} k) (hW : Nonempty W.scheme) (s : ℕ) (K : Fin s → intrinsicPbcQbarCategory l Qbar W.scheme) : ∃ (U : W.scheme.Opens) (t : ℕ) (V : Fin t → Base.{u} k) (j : ∀ i, (V i).scheme ⟶ W.scheme) (d : Fin t → ℕ) (B : ∀ i, ArbitraryFieldVerdier.Datum.{u, u + 1} l hl.out Qbar (𝟙 (V i).scheme)) (C : ∀ i, AdicLisseCohomologyCalculus l Qbar (V i).scheme) (O : ∀ i, LisseAlgebraicSheaf l (V i).scheme Qbar), Dense (U : Set W.scheme) ∧ (∀ i, Nonempty (V i).scheme) ∧ (∀ i, IrreducibleSpace (V i).scheme) ∧ (∀ i, IsOpenImmersion (j i)) ∧ (∀ i, (j i).IsOver (Spec (.of k))) ∧ (∀ i, Set.range (j i).base ⊆ (U : Set W.scheme)) ∧ (U : Set W.scheme) = ⋃ i, Set.range (j i).base ∧ (∀ i₁ i₂, i₁ ≠ i₂ → Disjoint (Set.range (j i₁).base) (Set.range (j i₂).base)) ∧ (∀ x : W.scheme, x ∈ genericPoints W.scheme → x ∈ U) ∧ topologicalKrullDim (((U : Set W.scheme)ᶜ : Set W.scheme)) < topologicalKrullDim W.scheme ∧ (∀ i, topologicalKrullDim (V i).scheme = (d i : WithBot ℕ∞)) ∧ (∀ i, Nonempty (ArbitraryFieldVerdier.Properties l hl.out Qbar (B i))) ∧ (∀ i, genericModelConstantRank l Qbar (V i) (C i) ((C i).comparison.functor.obj ((C i).realization.obj (O i))) 1) ∧ (∀ a r i, ∃ n : ℕ, genericModelConstantRank l Qbar (V i) (C i) ((genericModelCohomology l Qbar (V i) (C i) r).obj ((ArbitraryFieldVerdier.pull l hl.out Qbar (j i)).obj (K a))) n) ∧ (∀ i, Nonempty ((B i).omegaX l hl.out Qbar ≅ ((C i).comparison.functor.obj ((C i).realization.obj (O i)))⟦2 * (d i : ℤ)⟧)) ∧ (∀ i, genericDualityClause l Qbar (V i) hl.out (C i) (B i) (d i) (O i))",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Repair of returned immutable head fdab24ae8fd9 (H3/H4/H11): use the intrinsic common-stage category, normalized AdicLisseCohomologyCalculus and ArbitraryFieldVerdier.Datum.omegaX/dualX. Whole-component lissity reuses the landed HasCommonStageLisseLattice. Retain nonempty irreducible components, constant fibre ranks, the explicit omega ≅ O[2d] isomorphism, actual lisse dual tensor O, and the -r-2d cohomology index. Auxiliary definitions only transport the recorded operations and package the exact conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a13bdce88",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Re-delivery after RETURN fdab24ae8fd9; all its H3/H4/H11 faults are repaired. omegaX and dualX come from the recorded ArbitraryFieldVerdier.Datum for the identity of each piece, with full Properties. The dual and tensor are the recorded AdicLisseCohomologyCalculus ones, with O present and the index -r-2d. Each piece is nonempty and irreducible. Lisse means HasCommonStageLisseLattice on the whole piece plus constant geometric-fibre finrank, and the same notion is used for the hypothesis on L. Rank-one O and omega ≅ O[2d] are explicit. Dense U, generic points, disjoint open k-subscheme decomposition, d = topologicalKrullDim and the strict complement dimension drop match the node; edge cases s=0, empty complement and rank 0 hold. The existential calculus and datum are pinned up to iso and exist by the recorded theorems. Only the item's lean and stmt_deps changed (added landed def-a1-common-stage-lisse-lattice). lean.statement is verbatim, no line over 100 chars, docstrings and 10-step proof present. nt_compile --json clean in 5.6 s; an injected-error control confirmed the file is elaborated; sorryAx only. Advisory: second reading is the author's own but clause-by-clause; baseSchemeSeparated is a small structural instance."
  }
 }
