@@ -39,9 +39,8 @@
    }
   },
   {
-   "text": "Choose small filtered presentations $N=\\varinjlim_{i\\in I}D_i$ and $B=\\varinjlim_{a\\in H}C_a$, with all $D_i,C_a$ constructible, by the definition of $\\IndCons$ in the statement. For each $a$ let $M_a=M\\times_B C_a$. Pulling back gives $0\\to N\\to M_a\\to C_a\\to0$: apply [lem-weil-pbc-pushout-short-exact-sequence] in $\\mathcal A^{\\mathrm{op}}$ to the reversed original sequence and $C_a^{\\mathrm{op}}\\leftarrow B^{\\mathrm{op}}$. This is legitimate because the axioms of [def-sp-abelian] are self-dual (kernels exchange with cokernels and monomorphisms with epimorphisms). Reversing the resulting pushout sequence gives the claimed pullback sequence, with the map from $N$ induced by its injection into $M$ and the zero map to $C_a$. For every arrow $a\\to a'$ the universal property of the pullback gives $M_a\\to M_{a'}$; these maps fix $N$ and commute with $C_a\\to C_{a'}$, and uniqueness proves the identity and composition laws.",
+   "text": "Choose filtered constructible presentations of N and B. Form the functorial pullback of the quotient presentation along S.g. For each stage a, the canonical map N to the pullback is monic because its composite with the second projection is S.f. The first projection is epic by pullback stability. Exactness follows from the exact-up-to-refinements criterion: project a map into the kernel to M, factor locally through N using exactness of S, then use the two pullback projections to verify the factorization. This gives a short exact sequence with quotient C_a.",
    "uses": [
-    "lem-weil-pbc-pushout-short-exact-sequence",
     "def-sp-abelian"
    ],
    "elementary": false,
@@ -51,9 +50,9 @@
    }
   },
   {
-   "text": "Fix $a$. By the degree-one case of [lem-coef-yoneda-derived-ext-comparison] the pullback extension has a class $e_a\\in\\operatorname{Ext}^1_{\\mathcal A}(C_a,N)$, with Ext interpreted in the ordinary derived category. The final field-coefficient clause of [sk-lem-constructible-ext-continuity] applies: $X$ is Noetherian, $C_a$ is constructible, the coefficient ring is one of the two allowed field coefficients, and the diagram $D_i[0]$ is uniformly zero in degrees below $0$. It gives the canonical isomorphism\n$$\\varinjlim_{i\\in I}\\operatorname{Ext}^1_{\\mathcal A}(C_a,D_i)\\xrightarrow{\\sim}\\operatorname{Ext}^1_{\\mathcal A}(C_a,N).$$",
+   "text": "Fix $a$. By the degree-one case of [lem-weil-pbc-ext-one-extension-classification] the pullback extension has a class $e_a\\in\\operatorname{Ext}^1_{\\mathcal A}(C_a,N)$, with Ext interpreted in the ordinary derived category. The final field-coefficient clause of [sk-lem-constructible-ext-continuity] applies: $X$ is Noetherian, $C_a$ is constructible, the coefficient ring is one of the two allowed field coefficients, and the diagram $D_i[0]$ is uniformly zero in degrees below $0$. It gives the canonical isomorphism\n$$\\varinjlim_{i\\in I}\\operatorname{Ext}^1_{\\mathcal A}(C_a,D_i)\\xrightarrow{\\sim}\\operatorname{Ext}^1_{\\mathcal A}(C_a,N).$$",
    "uses": [
-    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-ext-one-extension-classification",
     "sk-lem-constructible-ext-continuity"
    ],
    "elementary": false,
@@ -63,11 +62,10 @@
    }
   },
   {
-   "text": "Choose a class $t\\in\\operatorname{Ext}^1(C_a,D_i)$ whose image is $e_a$ for some $i$. Here the passage from a colimit element to one stage is elementary: the colimit of a diagram of abelian groups is the quotient of their direct sum by the transition relations, as follows by testing homomorphisms out of that quotient; every element is a finite sum of stage elements, and filteredness moves that sum to one common stage. By [lem-coef-yoneda-derived-ext-comparison], $t$ is represented by $0\\to D_i\\to T\\to C_a\\to0$. Its pushout $L=N\\amalg_{D_i}T$ is short exact over $(N,C_a)$ by [lem-weil-pbc-pushout-short-exact-sequence]. Naturality of the Yoneda-to-derived-Ext isomorphism in its second variable identifies its class with the image of $t$, namely $e_a$. Thus $L$ and $M_a$ are equivalent Yoneda one-extensions. Every morphism in a zigzag of such one-extensions has identity endpoint maps, so [lem-weil-pbc-short-five-lemma] makes its middle map an isomorphism. Composing these maps and their inverses gives $L\\cong M_a$ as extensions. No such isomorphisms for different $a$ need to be chosen compatibly.",
+   "text": "Filtered colimits of abelian groups have representatives at one stage (Mathlib Concrete.colimit_exists_rep). Apply this to the inverse of the degree-one continuity comparison, then identify postcomposition with the degree-zero Ext class of D_i to N. By [lem-weil-pbc-ext-one-extension-classification], the resulting finite-stage class has a short exact representative T. Push it out along D_i to N using [lem-weil-pbc-pushout-short-exact-sequence]. Naturality of Mathlib ShortExact.extClass identifies its class with the original pullback extension. The injectivity clause of [lem-weil-pbc-ext-one-extension-classification] gives an isomorphism of middle objects with fixed endpoints.",
    "uses": [
-    "lem-coef-yoneda-derived-ext-comparison",
-    "lem-weil-pbc-pushout-short-exact-sequence",
-    "lem-weil-pbc-short-five-lemma"
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-weil-pbc-pushout-short-exact-sequence"
    ],
    "elementary": false,
    "source": {
@@ -76,7 +74,7 @@
    }
   },
   {
-   "text": "Use the small undercategory $J=i/I$: its objects are arrows $u:i\\to j$, and its morphisms are arrows between the targets commuting with $u$. It is filtered by the three axioms in [def-weil-pbc-category-colimit]: it contains $1_i$; for $u:i\\to j$ and $v:i\\to k$, choose $r:j\\to l$ and $s:k\\to l$, then equalize the parallel arrows $ru,sv:i\\to l$ by $t:l\\to l'$, so $tru=tsv$ gives a common target in $J$; and for parallel arrows $h,h':u\\to v$ in $J$, an arrow $q$ in $I$ equalizing their underlying arrows gives a morphism in $J$ equalizing them. It is nonempty, with initial object $1_i$. The diagram $u\\mapsto D_j$ has colimit $N$. To check this directly, a cocone on this diagram extends to $I$ by sending $D_k$ through a chosen common target of $k$ and $i$. Two choices give the same map after taking a common target and equalizing the two induced arrows from $k$ and the two from $i$; the cocone relations then give equality. For an arrow $f:k\\to k'$, compute the map from $D_k$ using a common target of $i$ and $k'$ and the composite from $k$ through $f$; independence of choices gives exactly the map from $D_{k'}$ composed with $D(f)$. An extension is unique because compatibility with each chosen arrow from $k$ to a common target forces that component. Thus the two cocone universal properties coincide. A constant diagram with identity transitions over $J$ has its displayed object as colimit, since $J$ has initial object $1_i$ and is connected.",
+   "text": "Use the small undercategory $J=i/I$: its objects are arrows $u:i\\to j$, and its morphisms are arrows between the targets commuting with $u$. It is filtered by the three axioms in [def-weil-pbc-category-colimit]: it contains $1_i$; for $u:i\\to j$ and $v:i\\to k$, choose $r:j\\to l$ and $s:k\\to l$, then equalize the parallel arrows $ru,sv:i\\to l$ by $t:l\\to l'$, so $tru=tsv$ gives a common target in $J$; and for parallel arrows $h,h':u\\to v$ in $J$, an arrow $q$ in $I$ equalizing their underlying arrows gives a morphism in $J$ equalizing them. It is nonempty, with initial object $1_i$. The diagram $u\\mapsto D_j$ has colimit $N$. To check this directly, a cocone on this diagram extends to $I$ by sending $D_k$ through a chosen common target of $k$ and $i$. Two choices give the same map after taking a common target and equalizing the two induced arrows from $k$ and the two from $i$; the cocone relations then give equality. For an arrow $f:k\\to k'$, compute the map from $D_k$ using a common target of $i$ and $k'$ and the composite from $k$ through $f$; independence of choices gives exactly the map from $D_{k'}$ composed with $D(f)$. An extension is unique because compatibility with each chosen arrow from $k$ to a common target forces that component. Thus the two cocone universal properties coincide. A constant diagram with identity transitions over $J$ has its displayed object as colimit, since $J$ has initial object $1_i$ and is connected. In Lean this universal-property argument is packaged by Mathlib IsColimit.underPost and finality of the filtered undercategory projection.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -99,7 +97,7 @@
    }
   },
   {
-   "text": "The maps $P_u\\to L=N\\amalg_{D_i}T$ induced by $D_j\\to N$ and $1_T$ exhibit $L$ as $\\varinjlim_{u\\in J}P_u$. Indeed a cocone $P_u\\to W$ is exactly a compatible family $D_j\\to W$ together with maps $T\\to W$ agreeing on $D_i$. All the maps from $T$ are the same because $1_i$ is initial in $J$ and all transition maps on $T$ are identities. By step 5 the family from the $D_j$ is uniquely a map $N\\to W$; its compatibility with $T\\to W$ is precisely agreement on $D_i$. Such a pair is uniquely a map $N\\amalg_{D_i}T\\to W$. This proves the colimit assertion by its universal property [def-weil-pbc-category-colimit], rather than invoking an uncited commutation theorem for pushouts and colimits. Steps 4 and 6 therefore express $M_a\\cong L$ as a small filtered colimit of constructible sheaves, so $M_a\\in\\IndCons(X,\\Lambda)$.",
+   "text": "The maps $P_u\\to L=N\\amalg_{D_i}T$ induced by $D_j\\to N$ and $1_T$ exhibit $L$ as $\\varinjlim_{u\\in J}P_u$. Indeed a cocone $P_u\\to W$ is exactly a compatible family $D_j\\to W$ together with maps $T\\to W$ agreeing on $D_i$. All the maps from $T$ are the same because $1_i$ is initial in $J$ and all transition maps on $T$ are identities. By step 5 the family from the $D_j$ is uniquely a map $N\\to W$; its compatibility with $T\\to W$ is precisely agreement on $D_i$. Such a pair is uniquely a map $N\\amalg_{D_i}T\\to W$. This proves the colimit assertion by its universal property [def-weil-pbc-category-colimit], rather than invoking an uncited commutation theorem for pushouts and colimits. Steps 4 and 6 therefore express $M_a\\cong L$ as a small filtered colimit of constructible sheaves, so $M_a\\in\\IndCons(X,\\Lambda)$. In Lean this universal-property argument is packaged by the colimit-preserving cobase-change functor Under.pushout and preservation of connected colimits by Under.forget.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -110,11 +108,10 @@
    }
   },
   {
-   "text": "Take the filtered colimit over $a\\in H$ of the exact sequences from step 2. It is exact by the ambient Grothendieck property proved in step 1 and [def-sp-grothendieck-abelian]. The colimit of the constant $N$-diagram is $N$, because $H$ is nonempty and any two objects have a common target, so every cocone on a constant identity diagram is a single map out of $N$. The colimit of $(C_a)$ is $B$ by the chosen presentation. Hence the maps $M_a\\to M$ yield a commutative diagram of short exact sequences with top row $0\\to N\\to\\varinjlim_a M_a\\to B\\to0$, bottom row the given sequence, and endpoint maps identities. By [lem-weil-pbc-short-five-lemma], the canonical map $\\varinjlim_a M_a\\to M$ is an isomorphism. Each $M_a$ is ind-constructible by step 7, so [det-ind-heart-filtered-colimits] gives $\\varinjlim_a M_a\\in\\IndCons(X,\\Lambda)$. The definition of this full subcategory is invariant under isomorphism, and therefore $M\\in\\IndCons(X,\\Lambda)$.",
+   "text": "Mathlib IsColimit.pullbackOfHasExactColimitsOfShape says that the pullback diagram of step 2 has colimit M, using connectedness of the filtered index category and exactness of its colimits. Its objects are ind-constructible by step 7, so this gives ind(ind Cons) for M. The finite-presentability clause of [det-ind-heart-full-faithfulness] and Mathlib ObjectProperty.ind_ind flatten this to ind Cons. This replaces the narrower geometric statement of [det-ind-heart-filtered-colimits], while keeping the unit step of filtered-colimit closure.",
    "uses": [
     "def-sp-grothendieck-abelian",
-    "lem-weil-pbc-short-five-lemma",
-    "det-ind-heart-filtered-colimits"
+    "det-ind-heart-full-faithfulness"
    ],
    "elementary": false,
    "source": {
@@ -128,19 +125,18 @@
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-grothendieck",
   "def-sp-grothendieck-abelian",
-  "lem-weil-pbc-pushout-short-exact-sequence",
   "def-sp-abelian",
-  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-ext-one-extension-classification",
   "sk-lem-constructible-ext-continuity",
-  "lem-weil-pbc-short-five-lemma",
+  "lem-weil-pbc-pushout-short-exact-sequence",
   "def-weil-pbc-category-colimit",
   "det-lem-coefficient-heart-closure",
-  "det-ind-heart-filtered-colimits"
+  "det-ind-heart-full-faithfulness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
-  "place": "Complete extension argument of the blueprint, supplemented by the categorical constructions in Stacks Tags 010I, 06XU, 06XV, 03DA and 03DB. The inherited Noetherian standing setting is made explicit."
+  "place": "Blueprint extension-class descent and two filtered colimits, implemented by private generic helpers, degree-one Ext classification, Mathlib undercategory pushout colimits and exact pullback colimits. Finite presentability is supplied by det-ind-heart-full-faithfulness; ObjectProperty.ind_ind implements the unit filtered-colimit closure step without the narrower geometric hypotheses of det-ind-heart-filtered-colimits."
  },
  "mathlib_searches": [
   {
@@ -249,8 +245,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-coef-yoneda-derived-ext-comparison"
+  "lem-weil-pbc-sheaf-tensor-closed"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -294,5 +289,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Two statements cover the finite intermediate field and condensed algebraic-closure coefficient cases. They use the recorded finite constant-model constructibility predicate and Mathlib ObjectProperty.ind at size u+1 in the internal-module category. No geometric assumptions beyond locally Noetherian and quasi-compact are added. The existing algebraic closure and finite-subextension framework fix representatives of the coefficient objects; the algebraic-closure case has no unused finite-field parameter."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261019T005313-L-2750797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
