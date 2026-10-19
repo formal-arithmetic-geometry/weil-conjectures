@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-dc-hom-small-coefficients",
+ "kind": "lemma",
+ "title": "Internal Hom finiteness for the existing small coefficient class",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and let $k$ be a field of positive characteristic different from $\\ell$. Let $X$ be separated of finite type over $k$ [sk-def-sfb-dc-setting]. Let $\\Lambda$ be one of the following condensed coefficient rings [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]: $\\underline E$ for a finite normed extension $E/\\mathbf Q_\\ell$ with carrier in $\\mathrm{Type}\\,0$; $\\underline{\\mathcal O_E}$ for its closed unit ball or the valuation ring of a finite subextension of $\\overline{\\mathbf Q}_\\ell$; or $\\underline{\\overline{\\mathbf Q}_\\ell}$. For bounded constructible $K,L\\in D(\\operatorname{Mod}_{\\Lambda_X})$ [sk-def-sfb-bounded-constructible], the ambient derived internal Hom $R\\mathcal Hom_{\\Lambda_X}(K,L)$ [sk-def-sfb-derived-tensor-hom] is bounded constructible. The coefficient cases are exactly the constructors of the existing Lean class IsEllAdicFinitenessCoefficient.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.md",
+  "place": "node lem-sfb-dc-hom-preserves, order 1788",
+  "external": [
+   {
+    "document": "SGA 4½",
+    "place": "Since $K$ is bounded constructible, reduction modulo $\\varpi$ gives $$ \\RHom(K,L)/\\varpi\\cong\\RHom_{\\cO_E/\\varpi}(K/\\varpi,L/\\varpi). $$ By Deligne's finiteness theorem for the internal $\\RHom$ (SGA 4½, *Th. finitude*, 1.6) on the finite type $k$-scheme $X$, with coefficients in which $p$ is invertible, this is a bounded complex with constructible cohomology."
+   },
+   {
+    "document": "Bhatt",
+    "place": "The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ([sk-thm-sfb-qlbar-two-colimit]), as in [lem-sfb-dc-lower-star-preserves]; see Bhatt–Scholze, §6.8."
+   },
+   {
+    "document": "Scholze",
+    "place": "The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ([sk-thm-sfb-qlbar-two-colimit]), as in [lem-sfb-dc-lower-star-preserves]; see Bhatt–Scholze, §6.8."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "First consider $\\Lambda=\\underline{\\mathcal O_E}$. The only ideals of $k$ are $0$ and $k$, so $\\operatorname{Spec}k$ is Noetherian; [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Choose a uniformizer $t$ of $A_0=\\mathcal O_E$. By [lem-weil-l-adic-extension-integers-dvr], $A=A_0/(t)$ is a finite field; its characteristic is $\\ell$, since $\\ell$ belongs to the maximal ideal. By [sk-prop-sfb-qlbar-colimit-x], the actual coefficient ring is $B=\\mathcal O_{E,X}=\\varprojlim_n(A_0/t^n)_X$. The bounded-constructible hypothesis on $K$ and $L$ [sk-def-sfb-bounded-constructible] means bounded cohomology constructible by general local finite presentations. Apply [lem-sfb-integral-lfp-constant-model-comparison] to each cohomology sheaf of $K$ and $L$: both complexes have bounded cohomology with finite constant local models. This invocation is the coefficient-specific bridge, not an identification by definition. Now apply implication (1) to (2) of [lem-sfb-integral-cohomological-adic-criterion], whose condition (1) explicitly uses finite constant scalar models. It gives local derived $(t)$-completeness of $K,L$, in the sense used by that criterion, and identifies $K_1=K\\otimes_B^LA_X$, $L_1=L\\otimes_B^LA_X$ with bounded finite-Tor-amplitude étale complexes with constructible finite-dimensional $A$-cohomology. Hence these reductions satisfy the explicit finite constant local model hypotheses of the finite-field child below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 09C0, proetale.tex, section-suitable-derived, for the adic criterion. The general-lfp to scalar-model comparison is the separate agent obligation cited in this step."
+   }
+  },
+  {
+   "text": "Set $H=R\\mathcal Hom_B(K,L)$. Apply [lem-coef-integral-hom-reduction] to this $B$ and $n=1$, with its finite-field datum taken in the characteristic $p$ of $k$, so that its hypothesis $\\ell\\ne p$ is the one in force. Its statement applies to an arbitrary scheme and arbitrary ambient complexes; it does not impose a finite-ground-field or site-perfectness hypothesis. Its evaluation-defined comparison gives\n$$H\\otimes_B^LA_X\\xrightarrow{\\sim}R\\mathcal Hom_{A_X}(K_1,L_1).$$\nThis is a comparison of the ambient internal Homs, not a new choice of Hom on a constructible subcategory. The completeness clause of that lemma is not used here: it concerns the derived-limit notion of completeness of its own definitions, whereas the criterion of step 1 uses local derived completeness; step 3 proves the latter for $H$ directly.",
+   "uses": [
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.11 (completeness) and Lemma 6.7.13 (reduction comparison)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-field-internal-hom-finiteness] to the finite field $A$ and to $K_1,L_1$ with their scalar-constant constructible cohomology established in step 1. By step 2, $H\\otimes_B^LA_X$ is therefore bounded with finite constant local model cohomology. Apply [sk-thm-pe-constructible-comparison] on the Noetherian (hence qcqs) scheme $X$, with the discrete Noetherian field $A$, to obtain a bounded constructible étale complex $C$ whose pullback is this reduction. It has finite Tor amplitude: tensor of $A$-module sheaves is exact, as is checked locally by tensor of vector spaces and exact sheafification; consequently for a bounded complex its derived tensor with any degree-zero module sheaf has the same cohomological support bound. Next, $H$ is locally derived $(t)$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. Let $U$ be an object of $X_{\\mathrm{proét}}$, let $f\\in(t)(U)$, and write $B_U$ for the restricted ring. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], on $X_{\\mathrm{proét}}$ and on the slice site over $U$, together with the symmetry of the derived tensor product,\n$$\\begin{aligned}\nR\\mathcal Hom_{B_U}(B_U[1/f],H|_U)&\\cong R\\mathcal Hom_{B_U}(B_U[1/f],R\\mathcal Hom_{B_U}(K|_U,L|_U))\\\\\n&\\cong R\\mathcal Hom_{B_U}(K|_U\\otimes^{\\mathbf L}_{B_U}B_U[1/f],L|_U)\\\\\n&\\cong R\\mathcal Hom_{B_U}(K|_U,R\\mathcal Hom_{B_U}(B_U[1/f],L|_U))=0,\n\\end{aligned}$$\nthe last vanishing being the local derived completeness of $L$ from step 1. Together with this completeness of $H$, the étale complex $C$ verifies condition (2) of [lem-sfb-integral-cohomological-adic-criterion]. Its implication (2) to (1) gives bounded cohomology of $H$ with finite constant scalar local models. The reverse direction of [lem-sfb-integral-lfp-constant-model-comparison] makes these cohomology sheaves constructible in the general ring-object sense. Thus $H$ meets exactly the bounded-constructible predicate in the conclusion [sk-def-sfb-bounded-constructible].",
+   "uses": [
+    "lem-sfb-finite-field-internal-hom-finiteness",
+    "sk-thm-pe-constructible-comparison",
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "sk-def-sfb-bounded-constructible",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13 with R=A and m=0; Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 09AI, proetale.tex, constructible comparison, and Tag 09C0, section-suitable-derived. Completeness of internal Hom: Bhatt–Scholze Lemma 6.7.13 proof (adjunction), via the ringed-site tensor–Hom adjunction and slice restriction."
+   }
+  },
+  {
+   "text": "Use the ordinary unbounded layer-B derived category of [sk-def-sfb-derived-categories] and the general local-finite-presentation predicate of [sk-def-sfb-bounded-constructible, def-sfb-constructible-module]. For the field-coefficient comparison lemmas below, their coefficient sheaves are $E_T=p_T^*\\underline E$ and $\\overline{\\mathbf Q}_{\\ell,T}=p_T^*\\underline{\\overline{\\mathbf Q}_\\ell}$: [def-weil-pbc-condensed-e-module-category] defines $p_T^*=\\pi_T^{-1}\\circ a^*$, with $a^*$ the sheafified left Kan extension along $S\\mapsto\\operatorname{Spec}LC(S,\\mathbf Z)$. This is term by term the construction in [sk-def-sfb-pullback-from-point]. The ring $C(-,E)$ has exactly the sections of $\\underline E$; the bounded-image ring $\\underline\\Omega$ has exactly the sections of the specified $\\underline{\\overline{\\mathbf Q}_\\ell}$. Hence the comparison lemmas use $E_T$ and $\\overline{\\mathbf Q}_{\\ell,T}$ themselves. The finite cokernel presentations coincide with [def-sfb-locally-finitely-presented].",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-bounded-constructible",
+    "def-sfb-constructible-module",
+    "def-weil-pbc-condensed-e-module-category",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "def-sfb-locally-finitely-presented"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15: ambient operations and coefficient passage; formal calculation from the cited adjunctions."
+   }
+  },
+  {
+   "text": "For $E_X$ and $\\overline{\\mathbf Q}_{\\ell,X}$ coefficients, apply respectively [lem-weil-pbc-condensed-lfp-local-triviality] and [lem-weil-pbc-condensed-qbar-lfp-local-triviality] to each locally closed stratum of each general-lfp constructible cohomology sheaf. Every such stratum is Noetherian because $X$ is Noetherian. By step 4 the coefficient sheaves and finite-presentation predicates agree with those in the two lemmas. They make the restriction pro-étale locally finite free, hence give finite constant local models with scalar modules $E^r$ or $\\overline{\\mathbf Q}_\\ell^r$ in the sense of [sk-def-sfb-constructible]. Conversely a finite scalar presentation is a presentation over the coefficient sheaf by extending its matrix; extension of scalars preserves cokernels because it is a left adjoint [sk-def-sfb-change-of-scalars]. Thus such scalar local models meet the general-lfp constructibility predicate. Boundedness is the same cohomological condition in both predicates.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15: ambient operations and coefficient passage; formal calculation from the cited adjunctions."
+   }
+  },
+  {
+   "text": "For any coefficient-ring map $R\\to S$ on $X_{\\mathrm{proét}}$, apply [lem-sfb-dc-hom-scalar-adjunction] in the ordinary unbounded derived categories. Write $K_S=S\\otimes_R^{\\mathbf L}K$ and $U$ for restriction. The lemma supplies the natural evaluation-normalized identification\n$$U R\\mathcal Hom_S(K_S,N)\\simeq R\\mathcal Hom_R(K,UN).$$\nIt also makes $U$ conservative. These conclusions will be used with $R=\\mathcal O_{E,X}$, $S=E_X$, and with $R=E_X$, $S=F_X$ or $\\overline{\\mathbf Q}_{\\ell,X}$. The lemma requires neither constructibility nor flatness. This cites the scalar-adjunction argument as a separate obligation rather than repeating it inline.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 (ambient derived operations); auxiliary change-of-ring comparison, an agent formulation extracted from returned proof step 4, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "For integral $K_0,L_0$ bounded constructible in the general-lfp sense, [lem-sfb-integral-lfp-constant-model-comparison] applied to the cohomology of $K_0$ supplies the finite constant local models required by [lem-sfb-constructible-internal-hom-continuity]. This also applies to the integral representatives later furnished by the rationalization equivalence; no stronger hypothesis on those representatives is assumed. Take a bounded-below complex representative of $L_0$. By [sk-prop-sfb-qlbar-colimit-x], $E_X=B[1/\\ell]$ is the sequential colimit in sheaves of $B$-modules, equipped with its localization ring structure. Tensoring this module colimit with the representative gives the termwise colimit of $L_0\\xrightarrow{\\ell}L_0\\xrightarrow{\\ell}\\cdots$. This system has a common lower bound. By [lem-sfb-constructible-internal-hom-continuity],\n$$R\\mathcal Hom_B(K_0,L_0)[1/\\ell]\n\\simeq R\\mathcal Hom_B(K_0,L_0[1/\\ell]).$$\nHere the left side is the same scalar localization of internal Hom. The module-object category is Grothendieck abelian by [lem-sfb-modobj-grothendieck], so filtered colimits are exact; tensoring with $B[1/\\ell]$ is therefore exact, being the filtered colimit of tensoring with the free module $B$. Step 6 identifies the right side with the restriction of $R\\mathcal Hom_{E_X}((K_0)_E,(L_0)_E)$. Hence the canonical evaluation-transpose map\n$$E_X\\otimes_B^L R\\mathcal Hom_B(K_0,L_0)\\longrightarrow R\\mathcal Hom_{E_X}((K_0)_E,(L_0)_E)$$\nis an isomorphism. Indeed its restriction is precisely the continuity map above; scalar multiplication by $\\ell$ on the target is invertible, so the compatible maps from the stages define the displayed localized map.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); internal continuity is the explicitly named additional input."
+   }
+  },
+  {
+   "text": "For arbitrary bounded constructible $E_X$-complexes $K,L$, apply [def-sfb-rationalization-equivalence] with the fixed prime $\\ell$, finite subextension $E$ and its pulled-back coefficient rings. Its composite with localization is the restriction of $E_X\\otimes_B^L-$ to bounded constructible complexes. The equivalence therefore gives integral bounded constructible representatives $K_0,L_0$ with $(K_0)_E\\simeq K$ and $(L_0)_E\\simeq L$: the standard localization has the objects of its source, and the equivalence is compatible with scalar extension. These representatives initially satisfy only the general-lfp predicate; step 7 applies to them because it explicitly invokes the integral comparison lemma. Step 3 makes $H_0=R\\mathcal Hom_B(K_0,L_0)$ bounded constructible. By [lem-sfb-extend-scalars-bounded-constructible], $(H_0)_E$ is bounded constructible. The evaluation-compatible comparison proved in step 7 identifies it with $R\\mathcal Hom_{E_X}(K,L)$. This proves the rational finite-extension case.",
+   "uses": [
+    "def-sfb-rationalization-equivalence",
+    "lem-sfb-extend-scalars-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2) and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "For bounded constructible $\\overline{\\mathbf Q}_{\\ell,X}$-complexes $K,L$, choose a common finite extension $E/\\mathbf Q_\\ell$ and bounded constructible $E_X$-complexes $K_E,L_E$ representing both, by [sk-thm-sfb-qlbar-two-colimit]. To obtain a common field from two initial fields, take their compositum and apply [lem-sfb-extend-subfield-constructible]. Put $H_E=R\\mathcal Hom_{E_X}(K_E,L_E)$, bounded constructible by step 8. For every finite $F/E$, [det-prop-sfb-cartesian-coefficients-finite-free] identifies $F_X$ with a finite sum of $E_X$. Thus, after restriction, the canonical map\n$$F_X\\otimes_{E_X}^LH_E\\longrightarrow R\\mathcal Hom_{F_X}((K_E)_F,(L_E)_F)$$\nis the finite-sum identification $H_E^{[F:E]}\\simeq R\\mathcal Hom_{E_X}(K_E,L_E^{[F:E]})$, using step 6. Its action on each basis summand is the identity followed by multiplication by that basis element. A different basis or the inclusion $F\\subset F'$ gives a finite matrix of $E$-scalars; additivity and $E$-linearity of internal Hom make the same matrix act on both sides. Hence these are the evaluation-defined comparisons and commute with every field transition map, not just abstract isomorphisms.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "lem-sfb-extend-subfield-constructible",
+    "det-prop-sfb-cartesian-coefficients-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1)–(2) and Remark 6.8.15; finite-free scalar calculation."
+   }
+  },
+  {
+   "text": "By [sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,X}=\\varinjlim_F F_X$. Finite subextensions containing the chosen $E$ are cofinal: every $F_0$ is contained in $EF_0$, and any two such fields are contained in their compositum. This is a small filtered poset. Apply [lem-sfb-dc-hom-filtered-colimit] with $R=E_X$, $S_F=F_X$, $S=\\overline{\\mathbf Q}_{\\ell,X}$, $K=K_E$, $L=L_E$. Its hypotheses hold: each $F_X$ is finite free by [det-prop-sfb-cartesian-coefficients-finite-free]; the module category is Grothendieck abelian by [lem-sfb-modobj-grothendieck], hence its filtered colimits are exact; $L_E$ has bounded-below cohomology; and step 5 gives the finite constant local models of $K_E$, so [lem-sfb-constructible-internal-hom-continuity] supplies exactly the lemma's common-lower-bound continuity hypothesis. The new comparison lemma gives the evaluation-transpose isomorphism\n$$\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}^{\\mathbf L}H_E\\xrightarrow{\\sim}R\\mathcal Hom_{\\overline{\\mathbf Q}_{\\ell,X}}(K,L).$$\nIts transition compatibility agrees with step 9. Finally [lem-sfb-extend-to-qlbar-constructible] makes the source bounded constructible, since $H_E$ is so by step 8. Thus the target internal Hom is bounded constructible.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-dc-hom-filtered-colimit",
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-extend-to-qlbar-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14 (continuity and coefficient passage), Remark 6.8.15 (ambient operations); conditional ring-sheaf comparison is an agent formulation of the argument extracted from returned step 8, not a verbatim assertion of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "lem-coef-integral-hom-reduction",
+  "lem-sfb-finite-field-internal-hom-finiteness",
+  "sk-thm-pe-constructible-comparison",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-constructible-module",
+  "def-weil-pbc-condensed-e-module-category",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-locally-finitely-presented",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-rationalization-equivalence",
+  "lem-sfb-extend-scalars-bounded-constructible",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "lem-sfb-extend-subfield-constructible",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "lem-sfb-dc-hom-filtered-colimit",
+  "lem-sfb-extend-to-qlbar-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Adaptation of Bhatt–Scholze Lemmas 3.4.11 and 6.7.13, Proposition 6.8.11(3), Lemma 6.8.12, Proposition 6.8.14 and Remark 6.8.15. General-lfp and finite-constant-local-model predicates are connected by explicit coefficient-specific lemmas; internal continuity is separately stated."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "bounded constructible complexes are closed under derived internal Hom for ell-adic coefficients",
+   "results": [
+    "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "HomologicalComplex.isGrothendieckAbelian"
+   ],
+   "date": "2026-10-19",
+   "verdict": "Only ambient derived category results; use the existing class-indexed library closure theorem."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Internal Hom of bounded constructible complexes over a finite extension of p-adic field is bounded constructible",
+   "results": [
+    "LightCondensed.instMonoidalClosedLightCondMod"
+   ],
+   "date": "2026-10-19",
+   "verdict": "Ambient closedness only; the existing WeilConjectures instance supplies constructible closure."
+  },
+  {
+   "tool": "Loogle",
+   "query": "\"IsMonoidalClosed\", \"boundedConstructible\"",
+   "results": [],
+   "date": "2026-10-19",
+   "verdict": "No Mathlib result."
+  },
+  {
+   "tool": "grep",
+   "query": "isMonoidalClosed_boundedConstructible",
+   "results": [],
+   "date": "2026-10-19",
+   "verdict": "No Mathlib hits. A separate rg search in lean/WeilConjectures found the existing isMonoidalClosed_boundedConstructible instance in SixFunctors/ProEtale/ModuleObject/Derived/BoundedConstructible.lean."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundedConstructibleHomFiniteness",
+  "date": "2026-10-19",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "The integral, rational finite-extension and algebraic-closure preservation cases, before transport from Type 0 coefficients to the scheme universe."
+  },
+  "same_as": [
+   "lem-sfb-dc-hom-preserves"
+  ]
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible",
+  "statement": "instance isMonoidalClosed_boundedConstructible\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :\n    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T005303-L-2748498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261019T005303-L-2748498",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

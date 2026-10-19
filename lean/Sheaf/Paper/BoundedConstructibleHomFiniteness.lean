@@ -9,33 +9,14 @@ public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.ProEtalePointPullback
-import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CartesianCoefficientsFiniteFree
-import Sheaf.Paper.CompletedCondensedCoefficients
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.ConstructibleInternalHomContinuity
-import Sheaf.Paper.DerivedInternalHomFilteredColimit
-import Sheaf.Paper.FiniteCoefficientDescentTwoColimit
-import Sheaf.Paper.FiniteFieldInternalHomFiniteness
-import Sheaf.Paper.IntegralCohomologicalAdicCriterion
-import Sheaf.Paper.IntegralHomReduction
-import Sheaf.Paper.IntegralLfpConstantModelComparison
-import Sheaf.Topology.ProfiniteCondensedRing
-import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
-import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Mathlib.Analysis.Normed.Field.TransferInstance
+import Mathlib.Algebra.Algebra.TransferInstance
+import Mathlib.RingTheory.Finiteness.Small
+import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Internal Hom finiteness for finite coefficient extensions in the scheme universe
@@ -59,9 +40,139 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+private lemma small_model (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    ∃ (E₀ : Type) (_ : NormedField E₀) (_ : NormedAlgebra ℚ_[ℓ] E₀)
+      (_ : FiniteDimensional ℚ_[ℓ] E₀), ∃ e : E₀ ≃+* E,
+      (∀ x, ‖e x‖ = ‖x‖) ∧ Continuous e ∧ Continuous e.symm := by
+  have : Small.{0} E := Module.Finite.small ℚ_[ℓ] E
+  let e := (equivShrink E).symm
+  let : NormedField (Shrink.{0} E) := e.normedField
+  let : Algebra ℚ_[ℓ] (Shrink.{0} E) := e.algebra ℚ_[ℓ]
+  let : NormedAlgebra ℚ_[ℓ] (Shrink.{0} E) :=
+    { toAlgebra := e.algebra ℚ_[ℓ]
+      norm_smul_le c x := by
+        change ‖e (e.symm (c • e x))‖ ≤ ‖c‖ * ‖e x‖
+        rw [e.apply_symm_apply]
+        exact norm_smul_le c _ }
+  have : FiniteDimensional ℚ_[ℓ] (Shrink.{0} E) :=
+    (e.algEquiv ℚ_[ℓ]).toLinearEquiv.symm.finiteDimensional
+  refine ⟨Shrink.{0} E, inferInstance, inferInstance, inferInstance, e.ringEquiv,
+    fun x ↦ rfl, ?_, ?_⟩
+  · exact (show Isometry e from fun x y ↦ rfl).continuous
+  · exact (show Isometry e.symm from fun x y ↦ by
+      change edist (e (e.symm x)) (e (e.symm y)) = edist x y
+      simp).continuous
+
+private noncomputable def coefficientIso (T : Type) (V : Type u)
+    [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+    [TopologicalSpace V] [Ring V] [IsTopologicalRing V]
+    (e : T ≃+* V) (hc : Continuous e) (hc' : Continuous e.symm) :
+    Profinite.continuousMapRingSheaf.{u} T ≅
+      Profinite.continuousCoefficientRingSheaf V where
+  hom := ⟨{
+    app S := RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+      ((e.toRingHom.compLeftContinuous S.unop hc).comp ULift.ringEquiv.toRingHom))
+    naturality _ _ _ := by ext; rfl }⟩
+  inv := ⟨{
+    app S := RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+      ((e.symm.toRingHom.compLeftContinuous S.unop hc').comp ULift.ringEquiv.toRingHom))
+    naturality _ _ _ := by ext; rfl }⟩
+  hom_inv_id := by
+    ext S x
+    exact congrArg ULift.up (ContinuousMap.ext (fun a ↦ e.symm_apply_apply (x.down a)))
+  inv_hom_id := by
+    ext S x
+    exact congrArg ULift.up (ContinuousMap.ext (fun a ↦ e.apply_symm_apply (x.down a)))
+
+section CoefficientTransport
+variable {X : Scheme.{u}}
+  {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+  [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+  (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+
+private lemma cons_comap
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
+    (h : IsConstructibleModuleObject S M) :
+    IsConstructibleModuleObject R ((Mod.comap φ).obj M) := by
+  obtain ⟨s, hs⟩ := h
+  refine ⟨s, fun a ↦ ?_⟩
+  let F := ProEtale.upperStar Ab.{u + 1} (s.immersion a)
+  exact lfp_of_iso (lfp_comap (F.map φ) (hs a))
+    ((F.mapModComapIso φ).app M).symm
+
+private lemma bc_comap
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)}
+    (h : boundedConstructible S K) :
+    boundedConstructible R ((Mod.comap φ).mapDerivedCategory.obj K) := by
+  refine ⟨Functor.bounded_mapDerivedCategory_obj _ h.1, fun n ↦ ?_⟩
+  exact constructible_of_iso R
+    (((Mod.comap φ).mapDerivedCategoryHomologyFunctorIso n).app K)
+    (cons_comap φ (h.2 n))
+
+private lemma bc_of_comap
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)}
+    (h : boundedConstructible R ((Mod.comap φ).mapDerivedCategory.obj K)) :
+    boundedConstructible S K := by
+  refine ⟨Functor.bounded_of_bounded_mapDerivedCategory_obj _ h.1, fun n ↦ ?_⟩
+  have hc := cons_comap (inv φ)
+    (constructible_of_iso R
+      (((Mod.comap φ).mapDerivedCategoryHomologyFunctorIso n).app K).symm (h.2 n))
+  exact constructible_of_iso S
+    ((Mod.comapEquivalenceOfIsIso φ).unitIso.app
+      ((DerivedCategory.homologyFunctor _ n).obj K)).symm hc
+
+set_option maxHeartbeats 800000 in
+-- Derive the strong monoidal comparison through the exact module equivalence.
+private lemma closure_transport (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    (h : (boundedConstructible R).IsMonoidalClosed) :
+    (boundedConstructible S).IsMonoidalClosed := by
+  let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R := Mod.comap φ
+  have : F.IsEquivalence :=
+    inferInstanceAs (Mod.comapEquivalenceOfIsIso φ).functor.IsEquivalence
+  have : F.PreservesFlat := Functor.preservesFlat_of_isEquivalence F
+  let : F.leftDerivedFunctor.Monoidal := Functor.residueDerivedMonoidal F
+  let : F.mapDerivedCategory.Monoidal :=
+    Functor.Monoidal.transport F.leftDerivedFunctorIsoMapDerivedCategory
+  let e := F.mapDerivedCategory.asEquivalence
+  have : (boundedConstructible R).IsMonoidalClosed := h
+  refine ⟨fun K L hK hL ↦ ?_⟩
+  apply bc_of_comap φ
+  let adj := e.toAdjunction
+  let adj' : tensorLeft K ⊣
+      e.functor ⋙ ihom (e.functor.obj K) ⋙ e.inverse :=
+    (adj.comp ((ihom.adjunction (e.functor.obj K)).comp e.symm.toAdjunction)).ofNatIsoLeft
+      (Iso.compInverseIso (H := e) (Functor.Monoidal.commTensorLeft F.mapDerivedCategory K))
+  let i := ((ihom.adjunction K).rightAdjointUniq adj').app L
+  let j := e.functor.mapIso i ≪≫
+    e.counitIso.app ((ihom (e.functor.obj K)).obj (e.functor.obj L))
+  have hb := (boundedConstructible R).prop_ihom (bc_comap φ hK) (bc_comap φ hL)
+  refine ⟨?_, fun n ↦ ?_⟩
+  · exact (DerivedCategory.TStructure.t.bounded).prop_of_iso j.symm hb.1
+  · exact constructible_of_iso R
+      ((DerivedCategory.homologyFunctor _ n).mapIso j.symm) (hb.2 n)
+end CoefficientTransport
+
+private lemma closure_of_continuousRingEquiv (T : Type) (V : Type u)
+    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
+    [TopologicalSpace V] [CommRing V] [IsTopologicalRing V]
+    (e : T ≃+* V) (hc : Continuous e) (hc' : Continuous e.symm) (X : Scheme.{u})
+    (h : (boundedConstructible
+      (condensedRingObj (Profinite.continuousMapRingObj T) X)).IsMonoidalClosed) :
+    (boundedConstructible
+      (condensedRingObj (Profinite.continuousCoefficientRingObj V) X)).IsMonoidalClosed := by
+  let i := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso (coefficientIso T V e hc hc')
+  have : IsMonHom i.hom := Sheaf.isMonHom_sheafCompose_map
+    (coherentTopology Profinite.{u}) (coefficientIso T V e hc hc').hom
+  let φ := (upperStarFromPoint X).map i.hom
+  have : IsMonHom φ := inferInstance
+  exact closure_transport φ h
 
 /-- The rational and integral finite-extension cases of internal Hom finiteness, without
 restricting the coefficient carrier to Type 0. The subring `O` is exactly the ring of integers,
@@ -72,124 +183,16 @@ the given property to an object with that property; it imposes no tensor closure
 Source: the node's reviewed proof from Bhatt--Scholze, Sections 3.4, 6.7 and 6.8,
 steps 1--8 (blueprint: lem-sfb-dc-hom-preserves).
 
-Proof (the integral case is steps 1--3; the rational case is steps 4--8):
-
-1. First consider $\Lambda=\underline{\mathcal O_E}$. The only ideals of $k$ are $0$ and $k$, so
-$\operatorname{Spec}k$ is Noetherian; [lem-weil-pbc-finite-type-over-noetherian] makes $X$
-Noetherian. Choose a uniformizer $t$ of $A_0=\mathcal O_E$. By
-[lem-weil-l-adic-extension-integers-dvr], $A=A_0/(t)$ is a finite field; its characteristic is
-$\ell$, since $\ell$ belongs to the maximal ideal. By [sk-prop-sfb-qlbar-colimit-x], the actual
-coefficient ring is $B=\mathcal O_{E,X}=\varprojlim_n(A_0/t^n)_X$. The bounded-constructible
-hypothesis on $K$ and $L$ [sk-def-sfb-bounded-constructible] means bounded cohomology
-constructible by general local finite presentations. Apply
-[lem-sfb-integral-lfp-constant-model-comparison] to each cohomology sheaf of $K$ and $L$: both
-complexes have bounded cohomology with finite constant local models. This invocation is the
-coefficient-specific bridge, not an identification by definition. Now apply implication (1) to (2)
-of [lem-sfb-integral-cohomological-adic-criterion], whose condition (1) explicitly uses finite
-constant scalar models. It gives local derived $(t)$-completeness of $K,L$, in the sense used by
-that criterion, and identifies $K_1=K\otimes_B^LA_X$, $L_1=L\otimes_B^LA_X$ with bounded
-finite-Tor-amplitude étale complexes with constructible finite-dimensional $A$-cohomology. Hence
-these reductions satisfy the explicit finite constant local model hypotheses of the finite-field
-child below.
-
-2. Set $H=R\mathcal Hom_B(K,L)$. Apply [lem-coef-integral-hom-reduction] to this $B$ and $n=1$,
-with its finite-field datum taken in the characteristic $p$ of $k$, so that its hypothesis
-$\ell\ne p$ is the one in force. Its statement applies to an arbitrary scheme and arbitrary
-ambient complexes; it does not impose a finite-ground-field or site-perfectness hypothesis. Its
-evaluation-defined comparison gives $$H\otimes_B^LA_X\xrightarrow{\sim}R\mathcal
-Hom_{A_X}(K_1,L_1).$$ This is a comparison of the ambient internal Homs, not a new choice of Hom
-on a constructible subcategory. The completeness clause of that lemma is not used here: it
-concerns the derived-limit notion of completeness of its own definitions, whereas the criterion of
-step 1 uses local derived completeness; step 3 proves the latter for $H$ directly.
-
-3. Apply [lem-sfb-finite-field-internal-hom-finiteness] to the finite field $A$ and to $K_1,L_1$
-with their scalar-constant constructible cohomology established in step 1. By step 2,
-$H\otimes_B^LA_X$ is therefore bounded with finite constant local model cohomology. Apply
-[sk-thm-pe-constructible-comparison] on the Noetherian (hence qcqs) scheme $X$, with the discrete
-Noetherian field $A$, to obtain a bounded constructible étale complex $C$ whose pullback is this
-reduction. It has finite Tor amplitude: tensor of $A$-module sheaves is exact, as is checked
-locally by tensor of vector spaces and exact sheafification; consequently for a bounded complex
-its derived tensor with any degree-zero module sheaf has the same cohomological support bound.
-Next, $H$ is locally derived $(t)$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete].
-Let $U$ be an object of $X_{\mathrm{proét}}$, let $f\in(t)(U)$, and write $B_U$ for the restricted
-ring. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], on $X_{\mathrm{proét}}$ and on the
-slice site over $U$, together with the symmetry of the derived tensor product, $$\begin{aligned}
-R\mathcal Hom_{B_U}(B_U[1/f],H|_U)&\cong R\mathcal Hom_{B_U}(B_U[1/f],R\mathcal
-Hom_{B_U}(K|_U,L|_U))\\ &\cong R\mathcal Hom_{B_U}(K|_U\otimes^{\mathbf L}_{B_U}B_U[1/f],L|_U)\\
-&\cong R\mathcal Hom_{B_U}(K|_U,R\mathcal Hom_{B_U}(B_U[1/f],L|_U))=0, \end{aligned}$$ the last
-vanishing being the local derived completeness of $L$ from step 1. Together with this completeness
-of $H$, the étale complex $C$ verifies condition (2) of
-[lem-sfb-integral-cohomological-adic-criterion]. Its implication (2) to (1) gives bounded
-cohomology of $H$ with finite constant scalar local models. The reverse direction of
-[lem-sfb-integral-lfp-constant-model-comparison] makes these cohomology sheaves constructible in
-the general ring-object sense. Thus $H$ meets exactly the bounded-constructible predicate in the
-conclusion [sk-def-sfb-bounded-constructible].
-
-4. Use the ordinary unbounded layer-B derived category of [sk-def-sfb-derived-categories] and the
-general local-finite-presentation predicate of [sk-def-sfb-bounded-constructible,
-def-sfb-constructible-module]. For the field-coefficient comparison lemmas below, their
-coefficient sheaves are $E_T=p_T^*\underline E$ and $\overline{\mathbf
-Q}_{\ell,T}=p_T^*\underline{\overline{\mathbf Q}_\ell}$:
-[def-weil-pbc-condensed-e-module-category] defines $p_T^*=\pi_T^{-1}\circ a^*$, with $a^*$ the
-sheafified left Kan extension along $S\mapsto\operatorname{Spec}LC(S,\mathbf Z)$. This is term by
-term the construction in [sk-def-sfb-pullback-from-point]. The ring $C(-,E)$ has exactly the
-sections of $\underline E$; the bounded-image ring $\underline\Omega$ has exactly the sections of
-the specified $\underline{\overline{\mathbf Q}_\ell}$. Hence the comparison lemmas use $E_T$ and
-$\overline{\mathbf Q}_{\ell,T}$ themselves. The finite cokernel presentations coincide with
-[def-sfb-locally-finitely-presented].
-
-5. For $E_X$ and $\overline{\mathbf Q}_{\ell,X}$ coefficients, apply respectively
-[lem-weil-pbc-condensed-lfp-local-triviality] and
-[lem-weil-pbc-condensed-qbar-lfp-local-triviality] to each locally closed stratum of each
-general-lfp constructible cohomology sheaf. Every such stratum is Noetherian because $X$ is
-Noetherian. By step 4 the coefficient sheaves and finite-presentation predicates agree with those
-in the two lemmas. They make the restriction pro-étale locally finite free, hence give finite
-constant local models with scalar modules $E^r$ or $\overline{\mathbf Q}_\ell^r$ in the sense of
-[sk-def-sfb-constructible]. Conversely a finite scalar presentation is a presentation over the
-coefficient sheaf by extending its matrix; extension of scalars preserves cokernels because it is
-a left adjoint [sk-def-sfb-change-of-scalars]. Thus such scalar local models meet the general-lfp
-constructibility predicate. Boundedness is the same cohomological condition in both predicates.
-
-6. For any coefficient-ring map $R\to S$ on $X_{\mathrm{proét}}$, apply
-[lem-sfb-dc-hom-scalar-adjunction] in the ordinary unbounded derived categories. Write
-$K_S=S\otimes_R^{\mathbf L}K$ and $U$ for restriction. The lemma supplies the natural
-evaluation-normalized identification $$U R\mathcal Hom_S(K_S,N)\simeq R\mathcal Hom_R(K,UN).$$ It
-also makes $U$ conservative. These conclusions will be used with $R=\mathcal O_{E,X}$, $S=E_X$,
-and with $R=E_X$, $S=F_X$ or $\overline{\mathbf Q}_{\ell,X}$. The lemma requires neither
-constructibility nor flatness. This cites the scalar-adjunction argument as a separate obligation
-rather than repeating it inline.
-
-7. For integral $K_0,L_0$ bounded constructible in the general-lfp sense,
-[lem-sfb-integral-lfp-constant-model-comparison] applied to the cohomology of $K_0$ supplies the
-finite constant local models required by [lem-sfb-constructible-internal-hom-continuity]. This
-also applies to the integral representatives later furnished by the rationalization equivalence;
-no stronger hypothesis on those representatives is assumed. Take a bounded-below complex
-representative of $L_0$. By [sk-prop-sfb-qlbar-colimit-x], $E_X=B[1/\ell]$ is the sequential
-colimit in sheaves of $B$-modules, equipped with its localization ring structure. Tensoring this
-module colimit with the representative gives the termwise colimit of
-$L_0\xrightarrow{\ell}L_0\xrightarrow{\ell}\cdots$. This system has a common lower bound. By
-[lem-sfb-constructible-internal-hom-continuity], $$R\mathcal Hom_B(K_0,L_0)[1/\ell] \simeq
-R\mathcal Hom_B(K_0,L_0[1/\ell]).$$ Here the left side is the same scalar localization of internal
-Hom. The module-object category is Grothendieck abelian by [lem-sfb-modobj-grothendieck], so
-filtered colimits are exact; tensoring with $B[1/\ell]$ is therefore exact, being the filtered
-colimit of tensoring with the free module $B$. Step 6 identifies the right side with the
-restriction of $R\mathcal Hom_{E_X}((K_0)_E,(L_0)_E)$. Hence the canonical evaluation-transpose
-map $$E_X\otimes_B^L R\mathcal Hom_B(K_0,L_0)\longrightarrow R\mathcal
-Hom_{E_X}((K_0)_E,(L_0)_E)$$ is an isomorphism. Indeed its restriction is precisely the continuity
-map above; scalar multiplication by $\ell$ on the target is invertible, so the compatible maps
-from the stages define the displayed localized map.
-
-8. For arbitrary bounded constructible $E_X$-complexes $K,L$, apply
-[def-sfb-rationalization-equivalence] with the fixed prime $\ell$, finite subextension $E$ and its
-pulled-back coefficient rings. Its composite with localization is the restriction of
-$E_X\otimes_B^L-$ to bounded constructible complexes. The equivalence therefore gives integral
-bounded constructible representatives $K_0,L_0$ with $(K_0)_E\simeq K$ and $(L_0)_E\simeq L$: the
-standard localization has the objects of its source, and the equivalence is compatible with scalar
-extension. These representatives initially satisfy only the general-lfp predicate; step 7 applies
-to them because it explicitly invokes the integral comparison lemma. Step 3 makes $H_0=R\mathcal
-Hom_B(K_0,L_0)$ bounded constructible. By [lem-sfb-extend-scalars-bounded-constructible],
-$(H_0)_E$ is bounded constructible. The evaluation-compatible comparison proved in step 7
-identifies it with $R\mathcal Hom_{E_X}(K,L)$. This proves the rational finite-extension case.
+Proof: a finite-dimensional algebra over the Type 0 field `ℚ_[ℓ]` is small, by
+`Module.Finite.small`. Transport its norm, field and algebra structures to `Shrink E`.
+The resulting ring equivalence is an isometry in both directions. Pull back `O` along
+this equivalence; its membership condition is exactly the closed-unit-ball condition.
+Postcomposition induces isomorphisms of the rational and integral condensed ring sheaves.
+Pull these isomorphisms to `X`. Restriction of scalars along a ring isomorphism preserves
+and reflects finite local presentations on each stratum, hence bounded constructibility.
+Its exact derived equivalence is strong monoidal, so uniqueness of right adjoints identifies
+the two internal Homs. Apply the existing Type 0 `isMonoidalClosed_boundedConstructible`
+instance and transport both conclusions back along these equivalences.
 -/
 lemma boundedConstructibleHom_finiteExtension
     (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
@@ -202,6 +205,29 @@ lemma boundedConstructibleHom_finiteExtension
       (condensedRingObj (Profinite.continuousCoefficientRingObj E) X.left)).IsMonoidalClosed ∧
     (boundedConstructible
       (condensedRingObj (Profinite.continuousCoefficientRingObj O) X.left)).IsMonoidalClosed := by
-  sorry
+  obtain ⟨E₀, hfield, halgebra, hfinite, e, hnorm, hc, hc'⟩ := small_model ℓ E
+  let := hfield
+  let := halgebra
+  let := hfinite
+  let O₀ := O.comap e.toRingHom
+  have hO₀ : ∀ x : E₀, x ∈ O₀ ↔ ‖x‖ ≤ 1 := by
+    intro x
+    change e x ∈ O ↔ ‖x‖ ≤ 1
+    rw [hO, hnorm]
+  let eO : O₀ ≃+* O :=
+    { toFun := fun x ↦ ⟨e x, x.property⟩
+      invFun := fun y ↦ ⟨e.symm y, by
+        change e (e.symm (y : E)) ∈ O
+        simpa only [e.apply_symm_apply] using y.property⟩
+      left_inv := fun x ↦ Subtype.ext (e.symm_apply_apply x)
+      right_inv := fun y ↦ Subtype.ext (e.apply_symm_apply y)
+      map_mul' := fun x y ↦ Subtype.ext (e.map_mul x y)
+      map_add' := fun x y ↦ Subtype.ext (e.map_add x y) }
+  have hcO : Continuous eO := (hc.comp continuous_subtype_val).subtype_mk _
+  have hcO' : Continuous eO.symm := (hc'.comp continuous_subtype_val).subtype_mk _
+  have : IsEllAdicFinitenessCoefficient ℓ (Profinite.continuousMapRingObj O₀) :=
+    .unitBall E₀ O₀ hO₀
+  exact ⟨closure_of_continuousRingEquiv E₀ E e hc hc' X.left (by infer_instance),
+    closure_of_continuousRingEquiv O₀ O eO hcO hcO' X.left (by infer_instance)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
