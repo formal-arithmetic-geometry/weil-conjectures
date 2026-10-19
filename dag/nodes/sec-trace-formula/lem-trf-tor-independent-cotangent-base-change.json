@@ -280,5 +280,28 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-65e5db2d1 (reviewer sub-agent of L); spot-checked: Read the item, new node, blueprint route, cited statements, and Stacks sources. All hypotheses and six proof steps check; edge cases, citations, graph, searches, and route-pivot constraints pass. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorIndependentCotangentBaseChange",
+  "declaration": "Algebra.CotangentResolution.isPolynomialResolution_tensor_of_torIndependent",
+  "declarations": [
+   "Algebra.CotangentResolution.tensorBaseArrow",
+   "Algebra.CotangentResolution.tensorAugmentation",
+   "Algebra.CotangentResolution.isPolynomialResolution_tensor_of_torIndependent"
+  ],
+  "file": "lean/Sheaf/RingTheory/TorIndependentCotangentBaseChange.lean",
+  "statement": "theorem isPolynomialResolution_tensor_of_torIndependent {f : Arrow CommRingCat.{u}} {S : CommRingCat.{u}} (α : f.left ⟶ S) (P : Augmentation f) (hP : IsPolynomialResolution P) [HasDerivedCategory.{wA} (ModuleCat.{u} f.left)] [HasDerivedCategory.{wS} (ModuleCat.{u} S)] (L : DerivedCategory (ModuleCat.{u} f.left) ⥤ DerivedCategory (ModuleCat.{u} S)) (ε : DerivedCategory.Q ⋙ L ⟶ (ModuleCat.extendScalars α.hom).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (hL : L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat.{u} f.left) (.up ℤ))) (hTor : IsIso (ε.app ((CochainComplex.singleFunctor (ModuleCat.{u} f.left) (0 : ℤ)).obj ((ModuleCat.restrictScalars f.hom.hom).obj (ModuleCat.of f.right f.right))))) : IsPolynomialResolution (tensorAugmentation P α)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23bdd9e6",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read item, all 5 stmt_dep records/Lean (CotangentResolutionCoherence Augmentation/IsPolynomialResolution, OnePointDerivedRingIdentification scalarExtension universal pairs, DerivedChangeOfRingsCochainModel, LinearMap.baseChange), Stacks 08QP/08QI place, module and report. Node differs from live only in lean; statement verbatim; declarations match file. B'=CommRingCat pushout; hP reuses the dependency predicate; derived extension = any universal pair (L,ε,IsLeftDerivedFunctor) for extendScalars α, instantiated by Mathlib leftDerivedFunctor as in citer CotangentFlatBaseChange; hTor = counit at B[0] (target ordinary B⊗A'), not an arbitrary iso or flatness; conclusion IsPolynomialResolution of the actual levelwise-pushout augmentation (pushout.desc of P.augmentation). No extra hypotheses; wA/wS free; edge cases (zero rings, empty/infinite variables, non-flat α) covered. Helper defs real, only theorem sorry, 6-step proof docstring, source/blueprint docstrings. No duplicate construction found. nt_compile --json: 3.4 s, exit 0, clean. Advisory: unused proof-only imports; second reading is a self-check."
  }
 }
