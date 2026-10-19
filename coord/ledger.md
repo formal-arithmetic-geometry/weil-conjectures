@@ -17676,3 +17676,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:11 L: merged deliver/E1/Sheaf.Paper.ConstantWeilStructure (stage 3; reviewer PASS; first push; landing 20261019T231119-L-549199 (proof); batch 20261019T231019; modules 1; new nodes 2)
 - 23:11 L: merged deliver/E3/Sheaf.Paper.CompactificationProjectionPasting (stage 3; reviewer PASS; first push; landing 20261019T231120-L-549472 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:11 L: merged deliver/E3/Sheaf.Paper.DenseOpenPiOneSurjective (stage 3; reviewer PASS; first push; landing 20261019T231122-L-549663 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/E3-dense-open-proof-scope.md)
+- 23:11 L: merged deliver/E4/Sheaf.AlgebraicGeometry.CondensedModulePullbackExact (stage 3; reviewer PASS; first push; landing 20261019T231124-L-550010 (proof); batch 20261019T231019; modules 1; new nodes 0)

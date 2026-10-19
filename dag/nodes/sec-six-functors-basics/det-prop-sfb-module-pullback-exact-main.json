@@ -20,113 +20,62 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $F=f^*_{\\Ab}$, $R=\\Lambda_Y$, $S=\\Lambda_X$, and $R'=FR$. Abelian sheaves on either small pro-étale site form an abelian category by [lem-weil-pbc-site-sheaves-enough-injectives]. By [det-def-sfb-sheaf-tensor-closed], their sheaf tensor products are closed symmetric monoidal, additive and colimit-preserving in either variable. Thus tensoring on the left by $R,R',S$ preserves finite colimits. The rings $R,S$ are commutative by [sk-def-sfb-pulled-back-coefficients]. The inverse image is strong monoidal by [def-sfb-finite-upper-star-monoidal], and sends commutative rings to commutative rings by [lem-sfb-finite-upper-star-braided], so $R'$ has the requisite commutative transported ring structure. Apply [lem-sfb-modobj-abelian] to $R$ in $\\mathcal C$ and to $R',S$ in $\\mathcal D$: all three module categories are abelian. The equalizers and coequalizers required for scalar extension also exist in $\\mathcal D$: by [def-sp-abelian] it has kernels and cokernels, and the equalizer, respectively coequalizer, of $a,b$ is the kernel, respectively cokernel, of $a-b$.",
+   "text": "Use the already proved source-library instances Functor.preservesFiniteLimits_mapMod and Functor.preservesFiniteColimits_mapMod for transport of the exact abelian inverse image. The ambient abelian, monoidal and tensor-colimit hypotheses are supplied by the canonical pro-etale sheaf instances already used in the definition of module pullback. The source-library upperStar_additive, preservesFiniteLimits_upperStar and preservesFiniteColimits_upperStar give additivity and exactness of the composite pullback itself. These are existing proofs, so the general lifted-exactness theorem and a separate construction of the sheaf tensor are unnecessary here.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "det-def-sfb-sheaf-tensor-closed",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-sfb-finite-upper-star-monoidal",
-    "lem-sfb-finite-upper-star-braided",
-    "lem-sfb-modobj-abelian",
-    "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Setting paragraph: abelian and monoidal hypotheses for the three coefficient rings"
-   }
-  },
-  {
-   "text": "The abelian direct image $T=f_*^{\\Ab}$ is additive from its restriction formula [def-sfb-finite-lower-star]: on every object $V$, $T(u+v)_V=(u+v)_{V\\times_YX}=u_{V\\times_YX}+v_{V\\times_YX}$. Use $F\\dashv T$ from [def-sfb-finite-upper-lower-star-adjunction], with unit $\\eta$. For parallel sheaf maps $u,v:A\\to B$, the adjunction bijection sends $F(u+v)$ to $TF(u+v)\\eta_A=\\eta_B(u+v)$, and sends $Fu+Fv$ to $T(Fu+Fv)\\eta_A=TFu\\eta_A+TFv\\eta_A=\\eta_Bu+\\eta_Bv$. The two images coincide by bilinearity, so injectivity gives $F(u+v)=Fu+Fv$. Setting $u=v=0$ and cancelling gives $F0=0$, and then negatives follow. This is additivity in [def-weil-pbc-additive-functor].",
-   "uses": [
-    "def-sfb-finite-lower-star",
-    "def-sfb-finite-upper-lower-star-adjunction",
-    "def-weil-pbc-additive-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Setting paragraph: expand additivity of the abelian inverse image"
-   }
-  },
-  {
-   "text": "The functor $F$ is exact by [lem-sfb-finite-upper-star-exact]. The transport $G=\\operatorname{mapMod}(F):\\Mod_R(\\mathcal C)\\to\\Mod_{R'}(\\mathcal D)$ exists by [def-sfb-modobj-transport], whose statement gives the equality $U_{R'}G=FU_R$ on both objects and morphisms. Apply [det-prop-sfb-module-pullback-exact-lifted] with these $F,G,R,R'$: the additive exactness of $F$ is step 2 and the cited inverse-image lemma; all abelian, tensor-additivity and right-exactness hypotheses were checked in step 1. Hence $G$ is additive and preserves finite limits and finite colimits.",
-   "uses": [
-    "lem-sfb-finite-upper-star-exact",
     "def-sfb-modobj-transport",
-    "det-prop-sfb-module-pullback-exact-lifted"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Transport paragraph: apply the general lifting lemma to mapMod"
-   }
-  },
-  {
-   "text": "By [lem-sfb-alpha-ring-hom], $\\alpha_f:R'\\to S$ is a morphism of ring objects, for the ring structure on $R'=FR$ transported along the strong monoidal $F$ (the one of step 3), and by [lem-sfb-alpha-iso] it is invertible; the inverse of an invertible morphism of ring objects is again one (apply $\\alpha_f^{-1}$, resp. $\\alpha_f^{-1}\\otimes\\alpha_f^{-1}$, to the unit and multiplication identities of $\\alpha_f$), so $\\alpha_f$ is an isomorphism of ring objects. Let $H=\\operatorname{Res}_{\\alpha_f^{-1}}:\\Mod_{R'}(\\mathcal D)\\to\\Mod_S(\\mathcal D)$. The direction follows from $\\alpha_f^{-1}:S\\to R'$. By [def-sfb-modobj-restriction], $H$ changes only the action and is the identity on underlying objects and morphisms, so $U_SH=\\operatorname{Id}_{\\mathcal D}U_{R'}$. Apply [det-prop-sfb-module-pullback-exact-lifted] with base functor $\\operatorname{Id}_{\\mathcal D}$ and module functor $H$, source monoid $R'$ and target monoid $S$. The identity preserves sums and every universal property directly, and the remaining hypotheses are step 1. Thus $H$ is additive and exact.",
-   "uses": [
-    "lem-sfb-alpha-iso",
-    "lem-sfb-alpha-ring-hom",
-    "def-sfb-modobj-restriction",
-    "det-prop-sfb-module-pullback-exact-lifted"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Extension of scalars paragraph: exactness of inverse scalar restriction"
-   }
-  },
-  {
-   "text": "Step 1 verifies all the ambient hypotheses in [def-sfb-modobj-restriction-equivalence]: closed braided structure, equalizers and coequalizers, and preservation of colimits by both tensor factors; $R'$ is commutative and step 4 supplies the ring isomorphism. Thus [def-sfb-modobj-extension-along-iso] gives a natural isomorphism $\\theta:E=\\operatorname{Ext}_{\\alpha_f}\\xrightarrow{\\sim}H$. For $u,v:M\\to N$, naturality yields $E(u+v)=\\theta_N^{-1}H(u+v)\\theta_M=\\theta_N^{-1}(Hu+Hv)\\theta_M=Eu+Ev$. For a finite diagram $D$ and a limiting cone $c$ with vertex $A$, a cone $b_j:B\\to E(D_j)$ becomes the cone $\\theta_{D_j}b_j$ over $HD$. Since $Hc$ is limiting, it has a unique factorization $t:B\\to HA$. The map $\\theta_A^{-1}t$ is the unique factorization through $Ec$, by naturality and invertibility of $\\theta$. This proves finite-limit preservation by $E$. For a cocone $b_j:E(D_j)\\to B$, compose with $\\theta_{D_j}^{-1}$, factor uniquely through $HA$ using the colimit property of $Hc$, and compose the resulting map $HA\\to B$ with $\\theta_A$. This proves finite-colimit preservation. Hence $E$ is additive and exact.",
-   "uses": [
-    "def-sfb-modobj-restriction-equivalence",
-    "def-sfb-modobj-extension-along-iso"
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-module-pushforward-pullback"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Extension of scalars paragraph, final sentence: expand invariance under natural isomorphism"
+    "place": "Setting, Transport and Conclusion: specialize the existing source-library exactness instances"
    }
   },
   {
-   "text": "The pullback in [sk-def-sfb-module-pushforward-pullback] is exactly $E\\circ G$. For parallel module maps $u,v$, $(EG)(u+v)=E(Gu+Gv)=EGu+EGv$. If $c$ is a limiting cone for a finite diagram, $Gc$ is limiting by step 3 and $E(Gc)$ is limiting by step 5; the same argument for colimiting cocones proves finite-colimit preservation. Thus the composite is additive and exact in the sense of [def-galois-exact-functor], as are both factors by steps 3 and 5. This proves every assertion without any finiteness or characteristic condition on $\\Lambda$.",
+   "text": "The canonical coefficient comparison is an invertible monoid morphism by lem-sfb-alpha-ring-hom and lem-sfb-alpha-iso. Mod.extendScalarsIsoComapInv is the already proved natural isomorphism of def-sfb-modobj-extension-along-iso. Its inverse has source the inverse scalar-restriction functor. Mod.preservesFiniteLimits_comap proves finite-limit preservation of this restriction functor. Apply Mathlib preservesFiniteLimits_of_natIso to that inverse natural isomorphism to obtain finite-limit preservation of scalar extension. Scalar extension preserves finite colimits as the left adjoint of scalar restriction, by lem-sfb-modobj-extension-right-exact.",
    "uses": [
-    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-alpha-ring-hom",
+    "lem-sfb-alpha-iso",
+    "def-sfb-modobj-extension-along-iso",
+    "def-sfb-modobj-restriction",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Extension of scalars: transfer finite limits from inverse restriction; use the left-adjoint instance for finite colimits"
+   }
+  },
+  {
+   "text": "Form the nested conjunction of the seven properties: additivity and finite-limit and finite-colimit preservation of upperStar, then both preservation properties of mapMod, then both preservation properties of scalar extension. Each component is one of the instances established above. No restriction on the scheme morphism or on the characteristic or finiteness of the coefficient ring has been added.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
     "def-galois-exact-functor"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Conclusion paragraph: compose the two additive exact factors"
+    "place": "Conclusion: assemble the seven clauses"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "det-def-sfb-sheaf-tensor-closed",
-  "sk-def-sfb-pulled-back-coefficients",
-  "def-sfb-finite-upper-star-monoidal",
-  "lem-sfb-finite-upper-star-braided",
-  "lem-sfb-modobj-abelian",
-  "def-sp-abelian",
-  "def-sfb-finite-lower-star",
-  "def-sfb-finite-upper-lower-star-adjunction",
-  "def-weil-pbc-additive-functor",
-  "lem-sfb-finite-upper-star-exact",
   "def-sfb-modobj-transport",
-  "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-sfb-alpha-iso",
-  "lem-sfb-alpha-ring-hom",
-  "def-sfb-modobj-restriction",
-  "def-sfb-modobj-restriction-equivalence",
-  "def-sfb-modobj-extension-along-iso",
+  "lem-sfb-finite-upper-star-exact",
   "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-alpha-ring-hom",
+  "lem-sfb-alpha-iso",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-modobj-restriction",
+  "lem-sfb-modobj-extension-right-exact",
+  "def-weil-pbc-additive-functor",
   "def-galois-exact-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-  "place": "Setting, Transport, Extension of scalars, Conclusion; elementary calculations expanded"
+  "place": "Setting, Transport, Extension of scalars and Conclusion, using the existing proved source-library instances; E4, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -262,8 +211,6 @@
   ]
  },
  "tool_uses": [
-  "det-def-sfb-sheaf-tensor-closed",
-  "det-prop-sfb-module-pullback-exact-lifted",
   "lem-sfb-alpha-iso"
  ],
  "reviewed": {
@@ -291,5 +238,15 @@
   "group": "Q49",
   "result": "fix",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261019T231124-L-550010",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
