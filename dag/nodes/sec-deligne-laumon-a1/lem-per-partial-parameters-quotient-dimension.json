@@ -2,18 +2,85 @@
  "id": "lem-per-partial-parameters-quotient-dimension",
  "kind": "statement",
  "title": "Quotients by initial parts of a system of parameters have the expected dimension",
- "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], meaning that $\\mathfrak m$ is its unique maximal ideal. Let $d\\geq0$ be an integer equal to its Krull dimension $\\dim A$ [def-weil-pbc-krull-dimension-ring]. Suppose $a_1,\\ldots,a_d\\in\\mathfrak m$ generate an ideal $J=(a_1,\\ldots,a_d)$ with $\\sqrt J=\\mathfrak m$, where $\\sqrt J=\\{b\\in A:b^N\\in J\\text{ for some integer }N\\geq1\\}$. Then for every integer $i$ with $1\\leq i\\leq d$ one has $\\dim\\bigl(A/(a_1,\\ldots,a_i)\\bigr)=d-i$.",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], meaning that $\\mathfrak m$ is its unique maximal ideal. Let $d\\geq0$ be an integer equal to its Krull dimension $\\dim A$ [def-weil-pbc-krull-dimension-ring]. Suppose $a_1,\\ldots,a_d\\in\\mathfrak m$ generate an ideal $J=(a_1,\\ldots,a_d)$ with $\\sqrt J=\\mathfrak m$, where $\\sqrt J=\\{b\\in A:b^N\\in J\\text{ for some integer }N\\geq1\\}$. Then for every integer $i$ with $1\\leq i\\leq d$ one has $\\dim\\bigl(A/(a_1,\\ldots,a_i)\\bigr)=d-i$; quotient rings have the meaning of [def-weil-pbc-algebra-hom-quotient].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 02IE, lemma-elements-generate-ideal-definition (lines 14712–14718); ideal of definition means radical equal to the maximal ideal, Definition Tag 07DU, definition-ideal-definition (lines 14019–14024)."
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-algebra-hom-quotient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $i$ with $1\\le i\\le d$, and put $I=(a_1,\\ldots,a_i)$, $B=A/I$, $q:A\\twoheadrightarrow B$ and $\\mathfrak n=\\mathfrak m/I$. By [def-weil-pbc-algebra-hom-quotient], $q$ is surjective with kernel $I$. Ideals $L\\subset B$ correspond to ideals of $A$ containing $I$: the inverse maps are $L\\mapsto q^{-1}L$ and $H\\mapsto q(H)$, since $q^{-1}q(H)=H$ when $I\\subset H$. The product test for primality shows this correspondence preserves prime ideals and strict inclusions. It also preserves maximal ideals, so $B$ is nonzero local with maximal ideal $\\mathfrak n$; here $I\\subseteq\\mathfrak m$ is proper. For each $L$, finite generators of $q^{-1}L$ map to finite generators of $L$, proving $B$ Noetherian by [def-weil-pbc-noetherian-ring]. Every prime chain in $B$ lifts to one in $A$, so $0\\le e:=\\dim B\\le d$, using [def-weil-pbc-krull-dimension-ring]. In a local ring every prime lies in its unique maximal ideal, hence the height of that maximal ideal, defined as the supremum of lengths of prime chains ending below it, equals the ring dimension. In particular $\\operatorname{ht}_A(\\mathfrak m)=d$ and $\\operatorname{ht}_B(\\mathfrak n)=e$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof via repeated one-equation bounds of Tag 00KW, lemma-one-equation; the bound for a finite list is the cited height-quotient lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-height-quotient-bound] with $R=A$, $t=i$, $f_j=a_j$ for $1\\le j\\le i$, and $\\mathfrak P=\\mathfrak m$. The ring is Noetherian, $\\mathfrak m$ is prime because it is maximal, and $I\\subseteq\\mathfrak m$. Its quotient prime is $\\mathfrak n$. The height identifications in Step 1 give $d\\le e+i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof via repeated one-equation bounds of Tag 00KW, lemma-one-equation; the bound for a finite list is the cited height-quotient lemma."
+   }
+  },
+  {
+   "text": "In $B$, put $K=(q(a_{i+1}),\\ldots,q(a_d))$, with $K=(0)$ if $i=d$, and put $C=B/K$. The surjection $A\\to C$, $a\\mapsto q(a)\\bmod K$, has kernel $J$: membership of $q(a)$ in $K$ means that $a$ differs from a linear combination of $a_{i+1},\\ldots,a_d$ by an element of $I$. Thus $C\\cong A/J$, and $C\\ne0$ since $J\\subseteq\\mathfrak m$. If a prime $\\mathfrak p$ of $A$ contains $J$, then for each $b\\in\\mathfrak m=\\sqrt J$ a power $b^N$ belongs to $J\\subseteq\\mathfrak p$; repeated primality gives $b\\in\\mathfrak p$. Hence $\\mathfrak m\\subseteq\\mathfrak p$, and maximality gives $\\mathfrak p=\\mathfrak m$. By the prime correspondence proved in Step 1, $C$ therefore has exactly one prime ideal, namely $\\mathfrak n/K$. There are no strict inclusions of prime ideals in $C$, so $\\dim C=0$ by [def-weil-pbc-krull-dimension-ring]. Its unique prime has height zero for the same reason.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof via repeated one-equation bounds of Tag 00KW, lemma-one-equation; the bound for a finite list is the cited height-quotient lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-height-quotient-bound] with $R=B$, $t=d-i$, $f_1,\\ldots,f_t=q(a_{i+1}),\\ldots,q(a_d)$, and $\\mathfrak P=\\mathfrak n$. Step 1 established that $B$ is Noetherian and $\\mathfrak n$ is maximal, hence prime. Every listed generator lies in $\\mathfrak n$, and the generated ideal is $K$. The image prime is $\\mathfrak n/K$, of height zero by Step 3. Thus $e=\\operatorname{ht}_B(\\mathfrak n)\\le0+(d-i)=d-i$. The cited lemma includes $t=0$, so this application also covers $i=d$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof via repeated one-equation bounds of Tag 00KW, lemma-one-equation; the bound for a finite list is the cited height-quotient lemma."
+   }
+  },
+  {
+   "text": "Combining $d\\le e+i$ from Step 2 with $e\\le d-i$ from Step 4, and using that $d,e,i$ are finite integers, gives $e=d-i$. Since $B=A/(a_1,\\ldots,a_i)$, this is the required equality. If $d=0$ there is no $i$ in the stated range, so the assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof via repeated one-equation bounds of Tag 00KW, lemma-one-equation; the bound for a finite list is the cited height-quotient lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-noetherian-height-quotient-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IE, lemma-elements-generate-ideal-definition, proof: repeated use of Tag 00KW (lemma-one-equation), packaged by the existing finite-list height-quotient bound."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +123,45 @@
    "results": "Actual logged response: 0 hits; ; Mathlib subdirectory RingTheory",
    "date": "2026-10-19",
    "verdict": "no match: the equality ringKrullDim_add_length_eq_ringKrullDim_of_isRegular in Mathlib/RingTheory/KrullDimension/Regular.lean:210 assumes a regular sequence. Parameters of an arbitrary Noetherian local ring need not be regular. The other hits give lower bounds or require a nonzerodivisor; none directly states the partial-parameter equality. Read Regular.lean:137–227."
+  },
+  {
+   "tool": "grep",
+   "query": "(systemOfParameters|SystemOfParameters|[Pp]artial.*[Pp]arameter|ringKrullDim_le_ringKrullDim_quotient_add_card)",
+   "results": "Actual logged response: 3 hits; Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean; Mathlib/RingTheory/KrullDimension/Regular.lean; Mathlib/RingTheory/KrullDimension/Regular.lean; Mathlib subdirectory RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: Regular.lean:210 requires a regular sequence; a system of parameters need not be regular. Read Regular.lean:137-224 and KrullsHeightTheorem.lean:369-416. The height/drop inequalities supply ingredients, not the partial-parameter equality in a one-line specialization; two applications and a zero-dimensional full quotient are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local ring quotient by initial elements of system of parameters has dimension equal to dimension minus number of elements",
+   "results": "Actual logged response: 8 hits; ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; ringKrullDim_quotient_le; Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal; ringKrullDim_le_ringKrullDim_add_card; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson",
+   "date": "2026-10-19",
+   "verdict": "no match: Regular.lean:210 requires a regular sequence; a system of parameters need not be regular. Read Regular.lean:137-224 and KrullsHeightTheorem.lean:369-416. The height/drop inequalities supply ingredients, not the partial-parameter equality in a one-line specialization; two applications and a zero-dimensional full quotient are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Ideal.radical",
+   "results": "Actual logged response: 1 hits; ringKrullDim_eq_one_iff_of_isLocalRing_isDomain",
+   "date": "2026-10-19",
+   "verdict": "no match: Regular.lean:210 requires a regular sequence; a system of parameters need not be regular. Read Regular.lean:137-224 and KrullsHeightTheorem.lean:369-416. The height/drop inequalities supply ingredients, not the partial-parameter equality in a one-line specialization; two applications and a zero-dimensional full quotient are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian local ring a partial system of parameters of length i has quotient of Krull dimension dim R minus i",
+   "results": "Actual logged response: 8 hits; ringKrullDim_le_ringKrullDim_add_card; ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; ringKrullDim_le_ringKrullDim_add_spanFinrank; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim; ringKrullDim_le_ringKrullDim_quotSMulTop_succ; ringKrullDim_le_ringKrullDim_quotient_add_card",
+   "date": "2026-10-19",
+   "verdict": "no match: Regular.lean:210 requires a regular sequence; a system of parameters need not be regular. Read Regular.lean:137-224 and KrullsHeightTheorem.lean:369-416. The height/drop inequalities supply ingredients, not the partial-parameter equality in a one-line specialization; two applications and a zero-dimensional full quotient are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If dim R equals d and the radical of an ideal generated by d elements is the maximal ideal then dim R modulo the first i elements equals d minus i",
+   "results": "Actual logged response: 8 hits; ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; ringKrullDim_le_ringKrullDim_add_card; ringKrullDim_le_ringKrullDim_quotient_add_card; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim; ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank; ringKrullDim_le_ringKrullDim_quotient_add_encard; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; ringKrullDim_le_ringKrullDim_add_spanFinrank",
+   "date": "2026-10-19",
+   "verdict": "no match: Regular.lean:210 requires a regular sequence; a system of parameters need not be regular. Read Regular.lean:137-224 and KrullsHeightTheorem.lean:369-416. The height/drop inequalities supply ingredients, not the partial-parameter equality in a one-line specialization; two applications and a zero-dimensional full quotient are needed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-local-domain-open-infinite",
@@ -88,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-partial-parameters-quotient-dimension",
+  "worker": "stage1",
+  "summary": "Read Stacks 02IE and 00KW; prove both inequalities using the existing Mathlib height-quotient bound, writing out quotient Noetherianity and the unique-prime argument for the full parameter quotient. Statement unchanged mathematically; added the quotient definition citation. No new nodes and no Lean attachment.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 1, through the imported middle-t-structure/potential-dualizing and punctured-local connectedness chain recorded in blueprint.from: this is the 02IE input in the 02IG proof, used by lem-per-noetherian-local-domain-open-infinite. The split supplies exactly the initial-parameter dimension equality; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-ddbe199d6",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-ddbe199d6 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, every cited node statement and Stacks algebra.tex 02IE (line 14713, proof at 14719), 00KW (14687) and 07DU (14020). There are no new nodes. The statement matches 02IE hypothesis by hypothesis, adds no regularity assumption, and its only edit is the quotient-definition citation. Steps 2 and 4 apply the Mathlib leaf lem-weil-pbc-noetherian-height-quotient-bound. I checked that leaf as Ideal.height_le_height_add_encard_of_subset, KrullsHeightTheorem.lean:379. Step 2 applies it to (A,m,t=i), giving d<=e+i. Step 4 applies it to (B,n,t=d-i), giving e<=d-i, and covers t=0. Both applications meet every hypothesis. Steps 1 and 3 are genuinely elementary. Step 1 shows the quotient is local and Noetherian, that prime chains lift, and that ht(max)=dim. Step 3 shows A/J has a unique prime, so its dimension is 0. I tested the zero-divisor parameter case k[[x,y]]/(x^2,xy) with a_1=y, the case k[[x,y]] with (x^2,y), and d=0. The grep over the DAG finds no duplicate: the system-of-parameters existence node and the regular-sequence Mathlib equality are different statements. The citer lem-per-noetherian-local-domain-open-infinite uses i=1,2 consistently. There is no cycle, no SGA source and no tool_uses."
  }
 }
