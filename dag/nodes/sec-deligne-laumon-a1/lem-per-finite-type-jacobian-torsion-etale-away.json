@@ -1,0 +1,100 @@
+{
+ "id": "lem-per-finite-type-jacobian-torsion-etale-away",
+ "kind": "statement",
+ "title": "Ordinary Jacobian torsion away from an ideal",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I\\subseteq A$ an ideal, and $S$ a finite type commutative $A$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra]. Assume $\\operatorname{Spec}S\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$ [def-weil-affine-spectrum, def-weil-etale-morphism]. Choose a finite polynomial presentation $\\alpha:A[x_1,\\ldots,x_r]\\twoheadrightarrow S$ with kernel $K$ [def-weil-pbc-mv-polynomial-ring], and let $d_\\alpha:K/K^2\\to S^{\\oplus r}$ be the $S$-linear map $\\bar f\\mapsto(\\partial f/\\partial x_i\\bmod K)_i$. Then there exists $c\\geq0$ such that $I^c\\ker d_\\alpha=0$ and $I^c\\operatorname{coker}d_\\alpha=0$, where annihilation means that every element of $I^c$ acts as zero through $A\\to S$.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0ALQ (lemma-rig-etale), proof of part (1), converse paragraph; the finite-generation and common-power argument uses the finite presentation and Noetherian hypotheses."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cotangent|Kaehler|etale.*locus|support",
+   "results": "OK 0 hits",
+   "date": "2026-10-19",
+   "verdict": "no usable search: the supplied subdirectory Mathlib/RingTheory duplicated the Mathlib prefix, so this zero-hit result is not evidence of absence; the corrected RingTheory search is recorded below"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, H1Cotangent, KaehlerDifferential",
+   "results": "OK 0 hits; loogle: unknown identifier 'H1Cotangent'",
+   "date": "2026-10-19",
+   "verdict": "no match: returned no usable declaration for the finite-type etale-away torsion statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra etale away from an ideal, the ordinary polynomial conormal differential has kernel and cokernel killed by a power of the ideal",
+   "results": "OK 8 hits; Algebra.IsEtaleAt; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; Algebra.FormallyEtale.comp_bijective; Algebra.FormallyEtale.iff_comp_bijective; Algebra.Etale.formallyEtale; Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern etale loci or ordinary cotangent objects, not a uniform ideal-power bound for both conormal homology modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary cotangent complex of a finite type etale-away-from-an-ideal algebra has ideal-power torsion cohomology",
+   "results": "OK 8 hits; Ideal.isTorsionBySet_cotangent; Algebra.Extension.H1Cotangent; Algebra.FormallySmooth.subsingleton_h1Cotangent; Ideal.instModuleQuotientCotangent; Ideal.Cotangent; Algebra.FormallyEtale.subsingleton_h1Cotangent; Ideal.instInhabitedCotangent; Ideal.Cotangent.smul_eq_zero_of_mem",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary cotangent constructions or pointwise ideal torsion, not the finite-type uniform-power conormal conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLocus_eq_compl_support|subsingleton_h1Cotangent|isTorsionBySet_cotangent",
+   "results": "OK 17 hits; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: etaleLocus_eq_compl_support describes support, and formally etale cotangent vanishing describes local vanishing; neither supplies the uniform ideal-power annihilation of both ordinary conormal homology modules. Ideal.isTorsionBySet_cotangent instead says the relation ideal K kills K/K^2, not that a power of the base ideal I kills the kernel and cokernel of the conormal differential."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, Ideal",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: the valid qualified-name query returned no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring, a finitely presented algebra which is etale outside V(I) has both first cotangent homology and Kahler differentials annihilated by a uniform power of I",
+   "results": "OK 8 hits; Algebra.etaleLocus_eq_compl_support; Algebra.smoothLocus_eq_compl_support_inter; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; Algebra.IsEtaleAt; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-19",
+   "verdict": "no match: etaleLocus_eq_compl_support describes support, and formally etale cotangent vanishing describes local vanishing; neither supplies the uniform ideal-power annihilation of both ordinary conormal homology modules. Ideal.isTorsionBySet_cotangent instead says the relation ideal K kills K/K^2, not that a power of the base ideal I kills the kernel and cokernel of the conormal differential."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-etale-away-completed-cotangent-torsion",
+  "date": "2026-10-19",
+  "group": "Q125"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tag 0ALQ (lemma-rig-etale), proof of part (1), converse paragraph: etaleness after inverting each element of I makes the ordinary conormal complex acyclic on each principal open, and finite generation gives one common power of I.",
+   "via": [
+    "lem-per-etale-away-completed-cotangent-torsion",
+    "lem-per-completed-retraction-conormal-torsion",
+    "lem-per-etale-away-completion-hom-lifting",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

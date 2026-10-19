@@ -15,9 +15,79 @@
   "def-weil-affine-spectrum",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $S$ is finite type over the Noetherian ring $A$, it is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Applying [lem-weil-pbc-adic-completion-noetherian] to $S$ and the ideal $IS$ shows that $B=\\varprojlim_n S/I^nS$ is Noetherian. The images in $S$ of a finite generating set for $I$ generate $IS$; such a set exists by [def-weil-pbc-noetherian-ring]. Hence [lem-weil-pbc-adic-completion-mod-ideal] identifies $B/IB$ with $S/IS$ and proves that $B$ is $IB$-adically complete. The quotient $S/IS$ is finite type over $A/I$ by the finite-type presentation, so the same holds for $B/IB$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0AJQ (lemma-topologically-finite-type-Noetherian), parts (1) and (3), and 05GG for completeness and reduction modulo I"
+   }
+  },
+  {
+   "text": "Choose a finite polynomial presentation $\\alpha:A[x_1,\\ldots,x_s]\\twoheadrightarrow S$ with finitely generated kernel $K$, using [lem-weil-pbc-finite-type-noetherian-finite-presentation]. The ordinary conormal map $d_\\alpha:K/K^2\\to S^{\\oplus s}$ has a power $I^c$ annihilating both its kernel and cokernel by [lem-per-finite-type-jacobian-torsion-etale-away]. Independently, the complete finite-type reduction hypotheses from Step 1 give a finite restricted-polynomial presentation $\\beta:P=\\widehat{A[x_1,\\ldots,x_r]}_I\\twoheadrightarrow B$ for some $r\\geq0$; this is the presentation-existence clause of [lem-per-completed-cotangent-transitivity] specialized to the identity map $B\\to B$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-per-finite-type-jacobian-torsion-etale-away",
+    "lem-per-completed-cotangent-transitivity",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0ALQ(1), 0AJU(3), 0AJP and 0AJQ(3), which choose the ordinary and completed presentations"
+   }
+  },
+  {
+   "text": "Apply [lem-per-completed-jacobian-homology-comparison] to the ordinary presentation $\\alpha$ and the arbitrary completed presentation $\\beta$. It gives $\\widehat{M}_1\\cong\\ker\\delta$ and $\\widehat{M}_0\\cong\\operatorname{coker}\\delta$, where $M_1=\\ker d_\\alpha$, $M_0=\\operatorname{coker}d_\\alpha$, and $\\delta$ is exactly the continuous partial-derivative map in the statement. Since $I^cM_i=0$, every quotient $M_i/I^nM_i$ is also killed by $I^c$, and therefore their inverse limits $\\widehat M_i$ are killed by $I^c$. Transporting this annihilation across the two displayed isomorphisms proves $I^c\\ker\\delta=I^c\\operatorname{coker}\\delta=0$. The comparison applies to every choice of $\\beta$, so the bound holds for every presentation.",
+   "uses": [
+    "lem-per-completed-jacobian-homology-comparison",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALQ(1), together with Tag 0GAF (lemma-NL-is-completion), and the definition of the inverse-limit completion"
+   }
+  },
+  {
+   "text": "The map $\\delta$ is well-defined because continuous polynomial differentiation is the completion of polynomial differentiation, as in the presentation comparison; its source and target are the two terms in degrees $-1$ and $0$ of the stated complex. Thus the preceding annihilation assertion is precisely the claimed bounded completed cotangent torsion, and Steps 1--3 establish all remaining clauses.",
+   "uses": [
+    "lem-per-completed-jacobian-homology-comparison",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AJR (equation-NL) and Tag 0GAF (lemma-NL-is-completion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-completed-cotangent-transitivity",
+  "lem-per-completed-jacobian-homology-comparison",
+  "lem-per-finite-type-jacobian-torsion-etale-away",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0ALQ (lemma-rig-etale), part (1), with 0AJU(3), 0AJP, 0AJQ and 0GAF for presentations and completion comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-retraction-conormal-torsion",
@@ -68,7 +138,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; The generic homomorphism-lifting input; the source is only finite type and the target need not be finite or etale. Supporting input: Stacks 0AKJ, existence paragraph after reduction to A=C: the conormal module of the completed retraction kernel is annihilated by a power of I, using 0ALQ and 0ALM. The 0ALQ input to conormal annihilation in 0AKJ, before homomorphism algebraization.",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the 0ALQ input to conormal annihilation in 0AKJ, before homomorphism algebraization; the proof now realizes the ordinary finite-type Jacobian torsion and its 0GAF completion comparison.",
    "via": [
     "lem-per-completed-retraction-conormal-torsion",
     "lem-per-etale-away-completion-hom-lifting",
@@ -82,5 +152,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-away-completed-cotangent-torsion",
+  "worker": "stage1",
+  "summary": "Splits the bounded completed cotangent torsion assertion into Noetherian/completion preparation, an ordinary finite-type Jacobian torsion lemma from Stacks 0ALQ(1), and the existing 0GAF comparison of ordinary and completed conormal homology for every presentation. The completed kernel and cokernel inherit the common ideal-power annihilator through inverse-limit quotients.",
+  "blueprint": "Realizes the 0ALQ conormal-annihilation input used in the current split of lem-per-artin-gabber-affine-curve Step 1 and before algebraization in the recorded 0AKJ chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e9e18ae1b",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e9e18ae1b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node against Stacks restricted.tex: 0ALQ(1) and its converse paragraph, 0AJU(3), 0AJP/0AJQ, 0AJR/0GAE and 0GAF. The item statement and stmt_deps are byte-identical to the live unsplit node, so nothing was weakened. Step 1: S is Noetherian (00FN leaf). The completion-Noetherian node applied to (S,IS) makes B Noetherian, and 05GG applied to the f.g. ideal IS gives IB-adic completeness and B/IB ≅ S/IS, which is finite type over A/I. Step 2: the presentation α comes from 00FP, and the new node gives I^c on ker and coker of d_α. The completed presentation β comes from the existence clause of lem-per-completed-cotangent-transitivity with the identity map B→B; that clause is in its statement and its hypotheses are exactly Step 1. Step 3: the 0GAF comparison node holds for any β and gives B-linear isomorphisms M̂_1 ≅ ker δ and M̂_0 ≅ coker δ. I^c kills each M_i/I^nM_i, so it kills their limit, and the A-action goes through A→B, so the annihilation transfers. Step 4 is elementary. proof_deps equals the union of the uses. The new node lem-per-finite-type-jacobian-torsion-etale-away is true by the 0ALQ converse argument: for each a in I, S_a is étale over A_a, so NL vanishes after inverting a. H^{-1} and H^0 are finite, so a power of a kills them, and finitely many generators of I give one common power. It holds for I=0, I=A, S=0 and Z→Z[x]/(px) with I=(p) (c=1). It is about the uncompleted complex, so it is strictly smaller than the item and does not restate it. No duplicate: I searched for 0ALQ, 'etale over … V(I)', I^c with étale, and conormal/naive-cotangent wording, and read 7 related nodes; the same argument appears only inside the proof of lem-per-completed-etale-jacobian-torsion (finite E over a complete base), which cannot be cited here. B1–B9 hold, and three kinds of Mathlib search are recorded. Route: the only off-unit non-leaf statement is lem-weil-pbc-adic-completion-noetherian (unit sk-thm-p1). sk-thm-p1 is reached through the unit's transitive uses, and the node is Lean-closed. No tool_uses, no cycle, no SGA. The citer lem-per-completed-retraction-conormal-torsion is unaffected. Cosmetic only: the Step 1 source field names restricted.tex for 05GG, which is in algebra.tex."
  }
 }
