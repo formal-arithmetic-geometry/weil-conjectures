@@ -107,7 +107,70 @@ theorem twoStepGraded_homotopy (b : Bool) (K L : TwoStepModuleComplex R)
     (f g : K ⟶ L) (h : twoStepModuleHomotopyRel R f g) :
     (twoStepGradedComplex R b ⋙ DerivedCategory.Q).map f =
       (twoStepGradedComplex R b ⋙ DerivedCategory.Q).map g := by
-  sorry
+  classical
+  obtain ⟨h, hh⟩ := h
+  let : Mono L.obj.hom := L.property
+  cases b
+  · change DerivedCategory.Q.map ((coker _).map f.hom) =
+      DerivedCategory.Q.map ((coker _).map g.hom)
+    let πK := cokernel.π K.obj.hom
+    let πL := cokernel.π L.obj.hom
+    have hz (n m : ℤ) : K.obj.hom.f n ≫ h.hom n m ≫ πL.f m = 0 := by
+      obtain ⟨l, hl⟩ := hh n m
+      rw [← Category.assoc, ← hl, Category.assoc]
+      have hc := HomologicalComplex.congr_hom (cokernel.condition L.obj.hom) m
+      change L.obj.hom.f m ≫ πL.f m = 0 at hc
+      rw [hc, comp_zero]
+    let lift (n m : ℤ) : (cokernel K.obj.hom).X n ⟶ (cokernel L.obj.hom).X m :=
+      (PreservesCokernel.iso
+        (HomologicalComplex.eval (ModuleCat R) (ComplexShape.up ℤ) n) K.obj.hom).hom ≫
+        cokernel.desc (K.obj.hom.f n) (h.hom n m ≫ πL.f m) (hz n m)
+    have hlift (n m : ℤ) : πK.f n ≫ lift n m = h.hom n m ≫ πL.f m := by
+      dsimp [lift, πK]
+      have he := PreservesCokernel.π_iso_hom
+        (HomologicalComplex.eval (ModuleCat R) (ComplexShape.up ℤ) n) K.obj.hom
+      change (cokernel.π K.obj.hom).f n ≫ _ = cokernel.π (K.obj.hom.f n) at he
+      rw [← Category.assoc, he, cokernel.π_desc]
+    apply DerivedCategory.Q_map_eq_of_homotopy
+    refine ⟨lift, ?_, ?_⟩
+    · intro n m hnm
+      apply (cancel_epi (πK.f n)).1
+      rw [hlift, h.zero n m hnm, zero_comp, comp_zero]
+    · intro n
+      apply (cancel_epi (πK.f n)).1
+      have hf := HomologicalComplex.congr_hom ((coker.π _).naturality f.hom) n
+      have hg := HomologicalComplex.congr_hom ((coker.π _).naturality g.hom) n
+      change f.hom.right.f n ≫ πL.f n =
+        πK.f n ≫ ((coker _).map f.hom).f n at hf
+      change g.hom.right.f n ≫ πL.f n =
+        πK.f n ≫ ((coker _).map g.hom).f n at hg
+      have hc := h.comm n
+      simp only [dNext, prevD, AddMonoidHom.mk'_apply] at hc ⊢
+      simp only [Preadditive.comp_add, ← Category.assoc]
+      erw [πK.comm, Category.assoc, hlift, hlift, Category.assoc, πL.comm]
+      rw [← hg]
+      simpa only [Preadditive.add_comp, Category.assoc] using
+        hf.symm.trans (congrArg (· ≫ πL.f n) hc)
+  · change DerivedCategory.Q.map f.hom.left = DerivedCategory.Q.map g.hom.left
+    choose lift hlift using hh
+    apply DerivedCategory.Q_map_eq_of_homotopy
+    refine ⟨lift, ?_, ?_⟩
+    · intro n m hnm
+      apply (cancel_mono (L.obj.hom.f m)).1
+      rw [hlift, h.zero n m hnm, comp_zero, zero_comp]
+    · intro n
+      apply (cancel_mono (L.obj.hom.f n)).1
+      have hf := congrArg (fun k ↦ k.f n) f.hom.w
+      have hg := congrArg (fun k ↦ k.f n) g.hom.w
+      have hc := h.comm n
+      simp only [dNext, prevD, AddMonoidHom.mk'_apply] at hc ⊢
+      simp only [Preadditive.add_comp, Category.assoc, hlift]
+      simp only [← L.obj.hom.comm, ← Category.assoc, hlift]
+      simp only [← K.obj.hom.comm, Category.assoc]
+      simp only [HomologicalComplex.comp_f] at hf hg
+      rw [hf, hg]
+      simpa only [Preadditive.comp_add, Category.assoc] using
+        congrArg (K.obj.hom.f n ≫ ·) hc
 
 /-- Each graded operation descends to the filtered homotopy category.
 Source: Stacks, Tags 012K and 03TB
@@ -126,7 +189,11 @@ homotopy quotient preserves those images.
 (blueprint: def-trf-two-step-filtered-module-derived). -/
 theorem twoStepGraded_inverts (b : Bool) :
     (twoStepModuleQuasiIso R).IsInvertedBy (twoStepGradedHomotopy R b) := by
-  sorry
+  intro K L q hq
+  obtain ⟨f, rfl, hf⟩ := hq
+  change IsIso (DerivedCategory.Q.map ((twoStepGradedComplex R b).map f))
+  have := hf b
+  infer_instance
 
 /-- The canonical graded functors `DF₂(R) → D(R)`; they are the localization lifts
 of subcomplex and quotient, with no choice of a graded model or arbitrary map.
