@@ -1,0 +1,166 @@
+{
+ "id": "lem-zl-smooth-affine-filtration-finite-field-descent",
+ "kind": "statement",
+ "title": "A prescribed smooth affine geometric filtration descends to one finite subfield",
+ "statement": "Fix finite-field data k_0=F_q and its algebraic closure k, with the specified subfields k_m=F_(q^m) [def-weil-finite-field-fiber]. Let X_0 be a separated finite-type k_0-scheme [def-weil-proper-morphism; def-weil-finite-type-morphism], X=X_0×_(k_0)k [def-pc-base-change], and suppose a particular SmoothAffineFiltration H of X_red of length n has already been given, in the precise sense of [lem-zl-smooth-affine-geometric-filtration]. Thus all H pieces are nonempty smooth geometrically connected affine schemes, with fixed dimensions d_a and commuting inclusions; there is no prescribed partition in this assertion. There are m≥1 and a SmoothAffineFiltration M of (X_m)_red of the same length n, where X_m=X_0×_(k_0)k_m, with the same dimensions and with isomorphisms between the geometric base changes of its pieces and the prescribed pieces of H. These isomorphisms commute with the maps into X under an ambient base-change isomorphism (X_m)_k≅X. If n>0 its final term is literally the canonical empty k_m-scheme. If n=0 only emptiness of that term is required, so that the literal initial term can remain (X_m)_red. No existence or construction of the geometric filtration is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM, lemma-descend-finite-presentation; Tag 01ZP, lemma-descend-closed-immersion-finite-presentation; varieties.tex Tag 0388, lemma-descend-open; descent.tex Tag 02L5, lemma-descending-property-affine; varieties.tex Tag 0387, lemma-characterize-geometrically-connected. This is the simultaneous finite-field model step in thm-zl-real-mixed-by-curves, proof paragraphs 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "lem-zl-smooth-affine-geometric-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse system of the prescribed ambient base changes over finite intermediate fields of k/k_0. Each geometric closed term is finitely presented over X because X is locally Noetherian. Descend these closed immersions as objects over X by Scheme.exists_isPullback_of_finitePresentation. A common lower bound for their finitely many stages supplies models and cartesian squares for the entire family. No diagram of arrows or open pieces needs to be descended separately.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-weil-finite-field-fiber",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the chosen finite intermediate field L take m=[L:k_0]>0. The finite-dimensional cardinality formula gives |L|=q^m. Uniqueness of the subfield in the fixed algebraic closure identifies L with extensionSubfield m. Its k_0 embedding equals extensionEmbedding m because their composites with the injective subfield inclusion agree. Transport the cartesian squares and the ambient pullback comparison along these equalities.",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure",
+    "def-weil-finite-field-fiber",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient projection and the projections from geometric closed terms are faithfully flat and quasi-compact. Reducedness and the closed-immersion property descend to the models. The initial closed model is surjective onto the ambient scheme, so uniqueness of a reduced closed subscheme with full image identifies it with the ambient reduction. The last model is empty by surjectivity. Normalize these endpoints by objectwise isomorphisms, with the zero endpoint taking priority in length zero. This proves normalize_closed_models and transports all cartesian squares.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Surjectivity reflects inclusion of the models' closed images from the geometric chain. Reducedness gives unique factorization through each reduced closed model, hence the chain inclusions. Define each finite-field piece as the open complement of the next closed term. Pullback cancellation shows that its geometric inverse image is the specified complement; the open-immersion pullback criterion gives the geometric piece comparison. These steps are proved in filtration_of_closed_models.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affineness and smoothness of the prescribed relative dimensions descend along the faithfully flat field extension. Geometric connectedness is equivalent after field extension, and a geometric point maps to a point of each model piece. The ambient and piece equations follow from their cartesian squares. Apply both projections of the ambient pullback to prove the exact comparison equation in the conclusion.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-geometrically-connected-check-after-extension",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-field-fiber",
+  "def-weil-open-immersion",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-unique-subfield-of-closure",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM applied only to objects over the ambient inverse system; fpqc descent of reducedness, closed immersions and affine morphisms (descent.tex Tag 02L5); varieties.tex Tag 054N for geometric connectedness after field extension. Complete G4 Lean proof, 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of finitely presented schemes over an algebraic field extension descends to a finite subextension",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation",
+   "results": "0 hits:  (loogle: unknown identifier 'AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation')",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|descend.*finitePresentation|exists_isPullback_of_finitePresentation",
+   "results": "25 hits: Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of finitely presented schemes over an algebraic field extension descends to a finite subextension",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact; AlgebraicGeometry.IsLocalAtTarget.descendsAlong; AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SmoothAffineFrontierStratification",
+  "date": "2026-10-19",
+  "group": "G4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 6-7: A prescribed smooth affine geometric filtration descends to one finite subfield",
+   "via": [
+    "lem-zl-smooth-affine-frontier-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.SmoothAffineFiltrationFiniteFieldDescent",
+  "file": "lean/Sheaf/DeligneLaumon/SmoothAffineFiltrationFiniteFieldDescent.lean",
+  "declaration": "WeilConjectures.exists_smooth_affine_filtration_finite_field_model",
+  "statement": "theorem exists_smooth_affine_filtration_finite_field_model\n    (D : FiniteFieldDatum.{u}) (X₀ : Scheme.{u})\n    (a₀ : X₀ ⟶ Spec (CommRingCat.of D.k₀))\n    [IsSeparated a₀] [LocallyOfFiniteType (Over.mk a₀).hom]\n    [QuasiCompact (Over.mk a₀).hom]\n    (n : ℕ)\n    (H : SmoothAffineFiltration\n      (Over.mk ((D.geometricFiber (Over.mk a₀)).left.nilradical.subschemeι ≫\n        (D.geometricFiber (Over.mk a₀)).hom)) n) :\n    ∃ (m : ℕ) (hm : 1 ≤ m),\n      let km := D.extensionSubfield m hm\n      let Sm := Spec (CommRingCat.of km)\n      let Xm := (Over.pullback\n        (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm)))).obj (Over.mk a₀)\n      let X := D.geometricFiber (Over.mk a₀)\n      let BC := Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap km D.k)))\n      ∃ (χ : BC.obj Xm ≅ X)\n        (M : SmoothAffineFiltration\n          (Over.mk (Xm.left.nilradical.subschemeι ≫ Xm.hom)) n),\n        (n ≠ 0 → M.closed (Fin.last n) = Over.mk (Scheme.emptyTo Sm)) ∧\n        ∀ a : Fin n, M.dimension a = H.dimension a ∧\n          ∃ e : BC.obj (M.piece a) ≅ H.piece a,\n            (BC.map (M.pieceInclusion a ≫ M.intoAmbient a.castSucc ≫\n              Over.homMk Xm.left.nilradical.subschemeι (by simp)) ≫ χ.hom).left =\n              e.hom.left ≫ (H.pieceInclusion a ≫ H.intoAmbient a.castSucc).left ≫\n                X.left.nilradical.subschemeι",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T160419-L-3355411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T160419-L-3355411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

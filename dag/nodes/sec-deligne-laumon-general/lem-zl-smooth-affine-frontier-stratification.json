@@ -23,143 +23,65 @@
  ],
  "proof": [
   {
-   "text": "If $X_0=\\varnothing$, take $m=1$ and the empty chain. Otherwise $X=X_0\\times_{k_0}k$ is finite type over the field $k$, hence Noetherian; reduction has the same underlying topological space. We work with the reduced induced closed subscheme $X_{\\mathrm{red}}$ and the given finite locally closed partition (intersecting each $T_\\nu$ with the reduction). The field $k=\\overline{\\mathbf F}_q$ is perfect.",
+   "text": "Apply the proved geometric-filtration theorem to the reduction of X with the locally closed cover supplied by T. This constructs the closed chain and its nonempty smooth affine geometrically connected pieces by Noetherian induction, each lying in a prescribed stratum. The separate generic good-frontier-refinement theorem and simultaneous irreducible-component construction are unnecessary.",
    "uses": [
+    "lem-zl-smooth-affine-geometric-filtration",
     "def-weil-finite-field-fiber",
-    "def-pc-base-change",
-    "def-weil-finite-type-morphism",
     "def-weil-pbc-scheme-reduction",
-    "def-pc-reduced-scheme",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "def-constructible-stratification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B8X; the finite-type and reduction conventions used in the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the Noetherian good-refinement lemma to the finite partition of $X_{\\mathrm{red}}$. Its finite locally closed refinement has the frontier property: the closure of every refined part is a union of refined parts. In particular each refined part lies in one of the original $T_\\nu$, and the closure filtration can be ordered so that removing a union of maximal parts leaves a closed subset.",
+   "text": "Apply the finite-field model theorem to this already constructed geometric filtration. It returns one extension k_m, the ambient comparison, a closed filtration of (X_m)_red, and geometric comparison isomorphisms for every piece preserving relative dimensions and ambient maps.",
    "uses": [
-    "lem-sfb-noetherian-good-stratification-refinement"
+    "lem-zl-smooth-affine-filtration-finite-field-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification"
-   }
+   "elementary": false
   },
   {
-   "text": "We now construct the pieces by strong induction on closed subsets. For a nonempty reduced closed subscheme $Y$ of $X_{\\mathrm{red}}$, take its finitely many irreducible components. For each component $C$, the locally closed part of the refined partition containing its generic point contains a nonempty open of $C$: remove the other components and use the locally closed description. Intersect this open with the dense smooth locus supplied by [lem-pur-geometrically-reduced-dense-smooth-open] (geometric reducedness follows from [lem-kun-geometric-reduced-perfect]) and then with an affine principal open. The resulting $U_C$ is nonempty, smooth, affine, irreducible, and lies in the selected original $T_\\nu$. The $U_C$ are pairwise disjoint after removing the other components.",
+   "text": "For a positive-length filtration choose exactly one component in each layer, with its inclusion the identity. The cover and pairwise disjointness assertions are immediate. For a zero-length filtration the reduced ambient scheme is empty; use a one-step chain from that empty reduction to the canonical empty scheme and take no components. This avoids requiring a literal equality of arbitrary isomorphic empty objects.",
    "uses": [
-    "lem-weil-pbc-noetherian-finite-components",
-    "lem-sfb-noetherian-component-open",
-    "lem-kun-geometric-reduced-perfect",
-    "lem-pur-geometrically-reduced-dense-smooth-open",
-    "def-weil-locally-closed-subset"
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B8X, lemma-dense-smooth-open-variety-over-perfect-field; affine shrinking in the proof"
-   }
+   "elementary": true
   },
   {
-   "text": "The finite union $U=\\coprod_CU_C$ is open in $Y$ and dense in every component. Its complement is a proper closed subset of $Y$; equip it with the reduced induced structure and apply the induction hypothesis. The resulting closed complements give a finite chain $Y=Y_0\\supset Y_1\\supset\\cdots\\supset Y_r=\\varnothing$, and each difference is the finite disjoint union of the selected $U_C$ belonging to that stage. The frontier property from Step 2 ensures that each difference is open in the corresponding $Y_a$ and that every closure is a union of later differences.",
+   "text": "For a dimension-zero piece V, etaleness and separatedness make the diagonal clopen in V×V. This product is connected by geometric connectedness and the diagonal is nonempty, so it is surjective and hence an isomorphism. Thus V→Spec k_m is a monomorphism. It is flat, so the Mathlib flat-monomorphism criterion makes it an open immersion. Geometric connectedness makes it surjective; therefore it is an isomorphism. The Lean proof checks this diagonal argument directly.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-sfb-noetherian-good-stratification-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B8X and Tag 06LH; Noetherian induction in the proof paragraphs 6-7"
-   }
-  },
-  {
-   "text": "Each selected $U_C$ is irreducible, hence connected. Over the algebraically closed field $k$, connectedness after every field extension is geometric connectedness. Smoothness has locally constant fibre dimension by [sbc-lem-smooth-relative-dimension-locally-constant]; since $U_C$ is connected, this dimension is one integer $d_C\\ge0$. Thus the geometric chain has exactly the asserted smooth, geometrically connected affine pieces and constant dimensions.",
-   "uses": [
-    "sbc-lem-smooth-relative-dimension-locally-constant",
     "def-sbc-smooth-morphisms",
     "def-pc-geometrically-irreducible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B8X; Tag 02G1 for local constancy of relative dimension"
-   }
+   "elementary": false
   },
   {
-   "text": "There are only finitely many schemes, inclusions, affine charts, component inclusions, and containment relations in this construction. All are of finite presentation over $k$. Regard $k=\\varinjlim_n\\mathbf F_{q^n}$ as the directed union of its finite subfields. The finite-presentation spreading-out theorem [thm-pd-spreading-out] descends this entire finite diagram, including the closed chain and all open immersions, to one stage $k_m=\\mathbf F_{q^m}$; enlarge $m$ so that the descended equations for every inclusion into the selected $T_\\nu$ hold after geometric base change. The resulting base changes are the original $Z_a$ and $U_{a,b}$, so the displayed containment in some $T_\\nu$ is preserved.",
-   "uses": [
-    "thm-pd-spreading-out",
-    "lem-zl-bertini-finite-field-descent",
-    "def-pc-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM, clauses (1)--(3); finite constant-field model construction in blueprint proof paragraphs 6-7"
-   }
-  },
-  {
-   "text": "At the descended stage, smoothness of every affine piece follows after increasing $m$ from [lem-weil-pbc-descend-smooth-qcqs], applied to the finite-presentation piece morphisms over the system of finite fields. The open immersions persist by [lem-weil-pbc-descend-open-immersion-qcqs], while the chain inclusions $Z_{a+1}\\hookrightarrow Z_a$ persist as closed immersions by [lem-weil-pbc-descend-closed-immersion]. Affineness is retained by choosing the descended affine charts from their finite algebra presentations. Finally apply [lem-zl-affine-geometric-components-finite-extension] to each descended affine smooth model and enlarge $m$ once more; its geometrically connected component whose geometric fibre is $U_{a,b}$ is then defined over $k_m$. All finitely many enlargements are replaced by one common multiple.",
-   "uses": [
-    "lem-weil-pbc-descend-smooth-qcqs",
-    "lem-weil-pbc-descend-open-immersion-qcqs",
-    "lem-weil-pbc-descend-closed-immersion",
-    "lem-zl-affine-geometric-components-finite-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C and Tag 0EUU; Tag 038E for finite-field component descent"
-   }
-  },
-  {
-   "text": "The finite-field chain is $Z_0=(X_m)_{\\mathrm{red}}\\supset\\cdots\\supset Z_t=\\varnothing$, and its differences are the finite disjoint unions just constructed. Each component piece is open and closed in its difference $U_a$ because the components were separated by the principal-open construction and the frontier ordering. Every object and inclusion is defined over $k_m$. If one piece has dimension zero, Tag 06LH first makes it finite over $k_m$; smoothness makes it reduced, so geometric connectedness leaves a single reduced point, and its residue field must equal $k_m$ because the geometric base change is connected. Thus $U_{a,b}\\cong\\operatorname{Spec}k_m$. This proves every clause of the statement.",
+   "text": "Use the geometric piece comparison to obtain its image containment in one T_nu. A map from a reduced scheme whose image lies in an immersion factors through that immersion: first lift to the open coborder, then factor through its closed immersion using reducedness. This is proved as reduced_factors_immersion. The resulting factor is an immersion because its composite with T_nu→X_red is one. The ambient equations follow by composition and the comparison equation.",
    "uses": [
     "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "lem-zl-affine-geometric-components-finite-extension"
+    "def-pc-reduced-scheme",
+    "def-pc-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0; final assembly of paragraphs 6-7"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-constructible-stratification",
   "def-pc-base-change",
   "def-pc-geometrically-irreducible",
   "def-pc-reduced-scheme",
   "def-sbc-smooth-morphisms",
   "def-weil-closed-immersion",
   "def-weil-finite-field-fiber",
-  "def-weil-finite-type-morphism",
-  "def-weil-locally-closed-subset",
   "def-weil-open-immersion",
   "def-weil-pbc-scheme-reduction",
-  "lem-kun-geometric-reduced-perfect",
-  "lem-pur-geometrically-reduced-dense-smooth-open",
-  "lem-sfb-noetherian-component-open",
-  "lem-sfb-noetherian-good-stratification-refinement",
-  "lem-weil-pbc-descend-closed-immersion",
-  "lem-weil-pbc-descend-open-immersion-qcqs",
-  "lem-weil-pbc-descend-smooth-qcqs",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-zl-affine-geometric-components-finite-extension",
-  "lem-zl-bertini-finite-field-descent",
-  "sbc-lem-smooth-relative-dimension-locally-constant",
-  "thm-pd-spreading-out"
+  "lem-zl-smooth-affine-filtration-finite-field-descent",
+  "lem-zl-smooth-affine-geometric-filtration"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-  "place": "Paragraphs 6-7, expanded with Stacks Tags 0B8X, 06LH, 01ZM, 0EUU and 0C0C"
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B8X and 06LH; limits.tex Tag 01ZM; complete G4 Lean proof via geometric Noetherian induction, proved finite-field model descent, and diagonal classification in dimension zero, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -272,12 +194,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-noetherian-good-stratification-refinement",
-  "lem-weil-pbc-descend-smooth-qcqs",
-  "lem-weil-pbc-descend-open-immersion-qcqs",
-  "thm-pd-spreading-out",
-  "lem-zl-affine-geometric-components-finite-extension",
-  "lem-weil-pbc-descend-closed-immersion"
+  "thm-pd-spreading-out"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -304,5 +221,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Statement, dependencies, edge cases, documentation, route-pivot constraints, and per-file compilation all checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T160419-L-3355411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

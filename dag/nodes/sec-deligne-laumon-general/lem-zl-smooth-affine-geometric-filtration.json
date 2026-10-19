@@ -1,0 +1,157 @@
+{
+ "id": "lem-zl-smooth-affine-geometric-filtration",
+ "kind": "statement",
+ "title": "Geometric smooth affine closed filtration adapted to a finite locally closed cover",
+ "statement": "Let k be an algebraically closed field [def-weil-algebraic-closure], and let Y be a reduced finite-type k-scheme [def-pc-reduced-scheme; def-weil-finite-type-morphism]. Let (P_a) indexed by a finite set A be locally closed subsets of Y whose union is Y [def-weil-locally-closed-subset]. Then there is a natural number n and reduced closed subschemes Y=Z_0 ⊇ Z_1 ⊇ ... ⊇ Z_n with Z_n empty [def-weil-closed-immersion]. For every b<n the open complement U_b=Z_b\\Z_{b+1} is nonempty, affine [def-weil-affine-spectrum], geometrically connected [def-pc-geometrically-irreducible], smooth of one constant nonnegative relative dimension over k [def-sbc-smooth-morphisms], and contained in some P_a. The inclusions and the maps Z_b→Y commute. The structure SmoothAffineFiltration records these schemes, maps, dimensions and properties, with literal equality of Z_0 and Y and emptiness of the final underlying space. If Y is empty, n=0 is permitted. No disjointness of the cover P_a is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B8X, lemma-dense-smooth-open-variety-over-perfect-field; morphisms.tex Tags 02G1 and 02G2; the Noetherian induction of thm-zl-real-mixed-by-curves, proof paragraphs 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-closed-subset",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "A finite locally closed cover of a nonempty space has a member with nonempty interior: otherwise each member is nowhere dense, and a finite union of nowhere dense subsets cannot be the whole nonempty space. Take such an open in one P_a. This argument is proved directly in exists_open_in_partition, using the locally closed description.",
+   "uses": [
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Y is Noetherian. On the chosen nonempty open, intersect with the dense smooth locus. Here the complete reduced-perfect-field version is already proved in Mathlib as Scheme.Hom.dense_smoothLocus_of_perfectField; no unproved geometric-reducedness lemma is used. Inside a nonempty open of an irreducible component, shrink to an affine open with constant smooth relative dimension, using Smooth.exists_smoothOfRelativeDimension_resLE. This is irreducible and hence connected. Over the algebraically closed field it is geometrically connected.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-component-open",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-separably-closed-geometrically-connected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the closed complement of this open its reduced induced structure. Its image is strictly smaller than the original closed subset, since the removed open is nonempty. Induct on the well-founded strict inclusion order of closed subsets of the ambient Noetherian space. The induction assertion carries an arbitrary reduced finite-type closed immersion Y→X with the prescribed closed image, and the pulled-back finite locally closed cover. For an empty Y construct the length-zero filtration explicitly.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prepend Y and the chosen open to the filtration of its reduced complement. Compose the later ambient maps with the closed inclusion. The complement-image equations and partition containment follow from composition; all reducedness, immersion and smoothness fields are preserved. This is the explicit prependFiltration construction, followed by the proved induction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-locally-closed-subset",
+  "def-weil-open-immersion",
+  "lem-sfb-noetherian-component-open",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B8X, lemma-dense-smooth-open-variety-over-perfect-field; morphisms.tex Tags 02G1 and 02G2; the Noetherian induction of thm-zl-real-mixed-by-curves, proof paragraphs 6-7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced finite type scheme over a perfect field has a finite chain of closed subschemes with smooth affine strata refining a given finite locally closed partition",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.Scheme.affineOpenCover_idx, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "12 hits: AlgebraicGeometry.smoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.SmoothOfRelativeDimension, AlgebraicGeometry.SmoothOfRelativeDimension.smooth, AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.smoothOfRelativeDimension_comp, AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification|dense_smooth|smoothLocus",
+   "results": "23 hits: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced finite type scheme over a perfect field has a finite chain of closed subschemes with smooth affine strata refining a given finite locally closed partition",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsReduced.mk; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsReduced.casesOn; AlgebraicGeometry.IsReduced.of_openCover; AlgebraicGeometry.IsReduced.recOn",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SmoothAffineFrontierStratification",
+  "date": "2026-10-19",
+  "group": "G4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 6-7: Geometric smooth affine closed filtration adapted to a finite locally closed cover",
+   "via": [
+    "lem-zl-smooth-affine-frontier-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.SmoothAffineGeometricFiltration",
+  "file": "lean/Sheaf/DeligneLaumon/SmoothAffineGeometricFiltration.lean",
+  "declaration": "WeilConjectures.exists_smooth_affine_geometric_filtration",
+  "statement": "theorem exists_smooth_affine_geometric_filtration\n    {k : Type u} [Field k] [IsAlgClosed k]\n    (Y : Over (Spec (.of k))) [IsReduced Y.left]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    {A : Type v} [Finite A] (P : A → Set Y.left)\n    (hl : ∀ a, IsLocallyClosed (P a)) (hc : (⋃ a, P a) = Set.univ) :\n    ∃ (n : ℕ) (H : SmoothAffineFiltration Y n),\n      ∀ b : Fin n, ∃ a, Set.range\n        (H.pieceInclusion b ≫ H.intoAmbient b.castSucc).left ⊆ P a",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-19",
+  "declarations": [
+   "WeilConjectures.SmoothAffineFiltration",
+   "WeilConjectures.exists_smooth_affine_geometric_filtration"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T160419-L-3355411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T160419-L-3355411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
