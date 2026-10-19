@@ -17515,3 +17515,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:33 L: merged deliver/NF/lem-sfb-constructible-cocone-hom-inj (stage 2; reviewer FIX; parallel immutable checks)
 - 18:34 L: returned deliver/P1/Sheaf.Paper.PurityFiniteKummerLevel (reviewer RETURN: (reviewer C-85315, head 8531501cd) Stage-3 point 6 (D3/E5 analogue: nodes do not follow the proof as written): (1) dag/n)
 - 18:35 L: merged deliver/NA/def-sf-pf (stage 2; reviewer PASS; parallel immutable checks)
+- 18:41 L: merged deliver/NJ/fix-lem-exchanges (stage 2; reviewer PASS; parallel immutable checks)
