@@ -224,7 +224,7 @@ def coefCurryingPointEvaluation (n : ℕ)
     (coefCurryingPointHom l E n).obj (op C) ⊗ C ⟶
       (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (coefTraceRing l E)) 0).obj
         (coefTraceQuotientModule l E n) :=
-  (DerivedMonoidal.braiding DerivedCategory.Qh
+  (DerivedMonoidal.braiding' DerivedCategory.Qh
     (HomotopyCategory.quasiIso
       (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)) _ _).hom ≫ (ihom.ev C).app _
 
@@ -503,7 +503,7 @@ def CoefCurryingModels.finiteArrow (n : ℕ)
       (coefCurryingPointHom l E n).obj
         (op ((coefCurryingIntegralSections l E D X T).obj K.obj)) :=
   MonoidalClosed.curry
-    ((DerivedMonoidal.braiding DerivedCategory.Qh
+    ((DerivedMonoidal.braiding' DerivedCategory.Qh
       (HomotopyCategory.quasiIso
         (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)) _ _).hom ≫
       (coefCurryingPointTensor l E).map

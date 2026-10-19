@@ -423,7 +423,7 @@ def IsProKoszulSymmetry (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     Prop :=
   ∀ K L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A),
     HEq ((b.hom.app K).app L)
-      (DerivedMonoidal.braiding
+      (DerivedMonoidal.braiding'
         (DerivedCategory.Qh (C := Sheaf (Scheme.ProEt.topology X) A))
         (HomotopyCategory.quasiIso (Sheaf (Scheme.ProEt.topology X) A) (.up ℤ)) K L).hom
 
