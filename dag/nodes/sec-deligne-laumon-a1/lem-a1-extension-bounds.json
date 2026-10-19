@@ -17,7 +17,19 @@
  ],
  "proof": [
   {
-   "text": "Choose the Frobenius-stable filtrations of $V'$ and $V''$ given by\n[def-weil-frobenius-module-weights] (of weights at most $w$);\npull back the filtration of $V''$ along the projection\n$V\\to V''$ and splice it after the filtration of $V'$. The graded\npieces are the graded pieces of $V'$ and the graded pieces of\n$V''$, so all their weights are at most $w$; by\n[def-weil-frobenius-module-weights] the module $V$ is mixed of\nweights at most $w$.",
+   "text": "Unpack the two finite stable filtrations from [def-weil-frobenius-module-weights]. Define W_i=f(V_i) for i<=m and W_i=g^(-1)(Z_(i-m)) for i>m. Exactness identifies f(V_m)=range(f)=ker(g)=g^(-1)(Z_0). Thus the definitions agree at the join. The zero and whole endpoints, increasing property and Frobenius stability follow from those of V and Z and the equivariance of f and g. The construction permits m=0 or n=0 and repeated steps.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a surjective equivariant linear map between upper subspaces whose inverse image of the lower target subspace is the lower source subspace, the induced quotient map is bijective: its kernel is zero and representatives lift by surjectivity. Conjugate the pure target quotient Frobenius through this linear equivalence. Equivariance gives the prescribed quotient action, and applying the equivalence to a nonzero eigenvector proves that purity is preserved. This elementary quotient argument is the fully proved private helper transport_piece.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each mapped filtration step, injectivity of f identifies its upper subspace with V_(i+1) and identifies its lower subspace with V_i; use the inverse restricted equivalence in transport_piece. For each pulled-back step, the restriction of g is surjective onto Z_(j+1) and the preimage of Z_j is the lower subspace; apply transport_piece directly. All weights are inherited unchanged and remain <=w. Hence W satisfies every clause of [def-weil-frobenius-module-weights], giving mixedness of B.",
    "uses": [
     "def-weil-frobenius-module-weights"
    ],
@@ -30,7 +42,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.md",
-  "place": "## Proof"
+  "place": "## Proof; direct Lean filtration-splicing implementation, with proved quotient transport"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -86,5 +98,15 @@
   "group": "Q42",
   "result": "pass",
   "note": "I read the node, the source (master order 2790 and main-20261015/17 order 3134, same text), the landed def-weil-frobenius-module-weights module and the upstream FrobeniusModule structure. Every clause matches: three FrobeniusModule.{u1/u2/u3,v} Qlb with independent carrier universes; Frobenius-equivariant linear f and g; short exactness as injective f, Function.Exact f g and surjective g; the landed filtration predicate IsMixedOfWeightsAtMost with the same p, a, ell, ha, hellp, Qlb, hQ, iota on A and C and in the conclusion on B; w real. No extra assumptions and no universe restriction. The upstream HasWeightsAtMost.of_functionExact uses a different notion, the eigenvalue bound, so not reusing it is right. Edge cases checked: zero module (m=0), one end zero, a non-split Jordan block, different weights on the two ends, ell=2. stmt_deps gains only the landed weight node, which brief-stage2 l.140 allows; no other node field changed. lean.statement matches the file signature verbatim. The proof is only sorry, with no new definitions or nodes. Docstrings carry the source place, the blueprint tag and the proof steps; minor and accepted: they cite main-20261015 order 3134, not master order 2790. The report has a Worker report and a Second reading by Q42. nt_compile.py --json compiled the item cleanly in 2.7 s with no warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261019T192850-L-1877474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
