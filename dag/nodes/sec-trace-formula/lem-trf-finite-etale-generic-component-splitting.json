@@ -22,9 +22,107 @@
   "def-weil-residue-field",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a point of the nonempty scheme $T$ and an affine open neighbourhood $V=\\operatorname{Spec}A$ using [lem-weil-pbc-affine-opens-basis]. The ring $A$ is Noetherian by [pqf-lem-affine-open-locnoeth], since $T$ is locally Noetherian, and is a domain by [def-pc-integral-scheme], since $V$ is nonempty. Put $K=\\operatorname{Frac}(A)$ and use the canonical morphism $\\operatorname{Spec}K\\to V\\to T$. Write $Y=X\\times_T\\operatorname{Spec}K$. The finite-type base-change assertion of [lem-sfb-finite-type-composition-base-change] makes $Y\\to\\operatorname{Spec}K$ finite type. In particular this step does not assume that $X\\to T$ is flat or dominant.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "pqf-lem-affine-open-locnoeth",
+    "def-pc-integral-scheme",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551 (lemma-make-components-generic-fibre-geometrically-irreducible), choosing an affine open and passing to the generic field; morphisms.tex Tag 01T4"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-components-split] to $Y/K$. It gives a field extension $L/K$ whose spectrum map is finite etale and for which every irreducible component of $G=Y\\times_K\\operatorname{Spec}L$ has irreducible nonempty inverse image after every field extension of $L$. Finiteness of this spectrum map means that $L$ is a finite $K$-module, by [def-weil-finite-integral-morphism] applied to the whole affine target. The two spectra have one point with residue fields $L$ and $K$; apply [lem-weil-pbc-etale-residue-field-extension-separable] at that point. Thus this very extension $L/K$ is finite-dimensional and separable algebraic, as required by the spreading theorem.",
+   "uses": [
+    "lem-sbc-generic-components-split",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054R (lemma-finite-extension-geometrically-irreducible-components); the field extension used in more-morphisms.tex Tag 0551"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spread-finite-separable-extension] to the Noetherian domain $A$, its fraction field $K$, and the finite separable extension $L/K$ just obtained. We obtain $c\\in A$, $c\\ne0$, and a finite etale $A[c^{-1}]$-algebra $B$ which is a domain with fraction field $L$, together with the finite etale surjective spectrum map $\\operatorname{Spec}B\\to\\operatorname{Spec}A[c^{-1}]$. The fraction-field identification is over $K$, so the composite $A\\to A[c^{-1}]\\to B\\to L$ is the original map $A\\to K\\to L$. These are exactly the field extension and the compatible model needed below; no normality of $A$ is required.",
+   "uses": [
+    "lem-weil-pbc-spread-finite-separable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551 (lemma-make-components-generic-fibre-geometrically-irreducible), spreading the separable extension by a monic polynomial and shrinking to its etale locus; the same calculation in literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md"
+   }
+  },
+  {
+   "text": "Let $U=D(c)\\subseteq V$. By [lem-weil-pbc-spec-localization-away-basic-open], $\\operatorname{Spec}A[c^{-1}]\\to\\operatorname{Spec}A$ is a homeomorphism onto this open; $U$ is nonempty because it contains $(0)$. This is also an isomorphism onto the open subscheme $U$: the affine stalk descriptions of [lem-weil-pbc-affine-open-stalk-localization] identify its stalk map over a prime $\\mathfrak p$ not containing $c$ with $A_{\\mathfrak p}\\to(A[c^{-1}])_{\\mathfrak p A[c^{-1}]}$. The inverse sends $(a/c^n)/(b/c^m)$ to $ac^m/(bc^n)$; the denominators are outside $\\mathfrak p$. For a section on the target sheaf, lift each germ locally using stalk surjectivity; injectivity makes these lifts agree after shrinking on overlaps, so the sheaf axiom glues them to a unique preimage. Thus the sheaf map is an isomorphism and the schemes are identified. Set $S=\\operatorname{Spec}B$ and transport the model map to $\\pi:S\\to U$. The preceding step supplies finiteness, etaleness and surjectivity, and $U$ is an affine open of $T$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), affine stalks; algebra.tex Tag 00E4 (lemma-standard-open); elementary localization calculation identifying the affine open in Tag 0551"
+   }
+  },
+  {
+   "text": "The nonempty open $U$ is integral by [def-pc-integral-scheme]: every nonempty affine open in it is such an open in $T$ and therefore has a domain coordinate ring. In particular $U$ is reduced. Since $\\pi$ is etale, [etale-proposition-etale-reduced] implies that $S$ is reduced. The prime $(0)\\subset B$ is a point $\\xi$ with closure $V((0))=\\operatorname{Spec}B$, by the Zariski topology and the fact that $B$ is a domain. Thus $S$ is irreducible and nonempty, and is integral by the reduced-and-irreducible characterization in [def-pc-integral-scheme]. By [lem-weil-pbc-affine-open-stalk-localization] its local ring at $\\xi$ is $B_{(0)}=\\operatorname{Frac}(B)=L$: every nonzero element of $B$ is inverted. This is a field with maximal ideal zero, so [def-weil-residue-field] gives $\\kappa(\\xi)=L$, compatibly with $A\\to K\\to L$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025O (proposition-etale-reduced), applied to the cover of Tag 0551; schemes.tex Tag 01HV and elementary generic-point calculation for a domain"
+   }
+  },
+  {
+   "text": "By [def-pc-scheme-fibre], the fibre to be considered is $H=(X\\times_T S)\\times_S\\operatorname{Spec}\\kappa(\\xi)$. Under $\\kappa(\\xi)=L$, the morphism $\\operatorname{Spec}L\\to S\\to T$ equals the morphism through $\\operatorname{Spec}K$. Apply the universal property [def-pc-fibre-product] twice: both $H$ and $G=(X\\times_T\\operatorname{Spec}K)\\times_K\\operatorname{Spec}L$ represent pairs of maps to $X$ and $\\operatorname{Spec}L$ agreeing in $T$. The comparison maps preserving these projections are inverse, since their composites preserve both projections. This is an isomorphism over $L$. For any extension $E/L$, its pullback is likewise an isomorphism preserving the projections to $H$ and $G$. An isomorphism is a homeomorphism, so it takes maximal irreducible subsets to maximal irreducible subsets, by [def-weil-irreducible-components]. The inverse image of each such subset in the $E$-fibre is identified with the corresponding inverse image for $G$. Step 2 says the latter is irreducible and nonempty for every $E$. This proves the required geometric irreducibility. If $Y$ is empty the same pullback identities give $G=H=\\varnothing$, and the assertion about every component is vacuous; the chosen $S$ and $U$ remain nonempty.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551 (lemma-make-components-generic-fibre-geometrically-irreducible), identifying the final generic fibre; elementary pullback universal properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "etale-proposition-etale-reduced",
+  "lem-sbc-generic-components-split",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0551 (lemma-make-components-generic-fibre-geometrically-irreducible), proof, using the existing finite-separable spreading lemma for its polynomial calculation; varieties.tex Tag 054R and etale.tex Tag 025O"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -67,10 +165,45 @@
    "results": "{\"t\": \"2026-10-17T23:54:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*component|component.*geometric|finite.*separable.*extension",
+   "results": "{\"t\": \"2026-10-18T23:06:26Z\", \"tool\": \"grep\", \"query\": \"generic.*component|component.*geometric|finite.*separable.*extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"baca41db70ddefe5\"}; Read the returned types. The geometric hits require pre-existing geometric irreducibility or integral schemes; the etale hits give field-algebra classification, an etale locus, or descent of a supplied etale algebra, not a component-splitting cover over a dense affine open. Source reads of Geometrically/{Irreducible,Reduced,Connected}.lean confirm no exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split the irreducible components of a generic fibre by spreading a finite separable extension to a finite etale cover of a dense open",
+   "results": "{\"t\": \"2026-10-18T23:06:27Z\", \"tool\": \"leansearch\", \"query\": \"Split the irreducible components of a generic fibre by spreading a finite separable extension to a finite etale cover of a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"IsSepClosed.splits_codomain\", \"genericPoints.component\", \"separableClosure\", \"IsSepClosed.splits_of_separable\"], \"digest\": \"b3dd208e29afd1a3\"}; Read the returned types. The geometric hits require pre-existing geometric irreducibility or integral schemes; the etale hits give field-algebra classification, an etale locus, or descent of a supplied etale algebra, not a component-splitting cover over a dense affine open. Source reads of Geometrically/{Irreducible,Reduced,Connected}.lean confirm no exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "{\"t\": \"2026-10-18T23:06:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. The geometric hits require pre-existing geometric irreducibility or integral schemes; the etale hits give field-algebra classification, an etale locus, or descent of a supplied etale algebra, not a component-splitting cover over a dense affine open. Source reads of Geometrically/{Irreducible,Reduced,Connected}.lean confirm no exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism to an integral Noetherian scheme, a finite etale integral affine cover of a nonempty affine open makes all generic fibre components geometrically irreducible",
+   "results": "{\"t\": \"2026-10-18T23:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism to an integral Noetherian scheme, a finite etale integral affine cover of a nonempty affine open makes all generic fibre components geometrically irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"637b4eefe53e7bb5\"}; Read the returned types. The geometric hits require pre-existing geometric irreducibility or integral schemes; the etale hits give field-algebra classification, an etale locus, or descent of a supplied etale algebra, not a component-splitting cover over a dense affine open. Source reads of Geometrically/{Irreducible,Reduced,Connected}.lean confirm no exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable splitting field for the geometric irreducible components of a finite type scheme can be spread out over a principal open as a finite etale domain",
+   "results": "{\"t\": \"2026-10-18T23:08:55Z\", \"tool\": \"leanfinder\", \"query\": \"A finite separable splitting field for the geometric irreducible components of a finite type scheme can be spread out over a principal open as a finite etale domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.isOpen_etaleLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"bbf0aaa5f737ac4c\"}; Read the returned types. The geometric hits require pre-existing geometric irreducibility or integral schemes; the etale hits give field-algebra classification, an etale locus, or descent of a supplied etale algebra, not a component-splitting cover over a dense affine open. Source reads of Geometrically/{Irreducible,Reduced,Connected}.lean confirm no exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-contracted-component-no-extra-generic",
@@ -92,5 +225,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-finite-etale-generic-component-splitting",
+  "worker": "stage1",
+  "summary": "Read Stacks 0551, 054R and 025O; the statement is correct without extra geometric assumptions. Reused the existing field component-splitting and finite-separable spreading nodes and made the finite-dimensionality, separability, affine-open and generic-fibre identifications explicit. No new nodes; no attachment in the project Lean source; all six steps are under 2000 characters.",
+  "blueprint": "Realizes the assigned historical finite-etale generic-component splitting input recorded in blueprint.from.place, below lem-trf-contracted-component-no-extra-generic. The current main-20261015 local-term unit no longer uses the historical Temkin route; this split proves only its assigned lower geometric lemma and changes no unit or chapter route. Whole-blueprint searches found no node stating this open-base cover.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Use the pullback universal property for the compatible generic-fibre isomorphism and its field base changes."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "Use the definition of integrality to get a domain chart and the reduced-and-irreducible characterization."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Expand the final generic fibre as its residue-field pullback."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Read finiteness of the affine field spectrum map as module finiteness."
+   },
+   {
+    "node": "def-weil-irreducible-components",
+    "why": "A homeomorphism preserves maximal irreducible subsets and nonemptiness."
+   },
+   {
+    "node": "def-weil-residue-field",
+    "why": "Read the residue field at the generic point as the field local ring modulo zero."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Reducedness ascends along the etale cover of the reduced integral open."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Field-case component splitting of Tag 054R, strictly below the requested cover of an open base; no trace-formula node supplies this tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Only its base-change clause gives finite type of the generic field pullback."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identify affine stalks with localizations, both for the open chart and for the residue field at the zero prime."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Select an affine chart of the integral base; a generic scheme tool, with no replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-residue-field-extension-separable",
+    "why": "Recover separability of the particular splitting extension from the finite etale field map."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Identify the topology of the principal localization spectrum with its open image."
+   },
+   {
+    "node": "lem-weil-pbc-spread-finite-separable-extension",
+    "why": "Only algebraic spreading of a supplied finite separable extension; it gives no component-splitting assertion and realizes the polynomial step of Tag 0551."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "The selected affine chart has a Noetherian coordinate ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "etale-proposition-etale-reduced",
+  "lem-sbc-generic-components-split",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-c31ac571a",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-c31ac571a (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the full mathematics. Source: Stacks 0551 (more-morphisms.tex, about line 6771), read with 054R and 025O. The item is 0551 specialized to an integral Noetherian base and the statement is unchanged. It matches the parent lem-trf-contracted-component-no-extra-generic step 1. No new nodes and no SGA. Steps: 1) affine chart, A a Noetherian domain, finite type by the base-change clause of lem-sfb-finite-type-composition-base-change. 2) lem-sbc-generic-components-split gives L/K finite étale; finite dimension via def-weil-finite-integral-morphism on Spec K; separable via lem-weil-pbc-etale-residue-field-extension-separable. 3) lem-weil-pbc-spread-finite-separable-extension: its hypotheses hold. Compatibility over K is the natural reading of 'fraction field K'' and the node's proof builds B=S[α] inside L, so it holds. 4) D(c) ≅ Spec A[c^-1] as an open subscheme, by an explicit stalk/gluing argument that is genuinely elementary; I found no existing node to cite instead. 5) S is integral via 025O (etale-proposition-etale-reduced) and the domain's generic point; κ(ξ)=B_(0)=L. 6) H ≅ G over L by the fibre-product universal property, compatible with every E/L; a homeomorphism preserves components. Edge cases checked: empty X (vacuous), T a field (reduces to 054R), non-reduced or inseparable generic fibres (the notion is topological). Duplicate search: the five lem-sbc 0551 nodes give étale neighbourhoods or spread supplied data, so none is a duplicate. Accepted tool_uses: the sbc, pbc, sfb and pqf generic-geometry nodes, none in trf or pod. Maintainer note: the blueprint ancestry is the inherited historical Temkin input under lem-trf-local-term-locality, which main-20261015 replaced; this is not a fault of the delivery."
  }
 }
