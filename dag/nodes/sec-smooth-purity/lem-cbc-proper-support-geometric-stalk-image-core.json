@@ -13,38 +13,99 @@
  ],
  "proof": [
   {
-   "text": "Represent a geometric-stalk element on a pointed étale neighbourhood and restrict it to the fibre. The inverse-image germ formula and proper-support locality show that the resulting support is proper. Conversely, shrink a properly supported fibre section to a quasi-compact open, give its support the reduced induced closed structure, compactify the open immersion by Nagata, and glue the section with zero outside its proper support. The resulting representative lies in G by hG and restricts to the original fibre section. The same zero-extension argument shows that a stalk element restricting to zero is already zero after refinement, proving injectivity.",
+   "text": "Derive the inverse-image germ formula for module-valued sheaves directly from the point-comap and inverse-image adjunction isomorphisms. Pull back the closed support along the cartesian square; properness is stable under base change. This shows that restriction of a properly supported neighbourhood section has proper support on the geometric fibre.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-cbc-closed-proper-support-locality",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lemma-nagata-proper-to-separated-target",
-    "thm-nagata-compactification",
-    "lem-weil-pbc-extension-by-zero-unit-iso",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lem-weil-pbc-separated-base-change"
+    "lem-cbc-etale-module-section-closed-support",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-cbc-proper-support-section-locality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F76, first three paragraphs and open-subscheme extension argument"
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+   }
+  },
+  {
+   "text": "For injectivity, use properSupportSectionImage to obtain the closed image of a neighbourhood section support in the base neighbourhood. If its fibre restriction is zero, an algebraic-closure point above any support point over the marked base point contradicts the germ formula. The base point therefore lies outside the closed support image, and the section has zero direct-image stalk. Monicity of i and exactness of the geometric stalk functor give the desired injectivity.",
+   "uses": [
+    "lem-cbc-proper-support-section-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+   }
+  },
+  {
+   "text": "For proper morphisms, identify the geometric restriction map with the geometric exchange map using geometricFibreExchange_germs. Proper geometric-point base change makes it an isomorphism, so every fibre section lifts to a section on a pointed etale neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-proper-geometric-point-exchange",
+    "lem-sbc-geometric-fibre-exchange-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+   }
+  },
+  {
+   "text": "For a compactification, extend a properly supported fibre section by zero across the open immersion, use extension-by-zero base change, and lift the resulting section by proper base change on the proper ambient scheme. The open-extension support-range theorem and transport along the pullback-composition isomorphism show that its comparison image has proper support. Verify the section restriction equality using the comparison/base-change identity and adjunction units.",
+   "uses": [
+    "lem-cbc-open-extension-proper-support-range",
+    "lem-cbc-extension-zero-base-change",
+    "lemma-nagata-proper-to-separated-target",
+    "pur713-def-base-changed-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+   }
+  },
+  {
+   "text": "Over a quasi-compact quasi-separated base, the image of the proper fibre support is compact and lies in a quasi-compact open of X. Restrict to this open and apply Nagata compactification. Use the open-closed short exact sequence to lift sections vanishing outside the open into extension by zero. The proper-support composite-range theorem lifts the neighbourhood section back to the original source. Unit, counit and base-change identities show that its fibre restriction is the original section.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-cbc-proper-support-composite-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+   }
+  },
+  {
+   "text": "For an arbitrary base, choose an affine open neighbourhood of the geometric point and apply the preceding argument to the restricted morphism. The localization restriction isomorphism and the canonical pullback-pasting isomorphism transfer the lifted neighbourhood section to the original sheaf. The inverse-image germ formula transfers its support, and the composition-unit equation proves compatibility with restriction to the fibre. Finally apply hG to lift this section to G, and stalk naturality and hc identify its image with the given fibre section.",
+   "uses": [
+    "lem-cbc-proper-support-section-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-cbc-closed-proper-support-locality",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-cbc-etale-module-section-closed-support",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-cbc-proper-support-section-locality",
+  "lem-cbc-proper-support-section-image",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-sbc-geometric-fibre-exchange-germs",
+  "lem-cbc-open-extension-proper-support-range",
+  "lem-cbc-extension-zero-base-change",
   "lemma-nagata-proper-to-separated-target",
+  "pur713-def-base-changed-compactification",
   "thm-nagata-compactification",
-  "lem-weil-pbc-extension-by-zero-unit-iso",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-separated-base-change"
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-cbc-proper-support-composite-range"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F76, support-image and extension-by-zero paragraphs"
+  "place": "Tag 0F76, support-image and extension-by-zero argument, with explicit affine-base localization and adjunction compatibility; formalized by C1"
  },
  "mathlib_searches": [
   {
@@ -111,13 +172,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261018T091359-L-3253746",
-  "kind": "interface",
+  "landing": "20261019T192650-L-1852657",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
