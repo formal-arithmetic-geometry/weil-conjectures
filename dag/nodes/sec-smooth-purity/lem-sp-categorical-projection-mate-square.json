@@ -1,0 +1,108 @@
+{
+ "id": "lem-sp-categorical-projection-mate-square",
+ "kind": "statement",
+ "title": "Tensor-compatible adjunction squares preserve projection maps",
+ "statement": "Let C,D,C\\prime,D\\prime be categories, F:D→C and F\\prime:D\\prime→C\\prime left adjoint to G and G\\prime, and N_D:D→D\\prime and N_C:C→C\\prime functors. Let α:N_D F\\prime≅F N_C be a natural isomorphism. Give the four categories tensor bifunctors T_C,T_D,T_C\\prime,T_D\\prime, comparisons φ:F(T_D(-,-))→T_C(F(-),F(-)) and φ\\prime, and natural tensor comparison isomorphisms m_C,m_D for N_C,N_D. Suppose ComparisonCompatible α φ φ\\prime m_C m_D: the two tensor comparisons across α agree. Define P and P\\prime as the adjoint transposes of φ followed by counit tensor identity, and β as the mate [def-weil-pbc-adjunction-mate] of α. For M∈C,L∈D, N_D(P(M,L)) followed by β at T_C(M,FL) and G\\prime of m_C(M,FL) followed by tensoring α_L^{-1}, equals m_D(GM,L) followed by tensoring β_M with identity and P\\prime(N_CM,N_DL). No invertibility hypothesis on β or P is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, remark-compatible-with-diagram; categorical calculation already proved in WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Apply the inverse adjunction Hom bijection for F\\prime. Substitute the counit formula for the mate β and the formula for the transpose of each projection map. Move the square isomorphism, tensor comparison, and tensor pullback comparison across the counit by naturality. The ComparisonCompatible equality identifies the remaining middle composites. Functoriality of the tensor bifunctor and the mate counit formula cancel the remaining factors. This is the existing complete Lean proof map_rightAdjointProjectionMap_comp_mateEquiv; no new proof obligation is introduced.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Adjunction/ProjectionMapMate.lean",
+  "place": "Existing proved lemma map_rightAdjointProjectionMap_comp_mateEquiv"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula morphisms commute with the mate of a tensor-compatible square of adjunctions",
+   "results": "8 hits, including CategoryTheory.mateEquiv_square, mateEquiv_vcomp, mateEquiv, CommSq.left_adjoint, mateEquiv_apply, Bicategory.mateEquiv_square, conjugateEquiv_mateEquiv_vcomp, and CommSq.right_adjoint. None states the tensor-compatible projection square.",
+   "date": "2026-10-19",
+   "verdict": "Generic mate identities only; use the existing source-library projection-map theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphisms commute with an adjunction mate under a tensor-compatible square of pullback functors",
+   "results": "Generic mate identities; no result for tensor-compatible projection squares.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing source-library theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit, a component identity used by the source theorem.",
+   "date": "2026-10-19",
+   "verdict": "Component tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "map_rightAdjointProjectionMap_comp_mateEquiv|ComparisonCompatible",
+   "results": "Mathlib grep returned no hits. Repository rg found the existing complete theorem and compatibility definition in lean/WeilConjectures/CategoryTheory/Adjunction/ProjectionMapMate.lean, and the source-library specialization in LowerStarProjComparison.lean.",
+   "date": "2026-10-19",
+   "verdict": "Exact generic source theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpDirectImageEtaleMate",
+  "date": "2026-10-19",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-direct-image-etale-mate-isomorphism",
+   "place": "Step 2, categorical projection/exchange identity in the fixed coefficient presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate",
+  "declaration": "CategoryTheory.Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv",
+  "statement": "lemma map_rightAdjointProjectionMap_comp_mateEquiv\n    (H : ComparisonCompatible α φ φ' m_C m_D) (M : C) (L : D) :\n    N_D.map (((adj.rightAdjointProjectionMap φ).app M).app L) ≫\n        (mateEquiv adj adj' α.hom).app ((T_C.obj M).obj (F.obj L)) ≫\n        G'.map ((m_C.hom.app M).app (F.obj L) ≫ (T_C'.obj (N_C.obj M)).map (α.inv.app L)) =\n      (m_D.hom.app (G.obj M)).app L ≫ (T_D'.map ((mateEquiv adj adj' α.hom).app M)).app _ ≫\n        ((adj'.rightAdjointProjectionMap φ').app (N_C.obj M)).app (N_D.obj L)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261019T112600-L-3957919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261019T112600-L-3957919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
