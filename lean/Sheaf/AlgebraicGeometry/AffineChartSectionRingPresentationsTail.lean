@@ -6,7 +6,7 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
+public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
 import Mathlib.CategoryTheory.Filtered.Final

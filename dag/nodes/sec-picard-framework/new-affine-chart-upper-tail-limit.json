@@ -103,13 +103,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineChartUpperTailLimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartUpperTailLimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineChartUpperTailLimit.lean",
   "declaration": "AlgebraicGeometry.exists_affine_chart_upper_tail_limit",
   "statement": "theorem exists_affine_chart_upper_tail_limit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    let W := V.pullback₁ (pullback.fst f (c.π.app (op i)))\n    let Z := W.X a\n    ∃ (D : ({j : I // i ≤ j})ᵒᵖ ⥤ Scheme.{u}) (d : Cone D),\n      Nonempty (IsLimit d) ∧ (∀ j, IsAffine (D.obj j)) ∧\n      ∃ z : d.pt ≅ Z, ∀ j : {j : I // i ≤ j},\n        let U : (pullback f (Spec.map (R.map (homOfLE j.property)))).OpenCover.{u} :=\n          V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE j.property))))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE j.property))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j.val)) (c.w (homOfLE j.property).op))\n        let Y := (U.pullback₁ p).X a\n        ∃ (e : D.obj (op j) ≅ U.X a) (h : Y ≅ Z),\n          h.hom ≫ W.f a = (U.pullback₁ p).f a ∧\n          h.hom ≫ z.inv ≫ d.π.app (op j) ≫ e.hom = U.pullbackHom p a",
   "branch": "sheaf-dag",
   "by": "U4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineChartUpperTailLimit; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

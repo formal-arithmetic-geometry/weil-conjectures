@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.CategoryTheory.Category.Preorder
-import Sheaf.Algebra.Homology.BoundedGradedFamilyMapColimitDescent
+import WeilConjectures.Algebra.Homology.BoundedGradedFamilyMapColimitDescent
 import Sheaf.Algebra.FiniteFamilyModuleMapEqualityColimit
 import Mathlib.Data.Int.Interval
 

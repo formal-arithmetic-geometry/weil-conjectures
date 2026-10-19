@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData
-import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
+import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 
 /-! # Tensor powers of a homogeneous section of a polynomial Proj twist
 

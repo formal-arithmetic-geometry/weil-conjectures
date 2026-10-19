@@ -12,9 +12,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.Topology.SliceOpenClosedShortExact
 import Sheaf.Topology.SliceOpenExtensionClosureUnit
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.AbelianSheafShortExactStalkwise
-import Sheaf.Topology.ClosedPushforwardAbelianStalks
-import Sheaf.Topology.InverseImageStalk
+import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
+import WeilConjectures.Topology.ClosedPushforwardAbelianStalks
+import WeilConjectures.Topology.InverseImageStalk
 
 /-!
 # The open-closed exact sequence on a Noetherian space

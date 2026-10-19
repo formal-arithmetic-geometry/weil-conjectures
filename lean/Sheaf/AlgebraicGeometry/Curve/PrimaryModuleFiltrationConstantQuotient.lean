@@ -5,10 +5,10 @@ Authors: SHEAF workers R3 and K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
+public import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.Algebra.Field.ULift
 

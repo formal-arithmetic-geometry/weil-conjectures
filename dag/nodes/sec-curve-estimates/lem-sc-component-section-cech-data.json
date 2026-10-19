@@ -105,13 +105,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ComponentSectionCechData",
-  "file": "lean/Sheaf/AlgebraicGeometry/ComponentSectionCechData.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ComponentSectionCechData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ComponentSectionCechData.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_component_section_cech_data",
   "statement": "theorem exists_component_section_cech_data\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible]\n    (s : ∀ a : ι, Γ(M a, ⊤))\n    (hs : ∀ a b : ι, a ≠ b → Set.range (i a) ∩ Set.range (i b) ⊆\n      i a '' nonvanishingLocus (M a) (s a)) :\n    ∃ (κ : Type (max u v)) (U : κ → Y.Opens)\n      (g : ∀ b c, Γ(Y, U b ⊓ U c)ˣ) (f : ∀ b, Γ(Y, U b))\n      (m : ∀ a b, Γ(M a, (i a) ⁻¹ᵁ U b)),\n      (⨆ b, U b) = ⊤ ∧\n      (∀ b, g b b = 1) ∧\n      (∀ b c (W : Y.Opens) (hb : W ≤ U b) (hc : W ≤ U c),\n        Units.map (Y.presheaf.map (homOfLE (le_inf hc hb)).op).hom.toMonoidHom (g c b) =\n          (Units.map (Y.presheaf.map (homOfLE (le_inf hb hc)).op).hom.toMonoidHom\n            (g b c))⁻¹) ∧\n      (∀ b c d (W : Y.Opens)\n        (hb : W ≤ U b) (hc : W ≤ U c) (hd : W ≤ U d),\n        Units.map (Y.presheaf.map (homOfLE (le_inf hb hd)).op).hom.toMonoidHom (g b d) =\n          Units.map (Y.presheaf.map (homOfLE (le_inf hb hc)).op).hom.toMonoidHom (g b c) *\n            Units.map (Y.presheaf.map (homOfLE (le_inf hc hd)).op).hom.toMonoidHom (g c d)) ∧\n      (∀ a b, IsFreeGenerator (m a b)) ∧\n      (∀ a b c,\n        (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_left)).op (m a b) =\n          ((i a).app (U b ⊓ U c)).hom (g b c).val •\n            (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_right)).op (m a c)) ∧\n      (∀ a b, (M a).presheaf.map (homOfLE le_top).op (s a) =\n        ((i a).app (U b)).hom (f b) • m a b) ∧\n      ∀ b c, Y.presheaf.map (homOfLE inf_le_left).op (f b) * (g b c).val =\n        Y.presheaf.map (homOfLE inf_le_right).op (f c)",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ComponentSectionCechData; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

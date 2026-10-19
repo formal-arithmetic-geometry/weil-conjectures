@@ -115,13 +115,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClosedCoverFrameTransitions",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClosedCoverFrameTransitions.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClosedCoverFrameTransitions",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClosedCoverFrameTransitions.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_closedCover_frame_transitions",
   "statement": "theorem exists_closedCover_frame_transitions\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible] :\n    let T : Set Y := ⋃ a : ι, ⋃ b : ι, ⋃ (_ : b ≠ a),\n      Set.range (i a) ∩ Set.range (i b)\n    ∃ (U : Y → Y.Opens) (g : ∀ p q : Y, Γ(Y, U p ⊓ U q)ˣ)\n      (f : ∀ (a : ι) (p : Y), Γ(M a, (i a) ⁻¹ᵁ U p)),\n      (⨆ p, U p = ⊤) ∧\n      (∀ p, g p p = 1) ∧\n      (∀ p q : Y, p ≠ q → (U p ⊓ U q : Set Y) ⊆ Tᶜ) ∧\n      (∀ a p, IsFreeGenerator (f a p)) ∧\n      (∀ a p q,\n        (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_left)).op (f a p) =\n          (i a).app (U p ⊓ U q) (g p q).val •\n            (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_right)).op\n              (f a q))",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ClosedCoverFrameTransitions; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

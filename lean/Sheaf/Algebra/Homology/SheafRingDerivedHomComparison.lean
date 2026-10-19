@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 
 /-!

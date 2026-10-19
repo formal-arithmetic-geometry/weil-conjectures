@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistProductMorphism
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
+import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 
 /-!
 # Multiplication and coordinate loci of twists on the projective line

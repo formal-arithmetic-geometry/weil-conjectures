@@ -94,13 +94,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.BoundedGradedMapColimitDescent",
-  "file": "lean/Sheaf/Algebra/Homology/BoundedGradedMapColimitDescent.lean",
+  "module": "WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent",
+  "file": "lean/WeilConjectures/Algebra/Homology/BoundedGradedMapColimitDescent.lean",
   "declaration": "CochainComplex.exists_bounded_graded_map_of_directed_colimit",
   "statement": "theorem exists_bounded_graded_map_of_directed_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (a b : ℤ) (hzero : ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hP : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (P.X n))\n    (hQ : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (Q.X n))\n    (f : ∀ n : ℤ,\n      (ModuleCat.extendScalars (colimit.ι F i₀).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (colimit.ι F i₀).hom).obj (Q.X n)) :\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∃ (i : Set.Ici i₀)\n      (v : ∀ n : ℤ,\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n          (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n)),\n      ∀ n : ℤ, (e i P).hom.f n ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n          (e i Q).inv.f n = f n",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.BoundedGradedMapColimitDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

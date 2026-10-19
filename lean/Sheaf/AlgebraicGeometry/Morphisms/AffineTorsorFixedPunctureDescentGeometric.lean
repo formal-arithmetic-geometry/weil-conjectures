@@ -4,9 +4,9 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorOrbitComponentDescent
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
 import Mathlib.Data.Fintype.EquivFin
 import Mathlib.GroupTheory.GroupAction.Defs
 

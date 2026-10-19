@@ -6,7 +6,7 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Topology.InverseImageStalk
+import WeilConjectures.Topology.InverseImageStalk
 
 /-! # The inverse-image structure map on stalks
 

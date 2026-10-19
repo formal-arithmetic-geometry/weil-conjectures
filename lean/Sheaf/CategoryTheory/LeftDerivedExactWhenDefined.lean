@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
-import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
+import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 
 /-!

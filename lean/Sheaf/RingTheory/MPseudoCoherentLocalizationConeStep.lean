@@ -5,12 +5,12 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.RingTheory.MPseudoCoherent
+public import WeilConjectures.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
+import WeilConjectures.RingTheory.FiniteHomologyOfMPseudoCoherent
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
-import Sheaf.RingTheory.MPseudoCoherentLocalizationConeConstruction
+import WeilConjectures.RingTheory.MPseudoCoherentLocalizationConeConstruction
 import Sheaf.RingTheory.MPseudoCoherentLocalizationConeLocal
 
 /-!

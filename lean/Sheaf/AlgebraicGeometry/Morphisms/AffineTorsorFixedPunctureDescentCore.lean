@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent
-import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantOrbitProduct
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantOrbitProduct
 
 @[expose] public section
 universe u

@@ -14,7 +14,7 @@ public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.KrullDimension
 
 import Sheaf.Topology.ConstantIntegerOpenExtensionComparison
-import Sheaf.Topology.IrreducibleOpenComplementDimension
+import WeilConjectures.Topology.IrreducibleOpenComplementDimension
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.NoetherianOpenClosedCohomologySequence
 import Sheaf.Topology.IrreducibleNoetherianConstantAcyclic

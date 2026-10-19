@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
-import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric
 import Sheaf.AlgebraicGeometry.Morphisms.EquivariantOrbitModelCompatible
 import Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv

@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
+public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Etale.Basic
@@ -13,7 +13,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Smooth.Fiber
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.HopkinsLevitzki
-import Sheaf.RingTheory.FlatPermanence
+import WeilConjectures.RingTheory.FlatPermanence
 
 /-!
 # The étale map into an adapted Artinian subalgebra

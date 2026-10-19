@@ -8,8 +8,8 @@ module
 public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Sheaves.Functors
-import Sheaf.Topology.ClosedPushforwardAbelianStalks
-import Sheaf.Topology.InverseImageStalk
+import WeilConjectures.Topology.ClosedPushforwardAbelianStalks
+import WeilConjectures.Topology.InverseImageStalk
 import Mathlib.Topology.Sheaves.Sheafify
 import Mathlib.Algebra.Category.Grp.Zero
 

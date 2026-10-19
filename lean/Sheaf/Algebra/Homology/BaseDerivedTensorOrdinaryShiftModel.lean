@@ -6,7 +6,7 @@ Authors: SHEAF groups F3 and C3
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
+import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.BaseDerivedTensorCounitShiftSquare
 

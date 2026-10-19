@@ -9,7 +9,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Sheaf.Topology.AbelianOpenExtensionByZero
 import Sheaf.Topology.AbelianSheafFiniteGeneratorStages
-import Sheaf.Topology.AbelianSheafDirectedStalkColimit
+import WeilConjectures.Topology.AbelianSheafDirectedStalkColimit
 
 /-! # AbelianSheafFiniteGenerationExhaustion
 

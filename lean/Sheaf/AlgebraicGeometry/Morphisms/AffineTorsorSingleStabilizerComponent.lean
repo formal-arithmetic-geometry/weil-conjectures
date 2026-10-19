@@ -7,10 +7,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
-import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen
-import Sheaf.AlgebraicGeometry.Morphisms.AffineInvariantBasicOpenDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineInvariantBasicOpenDescent
 import Mathlib.Topology.Connected.Clopen
 import Mathlib.AlgebraicGeometry.Properties
 

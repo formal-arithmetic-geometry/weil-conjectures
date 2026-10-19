@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Homology.Single
 import Sheaf.RingTheory.PseudoCoherentIffAllM
-import Sheaf.RingTheory.MPseudoCoherentVanishingBase
+import WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 import WeilConjectures.CategoryTheory.TruncationTriangle
 

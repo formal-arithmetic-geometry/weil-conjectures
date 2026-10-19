@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineBaseChangeRingDiagram
+public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.CategoryTheory.Limits.Final

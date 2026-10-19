@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Sheaf.Algebra.Homology.TotalFreeFiltrationExhaustive
-import Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients
+import WeilConjectures.Algebra.Homology.TotalFreeFiltrationExhaustive
+import WeilConjectures.Algebra.Homology.TotalFreeFiltrationQuotients
 
 /-!
 # A free filtration on a direct-sum total complex

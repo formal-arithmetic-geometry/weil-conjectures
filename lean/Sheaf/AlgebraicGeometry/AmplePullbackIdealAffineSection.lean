@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
-import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Ideal-supported affine sections of ample pullbacks

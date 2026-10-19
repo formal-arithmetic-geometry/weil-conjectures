@@ -5,9 +5,9 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.MPseudoCoherent
+public import WeilConjectures.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
-import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
+import WeilConjectures.RingTheory.FiniteHomologyOfMPseudoCoherent
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 import Sheaf.RingTheory.FiniteConeFreeModel

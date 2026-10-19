@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullback
 
-import Sheaf.AlgebraicGeometry.ClosedCoverFrameTransitions
-import Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections
+import WeilConjectures.AlgebraicGeometry.ClosedCoverFrameTransitions
+import WeilConjectures.AlgebraicGeometry.GlueComponentReducedCoverSections
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
 

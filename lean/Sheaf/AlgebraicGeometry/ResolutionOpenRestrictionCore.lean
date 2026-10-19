@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ResolutionOpenComparisonMap
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionNatural
 
 /-! # The fixed comparison commutes with restriction to the scalar nonvanishing open.

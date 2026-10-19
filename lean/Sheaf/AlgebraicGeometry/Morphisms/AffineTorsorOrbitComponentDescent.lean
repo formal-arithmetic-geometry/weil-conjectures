@@ -8,10 +8,10 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
 import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent
-import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover
 
 /-! # Descent of individual orbit components of a split finite étale cover -/
 

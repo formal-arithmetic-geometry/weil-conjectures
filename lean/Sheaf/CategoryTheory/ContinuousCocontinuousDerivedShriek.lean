@@ -22,7 +22,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.LeftDerivedExactWhenDefined
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral

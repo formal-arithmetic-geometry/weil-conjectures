@@ -4,7 +4,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.Topology.IrreducibleConstantSections
+import WeilConjectures.Topology.IrreducibleConstantSections
 
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 import Sheaf.Topology.FlasqueZariskiAcyclic

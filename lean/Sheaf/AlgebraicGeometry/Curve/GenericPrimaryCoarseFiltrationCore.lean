@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Mathlib.FieldTheory.Galois.Profinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Sheaf.FieldTheory.OpenSubgroupFixedField
+import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
 
 @[expose] public section

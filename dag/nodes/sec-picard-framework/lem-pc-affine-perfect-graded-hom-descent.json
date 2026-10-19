@@ -87,13 +87,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffinePerfectGradedHomDescent",
-  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectGradedHomDescent.lean",
+  "module": "WeilConjectures.Algebra.Homology.AffinePerfectGradedHomDescent",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffinePerfectGradedHomDescent.lean",
   "declaration": "CochainComplex.affine_perfect_gradedHom_descent",
   "statement": "theorem affine_perfect_gradedHom_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n))\n    (hEfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (E₀.X n))\n    (hKfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (K₀.X n))\n    (i : Set.Ici i₀)\n    (s : ∀ m n : ℤ, (ComplexShape.up ℤ).Rel n m →\n      ((((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex\n      (.up ℤ)).obj E₀).X m ⟶ (((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex\n      (.up ℤ)).obj K₀).X n)) :\n    ∃ (j : Set.Ici i₀) (hij : i ≤ j)\n      (t : ∀ m n : ℤ, (ComplexShape.up ℤ).Rel n m →\n        ((((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀).X m ⟶\n          (((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀).X n)),\n      let hc := congrArg CommRingCat.Hom.hom\n        (colimit.w F (homOfLE j.property)).symm\n      let L := eqToHom (congrArg (fun r ↦\n          ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀) hc) ≫\n        (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp\n          (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom) (.up ℤ)).hom.app E₀\n      let R := (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp\n          (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom) (.up ℤ)).inv.app K₀ ≫\n        eqToHom (congrArg (fun r ↦\n          ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀) hc.symm)\n      ∀ m n : ℤ, ∀ hmn : (ComplexShape.up ℤ).Rel n m,\n        L.f m ≫ (ModuleCat.extendScalars (colimit.ι F j.val).hom).map (t m n hmn) ≫\n          R.f n = s m n hmn",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.AffinePerfectGradedHomDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

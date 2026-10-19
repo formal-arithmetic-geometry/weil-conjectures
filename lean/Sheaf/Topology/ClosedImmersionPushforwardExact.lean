@@ -6,8 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Topology.AbelianSheafShortExactStalkwise
-import Sheaf.Topology.ClosedPushforwardAbelianStalks
+import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
+import WeilConjectures.Topology.ClosedPushforwardAbelianStalks
 
 /-!
 # Exactness of closed-subset pushforward for abelian sheaves

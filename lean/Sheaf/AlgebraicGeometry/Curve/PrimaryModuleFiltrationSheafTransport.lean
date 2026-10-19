@@ -12,9 +12,9 @@ public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
-import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafExactness
+import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafExactness
 import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationConstantQuotient
-import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage
+import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage
 
 /-!
 # Transport of an invariant primary module filtration to etale sheaves

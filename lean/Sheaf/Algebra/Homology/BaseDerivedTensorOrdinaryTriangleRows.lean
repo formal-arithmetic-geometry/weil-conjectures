@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.ExactSequence
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
-import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
+import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.Algebra.Homology.BaseDerivedTensorCanonicalRowCompletion
 import Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryBoundarySquare
 

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Reverse implication for the section-ring chart formula

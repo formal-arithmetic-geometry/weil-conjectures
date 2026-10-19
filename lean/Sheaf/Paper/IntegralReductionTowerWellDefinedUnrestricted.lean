@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.Paper.IntegralReductionTowerUnrestricted
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum

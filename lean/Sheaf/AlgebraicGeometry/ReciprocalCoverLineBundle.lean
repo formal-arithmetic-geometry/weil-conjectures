@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
-import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # A line bundle and two sections from reciprocal local functions

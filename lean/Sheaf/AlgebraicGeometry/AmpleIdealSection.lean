@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.AmpleSeparated
-import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators

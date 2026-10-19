@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
 
 @[expose] public section
 universe u

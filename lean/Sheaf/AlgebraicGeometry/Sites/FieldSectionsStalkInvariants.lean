@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import Sheaf.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative
 
 /-!

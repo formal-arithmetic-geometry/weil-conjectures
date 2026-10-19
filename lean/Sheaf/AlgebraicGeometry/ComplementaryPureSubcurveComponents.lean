@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
-import Sheaf.Topology.IrreducibleOpenComplementDimension
+import WeilConjectures.Topology.IrreducibleOpenComplementDimension
 
 /-!
 # Complementary components of a reduced pure subcurve
