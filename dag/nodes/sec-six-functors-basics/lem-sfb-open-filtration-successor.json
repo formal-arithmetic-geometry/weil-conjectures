@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-open-filtration-successor",
+ "kind": "statement",
+ "title": "Natural quotient for two nested open module pieces",
+ "statement": "Let Λ be a commutative condensed ring [sk-def-sfb-condensed-ring], X a scheme [def-pc-scheme], W⊆V open subschemes, and t:S→V a closed immersion with range V\\W. Assume the inclusions W→X, V→X and the open complement of t are quasi-compact and quasi-separated. For the module inverse image, open extension by zero and ordinary direct image [def-sfb-module-upper-star, def-sfb-module-open-lower-shriek, def-sfb-module-lower-star], there is a natural transformation d:W_!W^*→V_!V^* whose composite with the V counit is the W counit, and whose cokernel is naturally isomorphic to V_!t_*t^*V^*. No constructibility, Noetherianity or finite-model hypothesis is needed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; exact extension by zero in sites-modules.tex Tags 03DI and 03DJ. Original filtration proof steps 5–7."
+ },
+ "proof": [
+  {
+   "text": "Take the cokernel Q of the open counit in the functor category. Its restriction to the open is zero by the triangle identity. The proved supported_unit and open_cokernel_zero helpers in ContinuousConstructibleIntegralGluing give an invertible closed-support unit on every Q(M). The proved closed_pull_open_zero helper makes restriction of the cokernel projection invertible. These are natural transformations; composing their natural isomorphisms gives Q ≅ t^* ⋙ t_*.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved generic successor_of_adjunctions helper transports this quotient through precomposition with V restriction and postcomposition with exact V extension. The pullback composition isomorphism supplies the right-adjoint comparison; uniqueness of left adjoints and its counit identity identify the first term and its map. Functor-category preservation of cokernels gives the quotient. The open W→V is quasi-compact because its composite with V→X is W→X and V→X is quasi-separated.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-module-open-lower-shriek"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star-comp",
+  "lem-weil-pbc-continuous-constructible-integral-gluing"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH; closed-support unit, restriction vanishing and natural cokernel projections; composition of adjunctions and exact extension by zero. Completed in Lean by K2 on 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For nested open subschemes the cokernel of the natural extension by zero inclusion is the closed complement pushforward of restriction",
+   "results": "8 hits, including liftCoborder_app and Scheme.Opens.ι_appLE; no module localization match.",
+   "date": "2026-10-18",
+   "verdict": "No ready natural module-object quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "cokernel, Adjunction.counit",
+   "results": "0 hits; unknown identifier cokernel.",
+   "date": "2026-10-18",
+   "verdict": "unavailable: Loogle rejected the identifier; not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "openFiltrationSuccessor|cokernel.*openImmersionLowerShriek",
+   "results": "msearch: 0 hits. Local rg found private objectwise closed_cokernel_iso and supported_unit in ContinuousConstructibleIntegralGluing.",
+   "date": "2026-10-18",
+   "verdict": "Objectwise support ingredients exist; the natural successor comparison remains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cokernel of extension by zero for nested opens is closed complement pushforward",
+   "results": "8 hits: CategoryTheory.Limits.cokernel; CategoryTheory.Limits.zeroCokernelOfZeroCancel; CategoryTheory.Limits.cokernel.isColimitCoconeZeroCocone; CategoryTheory.Limits.cokernel.ofEpi; CategoryTheory.Limits.cokerIsCokernel; CategoryTheory.Limits.cokernelIsCokernel; CategoryTheory.Limits.cokernel.zeroCokernelCofork; CategoryTheory.Limits.cokernelZeroIsoTarget. Query and results retained in searches.jsonl from the previous attempt.",
+   "date": "2026-10-19",
+   "verdict": "Generic cokernel API only; no ready module-object localization comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelStratumFiltration",
+  "date": "2026-10-18",
+  "group": "K2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "The finite sheaf devissage used in the final coefficient-localization argument: natural quotients of successive open-supported pieces, the local categorical part of filtration proof steps 5–7.",
+   "via": [
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-finite-model-stratum-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenFiltrationSuccessor",
+  "file": "lean/Sheaf/Paper/OpenFiltrationSuccessor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_openFiltrationSuccessor",
+  "statement": "theorem exists_openFiltrationSuccessor\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (W V : X.Opens) (h : W ≤ V)\n    [QuasiCompact W.ι] [QuasiSeparated W.ι]\n    [QuasiCompact V.ι] [QuasiSeparated V.ι]\n    [QuasiCompact (V.ι ⁻¹ᵁ W).ι] [QuasiSeparated (V.ι ⁻¹ᵁ W).ι]\n    {S : Scheme.{u}} (t : S ⟶ V.toScheme) [IsClosedImmersion t]\n    (ht : Set.range t = {x | V.ι x ∉ W}) :\n    ∃ d : upperStar Λ W.ι ⋙ openImmersionLowerShriek Λ W.ι ⟶\n        upperStar Λ V.ι ⋙ openImmersionLowerShriek Λ V.ι,\n      d ≫ (openImmersionLowerShriekUpperStarAdjunction Λ V.ι).counit =\n        (openImmersionLowerShriekUpperStarAdjunction Λ W.ι).counit ∧\n      Nonempty (cokernel d ≅\n        upperStar Λ V.ι ⋙ upperStar Λ t ⋙ lowerStar Λ t ⋙\n          openImmersionLowerShriek Λ V.ι)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261019T005311-L-2750372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261019T005311-L-2750372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
