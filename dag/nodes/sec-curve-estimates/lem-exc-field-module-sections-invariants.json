@@ -1,0 +1,178 @@
+{
+ "id": "lem-exc-field-module-sections-invariants",
+ "kind": "statement",
+ "title": "Module global sections correspond naturally to invariant stalks",
+ "statement": "Let K be a field, Ks its separable closure, and Omega an algebraically closed algebraic extension of K containing Ks as a scalar tower. Let R be a commutative ring. Suppose E is an equivalence from etale R-module sheaves over Spec K to discrete R-linear Galois representations, i identifies its underlying-module functor with the geometric stalk at Omega, and i carries the Galois action on germs to change of lift by any extending automorphism of Omega. Then evaluation on the terminal etale object is naturally isomorphic, as an R-module functor, to E followed by invariants.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the set-valued sections-invariants theorem and compare the module stalk with its underlying set stalk using Point.sheafFiberCompIso. The comparison preserves germs. Every stalk element is represented by a germ; extend each Galois automorphism to Omega and use the two germ formulas to identify the two actions.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-exc-galois-point-action",
+    "lem-exc-galois-automorphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+   }
+  },
+  {
+   "text": "Specialize the sections-invariants theorem to the bottom intermediate field, whose fixing subgroup is the whole group. Its etale spectrum is isomorphic to the terminal etale object by IntermediateField.botEquiv. Naturality of germ maps identifies the terminal germ with the bottom-field germ. Thus terminal sections map bijectively to fixed set-valued germs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+   }
+  },
+  {
+   "text": "Compose the linear terminal germ with i inverse and restrict its image to the invariant submodule. The two stalk comparison isomorphisms and the fixed-set bijection prove injectivity and surjectivity. Naturality follows from the terminal germ natural transformation and i inverse. These bijective linear components therefore give a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-exc-galois-point-action",
+  "lem-exc-galois-automorphism-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof step 3: the natural R-linear sections-to-invariants comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ModuleCat, Equivalence",
+   "results": "No exact match.",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between sheaves of modules on the small etale site of a field and discrete continuous Galois representations",
+   "results": "LightCondMod.LocallyConstant.functorIsoDiscrete; CondensedMod.LocallyConstant.functorIsoDiscrete; CondensedMod.isDiscrete_tfae; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteAux₁; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "sheavesAlgebraicStructures|DiscreteContinuousRep|internalModules",
+   "results": "No exact match.",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber_jointly_surjective|sheafFiber_comp|invariantsFunctor",
+   "results": "Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Induced.lean; Mathlib/RepresentationTheory/Coinvariants.lean; Mathlib/RepresentationTheory/Coinvariants.lean",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.sheafToPresheafCompPresheafFiberIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_inv_app; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Galois action on the geometric stalk of an etale module sheaf has open stabilizers and sends germs to germs at changed lifts",
+   "results": "ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.toOpen_germ; ModuleCat.Tilde.stalkToFiberLinearMap_germ; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toOpen_germ_assoc; AlgebraicGeometry.Scheme.stalkMap_germ_apply; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "mkOfSMul|exists_SpecMap_comp_eq_of_isSepClosed",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.mkOfSMul",
+   "results": "ModuleCat.mkOfSMul; ModuleCat.mkOfSMul_smul; ModuleCat.HasColimit.colimitCocone_ι_app",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence transports modules defined by a ring homomorphism into endomorphisms",
+   "results": "AddEquiv.module; ModuleCat.semilinearMapAddEquiv_apply; LinearEquiv.toAddEquiv; ModuleCat.endRingEquiv; Module.compHom.toLinearEquiv_apply; ModuleCat.endRingEquiv_apply; ModuleCat.homLinearEquiv_apply; LinearEquiv.domMulActCongrRight",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive equivalence induces an equivalence of module objects and transports scalar actions through endomorphism rings",
+   "results": "Equiv.vadd; LinearEquivClass; Equiv.module; LinearEquiv.conjAlgEquiv; Module.compHom.toLinearEquiv; AddEquiv.toIntLinearEquiv; Equiv.linearEquiv; AddEquiv.module",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldDiscreteModules",
+  "date": "2026-10-19",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof step 3: the natural R-linear sections-to-invariants comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldModuleSectionsInvariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldModuleSectionsInvariants.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_iso_etaleModuleSections_invariants",
+  "statement": "theorem nonempty_iso_etaleModuleSections_invariants (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω] (A : Type v) [CommRing A] : let S := Spec (.of K) let J := S.smallEtaleTopology let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) let G := Gal(Ks/K) let D := Rep.DiscreteContinuousRep.{v, u, max (u + 1) v} A G let U : D ⥤ Rep.{max (u + 1) v} A G := ObjectProperty.ι _ ∀ (E : Sheaf J (ModuleCat.{max (u + 1) v} A) ≌ D) (i : E.functor ⋙ U ⋙ Rep.RepToAction A G ⋙ Action.forget ((ModuleCat.{max (u + 1) v} A)) G ≅ p.sheafFiber), (∀ (F : Sheaf J (ModuleCat.{max (u + 1) v} A)) (g : G) (τ : Ω ≃ₐ[K] Ω) (_hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (i.hom.app F) ((E.functor.obj F).obj.ρ g ((i.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) → Nonempty (sheafToPresheaf J (ModuleCat.{max (u + 1) v} A) ⋙ (CategoryTheory.evaluation S.Etaleᵒᵖ (ModuleCat.{max (u + 1) v} A)).obj (op (Scheme.Etale.mk (𝟙 S))) ≅ E.functor ⋙ U ⋙ Rep.invariantsFunctor A G)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261019T141700-L-1863084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261019T141700-L-1863084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

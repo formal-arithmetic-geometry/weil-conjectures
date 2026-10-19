@@ -1,0 +1,164 @@
+{
+ "id": "lem-exc-scalar-module-sheaves",
+ "kind": "statement",
+ "title": "Module sheaves as scalar objects",
+ "statement": "Let J be a Grothendieck topology on a category C and R a ring. At any common carrier universe at least the object and morphism universes of C, sheaves of R-modules are equivalent to scalar objects over R in sheaves of abelian groups. The forward functor forgets scalars on sections and remembers the scalar endomorphisms. The inverse retains the abelian sections and restriction maps and interprets the scalar endomorphisms as the module action.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+ },
+ "stmt_deps": [
+  "lem-exc-scalar-objects-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "For a module sheaf, its scalar maps are natural additive endomorphisms; their ring identities follow sectionwise from the module axioms. Scalar-compatible sheaf maps are exactly linear sheaf maps.",
+   "uses": [
+    "lem-exc-scalar-objects-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+   }
+  },
+  {
+   "text": "Evaluate a scalar object at every site object, obtaining R -> End of the abelian sections; apply ModuleCat.mkOfSMul. Naturality of scalar endomorphisms makes restriction maps linear. The underlying abelian presheaf is unchanged; the forgetful functor reflects the sheaf condition. Identity maps of sections construct the unit and counit and satisfy the triangle equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, scalar enhancement; Tag 04JM, lemma-global-sections-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-scalar-objects-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof step 2: interpreting a module sheaf as a ring action on an abelian sheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ModuleCat, Equivalence",
+   "results": "No exact match.",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between sheaves of modules on the small etale site of a field and discrete continuous Galois representations",
+   "results": "LightCondMod.LocallyConstant.functorIsoDiscrete; CondensedMod.LocallyConstant.functorIsoDiscrete; CondensedMod.isDiscrete_tfae; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteAux₁; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "sheavesAlgebraicStructures|DiscreteContinuousRep|internalModules",
+   "results": "No exact match.",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber_jointly_surjective|sheafFiber_comp|invariantsFunctor",
+   "results": "Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Invariants.lean; Mathlib/RepresentationTheory/Induced.lean; Mathlib/RepresentationTheory/Coinvariants.lean; Mathlib/RepresentationTheory/Coinvariants.lean",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.sheafToPresheafCompPresheafFiberIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_inv_app; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Galois action on the geometric stalk of an etale module sheaf has open stabilizers and sends germs to germs at changed lifts",
+   "results": "ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.toOpen_germ; ModuleCat.Tilde.stalkToFiberLinearMap_germ; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toOpen_germ_assoc; AlgebraicGeometry.Scheme.stalkMap_germ_apply; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "grep",
+   "query": "mkOfSMul|exists_SpecMap_comp_eq_of_isSepClosed",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.mkOfSMul",
+   "results": "ModuleCat.mkOfSMul; ModuleCat.mkOfSMul_smul; ModuleCat.HasColimit.colimitCocone_ι_app",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence transports modules defined by a ring homomorphism into endomorphisms",
+   "results": "AddEquiv.module; ModuleCat.semilinearMapAddEquiv_apply; LinearEquiv.toAddEquiv; ModuleCat.endRingEquiv; Module.compHom.toLinearEquiv_apply; ModuleCat.endRingEquiv_apply; ModuleCat.homLinearEquiv_apply; LinearEquiv.domMulActCongrRight",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive equivalence induces an equivalence of module objects and transports scalar actions through endomorphism rings",
+   "results": "Equiv.vadd; LinearEquivClass; Equiv.module; LinearEquiv.conjAlgEquiv; Module.compHom.toLinearEquiv; AddEquiv.toIntLinearEquiv; Equiv.linearEquiv; AddEquiv.module",
+   "date": "2026-10-19",
+   "verdict": "No complete module-stalk transport theorem; use the indicated library components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldDiscreteModules",
+  "date": "2026-10-19",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof step 2: interpreting a module sheaf as a ring action on an abelian sheaf",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarModuleSheaves",
+  "file": "lean/Sheaf/CategoryTheory/ScalarModuleSheaves.lean",
+  "declaration": "CategoryTheory.ScalarObject.moduleSheafEquivalence",
+  "statement": "def moduleSheafEquivalence : Sheaf J (ModuleCat.{max u v w} R) ≌ ScalarObject R (Sheaf J AddCommGrpCat.{max u v w})",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261019T141700-L-1863084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261019T141700-L-1863084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
