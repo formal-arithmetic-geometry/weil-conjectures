@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PrimeToEllAlterationTopology
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Noetherian

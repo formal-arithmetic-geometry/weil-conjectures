@@ -14,7 +14,7 @@ public import Mathlib.Algebra.CharP.Algebra
 import WeilConjectures.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP
 import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
 import Mathlib.RingTheory.Smooth.Field
-import Sheaf.RingTheory.GeometricallyRegularH1Injective
+import WeilConjectures.RingTheory.GeometricallyRegularH1Injective
 
 /-!
 # Base-field differentials of an adically formally smooth local algebra

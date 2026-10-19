@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
 import Mathlib.Algebra.Algebra.Shrink

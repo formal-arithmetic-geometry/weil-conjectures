@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.Paper.ConstantCompletionEquivalence
@@ -37,7 +37,6 @@ import Sheaf.Paper.IntegralReductionTowerCanonical
 import Sheaf.Paper.WeilCompletedTensorReflector
 import WeilConjectures.Algebra.Homology.RoosComplex
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.RingTheory.EtaleResidueTriplesFiltered
+import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
 import WeilConjectures.RingTheory.EtaleResidueTriplesExistsColimit
 
 /-!

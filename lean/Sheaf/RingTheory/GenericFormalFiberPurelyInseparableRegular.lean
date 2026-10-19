@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.GenericFormalFiberPurelyInseparableRegularAux
 public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic

@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Basic
 import WeilConjectures.FieldTheory.FinitePurelyInseparableScalarDescent
 import WeilConjectures.FieldTheory.FinitePresentationSubfieldModel

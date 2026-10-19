@@ -11,7 +11,7 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import WeilConjectures.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
-import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
+import WeilConjectures.RingTheory.CompletionFiniteExtensionDecomposition
 import WeilConjectures.RingTheory.FiniteOverNagata
 import Sheaf.RingTheory.IntegralExtensionDimension
 import WeilConjectures.RingTheory.NagataDomainN2

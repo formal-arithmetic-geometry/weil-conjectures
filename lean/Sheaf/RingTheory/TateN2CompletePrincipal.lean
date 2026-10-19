@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Sheaf.RingTheory.TatePurelyInseparableClosureQuotientFinite
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import Sheaf.RingTheory.N2CharPPurelyInseparableCriterion
 
 /-!

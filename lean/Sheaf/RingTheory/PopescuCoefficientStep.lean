@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.RingTheory.ArtinianCoefficientEnlargement
-import Sheaf.RingTheory.EssentiallySmoothComp
+import WeilConjectures.RingTheory.EssentiallySmoothComp
 import WeilConjectures.RingTheory.RegularSequencePowers
 import WeilConjectures.AlgebraicGeometry.Ogoma
 import WeilConjectures.RingTheory.PopescuLocalizedCoefficientRelation

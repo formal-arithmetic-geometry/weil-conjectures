@@ -31,7 +31,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolated
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import WeilConjectures.RingTheory.SmoothConormalSequenceExact
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.FiniteType

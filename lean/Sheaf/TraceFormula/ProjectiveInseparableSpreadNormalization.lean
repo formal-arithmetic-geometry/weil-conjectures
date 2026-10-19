@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 public import Sheaf.AlgebraicGeometry.FiniteOverProjective
 public import Sheaf.AlgebraicGeometry.ProperStability
 public import Sheaf.AlgebraicGeometry.ClosedImmersionProducts
-public import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+public import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme

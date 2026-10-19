@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.RingTheory.EtaleResidueTriplesFiltered
+import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
 
 /-!
 # EtaleResidueTriplesRepresentatives

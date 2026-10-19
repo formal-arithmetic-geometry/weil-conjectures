@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal

@@ -14,7 +14,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.ExistsCompleteLocalFlatPresentation
 import WeilConjectures.RingTheory.FlatPermanence
 import Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget

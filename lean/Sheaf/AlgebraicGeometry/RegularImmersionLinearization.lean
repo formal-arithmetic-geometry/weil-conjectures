@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion
 import Sheaf.AlgebraicGeometry.EtaleAtPointFromDifferentials
 import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Kaehler.Basic
 import Mathlib.RingTheory.Noetherian.Defs

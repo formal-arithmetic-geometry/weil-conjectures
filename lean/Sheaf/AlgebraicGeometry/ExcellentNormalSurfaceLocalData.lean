@@ -23,7 +23,7 @@ import Sheaf.RingTheory.SerreCriterionNormal
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.SerreConditions
 
 /-!

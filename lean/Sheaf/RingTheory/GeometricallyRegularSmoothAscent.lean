@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Smooth.Basic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.Algebra.Field.Shrink
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
 

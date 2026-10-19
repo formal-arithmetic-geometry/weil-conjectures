@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition

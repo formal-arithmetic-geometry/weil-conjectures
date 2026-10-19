@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.GeometricallyRegularDescent

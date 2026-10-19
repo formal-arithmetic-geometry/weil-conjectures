@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
+import WeilConjectures.RingTheory.CompletionFiniteExtensionDecomposition
 import Mathlib.RingTheory.TensorProduct.Pi
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.PolynomialAlgebra

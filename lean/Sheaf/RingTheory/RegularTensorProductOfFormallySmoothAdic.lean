@@ -5,9 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
-import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 

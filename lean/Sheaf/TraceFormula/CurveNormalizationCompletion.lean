@@ -22,8 +22,8 @@ import WeilConjectures.RingTheory.FiniteOverNagata
 import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
-import Sheaf.RingTheory.CompletionOfDVR
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionOfDVR
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.FiniteType

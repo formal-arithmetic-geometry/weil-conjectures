@@ -16,7 +16,7 @@ public import Mathlib.Topology.Irreducible
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.RingTheory.AffineDimensionInequality
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!

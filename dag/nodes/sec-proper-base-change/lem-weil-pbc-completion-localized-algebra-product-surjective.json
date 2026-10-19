@@ -139,13 +139,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompletionLocalizedAlgebraProductSurjective",
-  "file": "lean/Sheaf/RingTheory/CompletionLocalizedAlgebraProductSurjective.lean",
+  "module": "WeilConjectures.RingTheory.CompletionLocalizedAlgebraProductSurjective",
+  "file": "lean/WeilConjectures/RingTheory/CompletionLocalizedAlgebraProductSurjective.lean",
   "declaration": "AdicCompletion.completion_localizedAlgebra_product_surjective",
   "statement": "theorem completion_localizedAlgebra_product_surjective\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    ∀ (ψ : ∀ q : Q, B →ₐ[S] Localization.AtPrime q.1),\n      (∀ (q : Q) (r : A), ψ q (r ⊗ₜ[R] (1 : S)) =\n        Localization.localRingHom p q.1 (algebraMap R S)\n          (Ideal.LiesOver.over (P := q.1) (p := p)) r) →\n      ∀ (g : AdicCompletion J B →+* (∀ q : Q, D q)),\n        (∀ (q : Q) (n : ℕ) (x : AdicCompletion J B) (b : B),\n          evalₐ J n x = Ideal.Quotient.mk (J ^ n) b →\n          evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g x q) =\n            Ideal.Quotient.mk\n              ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n) (ψ q b)) →\n        Function.Surjective g",
   "branch": "sheaf-dag",
   "by": "F2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompletionLocalizedAlgebraProductSurjective; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

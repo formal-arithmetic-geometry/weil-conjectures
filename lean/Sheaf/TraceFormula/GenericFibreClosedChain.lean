@@ -14,7 +14,7 @@ public import WeilConjectures.ZetaSeries
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # A maximal chain from the generic point to a closed point

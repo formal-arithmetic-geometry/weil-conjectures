@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.RingTheory.CompleteLocalMapCohenPresentation
+import WeilConjectures.RingTheory.CompleteLocalMapCohenPresentation
 import Sheaf.RingTheory.FlatClosedFiberPowerSeriesModel
 import Sheaf.RingTheory.PowerSeriesParameterMapFormallySmoothAdic
 import WeilConjectures.RingTheory.FormallySmoothAdicUniverseLift

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.RingTheory.FlatUnderRegular
 
 /-!

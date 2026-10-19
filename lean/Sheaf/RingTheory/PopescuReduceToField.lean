@@ -3,8 +3,8 @@ module
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
-public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.DesingularizeStrictlyStandard
+public import WeilConjectures.RingTheory.GRing
+import WeilConjectures.RingTheory.DesingularizeStrictlyStandard
 import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuMaximalBadQuotient

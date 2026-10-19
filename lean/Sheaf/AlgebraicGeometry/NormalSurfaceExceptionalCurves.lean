@@ -40,7 +40,7 @@ import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Exceptional curves of a normal excellent surface modification

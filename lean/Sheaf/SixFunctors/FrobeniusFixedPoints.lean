@@ -29,7 +29,7 @@ import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

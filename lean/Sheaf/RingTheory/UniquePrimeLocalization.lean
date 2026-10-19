@@ -16,7 +16,7 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Ideal.Maximal
 import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Localization at the unique prime over a base prime

@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.PolynomialAlgebra

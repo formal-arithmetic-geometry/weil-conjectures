@@ -23,7 +23,7 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Sheaf.FieldTheory.SeparableMonicApproximation
 import Sheaf.RingTheory.AffinoidPolynomialClosedPointComparison
 import Sheaf.RingTheory.ExcellentRing
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.HeightOneRealAbsoluteValue
 
 /-!

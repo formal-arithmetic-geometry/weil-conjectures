@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Blowup.Affine.ChartAlgebra
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 
 /-!
 # Polynomial presentation of a regular-sequence blowup chart

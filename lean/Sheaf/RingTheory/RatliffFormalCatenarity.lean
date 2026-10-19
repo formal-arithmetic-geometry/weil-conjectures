@@ -18,7 +18,7 @@ import Sheaf.RingTheory.UniversallyCatenaryDimensionFormula
 import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.CompleteLocalExcellent
 import WeilConjectures.RingTheory.CompletionDimension
-import Sheaf.RingTheory.FiniteAfterCompletion
+import WeilConjectures.RingTheory.FiniteAfterCompletion
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Ideal.GoingDown

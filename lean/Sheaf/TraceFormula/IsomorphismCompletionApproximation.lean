@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Unramified.LocalRing

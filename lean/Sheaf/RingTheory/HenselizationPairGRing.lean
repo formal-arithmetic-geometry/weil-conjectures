@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import WeilConjectures.RingTheory.PairHenselization
 import Sheaf.RingTheory.HenselizationPairGRingCore
 

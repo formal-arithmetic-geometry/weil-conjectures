@@ -5,9 +5,9 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompleteLocalQuotient
+public import WeilConjectures.RingTheory.GRing
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FiniteSubringGenericFormalFiber
 import Sheaf.RingTheory.GRingPairsOfPrimes
 import Sheaf.RingTheory.RegularPowerSeriesGenericFormalFiber

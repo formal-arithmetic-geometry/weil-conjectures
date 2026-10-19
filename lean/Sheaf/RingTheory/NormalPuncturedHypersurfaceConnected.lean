@@ -16,7 +16,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import WeilConjectures.RingTheory.CompletionDimension
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers

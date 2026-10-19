@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Order.Filter.IsBounded
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Sheaf.RingTheory.EtaleResidueTriplesFiltered
+import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
 import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
 import WeilConjectures.RingTheory.EtaleResidueTripleIdealRefinement
 import Sheaf.RingTheory.FilteredColimitFiniteData

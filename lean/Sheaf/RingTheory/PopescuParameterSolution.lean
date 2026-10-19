@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
 public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Extension.Presentation.Basic

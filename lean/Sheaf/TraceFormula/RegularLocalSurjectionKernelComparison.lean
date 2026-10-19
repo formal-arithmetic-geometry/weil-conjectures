@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.IsRegularIffDimensionDrop
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 
 /-!
 # Regular-sequence kernels along a surjection of regular local rings

@@ -24,7 +24,7 @@ import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Mathlib.RingTheory.Localization.Integral
 import Sheaf.RingTheory.NagataOfCompleteLocal
 import WeilConjectures.RingTheory.NagataRing

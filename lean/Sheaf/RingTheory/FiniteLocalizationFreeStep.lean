@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.ConePseudoCoherent
+import WeilConjectures.RingTheory.ConePseudoCoherent
 import WeilConjectures.RingTheory.FiniteHomologyOfMPseudoCoherent
 import WeilConjectures.RingTheory.PseudoCoherentIffAllM
 import Mathlib.CategoryTheory.Adjunction.Additive

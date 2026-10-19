@@ -37,7 +37,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!

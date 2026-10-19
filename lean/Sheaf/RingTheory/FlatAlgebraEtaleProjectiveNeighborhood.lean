@@ -16,7 +16,7 @@ import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.RingHom.FinitePresentation
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.TraceFormula.CompleteDevissageProjectiveLocalization
 
 /-!

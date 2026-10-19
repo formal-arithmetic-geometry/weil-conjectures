@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.RegularComposition
 import Sheaf.RingTheory.RegularThroughLocalization
 import Sheaf.RingTheory.LocalizationRegular

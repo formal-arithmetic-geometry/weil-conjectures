@@ -118,13 +118,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit",
-  "file": "lean/Sheaf/RingTheory/CompletionAtQuasiFinitePrimeSplit.lean",
+  "module": "WeilConjectures.RingTheory.CompletionAtQuasiFinitePrimeSplit",
+  "file": "lean/WeilConjectures/RingTheory/CompletionAtQuasiFinitePrimeSplit.lean",
   "declaration": "Algebra.completion_split_of_finite_subalgebra_away",
   "statement": "theorem completion_split_of_finite_subalgebra_away\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] (q : PrimeSpectrum S)\n    (S' : Subalgebra R S) [Module.Finite R S']\n    (g : S') (hg : g.1 ∉ q.asIdeal)\n    (haway : Function.Bijective (Localization.awayMap S'.val.toRingHom g)) :\n    let p : Ideal R := q.comap (algebraMap R S)\n    let Rp := Localization.AtPrime p\n    let Sq := Localization.AtPrime q.asIdeal\n    let Ip := IsLocalRing.maximalIdeal Rp\n    let Iq := IsLocalRing.maximalIdeal Sq\n    let Rph := AdicCompletion Ip Rp\n    let Sqh := AdicCompletion Iq Sq\n    let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl\n    let U := TensorProduct R Rph S\n    ∀ (ψ : Rph →+* Sqh),\n      (∀ (n : ℕ) (x : Rph) (a : Rp),\n        AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a →\n        AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)) →\n      ∃ (B : Type (max u v)) (_ : CommRing B) (β : U →+* B) (φ : U →+* Sqh),\n        (∀ (x : Rph) (y : S),\n          φ (TensorProduct.tmul R x y) =\n            ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) ∧\n        ∃ e : U ≃+* Sqh × B, e.toRingHom = RingHom.prod φ β",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit; points at its upstream twin."
  },
  "lean_audit": {
   "master": {

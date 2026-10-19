@@ -21,7 +21,7 @@ import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
-import Sheaf.RingTheory.Derivation.FormallySmoothAdicExtension
+import WeilConjectures.RingTheory.Derivation.FormallySmoothAdicExtension
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
 import WeilConjectures.RingTheory.Derivation.Localization

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.RingTheory.Ideal.GoingUp
 

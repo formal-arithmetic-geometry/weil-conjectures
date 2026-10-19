@@ -97,13 +97,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompletionFiniteExtensionDecomposition",
-  "file": "lean/Sheaf/RingTheory/CompletionFiniteExtensionDecomposition.lean",
+  "module": "WeilConjectures.RingTheory.CompletionFiniteExtensionDecomposition",
+  "file": "lean/WeilConjectures/RingTheory/CompletionFiniteExtensionDecomposition.lean",
   "declaration": "AdicCompletion.completion_finite_extension_decomposition",
   "statement": "theorem completion_finite_extension_decomposition\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    Finite Q ∧\n      ∃ (e : (C ⊗[R] S) ≃ₐ[S] (∀ q : Q, D q))\n        (g : ∀ q : Q, C →+* D q),\n        (∀ (q : Q) (n : ℕ) (a : C) (r : A),\n          AdicCompletion.evalₐ m n a = Ideal.Quotient.mk (m ^ n) r →\n          AdicCompletion.evalₐ\n              (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g q a) =\n            Ideal.Quotient.mk\n              ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n)\n              (Localization.localRingHom p q.1 (algebraMap R S)\n                (Ideal.LiesOver.over (P := q.1) (p := p)) r)) ∧\n        (∀ (a : C) (q : Q), e (a ⊗ₜ[R] (1 : S)) q = g q a)",
   "branch": "sheaf-dag",
   "by": "N2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompletionFiniteExtensionDecomposition; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

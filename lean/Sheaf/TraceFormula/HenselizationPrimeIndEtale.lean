@@ -12,7 +12,7 @@ import Mathlib.RingTheory.Etale.Basic
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.RingTheory.PairHenselization
 import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
 import Sheaf.RingTheory.IndEtaleUniverseTransport

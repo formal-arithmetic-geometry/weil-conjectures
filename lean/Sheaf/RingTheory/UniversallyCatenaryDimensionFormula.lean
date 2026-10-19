@@ -21,7 +21,7 @@ import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Ideal.GoingDown
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Dimension formula over a universally catenary domain

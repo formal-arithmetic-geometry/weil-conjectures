@@ -59,7 +59,7 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.Paper.ExchangeIdentityPasting
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor

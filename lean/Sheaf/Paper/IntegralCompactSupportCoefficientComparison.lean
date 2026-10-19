@@ -39,7 +39,7 @@ public import Sheaf.CategoryTheory.CompactSupportRoosCofinality
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import Sheaf.Paper.ProjectionMateExact

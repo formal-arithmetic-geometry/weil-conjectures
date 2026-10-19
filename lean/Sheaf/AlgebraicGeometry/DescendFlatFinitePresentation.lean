@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.RingTheory.ColimitFlatRingMap
+import WeilConjectures.RingTheory.ColimitFlatRingMap
 import WeilConjectures.AlgebraicGeometry.FlatDescentAffineCharts
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra

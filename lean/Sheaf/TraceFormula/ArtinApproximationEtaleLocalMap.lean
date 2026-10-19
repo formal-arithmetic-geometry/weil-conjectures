@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import WeilConjectures.RingTheory.CompletionMapForLocalHom
 import Mathlib.GroupTheory.MonoidLocalization.Away
 import Mathlib.RingTheory.AdicCompletion.Completeness

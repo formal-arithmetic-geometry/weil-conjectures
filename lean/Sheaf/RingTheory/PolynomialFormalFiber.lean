@@ -6,16 +6,16 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.Algebra.Polynomial.Basic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
 import Sheaf.RingTheory.PolynomialFormalFiberNoetherian
 import Sheaf.RingTheory.PolynomialFormalFiberGeometric

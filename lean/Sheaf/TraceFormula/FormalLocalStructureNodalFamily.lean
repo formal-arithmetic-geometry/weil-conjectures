@@ -22,8 +22,8 @@ import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FiniteAfterCompletion
+import WeilConjectures.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.FiniteAfterCompletion
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.FlatCompletion
 import WeilConjectures.RingTheory.FlatModInjective

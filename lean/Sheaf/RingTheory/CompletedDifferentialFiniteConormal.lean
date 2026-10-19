@@ -17,7 +17,7 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.RingTheory.KrullDimension.Zero
 import WeilConjectures.RingTheory.FiniteModuleComplete
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 
 /-!
 # Finite completed differentials and the completed conormal sequence

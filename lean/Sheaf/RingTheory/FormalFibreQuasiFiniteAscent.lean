@@ -5,9 +5,9 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.CompletionAtQuasiFinitePrime
+import WeilConjectures.RingTheory.CompletionAtQuasiFinitePrime
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.TensorProduct.Pi

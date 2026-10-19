@@ -13,7 +13,7 @@ public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
 import WeilConjectures.AlgebraicGeometry.SmoothDiagonalRegularGenerators
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 
 /-!
 # The smooth diagonal is Koszul regular, perfect and proper

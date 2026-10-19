@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.CompletionSurjectiveBaseChange
+import WeilConjectures.RingTheory.CompletionSurjectiveBaseChange
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 

@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
 public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
@@ -15,7 +15,7 @@ import Sheaf.RingTheory.PopescuCoefficientStart
 import Sheaf.RingTheory.PopescuCoefficientStep
 import WeilConjectures.RingTheory.EssentiallySmoothSmallLocalModel
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.EssentiallySmoothComp
+import WeilConjectures.RingTheory.EssentiallySmoothComp
 
 /-!
 # Coefficient enlargement along fixed parameters

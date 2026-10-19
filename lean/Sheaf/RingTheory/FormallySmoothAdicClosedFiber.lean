@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.FormallySmoothAdicFlat
 import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular

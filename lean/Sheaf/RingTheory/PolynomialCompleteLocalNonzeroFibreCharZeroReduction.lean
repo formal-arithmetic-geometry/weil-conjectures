@@ -5,9 +5,9 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.IsIntegral
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
 

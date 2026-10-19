@@ -19,7 +19,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import Sheaf.RingTheory.StrictHenselizationLocalMaximalIdeal
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.RingTheory.StrictHenselizationNoetherian

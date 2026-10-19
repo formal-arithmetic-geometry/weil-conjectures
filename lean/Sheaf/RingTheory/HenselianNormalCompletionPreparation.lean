@@ -36,11 +36,11 @@ import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.RingTheory.FiniteTypeGRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 import Sheaf.RingTheory.RatliffFormalCatenarity
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization

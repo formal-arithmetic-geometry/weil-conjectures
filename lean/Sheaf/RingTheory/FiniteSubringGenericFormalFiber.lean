@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Finiteness.Basic

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 

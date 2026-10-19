@@ -8,12 +8,12 @@ module
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import WeilConjectures.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Algebraic.Integral
 import Mathlib.RingTheory.Localization.Finiteness
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap

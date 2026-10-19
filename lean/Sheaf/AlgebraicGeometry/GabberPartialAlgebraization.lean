@@ -19,7 +19,7 @@ import Sheaf.RingTheory.CohenGabberFinitePresentations
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.FiniteHenselianAlgebraLocalModel
 import Sheaf.RingTheory.WeierstrassHenselianCylinder
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import Sheaf.RingTheory.GRingCompletionRegular
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

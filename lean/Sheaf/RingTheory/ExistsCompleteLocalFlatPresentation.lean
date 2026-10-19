@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.CompleteLocalMapRegularPresentation
+import WeilConjectures.RingTheory.CompleteLocalMapRegularPresentation
 
 /-!
 # Flat presentations of maps of complete Noetherian local rings

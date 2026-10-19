@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.SurfaceResolutionNormalizedRefinement
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Mathlib.RingTheory.Algebraic.Integral
 import Sheaf.TraceFormula.ProjectiveBundleProper
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.NagataOfCompleteLocal
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic

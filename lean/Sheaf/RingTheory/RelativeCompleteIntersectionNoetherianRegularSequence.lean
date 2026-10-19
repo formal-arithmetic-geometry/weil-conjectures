@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.MvPolynomial.Basic
-import Sheaf.RingTheory.RelativeCompleteIntersectionClosedFiberRegularSequence
-import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
+import WeilConjectures.RingTheory.RelativeCompleteIntersectionClosedFiberRegularSequence
+import WeilConjectures.RingTheory.RegularSequenceFlatClosedFiber
 
 /-! # The Noetherian case of local complete-intersection regularity
 

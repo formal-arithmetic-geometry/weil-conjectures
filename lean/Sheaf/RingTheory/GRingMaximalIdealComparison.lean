@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.LocalizationRegular

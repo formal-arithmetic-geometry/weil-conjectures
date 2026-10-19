@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.RingTheory.Flat.Equalizer
 

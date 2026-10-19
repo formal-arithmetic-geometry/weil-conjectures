@@ -5,7 +5,7 @@ Authors: SHEAF group N7
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Nilpotent.Defs
 import Mathlib.Algebra.Field.ULift

@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.Algebra.Category.Ring.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 
 /-!
 # Clopen refinements of pointed étale neighbourhoods

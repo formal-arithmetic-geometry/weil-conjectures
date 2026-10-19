@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
 import WeilConjectures.AlgebraicGeometry.SmoothDiagonalRegularGenerators
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.AlgebraicGeometry.SmoothDiagonalIdealConormalRank
 import Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison
 

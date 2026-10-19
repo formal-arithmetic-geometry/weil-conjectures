@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 import WeilConjectures.Blowup.Affine.ChartAlgebra

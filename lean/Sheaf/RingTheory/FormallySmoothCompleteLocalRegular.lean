@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import WeilConjectures.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.CompleteLocalQuotient
+public import WeilConjectures.RingTheory.GRing
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
 import Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber
 import Mathlib.RingTheory.TensorProduct.Maps

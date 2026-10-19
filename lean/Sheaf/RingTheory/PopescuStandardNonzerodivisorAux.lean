@@ -1,7 +1,7 @@
 module
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Algebra
 import Sheaf.RingTheory.PopescuLocalizedIndSmooth

@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import Sheaf.RingTheory.RegularRingEquiv
 

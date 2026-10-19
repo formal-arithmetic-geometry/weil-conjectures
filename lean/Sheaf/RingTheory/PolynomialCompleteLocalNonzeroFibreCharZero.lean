@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.PolynomialRegularBaseFormalFibre
 import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction
 

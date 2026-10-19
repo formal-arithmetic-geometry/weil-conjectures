@@ -111,13 +111,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.LocalTensorQuotientDetection",
-  "file": "lean/Sheaf/RingTheory/LocalTensorQuotientDetection.lean",
+  "module": "WeilConjectures.RingTheory.LocalTensorQuotientDetection",
+  "file": "lean/WeilConjectures/RingTheory/LocalTensorQuotientDetection.lean",
   "declaration": "AdicCompletion.local_tensor_quotient_detection",
   "statement": "theorem local_tensor_quotient_detection\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] (n : ℕ) :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let Q := p.primesOver S\n    ∃ k : ℕ, n ≤ k ∧ ∀ (ι : Type w) (t : Finset ι) (r : ι → A) (s : ι → S),\n      (∀ q : Q,\n        ∑ i ∈ t, Ideal.Quotient.mk\n          ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ k)\n          (Localization.localRingHom p q.1 (algebraMap R S)\n            (Ideal.LiesOver.over (P := q.1) (p := p)) (r i) *\n            algebraMap S (Localization.AtPrime q.1) (s i)) = 0) →\n      (∑ i ∈ t, (Ideal.Quotient.mk (m ^ n) (r i)) ⊗ₜ[R] s i) = 0",
   "branch": "sheaf-dag",
   "by": "G3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalTensorQuotientDetection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

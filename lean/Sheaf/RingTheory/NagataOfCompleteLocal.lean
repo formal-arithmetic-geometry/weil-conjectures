@@ -8,8 +8,8 @@ module
 public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Sheaf.RingTheory.PowerSeriesN2
 import Sheaf.RingTheory.TateN2CompletePrincipal

@@ -15,7 +15,7 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.RingTheory.AdicCompletion.Noetherian
 import Sheaf.Paper.AdicTowerReconstruction
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!

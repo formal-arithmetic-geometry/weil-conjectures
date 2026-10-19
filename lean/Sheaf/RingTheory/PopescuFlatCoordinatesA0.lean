@@ -1,6 +1,6 @@
 module
 public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.ArtinianFlatSubalgebras
 import Sheaf.RingTheory.PopescuFlatCoordinatesSetup
 

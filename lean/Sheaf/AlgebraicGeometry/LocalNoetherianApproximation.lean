@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.Ring.Constructions
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.RingTheory.FiniteStability
-import Sheaf.RingTheory.ColimitFlatRingMap
+import WeilConjectures.RingTheory.ColimitFlatRingMap
 import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
 import Mathlib.AlgebraicGeometry.Properties

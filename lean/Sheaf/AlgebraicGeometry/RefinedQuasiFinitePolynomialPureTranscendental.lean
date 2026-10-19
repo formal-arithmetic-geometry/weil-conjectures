@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import Sheaf.RingTheory.QuasiFiniteLocusOpen
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

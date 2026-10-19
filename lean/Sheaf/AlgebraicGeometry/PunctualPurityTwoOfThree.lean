@@ -22,7 +22,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.DerivedGeometricStalkConservative
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

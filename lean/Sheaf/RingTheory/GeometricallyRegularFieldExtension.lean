@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import WeilConjectures.FieldTheory.MakeSeparable
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra

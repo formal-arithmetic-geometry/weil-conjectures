@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.LocalizationLocalization

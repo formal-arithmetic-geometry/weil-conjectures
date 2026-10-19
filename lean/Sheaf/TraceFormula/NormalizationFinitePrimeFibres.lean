@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.IntegralComponentHenselianPermanence
 import Sheaf.RingTheory.NormalizationCompletedBranchLift
 import WeilConjectures.Mathlib.RingTheory.Henselian

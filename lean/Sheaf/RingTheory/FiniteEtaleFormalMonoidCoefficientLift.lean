@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 import Mathlib.RingTheory.FiniteType
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Mathlib.RingTheory.Henselian
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Ideal.GoingUp

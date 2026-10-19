@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Sheaf.RingTheory.Derivation.PowerSeriesPolynomialNormalization
+import WeilConjectures.RingTheory.Derivation.PowerSeriesPolynomialNormalization
 import Sheaf.RingTheory.Derivation.PowerSeriesPolynomialDifferential
 import Mathlib.Algebra.CharP.Algebra
 import Mathlib.LinearAlgebra.Dual.Lemmas

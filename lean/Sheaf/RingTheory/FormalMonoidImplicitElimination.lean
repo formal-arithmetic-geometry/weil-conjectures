@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.FiniteType
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FormalMonoidAdicEvaluation
 
 /-!

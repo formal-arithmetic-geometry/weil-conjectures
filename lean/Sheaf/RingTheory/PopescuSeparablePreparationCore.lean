@@ -7,7 +7,7 @@ import Sheaf.RingTheory.ImprovePresentation
 import WeilConjectures.RingTheory.PopescuPolynomialQuotientSmooth
 import Mathlib.RingTheory.FiniteType
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Sheaf.RingTheory.CommonStrictlyStandardPower
+import WeilConjectures.RingTheory.CommonStrictlyStandardPower
 
 @[expose] public section
 

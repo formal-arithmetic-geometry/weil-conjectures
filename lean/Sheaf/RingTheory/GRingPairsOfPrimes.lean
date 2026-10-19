@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.GRingPairsForward
 import Sheaf.RingTheory.GRingPairsBackward

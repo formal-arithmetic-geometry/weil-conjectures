@@ -28,7 +28,7 @@ import Sheaf.Algebra.Homology.PerfectAlgebraCoinductionTensor
 import Sheaf.CategoryTheory.DerivedCategory.PerfectComplexDerivedBiduality
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.Algebra.Homology.AlgebraicShriekDerivedHomAdjunction
 
 /-! # Polynomial reduction of diagonal derived Hom

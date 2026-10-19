@@ -5,14 +5,14 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 import WeilConjectures.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.DifferentialCoordinatesCotangentIndependent
-import Sheaf.RingTheory.GeometricallyRegularH1Injective
+import WeilConjectures.RingTheory.DifferentialCoordinatesCotangentIndependent
+import WeilConjectures.RingTheory.GeometricallyRegularH1Injective
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.Mathlib.Algebra.Module.SpanRankOperations

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 import all WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 import WeilConjectures.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
-import Sheaf.RingTheory.CompleteIntersectionPresentationStableConormal
+import WeilConjectures.RingTheory.CompleteIntersectionPresentationStableConormal
 import Mathlib.RingTheory.LocalRing.Module
 
 /-!

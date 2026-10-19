@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Sheaf.Paper.SmoothSectionEtaleLift
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.EtaleSectionLiftingOfGabberRoots

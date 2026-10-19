@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Mathlib.Algebra.Polynomial.AlgebraMap
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.PolynomialResidueFiniteCoefficientModel

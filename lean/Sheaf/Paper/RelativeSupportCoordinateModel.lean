@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import Sheaf.AlgebraicGeometry.RelativeHigherDirectImageContinuity
 import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial

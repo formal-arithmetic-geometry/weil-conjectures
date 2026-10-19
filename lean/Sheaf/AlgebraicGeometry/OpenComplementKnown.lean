@@ -29,7 +29,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Mathlib.CategoryTheory.Sites.Sheaf

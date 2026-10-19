@@ -37,8 +37,8 @@ import Sheaf.RingTheory.RelativeRegularEquationsBaseChange
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
-import Sheaf.RingTheory.RegularSequenceConormal
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import Mathlib.RingTheory.MvPolynomial.Localization
 import Sheaf.TraceFormula.TwoTermPerfectDeterminant
 

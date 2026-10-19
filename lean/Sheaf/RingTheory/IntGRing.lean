@@ -5,8 +5,8 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.DVRCompletionRegular
+public import WeilConjectures.RingTheory.GRing
+import WeilConjectures.RingTheory.DVRCompletionRegular
 import WeilConjectures.RingTheory.IntegerPrimeLocalizations
 import Sheaf.RingTheory.LocalizationRegular
 import Mathlib.Algebra.CharP.Algebra

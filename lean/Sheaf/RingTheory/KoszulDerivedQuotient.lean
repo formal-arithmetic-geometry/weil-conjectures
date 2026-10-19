@@ -11,7 +11,7 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.TensorProduct.Quotient
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.RingTheory.KoszulBaseChangeIso
 import WeilConjectures.AlgebraicGeometry.KoszulComplex

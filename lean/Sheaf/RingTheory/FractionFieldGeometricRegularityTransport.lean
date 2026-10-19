@@ -1,5 +1,5 @@
 module
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.FractionRing
 import Sheaf.RingTheory.GeometricRegularityFieldIso
 @[expose] public section

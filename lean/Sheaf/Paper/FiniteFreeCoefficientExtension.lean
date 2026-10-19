@@ -38,7 +38,7 @@ public import Sheaf.AlgebraicGeometry.EvaluationHomSiteComparison
 public import Sheaf.Paper.ExceptionalCoefficientComparison
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison

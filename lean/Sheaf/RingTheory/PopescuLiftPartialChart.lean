@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.PopescuLiftPresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.EquationCountFibreDimensionFlat
+import WeilConjectures.RingTheory.EquationCountFibreDimensionFlat
 import Sheaf.RingTheory.PopescuPartialChartPolynomial
 import WeilConjectures.RingTheory.KaehlerDifferentialsPolynomialExtension
 import Mathlib.RingTheory.Kaehler.TensorProduct

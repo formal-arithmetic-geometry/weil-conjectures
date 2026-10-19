@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import WeilConjectures.RingTheory.SingularIdeal
-import Sheaf.RingTheory.DesingularizeStrictlyStandard
+import WeilConjectures.RingTheory.DesingularizeStrictlyStandard
 import Sheaf.RingTheory.PopescuLiftingWitness
 import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 

@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.PurelyInseparableIntegralPrimeUnique
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 import Mathlib.Algebra.Algebra.Pi
 import Mathlib.RingTheory.TensorProduct.Maps

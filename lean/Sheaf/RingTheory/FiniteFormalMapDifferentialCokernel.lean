@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import WeilConjectures.RingTheory.FiniteModuleComplete
-import Sheaf.RingTheory.FiniteOverCompleteRing
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
 
 /-!
 # Completed differentials of a finite formal parameter map

@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.QuasiExcellentNagata
@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CompletionDimension
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Sheaf.RingTheory.GRingCompletionRegular

@@ -140,14 +140,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.RingTheory.EquationCountLocalizeRGCI",
+  "module": "WeilConjectures.RingTheory.EquationCountLocalizeRGCI",
   "declaration": "Algebra.localized_presentation_is_relativeGlobalCompleteIntersection",
-  "file": "lean/Sheaf/RingTheory/EquationCountLocalizeRGCI.lean",
+  "file": "lean/WeilConjectures/RingTheory/EquationCountLocalizeRGCI.lean",
   "statement": "theorem localized_presentation_is_relativeGlobalCompleteIntersection\n    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))\n    (hdim : let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)\n      let p := PrimeSpectrum.comap (algebraMap R S) q\n      c ≤ n ∧ topologicalKrullDimAt\n        (PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩) = (n - c : ℕ))\n    : ∃ h : MvPolynomial (Fin n) R,\n    let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)\n    let g : S := Ideal.Quotient.mk _ h\n    g ∉ q.asIdeal ∧\n    let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R :=\n      Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1)\n        (fun i ↦ MvPolynomial.rename some (f i))\n    let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations)\n    IsRelativeGlobalCompleteIntersection (algebraMap R T) ∧\n      (∀ (p : Ideal R) (_hp : p.IsPrime),\n        letI : p.IsPrime := _hp\n        Nontrivial (p.Fiber T) →\n          c + 1 ≤ n + 1 ∧\n            topologicalKrullDim (PrimeSpectrum (p.Fiber T)) =\n              (n + 1 - (c + 1) : ℕ))",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.EquationCountLocalizeRGCI; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

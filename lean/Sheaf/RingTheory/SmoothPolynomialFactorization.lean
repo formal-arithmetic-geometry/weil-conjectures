@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.RingTheory.PopescuSmoothing

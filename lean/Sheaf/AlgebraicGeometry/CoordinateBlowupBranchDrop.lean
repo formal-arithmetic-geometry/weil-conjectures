@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.NormalCrossingsBranchCount
 public import Sheaf.AlgebraicGeometry.PermissibleCoordinateChart
 public import WeilConjectures.Blowup.Affine.ChartAlgebra
 public import WeilConjectures.Compactification.StrictTransform
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Blowup.Affine.Principalization

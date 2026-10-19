@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionFiniteExtension
 
 @[expose] public section
 

@@ -1,6 +1,6 @@
 module
 public import Mathlib.Algebra.Polynomial.Basic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian

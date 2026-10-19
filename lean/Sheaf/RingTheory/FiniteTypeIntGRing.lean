@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.FiniteTypeGRing
 import Sheaf.RingTheory.IntGRing

@@ -16,7 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.PopescuSmoothing
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit

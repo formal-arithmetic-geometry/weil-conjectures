@@ -11,7 +11,7 @@ public import Sheaf.Paper.PurityVectorBundleZeroSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 import WeilConjectures.AlgebraicGeometry.Modules.GenericRank

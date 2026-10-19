@@ -90,7 +90,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerS
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
@@ -119,7 +118,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Clo
 import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.RingTheory.Etale.LocalDimension
+import WeilConjectures.RingTheory.Etale.LocalDimension
 import Sheaf.AlgebraicGeometry.QcqsHigherDirectImage
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.Paper.FiniteFieldFiber

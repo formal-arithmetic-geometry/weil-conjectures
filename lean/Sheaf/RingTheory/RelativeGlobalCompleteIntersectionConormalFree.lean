@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.LocalProperties.Basic
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence
 
 /-!

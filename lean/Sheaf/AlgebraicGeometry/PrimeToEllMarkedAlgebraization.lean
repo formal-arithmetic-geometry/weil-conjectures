@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.FunctionField
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite

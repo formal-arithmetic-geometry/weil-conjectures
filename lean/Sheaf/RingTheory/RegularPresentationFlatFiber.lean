@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Sheaf.RingTheory.CompleteLocalQuotient
+import WeilConjectures.RingTheory.CompleteLocalQuotient
 import WeilConjectures.RingTheory.FlatOverRegular
 import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 import Sheaf.RingTheory.RegularFiberKernelParameterLift

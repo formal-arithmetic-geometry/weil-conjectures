@@ -106,14 +106,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.RingTheory.PthRootResidueDimensionBalance",
-  "file": "lean/Sheaf/RingTheory/PthRootResidueDimensionBalance.lean",
+  "module": "WeilConjectures.RingTheory.PthRootResidueDimensionBalance",
+  "file": "lean/WeilConjectures/RingTheory/PthRootResidueDimensionBalance.lean",
   "declaration": "Algebra.pthRoot_residue_dimension_balance",
   "statement": "theorem pthRoot_residue_dimension_balance\n    (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]\n    [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p]\n    (hA : IsGeometricallyRegular k A) (n : ℕ) (a : Fin n → k) :\n    letI := ZMod.algebra k p\n    letI := ((algebraMap k A).comp (algebraMap (ZMod p) k)).toAlgebra\n    let B := pthRootAlgebra p n A (fun i ↦ algebraMap k A (a i))\n    ∀ [IsLocalRing B] [IsLocalHom (algebraMap A B)],\n    LinearIndependent k (fun i ↦ KaehlerDifferential.D (ZMod p) k (a i)) →\n    let L := IsLocalRing.ResidueField B\n    let β := residueDifferentialComparison p A B\n    Module.finrank L β.ker =\n      Module.finrank L ((L ⊗[B] KaehlerDifferential (ZMod p) B) ⧸ β.range)",
   "branch": "sheaf-dag",
   "by": "P3",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PthRootResidueDimensionBalance; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

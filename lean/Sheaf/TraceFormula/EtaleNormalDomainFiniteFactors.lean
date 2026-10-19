@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.Algebra.Algebra.Pi
 import Sheaf.RingTheory.EtaleNormalRing
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 
 /-!

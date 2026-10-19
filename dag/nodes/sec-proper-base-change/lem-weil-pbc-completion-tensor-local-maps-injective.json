@@ -106,13 +106,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompletionTensorLocalMapsInjective",
-  "file": "lean/Sheaf/RingTheory/CompletionTensorLocalMapsInjective.lean",
+  "module": "WeilConjectures.RingTheory.CompletionTensorLocalMapsInjective",
+  "file": "lean/WeilConjectures/RingTheory/CompletionTensorLocalMapsInjective.lean",
   "declaration": "AdicCompletion.completion_tensor_localMaps_injective",
   "statement": "theorem completion_tensor_localMaps_injective\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    ∀ (f : (C ⊗[R] S) →ₐ[S] (∀ q : Q, D q)),\n      (∀ (q : Q) (n : ℕ) (a : C) (r : A),\n        evalₐ m n a = Ideal.Quotient.mk (m ^ n) r →\n        evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n\n            (f (a ⊗ₜ[R] (1 : S)) q) =\n          Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n)\n            (Localization.localRingHom p q.1 (algebraMap R S)\n              (Ideal.LiesOver.over (P := q.1) (p := p)) r)) →\n      Function.Injective f",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompletionTensorLocalMapsInjective; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

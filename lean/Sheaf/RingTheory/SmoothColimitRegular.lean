@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.Smooth.Basic
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Noetherian.Basic

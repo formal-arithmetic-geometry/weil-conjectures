@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.MvPolynomial.Basic
-import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound
+import WeilConjectures.RingTheory.PolynomialQuotientDimensionLowerBound
 import Mathlib.RingTheory.Extension.Presentation.Basic
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import Sheaf.Paper.NoetherianCoefficientNeighborhood

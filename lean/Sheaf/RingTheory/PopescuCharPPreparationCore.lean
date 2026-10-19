@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V3
 -/
 module
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
 public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic

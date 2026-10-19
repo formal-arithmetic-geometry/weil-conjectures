@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
 import Sheaf.TraceFormula.CurveNormalizationCompletion
 import Sheaf.AlgebraicGeometry.NodalPointLocalCriterion
-import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.CompletionOfDVR
+import WeilConjectures.RingTheory.CompletionFiniteExtension
+import WeilConjectures.RingTheory.CompletionOfDVR
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import WeilConjectures.RingTheory.SimpleFiltration
 import WeilConjectures.RingTheory.PowerSeriesAdicEvaluation

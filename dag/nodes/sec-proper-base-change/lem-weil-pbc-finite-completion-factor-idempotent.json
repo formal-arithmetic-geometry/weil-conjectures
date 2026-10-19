@@ -105,13 +105,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FiniteCompletionFactorIdempotent",
-  "file": "lean/Sheaf/RingTheory/FiniteCompletionFactorIdempotent.lean",
+  "module": "WeilConjectures.RingTheory.FiniteCompletionFactorIdempotent",
+  "file": "lean/WeilConjectures/RingTheory/FiniteCompletionFactorIdempotent.lean",
   "declaration": "Algebra.finite_completion_factor_idempotent",
   "statement": "theorem finite_completion_factor_idempotent\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] (q : PrimeSpectrum S)\n    (S' : Subalgebra R S) [Module.Finite R S']\n    (g : S') (hg : g.1 ∉ q.asIdeal)\n    (haway : Function.Bijective (Localization.awayMap S'.val.toRingHom g)) :\n    let p : Ideal R := q.comap (algebraMap R S)\n    let Rp := Localization.AtPrime p\n    let Sq := Localization.AtPrime q.asIdeal\n    let Ip := IsLocalRing.maximalIdeal Rp\n    let Iq := IsLocalRing.maximalIdeal Sq\n    let Rph := AdicCompletion Ip Rp\n    let Sqh := AdicCompletion Iq Sq\n    let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl\n    let T := TensorProduct R Rph S'\n    let U := TensorProduct R Rph S\n    let j := (TensorProduct.map (AlgHom.id R Rph) S'.val).toRingHom\n    let γ := TensorProduct.tmul R (1 : Rph) g\n    ∀ (ψ : Rph →+* Sqh),\n      (∀ (n : ℕ) (x : Rph) (a : Rp),\n        AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a →\n        AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)) →\n      ∀ (φ : U →+* Sqh),\n        (∀ (x : Rph) (y : S), φ (TensorProduct.tmul R x y) =\n          ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) →\n        ∃ e v : T, IsIdempotentElem e ∧ v * γ = e ∧ φ (j e) = 1 ∧\n          Function.Surjective (φ.comp j) ∧ (∀ t, φ (j t) = 0 → e * t = 0)",
   "branch": "sheaf-dag",
   "by": "X3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FiniteCompletionFactorIdempotent; points at its upstream twin."
  },
  "lean_audit": {
   "master": {

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.RingTheory.IsStrictHenselization
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.PointedEtaleSmallFiltered

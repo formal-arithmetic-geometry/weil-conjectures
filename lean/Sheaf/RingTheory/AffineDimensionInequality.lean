@@ -19,7 +19,7 @@ import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Ideal.GoingDown
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Dimension inequality for finite type inclusions of Noetherian domains

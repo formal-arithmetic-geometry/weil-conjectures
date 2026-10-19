@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.FormalMonoidExtensionModel
 import Sheaf.TraceFormula.FsFaceSharpening
-import Sheaf.RingTheory.FiniteCompletionFactorIdempotent
+import WeilConjectures.RingTheory.FiniteCompletionFactorIdempotent
 import Mathlib.RingTheory.FiniteType
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete

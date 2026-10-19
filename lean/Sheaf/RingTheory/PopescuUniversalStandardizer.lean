@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.RingTheory.PopescuStandardizerSmoothOpens
 import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import WeilConjectures.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
 import WeilConjectures.RingTheory.StrictlyStandardBaseChange
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Localization.BaseChange

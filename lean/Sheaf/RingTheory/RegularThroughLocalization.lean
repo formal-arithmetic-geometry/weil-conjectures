@@ -5,7 +5,7 @@ Authors: SHEAF contributors
 -/
 module
 
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.BaseChange

@@ -126,15 +126,16 @@
  },
  "reviewed": "pass (L, 2026-10-10): 7 steps follow 00ST (3): 00QH (new unsplit node, the fibre dimension is bounded above on an open neighbourhood; the brief's tag 00RJ was wrong, corrected in source.place) gives D(g); T = S_g by the extra variable; the lower bound n - c on all fibre local dimensions (Krull, written out); fibres of T are localizations of fibres of S, so their local dimensions are exactly n - c; dimension = sup of local dimensions (0B7I). New leaf for basic opens and Spec of a localization.",
  "lean": {
-  "module": "Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection",
+  "module": "WeilConjectures.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection",
   "declaration": "Algebra.exists_localization_relativeGlobalCompleteIntersection",
-  "file": "lean/Sheaf/RingTheory/EquationCountLocalizeRelativeGlobalCompleteIntersection.lean",
+  "file": "lean/WeilConjectures/RingTheory/EquationCountLocalizeRelativeGlobalCompleteIntersection.lean",
   "statement": "theorem exists_localization_relativeGlobalCompleteIntersection (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (hdim : let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f) let p := PrimeSpectrum.comap (algebraMap R S) q c ≤ n ∧ topologicalKrullDimAt (PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩) = (n - c : ℕ)) : ∃ h : MvPolynomial (Fin n) R, let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f) let g : S := Ideal.Quotient.mk _ h g ∉ q.asIdeal ∧ let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R := Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1) (fun i ↦ MvPolynomial.rename some (f i)) let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations) IsRelativeGlobalCompleteIntersection (algebraMap R T) ∧ (∀ (p : Ideal R) (_hp : p.IsPrime), letI : p.IsPrime := _hp Nontrivial (p.Fiber T) → c + 1 ≤ n + 1 ∧ topologicalKrullDim (PrimeSpectrum (p.Fiber T)) = (n + 1 - (c + 1) : ℕ)) ∧ ∃ e : T ≃ₐ[R] Localization.Away g, (∀ i : Fin n, e (Ideal.Quotient.mk _ (MvPolynomial.X (some i))) = algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧ e (Ideal.Quotient.mk _ (MvPolynomial.X none)) = IsLocalization.Away.invSelf g",
   "branch": "sheaf-dag",
   "by": "K1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-ecl0955"
+  "fixed_by": "R-ecl0955",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

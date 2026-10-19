@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
-public import Sheaf.RingTheory.GRing
+public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.Algebra.MvPolynomial.Basic

@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.EssentiallySmoothComp
+import WeilConjectures.RingTheory.EssentiallySmoothComp
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.Artinian.Module

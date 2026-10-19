@@ -50,7 +50,7 @@ import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
 import Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
-import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions

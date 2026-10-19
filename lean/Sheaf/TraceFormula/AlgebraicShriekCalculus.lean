@@ -26,8 +26,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import WeilConjectures.RingTheory.FiniteFreeResolution

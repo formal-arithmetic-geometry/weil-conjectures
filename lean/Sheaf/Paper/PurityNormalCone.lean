@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 import Sheaf.AlgebraicGeometry.RegularImmersionPureCodimension
 import Sheaf.Paper.PurityVectorBundleZeroSection
-import Sheaf.RingTheory.RegularSequenceConormal
+import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.RegularSequenceGradedPolynomial
 import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 

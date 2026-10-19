@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.GRingAffineCover
 import Sheaf.AlgebraicGeometry.JTwoAffineCover
 import Sheaf.AlgebraicGeometry.UniversallyCatenaryAffineCover
-import Sheaf.RingTheory.GRing
+import WeilConjectures.RingTheory.GRing
 
 /-! # Excellence detected on affine open covers
 

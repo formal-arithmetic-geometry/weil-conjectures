@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
 import WeilConjectures.Algebra.Homology.FreeResolutionSesSplit
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.Topology.Sober
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.ValuationDomainFibreDimensions
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 

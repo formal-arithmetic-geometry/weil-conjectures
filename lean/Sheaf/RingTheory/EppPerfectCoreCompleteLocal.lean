@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Algebraic.Defs
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Mathlib.RingTheory.MvPowerSeries.Basic
 import Mathlib.RingTheory.LaurentSeries
 
