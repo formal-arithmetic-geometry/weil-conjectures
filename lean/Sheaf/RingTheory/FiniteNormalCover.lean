@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Sheaf.RingTheory.FiniteNormalCoverFamily
-import Sheaf.RingTheory.FiniteNormalCoverSupNormal
+import WeilConjectures.RingTheory.FiniteNormalCoverSupNormal
 
 @[expose] public section
 

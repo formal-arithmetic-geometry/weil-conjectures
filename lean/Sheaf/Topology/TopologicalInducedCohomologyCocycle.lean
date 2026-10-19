@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Sheaf.Topology.TopologicalInducedEdgeAndMap
+import WeilConjectures.Topology.TopologicalInducedEdgeAndMap
 import Sheaf.Topology.TopologicalInducedCocycleFormula
 
 /-! # The induced topological cohomology map on cocycles -/

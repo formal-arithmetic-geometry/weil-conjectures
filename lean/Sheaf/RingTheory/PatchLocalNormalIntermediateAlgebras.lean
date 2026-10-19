@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.NormalLocusOpen
 import Sheaf.RingTheory.FiniteNormalCover
-import Sheaf.RingTheory.FiniteNormalSup
+import WeilConjectures.RingTheory.FiniteNormalSup
 
 @[expose] public section
 

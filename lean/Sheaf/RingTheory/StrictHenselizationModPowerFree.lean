@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Defs
 import Sheaf.RingTheory.StrictHenselizationQuotientBases
-import Sheaf.RingTheory.FixedQuotientBasesCompletion
+import WeilConjectures.RingTheory.FixedQuotientBasesCompletion
 
 /-!
 # Fixed bases for strict henselization quotients and their completed comparison

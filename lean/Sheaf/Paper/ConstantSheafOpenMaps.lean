@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Topology.LocallyConstantMapsPresheaf
+public import WeilConjectures.Topology.LocallyConstantMapsPresheaf
 public import Mathlib.Topology.Sheaves.Sheaf
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 

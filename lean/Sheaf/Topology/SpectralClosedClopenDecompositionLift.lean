@@ -8,7 +8,7 @@ module
 public import Mathlib.Topology.Category.TopCat.Basic
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Connected.Basic
-import Sheaf.Topology.ProconstructibleClosureSpecialization
+import WeilConjectures.Topology.ProconstructibleClosureSpecialization
 import Sheaf.Topology.SpectralGeneralizations
 
 /-! # Lifting clopen decompositions from a closed spectral subspace

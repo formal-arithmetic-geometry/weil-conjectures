@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.Connected.Basic
 import Sheaf.RingTheory.IntegralOverHenselianPair
-import Sheaf.RingTheory.HenselianPairDomainConnected
+import WeilConjectures.RingTheory.HenselianPairDomainConnected
 
 /-!
 # Connected zero loci over a henselian pair

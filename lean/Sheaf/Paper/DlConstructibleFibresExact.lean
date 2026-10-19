@@ -44,7 +44,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 import WeilConjectures.RingTheory.ProEtale.WLocal
 import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.WContractibleGeometricCriterion
+import WeilConjectures.RingTheory.WContractibleGeometricCriterion
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Sheaf.Paper.SfOpenClosedTriangleAllStages
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
@@ -52,6 +52,7 @@ import Sheaf.Paper.SfWeilSheafComplex
 import Mathlib.CategoryTheory.Endofunctor.Algebra
 import Sheaf.Paper.CondensedERealization
 import Sheaf.Paper.StratifiedLatticeRank
+import Sheaf.RingTheory.IndPrincipalZariski
 
 /-! # Exact and jointly conservative constructible adic coefficient fibres
 

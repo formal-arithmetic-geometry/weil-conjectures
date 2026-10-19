@@ -2,7 +2,7 @@ module
 
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
-import Sheaf.RingTheory.PowerSeriesNormalDomain
+import WeilConjectures.RingTheory.PowerSeriesNormalDomain
 import Sheaf.RingTheory.TateN2CompletePrincipal
 import Sheaf.RingTheory.IsN2OfFiniteExtension
 import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
