@@ -1,0 +1,166 @@
+{
+ "id": "lem-roos-eventually-constant-projection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-unbounded-window-arbitrary",
+   "place": "Milnor: eventual constancy and cone projections",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Eventually constant Roos projection",
+ "statement": "Let C be an abelian category with a derived category D(C) having countable products. Suppose H^j preserves countable products for every integer j. For a tower F : ℕᵒᵖ → D(C), a homotopy-limit cone c and integers q and natural N, assume the successor transitions are isomorphisms on H^q and H^(q-1) for all indices at least N. Then H^q(c → F_n) is an isomorphism for every n≥N.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+  "place": "Eventually constant Roos projection"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use homotopy-limit tail invariance to discard indices below n. In degree q-1 construct a section of 1-T recursively: x_0=0 and x_(i+1)=(x_i-proj_i) followed by the inverse transition. The product universal property and telescoping verify that it is a section, hence 1-T is epic. The Milnor long exact sequence makes the first degree-q arrow monic and exact as the kernel of its difference map. Compose inverse transition isomorphisms to give a compatible family of maps from the zeroth term to all terms; lift its product map through this kernel. The zeroth projection gives one inverse identity. Product extensionality, cone compatibility and induction give the other.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Eventually constant Roos projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+  "place": "Eventually constant Roos projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncGE.*(stabili|rightDerived)|rightDerived.*truncGE|eventually.*[Ii]so",
+   "results": [
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Algebra/Regular/Basic.lean",
+    "Mathlib/Order/Filter/Extr.lean",
+    "Mathlib/Topology/Algebra/Affine.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": [
+    "DerivedCategory.IsLE",
+    "DerivedCategory.instIsLEObjSingleFunctor",
+    "DerivedCategory.isZero_of_isLE",
+    "DerivedCategory.isLE_iff",
+    "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+    "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+    "DerivedCategory.isLE_Q_obj_iff",
+    "DerivedCategory.exists_iso_Q_obj_of_isLE"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension right derived functor stabilizes cohomology on lower truncations of unbounded complexes",
+   "results": [
+    "DerivedCategory.isGE_Q_obj_iff",
+    "DerivedCategory.isLE_Q_obj_iff",
+    "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+    "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+    "DerivedCategory.isGE_iff",
+    "DerivedCategory.isLE_iff",
+    "DerivedCategory.isZero_of_isLE",
+    "DerivedCategory.isZero_of_isGE"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy limit cone eventually isomorphism cohomology tower",
+   "results": [
+    "HomologicalComplex.homotopyCofiber.XIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'",
+    "CochainComplex.cm5b.homotopyEquiv"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of homotopy limits and Postnikov truncation towers in derived categories",
+   "results": [
+    "HomologicalComplex.instHasLimit",
+    "HomotopyCategory.instPretriangulatedIntUp",
+    "DerivedCategory.homologyFunctorFactorsh",
+    "HomologicalComplex.instHasLimitsOfShape",
+    "CategoryTheory.CosimplicialObject.Truncated.instHasLimitsOfShape",
+    "DerivedCategory.instIsHomologicalHomologyFunctor",
+    "CategoryTheory.CosimplicialObject.Truncated.instHasColimitsOfShape",
+    "CategoryTheory.NatTrans.leftDerivedToHomotopyCategory"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-proper-unbounded-window",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RoosEventuallyConstant",
+  "file": "lean/Sheaf/CategoryTheory/RoosEventuallyConstant.lean",
+  "declaration": "DerivedCategory.isIso_homology_map_cone_leg_of_eventually_isIso",
+  "statement": "theorem DerivedCategory.isIso_homology_map_cone_leg_of_eventually_isIso\n    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]\n    [HasCountableProducts (DerivedCategory C)]\n    (F : ℕᵒᵖ ⥤ DerivedCategory C) (c : Cone F)\n    (hc : IsHomotopyLimit c)\n    (hprod : ∀ j : ℤ, PreservesLimitsOfShape (Discrete ℕ)\n      (DerivedCategory.homologyFunctor C j))\n    (q : ℤ) (N : ℕ)\n    (ht : ∀ n : ℕ, N ≤ n →\n      IsIso ((DerivedCategory.homologyFunctor C q).map\n        (F.map (homOfLE n.le_succ).op)) ∧\n      IsIso ((DerivedCategory.homologyFunctor C (q - 1)).map\n        (F.map (homOfLE n.le_succ).op)))\n    (n : ℕ) (hn : N ≤ n) :\n    IsIso ((DerivedCategory.homologyFunctor C q).map (c.π.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-19"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperIndConstructibleUnbounded",
+  "date": "2026-10-19",
+  "group": "K6"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T005335-L-2754234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T005335-L-2754234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

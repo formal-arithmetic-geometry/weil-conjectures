@@ -1,0 +1,201 @@
+{
+ "id": "lem-module-object-postnikov-roos",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-unbounded-window-arbitrary",
+   "place": "Limit presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Module-object Postnikov Roos cone",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, let $p:X\\to Y$ be any morphism of schemes, and let $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$. Here module objects and their derived direct image $Rp_*$ are those of [sk-def-sfb-module-objects] and [sk-def-sfb-module-derived-pushpull]. Form the inverse tower $A_n=\\tau_{\\geq -n}K$ with its canonical truncation transitions and its canonical cone with vertex $K$ and legs $K\\to A_n$. Applying $Rp_*$ to this entire cone produces a homotopy-limit cone: its canonical map to $\\prod_n Rp_*A_n$ is the first map of a distinguished Roos triangle with second map $1-T$. Moreover, for every integer $j$, the functor $H^j:D(\\operatorname{Mod}_{\\Lambda_Y})\\to\\operatorname{Mod}_{\\Lambda_Y}$ preserves products indexed by $\\mathbb N$. No properness or boundedness assumption is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+  "place": "Module-object Postnikov Roos cone"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "Apply the actual internal/sectionwise module equivalence to transfer exact countable products from pro-etale module sheaves. The general derived-category product and homology preservation instances then apply to the internal module categories.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-products-exact",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Module-object Postnikov Roos cone"
+   }
+  },
+  {
+   "text": "Complete 1-T on the product of canonical lower truncations to a distinguished triangle with first object L. Exactness factors the canonical cone map K -> product through L, preserving all legs. In each degree the canonical truncation projections are eventually isomorphisms; cone naturality gives the same for the transitions. Apply the eventual Milnor projection theorem to L to see that K -> L induces isomorphisms on all cohomology, hence is an isomorphism. Transport the homotopy-limit cone along its inverse.",
+   "uses": [
+    "lem-roos-eventually-constant-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Module-object Postnikov Roos cone"
+   }
+  },
+  {
+   "text": "The derived upper-star/lower-star adjunction makes direct image a right adjoint and hence product preserving. Its K-injective derived construction is triangulated. Map the whole canonical homotopy-limit cone, retaining the canonical truncation projection maps.",
+   "uses": [
+    "def-sfb-module-derived-pushpull-adjunction",
+    "lem-pc-homotopy-limit-map",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Module-object Postnikov Roos cone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-products-exact",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-roos-eventually-constant-projection",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "lem-pc-homotopy-limit-map",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+  "place": "Limit presentation; direct derived-category proof from exact products and eventual Milnor projections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncGE.*(stabili|rightDerived)|rightDerived.*truncGE|eventually.*[Ii]so",
+   "results": [
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Dynamics/OmegaLimit.lean",
+    "Mathlib/Algebra/Regular/Basic.lean",
+    "Mathlib/Order/Filter/Extr.lean",
+    "Mathlib/Topology/Algebra/Affine.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": [
+    "DerivedCategory.IsLE",
+    "DerivedCategory.instIsLEObjSingleFunctor",
+    "DerivedCategory.isZero_of_isLE",
+    "DerivedCategory.isLE_iff",
+    "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+    "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+    "DerivedCategory.isLE_Q_obj_iff",
+    "DerivedCategory.exists_iso_Q_obj_of_isLE"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension right derived functor stabilizes cohomology on lower truncations of unbounded complexes",
+   "results": [
+    "DerivedCategory.isGE_Q_obj_iff",
+    "DerivedCategory.isLE_Q_obj_iff",
+    "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+    "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+    "DerivedCategory.isGE_iff",
+    "DerivedCategory.isLE_iff",
+    "DerivedCategory.isZero_of_isLE",
+    "DerivedCategory.isZero_of_isGE"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy limit cone eventually isomorphism cohomology tower",
+   "results": [
+    "HomologicalComplex.homotopyCofiber.XIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexIso",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+    "CochainComplex.mappingCone.mapHomologicalComplexXIso'",
+    "CochainComplex.cm5b.homotopyEquiv"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of homotopy limits and Postnikov truncation towers in derived categories",
+   "results": [
+    "HomologicalComplex.instHasLimit",
+    "HomotopyCategory.instPretriangulatedIntUp",
+    "DerivedCategory.homologyFunctorFactorsh",
+    "HomologicalComplex.instHasLimitsOfShape",
+    "CategoryTheory.CosimplicialObject.Truncated.instHasLimitsOfShape",
+    "DerivedCategory.instIsHomologicalHomologyFunctor",
+    "CategoryTheory.CosimplicialObject.Truncated.instHasColimitsOfShape",
+    "CategoryTheory.NatTrans.leftDerivedToHomotopyCategory"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No direct matching theorem; use the existing derived homology and homotopy-limit APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-proper-unbounded-window",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleObjectPostnikovRoos",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleObjectPostnikovRoos.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPushforward_postnikov_roos",
+  "statement": "theorem moduleObjectDerivedPushforward_postnikov_roos\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (K : DerivedCategory (pulledBackModuleObjects Λ X)) :\n    IsHomotopyLimit ((moduleObjectDerivedPushforward Λ p).mapCone\n      (DerivedCategory.lowerPostnikovCone K)) ∧\n    (∀ j : ℤ, PreservesLimitsOfShape (Discrete ℕ)\n      (DerivedCategory.homologyFunctor (pulledBackModuleObjects Λ Y) j))",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-19"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperIndConstructibleUnbounded",
+  "date": "2026-10-19",
+  "group": "K6"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T005335-L-2754234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T005335-L-2754234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,20 +9,11 @@ public import Sheaf.Paper.ProperIndConstructibleBoundedBelow
 public import Sheaf.Paper.AmbientIndDerivedSums
 public import Sheaf.Paper.CondensedModuleDerivedPushpull
 public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Mathlib.CategoryTheory.Monoidal.Mod
-import Sheaf.CategoryTheory.SheafTensor
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.AlgebraicGeometry.ProEtaleLeftComplete
-import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Limits.HasLimits
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.ModuleObjectPostnikovRoos
+import Sheaf.CategoryTheory.RoosEventuallyConstant
 
 /-!
 # Proper direct image of arbitrary ind-constructible complexes
@@ -48,6 +39,186 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
+private theorem truncation_step_isIso
+    {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [Category D] [Abelian D] [HasDerivedCategory D]
+    (F : DerivedCategory C ⥤ DerivedCategory D) [F.CommShift ℤ] [F.IsTriangulated]
+    (P : ObjectProperty (DerivedCategory C))
+    (hP : ∀ L, P L → ∀ j : ℤ,
+      P ((DerivedCategory.TStructure.t.truncLE j).obj L) ∧
+      P ((DerivedCategory.TStructure.t.truncGE j).obj L))
+    (c : ℤ)
+    (hF : ∀ L, P L → ∀ a : ℤ, L.IsGE a →
+      ∀ b : ℤ, L.IsLE b → (F.obj L).IsLE (b + c))
+    (K : DerivedCategory C) (hK : P K) (m q l : ℤ)
+    (hl : -m + 1 = l) (hm : -m + c < q) :
+    IsIso ((DerivedCategory.homologyFunctor D q).map (F.map
+      ((DerivedCategory.TStructure.t.natTransTruncGEOfLE (-m) l
+        (by omega)).app K))) := by
+  subst l
+  let t := DerivedCategory.TStructure.t (C := C)
+  let A := (t.truncGE (-m)).obj K
+  let B := (t.truncLE (-m)).obj A
+  have hA : P A := (hP K hK (-m)).2
+  have hB : P B := (hP A hA (-m)).1
+  have hBge : B.IsGE (-m) := by dsimp [B, A]; infer_instance
+  have hBle : B.IsLE (-m) := by dsimp [B]; infer_instance
+  have hFB : (F.obj B).IsLE (-m + c) := hF B hB (-m) hBge (-m) hBle
+  let T := F.mapTriangle.obj ((t.triangleLEGE (-m) (-m + 1) (by omega)).obj A)
+  have hT : T ∈ distTriang _ :=
+    F.map_distinguished _ (t.triangleLEGE_distinguished (-m) (-m + 1) (by omega) A)
+  have hi : IsIso ((DerivedCategory.homologyFunctor D q).map
+      (F.map ((t.truncGEπ (-m + 1)).app A))) :=
+    DerivedCategory.isIso_homologyMap_mor₂ T hT q (q + 1) rfl
+      (DerivedCategory.isZero_of_isLE (F.obj B) (-m + c) q hm)
+      (DerivedCategory.isZero_of_isLE (F.obj B) (-m + c) (q + 1) (by omega))
+  have hmap := t.isIso_truncGE_map_truncGEπ_app (-m + 1) (-m) (by omega) K
+  let e : (t.truncGE (-m + 1)).obj A ≅ (t.truncGE (-m + 1)).obj K :=
+    (asIso ((t.truncGE (-m + 1)).map ((t.truncGEπ (-m)).app K))).symm
+  have hg : (t.truncGEπ (-m + 1)).app A ≫ e.hom =
+      (t.natTransTruncGEOfLE (-m) (-m + 1) (by omega)).app K := by
+    have : t.IsGE ((t.truncGE (-m + 1)).obj K) (-m) :=
+      t.isGE_of_ge _ (-m) (-m + 1) (by omega)
+    apply t.from_truncGE_obj_ext
+    dsimp [e, A]
+    have hn := (t.truncGEπ (-m + 1)).naturality ((t.truncGEπ (-m)).app K)
+    dsimp only [Functor.id_map] at hn
+    rw [← Category.assoc, hn, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+    simp
+  rw [← hg, F.map_comp, Functor.map_comp]
+  infer_instance
+
+private theorem unbounded_of_postnikov
+    {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [Category D] [Abelian D] [HasDerivedCategory D]
+    [HasCountableProducts (DerivedCategory D)]
+    (F : DerivedCategory C ⥤ DerivedCategory D) [F.CommShift ℤ] [F.IsTriangulated]
+    (P : ObjectProperty (DerivedCategory C)) (Q : ObjectProperty D) [Q.IsClosedUnderIsomorphisms]
+    (hP : ∀ L, P L → ∀ j : ℤ,
+      P ((DerivedCategory.TStructure.t.truncLE j).obj L) ∧
+      P ((DerivedCategory.TStructure.t.truncGE j).obj L))
+    (c : ℤ)
+    (hB : ∀ L, P L → (∃ a : ℤ, L.IsGE a) →
+      (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor D q).obj (F.obj L))) ∧
+      (∀ a : ℤ, L.IsGE a → (F.obj L).IsGE a) ∧
+      (∀ b : ℤ, L.IsLE b → (F.obj L).IsLE (b + c)))
+    (K : DerivedCategory C) (hK : P K)
+    (hc : Pretriangulated.IsHomotopyLimit (F.mapCone (DerivedCategory.lowerPostnikovCone K)))
+    (hprod : ∀ j : ℤ, PreservesLimitsOfShape (Discrete ℕ)
+      (DerivedCategory.homologyFunctor D j)) :
+    (∀ q : ℤ, ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+      IsIso ((DerivedCategory.homologyFunctor D q).map
+        (F.map ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K)))) ∧
+    (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor D q).obj (F.obj K))) ∧
+    (∀ a : ℤ, K.IsGE a → (F.obj K).IsGE a) ∧
+    (∀ b : ℤ, K.IsLE b → (F.obj K).IsLE (b + c)) := by
+  have hF : ∀ L, P L → ∀ a : ℤ, L.IsGE a →
+      ∀ b : ℤ, L.IsLE b → (F.obj L).IsLE (b + c) := by
+    intro L hL a ha b hb
+    exact (hB L hL ⟨a, ha⟩).2.2 b hb
+  have hstab : ∀ q : ℤ, ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+      IsIso ((DerivedCategory.homologyFunctor D q).map
+        (F.map ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K))) := by
+    intro q
+    let N : ℕ := (c - q + 1).toNat
+    refine ⟨N, fun n hn ↦ ?_⟩
+    apply DerivedCategory.isIso_homology_map_cone_leg_of_eventually_isIso
+      (C := D) _ _ hc hprod q N ?_ n hn
+    intro i hi
+    constructor
+    · simp only [Functor.comp_map, DerivedCategory.lowerPostnikovTower,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact truncation_step_isIso F P hP c hF K hK
+        ((i + 1 : ℕ) : ℤ) q (-(i : ℤ)) (by omega)
+        (by dsimp [N] at hi; omega)
+    · simp only [Functor.comp_map, DerivedCategory.lowerPostnikovTower,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact truncation_step_isIso F P hP c hF K hK
+        ((i + 1 : ℕ) : ℤ) (q - 1) (-(i : ℤ)) (by omega)
+        (by dsimp [N] at hi; omega)
+  have hbounded (n : ℕ) := hB ((DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj K)
+    (hP K hK (-(n : ℤ))).2 ⟨-(n : ℤ), inferInstance⟩
+  refine ⟨hstab, ?_, ?_, ?_⟩
+  · intro q
+    obtain ⟨N, hN⟩ := hstab q
+    have := hN N le_rfl
+    exact Q.prop_of_iso
+      (asIso ((DerivedCategory.homologyFunctor D q).map
+        (F.map ((DerivedCategory.TStructure.t.truncGEπ (-(N : ℤ))).app K)))).symm
+      ((hbounded N).1 q)
+  · intro a ha
+    exact (hB K hK ⟨a, ha⟩).2.1 a ha
+  · intro b hb
+    apply (DerivedCategory.isLE_iff _ _).2
+    intro q hq
+    obtain ⟨N, hN⟩ := hstab q
+    have := hN N le_rfl
+    have : ((DerivedCategory.TStructure.t.truncGE (-(N : ℤ))).obj K).IsLE b := inferInstance
+    have : (F.obj ((DerivedCategory.TStructure.t.truncGE (-(N : ℤ))).obj K)).IsLE
+        (b + c) := (hbounded N).2.2 b this
+    exact (DerivedCategory.isZero_of_isLE
+      (F.obj ((DerivedCategory.TStructure.t.truncGE (-(N : ℤ))).obj K))
+      (b + c) q hq).of_iso
+      (asIso ((DerivedCategory.homologyFunctor D q).map
+        (F.map ((DerivedCategory.TStructure.t.truncGEπ (-(N : ℤ))).app K))))
+
+open AlgebraicGeometry.ProEtale in
+private theorem coefficient_unbounded
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : AlgebraicGeometry.Scheme.{u}}
+    (p : X ⟶ Y)
+    (P : ObjectProperty
+      (DerivedCategory (Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))))
+    (Q : ObjectProperty (Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y))) [Q.IsClosedUnderIsomorphisms]
+    (hP : ∀ L, P L → ∀ j : ℤ,
+      P ((DerivedCategory.TStructure.t.truncLE j).obj L) ∧
+      P ((DerivedCategory.TStructure.t.truncGE j).obj L))
+    (c : ℤ)
+    (hB : ∀ L, P L → (∃ a : ℤ, L.IsGE a) →
+      (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor (Mod
+        (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y)) q).obj
+        ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj L))) ∧
+      (∀ a : ℤ, L.IsGE a → ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj L).IsGE a) ∧
+      (∀ b : ℤ, L.IsLE b → ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj L).IsLE (b + c)))
+    (K : DerivedCategory (Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))) (hK : P K)
+ :
+    (∀ q : ℤ, ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+      IsIso ((DerivedCategory.homologyFunctor (Mod
+        (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y)) q).map
+        ((CondensedRing.moduleObjectDerivedPushforward Λ p).map
+          ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K)))) ∧
+    (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor (Mod
+        (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y)) q).obj
+      ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj K))) ∧
+    (∀ a : ℤ, K.IsGE a → ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj K).IsGE a) ∧
+    (∀ b : ℤ, K.IsLE b →
+        ((CondensedRing.moduleObjectDerivedPushforward Λ p).obj K).IsLE (b + c)) := by
+  let F := CondensedRing.moduleObjectDerivedPushforward Λ p
+  let : F.CommShift ℤ := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  let : F.IsTriangulated := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  obtain ⟨hc, hprod⟩ :=
+    CondensedRing.moduleObjectDerivedPushforward_postnikov_roos
+      Λ p K
+  let : HasCountableProducts
+      (DerivedCategory (Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y))) :=
+    ⟨fun J ↦ DerivedCategory.hasLimitsOfShape_discrete _ J⟩
+  exact unbounded_of_postnikov
+    (C := Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))
+    (D := Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj Λ Y)) F P Q hP c hB K hK hc hprod
+
 namespace AlgebraicGeometry.ProEtale
 
 /-- Proper direct image for a finite subextension of ℚ_ℓ: eventual truncation stabilization,
@@ -56,42 +227,26 @@ Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof parag
 standing hypotheses inherited from det-proper-unbounded-window-bounded-below
 (blueprint: det-proper-unbounded-window-arbitrary).
 
-Proof (the six steps of the node):
-1. Identify the internal module objects with sheaves of modules by
-   sk-def-sfb-module-objects and sk-def-sfb-sheaf-tensor. Their categories are
-   Grothendieck abelian by lem-weil-pbc-ring-sheaves-grothendieck and have K-injective
-   resolutions by lem-sfb-grothendieck-k-injective. Put A_n = tau_ge(-n) K and
-   L_n = Rp_* A_n. Products exist by det-pe-products-derived. The adjunction
-   def-sfb-module-derived-pushpull-adjunction makes Rp_* product-preserving, including
-   its projections. The additive module direct image is triangulated after deriving
-   by lem-pc-right-derived-functor-triangulated.
-2. det-pe-left-complete-iso identifies K with the derived limit of A_n. Apply
-   lem-pc-homotopy-limit-map to the entire cone and Rp_*. This gives the Roos triangle
-   Rp_*K --> product L_n --(1-T)--> product L_n --> (Rp_*K)[1] of
-   def-weil-derived-limit, with projections exactly Rp_*(K --> A_n).
-3. det-ambient-ind-derived-sums keeps A_n in Dic. The fibre of A_(n+1) --> A_n is
-   H^(-n-1)(K)[n+1] by lem-pc-derived-lower-truncation-step-triangle. Its pushforward
-   is supported in [-n-1, 2d-n] by det-proper-unbounded-window-bounded-below.
-   lem-sf-derived-homology-long-exact makes the transitions of H^q(L_n) and
-   H^(q-1)(L_n) invertible for n >= N_0 = max(0, 2d-q+2).
-4. For either tower t_i : M_(i+1) --> M_i, fix x_(N_0) = 0. Given y, recursively
-   set x_i = y_i + t_i x_(i+1) for i < N_0 descending, and
-   x_(i+1) = t_i inverse (x_i-y_i) for i >= N_0 ascending. Each coordinate is a
-   finite natural linear expression, giving a sheaf map splitting 1-T. Its cokernel
-   vanishes. The compatible-tuples limit of def-pur-sheaf-inverse-limit projects
-   isomorphically onto every M_n with n >= N_0, by the same tail inverses and the
-   original maps below the tail; no earlier transition is assumed surjective.
-5. Apply cohomology to the Roos triangle. det-pe-products-derived identifies the
-   cohomology of the product with the product of cohomologies, with projections.
-   lem-sf-derived-homology-long-exact gives the Milnor short exact sequence with
-   left term coker(1-T) in degree q-1 and right term lim H^q(L_n). Step 4 kills
-   the left term and identifies each sufficiently late right projection with an
-   isomorphism. Step 2 identifies the composite with H^q(Rp_*(K --> A_n)).
-6. For fixed q choose such n. The bounded-below theorem puts H^q(L_n) in IndCons;
-   transport across step 5 gives H^q(Rp_*K) in IndCons. If K is at most b, A_n is
-   too, so H^q(L_n) vanishes above b+2d+1 and the same transport gives the upper
-   bound. If K is at least a, it is already bounded below and the lower bound
-   follows directly from det-proper-unbounded-window-bounded-below.
+Proof:
+1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology
+   preserves countable products, by lem-module-object-postnikov-roos. This uses the
+   internal/sectionwise module equivalence and exact products; the derived adjunction
+   transports the whole cone through Rp_*, including its canonical projection maps.
+2. Put A = tau_ge(-m) K. Truncation closure keeps both A and tau_le(-m) A in Dic.
+   The latter is supported in degree -m, so the bounded-below theorem puts its
+   direct image in degrees at most -m+2d+1. Apply the long exact sequence to the
+   canonical triangle tau_le(-m) A --> A --> tau_ge(-m+1) A. The second arrow is
+   invertible on H^q when q > -m+2d+1. Idempotence of truncation identifies it with
+   the transition in the lower Postnikov tower.
+3. Taking N = (2d-q+2).toNat makes the transitions invertible in degrees q and q-1
+   for every index at least N. Apply lem-roos-eventually-constant-projection to the
+   mapped Postnikov cone. Its conclusion is invertibility on H^q of the actual
+   map Rp_*(K --> tau_ge(-n) K) for every n at least N.
+4. Fix such an n. The bounded-below theorem gives ind-constructibility of the
+   cohomology of Rp_* tau_ge(-n) K; transport along the projection isomorphism
+   gives it for Rp_* K. If K is at most b, its lower truncation is too, so the
+   same transport gives the upper bound b+2d+1. If K is at least a, it is already
+   bounded below, and the lower bound follows directly from the bounded-below theorem.
 -/
 theorem proper_indConstructible_unbounded
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -130,7 +285,34 @@ theorem proper_indConstructible_unbounded
       ((CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj E) p).obj
         K).IsLE
         (b + 2 * d + 1)) := by
-  sorry
+  let F := CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj.{u} E) p
+  let : F.CommShift ℤ := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  let : F.IsTriangulated := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  let P : ObjectProperty _ := fun L ↦ ∀ j : ℤ, ObjectProperty.ind.{u + 1}
+    (IsConstantModelConstructible (Profinite.continuousMapRingObj.{u} E) X)
+    ((DerivedCategory.homologyFunctor _ j).obj L)
+  let Q := ObjectProperty.ind.{u + 1}
+    (IsConstantModelConstructible (Profinite.continuousMapRingObj.{u} E) Y)
+  have hP : ∀ L, P L → ∀ j : ℤ,
+      P ((DerivedCategory.TStructure.t.truncLE j).obj L) ∧
+      P ((DerivedCategory.TStructure.t.truncGE j).obj L) := by
+    intro L hL j
+    exact (indConstructibleDerived_sums_and_truncations ℓ E
+      k p₀ hp₀ hpℓ X).2.2.1 L j hL
+  have hB : ∀ L, P L → (∃ a : ℤ, L.IsGE a) →
+      (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor _ q).obj (F.obj L))) ∧
+      (∀ a : ℤ, L.IsGE a → (F.obj L).IsGE a) ∧
+      (∀ b : ℤ, L.IsLE b → (F.obj L).IsLE (b + (2 * d + 1))) := by
+    intro L hL hLge
+    simpa only [F, CondensedRing.moduleObjectDerivedPushforward, add_assoc] using
+      proper_indConstructible_boundedBelow ℓ E k p₀ hp₀ hpℓ X Y p d hd L hL hLge
+  simpa only [Q, add_assoc] using
+    coefficient_unbounded (Profinite.continuousMapRingObj.{u} E) p P Q hP (2 * d + 1) hB K hK
+
 
 /-- Proper direct image for the condensed algebraic closure: eventual truncation stabilization,
 ind-constructible cohomology, and both cohomological amplitude bounds, for arbitrary K.
@@ -138,42 +320,26 @@ Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof parag
 standing hypotheses inherited from det-proper-unbounded-window-bounded-below
 (blueprint: det-proper-unbounded-window-arbitrary).
 
-Proof (the six steps of the node):
-1. Identify the internal module objects with sheaves of modules by
-   sk-def-sfb-module-objects and sk-def-sfb-sheaf-tensor. Their categories are
-   Grothendieck abelian by lem-weil-pbc-ring-sheaves-grothendieck and have K-injective
-   resolutions by lem-sfb-grothendieck-k-injective. Put A_n = tau_ge(-n) K and
-   L_n = Rp_* A_n. Products exist by det-pe-products-derived. The adjunction
-   def-sfb-module-derived-pushpull-adjunction makes Rp_* product-preserving, including
-   its projections. The additive module direct image is triangulated after deriving
-   by lem-pc-right-derived-functor-triangulated.
-2. det-pe-left-complete-iso identifies K with the derived limit of A_n. Apply
-   lem-pc-homotopy-limit-map to the entire cone and Rp_*. This gives the Roos triangle
-   Rp_*K --> product L_n --(1-T)--> product L_n --> (Rp_*K)[1] of
-   def-weil-derived-limit, with projections exactly Rp_*(K --> A_n).
-3. det-ambient-ind-derived-sums keeps A_n in Dic. The fibre of A_(n+1) --> A_n is
-   H^(-n-1)(K)[n+1] by lem-pc-derived-lower-truncation-step-triangle. Its pushforward
-   is supported in [-n-1, 2d-n] by det-proper-unbounded-window-bounded-below.
-   lem-sf-derived-homology-long-exact makes the transitions of H^q(L_n) and
-   H^(q-1)(L_n) invertible for n >= N_0 = max(0, 2d-q+2).
-4. For either tower t_i : M_(i+1) --> M_i, fix x_(N_0) = 0. Given y, recursively
-   set x_i = y_i + t_i x_(i+1) for i < N_0 descending, and
-   x_(i+1) = t_i inverse (x_i-y_i) for i >= N_0 ascending. Each coordinate is a
-   finite natural linear expression, giving a sheaf map splitting 1-T. Its cokernel
-   vanishes. The compatible-tuples limit of def-pur-sheaf-inverse-limit projects
-   isomorphically onto every M_n with n >= N_0, by the same tail inverses and the
-   original maps below the tail; no earlier transition is assumed surjective.
-5. Apply cohomology to the Roos triangle. det-pe-products-derived identifies the
-   cohomology of the product with the product of cohomologies, with projections.
-   lem-sf-derived-homology-long-exact gives the Milnor short exact sequence with
-   left term coker(1-T) in degree q-1 and right term lim H^q(L_n). Step 4 kills
-   the left term and identifies each sufficiently late right projection with an
-   isomorphism. Step 2 identifies the composite with H^q(Rp_*(K --> A_n)).
-6. For fixed q choose such n. The bounded-below theorem puts H^q(L_n) in IndCons;
-   transport across step 5 gives H^q(Rp_*K) in IndCons. If K is at most b, A_n is
-   too, so H^q(L_n) vanishes above b+2d+1 and the same transport gives the upper
-   bound. If K is at least a, it is already bounded below and the lower bound
-   follows directly from det-proper-unbounded-window-bounded-below.
+Proof:
+1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology
+   preserves countable products, by lem-module-object-postnikov-roos. This uses the
+   internal/sectionwise module equivalence and exact products; the derived adjunction
+   transports the whole cone through Rp_*, including its canonical projection maps.
+2. Put A = tau_ge(-m) K. Truncation closure keeps both A and tau_le(-m) A in Dic.
+   The latter is supported in degree -m, so the bounded-below theorem puts its
+   direct image in degrees at most -m+2d+1. Apply the long exact sequence to the
+   canonical triangle tau_le(-m) A --> A --> tau_ge(-m+1) A. The second arrow is
+   invertible on H^q when q > -m+2d+1. Idempotence of truncation identifies it with
+   the transition in the lower Postnikov tower.
+3. Taking N = (2d-q+2).toNat makes the transitions invertible in degrees q and q-1
+   for every index at least N. Apply lem-roos-eventually-constant-projection to the
+   mapped Postnikov cone. Its conclusion is invertibility on H^q of the actual
+   map Rp_*(K --> tau_ge(-n) K) for every n at least N.
+4. Fix such an n. The bounded-below theorem gives ind-constructibility of the
+   cohomology of Rp_* tau_ge(-n) K; transport along the projection isomorphism
+   gives it for Rp_* K. If K is at most b, its lower truncation is too, so the
+   same transport gives the upper bound b+2d+1. If K is at least a, it is already
+   bounded below, and the lower bound follows directly from the bounded-below theorem.
 -/
 theorem proper_indConstructible_unbounded_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -212,6 +378,33 @@ theorem proper_indConstructible_unbounded_padicAlgCl
       ((CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) p).obj
         K).IsLE
         (b + 2 * d + 1)) := by
-  sorry
+  let F := CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) p
+  let : F.CommShift ℤ := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  let : F.IsTriangulated := by
+    dsimp only [F, CondensedRing.moduleObjectDerivedPushforward]
+    infer_instance
+  let P : ObjectProperty _ := fun L ↦ ∀ j : ℤ, ObjectProperty.ind.{u + 1}
+    (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X)
+    ((DerivedCategory.homologyFunctor _ j).obj L)
+  let Q := ObjectProperty.ind.{u + 1}
+    (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) Y)
+  have hP : ∀ L, P L → ∀ j : ℤ,
+      P ((DerivedCategory.TStructure.t.truncLE j).obj L) ∧
+      P ((DerivedCategory.TStructure.t.truncGE j).obj L) := by
+    intro L hL j
+    exact (indConstructibleDerived_sums_and_truncations_padicAlgCl ℓ
+      k p₀ hp₀ hpℓ X).2.2.1 L j hL
+  have hB : ∀ L, P L → (∃ a : ℤ, L.IsGE a) →
+      (∀ q : ℤ, Q ((DerivedCategory.homologyFunctor _ q).obj (F.obj L))) ∧
+      (∀ a : ℤ, L.IsGE a → (F.obj L).IsGE a) ∧
+      (∀ b : ℤ, L.IsLE b → (F.obj L).IsLE (b + (2 * d + 1))) := by
+    intro L hL hLge
+    simpa only [F, CondensedRing.moduleObjectDerivedPushforward, add_assoc] using
+      proper_indConstructible_boundedBelow_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hd L hL hLge
+  simpa only [Q, add_assoc] using
+    coefficient_unbounded (Profinite.padicAlgClRingObj ℓ) p P Q hP (2 * d + 1) hB K hK
+
 
 end AlgebraicGeometry.ProEtale
