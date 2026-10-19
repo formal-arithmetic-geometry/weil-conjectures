@@ -18,9 +18,156 @@
   "def-weil-regular-scheme",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], $C$ is Noetherian local with maximal ideal $\\mathfrak mC$ and residue field $A/\\mathfrak m\\ne0$. By [lem-weil-pbc-adic-completion-mod-ideal] it is complete for $\\mathfrak mC$. The map $A\\to C$ is flat and surjective on spectra by [lem-weil-pbc-local-completion-faithfully-flat]. Put $Y=T_C$. By [lem-pod-separated-finite-type-base-change], $f_C$ is separated and finite type. It is universally closed: every base change of $f_C$ is, by the fibre-product universal property, a base change of $f$, hence closed by [def-weil-proper-morphism]. Thus $f_C$ is proper. The spectra of $A$ and $C$ are locally Noetherian by the one-affine-cover definition [pqf-def-locnoeth], and quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Both $T$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over $\\operatorname{Spec}A$ and $\\operatorname{Spec}C$ respectively. In particular $T$ is quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG6, proof, proper base change and completion setup; Tags 0316, 05GI, 05GG and 00MC for completion properties."
+   }
+  },
+  {
+   "text": "The morphism $f$ is locally of finite presentation by [pqf-lem-lft-fp-locnoeth], since it is finite type and $\\operatorname{Spec}A$ is locally Noetherian. Both integral schemes $T$ and $\\operatorname{Spec}A$ have just one irreducible component. The assumed isomorphism of function fields is the isomorphism on their generic local rings, and the generic point of $T$ maps to that of $\\operatorname{Spec}A$. Separatedness therefore allows [lem-per-birational-isomorphism-dense-open]: there is a dense open $V\\subseteq\\operatorname{Spec}A$ with $f^{-1}V\\cong V$. In particular the generic fibre is $\\operatorname{Spec}\\operatorname{Frac}(A)$.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-per-birational-isomorphism-dense-open",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ, lemma-birational-isomorphism-over-dense-open; used to verify the generic-fibre hypothesis of 0AY8."
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}A$ is integral by [lem-weil-pbc-spec-domain-stalks-function-field], and its stalks are normal domains by [lem-weil-pbc-localization-normal-domain]. The integral scheme $T$ is reduced and its sole generic point maps to the base generic point. Step 2 identifies the generic fibre and its global sections with $\\operatorname{Frac}(A)$. All six hypotheses of [lem-trf-proper-normal-geometric-connectedness] now hold, so $\\mathcal O_{\\operatorname{Spec}A}\\cong f_*\\mathcal O_T$ and hence $\\Gamma(T,\\mathcal O_T)=A$. Flatness of $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ follows from the ring flatness of step 1 and [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Apply [lem-weil-pbc-flat-base-change-global-sections-qcqs] to obtain, as $C$-algebras, $\\Gamma(Y,\\mathcal O_Y)\\cong\\Gamma(T,\\mathcal O_T)\\otimes_A C\\cong C$. The required quasi-compactness and quasi-separatedness were checked in step 1.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-trf-proper-normal-geometric-connectedness",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGI, proof, third paragraph, global-section comparison; more-morphisms Tag 0AY8 and coherent Tag 02KH."
+   }
+  },
+  {
+   "text": "Let $y\\in Y$ lie over the closed point of $\\operatorname{Spec}C$, and put $x=p(y)\\in T$. The canonical map $A\\to C$ maps $\\mathfrak m$ into $\\mathfrak mC$ and induces the residue-field isomorphism of step 1, so $f(x)=\\mathfrak m$. Apply [lem-per-closed-fibre-stalk-completion] with $X=T$. It identifies the maximal-ideal-adic completions of $\\mathcal O_{T,x}$ and $\\mathcal O_{Y,y}$ by the homomorphism induced by the actual projection $p:Y\\to T$. The base $A$ is Noetherian local as required; no regularity of $C$ or $Y$ has been used.",
+   "uses": [
+    "lem-per-closed-fibre-stalk-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG6 proof of (2), applying Tag 0BG5 (lemma-iso-completions)."
+   }
+  },
+  {
+   "text": "If $y$ is a closed point of $Y$, its image under the closed map $f_C$ is closed in the local spectrum $\\operatorname{Spec}C$, hence is its unique closed point. Step 4 applies. The ring $\\mathcal O_{T,x}$ is regular because $T$ is regular [def-weil-regular-scheme]. Both local rings are Noetherian: choose Noetherian affine neighbourhoods using local Noetherianity, identify their stalks with localizations by [lem-weil-pbc-affine-open-stalk-localization], and apply [lem-weil-pbc-localization-noetherian]. Twice applying [lem-weil-pbc-completion-regular-local], with the isomorphism of step 4 in between, shows $\\mathcal O_{Y,y}$ is regular. Every closed point of $Y$ has therefore been tested. By [lem-per-regular-closed-point-criterion], the locally Noetherian scheme $Y$ is regular.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-per-regular-closed-point-criterion",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG6, lemma-port-regularity-to-completion, proof of (2) and (3); properties Tag 02IT."
+   }
+  },
+  {
+   "text": "By [rem-pc-regular-normal], the regular scheme $Y$ has normal domain stalks. It is Noetherian and hence quasi-compact, so [lem-sbc-normal-sections-finite-product], with $U=Y$, expresses $\\Gamma(Y,\\mathcal O_Y)\\cong\\prod_{i<n}B_i$ with every $B_i$ a normal domain. This ring is $C$ by step 3. As $C$ has the nonzero residue field $A/\\mathfrak m$, $n\\ne0$. As $C$ is local, $n$ cannot exceed one: for $n>1$ the product has an idempotent $e$ equal to $1$ in one factor and $0$ in the others, with both $e$ and $1-e$ nonunits. In a local ring both would belong to the maximal ideal, contradicting $e+(1-e)=1$. Thus $n=1$, and $C$ is a normal domain.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-sbc-normal-sections-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGI, proof, third paragraph; properties Tags 0569, 033N and 0358. Finite-product formulation uses the existing normal-sections node."
+   }
+  },
+  {
+   "text": "The scheme $Y$ is nonempty, since its ring of global sections is the nonzero ring $C$. It is connected: a disconnection $Y=U\\amalg W$ into nonempty disjoint opens would, by gluing the sections $0$ on $U$ and $1$ on $W$, give an idempotent $e\\in\\Gamma(Y,\\mathcal O_Y)=C$ with $e\\ne0,1$. In a local ring an idempotent is $0$ or $1$: one of $e,1-e$ is a unit, and $e(1-e)=0$ then forces the other to vanish. This is a contradiction. The nonempty connected regular scheme $Y$ is integral by [lem-sc-regular-connected-integral].",
+   "uses": [
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGI, proof, third paragraph, connectedness and integrality of the completed model."
+   }
+  },
+  {
+   "text": "Finally pull the isomorphism $f^{-1}V\\cong V$ of step 2 back to $\\operatorname{Spec}C$. Fibre-product universality [def-pc-fibre-product] gives $f_C^{-1}(V_C)\\cong V_C$. The open $V_C$ is nonempty: choose any point of the nonempty $V$ and lift it by the spectrum-surjectivity in [lem-weil-pbc-local-completion-faithfully-flat]. Since $C$ and $Y$ are integral, these nonempty open subschemes contain their generic points and have the same generic local rings as their ambient schemes: restriction to an open neighbourhood does not change a stalk. To identify these local rings with the function fields, choose nonempty affine opens inside the isomorphic opens and apply [lem-sc-integral-function-field-affine-fraction] and [def-sc-function-field]. Consequently the isomorphism over $V_C$ identifies the function fields, through the map induced by $f_C$. Along with steps 1, 5, 6 and 7 this proves every assertion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-sc-function-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGM, proof, first paragraph, passage of the resolution to completion; generic isomorphism base-changed from Tag 0BAJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-per-birational-isomorphism-dense-open",
+  "def-sc-function-field",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-trf-proper-normal-geometric-connectedness",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-per-closed-fibre-stalk-completion",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-per-regular-closed-point-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "rem-pc-regular-normal",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0BG5 and 0BG6, and the third paragraph of the proof of 0BGI, specialized to a proper birational regular model; generic-isomorphism verification by 0BAJ and global-section equality by 0AY8."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +203,45 @@
    "results": "8 hits; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, PowerSeries.exists_isWeierstrassFactorization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; ; logged digest 95aafbea40f7e660",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these concern relative normalization, ordinary adic completion, rational maps, smooth/cotangent charts or Weierstrass nonsingularity, and do not assert this surface theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper birational regular model over a Noetherian normal local domain remains integral and regular after completion",
+   "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.ValuativeCommSq.domain, completeIntegralClosure_eq_integralClosure; logged digest f0f320bcb2ac1376",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AdicCompletion",
+   "results": "0 hits: ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(regular|normal)|normal.*completion",
+   "results": "0 hits: ; logged digest 4f53cda18c2baa0c; directory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of singularities preserved by completion of a local ring",
+   "results": "8 hits: PowerSeries.instIsLocalRing, isLocalRing_of_isAdicComplete_maximal, Algebra.FormallySmooth.localization_base, UniformSpace.Completion.coeRingHom, RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.isStandardSmooth_localizationPreserves, RingHom.FormallySmooth.localizationPreserves, Algebra.FormallySmooth.exists_kerProj_comp_eq_id; logged digest 472cbb44d244c5b7",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of the base of a proper regular resolution remains regular and normal",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.reduced, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.of, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.projectiveResolution, CategoryTheory.Abelian.LeftResolution.chainComplex; logged digest 86d1a761cd8e6d6e",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-normalized-refinement",
@@ -86,5 +268,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-model-completion",
+  "worker": "stage1",
+  "summary": "Preserved the statement and the eight-step completion proof. Repaired absolute quasi-separatedness using the existing locally Noetherian scheme theorem, used the exact flat-ring-map/affine-morphism equivalence, and extracted the non-elementary 0BG5 completed-stalk comparison. Two new general statement-only nodes: 0BG5 and the 02IT closed-point regularity criterion. Normality of C is derived by global sections and the finite-product theorem, integrality by the connected regular scheme theorem; neither conclusion is moved to a clause-restating helper.",
+  "blueprint": "Supports the existing potential-dualizing surface-construction branch under lem-per-artin-gabber-affine-curve via the given ancestry, specifically Stacks 0BGM first paragraph. No chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the completed base, needed before the finite-type and local-ring arguments. The perverse unit provides no replacement for this generic tool."
+   },
+   {
+    "node": "lem-trf-proper-normal-geometric-connectedness",
+    "why": "The O_S = f_* O_T conclusion gives global sections A for the proper birational normal-base model. The perverse unit provides no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Transfers regularity across the isomorphism of completed local rings at closed-fibre points. The perverse unit provides no replacement for this generic tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regularity gives normal domain stalks of the completed model. The perverse unit provides no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sbc-normal-sections-finite-product",
+    "why": "Expresses its global sections as a finite product of normal domains; locality reduces the product to one factor. The perverse unit provides no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Converts nonempty connected regularity into integrality. The perverse unit provides no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-trf-proper-normal-geometric-connectedness",
+  "lem-weil-pbc-completion-regular-local",
+  "rem-pc-regular-normal",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-1fb40ca7a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1fb40ca7a (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, both new nodes, every cited statement, Stacks resolve.tex 0BG5, 0BG6 and 0BGI (third paragraph), and properties.tex 02IT and 02IL. The item is 0BG6(3) plus the 0BGI normal-case argument; hypotheses and conclusion are unchanged. Steps: 1 gives C Noetherian, local, complete and faithfully flat over A, f_C proper, and T and Y Noetherian, with T qcqs through the locally Noetherian theorem. 2 gets the dense open V from the birational node after checking all its hypotheses. 3 gets Gamma(T)=A from O_S = f_*O_T of the 0AY8 node, all six hypotheses checked, then Gamma(Y)=C by qcqs flat base change. 4 applies the new 0BG5 node at points of the closed fibre. 5: a closed point of Y lies in the closed fibre because f_C is closed; regularity crosses the completed-stalk isomorphism (both stalks Noetherian), and the new 02IT node gives that Y is regular. 6: the finite product of normal domains has exactly one factor because C is local and nonzero, so C is a normal domain. 7: Y is nonempty and connected by the idempotent argument, hence integral. 8: birationality by base change of f^{-1}V = V, with V_C nonempty. New nodes: the 0BG5 node is true (B/p^n = B'/q^n, then localize), the closed-fibre hypothesis is essential (Q(t) vs Q((t))), and it does not duplicate flat-local-completion-iso. The 02IT closed-point criterion is true by 02IL plus localization of regular local rings, and def-weil-regular-scheme states only 02IT (1)<=>(2). Neither node restates an item clause, and the snapshot and live DAG have no other node stating either. Batch 5: lem-trf-proper-normal-geometric-connectedness is the general Zariski connectedness lemma 0AY8, which neither assumption provides. Its own closure (1755 nodes) contains no trace-formula or Poincare-duality node except itself and a Mathlib leaf, and no nt-assume, sk-thm-trace-transport or batch-4 node, so I accept it; no non-trf 0AY8 node exists. The declared tool_uses are generic and accepted. No SGA citations."
  }
 }
