@@ -380,7 +380,25 @@ class Batch:
         sha = md.git('rev-parse', 'HEAD')
         self.record['commit'] = sha
         atomic(self.path, self.record)
+        record_landings(self.staged, sha)
         return sha
+
+
+def record_landings(staged, sha):
+    """Merge queue (2026-10-19): the Lean files of each reviewed stage-2 delivery are one landing of its group, with the
+    delivery named, so that a red build that drops it returns it to the group (tools/batch_land.py)."""
+    import landing as ld
+    if not ld.merge_queue():
+        return
+    with ld.tree_lock():
+        for row in staged:
+            o = row['o']
+            files = {rel[len('lean/'):]: (base64.b64decode(v) if v is not None else None)
+                     for rel, v in row['tree'].originals.items() if rel.startswith('lean/') and rel.endswith('.lean')}
+            files = {rel: b for rel, b in files.items() if ld.sha(li.LEAN / rel) != (__import__('hashlib').sha256(b).hexdigest() if b is not None else None)}
+            if files:
+                ld.new_record(o.group, files, f'stage 2: {o.item} (commit {sha[:10]})',
+                              extra={'delivery': {'group': o.group, 'item': o.item, 'head': o.head}, 'stage': 2})
 
 
 def options(row):

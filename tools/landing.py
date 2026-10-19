@@ -182,7 +182,7 @@ def stage_copy(r: dict):
             shutil.copy2(src, dst)
 
 
-def new_record(group: str, files: dict, note: str, kind: str | None = None) -> dict:
+def new_record(group: str, files: dict, note: str, kind: str | None = None, extra: dict | None = None) -> dict:
     """A landing record for a change already written to the tree by a writer other than the landing scripts
     (proof-imports cycle, import pruning, maintenance, upstream sync, or `U` from build.py). files: {rel: previous
     bytes or None}. Caller holds local/tree.lock. Returns the record (in requests/)."""
@@ -206,6 +206,7 @@ def new_record(group: str, files: dict, note: str, kind: str | None = None) -> d
         out.append(f)
     r = {"id": rid, "group": group, "time": now(), "files": out, "note": note[:500], "seq": time.time_ns(),
          "kind": kind or ("interface" if changed else "proof"), "set": len(out) > 1, "changed": changed[:40], "landed": now()}
+    r.update(extra or {})
     stage_copy(r)
     write_json(REQUESTS / f"{rid}.json", r)
     log(f"{group} recorded {' '.join(f['module'] for f in out[:6])} ({r['kind']}, landing {rid}): {note[:120]}")

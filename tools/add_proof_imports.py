@@ -134,6 +134,94 @@ def distances(g: dict) -> dict:
     return dist
 
 
+def twin(x: str) -> str | None:
+    """The other copy of a module: `Sheaf.P` <-> `WeilConjectures.P` (the upstream sync adopted the project's modules)."""
+    if x.startswith("Sheaf."):
+        return "WeilConjectures." + x[len("Sheaf."):]
+    if x.startswith("WeilConjectures."):
+        return "Sheaf." + x[len("WeilConjectures."):]
+    return None
+
+
+def _down(g: dict, starts) -> set:
+    seen, stack = set(starts), list(starts)
+    while stack:
+        for y in g.get(stack.pop(), ()):
+            if y not in seen:
+                seen.add(y); stack.append(y)
+    return seen
+
+
+_HEAD = {}
+_HEAD_IMPORT = re.compile(r"^\s*(public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)\s*$", re.M)
+
+
+def _head(m: str):
+    """(is a `module` file, its public imports)."""
+    if m not in _HEAD:
+        p = li.file_of(m)
+        t = p.read_text(errors="ignore")[:20000] if p.is_file() else ""
+        _HEAD[m] = (bool(re.search(r"^module\s*$", t, re.M)), {x.group(2) for x in _HEAD_IMPORT.finditer(t) if x.group(1)})
+    return _HEAD[m]
+
+
+_EXP, _DECLS = {}, {}
+
+
+def _exported(x: str) -> set:
+    """What importing x loads: x, and through a `module` file only its public imports, through any other file all of
+    its imports (the model that matches the library: 0 of 300 compiling modules flagged, both collisions of
+    2026-10-19 found)."""
+    if x not in _EXP:
+        _EXP[x] = {x}
+        out = {x}
+        for y in (_head(x)[1] if _head(x)[0] else _G.get(x, ())):
+            out |= _exported(y)
+        _EXP[x] = out
+    return _EXP[x]
+
+
+def _clash(x: str) -> bool:
+    """x and its twin declare a common name (only then does Lean refuse: `environment already contains`)."""
+    t = twin(x)
+    for m in (x, t):
+        if m not in _DECLS:
+            p = li.file_of(m)
+            _DECLS[m] = set(li.decls_in_text(p.read_text(errors="ignore"))) if p.is_file() else set()
+    return bool(_DECLS[x] & _DECLS[t])
+
+
+_G: dict = {}
+
+
+def twin_collision(g: dict, rev: dict, m: str, dm: str) -> str:
+    """'' or why `import dm` in m would put a module and its twin, declaring the same names, into one environment:
+    m's own, or that of a non-`module` file above m (which loads everything below it). Replaces hand-written skip
+    entries for this cause (red build of 2026-10-19: SmoothSeparableHypersurfaceSlice <- Picard.ZeroScheme)."""
+    global _G
+    if _G is not g:
+        _G = g; _EXP.clear()
+    # m itself
+    env_m = set().union(*(_exported(y) for y in g.get(m, ()))) if _head(m)[0] else _down(g, g.get(m, ()))
+    new = _exported(dm) if _head(m)[0] else _down(g, [dm])
+    for x in sorted(new - env_m):
+        t = twin(x)
+        if t and (t in env_m or t in new) and _clash(x):
+            return f"{m} would load {x} (through {dm}) and its twin {t}"
+    # the non-module files above m load all of dm's closure
+    above = [n for n in _down(rev, [m]) if n != m and not _head(n)[0]]
+    if not above:
+        return ""
+    full_new = _down(g, [dm])
+    env = _down(g, above)
+    for x in sorted(full_new - env):
+        t = twin(x)
+        if t and (t in env or t in full_new) and _clash(x):
+            n = next((n for n in above if t in _down(g, [n])), above[0])
+            return f"{n} (above {m}) would load {x} (through {dm}) and its twin {t}"
+    return ""
+
+
 def plan():
     """Returns (report, g): report maps a class to its edges [(M, D, [nodes of M], extra)], g is the import graph
     with the added edges."""
@@ -182,6 +270,10 @@ def plan():
     for m, dm in sorted(pending):
         if m in RESERVED:
             rep["reserved"].append((m, dm, sorted(want[m][dm]), "")); pending.discard((m, dm))
+    rev = {}
+    for x, ys in g.items():
+        for y in ys:
+            rev.setdefault(y, set()).add(x)
     # to a fixed point: a source module becomes eligible when the targets reach it through the edges already added
     while True:
         dist = distances(g)
@@ -194,7 +286,10 @@ def plan():
             p = path(g, dm, m)
             if p is not None:
                 rep["cycle"].append((m, dm, sorted(want[m][dm]), " -> ".join(p))); continue
-            g[m].add(dm)
+            tw = twin_collision(g, rev, m, dm)
+            if tw:
+                rep["twin"].append((m, dm, sorted(want[m][dm]), tw)); continue
+            g[m].add(dm); rev.setdefault(dm, set()).add(m)
             rep["added"].append((m, dm, sorted(want[m][dm]), ""))
     for m, dm in sorted(pending):
         rep["upstream"].append((m, dm, sorted(want[m][dm]), ""))
@@ -209,11 +304,12 @@ def write(added, public: bool) -> int:
     for m, dm, _, _ in added:
         by[m].append(dm)
     import landing as ld
-    before = {}
+    mq, before = ld.merge_queue(), {}
     for m, ds in sorted(by.items()):
         p = li.file_of(m)
         text = p.read_text()
-        before[p.resolve().relative_to(li.LEAN).as_posix()] = p.read_bytes()
+        if mq:
+            before[p.resolve().relative_to(li.LEAN).as_posix()] = p.read_bytes()
         comment = [(a, b) for k, a, b in li.lex(text) if k in li.COMMENT_KINDS]
         lines, pos, last, mod_line = text.split("\n"), 0, None, None
         for n, line in enumerate(lines):
@@ -239,7 +335,7 @@ def write(added, public: bool) -> int:
         tmp = p.with_name(p.name + ".imports-new")
         tmp.write_text("\n".join(lines))
         tmp.replace(p)
-    if before and ld.merge_queue():
+    if before:
         # merge queue: the change is a landing of its own (writer PI), dropped like any landing if the build is red
         with ld.tree_lock():
             ld.new_record("PI", before, f"imports of the proof dependencies in {len(before)} module(s) (tools/add_proof_imports.py)", kind="proof")
@@ -254,6 +350,7 @@ LABEL = {
     "reserved": "not added: target module another team proves",
     "no file": "not added: the dependency's module has no file",
     "excluded": "left out: listed in tools/proof_imports_skip.tsv",
+    "twin": "left out: a module and its Sheaf.*/WeilConjectures.* twin would meet in one environment",
 }
 
 
@@ -282,10 +379,10 @@ def main() -> int:
     c = rep.pop("#counts")
     print(f"proof-dependency edges between stated modules (node level): {c.get('edges between stated modules (node level)', 0)}; "
           f"imported directly: {c.get('of these, imported directly', 0)}")
-    for k in ("added", "cycle", "excluded", "proved", "upstream", "reserved", "no file"):
+    for k in ("added", "cycle", "twin", "excluded", "proved", "upstream", "reserved", "no file"):
         e = rep.get(k, [])
         print(f"{LABEL[k]}: {len(e)} imports in {len({m for m, _, _, _ in e})} modules")
-        if k in ("added", "cycle", "excluded") or every:
+        if k in ("added", "cycle", "twin", "excluded") or every:
             for m, dm, ids, extra in (e if every or k != "added" else e[:40]):
                 print(f"  {m} <- {dm}   ({', '.join(ids[:3])})" + (f"   {extra}" if extra else ""))
             if not every and k == "added" and len(e) > 40:

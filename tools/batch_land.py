@@ -64,6 +64,10 @@ CLONE = ld.LOCAL / "buildtree"
 STOP_REQUESTED = lambda: False
 
 
+def MQ_LOG_FN(*a) -> None:
+    MQ_LOG(" ".join(str(x) for x in a))
+
+
 def MQ_LOG(line: str) -> None:
     """One line per merge-queue decision, in the lander's log (~/cc1/autoland.log when it runs)."""
     try:
@@ -962,6 +966,9 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
                 ld.drop_close(chained, message)
                 for r in chained:
                     MQ_LOG(f"take-out: landing {r['id']} of {r['group']} went with them (same files changed after)")
+    for r in chained:
+        if r.get('delivery'):
+            return_record(r, message, MQ_LOG_FN)
     # Queue calculation is source-only and deliberately outside both write locks.
     refresh_recovery_queue()
 
@@ -1482,6 +1489,8 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
         if e is not None and e['state'] == 'landed':
             e['state'] = 'returned'; e['why'] = 'taken out with ' + ', '.join(r.get('chained') or ids)
             give_back(e['group'], e['item'], e['head'], reason + '; it changed the same file(s) after a dropped change', log)
+        elif r.get('delivery'):
+            return_record(r, reason, log)
         log(f"batch {b['id']}: DROPPED from the candidate {r['id']} ({r['group']}: {r.get('note', '')[:100]})")
     for x in notes:
         MQ_LOG('drop: ' + x)
@@ -1491,6 +1500,14 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
         b['await_recovery'] = True
         write_json(OPEN, b)
     return True
+
+
+def return_record(r: dict, reason: str, log) -> None:
+    """A dropped landing that carries its delivery (stage 2, tools/nt_batch2.py) goes back to its group."""
+    d = r['delivery']
+    give_back(d['group'], d['item'], d.get('head', '?'),
+              f"(merge queue) your landing {r['id']} was taken out of the candidate: {reason}"
+              + (f"; it changed the same file(s) after {', '.join(r['chained'])}" if r.get('chained') else ''), log)
 
 
 def red_without_batch(log) -> bool:

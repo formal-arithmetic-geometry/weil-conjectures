@@ -12,6 +12,8 @@ import add_proof_imports as api
 
 class Repo(unittest.TestCase):
     def setUp(self):
+        import landing as _ld   # the merge queue is off unless a test turns it on (live coord/sheaf.env has it on)
+        _p = patch.object(_ld, 'merge_queue', lambda: False); _p.start(); self.addCleanup(_p.stop)
         self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
         self.root = pathlib.Path(self.tmp.name)
         self.g('init', '-q'); self.g('config', 'user.email', 'test@example.invalid'); self.g('config', 'user.name', 'test')
@@ -365,6 +367,27 @@ class MergeQueue(SelectiveRecovery):
             ld.drop_close(dropped, 'red build')
             self.assertEqual([r['id'] for r in ld.records(ld.REQUESTS)], [r3['id']])
             self.assertIn('taken out with', json.loads((builds / 'done' / f"{r2['id']}.json").read_text())['reason'])
+
+    def test_dropped_stage2_landing_goes_back_to_its_group(self):
+        import landing as ld, contextlib
+        lean = self.root / 'lean'; builds = self.root / 'local/builds'
+        given = []
+        with patch.object(ld.li, 'LEAN', lean), patch.object(ld, 'B', builds), patch.object(ld, 'REQUESTS', builds / 'requests'), \
+             patch.object(ld, 'DONE', builds / 'done'), patch.object(ld, 'BACKUP', builds / 'backup'), patch.object(ld, 'STAGED', builds / 'staged'), \
+             patch.object(ld, 'INFLIGHT', builds / 'inflight'), patch.object(ld, 'LOCAL', self.root / 'local'), patch.object(ld, 'WORK', self.root / 'coord'), \
+             patch.object(bl, 'ROOT', self.root), patch.object(bl.md, 'ROOT', self.root), patch.object(bl, 'BD', self.root / 'local/batch'), \
+             patch.object(bl, 'OPEN', self.root / 'local/batch/open.json'), patch.object(bl, 'MQ_LOG', lambda x: None), \
+             patch.object(bl.md, 'merge_lock', lambda: contextlib.nullcontext()), \
+             patch.object(bl, 'give_back', lambda *a: given.append(a[:2])):
+            ld.dirs()
+            b0 = (lean / 'Sheaf/B.lean').read_bytes()
+            (lean / 'Sheaf/B.lean').write_text('module\npublic theorem B : True := by exact bad\n')
+            r = ld.new_record('S7', {'Sheaf/B.lean': b0}, 'stage 2: lem-b', kind='interface',
+                              extra={'delivery': {'group': 'S7', 'item': 'lem-b', 'head': 'h' * 40}, 'stage': 2})
+            last = {'time': 't', 'commit': 'c' * 40, 'suspects': [{'id': r['id'], 'kind': 'interface', 'modules': ['Sheaf.B'], 'fails': ['Sheaf.B']}]}
+            self.assertTrue(bl.drop_other_writers({'id': '-', 'entries': []}, last, ['Sheaf.B'], lambda *a: None, persist=False))
+            self.assertEqual((lean / 'Sheaf/B.lean').read_bytes(), b0)
+            self.assertEqual(given, [('S7', 'lem-b')])
 
     def test_unrecorded_changes_become_a_landing(self):
         import landing as ld, importlib.util
