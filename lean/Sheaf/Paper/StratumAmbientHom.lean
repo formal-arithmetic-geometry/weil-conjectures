@@ -5,54 +5,22 @@ Authors: SHEAF group Q29
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.Hom
-public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-
-public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-public import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.SixFunctors.OpenClosed.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Sheaf.AlgebraicGeometry.EtaleGenericStratumMate
+
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection
+import all Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
+import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Internal Hom from extension along a stratum
 
@@ -69,9 +37,673 @@ uses the recorded intrinsic constant-ring presentation and its canonical coeffic
 
 set_option autoImplicit false
 
-universe u
+universe u d e v w a b a' b' a'' b''
 
-open CategoryTheory Opposite
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
+open AlgebraicGeometry.Scheme WeilConjectures
+private theorem existsNonempty {α : Sort*} {P : α → Prop} (h : ∃ x, P x) :
+    Nonempty α := by
+  obtain ⟨x, _⟩ := h
+  exact ⟨x⟩
+
+
+private theorem directImage_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :
+    sfConstantModuleDirectImage f A = proEtaleConstantModuleDirectImage f A := by
+  have h : proEtaleRingDirectImageMap f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (sfConstantCoefficientIso f A) =
+      proEtaleCoefficientDirectImageMap f A := by
+    change ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _)
+      (((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).symm
+        (proEtaleCoefficientDirectImageMap f A)) = _
+    exact Equiv.apply_symm_apply _ _
+  unfold sfConstantModuleDirectImage proEtaleRingModuleDirectImage
+    proEtaleConstantModuleDirectImage
+  rw [h]
+private noncomputable def pullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :
+    sfConstantModulePullback f A ≅ sfIntrinsicPullback A f :=
+  (sfConstantModuleAdjunction f A).leftAdjointUniq
+    ((sfIntrinsicConstantModuleAdjunction f A).ofNatIsoRight
+      (eqToIso (directImage_eq f A)).symm)
+/- The sheaf open adjunction is transported through the actual coefficient equivalences.
+This uses only the fixed-coefficient open adjunction, without any exchange theorem. -/
+private noncomputable def openSheafAdjunction
+    (A : Type u) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    sfIntrinsicExtensionByZero j A ⊣ sfConstantModulePullback j A :=
+  (((sfIntrinsicModuleEquivalence U A).symm.toAdjunction.comp
+    (ProEtale.openImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j)).comp
+    (sfIntrinsicModuleEquivalence X A).toAdjunction).ofNatIsoRight (pullbackIso j A).symm
+
+private noncomputable def openAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
+    (sfIntrinsicExtensionByZero j A).mapDerivedCategory ⊣
+      (sfConstantModulePullback j A).mapDerivedCategory := by
+  let a := openSheafAdjunction A j
+  letI : CatCommSq ((sfIntrinsicExtensionByZero j A).mapHomologicalComplex (.up ℤ))
+      DerivedCategory.Q DerivedCategory.Q
+      (sfIntrinsicExtensionByZero j A).mapDerivedCategory :=
+    ⟨(sfIntrinsicExtensionByZero j A).mapDerivedCategoryFactors.symm⟩
+  letI : CatCommSq ((sfConstantModulePullback j A).mapHomologicalComplex (.up ℤ))
+      DerivedCategory.Q DerivedCategory.Q
+      (sfConstantModulePullback j A).mapDerivedCategory :=
+    ⟨(sfConstantModulePullback j A).mapDerivedCategoryFactors.symm⟩
+  exact (a.mapHomologicalComplex (.up ℤ)).localization
+    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
+    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ)) _ _
+/- Exact restrictions that detect zero objects detect isomorphisms through kernels and
+cokernels. The derived statement follows by commuting each restriction with homology. -/
+private theorem jointIsoOfZero
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [Abelian C] [Abelian D] [Abelian E]
+    (F : C ⥤ D) (G : C ⥤ E)
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (hz : ∀ M, IsZero (F.obj M) → IsZero (G.obj M) → IsZero M)
+    {M N : C} (f : M ⟶ N) (hf : IsIso (F.map f)) (hg : IsIso (G.map f)) :
+    IsIso f := by
+  have : Mono f := Preadditive.mono_of_isZero_kernel f
+    (hz _ ((isZero_kernel_of_mono (F.map f)).of_iso (asIso (kernelComparison f F)))
+      ((isZero_kernel_of_mono (G.map f)).of_iso (asIso (kernelComparison f G))))
+  have : Epi f := Preadditive.epi_of_isZero_cokernel f
+    (hz _ ((isZero_cokernel_of_epi (F.map f)).of_iso ((asIso (cokernelComparison f F)).symm))
+      ((isZero_cokernel_of_epi (G.map f)).of_iso ((asIso (cokernelComparison f G)).symm)))
+  exact isIso_of_mono_of_epi f
+
+private theorem jointDerivedIso
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : C ⥤ E) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (hz : ∀ M, IsZero (F.obj M) → IsZero (G.obj M) → IsZero M)
+    {M N : DerivedCategory C} (f : M ⟶ N)
+    (hf : IsIso (F.mapDerivedCategory.map f))
+    (hg : IsIso (G.mapDerivedCategory.map f)) : IsIso f := by
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  apply jointIsoOfZero F G hz
+  · exact (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2
+      (by dsimp; infer_instance)
+  · exact (NatIso.isIso_map_iff (G.mapDerivedCategoryHomologyFunctorIso n) f).2
+      (by dsimp; infer_instance)
+
+private theorem derivedZeroOfHomology
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C)
+    (hz : ∀ n : ℤ, IsZero ((DerivedCategory.homologyFunctor C n).obj K)) :
+    IsZero K := by
+  let : Zero (DerivedCategory C) := HasZeroObject.zero' _
+  have : IsIso (0 : 0 ⟶ K) := (DerivedCategory.isIso_iff C _).2 fun n ↦
+    ((DerivedCategory.homologyFunctor C n).map_isZero (isZero_zero _)).isIso (hz n) _
+  exact (isZero_zero _).of_iso (asIso (0 : 0 ⟶ K)).symm
+
+private theorem derivedCompositeZero
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (hz : ∀ M, IsZero (G.obj (F.obj M))) (K : DerivedCategory C) :
+    IsZero (G.mapDerivedCategory.obj (F.mapDerivedCategory.obj K)) := by
+  apply derivedZeroOfHomology
+  intro n
+  exact (hz ((DerivedCategory.homologyFunctor C n).obj K)).of_iso
+    (((G.mapDerivedCategoryHomologyFunctorIso n).app (F.mapDerivedCategory.obj K)).symm ≪≫
+      G.mapIso ((F.mapDerivedCategoryHomologyFunctorIso n).app K).symm)
+
+private theorem closedCounit
+    (A : Type u) [CommRing A] [Finite A]
+    {Z U X : Scheme.{u}} [IsNoetherian X]
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hc : Set.range j = (Set.range i)ᶜ) :
+    IsIso (sfConstantModuleAdjunction i A).counit := by
+  let R := proEtaleConstantRing X A
+  let Ri := proEtaleConstantRing Z A
+  let ci := sfConstantCoefficientIso i A
+  let V := ProEt.mk j
+  have : IsOpenImmersion V.hom := ‹IsOpenImmersion j›
+  have : QuasiCompact V.hom := inferInstanceAs (QuasiCompact j)
+  obtain ⟨q, hq, ai, aj, hh, _⟩ := proEtale_ringed_open_closed i V hc R
+  have : IsIso ai.counit := by
+    have := hh
+    exact NatIso.isIso_of_isIso_app _
+  have : (proEtaleRingedDirectImage i R).Full := ai.fullyFaithfulROfIsIsoCounit.full
+  have : (proEtaleRingedDirectImage i R).Faithful := ai.fullyFaithfulROfIsIsoCounit.faithful
+  let ei := proEtaleScalarEquivalence Z ((sheafCompose (ProEt.topology Z)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso ci)
+  let d := coefficientDirectImageIso i R Ri ci
+  have : (sfConstantModuleDirectImage i A).Full := Functor.Full.of_iso d
+  have : (sfConstantModuleDirectImage i A).Faithful := Functor.Faithful.of_iso d
+  exact (sfConstantModuleAdjunction i A).counit_isIso_of_R_fully_faithful
+
+private theorem closedOpenZero
+    (A : Type u) [CommRing A] [Finite A]
+    {Z U X : Scheme.{u}} [IsNoetherian X]
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hc : Set.range j = (Set.range i)ᶜ)
+    (P : proEtaleRingModules Z (proEtaleConstantRing Z A)) :
+    IsZero ((sfConstantModulePullback j A).obj
+      ((sfConstantModuleDirectImage i A).obj P)) := by
+  exact (proEtaleRingModule_closed_essImage_iff_and_unit_isIso i j hc
+    (proEtaleConstantRing X A) (proEtaleConstantRing Z A) (proEtaleConstantRing U A)
+    (sfConstantCoefficientIso i A) (sfConstantCoefficientIso j A) _).1.1
+      ⟨P, ⟨Iso.refl _⟩⟩
+
+private theorem tensorZeroRight
+    {D : Type*} [Category* D] [HasZeroMorphisms D]
+    {H : Dᵒᵖ × D ⥤ D} (S : CoefficientClosedStructure H)
+    (b : @SymmetricCategory D _ S.monoidal)
+    (Q P : D) (hP : IsZero P) : IsZero (S.tensor.obj (Q, P)) := by
+  let := S.monoidal
+  let := b
+  have : PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight Q) :=
+    (S.adjunction Q).leftAdjoint_preservesColimits
+  have hz : IsZero ((MonoidalCategory.tensorRight Q).obj P) :=
+    (hP.isInitial.isInitialObj (MonoidalCategory.tensorRight Q) P).isZero
+  exact hz.of_iso (β_ Q P)
+
+private noncomputable def intrinsicTensorModel
+    (X : Scheme.{u}) (A : Type u) [CommRing A]
+    (S : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, u}
+        (ProEt.topology X) (proEtaleConstantRing X A)))
+    (T : CoefficientTensorModels.{u, u + 1, u, u + 2}
+      (ProEt.topology X) (proEtaleConstantRing X A) S) :
+    ProEtaleTensorModel X (proEtaleConstantRing X A) := by
+  let i := ObjectProperty.ιOfLE
+    (P := proEtaleFlatRepresentatives X (proEtaleConstantRing X A))
+    (P' := CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := ProEt.topology X) (R := proEtaleConstantRing X A))
+    (fun _ hP ↦ hP.1)
+  exact { tensor := S.tensor
+          representative := Functor.isoWhiskerLeft (i.prod i) T.comparison }
+
+private theorem tensorPullback
+    (A : Type u) [CommRing A] [Finite A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (SX : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, u}
+        (ProEt.topology X) (proEtaleConstantRing X A)))
+    (SY : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, u}
+        (ProEt.topology Y) (proEtaleConstantRing Y A)))
+    (TX : CoefficientTensorModels.{u, u + 1, u, u + 2}
+      (ProEt.topology X) (proEtaleConstantRing X A) SX)
+    (TY : CoefficientTensorModels.{u, u + 1, u, u + 2}
+      (ProEt.topology Y) (proEtaleConstantRing Y A) SY) :
+    Nonempty (SX.tensor ⋙ (sfConstantModulePullback f A).mapDerivedCategory ≅
+      ((sfConstantModulePullback f A).mapDerivedCategory.prod
+        (sfConstantModulePullback f A).mapDerivedCategory) ⋙ SY.tensor) := by
+  exact ⟨proEtaleCanonicalTensorComparison f
+    (proEtaleConstantRing X A) (proEtaleConstantRing Y A)
+    (sfConstantCoefficientIso f A)
+    (intrinsicTensorModel X A SX TX) (intrinsicTensorModel Y A SY TY)⟩
+
+private theorem openUnit
+    (A : Type u) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (openSheafAdjunction A j).unit := by
+  have : (sfIntrinsicExtensionByZero j A).Full := by
+    unfold sfIntrinsicExtensionByZero
+    infer_instance
+  have : (sfIntrinsicExtensionByZero j A).Faithful := by
+    unfold sfIntrinsicExtensionByZero
+    infer_instance
+  exact (openSheafAdjunction A j).unit_isIso_of_L_fully_faithful
+
+/- The two projection maps are the explicit mates of the tensor-pullback comparison.
+After restriction, their mate identities reduce invertibility to the closed counit or
+open unit; the other restriction sees zero objects on both sides. -/
+namespace ClosedProjectionFormal
+private noncomputable def projection
+    {D : Type d} [Category.{v} D] {E : Type e} [Category.{w} E]
+    (TD : D × D ⥤ D) (TE : E × E ⥤ E)
+    (L : D ⥤ E) (R : E ⥤ D) (a : L ⊣ R)
+    (μ : TD ⋙ L ≅ (L.prod L) ⋙ TE) :
+    ((𝟭 D).prod R) ⋙ TD ⟶ (L.prod (𝟭 E)) ⋙ TE ⋙ R where
+  app Z := a.unit.app (TD.obj (Z.1, R.obj Z.2)) ≫
+    R.map (μ.hom.app (Z.1, R.obj Z.2) ≫
+      TE.map (Prod.mkHom (𝟙 (L.obj Z.1)) (a.counit.app Z.2)))
+  naturality {Z Z'} f := by
+    dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map]
+    rw [← Category.assoc, ← a.unit_naturality (TD.map
+      (Prod.mkHom f.1 (R.map f.2))), Category.assoc]
+    simp only [Category.assoc, ← R.map_comp]
+    congr 1
+    have hm := μ.hom.naturality (Prod.mkHom f.1 (R.map f.2))
+    dsimp only [Functor.comp_map, Functor.prod_map] at hm
+    rw [← Category.assoc, hm]
+    rw [Category.assoc, ← TE.map_comp, ← TE.map_comp]
+    congr 3
+    ext
+    · simp
+    · simp
+
+private noncomputable def projectionIso
+    {D : Type d} [Category.{v} D] {E : Type e} [Category.{w} E]
+    {V : Type*} [Category* V] [HasZeroMorphisms V]
+    (TD : D × D ⥤ D) (TE : E × E ⥤ E)
+    (L : D ⥤ E) (R : E ⥤ D) (a : L ⊣ R)
+    (μ : TD ⋙ L ≅ (L.prod L) ⋙ TE)
+    (J : D ⥤ V)
+    (hc : ∀ P, IsIso (a.counit.app P))
+    (hj : ∀ {P Q : D} (f : P ⟶ Q), IsIso (L.map f) → IsIso (J.map f) → IsIso f)
+    (hs : ∀ Q P, IsZero (J.obj (TD.obj (Q, R.obj P))))
+    (ht : ∀ Q P, IsZero (J.obj (R.obj (TE.obj (L.obj Q, P))))) :
+    (L.prod (𝟭 E)) ⋙ TE ⋙ R ≅ ((𝟭 D).prod R) ⋙ TD := by
+  let π := projection TD TE L R a μ
+  have hc' : IsIso a.counit := by
+    let := hc
+    exact NatIso.isIso_of_isIso_app _
+  have hi (Z : D × E) : IsIso (L.map (π.app Z)) := by
+    have h : L.map (π.app Z) ≫ a.counit.app (TE.obj (L.obj Z.1, Z.2)) =
+        μ.hom.app (Z.1, R.obj Z.2) ≫
+          TE.map (Prod.mkHom (𝟙 (L.obj Z.1)) (a.counit.app Z.2)) := by
+      exact (a.homEquiv _ _).symm_apply_apply _
+    have : IsIso (a.counit.app Z.2) := hc _
+    have : IsIso (TE.map (Prod.mkHom (𝟙 (L.obj Z.1)) (a.counit.app Z.2))) :=
+      by
+      let : IsIso (Prod.mkHom (𝟙 (L.obj Z.1)) (a.counit.app Z.2)) :=
+        (Iso.prod (Iso.refl (L.obj Z.1)) (asIso (a.counit.app Z.2))).isIso_hom
+      infer_instance
+    have : IsIso (L.map (π.app Z) ≫
+        a.counit.app (TE.obj (L.obj Z.1, Z.2))) := by rw [h]; infer_instance
+    exact IsIso.of_isIso_comp_right _ (a.counit.app (TE.obj (L.obj Z.1, Z.2)))
+  have hiso (Z : D × E) : IsIso (π.app Z) :=
+    hj (π.app Z) (hi Z) ((hs Z.1 Z.2).isIso (ht Z.1 Z.2) (J.map (π.app Z)))
+  let := hiso
+  have : IsIso π := NatIso.isIso_of_isIso_app π
+  exact (asIso π).symm
+end ClosedProjectionFormal
+
+namespace OpenProjectionFormal
+open CategoryTheory.Functor
+private noncomputable def projection
+    {D : Type d} [Category.{v} D] {E : Type e} [Category.{w} E]
+    (TD : D × D ⥤ D) (TE : E × E ⥤ E)
+    (L : D ⥤ E) (F : E ⥤ D) (a : F ⊣ L)
+    (μ : TD ⋙ L ≅ (L.prod L) ⋙ TE) :
+    (L.prod (𝟭 E)) ⋙ TE ⋙ F ⟶ ((𝟭 D).prod F) ⋙ TD := by
+  let t : (L.prod (𝟭 E)) ⋙ TE ⟶ ((𝟭 D).prod F) ⋙ TD ⋙ L :=
+    whiskerRight (NatTrans.prod (𝟙 L) a.unit) TE ≫
+      whiskerLeft ((𝟭 D).prod F) μ.inv
+  exact whiskerRight t F ≫ whiskerLeft (((𝟭 D).prod F) ⋙ TD) a.counit
+
+private noncomputable def projectionIso
+    {D : Type d} [Category.{v} D] {E : Type e} [Category.{w} E]
+    {V : Type*} [Category* V] [HasZeroMorphisms V]
+    (TD : D × D ⥤ D) (TE : E × E ⥤ E)
+    (L : D ⥤ E) (F : E ⥤ D) (a : F ⊣ L)
+    (μ : TD ⋙ L ≅ (L.prod L) ⋙ TE)
+    (J : D ⥤ V)
+    (hc : ∀ P, IsIso (a.unit.app P))
+    (hj : ∀ {P Q : D} (f : P ⟶ Q), IsIso (L.map f) → IsIso (J.map f) → IsIso f)
+    (hs : ∀ Q P, IsZero (J.obj (TD.obj (Q, F.obj P))))
+    (ht : ∀ Q P, IsZero (J.obj (F.obj (TE.obj (L.obj Q, P))))) :
+    (L.prod (𝟭 E)) ⋙ TE ⋙ F ≅ ((𝟭 D).prod F) ⋙ TD := by
+  let π := projection TD TE L F a μ
+  have hc' : IsIso a.unit := by
+    have := hc
+    exact NatIso.isIso_of_isIso_app _
+  have hi (Z : D × E) : IsIso (L.map (π.app Z)) := by
+    have h : a.unit.app (TE.obj (L.obj Z.1, Z.2)) ≫ L.map (π.app Z) =
+        TE.map (Prod.mkHom (𝟙 (L.obj Z.1)) (a.unit.app Z.2)) ≫
+          μ.inv.app (Z.1, F.obj Z.2) := by
+      exact (a.homEquiv _ _).apply_symm_apply _
+    have : IsIso (Prod.mkHom (𝟙 (L.obj Z.1)) (a.unit.app Z.2)) :=
+      (Iso.prod (Iso.refl (L.obj Z.1)) (asIso (a.unit.app Z.2))).isIso_hom
+    have : IsIso (a.unit.app (TE.obj (L.obj Z.1, Z.2)) ≫ L.map (π.app Z)) := by
+      rw [h]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (a.unit.app (TE.obj (L.obj Z.1, Z.2))) _
+  have hiso (Z : D × E) : IsIso (π.app Z) :=
+    hj (π.app Z) (hi Z) ((ht Z.1 Z.2).isIso (hs Z.1 Z.2) (J.map (π.app Z)))
+  have : IsIso π := NatIso.isIso_of_isIso_app π
+  exact asIso π
+end OpenProjectionFormal
+
+/- Disjointness in the opposite order follows formally from the two adjunctions.
+Tensor preserves zero objects because tensoring is a left adjoint. -/
+private theorem supportProjectionPair
+    {D E C : Type*} [Category* D] [Category* E] [Category* C]
+    [HasZeroMorphisms D] [HasZeroMorphisms E] [HasZeroMorphisms C]
+    {HD : Dᵒᵖ × D ⥤ D} {HE : Eᵒᵖ × E ⥤ E} {HC : Cᵒᵖ × C ⥤ C}
+    (SD : CoefficientClosedStructure HD) (SE : CoefficientClosedStructure HE)
+    (SC : CoefficientClosedStructure HC)
+    (bE : @SymmetricCategory E _ SE.monoidal)
+    (bC : @SymmetricCategory C _ SC.monoidal)
+    (L : D ⥤ E) (R : E ⥤ D) (F : C ⥤ D) (J : D ⥤ C)
+    (ai : L ⊣ R) (aj : F ⊣ J)
+    (μi : SD.tensor ⋙ L ≅ (L.prod L) ⋙ SE.tensor)
+    (μj : SD.tensor ⋙ J ≅ (J.prod J) ⋙ SC.tensor)
+    (hc : ∀ P, IsIso (ai.counit.app P)) (hu : ∀ P, IsIso (aj.unit.app P))
+    (hj : ∀ {P Q : D} (f : P ⟶ Q), IsIso (L.map f) → IsIso (J.map f) → IsIso f)
+    (hz : ∀ P, IsZero (J.obj (R.obj P))) :
+    Nonempty ((L.prod (𝟭 E)) ⋙ SE.tensor ⋙ R ≅ ((𝟭 D).prod R) ⋙ SD.tensor) ∧
+    Nonempty ((J.prod (𝟭 C)) ⋙ SC.tensor ⋙ F ≅ ((𝟭 D).prod F) ⋙ SD.tensor) := by
+  have hLF (P : C) : IsZero (L.obj (F.obj P)) := by
+    apply (IsZero.iff_id_eq_zero _).2
+    apply (ai.homEquiv _ _).injective
+    apply (aj.homEquiv _ _).injective
+    exact (hz _).eq_of_tgt _ _
+  constructor
+  · exact ⟨ClosedProjectionFormal.projectionIso SD.tensor SE.tensor L R ai μi J hc hj
+      (fun Q P ↦ (tensorZeroRight SC bC _ _ (hz P)).of_iso (μj.app (Q, R.obj P)))
+      (fun Q P ↦ hz _)⟩
+  · exact ⟨OpenProjectionFormal.projectionIso SD.tensor SC.tensor J F aj μj L hu
+      (fun f hJ hL ↦ hj f hL hJ)
+      (fun Q P ↦ (tensorZeroRight SE bE _ _ (hLF P)).of_iso (μi.app (Q, F.obj P)))
+      (fun Q P ↦ hLF _)⟩
+
+private abbrev IntrinsicClosed (X : Scheme.{u}) (A : Type u) [CommRing A] :=
+  CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u, u}
+    (ProEt.topology X) (proEtaleConstantRing X A))
+
+private abbrev IntrinsicTensor (X : Scheme.{u}) (A : Type u) [CommRing A]
+    (S : IntrinsicClosed X A) :=
+  CoefficientTensorModels.{u, u + 1, u, u + 2}
+    (ProEt.topology X) (proEtaleConstantRing X A) S
+
+private noncomputable def deriveExactAdjunction
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (a : L ⊣ R) :
+    L.mapDerivedCategory ⊣ R.mapDerivedCategory := by
+  letI : CatCommSq (L.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+      DerivedCategory.Q L.mapDerivedCategory := ⟨L.mapDerivedCategoryFactors.symm⟩
+  letI : CatCommSq (R.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+      DerivedCategory.Q R.mapDerivedCategory := ⟨R.mapDerivedCategoryFactors.symm⟩
+  exact (a.mapHomologicalComplex (.up ℤ)).localization
+    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
+    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ)) _ _
+
+/- Apply the abstract support calculation to exact sheaf functors and their derived
+functors. Full faithfulness derives by localizing the sheaf unit/counit isomorphisms. -/
+private theorem intrinsicSupportProjectionPair
+    (A : Type u) [CommRing A] [Finite A]
+    {Z U X : Scheme.{u}} [IsNoetherian X]
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hc : Set.range j = (Set.range i)ᶜ)
+    (SX : IntrinsicClosed X A) (SZ : IntrinsicClosed Z A) (SU : IntrinsicClosed U A)
+    (TX : IntrinsicTensor X A SX) (TZ : IntrinsicTensor Z A SZ)
+    (TU : IntrinsicTensor U A SU)
+    (bZ : @SymmetricCategory (proEtaleDerivedCategory Z A) _ SZ.monoidal)
+    (bU : @SymmetricCategory (proEtaleDerivedCategory U A) _ SU.monoidal) :
+    Nonempty (((sfConstantModulePullback i A).mapDerivedCategory.prod (𝟭 _)) ⋙
+      SZ.tensor ⋙ (sfConstantModuleDirectImage i A).rightDerivedFunctor ≅
+      ((𝟭 _).prod (sfConstantModuleDirectImage i A).rightDerivedFunctor) ⋙ SX.tensor) ∧
+    Nonempty (((sfConstantModulePullback j A).mapDerivedCategory.prod (𝟭 _)) ⋙
+      SU.tensor ⋙ (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅
+      ((𝟭 _).prod (sfIntrinsicExtensionByZero j A).mapDerivedCategory) ⋙ SX.tensor) := by
+  have : PreservesFiniteColimits (sfConstantModuleDirectImage i A) :=
+    (sfIntrinsicClosedAmbientAdjunction A i j (compl_eq_iff_isCompl.mp hc.symm)).1
+  have : PreservesLimitsOfSize.{0, 0} (sfConstantModuleDirectImage i A) :=
+    (sfConstantModuleAdjunction i A).rightAdjoint_preservesLimits
+  have := closedCounit A i j hc
+  have := openUnit A j
+  let ai := deriveExactAdjunction (sfConstantModuleAdjunction i A)
+  let aj := deriveExactAdjunction (openSheafAdjunction A j)
+  let fi := ai.fullyFaithfulROfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso (sfConstantModuleAdjunction i A).counit) ≪≫
+        Functor.mapDerivedCategoryIdIso _)
+  have := fi.full
+  have := fi.faithful
+  have : IsIso ai.counit := ai.counit_isIso_of_R_fully_faithful
+  let fj := aj.fullyFaithfulLOfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso (openSheafAdjunction A j).unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso _)
+  have := fj.full
+  have := fj.faithful
+  have : IsIso aj.unit := aj.unit_isIso_of_L_fully_faithful
+  obtain ⟨μi⟩ := tensorPullback A i SX SZ TX TZ
+  obtain ⟨μj⟩ := tensorPullback A j SX SU TX TU
+  have hJoint {P Q : proEtaleDerivedCategory X A} (f : P ⟶ Q)
+      (hi : IsIso ((sfConstantModulePullback i A).mapDerivedCategory.map f))
+      (hj : IsIso ((sfConstantModulePullback j A).mapDerivedCategory.map f)) : IsIso f :=
+    jointDerivedIso (sfConstantModulePullback i A)
+    (sfConstantModulePullback j A) (fun P hi hj ↦
+      proEtaleRingModule_isZero_of_open_closed i j hc
+        (proEtaleConstantRing X A) (proEtaleConstantRing Z A) (proEtaleConstantRing U A)
+        (sfConstantCoefficientIso i A) (sfConstantCoefficientIso j A) P hj hi) f hi hj
+  have hp := supportProjectionPair SX SZ SU bZ bU _ _ _ _ ai aj μi μj
+    (fun P ↦ inferInstance) (fun P ↦ inferInstance) hJoint
+    (derivedCompositeZero _ _ (closedOpenZero A i j hc))
+  obtain ⟨c⟩ := hp.1
+  let e := (sfConstantModuleDirectImage i A).rightDerivedFunctorIsoMapDerivedCategory
+  exact ⟨⟨Functor.isoWhiskerLeft
+      (((sfConstantModulePullback i A).mapDerivedCategory.prod (𝟭 _)) ⋙ SZ.tensor) e ≪≫
+    c ≪≫ Functor.isoWhiskerRight (NatIso.prod (Iso.refl _) e.symm) SX.tensor⟩, hp.2⟩
+
+private theorem intrinsicClosedProjection
+    (A : Type u) [CommRing A] [Finite A]
+    {Y X : Scheme.{u}} [IsNoetherian X]
+    (i : Y ⟶ X) [IsClosedImmersion i]
+    (SX : IntrinsicClosed X A) (SY : IntrinsicClosed Y A)
+    (TX : IntrinsicTensor X A SX) (TY : IntrinsicTensor Y A SY)
+    (bY : @SymmetricCategory (proEtaleDerivedCategory Y A) _ SY.monoidal) :
+    Nonempty (((sfConstantModulePullback i A).mapDerivedCategory.prod (𝟭 _)) ⋙
+      SY.tensor ⋙ (sfConstantModuleDirectImage i A).rightDerivedFunctor ≅
+      ((𝟭 _).prod (sfConstantModuleDirectImage i A).rightDerivedFunctor) ⋙ SX.tensor) := by
+  let V : X.Opens := ⟨(Set.range i)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩
+  have hc : Set.range V.ι = (Set.range i)ᶜ := Scheme.Opens.range_ι V
+  obtain ⟨SV, TV, bV, _⟩ := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology V) (proEtaleConstantRing V A)
+  exact (intrinsicSupportProjectionPair A i V.ι hc SX SY SV TX TY TV bY bV).1
+
+private theorem intrinsicOpenProjection
+    (A : Type u) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} [IsNoetherian X]
+    (j : U ⟶ X) [IsOpenImmersion j]
+    (SX : IntrinsicClosed X A) (SU : IntrinsicClosed U A)
+    (TX : IntrinsicTensor X A SX) (TU : IntrinsicTensor U A SU)
+    (bU : @SymmetricCategory (proEtaleDerivedCategory U A) _ SU.monoidal) :
+    Nonempty (((sfConstantModulePullback j A).mapDerivedCategory.prod (𝟭 _)) ⋙
+      SU.tensor ⋙ (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅
+      ((𝟭 _).prod (sfIntrinsicExtensionByZero j A).mapDerivedCategory) ⋙ SX.tensor) := by
+  let Z : TopologicalSpace.Closeds X :=
+    ⟨(Set.range j)ᶜ, j.isOpenEmbedding.isOpen_range.isClosed_compl⟩
+  let I := Scheme.IdealSheafData.vanishingIdeal Z
+  have hc : Set.range j = (Set.range I.subschemeι)ᶜ := by
+    simp only [Scheme.IdealSheafData.range_subschemeι, I,
+      Scheme.IdealSheafData.coe_support_vanishingIdeal, Z]
+    exact (compl_compl (Set.range j)).symm
+  obtain ⟨SZ, TZ, bZ, _⟩ := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology I.subscheme) (proEtaleConstantRing I.subscheme A)
+  exact (intrinsicSupportProjectionPair A I.subschemeι j hc SX SZ SU TX TZ TU bZ bU).2
+
+open CategoryTheory.MonoidalCategory
+private def closedParametrized {D : Type a} [Category.{b} D]
+    {H : Dᵒᵖ × D ⥤ D} (S : CoefficientClosedStructure H) :
+    letI := S.monoidal
+    (curriedTensor D).flip ⊣₂ Functor.curry.obj H := by
+  letI := S.monoidal
+  refine ParametrizedAdjunction.mk' S.adjunction ?_
+  intro P P' f X Y g
+  change (S.adjunction P).homEquiv X Y (X ◁ f ≫ g) =
+    (S.adjunction P').homEquiv X Y g ≫ H.map (Prod.mkHom f.op (𝟙 Y))
+  apply ((S.adjunction P).homEquiv X Y).symm.injective
+  rw [Equiv.symm_apply_apply]
+  simp only [Adjunction.homEquiv_counit,
+    Functor.map_comp, Category.assoc]
+  rw [S.evaluation_naturality P' P Y f]
+  rw [← Category.assoc]
+  have hn := ((curriedTensor D).map ((S.adjunction P').homEquiv X Y g)).naturality f
+  change X ◁ f ≫ ((S.adjunction P').homEquiv X Y g) ▷ P' =
+    ((S.adjunction P').homEquiv X Y g) ▷ P ≫ H.obj (op P', Y) ◁ f at hn
+  change X ◁ f ≫ g =
+    (((S.adjunction P').homEquiv X Y g) ▷ P ≫ H.obj (op P', Y) ◁ f) ≫ _
+  rw [← hn, Category.assoc]
+  congr 1
+  exact ((S.adjunction P').homEquiv X Y).symm_apply_apply g |>.symm
+/- Parametrized conjugate isomorphisms implement the blueprint Yoneda calculation
+with naturality in both internal-Hom variables already built in. -/
+private theorem ambientHomOfProjection
+    {D : Type a} [Category.{b} D] {E : Type a'} [Category.{b'} E]
+    {HD : Dᵒᵖ × D ⥤ D} {HE : Eᵒᵖ × E ⥤ E}
+    (SD : CoefficientClosedStructure HD) (SE : CoefficientClosedStructure HE)
+    (L : D ⥤ E) (R F : E ⥤ D) (G : D ⥤ E)
+    (a : L ⊣ R) (b : F ⊣ G)
+    (p : (L.prod (𝟭 E)) ⋙ SE.tensor ⋙ F ≅
+      ((𝟭 D).prod F) ⋙ SD.tensor) :
+    Nonempty ((F.op.prod (𝟭 D)) ⋙ HD ≅
+      ((𝟭 Eᵒᵖ).prod G) ⋙ HE ⋙ R) := by
+  let := SD.monoidal
+  let := SE.monoidal
+  let ad := (closedParametrized SD).precomp F
+  let ae := (closedParametrized SE).comp a b
+  let e : (curriedTensor E).flip ⋙ (Functor.whiskeringLeft _ _ _).obj L ⋙
+      (Functor.whiskeringRight _ _ _).obj F ≅ F ⋙ (curriedTensor D).flip :=
+    NatIso.ofComponents
+    (fun (P : E) ↦ NatIso.ofComponents (fun (Q : D) ↦ p.app (Q, P))
+      (fun {Q Q'} f ↦ by
+        simpa [CoefficientClosedStructure.tensor, MonoidalCategory.tensorHom_def] using
+          p.hom.naturality (Prod.mkHom f (𝟙 P)))) (fun {P P'} f ↦ by
+          ext Q
+          simpa [CoefficientClosedStructure.tensor, MonoidalCategory.tensorHom_def] using
+            p.hom.naturality (Prod.mkHom (𝟙 Q) f))
+  let t := Functor.uncurry.mapIso (ad.conjugateIso ae e)
+  refine ⟨NatIso.ofComponents (fun Z ↦ t.app Z) ?_⟩
+  intro Z Z' f
+  have h := t.hom.naturality f
+  change (HD.map (Prod.mkHom (F.op.map f.1) (𝟙 _)) ≫
+      HD.map (Prod.mkHom (𝟙 _) f.2)) ≫ t.hom.app Z' =
+    t.hom.app Z ≫ (R.map (HE.map (Prod.mkHom f.1 (𝟙 _))) ≫
+      R.map (HE.map (Prod.mkHom (𝟙 _) (G.map f.2)))) at h
+  simpa only [Functor.comp_map, Functor.prod_map, Functor.id_map,
+    ← HD.map_comp, ← HE.map_comp, ← R.map_comp, prod_comp,
+    Category.id_comp, Category.comp_id, Iso.app_hom] using h
+
+
+private noncomputable def starAdjunction {S X : Scheme.{u}} (s : S ⟶ X)
+    (A : Type u) [CommRing A] [Finite A] :
+    (sfConstantModulePullback s A).mapDerivedCategory ⊣
+      (sfConstantModuleDirectImage s A).rightDerivedFunctor :=
+  (sfConstantModuleAdjunction s A).mapDerivedCategoryRightDerivedAdjunction
+
+private def compositeProjection
+    {D : Type a} [Category.{b} D] {E : Type a'} [Category.{b'} E]
+    {C : Type a''} [Category.{b''} C]
+    (TD : D × D ⥤ D) (TE : E × E ⥤ E) (TC : C × C ⥤ C)
+    (L : D ⥤ E) (M : E ⥤ C) (I : C ⥤ E) (J : E ⥤ D)
+    (c : (M.prod (𝟭 C)) ⋙ TC ⋙ I ≅ ((𝟭 E).prod I) ⋙ TE)
+    (o : (L.prod (𝟭 E)) ⋙ TE ⋙ J ≅ ((𝟭 D).prod J) ⋙ TD) :
+    ((L ⋙ M).prod (𝟭 C)) ⋙ TC ⋙ (I ⋙ J) ≅
+      ((𝟭 D).prod (I ⋙ J)) ⋙ TD :=
+  NatIso.ofComponents (fun Z ↦ J.mapIso (c.app (L.obj Z.1, Z.2)) ≪≫
+    o.app (Z.1, I.obj Z.2)) (by
+      intro Z Z' f
+      dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map,
+        Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+      rw [← Category.assoc, ← J.map_comp]
+      have hc := c.hom.naturality (Prod.mkHom (L.map f.1) f.2)
+      dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map] at hc
+      rw [hc]
+      rw [J.map_comp, Category.assoc]
+      have ho := o.hom.naturality (Prod.mkHom f.1 (I.map f.2))
+      dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map] at ho
+      rw [ho]
+      simp only [Category.assoc])
+
+private theorem assembly (A : Type u) [CommRing A] [Finite A]
+    {S U X : Scheme.{u}} [IsNoetherian X]
+    (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (SX : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, u}
+        (ProEt.topology X) (proEtaleConstantRing X A)))
+    (SS : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, u}
+        (ProEt.topology S) (proEtaleConstantRing S A)))
+    (p : ((sfConstantModulePullback (i ≫ j) A).mapDerivedCategory.prod
+        (𝟭 (proEtaleDerivedCategory S A))) ⋙ SS.tensor ⋙
+          ((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙
+            (sfIntrinsicExtensionByZero j A).mapDerivedCategory) ≅
+      ((𝟭 (proEtaleDerivedCategory X A)).prod
+        ((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙
+          (sfIntrinsicExtensionByZero j A).mapDerivedCategory)) ⋙ SX.tensor) :
+    Nonempty
+      ((((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙
+          (sfIntrinsicExtensionByZero j A).mapDerivedCategory).op.prod
+          (𝟭 (proEtaleDerivedCategory X A))) ⋙
+          derivedInternalHomOfUniverses.{u + 1, u, u}
+            (ProEt.topology X) (proEtaleConstantRing X A) ≅
+        ((𝟭 (proEtaleDerivedCategory S A)ᵒᵖ).prod
+          ((sfConstantModulePullback j A).mapDerivedCategory ⋙
+            (sfIntrinsicClosedUpperShriek i
+              (Scheme.Opens.ι (X := U) (⟨(Set.range i)ᶜ,
+                (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩ :
+                  U.Opens)) A).rightDerivedFunctor)) ⋙
+          derivedInternalHomOfUniverses.{u + 1, u, u}
+            (ProEt.topology S) (proEtaleConstantRing S A) ⋙
+            (sfConstantModuleDirectImage (i ≫ j) A).rightDerivedFunctor) := by
+  have : IsLocallyNoetherian U := isLocallyNoetherian_of_isOpenImmersion j
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have : IsNoetherian U := ⟨⟩
+  let V : U.Opens := ⟨(Set.range i)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩
+  have hc : IsCompl (Set.range i) (Set.range V.ι) := by
+    rw [Scheme.Opens.range_ι]
+    exact isCompl_compl
+  obtain ⟨_, ⟨ai⟩⟩ := sfIntrinsicClosedAmbientAdjunction A i V.ι hc
+  exact ambientHomOfProjection SX SS _ _ _ _ (starAdjunction (i ≫ j) A)
+    (ai.comp (openAdjunction j A)) p
+
+private theorem assembled (A : Type u) [CommRing A] [Finite A]
+    {S U X : Scheme.{u}} [IsNoetherian X]
+    (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] :
+    Nonempty
+      ((((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙
+          (sfIntrinsicExtensionByZero j A).mapDerivedCategory).op.prod
+          (𝟭 (proEtaleDerivedCategory X A))) ⋙
+          derivedInternalHomOfUniverses.{u + 1, u, u}
+            (ProEt.topology X) (proEtaleConstantRing X A) ≅
+        ((𝟭 (proEtaleDerivedCategory S A)ᵒᵖ).prod
+          ((sfConstantModulePullback j A).mapDerivedCategory ⋙
+            (sfIntrinsicClosedUpperShriek i
+              (Scheme.Opens.ι (X := U) (⟨(Set.range i)ᶜ,
+                (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩ :
+                  U.Opens)) A).rightDerivedFunctor)) ⋙
+          derivedInternalHomOfUniverses.{u + 1, u, u}
+            (ProEt.topology S) (proEtaleConstantRing S A) ⋙
+            (sfConstantModuleDirectImage (i ≫ j) A).rightDerivedFunctor) := by
+  have : IsLocallyNoetherian U := isLocallyNoetherian_of_isOpenImmersion j
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have : IsNoetherian U := ⟨⟩
+  obtain ⟨SX, TX, _, _⟩ := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology X) (proEtaleConstantRing X A)
+  obtain ⟨SU, TU, bU, _⟩ := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology U) (proEtaleConstantRing U A)
+  obtain ⟨SS, TS, bS, _⟩ := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology S) (proEtaleConstantRing S A)
+  obtain ⟨c⟩ := intrinsicClosedProjection A i SU SS TU TS bS
+  obtain ⟨o⟩ := intrinsicOpenProjection A j SX SU TX TU bU
+  let p := compositeProjection SX.tensor SU.tensor SS.tensor
+    (sfConstantModulePullback j A).mapDerivedCategory
+    (sfConstantModulePullback i A).mapDerivedCategory
+    (sfConstantModuleDirectImage i A).rightDerivedFunctor
+    (sfIntrinsicExtensionByZero j A).mapDerivedCategory c o
+  obtain ⟨e, _, _⟩ := proEtaleConstantRingModulePullbackComposition i j A
+  let e' : (sfConstantModulePullback (i ≫ j) A).mapDerivedCategory ≅
+      (sfConstantModulePullback j A).mapDerivedCategory ⋙
+        (sfConstantModulePullback i A).mapDerivedCategory :=
+    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let p' := Functor.isoWhiskerRight (NatIso.prod e' (Iso.refl _))
+    (SS.tensor ⋙ ((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙
+      (sfIntrinsicExtensionByZero j A).mapDerivedCategory)) ≪≫ p
+  exact assembly A i j SX SS p'
+
 
 namespace AlgebraicGeometry
 
@@ -251,16 +883,13 @@ theorem Etale.nonempty_stratumAmbientHomIso
     {S U X : Scheme.{u}} (i : S ⟶ U) [IsClosedImmersion i]
     (j : U ⟶ X) [IsOpenImmersion j] :
     Nonempty
-      ((((Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor ⋙
-          (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory).op.prod
-          (𝟭 (Etale.DerivedCategoryModule A X))) ⋙
+      ((Etale.immersionLowerShriek A i j).op.prod
+          (𝟭 (Etale.DerivedCategoryModule A X)) ⋙
           Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) X) ≅
-        ((𝟭 (Etale.DerivedCategoryModule A S)ᵒᵖ).prod
-          ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
-            (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor.rightAdjoint)) ⋙
+        (𝟭 (Etale.DerivedCategoryModule A S)ᵒᵖ).prod (Etale.immersionUpperShriek A i j) ⋙
           Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) S) ⋙
             (Etale.lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).rightDerivedFunctor) := by
-  sorry
+  exact existsNonempty (Etale.immersionInternalHomIso A i j)
 
 /-- The pro-etale ambient stratum identity on a Noetherian target.
 Source: Weil blueprint, order 2069 (blueprint: lem-weil-stratum-ambient-hom).
@@ -453,6 +1082,6 @@ theorem ProEtale.nonempty_stratumAmbientHomIso
           derivedInternalHomOfUniverses.{u + 1, u, u}
             (ProEt.topology S) (proEtaleConstantRing S A) ⋙
             (sfConstantModuleDirectImage (i ≫ j) A).rightDerivedFunctor) := by
-  sorry
+  exact assembled A i j
 
 end AlgebraicGeometry
