@@ -94,20 +94,20 @@
    }
   },
   {
-   "text": "For the normalization assertion, apply [lem-pur-kflat-change-of-rings] to the sheaf-ring homomorphism $R\\to B_{n+1}$ and the representative $P$ of step 3. Its hypotheses hold because $P$ is K-flat with flat terms. Thus $P\\otimes_R B_{n+1}$ is K-flat over $B_{n+1}$. Consequently [sk-def-sfb-derived-extension-of-scalars] computes $K_{n+1}\\otimes^{\\mathbf L}_{B_{n+1}}B_n$ by $(P\\otimes_R B_{n+1})\\otimes_{B_{n+1}}B_n$. Here the second tensor is over $B_{n+1}$, not over $R$; no flatness of $B_n$ over $B_{n+1}$ is assumed.",
+   "text": "Use the canonical derived extension/restriction adjunctions of [sk-def-sfb-derived-extension-of-scalars]. The already constructed restrictComp identifies consecutive exact restrictions with direct restriction, using quotient_transition. Its left-adjoint uniqueness isomorphism reductionComp is therefore the canonical derived reduction association; no new choice of a K-flat resolution is needed at this step.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
     "sk-def-sfb-derived-extension-of-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat, identity-topos coefficient change; Tag 06YY, lemma-derived-base-change"
+    "place": "Canonical derived scalar-extension adjunction and uniqueness of left adjoints; coefficient-change association of Tag 0D6D."
    }
   },
   {
-   "text": "The last complex is isomorphic to $P\\otimes_R B_n$ by the maps $(p\\otimes a)\\otimes b\\mapsto p\\otimes\\bar a b$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$. These formulas are balanced over $R$ and $B_{n+1}$ and inverse: $\\bar a b$ can be moved to the second tensor factor by the balancing relation. They commute with the differential, which acts only on $p$. The coequalizer definition of relative tensor and extension of scalars [sk-def-sfb-change-of-scalars] makes the formulas maps of sheaves, and step 3 identifies the right-hand complex with $K_n$. This proves the derived reduction identity. For a longer chain $B_r\\to B_m\\to B_n$ both possible composites send $((p\\otimes a)\\otimes b)\\otimes c$ to $p\\otimes\\bar a\\bar b c$; the unit maps send $p\\otimes a$ to $(p\\otimes a)\\otimes1$, which becomes $p\\otimes\\bar a$. Hence the identities are coherent and induce exactly the given transition maps. A normalized tower requires these derived reduction isomorphisms for its transition-induced comparisons, not unrelated isomorphisms between levels.",
+   "text": "By definition, derivedStep is the unit of the consecutive scalar-extension adjunction followed by restriction of the component of reductionComp. Applying the inverse adjunction hom equivalence recovers precisely that component, by homEquiv_unit and Equiv.symm_apply_apply. A component of a natural isomorphism is invertible, proving derivedReduction_isNormalized. Compatibility of the canonical units is unit_leftAdjointUniq_hom_app for the composite adjunction transported by restrictComp, followed by naturality of restrictComp. This retains the actual transition-induced comparison and the unit coherence, rather than merely an unrelated isomorphism of objects.",
    "uses": [
+    "sk-def-sfb-derived-extension-of-scalars",
     "sk-def-sfb-change-of-scalars"
    ],
    "elementary": true,
@@ -150,7 +150,6 @@
   "def-weil-abstract-derived-category",
   "lem-weil-strict-roos-comparison",
   "lem-pe-kflat-roos-representative-invariance",
-  "lem-pur-kflat-change-of-rings",
   "lem-weil-pbc-profinite-point-pullback",
   "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-pc-bounded-above-flat-kflat-site"
@@ -158,7 +157,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
-  "place": "Definition and its two subsequent normalization paragraphs; explicit Roos interpretation and K-flat calculation using Stacks Tags 08TC, 06YS, 0G7E and 0D6D"
+  "place": "Definition and its two subsequent normalization paragraphs; explicit Roos interpretation and K-flat calculation using Stacks Tags 08TC, 06YS, 0G7E and 0D6D; stage 3 V7 proves normalization and unit coherence directly from the canonical scalar-extension adjunctions and uniqueness of left adjoints."
  },
  "mathlib_searches": [
   {
@@ -312,7 +311,6 @@
   "lem-pc-kflat-resolution",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
-  "lem-pur-kflat-change-of-rings",
   "lem-weil-pbc-profinite-point-pullback",
   "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-pc-bounded-above-flat-kflat-site",
@@ -405,5 +403,15 @@
   "group": "Q16",
   "result": "pass",
   "note": "Repairs both H3 faults of return d2ecf223078d: the ambient category is Mod over condensedRingObj(DerivedNakayama.integerRing) (p_X^* of the continuous condensed O_E, recorded deps), not constant sheaves; normalization is declared in the finite-ring derived categories (finiteExtend over B_(n+2), canonical restrictComp/reductionComp via leftAdjointUniq, derivedStep, IsNormalized as the adjunction mate). IsDerivedComplete = exists a K-flat P (same quasiIso.kFlat predicate as the recorded PreservesKFlatQuasiIso/derived extension) with Q P ≅ K and Q(augmentation) iso, where augmentation = (product of p to p⊗1, 0) into the explicit Roos complex (d(x,y) = (dx,(1-s)x-dy), d² = 0 checked, 1-s = towerTransitionEndomorphism); representative independence and the derived-limit identification are stated as sorry'd theorems. Edge cases ok (empty X, levels n+1, unbounded K, no flatness of transitions). E : Type u tied to X is forced by the recorded Profinite.{u}/Ab.{u+1} interfaces and loses no case. No duplicate (def-weil-derived-complete is a different node), no name clash, no DAG cycle via DerivedNakayamaResolution; non-lean fields equal main; 46/46 declarations present; statement verbatim; docstrings and both report sections present; only sorry proofs. nt_compile --json of the snapshot file: rc 0, no errors or warnings, 44.5 s / 42.9 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034331-L-422373",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

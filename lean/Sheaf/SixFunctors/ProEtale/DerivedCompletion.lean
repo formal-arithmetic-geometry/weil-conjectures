@@ -35,7 +35,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.CategoryTheory.StrictRoosComparison
 import Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
@@ -110,7 +109,8 @@ so the quotient universal property proves continuity. -/
 theorem continuous_transition (n : ℕ) :
     @Continuous _ _ (finiteTopology l E (n + 2)) (finiteTopology l E (n + 1))
       (Padic.coefficientExtensionTransition l E (n + 1)) := by
-  sorry
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  exact continuous_quot_lift _ continuous_quot_mk
 
 /-- Continuous postcomposition with the specified quotient transition.
 Source: blueprint, canonical transitions (blueprint: sk-def-pe-derived-completion). -/
@@ -137,6 +137,13 @@ Source: blueprint, canonical transitions (blueprint: sk-def-pe-derived-completio
 abbrev transition (X : Scheme.{u}) (n : ℕ) : finiteRing l E X (n + 1) ⟶
     finiteRing l E X n := (upperStarFromPoint X).map (transitionRing l E n)
 
+private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
+    {R S T : C} [MonObj S] [MonObj T] (q : R ⟶ S) (r : R ⟶ T)
+    (f : S ⟶ T) [IsMonHom f] (h : q ≫ f = r) :
+    (q ▷ S ≫ μ[S]) ≫ f = R ◁ f ≫ (r ▷ T ≫ μ[T]) := by
+  simp only [Category.assoc, IsMonHom.mul_hom, tensorHom_def']
+  rw [← whisker_exchange_assoc, ← comp_whiskerRight_assoc, h]
+
 /-- Quotient and transition maps preserve the scalar action on the regular module.
 Source: blueprint, construction of the reduction cone
 (blueprint: sk-def-pe-derived-completion).
@@ -152,7 +159,18 @@ theorem coefficient_linearity :
         transitionRing l E n =
       DerivedNakayama.integerRing l E ◁ transitionRing l E n ≫
         Mod.act (DerivedNakayama.quotientModule l E (n + 1)).X) := by
-  sorry
+  constructor
+  · intro n
+    change μ[DerivedNakayama.integerRing l E] ≫
+      DerivedNakayama.reductionRing l E (n + 1) =
+      DerivedNakayama.integerRing l E ◁ DerivedNakayama.reductionRing l E (n + 1) ≫
+        (DerivedNakayama.reductionRing l E (n + 1) ▷
+          DerivedNakayama.quotientRing l E (n + 1) ≫ μ[_])
+    simpa only [tensorHom_def', Category.assoc] using
+      (IsMonHom.mul_hom (DerivedNakayama.reductionRing l E (n + 1)))
+  · intro n
+    exact restricted_linear (DerivedNakayama.reductionRing l E (n + 2))
+      (DerivedNakayama.reductionRing l E (n + 1)) (transitionRing l E n) (by rfl)
 
 /-- The actual unit quotient map as an integral-module morphism on the point.
 Source: blueprint, unit of the reduction cone (blueprint: sk-def-pe-derived-completion). -/
@@ -232,7 +250,20 @@ Proof: the first coordinate is d squared. In the second coordinate the two mixed
 terms cancel because 1-s is a chain map; the remaining d squared term is zero. -/
 theorem roosD_sq (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (i : ℤ) :
     roosD l E X P i ≫ roosD l E X P (i + 1) = 0 := by
-  sorry
+  dsimp only [roosD, roosX]
+  apply biprod.hom_ext
+  · simp
+  · suffices biprod.fst ≫ (product l E X P).d i (i + 1 + 1 - 1) ≫
+        (oneSubShift l E X P).f (i + 1 + 1 - 1) -
+        biprod.fst ≫ eqToHom (congrArg (product l E X P).X
+          (Int.add_sub_cancel i 1).symm) ≫
+          (product l E X P).d (i + 1 - 1) (i + 1 + 1 - 1) ≫
+          (oneSubShift l E X P).f (i + 1 + 1 - 1) = 0 by simpa using this
+    have hd := (product l E X P).eqToHom_comp_d
+      (i := i) (i' := i + 1 - 1) (j := i + 1 + 1 - 1)
+      (by change i + 1 = i + 1 + 1 - 1; omega)
+      (by change i + 1 - 1 + 1 = i + 1 + 1 - 1; omega)
+    rw [reassoc_of% hd, sub_self]
 
 /-- The explicit homotopy inverse limit of the strict derived reductions of a K-flat P.
 Source: Stacks 08TC, blueprint Roos model (blueprint: sk-def-pe-derived-completion). -/
@@ -245,6 +276,34 @@ Source: blueprint, strict reduction augmentation (blueprint: sk-def-pe-derived-c
 def unitProduct (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     P ⟶ product l E X P := Pi.lift (levelUnit l E X P)
 
+private theorem quotientUnit_step (n : ℕ) :
+    quotientUnit l E (n + 1) ≫ quotientStep l E n = quotientUnit l E n := by
+  apply Mod.hom_ext
+  rfl
+
+private theorem finiteUnit_step (X : Scheme.{u}) (n : ℕ) :
+    finiteUnit l E X (n + 1) ≫
+      (DerivedNakayama.pullback l E X).map (quotientStep l E n) = finiteUnit l E X n := by
+  dsimp only [finiteUnit]
+  rw [Category.assoc, ← Functor.map_comp, quotientUnit_step]
+
+private theorem levelUnit_step (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ)
+    (n : ℕ) : levelUnit l E X P (n + 1) ≫ levelStep l E X P n = levelUnit l E X P n := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  change ((ρ_ (P.X i)).inv ≫ P.X i ◁ finiteUnit l E X (n + 1)) ≫
+    P.X i ◁ (DerivedNakayama.pullback l E X).map (quotientStep l E n) =
+    (ρ_ (P.X i)).inv ≫ P.X i ◁ finiteUnit l E X n
+  rw [Category.assoc, ← whiskerLeft_comp, finiteUnit_step]
+
+private theorem unitProduct_oneSubShift (X : Scheme.{u})
+    (P : CochainComplex (Modules l E X) ℤ) :
+    unitProduct l E X P ≫ oneSubShift l E X P = 0 := by
+  apply Pi.hom_ext
+  intro n
+  simp [oneSubShift, towerTransitionEndomorphism, towerProductShift, unitProduct,
+    levelUnit_step]
+
 /-- The map with coordinates (unit,0) is a chain map.
 Source: blueprint, canonical reduction comparison (blueprint: sk-def-pe-derived-completion).
 Proof: the tensor units commute with d. Quotient transitions preserve 1 and commute
@@ -253,7 +312,13 @@ theorem augmentation_comm (X : Scheme.{u}) (P : CochainComplex (Modules l E X) �
     (i : ℤ) :
     biprod.lift ((unitProduct l E X P).f i) 0 ≫ (roos l E X P).d i (i + 1) =
       P.d i (i + 1) ≫ biprod.lift ((unitProduct l E X P).f (i + 1)) 0 := by
-  sorry
+  have hz (j : ℤ) : (unitProduct l E X P).f j ≫ (oneSubShift l E X P).f j = 0 :=
+    congrArg (fun f ↦ f.f j) (unitProduct_oneSubShift l E X P)
+  simp only [roos, CochainComplex.of_d]
+  dsimp only [roosD, roosX]
+  apply biprod.hom_ext
+  · simp
+  · simpa using hz (i + 1 - 1)
 
 /-- The canonical completion comparison, with the specified zero shifted-product component.
 Source: blueprint, canonical reduction comparison (blueprint: sk-def-pe-derived-completion). -/
@@ -292,7 +357,8 @@ Proof: quotient factor after quotient is the smaller quotient homomorphism.
 This identity holds pointwise on continuous functions, and inverse image preserves composition. -/
 theorem quotient_transition (n : ℕ) :
     quotient l E X (n + 1) ≫ transition l E X n = quotient l E X n := by
-  sorry
+  rw [← Functor.map_comp]
+  congr 1
 
 /-- The derived category over the positive finite coefficient level n+1.
 Source: blueprint, normalized complexes (blueprint: sk-def-pe-derived-completion). -/
@@ -359,20 +425,27 @@ def IsNormalized (M : ∀ n : ℕ, FiniteDerived l E X n)
     (((Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n)).homEquiv
       (M (n + 1)) (M n)).symm (t n))
 
+private theorem isIso_mate_unit {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {A : C} {B : D} (e : F.obj A ≅ B) :
+    IsIso ((adj.homEquiv A B).symm (adj.unit.app A ≫ G.map e.hom)) := by
+  rw [← adj.homEquiv_unit, Equiv.symm_apply_apply]
+  infer_instance
+
 /-- The derived reduction tower is normalized with its specified transitions.
 Source: blueprint, derived reduction identities (blueprint: sk-def-pe-derived-completion).
-Proof: choose a K-flat representative P. Extension to B_(n+2) remains K-flat by
-lem-pur-kflat-change-of-rings. Associativity of balanced tensor sends
-(p tensor a) tensor b to p tensor image(a)b; its inverse sends p tensor b to
-(p tensor 1) tensor b. They are inverse chain maps. The reductionComp construction
-is this isomorphism by uniqueness of the left adjoint to the same exact restriction.
-Under the adjunction homEquiv, derivedStep is precisely its component; hence it is
-invertible. For three levels both associations multiply the same coefficient images,
-so their composites agree and give all longer reduction identities. -/
+Proof: reductionComp is the canonical natural isomorphism supplied by uniqueness
+of left adjoints to the same restriction functor. By definition, derivedStep is its
+component transported by the finite scalar-extension adjunction: it is the unit
+followed by the restricted isomorphism. Applying the inverse adjunction homEquiv
+therefore recovers that isomorphism component, which is invertible. This proves
+normalization at each consecutive positive level. -/
 theorem derivedReduction_isNormalized (K : DerivedCategory (Modules l E X)) :
     IsNormalized l E X (fun n ↦ (derivedReduction l E X n).obj K)
       (derivedStep l E X K) := by
-  sorry
+  intro n
+  exact isIso_mate_unit
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n))
+    ((reductionComp l E X n).app K)
 
 /-- The canonical comparison on any specified K-flat representative of K.
 Source: blueprint, canonical completion map (blueprint: sk-def-pe-derived-completion). -/
@@ -425,6 +498,20 @@ def derivedTower (K : DerivedCategory (Modules l E X)) :
     ℕᵒᵖ ⥤ DerivedCategory (Modules l E X) :=
   Functor.ofOpSequence (integralStep l E X K)
 
+private theorem composed_unit_compatible
+    {C D A : Type*} [Category C] [Category D] [Category A]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ A} {I : A ⥤ D}
+    {L : C ⥤ A} {R : A ⥤ C}
+    (a : F ⊣ G) (b : H ⊣ I) (c : L ⊣ R) (e : I ⋙ G ≅ R) (K : C) :
+    let t := ((a.comp b).ofNatIsoRight e).leftAdjointUniq c
+    a.unit.app K ≫ (G.map (b.unit.app (F.obj K) ≫ I.map (t.hom.app K)) ≫
+      e.hom.app (L.obj K)) = c.unit.app K := by
+  have h := Adjunction.unit_leftAdjointUniq_hom_app ((a.comp b).ofNatIsoRight e) c K
+  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Adjunction.comp_unit_app, Category.assoc, Functor.whiskerLeft_app] at h
+  rw [← e.hom.naturality ((((a.comp b).ofNatIsoRight e).leftAdjointUniq c).hom.app K)] at h
+  simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using h
+
 /-- The coherent tensor-unit maps to the derived reductions.
 Source: blueprint, reduction cone (blueprint: sk-def-pe-derived-completion).
 Proof: reductionComp is formed by left-adjoint uniqueness, which identifies the
@@ -434,7 +521,11 @@ theorem reductionUnit_compatible (K : DerivedCategory (Modules l E X)) (n : ℕ)
     (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1))).unit.app K ≫
         integralStep l E X K n =
       (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K := by
-  sorry
+  exact composed_unit_compatible
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1)))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n))
+    (restrictComp l E X n) K
 
 /-- The specified augmented Roos model is the derived inverse limit of the canonical
 reductions; its evaluations compose with the explicit completionMap to the tensor units.
