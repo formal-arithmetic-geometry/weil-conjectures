@@ -1,0 +1,177 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-realization-direct-image",
+ "kind": "statement",
+ "title": "Finite coefficient realization commutes with ordinary direct image",
+ "statement": "Let X and Y be schemes [def-weil-pbc-scheme-conventions], f : X → Y any scheme morphism, and Λ a finite commutative ring with the discrete topology. Use the continuous-function coefficient ring sheaves, module categories and canonical realization functors of [def-weil-pbc-proetale-modules], and the ordinary module direct image with its specified precomposition-on-functions scalar map [def-weil-pbc-proetale-operations]. There is a natural isomorphism realization_X ⋙ f_*^module ≅ f_*^fixed ⋙ realization_Y, where f_*^fixed is direct image of fixed-Λ module sheaves on the pro-etale sites.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-sheafification-presheaf-modules and definition-pushforward; explicit scalar-map calculation for the finite coefficient model"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "The scalar map from constant scalars commutes with direct image: after precomposing with the sheafification unit this is the identity saying that precomposition of a constant function is constant. The sheafification adjunction gives the required equality of ring-presheaf maps. This is scalarDirectImage_square in the Lean proof.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let E_T embed fixed-ring module sheaves into constant-ring module presheaves, and let U_T forget a finite-coefficient module sheaf and restrict its scalars along the constant-scalar map. The sheafification adjunction has invertible counit, hence U_T is fully faithful. Its unit is invertible on E_T(F), since the underlying abelian presheaf of F is already a sheaf. Thus E_T is naturally isomorphic to realization_T followed by U_T. These are Mathlib PresheafOfModules.sheafificationAdjunction, its isomorphism-of-counit instance, and isIso_toSheafify.",
+   "uses": [
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction U_Y after the module direct image equals, up to the identity natural isomorphism on sections, U_X followed by presheaf precomposition with pro-etale base change. The identity is linear because of step 1. The maps and their inverse are identities, so their naturality is the sectionwise reflexive equality. This is restrictionDirectImageIso.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the preceding isomorphism by realization_X and use the unit identifications of step 2 on both sides. Both underlying fixed-ring direct images are precomposition with the same base-change functor. This yields an isomorphism of the desired functors after postcomposition by U_Y. Cancel the fully faithful U_Y by Mathlib Functor.fullyFaithfulCancelRight. No nontriviality, nonempty-scheme or properness hypothesis was used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-sheafification-presheaf-modules and definition-pushforward; explicit scalar-map calculation for the finite coefficient model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheafification commutes with pushforward of sheaves over a constant ring",
+   "results": [
+    "PresheafOfModules.sheafifyMap",
+    "SheafOfModules.pushforward_map_val",
+    "PresheafOfModules.sheafification",
+    "SheafOfModules.pushforwardNatTrans_app_val_app",
+    "PresheafOfModules.sheafify",
+    "PresheafOfModules.sheafification_map",
+    "SheafOfModules.pushforward_obj_val",
+    "SheafOfModules.pushforwardSections"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Related general sheafification API only; no direct theorem about this specified coefficient realization and scalar map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheafification commutes with pushforward constant ring sheaf",
+   "results": [
+    "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+    "SheafOfModules.unitToPushforwardObjUnit",
+    "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+    "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+    "PresheafOfModules.Sheafify.map_smul_eq",
+    "SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+    "PresheafOfModules.sheafificationCompToSheaf",
+    "PresheafOfModules.toPresheaf_map_toSheafify"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Related general sheafification API only; no direct theorem about this specified coefficient realization and scalar map."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationAdjunction",
+   "results": [
+    "PresheafOfModules.sheafificationAdjunction",
+    "PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction",
+    "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+    "PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app",
+    "PresheafOfModules.sheafificationAdjunction_homEquiv_apply"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Related general sheafification API only; no direct theorem about this specified coefficient realization and scalar map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of module presheaf along locally bijective ring morphism commutes with direct image",
+   "results": [
+    "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+    "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+    "PresheafOfModules.toPresheaf_map_toSheafify",
+    "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+    "PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+    "PresheafOfModules.sheafification_map",
+    "PresheafOfModules.sheafifyHomEquiv'",
+    "PresheafOfModules.sheafificationCompToSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Related general sheafification API only; no direct theorem about this specified coefficient realization and scalar map."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction and its unit/counit in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; realization/direct-image searches in lean/Sheaf and lean/WeilConjectures",
+   "results": [
+    "PresheafOfModules.sheafificationAdjunction",
+    "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+    "No existing finiteCoefficientRealization_directImage theorem in the library."
+   ],
+   "date": "2026-10-19",
+   "verdict": "General tools used in the proof; the concrete scalar-map compatibility must still be proved. Narrow direct rg search used because the remote whole-Mathlib grep timed out."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperDirectImageFiniteness",
+  "date": "2026-10-19",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, displayed comparison of higher direct images: change from fixed module coefficients to the specified coefficient sheaf",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientRealizationDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientRealizationDirectImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientRealization_directImage",
+  "statement": "theorem finiteCoefficientRealization_directImage\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    [TopologicalSpace Λ] [DiscreteTopology Λ] :\n    Nonempty (finiteCoefficientRealization X Λ ⋙ finiteCoefficientModuleDirectImage f Λ ≅\n      lowerStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization Y Λ)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-00d1f",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T005427-L-2768889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-00d1f",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T005427-L-2768889",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProperDirectImageFiniteness + new FiniteCoefficientRealizationDirectImage vs live clone: item signature byte-identical, compiled with importer AmplificationProper, axioms only via pre-existing upstream sorries, node diffs only proof/proof_deps/proof_origin, dropped site-comparison-finite-level not in unit sk-thm-properbasechange realized"
+ }
+}

@@ -12,12 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleProperDirectImageFiniteness
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Noetherian.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FiniteCoefficientRealizationDirectImage
+import Sheaf.SixFunctors.ProEtale.BaseChange.SmoothBaseChangeComparisons
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-!
 # Finiteness of proper direct images
@@ -36,6 +33,57 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
+
+private noncomputable def realizationDerivedDirectImageIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [TopologicalSpace Λ] [DiscreteTopology Λ] :
+    (finiteCoefficientRealization X Λ).mapDerivedCategory ⋙
+        finiteCoefficientDerivedDirectImage f Λ ≅
+      (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor ⋙
+        (finiteCoefficientRealization Y Λ).mapDerivedCategory :=
+  Functor.isoWhiskerRight
+      (finiteCoefficientRealization X Λ).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
+    (Functor.rightDerivedFunctorCompIso _ _).symm ≪≫
+    Functor.rightDerivedFunctorNatIso
+      (finiteCoefficientRealization_directImage f Λ).some ≪≫
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ _
+
+private noncomputable def fixedHigherDirectImageIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    (DerivedCategory.homologyFunctor _ q).obj
+        ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj
+            ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj E))) ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).obj
+        (Etale.higherDirectImage Λ f q E) :=
+  (DerivedCategory.homologyFunctor _ q).mapIso
+      ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.mapIso
+        (((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategorySingleFunctor
+          0).app E).symm ≪≫
+        ((rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj E)).symm) ≪≫
+    (((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategoryHomologyFunctorIso
+      q).app _).symm
+
+private noncomputable def finiteHigherDirectImageIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [TopologicalSpace Λ] [DiscreteTopology Λ]
+    (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    finiteCoefficientHigherDirectImage f Λ q ((finiteCoefficientComparison X Λ).obj E) ≅
+      (finiteCoefficientComparison Y Λ).obj (Etale.higherDirectImage Λ f q E) :=
+  (DerivedCategory.homologyFunctor _ q).mapIso
+      ((finiteCoefficientDerivedDirectImage f Λ).mapIso
+        (((finiteCoefficientRealization X Λ).mapDerivedCategorySingleFunctor 0).app
+          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj E)).symm ≪≫
+        (realizationDerivedDirectImageIso f Λ).app
+          ((DerivedCategory.singleFunctor _ 0).obj
+            ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj E))) ≪≫
+    (((finiteCoefficientRealization Y Λ).mapDerivedCategoryHomologyFunctorIso q).app _).symm ≪≫
+    (finiteCoefficientRealization Y Λ).mapIso (fixedHigherDirectImageIso f Λ E q)
 
 /-- Proper direct-image finiteness for Lambda = A/I^n, with the specified bound 2e.
 The coefficient hypotheses are those of the adic datum: Noetherianity of A, finite
@@ -82,6 +130,32 @@ theorem constructibleDirectImageFiniteness_of_isProper
       topologicalKrullDim ↥(pullback f (Y.algClosurePoint y)) ≤ (e : WithBot ℕ∞)) :
     ConstructibleDirectImageFiniteness A I hI htorsion hperfect n
       hYdim hYorders f (2 * e) := by
-  sorry
+  classical
+  have _ := hXorders
+  let Λ := A ⧸ I ^ (n : ℕ)
+  let : TopologicalSpace Λ := ⊥
+  let : DiscreteTopology Λ := ⟨rfl⟩
+  change (∀ (F : FiniteCoefficientModules X Λ),
+    IsConstructibleFiniteCoefficientSheaf X Λ F → ∀ q : ℤ, 0 ≤ q →
+      IsConstructibleFiniteCoefficientSheaf Y Λ (finiteCoefficientHigherDirectImage f Λ q F)) ∧
+    (∀ (F : FiniteCoefficientModules X Λ), IsConstructibleFiniteCoefficientSheaf X Λ F →
+      ∀ q : ℤ, ((2 * e : ℕ) : ℤ) < q → IsZero (finiteCoefficientHigherDirectImage f Λ q F))
+  have transfer (F : FiniteCoefficientModules X Λ)
+      (hF : IsConstructibleFiniteCoefficientSheaf X Λ F) :
+      (∀ q : ℤ, 0 ≤ q → IsConstructibleFiniteCoefficientSheaf Y Λ
+        (finiteCoefficientHigherDirectImage f Λ q F)) ∧
+      (∀ q : ℤ, (2 * e : ℤ) < q → IsZero (finiteCoefficientHigherDirectImage f Λ q F)) := by
+    obtain ⟨E, hE, ⟨i⟩⟩ := hF
+    have hfin := Etale.proper_directImage_finiteness hXdim hYdim f e hfib Λ hYorders E hE
+    have j (q : ℤ) : finiteCoefficientHigherDirectImage f Λ q F ≅
+        (finiteCoefficientComparison Y Λ).obj (Etale.higherDirectImage Λ f q E) :=
+      (DerivedCategory.homologyFunctor _ q).mapIso
+        ((finiteCoefficientDerivedDirectImage f Λ).mapIso
+          ((DerivedCategory.singleFunctor _ 0).mapIso i)) ≪≫ finiteHigherDirectImageIso f Λ E q
+    exact ⟨fun q hq ↦ ⟨_, hfin.1 q hq, ⟨j q⟩⟩,
+      fun q hq ↦ IsZero.of_iso
+        (Functor.map_isZero (finiteCoefficientComparison Y Λ) (hfin.2 q hq)) (j q)⟩
+  exact ⟨fun F hF ↦ (transfer F hF).1, fun F hF q hq ↦ (transfer F hF).2 q (by
+    simpa only [Nat.cast_mul, Nat.cast_ofNat] using hq)⟩
 
 end AlgebraicGeometry.ProEtale
