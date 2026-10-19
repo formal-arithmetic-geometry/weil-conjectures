@@ -309,5 +309,53 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-35fb9ab1b (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, all cited node statements, cited literature, and delivery checks A–F. The seven proof steps are mathematically coherent, hypotheses and coefficient/base-change maps align, no new nodes or duplicates occur, all steps are under 2000 characters, and edge cases were checked. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefTowerNaturalCurrying",
+  "declaration": "WeilConjectures.coefTowerNaturalCurrying",
+  "file": "lean/Sheaf/SixFunctors/CoefTowerNaturalCurrying.lean",
+  "statement": "theorem coefTowerNaturalCurrying (hl : l ≠ D.p) (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ) (eQ : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅ integralDualizingFiniteTerm l E D X n) (_hQ : ∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫ (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom = (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h) (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀) (T : DerivedCategory (scalarReductionSource.{u, u} l E X) ⥤ DerivedCategory (pbcTowers (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))))) (e : ∀ n : ℕ, T ⋙ pbcTowerEvaluation (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) n ≅ compactSupportRestrictedLevel l E (finiteDualizingCompactification D X) n) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E (finiteDualizingCompactification D X) m n h K) (eTrace : ∀ n : ℕ, (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅ coefTraceFiniteValue l E D X n) (t : coefTraceDualizingTower l E D X Q ⟶ coefCurryingTarget l E) (_ht : ∀ n : ℕ, (coefTraceEvaluation l E n).map t ≫ (coefCurryingTargetEvaluation l E n).hom = (eTrace n).hom ≫ coefTraceFiniteCounit l E D X n ≫ (coefTraceTargetIso l E D n).hom) : ∃ M : CoefCurryingModels l E D X Q a₀ b₀ T e, M.IsSpecified l E D X Q a₀ b₀ T e ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (P : CochainComplex (ModuleCat.{u + 1} (coefTraceRing l E)) ℤ) (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)).kFlat P) (_eP : DerivedCategory.Q.obj P ≅ C) (I : CochainComplex (coefPairingModules l E) ℤ) (_hI : I.IsKInjective) (_eI : DerivedCategory.Q.obj I ≅ coefCurryingTarget l E), Nonempty ((M.hom.hom).obj (op C) ≅ DerivedCategory.Q.obj (coefCurryingHomComplex l E P I))) ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (n : ℕ), (coefTraceEvaluation l E n).map (M.hom.evaluation C) ≫ (coefCurryingTargetEvaluation l E n).hom = (M.tensorEvaluation n).hom.app ((M.hom.hom).obj (op C), (CoefTower.constant (coefTraceRing l E)).obj C) ≫ ((M.homEvaluation n).hom.app (op C) ⊗ₘ (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app C) ≫ coefCurryingPointEvaluation l E n C) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map ((M.eta l E D X Q a₀ b₀ T e).app K) ≫ (M.supportEvaluation l E D X Q a₀ b₀ T e n).hom.app K.obj = (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app ((coefCurryingIntegralSections l E D X T).obj K.obj) ≫ M.finiteProjection l E D X Q a₀ b₀ T e n K) ∧ (∀ n : ℕ, (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom) ∧ (∀ K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory, IsIso (M.gamma l E D X Q a₀ b₀ T e t K)) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map (M.gamma l E D X Q a₀ b₀ T e t K) ≫ (M.homEvaluation n).hom.app (op ((coefCurryingIntegralSections l E D X T).obj K.obj)) = (M.finiteHom n).hom.app (op K.obj) ≫ M.finiteArrow l E D X Q a₀ b₀ T e n K) ∧ ∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (f : K ⟶ K'), M.gamma l E D X Q a₀ b₀ T e t K' ≫ (M.hom.hom).map ((coefCurryingIntegralSections l E D X T).map f.hom).op = (coefPairingHom l E X M.calculus Q).map f.hom.op ≫ M.gamma l E D X Q a₀ b₀ T e t K",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.coefCurryingPointDerived",
+   "WeilConjectures.coefCurryingStandardPoint",
+   "WeilConjectures.coefCurryingStandardPointQ",
+   "WeilConjectures.coefCurryingPointEquivalence",
+   "WeilConjectures.coefCurryingStandardEvaluate",
+   "WeilConjectures.coefCurryingStandardEvaluateFactors",
+   "WeilConjectures.coefCurryingEvaluationTransport",
+   "WeilConjectures.coefCurryingQuotients",
+   "WeilConjectures.coefCurryingTarget",
+   "WeilConjectures.coefCurryingTargetEvaluation",
+   "WeilConjectures.CoefCurryingHomModel",
+   "WeilConjectures.coefCurryingHomComplex",
+   "WeilConjectures.coefCurryingPointHom",
+   "WeilConjectures.coefCurryingPointTensor",
+   "WeilConjectures.coefCurryingPointEvaluation",
+   "WeilConjectures.coefCurryingIntegralSections",
+   "WeilConjectures.coefCurryingStandardFiniteSections",
+   "WeilConjectures.CoefCurryingModels",
+   "WeilConjectures.CoefCurryingModels.eta",
+   "WeilConjectures.CoefCurryingModels.supportEvaluation",
+   "WeilConjectures.CoefCurryingModels.finiteProjection",
+   "WeilConjectures.CoefCurryingModels.finiteArrow",
+   "WeilConjectures.CoefCurryingModels.gamma",
+   "WeilConjectures.coefTowerNaturalCurrying",
+   "WeilConjectures.coefCurryingStandardIntegralPoint",
+   "WeilConjectures.coefCurryingIntegralPointTransport",
+   "WeilConjectures.coefCurryingFiniteC",
+   "WeilConjectures.CoefCurryingModels.IsSpecified"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-975247e60",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of deb24dad (H3 F1/F2, H13 F3). F1: CoefCurryingModels.IsSpecified imposes all 5 coefTowerEvaluationPairing clauses verbatim (Hom complex, eIntegralHom scalar factorisation, eB transitions, beta evaluation, dinaturality) on M.calculus/pairing/finiteFrame/tensorEvaluation/integralHom/finiteHom/eB/omegaEvaluation; inputs a0 b0 imply finiteTorConstructibleIntegral via _hab. support_finite pins M.support vs eB, so the eta clause reduces to the coaugmentation dep's clause. F2: finiteC is now the def coefCurryingFiniteC (derivedFiniteSectionsRestriction + localization liftNatIso + pointSectionsDerived, the last pinned by Qh-whiskering; needs Gamma->RGamma unit iso on Spec kbar, true by w-contractibility); finiteHom/omegaEvaluation/tensorEvaluation pinned by beta evaluation, omegaOrigin by eTrace, homEvaluation by clause 2. F3: dep record no longer delivered; only item node/module/report differ from side-live. lean.statement verbatim; 28 declarations all listed; docstrings with source and blueprint, 7-step theorem docstring; only sorry. nt_compile --json clean 41.8 s. Advisory: possibly redundant transitive imports; compile time near 60 s."
  }
 }
