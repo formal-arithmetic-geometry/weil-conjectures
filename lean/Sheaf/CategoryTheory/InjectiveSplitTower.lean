@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.CategoryTheory.InjectiveSplitTowerExtension
+import WeilConjectures.CategoryTheory.InjectiveSplitTowerExtension
 
 /-!
 # Injectivity of split towers of injective abelian groups

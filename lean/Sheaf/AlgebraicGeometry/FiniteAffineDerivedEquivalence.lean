@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh

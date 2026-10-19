@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.TensorShiftOneAssociator
+import WeilConjectures.Algebra.Homology.TensorShiftOneAssociator
 import Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization
 
 /-! # Reassociation of the first-factor translation on K-flat representatives

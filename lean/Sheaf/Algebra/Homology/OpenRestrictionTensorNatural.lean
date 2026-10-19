@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Algebra.Homology.OpenRestrictionSheafification
+import WeilConjectures.Algebra.Homology.OpenRestrictionSheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 

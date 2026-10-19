@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.KoszulConormalCyclePresentation
-import Sheaf.RingTheory.KoszulAugmentationLiftExists
-import Sheaf.RingTheory.KoszulAugmentationLiftHomotopy
+import WeilConjectures.RingTheory.KoszulAugmentationLiftExists
+import WeilConjectures.RingTheory.KoszulAugmentationLiftHomotopy
 import Sheaf.RingTheory.KoszulGeneratorChainMap
 
 /-! # Alternating Koszul products before conormal descent

@@ -9,7 +9,7 @@ import Sheaf.AlgebraicGeometry.LogDifferentialStalk
 import Sheaf.AlgebraicGeometry.LogCotangentComparison
 import Sheaf.AlgebraicGeometry.LogFanChartBlowup
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong
+import WeilConjectures.RingTheory.FiniteFreeMapResidueLocalizationStrong
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.FinitePresentation
 import Sheaf.AlgebraicGeometry.SmoothEtaleLocalSource

@@ -6,7 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.Algebra.Homology.HomComplexToSingle
-public import Sheaf.Algebra.Homology.SignedModuleDualComplex
+public import WeilConjectures.Algebra.Homology.SignedModuleDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic

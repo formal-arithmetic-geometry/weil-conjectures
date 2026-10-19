@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Noetherian.Defs
 
-import Sheaf.RingTheory.PurelyInseparablePolynomialCover
+import WeilConjectures.RingTheory.PurelyInseparablePolynomialCover
 import Mathlib.RingTheory.Polynomial.IsIntegral
 
 /-!

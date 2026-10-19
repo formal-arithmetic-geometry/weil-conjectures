@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
+import WeilConjectures.AlgebraicGeometry.AffineConormalSectionsExistence
 import Sheaf.AlgebraicGeometry.OpenKernelConormalTransport
 
 /-! # Conormal sections on an affine closed chart

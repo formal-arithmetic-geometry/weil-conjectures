@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
-import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
+import WeilConjectures.AlgebraicGeometry.AffineConormalSectionsExistence
 import Sheaf.AlgebraicGeometry.DiagonalConormal
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 

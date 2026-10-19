@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleGenerators
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.AlgebraicGeometry.AffineScheme

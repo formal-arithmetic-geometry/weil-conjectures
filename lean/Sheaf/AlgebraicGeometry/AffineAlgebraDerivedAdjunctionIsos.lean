@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedUnitHomologyFactorization
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedCounitHomologyFactorization
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Unit and counit of the affine algebra derived adjunction

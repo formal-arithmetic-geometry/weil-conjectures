@@ -13,7 +13,7 @@ public import Mathlib.Topology.Defs.Filter
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
+import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 

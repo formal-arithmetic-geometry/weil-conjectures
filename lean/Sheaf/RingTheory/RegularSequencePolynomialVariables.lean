@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Data.List.OfFn
-import Sheaf.RingTheory.RegularSequencePermutationsSubsequences
-import Sheaf.RingTheory.RegularSequenceSubsequencesPolynomial
+import WeilConjectures.RingTheory.RegularSequencePermutationsSubsequences
+import WeilConjectures.RingTheory.RegularSequenceSubsequencesPolynomial
 
 /-!
 # Regular sequences multiplied by polynomial variables

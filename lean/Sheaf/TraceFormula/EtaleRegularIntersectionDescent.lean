@@ -10,7 +10,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.Etale.LocalDimension
-import Sheaf.RingTheory.FlatUnderRegular
+import WeilConjectures.RingTheory.FlatUnderRegular
 
 /-!
 # Étale descent of regular intersections and codimension

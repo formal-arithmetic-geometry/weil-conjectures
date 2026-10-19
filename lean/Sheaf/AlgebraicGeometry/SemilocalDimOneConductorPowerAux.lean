@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 import Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower
-import Sheaf.AlgebraicGeometry.AdjoinFiniteFractionSpec
+import WeilConjectures.AlgebraicGeometry.AdjoinFiniteFractionSpec
 
 /-! Auxiliary finite adjoin construction for the conductor-power argument.
 

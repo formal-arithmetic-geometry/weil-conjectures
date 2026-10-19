@@ -97,13 +97,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuParameterQuotientResidueEquivs",
-  "file": "lean/Sheaf/RingTheory/PopescuParameterQuotientResidueEquivs.lean",
+  "module": "WeilConjectures.RingTheory.PopescuParameterQuotientResidueEquivs",
+  "file": "lean/WeilConjectures/RingTheory/PopescuParameterQuotientResidueEquivs.lean",
   "declaration": "Algebra.parameter_quotient_residue_ringEquivs",
   "statement": "theorem parameter_quotient_residue_ringEquivs\n    {k : Type u} {Λ : Type w} [Field k] [CommRing Λ] [Algebra k Λ]\n    (d c : ℕ) (hc : 1 ≤ c) (φ : MvPolynomial (Fin d) k →ₐ[k] Λ)\n    (q : PrimeSpectrum Λ)\n    (hgen : Ideal.span (Set.range (fun i : Fin d ↦\n      algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i)))) =\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) :\n    letI := φ.toRingHom.toAlgebra\n    let J : Ideal (MvPolynomial (Fin d) k) :=\n      Ideal.span (Set.range (fun i : Fin d ↦ (MvPolynomial.X i ^ c) ^ 8))\n    let J_Λ := Ideal.map (algebraMap (MvPolynomial (Fin d) k) Λ) J\n    ∀ (q₀ : PrimeSpectrum (Λ ⧸ J_Λ)),\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q →\n    letI := Localization.AtPrime.algebraOfLiesOver\n      (q₀.asIdeal.under (MvPolynomial (Fin d) k ⧸ J)) q₀.asIdeal\n    let R₀ := Localization.AtPrime (q₀.asIdeal.under (MvPolynomial (Fin d) k ⧸ J))\n    let L₀ := Localization.AtPrime q₀.asIdeal\n    let L := ULift.{max u v} L₀\n    let I := IsLocalRing.maximalIdeal R₀\n    ∃ eR : (R₀ ⧸ I) ≃+* k,\n      ∃ eL : (L ⧸ I.map (algebraMap R₀ L)) ≃+* q.asIdeal.ResidueField,\n        ∀ r : R₀ ⧸ I,\n          eL (algebraMap (R₀ ⧸ I) (L ⧸ I.map (algebraMap R₀ L)) r) =\n            algebraMap k q.asIdeal.ResidueField (eR r)",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuParameterQuotientResidueEquivs; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -14,10 +14,10 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
-public import Sheaf.RingTheory.SelfTorRestrictionCertificate
+public import WeilConjectures.RingTheory.SelfTorRestrictionCertificate
 
 import Sheaf.AlgebraicGeometry.SelfTorChosenResolutionCharts
-import Sheaf.RingTheory.SelfTorRestrictionResolutionIndependence
+import WeilConjectures.RingTheory.SelfTorRestrictionResolutionIndependence
 
 /-! # Affine Tor coordinates compatible with resolution-induced restriction
 

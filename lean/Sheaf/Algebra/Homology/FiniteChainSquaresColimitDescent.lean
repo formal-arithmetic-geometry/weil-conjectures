@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Category.Preorder
 import Mathlib.CategoryTheory.NatIso
 
 import Sheaf.Algebra.Homology.PreorderModuleMapEqualityDescent
-import Sheaf.Algebra.Homology.GradedScalarExtensionCoherence
+import WeilConjectures.Algebra.Homology.GradedScalarExtensionCoherence
 import Mathlib.Data.Int.Interval
 
 /-! # Eventual commutativity of finitely many chain squares

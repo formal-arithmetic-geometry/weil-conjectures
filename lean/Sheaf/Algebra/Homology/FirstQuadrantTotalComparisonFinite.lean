@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
-import Sheaf.Algebra.Homology.FirstQuadrantTotalExtension
+import WeilConjectures.Algebra.Homology.FirstQuadrantTotalExtension
 
 /-! # Comparison for a finite strip of rows
 

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Whiskering
 import Mathlib.CategoryTheory.Functor.OfSequence
 import Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization
-import Sheaf.CategoryTheory.Triangulated.MilnorProjectionFactorization
+import WeilConjectures.CategoryTheory.Triangulated.MilnorProjectionFactorization
 
 /-!
 # Milnor exact sequence for a derived inverse limit

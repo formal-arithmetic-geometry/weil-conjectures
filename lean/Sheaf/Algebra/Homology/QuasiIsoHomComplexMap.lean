@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.HomComplexSectionsQuasiIso
-import Sheaf.Algebra.Homology.QuasiIsoOfSections
+import WeilConjectures.Algebra.Homology.QuasiIsoOfSections
 
 /-!
 # Quasi-isomorphisms of sheaf Hom complexes into K-injectives

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.Algebra.Homology.FreeRestrictionTorBound
+import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 
 /-! # Tor bounds for projective modules after scalar restriction
 

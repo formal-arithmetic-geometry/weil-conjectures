@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounit
-import Sheaf.Algebra.Homology.DerivedRestrictionHomologyFactors
+import WeilConjectures.Algebra.Homology.DerivedRestrictionHomologyFactors
 
 /-! # Transporting universal derived counits along coefficient equivalences
 

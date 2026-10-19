@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.Algebra.Homology.SingleSupportTorAcyclicTensor
+import WeilConjectures.Algebra.Homology.SingleSupportTorAcyclicTensor
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Adjunction.Additive

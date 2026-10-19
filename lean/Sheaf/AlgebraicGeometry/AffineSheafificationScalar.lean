@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-! # Scalars in the underived affine associated-sheaf functor
 

@@ -98,13 +98,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare",
-  "file": "lean/Sheaf/Algebra/Homology/FlatIteratedScalarExtensionHomologySquare.lean",
+  "module": "WeilConjectures.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare",
+  "file": "lean/WeilConjectures/Algebra/Homology/FlatIteratedScalarExtensionHomologySquare.lean",
   "declaration": "ModuleCat.flatIteratedScalarExtension_homology_square",
   "statement": "theorem flatIteratedScalarExtension_homology_square\n    (A T E D : Type u) [CommRing A] [CommRing T] [CommRing E] [CommRing D]\n    (f : A →+* T) (c : T →+* E) (d : T →+* D) (k : E →+* D)\n    (hk : k.Flat) (hcomp : k.comp c = d)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :\n    let X := ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj Q\n    let XE := ((extendScalars (c.comp f)).mapHomologicalComplex (.up ℤ)).obj Q\n    let XD := ((extendScalars (d.comp f)).mapHomologicalComplex (.up ℤ)).obj Q\n    let F := extendScalars k\n    letI := preservesFiniteLimits_extendScalars_of_flat hk\n    ∀ (S N : ModuleCat.{u} T) (s : S ≅ N)\n      (a : S ⟶ X.homology i) (b : N ⟶ X.homology i),\n      s.hom ≫ b = a →\n      ∀ (vE : X ⟶ ((restrictScalars c).mapHomologicalComplex (.up ℤ)).obj XE)\n        (vD : X ⟶ ((restrictScalars d).mapHomologicalComplex (.up ℤ)).obj XD),\n      (∀ (j : ℤ) (t : T) (q : Q.X j),\n        vE.f j (t ⊗ₜ[A, f] q) = c t ⊗ₜ[A, c.comp f] q) →\n      (∀ (j : ℤ) (t : T) (q : Q.X j),\n        vD.f j (t ⊗ₜ[A, f] q) = d t ⊗ₜ[A, d.comp f] q) →\n      ∀ (aE : (extendScalars c).obj S ⟶ XE.homology i)\n        (aD : (extendScalars d).obj N ⟶ XD.homology i),\n      (extendRestrictScalarsAdj c).unit.app S ≫ (restrictScalars c).map aE =\n        a ≫ HomologicalComplex.homologyMap vE i ≫\n          ((XE.sc i).mapHomologyIso (restrictScalars c)).hom →\n      (extendRestrictScalarsAdj d).unit.app N ≫ (restrictScalars d).map aD =\n        b ≫ HomologicalComplex.homologyMap vD i ≫\n          ((XD.sc i).mapHomologyIso (restrictScalars d)).hom →\n      ∀ (e : F.obj ((extendScalars c).obj S) ≅ (extendScalars d).obj N),\n      (∀ x : S, e.hom ((1 : D) ⊗ₜ[E, k] ((1 : E) ⊗ₜ[T, c] x)) =\n        (1 : D) ⊗ₜ[T, d] (s.hom x)) →\n      ∀ tau : (F.mapHomologicalComplex (.up ℤ)).obj XE ≅ XD,\n      (∀ (j : ℤ) (x : Q.X j),\n        tau.hom.f j ((1 : D) ⊗ₜ[E, k] ((1 : E) ⊗ₜ[A, c.comp f] x)) =\n          (1 : D) ⊗ₜ[A, d.comp f] x) →\n      F.map aE ≫ ((XE.sc i).mapHomologyIso F).inv ≫\n        HomologicalComplex.homologyMap tau.hom i = e.hom ≫ aD",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

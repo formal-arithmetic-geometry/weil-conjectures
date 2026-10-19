@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel
-import Sheaf.Algebra.Homology.BoundedProjectiveNonpositiveModel
+import WeilConjectures.Algebra.Homology.BoundedProjectiveNonpositiveModel
 import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks

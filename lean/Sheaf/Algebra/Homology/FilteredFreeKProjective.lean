@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
-import Sheaf.Algebra.Homology.FilteredFreeKProjectiveStep
+import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveStep
 import Sheaf.Algebra.Homology.FilteredFreeKProjectiveAssembly
 
 /-!

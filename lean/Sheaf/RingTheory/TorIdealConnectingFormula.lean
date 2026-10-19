@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.RingTheory.TorIdealHomologyFormula
+import WeilConjectures.RingTheory.TorIdealHomologyFormula
 import Sheaf.RingTheory.TorIdealHomologyExactness
 
 /-! # The ideal connecting map for first Tor

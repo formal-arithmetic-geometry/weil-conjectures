@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
-import Sheaf.AlgebraicGeometry.AffineBaseChangeChartColimit
+import WeilConjectures.AlgebraicGeometry.AffineBaseChangeChartColimit
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 

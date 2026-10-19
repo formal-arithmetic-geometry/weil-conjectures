@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
