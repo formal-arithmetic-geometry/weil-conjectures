@@ -2,7 +2,7 @@
  "id": "lem-per-epp-common-finite-trait-extension",
  "kind": "statement",
  "title": "Common finite extension of finitely many complete traits",
- "statement": "Let $W_0$ be a complete discrete valuation ring with fraction field $K_0$ and residue field $k_0$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-weil-field]. Let $I$ be a finite set. For each $i\\in I$, let $W_i$ be a complete discrete valuation ring equipped with an injective local map $W_0\\hookrightarrow W_i$ and finite fraction-field extension $\\operatorname{Frac}(W_i)/K_0$ [def-pc-field-extension, def-weil-finitely-generated-module]. Then there exists a complete discrete valuation ring $W$ with an injective local map $W_0\\hookrightarrow W$ making $W$ finite as a $W_0$-module and, for every $i$, a local $W_0$-map $W_i\\hookrightarrow W$. The residue field $W/\\mathfrak m_W$ [def-weil-residue-field] is a finite extension of $k_0$; if $k_0$ is perfect, so is this residue field.",
+ "statement": "Let $W_0$ be a complete discrete valuation ring with fraction field $K_0$ and residue field $k_0$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-weil-field]. Let $I$ be a finite set. For each $i\\in I$, let $W_i$ be a complete discrete valuation ring equipped with an injective local map $W_0\\hookrightarrow W_i$ and finite fraction-field extension $\\operatorname{Frac}(W_i)/K_0$ [def-pc-field-extension, def-weil-finitely-generated-module]. Then there exists a complete discrete valuation ring $W$ with an injective local map $W_0\\hookrightarrow W$ making $W$ finite as a $W_0$-module and, for every $i$, a local $W_0$-map $W_i\\hookrightarrow W$. The residue field $W/\\mathfrak m_W$ [def-weil-residue-field] is a finite extension of $k_0$; if $k_0$ is perfect, so is this residue field. Here a ring map between local rings is local when the inverse image of the target maximal ideal is the source maximal ideal; a perfect field has characteristic zero, or has characteristic $p>0$ with surjective Frobenius $x\\mapsto x^p$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IV §4.2.3, sentence beginning De tels idéaux p étant en nombre fini: choose one finite base change dominating the finitely many Epp extensions"
@@ -12,11 +12,84 @@
   "def-weil-pbc-adically-complete-ring",
   "def-weil-finitely-generated-module",
   "def-pc-field-extension",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $K_i=\\operatorname{Frac}(W_i)$. Enumerate the finite set $I$ and inductively construct a finite extension $L_j/K_0$ receiving the first $j$ fields. Start with $L_0=K_0$. Given $L_j$, [lem-weil-common-extension-fields] embeds $L_j$ and the next $K_i$ over $K_0$ in one field $\\Omega$. In $\\Omega$ take their compositum $L_{j+1}$. Apply [lem-weil-pbc-compositum-degree-bound] with $F=K_0$, $K$ the image of $K_i$, and $M$ the image of $L_j$: it gives that $L_{j+1}/L_j$ is finite. If $a_r$ span $L_j/K_0$ and $b_s$ span $L_{j+1}/L_j$, the finitely many products $a_rb_s$ span $L_{j+1}/K_0$, by expanding coefficients in the $a_r$. The old embeddings compose with the inclusion of $L_j$ in $L_{j+1}$. At the end obtain a finite extension $L/K_0$ and $K_0$-embeddings $\\sigma_i:K_i\\hookrightarrow L$. For $I=\\varnothing$ take $L=K_0$.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-compositum-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0H7K (lemma-common-extension-field) and Tag 09ID (definition-compositum); finite iteration spelling out the common base extension in ILO IV 4.2.3"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq L$ be the integral closure of $W_0$ in $L$ [def-weil-pbc-integral-closure]. Apply [lem-per-complete-dvr-finite-normalization] with $A=W_0$, $K=K_0$: the hypotheses are exactly completeness of $W_0$ and the finiteness of $L/K_0$ from step 1. Thus $W$ is a complete DVR, its fraction field is $L$, and $W_0\\hookrightarrow W$ is injective, local and finite as a module. For each $i$, apply the uniqueness assertion of the same node to $A=W_0$, $L=K_i$ and $V=W_i$: the assumed local injection and its fraction-field extension identify $W_i$ with the integral closure of $W_0$ in $K_i$. Hence every $x\\in W_i$ is integral over $W_0$. Applying $\\sigma_i$ to its monic equation leaves its coefficients in $W_0$ unchanged, so $\\sigma_i(x)\\in W$. Restriction therefore defines an injective $W_0$-algebra map $f_i:W_i\\hookrightarrow W$.",
+   "uses": [
+    "lem-per-complete-dvr-finite-normalization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09EM (remark-construction) and 09F8 (lemma-special-case, first paragraph of proof); integral equations transported along the constructed field embeddings"
+   }
+  },
+  {
+   "text": "Check that each $f_i$ is local. Choose uniformizers $\\pi_0\\in W_0$ and $\\pi_i\\in W_i$ [def-sc-discrete-valuation-ring]. The image of $\\pi_0$ in $W_i$ is nonzero and lies in its maximal ideal, by the original injective local map. By [lem-weil-pbc-dvr-unit-times-uniformizer-power] it is $u\\pi_i^e$ with $u$ a unit and $e\\ge0$. In fact $e>0$, since otherwise $\\pi_0$ would be a unit. In $W$ its image lies in $\\mathfrak m_W$, while $f_i(u)$ remains a unit. Thus $f_i(\\pi_i)^e\\in\\mathfrak m_W$, and primality gives $f_i(\\pi_i)\\in\\mathfrak m_W$. Every element of $\\mathfrak m_{W_i}=\\pi_iW_i$ therefore maps into $\\mathfrak m_W$. Every element outside $\\mathfrak m_{W_i}$ is a unit and maps to a unit; this gives $f_i^{-1}(\\mathfrak m_W)=\\mathfrak m_{W_i}$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final uniformizer factorization assertion; elementary locality test"
+   }
+  },
+  {
+   "text": "Set $k=W/\\mathfrak m_W$. Locality of $W_0\\to W$ induces an injective field map $k_0\\to k$: its kernel before quotient is $\\mathfrak m_{W_0}$. If $w_1,\\ldots,w_t$ generate $W$ as a $W_0$-module, their residue classes span $k$ over $k_0$, since reducing an expression $w=\\sum_j a_jw_j$ gives $\\bar w=\\sum_j\\bar a_j\\bar w_j$. Thus $k/k_0$ is a finite field extension.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 4.2.3: finite base extension W_0′/W_0; elementary residue-module calculation"
+   }
+  },
+  {
+   "text": "Finally suppose $k_0$ is perfect. For each $x\\in k$, finite-dimensionality makes $1,x,\\ldots,x^t$ linearly dependent if $t$ elements span $k$ over $k_0$, so $x$ satisfies a nonzero polynomial over $k_0$. Hence $k/k_0$ is algebraic. Apply [lem-per-algebraic-extension-perfect] to conclude that $k$ is perfect. Together with steps 2–4 this proves every assertion, including the empty-family case.",
+   "uses": [
+    "lem-per-algebraic-extension-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/FieldTheory/Perfect.lean",
+    "place": "Algebra.IsAlgebraic.perfectField, lines 344–347; algebraicity of a finite-dimensional field extension checked by linear dependence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-per-complete-dvr-finite-normalization",
+  "def-weil-pbc-integral-closure",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-finitely-generated-module",
+  "lem-per-algebraic-extension-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 4.2.3, finite common-base-change sentence, expanded by the Stacks 0H7K compositum construction, complete-DVR normalization (09EM, 09F8), and explicit local/residue calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +118,80 @@
    "results": "2 hits: Mathlib/RingTheory/LinearDisjoint.lean:99; Mathlib/RingTheory/LaurentSeries.lean:802.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "common finite extension of finitely many complete discrete valuation rings over a base DVR",
+   "results": "8 hits: of_isDiscreteValuationRing; IsDiscreteValuationRing.mk; IsDiscreteValuationRing.TFAE; IsDiscreteValuationRing.toIsLocalRing; Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField; IsDedekindDomainDvr.isIntegrallyClosed; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; Valuation.HasExtension.ofComapInteger.  Search log digest fcc808cbd1fd3874.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not assert the common finite trait extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "common finite extension of finitely many complete discrete valuation rings over a base DVR",
+   "results": "8 hits: Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; IsDedekindDomainDvr; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers; IsDedekindDomainDvr.isIntegrallyClosed; IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers.  Search log digest 3e803513f7dceffa.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not assert the common finite trait extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsAdicComplete, Finite",
+   "results": "0 hits: .  Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not assert the common finite trait extension"
+  },
+  {
+   "tool": "grep",
+   "query": "compositum|finite.*DVR|complete.*valuation",
+   "results": "2 hits: Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LinearDisjoint.lean.  Search log digest 773d431963409bd5.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not assert the common finite trait extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of a complete discrete valuation ring in a finite field extension is a finite complete discrete valuation ring",
+   "results": "8 hits: NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal; IsDedekindDomainDvr.isIntegrallyClosed; Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; Valuation.Integers.isIntegrallyClosed; Valuation.Integers.integrallyClosed; Valuation.Integers.integralClosure.  Search log digest 454234b9f990bc0d.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a complete discrete valuation ring in a finite field extension is a finite complete discrete valuation ring",
+   "results": "8 hits: integralClosure.isIntegrallyClosedOfFiniteExtension; integralClosure.isIntegralClosure; IsDedekindDomainDvr.isIntegrallyClosed; IsIntegralClosure.isDedekindDomain; ValuationSubring.isIntegral_of_mem_ringOfIntegers; Valuation.Integers.integrallyClosed; IsIntegralClosure.of_isIntegrallyClosed; instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure.  Search log digest ce271c0135abbd06.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, integralClosure",
+   "results": "0 hits: .  Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|IsAdicComplete",
+   "results": "0 hits: .  Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization in a finite extension of the fraction field of a complete DVR is module finite local and adically complete",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion; IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; Ring.instFiniteNormalClosure_1; Ring.instFiniteNormalClosure; IsDedekindDomain.HeightOneSpectrum.adicCompletion; IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem.  Search log digest 721e9de9ba239104.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|IsAdicComplete|Module.Finite",
+   "results": "23 hits in RingTheory/DedekindDomain: Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/Instances.lean; Mathlib/RingTheory/DedekindDomain/Instances.lean; Mathlib/RingTheory/DedekindDomain/Dvr.lean; Mathlib/RingTheory/DedekindDomain/Dvr.lean. Search log digest 5176fe7a87c6846e. IntegralClosure.lean:176 is the separable-only module-finiteness theorem (section hypothesis line 147); Dvr.lean:128 is DVR localization, not complete arbitrary finite normalization.",
+   "date": "2026-10-19",
+   "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-epp-finite-family-traits",
@@ -60,7 +203,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Simultaneous Epp base change for finitely many traits in ILO IV 4.2.3.",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Simultaneous Epp base change for finitely many traits in ILO IV 4.2.3. The common finite extension is constructed by normalizing W_0 in a common finite fraction field, the algebra implicit in ILO IV 4.2.3.",
    "via": [
     "lem-per-epp-finite-family-traits",
     "lem-per-mixed-reduced-special-fibre-cover",
@@ -74,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-epp-common-finite-trait-extension",
+  "worker": "stage1",
+  "summary": "Constructed a finite common fraction field by finite induction and composita, normalized the complete base DVR, identified each given DVR by uniqueness, and checked locality and finite perfect residue extension. Added a complete-DVR normalization input and a Mathlib perfect-extension leaf. Only the meanings of local and perfect are made explicit in the item statement; all original hypotheses and conclusions are retained.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Simultaneous Epp base change for finitely many traits in ILO IV 4.2.3. The common finite extension is constructed by normalizing W_0 in a common finite fraction field, the algebra implicit in ILO IV 4.2.3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic common-overfield tool for the induction; no node of this unit states it, and it does not replace the ILO simultaneous-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-c7e812fc8",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-c7e812fc8 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, ILO IV 4.2.3 ('De tels idéaux p étant en nombre fini…', which needs one finite W0' dominating the Epp extensions), Stacks 09EM (1),(4), 09F8 proof paragraph 1, and 032W/0H7K/09ID via tags. The item statement is unchanged apart from the inline meanings of local and perfect, and it matches its only citer (lem-per-epp-finite-family-traits Step 2). Steps: (1) the induction with common-extension-fields and the compositum bound gives a finite L/K0, with base case and I=∅ handled; (2) the normalization node gives W, its uniqueness clause identifies W_i with the integral closure of W0 in K_i, and the K0-linear σ_i carries the monic equations, so W_i maps into W; (3) the image of π0 is uπ_i^e with e>0 and 𝔪_W is prime, so f_i is local (elementary, correct); (4) generators reduce to a spanning set of k/k0; (5) linear dependence gives algebraic, then the perfect leaf applies. New node lem-per-complete-dvr-finite-normalization: true. Finiteness comes from 032W, including the inseparable case. C is local because A is henselian, and normal of dimension 1, so a DVR. It is complete as a finite module. Uniqueness holds because a DVR is maximal for domination. Tested on L=K, Z_p[√p], k[[t^{1/p}]], and the non-complete Z_(5)⊂Q(i) counterexample. Not a duplicate: lem-per-valuation-normalization-localizations, the complete-local Nagata node and the sbc tame nodes differ, and the blueprint has no such node. It is not a restated clause of the item. New node lem-per-algebraic-extension-perfect: a correct Mathlib leaf, Perfect.lean:343-347. FIX (B6/B8): its how said 'exact' and named no bridge between Mathlib's PerfectField (irreducibles separable) and the node's char-0-or-Frobenius-surjective definition. Corrected how names PerfectField.ofCharZero:306, PerfectRing.ofSurjective:97-99 plus PerfectRing.toPerfectField:293-294, PerfectField.toPerfectRing:317 and Algebra.IsAlgebraic Defs.lean:45,68. File: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-algebraic-extension-perfect.json; only mathlib_match.how changed. Accepted tool use: lem-weil-common-extension-fields, a generic common-overfield fact that replaces no step of the unit route. No SGA. Advisory: def-weil-residue-field is the residue field of a scheme at a point, while the item writes W/𝔪_W explicitly; acceptable.; 1 file(s) fixed by the reviewer"
  }
 }
