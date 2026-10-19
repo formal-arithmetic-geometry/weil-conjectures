@@ -83,7 +83,22 @@ in the field k. The structure map on global sections preserves units, including 
 the empty scheme. -/
 theorem purAdicCoefficientUnit (W : Scheme.{u}) [W.Over (Spec (.of D.k))] :
     IsUnit (C.l : Γ(W, ⊤)) := by
-  sorry
+  have hchar0 : ringChar D.k₀ = D.p := by
+    let : Fact D.p.Prime := ⟨D.prime⟩
+    let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+    have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+      (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+    exact ringChar.eq D.k₀ D.p
+  have hchar : ringChar D.k = D.p :=
+    (Algebra.ringChar_eq D.k₀ D.k).symm.trans hchar0
+  have hl : (C.l : D.k) ≠ 0 := by
+    intro hz
+    exact C.different
+      ((CharP.ringChar_of_prime_eq_zero (Fact.out : C.l.Prime) hz).symm.trans hchar)
+  have hspec : IsUnit (C.l : Γ(Spec (.of D.k), ⊤)) := by
+    simpa only [map_natCast] using
+      (isUnit_iff_ne_zero.mpr hl).map (Scheme.ΓSpecIso (.of D.k)).inv.hom
+  simpa only [map_natCast] using hspec.map (W ↘ Spec (.of D.k)).appTop.hom
 
 /-- The same coefficient prime is a unit in every residue field.
 Source: blueprint purity conventions (blueprint: def-pur-adic-purity-objects).
@@ -91,7 +106,8 @@ Proof: map its unit in k first to the stalk at x, and then to the residue field.
 The structure map and residue quotient are unital ring maps and preserve units. -/
 theorem purAdicResidueUnit (W : Scheme.{u}) [W.Over (Spec (.of D.k))] (x : W) :
     IsUnit (C.l : W.residueField x) := by
-  sorry
+  simpa only [map_natCast] using
+    (purAdicCoefficientUnit D C W).map (W.Γevaluation x).hom
 
 /-- The inverse of the coefficient prime, uniquely determined in each residue field.
 Source: blueprint purity conventions (blueprint: def-pur-adic-purity-objects). -/
@@ -112,7 +128,8 @@ theorem purAdicReductionFiniteTor (W : Scheme.{u})
     (hK : finiteTorConstructibleIntegral C.l E W K) (n : ℕ) :
     finiteTorConstructible C.l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) W
       ((scalarReductionDerivedExtension C.l E W n).obj K) := by
-  sorry
+  rcases hK with ⟨⟨_, a, b, hab, hc⟩, c, d, hcd, ht⟩
+  exact ⟨(hc n).1, c, d, ht n⟩
 
 variable {X Y : Scheme.{u}}
   [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

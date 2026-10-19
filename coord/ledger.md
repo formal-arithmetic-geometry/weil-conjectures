@@ -17476,3 +17476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/P1/Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre (stage 3; reviewer PASS; first push; landing 20261019T154019-L-3027632 (interface); batch 20261019T153958; modules 5; new nodes 4)
 - 15:40 L: merged deliver/P5/Sheaf.RingTheory.NagataJTwoOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T154020-L-3027942 (interface); batch 20261019T153958; modules 2; new nodes 1)
 - 15:40 L: merged deliver/P7/Sheaf.Paper.CoefficientHeartGeneration (stage 3; reviewer PASS; first push; landing 20261019T154021-L-3028121 (interface); batch 20261019T153958; modules 4; new nodes 3)
+- 15:40 L: merged deliver/R5/Sheaf.Paper.AdicPurityObjects (stage 3; reviewer PASS; first push; landing 20261019T154022-L-3028474 (proof); batch 20261019T153958; modules 1; new nodes 0)
