@@ -17225,3 +17225,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/J3/Sheaf.CategoryTheory.NaturalTransportInduction (stage 3; reviewer PASS; first push; landing 20261019T093450-L-2315030 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/J4/Sheaf.AlgebraicGeometry.CurveOpenConstructibleGeneral (stage 3; reviewer PASS; first push; landing 20261019T093451-L-2315198 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/J5/Sheaf.AlgebraicGeometry.EtaleSupportedSections (stage 3; reviewer PASS; first push; landing 20261019T093453-L-2315352 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:34 L: merged deliver/J5/Sheaf.Paper.PullbackTorAmplitude (stage 3; reviewer PASS; first push; landing 20261019T093454-L-2315553 (proof); batch 20261019T093237; modules 1; new nodes 0)

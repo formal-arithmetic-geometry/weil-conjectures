@@ -1,298 +1,318 @@
 {
-  "id": "lem-sf-pullback-tor-amplitude",
-  "blueprint": {
-    "is": "lem-sf-pullback-tor-amplitude",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Pullback preserves finite Tor amplitude",
-  "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$, and\nput $A=A_{E,n}$. Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes, and let $K\\in D^b_c(Y,A)$ be a\nbounded constructible\ncomplex of finite Tor amplitude\nin $[a,b]$. Then $Lf^*K\\in D^b_c(X,A)$ is bounded constructible and has\nfinite Tor amplitude in $[a,b]$. Consequently $Lf^*$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$, which is clause (i) of\nthe finite-Tor preservation summary at the finite coefficient stages.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-    "place": "node lem-sf-pullback-tor-amplitude, order 2064"
-  },
-  "stmt_deps": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-exact"
-  ],
-  "proof": [
-    {
-      "text": "Specialize the finite coefficient datum to $\\mathcal O_E$ and $I=(\\varpi_E)$, so $P_j=\\mathcal O_E/\\varpi_E^j$ and $P_n=A$. The coefficient data [def-weil-l-adic-coefficient-extension] give a discrete valuation ring with finite residue field and finite quotients; a principal ideal domain is Noetherian because every ideal is principal. The residue quotient is finite, hence additive torsion, and [lem-weil-pbc-standard-quotients-perfect] supplies perfectness of every $P_j$ by the two-term finite free resolution. The extension of the $\\ell$-adic valuation gives $\\ell=u\\varpi_E^e$ with $e\\geq1$ and $u$ a unit, so every $P_j$ is killed by $\\ell^j$; these orders are invertible on $X,Y$ because $\\ell\\ne p$. Thus the coefficient hypotheses in [lem-weil-pbc-pullback-preserves-bounded-constructible] hold. By [lem-sf-proetale-constructible-origin], clause (ii), the intrinsic bounded constructible category in the item agrees with the category defined by etale origin used in that lemma, on both $Y$ and $X$. Apply the lemma with $g=f$ to obtain $Lf^*K\\in D^b_c(X,A)$. It remains to prove the Tor bound.",
-      "uses": [
-        "def-weil-l-adic-coefficient-extension",
-        "lem-weil-pbc-standard-quotients-perfect",
-        "lem-sf-proetale-constructible-origin",
-        "lem-weil-pbc-pullback-preserves-bounded-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-        "place": "## Proof, bounded-constructibility sentence"
-      }
-    },
-    {
-      "text": "Apply [lem-sf-flat-model] to the assumed Tor amplitude of $K$. We obtain an isomorphism $K\\cong P$ in $D(Y_{\\mathrm{proet}},A)$, where $P$ is a bounded complex of flat $A_Y$-module sheaves and $P^q=0$ for $q\\notin[a,b]$.",
-      "uses": [
-        "lem-sf-flat-model"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-        "place": "## Proof, flat-model sentence"
-      }
-    },
-    {
-      "text": "The model $P$ of Step 2 is bounded above by $b$ and termwise flat. Apply [lem-pc-bounded-above-flat-kflat-site] on $(Y_{\\mathrm{proet}},A_Y)$ to make its K-flatness explicit. Regard $f$ as the morphism of ringed pro-etale sites with constant-coefficient isomorphism $f^{-1}A_Y\\cong A_X$ from [def-weil-derived-pullback-tensor-hom]. The theorem [lem-weil-pbc-ringed-pullback-preserves-kflat] now applies: $Q=f^*P=f^{-1}P\\otimes_{f^{-1}A_Y}A_X$ is K-flat and has flat terms. The constant-coefficient isomorphism identifies $Q$ termwise with $f^{-1}P$, and $Q^q=0$ for $q\\notin[a,b]$ because inverse image sends zero to zero. The same derived-pullback definition says that exact $f^{-1}$ computes $Lf^*$ on any representative. Applying this derived functor to the isomorphism $K\\cong P$ therefore gives $Lf^*K\\cong Q$; no chain map $P\\to K$ is assumed.",
-      "uses": [
-        "lem-pc-bounded-above-flat-kflat-site",
-        "lem-weil-pbc-ringed-pullback-preserves-kflat",
-        "def-weil-derived-pullback-tensor-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-        "place": "## Proof, derived pullback and flatness paragraph"
-      }
-    },
-    {
-      "text": "For an arbitrary sheaf $N$ of $A_X$-modules in degree zero, the K-flat computation [def-weil-derived-tensor] and Step 3 give $Lf^*K\\otimes_A^LN\\cong Q\\otimes_AN$. Its degree-$q$ term is $Q^q\\otimes_AN$, which is zero outside $[a,b]$. For any such $q$, both the kernel of the outgoing differential and the image of the incoming differential are subobjects of the zero term, so $\\mathcal H^q(Q\\otimes_AN)=0$. This holds for every $N$, hence is precisely Tor amplitude in $[a,b]$ by [def-weil-finite-tor-amplitude]. Combining with Step 1 gives the assertion. For $K\\in D^b_{ctf}(Y,A)$ choose an interval from that definition and apply the assertion to put $Lf^*K$ in $D^b_{ctf}(X,A)$.",
-      "uses": [
-        "def-weil-derived-tensor",
-        "def-weil-finite-tor-amplitude"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-        "place": "## Proof, final Tor-amplitude paragraph"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-finite-tor-amplitude",
+ "id": "lem-sf-pullback-tor-amplitude",
+ "blueprint": {
+  "is": "lem-sf-pullback-tor-amplitude",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback preserves finite Tor amplitude",
+ "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$, and\nput $A=A_{E,n}$. Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes, and let $K\\in D^b_c(Y,A)$ be a\nbounded constructible\ncomplex of finite Tor amplitude\nin $[a,b]$. Then $Lf^*K\\in D^b_c(X,A)$ is bounded constructible and has\nfinite Tor amplitude in $[a,b]$. Consequently $Lf^*$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$, which is clause (i) of\nthe finite-Tor preservation summary at the finite coefficient stages.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
+  "place": "node lem-sf-pullback-tor-amplitude, order 2064"
+ },
+ "stmt_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient ring A is finite by finite_coefficientExtensionRing. The intrinsic bounded-constructibility hypothesis supplies finite support of homology. Choose lower and upper bounds c,d for that support; the interval [min(c,d),d] is ordered and contains it. Apply finiteRing_constructibleDerived_origin to obtain an etale bounded constructible object L and an isomorphism from its intrinsic comparison to K. Convert the finite-value etale constructibility predicate to the source-library constructible-sheaf predicate degreewise; convert cohomology vanishing to the standard t-structure bounds. The reverse conversion uses [min(c,d),d], so even a zero complex and disjoint bounds cause no difficulty.",
+   "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-sf-flat-model",
-    "lem-sf-proetale-constructible-origin",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-standard-quotients-perfect"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-pullback-tor-amplitude.md",
-    "place": "## Proof"
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteRingConstructibleDerivedOrigin.lean",
+    "place": "finiteRing_constructibleDerived_origin, essential-image criterion"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "derived pullback preserves finite Tor amplitude bounded constructible complex flat model",
-      "results": "DerivedCategory.isGE_Q_obj_iff; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no theorem for this statement.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "torAmplitudeIn_leftDerivedUpperStar, DerivedCategory.torAmplitudeIn",
-      "results": "unknown identifier torAmplitudeIn_leftDerivedUpperStar; 0 hits.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "torAmplitudeIn_leftDerivedUpperStar|PreservesFlat [Mathlib subdirectory SixFunctors]",
-      "results": "0 Mathlib hits (the project source has the project-specific theorem, not Mathlib).",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "pullback preserves finite Tor amplitude of bounded constructible complexes on pro-etale sites",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "inverse image of sheaves preserves flatness and bounded flat complexes preserve Tor amplitude under derived pullback",
-      "results": "Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.iff_lTensor_preserves_shortComplex_exact; no sheaf-derived theorem matching the item.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory.torAmplitudeIn, Functor.PreservesFlat.flat_obj",
-      "results": "unknown identifier DerivedCategory.torAmplitudeIn; 0 hits.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "torAmplitudeIn_leftDerivedUpperStar|constructibleFiniteTor_leftDerivedUpperStar [source SixFunctors]",
-      "results": "project declarations in WeilConjectures/SixFunctors/Etale/Derived/Stability.lean and ProEtale/Derived/Stability.lean; no Mathlib declaration.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "class PreservesFlat|flat_obj [source CategoryTheory]",
-      "results": "project declarations in WeilConjectures/CategoryTheory/Abelian/Flat/PreservesFlat.lean; no Mathlib declaration.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived pullback preserves Tor amplitude",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|torAmplitude|PreservesFlat",
-      "date": "2026-10-15",
-      "results": "0 hits: . No declaration stating this ringed-site derived pullback and constructibility result.",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An exact tensor functor on sheaves of modules carries a bounded complex of flat objects to a complex with the same Tor dimension bounds",
-      "date": "2026-10-15",
-      "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact. No declaration stating this ringed-site derived pullback and constructibility result.",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"KFlat\"",
-      "date": "2026-10-15",
-      "results": "1 hits: Lean.mkFlatCtorOfStructCtorName. No declaration stating this ringed-site derived pullback and constructibility result.",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2064,
-  "blueprint_uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties",
-    "lem-exc-constant-inverse-image-flat",
-    "lem-sf-flat-model",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible"
-  ],
-  "uses_not_cited": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Let P be the exact etale inverse image of L along f. The proved source-library lemma boundedConstructible.mapDerivedCategory_upperStar gives bounded constructibility of P. Build the natural isomorphism between intrinsic comparison followed by constant-ring pullback and etale inverse image followed by intrinsic comparison: first whisker openSquarePullbackModel, cancel the intrinsic realization equivalence with its unit, and apply comparisonUpperStarCompUpperStarIso. Descend it by mapDerivedCategoryNatIso and mapDerivedCategoryCompIso, then compose its component with the pullback of the origin isomorphism. This gives comparison(P) isomorphic to the specified pullback of K; all coefficient maps are canonical, and sfFiniteDerivedPullback itself is unchanged.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Constructible.lean",
+    "place": "boundedConstructible.mapDerivedCategory_upperStar; ProEtaleConstantOpenSquareExchange.openSquarePullbackModel"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-sf-pullback-tor-amplitude",
-    "worker": "stage1",
-    "summary": "Second-read four-step split of the unchanged blueprint statement: verify the finite coefficient specialization and intrinsic/etale-origin category agreement, choose the bounded flat model, establish its K-flatness before applying ringed pullback, and compute the Tor test on the pulled-back model. No new nodes.",
-    "blueprint": "Realizes the blueprint proof paragraph: first the bounded-constructibility assertion, then the flat model, then exact pullback and the derived-tensor computation, and finally the degree interval Tor test.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-        "why": "The proof needs the general ringed-site result that pullback of a K-flat complex with flat terms remains K-flat with flat terms; this is a reusable tool from the proper-base-change unit and is not supplied by this unit's route."
-      },
-      {
-        "node": "lem-pc-bounded-above-flat-kflat-site",
-        "why": "General ringed-site K-flatness criterion, applied to a bounded flat model on the pro-etale site; this supplies a missing hypothesis of the pullback theorem."
-      },
-      {
-        "node": "lem-weil-pbc-standard-quotients-perfect",
-        "why": "Coefficient algebra tool verifying that A_{E,n} is a permitted finite stage of the cited bounded-constructibility theorem."
-      },
-      {
-        "node": "lem-sf-proetale-constructible-origin",
-        "why": "Comparison tool identifying intrinsic bounded constructibility with etale-origin bounded constructibility; needed to apply the blueprint-selected pullback theorem without silently changing categories."
-      }
-    ]
+  {
+   "text": "Apply comparison_torAmplitudeIn_iff to L, which is bounded below by its bounded constructibility. The composition isomorphism for derived functors identifies its displayed comparison functor with finiteCoefficientIntrinsicDerivedComparison. Tor amplitude is invariant under isomorphism directly from its quantified representative definition: compose the representative isomorphism with the inverse object isomorphism. Thus the assumed intrinsic Tor amplitude of K reflects to the same etale interval for L.",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/ComparisonTorInterval.lean",
+    "place": "comparison_torAmplitudeIn_iff"
+   }
   },
-  "tool_uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-sf-proetale-constructible-origin"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q25-f4b741cc5",
-    "group": "Q25",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-f4b741cc5 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages, and unit/chapter routes. All four proof steps preserve the exact coefficient category and Tor interval; accepted all four declared tool uses. Confirmed the repaired blueprint flatness gap, checked edge cases and target-source morphisms/categories, and found no new nodes or dependency cycle. Review written to review.md; no fixes required."
+  {
+   "text": "Use hasTorAmplitudeIn_iff_torAmplitudeIn to express etale Tor amplitude in the standard derived tensor t-structure. Apply the proved source-library torAmplitudeIn_leftDerivedUpperStar: its proof chooses a flat complex supported in [a,b], takes exact termwise inverse image, preserves flatness by upperStarPreservesFlat_moduleCat, and computes the resulting Tor interval on that model. Its derived-functor isomorphism identifies the result with P. This is the blueprint flat-model argument on the etale side, with the interval unchanged.",
+   "uses": [
+    "lem-sf-etale-flat-model",
+    "lem-sfb-etale-flat-geometric-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/Basic.lean",
+    "place": "torAmplitudeIn_leftDerivedUpperStar; Derived/Finiteness/FlatModel.hasTorAmplitudeIn_iff_torAmplitudeIn"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.PullbackTorAmplitude",
-    "declaration": "WeilConjectures.sf_pullback_torAmplitude",
-    "declarations": [
-      "WeilConjectures.sfFiniteDerivedPullback",
-      "WeilConjectures.sf_pullback_torAmplitude",
-      "WeilConjectures.sf_pullback_finiteTorConstructible"
-    ],
-    "file": "lean/Sheaf/Paper/PullbackTorAmplitude.lean",
-    "statement": "theorem sf_pullback_torAmplitude (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing l E n)) (hK : intrinsicFiniteTorsionConstructible l E n hn Y.left K) (a b : ℤ) (hTor : HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing l E n) K a b) : intrinsicFiniteTorsionConstructible l E n hn X.left ((sfFiniteDerivedPullback l E n hn f.left).obj K) ∧ HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing l E n) ((sfFiniteDerivedPullback l E n hn f.left).obj K) a b",
-    "branch": "newtargets-dag",
-    "by": "NE",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-8ed363759",
-    "group": "NE",
-    "result": "pass",
-    "note": "Wrote review.md. Verified source correspondence, all eight statement dependencies, canonical pullback, hypotheses, conclusions, universes, edge cases, docstrings, reports, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library modes. No defects found; branch unchanged."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$, and\nput $A=A_{E,n}$. Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes, and let $K\\in D^b_c(Y,A)$ be a\nbounded constructible\ncomplex of finite Tor amplitude\nin $[a,b]$. Then $Lf^*K\\in D^b_c(X,A)$ is bounded constructible and has\nfinite Tor amplitude in $[a,b]$. Consequently $Lf^*$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.",
-    "proof": [
-      {
-        "text": "Bounded constructibility is\n[lem-weil-pbc-pullback-preserves-bounded-constructible], which also\ngives that the cohomological interval is preserved. For the Tor bound apply\n[lem-sf-flat-model] to $K$: there is an isomorphism $K\\cong P$ in\n$D(Y_{\\mathrm{proet}},A)$ with $P$ a bounded complex of flat\n$A_Y$-module sheaves, $P^q=0$ for $q\\notin[a,b]$. By\n[def-weil-derived-pullback-tensor-hom] one has\n$Lf^*K=f^{-1}K\\otimes_{f^{-1}A}^LA$, and $f^{-1}A=A$; since inverse\nimage is exact the map $f^{-1}P\\to f^{-1}K$ is a quasi-isomorphism, and\n$f^{-1}P$ is a bounded complex of flat $A_X$-module sheaves, hence\nK-flat, so $Lf^*K\\cong f^{-1}P$ by [def-weil-derived-tensor]. The\ninverse image of a flat sheaf is flat, as follows:\n$f^{-1}G'\\to f^{-1}G$ is injective\nfor an injection $G'\\to G$ by exactness, and inverse image commutes with\ntensor products of module sheaves, so\n$f^{-1}F\\otimes_Af^{-1}G'\\to f^{-1}F\\otimes_Af^{-1}G$ is the functor\n$f^{-1}$ applied to $F\\otimes_AG'\\to F\\otimes_AG$, which is injective\nbecause $F$ is flat; flatness is understood as in\n[lem-exc-constant-inverse-image-flat]. Hence for every sheaf $N$ of\n$A_X$-modules in degree zero the complex\n$Lf^*K\\otimes_A^LN\\cong(f^{-1}P)\\otimes_AN$ has terms only in degrees\n$[a,b]$, each term $f^{-1}P^q\\otimes_AN$ lying in degree $q$ because\n$f^{-1}P^q$ is flat. Therefore\n$\\mathcal H^r(Lf^*K\\otimes_A^LN)=0$ for $r\\notin[a,b]$ for every such\n$N$, which is the finite Tor amplitude of $Lf^*K$ in $[a,b]$ in the\nsense of [def-weil-finite-tor-amplitude].",
-        "uses": [
-          "lem-weil-pbc-pullback-preserves-bounded-constructible",
-          "lem-sf-flat-model",
-          "def-weil-derived-pullback-tensor-hom",
-          "def-weil-derived-tensor",
-          "lem-exc-constant-inverse-image-flat",
-          "def-weil-finite-tor-amplitude"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "P is bounded below, so comparison_torAmplitudeIn_iff on X transfers its Tor interval to its intrinsic comparison. Transport it along the isomorphism of step 2. The essential-image implication of finiteRing_constructibleDerived_origin on X gives intrinsic constructibility and an interval of homology vanishing for that same pulled-back object; its nonzero homology support is a subset of the finite integer interval. These give the conjunction in sf_pullback_torAmplitude. Finally unpack the witness interval in finiteTorConstructible, apply this conjunction, and reuse the identical endpoints for sf_pullback_finiteTorConstructible.",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/PullbackTorAmplitude.lean",
+    "place": "sf_pullback_torAmplitude and sf_pullback_finiteTorConstructible"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-tor-amplitude",
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-etale-flat-model",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "prop-constructible-derived-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/Basic.lean",
+  "place": "torAmplitudeIn_leftDerivedUpperStar and boundedConstructible.mapDerivedCategory_upperStar, transported through finiteRing_constructibleDerived_origin, comparison_torAmplitudeIn_iff and the canonical comparison square; same flat-model argument as the current blueprint update"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback preserves finite Tor amplitude bounded constructible complex flat model",
+   "results": "DerivedCategory.isGE_Q_obj_iff; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no theorem for this statement.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "torAmplitudeIn_leftDerivedUpperStar, DerivedCategory.torAmplitudeIn",
+   "results": "unknown identifier torAmplitudeIn_leftDerivedUpperStar; 0 hits.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_leftDerivedUpperStar|PreservesFlat [Mathlib subdirectory SixFunctors]",
+   "results": "0 Mathlib hits (the project source has the project-specific theorem, not Mathlib).",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback preserves finite Tor amplitude of bounded constructible complexes on pro-etale sites",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves preserves flatness and bounded flat complexes preserve Tor amplitude under derived pullback",
+   "results": "Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.iff_lTensor_preserves_shortComplex_exact; no sheaf-derived theorem matching the item.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn, Functor.PreservesFlat.flat_obj",
+   "results": "unknown identifier DerivedCategory.torAmplitudeIn; 0 hits.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_leftDerivedUpperStar|constructibleFiniteTor_leftDerivedUpperStar [source SixFunctors]",
+   "results": "project declarations in WeilConjectures/SixFunctors/Etale/Derived/Stability.lean and ProEtale/Derived/Stability.lean; no Mathlib declaration.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class PreservesFlat|flat_obj [source CategoryTheory]",
+   "results": "project declarations in WeilConjectures/CategoryTheory/Abelian/Flat/PreservesFlat.lean; no Mathlib declaration.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback preserves Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|torAmplitude|PreservesFlat",
+   "date": "2026-10-15",
+   "results": "0 hits: . No declaration stating this ringed-site derived pullback and constructibility result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact tensor functor on sheaves of modules carries a bounded complex of flat objects to a complex with the same Tor dimension bounds",
+   "date": "2026-10-15",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact. No declaration stating this ringed-site derived pullback and constructibility result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "date": "2026-10-15",
+   "results": "1 hits: Lean.mkFlatCtorOfStructCtorName. No declaration stating this ringed-site derived pullback and constructibility result.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2064,
+ "blueprint_uses": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-pullback-tor-amplitude",
+  "worker": "stage1",
+  "summary": "Second-read four-step split of the unchanged blueprint statement: verify the finite coefficient specialization and intrinsic/etale-origin category agreement, choose the bounded flat model, establish its K-flatness before applying ringed pullback, and compute the Tor test on the pulled-back model. No new nodes.",
+  "blueprint": "Realizes the blueprint proof paragraph: first the bounded-constructibility assertion, then the flat model, then exact pullback and the derived-tensor computation, and finally the degree interval Tor test.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "The proof needs the general ringed-site result that pullback of a K-flat complex with flat terms remains K-flat with flat terms; this is a reusable tool from the proper-base-change unit and is not supplied by this unit's route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ringed-site K-flatness criterion, applied to a bounded flat model on the pro-etale site; this supplies a missing hypothesis of the pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Coefficient algebra tool verifying that A_{E,n} is a permitted finite stage of the cited bounded-constructibility theorem."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Comparison tool identifying intrinsic bounded constructibility with etale-origin bounded constructibility; needed to apply the blueprint-selected pullback theorem without silently changing categories."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-f4b741cc5",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-f4b741cc5 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages, and unit/chapter routes. All four proof steps preserve the exact coefficient category and Tor interval; accepted all four declared tool uses. Confirmed the repaired blueprint flatness gap, checked edge cases and target-source morphisms/categories, and found no new nodes or dependency cycle. Review written to review.md; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackTorAmplitude",
+  "declaration": "WeilConjectures.sf_pullback_torAmplitude",
+  "declarations": [
+   "WeilConjectures.sfFiniteDerivedPullback",
+   "WeilConjectures.sf_pullback_torAmplitude",
+   "WeilConjectures.sf_pullback_finiteTorConstructible"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackTorAmplitude.lean",
+  "statement": "theorem sf_pullback_torAmplitude (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing l E n)) (hK : intrinsicFiniteTorsionConstructible l E n hn Y.left K) (a b : ℤ) (hTor : HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing l E n) K a b) : intrinsicFiniteTorsionConstructible l E n hn X.left ((sfFiniteDerivedPullback l E n hn f.left).obj K) ∧ HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing l E n) ((sfFiniteDerivedPullback l E n hn f.left).obj K) a b",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8ed363759",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source correspondence, all eight statement dependencies, canonical pullback, hypotheses, conclusions, universes, edge cases, docstrings, reports, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library modes. No defects found; branch unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$, and\nput $A=A_{E,n}$. Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes, and let $K\\in D^b_c(Y,A)$ be a\nbounded constructible\ncomplex of finite Tor amplitude\nin $[a,b]$. Then $Lf^*K\\in D^b_c(X,A)$ is bounded constructible and has\nfinite Tor amplitude in $[a,b]$. Consequently $Lf^*$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.",
+  "proof": [
+   {
+    "text": "Bounded constructibility is\n[lem-weil-pbc-pullback-preserves-bounded-constructible], which also\ngives that the cohomological interval is preserved. For the Tor bound apply\n[lem-sf-flat-model] to $K$: there is an isomorphism $K\\cong P$ in\n$D(Y_{\\mathrm{proet}},A)$ with $P$ a bounded complex of flat\n$A_Y$-module sheaves, $P^q=0$ for $q\\notin[a,b]$. By\n[def-weil-derived-pullback-tensor-hom] one has\n$Lf^*K=f^{-1}K\\otimes_{f^{-1}A}^LA$, and $f^{-1}A=A$; since inverse\nimage is exact the map $f^{-1}P\\to f^{-1}K$ is a quasi-isomorphism, and\n$f^{-1}P$ is a bounded complex of flat $A_X$-module sheaves, hence\nK-flat, so $Lf^*K\\cong f^{-1}P$ by [def-weil-derived-tensor]. The\ninverse image of a flat sheaf is flat, as follows:\n$f^{-1}G'\\to f^{-1}G$ is injective\nfor an injection $G'\\to G$ by exactness, and inverse image commutes with\ntensor products of module sheaves, so\n$f^{-1}F\\otimes_Af^{-1}G'\\to f^{-1}F\\otimes_Af^{-1}G$ is the functor\n$f^{-1}$ applied to $F\\otimes_AG'\\to F\\otimes_AG$, which is injective\nbecause $F$ is flat; flatness is understood as in\n[lem-exc-constant-inverse-image-flat]. Hence for every sheaf $N$ of\n$A_X$-modules in degree zero the complex\n$Lf^*K\\otimes_A^LN\\cong(f^{-1}P)\\otimes_AN$ has terms only in degrees\n$[a,b]$, each term $f^{-1}P^q\\otimes_AN$ lying in degree $q$ because\n$f^{-1}P^q$ is flat. Therefore\n$\\mathcal H^r(Lf^*K\\otimes_A^LN)=0$ for $r\\notin[a,b]$ for every such\n$N$, which is the finite Tor amplitude of $Lf^*K$ in $[a,b]$ in the\nsense of [def-weil-finite-tor-amplitude].",
+    "uses": [
+     "lem-weil-pbc-pullback-preserves-bounded-constructible",
+     "lem-sf-flat-model",
+     "def-weil-derived-pullback-tensor-hom",
+     "def-weil-derived-tensor",
+     "lem-exc-constant-inverse-image-flat",
+     "def-weil-finite-tor-amplitude"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c5b1d",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T093454-L-2315553",
+  "kind": "proof",
+  "note": "independent cc review: sf_pullback_torAmplitude/finiteTorConstructible proofs vs node lem-sf-pullback-tor-amplitude (proof/proof_deps match imports), unit realized=[] vs removed imports, 14 importers compiled (4 pre-existing published-build failures)"
+ }
 }
