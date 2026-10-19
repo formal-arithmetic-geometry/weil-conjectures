@@ -1,0 +1,177 @@
+{
+ "id": "lem-a1-middle-extension-section-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fd-stalk-at-origin",
+   "place": "Proof, second paragraph: a compactly supported global section is zero by the lissity argument; the unique-continuation part.",
+   "via": [
+    "lem-a1-middle-extension-hc0"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique continuation of ordinary adic middle-extension sections",
+ "statement": "Fix the finite-field and coefficient datum of [def-wf-middle-extension], a prime l different from the characteristic, and an algebraic closure Ω of Q_l in the finite-extension adic convention. Let C₀ be a separated finite-type smooth geometrically connected curve over the finite field, with dense open j₀:U₀→C₀, and let F be any lisse Ω-adic sheaf on the geometric open U. Let C and j:U→C be the geometric base changes, and let j_*F be the actual ordinary image in the intrinsic common-stage category of [lem-a1-adic-middle-extension-constructible], placed in degree zero. For every nonempty open V of C, restriction is injective on sections from the coefficient unit: if s:1_C→j_*F restricts to zero on V, then s=0. Sections and restriction are exactly A1ConstructibleSections and a1ConstructibleSectionRestriction of [lem-a1-constructible-degree-zero-proper-support], using the normalized completed pullback and unit isomorphism. No affineness, compact support, or Weil structure on F or s is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-fd-stalk-at-origin.proof.md",
+  "place": "Second paragraph, the degree-zero lissity argument, expanded using the ordinary direct-image section formula; coefficient-stage transitions are those in def-wf-middle-extension"
+ },
+ "stmt_deps": [
+  "def-wf-middle-extension",
+  "def-sbc-smooth-morphisms",
+  "lem-a1-adic-middle-extension-constructible",
+  "lem-a1-constructible-degree-zero-proper-support"
+ ],
+ "proof": [
+  {
+   "text": "The geometric curve is smooth, geometrically connected, separated and of finite type over the algebraically closed geometric field. Hence it is integral and Noetherian. The projection to the arithmetic curve is open, so the inverse image U of its dense lisse open is dense. A nonempty open V therefore meets U. The open U is connected, Noetherian and separated, and l is invertible on it.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-scheme-over-field-universally-open",
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "pqf-def-locnoeth",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M (lemma-normal-Noetherian), as specialized in the smooth connected curve node; integral: Tag 01ON (lemma-characterize-integral); openness: morphisms.tex, Tag 0383 (lemma-scheme-over-field-universally-open); irreducibility: topology.tex, Tag 004V"
+   }
+  },
+  {
+   "text": "For the ordinary sheaf direct image, global sections of j_*F on C are precisely sections of F on U, at every finite coefficient level. Restrict the given section to U. Choose a geometric point in the nonempty intersection U and V. Its fibre vanishes because restriction to V vanishes. The geometric fibre functor on the connected lisse category is faithful, so this section on U is zero. The ordinary direct-image section formula then makes the original section zero. This argument also covers the zero sheaf and rank zero.",
+   "uses": [
+    "def-wf-middle-extension",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7, Remark 7.4.8 and Lemma 7.4.10; the finite-extension adic fibre equivalence is the statement of the cited Galois node"
+   }
+  },
+  {
+   "text": "Apply this argument to the actual common-stage arrow from the coefficient unit to adicMiddleExtensionObject. Represent its source, target and arrow at a common finite coefficient extension. The target is the degree-zero derived image of the ordinary pushforward of the realized lisse completed module. The normalized completed-system equivalence identifies the realized lisse inverse systems with completed module sheaves. Full faithfulness of the degree-zero embedding identifies its Hom group with the ordinary module Hom group. The immersion pullback comparison identifies the recorded restriction with ordinary restriction, including the unit comparison. After clearing uniformizer denominators, injectivity is the levelwise statement of the preceding step for integral inverse systems; equality of all components is equality of systems. The Hom tensor formula of the intrinsic rationalization, and flatness of localization, preserve this injectivity. The actual finite scalar transitions preserve the completed lisse systems and their ordinary-image comparisons by the normalized coefficient extension.  Passing to a common further coefficient field and to the directed colimit of Hom groups preserves the resulting equality. Thus zero under a1ConstructibleSectionRestriction implies zero in exactly A1ConstructibleSections, without any Weil invariance on the section.",
+   "uses": [
+    "lem-a1-adic-middle-extension-constructible",
+    "lem-a1-constructible-degree-zero-proper-support",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-constructible-heart",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-fd-stalk-at-origin.proof.md",
+    "place": "Second paragraph, the degree-zero lissity argument, expanded using the ordinary direct-image section formula; coefficient-stage transitions are those in def-wf-middle-extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-scheme-over-field-universally-open",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "pqf-def-locnoeth",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-wf-middle-extension",
+  "cor-galois-lisse-representations",
+  "lem-a1-adic-middle-extension-constructible",
+  "lem-a1-constructible-degree-zero-proper-support",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-fd-stalk-at-origin.proof.md",
+  "place": "Second paragraph, the lissity argument; expands unique continuation separately from proper support and nonproperness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of the ordinary direct image of a lisse sheaf on a connected smooth curve are determined by restriction to any nonempty open subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.component_nontrivial, TopCat.Presheaf.IsSheaf.section_ext, TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.OpenCover.ext_elem, StructureGroupoid.LocalInvariantProp.section_spec, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, ModuleCat.Tilde.res_const, ModuleCat.Tilde.exists_const",
+   "date": "2026-10-19",
+   "verdict": "No match: the results do not state unique continuation for the recorded ordinary adic middle extension and common-stage restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a nonempty open is injective on sections of the ordinary middle extension of a lisse sheaf on a smooth connected curve",
+   "results": "8 hits: AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.injective_germ_basicOpen, TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective",
+   "date": "2026-10-19",
+   "verdict": "No match: the results do not state unique continuation for the recorded ordinary adic middle extension and common-stage restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "adicMiddleExtension.*(injective|section)|a1ConstructibleSectionRestriction",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No match: the results do not state unique continuation for the recorded ordinary adic middle extension and common-stage restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Faithful\", \"restrict\"",
+   "results": "12 hits: ModuleCat.instFaithfulRestrictScalars, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, PresheafOfModules.instFaithfulRestrictScalars",
+   "date": "2026-10-19",
+   "verdict": "No match: the results do not state unique continuation for the recorded ordinary adic middle extension and common-stage restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of the ordinary direct image of a lisse adic sheaf from a dense open of a smooth connected curve is determined by its restriction to any nonempty open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Opens.ι_app, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Opens.ι_appTop, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Opens.topIso",
+   "date": "2026-10-19",
+   "verdict": "No match: the results do not state unique continuation for the recorded ordinary adic middle extension and common-stage restriction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.MiddleExtensionHcZero",
+  "date": "2026-10-19",
+  "group": "E5"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MiddleExtensionSectionRestriction",
+  "file": "lean/Sheaf/Paper/MiddleExtensionSectionRestriction.lean",
+  "declaration": "WeilConjectures.adicMiddleExtension_section_eq_zero_of_restriction",
+  "statement": "theorem adicMiddleExtension_section_eq_zero_of_restriction\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type (u + 1)) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (c : MiddleExtensionCurve D)\n    [SmoothOfRelativeDimension 1 c.C.hom] [GeometricallyConnected c.C.hom]\n    [IsSeparated ((D.geometricFiber c.C).left ↘ Spec (.of D.k))]\n    (F : adicMiddleExtensionLisse l Ω c hl)\n    (V : (D.geometricFiber c.C).left.Opens)\n    (hV : (V : Set (D.geometricFiber c.C).left).Nonempty) :\n    ∀ s : A1ConstructibleSections l D hl Ω (D.geometricFiber c.C).left\n      (adicMiddleExtensionObject l Ω c hl F),\n      a1ConstructibleSectionRestriction l D hl Ω (D.geometricFiber c.C).left V s = 0 →\n        s = 0",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T231129-L-551280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T231129-L-551280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

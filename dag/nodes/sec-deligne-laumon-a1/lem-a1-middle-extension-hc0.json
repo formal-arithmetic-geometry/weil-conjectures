@@ -38,38 +38,10 @@
    }
   },
   {
-   "text": "Apply [lem-sc-smooth-connected-curve-local-rings](1) to $C$: it is Noetherian and integral. By [def-pc-integral-scheme], it is reduced and irreducible. The projection $p:C\\to C_0$ is open by [lem-sc-scheme-over-field-universally-open], applied to $\\operatorname{Spec}k$ over $k_0$. For any nonempty open $V\\subset C$, the nonempty open $p(V)$ meets the dense open $U_0$; hence $V$ meets $p^{-1}(U_0)=U$. Thus $U$ is a nonempty dense open of $C$. It is irreducible, hence connected: two nonempty relatively open subsets of $U$ are nonempty opens of $C$ and intersect, since otherwise their closed complements would cover the irreducible space $C$ [def-weil-irreducible-components].",
-   "uses": [
-    "lem-sc-smooth-connected-curve-local-rings",
-    "def-pc-integral-scheme",
-    "lem-sc-scheme-over-field-universally-open",
-    "def-weil-irreducible-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 033M (lemma-normal-Noetherian), as specialized in the smooth connected curve node; integral: Tag 01ON (lemma-characterize-integral); openness: morphisms.tex, Tag 0383 (lemma-scheme-over-field-universally-open); irreducibility: topology.tex, Tag 004V"
-   }
-  },
-  {
-   "text": "Check the remaining hypotheses for the lisse fibre equivalence on $U$. Since $C$ is Noetherian, it is locally Noetherian; [pqf-lem-affine-open-locnoeth] makes its affine coordinate ring $B\\otimes_{k_0}k$ Noetherian. Hence $|C|$ is Noetherian by [lem-sc-affine-noetherian-underlying-space], and [lem-sfb-noetherian-space-compact-subsets] makes $U$ quasi-compact. It is locally Noetherian by the open-subscheme assertion in [pqf-def-locnoeth], so is Noetherian. It is separated over $k$: its diagonal is the restriction of the closed diagonal of $C$ to $U\\times_k U$, with the restricted ideal sheaf defining that closed subscheme. Finally $\\ell$ is invertible on $U$, since $\\ell\\ne\\operatorname{char}k$.",
-   "uses": [
-    "pqf-lem-affine-open-locnoeth",
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-sfb-noetherian-space-compact-subsets",
-    "pqf-def-locnoeth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tags 01OV (definition-noetherian), 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); Noetherian subspaces: topology.tex, Tags 0052 (lemma-Noetherian), 04ZA (lemma-Noetherian-quasi-compact); open inheritance is stated in pqf-def-locnoeth"
-   }
-  },
-  {
-   "text": "If $C$ were proper over $k$, [lem-sc-proper-affine-finite] would make this affine curve finite over $k$, and in particular of dimension zero. This contradicts $\\dim C=1$. Thus $C$ is not proper. Because $C$ is reduced, a closed subset $Z=|C|$ has reduced induced closed subscheme exactly $C$. By [def-weil-pbc-closed-subset-proper-over-base](1), no closed subset proper over $k$ can therefore equal $|C|$.",
+   "text": "The affine geometric curve cannot be proper: proper and affine would imply dimension at most zero, contradicting its smooth dimension one. If a closed subset Z proper over the base were the whole curve, apply the universal closed-subscheme characterization to the identity immersion to make the structure morphism proper. Thus every such Z is different from the whole curve. This uses no reduced-induced-subscheme identification.",
    "uses": [
     "lem-sc-proper-affine-finite",
-    "def-weil-pbc-closed-subset-proper-over-base"
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
    ],
    "elementary": false,
    "source": {
@@ -78,11 +50,11 @@
    }
   },
   {
-   "text": "Put $G=j_*\\mathcal F$ in degree zero. It is constructible by [lem-a1-adic-middle-extension-constructible]. For arbitrary $c\\in H_c^0(C,G)$, apply [lem-a1-constructible-degree-zero-proper-support] to the separated finite-type geometric scheme $C$ and to $G$, in precisely the completed, rationalized, common-finite-stage coefficient category of the statement. It gives an injective section comparison $\\alpha_{C,G}$ and a closed subset $Z\\subset C$ proper over $k$, such that $s=\\alpha_{C,G}(c)$ restricts to zero on $C\\setminus Z$. Its open-restriction compatibility identifies $s|_U$ with an ordinary lisse adic section $t:\\mathbf 1_U\\to\\mathcal F$. Here $G|_U=\\mathcal F$: on a test object $V$ over $U$, the ordinary direct-image formula of [def-wf-middle-extension] reads $(j_*\\mathcal F)(V)=\\mathcal F(V\\times_C U)=\\mathcal F(V)$.",
+   "text": "The actual ordinary image belongs to the common-stage heart by its constructibility declaration. Apply the degree-zero proper-support comparison. Each compact class produces a section of the ordinary image which vanishes outside some closed subset Z proper over the geometric field. The preceding step makes the complementary open nonempty. Apply unique continuation of ordinary middle-extension sections to this open: the compared section is zero.",
    "uses": [
     "lem-a1-adic-middle-extension-constructible",
     "lem-a1-constructible-degree-zero-proper-support",
-    "def-wf-middle-extension"
+    "lem-a1-middle-extension-section-restriction"
    ],
    "elementary": false,
    "source": {
@@ -91,20 +63,9 @@
    }
   },
   {
-   "text": "By step 4, $Z\\ne C$, so $C\\setminus Z$ is a nonempty open. Density of $U$ gives a point $u\\in U\\setminus Z$; choose a geometric point $\\bar u$ above it. Since $s$ is zero on $C\\setminus Z$, its restriction $t$ has zero fibre at $\\bar u$. Apply clause (2) of [cor-galois-lisse-representations] on $U$: it is connected, Noetherian and separated by steps 2–3, and $\\ell$ is invertible there. The geometric fibre functor on the stated finite-extension lisse $\\overline{\\mathbf Q}_\\ell$-sheaves is an equivalence, hence faithful, and carries the coefficient unit to the trivial line. It therefore sends $t$ and the zero morphism to the same map only if $t=0$. This uses no assumption about purity, weights, or ramification.",
+   "text": "The section comparison is an isomorphism onto ordinary degree-zero Hom sections, and the compact-to-ordinary comparison is injective. Hence any two compact classes have equal images and are equal. Transport this equality through the recorded compact-value isomorphism, cancel its inverse and the universe lift. This proves Subsingleton for exactly the displayed cohomology group, for every compactification and the given induced Weil structure.",
    "uses": [
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 7.4.7, Remark 7.4.8 and Lemma 7.4.10; the finite-extension adic fibre equivalence is the statement of the cited Galois node"
-   }
-  },
-  {
-   "text": "For the ordinary direct image, a global section is determined by its restriction to $U$. Indeed, at a fixed coefficient sheaf stage a module morphism $s:\\mathbf 1_C\\to j_*\\mathcal F$ is determined by the image of $1$; the formula $(j_*\\mathcal F)(C)=\\mathcal F(U)$ identifies this image with the section $t$, and all its components on test objects $V\\to C$ are its pullbacks to $V\\times_C U$ [def-wf-middle-extension]. Thus $t=0$ gives $s=0$. The same determination holds for an adic inverse system level by level; rationalization preserves this injective identification of Hom modules, and passing to a common finite extension and to idempotent summands preserves it by restriction to the corresponding Hom subspaces. Hence it applies to exactly the ordinary sheaf direct image used here. Since $\\alpha_{C,G}$ is injective, $s=0$ implies $c=0$. As $c$ was arbitrary, $H_c^0(C,j_*\\mathcal F)=0$.",
-   "uses": [
-    "def-wf-middle-extension"
+    "lem-a1-constructible-degree-zero-proper-support"
    ],
    "elementary": true,
    "source": {
@@ -117,25 +78,16 @@
   "lem-pod-separated-finite-type-base-change",
   "lem-sbc-smooth-relative-dimension-permanence",
   "lem-sbc-smooth-fixed-dimension-over-field",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "def-pc-integral-scheme",
-  "lem-sc-scheme-over-field-universally-open",
-  "def-weil-irreducible-components",
-  "pqf-lem-affine-open-locnoeth",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "pqf-def-locnoeth",
   "lem-sc-proper-affine-finite",
-  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
   "lem-a1-adic-middle-extension-constructible",
   "lem-a1-constructible-degree-zero-proper-support",
-  "def-wf-middle-extension",
-  "cor-galois-lisse-representations"
+  "lem-a1-middle-extension-section-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-fd-stalk-at-origin.proof.md",
-  "place": "Second paragraph, degree-zero lissity argument; complete support proof expanded from Milne Remark 29.7 with the cited adic comparison interfaces"
+  "place": "Second paragraph, the degree-zero lissity argument: Lean proves the nonproper support obstruction and the injective-comparison argument; unique continuation is isolated as lem-a1-middle-extension-section-restriction."
  },
  "mathlib_searches": [
   {
@@ -280,15 +232,9 @@
   "lem-pod-separated-finite-type-base-change",
   "lem-sbc-smooth-relative-dimension-permanence",
   "lem-sbc-smooth-fixed-dimension-over-field",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-scheme-over-field-universally-open",
-  "pqf-lem-affine-open-locnoeth",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-noetherian-space-compact-subsets",
   "lem-sc-proper-affine-finite",
   "lem-a1-adic-middle-extension-constructible",
-  "lem-a1-constructible-degree-zero-proper-support",
-  "cor-galois-lisse-representations"
+  "lem-a1-constructible-degree-zero-proper-support"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -319,5 +265,15 @@
   "group": "N3",
   "result": "pass",
   "note": "Every node hypothesis has a matching binder: FiniteFieldDatum, l prime with l≠p, Ω algebraically closed over Q_l; MiddleExtensionCurve with IsAffine, SmoothOfRelativeDimension 1 and GeometricallyConnected (its extra Smooth/IsPureDimension 1/U finite-type separated fields follow from these); dense open immersion; lisse F on geometric U with an arbitrary common-stage Frobenius iso theta. Ordinary j_* is adicOrdinaryPush placed by singleFunctor 0, not Rj_*. sfCommonStageWeilForget then adicCompactCohomology in degree 0 for every compactification; Subsingleton means H_c^0=0. Ω : Type (u+1) is forced by the recorded adicMiddleExtensionLisse interface. Helper instance middleExtensionCurve_geometricStructureIsSeparated is the real pullback.snd instance with docstrings and is recorded in lean.declarations. Proof is only sorry; all 7 proof steps in the docstring; lean.statement verbatim; node diff only in the lean field. Edge cases F=0, j=id, empty C/U, rank 0 checked. nt_compile.py --json on the snapshot: rc 0, 3.9 s and 4.3 s, no errors or warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T231129-L-551280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
