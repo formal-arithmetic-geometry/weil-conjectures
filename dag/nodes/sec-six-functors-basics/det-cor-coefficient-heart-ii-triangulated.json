@@ -18,104 +18,51 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with the actual coefficient sheaf $\\Lambda_X$, pulled back from the condensed ring, and put $\\mathcal A=\\Mod(\\Lambda_X)$. Use the universe and small-skeleton convention [def-weil-size-convention], so the site is small relative to the module universe. Then $\\mathcal A$ is abelian by [def-weil-sheaf-of-modules-category], and its cohomology functors are those of [def-weil-derived-cohomology-sheaves], which applies to any sheaf of commutative rings, not just a constant sheaf. By [det-def-sfb-constructible-tor-amplitude] (2), membership in $\\Dbc$ means finite cohomological support and constructibility of every cohomology sheaf. The zero sheaf has a finite constant local model, using the zero finitely presented module in [det-def-sfb-constructible-local-model], so it is constructible on the one-stratum stratification (the empty stratification if $X$ is empty). The zero complex therefore belongs to $\\Dbc$. An isomorphism of complexes in the derived category induces isomorphisms on all cohomology sheaves by functoriality; the same local models and stratification work for an isomorphic sheaf. Thus $\\Dbc$ is closed under isomorphisms.",
+   "text": "For either coefficient ring use det-lem-coefficient-heart-closure on X, with IsNoetherian constructed from the existing locally Noetherian and compact hypotheses. Set P to IsConstantModelConstructible. Install its kernel, cokernel and extension closure. The closure theorem supplies an abelian structure on its full subcategory. Its zero object maps to an ambient zero object under the full inclusion, since a full functor preserves zero morphisms. This supplies P.ContainsZero. Obtain isomorphism closure from the first clause of det-def-sfb-constructible-tor-amplitude. These constructions also apply on the empty scheme.",
    "uses": [
-    "def-weil-size-convention",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-derived-cohomology-sheaves",
+    "det-lem-coefficient-heart-closure",
     "det-def-sfb-constructible-tor-amplitude",
-    "det-def-sfb-constructible-local-model"
+    "def-sp-abelian"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian); blueprint proof, first paragraph: zero and isomorphisms"
-   }
+   "elementary": true
   },
   {
-   "text": "For every integer $n$, [lem-sp-derived-cohomology-shift] applied to $\\mathcal A$ gives $\\mathcal H^q(K[n])\\simeq\\mathcal H^{q+n}(K)$. If the support of the cohomology of $K$ is contained in a finite set $S\\subset\\mathbf Z$, that of $K[n]$ is contained in $S-n$. Each of these cohomology sheaves is constructible by the isomorphism invariance established in step 1. The definition [det-def-sfb-constructible-tor-amplitude] (2) now gives $K[n]\\in\\Dbc$ for every $n$, in particular $n=1,-1$.",
+   "text": "Apply lem-sbc-cohomology-in-weak-serre-subcategory to P. Its proved generic argument uses the five-term exact cohomology sequence, kernel/cokernel closure and extension closure, exactly the unit cone argument. Intersect its triangulated homology property with canonical boundedness. Both properties are invariant under isomorphisms. Their intersection is definitionally constantModelBoundedConstructible, and the object-property intersection instances supply repleteness and IsTriangulated.",
    "uses": [
-    "lem-sp-derived-cohomology-shift",
-    "det-def-sfb-constructible-tor-amplitude"
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "det-def-sfb-constructible-tor-amplitude",
+    "def-weil-triangulated-subcategory"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011H (definition-cohomology-shift); blueprint proof, first paragraph: shifts"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $K\\xrightarrow uK'\\xrightarrow vK''\\to K[1]$ be distinguished with $K,K'\\in\\Dbc$. In the derived category of [def-weil-abstract-derived-category], by [lem-sf-derived-homology-long-exact] for the abelian category $\\mathcal A$, there is an exact sequence $\\mathcal H^qK\\to\\mathcal H^qK'\\to\\mathcal H^qK''\\xrightarrow{\\delta^q}\\mathcal H^{q+1}K\\to\\mathcal H^{q+1}K'$ for each $q$. Choose finite cohomological supports $S$ for $K$ and $S'$ for $K'$. If $q\\notin S'\\cup(S-1)$, exactness gives $0\\to\\mathcal H^qK''\\to0$, so $\\mathcal H^qK''=0$. Thus the third vertex has finite cohomological support, as required by [det-def-sfb-constructible-tor-amplitude] (2).",
+   "text": "For a retract M of N with inclusion i and retraction r, construct the kernel fork of 1 - r followed by i, with kernel inclusion i. A map g annihilating this endomorphism satisfies g = g r i; its unique lift is g r. Thus any class closed under kernels is stable under retracts between its objects. Apply this to every cohomology retract. For boundedness choose bounds a,b for N using exists_homologyConcentratedIn_iff_bounded; homologyConcentratedIn a b is stable under retracts, so the same bounds hold for M. This proves thickness.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact",
-    "det-def-sfb-constructible-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RS (lemma-cohomology-homological: on the homotopy category), Tag 0147 (definition-homological), and Tag 05RU (definition-unbounded-derived-category: the localization and descended cohomology); blueprint proof, second paragraph"
-   }
-  },
-  {
-   "text": "Write the five consecutive terms of step 3 as $A\\xrightarrow f B\\xrightarrow g C\\xrightarrow h D\\xrightarrow k E$. Exactness says $\\ker g=\\operatorname{im}f$, $\\ker h=\\operatorname{im}g$ and $\\operatorname{im}h=\\ker k$. In the abelian category of [def-sp-abelian], every epimorphism is the cokernel of its kernel and every monomorphism is the kernel of its cokernel. The induced map $B/\\ker g\\to C$ is monic by [lem-weil-pbc-coimage-mono], with image $\\ker h$; since $B/\\ker g=B/\\operatorname{im}f=\\operatorname{coker}f$, and $C\\to\\operatorname{im}h=\\ker k$ is epic with that kernel, this gives the short exact sequence\n$$0\\to\\operatorname{coker}(\\mathcal H^q u)\\to\\mathcal H^qK''\\to\\ker(\\mathcal H^{q+1}u)\\to0.$$\nThe endpoints are constructible by the kernel and cokernel clause of [det-lem-coefficient-heart-closure], since the four cohomology sheaves of $K,K'$ are constructible. Its extension clause then makes $\\mathcal H^qK''$ constructible. The hypothesis is satisfied: $X$ is Noetherian and the coefficients are exactly $E$ or $\\Qlb$; no assertion for arbitrary condensed coefficients or finite discrete coefficients is substituted. Combining this for all $q$ with step 3 proves $K''\\in\\Dbc$.",
-   "uses": [
-    "def-sp-abelian",
-    "lem-weil-pbc-coimage-mono",
-    "det-lem-coefficient-heart-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ (lemma-cohomology-in-serre-subcategory), proof via the long exact sequence; abelian image/coimage identity is Tag 0109 (definition-abelian-category); blueprint proof, second paragraph"
-   }
-  },
-  {
-   "text": "The rotation axiom in [def-weil-triangulated-category] gives the other two cases explicitly. If $K',K''\\in\\Dbc$, rotate to $K'\\to K''\\to K[1]\\to K'[1]$ and apply steps 3--4 to get $K[1]\\in\\Dbc$, hence $K\\in\\Dbc$ by step 2. If $K,K''\\in\\Dbc$, rotate twice to $K''\\to K[1]\\to K'[1]\\to K''[1]$ and obtain $K'[1]\\in\\Dbc$, hence $K'\\in\\Dbc$. Consequently every distinguished triangle with two vertices in $\\Dbc$ has its third there. Together with zero, isomorphism closure and all shifts, this is the full triangulated-subcategory criterion in [def-weil-triangulated-subcategory]; the ambient category is triangulated by [def-weil-abstract-derived-category]. Thus $\\Dbc$ has the inherited triangulated structure.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "def-weil-triangulated-subcategory",
+    "det-lem-coefficient-heart-closure",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0145 (definition-triangulated), Tag 05QM (definition-triangulated-subcategory), Tag 05QX (lemma-triangulated-subcategory); blueprint proof, parenthetical rotation argument"
-   }
+   "elementary": true
   },
   {
-   "text": "For thickness, let $L\\in\\Dbc$ and let $K$ be any retract of $L$ in the ambient derived category, with $i:K\\to L$, $p:L\\to K$ and $pi=1_K$. Fix $q$ and put $M=\\mathcal H^qK$, $F=\\mathcal H^qL$, $a=\\mathcal H^q(i)$, $b=\\mathcal H^q(p)$. Functoriality in [def-weil-derived-cohomology-sheaves] gives $ba=1_M$. Then $a$ identifies $M$ with $\\ker(1_F-ab)$: $(1_F-ab)a=0$, and whenever $(1_F-ab)t=0$ one has $t=a(bt)$, uniquely since $ba=1_M$. Both source and target of $1_F-ab$ are the constructible sheaf $F$, so the kernel clause of [det-lem-coefficient-heart-closure] makes $M$ constructible. If $F=0$, the equality $ba=1_M$ forces $M=0$; thus the cohomological support of $K$ is contained in that of $L$. By [det-def-sfb-constructible-tor-amplitude] (2), $K\\in\\Dbc$. In particular, take the inclusion and projection of either summand when $L=K_1\\oplus K_2$. Hence $\\Dbc$ is closed under direct summands and is thick. The complementary idempotent $1_F-ab$, rather than $ab$ itself, has the chosen summand as its kernel.",
+   "text": "Specialize the preceding construction to continuousMapRingSheaf E for each finite intermediate field, using E.2 for finite dimensionality, and to padicAlgClCondensedRing. The underlying abelian sheaves and ring-object structures are definitionally the coefficient objects in the statement, so the two applications assemble the required conjunction.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "det-lem-coefficient-heart-closure",
-    "det-def-sfb-constructible-tor-amplitude"
+    "det-lem-coefficient-heart-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RB (definition-saturated) and Tag 06UQ (lemma-cohomology-in-serre-subcategory), direct-summand paragraph; blueprint proof, final paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-derived-cohomology-sheaves",
-  "det-def-sfb-constructible-tor-amplitude",
-  "det-def-sfb-constructible-local-model",
-  "lem-sp-derived-cohomology-shift",
-  "lem-sf-derived-homology-long-exact",
-  "def-sp-abelian",
-  "lem-weil-pbc-coimage-mono",
   "det-lem-coefficient-heart-closure",
-  "def-weil-triangulated-category",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-sp-abelian",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
   "def-weil-triangulated-subcategory",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-triangulated.proof.md",
-  "place": "All three paragraphs, expanded using Stacks Tags 03DA, 011H, 05RS, 0147, 0109, 05QM, 05QX, 05RB and 06UQ"
+  "place": "Unit cone argument implemented by the existing weak-Serre cohomology theorem (Stacks Tag 06UQ); direct complementary-idempotent kernel proof for retracts; Y5 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -422,5 +369,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "The statement matches the node and the source sk-cor-coefficient-heart-ii-triangulated.md clause by clause. Noetherian X is written as IsLocallyNoetherian plus CompactSpace. The coefficients are, for every FiniteIntermediateField E, condensedRingObj(continuousMapRingObj E), which is the recorded padicSubfieldRingObj, and the finite-subextension padicAlgClRingObj, which is the recorded Qbar coefficient ring. Dbc is the recorded constantModelBoundedConstructible of the stmt_dep, with no private copy. IsClosedUnderIsomorphisms, IsTriangulated (the Mathlib match of def-weil-triangulated-subcategory: zero, Z-shifts, 2-of-3 by rotation) and IsStableUnderRetracts (thick) cover every conclusion clause. There are no extra hypotheses or universe restrictions. Edge cases checked: empty X, zero complex, E = Q_l. No duplicate exists; IntegralConstantModelHeart uses different coefficients. Imports are the stmt_dep module plus the proof_dep modules, and heart-closure is unrecorded so it is correctly omitted. Docstrings carry the source place, the blueprint tag and all six proof steps. The only proof is sorry. lean.statement matches the file verbatim, lines are at most 100 characters, and the node changed only in lean. nt_compile against the side overlay is clean in 3.9 s, with axioms limited to sorryAx and the standard axioms. Findings: none."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261019T034355-L-426468",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
