@@ -2,7 +2,7 @@
  "id": "lem-per-marked-finite-diagram-approximation",
  "kind": "statement",
  "title": "Regularity and boundary intersections persist under sufficiently fine marked approximation",
- "statement": "Let $(A,\\mathfrak m)$ be an excellent henselian Noetherian local domain, $S=\\operatorname{Spec}A$, and $\\widehat S=\\operatorname{Spec}\\widehat A$ [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-adic-completion]. Write $\\widehat A=\\varinjlim_\\alpha A_\\alpha$ as its directed union of finite type $A$-subalgebras, and let $s_\\alpha:A_\\alpha\\to\\widehat A$ be the inclusions. Let $Z\\subset S$ be closed and let $X_i\\to\\widehat S$ be finitely many finite type morphisms, with $X_i$ regular Noetherian and $Z\\times_SX_i$ supported on a strict normal crossings boundary $D_i$ [def-weil-finite-type-morphism], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary]. There is an index $\\alpha_0$ and a finite diagram of finite type schemes over $S_{\\alpha_0}=\\operatorname{Spec}A_{\\alpha_0}$ whose base change is the diagram consisting of all $X_i$, the reduced irreducible components of each $D_i$, all their scheme-theoretic intersections, and their inclusions. After increasing $\\alpha_0$, there is $N_0\\geq1$ such that for every $\\alpha\\geq\\alpha_0$, every $N\\geq N_0$ and every $A$-algebra map $u:A_\\alpha\\to A$ congruent to $s_\\alpha$ modulo $\\mathfrak m^N\\widehat A$, the pulled-back model $X_{i,u}$ has an open neighborhood $V_{i,u}$ of its entire closed fibre which is regular, on which the pulled-back markings form a strict normal crossings boundary supported on $Z\\times_S V_{i,u}$. On $V_{i,u}$ the reduced union of the irreducible components of $X_{i,u}$ dominating $S$ is an open and closed subscheme. All intersections at points of this neighborhood have the expected local codimensions. Empty boundaries and empty intersections are permitted. The models may be enlarged to include any specified finite diagram of finite type schemes and morphisms involving the $X_i$ [def-pc-fibre-product], [def-weil-closed-immersion].",
+ "statement": "Let $(A,\\mathfrak m)$ be an excellent henselian Noetherian local domain, $S=\\operatorname{Spec}A$, and $\\widehat S=\\operatorname{Spec}\\widehat A$ [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-adic-completion]. Write $\\widehat A=\\varinjlim_\\alpha A_\\alpha$ as its directed union of finite type $A$-subalgebras, and let $s_\\alpha:A_\\alpha\\to\\widehat A$ be the inclusions. Let $Z\\subset S$ be closed and let $X_i\\to\\widehat S$ be finitely many finite type morphisms, with $X_i$ regular Noetherian and with a specified strict normal crossings boundary $D_i$ whose support equals $|Z\\times_SX_i|$ [def-weil-finite-type-morphism], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary]. There is an index $\\alpha_0$ and a finite diagram of finite type schemes over $S_{\\alpha_0}=\\operatorname{Spec}A_{\\alpha_0}$ whose base change is the diagram consisting of all $X_i$, the reduced irreducible components of each $D_i$, all their scheme-theoretic intersections, and their inclusions. After increasing $\\alpha_0$, there is $N_0\\geq1$ such that for every $\\alpha\\geq\\alpha_0$, every $N\\geq N_0$ and every $A$-algebra map $u:A_\\alpha\\to A$ congruent to $s_\\alpha$ modulo $\\mathfrak m^N\\widehat A$, the pulled-back model $X_{i,u}$ has an open neighborhood $V_{i,u}$ of its entire closed fibre which is regular, on which the pulled-back markings form a strict normal crossings boundary with support equal to $|Z\\times_S V_{i,u}|$. On $V_{i,u}$ the reduced union of the irreducible components of $X_{i,u}$ dominating $S$ is an open and closed subscheme. All intersections at points of this neighborhood have the expected local codimensions. Empty boundaries and empty intersections are permitted. The models may be enlarged to include any specified finite diagram of finite type schemes and morphisms involving the $X_i$ [def-pc-fibre-product], [def-weil-closed-immersion]. The reduced dominant union uses the reduced closed subscheme structure on the union of the global irreducible components whose generic points map to the generic point of $S$ [def-weil-irreducible-components], [def-pc-reduced-scheme].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose III section 2 (pp.35--36), Theorem 5.1 and Corollary 5.4 (pp.41--43), and the final paragraph of the proof of Proposition 6.2 (pp.44--45). Include every boundary intersection before approximation; regular local dimensions and cotangent dimensions persist by 5.4, giving codimensions by excellence/catenarity. This is the finite marked-diagram consequence stated in that paragraph, not the uniformization reduction itself."
@@ -15,11 +15,180 @@
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary",
   "def-pc-fibre-product",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "List the finitely many reduced components $D_{ij}$ and all intersections $D_{iJ}$, including $D_{i\\varnothing}=X_i$. Add the objects and arrows of the requested extra finite diagram. By [lem-weil-pbc-adic-completion-noetherian], $\\widehat A$ is Noetherian; all these finite type schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. On finite affine covers, [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives finite presentations of the coordinate algebras. Over a Noetherian affine base the overlaps are quasi-compact (every open of a Noetherian space is quasi-compact), so the morphisms are of finite presentation. Thus the finite-presentation descent statements apply to every object. Model an empty object by the empty scheme.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III section 2, pp.35--36; Proposition 6.2, final paragraph, pp.44--45; Stacks Tags 0316 and 00FP for the Noetherian and presentation inputs"
+   }
+  },
+  {
+   "text": "For each object form the finite raw affine-chart and overlap datum of the Nagata descent construction. Its base-change identifications are supplied by [lemma-nagata-relative-gluing-datum-descends], and [lemma-nagata-relative-gluing-axioms-eventually] supplies matching overlap opens, inverse maps and cocycles at its selected valid stage. Gluing this valid datum gives the constructed model of [def-nagata-finite-presentation-descent]; [lemma-nagata-finite-presentation-descends] asserts that it is finitely presented and that its comparison with the original object is an isomorphism. Move these finitely many models to one index. Descend each arrow by [lemma-nagata-morphism-descends] and impose each of the finitely many diagram equations by [lemma-nagata-morphism-eq-eventually]. Increase the index so all marked inclusions are closed immersions by [lemma-nagata-closed-immersion-stage-exists]. Define intersection models by the actual iterated fibre products of the component inclusions. Their completed base changes are the original scheme-theoretic intersections by the fibre-product universal property. If an intersection was also specified as a separate object, descend its comparison isomorphism and its inverse, and impose their inverse equations by the same two morphism lemmas. These operations give one finite diagram at an index $\\alpha_0$, together with its specified base-change identifications.",
+   "uses": [
+    "lemma-nagata-relative-gluing-datum-descends",
+    "lemma-nagata-relative-gluing-axioms-eventually",
+    "def-nagata-finite-presentation-descent",
+    "lemma-nagata-finite-presentation-descends",
+    "lemma-nagata-morphism-descends",
+    "lemma-nagata-morphism-eq-eventually",
+    "lemma-nagata-closed-immersion-stage-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III section 2, pp.35--36; Stacks Tag 01ZM, lemma-descend-finite-presentation, and the closed-immersion descent lemma; III Proposition 6.2, p.44, descending every component and its intersections"
+   }
+  },
+  {
+   "text": "Let $W_{i,\\alpha}=Z\\times_S X_{i,\\alpha}$ and let $H_{i,\\alpha}$ be the closed union of the component models. In $X_{i,\\alpha_0}$ consider the constructible set $E_i$ where membership in $|W_{i,\\alpha_0}|$ and in $|H_{i,\\alpha_0}|$ agrees. This is a Boolean combination of two closed subsets of a Noetherian space. The image of the limit $X_i$ is contained in $E_i$ by the corrected support hypothesis. Apply [lem-weil-pbc-limit-contained-in-constructible] to the system $(X_{i,\\alpha})_{\\alpha\\ge\\alpha_0}$: its terms are qcqs and its transitions are affine, being base changes of affine maps of spectra. After increasing $\\alpha_0$, the two supports agree on every later model. For every $u$ their inverse images agree as subsets of $X_{i,u}$. This proves the required support equality for the union of the pulled-back component markings, regardless of whether scheme-theoretic union commutes with this nonflat base change.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, pp.44--45, assertion that the union of the approximated components has support the inverse image of Z; Stacks Tag 05F4, lemma-limit-contained-in-constructible"
+   }
+  },
+  {
+   "text": "Apply [lem-per-gabber-graded-model-approximation] to each of the finitely many schemes $X_i$ and $D_{iJ}$ and their now fixed models. Take an upper bound for their stage thresholds and take $N_0$ at least the maximum of their $n_0+1$ and $c+2$. Thus for every later $\\alpha$, every $N\\ge N_0$, and every allowed $u$, each pair of corresponding schemes has isomorphic $G_a$ algebras and isomorphic thickenings modulo $\\mathfrak m^a$, with $a=N-c\\ge2$ (the constants $c$ may vary with the object). Quotient the graded algebra by its canonical degree $-1$ element, the class of $1$, to obtain the ordinary associated graded algebra $\\bigoplus_{q\\ge0}I^q/I^{q+1}$: in degree $q$ the image of multiplication by that element is $I^{q+1}/I^{q+a}$. Negative-degree quotients vanish. The isomorphisms preserve that element because they are over $G_a(A)$. Restrict the thickening isomorphism further modulo $\\mathfrak m^2$. All closed fibres are identified by the original congruence, not by independently chosen bijections of points.",
+   "uses": [
+    "lem-per-gabber-graded-model-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Theorem 5.1 and Definition 4.2, pp.39--42; finite maximum of thresholds as used in Corollary 5.4 and Proposition 6.2"
+   }
+  },
+  {
+   "text": "Fix a point $x$ on the common closed fibre of one of these pairs and let $R$ and $T$ be its two local rings. Taking stalks of the associated graded isomorphism gives $\\operatorname{gr}_I(R)\\cong\\operatorname{gr}_J(T)$, where $I=\\mathfrak mR$ and $J=\\mathfrak mT$; formation of powers, quotients and direct sums commutes with localization. Since $x$ lies on the closed fibre, $I$ and $J$ lie in the respective maximal ideals. Therefore [lem-per-associated-graded-local-dimension] gives $\\dim R=\\dim T$. This applies both to the ambient scheme and, at that same point, to every marked intersection through it.",
+   "uses": [
+    "lem-per-associated-graded-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Corollary 5.4(i), pp.42--43, applied separately to the ambient scheme and every boundary intersection"
+   }
+  },
+  {
+   "text": "The isomorphism modulo $\\mathfrak m^2$ identifies the cotangent spaces of $R$ and $T$. Indeed if $\\mathfrak n$ is the maximal ideal of $R$, then $I^2\\subseteq\\mathfrak n^2$, so the maximal-ideal cotangent space of $R/I^2$ is exactly $\\mathfrak n/\\mathfrak n^2$; the same computation applies to $T/J^2$. Their residue fields are identified as well. Every original $X_i$ and $D_{iJ}$ is regular by [def-trf-strict-normal-crossings-boundary]. The equality of dimensions in Step 5 and the cotangent criterion [lem-weil-pbc-regular-local-cotangent-dimension] therefore make all pulled-back schemes regular at every closed-fibre point. Subtracting the two dimension equalities gives, at every such point of $D_{iJ,u}$, $\\dim\\mathcal O_{X_{i,u},x}-\\dim\\mathcal O_{D_{iJ,u},x}=|J|$, because that is the original boundary equality.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Corollary 5.4(ii), pp.42--43, and the codimension calculation in the last paragraph of Proposition 6.2, pp.44--45"
+   }
+  },
+  {
+   "text": "Each $X_{i,u}$ and each $D_{iJ,u}$ is of finite type over $A$. By [lem-exc-finite-type-localization-excellent] its affine coordinate rings are excellent; their regular loci are open by the J-2 clause in [def-exc-excellent-ring]. Start with the regular locus of $X_{i,u}$ and remove the nonregular locus of every intersection. The latter locus is closed in its intersection and hence closed in this ambient open because the intersection is closed. There are only finitely many intersections, and none of these bad loci meets the closed fibre by Step 6. The resulting open $W_{i,u}$ contains the entire closed fibre; both it and all its marked intersections are regular Noetherian.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Corollary 5.4(iii), p.43; III Proposition 6.2, pp.44--45, openness of the regular loci; Stacks Tag 07QU, lemma-finite-type-over-excellent"
+   }
+  },
+  {
+   "text": "By [lem-per-regular-lci-geometric-calculus], every closed immersion $D_{iJ,u}\\cap W_{i,u}\\hookrightarrow W_{i,u}$ is regular and its codimension is locally constant on its source. In an affine neighborhood take the smooth factorization with smooth map the identity ($r=0$) in that lemma. Its dimension formula says this codimension is $\\dim\\mathcal O_{W_{i,u},x}-\\dim\\mathcal O_{D_{iJ,u},x}$. Hence it equals $|J|$ on the closed fibre by Step 6. The locus where it differs from $|J|$ is open and closed in the intersection, and is therefore closed in $W_{i,u}$. Remove all these finitely many wrong-codimension loci. The resulting open $V_{i,u}$ still contains the entire closed fibre, and all its intersections are regular with the stated dimension difference at every point.",
+   "uses": [
+    "lem-per-regular-lci-geometric-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, pp.44--45, the catenary codimension step; Stacks Tag 0E9J, lemma-immersion-regular-regular-immersion, and Tag 00NR"
+   }
+  },
+  {
+   "text": "At a point $x\\in V_{i,u}$ write $B=\\mathcal O_{V_{i,u},x}$, of dimension $d$, and list just the $r$ component markings through $x$. Their ideals $K_j$ have regular quotients of dimension $d-1$. By [lem-weil-pbc-regular-local-quotient-kernel-parameters] each $K_j$ is generated by an initial part of a regular system of parameters; [lem-weil-pbc-regular-local-generators-regular-sequence] computes the dimension of that quotient, so this part has length one. Write $K_j=(t_j)$. For $K=\\sum_jK_j$, the full intersection quotient is regular of dimension $d-r$. By [lem-weil-pbc-regular-local-cotangent-dimension], the kernel $(K+\\mathfrak n^2)/\\mathfrak n^2$ of the cotangent quotient has dimension $r$. It is spanned by the $r$ classes of the $t_j$, so those classes are independent. Extend them to a basis of $\\mathfrak n/\\mathfrak n^2$ and lift the added basis vectors. By [lem-weil-pbc-nakayama-local-generators] these $d$ lifts generate $\\mathfrak n$, giving a regular system of parameters containing all the $t_j$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, final paragraph, pp.44--45; Stacks Tags 00NR, 00NQ and 0BIA, the regular-intersection to parameter argument"
+   }
+  },
+  {
+   "text": "In this system of parameters the $t_j$ are pairwise nonassociated prime elements in a domain by [lem-trf-regular-local-ufd-boundary-factorization]. Hence $\\bigcap_j(t_j)=(\\prod_jt_j)$: an element divisible by each of finitely many distinct primes is divisible by their product. This ideal is radical (if a power is divisible by each prime, so is the element), and its generator is a nonzerodivisor. Thus the scheme-theoretic union $H_{i,u}$ of the component markings has at every point the product equation from [lem-per-snc-boundary-parameter-criterion], which makes it a strict normal crossings boundary. A marking may split into several components: by [rem-pc-regular-normal] its regular Noetherian restriction is a finite disjoint union of integral open and closed components. Different original markings cannot share one, since their common intersection has codimension two by Step 8. Thus these are the boundary's reduced irreducible components, with the same intersection conditions. Step 3 gives $|H_{i,u}|=|Z\\times_SV_{i,u}|$. At a point on no marking the product is $1$.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-per-snc-boundary-parameter-criterion",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, pp.44--45; Stacks Tag 0BIA, lemma-strict-normal-crossings, and the regular local parameter formulation"
+   }
+  },
+  {
+   "text": "Finally [rem-pc-regular-normal] decomposes the regular Noetherian $V_{i,u}$ into finitely many disjoint integral open and closed components. Each is the restriction of the unique global irreducible component of $X_{i,u}$ containing its generic point. Select precisely those whose global generic point maps to the generic point of $S$. Their finite union is open and closed. Its reduced scheme structure agrees with the restriction of the reduced closed union of all global dominant components, since a regular scheme is reduced and a reduced closed subscheme is determined by its support. This proves the dominant-union assertion. The construction never removed a closed-fibre point and used one common index and bound. An empty closed fibre allows the empty neighborhood. Empty markings give the unit ideal and no codimension constraints; empty intersections have no points to check. The extra finite diagram was included before choosing thresholds, so every morphism and equation in it remains modeled simultaneously.",
+   "uses": [
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, p.44, disjoint integral components on the regular neighborhood; pp.44--45 for empty boundaries and all intersections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-nagata-finite-presentation-descent",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-associated-graded-local-dimension",
+  "lem-per-gabber-graded-model-approximation",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-per-snc-boundary-parameter-criterion",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lemma-nagata-closed-immersion-stage-exists",
+  "lemma-nagata-finite-presentation-descends",
+  "lemma-nagata-morphism-descends",
+  "lemma-nagata-morphism-eq-eventually",
+  "lemma-nagata-relative-gluing-axioms-eventually",
+  "lemma-nagata-relative-gluing-datum-descends",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III section 2, Theorem 5.1, Corollary 5.4 and Proposition 6.2, final paragraph, pp.35--45; explicit finite-diagram, parameter and support arguments as detailed in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +224,31 @@
    "results": "[grep] OK 1 hit(s): Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean:23, approximate parallelogram law for K-points. Searched AlgebraicGeometry.",
    "date": "2026-10-19",
    "verdict": "no match: unrelated elliptic curve parallelogram-law comment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked finite diagrams of regular schemes with strict normal crossing divisors over a completed excellent henselian local ring can be approximated while preserving the boundary intersections near the special fibre",
+   "results": "{\"t\": \"2026-10-18T23:49:48Z\", \"tool\": \"leanfinder\", \"query\": \"Marked finite diagrams of regular schemes with strict normal crossing divisors over a completed excellent henselian local ring can be approximated while preserving the boundary intersections near the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"6fff30cea00bed81\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary affine-transition-limit morphism statements, henselian lifting and unrelated material do not supply marked approximation preserving regular boundary intersections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsRegularLocalRing\"",
+   "results": "{\"t\": \"2026-10-18T23:49:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsRegularLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary affine-transition-limit morphism statements, henselian lifting and unrelated material do not supply marked approximation preserving regular boundary intersections."
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.*approx|normal.?crossing|marked.*approx",
+   "results": "{\"t\": \"2026-10-18T23:49:54Z\", \"tool\": \"grep\", \"query\": \"Artin.*approx|normal.?crossing|marked.*approx\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary affine-transition-limit morphism statements, henselian lifting and unrelated material do not supply marked approximation preserving regular boundary intersections."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-complete-local-descent",
@@ -85,5 +275,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-marked-finite-diagram-approximation",
+  "worker": "stage1",
+  "summary": "Read ILO III 2, 4.2, 5.1, 5.4 and the final paragraph of 6.2. Corrected the reversed support containment to equality as required by the source. Descended the full finite diagram, made support equality eventual, applied graded approximation to ambient schemes and all intersections, and justified regularity, codimension openness, local parameter equations and the dominant open-and-closed union. Two genuinely smaller graded-algebra inputs are new; all other tools are reused. Resumed N3 sandbox without discarding prior searches; explicitly cited the raw-datum comparison and eventual gluing axioms needed to construct the models, and completed the missing report.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve: the finiteness/duality input through IX 1.1 and III Proposition 6.2; steps 1--3 realize III section 2 and component descent, steps 4--6 realize III 5.1/5.4, and steps 7--11 realize the last paragraph of III 6.2.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic finite-presentation/limit descent tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lemma-nagata-closed-immersion-stage-exists",
+    "why": "Generic finite-presentation/limit descent tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lemma-nagata-finite-presentation-descends",
+    "why": "Generic finite-presentation/limit descent tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lemma-nagata-morphism-descends",
+    "why": "Generic finite-presentation/limit descent tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lemma-nagata-morphism-eq-eventually",
+    "why": "Generic finite-presentation/limit descent tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic Noetherian local algebra or regular-scheme geometry tool in the III 2 / 5.4 / 6.2 approximation argument; the unit has no alternative statement for this input."
+   },
+   {
+    "node": "lemma-nagata-relative-gluing-datum-descends",
+    "why": "Generic finite-presentation object descent: the first identifies the raw affine gluing datum after base change; the second supplies the gluing axioms, rather than assuming a definition proves them. The unit has no other statement for this limit-descent tool."
+   },
+   {
+    "node": "lemma-nagata-relative-gluing-axioms-eventually",
+    "why": "Generic finite-presentation object descent: the first identifies the raw affine gluing datum after base change; the second supplies the gluing axioms, rather than assuming a definition proves them. The unit has no other statement for this limit-descent tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lemma-nagata-closed-immersion-stage-exists",
+  "lemma-nagata-finite-presentation-descends",
+  "lemma-nagata-morphism-descends",
+  "lemma-nagata-morphism-eq-eventually",
+  "rem-pc-regular-normal",
+  "lemma-nagata-relative-gluing-datum-descends",
+  "lemma-nagata-relative-gluing-axioms-eventually"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N3-7ee2f1130",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-7ee2f1130 (reviewer sub-agent of L); spot-checked: I read ILO III 4.1-4.5, 5.1 with its proof, 5.4 with its proof, and 6.1-6.2 to the final paragraph (pp.39-45). Statement correction: the base reading (|Z x X| contained in |D| implies |D_u| contained in |Z x V|) is false. Counterexample: A=k, X=A^1, Z empty, D=origin. ILO 6.1(iii) and the end of 6.2 use equality, the delivery writes equality in both hypothesis and conclusion, and the parent lem-per-uniformization-complete-local-descent Step 1 supplies equality. The change is recorded in the report (E7). New node gabber-graded-model matches Th 5.1 and Def 4.2 exactly (N=n+1, a=N-c, T^[a]=V(I^a), G_a=gr_a, uniqueness over the given phi). New node associated-graded-local-dimension is true (dim gr_I R = dim R for proper I, Matsumura 15.7, the fact ILO cites as 15.9); I tested I=0, I=n and (x) in k[[x,y]], and found no duplicate in the DAG or Mathlib. Neither new node restates the item. All 11 steps check against their cited statements: G_a/(t)=gr_1 is verified; the cotangent step uses I^2 in n^2; 05F4 gives eventual support equality; 00NR plus the dimension count gives K_j=(t_j); the cotangent count gives independence and an rsop; the UFD lemma gives intersection = product and radicality, and the parameter criterion gives SNC; dominant components handled through rem-pc-regular-normal; the codimension formula with p=id. Batch-5 flags: regular-lci-geometric-calculus (only trf node is lem-trf-regular-sequence-dimension-formula), snc-boundary-parameter-criterion (def-trf-SNC plus the UFD/K0/Pic chain) and lem-trf-regular-local-ufd-boundary-factorization are all generic commutative algebra, outside both assumptions and not steps of the trace formula or Poincare duality proofs. Accepted. No sk-/nt-/PD nodes are in the closure. No SGA. tool_uses accepted. No fixes."
  }
 }
