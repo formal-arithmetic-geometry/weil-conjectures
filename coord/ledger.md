@@ -16842,3 +16842,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/R5/Sheaf.AlgebraicGeometry.EtaleClosedSupportAmplitude (stage 3; reviewer PASS; first push; landing 20261019T005413-L-2764936 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R5/Sheaf.Paper.WeilCompletedTensorReflector (stage 3; reviewer PASS; first push; landing 20261019T005414-L-2765081 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R6/Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison (stage 3; reviewer PASS; first push; landing 20261019T005414-L-2765227 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/R6/Sheaf.Paper.IntegralComparisonRealizationModels (stage 3; reviewer PASS; first push; landing 20261019T005415-L-2765343 (proof); batch 20261019T005255; modules 1; new nodes 0)

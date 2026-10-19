@@ -18,9 +18,49 @@
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the constant-tower adjunction using the exact-functor/total-right-derived adjunction. On a K-injective tower, Adjunction.derivedε_fac_app gives its counit after precomposition by the derived unit. Cancel that unit and transport along quotientCompQhIso and mapDerivedCategoryFactorsh to obtain the ordinary limit-cone formula.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining open obligation is existence of the derived whole-system extension/restriction adjunction. Identify constant-coefficient towers with module sheaves over the horizontal-constant coefficient sheaf on the sequence site, extend scalars along its quotient-ring map, and derive the tensor/restriction adjunction by K-flat resolutions and exact restriction.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Adjunction.leftAdjointUniq_hom_app_counit to the reduction adjunction and the composite constant-tower/system-extension adjunction. Its inverse comparison is leftAdjointUniq in the opposite order. Adjunction.comp_counit_app then gives the displayed reduction-counit formula.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a tower complex, form the product of its ordinary limit projections. The limit cone equations show its composite with 1 minus shift is zero. Mathlib mappingCocone.lift with zero degree-minus-one cochain constructs the required map. Product extensionality fixes its first coordinate; the zero second coordinate and mappingCocone.id_X fix each degree of the whole map, proving uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The object component of coefficientSequenceRestriction_exists identifies the restricted evaluation with scalarReductionRestriction of evaluation. Scalar restriction preserves the underlying abelian sheaf, so coefficientSequenceEvaluationAb_eq gives the equality of section types. All normalized realization structures and their signatures remain unchanged.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-derived-change-of-rings",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": "Stages 3 proof by R6, 2026-10-19: generic derived-counit normalization, adjoint uniqueness, and explicit mapping-cocone lift; the original system-adjoint obligation remains open.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -127,5 +167,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261019T005415-L-2765343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
