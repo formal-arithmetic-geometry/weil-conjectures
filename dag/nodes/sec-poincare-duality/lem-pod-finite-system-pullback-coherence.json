@@ -20,6 +20,17 @@
  ],
  "proof": [
   {
+   "text": "Specialize the existing varying-ring operations to R_n = ULift A_n and the lifted coefficient maps. Continuity and ring-map naturality are their sequence-site continuity and naturality statements, after faithful passage from commutative rings to rings. The actual sectionwise pushforward is definitionally their pushforward, so its right-adjoint witness and exact pullback apply. For composition, take the unique section-normalized direct-image comparison and transport its existence and uniqueness across the conjugation equivalence. The evaluation normalization and final coherence statements remain open, with their original arguments in the following steps.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof: termwise composition on flat-term K-flat representatives. The varying-coefficient strict-system comparison, transition compatibility and its associativity equation are the agent-formulated refinement extracted from the integral pullback composition argument; 0D6D alone does not assert them."
+   }
+  },
+  {
    "text": "Write $P_f$ for the underived levelwise pullback. For a coefficient homomorphism $r:A_{n+1}\\to A_n$, the square $c^f_{A_n}\\circ f^{-1}(r)=r\\circ c^f_{A_{n+1}}$ commutes: after adjunction both maps send a constant section $a$ to the constant section $r(a)$, and uniqueness of extension from the constant presheaf proves equality. Thus inverse image of an $r$-semilinear map is $r$-semilinear after the canonical ring identifications. For composites, [lem-trf-constant-coefficient-composition] identifies the canonical structure map with the composite structure map. This checks that all the single-level module adjunctions below use exactly the coefficient maps stipulated in the statement.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
@@ -111,6 +122,7 @@
  ],
  "proof_deps": [
   "def-pc-fibre-product",
+  "def-sp-varying-ring-operations",
   "def-weil-pbc-constant-sheaf",
   "def-weil-proetale-inverse-image",
   "lem-coef-semilinear-derived-sections",
@@ -130,7 +142,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D3, 03D7 and 03D8 with sites-cohomology.tex Tag 0D6D; agent extension to strict varying-coefficient systems using componentwise adjunctions and ordinary localization"
+  "place": "Tags 03D3, 03D7, 03D8; specialize the existing varying-ring operations to the lifted finite ring tower, then retain the planned coherence argument."
  },
  "mathlib_searches": [
   {
@@ -334,5 +346,15 @@
   "group": "Q71",
   "result": "pass",
   "note": "Read node, 9 stmt deps, module, report, node copy (only lean changed). Clause-by-clause match: finite ring tower A,τ with [Finite]; arbitrary j,h,k in Scheme.{u}; Mathlib Scheme.ProEt with site universes u+1/u not forced equal; proEtaleConstantRing + constantSheaf.map τ; dependency Systems/DS/evaluation/e (no private copy); U_f = universal left adjoint of explicit sectionwise system pushforward, level-n identified with proEtaleConstantRingPullback by unit-normalized ∃! comparison, derived = mapDerivedCategory; a = unique conjugate of fibre-product comparison d. Conjuncts: (1) levelwise = published module comparison (transition compatibility by type), (2) derived evaluation = (proEtaleConstantRingPullbackComposition h k).inv = dependency's c_{h,k}, (3) associativity on complexes before localization with assoc eqToHom and associator, (4) displayed equation in D(S_Y); directions verified by hand, auxiliary sorry'd existence/uniqueness statements true. Gates: no hollow defs (choose only from ∃!/uniquely determining properties), all theorems sorry, source+blueprint docstrings, Stacks tags verified, lines ≤100, statement verbatim, declarations list exact, no extra hypotheses, no pro-etale substitute. nt_compile.py --json compiled the snapshot file cleanly (20.8 s/19.3 s, no diagnostics; error probe confirms reporting). Observations only: normalization against proEtaleConstantRingPullback rather than finiteCoefficientModulePullback (required to type c_{h,k}); module-comparison node is a proof dep, not a stmt_dep (H2 forbids adding it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261019T112514-L-3948613",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
