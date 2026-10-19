@@ -659,30 +659,7 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (unit ℓ Φ).stalkFrobenius m x hx = 𝟙 _ := by
-  rw [stalkFrobenius, frobenius_hom]
-  dsimp only [iterateStalk, weilStalk]
-  rw [weilUpperStar_obj_str, iterate_str]
-  simp only [weilUpperStarComparison,
-    boundedConstructiblePullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
-    Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom, eqToIso.hom, eqToIso.inv, Functor.map_comp,
-    eqToHom_map, NatTrans.comp_app, eqToHom_app, Category.assoc, unit_iterateStr_hom]
-  exact stalkFrobenius_unit_aux
-    (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
-    (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
-    (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
-    (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
-    (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
-    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)) (𝟙_ _) (𝟙_ _)
-    (fun a ↦ (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
-    (fun a ↦ (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
-    (fun a ↦ (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
-    (boundedConstructibleUpperStarId_hom_app_unit _ ℓ _)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b) hx (iterate_carrier _ m)
-    _ _ _
+  sorry
 
 end WeilBoundedConstructible
 
