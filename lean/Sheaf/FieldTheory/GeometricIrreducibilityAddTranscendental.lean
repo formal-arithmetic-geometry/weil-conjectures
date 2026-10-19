@@ -7,6 +7,9 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Sheaf.FieldTheory.GeometricIrreducibilityTranscendental
+import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+import Mathlib.Algebra.Field.ULift
+import Sheaf.FieldTheory.GeometricIrreducibilitySeparable
 
 /-!
 # Adding a transcendental variable preserves geometric irreducibility
@@ -24,6 +27,25 @@ open CategoryTheory
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry
+
+private theorem geometricallyIrreducible_of_equiv
+    {k F : Type u} {k' F' : Type v}
+    [Field k] [Field F] [Field k'] [Field F']
+    (i : k →+* F) (i' : k' →+* F') (e : k ≃+* k') (f : F ≃+* F')
+    (he : ∀ a, f (i a) = i' (e a))
+    (h : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom i'))) :
+    GeometricallyIrreducible (Spec.map (CommRingCat.ofHom i)) := by
+  let := i.toAlgebra
+  let := i'.toAlgebra
+  apply (geometricallyIrreducible_iff_separableElements_mem k F).mpr
+  intro a ha
+  have ha' : IsSeparable k' (f a) :=
+    ha.of_equiv_equiv e f (RingHom.ext fun b ↦ (he b).symm)
+  obtain ⟨b, hb⟩ := (geometricallyIrreducible_iff_separableElements_mem k' F').mp h _ ha'
+  refine ⟨e.symm b, f.injective ?_⟩
+  change i' b = f a at hb
+  change f (i (e.symm b)) = f a
+  rw [he, e.apply_symm_apply, hb]
 
 /-- If `L/M` is geometrically irreducible and `x` is transcendental over `L`, then adjoining
 `x` to both fields preserves geometric irreducibility.
@@ -58,6 +80,39 @@ theorem geometricallyIrreducible_adjoin_transcendental
             change x ∈ IntermediateField.adjoin L ({x} : Set K)
             apply IntermediateField.subset_adjoin
             simp))).toRingHom)) := by
-  sorry
+  -- The finite-family theorem requires an ambient universe containing the base universe.
+  let e : K ≃ₐ[L] ULift.{u} K := ULift.algEquiv.symm
+  have hx' : Transcendental L (e x) :=
+    fun ha ↦ hx ((isAlgebraic_algHom_iff e.toAlgHom e.injective).mp ha)
+  have ht : AlgebraicIndependent L (fun _ : Fin 1 ↦ e x) :=
+    algebraicIndependent_unique_type_iff.mpr hx'
+  have h := (geometricallyIrreducible_transcendental_extension (k := M) (K := L)).1
+    hLM (ULift.{u} K) 1 (fun _ ↦ e x) ht
+  let i := IntermediateField.inclusion (E := IntermediateField.adjoin M {x})
+    (F := (IntermediateField.adjoin L {x}).restrictScalars M)
+    (IntermediateField.adjoin_le_iff.mpr (IntermediateField.subset_adjoin L {x}))
+  let i' := IntermediateField.inclusion (E := IntermediateField.adjoin M {e x})
+    (F := (IntermediateField.adjoin L {e x}).restrictScalars M)
+    (IntermediateField.adjoin_le_iff.mpr (IntermediateField.subset_adjoin L {e x}))
+  have h' : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom i'.toRingHom)) := by
+    have hr : Set.range (fun _ : Fin 1 ↦ e x) = {e x} := Set.range_const
+    rw [hr] at h
+    exact h
+  let eM : IntermediateField.adjoin M ({x} : Set K) ≃ₐ[M]
+      IntermediateField.adjoin M ({e x} : Set (ULift.{u} K)) :=
+    ((IntermediateField.adjoin M {x}).equivMap (e.restrictScalars M).toAlgHom).trans
+      (IntermediateField.equivOfEq (by
+        rw [IntermediateField.adjoin_map, Set.image_singleton]
+        rfl))
+  let eL : IntermediateField.adjoin L ({x} : Set K) ≃ₐ[L]
+      IntermediateField.adjoin L ({e x} : Set (ULift.{u} K)) :=
+    ((IntermediateField.adjoin L {x}).equivMap e.toAlgHom).trans
+      (IntermediateField.equivOfEq (by
+        rw [IntermediateField.adjoin_map, Set.image_singleton]
+        rfl))
+  exact geometricallyIrreducible_of_equiv i.toRingHom i'.toRingHom
+    eM.toRingEquiv eL.toRingEquiv (fun a ↦ by
+      apply Subtype.ext
+      rfl) h'
 
 end AlgebraicGeometry
