@@ -13,9 +13,13 @@ public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
+import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 /-!
 # Realization of integral pullback comparisons
 
@@ -58,7 +62,22 @@ theorem integralComparisonSequenceBaseChange_continuous {X Y : Scheme.{t}} (f : 
     (integralComparisonSequenceBaseChange f).IsContinuous
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
-  sorry
+  have : RepresentablyFlat (proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
+  have : RepresentablyFlat (integralComparisonSequenceBaseChange f) := by
+    constructor
+    intro A
+    exact IsCofiltered.of_equivalence
+      (StructuredArrow.prodEquivalence A.1 A.2 (𝟭 ℕ) (proEtaleBaseChange f)).symm
+  apply Functor.isContinuous_of_coverPreserving
+    (compatiblePreservingOfFlat _ _)
+  constructor
+  intro A S hS
+  change (S.functorPushforward (integralComparisonSequenceBaseChange f)).functorPullback
+    (Prod.sectR A.1 X.ProEt) ∈ ProEt.topology X _
+  apply (ProEt.topology X).superset_covering _
+    ((proEtaleBaseChangeCoverPreserving f).cover_preserve hS)
+  rintro V a ⟨W, b, c, hb, rfl⟩
+  exact ⟨(A.1, W), Prod.mkHom (𝟙 A.1) b, Prod.mkHom (𝟙 A.1) c, hb, rfl⟩
 
 /-- Continuity of the actual sequence-site base change. Source: Stacks 0941
 (blueprint: def-trf-integral-comparison-sequence-systems). -/
@@ -83,6 +102,45 @@ def integralComparisonSequenceRingComponent {X Y : Scheme.{t}} (f : X ⟶ Y)
     (CommRingCat.of (ULift.{t + 1}
       (Padic.coefficientExtensionRing l E (A.unop.1 + 1))))).hom.app (op A.unop.2)
 
+private theorem sequenceConstantUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
+    (A : CommRingCat.{max u (t + 1)}) (U : Y.ProEtᵒᵖ) :
+    (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app U ≫
+      (coefficientProEtaleDirectRingMap.{t, u} f A).hom.app U =
+    (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+      ((proEtaleBaseChange f).op.obj U) := by
+  have h := (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{max u (t + 1)}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj A))
+      |>.apply_symm_apply (Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+  exact congrArg (fun α ↦ α.app U) h
+
+private theorem sequenceConstantMap_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
+    {A B : CommRingCat.{max u (t + 1)}} (a : A ⟶ B) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).map a ≫
+      coefficientProEtaleDirectRingMap.{t, u} f B =
+    coefficientProEtaleDirectRingMap.{t, u} f A ≫
+      ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+        (ProEt.topology Y) (ProEt.topology X)).map
+          ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map a) := by
+  apply (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{max u (t + 1)}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj B)) |>.injective
+  apply NatTrans.ext
+  funext U
+  change _ ≫ (_ ≫ _) = _ ≫ (_ ≫ _)
+  have hY := congrArg (fun α ↦ α.app U)
+    (toSheafify_naturality (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).map a))
+  change a ≫ _ = _ ≫ _ at hY
+  erw [← Category.assoc, ← hY, Category.assoc, sequenceConstantUnit,
+    ← Category.assoc, sequenceConstantUnit]
+  exact congrArg (fun α ↦ α.app ((proEtaleBaseChange f).op.obj U))
+    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
+
 /-- The constant-section coefficient maps commute with horizontal quotients and
 vertical restrictions. Source: Stacks 03D2, 0941
 (blueprint: def-trf-integral-comparison-sequence-systems).
@@ -97,7 +155,20 @@ theorem integralComparisonSequenceRing_naturality {X Y : Scheme.{t}} (f : X ⟶ 
       integralComparisonSequenceRingComponent l E f A ≫
         (coefficientSequenceCommRingPresheaf l E X).map
           ((integralComparisonSequenceBaseChange f).op.map g) := by
-  sorry
+  let τ : coefficientSequenceCommRingSystem l E Y ⟶
+      coefficientSequenceCommRingSystem l E X ⋙
+        (proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+          (ProEt.topology Y) (ProEt.topology X) :=
+    NatTrans.ofOpSequence (fun n ↦ coefficientProEtaleDirectRingMap.{t, u} f
+      (CommRingCat.of (ULift.{t + 1}
+        (Padic.coefficientExtensionRing l E (n + 1))))) (fun n ↦ by
+      simp only [coefficientSequenceCommRingSystem, Functor.comp_map,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact sequenceConstantMap_naturality f
+        (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift))
+  exact (Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := Y.ProEt)).functor
+    (Functor.uncurry.map (Functor.whiskerRight τ
+      (sheafToPresheaf (ProEt.topology Y) CommRingCat)))).naturality g
 
 /-- Actual constant coefficients on the sequence site, with their quotient transitions.
 Source: Stacks 03D2, 0941
@@ -129,16 +200,43 @@ def integralComparisonSequenceDirectImage {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ⟨Functor.whiskerRight (integralComparisonSequenceRingMap l E f).hom
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- The ordinary system inverse image exists and is exact. Source: Stacks 03D2, 0941
+/-- The ordinary system inverse image exists. Source: Stacks 03D2, 0941
 (blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: modules on the sequence site admit module Kan extension followed by
-sheafification. It is left adjoint to the displayed direct image. Evaluation is
-levelwise, where this is constant-coefficient pro-etale inverse image, hence exact.
-Evaluation detects exact sequences, so the sequence inverse image is exact. -/
+Proof: module sheaves on the sequence site form a Grothendieck abelian category,
+so they have a small coseparating family and are complete and well-powered.
+Direct image preserves limits: after evaluation it is evaluation on the source
+followed by restriction of scalars, both of which preserve limits. Evaluation
+jointly reflects limits. The special adjoint functor theorem supplies the left
+adjoint, with the original independent scheme and coefficient universes. -/
 theorem integralComparisonSequenceDirectImage_isRightAdjoint
     {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequenceDirectImage l E f).IsRightAdjoint := by
-  sorry
+  have : IsGrothendieckAbelian.{max u (t + 1)}
+      (coefficientSequenceModules l E X) :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses _ _
+  have : PreservesLimitsOfSize.{max u (t + 1), max u (t + 1)}
+      (integralComparisonSequenceDirectImage l E f) := by
+    constructor
+    intro J _
+    have : Small.{max u (t + 1)} J := inferInstance
+    constructor
+    intro K
+    constructor
+    intro c hc
+    refine ⟨?_⟩
+    apply isLimitOfReflects (SheafOfModules.forget _)
+    apply PresheafOfModules.evaluationJointlyReflectsLimits
+    intro U
+    change IsLimit ((ModuleCat.restrictScalars
+      ((Functor.whiskerRight (integralComparisonSequenceRingMap l E f).hom
+        (forget₂ CommRingCat RingCat)).app U).hom).mapCone
+          ((SheafOfModules.evaluation _
+            ((integralComparisonSequenceBaseChange f).op.obj U)).mapCone c))
+    have he : PreservesLimit K (SheafOfModules.evaluation _
+        ((integralComparisonSequenceBaseChange f).op.obj U)) := inferInstance
+    exact isLimitOfPreserves _ (isLimitOfPreserves _ hc)
+  exact isRightAdjoint_of_preservesLimits_of_isCoseparating
+    (isCoseparator_coseparator (coefficientSequenceModules l E X)) _
 
 /-- The adjunction structure whose right side is the actual sectionwise direct image.
 Source: Stacks 03D2 (blueprint: def-trf-integral-comparison-sequence-systems). -/
@@ -212,7 +310,26 @@ theorem integralComparisonSequenceScalar_naturality (X : Scheme.{t})
         integralComparisonSequenceScalarComponent l E L ι X B =
       integralComparisonSequenceScalarComponent l E L ι X A ≫
         (coefficientSequenceCommRingPresheaf l L X).map g := by
-  sorry
+  let τ : coefficientSequenceCommRingSystem l E X ⟶
+      coefficientSequenceCommRingSystem l L X :=
+    NatTrans.ofOpSequence (integralScalarQuotientSheafMap l E L ι X) (fun n ↦ by
+      simp only [coefficientSequenceCommRingSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      change (constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map
+          (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift) ≫
+          integralScalarQuotientSheafMap l E L ι X n =
+        integralScalarQuotientSheafMap l E L ι X (n + 1) ≫
+          (constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map
+            (CommRingCat.ofHom (Padic.coefficientExtensionTransition l L (n + 1)).ulift)
+      unfold integralScalarQuotientSheafMap
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      ext x
+      exact congrArg (fun q ↦ q x.down)
+        (integralScalarQuotientMap_transition l E L ι n).symm)
+  exact (Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := X.ProEt)).functor
+    (Functor.uncurry.map (Functor.whiskerRight τ
+      (sheafToPresheaf (ProEt.topology X) CommRingCat)))).naturality g
 
 /-- The specified morphism of quotient coefficient sheaves, before deriving.
 Source: Stacks 06YY, 0941
