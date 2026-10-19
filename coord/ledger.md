@@ -17755,3 +17755,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/T3/Sheaf.Paper.SfOpenClosedTriangleAllStages (stage 3; reviewer PASS; first push; landing 20261019T231347-L-577961 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/T6/Sheaf.Paper.ProperCoincidenceFrobenius (stage 3; reviewer PASS; first push; landing 20261019T231348-L-578127 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/T7/Sheaf.Paper.FiniteReductionComparisons (stage 3; reviewer PASS; first push; landing 20261019T231350-L-578463 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:13 L: merged deliver/T7/Sheaf.Paper.ProperSectionsSemilinearGerms (stage 3; reviewer PASS; first push; landing 20261019T231352-L-578832 (proof); batch 20261019T231019; modules 1; new nodes 0)
