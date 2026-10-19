@@ -12,9 +12,94 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-finite-gl-dim] to the given regular local ring $A$. It supplies a finite nonnegative bound $d=\\dim A$ such that every $A$-module has a projective resolution of length at most $d$. We shall construct the required injective complex supported in $[0,d]$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-finite-gl-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWX, lemma-regular-gorenstein, first two sentences of the proof; algebra.tex Tag 00O7, proposition-regular-finite-gl-dim, final assertion"
+   }
+  },
+  {
+   "text": "For each $A$-module $M$, apply [lem-weil-pbc-projective-dimension-ext-characterization] with $X=M$ and $n=d$, using the resolution bound from step 1. It gives $\\operatorname{Ext}^{i}_A(M,A)=0$ for every $i\\ge d+1$, with Ext as in [def-pc-ext]. In particular this vanishing holds for $M=A/T$ for every ideal $T\\subseteq A$. No finite-generation restriction on $M$ is used.",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-ext-characterization",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWX, lemma-regular-gorenstein, proof, Ext vanishing; algebra.tex Tag 065R, lemma-projective-dimension-ext, (1) implies (2)"
+   }
+  },
+  {
+   "text": "The category of $A$-modules is abelian and has enough injectives by [lem-weil-pbc-ring-modules-enough-injectives]. Part (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] therefore gives an exact augmented injective resolution $0\\to A\\xrightarrow{\\varepsilon}I^0\\xrightarrow{\\partial^0}I^1\\to\\cdots$, with $I^j=0$ for $j<0$. Put $J=\\ker(\\partial^d:I^d\\to I^{d+1})$ and let $\\iota:J\\hookrightarrow I^d$ denote its inclusion. For $d=0$, exactness identifies $\\varepsilon:A\\xrightarrow{\\sim}J$.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), choice of resolution and final kernel; derived.tex Tag 013K, lemma-injective-resolutions-exist, (1)"
+   }
+  },
+  {
+   "text": "Fix an ideal $T\\subseteq A$ and an $A$-linear map $u:T\\to J$. Since $I^d$ is injective in the sense of [def-sp-injective-resolutions], extend $\\iota u$ to $f:A\\to I^d$. The map $\\partial^d f$ vanishes on $T$, so it factors as $h\\pi$, where $\\pi:A\\to A/T$ is the quotient map and $h:A/T\\to I^{d+1}$. Since $\\partial^{d+1}\\partial^d=0$ and $\\pi$ is surjective, $\\partial^{d+1}h=0$. By [lem-weil-pbc-ext-via-injective-resolution] and step 2, $H^{d+1}(\\operatorname{Hom}_A(A/T,I^\\bullet))=0$. Its explicit cocycle/boundary description gives $g:A/T\\to I^d$ with $h=\\partial^d g$. Consequently $\\partial^d(f-g\\pi)=0$, and $f-g\\pi$ factors through $J$, giving $v:A\\to J$. On $T$ the correction $g\\pi$ is zero, so $\\iota(v|_T)=\\iota u$, and injectivity of $\\iota$ gives $v|_T=u$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, final-kernel argument, with the extension calculation written explicitly; derived.tex Tag 06XR, lemma-compute-ext-resolutions, (1)"
+   }
+  },
+  {
+   "text": "Step 4 gives the ideal-extension condition for $J$. Apply [lem-sf-baer-criterion] to the commutative ring $A$ and the $A$-module $J$: its hypotheses hold by step 3, and its implication from ideal extensions to injectivity proves that $J$ is injective.",
+   "uses": [
+    "lem-sf-baer-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF, lemma-characterize-injective-bis, (3) implies (1), as used at the end of Tag 0A5T"
+   }
+  },
+  {
+   "text": "Define $L^j=I^j$ for $0\\le j<d$, $L^d=J$, and $L^j=0$ otherwise. Keep the differentials of $I$ below degree $d-1$ and corestrict $\\partial^{d-1}$ to $J$ at the last differential; this is possible because $\\partial^d\\partial^{d-1}=0$. For $d=0$, simply take $L=J[0]$. The augmentation $A[0]\\to L$ is $\\varepsilon$ when $d>0$ and its factorization through $J$ when $d=0$. For $d>0$, exactness of the original augmented resolution gives $H^0(L)=A$, zero cohomology for $0<j<d$, and $H^d(L)=J/\\operatorname{im}\\partial^{d-1}=0$; for $d=0$, the augmentation $A\\to J$ is an isomorphism by step 3. All other degrees are zero. Thus this augmentation is a quasi-isomorphism. Every term of $L$ is injective: the $I^j$ by construction, $J$ by step 5, and $0$ because every map into it extends uniquely [def-sp-injective-resolutions]. Quasi-isomorphisms become isomorphisms in [def-weil-abstract-derived-category], so $A[0]\\cong L^\\bullet$ in $D(A)$; take $a=0$ and $b=d$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, truncation at the final kernel; Tag 0A5S, definition-injective-dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "def-pc-ext",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sf-baer-criterion",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0AWX, lemma-regular-gorenstein, proof through finite global dimension and Ext vanishing; more-algebra.tex Tag 0A5T, lemma-injective-amplitude, final-kernel truncation, with its Baer extension test expanded using derived.tex Tag 06XR."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +128,52 @@
    "results": "6 hits; top=['ModuleCat.hasInjectiveDimensionLE_of_quotients', 'ModuleCat.hasInjectiveDimensionLE_iff_of_linearEquiv', 'ModuleCat.hasInjectiveDimensionLE_iff_of_semiLinearEquiv', 'ModuleCat.localizedModule_hasInjectiveDimensionLE', 'ModuleCat.hasInjectiveDimensionLE_iff_forall_primeSpectrum', 'ModuleCat.hasInjectiveDimensionLE_iff_forall_maximalSpectrum']; subdirectory=; note=; digest=8aef2470af6d1c0e",
    "date": "2026-10-18",
    "verdict": "no match: dimension definitions, regular-local criteria and Baer criteria do not assert finite self-injective dimension for regular local rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Ext to a module vanishes above n then the module admits an injective resolution of length at most n",
+   "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLT.mk', \"CategoryTheory.HasInjectiveDimensionLT.mk'\", 'CategoryTheory.hasInjectiveDimensionLT_iff', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasInjectiveDimensionLT', 'CategoryTheory.HasInjectiveDimensionLE', 'CategoryTheory.HasProjectiveDimensionLT.mk', \"CategoryTheory.HasProjectiveDimensionLT.mk'\"]; subdirectory=; note=; digest=bc4e6169c9550a2b",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasInjectiveDimensionLE",
+   "results": "10 hits; top=['CategoryTheory.HasInjectiveDimensionLE', 'CategoryTheory.injective_iff_hasInjectiveDimensionLE_zero', 'CategoryTheory.injectiveDimension_ne_top_iff', 'CategoryTheory.injectiveDimension_le_iff', 'ModuleCat.hasInjectiveDimensionLE_of_quotients', 'ModuleCat.hasInjectiveDimensionLE_iff_of_linearEquiv', 'ModuleCat.hasInjectiveDimensionLE_iff_of_semiLinearEquiv', 'ModuleCat.localizedModule_hasInjectiveDimensionLE']; subdirectory=; note=; digest=edbbc0a8f80dea44",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "HasInjectiveDimension|InjectiveResolution|IsStrictlyLE",
+   "results": "19 hits; top=['Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean']; subdirectory=CategoryTheory/Abelian/Injective; note=; digest=04cc6d5d4e0892c4",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of an abelian category with enough injectives and finite injective dimension has a finite length injective resolution",
+   "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLT', 'CategoryTheory.HasInjectiveDimensionLE', 'CategoryTheory.injectiveDimension_ne_top_iff', 'CategoryTheory.instHasInjectiveDimensionLTOfNatNatOfInjective', 'CategoryTheory.injectiveDimension_le_iff', 'CategoryTheory.instHasInjectiveDimensionLTSucc', 'CategoryTheory.injectiveDimension_lt_iff', 'CategoryTheory.injectiveDimension']; subdirectory=; note=; digest=5a60ed0f6f7ab6be",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local rings admit bounded injective resolutions as modules over themselves",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.of_def', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolutions', 'CategoryTheory.InjectiveResolution.of', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolution', 'CategoryTheory.HasInjectiveResolutions.out', 'ModuleCat.enoughInjectives', 'instEnoughInjectivesModuleCatOfSmall']; subdirectory=; note=; digest=1fda48388a1a9745",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative regular local ring has finite self injective dimension and is isomorphic to a bounded complex of injective modules",
+   "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLT', 'CategoryTheory.HasInjectiveDimensionLE', 'CategoryTheory.injectiveDimension_ne_top_iff', 'CategoryTheory.injectiveDimension', 'CategoryTheory.instHasInjectiveDimensionLTOfNatNatOfInjective', 'CategoryTheory.injective_iff_hasInjectiveDimensionLT_one', 'CategoryTheory.injectiveDimension_lt_iff', 'CategoryTheory.injectiveDimension_le_iff']; subdirectory=; note=; digest=8b62370fff411489",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected Injective/Dimension.lean and Injective/Resolution.lean; these provide Ext-defined dimension and ordinary unbounded-above resolutions, but no regular-local finite self-injective dimension or bounded replacement assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-local-coherent-duality",
@@ -79,5 +206,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-regular-local-bounded-injective-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Followed Stacks 0AWX through existing global-dimension and projective-dimension/Ext nodes, then expanded the 0A5T final-kernel argument with an explicit cocycle correction and the existing Baer criterion. Constructed a bounded injective replacement in degrees [0,d], including d=0. All ingredients already have DAG nodes; no new nodes or Mathlib leaves. Searched project Lean and Mathlib and found no exact attachment or leaf.",
+  "blueprint": "Realizes the auxiliary regular-local injective-dimension input of lem-trf-complete-local-coherent-duality in the existing ancestry of lem-trf-local-term-locality: the regular local Cohen-presentation case of dualizing.tex Tag 0BFR, via Tag 0AWX. The unit and chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-finite-gl-dim",
+    "why": "The general regular-local global-dimension bound is the algebraic input expressly invoked by Stacks 0AWX; this trace-formula unit has no such generic commutative-algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-projective-dimension-ext-characterization",
+    "why": "The generic resolution/Ext characterization converts the bound into Ext vanishing, precisely as in 0AWX; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-enough-injectives",
+    "why": "The generic module-category abelian and enough-injectives theorem supplies the hypotheses for constructing the resolution; it is not a geometric change of route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Only clause (1), existence of a nonnegative injective resolution in a category with enough injectives, is used; it is a generic homological tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ext-via-injective-resolution",
+    "why": "The general Ext-as-cocycles-modulo-boundaries theorem provides the explicit correction in the final-kernel test, a generic homological tool absent from this unit."
+   },
+   {
+    "node": "lem-sf-baer-criterion",
+    "why": "The ideal-extension criterion for injectivity is the generic module-theoretic tool invoked at the end of Stacks 0A5T; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sf-baer-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-12a55b3dc",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-12a55b3dc (reviewer sub-agent of L); spot-checked: Read the item, all ten cited node statements, the report, and Stacks 0AWX (dualizing.tex l.3763), 0A5S/0A5T (more-algebra.tex l.17510/17530), 065R, 00O7 and 06XR. The delivery has one commit with two files. It creates no new nodes and leaves the statement, stmt_deps and blueprint unchanged. The statement is 0AWX's finite-injective-dimension conclusion in the 0A5S form; it is not weakened. Step 1 takes gl.dim ≤ d from regular-local-finite-gl-dim. Step 2 takes Ext^{≥d+1}(M,A)=0 for arbitrary M from the 065R node, the all-modules form, as A/T needs. Step 3 builds an exact injective resolution with I^{<0}=0 (enough-injectives + clause (1) of 013K) and sets J=ker ∂^d. Step 4 is a direct Baer test, which I checked line by line: the extension f, ∂^d f=hπ, h a (d+1)-cocycle, then the 06XR node with H^{d+1}=0 gives h=∂^d g, and v=f−gπ restricts to u on T. Edge cases T=0 and T=A hold. This correctly replaces 0A5T's distinguished-triangle argument. Step 5 applies the stated direction of the Baer node (0AVF). Step 6's truncation is a quasi-isomorphism: H^d=J/im ∂^{d-1}=0, with the d=0 and d=1 cases checked, and it is an iso in D(A) by the localization definition. Duplicate search over dag/nodes (0AWX, 0A5T, injective dimension, Gorenstein) found no node stating the item. The generic pbc/sf homological tools outside sk-i-curve-zero are declared in split_report.tool_uses, and I accept them. There is no cycle, no SGA, and the citer is unaffected."
  }
 }
