@@ -14,6 +14,8 @@ public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 import Sheaf.Paper.DetThmSfCtfStabilityInternalHom
 import Sheaf.SixFunctors.CtfStabilityDirectImages
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Restricted adjunctions on constructible finite-Tor complexes
@@ -54,6 +56,34 @@ def HasCompatibleRestriction
     ∀ (M : C') (N : D') (g : F'.obj M ⟶ N),
       iC.map (a'.homEquiv M N g) =
         a.homEquiv (iC.obj M) (iD.obj N) (eF.hom.app M ≫ iD.map g) ≫ eG.hom.app N
+
+/-- The Mathlib restriction has exactly the ambient Hom bijection. -/
+private theorem hasCompatibleRestriction_of_fullyFaithful
+    {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+    {C' : Type u₃} [Category.{v₃} C'] {D' : Type u₄} [Category.{v₄} D']
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    {iC : C' ⥤ C} {iD : D' ⥤ D}
+    (hiC : iC.FullyFaithful) (hiD : iD.FullyFaithful)
+    (F' : C' ⥤ D') (G' : D' ⥤ C')
+    (eF : iC ⋙ F ≅ F' ⋙ iD) (eG : iD ⋙ G ≅ G' ⋙ iC) :
+    a.HasCompatibleRestriction iC iD := by
+  refine ⟨F', G', eF, eG, a.restrictFullyFaithful hiC hiD eF eG, ?_⟩
+  intro M N g
+  rw [a.restrictFullyFaithful_homEquiv_apply hiC hiD eF eG,
+    hiC.map_preimage]
+  simp only [a.homEquiv_unit, Functor.map_comp, Category.assoc]
+
+/-- Restrict both functors by lifting their object maps to the full subcategories. -/
+private theorem hasCompatibleRestriction_of_preserves
+    {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    (hF : ∀ M, P M → Q (F.obj M)) (hG : ∀ N, Q N → P (G.obj N)) :
+    a.HasCompatibleRestriction P.ι Q.ι := by
+  exact hasCompatibleRestriction_of_fullyFaithful a P.fullyFaithfulι Q.fullyFaithfulι
+    (Q.lift (P.ι ⋙ F) (fun M ↦ hF M.obj M.property))
+    (P.lift (Q.ι ⋙ G) (fun N ↦ hG N.obj N.property))
+    (Iso.refl _) (Iso.refl _)
 
 end CategoryTheory.Adjunction
 
@@ -122,6 +152,51 @@ theorem constructibleFiniteTor_adjunctions
       (a : localizingLowerShriek Λ c.obj.obj h ⊣ G),
       a.HasCompatibleRestriction
         (constantModelFiniteTorToLocalizing Λ X) (constantModelFiniteTorToLocalizing Λ Y)) := by
-  sorry
+  have hs := constructibleFiniteTor_stability_direct_images ℓ k Λ _hΛ f
+  refine ⟨?_, ?_, ?_⟩
+  · exact Adjunction.hasCompatibleRestriction_of_preserves
+      (derivedUpperStarLowerStarAdjunction Λ f) _ _ hs.1 hs.2.2.2.1
+  · intro K
+    apply Adjunction.hasCompatibleRestriction_of_preserves
+    · intro M hM
+      exact hs.2.1 M K.obj hM K.property
+    · intro M hM
+      exact (internalHom_stability Λ ℓ k _hΛ K.obj M K.property hM).1
+  · have : CompactSpace Y :=
+      QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+    have : QuasiSeparatedSpace Y :=
+      quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+    let c₀ : Compactification.BoundaryCompactification f :=
+      ⟨⟨@HasCompactification.compactification X Y f
+        (HasCompactification.of_isOver (S := Spec (.of k)) f),
+        Compactification.quasiCompact_openImmersion _ inferInstance⟩⟩
+    obtain ⟨h₀, hX, hY, hdata⟩ :=
+      exists_localizingExceptionalAdjoint Λ ℓ k f c₀ _hΛ
+    obtain ⟨G, s, hG⟩ := hdata.2.2.2.2
+    obtain ⟨a₀, _⟩ := hG.2.2
+    let PX := constantModelBoundedConstructible Λ X ⊓ fun K ↦
+      DerivedCategory.finiteTorAmplitude _ K
+    let PY := constantModelBoundedConstructible Λ Y ⊓ fun K ↦
+      DerivedCategory.finiteTorAmplitude _ K
+    let iX := constantModelFiniteTorToLocalizing Λ X
+    let iY := constantModelFiniteTorToLocalizing Λ Y
+    let F₀ := localizingLowerShriek Λ c₀.obj.obj h₀
+    let F' := PY.lift (PX.ι ⋙ rightDerivedLowerShriekOfCompactification Λ c₀.obj.obj)
+      (fun M ↦ hs.2.2.2.2.1 M.obj M.property)
+    let G' := PX.lift (iY ⋙ G ⋙ (localizingClosureProEtale Λ X).ι)
+      (fun N ↦ hs.2.2.2.2.2 h₀ G a₀ N.obj N.property)
+    obtain ⟨φ, _⟩ := compactification_coherence_cocycle Λ ℓ _hΛ f
+    intro c
+    obtain ⟨h, _, _, _⟩ := exists_localizingExceptionalAdjoint Λ ℓ k f c _hΛ
+    let e : F₀ ≅ localizingLowerShriek Λ c.obj.obj h :=
+      NatIso.ofComponents
+        (fun M ↦ ObjectProperty.isoMk _ ((φ c₀ c).app M))
+        (fun g ↦ by
+          apply ObjectProperty.hom_ext
+          exact (φ c₀ c).hom.naturality g)
+    refine ⟨h, G, a₀.ofNatIsoLeft e, ?_⟩
+    exact Adjunction.hasCompatibleRestriction_of_fullyFaithful (a₀.ofNatIsoLeft e)
+      (ObjectProperty.fullyFaithfulιOfLE _) (ObjectProperty.fullyFaithfulιOfLE _)
+      F' G' (Functor.isoWhiskerLeft iX e.symm) (Iso.refl _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

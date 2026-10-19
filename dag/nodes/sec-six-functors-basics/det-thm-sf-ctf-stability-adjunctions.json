@@ -23,28 +23,49 @@
  ],
  "proof": [
   {
-   "text": "If $F:\\mathcal C\\rightleftarrows\\mathcal D:G$ is an adjunction and\n$\\mathcal C'\\subset\\mathcal C$, $\\mathcal D'\\subset\\mathcal D$ are full\nsubcategories with $F(\\mathcal C')\\subset\\mathcal D'$ and\n$G(\\mathcal D')\\subset\\mathcal C'$, then the natural bijections\n$\\Hom_{\\mathcal D}(FC,D)\\simeq\\Hom_{\\mathcal C}(C,GD)$ for $C\\in\\mathcal C'$,\n$D\\in\\mathcal D'$ are bijections of Hom sets of $\\mathcal D'$ and $\\mathcal C'$\nby fullness, so $F|_{\\mathcal C'}\\dashv G|_{\\mathcal D'}$, with the same unit and\ncounit. By [det-thm-sf-ctf-stability-direct-images] and\n[det-thm-sf-ctf-stability-internal-hom], $f^*$, $Rf_*$, $Rf_!$, $f^!$,\n$-\\otimes^{\\mathbf L}K$ and $\\cHom(K,-)$ preserve $\\Dctf$. The ambient derived pullback–pushforward adjunction is supplied by\n[def-sfb-module-derived-pushpull-adjunction] (its $Lf^*$ is the $f^*$ notation used here), and the ambient tensor–Hom adjunction is\nsupplied by [sk-def-sfb-derived-tensor-hom], as $K\\otimes^{\\mathbf L}_{\\Lambda_X}-\\dashv\\RHom_{\\Lambda_X}(K,-)$ with $\\cHom(K,-)=\\RHom_{\\Lambda_X}(K,-)$; since $\\Lambda_X$ is commutative, the termwise symmetry of $\\otimes_{\\Lambda_X}$ (with the Koszul sign) on a K-flat resolution of $K$ gives a natural isomorphism $M\\otimes^{\\mathbf L}K\\simeq K\\otimes^{\\mathbf L}M$, and composing the Hom bijections with it gives $-\\otimes^{\\mathbf L}K\\dashv\\cHom(K,-)$ on $D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$. Apply this to the\nambient adjunctions $f^*\\dashv Rf_*$ and $-\\otimes^{\\mathbf L}K\\dashv\\cHom(K,-)$\non $D(-_{\\mathrm{proét}},\\Lambda)$, and to $Rf_!\\dashv f^!$ on the localizing\ncategories $\\Loc(\\Dctf(-,\\Lambda))$, which contain $\\Dctf(-,\\Lambda)$ as a full\nsubcategory.",
+   "text": "For fully faithful inclusions iC and iD and comparison isomorphisms for proposed restricted functors, use Mathlib Adjunction.restrictFullyFaithful. Its restrictFullyFaithful_homEquiv_apply formula, fully faithful map_preimage, homEquiv_unit, map_comp and associativity give exactly the equation in HasCompatibleRestriction. When both object properties are preserved, construct the restricted functors with ObjectProperty.lift and take identity comparison isomorphisms. These two elementary categorical steps are proved as private helpers in the item module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pullback and direct-image preservation clauses of [det-thm-sf-ctf-stability-direct-images] to the ambient adjunction [def-sfb-module-derived-pushpull-adjunction], and use the preceding full-subcategory restriction construction. This gives clause 1, including the ambient Hom bijections.",
    "uses": [
     "det-thm-sf-ctf-stability-direct-images",
-    "det-thm-sf-ctf-stability-internal-hom",
-    "def-sfb-module-derived-pushpull-adjunction",
+    "def-sfb-module-derived-pushpull-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K in Dctf, transport the tensor-Hom adjunction [sk-def-sfb-derived-tensor-hom] along the Koszul-signed tensorLeftIsoTensorRight of the derived braided category. Its left adjoint sends M to M tensor K. The tensor clause of [det-thm-sf-ctf-stability-direct-images] and the first clause of [det-thm-sf-ctf-stability-internal-hom] prove preservation by both functors. Apply the same restriction construction for clause 2.",
+   "uses": [
     "sk-def-sfb-derived-tensor-hom",
-    "sk-prop-sf-existence"
+    "det-thm-sf-ctf-stability-direct-images",
+    "det-thm-sf-ctf-stability-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let c0 be the compactification explicitly used by [det-thm-sf-ctf-stability-direct-images]. Apply [sk-prop-sf-existence] at c0 to obtain h0 and an adjunction F0 left adjoint to G on the localizing closures. Its Dctf preservation is given by the last two clauses of the direct-image stability theorem. Lift F0 and G to Dctf. For any boundary compactification c, [sk-prop-sf-existence] supplies its preservation witness h. The natural comparison of [det-sf-comp-coherence-cocycle] from c0 to c lifts to an isomorphism F0 isomorphic to Fc on the localizing closures, because their inclusions are fully faithful. Transport the ambient adjunction along this isomorphism, retaining G. Use the canonical small functors, the inverse left comparison whiskered with the Dctf inclusion, and the identity right comparison in restrictFullyFaithful. Its Hom formula proves clause 3. Compactness and quasi-separatedness of Y follow from its standing finite-type separated structure morphism to the field.",
+   "uses": [
+    "sk-prop-sf-existence",
+    "det-thm-sf-ctf-stability-direct-images",
+    "det-sf-comp-coherence-cocycle"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "det-thm-sf-ctf-stability-direct-images",
-  "det-thm-sf-ctf-stability-internal-hom",
   "def-sfb-module-derived-pushpull-adjunction",
   "sk-def-sfb-derived-tensor-hom",
-  "sk-prop-sf-existence"
+  "det-thm-sf-ctf-stability-internal-hom",
+  "sk-prop-sf-existence",
+  "det-sf-comp-coherence-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-adjunctions.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, implemented using Adjunction.restrictFullyFaithful; arbitrary compactifications compared using det-sf-comp-coherence-cocycle"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -134,5 +155,15 @@
   "group": "Q14",
   "result": "fix",
   "note": "Statement matches node/source verbatim; hypotheses = standing setting + exists_localizingExceptionalAdjoint binders, nothing stronger; clause 1 derivedUpperStarLowerStarAdjunction restricted Dctf(Y)->Dctf(X); clause 2 derivedTensorHomAdjunction.ofNatIsoLeft(tensorLeftIsoTensorRight, real Koszul DerivedCategory.braidedCategory) gives -⊗K ⊣ RHom(K,-) for all K in Dctf(X); clause 3 asserts existence of h,G,a : localizingLowerShriek ⊣ G for every BoundaryCompactification (wide subcategory = all compactifications) with compatible restriction; HasCompatibleRestriction is non-vacuous (forces preservation, fixes Hom bijection); edge cases and universes fine; recorded statement verbatim; dep nodes unchanged. Finding H4: helper CondensedRing.constantModelFiniteTorToLocalizing duplicates landed AlgebraicGeometry.ProEtale.constantModelFiniteTorToLocalizing (Sheaf.Paper.RationalExceptionalRestriction, sk-thm-restriction): same type and body. Fix: copy deleted, that module imported (no cycle), statement text unchanged and verbatim, lean-record drops the helper and adds note, report appended. nt_compile --json: delivered clean 37.4 s once, timed out at 60 s under load on rerun; fixed file clean twice (54.4 s, 49.1 s); both near the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261019T154004-L-3024005",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
