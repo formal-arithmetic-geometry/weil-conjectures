@@ -9,9 +9,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Preadditive.Projective.Basic
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtale.Projective
-import Mathlib.CategoryTheory.Yoneda
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
+import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
@@ -77,7 +78,52 @@ theorem proetale_weakContractible_equivalences
         (φ : F ⟶ (ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f)) [Epi φ],
       ∃ s : (ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f) ⟶ F,
         s ≫ φ = 𝟙 _) := by
-  sorry
+  let J := ProEt.topology X
+  constructor
+  · constructor
+    · intro hsplit
+      constructor
+      intro F G y φ hφ
+      have : Sheaf.IsLocallySurjective φ :=
+        (Sheaf.isLocallySurjective_iff_epi φ).2 hφ
+      have : Epi (Limits.pullback.snd φ y) := by
+        apply (Sheaf.isLocallySurjective_iff_epi _).1
+        constructor
+        intro V t
+        apply J.superset_covering _ (Presheaf.imageSieve_mem J φ.hom (y.hom.app _ t))
+        intro U g hg
+        obtain ⟨a, ha⟩ := hg
+        let ev := sheafToPresheaf J (Type (u + 1)) ⋙
+          (CategoryTheory.evaluation X.ProEtᵒᵖ (Type (u + 1))).obj (op U)
+        have hpb := (IsPullback.of_hasPullback φ y).map ev
+        obtain ⟨z, _, hz⟩ := Limits.Types.exists_of_isPullback hpb a
+          (((J.uliftYoneda.obj W).obj.map g.op) t) (by
+            change φ.hom.app _ a = y.hom.app _ (((J.uliftYoneda.obj W).obj.map g.op) t)
+            rw [ha]
+            exact (ConcreteCategory.congr_hom (y.hom.naturality g.op) t).symm)
+        exact ⟨z, hz⟩
+      obtain ⟨s, hs⟩ := hsplit _ (Limits.pullback.snd φ y)
+      refine ⟨s ≫ Limits.pullback.fst φ y, ?_⟩
+      rw [Category.assoc, Limits.pullback.condition, ← Category.assoc, hs, Category.id_comp]
+    · intro hP F φ hφ
+      have := hP
+      exact Projective.factors (𝟙 _) φ
+  · constructor
+    · constructor
+      · intro hP F G φ hφ y
+        have := hP
+        obtain ⟨s, hs⟩ := Projective.factors (J.uliftYonedaEquiv.symm y) φ
+        refine ⟨J.uliftYonedaEquiv s, ?_⟩
+        rw [← J.uliftYonedaEquiv_comp, hs, Equiv.apply_symm_apply]
+      · intro hEval
+        constructor
+        intro F G y φ hφ
+        obtain ⟨a, ha⟩ := hEval F G φ (J.uliftYonedaEquiv y)
+        refine ⟨J.uliftYonedaEquiv.symm a, ?_⟩
+        apply J.uliftYonedaEquiv.injective
+        rw [J.uliftYonedaEquiv_comp, Equiv.apply_symm_apply, ha]
+    · intro D _ _ f _
+      exact (proetale_wContractible_projective X D f).1
 
 end AlgebraicGeometry.Scheme
 
