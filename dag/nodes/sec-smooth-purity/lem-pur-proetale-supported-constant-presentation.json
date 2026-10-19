@@ -23,75 +23,67 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pur-proetale-finite-constant-sections] for $X$ and $Z$. The direct-image definition gives $(i_*A_Z)(V)=A_Z(V_Z)$, where $V_Z=V\\times_X Z$. The specified $\\rho$ is restriction of functions: restriction $C(|V|,A)\\to C(|V_Z|,A)$ is a ring map natural in $V$, and it sends each constant $a$ to that same constant. The two maps from the constant presheaf therefore agree, and uniqueness for its sheafification [def-weil-pbc-sheafification] identifies them on $A_X$. Put $P=P_{A_U}$, the extension presheaf in [def-weil-extension-by-zero], and denote its sheafification unit by $\\eta:P\\to j_!A_U$. Its canonical map $b:P\\to A_X$ is the identity under the specified coefficient restriction when $V$ factors through $U$, and is zero otherwise. Its sheafified map is the counit $\\epsilon$. Since $V_Z$ is empty whenever $V$ factors through $U$, $\\rho b=0$; uniqueness in module sheafification [def-weil-presheaf-modules-sheafification] gives $\\rho\\epsilon=0$.",
+   "text": "Construct the fixed-scalar module sheaf of continuous functions to the discrete ring ULift A. The continuous-function sheaf theorem for the fpqc topology restricts to the pro-etale site. The constant-function map is locally surjective on its open fibres; it is locally injective on nonempty objects, and the empty cover treats the empty object. Local bijectivity and sheafification identify the constant module with this sheaf. Uniqueness of sheafification identifies the specified closed constant restriction with precomposition by the pullback projection.",
    "uses": [
-    "lem-pur-proetale-finite-constant-sections",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Bhatt--Scholze Lemma 4.2.12; Mathlib continuousMapPresheaf and locally bijective sheafification criteria."
+   }
+  },
+  {
+   "text": "The open restriction of a closed direct image is zero because the two ranges are disjoint. Under the open extension/restriction adjunction the fixed-scalar counit followed by closed restriction is therefore zero. Transport through the intrinsic coefficient equivalence and the normalized rank-one comparisons gives epsilon followed by rho equals zero.",
+   "uses": [
+    "def-weil-extension-by-zero",
     "def-weil-proetale-module-direct-image",
-    "def-weil-pbc-sheafification",
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Canonical maps of Tag 09AH (lemma-ses-associated-to-open); finite-constant maps identified by the sheafification universal property."
-   }
-  },
-  {
-   "text": "Let $V\\to X$ be affine and $s\\in A_Z(V_Z)$. By [lem-weil-pbc-closed-immersion-base-change], $V_Z\\hookrightarrow V$ is closed. By [lem-weil-pbc-affine-scheme-qcqs], $|V|$ is quasi-compact; its closed subspace $|V_Z|$ is therefore quasi-compact. The finite-section node identifies $s$ with a continuous function to finite discrete $A$. Its nonempty fibres $C_a$ form a finite clopen partition of $|V_Z|$, and each $C_a$ is quasi-compact. For each $a$ choose an open $W_a\\subset V$ with $W_a\\cap V_Z=C_a$ using the subspace topology. Choose affine neighbourhoods inside $W_a$ of the points of $C_a$ and retain finitely many covering $C_a$. Do this for every $a$. Their union $O$ covers $V_Z$. The closed subset $V\\setminus O$ is quasi-compact and lies in $V_U$, so finitely many affine opens contained in $V_U$ cover it. All these affine opens together cover $V$. On each member chosen inside $W_a$ the constant $a$ lifts $s$; on a member contained in $V_U$ the target has no points, so zero lifts $s$. This is a finite Zariski affine cover, hence a pro-etale cover by [def-weil-pbc-proetale-site] and the open-object localization of [lem-weil-proetale-weakly-etale-localization]. General $V$ is first covered by affine opens. Thus $\\rho$ is locally surjective. No covering of $V_Z$ is lifted, and $V_U$ need not be quasi-compact.",
-   "uses": [
-    "lem-pur-proetale-finite-constant-sections",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Agent finite-coefficient replacement for Tag 09AH: finite Zariski cover of an affine object; no application of the quasi-compact-open localization theorem."
-   }
-  },
-  {
-   "text": "Let $K=\\ker\\rho$, computed sectionwise by [def-weil-sheaf-of-modules-category]. For $g\\in K(V)$, the finite-section node gives a continuous function $g:|V|\\to A$ vanishing on $V_Z$. Put $D=g^{-1}(A\\setminus\\{0\\})$ and $E=g^{-1}(\\{0\\})$. These are disjoint clopen subsets covering $V$, and $D$ factors through $U$: it has no point over $Z$, and factorization through an open subscheme is the open-localization assertion of [lem-weil-proetale-weakly-etale-localization]. Their open subschemes give a pro-etale cover, including when one is empty. On $D$, send $g|_D\\in P(D)=A_U(D)$ to $\\eta(g|_D)$ in $j_!A_U(D)$; on $E$ take zero. The sheaf axiom glues these uniquely because the overlap is empty. Call the resulting section $q_V(g)$. The clopen subsets pull back to the corresponding subsets for a restricted section, so uniqueness of gluing proves naturality in $V$. Addition and scalar-linearity hold after intersecting the two-piece covers of the sections in question: on a part where a section can be nonzero the object factors through $U$ and the formula is the linear map $\\eta$; on the part where all input sections are zero both sides are zero. Thus $q:K\\to j_!A_U$ is a module-sheaf morphism.",
-   "uses": [
-    "lem-pur-proetale-finite-constant-sections",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Agent kernel calculation for the finite constant sheaf: clopen nonzero locus and sheaf gluing, replacing the w-contractible kernel calculation in Tag 09AH."
-   }
-  },
-  {
-   "text": "Write $\\kappa:K\\hookrightarrow A_X$ for the kernel inclusion. Step 1 factors $\\epsilon$ uniquely as $\\kappa h$ for $h:j_!A_U\\to K$. On the cover $(D,E)$ of Step 3, $\\epsilon q$ is respectively $g$ and zero, hence $\\epsilon q=\\kappa$. Since $\\kappa$ is monic, $hq=1_K$. To prove $qh=1_{j_!A_U}$, precompose with $\\eta:P\\to j_!A_U$. If $V$ factors through $U$, the formula of Step 3 agrees with $\\eta$ on every section of $P(V)$, checked on its nonzero and zero clopen loci. If $V$ does not factor through $U$, $P(V)=0$, so agreement is automatic. Thus $(qh)\\eta=\\eta$. The universal property in [def-weil-presheaf-modules-sheafification] gives $qh=1_{j_!A_U}$. Consequently $h$ is an isomorphism and $\\epsilon$ identifies $j_!A_U$ with $\\ker\\rho$; in particular $\\epsilon$ is monic. This argument uses no claim that a section of a sheafification already comes from a section of its presheaf.",
-   "uses": [
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Module-sheafification universal property applied to the explicit clopen kernel map of Step 3."
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Milne Section 9, proof of Theorem 9.4; the complementary-range vanishing theorem in LowerShriek.Open.Complement."
    }
   },
   {
-   "text": "Step 2 makes $\\rho$ epic: if two module-sheaf morphisms from $i_*A_Z$ agree after $\\rho$, their values on any section agree on a cover where that section lifts, hence agree by the sheaf axiom. Step 1 gives the zero composite, and Step 4 identifies its kernel with the image of $\\epsilon$. By [def-weil-pbc-exact-sequence], this is the asserted exact sequence. In an abelian category the epic map with that kernel is its cokernel, so $\\rho$ is the stated cokernel of $\\epsilon$. Module-linearity follows from pointwise ring operations and the direct-image action in [def-weil-proetale-module-direct-image].",
+   "text": "For a section on the closed pullback, every point in that closed subspace has an ambient open neighbourhood on which the section is constant: extend its open fibre by the subspace topology. Outside the closed image use its open complement and zero. These neighbourhoods cover the ambient object and are a Zariski, hence pro-etale, cover. Thus restriction of functions is locally surjective. The comparison from Step 1 and coefficient realization transport this to epimorphic rho. This works directly on arbitrary site objects without an affine or finite subcover argument.",
    "uses": [
-    "def-weil-pbc-exact-sequence",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-module-direct-image"
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Abelian-category conclusion corresponding to Tag 09AH, applied only after the finite-coefficient argument above."
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Milne Section 9, proof of Theorem 9.4; agent-written ambient-open version of the finite-cover argument."
+   }
+  },
+  {
+   "text": "The fixed-scalar constant open map is the continuous sheafification comparison and is an isomorphism. Its adjoint counit is monic by the existing open-extension monicity criterion and becomes invertible on restriction to the open. A section of the kernel of closed restriction, expressed as a continuous function by Step 1, vanishes on the closed pullback. Cover the ambient object by its open fibres. On a zero fibre lift by zero. A nonzero fibre has no point over the closed subscheme: otherwise surjectivity of the scheme pullback onto pairs of matching points contradicts vanishing. It therefore factors through the complementary open, where the counit is invertible, and the section lifts. The counit-to-kernel factor is thus locally surjective and monic, hence an isomorphism. Transport the resulting limit kernel fork through intrinsic coefficient realization and the source, middle and target comparison isomorphisms.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Milne Section 9 and the clopen-fibre kernel calculation of Stacks Tag 09AH; open-extension monicity and localization are already proved in the source library."
+   }
+  },
+  {
+   "text": "An epimorphism in an abelian category is the cokernel of its kernel. Apply Abelian.epiIsCokernelOfKernel to the kernel fork of Step 4 and the epimorphism of Step 3, with the zero composite of Step 2. This gives exactly the stated IsColimit cofork, with all original definitions and hypotheses unchanged.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Mathlib CategoryTheory.Abelian.epiIsCokernelOfKernel; Milne Section 9, proof of Theorem 9.4."
    }
   }
  ],
@@ -100,18 +92,13 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sheafification",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-module-direct-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pur-proetale-finite-constant-sections",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-proetale-weakly-etale-localization"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 4.2.12 supplies the finite constant section model through the new node. Zariski-local surjectivity and the explicit kernel/sheafification argument are agent-written; Stacks proetale.tex Tag 09AH is only the quasi-compact-open comparison model."
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, proof of Theorem 9.4; R3 formalization of the continuous-function and open-fibre argument, using existing Mathlib/source-library sheafification, open-extension monicity, complement vanishing and abelian cokernel lemmas."
  },
  "mathlib_searches": [
   {
@@ -198,9 +185,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -232,5 +217,15 @@
   "by": "Q13",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T122633-L-478222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
