@@ -10,9 +10,91 @@
  "stmt_deps": [
   "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-restricted-series-gauss-completion] with $n=s,s+1$. Thus $A$ and $D$ are complete, their norms satisfy the strong triangle inequality and submultiplicativity, and $D$ is isometrically the restricted series $\\sum a_iX^i$ over $A$. Let $E=A[X]_{<d}$, meaning the polynomials [def-weil-polynomial-ring] supported in $0,\\ldots,d-1$, with the maximum coefficient norm. For $d=0$ set $E=\\{0\\}$. Coefficientwise limits make $E=A^d$ complete, and its inclusion in $D$ is isometric. Put $p=X^d+\\sum_{i<d}a_iX^i$ and $e=g-p$. Then $\\|p\\|=1$ and $c=\\|e\\|=\\sup_{i>d}\\|a_i\\|<1$, with $c=0$ when $e=0$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Setup: Gauss completion and regrouping, then the polynomial part and small upper tail. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "First divide only polynomials by $p$, using the finite-support definition [def-weil-polynomial-ring]. Induct on the degree $N$ of a polynomial $b$. If $b=0$ or $N<d$, take quotient $0$ and remainder $b$. Otherwise let $\\beta$ be its leading coefficient and replace $b$ by $b'=b-\\beta X^{N-d}p$, whose degree is smaller than $N$. The norm estimates in step 1 give $\\|b'\\|\\le\\|b\\|$, because $\\|p\\|=1$ and $\\|\\beta X^{N-d}\\|\\le\\|b\\|$. An inductively constructed pair $v',t'$ for $b'$ gives $v=v'+\\beta X^{N-d}$ and $t=t'$, both of norm at most $\\|b\\|$. Uniqueness is a coefficient calculation: for nonzero polynomial $v$, monicity gives $\\deg(pv)=d+\\deg v$, which cannot equal a polynomial in $E$. Subtract two decompositions. Write $Q(b),R(b)$ for this unique pair; uniqueness also proves additivity and $A$-linearity. If $d=0$, $p=1$, and the formulas are $Q(b)=b$, $R(b)=0$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Elementary finite descending-degree division algorithm with its coefficient norm bound. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "Extend these particular polynomial operators explicitly. For $b=\\sum b_iX^i\\in D$, set $b^{(N)}=\\sum_{i=0}^Nb_iX^i$. Regrouping in [lem-trf-restricted-series-gauss-completion] gives $\\|b-b^{(N)}\\|\\to0$. Additivity and step 2 give $\\|Q(b^{(M)})-Q(b^{(N)})\\|,\\|R(b^{(M)})-R(b^{(N)})\\|\\le\\|b^{(M)}-b^{(N)}\\|$. Completeness of $D$ and $E$ therefore defines limits $Q_0(b),R_0(b)$. The same estimate shows independence of any polynomial approximating sequence, additivity, $A$-linearity and $\\|Q_0(b)\\|,\\|R_0(b)\\|\\le\\|b\\|$. Passing to the limit in $b^{(N)}=pQ(b^{(N)})+R(b^{(N)})$ gives $b=pQ_0(b)+R_0(b)$; multiplication by fixed $p$ is continuous since $\\|p(x-y)\\|\\le\\|x-y\\|$. Also, for $v\\in D$ and $t\\in E$, the polynomial identities $Q(pv^{(N)}+t)=v^{(N)}$ and $R(pv^{(N)}+t)=t$ pass to the limit, so $Q_0(pv+t)=v$ and $R_0(pv+t)=t$. In particular $Q_0(X^d)=1$ and $Q_0(t)=0$ for $t\\in E$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Construct the bounded division operators from X-truncations and complete coefficient limits; verify both inverse identities. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "For the given $h$, set $h_0=h$ and, successively, $v_j=Q_0(h_j)$, $t_j=R_0(h_j)$, $h_{j+1}=-ev_j$. From step 3, $h_j=gv_j+t_j+h_{j+1}$. Induction gives $\\|h_j\\|\\le c^j\\|h\\|$ and $\\|v_j\\|,\\|t_j\\|\\le c^j\\|h\\|$. If $c=0$, all terms after $j=0$ vanish; otherwise $0<c<1$ and $c^j\\to0$. For $M\\ge N$, the strong triangle inequality bounds the norm of $\\sum_{j=N}^Mv_j$, and likewise of $\\sum_{j=N}^Mt_j$, by $c^N\\|h\\|$. Hence the sums converge in $D$ and $E$ by [lem-trf-restricted-series-gauss-completion] and the finite-coordinate completeness of step 1. Denote them by $q$ and $r$. Every partial sum has norm at most $\\|h\\|$, and this bound passes to its limit. Summing the displayed recursion through $j=N$ gives $h=g\\sum_{j=0}^Nv_j+\\sum_{j=0}^Nt_j+h_{N+1}$. The last term tends to zero. Continuity of multiplication by $g$, using $\\|g(x-y)\\|\\le\\|g\\|\\|x-y\\|$, gives $h=gq+r$ and the claimed norm bounds.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Contracting correction for the small upper tail, with explicit finite-sum identity and convergence estimates. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "For uniqueness, subtract two decompositions and write $0=gv+t=pv+t+ev$ with $v\\in D$, $t\\in E$. Apply the additive operator $Q_0$ and the identity $Q_0(pv+t)=v$ from step 3. It follows that $v=-Q_0(ev)$ and $\\|v\\|\\le c\\|v\\|$. Since $0\\le c<1$ and norms are nonnegative real numbers, $\\|v\\|=0$, hence $v=0$ and then $t=0$. This applies to arbitrary decompositions, without assuming any norm bounds on them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Elementary uniqueness from the strict contraction inequality already established. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "Apply the division just proved to $X^d$, whose norm is $1$. Write $X^d=bg+r_*$ with $r_*\\in E$ and $\\|b\\|,\\|r_*\\|\\le1$. Applying $Q_0$ gives $1=b+Q_0(eb)$, because $g=p+e$ and $Q_0(r_*)=0$. Thus $\\|1-b\\|\\le c<1$. Set $z=1-b$. To check invertibility explicitly, the finite sums $S_N=\\sum_{k=0}^Nz^k$ satisfy $\\|S_M-S_N\\|\\le\\|z\\|^{N+1}$ for $M>N$ and $\\|S_N\\|\\le1$. By [lem-trf-restricted-series-gauss-completion] they converge to $S\\in D$ of norm at most $1$ (for $z=0$ take $S=1$). The finite identities $(1-z)S_N=S_N(1-z)=1-z^{N+1}$ pass to the limit by the product norm bound. Therefore $bS=Sb=1$. Put $w=X^d-r_*$ and $u=S=b^{-1}$; then $bg=w$, so $g=uw$. The polynomial $w$ is monic of degree $d$, with lower coefficient norms at most $1$, and $\\|u\\|\\le1$ and $\\|u^{-1}\\|=\\|b\\|\\le1$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Preparation from the division of X^d; the near-identity quotient is inverted by explicit geometric sums. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  },
+  {
+   "text": "When $d=0$, $E=\\{0\\}$ throughout: the division remainder is zero, the prepared polynomial in step 6 is $X^0-0=1$, and $g=u$ is a unit with the stated bounds. When $h=0$, the construction has every $h_j,v_j,t_j$ zero, so $q=r=0$. When $s=0$, all coefficient limits occur in $A=F$ and the same argument applies. If the upper tail is zero, the correction in step 4 stops after its first term. Thus none of these edge cases uses a positive-degree, positive-tail or additional-variable assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Elementary edge cases of the explicit construction. Agent reconstruction: the BGR book is WANTED and no precise theorem number is claimed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+  "place": "Agent reconstruction of norm-controlled Weierstrass division by bounded polynomial division, Gauss-completion limits and an explicit contracting tail correction. The BGR source is WANTED, not read locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +137,45 @@
    "results": "{\"t\": \"2026-10-18T23:12:51Z\", \"tool\": \"grep\", \"query\": \"distinguished|Weierstrass\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match: the hits are formal power series over adically complete local rings or elliptic curves. MvPowerSeries.Restricted defines the restricted subring but has no norm-controlled analytic division theorem; formal adic division is not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "weierstrassDiv|exists_isWeierstrassDivision",
+   "results": "{\"t\": \"2026-10-19T00:12:08Z\", \"tool\": \"grep\", \"query\": \"weierstrassDiv|exists_isWeierstrassDivision\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\"], \"digest\": \"db0ebbb9b53a97b0\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: PowerSeries.WeierstrassPreparation treats formal series over adically complete coefficient rings, with divisor order modulo an ideal; it does not state analytic restricted-series division, upper-tail smallness, or the Gauss-norm bounds required here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra distinguished series norm bounded Weierstrass division and preparation",
+   "results": "{\"t\": \"2026-10-19T00:12:09Z\", \"tool\": \"leansearch\", \"query\": \"Tate algebra distinguished series norm bounded Weierstrass division and preparation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.term_/ʷ_\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivisionAt.add\"], \"digest\": \"ba15e1d075fccaac\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: PowerSeries.WeierstrassPreparation treats formal series over adically complete coefficient rings, with divisor order modulo an ideal; it does not state analytic restricted-series division, upper-tail smallness, or the Gauss-norm bounds required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weierstrassDiv\"",
+   "results": "{\"t\": \"2026-10-19T00:12:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"weierstrassDiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.IsWeierstrassDivisorAt.mod\"], \"digest\": \"e75b94a31d6da983\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: PowerSeries.WeierstrassPreparation treats formal series over adically complete coefficient rings, with divisor order modulo an ideal; it does not state analytic restricted-series division, upper-tail smallness, or the Gauss-norm bounds required here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weierstrass division preparation in a Tate algebra with quotient remainder Gauss norm at most the dividend norm",
+   "results": "{\"t\": \"2026-10-19T00:12:10Z\", \"tool\": \"leanfinder\", \"query\": \"Weierstrass division preparation in a Tate algebra with quotient remainder Gauss norm at most the dividend norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassMod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\"], \"digest\": \"0ca65a2ffe96476e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: PowerSeries.WeierstrassPreparation treats formal series over adically complete coefficient rings, with divisor order modulo an ideal; it does not state analytic restricted-series division, upper-tail smallness, or the Gauss-norm bounds required here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Division by a distinguished restricted power series over a nonarchimedean Banach coefficient algebra with a unique bounded polynomial remainder",
+   "results": "{\"t\": \"2026-10-19T00:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"Division by a distinguished restricted power series over a nonarchimedean Banach coefficient algebra with a unique bounded polynomial remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\"], \"digest\": \"54e77a2c39be7266\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: PowerSeries.WeierstrassPreparation treats formal series over adically complete coefficient rings, with divisor order modulo an ideal; it does not state analytic restricted-series division, upper-tail smallness, or the Gauss-norm bounds required here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affinoid-polynomial-closed-point-comparison",
@@ -93,5 +210,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-tate-weierstrass-norm-division",
+  "worker": "stage1",
+  "group": "Q115",
+  "summary": "Kept the complete analytic statement unchanged. No project Lean attachment was found. Added one statement-only Gauss-completion/regrouping prerequisite, then constructed bounded polynomial division, its completed operators, a contracting correction for the upper tail, uniqueness and preparation. Checked all finite-sum limits and degree-zero cases. BGR is absent; the proof is explicitly agent-written and the source remains WANTED.",
+  "blueprint": "Historical supporting analytic prerequisite of lem-trf-local-term-locality through lem-trf-affinoid-polynomial-closed-point-comparison; realizes that latter split's norm-controlled Weierstrass invocation. It neither changes nor replaces any step of the current contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-c0cb37b67",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-c0cb37b67 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The item statement is unchanged; its hypotheses are a_d=1, lower coefficients of norm ≤1 and upper tail <1. Its proof is an agent reconstruction because BGR is absent from literature/; this is marked honestly and listed as WANTED, and there is no SGA or Stacks citation. I checked all seven steps line by line. Step 2: polynomial division with ‖b-βX^{N-d}p‖≤‖b‖, and uniqueness from monicity. Step 3: Q_0 and R_0 extended by X-truncation Cauchy estimates; Q_0(pv+t)=v comes from the approximants pv^(N)+t. Step 4: the sign in h_{j+1}=-e v_j is right, the bounds are c^j‖h‖ and the telescoping identity is exact. Step 5: uniqueness from ‖v‖≤c‖v‖. Step 6: ‖1-b‖≤c, b is inverted by a geometric series and w=X^d-r_* is monic. Step 7: the edge cases d=0, h=0, s=0 and e=0 hold. I tested the statement on Q_p with g=X+pX^2 (u=1+pX, w=X) and with d=0. The new node lem-trf-restricted-series-gauss-completion (Gauss norm axioms, completeness, truncation density, isometric regrouping of one variable) is true, including for n=0 and for a trivial absolute value. It is statement-only and self-contained, cites def-weil-field and def-trf-restricted-series-presentation, and has the right blueprint from and via fields; same_as=[] after a blueprint grep. It is not a clause of the item. My DAG grep found no duplicate: def-trf-restricted-series-presentation is a definition only, lem-wf-nonarchimedean-series-substitution, lem-trf-valuation-grauert-remmert-powerbounded and lem-per-distinguished-polynomial-quotient are different facts, and citing the parent would be circular. The parent lem-trf-affinoid-polynomial-closed-point-comparison uses the item in steps 1, 3, 7 and 9, and each use meets the hypotheses. Advisory: the item's statement uses 'field' without def-weil-field in stmt_deps, inherited from base. It sits on the historical Temkin route below sk-i-curve-zero, also inherited from base, and has no tool_uses."
  }
 }

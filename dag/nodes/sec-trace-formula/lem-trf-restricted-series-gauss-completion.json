@@ -1,0 +1,92 @@
+{
+ "id": "lem-trf-restricted-series-gauss-completion",
+ "kind": "statement",
+ "title": "Gauss-norm completeness and variable regrouping of restricted series",
+ "statement": "Let $F$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value, complete for $d(x,y)=|x-y|$. For $n\\ge0$, let $D_n=F\\langle T_1,\\ldots,T_n\\rangle$ be the restricted-series subring of [def-trf-restricted-series-presentation]: its elements are coefficient families $f=\\sum_{\\nu\\in\\mathbf N^n}c_\\nu T^\\nu$ for which, for each $\\epsilon>0$, only finitely many $\\nu$ have $|c_\\nu|\\ge\\epsilon$; addition is coefficientwise and multiplication is the finite Cauchy product in each coefficient. Put $\\|f\\|=\\sup_\\nu|c_\\nu|$. This is a finite-valued norm, $\\|f\\|=0$ exactly when $f=0$, $\\|1\\|=1$, $\\|-f\\|=\\|f\\|$, $\\|f+g\\|\\le\\max(\\|f\\|,\\|g\\|)$ and $\\|fg\\|\\le\\|f\\|\\|g\\|$. The metric $\\|f-g\\|$ on $D_n$ is complete, and the finite truncations $\\sum_{\\nu_1+\\cdots+\\nu_n\\le N}c_\\nu T^\\nu$ converge to $f$ in this metric. For $s\\ge0$, grouping coefficients by the last variable $X$ identifies $D_{s+1}$, as a ring and isometrically, with the series $\\sum_{i\\ge0}a_iX^i$ with $a_i\\in D_s$ and $\\|a_i\\|\\to0$, equipped with coefficientwise addition, Cauchy product and norm $\\sup_i\\|a_i\\|$. Here $D_0=F$, and the identification preserves constants and multiplication by $X$.",
+ "source": {
+  "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+  "place": "Basic Gauss-norm properties, completeness and regrouping of strictly convergent series. WANTED: the BGR book is not present locally; this is a descriptive location, not a verified theorem or page number."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CompleteSpace|NormedRing|IsUltrametricDist|dense|gaussNorm",
+   "results": "{\"t\": \"2026-10-19T00:11:19Z\", \"tool\": \"grep\", \"query\": \"CompleteSpace|NormedRing|IsUltrametricDist|dense|gaussNorm\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\"], \"digest\": \"cb197087cdb29203\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted power series over a complete nonarchimedean field form a complete normed algebra for the Gauss norm with dense polynomials and isometric regrouping of variables",
+   "results": "{\"t\": \"2026-10-19T00:11:20Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted power series over a complete nonarchimedean field form a complete normed algebra for the Gauss norm with dense polynomials and isometric regrouping of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.WithPiTopology.instCompleteSpace\", \"MvPowerSeries.WithPiTopology.instCompleteSpace\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"IsNonarchimedeanLocalField.instCompleteSpace\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instUniformSpaceRatFuncAdicCompl\", \"instNonarchimedeanRingCompletion\"], \"digest\": \"05bfe1de641f7978\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Gauss norm completion of multivariate polynomials over a complete ultrametric field is the ring of restricted power series",
+   "results": "{\"t\": \"2026-10-19T00:12:09Z\", \"tool\": \"leansearch\", \"query\": \"The Gauss norm completion of multivariate polynomials over a complete ultrametric field is the ring of restricted power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.gaussNorm\", \"MvPowerSeries.WithPiTopology.denseRange_toMvPowerSeries\", \"PowerSeries.IsRestricted\", \"Polynomial.gaussNorm_coe_powerSeries\", \"MvPolynomial.toMvPowerSeries_isDenseInducing\", \"PowerSeries.gaussNorm_monomial\", \"PowerSeries.gaussNorm_eq_zero_iff\", \"PowerSeries.WithPiTopology.instCompleteSpace\"], \"digest\": \"a5f388673f4d4d48\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\"",
+   "results": "{\"t\": \"2026-10-19T00:12:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"gaussNorm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.HasGaussNorm\", \"MvPowerSeries.gaussNorm\", \"MvPowerSeries.AchievesGaussNorm\", \"MvPowerSeries.gaussNorm_nonneg\", \"MvPowerSeries.gaussNorm_zero\", \"MvPowerSeries.gaussNorm_neg\", \"MvPowerSeries.gaussNorm_eq_zero_iff\", \"MvPowerSeries.gaussNorm_add_le_max\"], \"digest\": \"0dbc0cc868afe6f0\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Tate algebra of restricted convergent power series is a Banach algebra and grouping one variable gives the iterated restricted series algebra",
+   "results": "{\"t\": \"2026-10-19T00:12:11Z\", \"tool\": \"leanfinder\", \"query\": \"A Tate algebra of restricted convergent power series is a Banach algebra and grouping one variable gives the iterated restricted series algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"MvPowerSeries.WithPiTopology.instCompleteSpace\", \"LaurentSeries.instAlgebraPowerSeries\", \"PowerSeries.WithPiTopology.instIsTopologicalRing\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.LaurentSeriesPkg\"], \"digest\": \"aea30de056bd6e51\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-weierstrass-norm-division",
+  "date": "2026-10-19",
+  "group": "Q115"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic prerequisite of the former completed-local-ring comparison beneath lem-trf-local-term-locality, not a replacement for the current contracting-correspondence route: the Gauss-norm restricted-series ring used in Weierstrass division, via the norm-controlled division step of lem-trf-affinoid-polynomial-closed-point-comparison.",
+   "via": [
+    "lem-trf-tate-weierstrass-norm-division",
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-trf-valuation-rank-one-formal-comparison",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
