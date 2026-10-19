@@ -67,13 +67,14 @@
    }
   },
   {
-   "text": "To verify that it is the stated canonical map which is invertible, put $L=\\varprojlim_nM_n$, the inverse limit of [def-pur-sheaf-inverse-limit] (reindex its positive integers by $r=n+1$). A map into $P$ is killed by $1-T$ precisely when its coordinates $u_n$ satisfy $u_n=t_nu_{n+1}$ for all $n$; the universal properties of product, kernel and inverse limit therefore identify $L$ with $\\ker(1-T)$, with its natural inclusion into $P$. By the cone convention in [det-pe-milnor-sequence] and the cone and shift formulas of [def-weil-abstract-derived-category], $\\operatorname{Cone}(1-T)[-1]$ has $P$ in degrees $0,1$ and differential $-(1-T)$; multiplying its degree-one term by $-1$ gives the isomorphic two-term complex $C=[P\\xrightarrow{1-T}P]$. The kernel inclusion in degree zero and zero in every other degree define the canonical chain map $i\\colon L[0]\\to C$, since $(1-T)i^0=0$. On $H^0$ it is the identity of $L=\\ker(1-T)$; in degree one both sides vanish by step 4, and in all other degrees both sides vanish because of their degrees. Let $j\\colon C\\to\\operatorname{Cone}(1-T)[-1]$ have degree-zero component $1$ and degree-one component $-1$. It is a chain isomorphism since $-(1-T)\\circ 1=(-1)\\circ(1-T)$. Thus $j\\circ i$ is the canonical comparison to the stated cone model and is a quasi-isomorphism. By the definition of the derived category as localization at quasi-isomorphisms [def-weil-abstract-derived-category], its image is the claimed isomorphism.",
+   "text": "Identify the inverse limit with the kernel of 1-T by product and limit universal properties. The single-complex functor preserves products and limits, so the tuple of actual limit projections remains a kernel in cochain complexes. Its target endomorphism is epic: it is conjugate under the product comparison isomorphism to the single-complex image of the already epic sheaf endomorphism. Apply lem-weil-degreewise-epi-kernel-cocone-qis. Its two projection identities identify its comparison with the existing milnorLimitComparison, whose first component is the tuple of limit projections and whose second component is zero. Thus this particular canonical comparison is a quasi-isomorphism, and localization makes it an isomorphism.",
    "uses": [
     "det-pe-milnor-sequence",
     "def-weil-abstract-derived-category",
-    "def-pur-sheaf-inverse-limit"
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
     "place": "last sentence: the kernel inclusion into the two-term complex is a quasi-isomorphism"
@@ -86,12 +87,13 @@
   "det-pe-sections-conservative",
   "det-pe-milnor-sequence",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-inverse-limit"
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
-  "place": "entire proof, expanded into five steps; module evaluation argument in step 1"
+  "place": "The same five-step blueprint proof; the final kernel/cone comparison uses the proved generic degreewise-epimorphism kernel comparison, with its projection identities checked against the existing canonical map (V5)."
  },
  "mathlib_searches": [
   {
@@ -229,5 +231,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261019T034325-L-421291",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
