@@ -14,9 +14,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!+# A parameter identifying a local curve's principal localization with its total fractions
 
@@ -69,6 +67,81 @@ theorem exists_parameter_principal_total_fractions
         (IsLocalization.Away.liftAlgHom (S := Localization.Away f)
           (f := Algebra.ofId R (FractionRing R)) f
           (IsLocalization.map_units (FractionRing R) ⟨f, hf⟩)) := by
-  sorry
+  classical
+  have hmheight : (maximalIdeal R).height = 1 := by
+    have h := maximalIdeal_height_eq_ringKrullDim (R := R)
+    rw [hdim] at h
+    exact WithBot.coe_injective h
+  have hprime (p : Ideal R) [p.IsPrime] (hne : p ≠ maximalIdeal R) :
+      p ∈ minimalPrimes R := by
+    rw [← Ideal.height_eq_zero_iff]
+    have hlt := Ideal.height_strict_mono_of_isPrime_of_isPrime
+      (lt_of_le_of_ne (le_maximalIdeal (Ideal.IsPrime.ne_top inferInstance)) hne)
+    rw [hmheight, Order.lt_one_iff] at hlt
+    exact hlt
+  have hmnot : maximalIdeal R ∉ minimalPrimes R := by
+    rw [← Ideal.height_eq_zero_iff, hmheight]
+    exact one_ne_zero
+  obtain ⟨s, hs, hcard⟩ :=
+    Ideal.exists_finset_card_eq_height_of_isNoetherianRing (maximalIdeal R)
+  have hcard' : s.card = 1 := by
+    rw [hmheight] at hcard
+    exact_mod_cast hcard
+  obtain ⟨f, rfl⟩ := Finset.card_eq_one.mp hcard'
+  simp only [Finset.coe_singleton] at hs
+  have hfmem : f ∈ maximalIdeal R := hs.le (Ideal.subset_span (by simp))
+  have hrad : (Ideal.span ({f} : Set R)).radical = maximalIdeal R := by
+    rw [Ideal.radical_eq_sInf]
+    apply le_antisymm
+    · exact sInf_le ⟨hs.le, inferInstance⟩
+    · refine le_sInf fun p ⟨hsp, hp⟩ ↦ ?_
+      have := hp
+      exact hs.2 ⟨hp, hsp⟩ (le_maximalIdeal hp.ne_top)
+  have hfavoid : ∀ p ∈ minimalPrimes R, f ∉ p := by
+    intro p hp hfp
+    have := hp.isPrime
+    have hle : maximalIdeal R ≤ p := by
+      rw [← hrad]
+      exact hp.isPrime.radical_le_iff.mpr ((Ideal.span_singleton_le_iff_mem p).mpr hfp)
+    have heq := le_antisymm hle (le_maximalIdeal hp.isPrime.ne_top)
+    exact hmnot (heq.symm ▸ hp)
+  have hfreg : f ∈ nonZeroDivisors R := by
+    rw [mem_nonZeroDivisors_iff_right]
+    intro a ha
+    by_contra hane
+    have hfm : f ∈ ⋃ p ∈ (⊥ : Ideal R).minimalPrimes, (p : Set R) := by
+      rw [Ideal.iUnion_minimalPrimes]
+      exact ⟨a, by simpa using hane, by simpa [mul_comm] using ha⟩
+    have hex : ∃ p ∈ minimalPrimes R, f ∈ p := by
+      simpa only [Set.mem_iUnion, SetLike.mem_coe, exists_prop] using hfm
+    obtain ⟨p, hp, hfp⟩ := hex
+    exact hfavoid p hp hfp
+  refine ⟨f, hfreg, hfmem, hfavoid, hrad, ?_⟩
+  have hden (s : R) (hs : s ∈ nonZeroDivisors R) : ∃ n : ℕ, s ∣ f ^ n := by
+    have hfrad : f ∈ (Ideal.span ({s} : Set R)).radical := by
+      rw [Ideal.radical_eq_sInf]
+      refine Ideal.mem_sInf.mpr fun p ⟨hsp, hp⟩ ↦ ?_
+      have := hp
+      by_cases heq : p = maximalIdeal R
+      · simpa [heq] using hfmem
+      · have hpmin := hprime p heq
+        exact False.elim
+          (notMem_nonZeroDivisors_of_mem_mem_minimalPrimes
+            (hsp (Ideal.subset_span (Set.mem_singleton s))) hpmin hs)
+    obtain ⟨n, hn⟩ := hfrad
+    exact ⟨n, Ideal.mem_span_singleton.mp hn⟩
+  let : IsLocalization (nonZeroDivisors R) (Localization.Away f) :=
+    IsLocalization.of_le_of_exists_dvd (Submonoid.powers f) (nonZeroDivisors R)
+      (Submonoid.powers_le.mpr hfreg) (fun s hs ↦ by
+        obtain ⟨n, hn⟩ := hden s hs
+        exact ⟨f ^ n, ⟨n, rfl⟩, hn⟩)
+  apply IsLocalization.bijective (nonZeroDivisors R)
+    (IsLocalization.Away.liftAlgHom (S := Localization.Away f)
+      (f := Algebra.ofId R (FractionRing R)) f
+      (IsLocalization.map_units (FractionRing R) ⟨f, hfreg⟩)).toRingHom
+  ext r
+  exact (IsLocalization.Away.liftAlgHom (S := Localization.Away f)
+    (f := Algebra.ofId R (FractionRing R)) f
+    (IsLocalization.map_units (FractionRing R) ⟨f, hfreg⟩)).commutes r
 
 end IsLocalRing
