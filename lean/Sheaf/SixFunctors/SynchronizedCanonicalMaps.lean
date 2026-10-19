@@ -20,8 +20,8 @@ for arbitrary arrows or for independently chosen canonical maps at the two famil
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
@@ -34,6 +34,8 @@ variable (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o
   {B : Scheme.{u}} {I : Type u} {X : I → Over B}
   (M : ∀ i, System l E (X i).left) (K : ∀ i, Integral l E (X i).left)
   (MNew : ∀ i, System l E (X i).left) (KNew : ∀ i, Integral l E (X i).left)
+
+attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
 
 /-- One canonical isomorphism constructor at two families.
 Source: blueprint Step 2 (blueprint: def-pur-synchronized-canonical-maps). -/
@@ -354,6 +356,84 @@ inductive SynchronizedPair : {W : Over B} → (e t : Expression B I X W) →
       ((calculus l E W.left).systemClosed.tensor.map (Prod.mkHom s₁New s₂New))
       ((integralCompletedTensor l E W.left).map (Prod.mkHom r₁New r₂New))
 
+private theorem synchronizedIsoComponents {W : Over B} {e t : Expression B I X W}
+    {s : e.systemObj l E o M ≅ t.systemObj l E o M}
+    {r : e.ringedObj l E d K ≅ t.ringedObj l E d K}
+    {sNew : e.systemObj l E o MNew ≅ t.systemObj l E o MNew}
+    {rNew : e.ringedObj l E d KNew ≅ t.ringedObj l E d KNew}
+    (g : SynchronizedIso l E o c a d b M K MNew KNew e t s r sNew rNew) :
+    CanonicalIsoPair l E o c a d b M K e t s r ∧
+      CanonicalIsoPair l E o c a d b MNew KNew e t sNew rNew := by
+  cases g with
+  | pullComp => exact ⟨.pullComp .., .pullComp ..⟩
+  | pushComp => exact ⟨.pushComp .., .pushComp ..⟩
+  | openComp => exact ⟨.openComp .., .openComp ..⟩
+  | tensorAssoc => exact ⟨.tensorAssoc .., .tensorAssoc ..⟩
+  | tensorPull => exact ⟨.tensorPull .., .tensorPull ..⟩
+  | beta => exact ⟨.beta .., .beta ..⟩
+  | clopen => exact ⟨.clopen .., .clopen ..⟩
+  | supportExpansion => exact ⟨.supportExpansion .., .supportExpansion ..⟩
+  | openProjection => exact ⟨.openProjection .., .openProjection ..⟩
+
+private theorem synchronizedBasicComponents {W : Over B} {e t : Expression B I X W}
+    {s : e.systemObj l E o M ⟶ t.systemObj l E o M}
+    {r : e.ringedObj l E d K ⟶ t.ringedObj l E d K}
+    {sNew : e.systemObj l E o MNew ⟶ t.systemObj l E o MNew}
+    {rNew : e.ringedObj l E d KNew ⟶ t.ringedObj l E d KNew}
+    (g : SynchronizedBasic l E o c a bridge h d b q M K MNew KNew e t s r sNew rNew) :
+    BasicPair l E o c a bridge h d b q M K e t s r ∧
+      BasicPair l E o c a bridge h d b q MNew KNew e t sNew rNew := by
+  cases g with
+  | isoHom g =>
+    have hg := synchronizedIsoComponents l E o c a d b M K MNew KNew g
+    exact ⟨.isoHom hg.1, .isoHom hg.2⟩
+  | isoInv g =>
+    have hg := synchronizedIsoComponents l E o c a d b M K MNew KNew g
+    exact ⟨.isoInv hg.1, .isoInv hg.2⟩
+  | pullUnit => exact ⟨.pullUnit .., .pullUnit ..⟩
+  | pullCounit => exact ⟨.pullCounit .., .pullCounit ..⟩
+  | openUnit => exact ⟨.openUnit .., .openUnit ..⟩
+  | openCounit => exact ⟨.openCounit .., .openCounit ..⟩
+  | properOpen => exact ⟨.properOpen .., .properOpen ..⟩
+  | exchange => exact ⟨.exchange .., .exchange ..⟩
+  | projection => exact ⟨.projection .., .projection ..⟩
+  | compactExchange => exact ⟨.compactExchange .., .compactExchange ..⟩
+  | compactProjection => exact ⟨.compactProjection .., .compactProjection ..⟩
+
+private theorem canonicalIsoDiagonal {W : Over B} {e t : Expression B I X W}
+    {s : e.systemObj l E o M ≅ t.systemObj l E o M}
+    {r : e.ringedObj l E d K ≅ t.ringedObj l E d K}
+    (g : CanonicalIsoPair l E o c a d b M K e t s r) :
+    SynchronizedIso l E o c a d b M K M K e t s r s r := by
+  cases g with
+  | pullComp => exact .pullComp ..
+  | pushComp => exact .pushComp ..
+  | openComp => exact .openComp ..
+  | tensorAssoc => exact .tensorAssoc ..
+  | tensorPull => exact .tensorPull ..
+  | beta => exact .beta ..
+  | clopen => exact .clopen ..
+  | supportExpansion => exact .supportExpansion ..
+  | openProjection => exact .openProjection ..
+
+private theorem canonicalBasicDiagonal {W : Over B} {e t : Expression B I X W}
+    {s : e.systemObj l E o M ⟶ t.systemObj l E o M}
+    {r : e.ringedObj l E d K ⟶ t.ringedObj l E d K}
+    (g : BasicPair l E o c a bridge h d b q M K e t s r) :
+    SynchronizedBasic l E o c a bridge h d b q M K M K e t s r s r := by
+  cases g with
+  | isoHom g => exact .isoHom (canonicalIsoDiagonal l E o c a d b M K g)
+  | isoInv g => exact .isoInv (canonicalIsoDiagonal l E o c a d b M K g)
+  | pullUnit => exact .pullUnit ..
+  | pullCounit => exact .pullCounit ..
+  | openUnit => exact .openUnit ..
+  | openCounit => exact .openCounit ..
+  | properOpen => exact .properOpen ..
+  | exchange => exact .exchange ..
+  | projection => exact .projection ..
+  | compactExchange => exact .compactExchange ..
+  | compactProjection => exact .compactProjection ..
+
 /-- Each synchronized evaluation is one of the existing canonical pairs.
 Source: blueprint Step 2 (blueprint: def-pur-synchronized-canonical-maps).
 
@@ -373,7 +453,18 @@ theorem SynchronizedPair.components {W : Over B} {e t : Expression B I X W}
     (g : SynchronizedPair l E o c a bridge h d b q M K MNew KNew e t s r sNew rNew) :
     CanonicalPair l E o c a bridge h d b q M K e t s r ∧
       CanonicalPair l E o c a bridge h d b q MNew KNew e t sNew rNew := by
-  sorry
+  induction g with
+  | basic g he heNew =>
+    have hg := synchronizedBasicComponents l E o c a bridge h d b q M K MNew KNew g
+    exact ⟨.basic hg.1 he, .basic hg.2 heNew⟩
+  | identity e => exact ⟨.identity e, .identity e⟩
+  | comp gt ht htNew _ _ ih₁ ih₂ =>
+    exact ⟨.comp gt ht ih₁.1 ih₂.1, .comp gt htNew ih₁.2 ih₂.2⟩
+  | pull f _ ih => exact ⟨.pull f ih.1, .pull f ih.2⟩
+  | push f hf _ ih => exact ⟨.push f hf ih.1, .push f hf ih.2⟩
+  | shriek f hq _ ih => exact ⟨.shriek f hq ih.1, .shriek f hq ih.2⟩
+  | compactSupport f cf _ ih => exact ⟨.compactSupport f cf ih.1, .compactSupport f cf ih.2⟩
+  | tensor _ _ ih₁ ih₂ => exact ⟨.tensor ih₁.1 ih₂.1, .tensor ih₁.2 ih₂.2⟩
 
 /-- No canonical generator or finite context is lost by synchronization.
 Source: blueprint Step 2 (blueprint: def-pur-synchronized-canonical-maps).
@@ -389,7 +480,16 @@ theorem SynchronizedPair.diagonal {W : Over B} {e t : Expression B I X W}
       (t.evaluate (integralInterpretation l E)).obj K}
     (g : CanonicalPair l E o c a bridge h d b q M K e t s r) :
     SynchronizedPair l E o c a bridge h d b q M K M K e t s r s r := by
-  sorry
+  induction g with
+  | basic g he =>
+    exact .basic (canonicalBasicDiagonal l E o c a bridge h d b q M K g) he he
+  | identity e => exact .identity e
+  | comp gt ht _ _ ih₁ ih₂ => exact .comp gt ht ht ih₁ ih₂
+  | pull f _ ih => exact .pull f ih
+  | push f hf _ ih => exact .push f hf ih
+  | shriek f hq _ ih => exact .shriek f hq ih
+  | compactSupport f cf _ ih => exact .compactSupport f cf ih
+  | tensor _ _ ih₁ ih₂ => exact .tensor ih₁ ih₂
 
 end WeilConjectures.IntegralSystemRealization
 
