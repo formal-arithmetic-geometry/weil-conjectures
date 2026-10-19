@@ -17,69 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Fix an object $U$ of $\\mathcal C$ and a section $f\\in\\mathcal I(U)$. Restriction of internal Hom to the slice identifies $H(K,N)|_U$ with $R\\mathcal Hom_{\\mathcal O_U}(K|_U,N|_U)$, using the localized ringed site and the exact slice restriction.",
+   "text": "Fix U and f in I(U), and put A = O_U[1/f], B = K|_U, M = N|_U. Exact slice restriction identifies RHom(K,N)|_U with RHom(B,M). The small-site and independent-universe internal Hom implementations agree definitionally, using the same localized Hom complex and K-injective replacement.",
    "uses": [
     "def-pur-localized-ringed-site",
+    "def-pur-derived-internal-hom",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JB, lemma-restriction-RHom-to-U; Tag 03DH, section-localize"
-   }
+   "elementary": false
   },
   {
-   "text": "The tensor--internal-Hom adjunction on the slice gives a canonical isomorphism\n$$R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],R\\mathcal Hom_{\\mathcal O_U}(K|_U,N|_U))\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f]\\otimes^L_{\\mathcal O_U}K|_U,N|_U).$$\nThis is the currying identity for derived internal Hom, with the localization supplied by the section-localization definition.",
+   "text": "Use the closed symmetric monoidal structure on D(O_U). Put X = RHom(A,RHom(B,M)). Adjunction twice gives Hom(X,X) equivalent to Hom((X tensor^L A) tensor^L B,M). The associator, tensor of the symmetry of A and B, and the inverse associator identify this with Hom((X tensor^L B) tensor^L A,M). A third adjunction identifies it with Hom(X tensor^L B,RHom(A,M)). These are genuine Hom-set bijections, so no naturality or Yoneda construction is needed.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-pbc-ringed-site-section-localization",
-    "def-pur-derived-internal-hom"
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9, lemma-internal-hom; algebraization.tex Tag 0996"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $S=\\mathcal O_U[1/f]$. Derived extension of scalars along $\\mathcal O_U\\to S$ gives $K|_U\\otimes^L_{\\mathcal O_U}S\\in D(S)$ by [lem-pur-derived-change-of-rings]. Its underlying $\\mathcal O_U$-object identifies with $S\\otimes^L_{\\mathcal O_U}K|_U$: on a K-flat representative $P$ the tensor interchange is $p\\otimes s\\mapsto s\\otimes p$, with no sign since $S$ is in degree zero. Since $N$ is locally derived $\\mathcal I$-complete, its localization Hom vanishes: $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],N|_U)=0$. Apply [lem-sf-ringed-localization-rhom-orthogonality] on the slice to conclude\n$$R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f]\\otimes^L_{\\mathcal O_U}K|_U,N|_U)=0.$$",
-   "uses": [
-    "def-weil-pbc-locally-derived-ringed-ideal-complete",
-    "lem-sf-ringed-localization-rhom-orthogonality",
-    "def-weil-pbc-ringed-site-section-localization",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099A, lemma-derived-complete-internal-hom, proof; Tag 0997, lemma-hom-from-Af; sites-cohomology.tex Tag 06YY, lemma-derived-base-change (identity underlying topos, coefficient map O_U to S)"
-   }
-  },
-  {
-   "text": "Combining the slice restriction from Step 1, the currying isomorphism of Step 2, and the vanishing of Step 3 gives $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],H(K,N)|_U)=0$. Since this holds for every $U$ and every $f\\in\\mathcal I(U)$, the defining criterion says that $H(K,N)$ is locally derived $\\mathcal I$-complete.",
+   "text": "Completeness of N gives IsZero(RHom(A,M)). Hence every two arrows in the last Hom set are equal. Injectivity of the composite bijection shows that the identity of X equals its zero endomorphism; therefore X is a zero object. Apply the internal-Hom functor to the slice-restriction isomorphism and transport this vanishing. For every U and f in I(U) the localization Hom of RHom(K,N)|_U vanishes, precisely the defining local completeness condition.",
    "uses": [
     "def-weil-pbc-locally-derived-ringed-ideal-complete"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099A, lemma-derived-complete-internal-hom; Definition 0999"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
   "def-pur-localized-ringed-site",
-  "def-weil-pbc-locally-derived-ringed-ideal-complete",
-  "def-weil-pbc-ringed-site-section-localization",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-ringed-localization-rhom-orthogonality",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099A, lemma-derived-complete-internal-hom; proof via Tags 0996 and 0997 and the tensor--internal-Hom adjunction."
+  "place": "Tag 099A, lemma-derived-complete-internal-hom; shorter proof using tensor-Hom adjunction and symmetry from sites-cohomology.tex Tags 08J9 and 0FPT, and slice restriction 08JB."
  },
  "mathlib_searches": [
   {
@@ -180,5 +151,15 @@
   "group": "NO",
   "result": "pass",
   "note": "Compared every node clause with Stacks 099A/0999 and the Lean statement: small site in u, commutative O, ideal as monic ι (Mono matches the subsheaf; the completeness definition itself has no Mono), arbitrary K, complete N, conclusion is the same IsLocallyDerivedRingedIdealComplete applied to the recorded derivedInternalHomOfUniverses.{u,u,u,w} (same K-injective Hom-complex construction as the older derivedInternalHom used inside the definition; an rfl definitional-equality probe hit the 60 s limit, so that is not claimed); no extra hypotheses or universe restriction. lean.statement verbatim; only lean fields changed; the def-pur-localized-ringed-site §1(B) existing:true record matches Mathlib Over.lean:248,512 and PushforwardContinuous.lean:59-89. Docstrings carry source, blueprint and all four proof steps; sorry only (axioms include sorryAx); lines at most 91. nt_compile --json rc=0 (16.1 s, 10.7 s). Edge cases K/N=0, empty site, I=0, I=O fine. Notes: second reading was by the author, not another group worker, but is a real reading; EtaleDerivedScalarTensor proof import was the recorded change-of-rings module when delivered and re-exports the current one."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T093320-L-2294461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
