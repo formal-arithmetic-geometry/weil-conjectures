@@ -17165,3 +17165,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/D4/Sheaf.Paper.PbcQbarIdempotentComplete (stage 3; reviewer PASS; first push; landing 20261019T093327-L-2295731 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/D5/Sheaf.AlgebraicGeometry.EtaleNormalComponents (stage 3; reviewer PASS; first push; landing 20261019T093328-L-2295942 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/D5/Sheaf.AlgebraicGeometry.QcqsHigherDirectImage (stage 3; reviewer PASS; first push; landing 20261019T093329-L-2296168 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/D6/Sheaf.CategoryTheory.AbsoluteTraceExchange (stage 3; reviewer PASS; first push; landing 20261019T093331-L-2296385 (proof); batch 20261019T093237; modules 1; new nodes 0)

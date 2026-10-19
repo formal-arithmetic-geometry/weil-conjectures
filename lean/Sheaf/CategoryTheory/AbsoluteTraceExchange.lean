@@ -118,6 +118,105 @@ theorem absoluteTraceExchange
     (∀ (M : X) (W : Y) (h : W ⟶ R.obj (DX.obj (op M))),
       (absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm h =
         h ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M) := by
-  sorry
+  have htrace : PY.map (absoluteTraceExchangeTrace adjX adjY Ω κ) ≫
+      adjY.counit.app Ω = κ.hom.app (AX.obj Ω) ≫ adjX.counit.app Ω := by
+    exact (adjY.homEquiv _ Ω).symm_apply_apply _
+  have htranspose (M : X) (W : Y) (b : M ⊗ U.obj W ⟶ AX.obj Ω) :
+      adjY.homEquiv _ Ω
+        (PY.map ((β_ W (F.obj M)).hom ≫ (θ M W).hom) ≫
+          κ.hom.app (M ⊗ U.obj W) ≫ (adjX.homEquiv _ Ω).symm b) =
+        (β_ W (F.obj M)).hom ≫ (θ M W).hom ≫ F.map b ≫
+          absoluteTraceExchangeTrace adjX adjY Ω κ := by
+    apply (adjY.homEquiv _ Ω).symm.injective
+    simp only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit,
+      Functor.map_comp, Category.assoc, htrace]
+    have hn : PY.map (F.map b) ≫ κ.hom.app (AX.obj Ω) =
+        κ.hom.app (M ⊗ U.obj W) ≫ PX.map b := κ.hom.naturality b
+    rw [← Category.assoc (PY.map (F.map b)), hn, Category.assoc]
+  have hformula (M : X) (W : Y) (h : W ⟶ R.obj (DX.obj (op M))) :
+      eY W (F.obj M)
+        ((absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm h) =
+        (β_ W (F.obj M)).hom ≫ (θ M W).hom ≫
+          F.map ((β_ M (U.obj W)).hom ≫
+            eX (U.obj W) M ((adj.homEquiv _ _).symm h)) ≫
+          absoluteTraceExchangeTrace adjX adjY Ω κ := by
+    simpa only [absoluteTraceExchangeHomEquiv, Equiv.symm_trans_apply,
+      Equiv.trans_apply, Equiv.symm_symm, Equiv.apply_symm_apply,
+      Iso.homFromEquiv, Iso.homToEquiv, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+      Equiv.coe_fn_mk, Equiv.coe_fn_symm_mk, Category.assoc, Functor.map_comp] using
+      htranspose M W ((β_ M (U.obj W)).hom ≫
+        eX (U.obj W) M ((adj.homEquiv _ _).symm h))
+  have hhom (M : X) (W : Y) (h : W ⟶ R.obj (DX.obj (op M))) :
+      (absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm h =
+        h ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M := by
+    apply (eY W (F.obj M)).injective
+    rw [hformula, hY]
+    have heval := (eY _ _).apply_symm_apply
+      ((β_ (R.obj (DX.obj (op M))) (F.obj M)).hom ≫
+        (θ M (R.obj (DX.obj (op M)))).hom ≫
+        F.map (𝟙 M ⊗ₘ adj.counit.app (DX.obj (op M))) ≫
+        F.map ((β_ M (DX.obj (op M))).hom ≫ evX M) ≫
+        absoluteTraceExchangeTrace adjX adjY Ω κ)
+    rw [hY] at heval
+    change (absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M ⊗ₘ
+      𝟙 (F.obj M)) ≫ evY (F.obj M) = _ at heval
+    rw [← Category.id_comp (𝟙 (F.obj M)), ← tensorHom_comp_tensorHom,
+      Category.assoc, heval]
+    rw [hX, Adjunction.homEquiv_counit]
+    rw [← BraidedCategory.braiding_naturality_assoc]
+    have ht : (𝟙 M ⊗ₘ (U.map h ≫ adj.counit.app (DX.obj (op M)))) =
+        (𝟙 M ⊗ₘ U.map h) ≫ (𝟙 M ⊗ₘ adj.counit.app (DX.obj (op M))) := by
+      simp only [tensorHom_comp_tensorHom, Category.comp_id]
+    rw [ht]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [BraidedCategory.braiding_naturality_assoc]
+    rw [← Category.assoc (𝟙 (F.obj M) ⊗ₘ h), hθW]
+    simp only [Category.assoc]
+  have hb (M' M : X) (a : M' ⟶ M) (W : Y)
+      (h : W ⟶ R.obj (DX.obj (op M))) :
+      (β_ M' (U.obj W)).hom ≫
+          eX (U.obj W) M' ((adj.homEquiv _ _).symm (h ≫ R.map (DX.map a.op))) =
+        (a ⊗ₘ 𝟙 (U.obj W)) ≫ (β_ M (U.obj W)).hom ≫
+          eX (U.obj W) M ((adj.homEquiv _ _).symm h) := by
+    rw [adj.homEquiv_naturality_right_symm, hX, hX]
+    rw [← Category.comp_id (𝟙 M'), ← tensorHom_comp_tensorHom, Category.assoc,
+      hXM, tensorHom_comp_tensorHom_assoc]
+    rw [BraidedCategory.braiding_naturality_assoc]
+    rw [← BraidedCategory.braiding_naturality_assoc]
+    simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp, Category.comp_id]
+    rw [BraidedCategory.braiding_naturality_assoc]
+  have hnat (M' M : X) (a : M' ⟶ M) :
+      R.map (DX.map a.op) ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M' =
+        absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M ≫ DY.map (F.map a).op := by
+    let J := R.obj (DX.obj (op M))
+    apply (eY J (F.obj M')).injective
+    rw [← hhom, hformula, hY]
+    rw [← Category.comp_id (𝟙 (F.obj M')), ← tensorHom_comp_tensorHom,
+      Category.assoc, hYM, tensorHom_comp_tensorHom_assoc]
+    rw [Category.comp_id, Category.id_comp]
+    rw [← Category.id_comp
+      (absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M),
+      ← Category.comp_id (F.map a), ← tensorHom_comp_tensorHom,
+      Category.assoc, ← hY]
+    rw [← Category.id_comp
+      (absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M),
+      ← hhom, hformula]
+    rw [← Category.id_comp (R.map (DX.map a.op)), hb]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [BraidedCategory.braiding_naturality_assoc]
+    rw [← Category.assoc (F.map a ⊗ₘ 𝟙 J), hθM]
+    simp only [Category.assoc]
+    rfl
+  refine ⟨?_, hnat, hhom⟩
+  intro M
+  apply isIso_of_yoneda_map_bijective
+  intro W
+  have heq : (fun h : W ⟶ R.obj (DX.obj (op M)) ↦
+      h ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M) =
+      (absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm := by
+    funext h
+    exact (hhom M W h).symm
+  rw [heq]
+  exact (absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm.bijective
 
 end CategoryTheory
