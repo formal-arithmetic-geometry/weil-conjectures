@@ -18,28 +18,32 @@
  ],
  "proof": [
   {
-   "text": "For every $x\\in L$, the field $K(x)$ is finite over $K$ because $L/K$ is algebraic. Given finite subextensions $E_1,E_2\\subseteq L$, their compositum $E_1E_2$ is again finite over $K$ and contains both. Thus the finite subextensions form a filtered poset, and their union is $L$, so $L$ is their filtered colimit. Each finite subextension is separable because $L/K$ is separable; by [lem-weil-pbc-finite-separable-extension-etale], its affine scheme over $K$ is etale. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], an etale morphism in the sense of [def-weil-etale-morphism] is smooth [def-sbc-smooth-morphisms] (of relative dimension zero), so each stage is a smooth $K$-algebra. The same filtered system consequently exhibits $L$ as a filtered colimit of smooth $K$-algebras.",
+   "text": "Index by finite subsets s of L and take A(s) = K[s] as a subalgebra of L. Inclusions of finite subsets induce algebra inclusions. Finite unions are upper bounds, so the index poset is filtered. Each x lies in A({x}), so the supremum of the A(s) is L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a cocone, Subalgebra.iSupLift gives an algebra map on the supremum, identified with L. Its compatibility for any inclusion A(s) ≤ A(t) follows by mapping both stages to A(s ∪ t) and using cocone naturality. The iSupLift inclusion equation proves the cocone factorization; singleton stages prove uniqueness. This constructs the colimit presentation directly in CommAlgCat, with independent universes for K and L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Algebraicity implies each A(s) is a field (Subalgebra.isField_of_algebraic); integrality of its finite generating set implies Module.Finite K A(s) (Algebra.finite_adjoin_of_finite_of_isIntegral). Separability descends along A(s) → L (Algebra.IsSeparable.of_algHom). Apply lem-weil-pbc-finite-separable-extension-etale, then the Algebra.Etale-to-Algebra.Smooth instance of Mathlib.RingTheory.Etale.Basic. This is the affine smoothness notion of def-sbc-smooth-morphisms. Package the presentation and these properties as ObjectProperty.ind.",
    "uses": [
     "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-finite-separable-extension-etale",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+    "lem-weil-pbc-finite-separable-extension-etale"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
-    "place": "## Proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+  "lem-weil-pbc-finite-separable-extension-etale"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
-  "place": "## Proof"
+  "place": "## Proof; explicit finite-subset diagram and universal-property proof by M8, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -152,5 +156,15 @@
   "date": "2026-10-17",
   "existing": false,
   "fixed_by": "NT-stage2-cc-fba36dd8f"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261019T231243-L-566294",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
