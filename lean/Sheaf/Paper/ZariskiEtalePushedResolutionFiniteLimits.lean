@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ZariskiEtalePushedResolutionFiniteLimits
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.CategoryTheory.Sites.Continuous
-public import Mathlib.CategoryTheory.Sites.Pullback

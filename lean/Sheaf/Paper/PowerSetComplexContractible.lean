@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.PowerSetComplexContractible
-public import Mathlib.Algebra.Category.ModuleCat.Adjunctions

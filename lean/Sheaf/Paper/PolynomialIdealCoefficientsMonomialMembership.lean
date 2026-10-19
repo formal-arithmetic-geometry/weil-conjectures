@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.PolynomialIdealCoefficientsMonomialMembership
-public import Mathlib.RingTheory.Ideal.Operations
-public import Mathlib.Algebra.MvPolynomial.Basic

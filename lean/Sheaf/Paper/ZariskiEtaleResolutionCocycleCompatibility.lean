@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionCocycleCompatibility
-public import WeilConjectures.AlgebraicGeometry.ObjectCohomologyResolutionCocycleEquivalence

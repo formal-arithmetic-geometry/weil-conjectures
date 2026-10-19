@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck

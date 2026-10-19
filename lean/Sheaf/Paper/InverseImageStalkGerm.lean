@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk

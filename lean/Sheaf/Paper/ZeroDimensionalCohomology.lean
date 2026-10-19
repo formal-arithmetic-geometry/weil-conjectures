@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.Topology.KrullDimension

@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsComparisonMap
-public import WeilConjectures.AlgebraicGeometry.EtaleObjectCohomologyStalkComplex
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale

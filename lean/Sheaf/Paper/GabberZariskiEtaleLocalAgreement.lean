@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleLocalAgreement
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.Topology.Sheaves.Sheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

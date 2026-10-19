@@ -1,9 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FreeCechTupleBasis
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
-public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
-public import WeilConjectures.AlgebraicGeometry.PowerSetComplexContractible
-public import Mathlib.LinearAlgebra.DFinsupp

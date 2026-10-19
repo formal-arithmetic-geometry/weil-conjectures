@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleComparisonStalkInjective
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.Topology.Sheaves.Functors
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Mathlib.Topology.Sheaves.Stalks

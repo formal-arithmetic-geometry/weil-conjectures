@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
-public import Mathlib.CategoryTheory.Sites.Precoverage

@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SeparableResidueCotangentInjective
-public import Mathlib.RingTheory.Ideal.Cotangent
-public import Mathlib.RingTheory.Kaehler.Basic
-public import WeilConjectures.FieldTheory.SeparableExtension

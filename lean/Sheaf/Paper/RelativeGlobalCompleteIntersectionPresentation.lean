@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
-public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersection

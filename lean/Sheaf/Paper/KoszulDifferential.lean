@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
-public import Mathlib.LinearAlgebra.CliffordAlgebra.Contraction
-public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading

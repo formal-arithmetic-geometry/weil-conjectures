@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

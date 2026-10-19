@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.KoszulComplex
-public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
-public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-public import Mathlib.LinearAlgebra.TensorProduct.Map

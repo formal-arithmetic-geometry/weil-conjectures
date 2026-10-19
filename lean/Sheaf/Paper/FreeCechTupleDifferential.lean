@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FreeCechTupleDifferential
-public import WeilConjectures.AlgebraicGeometry.FreeCechTupleBasis
-public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
