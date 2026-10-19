@@ -18,9 +18,223 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The element $1/|H|$ has trace one. Apply [lem-per-trace-one-noetherian-invariant-finiteness] to $V$ and to $B$: $V$ is finite over $\\Lambda$, and $A_0=B^H$ is Noetherian. The ring $A_0$ is local: an invariant element outside $\\mathfrak m_B$ has invariant inverse. It is a normal domain: an element of $\\operatorname{Frac}(A_0)$ integral over $A_0$ lies in $B$ by normality of $B$, and is fixed by $H$, hence lies in $A_0$. Set $R_\\Lambda=\\Lambda[[t_1,\\ldots,t_r]]$. The formal-ring finiteness clause of [lem-per-finite-coefficient-henselian-cylinder], applied with $e=r-1$ and $T=t_r$, makes $V[[t]]$ finite over $R_\\Lambda$. Thus $B$ is finite over $R_\\Lambda$. This ring is Noetherian by [lem-weil-pbc-power-series-noetherian], so its submodule $A_0\\subset B$ is finite by [lem-weil-pbc-noetherian-submodule-finite].",
+   "uses": [
+    "lem-per-trace-one-noetherian-invariant-finiteness",
+    "lem-per-finite-coefficient-henselian-cylinder",
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.1--3.2.3: coefficient and invariant rings"
+   }
+  },
+  {
+   "text": "By [lem-per-noetherian-primary-decomposition], write each marking as a finite intersection of primary ideals $Q$. For $I_i=A_0$ use the empty intersection. Keep $Q=0$ separately; it already descends as the zero ideal of every model. For every remaining $Q$, [lem-per-normal-finite-primary-dichotomy] gives either $g_Q\\in Q\\cap R_\\Lambda$ with nonzero reduction modulo $\\mathfrak m_\\Lambda$, or, in the DVR case, $Q=P^{(n)}$ with $P$ a height-one prime containing a fixed uniformizer $\\pi\\in\\Lambda$. All its hypotheses were established in step 1. Call the first list the scalar-annihilated components and the second the vertical components.",
+   "uses": [
+    "lem-per-noetherian-primary-decomposition",
+    "lem-per-normal-finite-primary-dichotomy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.1--2.2.3 and 3.2.2--3.2.3"
+   }
+  },
+  {
+   "text": "Replace the ramification denominator $f$ by its norm $F_0=\\prod_{h\\in H}h(f)$. It lies in $R_\\Lambda$: fixed power series have fixed coefficients, and $H$ fixes all variables. Its reduction modulo $\\mathfrak m_V$ is a product of nonzero series, hence nonzero; since $\\mathfrak m_V\\cap\\Lambda=\\mathfrak m_\\Lambda$, its reduction over $\\Lambda$ is nonzero. Inverting $F_0$ also inverts $f$. Multiply $F_0$, all the finitely many $g_Q$, and $t_r$ to form $F\\in\\mathfrak m_{R_\\Lambda}$, still nonzero modulo $\\mathfrak m_\\Lambda$. Apply [lem-per-weierstrass-henselian-cylinder] to $F$. The shear substitutions $t_i\\mapsto t_i+t_r^{N_i}$ have coefficients in $\\Lambda$ and commute with $H$. Equivalently use their inverse to choose formal coordinates $u_i$, with $T=u_r$, in which $F$ is a unit times a distinguished polynomial $g\\in D[T]$ of positive degree, where $D=\\Lambda[[u_1,\\ldots,u_{r-1}]]$. Set $R=D[[T]]$ and $S=(D[T]_{(\\mathfrak m_D,T)})^h$. The cited node identifies $R$ with both completions of $S$.",
+   "uses": [
+    "lem-per-weierstrass-henselian-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.1--1.1.3, 2.2.3, 3.2.3"
+   }
+  },
+  {
+   "text": "Put $E=V[[u_1,\\ldots,u_{r-1}]]$, $S_V=(E[T]_{(\\mathfrak m_E,T)})^h$, and $R_V=E[[T]]$. Apply [lem-per-finite-coefficient-henselian-cylinder]: $S_V$ is finite local over $S$, $S$ is excellent, $(S_V,gS_V)$ is henselian, its $g$-adic completion is $R_V$, and $R\\otimes_S S_V\\cong R_V$. Each coefficient automorphism of $V$ extends to $S_V$ by the unique local henselian extension; this gives its $H$-action and fixes $S$ and $g$. The finite $R_V$-algebra $B$ is etale away from $g$, since $F$ is a multiple of $f$ and a unit times $g$. Apply [lem-per-elkik-finite-etale-away-completion] to the Noetherian henselian pair $(S_V,gS_V)$. Obtain a finite $S_V$-algebra $\\widetilde B$, etale away from $g$, with $R_V\\otimes_{S_V}\\widetilde B\\cong B$.",
+   "uses": [
+    "lem-per-finite-coefficient-henselian-cylinder",
+    "lem-per-elkik-finite-etale-away-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.2.4 and 3.2.3"
+   }
+  },
+  {
+   "text": "For $h\\in H$, twist the $S_V$-algebra structure on $\\widetilde B$ by $h^{-1}$. Its completed twist is the corresponding twist of $B$, and the given action map $h$ identifies this with $B$ as an algebra. Full faithfulness in [lem-per-elkik-finite-etale-away-completion] lifts this isomorphism uniquely to the twisted model. Its inverse lifts too, so it is an isomorphism. For $h,k$, the two lifts representing $hk$ and the composite of the lifts for $h$ and $k$ agree after completion; faithfulness makes them equal. The identity lifts to the identity. This constructs the required semilinear action on $\\widetilde B$ and makes the displayed completion isomorphism equivariant.",
+   "uses": [
+    "lem-per-elkik-finite-etale-away-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3: descent of the group action from the equivalence"
+   }
+  },
+  {
+   "text": "Set $A=\\widetilde B^H$. Since $\\widetilde B$ is finite over $S_V$ and $S_V$ is finite over the Noetherian ring $S$, [lem-weil-pbc-noetherian-submodule-finite] makes $A$ finite over $S$. Compute invariants as the kernel of $x\\mapsto(hx-x)_{h\\in H}$ from $\\widetilde B$ to the finite product of its copies, viewed as $S$-modules. The map $S\\to R$ is flat by step 3, so [lem-weil-pbc-flat-tensor-exact] identifies\n$$R\\otimes_S A=(R\\otimes_S\\widetilde B)^H=B^H=A_0,$$\nusing step 4. By [lem-weil-pbc-completion-finite-module-tensor] this tensor product is the maximal-ideal-of-$S$ completion of $A$. By [lem-weil-pbc-finite-over-henselian-local-product], $A$ is a finite product of henselian local rings. The completed product is the nonzero local ring $A_0$, so it has exactly one factor: every other factor would have a nonzero residue field and hence nonzero completion. Thus $A$ is local henselian, and the completion in question is also its maximal-ideal completion by [lem-weil-pbc-completion-finite-extension].",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3: the invariant model and its completion"
+   }
+  },
+  {
+   "text": "The ring $A$ is excellent by [lem-exc-finite-type-localization-excellent], since it is finite over the excellent ring $S$. It is Noetherian by the same excellent-ring convention [def-exc-excellent-ring]. By [lem-weil-pbc-local-completion-faithfully-flat] and [lem-weil-pbc-faithfully-flat-ideal-contraction], $A\\hookrightarrow\\widehat A=A_0$ and $bA_0\\cap A=bA$ for $b\\in A$. In particular $A$ is a domain. To check normality, write an element of its fraction field integral over $A$ as $x=a/b$. It lies in $A_0$ by normality of $A_0$; thus $a\\in bA_0\\cap A=bA$, and $x\\in A$. We may therefore apply the excellent henselian normal-domain completion input to $A$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3--3.2.4: normal henselian invariant model"
+   }
+  },
+  {
+   "text": "For a scalar-annihilated component $Q$, $g_Q$ divides $F$ in $R$, so $g$ annihilates $A_0/Q$. By [lem-per-distinguished-polynomial-quotient], $R/(g)=D[T]/(g)$ is finite over $D$ (the classes of $1,T,\\ldots,T^{\\deg g-1}$ generate it). Since $A_0$ is finite over $R$, $M=A_0/Q$ is finite over $D$, hence over $A$. Let $N$ be the image of $A$ in $M$. Maximal-ideal completion gives $M=N+\\mathfrak m_A M$, because $A\\to A_0$ is surjective modulo $\\mathfrak m_AA_0$. Therefore $\\mathfrak m_A(M/N)=M/N$. Apply [lem-weil-pbc-nakayama-jacobson] to the finite $A$-module $M/N$: it is zero. Thus $A\\to M$ is surjective. Put $K=\\ker(A\\to M)$.",
+   "uses": [
+    "lem-per-distinguished-polynomial-quotient",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.5--2.2.8 and 3.2.4: finite-quotient descent"
+   }
+  },
+  {
+   "text": "Here $M$ is $\\mathfrak m_D$-adically complete by [lem-weil-pbc-finite-module-complete-over-complete-noetherian]. Since $g$ annihilates $M$ and is distinguished, $T$ is nilpotent on $M/\\mathfrak m_D M$. Hence $M/\\mathfrak m_D M$ has finite length over $S$, and a power of $\\mathfrak m_S$ annihilates it. It follows that the $\\mathfrak m_D$-adic and $\\mathfrak m_S$-adic filtrations on $M$ are cofinal: for some $c$, $\\mathfrak m_S^{cn}M\\subseteq\\mathfrak m_D^nM\\subseteq\\mathfrak m_S^nM$. The maximal-ideal topology from the finite local extension $S\\to A$ is cofinal with the latter, as in [lem-weil-pbc-completion-finite-extension]. Thus $M$ is already its $\\mathfrak m_A$-adic completion. Apply [lem-weil-pbc-local-completion-quotient] to the surjection $A\\to M$: its completed kernel is $KA_0$, and its completed map is the original quotient $A_0\\to A_0/Q$. Consequently $KA_0=Q$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.6--2.2.8 and 3.2.4: equality of the completed ideal"
+   }
+  },
+  {
+   "text": "In the DVR case the vertical components have the form $Q=P^{(n)}$ with $P$ height one and $\\pi\\in P$. Such a $P$ is minimal over $\\pi A_0$: a prime strictly below it must be zero, which does not contain the nonzero element $\\pi$. Apply [lem-per-vertical-symbolic-powers-completion] to $A$, $a=\\pi$, and $\\widehat A=A_0$. Step 7 checked excellence, henselianity and normality, and step 1 checked normality of $A_0$; $\\pi$ is nonzero and lies in $\\mathfrak m_A$. We obtain $P=\\mathfrak p A_0$ and $\\mathfrak p^{(n)}A_0=P^{(n)}=Q$. Thus this component descends as $K=\\mathfrak p^{(n)}$.",
+   "uses": [
+    "lem-per-vertical-symbolic-powers-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.4: the vertical symbolic-power components"
+   }
+  },
+  {
+   "text": "For each original $I_i=\\bigcap_jQ_{ij}$, let $K_i=\\bigcap_jK_{ij}\\subset A$, using $K=0$ for the zero component and the empty intersection $A$ for the unit ideal. Extension commutes with these finite intersections: $\\bigcap_jK_{ij}$ is the kernel of $A\\to\\bigoplus_j A/K_{ij}$, and flat tensor exactness [lem-weil-pbc-flat-tensor-exact] identifies its extension to $A_0$ with the kernel of $A_0\\to\\bigoplus_j A_0/Q_{ij}$. Therefore $K_iA_0=I_i$. This is equality of ideals, including their nonreduced structures.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.1 and 3.2.4: reconstruct the original marking"
+   }
+  },
+  {
+   "text": "Use [lem-per-ordinary-henselian-pointed-neighbourhood-limit] for $D[T]$ at $\\mathfrak q=(\\mathfrak m_D,T)$, obtaining a henselian local colimit $H=\\varinjlim S_a$ with maximal ideal $\\mathfrak qH$. By [lem-per-pointed-etale-limit-henselization](1), $H$ is a henselization of $D[T]_{\\mathfrak q}$, so the uniqueness in [def-weil-pbc-henselization-at-prime] gives a unique local $D[T]_{\\mathfrak q}$-algebra isomorphism $H\\cong S$; we regard each $S_a$ as mapping to $S$ through it. Thus $S=\\varinjlim S_a$ with each $S_a$ etale of finite presentation over $D[T]$ and with a point $\\mathfrak q_a$ over $\\mathfrak q$ having the same residue field. Present the finite $S$-algebra $A$ by finitely many generators and relations, and each $K_i$ by finitely many elements; finiteness of these data follows from Noetherianity of $S,A$. Lift their coefficients to one stage using [lemma-nagata-filtered-colimit-finite-data]. This produces a finitely presented $S_a$-algebra $C_a$ and ideals $J_{i,a}$ with $C_a\\otimes_{S_a}S\\cong A$ carrying the ideals to $K_i$. Apply [lem-weil-pbc-colimit-finite-ring-map] to make $C_a$ finite over a later $S_a$.",
+   "uses": [
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "lem-per-pointed-etale-limit-henselization",
+    "def-weil-pbc-henselization-at-prime",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-colimit-finite-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.7 and 3.2.4: finite-presentation descent"
+   }
+  },
+  {
+   "text": "Fix this stage and write $C=C_a$, $J_i=J_{i,a}$. The map $C\\to A$ takes $\\mathfrak m_A$ back to a maximal ideal $\\mathfrak n$ above $\\mathfrak q_a$: $C/\\mathfrak n$ is an integral domain finite over the field $S_a/\\mathfrak q_a=D/\\mathfrak m_D$, hence is a field. In the limit, $S\\otimes_{S_a}C=A$ is local. Base changing its completion gives\n$$R\\otimes_{S_a}C=R\\otimes_S A=A_0.$$\nThe maximal-ideal completion of $(S_a)_{\\mathfrak q_a}$ is $R$: by [lem-per-pointed-etale-limit-henselization](3), applied to the system of step 12 at the stage $a$ (which still has colimit $S$ by step 12), $(S_a)_{\\mathfrak q_a}/\\mathfrak q_a^n\\to S/\\mathfrak m_S^n$ is an isomorphism for every $n$, compatibly with the maps from $S_a$; and [lem-per-weierstrass-henselian-cylinder] identifies the maximal-ideal completion of $S$ with $R$. By [lem-weil-pbc-completion-finite-extension], $R\\otimes_{S_a}C$ is the product of the completions at all primes over $\\mathfrak q_a$. It is nonzero local, so there is exactly one such prime and\n$$\\widehat{C_{\\mathfrak n}}\\cong A_0.$$\nThe isomorphism is induced by the specified structural maps, hence is a $D$-algebra isomorphism, and carries $J_i\\widehat{C_{\\mathfrak n}}$ onto $K_iA_0=I_i$.",
+   "uses": [
+    "lem-per-pointed-etale-limit-henselization",
+    "lem-per-weierstrass-henselian-cylinder",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.7 and 3.2.4: the pointed local completion"
+   }
+  },
+  {
+   "text": "Finally $D[T]\\to S_a$ is etale of finite presentation and $S_a\\to C$ is finite. Thus $C$ is finite type over $D[T]$. For every prime $\\mathfrak p$ of $D[T]$, the fibre $S_a\\otimes_{D[T]}\\kappa(\\mathfrak p)$ is etale over $\\kappa(\\mathfrak p)$ by [lem-weil-pbc-etale-scheme-base-change], hence unramified by [def-weil-etale-morphism], so [lem-weil-pbc-unramified-algebra-over-field-product] makes it a finite product of finite separable field extensions of $\\kappa(\\mathfrak p)$; tensoring the finite $S_a$-module $C$ with this fibre gives a finite-dimensional algebra over that residue field. Its spectrum is finite, with finite residue-field extensions. This proves quasi-finiteness in the stated sense. The previous step already gives finiteness of $C/\\mathfrak n$ over $D/\\mathfrak m_D$. All maps restrict on $D$ to the chosen invariant formal-coordinate inclusion. The construction also applies when $s=0$, and when $r=1$ the smaller coefficient ring is simply $D=\\Lambda$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-unramified-algebra-over-field-product",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.7 and 3.2.4: quasi-finite pointed polynomial cylinder"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-trace-one-noetherian-invariant-finiteness",
+  "lem-per-finite-coefficient-henselian-cylinder",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-noetherian-primary-decomposition",
+  "lem-per-normal-finite-primary-dichotomy",
+  "lem-per-weierstrass-henselian-cylinder",
+  "lem-per-elkik-finite-etale-away-completion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-per-distinguished-polynomial-quotient",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-per-vertical-symbolic-powers-completion",
+  "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "lem-per-pointed-etale-limit-henselization",
+  "def-weil-pbc-henselization-at-prime",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO V 2.2.1--2.2.8 and 3.2.2--3.2.4; expanded action, invariants, Nakayama, symbolic powers and pointed finite-stage arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +263,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: returned declarations concern standard etale presentations, invariants, or completion terminology; none constructs this formal presentation or its marked algebraization. The complete returned types were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame semilinear finite algebra over formal power series which is etale away from a divisor algebraizes with arbitrary finitely many ideals over a polynomial cylinder",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.IsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that an algebra $ S $ over a commutative ring $ R $ is standard étale, meaning it is isomorphic to a localization of a polynomial ring over $ R $ modulo a monic polynomial whose derivativ\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePair.instAlgebraRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → Algebra R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the quotient ring $ P.\\\\text{Ring} $ inherits a canonical $ R $-algebra structure from the polynomial ring $ R[X,Y] $, induced b\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.instIsStandardEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.IsStandardEtale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ is a standard étale algebra over $ R $. This means it is isomorphic to a localiz\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"IsInvariant\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|algebrai[sz]ation|henseli.*cylinder|partial.*algebrai[sz]",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked partial algebraization of invariant rings finite over a power series ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"PowerSeries.fg_iff_of_isPrime\", \"module\": \"Mathlib.RingTheory.PowerSeries.Ideal\", \"type\": \": P.FG ↔ (P.map constantCoeff).FG\", \"doc\": \"For an ideal $ P $ in the ring of formal power series over a commutative ring $ R $, $ P $ is finitely generated if and only if the ideal generated by the constant terms of elements of $ P $ in $ R $ \"}\n  {\"name\": \"instIsIntegralMvPolynomial\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"{σ} : Algebra.IsIntegral (MvPolynomial σ R) (MvPolynomial σ S)\", \"doc\": \"Given a commutative semiring $ R $, a commutative semiring $ S $ equipped with an $ R $-algebra structure, and a type $ \\\\sigma $, the multivariate polynomial ring $ S[\\\\sigma] $ is integral over the mu\"}\n  {\"name\": \"PowerSeries.instIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Ideal\", \"type\": \"[IsNoetherianRing R] : IsNoetherianRing R⟦X⟧\", \"doc\": \"If $ R $ is a Noetherian ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a Noetherian ring. This means every ideal in $ R⟦X⟧ $ is finitely generated, inheriting th\"}\n  {\"name\": \"MvPolynomial.coeToMvPowerSeries.algHom\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Basic\", \"type\": \": MvPolynomial σ R →ₐ[R] MvPowerSeries σ A\", \"doc\": \"The canonical $ R $-algebra homomorphism from the multivariate polynomial ring $ R[\\\\sigma] $ to the multivariate power series ring $ A\\\\llbracket \\\\sigma \\\\rrbracket $, constructed by composing the ring \"}\n  {\"name\": \"Algebra.FinitePresentation.mvPolynomial_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"[FinitePresentation R A] (ι : Type v) [Finite ι] : FinitePresentation R (MvPolynomial ι A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative semiring $ R $, and $ \\\\iota $ is a finite type, then the multivariate polynomial ring $ R[\\\\iota] $ over $ A $ is also finitely presented ove\"}\n  {\"name\": \"PowerSeries.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsNoetherianRing k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a Noetherian ring, meaning every ideal in this ring is finitely generated.\"}\n  {\"name\": \"IsLocalization.Away.finitePresentation\", \"module\": \"Mathlib.RingTheory.Localization.Away.AdjoinRoot\", \"type\": \"(r : R) {S} [CommRing S] [Algebra R S] [IsLocalization.Away r S] : Algebra.FinitePresentation R S\", \"doc\": \"Let $ R $ be a commutative semiring and $ r $ an element of $ R $. If $ S $ is the localization of $ R $ at the submonoid generated by all powers of $ r $, then $ S $ is finitely presented as an $ R $\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete normal local ring finite over a formal power series coefficient ring with tame group action is a completion of a quasi finite algebra in one polynomial variable with marked ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.unique\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A},\\n  g.IsWeierstrassFactorization f h →\\n    ∀ (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n      f = g.weierstr\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then any Weierstra\"}\n  {\"name\": \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  g.IsWeierstrassFactorization (g.weierstrassDistinguished hg) (g.weierstrassUnit hg)\", \"doc\": \"Let $ A $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $. If the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero,\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient a = (Ideal.quotientMapₐ (Ideal.span {↑g}) (Polynomial.coeToPowerSeries.algHom A) ⋯) a\", \"doc\": \"For a commutative ring $ A $, a distinguished polynomial $ g $ at an ideal $ I $, and an element $ a $ in the quotient ring $ A[X]/(g) $, the algebra isomorphism $ H.\\\\text{algEquivQuotient} $ maps $ a\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-marked-algebraization",
@@ -79,5 +328,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-equivariant-marked-cylinder-algebraization",
+  "worker": "stage1",
+  "summary": "Retained the marked-cylinder statement, reused Weierstrass and Elkik, separated primary classification, finite coefficient comparison and vertical symbolic powers as statement-only inputs, and used a primary-decomposition Mathlib leaf. Expanded semilinear action descent, invariant completion, exact ideals, and pointed quasi-finite finite-stage model. Maintainer reader Q95 (2026-10-19): steps 12--13 now identify the pointed etale colimit with the henselization and the completion of the finite stage through the new statement-only node lem-per-pointed-etale-limit-henselization; step 14 cites base change of etale maps and the structure of unramified algebras over a field; generic off-unit tools declared.",
+  "blueprint": "Supports the IX 1.1 input in lem-per-artin-gabber-affine-curve: follows ILO V 2.2 and V 3.2 cited by the parent marked-algebraization node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "steps 6, 9, 13: completion of a finite algebra over a Noetherian local ring is the product of the local completions (Stacks 07N9); generic commutative algebra no node of sk-p-dl-a1-perverse gives"
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "step 7: a finite algebra over the excellent ring S is excellent; generic excellence permanence"
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "step 9: completion of a surjection of Noetherian local rings has kernel J times the completion; generic"
+   },
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "step 12: lift finitely many elements and relations to one stage of the filtered colimit; generic"
+   },
+   {
+    "node": "lem-weil-pbc-colimit-finite-ring-map",
+    "why": "step 12: finiteness of a finite-type map descends to a stage of the colimit (Stacks 07RG); generic"
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "step 6: a finite algebra over a henselian local ring is a product of henselian local rings; generic"
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "step 9: finite modules over a complete Noetherian ring are complete; generic"
+   },
+   {
+    "node": "lem-weil-pbc-unramified-algebra-over-field-product",
+    "why": "step 14: an unramified algebra over a field is a finite product of finite separable extensions (Stacks 02G7); generic"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-local-completion-quotient",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-unramified-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-943d37cfa",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-943d37cfa (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps and the 4 new nodes against ILO V 1.2.3-1.2.4, 2.2.1-2.2.8 and 3.2.1-3.2.4 (pp.64-68), Stacks 04GN/04GV/08HT and Mathlib Lasker.lean 37-40/296-300. The statement matches ILO V 3.2 and is unchanged. Edge cases checked: s=0, marking ideals 0 and A_0, r=1, and the field case with H trivial. Steps 1-11 are correct: trace-one finiteness, the norm F_0 nonzero mod m_Lambda, the H-equivariant Weierstrass shear, Elkik descent with the twisted-lift group laws, invariants via flat kernel, a single local factor, excellence/domain/normality via contraction, the Nakayama descent of scalar-annihilated components, m_D/m_S/m_A cofinality with completed kernel Q, vertical symbolic powers, and intersections. Faults fixed: (C3) step 12 identified the colimit H of lem-per-ordinary-henselian-pointed-neighbourhood-limit with S, but that node's statement never says H is a henselization; (C1) step 13 used an uncited 'pointed etale neighbourhood has the same henselization/completion'; (C1/C4) step 14's claim that etale fibres are finite products of finite separable extensions was cited only to the definition; and the off-unit tool uses were undeclared. Repair: a new statement-only node lem-per-pointed-etale-limit-henselization (Stacks 08HT/04GN/04GV; checked true: unique sections over a henselian T, and completions agree by flatness). Steps 12-13 are rewritten to cite it; step 14 now cites lem-weil-pbc-etale-scheme-base-change and lem-weil-pbc-unramified-algebra-over-field-product; 8 generic tool uses are declared in split_report.tool_uses. All 4 new nodes are true and not duplicates: the finite-coefficient cylinder (finite free V over Lambda, one prime over q), Lasker's theorem (Submodule.isLasker), the primary dichotomy (going-down, A_P a DVR), and the vertical symbolic powers (analytic irreducibility of an excellent henselian A/p, regular formal fibres). Batch 5: def-weil-pbc-henselization-at-prime is a general definition; the Weierstrass node's closure reaches only it and three trf henselization-algebra nodes; the lem-pod base-change leaf is generic. None is a step of the trace formula or Poincare duality, so all are accepted. No SGA is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

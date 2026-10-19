@@ -1,0 +1,76 @@
+{
+ "id": "lem-per-pointed-etale-limit-henselization",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "IX 1.1 input of the ancestor; ILO V 2.2.7 and 3.2.4: the henselized cylinder is a filtered colimit of finite-type (etale) algebras over the polynomial cylinder, used to descend the finite model and its ideals and to identify the completion of the finite stage.",
+   "via": [
+    "lem-per-equivariant-marked-cylinder-algebraization",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "A henselian colimit of pointed etale neighbourhoods is the henselization",
+ "statement": "Let $A$ be a commutative ring and $\\mathfrak p\\subset A$ a prime ideal with residue field $\\kappa(\\mathfrak p)$ [def-weil-residue-field]. Let $I$ be a nonempty directed set and $(A_a)_{a\\in I}$ a directed system of $A$-algebras with colimit $H$ and colimit maps $\\lambda_a:A_a\\to H$ [def-weil-pbc-category-colimit]. Assume that each $\\operatorname{Spec}A_a\\to\\operatorname{Spec}A$ is separated etale of finite presentation [def-weil-etale-morphism, def-weil-pbc-scheme-conventions], that $H$ is a henselian local ring [def-weil-pbc-henselian-terminology] with maximal ideal $\\mathfrak m_H=\\mathfrak pH$, and that for every $a$ the prime $\\mathfrak p_a=\\lambda_a^{-1}(\\mathfrak m_H)$ lies over $\\mathfrak p$ and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p_a)$ is an isomorphism. Then: (1) the induced map $A_{\\mathfrak p}\\to H$ [def-weil-pbc-localization-at-prime] is local and makes $H$ a henselization of $A_{\\mathfrak p}$ [def-weil-pbc-henselization-at-prime]; (2) for every $a$, the map $(A_a)_{\\mathfrak p_a}\\to H$ induced by $\\lambda_a$ is local and makes $H$ a henselization of $(A_a)_{\\mathfrak p_a}$; (3) for every $a$ and every $n\\geq1$ the induced maps $A_{\\mathfrak p}/\\mathfrak p^nA_{\\mathfrak p}\\to(A_a)_{\\mathfrak p_a}/\\mathfrak p_a^n(A_a)_{\\mathfrak p_a}\\to H/\\mathfrak m_H^n$ are ring isomorphisms; hence $A_{\\mathfrak p}$, $(A_a)_{\\mathfrak p_a}$ and $H$ have canonically isomorphic maximal-ideal completions [def-weil-pbc-adic-completion], compatibly with the maps between these rings. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 08HT (lemma-uniqueness-henselian), with Lemmas 04GN (lemma-henselization) and 04GV (lemma-henselization-different): a henselian local filtered colimit of etale algebras with the given residue field is the henselization; used for ILO V 2.2.7 and 3.2.4, pp.65--68, where the henselized cylinder is written as a filtered colimit of finite type algebras."
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l -i henselization ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib; rg -n \"theorem|lemma|def |class \" Mathlib/RingTheory/Henselian.lean",
+   "results": "no file mentions henselization; Mathlib/RingTheory/Henselian.lean has only HenselianRing, HenselianLocalRing, HenselianLocalRing.TFAE, isLocalHom_of_le_jacobson_bot and IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "henselization of a local ring as colimit of pointed etale neighbourhoods",
+   "results": "not run: the search services are not reachable from the review machine",
+   "date": "2026-10-19",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale, colimit",
+   "results": "not run: the search services are not reachable from the review machine",
+   "date": "2026-10-19",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-marked-cylinder-algebraization",
+  "date": "2026-10-19",
+  "group": "Q95"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse"
+}

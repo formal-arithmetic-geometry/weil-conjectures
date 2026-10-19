@@ -1,0 +1,88 @@
+{
+ "id": "lem-per-noetherian-primary-decomposition",
+ "kind": "statement",
+ "title": "Finite primary decomposition of Noetherian ideals",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Every ideal $I\\subseteq R$ is a finite intersection of primary ideals. An ideal $Q$ is primary if $Q\\ne R$ and $xy\\in Q$, $x\\notin Q$ imply $y^n\\in Q$ for some integer $n\\geq1$. The empty intersection is $R$, so the assertion includes the unit ideal.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Lasker--Noether theorem: Mathlib/RingTheory/Lasker.lean:299, Submodule.isLasker; IsLasker at lines 39--40. Ideal.IsPrimary is Submodule.IsPrimary at Mathlib/RingTheory/Ideal/IsPrimary.lean:34--35."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every ideal in a Noetherian commutative ring has a finite primary decomposition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.IsLasker.exists_isMinimalPrimaryDecomposition\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"[DecidableEq (Ideal R)] (h : IsLasker R) (I : Ideal R) : ∃ t : Finset (Ideal R), I.IsMinimalPrimaryDecomposition t\", \"doc\": \"In a Lasker ring $ R $, every ideal $ I $ has a minimal primary decomposition. Specifically, there exists a finite set $ t $ of primary ideals in $ R $ such that $ t $ forms a minimal primary decompos\"}\n  {\"name\": \"Ideal.isLasker\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \": IsLasker R\", \"doc\": \"Every Noetherian ring is a Lasker ring, meaning that every ideal can be expressed as the intersection of finitely many primary ideals.\"}\n  {\"name\": \"IsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"(R) [Semiring R]\", \"doc\": \"A semiring $ R $ is a Noetherian ring if every ideal of $ R $ is finitely generated.\"}\n  {\"name\": \"Ideal.fg_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"{R : Type*} [Semiring R] [IsNoetherianRing R] (I : Ideal R) : I.FG\", \"doc\": \"In a Noetherian ring $ R $, every ideal $ I $ is finitely generated.\"}\n  {\"name\": \"Ideal.IsLasker.minimal\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [inst_1 : DecidableEq (Ideal R)],\\n  IsLasker R → ∀ (I : Ideal R), ∃ t, I.IsMinimalPrimaryDecomposition t\", \"doc\": \"In a Lasker ring $ R $, every ideal $ I $ admits a minimal primary decomposition. That is, there exists a finite set $ t $ of primary ideals such that $ I = \\\\bigcap_{J \\\\in t} J $, and this decompositi\"}\n  {\"name\": \"Ideal.exists_minimal_isPrimary_decomposition_of_isPrimary_decomposition\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"[DecidableEq (Ideal R)] {I : Ideal R} {s : Finset (Ideal R)} (hs : s.inf id = I) (hs' : ∀ ⦃J⦄, J ∈ s → J.IsPrimary) :\\n  ∃ t : Finset (Ideal R),\\n    t.inf id = I ∧\\n      (∀ ⦃J⦄, J ∈ t → J.IsPrimary) ∧\\n        ((t : Set (Ideal R)).Pairwise ((· ≠ ·) on radical)) ∧ (∀ ⦃J⦄, J ∈ t → ¬(t.erase J).inf id ≤ \", \"doc\": \"Given an ideal $ I $ in a semiring $ R $ with a primary decomposition $ I = \\\\bigcap_{J \\\\in s} J $ where each $ J \\\\in s $ is a primary ideal, there exists a finite set $ t $ of primary ideals such that\"}\n  {\"name\": \"minimalPrimes.finite_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian\", \"type\": \": (minimalPrimes R).Finite\", \"doc\": \"In a Noetherian ring $ R $, the set of minimal prime ideals is finite.\"}\n  {\"name\": \"IsLasker\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \": Prop\", \"doc\": \"A semiring $ R $ is a Lasker ring if every ideal $ I $ of $ R $ can be expressed as the intersection of finitely many primary ideals. Specifically, for every ideal $ I $, there exists a finite set $ S\"}\n",
+   "date": "2026-10-19",
+   "verdict": "match: Submodule.isLasker R R gives finite primary decomposition; source read at Lasker.lean:299, with IsLasker at line 39."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isLasker|def IsLasker",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"39\", \"line\": \"def IsLasker \", \"text\": \" Prop :=\"}\n  {\"file\": \"110\", \"line\": \"lemma IsLasker.exists_isMinimalPrimaryDecomposition\", \"text\": \"\"}\n  {\"file\": \"299\", \"line\": \"lemma isLasker \", \"text\": \" IsLasker R M := fun I ↦\"}\n",
+   "date": "2026-10-19",
+   "verdict": "match: Submodule.isLasker R R gives finite primary decomposition; source read at Lasker.lean:299, with IsLasker at line 39."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every ideal in a commutative Noetherian ring is a finite intersection of primary ideals",
+   "results": "Ideal.isLasker; IsLasker; Ideal.IsLasker.exists_isMinimalPrimaryDecomposition. Local source has the generalization Submodule.isLasker at Lasker.lean:299.",
+   "date": "2026-10-19",
+   "verdict": "match: use the local generalized declaration with M=R."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsPrimary",
+   "results": "Ideal.IsPrimary; Ideal.IsPrime.isPrimary; Ideal.IsPrimary.inf; Ideal.IsPrimary.comap; IsLocalization.under_map_of_isPrimary_disjoint. Read the primary definition in Ideal/IsPrimary.lean.",
+   "date": "2026-10-19",
+   "verdict": "definition match; primary decomposition itself is Submodule.isLasker."
+  },
+  {
+   "tool": "grep",
+   "query": "primary_decomposition|exists.*[Pp]rimary|[Ii]nf.*[Pp]rimary",
+   "results": "Mathlib/RingTheory/Lasker.lean:40,62,63,64; primary decompositions. Read Lasker.lean:39--40 and 285--308.",
+   "date": "2026-10-19",
+   "verdict": "match: Submodule.isLasker, line 299."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.isLasker",
+  "file": "Mathlib/RingTheory/Lasker.lean",
+  "how": "specializes in one line: apply Submodule.isLasker R R to the ideal I, viewed as an R-submodule of R. Lines 299--300; IsLasker unfolds at lines 39--40 to the finite intersection and primary clauses; Ideal.IsPrimary is definitionally the submodule predicate (Ideal/IsPrimary.lean:34--35).",
+  "line": 299
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-marked-cylinder-algebraization",
+  "date": "2026-10-19",
+  "group": "Q95"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "IX 1.1 input of lem-per-artin-gabber-affine-curve; ILO V 2.2.1 and V 3.2.2: reduce the finite marking to primary ideals.",
+   "via": [
+    "lem-per-equivariant-marked-cylinder-algebraization",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

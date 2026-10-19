@@ -1,0 +1,88 @@
+{
+ "id": "lem-per-vertical-symbolic-powers-completion",
+ "kind": "statement",
+ "title": "Vertical height-one symbolic powers descend through henselian completion",
+ "statement": "Let $(A,\\mathfrak m)$ be an excellent Noetherian henselian local normal domain [def-exc-excellent-ring, def-weil-pbc-noetherian-ring, def-weil-pbc-henselian-terminology, def-weil-pbc-normal-ring]. Let $\\widehat A$ be its maximal-ideal completion [def-weil-pbc-adic-completion], and assume $\\widehat A$ is a normal domain. Let $0\\ne a\\in\\mathfrak m$. Every prime $P\\subseteq\\widehat A$ minimal over $a\\widehat A$ is of the form $P=\\mathfrak p\\widehat A$ for a unique prime $\\mathfrak p$ minimal over $aA$, namely $\\mathfrak p=P\\cap A$. For every integer $n\\geq1$ one has\n$$\\mathfrak p^{(n)}\\widehat A=P^{(n)}.$$\nA prime minimal over an ideal contains that ideal and contains no strictly smaller prime containing it. Both $P$ and $\\mathfrak p$ have height one, meaning that they are nonzero and have no prime strictly between zero and themselves. The notation $\\mathfrak q^{(n)}$ for a prime of a domain $F$ means $\\{x\\in F:x/1\\in\\mathfrak q^n F_{\\mathfrak q}\\}$, using localization [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "V 2.2.4 and 3.2.4, pp.65,67: apply minimal-prime descent to A/aA. Symbolic-power comparison: Stacks algebra.tex Tag 0BC0, lemma-symbolic-power-flat-extension (lines 15578--15615)."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an excellent henselian normal local domain with normal completion minimal primes over a nonzero principal ideal descend uniquely and their symbolic powers commute with completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2\", \"doc\": \"Given a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, this constructs the completion of $ K $ with respect to the non-Archimedean valuation induced by $ v $. The\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of elements with valuation less than or equal to 1, is a discret\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimary\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "analytically.*irreduc|symbolic.*complet|minimal.*prime.*complet",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of an excellent henselian local domain is integral and height one symbolic primary ideals descend from completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] (I : Ideal R) [IsAdicComplete I R] : HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": ⇑(algebraMap S <| v.adicCompletion K) = (↑) ∘ algebraMap S K\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_apply\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(v : HeightOneSpectrum R) (x : v.adicCompletionIntegers ℚ) : padicIntEquiv v x = adicCompletion.padicEquiv v x\", \"doc\": \"In a Dedekind domain $ R $, every prime ideal of height one is a maximal ideal. This follows from the defining properties of Dedekind domains, where every nonzero prime ideal is maximal, and height on\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}\n  {\"name\": \"HenselianRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R},\\n  I ≤ ⊥.jacobson →\\n    (∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : R),\\n            Polynomial.eval a₀ f ∈ I →\\n              IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) →\\n                ∃ a, f.IsRoot\", \"doc\": \"Let $R$ be a commutative ring and $I$ be an ideal of $R$. If $I$ is contained in the Jacobson radical of $R$, and for every monic polynomial $f \\\\in R[X]$ and every element $a_0 \\\\in R$ such that $f(a_0\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) : (r : adicCompletion K v) ∈ adicCompletionIntegers K v\", \"doc\": \"For any element $ r $ in a Dedekind domain $ R $, the embedding of $ r $ into the adic completion of the fraction field $ K $ with respect to a height one prime ideal $ v $ lies within the adic comple\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of the completion of an excellent henselian local ring are extended prime ideals and symbolic powers of vertical height one primes descend",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsDedekindDomain.primesOverEquivPrimesOver\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (p : Ideal R) →\\n            [inst_3 : p.IsPrime] →\\n              (Rₚ : Type u_3) →\\n                [inst_4 : CommRing Rₚ] →\\n                  [inst_5 : Algebra R Rₚ]\", \"doc\": \"In a Dedekind domain $ S $ with a nonzero prime ideal $ p $ of the base ring $ R $, there exists an order-preserving bijection between the prime ideals of $ S $ lying over $ p $ and the prime ideals o\"}\n  {\"name\": \"Ideal.exists_ltSeries_of_hasGoingDown\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.HasGoingDown R S] (l : LTSeries (PrimeSpectrum R)) (P : Ideal S) [inst_4 : P.IsPrime]\\n  [lo : P.LiesOver (RelSeries.last l).asIdeal],\\n  ∃ L,\\n    L.length = l.length ∧\\n      RelSeries.last L = \", \"doc\": \"Given that the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property, for any chain of prime ideals in the prime spectrum of $ R $ and a prime ideal $ P $ in $ S $ lying over\"}\n  {\"name\": \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {I p : Ideal R} {x : R},\\n  p ∈ (I ⊔ Ideal.span {x}).minimalPrimes → (Ideal.map (Ideal.Quotient.mk I) p).height ≤ 1\", \"doc\": \"If $ p $ is a minimal prime ideal containing the ideal generated by $ I $ and an element $ x $ in a commutative ring $ R $, then the height of the image of $ p $ in the quotient ring $ R/I $ is at mos\"}\n  {\"name\": \"IsLocalRing.primesOver_eq\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Basic\", \"type\": \"∀ {R : Type u_1} (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : IsLocalRing A] [IsDedekindDomain A]\\n  [inst_4 : Algebra R A] [FaithfulSMul R A] [Module.Finite R A] {p : Ideal R} [p.IsMaximal],\\n  p ≠ ⊥ → p.primesOver A = {IsLocalRing.maximalIdeal A}\", \"doc\": \"Let $ A $ be a Dedekind domain that is also a local ring, equipped with a faithful $ R $-algebra structure such that $ A $ is a finitely generated $ R $-module. For any maximal ideal $ \\\\mathfrak{p} $ \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n  {\"name\": \"IsLocalRing.primesOverFinset_eq\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (A : Type u_4) [inst_1 : CommRing A] [IsDomain A] [inst_3 : IsLocalRing A]\\n  [inst_4 : IsDedekindDomain A] [inst_5 : Algebra R A] [FaithfulSMul R A] [Module.Finite R A] {p : Ideal R}\\n  [p.IsMaximal], p ≠ ⊥ → primesOverFinset p A = {IsLocalRing.maximalIdeal A}\", \"doc\": \"Given a commutative ring $ R $, a local Dedekind domain $ A $ equipped with an $ R $-algebra structure, faithful scalar multiplication, and finite module structure over $ R $, and a maximal ideal $ p \"}\n  {\"name\": \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ (Rₚ : Type u_3) [inst : CommRing Rₚ] [inst_1 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_2 : CommRing Sₚ]\\n  [inst_3 : Algebra Rₚ Sₚ] {Q : Ideal Sₚ} [Q.IsMaximal] [Algebra.IsIntegral Rₚ Sₚ],\\n  Q ∈ (IsLocalRing.maximalIdeal Rₚ).primesOver Sₚ\", \"doc\": \"If $ Q $ is a maximal ideal in $ S_{\\\\mathfrak{p}} $ and $ S_{\\\\mathfrak{p}} $ is integral over $ R_{\\\\mathfrak{p}} $, then $ Q $ lies over the maximal ideal of $ R_{\\\\mathfrak{p}} $. This means the contr\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-marked-cylinder-algebraization",
+  "date": "2026-10-19",
+  "group": "Q95"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "IX 1.1 input of the ancestor; ILO V 3.2.4: descend the vertical height-one primes and their symbolic powers using V 2.2.4 on the uniformizer quotient.",
+   "via": [
+    "lem-per-equivariant-marked-cylinder-algebraization",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
