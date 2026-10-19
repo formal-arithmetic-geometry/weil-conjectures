@@ -197,4 +197,19 @@ theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
   sorry
 
 
+/-- The unique-boundary clause of ordinary_supported_kummer, with its other witnesses hidden.
+Source: Stacks 03PL, 0A45 (blueprint: lem-asd-ordinary-supported-kummer).
+Proof: obtain κ and its relative boundary from ordinary_supported_kummer. Its third clause
+says every other representative with this boundary equals κ, which is exactly uniqueness.
+This typed projection prevents normalization of all pullback and scalar witnesses in consumers.
+-/
+theorem ordinary_supported_kummer_uniqueBoundary (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)
+    [IsClosedImmersion i] (hI : i.ker.IsInvertible) :
+    ∃! κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))
+      (Scheme.finiteEtaleTateLine T N A hA) 2,
+      SupportedKummerBoundary A N hA i hI hT κ := by
+  sorry
+
 end AlgebraicGeometry.Etale
