@@ -17116,3 +17116,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:22 L: merged deliver/NF/lem-pur-finite-free-projection-exchange (stage 2; reviewer PASS; parallel immutable checks)
 - 08:40 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 815b8b3be00c: Byte-identical re-delivery (module sha256 787e4e0b, node JSON identi)
 - 08:43 L: merged deliver/NE/prop-pur-rational-purity-trace-coherence (stage 2; reviewer FIX; parallel immutable checks)
+- 08:48 L: returned deliver/NN/lem-pur-flag-localized-product (reviewer RETURN: L: independent stage-2 immutable head 0ce4f388ae2e: H2: stmt_deps cite theorem nodes for plain defs. (1) lem-pur-chern-f)
