@@ -25,138 +25,60 @@
  ],
  "proof": [
   {
-   "text": "Write $G_n=J^n/J^{n+1}$ and $G=\\bigoplus_{n\\geq0}G_n$ as in [def-weil-pbc-associated-graded-ring]. Apply [lem-weil-pbc-associated-graded-ring-structure](1)-(3), with $A=R$, to obtain its commutative $B$-algebra structure, its degree-zero inclusion, and $[x]_n[y]_m=[xy]_{n+m}$ for $x\\in J^n,y\\in J^m$. Clause (3) also gives the scalar formula $\\bar a[x]_n=[ax]_n$ for $a\\in R$, which will be used for the coefficients of $\\theta$ in Step 2. These are the ring, scalar and multiplication facts used below; in particular $[f_j]_1$ is an element of this algebra.",
+   "text": "Use the associated-graded product and scalar formulas. Induct on the multi-index to evaluate a monomial, and sum over polynomial support. This proves the coefficient-lift formula without regularity.",
    "uses": [
     "def-weil-pbc-associated-graded-ring",
-    "lem-weil-pbc-associated-graded-ring-structure"
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
+   }
+  },
+  {
+   "text": "Apply the proved homogeneous zero-relation coefficient theorem in every length and degree. Its proof is the source double induction, including the empty sequence and degree zero; a separate conormal-basis argument is unnecessary.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-pur-regular-sequence-higher-homogeneous-relations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061N (equation-quasi-regular), construction of the target graded algebra; ring structure also appears in Tag 05GH (lemma-completion-Noetherian), proof."
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
    }
   },
   {
-   "text": "The universal property in [def-weil-pbc-mv-polynomial-ring] gives the unique $B$-algebra map $\\theta$ taking $T_j$ to $[f_j]_1$. Multiplying these classes by the formula of Step 1 gives $\\theta(\\bar a T^\\alpha)=[a f^\\alpha]_{|\\alpha|}$, where $|\\alpha|=\\sum_j\\alpha_j$. Additivity gives the displayed degree-$n$ formula and shows that $\\theta$ preserves total degree. Changing a coefficient lift by an element of $J$ changes $a f^\\alpha$ by an element of $J^{|\\alpha|+1}$, so this formula is independent of all lifts.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061N (equation-quasi-regular), formula for the canonical map, specialized to $M=R$."
-   }
-  },
-  {
-   "text": "From the definition of ideal multiplication in [def-weil-pbc-algebra-hom-quotient], $J^n$ is spanned over $R$ by the monomials $f^\\alpha$ with $|\\alpha|=n$: for $n=0$ the monomial is $1$; in the successor step expand both factors in $J^{n+1}=J^nJ$ and distribute. Consequently every $x\\in J^{n+1}$ has an expression $x=\\sum_{|\\alpha|=n}b_\\alpha f^\\alpha$ with all $b_\\alpha\\in J$: split one generator off each degree-$(n+1)$ monomial and group by the remaining degree-$n$ monomial. All these sums are finite, including when $c=0$.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), first paragraph: expression for an element of $J^{n+1}$."
-   }
-  },
-  {
-   "text": "We prove by induction on the length $c$, simultaneously for every commutative ring and every regular sequence of that length, the coefficient assertion $Q(c)$: for every $n\\geq0$, if $\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha\\in J^{n+1}$ then every $a_\\alpha\\in J$. When $c=0$, $J=0$; for $n=0$ the only monomial is $1$ and the assumption is $a_0=0$, while for $n>0$ there are no degree-$n$ monomials and there is nothing to prove. In the following steps fix $c>0$ and assume $Q(c-1)$ in all degrees.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), induction on $c$; empty-sequence base written out."
-   }
-  },
-  {
-   "text": "Put $g=(f_1,\\ldots,f_{c-1})$, $t=f_c$, and $K=(g)$. The prefix $g$ is regular by [def-weil-pbc-regular-sequence]: its successive multiplication maps are among those for $f$, and $K\\subseteq J\\ne R$ makes $R/K\\ne0$. The same definition says multiplication by $t$ on $R/K$ is injective. Hence $t^l a\\in K$ implies $a\\in K$ for every $l\\geq0$, by applying this injectivity $l$ times (with $l=0$ immediate). No permutation of the sequence is used.",
-   "uses": [
-    "def-weil-pbc-regular-sequence",
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), $J\\prime$ and cancellation of $f_c^l$ modulo $J\\prime$; regularity is Tag 00LF (definition-regular-sequence)."
-   }
-  },
-  {
-   "text": "Fix $n$ and a relation as in $Q(c)$. By Step 3 subtract a degree-$n$ expression with coefficients in $J$ for its value, reducing to $\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha=0$; after proving the assertion for these new coefficients, adding back coefficients in $J$ proves the original assertion. Regroup the zero relation as $\\sum_{e=0}^n(\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta)t^e=0$, where $\\beta$ runs through $(c-1)$-tuples. For $0\\leq l\\leq n$ let $P(l)$ assert that every coefficient in any such zero relation truncated to $0\\leq e\\leq l$ belongs to $J$. We prove $P(l)$ by induction on $l$; this inner induction is for the fixed length $c$ and fixed degree $n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), reduction to a zero relation and setup of induction on $l$."
-   }
-  },
-  {
-   "text": "For $l=0$ the relation is $\\sum_{|\\beta|=n}a_{\\beta,0}g^\\beta=0\\in K^{n+1}$. Apply the outer induction hypothesis $Q(c-1)$ to the regular prefix from Step 5. It gives $a_{\\beta,0}\\in K\\subseteq J$, proving $P(0)$. This also handles $n=0$ at every length.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), inner induction, base $l=0$ made explicit."
-   }
-  },
-  {
-   "text": "Let $1\\leq l\\leq n$ and suppose $P(l-1)$. In a relation truncated at $l$, set $d=n-l$. For $e<l$, each $g^\\beta$ in its coefficient sum is a product of $n-e$ generators of $K$, so $g^\\beta\\in K^{n-e}$. Since $K^{n-e}$ is an ideal, arbitrary coefficients $a_{\\beta,e}\\in R$ and finite addition keep the sum in $K^{n-e}\\subseteq K^{d+1}$, using $n-e\\geq d+1$. Multiplication by $t^e$ also keeps it in $K^{d+1}$. The zero relation therefore gives the explicit equality $\\sum_{|\\beta|=d}(t^l a_{\\beta,l})g^\\beta=-\\sum_{e=0}^{l-1}\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta t^e\\in K^{d+1}$. The inclusion of powers follows from $K^{r+1}=K^rK\\subseteq K^r$, iterated. Apply $Q(c-1)$ in degree $d$, and then the cancellation of Step 5: $t^l a_{\\beta,l}\\in K$ implies $a_{\\beta,l}\\in K$. This argument applies also when $d=0$ and when the prefix is empty.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), top-exponent coefficient calculation using the outer induction."
-   }
-  },
-  {
-   "text": "Write $a_{\\beta,l}=\\sum_{j=1}^{c-1}d_{\\beta,j}g_j$. For each $(c-1)$-tuple $\\gamma$ of degree $d+1$ define $b_\\gamma=\\sum_{\\beta,j:\\,\\beta+\\varepsilon_j=\\gamma}d_{\\beta,j}$, where $\\varepsilon_j$ has entry $1$ in position $j$ and $0$ elsewhere. Distributing gives $\\sum_{|\\beta|=d}a_{\\beta,l}g^\\beta=\\sum_{|\\gamma|=d+1}b_\\gamma g^\\gamma$. Multiplication by $t^l$ gives $\\sum_{|\\beta|=d}a_{\\beta,l}g^\\beta t^l=\\sum_{|\\gamma|=d+1}(t b_\\gamma)g^\\gamma t^{l-1}$ because $l\\geq1$. Thus the same zero relation becomes $\\sum_{e=0}^{l-2}\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta t^e+\\sum_{|\\gamma|=d+1}(a_{\\gamma,l-1}+t b_\\gamma)g^\\gamma t^{l-1}=0$, where the first sum is empty for $l=1$. This is exactly a degree-$n$ relation of the form quantified in $P(l-1)$, with all lower coefficients unchanged. If $c=1$, membership in $K=0$ makes the top term zero and the displayed empty sums still give the same rewrite.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), rewriting coefficients in $J\\prime$; the coefficient family $b_\\gamma$ is explicit here."
-   }
-  },
-  {
-   "text": "The rewritten relation has last exponent $l-1$, so $P(l-1)$ puts $a_{\\gamma,l-1}+t b_\\gamma$ and all unchanged coefficients with $e\\leq l-2$ in $J$. Since $t b_\\gamma\\in J$, subtraction gives $a_{\\gamma,l-1}\\in J$; Step 8 already put all exponent-$l$ coefficients in $K\\subseteq J$. This proves $P(l)$. At $l=n$ it proves the zero-relation case; restore the subtracted coefficients of Step 6 to prove $Q(c)$. This completes both inductions.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), final displayed relation and conclusion of the two inductions."
-   }
-  },
-  {
-   "text": "For a homogeneous polynomial $F=\\sum_{|\\alpha|=n}\\bar a_\\alpha T^\\alpha$ in the kernel of $\\theta$, choose coefficient lifts $a_\\alpha\\in R$. Its value formula in Step 2 says $\\sum a_\\alpha f^\\alpha\\in J^{n+1}$. The proved assertion $Q(c)$ makes all $a_\\alpha\\in J$, so all $\\bar a_\\alpha=0$ in $B$, and therefore $F=0$ by the coefficient description of [def-weil-pbc-mv-polynomial-ring]. Thus every degree map is injective. For any class $[x]_n$, Step 3 writes $x=\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha$; the corresponding polynomial with reduced coefficients maps to $[x]_n$, proving surjectivity in every degree.",
+   "text": "For a homogeneous relation with value in J^(n+1), expand this value using J*J^n and homogeneous polynomial representatives of J^n. The resulting homogeneous polynomial has all coefficients in J. Subtract it, apply the zero-relation result, and add its coefficients back.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pur-regular-sequence-higher-homogeneous-relations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00LN (lemma-regular-quasi-regular) (1), 061P (definition-quasi-regular-sequence), and 061N (equation-quasi-regular), degreewise bijectivity."
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
    }
   },
   {
-   "text": "Every polynomial is a finite sum of its homogeneous components, by grouping its finitely many monomials by $|\\alpha|$, and every element of $G$ is a finite sum of its degree components by [def-weil-pbc-associated-graded-ring]. Since $\\theta$ preserves degrees, a polynomial in its kernel has each homogeneous component in the degreewise kernel, hence each is zero by Step 11. Conversely lift each of the finitely many components of an element of $G$ by Step 11 and sum them. This proves bijectivity of $\\theta$. Its inverse respects degree by the same component argument; it respects addition, multiplication, units and $B$-scalars by applying $\\theta$ to each required identity and using injectivity. Hence $\\theta$ is an isomorphism of graded $B$-algebras.",
+   "text": "Lift quotient coefficients and take the degree-n component to obtain a homogeneous lift. The evaluation formula and the relation result prove injectivity on each degree. Evaluation commutes with homogeneous projections, by the monomial calculation. Apply this to all components to get injectivity on the full polynomial ring. Homogeneous polynomial representatives of ideal powers give surjectivity on pieces, and direct-sum induction gives surjectivity globally.",
    "uses": [
     "def-weil-pbc-associated-graded-ring",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-pur-regular-sequence-higher-homogeneous-relations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00LN (lemma-regular-quasi-regular) (1) and 061N (equation-quasi-regular), passage from the degreewise isomorphisms to the graded algebra."
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
    }
   },
   {
-   "text": "The degree-$n$ monomials $T^\\alpha$ are a $B$-basis of the homogeneous degree-$n$ polynomials: finite existence and uniqueness of their coefficients are part of [def-weil-pbc-mv-polynomial-ring]. Under the bijection of Step 11 they become $[f^\\alpha]_n$. Thus every element of $J^n/J^{n+1}$ has a unique finite expansion in these classes, which is precisely the basis criterion of [def-weil-pbc-free-module]. For $n=0$ this is the singleton basis $1$ of $B$; if $c=0$ and $n>0$, it is the empty basis of the zero module.",
+   "text": "Projection compatibility and injectivity identify homogeneous polynomials exactly with single-degree images. Restrict the polynomial coefficient finsupp to degree-n indices to obtain a monomial expansion, and read coefficients to prove its uniqueness. Transport this expansion through the bijective map to obtain the stated basis clause.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-free-module"
@@ -164,7 +86,7 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 061N (equation-quasi-regular) and 00LN (lemma-regular-quasi-regular) (1), monomial-basis reading in each degree."
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
    }
   }
  ],
@@ -172,14 +94,15 @@
   "def-weil-pbc-associated-graded-ring",
   "lem-weil-pbc-associated-graded-ring-structure",
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-algebra-hom-quotient",
   "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-pur-regular-sequence-higher-homogeneous-relations",
   "def-weil-pbc-free-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00LN (lemma-regular-quasi-regular), proof of (1), with Tags 061N (equation-quasi-regular) and 061P (definition-quasi-regular-sequence); both induction bases and the coefficient-rewriting formula are written out."
+  "place": "Tag 00LN (1), implemented by W3 with the complete double induction in the proved homogeneous zero-relation helper; Tags 061N and 061P for the map, grading and basis."
  },
  "mathlib_searches": [
   {
@@ -298,5 +221,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261019T034335-L-423197",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

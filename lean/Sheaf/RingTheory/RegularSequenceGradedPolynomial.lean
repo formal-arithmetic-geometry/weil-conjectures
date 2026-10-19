@@ -9,8 +9,7 @@ public import Sheaf.RingTheory.AssociatedGradedRing
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.FreeModule.Basic
-import Sheaf.RingTheory.AssociatedGradedRingStructure
-import WeilConjectures.RingTheory.AssociatedGradedRing
+import Sheaf.RingTheory.RegularSequenceHigherRelations
 
 /-!
 # The associated graded algebra of a regular-sequence ideal
@@ -44,6 +43,339 @@ noncomputable def regularSequenceGradedPolynomialMap {R : Type u} [CommRing R]
       (Submodule.Quotient.mk
         (⟨f j, by simpa using Ideal.subset_span (Set.mem_range_self j)⟩ :
           (Ideal.span (Set.range f) ^ 1 : Ideal R))))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem monomial_class {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (d : Fin c →₀ ℕ) :
+    ∃ x : (Ideal.span (Set.range f) ^ d.degree : Ideal R),
+      x.val = d.prod (fun j k ↦ f j ^ k) ∧
+      regularSequenceGradedPolynomialMap f (MvPolynomial.monomial d 1) =
+        DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) d.degree
+          (Submodule.Quotient.mk x) := by
+  classical
+  let J := Ideal.span (Set.range f)
+  let P := fun d : Fin c →₀ ℕ ↦
+    ∃ x : (J ^ d.degree : Ideal R),
+      x.val = d.prod (fun j k ↦ f j ^ k) ∧
+      regularSequenceGradedPolynomialMap f (MvPolynomial.monomial d 1) =
+        DirectSum.of (associatedGradedPiece J) d.degree (Submodule.Quotient.mk x)
+  have hzero : P 0 := by
+    refine ⟨⟨1, by simp⟩, by simp, ?_⟩
+    change regularSequenceGradedPolynomialMap f 1 = _
+    rw [map_one]
+    exact associatedGraded_one J
+  have hadd (d e : Fin c →₀ ℕ) (hd : P d) (he : P e) : P (d + e) := by
+    obtain ⟨x, hx, hx'⟩ := hd
+    obtain ⟨y, hy, hy'⟩ := he
+    dsimp only [P]
+    rw [Finsupp.degree.map_add]
+    refine ⟨⟨x.val * y.val, by simpa [pow_add] using Ideal.mul_mem_mul x.property y.property⟩,
+      ?_, ?_⟩
+    · change x.val * y.val = _
+      rw [hx, hy, Finsupp.prod_add_index]
+      · intro a ha; simp
+      · intro a ha b₁ b₂; exact pow_add _ _ _
+    · rw [← one_mul (1 : R ⧸ J), ← MvPolynomial.monomial_mul, map_mul, hx', hy']
+      exact associatedGraded_mul J _ _ x y
+  have hsingle (j : Fin c) : P (Finsupp.single j 1) := by
+    dsimp only [P]
+    rw [Finsupp.degree_single]
+    refine ⟨⟨f j, by simpa using Ideal.subset_span (Set.mem_range_self j)⟩,
+      by simp, ?_⟩
+    change regularSequenceGradedPolynomialMap f (MvPolynomial.X j) = _
+    exact MvPolynomial.aeval_X (R := R ⧸ J) (S₁ := associatedGraded J) _ j
+  change P d
+  induction d using Finsupp.induction_linear with
+  | zero => exact hzero
+  | add d e hd he => exact hadd d e hd he
+  | single j k =>
+    induction k with
+    | zero => simpa using hzero
+    | succ k hk =>
+      simpa only [Finsupp.single_add] using hadd _ _ hk (hsingle j)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem coeff_monomial_class {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (d : Fin c →₀ ℕ) (r : R) :
+    ∃ x : (Ideal.span (Set.range f) ^ d.degree : Ideal R),
+      x.val = r * d.prod (fun j k ↦ f j ^ k) ∧
+      regularSequenceGradedPolynomialMap f
+          (MvPolynomial.monomial d (Ideal.Quotient.mk (Ideal.span (Set.range f)) r)) =
+        DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) d.degree
+          (Submodule.Quotient.mk x) := by
+  obtain ⟨x, hx, hx'⟩ := monomial_class f d
+  refine ⟨⟨r * x.val, Ideal.mul_mem_left _ r x.property⟩, by dsimp only; rw [hx], ?_⟩
+  have hm : MvPolynomial.monomial d (Ideal.Quotient.mk (Ideal.span (Set.range f)) r) =
+      Ideal.Quotient.mk (Ideal.span (Set.range f)) r • MvPolynomial.monomial d 1 := by
+    simpa only [smul_eq_mul, mul_one] using
+      ((MvPolynomial.monomial d).map_smul
+        (Ideal.Quotient.mk (Ideal.span (Set.range f)) r) 1)
+  rw [hm, map_smul, hx']
+  exact associatedGraded_smul _ _ _ x
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem homogeneous_class {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (n : ℕ) (p : MvPolynomial (Fin c) R) (hp : p.IsHomogeneous n) :
+    ∃ x : (Ideal.span (Set.range f) ^ n : Ideal R),
+      x.val = p.eval f ∧
+      regularSequenceGradedPolynomialMap f
+          (MvPolynomial.map (Ideal.Quotient.mk (Ideal.span (Set.range f))) p) =
+        DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n
+          (Submodule.Quotient.mk x) := by
+  classical
+  let J := Ideal.span (Set.range f)
+  have hd (d : p.support) : Finsupp.degree d.val = n := by
+    simpa only [Finsupp.degree_eq_weight_one, Pi.one_def] using
+      hp (MvPolynomial.mem_support_iff.mp d.property)
+  have hmon (d : p.support) :
+      ∃ x : (J ^ n : Ideal R),
+        x.val = p.coeff d.val * d.val.prod (fun j k ↦ f j ^ k) ∧
+        regularSequenceGradedPolynomialMap f
+            (MvPolynomial.monomial d.val (Ideal.Quotient.mk J (p.coeff d.val))) =
+          DirectSum.of (associatedGradedPiece J) n (Submodule.Quotient.mk x) := by
+    have h := coeff_monomial_class f d.val (p.coeff d.val)
+    rw [hd d] at h
+    exact h
+  choose x hx hx' using hmon
+  refine ⟨∑ d : p.support, x d, ?_, ?_⟩
+  · simp only [Submodule.coe_sum, hx]
+    conv_rhs => rw [p.as_sum, map_sum]
+    simp only [MvPolynomial.eval_monomial]
+    exact Finset.sum_coe_sort p.support (fun d ↦ p.coeff d * d.prod (fun j k ↦ f j ^ k))
+  · conv_lhs => rw [p.as_sum, map_sum, map_sum]
+    simp only [MvPolynomial.map_monomial]
+    rw [← Finset.sum_coe_sort p.support]
+    simp only [map_sum, ← Submodule.mkQ_apply]
+    apply Finset.sum_congr rfl
+    intro d hd
+    exact hx' d
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem homogeneous_lift {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (n : ℕ) (p : MvPolynomial (Fin c) (R ⧸ Ideal.span (Set.range f)))
+    (hp : p.IsHomogeneous n) :
+    ∃ q : MvPolynomial (Fin c) R, q.IsHomogeneous n ∧
+      MvPolynomial.map (Ideal.Quotient.mk (Ideal.span (Set.range f))) q = p := by
+  obtain ⟨q, hq⟩ := MvPolynomial.map_surjective _ (Ideal.Quotient.mk_surjective) p
+  refine ⟨MvPolynomial.homogeneousComponent n q,
+    MvPolynomial.homogeneousComponent_isHomogeneous _ _, ?_⟩
+  ext d
+  rw [MvPolynomial.coeff_map, MvPolynomial.coeff_homogeneousComponent]
+  split_ifs with h
+  · simpa only [MvPolynomial.coeff_map] using congrArg (MvPolynomial.coeff d) hq
+  · rw [map_zero]
+    exact (hp.coeff_eq_zero h).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem polynomial_expansion {B : Type u} [CommRing B] {c : ℕ} (n : ℕ)
+    (p : MvPolynomial (Fin c) B) (hp : p.IsHomogeneous n) :
+    ∃ a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀ B,
+      a.sum (fun d b ↦ MvPolynomial.monomial d.val b) = p := by
+  refine ⟨(AddMonoidAlgebra.coeff p).subtypeDomain (fun d ↦ d.sum (fun _ k ↦ k) = n), ?_⟩
+  calc
+    _ = (AddMonoidAlgebra.coeff p).sum (fun d b ↦ MvPolynomial.monomial d b) :=
+      Finsupp.sum_subtypeDomain_index (h := fun d b ↦ MvPolynomial.monomial d b)
+        (fun d hd ↦ by
+          change d.degree = n
+          simpa only [Finsupp.degree_eq_weight_one, Pi.one_def] using
+            hp (Finsupp.mem_support_iff.mp hd))
+    _ = p := p.as_sum.symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem expansion_coeff {B : Type u} [CommRing B] {c : ℕ} (n : ℕ)
+    (a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀ B)
+    (d : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n}) :
+    MvPolynomial.coeff d.val (a.sum (fun e b ↦ MvPolynomial.monomial e.val b)) = a d := by
+  classical
+  simpa [Finsupp.sum, MvPolynomial.coeff_sum, MvPolynomial.coeff_monomial,
+    Subtype.val_inj] using (fun h : a d = 0 ↦ h.symm)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem component_map {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (n : ℕ) (p : MvPolynomial (Fin c) (R ⧸ Ideal.span (Set.range f))) :
+    regularSequenceGradedPolynomialMap f (MvPolynomial.homogeneousComponent n p) =
+      DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n
+        (regularSequenceGradedPolynomialMap f p n) := by
+  classical
+  induction p using MvPolynomial.induction_on' with
+  | monomial d b =>
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective b
+    obtain ⟨x, hx, hx'⟩ := coeff_monomial_class f d r
+    rw [MvPolynomial.homogeneousComponent_of_mem (MvPolynomial.isHomogeneous_monomial _ rfl)]
+    by_cases h : n = d.degree
+    · subst n
+      simp only [ite_true, hx', DirectSum.of_eq_same]
+    · simp only [if_neg h, map_zero, hx', DirectSum.of_eq_of_ne _ _ _ h]
+  | add p q hp hq =>
+    simp only [map_add, DirectSum.add_apply, hp, hq]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem homogeneous_kernel {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (hrel : ∀ (n : ℕ) (p : MvPolynomial (Fin c) R), p.IsHomogeneous n →
+      p.eval f ∈ Ideal.span (Set.range f) ^ (n + 1) →
+        ∀ d, p.coeff d ∈ Ideal.span (Set.range f))
+    (n : ℕ) (p : MvPolynomial (Fin c) (R ⧸ Ideal.span (Set.range f)))
+    (hp : p.IsHomogeneous n) (hz : regularSequenceGradedPolynomialMap f p = 0) : p = 0 := by
+  obtain ⟨q, hq, hqp⟩ := homogeneous_lift f n p hp
+  obtain ⟨x, hx, hx'⟩ := homogeneous_class f n q hq
+  have hzero : Submodule.Quotient.mk x =
+      (0 : associatedGradedPiece (Ideal.span (Set.range f)) n) := by
+    apply DirectSum.of_injective n
+    simpa only [hqp, hz, map_zero] using hx'.symm
+  have hmem : q.eval f ∈ Ideal.span (Set.range f) ^ (n + 1) := by
+    rw [← hx]
+    exact (Submodule.Quotient.mk_eq_zero
+      (Submodule.comap (Ideal.span (Set.range f) ^ n : Ideal R).subtype
+        (Ideal.span (Set.range f) ^ (n + 1)))).mp hzero
+  rw [← hqp]
+  ext d
+  simpa only [MvPolynomial.coeff_map, MvPolynomial.coeff_zero] using
+    Ideal.Quotient.eq_zero_iff_mem.mpr (hrel n q hq hmem d)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem bijective_of_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (hrel : ∀ (n : ℕ) (p : MvPolynomial (Fin c) R), p.IsHomogeneous n →
+      p.eval f ∈ Ideal.span (Set.range f) ^ (n + 1) →
+        ∀ d, p.coeff d ∈ Ideal.span (Set.range f)) :
+    Function.Bijective (regularSequenceGradedPolynomialMap f) := by
+  constructor
+  · apply (injective_iff_map_eq_zero _).mpr
+    intro p hp
+    have hc (n : ℕ) : MvPolynomial.homogeneousComponent n p = 0 := by
+      apply homogeneous_kernel f hrel n _ (MvPolynomial.homogeneousComponent_isHomogeneous _ _)
+      rw [component_map, hp]
+      simp
+    rw [← MvPolynomial.sum_homogeneousComponent p]
+    simp only [hc, Finset.sum_const_zero]
+  · intro y
+    induction y using DirectSum.induction_on with
+    | zero => exact ⟨0, map_zero _⟩
+    | of n y =>
+      induction y using Submodule.Quotient.induction_on with
+      | _ x =>
+        obtain ⟨p, hp, hpx⟩ := (Ideal.mem_span_pow_iff_exists_isHomogeneous f x.val).mp x.property
+        obtain ⟨z, hz, hz'⟩ := homogeneous_class f n p hp
+        have he : z = x := Subtype.ext (hz.trans hpx)
+        exact ⟨MvPolynomial.map (Ideal.Quotient.mk _) p, by simpa only [he] using hz'⟩
+    | add x y hx hy =>
+      obtain ⟨p, rfl⟩ := hx
+      obtain ⟨q, rfl⟩ := hy
+      exact ⟨p + q, map_add _ _ _⟩
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem homogeneous_iff_of_injective {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (hi : Function.Injective (regularSequenceGradedPolynomialMap f))
+    (n : ℕ) (p : MvPolynomial (Fin c) (R ⧸ Ideal.span (Set.range f))) :
+    p.IsHomogeneous n ↔ ∃ x : associatedGradedPiece (Ideal.span (Set.range f)) n,
+      regularSequenceGradedPolynomialMap f p =
+        DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n x := by
+  constructor
+  · intro hp
+    exact ⟨regularSequenceGradedPolynomialMap f p n, by
+      simpa only [MvPolynomial.homogeneousComponent_eq_self hp] using component_map f n p⟩
+  · rintro ⟨x, hx⟩
+    have he : MvPolynomial.homogeneousComponent n p = p := by
+      apply hi
+      rw [component_map, hx, DirectSum.of_eq_same]
+    rw [← he]
+    exact MvPolynomial.homogeneousComponent_isHomogeneous _ _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem expansion_map {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R) (n : ℕ)
+    (a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀ (R ⧸ Ideal.span (Set.range f))) :
+    a.sum (fun d b ↦ b • regularSequenceGradedPolynomialMap f
+        (MvPolynomial.monomial d.val 1)) =
+      regularSequenceGradedPolynomialMap f (a.sum (fun d b ↦ MvPolynomial.monomial d.val b)) := by
+  classical
+  change (∑ d ∈ a.support, a d • regularSequenceGradedPolynomialMap f
+      (MvPolynomial.monomial d.val 1)) =
+    regularSequenceGradedPolynomialMap f
+      (∑ d ∈ a.support, MvPolynomial.monomial d.val (a d))
+  rw [map_sum]
+  apply Finset.sum_congr rfl
+  intro d hd
+  have hm : MvPolynomial.monomial d.val (a d) =
+      a d • MvPolynomial.monomial d.val 1 := by
+    simpa only [smul_eq_mul, mul_one] using
+      ((MvPolynomial.monomial d.val).map_smul (a d) 1)
+  rw [hm, map_smul]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem formula {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R) (n : ℕ)
+    (a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀ R) :
+    ∃ x : (Ideal.span (Set.range f) ^ n : Ideal R),
+      x.val = a.sum (fun d r ↦ r * d.val.prod (fun j k ↦ f j ^ k)) ∧
+      regularSequenceGradedPolynomialMap f
+          (a.sum (fun d r ↦ MvPolynomial.monomial d.val
+            (Ideal.Quotient.mk (Ideal.span (Set.range f)) r))) =
+        DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n
+          (Submodule.Quotient.mk x) := by
+  let p : MvPolynomial (Fin c) R := a.sum (fun d r ↦ MvPolynomial.monomial d.val r)
+  have hp : p.IsHomogeneous n := by
+    apply MvPolynomial.IsHomogeneous.sum
+    intro d hd
+    exact MvPolynomial.isHomogeneous_monomial _ d.property
+  obtain ⟨x, hx, hx'⟩ := homogeneous_class f n p hp
+  refine ⟨x, ?_, ?_⟩
+  · simpa only [p, Finsupp.sum, map_sum, MvPolynomial.eval_monomial] using hx
+  · simpa only [p, Finsupp.sum, map_sum, MvPolynomial.map_monomial] using hx'
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem basis_of_bijective {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (hb : Function.Bijective (regularSequenceGradedPolynomialMap f))
+    (n : ℕ) (x : associatedGradedPiece (Ideal.span (Set.range f)) n) :
+    ∃! a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀
+        (R ⧸ Ideal.span (Set.range f)),
+      a.sum (fun d b ↦ b • regularSequenceGradedPolynomialMap f
+        (MvPolynomial.monomial d.val 1)) =
+          DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n x := by
+  obtain ⟨p, hp⟩ := hb.2 (DirectSum.of _ n x)
+  have hph : p.IsHomogeneous n := (homogeneous_iff_of_injective f hb.1 n p).mpr ⟨x, hp⟩
+  obtain ⟨a, ha⟩ := polynomial_expansion n p hph
+  refine ⟨a, ?_, ?_⟩
+  · dsimp only
+    rw [expansion_map, ha, hp]
+  · intro b hb'
+    have he : b.sum (fun d r ↦ MvPolynomial.monomial d.val r) =
+        a.sum (fun d r ↦ MvPolynomial.monomial d.val r) := by
+      apply hb.1
+      rw [← expansion_map, ← expansion_map, hb']
+      rw [expansion_map, ha, hp]
+    ext d
+    simpa only [expansion_coeff] using congrArg (MvPolynomial.coeff d.val) he
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem relation_of_zero_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
+    (hz : ∀ (n : ℕ) (p : MvPolynomial (Fin c) R), p.IsHomogeneous n →
+      p.eval f = 0 → ∀ d, p.coeff d ∈ Ideal.span (Set.range f))
+    (n : ℕ) (p : MvPolynomial (Fin c) R) (hp : p.IsHomogeneous n)
+    (hmem : p.eval f ∈ Ideal.span (Set.range f) ^ (n + 1)) :
+    ∀ d, p.coeff d ∈ Ideal.span (Set.range f) := by
+  classical
+  let J := Ideal.span (Set.range f)
+  have hrep : ∀ y ∈ J ^ (n + 1), ∃ q : MvPolynomial (Fin c) R,
+      q.IsHomogeneous n ∧ q.eval f = y ∧ ∀ d, q.coeff d ∈ J := by
+    intro y hy
+    rw [pow_succ', ← Ideal.smul_eq_mul] at hy
+    refine Submodule.smul_induction_on hy ?_ ?_
+    · intro a ha b hb
+      obtain ⟨q, hq, he⟩ := (Ideal.mem_span_pow_iff_exists_isHomogeneous f b).mp hb
+      refine ⟨MvPolynomial.C a * q, hq.C_mul a, ?_, ?_⟩
+      · simp only [map_mul, MvPolynomial.eval_C, he, smul_eq_mul]
+      · intro d
+        rw [MvPolynomial.coeff_C_mul]
+        exact J.mul_mem_right _ ha
+    · intro x y hx hy
+      obtain ⟨p, hp, he, hc⟩ := hx
+      obtain ⟨q, hq, hf, hd⟩ := hy
+      exact ⟨p + q, hp.add hq, by rw [map_add, he, hf],
+        fun d ↦ by rw [MvPolynomial.coeff_add]; exact J.add_mem (hc d) (hd d)⟩
+  obtain ⟨q, hq, he, hc⟩ := hrep _ hmem
+  have hh := hz n (p - q) (hp.sub hq) (by rw [map_sub, he, sub_self])
+  intro d
+  have hd : p.coeff d - q.coeff d ∈ J := by
+    simpa only [MvPolynomial.coeff_sub] using hh d
+  simpa only [sub_add_cancel] using J.add_mem hd (hc d)
 
 /-- A regular sequence has polynomial associated graded algebra, including the formula
 on coefficient lifts and the monomial basis in each degree. Source: Stacks, Algebra,
@@ -105,6 +437,8 @@ theorem regularSequence_gradedPolynomial {R : Type u} [CommRing R]
         a.sum (fun α b ↦ b • regularSequenceGradedPolynomialMap f
           (MvPolynomial.monomial α.val 1)) =
             DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n x) := by
-  sorry
+  have hrel := relation_of_zero_relation f (regularSequence_homogeneous_relation f hf)
+  have hb := bijective_of_relation f hrel
+  exact ⟨hb, homogeneous_iff_of_injective f hb.1, formula f, basis_of_bijective f hb⟩
 
 end Ideal
