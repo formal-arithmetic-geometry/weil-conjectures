@@ -15,6 +15,9 @@ quotient log structure with the invariant direct image
 (blueprint: def-per-fs-log-group-action).
 
 The action laws use relative étale test objects, exactly as `EtaleLogHom` does.
+The raw `InvariantDirectImage` interface does not assume fs on the quotient; it
+can therefore be used to establish fs by constructing charts.
+
 Quotient sections are tested on the canonical scheme fibre product. Thus the log
 structure is specified by invariant sections, rather than chosen independently.
 -/
@@ -70,11 +73,34 @@ def FSLogGroupAction.IsEquivariant {H : Type v} [Group H]
   ∀ g : H, ∃ c : EtaleLogHom X Y,
     (a.logMap g).CompEq f c ∧ f.CompEq (b.logMap g) c
 
+/-- Pullback of an étale test object of a scheme quotient.
+Source: ILO VI after 3.5 (blueprint: def-per-fs-log-group-action). -/
+noncomputable abbrev logInvariantTest {X Y : Scheme.{u}} (f : X ⟶ Y) (E : Y.Etale) : X.Etale :=
+  Scheme.Etale.mk (pullback.snd E.hom f)
+
+/-- The invariant submonoid on a quotient test object. The equations use all
+lifts of each prescribed group automorphism fixing the quotient projection.
+Source: ILO VI after 3.5 (blueprint: def-per-fs-log-group-action). -/
+def FSLogGroupAction.invariantLogSections {X : FineSaturatedLogScheme.{u}}
+    {H : Type v} [Group H] (action : FSLogGroupAction H X)
+    {Y : Scheme.{u}} (f : X.scheme ⟶ Y) (E : Y.Etale) :
+    Submonoid (X.logStructure.monoidSheaf.obj.obj (op (logInvariantTest f E))) where
+  carrier := {s | ∀ (h : H) (k : (logInvariantTest f E).left ⟶
+      (logInvariantTest f E).left)
+      (hk : k ≫ (logInvariantTest f E).hom =
+        (logInvariantTest f E).hom ≫ (action.logMap h).base),
+      k ≫ pullback.fst E.hom f = pullback.fst E.hom f →
+      (action.logMap h).sectionMap _ _ k hk s = s}
+  one_mem' := by intro h k hk he; exact map_one _
+  mul_mem' := by
+    intro s t hs ht h k hk he
+    rw [map_mul, hs h k hk he, ht h k hk he]
+
 /-- The canonical pullback of an étale quotient test object to the source.
 Source: ILO VI, paragraph after 3.5 (blueprint: def-per-fs-log-group-action). -/
 noncomputable abbrev logQuotientTest {X Y : FineSaturatedLogScheme.{u}}
     (q : EtaleLogHom X Y) (E : Y.scheme.Etale) : X.scheme.Etale :=
-  Scheme.Etale.mk (pullback.snd E.hom q.base)
+  logInvariantTest q.base E
 
 /-- Invariant log sections on a quotient test object. The maps quantified here are
 exactly the unique lifts of each group member fixing the first pullback projection.
@@ -83,11 +109,7 @@ def FSLogGroupAction.IsInvariantLogSection {H : Type v} [Group H]
     {X Y : FineSaturatedLogScheme.{u}} (a : FSLogGroupAction H X)
     (q : EtaleLogHom X Y) (E : Y.scheme.Etale)
     (s : X.logStructure.monoidSheaf.obj.obj (op (logQuotientTest q E))) : Prop :=
-  ∀ (g : H) (k : (logQuotientTest q E).left ⟶ (logQuotientTest q E).left)
-    (hk : k ≫ (logQuotientTest q E).hom =
-      (logQuotientTest q E).hom ≫ (a.logMap g).base),
-    k ≫ pullback.fst E.hom q.base = pullback.fst E.hom q.base →
-      (a.logMap g).sectionMap (logQuotientTest q E) (logQuotientTest q E) k hk s = s
+  s ∈ a.invariantLogSections q.base E
 
 /-- A categorical geometric scheme quotient, affine locally given by invariant rings,
 with precisely the invariant direct-image log structure. Log descent is tested on every
@@ -122,5 +144,30 @@ structure FSLogGroupAction.IsQuotient {H : Type v} [Group H]
       ∃ t : Y.logStructure.monoidSheaf.obj.obj (op E),
         q.sectionMap E (logQuotientTest q E)
           (pullback.fst E.hom q.base) pullback.condition t = s
+
+/-- A presentation of the actual invariant direct-image log sheaf, without
+assuming that this sheaf is fs. `pullbackMap` is a sheaf map on relative tests;
+its image is exactly the invariant submonoid, and its structural map is the
+prescribed pullback of regular functions. This characterizes the log sheaf
+uniquely, and does not choose it from an existence theorem.
+Source: ILO VI after 3.5 and 3.7(b)
+(blueprint: def-per-fs-log-group-action). -/
+structure FSLogGroupAction.InvariantDirectImage {X : FineSaturatedLogScheme.{u}}
+    {H : Type v} [Group H] (action : FSLogGroupAction H X)
+    {Y : Scheme.{u}} (f : X.scheme ⟶ Y) (N : EtaleLogStructure Y) where
+  pullbackMap : ∀ E : Y.Etale, N.monoidSheaf.obj.obj (op E) →*
+    X.logStructure.monoidSheaf.obj.obj (op (logInvariantTest f E))
+  injective : ∀ E : Y.Etale, Function.Injective (pullbackMap E)
+  image : ∀ (E : Y.Etale)
+    (s : X.logStructure.monoidSheaf.obj.obj (op (logInvariantTest f E))),
+    s ∈ FSLogGroupAction.invariantLogSections action f E ↔ ∃ t, pullbackMap E t = s
+  naturality : ∀ (E F : Y.Etale) (j : E ⟶ F)
+    (k : logInvariantTest f E ⟶ logInvariantTest f F),
+    k.left ≫ pullback.fst F.hom f = pullback.fst E.hom f ≫ j.left →
+    (X.logStructure.monoidSheaf.obj.map k.op).hom.comp (pullbackMap F) =
+      (pullbackMap E).comp (N.monoidSheaf.obj.map j.op).hom
+  compatibility : ∀ (E : Y.Etale) (s : N.monoidSheaf.obj.obj (op E)),
+    X.logStructure.alpha.app (op (logInvariantTest f E)) (pullbackMap E s) =
+      (pullback.fst E.hom f).appTop (N.alpha.app (op E) s)
 
 end AlgebraicGeometry

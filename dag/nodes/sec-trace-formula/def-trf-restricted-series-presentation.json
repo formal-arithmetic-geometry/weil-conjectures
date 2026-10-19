@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-restricted-series-presentation",
+ "kind": "definition",
+ "title": "Restricted-series finite presentations and bounded analytic models",
+ "status": "split",
+ "statement": "Let $R$ be a nonarchimedean normed commutative ring. The restricted-series ring $R\\langle T_1,\\ldots,T_n\\rangle$ is the subring of formal power series whose coefficients tend to zero in the cofinite filter; constants are the constant series. For a ring map $\\rho:R\\to A$ and $\\pi\\in R$, say that $A$ is topologically finitely presented over $R$ if there are $n\\geq0$ and a surjective ring map $f:R\\langle T\\rangle\\to A$ with finitely generated kernel, $f|_R=\\rho$, and the topology on $A$ is the quotient of the principal $\\pi$-adic topology on the series ring (equivalently, the quotient map is a quotient map for the principal adic topologies). For a nonarchimedean normed field $F$ [def-weil-field] and a normed commutative ring $B$ with scalar map $F\\to B$, an affinoid quotient presentation means that $B$ is complete and admits a surjective scalar-compatible ring map $F\\langle T_1,\\ldots,T_n\\rangle\\to B$ whose norm is the quotient Gauss norm: $\\|b\\|=\\inf_{f(s)=b}\\sup_\\nu\\|s_\\nu\\|$. The zero quotient is allowed. For maps $R\\xrightarrow{\\rho}A\\xrightarrow j B$, the image of $A$ is bounded and topologically finitely generated over $R$ if $\\|j(a)\\|\\le M$ for one real $M$ and all $a\\in A$, and there are finitely many $x_i\\in A$ such that every $j(a)$ is approximated arbitrarily closely in the norm of $B$ by polynomials in the $j(x_i)$ with coefficients in the image of $R$.",
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 3.5.5, Steps 2–3, printed pp. 22–23; restricted-series quotients, quotient Gauss norms and bounded topologically generated models used by formal comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra multivariate restricted power series coefficients tend to zero affinoid algebra",
+   "results": "[leansearch] OK 8 hit(s): MvPowerSeries.HasEval.tendsto_zero; PowerSeries.IsRestricted; FormalMultilinearSeries.isLittleO_one_of_lt_radius; MvPowerSeries.coeff_zero_iff; MvPowerSeries.HasEval.mk; MvPowerSeries.WithPiTopology.variables_tendsto_zero; MvPowerSeries.hasSum_aeval; HasFiniteFPowerSeriesOnBall.finite",
+   "date": "2026-10-18",
+   "verdict": "No affinoid or finite-presentation predicate; reuse Mathlib restricted series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affinoid algebra quotient Tate algebra topologically finitely presented algebra restricted power series",
+   "results": "[leanfinder] OK 8 hit(s): BDeRhamPlus; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply; Polynomial.IsDistinguishedAt.algEquivQuotient_apply; Polynomial.IsDistinguishedAt.algEquivQuotient; PowerSeries.algEquivQuotientWeierstrassDistinguished; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply; LaurentSeries.powerSeriesAlgEquiv",
+   "date": "2026-10-18",
+   "verdict": "No existing analytic finite-presentation interface."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTopologicallyFinitelyPresented|IsAffinoid|IsRestricted|gaussNorm (RingTheory/MvPowerSeries); rg TateAlgebra|RestrictedPowerSeries|restricted.series|IsAffinoid|affinoid|TopologicallyFinite in WeilConjectures and lean/Sheaf; blueprint_refs.py search affinoid; rg -l restricted.series|affinoid.algebra|Tate.algebra dag/nodes",
+   "results": "[grep] OK 10 hit(s), including MvPowerSeries/GaussNorm.lean:55–57 and Restricted.lean:33. Direct source reads found IsRestricted.subring at Restricted.lean:107. Source/project grep found no analytic predicate; only prose in ValuationReducedFibreNormalization.lean. blueprint search: 0 blueprint nodes match affinoid. DAG matches are statement nodes needing this notion, not definition nodes.",
+   "date": "2026-10-18",
+   "verdict": "Reuse IsRestricted.subring, isRestricted_C and gaussNorm; new predicates supply the missing notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-rank-one-formal-comparison",
+  "date": "2026-10-18",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical supporting ingredient of the normalization chain from lem-trf-local-term-locality (not a new route for the current contracting correspondence): Theorem 3.5.5, Step 3, printed pp. 22–23: completed analytic model, scalar saturation, and finite-module completion comparison; restricted-series quotients, quotient Gauss norms and bounded topologically generated models used by formal comparison",
+   "via": [
+    "lem-trf-valuation-rank-one-formal-comparison",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.RestrictedSeriesPresentation",
+  "declaration": "RestrictedSeries.IsTopologicallyFinitelyPresented",
+  "file": "lean/Sheaf/RingTheory/RestrictedSeriesPresentation.lean",
+  "statement": "def IsTopologicallyFinitelyPresented (R : Type u) [NormedCommRing R] [IsUltrametricDist R] (A : Type v) [CommRing A] (scalar : R →+* A) (π : R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "RestrictedSeries.constants",
+   "RestrictedSeries.IsTopologicallyFinitelyPresented",
+   "RestrictedSeries.IsAffinoidQuotient",
+   "RestrictedSeries.HasBoundedTopologicallyGeneratedImage"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3c025bf5",
+  "group": "NF",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3c025bf5",
+  "group": "NF",
+  "result": "fix",
+  "note": "Item, 7 recorded stmt_deps, both new def nodes and all 3 modules read clause by clause; item node changed only lean + stmt_deps (adds the 2 new def nodes). Hypotheses K sepclosed, V valuation ring with Frac K, height one, π≠0 in m, A flat f.p., IsGeometricallyReduced K (A⊗K) match the node with nothing stronger; every conclusion clause present and pinned to the actual AdicCompletion/Localization objects (eF/eV/eC isos, scalar, iK, t, g by compatibilities), no hollowness; edge cases A=0, Â=0, C=0, n=0, imperfect K, unit s covered. principalRingMap (liftRingHom) and the restricted-series/affinoid predicates (Mathlib IsRestricted.subring, gaussNorm) duplicate nothing public in Mathlib, the project or the live DAG; new-node fields ok; postponed theorems are the def node's stated obligations. Docstrings, 11-step proof, lines <=100, statements verbatim, plain imports = proof-dep modules. H9 FIX: AdicRingCompletionMap's public import of Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology is unused and not in the transitive imports -> fixes/AdicRingCompletionMap.lean with that line removed. nt_compile --json in dependency order clean before and after the fix (<12 s each). Advisory: saturation E only in universe max u v w (no mathematical loss); parent's geometric-reducedness form differs (equivalent)."
+ }
+}

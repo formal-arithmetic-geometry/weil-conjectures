@@ -11,7 +11,8 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finite-integral-morphism",
   "def-trf-fs-log-blowup",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-per-fs-log-group-action"
  ],
  "proof": [
   {
@@ -372,5 +373,37 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-04daee7ae (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the new Eakin–Nagata node in full. I opened every cited statement and checked ILO VI 3.5, its following paragraph and 3.7(b) (printed pp.74–75), and Stacks 0BRH. Step 4 is 0BRH's difference-kernel sequence tensored with the flat map D→O^sh; it does not divide by |G|. Step 5 proves nonemptiness and transitivity by invariant idempotents in the local ring B=C^G. Step 3 uses lem-trf-finite-base-strict-localization: components of the geometric fibre biject with Ω-lifts because Ω is algebraically closed, and the G-action is equivariant by uniqueness in functoriality (3). Step 7 uses the sets-valued finite-limit stalk lemma and the sets-valued finite pushforward lemma on the underlying sheaf of M. Steps 6, 8 and 9 (tuple inverses and units) check out. The new node is true. I tested it on k[x²,x³]⊂k[x], and showed injectivity and finiteness are both needed with k[t_i]→k and k[x,xy,xy²,…]. Neither Mathlib (grep) nor the DAG has it, and Stacks only names Eakin in examples.tex; WANTED is acceptable for an unsplit node. Batch-5 flag on lem-trf-finite-base-strict-localization: accepted. That node's closure has no sec-poincare-duality node, no sk-thm-trace-transport and no batch-4 target. Its only sec-trace-formula nodes are generic algebra (Stacks 04GH, 05WR, 0GIP, 092Y), so it is outside both assumptions and not a step of their proofs. I accept all four declared tool_uses as generic. FIX (B3): Step 1 concludes 'Y is locally Noetherian' without citing the definition; I added pqf-def-locnoeth to its text, uses and proof_deps. Advisory: 'Noetherian scheme' has no definition node (the statement dates from Q109). The report names a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteQuotientStrictLocalInvariants",
+  "declaration": "AlgebraicGeometry.FiniteQuotientStrictLocal.finiteQuotient_strictLocal_invariants",
+  "declarations": [
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.PullbackData",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.ofLogHom",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.LogGermImage",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.RingGermImage",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.IsRingPullback",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.IsLogPullback",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.IsFixedLog",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.IsFixedRing",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.IsInvariantSection",
+   "AlgebraicGeometry.FiniteQuotientStrictLocal.finiteQuotient_strictLocal_invariants"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteQuotientStrictLocalInvariants.lean",
+  "statement": "theorem finiteQuotient_strictLocal_invariants (X : FineSaturatedLogScheme.{u}) [IsNoetherian X.scheme] (Y : Scheme.{u}) (G : Type v) [Group G] [Finite G] (a : FSLogGroupAction G X) (q : X.scheme ⟶ Y) [IsFinite q] [Surjective q] (hinvariant : ∀ g : G, (a.baseAction g).hom ≫ q = q) (htopology : Topology.IsQuotientMap q) (horbits : ∀ x z : X.scheme, q x = q z ↔ ∃ g : G, (a.baseAction g).hom x = z) (hsheaf : ∀ U : Y.Opens, Function.Injective (q.app U).hom ∧ ∀ s : Γ(X.scheme, q ⁻¹ᵁ U), s ∈ Set.range (q.app U).hom ↔ ∀ (g : G) (V : X.scheme.Opens) (hV : V ≤ q ⁻¹ᵁ U) (hVg : V ≤ (a.baseAction g).hom ⁻¹ᵁ (q ⁻¹ᵁ U)), ((a.baseAction g).hom.appLE (q ⁻¹ᵁ U) V hVg).hom s = (X.scheme.presheaf.map (homOfLE hV).op).hom s) : IsNoetherian Y ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), ∃ x : Spec (.of Ω) ⟶ X.scheme, x ≫ q = y) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x z : Spec (.of Ω) ⟶ X.scheme), x ≫ q = z ≫ q ↔ ∃ g : G, x ≫ (a.baseAction g).hom = z) ∧ ∃ (N : EtalePrelogStructure Y) (d : PullbackData X.logStructure.toEtalePrelogStructure N q), (∀ W : Y.Etale, Function.Injective (d.sectionMap W (q.Etale.obj W) (pullback.fst W.hom q) pullback.condition) ∧ ∀ s : X.logStructure.monoidSheaf.obj.obj (op (q.Etale.obj W)), s ∈ Set.range (d.sectionMap W (q.Etale.obj W) (pullback.fst W.hom q) pullback.condition) ↔ IsInvariantSection a q W s) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X.scheme), ∃ (r : strictLocalRing Y (x ≫ q) →+* strictLocalRing X.scheme x) (e : N.stalk (x ≫ q) →* X.logStructure.toEtalePrelogStructure.stalk x), IsRingPullback q x r ∧ IsLogPullback d x e ∧ Function.Injective r ∧ r.Finite ∧ (∀ b : strictLocalRing X.scheme x, b ∈ Set.range r ↔ IsFixedRing a x b) ∧ Function.Injective e ∧ (∀ m : X.logStructure.toEtalePrelogStructure.stalk x, m ∈ Set.range e ↔ IsFixedLog a x m) ∧ (∀ m : N.stalk (x ≫ q), X.logStructure.toEtalePrelogStructure.stalkAlpha x (e m) = r (N.stalkAlpha (x ≫ q) m)) ∧ (∀ b : strictLocalRing Y (x ≫ q), IsUnit (r b) ↔ IsUnit b) ∧ (∀ m : N.stalk (x ≫ q), IsUnit (e m) ↔ IsUnit m) ∧ Function.Bijective (Units.map (N.stalkAlpha (x ≫ q)))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The invariant direct-image prelog sheaf and its inclusion are specified by natural section maps, injective on every etale test with exactly invariant image. It is not assumed fs. Ring and monoid stalk maps are characterized on all pointed relative etale germs. Fixed predicates use the graphs of pullback by exactly those action elements fixing the geometric point. Added the landed FSLogGroupAction definition node to stmt_deps to reuse its action rather than define one again. Reviewer FIX: added the nonemptiness of geometric fibres (every geometric point of Y lifts, part of fibres = orbits, node Step 5) and removed five unused plain imports (H9).",
+  "fixed_by": "NT-stage2-cc-6a55fddd6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a55fddd6",
+  "group": "N3",
+  "result": "fix",
+  "note": "Clause-by-clause check against the node, ILO VI after 3.5 and 3.7(b), and the 5 stmt_deps (including the landed FSLogGroupAction). N is pinned by its sections on W×_Y X with exactly invariant image. H is the geometric stabilizer. r and e are fixed on every germ: B≅A^H, A finite over B, N_y≅M_x^H, structural square, units. Node changed only in lean and stmt_deps (added landed def node); statement verbatim. FIX H3: the fibre clause omitted nonemptiness (every geometric point of Y lifts), which node Step 5 proves; added the clause, true since q is finite. FIX H9: removed 5 unused plain imports. Advisory: PullbackData generalizes EtaleLogStructure.HomAlong/EtaleLogMap to a prelog target. nt_compile --json: delivered 9.1 s clean, fixed 7.8 s clean."
  }
 }

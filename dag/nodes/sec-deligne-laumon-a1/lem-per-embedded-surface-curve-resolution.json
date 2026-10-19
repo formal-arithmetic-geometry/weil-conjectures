@@ -18,7 +18,10 @@
   "def-nagata-relative-proj",
   "def-nagata-effective-cartier-ideal",
   "def-weil-pbc-regular-system-of-parameters",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-trf-ordinary-resolution-rule",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-nagata-global-blowup"
  ],
  "proof": [
   {
@@ -266,5 +269,23 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c03126495 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 5 new nodes in full, against Stacks resolve.tex 0BIC, 0BIB, 0BI4, 0BI5, 0BI7, 0AHH, 0AGQ and 0AGR, and divisors.tex 0AGB and 080E. Every new node is true and strictly smaller than the item; none is a relabelled clause (D1). Changed statement ('regular codimension-one components' instead of 'regular curves', the SNC convention of Stacks 0BI9/0BIA): the report's counterexample is correct. R, the localization of k[x,y] away from (x) ∪ (x−1,y), is regular, excellent and 2-dimensional, and V(x) is one codimension-one closed point that point blowups leave unchanged. So this is an E7 correction with no hypothesis added. The proof typo 'more than 3' → 'more than 2' is also correct. Steps: the step-5 lexicographic (M, N_M) termination is set up properly; step 6 separates triple points using 0BI7(3) with multiplicity 1; step 7's local-parameter argument is a few lines from the cited UFD and height-one statements, so the elementary mark stands. Centres always have 2-dimensional local rings, and proper ⇒ closed gives the finite exceptional image set. Duplicates: I grepped all the tags and labels over the DAG and read regular-flag-blowup-geometry, excellent-surface-desingularization, the normalized-blowup nodes and snc-boundary-parameter-criterion; none duplicates a new node. Batch 5: I checked each flagged citation's own closure. lem-per-excellent-normalization-preparation reaches only the trf affine-cover excellence lemmas (G-ring, J-2, catenary); lem-trf-h-projective-composition is Segre composition; lem-trf-regular-local-ufd-boundary-factorization reaches only K0/Pic algebra; lem-trf-ufd-height-one is a Mathlib leaf. All are generic and none is part of the trace-formula or Poincaré-duality proofs, so I accept them. I accept all six declared tool_uses. Maintainer note: step 1 of the citer lem-per-surface-resolution-supported-presentation reads the conclusion as 'regular curves'. Under the corrected statement it needs the one-line dimension-formula remark that the closed fibre over a 2-dimensional excellent local base has no 0-dimensional component; its conclusion is unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EmbeddedSurfaceCurveResolution",
+  "declaration": "AlgebraicGeometry.exists_embedded_surface_curve_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/EmbeddedSurfaceCurveResolution.lean",
+  "statement": "theorem exists_embedded_surface_curve_resolution (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hRegular : IsRegularScheme X) (hExcellent : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) (hDim : topologicalKrullDim X = 2) (hAmple : ∃ (L : X.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple X L hL) (Z : X.IdealSheafData) (hZ : Z ≠ ⊥) : ∃ A : OrdinaryBlowupTower X, (∀ i : Fin (A.length + 1), IsRegularScheme (A.level i)) ∧ (∀ i : Fin A.length, ∃ p : A.level i.castSucc, IsClosed ({p} : Set (A.level i.castSucc)) ∧ (A.center i).radical = A.center i ∧ ((A.center i).support : Set (A.level i.castSucc)) = {p} ∧ p ∈ (Z.comap (A.toBase i.castSucc)).support) ∧ (Z.comap (A.toBase (Fin.last A.length))).IsInvertible ∧ IsStrictNormalCrossingsBoundary (Z.comap (A.toBase (Fin.last A.length))).radical ∧ IsHProjective (A.toBase (Fin.last A.length)) ∧ ∃ F : Closeds X, Set.Finite (F : Set X) ∧ (∀ x ∈ F, IsClosed ({x} : Set X)) ∧ (F : Set X) ⊆ Z.support ∧ IsIso ((A.toBase (Fin.last A.length)) ∣_ F.compl)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f6cc254d",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Every node clause matches its Lean rendering: integral, Noetherian, regular, excellent on all affine opens, topologicalKrullDim = 2, an ample invertible module, Z : IdealSheafData with Z ≠ ⊥ (empty Z allowed). OrdinaryBlowupTower transitions are fixed by blowup_fac and transition_comp, so toBase is the actual composite. Centres are reduced closed points in the current Z.comap. Every level is regular. The total transform is IsInvertible and its radical is IsStrictNormalCrossingsBoundary, which on a regular scheme of dimension ≤ 2 is equivalent to the node's SNC: codimension one, ≤ 2 components through a point, local equations part of a regular system of parameters. The composite is IsHProjective and an isomorphism off a finite closed set of closed points inside Z.support. Edge cases checked: Z = ⊤ (comap_top), length 0, zero-dimensional components, a single universe u. Only lean and stmt_deps changed against the live node; the three added stmt_deps are landed def nodes used in the statement. The statement is verbatim in the file. Plain imports equal the recorded proof_dep modules. Docstrings carry Source 0BIC, the blueprint id and all 8 steps; the proof is sorry. No duplicate found in the side Lean trees. nt_compile --json exit 0 (6.5 s, no warnings); a broken-identifier control fails. Advisory only: closed-immersion, relative-Proj and regular-system-of-parameters deps are rendered through IdealSheafData, blowup and the SNC predicate."
  }
 }

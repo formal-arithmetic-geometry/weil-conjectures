@@ -16,7 +16,9 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-finitely-generated-module",
-  "def-sc-finitely-presented-module"
+  "def-sc-finitely-presented-module",
+  "def-trf-restricted-series-presentation",
+  "def-trf-adic-ring-completion-map"
  ],
  "proof": [
   {
@@ -337,5 +339,27 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c9f23a638 (reviewer sub-agent of L); spot-checked: Read the governing docs, the item, all three new nodes and the statement of every cited node. The source is Temkin 0707.3953v3, which has no copy in literature/ and is already listed as WANTED. I read it from a text extraction of the primary PDF already on this machine: Thm 3.5.5 Step 3 (pp. 22–23) and §2.1 (pp. 6–7). The item's clauses match the source: Â is topologically finitely presented and flat, K̂ is the completion, Â[1/π] is reduced via p = m ∩ A_K̂ maximal with an isomorphism of completions plus excellence, ωĈ ∩ C = ωC, and the finite-module comparison. The statement is unchanged apart from an inline glossary. Steps 1–11 are correct, and every cited statement's hypotheses are in force. Step 2's root selection checks out (|g_{j+1}(r_j)| < ε_j R^{d−1} < 2^{−jd}, then some root lies within 2^{−j}; separable approximation is applied over K, linear factorization over separably closed K). In step 7, field and finite-type excellence give the G-ring property, hence a regular completion map with Noetherian target, and regular-map reducedness applies. Step 8 uses Krull intersection with I = mC_m. Steps 4, 5 and 10 apply tower-limit exactness (b) with the torsion-freeness and surjective kernel transitions verified. Step 9 only needs π̂_N∘ι. Step 11 uses ji = q, ij = q and π-regularity. All three new nodes are true and strictly smaller than the item, and none is a duplicate (rg found no affinoid/Tate/height-one/rank-one/separable-density node). Height-one ⇒ real absolute value is the classical archimedean argument. Separable density is false only for a trivial absolute value, which the hypotheses exclude. The Tate/polynomial closed-point comparison is BGR-standard; edge cases C = 0 and n = 0 checked. I accept the five declared tool uses (tower-limit exactness, field excellence, finite-type-localization excellence, completion Noetherian, regular-map reduced target). No cycle and no SGA. Minor and unchanged: the new nodes have no lean_audit field, which tools/lean_status.py fills. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationRankOneFormalComparison",
+  "declaration": "ValuationRing.valuation_rank_one_formal_comparison",
+  "file": "lean/Sheaf/TraceFormula/ValuationRankOneFormalComparison.lean",
+  "statement": "theorem valuation_rank_one_formal_comparison (K : Type u) (V : Type v) (A : Type w) [Field K] [CommRing V] [IsDomain V] [ValuationRing V] [CommRing A] [Algebra V K] [IsFractionRing V K] [IsSepClosed K] [Algebra V A] [Module.Flat V A] [Algebra.FinitePresentation V A] (hheight : ∀ p : Ideal V, p.IsPrime → p = ⊥ ∨ p = IsLocalRing.maximalIdeal V) (π : V) (hπ : π ≠ 0) (hπm : π ∈ IsLocalRing.maximalIdeal V) (hgeom : @Algebra.IsGeometricallyReduced K (A ⊗[V] K) inferInstance inferInstance Algebra.TensorProduct.rightAlgebra) : ∃ (F : Type v) (nf : NormedField F) (hu : @IsUltrametricDist F nf.toDist) (B : Type w) (nb : NormedCommRing B), @HasRankOneFormalComparison K V A inferInstance inferInstance inferInstance inferInstance inferInstance π F nf hu B nb",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "ValuationRing.HasRankOneFormalComparison",
+   "ValuationRing.valuation_rank_one_formal_comparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3c025bf5",
+  "group": "NF",
+  "result": "fix",
+  "note": "Item, 7 recorded stmt_deps, both new def nodes and all 3 modules read clause by clause; item node changed only lean + stmt_deps (adds the 2 new def nodes). Hypotheses K sepclosed, V valuation ring with Frac K, height one, π≠0 in m, A flat f.p., IsGeometricallyReduced K (A⊗K) match the node with nothing stronger; every conclusion clause present and pinned to the actual AdicCompletion/Localization objects (eF/eV/eC isos, scalar, iK, t, g by compatibilities), no hollowness; edge cases A=0, Â=0, C=0, n=0, imperfect K, unit s covered. principalRingMap (liftRingHom) and the restricted-series/affinoid predicates (Mathlib IsRestricted.subring, gaussNorm) duplicate nothing public in Mathlib, the project or the live DAG; new-node fields ok; postponed theorems are the def node's stated obligations. Docstrings, 11-step proof, lines <=100, statements verbatim, plain imports = proof-dep modules. H9 FIX: AdicRingCompletionMap's public import of Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology is unused and not in the transitive imports -> fixes/AdicRingCompletionMap.lean with that line removed. nt_compile --json in dependency order clean before and after the fix (<12 s each). Advisory: saturation E only in universe max u v w (no mathematical loss); parent's geometric-reducedness form differs (equivalent)."
  }
 }
