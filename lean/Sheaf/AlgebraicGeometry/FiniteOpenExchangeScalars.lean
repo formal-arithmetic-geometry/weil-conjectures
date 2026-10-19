@@ -621,6 +621,110 @@ theorem scalar_identity (A : Type (u + 1)) [CommRing A] [Finite A]
 
 end
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem left_square_composition
+    {D₁ D₂ D₃ E₁ E₂ E₃ : Type*}
+    [Category D₁] [Category D₂] [Category D₃]
+    [Category E₁] [Category E₂] [Category E₃]
+    {L₁ : D₁ ⥤ E₁} {R₁ : E₁ ⥤ D₁}
+    {L₂ : D₂ ⥤ E₂} {R₂ : E₂ ⥤ D₂}
+    {L₃ : D₃ ⥤ E₃} {R₃ : E₃ ⥤ D₃}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃)
+    {G₁ : D₁ ⥤ D₂} {G₂ : D₂ ⥤ D₃} {G₃ : D₁ ⥤ D₃}
+    {H₁ : E₁ ⥤ E₂} {H₂ : E₂ ⥤ E₃} {H₃ : E₁ ⥤ E₃}
+    (eG : G₁ ⋙ G₂ ≅ G₃) (eH : H₁ ⋙ H₂ ≅ H₃)
+    (p₁ : G₁ ⋙ L₂ ⟶ L₁ ⋙ H₁) (p₂ : G₂ ⋙ L₃ ⟶ L₂ ⋙ H₂)
+    (p₃ : G₃ ⋙ L₃ ⟶ L₁ ⋙ H₃)
+    (d₁ : R₁ ⋙ G₁ ⟶ H₁ ⋙ R₂) (d₂ : R₂ ⋙ G₂ ⟶ H₂ ⋙ R₃)
+    (d₃ : R₁ ⋙ G₃ ⟶ H₃ ⋙ R₃)
+    (hu₁ : ∀ M, G₁.map (adj₁.unit.app M) ≫ d₁.app (L₁.obj M) =
+      adj₂.unit.app (G₁.obj M) ≫ R₂.map (p₁.app M))
+    (hu₂ : ∀ M, G₂.map (adj₂.unit.app M) ≫ d₂.app (L₂.obj M) =
+      adj₃.unit.app (G₂.obj M) ≫ R₃.map (p₂.app M))
+    (hu₃ : ∀ M, G₃.map (adj₁.unit.app M) ≫ d₃.app (L₁.obj M) =
+      adj₃.unit.app (G₃.obj M) ≫ R₃.map (p₃.app M))
+    (hd : ∀ N, G₂.map (d₁.app N) ≫ d₂.app (H₁.obj N) ≫ R₃.map (eH.hom.app N) =
+      eG.hom.app (R₁.obj N) ≫ d₃.app N) (M : D₁) :
+    L₃.map (eG.inv.app M) ≫ p₂.app (G₁.obj M) ≫ H₂.map (p₁.app M) ≫
+        eH.hom.app (L₁.obj M) = p₃.app M := by
+  apply (cancel_epi (L₃.map (eG.hom.app M))).mp
+  simp only [← Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  apply (adj₃.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Functor.comp_obj, Category.assoc]
+  simp only [← Category.assoc]
+  rw [← hu₂ (G₁.obj M)]
+  simp only [Category.assoc]
+  have hn := NatTrans.naturality_assoc d₂ (p₁.app M)
+    (R₃.map (eH.hom.app (L₁.obj M)))
+  dsimp only [Functor.comp_obj, Functor.comp_map] at hn
+  rw [← hn]
+  simp only [← Category.assoc, ← Functor.map_comp]
+  rw [← hu₁ M]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hd, ← Category.assoc]
+  have he := eG.hom.naturality (adj₁.unit.app M)
+  dsimp only [Functor.comp_obj, Functor.comp_map] at he
+  rw [he]
+  simp only [Category.assoc]
+  rw [hu₃]
+  have ha := adj₃.unit.naturality (eG.hom.app M)
+  dsimp only [Functor.id_map, Functor.comp_map] at ha
+  simpa only [Functor.id_obj, Functor.comp_obj, Category.assoc] using
+    congrArg (fun k ↦ k ≫ R₃.map (p₃.app M)) ha
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem resComp_apply {D : Type (u + 1)} [CommRing D]
+    (a : B →+* C) (b : C →+* D) (X : Scheme.{u})
+    (M : Modules D X) (W : X.ProEtᵒᵖ) (m : M.val.obj W) :
+    ((resComp a b X).hom.app M).val.app W m = m :=
+  (Classical.choose_spec (ambientRes_existsUnique b X (ringCoefficients B X)
+    (ringCoefficientMap a X) (ringCoefficientMap (b.comp a) X)
+    (coefficientMap_comp a b X))).1 M W m
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem push_composition {D : Type (u + 1)} [CommRing D]
+    (a : B →+* C) (b : C →+* D) {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (N : Modules D Y) :
+    (res a X).map ((pushRes b f).hom.app N) ≫
+        (pushRes a f).hom.app ((res b Y).obj N) ≫
+        (moduleDirectImage B f).map ((resComp a b Y).hom.app N) =
+      (resComp a b X).hom.app ((moduleDirectImage D f).obj N) ≫
+        (pushRes (b.comp a) f).hom.app N := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext m
+  change ((resComp a b Y).hom.app N).val.app
+      ((Scheme.proEtaleBaseChange f).op.obj W)
+      (((pushRes a f).hom.app ((res b Y).obj N)).val.app W
+        (((pushRes b f).hom.app N).val.app W m)) =
+    ((pushRes (b.comp a) f).hom.app N).val.app W
+      (((resComp a b X).hom.app ((moduleDirectImage D f).obj N)).val.app W m)
+  simp only [resComp_apply, pushRes_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pull_composition_aux {D : Type (u + 1)} [CommRing D]
+    [Finite B] [Finite C] [Finite D] (a : B →+* C) (b : C →+* D)
+    {Y X : Scheme.{u}} (f : Y ⟶ X) (M : Modules D X) :
+    (modulePullback B f).map ((resComp a b X).inv.app M) ≫
+        (pullRes a f).hom.app ((res b X).obj M) ≫
+        (res a Y).map ((pullRes b f).hom.app M) ≫
+        (resComp a b Y).hom.app ((modulePullback D f).obj M) =
+      (pullRes (b.comp a) f).hom.app M := by
+  exact left_square_composition
+    (Scheme.proEtaleRingModuleAdjunction f
+      (coefficients D X) (coefficients D Y) (constantRingIso D f))
+    (Scheme.proEtaleRingModuleAdjunction f
+      (coefficients C X) (coefficients C Y) (constantRingIso C f))
+    (Scheme.proEtaleRingModuleAdjunction f
+      (coefficients B X) (coefficients B Y) (constantRingIso B f))
+    (resComp a b X) (resComp a b Y)
+    (pullRes b f).hom (pullRes a f).hom (pullRes (b.comp a) f).hom
+    (pushRes b f).hom (pushRes a f).hom (pushRes (b.comp a) f).hom
+    (pull_unit_counit b f).1 (pull_unit_counit a f).1
+    (pull_unit_counit (b.comp a) f).1 (push_composition a b f) M
+
 /-- Pullback and open-extension identifications compose along arbitrary coefficient maps.
 Source: Stacks Tags 03D2 and 03DI
 (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -643,7 +747,38 @@ theorem scalar_composition {D : Type (u + 1)} [CommRing D]
           (res a X).map ((openRes b j).hom.app F) ≫
           (resComp a b X).hom.app ((moduleJ D j).obj F) =
         (openRes (b.comp a) j).hom.app F) := by
-  sorry
+  constructor
+  · exact pull_composition_aux a b j
+  · intro F
+    apply left_square_composition (moduleJAdj D j) (moduleJAdj C j) (moduleJAdj B j)
+      (resComp a b U) (resComp a b X)
+      (openRes b j).hom (openRes a j).hom (openRes (b.comp a) j).hom
+      (pullRes b j).inv (pullRes a j).inv (pullRes (b.comp a) j).inv
+    · intro M
+      exact unit_mateEquiv_symm (moduleJAdj D j) (moduleJAdj C j)
+        (TwoSquare.mk _ _ _ _ (pullRes b j).inv) M
+    · intro M
+      exact unit_mateEquiv_symm (moduleJAdj C j) (moduleJAdj B j)
+        (TwoSquare.mk _ _ _ _ (pullRes a j).inv) M
+    · intro M
+      exact unit_mateEquiv_symm (moduleJAdj D j) (moduleJAdj B j)
+        (TwoSquare.mk _ _ _ _ (pullRes (b.comp a) j).inv) M
+    · intro N
+      apply (cancel_mono ((pullRes (b.comp a) j).hom.app N)).mp
+      simp only [Category.assoc, Iso.inv_hom_id_app]
+      conv_lhs => rw [← pull_composition_aux a b j N]
+      simp only [Functor.comp_obj]
+      slice_lhs 3 4 =>
+        rw [← Functor.map_comp, Iso.hom_inv_id_app]
+        erw [CategoryTheory.Functor.map_id]
+      simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+      slice_lhs 1 2 =>
+        rw [← Functor.map_comp, Iso.inv_hom_id_app]
+        erw [CategoryTheory.Functor.map_id]
+      simp only [Category.id_comp, Category.comp_id]
+
+
+
 
 /-- Pullback scalar identifications preserve the identity for arbitrary scheme maps.
 Source: Stacks Tags 03D2 and 03CY
@@ -671,7 +806,7 @@ theorem pull_composition {D : Type (u + 1)} [CommRing D]
         (res a Y).map ((pullRes b f).hom.app M) ≫
         (resComp a b Y).hom.app ((modulePullback D f).obj M) =
       (pullRes (b.comp a) f).hom.app M := by
-  sorry
+  exact pull_composition_aux a b f M
 
 /-- Forgetting the constant-ring action, using Mathlib's module-sheaf forgetful functor.
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars). -/
