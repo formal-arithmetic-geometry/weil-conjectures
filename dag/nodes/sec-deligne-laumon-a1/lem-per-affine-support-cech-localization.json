@@ -16,9 +16,176 @@
   "pqf-def-cohomology",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex $M$ representing $L$. The principal opens $D(f_i)$ cover $W$: a prime outside $V(K)$ omits at least one generator. Their increasing finite intersections are $D(f_{i_0}\\cdots f_{i_p})$, which are affine by [lem-weil-pbc-affine-open-section-vanishing-prime](b), applied on $X=\\operatorname{Spec}A$. By [lem-weil-pbc-spec-module-tilde-sections], sections of $\\widetilde M^q$ on each such intersection are $M^q_{f_{i_0}\\cdots f_{i_p}}$, with the actual localization restriction maps. For any module $N$, the sheaf kernel $\\Gamma_Z(X,\\widetilde N)$ is therefore $\\ker(N\\to\\prod_iN_{f_i})$. If $f_i^{a_i}x=0$ for every $i$, enlarge each $a_i$ to be positive. Every monomial of degree $1+\\sum_i(a_i-1)$ contains some $f_i^{a_i}$, so that power of $K$ kills $x$. Conversely $K^a x=0$ implies $f_i^a x=0$. Thus this kernel is exactly $\\Gamma_K(N)$, naturally as a submodule of $N$. For an empty list, both kernels are all of $N$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "Each $A_g$ is flat by [lem-weil-pbc-localization-flat]. Each term of $E_f$ and $T_f$ is a finite product of such modules (and $A$ in degree zero for $E_f$). Finite products are finite direct sums, and tensoring their sum gives the finite sum of the exact tensor functors, hence remains exact. Both complexes are bounded. Apply [lem-pc-module-bounded-flat-kflat] to conclude that both are K-flat. Consequently their ordinary total tensors with any representative compute their derived tensors and preserve quasi-isomorphisms in that representative. We use Cech degree first and differential $d_{\\rm Cech}+(-1)^p d_M$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "For an injective $A$-module $Q$, [lem-per-local-cohomology-cech-bound] says that $H^j(E_f\\otimes_A Q)$ is $R^j\\Gamma_K(Q)$ for $j\\geq0$. Its complex $C^\\bullet(f;Q)$ is $E_f\\otimes_AQ$: for each product $g$ of generators, [lem-weil-pbc-localization-tensor-over-base] (base ring $A$, module $A$, powers of $g$) gives $A_g\\otimes_AQ\\cong Q_g$, $(a/g^n)\\otimes q\\mapsto aq/g^n$, compatibly with the localization maps; finite products commute with $\\otimes_AQ$, and the two sign conventions agree. The complex $Q[0]$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. By [lem-weil-pbc-kinjective-total-derived], applying $\\Gamma_K$ to this same complex computes its derived functor; hence its higher derived functors on $Q$ vanish. In degree zero the inclusion $\\Gamma_K(Q)\\hookrightarrow Q$ identifies it with the kernel of the first differential, by Step 1. There are no negative degrees. Therefore the actual augmentation $\\Gamma_K(Q)[0]\\to E_f\\otimes_A Q$, inclusion in Cech degree zero and zero otherwise, is a quasi-isomorphism. This argument uses only the higher-degree vanishing from the cited Cech theorem; it does not assume that an unspecified isomorphism of degree-zero cohomology is the kernel inclusion.",
+   "uses": [
+    "lem-per-local-cohomology-cech-bound",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module computation, applied to injectives"
+   }
+  },
+  {
+   "text": "The module category is Grothendieck by [lem-weil-pbc-ring-modules-grothendieck-abelian]. Choose a functorial resolution $M\\to I$ with $I$ K-injective and all $I^q$ injective using [lem-pur-kinjective-degreewise-existence]. Apply Step 3 to each $I^q$. The double complex with rows $E_f\\otimes I^q$ has Cech columns $0,\\ldots,r$ and no vertical bound. Its augmentation from $\\Gamma_K(I)$ is a cochain map: the horizontal differential kills ideal torsion, and the vertical differential preserves it. The finite-strip theorem [lem-sc-finite-strip-row-augmentation], with strip length $r+1$, makes the augmentation a total quasi-isomorphism. By [lem-weil-pbc-kinjective-total-derived] its source computes $R\\Gamma_K(L)$. Step 2 identifies the target with $E_f\\otimes_A^{\\mathbf L}L$, using $E_f\\otimes M\\to E_f\\otimes I$. All maps here are induced by the actual torsion inclusions and the functorial resolutions.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-sc-finite-strip-row-augmentation",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-qcoh-complex-alternating-cech-derived-sections] to $W$ and its finite cover by $D(f_i)$; the associated modules are quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections] and all intersections are affine by Step 1. Its comparison is the canonical comparison through K-injective resolutions, not merely an abstract isomorphism. The components and restriction maps of Step 1 identify the Cech total complex with $T_f\\otimes M$, using termwise the isomorphisms $A_g\\otimes_AM^q\\cong M^q_g$ of [lem-weil-pbc-localization-tensor-over-base], natural in $M^q$. The diagonal augmentation from $M$ sends a section to its restrictions $m/1$ on the singleton opens, so the resulting map to $R\\Gamma(W,\\widetilde M|_W)$ is the derived restriction. Apply the same theorem to the singleton cover $X=D(1)$: it identifies $M=\\Gamma(X,\\widetilde M)$ with $R\\Gamma(X,\\widetilde M)$ by its actual augmentation. Step 2 replaces the ordinary tensor by $T_f\\otimes_A^{\\mathbf L}L$.",
+   "uses": [
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "Use [lem-per-ringed-space-supported-sections-triangle] on the Zariski ringed space $X$ and $\\widetilde M$. Choose its functorial K-injective resolution $\\widetilde M\\to J$ with injective terms, which exists by [prop-pur-kinjective-resolutions-exist] on the small site of opens. The cited localization theorem gives the short exact sequence $0\\to\\Gamma_Z(X,J)\\to\\Gamma(X,J)\\to\\Gamma(W,J|_W)\\to0$ and identifies its triangle with the derived support triangle. In particular the left term is the right derived functor of the kernel in the question. This is a theorem about Zariski module sheaves; none of the finite-coefficient etale or pro-etale support triangles is being applied to $\\mathcal O_X$-modules.",
+   "uses": [
+    "lem-per-ringed-space-supported-sections-triangle",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "Here is an explicit comparison of fibers, also fixing the maps. Write $a:M\\to T_f\\otimes M$. Its shifted cone is isomorphic to $E_f\\otimes M$: it is the identity on $M$ and multiplies the summand corresponding to $T_f^p\\otimes M^q$ by $(-1)^{p+1}$ in the shifted cone. This changes the augmented horizontal differential to the negative cone differential and leaves the required vertical sign unchanged. Put $J_W=J|_W$, K-injective by [lem-sc-derived-k-injective-restrict-open]. Let $T(J_W)$ be its Cech total complex for the same cover. There is a strictly commuting square from $a$ to $\\Gamma(X,J)\\to T(J_W)$, using resolution maps componentwise. The left vertical map is a quasi-isomorphism by Step 5. The right vertical map is a quasi-isomorphism by [lem-sc-qcoh-complex-alternating-cech-derived-sections] and its canonical comparison equation of [def-sc-alternating-cech-total-complex], together with [lem-sc-kinjective-alternating-cech-augmentation-quasi-iso] for $J_W$.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "def-sc-alternating-cech-total-complex",
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "The augmentation $\\Gamma(W,J_W)\\to T(J_W)$ is a quasi-isomorphism by [lem-sc-kinjective-alternating-cech-augmentation-quasi-iso]. It gives a second strictly commuting square with identity on $\\Gamma(X,J)$, from restriction to the bottom arrow of Step 7. Take the actual shifted cones of both squares, with component maps the two specified vertical maps. Each induced cone map is a quasi-isomorphism: use the degreewise split sequences $0\\to B\\to\\operatorname{Cone}(a)\\to M[1]\\to0$, their natural long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact, lem-weil-pbc-complex-ses-long-exact-naturality], and [lem-weil-pbc-five-lemma], since the four surrounding component maps are isomorphisms. This gives a natural zigzag of fiber quasi-isomorphisms. The restriction arrow for $J$ is degreewise surjective by Step 6, so [lem-weil-degreewise-epi-kernel-cocone-qis] identifies its shifted cone canonically with $\\Gamma_Z(X,J)$ by $(0,\\mathrm{inclusion})$. Thus the augmented localization model identifies with geometric derived support, preserving both the support map and restriction. The short-exact-sequence triangle is distinguished and has natural connecting maps by [lem-weil-pbc-complex-ses-triangle]. All comparisons are maps of explicit complexes, with no unspecified completion of a triangle morphism.",
+   "uses": [
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "Apply Steps 6--8 with $M=I$ from Step 4. The termwise tilde comparison in the triangulated affine derived equivalence [new-affine-qcoh-derived-equivalence-core] identifies $\\widetilde I$ with $\\widetilde L$, so replacing the original module representative is legitimate. The underived kernel equality of Step 1 gives the actual map $\\Gamma_K(I)=\\Gamma_Z(X,\\widetilde I)\\to\\Gamma_Z(X,J)$ from a resolution $\\widetilde I\\to J$. In the common shifted cone of $\\Gamma(X,J)\\to T(J_W)$, the map from $\\Gamma_K(I)$ sends $x$ to $(0,i(x))$. Indeed restrictions of a supported section to every cover intersection vanish. Both the row augmentation of Step 4 and the map through the geometric kernel have exactly this image; the cone-square zigzag therefore identifies them. Step 4 makes this map a quasi-isomorphism. Hence $R\\Gamma_K(L)\\cong R\\Gamma_Z(X,\\widetilde L)$ is the comparison induced by the actual kernel maps. Functorial resolutions make these squares natural on complex maps. All model functors invert quasi-isomorphisms by Step 2 (and the tilde equivalence), so the comparisons descend to $D(A)$ and its morphisms represented by roofs.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "For $Z_1=V(K_1)\\subseteq Z_2=V(K_2)$, Step 1 identifies the underived torsion functors with the respective geometric kernels on every module. These are submodules of the same module, and restriction to $X\\setminus Z_2\\subseteq X\\setminus Z_1$ gives the kernel inclusion. On a common module resolution $I$ and a common sheaf resolution $\\widetilde I\\to J$, the comparison in Step 9 is induced by these literal kernel maps. Thus its square for the two supports commutes degree by degree. By [lem-per-ringed-space-supported-sections-triangle], kernel inclusion, identity, and open restriction give the claimed morphism of triangles; the comparison therefore identifies the algebraic support map with this geometric one. Kernel inclusions and restrictions compose literally. When the closed sets coincide the kernels coincide, so the comparison is the identity after the geometric identification. No comparison between arbitrary choices of Cech refinements is needed.",
+   "uses": [
+    "lem-per-ringed-space-supported-sections-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  },
+  {
+   "text": "If $r=0$, then $K=(0)$, $Z=X$, $W=\\varnothing$, $T_f=0$, $E_f=A[0]$, and $\\Gamma_K$ is the identity. The triangle becomes $L\\xrightarrow{1}L\\to0\\to L[1]$. A zero generator has empty principal open and zero localization, and is harmless. If one generator is a unit, $W=X$ and the augmentation has zero fiber. More generally the same computations allow the zero ring, repeated generators and arbitrary modules: no step required a nonempty spectrum, a proper ideal or bounded cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-per-local-cohomology-cech-bound",
+  "lem-per-ringed-space-supported-sections-triangle",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+  "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "new-affine-qcoh-derived-equivalence-core",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0A6T (lemma-local-cohomology-is-local-cohomology), finite affine Cech and localization-triangle proof; algebraic right-derived torsion computed termwise on injectives using dualizing.tex Tag 0956 and finite-strip totalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +221,17 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"ModuleCat.Tilde.Localizations\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → ↑(AlgebraicGeometry.PrimeSpectrum.Top R) → Type u\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, this constructs the localization of the module $M$ with respect to the multiplicative set $\\\\m\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"ModuleCat.Tilde.const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      ↑M →\\n        (r : R) →\\n          (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n            (∀ x ∈ U, r ∈ x.asIdeal.primeCompl) → ↑(M.tildeInModuleCat.obj (Opposite.op U))\", \"doc\": \"Given an $R$-module $M$, an element $m \\\\in M$, an element $r \\\\in R$, and an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$ such that $r$ lies in the complement of every prime ideal corresponding to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat) →\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F) → Prop\", \"doc\": \"A property of a functor $ F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing} $ equipped with a natural transformation $ \\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F $, asserting that for every affine open s\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the localCohomology hits are Ext-colimit functors, not their derived-torsion or supported-section comparison; Mathlib LocalCohomology.lean explicitly lists these comparisons as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections on a finite union of principal opens of an affine scheme are computed by the alternating localization Cech complex for any unbounded module complex",
+   "results": "{\"t\": \"2026-10-18T23:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"Derived sections on a finite union of principal opens of an affine scheme are computed by the alternating localization Cech complex for any unbounded module complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"6935de15aac291cb\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned types concern ordinary basic-open sections, localization and fraction presentations, not unbounded derived supported-section comparisons. Read LocalCohomology.lean lines 40-47: these comparisons are future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-affine-localization-diagram",
@@ -85,5 +259,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-affine-support-cech-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing unbounded affine-cover Cech, module ideal-torsion Cech, finite-strip totalization, K-flat and resolution nodes. Proved the underived kernel equality, computed arbitrary derived torsion using finite-strip injective rows, and built geometric comparison maps through actual cone squares. One generic ringed-space localization node is new; no module-only duplicate and no clause restatement of this affine comparison is created. Checked support naturality on common resolutions and all degenerate generator cases.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: The two localization triangles and their comparison in the proof of 0DXQ underlying the formal-sections application in the first half of 0ECR. Specific input: The two affine localization triangles used before completing the punctured-spectrum triangle in the proof of 0DXQ.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-sc-derived-k-injective-restrict-open",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-sc-finite-strip-row-augmentation",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "new-affine-qcoh-derived-equivalence-core",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic homological or Zariski-module tool used in the affine local-cohomology argument; it does not replace any perverse/Fourier step of the unit. The local unit has no statement of this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+  "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-kinjective-total-derived",
+  "new-affine-qcoh-derived-equivalence-core",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N9-3358643b0",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-3358643b0 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 0G71 (cohomology.tex 8626-8653), 0A6T (local-cohomology.tex 60-150) and 0955/0956 through lem-per-local-cohomology-cech-bound. The item statement is identical to the live base; no SGA is cited. Checked on k[x] with K=(x), r=0, a unit generator, a zero generator, the zero ring, and V(K1) in V(K2) (Noetherian: K2^m in K1). Step 7's cone sign map (id on M, (-1)^{p+1} on T^p) recomputed and correct. Steps 7-9: the canonical-comparison equation plus the K-injective Cech augmentation give quasi-isomorphic vertical maps; both maps from Gamma_K(I) land on (0,i(x)), so the kernel comparison is a quasi-isomorphism by 2-of-3 and does not depend on f, which makes the Step 10 naturality literal. Step 4's finite-strip hypotheses hold (strip length r+1, b a cochain map). The new node lem-per-ringed-space-supported-sections-triangle is 0G71 with 08BS and 01EA; its Z1 in Z2 clause is true; it is generic, statement-only, searched with all three kinds, and not a duplicate (the DAG support nodes are etale/pro-etale with finite coefficients or D+). No cycle. All ten declared tool_uses accepted. One fault (C1): Steps 3 and 5 identify A_g tensor M with M_g without citation. Repaired by citing the Mathlib leaf lem-weil-pbc-localization-tensor-over-base in both steps and in proof_deps. Advisory: the connecting map delta of the SES triangle is not explicitly matched to the cone projection, but the statement only needs the vertices, the first two arrows and support naturality, and these are proved.; 1 file(s) fixed by the reviewer"
  }
 }
