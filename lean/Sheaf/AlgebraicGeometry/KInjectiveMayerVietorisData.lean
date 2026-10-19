@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # The concrete restriction/direct-image complex for Mayer--Vietoris

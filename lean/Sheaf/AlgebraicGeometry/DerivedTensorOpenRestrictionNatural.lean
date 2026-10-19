@@ -6,7 +6,7 @@ Authors: SHEAF group P4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.KFlatBifunctorIsoDescent
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel

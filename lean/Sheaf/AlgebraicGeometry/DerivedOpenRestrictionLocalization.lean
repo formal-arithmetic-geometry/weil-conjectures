@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Localization.Adjunction
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

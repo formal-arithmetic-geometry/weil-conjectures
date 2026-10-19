@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.SupportedOverlapPerfectExtension

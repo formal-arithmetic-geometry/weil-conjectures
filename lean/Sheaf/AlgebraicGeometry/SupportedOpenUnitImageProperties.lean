@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

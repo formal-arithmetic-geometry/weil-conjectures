@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 

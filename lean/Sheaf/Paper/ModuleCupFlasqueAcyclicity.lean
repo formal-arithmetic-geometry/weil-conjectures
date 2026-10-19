@@ -8,7 +8,7 @@ module
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 

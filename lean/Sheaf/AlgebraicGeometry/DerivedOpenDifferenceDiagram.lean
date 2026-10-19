@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
