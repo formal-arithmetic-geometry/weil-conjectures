@@ -205,5 +205,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-ddbe199d6 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, every cited node statement and Stacks algebra.tex 02IE (line 14713, proof at 14719), 00KW (14687) and 07DU (14020). There are no new nodes. The statement matches 02IE hypothesis by hypothesis, adds no regularity assumption, and its only edit is the quotient-definition citation. Steps 2 and 4 apply the Mathlib leaf lem-weil-pbc-noetherian-height-quotient-bound. I checked that leaf as Ideal.height_le_height_add_encard_of_subset, KrullsHeightTheorem.lean:379. Step 2 applies it to (A,m,t=i), giving d<=e+i. Step 4 applies it to (B,n,t=d-i), giving e<=d-i, and covers t=0. Both applications meet every hypothesis. Steps 1 and 3 are genuinely elementary. Step 1 shows the quotient is local and Noetherian, that prime chains lift, and that ht(max)=dim. Step 3 shows A/J has a unique prime, so its dimension is 0. I tested the zero-divisor parameter case k[[x,y]]/(x^2,xy) with a_1=y, the case k[[x,y]] with (x^2,y), and d=0. The grep over the DAG finds no duplicate: the system-of-parameters existence node and the regular-sequence Mathlib equality are different statements. The citer lem-per-noetherian-local-domain-open-infinite uses i=1,2 consistently. There is no cycle, no SGA source and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PartialParametersQuotientDimension",
+  "declaration": "ringKrullDim_quotient_span_initial_parameters",
+  "file": "lean/Sheaf/RingTheory/PartialParametersQuotientDimension.lean",
+  "statement": "theorem ringKrullDim_quotient_span_initial_parameters (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (d : ℕ) (hdim : ringKrullDim A = (d : WithBot ℕ∞)) (a : Fin d → A) (ha : ∀ j : Fin d, a j ∈ IsLocalRing.maximalIdeal A) (hrad : (Ideal.span (Set.range a)).radical = IsLocalRing.maximalIdeal A) (i : ℕ) (hi : 1 ≤ i) (hid : i ≤ d) : ringKrullDim (A ⧸ Ideal.span (a '' {j : Fin d | j.val < i})) = ((d - i : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8130ea229",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Node diff vs side-live is lean only; the 3 stmt_dep copies are unchanged. Clause check vs Stacks 02IE/07DU: Noetherian local nonzero ring (IsLocalRing gives Nontrivial), ringKrullDim A = d, a : Fin d → A in m, radical of span(range a) = m (exponent-0 convention equivalent since J is proper), 1 ≤ i ≤ d, ringKrullDim(A ⧸ span(first i)) = d - i with exact ℕ subtraction. No extra hypotheses or universe restriction; d=0 vacuous. Dep algebra-hom-quotient has status mathlib and no lean record; the tool treats it as stated. No duplicate in Mathlib (regular-sequence equality only) or side-live Sheaf. Docstrings give source places, blueprint id and all 5 proof steps; body is sorry; statement verbatim. nt_compile --json clean, 1.6 s. Advisory: proof-only KrullsHeightTheorem import."
  }
 }
