@@ -759,19 +759,30 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
 
 
 set_option linter.unusedVariables false in
+/-- The family of underived proper/open isomorphisms.
+Source: Stacks Project, Tag 0F7B. -/
+def ProperOpenUnderivedFamily (Λ : Type (u + 1)) [CommRing Λ] :=
+  ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
+        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar
+        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅
+        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p)
+
+set_option linter.unusedVariables false in
+/-- The family of derived proper/open isomorphisms.
+Source: Stacks Project, Tag 0F7B. -/
+def ProperOpenDerivedFamily (Λ : Type (u + 1)) [CommRing Λ] :=
+  ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
+        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅ (openImmersionLowerShriek (ModuleCat.{u +
+        1} Λ) k).mapDerivedCategoryPlus ⋙ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p)
+
+set_option linter.unusedVariables false in
 /-- The joint section, derived-unit, refinement, composition, identity and
 base-change normalizations of a pair of finite proper/open comparison families.
 Naming this predicate keeps its full conjunction out of witness-selection terms. -/
 def properOpenInterchangeConditions (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
-        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar
-        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p))
-    (γ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
-        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),
-        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek
-        (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅ (openImmersionLowerShriek (ModuleCat.{u +
-        1} Λ) k).mapDerivedCategoryPlus ⋙ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p)) :
+    (δ : ProperOpenUnderivedFamily Λ) (γ : ProperOpenDerivedFamily Λ) :
     Prop :=
     (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]
         [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf
