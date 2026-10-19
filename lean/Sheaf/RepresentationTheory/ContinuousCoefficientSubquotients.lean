@@ -6,9 +6,9 @@ Authors: SHEAF group Q07
 module
 
 public import Sheaf.RepresentationTheory.LAdic
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Algebra.Exact.Basic
+
+import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 /-!
 # Subquotients of continuous finite-dimensional coefficient representations
@@ -26,6 +26,67 @@ inclusion and the surjective quotient map characterizes the induced actions uniq
 universe u v w z x y
 
 namespace Representation
+
+private def toEndRepresentation {R G M : Type*} [CommRing R] [Group G]
+    [AddCommGroup M] [Module R M] (ρ : G →* (M ≃ₗ[R] M)) : Representation R G M where
+  toFun g := (ρ g).toLinearMap
+  map_one' := by ext x; simp
+  map_mul' g h := by ext x; simp
+
+private def toAutRepresentation {R G M : Type*} [CommRing R] [Group G]
+    [AddCommGroup M] [Module R M] (ρ : Representation R G M) : G →* (M ≃ₗ[R] M) :=
+  (LinearMap.GeneralLinearGroup.generalLinearEquiv R M).toMonoidHom.comp ρ.asGroupHom
+
+private theorem moduleTopology_t2 (R M : Type*) [NontriviallyNormedField R]
+    [AddCommGroup M] [Module R M] [FiniteDimensional R M]
+    [TopologicalSpace M] [IsModuleTopology R M] : T2Space M := by
+  exact T2Space.of_injective_continuous (Module.finBasis R M).equivFun.injective
+    (IsModuleTopology.continuous_of_linearMap (Module.finBasis R M).equivFun.toLinearMap)
+
+private theorem coefficient_subquotients
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] [tE : TopologicalSpace E]
+    (hE : tE =
+      (spectralNorm.nontriviallyNormedField ℚ_[l] E).toUniformSpace.toTopologicalSpace)
+    (G : ProfiniteGrp.{v}) (V : Type w) [AddCommGroup V] [Module E V]
+    [TopologicalSpace V] [IsModuleTopology E V]
+    (ρ : G →* (V ≃ₗ[E] V)) (hV : IsContinuousCoefficient l E G V ρ) :
+    (∀ (U : Submodule E V) (_hU : ∀ (g : G) (a : V), a ∈ U → ρ g a ∈ U),
+      IsClosed (U : Set V) ∧ IsModuleTopology E U ∧ IsModuleTopology E (V ⧸ U) ∧
+      ∃ (τ : G →* (U ≃ₗ[E] U)) (κ : G →* ((V ⧸ U) ≃ₗ[E] (V ⧸ U))),
+        IsContinuousCoefficient l E G U τ ∧
+        IsContinuousCoefficient l E G (V ⧸ U) κ ∧
+        Continuous (fun p : G × U ↦ τ p.1 p.2) ∧
+        Continuous (fun p : G × (V ⧸ U) ↦ κ p.1 p.2) ∧
+        IsEquivariant E G U V τ ρ U.subtype ∧ Continuous U.subtype ∧
+        IsEquivariant E G V (V ⧸ U) ρ κ U.mkQ ∧ Continuous U.mkQ) := by
+  subst tE
+  let := spectralNorm.nontriviallyNormedField ℚ_[l] E
+  have : FiniteDimensional E V := hV.1
+  have : IsTopologicalAddGroup V := IsModuleTopology.topologicalAddGroup E V
+  have : T2Space V := moduleTopology_t2 E V
+  have hρ : Continuous (fun p : G × V ↦ ρ p.1 p.2) := by
+    convert hV.2 using 1 <;> rw [eq_moduleTopology E V]
+  intro U hU
+  have : IsModuleTopology E U := isModuleTopologyOfFiniteDimensional
+  let τ := toAutRepresentation ((toEndRepresentation ρ).subrepresentation U hU)
+  let κ := toAutRepresentation ((toEndRepresentation ρ).quotient U hU)
+  have hτ : Continuous (fun p : G × U ↦ τ p.1 p.2) := by
+    exact (hρ.comp
+      (continuous_fst.prodMk (continuous_subtype_val.comp continuous_snd))).subtype_mk _
+  have hκ : Continuous (fun p : G × (V ⧸ U) ↦ κ p.1 p.2) := by
+    rw [← (IsOpenQuotientMap.id.prodMap U.isOpenQuotientMap_mkQ).continuous_comp_iff]
+    exact U.continuous_mkQ.comp hρ
+  refine ⟨U.closed_of_finiteDimensional, inferInstance, inferInstance, τ, κ, ?_, ?_,
+    hτ, hκ, ?_, continuous_subtype_val, ?_, U.continuous_mkQ⟩
+  · refine ⟨inferInstance, ?_⟩
+    convert hτ using 1 <;> rw [eq_moduleTopology E U]
+  · refine ⟨inferInstance, ?_⟩
+    convert hκ using 1 <;> rw [eq_moduleTopology E (V ⧸ U)]
+  · intro g x
+    rfl
+  · intro g x
+    rfl
 
 /-- Subspaces, quotients, kernels, images and cokernels of continuous coefficient
 representations, with their usual topologies and canonical universal properties.
@@ -119,6 +180,71 @@ theorem continuousCoefficient_subquotients
           ∃! g' : (W ⧸ LinearMap.range h) →ₗ[E] Y,
             IsEquivariant E G (W ⧸ LinearMap.range h) Y τQ υ g' ∧ Continuous g' ∧
             g'.comp (LinearMap.range h).mkQ = g)) := by
-  sorry
+  subst tE
+  let := spectralNorm.nontriviallyNormedField ℚ_[l] E
+  have : FiniteDimensional E V := hV.1
+  have : IsTopologicalAddGroup V := IsModuleTopology.topologicalAddGroup E V
+  have : T2Space V := moduleTopology_t2 E V
+  refine ⟨coefficient_subquotients l E rfl G V ρ hV, ?_⟩
+  intro W _ _ _ _ σ hW h hh
+  have : FiniteDimensional E W := hW.1
+  have : IsTopologicalAddGroup W := IsModuleTopology.topologicalAddGroup E W
+  have hK : ∀ (g : G) (a : V), a ∈ LinearMap.ker h → ρ g a ∈ LinearMap.ker h := by
+    intro g a ha
+    change h (ρ g a) = 0
+    rw [hh g a, (show h a = 0 from ha), map_zero]
+  have hI : ∀ (g : G) (a : W), a ∈ LinearMap.range h → σ g a ∈ LinearMap.range h := by
+    intro g a ha
+    obtain ⟨b, rfl⟩ := ha
+    exact ⟨ρ g b, hh g b⟩
+  obtain ⟨_, hKtop, _, τK, _, hτK, _, hKcont, _, hKeq, hKinc, _, _⟩ :=
+    coefficient_subquotients l E rfl G V ρ hV (LinearMap.ker h) hK
+  obtain ⟨_, hItop, hQtop, τI, τQ, hτI, hτQ, hIcont, hQcont, hIeq, hIinc,
+    hQeq, hQproj⟩ := coefficient_subquotients l E rfl G W σ hW (LinearMap.range h) hI
+  have hcoreq : IsEquivariant E G V (LinearMap.range h) ρ τI h.rangeRestrict := by
+    intro g a
+    apply Subtype.ext
+    exact (hh g a).trans (hIeq g (h.rangeRestrict a)).symm
+  have hco : Continuous h.rangeRestrict :=
+    h.continuous_of_finiteDimensional.subtype_mk _
+  refine ⟨h.continuous_of_finiteDimensional, τK, τI, τQ, hτK, hτI, hτQ,
+    hKtop, hItop, hQtop, hKcont, hIcont, hQcont, hKeq, hKinc, hcoreq, hco, hIeq, hIinc,
+    hQeq, hQproj, Subtype.val_injective, ?_, h.surjective_rangeRestrict,
+    Subtype.val_injective, LinearMap.exact_subtype_mkQ _, Submodule.mkQ_surjective _, ?_, ?_⟩
+  · rw [LinearMap.exact_iff, h.ker_rangeRestrict, Submodule.range_subtype]
+  · intro X _ _ _ _ ξ hX f hf hzero
+    have hmem : ∀ a : X, f a ∈ LinearMap.ker h := by
+      intro a
+      exact DFunLike.congr_fun hzero a
+    let f' := f.codRestrict (LinearMap.ker h) hmem
+    have hfac : (LinearMap.ker h).subtype.comp f' = f := rfl
+    refine ⟨f', ⟨?_, ?_, hfac⟩, ?_⟩
+    · intro g a
+      apply Subtype.ext
+      exact (hf g a).trans (hKeq g (f' a)).symm
+    · exact (IsModuleTopology.continuous_of_linearMap f).subtype_mk _
+    · intro f'' hf''
+      apply LinearMap.ext
+      intro a
+      apply Subtype.ext
+      exact DFunLike.congr_fun hf''.2.2 a
+  · intro Y _ _ _ _ υ hY g hg hzero
+    have : IsTopologicalAddGroup Y := IsModuleTopology.topologicalAddGroup E Y
+    have hmem : LinearMap.range h ≤ LinearMap.ker g := by
+      rintro _ ⟨a, rfl⟩
+      exact DFunLike.congr_fun hzero a
+    let g' := (LinearMap.range h).liftQ g hmem
+    have hfac : g'.comp (LinearMap.range h).mkQ = g := Submodule.liftQ_mkQ _ _ _
+    refine ⟨g', ⟨?_, ?_, hfac⟩, ?_⟩
+    · intro a q
+      obtain ⟨b, rfl⟩ := Submodule.mkQ_surjective (LinearMap.range h) q
+      rw [← hQeq a b]
+      exact hg a b
+    · exact IsModuleTopology.continuous_of_linearMap g'
+    · intro g'' hg''
+      apply LinearMap.ext
+      intro q
+      obtain ⟨b, rfl⟩ := Submodule.mkQ_surjective (LinearMap.range h) q
+      exact DFunLike.congr_fun hg''.2.2 b
 
 end Representation

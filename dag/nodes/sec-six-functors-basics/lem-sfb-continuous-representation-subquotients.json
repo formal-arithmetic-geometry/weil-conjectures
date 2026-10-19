@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "The finite extension $E/\\mathbf Q_\\ell$ is complete for the nontrivial absolute value $|\\cdot|_E$ [def-weil-l-adic-coefficient-extension]. The $\\ell$-adic topology on a finite-dimensional $E$-vector space (the product topology for a basis, as in [def-pod-l-adic-representations](2)) makes it a Hausdorff topological $E$-vector space, since $E$ is a Hausdorff topological field. The subspace $U$ is finite-dimensional; by [lem-sfb-finite-dimensional-subspace-closed] it is closed in $V$ and $U\\hookrightarrow V$ is a closed embedding. The subspace topology on $U$ is again Hausdorff with continuous addition, negation and scalar multiplication (restrictions of those of $V$). The identity of $U$ from its $\\ell$-adic topology to the subspace topology, and back, is $E$-linear with finite-dimensional Hausdorff source in both directions, hence continuous both ways by [lem-sfb-finite-dimensional-linear-map-continuous]: the two topologies agree. The restricted action $\\Pi\\times U\\to U$ is continuous: its composite with the embedding $U\\hookrightarrow V$ is the restriction of the ambient action to $\\Pi\\times U$, and $U$ carries the subspace topology. The inclusion is equivariant by definition and continuous.",
+   "text": "Equip E with its spectral nontrivially normed field structure using the topology equality in the statement. The finite-dimensional module topology on V is Hausdorff: the coordinate linear map for Module.finBasis is continuous by IsModuleTopology.continuous_of_linearMap and injective. Finite-dimensional subspaces are closed by Submodule.closed_of_finiteDimensional, and their subtype topology is the module topology by isModuleTopologyOfFiniteDimensional. Construct the restricted action with Representation.subrepresentation, converted from linear endomorphisms to automorphisms using Representation.asGroupHom and generalLinearEquiv. Its joint continuity is the ambient action composed with the product of identity and subtype, then restricted to the subtype.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
     "def-pod-l-adic-representations",
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Give $V/U$ the quotient topology. By [lem-sfb-finite-dimensional-quotient-open] the canonical map $q:V\\to V/U$ is continuous, surjective and open. A product of open maps is open, so $\\operatorname{id}_A\\times q:A\\times V\\to A\\times(V/U)$ is a continuous open surjection, hence a quotient map, for $A=E$, $A=\\Pi$ or $A=V$ (for the latter use $q\\times q$). The maps $(a,q(v))\\mapsto q(av)$ on $E\\times(V/U)$, $(q(v),q(w))\\mapsto q(v+w)$, and $(g,q(v))\\mapsto q(gv)$ on $\\Pi\\times(V/U)$ are well defined because $U$ is an $E$-subspace and $\\Pi$-stable; their composites with these quotient maps are the continuous maps $q\\circ(\\text{scalar multiplication, addition, action})$, so they are continuous. Negation is scalar multiplication by $-1$. Thus $V/U$ with the quotient topology is a topological $E$-vector space with jointly continuous $\\Pi$-action, and $q$ is equivariant and continuous. Comparison with the $\\ell$-adic topology: the composite of $q$ with the identity from the quotient topology to the $\\ell$-adic topology is the linear map $V\\to V/U$ with finite-dimensional Hausdorff source, continuous by [lem-sfb-finite-dimensional-linear-map-continuous], so that identity is continuous because $q$ is a quotient map; the identity in the other direction is linear from the finite-dimensional Hausdorff $\\ell$-adic topology to the topological vector space just constructed, continuous by the same node. Hence the quotient topology is the $\\ell$-adic topology and $V/U$ is a continuous representation.",
+   "text": "Construct the quotient action with Representation.quotient and the same automorphism conversion. Mathlib supplies the quotient topological module operations and IsModuleTopology.instQuot. The product of identity on G and the quotient projection is an open quotient map by Submodule.isOpenQuotientMap_mkQ and IsOpenQuotientMap.prodMap. Its continuous_comp_iff reduces joint continuity of the quotient action to continuity of the projection composed with the ambient action. Transport joint continuity to the module topology in IsContinuousCoefficient using eq_moduleTopology. Inclusion and projection are equivariant by their construction and continuous by continuous_subtype_val and Submodule.continuous_mkQ.",
    "uses": [
     "def-pod-l-adic-representations",
     "lem-sfb-finite-dimensional-quotient-open",
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Let $h:V\\to W$ be equivariant and $E$-linear. Then $K=\\ker h$ is a $\\Pi$-stable subspace of $V$ ($h(gv)=gh(v)=0$) and $I=h(V)$ is a $\\Pi$-stable subspace of $W$ ($gh(v)=h(gv)$); both are finite-dimensional. By steps 1 and 2, applied to $K\\subseteq V$, $I\\subseteq W$ and $W/I$, the spaces $K$, $I$ and $Q=W/I$ with the induced actions and their $\\ell$-adic topologies are continuous finite-dimensional $E$-representations, and the inclusions $K\\hookrightarrow V$, $I\\hookrightarrow W$ and the quotient $W\\to Q$ are equivariant continuous linear maps. The corestriction $V\\to I$ of $h$ is equivariant and linear with finite-dimensional Hausdorff source, hence continuous by [lem-sfb-finite-dimensional-linear-map-continuous]; the same node shows $h$ itself is continuous.",
+   "text": "Equivariance of h shows ker h and range h are invariant: h(ρ(g)a)=σ(g)h(a). Apply the preceding proved private subquotient construction to ker h in V and range h in W. This gives the induced continuous actions, module topologies, and equivariance/continuity of the inclusions and projection. The original h is continuous by LinearMap.continuous_of_finiteDimensional and its range corestriction is continuous by Continuous.subtype_mk. Equivariance of the corestriction follows from equivariance of h and the injective range inclusion.",
    "uses": [
     "def-pod-l-adic-representations",
     "lem-sfb-finite-dimensional-linear-map-continuous",
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "The canonical sequences $0\\to K\\to V\\to I\\to0$ and $0\\to I\\to W\\to Q\\to0$ are exact as sequences of underlying vector spaces, and all their arrows are equivariant and continuous by the preceding steps. Therefore they are exact sequences of continuous representations in the stated sense.",
+   "text": "The subtype maps are injective by Subtype.val_injective; rangeRestrict is surjective by LinearMap.surjective_rangeRestrict; mkQ is surjective by Submodule.mkQ_surjective. The first sequence is exact by LinearMap.exact_iff, LinearMap.ker_rangeRestrict and Submodule.range_subtype; the second is LinearMap.exact_subtype_mkQ. This proves both exact sequences with the continuous equivariant maps constructed above.",
    "uses": [
     "def-pod-l-adic-representations",
     "lem-sfb-finite-dimensional-subspace-closed",
@@ -67,7 +67,7 @@
    }
   },
   {
-   "text": "Kernel: if $f:X\\to V$ is a morphism of continuous representations with $h\\circ f=0$, then $f(X)\\subseteq K$ and $f$ factors uniquely as an $E$-linear map $f':X\\to K$ followed by the inclusion. It is equivariant because the inclusion is injective and equivariant and $f$ is equivariant, and it is continuous by [lem-sfb-finite-dimensional-linear-map-continuous] (finite-dimensional Hausdorff source $X$). Cokernel: if $g:W\\to Y$ is a morphism with $g\\circ h=0$, then $g$ vanishes on $I$ and factors uniquely through an $E$-linear $g':Q\\to Y$; it is equivariant because $W\\to Q$ is surjective and equivariant, and continuous by the same node (finite-dimensional Hausdorff source $Q$). Thus $K\\to V$ and $W\\to Q$ satisfy the kernel and cokernel universal properties among continuous representations.",
+   "text": "For h.comp f=0, use LinearMap.codRestrict to construct f' into ker h; its composite with the inclusion is definitionally f. Equivariance follows by applying Subtype.ext to equivariance of f and of the inclusion, and continuity follows from continuity of f into V and Continuous.subtype_mk. Any second factor agrees pointwise after inclusion, hence agrees by subtype injectivity and LinearMap.ext. For g.comp h=0, show range h ≤ ker g and construct g' with Submodule.liftQ. Its factorization equation is Submodule.liftQ_mkQ. For equivariance and uniqueness choose preimages under the surjective quotient projection. Continuity follows from IsModuleTopology.continuous_of_linearMap using the quotient module topology and the target topological module structure.",
    "uses": [
     "def-pod-l-adic-representations",
     "lem-sfb-finite-dimensional-linear-map-continuous"
@@ -88,8 +88,11 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Y9",
+  "date": "2026-10-18",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Corollary 6.8.5, proof, p. 60, expanded with finite-dimensional topological linear algebra"
+  "place": "Corollary 6.8.5, proof, p. 60: the category of representations of the profinite fundamental group on finite-dimensional E-vector spaces admits kernels and cokernels. This node states the topological linear-algebra input of that sentence, independently of any sheaf realization.",
+  "note": "Complete Lean proof of all five planned steps using Mathlib topology and linear algebra; no new nodes or holes."
  },
  "mathlib_searches": [
   {
@@ -208,5 +211,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Statement and Lean signature match; required report sections, docstrings, dependencies, edge cases, scompile evidence, and deliver2 preflight all checked with no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3b8be",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261019T034408-L-428663",
+  "kind": "interface",
+  "note": "independent cc review: delivered ContinuousCoefficientSubquotients.lean vs live clone (statement byte-identical, sorry→proof, 4 private proved helpers, public imports CoefficientExtensionFinite dropped and FiniteDimension made plain); compiled clean plus importer Sheaf.Paper.CoefficientHeartClosure compiled; axioms propext/choice/Quot.sound; unit sk-lem-coefficient-heart realized empty; node changed only in proof/proof_deps/proof_origin"
  }
 }
