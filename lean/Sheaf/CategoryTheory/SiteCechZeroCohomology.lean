@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteCechZeroCohomology
-public import WeilConjectures.CategoryTheory.SiteCechComplex
-public import Mathlib.CategoryTheory.Sites.Sheaf
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck

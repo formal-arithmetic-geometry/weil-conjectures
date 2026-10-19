@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.TorsorSectionEvaluationLocal
-public import WeilConjectures.ConstructibleSheaf.TorsorSectionRepresentation
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

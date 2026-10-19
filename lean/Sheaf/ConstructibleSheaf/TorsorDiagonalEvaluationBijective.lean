@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.TorsorDiagonalEvaluationBijective
-public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule

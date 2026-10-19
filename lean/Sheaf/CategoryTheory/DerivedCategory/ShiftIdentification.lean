@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle

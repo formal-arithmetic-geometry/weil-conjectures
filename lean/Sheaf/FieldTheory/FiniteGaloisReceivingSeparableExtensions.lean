@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.FiniteGaloisReceivingSeparableExtensions
-public import Mathlib.FieldTheory.Separable
-public import Mathlib.FieldTheory.Minpoly.Basic
-public import Mathlib.LinearAlgebra.FiniteDimensional.Basic

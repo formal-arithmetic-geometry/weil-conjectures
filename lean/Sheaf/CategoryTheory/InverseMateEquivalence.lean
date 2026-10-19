@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.InverseMateEquivalence
-public import Mathlib.CategoryTheory.Adjunction.Mates

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.RightDerivedZeroTransformation
-public import Mathlib.CategoryTheory.Abelian.RightDerived

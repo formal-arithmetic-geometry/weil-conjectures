@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-public import WeilConjectures.CategoryTheory.DeltaFunctor

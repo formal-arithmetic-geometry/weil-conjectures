@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.CoefficientRootExtension
-public import Mathlib.FieldTheory.PurelyInseparable.Basic

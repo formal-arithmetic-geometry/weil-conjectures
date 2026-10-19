@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ResolutionPullbackAugmentation
-public import Mathlib.CategoryTheory.Abelian.Injective.Extend
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteCoveringsCommonRefinement
-public import Mathlib.CategoryTheory.Sites.Hypercover.Zero

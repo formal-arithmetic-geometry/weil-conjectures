@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
-public import Mathlib.GroupTheory.Index

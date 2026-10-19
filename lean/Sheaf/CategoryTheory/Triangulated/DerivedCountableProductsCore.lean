@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
