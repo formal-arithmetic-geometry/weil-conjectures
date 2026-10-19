@@ -5,7 +5,7 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.FlatUnitRawSections
 import all Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 

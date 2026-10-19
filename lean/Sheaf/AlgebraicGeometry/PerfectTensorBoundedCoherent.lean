@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

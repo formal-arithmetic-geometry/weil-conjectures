@@ -5,7 +5,7 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
-import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
 import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
 
 /-! # The quasi-coherent derived projection mate

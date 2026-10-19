@@ -7,8 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.DeterminantDualPairingFunctional
-import Sheaf.AlgebraicGeometry.ExteriorSheafDualExt
+import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingFunctional
+import WeilConjectures.AlgebraicGeometry.ExteriorSheafDualExt
 
 /-! # Local alternating determinant functionals
 Source: Stacks Project, Tags 0BRT and 03CY; Mathlib exterior-power determinant pairing.

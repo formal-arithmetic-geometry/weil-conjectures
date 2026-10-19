@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
-import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsRightExact
+import WeilConjectures.AlgebraicGeometry.FlatModulePullbackExact
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

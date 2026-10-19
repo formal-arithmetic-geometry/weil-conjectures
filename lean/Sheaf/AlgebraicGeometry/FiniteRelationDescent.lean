@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Data.Finset.Order
-import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
+import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
 
 /-!
 # Descent of finite relations among module maps

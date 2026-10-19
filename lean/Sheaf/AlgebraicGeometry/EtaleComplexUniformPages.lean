@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 import Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound
 import Sheaf.AlgebraicGeometry.EtaleComplexPageDiagram
-import Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow
+import WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow
 /-! # Uniform stable pages for a diagram of étale complexes
 
 Source: Stacks Project, Tags 015J and 0EZM.

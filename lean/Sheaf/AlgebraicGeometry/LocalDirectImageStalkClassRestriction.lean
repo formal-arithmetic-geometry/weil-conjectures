@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassMap
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassTopComparison
 import Sheaf.AlgebraicGeometry.TargetSectionClassRestriction
 

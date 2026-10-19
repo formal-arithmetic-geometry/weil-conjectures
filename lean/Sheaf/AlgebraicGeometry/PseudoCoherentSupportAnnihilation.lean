@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
 import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree

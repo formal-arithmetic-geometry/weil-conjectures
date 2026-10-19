@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import Sheaf.Topology.PointModuleEvaluationEquivalence
+import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 import Sheaf.AlgebraicGeometry.ResiduePullbackGlobalSections
 
 /-! # Natural residue homology comparison for localized strictly perfect complexes

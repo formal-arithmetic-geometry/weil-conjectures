@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.Single
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel
 import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
 import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat

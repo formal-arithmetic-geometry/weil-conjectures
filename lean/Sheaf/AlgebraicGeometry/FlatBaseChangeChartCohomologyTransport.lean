@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 
 /-! # Cohomology transport from the affine scalar-extension chart
 

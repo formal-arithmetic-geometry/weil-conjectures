@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.UniversalLowestFiberRanks
 import Sheaf.AlgebraicGeometry.FiniteFreeResidueModelPullback
-import Sheaf.AlgebraicGeometry.FiniteFreeBottomDifferentialZero
+import WeilConjectures.AlgebraicGeometry.FiniteFreeBottomDifferentialZero
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Zero bottom differential on a universally free locus

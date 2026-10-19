@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.CategoryTheory.Functor.OfSequence
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 
 /-! # Infinitesimal fibre cohomology and its canonical stalk maps
 

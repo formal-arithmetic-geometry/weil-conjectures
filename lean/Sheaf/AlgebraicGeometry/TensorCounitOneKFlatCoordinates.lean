@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.TensorCounitCoordinateEquation
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 

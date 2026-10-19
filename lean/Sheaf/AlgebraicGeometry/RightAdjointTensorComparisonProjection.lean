@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
 module
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure

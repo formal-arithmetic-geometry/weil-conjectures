@@ -6,7 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocalizedResidueHomology
 import Sheaf.AlgebraicGeometry.LocalizedResidueHomologySheafRestriction
-import Sheaf.AlgebraicGeometry.FieldSpecTensorPullbackGlobalSections
+import WeilConjectures.AlgebraicGeometry.FieldSpecTensorPullbackGlobalSections
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Restriction of derived residue homology to an open subscheme
 

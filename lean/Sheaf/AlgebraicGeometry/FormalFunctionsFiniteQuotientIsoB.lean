@@ -8,7 +8,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 @[expose] public section
 universe u
 set_option autoImplicit false

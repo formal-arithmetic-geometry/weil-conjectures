@@ -6,7 +6,7 @@ Authors: SHEAF group E2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 

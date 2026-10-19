@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-import Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift
+import WeilConjectures.AlgebraicGeometry.FinitePresentationOneChartMapLift
 import Mathlib.Data.Finset.Order
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 

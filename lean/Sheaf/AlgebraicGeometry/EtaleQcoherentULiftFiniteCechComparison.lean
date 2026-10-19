@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation
 import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSections
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore

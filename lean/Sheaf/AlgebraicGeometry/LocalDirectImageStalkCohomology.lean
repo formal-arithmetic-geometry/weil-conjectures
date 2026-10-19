@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassEquiv
 import Sheaf.AlgebraicGeometry.LocalDirectImageStalkNormalization
 

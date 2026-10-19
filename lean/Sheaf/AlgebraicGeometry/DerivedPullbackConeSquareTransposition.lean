@@ -7,7 +7,7 @@ public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KFlatClosure
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.CategoryTheory.AdditiveAdjunctionConeSquare
 import Sheaf.AlgebraicGeometry.KFlatPullbackAdjunctionComparison
 

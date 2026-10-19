@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
+import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleCanonicalEventually
 import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleTransport
 

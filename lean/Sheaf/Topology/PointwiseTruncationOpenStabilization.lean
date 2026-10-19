@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.Topology.OpenModuleDerivedSections
+public import WeilConjectures.Topology.OpenModuleDerivedSections
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle

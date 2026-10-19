@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import Sheaf.AlgebraicGeometry.OpenExtensionTensorCounitIsIso
 

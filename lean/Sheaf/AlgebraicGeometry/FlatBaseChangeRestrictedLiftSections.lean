@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
 import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftAugmentation
 import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsFormula

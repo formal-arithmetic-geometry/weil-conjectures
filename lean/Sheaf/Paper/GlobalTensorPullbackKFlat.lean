@@ -6,7 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Paper.PointInverseEvaluationKFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso

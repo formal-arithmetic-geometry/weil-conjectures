@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.Topology.OpenModuleDerivedSections
+public import WeilConjectures.Topology.OpenModuleDerivedSections
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Evaluation of the cohomology presheaf

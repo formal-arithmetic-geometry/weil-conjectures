@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso
 import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroSystemIso

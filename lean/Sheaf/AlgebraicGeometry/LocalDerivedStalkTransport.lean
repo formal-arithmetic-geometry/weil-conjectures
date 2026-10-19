@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import WeilConjectures.AlgebraicGeometry.LocalPullbackAdjointStalkIso
 import Sheaf.AlgebraicGeometry.LocalDirectImageStalkCohomology
 
