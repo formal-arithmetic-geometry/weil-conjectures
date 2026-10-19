@@ -16725,3 +16725,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/J3/Sheaf.Paper.FrobeniusSquareExchange (stage 3; reviewer PASS; first push; landing 20261019T002621-L-2162644 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J4/Sheaf.AlgebraicGeometry.ProEtaleSheafTopologicalInvariance (stage 3; reviewer PASS; first push; landing 20261019T002622-L-2164718 (interface); batch 20261019T002449; modules 7; new nodes 6)
 - 00:26 L: merged deliver/J4/Sheaf.AlgebraicGeometry.VectorBundleIntegration (stage 3; reviewer PASS; first push; landing 20261019T002625-L-2166668 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/J4/Sheaf.Paper.FieldDerivedScalarTower (stage 3; reviewer PASS; first push; landing 20261019T002627-L-2167457 (proof); batch 20261019T002449; modules 1; new nodes 0)
