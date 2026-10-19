@@ -27,85 +27,36 @@
  ],
  "proof": [
   {
-   "text": "For a flat M, tensoring any presheaf monomorphism with M and then sheafifying is monic. Indeed module sheafification is left exact and monoidal. Its tensor comparison and the counit isomorphism for M identify this composite with sheafification followed by tensorRight M. The latter preserves monomorphisms by flatness. This is tensor_presheaf_mono in Lean.",
+   "text": "Apply the existing independent-universe equational criterion, specialized to the common universe u. Its flatness predicate is exactly IsFlatOnSite, and its conclusion uses covering sieves.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-flat-sheaf-modules"
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, (1) implies (2); monoidal sheafification and exactness"
-   }
+   "elementary": true
   },
   {
-   "text": "First suppose the coefficients a_p form a natural family on the entire site. Form the presheaf ideal I whose sections are the span of the a_p. The tensor z = sum a_p tensor s_p in I tensor M maps to zero in A tensor M by the given relation. The preceding monomorphism implies its image in the associated sheaf is zero. Mathlib Presheaf.equalizerSieve_mem for the locally injective sheafification unit produces a covering sieve on which z already vanishes. On each member the a_p generate I, so Mathlib TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero produces finite b_pq and t_q, with s_p = sum b_pq t_q and sum b_pq a_p = 0 in I and hence in A. These constructions include empty finite families.",
+   "text": "Under IsSiteForCoverings, every covering sieve contains an actual covering presieve. Prove this by induction on Precoverage.Saturate: a generating cover contains itself; the maximal sieve contains the identity cover; a pullback of a cover contains the chosen covering pullbacks from the site axioms; for transitivity choose a covering refinement over each distinct arrow of an initial covering presieve and bind them. Apply this to the covering sieve in the forward equational criterion and restrict its witnesses to that presieve.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-flat-sheaf-modules"
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, ideal proof of (1) implies (2); Algebra Tag 04VX, finite generators and vanishing tensors"
-   }
+   "elementary": false
   },
   {
-   "text": "For coefficients given over U, pass to the slice site C/U. The restrictions of a_p are natural on that site. Restriction of M is flat by [lem-weil-pbc-slice-restriction-flat], so the previous step applies at the terminal object. Mathlib Sieve.overEquiv identifies its covering sieve with one over U, and Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition supplies a presieve in J contained in it. Read the factorization there. Only the existing same-universe over and monoidal APIs are used.",
+   "text": "Conversely generate a covering sieve from the presieve furnished by the hypothesis. An arrow of the generated sieve factors through a covering arrow. Restrict that arrow's finite coefficients and sections along the further factor. Functoriality and semilinearity preserve the section factorization, and preservation of sums and products by the ring restriction preserves the zero coefficient relation. The covering-sieve criterion now implies IsFlatOnSite.",
    "uses": [
-    "lem-weil-pbc-slice-restriction-flat",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, reduction to global coefficients on C/U"
-   }
-  },
-  {
-   "text": "Conversely induct on the number m of simultaneous coefficient relations. For m = 0 take the identity cover, the original sections, and the identity matrix. At m+1 first factor the last relation by the assumed single-relation criterion. Substitute this factorization into the other m relations, apply induction on each member of that cover, and multiply the two coefficient matrices. Distributivity and commutativity show that all original relations vanish on the resulting columns. Compose the presieve coverings using Precoverage.comp_mem_coverings. This is local_matrix in Lean.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, induction proving (2) implies (3)"
-   }
-  },
-  {
-   "text": "A tensor z in G tensor T killed by j tensor 1 has finite witnesses: choose a finite sum expression for z, lift it to G tensor R[T], and use right exactness for ker(epsilon) -> R[T] -> T. A finite sum expression for the resulting element of H tensor ker(epsilon), together with the finite supports of its free-module coordinates and the original summands, gives g_p, s_p, d_pk, h_k with z = sum g_p tensor s_p, sum d_pk s_p = 0, and j(g_p) = sum d_pk h_k. This is the proved finite_tensor_relation helper. Apply it sectionwise to a presheaf monomorphism P -> Q. The matrix criterion factors the s_p locally. Naturality and injectivity of P(V) -> Q(V) show sum b_pq g_p|V = 0, so the restricted tensor is zero by bilinearity (Mathlib TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially).",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, (3) implies (1), finite-generators/finite-relations reduction; Algebra Tag 00HA"
-   }
-  },
-  {
-   "text": "Apply the preceding local-kernel calculation to x-y to see that the sectionwise tensor of any monomorphism of module sheaves is locally injective. Mathlib Presheaf.isLocallyInjective_presheafToSheaf_map_iff and Sheaf.mono_of_isLocallyInjective imply that its associated-sheaf map is monic. The natural tensorObjIsoSheafification comparisons identify this map with tensorRight M applied to the original monomorphism. The existing closed symmetric monoidal structure makes tensorRight M a left adjoint and hence preserves colimits; MonoidalFree supplies additivity. Mathlib Functor.preservesHomology_of_preservesMonos_and_cokernels and preservesFiniteLimits_of_preservesHomology now give preservation of finite limits. Together with finite colimits this is IsFlat M.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, conclusion of (3) implies (1); existing closed monoidal and exact-functor APIs"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-slice-restriction-flat",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 08FC (sites-modules-lemma-flat-eq), equivalence (1) and (2), via the finite-matrix criterion (3); the forward implication uses the source ideal argument and Mathlib finite-generator tensor criterion directly. The converse finite-presentation calculation is proved in Lean via lTensor_exact; closed monoidality supplies right exactness."
+  "place": "Tag 08FC (1) iff (2), using the proved independent-universe criterion; the sieve/presieve conversion follows Sites Definition 00VH and induction on the generated topology. Formalized by M5, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -193,22 +144,22 @@
   "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion",
   "declaration": "SheafOfModules.isFlat_iff_local_equationalCriterion",
   "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatEquationalCriterion.lean",
-  "statement": "theorem isFlat_iff_local_equationalCriterion {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (A : Sheaf J.toGrothendieck CommRingCat.{u}) (M : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) : IsFlatOnSite (J := J.toGrothendieck) (R := A) M ↔ ∀ (U : C) (n : ℕ) (a : Fin n → A.obj.obj (op U)) (s : Fin n → M.val.obj (op U)), (∑ p : Fin n, a p • s p) = 0 → ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V)) (t : Fin l → M.val.obj (op V)), (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧ (∀ q : Fin l, (∑ p : Fin n, A.obj.map f.op (a p) * b p q) = 0)",
-  "branch": "newtargets-dag",
-  "by": "Q116",
-  "date": "2026-10-16",
+  "statement": "theorem isFlat_iff_local_equationalCriterion\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) (_hJ : J.IsSiteForCoverings)\n    (A : Sheaf J.toGrothendieck CommRingCat.{u})\n    (M : ringedSiteModules.{u}\n      ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) :\n    IsFlatOnSite (J := J.toGrothendieck) (R := A) M ↔\n      ∀ (U : C) (n : ℕ) (a : Fin n → A.obj.obj (op U))\n        (s : Fin n → M.val.obj (op U)),\n        (∑ p : Fin n, a p • s p) = 0 →\n        ∃ S : Presieve U, S ∈ J U ∧\n          ∀ (V : C) (f : V ⟶ U), S f →\n            ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))\n              (t : Fin l → M.val.obj (op V)),\n              (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧\n              (∀ q : Fin l, (∑ p : Fin n, A.obj.map f.op (a p) * b p q) = 0)",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-19",
   "existing": false,
-  "note": "Restates the withdrawn stage-2 interface using the current recorded IsFlatOnSite and IsSiteForCoverings dependencies. The old isolated monoidal interface and stronger covering-composition classes are not imposed. The mathematical statement is unchanged."
+  "note": "Restores precisely the IsFlatOnSite / IsSiteForCoverings interface already recorded in this node, with a complete proof from the existing covering-sieve criterion. The obsolete commented IsFlat interface and private proof chain are removed."
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-9722f",
-  "group": "P2",
+  "reviewer": "COMPILER",
+  "group": "M5",
   "result": "pass",
-  "landing": "20261016T054837-L-157797",
+  "landing": "20261019T112456-L-3943727",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean proof and DAG node matched against the packet, base signatures, and successful compilation checks"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_before_upsync_e47": {
   "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion",
