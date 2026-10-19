@@ -17480,3 +17480,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/R5/Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison (stage 3; reviewer PASS; first push; landing 20261019T154023-L-3028622 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/S6/Sheaf.Paper.PbcFiniteStageKaroubian (stage 3; reviewer PASS; first push; landing 20261019T154024-L-3028896 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/T6/Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude (stage 3; reviewer PASS; first push; landing 20261019T154025-L-3029090 (interface); batch 20261019T153958; modules 1; new nodes 0; change records: coord/changes/T6-open-amplitude-imports.md)
+- 15:40 L: merged deliver/X5/Sheaf.SixFunctors.SelectedSchemeGaloisComparison (stage 3; reviewer PASS; first push; landing 20261019T154025-L-3029373 (proof); batch 20261019T153958; modules 1; new nodes 0)
