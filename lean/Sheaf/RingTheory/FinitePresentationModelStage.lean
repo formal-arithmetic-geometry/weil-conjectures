@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 import Sheaf.RingTheory.FinitePresentationComparisonSystem
-import Sheaf.RingTheory.FilteredPushoutBijectiveStage
+import WeilConjectures.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A finitely presented comparison model reaches a stage -/
 

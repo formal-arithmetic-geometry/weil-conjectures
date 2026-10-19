@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 import Sheaf.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
-import Sheaf.CategoryTheory.LeftExactUpperTruncationComparison
+import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 import Sheaf.AlgebraicGeometry.AffineBasisDerivedSectionsLowerTailVanishing
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 

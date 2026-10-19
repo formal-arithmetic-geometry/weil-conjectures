@@ -117,13 +117,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompletionLocalizedAlgebraFiniteQuotients",
-  "file": "lean/Sheaf/RingTheory/CompletionLocalizedAlgebraFiniteQuotients.lean",
+  "module": "WeilConjectures.RingTheory.CompletionLocalizedAlgebraFiniteQuotients",
+  "file": "lean/WeilConjectures/RingTheory/CompletionLocalizedAlgebraFiniteQuotients.lean",
   "declaration": "AdicCompletion.completion_localizedAlgebra_finite_quotients",
   "statement": "theorem completion_localizedAlgebra_finite_quotients\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    ∀ (ψ : ∀ q : Q, B →ₐ[S] Localization.AtPrime q.1),\n      (∀ (q : Q) (r : A), ψ q (r ⊗ₜ[R] (1 : S)) =\n        Localization.localRingHom p q.1 (algebraMap R S)\n          (Ideal.LiesOver.over (P := q.1) (p := p)) r) →\n      let K := fun q : Q ↦ J.map (ψ q).toRingHom\n      (∀ q : Q, K q ≤ IsLocalRing.maximalIdeal (Localization.AtPrime q.1) ∧\n        ∃ c : ℕ, 1 ≤ c ∧\n          (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ c ≤ K q) ∧\n      ∀ n : ℕ, Function.Bijective\n        (RingHom.pi (fun q : Q ↦\n          Ideal.quotientMap ((K q) ^ n) (ψ q).toRingHom (by\n            rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])) :\n          (B ⧸ J ^ n) →+* (∀ q : Q, Localization.AtPrime q.1 ⧸ (K q) ^ n))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompletionLocalizedAlgebraFiniteQuotients; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

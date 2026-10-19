@@ -102,13 +102,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PurelyInseparableBaseChangeResidue",
-  "file": "lean/Sheaf/RingTheory/PurelyInseparableBaseChangeResidue.lean",
+  "module": "WeilConjectures.RingTheory.PurelyInseparableBaseChangeResidue",
+  "file": "lean/WeilConjectures/RingTheory/PurelyInseparableBaseChangeResidue.lean",
   "declaration": "Algebra.TensorProduct.purelyInseparable_baseChange_residue",
   "statement": "theorem purelyInseparable_baseChange_residue\n    (k : Type u) (k' : Type v) (A : Type w)\n    [Field k] [Field k'] [CommRing A] [Algebra k k'] [Algebra k A]\n    [IsPurelyInseparable k k'] [Module.Finite k k']\n    [IsLocalRing A] [IsNoetherianRing A] :\n    IsLocalRing (A ⊗[k] k') ∧\n      (∃ m' : Ideal (A ⊗[k] k'),\n        m'.IsMaximal ∧\n        (∀ P : Ideal (A ⊗[k] k'), P.IsPrime →\n          (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A) ≤ P ↔ P = m')) ∧\n        (∃ f : IsLocalRing.ResidueField A →+* ((A ⊗[k] k') ⧸ m'),\n          (∀ a : A, f (IsLocalRing.residue A a) =\n            Ideal.Quotient.mk m' (algebraMap A (A ⊗[k] k') a)) ∧\n          @Module.Finite (IsLocalRing.ResidueField A) ((A ⊗[k] k') ⧸ m')\n            _ _ (@Algebra.toModule _ _ _ _ f.toAlgebra))) ∧\n      (∃ e : ((A ⊗[k] k') ⧸\n          (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A))) ≃+*\n          ((IsLocalRing.ResidueField A) ⊗[k] k'),\n        (∀ (a : A) (x : k'), e (Ideal.Quotient.mk\n          (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A))\n          (a ⊗ₜ[k] x)) = (IsLocalRing.residue A a) ⊗ₜ[k] x) ∧\n        @Module.finrank (IsLocalRing.ResidueField A)\n          ((A ⊗[k] k') ⧸\n            (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A)))\n          _ _ (@Algebra.toModule _ _ _ _\n            (e.symm.toRingHom.comp (algebraMap (IsLocalRing.ResidueField A)\n              ((IsLocalRing.ResidueField A) ⊗[k] k'))).toAlgebra) =\n            Module.finrank k k')",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PurelyInseparableBaseChangeResidue; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

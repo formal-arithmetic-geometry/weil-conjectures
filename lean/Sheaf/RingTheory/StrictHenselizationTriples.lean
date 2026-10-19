@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RingTheory.EtaleResidueTriplesColimit
 import Sheaf.RingTheory.EtaleResidueTriplesLocalization
 import Sheaf.RingTheory.EtaleResidueTriplesSimpleRoots
-import Sheaf.RingTheory.EtaleResidueTriplesSurjective
+import WeilConjectures.RingTheory.EtaleResidueTriplesSurjective
 
 /-!
 # Strict henselization from etale triples

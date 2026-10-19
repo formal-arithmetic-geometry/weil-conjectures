@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.Modules.LocalFiniteFreeGlobalMaps
+import WeilConjectures.AlgebraicGeometry.Modules.LocalFiniteFreeGlobalMaps
 
 /-! # Finite free quotients on Noetherian quasi-affine opens
 

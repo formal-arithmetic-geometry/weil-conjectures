@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison
-import Sheaf.Algebra.Homology.SemilinearScalarExtensionHomologySquare
+import WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySquare
 
 /-! # Change of all coefficient rings in the localized tensor comparison
 

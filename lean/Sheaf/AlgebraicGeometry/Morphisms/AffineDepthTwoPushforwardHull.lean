@@ -21,8 +21,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison
 import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel
-import Sheaf.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison
-import Sheaf.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
+import WeilConjectures.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
 
 /-! # Affine depth-two hull of a finite etale pushforward
 

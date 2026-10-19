@@ -14,7 +14,7 @@ import Mathlib.RingTheory.PowerSeries.WeierstrassPreparation
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Sheaf.RingTheory.CompleteLocalSubideal
+import WeilConjectures.RingTheory.CompleteLocalSubideal
 import Sheaf.TraceFormula.HenselizationQuotientAtPrime
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.RingTheory.PairHenselizationFlatQuotients

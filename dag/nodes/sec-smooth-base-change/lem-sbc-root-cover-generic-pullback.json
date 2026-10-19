@@ -88,13 +88,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootCoverGenericPullback",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootCoverGenericPullback.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootCoverGenericPullback",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootCoverGenericPullback.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_cover_generic_pullback",
   "statement": "theorem root_cover_generic_pullback\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (H B : CommRingCat.{u}) [Algebra H B] (g : H)\n    [(Ideal.span {g}).IsPrime] [IsLocalization.AtPrime B (Ideal.span {g})]\n    [IsDomain B] [IsDiscreteValuationRing B]\n    (hpi : Irreducible (algebraMap H B g))\n    (ψ : Spec H ⟶ L)\n    (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)\n    (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)\n    (hbranch : IsPullback k (𝟙 _) i\n      (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ))\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ ψ)\n    let a := p ≫ V.ι\n    let pi := algebraMap H B g\n    let A0 := AdjoinRoot\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n    let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))\n    let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a0 := pullback.snd (T.π ≫ j0) q0\n    let γ := AdjoinRoot.map (algebraMap H B)\n      ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi) (by simp [pi])\n    ∃ m : pullback (T.π ≫ j0) q0 ⟶\n        pullback (W.π ≫ i) (V.ι ≫ q ≫ ψ),\n      IsPullback m a0 a (Spec.map (CommRingCat.ofHom γ))",
   "branch": "sheaf-dag",
   "by": "V4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootCoverGenericPullback; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

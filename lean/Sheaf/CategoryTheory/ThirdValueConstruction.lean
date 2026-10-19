@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 import Sheaf.CategoryTheory.LeftDerivedValueMorphism
 import Sheaf.CategoryTheory.TriangleMorphismCategory
-import Sheaf.CategoryTheory.TriangulatedHomColimitComparison
+import WeilConjectures.CategoryTheory.TriangulatedHomColimitComparison
 import Mathlib.CategoryTheory.Limits.Final.Type
 
 /-! # Construction of the third denominator Hom comparison

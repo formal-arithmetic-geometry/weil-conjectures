@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.Algebra.Category.Ring.Colimits
 import Sheaf.RingTheory.TensorModelComparisonDiagram
-import Sheaf.RingTheory.FilteredPushoutBijectiveStage
+import WeilConjectures.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A tensor model at one finite stage
 

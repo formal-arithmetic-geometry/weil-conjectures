@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineTensorBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineNormalizationCoproduct
-import Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianAffineNormalizationCharts
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteAffineNormalizationCoproduct
+import WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianAffineNormalizationCharts
 
 /-! # Integral-closure charts for reduced Artinian tensor algebras
 

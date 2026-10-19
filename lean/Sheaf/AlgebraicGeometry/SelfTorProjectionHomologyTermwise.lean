@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.KFlatSingleTensorRepresentative
 import Sheaf.AlgebraicGeometry.ClosedStructureTensorComplexProjection
-import Sheaf.AlgebraicGeometry.ClosedModulePushforwardHomology
+import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 @[expose] public section
 set_option autoImplicit false

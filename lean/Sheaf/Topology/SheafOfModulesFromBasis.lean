@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Sheaf.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Topology.BasisSheafCofinalCoverings
-import Sheaf.Topology.SheafOnBasisExtends
+import WeilConjectures.Topology.BasisSheafCofinalCoverings
+import WeilConjectures.Topology.SheafOnBasisExtends
 
 /-!
 # Extending modules from a basis

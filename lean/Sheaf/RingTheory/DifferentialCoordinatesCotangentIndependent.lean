@@ -13,8 +13,8 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.RingTheory.GeometricallyRegularH1Injective
 import Sheaf.RingTheory.TransitivityGamma
-import Sheaf.RingTheory.DifferentialCoordinatesResidueComparison
-import Sheaf.RingTheory.LocalCotangentComparisonNaturality
+import WeilConjectures.RingTheory.DifferentialCoordinatesResidueComparison
+import WeilConjectures.RingTheory.LocalCotangentComparisonNaturality
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 

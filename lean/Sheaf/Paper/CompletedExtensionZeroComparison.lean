@@ -25,7 +25,7 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.ExactFunctorDerivedLimit
-import Sheaf.Algebra.Homology.RoosComplex
+import WeilConjectures.Algebra.Homology.RoosComplex
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic

@@ -10,7 +10,7 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
 import Sheaf.RingTheory.IntGRing
-import Sheaf.RingTheory.IntegerPrimeLocalizations
+import WeilConjectures.RingTheory.IntegerPrimeLocalizations
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.RegularRingUniversallyCatenary
 

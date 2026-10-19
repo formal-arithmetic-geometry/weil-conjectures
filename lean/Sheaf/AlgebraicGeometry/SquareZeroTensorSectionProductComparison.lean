@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Sheaf.AlgebraicGeometry.PullbackMonoidalUnitComparison
+import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 
 @[expose] public section
 set_option autoImplicit false

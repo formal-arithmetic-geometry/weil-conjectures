@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.RingTheory.Flat.Tensor
-import Sheaf.RingTheory.TensorTowerKernelProZero
-import Sheaf.RingTheory.TensorLimitOfProZeroKernels
+import WeilConjectures.RingTheory.TensorTowerKernelProZero
+import WeilConjectures.RingTheory.TensorLimitOfProZeroKernels
 
 /-!
 # Inverse limits of flat modules over ideal-power quotients

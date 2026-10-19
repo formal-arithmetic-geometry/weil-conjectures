@@ -10,7 +10,7 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalCompletionComparison
-import Sheaf.RingTheory.CompleteLocalSubideal
+import WeilConjectures.RingTheory.CompleteLocalSubideal
 
 /-! # Scalar formal comparison on a complete local puncture
 

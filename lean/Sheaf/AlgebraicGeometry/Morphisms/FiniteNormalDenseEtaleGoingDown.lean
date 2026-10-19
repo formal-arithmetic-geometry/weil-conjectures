@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.GoingDown
 
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteStalkIntegralDomainFactorization
-import Sheaf.AlgebraicGeometry.Morphisms.DenseEtaleStalkMapInjective
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStalkIntegralDomainFactorization
+import WeilConjectures.AlgebraicGeometry.Morphisms.DenseEtaleStalkMapInjective
 import Mathlib.RingTheory.IntegralClosure.GoingDown
 
 /-!

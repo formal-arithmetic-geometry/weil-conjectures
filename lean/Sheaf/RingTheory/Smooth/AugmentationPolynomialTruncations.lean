@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective
-import Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsInjective
+import WeilConjectures.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective
+import WeilConjectures.RingTheory.Smooth.AugmentationPolynomialTruncationsInjective
 
 /-!
 # Propagation of first-order augmented polynomial coordinates

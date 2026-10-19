@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
 
-import Sheaf.Topology.EmptySpaceCohomologyVanishing
+import WeilConjectures.Topology.EmptySpaceCohomologyVanishing
 import Sheaf.Topology.ClosedUnionCohomologyVanishing
 import Sheaf.Topology.WholeSpaceClosedSubtypeCohomologyVanishing
 

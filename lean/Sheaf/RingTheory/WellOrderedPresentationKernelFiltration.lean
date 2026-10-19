@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-import Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData
+import WeilConjectures.RingTheory.WellOrderedPresentationKernelProjectionData
 
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.Order.RelClasses

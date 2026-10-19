@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointFiniteFlatLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothClosedPointFiniteFlatLift
 import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.CategoryTheory.LeftExactUpperTruncationComparison
+public import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology

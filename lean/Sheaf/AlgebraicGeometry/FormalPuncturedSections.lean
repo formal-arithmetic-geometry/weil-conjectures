@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.CompleteLocalSubideal
+import WeilConjectures.RingTheory.CompleteLocalSubideal
 import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.SerreCriterionReduced
 import Mathlib.AlgebraicGeometry.Modules.Tilde

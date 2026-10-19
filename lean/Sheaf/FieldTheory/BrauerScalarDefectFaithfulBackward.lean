@@ -2,7 +2,7 @@ module
 public import Sheaf.FieldTheory.BrauerScalarDefect
 import Mathlib.RingTheory.MatrixAlgebra
 import Mathlib.LinearAlgebra.Matrix.ToLin
-import Sheaf.FieldTheory.CentralSimpleTensorEnd
+import WeilConjectures.FieldTheory.CentralSimpleTensorEnd
 import Sheaf.FieldTheory.BrauerScalarDefectTensorSplit
 @[expose] public section
 universe u

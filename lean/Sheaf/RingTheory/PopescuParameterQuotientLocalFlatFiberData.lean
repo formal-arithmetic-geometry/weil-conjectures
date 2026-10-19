@@ -15,8 +15,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.FieldTheory.SeparableIndSmoothTransport
-import Sheaf.RingTheory.FlatLocalizedQuotient
-import Sheaf.RingTheory.PopescuParameterQuotientResidueEquivs
+import WeilConjectures.RingTheory.FlatLocalizedQuotient
+import WeilConjectures.RingTheory.PopescuParameterQuotientResidueEquivs
 import Sheaf.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence

@@ -36,7 +36,7 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Paper.KoszulReconstruction
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.Algebra.Homology.RoosComplex
+import WeilConjectures.Algebra.Homology.RoosComplex
 import Sheaf.Paper.CompletedRlimFunctor
 import Sheaf.CategoryTheory.DiagramSiteRealization
 import Mathlib.Algebra.Category.Grp.FilteredColimits

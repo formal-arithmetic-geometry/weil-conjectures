@@ -12,7 +12,7 @@ public import Sheaf.RingTheory.Depth
 
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 import Sheaf.RingTheory.DepthOneOfMaximalNotAssociated
-import Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
+import WeilConjectures.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 
 /-! # Positive depth of finite boundary submodules
 

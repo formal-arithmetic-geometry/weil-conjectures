@@ -14,8 +14,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.LinearAlgebra.Dimension.Finite
-import Sheaf.RingTheory.PurelyInseparableBaseChangeStructural
-import Sheaf.RingTheory.PurelyInseparableBaseChangeResidue
+import WeilConjectures.RingTheory.PurelyInseparableBaseChangeStructural
+import WeilConjectures.RingTheory.PurelyInseparableBaseChangeResidue
 
 /-! # Purely inseparable base change of a Noetherian local algebra
 

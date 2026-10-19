@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
 import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
-import Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore
+import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 
 /-! # Source and class coherence before coefficients
 

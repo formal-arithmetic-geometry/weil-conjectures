@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StalkRestrictionWithinIso
+public import WeilConjectures.AlgebraicGeometry.StalkRestrictionWithinIso
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
