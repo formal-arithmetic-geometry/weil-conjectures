@@ -57,6 +57,165 @@ def PairPreadditiveNormalized (P : Preadditive S.PairCategory) : Prop := by
       PairCategory.mkHom n hX hY f + PairCategory.mkHom n hX hY g ∧
     PairCategory.mkHom n hX hY (0 : X.toStage hX ⟶ Y.toStage hY) = 0
 
+section AdditiveConstruction
+
+variable [∀ i j (h : i ≤ j), (S.T h).Additive]
+
+omit [IsDirectedOrder I] in
+private lemma pair_tr_add {i j n p : I} {hi : i ≤ n} {hj : j ≤ n}
+    (h : n ≤ p) {x : C i} {y : C j}
+    (f g : (S.T hi).obj x ⟶ (S.T hj).obj y) :
+    S.tr h (f + g) = S.tr h f + S.tr h g := by
+  simp [tr, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
+
+omit [IsDirectedOrder I] in
+private lemma pair_tr_zero {i j n p : I} {hi : i ≤ n} {hj : j ≤ n}
+    (h : n ≤ p) {x : C i} {y : C j} :
+    S.tr h (0 : (S.T hi).obj x ⟶ (S.T hj).obj y) = 0 := by
+  simp [tr]
+
+omit [IsDirectedOrder I] in
+private lemma pair_tr_neg {i j n p : I} {hi : i ≤ n} {hj : j ≤ n}
+    (h : n ≤ p) {x : C i} {y : C j}
+    (f : (S.T hi).obj x ⟶ (S.T hj).obj y) :
+    S.tr h (-f) = -S.tr h f := by
+  simp [tr]
+
+open PairCategory in
+private def pairAddRep {X Y : S.PairCategory} (r s : Rep X Y) : Rep X Y :=
+  ⟨commonStage r.k s.k, r.hX.trans (le_commonStage_left _ _),
+    r.hY.trans (le_commonStage_left _ _),
+    S.tr (le_commonStage_left _ _) r.u + S.tr (le_commonStage_right _ _) s.u⟩
+
+open PairCategory in
+private lemma pairAddRep_rel {X Y : S.PairCategory} {r r' s s' : Rep X Y}
+    (hr : Rep.Rel r r') (hs : Rep.Rel s s') :
+    Rep.Rel (pairAddRep S r s) (pairAddRep S r' s') := by
+  obtain ⟨p, h₁, h₂, e⟩ := hr
+  obtain ⟨q, h₃, h₄, e'⟩ := hs
+  obtain ⟨a, ha₁, ha₂⟩ := exists_ge_ge p q
+  obtain ⟨b, hb₁, hb₂⟩ := exists_ge_ge (commonStage r.k s.k) (commonStage r'.k s'.k)
+  obtain ⟨m, hm₁, hm₂⟩ := exists_ge_ge a b
+  refine ⟨m, hb₁.trans hm₂, hb₂.trans hm₂, ?_⟩
+  change S.tr _ (S.tr _ r.u + S.tr _ s.u) = S.tr _ (S.tr _ r'.u + S.tr _ s'.u)
+  rw [pair_tr_add, pair_tr_add, tr_tr, tr_tr, tr_tr, tr_tr]
+  exact congrArg₂ (· + ·)
+    (Rep.rel_of_eq h₁ h₂ e (ha₁.trans hm₁))
+    (Rep.rel_of_eq h₃ h₄ e' (ha₂.trans hm₁))
+
+private def pairHomAdd {X Y : S.PairCategory} (f g : X ⟶ Y) : X ⟶ Y :=
+  Quotient.map₂ (pairAddRep S) (fun _ _ hr _ _ hs ↦ pairAddRep_rel S hr hs) f g
+
+open PairCategory in
+private lemma pairHomAdd_mk {X Y : S.PairCategory} {n : I}
+    {hX : X.stage ≤ n} {hY : Y.stage ≤ n} (f g : X.toStage hX ⟶ Y.toStage hY) :
+    pairHomAdd S (mkHom n hX hY f) (mkHom n hX hY g) = mkHom n hX hY (f + g) := by
+  change mkHom _ _ _ _ = _
+  rw [mkHom_eq_mkHom_iff']
+  refine ⟨commonStage n n, le_rfl, le_commonStage_left _ _, ?_⟩
+  simp only [pair_tr_add, tr_tr]
+
+private def pairHomNeg {X Y : S.PairCategory} (f : X ⟶ Y) : X ⟶ Y :=
+  Quotient.map (fun r ↦ ⟨r.k, r.hX, r.hY, -r.u⟩)
+    (by
+      rintro r s ⟨p, hr, hs, e⟩
+      exact ⟨p, hr, hs, by simpa only [pair_tr_neg] using congrArg Neg.neg e⟩) f
+
+open PairCategory in
+private lemma pairHomNeg_mk {X Y : S.PairCategory} {n : I}
+    {hX : X.stage ≤ n} {hY : Y.stage ≤ n} (f : X.toStage hX ⟶ Y.toStage hY) :
+    pairHomNeg S (mkHom n hX hY f) = mkHom n hX hY (-f) := rfl
+
+open PairCategory in
+private def pairHomZero (X Y : S.PairCategory) : X ⟶ Y :=
+  mkHom (commonStage X.stage Y.stage) (le_commonStage_left _ _)
+    (le_commonStage_right _ _) 0
+
+open PairCategory in
+private lemma pairHomZero_mk {X Y : S.PairCategory} (n : I)
+    (hX : X.stage ≤ n) (hY : Y.stage ≤ n) :
+    pairHomZero S X Y = mkHom n hX hY 0 := by
+  rw [pairHomZero, mkHom_eq_mkHom_iff']
+  obtain ⟨p, hp, hn⟩ := exists_ge_ge (commonStage X.stage Y.stage) n
+  exact ⟨p, hp, hn, by simp only [pair_tr_zero]⟩
+
+open PairCategory in
+private abbrev pairHomGroup (X Y : S.PairCategory) : AddCommGroup (X ⟶ Y) := by
+  letI : Add (X ⟶ Y) := ⟨pairHomAdd S⟩
+  letI : Zero (X ⟶ Y) := ⟨pairHomZero S X Y⟩
+  letI : Neg (X ⟶ Y) := ⟨pairHomNeg S⟩
+  exact {
+    add := pairHomAdd S
+    zero := pairHomZero S X Y
+    neg := pairHomNeg S
+    nsmul := nsmulRec
+    zsmul := zsmulRec
+    add_assoc f g h := by
+      change pairHomAdd S (pairHomAdd S f g) h = pairHomAdd S f (pairHomAdd S g h)
+      induction f using hom_induction with
+      | h n hX hY f =>
+        induction g using hom_induction with
+        | h n' hX' hY' g =>
+          induction h using hom_induction with
+          | h n'' hX'' hY'' h =>
+            obtain ⟨a, ha, ha'⟩ := exists_ge_ge n n'
+            obtain ⟨p, hp, hp'⟩ := exists_ge_ge a n''
+            rw [← mkHom_tr (ha.trans hp) f, ← mkHom_tr (ha'.trans hp) g,
+              ← mkHom_tr hp' h]
+            simp only [pairHomAdd_mk, add_assoc]
+    zero_add f := by
+      change pairHomAdd S (pairHomZero S X Y) f = f
+      induction f using hom_induction with
+      | h n hX hY f => rw [pairHomZero_mk S n hX hY, pairHomAdd_mk, zero_add]
+    add_zero f := by
+      change pairHomAdd S f (pairHomZero S X Y) = f
+      induction f using hom_induction with
+      | h n hX hY f => rw [pairHomZero_mk S n hX hY, pairHomAdd_mk, add_zero]
+    neg_add_cancel f := by
+      change pairHomAdd S (pairHomNeg S f) f = pairHomZero S X Y
+      induction f using hom_induction with
+      | h n hX hY f =>
+        rw [pairHomNeg_mk, pairHomAdd_mk, neg_add_cancel, pairHomZero_mk S n hX hY]
+    add_comm f g := by
+      change pairHomAdd S f g = pairHomAdd S g f
+      obtain ⟨n, _, hX, hY, _, _, f, g, rfl, rfl⟩ :=
+        exists_common_stage f g X.stage
+      rw [pairHomAdd_mk, pairHomAdd_mk, add_comm] }
+
+open PairCategory in
+private abbrev pairPreadditiveStructure : Preadditive S.PairCategory where
+  homGroup := pairHomGroup S
+  add_comp X Y Z f g h := by
+    induction f using hom_induction with
+    | h n hX hY f =>
+      induction g using hom_induction with
+      | h n' hX' hY' g =>
+        induction h using hom_induction with
+        | h n'' hY'' hZ h =>
+          obtain ⟨a, ha, ha'⟩ := exists_ge_ge n n'
+          obtain ⟨p, hp, hp'⟩ := exists_ge_ge a n''
+          rw [← mkHom_tr (ha.trans hp) f, ← mkHom_tr (ha'.trans hp) g,
+            ← mkHom_tr hp' h]
+          change pairHomAdd S _ _ ≫ _ = pairHomAdd S (_ ≫ _) (_ ≫ _)
+          rw [pairHomAdd_mk, mkHom_comp_mkHom, mkHom_comp_mkHom,
+            mkHom_comp_mkHom, pairHomAdd_mk, Preadditive.add_comp]
+  comp_add X Y Z f g h := by
+    induction f using hom_induction with
+    | h n hX hY f =>
+      induction g using hom_induction with
+      | h n' hY' hZ g =>
+        induction h using hom_induction with
+        | h n'' hY'' hZ' h =>
+          obtain ⟨a, ha, ha'⟩ := exists_ge_ge n n'
+          obtain ⟨p, hp, hp'⟩ := exists_ge_ge a n''
+          rw [← mkHom_tr (ha.trans hp) f, ← mkHom_tr (ha'.trans hp) g,
+            ← mkHom_tr hp' h]
+          change _ ≫ pairHomAdd S _ _ = pairHomAdd S (_ ≫ _) (_ ≫ _)
+          rw [pairHomAdd_mk, mkHom_comp_mkHom, mkHom_comp_mkHom,
+            mkHom_comp_mkHom, pairHomAdd_mk, Preadditive.comp_add]
+
+end AdditiveConstruction
+
 /-- The common-stage formulas determine a unique preadditive structure.
 Source: blueprint finite-stage pair category
 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -68,7 +227,17 @@ bilinearity of composition hold after passing to one common stage. Every
 morphism has a representative, so these equations also prove uniqueness. -/
 theorem pairPreadditive_exists [∀ i j (h : i ≤ j), (S.T h).Additive] :
     ∃! P : Preadditive S.PairCategory, S.PairPreadditiveNormalized P := by
-  sorry
+  refine ⟨pairPreadditiveStructure S, ?_, ?_⟩
+  · intro X Y n hX hY f g
+    exact ⟨(pairHomAdd_mk S f g).symm, (pairHomZero_mk S n hX hY).symm⟩
+  · intro P hP
+    apply Preadditive.ext
+    funext X Y
+    apply AddCommGroup.ext
+    funext f g
+    obtain ⟨n, _, hX, hY, _, _, f, g, rfl, rfl⟩ :=
+      PairCategory.exists_common_stage f g X.stage
+    exact ((hP X Y n hX hY f g).1).symm.trans (pairHomAdd_mk S f g).symm
 
 /-- The preadditive structure determined by the common-stage group laws.
 Source: blueprint finite-stage pair category
@@ -169,6 +338,7 @@ def pbcScalarExtension (h : E ≤ F) :
       (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose
 
 
+set_option linter.unusedSectionVars false in
 /-- Coefficient maps compose exactly, including repeated fields.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
 Proof: both composites have the same quotient projections, because the field
@@ -176,7 +346,51 @@ inclusions compose. Use uniqueness of the completed limit map. -/
 theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
     pbcCompletedScalarMap l Ω T h ≫ pbcCompletedScalarMap l Ω T k =
       pbcCompletedScalarMap l Ω T (h.trans k) := by
-  sorry
+  have hi : (pbcIntegerInclusion l Ω k).comp (pbcIntegerInclusion l Ω h) =
+      pbcIntegerInclusion l Ω (h.trans k) := by
+    apply RingHom.ext
+    intro x
+    apply ULift.ext
+    apply Subtype.ext
+    have hinc : pbcFiniteFieldInclusion l Ω k
+        (pbcFiniteFieldInclusion l Ω h x.down.val) =
+        pbcFiniteFieldInclusion l Ω (h.trans k) x.down.val := by
+      change (Shrink.algEquiv (Padic l) G.val).symm
+          (IntermediateField.inclusion k
+            ((Shrink.algEquiv (Padic l) F.val)
+              ((Shrink.algEquiv (Padic l) F.val).symm
+                (IntermediateField.inclusion h
+                  ((Shrink.algEquiv (Padic l) E.val) x.down.val))))) = _
+      rw [AlgEquiv.apply_symm_apply]
+      rfl
+    simpa [pbcIntegerInclusion, WeilConjectures.integralScalarIntegerInclusion] using hinc
+  have hq (n : ℕ) :
+      (pbcQuotientInclusion l Ω k n).comp (pbcQuotientInclusion l Ω h n) =
+        pbcQuotientInclusion l Ω (h.trans k) n := by
+    apply RingHom.ext
+    intro x
+    refine Quotient.inductionOn' x ?_
+    intro x
+    change Ideal.Quotient.mk _ (pbcIntegerInclusion l Ω k (pbcIntegerInclusion l Ω h x)) =
+      Ideal.Quotient.mk _ (pbcIntegerInclusion l Ω (h.trans k) x)
+    exact congrArg (Ideal.Quotient.mk _) (RingHom.congr_fun hi x)
+  have hf (n : ℕ) : pbcFiniteScalarMap l Ω T h n ≫ pbcFiniteScalarMap l Ω T k n =
+      pbcFiniteScalarMap l Ω T (h.trans k) n := by
+    dsimp only [pbcFiniteScalarMap]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← Functor.map_comp_assoc]
+    congr 2
+    exact congrArg ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map)
+      (congrArg CommRingCat.ofHom (hq n))
+  apply (pbcCompletedScalarMap_exists l Ω T (h.trans k)).unique
+  · intro n
+    dsimp only [pbcCompletedScalarMap]
+    rw [Category.assoc,
+      (pbcCompletedScalarMap_exists l Ω T k).exists.choose_spec n,
+      ← Category.assoc,
+      (pbcCompletedScalarMap_exists l Ω T h).exists.choose_spec n,
+      Category.assoc, hf n]
+  · exact (pbcCompletedScalarMap_exists l Ω T (h.trans k)).exists.choose_spec
 
 /-- The tensor unit comparison is fixed on sheafified pure tensors.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -238,7 +452,20 @@ theorem pbcIntegralScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
         Functor.whiskerLeft
           (pbcStageInclusion l Ω T E)
           (pbcAmbientScalarUnit l Ω T E).hom := by
-  sorry
+  let e : pbcIntegralScalarExtension l Ω T hdim hl (le_refl E) ≅
+      𝟭 (pbcIntegralStage l Ω T E) :=
+    NatIso.ofComponents
+      (fun K ↦ ObjectProperty.isoMk _ ((pbcAmbientScalarUnit l Ω T E).app K.obj))
+      (fun f ↦ by
+        apply ObjectProperty.hom_ext
+        exact (pbcAmbientScalarUnit l Ω T E).hom.naturality f.hom)
+  refine ⟨e, rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext _
+  exact congrArg (fun η ↦ η.app K) he'
 
 /-- Integral unit with its ambient normalization.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -269,7 +496,28 @@ theorem pbcScalarIntegralComparison_exists (h : E ≤ F) :
           (pbcStageLocalization l Ω T E))) ∧
       (E ≠ F → HEq c
         (eqToIso (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec)) := by
-  sorry
+  classical
+  by_cases hEF : E = F
+  · subst F
+    have hs : pbcScalarExtension l Ω T hdim hl h = 𝟭 _ := by
+      simp [pbcScalarExtension]
+    rw [hs]
+    let e := (Functor.rightUnitor (pbcStageLocalization l Ω T E)) ≪≫
+      (Functor.leftUnitor (pbcStageLocalization l Ω T E)).symm ≪≫
+      Functor.isoWhiskerRight (pbcIntegralScalarUnit l Ω T hdim hl E).symm
+        (pbcStageLocalization l Ω T E)
+    refine ⟨e, ⟨fun _ ↦ HEq.rfl, fun hne ↦ (hne rfl).elim⟩, ?_⟩
+    intro e' he'
+    exact eq_of_heq (he'.1 rfl)
+  · have hs : pbcScalarExtension l Ω T hdim hl h =
+        (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose := by
+      simp [pbcScalarExtension, hEF]
+    rw [hs]
+    refine ⟨eqToIso
+      (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec,
+      ⟨fun heq ↦ (hEF heq).elim, fun _ ↦ HEq.rfl⟩, ?_⟩
+    intro e' he'
+    exact eq_of_heq (he'.2 hEF)
 
 /-- The uniquely normalized comparison with integral scalar extension.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -308,7 +556,21 @@ theorem pbcIntegralScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
         Functor.whiskerLeft
           (pbcStageInclusion l Ω T E)
           (pbcAmbientScalarAssociator l Ω T h k).hom := by
-  sorry
+  let e : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
+      pbcIntegralScalarExtension l Ω T hdim hl k ≅
+      pbcIntegralScalarExtension l Ω T hdim hl (h.trans k) :=
+    NatIso.ofComponents
+      (fun K ↦ ObjectProperty.isoMk _ ((pbcAmbientScalarAssociator l Ω T h k).app K.obj))
+      (fun f ↦ by
+        apply ObjectProperty.hom_ext
+        exact (pbcAmbientScalarAssociator l Ω T h k).hom.naturality f.hom)
+  refine ⟨e, rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext _
+  exact congrArg (fun η ↦ η.app K) he'
 
 /-- The integral associator with the ambient tensor normalization.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -419,3 +681,4 @@ instance pbcFiniteCoefficientFields_nonempty : Nonempty (Padic.FiniteCoefficient
   ⟨Padic.finiteCoefficientBase l Ω⟩
 
 end AlgebraicGeometry.Scheme
+
