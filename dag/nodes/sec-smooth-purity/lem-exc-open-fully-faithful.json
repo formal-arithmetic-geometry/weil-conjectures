@@ -21,79 +21,45 @@
  ],
  "proof": [
   {
-   "text": "At the abelian-sheaf level, [def-weil-pbc-inverse-image] gives the adjunction $g^{-1}\\dashv g_*$, while [lem-sc-open-immersion-pushforward-fully-faithful] says that for an open immersion the counit $g^{-1}g_*G\to G$ is an isomorphism for every sheaf $G$ on $V$. The inverse image is exact by [prop-weil-pbc-inverse-image-exact], so [lem-weil-pbc-exact-functor-derived-factorization] identifies its termwise functor on complexes with the derived functor $Lg^*$.",
+   "text": "The inverse image [def-weil-pbc-inverse-image] is exact by [prop-weil-pbc-inverse-image-exact]. Use the already proved source-library rightDerivedFunctorCompMapDerivedCategoryIso with F = g_* and G = g^* to identify Rg_* followed by D(g^*) with R(g_* followed by g^*). This generic comparison uses the canonical Grothendieck-category K-injective-resolution instance; no separately stated resolution or preservation theorem is required here.",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "lem-sc-open-immersion-pushforward-fully-faithful",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-    "place": "proof paragraph: the sheaf-level inverse/direct-image adjunction and open-immersion counit"
-   }
+   "elementary": false
   },
   {
-   "text": "For a complex $K$ on $V$, choose a quasi-isomorphism $K\to I$ with $I$ K-injective using [prop-weil-pbc-kinjective-resolutions-exist]. The total right derived functor of the direct-image functor exists and is computed on such an $I$ by [lem-weil-pbc-kinjective-total-derived], so $Rg_*K$ is represented by the complex $g_*I$. Moreover [lem-weil-pbc-right-adjoint-preserves-kinjective] applies because $g_*$ is right adjoint to the exact functor $g^{-1}$, and therefore $g_*I$ is K-injective; [lem-weil-pbc-kinjective-hom-derived] supplies the derived-category Hom identification and hence the naturality in $K$.",
-   "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-    "place": "proof paragraph: K-injective resolutions and derived direct image"
-   }
-  },
-  {
-   "text": "Applying the termwise representative from the preceding steps gives $Lg^*Rg_*K\\simeq Q(g^{-1}g_*I)$. The counit isomorphism of [lem-sc-open-immersion-pushforward-fully-faithful] is natural in $I$, hence gives an isomorphism of complexes $g^{-1}g_*I\\cong I$; applying the derived localization yields $Lg^*Rg_*K\\cong K$. The resolution-independence and functoriality are those in [lem-weil-pbc-kinjective-total-derived] and [lem-weil-pbc-kinjective-hom-derived], so these isomorphisms assemble to the asserted natural isomorphism $Lg^*Rg_*\\cong\\operatorname{id}$.",
+   "text": "The open-immersion sheaf counit is an isomorphism by [lem-sc-open-immersion-pushforward-fully-faithful]. Apply the source-library rightDerivedFunctorNatIso to this counit, then rightDerivedFunctorIsoMapDerivedCategory for the identity and mapDerivedCategoryIdIso. Composing these natural isomorphisms with step 1 proves D(g^*) Rg_* is naturally the identity. The exact-functor identification is [lem-weil-pbc-exact-functor-derived-factorization].",
    "uses": [
     "lem-sc-open-immersion-pushforward-fully-faithful",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-    "place": "proof paragraph: first derived identity"
-   }
+   "elementary": false
   },
   {
-   "text": "For the scheme-theoretic closed complement $i:Z\\hookrightarrow T$, the disjointness of the ranges and the open-immersion hypothesis give $g^{-1}i_*\\mathcal H=0$ for every sheaf $\\mathcal H$ by [lemma-openclosed-vanishing-lowerstar]. Here $i_*$ on complexes is the termwise closed-immersion direct image (the $i_*$ occurring in the displayed identity), so applying the sheaf-level identity in every degree gives the zero complex. Since $g^{-1}$ is exact and its derived functor is represented termwise by [lem-weil-pbc-exact-functor-derived-factorization], this zero complex represents $Lg^*i_*$. Thus the second displayed identity $Lg^*i_*=0$ follows.",
+   "text": "The complement equation implies Disjoint (range g) (range i). The functor i_* is exact because a closed immersion is finite, and g^* is exact by [prop-weil-pbc-inverse-image-exact]. Thus i_* followed by g^* is exact. For every integer n, [lemma-openclosed-vanishing-lowerstar] kills its value on H^n(K). The source-library isZero_mapDerivedCategory_obj, using commutation with homology and detection of zero objects by homology, therefore makes D(i_* followed by g^*)(K) zero. Transport along mapDerivedCategoryCompIso, supplied by exact-functor descent [lem-weil-pbc-exact-functor-derived-factorization], to obtain the asserted second composite.",
    "uses": [
     "lemma-openclosed-vanishing-lowerstar",
     "prop-weil-pbc-inverse-image-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "def-weil-pbc-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-    "place": "proof paragraph: sheaf-level vanishing for the disjoint open and closed immersions"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
   "lem-sc-open-immersion-pushforward-fully-faithful",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lemma-openclosed-vanishing-lowerstar",
-  "prop-weil-pbc-inverse-image-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-direct-image"
+  "prop-weil-pbc-inverse-image-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-  "place": "corrected proof of the imported node; the imported extension-by-zero/K-injective sentence was replaced by the K-injective derived-adjunction argument"
+  "place": "A9 Lean proof, 2026-10-19: existing exact-right-composition and natural-isomorphism APIs give the first identity; exact-functor homology vanishing gives the second."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -164,9 +130,6 @@
  "tool_uses": [
   "lem-sc-open-immersion-pushforward-fully-faithful",
   "prop-weil-pbc-inverse-image-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lemma-openclosed-vanishing-lowerstar"
  ],
  "reviewed": {
@@ -195,5 +158,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Exact theorem and dependency audit passed; scompile.py compiled sandbox and library successfully; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261019T093247-L-2286536",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

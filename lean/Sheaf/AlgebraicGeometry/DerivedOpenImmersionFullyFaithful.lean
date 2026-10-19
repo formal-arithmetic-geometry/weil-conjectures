@@ -15,14 +15,8 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-! # Derived full faithfulness for an open immersion
 
@@ -80,6 +74,26 @@ theorem derivedOpenImmersionFullyFaithful
         IsZero
           (((lowerStar AddCommGrpCat.{u + 1} i).mapDerivedCategory ⋙
             (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory).obj K) := by
-  sorry
+  constructor
+  · exact ⟨(Functor.rightDerivedFunctorCompMapDerivedCategoryIso
+        (lowerStar AddCommGrpCat.{u + 1} g) (upperStar AddCommGrpCat.{u + 1} g)).symm ≪≫
+      Functor.rightDerivedFunctorNatIso
+        (asIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).counit) ≪≫
+      Functor.rightDerivedFunctorIsoMapDerivedCategory
+        (𝟭 (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})) ≪≫
+      Functor.mapDerivedCategoryIdIso _⟩
+  · intro K
+    have hdisj : Disjoint (Set.range g.base) (Set.range i.base) := by
+      rw [h]
+      exact disjoint_compl_right
+    let F := lowerStar AddCommGrpCat.{u + 1} i
+    let G := upperStar AddCommGrpCat.{u + 1} g
+    let : PreservesFiniteLimits (F ⋙ G) := comp_preservesFiniteLimits F G
+    let : PreservesFiniteColimits (F ⋙ G) := comp_preservesFiniteColimits F G
+    have hz : IsZero ((F ⋙ G).mapDerivedCategory.obj K) :=
+      Functor.isZero_mapDerivedCategory_obj (F ⋙ G) K (fun n ↦
+        isZero_upperStar_lowerStar_of_disjoint_range AddCommGrpCat.{u + 1} g i hdisj
+          ((DerivedCategory.homologyFunctor _ n).obj K))
+    exact hz.of_iso ((Functor.mapDerivedCategoryCompIso F G).app K).symm
 
 end AlgebraicGeometry.Etale
