@@ -12,11 +12,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Category.Grp.Colimits
 import Sheaf.Paper.ConstructibleExtContinuity
-import Sheaf.Paper.UniformConstructibleExt
-import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import Sheaf.Topology.ProfiniteCondensedRing
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 /-!
 # Uniform vanishing on ind-constructible targets
@@ -92,6 +89,25 @@ theorem indHeartII_vanishing
       ∀ q : ℤ, d < q →
         Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C.obj ⟶
           ((DerivedCategory.singleFunctor _ 0).obj B)⟦q⟧)) := by
-  sorry
+  classical
+  constructor
+  · intro I _ _ D _ c hc q
+    exact constructible_sheaf_ext_continuity ℓ E R _hR X C.obj C.property D c hc q
+  · intro B hB q hq
+    obtain ⟨I, _, _, pres, hpres⟩ := hB
+    let F := DerivedCategory.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
+      preadditiveCoyoneda.obj
+        (op ((DerivedCategory.singleFunctor _ 0).obj C.obj))
+    have hstage : ∀ i : I, IsZero ((pres.diag ⋙ F).obj i) := by
+      intro i
+      exact AddCommGrpCat.isZero_iff_subsingleton.mpr
+        (_hbound ⟨pres.diag.obj i, hpres i⟩ q hq)
+    have hzero : IsZero (colimit (pres.diag ⋙ F)) :=
+      (colimit.isColimit _).isZero_pt (Functor.isZero _ hstage)
+    have : IsIso (colimit.desc _ (F.mapCocone pres.cocone)) :=
+      constructible_sheaf_ext_continuity ℓ E R _hR X C.obj C.property
+        pres.diag pres.cocone pres.isColimit q
+    exact AddCommGrpCat.subsingleton_of_isZero
+      (hzero.of_iso (asIso (colimit.desc _ (F.mapCocone pres.cocone))).symm)
 
 end AlgebraicGeometry.ProEtale
