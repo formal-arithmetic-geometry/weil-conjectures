@@ -1,0 +1,119 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "split into the independent conclusion proved by the item",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.md",
+  "place": "derived Nakayama first-reduction lemma, corresponding conclusion"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedNakayamaFirstReduction",
+  "date": "2026-10-19",
+  "group": "T3"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completeness of a Roos completion complex is preserved by shifts and distinguished triangles",
+   "results": "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; HasDerivedCategory.standard; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.instIsTriangulated",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|derived_nakayama_first_reduction",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendForgetTensorObjIso\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness of a complex is preserved by shifts and cones, and vanishing modulo a uniformizer implies vanishing",
+   "results": "CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.shiftTrianglehIso; CochainComplex.isKProjective_shift_iff; CochainComplex.isKInjective_shift_iff; CochainComplex.mappingCone.shiftTriangleIso; CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso; CochainComplex.instIsKInjectiveObjIntShiftFunctor; CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+   "date": "2026-10-19",
+   "verdict": "Generic shift, cone, scalar or splitting tools only; no match for the specified augmented internal-module Roos construction."
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Direct strict Roos proof using K-flat representatives"
+ },
+ "id": "det-pe-derived-nakayama-first-reduction-shifts",
+ "title": "Closure of derived completeness under shifts",
+ "statement": "Let l be a prime, E a finite extension of Q_l, and X any scheme. Work in the unbounded derived category of internal modules over the continuous integral coefficient ring O_E pulled back from the profinite point to X_Proet. The canonical reduction functor at index n is derived extension to O_E/pi^(n+1). Completeness means invertibility of the specified zero-nullhomotopy Roos augmentation on a K-flat representative. For every complete object K and integer r, the shift K[r] is complete.",
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take a K-flat representative P of a complete K. A shift of P remains K-flat and represents K[r]. Its original augmentation is a quasi-isomorphism; so is its shift. The normalized signed Roos shift comparison identifies that shifted augmentation with augmentation(P[r]) followed by an isomorphism. Cancelling that isomorphism proves completeness.",
+   "uses": [
+    "det-pe-derived-nakayama-roos-shift-comparison",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-derived-nakayama-roos-shift-comparison",
+  "sk-def-pe-derived-completion"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.DerivedNakayamaFirstReductionShifts",
+  "declaration": "AlgebraicGeometry.ProEtale.derived_nakayama_first_reduction_shifts",
+  "file": "lean/Sheaf/Paper/DerivedNakayamaFirstReductionShifts.lean",
+  "statement": "theorem derived_nakayama_first_reduction_shifts\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :\n    ∀ K : DerivedCategory (AdicCompletion.Modules l E X),\n      IsDerivedComplete l E X K → ∀ r : ℤ,\n        IsDerivedComplete l E X (K⟦r⟧)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T192836-L-1875226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T192836-L-1875226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

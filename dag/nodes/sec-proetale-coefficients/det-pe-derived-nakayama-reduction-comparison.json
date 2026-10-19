@@ -1,0 +1,140 @@
+{
+ "id": "det-pe-derived-nakayama-reduction-comparison",
+ "kind": "statement",
+ "title": "Integral finite reduction and derived tensor",
+ "statement": "For every prime l, finite field extension E of Q_l, scheme X, index n and K in D(Mod(O_E,X)), the restriction to O_E,X of the actual derived extension to the continuous finite quotient at level n+1 is isomorphic to the derived tensor reductionFunctor at n+1.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Step 1"
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "det-pe-derived-nakayama-resolution",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat representative. The derived-extension counit is invertible there. Exact scalar restriction commutes with localization.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced tensor universal property identifies restricted extension with tensoring by the restricted regular finite quotient. The mapMod-comap comparison and the strong monoidal unit isomorphism identify this quotient module with the pulled-back quotientModule.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The K-flat tensor model identifies the resulting localized complex with derived tensor by that degree-zero module. Compose with the representative isomorphism. This is an objectwise comparison, which suffices for vanishing. No boundedness or flatness of the quotient is used.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-derived-completion",
+  "det-pe-derived-nakayama-resolution",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Expanded strict-model proof in the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completeness of a Roos completion complex is preserved by shifts and distinguished triangles",
+   "results": "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; HasDerivedCategory.standard; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.instIsTriangulated",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|derived_nakayama_first_reduction",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendForgetTensorObjIso\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "Generic tools only; no theorem for the specified augmented internal-module completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived extension of scalars equals derived tensor with the restricted quotient algebra on K-flat complexes",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars; Derivation.restrictScalars.congr_simp; Derivation.coe_restrictScalars; Derivation.restrictScalars_apply; PresheafOfModules.restrictScalarsObj; Module.Flat.instTensorProduct; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Derivation.restrictScalars",
+   "date": "2026-10-19",
+   "verdict": "Generic shift, cone, scalar or splitting tools only; no match for the specified augmented internal-module Roos construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedNakayamaFirstReduction",
+  "date": "2026-10-19",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "Strict model comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedNakayamaReductionComparison",
+  "file": "lean/Sheaf/Paper/DerivedNakayamaReductionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.derived_nakayama_reduction_comparison",
+  "statement": "theorem derived_nakayama_reduction_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (n : ℕ)\n    (K : DerivedCategory (AdicCompletion.Modules l E X)) :\n    Nonempty (AdicCompletion.integralLevel l E X K n ≅\n      (DerivedNakayama.reductionFunctor l E X (n + 1)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T192836-L-1875226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T192836-L-1875226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
