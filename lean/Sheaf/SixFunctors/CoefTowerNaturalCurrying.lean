@@ -46,7 +46,7 @@ set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option warn.sorry false
 set_option synthInstance.maxSize 4096
-set_option Elab.async false
+set_option Elab.async true
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
@@ -537,6 +537,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (D : FiniteFieldDatum.{u}) (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+
+/- STATEMENT-DISPUTED: eTrace is arbitrary and is not normalized by eQ. For the
+two-point scheme X = s disjoint-union s, identify B_omega,n with A_n × A_n, whose
+exceptional counit is (x,y) ↦ x+y. Postcompose the canonical comparison with the
+invertible shear (x,y) ↦ (x-y,y), and take t to be first projection. These choices
+satisfy _ht at every level and commute with quotient transitions. For K supported
+on the second component, the evaluation pairing is supported there as well, so
+its composite with t is zero. Its transpose cannot be an isomorphism: both its
+source and target evaluate to the nonzero module A_n. The existential omegaOrigin
+field only factors the arbitrary eTrace; it does not require the canonical
+finite exceptional comparison. See the delivery report for the full specialization
+and the naturality argument that prevents the model witnesses absorbing the shear.
+The theorem statement and its hole are retained pending a normalization repair. -/
 
 /-- Currying of the fixed trace gives an isomorphism, its specified finite formula,
 and naturality in the derived category of strict towers. The model witnesses are
