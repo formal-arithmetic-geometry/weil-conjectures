@@ -17337,3 +17337,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/P8/Sheaf.DeligneLaumon.AffineGeometricComponentsFiniteExtension (stage 3; reviewer PASS; first push; landing 20261019T112510-L-3948000 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/P8/Sheaf.FieldTheory.FiniteDVRInertiaOrderPrimePart (stage 3; reviewer PASS; first push; landing 20261019T112511-L-3948135 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/Q3/Sheaf.Paper.LocalFrobeniusTrace (stage 3; reviewer PASS; first push; landing 20261019T112512-L-3948314 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/Q4/Sheaf.Paper.MixedWeightsStability (stage 3; reviewer PASS; first push; landing 20261019T112513-L-3948412 (proof); batch 20261019T112432; modules 1; new nodes 0)

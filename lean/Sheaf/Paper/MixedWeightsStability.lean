@@ -13,9 +13,9 @@ public import WeilConjectures.WeilSheaf.Category
 public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.Paper.SfConstructibleHeart
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
-import Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient
+import Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed
+import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 import Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds
-import Sheaf.Paper.AdicPunctualWeights
 
 /-! # Stability of mixed upper weight bounds
 
@@ -39,6 +39,53 @@ set_option relaxedAutoImplicit false
 universe u₁ u₂ u₃ v
 
 namespace FrobeniusModule
+
+private theorem mixed_eigenvalue_bound
+    (p a ell : ℕ) [Fact p.Prime] (ha : 1 ≤ a)
+    [Fact ell.Prime] (hellp : ell ≠ p) (Qlb : Type v) [Field Qlb]
+    [Algebra ℚ_[ell] Qlb] (hQ : IsAlgClosure ℚ_[ell] Qlb)
+    (iota : Qlb ≃+* ℂ) (M : FrobeniusModule.{u₁, v} Qlb) (w : ℝ)
+    (hM : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota M w) :
+    M.HasWeightsAtMost iota.toRingHom (p ^ a) w := by
+  obtain ⟨m, V, hzero, hwhole, hinc, hstable, hpure⟩ := hM
+  have step : ∀ (j : ℕ) (hj : j ≤ m) (α : Qlb) (x : M.carrier),
+      x ∈ V ⟨j, by omega⟩ → M.frobenius x = α • x → x ≠ 0 →
+      ‖iota α‖ ≤ ((p ^ a : ℕ) : ℝ) ^ (w / 2) := by
+    intro j
+    induction j with
+    | zero =>
+      intro hj α x hx _ hx0
+      exact (hx0 (by simpa [hzero] using hx)).elim
+    | succ j ih =>
+      intro hj α x hx hFx hx0
+      let r : Fin m := ⟨j, by omega⟩
+      by_cases hxprev : x ∈ V r.castSucc
+      · exact ih (by omega) α x hxprev hFx hx0
+      · obtain ⟨wr, G, hwr, hG, hp⟩ := hpure r
+        let U := (V r.castSucc).comap (V r.succ).subtype
+        let y : V r.succ := ⟨x, hx⟩
+        have hFy : M.frobenius x ∈ V r.succ := by
+          rw [hFx]
+          exact (V r.succ).smul_mem α hx
+        have hα : (FrobeniusModule.frobeniusEnd
+            { carrier := V r.succ ⧸ U, frobenius := G }).HasEigenvalue α := by
+          apply Module.End.hasEigenvalue_of_hasEigenvector
+            (x := (Submodule.Quotient.mk y : V r.succ ⧸ U))
+          rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+          constructor
+          · change G (Submodule.Quotient.mk y) = α • Submodule.Quotient.mk y
+            rw [hG y hFy, ← Submodule.Quotient.mk_smul]
+            congr 1
+            exact Subtype.ext hFx
+          · intro hy
+            apply hxprev
+            exact (Submodule.Quotient.mk_eq_zero U).mp hy
+        have hq : (1 : ℕ) ≤ p ^ a := one_le_pow₀ (Fact.out : p.Prime).one_le
+        exact (IsPureOfWeight.hasWeightsAtMost hp).mono hq hwr α hα
+  intro α hα
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  exact step m le_rfl α x (by rw [hwhole]; trivial) hx.1 hx.2
 
 /-- The same four stability assertions for finite-dimensional Frobenius modules,
 using mixedness defined by a finite stable filtration, with no semisimplicity assumption.
@@ -91,6 +138,37 @@ theorem mixedOfWeightsAtMost_stability
       r.comp i = LinearMap.id →
       IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w →
       IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w) := by
-  sorry
+  have sub : ∀ (A : FrobeniusModule.{u₁, v} Qlb)
+      (B : FrobeniusModule.{u₂, v} Qlb) (f : A.carrier →ₗ[Qlb] B.carrier),
+      (∀ x, f (A.frobenius x) = B.frobenius (f x)) → Function.Injective f →
+      IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w →
+      IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w := by
+    intro A B f hf hinj hB
+    apply isMixedOfWeightsAtMost_of_forall_hasEigenvalue p a ell ha hellp Qlb hQ iota A w
+    intro α hα
+    obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+    rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+    apply mixed_eigenvalue_bound p a ell ha hellp Qlb hQ iota B w hB α
+    apply Module.End.hasEigenvalue_of_hasEigenvector (x := f x)
+    rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+    refine ⟨?_, (map_ne_zero_iff _ hinj).2 hx.2⟩
+    change B.frobenius (f x) = α • f x
+    rw [← hf, ← map_smul]
+    exact congrArg f hx.1
+  refine ⟨sub, ?_, ?_, ?_⟩
+  · intro A B g hg hsurj hA
+    apply isMixedOfWeightsAtMost_of_forall_hasEigenvalue p a ell ha hellp Qlb hQ iota B w
+    intro α hα
+    obtain ⟨y, hy⟩ := hα.exists_hasEigenvector
+    exact mixed_eigenvalue_bound p a ell ha hellp Qlb hQ iota A w hA α
+      (hasEigenvalue_of_hasEigenvector_mem_range g hg hy (hsurj y))
+  · intro A B C f g hf hg hinj hexact hsurj hA hC
+    exact IsMixedOfWeightsAtMost.of_shortExact p a ell ha hellp Qlb hQ iota
+      A B C f g hf hg hinj hexact hsurj w hA hC
+  · intro A B i r hi _ hri hB
+    apply sub A B i hi _ hB
+    intro x y hxy
+    have hleft (z : A.carrier) : r (i z) = z := LinearMap.congr_fun hri z
+    exact (hleft x).symm.trans ((congrArg r hxy).trans (hleft y))
 
 end FrobeniusModule
