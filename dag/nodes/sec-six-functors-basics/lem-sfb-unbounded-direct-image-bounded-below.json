@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-unbounded-direct-image-bounded-below",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "Opening paragraph: affine pro-etale basis and all integer degrees; direct-image clause",
+   "via": [
+    "lem-sfb-unbounded-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded-below comparison under total derivation",
+ "statement": "Let A be a finite commutative ring, g:X→Y a quasi-compact quasi-separated scheme morphism, and K an etale complex of A-module sheaves whose cohomology vanishes below an integer n. The canonical unbounded direct-image mate of [def-sfb-unbounded-direct-image-mate] at K is an isomorphism. No finite-type, field, primary-torsion or upper-boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+  "place": "Conclusion: apply the canonical bounded-below comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-unbounded-direct-image-mate",
+  "sk-def-sfb-derived-categories",
+  "sk-thm-pe-direct-image-comparison",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Regard K as the D+ object given by its lower bound. Restrict the specified unbounded derived adjunction along the fully faithful inclusions, using mapDerivedCategoryPlusCompatibility and rightDerivedFunctorPlusCompatibility. The derived-unit factorization and the uniqueness theorem derivedPlus_unit_eq identify this restricted adjunction with derivedPlus. The restriction formula then identifies the included D+ counit with the total-derived counit preceded by direct-image compatibility.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Conclusion: the bounded-below comparison"
+   }
+  },
+  {
+   "text": "The termwise inverse-image composition and natural-isomorphism compatibility formulas identify the included fixedComparisonPullbackPlus with the inverse of unboundedDirectImagePullbackIso. Include fixedComparisonDirectImageMatePlus_counit into D and apply these pullback and counit identities. Naturality of the unbounded pullback isomorphism then identifies the transpose of its counit formula with the specified unbounded mate. This gives F(re.hom) followed by alpha_K equal to the included canonical D+ mate followed by rp.hom. Both re and rp are compatibility isomorphisms, and the D+ mate is invertible for qcqs g. Cancelling F(re.hom) proves that alpha_K is invertible.",
+   "uses": [
+    "def-sfb-unbounded-direct-image-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Conclusion: the canonical qcqs D+ mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "src-right-derived-functor-plus-compatibility",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-unbounded-direct-image-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+  "place": "Complete Lean proof: fully faithful restriction and derived-unit uniqueness, included counits, pullback-square compatibility, and the fixed canonical D+ mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proetale etale comparison direct image finite coefficients unbounded derived lower truncation",
+   "results": "Scheme.smallEtaleTopology and etale site definitions; no comparison or stabilization theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension stabilizes cohomology of derived pushforward under lower truncation",
+   "results": "DerivedCategory.isGE_Q_obj_iff, exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; these only describe truncation bounds",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*Plus|Plus.*rightDerivedFunctor in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "RightDerivedFunctorPlus and DerivabilityStructureInjectives; no pro-etale direct-image mate or uniform stabilization theorem. Upstream PlusCompatibility provides the functor comparison but no mate compatibility theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "K8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDirectImageBoundedBelow",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDirectImageBoundedBelow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedDirectImageComparison_boundedBelow",
+  "statement": "theorem unboundedDirectImageComparison_boundedBelow\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [QuasiCompact g] [QuasiSeparated g]\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (n : ℤ) [K.IsGE n] : IsIso (unboundedDirectImageComparisonMap A g K)",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "independent cc review: Proved item unboundedDirectImageComparison (statement byte-identical) via verbatim-extracted mate module (change record, public re-export) + proved bounded-below D+ mate identification + proved truncation stability using existing LeftComplete; sandbox --all compile clean (LeftComplete copied in: published olean missing), axioms only via existing open classicalUniformBounds; importers FiniteComparisonLocalizing and FiniteRingCompactSupportProjection compile; FiniteRingSiteTensorTranspose braidedCategory' failure is pre-existing on published"
+ }
+}

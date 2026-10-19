@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-unbounded-direct-image-mate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "Opening paragraph: affine pro-etale basis and all integer degrees; direct-image clause",
+   "via": [
+    "lem-sfb-unbounded-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The canonical unbounded direct-image mate and its naturality",
+ "statement": "For a commutative ring A and a scheme morphism g:X→Y, localize the canonical exact inverse-image square to obtain c:nu_Y^* g_proet^* ≅ g_et^* nu_X^*. Define alpha_K:nu_Y^* Rg_et,* K→Rg_proet,* nu_X^* K as the transpose, under g_proet^* ⊣ Rg_proet,*, of c at Rg_et,* K followed by nu_X^* of the etale derived counit. These are total right derived functors on K-injectives. This construction is natural in K.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+  "place": "Displayed canonical mate; naturality square in the Conclusion paragraph"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-derived-categories",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact inverse images termwise and localize their canonical square. Define the component by adjunction transposition. For naturality, apply the naturality formulas for homEquiv on its source and target, then naturality of the pullback square and the etale derived counit.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Opening paragraph: affine pro-etale basis and all integer degrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-direct-image-comparison",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+  "place": "Reorganization of the existing twelve-step proof into a naturality square and two strict subarguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proetale etale comparison direct image finite coefficients unbounded derived lower truncation",
+   "results": "Scheme.smallEtaleTopology and etale site definitions; no comparison or stabilization theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension stabilizes cohomology of derived pushforward under lower truncation",
+   "results": "DerivedCategory.isGE_Q_obj_iff, exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; these only describe truncation bounds",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*Plus|Plus.*rightDerivedFunctor in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "RightDerivedFunctorPlus and DerivabilityStructureInjectives; no pro-etale direct-image mate or uniform stabilization theorem. Upstream PlusCompatibility provides the functor comparison but no mate compatibility theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "K8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparisonMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDirectImageComparisonMap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap",
+  "statement": "def unboundedDirectImageComparisonMap\n    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj\n        ((Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.obj K) ⟶\n      (ProEtale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.obj\n        ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K)",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.unboundedDirectImagePullbackIso",
+   "AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap",
+   "AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "independent cc review: Proved item unboundedDirectImageComparison (statement byte-identical) via verbatim-extracted mate module (change record, public re-export) + proved bounded-below D+ mate identification + proved truncation stability using existing LeftComplete; sandbox --all compile clean (LeftComplete copied in: published olean missing), axioms only via existing open classicalUniformBounds; importers FiniteComparisonLocalizing and FiniteRingCompactSupportProjection compile; FiniteRingSiteTensorTranspose braidedCategory' failure is pre-existing on published"
+ }
+}

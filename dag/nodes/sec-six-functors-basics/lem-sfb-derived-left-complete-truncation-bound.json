@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-derived-left-complete-truncation-bound",
+ "kind": "statement",
+ "title": "Left completeness and a uniform upper bound on lower truncations",
+ "statement": "Let C and D be abelian categories with unbounded derived categories, K-injective resolutions, and exact countable products [def-sp-abelian, def-weil-abstract-derived-category, def-weil-category-product]. Every K in D(C) is the homotopy limit, with the specified canonical projections, of its standard truncation tower tau_{>=-n}K [def-sbc-standard-tstructure-derived-category, def-weil-derived-limit]. Consequently, if G:D(C)→D(D) is triangulated and preserves countable products, and G(tau_{>=-n}K) lies in D^{<=b} for every natural n, then G(K) lies in D^{<=b+1}. No bound on K itself or heart objects is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+  "place": "Statement and proof; existing Lean realization lean/WeilConjectures/CategoryTheory/DerivedCategory/LeftComplete.lean: isHomotopyLimit_truncGECone and isLE_obj_of_forall_isLE_obj_truncGE"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Form the tower of standard lower truncations tau_{>=-n}K and its canonical cone. Exact countable products give products in D(C) and let homology commute with them. Form the distinguished fibre triangle of 1 minus the transition shift on the product of this tower.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+    "place": "Proof of left completeness: the truncation tower and its Milnor triangle"
+   }
+  },
+  {
+   "text": "In degree i the tower is zero before max(0,-i) and its cone maps are isomorphisms thereafter. A cone on such a tower is limiting: lift at the first stable index and use its inverse. The endomorphism 1 minus shift is split epic: its section has nth component minus the sum of the input components from the first stable index to n-1, transported through the stable cone maps. The kernel is therefore H^i(K). The long exact sequence of the fibre triangle and this kernel calculation make K to the fibre an isomorphism on every homology object, hence an isomorphism. Thus K with its specified truncation projections is a homotopy limit.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+    "place": "Proof of left completeness: the eventually constant homology tower"
+   }
+  },
+  {
+   "text": "A triangulated functor preserving countable products sends that triangle to the Milnor triangle of its images. If all these images lie in D^{<=b}, their product does too, since target homology commutes with products. Rotating the triangle once expresses G(K) between a product shifted by -1, in D^{<=b+1}, and the unshifted product, in D^{<=b}. Extension closure gives G(K) in D^{<=b+1}.",
+   "uses": [
+    "def-weil-derived-limit",
+    "lem-weil-derived-limit-products-core",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+    "place": "Left completeness and products: the uniform truncation-bound consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+  "place": "Adopt the existing fully proved generic source-library left-completeness theorem and its Milnor-triangle bound; no new Lean theorem or alias"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a left complete derived category an exact functor preserving countable products sends a bounded above object to a bounded above object if all lower truncations satisfy a uniform upper bound",
+   "results": "DerivedCategory.IsGE, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; local source search found the proved general theorem in WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLE\", \"truncGE\"",
+   "results": "CategoryTheory.Triangulated.TStructure.instIsLEObjTruncGE, CategoryTheory.Triangulated.TStructure.isZero_truncGE_obj_of_isLE, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncGELTHSubIntOfNat, CategoryTheory.Triangulated.TStructure.isLE_iff_isZero_truncGE_obj, CategoryTheory.Triangulated.TStructure.isIso₂_truncGE_map_of_isLE, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncGELE, CategoryTheory.Triangulated.TStructure.instIsLEObjEIntFunctorETruncGE",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; local source search found the proved general theorem in WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete"
+  },
+  {
+   "tool": "grep",
+   "query": "isLE_obj_of_forall_isLE_obj_truncGE|countableAB4Star|mapDerivedCategoryTruncGEIso",
+   "results": "Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; local source search found the proved general theorem in WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category left completeness uniform upper bound on lower truncations exact countable products",
+   "results": "HasCountableProducts.mk; CountableAB4Star; CountableAB4Star.mk; CountableAB4Star.of_countableAB5Star; CountableAB4 and related instances. No derived truncation bound.",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match. Use the existing proved DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE in the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-unbounded-direct-image-comparison",
+   "place": "Shorter proof of the target tail via existing generic left completeness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete",
+  "declaration": "DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE",
+  "declarations": [
+   "DerivedCategory.isHomotopyLimit_truncGECone",
+   "DerivedCategory.isLE_of_isHomotopyLimit",
+   "DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE"
+  ],
+  "statement": "lemma isLE_obj_of_forall_isLE_obj_truncGE (G : DerivedCategory C ⥤ DerivedCategory D)\n    [G.CommShift ℤ] [G.IsTriangulated] [PreservesLimitsOfShape (Discrete ℕ) G]\n    (K : DerivedCategory C) (b : ℤ)\n    (hK : ∀ n : ℕ, (G.obj ((t.truncGE (-(n : ℤ))).obj K)).IsLE b) :\n    (G.obj K).IsLE (b + 1)",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-19",
+  "note": "Unchanged source library. The section variables supply the abelian, derived, K-injective and exact-countable-product hypotheses stated above. The unchanged file is copied in the sandbox only to compile its missing artifact; it is not modified by this delivery."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "independent cc review: Proved item unboundedDirectImageComparison (statement byte-identical) via verbatim-extracted mate module (change record, public re-export) + proved bounded-below D+ mate identification + proved truncation stability using existing LeftComplete; sandbox --all compile clean (LeftComplete copied in: published olean missing), axioms only via existing open classicalUniformBounds; importers FiniteComparisonLocalizing and FiniteRingCompactSupportProjection compile; FiniteRingSiteTensorTranspose braidedCategory' failure is pre-existing on published"
+ }
+}

@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-unbounded-direct-image-truncation-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "Opening paragraph: affine pro-etale basis and all integer degrees; direct-image clause",
+   "via": [
+    "lem-sfb-unbounded-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fixed-degree stabilization of the two direct-image expressions",
+ "statement": "Let k be a finite or algebraically closed field, ell a prime invertible in k, A a finite commutative ring killed by ell^r for some natural r, X and Y finite-type k-schemes, and g:X→Y a finite-type morphism (not necessarily a k-morphism). let S(K)=nu_Y^* Rg_et,* K and T(K)=Rg_proet,* nu_X^* K, using the derived functors and inverse images of [sk-def-sfb-derived-categories] and [sk-thm-pe-direct-image-comparison]. For each etale complex K and each integer m, there is an integer N such that the canonical truncation map t:K→tau_{≥N}K induces isomorphisms H^m(S(t)) and H^m(T(t)) of pro-etale A-module sheaves. This asserts stabilization of the two functors separately and does not assert invertibility of the unbounded comparison mate.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+  "place": "Source and Target paragraphs; opening basis-detection argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-sfb-derived-categories",
+  "sk-thm-pe-direct-image-comparison",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Put d=2 dim(X)+1, assigning empty dimension zero. For every fixed-ring module sheaf M, finiteness of A makes the underlying abelian sheaf torsion. Apply classicalUniformBounds (3) and transport zero homology from D+ to R^q g_et,* by the single-object homology isomorphism. The canonical module/abelian comparison and faithful coefficient forgetting give R^q g_et,* M=0 for q>d.",
+   "uses": [
+    "det-pe-unbounded-classical-bounds",
+    "det-pbc-conventions-module-cohomology",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Source paragraph: the module higher-direct-image bound"
+   }
+  },
+  {
+   "text": "Apply the existing proved isLE_rightDerivedFunctor_obj_of_dimension to the additive left exact etale direct image and the preceding uniform bound on its ordinary higher derived functors. It directly concerns the specified total rightDerivedFunctor. Thus E in D^{≤t} has Rg_et,*E in D^{≤t+d}; exact comparison preserves this bound.",
+   "uses": [
+    "lem-etale-derived-functor-upper-amplitude",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Source paragraph: total-derived upper bound"
+   }
+  },
+  {
+   "text": "Put G=nu_X^*, F=Rg_proet,*, and E=Rg_et,*. Exact inverse image commutes with standard lower truncations and preserves upper bounds. For K in D^{<=b}, each tau_{>=-n}K remains in D^{<=b}. The preceding etale bound puts nu_Y^*E(tau_{>=-n}K) in D^{<=b+d}. The bounded-below canonical comparison identifies this object with F(tau_{>=-n}(G(K))). Pro-etale fixed-ring module sheaves have exact countable products, as realized by the existing source instance Scheme.ProEt.countableAB4Star. Derived direct image is right adjoint to exact derived inverse image and hence preserves countable products. Apply the existing generic left-completeness bound to obtain F(G(K)) in D^{<=b+d+1}. This uses the bounded-below mate only and is independent of the unbounded comparison being proved.",
+   "uses": [
+    "lem-sfb-unbounded-direct-image-bounded-below",
+    "sk-thm-pe-direct-image-comparison",
+    "sk-def-sfb-derived-categories",
+    "det-pe-products-exact",
+    "lem-sfb-derived-left-complete-truncation-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+    "place": "Derived right adjoints preserve products and Postnikov limits; uniform truncation-bound consequence"
+   }
+  },
+  {
+   "text": "Fix m and choose N=m-d-2. In the standard truncation triangle E→K→tau_{≥N}K, E lies in D^{≤N-1}. Apply the two triangulated functors. Their first terms lie respectively in D^{≤N-1+d} and D^{≤N+d}. Both bounds are strictly below m and m+1. Each long exact sequence therefore makes its second map monic and epic in degree m. These are exactly the two displayed truncation maps. No sectionwise estimate on Y is needed for the source.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Conclusion: the two truncation maps separately"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-unbounded-classical-bounds",
+  "det-pbc-conventions-module-cohomology",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-etale-derived-functor-upper-amplitude",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-unbounded-direct-image-bounded-below",
+  "det-pe-products-exact",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+  "place": "Complete source estimate, bounded-below comparison on every truncation, existing generic left completeness, and the two long exact truncation sequences. No new open step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proetale etale comparison direct image finite coefficients unbounded derived lower truncation",
+   "results": "Scheme.smallEtaleTopology and etale site definitions; no comparison or stabilization theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension stabilizes cohomology of derived pushforward under lower truncation",
+   "results": "DerivedCategory.isGE_Q_obj_iff, exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; these only describe truncation bounds",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*Plus|Plus.*rightDerivedFunctor in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "RightDerivedFunctorPlus and DerivabilityStructureInjectives; no pro-etale direct-image mate or uniform stabilization theorem. Upstream PlusCompatibility provides the functor comparison but no mate compatibility theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "K8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDirectImageTruncationStability",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDirectImageTruncationStability.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedDirectImage_truncation_stability",
+  "statement": "theorem unboundedDirectImage_truncation_stability\n    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)\n    {ℓ : ℕ} [Fact ℓ.Prime]\n    (_hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (_hA : ∃ n : ℕ, (ℓ : A) ^ n = 0)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k))]\n    (g : X ⟶ Y)\n    [LocallyOfFiniteType g] [QuasiCompact g]\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (m : ℤ) :\n    ∃ N : ℤ,\n      IsIso ((DerivedCategory.homologyFunctor\n        (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) m).map\n        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map\n          ((Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.map\n            ((CategoryTheory.Triangulated.TStructure.truncGEπ\n              DerivedCategory.TStructure.t N).app K)))) ∧\n      IsIso ((DerivedCategory.homologyFunctor\n        (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) m).map\n        ((ProEtale.lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.map\n          ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map\n            ((CategoryTheory.Triangulated.TStructure.truncGEπ\n              DerivedCategory.TStructure.t N).app K))))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-19"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "worker": "stage3",
+  "summary": "Both tail estimates and truncation sequences are proved. The target uses exact countable products and the existing source-library generic left-completeness bound, eliminating all sectionwise transport.",
+  "blueprint": "Unit route retained: canonical direct-image comparison via both truncation tails and the bounded-below canonical comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-etale-derived-functor-upper-amplitude",
+    "why": "Existing proved generic finite-cohomological-dimension upper amplitude for the specified total right derived functor (Stacks 07K7), applied only to the etale direct image."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic triangulatedness of the derived exact inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic additivity and left exactness for etale module direct image, required by the finite-cohomological-dimension lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives hypothesis for the same upper-bound lemma."
+   },
+   {
+    "node": "det-pbc-conventions-module-cohomology",
+    "why": "Generic coefficient-forgetting comparison for higher etale direct images, needed to apply the torsion abelian-sheaf bound to module sheaves."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-f49bd",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112453-L-3943137",
+  "kind": "interface",
+  "note": "independent cc review: Proved item unboundedDirectImageComparison (statement byte-identical) via verbatim-extracted mate module (change record, public re-export) + proved bounded-below D+ mate identification + proved truncation stability using existing LeftComplete; sandbox --all compile clean (LeftComplete copied in: published olean missing), axioms only via existing open classicalUniformBounds; importers FiniteComparisonLocalizing and FiniteRingCompactSupportProjection compile; FiniteRingSiteTensorTranspose braidedCategory' failure is pre-existing on published"
+ }
+}
