@@ -13,13 +13,11 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
-import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.CategoryTheory.ConstantRingModuleSheaves
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleAffineBound
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 
 /-!
 # Uniform affine evaluation bound for classical pro-etale module sheaves
@@ -55,6 +53,84 @@ noncomputable abbrev proEtaleConstantModuleEvaluation
         ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} A)))).app
           (op W)).hom.comp ULift.ringEquiv.symm.toRingHom)
 
+private theorem etale_fixed_isZero_of_ringed
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ)
+    (h : ∀ J : InjectiveResolution ((Scheme.etaleConstantModuleFunctor X Λ).obj F),
+      IsZero ((((SheafOfModules.evaluation (Scheme.etaleConstantModuleRing X Λ)
+        (op (Scheme.Etale.mk (𝟙 X)))).mapHomologicalComplex (.up ℕ)).obj
+          J.cocomplex).homology n)) :
+    IsZero (((Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) X).rightDerived n).obj F) := by
+  let E := Scheme.etaleConstantModuleFunctor X Λ
+  have : E.IsEquivalence := Scheme.etaleConstantModuleFunctor_isEquivalence X Λ
+  have : E.Additive := Functor.additive_of_preserves_binary_products E
+  let I := injectiveResolution F
+  let J : InjectiveResolution (E.obj F) :=
+    { cocomplex := (E.mapHomologicalComplex _).obj I.cocomplex
+      ι := E.mapResolution I.ι
+      injective := fun n ↦ by
+        change Injective (E.obj (I.cocomplex.X n))
+        infer_instance }
+  let V := Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) X
+  let K := (V.mapHomologicalComplex _).obj I.cocomplex
+  let R := SheafOfModules.evaluation (Scheme.etaleConstantModuleRing X Λ)
+    (op (Scheme.Etale.mk (𝟙 X)))
+  let L := (R.mapHomologicalComplex _).obj J.cocomplex
+  let U := forget₂ (ModuleCat.{u + 1}
+    ((Scheme.etaleConstantModuleRing X Λ).obj.obj (op (Scheme.Etale.mk (𝟙 X)))))
+      AddCommGrpCat.{u + 1}
+  let U' := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  have hz : IsZero (((U.mapHomologicalComplex _).obj L).homology n) :=
+    (U.map_isZero (h J)).of_iso ((L.sc n).mapHomologyIso U)
+  have hz' : IsZero (((U'.mapHomologicalComplex _).obj K).homology n) := hz
+  have hz'' : IsZero (U'.obj (K.homology n)) :=
+    hz'.of_iso ((K.sc n).mapHomologyIso U').symm
+  have : Subsingleton (K.homology n) := AddCommGrpCat.subsingleton_of_isZero hz''
+  exact (ModuleCat.isZero_iff_subsingleton.mpr this).of_iso (I.isoRightDerivedObj V n)
+
+private theorem evaluation_isZero_of_fixed
+    (X : Scheme.{u}) (A : Type u) [CommRing A] (W : X.ProEt)
+    (H : ringedSiteModules.{u + 1}
+      ((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj
+        (RingCat.of (ULift.{u + 1, u} A))))
+    (I : InjectiveResolution H) (n : ℕ)
+    (h : IsZero (((sectionsFunctor (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) W).rightDerived n).obj
+      ((constantRingModuleRestriction (Scheme.ProEt.topology X) (ULift.{u + 1, u} A)).obj H))) :
+    IsZero ((((proEtaleConstantModuleEvaluation X A W).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj I.cocomplex).homology n) := by
+  let Λ := ULift.{u + 1, u} A
+  let E := constantRingModuleRestriction (Scheme.ProEt.topology X) Λ
+  obtain ⟨⟨e, he, ha, _, _⟩, _, _⟩ := constant_ring_module_sheaves
+    (Scheme.ProEt.topology X) Λ
+  have : E.IsEquivalence := by
+    dsimp only [E]
+    rw [← he]
+    infer_instance
+  have : E.Additive := by
+    dsimp only [E]
+    rw [← he]
+    exact ha
+  let J : InjectiveResolution (E.obj H) :=
+    { cocomplex := (E.mapHomologicalComplex _).obj I.cocomplex
+      ι := E.mapResolution I.ι
+      injective := fun n ↦ by
+        change Injective (E.obj (I.cocomplex.X n))
+        infer_instance }
+  let V := sectionsFunctor (ModuleCat.{u + 1} Λ) W
+  have hz : IsZero (((V.mapHomologicalComplex _).obj J.cocomplex).homology n) :=
+    h.of_iso (J.isoRightDerivedObj V n).symm
+  let R : ModuleCat.{u + 1} Λ ⥤ ModuleCat.{u + 1} A :=
+    ModuleCat.restrictScalars (ULift.ringEquiv.symm.toRingHom : A →+* Λ)
+  have : PreservesFiniteLimits R := ⟨fun _ _ _ ↦
+    ⟨ModuleCat.preservesLimit_restrictScalars _ _⟩⟩
+  have : PreservesFiniteColimits R := ⟨fun _ _ _ ↦
+    ⟨ModuleCat.preservesColimit_restrictScalars _ _⟩⟩
+  have hz' := R.map_isZero hz
+  let K := (V.mapHomologicalComplex _).obj J.cocomplex
+  have hz'' : IsZero (((R.mapHomologicalComplex _).obj K).homology n) :=
+    hz'.of_iso ((K.sc n).mapHomologyIso R)
+  exact hz''
+
 /-- Every classical module sheaf has vanishing evaluation cohomology above `2 dim X + 1`,
 uniformly over affine etale objects. Dimension of the empty scheme is assigned zero.
 The conclusion is stated for every injective module resolution and takes cohomology
@@ -66,23 +142,23 @@ Source: current blueprint, Fixed-degree truncation paragraph of
 (blueprint: lem-sfb-classical-module-affine-evaluation-bound).
 
 Proof:
-1. By lem-weil-pbc-ring-sheaves-grothendieck and lem-sp-grothendieck-enough-injectives,
-the module categories have injective resolutions in the common larger universe.
-By det-pe-classical-sheaves-modules, descend H to an etale module sheaf G.
-No finite generation or constructibility is used.
-2. By lem-weil-pbc-etale-inverse-image-restriction and
-lem-pe-constant-left-module-inverse-image, etale inverse image on W is the ordinary
-restriction, with the same A-action. Apply lem-sfb-etale-module-affine-bound to G;
-its hypotheses and its dimension convention are exactly those here.
-3. Apply the affine formula of sk-prop-sf-comparison to G[0] and the constant
-one-object affine etale presentation of W. This is a bounded-below input, so the
-comparison does not invoke unbounded comparison. By
-lem-weil-pbc-right-derived-plus-injective, derived sections are computed by evaluating
-injective module resolutions. Taking degree q gives vanishing on W_proet.
-4. By lem-weil-pbc-proetale-restriction-injectives, restriction to W is exact and
-preserves injectives. Its evaluated resolution at the final object has the terms
-I^n(W), the same differentials and the same constant A-action. Thus it is the complex
-in the conclusion. The same bound works for every W and every classical H. -/
+1. Restrict the constant-ring action to obtain a fixed-ULift-A module sheaf F.
+Its underlying set sheaf is unchanged, hence classical. Descend F by
+det-pe-classical-sheaves-modules and extend the descended module action through the
+etale constant-ring equivalence, obtaining G with comparison pullback isomorphic to F.
+2. Apply lem-sfb-etale-module-affine-bound to G with the lifted annihilation equation.
+Transport a fixed-module injective resolution through the etale constant-ring
+equivalence. Forgetting scalars commutes with homology and reflects zero modules,
+so etale_fixed_isZero_of_ringed gives vanishing of fixed-module derived sections.
+3. The upstream degree-zero-input specialization of sk-prop-sf-comparison transfers
+this vanishing to W_proet. The comparison pullback coherence isomorphism identifies
+its coefficients with the inverse image of F. Only bounded-below comparison is used.
+4. The upstream localization lemma, using exact injective-preserving restriction,
+gives vanishing of ambient derived evaluation at W. Transport the given resolution
+I through the constant-ring restriction equivalence, then restrict scalars along
+inverse ULift. Both operations preserve the relevant homology; the final evaluated
+complex is definitionally the one in the conclusion. This is
+evaluation_isZero_of_fixed. The same bound works for every W and every classical H. -/
 theorem classical_module_affine_evaluation_bound
     (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) (_hℓ : ℓ.Prime) (_hℓk : IsUnit (ℓ : k))
@@ -99,6 +175,39 @@ theorem classical_module_affine_evaluation_bound
     (_hq : (2 * ((topologicalKrullDim X).unbotD 0).toNat + 1 : ℕ) < q) :
     IsZero ((((proEtaleConstantModuleEvaluation X A (Scheme.ProEt.mk W.hom)).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj I.cocomplex).homology q.toNat) := by
-  sorry
+  let Λ := ULift.{u + 1, u} A
+  let F := (constantRingModuleRestriction (Scheme.ProEt.topology X) Λ).obj H
+  have hF : IsClassical ((sheafCompose (Scheme.ProEt.topology X)
+      (forget (ModuleCat.{u + 1} Λ))).obj F) := _hH
+  obtain ⟨adj, _, _, _, _, hc⟩ := proEtaleClassicalSheavesModules X Λ
+  obtain ⟨G₀, ⟨e₀⟩⟩ := (hc F).mp hF
+  let G := (Scheme.etaleConstantModuleFunctor X Λ).obj G₀
+  have e : (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj
+      ((Scheme.etaleConstantModuleRestrictionFunctor X Λ).obj G) ≅ F :=
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapIso
+      ((Scheme.etaleConstantModuleUnitIso X Λ).app G₀).symm ≪≫ e₀
+  have hA : (ℓ : Λ) ^ a = 0 := by
+    apply ULift.ext
+    exact _hA
+  have het : IsZero (((Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) W.left).rightDerived
+      q.toNat).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) W.hom).obj
+        ((Scheme.etaleConstantModuleRestrictionFunctor X Λ).obj G))) := by
+    apply etale_fixed_isZero_of_ringed
+    intro J
+    exact etaleModule_affine_cohomology_isZero _hk ℓ _hℓ _hℓk Λ a _ha hA
+      X W G q _hq J
+  have hpro := isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj
+    (ModuleCat.{u + 1} Λ) W.left _ q.toNat het
+  have hglobal : IsZero (((globalSectionsFunctor (ModuleCat.{u + 1} Λ)
+      W.left).rightDerived q.toNat).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) W.hom).obj F)) := by
+    apply hpro.of_iso
+    exact ((globalSectionsFunctor (ModuleCat.{u + 1} Λ) W.left).rightDerived
+      q.toNat).mapIso
+        ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) W.hom).mapIso e.symm ≪≫
+          (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) W.hom).app _)
+  have hsections := isZero_rightDerived_sectionsFunctor_of_upperStar
+    (ModuleCat.{u + 1} Λ) (Scheme.ProEt.mk W.hom) F q.toNat hglobal
+  exact evaluation_isZero_of_fixed X A (Scheme.ProEt.mk W.hom) H I q.toNat hsections
 
 end AlgebraicGeometry.ProEtale

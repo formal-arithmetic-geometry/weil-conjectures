@@ -16962,3 +16962,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/Y3/Sheaf.Paper.IntegralOperationsScalarComparisons (stage 3; reviewer PASS; first push; landing 20261019T034354-L-426362 (interface); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/IntegralOperationsScalarComparisons.md)
 - 03:43 L: merged deliver/Y5/Sheaf.Paper.CoefficientHeartTriangulated (stage 3; reviewer PASS; first push; landing 20261019T034355-L-426468 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/Y5/Sheaf.Paper.RestrictionDirectImage (stage 3; reviewer PASS; first push; landing 20261019T034355-L-426636 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/Y5/Sheaf.SixFunctors.ClassicalModuleAffineEvaluationBound (stage 3; reviewer PASS; first push; landing 20261019T034356-L-426733 (proof); batch 20261019T034248; modules 1; new nodes 0)
