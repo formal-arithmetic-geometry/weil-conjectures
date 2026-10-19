@@ -27,102 +27,65 @@
  ],
  "proof": [
   {
-   "text": "(1) Work in the separated finite-type $k$-scheme setting of [sk-def-sfb-dc-setting]. By [lem-weil-pbc-qcqs-over-affine], $X$ and $U$ are quasi-compact and quasi-separated, so [det-sf-open-closed-extension-zero-limits] applies to $A_X=\\mathcal O_{E,X}$. Clause (1) of [sk-prop-sfb-cartesian-coefficients] identifies $j^{-1}A_X$ with $A_U$, and [lem-weil-pbc-reduced-induced-closed-subscheme] supplies the reduced complement. The ringed-site lemma [lem-weil-pbc-proetale-ringed-open-closed] gives exactness and $j_!\\dashv j^{-1}$ on module sheaves. Using [lem-weil-pbc-sheaf-tensor-closed], [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and [sk-def-sfb-module-objects], these are the module categories of the item; [sk-prop-sfb-cartesian-coefficients] identifies module pullback with $j^{-1}$. By uniqueness of left adjoints, this is the module $j_!$ of [sk-def-sfb-module-lower-shriek]. Exactness gives the termwise triangulated derived functor by [lem-weil-pbc-exact-functor-derived-factorization].",
+   "text": "Use the existing exactness instance for openImmersionLowerShriek and its mapDerivedCategory triangulated instance. The upstream derived open extension adjunction gives all small sums. Infer qcqs for both schemes from the separated finite-type structure maps.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-qcqs-over-affine",
-    "det-sf-open-closed-extension-zero-limits",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-sheaf-tensor-closed",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-module-objects",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-condensed-open-extension-products. For a limiting cone c of M form the two products P and R and maps s,t. The induced k:c.pt to P is a kernel of s-t: a zero composite is precisely a compatible cone, and its factorization and uniqueness follow from c. Apply preservesKernel_of_pretriangulated. Additivity identifies F(s-t) with F(s)-F(t); the mapped kernel is an equalizer. buildIsLimit applied to the two preserved product fans and this equalizer proves the image cone limiting. This only preserves existing limits and does not assume equalizers exist for arbitrary pairs.",
+   "uses": [
+    "lem-sfb-condensed-open-extension-products",
+    "lem-cor-int-compactness-ii-pretriangulated-kernel-split",
+    "lem-cor-int-compactness-ii-products-kernels-preserve-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralOpenExtensionReduction to obtain the natural comparison for every n, including zero.",
+   "uses": [
+    "lem-sfb-integral-open-extension-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exactness to preserve the bounded interval and identify cohomology of extension with extension of cohomology. On qcqs U its constant-model constructibility supplies a Scheme.Stratification S. Forget only the constructibility field to obtain a finite locally closed stratification; keep the same domains, immersions, and models. The existing constant-model open-extension theorem gives constructibility of each extended cohomology module. Transport along the homology isomorphism using the same stratification and local covers.",
+   "uses": [
+    "lem-sf-open-extension-zero-constant-model-constructible",
     "sk-def-sfb-module-lower-shriek",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
-    "place": "proof (1), coefficient identification and exact derived factorization"
-   }
+   "elementary": false
   },
   {
-   "text": "(2) The sheaf adjunction in (1) and [lem-weil-pbc-left-adjoint-preserves-colimits] give sheaf sums. By [det-def-localizing-closure-existence] (1), derived sums are termwise, so the termwise derived $j_!$ preserves them. Clause (2) of [det-sf-open-closed-extension-zero-limits] gives products and sequential derived inverse limits. For a small diagram $M$ with an existing categorical limit $L$, form the two products $P,Q$, which exist on $U$ as termwise product complexes by [det-pe-products-derived], and the maps $s,t$ of [lem-cor-int-compactness-ii-products-kernels-preserve-limits]. The limit maps give $k:L\\to P$. Put $d=s-t$. A map $a:T\\to P$ satisfies $da=0$ exactly when its components are a compatible family for $M$; the universal property of $L$ gives its unique factorization through $k$. Thus $k$ is a kernel of $d$. By [lem-cor-int-compactness-ii-pretriangulated-kernel-split], $j_!k$ is a kernel of $j_!d$. Additivity gives $j_!d=j_!s-j_!t$, so this is an equalizer of $j_!s,j_!t$. Product preservation identifies their components with the two canonical maps for $j_!M$; [lem-cor-int-compactness-ii-products-kernels-preserve-limits] proves the image cone limiting. This means all existing small categorical limits, without asserting completeness of the derived category. On module sheaves, products exist and are sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], clause (3) of [det-sf-open-closed-extension-zero-limits] supplies their preservation and exactness from (1) supplies kernels; the same product/equalizer construction gives all small limits.",
+   "text": "Let P be Loc(Dbc(X)). Its preimage under the triangulated derived extension is triangulated and replete. The derived adjunction preserves coproducts of every universe size, and preservesColimitIso transports the coproduct closure of P to its preimage. The previous step sends the generators into P. Apply the intersection definition of localizingClosure and the generator inclusion supplied by localizingClosure_exists.",
    "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "det-sf-open-closed-extension-zero-limits",
-    "det-pe-products-derived",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "lem-cor-int-compactness-ii-pretriangulated-kernel-split",
-    "lem-cor-int-compactness-ii-products-kernels-preserve-limits",
-    "det-def-localizing-closure-existence"
+    "det-def-localizing-closure-existence",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
-    "place": "proof (1), sums, products, and arbitrary limits"
-   }
-  },
-  {
-   "text": "(3) For $n=0$, reduction is tensoring with the zero coefficient ring, so both sides are zero. For $n\\ge1$, [det-pe-derived-nakayama-resolution] identifies reduction modulo $\\pi_E^n$ with the cone of multiplication by $\\pi_E^n$. The $\\mathcal O_E$-linear termwise functor in (1) preserves this cone: its terms, finite sums, differentials and scalar multiplication are carried to those of the cone on $j_!K$. Naturality holds term by term. On the two-term rank-one resolutions, the transition from $n+1$ to $n$ is multiplication by $\\pi_E$ in degree $-1$ and identity in degree $0$; $j_!$ preserves these maps. Thus reduction and its transitions commute with $j_!$.",
-   "uses": [
-    "det-pe-derived-nakayama-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
-    "place": "proof (1), reduction modulo $\\pi_E^n$"
-   }
-  },
-  {
-   "text": "(4) If $K\\in\\Dbc(U,\\mathcal O_E)$, [sk-lem-int-tensor] states that extension by zero along a quasi-compact open immersion preserves $\\Dbc$ for integral coefficients. Hence $j_!K\\in\\Dbc(X,\\mathcal O_E)$.",
-   "uses": [
-    "sk-lem-int-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
-    "place": "proof (2)"
-   }
-  },
-  {
-   "text": "(5) In the ambient derived category let $\\mathcal S$ be the full subcategory of $K$ with $j_!K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$. Exactness from (1) closes it under shifts and distinguished triangles, and sums from (2) close it under small sums; it is replete, hence localizing. By (4) it contains $\\Dbc(U,\\mathcal O_E)$. Minimality in [det-def-localizing-closure-existence] (2) gives $\\Loc(\\Dbc(U,\\mathcal O_E))\\subseteq\\mathcal S$.",
-   "uses": [
-    "det-def-localizing-closure-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
-    "place": "proof (3)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "det-def-localizing-closure-existence",
-  "det-pe-derived-nakayama-resolution",
-  "det-pe-products-derived",
-  "det-sf-open-closed-extension-zero-limits",
   "lem-cor-int-compactness-ii-pretriangulated-kernel-split",
   "lem-cor-int-compactness-ii-products-kernels-preserve-limits",
+  "lem-sf-open-extension-zero-constant-model-constructible",
+  "lem-sfb-condensed-open-extension-products",
+  "lem-sfb-integral-open-extension-reduction",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "sk-def-sfb-dc-setting",
-  "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-module-objects",
-  "sk-lem-int-tensor",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-def-sfb-module-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.md",
-  "place": "## Proof"
+  "place": "Proof (1)-(3), implemented in Lean by A3; products and reduction supplied by proved interface lemmas"
  },
  "mathlib_searches": [
   {
@@ -257,11 +220,7 @@
   ]
  },
  "tool_uses": [
-  "det-sf-open-closed-extension-zero-limits",
-  "det-def-localizing-closure-existence",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "det-pe-derived-nakayama-resolution"
+  "det-def-localizing-closure-existence"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -300,5 +259,15 @@
   "group": "Q35",
   "result": "fix",
   "note": "Byte-identical re-push of 4dcdcec39f2a (diff -rq: only generated coord/blueprint-index.tsv differs). The earlier reviewer FIX was refused by --apply-fixes only because the node file was at fixes/dag/nodes/... instead of DIR/<new node id>.json (prepare.log batch-20261018-133358). Re-checked the substance: hypotheses equal sk-def-sfb-dc-setting plus a quasi-compact open immersion, nothing stronger; clauses (1)-(3) rendered faithfully (PreservesHomology, IsTriangulated, Type(u+1) sums, PreservesLimitsOfSize.{u+1,u+1}, natural reduction iso for all n, Dbc and Loc(Dbc) implications); edge cases admitted; aliases are abbrevs of DerivedNakayama.integerRing/Derived/reductionFunctor, no duplication; lean.statement verbatim for item and new node; only sorry; docstrings present. nt_compile --json exit 0: IntegralDerivedCoefficientData 5.9 s, IntegralExtensionByZero 11.2 s, no warnings. FIX (B2/B3, H12): fixes/def-sfb-integral-derived-coefficient-data.json gives the new node a self-contained statement citing def-weil-l-adic-coefficient-extension, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-weil-pbc-proetale-site, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-derived-categories, def-sfb-derived-tensor-modules and det-pe-derived-nakayama-resolution (owner of the Lean declarations). Citations equal stmt_deps; all ids exist; no cycle (488-node reachability check). Lean unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T002455-L-2138478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

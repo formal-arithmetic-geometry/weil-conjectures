@@ -16590,3 +16590,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:24 L: merged deliver/A2/Sheaf.Paper.FrobeniusGeometricExchange (stage 3; reviewer PASS; first push; landing 20261019T002453-L-2137879 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:24 L: merged deliver/A3/Sheaf.Paper.FiniteCoefficientPoint (stage 3; reviewer PASS; first push; landing 20261019T002454-L-2138028 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:24 L: merged deliver/A3/Sheaf.Paper.FiniteMittagLeffler (stage 3; reviewer PASS; first push; landing 20261019T002454-L-2138213 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:24 L: merged deliver/A3/Sheaf.Paper.IntegralExtensionByZero (stage 3; reviewer PASS; first push; landing 20261019T002455-L-2138478 (interface); batch 20261019T002449; modules 3; new nodes 2; change records: coord/changes/IntegralExtensionByZero-proof-scope.md)
