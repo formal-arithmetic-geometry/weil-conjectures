@@ -21,63 +21,70 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-kun-0f1m] to $A$ with its assumed tor-amplitude bound $[a,\\infty)$. It gives a representing cochain complex $P^\\bullet$ of $\\Lambda_T$-modules that is K-flat, has flat terms, and satisfies $P^p=0$ for $p<a$. Only the model assertion is needed, not the additional assertion about pullbacks. This is exactly where the tor-amplitude hypothesis, absent from the imported statement, is used.",
+   "text": "Use the existing categorical K-flat resolution CochainComplex.exists_quasiIso_flat_kFlat of a representative of A. Localization gives Q(P) isomorphic to A. This uses the K-flat construction in [def-kun-derived-tensor]; no lower support condition on P is imposed. Interpret hB using the standard t-structure and choose a representative L of B with zero terms below b, using DerivedCategory.exists_iso_Q_obj_of_isGE and the good truncation of [def-kun-truncations].",
    "uses": [
-    "lem-kun-0f1m"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), implication (1) implies (2)"
-   }
-  },
-  {
-   "text": "Choose a representing complex $C^\\bullet$ for $B$ using [def-weil-pbc-derived-categories] and form $L^\\bullet=\\tau_{\\ge b}C^\\bullet$ as in [def-kun-truncations]. Explicitly, $L^q=0$ for $q<b$, $L^b=\\operatorname{coker}(d_C^{b-1})$, and $L^q=C^q$ for $q>b$. The quotient map $C^\\bullet\\to L^\\bullet$ induces the identity on $\\ker(d_C^b)/\\operatorname{im}(d_C^{b-1})$ in degree $b$; in degree $b+1$ its incoming image is still $\\operatorname{im}(d_C^b)$, and all higher differentials are unchanged. Thus it induces isomorphisms on cohomology in degrees at least $b$. Below $b$, the source cohomology is zero by hypothesis and the target terms are zero. The map is therefore a quasi-isomorphism, hence becomes an isomorphism in the localization defining the derived category. Consequently $L^\\bullet$ represents $B$ and is supported in degrees at least $b$. No flatness or K-flatness of $L^\\bullet$ is asserted or needed.",
-   "uses": [
+    "def-kun-derived-tensor",
     "def-weil-pbc-derived-categories",
     "def-kun-truncations"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations), cochain canonical lower truncation and its cohomology"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+    "place": "CochainComplex.exists_quasiIso_flat_kFlat; Mathlib DerivedCategory.exists_iso_Q_obj_of_isGE"
    }
   },
   {
-   "text": "Use $P^\\bullet$ and $L^\\bullet$ as the representing complexes of $A$ and $B$. In [def-kun-derived-tensor] the K-flat replacement of the first representing complex can now be the identity $P^\\bullet\\to P^\\bullet$. Its defining formula therefore computes $A\\kunotimes{\\Lambda}B$ as $Q(P^\\bullet\\otimes_\\Lambda L^\\bullet)$, where $Q$ is localization. This computation requires K-flatness only of the first factor, already supplied in step 1.",
+   "text": "The hypothesis [def-kun-tor-amplitude] says that the triangulated functor A tensor - sends every sheaf placed in degree zero into degrees at least a. For each n, Q(truncLE n L) is bounded and has no cohomology below b. Apply the proved source-library DerivedCategory.isGE_obj_of_isGE: induction on its finite cohomological interval using the successive good-truncation triangle gives the bound b+a after tensoring with A. The pure-degree case is the degree-zero hypothesis transported by the shift isomorphism. This finite devissage is implemented by the existing theorem, not assumed as a new result.",
    "uses": [
-    "def-kun-derived-tensor"
+    "def-kun-tor-amplitude",
+    "def-kun-truncations"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), K-flat model construction immediately preceding the definition"
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "place": "DerivedCategory.isGE_obj_of_isGE and isGE_obj_singleFunctor_obj"
    }
   },
   {
-   "text": "By [def-pc-tensor-complex-sheaves], the degree $i$ term of $P^\\bullet\\otimes_\\Lambda L^\\bullet$ is $\\bigoplus_{p+q=i}P^p\\otimes_{\\Lambda_T}L^q$. If $i<a+b$ and $p+q=i$, the simultaneous inequalities $p\\ge a$ and $q\\ge b$ are impossible. Thus either $P^p=0$ or $L^q=0$, so each tensor summand is zero and their direct sum is zero. It follows that this total complex has zero terms, and hence zero cohomology, in every degree below $a+b$. The cohomology of its image under $Q$ is the cohomology of this representing complex by [def-weil-pbc-derived-categories]. Combined with step 3 this proves the required vanishing. The argument uses actual termwise support and involves no spectral-sequence convergence claim.",
+   "text": "The K-flat comparison DerivedCategory.QObjTensorQObjIsoOfKFlatLeft identifies A tensor Q(truncLE n L) with Q(P tensor truncLE n L). Transfer the bound from step 2 across this isomorphism and isGE_Q_obj_iff. Thus every P tensor truncLE n L is exact at each i<a+b.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
+    "def-kun-derived-tensor",
     "def-weil-pbc-derived-categories"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012Z (definition-associated-simple-complex), direct-sum totalization formula, applied to tensor complexes as in Tag 06YM"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+    "place": "DerivedCategory.QObjTensorQObjIsoOfKFlatLeft"
+   }
+  },
+  {
+   "text": "The integer-indexed good truncation filtration of L has colimit L: in each degree the maps eventually become identities. Tensoring with P preserves this colimit, since the total tensor of [def-pc-tensor-complex-sheaves] uses coproducts and tensoring sheaves preserves colimits. The coefficient sheaf category has exact filtered colimits. Apply colim.exact_mapShortComplex to the three consecutive terms in degrees i-1,i,i+1 of this diagram, using exact_iff_evaluation to express pointwise exactness and evaluation preservation of colimits. It follows that P tensor L is exact at i. Finally transfer its zero homology through the localization-homology comparison and the K-flat isomorphism A tensor B isomorphic to Q(P tensor L).",
+   "uses": [
+    "def-kun-truncations",
+    "def-pc-tensor-complex-sheaves",
+    "def-kun-derived-tensor",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/Embedding/CochainComplexTrunc.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean",
+    "place": "isColimitFiltrationLECocone; colim.exact_mapShortComplex; private exactAt_colimit in the item"
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-0f1m",
+  "def-kun-derived-tensor",
   "def-weil-pbc-derived-categories",
   "def-kun-truncations",
-  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
   "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md",
-  "place": "Corrected lower-connectivity statement: replace the false imported Tor-spectral-sequence argument by K-flat lower support (Stacks 0F1M), good truncation (0118), and the defining total tensor (06YU, 012Z). This is the estimate needed in Stacks 0F1J (lemma-punctual-base-change-upgrade), first reduction paragraph."
+  "by": "worker",
+  "group": "V2",
+  "date": "2026-10-19",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean; Stacks Project Tag 0F1J",
+  "place": "Alternative below-unit proof: existing bounded devissage, categorical K-flat comparison, and exact colimits of canonical upper truncations. Avoids the independent-coefficient lower-flat-model conversion. The unit has no realized statement or steps; its route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -219,5 +226,15 @@
   "group": "Q115",
   "result": "pass",
   "note": "Lean theorem derivedTensor_isZero_homology_of_torAmplitudeGE matches the corrected node clause by clause: hA = the recorded hasTorAmplitudeGE (every sheaf M in degree 0, every i<a, A as left factor), hB = vanishing of all homology of B below b, conclusion for every i<a+b with the recorded derivedTensor in the same factor order. Λ : Type (u+1) is the project-wide encoding of DerivedCategoryModule and of the dependency predicates, not a new restriction. No extra instances or finiteness assumptions; autoImplicit false and all universes bound. lean.statement appears verbatim in the file; apart from the lean field the node is identical to the side clone. No duplicate: isGE_tensor_of_torAmplitudeIn needs a finite interval [a,b]. No definitions introduced; docstrings carry the source place, the blueprint tag and the four proof steps (0F1M, 0118, 06YU, 012Z); proof is exactly sorry; single import of the recorded tor-amplitude module; small étale site, no pro-étale substitute; report has both Worker report and Second reading by Q115. nt_compile.py --json on the snapshot file: rc=0, no errors (8.9 s); a deliberately broken copy gave rc=1 with an error, so the tool reports errors. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261019T192845-L-1876737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
