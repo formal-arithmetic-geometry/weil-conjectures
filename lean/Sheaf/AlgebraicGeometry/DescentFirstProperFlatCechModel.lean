@@ -22,7 +22,7 @@ public import Mathlib.RingTheory.Flat.Stability
 public import Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel
 public import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
 public import Sheaf.AlgebraicGeometry.ProperFlatCohomologyData
-public import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 public import Sheaf.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs

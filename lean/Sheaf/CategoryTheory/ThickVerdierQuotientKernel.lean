@@ -6,7 +6,7 @@ Authors: SHEAF group Q15
 module
 
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Kernel of a thick Verdier quotient
 

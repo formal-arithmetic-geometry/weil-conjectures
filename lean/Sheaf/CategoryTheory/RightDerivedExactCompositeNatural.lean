@@ -5,11 +5,10 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.CategoryTheory.RightDerivedExactComposite
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+public import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-!
 # Naturality of the exact-composite comparison

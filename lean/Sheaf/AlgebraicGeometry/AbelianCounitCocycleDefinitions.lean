@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-! # The fixed abelian counit resolution comparisons
 Source: Stacks Project, Tags 01F7, 03FD and 06XR.

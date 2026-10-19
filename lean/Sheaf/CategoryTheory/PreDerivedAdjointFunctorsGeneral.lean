@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Sheaf.CategoryTheory.DerivedAdjunctionSourceColimit
 import Sheaf.CategoryTheory.DerivedAdjunctionTargetColimit
 

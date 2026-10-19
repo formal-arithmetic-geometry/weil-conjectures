@@ -99,13 +99,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.Abelian.ResolvedBoundaryNaturality",
-  "file": "lean/Sheaf/CategoryTheory/Abelian/ResolvedBoundaryNaturality.lean",
+  "module": "WeilConjectures.CategoryTheory.Abelian.ResolvedBoundaryNaturality",
+  "file": "lean/WeilConjectures/CategoryTheory/Abelian/ResolvedBoundaryNaturality.lean",
   "declaration": "CategoryTheory.resolvedBoundary_naturality",
   "statement": "theorem resolvedBoundary_naturality\n    {A : Type u₁} [Category.{v₁} A] [Abelian A] [EnoughInjectives A]\n    {R : Type u₂} [Ring R]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} (ModuleCat.{u₂} R)]\n    (v : A ⥤ ModuleCat.{u₂} R) [v.Additive] [PreservesFiniteLimits v]\n    (S T : ShortComplex A) (hS : S.ShortExact) (hT : T.ShortExact) (φ : S ⟶ T)\n    (q : S.X₃ ⟶ T.X₃) (hq : φ.τ₃ = q)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι)\n    (hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι)\n    (hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact)\n    (hΓ : ((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact) (z : v.obj S.X₃) (z' : v.obj T.X₃)\n    (hz : (v.map q).hom z = z')\n    (b : v.obj T.X₃ ⟶ (v.rightDerived 1).obj T.X₁)\n    (hb : b = v.toRightDerivedZero.app T.X₃ ≫\n        (v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).inv.app T.X₃ ≫\n        DerivedCategory.HomologySequence.δ\n          ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj\n            hT.singleTrianglePlus) 0 1 (by norm_num) ≫\n        (v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 1).hom.app T.X₁) :\n    ((v.rightDerived 1).map φ.τ₁).hom\n      ((v.toRightDerivedZero.app S.X₃ ≫\n        (IC.isoRightDerivedObj v 0).hom ≫ hΓ.δ 0 1 rfl ≫\n          (IA.isoRightDerivedObj v 1).inv).hom z) = b.hom z'",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.Abelian.ResolvedBoundaryNaturality; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

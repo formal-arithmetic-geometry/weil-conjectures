@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Localization.Triangulated
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!

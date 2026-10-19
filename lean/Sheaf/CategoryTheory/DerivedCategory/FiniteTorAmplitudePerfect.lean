@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.LocalRing.Module
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!

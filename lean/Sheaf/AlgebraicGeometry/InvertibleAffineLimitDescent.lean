@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.CategoryTheory.RingedSiteModules

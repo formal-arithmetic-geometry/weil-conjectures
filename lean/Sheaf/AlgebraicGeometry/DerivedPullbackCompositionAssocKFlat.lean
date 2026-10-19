@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc
+import WeilConjectures.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc
 
 /-! Associativity calculation on K-flat representatives for derived pullback. -/
 

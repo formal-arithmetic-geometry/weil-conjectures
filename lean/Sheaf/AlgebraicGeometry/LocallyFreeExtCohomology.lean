@@ -12,7 +12,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import Sheaf.CategoryTheory.RightDerivedExactComposite
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
-import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!

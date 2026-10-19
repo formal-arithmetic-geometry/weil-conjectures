@@ -5,8 +5,8 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
 
 /-! # Left derived values invert the multiplicative system
 

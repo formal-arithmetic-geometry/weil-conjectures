@@ -11,7 +11,7 @@ public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Equivalence
 import Sheaf.CategoryTheory.DerivedModuleCompactGeneration
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
-import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import Sheaf.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Adjunction.Limits

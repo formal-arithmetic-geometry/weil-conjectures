@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import Sheaf.Topology.StalkDirectSums
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Adjunction.Additive

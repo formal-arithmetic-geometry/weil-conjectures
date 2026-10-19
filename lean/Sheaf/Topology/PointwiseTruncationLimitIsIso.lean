@@ -5,7 +5,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Sheaf.Topology.PointwiseTruncationOpenStabilization
-import Sheaf.CategoryTheory.DerivedLimitEventuallyIso
+import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import Sheaf.Topology.DerivedLimitStalkInjective
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure

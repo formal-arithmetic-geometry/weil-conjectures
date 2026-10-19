@@ -61,7 +61,7 @@ import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination
-import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
+import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
 
 /-! # Constant coefficient tensor calculus for the exceptional adjoint

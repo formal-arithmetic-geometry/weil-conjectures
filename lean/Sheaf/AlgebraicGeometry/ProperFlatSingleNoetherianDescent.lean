@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.FlatModuleOnLaterStage
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a proper morphism and a relatively flat finitely presented sheaf

@@ -11,7 +11,7 @@ public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 import Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor

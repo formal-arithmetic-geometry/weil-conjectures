@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 
 /-! # Descent of a termwise coefficient map
 Source: Stacks Project, Tags 06XN, 05SU and 06YY.

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.DerivedAdjunctionHomDiagram
 public import Mathlib.CategoryTheory.Limits.Types.ColimitType
-public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.Adjunction.Basic
 

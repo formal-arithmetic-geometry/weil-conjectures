@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic

@@ -9,12 +9,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Preadditive.Projective.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-!
 # Bounded above acyclic complexes compute a left derived functor

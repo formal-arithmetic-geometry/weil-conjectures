@@ -21,7 +21,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.RingTheory.Kaehler.TensorProduct
-import Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
+import WeilConjectures.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
 import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
 import WeilConjectures.RingTheory.SingularIdeal
 import Mathlib.AlgebraicGeometry.OpenImmersion

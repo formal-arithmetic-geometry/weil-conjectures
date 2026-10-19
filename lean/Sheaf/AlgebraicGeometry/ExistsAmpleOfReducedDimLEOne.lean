@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.GluedComponentAffineSection
 import Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection
 import WeilConjectures.AlgebraicGeometry.ComponentIntersectionsFinite
 import Sheaf.AlgebraicGeometry.IntegralDimOneAmple
-import Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine
+import WeilConjectures.AlgebraicGeometry.ZeroDimNoetherianAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

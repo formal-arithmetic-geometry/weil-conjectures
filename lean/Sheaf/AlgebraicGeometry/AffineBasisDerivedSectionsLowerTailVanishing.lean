@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction
 import Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsStep
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
-import Sheaf.CategoryTheory.DerivedLimitEventuallyIso
+import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 

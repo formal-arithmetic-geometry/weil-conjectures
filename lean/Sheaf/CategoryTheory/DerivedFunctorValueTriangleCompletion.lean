@@ -5,9 +5,9 @@ Authors: SHEAF groups B2, J3
 -/
 module
 
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import Sheaf.CategoryTheory.DerivedFunctorFixedConeHomColimit
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
+import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 
 /-! # Completion of a derived value triangle
 

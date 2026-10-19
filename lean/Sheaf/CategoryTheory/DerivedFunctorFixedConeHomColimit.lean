@@ -5,10 +5,10 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 public import Mathlib.CategoryTheory.Yoneda
-import Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit
+import WeilConjectures.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit
 
 /-! # Hom-colimit comparison for a fixed derived cone
 

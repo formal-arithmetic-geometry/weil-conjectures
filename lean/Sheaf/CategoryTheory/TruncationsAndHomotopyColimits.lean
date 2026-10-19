@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.TruncationTriangle
-public import Sheaf.CategoryTheory.TruncationCouple
+public import WeilConjectures.CategoryTheory.TruncationCouple
 public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits

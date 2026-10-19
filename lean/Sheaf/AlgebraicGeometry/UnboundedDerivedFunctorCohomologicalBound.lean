@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization
 import Sheaf.AlgebraicGeometry.QCohTruncationDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
-import Sheaf.CategoryTheory.DerivedLimitEventuallyIso
+import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 

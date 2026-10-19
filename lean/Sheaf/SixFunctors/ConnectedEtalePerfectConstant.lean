@@ -32,7 +32,7 @@ import Sheaf.Paper.SiteBoundedConstantModel
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.RingTheory.Noetherian.Basic

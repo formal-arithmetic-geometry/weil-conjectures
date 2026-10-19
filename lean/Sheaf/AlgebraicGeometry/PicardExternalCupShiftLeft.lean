@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 

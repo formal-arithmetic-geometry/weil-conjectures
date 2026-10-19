@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

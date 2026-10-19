@@ -5,12 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.CartanEilenbergDecalageInjectiveModel
-import Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison
+import WeilConjectures.CategoryTheory.GrothendieckResolutionUnitComparison
 
 /-! # The cohomology diagrams of the filtered injective comparison
 

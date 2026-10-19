@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalization
+import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty

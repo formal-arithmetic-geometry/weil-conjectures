@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
-import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 @[expose] public section

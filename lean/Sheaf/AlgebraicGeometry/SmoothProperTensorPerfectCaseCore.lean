@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
-import Sheaf.CategoryTheory.MonoidalProjectionConjugate
+import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 import Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
 import Mathlib.CategoryTheory.Yoneda
 @[expose] public section

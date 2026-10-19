@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.Paper.BoundaryCechCompatibility
 import Sheaf.AlgebraicGeometry.CechH1MapNatural
-import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
+import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 import WeilConjectures.Topology.Sheaves.CechComparison
 
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting

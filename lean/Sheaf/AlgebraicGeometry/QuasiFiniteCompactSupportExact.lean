@@ -38,7 +38,7 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite

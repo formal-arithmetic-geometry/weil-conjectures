@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-! # Natural additive comparison for acyclic module direct image
 

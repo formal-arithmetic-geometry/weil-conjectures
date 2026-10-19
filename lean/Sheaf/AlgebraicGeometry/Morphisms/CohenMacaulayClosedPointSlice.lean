@@ -16,7 +16,7 @@ public import WeilConjectures.RingTheory.Depth
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen

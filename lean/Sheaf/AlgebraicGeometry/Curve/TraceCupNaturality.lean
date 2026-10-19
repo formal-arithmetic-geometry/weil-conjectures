@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.DivisorModule
 import Sheaf.AlgebraicGeometry.SecondKummerDivisors
 import Sheaf.AlgebraicGeometry.DivisorClassCurve
 import Sheaf.AlgebraicGeometry.GmPicardPullback
-import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
+import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import Sheaf.AlgebraicGeometry.OrdinaryEtaleCupFunctoriality

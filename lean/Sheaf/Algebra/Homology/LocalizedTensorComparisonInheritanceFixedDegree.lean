@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonGenerators
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosure
-import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
+import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 
 @[expose] public section
 universe u

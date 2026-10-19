@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction
+import WeilConjectures.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction
 
 /-!
 # A finite-cover connectedness criterion for abelian étale sections

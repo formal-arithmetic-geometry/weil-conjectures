@@ -22,7 +22,7 @@ import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.PowerSeriesNormalDomain
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import Sheaf.RingTheory.RegularLocalDimOneIffNormal
-import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
+import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic

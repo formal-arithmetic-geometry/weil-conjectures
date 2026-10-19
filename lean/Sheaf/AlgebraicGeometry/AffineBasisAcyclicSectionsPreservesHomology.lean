@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finite section homology from cokernel and homology acyclicity

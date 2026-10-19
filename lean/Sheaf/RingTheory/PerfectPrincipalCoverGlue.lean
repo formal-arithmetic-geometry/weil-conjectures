@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.RingTheory.FiniteProjectiveComplexFreeModel
 import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
 import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Sheaf.Algebra.Homology.TorAmplitudePrincipalCover
 
 /-!

@@ -5,13 +5,12 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import WeilConjectures.CategoryTheory.InjectiveSplitTower
 import WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
-import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!
 # Acyclicity of inverse limits for surjective towers

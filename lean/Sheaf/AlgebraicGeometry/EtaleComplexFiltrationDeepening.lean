@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
 import Sheaf.AlgebraicGeometry.EtaleComplexFirstPageContinuity
-import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
+import WeilConjectures.CategoryTheory.SpectralSequenceFinitePageComparison
 import Mathlib.CategoryTheory.Presentable.Directed
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.CategoryTheory.Category.ULift

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.PbcDerivedProductRepresentation
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
-import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
+import WeilConjectures.CategoryTheory.SpectralSequenceFinitePageComparison
 import Sheaf.CategoryTheory.FiniteFilteredColimitComparison
 
 /-!

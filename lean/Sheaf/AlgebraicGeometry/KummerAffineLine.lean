@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Polynomial.Laurent
 public import Mathlib.LinearAlgebra.Dimension.Free
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
@@ -22,7 +22,6 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
 import WeilConjectures.AlgebraicGeometry.Sites.Gm
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
 # Kummer computations on the affine and punctured lines

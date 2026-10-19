@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.ZetaSeries
 public import Mathlib.FieldTheory.Separable
 import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Kaehler.TensorProduct

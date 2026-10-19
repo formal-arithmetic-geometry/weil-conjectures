@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.CartanEilenbergExists
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly
-import all Sheaf.CategoryTheory.CartanEilenbergComparisonCycleStage
+import all WeilConjectures.CategoryTheory.CartanEilenbergComparisonCycleStage
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 

@@ -15,7 +15,7 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.FieldTheory.MakeSeparable
-import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
+import WeilConjectures.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
 import Mathlib.RingTheory.Localization.BaseChange

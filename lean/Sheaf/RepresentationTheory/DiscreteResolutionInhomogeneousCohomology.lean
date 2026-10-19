@@ -14,7 +14,7 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
 import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Injective resolutions and locally constant inhomogeneous cochains

@@ -5,9 +5,9 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.GrothendieckCocycleComparison
+import WeilConjectures.CategoryTheory.GrothendieckCocycleComparison
 
 /-!
 # Cocycle description of the Grothendieck left edge

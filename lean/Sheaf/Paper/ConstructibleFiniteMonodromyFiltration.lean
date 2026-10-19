@@ -33,7 +33,7 @@ import WeilConjectures.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQ
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

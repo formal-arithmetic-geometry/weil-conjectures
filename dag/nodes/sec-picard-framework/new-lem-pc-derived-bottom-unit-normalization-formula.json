@@ -83,13 +83,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula",
-  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedBottomUnitNormalizationFormula.lean",
+  "module": "WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula",
+  "file": "lean/WeilConjectures/CategoryTheory/Abelian/DerivedBottomUnitNormalizationFormula.lean",
   "declaration": "CategoryTheory.Functor.normalized_bottom_unit_formula",
   "statement": "theorem normalized_bottom_unit_formula\n    {C : Type uC} [Category.{vC} C] [Abelian C]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    [HasDerivedCategory.{wC} C]\n    {D : Type uD} [Category.{vD} D] [Abelian D]\n    [HasDerivedCategory.{wD} D]\n    (S : C ⥤ D) [S.Additive] [PreservesFiniteLimits S] (n : ℤ)\n    (K : CochainComplex C ℤ) :\n    ((((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).liftCycles\n        (S.map (K.sc n).iCycles) (by\n          change S.map (K.sc n).iCycles ≫ S.map (K.sc n).g = 0\n          rw [← S.map_comp, (K.sc n).iCycles_g, S.map_zero])) ≫\n      (((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).homologyπ ≫\n          ((DerivedCategory.homologyFunctorFactors D n).app\n            ((S.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctor.map\n              ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫\n          (S.rightDerivedFunctorTruncatedBottomIso n).hom.app\n            (DerivedCategory.Q.obj K) =\n        S.map ((K.sc n).homologyπ ≫\n          ((DerivedCategory.homologyFunctorFactors C n).app K).inv)",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

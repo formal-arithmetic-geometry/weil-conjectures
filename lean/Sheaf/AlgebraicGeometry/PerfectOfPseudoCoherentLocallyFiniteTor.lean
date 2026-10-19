@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
 import Sheaf.AlgebraicGeometry.AffineLocalSheafificationTorAmplitude
 import Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification
 import all Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
 /-! # Pseudo-coherent complexes of locally finite Tor dimension are perfect
 

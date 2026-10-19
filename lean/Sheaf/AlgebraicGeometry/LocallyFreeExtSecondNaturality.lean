@@ -10,14 +10,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import Sheaf.CategoryTheory.RightDerivedExactComposite
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-!

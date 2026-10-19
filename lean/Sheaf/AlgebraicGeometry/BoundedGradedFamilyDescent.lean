@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Mathlib.Data.Int.Interval
 import Mathlib.Data.Finset.Order

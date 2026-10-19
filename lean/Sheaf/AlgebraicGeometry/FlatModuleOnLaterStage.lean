@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
 import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
 import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 
 /-! # A flat module on a fixed affine-limit model descends to a later stage
 

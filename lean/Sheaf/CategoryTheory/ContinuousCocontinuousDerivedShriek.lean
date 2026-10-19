@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -23,7 +23,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.CategoryTheory.LeftDerivedExactWhenDefined
+import WeilConjectures.CategoryTheory.LeftDerivedExactWhenDefined
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.CategoryTheory.AcyclicCoproductExtOrthogonalHom

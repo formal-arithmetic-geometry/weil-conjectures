@@ -29,7 +29,7 @@ import Sheaf.TraceFormula.ReducedSchemeImage
 import Sheaf.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.LocalCompletionQuotient
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
+import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Noetherian

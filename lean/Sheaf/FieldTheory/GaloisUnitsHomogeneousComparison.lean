@@ -5,7 +5,7 @@ Authors: SHEAF worker N3
 -/
 module
 
-public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
+public import WeilConjectures.FieldTheory.GaloisUnitsTwoCocycles
 import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Sheaf.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 

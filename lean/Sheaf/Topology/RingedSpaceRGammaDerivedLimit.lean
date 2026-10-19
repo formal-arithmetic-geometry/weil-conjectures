@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.Topology.OpenModuleDerivedSections
-public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

@@ -38,7 +38,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.Paper.ComparisonBoundZero
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -46,7 +46,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.SfFullcdEtaleOrigin
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!

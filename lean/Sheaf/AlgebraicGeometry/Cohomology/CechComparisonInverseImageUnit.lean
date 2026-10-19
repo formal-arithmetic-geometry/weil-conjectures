@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement
 import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Čech comparison and the inverse-image unit
 

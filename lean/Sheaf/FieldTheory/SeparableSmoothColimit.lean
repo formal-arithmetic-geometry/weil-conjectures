@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.FieldTheory.FgSeparableSmooth
+public import WeilConjectures.FieldTheory.FgSeparableSmooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra

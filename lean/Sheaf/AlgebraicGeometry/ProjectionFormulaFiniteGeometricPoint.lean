@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
-import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
+import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCoproducts
 import Sheaf.AlgebraicGeometry.ProjectionFormulaTriangleClosure
 import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology

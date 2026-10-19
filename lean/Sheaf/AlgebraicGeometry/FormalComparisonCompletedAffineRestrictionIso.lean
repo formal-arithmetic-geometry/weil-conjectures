@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineAdjunctionModel
-import Sheaf.AlgebraicGeometry.TensorPullbackUnitRestrictionIso
+import WeilConjectures.AlgebraicGeometry.TensorPullbackUnitRestrictionIso
 import Sheaf.AlgebraicGeometry.CompletedAffineCoherentIsoLift
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

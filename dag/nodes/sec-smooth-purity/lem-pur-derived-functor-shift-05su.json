@@ -124,14 +124,15 @@
   "L (02:00 UTC), after reviewer R-dfs0156 (F1 delivery 5d33973fa, merged 4edc41ef9): the isomorphisms $LF(X)[n]\\to LF(X[n])$ are natural in $X$ (for $f\\colon X\\to Y$ with $LF$ defined at $X$ and $Y$, the square with $LF(f)[n]$ and $LF(f[n])$ commutes, because both composites are the unique map of lem-pur-derived-functor-morphisms-05sa compatible with the cone maps $u_s[n]$ and $u_{s[n]}$); the citer lem-pur-left-derived-exact-when-defined step 4 uses this naturality; Stacks 05SU(2) states the isomorphism object by object, as this node does. A re-statement adding the naturality clause is welcome but not required."
  ],
  "lean": {
-  "module": "Sheaf.CategoryTheory.DerivedFunctorShift",
+  "module": "WeilConjectures.CategoryTheory.DerivedFunctorShift",
   "declaration": "CategoryTheory.Functor.isTriangulatedLeftDerivedDefinedAt_shift_iff",
-  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorShift.lean",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedFunctorShift.lean",
   "statement": "theorem isTriangulatedLeftDerivedDefinedAt_shift_iff {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty C) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (X : C) (n : ℤ) : (F.IsTriangulatedLeftDerivedDefinedAt S hS X ↔ F.IsTriangulatedLeftDerivedDefinedAt S hS ((shiftFunctor C n).obj X)) ∧ (F.IsTriangulatedLeftDerivedDefinedAt S hS X → ∀ (Y Y' : D), F.IsTriangulatedLeftDerivedValue S hS X Y → F.IsTriangulatedLeftDerivedValue S hS ((shiftFunctor C n).obj X) Y' → let G := MorphismProperty.Over.forget S ⊤ X ⋙ Over.forget X ⋙ F let Gn := MorphismProperty.Over.forget S ⊤ ((shiftFunctor C n).obj X) ⋙ Over.forget ((shiftFunctor C n).obj X) ⋙ F ∀ (u : (Functor.const (S.Over ⊤ X)).obj Y ⟶ G) (u' : (Functor.const (S.Over ⊤ ((shiftFunctor C n).obj X))).obj Y' ⟶ Gn), Nonempty (IsLimit (Cone.mk Y u)) → Nonempty (IsLimit (Cone.mk Y' u')) → ∃! e : (shiftFunctor D n).obj Y ≅ Y', ∀ (s : S.Over ⊤ X) (hs : S ((shiftFunctor C n).map s.hom)), e.hom ≫ u'.app (MorphismProperty.Over.mk ⊤ ((shiftFunctor C n).map s.hom) hs) = (shiftFunctor D n).map (u.app s) ≫ (F.commShiftIso n).inv.app s.left)",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.DerivedFunctorShift; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

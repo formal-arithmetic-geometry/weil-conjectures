@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.Paper.FiniteFreeKernelH1Vanishing
 import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

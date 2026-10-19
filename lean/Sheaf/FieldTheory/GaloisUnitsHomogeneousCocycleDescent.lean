@@ -5,7 +5,7 @@ Authors: SHEAF worker S1
 -/
 module
 
-public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
+public import WeilConjectures.FieldTheory.GaloisUnitsTwoCocycles
 public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Mathlib.FieldTheory.Galois.Profinite
 import Mathlib.Tactic.Abel

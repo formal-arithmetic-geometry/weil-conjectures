@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!
 # Étale algebraic spaces are locally quasi-finite on scheme charts

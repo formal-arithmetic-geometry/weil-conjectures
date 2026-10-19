@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-public import Sheaf.CategoryTheory.TruncationCouple
+public import WeilConjectures.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
@@ -17,7 +17,6 @@ import all Sheaf.CategoryTheory.ExactFunctorCouple
 import WeilConjectures.CategoryTheory.AbutmentImageFiltration
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.KInjectiveBridge
-import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

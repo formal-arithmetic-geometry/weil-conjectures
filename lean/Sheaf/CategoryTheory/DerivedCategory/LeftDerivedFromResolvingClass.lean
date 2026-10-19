@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 
 /-!

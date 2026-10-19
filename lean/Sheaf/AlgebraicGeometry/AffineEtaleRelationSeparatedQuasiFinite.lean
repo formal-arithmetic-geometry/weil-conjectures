@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!
 # Separated locally quasi-finite morphisms of an affine étale relation

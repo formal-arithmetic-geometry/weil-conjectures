@@ -31,7 +31,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import Sheaf.AlgebraicGeometry.ProperBirationalNormalCurveIso
 import Sheaf.AlgebraicGeometry.StableModificationFlatCurvePair
 import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 import Sheaf.TraceFormula.ProjectiveBundleProper

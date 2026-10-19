@@ -12,7 +12,7 @@ import WeilConjectures.RingTheory.FiniteProjectiveComplexFreeModel
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import WeilConjectures.Algebra.Homology.RingPseudoCoherentSummand
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Mathlib.RingTheory.Flat.Basic
 
 /-!

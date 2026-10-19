@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Finiteness.Small
 import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.Algebra.Field.Shrink
-import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
+import WeilConjectures.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
 import WeilConjectures.RingTheory.RegularRingSmoothAscent

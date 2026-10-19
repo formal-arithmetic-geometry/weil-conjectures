@@ -68,13 +68,14 @@
  "merged_into": null,
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean",
   "declaration": "AlgebraicGeometry.zariski_restriction_universe_transport",
   "statement": "theorem zariski_restriction_universe_transport\n    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (hconn : ∀ x : X, IsConnected (closure ({x} : Set X) ∩ Set.range i)) :\n      letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1),\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P :=\n            fun P U ↦\n              @Types.hasColimit.{u, u + 1, u}\n                (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U)\n                inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)\n      ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat,\n      Function.Bijective\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app\n            (op (⊤ : X.Opens)))",
   "branch": "sheaf-dag",
   "by": "S1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction; points at its upstream twin."
  },
  "created": {
   "by": "worker",

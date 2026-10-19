@@ -3,7 +3,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
+import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.Topology.CompactCechCoproduct
 

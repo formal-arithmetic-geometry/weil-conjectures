@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
 import Sheaf.AlgebraicGeometry.SelfTorAmbientResolutionCharts
-import Sheaf.AlgebraicGeometry.TensorPullbackOverIsoUnit
+import WeilConjectures.AlgebraicGeometry.TensorPullbackOverIsoUnit
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 

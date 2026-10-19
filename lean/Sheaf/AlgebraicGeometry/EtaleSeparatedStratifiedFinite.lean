@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!
 # Finite étale strata of a separated étale morphism

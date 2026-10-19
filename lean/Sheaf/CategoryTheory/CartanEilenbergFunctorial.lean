@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentedComparison
 import Sheaf.CategoryTheory.DoubleComplexBoundedBelowTotal
 import Sheaf.CategoryTheory.DoubleComplexFirstFiltrationDifferential
 import Sheaf.CategoryTheory.DoubleComplexFirstFiltrationMap

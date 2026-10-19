@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.EtaleComplexFirstPageAbutment
-import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
+import WeilConjectures.CategoryTheory.SpectralSequenceFinitePageComparison
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Etale complex graded class descent

@@ -5,8 +5,8 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.CategoryTheory.TruncationCouple
-import Sheaf.CategoryTheory.TruncationRawExact
+public import WeilConjectures.CategoryTheory.TruncationCouple
+import WeilConjectures.CategoryTheory.TruncationRawExact
 
 /-!
 # Exactness of the truncation couple

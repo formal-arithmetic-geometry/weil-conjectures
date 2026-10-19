@@ -49,7 +49,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
 import Sheaf.AlgebraicGeometry.FlatificationHorizontalCurvePair
 import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective

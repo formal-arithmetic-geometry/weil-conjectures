@@ -8,7 +8,7 @@ public import WeilConjectures.CategoryTheory.CechResolutionDoubleComplex
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 

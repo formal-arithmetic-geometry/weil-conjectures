@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Auxiliary reductions for rational point local dimension base change. -/

@@ -7,7 +7,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ValuationClosedFibreDivisibility
 import Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator
-import Sheaf.AlgebraicGeometry.ValuationZeroSectionRelativeCartier
+import WeilConjectures.AlgebraicGeometry.ValuationZeroSectionRelativeCartier
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 

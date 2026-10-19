@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula
 
 /-! # Computing the fixed comparison on arbitrary injective resolutions

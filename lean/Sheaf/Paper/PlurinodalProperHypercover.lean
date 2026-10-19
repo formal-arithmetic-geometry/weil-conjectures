@@ -20,14 +20,13 @@ import Sheaf.AlgebraicGeometry.ProperDimZeroFiniteOverField
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.RingTheory.Ideal.GoingDown
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.AlgebraicGeometry.DeJongGeometricallyIrreducibleTower
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 
 /-!

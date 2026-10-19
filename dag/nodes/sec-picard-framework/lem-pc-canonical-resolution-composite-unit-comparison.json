@@ -115,13 +115,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison",
-  "file": "lean/Sheaf/CategoryTheory/CanonicalResolutionCompositeUnitComparison.lean",
+  "module": "WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison",
+  "file": "lean/WeilConjectures/CategoryTheory/CanonicalResolutionCompositeUnitComparison.lean",
   "declaration": "CategoryTheory.resolution_composite_unit_transport",
   "statement": "theorem resolution_composite_unit_transport\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B]\n    [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C]\n    [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A]\n    [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C)\n    [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)\n    (X : A) (I : InjectiveResolution X) (n : ℕ) :\n      (I.isoRightDerivedObj (F ⋙ G) n).inv ≫\n          (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫\n          (DerivedCategory.Plus.homologyFunctor C n).map\n            (G.rightDerivedFunctorPlus.map (canonicalResolutionDerivedIso F I).hom) =\n        (((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)).extendHomologyIso\n          ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).inv ≫\n        HomologicalComplex.homologyMap\n          (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso\n            ComplexShape.embeddingUpNat G).inv (n : ℤ) ≫\n        (DerivedCategory.Plus.homologyFunctorObjQIso\n          (G.mapCochainComplexPlus.obj\n            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend\n              ComplexShape.embeddingUpNat, 0, inferInstance⟩) n).inv ≫\n        (DerivedCategory.Plus.homologyFunctor C n).map\n          (G.rightDerivedFunctorPlusUnit.app\n            ((HomotopyCategory.Plus.quotient B).obj\n              ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend\n                ComplexShape.embeddingUpNat, 0, inferInstance⟩))",
   "branch": "sheaf-dag",
   "by": "F3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

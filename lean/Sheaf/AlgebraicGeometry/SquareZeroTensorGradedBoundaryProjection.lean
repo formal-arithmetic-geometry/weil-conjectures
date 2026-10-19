@@ -6,7 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
-import Sheaf.CategoryTheory.Abelian.ResolvedBoundaryNaturality
+import WeilConjectures.CategoryTheory.Abelian.ResolvedBoundaryNaturality
 
 /-! # Naturality of homogeneous boundary projections
 

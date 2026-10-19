@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
-import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
+import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 import Mathlib.CategoryTheory.Localization.Triangulated
 
 /-! # The counit-compatible shift of derived scalar extension

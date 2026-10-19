@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

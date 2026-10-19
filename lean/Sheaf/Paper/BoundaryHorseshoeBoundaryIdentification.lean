@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Homology.ConcreteCategory
-import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
+import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 @[expose] public section
 universe u wC wD
 open CategoryTheory CategoryTheory.Limits Opposite

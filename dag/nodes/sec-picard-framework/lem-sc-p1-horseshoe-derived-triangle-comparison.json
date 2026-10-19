@@ -109,13 +109,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison",
-  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeDerivedTriangleComparison.lean",
+  "module": "WeilConjectures.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison",
+  "file": "lean/WeilConjectures/CategoryTheory/Abelian/HorseshoeDerivedTriangleComparison.lean",
   "declaration": "CategoryTheory.horseshoe_derived_triangle_comparison",
   "statement": "theorem horseshoe_derived_triangle_comparison\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]\n    [EnoughInjectives A] [Category.{v₂} B] [Abelian B]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]\n    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]\n    (S : ShortComplex A) (hS : S.ShortExact)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (_hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι)\n    (_hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι)\n    (_hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact)\n    (hvH : ((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact)\n    (hExt : (((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).map\n      (ComplexShape.embeddingUpNat.extendFunctor B)).ShortExact) :\n    ∃ τ : ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj\n        hS.singleTrianglePlus) ⟶ DerivedCategory.triangleOfSES hExt,\n      (∀ n : ℕ,\n        (DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₁ ≫\n            (natComplexDerivedHomologyIso\n              ((v.mapHomologicalComplex _).obj IA.cocomplex) n).hom =\n          (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ n).hom ≫\n            (IA.isoRightDerivedObj v n).hom) ∧\n      (∀ n : ℕ,\n        (DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₃ ≫\n            (natComplexDerivedHomologyIso\n              ((v.mapHomologicalComplex _).obj IC.cocomplex) n).hom =\n          (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₃ n).hom ≫\n            (IC.isoRightDerivedObj v n).hom)",
   "branch": "sheaf-dag",
   "by": "Q1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

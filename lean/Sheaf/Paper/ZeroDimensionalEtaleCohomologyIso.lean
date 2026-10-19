@@ -3,7 +3,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 
 @[expose] public section
 

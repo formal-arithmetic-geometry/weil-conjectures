@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.GrothendieckCocycleComparison
+import WeilConjectures.CategoryTheory.GrothendieckCocycleComparison
 import WeilConjectures.CategoryTheory.GrothendieckBottomResolutionComparison
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf

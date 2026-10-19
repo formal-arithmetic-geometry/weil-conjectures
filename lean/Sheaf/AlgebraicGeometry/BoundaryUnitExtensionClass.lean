@@ -10,11 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.Modules.ExtConnectingYoneda
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-! # The boundary of the unit section is the extension class
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
-import Sheaf.ConstructibleSheaf.RepresentablePullbackConstantOfEvaluation
+import WeilConjectures.ConstructibleSheaf.RepresentablePullbackConstantOfEvaluation
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 
 /-!

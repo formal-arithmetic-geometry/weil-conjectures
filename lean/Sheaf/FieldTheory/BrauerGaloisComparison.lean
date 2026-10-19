@@ -8,9 +8,9 @@ module
 public import Mathlib.Algebra.BrauerGroup.Defs
 public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import WeilConjectures.Algebra.Central.ReducedNorm
-import Sheaf.FieldTheory.BrauerScalarDefectExists
-import Sheaf.FieldTheory.BrauerScalarDefectFaithful
-import Sheaf.FieldTheory.BrauerScalarDefectSurjective
+import WeilConjectures.FieldTheory.BrauerScalarDefectExists
+import WeilConjectures.FieldTheory.BrauerScalarDefectFaithful
+import WeilConjectures.FieldTheory.BrauerScalarDefectSurjective
 
 /-!
 # Algebraic Brauer classes and continuous Galois cohomology

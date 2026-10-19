@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
-public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
 

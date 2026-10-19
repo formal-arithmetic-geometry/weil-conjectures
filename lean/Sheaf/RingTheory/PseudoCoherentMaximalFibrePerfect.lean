@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Sheaf.Algebra.Homology.FreeComplexResidueTensorExact
-import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!

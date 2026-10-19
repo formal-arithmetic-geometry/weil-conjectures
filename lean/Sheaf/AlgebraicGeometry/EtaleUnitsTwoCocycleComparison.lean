@@ -6,7 +6,7 @@ Authors: SHEAF worker N3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
+public import WeilConjectures.FieldTheory.GaloisUnitsTwoCocycles
 import Sheaf.FieldTheory.GaloisUnitsHomogeneousComparison
 import Mathlib.SetTheory.Cardinal.SchroederBernstein
 import Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding

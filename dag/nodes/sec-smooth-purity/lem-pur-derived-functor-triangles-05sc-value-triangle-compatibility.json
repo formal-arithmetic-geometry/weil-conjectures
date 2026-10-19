@@ -135,13 +135,14 @@
  "unit": "sk-def-sf-operations",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility",
-  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorValueTriangleCompatibility.lean",
+  "module": "WeilConjectures.CategoryTheory.DerivedFunctorValueTriangleCompatibility",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedFunctorValueTriangleCompatibility.lean",
   "declaration": "CategoryTheory.Functor.leftDerived_value_triangle_extension_compat",
   "statement": "theorem leftDerived_value_triangle_extension_compat\n    {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [CategoryTheory.IsTriangulated C]\n    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    [CategoryTheory.IsTriangulated D]\n    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    (S : MorphismProperty C)\n    (hS : S.IsSaturatedTriangulatedMultiplicativeSystem)\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (LX LY LZ : D)\n    (hX : F.IsTriangulatedLeftDerivedValue S hS T.obj₁ LX)\n    (hY : F.IsTriangulatedLeftDerivedValue S hS T.obj₂ LY)\n    (hZ : F.IsTriangulatedLeftDerivedValue S hS T.obj₃ LZ)\n    (uX : (Functor.const (S.Over ⊤ T.obj₁)).obj LX ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F)\n    (uY : (Functor.const (S.Over ⊤ T.obj₂)).obj LY ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F)\n    (uZ : (Functor.const (S.Over ⊤ T.obj₃)).obj LZ ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F)\n    (huX : ∃ s₀ : S.Over ⊤ T.obj₁, ∃ r : F.obj s₀.left ⟶ LX,\n      uX.app s₀ ≫ r = 𝟙 LX ∧\n        ∀ s : S.Over ⊤ T.obj₁, ∃ t : S.Over ⊤ T.obj₁,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uX.app s)\n    (huY : ∃ s₀ : S.Over ⊤ T.obj₂, ∃ r : F.obj s₀.left ⟶ LY,\n      uY.app s₀ ≫ r = 𝟙 LY ∧\n        ∀ s : S.Over ⊤ T.obj₂, ∃ t : S.Over ⊤ T.obj₂,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uY.app s)\n    (huZ : ∃ s₀ : S.Over ⊤ T.obj₃, ∃ r : F.obj s₀.left ⟶ LZ,\n      uZ.app s₀ ≫ r = 𝟙 LZ ∧\n        ∀ s : S.Over ⊤ T.obj₃, ∃ t : S.Over ⊤ T.obj₃,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uZ.app s)\n    (lf : LX ⟶ LY) (lg : LY ⟶ LZ)\n    (hf : ∀ (s : S.Over ⊤ T.obj₁) (s' : S.Over ⊤ T.obj₂)\n        (f' : s.left ⟶ s'.left),\n        s.hom ≫ T.mor₁ = f' ≫ s'.hom →\n          uX.app s ≫ F.map f' = lf ≫ uY.app s')\n    (hg : ∀ (s : S.Over ⊤ T.obj₂) (s' : S.Over ⊤ T.obj₃)\n        (g' : s.left ⟶ s'.left),\n        s.hom ≫ T.mor₂ = g' ≫ s'.hom →\n          uY.app s ≫ F.map g' = lg ≫ uZ.app s')\n    : ∃ lh : LZ ⟶ (shiftFunctor D (1 : ℤ)).obj LX,\n        Triangle.mk lf lg lh ∈ distTriang D ∧\n        (∀ (s : S.Over ⊤ T.obj₃) (s' : S.Over ⊤ T.obj₁)\n          (h' : s.left ⟶ (shiftFunctor C (1 : ℤ)).obj s'.left),\n          s.hom ≫ T.mor₃ = h' ≫ (shiftFunctor C (1 : ℤ)).map s'.hom →\n            uZ.app s ≫ F.map h' =\n              lh ≫ (shiftFunctor D (1 : ℤ)).map (uX.app s') ≫\n                (F.commShiftIso (1 : ℤ)).inv.app s'.left)",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

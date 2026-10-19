@@ -6,7 +6,7 @@ module
 
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
-import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import Sheaf.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 import Mathlib.Algebra.Category.Grp.Ulift

@@ -17,7 +17,7 @@ import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
-import Sheaf.CategoryTheory.DerivedLimitEventuallyIso
+import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Abelian.FunctorCategory

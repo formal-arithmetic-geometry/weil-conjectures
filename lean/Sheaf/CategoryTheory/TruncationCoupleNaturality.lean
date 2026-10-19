@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.CategoryTheory.TruncationCouple
+public import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-! # Naturality of the raw truncation maps

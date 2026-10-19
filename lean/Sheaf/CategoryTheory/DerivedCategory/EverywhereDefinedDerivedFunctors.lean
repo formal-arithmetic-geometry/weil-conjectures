@@ -6,11 +6,11 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 
 @[expose] public section
 

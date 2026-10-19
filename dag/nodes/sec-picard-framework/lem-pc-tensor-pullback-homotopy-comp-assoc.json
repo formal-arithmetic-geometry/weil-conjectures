@@ -85,13 +85,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackHomotopyCompAssoc.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorPullbackHomotopyCompAssoc.lean",
   "declaration": "AlgebraicGeometry.tensorPullback_homotopy_comp_assoc",
   "statement": "theorem tensorPullback_homotopy_comp_assoc\n    (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive)\n    {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)\n    (H : HomotopyCategory Z.Modules (ComplexShape.up ℤ)) :\n    let T {X Y : Scheme.{u₁}} (f : X ⟶ Y) :=\n    (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)\n    let t {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :=\n    Functor.mapHomotopyCategoryCompIso\n      ((conjugateIsoEquiv\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))\n        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp\n          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm\n        (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)\n    (T h).map ((t f g).hom.app H) ≫ (t h (f ≫ g)).hom.app H =\n      (t h f).hom.app ((T g).obj H) ≫ (t (h ≫ f) g).hom.app H",
   "branch": "sheaf-dag",
   "by": "R2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

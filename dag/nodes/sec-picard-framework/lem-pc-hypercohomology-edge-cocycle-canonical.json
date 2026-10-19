@@ -76,13 +76,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical",
-  "file": "lean/Sheaf/CategoryTheory/HypercohomologyLeftEdgeCanonical.lean",
+  "module": "WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeCanonical",
+  "file": "lean/WeilConjectures/CategoryTheory/HypercohomologyLeftEdgeCanonical.lean",
   "declaration": "CategoryTheory.Functor.cochainHypercohomologyLeftEdge_canonical",
   "statement": "theorem cochainHypercohomologyLeftEdge_canonical\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory B] [HasDerivedCategory C]\n    (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]\n    (K : CochainComplex B ℕ) (n : ℕ) :\n    (let T := ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K)\n     let c := T.liftCycles (G.map (K.iCycles n)) (n + 1) (by simp)\n       (by\n         change G.map (K.iCycles n) ≫ G.map (K.d n (n + 1)) = 0\n         rw [← G.map_comp, K.iCycles_d, G.map_zero])\n     c ≫ T.homologyπ n ≫ G.cochainHypercohomologyLeftEdge K n =\n       G.map (K.homologyπ n))",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical; points at its upstream twin."
  },
  "proof_deps": [
   "lem-pc-hypercohomology-left-edge-naturality",

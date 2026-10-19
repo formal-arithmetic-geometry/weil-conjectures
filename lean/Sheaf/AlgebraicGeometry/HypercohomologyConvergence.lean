@@ -12,10 +12,9 @@ import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.HalfPlaneConvergence
-import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.KInjectiveComputes
 import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
-import Sheaf.CategoryTheory.TruncationCouple
+import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.Algebra.Homology.ExactCouple.Basic

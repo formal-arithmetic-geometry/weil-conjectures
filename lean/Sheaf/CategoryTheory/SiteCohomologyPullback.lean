@@ -8,10 +8,10 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Sheaf.CategoryTheory.SitePullbackAbelianExact
-public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-public import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+public import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 public import WeilConjectures.CategoryTheory.DeltaFunctor
-public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+public import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import WeilConjectures.CategoryTheory.SiteMorphismComposition
 
 import Sheaf.CategoryTheory.SiteCohomologyPullbackExists

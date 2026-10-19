@@ -4,7 +4,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Paper.FiniteFreeKernelIdealFiltration
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 @[expose] public section
 

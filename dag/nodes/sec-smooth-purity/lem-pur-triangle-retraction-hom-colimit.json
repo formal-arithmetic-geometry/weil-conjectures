@@ -108,13 +108,14 @@
  "unit": "sk-def-sf-operations",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit",
-  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorTriangleRetractionHomColimit.lean",
+  "module": "WeilConjectures.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedFunctorTriangleRetractionHomColimit.lean",
   "declaration": "CategoryTheory.Functor.leftDerived_triangle_retraction_homColimit",
   "statement": "theorem leftDerived_triangle_retraction_homColimit\n    {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [CategoryTheory.IsTriangulated C]\n    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    [CategoryTheory.IsTriangulated D]\n    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    (S : MorphismProperty C)\n    (hS : S.IsSaturatedTriangulatedMultiplicativeSystem)\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (LX LY : D)\n    (hX : F.IsTriangulatedLeftDerivedValue S hS T.obj₁ LX)\n    (hY : F.IsTriangulatedLeftDerivedValue S hS T.obj₂ LY)\n    (uX : (Functor.const (S.Over ⊤ T.obj₁)).obj LX ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F)\n    (uY : (Functor.const (S.Over ⊤ T.obj₂)).obj LY ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F)\n    (huX : ∃ s₀ : S.Over ⊤ T.obj₁, ∃ r : F.obj s₀.left ⟶ LX,\n      uX.app s₀ ≫ r = 𝟙 LX ∧\n        ∀ s : S.Over ⊤ T.obj₁, ∃ t : S.Over ⊤ T.obj₁,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uX.app s)\n    (huY : ∃ s₀ : S.Over ⊤ T.obj₂, ∃ r : F.obj s₀.left ⟶ LY,\n      uY.app s₀ ≫ r = 𝟙 LY ∧\n        ∀ s : S.Over ⊤ T.obj₂, ∃ t : S.Over ⊤ T.obj₂,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uY.app s)\n    (lf : LX ⟶ LY) (K : D) (b : LY ⟶ K)\n    (c : K ⟶ (shiftFunctor D (1 : ℤ)).obj LX)\n    (hK : Triangle.mk lf b c ∈ distTriang D)\n    (U : Triangle C) (hU : U ∈ distTriang C) (sigma : U ⟶ T)\n    (hsigma₁ : S sigma.hom₁) (hsigma₂ : S sigma.hom₂) (hsigma₃ : S sigma.hom₃)\n    (rho : F.mapTriangle.obj U ⟶ Triangle.mk lf b c)\n    (hretract₁ : uX.app (MorphismProperty.Over.mk ⊤ sigma.hom₁ hsigma₁) ≫\n      rho.hom₁ = 𝟙 LX)\n    (hretract₂ : uY.app (MorphismProperty.Over.mk ⊤ sigma.hom₂ hsigma₂) ≫\n      rho.hom₂ = 𝟙 LY) :\n    ∀ W : D, Function.Bijective (fun phi : K ⟶ W ↦\n      ((MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F).op ⋙\n        yoneda.obj W).ιColimitType\n          (Opposite.op (MorphismProperty.Over.mk ⊤ sigma.hom₃ hsigma₃))\n          (rho.hom₃ ≫ phi))",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

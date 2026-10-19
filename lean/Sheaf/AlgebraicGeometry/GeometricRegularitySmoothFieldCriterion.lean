@@ -19,7 +19,7 @@ import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
+import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth
 import WeilConjectures.RingTheory.SmoothAtPrimeFieldExtensionDescent
 
 /-!

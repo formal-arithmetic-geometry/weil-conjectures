@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
 
 /-! # Flat-module descent over a directed preorder

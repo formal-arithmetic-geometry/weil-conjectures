@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.GDelta.Basic
 import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
-import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.DeJongRelativeMarkedSemistable
 import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition

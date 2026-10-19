@@ -14,7 +14,7 @@ import WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
 import Sheaf.Algebra.Homology.FilteredFreeKProjective
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
-import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
+import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 
 /-! # Canonical completion of the derived tensor row
 

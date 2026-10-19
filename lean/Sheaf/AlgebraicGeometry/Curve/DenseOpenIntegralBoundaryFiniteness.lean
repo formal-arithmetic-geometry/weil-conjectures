@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 /-! # Finite cohomology of the dense-open boundary

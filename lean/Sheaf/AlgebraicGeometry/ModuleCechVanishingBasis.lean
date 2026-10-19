@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
 # Module cohomology vanishing from cofinal basis Čech coverings

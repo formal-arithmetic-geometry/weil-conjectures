@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
-import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import Sheaf.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Adjunction.Limits
 

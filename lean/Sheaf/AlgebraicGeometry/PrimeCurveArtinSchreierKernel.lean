@@ -17,7 +17,6 @@ import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
 import Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!

@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.Paper.CechComparisonMapNaturality
 import Sheaf.Paper.CechCupPullbackCompat
 

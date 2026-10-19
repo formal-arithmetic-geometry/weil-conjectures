@@ -10,13 +10,12 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
+import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.Paper.ColimitSitesInjectiveSystem
 import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 
 /-! # Acyclic coefficient replacements on colimit sites.
 
