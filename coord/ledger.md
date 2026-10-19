@@ -17483,3 +17483,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/X5/Sheaf.SixFunctors.SelectedSchemeGaloisComparison (stage 3; reviewer PASS; first push; landing 20261019T154025-L-3029373 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 16:00 L: merged deliver/NR/lem-a1-lisse-sections-stalk-evaluation (reviewer FIX; first push; new nodes: 0)
 - 16:04 L: returned deliver/E5/Sheaf.AlgebraicGeometry.BertiniSmoothMember (reviewer RETURN: (the landing tools, head d14c77b84) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Be)
+- 16:04 L: merged deliver/A6/Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison (stage 3; reviewer PASS; first push; landing 20261019T160415-L-3354819 (interface); batch 20261019T160413; modules 2; new nodes 1)

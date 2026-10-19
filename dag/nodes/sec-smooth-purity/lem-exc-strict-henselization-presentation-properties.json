@@ -1,0 +1,152 @@
+{
+ "id": "lem-exc-strict-henselization-presentation-properties",
+ "kind": "statement",
+ "title": "Local properties of a specified pointed-etale presentation",
+ "statement": "Let A be a local commutative ring and K a specified separable closure of its residue field, with the compatible A-algebra structure. Let H be an A-algebra with a specified pointed-etale colimit presentation P [def-sc-ring-strict-henselization]. Then H is strictly henselian [def-weil-pbc-henselian-terminology], P.residueMap is surjective, and its kernel equals the maximal ideal of H. The residue map is the one induced by the pointings of P, not an independently chosen map.",
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GP and 04GW; pointed-algebra interpretation of lemma-strict-henselization-different"
+ },
+ "proof": [
+  {
+   "text": "Translate residue triples at the maximal ideal to pointed etale algebras. The forward functor retains the ring, uses alpha for the base algebra structure and evaluation followed by the residue embedding for the pointing. Every ring map to a field factors through the residue field of its kernel, giving essential surjectivity. Morphisms are precisely ring maps commuting with the base and pointing, giving full faithfulness. The resulting equivalence preserves both structural maps and the evaluations into K.",
+   "uses": [
+    "def-weil-pbc-etale-residue-triples",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW; pointed-algebra interpretation of lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "Whisker the given universal algebra cocone by that equivalence. The forgetful functor from algebras to rings preserves connected colimits: identify algebras with the under category and use filteredness of triples. Thus this gives a universal ring cocone on local-base triples, whose evaluation into K agrees on each leg with the specified presentation residue map.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-etale-triples-filtered-colimit-filtered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW; pointed-algebra interpretation of lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "Apply the existing strictly henselian triple-colimit theorem and compare its universal cocone with the transported one. Colimit extensionality identifies both residue maps. Transport strict henselianity and surjectivity through the resulting ring equivalence. Finally the kernel of a surjection from a local ring to a field is its maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW; pointed-algebra interpretation of lemma-strict-henselization-different"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-residue-triples",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-triples-filtered-colimit-filtered",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "Explicit transport of the given presentation retaining its specified evaluation, A6, 2026-10-19.",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GP and 04GW; pointed-algebra interpretation of lemma-strict-henselization-different"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictHenselizationPresentation|strictHenselizationPointEvaluation",
+   "results": "No exact match.",
+   "date": "2026-10-19",
+   "verdict": "Component results only; no exact specified-presentation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, RingHom.ker, IsLocalRing.maximalIdeal",
+   "results": "IsLocalRing.ker_eq_maximalIdeal; IsLocalRing.spanFinrank_maximalIdeal_add_finrank_eq_of_surjective; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+   "date": "2026-10-19",
+   "verdict": "Component results only; no exact specified-presentation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified pointed etale algebra colimit has a surjective residue map and is a strictly henselian local ring",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; HenselianLocalRing; HenselianLocalRing.TFAE; Algebra.IsStandardEtale.of_surjective; Algebra.IsEtaleAt; Algebra.instIsStandardEtaleRing; AlgebraicGeometry.Scheme.residue_surjective; StandardEtalePair.instEtaleRing",
+   "date": "2026-10-19",
+   "verdict": "Component results only; no exact specified-presentation statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A specified pointed etale algebra colimit has a surjective residue map and is a strictly henselian local ring",
+   "results": "IsLocalRing.residue_surjective; IsLocalRing.residue; AlgebraicGeometry.Scheme.residue_surjective; HenselianLocalRing.TFAE; HenselianLocalRing; AlgebraicGeometry.Scheme.residue; AlgebraicGeometry.Scheme.instEpiCommRingCatResidue; HenselianLocalRing.toIsLocalRing",
+   "date": "2026-10-19",
+   "verdict": "The results give residue surjectivity and henselian terminology, but none gives the properties of the residue map induced by a specified pointed-etale colimit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison",
+  "date": "2026-10-19",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-constructible-general",
+   "place": "Proof paragraph 1, strict-local stalk calculation: the affine comparison uses the local properties of its specified algebraic strict-henselization presentation (steps 4 and 5 of lem-exc-affine-strict-local-ring-comparison).",
+   "via": [
+    "lem-exc-affine-strict-local-ring-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.StrictHenselizationPresentationProperties",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationPresentationProperties.lean",
+  "declaration": "Algebra.StrictHenselizationPresentation.local_properties",
+  "statement": "theorem StrictHenselizationPresentation.local_properties\n    (A K H : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]\n    [CommRing H] [Algebra A H] (P : StrictHenselizationPresentation A K H) :\n    ∃ _ : IsStrictlyHenselianLocalRing H,\n      Function.Surjective P.residueMap ∧\n      RingHom.ker P.residueMap = IsLocalRing.maximalIdeal H",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261019T160415-L-3354819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261019T160415-L-3354819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
