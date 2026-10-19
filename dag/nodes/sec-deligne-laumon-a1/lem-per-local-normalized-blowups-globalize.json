@@ -17,9 +17,163 @@
   "def-sc-normalization",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the local objects to which gluing will apply. Every $S_i$ is Noetherian by localization of Noetherian rings. Induct on $j$: the ordinary blowup at each nongeneric point is integral by the integral-blowup theorem, and the normalization assertion below supplies the next normal integral stage. Every $T_{i,j}\\to S_i$ is proper by composition and hence has Noetherian source by the finite-type-over-Noetherian theorem. On each affine chart its finite-type algebra is finitely presented by the Noetherian finite-presentation lemma; properness supplies quasi-compactness and quasi-separatedness. Thus these are morphisms of finite presentation. For a normalized stage, apply the generic-residue-field normalization theorem with $x$ the generic point of its integral ordinary blowup and $K=\\kappa(x)$ (extension degree one): its source is integral and all its local rings are integrally closed domains. The initial $S_i$ is normal because its stalks are stalks of $S$. Away from its center the ordinary blowup is an isomorphism by the blowup-complement theorem, and normalization of a normal domain adds no elements to its fraction field. Consequently every $T_{i,j}$ is normal integral and its map to $S_i$ is an isomorphism over $V_i$. No finiteness of normalization on an arbitrary Noetherian scheme is assumed.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-per-integral-blowup-projective-geometry",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-sc-normalization",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0BFV and 0BFZ, finite-presentation setting; normality from morphisms.tex, Tags 035Q and 035I, specialized at the generic point"
+   }
+  },
+  {
+   "text": "Here is the localization calculation used throughout. For any $X\\to S$, choose $\\operatorname{Spec}A\\subset S$ containing $s_i$, corresponding to $\\mathfrak p\\subset A$, and an affine chart $\\operatorname{Spec}B\\subset X$ above it. The pullback chart is $\\operatorname{Spec}((A\\setminus\\mathfrak p)^{-1}B)$. Its points correspond to primes $\\mathfrak q\\subset B$ whose contraction lies in $\\mathfrak p$; at such a point the local ring is $((A\\setminus\\mathfrak p)^{-1}B)_{\\mathfrak q}=B_{\\mathfrak q}$, since every denominator already lies outside $\\mathfrak q$. In particular the pullback gives a bijection of the points over $s_i$ and an isomorphism of their local rings. Tensoring either chart with $\\kappa(s_i)$ gives the same fibre ring, so this is an isomorphism of fibres as schemes. A closed point in that fibre is closed in $X$, because the fibre over the closed point $s_i$ is closed. These chart identifications agree on overlaps by their fraction formulas.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFX (resolve-lemma-equivalence-fibre); the displayed fraction calculation supplies the local-ring strengthening"
+   }
+  },
+  {
+   "text": "Choose a total ordering of the $N=\\sum_i n_i$ prescribed operations that respects the order within each local tower. After $k$ operations keep indices $a_i\\leq n_i$, with $\\sum_i a_i=k$, and a normal integral Noetherian scheme $Z_k$, proper and of finite presentation over $S$, identified with $U$ over $U$ and with $T_{i,a_i}$ after base change to $S_i$. Keep also the identifications of all earlier transition morphisms. For $k=0$, take $Z_0=S$, $a_i=0$, and the identity identifications. If $N=0$, this is already the desired tower, including the cases $r=0$ and all $n_i=0$. In the remaining induction $S$ has a nongeneric chosen center, so $U$ contains its generic point. In dimension zero a nonempty integral normalized blowup at the sole point cannot be supplied: the ordinary blowup of the zero ideal is empty and has no function field, so only the zero-length input occurs.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "def-pc-integral-scheme",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFZ, reduction to the point-by-point construction in Tag 0BFY (resolve-lemma-equivalence-sequence-blowups)"
+   }
+  },
+  {
+   "text": "Suppose the next operation is $T_{i,a_i+1}\\to T_{i,a_i}$ at $t$. By Step 2 the closed point $t$ in the fibre corresponds to a closed point $z\\in Z_k$ over $s_i$. Give $z$ its reduced closed subscheme structure, and blow up its ideal $\\mathcal I_z$: $b:W=\\operatorname{Bl}_z(Z_k)\\to Z_k$. On a Noetherian affine chart this ideal is finitely generated, so the blowup-properness theorem applies. Its ideal is nonzero: if $z$ were the generic point, the corresponding local ordinary blowup would be empty, contradicting the supplied next integral normalized stage. The integral-blowup theorem therefore makes $W$ integral. Since $V(\\mathcal I_z)=\\{z\\}$, the blowup-complement theorem makes $b$ an isomorphism over $Z_k\\setminus\\{z\\}$. Thus $W\\to S$ is proper, is an isomorphism over $U$, and is Noetherian by finite type over $S$. The same affine Noetherian finite-presentation argument as in Step 1 makes $W\\to S$ finitely presented.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "lem-per-integral-blowup-projective-geometry",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0BFY and 0BFZ, next point blowup; divisors.tex, Tag 02ND (lemma-blow-up-integral-scheme)"
+   }
+  },
+  {
+   "text": "The maps $S_j\\to S$ are flat: on affine charts their stalk maps are localizations, flat by the localization-flat theorem. The projection $Z_k\\times_SS_j\\to Z_k$ has the same localization description, hence is flat as well. Apply the flat blowup base-change theorem. For $j=i$ it identifies $W\\times_SS_i$ with the ordinary blowup of $T_{i,a_i}$ at $t$; the pulled-back center is the reduced point because the point and residue-field calculation of Step 2 identifies its closed immersion. For $j\\ne i$ the center pulls back to the empty subscheme: no point of $S_j$ maps to the distinct closed point $s_i$. Its ideal is the unit ideal, so $W\\times_SS_j\\cong T_{j,a_j}$ by the Cartier-center theorem. These identifications commute with the blowup structure maps.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "cor-nagata-blowup-cartier-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0BFY and 0BFZ, base-changing the chosen point blowup; comparison defined in def-nagata-blowup-flat-base-change-map"
+   }
+  },
+  {
+   "text": "Set $Y_i=T_{i,a_i+1}$ and $Y_j=T_{j,a_j}$ for $j\\ne i$. They are the finite-presentation objects of Step 1. By the gluing equivalence there is a finite-presentation $S$-scheme $Z^+$, equal to $U$ over $U$, with specified isomorphisms $Z^+\\times_SS_j\\cong Y_j$. Apply full faithfulness to two families of arrows: the prescribed next map $Y_i\\to T_{i,a_i}$ and identities elsewhere give $a:Z^+\\to Z_k$; the normalization map $Y_i\\to W\\times_SS_i$ and identities elsewhere give $q:Z^+\\to W$. Uniqueness of the lifted arrows gives $bq=a$, since this equality holds for every local arrow. Each local map of $a$ is proper (the prescribed next map or an identity), so the arrow-properness clause gives that $a$ is proper. Each local map of $q$ is integral (a normalization map or an identity), so the integral-arrow clause gives that $q$ is integral. This avoids assuming that the normalization of $W$ is finite before constructing $Z^+$.",
+   "uses": [
+    "lem-per-finite-point-fp-gluing",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0BFV, 0BFW, 0BFZ; limits.tex Tag 0EY3(2), gluing and detecting properties of arrows"
+   }
+  },
+  {
+   "text": "Every local ring of $Z^+$ over $s_j$ is a local ring of $Y_j$ by Step 2, so is an integrally closed domain; over $U$ it is a local ring of the normal scheme $S$. Hence $Z^+$ is normal and reduced. Moreover each of its points over $s_j$ is a specialization of the generic point of $Y_j$, since $Y_j$ is integral; the localization projection takes that generic point to the common generic point over $U$. Points over $U$ are specializations of the same point because $S$ is integral. Thus every point of $Z^+$ is in the closure of that one generic point. It is nonempty, irreducible and reduced, hence integral. The maps $q$ and $b$ are isomorphisms over $U$, so $q$ induces the identity on the common function field.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFZ, identifying the glued normal modification; the argument uses the local-ring calculation of Step 2"
+   }
+  },
+  {
+   "text": "Identify $Z^+$ with the normalization of $W$ by an affine calculation. Since $q$ is integral, the inverse image of an affine $\\operatorname{Spec}A\\subset W$ is affine $\\operatorname{Spec}B$ with $B$ integral over $A$. Integrality of both schemes and the common function field embed $A\\subseteq B\\subseteq k(W)$. Normality makes $B$ integrally closed: an integral fraction belongs to every $B_{\\mathfrak q}$ and hence to $B$; the last assertion follows since the ideal $\\{d\\in B:dx\\in B\\}$ is contained in no maximal ideal if $x\\in B_{\\mathfrak q}$ for all maximal $\\mathfrak q$. Thus $B\\subseteq\\overline A$ by integrality, while every element of $\\overline A$ is integral over $B$ and lies in $B$. Therefore $B=\\overline A$. These equalities inside the same function field agree under restriction, and the definition of normalization identifies $q$ globally with $W^\\nu\\to W$. Consequently $a$ is exactly the normalized point blowup of $Z_k$ at $z$, and it is proper by Step 6.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035I and 035Q, integral birational characterization, with the integral-closure argument written out; def-sc-normalization"
+   }
+  },
+  {
+   "text": "Put $Z_{k+1}=Z^+$ and increase just $a_i$ by one. Properness of $Z^+\\to Z_k$ and $Z_k\\to S$ gives properness over $S$ by composition, and finite type over the Noetherian $S$ gives that $Z^+$ is Noetherian. It already has finite presentation by its gluing construction; Step 7 gives normality and integrality. The chosen local identifications and the lifted arrow $a$ show that its tower over $S_i$ has exactly the prescribed next step and its tower over every other $S_j$ has an identity step. All restrictions over $U$ are identities. This proves the induction invariant for $k+1$. At $k=N$, the interleaving has used every prescribed operation once, giving the required global tower and the endpoint identifications. Finally apply Step 2 to $X=Z_N$: every point over $s_i$ has the asserted unique corresponding point and local-ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFZ, conclusion of the induction; Tag 0BFX and the localization calculation for the endpoint stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-normal-ring",
+  "lem-per-finite-point-fp-gluing",
+  "lem-per-integral-blowup-projective-geometry",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-blowup-proper",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Expanded proof of Tag 0BFZ via 0BFY; fills its omitted normalization/gluing argument using Tags 0BFV, 0BFW, and 0EY3(2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +202,38 @@
    "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc; logged digest 9fb3b3192ba06180",
    "date": "2026-10-18",
    "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Globalize prescribed towers of proper normalized blowups at closed points by interleaving their centers over a normal Noetherian scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; digest 70a51d8c7ca5a4d9",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization declarations do not globalize point blowup towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue finite sequences of blowups followed by normalization over local rings at finitely many closed points",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.normalization; digest 1c39db677f9148de",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization constructors and compatibilities only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsProper",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.?[Bb]low|[Bb]low.*localiz|localiz.*[Bb]low",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: no hits in AlgebraicGeometry"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-desingularization",
@@ -77,5 +259,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-normalized-blowups-globalize",
+  "worker": "stage1",
+  "group": "Q21",
+  "summary": "Expanded Stacks 0BFZ as an induction interleaving the prescribed centers. A single new generic finite-point gluing equivalence supplies descent of objects and arrows with proper/integral detection. Existing nodes supply ordinary blowup geometry, flat base change, normalization geometry, and Noetherian finite-presentation facts. The normalization identification and stalk comparison are explicit elementary calculations. No excellence or unproved general finiteness of normalization is used. Statement unchanged.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction and Stacks 0BGP (4) implies (3): Stacks 0BFZ, proof, \"the exact same argument\" as 0BFY; the gluing and morphism-detection input that makes the normalized induction proper without excellence.",
+  "tool_uses": [
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Generic Blow-up of an effective Cartier center input for the point-by-point Stacks 0BFZ construction; the perverse-unit nodes do not state this scheme-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic The normalization of a scheme in a finite extension of a residue field is a normal integral scheme, integral over the base, with the extension as generic point input for the point-by-point Stacks 0BFZ construction; the perverse-unit nodes do not state this scheme-theoretic fact."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic Properness of a blow-up input for the point-by-point Stacks 0BFZ construction; the perverse-unit nodes do not state this scheme-theoretic fact."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic Flat base change of blow-ups input for the point-by-point Stacks 0BFZ construction; the perverse-unit nodes do not state this scheme-theoretic fact."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic Blow-up is an isomorphism off its center input for the point-by-point Stacks 0BFZ construction (Steps 1 and 4); the perverse-unit nodes do not state this scheme-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lemma-nagata-blowup-proper",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-73eae2258",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-73eae2258 (reviewer sub-agent of L); spot-checked: I read the whole split. It follows Stacks resolve section-modifications: 0BFV, 0BFW, 0BFX, 0BFY and 0BFZ (the printed x_i stands for s_i). For the new node I also read limits 0EY3(2), lemma-modifications(-properties) and lemma-glueing-near-multiple-closed-points. The item statement is unchanged and agrees with 0BFZ for a normal integral Noetherian S. Its three citers (excellent-surface-desingularization, surface-resolution-normalized-refinement, complete-normal-surface-resolution) use only clauses the statement gives. There is no cycle. The new node lem-per-finite-point-fp-gluing has no proof, is self-contained and is true. The equivalence is 0BFV, with multi-point full faithfulness from limits glueing-near-multiple-closed-points. Proper detection is 0BFW. Proper and finite arrows come from 0EY3(2), since an arrow is an iso over U and the properties are local on the base. Integral follows because an arrow over a Noetherian base is of finite type and integral plus finite type is finite. Checked cases: r=0, dim 0, S empty. I searched dag/nodes for the tags, glueing-near and every equivalence+stalk+finite-presentation statement, and the blueprint for 0BFV/0BFZ; neither has a duplicate. The node is strictly smaller than the item, and the parallel Q34 delivery adds no competing node. Steps 2-9 are correct. Step 2: the chart is (A\\p)^-1 B with local ring B_q. Step 5: z x_S S_i = Spec kappa(z) is the reduced point t, and for j != i the center is empty. Step 6 uses only the statement of the new node. Step 7: the generic point of Y_j lies over V_j. Step 8: B is integrally closed, so B is the integral closure of A, which is the normalization. No excellence and no finiteness of normalization are used. FIX (one C1 citation): Steps 1 and 4 used 'off the center the blowup is the blowup of the unit ideal, hence iso by Cartier' without citing any node for blowups commuting with restriction to an open. They now cite thm-nagata-global-blowup-complement, which is also added to proof_deps and declared in split_report.tool_uses. cor-nagata-blowup-cartier-iso stays in Step 5. The corrected item file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-local-normalized-blowups-globalize.json; the statement and the new node are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
