@@ -2,18 +2,228 @@
  "id": "lem-per-inert-etale-quotient-comparison",
  "kind": "statement",
  "title": "Inert etale comparisons descend to etale quotient comparisons",
- "statement": "Let $G$ be a finite group acting on separated locally Noetherian schemes $U,V$, each covered by invariant affine opens, and let $h:V\\to U$ be a $G$-equivariant etale morphism [def-weil-etale-morphism]. For a geometric point $v$ put $G_v=\\{g:g\\circ v=v\\}$. The locus on which $G_v=G_{h(v)}$ is an invariant open subset of $V$. Restrict to this locus (so $h$ is called inert). Suppose $q_U:U\\to U/G$ and $q_V:V\\to V/G$ are finite surjective scheme quotients with orbit geometric fibres and invariant structure sheaves. Then $\\bar h:V/G\\to U/G$ is etale, and\n$$V\\simeq U\\times_{U/G}(V/G)$$\ncompatibly with the quotient maps and $G$-actions. These assertions hold locally on the quotients, so apply to pointed etale neighborhoods and are compatible with composition.\n\nIn addition suppose $M_U,M_V$ are fs log structures [def-trf-fs-log-blowup], $h$ is strict, both actions are very tame, and their quotient log structures are $N_U=(q_{U*}M_U)^G$ and $N_V=(q_{V*}M_V)^G$. Here strict means that the source log structure is pulled back from the target; very tame means that geometric stabilizers have invertible order and act trivially on the characteristic monoid and the strict local log stratum (the quotient of the strict local ring by the images of nonunit log sections). Then $\\bar h$ is strict for $N_V,N_U$.",
+ "statement": "Let $G$ be a finite group acting on separated [def-weil-proper-morphism] locally Noetherian schemes $U,V$ [pqf-def-locnoeth], each covered by invariant affine opens, and let $h:V\\to U$ be a $G$-equivariant etale morphism [def-weil-etale-morphism]. For a geometric point $v$ [def-weil-geometric-point] put $G_v=\\{g:g\\circ v=v\\}$. The locus on which $G_v=G_{h(v)}$ is an invariant open subset of $V$. Restrict to this locus (so $h$ is called inert). Suppose $q_U:U\\to U/G$ and $q_V:V\\to V/G$ are finite [def-weil-finite-integral-morphism] surjective scheme quotients with orbit geometric fibres and invariant structure sheaves. Then $\\bar h:V/G\\to U/G$ is etale, and\n$$V\\simeq U\\times_{U/G}(V/G)$$\nwith fibre product as in [def-pc-fibre-product], compatibly with the quotient maps and $G$-actions. These assertions hold locally on the quotients, so apply to pointed etale neighborhoods and are compatible with composition.\n\nIn addition suppose $M_U,M_V$ are fs log structures [def-trf-fs-log-blowup], $h$ is strict, both actions are very tame, and their quotient log structures are $N_U=(q_{U*}M_U)^G$ and $N_V=(q_{V*}M_V)^G$. Here strict means that the source log structure is pulled back from the target; very tame means that geometric stabilizers have invertible order and act trivially on the characteristic monoid and the strict local log stratum (the quotient of the strict local ring by the images of nonunit log sections). Then $\\bar h$ is strict for $N_V,N_U$.",
  "source": {
   "document": "literature/stacks-project/groupoids.tex",
   "place": "Tag 0DT9, lemma-etale, specialized to finite constant action groupoids; log strictness is ILO VIII Proposition 5.4.2, pp.126--127; inert localization as in VIII 5.3.6--5.3.7."
  },
  "stmt_deps": [
   "def-weil-etale-morphism",
+  "def-trf-fs-log-blowup",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For $g\\in G$ let $U^g,V^g$ be the equalizer closed subschemes of $g$ and the identity. They are closed because the schemes are separated. Equivariance gives $V^g\\subset Z_g=V\\times_U U^g$. On $Z_g$, the morphisms $g$ and the identity have the same composite with $h$, so this inclusion is a pullback of $\\Delta_h$. The diagonal is open by [def-weil-etale-morphism] and [def-weil-unramified-morphism], and closed by separatedness (it is a pullback of the absolute diagonal of $V$). Thus $V^g$ is open and closed in $Z_g$. The bad locus $|Z_g|\\setminus|V^g|$ is closed in $V$. Its finite union over $g$ is exactly the locus where some $g$ fixes $h(v)$ but not $v$. Its complement is open, and conjugation permutes these bad loci, so it is invariant. This proves the asserted inert localization, including its scheme-theoretic fixed-locus interpretation.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "Work henceforth on the inert locus. The quotient universal property gives $\\bar h$ from the invariant morphism $q_Uh$. Around any point of $V/G$ take affine opens $N\\subset V/G$ and $M\\subset U/G$ with $\\bar h(N)\\subset M$. Finiteness of the quotient maps makes their inverse images affine by [def-weil-finite-integral-morphism]. Write these inverse images as $\\operatorname{Spec}B$ and $\\operatorname{Spec}A$, and $M=\\operatorname{Spec}C$, $N=\\operatorname{Spec}D$. The invariant structure-sheaf hypotheses give $C=A^G$ and $D=B^G$. The map $A\\to B$ is etale and finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Both $A$ over $C$ and $B$ over $D$ are finite modules. All further constructions are over these quotient charts. Morphisms between affine schemes are separated, so the restricted $h$ is separated.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "For every flat $C$-algebra $E$, invariants commute with tensoring by $E$. Indeed, for either $L=A$ or $L=B$ the sequence $0\\to L^G\\to L\\xrightarrow{\\delta}\\prod_{g\\in G}L$ is exact, where $\\delta(l)=(g(l)-l)_g$. Apply [lem-weil-pbc-flat-tensor-exact]. Tensoring commutes with this finite product, by the componentwise maps on pure tensors and their inverse summing the finitely many coordinate inclusions. The resulting kernel is $(E\\otimes_C L)^G$, so $E\\otimes_C L^G\\cong(E\\otimes_C L)^G$. These are algebra isomorphisms because the comparisons send $e\\otimes l$ to the same tensor and preserve multiplication. In particular the base-changed quotients are $\\operatorname{Spec}E$ and $\\operatorname{Spec}(E\\otimes_C D)$. The finite maps retain their geometric orbit fibres: on any algebraically closed field the base-change square just specifies the same common base point. No averaging or invertibility of $|G|$ is used.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK, lemma-invariants-base-change (3), kernel calculation; used in Tag 0DT9"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar n$ of $N$ and its image $\\bar m$ of $M$. Put $H=\\mathcal O^{\\mathrm{sh}}_{M,\\bar m}$. By [def-weil-pbc-strict-henselization-limit] this is the filtered colimit of coordinate rings $C_i$ of affine pointed etale neighborhoods of $\\bar m$; by [lem-weil-pbc-strict-henselization-local-structure] it is strictly henselian local. Each $C_i$ is flat over $C$. Applying [lem-weil-pbc-filtered-colimit-algebras-underlying-module] and [lem-weil-pbc-filtered-colimit-flat-modules] shows that $H$ is flat over $C$, so Step 3 applies. The pointed evaluation into the algebraically closed field of $\\bar n$ has image in the relative separable closure of the residue field of $\\bar m$ and is surjective onto that separable closure by [lem-weil-pbc-strict-henselization-point-evaluation-image] and [lem-weil-pbc-strict-henselization-point-evaluation-properties]. Its kernel is therefore maximal, hence is the maximal ideal of the local ring $H$. Thus $\\bar n$ lifts to a geometric point $\\bar n_H$ over the closed point of $\\operatorname{Spec}H$. Write $A_H=H\\otimes_C A$, $B_H=H\\otimes_C B$, $D_H=H\\otimes_C D$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-weil-pbc-strict-henselization-point-evaluation-image",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "The finite $H$-algebra $A_H$ is a finite product of finite henselian local $H$-algebras $A_j$ by [lem-weil-pbc-finite-over-henselian-local-product]. The corresponding spectra $U_j$ are clopen components by [lem-weil-pbc-finite-affine-coproduct-spectrum]. Their residue fields are finite over the separably closed residue field of $H$, and are separably closed with unique embeddings into an algebraic closure by [lem-weil-pbc-sepclosed-finite-extension-unique-embedding]. Thus each component has exactly one geometric point over the fixed closed geometric point of $H$. The orbit-fibre hypothesis makes $G$ transitive on these components. The subgroup $K$ preserving a chosen component $U_j$ is exactly the stabilizer of its closed geometric point $\\bar u$: a component-preserving element induces an automorphism of its residue field over that of $H$, and uniqueness of the embedding forces this automorphism to fix the geometric point. These conclusions include nonreduced finite algebras.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "Base change preserves etaleness by [lem-weil-pbc-etale-base-change-finite-limits], so $h_H$ is etale. Choose a geometric lift $\\bar v$ of $\\bar n_H$ to $\\operatorname{Spec}B_H$, and let $\\bar u=h(\\bar v)$ lie on $U_j$. Such a lift exists because the finite quotient is surjective with geometric orbit fibres. Etaleness over the separably closed residue field of $A_j$ gives a rational point with the specified geometric lift, by [lem-exc-etale-lift-sepclosed-base]. Hence its residue field is exactly that of $A_j$. Apply [lem-weil-pbc-henselian-etale-retraction] to the etale affine scheme over $U_j$ obtained by restricting $h_H$. It gives a unique section through this point. Its image $W_j$ is clopen and maps isomorphically to $U_j$ by [lem-weil-pbc-etale-section-clopen-immersion]. The uniqueness here is uniqueness with the specified closed point, not uniqueness of an arbitrary section of the whole etale scheme.",
+   "uses": [
+    "lem-exc-etale-lift-sepclosed-base",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "For $k\\in K=G_{\\bar u}$, inertness gives $k\\bar v=\\bar v$. Conjugating the section of Step 6 by $k$ gives another section over $U_j$ with the same closed point; the uniqueness in [lem-weil-pbc-henselian-etale-retraction] makes it the same section. Therefore $K$ preserves $W_j$. The translates $gW_j$, indexed by $G/K$, lie over the distinct components $gU_j$, are disjoint, and together form an invariant clopen subscheme $W\\subset\\operatorname{Spec}B_H$. The restriction $h_H:W\\to\\operatorname{Spec}A_H$ is an isomorphism on every clopen component, hence an equivariant isomorphism. Moreover $W$ contains the entire orbit of $\\bar v$, which is the geometric fibre over $\\bar n_H$. This is the local orbit construction, rather than an application of a new quotient-comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "Let $e\\in B_H$ be the idempotent defining $W$, with value $1$ on $W$ and $0$ on its complement. Invariance of $W$ says $g(e)=e$. Therefore $e\\in B_H^G=D_H$ by Step 3. Splitting a ring by its idempotent gives $B_H=eB_H\\times(1-e)B_H$, equivariantly, so $eD_H=(eB_H)^G$. Step 7 identifies $eB_H$ equivariantly with $A_H$, hence $eD_H\\cong A_H^G=H$ as $H$-algebras. Consequently $\\operatorname{Spec}D_H$ has a clopen neighborhood of $\\bar n_H$ isomorphic to $\\operatorname{Spec}H$, and over it the comparison $\\operatorname{Spec}B_H\\to\\operatorname{Spec}A_H\\times_H\\operatorname{Spec}D_H$ is the isomorphism of Step 7. These are the explicit quotient and cartesian identifications of the local construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "Descend first the idempotent. Apply [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] with $R=C$, stage algebras $C_i$, and module/algebra $B$. It represents $e$ by $e_i\\in B_i=C_i\\otimes_C B$ at some pointed etale neighborhood. The finitely many zero equations $e_i^2-e_i=0$ and $g(e_i)-e_i=0$ hold after a further common refinement, by part (2) of that node and filteredness. Thus $e_i$ is an invariant idempotent. Since $C_i$ is flat over $C$, Step 3 gives $D_i=C_i\\otimes_C D=B_i^G$, so $e_i$ is also an idempotent of $D_i$. Its clopen subscheme contains the distinguished point induced by $\\bar n$, since $e$ evaluates to $1$ there and all cone legs preserve that evaluation.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "Descend the isomorphism $A_H\\to eB_H$ with its actual structural map. By Step 2, $B$ has a finite presentation over $A$. Hence $e_iB_i=B_i[1/e_i]$ has a finite presentation over $A_i=C_i\\otimes_C A$: base-change that presentation and adjoin an inverse for $e_i$. Write it $A_i[t_1,\\ldots,t_s]/(f_1,\\ldots,f_r)$. The inverse over $H$ sends these generators to finitely many elements of $A_H$. Lift those elements to a later $A_{i'}$, and then force the finitely many relations $f_a$ to vanish at a further stage, using [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] with module $A$. This gives an $A_{i'}$-algebra retraction of $A_{i'}\\to e_{i'}B_{i'}$. Its other composite is the identity after tensoring with $H$; force equality on the finitely many $t_b$ at a later stage by the same node with $R=C$ and module $B$: each difference is an element of the direct summand $e_{i'}B_{i'}\\subset B_{i'}$, so it suffices to kill that element in $B$ at a later stage. Thus the structural map is already an isomorphism $A_{i'}\\cong e_{i'}B_{i'}$. Because it is the structural map and $e_{i'}$ is invariant, it is equivariant and so is its inverse. Step 3 now gives $C_{i'}\\cong e_{i'}D_{i'}$. This supplies the finite-stage clopen quotient neighborhood with both required isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "For every geometric point of $N$ the construction gives $T=\\operatorname{Spec}C_i$, identified with the clopen $\\operatorname{Spec}(e_iD_i)\\subset N\\times_M\\operatorname{Spec}C_i$. The map $T\\to N$ is etale by base change and restriction, and its image contains that point. Taking all these maps gives an etale surjection $\\coprod T\\to N$. Each composite $T\\to N\\to M$ is the original etale pointed neighborhood. Apply [lem-trf-etale-descent-through-source-cover] to conclude that $\\bar h:N\\to M$ is etale. Over each $T$, Step 10 identifies the canonical comparison $V\\to U\\times_M N$ with an isomorphism. To descend it, cover any affine open of $U\\times_MN$ by the affine refinements of the pulled-back etale maps $T$; choose finitely many, since the affine open is quasi-compact. Their disjoint union is a flat surjective quasi-compact morphism onto that affine open. Apply [lem-weil-pbc-fpqc-descend-isomorphism]. The local isomorphisms glue because each is inverse to the same canonical comparison. They are equivariant because that comparison is equivariant.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  },
+  {
+   "text": "For clarity about coefficients, inverse image along an etale map $j:Y\\to X$ is restriction also for monoid sheaves. In the set-valued inverse-image formula of [lem-weil-pbc-etale-inverse-image-algebraic-structures], for an etale $T\\to Y$ use the pair $(T\\to X,\\,T\\to Y\\times_XT)$ given by the graph. The adjunction of [lem-weil-pbc-etale-localization-functor-adjoint] says that any other pair receives the unique map from this pair. With the contravariant sheaf transition maps this gives the terminal value $F(T\\to X)$ in the colimit. These values already form a sheaf, because a covering over $Y$ is the same covering of the underlying etale $X$-schemes. Thus no sheafification changes them. Multiplication and unit are preserved objectwise, proving the restriction formula for sheaves of commutative monoids. The etale structure sheaf restricts to $\\mathcal O_Y$, since its value on $T$ is $\\Gamma(T,\\mathcal O_T)$ in both sites. Its unit subsheaf therefore restricts to $\\mathcal O_Y^\\times$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-etale-localization-functor-adjoint",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Proposition 5.4.2, pp.126--127; elementary small-etale-site restriction argument in the etale case"
+   }
+  },
+  {
+   "text": "Now assume the log hypotheses. Strictness of $h$ means $M_V\\cong h^*M_U$; Step 12 identifies $h^*M_U$ with restriction $h^{-1}M_U$, since both the structure sheaf and its units restrict identically. On any etale $T\\to V/G$, the scheme $U\\times_{U/G}T$ is canonically $V\\times_{V/G}T$ by Step 11. Hence the two monoids\n$$ (\\bar h^{-1}N_U)(T)=M_U(U\\times_{U/G}T)^G,\\qquad N_V(T)=M_V(V\\times_{V/G}T)^G $$\nare identified by the strict equivariant restriction of $h$. This identification commutes with all restrictions, monoid operations and structure maps. It is the quotient log morphism, because on sections it is the given pullback along $h$. Step 12 applied to the etale map $\\bar h$ identifies its log pullback with inverse-image restriction, so $\\bar h^*N_U\\cong N_V$. This proves strictness. The fs and very-tame assumptions and the assertion that the displayed invariant sheaves are quotient log structures are retained; the etale case needs no separate chart or quotient-existence theorem.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Proposition 5.4.2, pp.126--127, etale equal-group case; direct restriction computation"
+   }
+  },
+  {
+   "text": "All the comparisons above are the canonical maps determined by $(h,q_V)$ into the fibre product. Restriction to a quotient open, or pullback along a pointed etale neighborhood, restricts these same two components, so gives the same comparison by the fibre-product universal property. For composable inert equivariant etale maps the stabilizer equalities compose; the composite pair defining the comparison is the composite of the two component pairs. The universal property therefore identifies the composite comparison with that of the composite map. For log structures the monoid identifications of Step 13 are literal restrictions of sections; successive restrictions equal restriction along the composite. This proves both locality and the stated composition compatibility, including the pointed versions.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9, lemma-etale, proof specialized to finite constant action groupoids"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-strict-henselization-point-evaluation-image",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-exc-etale-lift-sepclosed-base",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-localization-functor-adjoint",
+  "def-weil-pbc-etale-site",
   "def-trf-fs-log-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT9, lemma-etale, its strict-henselian clopen-component construction and finite-stage descent, expanded for finite constant groups; log clause checked against ILO VIII Proposition 5.4.2 and proved directly on etale monoid sections."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +252,52 @@
    "results": "{\"t\": \"2026-10-18T22:44:23Z\", \"tool\": \"grep\", \"query\": \"inert|stabilizer|quotient\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary etale stability/composition and orbit-stabilizer bijections do not give etale descent to invariant schemes. The grep of AlgebraicGeometry/Morphisms/Etale.lean returned no hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stabilizer preserving equivariant etale morphism induces an etale morphism of finite group scheme quotients and a cartesian square",
+   "results": "{\"t\": \"2026-10-18T23:30:29Z\", \"tool\": \"leanfinder\", \"query\": \"A stabilizer preserving equivariant etale morphism induces an etale morphism of finite group scheme quotients and a cartesian square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"b266ba263ad1730a\"}; Read the returned hits: ordinary etale stability and finite-field inertia degrees do not assert invariant-scheme quotient descent or strict log pullback. No exact project attachment was found.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inert|stabilizer|quotient",
+   "results": "{\"t\": \"2026-10-18T23:32:27Z\", \"tool\": \"grep\", \"query\": \"inert|stabilizer|quotient\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale stability and finite-field inertia degrees do not assert invariant-scheme quotient descent or strict log pullback. No exact project attachment was found.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inertia preserving etale maps descend to etale maps on finite group quotients",
+   "results": "{\"t\": \"2026-10-18T23:32:28Z\", \"tool\": \"leansearch\", \"query\": \"Inertia preserving etale maps descend to etale maps on finite group quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.of_equiv\", \"Algebra.FormallyEtale.of_equiv\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Ideal.inertiaDeg_comap_eq\", \"Ideal.inertiaDeg_map_eq\", \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\"], \"digest\": \"557f2ac9452d6d6a\"}; Read the returned hits: ordinary etale stability and finite-field inertia degrees do not assert invariant-scheme quotient descent or strict log pullback. No exact project attachment was found.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, \"invariant\"",
+   "results": "{\"t\": \"2026-10-18T23:32:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale stability and finite-field inertia degrees do not assert invariant-scheme quotient descent or strict log pullback. No exact project attachment was found.",
+   "date": "2026-10-19",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale map of schemes which preserves geometric inertia, the finite group quotient square is cartesian; strict etale log structures pull back to quotient log structures",
+   "results": "{\"t\": \"2026-10-18T23:42:22Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale map of schemes which preserves geometric inertia, the finite group quotient square is cartesian; strict etale log structures pull back to quotient log structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"6e71845eb5149eff\"}; Read the returned hits: ordinary etale stability and finite-field inertia degrees do not assert invariant-scheme quotient descent or strict log pullback. No exact project attachment was found.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale",
+   "results": "{\"t\": \"2026-10-18T23:58:09Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.Etale.inst\", \"Algebra.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.instSmooth\", \"Algebra.Etale.instUnramified\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.iff_formallyUnramified_and_smooth\"], \"digest\": \"3721aaab0e99c861\"}; The returned declarations concern ordinary etale algebras and their formal etaleness, smoothness, unramifiedness and finite presentation. None states the inert finite-group quotient comparison or its strict log clause.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-abelian-stage-toric-chart",
@@ -72,5 +324,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-inert-etale-quotient-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the finite-group case of Stacks 0DT9 by constructing the equivariant clopen copy over a strict henselization, descending its invariant idempotent and the inverse by finitely many equations, and descending the resulting etale neighborhoods and cartesian comparison. Proved inert openness using relative fixed loci. Proved the log clause directly on monoid sections, without applying abelian derived exchange to log structures. All supporting statements already exist; no new nodes, statement corrections or route changes.",
+  "blueprint": "Ancestor proof Step 3, abelian-inertia fourth-stage local toric comparison; Tag 0DT9, lemma-etale, specialized to finite constant action groupoids; log strictness is ILO VIII Proposition 5.4.2, pp.126--127; inert localization as in VIII 5.3.6--5.3.7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for A morphism locally of finite presentation is of finite presentation on every pair of affine opens. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Tensoring with a flat module preserves exact sequences. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Local structure of the chosen strict-henselization colimit. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for A filtered colimit of algebras is the colimit of the underlying modules. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Filtered colimits of flat modules are flat. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-point-evaluation-image",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Pointed evaluation lands in the relative separable closure. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Surjectivity of canonical pointed evaluation. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for A finite algebra over a henselian local ring is a product of henselian local rings. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Finite coproducts of affine schemes are spectra of product rings. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for A finite extension of a separably closed field is separably closed and embeds uniquely into an algebraically closed field. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-exc-etale-lift-sepclosed-base",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Etale lifts descend along an extension of a separably closed field. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-etale-retraction",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Etale algebras over a henselian local ring have unique sections through rational points of the closed fibre. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for A section of a separated etale morphism is an open and closed immersion. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Base change of a filtered colimit of algebras, elementwise. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for The base-change functor between small etale sites commutes with finite limits. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Etaleness descends through a surjective etale source cover. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-isomorphism",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Being an isomorphism descends along flat surjective quasi-compact morphisms (Stacks 02L4). It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Inverse image of etale sheaves of sets, abelian groups and rings. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-localization-functor-adjoint",
+    "why": "Generic tool used only with its stated hypotheses in the proof steps; this unit has no replacement for Composition with an etale morphism is left adjoint to base change on small etale sites. It supplies local scheme, elementary algebra, or site formalism, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-strict-henselization-point-evaluation-image",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-exc-etale-lift-sepclosed-base",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-localization-functor-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-16fd40d87",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-16fd40d87 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 14 steps and all 27 cited statements. Sources read: Stacks 0DT9 (lemma-etale) with its proof and 03BK (invariants base change), and ILO VIII 5.3.6–5.3.7, 5.4.1 and Prop. 5.4.2 (pp.124–127). Shape: one commit, item and report only, no new nodes, steps 690–1290 characters, proof_deps equal to the union of uses. Statement: compared with the live base, the only edits add definition references (separated via def-weil-proper-morphism, locally Noetherian, geometric point, finite morphism, fibre product), with matching stmt_deps; nothing is weakened. The statement is a faithful specialization of 0DT9 to finite constant groups: for an equivariant h the s- and t-squares are automatically cartesian, and the stabilizer square is cartesian exactly when h is inert. G_v for a geometric point is ILO's inertia group, and the log clause is the étale, equal-group case of 5.4.2 with the fs and very-tame hypotheses kept. Step checks: S1 open inert locus from Δ_h being open (unramified) and closed (pulled back from Δ_V of separated V); S2 01TQ on affine quotient charts with C=A^G, D=B^G; S3 the flat kernel argument of 03BK; S4 H flat over C, and the evaluation surjects onto the separable closure, giving a lift to the closed point; S5 04GH product decomposition, unique embedding, G transitive on components, and K equal to G_ū (stabilizers in Spec H×U agree with those in U); S6 the étale lift plus the unique 04GG retraction and a clopen section; S7 inertness gives k v̄=v̄, uniqueness makes the section K-invariant, and the disjoint translates give W≅Spec A_H; S8 invariant idempotent with eD_H≅H; S9–S10 finitely many equations descended with the elementwise filtered-colimit node, both composites checked; S11 036W gives h̄ étale and 02L4 descends the canonical comparison over finite affine étale covers; S12 étale inverse image of monoid sheaves is restriction (graph object terminal); S13 N_V(T) and h̄^{-1}N_U(T) are identified through V×_{V/G}T≅U×_{U/G}T and strictness of h; S14 locality and composition from the universal property. Edge cases: empty, trivial G, free action, K=G, nonreduced A_H. The non-inert example Z/2×A¹ → A¹ with x↦−x gives the quotient map x↦x², ramified at 0, so the inert hypothesis is needed. No duplicate found: rg for 0DT9/03BK/036W, and the lem-a1 groupoid quotient and torsor-subquotient nodes state other things. The 19 tool_uses are generic pbc/sbc/exc tools and I accept all of them. Batch-5 flag: lem-trf-etale-descent-through-source-cover is generic Stacks 036W (if p is étale surjective and h∘p is étale, then h is étale). It is neither assumed statement nor a step of their proofs, and its 219-node closure contains no other trace-formula/Poincaré/sk-thm-trace-transport/nt node. Every other new citation's closure is clean; def-trf-fs-log-blowup is a pre-existing definition stmt_dep. Flag accepted, no RETURN. No fixes written."
  }
 }
