@@ -1,0 +1,142 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/_section.md",
+  "place": "D4, complete checked Lean proof, 2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-proper-truncation-bound",
+   "place": "Integral ind-constructible heart is weak Serre",
+   "via": [
+    "lem-sfb-adic-proper-truncation-bound",
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "date": "2026-10-19",
+  "group": "D4"
+ },
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ind closure of a Serre subcategory of finitely presented objects in a Grothendieck abelian category is closed under kernels cokernels and extensions",
+   "date": "2026-10-18",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsSerreClass, CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.ObjectProperty.instIsSerreClassTop, CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects, CategoryTheory.IsGrothendieckAbelian.wellPowered",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.ind",
+   "date": "2026-10-18",
+   "results": "12 hits: CategoryTheory.ObjectProperty.ind, CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInd, CategoryTheory.ObjectProperty.instNonemptyInd, CategoryTheory.ObjectProperty.le_ind, CategoryTheory.ObjectProperty.isClosedUnderLimitsOfShape_ind_discrete, CategoryTheory.ObjectProperty.ind_ind, CategoryTheory.ObjectProperty.of_essentiallySmall_index, CategoryTheory.ObjectProperty.ind_inverseImage_eq_of_isEquivalence",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*IsClosedUnderKernels|IsClosedUnderKernels.*ind|ind_pi_of_ind",
+   "date": "2026-10-18",
+   "results": "2 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind closure of a Serre subcategory of finitely presentable objects is closed under kernels cokernels and extensions from Ext continuity",
+   "date": "2026-10-19",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects, CategoryTheory.instAbelianInd, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.Limits.isClosedUnderLimitsOfShape_isIndObject_walkingParallelPair, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients, CategoryTheory.ObjectProperty.IsClosedUnderExtensions, CategoryTheory.ObjectProperty.IsSerreClass.casesOn",
+   "verdict": "Component declarations only; no exact match for this statement."
+  }
+ ],
+ "id": "new-lem-sfb-integral-ind-heart-weak-serre",
+ "kind": "statement",
+ "title": "Integral ind-constructible heart is weak Serre",
+ "statement": "Fix a prime ell, a field k of positive prime characteristic different from ell, and a separated finite-type k-scheme X. Let E be any finite extension of Q_ell with a specified Q_ell-embedding in PadicAlgCl ell. Let Lambda be the condensed ring of continuous functions valued in its valuation ring with the induced topology. For C = IsConstructibleModuleObject Lambda_X [def-sfb-constructible-module], namely finite stratifications with locally finitely presented inverse images, the ambient closure C.ind under small filtered colimits in universe u+1 is closed under kernels, cokernels and short exact extensions. All module sheaves and colimits are ordinary internal module sheaves, with no completeness assumption on ind objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/_section.md",
+  "place": "Strict integral intermediate: Integral ind-constructible heart is weak Serre"
+ },
+ "proof": [
+  {
+   "text": "Construct an actual continuous coefficient isomorphism from the spectral-norm valuation ring of ULift E to the embedded valuation ring. Transport the integral finite-presentation/constant-model comparison. Integral constructibles are closed under kernels, cokernels and extensions; their full subcategory is abelian with finite-colimit-preserving inclusion, and is essentially small by finite stratified scalar models.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-constant-model-heart-closure",
+    "lem-weil-pbc-integral-constructible-serre",
+    "det-lem-coefficient-heart-small"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral Ext/Hom continuity to complexes concentrated in degree zero. Its degree-zero case makes constructible sheaves finitely presentable. Prove finality of each filtered presentation in the constructible comma category by descending arrows and equalities; this yields the canonical presentation. Apply the finite-stage-square kernel/cokernel construction and exact filtered colimits.",
+   "uses": [
+    "det-lem-int-ext-continuity",
+    "det-ind-heart-full-faithfulness",
+    "det-ind-heart-canonical-presentation",
+    "det-ind-heart-kernels-cokernels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the degree-one case of integral Ext/Hom continuity to descend an extension over a constructible quotient stage to a constructible subobject stage. The generic ind-extension argument pushes out these finite-stage extensions, forms their filtered colimit and identifies the result by the short five lemma. Only continuity is used; no uniform Ext-degree bound or finite base field is required.",
+   "uses": [
+    "det-lem-int-ext-continuity",
+    "det-ind-heart-extensions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-ind-heart-canonical-presentation",
+  "det-ind-heart-extensions",
+  "det-ind-heart-full-faithfulness",
+  "det-ind-heart-kernels-cokernels",
+  "det-lem-coefficient-heart-small",
+  "det-lem-int-ext-continuity",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-weil-pbc-integral-constructible-serre"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicIntegralIndHeartWeakSerre",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicIntegralIndHeartWeakSerre.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_integral_indConstructible_weakSerre",
+  "statement": "theorem ellAdic_integral_indConstructible_weakSerre :\n    ∀ (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]\n      [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E],\n      let P := ObjectProperty.ind.{u + 1}\n        (IsConstructibleModuleObject\n          (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left))\n      P.IsClosedUnderKernels ∧ P.IsClosedUnderCokernels ∧ P.IsClosedUnderExtensions",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-19"
+ },
+ "stmt_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-adic-coefficient-certificate"
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

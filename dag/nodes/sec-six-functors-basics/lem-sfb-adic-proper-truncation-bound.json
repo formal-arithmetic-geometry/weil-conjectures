@@ -16,58 +16,32 @@
  },
  "proof": [
   {
-   "text": "In each coefficient-certificate case, the schemes and their strata are Noetherian. In the rational cases the class of complexes with ind-constructible cohomology is replete, triangulated, closed under ambient sums, and contains bounded constructible complexes, so it contains the localizing hull. The integral ind-realization and its derived cohomology class give the same containment for integral coefficients. These are ordinary sheaf colimits.",
+   "text": "Install the weak Serre and coproduct closure of the ind-constructible heart. Homology preserves ambient coproducts, so its object property is localizing and contains all bounded constructible complexes. The universal property of the localizing hull gives ind-constructible cohomology for K.",
    "uses": [
-    "det-ambient-ind-derived-sums",
-    "det-ambient-ind-derived-triangulated",
-    "det-prop-int-compactness-compact",
+    "new-lem-sfb-adic-ind-heart-closure",
     "def-sfb-bounded-constructible-localizing-closure"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a natural uniform geometric fibre-dimension bound d. In the rational cases the proper heart bound gives cohomology in [0,2d+1] for ind-constructible sheaves. In the integral case use the local free resolutions to put derived torsion reductions in degrees [-1,0], the proper upper bound 2d, and the Milnor sequence for their countable derived inverse limit; bounded-below continuity passes this to filtered colimits of constructible sheaves. Set c=2d+1.",
+   "text": "Good lower truncation preserves ind-constructible cohomology. The uniform upper-amplitude theorem applied to tau_lt(q-c) K, supported in degrees at most q-c-1, gives the bound q-1 by integer arithmetic.",
    "uses": [
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "sk-lem-proper-heart-bound",
-    "det-prop-int-compactness-direct-sums"
+    "def-kun-truncations",
+    "new-lem-sfb-adic-proper-upper-amplitude"
    ],
    "elementary": false
-  },
-  {
-   "text": "The arbitrary-complex proper upper bound extends the heart bound to complexes with ind-constructible cohomology supported in degrees at most b: the image is supported in degrees at most b+c. Finite lower-truncation intervals give this bound first for bounded complexes. Left completeness expresses an arbitrary complex as the derived limit of its lower truncations. The discarded layer at stage n has image supported above by 2d-n. For a fixed output degree r, choose n≥max(0,2d-r+2); the degree-r and degree-(r-1) transition maps are then invertible. The Roos map 1-shift for an eventually invertible tower is split surjective by recursive lifting on its tail and finite backward recursion, so its first derived limit vanishes. This is also the integral argument; it uses the class-relative heart upper-bound lemma, not a cohomological-dimension bound on all ambient sheaves.",
-   "uses": [
-    "det-proper-unbounded-window-arbitrary",
-    "lem-sfb-left-complete-heart-upper-bound",
-    "det-prop-int-compactness-direct-sums"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Good truncations preserve ind-constructible cohomology. Apply the preceding class-relative upper bound to τ<q-c K. This lower tail is supported in degrees at most q-c-1, so its direct image is supported in degrees at most q-1. This proves the asserted upper amplitude. Zero complexes and empty fibres satisfy the same calculation.",
-   "uses": [
-    "det-ambient-ind-derived-sums",
-    "def-kun-truncations"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
   "def-kun-truncations",
   "def-sfb-bounded-constructible-localizing-closure",
-  "det-ambient-ind-derived-sums",
-  "det-ambient-ind-derived-triangulated",
-  "det-prop-int-compactness-compact",
-  "det-prop-int-compactness-direct-sums",
-  "det-proper-unbounded-window-arbitrary",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-sfb-left-complete-heart-upper-bound",
-  "sk-lem-proper-heart-bound"
+  "new-lem-sfb-adic-ind-heart-closure",
+  "new-lem-sfb-adic-proper-upper-amplitude"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-  "place": "Arbitrary K and the window isomorphism; integral analogue in sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md, (1)-(2)."
+  "place": "D4: localizing hull containment followed by coefficient-relative upper amplitude"
  },
  "mathlib_searches": [
   {
@@ -149,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261017T141636-L-3673008",
+  "landing": "20261019T192706-L-1855853",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

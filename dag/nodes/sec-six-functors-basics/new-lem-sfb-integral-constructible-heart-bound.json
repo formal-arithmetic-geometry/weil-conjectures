@@ -1,0 +1,135 @@
+{
+ "id": "new-lem-sfb-integral-constructible-heart-bound",
+ "kind": "statement",
+ "title": "Proper upper bound on constructible integral sheaves",
+ "statement": "Fix a prime ell, a field k in Type u of positive prime characteristic different from ell, separated finite-type k-schemes Z and Y, and a proper k-morphism g:Z to Y. Let E be any finite extension of Q_ell with a specified compatible embedding in PadicAlgCl ell, and Lambda the condensed ring of its valuation ring with the induced topology. There exists c in Nat such that H^j(Rg_*(M[0])) vanishes for every constructible Lambda_Z-module M [def-sfb-constructible-module] and every integer j>c. Constructibility is finite stratification with local finite presentation, not a completeness condition or a finite Tor hypothesis. The direct image is the ordinary unbounded internal-module derived functor [sk-def-sfb-module-derived-pushpull].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/_section.md",
+  "place": "Strict integral intermediate: Proper upper bound on constructible integral sheaves"
+ },
+ "stmt_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Bound the dimension of Z by d, hence every geometric fibre dimension by d. For canonical finite intermediate fields compare integral local presentations with constant scalar models via the continuous coefficient isomorphism. Normalize an arbitrary embedded finite extension E by its image subfield, constructing the isometry and continuous valuation-ring isomorphism explicitly.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-constant-model-heart-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two-term torsion reduction of a constructible integral M lies in degrees [-1,0]. The classical comparison and proper torsion bound put its proper image in degrees at most 2d, including when M has torsion.",
+   "uses": [
+    "det-prop-int-compactness-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the bounded-above clause of integralProperDirectSums, which reconstructs integral heart objects from their reduction towers by the Roos/Milnor triangle and gives 2d+1. Take constructible objects into their ind closure. Transport the bound from the canonical image field to E by restriction of scalars, its compatibility with derived proper direct image and homology, and reflection of zero objects. Zero sheaves and empty fibres are included.",
+   "uses": [
+    "det-prop-int-compactness-direct-sums",
+    "new-lem-sfb-adic-ind-heart-weak-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-int-compactness-direct-sums",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "new-lem-sfb-adic-ind-heart-weak-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/_section.md",
+  "place": "D4, complete checked Lean proof, 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism has uniformly bounded higher direct images on the ind constructible ell adic heart",
+   "date": "2026-10-18",
+   "results": "8 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.profiniteSolid, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Condensed.instAB4CondensedMod, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Condensed.instAB4StarCondensedMod, CondensedMod.IsSolid",
+   "verdict": "No exact match; the available generic ind and cohomology APIs supply only components."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isLE_iff",
+   "date": "2026-10-18",
+   "results": "1 hits: DerivedCategory.isLE_iff",
+   "verdict": "No exact match; the available generic ind and cohomology APIs supply only components."
+  },
+  {
+   "tool": "grep",
+   "query": "properHeartBound|isLE_obj_of_isLE|homologyProperty_truncGE",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact match; the available generic ind and cohomology APIs supply only components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of constructible integral ell adic module sheaves has uniformly bounded cohomology",
+   "date": "2026-10-19",
+   "results": "8 hits: SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardSections, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pushforward₀_obj_obj_isModule",
+   "verdict": "Component declarations only; no exact match for this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "date": "2026-10-19",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-proper-truncation-bound",
+   "place": "Proper upper bound on constructible integral sheaves",
+   "via": [
+    "lem-sfb-adic-proper-truncation-bound",
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicIntegralConstructibleHeartBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicIntegralConstructibleHeartBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_integral_constructible_heart_upper_bound",
+  "statement": "theorem ellAdic_integral_constructible_heart_upper_bound\n    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]\n    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :\n    ∃ c : ℕ, ∀ M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z.left),\n      IsConstructibleModuleObject\n        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z.left) M →\n      ∀ j : ℤ, (c : ℤ) < j →\n        IsZero ((DerivedCategory.homologyFunctor _ j).obj\n          ((R((g.left)_*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

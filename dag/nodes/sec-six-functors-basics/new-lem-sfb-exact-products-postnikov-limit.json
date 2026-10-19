@@ -1,0 +1,128 @@
+{
+ "id": "new-lem-sfb-exact-products-postnikov-limit",
+ "kind": "statement",
+ "title": "Canonical Postnikov derived-limit triangle with exact products",
+ "statement": "Let A be an abelian category with its derived category, countable products and exact countable products. For every K in D(A) and every chosen product of tau_ge(-n)K, the canonical maps from K to these truncations fit into the distinguished Roos triangle K -> product_n tau_ge(-n)K -> product_n tau_ge(-n)K -> K[1], whose middle map is 1 minus the truncation transition shift. No boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-derived-limit (Tag 08TC), lemma-products (Tag 07KC), remark-map-into-derived-limit-truncations, and the Postnikov reconstruction argument in the proof of lemma-enough-K-injectives-Ab4-star; the Lean proof uses derived-product existence directly and does not require enough injectives."
+ },
+ "stmt_deps": [
+  "def-weil-derived-limit",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Use exact countable products to obtain countable products in D(A) and preservation of those products by each homology functor. Complete the Roos transition to a distinguished triangle by derived-limit existence.",
+   "uses": [
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each cohomology degree, the canonical maps to lower truncations are eventually invertible. For an eventually invertible tower, construct a right inverse of 1-shift by forward recursion on its invertible tail and finite backward recursion. The compatible maps identify the original object as the kernel of this split epimorphism. A forward/backward recursion constructs the splitting; this is implemented in the private Lean helpers, rather than left as a new obligation.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of homology and product comparison identifies the factorization into the completed triangle with an isomorphism on every cohomology object. Reflect isomorphisms in the derived category, and transport the distinguished triangle along this isomorphism, retaining the canonical projection maps.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-derived-limit-products-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "D4: direct homology proof of canonical Postnikov reconstruction, "
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncGE.*DerivedLimit|DerivedLimit.*truncGE",
+   "date": "2026-10-18",
+   "results": "0 matches: ",
+   "verdict": "Component lemmas only; no exact match for the coefficient-relative statement or canonical Postnikov triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CountableAB4Star",
+   "date": "2026-10-18",
+   "results": "8 matches: CategoryTheory.CountableAB4Star, CategoryTheory.instCountableAB4StarOfAB4StarOfSize, CategoryTheory.CountableAB4Star.mk, CategoryTheory.CountableAB4Star.ofShape, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, LightCondensed.instCountableAB4StarLightCondMod",
+   "verdict": "Component lemmas only; no exact match for the coefficient-relative statement or canonical Postnikov triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact countable products, every complex is the derived inverse limit of its lower truncations",
+   "date": "2026-10-18",
+   "results": "8 matches: CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, HomologicalComplex.isGrothendieckAbelian, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, HomologicalComplex.ab5OfSize, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_shortExact",
+   "verdict": "Component lemmas only; no exact match for the coefficient-relative statement or canonical Postnikov triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "With exact countable products a complex is the homotopy inverse limit of its canonical lower truncations",
+   "date": "2026-10-19",
+   "results": "8 hits: CategoryTheory.Limits.HasCountableProducts.mk, CategoryTheory.CountableAB4Star.mk, HomologicalComplex.instHasLimit, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, LightProfinite.instHasCountableLimits, CategoryTheory.Limits.hasCountableProducts_of_hasCountableLimits, CategoryTheory.Limits.SequentialProduct.isLimit, CategoryTheory.ShortComplex.hasLimitsOfShape",
+   "verdict": "Component declarations only; no exact match for this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "date": "2026-10-18",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Proper coproduct preservation: the uniform truncation-window argument on the ordinary bounded-constructible localizing hull. Canonical Postnikov derived-limit triangle with exact products",
+   "via": [
+    "lem-sfb-adic-proper-truncation-bound",
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.PostnikovDerivedLimit",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/PostnikovDerivedLimit.lean",
+  "declaration": "DerivedCategory.lowerTruncation_isDerivedLimitTriangle",
+  "statement": "theorem lowerTruncation_isDerivedLimitTriangle\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (K : DerivedCategory A)\n    [HasProduct (fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)] :\n    ∃ δ : (∏ᶜ (fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)) ⟶ K⟦(1 : ℤ)⟧,\n      IsDerivedLimitTriangle\n        (fun n : ℕ ↦ (TStructure.t.natTransTruncGEOfLE\n          (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app K)\n        K (Pi.lift (fun n : ℕ ↦ (TStructure.t.truncGEπ (-(n : ℤ))).app K)) δ",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

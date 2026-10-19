@@ -1,0 +1,134 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/_section.md",
+  "place": "D4 coefficient-relative proper truncation proof"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Proper coproduct preservation: the uniform truncation-window argument on the ordinary bounded-constructible localizing hull. Comparison of local finite presentation and finite constant models under local freeness",
+   "via": [
+    "lem-sfb-adic-proper-truncation-bound",
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "date": "2026-10-19",
+  "group": "D4"
+ },
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented sheaf of modules over a field condensed coefficient is locally finite free and has a constant finite presentation",
+   "date": "2026-10-18",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, Condensed.finFree, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.IsFinitelyPresented",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*[Cc]oproduct|[Cc]oproduct.*ind|[Ll]ocally.*[Ff]ree.*[Pp]resent",
+   "date": "2026-10-18",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/CategoryTheory/Limits/Preserves/SigmaConst.lean, Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean",
+   "verdict": "No exact match; the cited Mathlib constructions supply components of the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented sheaf modules that are locally finite free are locally isomorphic to pullbacks of finite constant modules",
+   "date": "2026-10-19",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso, SheafOfModules.isFinitePresentation, SheafOfModules.free, SheafOfModules.ιFree",
+   "verdict": "Component declarations only; no exact match for this statement."
+  }
+ ],
+ "id": "new-lem-sfb-lfp-free-constant-comparison",
+ "kind": "statement",
+ "title": "Comparison of local finite presentation and finite constant models under local freeness",
+ "statement": "Let Lambda be a commutative condensed ring in universe u. Suppose that for every scheme T in universe u with Noetherian underlying space, every locally finitely presented internal Lambda_T-module becomes a finite free module on a pro-etale cover. On any scheme X with Noetherian underlying space which is quasi-compact and quasi-separated, the object property IsConstructibleModuleObject Lambda_X [def-sfb-constructible-module] equals IsConstantModelConstructible Lambda X [sk-def-sfb-constructible]. The equality concerns the same ordinary internal module objects; the latter uses finite presentations pulled back from the profinite point, and neither side imposes derived completeness.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/_section.md",
+  "place": "strict intermediate step"
+ },
+ "proof": [
+  {
+   "text": "A finite free coefficient module has a finite presentation (the cokernel of the zero endomorphism). Pullback from the point preserves finite biproducts and cokernels, so finite presentations of constant models pull back to finite presentations on the covering schemes. The canonical coefficient pullback isomorphism transports finite presentations between normalized and raw inverse images.",
+   "uses": [
+    "def-sfb-locally-finitely-presented",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each stratum of a source-constructible module, the underlying scheme is Noetherian. Normalize the coefficient inverse image and apply the local freeness hypothesis. A finite free sheaf is the pullback of the corresponding finite free module over the point. The coefficient isomorphism yields the required finite constant local model without changing the stratification.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely pull each finite constant presentation back from the point and then along the coefficient isomorphism. This gives locally finite presentation of the raw inverse image on each of the same strata. The two implications are pointwise equality of object properties; zero ranks and empty strata use the same argument.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented",
+  "sk-def-sfb-constructible"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeConstantModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeConstantModelComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_eq_constantModels_of_lfp_locally_free",
+  "statement": "theorem constructible_eq_constantModels_of_lfp_locally_free\n    (hLF : ∀ (Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace Y]\n      (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)),\n      IsLocallyFinitelyPresented (condensedRingObj Λ Y) M →\n      ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i,\n        Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj (condensedRingObj Λ Y))\n          (((upperStar Ab.{u + 1} (U.f i)).mapMod (condensedRingObj Λ Y)).obj M))\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    [CompactSpace X] [QuasiSeparatedSpace X] :\n    IsConstructibleModuleObject (condensedRingObj Λ X) =\n      IsConstantModelConstructible Λ X",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-19"
+ },
+ "stmt_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented",
+  "sk-def-sfb-constructible"
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T192706-L-1855853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
