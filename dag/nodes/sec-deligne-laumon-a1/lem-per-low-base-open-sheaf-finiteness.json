@@ -17,9 +17,125 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $T$ is Noetherian since it is of finite type over $S$. Every open of $T$ is quasi-compact, so $j$ is quasi-compact and of finite type; in particular its higher direct images admit the strict-local stalk formula. Regularity makes $S$ normal, and its finitely many irreducible components are disjoint open integral schemes. Work on each component and combine the resulting finite stratifications and vanishing bounds at the end. Open restriction commutes with $Rj_*$. The empty base has empty $T$, hence the assertion is immediate.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-derived-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197"
+   }
+  },
+  {
+   "text": "Now $S$ is integral. Apply generic open-image finiteness to obtain a nonempty open $S^\\circ$ and a bound $b_0$. By open restriction, $G_q=R^qj_*F$ is constructible on $T^\\circ=T\\times_SS^\\circ$ and is zero there for $q>b_0$. This generic input has no finite-type-over-a-field assumption. It applies to the original constant coefficient field $A$.",
+   "uses": [
+    "lem-per-noetherian-base-generic-open-finiteness",
+    "lem-weil-pbc-derived-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197"
+   }
+  },
+  {
+   "text": "The proper closed subset $E=S\\setminus S^\\circ$ contains no generic point. Each of its irreducible components is therefore a single closed point: a strict specialization inside such a component would, with the generic point of $S$, make a chain of length two, contrary to $\\dim S\\leq1$. There are finitely many such components, say $s_1,\\ldots,s_r$. If $S$ has dimension zero, $E$ is empty. Otherwise each $\\mathcal O_{S,s_a}$ is regular local of dimension one, hence a DVR. Put $S_a=\\operatorname{Spec}\\mathcal O_{S,s_a}$ and form $j_a:V_a\\hookrightarrow T_a$ by base change. The closed fibre of $T_a$ is exactly $T_{s_a}$, with the same residue field.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-kun-topological-krull-dimension",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197"
+   }
+  },
+  {
+   "text": "For each $a$, let $p_a:T_a\\to T$ and let $F_a$ be the inverse image of $F$. It is constructible: pull its finite stratification and its finite constant local trivializations back to $V_a$. The base map $S_a\\to S$ is locally ind-etale: on an affine neighbourhood of $s_a$, localization is the filtered colimit of the localizations at elements outside its prime, each an open immersion. The same holds for $p_a$. For a geometric point $t$ of $T_a$, ind-etale strict-local invariance identifies $(T_a)_{(t)}$ with $T_{(p_at)}$. The two stalk formulas for $j_a$ and $j$ are thus the cohomology of the identical scheme $V\\times_TT_{(p_at)}$ with the identical pulled-back sheaf. Their canonical restriction maps are isomorphisms. The forgetful comparison supplies these formulas for $A$-module higher direct images; the maps commute with the action of every scalar in $A$. Stalk conservativity therefore gives $p_a^{-1}G_q\\cong R^qj_{a*}F_a$ for every $q$. Exact inverse image allows us to commute restriction with cohomology.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-constructible-pullback-stratification",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-pur-scheme-constructible-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), local reduction, expanded using Stacks etale-cohomology.tex theorem-higher-direct-images and strict-local invariance"
+   }
+  },
+  {
+   "text": "Apply closed-fibre DVR finiteness to $j_a,F_a$; all its hypotheses hold since $\\ell$ remains a unit and separated finite-type morphisms and open immersions retain their properties after base change. Using the preceding isomorphism and then pulling back to the closed fibre gives that $G_q|_{T_{s_a}}$ is constructible for every $q$, and zero there for $q>b_a$, for some $b_a\\geq0$. Only this restriction is taken from the local input. No comparison with the direct image of $j_{s_a}$ is claimed.",
+   "uses": [
+    "lem-per-dvr-open-image-closed-fibre-finiteness",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197"
+   }
+  },
+  {
+   "text": "For fixed $q$, choose finite constructible locally closed stratifications trivializing $G_q$ on $T^\\circ$ and each $T_{s_a}$. Regard these strata as subschemes of $T$ by composing their immersions with the open immersion $T^\\circ\\to T$ or the closed immersion $T_{s_a}\\to T$. A locally closed subset of a locally closed subset is locally closed; in the Noetherian space $T$ each such subset is constructible. The finitely many stratifications are disjoint and cover $T$, and the same finite constant module trivializations still apply. This is precisely the defining stratification of a constructible $A_T$-module sheaf. Take $c_F=\\max(\\{0,b_0\\}\\cup\\{b_a:1\\leq a\\leq r\\})$. If $q>c_F$, every geometric stalk of $G_q$ lies either over $S^\\circ$ or over one of the $s_a$, where the restriction is zero. Stalk conservativity gives $G_q=0$. Taking the maximum over the finitely many components from step 1 finishes the proof.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-per-noetherian-base-generic-open-finiteness",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-kun-topological-krull-dimension",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lemma-constructible-pullback-stratification",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-per-dvr-open-image-closed-fibre-finiteness",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIII, Theorem 2.3.1(i), proof, printed p.197: generic finiteness, then local regular dimension-one finiteness; finite-stratification gluing and the localization comparison expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +179,89 @@
    "results": "{\"t\": \"2026-10-18T23:32:28Z\", \"tool\": \"grep\", \"query\": \"constructible.*direct|direct.*constructible|higherDirectImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*constructib|constructib.*generic",
+   "results": "{\"t\": \"2026-10-19T00:06:47Z\", \"tool\": \"grep\", \"query\": \"generic.*constructib|constructib.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic finiteness for etale cohomology over an integral Noetherian base",
+   "results": "{\"t\": \"2026-10-19T00:06:47Z\", \"tool\": \"leansearch\", \"query\": \"Generic finiteness for etale cohomology over an integral Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"249edc9be5941f8e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-19T00:06:47Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_comp\"], \"digest\": \"284f840d705be9bd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism over an integral Noetherian scheme, higher direct images of a constructible etale torsion sheaf are bounded constructible after shrinking the base",
+   "results": "{\"t\": \"2026-10-19T00:06:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism over an integral Noetherian scheme, higher direct images of a constructible etale torsion sheaf are bounded constructible after shrinking the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"chevalley_mvPolynomial_mvPolynomial\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"bf97044939fdd324\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic base change and bounded constructibility for an open immersion of schemes over an arbitrary integral noetherian base",
+   "results": "{\"t\": \"2026-10-19T00:07:19Z\", \"tool\": \"leanfinder\", \"query\": \"Generic base change and bounded constructibility for an open immersion of schemes over an arbitrary integral noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen\"], \"digest\": \"8c5dc33ff52be950\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "trait.*constructib|constructib.*trait|higherDirectImage",
+   "results": "{\"t\": \"2026-10-19T00:06:47Z\", \"tool\": \"grep\", \"query\": \"trait.*constructib|constructib.*trait|higherDirectImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness on the special fibre of an open immersion over a trait for constructible etale sheaves",
+   "results": "{\"t\": \"2026-10-19T00:06:47Z\", \"tool\": \"leansearch\", \"query\": \"Finiteness on the special fibre of an open immersion over a trait for constructible etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"3bf99606dd65a257\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-19T00:06:48Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing\", \"IsDiscreteValuationRing.toEuclideanDomain\", \"IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization\", \"IsDiscreteValuationRing.toWithBotNat\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.addVal\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\"], \"digest\": \"17892b08ba654294\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a discrete valuation ring, the restriction to the closed fibre of the derived direct image under an open immersion is bounded constructible for finite torsion coefficients",
+   "results": "{\"t\": \"2026-10-19T00:06:49Z\", \"tool\": \"leanfinder\", \"query\": \"Over a discrete valuation ring, the restriction to the closed fibre of the derived direct image under an open immersion is bounded constructible for finite torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isConstructible_comap_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"PrimeSpectrum.BasicConstructibleSetData.map\"], \"digest\": \"f0317e1b06da061b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility and eventual vanishing of higher direct images restricted to the special fibre for schemes of finite type over a DVR",
+   "results": "{\"t\": \"2026-10-19T00:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"Constructibility and eventual vanishing of higher direct images restricted to the special fibre for schemes of finite type over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"a914edbb63d92298\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*direct|direct.*constructible|rightDerivedLowerStar",
+   "results": "{\"t\": \"2026-10-19T00:07:16Z\", \"tool\": \"grep\", \"query\": \"constructible.*direct|direct.*constructible|rightDerivedLowerStar\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern constructible subsets, scheme morphisms, affine limits or DVR algebra; none gives etale higher-direct-image finiteness",
+   "sub": "AlgebraicGeometry/Sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-low-base-constructible-internal-hom",
@@ -94,5 +289,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-low-base-open-sheaf-finiteness",
+  "worker": "stage1",
+  "summary": "Kept the statement and both coefficient and base hypotheses. Expanded the dimension-one proof into a dense-open reduction and finitely many DVR closed-fibre tests. Added statement-only generic finiteness and local boundary finiteness inputs; proved the needed localization comparison stalkwise with existing nodes, and wrote out finite-stratification gluing and the maximum of the finite vanishing bounds. No excellence or purity theorem is used.",
+  "blueprint": "Proof Step 1, dimension-normalized Verdier duality, via the regular finite-torsion duality input: the local biduality invoked in ILO Expose XVI, Lemma 3.5.9 proof, printed p.250, before the purity of the target is proved. Here: constructibility of the biduality cone before the dimension-one projective-line induction. Specifically: the open direct-image finiteness input in the Noetherian open/closed devissage proving low-base internal-Hom finiteness. The six steps supply its independent low-base open-direct-image input in the constructible internal-Hom devissage, preserving the current unit route.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic scheme/sheaf tool for the finite-base-strata reduction or its localization stalk calculation; the perverse Fourier unit supplies no corresponding statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-sc-regular-dim1-dvr",
+  "lemma-constructible-pullback-stratification",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-40f19883e",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-40f19883e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, ILO XIII 2.3.1 with its proof sketch (printed p.197) and Zheng 3.16(1) (printed p.19). The item statement is unchanged from the earlier unsplit copy, its sources cite no SGA, and its closure contains no via-ancestor (no cycle). The six steps follow ILO's route: generic open plus local DVR. Step 1 uses rem-pc-regular-normal to reduce to integral components, with open restriction. Step 3 shows every non-generic point is closed because dim<=1, so E is a finite set of closed points, each with a DVR local ring by lem-sc-regular-dim1-dvr. Step 4 compares S_a->S with S by ind-Zariski localization: the invariance node gives (T_a)_(t)=T_(p_a t) over T, then the stalk formula, the forget comparison and conservativity give the isomorphism (the global base-change arrow is the standard adjunction map). Step 5 checks the hypotheses of the DVR node by base-change nodes; the closed fibre of T_a is T_{s_a}. Step 6 glues the strata, which is elementary in Noetherian T, and takes the maximum of finitely many bounds. The generic node is Deligne's generic finiteness over an integral Noetherian base, true and not a duplicate: thm-fin-deligne-generic-open and sk-thm-geo-generic-open need a base of finite type over a field, and the Gabber/quasi-excellent nodes need excellence. A later split of it must avoid SGA 4 1/2. The DVR closed-fibre node is true by ILO 2.3.1(i) or Zheng over Spec R, and strictly smaller than the item (local base, closed fibre only). A non-SGA split exists: completion plus Gabber-Fujiwara plus lem-per-quasi-excellent-etale-direct-image-finiteness. It is not a duplicate of the nearby-cycle or quasi-excellent nodes. Batch-5 check: lem-trf-ind-etale-strict-local-invariance is Stacks 05WR, generic, and its 253-node closure has no other trace-formula or Poincare-duality node; I accept it. The only other such node in the closure is lem-pod-separated-finite-type-base-change, a generic Mathlib leaf. The generic tool_uses are accepted. Maintainer notes: the item's source.place still mentions the S+Spec Q[t] trick that the proof no longer uses; lem-sc-regular-dim1-dvr should cite tag 00PD, not 00DV."
  }
 }
