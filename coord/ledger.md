@@ -17144,3 +17144,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:32 L: merged deliver/B6/Sheaf.Paper.AffineLineSupportGeometry (stage 3; reviewer PASS; first push; landing 20261019T093258-L-2288094 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/B7/Sheaf.Paper.ConstantTwoTermResolution (stage 3; reviewer PASS; first push; landing 20261019T093259-L-2288396 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/B9/Sheaf.AlgebraicGeometry.NoetherianAffineDimOneOpen (stage 3; reviewer PASS; first push; landing 20261019T093300-L-2288647 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/C1/Sheaf.Paper.ConstructibleFlatCohomologyTorBound (stage 3; reviewer PASS; first push; landing 20261019T093302-L-2288982 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/C1-residue-tor-private-proof-context.md)
