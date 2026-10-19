@@ -21,108 +21,57 @@
  ],
  "proof": [
   {
-   "text": "Let $E(P)=P\\otimes_R S$ on complexes and let $V$ be termwise restriction of scalars. The map $i_P:P\\to VE(P)$ is defined by the sectionwise map $x\\mapsto x\\otimes1$ followed by sheafification [def-pur-sheaf-tensor-product]. It is $R$-linear and commutes with restriction maps and differentials: $d(x\\otimes1)=d(x)\\otimes1$. For a chain map $a:P\\to P'$ one has $VE(a)i_P=i_{P'}a$. For a chain homotopy $h$ the termwise tensor homotopy is $h\\otimes1$, since $E(dh+hd)=E(d)E(h)+E(h)E(d)$. Thus $E,V$ and $i$ are defined on the homotopy categories. Restriction leaves the underlying abelian sheaf unchanged, so preserves kernels and sheafified cokernels [def-pc-sheaf-restrict-scalars, def-weil-sheaf-of-modules-category]. It is exact; [lem-weil-pbc-exact-functor-derived-factorization] gives $U$ and the termwise identification $UQ_S\\cong Q_RV$, compatible with the canonical shifts.",
+   "text": "Construct the ordinary coefficient natural transformation sectionwise using the module extension/restriction adjunction unit followed by module sheafification. Naturality follows from naturality of the two units. Prove restriction exact by reflecting finite limits and colimits with toSheaf; establish preservation of colimits by toSheaf using its compatibility with module sheafification.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the specified-counit computation theorem to obtain F.IsTriangulated and invertibility of epsilon at every K-flat complex. Use K-flat resolutions and the general coefficient-map descent theorem to obtain eta, its counit comparison on every complex, and its shift equation.",
+   "uses": [
+    "lem-sbc-scalar-extension-counit-properties",
+    "lem-sbc-derived-coefficient-map-descent",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p:P -> K a K-flat resolution take c = inv(F(Qp)) followed by epsilon_P. Naturality of eta at Qp and cancellation give the required roof equation. For two transformations satisfying the roof predicate, use the same resolution: the counit equation forces their comparison c to agree. Cancel Qp, derived restriction of c, and the restriction factorization. Localization extensionality then identifies the transformations.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03EK (sites-modules-section-tensor-product), 03DA (sites-modules-lemma-abelian), and 015F (derived-lemma-right-derived-exact-functor); explicit coefficient-map construction by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $\\mathcal P$ for the full homotopy subcategory of K-flat $R$-complexes with flat terms, $W$ for its quasi-isomorphisms and $L=Q_R|_{\\mathcal P}$. By [lem-weil-pbc-site-derived-tensor-descent], $W^{-1}\\mathcal P\\to D(R)$ is an equivalence; consequently $L$ is a localization at $W$ (compose its localization equivalence with that equivalence). By [lem-pur-derived-change-of-rings], $Q_SE$ inverts $W$, and on $\\mathcal P$ there is the canonical comparison $c_P:F(LP)\\xrightarrow{\\sim}Q_SE(P)$. This comparison is natural: it is the restriction of the derived-functor counit, whose naturality and invertibility on the resolving class are stated in [lem-pur-left-derived-from-kflat-class]. Compose with the termwise restriction identification of Step 1 to obtain $b_P:UF(LP)\\xrightarrow{\\sim}Q_RVE(P)$. Define $j_P=b_P^{-1}Q_R(i_P):LP\\to UF(LP)$. Step 1 and naturality of $b$ make $j$ a natural transformation $L\\to UF\\circ L$. Both functors invert $W$. Clause (2) of [lem-weil-pbc-localization-universal-property], applied to this $L$, extends $j$ uniquely to $\\eta:\\mathrm{id}_{D(R)}\\to UF$.",
+   "text": "The composite F followed by derived restriction preserves distinguished triangles. Its triangle morphism has eta at each of its three vertices. The first two squares are naturality; naturality at the third arrow followed by the already obtained shift equation is precisely the connecting square.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 0G7D and 06YY; derived.tex Tag 06XN; localization natural-transformation universal property, as stated in the cited node"
-   }
-  },
-  {
-   "text": "First suppose $p:P\\to C$ is a K-flat resolution with flat terms. Naturality of $\\eta$ for $Q_Rp$ gives $\\eta_{Q_RC}=UF(Q_Rp)\\eta_{Q_RP}(Q_Rp)^{-1}$. The resolution identification is $F(Q_RC)\\xrightarrow{F(Q_Rp)^{-1}}F(Q_RP)\\xrightarrow{c_P}Q_SE(P)$ [lem-pur-derived-change-of-rings]. In that identification the last equality becomes exactly $Q_R(i_P)(Q_Rp)^{-1}$, the required roof. This also proves uniqueness from the roof characterization: every complex has such a resolution by [lem-pc-kflat-resolution], and every object of $D(R)$ is represented by a complex [def-weil-abstract-derived-category].",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 06YY, resolution comparison; agent calculation of the component"
-   }
-  },
-  {
-   "text": "Now let $p:P\\to C$ be any K-flat resolution, with no condition on its terms. Choose a K-flat resolution $t:T\\to P$ with flat terms by [lem-pc-kflat-resolution]. Then $pt:T\\to C$ is another such resolution. Put $a=Q_Rt$ and $e=UQ_S(E(t))$. Both are isomorphisms: for $e$ use clause (1) of [lem-pur-derived-change-of-rings], since both $T$ and $P$ are K-flat. The sectionwise equality $E(t)i_T=i_Pt$ gives $eQ_R(i_T)=Q_R(i_P)a$. Multiplying by $a^{-1}(Q_Rp)^{-1}$ gives\n$$eQ_R(i_T)(Q_R(pt))^{-1}=Q_R(i_P)(Q_Rp)^{-1}.$$\nThe canonical comparison between the $T$ and $P$ computations of $F(Q_RC)$ is $Q_SE(t)$ by naturality of its derived counit [lem-pur-left-derived-from-kflat-class]. Hence the already established roof for $pt$ is the proposed roof for $p$. Every roof therefore represents the same $\\eta_{Q_RC}$, proving independence of all resolutions, not merely those with flat terms.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 06YT, together with Tag 06YY; agent refinement comparing arbitrary K-flat resolutions"
-   }
-  },
-  {
-   "text": "The class $\\mathcal P$ is stable under $[1]$: terms are merely reindexed, and the total tensor with $P[1]$ is the shift of the total tensor with $P$ (in a term $A^a\\otimes P^{b+1}$ the comparison multiplies by $(-1)^a$); thus the K-flat test remains acyclic [def-pc-kflat-complex]. On scalar extension, $S$ is in degree zero and the termwise comparison $\\theta_P:E(P[1])\\to E(P)[1]$ is the identity, since both differentials are $-d_P\\otimes1$. Restriction likewise has identity termwise shift comparison $\\tau$, and $\\varphi$ of [lem-weil-pbc-exact-functor-derived-factorization] is compatible with it (its clause (2)). Therefore $i_{P[1]}=i_P[1]$ degree by degree: both send $x\\in P^{r+1}$ to $x\\otimes1$. The canonical shift structure $\\sigma$ of $F$ is the unique one for which the derived counit $\\varepsilon$ commutes with $\\theta$ and the shift isomorphisms of $Q_R,Q_S$ [lem-sbc-derived-scalar-extension-counit-shift]; $c_P=\\varepsilon_P$ on $\\mathcal P$. For $P\\in\\mathcal P$, naturality of $\\eta$ at $s_P:Q_R(P[1])\\cong(Q_RP)[1]$ gives $\\eta_{(Q_RP)[1]}=UF(s_P)\\,j_{P[1]}\\,s_P^{-1}$. Insert the definitions $j=b^{-1}Q_R(i)$ at $P$ and $P[1]$; the two compatibilities just cited turn $\\chi_{Q_RP}\\eta_{(Q_RP)[1]}$ into $b_P[1]^{-1}\\,Q_R(i_P)[1]$, which is $\\eta_{Q_RP}[1]$. Thus the two natural transformations $\\chi\\circ\\eta_{[1]}$ and $\\eta[1]$ from $[1]$ to $[1]\\circ UF$ agree at every $L(P)$. Clause (3) of [lem-weil-pbc-localization-universal-property] then makes them equal on $D(R)$. This proves $\\chi_X\\eta_{X[1]}=\\eta_X[1]$ with the specified sign convention.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sbc-derived-scalar-extension-counit-shift",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, canonical shift structure of the K-flat derived functor; agent calculation using the tensor differential and derived.tex Definition 014V"
-   }
-  },
-  {
-   "text": "Let $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ be distinguished. The functor $F$ with its canonical shift structure $\\sigma$ is triangulated by [lem-sbc-derived-scalar-extension-counit-shift], and $U$ with its termwise shift structure is triangulated by [lem-weil-pbc-exact-functor-derived-factorization] clause (1) (the functor of [lem-sf-exact-functor-derived-triangulated]). Thus $UF(\\Delta)$ is distinguished and has last arrow $\\chi_XUF(w)$. Naturality gives $UF(u)\\eta_X=\\eta_Yu$ and $UF(v)\\eta_Y=\\eta_Zv$, and at $w$ it gives $UF(w)\\eta_Z=\\eta_{X[1]}w$. Substitute Step 5 to obtain\n$$\\chi_XUF(w)\\eta_Z=\\chi_X\\eta_{X[1]}w=\\eta_X[1]w.$$\nThese are exactly the three squares in a morphism of triangles [def-weil-triangulated-category]. The construction and the cited K-flat results use no flatness of $S$, cohomological bounds, constructibility or points.",
-   "uses": [
-    "lem-sbc-derived-scalar-extension-counit-shift",
-    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-sf-exact-functor-derived-triangulated",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY; derived.tex Tags 015F and 014V; naturality calculation by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-localization-universal-property",
+  "lem-sbc-scalar-extension-counit-properties",
+  "lem-sbc-derived-coefficient-map-descent",
   "lem-pc-kflat-resolution",
-  "def-weil-abstract-derived-category",
-  "def-pc-kflat-complex",
-  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sf-exact-functor-derived-triangulated",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YT, 0G7D, 06YY and the existing resolving-class localization and derived-functor universal properties; explicit scalar-map descent and shift calculation"
+  "place": "Tags 06YS, 06YT and 06YY; sectionwise unit and exactness proofs, proved derived-counit and descent lemmas, followed by Lean cancellation and triangle-square proofs."
  },
  "mathlib_searches": [
   {
@@ -257,7 +206,6 @@
  },
  "tool_uses": [
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-derived-change-of-rings",
   "lem-pur-left-derived-from-kflat-class",
   "lem-pc-kflat-resolution",
@@ -294,5 +242,15 @@
   "group": "Q59",
   "result": "pass",
   "note": "Read node, all 10 stmt deps, report, module, check-brief2; node unchanged except lean field; statement verbatim in file. Clause match: E/h/hmap pin changeOfRings exactly (dependency interface); F,ε universal left derived pair (Q = quotient ⋙ Qh); NatTrans.CommShift ε is verbatim the defining condition of the canonical counit-compatible shift of lem-sbc-derived-scalar-extension-counit-shift (unique), so not an extra assumption and no −σ ambiguity; restriction exactness and F.IsTriangulated are conclusions; ι pinned sectionwise to sheafification unit ∘ (x ↦ 1⊗x), unique and existing; roof over all K-flat resolutions with c = F(Qp)⁻¹ε_P, plus uniqueness; χ∘η[1] = η[1] via composite commShiftIso; triangle morphism with components η and comm₃ = the node's connecting square. Edge cases (id, S=0, zero complex, empty site, ℤ→ℤ/2, char 2) and universes u,v,r,wR,wS independent. Gates: helpers real data, docstrings with source and blueprint, sorry-only proof, report sections present. nt_compile --json with side overlay: rc 0, no errors or warnings; helper map axiom-clean; ScalarExtensionUnitRoof's sorryAx comes only from the recorded IsKFlatIndependentCoefficients (postponed Prop instance theorems), not this delivery. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261019T132236-L-1206342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

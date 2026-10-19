@@ -17423,3 +17423,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/Q9/Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension (stage 3; reviewer PASS; first push; landing 20261019T132233-L-1205963 (interface); batch 20261019T132218; modules 2; new nodes 1)
 - 13:22 L: merged deliver/R5/WeilConjectures.ZetaFunction.TraceFormula (stage 3; reviewer PASS; first push; landing 20261019T132234-L-1206123 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/S6/Sheaf.AlgebraicGeometry.GeometricIrreducibilityAffineLocal (stage 3; reviewer PASS; first push; landing 20261019T132235-L-1206239 (proof); batch 20261019T132218; modules 1; new nodes 0)
+- 13:22 L: merged deliver/T2/Sheaf.Algebra.Homology.ScalarExtensionUnitTriangles (stage 3; reviewer PASS; first push; landing 20261019T132236-L-1206342 (interface); batch 20261019T132218; modules 3; new nodes 2)

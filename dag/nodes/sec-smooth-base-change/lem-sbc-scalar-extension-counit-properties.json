@@ -1,0 +1,123 @@
+{
+ "id": "lem-sbc-scalar-extension-counit-properties",
+ "kind": "statement",
+ "title": "K-flat computation and triangulatedness of a specified scalar-extension counit",
+ "statement": "Let C be a site essentially small relative to the coefficient universe r, with sheafification of abelian-group presheaves and the local-bijection characterization used for module sheaves. Let phi:R -> S be a morphism of sheaves of commutative rings. Let E be additive ordinary sheafified scalar extension, specified on objects and maps by changeOfRings and changeOfRingsHom. Let (F,epsilon) be any universal left derived pair for termwise E on cochain complexes and derived localization, allowing independent Hom universes for D(R) and D(S). Give F a coherent integer shift such that epsilon commutes with shifts. Then F is triangulated for that shift, and epsilon_P is invertible for every K-flat R-complex P, without any termwise flatness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT and 06YY; derived.tex Tags 06XN, 05SU and 05SE, as used in the parent proof steps 2–5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Take the existing cochain derived-change-of-rings model with independent universes. The prescribed objects and maps identify its ordinary functor with E by a natural isomorphism. Transport its universal pair, and compare it to the given one by uniqueness of right Kan extensions. The counit comparison transfers invertibility at every K-flat complex.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass the given counit to homotopy categories along the full essentially surjective homotopy quotient. Apply the scalar-extension counit-shift theorem. Its uniqueness clause identifies its triangulated degree-one comparison with the given one, since commutation of epsilon with shifts is its defining equation. Therefore the given F preserves distinguished triangles.",
+   "uses": [
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent scalar-extension-unit proof steps 2–5; universal-property argument spelled out in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(postcomp|[Cc]omp)|[Pp]ostcomp.*[Kk]an",
+   "results": "12 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-19",
+   "verdict": "Relevant universal-property and derived-adjunction APIs, but no single theorem gives this statement with these independent universes and counit data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Adjunction",
+   "results": "9 hits: CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-19",
+   "verdict": "Relevant universal-property and derived-adjunction APIs, but no single theorem gives this statement with these independent universes and counit data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of derived extension and restriction of scalars commutes with shifts and preserves distinguished triangles",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-19",
+   "verdict": "Relevant universal-property and derived-adjunction APIs, but no single theorem gives this statement with these independent universes and counit data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal derived extension of scalars counit is invertible on K flat complexes and its compatible shift preserves distinguished triangles",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.Functor.totalLeftDerivedCounit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, comonadicExtendScalars",
+   "date": "2026-10-19",
+   "verdict": "The returned counits are underived module adjunctions or the abstract total-left-derived counit. Exact-functor triangulatedness assumes ordinary exactness and does not apply to arbitrary scalar extension. No matching K-flat counit computation and shift identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarExtensionUnitTriangles",
+  "date": "2026-10-19",
+  "group": "T2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Current blueprint proof Step 1, tensoring the truncation triangle, and Step 3, compatibility with normalization maps by canonicality: the scalar-extension maps comparing the original and reduced triangles.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarExtensionCounitProperties",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarExtensionCounitProperties.lean",
+  "declaration": "SheafOfModules.scalarExtension_counit_properties",
+  "statement": "theorem scalarExtension_counit_properties\n    (φ : R ⟶ S)\n    [HasDerivedCategory.{wR} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R))]\n    [HasDerivedCategory.{wS} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))]\n    (E : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R) ⥤\n      ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))\n    (h : ∀ M : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R),\n      E.obj M = changeOfRings.{v, u, r} φ M)\n    (hmap : ∀ {M N : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)}\n      (f : M ⟶ N),\n      E.map f = eqToHom (h M) ≫ changeOfRingsHom.{v, u, r} φ M f ≫ eqToHom (h N).symm)\n    [E.Additive]\n    (F : DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) ⥤\n      DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S)))\n    (ε : DerivedCategory.Q ⋙ F ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    [F.IsLeftDerivedFunctor ε\n      (HomologicalComplex.quasiIso\n        (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (.up ℤ))]\n    [F.CommShift ℤ] [NatTrans.CommShift ε ℤ] :\n    F.IsTriangulated ∧\n      ∀ P : CochainComplex\n        (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) ℤ,\n        CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →\n          IsIso (ε.app P)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261019T132236-L-1206342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261019T132236-L-1206342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
