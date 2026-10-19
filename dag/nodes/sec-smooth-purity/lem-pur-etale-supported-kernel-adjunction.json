@@ -17,96 +17,55 @@
  ],
  "proof": [
   {
-   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite]. Apply [lemma-weil-pbc-finite-direct-image-exact] to $i$ in the category of abelian etale sheaves. Thus $i_*$ is exact on all abelian sheaves, with no finiteness hypothesis on their sections and no quasi-compactness hypothesis on $j$.",
+   "text": "A closed immersion is finite by [lem-weil-pbc-closed-immersion-finite]. The existing preservesFiniteLimits_lowerStar instance and [lemma-weil-pbc-finite-direct-image-exact] supply the two exactness classes.",
    "uses": [
     "lem-weil-pbc-closed-immersion-finite",
     "lemma-weil-pbc-finite-direct-image-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof: exactness of i_*; section-closed-immersions."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $u_F:F\\to j_*j^{-1}F$ for the unit of [def-weil-pbc-inverse-image] and $a_F:P_Z(F)\\to F$ for its kernel inclusion [def-pur-abelian-sheaf-kernel]. For $v:F\\to F'$, naturality gives $u_{F'}v=j_*j^{-1}(v)u_F$, so $v a_F$ factors uniquely through $a_{F'}$; these factorizations define $P_Z$ on morphisms and obey the functor laws by uniqueness. Applying $i^{-1}$ defines the stated functor $i^!_0$. By [prop-weil-pbc-inverse-image-exact], $j^{-1}$ preserves this kernel. The counit $\\varepsilon^j:j^{-1}j_*\\to1$ is invertible by [lem-kun-open-immersion-restriction]; the triangle identity $\\varepsilon^j_{j^{-1}F}\\,j^{-1}(u_F)=1$ makes $j^{-1}(u_F)$ its inverse. Hence $j^{-1}P_Z(F)=\\ker(j^{-1}u_F)=0$, naturally in $F$.",
+   "text": "Evaluate the functor-category kernel at each sheaf F. PreservesKernel.iso for evaluation identifies it with the objectwise kernel sectionsWithSupport AddCommGrpCat j in WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek. After composing with the kernel inclusion, naturality is exactly naturality of the functor-category kernel inclusion; cancellation proves this is a natural isomorphism e. The existing isZero_upperStar_sectionsWithSupport proves restriction of the objectwise kernel is zero: inverse image preserves kernels and the image of the open unit is invertible by the invertible open counit and the triangle identity. Transport this vanishing along j^*(e_F).",
    "uses": [
-    "def-weil-pbc-inverse-image",
     "def-pur-abelian-sheaf-kernel",
+    "def-weil-pbc-inverse-image",
     "prop-weil-pbc-inverse-image-exact",
     "lem-kun-open-immersion-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ, preceding paragraph defining H_Z; Tag 04CA, proposition-closed-immersion-pushforward; open counit as restriction in section-extension-by-zero."
-   }
+   "elementary": false
   },
   {
-   "text": "For any abelian sheaf $H$ on $X$, [lem-weil-pbc-inverse-image-stalk-germ] identifies $(j^{-1}H)_{\\bar o}$ with $H_{j\\bar o}$. Every geometric point of $X$ outside $Z$ factors through the open subscheme $O$. Thus $j^{-1}H=0$ implies that every geometric stalk of $H$ outside $Z$ vanishes. Conversely, if all those stalks vanish, all stalks of $j^{-1}H$ vanish, and [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to j^{-1}H$ gives $j^{-1}H=0$. By [lem-kun-04ca], this vanishing criterion is precisely membership in the essential image of $i_*$. In particular Step 2 gives $P_Z(F)\\cong i_*B$ for some abelian sheaf $B$ on $Z$, and applying the converse criterion to $i_*G$ gives $j^{-1}i_*G=0$ for every abelian sheaf $G$ on $Z$.",
+   "text": "Apply isIso_upperStarLowerStarAdjunction_unit_app_of_isZero from the same existing library module to each supportedKernel(j)(F). Its proof puts a sheaf vanishing on the open complement in the closed essential image [lem-kun-04ca], uses the invertible closed counit [prop-openclosed-lowerstar-fully-faithful] to invert the unit on a closed pushforward, and transfers invertibility by naturality. The resulting pointwise instances make the specified whiskered canonical unit invertible.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-kun-04ca"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04CA, proposition-closed-immersion-pushforward (2), and Tag 09XQ, identification of H_Z with a sheaf on Z."
-   }
-  },
-  {
-   "text": "Let $\\eta^i:1\\to i_*i^{-1}$ be the closed unit [def-weil-pbc-inverse-image]. The closed counit $\\varepsilon^i:i^{-1}i_*\\to1$ is invertible by [prop-openclosed-lowerstar-fully-faithful]. The triangle identity says $i_*(\\varepsilon^i_B)\\eta^i_{i_*B}=1$, so $\\eta^i_{i_*B}=i_*(\\varepsilon^i_B)^{-1}$ is invertible. For an isomorphism $e:P_Z(F)\\to i_*B$ from Step 3, naturality gives $i_*i^{-1}(e)\\eta^i_{P_Z(F)}=\\eta^i_{i_*B}e$. All factors except $\\eta^i_{P_Z(F)}$ are invertible, so it too is invertible. Consequently the particular canonical map $q_F=\\eta^i_{P_Z(F)}:P_Z(F)\\to i_*i^!_0F$ is an isomorphism; naturality of $\\eta^i$ and the functor from Step 2 make $q$ a natural isomorphism.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
+    "lem-kun-04ca",
     "prop-openclosed-lowerstar-fully-faithful"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04CA, proposition-closed-immersion-pushforward, proof: the canonical unit on supported sheaves; Tag 09XQ, preceding paragraph."
-   }
+   "elementary": false
   },
   {
-   "text": "For $h:i_*G\\to F$, the open adjunction [def-weil-pbc-inverse-image] identifies $\\operatorname{Hom}_X(i_*G,j_*j^{-1}F)$ with $\\operatorname{Hom}_O(j^{-1}i_*G,j^{-1}F)$. The latter has only the zero morphism by Step 3. Therefore $u_Fh=0$, and the kernel property [def-pur-abelian-sheaf-kernel] gives a unique $\\widetilde h:i_*G\\to P_Z(F)$ with $a_F\\widetilde h=h$. Conversely every such $\\widetilde h$ yields $h=a_F\\widetilde h$. These operations are inverse and commute with precomposition in $G$ and postcomposition in $F$, since $a$ is natural and its factorizations are unique. This gives a natural bijection $\\operatorname{Hom}_X(i_*G,F)\\cong\\operatorname{Hom}_X(i_*G,P_Z(F))$.",
+   "text": "Reuse lowerStarClosedUpperShriekAdjunction AddCommGrpCat i j hij from WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek, where hij is the equality of the closed image with the complement of the open image obtained from IsCompl.eq_compl. This existing adjunction realizes the original Hom-set argument: j^*i_*G=0 kills the composite with the open unit, so every map i_*G to F factors uniquely through its objectwise kernel; compose with the invertible closed unit and use full faithfulness of i_*. The inverse sends k to i_*k followed by the inverse unit and the kernel inclusion, and kernel uniqueness proves both naturalities. Finally whisker e on the right by i^* and transport the adjunction along its inverse using Adjunction.ofNatIsoRight. Its right adjoint is exactly the unchanged supportedClosedInverseImage i j.",
    "uses": [
+    "def-pur-abelian-sheaf-kernel",
     "def-weil-pbc-inverse-image",
-    "def-pur-abelian-sheaf-kernel"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof: every map from i_*G factors through the subsheaf of supported sections."
-   }
-  },
-  {
-   "text": "Compose the bijection of Step 5 with postcomposition by $q_F$ from Step 4, then with the inverse of the fully faithful map on Hom sets from [lem-kun-04ca]. This gives\n$$\\operatorname{Hom}_X(i_*G,F)\\cong\\operatorname{Hom}_X(i_*G,i_*i^!_0F)\\cong\\operatorname{Hom}_Z(G,i^!_0F).$$\nExplicitly it sends $h$ to the unique $k$ satisfying $i_*k=q_F\\widetilde h$; its inverse sends $k$ to $a_Fq_F^{-1}i_*k$. Substituting these formulas gives the identity in both orders, using faithfulness of $i_*$. Each operation is natural in $G,F$, as shown in Steps 4 and 5 and by functoriality of $i_*$. These are the claimed natural adjunction bijections for $i_*\\dashv i^!_0$, with the exactness of its left adjoint already proved in Step 1.",
-   "uses": [
     "lem-kun-04ca"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, displayed Hom identity in its proof."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-pbc-inverse-image",
   "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-inverse-image",
   "prop-weil-pbc-inverse-image-exact",
   "lem-kun-open-immersion-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-kun-04ca",
   "prop-openclosed-lowerstar-fully-faithful"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof and preceding definition of H_Z; Tag 04CA, proposition-closed-immersion-pushforward (2)."
+  "place": "Tag 09XQ, proof and preceding supported-sheaf construction; Tag 04CA. Reuse the already proved sheaf-level argument in WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek, comparing the kernels by preservation under evaluation (C7)."
  },
  "mathlib_searches": [
   {
@@ -250,5 +209,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261019T231055-L-545656",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

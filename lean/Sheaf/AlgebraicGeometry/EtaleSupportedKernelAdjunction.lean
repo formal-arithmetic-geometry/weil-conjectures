@@ -13,15 +13,8 @@ public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 
 /-!
 # The support kernel and the right adjoint of closed etale direct image
@@ -71,6 +64,23 @@ noncomputable def supportedClosedInverseImage {Z O X : Scheme.{u}}
       Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   supportedKernel j ⋙ upperStar AddCommGrpCat.{u + 1} i
 
+private noncomputable def supportedKernelIso {O X : Scheme.{u}} (j : O ⟶ X) :
+    supportedKernel j ≅ sectionsWithSupport AddCommGrpCat.{u + 1} j :=
+  NatIso.ofComponents
+    (fun F ↦ PreservesKernel.iso
+      ((evaluation _ _).obj F) (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).unit)
+    (by
+      intro F G f
+      apply (cancel_mono
+        (kernel.ι ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).unit.app G))).1
+      simp only [PreservesKernel.iso_hom, sectionsWithSupport, Category.assoc,
+        kernel.lift_ι]
+      erw [kernelComparison_comp_ι]
+      rw [← Category.assoc]
+      erw [kernelComparison_comp_ι]
+      exact (kernel.ι
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).unit).naturality f)
+
 /-- The closed adjunction unit on the support kernel is a natural isomorphism;
 closed direct image is exact and is left adjoint to supported inverse image.
 The `Nonempty` adjunction supplies bijections on Hom sets natural in both sheaves.
@@ -107,6 +117,22 @@ theorem supportedKernel_closedAdjunction
       PreservesFiniteLimits (lowerStar AddCommGrpCat.{u + 1} i) ∧
       PreservesFiniteColimits (lowerStar AddCommGrpCat.{u + 1} i) ∧
       Nonempty (lowerStar AddCommGrpCat.{u + 1} i ⊣ supportedClosedInverseImage i j) := by
-  sorry
+  have hij : Set.range i.base = (Set.range j.base)ᶜ := hcompl.eq_compl
+  let e := supportedKernelIso j
+  have hz (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+      IsZero ((upperStar AddCommGrpCat.{u + 1} j).obj ((supportedKernel j).obj F)) :=
+    (isZero_upperStar_sectionsWithSupport AddCommGrpCat.{u + 1} j F).of_iso
+      ((upperStar AddCommGrpCat.{u + 1} j).mapIso (e.app F))
+  have hu : IsIso (Functor.whiskerLeft (supportedKernel j)
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit) := by
+    have (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+        IsIso ((Functor.whiskerLeft (supportedKernel j)
+          (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit).app F) :=
+      isIso_upperStarLowerStarAdjunction_unit_app_of_isZero
+        AddCommGrpCat.{u + 1} i j hij (hz F)
+    exact NatIso.isIso_of_isIso_app _
+  refine ⟨hu, inferInstance, inferInstance, ⟨?_⟩⟩
+  exact (lowerStarClosedUpperShriekAdjunction AddCommGrpCat.{u + 1} i j hij).ofNatIsoRight
+    (Functor.isoWhiskerRight e (upperStar AddCommGrpCat.{u + 1} i)).symm
 
 end AlgebraicGeometry.Etale
