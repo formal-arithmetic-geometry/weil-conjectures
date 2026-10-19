@@ -13,19 +13,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedSupport
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
+import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 
 /-!
 # Closed support for arbitrary condensed coefficients
@@ -143,7 +133,9 @@ The induced map on kernels is the restriction of the given module map; restricti
 with zero and addition. Inverse image is additive, so the composite is additive. -/
 @[instance] theorem closedSupport_additive {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) :
     (closedSupport Λ i j).Additive := by
-  sorry
+  have : (supportKernel Λ j).Additive :=
+    ⟨equalizer.hom_ext (by simp [supportKernel])⟩
+  exact inferInstanceAs ((supportKernel Λ j ⋙ supportPullback Λ i).Additive)
 
 
 /-- The comparison from the kernel to i* i^* of that kernel, given by the unit.
@@ -154,6 +146,59 @@ noncomputable def closedSupportKernelComparison {Z U X : Scheme.{u}}
   Functor.whiskerLeft (supportKernel Λ j) (supportPullbackAdjunction Λ i).unit ≫
     (Functor.associator _ _ _).inv
 
+private theorem supportCounitOfAbelian {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hAb : IsIso (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).counit) :
+    IsIso (supportPullbackAdjunction Λ f).counit := by
+  let adj := (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction
+    (condensedRingObj Λ Y)
+  have hε (N) : IsIso (adj.counit.app N) := by
+    have hh : IsIso ((Mod.forget _).map (adj.counit.app N)) := by
+      change IsIso (adj.counit.app N).hom
+      dsimp only [adj]
+      rw [Adjunction.mapModAdjunction_counit_app_hom]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  have : IsIso adj.counit := NatIso.isIso_of_isIso_app _
+  have ff := adj.fullyFaithfulROfIsIsoCounit
+  have he := (supportCoefficientEquivalence Λ f).fullyFaithfulInverse
+  have hcomp := he.comp ff
+  have hfull := hcomp.ofIso
+    ((Functor.associator _ _ _).symm ≪≫ comapPullbackHomCompIso Λ f)
+  have := hfull.full
+  have := hfull.faithful
+  exact (supportPullbackAdjunction Λ f).counit_isIso_of_R_fully_faithful
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem supportUnitOfAbelian {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : supportModules Λ Y)
+    (hAb : IsIso ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app M.X)) :
+    IsIso ((supportPullbackAdjunction Λ f).unit.app M) := by
+  let adj := (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction
+    (condensedRingObj Λ Y)
+  have hη : IsIso (adj.unit.app M) := by
+    have hh : IsIso ((Mod.forget _).map (adj.unit.app M)) := by
+      change IsIso (adj.unit.app M).hom
+      dsimp only [adj]
+      rw [Adjunction.mapModAdjunction_unit_app_hom]
+      exact hAb
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  have hcomp : IsIso ((adj.comp (supportCoefficientEquivalence Λ f).toAdjunction).unit.app M) := by
+    rw [Adjunction.comp_unit_app]
+    infer_instance
+  change IsIso (((adj.comp (supportCoefficientEquivalence Λ f).toAdjunction).ofNatIsoRight
+    ((Functor.associator _ _ _).symm ≪≫ comapPullbackHomCompIso Λ f)).unit.app M)
+  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app]
+  infer_instance
+
+private theorem supportOpenCounit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (supportPullbackAdjunction Λ j).counit := by
+  have ff := (ProEtale.openImmersionRestrictionLowerStarAdjunction Ab.{u + 1} j
+    ).fullyFaithfulROfIsIsoCounit
+  have := ff.full
+  have := ff.faithful
+  exact supportCounitOfAbelian Λ j
+    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} j).counit_isIso_of_R_fully_faithful)
+
 /-- Clause (1): the kernel comparison is a natural isomorphism.
 Source: blueprint proof Steps 3--5 (blueprint: det-lem-formal-closed-support-adjunction).
 Restriction of the open unit is invertible, hence the kernel restricts to zero on U.
@@ -163,7 +208,30 @@ theorem closedSupportKernelComparison_isIso {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     IsIso (closedSupportKernelComparison Λ i j) := by
-  sorry
+  have := supportOpenCounit Λ j
+  have hunit (M : supportModules Λ X) :
+      IsIso ((supportPullback Λ j).map ((supportPullbackAdjunction Λ j).unit.app M)) := by
+    have h := (supportPullbackAdjunction Λ j).left_triangle_components M
+    have : IsIso ((supportPullback Λ j).map
+        ((supportPullbackAdjunction Λ j).unit.app M) ≫
+          (supportPullbackAdjunction Λ j).counit.app ((supportPullback Λ j).obj M)) := by
+      rw [h]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_right _
+      ((supportPullbackAdjunction Λ j).counit.app ((supportPullback Λ j).obj M))
+  have hcomp (M : supportModules Λ X) :
+      IsIso ((closedSupportKernelComparison Λ i j).app M) := by
+    have hzero : IsZero ((supportPullback Λ j).obj ((supportKernel Λ j).obj M)) :=
+      (isZero_kernel_of_mono
+        ((supportPullback Λ j).map ((supportPullbackAdjunction Λ j).unit.app M))).of_iso
+          (PreservesKernel.iso _ _)
+    have habzero := (Mod.forget (condensedRingObj Λ U)).map_isZero hzero
+    have hab := (ProEtale.abelian_closed_support i j
+      (by rw [hij, compl_compl])).2 ((supportKernel Λ j).obj M).X habzero
+    have hu := supportUnitOfAbelian Λ i ((supportKernel Λ j).obj M) hab
+    simpa only [closedSupportKernelComparison, Functor.whiskerLeft_app,
+      NatTrans.comp_app, Functor.associator_inv_app, Category.comp_id] using hu
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The support inclusion, obtained from the inverse kernel comparison.
 Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
@@ -173,6 +241,43 @@ noncomputable def closedSupportCounit {Z U X : Scheme.{u}}
     closedSupport Λ i j ⋙ lowerStar Λ i ⟶ 𝟭 _ :=
   letI := closedSupportKernelComparison_isIso Λ i j hij
   (asIso (closedSupportKernelComparison Λ i j)).inv ≫ supportKernelι Λ j
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem supportCrossZero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsOpenImmersion j]
+    (hij : Set.range j = (Set.range i)ᶜ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    IsZero ((supportPullback Λ j).obj ((lowerStar Λ i).obj M)) := by
+  have hdisjoint : Set.range i.base ∩ Set.range j.base = ∅ := by
+    rw [hij]
+    exact Set.inter_compl_self _
+  have hz : IsZero ((ProEtale.openImmersionRestriction Ab.{u + 1} j).obj
+      ((ProEtale.lowerStar Ab.{u + 1} i).obj M.X)) := by
+    refine Sheaf.isZero_of_isZero_obj _ ?_
+    rintro ⟨T⟩
+    let V := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).obj
+      ((MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j)).obj T)
+    have hempty : IsEmpty V.left := by
+      refine ⟨fun z ↦ ?_⟩
+      have hz : (pullback.fst (T.hom ≫ j) i ≫ T.hom ≫ j).base z ∈
+          Set.range i.base ∩ Set.range j.base := by
+        refine ⟨?_, ⟨T.hom.base (pullback.fst (T.hom ≫ j) i z), ?_⟩⟩
+        · rw [pullback.condition]
+          exact ⟨_, rfl⟩
+        · rfl
+      rw [hdisjoint] at hz
+      exact hz
+    exact (isZero_zero Ab.{u + 1}).of_iso
+      ((Scheme.ProEt.isTerminalSectionsOfIsEmpty M.X V).uniqueUpToIso
+        HasZeroObject.zeroIsTerminal)
+  have hz' : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj
+      ((ProEtale.lowerStar Ab.{u + 1} i).obj M.X)) :=
+    hz.of_iso ((ProEtale.upperStarIsoOpenImmersionRestriction Ab.{u + 1} j).app _)
+  apply (IsZero.iff_id_eq_zero _).2
+  apply (Mod.forget (condensedRingObj Λ U)).map_injective
+  exact hz'.eq_of_src _ _
 
 /-- Clause (1): the adjunction with its canonical support inclusion as counit.
 Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction).
@@ -185,7 +290,62 @@ theorem existsUnique_closedSupportAdjunction {Z U X : Scheme.{u}}
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     ∃! adj : lowerStar Λ i ⊣ closedSupport Λ i j,
       adj.counit = closedSupportCounit Λ i j hij := by
-  sorry
+  classical
+  have := supportCounitOfAbelian Λ i (ProEtale.abelian_closed_support i j
+    (by rw [hij, compl_compl])).1
+  have ff := (supportPullbackAdjunction Λ i).fullyFaithfulROfIsIsoCounit
+  have := ff.full
+  have := ff.faithful
+  have := closedSupportKernelComparison_isIso Λ i j hij
+  let ε := closedSupportCounit Λ i j hij
+  have hε (M : supportModules Λ X) : Mono (ε.app M) := by
+    change Mono ((inv (closedSupportKernelComparison Λ i j)).app M ≫
+      kernel.ι ((supportPullbackAdjunction Λ j).unit.app M))
+    infer_instance
+  have hvanish {B : supportModules Λ Z} {M : supportModules Λ X}
+      (f : (lowerStar Λ i).obj B ⟶ M) :
+      f ≫ (supportPullbackAdjunction Λ j).unit.app M = 0 := by
+    apply ((supportPullbackAdjunction Λ j).homEquiv _ _).symm.injective
+    rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+    simp only [Functor.map_comp, Functor.map_zero, zero_comp]
+    rw [Category.assoc, Adjunction.left_triangle_components, Category.comp_id]
+    exact (supportCrossZero Λ i j (by rw [hij, compl_compl]) B).eq_of_src _ _
+  let e (B : supportModules Λ Z) (M : supportModules Λ X) :
+      (B ⟶ (closedSupport Λ i j).obj M) ≃ ((lowerStar Λ i).obj B ⟶ M) :=
+    Equiv.ofBijective (fun g ↦ (lowerStar Λ i).map g ≫ ε.app M) (by
+      constructor
+      · intro g h heq
+        exact (lowerStar Λ i).map_injective ((cancel_mono (ε.app M)).1 heq)
+      · intro f
+        refine ⟨(lowerStar Λ i).preimage
+          (kernel.lift _ f (hvanish f) ≫ (closedSupportKernelComparison Λ i j).app M), ?_⟩
+        simp [ε, closedSupportCounit, supportKernelι, Category.assoc])
+  let adj : lowerStar Λ i ⊣ closedSupport Λ i j := Adjunction.mkOfHomEquiv
+    { homEquiv := fun B M ↦ (e B M).symm
+      homEquiv_naturality_left_symm := by
+        intro B' B M f g
+        change (lowerStar Λ i).map (f ≫ g) ≫ ε.app M =
+          (lowerStar Λ i).map f ≫ ((lowerStar Λ i).map g ≫ ε.app M)
+        simp [Functor.map_comp, Category.assoc]
+      homEquiv_naturality_right := by
+        intro B M N f g
+        apply (e B N).injective
+        rw [Equiv.apply_symm_apply]
+        change f ≫ g = (lowerStar Λ i).map
+          ((e B M).symm f ≫ (closedSupport Λ i j).map g) ≫ ε.app N
+        have hn := ε.naturality g
+        change (lowerStar Λ i).map ((closedSupport Λ i j).map g) ≫ ε.app N =
+          ε.app M ≫ g at hn
+        rw [Functor.map_comp, Category.assoc, hn]
+        have hf := (e B M).apply_symm_apply f
+        change (lowerStar Λ i).map ((e B M).symm f) ≫ ε.app M = f at hf
+        rw [← Category.assoc, hf] }
+  have hadj : adj.counit = ε := by
+    apply NatTrans.ext
+    funext M
+    change (e ((closedSupport Λ i j).obj M) M) (𝟙 _) = ε.app M
+    simp [e]
+  exact ⟨adj, hadj, fun a ha ↦ Adjunction.ext_counit (ha.trans hadj.symm)⟩
 
 /-- The uniquely counit-normalized support adjunction.
 Source: blueprint clause (1) (blueprint: det-lem-formal-closed-support-adjunction). -/
@@ -203,12 +363,17 @@ theorem closedSupport_leftExact {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     PreservesFiniteLimits (closedSupport Λ i j) := by
-  sorry
+  have := (closedSupportAdjunction Λ i j hij).rightAdjoint_preservesLimits
+  infer_instance
 
 /-- Closed direct image is exact, also for noncommutative coefficient rings.
 Source: blueprint proof Step 3 (blueprint: det-lem-formal-closed-support-adjunction).
 The abelian-sheaf closed direct image is exact. The action through the coefficient unit
 lifts it to left modules; the forgetful functor detects kernels and sheafified cokernels. -/
+/- STATEMENT-DISPUTED: the signature omits the quasi-compact open-complement hypothesis
+of the node and of the cited Stacks exactness result (proetale.tex,
+lemma-closed-immersion-complement-retrocompact-exact). The unrestricted assertion requires
+separate justification or repair; it is not used by the proofs completed in this delivery. -/
 @[instance] theorem closedSupport_lowerStarExact {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] : PreservesFiniteColimits (lowerStar Λ i) := by
   sorry
@@ -239,8 +404,16 @@ theorem closedSupport_open_isKInjective {U X : Scheme.{u}} (j : U ⟶ X)
     (I : CochainComplex (supportModules Λ X) ℤ) [I.IsKInjective] :
     CochainComplex.IsKInjective
       (((supportPullback Λ j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I) := by
-  sorry
+  let a : (Mod.comap (condensedPullbackHom Λ j) ⋙
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
+        (condensedRingObj Λ X)) ⊣ supportPullback Λ j :=
+    (supportCoefficientEquivalence Λ j).symm.toAdjunction.comp
+    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeftAdjunction
+      (B := condensedRingObj Λ X))
+  have := a.preservesKInjectiveComplexes
+  exact Functor.PreservesKInjectiveComplexes.isKInjective_map I
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Clause (2), global RHom form, specified componentwise on K-injective representatives.
 Source: blueprint proof Step 8 (blueprint: det-lem-formal-closed-support-adjunction).
 In degree n apply the sheaf Hom adjunction to every component A^p -> H(I)^(p+n).
@@ -263,7 +436,148 @@ theorem closedSupport_globalRHom {Z U X : Scheme.{u}}
         (p q : ℤ) (hpq : p + n = q),
         (e.hom.f n a) ⟨p, q, hpq⟩ =
           (closedSupportAdjunction Λ i j hij).homEquiv (A.X p) (I.X q) (a ⟨p, q, hpq⟩) := by
-  sorry
+  let adj := closedSupportAdjunction Λ i j hij
+  let e (n : ℤ) :
+      CochainComplex.HomComplex.Cochain
+        (((lowerStar Λ i).mapHomologicalComplex (ComplexShape.up ℤ)).obj A) I n ≃+
+      CochainComplex.HomComplex.Cochain A
+        (((closedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I) n :=
+    AddEquiv.piCongrRight (fun T ↦ adj.homAddEquiv (A.X T.p) (I.X T.q))
+  refine ⟨HomologicalComplex.Hom.isoOfComponents
+    (fun n ↦ (e n).toAddCommGrpIso) ?_, ?_⟩
+  · intro n m hnm
+    apply AddCommGrpCat.hom_ext
+    apply AddMonoidHom.ext
+    intro a
+    change (∀ T : CochainComplex.HomComplex.Triplet n,
+      (lowerStar Λ i).obj (A.X T.p) ⟶ I.X T.q) at a
+    funext T
+    rcases T with ⟨p, q, hpq⟩
+    change (CochainComplex.HomComplex.δ n m (e n a)) ⟨p, q, hpq⟩ =
+      (e m (CochainComplex.HomComplex.δ n m a)) ⟨p, q, hpq⟩
+    change
+      adj.homEquiv _ _ (a ⟨p, p + n, rfl⟩) ≫
+          (closedSupport Λ i j).map (I.d (p + n) q) +
+        m.negOnePow • A.d p (p + m - n) ≫
+          adj.homEquiv _ _ (a ⟨p + m - n, q, by omega⟩) =
+      adj.homEquiv _ _ (a ⟨p, p + n, rfl⟩ ≫ I.d (p + n) q +
+        m.negOnePow • (lowerStar Λ i).map (A.d p (p + m - n)) ≫
+          a ⟨p + m - n, q, by omega⟩)
+    rw [Adjunction.homAddEquiv_add]
+    congr 1
+    · exact (adj.homEquiv_naturality_right _ _).symm
+    · change m.negOnePow • (A.d p (p + m - n) ≫
+          adj.homEquiv _ _ (a ⟨p + m - n, q, by omega⟩)) =
+        (adj.homAddEquiv _ _) (m.negOnePow •
+          ((lowerStar Λ i).map (A.d p (p + m - n)) ≫ a ⟨p + m - n, q, by omega⟩))
+      simp only [Units.smul_def, map_zsmul]
+      congr 1
+      exact (adj.homEquiv_naturality_left _ _).symm
+  · intro n a p q hpq
+    rfl
+
+private noncomputable def supportOpenExtensionAdjunction {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] :
+    (Mod.comap (condensedPullbackHom Λ j) ⋙
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
+        (condensedRingObj Λ X)) ⊣ supportPullback Λ j :=
+  (supportCoefficientEquivalence Λ j).symm.toAdjunction.comp
+    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeftAdjunction
+      (B := condensedRingObj Λ X))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem supportOpenExtensionUnit {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (supportOpenExtensionAdjunction Λ j).unit := by
+  let a₀ := ProEtale.openImmersionLowerShriekAdjunction Ab.{u + 1} j
+  have : IsIso a₀.unit :=
+    (ProEtale.openImmersionAdjunctionTriple Ab.{u + 1} j).isIso_unit_iff_isIso_counit.mpr
+      (ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit Ab.{u + 1} j)
+  have ff₀ := a₀.fullyFaithfulLOfIsIsoUnit
+  have := ff₀.full
+  have := ff₀.faithful
+  have hu : IsIso (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful _
+  let lin := (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j
+    ).mapModLeftAdjunction (B := condensedRingObj Λ X)
+  have hlinapp (M) : IsIso (lin.unit.app M) := by
+    have hh : IsIso ((Mod.forget _).map (lin.unit.app M)) := by
+      dsimp [lin, Adjunction.mapModLeftAdjunction, Adjunction.mkOfHomEquiv,
+        Adjunction.mk', Mod.forget, Mod.Hom.mk']
+      rw [Adjunction.homEquiv_unit]
+      simp only [Mod.id_hom']
+      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  have : IsIso lin.unit := NatIso.isIso_of_isIso_app _
+  have ff := lin.fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have he := (supportCoefficientEquivalence Λ j).fullyFaithfulInverse
+  have hc := he.comp ff
+  have : (Mod.comap (condensedPullbackHom Λ j) ⋙
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
+        (condensedRingObj Λ X)).Full := hc.full
+  have : (Mod.comap (condensedPullbackHom Λ j) ⋙
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
+        (condensedRingObj Λ X)).Faithful := hc.faithful
+  exact (supportOpenExtensionAdjunction Λ j).unit_isIso_of_L_fully_faithful
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem supportOpenExtensionCounitMono {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] (M : supportModules Λ X) :
+    Mono ((supportOpenExtensionAdjunction Λ j).counit.app M) := by
+  let a := supportOpenExtensionAdjunction Λ j
+  have := supportOpenExtensionUnit Λ j
+  have hm : IsIso ((supportPullback Λ j).map (a.counit.app M)) := by
+    have : IsIso (a.unit.app ((supportPullback Λ j).obj M) ≫
+        (supportPullback Λ j).map (a.counit.app M)) := by
+      rw [a.right_triangle_components]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_left (a.unit.app _) _
+  let N := kernel (a.counit.app M)
+  have hz : IsZero ((supportPullback Λ j).obj N) :=
+    (isZero_kernel_of_mono ((supportPullback Λ j).map (a.counit.app M))).of_iso
+      (PreservesKernel.iso _ _)
+  have hAb : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj N.X) := by
+    exact (Mod.forget _).map_isZero hz
+  have hRes : IsZero ((ProEtale.openImmersionRestriction Ab.{u + 1} j).obj N.X) :=
+    hAb.of_iso ((ProEtale.upperStarIsoOpenImmersionRestriction Ab.{u + 1} j).app N.X).symm
+  have hzero : IsZero N.X :=
+    ProEtale.isZero_of_mono_openImmersionLowerShriek Ab.{u + 1} j
+      ((Mod.forget _).map (kernel.ι (a.counit.app M))) hRes
+  apply Preadditive.mono_of_isZero_kernel
+  apply (IsZero.iff_id_eq_zero _).2
+  apply (Mod.forget _).map_injective
+  exact hzero.eq_of_src _ _
+
+private theorem supportInjectiveUnitEpi
+    {C D : Type*} [Category* C] [Category* D]
+    {L : C ⥤ D} {R F : D ⥤ C} (adj : L ⊣ R) (adj' : F ⊣ L)
+    (I : C) [Injective I] [Mono (adj'.counit.app (R.obj (L.obj I)))] :
+    Epi (adj.unit.app I) := by
+  let φ := (adj'.homEquiv _ _).symm (adj.counit.app (L.obj I))
+  let σ : R.obj (L.obj I) ⟶ I := Injective.factorThru φ (adj'.counit.app _)
+  have hσ : adj'.counit.app _ ≫ σ = φ := Injective.comp_factorThru _ _
+  have hs : IsSplitEpi (adj.unit.app I) := by
+    refine ⟨⟨σ, ?_⟩⟩
+    apply (adj.homEquiv _ _).symm.injective
+    have h₁ : L.map σ = adj.counit.app _ := by
+      have h := congrArg (adj'.homEquiv _ _) hσ
+      have he : (adj'.homEquiv (L.obj (R.obj (L.obj I))) I) φ =
+          adj.counit.app (L.obj I) := (adj'.homEquiv _ _).apply_symm_apply _
+      rw [he, Adjunction.homEquiv_unit, Functor.map_comp,
+        ← Category.assoc, adj'.right_triangle_components, Category.id_comp] at h
+      exact h
+    change L.map (σ ≫ adj.unit.app I) ≫ adj.counit.app (L.obj I) =
+      L.map (𝟙 (R.obj (L.obj I))) ≫ adj.counit.app (L.obj I)
+    calc
+      _ = L.map σ ≫ (L.map (adj.unit.app I) ≫ adj.counit.app (L.obj I)) := by
+        rw [Functor.map_comp, Category.assoc]
+      _ = L.map σ := by rw [adj.left_triangle_components I, Category.comp_id]
+      _ = adj.counit.app (L.obj I) := h₁
+      _ = _ := by rw [L.map_id, Category.id_comp]
+  infer_instance
 
 /-- Clause (3): the open unit is an epimorphism for every injective module.
 Source: blueprint proof Step 9 (blueprint: det-lem-formal-closed-support-adjunction).
@@ -276,7 +590,11 @@ theorem closedSupport_injective_unit_epi {Z U X : Scheme.{u}}
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (I : supportModules Λ X) [Injective I] :
     Epi ((supportPullbackAdjunction Λ j).unit.app I) := by
-  sorry
+  have _ := hij
+  have := supportOpenExtensionCounitMono Λ j
+    ((lowerStar Λ j).obj ((supportPullback Λ j).obj I))
+  exact supportInjectiveUnitEpi (supportPullbackAdjunction Λ j)
+    (supportOpenExtensionAdjunction Λ j) I
 
 /-- Clause (4): the counit/unit localization triangle, natural on the unbounded category.
 Source: blueprint proof Steps 10--11 (blueprint: det-lem-formal-closed-support-adjunction).
@@ -338,7 +656,16 @@ theorem closedSupport_recordedDerived {Z U X : Scheme.{u}}
       (closedSupport Λ i j).rightDerivedFunctorOfQuasiIsoResolutionsUnit h ≫
         Functor.whiskerLeft DerivedCategory.Qh e.hom =
           (closedSupport Λ i j).rightDerivedFunctorUnit := by
-  sorry
+  apply (closedSupport Λ i j).rightDerivedFunctorOfQuasiIsoResolutions_unique h
+  intro G
+  constructor
+  · intro β γ hβγ
+    exact Functor.rightDerived_ext _ (closedSupport Λ i j).rightDerivedFunctorUnit
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) G β γ hβγ
+  · intro β
+    exact ⟨Functor.rightDerivedDesc _ (closedSupport Λ i j).rightDerivedFunctorUnit
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) G β,
+      Functor.rightDerived_fac _ _ _ G β⟩
 
 /-- The total derived support functor is computed termwise on every K-injective complex.
 Source: blueprint clause (2), proof Steps 6--7

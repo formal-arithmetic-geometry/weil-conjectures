@@ -58,12 +58,11 @@
    }
   },
   {
-   "text": "Use the geometric open--closed statements of [lem-weil-pbc-proetale-ringed-open-closed], first with auxiliary coefficient sheaf $\\mathbf Z_X$ on underlying abelian sheaves. They give exact $i_*,j_!$, $i^*i_*\\cong\\mathrm{id}$, $j^*j_!\\cong\\mathrm{id}$, $j^*i_*=i^*j_!=0$, and the short exact sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. These are also statements for the $B$-modules of Step 1: direct image gives the $B$-action through the canonical ring map $B\\to a_*a^{-1}B$; extension by zero is the module sheafification of [def-weil-presheaf-modules-sheafification], whose underlying sheaf is the abelian sheafification and whose universal map is linear, applied to [def-weil-extension-by-zero-presheaf]: the presheaf with value $N(W)$ when $W\\to X$ factors through $V$ and zero otherwise, with action through $B(W)\\to B|_V(W)$. Its counit sends a section to its image under the given restriction-adjunct map, so is linear; restriction of a linear map to $V$ and extension along this presheaf are inverse, giving $j_!\\dashv j^*$. All localization maps are the linear units/counits of Step 2. Their underlying maps are the cited abelian maps, and kernels/cokernels are detected on underlying abelian sheaves by [def-weil-sheaf-of-modules-category]. Exactness and the displayed identities therefore lift to modules over arbitrary $B$, without a commutativity hypothesis. The identity $i^*i_*\\cong\\mathrm{id}$ makes $i_*$ fully faithful: its adjunction Hom bijection with $i^*$ restricts to the required bijection between $i_*A$ and $i_*A'$. Finally, if $i^*F=j^*F=0$, the displayed short exact sequence forces $F=0$. The quasi-compactness used here is precisely that of $j$, not a qcqs hypothesis on $X$.",
+   "text": "For the completed clauses use the proved abelian closed-support interface [lem-weil-pbc-proetale-abelian-closed-support] instead of passage through commutative ringed module sheaves. Lift invertibility of its counit and supported units through mapModAdjunction, the scalar-transport equivalence, and the faithful module forgetful functor. The open restriction of a closed direct image is zero by evaluation on empty base changes. For extension by zero use the source-library mapModLeft construction and its exactness; composing its adjunction with inverse scalar transport works for noncommutative monoid objects too. The standalone unrestricted closed-pushforward exactness declaration is still open and is marked STATEMENT-DISPUTED: unlike this node it omits the quasi-compact open-complement hypothesis.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "def-sfb-module-linear-open-lower-shriek",
+    "def-sfb-finite-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -72,10 +71,9 @@
    }
   },
   {
-   "text": "The geometric clause (1) of [lem-weil-proetale-weakly-etale-localization], with auxiliary ring $\\mathbf Z$, identifies $V_{\\mathrm{pro\\acute et}}$ with $X_{\\mathrm{pro\\acute et}}/V$. On this slice $j^*$ is restriction. Indeed, in the inverse-image formula of [def-weil-proetale-inverse-image], an object $W\\to V$ gives the initial indexing object $W\\to X$ with $W\\cong W\\times_XV$; the opposite indexing category therefore has a terminal object, so the colimit is $M(W)$ and this restriction is already a sheaf. The same formula for direct image gives $(j^*j_*N)(W)=N(W\\times_XV)=N(W)$. The counit is the identity, including the restricted ring action. It follows by the triangle identity that $j^*$ of the unit $M\\to j_*j^*M$ is invertible, and that $j_*$ is fully faithful. In particular restriction is faithful on maps between objects of the form $j_*N$: a map between them is uniquely determined by its restriction via this counit.",
+   "text": "The source-library localized open restriction/direct-image adjunction has invertible counit. Transfer full faithfulness to the ordinary abelian inverse-image adjunction and then to the scalar-transported module adjunction as in Step 3. The triangle identity makes open pullback of its unit invertible.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image"
+    "def-sfb-finite-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -84,9 +82,9 @@
    }
   },
   {
-   "text": "Put $N=\\ker(M\\to j_*j^*M)$. Exactness of $j^*$ and Step 4 give $j^*N=0$. The localization sequence supplied by [lem-weil-pbc-proetale-ringed-open-closed] and lifted in Step 3, applied to $N$ becomes $0\\to0\\to N\\to i_*i^*N\\to0$, so its last nonzero map is a natural isomorphism $N\\cong i_*\\underline\\Gamma_Z(M)$. For $\\phi:i_*A\\to M$, its composite to $j_*j^*M$ is adjoint to a map out of $j^*i_*A=0$, and hence vanishes. The kernel property and full faithfulness of $i_*$ then give a unique $A\\to\\underline\\Gamma_Z(M)$, and conversely composition with the kernel inclusion recovers $\\phi$. Both constructions commute with pre- and postcomposition, proving the sheaf adjunction $i_*\\dashv\\underline\\Gamma_Z$. A right adjoint preserves kernels: for any test object $A$, the adjunction turns the universal Hom description of a kernel into the same description after applying $\\underline\\Gamma_Z$. The functor is additive directly from its kernel formula: the induced map on a kernel section is obtained by applying the additive maps $M\\to M' and $j_*j^*M\\to j_*j^*M' to that section, so it sends zero and sums to zero and sums. Hence it is left exact. This proves (1).",
+   "text": "Put N = ker(M -> j_* j^* M). Preservation of kernels and the invertibility in Step 4 give j^* N = 0. Apply the supported-unit assertion of [lem-weil-pbc-proetale-abelian-closed-support] to the underlying abelian sheaf and lift it as in Step 3; this proves that the specified kernel comparison is invertible. Every map i_* A -> M has zero composite with the open unit by the open adjunction and j^* i_* A = 0. Factor it through the kernel and apply full faithfulness of i_* to obtain the explicit natural Hom equivalence. Its counit is the fixed kernel inclusion, and Adjunction.ext_counit proves uniqueness. The resulting right adjoint preserves limits. Kernel-map addition is checked by equalizer.hom_ext, so the support functor is additive.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-weil-pbc-proetale-abelian-closed-support"
    ],
    "elementary": false,
    "source": {
@@ -95,11 +93,11 @@
    }
   },
   {
-   "text": "The categories of left $\\Lambda_T$-module sheaves, $T=X,Z,V$, are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]; their sites and coefficient sheaves lie in the common universe of Step 1. Thus [lem-pur-kinjective-degreewise-existence] supplies functorial resolutions $K\\to I$ of arbitrary unbounded complexes, with $I$ K-injective and every $I^n$ injective. The additive functors $H=\\underline\\Gamma_Z$ and $j_*$ induce functors on homotopy categories: they preserve the chain-homotopy equation, and they preserve shifts and cone differential matrices because they preserve addition and finite biproducts. Their composites with derived localization are consequently exact functors to $D(Z)$ and $D(X)$. Apply [lem-weil-pbc-kinjective-total-derived] to these composites to define $RH$ and $Rj_*$, computed by $H(I)$ and $j_*I$ on K-injectives. This uses no boundedness or constructibility.",
+   "text": "The source-library Mod.isGrothendieckAbelian supplies the module categories and their K-injective resolutions in the stated universes. Use the existing upstream rightDerivedFunctor and exact-left-adjoint derived-adjunction constructions. Identify the recorded arbitrary-quasi-isomorphism-resolution right derived functor with the upstream one by their universal properties: rightDerivedDesc supplies the map on natural transformations, rightDerived_fac its factorization, and rightDerived_ext injectivity. No degreewise-injective replacement is needed for these completed assertions. Such replacements remain the proposed route for the unproved triangle and fibre assertions.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-pbc-kinjective-total-derived"
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -122,23 +120,20 @@
    }
   },
   {
-   "text": "For the $R\\operatorname{Hom}$ clause, take global derived Hom, a complex of abelian groups, on each side, using the total right-derived construction of [def-sfb-right-derived-functor]. On representatives its degree $n$ group is $\\prod_p\\operatorname{Hom}(A^p,H(I)^{p+n})$, respectively $\\prod_p\\operatorname{Hom}(i_*A^p,I^{p+n})$, and its differential on a degree $n$ family is $d_I f-(-1)^n f d_A$. Apply the sheaf adjunction of Step 5 in every component. Naturality with respect to both differentials shows that this product bijection intertwines the two displayed differentials, so it is an isomorphism of Hom complexes. These complexes compute global derived Hom: into a K-injective complex, Hom from an acyclic complex is acyclic, since its degree $n$ cohomology is Hom in the homotopy category from the corresponding shift of that acyclic complex (the equivalence is stated in [lem-weil-pbc-right-adjoint-preserves-kinjective]). Thus quasi-isomorphisms in $A$ induce quasi-isomorphisms of Hom complexes, by applying this observation to their cones; changes of K-injective resolution are homotopy equivalences by [lem-weil-pbc-kinjective-hom-derived]. This constructs the asserted natural $R\\operatorname{Hom}$ isomorphism. It does not identify internal Hom sheaves on two different sites.",
-   "uses": [
-    "def-sfb-right-derived-functor",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
+   "text": "Apply the additive sheaf Hom equivalence of Step 5 to each (p,q) component of the global Hom complex. AddEquiv.piCongrRight gives the degreewise additive isomorphism, and HomologicalComplex.Hom.isoOfComponents assembles it. Expand the Hom differential: naturality of the adjunction in the target handles the first summand, naturality in the source handles the second, and additivity commutes with the integer sign scalar. The component formula is definitional. This proves exactly the displayed Hom-complex isomorphism, without internal-Hom or boundedness claims.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
     "place": "(2), last sentence: global Hom-complex form of the termwise adjunction; Stacks Tag 070I"
    }
   },
   {
-   "text": "Let $I$ be an injective $\\Lambda_X$-module, let $\\eta:I\\to j_*j^*I$ be the unit, and let $c:j_!j^*I\\to I$ be the counit. Their composite $t=\\eta c$ restricts to the identity on $V$. Its kernel $Q$ has $j^*Q=0$, and $i^*Q=0$ because $i^*$ is exact and $i^*j_!=0$. The localization detection argument of Step 3, from [lem-weil-pbc-proetale-ringed-open-closed], gives $Q=0$, so $t$ is monic. The extension property of injectivity in [def-sp-injective-resolutions] extends $c$ along $t$ to $s:j_*j^*I\\to I$, with $st=c$. Now $j^*s=\\mathrm{id}$, since both $j^*t$ and $j^*c$ are identities under the standard identifications. Hence $j^*(\\eta s)=\\mathrm{id}$; the faithfulness on maps between open direct images in Step 4 gives $\\eta s=\\mathrm{id}$. Thus $\\eta$ is a split epimorphism, proving (3). The section need not be chosen naturally and will not be used to define the triangle.",
+   "text": "Use the proved source-library isZero_of_mono_openImmersionLowerShriek (FiniteCoefficient.LowerShriek.Open.Mono), rather than a new localization sequence. Lift the fully faithful abelian extension-by-zero adjunction through mapModLeft and scalar transport; its module unit is invertible. Thus restriction of its counit is invertible. The counit kernel has zero open restriction, and its underlying abelian kernel embeds in an extension by zero. The cited source lemma makes that kernel zero, proving the module counit monic. Put F = j_* j^* I. Extend the map j_! j^* F -> I adjoint to the open counit along the monic extension counit to sigma : F -> I, using injectivity. Applying the extension adjunction shows j^* sigma equals the open counit. Applying the open Hom equivalence and its triangle identity gives sigma followed by the open unit equal to the identity of F. Consequently the open unit is split epic, hence epic. This argument works without using the closed-pushforward exactness assertion.",
    "uses": [
     "def-sp-injective-resolutions",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sfb-module-linear-open-lower-shriek"
    ],
    "elementary": false,
    "source": {
@@ -147,7 +142,7 @@
    }
   },
   {
-   "text": "Resolve $K$ on $X$ by the K-injective complex $I$ with injective terms of Step 6. By [lem-weil-pbc-right-adjoint-preserves-kinjective], with exact left adjoint $j_!$ and right adjoint $j^*$ from Steps 2--3, the complex $j^*I$ is K-injective. Since $j^*$ is exact, $j^*K\\to j^*I$ is a quasi-isomorphism. Consequently $j_*j^*I$ computes $Rj_*j^*K$. Steps 5 and 9 give a canonical degreewise short exact sequence of complexes\n$$0\\to i_*H(I)\\to I\\xrightarrow{\\eta}j_*j^*I\\to0.$$\nApply [lem-weil-pbc-complex-ses-triangle] to obtain the distinguished triangle in (4). The first term computes $i_*RHK$ by exactness of $i_*$; the middle term represents $K$, and the second arrow is the adjunction unit, represented by the sheaf unit on $I$.",
+   "text": "STILL OPEN IN LEAN. Resolve $K$ on $X$ by the K-injective complex $I$ with injective terms of Step 6. By [lem-weil-pbc-right-adjoint-preserves-kinjective], with exact left adjoint $j_!$ and right adjoint $j^*$ from Steps 2--3, the complex $j^*I$ is K-injective. Since $j^*$ is exact, $j^*K\\to j^*I$ is a quasi-isomorphism. Consequently $j_*j^*I$ computes $Rj_*j^*K$. Steps 5 and 9 give a canonical degreewise short exact sequence of complexes\n$$0\\to i_*H(I)\\to I\\xrightarrow{\\eta}j_*j^*I\\to0.$$\nApply [lem-weil-pbc-complex-ses-triangle] to obtain the distinguished triangle in (4). The first term computes $i_*RHK$ by exactness of $i_*$; the middle term represents $K$, and the second arrow is the adjunction unit, represented by the sheaf unit on $I$.",
    "uses": [
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "lem-weil-pbc-complex-ses-triangle"
@@ -159,7 +154,7 @@
    }
   },
   {
-   "text": "The sequence in Step 10 uses only natural functors, kernel inclusions and the unit; its connecting map is natural in maps of such sequences by [lem-weil-pbc-complex-ses-triangle]. Every derived morphism between $K,K'$ is represented by a homotopy class of maps between their K-injective resolutions, and two such representatives differ by homotopy, by [lem-weil-pbc-kinjective-hom-derived]. The three additive functors $i_*H$, identity and $j_*j^*$ carry that homotopy to homotopies, so the corresponding three derived arrows are independent of the representative. The connecting-map naturality therefore descends to $D(X)$, proving the required naturality. Here is the explicit fibre comparison, using the cone convention of [def-weil-abstract-derived-category]. Put $N=i_*H(I)$, $P=j_*j^*I$ and $g=\\eta:I\\to P$. The natural chain map $N\\to\\operatorname{cone}(g)[-1]$ sends $n$ to $(0,n)$, where the fibre differential is $(a,b)\\mapsto(-d_Pa-gb,d_Ib)$. It is a quasi-isomorphism, as can be checked locally on sections, since sheaf cokernels are sheafifications by [def-weil-sheaf-of-modules-category]: if $(a,b)$ is a fibre cocycle, locally lift $a$ to $c\\in I^{n-1}$ with $gc=a$, and subtract the boundary $d(0,-c)=(a,-dc)$ to obtain $(0,b+dc)$, a cocycle in $N$. If $(0,k)=d(a,b)$ is a boundary, locally lift $a$ to $c\\in I^{n-2}$ with $gc=a$; then $b+dc$ lies in $N^{n-1}$ because $da+gb=0$, and $k=d(b+dc)$. These two computations prove surjectivity and injectivity on cohomology sheaves. They use local lifts only to verify the canonical map, and make no choice in that map. Thus $i_*RHK\\cong\\operatorname{fib}(K\\to Rj_*j^*K)$. Apply the exact derived functor $i^*$ supplied by [lem-sf-exact-functor-derived-triangulated] and the counit isomorphism $i^*i_*\\cong\\mathrm{id}$ from Step 3 to get $RHK\\cong i^*\\operatorname{fib}(K\\to Rj_*j^*K)$, as claimed.",
+   "text": "STILL OPEN IN LEAN. The sequence in Step 10 uses only natural functors, kernel inclusions and the unit; its connecting map is natural in maps of such sequences by [lem-weil-pbc-complex-ses-triangle]. Every derived morphism between $K,K'$ is represented by a homotopy class of maps between their K-injective resolutions, and two such representatives differ by homotopy, by [lem-weil-pbc-kinjective-hom-derived]. The three additive functors $i_*H$, identity and $j_*j^*$ carry that homotopy to homotopies, so the corresponding three derived arrows are independent of the representative. The connecting-map naturality therefore descends to $D(X)$, proving the required naturality. Here is the explicit fibre comparison, using the cone convention of [def-weil-abstract-derived-category]. Put $N=i_*H(I)$, $P=j_*j^*I$ and $g=\\eta:I\\to P$. The natural chain map $N\\to\\operatorname{cone}(g)[-1]$ sends $n$ to $(0,n)$, where the fibre differential is $(a,b)\\mapsto(-d_Pa-gb,d_Ib)$. It is a quasi-isomorphism, as can be checked locally on sections, since sheaf cokernels are sheafifications by [def-weil-sheaf-of-modules-category]: if $(a,b)$ is a fibre cocycle, locally lift $a$ to $c\\in I^{n-1}$ with $gc=a$, and subtract the boundary $d(0,-c)=(a,-dc)$ to obtain $(0,b+dc)$, a cocycle in $N$. If $(0,k)=d(a,b)$ is a boundary, locally lift $a$ to $c\\in I^{n-2}$ with $gc=a$; then $b+dc$ lies in $N^{n-1}$ because $da+gb=0$, and $k=d(b+dc)$. These two computations prove surjectivity and injectivity on cohomology sheaves. They use local lifts only to verify the canonical map, and make no choice in that map. Thus $i_*RHK\\cong\\operatorname{fib}(K\\to Rj_*j^*K)$. Apply the exact derived functor $i^*$ supplied by [lem-sf-exact-functor-derived-triangulated] and the counit isomorphism $i^*i_*\\cong\\mathrm{id}$ from Step 3 to get $RHK\\cong i^*\\operatorname{fib}(K\\to Rj_*j^*K)$, as claimed.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
     "lem-weil-pbc-kinjective-hom-derived",
@@ -175,33 +170,29 @@
   }
  ],
  "proof_deps": [
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "def-sfb-module-linear-open-lower-shriek",
+  "def-sfb-right-derived-functor",
   "def-sp-injective-resolutions",
   "def-weil-abstract-derived-category",
-  "def-weil-extension-by-zero-presheaf",
   "def-weil-pbc-proetale-site",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
   "def-weil-size-convention",
-  "lem-pur-kinjective-degreewise-existence",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-sfb-alpha-iso",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-abelian-closed-support",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-def-sfb-pulled-back-coefficients",
-  "def-sfb-right-derived-functor"
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
-  "place": "Opening paragraph and (1)--(4), with Stacks Tags 09AA, 09BM, 09BN, 09AH, 079P, 08BJ, 070I, 070K, 070Y and 0152 supplying the named interfaces"
+  "place": "E1 stage 3, 2026-10-18: eight original holes proved from source-library adjunction and module APIs; unrestricted exactness disputed, triangle and fibre still open. Steps 3--6, 8--9 follow the Lean proof; Steps 10--11 retain the unimplemented source plan."
  },
  "mathlib_searches": [
   {
@@ -329,11 +320,6 @@
  "tool_uses": [
   "lem-sfb-alpha-iso",
   "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-termwise-adjunction-homotopy",
@@ -410,5 +396,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The declarations jointly state clauses (1)--(4). The support kernel and pullback are real constructions for every condensed ring, with no commutativity or finiteness hypothesis. Pullback transports the canonical alpha isomorphism by inverse restriction of scalars, extending the commutative upstream API without changing coefficients. The sheaf adjunction is chosen from its unique counit normalization; the derived adjunctions use the existing exact-left-adjoint construction. The global RHom clause is specified on K-injective Hom complexes componentwise, and the fibre is the shifted mapping cone of the actual open unit. The recorded arbitrary-quasi-isomorphism right-derived interface is identified with the upstream universal pair by a unique unit-compatible comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261019T002529-L-2148684",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

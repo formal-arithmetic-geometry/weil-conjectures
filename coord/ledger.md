@@ -16655,3 +16655,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/D8/Sheaf.Paper.WeilCompactSupportCohomology (stage 3; reviewer PASS; first push; landing 20261019T002528-L-2148370 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/D9/Sheaf.Paper.CompletedPullbackReduction (stage 3; reviewer PASS; first push; landing 20261019T002528-L-2148467 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/D9/Sheaf.Paper.WeilIndSheafCategory (stage 3; reviewer PASS; first push; landing 20261019T002529-L-2148567 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction (stage 3; reviewer PASS; first push; landing 20261019T002529-L-2148684 (proof); batch 20261019T002449; modules 1; new nodes 0)
