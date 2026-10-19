@@ -14,37 +14,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.Compactification.BaseChange
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
+import Sheaf.Paper.OpenPullbackGenerators
 import Sheaf.Paper.OpenImmersionLocalizing
-import Sheaf.Paper.UnboundedLocalizingPullback
-import Sheaf.Paper.LocalizingLowerShriekComposition
-import Sheaf.Paper.NonrationalLocalizingLowerShriekComposition
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Sites.LocalProperties
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.Topology.Constructible
 import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.SixFunctorsBasics.BrownHypotheses
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Open restriction of the Brown exceptional inverse image
@@ -214,17 +190,15 @@ adjoint is identified with restriction by the unique counit-compatible isomorphi
 Source: blueprint det-sf-mate-open-restriction (1)
 (blueprint: det-sf-mate-open-restriction).
 
-Proof (DAG steps 1--4): cartesian coefficients make inverse image exact; extension by zero
-is exact by sk-def-sfb-module-lower-shriek. Exact-functor-derived-factorization and
-exact-functor-derived-functor identify their total derived functors with their termwise
-functors. At a quasi-isomorphism index use its derived inverse, with identity splitting;
-the factorization is the identity, verifying the essentially constant ind/pro criteria.
-Termwise-adjunction-homotopy and derived-adjoint-functors descend the adjunction. By
-openImmersionLowerShriek_localizing and unboundedLocalizingPullback both functors preserve
-the closures; fullness restricts the same Hom bijections, units and counits. For the
-compactification (j,id), derived direct image of id is canonically id by exact derived
-factorization. The uniqueness clause of det-sf-existence-brown gives the displayed unique
-counit-compatible comparison; the triangle identities give unit compatibility too. -/
+Proof: The existing exact derived open adjunction already supplies the ambient Hom
+bijections. Obtain open-extension preservation from openImmersionLowerShriek_localizing.
+For pullback, use openPullback_generators and the defining intersection of the localizing
+closure: inverse images of the replete triangulated sum-closed candidates are again such
+candidates, since exact termwise pullback is also a left adjoint. Restrict the ambient
+adjunction using restrictFullyFaithful, retaining its Hom formula. Transport extension
+preservation and the adjunction along mateOpenTrivialLowerShriek for (j,id). The canonical
+rightAdjointUniq has precisely the displayed counit equation; injectivity of the inverse
+Hom equivalence proves that it is the only such isomorphism. -/
 theorem mateOpenImmersion
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)
@@ -257,7 +231,75 @@ theorem mateOpenImmersion
               (mateOpenTrivialLowerShriek Λ j).hom.app
                 ((mateOpenPullback Λ j hs).obj N).obj ≫
               (adj.counit.app N).hom = (adjG.counit.app N).hom := by
-  sorry
+  let : U.Over (Spec (.of k)) := ⟨j ≫ (X ↘ Spec (.of k))⟩
+  have : j.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (U ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (j ≫ (X ↘ Spec (.of k))))
+  have : QuasiCompact (U ↘ Spec (.of k)) :=
+    inferInstanceAs (QuasiCompact (j ≫ (X ↘ Spec (.of k))))
+  have : IsSeparated (U ↘ Spec (.of k)) :=
+    inferInstanceAs (IsSeparated (j ≫ (X ↘ Spec (.of k))))
+  obtain ⟨_, _, he, _⟩ :=
+    (openImmersionLowerShriek_localizing ℓ k p _hp _hpℓ Λ _hΛ j).2.2
+  have hs : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
+      localizingClosureProEtale Λ U ((upperStar Λ j).mapDerivedCategory.obj K.obj) := by
+    let F := (upperStar Λ j).mapDerivedCategory
+    have : F.IsLeftAdjoint :=
+      ((derivedUpperStarLowerStarAdjunction Λ j).ofNatIsoLeft
+        (leftDerivedUpperStarIsoMapDerivedCategory Λ j)).isLeftAdjoint
+    intro K P hP hS
+    let := hP.1
+    let := hP.2.1
+    have hR : IsLocalizingSubcategory (P.inverseImage F) := by
+      refine ⟨inferInstance, inferInstance, ?_⟩
+      intro I D hD hobj
+      let := hD
+      have : HasColimit (D ⋙ F) := inferInstance
+      exact P.prop_of_iso (preservesColimitIso F D).symm
+        (hP.2.2 (D ⋙ F) inferInstance hobj)
+    exact K.property (P.inverseImage F) hR (fun L hL ↦
+      hS _ (openPullback_generators Λ ℓ k p _hp _hpℓ _hΛ j ⟨L, hL⟩))
+  have ht : ∀ K, localizingClosureProEtale Λ U K → localizingClosureProEtale Λ X
+      ((rightDerivedLowerShriekOfCompactification Λ
+        (Compactification.ofIsOpenImmersion j)).obj K) := by
+    intro K hK P hP hS
+    let := hP.2.1
+    exact P.prop_of_iso ((mateOpenTrivialLowerShriek Λ j).app K).symm
+      (he ⟨K, hK⟩ P hP hS)
+  let adj : mateOpenExtension Λ j he ⊣ mateOpenPullback Λ j hs :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).restrictFullyFaithful
+      (localizingClosureProEtale Λ U).fullyFaithfulι
+      (localizingClosureProEtale Λ X).fullyFaithfulι (Iso.refl _) (Iso.refl _)
+  have hadj : ∀ (M : (localizingClosureProEtale Λ U).FullSubcategory)
+      (N : (localizingClosureProEtale Λ X).FullSubcategory)
+      (b : (mateOpenExtension Λ j he).obj M ⟶ N),
+      (adj.homEquiv M N b).hom =
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv M.obj N.obj
+          b.hom := by
+    intro M N b
+    dsimp only [adj]
+    rw [Adjunction.restrictFullyFaithful_homEquiv_apply]
+    simp [Adjunction.homEquiv_apply]
+  let t : localizingLowerShriek Λ (Compactification.ofIsOpenImmersion j) ht ≅
+      mateOpenExtension Λ j he := NatIso.ofComponents
+    (fun M ↦ (localizingClosureProEtale Λ X).isoMk
+      ((mateOpenTrivialLowerShriek Λ j).app M.obj))
+    (by intro M N b; ext; exact (mateOpenTrivialLowerShriek Λ j).hom.naturality b.hom)
+  let adjT := adj.ofNatIsoLeft t.symm
+  refine ⟨he, hs, ht, adj, hadj, ?_⟩
+  intro G adjG
+  refine ⟨adjG.rightAdjointUniq adjT, ?_, ?_⟩
+  · intro N
+    exact congrArg (fun b ↦ b.hom) (adjG.rightAdjointUniq_hom_app_counit adjT N)
+  · intro e heq
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply (adjT.homEquiv _ N).symm.injective
+    exact (show _ = (adjG.counit.app N) by
+      ext
+      exact heq N).trans
+        (adjG.homEquiv_symm_rightAdjointUniq_hom_app adjT N).symm
 
 /-- Source-open restriction of f! is the exceptional inverse image of fj. The induced
 adjunction is normalized by the actual composite of open extensions in the same
@@ -267,17 +309,14 @@ no exceptional-adjunction assumption on an ambient derived category is made.
 Source: blueprint det-sf-mate-open-restriction (2), source-open comparison
 (blueprint: det-sf-mate-open-restriction).
 
-Proof (DAG steps 3--7): closure preservation gives he and hs as in clause (1).
-All opens of the standing Noetherian schemes are quasi-compact; their structure maps and
-source-restricted f are separated of finite type, by finite-type-over-noetherian,
-qc-open-immersion-finite-type, finite-type-composition-base-change and proper-diagonal
-restriction. The compactification of fj is c.precomp j. Composite adjunctions and the
-canonical open-extension compositor mateOpenSourceLowerShriek identify its right adjoint
-with j* f!. The Hom computation is precisely the displayed equation. Alternatively this
-is j* f! = j! f! = (fj)! using rational or nonrational lower-shriek composition and Brown
-uniqueness, with compact generation supplied by sk-lem-brown-hypotheses. Yoneda gives
-naturality and the unique comparison to each Brown adjoint; the normalization identifies
-both constructions, including all unit and counit identifications. -/
+Proof: X is Noetherian because its structure map is of finite type over a field.
+Thus j is quasi-compact and mateOpenImmersion gives he, hs and the normalized open
+adjunction. Transport hf after he along the actual mateOpenSourceLowerShriek to obtain
+hjf. Lift that same compositor to the full localizing categories, and transport the
+composite of the open adjunction and adjF along it. comp_homEquiv and the open Hom formula
+give the displayed normalization. rightAdjointUniq supplies the comparison to any adjJ;
+injectivity of the inverse Hom equivalence gives uniqueness. This source-open argument
+needs no general rational or nonrational lower-shriek composition theorem. -/
 theorem mateOpenSourceRestriction
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)
@@ -317,7 +356,38 @@ theorem mateOpenSourceRestriction
         ∃! e : G ⋙ mateOpenPullback Λ j hs ≅ J,
           ∀ N, (localizingLowerShriek Λ (c.precomp j) hjf).map (e.hom.app N) ≫
             adjJ.counit.app N = adjS.counit.app N := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : QuasiCompact j := inferInstance
+  obtain ⟨he, hs, _, adj, hadj, _⟩ := mateOpenImmersion Λ ℓ k p _hp _hpℓ _hΛ j
+  have hjf : ∀ K, localizingClosureProEtale Λ U K → localizingClosureProEtale Λ Y
+      ((rightDerivedLowerShriekOfCompactification Λ (c.precomp j)).obj K) := by
+    intro K hK P hP hS
+    let := hP.2.1
+    exact P.prop_of_iso ((mateOpenSourceLowerShriek Λ c j).app K)
+      (hf _ (he ⟨K, hK⟩) P hP hS)
+  let s : mateOpenExtension Λ j he ⋙ localizingLowerShriek Λ c hf ≅
+      localizingLowerShriek Λ (c.precomp j) hjf := NatIso.ofComponents
+    (fun M ↦ (localizingClosureProEtale Λ Y).isoMk
+      ((mateOpenSourceLowerShriek Λ c j).app M.obj))
+    (by intro M N b; ext; exact (mateOpenSourceLowerShriek Λ c j).hom.naturality b.hom)
+  let adjS := (adj.comp adjF).ofNatIsoLeft s
+  refine ⟨he, hs, hjf, adjS, ?_, ?_⟩
+  · intro M N b
+    rw [Adjunction.homEquiv_ofNatIsoLeft_apply, Adjunction.comp_homEquiv]
+    exact hadj M (G.obj N) _
+  · intro J adjJ
+    refine ⟨adjS.rightAdjointUniq adjJ,
+      fun N ↦ adjS.rightAdjointUniq_hom_app_counit adjJ N, ?_⟩
+    intro e heq
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply (adjJ.homEquiv _ N).symm.injective
+    exact (heq N).trans (adjS.homEquiv_symm_rightAdjointUniq_hom_app adjJ N).symm
 
 /-- Target-open restriction u* f! = f_V! v*, with its precise mate normalization.
 The inverse-image scheme U is expressed by an arbitrary Cartesian open square, including
@@ -397,21 +467,13 @@ comparisons to every member gives exactly the two locality assertions for f! in 
 Source: blueprint det-sf-mate-open-restriction (3)
 (blueprint: det-sf-mate-open-restriction).
 
-Proof (DAG steps 8--12): take a distinguished cone C of the morphism. Exact restriction and
-lem-kun-distinguished-cone-zero make its restrictions zero. Cartesian-coefficient exactness
-and exact-functor-complex-cohomology identify restrictions of H^n(C) with H^n of those
-restrictions, hence zero in every degree. Weakly-etale-localization identifies each open
-pro-etale site with the corresponding slice. On a site object T the base-changed opens
-cover T. Each affine W in T has a finite principal refinement subordinate to those opens;
-this is an fpqc cover by the affine criterion, also for empty W. Thus the sieve of arrows
-factoring through some covering open is covering on the small pro-etale site. Apply
-lem-sfb-sheaf-cover-local-isomorphism to 0 → H^n(C): all slice restrictions vanish, so the
-underlying abelian sheaf is zero. Its module structure is then zero as well. All cohomology
-of C vanishes, hence a representative is acyclic and localization makes C zero. The cone
-criterion makes the ambient morphism invertible; fullness puts its inverse in Loc(Dctf).
-No bound on degrees is used. Finally apply mateOpenSourceRestriction to every source open
-and mateOpenTargetRestriction to every target open. Their unique adjunction normalizations
-give the stated computations of f! on both covers. -/
+Proof: The supplied iSup equality says that the given opens cover X. Their inclusions
+form the actual pro-etale cover ofArrows_opens_ι_mem_proetalePrecoverage. Apply
+condensed_cover_restriction_conservative to the condensed ring Mon.mk Λ, this cover,
+and b.hom in the ambient unbounded derived category. Its hypotheses are exactly the
+restrictions in the statement. ObjectProperty.isIso_hom_iff gives the isomorphism in
+the full localizing subcategory. The argument includes the empty scheme and arbitrary
+index universes; no cohomological bound is introduced. -/
 theorem mateOpenCover_isIso
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)
@@ -423,6 +485,16 @@ theorem mateOpenCover_isIso
     {K L : (localizingClosureProEtale Λ X).FullSubcategory} (b : K ⟶ L)
     (_hb : ∀ i : I, IsIso ((upperStar Λ (U i).ι).mapDerivedCategory.map b.hom)) :
     IsIso b := by
-  sorry
+  let C : Scheme.Cover.{w} Scheme.proetalePrecoverage X :=
+    { I₀ := I
+      X i := (U i).toScheme
+      f i := (U i).ι
+      mem₀ := ofArrows_opens_ι_mem_proetalePrecoverage U (by
+        intro x
+        have hx : x ∈ iSup U := by rw [_hcover]; trivial
+        exact TopologicalSpace.Opens.mem_iSup.mp hx) }
+  have hb : IsIso b.hom :=
+    ((condensed_cover_restriction_conservative (Mon.mk Λ) X C).1 K.obj L.obj b.hom).2 _hb
+  exact (ObjectProperty.isIso_hom_iff b).1 hb
 
 end AlgebraicGeometry.ProEtale.CondensedRing

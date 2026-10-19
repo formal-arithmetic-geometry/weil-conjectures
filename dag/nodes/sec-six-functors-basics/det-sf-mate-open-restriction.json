@@ -24,211 +24,98 @@
  ],
  "proof": [
   {
-   "text": "On module objects [sk-def-sfb-module-lower-shriek] supplies the exact adjunction $j_!\\dashv j^*$. The coefficient identification of [sk-prop-sfb-cartesian-coefficients] makes $j^*$ exact, with the action transported along $\\alpha_j^{-1}$. For either functor $H$, [lem-weil-pbc-exact-functor-derived-factorization] gives the termwise functor $D(H)$, and [lem-weil-pbc-exact-functor-derived-functor] identifies it as both total derived functors. Here are explicit data for the ind/pro convention in [lem-pc-derived-adjoint-functors]. At a right index $s:K\\to K'$, put $p_s=D(H)(s)^{-1}$, choose the identity index and identity splitting. For $ts=s'$, $p_{s'}D(H)(t)=p_s$. Taking the common target to be $s$ itself makes the factorization in [def-pc-essentially-constant-ind-diagram] equal $D(H)(s)D(H)(s)^{-1}=1$. Dually, at a left index $s:K'\\to K$, take $u_s=D(H)(s)^{-1}$, the identity index and identity retraction. At the common source $s$ the criterion in [def-pc-essentially-constant-pro-diagram] is $D(H)(s)^{-1}D(H)(s)=1$. These systems are therefore essentially constant with value $D(H)K$.",
+   "text": "Use openPullback_generators to prove preservation of the whole localizing closure. For every replete triangulated sum-closed candidate P on U, its inverse image under the exact termwise j* is replete and triangulated. The existing derived pullback/direct-image adjunction makes j* a left adjoint, so it preserves every existing coproduct, including the indexing universe in the definition of the closure. Therefore this inverse image is localizing. It contains all generators by openPullback_generators, and the defining intersection gives hs.",
    "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pc-derived-adjoint-functors",
-    "def-pc-essentially-constant-ind-diagram",
-    "def-pc-essentially-constant-pro-diagram"
+    "lem-sfb-open-pullback-generators",
+    "sk-def-localizing-closure",
+    "sk-def-sfb-module-derived-pushpull"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (1); Stacks derived.tex Tag 015F, lemma-right-derived-exact-functor, and categories.tex Tag 05PU, definition-essentially-constant-diagram."
+    "place": "Proof (1), restriction and preservation of the localizing closures; clauses (2) and (3) where indicated."
    }
   },
   {
-   "text": "The homotopy functors used in these systems exist: [lem-weil-pbc-termwise-adjunction-homotopy] gives preservation of homotopies and the termwise adjunction on homotopy categories for the additive adjoint pair in step 1. The existence conditions of [lem-pc-derived-adjoint-functors] have just been verified at every complex. Apply it with $G=j_!$ and $F=j^*$ to obtain the canonical adjunction $D(j_!)\\dashv D(j^*)$ on the ambient unbounded module-object derived categories.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (1); Stacks derived.tex Tag 09T5, lemma-derived-adjoint-functors."
-   }
-  },
-  {
-   "text": "By [det-proper-image-localizing-open], $D(j_!)$ preserves $\\Dctf$, sums and the localizing hulls; [det-proper-base-change-unbounded-pullback] gives the same hull preservation for $j^*$. Both restricted functors therefore exist. The subcategories $\\mathcal T_U,\\mathcal T_X$ are full by [sk-def-localizing-closure]. For $M\\in\\mathcal T_U$, $N\\in\\mathcal T_X$, their Hom sets are the ambient Hom sets, so the step 2 bijection $\\Hom(j_!M,N)\\cong\\Hom(M,j^*N)$ restricts, with the same naturality and triangle identities. This proves the adjunction on precisely the localizing categories in clause (1).",
+   "text": "For mateOpenImmersion, give U the structure map j followed by that of X; finite type, quasi-compactness and separatedness compose. Obtain he from openImmersionLowerShriek_localizing. Restrict the existing derivedOpenImmersionLowerShriekUpperStarAdjunction along the full inclusions using Mathlib Adjunction.restrictFullyFaithful. Its homEquiv formula gives exactly the required ambient Hom bijection. Transport he along mateOpenTrivialLowerShriek to obtain ht. Lift that canonical isomorphism to the full subcategories and transport the adjunction along its inverse. Adjunction.rightAdjointUniq gives the requested comparison for every adjG; its counit identity proves the displayed normalization, and injectivity of the inverse Hom equivalence gives uniqueness.",
    "uses": [
     "det-proper-image-localizing-open",
-    "det-proper-base-change-unbounded-pullback",
-    "sk-def-localizing-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (1), preservation of the localizing subcategories and restriction of the adjunction."
-   }
-  },
-  {
-   "text": "The compact-generation hypotheses for the Brown adjunction are supplied by [sk-lem-brown-hypotheses] for every standing source scheme. Compute the lower shriek for $j$ using $U\\xrightarrow jX\\xrightarrow{\\mathrm{id}_X}X$, which is a compactification in the sense of [sk-def-nagata-sketch-data]: $j$ is quasi-compact open and the identity is proper. By [sk-def-sfb-module-derived-lower-shriek] its functor is $R(\\mathrm{id}_X)_*\\circ D(j_!)$. Here $R(\\mathrm{id}_X)_*$ is the total right derived functor of $\\operatorname{Res}_{\\eta_{\\mathrm{id}}}\\circ\\operatorname{mapMod}(\\mathrm{id}^{\\Ab}_*)$ [sk-def-sfb-module-derived-pushpull]; since $\\eta_{\\mathrm{id}}$ is the identity of $\\Lambda_X$, this underived functor is the identity of $\\Mod_{\\Lambda_X}$, which is exact. By [lem-weil-pbc-exact-functor-derived-functor] (1) the termwise functor $D(\\mathrm{id})=\\mathrm{id}$ is a right derived functor of it, so by uniqueness of Kan extensions $R(\\mathrm{id}_X)_*\\cong\\mathrm{id}$ canonically and $R(\\mathrm{id}_X)_*D(j_!)\\cong D(j_!)$; no resolution hypothesis is needed. Step 3 exhibits $j^*$ as a right adjoint of $D(j_!)$, hence, through this isomorphism, of the lower shriek for this compactification. Clause (3) of [det-sf-existence-brown] now gives the unique adjunction-compatible isomorphism $j^!\\simeq j^*$, including transport from the chosen compactification. Thus the comparison is canonical with respect to both unit and counit, not an arbitrary isomorphism of functors.",
-   "uses": [
     "sk-def-sfb-module-derived-lower-shriek",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "det-sf-existence-brown",
-    "sk-lem-brown-hypotheses",
+    "sk-def-sfb-module-lower-shriek",
     "sk-def-nagata-sketch-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (1), trivial compactification and uniqueness; compactification is as in sk-def-nagata-sketch-data."
+    "place": "Proof (1), restriction and preservation of the localizing closures; clauses (2) and (3) where indicated."
    }
   },
   {
-   "text": "The compact-generation hypotheses for the Brown adjunction are supplied by [sk-lem-brown-hypotheses] for every standing source scheme. We spell out the composition input instead of applying the conditional finite-Tor lemma lem-sf-mate. For composable standing morphisms $T\\xrightarrow aS\\xrightarrow bR$, the natural lower-shriek comparison $Rb_!Ra_!\\cong R(ba)_!$ on $\\mathcal T_T$ is [lem-sfb-nonrational-localizing-lower-shriek-composition] when $\\Lambda=A,\\mathbf Z_\\ell,\\mathcal O_E$, and [lem-sfb-localizing-lower-shriek-composition] when $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$; $\\mathbf Q_\\ell$ is its case $E=\\mathbf Q_\\ell$. By [det-sf-existence-brown], all three right adjunctions exist on these same categories. For $M\\in\\mathcal T_T$ and $N\\in\\mathcal T_R$, compose their Hom bijections and the lower-shriek comparison to get\n$$\\Hom(M,a^!b^!N)\\cong\\Hom(Ra_!M,b^!N)\\cong\\Hom(Rb_!Ra_!M,N)\\cong\\Hom(R(ba)_!M,N)\\cong\\Hom(M,(ba)^!N).$$\nThis is natural in $M,N$. By [lem-galois-yoneda-fully-faithful] it gives a unique isomorphism $a^!b^!\\cong(ba)^!$: the inverse natural Hom transformation gives the inverse map, since their composites are identity transformations of representables. Naturality in $N$ follows from faithfulness of the same Yoneda functor. The two successive adjunction bijections are the composite adjunction of [def-weil-pbc-composite-adjunction], so this is the comparison compatible with the pasted units and counits. No ambient exceptional adjunction or six-functor-datum hypothesis is introduced.",
-   "uses": [
-    "lem-sfb-nonrational-localizing-lower-shriek-composition",
-    "lem-sfb-localizing-lower-shriek-composition",
-    "det-sf-existence-brown",
-    "lem-galois-yoneda-fully-faithful",
-    "def-weil-pbc-composite-adjunction",
-    "sk-lem-brown-hypotheses"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/sk-lem-sf-mate.proof.md",
-    "place": "Proof (1), Hom calculation used by the detail item proof (2)."
-   }
-  },
-  {
-   "text": "All standing schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since fields are Noetherian. By [def-weil-constructible-subset] their opens and intersections with affine opens are quasi-compact. Every such open inclusion is finite type by [lem-weil-pbc-qc-open-immersion-finite-type], and a monomorphism, so its diagonal is an isomorphism and it is separated by [def-weil-proper-morphism]. Composing open inclusions with the finite-type structure maps and with $f$ preserves finite type by [lem-sfb-finite-type-composition-base-change]. The diagonal of a source restriction of $f$ is the restriction of its closed diagonal, so it remains closed. Finally [lem-pod-separated-finite-type-base-change] gives the separated finite-type property of $f_V$. Thus $U,V,X_V$, their structure maps, $u,v,j,fj,f_V$ all have the standing hypotheses required by steps 4 and 5.",
+   "text": "For mateOpenSourceRestriction, finite type over a field makes X locally Noetherian, and quasi-compactness of the structure map makes X compact, so every open immersion into X is quasi-compact. Apply mateOpenImmersion. Transport hf applied after he along mateOpenSourceLowerShriek to obtain hjf. Lift this same compositor to the full subcategories and transport the composite of the open adjunction and adjF along it. Mathlib comp_homEquiv and the open Hom normalization prove the stated equation. rightAdjointUniq gives the comparison to any adjJ, and the inverse Hom equivalence proves its uniqueness. No general lower-shriek composition theorem is needed for this source-open clause.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-constructible-subset",
     "lem-weil-pbc-qc-open-immersion-finite-type",
-    "def-weil-proper-morphism",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-pod-separated-finite-type-base-change"
+    "sk-def-localizing-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (2), geometric hypotheses for both restrictions."
+    "place": "Proof (1), restriction and preservation of the localizing closures; clauses (2) and (3) where indicated."
    }
   },
   {
-   "text": "In the Cartesian open square, $u$ includes $f^{-1}(V)$ and the actual scheme morphisms satisfy $fu=vf_V$. Steps 4 and 5, with their adjunction-compatible natural isomorphisms, give\n$$u^*f^!\\cong u^!f^!\\cong(fu)^!=(vf_V)^!\\cong f_V^!v^!\\cong f_V^!v^*.$$\nThe middle equality is transport along $fu=vf_V$ for the same lower-shriek functor and its canonical adjoint. Applying the same steps to $(j,f)$ gives $j^*f^!\\cong j^!f^!\\cong(fj)^!$. This proves both comparisons in clause (2), natural on the full localizing categories.",
-   "uses": [],
-   "elementary": true,
+   "text": "The target-open theorem remains sorry. Its retained plan is to use Brown adjoints on the base-changed compactification and the rational/nonrational lower-shriek compositors, identify u* f! with f_V! v*, and check the displayed normalization by the ordinary open proper restriction mate, the open extension compositor and the inverse open unit. The precise target mate normalization and its invertibility still require proof.",
+   "uses": [
+    "det-sf-existence-brown",
+    "sk-lem-brown-hypotheses",
+    "lem-sfb-localizing-lower-shriek-composition",
+    "lem-sfb-nonrational-localizing-lower-shriek-composition",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
     "place": "Proof (2), both comparison chains."
    }
   },
   {
-   "text": "Replace the index family by its set of distinct opens in the fixed universe, hence a small family. For $\\phi:K\\to L$ in $\\mathcal T_X$, choose a distinguished triangle $K\\xrightarrow\\phi L\\to C\\to K[1]$. Exactness of restriction [det-proper-base-change-unbounded-pullback] and [lem-kun-distinguished-cone-zero] show that $j_a^*C=0$ when all $j_a^*\\phi$ are isomorphisms. Exact module pullback [sk-prop-sfb-cartesian-coefficients] and [lem-weil-pbc-exact-functor-complex-cohomology] give $j_a^*\\mathcal H^n(C)\\cong\\mathcal H^n(j_a^*C)=0$ for every integer $n$.",
+   "text": "For mateOpenCover_isIso, use the given opens and iSup equality to construct the actual pro-etale cover ofArrows_opens_ι_mem_proetalePrecoverage. Apply condensed_cover_restriction_conservative to Mon.mk Lambda and the ambient morphism b.hom. The supplied hypotheses are exactly its covering restrictions. ObjectProperty.isIso_hom_iff returns the isomorphism in the full localizing subcategory. This includes empty and arbitrarily large index families, without boundedness assumptions.",
    "uses": [
-    "det-proper-base-change-unbounded-pullback",
-    "lem-kun-distinguished-cone-zero",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (3), cone and cohomology restriction."
-   }
-  },
-  {
-   "text": "The underlying abelian-sheaf functor of module pullback is inverse image, with transported coefficient action, by [sk-prop-sfb-cartesian-coefficients]. For an open immersion it is the pullback of [def-sfb-finite-upper-star], computed by [def-sfb-finite-extension-by-zero-adjunction] as $(j_a^*G)(T\\to U_a)\\cong G(T\\to U_a\\to X)$. By [lem-weil-proetale-weakly-etale-localization] (1), the site $(U_a)_{\\mathrm{pro\\acute et}}$ is the slice $X_{\\mathrm{pro\\acute et}}/U_a$. Consequently the underlying abelian sheaf $G_n$ of $\\mathcal H^n(C)$ restricts to zero on each such slice. A module with zero underlying sheaf is zero: the unique arrows to and from zero commute with its action, and their composites are identities. This needs no interchange of a forgetful functor with cohomology.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-finite-upper-star",
-    "def-sfb-finite-extension-by-zero-adjunction",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (3), identification with slice restrictions."
-   }
-  },
-  {
-   "text": "Check the covering-sieve hypothesis of [lem-sfb-sheaf-cover-local-isomorphism]. For every site object $T\\to X$, the opens $T_a=T\\times_XU_a$ cover $T$. These are site objects by [lem-weil-proetale-weakly-etale-localization] (1) and (4), applied also to $T_a\\subset T$. For each affine open $W\\subset T$, principal affine opens form a basis, so quasi-compactness of $W$ supplies finitely many principal opens $D(s_i)\\subset W$, each contained in some $T_{a_i}$, which cover $W$. They are affine opens in $T_{a_i}$ as well. Each $T_a\\to T$ is flat because its maps on local rings are isomorphisms. Thus the family is fpqc by the affine-cover criterion in [def-weil-pbc-fpqc-covering], including $W=\\varnothing$ with the empty refinement. The sieve on $T$ of arrows whose domain maps to some $U_a$ contains this family, and hence covers by [def-weil-pbc-small-proetale-site]. This argument asserts finiteness only over each affine $W$, not over an arbitrary site object $T$.",
-   "uses": [
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-fpqc-covering",
-    "def-weil-pbc-small-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (3), covering-sieve hypothesis of sheaf-local detection."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-sheaf-cover-local-isomorphism] to $0\\to G_n$. Step 9 identifies its slice restrictions as isomorphisms, and step 10 verifies its covering-sieve hypothesis; hence $G_n=0$. The module observation of step 9 makes $\\mathcal H^n(C)=0$ for all $n$. A representative complex $C^\\bullet$ is acyclic, so $0\\to C^\\bullet$ is a quasi-isomorphism and is inverted by the localization in [def-weil-abstract-derived-category]. Therefore $C=0$; [lem-kun-distinguished-cone-zero] implies that $\\phi$ is invertible. Since $\\mathcal T_X$ is full by [sk-def-localizing-closure], its ambient inverse lies in this subcategory. No bound on the cohomological degrees of $C$ was used.",
-   "uses": [
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "def-weil-abstract-derived-category",
-    "lem-kun-distinguished-cone-zero",
+    "lem-zl-condensed-cover-restriction-conservative",
     "sk-def-localizing-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (3), vanishing and detection of isomorphisms."
-   }
-  },
-  {
-   "text": "Apply clause (2), proved in step 7, to each $j_a:U_a\\hookrightarrow X$ and to each $v_b:V_b\\hookrightarrow Y$. This gives $j_a^*f^!\\cong(fj_a)^!$ and $u_b^*f^!\\cong f_{V_b}^!v_b^*$ for the whole localizing categories. Step 11 detects isomorphisms after these restrictions. These are exactly the locality and isomorphism-detection assertions of clause (3). For an empty scheme the same argument says all cohomology sheaves are zero; for the identity cover the comparisons reduce to the same adjunction bijections.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (3), final two sentences, read as the explicit comparisons in the statement."
+    "place": "Proof (1), restriction and preservation of the localizing closures; clauses (2) and (3) where indicated."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-essentially-constant-ind-diagram",
-  "def-pc-essentially-constant-pro-diagram",
-  "def-sfb-finite-extension-by-zero-adjunction",
-  "def-sfb-finite-upper-star",
-  "def-weil-abstract-derived-category",
-  "def-weil-constructible-subset",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-fpqc-covering",
-  "def-weil-pbc-small-proetale-site",
-  "def-weil-proper-morphism",
-  "det-proper-base-change-unbounded-pullback",
   "det-proper-image-localizing-open",
   "det-sf-existence-brown",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-kun-distinguished-cone-zero",
-  "lem-pc-derived-adjoint-functors",
   "lem-pod-separated-finite-type-base-change",
   "lem-sfb-finite-type-composition-base-change",
   "lem-sfb-localizing-lower-shriek-composition",
   "lem-sfb-nonrational-localizing-lower-shriek-composition",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-open-pullback-generators",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-proetale-weakly-etale-localization",
+  "lem-zl-condensed-cover-restriction-conservative",
   "sk-def-localizing-closure",
   "sk-def-nagata-sketch-data",
   "sk-def-sfb-module-derived-lower-shriek",
   "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-module-lower-shriek",
-  "sk-lem-brown-hypotheses",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-lem-brown-hypotheses"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "D7",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-  "place": "Proof (1)-(3), with the source unit Hom calculation expanded and Stacks 09T5, 010N, 04TQ and 05RU supplying generic derived/sheaf facts."
+  "place": "Three original holes proved from exact adjunctions, full-subcategory restriction, the source compositor and cover conservativity; generator preservation is proved in the new helper; the original target-open hole remains."
  },
  "mathlib_searches": [
   {
@@ -463,37 +350,15 @@
   ]
  },
  "tool_uses": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-pc-derived-adjoint-functors",
   "det-proper-image-localizing-open",
-  "det-proper-base-change-unbounded-pullback",
   "lem-sfb-localizing-lower-shriek-composition",
-  "lem-galois-yoneda-fully-faithful",
-  "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-constructible-subset",
-  "lem-kun-distinguished-cone-zero",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-small-proetale-site",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "def-weil-abstract-derived-category",
   "sk-lem-brown-hypotheses",
   "lem-pod-separated-finite-type-base-change",
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "def-pc-essentially-constant-ind-diagram",
-  "def-pc-essentially-constant-pro-diagram",
-  "def-sfb-finite-extension-by-zero-adjunction",
-  "def-sfb-finite-upper-star",
-  "def-weil-pbc-fpqc-covering",
   "det-sf-existence-brown",
   "lem-sfb-finite-type-composition-base-change",
   "lem-sfb-nonrational-localizing-lower-shriek-composition",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
   "sk-def-localizing-closure",
   "sk-def-nagata-sketch-data",
   "sk-def-sfb-module-derived-lower-shriek",
@@ -552,5 +417,15 @@
   "group": "NA",
   "result": "pass",
   "note": "All three clauses match the node with only the standing hypotheses. Clause 1: the restricted adjunction j_! ⊣ j^* has its Hom bijection equal to the existing ambient open adjunction; for every Brown right adjoint at the trivial compactification (j,id) there is a unique counit-compatible iso to j^* through the canonical R(id)_* ≅ id. Clause 2 target side: an arbitrary Cartesian open square with upstream c.ofIsPullback sq; existence of the Brown adjoint J is a conclusion; the pinning equation was checked by hand to hold for the base-change mate, and since the comparison map is invertible it fixes e uniquely. Clause 2 source side: c.precomp j, normalized by the leftAdjointUniq open-extension compositor, with unique counit-compatible comparison. Clause 3: arbitrary covers I : Type w with iSup U = ⊤, including empty and infinite ones; the displayed locality formulas are instances of the clause-2 theorems. Every Compactification is allowed, which is a correct generalization. Only the item's lean field changed, and the statement is verbatim. det-sf-existence-brown is a genuine stmt_dep (localizingLowerShriek is owned by the landed def node def-sf-localizing-lower-shriek, which H2 does not let the item add). The 8 helper defs have real canonical data and are not duplicates; the 4 theorems are sorry-only. Docstrings, line widths and imports conform; non-public imports are proof dependencies. nt_compile --json: 7.9 s, rc 0, clean. Edge cases checked: empty opens and empty cover, identity opens, zero ring, unbounded objects, universes u/u+1/w."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

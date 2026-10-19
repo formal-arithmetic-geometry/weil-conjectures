@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-open-pullback-generators",
+ "kind": "statement",
+ "title": "Open inverse image preserves the constructible finite-Tor generators",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, $p\\ne\\ell$, and an admissible commutative condensed coefficient ring $\\Lambda$ as in [sk-def-localizing-closure]. Let $X$ be separated and of finite type over $k$ [sk-def-sfb-dc-setting], and let $j:U\\to X$ be a quasi-compact open immersion. Exact termwise inverse image $D(j^*)$ takes every bounded constant-model constructible finite-Tor complex on $X$ [sk-def-sfb-constructible] to one on $U$. This asserts generator preservation only; it neither assumes nor concludes an exceptional adjunction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+  "place": "Proof (1), preservation of Dctf by exact open restriction; flat models supply the Tor-amplitude argument."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "def-weil-open-immersion",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the actual finite stratification using Scheme.Stratification.pullback and the trivializing cover using Cover.pullback₁. The square pullback compositor and upperStarFromPointComp identify the new models with the same finitely presented modules on the point. Transport this along the exact pullback/cohomology isomorphism. Exactness preserves boundedness. Quasi-compactness and separatedness ensure the qcqs branch of constant-model constructibility applies to both X and U.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (1), preservation of Dctf by exact open restriction; flat models supply the Tor-amplitude argument."
+   }
+  },
+  {
+   "text": "Apply the proved upperStar_preservesFlat theorem to exact module inverse image, then DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj to the Tor interval of K. That theorem sends a bounded flat model to its exact termwise image, whose terms remain flat; its support interval is unchanged. This proves finite Tor amplitude without an open projection-formula assertion.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (1), preservation of Dctf by exact open restriction; flat models supply the Tor-amplitude argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-constructible-pullback-stratification",
+  "new-proetale-derived-module-pullback-monoidal",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D7",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+  "place": "Proof (1), preservation of Dctf by exact open restriction; flat models supply the Tor-amplitude argument.",
+  "note": "Complete Lean proof: explicit constant-model cover and stratification pullback; exactness for cohomology and boundedness; existing flat-preservation and Tor-amplitude APIs. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact open inverse image preserves bounded constructible complexes of finite Tor amplitude with condensed coefficients",
+   "date": "2026-10-19",
+   "results": "No direct theorem with these constant-model and arbitrary admissible ring-object interfaces; the derived adjunction itself already exists upstream.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localizing\"",
+   "date": "2026-10-19",
+   "results": "Verdier localizing-subcategory declarations, not preservation of these generators.",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "openPullback.*localizing|upperStar.*localizing",
+   "date": "2026-10-19",
+   "results": "No hits from msearch. Repository rg found UnboundedLocalizingPullback for concrete coefficients and PullbackConstantModelConstructible with a different coefficient presentation.",
+   "verdict": "Existing interfaces do not directly supply this generator statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact pullback of sheaves preserves bounded constructible finite Tor amplitude complexes",
+   "date": "2026-10-19",
+   "results": "8 hits: TopCat.Sheaf.pullback; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; sheafPullbackConstruction.preservesFiniteLimits; pullbackPushforwardAdjunction; no bounded constant-model finite-Tor generator statement.",
+   "verdict": "No exact Mathlib match; use the existing source-library flat-model and pullback APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.MateOpenRestriction",
+  "date": "2026-10-19",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-mate-open-restriction",
+   "place": "Proof (1), assertion that exact restriction carries Dctf into Dctf.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenPullbackGenerators",
+  "file": "lean/Sheaf/Paper/OpenPullbackGenerators.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openPullback_generators",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openPullback_generators"
+  ],
+  "statement": "theorem openPullback_generators\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)\n    (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)\n    {U X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] :\n    ∀ K : ConstantModelConstructibleFiniteTor Λ X,\n      constantModelBoundedConstructible Λ U\n          ((upperStar Λ j).mapDerivedCategory.obj K.obj) ∧\n        DerivedCategory.finiteTorAmplitude _ ((upperStar Λ j).mapDerivedCategory.obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
