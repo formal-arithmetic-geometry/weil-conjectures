@@ -15,9 +15,116 @@
   "def-pc-cochain-complex-modules",
   "def-pc-acyclic-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in $\\mathcal A=\\operatorname{Mod}(R)$. Since the site is small in the module universe, [lem-weil-pbc-ring-sheaves-grothendieck] makes $\\mathcal A$ Grothendieck abelian. By [lem-sp-grothendieck-enough-injectives] it has enough injectives, and clause (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] gives an exact augmented injective resolution $0\\to F\\xrightarrow{\\iota}J^0\\to J^1\\to\\cdots$, extended by zero for negative degrees. Fix this resolution for every Ext calculation. This is legitimate: by [lem-sp-derived-well-defined], applied to the left exact additive functor $\\operatorname{Hom}_R(E_i,-):\\mathcal A\\to\\operatorname{Ab}$ (and to $\\operatorname{Hom}_R(M,-)$ for the coproducts $M$ of step 2), the groups $H^p\\operatorname{Hom}_R(E_i,J^\\bullet)$ do not depend on the chosen injective resolution of $F$, so the hypothesis $\\operatorname{Ext}^p_R(E_i,F)=0$ for $p>0$ holds for this $J^\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf, choice of injective resolution; injectives.tex Tag 079Q, remark-existence-D; derived.tex Tag 013K, lemma-injective-resolutions-exist (1)."
+   }
+  },
+  {
+   "text": "If $M\\simeq\\bigoplus_{a\\in A}E_{i(a)}$, restriction to summands gives a degreewise isomorphism of complexes $\\operatorname{Hom}_R(M,J^\\bullet)\\simeq\\prod_{a\\in A}\\operatorname{Hom}_R(E_{i(a)},J^\\bullet)$: postcomposition by $d_J$ commutes with restriction. For complexes $L_a$, apply the exact-product statement [lem-pc-abelian-groups-exact-products] to $0\\to Z^q(L_a)\\to L_a^q\\to B^{q+1}(L_a)\\to0$ and $0\\to B^q(L_a)\\to Z^q(L_a)\\to H^q(L_a)\\to0$. Kernels are computed componentwise, so these two exact product sequences identify $H^q(\\prod_aL_a)$ with $\\prod_aH^q(L_a)$. Thus $\\operatorname{Ext}_R^q(M,F)=0$ for $q>0$. The argument includes an empty coproduct and arbitrary repetitions.",
+   "uses": [
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, passage from vanishing on free summands to vanishing on their direct sums; the product-cohomology calculation is written out here."
+   }
+  },
+  {
+   "text": "Choose an integer $b$ such that $K^r=0$ for $r>b$. Define the first-quadrant double complex $D^{p,q}=\\operatorname{Hom}_R(K^{b-p},J^q)$ for $p,q\\ge0$, with zero terms elsewhere, horizontal differential $d_I(h)=h\\circ d_K^{b-p-1}$ and vertical differential $d_{II}(h)=d_J^q\\circ h$. Both differentials square to zero and they commute, since postcomposition and precomposition commute. The boundary at $p=0$ is compatible with extension by zero because $K^{b+1}=0$. This is the commuting convention of [def-sp-double-complex-total], whose total differential is $d_I+(-1)^pd_{II}$. Each total diagonal is finite: $0\\le p,q\\le p+q$.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf, the Hom double complex, reindexed using the upper bound; homology.tex Tag 012Z, section-double-complex."
+   }
+  },
+  {
+   "text": "The $p$-th column is $\\operatorname{Hom}_R(K^{b-p},J^\\bullet)$. By step 2 and the coproduct hypothesis its positive cohomology vanishes. In degree zero, the exact augmentation identifies $F$ with $\\ker(d_J^0)$, so the kernel universal property identifies $\\ker(\\operatorname{Hom}_R(K^{b-p},d_J^0))$ with $\\operatorname{Hom}_R(K^{b-p},F)$; there are no negative-degree boundaries. These identifications commute with precomposition by $d_K$. Therefore the degree-zero column cohomology, with its horizontal differential, is the complex $C^p=\\operatorname{Hom}_R(K^{b-p},F)$, $d_C(h)=h\\circ d_K^{b-p-1}$ for $p\\ge0$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf, column cohomology; Tag 07AC, lemma-existence-derived-lower-shriek, the row $E_1^{p,0}$."
+   }
+  },
+  {
+   "text": "Every row $D^{\\bullet,q}$ is exact, directly from acyclicity and injectivity [def-pc-acyclic-complex-modules, def-sp-injective-resolutions]. Indeed, write $r=b-p$. A horizontal cocycle $h:K^r\\to J^q$ kills $\\operatorname{im}d_K^{r-1}=\\ker d_K^r$, so it factors through $K^r/\\ker d_K^r=\\operatorname{im}d_K^r$. If $p>0$, extend this factored map across the monomorphism $\\operatorname{im}d_K^r\\hookrightarrow K^{r+1}$ using injectivity of $J^q$; the extension $g$ satisfies $h=g\\circ d_K^r$, so $h$ is a horizontal boundary. If $p=0$, then $r=b$ and $d_K^b=0$, hence the factorization already gives $h=0$. This proves exactness also at the left endpoint, without any assertion about sectionwise exactness of $K$.",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf, the other filtration of the Hom double complex; row exactness is expanded using the definition of injectivity."
+   }
+  },
+  {
+   "text": "Apply the second spectral sequence of [thm-sp-double-complex-spectral-sequences] to $D$. Its first page is ${}''E_1^{q,p}=H_I^p(D^{\\bullet,q})=0$ by step 5. All later pages and all stable terms are consequently zero. For each $n\\ge0$, the cited theorem gives a finite filtration $H^n(\\operatorname{Tot}D)=F^0\\supseteq\\cdots\\supseteq F^{n+1}=0$ whose successive quotients are these stable terms. Descending induction, from $F^{n+1}=0$ and $F^i/F^{i+1}=0$, gives $F^i=0$. Hence $H^n(\\operatorname{Tot}D)=0$ in every degree (negative total degrees are already zero).",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf, the two filtrations; convergence is homology.tex Tag 0132, lemma-first-quadrant-ss."
+   }
+  },
+  {
+   "text": "For the first spectral sequence of [thm-sp-double-complex-spectral-sequences], step 4 gives ${}'E_1^{p,q}=0$ for $q>0$ and ${}'E_1^{p,0}=C^p$, with $d_1=d_C$. Thus ${}'E_2^{p,0}=H^p(C)$ and ${}'E_2^{p,q}=0$ for $q>0$. Its finite-filtration convergence satisfies exactly the hypotheses of [lem-weil-pbc-first-quadrant-row-collapse]. Applying that lemma in every degree $p\\ge0$, including $p=0$, gives $H^p(C)\\simeq H^p(\\operatorname{Tot}D)=0$ by step 6. In particular it is the whole edge-isomorphism assertion, rather than only the positive-degree corollary, that is used.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, final spectral-sequence paragraph; Tag 07AA, example-hom-complex-into-sheaf; homology.tex Tag 0132, lemma-first-quadrant-ss."
+   }
+  },
+  {
+   "text": "Finally put $T^n=\\operatorname{Hom}_R(K^{-n},F)$ with the differential in the statement. Degree relabelling gives $T^{p-b}=C^p$ for $p\\ge0$ and $T^n=0$ for $n<-b$. On this relabelled complex the differential is $(-1)^{p-b+1}d_C$. Choose signs $a_0=1$ and $a_{p+1}=(-1)^{p-b+1}a_p$. Multiplication by $a_p$ gives an isomorphism from $C^p$ to $T^{p-b}$, since $a_{p+1}d_C=(-1)^{p-b+1}d_Ca_p$; its inverse is multiplication by the same signs. It therefore identifies $H^p(C)$ with $H^{p-b}(T)$. These groups vanish by step 7, and all lower degrees of $T$ are zero. This proves acyclicity with precisely the specified Hom differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, concluding acyclicity of the Hom complex; explicit sign comparison with the convention in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-derived-well-defined",
+  "lem-pc-abelian-groups-exact-products",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-pc-acyclic-complex-modules",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AA, example-hom-complex-into-sheaf; Tag 07AC, lemma-existence-derived-lower-shriek, coproduct Ext vanishing and the concluding spectral-sequence argument, with the reindexing and elementary calculations expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +160,45 @@
    "results": "8 hits: isZero_Ext_succ_of_projective, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.ProjectiveResolution.extMk_zero, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁. Digest 6396097182107750. Full outputs retained in lem-trf-acyclic-coproduct-ext-orthogonal-hom-search-4.txt.",
    "date": "2026-10-19",
    "verdict": "no match: KInjective/KProjective impose orthogonality against every acyclic complex; the Ext-dimension and Ext exact-sequence declarations do not give this bounded-above, termwise Ext-orthogonal Hom calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An acyclic bounded above complex with terms Ext acyclic against F has acyclic Hom into F",
+   "results": "8 hits; CochainComplex.IsKInjective.nonempty_homotopy_zero, HomologicalComplex.Acyclic, CochainComplex.isKInjective_iff_rightOrthogonal, HomologicalComplex.isGrothendieckAbelian, HomologicalComplex.instHasLimit, HomotopyCategory.mem_subcategoryAcyclic_iff, CochainComplex.IsKProjective.nonempty_homotopy_zero, CochainComplex.IsKProjective.leftOrthogonal. Digest ba0621a19de83d0e.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern K-injective/K-projective complexes, injective dimension, or Ext exact sequences, not acyclicity from bounded-above termwise Ext orthogonality. K-injectivity of F is not assumed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Acyclic\"",
+   "results": "0 hits; . Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern K-injective/K-projective complexes, injective dimension, or Ext exact sequences, not acyclicity from bounded-above termwise Ext orthogonality. K-injectivity of F is not assumed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a bounded above acyclic complex of coproducts of Ext orthogonal sheaf modules to a fixed module is acyclic",
+   "results": "8 hits; CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.IsKInjective.rightOrthogonal, CategoryTheory.HasInjectiveDimensionLT.mk, CochainComplex.IsKInjective, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.HasInjectiveDimensionLT.mk', CochainComplex.IsKProjective. Digest d56601fd3e9132a2.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern K-injective/K-projective complexes, injective dimension, or Ext exact sequences, not acyclicity from bounded-above termwise Ext orthogonality. K-injectivity of F is not assumed."
+  },
+  {
+   "tool": "grep",
+   "query": "hyper.?[Ee]xt|Ext.*[Ss]pectral|[Ss]pectral.*Ext|acyclic.*[Hh]om|[Hh]om.*acyclic",
+   "results": "25 hits; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean, Mathlib/Combinatorics/SimpleGraph/Acyclic.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean. Digest a60b88bd86bffa18.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern K-injective/K-projective complexes, injective dimension, or Ext exact sequences, not acyclicity from bounded-above termwise Ext orthogonality. K-injectivity of F is not assumed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Collapse hyper Ext spectral sequence for a bounded above acyclic complex with terms acyclic for contravariant Hom into F",
+   "results": "8 hits; CochainComplex.IsKInjective, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁', CochainComplex.IsKProjective, CategoryTheory.HasInjectiveDimensionLT.mk, CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective. Digest 5d5d347f78bb043e.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern K-injective/K-projective complexes, injective dimension, or Ext exact sequences, not acyclicity from bounded-above termwise Ext orthogonality. K-injectivity of F is not assumed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-continuous-cocontinuous-derived-shriek",
@@ -88,5 +230,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+  "worker": "stage1",
+  "summary": "Retained the statement and its size hypotheses. Expanded the Stacks 07AA/07AC argument into eight steps: one fixed nonnegative injective resolution, exact products of abelian groups for coproduct Ext vanishing, a first-quadrant reindexing, exact rows by injectivity, two spectral sequences with finite convergence, and the explicit sign comparison. All supporting statements already exist; no new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The spectral-sequence argument proving acyclicity of Hom from the bounded-above acyclic free-sum test complex; no site functor or lower shriek is part of this lemma. The supporting 07AA/07AC Hom-acyclicity calculation is realized by steps 1--8; the inherited ancestor and via chain are retained. Whole-blueprint searches for Hom complex, double complex, Ext orthogonal, acyclic Hom, and bounded above found no duplicate of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic structural theorem for module sheaves on an arbitrary small ringed site, used only to obtain an injective resolution; the local-term unit has no such structural statement."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic first-quadrant spectral-sequence edge isomorphism, used as a black box after constructing the Hom bicomplex; no local-term-unit statement gives this formal collapse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-first-quadrant-row-collapse"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-014d6f408",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-014d6f408 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement, Stacks 07AA (sites-cohomology.tex l.8172) and the 07AC direct-sum Ext application (l.9380-9410) agree. I checked all 8 steps: (1) the product-of-Hom identity and cohomology commuting with products in Ab; (2) D^{p,q}=Hom(K^{b-p},J^q) with the right d_I direction and commuting differentials; (3) columns: Ext vanishing and degree-0 identification Hom(K,F); (4) rows exact by injectivity, including the p=0 endpoint where d^b=0; (5) the second spectral sequence's E_1=0 gives Tot acyclic; (6) the first collapses to C, using the edge isomorphism in degree 0 too; (7) the sign twist a_p gives the isomorphism to the stated Hom differential; (8) small cases: K=0, E->E identity, and Z->Z->Z/2 showing the hypothesis is needed. Cited statements match their uses, and the blueprint_update of def-sp-double-complex-total is consistent. No duplicate in the DAG. Both tool_uses (pbc Grothendieck structure, row-collapse) are generic and accepted. The item is reachable from sk-i-curve-zero through the inherited local-term-locality/Temkin chain (a base binding, not this delivery's fault) and is not on the route-pivot drop list. All cited nodes are non-trf, so the delivery adds no batch-5 flags. FIX: step 1 fixed its own nonnegative resolution J without saying that the Ext hypothesis, stated for 'an' injective resolution, holds for this J. I added [lem-sp-derived-well-defined] for Hom_R(E_i,-) and Hom_R(M,-) to that step's uses and to proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
