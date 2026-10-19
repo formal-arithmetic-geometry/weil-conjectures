@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-continuous-ring-universe-realization",
+ "kind": "statement",
+ "title": "Canonical continuous-ring realization in the scheme universe",
+ "statement": "Let T be a totally disconnected topological ring in universe u and X a scheme in universe u. The canonical comparison p_X^* C(-,T) to the abelian sheaf U ↦ ULift C(|U|,T), defined by the inverse-image adjunction and the profinite test projection, is an isomorphism and preserves multiplication and unit. No field structure or Type 0 restriction is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; parent comparison proof steps 2--5; for local Smith, Theorem 6.12(2) pivot/division argument."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Define the adjoint by precomposition with the profinite test projection; naturality is the projection naturality equation. Construct the ring-valued adjoint and use the sheaf-compose monoid comparison to prove preservation of ring operations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On an affine weakly contractible test object, use the terminal point-component arrow in the point-Lan diagram. Total disconnectedness factors every continuous coefficient through connected components, giving a bijection on sections. The sheafification unit is invertible on this basis. The affine weakly contractible basis criterion makes the comparison an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-point-lan-affine-evaluation",
+    "lem-weil-pbc-integral-scalar-contractive",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-point-lan-affine-evaluation",
+  "lem-weil-pbc-integral-scalar-contractive",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Detailed proof of the corresponding part of lem-sfb-integral-lfp-constant-model-comparison; explicit universe-polymorphic coefficient construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical sheaf of continuous functions to a totally disconnected topological ring equals pullback of its condensed continuous function ring, in arbitrary universe",
+   "results": "CompHausLike.LocallyConstant.counit_app_val; CompHausLike.LocallyConstantModule.functor_obj_val; Condensed.underlying_obj; TopCat.toSheafCompHausLike_val_obj. These concern the profinite site, not the scheme inverse-image comparison.",
+   "date": "2026-10-18",
+   "verdict": "No matching scheme coefficient realization or presentation-fibre theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"Ring\"",
+   "results": "12 continuous-map ring instances, including ContinuousMap.instNonUnitalNonAssocRingOfIsTopologicalRing; no pro-etale comparison.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapRing|condensedRingObj|presentationFiberType",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback to a scheme of the condensed ring of continuous functions into a totally disconnected topological ring is canonically isomorphic to the sheaf of continuous functions to the ring.",
+   "results": "TopCat.continuousFunctions.pullback and TopCat.presheafToTopCommRing (Mathlib.Topology.Sheaves.CommRingCat); CategoryTheory.Functor.sheafPullback; CompHausLike.LocallyConstant.functorToPresheavesIso. Read the continuous-function and pullback declarations.",
+   "date": "2026-10-19",
+   "verdict": "No match: these construct topological continuous-function presheaves or generic pullbacks; they do not identify the scheme pro-etale inverse image of condensed coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLfpConstantModelComparison",
+  "date": "2026-10-18",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, first sentence 'use the characterisation of bounded constructible complexes recalled in the proof of [lem-sfb-dc-lower-star-preserves]': matching the general-lfp predicate of the statement with the scalar-model characterisation (parent steps 1, 3, 4, 5).",
+   "via": [
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousRingUniverseRealization",
+  "file": "lean/Sheaf/Paper/ContinuousRingUniverseRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparisonAdjoint",
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison",
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison_isMonHom",
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison_isIso"
+  ],
+  "statement": "theorem comparison_isIso (X : Scheme.{u}) (T : Type u)\n    [TopologicalSpace T] [Ring T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :\n    IsIso (comparison X T)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T192748-L-1864345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T192748-L-1864345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

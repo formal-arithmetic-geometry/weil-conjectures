@@ -32,132 +32,72 @@
  ],
  "proof": [
   {
-   "text": "We first prove a local statement on each stratum, keeping its actual immersion into $X$. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], every nonempty family of closed subsets of $|X|$ has a minimal member. Applied to the complements of an increasing chain of opens, minimality forces that chain to stabilize, so $|X|$ is Noetherian. Every subspace $|T|$ is also Noetherian: for an increasing chain $O_j$ of subspace opens choose ambient opens $U_j$ with $O_j=U_j\\cap|T|$; the ambient opens $H_j=\\bigcup_{k\\leq j}U_k$ form an increasing chain and satisfy $H_j\\cap|T|=O_j$, so their stabilization gives stabilization of $O_j$. Thus the topological hypothesis of the descent lemma used below holds on every stratum, irrespective of its chosen scheme structure. Suppose (i), choose its finite stratification, and fix one stratum $T$. By [def-sfb-locally-finitely-presented] and the finite-biproduct cokernel definition [def-sfb-finitely-presented-module], $M_T=M|_T$ has a pro-étale cover $(V_i\\to T)$ with presentations $B_{V_i}^{m_i}\\xrightarrow{F_i}B_{V_i}^{n_i}\\to M_T|_{V_i}\\to0$. Inverse image along any further scheme map preserves these finite presentations: [sk-prop-sfb-cartesian-coefficients] identifies the coefficient rings and makes module pullback exact. The site definition says each $V_i\\to T$ is flat and the family is jointly surjective on points.",
+   "text": "Use the same finite constructible stratification from general constructibility. Its immersions embed their Noetherian underlying spaces in X. Normalize each stratum coefficient ring by the canonical pullback isomorphism; local finite presentation is invariant under this ring isomorphism.",
    "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-pbc-quasi-compact-scheme",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-constructible-stratification",
     "def-sfb-constructible-module",
+    "def-constructible-stratification",
+    "lem-weil-pbc-module-constructible-pullback",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a finite-presentation pro-etale cover choose the actual presentation morphisms. The spectral absolute value is nonarchimedean, hence the lattice integer subring is totally disconnected and Hausdorff. Use the canonical universe-polymorphic continuous realization to form each full scalar cokernel class. These agree at comparable points by continuity and Hausdorffness, and agree over equal base points by compatible geometric evaluation.",
+   "uses": [
     "def-sfb-locally-finitely-presented",
+    "def-sfb-finitely-presented-module",
+    "lem-sfb-integral-continuous-presentation-matrix",
+    "lem-sfb-continuous-presentation-fiber-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The covering maps are flat and jointly surjective. Apply arbitrary-type specialization-invariant flat descent on the Noetherian stratum. Pulling its locally constant class function back to each covering member makes that presentation fibre-type function locally constant.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-rank-descent",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-presentation constant-type cokernel theorem to each covering member. Transport the result through the chosen presentation isomorphism. Bind the covering and its local-model coverings; the canonical module pullback composition isomorphism identifies the resulting models. Retain the original stratification.",
+   "uses": [
+    "lem-sfb-integral-continuous-cokernel-local-model",
+    "sk-def-sfb-constructible",
     "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-pbc-proetale-site",
-    "def-sfb-finitely-presented-module"
+    "sk-def-pe-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Definition 01OV (definition-noetherian) and Lemma 01OZ (lemma-Noetherian-topology), via the cited minimal-closed-subset node; the subspace ACC argument is written out."
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-continuous-coefficient-realizations] with the topological ring $A=\\mathcal O_E$. It is totally disconnected in its valuation topology (balls are clopen), so that comparison is an isomorphism and identifies $B_{V_i}$ with the sheaf $U\\mapsto C(|U|,A)$, naturally under restriction. The entries of $F_i$ are continuous functions on $|V_i|$: a map from a finite free module is determined by the images of its standard generators, whose coordinates lie in $B_{V_i}(V_i)$. For each $v\\in |V_i|$ define the scalar module $Q_{i,v}=A^{n_i}/F_i(v)(A^{m_i})$. Encode its isomorphism class in the fixed set $\\mathcal S$ of isomorphism classes of all finite scalar matrix cokernels (a quotient of the set of finite matrices over $A$). Write $r_i(v)=[Q_{i,v}]$. Each entry is equal at comparable points of $V_i$: a continuous map sends a specialization to a specialization, while in the Hausdorff space $A$ comparable points are equal. Hence $r_i$ is specialization invariant. This uses the integral continuous ring itself, not the rationalization. The integral coefficient ring used in the entry-pullback lemma below is exactly this $B$: [def-weil-pbc-continuous-integral-coefficients] uses the valuation subring $\\{x\\in E:\\lVert x\\rVert\\leq1\\}$ with its subspace topology and pulls back its condensed continuous-function ring. For this finite extension, the norm is the same valuation absolute value defining $A$ in the item.",
+   "text": "Conversely each finite constant local model is locally finitely presented. On each stratum transport this local finite presentation back across the canonical coefficient isomorphism, using extension-of-scalars equals restriction along its inverse. The same stratification proves general constructibility. Since X is qcqs, the finite-constant-model predicate is exactly the stratified one.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-continuous-integral-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1: continuous-function coefficient realization; specialization invariance follows directly from the Hausdorff topology."
-   }
-  },
-  {
-   "text": "The functions $r_i$ agree over equal base points, including across distinct presentations. Indeed, if $v\\in V_i$ and $w\\in V_j$ lie over $x\\in T$, apply [lem-weil-common-extension-fields] to $\\kappa(v)/\\kappa(x)$ and $\\kappa(w)/\\kappa(x)$ to obtain compatible embeddings into a field $K$. Choose an algebraic closure $\\Omega$ of $K$ by [lem-pc-algebraic-closure-exists-unique]. The embeddings into $\\Omega$ give maps $a:\\operatorname{Spec}\\Omega\\to V_i$ and $b:\\operatorname{Spec}\\Omega\\to V_j$ by [lem-weil-pbc-morphism-from-spec-field]. Their composites to $T$ correspond to the same pair consisting of $x$ and the common embedding $\\kappa(x)\\to\\Omega$, so the same bijection proves that they are equal. Thus they define a map to $V_i\\times_T V_j$, in agreement with Stacks Tag 01JT, schemes.tex, lemma-points-fibre-product [lem-weil-pbc-fibre-product-points]. Exact module inverse image and Cartesian coefficients [sk-prop-sfb-cartesian-coefficients] pull both presentations back to presentations of the same module $M_\\Omega$. Under [lem-weil-pbc-geometric-field-proetale-evaluation], evaluation at $\\operatorname{Spec}\\Omega$ preserves cokernels and finite free modules. Its coefficient ring is $A$, by [det-pe-condensed-point-coefficients] at the one-point profinite set. [lem-weil-pbc-integral-regular-coefficient-pullback], applied to each entry as an endomorphism of the regular module in the standard bases, identifies the pulled matrix entries with $F_i(v)$ and $F_j(w)$; a continuous function on the one-point underlying space of $\\operatorname{Spec}\\Omega$ has exactly this value. Consequently both $Q_{i,v}$ and $Q_{j,w}$ are isomorphic to the same scalar module $M_\\Omega(\\operatorname{Spec}\\Omega)$, so $r_i(v)=r_j(w)$. Neither conservativity of geometric points nor finite-dimensionality of the integral modules is asserted.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "det-pe-condensed-point-coefficients",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-pbc-integral-regular-coefficient-pullback",
-    "lem-weil-common-extension-fields",
-    "lem-pc-algebraic-closure-exists-unique",
-    "lem-weil-pbc-morphism-from-spec-field",
-    "lem-weil-pbc-fibre-product-points"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Examples 4.1.10 and 4.2.11; geometric-field evaluation. Common field and its algebraic closure use Stacks 0H7K (fields.tex, lemma-common-extension-field) and 09GT (fields.tex, theorem-existence-algebraic-closure); field-valued points use 01J9 and 01JT (schemes.tex, lemma-characterize-points and lemma-points-fibre-product)."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-condensed-field-rank-descent] to the scheme $T$, the flat jointly surjective family $(V_i\\to T)$ of step 1, the set $\\mathcal S$, and the functions $r_i$. Its statement allows any target type, not merely natural-number ranks. Steps 2 and 3 verify respectively specialization invariance and compatibility over equal base points. It gives a locally constant function $d:|T|\\to\\mathcal S$ with $r_i=d\\circ|V_i\\to T|$. In particular each $r_i$ is locally constant because scheme morphisms are continuous. This is the point where Noetherianity is essential; the source members $V_i$ need not be Noetherian.",
-   "uses": [
-    "lem-weil-pbc-condensed-field-rank-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1; agent specialization-invariant descent argument, using the existing general descent statement for arbitrary target sets."
-   }
-  },
-  {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR and has a uniformizer $\\pi$. Apply [lem-sfb-continuous-integral-matrix-local-smith] to $Y=|V_i|$ and the continuous matrix $F_i$ of step 2, whose scalar cokernel class is locally constant by step 4. It supplies an open cover $(W_{i\\alpha})$ with continuous invertible row and column matrices and a fixed scalar rectangular diagonal matrix $D_{i\\alpha}$, satisfying $L F_i R=D_{i\\alpha}$. Regard each open as its open subscheme. Through [lem-weil-pbc-continuous-coefficient-realizations], those matrices and their inverses are actual mutually inverse sheaf maps on $W_{i\\alpha}$, since matrix multiplication is pointwise multiplication of continuous sections. Thus the presentation of $M$ on that open is isomorphic to the presentation by $D_{i\\alpha}$. Put $P_{i\\alpha}=\\operatorname{coker}(D_{i\\alpha}:A^{m_i}\\to A^{n_i})$; it is finitely presented by [def-sc-finitely-presented-module]. The scalar tensor universal property identifies the sheaf cokernel of $D_{i\\alpha}$ with $B_{W_{i\\alpha}}\\otimes_A P_{i\\alpha}$: a map from either object to a $B$-module $N$ is exactly a tuple of $n_i$ local sections of $N$ annihilating the columns of $D_{i\\alpha}$, with agreement and gluing on overlaps. This is also the coequalizer definition of relative tensor in [def-sfb-modobj-relative-tensor]. No flatness of $B$ as a constant $A$-module is required. Open covers are pro-étale covers, and cover composition [sk-def-pe-site] makes the family $(W_{i\\alpha}\\to T)$ a pro-étale cover. We have therefore obtained the required finite scalar local models on every original stratum. The original finite stratification proves (ii).",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sfb-continuous-integral-matrix-local-smith",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-sc-finitely-presented-module",
-    "def-sfb-modobj-relative-tensor",
-    "sk-def-pe-site",
+    "def-sfb-finitely-presented-module",
+    "lem-weil-pbc-module-constructible-pullback",
     "sk-def-sfb-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 and continuous integral pivot arguments in Theorem 6.12(2); agent local constant-type Smith argument, followed by the explicit tensor/cokernel universal-property calculation."
-   }
-  },
-  {
-   "text": "Conversely assume (ii). On each given stratum and each model open $V_j$, take the finite scalar presentation $A^{u_j}\\xrightarrow{G_j}A^{v_j}\\to P_j\\to0$ supplied by [def-sc-finitely-presented-module]. For any sheaf of $B_{V_j}$-modules $N$, a $B_{V_j}$-linear map $B_{V_j}\\otimes_A P_j\\to N$ is, by the relative tensor coequalizer [def-sfb-modobj-relative-tensor], exactly an $A$-linear map from the constant sheaf $P_j$ to $N$. Giving this map is giving $v_j$ sections $t_1,\\ldots,t_{v_j}\\in N(V_j)$ satisfying $\\sum_{b=1}^{v_j}(G_j)_{ba}t_b=0$ for every $1\\leq a\\leq u_j$: the sections are the images of the scalar generators, and these equations impose their scalar relations; restriction and sheaf gluing give the unique map on the associated constant sheaf. Those tuples are also exactly the $B_{V_j}$-linear maps $B_{V_j}^{v_j}\\to N$ annihilating $G_j$. This proves the cokernel universal property and hence the presentation $B_{V_j}^{u_j}\\xrightarrow{G_j}B_{V_j}^{v_j}\\to B_{V_j}\\otimes_A P_j\\to0$. Transport it through the assumed local-model isomorphism to obtain a finite presentation of $M|_{V_j}$ in exactly the sense of [def-sfb-finitely-presented-module]. The definition [def-sfb-locally-finitely-presented] now applies on each stratum, and the given finite constructible stratification is a witness to [def-sfb-constructible-module]. Hence (i). This direction does not use Noetherianity. The empty scheme uses the empty stratification; zero modules use the zero matrix. The diagonal description in step 5 includes $A/\\pi^e$ for $e\\geq1$, so no torsion-free hypothesis has entered either direction.",
-   "uses": [
-    "def-sc-finitely-presented-module",
-    "def-sfb-modobj-relative-tensor",
-    "def-sfb-locally-finitely-presented",
-    "def-sfb-constructible-module",
-    "def-sfb-finitely-presented-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 6.2(2) local-model formula, reverse direction here verified directly by scalar finite presentations."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "def-constructible-stratification",
   "def-sfb-constructible-module",
-  "def-sfb-locally-finitely-presented",
+  "def-constructible-stratification",
+  "lem-weil-pbc-module-constructible-pullback",
   "sk-prop-sfb-cartesian-coefficients",
-  "def-weil-pbc-proetale-site",
+  "def-sfb-locally-finitely-presented",
   "def-sfb-finitely-presented-module",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "det-pe-condensed-point-coefficients",
-  "lem-weil-pbc-integral-regular-coefficient-pullback",
-  "lem-weil-common-extension-fields",
-  "lem-pc-algebraic-closure-exists-unique",
-  "lem-weil-pbc-morphism-from-spec-field",
-  "lem-weil-pbc-fibre-product-points",
+  "lem-sfb-integral-continuous-presentation-matrix",
+  "lem-sfb-continuous-presentation-fiber-compatibility",
   "lem-weil-pbc-condensed-field-rank-descent",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-sfb-continuous-integral-matrix-local-smith",
-  "def-sc-finitely-presented-module",
-  "def-sfb-modobj-relative-tensor",
-  "sk-def-pe-site",
-  "sk-def-sfb-constructible"
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-integral-continuous-cokernel-local-model",
+  "sk-def-sfb-constructible",
+  "sk-def-pe-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1; direct integral matrix/module-type adaptation of the existing field rank-descent route. Theorem 6.2 alone is not used to infer perfection of arbitrary local presentations."
+  "place": "H6 Lean proof: full scalar cokernel classes, geometric compatibility, flat descent, continuous integral Smith reduction and its sheaf realization are implemented. Converse, cover, stratum and coefficient transports are proved without new sorry."
  },
  "mathlib_searches": [
   {
@@ -304,14 +244,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
   "lem-weil-pbc-condensed-field-rank-descent",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-integral-regular-coefficient-pullback",
-  "sk-prop-sfb-cartesian-coefficients",
-  "det-pe-condensed-point-coefficients",
-  "lem-weil-common-extension-fields"
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -340,12 +274,22 @@
    "AlgebraicGeometry.ProEtale.integralCoefficientRingMonObj",
    "AlgebraicGeometry.ProEtale.integralLfpConstantModelComparison"
   ],
-  "statement": "theorem integralLfpConstantModelComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (ℚ_[l]) E] [FiniteDimensional (ℚ_[l]) E] (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (integralCoefficientRing l E X).X) : IsConstructibleModuleObject (integralCoefficientRing l E X).X M ↔ IsConstantModelConstructible (integralCondensedRing l E) X M",
+  "statement": "theorem integralLfpConstantModelComparison\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (ℚ_[l]) E]\n    [FiniteDimensional (ℚ_[l]) E]\n    (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X]\n    (M : Mod\n      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (integralCoefficientRing l E X).X) :\n    IsConstructibleModuleObject\n        (integralCoefficientRing l E X).X M ↔\n      IsConstantModelConstructible\n        (integralCondensedRing l E) X M",
   "by": "Q29",
   "date": "2026-10-18",
   "branch": "newtargets-dag",
   "file": "lean/Sheaf/Paper/IntegralLfpConstantModelComparison.lean",
   "existing": false,
   "fixed_by": "NT-stage2-cc-2bbacc819"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T192748-L-1864345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
