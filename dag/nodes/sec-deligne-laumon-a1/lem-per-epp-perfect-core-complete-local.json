@@ -243,5 +243,23 @@
   "group": "Q134",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-fa5dbad16 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the new node lem-per-finite-extension-perfect-core in full, together with ILO IV 3.2.1-3.2.3 (pp. 55-56) and 4.2.3. Item statement unchanged; over a perfect k0 it is the 4.2.3 use of 3.2.3(i),(iv). Step 1: Stacks 032D (lem-weil-pbc-complete-local-domain-finite-over-regular) applies to R; the Cohen-ring branch is correctly excluded in characteristic p; the residue field of C[[t]] is C. Step 2: s(a)-a=(s(a_n)-a_n)^{p^n} lies in m^{p^n} and the intersection of the m^r is 0 (the cited completeness definition), so C contains the given k0. Step 3: the finite domain is a field, so F/K is finite. Steps 4-5: the iterated Laurent embedding gives K_perf=C_perf (ILO iii). Step 6: the new node applies (finite, characteristic p). Step 7: transitivity of algebraicity by a finite spanning set. New node: true by the Lemma 3.2.2 minimal-polynomial argument once K(x_n) stabilizes. Tested on L=K, F_{p^2}/F_p and F_p(t^{1/p})/F_p(t); finiteness is essential (perfect closure of F_p(t)). Self-contained and statement only; not a restated clause of the item. rg over dag/nodes for perfect-core and perfect-subfield wording found no duplicate. Off-unit tool 032D is declared only in split_report.tool_uses (C8) and accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppPerfectCoreCompleteLocal",
+  "declaration": "IsLocalRing.epp_perfect_core_complete_local",
+  "file": "lean/Sheaf/RingTheory/EppPerfectCoreCompleteLocal.lean",
+  "statement": "theorem epp_perfect_core_complete_local (p : ℕ) [Fact p.Prime] (k₀ : Type v) [Field k₀] [CharP k₀ p] [PerfectRing k₀ p] (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [IsDomain R] [CharP R p] [Algebra k₀ R] [IsAdicComplete (maximalIdeal R) R] (hres : ∀ x : ResidueField R, (∀ n : ℕ, ∃ y : ResidueField R, y ^ (p ^ n) = x) → IsAlgebraic k₀ x) : ∀ x : FractionRing R, (∀ n : ℕ, ∃ y : FractionRing R, y ^ (p ^ n) = x) → IsAlgebraic k₀ x",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-020193a98",
+  "group": "NW",
+  "result": "pass",
+  "note": "Clause-by-clause match: p prime, k0 perfect field char p (PerfectRing equivalent to the node's surjective-Frobenius convention on a field), R local/Noetherian/domain/char p/IsAdicComplete at maximalIdeal (recorded dep decls), Algebra k0 R as the inclusion, ResidueField/FractionRing, perfect cores as forall-n exists-p^n-th-root, hres and conclusion via IsAlgebraic k0. Induced algebraMaps checked by rfl in a scratch module. No extra assumptions; universes u,v independent. Edge cases n=0, x=0, R a field, p=2 covered. Node changed only in lean; statement verbatim; non-public imports are the stated proof-dep modules (CompleteLocalDomainFiniteOverRegular, MvPowerSeries, LaurentSeries mathlib_match). No duplicate found (rg lean/Sheaf + worker searches). Docstrings carry source place, blueprint id and all 7 steps; sorry-only; lines <=100. nt_compile --json side overlay: 3.6 s, exit 0, clean. Advisory: second reading is a same-worker reread."
  }
 }

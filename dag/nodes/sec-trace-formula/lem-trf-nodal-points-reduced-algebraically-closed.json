@@ -228,5 +228,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-41d123098 (reviewer sub-agent of L); spot-checked: I read the full item, six steps and no new nodes; review.md has the details. The statement matches the imported one: only the TeX escapes changed, and the ring-isomorphism, locally-finite-type and empty-case clauses are kept. Small cases: Spec F, A^n, F[u,v]/(uv), infinite smooth disjoint unions and the empty scheme satisfy it; Spec F[e]/(e^2) correctly fails the premise. Step 1: 01T6 leaf, Noetherian cover, affine-stalk localization (c) and localization-noetherian. Step 2: sbc-lem-smooth-geometrically-reduced (unsplit, off-unit, but slopmaster2-closed as Smooth.geometricallyReduced) with the identity extension. Step 3: the axis-restriction kernel is (uv) with g_ij=f_{i+1,j+1}; checked, elementary. Step 4: 00MC faithful flatness, then injectivity from ideal contraction with I=0, transported along the ring isomorphism. Step 5: Jacobson density (0478) gives a closed point x in cl{y}; p_y is contained in p_x, and the fraction calculation (t a^n=0, then (ta)^n=0 in B_p, then uta=0 with u,t outside q) is correct. Step 6: definition. Checked Stacks 0E37 curves.tex:4565-4573 and tags 01T6/01OV/01HV/00FN/00MC/05CK/0478/056T; no SGA. lem-trf-nodal-geometric-fibres-reduced has different hypotheses and conclusion, so it is not a duplicate; no node states the item; no cycle. The tool_uses entry for the Mathlib leaf pqf-lem-locnoeth-lft is unnecessary but harmless. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalClosedPointsReduced",
+  "declaration": "AlgebraicGeometry.isReduced_of_nodal_closed_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalClosedPointsReduced.lean",
+  "statement": "theorem isReduced_of_nodal_closed_points (F : Type u) [Field F] [IsAlgClosed F] (C : Scheme.{u}) (f : C ⟶ Spec (.of F)) [LocallyOfFiniteType f] (hnodal : ∀ x : C, x ∈ closedPoints C → (¬ ∃ U : C.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) F ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) F) * MvPowerSeries.X 1}))) : IsReduced C",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7ba635b0",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node and nothing extra is assumed (smooth-neighbourhood clause ¬∃U open with Smooth (U.ι≫f), AdicCompletion of the stalk at its maximal ideal, a plain ring iso ≃+* to MvPowerSeries (Fin 2) F ⧸ (X0*X1), IsReduced C). The shared universe is forced by Spec(.of F). Only the lean field differs from the live node, and lean.statement matches the file word for word. No duplicate in Sheaf, Mathlib or the DAG (lem-trf-nodal-geometric-fibres-reduced is a different statement). Docstrings have the source and blueprint id and all six proof steps; cited tags 0E37/00MC/05CK/0478 checked. nt_compile --json clean in 7.9 s. Advisory: some proof-only imports are unused while the proof is sorry."
  }
 }

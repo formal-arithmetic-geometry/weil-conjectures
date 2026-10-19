@@ -207,5 +207,23 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-3f676219d (reviewer sub-agent of L); spot-checked: I read the item, every cited node and the sources in full; the delivery has no new nodes. Statement: Stacks 067R in relative dimension 1, plus separatedness so the section is closed (01KT). It is true, and both uses in the parent lem-trf-valuation-nodal-polar-section have separatedness (Z proper over k; smooth locus of proper Y/T). Step 1: the Mathlib leaf lem-weil-pbc-section-separated-closed-immersion; its hypotheses are exactly 'f separated' and 'f∘σ=id'. Step 2: the identity morphism is finite, flat and finitely presented, checked against def-pc-finite-locally-free; genuinely elementary. Step 3: lem-pc-cartier-criterion (1)⇒(2). Stacks pic.tex 0B9D says this holds always; the Noetherian hypothesis is only for (4)⇒(3) and properness only for (2)⇒(1). The slopmaster2 declaration isRelativeEffectiveCartier_of_isFinite (RelativeEffectiveCartier.lean:702-712) has only SmoothOfRelativeDimension 1 and finite, flat, finitely presented hypotheses on D→S. Step 4: unpacking def-pc-relative-effective-cartier and def-sc-effective-cartier-divisor into def-nagata-effective-cartier-ideal, consistent with divisors.tex 01WR and 01WS; the ideal is the unit ideal off the section. Remark, not this delivery's fault: the existing definitions disagree on 'any open U' versus 'affine U', and 01WS reconciles them. Edge cases: S empty; X = A^1 over a non-reduced or non-Noetherian A, where t-a is a nonzerodivisor; S = Spec k. Duplicate search with rg over dag/nodes for 067R and section/Cartier/smooth wording found nothing equal to the item. No SGA citation. Accepted tool_use: lem-pc-cartier-criterion, a generic 0B9D criterion that is closed in Lean and replaces no step of the unit sk-i-curve-zero. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmoothCurveSectionCartier",
+  "declaration": "AlgebraicGeometry.smoothCurveSection_cartier",
+  "file": "lean/Sheaf/TraceFormula/SmoothCurveSectionCartier.lean",
+  "statement": "theorem smoothCurveSection_cartier {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [SmoothOfRelativeDimension 1 f] (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) : IsClosedImmersion σ ∧ σ.ker.IsInvertible",
+  "by": "Q78",
+  "date": "2026-10-18",
+  "existing": false,
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d94a366a1",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 067R+01KT: IsSeparated f, SmoothOfRelativeDimension 1 f, σ ≫ f = 𝟙 S ⊢ IsClosedImmersion σ ∧ σ.ker.IsInvertible; IsInvertible = recorded def-nagata-effective-cartier-ideal decl (affine nbhd, regular principal), matches its main-20261015 blueprint text; Hom.ker unconditional; no Noetherian/proper/universe restriction. Node unchanged except lean record (diff vs live = 0), statement verbatim; 5 stmt_dep files identical to live. Edge cases empty S, off-image unit ideal, non-Noetherian A¹_A, field base (= lem-sc-point-cartier special case, not a duplicate). rg found no general-base duplicate. nt_compile --json clean 3.6 s; probe #check of of_comp / isRelativeEffectiveCartier_of_isFinite consistent with proof plan; axioms only sorryAx+std. Advisory: proof-only imports are public import; docstring step 4 condensed."
  }
 }

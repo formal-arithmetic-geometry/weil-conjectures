@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-sbc-ideal-power-torsion-functor"
+  "def-sbc-ideal-power-torsion-functor",
+  "def-per-local-cohomological-dimension"
  ],
  "proof": [
   {
@@ -186,5 +187,23 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-85f5e3c22 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited defs (def-sbc-ideal-power-torsion-functor, def-weil-pbc-noetherian-ring) and the Stacks sources: local-cohomology 0DX7/0DX8/0DX9/0ECP and dualizing 0955/0956/0BJC; every tag matches its label. Statement: unchanged from the base except for the added torsion-functor citation. The base already restricted to I+J≠A, which is a correct source-error restriction: 0ECP is false at I=J=A since cd(A,A)=-1. Steps: Step 1 gets cd≤r from the Noetherian Cech model, whose terms vanish above r. That also shows cd exists for every finitely generated ideal. Step 2 gets cd≥0 from H^0_I(A/I)=A/I≠0, which is elementary from left exactness. Step 3 is a correct vanishing-rectangle argument with a finite filtration, and a,b≥0 follow from properness. Step 4 applies Step 1 to J=(f_1..f_e). Small cases checked: k[x,y] with (x),(y); a field; r=0; e=0. New nodes: cech-bound is 0956 for modules (Noetherian, so RΓ_I=RΓ_Z by 0955), with the r=0 case stated. sum-spectral is 0BJC with I and J relabelled (harmless, the sum is symmetric) and convergence stated as a finite filtration. Both are true, statement-only, self-contained, carry 3+ kinds of Mathlib search, and restate no item clause. Mathlib LocalCohomology.lean lists both comparisons as future work. Duplicate check: I read lem-sbc-local-cohomology-derived-torsion, lem-sc-koszul-cech-*, the extended-Cech ringed nodes and the change-rings/top-nonvanishing siblings; none states these. No cycle, no parallel delivery of these ids, no SGA, no off-unit uses or tool_uses. Advisory only: def-per-local-cohomological-dimension (N6) already defines cd, and the item's inline definition agrees with it; a later pass could cite it."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalCohomologyGeneratorBound",
+  "declaration": "ModuleCat.localCohomology_generator_bound",
+  "file": "lean/Sheaf/Algebra/Homology/LocalCohomologyGeneratorBound.lean",
+  "statement": "theorem localCohomology_generator_bound (A : Type u) [CommRing A] [Nontrivial A] [IsNoetherianRing A] : (∀ (I : Ideal A) (r : ℕ) (f : Fin r → A), I = Ideal.span (Set.range f) → I ≠ ⊤ → 0 ≤ localCohomologicalDimension I ∧ localCohomologicalDimension I ≤ r) ∧ (∀ (I J : Ideal A), I.FG → J.FG → I + J ≠ ⊤ → localCohomologicalDimension (I + J) ≤ localCohomologicalDimension I + localCohomologicalDimension J) ∧ (∀ (I : Ideal A) (e : ℕ) (f : Fin e → A), I.FG → I + Ideal.span (Set.range f) ≠ ⊤ → localCohomologicalDimension (I + Ideal.span (Set.range f)) ≤ localCohomologicalDimension I + e)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ad853d7b",
+  "group": "NV",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: Nontrivial+CommRing+IsNoetherianRing; generator bound 0≤cd≤r for I=span(range f), f:Fin r→A, I≠⊤; subadditivity for FG I,J with I+J≠⊤ (WithBot add harmless since both ≥0); adjoined-elements bound with redundant-but-not-stronger I.FG. Node diff vs live: only lean + stmt_deps gaining landed def-per-local-cohomological-dimension (allowed, brief §140); dep records identical to live; lean.statement verbatim. localCohomologicalDimension = sSup of nonvanishing rightDerived degrees of idealPowerTorsion (⊥=-1). Probe: ℕ-cast ≤ r is rfl-equal to ((r:ℕ∞):WithBot ℕ∞); single universe. Edge cases r=0/e=0/field/I+J=A ok. No duplicate in side lean/Sheaf or Mathlib. Docstrings carry Stacks tags, blueprint tag, Steps 1–4; sorry only. nt_compile --json clean 3.0 s. Advisory: redundant IdealPowerTorsionFunctor import."
  }
 }

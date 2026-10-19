@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex",
+  "lem-pod-projective-hom-evaluation-model"
  ],
  "proof": [
   {
@@ -339,5 +341,33 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-33028ae3f (reviewer sub-agent of L); spot-checked: Full source, DAG, route, hypothesis, citation, edge-case, duplicate, and eight-step proof audit completed. The repaired split removes the coinduction cycle, uses the ordinary derived route, preserves the coefficient category, and correctly identifies the scalar-to-bidual map without claiming invertibility. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AlgebraicShriekDerivedHomAdjunction",
+  "declaration": "ModuleCat.algebraicShriek_derivedHom_adjunction",
+  "declarations": [
+   "ModuleCat.coinductionHomEvaluation",
+   "ModuleCat.coinductionHomComparison",
+   "ModuleCat.coinductionHomShift",
+   "ModuleCat.coinductionHomLeft",
+   "ModuleCat.coinductionHomRight",
+   "ModuleCat.coinductionHomScalarFormula",
+   "ModuleCat.algebraicShriek_derivedHom_adjunction"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean",
+  "statement": "theorem algebraicShriek_derivedHom_adjunction : ∃ hJ : ∀ (I : CochainComplex (ModuleCat.{u} P) ℤ), I.IsKInjective → ((coinductionComplexFunctor f).obj I).IsKInjective, ∃ eP : ∀ (E I : CochainComplex (ModuleCat.{u} P) ℤ) (_hI : I.IsKInjective), DerivedCategory.Q.obj (CochainComplex.moduleHomComplex E I) ≅ (ihom (DerivedCategory.Q.obj E)).obj (DerivedCategory.Q.obj I), ∃ eA : ∀ (E I : CochainComplex (ModuleCat.{u} A) ℤ) (_hI : I.IsKInjective), DerivedCategory.Q.obj (CochainComplex.moduleHomComplex E I) ≅ (ihom (DerivedCategory.Q.obj E)).obj (DerivedCategory.Q.obj I), ∃ T : ∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ), ((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)) ≅ CochainComplex.moduleHomComplex (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I, ∃ θ : coinductionHomLeft f ≅ coinductionHomRight f, ∃ κ : derivedCoinduction f ⋙ (restrictScalars f).mapDerivedCategory ≅ ihom ((restrictScalars f).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))), (∀ (E I : CochainComplex (ModuleCat.{u} P) ℤ) (hI : I.IsKInjective), (eP E I hI).hom = coinductionHomComparison E I) ∧ (∀ (E I : CochainComplex (ModuleCat.{u} A) ℤ) (hI : I.IsKInjective), (eA E I hI).hom = coinductionHomComparison E I) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (r p q : ℤ) (h : p + r = q) (z : (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)).X r) (x : E.X p), (((T E I).hom.f r z).v p q h) x = (coinductionEvaluation f I).f q ((z.v p q h) x)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (r p q : ℤ) (h : p + r = q) (z : (CochainComplex.moduleHomComplex (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I).X r) (x : E.X p) (a : A), (coinductionEvaluation f I).f q (a • (((T E I).inv.f r z).v p q h) x) = (z.v p q h) (a • x)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (hI : I.IsKInjective), θ.hom.app (op (DerivedCategory.Q.obj E), DerivedCategory.Q.obj I) = (restrictScalars f).mapDerivedCategory.map ((ihom (DerivedCategory.Q.obj E)).map (@derivedCoinductionModel P A _ _ f _ _ I hI).hom) ≫ (restrictScalars f).mapDerivedCategory.map (eA E ((coinductionComplexFunctor f).obj I) (hJ I hI)).inv ≫ (restrictScalars f).mapDerivedCategoryFactors.hom.app (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)) ≫ DerivedCategory.Q.map (T E I).hom ≫ (eP (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I hI).hom ≫ (MonoidalClosed.pre ((restrictScalars f).mapDerivedCategoryFactors.hom.app E)).app (DerivedCategory.Q.obj I)) ∧ (∀ Y : DerivedCategory (ModuleCat.{u} P), κ.hom.app Y = (restrictScalars f).mapDerivedCategory.map ((MonoidalClosed.unitNatIso.hom.app ((derivedCoinduction f).obj Y)) ≫ (MonoidalClosed.pre (DerivedCategory.singleFunctorObjUnitIso (ModuleCat.{u} A)).hom).app ((derivedCoinduction f).obj Y)) ≫ θ.hom.app (op ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A)), Y)) ∧ (∀ n : ℤ, coinductionHomScalarFormula f θ κ (((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P))⟦n⟧) (((derivedCoinduction f).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P)))⟦n⟧) (coinductionHomShift f ((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P)) n))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical ordinary-module internal Hom uses the existing native closed derived tensor structure, with model comparisons fixed by the transposed signed evaluation. T is fixed by evaluation at one and its inverse formula. The final equality transports scalar action on D[n] through the canonical coinduction shift mate to coefficient biduality into P[n]; cancelling the two equal shifts is exactly the P[0]-biduality in the node. Reuses only the proof-free construction declarations from DerivedCoinductionAdjunction, not its theorem: adding that downstream theorem as a DAG dependency would create a cycle. The two added statement dependencies are already landed and provide the ordinary Hom complex and its uniquely characterized evaluation map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a446cca89",
+  "group": "Q129",
+  "result": "pass",
+  "note": "nt_compile --json clean (20.5 s, rc 0; injected-error control fails at 183:63). All node clauses match: arbitrary comm ring map, ordinary D(Mod), U = mapDerivedCategory, C = derivedCoinduction with K-injective model and hJ; θ is a bifunctor iso pinned on every (QE, QI) via eA/eP (hom = transposed signed evaluation), Q(T), with T's eval-at-1 and inverse a↦z(ax) formulas in all degrees; κ = θ at A[0] composed with the unit-Hom iso; for all n, scalar action on D[n], transported by the commShift mate C(P[n])≅D[n], equals curry(braiding≫ev) biduality into P[n] (shift-cancelled form of the node), with no invertibility claimed. Mechanical finding: lem-pod-projective-hom-evaluation-model is used only via .choose of its ev, uniquely fixed by the pure-tensor formula → constructed object, PASS on that point. Helpers have real data, sorry only on the theorem, docstrings and 8 steps present, lines ≤100, statement verbatim, report sections present. Advisory: DerivedInternalHomOfUniverses imported but unused (native ihom pinned to the Hom-complex model, as in Q131). Maintainer note: the item public-imports DerivedCoinductionAdjunction (owner lem-trf-derived-coinduction-adjunction, whose proof_deps cite this item), which makes a stage-3 Lean import cycle; the group cannot repair this under stage-2 rules. Split coinductionComplexFunctor/Evaluation, derivedCoinduction, derivedCoinductionModel/Adjunction (and derivedCoinductionUnderlying*) into a def-node module imported by both, and add that node to the item's stmt_deps."
  }
 }

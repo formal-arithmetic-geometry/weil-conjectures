@@ -280,5 +280,23 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-4b0f69a47 (reviewer sub-agent of L); spot-checked: I read the whole item (8 steps; no new nodes), every cited statement, and the sources: Stacks 0FUT lemma-blowup with its proof, Remark 0H1H and morphisms 056B. The statement is true as written and is not weakened. Step 1: 0FUE coordinates make the ideal of finite type and the center finite-presentation. Step 2: flat base change of blowups along V⊂P and along the étale map h, with the ideals matching. Step 3: the chart A[J/y_i] is a polynomial ring in a+b variables; surjectivity holds because y_j=y_i t_j, and injectivity holds by Laurent exponents. When b=0 the chart is empty, which agrees with Proj of the zero Rees algebra. Step 4: étale base change, étale⇒smooth, composition and source-locality. Step 5: complement isomorphism plus the open cover. Steps 6–7: properness of the blowup and the diagonal factorization prove finite type and separatedness. Step 8: the strict transform is the scheme-theoretic closure of the reduced open T≅X_U, reduced by 056B, and transfers to P^+ along a closed immersion. Edge cases tested: P or C empty, C=P or C a component (b=0), a Cartier center, a point in A^2, X reducible (xy=0), X⊆C. No duplicate in the DAG: permissible-boundary-preservation and nc-maximal-branch-blowup are regular/NC variants without the reducedness clause. No cycle, no SGA citation. Accepted tool_uses: lem-pur-smooth-pair-local-coordinates and lem-weil-pbc-etale-smooth-zero-dimensional-fibres. FIX: step 4 transported smoothness along the chart≅A^{a+b} and b_P^{-1}(V)≅V×Bl_J isomorphisms without citing anything. I added lem-weil-pbc-smooth-restrict-open-subschemes clause (c) to step 4's uses and text; proof_deps is unchanged because step 5 already cites it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.SmoothCenterBlowupGeometry",
+  "declaration": "AlgebraicGeometry.smooth_center_blowup_geometry",
+  "statement": "theorem smooth_center_blowup_geometry {P C X : Scheme.{0}} (p : P ⟶ Spec (CommRingCat.of ℚ)) (c : C ⟶ P) (x : X ⟶ P) [Smooth p] [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] [Smooth (c ≫ p)] [IsClosedImmersion c] [IsReduced X] [IsClosedImmersion x] : Smooth (c.ker.blowupMap ≫ p) ∧ IsSeparated (c.ker.blowupMap ≫ p) ∧ LocallyOfFiniteType (c.ker.blowupMap ≫ p) ∧ QuasiCompact (c.ker.blowupMap ≫ p) ∧ IsReduced (c.ker.strictTransform x)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/SecTraceFormula/SmoothCenterBlowupGeometry.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48264a0c6",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: P smooth+IsSeparated+LOFT+QC over Spec ℚ; C closed immersion with c≫p smooth (0FUT); X reduced closed; conclusion = Smooth/IsSeparated/LOFT/QC of c.ker.blowupMap≫p plus IsReduced (c.ker.strictTransform x) (recorded Gluing.blowup and IdealSheafData.strictTransform = image of the open over P∖V(I)). Empty center, b=0 component, X⊆C and empty P all admissible; Scheme.{0} forced by Spec ℚ; no extra hypotheses; no duplicate found; node changed only in lean; statement field verbatim. Delivered file compiles clean via nt_compile --json (3.5 s; injected-error control fails). FIX: H8, theorem docstring now carries the node's 8 proof steps with cited nodes; H9, unused Morphisms.Proper import replaced by Morphisms.Separated and Morphisms.QuasiCompact. Fixed file compiles clean (5.1 s), signature byte-identical, no record change."
  }
 }

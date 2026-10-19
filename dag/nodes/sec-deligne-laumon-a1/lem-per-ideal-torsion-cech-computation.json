@@ -175,5 +175,38 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-30328cc68 (reviewer sub-agent of L); spot-checked: Read the item, both cited nodes and the source in full. The item statement is unchanged and correct: it matches Stacks dualizing.tex Tag 0956 (lemma-compute-local-cohomology-noetherian, l.1649-1672, module assertion) for any module over a Noetherian ring. The complex, signs and localization agree with the source. Small cases check out: r=0, generator t=0, unit generator, two generators (m/1-m/1) and the zero ring. The torsion convention n>=1 gives the same submodule as def-sbc-ideal-power-torsion-functor's n in N. Steps: Step 1 proves d∘d=0 and functoriality correctly. Step 2 cites lem-per-local-cohomology-cech-bound, an existing unsplit node (Q71) in the same chapter and unit. I compared the two statements clause by clause: same hypotheses, same complex, same natural A-linear isomorphism. Step 3 inverts it with naturality and linearity written out. No new nodes, no tool_uses, no SGA, no cycle: the cited node has empty proof_deps and no delivery of it exists yet. Maintainer note: the item and lem-per-local-cohomology-cech-bound are same-day duplicates. Q71's run ended 06:53 and Q54's run, which created this item, ended 06:57 on 2026-10-19, so this item should be merged into cech-bound and lem-per-local-cohomology-change-rings repointed. Until then, a split of cech-bound must not cite this item, because that would create a 2-cycle."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.IdealTorsionCechComputation",
+  "declaration": "ModuleCat.idealPowerTorsion_rightDerived_iso_cech",
+  "declarations": [
+   "ModuleCat.IdealTorsionCech.localizationMap_existsUnique",
+   "ModuleCat.IdealTorsionCech.localizationMap",
+   "ModuleCat.IdealTorsionCech.tupleProduct",
+   "ModuleCat.IdealTorsionCech.faceProduct_dvd",
+   "ModuleCat.IdealTorsionCech.term",
+   "ModuleCat.IdealTorsionCech.differential",
+   "ModuleCat.IdealTorsionCech.differential_sq",
+   "ModuleCat.IdealTorsionCech.complex",
+   "ModuleCat.IdealTorsionCech.mapTerm",
+   "ModuleCat.IdealTorsionCech.mapTerm_comm",
+   "ModuleCat.IdealTorsionCech.map",
+   "ModuleCat.idealPowerTorsion_rightDerived_iso_cech"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/IdealTorsionCechComputation.lean",
+  "statement": "theorem idealPowerTorsion_rightDerived_iso_cech {R : Type u} [CommRing R] [IsNoetherianRing R] (r : ℕ) (t : Fin r → R) (q : ℕ) : ∃ e : ∀ M : ModuleCat.{u} R, ((idealPowerTorsion (Ideal.span (Set.range t))).rightDerived q).obj M ≅ (IdealTorsionCech.complex t M).homology q, ∀ {M N : ModuleCat.{u} R} (f : M ⟶ N), ((idealPowerTorsion (Ideal.span (Set.range t))).rightDerived q).map f ≫ (e N).hom = (e M).hom ≫ HomologicalComplex.homologyMap (IdealTorsionCech.map t f) q",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The auxiliary declarations construct precisely the extended alternating localization complex and fraction maps introduced in this node. Localization maps are chosen only from a unique universal characterization, never from unconstrained existence. The existential family of ModuleCat isomorphisms includes its full naturality equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bacf5fa00",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0956 module assertion: Noetherian R:Type u (no extra hyps), t:Fin r→R incl. r=0, K=span(range t), arbitrary M:ModuleCat.{u} R (universe of recorded idealPowerTorsion dep), H^q_K=(idealPowerTorsion K).rightDerived q; complex C^0=M (rfl), C^p=∏ over Fin p↪o Fin r of LocalizedModule.Away (tuple product), zero above r, d^0=m/1, alternating (-1)^a zero-based signs with face=succAboveOrderEmb, canonical fraction map via .choose of ∃! characterization; conclusion ∃ family of isos R^qΓ_K(M)≅H^q(C) with full naturality. lean.statement verbatim; node copy differs from live only in lean; deps identical to live. No duplicate module Čech complex in live/side (ExtendedLocalizationCech is ringed-site, different); cech-bound node unsplit with lean null. nt_compile --json clean 4.7 s; probe (rfl term 0, d=differential, empty tuples above r, axioms) compiles. Advisory: localizationMap could use IsLocalizedModule.lift + localizationAway_map_units_of_dvd; maintainer note: cech-bound should reuse IdealTorsionCech.complex/map or merge."
  }
 }

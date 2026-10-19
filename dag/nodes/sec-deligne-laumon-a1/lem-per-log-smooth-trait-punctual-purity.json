@@ -17,7 +17,10 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-trf-fs-log-blowup",
   "def-sbc-smooth-morphisms",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-punctual-purity",
+  "def-per-fs-log-smooth-etale",
+  "def-trf-log-regular-pair"
  ],
  "proof": [
   {
@@ -142,5 +145,26 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-59abb52c8 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the cited statements against ILO XVI §3.2 (pp.243-245), §3.4.1-3.4.5, §3.5 from its opening (arbitrary trait, p.248) through 3.5.11-3.5.13 with footnotes viii/ix (pp.248-251), and §3.6.1-3.6.5 (pp.252-253). The item is Thm 3.6.2 with the statement unchanged. Its three steps (3.6.5 chart, then 3.5.12 purity of the monomial model, then purity passed back through both étale arrows) are exactly the source's final sentence on p.253, and each step uses only what the cited statements say. Chart node: true for any uniformizer. The source argument is 3.6.3 with Q=N, inverting the face P', P≅N^r⊕P' (log regular and regular means M̄_x free), and an étale map into an open of V(S,π,e,f); the exponent tuple is nonzero because N→P is injective. Spec K⊂S is consistent with it. Monomial node: 3.5.12 over an arbitrary trait, with all-zero e correctly excluded (it gives the empty scheme). I tested e=(1), (1,0), (1,1), (2) in residue char 2, and (p), (p,p) in equal char p. Étale-locality node: true. It follows from essentially-étale local maps with m_xO_{Y,y}=m_y and d_y=d_x, ind-étale j^! base change, class compatibility with flat base change, and conservative pullback along the finite separable extension κ(y)/κ(x). It is strictly smaller than the item, so not a D1 relabelling. No duplicates: lem-trf-log-regular-completed-chart, lem-trf-face-localization-fs, lem-trf-fs-chart-free-factorization, lem-trf-log-smooth-log-regular, the nodal chart, and the punctual-purity siblings (two-of-three, trait-test, proper-degree-descent) all state other things. No cycle: the new nodes cite neither the item nor the parent gabber-regular-pair-purity. No SGA is cited. Batch 5: (1) regular-immersion-class-calculus is cited by the monomial and locality nodes only as a stmt_dep naming the Kummer class, exactly as the item's own statement already does. The flagged path ends at lem-trf-bounded-below-derived-adjunction, generic homological algebra that is not part of either assumption: accepted. (2) def-trf-fs-log-blowup is a general log-structure definition already in the item's stmt_deps: accepted. FIX: removed the unused stmt_dep def-weil-pbc-krull-dimension-ring from lem-per-regular-log-smooth-monomial-chart (fixes/dag/nodes/sec-deligne-laumon-a1/). Advisory for later splits: the 3.5.12 proof's footnote ix and 3.4.4 cite SGA 4, so the monomial node's split must use the blueprint smooth-purity route instead.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothTraitPunctualPurity",
+  "declaration": "AlgebraicGeometry.Etale.log_smooth_trait_punctual_purity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.log_smooth_trait_punctual_purity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothTraitPunctualPurity.lean",
+  "statement": "theorem log_smooth_trait_punctual_purity (ℓ : ℕ) (hℓ : ℓ.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (hR : IsUnit (ℓ : R)) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (M : EtaleLogStructure (Spec (.of R))) (hfs : M.IsFineSaturated) (hcanonical : ∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι, e.hom ≫ divisorialStructuralMap ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι = M.alpha) (V : FineSaturatedLogScheme.{u}) [IsNoetherian V.scheme] (hV : IsRegularScheme V.scheme) (f : EtaleLogHom V ⟨Spec (.of R), inferInstance, M, hfs⟩) (hf : f.IsLogSmooth) : IsPunctuallyPure ℓ hℓ V.scheme",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07f60349f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 782ee80f: H3/H12/H4 repaired. The plain-map chart node is gone; the statement uses canonical M (hcanonical iso to divisorialLogPresheaf of D(π) with α-compatibility), f : EtaleLogHom V ⟨Spec R,_,M,hfs⟩ and f.IsLogSmooth, the same block as the landed regular_logSmooth_monomial_chart; def-per-fs-log-smooth-etale and def-trf-log-regular-pair added to stmt_deps. H2 repaired: no dependency modules; the regular-immersion-class-calculus record and the three added def nodes are identical to live. The old Kummer-purity node is replaced by Q03's landed IsPunctuallyPure (def-per-punctual-purity), avoiding a race duplicate. Clause check: DVR trait, IsUnit ℓ, uniformizer π (conclusion independent of it), regular Noetherian fs V, conclusion ∀ w punctual purity. Empty V vacuous; both characteristics; universes as in the landed proof dependency. Record statement verbatim, sorry-only proof, docstring with source and 3-step plan, imports per rule 7. nt_compile --json clean (8.3 s, rc 0). Advisory: the IsLogSmooth→uniformizer-chart refinement (XVI 3.6.3, lem-per-trait-log-smooth-uniformizer-chart) is not in proof_deps; for stage 3."
  }
 }

@@ -206,5 +206,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-2de20db56 (reviewer sub-agent of L); spot-checked: I read all five steps and the new leaf in full against Stacks more-morphisms 02HM (converse proof, lines 1723-1742), 02HK and 02HL (confirmed in tags/tags). The item statement is unchanged from live and is exactly 02HM (2)=>(1) with the 02HG affine first-order test; it needs only lfp. Step 1: the affine U in c^-1(V) has a finitely presented section ring map by lem-weil-pbc-lfp-affine-opens-finite-presentation, which covers any affine pair, and no affine-intersection claim is made. Step 2: the thickening is surjective on points, so a(T)=a0(T0) lies in U; the lift factors through the open subscheme and uniqueness descends through the monomorphisms (elementary is fair). Step 3: Spec(D/I) to Spec D is a square-zero closed immersion, and def-weil-affine-spectrum's 'exactly one phi' gives the bijection between lifts over V and R-algebra maps v with q v = u, for arbitrary D. Step 4: the new leaf gives Omega=0 and H1=0, and finite presentation plus lem-weil-pbc-etale-ring-map-iff-etale-affine gives Spec A to Spec R etale. Step 5: def-weil-etale-morphism's statement records the 02GI affine-chart form, and its Mathlib match is affine-local, so this is not a use of a proof (C3 OK). New leaf lem-per-ring-square-zero-lifts-cotangent-zero: an exact match to Mathlib RingTheory/Etale/Basic.lean, FormallyEtale with mk_iff (lines 42-48) and FormallyEtale.iff_comp_bijective (lines 82-95); H1 and Omega are tied to the cited definition nodes, and it has three kinds of search. Tested on A=R, R[x] with dual numbers, and Z to F_p, which shows both modules are needed. Duplicate search (tags 02HM/02HG/02HK/02HL/00UQ/00UR, FormallyEtale matches, unique-lift phrases) found only the localized cotangent criterion, the trf weakly-etale consequence and the converse pbc node: no duplicate and no restated clause. The blueprint from/via are correct. There are no off-unit statements, so no tool_uses, and no SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LfpUniqueInfinitesimalLiftsEtale",
+  "declaration": "AlgebraicGeometry.lfp_unique_infinitesimal_lifts_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/LfpUniqueInfinitesimalLiftsEtale.lean",
+  "statement": "theorem lfp_unique_infinitesimal_lifts_etale {W Z : Scheme.{u}} (c : W ⟶ Z) [LocallyOfFinitePresentation c] (h : ∀ (T₀ T : Scheme.{u}) (j : T₀ ⟶ T) [IsAffine T₀] [IsAffine T] (hj : IsFirstOrderThickening j) (a₀ : T₀ ⟶ W) (b : T ⟶ Z), a₀ ≫ c = j ≫ b → ∃! a : T ⟶ W, j ≫ a = a₀ ∧ a ≫ c = b) : Etale c",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43531f9cf",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02HM (2)=>(1)/02HG clause by clause: lfp c, forall affine first-order thickening j (IsClosedImmersion ∧ ker^2=⊥, the recorded upstream WeilConjectures.AlgebraicGeometry.Thickening), a0, b with a0≫c=j≫b, ∃! a with j≫a=a0 ∧ a≫c=b; conclusion Etale c. No extra hypotheses, single universe u, edge cases (empty W/T, identity thickening) covered. Node differs from live only in lean; lean.statement verbatim. Imports match the 4 live dep records. No duplicate in Mathlib or side lean. Docstrings carry Tag 02HM/02HG, the blueprint tag and the 5 proof steps; proof sorry only. nt_compile --json rc 0, clean, 3.3 s. Report has Worker report + Second reading by Q23. No findings."
  }
 }

@@ -332,5 +332,23 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d791fc060 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged; it is the rank-one, integral, dimension-one case of Stacks 0AYU (lemma-degree-birational-pullback), which I read with its proof. There are no new nodes. All 9 steps check against the statements they cite. Step 1: X and X' are Noetherian, f is proper (proper over separated), and lem-trf-proper-birational-curve-finite (0AB7) applies with every hypothesis met, so f is finite. Step 3: O_X→f_*O_{X'} is injective and an isomorphism at the generic point, shown on affine charts with the fraction-field node; no normality is used. Step 4: Supp Q is closed and misses η, so its dimension is ≤0 by an explicit chain argument, and the zero-support node gives χ(Q⊗L)=χ(Q). Steps 5 and 6 (rank-one projection formula and exactness of ⊗L) are genuinely elementary, checked on a trivializing cover. Step 7: the affine cohomology isomorphism and finiteness from 02O5/02O6. Steps 8 and 9: Euler additivity, χ(Q) cancels, the signs match 0AYU, and the degree definition finishes. proof_deps equals the union of the uses. Edge cases tested: identity, nodal and cuspidal normalization (the proof correctly never claims χ(O_X)=χ(O_X')), non-rational support points, L=O. Batch-5 flag on lem-trf-proper-birational-curve-finite: accepted. It is Stacks 0AB7; its 104-node closure contains only 0AB6 (lem-trf-birational-curve-quasifinite) from the trace-formula chapter, plus generic Stacks nodes, and no Poincaré, sk-* or assumption node. It is neither a trace-formula nor a Poincaré-duality result, nor a step of their proofs. The declared generic tool_uses are accepted. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalCurveDegreeInvariance",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.degree_tensorPullback_of_birational_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalCurveDegreeInvariance.lean",
+  "statement": "theorem degree_tensorPullback_of_birational_curve (k : Type u) [Field k] {X X' : Scheme.{u}} [X.Over (Spec (.of k))] [X'.Over (Spec (.of k))] [IsIntegral X] [IsIntegral X'] [IsProper (X ↘ Spec (.of k))] [IsProper (X' ↘ Spec (.of k))] (hdimX : topologicalKrullDim X = 1) (hdimX' : topologicalKrullDim X' = 1) (f : X' ⟶ X) [f.IsOver (Spec (.of k))] (hbirational : ∃ (U' : X'.Opens) (U : X.Opens) (e : U'.toScheme ≅ U.toScheme), Dense (U' : Set X') ∧ Dense (U : Set X) ∧ U'.ι ≫ f = e.hom ≫ U.ι) (L : X.Modules) [L.IsInvertible] : ((tensorPullback f).obj L).degree k = L.degree k",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e7d5a356",
+  "group": "NH",
+  "result": "pass",
+  "note": "Lean signature matches node clause by clause: Field k, X/X' Over Spec k, IsIntegral, IsProper of structure maps, topologicalKrullDim = 1, f IsOver k, dense-open iso tied to f by U'.ι ≫ f = e.hom ≫ U.ι, L.IsInvertible, recorded tensorPullback, Modules.degree = eulerChar M − eulerChar unit. No extra hypotheses; the single universe u is the one the degree API requires. Edge cases identity/nodal/cuspidal normalization/non-closed fields covered. Node record differs from live only in lean; statement verbatim. Public imports = stmt_dep modules, plain imports = proof_dep modules (each checked against its record). Docstrings carry source, blueprint id and the 9 node steps; ≤100 cols; sorry only; no new defs. No duplicate (Hom.degree_pullback needs finite surjective + ample; Modules.degree_pullback is field base change). nt_compile --json clean, 2.9 s, exit 0."
  }
 }

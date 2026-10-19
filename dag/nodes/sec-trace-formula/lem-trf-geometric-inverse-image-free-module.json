@@ -22,7 +22,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-free-module",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -212,5 +213,39 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-cfa7e89ae (reviewer sub-agent of L); spot-checked: I read all six steps and every cited statement in full: def-trf-geometric-morphism, def-weil-pbc-sites-and-cohomology, def-weil-sheaf-of-modules-category, def-weil-pbc-sheafification, def-weil-pbc-free-module, def-weil-presheaf-modules-sheafification, lem-weil-pbc-geometric-module-transport (with geometric-module-construction), and the parent lem-trf-topos-inverse-image-differentials. Sources checked: Stacks 08TQ (sites-modules.tex l.6062-6084) asserts the three free-module identifications without proof, and 04BL (l.5951 ff.) defines O2[F] as the sheafification of U↦O2(U)[F(U)]; tags were checked against tags/tags. Proof: step 1 gives the free universal property through module sheafification over a variable ring sheaf, which the cited node states. Step 2 applies the transport lemma with A=S=f⁻¹B, e_R=id, c=id; the hypotheses (small sites, adjunction, finite-limit preservation) hold. Step 3 uses the lemma's normalization clause to show the composite bijection is h↦|h|∘Li. Step 4 builds the inverse maps with both uniquenesses checked. Step 5 gives naturality in E and in ring maps, with products taken only on the generator sheaves; the one-point topos over Z shows free(E×F)≠free(E)×free(F), and the item never makes that identification. Step 6 gives the identity and composite cases by generator uniqueness. proof_deps equals the union of uses, and the transport lemma does not depend on the item or its parent, so there is no cycle. Small cases E=∅, E=1, constant E, B=0 and f=id all check. There are no new nodes and I found no duplicate (rg over the DAG for 04BL, universal-module and free/inverse-image phrases). The recorded Mathlib searches cover all three kinds; pullbackObjFreeIso needs a constant index type and a site functor, so 'no match' is right. I accept the declared tool use of lem-weil-pbc-geometric-module-transport as a generic, reviewed module adjunction that replaces no unit step. No SGA is cited. FIX, one B2/B3 fault in the statement's form: the sites and the direction of f were not introduced, and 'free B-module sheaf on E' cited def-weil-sheaf-of-modules-category, which does not define it. The corrected statement introduces C, D and f: Sh(D)→Sh(C) and the transported ring and module structure. It defines O[F] inline as in 04BL, citing the free-module, module-sheafification and sheafification definitions already in stmt_deps. It also spells out the naturality, finite-product and identity/composite clauses as exactly what steps 5-6 prove and the parent uses. The mathematics is unchanged and nothing is weakened. The fix file is fixes/dag/nodes/sec-trace-formula/lem-trf-geometric-inverse-image-free-module.json, and review.md has the details.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InverseImageFreeModule",
+  "declaration": "CategoryTheory.SheafFreeModule.inverseFreeModule_existsUnique",
+  "declarations": [
+   "CategoryTheory.SheafFreeModule.ring",
+   "CategoryTheory.SheafFreeModule.moduleSets",
+   "CategoryTheory.SheafFreeModule.free",
+   "CategoryTheory.SheafFreeModule.generatorRaw",
+   "CategoryTheory.SheafFreeModule.generator",
+   "CategoryTheory.SheafFreeModule.change",
+   "CategoryTheory.SheafFreeModule.changeSets",
+   "CategoryTheory.SheafFreeModule.comparison",
+   "CategoryTheory.SheafFreeModule.IsComparison",
+   "CategoryTheory.SheafFreeModule.inverseFreeModule_existsUnique",
+   "CategoryTheory.SheafFreeModule.inverseFreeModule_naturality",
+   "CategoryTheory.SheafFreeModule.inverseFreeModule_products",
+   "CategoryTheory.SheafFreeModule.inverseFreeModule_identity",
+   "CategoryTheory.SheafFreeModule.inverseFreeModule_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/InverseImageFreeModule.lean",
+  "statement": "theorem inverseFreeModule_existsUnique (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}} (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse B BI) (E : Sheaf J (Type w)) : ∃! p : F.modules.obj ((free B).obj E) ≅ (free BI).obj (f.inverse.obj E), IsComparison f F E p",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b31f0194",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read item node (diff vs live: lean record + stmt_dep def-weil-pbc-algebraic-inverse-image, already landed, allowed), all 7 stmt_deps incl. full AlgebraicInverseImageOfUniverses source (graph conditions over all test sheaves fix the transported ring/module operations), Stacks 08TQ/04BL/03CY/03D3, and the parent InverseImageDifferentials. Clauses: small sites (EssentiallySmall.{w}, independent universes), f direction, free = sheafification of PresheafOfModules.free (real data), generator = sheafified [s], ∃! normalized iso as an equation of sheaf maps, naturality in e and ring maps with hb (bi = transport of b, no added assumption), finite products via piComparison including the empty family, identity with ringUnderlying = refl (needed), composition (verified true via graph conditions + left exactness). Edge cases E=∅, E=1, B=0, f=id fine. H4: no Mathlib/side/DAG duplicate (constant-index free only; 04BL cited only here and by a lean-less node). Statement verbatim, 14 declarations match, sorry only, source/blueprint docstrings with proof steps, report sections present. nt_compile --json: 60 s timeout at load 105, then clean 42.3 s at load 114. Advisory: plain GeometricModuleTransport import unused by statements (stage-3 proof dep)."
  }
 }

@@ -19,7 +19,10 @@
   "def-galois-object",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-category-colimit",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-per-galois-partition-modules",
+  "def-per-directed-constructible-galois-partition",
+  "def-per-prime-field-tensor-sheaf"
  ],
  "proof": [
   {
@@ -376,5 +379,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-83e2c325f (reviewer sub-agent of L); spot-checked: I read ILO XVII 7.4.2–7.4.7 (printed pp.305–308) next to all nine steps and the statements of every cited node. The item statement and stmt_deps are byte-identical to the Q52-created version. Every step is correct. (1) k_{i!} exact, preserving constructibility, class membership and filtered colimits: j_! exactness and stalks, plus the trf closed-subtopos node (exact, fully faithful, essential image j*M=0) and the closed-pushforward stalk node. (2) Torsion-local-system monodromy and descent-monodromy θ identify the one-stratum class with π1(V)-ind-unipotent discrete modules; finite orbit spans give the directed union; the final clause gives lcc ⇔ f.g. stalk. (3) There are finitely many simple F_ℓ[K_i]-modules, chosen before A. (4) The 7.4.7 node applies with B=Λ[K_i]. The report is right that ILO's printed B=A[K] is a typo. The mixed tensor clause of cover descent gives N_S⊗T(L0). (5) The projection map is an isomorphism on stalks (pod stalk-tensor, 03PU). (6) Open/closed recursion with exact-refinement closure. (7)–(8) The 7.4.4 pushout argument and the induction on strata are correct. The indexing poset is closed under finite sums, which are constructible by Step 2, and is small. New node lem-per-constructible-extension-finite-stage: it is true, equivalent to colim Ext¹(G,H_a)=Ext¹(G,H) plus the snake lemma and the pushout. I checked it via the j_!-generator resolution and qcqs H¹–colimit commutation, and on a point, X empty, G=0 and H=0. It is statement-only and self-contained. It is not a duplicate: the existing nodes give sheaf-Ext continuity, internal RHom with coproducts, condensed pro-étale O_E, or D_ctf with finite A only. No SGA citation appears in either file. Batch-5 flags are all generic. The trf closed-base localization closure is topos constructions only, and the parent already cites it. The pod stalk tensor is Stacks 008B. The three per monodromy/partition nodes reach pod only through cor-galois-lisse-representations (π1 ↔ lisse correspondence), which neither assumption gives and which is not part of the proof of Poincaré duality. I accepted the generic tool_uses. Maintainer note: when the helper is split later, it must avoid SGA 4 IX 2.7.3 (route lock) and go through Stacks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectedGaloisFiniteTensorGenerators",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisPartition.finite_tensor_generators",
+  "file": "lean/Sheaf/Paper/DirectedGaloisFiniteTensorGenerators.lean",
+  "statement": "theorem finite_tensor_generators (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (P : GaloisPartition X) (hP : P.IsDirected) : ∃ (r : ℕ) (C : Fin r → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))), (IsEmpty X → r = 0) ∧ (∀ a, P.constructible (ULift.{u + 1} (ZMod ℓ)) (C a)) ∧ ∀ (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ULift.{u + 1} (ZMod ℓ)) A], (∀ (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)), P.constructible A E → ∃ (n : ℕ) (H : Fin (n + 1) → Subobject E) (hH : Monotone H), IsZero (H 0 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ∧ IsIso (H (Fin.last n)).arrow ∧ (IsZero E → n = 0) ∧ (∀ j, P.constructible A (H j : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) ∧ ∀ i : Fin n, ∃ (a : Fin r) (N : ModuleCat.{u + 1} A), Module.Finite A N ∧ ∃ (ι : cokernel (Subobject.ofLE (H i.castSucc) (H i.succ) (hH (Fin.castSucc_le_succ i))) ⟶ (Etale.primeFieldTensorSheaf X ℓ A N).obj (C a)) (π : (Etale.primeFieldTensorSheaf X ℓ A N).obj (C a) ⟶ cokernel (Subobject.ofLE (H i.castSucc) (H i.succ) (hH (Fin.castSucc_le_succ i)))), ι ≫ π = 𝟙 _) ∧ (∀ (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)), P.modules A E → ∃ (I : Type (u + 1)) (_ : SmallCategory I) (_ : IsFiltered I) (D : I ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (c : Cocone D), (∀ i, P.constructible A (D.obj i)) ∧ (∀ i, Mono (c.ι.app i)) ∧ Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ E))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fd185ce1",
+  "group": "Q86",
+  "result": "fix",
+  "note": "Re-delivery resolves the H2 return of a4615835/c8333343: new existing:true def nodes def-per-directed-constructible-galois-partition (GaloisPartition.constructible, IsDirected on unchanged GaloisPartitionExactRefinement) and def-per-prime-field-tensor-sheaf (Etale.primeFieldTensorSheaf on unchanged PrimeFieldTensorDevissage) replace the theorem stmt_deps; exact refinement stays in proof_deps. Item Lean is byte-identical to the earlier heads (sha ab82624d); vs live, the item record differs only in lean and stmt_deps. Statement re-read against node and ILO XVII 7.4.2-7.4.7: finite list before all A, constructible filtration with A-linear retracts of N_X⊗C_a, filtered colimit of constructible subobjects, empty X gives r=0, zero E gives n=0, universes u/u+1. check_new_node clean for both nodes; body owners present in stmt_deps; no race in live DAG; owner modules identical in live and side. nt_compile --json clean in 4.5 s, exit 0. FIX: fixes/def-per-prime-field-tensor-sheaf.json removes 'noncomputable' from lean.statement (check_existing note, now clean). Advisory: definition docstrings keep the theorem nodes' blueprint tags."
  }
 }

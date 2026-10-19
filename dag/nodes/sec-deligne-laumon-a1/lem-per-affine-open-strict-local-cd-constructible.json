@@ -608,5 +608,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-00eb7d3cb (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-affine-open-strict-local-constant-bound, every cited statement and ILO XV §1 (printed pp. 219–220). The item is unchanged and is XV 1.2.2 for the affine open immersion V→X with bound q>d. The new node is exactly XV Corollaire 1.2.4 (constant Z/m, q>e). It carries the statement only, its blueprint/created/searches fields are valid, and it is strictly smaller than the item: no D1/D2 relabelling. The rg duplicate search found nothing; the parent would make a cycle. Small cases checked: e=0, e=1 (strictly henselian DVR generic point, cd≤1), m=1. Steps checked against the cited statements: (1) ℓ-power filtration via thm-constructible-serre and the long exact ladder; (2) the generation node's statement gives exactly the generators and the sum/extension/summand closure; (3) T→X quasi-finite by 02NH; (4) 00QB(3) gives finite A⊆E; (5) T=Y×_XV; (6) A strictly henselian, excellent, dim ≤ d (04GH, 07QU, integral dimension); (7) boundary Z has dim ≤ e−1, strictly henselian and excellent; (8) constant node on the affine opens T⊆Y and F⊆Z with q>d≥e>r; (9) recollement short exact sequence plus finite pushforward; (10) return along π. FIX: Step 4 applied 00QB, which needs R→E quasi-finite at every prime in the ring sense, from Step 3's scheme-level quasi-finiteness with no bridge. I added the definitional sentence and cited pqf-def-quasifinite and def-weil-pbc-ring-map-quasi-finite-at-prime (step uses and proof_deps). Batch-5 flag: the only sec-trace-formula node in the closure is lem-trf-reduced-scheme-image (Stacks 056B, the scheme-theoretic image of a reduced scheme is the reduced closure). That is generic scheme theory, not part of the trace formula or Poincaré duality, so I accept it. No SGA is cited. The generic off-unit tool_uses are accepted. Maintainer note: the item's source.place still says 'not the reduction of 1.2.3'; it is stale against the new proof but not a split-owned field, so I left it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenStrictLocalConstructibleCohomology",
+  "declaration": "AlgebraicGeometry.Etale.isZero_cohomology_affineOpen_of_strictlyHenselian_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenStrictLocalConstructibleCohomology.lean",
+  "statement": "theorem isZero_cohomology_affineOpen_of_strictlyHenselian_constructible (X : Scheme.{u}) [IsAffine X] [IsNoetherianRing Γ(X, ⊤)] [IsStrictlyHenselianLocalRing Γ(X, ⊤)] (hX : IsExcellent Γ(X, ⊤)) (ℓ n d : ℕ) (hℓ : ℓ.Prime) (hn : 1 ≤ n) (hunit : IsUnit (ℓ : Γ(X, ⊤))) (hd : ringKrullDim Γ(X, ⊤) = (d : WithBot ℕ∞)) {V : Scheme.{u}} [IsAffine V] (j : V ⟶ X) [IsOpenImmersion j] (C : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n))))) (hC : @Scheme.IsConstructibleEtaleModuleSheaf V (ULift.{u + 1} (ZMod (ℓ ^ n))) _ (by letI : NeZero (ℓ ^ n) := ⟨pow_ne_zero n hℓ.ne_zero⟩ letI : Fintype (ZMod (ℓ ^ n)) := ZMod.fintype (ℓ ^ n) exact Finite.of_equiv (ZMod (ℓ ^ n)) Equiv.ulift.symm) C) (q : ℕ) (hq : d < q) : IsZero ((cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((sheafCompose V.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) AddCommGrpCat.{u + 1})).obj C)))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0ccae438",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Every clause matches the node: affine X with Noetherian, strictly henselian local, excellent global ring; ℓ prime; n≥1; ℓ a unit; ringKrullDim = d; affine open V via an open immersion; C in ModuleCat.{u+1} (ULift (ZMod ℓ^n)) with the recorded Scheme.IsConstructibleEtaleModuleSheaf (the Finite instance is supplied by a Prop proof, so no extra hypothesis); q>d; IsZero of Etale.cohomology AddCommGrpCat.{u+1} of the forgotten sheaf in degree 0, the same rendering as the landed parent (Q20 PASS). Edge cases d=0, q=0, n=0/1, V empty, V=X, C=0 and the DVR generic open all check. Not a duplicate: the parent is strictly stronger and is proved from this item, so existing:true would be inexact and cyclic. Only the item's lean field changed; statement verbatim; docstrings carry the source place, blueprint id and all ten steps; only the theorem proof is sorry; report sections present. nt_compile --json on the snapshot: clean, 8.2 s against the 60 s limit."
  }
 }

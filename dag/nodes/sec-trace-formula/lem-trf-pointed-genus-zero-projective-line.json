@@ -469,5 +469,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-cc810a5f0 (reviewer sub-agent of L); spot-checked: I read all of item lem-trf-pointed-genus-zero-projective-line against Stacks curves.tex Tag 0C6T (lemma-genus-zero-positive-degree, statement and proof) with d=1. Compared with the side DAG, the statement, stmt_deps and blueprint fields are unchanged, and the hypotheses match 0C6T exactly: integral proper curve, k->H^0 an isomorphism, H^1(O)=0, deg M=1. No smoothness or algebraically-closed assumption is added and the conclusion is not weakened. I read the full statements of all 34 cited nodes, plus def-nagata-relative-proj and lem-trf-space-line-module-proj-map. Steps 1-2: the chain lemma and sobriety convert local-ring dimension 1 to topological dimension 1; C is Noetherian; coherent cohomology is finite and H^q=0 for q>=2; chi(O)=1 and chi(M)=2. Step 3: the Cartier lemma gives a nonzero local coefficient a in a domain; D=Z(s) misses the generic point; a chain argument gives dim D<=0. Step 4: Euler additivity and lem-pc-chi-zero-dim-support clause 3 with N=L_n give h^0(Q_n)=1, H^1(Q_n)=0 and D nonempty. Step 5: the finite-support closed immersion, the tilde/Gamma counit and cokernel preservation, and the closed-immersion surjectivity correctly supply global generation, which the DAG's version of 0AYT does not state. Step 6: b mod a generates O_x/(a) and a is in m_x, so b is a unit. Steps 7-8 are a properly set-up induction: H^1(L_n)=0, h^0(L_n)=n+1, and the monomial basis via the nonzero image of t^{n+1} on the nonempty D. Step 9: B is isomorphic to k[S,T] as graded rings. Step 10: lem-trf-proper-integral-curve-ample-degree applies; f-ample over Spec k holds since the empty open is vacuous; the canonical-Proj criterion and relative-Proj restriction plus graded invariance give an open immersion into Proj k[S,T]. Step 11: the affine-Proj scalar extension for Z->k needs no flatness and gives P({0,1};Spec k). Step 12: r is proper, hence its image is closed and open and nonempty; P^1 is irreducible from the two charts with overlap D(u), v=u^{-1}; so r is an isomorphism over k. Small cases checked: P^1 with O(1); conics with and without a degree-1 bundle; characteristic 2 and imperfect fields; empty D excluded. No new nodes. Duplicate check: lem-trf-genus-zero-smooth-proper-line (algebraically closed, smooth) is strictly narrower and lem-asd-projective-line-genus-zero is the converse; nothing else matches. The parent lem-trf-valuation-nodal-polar-section, step 2, uses exactly this statement. I accept all 20 declared generic off-unit tool_uses. No SGA is cited. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PointedGenusZeroProjectiveLine",
+  "declaration": "AlgebraicGeometry.isProjectiveLine_of_genus_zero_degree_one",
+  "file": "lean/Sheaf/TraceFormula/PointedGenusZeroProjectiveLine.lean",
+  "statement": "theorem isProjectiveLine_of_genus_zero_degree_one (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegralCurve (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))] (h₀ : Function.Bijective (Scheme.globalSectionsRingHom k (X := C))) (h₁ : Subsingleton ((RingedSpace.moduleCohomology C.toRingedSpace 1).obj (Scheme.Modules.unit C))) (M : C.Modules) [M.IsInvertible] (hdeg : Scheme.Modules.degree k M = 1) : Nonempty (Over.mk (C ↘ Spec (.of k)) ≅ Over.mk (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cb221be1",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0C6T (d=1) clause by clause: Field k; IsIntegralCurve (integral, separated, finite type, topologicalKrullDim = 1) + IsProper; globalSectionsRingHom bijective; Subsingleton of moduleCohomology 1 of unit (the recorded def-sc-ringed-space-module-cohomology decl); IsInvertible M; degree k M = 1 (χ(L) − χ(O)); Nonempty iso in Over (Spec k) to ProjectiveLine = ProjectiveSpace (ULift (Fin 2)) with pullback.fst. No added smoothness or algebraic-closure assumption; all universes u. Only the lean record is added to the node; statement field is verbatim; all imports used. genus_zero_smooth_proper_line (IsAlgClosed + Smooth) is narrower, not a duplicate. Per-file compile clean (5.3 s); broken-copy control fails. No findings."
  }
 }
