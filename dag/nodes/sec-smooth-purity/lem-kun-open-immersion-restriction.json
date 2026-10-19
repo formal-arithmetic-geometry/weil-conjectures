@@ -24,81 +24,50 @@
  ],
  "proof": [
   {
-   "text": "The existing open-immersion fully-faithfulness statement [lem-sc-open-immersion-pushforward-fully-faithful] says that the direct image $j_*:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$ is fully faithful, equivalently that the counit $j^{-1}j_*G\\to G$ is an isomorphism for every abelian sheaf $G$ on $U_{\\Et}$. Thus the counit gives the asserted natural isomorphism $j^{-1}j_*\\cong\\mathrm{id}$.",
+   "text": "The existing fully faithful direct image along an open immersion supplies Full and Faithful instances for lowerStar. The standard adjunction criterion therefore proves that the counit of upperStarLowerStarAdjunction is invertible. This is the first conjunct, with the original inverse image and direct image unchanged.",
    "uses": [
-    "lem-sc-open-immersion-pushforward-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
-    "place": "Lean declaration AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion, lines 94–99"
-   }
-  },
-  {
-   "text": "Choose a complex $C$ representing $F$ and a K-injective resolution $C\\to I$ by [prop-weil-pbc-kinjective-resolutions-exist], taking the coefficient ring to be $\\mathbf Z$. The functor $j^{-1}$ is additive and exact by [prop-weil-pbc-inverse-image-exact], and is left adjoint to $j_*$ by [def-weil-pbc-inverse-image]; $j_*$ is additive by [def-weil-pbc-direct-image]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $u=j_*$, $v=j^{-1}$. It follows that $j_*I$ is K-injective on $X_{\\Et}$. No bound on $I$, no quasi-compactness, and no finite cohomological dimension is used.",
-   "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "prop-weil-pbc-inverse-image-exact",
+    "lem-sc-open-immersion-pushforward-fully-faithful",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, label lemma-adjoint-preserve-K-injectives; unbounded replacement exists as in the cited resolution node"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-kinjective-total-derived] to termwise $j_*$ followed by localization. An additive termwise functor commutes with shifts and with the cone matrix (its entries are differentials, maps, and their negatives); hence it gives an exact functor on homotopy categories, as required there. The same observation applies to termwise global sections. Thus $Rj_*F$ is represented by $j_*I$, and, since both $I$ and $j_*I$ are K-injective, [def-kun-rgamma-unbounded] computes the two derived-global-sections objects by $\\Gamma(X,j_*I)$ and $\\Gamma(U,I)$. By [def-weil-pbc-global-sections-functor] and [def-weil-pbc-direct-image], in degree $r$ the former is $I^r(X\\times_XU)$. The projection $p:X\\times_XU\\to U$ has inverse $(j,\\mathrm{id}_U)$; both inverse identities follow from the uniqueness clause of [def-pc-fibre-product]. Restriction along $p^{-1}$ therefore gives $I^r(X\\times_XU)\\cong I^r(U)$. Naturality of restriction with respect to the sheaf morphism $d_I^r$ makes these isomorphisms commute with differentials, so they give an isomorphism of complexes $\\Gamma(X,j_*I)\\cong\\Gamma(U,I)$. Its derived class is an isomorphism with the displayed source and target.",
+   "text": "The canonical unbounded Leray morphism is, by definition, the hom component of rightDerivedLowerStarCompRightDerivedGlobalSectionsIso. That declaration is already a natural isomorphism, constructed in the source library by rightDerivedFunctorCompIso'. Its components are invertible; no reconstruction of K-injective representatives is needed here. Its required preservation of K-injective complexes is supplied by the existing source-library instance for lowerStar.",
    "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
     "def-kun-rgamma-unbounded",
-    "def-weil-pbc-global-sections-functor",
     "def-weil-pbc-direct-image",
-    "def-pc-fibre-product"
+    "def-weil-pbc-global-sections-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070K and 070Y, labels lemma-enough-K-injectives-implies and lemma-K-injective-defined; sectionwise identification follows the blueprint proof and WeilConjectures/SixFunctors/Etale/Derived/GlobalSections.lean:57-65"
-   }
+   "elementary": true
   },
   {
-   "text": "For a morphism $F\\to F'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class of maps $h:I\\to I'$ between the chosen K-injective representatives. In each degree, the two composites from $I^r(X\\times_XU)$ to $I'^r(U)$ agree because $h^r$ commutes with sheaf restriction. Thus the chain isomorphism of Step 3 is natural. Applying additive $j_*$ and $\\Gamma$ termwise preserves homotopies. A change of K-injective representative is a homotopy equivalence by the same Hom bijection (lift the derived inverse and use injectivity to check the inverse identities), and the preceding restriction square identifies the two comparisons. Hence this is the canonical derived comparison induced by the underived sections identification, independent of resolutions. For $F$ bounded below, choose a bounded-below injective representative as in [lem-weil-pbc-dplus-injective-representative]. Its direct image is bounded below and K-injective by Step 2; [lem-kun-rgamma-unbounded-bounded] identifies the bounded and unbounded global-section computations. The comparison of [lem-kun-leray-bdd] is induced by the same underived sections identification in the opposite direction. Therefore our map is its inverse on that subcategory, while the construction above supplies it for all $F\\in D(U_{\\Et})$.",
+   "text": "For additive functors F, G, H and an underived isomorphism e : F composed with G is isomorphic to H, prove the compatibility of the bounded and unbounded composition comparisons directly from their defining units. Precompose the natural-transformation equality with the bounded composition isomorphism. Apply Functor.rightDerived_ext to (F composed with G).rightDerivedFunctorPlus composed with the inclusion. On a bounded-below homotopy object K, the bounded composition factorization gives the composite bounded unit. Naturality of G.rightDerivedFunctorPlusCompatibility moves this comparison past the F bounded unit. The defining uniqueness comparison intertwines the bounded and unbounded units for F and G; hence the right side becomes the unbounded composite unit followed by the unbounded composition comparison. Its factorization identity is the homotopy-category image of e.hom followed by the H unbounded unit. The left side is that same map, by the bounded factorization identity and the unit compatibility for H. Compatibility of mapHomotopyCategoryPlus with the inclusion identifies the two images of e.hom. Specialize F to lowerStar, G to sections on X, H to sections on U, and e to lowerStarCompGlobalSectionsIso. Direct image preserves injectives by the existing adjunction criterion. The inverse of rightDerivedGlobalSectionsLerayPlus is exactly the hom component of the bounded composition comparison, so evaluating the natural-transformation equality at E proves precisely the third conjunct.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-kun-rgamma-unbounded-bounded",
-    "lem-kun-leray-bdd"
+    "lem-kun-leray-bdd",
+    "def-kun-rgamma-unbounded",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-global-sections-functor"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, label lemma-K-injective; explicit resolution and morphism comparison extending the blueprint final sentence"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusComp.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean",
+    "place": "rightDerivedFunctorPlusCompatibility, rightDerivedFunctorPlusCompIso'_fac, rightDerivedFunctorCompIso'; Mathlib.CategoryTheory.Functor.Derived.RightDerived: rightDerived_ext and rightDerivedNatTrans_fac"
    }
   }
  ],
  "proof_deps": [
   "def-kun-rgamma-unbounded",
-  "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-global-sections-functor",
   "def-weil-pbc-inverse-image",
   "lem-kun-leray-bdd",
-  "lem-kun-rgamma-unbounded-bounded",
-  "lem-sc-open-immersion-pushforward-fully-faithful",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "prop-weil-pbc-inverse-image-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-sc-open-immersion-pushforward-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-open-immersion-restriction.md",
-  "place": "Proof: first clause unchanged in scope; replace the bounded-below-only final citation by the unbounded K-injective computation (Stacks 08BJ, 070K, 070I)"
+  "place": "K1: existing fully faithful direct image and source-library Leray isomorphism; bounded/unbounded compatibility proved by uniqueness of right derived functors and the defining composition units, rather than choosing resolutions again."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -172,14 +141,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sc-open-immersion-pushforward-fully-faithful",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-kun-rgamma-unbounded-bounded"
+  "lem-sc-open-immersion-pushforward-fully-faithful"
  ],
  "reviewed": {
   "date": "2026-10-15",
@@ -206,5 +168,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable statement, all eight dependencies, source, canonical maps, bounded compatibility, universes, edge cases, docstrings, and report. Verbatim signature matches; scompile.py passed both local overlay checks. No delivery faults found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T093508-L-2317791",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

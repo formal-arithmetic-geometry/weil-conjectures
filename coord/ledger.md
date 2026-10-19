@@ -17235,3 +17235,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/J8/Sheaf.FieldTheory.FiniteTameCharacterTower (stage 3; reviewer PASS; first push; landing 20261019T093504-L-2317143 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/J9/Sheaf.AlgebraicGeometry.BertiniIndependentFunctions (stage 3; reviewer PASS; first push; landing 20261019T093505-L-2317370 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/J9/Sheaf.FieldTheory.TameRootExtension (stage 3; reviewer PASS; first push; landing 20261019T093506-L-2317609 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:35 L: merged deliver/K1/Sheaf.AlgebraicGeometry.OpenImmersionRestriction (stage 3; reviewer PASS; first push; landing 20261019T093508-L-2317791 (proof); batch 20261019T093237; modules 1; new nodes 0)

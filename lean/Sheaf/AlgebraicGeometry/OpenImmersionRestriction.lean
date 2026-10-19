@@ -16,18 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Sheaf.AlgebraicGeometry.LerayBounded
 
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.AlgebraicGeometry.RGammaUnboundedBounded
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Mathlib.CategoryTheory.Sites.GlobalSections
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Restriction and Leray for an open immersion
@@ -48,6 +37,100 @@ universe u
 
 open CategoryTheory
 
+private theorem derived_plus_unit_compatibility
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C) :
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+        F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
+      F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K) := by
+  simpa only [Functor.rightDerivedFunctorPlusιUnit, Functor.ιRightDerivedFunctorUnit,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
+    NatTrans.congr_app (by
+      simp [Functor.rightDerivedFunctorPlusCompatibility] :
+      F.rightDerivedFunctorPlusιUnit ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+        F.rightDerivedFunctorPlusCompatibility.hom = F.ιRightDerivedFunctorUnit) K
+
+private theorem derived_comp_plus_compatibility
+    {C D T : Type*} [Category C] [Category D] [Category T]
+    [Abelian C] [Abelian D] [Abelian T]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory T]
+    [EnoughInjectives C] [EnoughInjectives D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ T) (H : C ⥤ T)
+    [F.Additive] [G.Additive] [H.Additive]
+    [F.PreservesInjectiveObjects] [F.PreservesKInjectiveComplexes]
+    (e : F ⋙ G ≅ H) :
+    Functor.whiskerRight (Functor.rightDerivedFunctorPlusCompIso' F G e).hom
+        DerivedCategory.Plus.ι ≫ H.rightDerivedFunctorPlusCompatibility.hom =
+      Functor.whiskerLeft F.rightDerivedFunctorPlus G.rightDerivedFunctorPlusCompatibility.hom ≫
+        Functor.whiskerRight F.rightDerivedFunctorPlusCompatibility.hom G.rightDerivedFunctor ≫
+        Functor.whiskerLeft DerivedCategory.Plus.ι
+          (Functor.rightDerivedFunctorCompIso' F G e).hom := by
+  apply (cancel_epi (Functor.isoWhiskerRight
+    (Functor.rightDerivedFunctorPlusCompIso F G) DerivedCategory.Plus.ι).hom).1
+  apply Functor.rightDerived_ext
+    ((F ⋙ G).rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
+    (F ⋙ G).rightDerivedFunctorPlusιUnit (HomotopyCategory.Plus.quasiIso C)
+  ext K : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.isoWhiskerRight_hom]
+  change DerivedCategory.Plus.ι.map ((F ⋙ G).rightDerivedFunctorPlusUnit.app K) ≫ _ = _
+  rw [← Category.assoc, ← Functor.map_comp,
+    Functor.rightDerivedFunctorPlusCompIso_fac_app]
+  have hp := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac F G e) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hp
+  rw [← Category.assoc, ← Functor.map_comp, hp, Functor.map_comp, Category.assoc,
+    derived_plus_unit_compatibility H K]
+  change _ = DerivedCategory.Plus.ι.map
+    ((F ⋙ G).rightDerivedFunctorPlusUnit.app K) ≫ _
+  rw [← Category.assoc, ← Functor.map_comp,
+    Functor.rightDerivedFunctorPlusCompIso_fac_app,
+    Functor.rightDerivedFunctorPlusCompUnit_app, Functor.map_comp, Category.assoc]
+  have hn := G.rightDerivedFunctorPlusCompatibility.hom.naturality
+    (F.rightDerivedFunctorPlusUnit.app K)
+  simp only [Functor.comp_map] at hn
+  erw [reassoc_of% hn]
+  erw [← Functor.map_comp_assoc, derived_plus_unit_compatibility F K]
+  rw [reassoc_of% (derived_plus_unit_compatibility G (F.mapHomotopyCategoryPlus.obj K))]
+  have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app
+      ((HomotopyCategory.Plus.ι C).obj K) = 𝟙 _ := by
+    simpa only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] using
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv_hom_id_app
+        ((HomotopyCategory.Plus.ι C).obj K)
+  have hu : (Functor.rightDerivedFunctorCompUnit F G).app
+      ((HomotopyCategory.Plus.ι C).obj K) =
+      G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K.obj) ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K.obj) := by
+    simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, hi,
+      Category.id_comp, Category.comp_id]
+    erw [DerivedCategory.Qh.map_id, Category.id_comp]
+    rfl
+  erw [reassoc_of% hu.symm]
+  have hf : Functor.rightDerivedFunctorCompUnit F G ≫
+      Functor.whiskerLeft DerivedCategory.Qh
+        (Functor.rightDerivedFunctorCompIso' F G e).hom =
+      Functor.whiskerRight (NatTrans.mapHomotopyCategory e.hom (.up ℤ))
+          DerivedCategory.Qh ≫ H.rightDerivedFunctorUnit := by
+    have hcomp : (F ⋙ G).rightDerivedFunctorUnit ≫
+        Functor.whiskerLeft DerivedCategory.Qh
+          (Functor.rightDerivedFunctorCompIso F G).hom =
+        Functor.rightDerivedFunctorCompUnit F G := by
+      simp [Functor.rightDerivedFunctorCompIso]
+    rw [← hcomp, Category.assoc, ← Functor.whiskerLeft_comp]
+    simp only [Functor.rightDerivedFunctorCompIso', Iso.trans_hom, Iso.symm_hom,
+      Iso.hom_inv_id_assoc]
+    exact Functor.rightDerivedNatTrans_fac _ _ _ _
+      (HomotopyCategory.quasiIso C (.up ℤ)) _
+  have hf' := NatTrans.congr_app hf K.obj
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hf'
+  erw [hf']
+  congr 1
+
 namespace AlgebraicGeometry.Etale
 
 /-- The counit of inverse image followed by direct image along an open immersion is a
@@ -59,29 +142,19 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary`, node
 
 Proof:
 1. The direct image is fully faithful by
-   `lem-sc-open-immersion-pushforward-fully-faithful`. For the adjunction of
-   `def-weil-pbc-inverse-image`, this is equivalent to invertibility of its counit.
-2. Represent F by a complex C and choose a K-injective resolution C → I using
-   `prop-weil-pbc-kinjective-resolutions-exist` (with integer coefficients).
-   Inverse image is additive and exact by `prop-weil-pbc-inverse-image-exact` and is
-   left adjoint to direct image. Therefore `lem-weil-pbc-right-adjoint-preserves-kinjective`
-   makes j_*I K-injective, with no boundedness or cohomological-dimension assumption.
-3. Apply `lem-weil-pbc-kinjective-total-derived` to the termwise direct image and sections
-   functors: additivity makes their homotopy functors exact (they preserve shifts and
-   cone matrices). Then Rj_*F is computed by j_*I, and `def-kun-rgamma-unbounded`
-   computes the two sections objects by Γ(X,j_*I) and Γ(U,I). In degree r the former
-   is I^r(X ×_X U). The projection X ×_X U → U is an isomorphism with inverse
-   (j,id), by `def-pc-fibre-product`. Restriction along this inverse gives the
-   degreewise comparison. Naturality in I^r makes it a chain isomorphism.
-4. By `lem-weil-pbc-kinjective-hom-derived`, a derived morphism lifts uniquely up to
-   homotopy between K-injective representatives. Its restriction squares commute
-   degreewise. Additive sections and direct image preserve homotopies, proving naturality
-   and independence of the resolution. For bounded-below F use the bounded-below
-   injective representative of `lem-weil-pbc-dplus-injective-representative`.
-   `lem-kun-rgamma-unbounded-bounded` identifies its sections with the unbounded recipe.
-   The map of `lem-kun-leray-bdd` uses the same chain isomorphism in the opposite
-   direction. The standard bounded/unbounded comparison isomorphisms therefore give
-   exactly the commuting square below. -/
+   `lem-sc-open-immersion-pushforward-fully-faithful`, so the adjunction counit is invertible.
+2. The unbounded Leray morphism is the hom component of the existing natural composition
+   isomorphism `rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`.
+3. The bounded and unbounded composition isomorphisms are defined by uniqueness of right
+   derived functors. Precompose the desired natural-transformation identity with the bounded
+   composition isomorphism and apply the universal property of the derived functor of
+   `lowerStar ⋙ Γ`. Its defining unit identities reduce the two composites to the same map:
+   the homotopy-category image of `lowerStarCompGlobalSectionsIso.hom` followed by the
+   unbounded sections unit. Naturality of the bounded/unbounded compatibility moves it past
+   the bounded direct-image unit. The compatibility itself intertwines the bounded and
+   unbounded units by its defining uniqueness property. This proves the identity on all
+   bounded-below derived objects, including precisely the inverse of the canonical bounded
+   Leray isomorphism defined in `lem-kun-leray-bdd`. -/
 theorem openImmersion_restriction_leray {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     IsIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).counit ∧
@@ -99,6 +172,16 @@ theorem openImmersion_restriction_leray {U X : Scheme.{u}} (j : U ⟶ X)
             ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlusCompatibility.hom.app E) ≫
           (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
             AddCommGrpCat.{u + 1} j).hom.app (DerivedCategory.Plus.ι.obj E)) := by
-  sorry
+  refine ⟨?_, (fun F ↦ inferInstance), ?_⟩
+  · infer_instance
+  · intro E
+    have : (lowerStar AddCommGrpCat.{u + 1} j).PreservesInjectiveObjects :=
+      Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j)
+    exact NatTrans.congr_app
+      (derived_comp_plus_compatibility (lowerStar AddCommGrpCat.{u + 1} j)
+        (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (Sheaf.Γ U.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} j)) E
 
 end AlgebraicGeometry.Etale
