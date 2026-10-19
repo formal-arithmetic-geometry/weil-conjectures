@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Sites.IsSheafFor

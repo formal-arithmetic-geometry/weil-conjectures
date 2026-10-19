@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial

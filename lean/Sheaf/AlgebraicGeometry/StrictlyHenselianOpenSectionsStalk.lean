@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.Mathlib.RingTheory.Henselian

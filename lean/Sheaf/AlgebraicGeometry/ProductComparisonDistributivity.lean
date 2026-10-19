@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ProductComparisonDistributivity
-public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts

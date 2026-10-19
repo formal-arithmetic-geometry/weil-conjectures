@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.UnderivedGlobalGermExchange
-public import WeilConjectures.AlgebraicGeometry.DerivedGlobalGerm
-public import WeilConjectures.SixFunctors.BaseChange.Square

@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion

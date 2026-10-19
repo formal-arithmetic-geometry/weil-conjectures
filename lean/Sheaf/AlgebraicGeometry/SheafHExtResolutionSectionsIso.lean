@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import Mathlib.CategoryTheory.Abelian.Injective.Ext

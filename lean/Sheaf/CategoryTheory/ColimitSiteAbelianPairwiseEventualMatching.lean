@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching
-public import WeilConjectures.CategoryTheory.ColimitSiteAbelianStageImage
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import WeilConjectures.CategoryTheory.FinitePrecoverage

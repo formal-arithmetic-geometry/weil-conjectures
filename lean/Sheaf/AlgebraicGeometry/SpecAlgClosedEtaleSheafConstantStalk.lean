@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint

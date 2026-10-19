@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteFiniteRestrictionFamilyLift
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import Mathlib.CategoryTheory.Filtered.Basic
-public import Mathlib.CategoryTheory.Comma.Over.Basic

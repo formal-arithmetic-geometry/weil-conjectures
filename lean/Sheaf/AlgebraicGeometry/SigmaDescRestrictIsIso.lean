@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SigmaDescRestrictIsIso
-public import Mathlib.AlgebraicGeometry.Limits

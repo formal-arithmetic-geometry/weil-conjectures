@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
-public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
-public import Mathlib.CategoryTheory.Sites.Over
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.CategoryTheory.Filtered.Basic

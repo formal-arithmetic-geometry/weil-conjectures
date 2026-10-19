@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Abelian.HorseshoeDefectFactorization
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution

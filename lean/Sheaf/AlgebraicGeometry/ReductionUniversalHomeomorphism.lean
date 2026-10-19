@@ -1,9 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Mathlib.AlgebraicGeometry.Morphisms.Constructors
-public import Mathlib.CategoryTheory.MorphismProperty.Limits
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
