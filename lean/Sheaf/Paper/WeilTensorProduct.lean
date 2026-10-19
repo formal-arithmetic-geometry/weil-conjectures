@@ -177,6 +177,13 @@ def wfRationalTensorHom (p : A)
     (M M' N N' : WfAmbientRationalCategory X d r a ha p) :=
   (wfRationalTensorHom_exists X d r a ha p M M' N N').exists.choose
 
+private theorem wfRationalTensorHom_tmul (p : A)
+    (M M' N N' : WfAmbientRationalCategory X d r a ha p)
+    (f : M.obj ⟶ M'.obj) (g : N.obj ⟶ N'.obj) (s t : Localization.Away p) :
+    wfRationalTensorHom X d r a ha p M M' N N' (s ⊗ₜ[A] f) (t ⊗ₜ[A] g) =
+      (s * t) ⊗ₜ[A] (wfIntegralTensor X d r a ha).map (Prod.mkHom f g) :=
+  (wfRationalTensorHom_exists X d r a ha p M M' N N').exists.choose_spec f g s t
+
 /-- The extended tensor maps satisfy the bifunctor laws.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: on pure tensors the identity law follows from integral tensor's identity law and
@@ -190,7 +197,42 @@ theorem wfRationalTensor_laws (p : A) :
       wfRationalTensorHom X d r a ha p M M'' N N'' (f ≫ f') (g ≫ g') =
         wfRationalTensorHom X d r a ha p M M' N N' f g ≫
           wfRationalTensorHom X d r a ha p M' M'' N' N'' f' g' := by
-  sorry
+  constructor
+  · intro M N
+    change wfRationalTensorHom X d r a ha p M M N N
+      ((1 : Localization.Away p) ⊗ₜ[A] 𝟙 M.obj)
+      ((1 : Localization.Away p) ⊗ₜ[A] 𝟙 N.obj) =
+        (1 : Localization.Away p) ⊗ₜ[A] 𝟙 _
+    rw [wfRationalTensorHom_tmul, one_mul]
+    congr 1
+    exact (wfIntegralTensor X d r a ha).map_id (M.obj, N.obj)
+  · intro M M' M'' N N' N'' f f' g g'
+    change wfRationalTensorHom X d r a ha p M M'' N N''
+      (ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _ f' f)
+      (ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _ g' g) =
+        ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _
+          (wfRationalTensorHom X d r a ha p M' M'' N' N'' f' g')
+          (wfRationalTensorHom X d r a ha p M M' N N' f g)
+    induction f using TensorProduct.induction_on with
+    | zero => simp
+    | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
+    | tmul s f =>
+      induction f' using TensorProduct.induction_on with
+      | zero => simp
+      | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
+      | tmul t f' =>
+        induction g using TensorProduct.induction_on with
+        | zero => simp
+        | add g₁ g₂ h₁ h₂ => simp only [map_add, h₁, h₂]
+        | tmul u g =>
+          induction g' using TensorProduct.induction_on with
+          | zero => simp
+          | add g₁ g₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
+          | tmul v g' =>
+            simp [ScalarLocalization.composition_tmul,
+              wfRationalTensorHom_tmul, ← Functor.map_comp, mul_comm,
+              mul_left_comm, Prod.mkHom]
+
 
 /-- Completed tensor rationalized with the stated product-of-denominators convention.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -373,7 +415,9 @@ pbcIntegralDatum defines its ideal as the span of that singleton. -/
 theorem wfUniformizer_generates :
     Ideal.span (Set.range (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)) =
       (pbcStageDatum.{u} c.l c.Qbar E).ideal := by
-  sorry
+  rw [Set.range_const]
+  change Ideal.span {pbcUniformizer c.l (pbcFiniteField c.l c.Qbar E)} = _
+  rfl
 
 /-- The actual ambient rational category at the finite coefficient field E.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
