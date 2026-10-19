@@ -1,11 +1,11 @@
 # Work queue
 
-681 items; claim with `tools/claim.py next <group> [--stage N]`.
+680 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (31)
+## Stage 2: nodes to state (30)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `lem-pur-finite-adjoint-mate-compatibility` | 1 | state | 0 |
 | `lem-pur-weil-basechange-semilinear-pasting` | 1 | state | 0 |
 | `lem-pur-weil-semilinear-exchange-reindexing` | 1 | state | 0 |
-| `lem-sf-proper-product-counit-transpose` | 1 | state | 0 |
 | `lem-sp-tower-p1-arbitrary-base-integrals` | 1 | state | 0 |
 | `lem-trf-finite-horizontal-shriek-mate` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
@@ -700,7 +699,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent` | - | 1 | proof | 7 |
 | `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | proof | 7 |
 
-## Stage 3: waiting for statements of dependencies (23)
+## Stage 3: waiting for statements of dependencies (24)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -723,6 +722,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | - | 2 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.FiniteFreeCompactComposition` | - | 8 | `lem-coef-finite-adjunction-diagram-realization` |
 | `Sheaf.Paper.FiniteUniversalSmoothTrace` | - | 1 | `lem-pur-vector-integration-site-comparison` |
+| `Sheaf.Paper.ProperProductCounitTranspose` | - | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.TensorAdjunctionExchange` | - | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `sk-thm-sf-tensor-hom` |
