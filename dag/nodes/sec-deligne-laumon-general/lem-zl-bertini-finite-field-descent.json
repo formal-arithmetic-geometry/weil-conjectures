@@ -15,107 +15,80 @@
  ],
  "proof": [
   {
-   "text": "Put $K_n=\\mathbf F_{q^n}\\subset k$ for $n\\ge1$, and order the positive integers by divisibility. By [lem-weil-unique-subfield-of-closure], $K_n$ is exactly the root field of $T^{q^n}-T$. If $n\\mid r$, iterating $x^{q^n}=x$ gives $x^{q^r}=x$, so $K_n\\subseteq K_r$; $nr$ is a common upper bound of $n,r$. Every $b\\in k$ is algebraic over $k_0$. Its minimal polynomial of degree $d\\ge1$ identifies $k_0[b]$ with a field having a basis $1,b,\\ldots,b^{d-1}$ and therefore $q^d$ elements. Uniqueness of the subfield with $q^d$ elements puts $b$ in $K_d$. Thus $k=\\bigcup_{n\\ge1}K_n$ as a directed union of rings. Its colimit property is explicit: compatible ring maps from the $K_n$ send $b$ to its image at any stage containing $b$; a common multiple makes this independent of the stage and preserves addition and multiplication.",
+   "text": "Index by the finitely generated k₀-subalgebras A of k, ordered by inclusion. Bottom gives an index and the join of two finitely generated subalgebras is finitely generated, so this is directed. The explicit filtered-colimit theorem CommRingCat.isColimitFGSubalgebraCocone identifies its colimit with k. Spec preserves the opposite limit. Pullbacks commute with connected limits (isLimitOfIsPullbackOfIsConnected), giving a limiting cone of X_A = X₀ × Spec A with vertex X₀ × Spec k. The transition maps are base changes of maps between affine schemes, hence affine.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
+   }
+  },
+  {
+   "text": "Each A is a finitely generated algebra over the field k₀ and hence Noetherian. Each X_A is locally Noetherian by [pqf-lem-locnoeth-lft] and finite-type base change [lem-sfb-finite-type-composition-base-change], and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Its quasi-compact structure map to affine Spec A makes it quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] and [lem-weil-pbc-affine-scheme-qcqs]. The same argument makes X locally Noetherian.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
+   }
+  },
+  {
+   "text": "The closed immersion i is locally of finite type and quasi-compact and quasi-separated. Its locally Noetherian target makes it locally of finite presentation by [pqf-lem-lft-fp-locnoeth], giving finite presentation as in [def-sbc-locally-finite-presentation]. Apply clause (1) of [thm-pd-spreading-out] directly to i over the ambient system X_A: Scheme.exists_isPullback_of_finitePresentation supplies Y → X_A and a cartesian square recovering i. The eventual closed-immersion theorem [lemma-nagata-closed-immersion-stage-exists], in its pullback-square form Scheme.exists_isClosedImmersion_pullback_snd, supplies a later stage where the descended map is closed. isPullback_isPullbackLift preserves the square. This descends the source and embedding together; the separate morphism clause of spreading out is unnecessary.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-sbc-locally-finite-presentation",
+    "thm-pd-spreading-out",
+    "lemma-nagata-closed-immersion-stage-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
+   }
+  },
+  {
+   "text": "Since k/k₀ is algebraic, each A is integral over k₀ (isIntegral_algHom_iff). A finitely generated integral algebra is finite-dimensional (Algebra.IsIntegral.finite), and an algebraic subalgebra of a field is a field (Algebra.IsAlgebraic.toIntermediateField). Its cardinality is q^m for m = finrank k₀ A ≥ 1, by Module.natCard_eq_pow_finrank. Uniqueness in [lem-weil-unique-subfield-of-closure] identifies this subfield with extensionSubfield m hm. The resulting ring equivalence commutes with inclusions into k; injectivity of the subfield inclusion makes it commute with the base embedding as well.",
    "uses": [
     "lem-weil-unique-subfield-of-closure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Final paragraph, finite constant-field coefficients; elementary algebraic elaboration"
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
    }
   },
   {
-   "text": "Set $S_n=\\operatorname{Spec}K_n$ and $S=\\operatorname{Spec}k$. For $n\\mid r$ the transition $S_r\\to S_n$ is affine: its target has just the two opens $\\varnothing,S_n$, whose inverse images are affine. The affine-limit clause of [lem-weil-pbc-limit-affine-transition] and Step 1 identify $S=\\varprojlim_n S_n$. Each $S_n$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Thus this small directed inverse system satisfies exactly the base hypotheses of [thm-pd-spreading-out].",
+   "text": "Base change by the spectrum of this field equivalence identifies X_A with X₀ × Spec(extensionSubfield m hm). Compose the descended closed embedding with the inverse of that isomorphism. Transport the cartesian square, then paste it with the ambient base-change square. Its canonical isoPullback, bundled by Over.isoMk, is the required isomorphism over Spec k. The first-projection equations give exactly the required equation with the embedding into X₀; no underlying reduced subscheme is taken.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "thm-pd-spreading-out"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tags 01YW (lemma-directed-inverse-system-affine-schemes-has-limit), 01ZM (lemma-descend-finite-presentation), hypotheses"
-   }
-  },
-  {
-   "text": "Write $X_n=X_0\\times_{k_0}K_n$. By [lem-sfb-finite-type-composition-base-change](2), both $X_n\\to S_n$ and $X\\to S$ are of finite type. The affine closed-immersion description in [def-weil-closed-immersion] gives $i^{-1}(\\operatorname{Spec}A)=\\operatorname{Spec}(A/I)$ over every affine open of $X$. A finite affine cover of $X$ by finite-type $k$-algebras therefore pulls back to a finite affine cover of $C$ by quotient algebras of finite type over $k$. Hence $C\\to S$ is of finite type by [def-weil-finite-type-morphism]. This retains the ideals themselves, including nilpotents, rather than replacing $C$ by its underlying closed set.",
-   "uses": [
-    "lem-sfb-finite-type-composition-base-change",
-    "def-weil-closed-immersion",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T4 (lemma-base-change-finite-type); lemma-immersion-locally-finite-type, affine quotient argument"
-   }
-  },
-  {
-   "text": "For a field $L$, $\\operatorname{Spec}L$ is locally Noetherian, since its coordinate ring has only the ideals $(0),(1)$; it is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. If $Y\\to\\operatorname{Spec}L$ is of finite type, [pqf-lem-locnoeth-lft] makes $Y$ locally Noetherian, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes $Y$ quasi-separated. Its quasi-compact structure map and the quasi-compact base make $Y$ quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2); part (1) of that node makes the structure map quasi-separated. Finally [pqf-lem-lft-fp-locnoeth] makes it locally of finite presentation. These three properties give finite presentation by [def-sbc-locally-finite-presentation]. Apply this argument to $X_0/k_0$, $X_n/K_n$, $X/k$ and $C/k$. In particular all these schemes are quasi-compact and quasi-separated, and all their structure maps are of finite presentation.",
-   "uses": [
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "pqf-lem-lft-fp-locnoeth",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01TX (lemma-noetherian-finite-type-finite-presentation); Properties Tag 01OY (lemma-locally-Noetherian-quasi-separated)"
-   }
-  },
-  {
-   "text": "Apply clause (1) of [thm-pd-spreading-out] to the finite-presentation map $C\\to S$ over the inverse system of Step 2. It supplies an $n\\ge1$, a finite-presentation $C_n\\to S_n$, and an isomorphism $\\epsilon_n:C\\xrightarrow{\\sim}C_n\\times_{S_n}S$ over $S$. The target already has the model $X_n$. Base-change associativity identifies $X_n\\times_{S_n}S$ with $X$, by [def-pc-base-change]. Clause (2) of [thm-pd-spreading-out], applied to the morphism $i\\epsilon_n^{-1}$ between these two base changes, gives an $r$ divisible by $n$ and an $S_r$-morphism $i_r:C_r\\to X_r$ whose base change is $i$ under the induced isomorphism $\\epsilon_r$. Here $C_r=C_n\\times_{S_n}S_r$. The structure maps of $C_r$ and $X_r$ remain of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3), so their schemes are quasi-compact and quasi-separated by part (2) and the affine base.",
-   "uses": [
-    "thm-pd-spreading-out",
-    "def-pc-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM (lemma-descend-finite-presentation), clauses (1) and (2)"
-   }
-  },
-  {
-   "text": "The map $i_r$ is locally of finite type. Indeed, take an affine open $V=\\operatorname{Spec}B\\subseteq X_r$. Cover $C_r$ by finite-type affine $K_r$-charts, which exist because finite presentations are in particular finite sets of algebra generators. Cover the intersection of each chart with $i_r^{-1}(V)$ by principal opens $U=\\operatorname{Spec}A$. Each $A$ remains of finite type over $K_r$: a principal localization adds one generator and the relation making it inverse to the localized element. Any finite list generating $A$ as a $K_r$-algebra also generates it as a $B$-algebra, since $K_r\\to A$ factors through $B$. This is the affine criterion of [def-weil-finite-type-morphism]. Step 4 makes $X_r$ locally Noetherian, so [pqf-lem-lft-fp-locnoeth] makes $i_r$ locally of finite presentation. The source $C_r$ and target $X_r$ are quasi-compact and quasi-separated; [lem-weil-pbc-qcqs-morphism-permanence](1) makes $i_r$ quasi-compact and quasi-separated. Hence it is of finite presentation by [def-sbc-locally-finite-presentation].",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "pqf-lem-lft-fp-locnoeth",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T8 (lemma-permanence-finite-type), explicit algebra argument; Tag 01TX (lemma-noetherian-finite-type-finite-presentation)"
-   }
-  },
-  {
-   "text": "The morphism $i_r$ of Step 6 is of finite presentation between finite-presentation $S_r$-schemes, and its base change to $S$ is the given closed immersion $i$. Apply [lemma-nagata-closed-immersion-stage-exists] to this morphism and the system of Step 2. It supplies an $m$ divisible by $r$ such that $i_m:C_m\\to X_m$ is a closed immersion. The descended isomorphism $\\epsilon:C\\xrightarrow{\\sim}C_m\\times_{K_m}k$ satisfies $(i_m\\times\\operatorname{id}_k)\\epsilon=i$ by construction. Regard $C_m$ with $i_m$ as a closed subscheme of $X_m$. This proves precisely the asserted equality after base change as a closed subscheme, not merely equality of images on points. All indices are positive integers, so $m\\ge1$.",
-   "uses": [
-    "lemma-nagata-closed-immersion-stage-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZP (lemma-descend-closed-immersion-finite-presentation), finite-presentation case"
-   }
-  },
-  {
-   "text": "The root description in [lem-weil-unique-subfield-of-closure] says $b^{q^m}=b$ for $b\\in K_m$. Thus arithmetic Frobenius to the $m$th power restricts to the identity on $K_m$, and so does its inverse $\\gamma^m$. Consequently $\\operatorname{Spec}(\\gamma^m)$ is an automorphism over $S_m$. On $D=C_m\\times_{K_m}k$ form $h=\\operatorname{id}_{C_m}\\times\\operatorname{Spec}(\\gamma^m)$ by [def-pc-base-change]; its inverse uses $\\gamma^{-m}$. Define $\\varphi=\\epsilon^{-1}h\\epsilon$. The two projections of the fibre product give $(i_m\\times\\operatorname{id}_k)h=(\\operatorname{id}_{X_m}\\times\\operatorname{Spec}(\\gamma^m))(i_m\\times\\operatorname{id}_k)$. Under $X_m\\times_{K_m}k=X_0\\times_{k_0}k$, the middle automorphism is $g_X^m$ by the explicit formula in [def-weil-frobenius-detailed]. Substitution of $(i_m\\times\\operatorname{id}_k)\\epsilon=i$ gives $i\\varphi=g_X^m i$. Thus $\\varphi$ is the required scheme automorphism, semilinear over $k$; no claim that it is a $k$-morphism is needed.",
-   "uses": [
-    "lem-weil-unique-subfield-of-closure",
-    "def-pc-base-change",
-    "def-weil-frobenius-detailed"
+    "def-pc-base-change"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Final paragraph, finite constant extension; explicit Frobenius consequence using the fixed conventions"
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
+   }
+  },
+  {
+   "text": "Let σ be geometric field Frobenius and E = extensionSubfield m hm. Its cardinality q^m from [lem-weil-unique-subfield-of-closure] implies σ^m fixes E pointwise, by FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq. Thus Spec(σ^m) and its inverse are over Spec E. The cartesian square lifts the identity on Y and the coefficient automorphism to an endomorphism of C, and similarly lifts the inverse. Pullback uniqueness proves the two composites are identities. Induction using galoisMap_projections from [def-weil-frobenius-detailed] gives the projections of the mth power of ambient geometric Frobenius. Comparing both ambient projections proves φ.hom ≫ i = i ≫ (D.geometricFrobenius X₀ ^ m).hom.",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure",
+    "def-weil-frobenius-detailed",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Final paragraph: finite coefficients and descent to one finite constant-field extension"
    }
   }
  ],
@@ -127,7 +100,6 @@
   "def-weil-frobenius-detailed",
   "lem-sfb-finite-type-composition-base-change",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-unique-subfield-of-closure",
@@ -139,7 +111,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-  "place": "Final paragraph, expanded using Stacks Tags 01YW, 01ZM, 01ZP, 01T6, 01TX"
+  "place": "Final paragraph, implemented by finite-subalgebra descent directly over the ambient limit; Stacks Limits Tags 01ZM and 01ZP; group F2"
  },
  "mathlib_searches": [
   {
@@ -250,7 +222,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-unique-subfield-of-closure"
  ],
  "reviewed": {
@@ -278,5 +249,15 @@
   "group": "Q150",
   "result": "pass",
   "note": "Reviewed the immutable node, all dependencies, source passage, Lean module, report sections, edge cases, route restrictions, and declaration details. scompile.py verified both sandbox and library compilation with no errors; no fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T112447-L-3942124",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
