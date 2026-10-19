@@ -6,25 +6,6 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import Sheaf.Paper.FiniteDirectImageComposition
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.ProperStability
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition
-import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals
 
 /-!
 # The full projective-line adjunction
@@ -49,31 +30,17 @@ Its counit is exactly the normalized inverse-projection trace composite.
 Source: blueprint thm-amb-p1-adjunction (blueprint: thm-amb-p1-adjunction).
 
 Proof:
-1. For `M` on P, put W = P times_S P with projections p1,p2 and diagonal Delta.
-   Derived direct-image composition identifies M with Rp2_* Delta_* M.
-   Properness of projective space, stability under base change, and separatedness
-   make the projections and diagonal proper. Finite type over a Noetherian base
-   makes P and W Noetherian. The proper projection formula identifies Delta_* M
-   with Delta_* A_P tensor p1^-1 M. Apply Rp2_* to the diagonal class tensor M,
-   then proper base change and projection give a natural unit M -> G F M.
-   The proper-base-change theorem applies to all unbounded objects because N A = 0.
-2. Use `projectiveLineTraceEpsilon` as counit. Its components are inverse ordered
-   projection followed by tensor with the normalized trace and the unit constraint.
-3. Expand epsilon_(F M) after F eta_M. Derived direct-image composition and
-   exchange/tensor coherence turn it into Rq_* of identity on M tensored with
-   t_p1 after Rp1_* delta. The projective-line decomposition and its base-change
-   compatibility identify t_p1 with the pulled-back trace.
-4. The a=1 diagonal-integral identity makes this factor identity, proving the
-   first triangle.
-5. For the second triangle put M=G K. The two pullbacks of q^-1 K agree, so the
-   proper projection formula takes out this common coefficient. Tensor/exchange
-   coherence identifies G epsilon_K with this coefficient tensored with t_p2.
-   Eta_(G K) contributes Rp2_* delta. Every shift crossing a term is by two,
-   hence its Koszul sign is one.
-6. The a=2 diagonal-integral identity makes the remaining factor identity,
-   proving G epsilon_K after eta_(G K) is identity.
-7. The unit/counit Hom bijections from these two triangles give the adjunction,
-   with precisely the prescribed natural transformation as its counit. -/
+1. Take the adjunction of `projectiveLineTraceDatum`, supplied by the existing
+   ordinary finite-coefficient projective-line theorem. Its normalized datum
+   already includes both triangle identities.
+2. The projective-line projection is proper with Noetherian source. The proper
+   projection formula makes the ordered projection map an isomorphism for every
+   unbounded object K.
+3. Precompose both the datum's counit and `projectiveLineTraceEpsilon` with that
+   projection. The datum's counit normalization identifies the first composite
+   with tensoring by its normalized trace and the tensor unit constraint. The
+   projection and its inverse cancel in the second composite, giving the same
+   arrow. Cancel the projection to obtain the required counit equality. -/
 theorem exists_projectiveLineFullAdjunction (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -81,6 +48,31 @@ theorem exists_projectiveLineFullAdjunction (N : ℕ) (hN : 0 < N)
       ordinaryFiniteP1Right A N hA S,
       ∀ K : DerivedCategoryModule A S,
         adj.counit.app K = projectiveLineTraceEpsilon N hN A hA S hS K := by
-  sorry
+  let dS := projectiveLineTraceDatum N hN A hA S hS
+  let adj := dS.adjunction
+  refine ⟨adj, ?_⟩
+  intro K
+  let : IsLocallyNoetherian (ProjectiveLine S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+  let : CompactSpace (ProjectiveLine S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+  let : IsProper (ProjectiveLine S ↘ S) :=
+    ProjectiveSpace.instIsProper (ULift (Fin 2)) S
+  let : IsIso (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) :=
+    isIso_proper_projection_formula_reordered A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K
+  apply (cancel_epi
+    (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K)).1
+  change _ = ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K ≫
+    (inv (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) ≫
+    ((ordinaryFiniteTensor A S).obj K).map
+        (dS.decomposition.inv ≫ CategoryTheory.Limits.biprod.snd) ≫
+      (derivedTensorSingleUnitIso K).hom)
+  rw [IsIso.hom_inv_id_assoc]
+  exact dS.counit_normalization K
 
 end AlgebraicGeometry.Etale
