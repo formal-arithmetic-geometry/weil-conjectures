@@ -14,9 +14,105 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $A$ is a DVR, it is a principal ideal domain. By [lem-weil-pbc-pid-noetherian-normal] it is Noetherian. It is local and complete by hypothesis, so [lem-weil-pbc-complete-local-nagata] makes $A$ Nagata. Apply the definition [def-weil-pbc-nagata-ring] to the prime $(0)$: the domain $A/(0)=A$ is N-2. By [def-weil-pbc-japanese-domain], applied to the given finite extension $L/K$, its integral closure $C$ is a finite $A$-module. This uses the N-2 condition for all finite extensions, with no separability hypothesis.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032W (lemma-Noetherian-complete-local-Nagata), 032R (definition-nagata), 032F (definition-N); More on Algebra Tag 09F8 (lemma-special-case), proof first paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-closure-finite-extension-normal] to $A$, its fraction field $K$, and $L/K$. It gives that $C$ is a domain, is integrally closed in $L$, and has fraction field $L$. The inclusion $A\\hookrightarrow C$ is injective because both rings are subrings of $L$, and it is integral by the definition of $C$ [def-weil-pbc-integral-closure].",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 034L (lemma-integral-closure-in-normal), 0308 (lemma-integral-closure-transitive), 00GP (definition-integral-closure); More on Algebra Tag 09EM (remark-construction), first assertion"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-over-complete-local-product] to the finite $A$-algebra $C$. Since $C$ is a domain by Step 2, its domain clause gives that $C$ is a Noetherian local ring complete for its own maximal ideal $\\mathfrak m_C$. Apply [lem-weil-pbc-finite-algebra-local-radical] to $A\\to C$ and this maximal ideal: its inverse image is $\\mathfrak m_A$. Thus the inclusion is local, as required.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0325 (lemma-quotient-complete-local), second sentence and its domain consequence; More on Algebra Tag 09F8 (lemma-special-case), proof first paragraph"
+   }
+  },
+  {
+   "text": "By [lem-sc-dvr-dimension-one], $\\dim A=1$. The injective integral map $A\\hookrightarrow C$ from Step 2 satisfies [lem-weil-pbc-integral-injective-dimension-equal], hence $\\dim C=\\dim A=1$. Steps 2 and 3 give normality, Noetherianity and locality of $C$, so [lem-sc-normal-dim1-dvr] shows that $C$ is a discrete valuation ring. This also excludes the field case.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OK (lemma-integral-sub-dim-equal) and 00PD (lemma-characterize-dvr), conditions (1), (3), (5); More on Algebra Tag 09EM (remark-construction), assertions (1) and (4)"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq L$ be a DVR as in the uniqueness assertion. It is a principal ideal domain [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-noetherian-normal] says that it is integrally closed in its fraction field $L$. For $c\\in C$, the monic polynomial over $A$ witnessing its membership in $C$ is also a monic polynomial over $V$, since $A\\subseteq V$. Thus $c$ is integral over $V$ and belongs to $V$. This proves $C\\subseteq V$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), DVRs are PIDs and normal; More on Algebra Tag 09F8 (lemma-special-case), proof first paragraph, maximality for domination"
+   }
+  },
+  {
+   "text": "Choose uniformizers $\\pi$ of $A$ and $t$ of $C$ [def-sc-discrete-valuation-ring]. By locality in Step 3, $\\pi\\in\\mathfrak m_C$ and $\\pi\\ne0$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], $\\pi=u t^e$ for a unit $u\\in C$ and $e\\ge1$ (exponent zero would make $\\pi$ a unit). In $V$ the element $\\pi$ is a nonunit because $A\\to V$ is local. Since $u$ stays a unit under $C\\subseteq V$, $t$ cannot be a unit of $V$. Now any nonzero $x\\in V\\subseteq L=\\operatorname{Frac}(C)$ is $a/b$ with nonzero $a,b\\in C$. Write $a=u_a t^r$ and $b=u_b t^s$ by the same power decomposition. If $r\\ge s$, then $x=u_a u_b^{-1}t^{r-s}\\in C$. If $r<s$, putting $q=s-r\\ge1$ gives $t^{-1}=(u_a u_b^{-1})^{-1}x t^{q-1}\\in V$, contradicting that $t$ is a nonunit there. Thus every nonzero $x\\in V$ belongs to $C$, and zero does as well. Together with Step 5 this proves $V=C$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final uniformizer-power assertion; explicit DVR argument for More on Algebra Tag 09F8 (lemma-special-case), proof first paragraph, maximality for domination"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F8 (lemma-special-case), proof first paragraph; Tag 09EM (remark-construction), assertions (1), (4), (8). Finiteness via Algebra 032W and completeness via Algebra 0325; domination maximality expanded using Algebra 00PD."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +155,45 @@
    "results": "23 hits in RingTheory/DedekindDomain: Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/PID.lean; Mathlib/RingTheory/DedekindDomain/Instances.lean; Mathlib/RingTheory/DedekindDomain/Instances.lean; Mathlib/RingTheory/DedekindDomain/Dvr.lean; Mathlib/RingTheory/DedekindDomain/Dvr.lean. Search log digest 5176fe7a87c6846e. IntegralClosure.lean:176 is the separable-only module-finiteness theorem (section hypothesis line 147); Dvr.lean:128 is DVR localization, not complete arbitrary finite normalization.",
    "date": "2026-10-19",
    "verdict": "no match: the integral-closure and Dedekind-domain hits do not give module finiteness, locality, completeness and uniqueness for arbitrary, possibly inseparable, finite extensions of a complete DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of a complete discrete valuation ring in a finite field extension is a finite complete discrete valuation ring",
+   "results": "8 hits: instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomainDvr.isIntegrallyClosed, NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation, NumberField.RingOfIntegers.instIsDedekindDomainWithVal, IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers. Search log digest e41e0ec86228394a.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not give the full theorem for arbitrary finite extensions; finiteness in IntegralClosure.lean requires separability, and adic-completion hits concern a completion rather than normalization in a given extension field."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|IsAdicComplete|Module.Finite",
+   "results": "23 hits in RingTheory/DedekindDomain: Mathlib/RingTheory/DedekindDomain/PID.lean, Mathlib/RingTheory/DedekindDomain/PID.lean, Mathlib/RingTheory/DedekindDomain/PID.lean, Mathlib/RingTheory/DedekindDomain/Instances.lean, Mathlib/RingTheory/DedekindDomain/Instances.lean, Mathlib/RingTheory/DedekindDomain/Basic.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean, Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean. Search log digest 176d00bce3e03d57. Read IntegralClosure.lean:147-176: module finiteness assumes Algebra.IsSeparable K L.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not give the full theorem for arbitrary finite extensions; finiteness in IntegralClosure.lean requires separability, and adic-completion hits concern a completion rather than normalization in a given extension field."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, integralClosure",
+   "results": "0 hits: . Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not give the full theorem for arbitrary finite extensions; finiteness in IntegralClosure.lean requires separability, and adic-completion hits concern a completion rather than normalization in a given extension field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a complete discrete valuation ring in a finite field extension is a finite complete discrete valuation ring",
+   "results": "8 hits: integralClosure.isIntegrallyClosedOfFiniteExtension, integralClosure.isIntegralClosure, IsDedekindDomainDvr.isIntegrallyClosed, IsIntegralClosure.isDedekindDomain, ValuationSubring.isIntegral_of_mem_ringOfIntegers, Valuation.Integers.integrallyClosed, IsIntegralClosure.of_isIntegrallyClosed, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure. Search log digest ce271c0135abbd06.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not give the full theorem for arbitrary finite extensions; finiteness in IntegralClosure.lean requires separability, and adic-completion hits concern a completion rather than normalization in a given extension field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization in a finite extension of the fraction field of a complete DVR is module finite local and adically complete",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, Ring.instFiniteNormalClosure_1, Ring.instFiniteNormalClosure, IsDedekindDomain.HeightOneSpectrum.adicCompletion, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem. Search log digest 721e9de9ba239104.",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not give the full theorem for arbitrary finite extensions; finiteness in IntegralClosure.lean requires separability, and adic-completion hits concern a completion rather than normalization in a given extension field."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-epp-common-finite-trait-extension",
@@ -89,5 +220,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-dvr-finite-normalization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Stacks 09EM and the first paragraph of 09F8, plus 032W, 0325, 032R, 032F and 00PD. All algebra inputs already have DAG nodes: use complete-local Nagata for arbitrary-extension finiteness, finite-algebra completeness for locality and completeness, normality/fraction field and dimension equality for the DVR criterion. Prove uniqueness explicitly with uniformizer powers. No new nodes. Project-source attachment search and two Mathlib phrasings found no exact full theorem.",
+  "blueprint": "Supports the existing blueprint ancestor lem-per-artin-gabber-affine-curve Step 1 (dimension-normalized Verdier duality), through the recorded via chain to partial algebraization and ILO IV 4.2.3: normalize the complete base trait in a common finite extension and identify each given local DVR with its integral closure. Steps 1-4 provide the normalization, Steps 5-6 its uniqueness; the unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic complete-local Nagata theorem supplies inseparable normalization finiteness; no theorem of the curve perverse unit supplies this commutative algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic finite-algebra completeness and locality theorem, applied after module finiteness; this is the completion argument explicitly used by the source."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic integral-extension dimension equality identifies the dimension needed for the DVR criterion; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-injective-dimension-equal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NY-42dd55fac",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-42dd55fac (reviewer sub-agent of L); spot-checked: Read the item's six steps in full, every cited statement, Stacks more-algebra 09F8 (lemma-special-case, line 35370, first paragraph of the proof) and 09EM (remark-construction, lines 33882-33957, (4) and (8)). The statement, stmt_deps, source and blueprint are identical to the Q132 creation record, so nothing was weakened. Its only citer, lem-per-epp-common-finite-trait-extension, is unaffected. There are no new nodes. Step 1: DVR -> PID -> Noetherian, then complete-local Nagata (032W) at the prime (0), then the N-2 definition gives module finiteness for any finite L/K, with no separability needed. Step 2: the finite-extension-normal leaf gives domain, Frac C = L and integral closedness. Step 3: the domain clause of finite-over-complete-local-product (0325) gives C local and complete for its own maximal ideal, and the finite-algebra-local-radical leaf gives the contraction to m_A. Step 4: dim A = 1, integral-injective dimension equality gives dim C = 1, and normal Noetherian local of dimension 1 gives a DVR (lem-sc-normal-dim1-dvr, used only after all its hypotheses are established). Step 5: V is a PID, hence normal, so C is contained in V. Step 6: write pi = u t^e with e >= 1. t is a nonunit in V because A -> V is local. If x = a/b had r < s, then t^{-1} = (u_a u_b^{-1})^{-1} x t^{q-1} would lie in V, so x lies in C; I checked the algebra. Edge cases tested: L = K, totally ramified t = s^e, purely inseparable extensions with imperfect residue field, unramified extensions, and nonlocal overrings, which are excluded by the locality hypothesis. The proof_deps closure (191 nodes) does not contain the item, so there is no cycle. There is no SGA citation and every step is under 2000 characters. I searched for duplicates with rg over 09F8, 09EM and 'complete discrete valuation'/'dominat': the sbc compositum nodes assume separability, the l-adic node covers only Q_l, and the Nagata domination nodes are generic. None states the item. I accepted the three recorded tool_uses (sk-thm-p1 Nagata, finite-over-complete product, integral dimension equality): each is genuine generic algebra that the unit sk-p-dl-a1-perverse lacks. The worker wrote tool_uses themselves; I took the list as the maintainer's record."
  }
 }
