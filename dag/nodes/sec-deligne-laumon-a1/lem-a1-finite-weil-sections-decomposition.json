@@ -20,7 +20,8 @@
   "def-weil-constructible-heart",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-global-geometric-frobenius",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-a1-proper-sections-germ-and-moving-point"
  ],
  "proof": [
   {
@@ -234,5 +235,38 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-666091d65 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-a1-proper-sections-semilinear-germs, the statement of every cited node, Stacks 03QP (etale-cohomology.tex 8244-8290), Deligne Weil II (1.1.7)-(1.1.14), pp. 150-153, and the parent blueprint proof. The parent proof's arithmetic-invariants display is false: for Spec F_q and Frobenius acting by -1 the invariants are 0 but the stalk is 1-dimensional. The item states the correct sum of geometric stalks, so nothing is weakened. New node: the identity is type-correct, and T(z)=g z h^{-1} is a k-point because a_Y g = h a_Y. It is the derived form of transport of structure: the germ of g^*s at z is h^*(z_1^* s), and h^* on sections is the point transport. It holds on the cases I tried (Spec k_0, empty scheme, M=0, Spec F_{q^2}). It is not a restatement of the parent: it has no Weil structure and allows any proper Y_0. It is not a duplicate of lem-trf-graph-frobenius-point-exchange, lem-trf-finite-scheme-derived-germs, lem-trf-compact-frobenius-transport-composition, lem-pod-frobenius-exchange-degree-zero or lem-zl-finite-adic-direct-image, which are finite-coefficient, k-endomorphism-only or have no germs. Item steps: step 2 correctly gives the projection of T(z) as gamma^{-1} i, a d_x-cycle, and the return g^d z = z h^d. Step 4's induction F^r = C(theta^[r]) tau^[r] checks against theta^[n+1] = theta^[n] L(g^n)^* theta via the associativity of lem-pod-integral-pullback-composition. Step 5 gives blocks permuted by T^{-1}, invertible by lem-weil-frobenius-cohomology-transport-iso (1). Step 6 matches the displayed definition in def-weil-local-frobenius-trace arrow by arrow. I accept all four declared tool uses. Batch 5: lem-pod-integral-pullback-composition is pullback-composition coherence and is already in the item's closure through def-weil-local-frobenius-trace. lem-pod-proper-coincidence-frobenius is the general identification RGamma_c = RGamma for proper Y with Frobenius compatibility (Weil I (1.3)). Neither is given by the Poincare-duality or trace-formula assumptions, and neither closure reaches an nt-assume, target, PD or trace-formula theorem. The only newly reached sk-thm-trace-transport node, lem-weil-isomorphism-derived-pullback-comparison-normalization, is generic pullback normalization. Both citations are allowed. Two minor implicit points, both a couple of lines from cited definitions: finite implies separated and of finite type (step 1), and the embedding count via uniqueness of F_{q^d} (step 2). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.A1FiniteWeilSectionsDecomposition",
+  "declaration": "WeilConjectures.a1FiniteWeilSectionsDecomposition",
+  "file": "lean/Sheaf/Paper/A1FiniteWeilSectionsDecomposition.lean",
+  "statement": "theorem a1FiniteWeilSectionsDecomposition (K : sfWeilComplex D c.l c.different Z₀ E.val) (hK : sfRationalHeartProperty c.l E.val (D.geometricFiber Z₀).left K.carrier) : Finite {x : Z₀.left // x ∈ closedPoints Z₀.left} ∧ (∀ x : {x : Z₀.left // x ∈ closedPoints Z₀.left}, Nat.card (A1FinitePointLifts D Z₀ x) = localClosedPointDegree D Z₀ x ∧ 1 ≤ localClosedPointDegree D Z₀ x) ∧ FiniteDimensional c.Qbar ((a1FiniteQbarCohomologyFunctor D c Z₀ E).obj K) ∧ Function.Bijective (a1FiniteQbarFrobenius D c Z₀ E K) ∧ (∃ e : (a1FiniteQbarCohomologyFunctor D c Z₀ E).obj K →ₗ[c.Qbar] DirectSum {x : Z₀.left // x ∈ closedPoints Z₀.left} (fun x ↦ DirectSum (A1FinitePointLifts D Z₀ x) (fun z ↦ (a1FiniteQbarStalkFunctor D c Z₀ E z.val).obj K)), Function.Bijective e ∧ ∀ v x z, (e v x) z = a1FiniteQbarEvaluation D c Z₀ E K x z v) ∧ (∀ x : {x : Z₀.left // x ∈ closedPoints Z₀.left}, ∃ T : Equiv.Perm (A1FinitePointLifts D Z₀ x), (∀ z, (T z).val = ProperSemilinearGerms.movingPoint D Z₀ z.val 0) ∧ (∀ z w, ∃ n : Fin (localClosedPointDegree D Z₀ x), (T^[n.val]) z = w) ∧ (∀ z, ∃ b : ((a1FiniteQbarStalkFunctor D c Z₀ E (T z).val).obj K) ≃ₗ[c.Qbar] ((a1FiniteQbarStalkFunctor D c Z₀ E z.val).obj K), (a1FiniteQbarEvaluation D c Z₀ E K x z).hom.comp (a1FiniteQbarFrobenius D c Z₀ E K) = b.toLinearMap.comp (a1FiniteQbarEvaluation D c Z₀ E K x (T z)).hom)) ∧ (∀ (x : {x : Z₀.left // x ∈ closedPoints Z₀.left}) (z : A1FinitePointLifts D Z₀ x), ∃ h : z.val ≫ localPositivePower (D.geometricFrobenius Z₀).hom (localClosedPointDegree D Z₀ x - 1) = localPositivePower (frobeniusPointIso D).hom (localClosedPointDegree D Z₀ x - 1) ≫ z.val, (a1FiniteQbarEvaluation D c Z₀ E K x z).hom.comp (a1FiniteQbarFrobenius D c Z₀ E K ^ localClosedPointDegree D Z₀ x) = ((a1FiniteExtend D c E).map (localFrobeniusCohomology c.l E.val D c.different Z₀ K z.val (localClosedPointDegree D Z₀ x - 1) h 0)).hom.comp (a1FiniteQbarEvaluation D c Z₀ E K x z).hom) ∧ (∀ (L : sfWeilComplex D c.l c.different Z₀ E.val), sfRationalHeartProperty c.l E.val (D.geometricFiber Z₀).left L.carrier → ∀ (f : K ⟶ L) (x : {x : Z₀.left // x ∈ closedPoints Z₀.left}) (z : A1FinitePointLifts D Z₀ x), (a1FiniteQbarCohomologyFunctor D c Z₀ E).map f ≫ a1FiniteQbarEvaluation D c Z₀ E L x z = a1FiniteQbarEvaluation D c Z₀ E K x z ≫ (a1FiniteQbarStalkFunctor D c Z₀ E z.val).map f)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.A1FinitePointLifts",
+   "WeilConjectures.a1FiniteCohomologyFunctor",
+   "WeilConjectures.a1FiniteStalkFunctor",
+   "WeilConjectures.a1FiniteEvaluation",
+   "WeilConjectures.a1FiniteFrobenius",
+   "WeilConjectures.a1FiniteWeilSectionsDecompositionRational",
+   "WeilConjectures.a1FiniteExtend",
+   "WeilConjectures.a1FiniteQbarCohomologyFunctor",
+   "WeilConjectures.a1FiniteQbarStalkFunctor",
+   "WeilConjectures.a1FiniteQbarEvaluation",
+   "WeilConjectures.a1FiniteQbarFrobenius",
+   "WeilConjectures.a1FiniteWeilSectionsDecomposition"
+  ],
+  "note": "Repair of the definition-owner return at 21a25d28cf8d: the canonical germ and movingPoint definitions are cited through def-a1-proper-sections-germ-and-moving-point; the semilinear germ theorem remains only in proof_deps. Lean module and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d5d703ac",
+  "group": "Q110",
+  "result": "fix",
+  "note": "Third delivery. Item Lean byte-identical to 21a25d28cf8d (sha 7746195a), whose mathematics was accepted. The item now cites the new existing:true def node def-a1-proper-sections-germ-and-moving-point instead of theorem lem-a1-proper-sections-semilinear-germs (kept in proof_deps), so H2 is satisfied. The new node's text matches the bodies of comparisons/integralCounit/integralGerm/rationalGerm/movingPoint (order of composites, r+1 convention). check_existing and check_new_node are clean. No cycle, no parallel def node. The theorem stmt_deps lem-trf-integral-pullback-comparison-realization, lem-pod-integral-pullback-composition and lem-pod-proper-coincidence-frobenius are genuine (.choose used). FIX (whole node in fixes/def-a1-proper-sections-germ-and-moving-point.json): drop the unused theorem cite fix-prop-adjunctions and add the body owners def-weil-system-operation-exchange-realization, def-coef-ringed-sequence-site, def-trf-integral-comparison-sequence-systems, def-weil-derived-complete-integral-detailed and def-weil-frobenius-point-transport, with matching TeX cites. All five are already in the closure; the checkers are clean on the fix. Advisory: integralDerivedPullback has no owner node anywhere in the DAG (base gap). nt_compile --json of the item module: 31.8 s, exit 0, only sorry."
  }
 }
