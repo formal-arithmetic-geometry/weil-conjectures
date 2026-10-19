@@ -26,125 +26,37 @@
  ],
  "proof": [
   {
-   "text": "Put $\\overline X_U=\\overline X\\times_SU$ and write $w:\\overline X_U\\hookrightarrow\\overline X$ for its open inclusion. The two squares are $(r,r_U,u,w)$ and $(j,j_U,w,v)$. Properness implies that $r$ is of finite type, hence quasi-compact; separatedness implies quasi-separatedness by [lem-pc-separated-quasi-separated]. The base-change permanence in [lem-weil-pbc-qcqs-morphism-permanence], clause (3), gives the same two properties for $r_U$. Thus both direct-image comparisons used below satisfy the qcqs hypotheses. In the rest of the proof subscripts $e,p$ denote the etale and pro-etale functors, $N_T=\\nu_T^*$, and all compositions are read from right to left. Canonical inverse-image identifications are those of [lem-weil-pbc-comparison-pullback]; its composition and cartesian compatibility allow us to suppress them in equations.",
+   "text": "Apply compactSupportProperFactor to c.isPullback_g_ofIsPullback sq at the etale extension-by-zero of L. Apply compactSupportOpenFactor to c.isPullback_i_ofIsPullback sq at L. These are only the proper and open factors, respectively.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-pc-separated-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-amb-compact-support-proper-factor",
+    "lem-amb-compact-support-open-factor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison: qcqs hypothesis; preceding commutative square of inverse images"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $e=Dj_{e,!}$, $d=Dj_{p,!}$, and similarly $e',d'$ for $j_U$. These functors are termwise exact by [lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero]. The comparison $N_T$ is exact by [lem-sf-comparison-pullback-exact], and etale inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. By [lem-weil-pbc-exact-functor-bounded-below], $M=eL$, $v_e^*L$, $w_e^*M$, $N_XL$ and their open extensions remain bounded below. Use precisely the derived open comparison $k_L:N_{\\overline X}eL\\xrightarrow{\\sim}dN_XL$ specified in [lem-fix-site-open-exchange], not an arbitrary isomorphism. That statement identifies $k^{-1}$ with the open-adjunction adjunct of the etale unit followed by the canonical restriction comparison; it therefore fixes the adjunction normalization. Write $k'$ for the same comparison for $j_U$.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-proetale-extension-zero",
-    "lem-sf-comparison-pullback-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-fix-site-open-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison: comparison by the common right adjoint; exact derived extension"
-   }
+   "text": "Expand the compactification comparison and the two compactified exchanges. The private generic lemma paste_exchange uses naturality of the proper exchange at the open comparison, then functoriality to substitute the open-factor equation. Substitute the proper-factor equation. Naturality of the base-changed direct-image comparison at the etale open exchange gives the desired equality. This is a genuine composition of the two independent factor squares and cancels no exchange.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For $h=r,r_U$, let $b_h:N Rh_{e,*}\\xrightarrow{\\sim}Rh_{p,*}N$ be the specified comparison of [lem-weil-pbc-comparison-direct-image-canonical-mate]. This node applies by Step 1 and to bounded-below inputs by Step 2; it proves invertibility of this actual counit mate and naturality in its input. The composite in the question is therefore\n$$J_{c,L}=Rr_{p,*}(k_L)\\circ b_{r,eL}.$$\nEach factor is invertible, so $J_{c,L}$ is invertible, naturally in $L$. The same formula with primes gives $J_{c_U,v_e^*L}$. These are the compactification expressions of [def-amb-etale-compact-support] and the statement, so no compactification-independence theorem is needed.",
+   "text": "For the proper counit conjunct apply fixedComparisonDirectImageMatePlus_counit to c.g. For the open counit conjunct apply openSiteEvaluationCounit to c.i. Properness supplies the qcqs instances.",
    "uses": [
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "def-amb-etale-compact-support"
+    "lem-amb-open-site-evaluation-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison: named canonical direct-image map; Tag 09AF: open comparison; their composite"
-   }
-  },
-  {
-   "text": "Denote the direct-image exchanges for $(r,r_U,u,w)$ by $E^e$ and $E^p$. Apply [lem-weil-pbc-transport-identifies-exchange] with $(f,f',g,g')=(r,r_U,u,w)$ and input $M=eL$. Its equation, under the specified inverse-image comparisons, is\n$$E^p_{N_{\\overline X}M}\\circ u_p^*(b_{r,M})\n=b_{r_U,w_e^*M}\\circ N_U(E^e_M).\\tag{1}$$\nAll coefficients here are constant $A$-module coefficients. The $E^e$ in this citation is the unit--square--counit mate, exactly as in [def-kun-unbounded-exchange]; the $E^p$ is the corresponding ambient ringed mate. Thus (1) concerns the exchanges in the question, including their counits. It does not assume either exchange to be invertible.",
-   "uses": [
-    "lem-weil-pbc-transport-identifies-exchange",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison and the preceding inverse-image square; agent application of the canonical exchange-transport equation"
-   }
-  },
-  {
-   "text": "Let $t^e:w_e^*e\\xrightarrow{\\sim}e'v_e^*$ and $t^p:w_p^*d\\xrightarrow{\\sim}d'v_p^*$ be the open base-change maps. The direction is important: these are inverses of the extension maps defined in [def-weil-pbc-etale-shriek-base-change-map], as the unit-adjunct formula of [lem-cbc-extension-zero-base-change] shows. Apply [lem-fix-site-open-exchange] to $(j,j_U,w,v)$, with its $\\rho$ the inverse pullback comparison. Its full equation, after the canonical inverse-image identifications, reads\n$$t^p_{N_XL}\\circ w_p^*(k_L)\n=k'_{v_e^*L}\\circ N_{\\overline X_U}(t^e_L).\\tag{2}$$\nThis is an equality of the specified derived maps, natural in $L$, and uses no conservativity or detection of equality by geometric stalks.",
-   "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-cbc-extension-zero-base-change",
-    "lem-fix-site-open-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, lemma-shriek-base-change: comparison of right adjoints and inverse mate direction; Tag 09AF for the normalized site transport"
-   }
-  },
-  {
-   "text": "For brevity write $F=Rr_{p,*}$, $F'=Rr_{U,p,*}$, $G'=Rr_{U,e,*}$ and $N'=N_{\\overline X_U}$. Keep $M=eL$. By definition the exchanges of the question are $C^p=F'(t^p)\\circ E^p_d$ and $C^e=G'(t^e)\\circ E^e_e$. Expand the left side of the desired equation. Naturality of $E^p$ in the morphism $k_L$, equation (2), equation (1), and then naturality of $b_{r_U}$ in $t^e_L$ give, in that order,\n$$\\begin{aligned}\nC^p_{N_XL}\\circ u_p^*J_{c,L}\n&=F'(t^p_{N_XL})\\circ E^p_{dN_XL}\\circ u_p^*F(k_L)\\circ u_p^*b_{r,M}\\\\\n&=F'(t^p_{N_XL}\\circ w_p^*k_L)\\circ E^p_{N_{\\overline X}M}\\circ u_p^*b_{r,M}\\\\\n&=F'(k'_{v_e^*L})\\circ F'N'(t^e_L)\\circ b_{r_U,w_e^*M}\\circ N_U(E^e_M)\\\\\n&=F'(k'_{v_e^*L})\\circ b_{r_U,e'v_e^*L}\\circ N_U(G'(t^e_L))\\circ N_U(E^e_M)\\\\\n&=J_{c_U,v_e^*L}\\circ N_U(C^e_L).\n\\end{aligned}$$\nEach equality is functoriality or substitution of the two cited transport equations. The suppressed pullback comparisons compose to the ones in the question by [lem-weil-pbc-comparison-pullback].",
-   "uses": [
-    "lem-weil-pbc-transport-identifies-exchange",
-    "lem-fix-site-open-exchange",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Agent pasting of Tags 09A6 and 09AF: displayed component computation from the two existing transport equations"
-   }
-  },
-  {
-   "text": "Finally check the normalization clause. For a qcqs $h$, [lem-weil-pbc-comparison-direct-image-canonical-mate] gives\n$$\\varepsilon^p_h\\circ h_p^*(b_h)\\circ a_h=N(\\varepsilon^e_h),$$\nwhere $a_h:Nh_e^*\\xrightarrow{\\sim}h_p^*N$ is the canonical comparison. For $j$, put $s=j_p^*$, $q=j_e^*$ and $a=N_Xq\\xrightarrow{\\sim}sN_{\\overline X}$. The adjunct formula for $k^{-1}$ in [lem-fix-site-open-exchange] says $s(k^{-1})\\eta^p=a_eN_X(\\eta^e)$. Consequently the adjunct of $N_{\\overline X}(\\varepsilon^e_B)\\circ k^{-1}_{qB}$ is\n$$sN_{\\overline X}(\\varepsilon^e_B)\\circ a_{eqB}\\circ N_X(\\eta^e_{qB})\n=a_B\\circ N_X(q\\varepsilon^e_B\\circ\\eta^e_{qB})=a_B.$$\nHere the first equality is naturality of $a$ and the second is the etale triangle identity. The adjunct of $\\varepsilon^p_{N_{\\overline X}B}\\circ d(a_B)$ is also $a_B$. The adjunction bijection [def-weil-pbc-adjunction-mate] therefore gives\n$$N_{\\overline X}(\\varepsilon^e_B)\n=\\varepsilon^p_{N_{\\overline X}B}\\circ d(a_B)\\circ k_{qB}.$$\nThus the $k$ used throughout preserves the actual extension-by-zero evaluation counit. The same holds for $j_U$. All transformations and the computations are natural in $L$; no choices of isomorphisms or changes of adjunction are involved. This proves the remaining normalization and naturality clauses.",
-   "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-fix-site-open-exchange",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison: adjunction normalization; Tag 09A6: canonical counit mate; triangle-identity verification"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "lem-pc-separated-quasi-separated",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-cbc-proetale-extension-zero",
-  "lem-sf-comparison-pullback-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-fix-site-open-exchange",
+  "lem-amb-compact-support-proper-factor",
+  "lem-amb-compact-support-open-factor",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "def-amb-etale-compact-support",
-  "lem-weil-pbc-transport-identifies-exchange",
-  "def-kun-unbounded-exchange",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-cbc-extension-zero-base-change",
-  "def-weil-pbc-adjunction-mate"
+  "lem-amb-open-site-evaluation-counit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09A6 (lemma-morphism-comparison) and 09AF (lemma-jshriek-comparison); explicit pasting and evaluation-counit calculation, using existing canonical comparison and transport nodes"
+  "place": "Tags 099R and 09AF; proper/open factorization and the Lean naturality calculation paste_exchange, X3 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -277,13 +189,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-transport-identifies-exchange",
-  "lem-fix-site-open-exchange",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -317,5 +223,15 @@
   "group": "Q39",
   "result": "fix",
   "note": "Delivery equals the landed Q139 module (reviewed 2026-10-17) except one added comment; node changes only lean.by/date. Read node, 7 proof steps, Stacks 09A6/09AF/03S6, all 15 stmt_dep records, and Etale.baseChange (D+ unit-square-counit mate), Etale.openImmersionLowerShriekBaseChangeMap (inverse used, direction correct), pro-etale mateEquiv/sfFixedOpenExtensionBaseChange, compactSupportSiteComparisonPlus, fixedComparisonPullbackPlus. Every hypothesis and clause matches (finite A in ULift presentation, Noetherian X/S/c.Z, open pullback square, D+ only, J an Iso, equation typed on both sides, counit normalizations); edge cases covered; no hollow defs, only sorry, docstrings present, statement verbatim, universes bound. nt_compile exit 0. FIX: fixes/CompactSupportSiteComparisonOpen.lean removes the added comment (byte-identical to landed); fixes report keeps both sections and appends a clause-by-clause maintainer section because the second reading is thin. Note: lean.by changes Q139->Q39, which fixes cannot change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261019T112615-L-3961377",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

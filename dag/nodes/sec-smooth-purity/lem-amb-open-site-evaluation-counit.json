@@ -1,0 +1,119 @@
+{
+ "id": "lem-amb-open-site-evaluation-counit",
+ "kind": "lemma",
+ "title": "Evaluation normalization for the open site comparison",
+ "statement": "Evaluation normalization for the open site comparison. In the fixed scalar presentation of finite constant coefficients and on the ordinary bounded-below derived categories, the specified canonical maps satisfy the following identity:\n\ntheorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :\n    ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),\n      (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.map\n          ((Etale.openImmersionLowerShriekUpperStarAdjunction\n            (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlusAdjunction.counit.app B) =\n        (properOpenSiteExtensionIso A j).hom.app\n          ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.obj B) ≫\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map\n          ((fixedComparisonPullbackPlus A j).hom.app B) ≫\n        (openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlusAdjunction.counit.app\n            ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.obj B)\n\nThe direct-image and inverse-image comparisons are those of [lem-weil-pbc-comparison-direct-image-canonical-mate], and the open comparison is that of [lem-cbc-proetale-extension-zero-comparison].",
+ "stmt_deps": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 09AF; lem-amb-compact-support-site-comparison-open, step 7"
+ },
+ "proof": [
+  {
+   "text": "Transpose under the target open adjunction. The unit normalization of the inverse site/open comparison identifies its transpose with pullback comparison followed by comparison applied to the etale open unit. Naturality of the pullback comparison and the etale triangle identity give this transpose for the left evaluation map. The pro-etale triangle identity gives it for the right evaluation composite. Injectivity of the Hom adjunction gives equality. Apply this degreewise and descend through quasi-isomorphisms using exactness; the canonical derived adjunction is the descent of this adjunction, so the displayed maps are its counits.",
+   "uses": [
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "The canonical proper/open factor and evaluation calculations in lem-amb-compact-support-site-comparison-open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mate comparison preserves base change and extension by zero evaluation counits",
+   "results": "[leansearch] OK 8 hits: CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.functorialityCounit, CategoryTheory.rightAdjointMate_comp_evaluation.",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the proof derives the counit from the existing unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate comparison preserves base change and extension by zero evaluation counits",
+   "results": "mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, conjugateEquiv_counit; generic identities, no site-specific derived comparison equation",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic transposition identities support the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-18",
+   "verdict": "Generic counit identity; it does not identify the derived site-comparison squares."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Cc]ounit|[Oo]pen.*[Cc]omparison",
+   "results": "12 hits, chiefly monadicity comparisonAdjunction_counit_app and unrelated monoidal comparisons",
+   "date": "2026-10-18",
+   "verdict": "No etale/pro-etale comparison normalization in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen",
+  "date": "2026-10-18",
+  "group": "X3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-compact-support-site-comparison-open",
+   "place": "Open evaluation half of step 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSiteEvaluationCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSiteEvaluationCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openSiteEvaluationCounit",
+  "statement": "theorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :\n    ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),\n      (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.map\n          ((Etale.openImmersionLowerShriekUpperStarAdjunction\n            (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlusAdjunction.counit.app B) =\n        (properOpenSiteExtensionIso A j).hom.app\n          ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.obj B) ≫\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map\n          ((fixedComparisonPullbackPlus A j).hom.app B) ≫\n        (openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlusAdjunction.counit.app\n            ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.obj B)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261019T112615-L-3961377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261019T112615-L-3961377",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

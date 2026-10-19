@@ -11,22 +11,18 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Refinement
-public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.CompactSupportProperFactor
+import Sheaf.AlgebraicGeometry.CompactSupportOpenFactor
+import Sheaf.AlgebraicGeometry.OpenSiteEvaluationCounit
 import Sheaf.Paper.ComparisonPullbackExact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Compactified site comparison and open restriction
 
@@ -113,6 +109,46 @@ def compactSupportProEtaleExchangePlus (A : Type u) [CommRing A] [Finite A]
         Functor.mapDerivedCategoryPlusCompIso _ _).hom _ ≫
     (Functor.associator _ _ _).hom
 
+-- Naturality and the two factor squares paste without cancelling an exchange.
+private theorem paste_exchange
+    {C C' D D' E E' P P' Q Q' R R' : Type*}
+    [Category C] [Category C'] [Category D] [Category D'] [Category E] [Category E']
+    [Category P] [Category P'] [Category Q] [Category Q'] [Category R] [Category R']
+    {j : C ⥤ D} {j' : C' ⥤ D'} {p : D ⥤ E} {p' : D' ⥤ E'}
+    {J : P ⥤ Q} {J' : P' ⥤ Q'} {F : Q ⥤ R} {F' : Q' ⥤ R'}
+    {nC : C ⥤ P} {nD : D ⥤ Q} {nE : E ⥤ R}
+    {nC' : C' ⥤ P'} {nD' : D' ⥤ Q'} {nE' : E' ⥤ R'}
+    {v : C ⥤ C'} {h : D ⥤ D'} {a : E ⥤ E'}
+    {V : P ⥤ P'} {H : Q ⥤ Q'} {A : R ⥤ R'}
+    (b : p ⋙ nE ⟶ nD ⋙ F) (b' : p' ⋙ nE' ⟶ nD' ⋙ F')
+    (e : j ⋙ nD ⟶ nC ⋙ J) (e' : j' ⋙ nD' ⟶ nC' ⋙ J')
+    (av : nC ⋙ V ⟶ v ⋙ nC') (ah : nD ⋙ H ⟶ h ⋙ nD')
+    (aa : nE ⋙ A ⟶ a ⋙ nE')
+    (ep : F ⋙ A ⟶ H ⋙ F') (ee : p ⋙ a ⟶ h ⋙ p')
+    (op : J ⋙ H ⟶ V ⋙ J') (oe : j ⋙ h ⟶ v ⋙ j')
+    (L : C)
+    (hp : A.map (b.app (j.obj L)) ≫ ep.app (nD.obj (j.obj L)) ≫
+        F'.map (ah.app (j.obj L)) =
+      aa.app (p.obj (j.obj L)) ≫ nE'.map (ee.app (j.obj L)) ≫
+        b'.app (h.obj (j.obj L)))
+    (ho : H.map (e.app L) ≫ op.app (nC.obj L) ≫ J'.map (av.app L) =
+      ah.app (j.obj L) ≫ nD'.map (oe.app L) ≫ e'.app (v.obj L)) :
+    A.map (b.app (j.obj L)) ≫ A.map (F.map (e.app L)) ≫
+        ep.app (J.obj (nC.obj L)) ≫ F'.map (op.app (nC.obj L)) ≫
+        F'.map (J'.map (av.app L)) =
+      aa.app (p.obj (j.obj L)) ≫ nE'.map (ee.app (j.obj L)) ≫
+        nE'.map (p'.map (oe.app L)) ≫ b'.app (j'.obj (v.obj L)) ≫
+        F'.map (e'.app (v.obj L)) := by
+  have hn := ep.naturality (e.app L)
+  dsimp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+  rw [← F'.map_comp, ← F'.map_comp, ho]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% hp]
+  have hb := b'.naturality (oe.app L)
+  dsimp only [Functor.comp_map] at hb
+  rw [reassoc_of% hb]
+
 /-- The canonical compactification comparison commutes with open restriction, with
 both inverse-image comparisons displayed. Its isomorphism assertion is carried by
 `compactSupportSiteComparisonPlus`; equality is between components of natural maps,
@@ -120,7 +156,7 @@ so the statement is natural in the entire bounded-below complex.
 Source: Stacks proetale.tex, Tags 09A6 and 09AF, canonical open-restriction pasting
 (blueprint: lem-amb-compact-support-site-comparison-open).
 
-Proof (the node's seven steps):
+Proof (proper/open factorization and counit normalization):
 1. Properness of c.g gives qcqs; base change preserves it. Use
 lem-weil-pbc-comparison-pullback to identify the inverse-image composites.
 2. Exact open extension, comparison and inverse image preserve D+ by
@@ -129,17 +165,18 @@ open comparison of lem-fix-site-open-exchange, not an arbitrary isomorphism.
 3. J is the proper counit mate followed by direct image of the open comparison.
 lem-weil-pbc-comparison-direct-image-canonical-mate makes the first factor invertible;
 the second is an isomorphism. This is exactly compactSupportSiteComparisonPlus.
-4. Apply lem-weil-pbc-transport-identifies-exchange to c.g and its open base change:
-the two proper exchanges intertwine the actual proper comparison mates.
-5. Apply lem-fix-site-open-exchange to the open square. Its equation intertwines
-the actual inverse extension-by-zero exchanges and the two open site comparisons.
+4. Apply compactSupportProperFactor to c.g and its open base change. It restricts
+the pullback comparison square to D+ and uses the counit equations to compare its mates.
+5. Apply compactSupportOpenFactor to the open square. It restricts fixSiteOpenExchange
+to D+ and identifies its conjugate with the actual extension-by-zero exchange.
 6. Expand both compactified exchanges. Naturality of the proper exchange moves
 the open site comparison through it. Substitute step 5 and then step 4; naturality
 of the base-changed proper comparison moves the etale open exchange through it.
 Functoriality combines the resulting two factors to give the displayed right side.
 7. The proper mate's counit equation gives its normalization. For the open factor,
-transpose its inverse under the open adjunction. Naturality of the pullback comparison
-and the etale triangle identity identify the transpose with the pullback comparison.
+apply openSiteEvaluationCounit, which transposes under the open adjunction. Naturality
+of the pullback comparison and the etale triangle identity identify the transpose
+with the pullback comparison.
 The pro-etale triangle identity identifies the same transpose for the evaluation
 counit composite. Injectivity of the Hom adjunction proves equality. This applies
 also to the restricted compactification. All maps used above are natural. -/
@@ -166,7 +203,30 @@ theorem compactSupportSiteComparison_open (A : Type u) [CommRing A] [Finite A]
       (compactSupportSiteComparisonPlus (ULift.{u + 1, u} A) (c.ofIsPullback sq)).hom.app
         ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) v).mapDerivedCategoryPlus.obj
           L) := by
-  sorry
+  let := Etale.isIso_openImmersionLowerShriekBaseChangeMap
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) (c.isPullback_i_ofIsPullback sq)
+  let := sfFixedOpenExtensionBaseChange_isIso A (c.isPullback_i_ofIsPullback sq)
+  have hp := compactSupportProperFactor (ULift.{u + 1, u} A)
+    (c.isPullback_g_ofIsPullback sq)
+    ((Etale.openImmersionLowerShriek
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategoryPlus.obj L)
+  have ho := compactSupportOpenFactor A (c.isPullback_i_ofIsPullback sq) L
+  have pasted := paste_exchange
+    (fixedComparisonDirectImageMatePlus (ULift.{u + 1, u} A) c.g)
+    (fixedComparisonDirectImageMatePlus (ULift.{u + 1, u} A) (c.ofIsPullback sq).g)
+    (properOpenSiteExtensionIso (ULift.{u + 1, u} A) c.i).hom
+    (properOpenSiteExtensionIso (ULift.{u + 1, u} A) (c.ofIsPullback sq).i).hom
+    (fixedComparisonPullbackPlus (ULift.{u + 1, u} A) v).inv
+    (fixedComparisonPullbackPlus (ULift.{u + 1, u} A) (pullback.fst c.g u)).inv
+    (fixedComparisonPullbackPlus (ULift.{u + 1, u} A) u).inv
+    _ _ _ _ L hp ho
+  simpa only [compactSupportSiteComparisonPlus, compactSupportEtaleExchangePlus,
+    compactSupportProEtaleExchangePlus, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_map,
+    Functor.comp_obj, Category.id_comp, Category.comp_id, asIso_hom,
+    Functor.map_comp, Category.assoc, Etale.rightDerivedLowerStarPlus] using pasted
 
 /-- The site factors used in J preserve the actual proper and open-evaluation counits.
 The same assertion for the restricted compactification is obtained by applying this
@@ -204,6 +264,9 @@ theorem compactSupportSiteComparison_open_counits
         (openImmersionLowerShriekUpperStarAdjunction
           (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryPlusAdjunction.counit.app
             ((comparisonUpperStar (ModuleCat.{u + 1} A) c.Z).mapDerivedCategoryPlus.obj B)) := by
-  sorry
+  constructor
+  · intro K
+    exact fixedComparisonDirectImageMatePlus_counit A c.g K
+  · exact openSiteEvaluationCounit A c.i
 
 end AlgebraicGeometry.ProEtale
