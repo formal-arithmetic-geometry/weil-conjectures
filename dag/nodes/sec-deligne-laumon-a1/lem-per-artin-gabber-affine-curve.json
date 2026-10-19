@@ -43,26 +43,32 @@
  ],
  "proof": [
   {
-   "text": "Three formal facts are used throughout. (a) $Rf_!$ is an exact functor of triangulated categories, in particular it commutes with shifts [def-amb-etale-compact-support], and $D_T(M[m])\\cong D_T(M)[-m]$ because $R\\mathcal Hom_\\Lambda(-,\\omega_T)$ is exact and contravariant in its first variable [def-pur-derived-internal-hom]. (b) If $\\operatorname{SuppCon}(M)$ and $e\\ge0$ then $\\operatorname{SuppCon}(M[e])$: $\\mathcal H^{-i}(M[e])=\\mathcal H^{-(i-e)}(M)$ has closed support of dimension at most $i-e\\le i$. (c) $\\operatorname{SuppCon}$ is closed under extensions: for a distinguished triangle $M'\\to M\\to M''\\to M'[1]$ the sequence $\\mathcal H^{-i}M'\\to\\mathcal H^{-i}M\\to\\mathcal H^{-i}M''$ is exact, so $\\mathcal H^{-i}M$ vanishes on every Zariski open on which both outer sheaves vanish, and its closed support lies in the union of the two outer ones, whose dimension is the maximum of theirs.",
+   "text": "Three formal facts are used throughout. (a) On a compactification $f=rj$, $Rf_!=Rr_*Dj_!$ [def-amb-etale-compact-support]. Extension by zero is exact [lem-weil-pbc-extension-by-zero-exact], so its termwise derived functor is triangulated [lem-sf-exact-functor-derived-triangulated]; $Rr_*$ is triangulated on the unbounded categories by [lem-pc-right-derived-functor-triangulated]. Their composite is triangulated [lem-weil-pbc-triangulated-functor-composite], hence commutes with shifts. Also $D_T(M[m])\\cong D_T(M)[-m]$ by [lem-pur-derived-internal-hom-shift-left]. (b) If $\\operatorname{SuppCon}(M)$ and $e\\ge0$, then $\\operatorname{SuppCon}(M[e])$: $\\mathcal H^{-i}(M[e])=\\mathcal H^{-(i-e)}(M)$ has closed support of dimension at most $i-e\\le i$. (c) The support condition is extension closed. The cohomology sequence of a distinguished triangle $M'\\to M\\to M''\\to M'[1]$ for the standard t-structure, whose cohomology objects are the cohomology sheaves [def-sbc-standard-tstructure-derived-category, lem-weil-heart-short-exact-triangles] shows that $\\mathcal H^{-i}M$ vanishes wherever both outer sheaves vanish. Its closed support is therefore contained in their union. An irreducible closed subset of a union of two closed subsets lies in one of them, so every chain of irreducible closed subsets lies in the member containing its largest term; the dimension of that union is the maximum of the two dimensions. This proves (c), including empty supports.",
    "uses": [
     "def-amb-etale-compact-support",
-    "def-pur-derived-internal-hom",
-    "def-per-support-condition"
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-triangulated-functor-composite",
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-weil-heart-short-exact-triangles",
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "1.3 and 2.1.2: shifts and extension closure of the support condition"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SE (proposition-derived-functor), Tag 015F (lemma-right-derived-exact-functor), Tag 014Y (lemma-composition-exact); the support and dimension calculation is written out"
    }
   },
   {
-   "text": "Support side. Let $K\\in{}^pD^{\\le n}(X)\\cap D^b_{ctf}(X,\\Lambda)$ and put $K'=K[n]$, so $\\operatorname{SuppCon}(K')$ holds and $K'$ is bounded with constructible cohomology sheaves $F_i=\\mathcal H^{-i}K'$ [def-weil-pbc-constructible-complexes]. The closed support of $F_i$ has dimension at most $i$; in particular $F_i=0$ for $i<0$. By (a) the claim $Rf_!K\\in{}^pD^{\\le n+d}(Y)$ is $\\operatorname{SuppCon}((Rf_!K')[d])$. The truncation triangles of the standard t-structure on $D(X_{\\mathrm{et}},\\Lambda)$ [lem-weil-heart-short-exact-triangles] build $K'$ from the finitely many objects $F_i[i]$ by extensions. Since $Rf_!$ is exact, (c) reduces the claim to $\\operatorname{SuppCon}((Rf_!F_i)[i+d])$ for each $i\\ge0$. Now $\\mathcal H^{-m}((Rf_!F_i)[i+d])=R^{q}f_!F_i$ with $q=i+d-m$, and [lem-per-finite-compact-support-fibre-support-bound], applied with $a=i$, bounds the dimension of its closed support by $i+d-q=m$. This is the support condition.",
+   "text": "Support side. Let $K\\in{}^pD^{\\le n}(X)\\cap D^b_{ctf}(X,\\Lambda)$ and put $K'=K[n]$, so $\\operatorname{SuppCon}(K')$ holds and $K'$ is bounded with constructible cohomology sheaves $F_i=\\mathcal H^{-i}K'$ [def-weil-pbc-constructible-complexes]. The closed support of $F_i$ has dimension at most $i$; in particular $F_i=0$ for $i<0$. By (a) the claim $Rf_!K\\in{}^pD^{\\le n+d}(Y)$ is $\\operatorname{SuppCon}((Rf_!K')[d])$. For a bounded complex, successive truncation triangles have cohomology-sheaf quotients $F_i[i]$. Thus the truncation triangles of the standard t-structure on $D(X_{\\mathrm{et}},\\Lambda)$ [def-sbc-standard-tstructure-derived-category, lem-weil-heart-short-exact-triangles] build $K'$ from the finitely many objects $F_i[i]$ by extensions. Since $Rf_!$ is exact, (c) reduces the claim to $\\operatorname{SuppCon}((Rf_!F_i)[i+d])$ for each $i\\ge0$. Now $\\mathcal H^{-m}((Rf_!F_i)[i+d])=R^{q}f_!F_i$ with $q=i+d-m$, and [lem-per-finite-compact-support-fibre-support-bound], applied with $a=i$, bounds the dimension of its closed support by $i+d-q=m$. This is the support condition.",
    "uses": [
     "def-weil-pbc-constructible-complexes",
     "lem-weil-heart-short-exact-triangles",
     "lem-per-finite-compact-support-fibre-support-bound",
     "def-per-support-condition",
-    "def-per-perverse-subcategories"
+    "def-per-perverse-subcategories",
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -71,12 +77,13 @@
    }
   },
   {
-   "text": "Exchange. For every $M\\in D(X_{\\mathrm{et}},\\Lambda)$ there is a natural isomorphism $D_YRf_!M\\cong Rf_*D_XM$. Indeed the composition isomorphism $Ra_{Y!}Rf_!\\cong Ra_{X!}$ [lem-amb-unbounded-compact-support-comparisons] gives, by uniqueness of right adjoints, $f^\\times a_Y^\\times\\cong a_X^\\times$, hence $\\omega_X\\cong f^\\times\\omega_Y$. The internal adjunction [prop-asd-internal-adjunction], applied with $K=\\omega_Y$, is $Rf_*R\\mathcal Hom_\\Lambda(M,f^\\times\\omega_Y)\\cong R\\mathcal Hom_\\Lambda(Rf_!M,\\omega_Y)$. All schemes are of finite type over $k$, hence Noetherian, and $f$, $a_Y$, $a_X$ are compactifiable by [thm-nagata-compactification]. No finiteness theorem and no biduality is used here.",
+   "text": "Exchange. For every $M\\in D(X_{\\mathrm{et}},\\Lambda)$ there is a natural isomorphism $D_YRf_!M\\cong Rf_*D_XM$. Indeed the composition isomorphism $Ra_{Y!}Rf_!\\cong Ra_{X!}$ [lem-amb-unbounded-compact-support-comparisons] gives, by uniqueness of right adjoints [det-sp-unique-right-adjoint], $f^\\times a_Y^\\times\\cong a_X^\\times$, hence $\\omega_X\\cong f^\\times\\omega_Y$. The internal adjunction [prop-asd-internal-adjunction], applied with $K=\\omega_Y$, is $Rf_*R\\mathcal Hom_\\Lambda(M,f^\\times\\omega_Y)\\cong R\\mathcal Hom_\\Lambda(Rf_!M,\\omega_Y)$. All schemes are of finite type over $k$, hence Noetherian, and $f$, $a_Y$, $a_X$ are compactifiable by [thm-nagata-compactification]. No finiteness theorem and no biduality is used here.",
    "uses": [
     "lem-amb-unbounded-compact-support-comparisons",
     "prop-asd-internal-adjunction",
     "thm-nagata-compactification",
-    "thm-amb-etale-exceptional-adjoint"
+    "thm-amb-etale-exceptional-adjoint",
+    "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
    "source": {
@@ -85,12 +92,14 @@
    }
   },
   {
-   "text": "Cosupport side. Let $K\\in{}^pD^{\\ge n}(X)\\cap D^b_{ctf}(X,\\Lambda)$ and put $L=D_X(K[n])$, so $\\operatorname{SuppCon}(L)$ holds by definition. By [lem-per-finite-coefficient-dual-constructible], applied to the bounded constructible complex $K[n]$, $L$ lies in $D^+(X_{\\mathrm{et}},\\Lambda)$ and has constructible cohomology sheaves. Since $f$ is affine, [lem-per-finite-affine-direct-image-support-bound] gives $\\operatorname{SuppCon}(Rf_*L)$. By the exchange of Step 3 and (a), $D_Y((Rf_!K)[n-d])\\cong D_Y(Rf_!(K[n]))[d]\\cong(Rf_*L)[d]$, which satisfies the support condition by (b), as $d\\ge0$. Hence $Rf_!K\\in{}^pD^{\\ge n-d}(Y)$. The argument gives the stronger affine bound $Rf_!K\\in{}^pD^{\\ge n}(Y)$ (the case $d=0$ of (b)).",
+   "text": "Cosupport side. Let $K\\in{}^pD^{\\ge n}(X)\\cap D^b_{ctf}(X,\\Lambda)$ and put $L=D_X(K[n])$, so $\\operatorname{SuppCon}(L)$ holds by definition. By [lem-per-finite-coefficient-dual-constructible], applied to the bounded constructible complex $K[n]$, $L$ lies in $D^+(X_{\\mathrm{et}},\\Lambda)$ and has constructible cohomology sheaves. Since $f$ is affine, [lem-per-finite-affine-direct-image-support-bound] gives $\\operatorname{SuppCon}(Rf_*L)$ for the bounded-below direct image. It agrees on $L$ with the unbounded $Rf_*$ of Step 3: a bounded-below injective resolution of $L$ is K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], and K-injective complexes compute the total derived functor [lem-weil-pbc-kinjective-total-derived]. By the exchange of Step 3 and (a), $D_Y((Rf_!K)\\lbrack n-d\\rbrack)\\cong D_Y(Rf_!(K[n]))[d]\\cong(Rf_*L)[d]$, which satisfies the support condition by (b), as $d\\ge0$. Hence $Rf_!K\\in{}^pD^{\\ge n-d}(Y)$. The argument gives the stronger affine bound $Rf_!K\\in{}^pD^{\\ge n}(Y)$ (the case $d=0$ of (b)).",
    "uses": [
     "lem-per-finite-coefficient-dual-constructible",
     "lem-per-finite-affine-direct-image-support-bound",
     "def-per-support-condition",
-    "def-per-perverse-subcategories"
+    "def-per-perverse-subcategories",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
@@ -99,9 +108,10 @@
    }
   },
   {
-   "text": "Both implications hold for every $n$, which is the statement. If $X$ is empty, $Rf_!K=0$ lies in every class. For $p_2:\\mathbf A^1_{k_0}\\times\\mathbf A^1_{k_0}\\to\\mathbf A^1_{k_0}$ the morphism is affine of finite type and each fibre is $\\mathbf A^1_{\\kappa(y)}$, of dimension one, so $d=1$; the same holds after any base change $Y'\\to\\mathbf A^1_{k_0}$ with $Y'$ separated of finite type over $k_0$.",
+   "text": "Both implications hold for every $n$, which is the statement. If $X$ is empty, $Rf_!K=0$ lies in every class. For the projection $p_2:\\mathbf A^1_{k_0}\\times\\mathbf A^1_{k_0}\\to\\mathbf A^1_{k_0}$, and after a base change $Y'\\to\\mathbf A^1_{k_0}$, the inverse image of an affine open $\\operatorname{Spec}B$ of the base is $\\operatorname{Spec}B[t]$. Thus the map is affine and of finite type [pqf-def-affine-morphism, def-weil-pbc-scheme-conventions]. Its fibre over $y$ is $\\operatorname{Spec}\\kappa(y)[t]$ [def-pc-scheme-fibre]. Euclidean division makes every nonzero prime of this polynomial ring maximal, and $(0)\\subsetneq(t)$ is a chain of primes; its spectrum has dimension one. Consequently $d=1$ applies whenever the base $Y'$ is separated of finite type over $k_0$, as required by the theorem.",
    "uses": [
     "pqf-def-affine-morphism",
+    "def-weil-pbc-scheme-conventions",
     "def-pc-scheme-fibre"
    ],
    "elementary": true,
@@ -116,26 +126,71 @@
   "def-pc-scheme-fibre",
   "def-per-perverse-subcategories",
   "def-per-support-condition",
-  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
   "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "det-sp-unique-right-adjoint",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pc-right-derived-functor-triangulated",
   "lem-per-finite-affine-direct-image-support-bound",
   "lem-per-finite-coefficient-dual-constructible",
   "lem-per-finite-compact-support-fibre-support-bound",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-triangulated-functor-composite",
   "pqf-def-affine-morphism",
   "prop-asd-internal-adjunction",
   "thm-amb-etale-exceptional-adjoint",
   "thm-nagata-compactification"
  ],
  "proof_origin": {
-  "by": "L (route decision of the human, 2026-10-19)",
+  "by": "agent",
   "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "4.2.4 for the support side; Theorem 4.1.1 and Corollary 4.1.2 for the cosupport side; finite coefficients as in the upstream Lean (isPerverseLE_lowerShriek, isPerverseGE_lowerShriek)"
+  "place": "The maintainer's 2026-10-19 finite-coefficient plan, expanding BBD 4.1.1, 4.1.2 and 4.2.4 with ordinary etale internal adjunction; formal support calculations written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perverse|Artin.?Gabber",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pushforward is perverse up to relative dimension",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_map_app; PresheafOfModules.pushforward_map_app_apply; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom; AffineSubspace.map_le_iff_le_comap; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map; AlgebraicGeometry.sourceAffineLocally; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerverse\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite type pushforward with compact support has perverse cohomological amplitude bounded by the fibre dimension",
+   "results": "AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_preimage_eq; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin vanishing theorem for perverse sheaves and direct image along an affine morphism",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine; AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -213,7 +268,51 @@
  "tool_uses": [
   "lem-weil-heart-short-exact-triangles",
   "prop-asd-internal-adjunction",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-derived-internal-hom-shift-left"
  ],
- "lead_note": "2026-10-19 L (route decision of the human): restored to the upstream finite-coefficient statement (isPerverseLE_lowerShriek / isPerverseGE_lowerShriek: finite Lambda, any field, Dctf input) and re-planned on the blueprint/BBD route: support side by proper base change, cd <= 2 dim and the fibre dimension count (lem-per-finite-compact-support-fibre-support-bound); cosupport side by the ordinary exchange D_Y Rf_! = Rf_* D_X (prop-asd-internal-adjunction), constructibility of D_X (lem-per-finite-coefficient-dual-constructible) and Artin's affine estimate at finite coefficients (lem-per-finite-affine-direct-image-support-bound). The Q144 split (5ea9835359) restated it over Qbar_l on an arbitrary field and routed it through arbitrary-field Qbar_l duality and biduality, Gabber finiteness, alterations and stable reduction; those children are dropped (coord/route-pivot-dropped.txt, 2026-10-19 section). Returned with keep_plan: deliver this plan for review; keep finite coefficients and this route."
+ "lead_note": "2026-10-19 L (route decision of the human): restored to the upstream finite-coefficient statement (isPerverseLE_lowerShriek / isPerverseGE_lowerShriek: finite Lambda, any field, Dctf input) and re-planned on the blueprint/BBD route: support side by proper base change, cd <= 2 dim and the fibre dimension count (lem-per-finite-compact-support-fibre-support-bound); cosupport side by the ordinary exchange D_Y Rf_! = Rf_* D_X (prop-asd-internal-adjunction), constructibility of D_X (lem-per-finite-coefficient-dual-constructible) and Artin's affine estimate at finite coefficients (lem-per-finite-affine-direct-image-support-bound). The Q144 split (5ea9835359) restated it over Qbar_l on an arbitrary field and routed it through arbitrary-field Qbar_l duality and biduality, Gabber finiteness, alterations and stable reduction; those children are dropped (coord/route-pivot-dropped.txt, 2026-10-19 section). Returned with keep_plan: deliver this plan for review; keep finite coefficients and this route.",
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-artin-gabber-affine-curve",
+  "worker": "stage1",
+  "summary": "Q02 delivers the maintainer-seeded finite-coefficient five-step plan. Checked the source declarations (both sorry), all dependency statements, the BBD estimates and Stacks affine support lemma. Added existing generic nodes for exactness, Hom shifts and adjoint uniqueness; expanded the finite-union support argument and affine-line instance. The three finite-coefficient estimate children already exist and are reused unchanged; no new nodes.",
+  "blueprint": "The affine-pushforward lemma serves the perverse-amplitude argument in sk-p-dl-a1-perverse. Realizes the two displayed inclusions of the current blueprint lemma through support devissage (Step 2), ordinary exchange and the affine direct-image estimate (Steps 3-4), shifts (Step 1), and the d=1 instance (Step 5), as required by the 2026-10-19 return.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Truncation triangles and cohomological exact sequences in an arbitrary t-structure; the unit does not develop this generic formalism."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Ordinary finite-coefficient internal adjunction supplies the exchange used in Step 3; no Qbar_l or adic comparison is involved."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Composition of ordinary finite-coefficient compact supports identifies the two absolute right adjoints in Step 3."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulatedness of unbounded right derived functors, applied to the proper direct image in Step 1."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of ordinary module extension by zero, needed for triangulatedness in Step 1."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-left",
+    "why": "Generic internal Hom shift formula in the first variable, used for the finite-coefficient Verdier dual."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-4208f1337",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-4208f1337 (reviewer sub-agent of L); spot-checked: Read the item in full (five steps; statement and lean record unchanged from live; no new nodes), every cited node's statement, the main-20261015 blueprint md, BBD 4.1.1, 4.1.2 and 4.2.4 (extracted pdf), Stacks 0F0X/0F0V and derived.tex 05SE/015F/014Y. Route: finite Λ with exponent invertible in an arbitrary field k, D^b_ctf, every n, closed supports, dual a_T^×Λ, as in coord/repair-notes/lem-per-artin-gabber-affine-curve.json. Support side uses devissage and lem-per-finite-compact-support-fibre-support-bound (a=i, q=i+d-m gives the bound m). Cosupport side uses prop-asd-internal-adjunction with ω_X≅f^×ω_Y by unique right adjoints, then lem-per-finite-coefficient-dual-constructible, then lem-per-finite-affine-direct-image-support-bound, then shift by d. No item, stmt_dep, proof_dep or child proof_dep is in coord/route-pivot-dropped.txt. Route words: 'biduality' only in a true negation (Step 3); gabber only in the id or path; Qbar only in a split_report negation; t-structure only the standard one; no alterations, stable reduction or SGA. The Qbar def-per nodes are cited only for displayed formulas, read at finite coefficients in the statement. Statement matches BBD 4.2.4 (f_! amplitude ≤ d) and is weaker than 4.1.2 on the ≥ side. Checked edge cases: X empty, d=0, Λ=0, any n; ctf unused but harmless. Step 5: Spec κ(y)[t] has dimension 1. FIX, 2 missing citations: (1) Steps 1(c) and 2 use cohomology-sheaf long exact sequences and truncations of the standard t-structure without citing def-sbc-standard-tstructure-derived-category; added. (2) Step 4 applies the affine child, stated for the bounded-below Rf_*, to the unbounded K-injective Rf_* from the exchange; added the identification on L in D^+ via lem-weil-pbc-bounded-below-injectives-kinjective and lem-weil-pbc-kinjective-total-derived. proof_deps updated; nothing else touched. All six tool_uses accepted as generic or ordinary finite-coefficient formal tools.; 1 file(s) fixed by the reviewer"
+ }
 }
