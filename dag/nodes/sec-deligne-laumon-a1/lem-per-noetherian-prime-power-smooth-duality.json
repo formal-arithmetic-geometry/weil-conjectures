@@ -40,13 +40,14 @@
    }
   },
   {
-   "text": "Fix the normalization for affine space over a Noetherian base $S$. For $q:\\mathbf P^1_S\\to S$, the ordinary finite projective-line adjunction has $G_qK=q^*K(1)[2]$ and counit $(1\\otimes t_q)\\mathrm{PF}^{-1}$, with $t_qc_1(\\mathcal O(1))=1$. Its unit is the supported-diagonal formula of [det-sp-p1-adjunction]; the two diagonal integrals in [lem-sp-tower-p1-arbitrary-base-integrals] are its triangle identities. Compose this adjunction with open extension for $\\mathbf A^1_S\\subset\\mathbf P^1_S$, and then successively in the ordered coordinate tower. This is precisely the affine-space adjunction and trace of [lem-amb-affine-space-top-trace], with identity adjunction when $r=0$. Thus the chosen affine comparison $\\Gamma_{r}:A(r)[2r]\\to\\omega_{p_r}$ uses the supported first Chern class of the diagonal and the prescribed integration normalization.",
+   "text": "Fix the normalization for affine space over a Noetherian base $S$. For $q:\\mathbf P^1_S\\to S$, the ordinary finite projective-line adjunction has $G_qK=q^*K(1)[2]$ and counit $(1\\otimes t_q)\\mathrm{PF}^{-1}$, with $t_qc_1(\\mathcal O(1))=1$. Its unit is the supported-diagonal formula of [det-sp-p1-adjunction]; the Noetherian diagonal integrals in [lem-amb-p1-diagonal-integrals] are its triangle identities. All coordinate-tower bases are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since they are finite type over S. No arbitrary-base integral theorem is needed. Compose this adjunction with open extension for $\\mathbf A^1_S\\subset\\mathbf P^1_S$, and then successively in the ordered coordinate tower. This is precisely the affine-space adjunction and trace of [lem-amb-affine-space-top-trace], with identity adjunction when $r=0$. Thus the chosen affine comparison $\\Gamma_{r}:A(r)[2r]\\to\\omega_{p_r}$ uses the supported first Chern class of the diagonal and the prescribed integration normalization.",
    "uses": [
     "lem-asd-ordinary-finite-p1-adjunction",
     "det-sp-p1-adjunction",
-    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-amb-p1-diagonal-integrals",
     "lem-amb-affine-space-top-trace",
-    "def-weil-pbc-composite-adjunction"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
@@ -300,7 +301,6 @@
   "lem-pur-sheaf-hom-cover-gluing",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sp-tower-p1-arbitrary-base-integrals",
   "lem-trf-ambient-affine-translation-trace",
   "lem-trf-finite-ring-section-deformation",
   "lem-weil-pbc-derived-single-fully-faithful",
@@ -317,12 +317,13 @@
   "sbc-thm-etale-local-normal-form",
   "thm-amb-vector-bundle-purity",
   "thm-asd-smooth-tensor",
-  "thm-nagata-compactification"
+  "thm-nagata-compactification",
+  "lem-amb-p1-diagonal-integrals"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/scholze-six-functor-formalisms.pdf",
-  "place": "Theorem 7.19 and following DNC paragraph; finite-level details follow current blueprint sk-prop-sp-orientation, sk-thm-dnc, sk-thm-smooth-purity and sk-lem-sp-reduction proof files, expanded over arbitrary Noetherian bases."
+  "place": "Theorem 7.19 and following DNC paragraph; finite-level details follow current blueprint sk-prop-sp-orientation, sk-thm-dnc, sk-thm-smooth-purity and sk-lem-sp-reduction proof files, expanded over arbitrary Noetherian bases. Step 2 uses the existing Noetherian diagonal integrals directly; J1 prunes the unnecessary arbitrary-base integral input."
  },
  "mathlib_searches": [
   {
@@ -540,7 +541,6 @@
   "lem-pur-sheaf-hom-cover-gluing",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sp-tower-p1-arbitrary-base-integrals",
   "lem-trf-ambient-affine-translation-trace",
   "lem-trf-finite-ring-section-deformation",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
@@ -592,5 +592,15 @@
   "group": "Q12",
   "result": "pass",
   "note": "Every node clause matches the Lean. Hypotheses: prime ell, n>=1, Noetherian P and X, SmoothOfRelativeDimension r, separated + quasi-compact (finite type), HasCompactification, ell^n a unit. Orientation Datum.alpha is pinned by the landed OrientationNormalized (diagonal/DNC/Kummer-bundle equation). tensor_isIso holds for every D+ input. unit_normalization. BaseChange: dualizing and gamma clauses via the canonical smooth base-change maps, for any b with X' Noetherian. Composition via the conjugate compact-support composition iso, with the canonical source; source open/etale restriction = r=0 composition + dimension_zero. dimension_zero holds for every normalized C, and etale_comparison_exists shows it is not vacuous. Reduction: mateMap + unitIso against e^{tensor r}, with CoefficientLineComparison fully pinned (roots_power ell^(N-n), generators, derived_normalization). Extra binders (pullback Noetherian, unit witnesses, instances on composites) are derivable Props. Edge cases n=1, N=n, r=0, empty scheme, non-ctf D+ are covered. No duplicate: Q07 general-base theorem is field-based with ctf inputs; no competing delivery. Added stmt_deps are 4 landed def nodes (allowed); no theorem added, none dropped. 16 proof steps are verbatim in the docstring; statement record is verbatim; declaration list matches; lines <=100. nt_compile --json clean in 17.5 s. Advisory only: plain decls from nodes outside stmt_deps (SmoothExceptionalBaseChange maps, unboundedEtaleLowerShriekCompIso, mateMap, Geometry, vectorIntegrationBaseCoefficientPullback); an existing:true def node for the base-change maps is suggested."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-2954f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T154013-L-3026593",
+  "kind": "interface",
+  "note": "independent cc review: Withdrawn item vs its only importer NoetherianPrimePowerSmoothDuality (unclaimed, Noetherian-only, now cites lem-amb-p1-diagonal-integrals); node diffs vs live; lineAppend Nat.rec vs old recursion; compiled delivery + importer PrimeFieldPunctualPurity"
  }
 }

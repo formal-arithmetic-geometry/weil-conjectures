@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
 import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
+import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals
 import Sheaf.SmoothPurity.TensorMateEtalePrecomp
 import Sheaf.Paper.PurityDiagonalOrientationCompatibility
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
@@ -37,7 +38,6 @@ import Sheaf.Paper.NoetherianEtaleSectionSpecialization
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Paper.EtaleUnboundedRestrictionComparison
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.ArbitraryBaseP1Integrals
 import Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace
 import Sheaf.Paper.FiniteRingSectionDeformation
 import Sheaf.Paper.RingedExchangeTensorCoherence
@@ -92,14 +92,15 @@ unit constraint, including the empty product. Source: sk-prop-sp-orientation, co
 def lineAppend (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (X : Scheme.{u}) (s : ℕ) : ∀ r : ℕ,
     ((derivedTensor (ModuleCat.{u + 1} A) X).obj (line A N hA X s)).obj
-        (line A N hA X r) ≅ line A N hA X (s + r)
-  | 0 => ((derivedTensor (ModuleCat.{u + 1} A) X).obj (line A N hA X s)).mapIso
+        (line A N hA X r) ≅ line A N hA X (s + r) :=
+  Nat.rec
+    (((derivedTensor (ModuleCat.{u + 1} A) X).obj (line A N hA X s)).mapIso
       (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) X) ≪≫
-        derivedTensorRightUnitor (ModuleCat.{u + 1} A) X (line A N hA X s)
-  | r + 1 =>
-    (derivedTensorAssociator (ModuleCat.{u + 1} A) X (line A N hA X s)
-      (line A N hA X r) ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧)).symm ≪≫
-      ((derivedTensor (ModuleCat.{u + 1} A) X).mapIso (lineAppend A N hA X s r)).app _
+        derivedTensorRightUnitor (ModuleCat.{u + 1} A) X (line A N hA X s))
+    (fun r ih ↦
+      (derivedTensorAssociator (ModuleCat.{u + 1} A) X (line A N hA X s)
+        (line A N hA X r) ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧)).symm ≪≫
+        ((derivedTensor (ModuleCat.{u + 1} A) X).mapIso ih).app _)
 
 /-- Identify the purity source at the coefficient unit by inverse-image and tensor
 unit constraints. Source: sk-prop-sp-orientation, unit normalization
@@ -330,15 +331,18 @@ Proof, following the DAG node step by step:
 2. Fix the normalization for affine space over a Noetherian base $S$. For $q:\mathbf P^1_S\to S$,
    the ordinary finite projective-line adjunction has $G_qK=q^*K(1)[2]$ and counit $(1\otimes
    t_q)\mathrm{PF}^{-1}$, with $t_qc_1(\mathcal O(1))=1$. Its unit is the supported-diagonal
-   formula of [det-sp-p1-adjunction]; the two diagonal integrals in [lem-sp-tower-p1-arbitrary-
-   base-integrals] are its triangle identities. Compose this adjunction with open extension for
+   formula of [det-sp-p1-adjunction]; the two diagonal integrals in
+   [lem-amb-p1-diagonal-integrals] are its triangle identities. All coordinate-tower bases
+   are Noetherian, as they are finite type over S; arbitrary-base integrals are unnecessary.
+   Compose this adjunction with open extension for
    $\mathbf A^1_S\subset\mathbf P^1_S$, and then successively in the ordered coordinate tower.
    This is precisely the affine-space adjunction and trace of [lem-amb-affine-space-top-trace],
    with identity adjunction when $r=0$. Thus the chosen affine comparison
    $\Gamma_{r}:A(r)[2r]\to\omega_{p_r}$ uses the supported first Chern class of the diagonal and
    the prescribed integration normalization.
-   Uses: lem-asd-ordinary-finite-p1-adjunction, det-sp-p1-adjunction, lem-sp-tower-p1-arbitrary-
-   base-integrals, lem-amb-affine-space-top-trace, def-weil-pbc-composite-adjunction.
+   Uses: lem-asd-ordinary-finite-p1-adjunction, det-sp-p1-adjunction,
+   lem-amb-p1-diagonal-integrals, lem-weil-pbc-finite-type-over-noetherian,
+   lem-amb-affine-space-top-trace, def-weil-pbc-composite-adjunction.
 
 3. Apply [prop-asd-smooth-base-change] to the self-base-change square of $p$. Its unit-coefficient
    comparison $p_2^*\omega_p\xrightarrow{\sim}\omega_{p_1}$ restricts along $\Delta$ to
