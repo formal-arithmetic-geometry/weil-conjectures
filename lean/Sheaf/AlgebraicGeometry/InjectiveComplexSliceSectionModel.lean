@@ -12,11 +12,10 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Compatible slice section models from one injective complex
@@ -259,6 +258,12 @@ functor of terminal evaluation. Source: Stacks, 03F3 and 05TI
 def constantModuleSliceDerivedSections (W : C) :=
   (constantModuleSliceEvaluation J Λ W).rightDerivedFunctorPlus
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+set_option maxHeartbeats 600000 in
+-- Comparing the composite derived units requires the full slice-evaluation definitions.
+set_option synthInstance.maxHeartbeats 80000 in
 /-- A single bounded-below injective complex computes the derived sections on every
 slice, naturally with respect to both site arrows and changes of representatives.
 All complexes, differentials and transition maps below are literal evaluations, and
@@ -348,6 +353,227 @@ theorem injectiveComplexSliceSectionModel
           ((constantModuleSliceDerivedSections J Λ W).obj
             ((constantModuleSliceRestriction J Λ W).obj
               ((DerivedCategory.Plus.singleFunctor _ 0).obj M))))) := by
-  sorry
+  have hpres : ∀ W : C, (SheafOfModules.overFunctor.{u}
+      ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) W).PreservesInjectiveObjects := by
+    intro W
+    obtain ⟨G, hlim, _, _, ⟨adj⟩⟩ := localized_restriction_adjunction
+      ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) W inferInstance
+    let := hlim
+    exact adj.preservesInjectiveObjects_of_preservesFiniteLimits
+  refine ⟨?_, ?_, ?_⟩
+  · intro W
+    let c := ((Over.forget W).pushforwardContinuousSheafificationCompatibility
+      RingCat.{u} (J.over W) J).app ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))
+    refine ⟨c.symm, ?_⟩
+    have h := (Over.forget W).toSheafify_pullbackSheafificationCompatibility
+      RingCat.{u} (J.over W) J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))
+    change _ ≫ c.inv.hom = _
+    rw [← h]
+    change (_ ≫ c.hom.hom) ≫ c.inv.hom = _
+    have hc := congrArg (sheafToPresheaf (J.over W) RingCat.{u}).map c.hom_inv_id
+    change c.hom.hom ≫ c.inv.hom = 𝟙 _ at hc
+    rw [Category.assoc, hc, Category.comp_id]
+    rfl
+  · intro W
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro M hM
+    let := hM
+    let := hpres W
+    exact Functor.injective_obj _ M
+  · have hbeta : ∀ W : C, ∃ beta : constantModuleDerivedSections J Λ (op W) ≅
+        constantModuleSliceRestriction J Λ W ⋙ constantModuleSliceDerivedSections J Λ W,
+        ∀ M : CochainComplex.Plus (constantModuleSheaves J Λ),
+          (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+              ((HomotopyCategory.Plus.quotient _).obj M) ≫
+            beta.hom.app (DerivedCategory.Plus.Q.obj M) =
+          (constantModuleSliceEvaluation J Λ W).rightDerivedFunctorPlusUnit.app
+              (((SheafOfModules.overFunctor _ W).mapHomotopyCategoryPlus).obj
+                ((HomotopyCategory.Plus.quotient _).obj M)) ≫
+            (constantModuleSliceDerivedSections J Λ W).map
+              ((SheafOfModules.overFunctor _ W).mapDerivedCategoryPlusFactorsh.inv.app
+                ((HomotopyCategory.Plus.quotient _).obj M)) := by
+      intro W
+      let S := SheafOfModules.overFunctor.{u}
+        ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) W
+      let T := constantModuleSliceEvaluation J Λ W
+      let E := constantModuleEvaluation J Λ (op W)
+      let := hpres W
+      let δ : E.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⟶
+          DerivedCategory.Plus.Qh ⋙ (S.mapDerivedCategoryPlus ⋙ T.rightDerivedFunctorPlus) :=
+        Functor.whiskerRight
+            (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (S ⋙ T))).inv
+            DerivedCategory.Plus.Qh ≫
+          (Functor.associator _ _ _).hom ≫
+          Functor.whiskerLeft S.mapHomotopyCategoryPlus T.rightDerivedFunctorPlusUnit ≫
+          (Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight S.mapDerivedCategoryPlusFactorsh.inv T.rightDerivedFunctorPlus ≫
+          (Functor.associator _ _ _).hom
+      have hδ : (S.mapDerivedCategoryPlus ⋙ T.rightDerivedFunctorPlus).IsRightDerivedFunctor
+          δ (HomotopyCategory.Plus.quasiIso (constantModuleSheaves J Λ)) := by
+        refine (HomotopyCategory.Plus.localizerMorphism_derives
+          (E.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh)).isRightDerivedFunctor_of_isIso
+            _ (fun X ↦ ?_)
+        have : ∀ n : ℤ, Injective
+            ((S.mapHomotopyCategoryPlus.obj
+              ((InjectiveObject.ι _).mapHomotopyCategoryPlus.obj X)).obj.as.X n) :=
+          fun n ↦ inferInstanceAs (Injective (S.obj
+            (((InjectiveObject.ι _).mapHomotopyCategoryPlus.obj X).obj.as.X n)))
+        have : IsIso (T.rightDerivedFunctorPlusUnit.app
+            (S.mapHomotopyCategoryPlus.obj
+              ((InjectiveObject.ι _).mapHomotopyCategoryPlus.obj X))) := inferInstance
+        dsimp only [δ, NatTrans.comp_app, Functor.whiskerRight_app,
+          Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app]
+        infer_instance
+      let := hδ
+      let beta := Functor.rightDerivedUnique E.rightDerivedFunctorPlus
+        (S.mapDerivedCategoryPlus ⋙ T.rightDerivedFunctorPlus)
+        E.rightDerivedFunctorPlusUnit δ
+        (HomotopyCategory.Plus.quasiIso (constantModuleSheaves J Λ))
+      refine ⟨beta, ?_⟩
+      intro M
+      have hunit : E.rightDerivedFunctorPlusUnit.app
+          ((HomotopyCategory.Plus.quotient _).obj M) ≫
+          beta.hom.app (DerivedCategory.Plus.Qh.obj
+            ((HomotopyCategory.Plus.quotient _).obj M)) =
+          δ.app ((HomotopyCategory.Plus.quotient _).obj M) := by
+        exact (Functor.rightDerivedNatTrans_app E.rightDerivedFunctorPlus
+          (S.mapDerivedCategoryPlus ⋙ T.rightDerivedFunctorPlus)
+          E.rightDerivedFunctorPlusUnit δ
+          (HomotopyCategory.Plus.quasiIso (constantModuleSheaves J Λ)) (𝟙 _)
+          ((HomotopyCategory.Plus.quotient _).obj M)).trans (Category.id_comp _)
+      refine hunit.trans ?_
+      dsimp only [δ, NatTrans.comp_app, Functor.whiskerRight_app,
+        Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app]
+      rw [Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app]
+      erw [Functor.map_id]
+      repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
+      simp [T, S, constantModuleSliceDerivedSections]
+    choose beta hbeta using hbeta
+    refine ⟨beta, hbeta, ?_, ?_, ?_, ?_, ?_⟩
+    · intro W
+      let := hInjective
+      dsimp only [constantModuleSectionComparison]
+      infer_instance
+    · intro W' W a
+      simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+      have hu := Functor.rightDerivedNatTrans_app
+        (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlus
+        (constantModuleEvaluation J Λ (op W')).rightDerivedFunctorPlus
+        (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit
+        (constantModuleEvaluation J Λ (op W')).rightDerivedFunctorPlusUnit
+        (HomotopyCategory.Plus.quasiIso (constantModuleSheaves J Λ))
+        (Functor.whiskerRight
+          (NatTrans.mapHomotopyCategoryPlus (constantModuleRestriction J Λ a.op))
+          DerivedCategory.Plus.Qh)
+        ((HomotopyCategory.Plus.quotient _).obj L)
+      have hn := (constantModuleDerivedRestriction J Λ a.op).naturality e.hom
+      have hr : DerivedCategory.Plus.Qh.map
+          ((NatTrans.mapHomotopyCategoryPlus (constantModuleRestriction J Λ a.op)).app
+            ((HomotopyCategory.Plus.quotient _).obj L)) =
+          DerivedCategory.Plus.Q.map (ObjectProperty.homMk
+            (X := (constantModuleEvaluation J Λ (op W)).mapCochainComplexPlus.obj L)
+            (Y := (constantModuleEvaluation J Λ (op W')).mapCochainComplexPlus.obj L)
+            (((constantModuleRestriction J Λ a.op).mapHomologicalComplex (.up ℤ)).app
+              L.obj)) := by
+        apply DerivedCategory.Plus.ι.map_injective
+        change DerivedCategory.Qh.map
+            ((HomotopyCategory.Plus.ι _).map
+              ((NatTrans.mapHomotopyCategoryPlus (constantModuleRestriction J Λ a.op)).app
+                ((HomotopyCategory.Plus.quotient _).obj L))) = _
+        rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
+        rfl
+      have hu' :
+          (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+              ((HomotopyCategory.Plus.quotient _).obj L) ≫
+            (constantModuleDerivedRestriction J Λ a.op).app (DerivedCategory.Plus.Q.obj L) =
+          DerivedCategory.Plus.Q.map (ObjectProperty.homMk
+            (X := (constantModuleEvaluation J Λ (op W)).mapCochainComplexPlus.obj L)
+            (Y := (constantModuleEvaluation J Λ (op W')).mapCochainComplexPlus.obj L)
+            (((constantModuleRestriction J Λ a.op).mapHomologicalComplex (.up ℤ)).app
+              L.obj)) ≫
+          (constantModuleEvaluation J Λ (op W')).rightDerivedFunctorPlusUnit.app
+            ((HomotopyCategory.Plus.quotient _).obj L) := by
+        dsimp only [Functor.whiskerRight_app] at hu
+        rw [hr] at hu
+        exact hu
+      dsimp only [constantModuleSectionComparison]
+      calc
+        _ = ((constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+              ((HomotopyCategory.Plus.quotient _).obj L) ≫
+            (constantModuleDerivedRestriction J Λ a.op).app (DerivedCategory.Plus.Q.obj L)) ≫
+            (constantModuleDerivedSections J Λ (op W')).map e.hom ≫
+            (beta W').hom.app K := by
+          simpa only [Category.assoc] using congrArg (fun z ↦
+            (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+              ((HomotopyCategory.Plus.quotient _).obj L) ≫ z ≫ (beta W').hom.app K) hn
+        _ = _ := by
+          simpa only [Category.assoc] using congrArg (fun z ↦ z ≫
+            (constantModuleDerivedSections J Λ (op W')).map e.hom ≫
+            (beta W').hom.app K) hu'
+    · intro L' K' e' f k h W
+      have hn := (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.naturality
+        ((HomotopyCategory.Plus.quotient _).map f)
+      dsimp only [constantModuleSectionComparison]
+      calc
+        _ = (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+            ((HomotopyCategory.Plus.quotient _).obj L) ≫
+            (constantModuleDerivedSections J Λ (op W)).map (e.hom ≫ k) ≫
+            (beta W).hom.app K' := by
+          simpa only [Functor.map_comp, Category.assoc] using
+            congrArg (fun z ↦
+              (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+                ((HomotopyCategory.Plus.quotient _).obj L) ≫
+                (constantModuleDerivedSections J Λ (op W)).map e.hom ≫ z)
+              ((beta W).hom.naturality k).symm
+        _ = _ := by
+          have hn' : DerivedCategory.Plus.Q.map
+                ((constantModuleEvaluation J Λ (op W)).mapCochainComplexPlus.map f) ≫
+              (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+                ((HomotopyCategory.Plus.quotient _).obj L') =
+            (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+                ((HomotopyCategory.Plus.quotient _).obj L) ≫
+              (constantModuleDerivedSections J Λ (op W)).map
+                (DerivedCategory.Plus.Q.map f) := hn
+          have hh := congrArg (fun z ↦
+            (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app
+                ((HomotopyCategory.Plus.quotient _).obj L) ≫
+              (constantModuleDerivedSections J Λ (op W)).map z ≫
+              (beta W).hom.app K') h.symm
+          exact hh.trans (by
+            simpa only [Functor.map_comp, Category.assoc] using congrArg (fun z ↦ z ≫
+              (constantModuleDerivedSections J Λ (op W)).map e'.hom ≫
+                (beta W).hom.app K') hn'.symm)
+    · intro I _ D
+      obtain ⟨N, hN⟩ := L.property
+      let := hN
+      refine ⟨N, ?_⟩
+      intro j n hn
+      exact (constantModuleEvaluation J Λ (op (D.obj j.unop))).map_isZero
+        (L.obj.isZero_of_isStrictlyGE N n hn)
+    · intro M hM W n hn
+      let L₀ : CochainComplex.Plus (constantModuleSheaves J Λ) :=
+        ⟨(HomologicalComplex.single _ (.up ℤ) 0).obj M, 0, inferInstance⟩
+      have : ∀ q : ℤ, Injective (L₀.obj.X q) := by
+        intro q
+        by_cases hq : q = 0
+        · subst q
+          exact Injective.of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).symm hM
+        · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq).injective
+      let e₀ : DerivedCategory.Plus.Q.obj L₀ ≅
+          (DerivedCategory.Plus.singleFunctor _ 0).obj M := Iso.refl _
+      let α := constantModuleSectionComparison J Λ L₀ _ e₀ (op W) ≫
+        (beta W).hom.app ((DerivedCategory.Plus.singleFunctor _ 0).obj M)
+      have : IsIso α := by
+        dsimp [α, constantModuleSectionComparison]
+        infer_instance
+      let E := constantModuleEvaluation J Λ (op W)
+      have : (DerivedCategory.Plus.Q.obj (E.mapCochainComplexPlus.obj L₀)).IsLE 0 := by
+        rw [← DerivedCategory.Plus.isLE_ι_obj_iff]
+        change (DerivedCategory.Q.obj
+          ((E.mapHomologicalComplex (.up ℤ)).obj L₀.obj)).IsLE 0
+        infer_instance
+      exact (DerivedCategory.Plus.isZero_homology_of_isLE
+        (DerivedCategory.Plus.Q.obj (E.mapCochainComplexPlus.obj L₀)) 0 n hn).of_iso
+          ((DerivedCategory.Plus.homologyFunctor (ModuleCat.{u} Λ) n).mapIso (asIso α)).symm
 
 end CategoryTheory

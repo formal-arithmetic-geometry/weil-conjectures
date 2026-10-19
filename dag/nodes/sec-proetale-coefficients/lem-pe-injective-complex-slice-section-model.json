@@ -20,10 +20,11 @@
  ],
  "proof": [
   {
-   "text": "Put $S_W(F)=F|_W$. By [def-pur-localized-ringed-site], $S_W(F)(V\\to W)=F(V)$, with the original restriction maps, and $\\operatorname{id}_W$ is terminal. The localization inverse image on sheaves of sets is this sectionwise restriction; [lem-pe-constant-left-module-inverse-image] identifies its pullback of $\\Lambda_{\\mathcal C}$ with $\\Lambda_{\\mathcal C/W}$ and says that the resulting left-module inverse image is exact, including for noncommutative $\\Lambda$. It is precisely $S_W$: the addition and scalar action at $V\\to W$ are those of $F(V)$. In particular it sends a zero map to zero, preserves quasi-isomorphisms termwise and induces the stated restriction of derived objects. Applying [def-pur-localized-ringed-site] inside $\\mathcal C/W$ gives $S_a S_W=S_{W'}$ sectionwise for $a:W'\\to W$.",
+   "text": "Use [lem-pur-ring-presheaf-sheafification-localization] with the constant ring presheaf. Invert its canonical comparison; its sheafification-unit equation gives the stated constant scalar normalization. Restriction S_W is the literal sectionwise functor of [def-pur-localized-ringed-site]. Its additivity and exactness are [def-weil-pbc-ringed-derived-restriction]. Evaluation at the terminal slice object composed with S_W is the original evaluation at W, definitionally, including its constant scalar action and differentials.",
    "uses": [
+    "lem-pur-ring-presheaf-sheafification-localization",
     "def-pur-localized-ringed-site",
-    "lem-pe-constant-left-module-inverse-image"
+    "def-weil-pbc-ringed-derived-restriction"
    ],
    "elementary": false,
    "source": {
@@ -45,7 +46,7 @@
    }
   },
   {
-   "text": "All sites and coefficients lie in the fixed universe, and each slice of the small site is small. By [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives], their left-module-sheaf categories have enough injectives. The target $\\Lambda\\text{-}\\operatorname{Mod}$ is abelian by [lem-weil-pbc-ring-modules-enough-injectives]. For a slice let $E_W(F)=F(\\operatorname{id}_W)$, regarded as a left $\\Lambda$-module by constant scalars. It is additive since evaluation preserves addition of morphisms. It is left exact since kernels are sectionwise [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-right-derived-plus-injective] to $E_W$. Denote its derived functor by $RE_W=R\\Gamma(\\mathcal C/W,-)$ and its natural unit by $\\eta^W_M:Q(E_WM)\\to RE_W(QM)$. The unit is invertible on bounded-below complexes of injectives. Step 2 and the sectionwise definition give $E_W(S_WL)=L(W)$ as complexes: the differential in degree $n$ is exactly $(d_L^n)_W$. Define\n$$\\alpha_W=RE_W(S_We)\\circ\\eta^W_{S_WL}.$$\nBoth factors are isomorphisms, with target $RE_W(S_WK)$, as required.",
+   "text": "The Grothendieck and enough-injectives declarations [lem-weil-pbc-ring-sheaves-grothendieck, lem-sp-grothendieck-enough-injectives, lem-weil-pbc-ring-modules-enough-injectives] supply derived evaluation on the base and slices. Form the natural transformation delta from evaluation on the homotopy category to the composite of exact derived slice restriction and derived terminal evaluation: apply the terminal-evaluation unit and then map the inverse exact-restriction factorization. On bounded-below complexes of injectives delta is invertible by step 2 and [lem-weil-pbc-right-derived-plus-injective]. The injective derivability structure therefore says this composite is a right derived functor of evaluation. The unique unit-compatible derived-functor isomorphism of [lem-weil-pbc-right-derived-plus-injective] gives beta, with exactly the displayed unit equation. The original evaluation unit at L is invertible, so its composite with the image of e and beta is invertible as well.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives",
@@ -60,7 +61,7 @@
    }
   },
   {
-   "text": "Fix $a:W'\\to W$ and work on $\\mathcal C/W$. For a module sheaf $F$ there is the natural section restriction $t_a(F):E_WF\\to E_{W'}S_aF$, evaluated on the arrow $(W'\\xrightarrow a W)\\to\\operatorname{id}_W$. It is $\\Lambda$-linear, and for complexes it commutes with the differential by naturality of $d$. By the universal property (1) of [lem-weil-pbc-right-derived-plus-injective], the transformation on bounded-below complexes\n$$Q(E_WM)\\xrightarrow{Q(t_a(M))}Q(E_{W'}S_aM)\\xrightarrow{\\eta^{W'}_{S_aM}}RE_{W'}(Q(S_aM))$$\nextends uniquely across the unit $\\eta^W$ to a transformation $\\rho_a:RE_W\\to RE_{W'}S_a^D$, where $S_a^D$ is induced by exact restriction. This is canonical derived section pullback: it derives the ordinary section pullback along localization, and uniqueness specifies its normalization. Its defining equality is\n$$\\rho_{a,QM}\\circ\\eta^W_M=\\eta^{W'}_{S_aM}\\circ Q(t_a(M)).$$\nFor $M=S_WL$, relocalization [def-pur-localized-ringed-site] identifies $S_aM=S_{W'}L$ sectionwise, while $t_a(M)$ is literally $r_a$. Thus the equality uses the actual evaluation differential and actual restriction map, rather than a chosen map between isomorphic cohomology objects.",
+   "text": "For an arrow a : W' → W, derive the natural transformation of the original evaluation functors given by literal sheaf restriction. The definition constantModuleDerivedRestriction is exactly this rightDerivedNatTrans. Its unit equation [lem-weil-pbc-right-derived-plus-injective], evaluated at the homotopy image of L, identifies the composite of the evaluation unit and derived restriction with Q of the literal chain restriction followed by the target evaluation unit. Transporting this transformation through beta gives the slice-derived restriction displayed in the statement; this is the canonical pullback because both it and section pullback are normalized descents of the same ordinary section map.",
    "uses": [
     "lem-weil-pbc-right-derived-plus-injective",
     "def-pur-localized-ringed-site"
@@ -72,7 +73,7 @@
    }
   },
   {
-   "text": "Naturality of $\\rho_a$ at $S_We:Q(S_WL)\\cong S_WK$ gives\n$$\\rho_{a,S_WK}\\,RE_W(S_We)=RE_{W'}(S_{W'}e)\\,\\rho_{a,Q(S_WL)}.$$\nCompose this with $\\eta^W_{S_WL}$ and substitute step 4. The result is exactly $\\rho_a\\alpha_W=\\alpha_{W'}Q(r_a)$. For a chain map $f:L\\to L'$ and a derived map $u:K\\to K'$ satisfying $u e=e'Q(f)$, naturality of the unit from [lem-weil-pbc-right-derived-plus-injective] gives\n$$RE_W(S_Wu)\\alpha_W=\\alpha'_W Q(f(W)).$$\nThis proves naturality for the specified representatives and identifications, including changes of $e$. The only identities used are naturality and composition of the displayed functors.",
+   "text": "Apply naturality of constantModuleDerivedRestriction to e.hom and compose with the unit equation of step 4. Associativity and cancellation of beta.hom with beta.inv prove the restriction square. For a chain map f and a derived map k compatible with e and e', naturality of beta first moves the sliced derived map across beta; the compatibility equation replaces e.hom followed by k with Q(f) followed by e'. Naturality of the evaluation unit then yields the stated naturality formula. These are equations of the actual complexes and their morphisms, so no replacement of restriction maps is involved.",
    "uses": [
     "lem-weil-pbc-right-derived-plus-injective"
    ],
@@ -96,8 +97,9 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-ring-presheaf-sheafification-localization",
   "def-pur-localized-ringed-site",
-  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-ringed-derived-restriction",
   "lem-pur-kinjective-restrict-localized-adjunction",
   "lem-sp-right-adjoint-preserves-injectives",
   "def-weil-sheaf-of-modules-category",
@@ -107,9 +109,9 @@
   "lem-weil-pbc-right-derived-plus-injective"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "H2",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03F3 and equation-restriction-mapping, with bounded-below comparisons and pullback normalization expanded using derived.tex Tags 05TI, 05TH and 05SA"
+  "place": "Tag 03F3 and equation-restriction-mapping, with unit-normalized bounded-below derived comparison via Tags 05TI, 05TH and 05SA; the constant-ring identification uses the ring-presheaf sheafification-localization comparison."
  },
  "mathlib_searches": [
   {
@@ -302,5 +304,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Clause-by-clause check of the node, all 9 stmt_deps and Stacks 03F3 against CategoryTheory.injectiveComplexSliceSectionModel. It covers the small site, unital noncommutative Λ, constant ring sheaf, left-module sheaves, slice J.over W, and the canonical normalized identification of the restricted constant ring sheaf. Also exactness and injective preservation, the unit-normalized beta giving α_W with IsIso, the restriction square (ρ_a by rightDerivedNatTrans transported along beta, equal to relocalization pullback by uniqueness), naturality in (L,K,e,f,k), the strict D.op diagram with a common lower bound for any I : Type i, and positive-degree vanishing for restricted injectives. Only lean and stmt_deps changed in the node; the added dep is a landed node and is used (allowed by brief-stage2). lean.statement matches the file verbatim. No hollow definitions, a single sorry, docstrings with source and blueprint, lines of at most 100 characters. The extra instances are construction-only. No duplicate notion found (siteModuleDerivedSections is an abelian-group, commutative-ring, unbounded helper). Edge cases: empty C or I, L=0, any lower bound, identity arrows, zero ring, noncommutative Λ. nt_compile --json on the local side overlay compiled clean in 31.3 s with no errors or warnings, after a first attempt hit the 60 s limit at machine load average ~243 on 80 cores. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261019T002616-L-2159873",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
