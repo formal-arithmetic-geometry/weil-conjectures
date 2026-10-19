@@ -45,11 +45,11 @@ lemma continuousSheafLowerStarIso_hom_naturality (e : X ≅ Y) (φ : ContinuousA
 
 variable (l : ℕ) [Fact l.Prime]
 
-lemma continuousSheafLowerStarIso_hom_integralToAdicConstantSheaf (e : X ≅ Y) :
-    (e.hom)_*[AddCommGrpCat.{u + 1}].map (integralToAdicConstantSheaf l X) ≫
+lemma continuousSheafLowerStarIso_hom_continuousSheafToAdicConstantSheaf (e : X ≅ Y) :
+    (e.hom)_*[AddCommGrpCat.{u + 1}].map (continuousSheafToAdicConstantSheaf l X) ≫
         (sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) Y).map
           (adicConstantSheafLowerStarIso l e).hom =
-      (continuousSheafLowerStarIso ℤ_[l] e).hom ≫ integralToAdicConstantSheaf l Y :=
+      (continuousSheafLowerStarIso ℤ_[l] e).hom ≫ continuousSheafToAdicConstantSheaf l Y :=
   rfl
 
 end AlgebraicGeometry.ProEtale

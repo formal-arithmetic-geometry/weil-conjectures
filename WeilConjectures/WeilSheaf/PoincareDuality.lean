@@ -73,8 +73,9 @@ groups vanish and perfectness is automatic.
 `k₀'` is `F^r`, proved by transporting Weil structures along the base change) and
 `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace isomorphism and perfectness at
 the coefficient stage `ℚ̄_ℓ`, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
-`sk-thm-frobenius`), which is still `sorry`: it needs the cup product and trace of `ℚ̄_ℓ`-Weil
-cohomology, transported from the finite levels.
+`sk-thm-frobenius`). The last is built from the cup product of `ℚ̄_ℓ`-cohomology transported from
+the finite levels, and its only open input is
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`.
 -/
 
 @[expose] public section

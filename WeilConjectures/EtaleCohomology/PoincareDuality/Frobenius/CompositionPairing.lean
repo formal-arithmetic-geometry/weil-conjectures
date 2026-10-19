@@ -105,37 +105,6 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
-/-- A complex of modules over a semisimple ring is quasi-isomorphic to the complex of its
-cohomology modules with zero differential. -/
-private theorem exists_quasiIso_of_zero_differential' [IsSemisimpleRing R]
-    (L : CochainComplex (ModuleCat.{u} R) ℤ) :
-    ∃ (H : CochainComplex (ModuleCat.{u} R) ℤ) (φ : H ⟶ L), QuasiIso φ ∧ (∀ i j, H.d i j = 0) ∧
-      ∀ i, Nonempty (H.X i ≅ L.homology i) := by
-  have hs : ∀ i, ∃ s : L.homology i ⟶ L.cycles i, s ≫ L.homologyπ i = 𝟙 _ := fun i ↦ by
-    have hπ : Function.Surjective (L.homologyπ i).hom :=
-      (ModuleCat.epi_iff_surjective _).1 inferInstance
-    have := Module.projective_of_isSemisimpleRing R (L.homology i)
-    obtain ⟨g, hg⟩ := Module.projective_lifting_property (L.homologyπ i).hom LinearMap.id hπ
-    exact ⟨ModuleCat.ofHom g, ModuleCat.hom_ext hg⟩
-  choose s hs using hs
-  let H : CochainComplex (ModuleCat.{u} R) ℤ :=
-    { X := fun i ↦ L.homology i
-      d := fun _ _ ↦ 0 }
-  let φ : H ⟶ L :=
-    { f := fun i ↦ s i ≫ L.iCycles i }
-  refine ⟨H, φ, ⟨fun i ↦ ?_⟩, fun _ _ ↦ rfl, fun i ↦ ⟨Iso.refl _⟩⟩
-  rw [quasiIsoAt_iff_isIso_homologyMap]
-  have h₁ := H.isIso_homologyπ (i - 1) i (by simp) rfl
-  have h₂ := H.isIso_iCycles i (i + 1) (by simp) rfl
-  have hc : HomologicalComplex.cyclesMap φ i = H.iCycles i ≫ s i := by
-    rw [← cancel_mono (L.iCycles i), HomologicalComplex.cyclesMap_i, Category.assoc]
-  have : HomologicalComplex.homologyMap φ i = inv (H.homologyπ i) ≫ H.iCycles i := by
-    rw [← cancel_epi (H.homologyπ i), HomologicalComplex.homologyπ_naturality, hc,
-      Category.assoc, hs, Category.comp_id, IsIso.hom_inv_id_assoc]
-  rw [this]
-  infer_instance
-
 instance : Projective (ModuleCat.of R R) :=
   ModuleCat.projective_of_free (Module.Basis.singleton Unit R)
 
@@ -167,7 +136,7 @@ theorem nondegenerate_comp_singleFunctor_of_isField (hR : IsField R) [Finite R]
         ∃ x : (singleFunctor _ 0).obj (ModuleCat.of R R) ⟶ E, x ≫ f ≠ 0) := by
   let _ := hR.toField
   have : IsSemisimpleRing R := inferInstance
-  obtain ⟨H, φ, hφ, hd, eH⟩ := exists_quasiIso_of_zero_differential' (Q.objPreimage E)
+  obtain ⟨H, φ, hφ, hd, eH⟩ := exists_quasiIso_of_zero_differential (Q.objPreimage E)
   have : IsIso (Q.map φ) := (isIso_Q_map_iff_quasiIso (C := ModuleCat.{u} R) φ).2 hφ
   let e : Q.obj H ≅ E := asIso (Q.map φ) ≪≫ Q.objObjPreimageIso E
   let S := HomologicalComplex.single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0

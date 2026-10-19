@@ -61,17 +61,6 @@ lemma eq_zero_of_isGE_one_of_injective {X : DerivedCategory C} [X.IsGE 1] {I : C
   rw [← cancel_epi e.inv, ← cancel_epi ((quotientCompQhIso C).hom.app K), ← cancel_mono e'.hom]
   simpa using hg.symm
 
-/-- If the morphism `f₁ : X₁ ⟶ X₂` of a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` induces
-an epimorphism on `Hⁿ` and a monomorphism on `Hⁿ⁺¹`, then `Hⁿ(X₃) = 0`. -/
-lemma isZero_homology_obj₃_of_epi_of_mono (T : Triangle (DerivedCategory C))
-    (hT : T ∈ distTriang _) (n : ℤ) (h₁ : Epi ((homologyFunctor C n).map T.mor₁))
-    (h₂ : Mono ((homologyFunctor C (n + 1)).map T.mor₁)) :
-    IsZero ((homologyFunctor C n).obj T.obj₃) := by
-  have hf := ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₁_iff T hT n).1 h₁
-  have hg := ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₁_iff T hT n (n + 1)
-    rfl).1 h₂
-  exact ((homologyFunctor C 0).homologySequence_exact₃ T hT n (n + 1) rfl).isZero_X₂ hf hg
-
 /-- Let `E ⟶ P ⟶ Z ⟶ E[1]` be a distinguished triangle with `Z ∈ D^{≥ 1}`, and let `I` be an
 injective object of `C`. Then precomposition with `E ⟶ P` is a bijection
 `Hom(P, I) ≃ Hom(E, I)`: neither `Z` nor `Z[-1]` has nonzero morphisms to `I`

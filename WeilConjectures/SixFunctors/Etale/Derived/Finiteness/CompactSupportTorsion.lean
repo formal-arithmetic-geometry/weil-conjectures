@@ -31,28 +31,6 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- Over a separably closed field `k` and a noetherian ring `Λ`, the derived global sections of a
-bounded constructible object of `D(Spec(k)_ét, Λ)` of Tor amplitude in `[a, b]` form a perfect
-complex: their cohomology modules are the global sections of constructible sheaves, hence
-finitely generated, and they have Tor amplitude in `[a, b]`. -/
-theorem isPerfect_rightDerivedGlobalSections_of_isSepClosed (Λ : Type (u + 1)) [CommRing Λ]
-    [IsNoetherianRing Λ] {k : Type u} [Field k] [IsSepClosed k]
-    (M : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hM : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) M)
-    {a b : ℤ} (hta : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) a b M) :
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj M).IsPerfect := by
-  have h := torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed hta
-  refine _root_.DerivedCategory.isPerfect_of_finiteTorAmplitude
-    ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
-      ⟨a, b, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn h⟩)
-    (fun q ↦ ?_) ⟨a, b, h⟩
-  have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj M) := hM.2 q
-  have := finite_Γ_of_isConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj M)
-  have : Module.Finite Λ ((_root_.DerivedCategory.homologyFunctor _ q ⋙
-      Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := this
-  exact Module.Finite.equiv
-    ((homologyRightDerivedGlobalSectionsIsoOfIsSepClosed q).app M).symm.toLinearEquiv
-
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks.
 
@@ -84,10 +62,9 @@ theorem isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero (Λ : Type (
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
   have hNL : N • 𝟙 L = 0 := by
     rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hN, Functor.map_zero]
-  exact isPerfect_rightDerivedGlobalSections_of_isSepClosed Λ _
-    (boundedConstructible_rightDerivedLowerStar _ c.g (𝟙 _) c.g (Category.comp_id _) N hNL hNk
-      hL.1.1)
-    (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing Λ c.g (𝟙 _) c.g
-      (Category.comp_id _) d hd a b N hNL hNk hL.1.1 hL.2)
+  exact isPerfect_rightDerivedGlobalSections_of_isSepClosed
+    ⟨boundedConstructible_rightDerivedLowerStar _ c.g (𝟙 _) c.g (Category.comp_id _) N hNL hNk
+      hL.1.1, _, _, torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing Λ c.g (𝟙 _) c.g
+      (Category.comp_id _) d hd a b N hNL hNk hL.1.1 hL.2⟩
 
 end AlgebraicGeometry.Etale

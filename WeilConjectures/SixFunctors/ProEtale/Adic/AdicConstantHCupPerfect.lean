@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Module.AdicDualityTransport
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHCup
 
@@ -53,18 +54,6 @@ omit [CompactSpace S] [QuasiSeparatedSpace S] in
 /-- `ℓ` is a nonzero element of `ℤ_ℓ`. -/
 lemma natCast_ne_zero_padicInt : (l : ℤ_[l]) ≠ 0 :=
   Nat.cast_ne_zero.2 (Fact.out : l.Prime).ne_zero
-
-omit [CompactSpace S] [QuasiSeparatedSpace S] in
-/-- A torsion element of a `ℤ_ℓ`-module is killed by a power of `ℓ`. -/
-lemma exists_pow_smul_eq_zero_of_mem_torsion {M : Type*} [AddCommGroup M] [Module ℤ_[l] M]
-    {x : M} (hx : x ∈ Submodule.torsion ℤ_[l] M) : ∃ k : ℕ, (l : ℤ_[l]) ^ k • x = 0 := by
-  obtain ⟨⟨r, hr⟩, hrx⟩ := hx
-  have hr0 : r ≠ 0 := nonZeroDivisors.ne_zero hr
-  have hrx' : r • x = 0 := hrx
-  rw [unitCoeff_spec hr0] at hrx'
-  refine ⟨r.valuation, ?_⟩
-  rw [← Units.inv_mul_cancel_left (unitCoeff hr0) ((l : ℤ_[l]) ^ r.valuation), mul_smul, hrx',
-    smul_zero]
 
 /-- **Left kernel, integral level.** If `ℓᵉ` kills the `ℓ`-power torsion of `Hʲ⁺¹(S, ℤ_ℓ)` and
 `ℓᵉ (a ⌣ b) = 0` for all `b ∈ Hʲ(S, ℤ_ℓ)`, then `ℓ^{2e} a ∈ ℓᵐ Hⁱ(S, ℤ_ℓ)` for every `m`. -/
@@ -190,7 +179,7 @@ theorem isPerfPair_adicConstantHCup {i j n : ℕ} (h : i + j = n)
   have hcupT (a : IntegralAdicH S l i) (b : IntegralAdicH S l j)
       (hab : t₀ (integralAdicHCup l S hfin h a b) = 0) :
       (l : ℤ_[l]) ^ e • integralAdicHCup l S hfin h a b = 0 :=
-    hle (le_max_left _ _) he₁ _ (exists_pow_smul_eq_zero_of_mem_torsion l (ht₀ _ hab))
+    hle (le_max_left _ _) he₁ _ (LinearMap.exists_pow_smul_eq_zero_of_mem_torsion (ht₀ _ hab))
   set P := (integralAdicHCup l S hfin h).compr₂ t₀
   set Q := c₀⁻¹ • (adicConstantHCup l S hfin h).compr₂ t.toLinearMap
   have hl0 : ¬IsUnit (l : ℤ_[l]) := PadicInt.p_nonunit

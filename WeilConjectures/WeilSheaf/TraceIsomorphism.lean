@@ -352,7 +352,10 @@ dimension `d` over `k₀ = 𝔽_q`, and `F` the geometric Frobenius. Over `ℚ̄
    `q^d`; for `X₀` proper the same holds for `H^{2d}`.
 
 In the existential form of this file, these are clauses of
-`AlgebraicGeometry.WeilSheaf.poincareDuality_compactlySupportedCohomology_adicConstant`. -/
+`AlgebraicGeometry.WeilSheaf.poincareDuality_compactlySupportedCohomology_adicConstant`.
+The statement asserts that *some* perfect pairing with the Frobenius similitude exists, not that
+the Poincaré pairing (cup product followed by the trace) is perfect: it only repackages the
+existential statement `poincareDuality_compactlySupportedCohomology_adicConstant`. -/
 theorem exists_isPerfPair_similitude_adicConstant :
     (∀ (i j : ℤ) (_ : i + j = 2 * d),
       ∃ P : ((adicConstant k₀ l X).compactlySupportedCohomology i).carrier →ₗ[PadicAlgCl l]

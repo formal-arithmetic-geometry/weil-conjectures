@@ -68,7 +68,7 @@ instance (n : ℕ) : IsScalarTower ℤ_[l] (PadicAlgCl l) (CompactAdicConstantH 
 noncomputable abbrev integralToCompactAdicConstantSheaf :
     (j)_!open[AddCommGrpCat.{u + 1}].obj (continuousSheaf U ℤ_[l]) ⟶
       (j)_!open[AddCommGrpCat.{u + 1}].obj (adicConstantSheafAb l U) :=
-  (j)_!open[AddCommGrpCat.{u + 1}].map (integralToAdicConstantSheaf l U)
+  (j)_!open[AddCommGrpCat.{u + 1}].map (continuousSheafToAdicConstantSheaf l U)
 
 /-- The map `ι : Hⁿ(T, j_! ℤ_ℓ) ⟶ Hⁿ(T, j_! ℚ̄_ℓ)` induced by the inclusion
 `C(-, ℤ_ℓ) ⊆ ℚ̄_ℓ,U`. -/
@@ -86,7 +86,7 @@ noncomputable def integralToCompactAdicConstantH (n : ℕ) :
     rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
       Ext.mk₀_comp_mk₀]
     simp only [Functor.mapRingHom_apply, ← Functor.map_comp,
-      integralSmulRingHom_comp_integralToAdicConstantSheaf]
+      integralSmulRingHom_comp_continuousSheafToAdicConstantSheaf]
 
 lemma integralToCompactAdicConstantH_apply (n : ℕ) (x : CompactIntegralAdicH j l n) :
     integralToCompactAdicConstantH l j n x =

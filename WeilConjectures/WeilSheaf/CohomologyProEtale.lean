@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
@@ -42,26 +43,6 @@ open scoped AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- The geometric fiber of `Spec k₀` over itself is `Spec k̄`. -/
-noncomputable def geometricFiberSpecIso :
-    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
-      Spec (CommRingCat.of (AlgebraicClosure k₀)) :=
-  have : IsIso (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (IsIso (𝟙 _))
-  asIso (Limits.pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
-    (Scheme.specAlgebraicClosure k₀).hom)
-
-/-- The global sections functor of the pro-étale site of the geometric fiber of `Spec k₀`
-preserves epimorphisms: this geometric fiber is `Spec k̄`. -/
-instance preservesEpimorphisms_Γ_geometricFiber_spec :
-    (Sheaf.Γ (Scheme.ProEt.topology
-      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (WeilCoefficients.{u} l)).PreservesEpimorphisms := by
-  have := ProEtale.preservesEpimorphisms_sheafSections_of_iso
-    (A := WeilCoefficients.{u} l) (geometricFiberSpecIso (k₀ := k₀))
-  exact Functor.PreservesEpimorphisms.of_iso
-    (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId _)).symm
 
 instance preservesFiniteColimits_Γ_geometricFiber_spec :
     PreservesFiniteColimits (Sheaf.Γ (Scheme.ProEt.topology

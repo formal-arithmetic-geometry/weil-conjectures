@@ -516,7 +516,7 @@ theorem exists_quasiIso_of_zero_differential_of_projective
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
 /-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the
 complex of its cohomology modules with zero differential. -/
-private theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
+theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
     (L : CochainComplex (ModuleCat.{u} R) ℤ) :
     ∃ (H : CochainComplex (ModuleCat.{u} R) ℤ) (φ : H ⟶ L), QuasiIso φ ∧ (∀ i j, H.d i j = 0) ∧
       ∀ i, Nonempty (H.X i ≅ L.homology i) :=

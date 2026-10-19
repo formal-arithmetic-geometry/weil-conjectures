@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
 /-!
@@ -145,12 +147,6 @@ lemma lowerStarFactor_exchange_cube {Z Z' P P' : Scheme.{u}} (θ : Z ⟶ Z') (ψ
   all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
     MorphismProperty.Over.pullbackComp, e, e']
 
-/-- The factorisation isomorphism of the tautological factorisation is the composition
-isomorphism. -/
-lemma lowerStarFactor_rfl {X Y Z : Scheme.{u}} (b : Z ⟶ Y) (c : Y ⟶ X) :
-    lowerStarFactor A (rfl : b ≫ c = b ≫ c) = lowerStarComp A b c := by
-  rw [← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl, Iso.trans_refl]
-
 /-- A congruence followed by the inverse of a composition isomorphism is the inverse of a
 factorisation isomorphism. -/
 lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq {X Y Z : Scheme.{u}} {x : Z ⟶ X}
@@ -192,11 +188,6 @@ lemma adicLowerStarCongr_hom_app_comp_adicLowerStarComp_inv_app_hom {X Y Z : Sch
       (lowerStarFactor _ h.symm).inv.app M.X := by
   rw [Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
     lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq]
-
-lemma adicLowerStarId_hom_app_hom (X : Scheme.{u}) (M : AdicSheaf l X) :
-    ((adicLowerStarId l X).hom.app M).hom = (lowerStarId _ X).hom.app M.X := by
-  simp only [adicLowerStarId, Iso.trans_hom, NatTrans.comp_app, Mod.comp_hom']
-  exact Category.comp_id _
 
 /-- Exchange isomorphisms are compatible with composition of the horizontal morphisms. -/
 lemma adicLowerStarSquareIso_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ a₃ : Z ⟶ Z)
