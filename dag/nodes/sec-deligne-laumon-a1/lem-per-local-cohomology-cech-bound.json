@@ -1,9 +1,55 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "The extended Čech right-adjoint model [lem-per-local-cohomology-adjoint-cech], applied to the ring $A$, the given list $f_1,\\ldots,f_r$ and $M[0]$, gives a natural $A$-linear isomorphism $H^j(C_A^\\bullet(f)\\otimes_A M)\\cong H^j(R\\Gamma_Z(M))$ for every $j\\geq0$, where $Z=V(I)$. This input needs only that the ideal have the given finite generating list, not that $M$ be finitely generated.",
+   "uses": [
+    "lem-per-local-cohomology-adjoint-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A6R (lemma-local-cohomology-adjoint), explicit extended Čech model and module specialization"
+   }
+  },
+  {
+   "text": "Identify $C_A^\\bullet(f)\\otimes_A M$ with the complex in the statement as follows. For every product $g$ of generators, [lem-weil-pbc-localization-tensor-over-base], with base ring $A$, module $A$ and multiplicative set $\\{1,g,g^2,\\ldots\\}$, gives $A_g\\otimes_A M\\cong M_g$ after the elementary identification $A\\otimes_A M\\cong M$. In this direction the map is $(a/g^n)\\otimes m\\mapsto am/g^n$. A finite product commutes with tensor here: the map to the product of tensors is induced by coordinate projections, and its inverse is the sum of the maps induced by coordinate inclusions; the identities follow from $\\sum_S\\iota_S\\pi_S=1$. Apply these maps in each degree and $A\\otimes_A M\\cong M$ in degree zero. For a face localization from a subset $S$ to a larger subset $T$, both composites send $(a/g_S^n)\\otimes m$ to the image of $am/g_S^n$ in $M_{g_T}$. Hence they commute with each alternating differential, with the same sign $(-1)^{a-1}$, and give a natural cochain isomorphism. For $r=0$ there are no localization factors: it is simply $A\\otimes_A M\\cong M$ in degree zero.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion; termwise identification with the model of Tag 0A6R (lemma-local-cohomology-adjoint)."
+   }
+  },
+  {
+   "text": "Because $A$ is Noetherian, [lem-per-local-cohomology-noetherian-comparison] at $K=M[0]$ gives a natural isomorphism $R\\Gamma_I(M[0])\\to R\\Gamma_Z(M[0])$, where $R\\Gamma_I$ is computed by applying $\\Gamma_I$ to a K-injective resolution. An injective resolution $M\\to J^\\bullet$ is a bounded-below complex of injectives, hence a K-injective resolution of $M[0]$, so [lem-sp-derived-functor-single-identification], applied to the additive functor $\\Gamma_I$ of [def-sbc-ideal-power-torsion-functor] on $A$-modules (which have enough injectives), gives isomorphisms $H^j(R\\Gamma_I(M[0]))\\cong H^j(\\Gamma_I(J^\\bullet))=R^j\\Gamma_I(M)=H_I^j(M)$, natural in $M$; they are $A$-linear because they are induced by an isomorphism of complexes of $A$-modules in $D(A)$. Compose the cohomology of the cochain isomorphism in Step 2, the isomorphism of Step 1, the inverse of the degree-$j$ cohomology of the comparison just given, and the identification $H^j(R\\Gamma_I(M[0]))\\cong H_I^j(M)$. The result is a natural $A$-linear isomorphism $H^j(C^\\bullet(f;M))\\cong H_I^j(M)$ for every $j\\geq0$. Each factor is natural in module maps, so their composite is natural. If $r=0$, $I=(0)$, the torsion functor is the identity and its injective-resolution cohomology is $M$ in degree zero and zero in higher degrees, agreeing with the one-term complex.",
+   "uses": [
+    "lem-per-local-cohomology-noetherian-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0955 (lemma-local-cohomology-noetherian), clause (3), together with Tag 0956 (lemma-compute-local-cohomology-noetherian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-local-cohomology-adjoint-cech",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-per-local-cohomology-noetherian-comparison",
+  "lem-sp-derived-functor-single-identification",
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0956 (lemma-compute-local-cohomology-noetherian), 0955 (lemma-local-cohomology-noetherian), and 0A6R (lemma-local-cohomology-adjoint)"
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -79,5 +125,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-cohomology-cech-bound",
+  "worker": "stage1",
+  "summary": "Split the Noetherian Čech computation into the extended Čech model for derived closed support (Tag 0A6R) and the Noetherian comparison of ideal-power torsion with derived closed support (Tag 0955). The two proof steps identify the module specialization with H^j(RΓ_Z(M)) and then compose with the Noetherian comparison to obtain H_I^j(M), including the empty-generator case. No Lean declaration exists for this item or either new node.",
+  "blueprint": "Proof Step 1 of lem-per-artin-gabber-affine-curve: the technical local-cohomology input, specifically the extended Čech computation and the Noetherian derived-torsion/closed-support comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "Generic module-localization/tensor comparison used only to identify the terms in the source Cech model with module localizations; it does not replace a step of this unit."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Generic derived-functor fact used as a black box in Step 3: H^j of the K-injectively computed RΓ_I(M[0]) is naturally R^jΓ_I(M) defined by an injective resolution; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-7c1175ac7",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7c1175ac7 (reviewer sub-agent of L); spot-checked: I read Stacks dualizing.tex Tags 0A6R, 0955 (with the preamble defining the transformation) and 0956, the item, both new nodes and every cited node. The item statement is unchanged and is exactly Tag 0956's module assertion. It holds in my small checks: k[x] with I=(x), a nilpotent generator, f=1, r=0, the zero ring. Step 1: new node lem-per-local-cohomology-adjoint-cech is the module specialization of 0A6R's own termwise-tensor construction, for any ring and the empty list included; the degree-q product over q-subsets is correct. Step 2 is a genuinely elementary termwise identification via the Mathlib leaf lem-weil-pbc-localization-tensor-over-base, and the signs match. New node lem-per-local-cohomology-noetherian-comparison is 0955(3) with the source's factorization through the counit, for unbounded K. Both new nodes are real lemmas strictly smaller than the item, not restatements; no duplicates were found, either in the pbc sheaf-level extended-Čech nodes or in the sbc/per local-cohomology nodes. lem-per-affine-support-cech-localization uses sheaf-cohomology support, not the categorical adjoint. One fault (C1/C4) in Step 3: it identified H^j of the K-injectively computed RΓ_I(M[0]) with R^jΓ_I(M) from the definition node alone, which states neither that an injective resolution is K-injective nor that the identification is natural. Repaired: Step 3 now cites lem-sp-derived-functor-single-identification (natural H^p(Rv(X[0]))≅R^pv(X)); it is added to proof_deps and declared in split_report.tool_uses. There is no cycle. Maintainer note: lem-per-ideal-torsion-cech-computation (Q54) states the same 0956 theorem, and its only proof step cites this item; that duplicate pair should be merged. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
