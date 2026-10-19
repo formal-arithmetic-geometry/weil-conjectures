@@ -7,8 +7,6 @@ module
 
 public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Mathlib.CategoryTheory.ComposableArrows.Basic
-import Sheaf.Paper.SixFunctorDatum
-import Sheaf.Paper.DerivedPullbackTensorIso
 
 /-!
 # Pasting the open and proper compactification factors
@@ -259,7 +257,85 @@ theorem compactification_pasting (K : DX) (L : DY) (h : D.FactorIdentities K L) 
       (target : V.obj (D.leftPath K L).right ≅ W),
       source.hom ≫ V.map (D.leftPath K L).hom ≫ target.hom =
         source.hom ≫ V.map (D.rightPath K L).hom ≫ target.hom) := by
-  sorry
+  have hp : (D.leftPath K L).hom = (D.rightPath K L).hom := by
+    change D.horizontal.map (D.projection K L) ≫
+      D.properExchange.app (D.openExtension.obj
+        ((D.tensorX.obj K).obj (D.openPull.obj (D.properPull.obj L)))) ≫
+      D.properPush'.map (D.targetComparison K L) =
+      (D.tensorHorizontal.hom.app (D.properPush.obj (D.openExtension.obj K))).app L ≫
+      (D.tensorY'.map (D.properExchange.app (D.openExtension.obj K) ≫
+        D.properPush'.map (D.openBaseChange.hom.app K))).app (D.horizontal.obj L) ≫
+      (D.properProjection'.app (D.openExtension'.obj (D.horizontal'.obj K))).app
+        (D.horizontal.obj L) ≫
+      D.properPush'.map ((D.openTensor'.hom.app (D.horizontal'.obj K)).app
+        (D.properPull'.obj (D.horizontal.obj L)))
+    have hopen :
+        D.compactifyingHorizontal.map
+            ((D.openTensor.hom.app K).app (D.properPull.obj L)) ≫
+            D.targetComparison K L =
+          D.tensorTarget K L ≫
+            (D.tensorBar'.map (D.openBaseChange.hom.app K)).app
+              (D.properPull'.obj (D.horizontal.obj L)) ≫
+            (D.openTensor'.hom.app (D.horizontal'.obj K)).app
+              (D.properPull'.obj (D.horizontal.obj L)) := by
+      have hg := (D.openTensor'.hom.app (D.horizontal'.obj K)).naturality
+        (D.properPullbackComparison.inv.app L)
+      have hb := (D.tensorBar'.map (D.openBaseChange.hom.app K)).naturality
+        (D.properPullbackComparison.inv.app L)
+      dsimp at hg hb
+      dsimp only [targetComparison, tensorTarget]
+      rw [← Category.assoc, h.openFactor]
+      simp only [Category.assoc]
+      rw [← hg]
+      rw [← Category.assoc ((D.tensorBar'.map _).app _), ← hb]
+      simp only [Category.assoc]
+    have he := D.properExchange.naturality
+      ((D.openTensor.hom.app K).app (D.properPull.obj L))
+    change D.horizontal.map
+        (D.properPush.map ((D.openTensor.hom.app K).app (D.properPull.obj L))) ≫
+        D.properExchange.app (D.openExtension.obj
+          ((D.tensorX.obj K).obj (D.openPull.obj (D.properPull.obj L)))) =
+      D.properExchange.app
+        ((D.tensorBar.obj (D.openExtension.obj K)).obj (D.properPull.obj L)) ≫
+        D.properPush'.map
+        (D.compactifyingHorizontal.map
+          ((D.openTensor.hom.app K).app (D.properPull.obj L))) at he
+    have hp' := NatTrans.naturality_app D.properProjection' (D.horizontal.obj L)
+      (D.openBaseChange.hom.app K)
+    change (D.tensorY'.map (D.properPush'.map (D.openBaseChange.hom.app K))).app
+        (D.horizontal.obj L) ≫
+        (D.properProjection'.app (D.openExtension'.obj (D.horizontal'.obj K))).app
+          (D.horizontal.obj L) =
+      (D.properProjection'.app
+        (D.compactifyingHorizontal.obj (D.openExtension.obj K))).app (D.horizontal.obj L) ≫
+        D.properPush'.map ((D.tensorBar'.map (D.openBaseChange.hom.app K)).app
+          (D.properPull'.obj (D.horizontal.obj L))) at hp'
+    dsimp only [projection]
+    rw [D.horizontal.map_comp]
+    simp only [Category.assoc]
+    rw [← Category.assoc (D.horizontal.map (D.properPush.map _)), he]
+    simp only [Category.assoc, ← D.properPush'.map_comp]
+    rw [hopen]
+    simp only [D.properPush'.map_comp]
+    have hproper := h.properFactor
+    simp only [← Category.assoc] at hproper ⊢
+    rw [hproper]
+    simp only [Category.assoc]
+    rw [← reassoc_of% hp']
+    simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  constructor
+  · exact hp
+  constructor
+  · intro C iC V D' K' L' a b hs ht
+    constructor
+    · have hb := b.naturality (X := (0 : Fin 5)) (Y := (4 : Fin 5))
+        (homOfLE (by decide))
+      simpa [hp, ht] using hb
+    · have ha := a.naturality (X := (0 : Fin 4)) (Y := (3 : Fin 4))
+        (homOfLE (by decide))
+      simpa [hp, hs, ht] using ha
+  · intro C iC V U W source target
+    rw [hp]
 
 end CompactificationPastingData
 end CategoryTheory.SuppliedExchangeProjection
