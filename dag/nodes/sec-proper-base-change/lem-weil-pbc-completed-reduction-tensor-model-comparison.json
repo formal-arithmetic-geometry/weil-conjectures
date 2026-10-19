@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-completed-reduction-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Tensor comparison for a specified bounded quotient model",
+ "statement": "Let T, A and d be the completed coefficient datum of [def-weil-pbc-adic-coefficient-datum], and let n be a natural number. Let P be a bounded complex of completed-coefficient module sheaves with a degreewise finite-free-retract package. Suppose its localization is isomorphic to the degree-zero quotient sheaf A/I^(n+1), with the completed-ring action specified by the actual quotient projection. Then the localized tensor functor with P of [lem-weil-pbc-finite-projective-tensor-products] is naturally isomorphic to derived scalar extension to that quotient followed by scalar restriction. The complex, bounds, splitting package and realization are all inputs; no resolution-existence assertion is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.proof.md",
+  "place": "first proof sentence: compare tensor with a bounded finite-projective quotient representative to finite scalar reduction",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 091Z and 099M"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-finite-projective-tensor-products",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof": [
+  {
+   "text": "For every K-flat test complex C, apply the one-K-flat representative comparison of ringedDerived_closed_symmetric_monoidal. Its tensor functor carries the given coefficient isomorphism Q(P) ≅ Q(Z) to an isomorphism between localized total tensor with P and with the degree-zero quotient Z. The recorded representative naturality and functoriality of derived tensor make the comparison natural on the full K-flat homotopy subcategory. The localization factorization of finiteProjectiveTensorRight fixes the first endpoint.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-tensor-products",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completed-reduction-ordinary-tensor-comparison], now proved, to identify total tensor with the degree-zero quotient with termwise ordinary scalar extension followed by restriction, naturally on all complexes.",
+   "uses": [
+    "lem-weil-pbc-completed-reduction-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized universal derived extension comparison is invertible on K-flat test complexes, and scalar restriction is exact. Thus the preceding calculation compares with the specified finite reduction functor. K-flat localization extends the natural isomorphism to the whole derived category; the factorization of finiteProjectiveTensorRight identifies the other endpoint.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-tensor-products",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-completed-reduction-ordinary-tensor-comparison",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.proof.md",
+  "place": "first proof sentence: compare tensor with a bounded finite-projective quotient representative to finite scalar reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension followed by restriction is tensor with the quotient ring in the unbounded derived category of module sheaves",
+   "results": "Eight hits: ordinary ModuleCat, PresheafOfModules and SheafOfModules restriction of scalars, the ordinary scalar adjunction unit and a scalar pseudofunctor. None provides the derived tensor comparison.",
+   "date": "2026-10-19",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified bounded perfect model of a quotient sheaf induces a natural isomorphism between its localized tensor functor and derived extension followed by restriction of scalars",
+   "results": "Eight hits: PresheafOfModules.sheafificationCompForgetCompToPresheaf, sheafificationCompToSheaf, ordinary scalar localization, LightCondensed monoidal sheafification, cotangent tensor, a Serre-class localization, Tor and finite-presentation scalar extension. None identifies these unbounded derived sheaf functors.",
+   "date": "2026-10-19",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique: uniqueness of universal left-derived functors; useful for the comparison, but does not supply a coefficient model or a Roos comparison.",
+   "date": "2026-10-19",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteProjectiveTensorRight|adicDatumReductionUnderlying; tensorCancellation|changeOfRings.*Tensor; leftDerivedUnique",
+   "results": "The specialized functors occur only in AdicCoefficientDatumCompleted and FiniteProjectiveTensorProducts. ChangeOfRingsTensorCancellation gives the ordinary natural tensor identity, and SiteDerivedTensorDescentIndependentCoefficients gives the localization interface. No theorem identifies the specialized derived functors for a supplied quotient model.",
+   "date": "2026-10-19",
+   "verdict": "ordinary comparison and localization tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionReconstructionCompleted",
+  "date": "2026-10-19",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-reduction-reconstruction",
+   "place": "first proof sentence: compare tensor with a bounded finite-projective quotient representative to finite scalar reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedReductionTensorModelComparison",
+  "file": "lean/Sheaf/Paper/CompletedReductionTensorModelComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionTensorModelComparison",
+  "statement": "theorem completedReductionTensorModelComparison (n : ℕ)\n    (P : CochainComplex (adicDatumModules T d) ℤ)\n    (hb : ∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (P.X j))\n    (p : SheafOfModules.StrictPerfectCoefficientPackageOnSite\n      ((adicLisseForget T).obj (adicDatumRing T d)) P)\n    (e : (completedConstantQ _).obj P ≅\n      (DerivedCategory.singleFunctor (adicDatumModules T d) 0).obj\n        (CompletedConstantReduction.residue T d.ideal n)) :\n    Nonempty (finiteProjectiveTensorRight T d P hb p ≅\n      adicDatumReductionUnderlying T d n)",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261019T231344-L-577393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261019T231344-L-577393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-model-roos-comparison",
+ "kind": "statement",
+ "title": "Koszul reconstruction with normalized model Roos evaluations",
+ "statement": "Let T, A and d be the completed coefficient datum of [def-weil-pbc-adic-coefficient-datum], K an arbitrary object of D(Mod(A_T)), and M a specified K-flat representative with realization Q(M) ≅ K. Let f : Fin r → A generate the ideal of d. For every completed sequential derived limit L of the strict quotient tower of M [def-weil-pbc-derived-inverse-limit], there is an isomorphism e from its intrinsic Koszul completion [def-weil-pbc-intrinsic-completion] to L.obj. For every n, the composite of the intrinsic unit, e, L's nth product projection, and the normalized K-flat restriction and reduction comparisons equals the unit at K of the derived extension/restriction adjunction for A_T → (A/I^(n+1))_T. No completeness hypothesis is imposed on K.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.proof.md",
+  "place": "first proof sentence: identification with the Koszul completion, with its canonical finite-level evaluation",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 091Z and 099M"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-derived-inverse-limit"
+ ],
+ "proof": [
+  {
+   "text": "Use the Koszul-to-quotient reconstruction comparison on the given K-flat representative. Constant completed coefficient comparison identifies the coefficient rings and quotient projections. The strict Koszul augmentations preserve transitions and degree-zero inclusions, so their induced derived-limit comparison carries the intrinsic unit to the quotient unit. This is the representative version of [prop-weil-pbc-koszul-reconstruction], with the coefficient comparison retained.",
+   "uses": [
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict derived-limit theorem supplies a Roos triangle for that comparison. Compare its rotation with the rotation of the specified triangle L using identity maps on both product vertices. The triangle morphism axiom and two-out-of-three give an isomorphism to L preserving its product map, hence all evaluations.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the K-flat representative the evaluation of the quotient unit is the ordinary scalar-extension unit. The normalization in the derived scalar adjunction transports this to its derived unit at K. The universal K-flat counit and the realization are precisely the displayed restriction and inverse reduction comparisons. Thus all asserted evaluation equations hold, including for empty generator lists and zero objects.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.proof.md",
+  "place": "first proof sentence: identification with the Koszul completion, with its canonical finite-level evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul derived completion agrees with the derived inverse limit of a quotient tower preserving the canonical unit",
+   "results": "Eight hits: ordinary AdicCompletion and its unit, profinite limit comparisons, UniformSpace.Completion.coeRingHom, and DerivedCategory.quotientCompQhIso. None states Koszul/strict-quotient reconstruction in a derived sheaf category.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded perfect quotient coefficient admits a finite projective tensor model naturally isomorphic to derived extension followed by restriction of scalars",
+   "results": "Eight hits: projective tensor products, ordinary completion tensor formulas, and formally unramified module facts; none states the derived sheaf comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique: uniqueness of universal left-derived functors; useful for the comparison, but does not supply a coefficient model or a Roos comparison.",
+   "date": "2026-10-19",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "adicDatumReductionUnderlying|finiteProjectiveTensorRight|completedIntrinsicCompletionMap; homEquiv_naturality; leftDerivedUnique",
+   "results": "Library: AdicCoefficientDatumCompleted, IntrinsicCompletionCompleted, FiniteProjectiveTensorProducts. The old KoszulReconstruction uses a different ring/site universe interface. Mathlib Adjunction.Basic supplies naturality and Derived.LeftDerived supplies uniqueness, but no completed-sheaf model comparison.",
+   "date": "2026-10-19",
+   "verdict": "no direct theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionReconstructionCompleted",
+  "date": "2026-10-19",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-reduction-reconstruction",
+   "place": "first proof sentence: identification with the Koszul completion, with its canonical finite-level evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulModelRoosComparison",
+  "file": "lean/Sheaf/Paper/CompletedKoszulModelRoosComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulModelRoosComparison",
+  "statement": "theorem completedKoszulModelRoosComparison {K : adicDatumDerived T d}\n    (M : AdicDatumModel T d K) (r : ℕ) (f : Fin r → A)\n    (hf : Ideal.span (Set.range f) = d.ideal)\n    (L : CompletedSequentialDerivedLimit T d (adicDatumModelTower T d M)) :\n    ∃ e : completedIntrinsicCompletion T d r f M.complex ≅ L.obj,\n      ∀ n : ℕ,\n        completedIntrinsicCompletionMap T d r f M.complex M.realization ≫ e.hom ≫\n          L.p ≫ Pi.π (fun a : ℕ ↦ (adicDatumModelTower T d M).obj (op a)) n ≫\n          (adicDatumModelRestriction T d M n).hom ≫\n          (adicDatumRestriction T (adicDatumProjection T d n)).map\n            (adicDatumModelReductionIso T d M n).inv =\n        (adicDatumAdjunction T (adicDatumProjection T d n)).unit.app K",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261019T231344-L-577393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261019T231344-L-577393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
