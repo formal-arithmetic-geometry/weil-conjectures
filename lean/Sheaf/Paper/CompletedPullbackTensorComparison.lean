@@ -11,31 +11,7 @@ public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.Paper.NormalizedDVRTower
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.IntegralScalarExtensionUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.IntegralComparisonSequenceSystems
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Derived pullback and derived tensor comparison
@@ -103,7 +79,7 @@ vertical slice; pro-etale covers are stable under scheme base change. -/
     (pullbackTensorSequenceBase f).IsContinuous
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
-  sorry
+  exact integralComparisonSequenceBaseChange_continuous f
 
 /-- The sequence-ring map is fixed at every level by the constant-section map.
 Source: Stacks 0941 and 0H7J (blueprint: def-pur-completed-pullback-tensor-comparison).
@@ -122,12 +98,26 @@ theorem pullbackTensorSequenceRing_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((coefficientProEtaleDirectRingMap.{u, u} f
             (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).hom.app
               (op U)) := by
-  sorry
+  refine ⟨integralComparisonSequenceRingMap l E f, ?_, ?_⟩
+  · intro n U
+    rfl
+  · intro ρ hρ
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    exact eq_of_heq (hρ V.unop.1 V.unop.2)
 
 /-- The actual levelwise constant-section map on sequence rings.
 Source: Stacks 0941 and 0H7J (blueprint: def-pur-completed-pullback-tensor-comparison). -/
 def pullbackTensorSequenceRing {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (pullbackTensorSequenceRing_existsUnique l E f).exists.choose
+
+private theorem pullbackTensorSequenceRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    pullbackTensorSequenceRing l E f = integralComparisonSequenceRingMap l E f := by
+  apply (pullbackTensorSequenceRing_existsUnique l E f).unique
+  · exact (pullbackTensorSequenceRing_existsUnique l E f).exists.choose_spec
+  · intro n U
+    rfl
 
 /-- Module direct image on the ringed sequence site, with the actual coefficient action.
 Source: Stacks 03D1 and 0941 (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -150,7 +140,9 @@ module sheafification gives its adjunction. Transport back to the stated
 sequence sites. The right adjoint and its coefficient map are the displayed ones. -/
 @[instance] theorem pullbackTensorSequenceDirect_rightAdjoint {X Y : Scheme.{u}}
     (f : X ⟶ Y) : (pullbackTensorSequenceDirect l E f).IsRightAdjoint := by
-  sorry
+  unfold pullbackTensorSequenceDirect
+  rw [pullbackTensorSequenceRing_eq]
+  exact integralComparisonSequenceDirectImage_isRightAdjoint l E f
 
 /-- Canonical module inverse image on coefficient systems, retaining its adjunction.
 Source: Stacks 03D2 and 0941 (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -173,7 +165,11 @@ theorem pullbackTensorSequenceInverse_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorSequenceInverse l E f).Additive ∧
       PreservesFiniteLimits (pullbackTensorSequenceInverse l E f) ∧
       PreservesFiniteColimits (pullbackTensorSequenceInverse l E f) := by
-  sorry
+  simpa only [pullbackTensorSequenceInverse, pullbackTensorSequenceDirect,
+    pullbackTensorSequenceRing_eq, integralComparisonSequencePullback,
+    integralComparisonSequenceDirectImage, pullbackTensorSequenceBase,
+    integralComparisonSequenceBaseChange] using
+    integralComparisonSequencePullback_exact l E f
 
 /-- The additive structure of sequence inverse image.
 Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -234,7 +230,11 @@ Alternatively use the additive-adjunction criterion for the displayed adjunction
 theorem pullbackTensorOrdinary_additive (W : Scheme.{u}) :
     (pullbackTensorOrdinaryReduction l E W).Additive ∧
       (pullbackTensorOrdinaryLimit l E W).Additive := by
-  sorry
+  have : (pullbackTensorOrdinaryLimit l E W).Additive := by
+    have := coefficientConstantTowerLimitAdditive l E W
+    change (coefficientSequenceRestriction l E W ⋙ lim).Additive
+    infer_instance
+  exact ⟨(pullbackTensorOrdinaryAdjunction l E W).left_adjoint_additive, inferInstance⟩
 
 /-- The additive structure on ordinary coherent reduction.
 Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -467,7 +467,23 @@ theorem pullbackTensorRoosAugmentation_condition (W : Scheme.{u})
               (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj P).obj (op n))
             (integralOperationsTowerStep
               (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj P))) = 0 := by
-  sorry
+  have hz : pullbackTensorRoosAugmentation l E W P ≫
+      towerTransitionEndomorphism
+        (K := fun n : ℕ ↦
+          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj P).obj (op n))
+        (integralOperationsTowerStep
+          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj P)) = 0 := by
+    apply Pi.hom_ext
+    intro n
+    simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Preadditive.sub_comp,
+      Category.comp_id,
+      towerProductShift, Category.assoc, Pi.lift_π_assoc, pullbackTensorRoosAugmentation,
+      Pi.lift_π, zero_comp]
+    apply sub_eq_zero.mpr
+    apply HomologicalComplex.hom_ext
+    intro k
+    exact (limit.w (P.X k) (homOfLE (Nat.le_succ n)).op).symm
+  simp [hz]
 
 /-- The specified (limit-projections, zero) chain map into Cone(1-s)[-1].
 Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -952,7 +968,25 @@ theorem pullbackTensorLevelIntrinsic_existsUnique {X Y : Scheme.{u}}
               (finiteCoefficientRing l E (n + 1))))).unit.app M).val.app (op U) x) =
         ((sfIntrinsicConstantModuleAdjunction f
           (finiteCoefficientRing l E (n + 1))).unit.app M).val.app (op U) x := by
-  sorry
+  let A := finiteCoefficientRing l E (n + 1)
+  let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} f
+    (CommRingCat.of (ULift.{u + 1} A))
+  let adj₂ : sfIntrinsicPullback A f ⊣
+      coefficientProEtaleModuleDirectImage.{u, u} f
+        (CommRingCat.of (ULift.{u + 1} A)) :=
+    sfIntrinsicConstantModuleAdjunction f A
+  refine ⟨adj₁.leftAdjointUniq adj₂, ?_, ?_⟩
+  · intro M U x
+    exact congrArg (fun a ↦ a.val.app (op U) x)
+      (Adjunction.unit_leftAdjointUniq_hom_app adj₁ adj₂ M)
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (adj₁.homEquiv M _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app, Adjunction.homEquiv_unit]
+    ext U x
+    exact he M U.unop x
 
 /-- The unit-normalized realization of the finite pullback used by the strict tower.
 Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tensor-comparison). -/
@@ -1297,7 +1331,35 @@ theorem canonicalRationalPullbackTensor_existsUnique {X Y : Scheme.{u}} (f : X �
             _ E _ _ _ X Y f hX hY)).obj N),
       HEq e.hom ((sfRationalConstructibleLocalization l E X).map
         ((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M.obj N.obj).hom) := by
-  sorry
+  let T (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :=
+    (rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1
+  let F := (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.2.1
+  let e := (sfRationalConstructibleLocalization l E X).mapIso
+    ((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M.obj N.obj)
+  have hs : (rationalDerivedPullback l E f).obj
+      ((rationalDerivedTensor l E Y).obj (M,N)) =
+        (sfRationalConstructibleLocalization l E X).obj
+          ((constructibleIntegralPullback l E f).obj
+            ((constructibleIntegralTensor l E Y).obj (M.obj,N.obj))) := by
+    dsimp only [rationalDerivedPullback, rationalDerivedTensor]
+    rw [F, T Y (M,N)]
+    rfl
+  have ht : (rationalDerivedTensor l E X).obj
+      ((rationalDerivedPullback l E f).obj M, (rationalDerivedPullback l E f).obj N) =
+        (sfRationalConstructibleLocalization l E X).obj
+          ((constructibleIntegralTensor l E X).obj
+            ((constructibleIntegralPullback l E f).obj M.obj,
+              (constructibleIntegralPullback l E f).obj N.obj)) := by
+    dsimp only [rationalDerivedPullback, rationalDerivedTensor]
+    rw [T X, F M, F N]
+    rfl
+  refine ⟨eqToIso hs ≪≫ e ≪≫ (eqToIso ht).symm, ?_, ?_⟩
+  · apply (conj_eqToHom_iff_heq _ e.hom hs ht).mp
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    apply eq_of_heq
+    exact he'.trans ((conj_eqToHom_iff_heq _ e.hom hs ht).mp rfl).symm
 
 /-- The localized canonical integral comparison.
 Source: blueprint scalar localization paragraph (blueprint:

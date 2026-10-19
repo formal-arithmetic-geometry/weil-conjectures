@@ -19,9 +19,50 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 21.18.4 (Tag 07A4, label lemma-pullback-tensor-product), for the morphism of ringed topoi (X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar levels follow the level-by-level definitions of the operations in def-weil-derived-pullback-tensor-hom"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For sequence continuity use integralComparisonSequenceBaseChange_continuous. Construct the uniquely specified sequence ring map as integralComparisonSequenceRingMap; its sections are definitionally the prescribed coefficient maps, and sheaf and natural-transformation extensionality prove uniqueness. Identify the selected sequence ring map with this map by uniqueness. The right-adjoint and exactness declarations for integralComparisonSequenceDirectImage and integralComparisonSequencePullback then prove the corresponding sequence-operation properties.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "Ordinary coherent limit is the composition of additive scalar restriction and additive constant-tower limit. Its left adjoint is additive by the preadditive adjunction criterion. For the Roos augmentation, compose with each product projection and each complex degree. The resulting equation is exactly the compatibility of the ordinary limit projections with the consecutive transition; hence the composite with 1 minus shift is zero, as is the differential of the zero cochain.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "The finite intrinsic pullback comparison is leftAdjointUniq for the coefficientProEtaleModuleAdjunction and sfIntrinsicConstantModuleAdjunction: their right adjoints coincide definitionally. The unit equation follows from unit_leftAdjointUniq_hom_app. Conversely the prescribed section equations determine the adjunction transpose, hence every hom component and the natural isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "Localize the canonical integral pullback/tensor isomorphism. The chosen rational pullback and tensor functors have the integral object formulas specified by their existsUnique characterizations. Conjugate the localized isomorphism by these object equalities. conj_eqToHom_iff_heq gives the required equality of homs; Iso.ext gives uniqueness. The other existing normalization, compatibility, and descent theorems remain named proof obligations in this module with their existing source proofs in their docstrings.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "Z6",
+  "date": "2026-10-19",
+  "note": "Partial Lean proof of eight existing normalization and operation properties; remaining named obligations unchanged."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -213,5 +254,15 @@
   "group": "Q45",
   "result": "fix",
   "note": "Read all 3 modules (Finite 27 decls, Completed 96+3, main 62), both new nodes (the finite node read from commit 03260642e6 because it was missing from the snapshot), deps and Stacks 07A4. Every node clause is in derivedPullbackTensorIso: finite mu for arbitrary ambient inputs (the recorded proEtaleCanonicalTensorComparison, conjugated by unique normalizations); integral (Rlim of the K-flat-fixed system comparison, plus the reduction square and the finite evaluation equation), rational (localization) and common-stage (ofHom at every stage) NatIsos with canonical components; assoc/signed braiding/unit/composition at all four levels; quotient square for every q<=m incl. q=m; integral and rational scalar squares for every L and iota (ramified and identity). No extra hypotheses, Omega in its own universe v, L: Type u forced by the recorded API. No hollow data: each def is a real construction or the choice from an exists-unique statement; calculus choice same as the recorded operations. No duplicate associator/unitor for the completed tensor exists. Signatures verbatim, no doubly owned declaration, lines <=100. Compile: unmodified files passed once at 21.5/46.9/54.8 s, exit 0, no diagnostics (first run: main timed out); with my docstring-fixed main file, main timed out at 60 s in both runs; that file differs only by comment lines; delivery record 40.0 s; borderline under load 90-117 on 80 cores. FIX 1: the completed node's lean.declarations lacked 3 sorry @[instance] theorems (pullbackTensorSequenceBase_continuous, pullbackTensorSequenceDirect_rightAdjoint, pullbackTensorOrdinaryLimit_rightAdjoint): fixes/def-pur-completed-pullback-tensor-comparison.json. FIX 2: main theorem docstring lacked a source place: fixes/DerivedPullbackTensorIso.lean adds the Stacks 07A4 source, docstring only, signature unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-dbaf1",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261019T034411-L-429152",
+  "kind": "proof",
+  "note": "independent cc review: delivered CompletedPullbackTensorComparison.lean + node vs live clone: only sorry proofs closed, plain imports pruned (IntrinsicFiniteTorsionConstructibility unused, still reached via public import ProEtaleOpenSquareExchange; unit sk-def-purity-conv realized empty), node changes only proof/proof_deps/proof_origin; compiles 30 s, 8 importers compile; axioms standard + sorryAx from sorried upstream statements"
  }
 }
