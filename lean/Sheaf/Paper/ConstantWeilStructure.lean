@@ -68,7 +68,7 @@ theorem constantWeilFiniteComparison_reduction {X Y : Scheme.{u}}
       (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
           (constantWeilCoefficientReduction l E Y n) ≫
         (constantWeilFiniteComparison l E g n).hom := by
-  sorry
+  exact (proEtaleIso_constantComparison g CommRingCat.{u + 1}).2 _ _ _
 
 /-- The completed integral comparison, uniquely fixed by all finite projections.
 Its defining projection equations are exactly limit(c_n) after the inverse-limit comparison.
@@ -251,7 +251,35 @@ isomorphism. Both statements hold without any nonempty-site assumption. -/
 theorem constantWeilTermwiseUnitMaps_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     IsIso (constantWeilTermwiseUnitMap l E g) ∧
       IsIso (constantWeilRestrictionUnitMap l E g) := by
-  sorry
+  have : (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤
+      (inferInstance : WeaklyEtale g)).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence g).1
+  have : (proEtaleBaseChange g).IsEquivalence :=
+    (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+      (inferInstance : WeaklyEtale g) trivial).isEquivalence_right_of_isEquivalence_left
+  have : (AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).IsEquivalence :=
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := Y.ProEt)).isEquivalence_inverse
+  have : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsEquivalence :=
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).isEquivalence_functor
+  have : (proEtaleModelBaseChange g).IsEquivalence := by
+    dsimp only [proEtaleModelBaseChange]
+    infer_instance
+  have : (proEtaleModelBaseChange g).Final := inferInstance
+  constructor
+  · unfold constantWeilTermwiseUnitMap
+    infer_instance
+  · let c := (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+        (constantWeilIntegralComparison l E g)
+    apply (isIso_iff_of_reflects_iso (constantWeilRestrictionUnitMap l E g)
+      (SheafOfModules.toSheaf (completedIntegralCoefficientSheafUnrestricted l E X) ⋙
+        sheafToPresheaf (ProEt.topology X) AddCommGrpCat.{u + 1})).mp
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro U
+    apply (ConcreteCategory.isIso_iff_bijective _).2
+    change Function.Bijective (fun x ↦ c.inv.hom.app U x * 1)
+    simp only [mul_one]
+    exact (ConcreteCategory.isIso_iff_bijective (c.inv.hom.app U)).1 inferInstance
 
 /-- c_O_E on the completed regular module, with its transported coefficient action.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure). -/
@@ -344,7 +372,17 @@ integral representative and the identity isomorphism. Thus it lies in their inte
 theorem constantWeilRationalObject_mem_heart :
     sfRationalHeartProperty l E (D.geometricFiber Y₀).left
       (constantWeilRationalObject l E D hl (D.geometricFiber Y₀).left) := by
-  sorry
+  constructor
+  · refine ⟨constantWeilIntegralObject l E D hl _, ?_, ⟨Iso.refl _⟩⟩
+    intro i hi
+    change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((DerivedCategory.singleFunctor _ 0).obj _))
+    exact DerivedCategory.isZero_of_isLE _ 0 i hi
+  · refine ⟨constantWeilIntegralObject l E D hl _, ?_, ⟨Iso.refl _⟩⟩
+    intro i hi
+    change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((DerivedCategory.singleFunctor _ 0).obj _))
+    exact DerivedCategory.isZero_of_isGE _ 0 i hi
 
 /-- The canonical constructible E-Weil sheaf; forgetting it retains exactly E_Y.
 Source: blueprint order 1510, clause 4 (blueprint: def-weil-constant-weil-structure). -/
@@ -370,7 +408,12 @@ statement supplies both classes; the pair's defining carrier is exactly its incl
 theorem constantWeilAlgebraicallyClosedObject_mem_heart :
     sfCommonStageHeartProperty l (D.geometricFiber Y₀).left Ω
       (constantWeilAlgebraicallyClosedComplex l D hl Y₀ Ω).carrier := by
-  sorry
+  have h := constantWeilRationalObject_mem_heart l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω (Padic.finiteCoefficientBase l Ω))
+    D hl Y₀
+  constructor
+  · exact ⟨Padic.finiteCoefficientBase l Ω, _, h.1, ⟨Iso.refl _⟩⟩
+  · exact ⟨Padic.finiteCoefficientBase l Ω, _, h.2, ⟨Iso.refl _⟩⟩
 
 /-- The canonical algebraically closed constructible Weil sheaf at stage E=Q_l.
 Forgetting the Weil structure gives exactly the coefficient pair (Q_l,(Q_l)_Y).
@@ -386,7 +429,7 @@ is definitionally the rationalization of the specified integral coefficient obje
 theorem constantWeilRationalForget :
     (sfWeilForget D l hl Y₀ E).obj (constantWeilRationalComplex l E D hl Y₀) =
       constantWeilRationalObject l E D hl (D.geometricFiber Y₀).left := by
-  sorry
+  rfl
 
 /-- The algebraically closed forgetful functor retains precisely the literal base-stage pair.
 Source: blueprint order 1510, clause 5 (blueprint: def-weil-constant-weil-structure).
@@ -400,6 +443,6 @@ theorem constantWeilAlgebraicallyClosedForget :
         constantWeilRationalObject l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
             (Padic.finiteCoefficientBase l Ω)) D hl (D.geometricFiber Y₀).left⟩ := by
-  sorry
+  rfl
 
 end WeilConjectures
