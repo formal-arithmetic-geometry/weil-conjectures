@@ -16,69 +16,55 @@
  ],
  "proof": [
   {
-   "text": "Write $C(T)=\\operatorname{Roos}(T)$. Apply [lem-weil-strict-roos-comparison] to the given small ringed site: its exact-countable-product hypothesis is exactly the hypothesis of this item. The coordinate order here is (shifted target product, source product); the cone-and-shift convention of [def-weil-abstract-derived-category] gives $d(y,x)=(-dy-(1-s_T)x,dx)$ in this order, so its $\\mathsf C$ is this $C$. The identity $u_nt_n=t_n^Iu_{n+1}$ gives $P(u)s_X=s_IP(u)$ after each projection. Consequently $(y,x)\\mapsto(P(u)y,P(u)x)$ commutes with the displayed differential and is exactly $C(u)$. Evaluation is exact by [lem-weil-tower-category-levelwise-abelian], so $u$ is the quasi-isomorphism of tower complexes to which the descent-to-$D(\\operatorname{Tow}(\\mathcal A))$ clause of the comparison lemma applies. A functor sends an invertible morphism to an invertible morphism; thus $C(u)$ is invertible in $D(\\mathcal A)$. Applying cohomology shows that the chain map $C(u)$ is a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-strict-roos-comparison",
-    "def-weil-abstract-derived-category",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07KC, lemma-products; Tag 08TC, definition-derived-limit; strict-cone functor supplied by the cited existing comparison lemma."
-   }
-  },
-  {
-   "text": "The index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ is small, so [lem-weil-pbc-small-module-diagrams-grothendieck] makes $\\operatorname{Tow}(\\mathcal A)$ Grothendieck abelian. Apply [lem-pur-kinjective-degreewise-existence] in that category to obtain a quasi-isomorphism $v:I_\\bullet\\to J_\\bullet$, where $J_\\bullet$ is K-injective and every $J^r_\\bullet$ is an injective tower object. Both $I_\\bullet$ and $J_\\bullet$ are K-injective; hence [lem-weil-pbc-kinjective-hom-derived] says that $v$ is a homotopy equivalence in the category of tower complexes. Its inverse and its homotopies are tower maps, not merely unrelated maps at the individual levels. We use this replacement only to invoke the injective-term normalization of [lem-weil-strict-roos-comparison]: applied to $v$ as a resolution of $I_\\bullet$, it states that $\\eta_J:L_J=\\lim J_n\\to C(J)$, $z\\mapsto(0,z)$, is a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tag 070I, lemma-K-injective; sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok, injective-term computation."
-   }
-  },
-  {
-   "text": "Termwise limit sends a tower chain homotopy $h$ to the chain homotopy $\\lim h$: for each degree its components preserve compatible sequences, and applying this additive functor to $f-g=dh+hd$ gives the same equation on limits. Thus the homotopy inverse of $v$ from Step 2 gives a homotopy inverse of $L(v):L_I\\to L_J$, making $L(v)$ a quasi-isomorphism. The functor clause of [lem-weil-strict-roos-comparison] also makes $C(v)$ a quasi-isomorphism, as in Step 1. The formula $\\eta_I(z)=(0,z)$ is a chain map because $(1-s_I)z=0$. On the two coordinates one has the equality of chain maps\n$$C(v)\\eta_I=\\eta_JL(v).$$\nAfter cohomology, the three maps $C(v)$, $\\eta_J$, and $L(v)$ are isomorphisms; therefore so is $H^r(\\eta_I)=H^r(C(v))^{-1}H^r(\\eta_J)H^r(L(v))$ for every $r$. This proves that the specified inclusion $\\eta_I$ is a quasi-isomorphism even when $I$ does not have injective terms.",
-   "uses": [
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, lemma-K-injective; explicit homotopy-equivalence and coordinate-square extension of sites-cohomology.tex Tag 0941."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the given K-injective resolution computes the total right derived limit by $L_I$. Define $\\theta=\\eta_I^{-1}C(u):C(X)\\to L_I$ in $D(\\mathcal A)$; Steps 1 and 3 make it an isomorphism. Let $a_n^T:C(T)\\to T_n$ be $(y,x)\\mapsto\\mathrm{pr}_nx$, and let $p_n:L_I\\to I_n$ be the limit projection. These are chain maps: the second coordinate of the Roos differential is $dx$. Their formulas give\n$$a_n^I\\eta_I=p_n,\\qquad a_n^IC(u)=u_na_n^X.$$\nHence $p_n\\theta=a_n^IC(u)=u_na_n^X$ in the derived category. Exact evaluation from [lem-weil-tower-category-levelwise-abelian] makes $u_n$ a quasi-isomorphism, so $e_n=u_n^{-1}p_n$ is the evaluation specified in the statement, and $e_n\\theta=a_n^X$. This is the required compatibility for each $n$, for the actual displayed zigzag rather than an arbitrarily chosen isomorphism of Roos triangles.",
+   "text": "Use the canonical natural isomorphism between the limit of evaluated tower complexes and the complex obtained by applying lim termwise. Whisker it with localization and transport the right-derived-functor unit supplied by ringedStrictTowerHomotopyLimitOfUniverses. Apply strictRoosComparison to obtain its cone functor F, canonical coordinates, evaluations and augmentation normalization.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module sheaves are Grothendieck with independent universes by lem-weil-pbc-ring-sheaves-grothendieck. Exact filtered colimits in the tower functor category are levelwise; a separator is supplied by the free-Yoneda generator of the presheaf category. Resolve I by the existing degreewise-injective K-injective replacement v:I→K. The K-injective quasi-isomorphism v is a homotopy equivalence. Applying the additive lim functor and transporting along the natural limit isomorphism proves that lim(v) is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-tower-category-levelwise-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits; Tag 0941, lemma-derived-limit-is-ok; explicit evaluation square for the strict comparison."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the augmentation clause of strictRoosComparison to the compatible limit projections of I and the resolution v. It gives b:lim I→F(I) with coordinates (0,z), lam:lim I→lim K equal to lim(v), and Q(b)κ_Iρ_I=Q(lam)d_K. The right side and κ_Iρ_I are invertible, so b is a quasi-isomorphism. Functorial descent similarly makes F(u) a quasi-isomorphism. Transport F(u), b and a_X along the object equality F(T)=Roos(T), retaining all coordinate equations.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define a_I by the same canonical second-coordinate projection. In each degree the equations for products and biproducts imply η a_I=π_I and Roos(u)a_I=a_X u_n. Exact evaluation gives QuasiIso u_n. Set ε=asIso(Qη), θ=asIso(Qρ) ε inverse and υ=asIso(Qu_n). Apply Q to the two chain equations and cancel ε and υ to obtain the asserted evaluation identity for the actual zigzag.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
   "lem-pur-kinjective-degreewise-existence",
   "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-weil-strict-roos-comparison",
   "lem-weil-tower-category-levelwise-abelian"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0940 and 0941 give the total-limit model; extension of the existing strict comparison from injective-term to arbitrary K-injective resolutions and the evaluation equations are written out."
+  "kind": "agent",
+  "by": "R6",
+  "date": "2026-10-19",
+  "note": "Lean proof from existing comparison and augmentation normalization, with canonical termwise-limit transport and K-injective homotopy invariance."
  },
  "mathlib_searches": [
   {
@@ -207,7 +193,6 @@
  },
  "tool_uses": [
   "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
@@ -244,5 +229,15 @@
   "by": "Q05",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261019T005414-L-2765227",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
