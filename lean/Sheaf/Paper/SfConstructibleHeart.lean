@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ConstructibleHeart
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-! # Constructible hearts on the intrinsic coefficient categories
 
@@ -136,7 +137,25 @@ theorem sfRationalHeart_properties :
         (sfRationalStandardClass l E Y false 0 K ↔
           IsZero (((sfRationalStandardTStructure l E Y D hl).truncLE (-1)).obj K))) ∧
       Nonempty (Abelian (sfRationalHeart l E Y)) := by
-  sorry
+  let t := sfRationalStandardTStructure l E Y D hl
+  have hclasses : ∀ n : ℤ, t.le n = sfRationalStandardClass l E Y true n ∧
+      t.ge n = sfRationalStandardClass l E Y false n :=
+    (sfRationalStandardTStructure_existsUnique l E Y D hl).exists.choose_spec.1
+  have hheart : t.heart = sfRationalHeartProperty l E Y := by
+    change t.le 0 ⊓ t.ge 0 = _
+    rw [(hclasses 0).1, (hclasses 0).2]
+    rfl
+  refine ⟨hheart, ?_, ?_⟩
+  · intro K
+    constructor
+    · rw [← (hclasses 0).1, t.le_iff_isLE]
+      exact t.isLE_iff_isZero_truncGE_obj 0 1 rfl K
+    · rw [← (hclasses 0).2, t.ge_iff_isGE]
+      exact t.isGE_iff_isZero_truncLE_obj (-1) 0 rfl K
+  · change Nonempty (Abelian (sfRationalHeartProperty l E Y).FullSubcategory)
+    rw [← hheart]
+    let := t.hasHeartFullSubcategory
+    exact ⟨t.abelianHeart t.heart.FullSubcategory⟩
 
 /-- Common-stage truncation and abelianity clauses.
 Source: blueprint order 1506 (blueprint: def-weil-constructible-heart).
@@ -150,6 +169,24 @@ theorem sfCommonStageHeart_properties :
         (sfCommonStageStandardClass l Y Ω false 0 K ↔
           IsZero (((sfCommonStageStandardTStructure l Y Ω D hl).truncLE (-1)).obj K))) ∧
       Nonempty (Abelian (sfCommonStageHeart l Y Ω)) := by
-  sorry
+  let t := sfCommonStageStandardTStructure l Y Ω D hl
+  have hclasses : ∀ n : ℤ, t.le n = sfCommonStageStandardClass l Y Ω true n ∧
+      t.ge n = sfCommonStageStandardClass l Y Ω false n :=
+    (sfCommonStageStandardTStructure_existsUnique l Y Ω D hl).exists.choose_spec.1
+  have hheart : t.heart = sfCommonStageHeartProperty l Y Ω := by
+    change t.le 0 ⊓ t.ge 0 = _
+    rw [(hclasses 0).1, (hclasses 0).2]
+    rfl
+  refine ⟨hheart, ?_, ?_⟩
+  · intro K
+    constructor
+    · rw [← (hclasses 0).1, t.le_iff_isLE]
+      exact t.isLE_iff_isZero_truncGE_obj 0 1 rfl K
+    · rw [← (hclasses 0).2, t.ge_iff_isGE]
+      exact t.isGE_iff_isZero_truncLE_obj (-1) 0 rfl K
+  · change Nonempty (Abelian (sfCommonStageHeartProperty l Y Ω).FullSubcategory)
+    rw [← hheart]
+    let := t.hasHeartFullSubcategory
+    exact ⟨t.abelianHeart t.heart.FullSubcategory⟩
 
 end WeilConjectures
