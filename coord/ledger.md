@@ -17548,3 +17548,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:26 L: merged deliver/C3/Sheaf.Paper.ExceptionalAdjointAdmissibility (stage 3; reviewer PASS; first push; landing 20261019T192652-L-1853013 (interface); batch 20261019T192638; modules 5; new nodes 4)
 - 19:26 L: merged deliver/C3/Sheaf.Paper.IntegralHeartLocalModel (stage 3; reviewer PASS; first push; landing 20261019T192653-L-1853333 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:26 L: merged deliver/C6/Sheaf.Algebra.Homology.DerivedChangeOfRingsGeneral (stage 3; reviewer PASS; first push; landing 20261019T192655-L-1853616 (proof); batch 20261019T192638; modules 1; new nodes 0)
+- 19:26 L: merged deliver/C6/Sheaf.Paper.ProEtaleProjectionFormulaArrows (stage 3; reviewer PASS; first push; landing 20261019T192656-L-1853845 (interface); batch 20261019T192638; modules 1; new nodes 0; change records: coord/changes/C6-proetale-projection-unit-local-transparency.md)
