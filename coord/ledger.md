@@ -17625,3 +17625,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: returned deliver/C2/Sheaf.Paper.TrfDevissageGeneration (reviewer RETURN: (the landing tools, head e7899db47) the delivery did not land: lean/Sheaf/Paper/TrfDevissageGeneration.lean changed on s)
 - 23:10 L: returned deliver/E5/Sheaf.AlgebraicGeometry.BertiniSmoothMember (reviewer RETURN: (the landing tools, head 2a0e28dbc) the delivery did not land: lean/Sheaf/AlgebraicGeometry/BertiniSmoothMember.lean cha)
 - 23:10 L: returned deliver/F7/Sheaf.AlgebraicGeometry.VectorBundleIntegration (reviewer RETURN: (the landing tools, head 4473d596f) the delivery did not land: lean/Sheaf/AlgebraicGeometry/VectorBundleIntegration.lean)
+- 23:10 L: returned deliver/G3/Sheaf.Paper.PurityDiagonalDualizingObject (reviewer RETURN: (the landing tools, head 7b2cdd471) the delivery did not land: lean/Sheaf/Paper/PurityDiagonalDualizingObject.lean chang)
