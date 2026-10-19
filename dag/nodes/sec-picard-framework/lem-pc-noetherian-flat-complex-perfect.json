@@ -17,66 +17,20 @@
  ],
  "proof": [
   {
-   "text": "Choose a flat representative $F^\\bullet$ concentrated in degrees\n$[a,b]$. In particular, for every $A$-module $N$, the complex\n$F^\\bullet\\otimes_A N$ has no cohomology in degrees less than $a$.",
+   "text": "Choose the bounded flat representative F and express its bounds as IsStrictlyGE and IsStrictlyLE. Transport finite cohomology from C to F using the homology comparison isomorphism. Choose the universe-u derived category of modules (HasDerivedCategory.ofIsGrothendieckAbelian), and transport finite cohomology to its image of F. Apply the already proved source-library theorem DerivedCategory.isPerfect_of_flat_of_finite_homology (WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat), which realizes this same mathematical statement at universe u. Unpack IsPerfect to obtain a bounded finite projective complex P and an isomorphism between the small derived images of F and P. Use Localization.lift for the original localization Q at quasi-isomorphisms and Localization.fac to send that isomorphism back to the originally chosen universe w; compose with the given isomorphism from Q(F) to C. Translate the strict support bounds on P into the explicit IsZero bounds. No unit statement or unit proof step is bypassed: this reuses the existing proof of this very node.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
-    "place": "Proof, first paragraph"
-   }
-  },
-  {
-   "text": "We first construct a bounded-above complex $P^\\bullet$ of finite\nfree modules, with $P^i=0$ for $i>b$, and a quasi-isomorphism\n$P^\\bullet\\to F^\\bullet$. Here are the steps of the construction.\nChoose finitely many cycles representing generators of $H^b(F)$.\nThey give a map from a finite free module placed in degree $b$\nto $F$. Its cone has zero cohomology in degrees at least $b$ and\nfinite cohomology in every degree: this follows from the long\nexact sequence and the fact that kernels and cokernels of maps\nbetween finite modules over a Noetherian ring are finite.\nSuppose finite free terms in degrees $r,\\ldots,b$ and a map from\nthat truncated complex to $F$ have been chosen so that its cone\nhas no cohomology in degrees at least $r$. Choose finitely many\ncycles generating the cone's cohomology in degree $r-1$.\nA cone cycle consists of a vector in the existing degree-$r$\nterm and a vector of $F^{r-1}$ satisfying the cone cycle\nequations. Use these vectors to define the differential from a\nnew finite free degree-$(r-1)$ term and its map to $F^{r-1}$.\nThe cone equations give both $d^2=0$ and the chain-map identity.\nThe new cone has zero cohomology in degrees at least $r-1$,\nand still has finite cohomology in every degree by the same\nlong exact sequence. Continuing downward gives $P$; in each\nfixed degree the terms and maps stabilize, and the resulting\ncone is acyclic. This proves the asserted quasi-isomorphism in\nthe derived category of [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pc-noetherian-finite-kernels-cokernels"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
-    "place": "Proof, inductive finite-free replacement"
-   }
-  },
-  {
-   "text": "A bounded-above complex of flat modules computes derived tensor\nproducts: it is K-flat by [lem-pc-bounded-above-flat-kflat], applied on the one-point ringed space with structure ring $A$, whose sheaves of modules are the $A$-modules. Concretely, its tensor product with an acyclic complex\nis acyclic by applying the usual finite-complex argument to\nsuccessively longer bounded truncations and taking their\nfiltered colimit; tensor products and filtered colimits of\nmodules are exact in this calculation. Thus both $P$ and $F$\ncompute $C\\otimes_A^{\\mathbf L}N$.\nPut $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$. Since $P$ has no\ncohomology below $a$, its left tail\n\n$$\n\\cdots\\longrightarrow P^{a-2}\\longrightarrow P^{a-1}\n\\longrightarrow P^a\\longrightarrow Q\\longrightarrow0\n$$\n\nis a free resolution of $Q$, so it computes Tor as in [def-weil-pbc-tor-modules]. For every module $N$ it gives\n\n$$\n\\operatorname{Tor}_1^A(Q,N)\n=H^{a-1}(P^\\bullet\\otimes_A N)\n=H^{a-1}(F^\\bullet\\otimes_A N)=0 .\n$$",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
-    "place": "Proof, derived tensor and Tor calculation"
-   }
-  },
-  {
-   "text": "In particular $\\operatorname{Tor}_1^A(Q,A/I)=0$ for every ideal $I\\subseteq A$ (take $N=A/I$), so $Q$ is flat by the ideal Tor criterion [lem-weil-pbc-flat-tor-ideal-criterion]. It is finitely\npresented, being the cokernel of a map between finite free\nmodules, so it is finite projective. Replacing the part of $P$\nin degrees at most $a$ by $Q$ in degree $a$ gives a\nquasi-isomorphic complex concentrated in $[a,b]$, all of whose\nterms are finite projective, as required.",
-   "uses": [
-    "lem-weil-pbc-flat-tor-ideal-criterion",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
-    "place": "Proof, flatness and finite projectivity of Q"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-pc-noetherian-finite-kernels-cokernels",
-  "lem-pc-bounded-above-flat-kflat",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-flat-tor-ideal-criterion",
-  "lem-weil-pbc-finitely-presented-flat-module-projective"
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Perfect/OfFlat.lean",
+  "place": "DerivedCategory.isPerfect_of_flat_of_finite_homology, with universe comparison by the universal property of localization; H4, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -151,9 +105,7 @@
   "blueprint": "Realizes the four proof paragraphs: bounded flat representative; inductive finite-free replacement; K-flat/Tor computation; and flat finitely presented cokernel is finite projective.",
   "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-flat-tor-ideal-criterion"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -179,5 +131,15 @@
   "by": "NI",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261019T093437-L-2311579",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
