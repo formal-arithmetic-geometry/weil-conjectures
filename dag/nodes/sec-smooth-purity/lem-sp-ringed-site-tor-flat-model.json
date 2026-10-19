@@ -19,106 +19,57 @@
  ],
  "proof": [
   {
-   "text": "We first make the single-variable tensor computation explicit. Let $T$ be a K-flat complex with flat terms and let $M$ be a module sheaf. Choose a flat-term K-flat resolution $c:C\\to M[0]$ by [lem-pc-kflat-resolution]. The cone of $c$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. By [lem-pc-tensor-mapping-cone-iso] the cone of $T\\otimes c$ is $\\operatorname{Tot}(T\\otimes\\operatorname{Cone}(c))$, which is acyclic by [def-pc-kflat-complex]; the symmetry from [lem-pc-sheaf-modules-tensor-closed] exchanges the factors in that definition (on complexes it has sign $(-1)^{pq}$). Thus $T\\otimes c$ is a quasi-isomorphism by the same cone criterion. The two-K-flat computation in [lem-weil-pbc-site-derived-tensor-descent] now gives\n$$Q_RT\\otimes_R^{\\mathbf L}M\\simeq Q_R\\operatorname{Tot}(T\\otimes_R M[0]).$$\nThis is the direct cone criterion applied to the chosen resolution, not an assumption that $M[0]$ is K-flat.",
+   "text": "Install the existing sheafified symmetric monoidal structure, tensorPreadditive, the proved small internal-Hom closed structure exposed by nonempty_monoidalClosed_independentCoefficients, the canonical functorial flat resolution, and isGrothendieckAbelianOfUniverses. Transport exactness along siteSheafTensorRightIso and symmetry to identify IsFlatOnSite with categorical ObjectProperty.flat. No site universes are identified.",
    "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
     "lem-pc-kflat-resolution",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-kflat-complex",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism) and 06YU (definition-derived-tor); the cone argument in the proof of 06YP"
-   }
-  },
-  {
-   "text": "Assume (2). The displayed $P$ is bounded above and termwise flat, so [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. Apply step 1 with $T=P$. In degree $i$ the tensor with $M[0]$ has just the term $P^i\\otimes_R M$, by [def-pc-tensor-complex-sheaves], and is zero outside $[a,b]$. Its cohomology is therefore zero outside that interval. The isomorphism $K\\simeq Q_RP$ and functoriality of derived tensor give (1).",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1 (lemma-tor-amplitude), proof of (2) implies (1); Tag 06YQ (lemma-bounded-flat-K-flat)"
-   }
-  },
-  {
-   "text": "Assume (1) and test it on $M=R$. The ordinary tensor unit is $R$, by [lem-pc-sheaf-modules-tensor-closed], so it is flat: tensoring with it is the identity exact functor [def-pc-flat-sheaf-modules]. For a flat-term K-flat representative $T$ of $K$, provided by [lem-pc-kflat-resolution], step 1 and the termwise unit isomorphisms identify $K\\otimes_R^{\\mathbf L}R$ with $K$. Hence $H^i(K)=0$ outside $[a,b]$. By the representative characterization in [def-sbc-standard-tstructure-derived-category], choose a complex $L$ representing $K$ with $L^i=0$ for $i>b$. This uses only the upper bound on cohomology; it makes no assertion that the terms of $L$ are flat.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-kflat-resolution",
-    "def-sbc-standard-tstructure-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1, proof of (1) implies (2), first paragraph; preceding observation testing on the ring sheaf"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-kflat-bounded-flat-replacement] to the complex $L$ of step 3 with the integer $N=b$. Obtain a quasi-isomorphism $F\\to L$ with every $F^i$ flat and $F^i=0$ for $i>b$. Thus $Q_RF\\simeq K$, since the derived category inverts quasi-isomorphisms [def-weil-abstract-derived-category]. The bound is exactly $b$, not merely some larger integer. This replaces the finite sequence of upper flat-kernel truncations in the source proof by the already available bound-preserving flat replacement.",
-   "uses": [
-    "lem-pc-kflat-bounded-flat-replacement",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1, first paragraph of the reverse implication, using Section 06YL (section-flat); bounded-above replacement preserves the prescribed upper bound"
-   }
-  },
-  {
-   "text": "The bounded-above flat complex $F$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Step 1 therefore identifies $H^{a-1}(F\\otimes_R M[0])$ with $H^{a-1}(K\\otimes_R^{\\mathbf L}M)$ for every module sheaf $M$. This vanishes by (1), because $a-1<a$. Symmetry of the sheaf tensor [lem-pc-sheaf-modules-tensor-closed] interchanges $F\\otimes M[0]$ and $M[0]\\otimes F$; the degree-zero factor contributes no sign. All the hypotheses of [lem-weil-pbc-site-flat-opcycles-tor-criterion] hold with $P=F$ and $n=a$. It follows that the cokernel sheaf\n$$B=\\operatorname{Coker}(d_F^{a-1}:F^{a-1}\\to F^a)$$\nis flat. In particular, it is exactness after tensoring with every module sheaf, not flatness of the cohomology sheaves of $K$, that supplies the bottom flat term.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08G0 (lemma-last-one-flat) and 08G1 (lemma-tor-amplitude), final paragraph"
-   }
-  },
-  {
-   "text": "Define $P$ explicitly by $P^i=0$ for $i<a$, $P^a=B$, and $P^i=F^i$ for $i>a$. The differential out of $B$ is induced by $d_F^a$, which kills $\\operatorname{im}d_F^{a-1}$ because $d_F^ad_F^{a-1}=0$; subsequent differentials are those of $F$. This is a complex by [def-pc-cochain-complex-modules]. The quotient in degree $a$ and the identity in higher degrees define a chain map $q:F\\to P$. Using the cohomology quotient formula in [def-weil-abstract-derived-category], in degree $a$ its induced map is\n$$\\ker d_F^a/\\operatorname{im}d_F^{a-1}\\xrightarrow{\\sim}\\ker(B\\to F^{a+1}).$$\nIn degree $a+1$, the images of $B\\to F^{a+1}$ and $F^a\\to F^{a+1}$ coincide since $F^a\\to B$ is epimorphic; thus cohomology is unchanged there, and it is unchanged in every higher degree. Below $a$ both cohomologies vanish, for $F$ by step 3 and for $P$ by its zero terms. Hence $q$ is a quasi-isomorphism and $Q_RP\\simeq Q_RF\\simeq K$. The bottom term is flat by step 5, higher terms are flat by step 4, and zero terms are flat since tensoring with zero is the zero exact functor [def-pc-flat-sheaf-modules]. Finally $a\\leq b$ and $F^i=0$ for $i>b$ imply $P^i=0$ outside $[a,b]$. This is (2).",
-   "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "def-pc-flat-sheaf-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1 (lemma-tor-amplitude), final paragraph: the good lower truncation and its definitions"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a degree-zero test sheaf M, choose a cochain representative L of K and apply the proved generic CochainComplex.exists_quasiIso_flat_kFlat to obtain P -> L. Its categorical K-flatness implies the live acyclic-tensor predicate: tensor the quasi-isomorphism 0 -> Z for any acyclic Z, and use that tensor preserves zero objects. Apply wfSiteDerivedTensor_first from def-wf-tensor-product to P and M[0]. Compose with the generic QObjTensorQObjIsoOfKFlatLeft, the localization of P -> L, and singleFunctorIsoCompQ. This gives an isomorphism from wfSiteDerivedTensor(K,M[0]) to the generic derived monoidal tensor K tensor M[0]. Transport homology vanishing along it and use isGE_iff/isLE_iff to identify the stated condition with categorical torAmplitudeIn.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-wf-tensor-product",
+    "lem-sc-source-tor-amplitude-flat-model",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved generic DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat. Its reverse implication uses bounded flat K-flatness; its forward implication tests against the unit, takes a same-upper-bound flat resolution, proves the lower opcycles flat by the Tor criterion, and forms the good lower truncation. Thus the original flat-resolution and truncation argument is retained inside this generic tool. Convert its categorical flatness termwise to IsFlatOnSite, convert IsStrictlyGE/LE to zero terms outside the interval, and reverse the representing isomorphism. These conversions work in both directions, including the zero ring, empty site, and a=b.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-flat-model",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso",
-  "def-pc-kflat-complex",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-wf-tensor-product",
+  "lem-sc-source-tor-amplitude-flat-model",
   "def-sbc-standard-tstructure-derived-category",
-  "lem-pc-kflat-bounded-flat-replacement",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
   "def-pc-cochain-complex-modules"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08G1 (lemma-tor-amplitude), with Tag 08G0 (lemma-last-one-flat); bound-preserving flat replacement supplies the upper truncation part directly"
+  "by": "agent",
+  "group": "M5",
+  "date": "2026-10-19",
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "Tag 08G1 (1)-(2), realized by the proved generic bounded flat model theorem and the live wfSiteDerivedTensor_first comparison."
  },
  "mathlib_searches": [
   {
@@ -255,11 +206,7 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -286,5 +233,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Statement, dependencies, source proof, universes, edge cases, docstrings, report sections, and compiler evidence checked; delivery is correct."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261019T231238-L-565380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
