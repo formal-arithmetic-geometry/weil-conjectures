@@ -5,10 +5,9 @@
  "unit": "sk-lem-integral-models",
  "proof": [
   {
-   "text": "Write $P$ for the constant presheaf of $R$-modules with value $T$, and $\\eta:P\\to\\underline T$ for its module-sheafification unit, viewing the sections of $\\underline T$ as $R$-modules by restriction along $R\\to\\underline R(V)$ [def-sf-site-constant-module-functor]. By [lem-sf-constant-module-unit-locally-bijective], this unit is locally injective. Thus, if $a,b\\in T=P(U)$ satisfy $\\eta_U(a)=\\eta_U(b)$, there is a covering family $\\{U_i\\to U\\}_{i\\in I}$ on which $P(U_i\\to U)(a)=P(U_i\\to U)(b)$. Use here the small site and coefficient universe in [def-weil-pbc-proetale-site], enlarging the universe of values to contain its objects and arrows as necessary.",
+   "text": "Write P for the genuine constant module presheaf of [def-sf-site-constant-module-functor] on the small pro-etale site [def-weil-pbc-proetale-site]. The module sheafification adjunction unit has, definitionally, underlying additive map CategoryTheory.toSheafify J P.presheaf (Mathlib PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app). Hence equality of two constantRealizationUnit images gives equality under this additive unit. Mathlib's GrothendieckTopology.instIsLocallyInjectiveToSheafify and Presheaf.equalizerSieve_mem give a covering equalizer sieve. These generic Mathlib results allow independent site universes, unlike the specialized siteConstantModuleUnitSections lemma. They implement the same local-injectivity step from Tags 00WB/00WK and 03CY without an intermediate project lemma.",
    "uses": [
     "def-sf-site-constant-module-functor",
-    "lem-sf-constant-module-unit-locally-bijective",
     "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
@@ -18,7 +17,7 @@
    }
   },
   {
-   "text": "Choose a point $u\\in U$. By the covering condition of [def-weil-pbc-proetale-site], an affine open neighbourhood $V\\subset U$ of $u$ is the union of the images of finitely many affine opens in the $U_i$. At least one of those images contains $u$, so some $U_i$ is nonempty; in particular the covering family has a member. The restriction map $P(U)\\to P(U_i)$ is $\\operatorname{id}_T$ by [def-sf-site-constant-module-functor]. Therefore the local equality from step 1 is precisely $a=b$ in $T$. This proves injectivity of $\\eta_U$. The only use of nonemptiness is to exclude an empty covering of $U$.",
+   "text": "First show that the empty sieve does not cover U. Scheme.ProEt.mem_topology_iff refines a hypothetical empty covering sieve to a presieve Q in ProEt.precoverage. Express Q as Presieve.ofArrows V f and use Scheme.ProEt.mem_precoverage_iff. The underlying family is jointly surjective by Scheme.ofArrows_mem_precoverage_iff, since a pro-etale covering is in the weakly-etale precoverage. Choose a point of U by nonemptiness and a covering member above it. Its inclusion in the empty sieve is impossible. Now, if two distinct elements of T have equal unit images, their equalizer sieve is covering by step 1, but is empty because all constant-presheaf restrictions are identity maps. This contradicts the first conclusion and proves injectivity. This is the original nonempty-cover argument, using [def-weil-pbc-proetale-site] and [def-sf-site-constant-module-functor].",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-sf-site-constant-module-functor"
@@ -30,7 +29,7 @@
    }
   },
   {
-   "text": "If $\\underline T(U)=0$, then for every $t\\in T$ the elements $\\eta_U(t)$ and $\\eta_U(0)$ agree, so step 2 gives $t=0$ and $T=0$. If $\\underline T|_U$ is the zero module sheaf, evaluate at the object $\\operatorname{id}_U:U\\to U$ of the localized site. The sectionwise restriction rule of [def-pur-localized-ringed-site] gives $(\\underline T|_U)(U/U)=\\underline T(U)$. The zero module sheaf has the zero module of sections at every object: the presheaf of zero modules satisfies the sheaf condition and is both initial and terminal under the morphism definition in [def-weil-sheaf-of-modules-category]. Hence $\\underline T(U)=0$, and the preceding implication applies.",
+   "text": "For zero sections at U, ModuleCat.subsingleton_of_isZero makes the codomain of the injective unit a subsingleton. Injectivity makes T a subsingleton, and ModuleCat.isZero_of_subsingleton proves IsZero T. For a zero restricted sheaf, use the additive evaluation functor SheafOfModules.evaluation at op (Over.mk (identity U)); Functor.map_isZero sends the zero restricted sheaf to its zero module of sections. By the sectionwise restriction rule of [def-pur-localized-ringed-site] this evaluation is definitionally the original sections at U. Apply the first implication. These are the module category and evaluation functor of [def-weil-sheaf-of-modules-category].",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-sheaf-of-modules-category"
@@ -44,7 +43,6 @@
  ],
  "proof_deps": [
   "def-sf-site-constant-module-functor",
-  "lem-sf-constant-module-unit-locally-bijective",
   "def-weil-pbc-proetale-site",
   "def-pur-localized-ringed-site",
   "def-weil-sheaf-of-modules-category"
@@ -52,7 +50,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Specialization of Tags 00WB/00WK and sites-modules.tex Tag 03CY to the constant module presheaf; nonempty-cover argument from proetale.tex Tag 0989; restriction rule Tag 04IX"
+  "place": "E8 Lean proof, 2026-10-19: same three-step argument from Tags 00WB/00WK, sites-modules.tex 03CY and 04IX, and proetale.tex 0989; use the underlying additive Mathlib sheafification unit directly for independent site universes."
  },
  "mathlib_match": null,
  "status": "split",
@@ -210,9 +208,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-constant-module-unit-locally-bijective"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -242,5 +238,15 @@
   "by": "NW",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261019T093349-L-2301611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

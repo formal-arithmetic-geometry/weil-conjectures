@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 public import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteConstantModuleUnit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Nonempty constant sheaf detects a zero module
 Source: Stacks Project, sites.tex, Tags 00WB and 00WK, applied via sites-modules.tex Tag 03CY
@@ -18,7 +18,6 @@ Source: Stacks Project, sites.tex, Tags 00WB and 00WK, applied via sites-modules
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -67,6 +66,38 @@ theorem constantRealization_detects_zero (X : Scheme.{u}) (R : Type (u + 1)) [Co
         (Opposite.op U)) → IsZero T) ∧
       (IsZero (((siteConstantModuleFunctorGeneral (Scheme.ProEt.topology X) R).obj T).over U) →
         IsZero T) := by
-  sorry
+  classical
+  let J := Scheme.ProEt.topology X
+  let P := ((siteConstantModulePresheafGeneral (C := X.ProEt) R).obj T).presheaf
+  have hbot : (⊥ : Sieve U) ∉ J U := by
+    intro h
+    obtain ⟨Q, hQ, hQS⟩ := Scheme.ProEt.mem_topology_iff.mp h
+    obtain ⟨ι, V, f, rfl⟩ := Q.exists_eq_ofArrows
+    rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hQ
+    obtain ⟨i, y, hy⟩ :=
+      ((Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).1 hQ.2).1
+        (Classical.arbitrary U.left)
+    have hf := hQS _ _ (Presieve.ofArrows.mk i)
+    simp at hf
+  have hinj : Function.Injective (constantRealizationUnit X R T U) := by
+    intro a b hab
+    have hS := Presheaf.equalizerSieve_mem J (toSheafify J P) a b hab
+    by_contra hab'
+    apply hbot
+    convert hS using 1
+    ext V g
+    simp only [Sieve.bot_apply, Presheaf.equalizerSieve_apply, false_iff]
+    change ¬ a = b
+    exact hab'
+  have hzero : IsZero (((siteConstantModuleFunctorGeneral J R).obj T).val.obj
+      (Opposite.op U)) → IsZero T := by
+    intro h
+    have := ModuleCat.subsingleton_of_isZero h
+    have : Subsingleton T := ⟨fun a b ↦ hinj (Subsingleton.elim _ _)⟩
+    exact ModuleCat.isZero_of_subsingleton T
+  refine ⟨hinj, hzero, ?_⟩
+  intro h
+  apply hzero
+  exact (SheafOfModules.evaluation _ (Opposite.op (Over.mk (𝟙 U)))).map_isZero h
 
 end AlgebraicGeometry.ProEtale
