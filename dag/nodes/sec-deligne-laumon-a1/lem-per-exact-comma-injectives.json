@@ -11,9 +11,121 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The morphism sets of $\\mathcal T_L$ are subgroups of $\\operatorname{Hom}_{\\mathcal A}(P,P')\\oplus\\operatorname{Hom}_{\\mathcal B}(N,N')$: the equation $bu=u'L(a)$ is additive because $L$ is additive. Composition is bilinear componentwise. The triple $(0,0,0)$ is a zero object (an additive functor sends a zero object to a zero object since $L(1_0)=L(0)=0$). For two triples take $(P_1\\oplus P_2,N_1\\oplus N_2,w)$, where $w=\\sum_{j=1}^2\\iota^N_j u_j L(\\pi^P_j)$. Its componentwise inclusions and projections are morphisms of triples: for example $wL(\\iota^P_j)=\\iota^N_j u_j$, by the biproduct identities and additivity of $L$. They satisfy $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_j\\iota_j\\pi_j=1$ componentwise, giving a biproduct. Thus $\\mathcal T_L$ is additive.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive, and Tag 0109, definition-abelian-category; agent componentwise biproduct construction"
+   }
+  },
+  {
+   "text": "For $f=(a,b):(P,N,u)\\to(P',N',u')$, choose kernels $k_a:K_a\\to P$ and $k_b:K_b\\to N$. Since $buL(k_a)=u'L(a k_a)=0$, there is a unique $w:LK_a\\to K_b$ with $k_bw=uL(k_a)$. This makes $(K_a,K_b,w)\\xrightarrow{(k_a,k_b)}(P,N,u)$ a morphism killed by $f$. If $(x,y):(S,T,v)\\to(P,N,u)$ is killed by $f$, uniquely factor $x=k_a\\bar x$, $y=k_b\\bar y$. The equation $k_b\\bar yv=yv=uL(x)=k_bwL(\\bar x)$ implies $\\bar yv=wL(\\bar x)$ by the monicity of $k_b$; a kernel is monic directly by uniqueness in its universal property. Hence $(\\bar x,\\bar y)$ is the unique factorization in $\\mathcal T_L$. This proves the componentwise kernel formula.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0106, definition-kernel; agent universal-property calculation for the comma kernel"
+   }
+  },
+  {
+   "text": "Choose cokernels $q_a:P'\\to C_a$ and $q_b:N'\\to C_b$. The functor $L$ preserves the cokernel of $a$: apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the coequalizer of the parallel pair $(a,0)$, a diagram indexed by a finite, hence small, category; additivity gives $L(0)=0$. Since $q_bu'L(a)=q_bbu=0$, there is a unique $w:LC_a\\to C_b$ with $wL(q_a)=q_bu'$. Thus $(q_a,q_b)$ is a morphism to $(C_a,C_b,w)$ and kills $f$. Given $(x,y):(P',N',u')\\to(S,T,v)$ killed by $f$, uniquely write $x=\\bar xq_a$ and $y=\\bar yq_b$. Precomposing the desired relation $\\bar yw=vL(\\bar x)$ with $L(q_a)$ gives $yu'=vL(x)$, which holds. The map $L(q_a)$ is epic, being a cokernel, so the relation holds. The component factorizations are unique, proving that this is the cokernel in $\\mathcal T_L$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0106, definition-kernel, and Categories Tag 0038, lemma-adjoint-exact (1); agent comma cokernel construction"
+   }
+  },
+  {
+   "text": "In a preadditive category with kernels, $f$ is monic exactly when its kernel object is zero: if $f$ is monic its kernel arrow is zero and monic, so the kernel identity is zero; conversely $fx=fy$ makes $x-y$ factor through the zero kernel, hence $x=y$. The argument for epimorphisms and zero cokernels is dual, using differences of maps out of the target. A triple is zero exactly when both components are zero, because its identity is zero exactly when both component identities are zero. Applying these observations to Steps 2 and 3 shows that $(a,b)$ is monic, respectively epic, exactly when both $a,b$ are monic, respectively epic.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0E43, lemma-kernel-mono, and Tag 010C, lemma-characterize-injective; agent difference-of-morphisms verification"
+   }
+  },
+  {
+   "text": "Every mono $a$ in either abelian component category is the kernel of its own cokernel $q_a$. Indeed, by [def-sp-abelian] it is a kernel of some $r$; write $r=hq_a$ since $ra=0$. Any $x$ with $q_ax=0$ then satisfies $rx=0$ and factors uniquely through $a$, as required. Dually an epi $a$ is the cokernel of its own kernel $k_a$: express $a$ as a cokernel of $s$, factor $s=k_at$ since $as=0$, and use the cokernel property of $s$ for any map killing $k_a$. By Step 4 a mono in $\\mathcal T_L$ has monic components, so these component kernel properties and Step 2 make it the kernel of its componentwise cokernel from Step 3. Dually every epi is the cokernel of its kernel. Together with Steps 1–3, this verifies precisely the abelian-category axioms in [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0109, definition-abelian-category; agent normal-mono and normal-epi verification from the defining axioms"
+   }
+  },
+  {
+   "text": "A sequence $0\\to X\\xrightarrow fY\\xrightarrow g Z\\to0$ of triples is short exact precisely when each component sequence is: in an abelian category this says that $f$ is a kernel of $g$ and $g$ a cokernel of $f$, and Steps 2–3 give these universal properties componentwise. For the reverse implication the unique component factorizations form a morphism of triples by the same cancellation calculations as in Steps 2–3. Consequently both additive evaluations $e_0,e_1$ preserve short exact sequences and are exact. For $\\Delta$, the relation defining a morphism is $L(a)=L(a)$, and additivity is immediate. Applying $\\Delta$ to a short exact sequence gives that sequence in component zero and its $L$-image in component one, both short exact by the hypothesis on $L$. The componentwise criterion therefore makes $\\Delta$ additive and exact. Also $Z:\\mathcal B\\to\\mathcal T_L$, $N\\mapsto(0,N,0)$, is additive and exact by the same criterion.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010E, definition-exact (including short exact sequences); agent short-exactness test and graph/zero-section calculations, with exact meaning preservation of short exact sequences as in the item"
+   }
+  },
+  {
+   "text": "There are natural bijections $\\operatorname{Hom}_{\\mathcal T_L}(\\Delta S,(P,N,u))\\cong\\operatorname{Hom}_{\\mathcal A}(S,P)$, sending $(a,b)$ to $a$ with inverse $a\\mapsto(a,uL(a))$. Likewise $\\operatorname{Hom}_{\\mathcal T_L}(Z T,(P,N,u))\\cong\\operatorname{Hom}_{\\mathcal B}(T,N)$ by $(0,b)\\leftrightarrow b$. Thus $\\Delta\\dashv e_0$ and $Z\\dashv e_1$. Both left adjoints are additive and exact by Step 6, and the categories are abelian by Step 5 and the hypotheses. Apply [lem-sp-right-adjoint-preserves-injectives] to each of these adjunctions. It follows that $e_0$ and $e_1$ send injective triples to injective objects in their respective component categories.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, lemma-adjoint-preserve-injectives, implication (b) to (c); explicit adjunction bijections for the evaluations"
+   }
+  },
+  {
+   "text": "Write $\\varepsilon:LR\\to1_{\\mathcal B}$ for the counit of the given adjunction. Define $r_0(I)=(I,0,0)$ and $r_1(J)=(RJ,J,\\varepsilon_J)$; their actions on morphisms are $(c,0)$ and $(R(d),d)$, respectively. For a triple $X=(P,N,u)$, maps $X\\to r_0(I)$ are precisely $(a,0)$ with arbitrary $a:P\\to I$. Maps $X\\to r_1(J)$ correspond to arbitrary $b:N\\to J$: the first component is the adjoint transpose $\\widehat{bu}:P\\to RJ$, the unique map satisfying $\\varepsilon_J L(\\widehat{bu})=bu$. These natural bijections give $e_0\\dashv r_0$ and $e_1\\dashv r_1$. The displayed actions are additive since $R$ is additive. As $e_0,e_1$ are exact, [lem-sp-right-adjoint-preserves-injectives] shows that $r_0(I)$ and $r_1(J)$ are injective whenever $I$ and $J$ are injective.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, lemma-adjoint-preserve-injectives; agent construction of the right adjoints of the evaluations"
+   }
+  },
+  {
+   "text": "For $X=(P,N,u)$ choose monomorphisms $i:P\\hookrightarrow I$ and $j:N\\hookrightarrow J$ with $I,J$ injective, using enough injectives in the two component categories. By Step 8 there are maps $X\\to r_0(I)$ corresponding to $i$ and $X\\to r_1(J)$ corresponding to $j$; their first components are $i$ and $\\widehat{ju}$ and their second components are $0$ and $j$. Pair them to obtain $X\\to r_0(I)\\oplus r_1(J)$ with components $(i,\\widehat{ju}):P\\to I\\oplus RJ$ and $j:N\\to J$ (identifying $0\\oplus J$ with $J$). The first component is monic because its composite with the projection to $I$ is $i$, and the second is monic by choice. Step 4 makes the map of triples monic. Finally this finite biproduct is injective: a map from the source of any mono to it has two component maps into $r_0(I),r_1(J)$; extend these separately using their injectivity and pair the extensions, obtaining an extension to the biproduct. This uses exactly the lifting definition [def-sp-injective-resolutions]. Every triple therefore embeds in an injective triple, proving enough injectives.",
+   "uses": [
+    "def-sp-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0135, definition-injective, and Tag 0137, lemma-product-injectives; agent explicit embedding and two-factor extension argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Agent exact-comma calculation using Tag 0106 (kernels/cokernels), Tag 0109 (abelian categories), Tag 015Z (injectives and adjunctions), and Categories Tag 0038 (left adjoints preserve colimits); auxiliary to ILO XVI printed p.248, relative cohomology paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +161,52 @@
    "results": "{\"t\": \"2026-10-18T23:23:57Z\", \"tool\": \"grep\", \"query\": \"Comma|StructuredArrow\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Pseudoelements.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean\"], \"digest\": \"251124ba50360430\"}",
    "date": "2026-10-19",
    "verdict": "no match: the hits give adjoint preservation/transfer of injectivity and reflective transfer of abelianness, but not the exact-comma category, its componentwise abelian structure, or its injective evaluations"
+  },
+  {
+   "tool": "grep",
+   "query": "Comma.*[Ii]njective|[Aa]belian.*Comma|Comma.*[Aa]belian",
+   "results": "{\"t\": \"2026-10-19T00:12:20Z\", \"tool\": \"grep\", \"query\": \"Comma.*[Ii]njective|[Aa]belian.*Comma|Comma.*[Aa]belian\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian comma categories of exact functors and enough injective objects",
+   "results": "{\"t\": \"2026-10-19T00:12:20Z\", \"tool\": \"leansearch\", \"query\": \"Abelian comma categories of exact functors and enough injective objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolution\", \"CategoryTheory.exact_f_d\", \"CommGrpCat.enoughInjectives\", \"CategoryTheory.Injective.mk\", \"CategoryTheory.InjectiveResolution.of_def\", \"AddCommGrpCat.enoughInjectives\", \"CategoryTheory.injectiveResolutions\"], \"digest\": \"6a8c2c11d100cf3b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Comma, CategoryTheory.Abelian",
+   "results": "{\"t\": \"2026-10-19T00:12:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.Abelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between abelian categories has an abelian comma category whose injective objects have injective components and which has enough injectives",
+   "results": "{\"t\": \"2026-10-19T00:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor between abelian categories has an abelian comma category whose injective objects have injective components and which has enough injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.exact_f_d\", \"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects\", \"CategoryTheory.Injective.injective_under\", \"CategoryTheory.Functor.preservesMonomorphisms_of_map_exact\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.IsGrothendieckAbelian\"], \"digest\": \"b250fe26769f15f1\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Comma|StructuredArrow|CostructuredArrow",
+   "results": "{\"t\": \"2026-10-19T00:13:59Z\", \"tool\": \"grep\", \"query\": \"Comma|StructuredArrow|CostructuredArrow\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean\", \"Mathlib/CategoryTheory/Abelian/Pseudoelements.lean\"], \"digest\": \"bce1e9dd046c9a64\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of triples consisting of objects P and N and a map L P to N is abelian for an exact additive functor L and its evaluation functors preserve injectives",
+   "results": "{\"t\": \"2026-10-19T00:14:01Z\", \"tool\": \"leanfinder\", \"query\": \"The category of triples consisting of objects P and N and a map L P to N is abelian for an exact additive functor L and its evaluation functors preserve injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.preservesMonomorphisms_of_map_exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.abelianOfAdjunction\", \"CategoryTheory.Functor.preservesEpimorphisms_of_map_exact\"], \"digest\": \"4dd8b2c2a8c9bb96\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: exact-functor equivalences, enough-injective resolutions, reflective transfer of abelianness and incidental comma imports do not state this comma-category theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kummer-relative-cone-functor",
@@ -80,5 +234,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-exact-comma-injectives",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved the comma construction by explicit biproduct, kernel and cokernel universal properties, normal monos and epis, componentwise short exactness, and the four evaluation adjunctions. Enough injectives follows from an explicit embedding into a biproduct of the two right-adjoint injectives. Reused all generic tools; created no nodes.",
+  "blueprint": "Realizes the simultaneous endpoint-resolution ingredient of lem-per-kummer-relative-cone-functor, Step 4, auxiliary to the historical Step 3 regular finite-coefficient input of lem-per-artin-gabber-affine-curve recorded in blueprint.from.place; ILO XVI printed p.248 relative cohomology paragraph. Neither the current ancestor proof nor the unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-a26f44575",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-a26f44575 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unchanged statement, nine proof steps, no new nodes. Delivery shape (A) is clean: one commit with the item and its report; the report has its Review section; proof_deps equals the union of the step citations. All five cited nodes are Mathlib leaves, and I checked each one's statement against the step that uses it. The cited Stacks tags match (015Z is homology.tex line 7270, case (b)⇒(c), with no enough-injectives hypothesis; the other tags exist with the labels the report gives), and there is no SGA citation. Mathematics: Step 1 checks the biproduct map w=Σι_j u_j L(π_j) through both identities. Steps 2-3 build kernels and cokernels componentwise; the cokernel step relies on L(q_a) being a cokernel of L(a), which comes from the colimit-preservation leaf. Step 4 shows a map of triples is mono (or epi) exactly when both components are. Step 5 checks the normal-mono and normal-epi axioms of def-sp-abelian. Step 6 shows short exact sequences are exact componentwise, so e_0, e_1, Δ and Z are exact. Steps 7-8 set up the four adjunctions Δ⊣e_0, Z⊣e_1, e_0⊣r_0 and e_1⊣r_1, the last via the adjoint transpose against the counit ε_J. The cited node lem-sp-right-adjoint-preserves-injectives then gives the injectivity claims without R exact. Step 9 embeds each triple by ((i,(ju)^),j) into r_0(I)⊕r_1(J) and proves that biproduct injective inline. I tested L=id (the arrow category), L=0 (the product category) and a non-exact R; all behave as claimed. The parent lem-per-kummer-relative-cone-functor uses exactly the clauses proved here. No duplicate found in a DAG search for comma/triple/enough-injectives/recollement nodes. No Lean declaration for this item in the project tree. No fixes, no drop_nodes, no tool_uses."
  }
 }
