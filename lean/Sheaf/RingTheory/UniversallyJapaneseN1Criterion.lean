@@ -9,14 +9,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.JapaneseDomain
 public import Sheaf.RingTheory.NagataRing
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.PolynomialResidueFiniteCoefficientModel
 
 /-!
 # A normalization criterion for universally Japanese rings
@@ -37,29 +31,68 @@ Source: Stacks Project, Algebra, Lemma 10.162.3 (Tag 0351),
 (blueprint: lem-exc-universally-japanese-n1-criterion).
 
 Proof:
-1. Fix a finite type domain algebra `S` over `R`, put `K = FractionRing S`, and take a
-   finite extension `L/K`. In `S[X]`, the ideal `r = (X)` is nonzero and prime and
-   contracts to zero in `S`. Evaluation at zero identifies its residue field with `K`:
-   the residue of `f/g` maps to `f(0)/g(0)`, and the inverse sends `a/b` to the residue
-   of the quotient of constant polynomials. The identity `f = f(0) + X h` verifies that
-   these maps are inverse. Transport the finite extension `L/K` along this identification.
-2. Apply `lem-weil-pbc-polynomial-residue-finite-coefficient-model` at `r`. It produces
-   a finite `S`-subalgebra `S'` of `L` and a residue field isomorphic to `L`, which is a
-   fraction field of `S'`. Transporting the fraction presentations makes `L` itself a
-   fraction field of `S'`. Finite algebra generators of `S/R` together with finite module
-   generators of `S'/S` generate `S'` as an `R`-algebra. Since `S'` is a subring of `L`,
-   it is a domain. The hypothesis therefore makes `S'` N-1.
-3. The integral closure `S''` of `S'` in `L` is finite over `S'` by N-1
-   (`def-weil-pbc-japanese-domain`). Since `S'` is finite over `S`, finite-module
-   transitivity (`lem-weil-pbc-finite-module-over-finite-algebra`) makes `S''` finite over `S`.
-4. The integral closures of `S` and `S'` in `L` coincide. A monic equation over `S` is
-   also one over `S'`. Conversely, `S'` is integral over `S` by
-   `lem-weil-pbc-finite-algebra-is-integral`, and integrality of `S''` over `S'` follows
-   from `def-weil-pbc-integral-closure`. Apply `lem-weil-pbc-integral-transitive` to
-   `S → S' → S''`. Thus the integral closure of `S` in every finite `L/K` is finite
-   over `S`, so `S` is N-2. Varying `S` proves that `R` is universally Japanese. -/
+1. Fix a finite type domain algebra `S` over `R` and a finite extension `L` of
+   `FractionRing S`. Mathlib's `FiniteDimensional.exists_is_basis_integral` gives a
+   finite basis of `L` consisting of elements integral over `S`. Adjoin those elements
+   to form a subalgebra `B` of `L`. Finite integral generation makes `B` finite over `S`.
+2. For each `z : L`, clear the denominators of its basis coordinates simultaneously.
+   For the resulting nonzero `d : S`, the basis expansion expresses `d • z` as an
+   `S`-linear combination of the basis, hence as an element of `B`. Since `d` is also
+   in `B` and remains nonzero in `L`, the quotient `(d • z) / d` shows that `L` is a
+   fraction field of `B`.
+3. Finiteness over `S` and finite type over `R` make `B` finite type over `R`.
+   As a subring of `L`, it is a domain. Apply the hypothesis to `B`, and transport
+   its finite normalization from `FractionRing B` to `L` by the canonical algebra
+   equivalence of fraction fields. Transitivity makes this normalization finite over `S`.
+4. Because `B` is finite, it is integral over `S`. Transitivity of integrality maps
+   the integral closure of `B` in `L` to that of `S` in `L`. This `S`-linear map is
+   surjective: every element integral over `S` is integral over `B`. Its target is
+   therefore finite over `S`. Varying `L` and `S` proves universal Japaneseness. -/
 theorem isUniversallyJapanese_of_forall_isN1 (R : Type u) [CommRing R]
     (h : ∀ (S : Type u) [CommRing S] [IsDomain S] [Algebra R S]
       [Algebra.FiniteType R S], IsN1 S (FractionRing S)) :
     IsUniversallyJapanese R := by
-  sorry
+  classical
+  intro S _ _ _ _ L _ _ _ _ _
+  obtain ⟨t, e, he⟩ := FiniteDimensional.exists_is_basis_integral S (FractionRing S) L
+  let B := Algebra.adjoin S (Set.range e)
+  have : Module.Finite S B :=
+    Algebra.finite_adjoin_of_finite_of_isIntegral (Set.finite_range e)
+      (by rintro _ ⟨i, rfl⟩; exact he i)
+  have : IsFractionRing B L := IsFractionRing.of_field B L (fun z ↦ by
+    obtain ⟨d, hd⟩ := IsLocalization.exist_integer_multiples_of_finite
+      (nonZeroDivisors S) (fun i ↦ e.repr z i)
+    choose a ha using hd
+    have hd0 : (d : S) ≠ 0 := mem_nonZeroDivisors_iff_ne_zero.mp d.property
+    have hdm : algebraMap S L d ≠ 0 := by
+      rw [IsScalarTower.algebraMap_apply S (FractionRing S) L]
+      exact (map_ne_zero_iff (algebraMap (FractionRing S) L) (RingHom.injective _)).mpr
+        ((map_ne_zero_iff (algebraMap S (FractionRing S))
+          (IsFractionRing.injective S (FractionRing S))).mpr hd0)
+    have hdz : (d : S) • z ∈ B := by
+      rw [← e.sum_repr z, Finset.smul_sum]
+      apply B.sum_mem
+      intro i _
+      rw [← smul_assoc, ← ha i, algebraMap_smul]
+      exact B.smul_mem (Algebra.subset_adjoin ⟨i, rfl⟩) (a i)
+    refine ⟨(⟨(d : S) • z, hdz⟩ : B),
+      (⟨algebraMap S L d, B.algebraMap_mem d⟩ : B), ?_⟩
+    change z = ((d : S) • z) / algebraMap S L d
+    rw [Algebra.smul_def, mul_div_cancel_left₀ _ hdm])
+  let : Algebra R L := ((algebraMap S L).comp (algebraMap R S)).toAlgebra
+  let : IsScalarTower R S L := .of_algebraMap_eq' rfl
+  have : Algebra.FiniteType R B := Algebra.FiniteType.trans
+    (S := S) inferInstance inferInstance
+  have : Module.Finite B (integralClosure B (FractionRing B)) := h B
+  have : Module.Finite B (integralClosure B L) := Module.Finite.equiv
+    ((IsLocalization.algEquiv (nonZeroDivisors B) (FractionRing B) L).mapIntegralClosure
+      ).toLinearEquiv
+  have : Module.Finite S (integralClosure B L) := Module.Finite.trans B _
+  let q : integralClosure B L →ₗ[S] integralClosure S L :=
+    { toFun := fun z ↦ ⟨z.1, isIntegral_trans z.1 z.2⟩
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun _ _ ↦ rfl }
+  have hq : Function.Surjective q := by
+    intro z
+    exact ⟨⟨z.1, z.2.tower_top⟩, rfl⟩
+  exact Module.Finite.of_surjective q hq
