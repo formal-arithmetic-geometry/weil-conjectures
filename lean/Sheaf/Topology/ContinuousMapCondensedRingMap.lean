@@ -63,7 +63,7 @@ theorem continuousMapRingSheafMapOfUniverse_app_apply (S : Profinite.{u}ᵒᵖ)
     (a : ULift.{max u v + 1} C(S.unop, T)) :
     (continuousMapRingSheafMapOfUniverse φ hφ).hom.app S a =
       ULift.up ((⟨φ, hφ⟩ : C(T, T')).comp a.down) := by
-  sorry
+  rfl
 
 /-- The underlying morphism of abelian sheaves of the continuous-map ring morphism.
 Source: blueprint `def-sfb-continuous-map-condensed-ring-map.md`, ring-object clause
@@ -91,7 +91,15 @@ theorem isMonHom_continuousMapRingObjMapOfUniverse :
     letI := continuousMapRingObjOfUniverseMonObj.{u, v} T
     letI := continuousMapRingObjOfUniverseMonObj.{u, v} T'
     IsMonHom (continuousMapRingObjMapOfUniverse.{u, v} φ hφ) := by
-  sorry
+  let := (sfbSheafTensorStructure (A := AddCommGrpCat.{max u v + 1})
+    (coherentTopology Profinite.{u})).monoidal
+  let := continuousMapRingObjOfUniverseMonObj.{u, v} T
+  let := continuousMapRingObjOfUniverseMonObj.{u, v} T'
+  change IsMonHom ((sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{max u v + 1} AddCommGrpCat.{max u v + 1})).map
+      (continuousMapRingSheafMapOfUniverse φ hφ))
+  exact Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
+    (continuousMapRingSheafMapOfUniverse φ hφ)
 
 /-- Postcomposition by the identity is the identity sheaf morphism.
 Source: blueprint `def-sfb-continuous-map-condensed-ring-map.md`, identity clause
@@ -103,7 +111,7 @@ Forgetting to abelian sheaves keeps the same components, hence also gives the
 identity ring-object morphism. -/
 theorem continuousMapRingSheafMapOfUniverse_id :
     continuousMapRingSheafMapOfUniverse.{u, v} (RingHom.id T) continuous_id = 𝟙 _ := by
-  sorry
+  rfl
 
 /-- Postcomposition respects composition of continuous ring homomorphisms.
 Source: blueprint `def-sfb-continuous-map-condensed-ring-map.md`, composition clause
@@ -118,6 +126,6 @@ theorem continuousMapRingSheafMapOfUniverse_comp {T'' : Type v} [TopologicalSpac
     continuousMapRingSheafMapOfUniverse.{u, v} (ψ.comp φ) (hψ.comp hφ) =
       continuousMapRingSheafMapOfUniverse φ hφ ≫
         continuousMapRingSheafMapOfUniverse ψ hψ := by
-  sorry
+  rfl
 
 end Profinite
