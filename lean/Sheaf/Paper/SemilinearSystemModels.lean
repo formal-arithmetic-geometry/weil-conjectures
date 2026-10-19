@@ -19,6 +19,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Sites.CoverPreserving
 /-! # Generic ordinary semilinear systems and their representative models
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1;
@@ -54,7 +56,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
 Source: the small-site size convention (blueprint: def-coef-semilinear-system-models).
 Proof: the supplied EssentiallySmall instance is exactly this small-model witness. -/
 theorem siteSmall : EssentiallySmall.{r} C := by
-  sorry
+  infer_instance
 
 /-- Canonical abelian sheafification in the chosen coefficient universe.
 Source: Stacks 03DA (blueprint: def-coef-semilinear-system-models). -/
@@ -106,7 +108,8 @@ Proof: take a small model of C and its product with the natural-number poset,
 using a universe lift of the latter. The product of the two equivalences is an
 equivalence with a category whose objects and arrows lie in the coefficient universe. -/
 theorem sequenceSmall : EssentiallySmall.{r} (ℕ × C) := by
-  sorry
+  exact EssentiallySmall.mk'
+    ((AsSmall.equiv : ℕ ≌ AsSmall.{r} ℕ).prod (equivSmallModel.{r} C))
 
 attribute [instance] sequenceSmall
 
@@ -115,7 +118,7 @@ Source: the small-site convention (blueprint: def-coef-semilinear-system-models)
 Proof: an equivalence with a small model induces an equivalence of slice categories.
 The slice of the small model has objects and morphisms in the same universe. -/
 theorem sliceSmall (U : C) : EssentiallySmall.{r} (Over U) := by
-  sorry
+  exact EssentiallySmall.mk' (Over.postEquiv U (equivSmallModel.{r} C))
 
 attribute [instance] sliceSmall
 
@@ -151,13 +154,31 @@ abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, 
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
+set_option linter.unusedSectionVars false in
 /-- The slice inclusion is continuous for the actual vertical topology.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models).
 Proof: a covering sieve restricts to a covering sieve on its vertical slice by the
 definition of coefficientSequenceTopology. The sheaf condition restricts accordingly. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
-  sorry
+  apply Functor.isContinuous_of_coverPreserving
+  · constructor
+    intro G Z T x hx Y₁ Y₂ X f₁ f₂ g₁ g₂ hg₁ hg₂ he
+    have he' : f₁.2 ≫ g₁ = f₂.2 ≫ g₂ := congrArg Prod.snd he
+    have hx' := hx f₁.2 f₂.2 hg₁ hg₂ he'
+    let q : X ⟶ (n, X.2) := Prod.mkHom f₁.1 (𝟙 _)
+    have e₁ : q ≫ (Prod.sectR n C).map f₁.2 = f₁ := by
+      ext <;> simp [q]
+    have e₂ : q ≫ (Prod.sectR n C).map f₂.2 = f₂ := by
+      apply Prod.hom_ext
+      · exact Subsingleton.elim _ _
+      · simp [q]
+    rw [← e₁, ← e₂, op_comp, op_comp, G.obj.map_comp, G.obj.map_comp]
+    exact congrArg (G.obj.map q.op) hx'
+  · constructor
+    intro U S hS
+    change (S.functorPushforward (Prod.sectR n C)).functorPullback (Prod.sectR n C) ∈ J U
+    exact J.superset_covering (Sieve.le_functorPushforward_pullback _ S) hS
 
 /-- Continuity used by continuous module pushforward along the vertical inclusion.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
@@ -174,7 +195,17 @@ theorem evaluation_ring (n : ℕ) :
       J (coefficientSequenceTopology J)).obj
         (ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)) =
         ring.{c, v, r} J (B n) := by
-  sorry
+  apply ObjectProperty.FullSubcategory.ext
+  refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
+  intro U V f
+  simp only [Functor.sheafPushforwardContinuous_obj_obj_map, Prod.sectR_map,
+    eqToHom_refl, Category.comp_id, Category.id_comp]
+  change (forget₂ CommRingCat.{r} RingCat.{r}).map
+      (((rings.{c, v, r} J B τ).map (𝟙 (op n))).hom.app U) ≫
+        (forget₂ CommRingCat.{r} RingCat.{r}).map ((B n).obj.map f) =
+      (forget₂ CommRingCat.{r} RingCat.{r}).map ((B n).obj.map f)
+  rw [(rings.{c, v, r} J B τ).map_id]
+  simp
 
 /-- Actual evaluation, using the identity identification of its coefficient sheaf.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
@@ -240,7 +271,15 @@ Proof: kernels retain their sectionwise groups and cokernels retain their sheafi
 sectionwise groups; only the ring action is restricted. -/
 theorem res_exact : PreservesFiniteLimits (res.{c, v, r} φ) ∧
     PreservesFiniteColimits (res.{c, v, r} φ) := by
-  sorry
+  let U := SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R)
+  have : PreservesFiniteLimits (res.{c, v, r} φ ⋙ U) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R')))
+  have : PreservesFiniteColimits (res.{c, v, r} φ ⋙ U) :=
+    inferInstanceAs (PreservesFiniteColimits
+      (SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R')))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
+    preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
 /-- Left exactness of scalar restriction.
 Source: Stacks 03CZ (blueprint: def-coef-semilinear-system-models). -/
@@ -316,7 +355,30 @@ theorem restrictionComposition_existsUnique {l m n : ℕ} (h : n ≤ m) (k : m �
       res.{c, v, r} (coefficientMap.{c, v, r} J B τ (h.trans k)),
       ∀ (M : Mod.{c, v, r} J (B n)) (U : Cᵒᵖ),
         HEq (fun x ↦ ((δ.hom.app M).val.app U) x) (fun x : M.val.obj U ↦ x) := by
-  sorry
+  have hcomp : coefficientMap.{c, v, r} J B τ (h.trans k) =
+      coefficientMap.{c, v, r} J B τ k ≫ coefficientMap.{c, v, r} J B τ h := by
+    exact (rings.{c, v, r} J B τ).map_comp (homOfLE k).op (homOfLE h).op
+  let δ : res.{c, v, r} (coefficientMap.{c, v, r} J B τ h) ⋙
+      res.{c, v, r} (coefficientMap.{c, v, r} J B τ k) ≅
+      res.{c, v, r} (coefficientMap.{c, v, r} J B τ (h.trans k)) :=
+    NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        (ModuleCat.restrictScalarsComp'App
+          ((coefficientMap.{c, v, r} J B τ k).hom.app U).hom
+          ((coefficientMap.{c, v, r} J B τ h).hom.app U).hom
+          ((coefficientMap.{c, v, r} J B τ (h.trans k)).hom.app U).hom
+          (congrArg (fun f ↦ (f.hom.app U).hom) hcomp) (M.val.obj U)).symm)
+        (by intros; ext x; rfl))) (by intros; ext U x; rfl)
+  refine ⟨δ, fun _ _ ↦ HEq.rfl, ?_⟩
+  intro δ' hδ'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact congrFun (eq_of_heq (hδ' M U)) x
 
 /-- Derived restriction composition is the localization of the section identity.
 Source: Stacks 03CZ (blueprint: def-coef-semilinear-system-models). -/
@@ -399,7 +461,18 @@ uniqueness. Thus this is the given coefficient map, not a chosen unrelated morph
 theorem systemMap_existsUnique :
     ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,
       ∀ (n : ℕ) (U : Cᵒᵖ), f.hom.app (op (n, U.unop)) = (α n).hom.app U := by
-  sorry
+  let a : rings.{c, v, r} J B τ ⟶ rings.{c, v, r} J F σ :=
+    NatTrans.ofOpSequence α (fun n ↦ by
+      simpa only [rings, Functor.ofOpSequence_map_homOfLE_succ] using (hα n).symm)
+  let f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ :=
+    ⟨Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := C)).functor
+      (Functor.uncurry.map (Functor.whiskerRight a (sheafToPresheaf J CommRingCat.{r})))⟩
+  refine ⟨f, fun _ _ ↦ rfl, ?_⟩
+  intro g hg
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  exact hg U.unop.1 (op U.unop.2)
 
 /-- The coefficient-system map uniquely specified by its components α_n.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
