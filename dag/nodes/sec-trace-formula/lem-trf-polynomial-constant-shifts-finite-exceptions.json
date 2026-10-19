@@ -12,9 +12,76 @@
   "def-weil-polynomial-ring",
   "def-pc-separable-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $p=h\\prime\\ne0$ and let $D=\\{d\\in F[T]:d\\text{ is monic and }d\\mid p\\}$. By [lem-trf-finite-monic-polynomial-divisors], $D$ is finite. Let $D_0$ be its subset consisting of the nonunits, so $D_0$ is finite too.",
+   "uses": [
+    "lem-trf-finite-monic-polynomial-divisors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+   }
+  },
+  {
+   "text": "Fix $b\\in B_h$ and write $f_b=h+b$. The coefficient formula for the derivative in [def-pc-separable-polynomial] gives $f_b\\prime=h\\prime=p$. Since $f_b$ is not separable, no polynomials $U,V$ satisfy $Uf_b+Vp=1$.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-polynomial-field-pid] to the ideal $I=(f_b,p)\\subseteq F[T]$ and choose a generator $g$ with $I=(g)$. Membership $f_b,p\\in(g)$ says that $g$ divides both polynomials. As $p\\ne0$, $g\\ne0$. If $g$ were a unit, then $1\\in I$; but $I$ consists exactly of the sums $Uf_b+Vp$ (these sums form an ideal containing both generators), contrary to step 2. Thus $g$ is a nonzero nonunit common divisor.",
+   "uses": [
+    "lem-pur-polynomial-field-pid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+   }
+  },
+  {
+   "text": "Let $a\\ne0$ be the leading coefficient of $g$ and set $d=a^{-1}g$. Multiplying every coefficient by the nonzero scalar $a^{-1}$ leaves its largest nonzero index unchanged and makes the leading coefficient $1$. Hence $d$ is monic. The equalities $g=ad$ and $d=a^{-1}g$ show that $d$ divides $f_b$ and $p$ and is still a nonunit: a unit inverse for $d$ would give one for $g$. Therefore $d\\in D_0$ and $d\\mid h+b$. This uses only coefficient scaling and the field inverses.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+   }
+  },
+  {
+   "text": "For $d\\in D_0$, put $E_d=\\{b\\in F:d\\mid h+b\\}$. If $b,c\\in E_d$, subtract the two divisibilities to get $d\\mid b-c$. If $b\\ne c$, write $b-c=de$; multiplying by the constant $(b-c)^{-1}$ gives $1=d(e(b-c)^{-1})$, making $d$ a unit, a contradiction. Thus $b=c$, and $E_d$ has at most one element. Step 4 gives $B_h\\subseteq\\bigcup_{d\\in D_0}E_d$. This is a finite union of sets with at most one element, so $B_h$ is finite.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-monic-polynomial-divisors",
+  "def-pc-separable-polynomial",
+  "lem-pur-polynomial-field-pid",
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Agent proof of the finite-exception lemma; derivative/separability convention from Tag 09H1 (fields-definition-separable), lines 1164–1178; polynomial ideal argument as in Tag 09H0 (fields-lemma-irreducible-polynomials), lines 1145–1150. The finite-exception result is not a numbered assertion of these tags."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-separable-monic-approximation",
@@ -109,5 +176,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-polynomial-constant-shifts-finite-exceptions",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and the conclusion. Reused the existing polynomial PID and the derivative/separability definition. One new Mathlib leaf supplies finiteness of monic divisors. The proof constructs a nonunit monic common divisor for every bad shift and shows that any such divisor divides at most one shift by subtracting shifts and inverting a nonzero constant. All subsequent counting is elementary.",
+  "blueprint": "Historical algebraic auxiliary of lem-trf-local-term-locality through the already recorded Temkin/separable-approximation ancestry; realizes the finite-exception ingredient cited in step 4 of lem-trf-separable-monic-approximation. The current blueprint contracting-correspondence route and the unit record are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-25d0ff318",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-25d0ff318 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the split is correct, so this is a PASS with no fixes. The item statement is byte-identical to the live unsplit node and is exactly what step 4 of the parent lem-trf-separable-monic-approximation uses. Only status/proof/proof_deps/proof_origin/split_report changed; blueprint and stmt_deps are untouched. Steps: (1) the new leaf gives a finite set of monic divisors of h′≠0, and its nonunit subset is finite. (2) (h+b)′=h′, and failure of separability is the failure of the Bezout identity in def-pc-separable-polynomial. (3) lem-pur-polynomial-field-pid gives a generator g of (h+b,h′); g≠0 because h′≠0, and g is not a unit because 1 is not in the ideal. (4) Normalizing g by its leading coefficient gives a monic nonunit d in D₀. (5) d dividing both h+b and h+c gives d|b−c, so d would be a unit unless b=c; hence each divisor serves at most one shift and the union is finite. All steps marked elementary really are elementary. New node lem-trf-finite-monic-polynomial-divisors: I checked it against Polynomial.fintypeSubtypeMonicDvd (Mathlib/RingTheory/Polynomial/UniqueFactorization.lean:96–113, hypotheses CommRing+UFD at line 86). The field UFD instance is inferred via DivisionSemiring.isPrincipalIdealRing (PrincipalIdealDomain.lean:72) and to_uniqueFactorizationMonoid (line 371), so it is a genuine leaf. All three search kinds are recorded, the statement is self-contained, it does not restate a clause of the item, and I found no duplicate after scanning about 200 monic/divisor/separable nodes in the DAG. Sources: Stacks fields.tex 09H0 and 09H1 (lines 1130–1178) are background only, and the source field says so; no SGA is cited. Edge cases checked: a linear h, or T^p+aT in characteristic p, gives no exceptions; h=T² gives {0}; h′=0 is excluded, and the hypothesis is needed; finite fields are fine. The only off-unit citation is a Mathlib leaf (PID), so no tool_uses are needed."
  }
 }
