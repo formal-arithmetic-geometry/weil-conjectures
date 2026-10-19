@@ -9,12 +9,7 @@ public import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.OfSequence
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 
 /-!
 # Finite open exchange and coefficient restriction
@@ -39,6 +34,50 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars
+
+attribute [local irreducible] Functor.leftAdjoint
+
+private theorem mate_unit_iso
+    {D₁ D₂ E₁ E₂ : Type*} [Category D₁] [Category D₂] [Category E₁] [Category E₂]
+    {L₁ : D₁ ⥤ D₂} {R₁ : D₂ ⥤ D₁} {L₂ : E₁ ⥤ E₂} {R₂ : E₂ ⥤ E₁}
+    {G : D₁ ⥤ E₁} {H : D₂ ⥤ E₂}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e : R₁ ⋙ G ≅ H ⋙ R₂) (M : D₁) :
+    adj₂.unit.app (G.obj M) ≫
+        R₂.map (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ e.hom)).app M) ≫
+        e.inv.app (L₁.obj M) = G.map (adj₁.unit.app M) := by
+  have hu := unit_mateEquiv_symm adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.hom) M
+  change G.map (adj₁.unit.app M) ≫ e.hom.app (L₁.obj M) =
+    adj₂.unit.app (G.obj M) ≫
+      R₂.map (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ e.hom)).app M) at hu
+  rw [← Category.assoc, ← hu, Category.assoc, Iso.hom_inv_id_app]
+  change G.map (adj₁.unit.app M) ≫ 𝟙 _ = G.map (adj₁.unit.app M)
+  exact Category.comp_id _
+
+private theorem sequence_iso
+    {C : Type*} [Category C] {X Y : ℕ → C}
+    (s : ∀ n, X (n + 1) ⟶ X n) (t : ∀ n, Y (n + 1) ⟶ Y n)
+    (e : ∀ n, X n ≅ Y n)
+    (h : ∀ n, s n ≫ (e n).hom = (e (n + 1)).hom ≫ t n) :
+    ∃ z : Functor.ofOpSequence s ≅ Functor.ofOpSequence t,
+      (∀ n, z.hom.app (Opposite.op n) = (e n).hom) ∧
+      (∀ n, z.inv.app (Opposite.op n) = (e n).inv) := by
+  let f : Functor.ofOpSequence s ⟶ Functor.ofOpSequence t :=
+    NatTrans.ofOpSequence (fun n ↦ (e n).hom) (by
+      intro n
+      simpa only [Functor.ofOpSequence_map_homOfLE_succ] using h n)
+  let g : Functor.ofOpSequence t ⟶ Functor.ofOpSequence s :=
+    NatTrans.ofOpSequence (fun n ↦ (e n).inv) (by
+      intro n
+      simp only [Functor.ofOpSequence_map_homOfLE_succ]
+      apply (cancel_epi (e (n + 1)).hom).mp
+      rw [← Category.assoc, ← h n]
+      simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id,
+        Iso.hom_inv_id_assoc])
+  refine ⟨⟨f, g, ?_, ?_⟩, fun _ ↦ rfl, fun _ ↦ rfl⟩
+  · ext n
+    exact (e n.unop).hom_inv_id
+  · ext n
+    exact (e n.unop).inv_hom_id
 
 variable {B C : Type (u + 1)} [CommRing B] [CommRing C]
 
@@ -75,7 +114,7 @@ theorem coefficientSquare (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (constantRingIso B f).hom ≫ coefficientMap a Y =
       (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap a X) ≫
         (constantRingIso C f).hom := by
-  sorry
+  exact (Scheme.proEtaleConstantInverseImageMap_naturality f (CommRingCat.ofHom a)).symm
 
 /-- Canonical pullback/scalar identification, the mate of identity on direct-image sections.
 Source: Stacks Tags 03D2 and 03CY
@@ -99,6 +138,34 @@ def pushRes (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (coefficients B X) (coefficients C X) (coefficients B Y) (coefficients C Y)
     (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
     (coefficientSquare a f)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    (mateEquiv (Scheme.proEtaleRingModuleAdjunction f
+        (coefficients C X) (coefficients C Y) (constantRingIso C f))
+      (Scheme.proEtaleRingModuleAdjunction f
+        (coefficients B X) (coefficients B Y) (constantRingIso B f))
+      (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans = (pushRes a f).hom := by
+  change (mateEquiv (Scheme.proEtaleRingModuleAdjunction f
+      (coefficients C X) (coefficients C Y) (constantRingIso C f))
+    (Scheme.proEtaleRingModuleAdjunction f
+      (coefficients B X) (coefficients B Y) (constantRingIso B f)))
+      (TwoSquare.mk _ _ _ _ (pullRes a f).hom) =
+    TwoSquare.mk _ _ _ _ (pushRes a f).hom
+  rw [← Equiv.eq_symm_apply]
+  apply TwoSquare.ext
+  intro M
+  simp only [mateEquiv_symm_apply, pullRes, asIso_hom,
+    Scheme.proEtaleRingRestrictionPullbackInv,
+    Scheme.proEtaleRingRestrictionPullbackApp, pushRes, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
+    Functor.comp_map, Category.id_comp]
+  simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
+  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  simp only [Category.id_comp]
+  exact congrArg (fun k ↦ _ ≫ _ ≫ k) (Category.comp_id _).symm
 
 /-- The scalar comparison for extension is the mate of the inverse pullback comparison.
 Source: Stacks Tag 03DI, direct-sum adjunction construction
@@ -212,6 +279,7 @@ theorem exchange_restrictScalars [Finite B] [Finite C] (a : B →+* C)
         (targetResC a gU j').hom.app F := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Scalar restriction preserves the specified open unit and counit.
 Source: Stacks Tag 03DI, explicit summand adjunction
 (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -231,7 +299,12 @@ theorem open_unit_counit [Finite B] [Finite C] (a : B →+* C)
           (res a X).map ((moduleJAdj C j).counit.app N) =
         (moduleJ B j).map ((pullRes a j).inv.app N) ≫
           (moduleJAdj B j).counit.app ((res a X).obj N)) := by
-  sorry
+  constructor
+  · intro F
+    exact mate_unit_iso (moduleJAdj C j) (moduleJAdj B j) (pullRes a j).symm F
+  · intro N
+    exact (mateEquiv_counit_symm (moduleJAdj C j) (moduleJAdj B j)
+      (TwoSquare.mk _ _ _ _ (pullRes a j).inv) N).symm
 
 /-- Scalar restriction preserves the inverse-image/direct-image unit and counit.
 Source: Stacks Tags 03D2 and 03CY
@@ -257,7 +330,28 @@ theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
           (Scheme.proEtaleRingModuleAdjunction f
             (coefficients B X) (coefficients B Y) (constantRingIso B f)).counit.app
               ((res a Y).obj N)) := by
-  sorry
+  let adjC := Scheme.proEtaleRingModuleAdjunction f
+    (coefficients C X) (coefficients C Y) (constantRingIso C f)
+  let adjB := Scheme.proEtaleRingModuleAdjunction f
+    (coefficients B X) (coefficients B Y) (constantRingIso B f)
+  have hm := pullRes_mate a f
+  constructor
+  · intro F
+    have hu := unit_mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom) F
+    change (res a X).map (adjC.unit.app F) ≫
+      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans).app _ =
+        adjB.unit.app _ ≫ (moduleDirectImage B f).map ((pullRes a f).hom.app F) at hu
+    rw [hm] at hu
+    exact hu
+  · intro N
+    have hc := mateEquiv_counit adjC adjB
+      (TwoSquare.mk _ _ _ _ (pullRes a f).hom) N
+    change (modulePullback B f).map
+      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans.app N) ≫
+        adjB.counit.app _ = (pullRes a f).hom.app _ ≫
+          (res a Y).map (adjC.counit.app N) at hc
+    rw [hm] at hc
+    exact hc.symm
 
 /-- The inverse exchange is the specified pulled-back open-unit transpose in every degree.
 Source: Stacks Tag 09AE and the blueprint's inverse-mate normalization
@@ -274,7 +368,8 @@ theorem inverse_unit_transpose (A : Type (u + 1)) [CommRing A] [Finite A]
       ((moduleJAdj A j').homEquiv _ _).symm
         ((modulePullback A gU).map ((moduleJAdj A j).unit.app (F.X i)) ≫
           (moduleSquareG A gU j' j g h).inv.app ((moduleJ A j).obj (F.X i))) := by
-  sorry
+  change (singleBetaInv A gU j' j g h).app (F.X i) = _
+  rfl
 
 /-- Every semilinear chain map commutes with the exchange and its inverse.
 This includes successive strict tower transitions and every composite transition.
@@ -301,7 +396,21 @@ theorem exchange_transition [Finite B] [Finite C] (a : B →+* C)
         (betaC B gU j' j g h hsq).inv.app F ≫
           ((moduleJ B j ⋙ modulePullback B g).mapHomologicalComplex (.up ℤ)).map t ≫
           (sourceResC a j g).hom.app G := by
-  sorry
+  have he := exchange_restrictScalars a gU j' j g h hsq G
+  have hi : (targetResC a gU j').hom.app G ≫
+      (resC a X').map ((betaC C gU j' j g h hsq).inv.app G) =
+      (betaC B gU j' j g h hsq).inv.app ((resC a U).obj G) ≫
+        (sourceResC a j g).hom.app G := by
+    apply (cancel_epi ((betaC B gU j' j g h hsq).hom.app ((resC a U).obj G))).mp
+    rw [← Category.assoc, ← he]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      Iso.hom_inv_id_app_assoc]
+    exact Category.comp_id _
+  constructor
+  · rw [he, ← Category.assoc, (betaC B gU j' j g h hsq).hom.naturality t,
+      Category.assoc]
+  · rw [hi, ← Category.assoc, (betaC B gU j' j g h hsq).inv.naturality t,
+      Category.assoc]
 
 /-- Restriction along the identity has its unique identity-on-sections identification.
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -311,7 +420,40 @@ theorem resId_existsUnique (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     ∃! e : res (RingHom.id A) X ≅ 𝟭 (Modules A X),
       ∀ (M : Modules A X) (W : X.ProEtᵒᵖ) (m : M.val.obj W),
         (e.hom.app M).val.app W m = m := by
-  sorry
+  have hid : ringCoefficientMap (RingHom.id A) X = 𝟙 _ := by
+    change (sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (𝟙 _)) = _
+    exact (congrArg (fun k ↦ (sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map k)
+      ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map_id
+        (CommRingCat.of A))).trans
+      ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map_id _)
+  let e : res (RingHom.id A) X ≅ 𝟭 (Modules A X) :=
+    NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun W ↦
+        ModuleCat.restrictScalarsId'App _
+          (congrArg (fun k ↦ (k.hom.app W).hom) hid) (M.val.obj W)) (by
+        intro W W' f
+        ext m
+        rfl))) (by
+      intro M N f
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro W
+      ext m
+      rfl)
+  refine ⟨e, fun _ _ _ ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext m
+  exact he' M W m
 
 /-- The identity-on-sections identification for identity restriction.
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars). -/
@@ -332,7 +474,32 @@ theorem ambientRes_existsUnique (a : B →+* C) (X : Scheme.{u})
         SheafOfModules.restrictScalars.{u + 1} rC,
       ∀ (M : Modules C X) (W : X.ProEtᵒᵖ) (m : M.val.obj W),
         (e.hom.app M).val.app W m = m := by
-  sorry
+  let e : res a X ⋙ SheafOfModules.restrictScalars.{u + 1} rB ≅
+      SheafOfModules.restrictScalars.{u + 1} rC :=
+    NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun W ↦
+        (ModuleCat.restrictScalarsComp'App (rB.hom.app W).hom
+          ((ringCoefficientMap a X).hom.app W).hom (rC.hom.app W).hom
+          (congrArg (fun k ↦ (k.hom.app W).hom) hr.symm) (M.val.obj W)).symm) (by
+        intro W W' f
+        ext m
+        rfl))) (by
+      intro M N f
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro W
+      ext m
+      rfl)
+  refine ⟨e, fun _ _ _ ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext m
+  exact he' M W m
 
 /-- The fixed comparison for restriction to compatible ambient actions.
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars). -/
@@ -350,7 +517,12 @@ Proof: this is functoriality of constant-sheaf sheafification on ring maps. -/
 theorem coefficientMap_comp {D : Type (u + 1)} [CommRing D]
     (a : B →+* C) (b : C →+* D) (X : Scheme.{u}) :
     ringCoefficientMap a X ≫ ringCoefficientMap b X = ringCoefficientMap (b.comp a) X := by
-  sorry
+  change (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map _ ≫
+      (sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map _ = _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  rfl
 
 /-- The identity-on-sections comparison between successive and composite restriction.
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars). -/
@@ -359,6 +531,63 @@ def resComp {D : Type (u + 1)} [CommRing D] (a : B →+* C) (b : C →+* D)
   ambientRes b X (ringCoefficients B X) (ringCoefficientMap a X)
     (ringCoefficientMap (b.comp a) X)
     (coefficientMap_comp a b X)
+
+section
+
+set_option backward.isDefEq.respectTransparency false
+
+private theorem resId_apply (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
+    (M : Modules A X) (W : X.ProEtᵒᵖ) (m : M.val.obj W) :
+    ((resId A X).hom.app M).val.app W m = m :=
+  (Classical.choose_spec (resId_existsUnique A X)).1 M W m
+
+private theorem pushRes_apply {B C : Type (u + 1)} [CommRing B] [CommRing C]
+    (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) (N : Modules C Y)
+    (W : X.ProEtᵒᵖ) (m : N.val.obj ((Scheme.proEtaleBaseChange f).op.obj W)) :
+    ((pushRes a f).hom.app N).val.app W m = m :=
+  (Classical.choose_spec (Scheme.proEtaleRingRestrictionDirectImage_existsUnique f
+    (coefficients B X) (coefficients C X) (coefficients B Y) (coefficients C Y)
+    (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
+    (coefficientSquare a f))).1 N W m
+
+private theorem push_identity (A : Type (u + 1)) [CommRing A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) (N : Modules A Y) :
+    (pushRes (RingHom.id A) f).hom.app N ≫
+        (moduleDirectImage A f).map ((resId A Y).hom.app N) =
+      (resId A X).hom.app ((moduleDirectImage A f).obj N) := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext m
+  change ((resId A Y).hom.app N).val.app ((Scheme.proEtaleBaseChange f).op.obj W)
+    (((pushRes (RingHom.id A) f).hom.app N).val.app W m) = _
+  rw [pushRes_apply, resId_apply]
+  exact (resId_apply A X ((moduleDirectImage A f).obj N) W m).symm
+
+private theorem left_square_identity
+    {D E : Type*} [Category D] [Category E]
+    {L : D ⥤ E} {R : E ⥤ D} (adj : L ⊣ R)
+    {G : D ⥤ D} {H : E ⥤ E} (eG : G ⟶ 𝟭 D) (eH : H ⟶ 𝟭 E)
+    (p : G ⋙ L ⟶ L ⋙ H) (d : R ⋙ G ⟶ H ⋙ R)
+    (hu : ∀ M, G.map (adj.unit.app M) ≫ d.app (L.obj M) =
+      adj.unit.app (G.obj M) ≫ R.map (p.app M))
+    (hd : ∀ N, d.app N ≫ R.map (eH.app N) = eG.app (R.obj N)) (M : D) :
+    p.app M ≫ eH.app (L.obj M) = L.map (eG.app M) := by
+  apply (adj.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [← Category.assoc, ← hu, Category.assoc, hd]
+  exact (eG.naturality (adj.unit.app M)).trans (adj.unit.naturality (eG.app M))
+
+private theorem pull_identity_aux (A : Type (u + 1)) [CommRing A] [Finite A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) (M : Modules A X) :
+    (pullRes (RingHom.id A) f).hom.app M ≫
+        (resId A Y).hom.app ((modulePullback A f).obj M) =
+      (modulePullback A f).map ((resId A X).hom.app M) := by
+  exact left_square_identity (Scheme.proEtaleRingModuleAdjunction f
+    (coefficients A X) (coefficients A Y) (constantRingIso A f))
+    (resId A X).hom (resId A Y).hom (pullRes (RingHom.id A) f).hom
+    (pushRes (RingHom.id A) f).hom
+    (pull_unit_counit (RingHom.id A) f).1 (push_identity A f) M
 
 /-- The canonical inverse-image and extension scalar identifications preserve identities.
 Source: Stacks Tags 03D2 and 03DI
@@ -376,7 +605,21 @@ theorem scalar_identity (A : Type (u + 1)) [CommRing A] [Finite A]
       (openRes (RingHom.id A) j).hom.app F ≫
           (resId A X).hom.app ((moduleJ A j).obj F) =
         (moduleJ A j).map ((resId A U).hom.app F)) := by
-  sorry
+  constructor
+  · exact pull_identity_aux A j
+  · intro F
+    apply left_square_identity (moduleJAdj A j)
+      (resId A U).hom (resId A X).hom (openRes (RingHom.id A) j).hom
+      (pullRes (RingHom.id A) j).inv
+    · intro M
+      exact unit_mateEquiv_symm (moduleJAdj A j) (moduleJAdj A j)
+        (TwoSquare.mk _ _ _ _ (pullRes (RingHom.id A) j).inv) M
+    · intro N
+      apply (cancel_epi ((pullRes (RingHom.id A) j).hom.app N)).mp
+      simpa only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp] using
+        (pull_identity_aux A j N).symm
+
+end
 
 /-- Pullback and open-extension identifications compose along arbitrary coefficient maps.
 Source: Stacks Tags 03D2 and 03DI
@@ -412,7 +655,7 @@ theorem pull_identity (A : Type (u + 1)) [CommRing A] [Finite A]
     (pullRes (RingHom.id A) f).hom.app M ≫
         (resId A Y).hom.app ((modulePullback A f).obj M) =
       (modulePullback A f).map ((resId A X).hom.app M) := by
-  sorry
+  exact pull_identity_aux A f M
 
 /-- Pullback scalar identifications compose for arbitrary scheme maps.
 Source: Stacks Tags 03D2 and 03CY
@@ -480,6 +723,7 @@ section
 attribute [local irreducible] sourceStep targetStep sourceResC targetResC betaC
   sourceRes targetRes openRes pullRes pushRes beta openResMap
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite exchanges and their inverses form inverse maps of the actual strict towers.
 The natural isomorphism is between towers of complexes, before any localization.
 Source: blueprint strict reduction-tower assertion
@@ -515,7 +759,27 @@ theorem exchange_strict_towers
       (∀ n, e.inv.app (Opposite.op n) =
         ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).map
           ((betaC (A n) gU j' j g h hsq).inv.app (F n))) := by
-  sorry
+  let e n := ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).mapIso
+    ((betaC (A n) gU j' j g h hsq).app (F n))
+  apply sequence_iso _ _ e
+  intro n
+  dsimp only [e, Functor.mapIso_hom, Iso.app_hom]
+  rw [sourceStep, targetStep]
+  let P := (forgetModules (A (n + 1)) X').mapHomologicalComplex (.up ℤ)
+  let q := NatIso.mapHomologicalComplex (resForget (a n) X') (.up ℤ)
+  have hn := congrArg P.map
+    (exchange_transition (a n) gU j' j g h hsq (F (n + 1)) (F n) (t n)).1
+  have hq := q.hom.naturality ((betaC (A n) gU j' j g h hsq).hom.app (F n))
+  change P.map ((resC (a n) X').map
+      ((betaC (A n) gU j' j g h hsq).hom.app (F n))) ≫ q.hom.app _ =
+    q.hom.app _ ≫ ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).map
+      ((betaC (A n) gU j' j g h hsq).hom.app (F n)) at hq
+  simp only [Functor.map_comp] at hn
+  rw [Category.assoc, ← hq]
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun k ↦ k ≫ q.hom.app
+      (((modulePullback (A n) gU ⋙ moduleJ (A n) j').mapHomologicalComplex
+        (.up ℤ)).obj (F n))) hn
 
 end
 
@@ -564,6 +828,7 @@ section
 attribute [local irreducible] ambientSourceStep ambientTargetStep ambientRes sourceStep targetStep
   sourceResC targetResC betaC sourceRes targetRes openRes pullRes
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The same strict-tower isomorphism is linear over every compatible ambient ring sheaf.
 Source: blueprint final ambient-action clause
 (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -605,7 +870,29 @@ theorem exchange_ambient_towers
       (∀ n, e.inv.app (Opposite.op n) =
         ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex (.up ℤ)).map
           ((betaC (A n) gU j' j g h hsq).inv.app (F n))) := by
-  sorry
+  let e n := ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex
+    (.up ℤ)).mapIso ((betaC (A n) gU j' j g h hsq).app (F n))
+  apply sequence_iso _ _ e
+  intro n
+  dsimp only [e, Functor.mapIso_hom, Iso.app_hom]
+  rw [ambientSourceStep, ambientTargetStep]
+  let P := (SheafOfModules.restrictScalars.{u + 1} (r (n + 1))).mapHomologicalComplex
+    (.up ℤ)
+  let q := NatIso.mapHomologicalComplex
+    (ambientRes (a n) X' R (r (n + 1)) (r n) (hr n)) (.up ℤ)
+  have hn := congrArg P.map
+    (exchange_transition (a n) gU j' j g h hsq (F (n + 1)) (F n) (t n)).1
+  have hq := q.hom.naturality ((betaC (A n) gU j' j g h hsq).hom.app (F n))
+  change P.map ((resC (a n) X').map
+      ((betaC (A n) gU j' j g h hsq).hom.app (F n))) ≫ q.hom.app _ =
+    q.hom.app _ ≫ ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex
+      (.up ℤ)).map ((betaC (A n) gU j' j g h hsq).hom.app (F n)) at hq
+  simp only [Functor.map_comp] at hn
+  rw [Category.assoc, ← hq]
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun k ↦ k ≫ q.hom.app
+      (((modulePullback (A n) gU ⋙ moduleJ (A n) j').mapHomologicalComplex
+        (.up ℤ)).obj (F n))) hn
 
 end
 
