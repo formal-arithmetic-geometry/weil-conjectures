@@ -101,7 +101,9 @@ of scalar restriction (blueprint: lem-pur-coefficient-evaluation-derived-left-ad
 theorem coefficientSystem_id_comm (M : CoefficientSystem (J := J) O ell) (n : ℕ) :
     𝟙 (M.level (n + 1)) ≫ M.transition n =
       M.transition n ≫ (coefficientRestriction (J := J) O ell (Nat.le_succ n)).map (𝟙 _) := by
-  sorry
+  have := ‹J.WEqualsLocallyBijective AddCommGrpCat.{w}›
+  have := ‹HasSheafify J AddCommGrpCat.{w}›
+  simp
 /-- Composable compatible families remain compatible. Source: Zheng, Construction 4.1, p. 21.
 Proof: substitute the two commuting squares, then use associativity and preservation
 of composition by restriction (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
@@ -110,7 +112,10 @@ theorem coefficientSystem_comp_comm {M N P : CoefficientSystem (J := J) O ell}
     (f.app (n + 1) ≫ g.app (n + 1)) ≫ P.transition n =
       M.transition n ≫ (coefficientRestriction (J := J) O ell (Nat.le_succ n)).map
         (f.app n ≫ g.app n) := by
-  sorry
+  have := ‹J.WEqualsLocallyBijective AddCommGrpCat.{w}›
+  have := ‹HasSheafify J AddCommGrpCat.{w}›
+  rw [Category.assoc, g.comm, ← Category.assoc, f.comm]
+  simp only [Category.assoc, Functor.map_comp]
 /-- Componentwise identity. Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
 def CoefficientSystem.identity (M : CoefficientSystem (J := J) O ell) : M.Hom M :=
@@ -131,7 +136,25 @@ theorem coefficientSystem_category_laws :
     (∀ (M N P Q : CoefficientSystem (J := J) O ell)
       (f : M.Hom N) (g : N.Hom P) (h : P.Hom Q),
       (f.compose g).compose h = f.compose (g.compose h)) := by
-  sorry
+  have ext {M N : CoefficientSystem (J := J) O ell} (f g : M.Hom N)
+      (h : f.app = g.app) : f = g := by
+    cases f
+    cases g
+    cases h
+    rfl
+  constructor
+  · intro M N f
+    constructor
+    · apply ext
+      funext n
+      exact Category.id_comp (f.app n)
+    · apply ext
+      funext n
+      exact Category.comp_id (f.app n)
+  · intro M N P Q f g h
+    apply ext
+    funext n
+    exact Category.assoc (f.app n) (g.app n) (h.app n)
 /-- The category with precisely the declared objects and componentwise maps.
 Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
@@ -180,7 +203,7 @@ Proof: apply the normalization in the unique abelian-structure theorem
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
 theorem coefficientEvaluation_additive (n : ℕ) :
     (coefficientEvaluation (J := J) (O := O) (ell := ell) n).Additive := by
-  sorry
+  exact coefficientSystem_abelian_exists.exists.choose_spec n
 attribute [instance] coefficientEvaluation_additive
 /-- Evaluation is exact. Source: Zheng, Construction 4.1, p. 21.
 Proof: kernels and cokernels in the constructed abelian category are componentwise;
@@ -193,6 +216,7 @@ theorem coefficientEvaluation_exact (n : ℕ) :
 variable [EssentiallySmall.{w} C]
 variable {R R' : Sheaf J CommRingCat.{w}}
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Scalar extension respects identities. Source: Stacks Tag 03EK.
 Proof: the sectionwise tensor map of the identity is the identity on every pure tensor;
 sheafification preserves identity maps
@@ -201,8 +225,18 @@ theorem siteCoefficientTensor_map_id (φ : R ⟶ R')
     (F : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
     changeOfRingsHom (φ) F (𝟙 F) =
       𝟙 (changeOfRings (φ) F) := by
-  sorry
+  have := ‹HasWeakSheafify J CommRingCat.{w}›
+  have := ‹EssentiallySmall.{w} C›
+  unfold changeOfRingsHom changeOfRings
+  convert (PresheafOfModules.sheafification
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R').obj)).map_id
+      (changeOfRingsPresheaf φ F) using 1
+  congr 1
+  ext U x
+  exact ConcreteCategory.congr_hom
+    ((ModuleCat.extendScalars (φ.hom.app U).hom).map_id (F.val.obj U)) x
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Scalar extension respects composition. Source: Stacks Tag 03EK.
 Proof: on a tensor generator both composites apply the two module maps successively;
 sheafify that equality (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
@@ -212,7 +246,14 @@ theorem siteCoefficientTensor_map_comp (φ : R ⟶ R')
     changeOfRingsHom (φ) F (f ≫ g) =
       changeOfRingsHom (φ) F f ≫
         changeOfRingsHom (φ) G g := by
-  sorry
+  have := ‹HasWeakSheafify J CommRingCat.{w}›
+  have := ‹EssentiallySmall.{w} C›
+  unfold changeOfRingsHom
+  rw [← Functor.map_comp]
+  congr 1
+  ext U x
+  exact ConcreteCategory.congr_hom
+    ((ModuleCat.extendScalars (φ.hom.app U).hom).map_comp (f.val.app U) (g.val.app U)) x
 
 /-- The recorded sheafified sectionwise scalar extension, on objects and maps.
 Source: Stacks Tag 03EK; Zheng, Construction 4.1, p. 21
@@ -225,13 +266,28 @@ def siteCoefficientTensor (φ : R ⟶ R') :
   map_id := siteCoefficientTensor_map_id φ
   map_comp := siteCoefficientTensor_map_comp φ
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The tensor functor is additive. Source: Stacks Tag 03EK.
 Proof: the tensor map is additive in the module-map variable before sheafification, and
 module sheafification is additive
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
 theorem siteCoefficientTensor_additive (φ : R ⟶ R') :
     (siteCoefficientTensor (J := J) φ).Additive := by
-  sorry
+  have := ‹HasWeakSheafify J CommRingCat.{w}›
+  have := ‹EssentiallySmall.{w} C›
+  have hscalar (U : Cᵒᵖ) : (ModuleCat.extendScalars (φ.hom.app U).hom).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).left_adjoint_additive
+  have hsheaf : (PresheafOfModules.sheafification
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R').obj)).Additive :=
+    (PresheafOfModules.sheafificationAdjunction (𝟙 _)).left_adjoint_additive
+  constructor
+  intro F G f g
+  dsimp only [siteCoefficientTensor, changeOfRingsHom]
+  rw [← CategoryTheory.Functor.map_add]
+  congr 1
+  apply PresheafOfModules.hom_ext
+  intro U
+  exact (ModuleCat.extendScalars (φ.hom.app U).hom).map_add (f := f.val.app U) (g := g.val.app U)
 
 attribute [instance] siteCoefficientTensor_additive
 
@@ -252,6 +308,8 @@ def SiteCoefficientTensorAdjunctionNormalized (φ : R ⟶ R')
             ((φ).hom.app U).hom).unit.app
               (F.val.obj U)) x))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The tensor adjunction, uniquely fixed by its action on local tensor generators.
 Source: Stacks Tag 03D7.
 Proof: take the ordinary sectionwise tensor/restriction Hom bijections and then the module
@@ -263,7 +321,31 @@ theorem siteCoefficientTensorAdj_exists (φ : R ⟶ R') :
     ∃! a : siteCoefficientTensor φ ⊣
       restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ),
         SiteCoefficientTensorAdjunctionNormalized φ a := by
-  sorry
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R'))
+  obtain ⟨_, _, h⟩ := sheafRingDerivedCoefficientAdjunction φ
+  obtain ⟨a, ha, _⟩ := h (siteCoefficientTensor φ) (fun _ ↦ rfl) (by
+    intro F G f
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl)
+  have hn : SiteCoefficientTensorAdjunctionNormalized φ a := by
+    intro F G f U x
+    have hx := ha F G f U x
+    simp only [eqToHom_refl, Category.id_comp] at hx
+    convert hx using 1
+    rfl
+  refine ⟨a, hn, ?_⟩
+  intro b hb
+  apply Adjunction.ext
+  ext F U x
+  have he : b.homEquiv F ((siteCoefficientTensor φ).obj F) (𝟙 _) =
+      a.homEquiv F ((siteCoefficientTensor φ).obj F) (𝟙 _) := by
+    ext V y
+    rw [hb, hn]
+  simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id] at he
+  exact ConcreteCategory.congr_hom (congrArg (fun f ↦ f.val.app U) he) x
 
 /-- The specified tensor/restriction adjunction, not a choice of an arbitrary map.
 Source: Stacks Tag 03D7 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/

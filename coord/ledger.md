@@ -16803,3 +16803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/P1/Sheaf.Paper.CoefDerivedSystemEvaluationCalculus (stage 3; reviewer PASS; first push; landing 20261019T005354-L-2759843 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/P1/Sheaf.Paper.PbcRationalTransport (stage 3; reviewer PASS; first push; landing 20261019T005354-L-2760035 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/P2/Sheaf.CategoryTheory.MultivariableDerivedCalculus (stage 3; reviewer PASS; first push; landing 20261019T005355-L-2760207 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/P2-multivariable-private-product-helpers.md)
+- 00:53 L: merged deliver/P2/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (stage 3; reviewer PASS; first push; landing 20261019T005355-L-2760488 (proof); batch 20261019T005255; modules 1; new nodes 0)
