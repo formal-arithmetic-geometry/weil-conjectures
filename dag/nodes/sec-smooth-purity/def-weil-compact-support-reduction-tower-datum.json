@@ -1,0 +1,105 @@
+{
+ "id": "def-weil-compact-support-reduction-tower-datum",
+ "kind": "definition",
+ "title": "Compact-support reduction tower datum",
+ "status": "split",
+ "statement": "Let $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ a finite extension, $R=\\mathcal O_E$ its valuation ring, and $\\varpi$ its uniformizer. Let $f:X\\to Y$ be a separated finite-type morphism of schemes and fix a compactification $c=(X\\xhookrightarrow{j}\\overline X\\xrightarrow{p}Y)$. On the small pro-etale site [def-weil-pbc-proetale-site] let $B_W=\\varprojlim_{m\\geq1}(R/\\varpi^m)_W$, $\\mathcal A_W=\\operatorname{Mod}(B_W)$, and $D(\\mathcal A_W)$ its unbounded derived category [def-weil-abstract-derived-category]. Write $\\operatorname{Tow}(\\mathcal A_Y)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A_Y)$. A compact-support reduction tower datum consists of the following data: an exact $R$-linear functor $T:D(\\mathcal A_X)\\to D(\\operatorname{Tow}(\\mathcal A_Y))$; normalized $R$-actions on $\\mathcal A_X,\\mathcal A_Y$ induced by constant sections; natural evaluation isomorphisms $\\operatorname{ev}_m T\\simeq\\operatorname{Res}_m Rp_{*,m}j_!(-\\otimes^L_{B_X}(R/\\varpi^m)_X)$ identifying every transition for $m\\geq r\\geq1$ with the prescribed quotient-induced compact-support transition, as in [lem-weil-compact-support-reduction-tower-functor]; and a total right-derived inverse-limit functor $L:D(\\operatorname{Tow}(\\mathcal A_Y))\\to D(\\mathcal A_Y)$. The latter carries a natural transformation $Q\\circ\\varprojlim\\to L\\circ Q$ on complexes exhibiting it as the right derived functor, invertible on K-injective complexes, and natural projections $L\\to\\operatorname{ev}_m$. After precomposing with the derived-functor unit, each projection is exactly the image under $Q$ of the ordinary inverse-limit projection. Here $Q$ denotes localization of cochain complexes at quasi-isomorphisms, and the index $i\\in\\mathbf N$ in the Lean representation denotes the positive exponent $i+1$. Assume that $D(\\mathcal A_Y)$ has countable products. The datum includes the tower's shift comparison and triangulatedness; no arbitrary choice from a bare existence assertion is made.",
+ "stmt_deps": [
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "the displayed definition Rf_!K = R lim_n Res_n Rf_{!,n}K_n; the coherent tower and derived-limit interface underlying that displayed construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compact support reduction tower functor datum evaluations derived inverse limit projections",
+   "results": "No exact existing datum; generic derived-category limit declarations only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsRightDerivedFunctor, pbcTowerEvaluation",
+   "results": "No exact match for the bundled construction datum.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CompactSupportReductionTowerDatum|tower datum",
+   "results": "No declaration in Mathlib, WeilConjectures, or lean/Sheaf before this module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent compact support reduction tower with evaluation isomorphisms and normalized derived limit projections",
+   "results": "Generic tower and inverse-limit hits; no construction-owned datum.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-fix-six-functor-datum",
+  "date": "2026-10-18",
+  "group": "Q26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fix-six-functor-datum",
+   "place": "Support construction clause requires a construction-owned tower, evaluations, derived limit and normalized projections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportReductionTowerConstruction",
+  "declaration": "WeilConjectures.CompactSupportReductionTowerConstruction",
+  "declarations": [
+   "WeilConjectures.CompactSupportReductionTowerConstruction"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportReductionTowerConstruction.lean",
+  "statement": "structure CompactSupportReductionTowerConstruction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) [HasCountableProducts (DerivedCategory (scalarReductionSource l E Y))]",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Construction-owned tower/evaluation/derived-limit data with projection normalization; no data is chosen from a bare existence proposition."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98051cef4",
+  "group": "Q26",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98051cef4",
+  "group": "Q26",
+  "result": "fix",
+  "note": "98051cef is a substantive repair, not a re-push (main 55bf2bd7, stages d53bc6f3). It resolves the 5ff2b0/b87e0d/5595aa/4dafee H3/H5 return. New required SixFunctorIntegralNormalization: reduction m to normalized finiteLevels m for all m, with support/pull/open/direct components pinned to the recorded adjuncts (sfCompactSupportChosenReduction, integralPullbackFiniteComparison, the PurCompactSupport open mate, sfDirectImageReductionComparison). The existing coefficient-comparison equations then pin integral comparison, composition, properIdentity, openIdentification and both adjunctions, since the reductions are jointly faithful (lim^1 of finite Homs = 0). SixFunctorCoefficientModelNormalization makes the rationalization and common-stage inclusion components identities, pinning rational and common-stage maps; every object lies in the image. Satisfiability: an HEq->Eq copy of the four projection pins compiles clean (56.6 s); model-normalization object equalities hold by the dependency definitions and the uniqueness statements. Compile: nt_compile --json rc=0, 8.6/45.9/5.8 s at load 55. Item record verbatim; stmt_deps unchanged. FIX = fixes/def-sf-operation-stages.json: stmt_deps and statement citations += def-weil-integral-derived-reduction, def-weil-compact-support-finite-action, def-sf-open-reduction-coefficient-mate (H12; no cycle); lean.declarations deduplicated and the omitted compactification' and sixFunctorFiniteRefinementComparison restored. Advisory: plain decls from theorem-owned modules (unrestrictedTowerResolutionIso, integralOperationsGood*, integralPullbackFiniteComparison, exceptionalOpenAdjunction, PurCompactSupport.finiteReductionIso/finiteOpenIso) need existing:true definition nodes in maintenance; the stages module at 46/60 s may time out at landing, re-land at lower load."
+ }
+}
