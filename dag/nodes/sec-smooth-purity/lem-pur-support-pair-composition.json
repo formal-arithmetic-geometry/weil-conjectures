@@ -16,18 +16,16 @@
  ],
  "proof": [
   {
-   "text": "Take the degreewise adjoints $b:I\\to RJ$ of $h$ and $c:J\\to R_vP$ of $k$. The composite data satisfy the hypotheses of [lem-pur-support-pair-chain-coherence] for $v\\circ u$: precomposition with $v\\circ u$ is $R\\circ R_v$, which preserves abelian sheaves; $M\\circ L$ is additive and exact and left adjoint to $R\\circ R_v$ through the composite Hom bijection; and $(vu)(m)\\circ v(s)s'=v(u(m)s)s'=v(tm')s'=v(t)\\,v(m')s'=v(t)t'm''$. Under that Hom bijection the adjoint of $k\\circ M(h)$ is $R(c)\\circ b$, since transposing $k\\circ M(h)$ across $M\\dashv R_v$ gives $R_v$-adjoint $c\\circ h$, whose transpose across $L\\dashv R$ is $R(c)\\circ b$. Apply clause (1) of [lem-pur-support-pair-chain-coherence] to $h$, to $k$, and to $k\\circ M(h)$ with the composite data. The T-component for the composite is $P(v(t)t')\\circ c_{uT}\\circ b_T=P(t')\\circ P(v(t))\\circ c_{uT}\\circ b_T$. Naturality of the sheaf map $c:J\\to R_vP$ along $t:T'\\to uT$ gives $P(v(t))\\circ c_{uT}=c_{T'}\\circ J(t)$, so this equals $(P(t')\\circ c_{T'})\\circ(J(t)\\circ b_T)$, the composite of the T-components for $k$ and for $h$. The same computation with $s,s'$ and naturality of $c$ along $s$ gives the V-components. The kernel inclusions are monomorphisms, so the kernel map of the composite, being the unique map compatible with the inclusions, equals the composite of the two kernel maps. Hence the diagram map for $k\\circ M(h)$ and $(v\\circ u,v(t)\\circ t',v(s)\\circ s')$ is the composite of the diagram maps for $h$ and $k$.",
-   "uses": [
-    "lem-pur-support-pair-chain-coherence"
-   ],
-   "elementary": false,
+   "text": "For a sheaf morphism h:LF→G and k:MG→H, Adjunction.comp_homEquiv and naturality of the two Hom bijections identify the transpose of M(h)≫k with the transpose of h followed by R applied to the transpose of k. Evaluate at T, and use naturality of the transpose of k along t:T′→uT: G(t)≫c(T′)=c(uT)≫H(v(t)). Contravariant functoriality H(t′≫v(t))=H(v(t))≫H(t′) then proves the composition formula for the ambient sections. Repeat with V,s,s′ for restricted sections. These formulas imply that φ≫ψ satisfies the composite support-pair map condition. Any χ satisfying that condition has the same second and third components. Its first component equals that of φ≫ψ by their commutation with the kernel inclusion, which is monic. This proves chain-level equality directly from the definitions.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
     "place": "Section 9, Theorem 9.4, pp. 65-67, functoriality in the pair; Stacks sites.tex Tag 03CB for composition of site morphisms and adjunction transposition"
    }
   },
   {
-   "text": "If h is replaced by a homotopic representative, clause (2) of [lem-pur-support-pair-chain-coherence] supplies compatible homotopies on the T-, V-, and kernel components; applying the degreewise adjoint of the homotopy for h and then the chain map k gives the same homotopy for the composite. The analogous assertion holds when k is changed. Thus the chain-level equality in Step 1 survives passage to cohomology, and the two routes induce the same maps on all three cohomology groups.",
+   "text": "The composite pair square follows by functoriality: (s′≫v(s))≫v(u(m)) = s′≫v(s≫u(m)) = s′≫v(m′≫t) = (s′≫v(m′))≫v(t) = m″≫(t′≫v(t)). Composite continuity is Functor.isContinuous_comp; composite finite-limit and finite-colimit preservation are comp_preservesFiniteLimits and comp_preservesFiniteColimits. Hence the representative-independence clause of [lem-pur-support-pair-chain-coherence] applies to the composite adjunction and to I,N.",
    "uses": [
     "lem-pur-support-pair-chain-coherence"
    ],
@@ -38,7 +36,7 @@
    }
   },
   {
-   "text": "For bounded-below injective representatives $I,J,P$, clause (2) of [lem-pur-support-pair-chain-coherence] says that every derived morphism has a chain representative unique up to homotopy and that the three induced cohomology maps are unchanged under replacing representatives. Since $M$ is exact, $Q(M(h))$ is $M$ applied to the derived morphism represented by $h$, so $k\\circ M(h)$ represents the composite derived morphism. Apply clause (2) once to $h$, once to $k$, and once to the composite with the data checked in Step 1. The equality from Steps 1–2 is therefore independent of all representative choices and is precisely the asserted composition identity on cohomology.",
+   "text": "Put q=M(h)≫k. Functoriality of standardDerivedQ, the hypothesis Q(k)=b, and the displayed hypothesis on Q(g) show Q(q)=Q(g). By Step 1, φ≫ψ satisfies the composite support-pair condition for q, whereas χ satisfies it for g by hypothesis. Apply the equal-derived-representatives clause of [lem-pur-support-pair-chain-coherence] to q,g and these two diagrams. It directly gives supportCohomologyEqual (φ≫ψ) χ; the hypotheses needed are exactly bounded-below injectivity of I and N. No new representative or homotopy construction is needed.",
    "uses": [
     "lem-pur-support-pair-chain-coherence"
    ],
@@ -55,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Section 9, Theorem 9.4, pp. 65-67, with the composition calculation written from the adjunction Hom-bijections and the chain-level refinement in lem-pur-support-pair-chain-coherence"
+  "place": "Section 9, Theorem 9.4, pp. 65-67. X2 proves the component composition formula directly by Adjunction.comp_homEquiv and naturality, then invokes the existing chain-coherence equal-derived-representatives clause for the composite adjunction."
  },
  "mathlib_searches": [
   {
@@ -157,5 +155,15 @@
   "group": "Q14",
   "result": "fix",
   "note": "Clause-by-clause match of supportPairComposition to the node: sites/universes, continuous u,v, real adjunctions adjL/adjM with additive exact L,M, SupportPairs, squares in diagrammatic order, composite data (t' ≫ v.map t, s' ≫ v.map s) with adjL.comp adjM; rfl confirms (u⋙v).sheafPushforwardContinuous = v.sheafPushforwardContinuous ⋙ u.sheafPushforwardContinuous, so the identification is canonical. First conjunct is χ = φ ≫ ψ. Derived conjunct is true (g homotopic to M h ≫ k since N is K-injective) and does not follow from the first conjunct. The dependency §1(B) change, diffed against the landed version, only generalizes coefficients to AddCommGrpCat.{w₀}; no importers; node records differ only in lean. Statements verbatim, no line over 100 characters, one sorry per module, axioms standard plus sorryAx, docstrings have source and blueprint tags with Steps 1-3. nt_compile --json on both snapshot files: rc 0, no errors or warnings; probe shows the theorem elaborates at AddCommGrpCat.{u+1}. Only finding: the item lean record lacks the declarations list for the helper compositeSupportPairMapCondition; fixed in fixes/lem-pur-support-pair-composition.lean-record.json listing both declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261019T112614-L-3961247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
