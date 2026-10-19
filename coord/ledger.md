@@ -16755,3 +16755,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction (stage 3; reviewer PASS; first push; landing 20261019T005309-L-2749800 (interface); batch 20261019T005255; modules 1; new nodes 1; change records: coord/changes/K1-supported-reconstruction-imports.md)
 - 00:53 L: merged deliver/K1/Sheaf.Paper.AdicCoefficientDatum (stage 3; reviewer PASS; first push; landing 20261019T005309-L-2749899 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/K1/Sheaf.Paper.FiniteCoefficientFlatModel (stage 3; reviewer PASS; first push; landing 20261019T005310-L-2750067 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:53 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ProEtaleTorsorComparisonAffine (stage 3; reviewer PASS; first push; landing 20261019T005310-L-2750168 (proof); batch 20261019T005255; modules 1; new nodes 0)

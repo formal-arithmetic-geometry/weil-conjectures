@@ -22,148 +22,71 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}R$. Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to $T\\to *$ over $X$ to obtain a covering with local sections. The finite-affine refinement in [sk-def-pe-site] gives finitely many affine opens $W_b=\\operatorname{Spec}B_b$ in its members which cover $X$ and retain those sections. Put $W=\\coprod_bW_b=\\operatorname{Spec}(\\prod_bB_b)$ by [lem-weil-pbc-finite-affine-coproduct-spectrum]. Its summands are disjoint open subschemes by [lem-weil-pbc-scheme-coproduct-family], so [lem-weil-pbc-weakly-etale-source-locality] makes $W\\to X$ weakly étale. It is surjective, and its affine source makes it a pro-étale singleton covering by the covering condition in [sk-def-pe-site]. The sheaf equalizer axiom applied to the disjoint open covering of $W$ glues the chosen sections to $s_W\\in T(W)$: intersections of different summands are empty and a sheaf takes the empty scheme to a singleton. This finite refinement uses the fpqc topology condition, not a claim that arbitrary weakly étale images are open.",
+   "text": "The image sieve of the epic terminal map covers. Take the family of every pro-etale object equipped with a section. The inverse of the torsor pair map gives an explicit local isomorphism from the restricted group to the restricted torsor. Restriction is the scheme inverse image by the map/pullback adjunction. The canonical comparison/pullback isomorphism identifies the restricted group as the inverse image of its etale inverse image. Thus T is locally classical.",
    "uses": [
     "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
     "sk-def-pe-site",
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-weakly-etale-source-locality"
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-comparison-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, lemma-compare-cohomology-nonabelian, affine reduction; Tag 098D, lemma-proetale-affine. Finite disjoint-union step expanded."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [sk-thm-pe-indetale-refinement] to $R\\to B=\\prod_bB_b$. It gives a faithfully flat ind-étale $B\\to B'$ such that $R\\to B'$ is ind-étale. Set $U=\\operatorname{Spec}B'$ and pull $s_W$ back to $s\\in T(U)$. The affine morphism $U\\to W$ is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum] and weakly étale by [lem-weil-pbc-ind-etale-stability]; hence $U\\to X$ is a singleton covering by [sk-def-pe-site]. By [def-weil-pbc-ind-etale-algebra], choose a small nonempty cofiltered presentation $U=\\varprojlim_iU_i$ by affine étale finitely presented $X$-schemes, with affine transitions. Every $U_i\\to X$ is surjective, because the surjection $U\\to X$ factors through it; it is therefore a singleton étale covering. This obtains one ind-étale trivializing affine without assuming closure under finite products of ind-étale algebras.",
+   "text": "Apply the first clause of lem-weil-pbc-proetale-locally-classical-etale-cover to obtain an etale sheaf P and an isomorphism e from its comparison inverse image to T. This general theorem contains the affine-continuity and descent argument of Bhatt--Scholze Lemma 5.1.4, so no separate torsor cocycle construction is needed here.",
    "uses": [
-    "sk-thm-pe-indetale-refinement",
-    "lem-weil-pbc-ind-etale-stability",
-    "sk-def-pe-site",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, choice of U and its presentation; Tag 097Z, proposition-weakly-etale."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $p_1,p_2:U\\times_XU\\to U$ be the projections. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], evaluation of the torsor isomorphism $G\\times T\\xrightarrow{\\sim}T\\times T$ gives a bijection on sections. Thus there is a unique $g\\in G(U\\times_XU)$ with $s_1=g\\cdot s_2$. On $U^3_X$, the equalities $s_1=g_{12}s_2=g_{12}g_{23}s_3$ and $s_1=g_{13}s_3$ imply $g_{13}=g_{12}g_{23}$ by this uniqueness. This is the left-action convention used below; no commutativity of $G$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, transition element and cocycle; blueprint affine proof Step 2 (left-action convention)."
-   }
-  },
-  {
-   "text": "For $n=2,3$ there is a canonical limit $U^n_X=\\varprojlim_i(U_i)^n_X$. Indeed a compatible map from any test scheme to the right-hand diagram is exactly $n$ compatible maps to the $U_i$ with the same map to $X$, hence exactly $n$ maps to $U$ over $X$. The stages are affine by repeated [lem-weil-pbc-fibre-product-affine-spectra], and étale by [lem-weil-pbc-etale-base-change-finite-limits]. For finite presentation, if $U_i=\\operatorname{Spec}A_i$ and $A_i=R[\\mathbf t]/(\\mathbf f)$ with finite tuples, its $n$-fold tensor power is $R[\\mathbf t_1,\\ldots,\\mathbf t_n]/(\\mathbf f(\\mathbf t_1),\\ldots,\\mathbf f(\\mathbf t_n))$, again finitely presented. Their limits are affine ind-étale over $X$ by [lem-weil-pbc-ind-etale-stability]. Thus the set-sheaf clause of [lem-weil-pbc-comparison-sections] applies, giving $G(U^n_X)=\\varinjlim_iG_0((U_i)^n_X)$. Naturality of that formula gives compatibility with every projection and with multiplication (apply it to the group operations as sheaf maps). These are affine finite-presentation presentations over the affine $X$, exactly as required by that node.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-comparison-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099S, lemma-limit-pullback; Tag 099X, the two displayed colimit formulas."
-   }
-  },
-  {
-   "text": "By clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise], represent $g$ by some $g_i\\in G_0(U_i\\times_XU_i)$. The images of $g_{i,13}$ and $g_{i,12}g_{i,23}$ agree in the triple-product colimit. Clause (3) of the same node gives one later transition on which they are equal. Replace $i$ by that stage and put $V=U_i$ and $c=g_i$. Then $c_{13}=c_{12}c_{23}$. Pullback along the triple diagonal gives $c_{11}=c_{11}^2$, hence diagonal restriction $c=1$; the map $(x,y)\\mapsto(x,y,x)$ gives $c_{12}c_{21}=1$. These identities include the repeated-index and inverse conditions for a descent datum.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, descending g and its cocycle identity to one stage; the normalization identities are written out."
-   }
-  },
-  {
-   "text": "On $V\\times_XV$ define an isomorphism of local sheaves $\\phi_{12}:G_0|_{V,1}\\to G_0|_{V,2}$ by $h\\mapsto h c_{12}$. Its inverse is right multiplication by $c_{12}^{-1}$. The cocycle gives $\\phi_{23}\\phi_{12}(h)=h c_{12}c_{23}=h c_{13}=\\phi_{13}(h)$. Apply [lem-pe-set-sheaf-cover-descent] to the singleton covering $V\\to X$ and this datum to obtain a set sheaf $T_0$ with local coordinate $e:T_0|_V\\xrightarrow{\\sim}G_0|_V$. Form the product sheaves sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Left multiplication commutes with the transition $h\\mapsto h c_{12}$; the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] therefore glues the local action maps to a $G_0$-action. Associativity and the unit law hold after the covering and hence globally, by uniqueness in the sheaf axiom. Let $s_0=e^{-1}(1)\\in T_0(V)$. On overlaps the coordinate relation is $h_2=h_1c_{12}$, so $s_{0,1}=c_{12}s_{0,2}$. Locally $G_0\\times T_0\\to T_0\\times T_0$ has inverse $(a,b)\\mapsto(ab^{-1},b)$ in these coordinates; these inverses agree on overlaps because $(a c)(b c)^{-1}=a b^{-1}$ and the second coordinate changes from $b$ to $b c$, so they glue by the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] and are inverse globally. Also every object has a covering by its base change to $V$, where $s_0$ supplies a section. Hence $T_0\\to *$ is epic by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], and $T_0$ is a $G_0$-torsor with a section over the affine étale surjection $V$.",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, final paragraph: omitted cocycle-to-torsor construction; filled using sites.tex Tags 04TR and 04TQ."
-   }
-  },
-  {
-   "text": "Put $F=\\nu_X^*T_0$, with the pulled-back action of $G=\\nu_X^*G_0$; finite-limit preservation from [def-weil-pbc-site-comparison-morphism] supplies the product identifications for this action. The adjunction unit, evaluated at $V$, pulls $s_0$ to a section $s'_0\\in F(V)$, and then to $s'\\in F(U)$. The identity $s_{0,1}=c s_{0,2}$ pulls back to $s'_1=g s'_2$. We verify explicitly that $h\\mapsto h s'$ is an isomorphism $G|_U\\to F|_U$. It suffices by [lem-weil-pbc-ind-etale-basis] to evaluate on affine ind-étale $X$-objects $Z\\to U$. Both $Z$ and $V$ are ind-étale over $X$, so [lem-weil-pbc-ind-etale-stability] makes $Z\\to V$ ind-étale. Present $Z=\\varprojlim_a Z_a$ with $Z_a$ affine étale of finite presentation over $V$, using [def-weil-pbc-ind-etale-algebra]. These are also affine étale of finite presentation over $X$ by composition [lem-weil-pbc-etale-composition-cancellation]. Finite presentation under this composition follows directly from presentations: if $V=\\operatorname{Spec}(R[\\mathbf t]/(\\mathbf f))$ and $Z_a=\\operatorname{Spec}((R[\\mathbf t]/(\\mathbf f))[\\mathbf y]/(\\mathbf q))$, choose polynomial lifts $\\widetilde{\\mathbf q}$ and obtain the finite presentation $R[\\mathbf t,\\mathbf y]/(\\mathbf f,\\widetilde{\\mathbf q})$. The local coordinate $e$ gives natural bijections $T_0(Z_a)\\cong G_0(Z_a)$ carrying $s_0|_{Z_a}$ to $1$. Applying [lem-weil-pbc-comparison-sections] to this presentation identifies $F(Z)\\cong G(Z)$, with inverse $h\\mapsto h s'|_Z$. Naturality makes these local inverses compatible under restrictions. Thus this is a local isomorphism of $G$-sheaves, without an unsupported assertion that inverse image commutes with localization.",
+   "text": "Conjugate the given action by e. The comparison unit is invertible, hence the comparison inverse image is fully faithful. Its finite-product-preserving monoidal structure allows taking the preimage of the cotensorator followed by the conjugated action. Apply faithfulness after tensorator naturality and coherence to prove both action laws. The image of the etale pair map is the conjugated pro-etale pair map up to invertible product comparisons, so full faithfulness reflects its invertibility. The image of the terminal map is epic, hence faithfulness reflects its epimorphism. All conjugation, action-law, isomorphism and epimorphism calculations are proved explicitly in private Lean helpers.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-comparison-sections"
+    "lem-weil-pbc-proetale-comparison-unit-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Blueprint affine proof Step 5; Tag 099S applied on affine presentations over V; the localization compatibility is proved on the affine basis."
-   }
+   "elementary": true
   },
   {
-   "text": "The torsor axiom makes $G|_U\\to T|_U$, $h\\mapsto hs$, an isomorphism. Combine it with the preceding local isomorphism to obtain $\\alpha_U:F|_U\\xrightarrow{\\sim}T|_U$, sending $s'$ to $s$. On $U\\times_XU$, an element with coordinate $h$ relative to $s'_1$ has coordinate $hg$ relative to $s'_2$. The two proposed images are $h s_1$ and $(hg)s_2$, equal because $s_1=g s_2$. Thus the two pullbacks of $\\alpha_U$ agree on all local sections; the same holds for their inverses. Apply the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] to the covering $U\\to X$ to glue both maps. Their composites restrict to identities, so uniqueness of gluing makes them inverse globally. Equivariance is an equality of maps and is checked over the covering. We obtain an isomorphism of $G$-sheaves $\\nu_X^*T_0\\cong T$, and therefore an isomorphism of $G$-torsors.",
+   "text": "Apply the finite affine covering-sieve refinement to the image sieve of P to the terminal etale sheaf on the identity object. Put the resulting finite affine etale family into the affine pro-etale site, using the existing sigmaCover spectrum-of-product construction. Its component inclusions are open immersions and cover its affine source, so etale source locality makes its structure map etale. Joint surjectivity of the original finite family gives surjectivity. Transport its local sections through the comparison unit and apply AffineProEt.exists_sigmaCover_glue to the restricted comparison inverse image. The comparison unit is invertible on the resulting etale object, so its inverse returns the glued section to P. The lifted finite index allows arbitrary universe u and includes the empty family.",
    "uses": [
-    "lem-pe-set-sheaf-cover-descent"
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-proetale-comparison-unit-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, final paragraph: pullback torsor is isomorphic by construction; overlap and inverse-map calculations expanded (Sites Tag 04TQ)."
-   }
+   "elementary": false
   },
   {
-   "text": "Condition (1) of [det-pe-classical-sheaves-image] holds for $T$ with witness $T_0$, so its equivalent condition (2) proves that $T$ is classical. The section $s'_0\\in F(V)$ maps to a section of $T(V)$ under the global comparison isomorphism. Since $V\\to X$ is an affine étale surjection, it is the claimed étale trivializing covering; the torsor axiom identifies a torsor with its group after a chosen section. This proves every clause, including $T_0(V)\\ne\\varnothing$.",
+   "text": "Use the essential-image criterion with witness P to prove IsClassical T. The action preimage identity followed by e proves the required equivariance equation. Map the section of P through the comparison unit and then e to obtain a section of T on exactly the same affine etale surjection.",
    "uses": [
     "det-pe-classical-sheaves-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.proof.md",
-    "place": "Blueprint affine proof Step 5, last sentence; classical essential-image criterion."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "sk-def-pe-site",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-proetale-comparison-unit-sets",
+  "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+  "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-finite-affine-coproduct-spectrum",
   "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-weakly-etale-source-locality",
-  "sk-thm-pe-indetale-refinement",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-pe-set-sheaf-cover-descent",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-etale-composition-cancellation",
   "det-pe-classical-sheaves-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.proof.md",
-  "place": "Steps 1–5, expanded using Stacks Tags 099X, 098D, 097Z, 099S, 04TR and 04TQ; left-action convention as in the blueprint."
+  "group": "K2",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.2 and 5.1.4, with the affine disjoint-union reduction of Stacks Tag 099X; explicit categorical action reflection and conjugation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -255,9 +178,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-comparison-sections",
   "def-weil-pbc-site-comparison-morphism",
   "lem-weil-pbc-ind-etale-basis",
   "det-pe-classical-sheaves-image"
@@ -305,5 +225,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Group sheaves are Mathlib internal group objects in set sheaves; all torsor action laws, the pair-map isomorphism and the terminal-map epimorphism are explicit. The comparison abbreviation unfolds to the publicly retained original-site inverse image, and its monoidal structure is the canonical one supplied by finite-product preservation. No new torsor notion or arbitrary comparison map is introduced. Nonempty sections on the stated cover express triviality using the torsor pair-map isomorphism."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-fc08c",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261019T005310-L-2750168",
+  "kind": "proof",
+  "note": "independent cc review: delivered ProEtaleTorsorComparisonAffine.lean (compiled clean, importer TorsorComparisonGlue compiled clean, axioms sorryAx only via sorry'd proEtaleClassicalSheavesImage, each import needed) and node det-pe-torsor-comparison-affine proof/proof_deps against the Lean; unit sk-lem-pe-torsor-comparison realized is empty, so dropping the ProEtaleSiteComparison import bypasses nothing (still used transitively)"
  }
 }
