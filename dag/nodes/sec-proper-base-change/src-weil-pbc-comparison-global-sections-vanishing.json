@@ -1,0 +1,111 @@
+{
+ "id": "src-weil-pbc-comparison-global-sections-vanishing",
+ "kind": "statement",
+ "title": "Global sections vanishing under comparison pullback",
+ "statement": "Let $X$ be a scheme, and let $A$ be a Grothendieck abelian coefficient category in the common site universe. Let $M$ be an etale $A$-valued sheaf and $q$ a nonnegative integer. If $R^q\\Gamma(X_{\\mathrm{et}},M)$ is zero, then $R^q\\Gamma(X_{\\mathrm{proet}},\\nu_X^*M)$ is zero. Both section functors are evaluation at the terminal identity object, and the comparison inverse image is that of [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean",
+  "place": "isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj, lines 211-252"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "This is the existing source-library lemma. Its proof identifies global sections after comparison direct image with pro-etale global sections, derives that composition using preservation of injectives, and uses the invertible bounded-below comparison unit. Homology and the single-object derived comparison give an isomorphism with the original etale right-derived sections; transport the assumed zero object along it.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-derived-sections-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-derived-sections-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean",
+  "place": "Existing proof of isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For etale sheaves positive derived global sections vanish after pro-etale comparison if they vanish before comparison",
+   "results": "8 hits: smallEtaleTopology, formallyEtale, etale locality, condensed sheaf constructions, Sheaf.coneΓ_π_app, RingHom.Etale, IsEtale.of_comp; no comparison cohomology theorem.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the etale cohomology of a sheaf in a degree vanishes then the proetale cohomology of its comparison pullback vanishes in that degree",
+   "results": "8 hits about formal etaleness and cotangent cohomology; no match.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsZero\"",
+   "results": "Functor.isZero_rightDerived_obj_injective_succ; vanishing for injectives only.",
+   "verdict": "ingredient only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_rightDerivedFunctorPlusBaseChange|isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj",
+   "results": "msearch Mathlib grep returned no hits. Repository rg located the exact source lemma in Comparison/LowerStarAcyclic.lean at lines 214-252; its full signature and proof were read.",
+   "verdict": "existing source declaration attached",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized",
+  "date": "2026-10-18",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-comparison-global-cohomology",
+   "place": "Proof paragraph: apply terminal-object derived-sections identity to the invertible derived unit; specialize the resulting comparison to positive vanishing for injectives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+  "declaration": "AlgebraicGeometry.ProEtale.isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj",
+  "statement": "lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Scheme.{u})\n    (M : Sheaf X.smallEtaleTopology A) (q : ℕ)\n    (h : IsZero (((Etale.sectionsFunctor A X).rightDerived q).obj M)) :\n    IsZero (((globalSectionsFunctor A X).rightDerived q).obj\n      ((comparisonUpperStar A X).obj M))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-18",
+  "note": "Already proved source lemma; no new Lean declaration or sorry is introduced. The ambient parameters are A : Type u', Category.{u+1} A, Abelian A, IsGrothendieckAbelian.{u+1} A."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b4981",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002539-L-2151146",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b4981",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002539-L-2151146",
+  "kind": "proof",
+  "note": "independent cc review: isIso_finiteComparisonGlobalSections proof (axioms propext/choice/Quot.sound only) against node lem-weil-pbc-comparison-global-cohomology, src node vs LowerStarAcyclic.lean:214 verbatim, unit sk-thm-properbasechange realized list vs removed imports (ProEtaleSiteComparison still reached via FiniteLevel public import), 11 direct importers compiled against the delivered module"
+ }
+}

@@ -6,10 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Canonical finite-coefficient global comparison
@@ -80,6 +78,33 @@ the claimed ordinary RΓ comparison. -/
 theorem isIso_finiteComparisonGlobalSections (T : Scheme.{u})
     (A : Type (u + 1)) [Ring A] [Finite A] :
     IsIso (finiteComparisonGlobalSections T A) := by
-  sorry
+  let G := sheafToPresheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
+    (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 T)))
+  let G' := sheafToPresheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A) ⋙
+    (evaluation _ _).obj (op ((Scheme.toProEt T).obj (Scheme.Etale.mk (𝟙 T))))
+  let β := comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let γ := 𝟭 (ModuleCat.{u + 1} A)
+  let e := finiteComparisonGlobalSectionsUnit T A
+  have hβ : PreservesFiniteLimits β :=
+    (siteComparison_finiteLevel T A).1
+  have hβ' : PreservesFiniteColimits β :=
+    (siteComparison_finiteLevel T A).2.1
+  have : PreservesFiniteLimits β := hβ
+  have : PreservesFiniteColimits β := hβ'
+  have hu (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+      IsIso ((finiteComparisonGlobalSectionsUnit T A).app F) := by
+    change IsIso (((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F).hom.app
+      (op (Scheme.Etale.mk (𝟙 T))))
+    have := isIso_comparisonAdjunction_unit (ModuleCat.{u + 1} A) T
+    infer_instance
+  have : IsIso (finiteComparisonGlobalSectionsUnit T A) := NatIso.isIso_of_isIso_app _
+  have hG' : PreservesFiniteLimits G' := by infer_instance
+  have : PreservesFiniteLimits G' := hG'
+  have h := Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
+    (G := G) (G' := G') (β := β) (γ := γ) (asIso e)
+    (fun I _ q ↦ isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj
+      (ModuleCat.{u + 1} A) T I (q + 1)
+      ((Functor.rightAcyclic_of_injective I) q))
+  exact h
 
 end AlgebraicGeometry.ProEtale

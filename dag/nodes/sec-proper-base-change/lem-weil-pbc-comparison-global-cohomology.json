@@ -20,41 +20,42 @@
  ],
  "proof": [
   {
-   "text": "For a bounded-below complex J of pro-etale Λ-module sheaves, exactness of ν_T^* from [prop-weil-pbc-site-comparison-finite-level] implies that its right adjoint ν_{T,*} preserves injectives. Resolving J by injectives, ν_{T,*} computes the derived direct image, and evaluation on the final object identifies Γ(T_Et,ν_{T,*}J^r) with Γ(T_Proet,J^r) termwise. Therefore the derived-sections identity RΓ(T_Et,Rν_{T,*}J) ≅ RΓ(T_Proet,J) is the preceding node.",
+   "text": "Let G and G' be evaluation at the terminal étale and pro-étale objects, and let e be the displayed adjunction-unit evaluation. The finite-level comparison proposition gives finite-limit and finite-colimit preservation for the comparison inverse image. Its ordinary adjunction unit is invertible by the comparison full-faithfulness theorem. The generic bounded-below right-derived base-change theorem therefore applies once the pro-étale terminal evaluation of every pulled-back injective is right-acyclic.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-derived-sections-pushforward"
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
-    "place": "Proof, first paragraph through “Thus RΓ_Et Rν_{T,*}=RΓ_Proet.”"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/lem-weil-pbc-comparison-global-cohomology.proof.md",
+    "place": "Proof paragraph: exact comparison inverse image and the derived unit."
    }
   },
   {
-   "text": "Apply that identity to J=ν_T^*K. The derived unit K→Rν_{T,*}ν_T^*K is an isomorphism by [thm-weil-pbc-site-comparison], so applying RΓ(T_Et,−) gives the claimed natural isomorphism RΓ(T_Et,K) ≅ RΓ(T_Proet,ν_T^*K).",
+   "text": "The terminal-evaluation acyclicity is the global-sections comparison lemma: for every injective étale module sheaf I, all positive right-derived global sections of its comparison pullback vanish. Applying Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic to e gives the isomorphism of the bounded-below derived evaluation functors, which is definitionally the finiteComparisonGlobalSections transformation.",
    "uses": [
-    "lem-weil-pbc-derived-sections-pushforward",
-    "thm-weil-pbc-site-comparison"
+    "src-weil-pbc-comparison-global-sections-vanishing",
+    "src-right-derived-functor-plus-base-change-of-right-acyclic",
+    "lemma-weil-pbc-leray-acyclicity"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
-    "place": "Proof, final sentence “Apply this identity to the derived unit...”"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/lem-weil-pbc-comparison-global-cohomology.proof.md",
+    "place": "Proof paragraph: terminal-object evaluation and the resulting derived global comparison."
    }
   }
  ],
  "proof_deps": [
   "prop-weil-pbc-site-comparison-finite-level",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-derived-sections-pushforward",
-  "thm-weil-pbc-site-comparison"
+  "src-weil-pbc-comparison-global-sections-vanishing",
+  "src-right-derived-functor-plus-base-change-of-right-acyclic",
+  "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/lem-weil-pbc-comparison-global-cohomology.proof.md",
+  "place": "Short route through the generic right-derived base-change theorem and terminal-evaluation acyclicity."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -154,5 +155,15 @@
    "def-weil-pbc-etale-cohomology",
    "def-weil-pbc-site-comparison-morphism"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b4981",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002539-L-2151146",
+  "kind": "proof",
+  "note": "independent cc review: isIso_finiteComparisonGlobalSections proof (axioms propext/choice/Quot.sound only) against node lem-weil-pbc-comparison-global-cohomology, src node vs LowerStarAcyclic.lean:214 verbatim, unit sk-thm-properbasechange realized list vs removed imports (ProEtaleSiteComparison still reached via FiniteLevel public import), 11 direct importers compiled against the delivered module"
  }
 }
