@@ -183,5 +183,38 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-be1862f6d (reviewer sub-agent of L); spot-checked: I read everything in full: the item, all 7 steps, the cited statements (def-exchange-projection, def-sf-datum, lem-pur-derived-pullback-tensor-iso, and lem-cbc-extension-zero-projection-formula for gamma), the unit sk-prop-sf-pf-coherence, the main-20261015 prop-sf-pf-coherence.proof.md base-change paragraph (lines 18-40) and the parent's step 5, which is the only citer and uses the same notation. Types: I checked by hand the sources and targets of z_K, d and v and of both hypotheses and the conclusion. v gives the correct target identification La^*JFL to J'F'GL (sigma, then J' theta_L^{-1}). The statement is not weakened: the two factor identities are proved in the parent's steps 3 and 4, nothing is assumed invertible, and the higher-stage domain restriction is kept. Proof: I redid steps 2-5 myself. Naturality of gamma_{j'} at t=theta_L^{-1} plus the bifunctor law gives vH(c)=c'(b x 1)d. Naturality of e at c:Q->T, the proper hypothesis and first-variable naturality of pi_{p'} at b then give exactly the right side. Steps 6 and 7 (composites of intertwined arrows; conjugating an equality) are elementary. Minor points I accept: step 1 says the definition gives PF^c=R(gamma_j)pi_p, but def-exchange-projection's gamma also includes Lj^*Lp^*=Lf^*; the item itself fixes the bare-gamma convention, so this is harmless. Naturality of gamma in a general second variable is part of the canonical open tensor map (stated outright at the higher stages). Edge cases checked: g=id, K=0 or L=0, j=id, non-invertible e and pi. No new nodes. No duplicates: I checked lem-cbc-proper-open-interchange-coherence and lem-fix-projection-compactification-comparison. FIX: step 6 cites lem-pur-derived-pullback-tensor-iso, which belongs to unit sk-def-purity-conv; that unit is not in the transitive route of sk-prop-sf-pf-coherence, and the worker did not declare it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-sf-pf-compactification-pasting.json; nothing else changed. Accepted tool_use: lem-pur-derived-pullback-tensor-iso (generic naturality of the pullback-tensor comparison, already accepted on the parent).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationProjectionPasting",
+  "declaration": "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.compactification_pasting",
+  "declarations": [
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.properExchange",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.properProjection",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.properProjection'",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.tensorTarget",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.openTarget",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.targetComparison",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.projection",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.leftPath",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.rightPath",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.FactorIdentities",
+   "CategoryTheory.SuppliedExchangeProjection.CompactificationPastingData.compactification_pasting"
+  ],
+  "file": "lean/Sheaf/Paper/CompactificationProjectionPasting.lean",
+  "statement": "theorem compactification_pasting (K : DX) (L : DY) (h : D.FactorIdentities K L) : (D.leftPath K L).hom = (D.rightPath K L).hom ∧ (∀ {C : Type uC} [Category.{vC} C] (V : DY' ⥤ C) (D' : CompactificationPastingData (DX := DX) (DB := DB) (DY := DY) (DX' := DX') (DB' := DB') (DY' := DY')) (K' : DX) (L' : DY) (a : D.leftPath K L ⋙ V ⟶ D'.leftPath K' L' ⋙ V) (b : D.rightPath K L ⋙ V ⟶ D'.rightPath K' L' ⋙ V) (_hs : a.app 0 = b.app 0) (_ht : a.app 3 = b.app 4), V.map (D.leftPath K L).hom ≫ a.app 3 = b.app 0 ≫ V.map (D'.rightPath K' L').hom ∧ V.map (D.rightPath K L).hom ≫ b.app 4 = a.app 0 ≫ V.map (D'.leftPath K' L').hom) ∧ (∀ {C : Type uC} [Category.{vC} C] (V : DY' ⥤ C) {U W : C} (source : U ≅ V.obj (D.leftPath K L).left) (target : V.obj (D.leftPath K L).right ≅ W), source.hom ≫ V.map (D.leftPath K L).hom ≫ target.hom = source.hom ≫ V.map (D.rightPath K L).hom ≫ target.hom)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Conditional formal pasting on the supplied closed coefficient domains of the recorded ExchangeProjectionStage. Proper exchange and projections use the recorded mate constructions. The owning-node auxiliary record collects the displayed bare open comparisons, with normalization to the recorded composite projection. Main conclusion includes componentwise diagram naturality and comparison conjugation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-198b52a74",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause match: θ/σ/β/μ_G,μ_H,μ_A/γ_j,γ_j' orientations, d, z_K, v, PF^c=R(γ_j)π_p, both factor hypotheses at M=j_!K, Q=M⊗FL, and conclusion paths with exactly the node's arrows. properExchange and projections reuse the dependency's mateEquiv/rightAdjointProjectionMap. Quantifies over arbitrary supplied stage data: a formal lemma true for all data, so more general than the node, with canonical SixFunctorExchangeData instances as specialisations; openProjectionNormalization pins bare γ to the dependency's openProjection. Universes independent. Scratch probe proved the full 3-conjunct statement (e-naturality, openFactor, γ' and tensor naturality at θ⁻¹, properFactor, π' naturality at β); both hypotheses needed, not vacuous. nt_compile --json: one 60 s timeout at load 264 on cold import load, then clean 6.4 s at load 201. No duplicate in side Sheaf/; docstrings, source place, 7 proof steps, sorry-only, statement verbatim; report sections present; only the lean record changed. Advisory: unused private imports SixFunctorDatum/DerivedPullbackTensorIso slow loading under load; _hs superfluous."
  }
 }
