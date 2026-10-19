@@ -1,0 +1,81 @@
+{
+ "id": "lem-per-trait-formal-ambient-system",
+ "kind": "statement",
+ "title": "Henselian smooth ambient system for a formal affine space over a trait",
+ "statement": "Let $C$ be a complete discrete valuation ring with separably closed residue field $k$, and let $m\\geq0$. A discrete valuation ring is a Noetherian local domain of dimension one with principal maximal ideal; completeness is for powers of that ideal [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring]. Let $E$ be the strict localization of $\\mathbf A^m_C=\\operatorname{Spec}C[x_1,\\ldots,x_m]$ at the $k$-rational origin in its closed fibre [def-weil-pbc-strict-henselization-limit]. Then $E$ is affine, Noetherian, regular, excellent and strictly henselian local with residue field $k$, and its maximal-ideal completion is $\\widehat E=\\operatorname{Spec}C[[x_1,\\ldots,x_m]]$ [def-weil-affine-spectrum, def-weil-pbc-noetherian-ring, def-weil-regular-scheme, def-exc-excellent-ring, def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. There is a small cofiltered inverse system of affine Noetherian regular excellent strictly henselian local schemes $E_\\alpha$ over $E$, with affine local transition maps, limit $\\widehat E$, and local projection maps $\\widehat E\\to E_\\alpha$; all closed residue field maps are the identity of $k$. Each $E_\\alpha$ is a strict localization at a $k$-rational closed-fibre point of a smooth finite-type $E$-scheme and is also a strict localization of a scheme of finite type over $C$ [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Writing $E=\\operatorname{Spec}A$, for every index $\\alpha$ and every $n\\geq1$ there is an $E$-section $\\sigma:E\\to E_\\alpha$ whose composite with $\\widehat E\\to E$ agrees with $\\widehat E\\to E_\\alpha$ on $\\operatorname{Spec}(A/\\mathfrak m_A^n)$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XV 3.1.3–3.1.4, printed p.222, and III §2, printed pp.35–36 (arbitrarily close sections); I 10.3 (Popescu). The strict-local stage formulation includes strict localization of the smooth models at the common residue-field point."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The completion of the henselization of affine space over a complete discrete valuation ring is the formal power series ring and is a limit of smooth strictly local models",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; these give basic henselian rings, formal smooth lifting, scheme limits, ordinary covers, or cotangent-space definitions, not the stated approximation or uniformization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular complete power series local ring over a trait admits a filtered system of henselian smooth local models with fixed residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hg : g.map (IsLocalRing.residue A) ≠ 0) :\\n  ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] (I : Ideal R) [IsAdicComplete I R] : HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"PowerSeries.residueFieldOfPowerSeries\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": ResidueField k⟦X⟧ ≃+* k\", \"doc\": \"For any field $ k $, the residue field of the ring of univariate power series $ k[[X]] $ is isomorphic to $ k $. This isomorphism arises because the maximal ideal of $ k[[X]] $ consists of power serie\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; these give basic henselian rings, formal smooth lifting, scheme limits, ordinary covers, or cotangent-space definitions, not the stated approximation or uniformization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"MvPowerSeries\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; these give basic henselian rings, formal smooth lifting, scheme limits, ordinary covers, or cotangent-space definitions, not the stated approximation or uniformization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*power|power.*henseli|Popescu|CohenRing",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"16\", \"text\": \"# The Gabriel-Popescu theorem\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"18\", \"text\": \"We prove the following Gabriel-Popescu theorem: if `C` is a Grothendieck abelian category and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"61\", \"text\": \"namespace GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"111\", \"text\": \"end GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"113\", \"text\": \"open GabrielPopescuAux\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; these give basic henselian rings, formal smooth lifting, scheme limits, ordinary covers, or cotangent-space definitions, not the stated approximation or uniformization theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-local-branch-approximation",
+  "date": "2026-10-19",
+  "group": "Q46"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "lem-per-artin-gabber-affine-curve proof Step 1, strictly local affine bound; XV 3.1.3–3.1.4 ambient henselian affine space and its smooth local models, before introducing the closed pair.",
+   "via": [
+    "lem-per-complete-local-branch-approximation",
+    "lem-per-affine-open-strict-local-constant-bound",
+    "lem-per-affine-open-strict-local-cd-constructible",
+    "lem-per-affine-open-strict-local-cd"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

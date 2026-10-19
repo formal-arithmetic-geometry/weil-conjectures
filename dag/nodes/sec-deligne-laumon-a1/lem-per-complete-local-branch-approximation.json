@@ -22,9 +22,201 @@
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-cohen-power-series-presentation] for $R$. If $\\operatorname{char}k>0$, its Cohen ring is already a complete DVR $C$ of residue field $k$, and its local surjection gives a closed immersion $X\\hookrightarrow\\operatorname{Spec}C[[x_1,\\ldots,x_m]]$. If $\\operatorname{char}k=0$, identify its coefficient field with $k$, set $C=k[[t]]$, and use the quotient $C[[x_1,\\ldots,x_m]]\\twoheadrightarrow k[[x_1,\\ldots,x_m]]\\twoheadrightarrow R$ with $t\\mapsto0$. That $k[[t]]$ is a complete regular Noetherian local ring with parameter $t$ is [lem-weil-pbc-power-series-field-cohen-regular-complete]; the one-dimensional regular local ring is a DVR by [lem-sc-regular-dim1-dvr]. Its dimension is one since its regular parameter list has one member. In either case the closed residue field is $k$ and $\\ell$ is a unit in $C$: its image in $k$ is nonzero.",
+   "uses": [
+    "lem-weil-pbc-cohen-power-series-presentation",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.3, complete trait in residue characteristic zero made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-per-trait-formal-ambient-system] to this $C$ and $m$. Write $E=\\operatorname{Spec}A$ and $\\widehat E=\\operatorname{Spec}C[[x_1,\\ldots,x_m]]$. We have $X\\hookrightarrow\\widehat E$ and a system $\\widehat E=\\varprojlim E_\\alpha$ with regular excellent strictly local terms, residue field $k$, and arbitrarily close $E$-sections. Since $R$ is complete Noetherian, [lem-per-complete-local-excellence] makes $X$ excellent, hence quasi-excellent. The complement $Z=X\\setminus V$ is nowhere dense because $V$ is dense. These verify the hypotheses for uniformization; no normality or irreducibility of $X$ is assumed.",
+   "uses": [
+    "lem-per-trait-formal-ambient-system",
+    "lem-per-complete-local-excellence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.3–3.1.4 and 3.1.2."
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-alteration-hypercover] to $(X,V,\\ell,L)$. Denote its affine regular levels by $P_i$, and their reduced normal-crossings boundaries by $D_i$, for $0\\leq i\\leq L$. By [lem-per-snc-boundary-parameter-criterion], each boundary has local equations that are products of distinct regular parameters. Keep the whole truncated simplicial diagram, including its matching objects and covering maps. On finite affine neighborhoods of the closed fibres, mark local equations of the branches of every $D_i$, all their intersections and their inclusions. There are finitely many such charts and branches: each closed fibre is a Noetherian scheme, so its relevant affine open cover has a finite subcover. Empty boundaries require no equations.",
+   "uses": [
+    "lem-per-regular-alteration-hypercover",
+    "lem-per-snc-boundary-parameter-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.2, with the strong prime-to-ell uniformization of IX 1.1."
+   }
+  },
+  {
+   "text": "Use [lem-per-relative-alteration-diagram-approximation] for this finite marked diagram over the closed subscheme $X\\hookrightarrow\\widehat E$. At a sufficiently large index it gives a closed $X_\\alpha\\hookrightarrow E_\\alpha$, an affine open $V_\\alpha\\subseteq X_\\alpha$, and a truncated hypercover $P_{\\bullet,\\alpha}\\to X_\\alpha$ whose pullback is $P_\\bullet\\to X$. Its closed fibres are the original ones. Descend all equations, charts and equalities in the markings at the same time. The same node supplies a lower bound on the closeness of a section for its dominant reduced pullback to remain a hypercover. This last assertion is needed: an arbitrary local base change of an alteration need not even be generically finite.",
+   "uses": [
+    "lem-per-relative-alteration-diagram-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.2.1–3.2.3 and 3.3.1; keep the finite covering certificates."
+   }
+  },
+  {
+   "text": "We check regularity of the levels of this intermediate model along their closed fibres. Near a closed-fibre point, embed an affine chart of $P_i$ in an affine space over the regular $\\widehat E$. Its ambient local ring is regular by smooth ascent [lem-weil-pbc-regular-ring-smooth-ascent]. Since the quotient local ring of $P_i$ is regular, [lem-weil-pbc-regular-local-quotient-independent-generators] supplies ideal generators $g_1,\\ldots,g_c$ independent in the ambient cotangent space. Enlarge the descended finite chart diagram to include these generators and the equalities saying that they generate the ideal; the descent statement [lem-per-relative-alteration-diagram-approximation] permits this. The ambient ring over $E_\\alpha$ is regular by the same smooth-ascent theorem. At corresponding closed-fibre points the residue fields are equal. The cotangent map sends the descended $g_{j,\\alpha}$ to the independent $g_j$, so the former classes are independent. Successively quotienting by them gives a regular local ring by [lem-weil-pbc-regular-local-hypersurface-criterion]: at each quotient the next class stays nonzero because the original classes are independent. Thus $P_{i,\\alpha}$ is regular at these points. Finitely many charts and levels allow one common index.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "lem-per-relative-alteration-diagram-approximation",
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.2.4, cotangent argument expanded; Stacks 00NR and 00NQ for the regular quotient criteria."
+   }
+  },
+  {
+   "text": "At a closed-fibre point of $P_{i,\\alpha}$, retain just the marked branches passing through that point, with equations $f_{1,\\alpha},\\ldots,f_{r,\\alpha}$. Their images on $P_i$ are the original branch equations $f_1,\\ldots,f_r$, independent modulo the square of the maximal ideal by [lem-per-snc-boundary-parameter-criterion] and the chosen parameter equations. Equality of residue fields and the local cotangent map imply independence of the $f_{j,\\alpha}$ as well. The descended equality of the boundary support with the union of the marked zero loci is part of the finite model diagram. The independent classes extend to a basis of the cotangent space, and lifting the remaining basis vectors gives generators of the maximal ideal by [lem-weil-pbc-nakayama-local-generators]. Hence these branch equations are part of a regular system of parameters; the product equation defines a reduced strict normal crossings divisor by [lem-per-snc-boundary-parameter-criterion] and prove the required branch assertion for $\\widehat E\\times_{E_\\alpha}P_{i,\\alpha}=P_i\\to P_{i,\\alpha}$.",
+   "uses": [
+    "lem-per-relative-alteration-diagram-approximation",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-per-snc-boundary-parameter-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.2.5, using the same cotangent argument as 3.2.4."
+   }
+  },
+  {
+   "text": "Apply [lem-per-close-model-local-invariants] simultaneously to the finite-type $\\widehat E$-scheme $X$ and the finitely many level charts and markings above. Choose an index and section closeness large enough for it and for [lem-per-relative-alteration-diagram-approximation]; then choose a section $\\sigma:E\\to E_\\alpha$ of that closeness by [lem-per-trait-formal-ambient-system]. Set $T=X_\\alpha$, $W=V_\\alpha$, $T_0=X_\\alpha\\times_{E_\\alpha,\\sigma}E$, and $T_\\bullet=P_{\\bullet,\\alpha}$. The diagram gives the maps $a:X\\to T$ and $b:T_0\\to T$. Both $T$ and $T_0$ are closed subschemes of Noetherian strictly local schemes. The quotient lemma [lem-weil-pbc-strictly-henselian-quotient] makes them strictly henselian local; their closed fibres are $\\operatorname{Spec}k$, so both maps are local and induce the identity on $k$. The invariant lemma applied to $X$ at its sole closed-fibre point gives $\\dim T_0=\\dim X=d$. The construction of the open gives $a^{-1}W=V$.",
+   "uses": [
+    "lem-per-close-model-local-invariants",
+    "lem-per-relative-alteration-diagram-approximation",
+    "lem-per-trait-formal-ambient-system",
+    "lem-weil-pbc-strictly-henselian-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.1–3.3.2; III 5.4(i) applied also to X, not only to regular levels."
+   }
+  },
+  {
+   "text": "We verify the branch assertion for $b$ before dominant reduction. For any closed-fibre point on the ordinary pullback $Q_i=P_{i,\\alpha}\\times_{E_\\alpha,\\sigma}E$, [lem-per-close-model-local-invariants] identifies its dimension and cotangent space with those at the corresponding point of the regular $P_i$. Thus $Q_i$ is regular there, and the pulled-back model functions $f_{j,\\alpha}$ have the same independent classes as the original $f_j$. Their product has precisely the inverse-image boundary support, by the marked equality retained in [lem-per-relative-alteration-diagram-approximation]. The same basis extension and [lem-weil-pbc-nakayama-local-generators] show they are part of a regular parameter system. By [lem-per-snc-boundary-parameter-criterion], their product defines a reduced strict normal crossings divisor with exactly these branches, with no multiplicities or branch identifications. The case $r=0$ is the empty divisor.",
+   "uses": [
+    "lem-per-close-model-local-invariants",
+    "lem-per-relative-alteration-diagram-approximation",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-per-snc-boundary-parameter-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.2, first-order comparison of marked equations spelled out."
+   }
+  },
+  {
+   "text": "By [lem-per-relative-alteration-diagram-approximation], our chosen section makes the dominant reduced $Q_\\bullet^{\\mathrm{dom}}\\to T_0$ a hypercover through degree $L$. Its levels are the ones in clause (3). At a point of $Q_i^{\\mathrm{dom}}$ on the closed fibre, the ordinary $Q_i$ is regular by Step 8. A regular local ring is a domain [lem-sc-regular-local-domain]; hence exactly one irreducible component passes through that point, and the reduced union of any chosen components containing the point has the identical local ring. Dominant reduction consequently changes neither that local ring nor its boundary equations. Pullback along $a$ is the original $P_\\bullet$, already reduced and dominant over $X$, so it too is the specified hypercover. No claim of automatic preservation under arbitrary base change is used.",
+   "uses": [
+    "lem-per-relative-alteration-diagram-approximation",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.1–3.3.2; II 1.2.5 dominant reduction at regular points."
+   }
+  },
+  {
+   "text": "Pass the local regularity and branch assertions of Steps 5, 6, 8 and 9 to the strict localizations at the indicated geometric points. Regularity is invariant under strict henselization by [lem-sc-strict-henselization-regular]. The canonical cotangent base-change isomorphism in [lem-sc-strict-henselization-cotangent-dimension] carries each marked function to its image, so the independent classes remain independent after extending the residue field. Extend them to a basis and use [lem-weil-pbc-nakayama-local-generators] for the maximal ideal. Thus their images are part of a regular parameter system; [lem-per-snc-boundary-parameter-criterion] gives the reduced normal crossings boundary and its branches. The compatible pointed maps send each marked equation to the same function, so this proves clause (4) for both maps.",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-per-snc-boundary-parameter-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.2, strict-local formulation and finite-type trait model."
+   }
+  },
+  {
+   "text": "The ideal $I$ of the closed subscheme $T_0\\hookrightarrow E$ is finitely generated, $E$ being Noetherian, and lies in the maximal ideal because $T_0$ contains the closed point. By [def-weil-pbc-strict-henselization-limit] each of finitely many generators of $I$ comes from an affine pointed etale neighbourhood of the origin $\\bar0$ of $\\mathbf A^m_C=\\operatorname{Spec}C[x]$; by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] all come from one, $(N=\\operatorname{Spec}B,\\bar n)$, with leg $\\lambda:B\\to\\mathcal O(E)$. Let $\\mathfrak q\\subset B$ be the prime of the image $n$ of $\\bar n$; $\\kappa(\\mathfrak q)$ is etale over $k$, hence equals $k$. Let $R_0=C[x]_{\\mathfrak p_0}$ be the local ring at the origin. By [lem-sbc-geometric-strict-henselization-local-presentation] for $C[x]$ and $\\bar0$, $\\mathcal O(E)$ is an algebraic strict henselization of $R_0$ relative to $k$ [def-sc-ring-strict-henselization]; its pairs $(S,\\chi)$ are the pointed etale triples with $\\mathfrak q=\\chi^{-1}(0)$, so it is a triple colimit as in [lem-sc-strict-henselization-comparison]. Apply that lemma to the triple $(B\\otimes_{C[x]}R_0,\\mathfrak q,\\mathrm{id}_k)$: the triple colimit $D$ of $B_{\\mathfrak q}$ is isomorphic to $\\mathcal O(E)$ compatibly with the cocone map $B\\to\\mathcal O(E)$. That cocone map and $\\lambda$ are $C[x]$-algebra maps from the etale $B$ into the henselian $\\mathcal O(E)$ with preimage $\\mathfrak q$ of the maximal ideal and identity residue map, so they coincide by [lem-weil-pbc-map-into-henselian-colimit]. By [lem-sc-etale-triples-colimit-is-strict-henselization], $\\mathcal O(E)$ with $\\lambda$ is an algebraic strict henselization of $B_{\\mathfrak q}$ relative to $k$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-sbc-geometric-strict-henselization-local-presentation",
+    "def-sc-ring-strict-henselization",
+    "lem-sc-strict-henselization-comparison",
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "lem-sc-etale-triples-colimit-is-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.4 and 3.3.2; finite ideal descent and strict localization of a closed subscheme made explicit."
+   }
+  },
+  {
+   "text": "Let $J\\subseteq B$ be the ideal generated by the chosen representatives and $F=\\operatorname{Spec}(B/J)$. Since $N$ is etale, hence of finite type, over $\\mathbf A^m_C$, $F$ is of finite type over $C$. The generators of $I$ lie in the maximal ideal, so $J\\subseteq\\mathfrak q$; thus $\\bar n$ is a geometric point of $F$, and $JB_{\\mathfrak q}$ is the kernel of the local surjection $B_{\\mathfrak q}\\to(B/J)_{\\mathfrak q}$, contained in the maximal ideal. By Step 11 and [lem-sbc-strict-henselization-surjective-quotient], $\\mathcal O(E)/J\\mathcal O(E)=\\mathcal O(E)/I=\\mathcal O(T_0)$ is an algebraic strict henselization of $(B/J)_{\\mathfrak q}$ relative to a separable closure of $k$, i.e. to $k$. By [lem-sbc-geometric-strict-henselization-local-presentation] for $B/J$ and $\\bar n$, the strict localization ring of $F$ at $\\bar n$ is an algebraic strict henselization of the localization of $B/J$ at a prime, which is the prime of $n$ because the structural morphism sends the closed point to $n$ [lem-weil-pbc-strict-henselization-functoriality](1). Both are vertices of universal colimit cocones of one diagram [def-sc-ring-strict-henselization], hence isomorphic as $(B/J)_{\\mathfrak q}$-algebras. Thus $T_0$ is the strict localization of $F$ at $\\bar n$, proving clause (2). Clauses (1) and (3) were checked in Steps 7 and 9, and $\\ell$ is invertible on $C$ by Step 1.",
+   "uses": [
+    "lem-sbc-strict-henselization-surjective-quotient",
+    "lem-sbc-geometric-strict-henselization-local-presentation",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.4 and 3.3.2; finite ideal descent and strict localization of a closed subscheme made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-sc-regular-dim1-dvr",
+  "lem-per-trait-formal-ambient-system",
+  "lem-per-complete-local-excellence",
+  "lem-per-regular-alteration-hypercover",
+  "lem-per-snc-boundary-parameter-criterion",
+  "lem-per-relative-alteration-diagram-approximation",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-per-close-model-local-invariants",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-sbc-strict-henselization-surjective-quotient",
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "def-sc-ring-strict-henselization",
+  "lem-sc-strict-henselization-comparison",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XV 3.1.2–3.3.2, with the IX 1.1 prime-to-ell variant, relative finite covering certificates, the III 5.4 dimension argument, and explicit marked cotangent comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -117,10 +309,96 @@
    },
    "date": "2026-10-19",
    "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete strictly henselian local pair admits finite type trait models and truncated alteration hypercovers preserving normal crossing branch equations",
+   "results": {
+    "t": "2026-10-18T23:22:43Z",
+    "tool": "leanfinder",
+    "query": "Complete strictly henselian local pair admits finite type trait models and truncated alteration hypercovers preserving normal crossing branch equations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HenselianLocalRing",
+     "StandardEtalePair",
+     "HenselianLocalRing.TFAE",
+     "HenselianRing",
+     "IsAdicComplete.henselianRing",
+     "Algebra.Smooth.exists_finiteType",
+     "StandardEtalePresentation",
+     "HenselianLocalRing.is_henselian"
+    ],
+    "digest": "996a1b30fcf2aab1"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no returned theorem constructs compatible trait models and branch-preserving alteration hypercovers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsAdicComplete\"",
+   "results": {
+    "t": "2026-10-18T23:26:18Z",
+    "tool": "loogle",
+    "query": "\"HenselianLocalRing\", \"IsAdicComplete\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no returned theorem constructs compatible trait models and branch-preserving alteration hypercovers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin approximation of a complete local scheme over a Cohen ring with normal crossing alteration hypercovers",
+   "results": {
+    "t": "2026-10-18T23:26:19Z",
+    "tool": "leansearch",
+    "query": "Artin approximation of a complete local scheme over a Cohen ring with normal crossing alteration hypercovers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsArtinianScheme.recOn",
+     "AlgebraicGeometry.IsArtinianScheme.casesOn",
+     "AlgebraicGeometry.Scheme.isArtinianScheme_Spec",
+     "AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian",
+     "AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover",
+     "AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+     "AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec",
+     "AlgebraicGeometry.IsLocallyArtinian.recOn"
+    ],
+    "digest": "3223f72c31011305"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no returned theorem constructs compatible trait models and branch-preserving alteration hypercovers"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|ArtinApproximation|Popescu|NormalCrossing",
+   "results": {
+    "t": "2026-10-18T23:26:19Z",
+    "tool": "grep",
+    "query": "CohenRing|ArtinApproximation|Popescu|NormalCrossing",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no returned theorem constructs compatible trait models and branch-preserving alteration hypercovers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-affine-open-strict-local-constant-bound",
@@ -141,5 +419,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-local-branch-approximation",
+  "worker": "stage1",
+  "summary": "Retained the previous ambient construction and four geometric inputs. Repaired nonexistent Nakayama and strict-local-limit citation ids; used the existing normal-crossings parameter criterion and strict-henselization cotangent isomorphism, and expanded the final finite-type quotient descent into its own step. Checked dimension only on the section model, and retained finite covering certificates for dominant reduction.",
+  "blueprint": "lem-per-artin-gabber-affine-curve Step 1, strictly local affine bound, through the ancestor chain recorded in blueprint.from; realizes ILO XV 3.1.2–3.3.2 rather than replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-power-series-presentation",
+    "why": "Generic Cohen power series presentation of a complete local ring input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic Power series over a field or a Cohen ring: complete regular local domain input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic One-dimensional regular local rings input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic Regularity ascends along smooth ring maps input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "why": "Generic A regular local quotient has independent cotangent-space kernel generators input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "Generic A non-square element cuts a regular local hypersurface input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic Nakayama: generators of a finite module over a local ring are detected modulo the maximal ideal input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Generic A quotient of a strictly henselian local ring by a proper ideal is strictly henselian (Stacks 05WS for a strictly henselian ring) input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic Regular local rings are domains input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic Strict henselization preserves regular local rings input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-cotangent-dimension",
+    "why": "Generic Strict henselization preserves embedding dimension input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Generic Pointed etale neighbourhoods of a geometric point form a cofiltered category input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sbc-strict-henselization-surjective-quotient",
+    "why": "Generic Strict henselization commutes with surjective local quotients input for the ambient, local-algebra or pointed-localization argument; the curve-perverse unit supplies no replacement for this tool statement."
+   },
+   {
+    "node": "lem-sbc-geometric-strict-henselization-local-presentation",
+    "why": "Generic comparison of the colimit strict localization of an affine scheme with the algebraic strict henselization of its local ring (maintainer review FIX of Step 11)."
+   },
+   {
+    "node": "def-sc-ring-strict-henselization",
+    "why": "Generic definition of the algebraic strict henselization, needed to apply the surjective-quotient lemma (maintainer review FIX of Step 11)."
+   },
+   {
+    "node": "lem-sc-strict-henselization-comparison",
+    "why": "Generic invariance of the strict henselization under a pointed etale local extension, Stacks 05WR/04GU type (maintainer review FIX of Step 11)."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic uniqueness of etale-algebra maps into a henselian ring with given residue map (maintainer review FIX of Step 11)."
+   },
+   {
+    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "why": "Generic identification of the etale-triple colimit with the algebraic strict henselization (maintainer review FIX of Step 11)."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic: the strict localization's closed point maps to the point under the geometric point (maintainer review FIX of Step 12)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-sc-regular-dim1-dvr",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-sbc-strict-henselization-surjective-quotient",
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "def-sc-ring-strict-henselization",
+  "lem-sc-strict-henselization-comparison",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-a2e111268",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-a2e111268 (reviewer sub-agent of L); spot-checked: FIX. I read the item in full (statement, 11 steps, split_report), all four new nodes, every cited statement, ILO XV 1.1–3.3.2 (pp.219–224) with the footnote to 3.2.3, III §2–6 (pp.35–45: 3.1, 5.1, 5.4, 5.5, 6.2) and II 2.3–3.2.1. The item statement is identical to the base (the Q137 FIX text, with ℓ′ in clause (3)). The route is XV 3.1–3.3: dim T_0=d holds on the section model only, as 3.2.6 requires. Steps 1–10 are correct and their cited statements say what the steps take: Cohen/k[[t]] trait; 07QW excellence; IX 1.1 hypercover; relative descent; the XV 3.2.4 cotangent-independence argument with 00NR, 07NF and 00NQ; parameter criterion with Nakayama; III 5.4(i)(ii) for dim T_0=d and for regularity and cotangent spaces with n_0≥2; the domain argument for dominant reduction; 06LN for passage to strict localizations. One fault (C3/C4) in old Step 11: it applied the algebraic-strict-henselization quotient lemma to the colimit-defined O(E) without identifying O(E) as the strict henselization of B_q along the leg B→O(E), and without identifying the result with the colimit strict localization of F. I repaired this by splitting it into Steps 11 and 12, citing lem-sbc-geometric-strict-henselization-local-presentation, lem-sc-strict-henselization-comparison, lem-weil-pbc-map-into-henselian-colimit, lem-sc-etale-triples-colimit-is-strict-henselization, def-sc-ring-strict-henselization and lem-weil-pbc-strict-henselization-functoriality. None of these closes a cycle or reaches a trace-formula node; they are added to proof_deps and tool_uses. The new nodes are true at source level and none restates the item. The ambient node is Popescu plus strict localization plus Artin approximation. The hypercover node is IX 1.1 plus matching objects. The invariants node is III 5.1/5.4. The relative node matches ILO XV 3.2.3/3.3.1; maintainer note: XV uses ℓ=1, and II 3.2.1 needs irreducibility, while here Y may be reducible with the ℓ′ topology. I reduced this to components and found no counterexample. The invariants and relative nodes generalize lem-per-marked-finite-diagram-approximation and lem-per-alteration-cover-approximation; neither duplicates them. Batch-5: complete-local-excellence reaches only generic catenary/CM trace-formula lemmas; the parameter criterion and the hypercover node reach the general SNC definition and UFD/K_0 algebra. None is a trace-formula or Poincaré-duality step: accepted. Edge cases checked: m=0, d=0, r=0, reducible X, equal versus mixed characteristic, L=1.; 1 file(s) fixed by the reviewer"
  }
 }
