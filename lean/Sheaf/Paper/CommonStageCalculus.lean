@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
+import Mathlib.Data.Fintype.Order
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.Algebra.Homology.BifunctorShift
@@ -53,6 +54,7 @@ tensor construction rather than supplied as an independent comparison.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedSectionVars false
 universe c w u v
 open CategoryTheory
 open scoped ZeroObject
@@ -143,7 +145,8 @@ Proof: its normalized Hom action is ScalarLocalization.map, whose mapHom is line
 @[instance] theorem pbcRationalShiftAdditive (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
       (pbcStageUniformizer.{u} l Ω E)) n).Additive := by
-  sorry
+  rw [((pbcRationalShift_exists l Ω T E).exists.choose_spec).1 n]
+  infer_instance
 
 /-- Localization commutes with shifts through the identity component comparison.
 Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
@@ -262,7 +265,9 @@ theorem pbcStageShift_coherence (n : ℤ) {i j k : I}
         (shiftFunctor (C k) n).map ((S.assoc h h').hom.app X) =
     (S.assoc h h').hom.app ((shiftFunctor (C i) n).obj X) ≫
       ((S.T (h.trans h')).commShiftIso n).hom.app X := by
-  sorry
+  simpa only [Functor.commShiftIso_comp_hom_app, Functor.comp_obj,
+    Category.assoc] using
+    NatTrans.shift_app_comm (S.assoc h h').hom n X
 
 /-- Shifting each finite stage gives a morphism of the actual stage system.
 Source: blueprint common-stage calculus
@@ -289,7 +294,15 @@ theorem pbcPairShiftZero_naturality {X Y : S.PairCategory} (f : X ⟶ Y) :
     (pbcPairShift S 0).map f ≫
       (S.ι Y.stage).map ((shiftFunctorZero (C Y.stage) ℤ).hom.app Y.obj) =
     (S.ι X.stage).map ((shiftFunctorZero (C X.stage) ℤ).hom.app X.obj) ≫ f := by
-  sorry
+  induction f using PairCategory.hom_induction with
+  | h k hX hY u =>
+    change (pbcStageShift S 0).functor.map (PairCategory.mkHom k hX hY u) ≫ _ = _
+    rw [Morphism.functor_map_mkHom, ι_map_eq hY, ι_map_eq hX]
+    rw [PairCategory.mkHom_comp_mkHom, PairCategory.mkHom_comp_mkHom]
+    congr 1
+    dsimp only [Morphism.functor, pbcStageShift]
+    simp [Morphism.mapAt, Functor.commShiftIso_zero,
+      Functor.CommShift.isoZero, Category.assoc, ← Functor.map_comp]
 
 /-- The zero comparison is the actual image of the finite-stage zero comparison.
 Source: blueprint common-stage calculus
@@ -310,7 +323,20 @@ theorem pbcPairShiftAdd_naturality (n m : ℤ) {X Y : S.PairCategory} (f : X ⟶
       (S.ι Y.stage).map ((shiftFunctorAdd (C Y.stage) n m).hom.app Y.obj) =
     (S.ι X.stage).map ((shiftFunctorAdd (C X.stage) n m).hom.app X.obj) ≫
       (pbcPairShift S n ⋙ pbcPairShift S m).map f := by
-  sorry
+  induction f using PairCategory.hom_induction with
+  | h k hX hY u =>
+    change (pbcStageShift S (n + m)).functor.map (PairCategory.mkHom k hX hY u) ≫ _ =
+      _ ≫ (pbcStageShift S m).functor.map
+        ((pbcStageShift S n).functor.map (PairCategory.mkHom k hX hY u))
+    rw [Morphism.functor_map_mkHom, Morphism.functor_map_mkHom,
+      Morphism.functor_map_mkHom, ι_map_eq hY, ι_map_eq hX]
+    rw [PairCategory.mkHom_comp_mkHom, PairCategory.mkHom_comp_mkHom]
+    congr 1
+    dsimp only [Morphism.functor, pbcStageShift]
+    simp [Morphism.mapAt, Functor.commShiftIso_add,
+      Functor.CommShift.isoAdd_hom_app, Functor.CommShift.isoAdd_inv_app,
+      Category.assoc, ← Functor.map_comp]
+    simp only [Functor.map_comp, Category.assoc]
 
 /-- The addition comparison is the actual image of the finite-stage comparison.
 Source: blueprint common-stage calculus
@@ -342,7 +368,27 @@ theorem pbcPairShift_laws :
       (pbcPairShiftAdd S n 0).hom.app X =
         eqToHom (by dsimp; rw [add_zero]) ≫
           (pbcPairShiftZero S).inv.app ((pbcPairShift S n).obj X)) := by
-  sorry
+  constructor
+  · intro a b c X
+    have h := congrArg (fun f ↦ (S.ι X.stage).map f)
+      (shiftFunctorAdd_assoc_hom_app a b c X.obj)
+    simpa [pbcPairShiftAdd, pbcPairShift, pbcPairShiftZero,
+      Morphism.functor_map_ι, pbcStageShift, shiftFunctorAdd',
+      Functor.map_comp, eqToHom_map,
+      Morphism.functor_obj] using h
+  constructor
+  · intro n X
+    have h := congrArg (fun f ↦ (S.ι X.stage).map f)
+      (shiftFunctorAdd_zero_add_hom_app n X.obj)
+    simpa [pbcPairShiftAdd, pbcPairShift, pbcPairShiftZero,
+      Morphism.functor_map_ι, pbcStageShift, Functor.map_comp, eqToHom_map,
+      Morphism.functor_obj] using h
+  · intro n X
+    have h := congrArg (fun f ↦ (S.ι X.stage).map f)
+      (shiftFunctorAdd_add_zero_hom_app n X.obj)
+    simpa [pbcPairShiftAdd, pbcPairShift, pbcPairShiftZero,
+      pbcStageShift, Functor.map_comp, eqToHom_map,
+      Morphism.functor_obj] using h
 
 /-- The common-stage shift with the actual finite-stage unit and addition maps.
 Source: blueprint common-stage calculus
@@ -381,7 +427,18 @@ theorem pbcStageInclusionShift_laws (i : I) :
     ∀ n m : ℤ, pbcStageInclusionShiftIso S i (n + m) =
       Functor.CommShift.isoAdd (pbcStageInclusionShiftIso S i n)
         (pbcStageInclusionShiftIso S i m) := by
-  sorry
+  constructor
+  · ext X
+    simp only [Functor.CommShift.isoZero_hom_app]
+    rw [show shiftFunctorZero S.PairCategory ℤ = pbcPairShiftZero S from rfl]
+    simp [pbcStageInclusionShiftIso, Morphism.ιCompFunctorIso,
+      pbcPairShiftZero, ι_obj, Morphism.functor_obj, pbcStageShift, ← Functor.map_comp]
+  · intro n m
+    ext X
+    simp only [Functor.CommShift.isoAdd_hom_app]
+    rw [show shiftFunctorAdd S.PairCategory n m = pbcPairShiftAdd S n m from rfl]
+    simp [pbcStageInclusionShiftIso, Morphism.ιCompFunctorIso,
+      pbcPairShiftAdd, ι_obj, Morphism.functor_obj, pbcStageShift, ← Functor.map_comp]
 
 /-- Finite-stage inclusions commute with the actual common-stage shift.
 Source: blueprint common-stage calculus
@@ -405,7 +462,20 @@ and pre- and post-composition by its comparison isomorphisms preserve sums.
 The common-stage Hom quotient therefore identifies the shifted sum with the
 sum of the shifted representatives. -/
 theorem pbcPairShift_additive (n : ℤ) : (shiftFunctor S.PairCategory n).Additive := by
-  sorry
+  have norm := (S.pairPreadditive_exists).exists.choose_spec
+  constructor
+  intro X Y f g
+  obtain ⟨k, _, hX, hY, _, _, u, v, rfl, rfl⟩ :=
+    PairCategory.exists_common_stage f g X.stage
+  rw [← (norm X Y k hX hY u v).1]
+  change (pbcStageShift S n).functor.map (PairCategory.mkHom k hX hY (u + v)) =
+    (pbcStageShift S n).functor.map (PairCategory.mkHom k hX hY u) +
+      (pbcStageShift S n).functor.map (PairCategory.mkHom k hX hY v)
+  simp only [Morphism.functor_map_mkHom]
+  dsimp only [Morphism.mapAt, pbcStageShift, Morphism.functor]
+  simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+  exact (norm ((pbcPairShift S n).obj X) ((pbcPairShift S n).obj Y)
+    k hX hY _ _).1
 
 attribute [instance] pbcPairShift_additive
 
@@ -419,7 +489,14 @@ of transition functors sends a zero object to a zero object, so its arrow is
 uniquely zero there. The common-stage quotient preserves this equality. -/
 theorem pbcPairZero_isZero (i : I) :
     Limits.IsZero ((S.ι i).obj (0 : C i)) := by
-  sorry
+  apply (Limits.IsZero.iff_id_eq_zero _).mpr
+  rw [← (S.ι i).map_id]
+  change PairCategory.mkHom (X := ⟨i, (0 : C i)⟩)
+    (Y := ⟨i, (0 : C i)⟩) i (le_refl i) (le_refl i)
+      ((S.T (le_refl i)).map (𝟙 (0 : C i))) = 0
+  have e : 𝟙 (0 : C i) = 0 := (Limits.isZero_zero (C i)).eq_zero_of_src _
+  rw [e, Functor.map_zero]
+  exact ((S.pairPreadditive_exists).exists.choose_spec _ _ i _ _ 0 0).2
 
 /-- Existence of a zero object, witnessed by the image of any finite-stage zero.
 Source: blueprint common-stage calculus
@@ -446,7 +523,19 @@ theorem pbcFiniteGraph_representation {A B : Type w} [Finite A] [Finite B]
       (u : ∀ b : B, (X (s b)).toStage (h (s b)) ⟶
         (X (t b)).toStage (h (t b))),
       ∀ b : B, PairCategory.mkHom M (h (s b)) (h (t b)) (u b) = f b := by
-  sorry
+  classical
+  choose k hX hY hk using fun b ↦ PairCategory.exists_mkHom_eq (f b)
+  obtain ⟨M, hM⟩ := Finite.exists_le (fun q : A ⊕ B ↦
+    Sum.elim (fun a ↦ (X a).stage) k q)
+  let h : ∀ a : A, (X a).stage ≤ M := fun a ↦ hM (Sum.inl a)
+  have hu : ∀ b : B, ∃ u : (X (s b)).toStage (h (s b)) ⟶
+      (X (t b)).toStage (h (t b)),
+      PairCategory.mkHom M (h (s b)) (h (t b)) u = f b := by
+    intro b
+    obtain ⟨u, e⟩ := hk b M (hM (Sum.inr b))
+    exact ⟨u, e.symm⟩
+  choose u hu using hu
+  exact ⟨M, h, u, hu⟩
 
 variable [∀ i, Preadditive (C i)]
     [∀ {i j : I} (h : i ≤ j), (S.T h).Additive]
@@ -491,7 +580,20 @@ theorem pbcFiniteEqualities_detection {A : Type c} [Finite A]
     ∃ (N : I) (_ : m ≤ N) (hr : ∀ a : A, (r a).k ≤ N)
       (hs : ∀ a : A, (s a).k ≤ N),
       ∀ a : A, S.tr (hr a) (r a).u = S.tr (hs a) (s a).u := by
-  sorry
+  classical
+  constructor
+  · intro e
+    have he : ∀ a : A, ∃ (p : I) (hr : (r a).k ≤ p) (hs : (s a).k ≤ p),
+        S.tr hr (r a).u = S.tr hs (s a).u :=
+      fun a ↦ (PairCategory.mkHom_eq_mkHom_iff' _ _).mp (e a)
+    choose p hr hs he using he
+    obtain ⟨N, hN⟩ := Finite.exists_le (fun a : Option A ↦ a.elim m p)
+    refine ⟨N, hN none, fun a ↦ (hr a).trans (hN (some a)),
+      fun a ↦ (hs a).trans (hN (some a)), ?_⟩
+    intro a
+    exact PairCategory.Rep.rel_of_eq (hr a) (hs a) (he a) (hN (some a))
+  · rintro ⟨N, _, hr, hs, e⟩ a
+    exact (PairCategory.mkHom_eq_mkHom_iff' _ _).mpr ⟨N, hr a, hs a, e a⟩
 
 /-- A literal clause-by-clause specification of the common-stage calculus, using
 actual typed representatives, quotient morphisms and sigma comparisons.
@@ -550,6 +652,36 @@ structure CommonStageCalculusSpec : Prop where
   inclusion_comparison : ∀ i : I, Nonempty ((S.ι i).CommShift ℤ)
   inclusion_normalization : ∀ (i : I) (n : ℤ),
     (S.ι i).commShiftIso n = pbcStageInclusionShiftIso S i n
+
+private theorem commonStageCalculus_generic [∀ i, Limits.HasFiniteBiproducts (C i)]
+    [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive] :
+    CommonStageCalculusSpec S := by
+  have norm := (S.pairPreadditive_exists).exists.choose_spec
+  refine {
+    relation := fun X Y ↦ PairCategory.Rep.rel_equivalence
+    transport_add := ?_
+    transport_cocycle := fun {X Y} r {N P} h k ↦ tr_tr h k r.u
+    operations := norm
+    negation := ?_
+    identity := fun X ↦ PairCategory.id_eq_mkHom X (le_refl _)
+    composition := fun {X Y Z} r s N hr hs ↦ PairCategory.mkHom_comp_mkHom' r.u s.u hr hs
+    biproducts := inferInstance
+    finite_diagram := pbcFiniteGraph_representation S
+    equalities := pbcFiniteEqualities_detection S
+    shift_objects := fun X ↦ rfl
+    shift_maps := fun {X Y} r ↦ rfl
+    shift_additive := inferInstance
+    inverse_additive := inferInstance
+    inverse_left := ⟨shiftFunctorCompIsoId S.PairCategory (-1 : ℤ) 1 (by decide)⟩
+    inverse_right := ⟨shiftFunctorCompIsoId S.PairCategory (1 : ℤ) (-1) (by decide)⟩
+    inclusion_comparison := fun i ↦ ⟨inferInstance⟩
+    inclusion_normalization := fun i n ↦ rfl }
+  · intro X Y r N h v
+    simp only [tr, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+  · intro X Y r
+    apply neg_eq_of_add_eq_zero_left
+    rw [← (norm X Y r.k r.hX r.hY (-r.u) r.u).1, neg_add_cancel]
+    exact (norm X Y r.k r.hX r.hY 0 0).2
 
 end CategoryTheory.StageSystem
 
@@ -720,6 +852,6 @@ theorem commonStageCalculus (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω]
     (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
     (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) :
     CommonStageCalculusSpec (pbcScalarSystem l Ω T hdim hl) := by
-  sorry
+  exact commonStageCalculus_generic (pbcScalarSystem l Ω T hdim hl)
 
 end AlgebraicGeometry.Scheme
