@@ -40,11 +40,11 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-sheafification-sets-exact], $\\underline{E\\times F}$ identifies with $\\underline E\\times\\underline F$ through the two projections, and $\\underline{\\{*\\}}=1$. Since $f^{-1}$ preserves finite limits, naturality of Step 2 with respect to these projections implies $c_{E\\times F}=c_E\\times c_F$ under these identifications: the two projections of both maps are equal, so the product universal property proves equality. Also $c_{\\{*\\}}$ is the terminal comparison. By [lem-cbc-module-sheafification-underlying-sets] with $P$ the constant $R$-module presheaf, the underlying set sheaf of $\\underline M$ is exactly the set constant sheaf used above, compatibly with its constant sections. The same compatibility for the constant ring follows from [lem-pc-sites-sheafification-underlying-sets].",
+   "text": "Constant module sheafification, followed by forgetting to abelian sheaves, is the constant abelian sheaf functor; forgetting further to sets gives the canonical comparison of [lem-pc-sites-module-sheafification-interface, lem-pc-sites-sheafification-underlying-sets]. The constant module functor preserves finite limits: its underlying abelian functor is constant presheaf followed by the left-exact sheafification of [lem-weil-pbc-sheafification-sets-exact], and the module forgetful functor reflects finite limits. The inverse-image functor of [lem-pe-constant-left-module-inverse-image] also preserves finite limits. After evaluation at each target-site object, both module-valued functors therefore give left-exact abelian-group-valued functors on the additive category of R-modules. Mathlib's AddCommGrpCat.leftExactFunctorForgetEquivalence lifts the natural set comparison uniquely to an abelian comparison. Faithfulness of abelian-group forgetting proves compatibility with restriction maps and naturality in modules.",
    "uses": [
     "lem-weil-pbc-sheafification-sets-exact",
-    "lem-cbc-module-sheafification-underlying-sets",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-pc-sites-module-sheafification-interface"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "Use [lem-pe-constant-left-module-inverse-image] for $\\Lambda=R$, so the operations of $f_R^*\\underline M$ are obtained by applying $f^{-1}$ to the source operations. Naturality of $c$ for $+:M\\times M\\to M$, $0:\\{*\\}\\to M$ and $-:M\\to M$, together with Step 3, gives $c_M f^{-1}(+)=+\\,(c_M\\times c_M)$, $c_M f^{-1}(0)=0$ and $c_M f^{-1}(-)=-\\,c_M$. For the action $\\mu:R\\times M\\to M$ it gives $c_M f^{-1}(\\mu)=\\mu\\,(c_R\\times c_M)$. Here [lem-pc-sites-module-sheafification-interface] identifies the action on the constant module sheaf with the sheafification of this constant-presheaf action. The ring comparison $c_R$ agrees with the canonical ring identification in the inverse-image node: both carry every constant scalar injection to that scalar, and the coproduct universal property in Step 2 forces equality. Consequently $c_M$ is a morphism of module sheaves [def-weil-sheaf-of-modules-category]. Its inverse is linear: substituting $x=c_M^{-1}(y)$ in $c_M(ax)=a c_M(x)$ and applying $c_M^{-1}$ gives $c_M^{-1}(ay)=a c_M^{-1}(y)$, and the same argument gives additivity. It therefore gives the asserted module isomorphism.",
+   "text": "For r in R, multiplication by r on an R-module is R-linear because R is commutative. The unit of module sheafification is linear over the constant ring presheaf, so sheafification sends this endomorphism to the actual constant-scalar action. This equality is checked before the sheafification unit and extended by its universal property [lem-pc-sites-module-sheafification-interface]. The scalar-compatibility and underlying-isomorphism fields of [lem-pe-constant-left-module-inverse-image] then identify inverse image of this endomorphism with constant-scalar multiplication on the image module sheaf. Naturality of the abelian comparison for multiplication by r proves that its components commute with every constant scalar. The map from the constant ring presheaf to the constant ring sheaf is locally surjective. Mathlib's PresheafOfModules.restrictHomEquivOfIsLocallySurjective extends these morphisms uniquely to morphisms linear over the full constant ring sheaf: locally every scalar section is constant and sheaf separatedness extends the equality. Its construction leaves the underlying abelian map unchanged. The resulting natural transformation is an isomorphism because forgetting modules to sets reflects isomorphisms.",
    "uses": [
     "lem-pe-constant-left-module-inverse-image",
     "lem-pc-sites-module-sheafification-interface",
@@ -79,7 +79,6 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
   "def-weil-sheaf-of-modules-category",
-  "lem-cbc-module-sheafification-underlying-sets",
   "lem-pc-sites-module-sheafification-interface",
   "lem-pc-sites-sheafification-underlying-sets",
   "lem-pe-constant-left-module-inverse-image",
@@ -89,7 +88,8 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 0H7J (constant-sheaf universal property), 00WJ (finite limits), 00YR and 00YV (algebraic structures); sites-modules.tex Tag 03CY (module action); categories.tex Tag 0038 (left adjoints and colimits)"
+  "place": "Tags 0H7J (constant-sheaf universal property), 00WJ (finite limits), 00YR and 00YV (algebraic structures); sites-modules.tex Tag 03CY (module action); categories.tex Tag 0038 (left adjoints and colimits)",
+  "note": "C5 implements the constant-scalar variant of the fixed-ring argument in Tag 00YV, using Mathlib left-exact-functor fullness to obtain additivity."
  },
  "mathlib_searches": [
   {
@@ -259,5 +259,15 @@
   "group": "N1",
   "result": "pass",
   "note": "The statement matches the node clause by clause: small sites in universe u, as in lem-pe; an adjunction L ⊣ Rfun with L preserving finite limits; any commutative ring R and any R-module M; a module iso e between d.moduleFunctor.obj(siteConstantModuleFunctorGeneral J R M) and the same on K; naturality for every linear map; and a last clause normalizing e on each constant section through moduleSetIso and pointIso. That clause determines e uniquely, because const M is the coproduct of the sections, L preserves it and W is faithful, so arbitrary automorphisms are excluded. The ∃ d is harmless: presentation_coherence with e = refl transports the normalized iso to any other lift. Both helpers are real canonical data (Mathlib constantCommuteCompose and the actual constant section), and the constant-module functor is a genuine sheafification. Only lean and stmt_deps differ from the base node; the added def-sf-site-constant-module-functor is landed and used. lean.statement is verbatim in the file. One sorry, source and blueprint docstrings present, all five proof steps in the theorem docstring, report sections present, no unbound universes. Edge cases checked: M = 0, zero ring, empty site, empty covers, infinite M, f = id. No duplicate found in Mathlib, side or newtargets. nt_compile: dependency clean in 23.5 s, item clean in 3.7 s and 2.8 s with rc 0; a control copy with a deliberate error confirmed that diagnostics surface."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261019T002516-L-2144300",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
