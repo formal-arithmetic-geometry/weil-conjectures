@@ -21,103 +21,82 @@
  ],
  "proof": [
   {
-   "text": "Work on compatible representatives of $\\mathcal C=X_{\\mathrm{proet}}$ in the size convention of [def-weil-proetale-inverse-image], with $\\mathcal O=\\Lambda_X$. By [lem-pur-proetale-open-unit-evaluation], after the canonical coefficient identification from [prop-weil-pbc-proetale-constant-ring-map] and the localization identification from [lem-weil-proetale-weakly-etale-localization], the module pullback $j^*M$ is the restriction $M|_U$ and the unit $M\\to j_*j^*M$ is restriction on every object. Explicitly, for $V\\to X$ put $V_U=V\\times_XU$. The direct-image formula in [def-weil-proetale-inverse-image] gives $(j_*j^*M)(V)=M(V_U)$, and the unit is the restriction map $M(V)\\to M(V_U)$.",
+   "text": "Use the already-proved finite-coefficient restriction/direct-image adjunction and its canonical left-adjoint comparison from def-sfb-finite-extension-by-zero-adjunction. It is induced by the composition/base-change adjunction of pro-etale sites, so its unit on V is restriction along V times_X U -> V. The adjunction unit_leftAdjointUniq_hom_app equation identifies the specified inverse-image unit with this restriction unit followed by direct image of an isomorphism. Thus it suffices to prove the restriction unit epic; no scalar-extension or intrinsic-module comparison is needed.",
    "uses": [
-    "lem-pur-proetale-open-unit-evaluation",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image"
+    "def-sfb-finite-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
-    "place": "Proof, first paragraph: restriction and coefficient identification"
+    "place": "node lem-pur-support-exact, order 1930"
    }
   },
   {
-   "text": "For any object $T$ of $\\mathcal C$, let $P_T=\\mathcal O[h_T]$ be the free module presheaf of [lem-weil-pbc-free-yoneda-presheaf-module], and let $L_T=P_T^\\#$ be its module sheafification [def-weil-presheaf-modules-sheafification]. For $a:V_U\\to V$, the induced map $P_{V_U}\\to P_V$ sends $e_b$ to $e_{ab}$ on each object $T$. This is a presheaf morphism: for $c:T'\\to T$, either order of applying restriction and this map sends $r e_b$ to $r|_c e_{abc}$; hence the component maps commute with all restrictions. The map $\\operatorname{Hom}(T,V_U)\\to\\operatorname{Hom}(T,V)$ is injective: two arrows with equal $V$-components also have equal $U$-components because $U\\to X$ is a monomorphism, and then agree by the pullback universal property. Consequently each component on free modules is injective: a left inverse on that component retains coefficients on basis elements in this image and discards all others. This componentwise injectivity implies that the presheaf morphism is a monomorphism, since equality after it can be cancelled at every object. By exactness of module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact], its sheafification $L_{V_U}\\to L_V$ is a monomorphism. No naturality of the componentwise left inverses is asserted or needed.",
-   "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Remark Tag 03EJ (remark-localize-presheaves); Lemma Tag 03EI (lemma-sheafification-exact); free-basis injection written out"
-   }
-  },
-  {
-   "text": "The module sheafification adjunction of [def-weil-presheaf-modules-sheafification] and the explicit bijection of [lem-weil-pbc-free-yoneda-presheaf-module] identify $\\operatorname{Hom}_{\\mathcal O}(L_T,M)$ with $M(T)$: a section $x\\in M(T)$ corresponds before sheafification to $e_b\\mapsto x|_b$. Precomposition by $L_{V_U}\\to L_V$ therefore corresponds exactly to restriction along $a:V_U\\to V$: on the identity generator of $V_U$ the composite takes the value $x|_a$. This establishes the required compatibility in the represented object, rather than assuming it from naturality in the coefficient sheaf.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-free-yoneda-presheaf-module"
-   ],
+   "text": "For a monomorphism a:V->W in X_proet, form the lifted representables followed by ModuleCat.free R. The induced presheaf map sends each basis element b to a composed with b. The function on bases is injective by cancellation of a; Finsupp.mapDomain_injective proves componentwise injectivity, hence the presheaf map is monic. The left-exact ModuleCat-valued sheafification functor preserves this monomorphism. These are explicit Mathlib constructions in the private helper restriction_surjective; variable-ring module sheafification is unnecessary.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Remark Tag 03EJ (remark-localize-presheaves); equation-map-lower-shriek-OU-into-module after Lemma Tag 03DI; direct generator calculation"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+    "place": "node lem-pur-support-exact, order 1930"
    }
   },
   {
-   "text": "Fix a degree $r$ and an arbitrary $V$ in $\\mathcal C$. For $y\\in I^r(V_U)$, step 3 gives a morphism $L_{V_U}\\to I^r$. Extend it across the monomorphism $L_{V_U}\\to L_V$ of step 2, using injectivity of $I^r$ in the precise sense of [def-sp-injective-resolutions]. The resulting morphism corresponds to $x\\in I^r(V)$ with $x|_{V_U}=y$ by step 3. Hence the unit $\\eta^r:I^r\\to j_*j^*I^r$ is surjective on sections over every $V$, by step 1. It is an epimorphism of sheaves: if two morphisms from $j_*j^*I^r$ have equal composites with $\\eta^r$, evaluate at any $V$ and lift any section by this surjectivity to see that their components agree on every section. The morphisms are therefore equal.",
+   "text": "Given x in M(V), the proved source-library freeModuleYonedaHom sends a generator b to its restriction of x. Extend this map to sheafification by sheafifyLift. Its value on the identity generator is x by toSheafify_sheafifyLift and freeModuleYonedaHom_gen. Extend the resulting morphism to the sheafified free module on W using Injective.factorThru. Evaluate the extension on the identity generator of W. Naturality of the extension, naturality of toSheafify, and the basis map formula prove that its restriction along a is x. This is a complete Lean proof of restriction_surjective, valid also when the coefficient ring is zero.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-sheaf-of-modules-category"
+    "def-sp-injective-resolutions"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
-    "place": "Proof, applying Hom(-,I) to the free-module monomorphism and proving the last surjectivity term by term"
+    "place": "node lem-pur-support-exact, order 1930"
    }
   },
   {
-   "text": "By [def-pur-flasque-support], in each degree\n$\\mathcal G_ZI^r=\\ker(\\eta^r)=s_*s^!I^r$, where the identification is the inverse of the canonical closed adjunction unit, an isomorphism for the quasi-compact open complement by [lem-exc-proetale-closed-essential-image]; kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. Naturality of restriction gives $\\eta^{r+1}d_I^r=(j_*j^*d_I^r)\\eta^r$. Thus $d_I^r$ restricts to $\\delta^r:\\mathcal G_ZI^r\\to\\mathcal G_ZI^{r+1}$, equivalently to the differential on $s_*s^!I^\\bullet$, and $\\delta^{r+1}\\delta^r=0$ by cancellation of the kernel inclusion. The kernel inclusions and the units form morphisms of complexes, with zero composite. In each degree the inclusion is monic, its image is the kernel of $\\eta^r$, and $\\eta^r$ is epic by step 4. Therefore the sequence is short exact in each degree by [def-weil-pbc-exact-sequence].",
+   "text": "For each V, the first projection V times_X U -> V is a monomorphism, since it is a base change of the open immersion j. The faithful forgetful functor from the pro-etale slice reflects this property. Step 3 makes restriction surjective on sections of an injective sheaf. Each component of the restriction unit is therefore epic in ModuleCat; the natural transformation is epic, and the faithful inclusion from sheaves reflects epimorphisms. Step 1 transports this to the specified open unit, in every degree.",
    "uses": [
-    "def-pur-flasque-support",
-    "def-weil-sheaf-of-modules-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+    "place": "node lem-pur-support-exact, order 1930"
+   }
+  },
+  {
+   "text": "Let q be finiteSupportedClosedComparison R s j. By def-pur-flasque-support it is invertible when j is quasi-compact. Define the natural inclusion as q inverse followed by the supported-kernel inclusion. Naturality of this inclusion and of the open unit gives the two chain maps on the specified complex objects. The kernel equation proves their composite zero. The isomorphism inverse laws prove the required equation q_n followed by f_n equals the supported-kernel inclusion; g_n is definitionally the specified open unit.",
+   "uses": [
+    "def-pur-flasque-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+    "place": "node lem-pur-support-exact, order 1930"
+   }
+  },
+  {
+   "text": "Evaluate the kernel of the natural open unit at I.X n; evaluation preserves limits, so this remains a kernel fork. The corresponding short complex is exact with monic first map. Its last map is epic by step 4. Transport its short exactness along the closed-comparison isomorphism in the first term and identities in the other terms. Finally apply HomologicalComplex.shortExact_of_degreewise_shortExact to obtain short exactness of complexes, without boundedness or K-injectivity.",
+   "uses": [
     "def-weil-pbc-exact-sequence",
-    "lem-exc-proetale-closed-essential-image"
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
-    "place": "Proof, first sentence identifying the kernel, and its termwise extension to the given complex"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-cochain-complexes-degreewise-exact] to the abelian category of $\\Lambda_X$-module sheaves [def-weil-sheaf-of-modules-category]. Step 5 supplies the complex maps and their zero composite, and steps 4--5 supply short exactness in every integer degree. Its degreewise criterion gives the asserted short exact sequence of complexes $0\\to s_*s^!I^\\bullet\\to I^\\bullet\\to j_*j^*I^\\bullet\\to0$. No boundedness of the complex and no K-injectivity are used.",
-   "uses": [
-    "lem-weil-pbc-cochain-complexes-degreewise-exact",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma Tag 0114 (lemma-cat-cochain-abelian), degreewise short exactness criterion"
+    "place": "node lem-pur-support-exact, order 1930"
    }
   }
  ],
  "proof_deps": [
   "def-pur-flasque-support",
+  "def-sfb-finite-extension-by-zero-adjunction",
   "def-sp-injective-resolutions",
   "def-weil-pbc-exact-sequence",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-exc-proetale-closed-essential-image",
-  "lem-pur-proetale-open-unit-evaluation",
-  "lem-weil-pbc-cochain-complexes-degreewise-exact",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
-  "place": "Blueprint Proof, read in the launcher literature mirror; free-module argument expanded in six steps. Localization and free-module calculations checked against Stacks TeX labels definition-localize-ringed-site (04IX), remark-localize-presheaves (03EJ), lemma-sheafification-exact (03EI), and lemma-cat-cochain-abelian (0114)."
+  "place": "Proof, the same free-module and injective-lifting argument, implemented by C9 in Lean. The source restriction adjunction supplies the open-unit formula directly. Sheafification is for ModuleCat-valued presheaves; the closed comparison is the existing finiteSupportedClosedComparison_isIso."
  },
  "mathlib_searches": [
   {
@@ -241,11 +220,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-exc-proetale-closed-essential-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -385,5 +360,15 @@
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, dependencies, canonical arrows, source-based correction and sole citer, universes, edge cases, reports, and verbatim signature. Reproduced clean scompile checks in 9.7 s and 7.1 s. No defects or repository changes.",
   "statement_corrected": true
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T093321-L-2294689",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
