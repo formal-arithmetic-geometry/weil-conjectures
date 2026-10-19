@@ -24,9 +24,33 @@
   "def-kun-constant-sheaf",
   "def-weil-pbc-global-sections-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the constant-presheaf CoreMonoidal explicitly: its unit isomorphism and every tensor isomorphism are NatIso.ofComponents of Iso.refl. The default CoreMonoidal coherence proofs verify naturality, associativity, and units componentwise, as in the existing Functor.Monoidal.const construction. Both prescribed hom-component identities hold by reflexivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a flat coefficient module M, apply the existing geometric-fiber flatness criterion to its constant sheaf. At each separably closed geometric point s, Point.sheafFiberConstantSheafIso for (Scheme.pointSmallEtale s).ulift identifies its fiber with M. Transport ObjectProperty.flat along the inverse isomorphism. This also covers the empty scheme since the geometric-point condition is then vacuous.",
+   "uses": [
+    "lem-sfb-etale-flat-geometric-fibers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining constructions are unchanged: compose the normalized monoidal constant-presheaf functor with monoidal sheafification, derive the constant-sheaf/global-sections adjunction, and take rightAdjointProjectionMap of the canonical leftDerivedTensorComparison. The two proved theorems supply the same existing instances without any postponed proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-flat-geometric-fibers"
+ ],
+ "proof_origin": {
+  "by": "C6 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 07A4, 07A6, equation 0B56; lemma-check-flat-stalks. Constant-presheaf core follows the explicit existing Functor.Monoidal.const construction; geometric fibers use the existing FlatModuleCat criterion and Point.sheafFiberConstantSheafIso."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -120,5 +144,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Statement, dependencies, constructions, edge cases, docstrings, and universes checked; both delivered Lean modules compiled cleanly with scompile.py."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261019T231053-L-545379",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

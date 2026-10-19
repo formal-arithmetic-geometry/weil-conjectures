@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The derived constant-coefficient projection map
@@ -47,7 +48,12 @@ theorem exists_etaleConstantPresheafCoreMonoidal (Λ : Type (u + 1)) [CommRing �
       (∀ U : X.Etaleᵒᵖ, h.εIso.hom.app U = 𝟙 _) ∧
       (∀ (M N : ModuleCat.{u + 1} Λ) (U : X.Etaleᵒᵖ),
         (h.μIso M N).hom.app U = 𝟙 _) := by
-  sorry
+  refine ⟨{ εIso := NatIso.ofComponents fun _ ↦ Iso.refl _
+            μIso _ _ := NatIso.ofComponents fun _ ↦ Iso.refl _ }, ?_, ?_⟩
+  · intro U
+    rfl
+  · intro M N U
+    rfl
 
 /-- The constant-presheaf monoidal structure with identity components. Its data are
 uniquely fixed by the normalization in the preceding theorem.
@@ -79,7 +85,10 @@ The empty scheme has the zero sheaf category, where the same assertion holds. -/
 theorem etaleConstantSheaf_preservesFlat (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesFlat := by
-  sorry
+  refine ⟨fun {M} hM ↦ (flat_iff_forall_flat_sheafFiber_obj _).2 ?_⟩
+  intro Ω _ _ s
+  exact ObjectProperty.prop_of_iso ObjectProperty.flat
+    ((Scheme.pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
 
 attribute [instance] etaleConstantSheaf_preservesFlat
 
@@ -117,3 +126,4 @@ noncomputable def constantDerivedProjectionMap (X : Scheme.{u})
       E).app K
 
 end AlgebraicGeometry.Etale
+
