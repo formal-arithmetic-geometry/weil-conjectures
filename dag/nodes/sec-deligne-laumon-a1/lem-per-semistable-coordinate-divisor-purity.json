@@ -15,7 +15,9 @@
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-per-punctual-purity",
+  "def-per-monomial-trait-model"
  ],
  "proof": [
   {
@@ -328,5 +330,30 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-434ac5972 (reviewer sub-agent of L); spot-checked: I read ILO XVI 3.5.11–3.5.13 and the proof of 3.5.12 on printed p.251. The source only cites Illusie 2004 Thm 1.4 and Rapoport–Zink Satz 2.21 for the all-one case. Neither is in literature/, so the WANTED entries and the agent origin are correct. The item statement is unchanged; it is what the monomial parent uses, and it is not weakened. Small cases: n=1 is purity at the closed point of a DVR; the n=2 crossing and the smooth points both follow from absolute purity. No SGA is cited. Steps 1, 3, 4 and 5 check out against the cited statements: the regularity of the monomial chart, the étale and torsor argument (roots of unity give unit differences, the monic derivative is invertible, CRT splits the self-product), the descent node plus procyclic two-term giving H^0 = H^1 = A, and the localization cone. Two faults, both repaired in fixes/. (1) Step 2, C1/C4: the reduction from the stalk of h_i^! to supported cohomology on the strict localization had no node for the base change of h^! along Y→X. It also lacked nodes for C Noetherian, for Y and D strictly henselian, and for t_i staying a nonzerodivisor. I added lem-per-ind-etale-closed-support-base-change, lem-sbc-strict-hensel-regular-divisor-quotient (with the Mathlib leaf lem-trf-polynomial-ring-regular-base), lem-weil-pbc-etale-algebra-flat, lem-weil-pbc-strict-henselization-local-structure and thm-amb-etale-exceptional-adjoint. (2) Step 6, C4/E5: the step claimed that the asd node and the boundary definition 'precisely' give the localization boundary of the Kummer class. They only pin a Yoneda product. I rewrote the step following the accepted Q10 repair: [E] = e_{t^{-1}}, and lem-per-supported-yoneda-localization gives -∂κ(t_i), a generator, with the scalar comparison node. I updated proof_deps and added five tool_uses. New nodes: kummer-tower-acyclic is true (via regular Y_r = C[u]/(u^N - t_i) and transitions killing κ). It is not a restatement of the item and has no duplicate; its future split must avoid absolute, monomial and log purity, or it makes a cycle. procyclic-torsor-tower-descent is true (Hochschild–Serre over the finite levels, then the colimit) and has no duplicate. Batch-5 flags: asd→lem-pod-etale-stalk-tensor-scalar (a stalk tensor fact), lem-trf-polynomial-ring-regular-base (algebra) and lem-trf-closed-immersion-strict-localization-cartesian (algebra) are all generic. None of their closures contains a thm-trf or thm-pod node. The nodes added by the repair also add only generic nodes and make no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemistableCoordinateDivisorPurity",
+  "declaration": "AlgebraicGeometry.Etale.semistable_coordinate_divisor_purity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.semistableCoordinateRing",
+   "AlgebraicGeometry.Etale.semistableCoordinateIdeal",
+   "AlgebraicGeometry.Etale.semistableCoordinateDivisor",
+   "AlgebraicGeometry.Etale.semistableCoordinateDivisor_isClosedImmersion",
+   "AlgebraicGeometry.Etale.semistable_coordinate_divisor_purity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemistableCoordinateDivisorPurity.lean",
+  "statement": "theorem semistable_coordinate_divisor_purity (ell : ℕ) (hell : ell.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (hinv : IsUnit (ell : R)) (n : ℕ) (hn : 1 ≤ n) : ∀ i : Fin n, ∃ (hreg : IsStalkRegularClosedImmersion (semistableCoordinateDivisor R π n i) 1), ∃ (hunit : IsUnit ((ell ^ 1 : ℕ) : Γ(Spec (.of (semistableCoordinateRing R π n)), ⊤))), IsIso (punctualPurityClassMap ell hell (semistableCoordinateDivisor R π n i) 1 hreg hunit)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b699e349",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: trait hypotheses (domain, local, Noetherian, ringKrullDim=1, maxIdeal=span{π}), ℓ unit, n≥1, all-one chart = recorded monomialTraitAlgebra (fun _=>1), H_i=V(T_i) closed immersion, ∀ i : Fin n, IsIso of punctualPurityClassMap with c=1 (transpose of the c=1 Kummer class, target A_X(1)[2]); witnesses hreg/hunit are Props and provable on every trait. lean.statement verbatim; stmt_deps gain only landed def nodes def-per-punctual-purity and def-per-monomial-trait-model, both used. nt_compile --json clean (item 5.5 s). Advisory H4 maintainer note: semistableCoordinateDivisor duplicates theorem-owned monomialBoundaryInclusion at a≡1 but is rfl-equal (scratch compile), so the parent's Step 3 composes; consolidate into a def node later. Advisory: some stated proof-dep modules not plain-imported."
  }
 }
