@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-proetale-algebraic-inverse-image",
+ "kind": "statement",
+ "title": "Algebraic presentation of the specified pro-etale module inverse image",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism and let $R$ be a sheaf of commutative rings on the small pro-etale site of $Y$ [def-weil-proetale-inverse-image]. Write $L=f^{-1}$ for the specified set inverse image and $R_I=f^{-1}R$ for the specified ring inverse image. There exists an algebraic inverse-image presentation $I$ [def-weil-pbc-algebraic-inverse-image] along $L$ from $R$ to $R_I$ whose module functor equals the existing functor proEtaleModuleInverseImage(f,R), including its action on morphisms. All ring and module operation graph equations are those in AlgebraicInverseImage. No finiteness or immersion assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Modules on Sites, Tag 03D2"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the unit-normalized ringSetsIdentification_exists and moduleSetsIdentification_exists of lem-pur-proetale-inverse-image-tensor-comparison. The existing module-adjunction unit is natural. Transpose the proposed module-identification naturality square through the set inverse-image adjunction: naturality of the set unit and the two normalization equations reduce it to naturality of the module unit. Thus the component module identifications form the required natural isomorphism of underlying-set functors.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any generalized operation graph on a test sheaf T, both proposed composites are sheaf maps from set inverse image of T. They are equal if their adjuncts agree on every original section. Naturality of the set unit and the normalized identifications reduce this to preservation of addition, multiplication, zero and one by the original ring unit, and addition, zero and semilinear scalar action by the original module unit. This proves all seven operation graph equations directly, without choosing a replacement module functor. Use proEtaleModuleInverseImage as modules; the final equality is reflexivity.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Modules on Sites, Tag 03D2",
+  "note": "Lean proof by W2 from the already stated normalized ring and module underlying-set identifications; all graph equations and module naturality are proved by set-adjunction injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of rings and modules transports addition multiplication and scalar multiplication along inverse image of sets",
+   "date": "2026-10-18",
+   "results": [
+    "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+    "AlgebraicGeometry.Scheme.inv_app",
+    "AlgebraicGeometry.Scheme.Modules.pullback",
+    "Subring.comap",
+    "PresheafOfModules.Sheafify.SMulCandidate.h",
+    "PresheafOfModules.Sheafify.smul",
+    "SheafOfModules.pullback",
+    "AlgebraicGeometry.StructureSheaf.comap_id'"
+   ],
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicInverseImage",
+   "date": "2026-10-18",
+   "results": [],
+   "verdict": "no match",
+   "note": "loogle: unknown identifier 'AlgebraicInverseImage'"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|module_transport",
+   "date": "2026-10-18",
+   "results": [],
+   "verdict": "no match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumScalarExtension",
+  "date": "2026-10-19",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "proof paragraph (2): algebraic inverse image on the stratum, needed for the K-flat pullback comparison",
+   "via": [
+    "lem-sp-stratum-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAlgebraicInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAlgebraicInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleAlgebraicInverseImage_exists",
+  "statement": "theorem proEtaleAlgebraicInverseImage_exists {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :\n    ∃ I : SheafOfModules.AlgebraicInverseImage\n        (proEtaleSheafInverseImage f (Type (u + 1))) R\n        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R),\n      I.modules = proEtaleModuleInverseImage f R",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T112603-L-3958856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T112603-L-3958856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

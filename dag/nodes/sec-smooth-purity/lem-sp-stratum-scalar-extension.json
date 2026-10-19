@@ -21,90 +21,52 @@
  ],
  "proof": [
   {
-   "text": "Put $L=i^{-1}$ on sheaves of sets. The construction in [def-weil-proetale-inverse-image] gives a geometric morphism on the chosen small pro-etale sites: base change sends the final object $T\\to T$ to $S\\to S$, preserves finite limits, and direct image is precomposition. For the finite commutative ring $A$, [prop-weil-pbc-proetale-constant-ring-map] says that the particular structure map $c_A:L A_T\\to A_S$, adjoint to the map sending constant scalars to themselves, is invertible. Thus the module pullback $i^*F=LF\\otimes_{LA_T}A_S$ is canonically $LF$ with its action transported through $c_A$: the map on local tensors is $x\\otimes a\\mapsto c_A^{-1}(a)x$, with inverse $x\\mapsto x\\otimes1$. By [prop-weil-pbc-proetale-constant-exact] this module functor is exact. The same coefficient comparison applies to $B$.",
+   "text": "Use the canonical coefficient comparison for invertibility. Compose the constant-module presheaf/evaluation adjunction with simultaneous module sheafification. Base change preserves the final object. Identity on sections identifies the two global-section functors; linearity follows from the constant-section coefficient equation. Uniqueness of left adjoints gives the constant-module isomorphism. Its unit equation at the terminal object and naturality along the map to that object give the displayed formula at every object.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00YV (proposition-functoriality-algebraic-structures-topoi) and 0H7J (example-constant-sheaf); specialized coefficient comparisons supplied by the cited nodes"
-   }
-  },
-  {
-   "text": "Write $\\Delta_T E,\\Delta_S E$ for constant sheaves of sets. For a set $E$ and a sheaf of sets $F$ on $S$, the inverse-image adjunction from [def-weil-proetale-inverse-image] and the constant-sheaf adjunction [lem-weil-pbc-constant-sheaf-maps-global-sections] give, naturally in both variables,\n$$\\operatorname{Hom}(L\\Delta_T E,F)=\\operatorname{Hom}(\\Delta_T E,i_*F)=\\operatorname{Hom}_{\\mathrm{Sets}}(E,(i_*F)(T))=\\operatorname{Hom}_{\\mathrm{Sets}}(E,F(S))=\\operatorname{Hom}(\\Delta_S E,F).$$\nThe middle equality uses $(i_*F)(T)=F(S)$, since base change preserves the final object. Hence $L\\Delta_T$ and $\\Delta_S$ are left adjoints to the same global-sections functor. The unit-compatible uniqueness statement [lem-weil-pbc-conjugate-iso-unit-equation] gives a natural isomorphism $\\gamma_E:L\\Delta_T E\\xrightarrow{\\sim}\\Delta_S E$. Its adjoint sends the constant section $e$ to the constant section $e$: this is precisely the equality of units in that statement. This construction works for every set $E$, including singleton and product sets.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (example-constant-sheaf), with categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints): composite adjunction and its unit-compatible uniqueness"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply step 2 to the underlying sets of $A$ and $M$. By [lem-weil-pbc-sheafification-sets-exact], the constant-sheaf functor preserves finite products: the product of two constant presheaves is the constant presheaf of the product, and sheafification preserves that product. The functor $L$ also preserves finite products by [def-weil-proetale-inverse-image]. Naturality of $\\gamma$ at the two projections therefore identifies $\\gamma_{E\\times E'}$ with $\\gamma_E\\times\\gamma_{E'}$ under these product comparisons. Apply naturality at $+:M\\times M\\to M$, $-:M\\to M$, $0:\\{*\\}\\to M$, and the action $A\\times M\\to M$. It gives respectively the addition, negation, zero and action squares; for example $\\gamma_M L(\\mu_M)=\\mu_{M,S}(\\gamma_A\\times\\gamma_M)$ under the product identification. The module operations are the sheafified constant operations of [def-weil-proetale-locally-constant-sheaf], and the pulled-back operations are exactly those prescribed in [def-weil-proetale-inverse-image]. Both $\\gamma_A$ and $c_A$ have adjunct sending each constant $a$ to itself, so the adjunction makes them equal. Step 1 now gives the required $A_S$-linear isomorphism $i^*\\underline M_T\\simeq\\underline M_S$. Naturality holds for every $A$-linear map $M\\to M'$ by the same naturality square; in particular this applies to $M=B$ as an $A$-module. No local freeness of $M$ was used.",
+   "text": "Construct scalar extension as a functor using the existing sectionwise tensor maps and sheafification. Its tensor-unit Hom equivalence is the normalized change-of-rings adjunction. The existing coefficient direct-image comparison is identity on sections; bridge its pushforward to the arbitrary-ring pushforward by the adjunction triangle identity. Uniqueness of the two composite left adjoints gives beta, its naturality, and its tensor-unit equation. Apply naturality to each differential and use HomologicalComplex.Hom.isoOfComponents to assemble the complex comparisons.",
    "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-proetale-inverse-image",
-    "def-weil-proetale-locally-constant-sheaf"
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-pur-change-of-rings-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WJ (lemma-sheafification-exact) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi); naturality at the displayed module operations"
-   }
+   "elementary": false
   },
   {
-   "text": "Regard $i$ as a morphism of ringed topoi with rings $A_T,A_S$ and structure map $c_A$ from step 1. In each degree $n$, apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the two $A_T$-module sheaves $P^n$ and $B_T$. Using $i^*B_T\\simeq B_S$ from step 3 gives\n$$i^*(P^n\\otimes_{A_T}B_T)\\xrightarrow{\\sim}i^*P^n\\otimes_{A_S}B_S.$$\nThe comparison is $B_S$-linear: on the right $B_S$ acts on its second factor, and naturality of the cited tensor comparison in that factor intertwines multiplication by each constant $b\\in B$ with multiplication by the same $b$ after step 3. These constants locally generate $B_S$ as a sheaf, so the action square holds for all local scalar sections. Naturality in $P^n$ applied to $d^n:P^n\\to P^{n+1}$ makes these maps commute with the differentials. They thus give the asserted natural termwise tensor isomorphism of complexes, and naturality for any cochain map follows degree by degree. This tensor comparison itself does not require $B_T$ to be flat over $A_T$.",
+   "text": "Use the algebraic presentation of the specified inverse-image module functor and finite-limit preservation of the set inverse image. Identify object and morphism formulas with the specified tensor scalar-extension pullback. Apply the ringed-topos K-flat pullback theorem to P, retaining both the K-flat and flat-term hypotheses.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-weil-proetale-locally-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback), applied degreewise; naturality for multiplication on the constant B factor"
-   }
-  },
-  {
-   "text": "The same ringed-topos morphism has the module pullback of [def-weil-proetale-inverse-image]. The complex $P$ is K-flat and each $P^n$ is flat by hypothesis. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] with $\\mathcal C=T_{\\mathrm{proet}}$, $\\mathcal C'=S_{\\mathrm{proet}}$, $\\mathcal O=A_T$, $\\mathcal O'=A_S$, and $c=c_A$. Its conclusion is exactly that the termwise pullback $i^*P$ is K-flat over $A_S$ and has flat terms. Both the K-flat and flat-term hypotheses are retained; this application does not rely on enough points or on a stalk criterion for the pro-etale topos.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
     "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat), with both its K-flatness and flat-term hypotheses"
-   }
+   "elementary": false
   },
   {
-   "text": "By step 1 the additive coefficient pullback $i^*$ is exact. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this functor between the abelian module categories and to the given complex $K$. It yields natural $A_S$-linear isomorphisms $H^q(i^*K)\\simeq i^*H^q(K)$ for every integer $q$, induced by preservation of cycles and boundaries. With the cohomology-sheaf convention [def-weil-derived-cohomology-sheaves], these are precisely the isomorphisms $\\mathcal H^q(i^*K)\\simeq i^*\\mathcal H^q(K)$ in the statement. In particular they hold when the cohomology sheaves restrict to finite locally constant modules on $S$; that restriction hypothesis imposes no additional requirement on this exact-functor calculation.",
+   "text": "Apply the exact pullback functor mapDerivedCategoryHomologyFunctorIso in each degree and reverse it. This identifies derived pullback cohomology with pullback of cohomology.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-derived-cohomology-sheaves"
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N (lemma-exact-functor), applied in each degree, with cohomology sheaves computed in the abelian category of modules"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-sheafification-sets-exact",
   "def-weil-proetale-locally-constant-sheaf",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-pur-change-of-rings-complex",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-derived-cohomology-sheaves"
@@ -112,7 +74,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
-  "place": "Expansion of paragraph (2), following Stacks Tags 0H7J, 00WJ, 00YV, 03EL, 0G7E, 010N and the existing DAG interfaces; the constant-set adjunction and operation squares are written explicitly."
+  "place": "proof paragraph (2), expanded constant-module pullback and stratum tensor comparison",
+  "note": "Lean proof by W2: direct module adjunctions for constants and scalar extension; the algebraic presentation is proved from the existing normalized underlying-set identifications."
  },
  "mathlib_searches": [
   {
@@ -253,13 +216,8 @@
  },
  "tool_uses": [
   "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-sheafification-sets-exact",
   "def-weil-proetale-locally-constant-sheaf",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-derived-cohomology-sheaves"
@@ -296,5 +254,15 @@
   "group": "Q93",
   "result": "pass",
   "note": "Statement, dependencies, constructions, docstrings, edge cases, report sections, and compiler evidence checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T112603-L-3958856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
