@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-support-coefficient-by-projection",
+ "kind": "statement",
+ "title": "Coefficient comparison from finite constant projection",
+ "statement": "Let A and B be finite commutative rings and phi:A to B a ring map. Let c compactify f:X to Y [def-weil-compactifications-refinements]. For T=X,Y let L_T be any left adjoint of exact derived scalar restriction. If the ambient A compact-support functor has a right adjoint, the inverse scalar-adjunction mate of the normalized support restriction square [lem-sf-compact-support-restriction-of-scalars] is invertible on every unbounded object.",
+ "source": {
+  "document": "lean/Sheaf/Paper/ExceptionalAdjointAdmissibility.lean",
+  "place": "Coefficient comparison proof; Stacks Tags 06YY, 07A6 and 0GL6."
+ },
+ "stmt_deps": [
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Transport the compact-support adjunction through the realization equivalences to fixed coefficients, obtaining a left adjoint and preservation of all small coproducts. Apply the finite constant projection theorem with the restricted target ring as a source module. Its arrow identification gives invertibility after exact restriction and realization. Derived realization reflects isomorphisms. Derived scalar restriction reflects them because its homology functor is underived conservative restriction. Hence the original scalar mate is invertible.",
+   "uses": [
+    "lem-sf-finite-support-projection",
+    "lem-sf-support-scalar-projection-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-support-projection",
+  "lem-sf-support-scalar-projection-identification"
+ ],
+ "proof_origin": "C3: canonical projection formula and normalized scalar comparison.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction of scalar extension is tensor with the target ring, and the scalar direct image mate is the canonical projection formula map",
+   "results": "8 ordinary ModuleCat scalar-unit/counit and adjunction hits; no derived support/projection identification.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 generic mate-equivalence, unit/counit, composition and conjugacy results.",
+   "date": "2026-10-19",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*projection|projection.*scalar",
+   "results": "1 unrelated C-star projection result.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalar extension is tensor with the target ring, and the scalar direct image mate is the canonical projection formula map",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj (Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings); RestrictScalars (Mathlib.Algebra.Algebra.RestrictScalars); ModuleCat.RestrictScalars.obj' (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); PresheafOfModules.restrictScalars (Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings); ModuleCat.restrictScalars (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); ModuleCat.RestrictScalars.map' (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); ModuleCat.ExtendRestrictScalarsAdj.homEquiv (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings)",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic ordinary monoidal/shift or scalar-restriction adjunction tools do not give the stated canonical derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "date": "2026-10-19",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "Coefficient paragraph: canonical scalar-extension comparison used for exceptional coefficient mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportCoefficientByProjection",
+  "file": "lean/Sheaf/Paper/SupportCoefficientByProjection.lean",
+  "declaration": "WeilConjectures.supportCoefficient_isIso_of_projection",
+  "statement": "theorem supportCoefficient_isIso_of_projection\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (LX : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory X B)\n    (LY : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory Y B)\n    (aX : LX ⊣ (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory)\n    (aY : LY ⊣ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory)\n    {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A}\n    (a : sfAmbientCompactSupportCandidate A c ⊣ G)\n    (K : proEtaleDerivedCategory X A) :\n    IsIso ((((mateEquiv aX aY).symm\n      (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c φ).hom)).natTrans).app K)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261019T192652-L-1853013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261019T192652-L-1853013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

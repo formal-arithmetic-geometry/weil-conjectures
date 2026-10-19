@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-derived-monoidal-comparison-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of the canonical derived tensor comparison",
+ "statement": "For an exact additive strong monoidal left adjoint preserving flat objects between Grothendieck abelian braided closed monoidal categories admitting functorial flat resolutions, the canonical derived tensor comparison commutes with shifts whenever the left-derived counit does. Its canonical unit is invertible and its comparison is oplax monoidal. The canonical tensor is [def-weil-derived-tensor].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarMonoidal/Comparison.lean",
+  "place": "Monoidal localization construction; UpperStarMonoidal/Shift.lean, flat-resolution shift argument."
+ },
+ "stmt_deps": [
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Compute the comparison on a flat resolution using its universal counit. The tensor shift comparison applies on these representatives; naturality transports the result along the resolution isomorphism. The existing oplax-of-lax-square construction proves monoidal coherence; the unit is the composite of the derived counit on the unit and the ordinary unit comparisons, all invertible.",
+   "uses": [
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-tensor"
+ ],
+ "proof_origin": "C3: canonical projection formula and normalized scalar comparison.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived tensor comparison of an exact strong monoidal functor commutes with shifts and its unit is invertible",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Monoidal.InducingFunctorData.μIso, CategoryTheory.exactPairingOfFaithful, CategoryTheory.exactPairingOfFullyFaithful, CategoryTheory.ExactPairing.ofFullyFaithful, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_inv",
+   "date": "2026-10-19",
+   "verdict": "No exact derived tensor/projection theorem; generic tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.Functor.CommShift.commShiftIso, CategoryTheory.Functor.CommShift.isoZero', CategoryTheory.Functor.CommShift.isoZero, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful",
+   "date": "2026-10-19",
+   "verdict": "No exact derived tensor/projection theorem; generic tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison|tensorLeftCounit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "No exact derived tensor/projection theorem; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived tensor comparison of an exact strong monoidal functor commutes with shifts and its unit is invertible",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.ofLaxMonoidal (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Functor.Monoidal.commTensorRight (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); CategoryTheory.Equivalence.CommShift.mk' (Mathlib.CategoryTheory.Shift.Adjunction); CategoryTheory.Functor.Monoidal.commTensorRight_hom_app (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Functor.Monoidal.commTensorLeft (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Functor.Monoidal.ofBifunctor (Mathlib.CategoryTheory.Monoidal.Multifunctor); CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor)",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic ordinary monoidal/shift or scalar-restriction adjunction tools do not give the stated canonical derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "date": "2026-10-19",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "Coefficient paragraph: canonical scalar-extension comparison used for exceptional coefficient mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedMonoidalComparisonShift",
+  "file": "lean/Sheaf/CategoryTheory/DerivedMonoidalComparisonShift.lean",
+  "declaration": "GenericDerivedTensorShift.commShift",
+  "statement": "theorem commShift (K : DerivedCategory C) :\n    NatTrans.CommShift (F₁ := (curriedTensor _).obj K ⋙ F.leftDerivedFunctor)\n      (F₂ := F.leftDerivedFunctor ⋙ (curriedTensor _).obj (F.leftDerivedFunctor.obj K))\n      (F.leftDerivedTensorComparison.app K) ℤ",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-19",
+  "declarations": [
+   "GenericDerivedTensorShift.commShift",
+   "GenericDerivedTensorShift.exists_kFlatMap_iso",
+   "GenericDerivedTensorShift.oplaxMonoidal",
+   "GenericDerivedTensorShift.isIso_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261019T192652-L-1853013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261019T192652-L-1853013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
