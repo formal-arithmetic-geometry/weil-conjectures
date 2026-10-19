@@ -11,15 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 
 import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism
 import Sheaf.Paper.FiniteFieldFiber
-import Mathlib.FieldTheory.Finite.GaloisField
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.AlgebraicGeometry.Over
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Mathlib.Algebra.Field.ULift
+import Mathlib.Algebra.Field.ZMod
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-!
@@ -39,6 +33,49 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Absolute Frobenius is natural because ring homomorphisms preserve powers.
+Source: Stacks Project, Tag 0CC7. -/
+private theorem frobenius_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0)
+    (hY : (p : Γ(Y, ⊤)) = 0) :
+    X.iterateFrobenius hp hX 1 ≫ f = f ≫ Y.iterateFrobenius hp hY 1 := by
+  apply Scheme.Hom.ext (by ext x; rfl)
+  intro U
+  simp only [Scheme.Hom.comp_app]
+  change f.app U ≫ (X.iterateFrobenius hp hX 1).app (f ⁻¹ᵁ U) ≫
+    X.presheaf.map (𝟙 _) =
+      (Y.iterateFrobenius hp hY 1).app U ≫ f.app U
+  rw [X.presheaf.map_id, Category.comp_id]
+  ext s
+  change ((f.app U).hom s) ^ p ^ 1 = (f.app U).hom (s ^ p ^ 1)
+  exact (map_pow (f.app U).hom s _).symm
+
+/-- Specialize the finite-field absolute Frobenius theorem to the prime field.
+The global section map also constructs the structure morphism for the empty scheme.
+Source: Stacks Project, Tag 0CC8. -/
+private theorem frobenius_universal (p : ℕ) (T : Scheme.{u})
+    (hT : T.IsCharacteristic p) :
+    IsUniversalHomeomorphism (T.iterateFrobenius hT.1 (hT.2 ⊤) 1) := by
+  classical
+  let : Fact p.Prime := ⟨hT.1⟩
+  let k₀ := ULift.{u} (ZMod p)
+  let D : WeilConjectures.FiniteFieldDatum.{u} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hT.1
+      exponent_pos := le_rfl
+      cardinality_eq := (pow_one p).symm
+      k₀ := k₀
+      card_base := by simp [k₀, Nat.card_eq_fintype_card]
+      k := AlgebraicClosure k₀ }
+  let φ : k₀ →+* Γ(T, ⊤) :=
+    (ZMod.castHom (ringChar.dvd (hT.2 ⊤)) Γ(T, ⊤)).comp ULift.ringEquiv.toRingHom
+  let : T.Over (Spec (CommRingCat.of D.k₀)) :=
+    ⟨T.toSpecΓ ≫ Spec.map (CommRingCat.ofHom φ)⟩
+  exact D.absoluteFrobenius_isUniversalHomeomorphism T
 
 /-- Relative Frobenius is integral and a universal homeomorphism for every morphism to a
 scheme of prime characteristic. Its existence and uniqueness are specified by the two
@@ -91,6 +128,25 @@ theorem relativeFrobenius_integral_universalHomeomorphism
           s ≫ pullback.fst v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) =
               V.iterateFrobenius hV.1 (hV.2 ⊤) 1 →
           s ≫ pullback.snd v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) = v → s = r := by
-  sorry
+  have hVt : (p : Γ(V, ⊤)) = 0 := by
+    rw [← map_natCast v.appTop.hom, hX.2 ⊤, map_zero]
+  let hV : V.IsCharacteristic p :=
+    ⟨hX.1, natCast_eq_zero_of_natCast_top_eq_zero hVt⟩
+  let F := X.iterateFrobenius hX.1 (hX.2 ⊤) 1
+  let G := V.iterateFrobenius hV.1 (hV.2 ⊤) 1
+  let r : V ⟶ pullback v F :=
+    pullback.lift G v (frobenius_naturality v hX.1 (hV.2 ⊤) (hX.2 ⊤))
+  have hr₁ : r ≫ pullback.fst v F = G := pullback.lift_fst _ _ _
+  have hr₂ : r ≫ pullback.snd v F = v := pullback.lift_snd _ _ _
+  have : IsUniversalHomeomorphism F := frobenius_universal p X hX
+  have : IsUniversalHomeomorphism G := frobenius_universal p V hV
+  have : IsUniversalHomeomorphism (r ≫ pullback.fst v F) :=
+    hr₁.symm ▸ ‹IsUniversalHomeomorphism G›
+  have : IsUniversalHomeomorphism r :=
+    IsUniversalHomeomorphism.of_comp r (pullback.fst v F)
+  refine ⟨hV, r, hr₁, hr₂, inferInstance,
+    @isUniversalHomeomorphism_le_universally_isHomeomorph _ _ r ‹_›, ?_⟩
+  intro s hs₁ hs₂
+  exact pullback.hom_ext (hs₁.trans hr₁.symm) (hs₂.trans hr₂.symm)
 
 end AlgebraicGeometry.Scheme

@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "First $V$ also has characteristic $p$: for any open $W\\subseteq X$, the unital ring map $\\mathcal O_X(W)\\to\\mathcal O_V(v^{-1}W)$ sends $p\\cdot1=0$ to $p\\cdot1=0$, and these inverse-image opens cover $V$. Absolute Frobenius commutes with $v$, since on the structure sheaves $v^\\sharp(s^p)=v^\\sharp(s)^p$ and both Frobenii act identically on the underlying spaces. Thus the fibre-product universal property constructs $r=r_{V/X}=(F_V,v)$, with $h\\circ r=F_V$ for $h=\\pi_1:V^{(p/X)}\\to V$.",
+   "text": "Pull back p=0 along v.appTop and restrict from global sections to every open to obtain V.IsCharacteristic p. Absolute Frobenius is natural: Scheme.Hom.ext reduces the assertion to map_pow on sections, with both base maps the identity. The pullback lift r=(F_V,v) has the two projection equations and is unique by pullback.hom_ext.",
    "uses": [
     "def-weil-scheme-characteristic-p",
     "def-weil-absolute-frobenius-scheme",
@@ -26,15 +26,14 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0CC7 (lemma-frobenius-endomorphism-identity) and 0CC9 (definition-relative-frobenius)."
+    "place": "Tags 0CC7 and 0CC9."
    }
   },
   {
-   "text": "Apply the existing absolute-Frobenius theorem to both $X$ and $V$ with the finite-field datum specialized to $a=1$, $q=p$, $k_0=\\mathbf F_p=\\mathbf Z/p\\mathbf Z$ and an algebraic closure $k$ of $k_0$. This datum exists by the finite-field and algebraic-closure statements cited here. Every characteristic-$p$ scheme $T$ is canonically a $k_0$-scheme: on affine charts the compatible homomorphisms $\\mathbf F_p\\to\\mathcal O_T(U)$ send $\\overline n\\mapsto n\\cdot1$; their spectrum maps agree on overlaps and give $T\\to\\operatorname{Spec}\\mathbf F_p$. The theorem imposes no finite-type or separatedness condition on $T$, and for $a=1$ its absolute $q$-power map is exactly $F_T$. It follows that $F_X$ and $F_V$ are universal homeomorphisms. The auxiliary algebraic closure is only a parameter of the cited theorem: neither scheme is extended to $k$.",
+   "text": "Construct the finite-field datum with a=1, q=p, k_0=ULift (ZMod p), and its AlgebraicClosure. Its cardinality is p by ZMod.card and the cardinality of ULift. For any scheme T with p=0 in global sections, ringChar.dvd gives ringChar Gamma(T,top) dividing p. Thus ZMod.castHom, composed with ULift.ringEquiv, gives a unital prime-field map to global sections, even if this is the zero ring. Compose T.toSpecGamma with Spec of this map. The existing absolute-Frobenius theorem for this datum applies to X and V, providing the IsUniversalHomeomorphism class and hence integrality, universal injectivity, and surjectivity of their Frobenii. No algebraic-closure base change of either scheme is performed.",
    "uses": [
     "lem-pur-absolute-frobenius-universal-homeomorphism",
     "def-weil-finite-field-fiber",
-    "def-weil-finite-field-q-elements",
     "def-weil-algebraic-closure",
     "def-weil-scheme-over-base",
     "def-weil-absolute-frobenius-scheme"
@@ -42,81 +41,54 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CC8, lemma-frobenius; reuse the existing finite-field formulation with q=p."
+    "place": "Tag 0CC8; prime-field construction and the global-sections/spectrum adjunction."
    }
   },
   {
-   "text": "The square defining $V^{(p/X)}=V\\times_{X,F_X}X$ makes $h=\\pi_1$ the base change of $F_X$ along $v$. Stability of universal homeomorphisms under arbitrary base change therefore makes $h$ a universal homeomorphism. In particular, both $h$ and $F_V$ are homeomorphisms on their underlying spaces (take the identity base change in the definition).",
+   "text": "The projection h=pullback.fst v F_X is a base change of F_X, hence a universal homeomorphism. Since r followed by h equals F_V, both h and this composite are universal homeomorphisms. Apply the existing library theorem IsUniversalHomeomorphism.of_comp r h. Its integral component uses separatedness of h (which follows from injectivity) and IsIntegralHom.of_comp. Its other components are the field-point and surjectivity cancellations expanded in the next two steps. The absolute-Frobenius class already includes integrality, so closed-embedding affineness and integral=affine+universally-closed are unnecessary.",
    "uses": [
     "lem-weil-pbc-universal-homeomorphism-base-change",
-    "def-weil-universal-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCB, lemma-relative-frobenius, first sentence of the proof."
-   }
-  },
-  {
-   "text": "The underlying homeomorphism $F_V:V\\to V$ identifies $|V|$ with the whole, hence closed, subset of $|V|$. The closed-embedding affineness lemma shows that $F_V$ is affine. Every base change of $F_V$ is a homeomorphism and hence a closed map, so $F_V$ is universally closed by the definition of that property. The equivalence integral = affine + universally closed now shows that $F_V$ is integral. This explicitly proves the integrality needed below from the topological definition of universal homeomorphism.",
-   "uses": [
-    "lem-trf-closed-embedding-affine",
     "def-weil-universal-homeomorphism",
-    "def-weil-proper-morphism",
-    "pqf-lem-integral-univclosed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 04DF, lemma-universal-homeomorphism, forward implication; its inputs are Tags 04DE (lemma-homeomorphism-affine) and 01WM (lemma-integral-universally-closed)."
-   }
-  },
-  {
-   "text": "Likewise the underlying homeomorphism $h$ has closed image, so the closed-embedding affineness lemma shows that $h$ is affine. Clause (3) of affine-morphism permanence shows that $h$ is separated; this is a relative separatedness assertion about $h$, not an assumption that $V$ or $X$ is a separated scheme. Since $h\\circ r=F_V$ is integral by step 4, integral cancellation with a separated second morphism, applied with $f=r$ and $g=h$, shows that $r$ is integral.",
-   "uses": [
-    "lem-trf-closed-embedding-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
     "lem-weil-pbc-integral-of-comp-separated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 04DE (lemma-homeomorphism-affine), 01S7 (lemma-affine-separated), and 035D (lemma-finite-permanence), part (2); the algebraic cancellation argument expands the permanence input of Tag 0CCB."
+    "place": "Tag 0CCB; Morphisms Tags 01S7 and 035D."
    }
   },
   {
-   "text": "Every base change of $F_V$ is injective because it is a homeomorphism, so $F_V$ is universally injective. For any field $K$ and morphisms $a,b:\\operatorname{Spec}K\\to V$ satisfying $r\\circ a=r\\circ b$, compose with $h$ to obtain $F_V\\circ a=F_V\\circ b$. The field-valued-point criterion for universal injectivity, applied first to $F_V$, gives $a=b$. The same criterion applied to $r$ now proves that $r$ is universally injective. This is a three-line cancellation using the explicit equivalence in the cited radicial-morphism statement; no preservation of fibre products by underlying spaces is assumed.",
+   "text": "Apply the field-valued-point criterion for universal injectivity to r and r followed by h. For any field K and a,b:Spec K to V with a followed by r equal to b followed by r, postcompose with h and reassociate. Universal injectivity of r followed by h gives a=b.",
    "uses": [
-    "def-weil-universal-homeomorphism",
     "def-weil-radicial-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01S4, lemma-universally-injective, equivalence of (1) and (2); this is the universally injective component of the permanence input in Tag 0CCB."
+    "place": "Morphisms Tag 01S4."
    }
   },
   {
-   "text": "To prove surjectivity, let $y$ be any point of $V^{(p/X)}$. Because $F_V$ is a homeomorphism on points, choose $x\\in V$ with $F_V(x)=h(y)$. Then $h(r(x))=F_V(x)=h(y)$; since $h$ is injective on points, $r(x)=y$. Thus $r$ is surjective by the definition. This argument is also valid for the empty scheme, when there is no $y$ to consider.",
+   "text": "For y in the twist, surjectivity of r followed by h supplies x with h(r(x))=h(y). Injectivity of h gives r(x)=y. This proves Surjective r, with no nonemptiness assumption.",
    "uses": [
-    "def-weil-universal-homeomorphism",
     "def-weil-surjective-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0H2M, lemma-permanence-universal-homeomorphism, cancellation case f=h∘g; the point-set surjectivity argument uses only the known homeomorphisms."
+    "place": "Tag 0CCB, point-set cancellation in Morphisms lemma-permanence-universal-homeomorphism."
    }
   },
   {
-   "text": "We have shown that $r$ is integral (step 5), universally injective (step 6), and surjective (step 7). Apply the existing integral, universally injective, surjective criterion to conclude that every base change of $r$ is a homeomorphism. Hence $r$ is a universal homeomorphism as well as integral, as required. All constructions and cited lemmas allow arbitrary schemes and arbitrary $v$; no finite-type, weakly-etale, quasi-compactness, reducedness or perfection hypothesis was introduced.",
+   "text": "Combine integrality, universal injectivity, and surjectivity into IsUniversalHomeomorphism r, then apply isUniversalHomeomorphism_le_universally_isHomeomorph to obtain the quantified topological conclusion. Pair this with the projection equations and the uniqueness established by the pullback universal property.",
    "uses": [
-    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 04DF, lemma-universal-homeomorphism, implication (2) ⇒ (1), completing Tag 0CCB."
+    "place": "Morphisms Tag 04DF."
    }
   }
  ],
@@ -126,15 +98,10 @@
   "def-pc-fibre-product",
   "lem-pur-absolute-frobenius-universal-homeomorphism",
   "def-weil-finite-field-fiber",
-  "def-weil-finite-field-q-elements",
   "def-weil-algebraic-closure",
   "def-weil-scheme-over-base",
   "lem-weil-pbc-universal-homeomorphism-base-change",
   "def-weil-universal-homeomorphism",
-  "lem-trf-closed-embedding-affine",
-  "def-weil-proper-morphism",
-  "pqf-lem-integral-univclosed",
-  "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-integral-of-comp-separated",
   "def-weil-radicial-morphism",
   "def-weil-surjective-morphism",
@@ -143,7 +110,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0CCB, lemma-relative-frobenius; follows the absolute-Frobenius/base-change/permanence route, expanding cancellation through Tags 04DF, 035D and 01S4 rather than leaving the permanence argument implicit."
+  "place": "Tag 0CCB, implemented by S5 by constructing the pullback lift and specializing the stated absolute-Frobenius theorem to the prime field; the existing IsUniversalHomeomorphism.of_comp packages separated integral cancellation, field-point cancellation, and point-set surjectivity. Tag 04DF supplies the quantified topological conclusion."
  },
  "mathlib_searches": [
   {
@@ -405,8 +372,6 @@
  "tool_uses": [
   "lem-pur-absolute-frobenius-universal-homeomorphism",
   "lem-weil-pbc-universal-homeomorphism-base-change",
-  "pqf-lem-integral-univclosed",
-  "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-integral-of-comp-separated",
   "lem-pc-integral-radicial-surjective-universal-homeomorphism"
  ],
@@ -435,5 +400,15 @@
   "group": "N8",
   "result": "pass",
   "note": "Read node, 6 stmt deps and their Lean (IsCharacteristic = Nat.Prime p ∧ p=0 on all opens; iterateFrobenius n=1; pullback/fst/snd; IsIntegralHom; (topologically IsHomeomorph).universally) against Stacks varieties.tex 0CC9/0CCB (l.7071,7117). All clauses match: V's characteristic concluded not assumed, r characterized by both projection equations plus uniqueness, integral (not finite) and universal homeomorphism, no extra hypotheses; edge cases empty/zero ring, nonreduced, imperfect, p=2, universe u fine. lean.statement verbatim in file, only node lean field changed, proof_deps = union of uses, no definitions, sorry only, docstrings carry source+blueprint+8 proof steps, report has both sections (worker's 'no proof steps' remark is corrected by the second reading). No duplicate found. nt_compile.py per-file compile rc=0, no errors."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261019T122638-L-479483",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
