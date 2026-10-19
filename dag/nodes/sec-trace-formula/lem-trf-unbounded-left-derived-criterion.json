@@ -13,9 +13,111 @@
   "def-weil-pbc-category-colimit",
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace $\\mathcal P$ by its isomorphism closure $\\overline{\\mathcal P}$. It contains every zero object, is closed under finite biproducts, and still covers every object by epimorphisms. The acyclicity hypothesis remains true: choose termwise isomorphisms from objects of $\\mathcal P$ to the terms of an acyclic $\\overline{\\mathcal P}$-complex and conjugate its differentials. This gives an isomorphic acyclic $\\mathcal P$-complex with the same upper bound, and applying $F$ gives an isomorphism of complexes. Thus work with $\\overline{\\mathcal P}$ throughout without adding a hypothesis to the item.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, hypothesis (1); isomorphism-closure convention needed for applying Tag 06XX as stated in the existing node."
+   }
+  },
+  {
+   "text": "If $s:E\\to E'$ is a quasi-isomorphism between bounded above $\\overline{\\mathcal P}$-complexes, its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Its terms are $E'^i\\oplus E^{i+1}$, hence belong to $\\overline{\\mathcal P}$, and it is bounded above. The hypothesis makes $F(C(s))$ acyclic. Additivity identifies its differential matrix with the cone differential of $F(s)$, including the minus sign on the shifted summand. The same cone criterion in $\\mathcal B$ makes $F(s)$ a quasi-isomorphism. This supplies precisely the preservation hypothesis of [lem-trf-bounded-stage-roof-comparison].",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, first paragraph, cone argument."
+   }
+  },
+  {
+   "text": "For any complex $K$, apply [lem-sfb-subcategory-truncation-resolution-system] to $\\overline{\\mathcal P}$. It gives bounded above $E_n$, strict compatible quasi-isomorphisms $E_n\\to T_n=\\tau_{\\le n}K$, and transition maps. Form the termwise sequential colimit $E=\\varinjlim E_n$ and its induced map $a:E\\to K$. Exactness of sequential colimits in $\\mathcal A$ and [src-weil-homology-preserves-exact-colimits] identify $H^i(E)$ with $\\varinjlim H^i(E_n)$. The explicit good truncation has $H^i(T_n)=H^i(K)$ for $i\\le n$ and zero for $i>n$ (kernel/image at the cutoff gives the same quotient). The transition maps act as the identity on $H^i(K)$ once $n\\ge\\max(1,i)$. The colimit of this eventually constant system is $H^i(K)$, with comparison $H^i(a)$: a compatible cocone is uniquely determined on that constant tail. Hence $a$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-subcategory-truncation-resolution-system",
+    "src-weil-homology-preserves-exact-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, lemma-special-direct-system; Tag 0794, second paragraph."
+   }
+  },
+  {
+   "text": "Let $\\mathcal R$ be the class of complexes $X$ admitting a presentation $X=\\varinjlim E_n$ by bounded above $\\overline{\\mathcal P}$-complexes with structure maps $e_n:E_n\\to X$, such that $H^j(E_n)=0$ for $j>n$ and $H^j(e_n)$ is an isomorphism for $j\\le n$. Isomorphic presentations are allowed. Step 3 supplies a quasi-isomorphism from an object of $\\mathcal R$ to every $K$. Indeed its stages have the asserted vanishing because they resolve $T_n$; for $j\\le n$ the equation $a e_n=(T_n\\to K)(E_n\\to T_n)$ and the isomorphism $H^j(a)$ show that $H^j(e_n)$ is an isomorphism. This uses no functorial choice of the towers and no additional bound on their terms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, class of colimit resolutions used in the claim."
+   }
+  },
+  {
+   "text": "Take a quasi-isomorphism $\\alpha:X\\to Y$ between objects of $\\mathcal R$, and choose witnessing towers $E_n,G_n$. Step 2 verifies the preservation assumption of [lem-trf-bounded-stage-roof-comparison]; the augmentations satisfy all its other assumptions by the definition of $\\mathcal R$. For each $i$ the lemma gives isomorphisms $\\theta_n^i:H^i(F(E_n))\\to H^i(F(G_n))$ commuting with the transition maps, and satisfying $H^i(F(g_n))\\theta_n^i=H^i(F(\\alpha))H^i(F(e_n))$. In particular the comparison is compatible with the actual map $F(\\alpha)$ even though $\\alpha$ need not be induced by a map of towers.",
+   "uses": [
+    "lem-trf-bounded-stage-roof-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proof of the claim; bounded roofs and compatibility as n varies."
+   }
+  },
+  {
+   "text": "Since $F$ preserves sequential colimits, $F(X)=\\varinjlim F(E_n)$ and $F(Y)=\\varinjlim F(G_n)$, compatibly with their structure maps. Exact sequential colimits in $\\mathcal B$ and [src-weil-homology-preserves-exact-colimits] identify their cohomology with the colimits of the stage cohomology. The transition equation in step 5 makes $\\theta_n^i$ a natural isomorphism of sequential diagrams, with natural inverse $(\\theta_n^i)^{-1}$. The colimit universal property sends these inverse families to inverse maps. The second equation in step 5 identifies that colimit map with $H^i(F(\\alpha))$, by its composites with every colimit leg. Thus $F(\\alpha)$ is a quasi-isomorphism.",
+   "uses": [
+    "src-weil-homology-preserves-exact-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, final paragraph of the proof, using hypotheses (4) and (5)."
+   }
+  },
+  {
+   "text": "Use $C=K(\\mathcal A)$, its quasi-isomorphisms $W$, and $H=D(\\mathcal B)$ in [lem-pur-resolving-class-essential-constancy]. The required right calculus of fractions and two-out-of-three hold by [lem-pur-quasi-isos-saturated-triangulated]. Step 4 supplies $W$-arrows from $\\mathcal R$ to every object, and steps 5–6 show that $Q_{\\mathcal B}K(F)$ inverts every $W$-arrow between objects of $\\mathcal R$. Thus every denominator diagram $W/K\\to D(\\mathcal B)$ is essentially constant. The same quasi-isomorphism-system node gives the triangulated localization setup; additivity of $F$ preserves the shift and cone matrices displayed in step 2, so $K(F)$ is exact, and $Q_{\\mathcal B}$ is exact. These are the assumptions of Situation 05S8. By the definition in [def-pur-saturated-triangulated-localization], the essential constancy just proved says that the left derived functor is defined at every object, as required.",
+   "uses": [
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual assertion; Tag 0794, reduction to this criterion; Situation 05S8 and Definition 05S9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sfb-subcategory-truncation-resolution-system",
+  "src-weil-homology-preserves-exact-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-bounded-stage-roof-comparison",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, with its implicit bounded-stage comparison isolated as a statement-only helper."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +153,200 @@
    "results": "8 hits: CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions, CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt, CategoryTheory.LocalizerMorphism.isLeftDerivabilityStructure_iff, CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure, CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.mk', CategoryTheory.Functor.HasLeftDerivedFunctor, CategoryTheory.Functor.HasPointwiseLeftDerivedFunctor, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure. Digest 84286bc2b998b46a. Full outputs retained in lem-trf-unbounded-left-derived-criterion-search-4.txt.",
    "date": "2026-10-19",
    "verdict": "no match: totalLeftDerived assumes HasLeftDerivedFunctor; pointwise and derivability-structure results assume resolutions/derived values already supplied. None constructs unbounded derived values from the five bounded-above and sequential-colimit hypotheses of Tag 0794."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right exact additive functor commuting with exact sequential colimits has an everywhere defined unbounded left derived functor using a bounded above acyclic generating class",
+   "results": {
+    "t": "2026-10-19T00:16:37Z",
+    "tool": "leanfinder",
+    "query": "A right exact additive functor commuting with exact sequential colimits has an everywhere defined unbounded left derived functor using a bounded above acyclic generating class",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.HasLeftDerivedFunctor",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor",
+     "CategoryTheory.Functor.HasPointwiseLeftDerivedFunctor",
+     "CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt",
+     "CategoryTheory.Functor.totalLeftDerived",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'",
+     "CategoryTheory.Functor.hasRightDerivedFunctor_of_hasPointwiseRightDerivedFunctor",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor"
+    ],
+    "digest": "a2242c5d476c600e"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLeftDerivedFunctor\"",
+   "results": {
+    "t": "2026-10-19T00:17:37Z",
+    "tool": "loogle",
+    "query": "\"HasLeftDerivedFunctor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.HasLeftDerivedFunctor",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension'",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_iff",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor"
+    ],
+    "digest": "41ee05e76e4dfdbc"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded left derived functor exists from bounded above resolving complexes and exact sequential colimits",
+   "results": {
+    "t": "2026-10-19T00:17:43Z",
+    "tool": "leansearch",
+    "query": "Unbounded left derived functor exists from bounded above resolving complexes and exact sequential colimits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.leftDerived",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_iff",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor",
+     "CategoryTheory.Functor.leftDerivedToHomotopyCategory",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor.mk"
+    ],
+    "digest": "d65989be730a85de"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "grep",
+   "query": "specialDirectSystem|leftDerived.*[Ee]xist|[Ee]xist.*[Ll]eftDerived",
+   "results": {
+    "t": "2026-10-19T00:17:55Z",
+    "tool": "grep",
+    "query": "specialDirectSystem|leftDerived.*[Ee]xist|[Ee]xist.*[Ll]eftDerived",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between abelian categories commutes with cohomology of cochain complexes",
+   "results": {
+    "t": "2026-10-19T00:21:02Z",
+    "tool": "leanfinder",
+    "query": "An exact functor between abelian categories commutes with cohomology of cochain complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor",
+     "CategoryTheory.Functor.preservesHomology_of_map_exact",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+     "CategoryTheory.Functor.exact_tfae",
+     "CategoryTheory.Functor.mapExactFunctor_smul",
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+    ],
+    "digest": "e32e16a6b768e2dd"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"PreservesColimitsOfShape\"",
+   "results": {
+    "t": "2026-10-19T00:21:15Z",
+    "tool": "loogle",
+    "query": "\"homologyFunctor\", \"PreservesColimitsOfShape\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape_homologyFunctor|preservesHomologyOf_exact|homologyFunctorIso|mapHomologyIso",
+   "results": {
+    "t": "2026-10-19T00:21:17Z",
+    "tool": "grep",
+    "query": "preservesColimitsOfShape_homologyFunctor|preservesHomologyOf_exact|homologyFunctorIso|mapHomologyIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 19,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Sheaves/Abelian.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+     "Mathlib/Algebra/Homology/Functor.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+    ],
+    "digest": "a462f375b51f70c5"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spaltenstein unbounded left derivability theorem from a generating additive class acyclic on bounded above complexes",
+   "results": {
+    "t": "2026-10-19T00:32:34Z",
+    "tool": "leanfinder",
+    "query": "Spaltenstein unbounded left derivability theorem from a generating additive class acyclic on bounded above complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isLE_iff"
+    ],
+    "digest": "8a5535d254342d77"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match for Tag 0794: general Kan-extension constructors require the derived values or a derivability structure already supplied; bounded fraction and exact-functor hits do not give the five-hypothesis unbounded criterion. Existing DAG node src-weil-homology-preserves-exact-colimits supplies the general homology/colimit fact."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-continuous-cocontinuous-derived-shriek",
@@ -86,5 +378,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-unbounded-left-derived-criterion",
+  "worker": "stage1",
+  "summary": "Read and followed Stacks 0794. Reused 06XX and exact-colimit homology nodes, verified the cone argument, normalized the class under isomorphisms without strengthening hypotheses, and isolated the compatible bounded-stage roof comparison. No statement change and no Lean writing.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. The seven steps realize the auxiliary Stacks 0794 input to unbounded lower shriek, preserving the ancestor/unit route; they do not replace the geometric local-term argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subcategory-truncation-resolution-system",
+    "why": "Generic compatible bounded-above resolutions (Tag 06XX), needed for the unbounded existence input already used by the parent; it does not replace any geometric step of the unit."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic homology/colimit comparison in any abelian category, used with exact sequential colimits; no node of this unit states this generality."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic mapping-cone criterion used to verify preservation on bounded stages."
+   },
+   {
+    "node": "lem-pur-resolving-class-essential-constancy",
+    "why": "Generic right-fraction criterion translating resolutions into the exact 05S9 conclusion, with the resolving class constructed here."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic calculus-of-fractions and triangulated-localization setup, needed for applying the resolving-class criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subcategory-truncation-resolution-system",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-quasi-isos-saturated-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-a4fd730eb",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-a4fd730eb (reviewer sub-agent of L); spot-checked: I read Stacks derived.tex Tag 0794 (proposition-left-derived-exists) in full. The item matches hypotheses (1)-(5) and the 05S9 everywhere-defined conclusion, with nothing weakened. Its seven steps are correct. Step 1 (isomorphism closure, elementary) is needed for the 06XX node's hypotheses. Step 2 is the cone criterion via lem-pur-quasi-iso-cone-acyclic, with F(C(s))=C(F(s)). Step 3 builds the 06XX tower and identifies cohomology through src-weil-homology-preserves-exact-colimits plus the eventually constant good-truncation system. Step 4 defines the class R by the identity a·ι_n=(T_n→K)e_n. Step 6 is the colimit of the natural isomorphism θ, identified with H^i(F(α)) through the colimit legs. Step 7 uses lem-pur-resolving-class-essential-constancy, lem-pur-quasi-isos-saturated-triangulated and def-pur-saturated-triangulated-localization; all their hypotheses are met. The new node lem-trf-bounded-stage-roof-comparison is true: φ_n is the unique D-morphism with g_nφ_n=αe_n, using G_n≅τ≤nY and E_n∈D^{≤n}. A P̄-resolved roof gives θ_n as an isomorphism, and F preserves homotopies, which gives the square. The transition equation follows by uniqueness in D^{≤n+1}. I tested it on X=Y=0, α=id, negative i, and stages with terms above n. It is statement-only and self-contained. It fills the source's 'exact same argument' compatibility gap, so it is not a restatement of the item (D1). A duplicate search over 0794, 05T7, 06XN, 06XX and the left-derived existence nodes found no duplicate of the helper or of the item. Stacks' α: Q→P against its diagrams is a harmless notational correction. I accept the five generic homological-algebra tool_uses. No SGA source is used. No fixes."
  }
 }
