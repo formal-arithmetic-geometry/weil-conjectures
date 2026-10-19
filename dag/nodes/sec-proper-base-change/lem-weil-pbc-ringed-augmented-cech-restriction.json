@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-ringed-augmented-cech-restriction",
+ "kind": "statement",
+ "title": "Restriction preserves the augmented finite Cech tensor complex",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (possibly zero), and b a Fin r-indexed list of global sections of O. Assume unbounded derived categories of O-module sheaves on C and on every slice. Use the augmented complexes, slice lists and exact derived restriction functors of [def-weil-pbc-ringed-koszul-system], and write Q for localization of complexes. For each object U, restricting the arrow Q(C_b→O[0]) to C/U gives an arrow isomorphic to Q(C_(b|U)→(O/U)[0]). For each morphism f:V→U, further restriction along Over.map f gives the analogous arrow for b|V. Each arrow isomorphism includes both source and ring-complex components and preserves the actual augmentation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex Tag 08JB, lemma-restriction-RHom-to-U; algebraization.tex Tag 0996, lemma-map-twice-localize, and Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "1. Restriction of sheaf modules is additive and preserves small colimits, since its underlying abelian-sheaf restriction is a cocontinuous inverse image and the forgetful functor reflects colimits. The natural module tensor restriction isomorphism extends to total complexes by the map-bifunctor comparison.",
+   "uses": [
+    "lem-weil-pbc-slice-tensor-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Induct on the ordered finite list. The base is the degree-zero ring complex with its identity augmentation. For the successor, tensor the arrow isomorphism of one localization factor with the induction hypothesis. Naturality of tensor restriction gives an arrow isomorphism; compose its codomain with the actual tensor unit isomorphisms on the two sites.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-factor-restriction",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Apply Q to the resulting chain-level arrow isomorphism and the canonical factorization of exact restriction through Q. Repeat for Over.map f. The twice restricted sections are definitionally the original sections evaluated at the same domains.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-slice-tensor-natural",
+  "lem-weil-pbc-ringed-localization-factor-restriction",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB; algebraization.tex Tags 0996 and 099E",
+  "note": "Separated from the normalized comparison existence argument; finite-complex and categorical glue are written explicitly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheafified localization complexes commutes with augmentation and tensor products",
+   "results": "8 hit(s): IsLocalization.instIsLocalizedModuleTensorProductMap, ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.toOpen, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, CategoryTheory.Sheaf.ΓRes, IsLocalization.tensorProduct_isLocalizedModule, CategoryTheory.GrothendieckTopology.sheafifyCompIso, IsLocalizedModule.rTensor. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules.unitHomEquiv\"",
+   "results": "2 hit(s): PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*restriction|sheafification.*unit|sliceSheafification",
+   "results": "25 hit(s): Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedAugmentedCechRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedAugmentedCechRestriction.lean",
+  "declaration": "CategoryTheory.exists_ringed_augmented_cech_restriction",
+  "statement": "theorem exists_ringed_augmented_cech_restriction :\n    (∀ U : C, Nonempty\n      (Arrow.mk ((ringedDerivedRestriction O U).map\n          (DerivedCategory.Q.map (ringedExtendedCech O r b).2)) ≅\n        Arrow.mk (DerivedCategory.Q.map\n          (ringedExtendedCech (O.over U) r\n            (fun i ↦ ringedKoszulSliceSection O (b i) U)).2))) ∧\n    (∀ (U V : C) (f : V ⟶ U), Nonempty\n      (Arrow.mk ((ringedKoszulDerivedOverMap O f).map\n          (DerivedCategory.Q.map\n            (ringedExtendedCech (O.over U) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) U)).2)) ≅\n        Arrow.mk (DerivedCategory.Q.map\n          (ringedExtendedCech (O.over V) r\n            (fun i ↦ ringedKoszulSliceSection O (b i) V)).2)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

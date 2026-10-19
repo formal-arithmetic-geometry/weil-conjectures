@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-completion-hom-injective",
+ "kind": "statement",
+ "title": "Unit cancellation for morphisms between Cech completed objects",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (possibly zero), and b a Fin r-indexed list of global sections of O. Assume the unbounded derived category of O-module sheaves. Put L=RHom(C_b,-) and eta:E→L(E) using the actual augmented Cech complex and unit of [def-weil-pbc-ringed-koszul-system]. For all derived objects E,Y, precomposition with eta_E is injective on morphisms L(E)→L(Y). No ideal subsheaf, tower category or slice restriction hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "algebraization.tex Tag 099B, proof of lemma-derived-completion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "1. Descend evaluation at one on functorial K-injective representatives to a natural transformation from the identity to internal Hom from the ring complex. Naturality of the augmentation-induced map gives naturality of the actual Cech completion unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-completion-unit-naturality",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Use the invertibility of L(eta_E) and eta_(L Y). Given eta_E f=eta_E g, apply L and cancel L(eta_E) to get L(f)=L(g). Unit naturality rewrites f eta_(L Y) and g eta_(L Y) as eta_(L E)L(f) and eta_(L E)L(g). Cancel eta_(L Y) to obtain f=g.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-completion-unit-naturality",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-cech-completion-unit-idempotence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "algebraization.tex Tag 099B, proof of lemma-derived-completion",
+  "note": "Naturality and the categorical cancellation argument are complete Lean proofs from the two actual idempotence maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion unit precomposition is injective for maps between Cech completed objects",
+   "results": "8 hit(s): UniformSpace.Completion.coe_injective, CauSeq.Completion.ofRat_injective, UniformSpace.Completion.map_unique, UniformSpace.Completion.map, injective_stoneCechUnit_of_t35Space, UniformSpaceCat.extension_comp_coe, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', UniformSpace.Completion.coe_inj. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reflective\"",
+   "results": "12 hit(s): CategoryTheory.Coreflective, CategoryTheory.Reflective, CategoryTheory.Coreflective.R, CategoryTheory.Reflective.L, CategoryTheory.instIsLeftAdjointOfCoreflective, CategoryTheory.instIsRightAdjointOfReflective, CategoryTheory.Coreflective.toFaithful, CategoryTheory.Coreflective.toFull. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Ii]njective|[Ii]njective.*unit|Reflective",
+   "results": "25 hit(s): Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/LucasPrimality.lean, Mathlib/NumberTheory/LucasPrimality.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean, Mathlib/NumberTheory/Cyclotomic/Gal.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCechCompletionHomInjective",
+  "file": "lean/Sheaf/CategoryTheory/RingedCechCompletionHomInjective.lean",
+  "declaration": "CategoryTheory.ringed_cech_completion_unit_hom_injective",
+  "statement": "theorem ringed_cech_completion_unit_hom_injective\n    (E Y : ringedSiteDerived O) :\n    Function.Injective\n      (fun f : (ringedCechCompletionFunctor O (ringedExtendedCech O r b).1).obj E ⟶\n          (ringedCechCompletionFunctor O (ringedExtendedCech O r b).1).obj Y ↦\n        ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n          (ringedExtendedCech O r b).2 E ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

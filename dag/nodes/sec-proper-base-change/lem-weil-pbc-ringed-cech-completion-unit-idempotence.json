@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+ "kind": "statement",
+ "title": "Idempotence of the two actual Cech completion unit maps",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (possibly zero), and b a Fin r-indexed list of global sections of O. Assume the unbounded derived category of O-module sheaves. Put L=RHom(C_b,-) with the actual augmented Cech complex and unit eta of [def-weil-pbc-ringed-koszul-system]. For every derived object E, both L.map(eta_E) and eta_(L E) are isomorphisms. These assertions concern the specified maps rather than an unspecified isomorphism L(L(E)) ≅ L(E).",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "algebraization.tex Tag 099B, proof of lemma-derived-completion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "1. The term of Cech degree q is a finite sum of the flat localizations S_I at products over q-element subsets I, and the complex is bounded. For nonempty I choose j in I. In K tensor S_I, the j-th factor has invertible localization differential. Its inverse, multiplied on each tensor summand by (-1) to the sum of preceding degrees, contracts this complex: the other differential terms cancel in d h+h d. Cancel the identity ring-term pair in cone(epsilon). Filter the remaining positive Cech complex by Cech degree; its graded pieces are finite sums of shifted S_I with nonempty I. Tensoring with K makes each such graded piece contractible, hence the whole tensor cone acyclic. The tensor/mapping-cone comparison proves that the projection id_K tensor epsilon is a quasi-isomorphism, and symmetry proves the same for epsilon tensor id_K.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech",
+    "lem-weil-pbc-ringed-localization-rhom-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Bounded flatness makes K K-flat, so Hom(K,I) is K-injective for a K-injective representative I. Use evaluation at one and the fixed functorial replacement comparison in the definition of derived internal Hom to compute the actual units on representatives. Tensor-Hom currying identifies L(eta_E) with Hom of id_K tensor epsilon, and eta_(L E) with Hom of epsilon tensor id_K, after right and left ring-unit identifications respectively. The K-injective comparison maps intertwine these units by naturality of evaluation and precomposition. Hom into I inverts both projection quasi-isomorphisms, proving both actual maps invertible. Empty lists, zero or invertible generators, and zero rings obey the same formulas; no exactness of infinite products is used.",
+   "uses": [
+    "lem-sc-derived-hom-tensor-total",
+    "lem-sc-hom-complex-unit-evaluation-naturality",
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-weil-pbc-ringed-localization-rhom-calculus",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sc-hom-complex-unit-evaluation-naturality",
+  "def-pur-derived-internal-hom",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "algebraization.tex Tag 099B, proof of lemma-derived-completion",
+  "note": "The two-projection tensor/Hom argument is the remaining analytic part; unit naturality and cancellation are proved separately in the consumer module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Cech completion applied to its unit and the unit evaluated at a completed object are isomorphisms",
+   "results": "8 hit(s): CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso, NormedAddGroupHom.completion_id, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.unitIso, UniformSpaceCat.adj, UniformSpace.Completion.coe_one, CategoryTheory.CechNerveTerminalFrom.iso, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi. Generic reflective-category and topological completion results do not prove idempotence of this actual Cech unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reflective\", \"unit\"",
+   "results": "6 hit(s): CategoryTheory.equivEssImageOfReflective_unitIso, CategoryTheory.equivEssImageOfReflective_counitIso, CategoryTheory.Coreflective.instIsIsoAppCounitCoreflectorAdjunctionA, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit. Generic reflective-category and topological completion results do not prove idempotence of this actual Cech unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*completion|completion.*idempotent|reflector.*unit|unit.*reflector",
+   "results": "22 hit(s): Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean, Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean. Generic reflective-category and topological completion results do not prove idempotence of this actual Cech unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCechCompletionUnitIdempotence",
+  "file": "lean/Sheaf/CategoryTheory/RingedCechCompletionUnitIdempotence.lean",
+  "declaration": "CategoryTheory.ringed_cech_completion_unit_idempotence",
+  "statement": "theorem ringed_cech_completion_unit_idempotence (E : ringedSiteDerived O) :\n    IsIso ((ringedCechCompletionFunctor O (ringedExtendedCech O r b).1).map\n      (ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n        (ringedExtendedCech O r b).2 E)) ∧\n    IsIso (ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n      (ringedExtendedCech O r b).2\n      ((ringedCechCompletionFunctor O (ringedExtendedCech O r b).1).obj E))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

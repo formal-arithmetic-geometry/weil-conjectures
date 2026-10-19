@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-ringed-localization-factor-restriction",
+ "kind": "statement",
+ "title": "Restriction preserves one localization complex and its augmentation",
+ "statement": "Let C be a small site with topology J and commutative ring sheaf O. For every U and global section s, restriction along Over.forget U carries the chain arrow [O→O[1/s]]→O[0] to an arrow isomorphic to the analogous localization factor for O/U and s|U. For every f:V→U and every global section of O/U, the same assertion holds along Over.map f with the section restricted by precomposition. No derived category, finite tensor product, internal Hom or Koszul tower occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, lemma-restriction-RHom-to-U; algebraization.tex Tag 0996, lemma-map-twice-localize"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-weil-pbc-ringed-localization-restriction"
+ ],
+ "proof": [
+  {
+   "text": "1. The objectwise identity on fractions is an isomorphism from the restricted localization presheaf to the localization presheaf of the restricted section. The continuous cocontinuous restriction/sheafification comparison identifies the corresponding sheaves.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Apply the sheafification adjunction to its defining comparison equation. Restriction of the presheaf map sending one to one is the same local map under the fraction isomorphism. Naturality of the local sheafification unit then proves the localization-unit square, using the objectwise identity comparison of rank-one modules.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Use this square to construct a complex isomorphism in degrees zero and one, and the zero-object comparison elsewhere. The unique nonzero differential square is the localization-unit square. Compare ring complexes by single-map restriction, and check the augmentation in degree zero and in the zero degrees. Apply to Over.forget U and Over.map f.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-localization-restriction",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB; algebraization.tex Tag 0996",
+  "note": "Separated from the normalized comparison existence argument; finite-complex and categorical glue are written explicitly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheafified localization complexes commutes with augmentation and tensor products",
+   "results": "8 hit(s): IsLocalization.instIsLocalizedModuleTensorProductMap, ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.toOpen, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, CategoryTheory.Sheaf.ΓRes, IsLocalization.tensorProduct_isLocalizedModule, CategoryTheory.GrothendieckTopology.sheafifyCompIso, IsLocalizedModule.rTensor. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules.unitHomEquiv\"",
+   "results": "2 hit(s): PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*restriction|sheafification.*unit|sliceSheafification",
+   "results": "25 hit(s): Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedLocalizationFactorRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedLocalizationFactorRestriction.lean",
+  "declaration": "CategoryTheory.exists_ringed_localization_factor_restriction",
+  "statement": "theorem exists_ringed_localization_factor_restriction :\n    (∀ (U : C) (s : (O.obj ⋙ forget CommRingCat).sections), Nonempty\n      (Arrow.mk\n          (((SheafOfModules.overFunctor.{u}\n            ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapHomologicalComplex\n              (.up ℤ)).map (ringedLocalizationTwoTermAugmentation O s)) ≅\n        Arrow.mk (ringedLocalizationTwoTermAugmentation (O.over U)\n          (ringedKoszulSliceSection O s U)))) ∧\n    (∀ (U V : C) (f : V ⟶ U)\n      (s : ((O.over U).obj ⋙ forget CommRingCat).sections), Nonempty\n      (Arrow.mk\n          (((SheafOfModules.overMap.{u}\n            ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) f).mapHomologicalComplex\n              (.up ℤ)).map (ringedLocalizationTwoTermAugmentation (O.over U) s)) ≅\n        Arrow.mk (ringedLocalizationTwoTermAugmentation (O.over V)\n          (LocalizationRHom.restrictedSection (K := J.over V) (L := J.over U)\n            (Over.map f) (O.over U) s))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

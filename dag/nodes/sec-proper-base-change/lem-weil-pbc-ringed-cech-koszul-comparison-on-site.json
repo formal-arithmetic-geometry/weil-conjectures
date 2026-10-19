@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-koszul-comparison-on-site",
+ "kind": "statement",
+ "title": "A unit-compatible Cech Koszul comparison on one ringed site",
+ "statement": "Let C be a small site with topology J, O a sheaf of commutative rings, and b a list of r global sections, allowing r=0. Assume derived categories of O-module sheaves and of their strict natural-number inverse towers. With the actual complexes, strict tensor tower, units, and presentation structure of [def-weil-pbc-ringed-koszul-system], there exist a presentation D and a natural isomorphism theta from RHom(C_b,-) to D.completion carrying the actual Cech unit to D.unit on every derived object. This assertion neither chooses slice comparisons nor asserts their uniqueness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex Tag 0A0A, lemma-colim-and-lim-of-duals; Tag 0941, lemma-derived-limit-is-ok; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul; derived.tex Tag 0949, lemma-colim-hocolim"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "1. Evaluate the transposed strict tensor tower at each index. Its map is the tensor map with the finite dual Koszul complex. The K-flatness theorem and the tensor mapping-cone isomorphism show that this sends quasi-isomorphisms to quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Descend that actual strict tensor tower by the localization lifting universal property. Use its localization factorization, and take total right derived inverse limit and its comparison from the strict-tower theorem. These fields explicitly construct a RingedKoszulLimitPresentation; no arbitrary witness of an existence theorem is used to define its tensor tower.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Apply the prescribed-presentation telescope/Hom comparison to this concrete presentation. Its unit equation supplies the asserted equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0913, 0A0A, 0941 and 0949",
+  "note": "Separated from the normalized comparison existence argument; finite-complex and categorical glue are written explicitly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of an augmented Cech complex and strict inverse limit of the tensor Koszul dual tower",
+   "results": "8 hit(s): HomologicalComplex.instHasLimit, DerivedCategory, HomologicalComplex.instHasFiniteLimits, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q, HomologicalComplex.instHasLimitsOfShape, CategoryTheory.Arrow.augmentedCechConerve. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\"",
+   "results": "12 hit(s): CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension, CategoryTheory.Functor.IsRightDerivedFunctor.mk, CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*completion|completion.*Cech|derived.*inverse.*limit",
+   "results": "0 hit(s): . No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCechKoszulComparisonOnSite",
+  "file": "lean/Sheaf/CategoryTheory/RingedCechKoszulComparisonOnSite.lean",
+  "declaration": "CategoryTheory.exists_ringed_cech_koszul_comparison_on_site",
+  "statement": "theorem exists_ringed_cech_koszul_comparison_on_site :\n    ∃ (D : RingedKoszulLimitPresentation O r b)\n      (theta : ringedCechCompletionFunctor O (ringedExtendedCech O r b).1 ≅ D.completion),\n      ∀ E, ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n        (ringedExtendedCech O r b).2 E ≫ theta.hom.app E = D.unit E",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

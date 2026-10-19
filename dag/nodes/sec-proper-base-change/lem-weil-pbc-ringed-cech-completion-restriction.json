@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-completion-restriction",
+ "kind": "statement",
+ "title": "Unit-normalized restriction of Cech completion",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (possibly zero), and b a Fin r-indexed list of global sections of O. Assume unbounded derived categories of O-module sheaves on C and every slice. Write L for RHom from the actual augmented Cech complex, with actual unit eta, as in [def-weil-pbc-ringed-koszul-system]; all lists on slices are restrictions of b. There are natural isomorphisms e_U:L_O R_U ≅ R_U L_(O/U) and s_f:L_(O/U) F_f ≅ F_f L_(O/V), for every object U and morphism f:V→U, where R_U,F_f are the exact derived restriction functors from that definition. For every derived object E they satisfy R_U(eta_E) followed by e_U(E) = eta_(R_U E), and F_f(eta_E) followed by s_f(E) = eta_(F_f E). No coherence or uniqueness assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex Tag 08JB, lemma-restriction-RHom-to-U; algebraization.tex Tag 099B, lemma-derived-completion, and Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "1. Descend evaluation at one on K-injective representatives to prove naturality of the completion unit, and obtain the natural unit-object internal-Hom isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-completion-unit-naturality",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Use exact derived internal-Hom restriction and the augmented Cech restriction arrow isomorphisms to compare Hom from K and Hom from the ring object. Naturality in the first variable gives a raw unit square.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-augmented-cech-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. The comparison at the ring object determines an automorphism sigma of the restriction functor. Postcompose the raw K comparison with the completion functor applied to sigma inverse. Naturality of the slice completion unit makes the resulting comparison preserve the unit exactly. Apply this construction to every global and further slice restriction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-completion-unit-naturality",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-augmented-cech-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB (restriction of RHom); algebraization.tex Tags 099B and 099E",
+  "note": "Separated from the normalized comparison existence argument; finite-complex and categorical glue are written explicitly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheafified localization complexes commutes with augmentation and tensor products",
+   "results": "8 hit(s): IsLocalization.instIsLocalizedModuleTensorProductMap, ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.toOpen, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, CategoryTheory.Sheaf.ΓRes, IsLocalization.tensorProduct_isLocalizedModule, CategoryTheory.GrothendieckTopology.sheafifyCompIso, IsLocalizedModule.rTensor. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.overFunctor\"",
+   "results": "2 hit(s): SheafOfModules.overFunctor, SheafOfModules.overFunctorMap. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|sliceSheafificationIso|restriction.*internalHom",
+   "results": "17 hit(s): Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. No exact statement; generic category, ordinary localization or topology results do not provide this assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCechCompletionRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedCechCompletionRestriction.lean",
+  "declaration": "CategoryTheory.exists_ringed_cech_completion_restriction",
+  "statement": "theorem exists_ringed_cech_completion_restriction :\n    ∃ (e : ∀ U : C,\n      ringedCechCompletionFunctor O (ringedExtendedCech O r b).1 ⋙\n          ringedDerivedRestriction O U ≅\n        ringedDerivedRestriction O U ⋙ ringedCechCompletionFunctor (O.over U)\n          (ringedExtendedCech (O.over U) r\n            (fun i ↦ ringedKoszulSliceSection O (b i) U)).1)\n      (s : ∀ (U V : C) (f : V ⟶ U),\n        ringedCechCompletionFunctor (O.over U)\n            (ringedExtendedCech (O.over U) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) U)).1 ⋙\n                ringedKoszulDerivedOverMap O f ≅\n          ringedKoszulDerivedOverMap O f ⋙ ringedCechCompletionFunctor (O.over V)\n            (ringedExtendedCech (O.over V) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) V)).1),\n      (∀ (U : C) E,\n        (ringedDerivedRestriction O U).map\n            (ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n              (ringedExtendedCech O r b).2 E) ≫ (e U).hom.app E =\n          ringedCechCompletionUnit (O.over U)\n            (ringedExtendedCech (O.over U) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) U)).1\n            (ringedExtendedCech (O.over U) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) U)).2\n            ((ringedDerivedRestriction O U).obj E)) ∧\n      (∀ (U V : C) (f : V ⟶ U) E,\n        (ringedKoszulDerivedOverMap O f).map\n            (ringedCechCompletionUnit (O.over U)\n              (ringedExtendedCech (O.over U) r\n                (fun i ↦ ringedKoszulSliceSection O (b i) U)).1\n              (ringedExtendedCech (O.over U) r\n                (fun i ↦ ringedKoszulSliceSection O (b i) U)).2 E) ≫\n            (s U V f).hom.app E =\n          ringedCechCompletionUnit (O.over V)\n            (ringedExtendedCech (O.over V) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) V)).1\n            (ringedExtendedCech (O.over V) r\n              (fun i ↦ ringedKoszulSliceSection O (b i) V)).2\n            ((ringedKoszulDerivedOverMap O f).obj E))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

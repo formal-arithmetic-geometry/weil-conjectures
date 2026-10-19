@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-ringed-completion-unit-naturality",
+ "kind": "statement",
+ "title": "Naturality of the actual derived completion unit",
+ "statement": "Let C be a small site with topology J and commutative ring sheaf O, and assume its unbounded derived category. For any complex K of O-module sheaves and any augmentation epsilon:K→O[0], use the actual completion functor L_K=RHom(K,-) and completion unit eta of [def-weil-pbc-ringed-completion-unit]. For every derived morphism g:E→Eprime, eta_E followed by L_K(g) equals g followed by eta_Eprime. No finiteness, boundedness, ideal, or completeness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099F, proposition-derived-completion, completion unit induced by the augmented complex; sites-cohomology.tex Section 08J7, section-internal-hom, derived internal Hom"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "1. Evaluation at one is a natural complex isomorphism from Hom(O[0],I) to I. Compose the functorial K-injective replacement map, its inverse evaluation, and the localization factorization. Naturality of these three maps gives a natural transformation on complexes.",
+   "uses": [
+    "lem-sc-hom-complex-unit-evaluation-naturality",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-completion-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Fully faithful whiskering by localization descends this transformation. Naturality at the chosen representative isomorphism shows that its components equal the actual ringedDerivedHomUnit on every derived object.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. In the internal-Hom bifunctor, precomposition with epsilon commutes with postcomposition by g. Compose that square with naturality of ringedDerivedHomUnit to obtain the displayed completion-unit equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-unit-evaluation-naturality",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099F, completion unit induced by the augmented complex; sites-cohomology.tex Section 08J7, derived internal Hom",
+  "note": "Reuse the existing completion_unit_natural proof in ExtendedCechCompletionModel, exposing it publicly in place. The duplicate RingedCompletionUnitNaturality module is not delivered."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The augmentation induced map from the identity to derived internal Hom from a fixed complex is natural in the derived object",
+   "results": "8 hit(s): CategoryTheory.SimplicialObject.augment_hom_app, CategoryTheory.CosimplicialObject.augment_hom_app, CategoryTheory.NatTrans.mapHomotopyCategory_id, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.NatTrans.mapHomologicalComplex_id. Generic naturality and bounded injective-resolution comparisons do not establish naturality of the specified unbounded representative-defined unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"naturality\"",
+   "results": "12 hit(s): CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.NatTrans.naturality_inv, CategoryTheory.NatTrans.naturality_inv_assoc, CategoryTheory.NatTrans.app_naturality, CategoryTheory.NatTrans.naturality_app. Generic naturality and bounded injective-resolution comparisons do not establish naturality of the specified unbounded representative-defined unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*unit|unit.*derived.*[Hh]om|unit.*evaluation.*naturality",
+   "results": "0 hit(s): . Generic naturality and bounded injective-resolution comparisons do not establish naturality of the specified unbounded representative-defined unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion_unit_natural|ringed_cech_completion_unit_natural in lean/Sheaf and lean/WeilConjectures",
+   "results": "The existing private CategoryTheory.completion_unit_natural in Sheaf.Paper.ExtendedCechCompletionModel has exactly the required binders and conclusion. Expose it publicly in place and reuse its original proof; no duplicate statement module is delivered.",
+   "date": "2026-10-18",
+   "verdict": "exact existing project theorem reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "declaration": "CategoryTheory.completion_unit_natural",
+  "statement": "theorem completion_unit_natural\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]\n    (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O)\n    (E E' : ringedSiteDerived O) (g : E ⟶ E') :\n    ringedCechCompletionUnit O K ε E ≫ (ringedCechCompletionFunctor O K).map g =\n      g ≫ ringedCechCompletionUnit O K ε E'",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005258-L-2747351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

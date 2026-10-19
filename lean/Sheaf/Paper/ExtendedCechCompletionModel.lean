@@ -33,7 +33,21 @@ namespace CategoryTheory
 set_option maxHeartbeats 1200000 in
 -- Descending evaluation compares several expanded product-localization functors.
 set_option backward.isDefEq.respectTransparency false in
-private theorem completion_unit_natural
+/-- The actual augmentation-induced completion unit is natural for every augmented
+complex, without a boundedness or completeness hypothesis.
+
+Source: Stacks Project, algebraization.tex, Tag 099F; sites-cohomology.tex, Section 08J7.
+(blueprint: lem-weil-pbc-ringed-completion-unit-naturality).
+
+Proof: on complexes, compose the functorial K-injective replacement map with inverse
+evaluation at one and the localization factorization of derived internal Hom. Evaluation
+at one commutes with postcomposition, so this is a natural transformation on complexes.
+Fully faithful whiskering with localization descends it to the derived category. Its
+component on each chosen localization representative equals ringedDerivedHomUnit by
+naturality at that representative isomorphism. Precomposition with the augmentation
+commutes with every postcomposition map in the internal-Hom bifunctor. Composing the
+two squares proves the displayed equation for the actual completion unit. -/
+theorem completion_unit_natural
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u}
